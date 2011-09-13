@@ -185,12 +185,12 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
       if (Utils.isNameEmpty(jcrPath)) {
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-path", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       if (container.getNodeByPath(jcrPath, workSpace) == null) {
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-path", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       UIFormInputSetWithAction documentSelect = uiForm.getChildById(FIELD_DOCSELECT);
@@ -198,14 +198,14 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       String docName = documentField.getValue();
       if(Utils.isNameEmpty(docName)) {
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-doc", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       String fullPath = jcrPath.concat(docName).replaceAll("/+", "/");
       if(container.getNodeByPath(fullPath, workSpace) == null){
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-doc", null,
                                               ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       String boxTemplate = uiForm.getUIStringInput(UINewConfigForm.FIELD_DETAILBOXTEMP).getValue();
@@ -299,15 +299,13 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       String jcrPath = categoryPathField.getValue();
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
       if (Utils.isNameEmpty(jcrPath)) {
-        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-path", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-path", null));        
         return;
       }
       UIBrowseContentPortlet uiBrowseContentPortlet = uiForm.getAncestorOfType(UIBrowseContentPortlet.class);
       UIBrowseContainer container = uiBrowseContentPortlet.findFirstComponentOfType(UIBrowseContainer.class);
       if (container.getNodeByPath(jcrPath, workspace) == null) {
-        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-path", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-path", null));        
         return;
       }
       UIConfigTabPane uiConfig = uiForm.getAncestorOfType(UIConfigTabPane.class);

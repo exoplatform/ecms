@@ -154,17 +154,17 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       Node node = uiExplorer.getCurrentNode() ;
       if(uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-invalid", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(pathNode == null || pathNode.length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.path-node-invalid", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return ;
       }
       String workspaceName = pathNode.substring(0, pathNode.lastIndexOf(":/"));
@@ -176,7 +176,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         if(symLinkName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -187,18 +187,18 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       } catch (ItemNotFoundException e) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (RepositoryException re) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("An unexpected error occurs", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       try {
@@ -213,33 +213,33 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         uiExplorer.updateAjax(event);
       } catch (AccessControlException ace) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(NumberFormatException nume) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.numberformat-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(ConstraintViolationException cve) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(ItemExistsException iee) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.item-exists-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(UnsupportedRepositoryOperationException unOperationException) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.UnsupportedRepositoryOperationException", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }

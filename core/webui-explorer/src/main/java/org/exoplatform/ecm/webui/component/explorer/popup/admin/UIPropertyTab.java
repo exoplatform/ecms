@@ -170,18 +170,18 @@ public class UIPropertyTab extends UIContainer {
       if(!PermissionUtil.canSetProperty(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(uiExplorer.nodeIsLocked(currentNode)) {
         Object[] arg = { currentNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -211,7 +211,7 @@ public class UIPropertyTab extends UIContainer {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);

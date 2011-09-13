@@ -71,13 +71,11 @@ public class UINamespaceForm extends UIForm {
       if(prefix == null || prefix.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.prefix-null", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       if(uri == null || uri.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.uri-null", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       UINamespaceManager uiManager = uiForm.getAncestorOfType(UINamespaceManager.class) ;
@@ -85,7 +83,6 @@ public class UINamespaceForm extends UIForm {
           contains(namespaceRegistry.getURIs(), uri)) {
         uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       try {
@@ -95,7 +92,6 @@ public class UINamespaceForm extends UIForm {
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

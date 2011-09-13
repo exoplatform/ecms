@@ -536,8 +536,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue() ;
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null,
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                ApplicationMessage.WARNING)) ;        
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         return ;
       }
@@ -547,7 +546,6 @@ public class UINodeTypeForm extends UIFormTabPane {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
         }
@@ -557,7 +555,6 @@ public class UINodeTypeForm extends UIFormTabPane {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
         }
@@ -568,7 +565,6 @@ public class UINodeTypeForm extends UIFormTabPane {
         if(superTypes == null || superTypes.trim().length() == 0) {
           uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.supertype-is-madatory", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           uiForm.setTabRender(NODETYPE_DEFINITION) ;
           return ;
         }
@@ -601,7 +597,6 @@ public class UINodeTypeForm extends UIFormTabPane {
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-failed", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         return ;
       }
@@ -619,8 +614,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       uiPopup.setRendered(false) ;
       uiPopup.setShowMask(true);
       Object[] args = { newNodeType.getName() } ;
-      uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-successfully", args)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-successfully", args)) ;      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -638,7 +632,6 @@ public class UINodeTypeForm extends UIFormTabPane {
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         session.logout();
         return ;
@@ -648,8 +641,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                    ApplicationMessage.WARNING)) ;            
             return ;
           }
         }
@@ -658,8 +650,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
-                                                    ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                    ApplicationMessage.WARNING)) ;            
             return ;
           }
         }

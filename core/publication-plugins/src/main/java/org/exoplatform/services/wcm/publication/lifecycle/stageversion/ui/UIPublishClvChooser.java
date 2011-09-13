@@ -171,8 +171,7 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
               UIApplication application = clvChooser.getAncestorOfType(UIApplication.class);
               application.addMessage(new ApplicationMessage("UIPublishClvChooser.msg.duplicate",
                                                             null,
-                                                            ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+                                                            ApplicationMessage.WARNING));              
               return;
             }
           }

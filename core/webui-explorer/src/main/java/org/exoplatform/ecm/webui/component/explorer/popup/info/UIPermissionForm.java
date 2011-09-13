@@ -176,7 +176,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       if (!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       for (String perm : PermissionType.ALL) {
@@ -196,13 +196,13 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (permsList.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.checkbox-require", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String[] permsArray = permsList.toArray(new String[permsList.size()]);
@@ -218,12 +218,12 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           } catch (AccessDeniedException ade) {
             uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           } catch (AccessControlException accessControlException) {
             uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -233,12 +233,12 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         } catch (AccessDeniedException ade) {
           uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (AccessControlException accessControlException) {
           uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         uiParent.getChild(UIPermissionInfo.class).updateGrid(1);
@@ -251,7 +251,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.not-change-permission", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 

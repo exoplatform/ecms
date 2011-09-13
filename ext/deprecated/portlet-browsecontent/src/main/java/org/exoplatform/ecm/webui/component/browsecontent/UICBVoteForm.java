@@ -88,17 +88,17 @@ public class UICBVoteForm extends UIComponent implements UIPopupComponent {
       } catch (LockException le) {
         uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.locked-doc", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.versioning-doc", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.error-vote", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;

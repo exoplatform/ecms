@@ -102,7 +102,7 @@ public class UIWorkspacePermissionForm extends UIForm implements UISelectable {
       if(!uiForm.isCheckedAny()) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIWorkspacePermissionForm.msg.check-one", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       StringBuilder sb = new StringBuilder() ;

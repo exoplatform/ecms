@@ -170,7 +170,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
         Object[] args = {nodePath};
         uiApp.addMessage(new ApplicationMessage("UILockNodeList.msg.access-denied-exception", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiUnLockManager.refresh();
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
@@ -210,19 +210,19 @@ public class UILockNodeList extends UIPagingGridDecorator {
         Object[] args = {lockedNode.getName()};
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       } catch(VersionException versionException) {
         Object[] args = {lockedNode.getName()};
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       }
       uiUnLockManager.refresh();
       uiUnLockManager.getChild(UILockNodeList.class).setRendered(true);

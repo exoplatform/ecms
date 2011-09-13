@@ -121,7 +121,7 @@ public class UIActionTypeForm extends UIForm {
           Object[] arg = { actionType };
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           actionType = TaxonomyTreeData.ACTION_TAXONOMY_TREE;
           uiActionType.getUIFormSelectBox(UIActionTypeForm.ACTION_TYPE).setValue(actionType);
         }
@@ -129,7 +129,7 @@ public class UIActionTypeForm extends UIForm {
         Object[] arg = { actionType };
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.not-support", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         actionType = TaxonomyTreeData.ACTION_TAXONOMY_TREE;
         uiActionType.getUIFormSelectBox(UIActionTypeForm.ACTION_TYPE).setValue(actionType);
       }

@@ -127,7 +127,7 @@ public class UICategoryTree extends UIComponent {
       if(node == null) {
         UIApplication app = uiContainer.getAncestorOfType(UIApplication.class) ;
         app.addMessage(new ApplicationMessage("UICategoryTree.msg.invalid-node", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
+        
         return ;
       }
       uiContainer.setShowDocumentDetail(false)  ;

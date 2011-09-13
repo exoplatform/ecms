@@ -109,7 +109,7 @@ public class UISingleUploadContent extends UIContainer {
         Object[] args = {nodeType} ;
         uiApp.addMessage(new ApplicationMessage("UIUploadContent.msg.has-not-template", args,
                          ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiUploadContainer.removeChild(UISingleAddMetadataForm.class) ;

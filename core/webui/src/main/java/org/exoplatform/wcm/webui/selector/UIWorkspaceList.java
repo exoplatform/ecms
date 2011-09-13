@@ -223,8 +223,7 @@ public class UIWorkspaceList extends UIForm {
         uiTreeJCRExplorer.setRootTreeNode(uiWorkspaceList.getRootNode(wsName));
       } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
-        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));        
         return;
       } catch(Exception e) {
         return;

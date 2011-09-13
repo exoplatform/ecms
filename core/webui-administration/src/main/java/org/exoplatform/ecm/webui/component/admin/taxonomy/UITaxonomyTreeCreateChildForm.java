@@ -84,7 +84,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       if (name == null || name.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-null",
             null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       else
@@ -93,7 +93,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       if (!Utils.isNameValid(name, new String[] { "&", "$", "@", ",", ":", "]", "[", "*", "%", "!" })) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-invalid",
             null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       
@@ -103,7 +103,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         	Object[] args = { taxonomyService.getCategoryNameLength() };
           uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
           		args, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();
@@ -114,13 +114,13 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         Object[] arg = { name };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.exist", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (RepositoryException e) {
         Object[] arg = { name };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.error", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiForm.reset();

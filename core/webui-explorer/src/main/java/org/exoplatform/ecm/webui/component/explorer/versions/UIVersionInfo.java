@@ -122,7 +122,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
         UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiViewVersion.setRendered(true) ;
@@ -172,18 +172,18 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       } catch(JCRInvalidItemStateException invalid) {
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(NullPointerException nuException){
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch(Exception e) {
         //JCRExceptionManager.process(uiApp, e);
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       }
       Node node = uiVersionInfo.getCurrentNode() ;
@@ -217,13 +217,11 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo.getAncestorOfType(UIPopupContainer.class)) ;
       } catch (ReferentialIntegrityException rie) {
         LOG.error("Unexpected error", rie);
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
         return;
       } catch (Exception e) {
         LOG.error("Unexpected error", e);
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
         return;
       }
     }

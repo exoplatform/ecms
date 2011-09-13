@@ -216,7 +216,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         uiExplorer.cancelAction();
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } finally {
         out.close();
@@ -291,7 +291,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + downloadLink + "');");
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } finally {
         propertiesBOS.close();

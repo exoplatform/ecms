@@ -124,7 +124,7 @@ public class UIActionTypeForm extends UIForm {
           Object[] arg = { actionType } ;
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           uiActionType.getUIFormSelectBox(
               UIActionTypeForm.ACTION_TYPE).setValue(uiActionType.defaultActionType_) ;
           UIActionContainer uiActionContainer = uiActionType.getAncestorOfType(UIActionContainer.class) ;
@@ -138,7 +138,7 @@ public class UIActionTypeForm extends UIForm {
         Object[] arg = { actionType } ;
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.not-support", arg,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         uiActionType.getUIFormSelectBox(
             UIActionTypeForm.ACTION_TYPE).setValue(uiActionType.defaultActionType_) ;
         UIActionContainer uiActionContainer = uiActionType.getAncestorOfType(UIActionContainer.class) ;

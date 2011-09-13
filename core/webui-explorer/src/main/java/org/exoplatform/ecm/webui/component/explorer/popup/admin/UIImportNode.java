@@ -132,7 +132,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     zipInputStream.close();
     uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-content", null,
         ApplicationMessage.WARNING));
-    event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+    
     return false;
   }
 
@@ -156,7 +156,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       if (input.getUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filename-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(inputHistory.getUploadResource() != null) {
@@ -164,7 +164,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         if(!mimeTypeHistory.equals("application/zip")) {
           uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-type", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         if(!uiImport.validHistoryUploadFile(event)) return;
@@ -179,7 +179,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.mimetype-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       try {
@@ -195,7 +195,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
           uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.constraint-violation-exception",
                                                   args,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
 
@@ -215,13 +215,13 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
           // otherwise ECM FileExplolrer crashes as it assume all items were imported correct.
 
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.import-successful", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (AccessDeniedException ace) {
         log.error("XML Import error " + ace, ace);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (ConstraintViolationException con) {
         log.error("XML Import error " + con, con);
@@ -230,7 +230,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.constraint-violation-exception",
                                                 args,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (JCRItemExistsException iee) {
         log.error("XML Import error " + iee, iee);
@@ -238,14 +238,14 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
                                                 new Object[] { iee.getIdentifier() },
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;      
       } catch (Exception ise) {
         log.error("XML Import error " + ise, ise);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } finally {
         UploadService uploadService = uiImport.getApplicationComponent(UploadService.class) ;

@@ -90,7 +90,6 @@ public class UIContentDialogConfig extends UIForm {
       uiApplication.addMessage(new ApplicationMessage("UIContentDialogConfig.msg.saved-successfully",
                                                       null,
                                                       ApplicationMessage.INFO));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
     }
   }
 }

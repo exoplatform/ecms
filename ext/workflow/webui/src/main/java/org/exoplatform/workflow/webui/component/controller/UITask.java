@@ -510,7 +510,7 @@ public class UITask extends UIForm implements UISelectable {
         if (delegate.length() == 0) {
             uiApp.addMessage(new ApplicationMessage("UITask.msg.has-not-got-delegate", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
         }
         else {

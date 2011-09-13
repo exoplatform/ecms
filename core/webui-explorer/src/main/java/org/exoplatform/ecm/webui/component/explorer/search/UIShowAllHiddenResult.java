@@ -237,7 +237,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -260,7 +260,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
       } catch (LockException e) {
         LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
         LOG.error("Access denied! No permission for modifying property " + Utils.EXO_HIDDENABLE
@@ -268,11 +268,11 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.accessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (Exception e) {
         LOG.error("an unexpected error occurs while removing the node", e);
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }
@@ -291,7 +291,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       TemplateService templateService = uiShowAllHiddenResult.getApplicationComponent(TemplateService.class);
@@ -299,7 +299,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.not-support",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");

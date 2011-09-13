@@ -145,7 +145,7 @@ public class UIViewList extends UIPagingGrid {
       if(uiViewList.getViewsBean().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIViewList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       UIViewContainer uiViewContainer = uiViewList.getParent() ;

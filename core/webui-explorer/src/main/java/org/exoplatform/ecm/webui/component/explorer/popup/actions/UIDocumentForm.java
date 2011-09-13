@@ -344,7 +344,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if (!Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return null;
           }
         }
@@ -377,7 +377,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return null;
           }
         }
@@ -447,7 +447,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             } catch(AccessDeniedException accessDeniedException) {
               uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
             } catch (Exception e) {
               continue;
             }
@@ -473,46 +473,46 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     } catch(VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(ItemNotFoundException item) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.item-not-found", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(AccessDeniedException accessDeniedException) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception-permission", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(ItemExistsException existedex) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-allowed-same-name-sibling",
                                               null,
                                               ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(ConstraintViolationException constraintViolationException) {
     LOG.error("Unexpected error occurrs", constraintViolationException);
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                               null,
                                               ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(RepositoryException repo) {
       LOG.error("Unexpected error occurrs", repo);
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(NumberFormatException nume) {
       String key = "UIDocumentForm.msg.numberformat-exception";
       uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } catch(Exception e) {
       LOG.error("Unexpected error occurs", e);
       String key = "UIDocumentForm.msg.cannot-save";
       uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return null;
     } finally {
        documentForm.releaseLock();
@@ -704,11 +704,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else {

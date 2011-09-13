@@ -176,7 +176,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.invalid-queryStatement", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
     }
@@ -217,7 +217,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       if(statement == null || statement.trim().length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.value-save-null", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
 
@@ -226,7 +226,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
         if(name == null || name.trim().length() == 0) {
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.query-name-null", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
@@ -235,7 +235,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
           if(name.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.name-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }
@@ -245,7 +245,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         } catch(Exception e){
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         UIECMSearch uiSearch = uiForm.getParent() ;
@@ -261,7 +261,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         } catch(Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         ManageableRepository repository =

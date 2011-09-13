@@ -83,21 +83,21 @@ public class UITaxonomyForm extends UIForm {
       if(name == null || name.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-null", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
 
       if(!Utils.isNameValid(name, new String[]{"&", "$", "@", ",", ":","]", "[", "*", "%", "!"})) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
 
       if(name.length() > 30) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-too-long", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String rootPath = uiManager.getRootNode().getPath();
@@ -109,7 +109,7 @@ public class UITaxonomyForm extends UIForm {
         Object[] arg = {name} ;
         uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.exist", arg,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiForm.reset() ;

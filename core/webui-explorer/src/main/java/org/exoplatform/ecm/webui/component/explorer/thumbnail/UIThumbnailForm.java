@@ -104,7 +104,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       if(input.getUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       Node selectedNode = uiExplorer.getRealCurrentNode();
@@ -115,7 +115,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       if(!mimeType.startsWith("image")) {
         uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.mimetype-incorrect", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       InputStream inputStream = input.getUploadDataAsStream();
@@ -126,28 +126,28 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(VersionException ver) {
         uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.is-checked-in", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(LockException lock) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
             null,ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("An unexpected error occurs", e);
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       selectedNode.getSession().save();
@@ -173,23 +173,23 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
           Object[] arg = { selectedNode.getPath() };
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           uiExplorer.updateAjax(event);
           return;
         } catch(PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
               null,ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch(Exception e) {
           LOG.error("An unexpected error occurs", e);
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }

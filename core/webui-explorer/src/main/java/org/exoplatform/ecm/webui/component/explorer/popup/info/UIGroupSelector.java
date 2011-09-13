@@ -139,7 +139,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
       if(user.equals(Utils.getNodeOwner(node))) {
         UIApplication uiApp = uiGroupSelector.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIGroupSelector.msg.not-change-owner", new Object[]{user})) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String returnField = uiGroupSelector.getReturnField() ;

@@ -132,7 +132,7 @@ public class UIMultiLanguageForm extends UIForm {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);

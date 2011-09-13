@@ -127,7 +127,7 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
             null,ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -148,22 +148,22 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
       } catch (LockException e) {
         LOG.error("node is locked, can't remove favourite of node :" + node.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       } catch (VersionException e) {
         LOG.error("node is checked in, can't remove favourite of node:" + node.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
         LOG.error("access denied, can't remove favourite of node:" + node.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       } catch (Exception e) {
           LOG.error("an unexpected error occurs", e);
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           uiExplorer.updateAjax(event);
       }
   }

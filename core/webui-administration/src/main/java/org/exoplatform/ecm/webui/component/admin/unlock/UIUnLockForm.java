@@ -95,7 +95,7 @@ public class UIUnLockForm extends UIForm implements UISelectable {
       if((groupsOrUsers == null)||(groupsOrUsers.trim().length() == 0)) {
         uiApp.addMessage(new ApplicationMessage("UIUnLockForm.msg.permission-require", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIUnLockManager uiManager = uiUnLockForm.getAncestorOfType(UIUnLockManager.class);

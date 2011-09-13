@@ -185,7 +185,7 @@ public class UIPublicationPanel
       } catch (NullPointerException e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }catch (ItemExistsException iee){
     	LOG.error("Error when adding properties to node");    	 

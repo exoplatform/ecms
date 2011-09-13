@@ -521,7 +521,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.ws-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String repositoryName = null;
@@ -534,7 +534,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.fileType-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_REPOSITORY, repositoryName);
@@ -548,7 +548,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, redirectPath);
       portletPreferences.store();
       uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.save-successfully", null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
     }
   }
 

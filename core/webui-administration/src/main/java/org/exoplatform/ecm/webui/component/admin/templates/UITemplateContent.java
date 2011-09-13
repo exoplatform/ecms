@@ -235,7 +235,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       app.addMessage(new ApplicationMessage("UITemplateContent.msg.version-restored", args)) ;
       uiForm.refresh() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
+      
     }
   }
 
@@ -249,13 +249,13 @@ public class UITemplateContent extends UIForm implements UISelectable {
         Object[] args = { FIELD_NAME } ;
         uiApp.addMessage(new ApplicationMessage("ECMNameValidator.msg.empty-input", args,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(!Utils.isNameValid(name, UITemplateContent.REG_EXPRESSION)){
         uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue() ;
@@ -269,7 +269,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       } else if(uiForm.getId().equals(UIViewTab.VIEW_FORM_NAME)) {
@@ -278,7 +278,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       } else if(uiForm.getId().equals(UISkinTab.SKIN_FORM_NAME)) {
@@ -287,7 +287,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       }
@@ -430,7 +430,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null",
                                               null,
                                               ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       areValidPermissions = false;
       return areValidPermissions;
     }
@@ -449,7 +449,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         areValidPermissions = false;
         return areValidPermissions;
       }
@@ -459,14 +459,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           areValidPermissions = false;
           return areValidPermissions;
         } else if (!listMemberhip.contains(permission[0])) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           areValidPermissions = false;
           return areValidPermissions;
         }
@@ -474,14 +474,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           areValidPermissions = false;
           return areValidPermissions;
         } else if (oservice.getGroupHandler().findGroupById(permission[1]) == null) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           areValidPermissions = false;
           return areValidPermissions;
         }
@@ -490,7 +490,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           areValidPermissions = false;
           return areValidPermissions;
         }

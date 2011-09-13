@@ -142,7 +142,7 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UICBCommentForm.msg.comment-required", null, ApplicationMessage.WARNING));
         UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       CommentsService commentsService = uiForm.getApplicationComponent(CommentsService.class);
@@ -188,17 +188,17 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
       } catch (LockException le) {
         uiApp.addMessage(new ApplicationMessage("UICBCommentForm.msg.locked-doc", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UICBCommentForm.msg.versioning-doc", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UICBCommentForm.msg.error-vote", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class);

@@ -519,8 +519,7 @@ public class UIPublicationPanel extends UIForm {
       versionViewer.setNode(frozenNode);
       if(versionViewer.getTemplate() == null || versionViewer.getTemplate().trim().length() == 0) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.have-no-view-template", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.have-no-view-template", null)) ;        
         return ;
       }
       if (publicationContainer.getChildById("UIVersionViewer") == null) publicationContainer.addChild(versionViewer);

@@ -173,14 +173,12 @@ public class UIActionTypeForm extends UIForm {
         if(actionName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.fileName-invalid", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
       }
       if(!actionName.startsWith("exo:")) {
         uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-name-invalid", args,
                                                  ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       List<String> variables = new ArrayList<String>();
@@ -192,8 +190,7 @@ public class UIActionTypeForm extends UIForm {
       }
       for(NodeType nodeType : actionServiceContainer.getCreatedActionTypes(repository)) {
         if(actionName.equals(nodeType.getName())) {
-          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-exist", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-exist", null)) ;          
           return ;
         }
       }
@@ -208,7 +205,6 @@ public class UIActionTypeForm extends UIForm {
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-type-create-error", args,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionManager) ;

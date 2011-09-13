@@ -74,14 +74,14 @@ public class UILabelForm extends UIForm {
       if(!Utils.isNameValid(label, Utils.SPECIALCHARACTER)) {
         uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-invalid",
             null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       try{
         currentNode.getVersionHistory().addVersionLabel(currentVersion.getName(), label, false) ;
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-exist", new Object[]{label})) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiLabelForm.reset() ;

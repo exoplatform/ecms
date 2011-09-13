@@ -267,7 +267,7 @@ public class UITemplateForm extends UIForm {
             Object[] args = { templateName };
             uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.template-name-exist", args,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -280,7 +280,7 @@ public class UITemplateForm extends UIForm {
               Object[] args = { templateName };
               uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.template-name-exist",
                   args, ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }

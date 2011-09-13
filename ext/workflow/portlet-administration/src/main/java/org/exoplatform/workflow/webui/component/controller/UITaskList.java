@@ -173,7 +173,7 @@ public class UITaskList extends UIContainer {
       UIApplication uiApp = context.getUIApplication();
       if (uiTaskList.isTaskActivated(tokenId)) {
         uiApp.addMessage(new ApplicationMessage("UITaskList.msg.task-not-found", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } else {
         UIWorkflowControllerPortlet uiControllerPortlet = uiTaskList.getAncestorOfType(UIWorkflowControllerPortlet.class);
         UITaskManager uiTaskManager = uiControllerPortlet.createUIComponent(UITaskManager.class, null, null);
@@ -183,7 +183,7 @@ public class UITaskList extends UIContainer {
         if (!uiTaskManager.checkBeforeActive()) {
           uiApp.addMessage(new ApplicationMessage("UITaskList.msg.task-change", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskList);
           return;
         }

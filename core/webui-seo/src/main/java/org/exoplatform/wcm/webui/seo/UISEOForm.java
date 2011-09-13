@@ -250,7 +250,6 @@ public class UISEOForm extends UIForm{
           if(priority < 0.0 || priority > 1.0) {
             uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null,
             ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
         }
@@ -282,8 +281,7 @@ public class UISEOForm extends UIForm{
           }         
         } catch (Exception ex) {   
           LOG.error("Unexpected error ", ex);
-          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
           return;
         }
       } else {
@@ -312,8 +310,7 @@ public class UISEOForm extends UIForm{
           }          
         } catch (Exception ex) {
           LOG.error("Unexpected error ", ex);
-          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
           return;
         }
       }

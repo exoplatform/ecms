@@ -112,7 +112,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -142,7 +142,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       Object[] args = {node.getName()};
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch(VersionException versionException) {
@@ -150,13 +150,13 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in",
                                               args,
                                               ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while unloking the node", e);
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     }
   }

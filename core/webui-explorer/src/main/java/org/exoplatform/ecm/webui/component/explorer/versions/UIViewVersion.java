@@ -370,7 +370,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       UIViewVersion uiViewVersion = event.getSource() ;
       UIApplication uiApp = uiViewVersion.getAncestorOfType(UIApplication.class) ;
       uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      
       return ;
     }
   }
@@ -388,7 +388,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       UIViewVersion uiViewVersion =  event.getSource() ;
       UIApplication uiApp = uiViewVersion.getAncestorOfType(UIApplication.class) ;
       uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      
       return ;
     }
   }

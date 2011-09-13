@@ -664,13 +664,11 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.access-denied",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         } catch (Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.exception",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       } else {

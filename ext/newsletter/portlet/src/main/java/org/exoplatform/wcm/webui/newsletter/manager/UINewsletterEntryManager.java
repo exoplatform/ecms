@@ -556,7 +556,7 @@ public class UINewsletterEntryManager extends UIForm {
       }
       UIApplication uiApp = newsletterEntryManager.getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage(message, null, messageType));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
     }
   }
 }

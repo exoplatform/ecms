@@ -170,8 +170,7 @@ public class UIPublicationForm extends UIForm {
       }
       if(!uiForm.getRealCurrentNode().isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       }
       PublicationService publicationService = uiForm.getApplicationComponent(PublicationService.class);
@@ -196,7 +195,6 @@ public class UIPublicationForm extends UIForm {
       if(!selectedNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
 
@@ -209,7 +207,6 @@ public class UIPublicationForm extends UIForm {
       if (publicationService.isUnsubcribeLifecycle(selectedNode)) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.unsubcriber-lifecycle", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       /*
@@ -222,8 +219,7 @@ public class UIPublicationForm extends UIForm {
        * Unsubcribe lifecycle and display message to inform
        */
       publicationService.unsubcribeLifecycle(selectedNode);
-      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.unsubcriber-lifecycle-finish", null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.unsubcriber-lifecycle-finish", null));      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
       return;
     }

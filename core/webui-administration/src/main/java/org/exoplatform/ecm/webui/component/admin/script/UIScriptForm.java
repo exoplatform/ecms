@@ -182,7 +182,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       if(name == null || name.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-null", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!", "\""};
@@ -190,7 +190,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         if(name.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.fileName-invalid", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       }
@@ -220,7 +220,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         Object[] args = { name } ;
         uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-exist", args,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       boolean isEnableVersioning =
@@ -233,7 +233,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       } else {
@@ -250,7 +250,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           Object[] args = { namePrefix };
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -342,7 +342,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }

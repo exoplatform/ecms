@@ -230,7 +230,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String[] tagNames = null;
@@ -249,7 +249,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-duplicate",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
           listTagNamesClone.add(tag);
@@ -265,14 +265,14 @@ public class UITaggingForm extends UIForm {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         if (t.trim().length() > 30) {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
@@ -281,7 +281,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -299,7 +299,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.name-exist",
                                                     args,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -366,7 +366,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -378,7 +378,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       removeTagFromNode(tagScope, currentNode, tagName, uiForm);
@@ -460,7 +460,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       ((UITaggingFormContainer) uiForm.getParent()).edit(event);

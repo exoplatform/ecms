@@ -80,14 +80,12 @@ public class UINodeTypeUpload extends UIForm {
       UIApplication uiApp = uiUploadForm.getAncestorOfType(UIApplication.class) ;
       UIFormUploadInput input = uiUploadForm.getUIInput(FIELD_UPLOAD) ;
       if(input.getUploadResource() == null) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;        
         return ;
       }
       String fileName = input.getUploadResource().getFileName();
       if(fileName == null || fileName.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;        
         return ;
       }
       DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
@@ -101,8 +99,7 @@ public class UINodeTypeUpload extends UIForm {
           ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream())) ;
           is = Utils.extractFirstEntryFromZipFile(zipInputStream);
         }else {
-          uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-file-error", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-file-error", null)) ;          
           return;
         }
         IBindingFactory factory = BindingDirectory.getFactory(NodeTypeValuesList.class);
@@ -119,20 +116,16 @@ public class UINodeTypeUpload extends UIForm {
         if (uiNodeTypeImport.getRegisteredNodeType().size() > 0) {
            uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist",
                new Object[] {uiNodeTypeImport.getRegisteredNodeType().toString()}, ApplicationMessage.WARNING )) ;
-           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         }
         if (uiNodeTypeImport.getUndefinedNamespace().size() > 0) {
            uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.namespace-invalid",
                new Object[] { uiNodeTypeImport.getUndefinedNamespace().toString() }, ApplicationMessage.WARNING));
-           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
          }
       } catch(JiBXException e) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", null, ApplicationMessage.ERROR )) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch(RepositoryException e) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", null, ApplicationMessage.ERROR )) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } finally {
         UploadService uploadService = uiUploadForm.getApplicationComponent(UploadService.class);

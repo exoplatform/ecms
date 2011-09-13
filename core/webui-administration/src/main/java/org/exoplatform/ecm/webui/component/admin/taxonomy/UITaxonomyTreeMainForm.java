@@ -184,12 +184,12 @@ public class UITaxonomyTreeMainForm extends UIForm {
       if (validateCode == 1) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.name-emty", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } else if (validateCode == 2) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.homepath-emty", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -201,7 +201,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
       if (!Utils.isNameValid(name,arrFilterChar)) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.name-not-allowed", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -209,7 +209,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
       if (taxonomyService.hasTaxonomyTree(name) && !taxonomyTreeData.isEdit()) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.taxonomytree-existed", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -223,7 +223,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
           && (treeDefinitionPath.length() > 0) && (homePath.equals(treeDefinitionPath))) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.no-right-target-path", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIPermissionTreeManager uiPermissionManage = uiTaxonomyTreeContainer.getChild(UIPermissionTreeManager.class);

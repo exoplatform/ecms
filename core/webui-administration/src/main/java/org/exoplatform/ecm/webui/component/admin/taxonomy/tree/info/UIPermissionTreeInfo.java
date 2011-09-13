@@ -195,20 +195,20 @@ public class UIPermissionTreeInfo extends UIContainer {
         if (uicomp.getSizeOfListPermission() < 2 + iSystemOwner) {
             uiApp.addMessage(new ApplicationMessage("UIPermissionTreeInfo.msg.no-permission-remove",
                 null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
         }
         if(!currentNode.isCheckedOut()) {
           uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         String nodeOwner = Utils.getNodeOwner(node);
         if(name.equals(nodeOwner)) {
           uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         if(PermissionUtil.canChangePermission(node)) {
@@ -224,7 +224,7 @@ public class UIPermissionTreeInfo extends UIContainer {
             node.getSession().refresh(false) ;
             uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.access-denied", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           node.getSession().save();
@@ -232,7 +232,7 @@ public class UIPermissionTreeInfo extends UIContainer {
         } else {
           uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-tochange", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         if(!PermissionUtil.canRead(node)) {

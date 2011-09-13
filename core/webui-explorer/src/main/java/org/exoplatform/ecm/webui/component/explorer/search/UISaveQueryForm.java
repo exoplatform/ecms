@@ -80,7 +80,7 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
       String queryName = uiSaveQueryForm.getUIStringInput(QUERY_NAME).getValue() ;
       if(queryName == null || queryName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.query-name-null", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       try {
@@ -88,12 +88,12 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e){
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.save-failed", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiECMSearch.getChild(UISavedQuery.class).updateGrid(1);

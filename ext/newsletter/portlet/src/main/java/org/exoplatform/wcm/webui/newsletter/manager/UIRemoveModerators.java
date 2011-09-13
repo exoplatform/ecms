@@ -90,7 +90,7 @@ public class UIRemoveModerators extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.checkToRemove",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -109,7 +109,7 @@ public class UIRemoveModerators extends UIForm {
       // uiApp.addMessage(new
       // ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.donotMoveYourSelt",
       // null, ApplicationMessage.WARNING));
-//          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+//          
 //          return;
 //        }
 //      }

@@ -143,8 +143,7 @@ import org.exoplatform.webui.form.UIForm;
     try {
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
-            ApplicationMessage.WARNING));
-        requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       }
       String siteName = Util.getPortalRequestContext().getPortalOwner();
@@ -156,14 +155,12 @@ import org.exoplatform.webui.form.UIForm;
       }
     } catch (AlreadyInPublicationLifecycleException e) {
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.already-enroled", null,
-          ApplicationMessage.ERROR));
-      requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          ApplicationMessage.ERROR));      
       return;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.unknow-error",
-          new String[] { e.getMessage() }, ApplicationMessage.ERROR));
-      requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          new String[] { e.getMessage() }, ApplicationMessage.ERROR));      
       return;
     }
     // refresh node prevent the situation node is changed in other session

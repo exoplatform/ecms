@@ -263,7 +263,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
         uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.selectRedactorPermission",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -280,7 +280,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
           uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.subcriptionNameIsAlreadyExist",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
 
@@ -396,7 +396,7 @@ public static class SelectUserActionListener extends EventListener<UISubcription
       if(stringInput.getValue() == null || stringInput.getValue().trim().length() < 1) {
         UIApplication uiApp = subscriptionForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.doNotHaveModerators", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       };
       UIRemoveModerators removeModerators = subscriptionForm.createUIComponent(UIRemoveModerators.class, null, null);

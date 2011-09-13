@@ -115,7 +115,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     confirmToRestore(node, srcPath, event);
@@ -201,32 +201,32 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     } catch (PathNotFoundException e) {
       LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
       LOG.error("node is locked, can't restore node :" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (VersionException e) {
       LOG.error("node is checked in, can't restore node:" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
       LOG.error("access denied, can't restore of node:" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (ConstraintViolationException e) {
       LOG.error("access denied, can't restore of node:" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
       LOG.error("an unexpected error occurs", e);
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     }
   }

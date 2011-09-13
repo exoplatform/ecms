@@ -123,23 +123,23 @@ public void updateGrid(Node node, int currentPage) throws Exception {
           Object[] args = {actionName} ;
           uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-null", args,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       } catch(PathNotFoundException path) {
         Object[] args = {actionName} ;
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(uiActionManager.getChild(UIActionViewContainer.class) != null) {
@@ -192,11 +192,11 @@ public void updateGrid(Node node, int currentPage) throws Exception {
         Object[] args = {actionName} ;
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiActionListContainer.initEditPopup(selectedAction) ;
@@ -225,7 +225,7 @@ public void updateGrid(Node node, int currentPage) throws Exception {
         uiPopup.setShowMask(true);
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(uiPopup != null && uiPopup.isRendered()) uiActionListContainer.removeChildById("editActionPopup") ;
@@ -234,7 +234,7 @@ public void updateGrid(Node node, int currentPage) throws Exception {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       UIActionManager uiActionManager = uiExplorer.findFirstComponentOfType(UIActionManager.class) ;

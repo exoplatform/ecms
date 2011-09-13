@@ -83,12 +83,12 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
       actionService.executeAction(userId, node, actionName, repository);
       Object[] arg = { actionName };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.execute-successfully", arg));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while calling custom action on the node", e);;
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     }
   }

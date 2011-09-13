@@ -173,14 +173,14 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
       if (uiForm.selectedLanguage_ == null) {
         uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.select-lang", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (!uiExplorer.hasAddPermission()) {
         uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (node.hasNode(Utils.EXO_IMAGE)) {
@@ -196,7 +196,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.access-denied",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else if (uiForm.hasNodeTypeNTResource(node)) {
@@ -211,7 +211,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.access-denied",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else if (node.isNodeType(Utils.NT_FOLDER) || node.isNodeType(Utils.NT_UNSTRUCTURED)) {
@@ -227,7 +227,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.access-denied",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else {
@@ -241,7 +241,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           uiApp.addMessage(new ApplicationMessage("UILanguageDialogForm.msg.access-denied",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }

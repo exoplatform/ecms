@@ -92,7 +92,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
       } else {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.not-exist-categories", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       }
     }

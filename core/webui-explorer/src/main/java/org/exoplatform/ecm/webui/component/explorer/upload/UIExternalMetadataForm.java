@@ -136,7 +136,7 @@ public class UIExternalMetadataForm extends UIForm {
             UIApplication uiApp = uiExternalMetadataForm.getAncestorOfType(UIApplication.class) ;
             uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           uploadedNode.addMixin(metadataName);

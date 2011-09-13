@@ -95,14 +95,14 @@ public class UITabForm extends UIFormInputSetWithAction {
       if(tabName == null || tabName.trim().length() == 0) {
         viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
         uiApp.addMessage(new ApplicationMessage("UITabForm.msg.tab-name-error", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!"} ;
       for(String filterChar : arrFilterChar) {
         if(tabName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UITabForm.msg.fileName-invalid", null, ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       }
@@ -119,7 +119,7 @@ public class UITabForm extends UIFormInputSetWithAction {
       if(!isSelected) {
         viewFormTabPane.setSelectedTab(uiTabForm.getId());
         uiApp.addMessage(new ApplicationMessage("UITabForm.msg.button-select-error", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiViewForm.setRendered(true);

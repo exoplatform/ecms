@@ -136,8 +136,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       uiDocumentForm.setRepositoryName(uiExplorer.getRepositoryName());
       uiDocumentForm.setContentType(nodeType);
       if(uiDocumentForm.getTemplate() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));        
         return;
       }
       refresh(selectedNode);
@@ -179,8 +178,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
-            ApplicationMessage.WARNING));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       }
       uiDocumentForm.setNodePath(selectedNode.getPath());
@@ -241,12 +239,12 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);

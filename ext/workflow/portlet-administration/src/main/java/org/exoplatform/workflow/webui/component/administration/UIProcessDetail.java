@@ -205,7 +205,7 @@ public class UIProcessDetail extends UIContainer {
       if(uicomp.completedProcessInstanceList.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIProcessDetail.msg.result-delete-completed-process", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       }
       WorkflowServiceContainer workflowServiceContainer = uicomp.getApplicationComponent(WorkflowServiceContainer.class);

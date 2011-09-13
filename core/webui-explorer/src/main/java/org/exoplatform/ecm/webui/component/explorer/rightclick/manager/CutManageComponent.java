@@ -105,13 +105,13 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null,ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while cuting the node", e);
@@ -139,7 +139,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       }
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
     }
   }
 

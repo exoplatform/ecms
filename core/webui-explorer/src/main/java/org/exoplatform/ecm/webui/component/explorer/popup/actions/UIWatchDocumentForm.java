@@ -127,12 +127,12 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.watching-successfully", null)) ;
       uiForm.getAncestorOfType(UIJCRExplorer.class).updateAjax(event) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      
     }
   }
 
@@ -150,12 +150,12 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unwatching-successfully", null)) ;
       uiForm.getAncestorOfType(UIJCRExplorer.class).updateAjax(event) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      
     }
   }
 }

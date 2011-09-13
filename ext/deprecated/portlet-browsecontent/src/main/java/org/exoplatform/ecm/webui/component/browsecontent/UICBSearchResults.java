@@ -104,7 +104,7 @@ public class UICBSearchResults extends UIContainer {
       UIApplication uiApp = uiResults.getAncestorOfType(UIApplication.class);
       if(node == null) {
         uiApp.addMessage(new ApplicationMessage("UICBSearchResults.msg.node-removed", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       NodeType nodeType = node.getPrimaryNodeType();
@@ -146,7 +146,7 @@ public class UICBSearchResults extends UIContainer {
         Node node = container.getNodeByPath(itemPath);
         if (node == null) {
           uiApp.addMessage(new ApplicationMessage("UICBSearchResults.msg.node-removed", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         if (node.getPath().equals(container.getRootNode().getPath()))
@@ -181,7 +181,7 @@ public class UICBSearchResults extends UIContainer {
       } catch (AccessDeniedException e) {
         uiApp.addMessage(new ApplicationMessage("UICBSearchResults.msg.not-permission", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);

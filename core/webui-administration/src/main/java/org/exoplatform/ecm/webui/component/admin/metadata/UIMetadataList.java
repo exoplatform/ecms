@@ -137,7 +137,6 @@ public class UIMetadataList extends UIPagingGridDecorator {
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class) ;
       Object[] args = {metadataName} ;
       uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.delete-successful", args)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
     }
   }
   public class Metadata{

@@ -337,7 +337,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
                                                                null);
           UIApplication uiApp = workflowForm.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else {

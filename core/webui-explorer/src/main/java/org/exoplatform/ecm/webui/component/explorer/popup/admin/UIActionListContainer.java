@@ -106,7 +106,7 @@ public class UIActionListContainer extends UIContainer {
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
           ApplicationMessage.WARNING));
-      ((WebuiRequestContext)(WebuiRequestContext.getCurrentInstance())).addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
 

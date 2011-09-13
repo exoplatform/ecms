@@ -71,14 +71,14 @@ public class UIActivateAuditing extends UIContainer implements UIPopupComponent 
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         Object[] arg = { uiExplorer.getCurrentNode().getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg, ApplicationMessage.WARNING)) ;
-        contx.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch(AccessDeniedException accessDeniedException) {
         UIActivateAuditing uiActivateAuditing = event.getSource();
         UIJCRExplorer uiExplorer = uiActivateAuditing.getAncestorOfType(UIJCRExplorer.class) ;
         WebuiRequestContext contx = event.getRequestContext();
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied",null,ApplicationMessage.WARNING)) ;
-        contx.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch(Exception e){
         LOG.error("Unexpected error", e);
         UIActivateAuditing uiActivateAuditing = event.getSource();
@@ -86,7 +86,7 @@ public class UIActivateAuditing extends UIContainer implements UIPopupComponent 
         WebuiRequestContext contx = event.getRequestContext();
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.does-not-support-auditing",null,ApplicationMessage.WARNING)) ;
-        contx.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
       }
     }
   }

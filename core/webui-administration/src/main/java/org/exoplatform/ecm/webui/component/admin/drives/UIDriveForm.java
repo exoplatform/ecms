@@ -204,7 +204,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       if(name == null || name.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.name-null", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
@@ -212,7 +211,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         if(name.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.fileName-invalid", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       }
@@ -236,7 +234,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           }
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       }
@@ -254,7 +251,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       if (allowCreateFolders == null || allowCreateFolders.length == 0 ) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.allowedCreateFolder", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       StringBuilder foldertypes = new StringBuilder();
@@ -278,7 +274,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name) != null)) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       String iconPath = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_WORKSPACEICON).getValue();
@@ -297,7 +292,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           }
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.icon-not-found", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       } else {

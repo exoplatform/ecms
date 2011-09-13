@@ -126,7 +126,6 @@ public class UINodeTypeExport extends UIForm {
       }
       if(selectedNodes.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeExport.msg.item-null", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       String nodeTypeXML = getNodeTypeXML(selectedNodes) ;

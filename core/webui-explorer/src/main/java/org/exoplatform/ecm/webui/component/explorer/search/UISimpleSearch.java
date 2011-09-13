@@ -219,7 +219,7 @@ public class UISimpleSearch extends UIForm {
       String text = uiSimpleSearch.getUIStringInput(INPUT_SEARCH).getValue();
       if((text == null) && uiSimpleSearch.constraints_.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-save-null", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UISearchContainer uiSearchContainer = uiSimpleSearch.getParent();
@@ -277,7 +277,7 @@ public class UISimpleSearch extends UIForm {
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
       if(text == null && uiSimpleSearch.constraints_.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-null", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
@@ -318,7 +318,7 @@ public class UISimpleSearch extends UIForm {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       long time = System.currentTimeMillis() - startTime;

@@ -135,7 +135,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
         }
@@ -259,25 +259,25 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } catch (LockException e) {
       LOG.error("node is locked, can't move to trash node :" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (VersionException e) {
       LOG.error("node is checked in, can't move to trash node:" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (AccessDeniedException e) {
       LOG.error("access denied, can't add move to trash to node:" + node.getPath());
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs", e);
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       ret = false;
     }
@@ -345,7 +345,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (ReferentialIntegrityException ref) {
@@ -355,7 +355,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           .addMessage(new ApplicationMessage(
               "UIPopupMenu.msg.remove-referentialIntegrityException", null,
               ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (ConstraintViolationException cons) {
@@ -363,19 +363,19 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null, ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException lockException) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while removing the node", e);
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     if (!isMultiSelect) {
@@ -457,7 +457,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
@@ -484,7 +484,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       listNodesHaveRelations = checkRelations(nodePath, uiExplorer);
     } catch (PathNotFoundException pathEx) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
     }
 

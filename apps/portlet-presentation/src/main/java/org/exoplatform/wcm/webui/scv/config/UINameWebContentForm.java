@@ -173,8 +173,7 @@ public class UINameWebContentForm extends UIForm {
       } catch (RepositoryException e) {
         uiApplication.addMessage(new ApplicationMessage("UINameWebContentForm.msg.non-firstwhiteletter",
                                                         null,
-                                                        ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
+                                                        ApplicationMessage.WARNING));        
         return;
       }
       WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService.

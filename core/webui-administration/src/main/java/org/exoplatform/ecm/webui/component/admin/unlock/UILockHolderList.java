@@ -89,7 +89,7 @@ public class UILockHolderList extends UIPagingGridDecorator {
         UIApplication uiApp = uiLockHolderList.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UILockHolderList.msg.can-not-delete-lock-holder", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLockHolderContainer.getParent());
       }
       UILockHolderList uiHolderList = uiLockHolderContainer.getChild(UILockHolderList.class);

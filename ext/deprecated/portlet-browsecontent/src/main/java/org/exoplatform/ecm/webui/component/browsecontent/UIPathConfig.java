@@ -353,7 +353,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
       if((jcrPath == null) || (jcrPath.trim().length() == 0)) {
         uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.require-path", null,
                                               ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       try {
@@ -362,12 +362,12 @@ public class UIPathConfig extends UIForm implements UISelectable{
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-path", null,
                                               ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.access-denied", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String template = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_TEMPLATE).getValue();
@@ -375,13 +375,13 @@ public class UIPathConfig extends UIForm implements UISelectable{
       try {
         if (Integer.parseInt(itemPerPage) <= 0) {
           uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-value", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } catch (NumberFormatException e) {
         uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-number", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String boxTemplate = uiForm.getUIStringInput(UINewConfigForm.FIELD_DETAILBOXTEMP).getValue();
@@ -402,7 +402,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
         if(searchLocation == null || searchLocation.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.enter-search-location", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }

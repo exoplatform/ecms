@@ -907,7 +907,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -949,7 +949,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
           }
           if (warningMSG != null) {
             uiApp.addMessage(new ApplicationMessage(warningMSG, null, ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           uiExplorer.setDriveData(uicomp.getDrive(driveList, uiExplorer.getCurrentNode()));
@@ -957,21 +957,21 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiExplorer.updateAjax(event);
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1006,7 +1006,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1028,7 +1028,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1050,7 +1050,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1070,7 +1070,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1111,13 +1111,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
             null,ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1152,11 +1152,11 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         LOG.error("Access denied! No permission for modifying property " +
         Utils.EXO_FAVOURITER + " of node: " + node.getPath());
         uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
         return;
       } catch (ReferentialIntegrityException ref) {
@@ -1166,7 +1166,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
             .addMessage(new ApplicationMessage(
                 "UIPopupMenu.msg.remove-referentialIntegrityException", null,
                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
         return;
       } catch (ConstraintViolationException cons) {
@@ -1174,19 +1174,19 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiExplorer.refreshExplorer();
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
             null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
         return;
       } catch (LockException lockException) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
         return;
       } catch (Exception e) {
         LOG.error("an unexpected error occurs while removing the node", e);
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }
@@ -1251,7 +1251,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);

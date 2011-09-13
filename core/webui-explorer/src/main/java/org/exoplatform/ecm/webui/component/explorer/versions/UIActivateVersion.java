@@ -71,7 +71,7 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
         }
         UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.does-not-support-versioning",null,ApplicationMessage.WARNING)) ;
-        contx.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       try {

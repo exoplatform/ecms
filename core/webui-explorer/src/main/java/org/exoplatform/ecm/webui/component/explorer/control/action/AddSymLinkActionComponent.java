@@ -116,7 +116,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
               Object[] args = { selectedNode.getPath() };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.selected-is-link", args,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               continue;
             }
             try {
@@ -129,7 +129,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
               Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }
@@ -157,7 +157,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
               Object[] args = { selectedNode.getPath() };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.selected-is-link", args,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
             if (selectedNode.getName().indexOf(".lnk") > -1)
@@ -170,7 +170,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
               Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
             uiExplorer.updateAjax(event);
@@ -185,33 +185,33 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
       } catch (AccessControlException ace) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (NumberFormatException nume) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.numberformat-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (ConstraintViolationException cve) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (ItemExistsException iee) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.item-exists-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         LOG.error("an unexpected error occurs while adding a symlink to the node", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }

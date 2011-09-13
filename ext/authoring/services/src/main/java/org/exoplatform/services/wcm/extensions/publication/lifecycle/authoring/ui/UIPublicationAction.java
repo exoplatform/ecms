@@ -125,7 +125,7 @@ public class UIPublicationAction extends UIForm {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none",
                                                       null,
                                                       ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        
         return;
       }
 
@@ -139,9 +139,7 @@ public class UIPublicationAction extends UIForm {
           if (navigationNodeURI.getString().equals(selectedNavigationNodeURI)) {
             application.addMessage(new ApplicationMessage("UIPublicationAction.msg.duplicate",
                                                           null,
-                                                          ApplicationMessage.WARNING));
-            event.getRequestContext()
-                 .addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+                                                          ApplicationMessage.WARNING));            
             return;
           }
         }
@@ -152,7 +150,7 @@ public class UIPublicationAction extends UIForm {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.wrongNode",
                                                       null,
                                                       ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        
         return;
       }
 
@@ -228,7 +226,7 @@ public class UIPublicationAction extends UIForm {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none",
                                                       null,
                                                       ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        
         return;
       }
       String portalName = selectedNavigationNodeURI.substring(1,

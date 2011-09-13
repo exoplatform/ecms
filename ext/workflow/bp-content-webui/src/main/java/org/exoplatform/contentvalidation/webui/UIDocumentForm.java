@@ -299,7 +299,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                       null,
                                                       ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }
@@ -353,7 +353,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             } catch(AccessDeniedException accessDeniedException) {
               uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
             } catch (Exception e) {
               continue;
             }
@@ -373,20 +373,20 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         LOG.error("Unexpected error", ve);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch (ConstraintViolationException constraintViolationException) {
         LOG.error("Unexpected error occurrs", constraintViolationException);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         String key = "UIDocumentForm.msg.cannot-save" ;
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       }
     }
@@ -445,11 +445,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else {

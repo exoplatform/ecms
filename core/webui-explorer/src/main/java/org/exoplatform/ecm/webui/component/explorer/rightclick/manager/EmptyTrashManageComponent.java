@@ -100,7 +100,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     if (error) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.error-when-emptying-trash", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
     }
   }
 

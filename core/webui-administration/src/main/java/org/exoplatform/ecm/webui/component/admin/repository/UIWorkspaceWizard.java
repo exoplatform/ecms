@@ -446,7 +446,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
         if(uiWSFormStep1.isRendered()) {
           if(uiFormWizard.isEmpty(wsName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
@@ -454,7 +454,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           if (!Utils.isNameValid(wsName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
           if(uiFormWizard.isNewWizard_) {
@@ -463,7 +463,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if(uiRepoForm.isExistWorkspace(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
           } else if(uiFormWizard.isNewRepo_ ) {
@@ -472,33 +472,33 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if(uiFormWizard.selectedWsName_ == null && uiRepoForm.getWorkspaceMap().containsKey(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
           }
           if (isDefault && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalid",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (isDMSSystemWs && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalidSystemWs",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isNewWizard_ && uiWSFormStep1.isPermissionEmpty()) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.permission-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(Utils.isNameEmpty(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-required", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (!uiFormWizard.checkLockTimeOut(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
           if(!Utils.isNameEmpty(swapPath)) {
@@ -549,7 +549,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
         if(uiWSFormStep1.isRendered()) {
           if(uiFormWizard.isEmpty(wsName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
@@ -557,17 +557,17 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           if (!Utils.isNameValid(wsName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
           if(isDefault && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalid",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(isDMSSystemWs && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalidSystemWs",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isNewWizard_) {
@@ -576,7 +576,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if(uiRepoForm.isExistWorkspace(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
           } else if(uiFormWizard.isNewRepo_ ) {
@@ -585,23 +585,23 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if (uiFormWizard.selectedWsName_ == null && uiRepoForm.getWorkspaceMap().containsKey(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
           }
           if (uiFormWizard.isNewWizard_ && uiWSFormStep1.isPermissionEmpty()) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.permission-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (Utils.isNameEmpty(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-required", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (!uiFormWizard.checkLockTimeOut(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
         }
@@ -609,32 +609,32 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           boolean isExternalStoreage = uiWSFormStep2.getUIFormCheckBoxInput(UIWizardStep2.FIELD_EXTERNAL_STORE).isChecked() ;
           if (uiFormWizard.isEmpty(containerType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.containerName-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(sourceName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.sourceName-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(isExternalStoreage && uiFormWizard.isEmpty(storeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.storeType-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(maxBuffer)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.buffer-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(Utils.isNameEmpty(swapPath)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.swapPath-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(isExternalStoreage && uiFormWizard.isEmpty(storePath)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.storePath-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }
@@ -695,29 +695,29 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       if (!Utils.isNameValid(name, arrFilterChar)) {
         uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-not-allowed", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(uiFormWizard.isCheckValid_){
         if(uiFormWizard.isEmpty(queryHandlerType)) {
           uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.queryHandlerType-invalid", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         if(uiFormWizard.isEmpty(indexPath)) {
           uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.indexPath-invalid", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
         if(isCache){
           if(uiFormWizard.isEmpty(maxSize)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.maxSize-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(liveTime)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.liveTime-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }
@@ -729,7 +729,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           if(uiRepoForm.isExistWorkspace(name)){
             Object[] args = new Object[]{name}  ;
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }
@@ -910,7 +910,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
         if(uiWSFormStep1.isRendered()) {
           if(uiFormWizard.isEmpty(wsName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
@@ -918,7 +918,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           if (!Utils.isNameValid(wsName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
           if(uiFormWizard.isNewWizard_) {
@@ -927,13 +927,13 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if(uiRepoForm.isExistWorkspace(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
             if(uiFormWizard.selectedWsName_ == null && uiRepoForm.getWorkspaceMap().containsKey(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
             if (!isDefault && (uiWSFormStep1.getUIFormCheckBoxInput(UIWizardStep1.FIELD_ISDEFAULT).isEnable()))
@@ -946,13 +946,13 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             if(uiRepoForm.isExistWorkspace(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
             if(uiFormWizard.selectedWsName_ == null && uiRepoForm.getWorkspaceMap().containsKey(wsName)){
               Object[] args = new Object[]{wsName}  ;
               uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.wsname-exist", args)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
             if (!isDefault && (uiWSFormStep1.getUIFormCheckBoxInput(UIWizardStep1.FIELD_ISDEFAULT).isEnable()))
@@ -962,66 +962,66 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           }
           if(isDefault && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalid",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (isDMSSytemWs && !Utils.NT_UNSTRUCTURED.equals(nodeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.nodeType-invalidSystemWs",null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isNewWizard_ && uiWSFormStep1.isPermissionEmpty()) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.permission-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (Utils.isNameEmpty(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-required", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if (!uiFormWizard.checkLockTimeOut(lockTimeOut)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.lockTimeOut-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
         }
         if(uiWSFormStep2.isRendered()) {
           if(uiFormWizard.isEmpty(containerName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.containerName-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(sourceName)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.sourceName-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(isExternalStoreage && uiFormWizard.isEmpty(storeType)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.storeType-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(maxBuffer)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.buffer-require", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(uiFormWizard.isEmpty(swapPath)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.swapPath-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           if(isExternalStoreage && uiFormWizard.isEmpty(storePath)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.storePath-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }
         if(uiWSFormStep3.isRendered()) {
           if(Utils.isNameEmpty(indexPath)) {
             uiApp.addMessage(new ApplicationMessage("UIWorkspaceWizard.msg.indexPath-invalid", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
         }

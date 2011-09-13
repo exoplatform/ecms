@@ -954,7 +954,7 @@ public class UIJCRExplorer extends UIContainer {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
         WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         String workspace = null;
         try {
           workspace = session.getWorkspace().getName();

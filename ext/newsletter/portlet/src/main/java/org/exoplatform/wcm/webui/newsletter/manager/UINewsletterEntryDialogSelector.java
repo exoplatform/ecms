@@ -329,7 +329,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
                                                   null,
                                                   ApplicationMessage.WARNING));
         }
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (categorySelectBox.getValue() == null || subcriptionSelectBox.getValue() == null

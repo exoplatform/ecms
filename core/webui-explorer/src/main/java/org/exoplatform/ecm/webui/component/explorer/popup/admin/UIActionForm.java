@@ -251,7 +251,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       Node currentNode = uiExplorer.getCurrentNode();
       if(!PermissionUtil.canAddNode(currentNode) || !PermissionUtil.canSetProperty(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.no-permission-add", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIFormStringInput homePathInput = actionForm.getUIStringInput("homePath");
@@ -260,7 +260,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if ((targetPath == null) || (targetPath.length() == 0)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.homePath-emty", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -270,7 +270,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if ((targetPath == null) || (targetPath.length() == 0)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.targetPath-emty", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -282,7 +282,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if(actionName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -295,7 +295,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action",
                                                     args,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -307,7 +307,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action",
                                                     args,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -363,7 +363,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if (parentNode.isNew()) {
           String[] args = { parentNode.getPath() };
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add-action", args));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         actionServiceContainer.addAction(parentNode, actionForm.nodeTypeName_, sortedInputs);
@@ -379,29 +379,29 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraintviolation-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
       } catch(RepositoryException repo) {
         String key = "UIActionForm.msg.repository-exception";
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(NumberFormatException nume) {
         String key = "UIActionForm.msg.numberformat-exception";
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (NullPointerException nullPointerException) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (NoSuchFieldException ns) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.lifecycle-invalid", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } finally {
         if (actionForm.isEditInList_) {

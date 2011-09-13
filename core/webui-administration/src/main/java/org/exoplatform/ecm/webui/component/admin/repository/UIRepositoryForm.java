@@ -512,55 +512,47 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       RepositoryEntry repo = rService.getCurrentRepository().getConfiguration();
       if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
         Object[] args = new Object[]{repo.getName()} ;
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));        
         return;
       }
       if(!Utils.isNameValid(repoName, Utils.SPECIALCHARACTER)) {
         Object[] args = new Object[]{repoName} ;
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-not-alow", args));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-not-alow", args));        
         return;
       }
       if (uiForm.getWorkspaceMap().isEmpty()) {
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.workspace-isrequire", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.workspace-isrequire", null));        
         return;
       }
       if (uiForm.defaulWorkspace_ == null) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.workspace-setdefault",
                                                 null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                                                ApplicationMessage.WARNING));        
         return;
       }
       if (uiForm.dmsSystemWorkspace_ == null) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.workspace-setDMSsystem",
                                                 null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                                                ApplicationMessage.WARNING));        
         return;
       }
       String acess = uiForm.getUIStringInput(UIRepositoryForm.FIELD_ACCESSCONTROL).getValue();
       UIFormInputSetWithAction autField = uiForm.getChildById(UIRepositoryForm.FIELD_AUTHINPUTSET);
       String authen = autField.getUIStringInput(UIRepositoryForm.FIELD_AUTHENTICATION).getValue();
       if(Utils.isNameEmpty(authen)) {
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.authen-isrequire", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.authen-isrequire", null));        
         return;
       }
       String security = uiForm.getUIStringInput(UIRepositoryForm.FIELD_SCURITY).getValue();
       String sessionTimeOut = uiForm.getUIStringInput(UIRepositoryForm.FIELD_SESSIONTIME).getValue();
       if(Utils.isNameEmpty(sessionTimeOut)) {
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-required", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-required", null));        
         return;
       }
       try {
         Long.parseLong(sessionTimeOut);
       } catch (NumberFormatException nfe) {
-        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-invalid", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-invalid", null));        
         return;
       }
       re.setName(repoName);
@@ -636,7 +628,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
                                                   ApplicationMessage.WARNING));
           uiWizardPopup.deActivate();
           event.getRequestContext().addUIComponentToUpdateByAjax(uiWizardPopup);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           LOG.error("Unexpected error", e);
@@ -681,24 +673,24 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
         Object[] args = new Object[]{repo.getName()} ;
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(!Utils.isNameValid(repoName, Utils.SPECIALCHARACTER)) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-not-alow", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(Utils.isNameEmpty(sessionTime)) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-required", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       try {
         Long.parseLong(sessionTime.trim());
       } catch (NumberFormatException nfe) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.sessionTime-invalid", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIRepositoryFormContainer uiControl = uiForm.getAncestorOfType(UIRepositoryFormContainer.class);
@@ -758,7 +750,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
           Object[] args = {workspaceName} ;
           uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.cannot-delete-default-workspace",
               args, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
@@ -780,7 +772,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
           Object[] args = {workspaceName} ;
           uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.cannot-delete-workspace",
               args, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
         }
       } else {
         uiForm.workspaceMap_.remove(workspaceName);

@@ -172,7 +172,6 @@ public class UISelectedCategoriesGrid extends UIGrid {
         uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                         null,
                                                         ApplicationMessage.INFO));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
         return;
       }
       try {
@@ -182,7 +181,6 @@ public class UISelectedCategoriesGrid extends UIGrid {
         uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.cannot-save",
                                                         null,
                                                         ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
       }
       uiCategoriesSelector.deActivate();
     }

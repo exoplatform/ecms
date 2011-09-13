@@ -171,12 +171,12 @@ public class UIAddressBar extends UIForm {
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.no-node-history",
                                                 null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
     }
@@ -205,7 +205,7 @@ public class UIAddressBar extends UIForm {
         UIApplication uiApp = uiAddress.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.path-not-found", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiExplorer.updateAjax(event) ;
@@ -231,7 +231,7 @@ public class UIAddressBar extends UIForm {
         UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
     }

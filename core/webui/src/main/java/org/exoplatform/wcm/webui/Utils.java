@@ -563,7 +563,6 @@ public class Utils {
     UIApplication application = container.getAncestorOfType(UIApplication.class);
     application.addMessage(new ApplicationMessage(message, args, type));
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(application.getUIPopupMessages());
   }
 
   @Deprecated

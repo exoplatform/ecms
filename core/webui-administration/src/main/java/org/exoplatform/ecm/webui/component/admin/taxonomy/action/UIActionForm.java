@@ -293,7 +293,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         } else {
           uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.homepath-emty", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -303,7 +303,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if ((targetPath == null) || (targetPath.length() == 0)) {
           uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.targetPath-emty", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -320,23 +320,23 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       } catch (PathNotFoundException e) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.path-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (TaxonomyAlreadyExistsException e) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.taxonomy-existed", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (TaxonomyNodeAlreadyExistsException e) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.taxonomy-node-existed", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (ConstraintViolationException cViolationException) {
         Object[] args = {name, homePath, workspace};
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraint-violation-exception", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -353,7 +353,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if (!Utils.isNameValid(actionNameInput, arrFilterChar)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
          //update action for taxonomy tree
@@ -365,7 +365,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         } catch (Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.canotChangeActionId", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       } else {
@@ -382,7 +382,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
         if (!PermissionUtil.canAddNode(currentNode) || !PermissionUtil.canSetProperty(currentNode)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.no-permission-add", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         if (currentNode.isLocked()) {
@@ -404,7 +404,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             }
             uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
 
@@ -421,14 +421,14 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
               Object[] args = { actionName };
               uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action", args,
                   ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }
           if (currentNode.isNew()) {
             String[] args = { currentNode.getPath() };
             uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add-action", args));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
           boolean alreadyExistEXO_ACTION = currentNode.hasNode(Utils.EXO_ACTIONS);
@@ -451,17 +451,17 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraint-violation-exception",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (RepositoryException repo) {
           String key = "UIActionForm.msg.repository-exception";
           uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (NumberFormatException nume) {
           String key = "UIActionForm.msg.numberformat-exception";
           uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch (Exception e) {
           LOG.error("Unexpected error", e);
@@ -515,7 +515,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       } else {
         String key = "UIActionForm.msg.not-created-tree";
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);

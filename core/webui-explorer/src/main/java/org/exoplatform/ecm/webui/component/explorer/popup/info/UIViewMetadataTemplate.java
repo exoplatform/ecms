@@ -99,7 +99,7 @@ public class UIViewMetadataTemplate extends UIContainer {
       }
       if (!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiMetaManager.initMetadataFormPopup(nodeType) ;

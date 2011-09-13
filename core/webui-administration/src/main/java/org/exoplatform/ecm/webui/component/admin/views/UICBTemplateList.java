@@ -122,7 +122,7 @@ public class UICBTemplateList extends UIPagingGrid {
       if(cbTemplateHome == null) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UICBTemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       UIViewManager uiViewManager = uiCBTemp.getAncestorOfType(UIViewManager.class) ;

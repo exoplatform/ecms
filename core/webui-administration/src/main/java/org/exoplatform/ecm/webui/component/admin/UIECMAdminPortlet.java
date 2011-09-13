@@ -36,7 +36,6 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPopupMessages;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -92,12 +91,12 @@ public class UIECMAdminPortlet extends UIPortletApplication {
     }
     workingArea.init() ;
   }
-  public void renderPopupMessages() throws Exception {
+  /*public void renderPopupMessages() throws Exception {
     UIPopupMessages popupMess = getUIPopupMessages();
     if(popupMess == null)  return ;
     WebuiRequestContext  context =  WebuiRequestContext.getCurrentInstance() ;
     popupMess.processRender(context);
-  }
+  }*/
 
   public String getUserAgent() {
     PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();

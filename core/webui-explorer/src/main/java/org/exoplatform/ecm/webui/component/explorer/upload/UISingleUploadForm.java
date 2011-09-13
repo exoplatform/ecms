@@ -241,7 +241,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
       if(input.getUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(uiExplorer.getCurrentNode().isLocked()) {
@@ -256,7 +256,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
           && !uiExplorer.getCurrentNode().hasNode(JCRCONTENT)) {
         uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.taxonomyPath-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String fileName = input.getUploadResource().getFileName();
@@ -264,7 +264,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
       if(fileName == null || fileName.length() == 0) {
           uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                   ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
       }
       //String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{"} ;
@@ -303,18 +303,18 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
         } catch (ItemNotFoundException e) {
           uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return;
         } catch (RepositoryException re) {
           uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         } catch(Exception e) {
           LOG.error("An unexpected error occurs", e);
           uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -399,9 +399,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
                     taxonomyService.addCategory(newNode, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
                     uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
-                        null, ApplicationMessage.WARNING));
-                    event.getRequestContext().addUIComponentToUpdateByAjax(
-                        uiApp.getUIPopupMessages());
+                        null, ApplicationMessage.WARNING));                    
                     return;
                   } catch (RepositoryException e) {
                     LOG.error("Unexpected error", e);
@@ -417,7 +415,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
               Object[] args = { name } ;
               uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args,
                                                       ApplicationMessage.WARNING)) ;
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              
               return ;
             }
             Node contentNode = node.getNode(Utils.JCR_CONTENT);
@@ -535,7 +533,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
         if (uploadResource == null) {
           uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.upload-not-null", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         UISingleUploadManager uiUploadManager = uiUploadForm.getParent();
@@ -573,12 +571,12 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
       } catch (AccessDeniedException accessDeniedException) {
         uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }

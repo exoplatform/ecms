@@ -122,7 +122,7 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -154,13 +154,13 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     } catch(LockException le) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cant-lock", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while locking the node", e);
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
     }
   }

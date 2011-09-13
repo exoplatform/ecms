@@ -227,7 +227,6 @@ public class UIContentSearchForm extends UIForm {
       if(field == null || "".equals(field) || (field.toString().trim().length() <= 0)) {
         uiApp.addMessage(new ApplicationMessage(
             "UIContentSearchForm.msg.empty-field", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return true;
       }
     }
@@ -334,7 +333,6 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       new Object[] { resourceBundle.getString("UIContentSearchForm.title.FromDate") },
                                                       ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
             
@@ -344,7 +342,6 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       new Object[] { resourceBundle.getString("UIContentSearchForm.title.ToDate") },
                                                       ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
             
@@ -362,8 +359,7 @@ public class UIContentSearchForm extends UIForm {
             if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
                                                       null,
-                                                      ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                                                      ApplicationMessage.WARNING));              
               return;
             }
             String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
@@ -394,7 +390,6 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
                                                       new Object[] { documentType },
                                                       ApplicationMessage.ERROR));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
           }
@@ -424,8 +419,7 @@ public class UIContentSearchForm extends UIForm {
             } catch (Exception e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       null,
-                                                      ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                                                      ApplicationMessage.WARNING));              
               return;
             }
             Calendar startDate = startDateInput.getCalendar();
@@ -442,8 +436,7 @@ public class UIContentSearchForm extends UIForm {
             if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
                                                       null,
-                                                      ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                                                      ApplicationMessage.WARNING));              
               return;
             }
             String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
@@ -472,7 +465,6 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
                                                       new Object[] { documentType },
                                                       ApplicationMessage.ERROR));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
           }
@@ -481,13 +473,11 @@ public class UIContentSearchForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch (RepositoryException re) {
         uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       UIContentSearchResult uiWCSearchResult = uiWCTabSelector.getChild(UIContentSearchResult.class);

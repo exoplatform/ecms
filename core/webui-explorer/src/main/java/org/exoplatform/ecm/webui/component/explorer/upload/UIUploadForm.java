@@ -344,7 +344,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         (getMapTaxonomies().size() == 0) && !uiExplorer.getCurrentNode().hasNode(JCRCONTENT)) {
       uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.taxonomyPath-error", null,
           ApplicationMessage.WARNING)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      
       return ;
     }
     String pers = PermissionType.ADD_NODE + "," + PermissionType.SET_PROPERTY ;
@@ -365,14 +365,14 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           if(uiFormUploadInput.getUploadResource() == null) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
           String fileName = uiFormUploadInput.getUploadResource().getFileName();
           if(fileName == null || fileName.length() == 0) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
         }
@@ -397,7 +397,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             }
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return ;
           }
 
@@ -413,7 +413,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             }
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
           try {
@@ -433,7 +433,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           if (!passNameValidation(name)) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-invalid-with-name",
                 new Object[] {name}, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
 
@@ -461,18 +461,18 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               } catch (ItemNotFoundException e) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                
                 return;
               } catch (RepositoryException re) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                
                 return;
               } catch(Exception e) {
                 LOG.error("An unexpected error occurs", e);
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                
                 return;
               }
             }
@@ -534,8 +534,6 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                     } catch (ItemExistsException e) {
                       uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
                           null, ApplicationMessage.WARNING));
-                      event.getRequestContext().addUIComponentToUpdateByAjax(
-                          uiApp.getUIPopupMessages());
                       return;
                     } catch (RepositoryException e) {
                       LOG.error("Unexpected error", e);
@@ -555,7 +553,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 Object[] args = { name } ;
                 uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args,
                                                         ApplicationMessage.WARNING)) ;
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                
                 return ;
               }
               if(!node.isNodeType(Utils.MIX_VERSIONABLE) && node.canAddMixin(Utils.MIX_VERSIONABLE)) {
@@ -589,9 +587,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                     taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
                     uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
-                        null, ApplicationMessage.WARNING));
-                    event.getRequestContext().addUIComponentToUpdateByAjax(
-                        uiApp.getUIPopupMessages());
+                        null, ApplicationMessage.WARNING));                    
                     return;
                   } catch (RepositoryException e) {
                     LOG.error("Unexpected error", e);
@@ -870,7 +866,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         if (uploadResource == null) {
           uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.upload-not-null", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         UIUploadManager uiUploadManager = uiUploadForm.getParent();
@@ -898,11 +894,11 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       } catch (AccessDeniedException accessDeniedException) {
         uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }

@@ -177,14 +177,14 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
         Object[] arg = { path };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.reference-exception",
             arg, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (Exception e) {
         LOG.error("Unexpected error", e);
         Object[] arg = { path };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.path-error", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (uiTaxonomyTreeCreateChild.getChildById("TaxonomyPopupCreateChild") != null) {
@@ -220,21 +220,21 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       if (type == null || srcPath == null) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.can-not-paste", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (type.equals(ClipboardCommand.CUT) && realPath.equals(srcPath)) {
         Object[] arg = { realPath };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.node-is-cutting", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (srcPath == null) {
         Object[] arg = { realPath };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.no-taxonomy-selected",
             arg, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String destPath = realPath + srcPath.substring(srcPath.lastIndexOf("/"));
@@ -243,7 +243,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
         Object[] args = { srcPath.substring(srcPath.lastIndexOf("/") + 1) };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.exist", args,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       TaxonomyService taxonomyService = uiWorkingArea
@@ -260,7 +260,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.referential-integrity",
             null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTreeCreateChild);

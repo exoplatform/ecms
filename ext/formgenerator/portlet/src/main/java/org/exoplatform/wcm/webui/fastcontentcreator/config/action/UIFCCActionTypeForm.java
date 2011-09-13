@@ -186,7 +186,7 @@ public class UIFCCActionTypeForm extends UIForm {
           uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionTypeForm.msg.access-denied",
                                                   arg,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           actionType = "exo:sendMailAction" ;
           fastContentCreatorActionTypeForm.getUIFormSelectBox(UIFCCActionTypeForm.ACTION_TYPE).setValue(actionType) ;
           UIFCCActionContainer fastContentCreatorActionContainer = fastContentCreatorActionTypeForm.
@@ -201,7 +201,7 @@ public class UIFCCActionTypeForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionTypeForm.msg.not-support",
                                                 arg,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         actionType = "exo:sendMailAction" ;
         fastContentCreatorActionTypeForm.getUIFormSelectBox(UIFCCActionTypeForm.ACTION_TYPE).setValue(actionType) ;
         UIFCCActionContainer fastContentCreatorActionContainer = fastContentCreatorActionTypeForm.

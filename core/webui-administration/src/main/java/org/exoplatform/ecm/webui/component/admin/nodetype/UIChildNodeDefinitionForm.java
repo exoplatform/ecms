@@ -267,8 +267,6 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage(
             "UIChildNodeDefinitionForm.msg.child-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(
-            uiApp.getUIPopupMessages());
         return;
       }
       NodeDefinitionValue nodeDefValue =
@@ -309,8 +307,6 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage(
             "UIChildNodeDefinitionForm.msg.child-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(
-            uiApp.getUIPopupMessages());
         return;
       }
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
@@ -387,8 +383,6 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage(
             "UIChildNodeDefinitionForm.msg.child-invalid", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(
-            uiApp.getUIPopupMessages());
         return;
       }
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;

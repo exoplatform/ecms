@@ -166,7 +166,7 @@ public class UITagExplorer extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).updateAjax(event);
       }
     }

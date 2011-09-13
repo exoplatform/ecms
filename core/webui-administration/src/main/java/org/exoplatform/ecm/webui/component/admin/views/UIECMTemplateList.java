@@ -118,7 +118,7 @@ public class UIECMTemplateList extends UIPagingGrid {
         uiApp.addMessage(new ApplicationMessage("UIECMTemplateList.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIViewManager uiViewManager = uiECMTempList.getAncestorOfType(UIViewManager.class) ;

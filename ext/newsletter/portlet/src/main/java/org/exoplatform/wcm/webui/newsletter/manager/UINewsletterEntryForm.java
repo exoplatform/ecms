@@ -223,7 +223,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       try{
@@ -233,7 +233,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }
@@ -266,7 +266,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       Node newsletterNode = null;
@@ -277,7 +277,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if(newsletterNode != null){

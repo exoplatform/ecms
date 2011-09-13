@@ -220,27 +220,27 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       } catch (PathNotFoundException e) {
         LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (LockException e) {
         LOG.error("node is locked, can't restore node :" + trashNode.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (VersionException e) {
         LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (AccessDeniedException e) {
         LOG.error("access denied, can't restore of node:" + trashNode.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (ConstraintViolationException e) {
         LOG.error("access denied, can't restore of node:" + trashNode.getPath());
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       } catch (Exception e) {
         LOG.error("an unexpected error occurs", e);
         JCRExceptionManager.process(uiApp, e);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       }
     }
   }

@@ -211,7 +211,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                            "UIWorkflowPublicationViewForm.msg.unpublish-success",
                                                            null);
       uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.INFO));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
 
       UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
       popupWindow.setRendered(false);
@@ -239,7 +239,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                              "UIWorkflowPublicationActionForm.msg.node-checkedin",
                                                              null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -248,7 +248,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                              "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle",
                                                              null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
 
@@ -265,7 +265,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                            "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle-finish",
                                                            null);
       uiApp.addMessage(new ApplicationMessage(msg, null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
   }

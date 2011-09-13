@@ -267,7 +267,6 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       for(PropertyDefinitionValue property : uiForm.addedPropertiesDef_) {
@@ -290,8 +289,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       if(propertyName == null || propertyName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));       
         return;
       }
       PropertyDefinitionValue property =
@@ -320,8 +318,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       String name = uiPropertyForm.getUIStringInput(DEFINITION_NAME).getValue();
       if(name == null || name.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));        
         return;
       }
       for(int i = 0; i < name.length(); i ++){
@@ -332,9 +329,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         }
         uiApp.addMessage(new ApplicationMessage(
             "UIPropertyDefinitionForm.msg.property-name", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(
-            uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       }
       if(prefix != null && prefix.length() > 0 ) name = prefix + ":" + name;
@@ -387,8 +382,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         uiForm.getUIStringInput(DEFINITION_NAME).getValue();
       if(propertyName == null || propertyName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));        
         return;
       }
 
@@ -400,9 +394,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         }
         uiApp.addMessage(new ApplicationMessage(
             "UIPropertyDefinitionForm.msg.property-name", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(
-            uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       }
       if(prefix != null && prefix.length() > 0 ) propertyName = prefix + ":" + propertyName;
@@ -485,14 +477,12 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       } else {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         String message = "UIPropertyDefinitionForm.msg.not-supported-value-constraints";
-        uiApp.addMessage(new ApplicationMessage(message, null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage(message, null));        
         return;
       }
       uiForm.setSelectedTab("Contraints");
       String[] actionNames = new String[] {"AddValue", "CancelConstraints"};
-      constraintTab.setActions(actionNames, null);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      constraintTab.setActions(actionNames, null);      
     }
   }
 

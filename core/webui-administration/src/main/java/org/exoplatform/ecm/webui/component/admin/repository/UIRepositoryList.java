@@ -93,7 +93,7 @@ public class UIRepositoryList extends UIGrid  implements UIPopupComponent {
       Object[] args = new Object[]{repoName}  ;
       if(repoName.equals(repositoryControl.getSelectedRepo()) || !rservice.canRemoveRepository(repoName)) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryList.msg.cannot-delete", args)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       rservice.removeRepository(repoName) ;

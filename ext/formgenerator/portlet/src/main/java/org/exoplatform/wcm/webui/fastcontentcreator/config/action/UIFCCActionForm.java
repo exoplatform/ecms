@@ -287,7 +287,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       if (!PermissionUtil.canAddNode(currentNode) || !PermissionUtil.canSetProperty(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionForm.msg.no-permission-add",
                                                 null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UIFCCActionList fastContentCreatorActionList = null;
@@ -330,7 +330,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
               uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionForm.msg.existed-action",
                                                       args,
                                                       ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }
@@ -339,7 +339,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
           if(parentNode.isNew()) {
             String[] args = {parentNode.getPath()} ;
             uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionForm.msg.unable-add-action",args)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+            
             return;
           }
 
@@ -362,24 +362,24 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
         } catch(RepositoryException repo) {
           String key = "UIFastContentCreatorActionForm.msg.repository-exception" ;
           uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return;
         } catch(NumberFormatException nume) {
           String key = "UIFastContentCreatorActionForm.msg.numberformat-exception" ;
           uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return;
         } catch (NullPointerException nullPointerException) {
           uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionForm.msg.unable-add",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return;
         } catch (Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionForm.msg.unable-add",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return;
         }
       }

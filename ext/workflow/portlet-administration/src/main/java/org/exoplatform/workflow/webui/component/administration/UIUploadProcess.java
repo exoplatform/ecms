@@ -70,14 +70,14 @@ public class UIUploadProcess extends UIForm {
       UIFormUploadInput input = (UIFormUploadInput)uiUploadProcess.getUIInput(FIELD_UPLOAD);
       if(input.getUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-error", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
 
       }
       String fileName = input.getUploadResource().getFileName() ;
       if(fileName == null || fileName.equals("")) {
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-error", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
 
@@ -89,18 +89,18 @@ public class UIUploadProcess extends UIForm {
         if(name.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-invalid", null,
                                                    ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
         }
       }
       try {
         workflowServiceContainer.deployProcess(inputStream) ;
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.process-successful", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.data-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       UIAdministrationManager uiAdminstrationManager =

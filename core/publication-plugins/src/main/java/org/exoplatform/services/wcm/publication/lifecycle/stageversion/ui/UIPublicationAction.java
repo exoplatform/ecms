@@ -119,7 +119,7 @@ public class UIPublicationAction extends UIForm {
 
       if (selectedNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        
         return;
       }
 
@@ -134,7 +134,6 @@ public class UIPublicationAction extends UIForm {
             application.addMessage(new ApplicationMessage("UIPublicationAction.msg.duplicate",
                                                           null,
                                                           ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
             return;
           }
         }
@@ -143,7 +142,7 @@ public class UIPublicationAction extends UIForm {
       UserNode userNode = selectedNode.getUserNode();
       if (userNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.wrongNode", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        
         return;
       }
 
@@ -212,8 +211,7 @@ public class UIPublicationAction extends UIForm {
 
       if (selectedNavigationNodeURI == null) {
         UIApplication application = publicationAction.getAncestorOfType(UIApplication.class);
-        application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+        application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));        
         return;
       }
       String portalName = selectedNavigationNodeURI.substring(1, selectedNavigationNodeURI.indexOf("/", 1));

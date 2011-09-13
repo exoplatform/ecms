@@ -116,7 +116,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (uiExplorer.getAllClipBoard().size() < 1) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.no-node", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     Node destNode;
@@ -133,7 +133,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     } catch (PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -142,7 +142,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (!PermissionUtil.canAddNode(destNode)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-paste-node", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     }
@@ -150,12 +150,12 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     if (!destNode.isCheckedOut()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
 
@@ -167,7 +167,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     } catch (PathNotFoundException pe) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     if (!uiExplorer.getPreference().isJcrEnable())
@@ -282,7 +282,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (ClipboardCommand.CUT.equals(type) && srcPath.equals(destPath)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-cutting", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     // Make destination path without index on final name
@@ -303,48 +303,48 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     } catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.copied-node-in-versioning", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (ItemExistsException iee) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (LoginException e) {
       if (ClipboardCommand.CUT.equals(type)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
         return;
       }
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-paste-nodetype", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (AccessDeniedException ace) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException locke) {
       Object[] arg = { srcPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-lock-exception", arg,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     }

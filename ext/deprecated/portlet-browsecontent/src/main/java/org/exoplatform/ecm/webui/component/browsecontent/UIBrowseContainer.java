@@ -1928,7 +1928,7 @@ public class UIBrowseContainer extends UIContainer {
           app
               .addMessage(new ApplicationMessage("UIBrowseContainer.msg.template-notsupported",
                   null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
         } else {
           uiContainer.changeNode(selectNode);
           uiContainer.setPageIterator(uiContainer.getSubDocumentList(selectNode));
@@ -1950,7 +1950,7 @@ public class UIBrowseContainer extends UIContainer {
       if(node == null) {
         UIApplication app = uiContainer.getAncestorOfType(UIApplication.class);
         app.addMessage(new ApplicationMessage("UIBrowseContainer.msg.invalid-node", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       uiContainer.setShowDocumentDetail(false);

@@ -243,13 +243,13 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       if (permsList.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.checkbox-require", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String[] permsArray = permsList.toArray(new String[permsList.size()]);
@@ -262,7 +262,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
         if(!currentNode.isCheckedOut()) {
           uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.node-checkedin", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
 
@@ -278,7 +278,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
             } catch (AccessDeniedException ade) {
               uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.access-denied", null,
                                                       ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              
               return;
             }
           }
@@ -288,7 +288,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
         } else {
           uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.not-change-permission", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         currentNode.getSession().save();
@@ -310,7 +310,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       if (uiPermInfo.getPermBeans().size() < 1) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.have-not-any-permission", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UITaxonomyTreeContainer uiTaxonomyTreeContainer = uiForm.getAncestorOfType(UITaxonomyTreeContainer.class);

@@ -161,7 +161,7 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
       } catch(RepositoryException e) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeList.msg.remove-exception",
             null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiTaxonomyManagerTrees.update();

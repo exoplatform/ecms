@@ -214,14 +214,14 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllOwnedByUserResult.msg.access-denied", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         TemplateService templateService = uiShowAllOwnedByUserResult.getApplicationComponent(TemplateService.class);
         if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllOwnedByUserResult.msg.not-support", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
         UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");

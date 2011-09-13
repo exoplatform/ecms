@@ -69,13 +69,13 @@ public class ManageHiddenActionComponent extends UIComponent {
         selectedNode.removeMixin(Utils.EXO_HIDDENABLE);
         selectedNode.save();
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.removed-hidden-mixin", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       } else if(selectedNode.canAddMixin(Utils.EXO_HIDDENABLE)){
         selectedNode.addMixin(Utils.EXO_HIDDENABLE);
         selectedNode.save();
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.added-hidden-mixin", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         uiExplorer.updateAjax(event);
       }
     }

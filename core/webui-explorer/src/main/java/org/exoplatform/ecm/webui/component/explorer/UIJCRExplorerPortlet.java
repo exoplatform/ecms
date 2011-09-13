@@ -361,7 +361,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     } catch (PathNotFoundException e) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.drive-not-exist", args, ApplicationMessage.WARNING));
-      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     RepositoryService rservice = getApplicationComponent(RepositoryService.class);
@@ -415,14 +415,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
-          ApplicationMessage.WARNING));
-      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          ApplicationMessage.WARNING));      
       return;
     } catch(NoSuchWorkspaceException nosuchWS) {
       Object[] args = { driveName };
       uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
-          ApplicationMessage.WARNING));
-      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          ApplicationMessage.WARNING));      
       return;
     } catch(Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -482,7 +480,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
       } else {
         uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
       }
     }
 
@@ -491,8 +489,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
         AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));        
       }
     }
     uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());

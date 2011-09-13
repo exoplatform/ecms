@@ -119,17 +119,17 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       Node node = uiExplorer.getCurrentNode() ;
       if (uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(name == null || name.length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if (title == null || title.length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.title-invalid", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;        
       }
 
@@ -157,7 +157,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       } catch(AccessDeniedException accessDeniedException) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(RepositoryException re) {
         String key = "";
@@ -170,12 +170,12 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
           }
         }
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return ;
       } catch(NumberFormatException nume) {
         String key = "UIFolderForm.msg.numberformat-exception";
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);

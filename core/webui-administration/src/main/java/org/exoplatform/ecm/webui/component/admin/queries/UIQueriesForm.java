@@ -166,16 +166,14 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         for(Node queryNode : queryService.getSharedQueries(WCMCoreUtils.getSystemSessionProvider())) {
           if(queryNode.getName().equals(queryName)) {
             uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-existing", null,
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                ApplicationMessage.WARNING)) ;            
             return ;
           }
         }
       }
       if(!Utils.isNameValid(queryName, REG_EXPRESSION)) {
         uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-invalid", null,
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                ApplicationMessage.WARNING)) ;        
         return ;
       }
       String statement = uiForm.getUIFormTextAreaInput(STATEMENT).getValue() ;
@@ -183,8 +181,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       String permissions = permField.getUIStringInput(PERMISSIONS).getValue() ;
       if((permissions == null)||(permissions.trim().length() == 0)) {
         uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.permission-require", null,
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                ApplicationMessage.WARNING)) ;        
         return ;
       }
       String queryType = uiForm.getUIFormSelectBox(QUERY_TYPE).getValue() ;
@@ -205,13 +202,11 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         }
       } catch(InvalidQueryException qe) {
         uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.invalid-query", null,
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                                                ApplicationMessage.WARNING)) ;        
         return ;
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.access-denied", null,
-                  ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+                  ApplicationMessage.WARNING)) ;        
         return ;
       }
       UIQueriesManager uiManager = uiForm.getAncestorOfType(UIQueriesManager.class) ;

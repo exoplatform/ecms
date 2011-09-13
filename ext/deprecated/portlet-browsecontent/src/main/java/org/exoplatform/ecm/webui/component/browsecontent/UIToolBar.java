@@ -155,7 +155,7 @@ public class UIToolBar extends UIContainer {
         } else {
           UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-removed", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           selectNode = uiComp.getRootNode();
           uiContainer.changeNode(selectNode);
         }
@@ -184,7 +184,7 @@ public class UIToolBar extends UIContainer {
             UIApplication app = uiContainer.getAncestorOfType(UIApplication.class);
             app.addMessage(new ApplicationMessage("UIBrowseContainer.msg.template-notsupported",
                                                   null));
-            event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+            
           } else {
             uiContainer.changeNode(selectNode);
             uiContainer.setPageIterator(uiContainer.getSubDocumentList(selectNode));
@@ -212,7 +212,7 @@ public class UIToolBar extends UIContainer {
       if (uiContainer.isShowDocumentDetail()) {
         UIApplication uiApp = uiToolBar.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.back-view-search", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       UISearchController uiSearchController = uiContainer.getChild(UISearchController.class);
@@ -247,7 +247,7 @@ public class UIToolBar extends UIContainer {
       UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
       if (!container.isShowDocumentDetail() || !uiDocument.isValidNode()) {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         event.getRequestContext().addUIComponentToUpdateByAjax(container);
         return;
       }
@@ -255,7 +255,7 @@ public class UIToolBar extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-vote",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String lockToken = LockUtil.getLockToken(uiDocument.node_);
@@ -268,7 +268,7 @@ public class UIToolBar extends UIContainer {
           uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-is-locked",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -281,7 +281,7 @@ public class UIToolBar extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }
@@ -310,20 +310,20 @@ public class UIToolBar extends UIContainer {
       if ((documentNode == null) || !container.isShowDocumentDetail()) {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         event.getRequestContext().addUIComponentToUpdateByAjax(container) ;
         return ;
       }
       if(!container.hasAddPermission(documentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.access-add-denied", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if(!documentNode.isNodeType("mix:commentable")) {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-comment", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       String lockToken = LockUtil.getLockToken(documentNode);
@@ -334,7 +334,7 @@ public class UIToolBar extends UIContainer {
         if (!strLockOwner.equals(userId)) {
           uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-is-locked", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -358,7 +358,7 @@ public class UIToolBar extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }

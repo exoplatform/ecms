@@ -89,7 +89,6 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     if(uiController.getListFileType().isEmpty()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.empty-file-type", null,
           ApplicationMessage.WARNING));
-      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
     }
 //    uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());

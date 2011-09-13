@@ -261,7 +261,7 @@ public class UIFCCActionList extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       if (uiPopup != null && uiPopup.isRendered())
@@ -274,7 +274,7 @@ public class UIFCCActionList extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       fastContentCreatorActionList.updateGrid(fastContentCreatorConfig.getSavedLocationNode(),

@@ -155,7 +155,6 @@ public class UIWorkspaceList extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(Exception e) {
         LOG.error("An unexpected error occurs", e);

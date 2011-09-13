@@ -137,14 +137,12 @@ public class UIJcrExplorerContainer extends UIContainer {
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
-            ApplicationMessage.WARNING));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
-            ApplicationMessage.WARNING));
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            ApplicationMessage.WARNING));        
         return;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);

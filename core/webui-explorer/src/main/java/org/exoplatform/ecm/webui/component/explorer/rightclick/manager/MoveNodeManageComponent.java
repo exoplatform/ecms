@@ -98,7 +98,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     if (destPath.startsWith(nodePath)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.bound-move-exception", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     Node destNode;
@@ -113,7 +113,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     } catch (PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -122,7 +122,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     if (!PermissionUtil.canAddNode(destNode)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-move-node", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       uiExplorer.updateAjax(event);
       return;
     }
@@ -130,12 +130,12 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     if (!destNode.isCheckedOut()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
     try {
@@ -150,18 +150,18 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.has-not-add-permission", arg,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (LockException lock) {
       Object[] arg = { nodePath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (ConstraintViolationException constraint) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.move-constraint-exception", null,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while selecting the node", e);
@@ -194,7 +194,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.can-not-move-to-itself",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
     }
@@ -207,7 +207,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       if (!selectedNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       uiExplorer.addLockToken(selectedNode);
@@ -235,7 +235,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Object[] args = { srcPath, messagePath };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.move-problem", args,
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      
       return;
     }
   }

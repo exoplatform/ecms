@@ -340,7 +340,7 @@ public class UIQueryConfig extends UIForm {
         if(queryPath.equals(UIQueryConfig.EMPTYQUERY)){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-name", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
           return;
         }
       }
@@ -348,7 +348,7 @@ public class UIQueryConfig extends UIForm {
         if(Utils.isNameEmpty(query)) {
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-query", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
           return;
         }
         try {
@@ -358,17 +358,17 @@ public class UIQueryConfig extends UIForm {
         } catch(InvalidQueryException iqe) {
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-query", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
           return;
         } catch(NoSuchNodeTypeException nt){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.noSuchNodeTypeException", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
           return;
         } catch(RepositoryException rp){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.repostoryException", null,
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+          
           return;
         }catch(Exception e){
           LOG.error("Unexpected error", e);
@@ -379,13 +379,13 @@ public class UIQueryConfig extends UIForm {
       } catch(Exception e){
         app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-value", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       if(Integer.parseInt(itemPerPage) == 0) {
         app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-value", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       String  queryType = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_QUERYTYPE).getValue();

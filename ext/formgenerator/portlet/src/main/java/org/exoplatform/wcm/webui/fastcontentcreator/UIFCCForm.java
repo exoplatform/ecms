@@ -318,7 +318,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           String valueName = input.getValue().toString().trim();
           if (!org.exoplatform.ecm.webui.utils.Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.name-not-allowed", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -340,7 +340,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           if ((categoriesPathList == null) || (categoriesPathList.length == 0)) {
             uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
 
@@ -349,7 +349,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
               if (categoryPath.indexOf("/") == -1) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING));
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                
                 return;
               }
             }
@@ -366,13 +366,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         Object[] args = { preferencePath } ;
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.access-denied", args,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch(PathNotFoundException pnfe) {
         Object[] args = { preferencePath } ;
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.path-not-found", args,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       }
       try {
@@ -412,7 +412,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           if (saveMessage == null) saveMessage = "saved-successfully";
           Object[] args = { saveMessage } ;
           uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.saved-successfully", args)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent()) ;
       } catch (AccessControlException ace) {
@@ -420,25 +420,25 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       } catch(VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.in-versioning", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch(AccessDeniedException e) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.access-denied" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch(LockException lock) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.node-locked" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return;
       } catch(ItemExistsException item) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.node-isExist" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
       }
     }
   }

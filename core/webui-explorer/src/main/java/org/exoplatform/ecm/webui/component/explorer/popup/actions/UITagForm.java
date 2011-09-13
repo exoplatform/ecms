@@ -98,7 +98,7 @@ public class UITagForm extends UIForm {
       if(tagName.trim().length() > 20) {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       String[] arrFilterChar = {"&", "'", "$", "@", ":","]", "[", "*", "%", "!", "/", "\\"};
@@ -106,7 +106,7 @@ public class UITagForm extends UIForm {
         if(tagName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null,
                                                   ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }
@@ -135,7 +135,7 @@ public class UITagForm extends UIForm {
           } else if (!tagName.equals(uiForm.oldName_)) {
            uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
                           ApplicationMessage.WARNING));
-//           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+//           
           }
         }
 

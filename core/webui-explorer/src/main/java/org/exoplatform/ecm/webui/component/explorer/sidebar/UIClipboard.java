@@ -88,11 +88,11 @@ public class UIClipboard extends UIComponent {
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException path) {
         app.addMessage(new ApplicationMessage("PathNotFoundException.msg", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         app.addMessage(new ApplicationMessage("UIClipboard.msg.unable-pasted", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
+        
         return ;
       }
     }

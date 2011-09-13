@@ -377,23 +377,23 @@ public class UITreeExplorer extends UIContainer {
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(ItemNotFoundException inf) {
           uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
               ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          
           return ;
       } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch(RepositoryException e) {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -442,25 +442,25 @@ public class UITreeExplorer extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (ItemNotFoundException inf) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch (AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(RepositoryException e) {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -489,7 +489,7 @@ public class UITreeExplorer extends UIContainer {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);

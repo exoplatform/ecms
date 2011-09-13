@@ -159,7 +159,6 @@ public class UITreeTaxonomyList extends UIForm {
             uiTaxonomyTree.setValue(taxonomyTree.get(0).getValue());
 
           uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTree.getParent());
           return;
         } catch(Exception e) {
@@ -172,7 +171,6 @@ public class UITreeTaxonomyList extends UIForm {
         if (taxonomyTree != null && taxonomyTree.size() > 0)
           uiTaxonomyTree.setValue(taxonomyTree.get(0).getValue());
         uiApp.addMessage(new ApplicationMessage("UITreeTaxonomyList.msg.NoChild", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiOneTaxonomySelector);

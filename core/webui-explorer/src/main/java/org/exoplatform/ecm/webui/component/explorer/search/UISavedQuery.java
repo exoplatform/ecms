@@ -185,7 +185,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       } finally {
         if(queryResult == null || queryResult.getNodes().getSize() ==0) {
           uiApp.addMessage(new ApplicationMessage("UISavedQuery.msg.not-result-found", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setRenderedChild(UISavedQuery.class);
           return;
         }

@@ -256,7 +256,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
         } catch(PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
               null,ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
 
@@ -284,11 +284,11 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
         } catch (AccessDeniedException e) {
           LOG.error("Access denied! No permission for deleting node: " + node.getPath());
           uiApp.addMessage(new ApplicationMessage("UIShowAllTrashResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           } catch (VersionException ve) {
             uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             uiExplorer.updateAjax(event);
             return;
           } catch (ReferentialIntegrityException ref) {
@@ -298,7 +298,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
                 .addMessage(new ApplicationMessage(
                     "UIPopupMenu.msg.remove-referentialIntegrityException", null,
                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             uiExplorer.updateAjax(event);
             return;
           } catch (ConstraintViolationException cons) {
@@ -306,19 +306,19 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
             uiExplorer.refreshExplorer();
             uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
                 null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             uiExplorer.updateAjax(event);
             return;
           } catch (LockException lockException) {
             uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             uiExplorer.updateAjax(event);
             return;
           } catch (Exception e) {
             LOG.error("an unexpected error occurs while removing the node", e);
             JCRExceptionManager.process(uiApp, e);
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
 
@@ -365,7 +365,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
         } catch(PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
               null,ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
 
@@ -397,16 +397,16 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
         } catch (LockException e) {
           LOG.error("node is locked, can't restore node :" + node.getPath());
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           uiExplorer.updateAjax(event);
         } catch (AccessDeniedException e) {
           LOG.error("Access denied! No permission for restoring node: " + node.getPath());
           uiApp.addMessage(new ApplicationMessage("UIShowAllTrashResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
         } catch (Exception e) {
           LOG.error("an unexpected error occurs", e);
           JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           uiExplorer.updateAjax(event);
         }
 

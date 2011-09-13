@@ -133,7 +133,7 @@ public class UIUploadContent extends UIContainer {
         Object[] args = {nodeType} ;
         uiApp.addMessage(new ApplicationMessage("UIUploadContent.msg.has-not-template", args,
                          ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiUploadContainer.removeChild(UIAddMetadataForm.class) ;
@@ -176,7 +176,7 @@ public class UIUploadContent extends UIContainer {
         Object[] args = {nodeType} ;
         uiApp.addMessage(new ApplicationMessage("UIUploadContent.msg.has-not-template", args,
                          ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
       uiUploadContainer.setActions(new String[] {"AddMetadata","Close"});

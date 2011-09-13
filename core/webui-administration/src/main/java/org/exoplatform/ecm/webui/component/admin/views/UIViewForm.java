@@ -386,7 +386,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
         WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        
         return ;
       }
     }

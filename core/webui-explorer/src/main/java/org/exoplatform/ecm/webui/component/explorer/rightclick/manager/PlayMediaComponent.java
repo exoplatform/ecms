@@ -108,7 +108,7 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
           if (nodes.size() == 0) {
             uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unavaiable-supported-media-file",
                 null,ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }
         }
@@ -130,7 +130,7 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
         } catch(PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
               null,ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
         }
       }

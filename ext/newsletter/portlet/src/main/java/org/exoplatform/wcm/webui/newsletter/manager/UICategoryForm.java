@@ -233,7 +233,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent, UISelect
       if (("".equals(inputModeratorValue)) || (inputModeratorValue == null)) {
         UIApplication uiApp = uiCategoryForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.inputModeratorEmpty", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       categoryConfig.setModerator(inputModeratorValue);
@@ -251,7 +251,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent, UISelect
             uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.categoryNameIsAlreadyExist",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             return;
           }else{
             categoryHandler.add(sessionProvider, portalName, categoryConfig);
@@ -357,7 +357,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent, UISelect
       if(stringInput.getValue() == null || stringInput.getValue().trim().length() < 1) {
         UIApplication uiApp = categoryForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.doNotHaveModerators", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       };
       UIRemoveModerators removeModerators = categoryForm.createUIComponent(UIRemoveModerators.class, null, null);

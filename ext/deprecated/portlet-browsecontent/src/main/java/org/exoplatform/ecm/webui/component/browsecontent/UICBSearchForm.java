@@ -255,7 +255,7 @@ public class UICBSearchForm extends UIForm {
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
       if(Utils.isNameEmpty(keyword)) {
         app.addMessage(new ApplicationMessage("UICBSearchForm.msg.not-empty", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
         return;
       }
       if(type.equals(CATEGORY_SEARCH)) {
@@ -269,7 +269,7 @@ public class UICBSearchForm extends UIForm {
       if(queryResult == null || queryResult.size() == 0){
         Object[] args = new Object[]{keyword};
         app.addMessage(new ApplicationMessage("UICBSearchForm.msg.suggestion-keyword", args));
-        event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
+        
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISearchController.class));
     }

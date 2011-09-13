@@ -552,7 +552,7 @@ public class UIPropertyForm extends UIForm {
       }
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.node-checkedin", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       }
       boolean isMultiple = false;
@@ -571,7 +571,7 @@ public class UIPropertyForm extends UIForm {
             Object[] args = { name };
             uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args,
                 ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            
             UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
             uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
             return;
@@ -620,19 +620,19 @@ public class UIPropertyForm extends UIForm {
           LOG.error("Unexpected error", vf);
           uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.valueFormatEx", null, 
               ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          
           return;
       } 
       catch(NullPointerException ne) {
         LOG.error("Unexpected error", ne);
         uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyValu-null", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(NumberFormatException nume) {
         uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.number-format-exception", null,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
