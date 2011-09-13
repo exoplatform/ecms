@@ -42,6 +42,5 @@
 			 </div>
 		</div>
 		<div style="clear: left;"><span style="display: none;"></span></div>
-	</div>
-	<%uicomponent.renderPopupMessages(); %>
+	</div>	
 </div>

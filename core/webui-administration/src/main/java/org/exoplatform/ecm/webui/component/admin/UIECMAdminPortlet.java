@@ -91,12 +91,6 @@ public class UIECMAdminPortlet extends UIPortletApplication {
     }
     workingArea.init() ;
   }
-  /*public void renderPopupMessages() throws Exception {
-    UIPopupMessages popupMess = getUIPopupMessages();
-    if(popupMess == null)  return ;
-    WebuiRequestContext  context =  WebuiRequestContext.getCurrentInstance() ;
-    popupMess.processRender(context);
-  }*/
 
   public String getUserAgent() {
     PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
