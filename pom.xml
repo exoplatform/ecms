@@ -27,11 +27,11 @@
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
-    <org.exoplatform.kernel.version>2.3.0-CR4-CP01</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.4.0-CR4</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.2.0-CR4</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.14.0-CR4-CP01</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.14.0-CR4</org.exoplatform.jcr-services.version>
+    <org.exoplatform.kernel.version>2.3.0-GA</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.4.0-GA-CP02</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.2.0-GA</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.14.0-GA</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.14.0-GA</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.2.0-PLF-SNAPSHOT</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.1.1-GA-SNAPSHOT</org.exoplatform.commons.version>
@@ -95,7 +95,7 @@
 	<itunes.podcast.version>0.2</itunes.podcast.version>
 	<org.hsqldb.version>2.0.0</org.hsqldb.version>
 	<org.apache.pdfbox.version>1.4.0</org.apache.pdfbox.version>
-	<bouncycastle.version>136</bouncycastle.version>
+	<org.bouncycastle.version>1.45</org.bouncycastle.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->

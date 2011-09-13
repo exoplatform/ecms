@@ -57,21 +57,20 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          nicolas.filotto@exoplatform.com
- * 31 mars 2009
+ * Created by The eXo Platform SAS Author : eXoPlatform
+ * nicolas.filotto@exoplatform.com 31 mars 2009
  */
 public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
 
-  final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
+  final static public String    EXO_RESTORE_LOCATION = "exo:restoreLocation";
 
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("services.cms.link.NodeLinkAware");
+  private static final Log      LOG                  = ExoLogger
+                                                         .getLogger("services.cms.link.NodeLinkAware");
 
-  private final NodeLocation nodeLocation;
+  private final NodeLocation    nodeLocation;
 
   private volatile NodeLocation targetNodeLocation;
 
@@ -79,8 +78,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
     super(originalWorkspace, virtualPath, node);
     this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
-  
-  public String getRealPath() throws RepositoryException {
+
+  public String getRealPath() {
     return nodeLocation.getPath();
   }
 
@@ -91,7 +90,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   public NodeLinkAware getTargetNode() throws RepositoryException {
     return new NodeLinkAware(originalWorkspaceName, virtualPath, getTarget());
   }
-  
+
   public Session getNodeSession() throws RepositoryException {
     return getRealNode().getSession();
   }
@@ -140,37 +139,28 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   /**
    * {@inheritDoc}
    */
-  public void addMixin(String mixinName) throws NoSuchNodeTypeException,
-                                   VersionException,
-                                   ConstraintViolationException,
-                                   LockException,
-                                   RepositoryException {
+  public void addMixin(String mixinName) throws NoSuchNodeTypeException, VersionException,
+      ConstraintViolationException, LockException, RepositoryException {
     getTarget().addMixin(mixinName);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Node addNode(String relPath) throws ItemExistsException,
-                                  PathNotFoundException,
-                                  VersionException,
-                                  ConstraintViolationException,
-                                  LockException,
-                                  RepositoryException {
-    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(relPath));
+  public Node addNode(String relPath) throws ItemExistsException, PathNotFoundException,
+      VersionException, ConstraintViolationException, LockException, RepositoryException {
+    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(
+        relPath));
   }
 
   /**
    * {@inheritDoc}
    */
   public Node addNode(String relPath, String primaryNodeTypeName) throws ItemExistsException,
-                                               PathNotFoundException,
-                                               NoSuchNodeTypeException,
-                                               LockException,
-                                               VersionException,
-                                               ConstraintViolationException,
-                                               RepositoryException {
-    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(relPath, primaryNodeTypeName));
+      PathNotFoundException, NoSuchNodeTypeException, LockException, VersionException,
+      ConstraintViolationException, RepositoryException {
+    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(
+        relPath, primaryNodeTypeName));
   }
 
   /**
@@ -183,40 +173,32 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   /**
    * {@inheritDoc}
    */
-  public void cancelMerge(Version version) throws VersionException,
-                                       InvalidItemStateException,
-                                       UnsupportedRepositoryOperationException,
-                                       RepositoryException {
+  public void cancelMerge(Version version) throws VersionException, InvalidItemStateException,
+      UnsupportedRepositoryOperationException, RepositoryException {
     getTarget().cancelMerge(version);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Version checkin() throws VersionException,
-                          UnsupportedRepositoryOperationException,
-                          InvalidItemStateException,
-                          LockException,
-                          RepositoryException {
+  public Version checkin() throws VersionException, UnsupportedRepositoryOperationException,
+      InvalidItemStateException, LockException, RepositoryException {
     return getTarget().checkin();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void checkout() throws UnsupportedRepositoryOperationException,
-                        LockException,
-                        RepositoryException {
+  public void checkout() throws UnsupportedRepositoryOperationException, LockException,
+      RepositoryException {
     getTarget().checkout();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void doneMerge(Version version) throws VersionException,
-                                     InvalidItemStateException,
-                                     UnsupportedRepositoryOperationException,
-                                     RepositoryException {
+  public void doneMerge(Version version) throws VersionException, InvalidItemStateException,
+      UnsupportedRepositoryOperationException, RepositoryException {
     getTarget().doneMerge(version);
   }
 
@@ -224,7 +206,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Version getBaseVersion() throws UnsupportedRepositoryOperationException,
-                                 RepositoryException {
+      RepositoryException {
     return getTarget().getBaseVersion();
   }
 
@@ -232,9 +214,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public String getCorrespondingNodePath(String workspaceName) throws ItemNotFoundException,
-                                                     NoSuchWorkspaceException,
-                                                     AccessDeniedException,
-                                                     RepositoryException {
+      NoSuchWorkspaceException, AccessDeniedException, RepositoryException {
     return getTarget().getCorrespondingNodePath(workspaceName);
   }
 
@@ -255,10 +235,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   /**
    * {@inheritDoc}
    */
-  public Lock getLock() throws UnsupportedRepositoryOperationException,
-                       LockException,
-                       AccessDeniedException,
-                       RepositoryException {
+  public Lock getLock() throws UnsupportedRepositoryOperationException, LockException,
+      AccessDeniedException, RepositoryException {
     return getTarget().getLock();
   }
 
@@ -273,10 +251,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Node getNode(String relPath) throws PathNotFoundException, RepositoryException {
-    return new NodeLinkAware(originalWorkspaceName,
-                             getVirtualPath(relPath),
-                             (Node) LinkUtils.getNodeFinder().getItem(getOriginalSession(),
-                                                                      getVirtualPath(relPath)));
+    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), (Node) LinkUtils
+        .getNodeFinder().getItem(getOriginalSession(), getVirtualPath(relPath)));
   }
 
   /**
@@ -290,14 +266,16 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public NodeIterator getNodes(String namePattern) throws RepositoryException {
-    return new NodeIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getNodes(namePattern));
+    return new NodeIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getNodes(
+        namePattern));
   }
 
   /**
    * {@inheritDoc}
    */
   public Item getPrimaryItem() throws ItemNotFoundException, RepositoryException {
-    return ItemLinkAware.newInstance(originalWorkspaceName, getVirtualPath(super.getName()), getTarget().getPrimaryItem());
+    return ItemLinkAware.newInstance(originalWorkspaceName, getVirtualPath(super.getName()),
+        getTarget().getPrimaryItem());
   }
 
   /**
@@ -311,14 +289,16 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public PropertyIterator getProperties() throws RepositoryException {
-    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getProperties());
+    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget()
+        .getProperties());
   }
 
   /**
    * {@inheritDoc}
    */
   public PropertyIterator getProperties(String namePattern) throws RepositoryException {
-    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getProperties(namePattern));
+    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget()
+        .getProperties(namePattern));
   }
 
   /**
@@ -326,7 +306,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public Property getProperty(String relPath) throws PathNotFoundException, RepositoryException {
     String path = getVirtualPath(relPath);
-    return new PropertyLinkAware(originalWorkspaceName, path, (Property) LinkUtils.getNodeFinder().getItem(getOriginalSession(), path));
+    return new PropertyLinkAware(originalWorkspaceName, path, (Property) LinkUtils.getNodeFinder()
+        .getItem(getOriginalSession(), path));
   }
 
   /**
@@ -347,7 +328,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public VersionHistory getVersionHistory() throws UnsupportedRepositoryOperationException,
-                                           RepositoryException {
+      RepositoryException {
     return getTarget().getVersionHistory();
   }
 
@@ -424,46 +405,35 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   /**
    * {@inheritDoc}
    */
-  public Lock lock(boolean isDeep, boolean isSessionScoped) throws UnsupportedRepositoryOperationException,
-                                              LockException,
-                                              AccessDeniedException,
-                                              InvalidItemStateException,
-                                              RepositoryException {
+  public Lock lock(boolean isDeep, boolean isSessionScoped)
+      throws UnsupportedRepositoryOperationException, LockException, AccessDeniedException,
+      InvalidItemStateException, RepositoryException {
     return getTarget().lock(isDeep, isSessionScoped);
   }
 
   /**
    * {@inheritDoc}
    */
-  public NodeIterator merge(String srcWorkspace, boolean bestEffort) throws NoSuchWorkspaceException,
-                                                      AccessDeniedException,
-                                                      MergeException,
-                                                      LockException,
-                                                      InvalidItemStateException,
-                                                      RepositoryException {
+  public NodeIterator merge(String srcWorkspace, boolean bestEffort)
+      throws NoSuchWorkspaceException, AccessDeniedException, MergeException, LockException,
+      InvalidItemStateException, RepositoryException {
     return getTarget().merge(srcWorkspace, bestEffort);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void orderBefore(String srcChildRelPath, String destChildRelPath) throws UnsupportedRepositoryOperationException,
-                                                   VersionException,
-                                                   ConstraintViolationException,
-                                                   ItemNotFoundException,
-                                                   LockException,
-                                                   RepositoryException {
+  public void orderBefore(String srcChildRelPath, String destChildRelPath)
+      throws UnsupportedRepositoryOperationException, VersionException,
+      ConstraintViolationException, ItemNotFoundException, LockException, RepositoryException {
     getTarget().orderBefore(srcChildRelPath, destChildRelPath);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void removeMixin(String mixinName) throws NoSuchNodeTypeException,
-                                      VersionException,
-                                      ConstraintViolationException,
-                                      LockException,
-                                      RepositoryException {
+  public void removeMixin(String mixinName) throws NoSuchNodeTypeException, VersionException,
+      ConstraintViolationException, LockException, RepositoryException {
     getTarget().removeMixin(mixinName);
   }
 
@@ -471,11 +441,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void restore(String versionName, boolean removeExisting) throws VersionException,
-                                                ItemExistsException,
-                                                UnsupportedRepositoryOperationException,
-                                                LockException,
-                                                InvalidItemStateException,
-                                                RepositoryException {
+      ItemExistsException, UnsupportedRepositoryOperationException, LockException,
+      InvalidItemStateException, RepositoryException {
     getTarget().restore(versionName, removeExisting);
   }
 
@@ -483,24 +450,18 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void restore(Version version, boolean removeExisting) throws VersionException,
-                                                 ItemExistsException,
-                                                 UnsupportedRepositoryOperationException,
-                                                 LockException,
-                                                 RepositoryException {
+      ItemExistsException, UnsupportedRepositoryOperationException, LockException,
+      RepositoryException {
     getTarget().restore(version, removeExisting);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void restore(Version version, String relPath, boolean removeExisting) throws PathNotFoundException,
-                                                              ItemExistsException,
-                                                              VersionException,
-                                                              ConstraintViolationException,
-                                                              UnsupportedRepositoryOperationException,
-                                                              LockException,
-                                                              InvalidItemStateException,
-                                                              RepositoryException {
+  public void restore(Version version, String relPath, boolean removeExisting)
+      throws PathNotFoundException, ItemExistsException, VersionException,
+      ConstraintViolationException, UnsupportedRepositoryOperationException, LockException,
+      InvalidItemStateException, RepositoryException {
     getTarget().restore(version, relPath, removeExisting);
   }
 
@@ -508,11 +469,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void restoreByLabel(String versionLabel, boolean removeExisting) throws VersionException,
-                                                       ItemExistsException,
-                                                       UnsupportedRepositoryOperationException,
-                                                       LockException,
-                                                       InvalidItemStateException,
-                                                       RepositoryException {
+      ItemExistsException, UnsupportedRepositoryOperationException, LockException,
+      InvalidItemStateException, RepositoryException {
     getTarget().restoreByLabel(versionLabel, removeExisting);
   }
 
@@ -520,10 +478,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Value value) throws ValueFormatException,
-                                                      VersionException,
-                                                      LockException,
-                                                      ConstraintViolationException,
-                                                      RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -531,10 +486,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Value[] values) throws ValueFormatException,
-                                                        VersionException,
-                                                        LockException,
-                                                        ConstraintViolationException,
-                                                        RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, values);
   }
 
@@ -542,10 +494,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, String[] values) throws ValueFormatException,
-                                                         VersionException,
-                                                         LockException,
-                                                         ConstraintViolationException,
-                                                         RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, values);
   }
 
@@ -553,10 +502,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, String value) throws ValueFormatException,
-                                                       VersionException,
-                                                       LockException,
-                                                       ConstraintViolationException,
-                                                       RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -564,10 +510,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, InputStream value) throws ValueFormatException,
-                                                            VersionException,
-                                                            LockException,
-                                                            ConstraintViolationException,
-                                                            RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -575,10 +518,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, boolean value) throws ValueFormatException,
-                                                        VersionException,
-                                                        LockException,
-                                                        ConstraintViolationException,
-                                                        RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -586,10 +526,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, double value) throws ValueFormatException,
-                                                       VersionException,
-                                                       LockException,
-                                                       ConstraintViolationException,
-                                                       RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -597,10 +534,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, long value) throws ValueFormatException,
-                                                     VersionException,
-                                                     LockException,
-                                                     ConstraintViolationException,
-                                                     RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -608,10 +542,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Calendar value) throws ValueFormatException,
-                                                         VersionException,
-                                                         LockException,
-                                                         ConstraintViolationException,
-                                                         RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -619,10 +550,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Node value) throws ValueFormatException,
-                                                     VersionException,
-                                                     LockException,
-                                                     ConstraintViolationException,
-                                                     RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value);
   }
 
@@ -630,10 +558,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Value value, int type) throws ValueFormatException,
-                                                                VersionException,
-                                                                LockException,
-                                                                ConstraintViolationException,
-                                                                RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value, type);
   }
 
@@ -641,10 +566,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, Value[] values, int type) throws ValueFormatException,
-                                                                  VersionException,
-                                                                  LockException,
-                                                                  ConstraintViolationException,
-                                                                  RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, values, type);
   }
 
@@ -652,10 +574,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, String[] values, int type) throws ValueFormatException,
-                                                                   VersionException,
-                                                                   LockException,
-                                                                   ConstraintViolationException,
-                                                                   RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, values, type);
   }
 
@@ -663,21 +582,15 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Property setProperty(String name, String value, int type) throws ValueFormatException,
-                                                                 VersionException,
-                                                                 LockException,
-                                                                 ConstraintViolationException,
-                                                                 RepositoryException {
+      VersionException, LockException, ConstraintViolationException, RepositoryException {
     return getTarget().setProperty(name, value, type);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void unlock() throws UnsupportedRepositoryOperationException,
-                      LockException,
-                      AccessDeniedException,
-                      InvalidItemStateException,
-                      RepositoryException {
+  public void unlock() throws UnsupportedRepositoryOperationException, LockException,
+      AccessDeniedException, InvalidItemStateException, RepositoryException {
     getTarget().unlock();
   }
 
@@ -685,25 +598,16 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void update(String srcWorkspaceName) throws NoSuchWorkspaceException,
-                                 AccessDeniedException,
-                                 LockException,
-                                 InvalidItemStateException,
-                                 RepositoryException {
+      AccessDeniedException, LockException, InvalidItemStateException, RepositoryException {
     getTarget().update(srcWorkspaceName);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void save() throws AccessDeniedException,
-                    ItemExistsException,
-                    ConstraintViolationException,
-                    InvalidItemStateException,
-                    ReferentialIntegrityException,
-                    VersionException,
-                    LockException,
-                    NoSuchNodeTypeException,
-                    RepositoryException {
+  public void save() throws AccessDeniedException, ItemExistsException,
+      ConstraintViolationException, InvalidItemStateException, ReferentialIntegrityException,
+      VersionException, LockException, NoSuchNodeTypeException, RepositoryException {
     getTarget().save();
   }
 
@@ -740,10 +644,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Lock lock(boolean isDeep, long timeOut) throws UnsupportedRepositoryOperationException,
-                                                LockException,
-                                                AccessDeniedException,
-                                                InvalidItemStateException,
-                                                RepositoryException {
+      LockException, AccessDeniedException, InvalidItemStateException, RepositoryException {
     return getExtendedTarget().lock(isDeep, timeOut);
   }
 
@@ -758,7 +659,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void removePermission(String identity, String permission) throws RepositoryException,
-                                                                  AccessControlException {
+      AccessControlException {
     getExtendedRealNode().removePermission(identity, permission);
   }
 
@@ -766,7 +667,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void setPermission(String identity, String[] permission) throws RepositoryException,
-                                                                 AccessControlException {
+      AccessControlException {
     getExtendedRealNode().setPermission(identity, permission);
   }
 
@@ -774,11 +675,23 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public void setPermissions(Map<String, String[]> permissions) throws RepositoryException,
-                                                               AccessControlException {
+      AccessControlException {
     getExtendedRealNode().setPermissions(permissions);
   }
 
-public String getIdentifier() throws RepositoryException {
-  return null;
-}
+  /**
+   * {@inheritDoc}
+   */
+  public String getIdentifier() throws RepositoryException {
+    ExtendedNode node = (ExtendedNode) getTarget();
+    return node.getIdentifier();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NodeIterator getNodesLazily() throws RepositoryException {
+    ExtendedNode node = (ExtendedNode) getTarget();
+    return node.getNodesLazily();
+  }
 }
