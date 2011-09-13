@@ -790,8 +790,8 @@ public class Utils {
     return string
        .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed 
        .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
-       .replaceAll("eval\\((.*)\\)", "")                   // case 3 : eval: are removed           
-       .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
+       .replaceAll("eval\\((.*)\\)", "");                   // case 3 : eval: are removed           
+//       .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
   }
   
   public static boolean isEmptyContent(String inputValue) {
