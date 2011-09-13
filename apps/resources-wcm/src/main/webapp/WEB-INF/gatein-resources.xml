@@ -41,11 +41,6 @@
     </param>
     <param>
       <js-module>eXo.ecm.BackPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/UIWCMTreeView.js</js-path>
-      <js-priority>60</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.ecm.BackPrivate</js-module>
       <js-path>/javascript/eXo/wcm/backoffice/private/Newsletter.js</js-path>
       <js-priority>60</js-priority>
     </param>
