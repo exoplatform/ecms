@@ -15,6 +15,7 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.services.cms.drives;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,12 @@ import java.util.List;
  *          nguyenkequanghung@yahoo.com
  * Feb 27, 2006
  */
-public class DriveData implements Comparable<DriveData> {
+public class DriveData implements Comparable<DriveData>, Serializable {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -1483463576328793278L;
   private String name ;
   /**
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.

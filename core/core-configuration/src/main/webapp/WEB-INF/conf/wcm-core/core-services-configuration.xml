@@ -369,7 +369,7 @@
   <!-- Configures live time for query service cache -->
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin>
+    <component-plugin  profiles="cluster">
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
@@ -377,13 +377,34 @@
       <init-params>
 	      <object-param>
 	        <name>cache.config.ecm.query</name>
-	        <description>The default cache configuration</description>
-	        <object type="org.exoplatform.services.cache.ExoCacheConfig">
+	        <description>The clustered cache configuration</description>
+	        <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
 	          <field name="name"><string>default</string></field>
-	          <field name="maxSize"><int>300</int></field>
-	          <field name="liveTime"><long>-1</long></field>
-	          <field name="distributed"><boolean>false</boolean></field>
-	          <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field> 
+	          <field name="expirationTimeout"><long>600000</long></field>
+	          <field name="maxNodes"><int>5000</int></field>
+	          <field name="distributed"><boolean>true</boolean></field>
+	        </object>
+	      </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin  profiles="cluster">
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for query service</description>
+      <init-params>
+	      <object-param>
+	        <name>cache.config.default</name>
+	        <description>The clustered cache configuration</description>
+	        <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
+	          <field name="name"><string>wcm.drive</string></field>
+	          <field name="expirationTimeout"><long>600000</long></field>
+	          <field name="maxNodes"><int>5000</int></field>
+	          <field name="distributed"><boolean>true</boolean></field>
 	        </object>
 	      </object-param>
       </init-params>

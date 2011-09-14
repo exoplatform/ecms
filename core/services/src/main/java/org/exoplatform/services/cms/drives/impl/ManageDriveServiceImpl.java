@@ -162,7 +162,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
     baseDrivePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.EXO_DRIVES_PATH);
     dmsConfiguration_ = dmsConfiguration;
-    drivesCache_ = caService.getCacheInstance(ManageDriveService.class.getName());
+    drivesCache_ = caService.getCacheInstance("wcm.drive");
   }
 
   /**
