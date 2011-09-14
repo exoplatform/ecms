@@ -78,9 +78,9 @@ public class TimelineServiceImpl implements TimelineService {
   @Deprecated
   public List<Node> getDocumentsOfEarlierThisYear(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
-    return getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, byUser);
+    return getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, byUser);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -101,7 +101,8 @@ public class TimelineServiceImpl implements TimelineService {
     if (pathPattern.length() > 0) {
       sb.append(pathPattern).append(" AND ");
     }
-    sb.append("(" + buildDocumentTypePattern() + ")")
+    sb.append("((" + buildDocumentTypePattern() + ")")
+      .append(" OR (jcr:primaryType='exo:symlink' AND (" + buildSymlinkDocumentTypePattern() + ")))")
       .append(" AND ")
       .append(" (" + EXO_MODIFIED_DATE + " >= TIMESTAMP '" + strBeginningOfThisYearTime + "')")
       .append(" AND ")
@@ -118,7 +119,7 @@ public class TimelineServiceImpl implements TimelineService {
       documentsOfYear.add(nodeIter.nextNode());
     }
     return documentsOfYear;
-  } 
+  }
 
   /**
    * {@inheritDoc}
@@ -128,7 +129,7 @@ public class TimelineServiceImpl implements TimelineService {
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
     return getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, byUser);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -146,9 +147,11 @@ public class TimelineServiceImpl implements TimelineService {
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
-    if (pathPattern.length() > 0)
+    if (pathPattern.length() > 0) {
       sb.append(pathPattern).append(" AND ");
-    sb.append("(" + buildDocumentTypePattern() + ")")
+    }
+    sb.append("((" + buildDocumentTypePattern() + ")")
+      .append(" OR (jcr:primaryType='exo:symlink' AND (" + buildSymlinkDocumentTypePattern() + ")))")
       .append(" AND ")
       .append(" (" + EXO_MODIFIED_DATE + " >= TIMESTAMP '" + strBeginningOfThisMonthTime + "')")
       .append(" AND ")
@@ -179,7 +182,7 @@ public class TimelineServiceImpl implements TimelineService {
                                                   boolean byUser) throws Exception {
     return getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, byUser);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -197,8 +200,11 @@ public class TimelineServiceImpl implements TimelineService {
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
-    if(pathPattern.length() > 0) sb.append(pathPattern).append(" AND ");
-    sb.append("(" + buildDocumentTypePattern() + ")")
+    if(pathPattern.length() > 0) {
+      sb.append(pathPattern).append(" AND ");
+    }
+    sb.append("((" + buildDocumentTypePattern() + ")")
+      .append(" OR (jcr:primaryType='exo:symlink' AND (" + buildSymlinkDocumentTypePattern() + ")))")
       .append(" AND ")
       .append(" (" + EXO_MODIFIED_DATE + " >= TIMESTAMP '" + strBeginningOfThisWeekTime + "')")
       .append(" AND ")
@@ -215,7 +221,7 @@ public class TimelineServiceImpl implements TimelineService {
       documentsOfWeek.add(nodeIter.nextNode());
     }
     return documentsOfWeek;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -229,7 +235,7 @@ public class TimelineServiceImpl implements TimelineService {
                                             boolean byUser) throws Exception {
     return getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, byUser);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -247,8 +253,11 @@ public class TimelineServiceImpl implements TimelineService {
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
-    if(pathPattern.length() > 0) sb.append(pathPattern).append(" AND ");
-    sb.append("(" + buildDocumentTypePattern() + ")")
+    if(pathPattern.length() > 0) {
+      sb.append(pathPattern).append(" AND ");
+    }
+    sb.append("((" + buildDocumentTypePattern() + ")")
+      .append(" OR (jcr:primaryType='exo:symlink' AND (" + buildSymlinkDocumentTypePattern() + ")))")
       .append(" AND ")
       .append(" (" + EXO_MODIFIED_DATE + " >= TIMESTAMP '" + strYesterdayTime + "')")
       .append(" AND ")
@@ -265,7 +274,7 @@ public class TimelineServiceImpl implements TimelineService {
       documentsOfYesterday.add(nodeIter.nextNode());
     }
     return documentsOfYesterday;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -279,7 +288,7 @@ public class TimelineServiceImpl implements TimelineService {
                                         boolean byUser) throws Exception {
     return getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, byUser);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -295,8 +304,11 @@ public class TimelineServiceImpl implements TimelineService {
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
-    if(pathPattern.length() > 0) sb.append(pathPattern).append(" AND ");
-    sb.append("(" + buildDocumentTypePattern() + ")")
+    if(pathPattern.length() > 0) {
+      sb.append(pathPattern).append(" AND ");
+    }
+    sb.append("((" + buildDocumentTypePattern() + ")")
+      .append(" OR (jcr:primaryType='exo:symlink' AND (" + buildSymlinkDocumentTypePattern() + ")))")
       .append(" AND ")
       .append(" (" + EXO_MODIFIED_DATE + " >= TIMESTAMP '" + strTodayTime + "')");
     if (byUser) {
@@ -310,7 +322,7 @@ public class TimelineServiceImpl implements TimelineService {
       documentsOfToday.add(nodeIter.nextNode());
     }
     return documentsOfToday;
-  }  
+  }
 
   private Session getSession(SessionProvider sessionProvider, String workspace
   ) throws RepositoryException, RepositoryConfigurationException {
@@ -337,6 +349,16 @@ public class TimelineServiceImpl implements TimelineService {
     for(String documentType : documentFileTypes) {
       if(sb.length() > 0) sb.append(" OR ");
       sb.append("jcr:primaryType='"+documentType+"'");
+    }
+    return sb.toString();
+  }
+
+  private String buildSymlinkDocumentTypePattern() throws Exception {
+    List<String> documentFileTypes = templateService_.getAllDocumentNodeTypes();
+    StringBuilder sb = new StringBuilder();
+    for(String documentType : documentFileTypes) {
+      if(sb.length() > 0) sb.append(" OR ");
+      sb.append("exo:primaryType='" + documentType + "'");
     }
     return sb.toString();
   }
