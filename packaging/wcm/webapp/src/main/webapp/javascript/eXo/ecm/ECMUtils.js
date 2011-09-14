@@ -377,7 +377,10 @@
 			doc.close() ;
 		} catch (ex) {}
 	} ;
-	
+
+	ECMUtils.prototype.generatePublicWebDAVLink = function(serverInfo, restContextName, repository, workspace, nodePath) {		
+	  window.open(serverInfo + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath, '_new');
+	} ;	
 	
 	ECMUtils.prototype.generateWebDAVLink = function(serverInfo,portalName,restContextName,repository,workspace,nodePath,mimetype) {		
 	  if(eXo.core.Browser.getBrowserType() == "ie") {
@@ -390,12 +393,12 @@
 		        path += encodeURIComponent(nodePath[i]) + "/";
 		      }
 		    }
-		    window.open(serverInfo + "/" + portalName + "/" + restContextName + "/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
+		    window.open(serverInfo + "/" + restContextName + "/private/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
 	   	} else {
-	 	  	window.open(serverInfo + "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" +workspace + nodePath, '_new');
+	 	  	window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" +workspace + nodePath, '_new');
 	 	  } 	  
 	  } else {
-		  window.open(serverInfo+ "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath, '_new');
+		  window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath, '_new');
 	  } 
 	} ;
 	
