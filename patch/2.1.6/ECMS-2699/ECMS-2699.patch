@@ -1,0 +1,13 @@
+Index: core/publication-plugins/src/main/resources/groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationPanel.gtmpl
+===================================================================
+--- core/publication-plugins/src/main/resources/groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationPanel.gtmpl	(revision 73254)
++++ core/publication-plugins/src/main/resources/groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationPanel.gtmpl	(working copy)
+@@ -15,7 +15,7 @@
+ <% uicomponent.begin(); %>
+ <div class="UIPublicationPanel" id="$uicomponent.id">
+   <fieldset class="StatusTable">
+-     <% String versionName = (currentRevision.getName();
++     <% String versionName = currentRevision.getName();
+         String verName = Text.unescapeIllegalJcrChars(versionName);
+      %>
+      <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </legend>

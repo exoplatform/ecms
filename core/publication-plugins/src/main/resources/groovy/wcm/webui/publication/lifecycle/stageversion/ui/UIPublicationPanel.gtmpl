@@ -15,7 +15,7 @@
 <% uicomponent.begin(); %>
 <div class="UIPublicationPanel" id="$uicomponent.id">
   <fieldset class="StatusTable">
-     <% String versionName = (currentRevision.getName();
+     <% String versionName = currentRevision.getName();
         String verName = Text.unescapeIllegalJcrChars(versionName);
      %>
      <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </legend>
