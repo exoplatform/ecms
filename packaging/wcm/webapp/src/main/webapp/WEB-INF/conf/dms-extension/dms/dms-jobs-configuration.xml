@@ -5,26 +5,25 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <external-component-plugins>
-    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
-    <component-plugin>
-      <name>ClearOrphanSymlinksJob</name>
-      <set-method>addPeriodJob</set-method>
-      <type>org.exoplatform.services.scheduler.PeriodJob</type>
-      <description>add to the JobSchedulerService a job which cleans all the unassigned symlinks</description>
-      <init-params>
-        <properties-param>
-          <name>job.info</name>
-          <description>info of jobs</description>
-          <property name="jobName" value="ClearOrphanSymlinksJob"/>
-          <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksJob"/>
-          <property name="repeatCount" value="0"/>
-          <property name="period" value="1200000"/>     
-          <property name="startTime" value="+0"/>
-          <property name="endTime" value=""/>               
-          <property name="repository" value="repository"/>
-        </properties-param>
-      </init-params>
-    </component-plugin>
+      <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+      <component-plugin>
+        <name>ClearOrphanSymlinksJob</name>
+        <set-method>addCronJob</set-method>
+        <type>org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksCronJob</type>
+        <description>add to the JobSchedulerService a job which cleans all the unassigned symlinks</description>
+        <init-params>
+          <properties-param>
+            <name>cronjob.info</name>
+            <description>symlink job</description>
+            <property name="jobName" value="symlinkJob" />
+            <property name="groupName" value="group" />
+            <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksJob" />
+            <property name="expression" value="${wcm.linkjob.cron.expression}" />
+          </properties-param>
+        </init-params>
+      </component-plugin>
+
+
   </external-component-plugins>
     
 </configuration>
