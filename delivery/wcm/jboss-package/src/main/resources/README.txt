@@ -19,5 +19,12 @@ Drop EARs files in your JBoss application with already a compatible portal insta
 
 Note: To ensure your router to be activated, you should paste the configuration above at the top of the "portal access" section of controller.xml file.
 
+3. Config ClearOrphanSymlinksCronJob for removing orphaned symlink
+* Open /Jboss_home/server/default/conf/gatein/configuration.properties
+* Add new this configuration if not found
 
+#WCM
+wcm.linkjob.cron.expression=0 0/20 * * * ?
+
+For further information of expression meaning, please refer to: http://en.wikipedia.org/wiki/CRON_expression
 
