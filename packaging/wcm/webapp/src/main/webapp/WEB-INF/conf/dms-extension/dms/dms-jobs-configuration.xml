@@ -17,8 +17,8 @@
             <description>symlink job</description>
             <property name="jobName" value="symlinkJob" />
             <property name="groupName" value="group" />
-            <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksJob" />
-            <property name="expression" value="${wcm.linkjob.cron.expression}" />
+            <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksCronJobImpl" />
+            <property name="expression" value="${wcm.linkjob.cron.expression:0 0/20 * * * ?}" />
           </properties-param>
         </init-params>
       </component-plugin>

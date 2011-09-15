@@ -37,7 +37,6 @@ public class ClearOrphanSymlinksCronJob extends CronJob {
 
     if (log.isInfoEnabled()) {
       log.info("CronJob Param...expression: " + expression);
-
       log.info("End Init ClearOrphanSymlinksCronJobImpl");
     }
   }
@@ -49,6 +48,4 @@ public class ClearOrphanSymlinksCronJob extends CronJob {
   public String getExpression() {
     return expression;
   }
-
-
 }

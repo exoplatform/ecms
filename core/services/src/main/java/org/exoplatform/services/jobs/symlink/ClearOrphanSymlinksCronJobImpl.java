@@ -35,11 +35,11 @@ import org.quartz.JobExecutionException;
  * Jan 11, 2011
  * 10:48:40 AM
  */
-public class ClearOrphanSymlinksJob implements Job {
-  private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksJob.class);
+public class ClearOrphanSymlinksCronJobImpl implements Job {
+  private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksCronJobImpl.class);
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    log.debug("Start Executing ClearOrphanSymlinksJob");
+    log.debug("Start Executing ClearOrphanSymlinksCronJobImpl");
 
     String queryString = "SELECT * FROM exo:symlink order by exo:dateCreated DESC";
 
@@ -85,13 +85,13 @@ public class ClearOrphanSymlinksJob implements Job {
             try {
               String nodePath = node.getPath();
               trashService.moveToTrash(node, sessionProvider);
-              log.info("ClearOrphanSymlinksJob: move orphan symlink " + nodePath + " to Trash");
+              log.info("ClearOrphanSymlinksCronJobImpl: move orphan symlink " + nodePath + " to Trash");
             } catch (Exception e) {
-              log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
+              log.error("ClearOrphanSymlinksCronJobImpl: Can not move to trash node :" + node.getPath(), e);
             }
           }
         } catch (RepositoryException e) {
-          log.error("ClearOrphanSymlinksJob: Error when deleting orphan symlinks in workspace: " + workspace, e);
+          log.error("ClearOrphanSymlinksCronJobImpl: Error when deleting orphan symlinks in workspace: " + workspace, e);
         } finally {
           if (session != null && session.isLive())
             session.logout();
@@ -102,9 +102,8 @@ public class ClearOrphanSymlinksJob implements Job {
           targetSession.logout();
       }
     } catch (Exception e) {
-      log.error("Error occurs in ClearOrphanSymlinksJob", e);
+      log.error("Error occurs in ClearOrphanSymlinksCronJobImpl", e);
       sessionProvider.close();
     }
   }
-
 }
