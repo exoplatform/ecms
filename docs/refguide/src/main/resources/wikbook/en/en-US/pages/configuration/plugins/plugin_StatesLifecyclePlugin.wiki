@@ -1,0 +1,112 @@
+This plugin is used to control the state life cycle of a content.
+
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+{code}
+
+The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
+
+*Sample configuration*:
+{code:xml}
+<component-plugin>
+    <name>AddLifecycle</name>
+    <set-method>addLifecycle</set-method>
+    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
+    <description>Configures</description>
+    <priority>1</priority>
+    <init-params>
+        <object-param>
+            <name>lifecycles</name>
+            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig">
+                <field name="lifecycles">
+                    <collection type="java.util.ArrayList">
+                        <value>
+                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+                                <field name="name">
+                                    <string>lifecycle1</string>
+                                </field>
+                                <field name="publicationPlugin">
+                                    <string>Authoring publication</string>
+                                </field>
+                                <field name="states">
+                                    <collection type="java.util.ArrayList">
+                                        <value>
+                                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                                                <field name="state">
+                                                    <string>draft</string>
+                                                </field>
+                                                <field name="membership">
+                                                    <string>author:/platform/web-contributors</string>
+                                                </field>
+                                            </object>
+                                        </value>
+                                        <value>
+                                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                                                <field name="state">
+                                                    <string>pending</string>
+                                                </field>
+                                                <field name="membership">
+                                                    <string>author:/platform/web-contributors</string>
+                                                </field>
+                                            </object>
+                                        </value>
+                                        <value>
+                                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                                                <field name="state">
+                                                    <string>approved</string>
+                                                </field>
+                                                <field name="membership">
+                                                    <string>manager:/platform/web-contributors</string>
+                                                </field>
+                                            </object>
+                                        </value>
+                                        <value>
+                                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                                                <field name="state">
+                                                    <string>staged</string>
+                                                </field>
+                                                <field name="membership">
+                                                    <string>publisher:/platform/web-contributors</string>
+                                                </field>
+                                            </object>
+                                        </value>
+                                        <value>
+                                            <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                                                <field name="state">
+                                                    <string>published</string>
+                                                </field>
+                                                <field name="membership">
+                                                    <string>publisher:/platform/web-contributors</string>
+                                                </field>
+                                            </object>
+                                        </value>
+                                    </collection>
+                                </field>
+                            </object>
+                        </value>
+                    </collection>
+                </field>
+            </object>
+        </object-param>
+    </init-params>
+</component-plugin>
+{code}
+
+In which:
+
+* *Name*: {{AddLifecycle}}
+* *Set-method*: {{addLifecycle}}
+* *Type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin}}
+
+* *Object type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle}}
+||*Field*||*Type*||*Value*||*Description*||
+|*name*|{{String}}|{{lifecycle1}}|The name of the lifecycle.|
+|*publicationPlugin*|{{string}}|{{Authoring publication}}|The publication plugin name.|
+|*states*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_|The list of the publication states.|
+
+
+* *Object type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State}}
+||*Field*||*Type*||*Description*||
+|*state*|{{string}}|The publication states: draft, pending, staged, approved or published.|
+|*membership*|{{string}}|The user or group.|

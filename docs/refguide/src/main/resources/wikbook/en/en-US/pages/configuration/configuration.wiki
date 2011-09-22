@@ -1,0 +1,5 @@
+This chapter describes about configuration used in eXo Content. It consists of two main sections:
+
+* [Component|#CONTref.Configuration.Components]
+
+* [External Component Plugins|#CONTref.Configuration.Plugins]

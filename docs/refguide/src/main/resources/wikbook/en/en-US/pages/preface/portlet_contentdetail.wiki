@@ -1,8 +1,14 @@
-The Content Detail portlet is packaged in the _presentation.war_ file. The portlet allows users to view the detail of a specific content.
+The *Content Detail* portlet allows users to view the detail of a specific content.
 
-* *Available preferences* {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
+This is an example of the *Content Detail* portlet used in eXo Content:
+!images/content-detail-portlet.png|align="center"!
 
-|| *Preference* || *Type* || *Default Value* || *Description* ||
+* *Packaging*: This portlet is packaged in the _presentation.war_ file.
+
+* *The portlet class name*: _org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet_
+
+* *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
+|| *Preference* || *Type* || *Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository where data are stored and maintained. |
 | *workspace* | {{String}} | {{collaboration}} | The workspace where content is stored. |
 | *nodeIdentifier* | {{String}} | {{N/A}} | The UUID or the path of content that you want to show. |
@@ -78,5 +84,5 @@ The Content Detail portlet is packaged in the _presentation.war_ file. The portl
 {code}
 
 {note}
-In WCM 2.2.0, some preferences are no longer used, for example, the ShowPrintAction preference.
+In WCM 2.3.0, some preferences are no longer used, for example, the ShowPrintAction preference.
 {note}

@@ -1,8 +1,15 @@
-The Search portlet is packaged in the _searches.war_ file. It allows users to do a search with any string. In WCM 2.2.0, there are three types of search: quick search, advanced search and search with saved queries.
+The *Search* portlet allows users to do a search with any string. In eXo Content, there are three types of search: quick search, advanced search and search with saved queries.
 
-* *Available preferences* {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
+The users can find this porlet in the front page. This is an example of the *Search* portlet used in eXo Content:
 
-|| *Preference* || *Type*|| *Default value* || *Description* ||
+!images/search-portlet.png|align="center"!
+
+* *Packaging*: This portlet is packaged in the _searches.war_ file.
+
+* *The portlet class name*: _org.exoplatform.wcm.webui.search.UIWCMSearchPortlet_
+
+* *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
+|| *Preference* || *Type*|| *Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The place where data are stored and maintained. |
 | *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored. |
 | *searchFormTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}} | The path to the search form template. |

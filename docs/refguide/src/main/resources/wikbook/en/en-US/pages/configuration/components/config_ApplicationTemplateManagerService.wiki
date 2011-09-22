@@ -3,17 +3,19 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 {code:xml}
 <component>
-  <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
-  <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
-  <init-params>
-    <properties-param>
-      <name>storedLocations</name>
-      <property name="repository" value="system"/>
-    </properties-param>
-  </init-params>
+    <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
+    <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
+    <init-params>
+        <properties-param>
+            <name>storedLocations</name>
+            <property name="repository" value="system"/>
+        </properties-param>
+    </init-params>
 </component>
 {code}
 
 *Details*:
-|| *Properties-param* || *Property name* || *Possible value* || *Default value* || *Description* ||
-| *storedLocations* | repository | string | system | The repository name. |
+
+* *Properties-param*:
+|| *Name* || *Property name* || *Type* || *Value* || *Description* ||
+| *storedLocations* | {{repository}} | {{String}} | {{system}} | The repository name. |

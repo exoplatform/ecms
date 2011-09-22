@@ -3,37 +3,39 @@ The configuration of this component is found in  _/core/core-configuration/src/m
 
 {code:xml}
 <component>
-  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
-  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
-  <init-params>
-    <value-param>
-      <name>smallSize</name>
-      <value>32x32</value>
-    </value-param>
-    <value-param>
-      <name>mediumSize</name>
-      <value>64x64</value>
-    </value-param>
-    <value-param>
-      <name>largeSize</name>
-      <value>300x300</value>
-    </value-param>
-    <value-param>
-      <name>enable</name>
-      <value>false</value>
-    </value-param>
-    <value-param>
-      <name>mimetypes</name>
-      <value>image/jpeg;image/png;image/gif;image/bmp</value>
-    </value-param>
-  </init-params>
+    <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
+    <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
+    <init-params>
+        <value-param>
+            <name>smallSize</name>
+            <value>32x32</value>
+        </value-param>
+        <value-param>
+            <name>mediumSize</name>
+            <value>64x64</value>
+        </value-param>
+        <value-param>
+            <name>largeSize</name>
+            <value>300x300</value>
+        </value-param>
+        <value-param>
+            <name>enable</name>
+            <value>false</value>
+        </value-param>
+        <value-param>
+            <name>mimetypes</name>
+            <value>image/jpeg;image/png;image/gif;image/bmp</value>
+        </value-param>
+    </init-params>
 </component>
 {code}
 
 *Details*:
-||*Value-param*||*Possible value*||*Default value*||*Description*||
-|*smallSize* |32x32|32x32| The small thumbnail size.|
-|*mediumSiz* |64x64|64x64|The medium thumbnail size.|
-|*largeSize* |300x300|300x300|The large thumbnail size.|
-|*enable* |boolean|false|Specify if the thumbnail is displayed or not.|
-|*mimetypes* |images formats|image/jpeg;image/png;image/gif;image/bmp|The image formats are supported.|
+
+* *Value-param*:
+||*Name*||*Type*||*Value*||*Description*||
+|*smallSize* |{{integer x integer}}|{{32x32}}| The small thumbnail size.|
+|*mediumSize* |{{integer x integer}}|{{64x64}}|The medium thumbnail size.|
+|*largeSize* |{{integer x integer}}|{{300x300}}|The large thumbnail size.|
+|*enable* |{{Boolean}}|{{false}}|Specify if the thumbnail is displayed or not.|
+|*mimetypes* |{{Images formats}}|{{image/jpeg;image/png;image/gif;image/bmp}}|The image formats are supported.|

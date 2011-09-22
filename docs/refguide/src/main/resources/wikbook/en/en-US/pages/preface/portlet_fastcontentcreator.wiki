@@ -1,8 +1,16 @@
-The Fast Content Creator portlet is packaged in the _formgenerator.war_ file. The portlet consists of two modes: Standard Content Creator and Basic Content Creator. This portlet allows users to quickly create contents without accessing the Content Explorer portlet.
+The *Fast Content Creator* portlet consists of two modes: *Standard Content Creator* and *Basic Content Creator*. This portlet allows users to quickly create contents without accessing the Content Explorer portlet.
 
-* *Available preferences* {anchor:id=CONTref.Portlets.FastContentCreator.AvailablePreferences}
+This is an example of the *Fast Content Creator* portlet used in eXo Content:
 
-|| *Preference* || *Type* || *Default Value* || *Description* ||
+!images/fast-content-creator.png|align="center"!
+
+By default, this porlet is applied for the Contact Us portlet in eXo Content.
+* *Packaging*: This portlet is packaged in the _formgenerator.war_ file.
+
+* *The portlet class name*: _org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet_
+
+* *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.FastContentCreator.AvailablePreferences}
+|| *Preference* || *Type* || *Value* || *Description* ||
 | *mode* | {{String}} | {{basic}} | The default mode of the *Fast Content Creator* portlet. |
 | *repository* | {{String}} | {{repository}} | The name of the current repository.|
 | *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored. |

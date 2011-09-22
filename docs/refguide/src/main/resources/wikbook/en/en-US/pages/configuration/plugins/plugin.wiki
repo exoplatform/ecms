@@ -1,0 +1,2 @@
+This section describes about the main component plugins used in eXo Content.
+Each part supply an example configuration with the explanation about ini-params so you can know how to use these plugins.

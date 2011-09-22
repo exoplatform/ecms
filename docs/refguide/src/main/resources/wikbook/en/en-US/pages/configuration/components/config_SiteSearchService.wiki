@@ -28,9 +28,12 @@ The component configuration maps the _SiteSearchService_ component with its own 
 </component>
 {code}
 
-The component consists of the following init-parameters:
-||*Init-Params*||*Default Value*||*Possible Value*||*Description*||
-|isEnabledFuzzySearch|true|Boolean|Allow administrators to enable/disable the fuzzy search mechanism.|
-|fuzzySearchIndex|N/A |N/A |Allow the approximate level between the input keyword and the found key results. In case of the invalid configuration, the default value is set to 0.8.|
+*Detail*:
+
+* *Value-param*:
+
+||*Name*||*Type* ||*Value*||*Description*||
+|*isEnabledFuzzySearch*| {{Boolean}} | {{true}}|Allow administrators to enable/disable the fuzzy search mechanism.|
+|*fuzzySearchIndex*|N/A |N/A |Allow the approximate level between the input keyword and the found key results. In case of the invalid configuration, the default value is set to 0.8.|
 
 To have more information about the fuzzy search, please refer to [Fuzzy Search|http://lucene.apache.org/java/2_4_1/queryparsersyntax.html#Fuzzy%20Searches].

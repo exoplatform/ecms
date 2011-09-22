@@ -1,3 +1,6 @@
+The following is an sample code of the *View* template of a content node:
+
+* Get a content node to display: 	
 {code:groovy}
 <%
   def node = uicomponent.getNode() ;
@@ -5,10 +8,12 @@
 %>
 {code}
 
+* Display the name of the content node: 
 {code:groovy}
 <%=node.getName()%>
 {code}
 
+* Display the _{noformat}exo:title{noformat}_ property of the content node:
 {code:groovy}
 <%
   if(node.hasProperty("exo:title")) {
@@ -19,6 +24,7 @@
 %>
 {code}
 
+* Display the _{noformat}exo:date{noformat}_ property of the content node in a desired format. For example: "MM DD YYYY" or "YYYY MM DD".
 {code:groovy}
 <%
   import java.text.SimpleDateFormat ;
@@ -36,7 +42,7 @@
 %>
 {code}
 
-
+* Display the translation of the 'Sample.view.label.node-name' message in different lanaguages.
 {code:groovy}
 <%=_ctx.appRes("Sample.view.label.node-name")%>
 {code}

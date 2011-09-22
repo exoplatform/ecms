@@ -1,52 +1,58 @@
-h1. Fields
-*Object type*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
-||*Name*||*Type*||*Default Value*||*Description*||
-|*name*|{{string}}|context2|The name of the context. |
-|*priority*|{{string}}|{{100}}|The context priority, the higher number indicates higher priority. Because a site may have several lifecycles, the lifecycle with higher priority will be excuted priorly.|
-|*lifecycle*|{{string}}|{{lifecycle2}}|The name of the lifecycle.|
-|*site*|{{string}}|{{acme}}|The site that will apply the context configuration.|
+This plugin is used to store the context configuration of a publication lifecycle.
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+{code}
 
-h1. Sample configuration
+The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/wcm/content-configuration.xml_ or _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
+
+*Sample configuration*:
 {code:xml}
 <external-component-plugins>
-  <target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
-  <component-plugin>
-    <name>AddContext</name>
-    <set-method>addContext</set-method>
-    <type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
-    <init-params>
-      <object-param>
-        <name>contexts</name>
-        <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
-          <field name="contexts">
-            <collection type="java.util.ArrayList">
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name">
-                    <string>context2</string>
-                  </field>
-                  <field name="priority">
-                    <string>100</string>
-                  </field>
-                  <field name="lifecycle">
-                    <string>lifecycle2</string>
-                  </field>
-                  <field name="site">
-                    <string>acme</string>
-                  </field>
+    <target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+    <component-plugin>
+        <name>AddContext</name>
+        <set-method>addContext</set-method>
+        <type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
+        <init-params>
+            <object-param>
+                <name>contexts</name>
+                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
+                    <field name="contexts">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+                                    <field name="name">
+                                        <string>context2</string>
+                                    </field>
+                                    <field name="priority">
+                                        <string>100</string>
+                                    </field>
+                                    <field name="lifecycle">
+                                        <string>lifecycle2</string>
+                                    </field>
+                                    <field name="site">
+                                        <string>acme</string>
+                                    </field>
+                                </object>
+                            </value>
+                        </collection>
+                    </field>
                 </object>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component-plugin>
+            </object-param>
+        </init-params>
+    </component-plugin>
 </external-component-plugins>
 {code}
 
 In which:
-* *Target-component*: {{org.exoplatform.services.wcm.extensions.publication.PublicationManager}}
-* *Name*: {{AddLifecycle}}
-* *Set-method*: {{addLifecycle}}
-* *Type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin}}
+* *Name*: {{AddContext}}
+* *Set-method*: {{addContext}}
+* *Type*: {{org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin}}
+
+* *Object type*: {{org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig}}
+||*Field*||*Type*||*Value*||*Description*||
+|*name*|{{string}}|{{context2}}|The name of the context. |
+|*priority*|{{string}}|{{100}}|The context priority, the higher number indicates higher priority. Because a site may have several lifecycles, the lifecycle with higher priority will be executed sooner.|
+|*lifecycle*|{{string}}|{{lifecycle2}}|The name of the lifecycle.|
+|*site*|{{string}}|{{acme}}|The site that will apply the context configuration.|

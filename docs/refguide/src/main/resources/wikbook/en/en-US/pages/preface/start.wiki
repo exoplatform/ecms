@@ -1,7 +1,10 @@
-eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform, the extension mechanism is used to add content features. If you want more information about the extension mechanism, you can read the GateIn documentation:
+eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform, the extension mechanism is used to add content features. To have more information about the extension mechanism, refer to the [GateIn reference guide|http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html].
 
-[http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html]
+This integrated solution provides users with a comprehensive platform about integrating applications, managing and publishing content - all from a single, familiar console.
 
-This integrated solution provides users with a comprehensive platform for integrating applications, managing and publishing content - all from a single, familiar console.
+When starting a new project, you can see eXo Content as a Java developer platform.
 
-When starting a new project, you can see eXo Content as a Java developer platform. In this reference guide, we will give you guidelines related to building stable applications using eXo Content from the inside.
+This document will give you guidelines related to building stable applications using eXo Content from the inside. The document consists of the following main contents:
+* *[Application|#CONTref.Applications]* describes portlet applications included in eXo Content.
+* *[Configuration|#CONTref.Configuration]* provides you the comprehensive knowledge about the configuration with a large range of configuration parameters declared in eXo Content.
+* *[Developer References|#CONTref.DeveloperReferences]* describes about extension, public APIs, Java APIs, FAQs and related others in eXo Content.

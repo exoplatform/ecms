@@ -3,20 +3,20 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 {code:xml}
 <component>
-  <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
-  <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
-  <init-params>
-    <properties-param>
-      <name>server.config</name>
-      <description>server.address</description>
-      <property name="scheme" value="http" />
-      <property name="hostName" value="localhost" />
-      <property name="port" value="8080" />
-    </properties-param>
-  </init-params>
+    <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
+    <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
+    <init-params>
+        <properties-param>
+            <name>server.config</name>
+            <description>server.address</description>
+            <property name="scheme" value="http"/>
+            <property name="hostName" value="localhost"/>
+            <property name="port" value="8080"/>
+        </properties-param>
+    </init-params>
 </component>
 {code}
 
 *Details*:
-||*Properties-param*||*Property name*||*Possible value*||*Default value*||*Description*||
-|*server.config* |scheme{example}{example}hostName {example}{example}port |http/https{example}{example}string{example}{example}the port number|http {example}{example}localhost {example}{example}8080|All the property names are used together to configure the server. Here is an example about the server configuration: http//:localhost:8080. |
+||*Properties-param*||*Property name*||*Type*||*Value*||*Description*||
+|*server.config* |{{scheme}}{example}{example}{{hostName}} {example}{example}{{port}} |{{http/https}}{example}{example}{{String}}{example}{example}{{The port number}}|{{http}} {example}{example}{{localhost}} {example}{example}{{8080}}|All the property names are used together to configure the server. Here is an example about the server configuration: http//:localhost:8080. |

@@ -1,10 +1,10 @@
 _PublicationService_ is to manage the publication.
 
-|| *Method* || *Return* || *Prototype* || *Description* ||
-| *addLifecycle* | {{void}} | {{addLifecycle(ComponentPlugin plugin); }} |  Add plugins context for the publication service. |
-| *getLifecycle* | {{Lifecycle}} | {{Lifecycle getLifecycle(String name) ; }} | Get a specific lifecycle with the given name. {example}{example} @param name: The name of the wanted lifecycle.|
-| *getLifecycles* | {{List<Lifecycle>}} | {{List<Lifecycle> getLifecycles(); }} | Get all the lifecycles which were added to service instances. |
-| *getContext* | {{Context}} | {{Context getContext(String name) ; }} | Get a specific context with the given names. |
-| *getContexts* | {{List<Context>}} | {{List<Context> getContexts();}} | Get all the contexts which were added to service instances. |
-| *getContents* | {{List<Node>}} | {{List<Node> getContents(String fromstate, String tostate, String date, String user, String lang , String workspace) throws Exception; }} | Get all the nodes.{example}{example}@param fromstate/tostate: the current range state of node.{example}{example}@param user: The last user of node.{example}{example}@param lang: the node's language.{example}{example}@param workspace: the Workspace of the node's location. |
-| *getLifecyclesFromUser* | {{List<Lyfecycle>}} | {{List<Lyfecycle> getLifecyclesFromUser(String remoteUser, String state);}} | Get all the Lifecycle of a specific user. {example}{example} @param remoteUser: the current user of publication service.{example}{example}@param state: The current state of the node. |
+|| *Method* || *Param* ||*Return* ||  *Description* ||
+| *addLifecycle*(ComponentPlugin plugin)| N/A | void |  Add plugins context for the publication service. |
+| *getLifecycle*(String name) | {{name}}: The name of the wanted lifecycle.| Lifecycle | Get a specific lifecycle with the given name. |
+| *getLifecycles*() |N/A| List<Lifecycle> | Get all the lifecycles which were added to service instances. |
+| *getContext*(String name) | {{name}} | Context | Get a specific context with the given names. |
+| *getContexts*() |N/A | List<Context> | Get all the contexts which were added to service instances. |
+| *getContents*(String fromstate, String tostate, String date, String user, String lang , String workspace) throws Exception; |{{fromstate/tostate}}: The current range state of node.{example}{example}{{user}}: The last user of node.{example}{example}{{lang}}: The node's language.{example}{example}{{workspace}}: The Workspace of the node's location. | List<Node> | Get all the nodes. |
+| *getLifecyclesFromUser*(String remoteUser, String state);|{{remoteUser}}: The current user of publication service.{example}{example}{{state}}: The current state of the node.   |List<Lifecycle>| Get all the Lifecycle of a specific user. |

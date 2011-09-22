@@ -1,51 +1,58 @@
-h1. Fields
-This plugin will configure the file types of the thumbnail images.
+This plugin is used to configure the file types and get thumbnail for images.
 
-*Object type*: _org.exoplatform.services.cms.thumbnail.impl.ThumbnailType_
-||*Name*||*Type*||*Default Value*||*Description*||
-|*mimeTypes*|{{Array list}}|{{java.util.ArrayList}}|List of thumbnail image types|
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
+{code}
 
-h1. Sample configuration
+The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-thumbnail-configuration.xml_.
+
+*Sample configuration*:
+
 {code:xml}
 <external-component-plugins>
-  <target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
-  <component-plugin>
-    <name>ImageThumbnailPlugin</name>
-    <set-method>addPlugin</set-method>
-    <type>org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin</type>
-    <init-params>
-      <object-param>
-        <name>thumbnailType</name>
-        <description>Thumbnail types</description>
-        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
-          <field name="mimeTypes">
-            <collection type="java.util.ArrayList">
-              <value>
-                <string>image/jpeg</string>
-              </value>
-              <value>
-                <string>image/png</string>
-              </value>
-              <value>
-                <string>image/gif</string>
-              </value>
-              <value>
-                <string>image/bmp</string>
-              </value>
-              <value>
-                <string>image/tiff</string>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component-plugin>
+    <target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
+    <component-plugin>
+        <name>ImageThumbnailPlugin</name>
+        <set-method>addPlugin</set-method>
+        <type>org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin</type>
+        <init-params>
+            <object-param>
+                <name>thumbnailType</name>
+                <description>Thumbnail types</description>
+                <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+                    <field name="mimeTypes">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <string>image/jpeg</string>
+                            </value>
+                            <value>
+                                <string>image/png</string>
+                            </value>
+                            <value>
+                                <string>image/gif</string>
+                            </value>
+                            <value>
+                                <string>image/bmp</string>
+                            </value>
+                            <value>
+                                <string>image/tiff</string>
+                            </value>
+                        </collection>
+                    </field>
+                </object>
+            </object-param>
+        </init-params>
+    </component-plugin>
 </external-component-plugins>
 {code}
 
-*Details*:
-* *Target-component*: {{org.exoplatform.services.cms.thumbnail.ThumbnailService}}
+In which:
+
 * *Name*: {{ImageThumbnailPlugin}}
 * *Set-method*: {{addPlugin}}
 * *Type*: {{org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin}}
+
+* *Object type*: {{org.exoplatform.services.cms.thumbnail.impl.ThumbnailType}}
+||*Field*||*Type*||*Value*||*Description*||
+|*mimeTypes*|{{String}}|{{image/jpeg}}{example}{example}{{image/png}}{example}{example}{{image/gif}}{example}{example}{{image/bmp}} {example}{example}{{image/tiff}}|The list of thumbnail image types.|

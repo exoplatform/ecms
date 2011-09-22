@@ -1,14 +1,14 @@
 _SEOService_ supplies APIs to manage SEO data of a page or a content. This service includes some major functions which enables you to add, store, get or remove the metadata of a page or a content.
-|| *Method* || *Return* || *Prototype* || *Description* ||
-|*storePageMetadata*|{{void}}|{{storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception}}|Store the metadata of a page/content. {example}{example}@param metaModel: The metadata of a page/content stored. {example}{example} @param portalName: The name of portal. {example}{example}@param onContent: Indicate whether the current page is the content page or the portal page.|
-|*getMetadata*|{{PageMetadataModel}}|{{PageMetadataModel (ArrayList<String> params, String pageReference) throws Exception}}|Return the metadata of a portal page or a content page.  {example}{example}@param params: The parameters list of a content page. {example}{example} @param pageReference: The reference of the page.|
-|*getPageMetadata*|{{PageMetadataModel}}|{{getPageMetadata(String pageReference) throws Exception}}|Return the metadata of a portal page. {example}{example} @param pageReference: The reference of the page.|
-|*getContentMetadata*|{{PageMetadataModel}}|{{getContentMetadata(ArrayList<String> params) throws Exception}}|Return the metadata of a content page. {example}{example} @param params: The parameters list of a content page.|
-|*removePageMetadata*|{{void}}|{{removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception}}|Remove the metadata of a page. {example}{example} @param metaModel: The metadata of a page/content stored. {example}{example} @param portalName: The name of portal. {example}{example}@param onContent: Indicate whether the current page is the content page or the portal page.|
-|*getContentNode*|{{Node}}|{{getContentNode(String contentPath) throws Exception}}|Return the content node by the content path. {example}{example} @param contentPath: The content path. |
-|*getHash*|{{String}}|{{getHash(String uri) throws Exception}}|Create a key from the page reference or the UUID of the node.{example}{example}@param uri: The page reference of the UUID of a node.|
-|*getSitemap*|{{String}}|{{getSitemap(String portalName) throws Exception}}|Return a sitemap's content of a specific portal.{example}{example}@param portalName: The portal name.|
-|**getRobots*|{{String}}|{{getRobots(String portalName) throws Exception}}|Return Robots' content of a specific portal.{example}{example}@param portalName: The portal name.|
-|*getRobotsIndexOptions*|{{List<String>}} |{{getRobotsIndexOptions() throws Exception}}|Return a list of options (INDEX and NOINDEX) for robots to index.|
-|*getRobotsFollowOptions*|{{List<String>}} |{{getRobotsFollowOptions() throws Exception}}|Return a list of options (FOLLOW and NOFOLLOW) for robots to follow.|
-|*getFrequencyOptions*|{{List<String>}} |{{getFrequencyOptions() throws Exception}}|Return a list of options for frequency.|
+|| *Method* ||*Param*|| *Return* || *Description* ||
+|*storePageMetadata*(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception|{{metaModel}}: The metadata of a page/content stored. {example}{example} {{portalName}}: The name of portal. {example}{example}{{onContent}}: Indicate whether the current page is the content page or the portal page. | void|Store the metadata of a page/content.|
+|*getMetadata*(ArrayList<String> params, String pageReference) throws Exception| {{params}}: The parameters list of a content page. {example}{example}  {{pageReference}}: The reference of the page.| PageMetadataModel | Return the metadata of a portal page or a content page. |
+|*getPageMetadata* (String pageReference) throws Exception | {{pageReference}}: The reference of the page. |PageMetadataModel| Return the metadata of a portal page.|
+|*getContentMetadata*(ArrayList<String> params) throws Exception|{{params}}: The parameters list of a content page. | PageMetadataModel|Return the metadata of a content page. |
+|*removePageMetadata*(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception|{{metaModel}}: The metadata of a page/content stored. {example}{example} {{portalName}}: The name of portal. {example}{example}{{onContent}}: Indicate whether the current page is the content page or the portal page. | void| Remove the metadata of a page. |
+|*getContentNode*(String contentPath) throws Exception| {{contentPath}}: The content path. | Node|Return the content node by the content path.  |
+|*getHash*(String uri) throws Exception|{{uri}}: The page reference of the UUID of a node. |String| Create a key from the page reference or the UUID of the node. |
+|*getSitemap*(String portalName) throws Exception|{{portalName}}: The portal name. | String|Return a sitemap's content of a specific portal. |
+|*getRobots*(String portalName) throws Exception|{{portalName}}: The portal name. | String|Return Robots' content of a specific portal.|
+|*getRobotsIndexOptions*() throws Exception| N/A| List<String> |Return a list of options (INDEX and NOINDEX) for robots to index.|
+|*getRobotsFollowOptions*() throws Exception |N/A |List<String> |Return a list of options (FOLLOW and NOFOLLOW) for robots to follow.|
+|*getFrequencyOptions*() throws Exception|N/A | List<String>|Return a list of options for frequency.|

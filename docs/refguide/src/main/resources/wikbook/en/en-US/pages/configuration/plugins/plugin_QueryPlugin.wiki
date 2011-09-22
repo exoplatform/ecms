@@ -1,85 +1,128 @@
+This plugin is used to store predefined queries into the repositories of the system.
+
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.cms.queries.QueryService</target-component>
+{code}
+
+The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-queries-configuration.xml_.
+
+*Sample configuration*:
 
 {code:xml}
 <external-component-plugins>
-   <target-component>org.exoplatform.services.cms.queries.QueryService</target-component>        		        
-    <component-plugin> 
-      <name>query.plugin</name>
-      <set-method>setQueryPlugin</set-method>
-      <type>org.exoplatform.services.cms.queries.impl.QueryPlugin</type>
-      <description>Nothing</description>
-      <init-params>
-      	<value-param>
-       	<name>autoCreateInNewRepository</name>
-       	<value>true</value>
-       </value-param>	        
-       <value-param>
-       	<name>repository</name>
-       	<value>repository</value>
-       </value-param>	        		        		    		    
-       <object-param>        
-         <name>CreatedDocuments</name>
-         <description>documents created by the current user</description>
-         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
-           <field  name="name"><string>Created Documents</string></field>
-           <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//*[(@jcr:primaryType = 'exo:article' or @jcr:primaryType = 'nt:file') and @exo:owner='${UserId}$'] order by @exo:dateCreated descending</string></field>
-           <field  name="permissions">
-             <collection type="java.util.ArrayList">
-               <value><string>*:/platform/users</string></value>
-             </collection>
-           </field>
-           <field  name="cachedResult"><boolean>false</boolean></field>             
-         </object>
-       </object-param>
-       <object-param>        
-         <name>CreatedDocumentsDayBefore</name>
-         <description>documents created the day before</description>
-         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
-           <field  name="name"><string>CreatedDocumentDayBefore</string></field>
-           <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//element(*,exo:article)[@exo:dateCreated &lt; xs:dateTime('${Date}$')] order by @exo:dateCreated descending</string></field>
-           <field  name="permissions">
-             <collection type="java.util.ArrayList">
-               <value><string>*:/platform/users</string></value>
-             </collection>
-           </field>
-           <field  name="cachedResult"><boolean>true</boolean></field>             
-         </object>
-       </object-param>
-       <object-param>        
-         <name>AllArticles</name>
-         <description>All articles</description>
-         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
-           <field  name="name"><string>All Articles</string></field>
-           <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//element(*,exo:article) order by @exo:dateCreated descending</string></field>
-           <field  name="permissions">
-             <collection type="java.util.ArrayList">
-               <value><string>*:/platform/users</string></value>
-             </collection>
-           </field>
-           <field  name="cachedResult"><boolean>true</boolean></field>             
-         </object>
-       </object-param>
-      </init-params>  
-	</component-plugin>  		
- </external-component-plugins>
+    <target-component>org.exoplatform.services.cms.queries.QueryService</target-component>
+    <component-plugin>
+        <name>query.plugin</name>
+        <set-method>setQueryPlugin</set-method>
+        <type>org.exoplatform.services.cms.queries.impl.QueryPlugin</type>
+        <description>Nothing</description>
+        <init-params>
+            <value-param>
+                <name>autoCreateInNewRepository</name>
+                <value>true</value>
+            </value-param>
+            <value-param>
+                <name>repository</name>
+                <value>repository</value>
+            </value-param>
+            <object-param>
+                <name>CreatedDocuments</name>
+                <description>documents created by the current user</description>
+                <object type="org.exoplatform.services.cms.queries.impl.QueryData">
+                    <field name="name">
+                        <string>Created Documents</string>
+                    </field>
+                    <field name="language">
+                        <string>xpath</string>
+                    </field>
+                    <field name="statement">
+                        <string>//*[(@jcr:primaryType = 'exo:article' or @jcr:primaryType = 'nt:file') and
+                            @exo:owner='${UserId}$'] order by @exo:dateCreated descending
+                        </string>
+                    </field>
+                    <field name="permissions">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <string>*:/platform/users</string>
+                            </value>
+                        </collection>
+                    </field>
+                    <field name="cachedResult">
+                        <boolean>false</boolean>
+                    </field>
+                </object>
+            </object-param>
+            <object-param>
+                <name>CreatedDocumentsDayBefore</name>
+                <description>documents created the day before</description>
+                <object type="org.exoplatform.services.cms.queries.impl.QueryData">
+                    <field name="name">
+                        <string>CreatedDocumentDayBefore</string>
+                    </field>
+                    <field name="language">
+                        <string>xpath</string>
+                    </field>
+                    <field name="statement">
+                        <string>//element(*,exo:article)[@exo:dateCreated &lt; xs:dateTime('${Date}$')] order by
+                            @exo:dateCreated descending
+                        </string>
+                    </field>
+                    <field name="permissions">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <string>*:/platform/users</string>
+                            </value>
+                        </collection>
+                    </field>
+                    <field name="cachedResult">
+                        <boolean>true</boolean>
+                    </field>
+                </object>
+            </object-param>
+            <object-param>
+                <name>AllArticles</name>
+                <description>All articles</description>
+                <object type="org.exoplatform.services.cms.queries.impl.QueryData">
+                    <field name="name">
+                        <string>All Articles</string>
+                    </field>
+                    <field name="language">
+                        <string>xpath</string>
+                    </field>
+                    <field name="statement">
+                        <string>//element(*,exo:article) order by @exo:dateCreated descending</string>
+                    </field>
+                    <field name="permissions">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <string>*:/platform/users</string>
+                            </value>
+                        </collection>
+                    </field>
+                    <field name="cachedResult">
+                        <boolean>true</boolean>
+                    </field>
+                </object>
+            </object-param>
+        </init-params>
+    </component-plugin>
+</external-component-plugins>
 {code}
-
-* *Target Component*: {{org.exoplatform.services.cms.queries.QueryService}}
+In which:
 * *Name*: {{predefinedTaxonomyPlugin}}
 * *Set-method*: {{setQueryPlugin}}
 * *Type*: {{org.exoplatform.services.cms.queries.impl.QueryPlugin}}
 
+* *Init-param*:
+|| *Value-param* || *Type* || *Value* || *Description* ||
+| {{autoCreateInNewRepository}} | {{boolean}} | {{true}} |Store queries in a new repository if the value is "true".  |
+| {{repository}} | {{string}} | {{repository}} |The repository to the target node. |
 
-|| *Value param* || *Possible value* || *Default value* || *Description* ||
-| {{autoCreateInNewRepository}} | {{boolean}} | {{true}} |  |
-| {{repository}} | {{string}} | {{repository}} | repository to the target node. |
-
-
-|| *Object param* || *Possible value* || *Default value* || *Description* ||
-| {{CreatedDocuments}} | {{string}} | {{*:/platform/users}} | documents created by the current user. |
-| {{AllArticles}} | {{string}} | {{*:/platform/users}} | All articles. |
-| {{CreatedDocumentsDayBefore}} | {{string}} | {{*:/platform/users}} | documents created on the day before. |
-
-
+* *Object type*: {{org.exoplatform.services.cms.queries.impl.QueryData}}
+|| *Field* || *Type*  || *Description* ||
+|*name*| {{String}}  |The name of the query. |
+|*language*| {{String}} |The language of the query (Xpath, SQL). |
+|*statement*| {{String}} |The query statement. |
+|*permissions*| {{ArrayList}} |The permission which users must have to use this query.|
+|*cachedResult*| {{Boolean}} | Specify if the query is cached or not.|

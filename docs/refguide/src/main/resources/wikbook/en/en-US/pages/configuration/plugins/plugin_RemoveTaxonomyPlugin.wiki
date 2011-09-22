@@ -1,0 +1,24 @@
+This plugin is used to invalidate taxonomy trees in *categories* folder of a portal when the portal is removed.
+
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsService</target-component>
+{code}
+*Sample configuration*:
+{code:xml}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsService</target-component>
+    <component-plugin>
+        <name>Remove taxonomy tree</name>
+        <set-method>addPlugin</set-method>
+        <type>org.exoplatform.services.wcm.category.RemoveTaxonomyPlugin</type>
+        <description>This plugin invalidate taxonomy tree to categories folder of portal when a portal is removed
+        </description>
+    </component-plugin>
+</external-component-plugins>
+{code}
+
+In which:
+* *Name*: {{Remove taxonomy tree}}
+* *Set-method*: {{addPlugin}}
+* *Type*: {{org.exoplatform.services.wcm.category.RemoveTaxonomyPlugin}}

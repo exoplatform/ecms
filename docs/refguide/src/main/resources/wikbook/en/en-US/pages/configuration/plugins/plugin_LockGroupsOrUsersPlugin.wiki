@@ -1,36 +1,44 @@
-h1. Fields
-*Object type*_org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig_
-||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *settingLockList* | {{array list}} | {{java.util.ArrayList}} | The list of the groups or user to be locked. |
-h1. Sample configuration
+This plugin is used to configure predefined groups or users for lock administration.
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.cms.lock.LockService</target-component>
+{code}
+
+The configuration is applied mainly in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
+
+*Sample configuration*:
 {code:xml}
 <external-component-plugins>
-  <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
-  <component-plugin>
-    <name>predefinedLockGroupsOrUsersPlugin</name>
-    <set-method>addLockGroupsOrUsersPlugin</set-method>
-    <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
-    <init-params>
-      <object-param>
-        <name>LockGroupsOrUsers.configuration</name>
-        <description>configuration predefined groups or users for lock administrator</description>
-        <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
-          <field name="settingLockList">
-            <collection type="java.util.ArrayList">
-              <value>
-                <string>*:/platform/administrators</string>
-              </value>
-            </collection>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component-plugin>
+    <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
+    <component-plugin>
+        <name>predefinedLockGroupsOrUsersPlugin</name>
+        <set-method>addLockGroupsOrUsersPlugin</set-method>
+        <type>org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin</type>
+        <init-params>
+            <object-param>
+                <name>LockGroupsOrUsers.configuration</name>
+                <description>configuration predefined groups or users for lock administrator</description>
+                <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
+                    <field name="settingLockList">
+                        <collection type="java.util.ArrayList">
+                            <value>
+                                <string>*:/platform/administrators</string>
+                            </value>
+                        </collection>
+                    </field>
+                </object>
+            </object-param>
+        </init-params>
+    </component-plugin>
 </external-component-plugins>
 {code}
 
 In which:
-* *Target-component*: {{org.exoplatform.services.cms.lock.LockService}}
+
 * *Name*: {{predefinedLockGroupsOrUsersPlugin}}
 * *Set-method*: {{addLockGroupsOrUsersPlugin}}
 * *Type*: {{org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin}}
+
+* *Object type*: {{org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig}}
+||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||
+| *settingLockList* | {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The list of the groups or user to be locked. |

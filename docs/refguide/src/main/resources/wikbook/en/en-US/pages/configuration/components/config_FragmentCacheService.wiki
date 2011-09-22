@@ -1,18 +1,23 @@
+The _FragmentCacheService_ component is used to cache the response fragments which are sent to end-users.
+
+The configuration of this component is found in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/wcm-configuration.xml_.
 
 {code:xml}
 <component>
-  <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
-  <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
-  <init-params>
-    <value-param>
-      <name>cleanup-cache</name>
-      <description>The cleanup cache period in seconds</description>
-      <value>300</value>
-    </value-param>
-  </init-params>
+    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
+    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
+    <init-params>
+        <value-param>
+            <name>cleanup-cache</name>
+            <description>The cleanup cache period in seconds</description>
+            <value>300</value>
+        </value-param>
+    </init-params>
 </component>
 {code}
 
 *Details*
-|| *Value-param* || *Possible value* || *Default value* || *Description* ||
-| *cleanup-cache* | integer | 300 | |
+
+* *Value-param*:
+||*Name*  || *Type* || *Value* || *Description* ||
+| *cleanup-cache* |{{integer}} | {{300}} | The time period over which cache items are expired.|

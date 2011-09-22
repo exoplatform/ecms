@@ -1,8 +1,15 @@
-The Authoring portlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file. The portlet allows users to manage contents in draft and contents which need to be approved or published.
+The *Authoring* portlet allows users to manage contents in draft and ones which need to be approved or published.
 
-* *Available preferences* {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
+This is an example of the *Authoring* portlet used in eXo Content:
 
-|| *Preference* || *Type*|| *Default*|| *Description* ||
+!images/authoring-porlet.png|align="center"!
+
+* *Packaging*: This porlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file.
+
+* *The portlet class name*: _org.exoplatform.wcm.webui.authoring.UIWCMDashboardPortlet_
+
+* *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
+|| *Preference* || *Type*|| *Value*|| *Description* ||
 | *repository* | {{String}} | {{Repository}} |The name of the repository.|
 | *workspace* | {{String}} | {{Collaboration}} |The name of the workspace.|
 | *drive* | {{String}} | {{Collaboration}} |The name of the drive.|

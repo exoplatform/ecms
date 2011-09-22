@@ -1,9 +1,16 @@
-The Content Explorer portlet is packaged in the _ecmexplorer.war_ file. It is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
+The *Content Explorer* portlet is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
 managing publication, and more.
 
-* *Available preferences* {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
+This is an example of the *Content Explorer* portlet used in eXo Content:
 
-|| *Preference* || *Type* || *Default value* || *Description* ||
+!images/content-explorer-porltet.png|align="center"!
+
+* *Packaging*: The porlet is packaged in the _ecmexplorer.war_ file.
+
+* *The portlet class name*: _org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet_
+
+* *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
+|| *Preference* || *Type* || *Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository name which is used in an instance of Content Explorer. |
 | *workspace* | {{String}} | N/A | Not in use. The workspace name was included in the Drive.|
 | *path* | {{String}} | N/A | The path of the node. This preference will be used when the selected usecase is *Parameterize*. |

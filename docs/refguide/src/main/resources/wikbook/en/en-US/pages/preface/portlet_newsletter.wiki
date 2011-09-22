@@ -1,1 +1,9 @@
-The Newsletter portlet is packaged in the _newsletter.war_ file. The portlet is used to help users quickly get the updated newsletter from a site.
+The *Newsletter* portlet is used to help users quickly get the updated newsletter from a site.
+
+This is an example of the *Newsletter* portlet used in eXo Content:
+
+!images/newsletter-portlet.png|align="center"!
+
+* *Packaging*: This portlet is packaged in the _newsletter.war_ file.
+
+* *The portlet class name*: _org.exoplatform.wcm.webui.newsletter.manager.UINewsletterManagerPortlet_

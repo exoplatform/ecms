@@ -1,134 +1,23 @@
-h1. Fields
-*Object type*: _org.exoplatform.services.cache.ExoCacheConfig_
+This plugin is used to control the state life cycle of a content.
 
-||*Name*||*Type*||*Default Value*||*Description*||
-|*name*|{{string}}|{{wcm.compose}}|The name of the cache which must be unique.|
-|*maxSize*|{{string}}|{{200}}|The max size of the cache object.|
-|*liveTime*|{{string}}|{{600}}|The time interval.|
-|*implementation*|{{string}}|{{org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache}}|The algorithm that is used to handle the cache.|
+The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
 
-h1. Sample configuration
+*Sample configuration*:
+
 {code:xml}
-<external-component-plugins>
-  <target-component>org.exoplatform.services.cache.CacheService</target-component>
-  <component-plugin>
-    <name>addExoCacheConfig</name>
-    <set-method>addExoCacheConfig</set-method>
-    <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-    <description>Configures the cache for query service</description>
-    <init-params>
-      <object-param>
-        <name>cache.config.wcm.composer</name>
-        <description>The default cache configuration</description>
-        <object type="org.exoplatform.services.cache.ExoCacheConfig">
-          <field name="name">
-            <string>wcm.composer</string>
-          </field>
-          <field name="maxSize">
-            <int>300</int>
-          </field>
-          <field name="liveTime">
-            <long>600</long>
-          </field>
-          <field name="distributed">
-            <boolean>false</boolean>
-          </field>
-          <field name="implementation">
-            <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
-  </component-plugin>
-</external-component-plugins>
-<external-component-plugins>
-  <target-component>org.exoplatform.services.wcm.core.WebSchemaConfigService</target-component>
-  <component-plugin>
-    <name>StageAndVersionPublicationHandler</name>
-    <set-method>addWebSchemaHandler</set-method>
-    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationHandler</type>
-  </component-plugin>
-</external-component-plugins>
-<external-component-plugins>
-  <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-  <component-plugin>
-    <name>org.exoplatform.portal.config.DataStorage.pageCreated</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.page.CreatePageEventListener</type>
-    <description>this listener update publication state of content when page is created</description>
-  </component-plugin>
-  <component-plugin>
-    <name>org.exoplatform.portal.config.DataStorage.pageUpdated</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.page.UpdatePageEventListener</type>
-    <description>this listener update publication state of content when page is updated</description>
-  </component-plugin>
-  <component-plugin>
-    <name>org.exoplatform.portal.config.DataStorage.pageRemoved</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.page.RemovePageEventListener</type>
-    <description>this listener update publication state of content when page is removed</description>
-  </component-plugin>
-  <component-plugin>
-    <name>org.exoplatform.portal.config.DataStorage.navigationUpdated</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.navigation.UpdateNavigationEventListener</type>
-    <description>this listener update publication state of content when navigation is updated</description>
-  </component-plugin>
-  <component-plugin>
-    <name>org.exoplatform.portal.config.DataStorage.navigationRemoved</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.navigation.RemoveNavigationEventListener</type>
-    <description>this listener update publication state of content when navigation is removed</description>
-  </component-plugin>
-</external-component-plugins>
-<external-component-plugins>
-  <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-  <component-plugin>
-    <name>CmsService.event.postCreate</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener</type>
-    <description>this listener will force the created document enroll to publication lifecycle</description>
-  </component-plugin>
-  <component-plugin>
-    <name>CmsService.event.postEdit</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener</type>
-    <description>this listener will change state of document to draft after editing</description>
-  </component-plugin>
-  <component-plugin>
-    <name>FormGenerator.event.postCreate</name>
-    <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.post.PostCreateNodeTypeEventListener</type>
-    <description>this listener will reinit the composer templates list when creating a new nodetype</description>
-  </component-plugin>
-</external-component-plugins>
+<component-plugin>
+    <name>States and versions based publication</name>
+    <set-method>addPublicationPlugin</set-method>
+    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
+    <description>This publication lifecycle publish a web content or DMS document to a portal page with more state
+        and version.
+    </description>
+</component-plugin>
 {code}
 
 In which:
 
-* *target component*: {{org.exoplatform.services.cache.CacheService}}
-* *name*: {{addExoCacheConfig}}
-* *set method*: {{addExoCacheConfig}}
-* *type* {{org.exoplatform.services.cache.ExoCacheConfigPlugin}}
+* *name*: {{States and versions based publication}}
+* *set method*: {{addPublicationPlugin}}
+* *type*: {{org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin}}
 
-{noformat}.{noformat}
-
-* *target component*: {{org.exoplatform.services.wcm.core.WebSchemaConfigService}}
-* *name*: {{StageAndVersionPublicationHandler}}
-* *set method*: {{addExoCacheConfig}}
-* *type* {{org.exoplatform.services.cache.ExoCacheConfigPlugin}}
-
-{noformat}.{noformat}
-
-* *target component*: {{org.exoplatform.services.listener.ListenerService}}
-* *name*: {{org.exoplatform.portal.config.DataStorage.pageCreated}}
-* *set method*: {{addListener}}
-* *type* {{org.exoplatform.services.wcm.publication.listener.page.CreatePageEventListener}}
-
-{noformat}.{noformat}
-
-* *target component*: {{org.exoplatform.services.listener.ListenerService}}
-* *name*: {{org.exoplatform.portal.config.DataStorage.pageCreated}}
-* *set method*: {{addListener}}
-* *type* {{org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener}}
