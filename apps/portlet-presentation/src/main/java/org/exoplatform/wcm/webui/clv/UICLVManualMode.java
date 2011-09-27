@@ -63,7 +63,7 @@ public class UICLVManualMode extends UICLVContainer {
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
-    String query = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, null);
+    String query = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, "");
     String contextualMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
     String workspace = portletPreferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
     List<Node> nodes = new ArrayList<Node>();
