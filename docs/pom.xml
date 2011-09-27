@@ -20,14 +20,18 @@
   </properties>
   
    <modules>
-     <!-- to build the doc, use the release plugin -->
+     <module>refguide</module>
    </modules>
 
    <profiles>
      <profile>
        <id>docs</id>
+       <activation>
+         <property>
+           <name>!skip.doc</name>
+         </property>
+       </activation>
        <modules>
-         <module>refguide</module>
          <module>userguide</module>
        </modules>
      </profile>

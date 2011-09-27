@@ -108,8 +108,6 @@
     <!-- maven-release-plugin -->
     <preparationGoals>clean install</preparationGoals>
     <arguments>-Dgatein.working.dir=target</arguments>
-    <!-- For 2.0.0 Beta 01 we release only tomcat package for WCM -->
-    <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,wcm,wkf,docs</releaseProfiles>    
     <!-- Required to add generate sources bundle -->
     <version.assembly.plugin>2.2</version.assembly.plugin>
   </properties>

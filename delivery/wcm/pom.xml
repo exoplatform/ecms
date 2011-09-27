@@ -10,14 +10,6 @@
   <packaging>pom</packaging>
   <name>eXo ECM Suite :: Delivery :: WCM</name>
   <description>eXo Entreprise Content Management Suite :: Delivery :: WCM</description>
-  <profiles>
-    <profile>
-      <id>wcm</id>
-      <modules>
-        <module>assembly</module>
-      </modules>
-    </profile>
-  </profiles>
   <modules>
     <module>server-jonas</module>
     <module>server-tomcat</module>
@@ -26,5 +18,6 @@
     <module>module</module>
     <module>product</module>
     <module>jboss-package</module>
+    <module>assembly</module>
   </modules>
 </project>

@@ -261,14 +261,6 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- needed for exobuild to call maven dependency:get -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <configuration>
-          <repositoryUrl>http://repository.exoplatform.org/all</repositoryUrl>
-        </configuration>
-      </plugin>
       <!-- check-out exobuild -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -312,7 +304,9 @@
     <profile>
       <id>pkg-tomcat</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>!skip.wkf</name>
+        </property>
       </activation>
       <build>
         <finalName>eXoWCM-Workflow-${project.version}</finalName>
@@ -369,7 +363,7 @@
                     <!--argument>-Dexo.src.dir=NONE</argument-->
                     <argument>-Dexo.dep.dir=${exo.projects.directory.dependencies}</argument>
                     <!-- to get the server ref install -->
-                    <argument>-Dexo.m2.repos=file:${settings.localRepository},http://repository.exoplatform.org/all</argument>
+                    <argument>-Dexo.m2.repos=file:${settings.localRepository}</argument>
                     <argument>-Dclean.server=${exo.projects.app.tomcat.version}</argument>
                     <argument>-Dexo.m2.home=${maven.home}</argument>
                     <argument>-Dorg.exoplatform.portal.version=${org.exoplatform.portal.version}</argument>
@@ -384,7 +378,7 @@
                     <argument>exobuild</argument>
                     <argument>--product=wcm</argument>
                     <argument>--deploy=tomcat</argument>
-										<argument>--enable-workflow=${workflowEngine}</argument>
+					<argument>--enable-workflow=${workflowEngine}</argument>
                   </arguments>
                 </configuration>
                 <goals>
@@ -398,6 +392,11 @@
     </profile>
     <profile>
       <id>arc-tomcat</id>
+      <activation>
+        <property>
+          <name>!skip.archive</name>
+        </property>
+      </activation>      
       <build>
         <plugins>
           <plugin>

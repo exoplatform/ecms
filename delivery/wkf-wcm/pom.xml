@@ -10,14 +10,6 @@
   <packaging>pom</packaging>
   <name>eXo ECM Suite :: Delivery :: WKF WCM</name>
   <description>eXo Entreprise Content Management Suite :: Delivery :: Workflow WCM</description>
-  <profiles>
-    <profile>
-      <id>wkf</id>
-      <modules>
-        <module>assembly</module>
-      </modules>
-    </profile>
-  </profiles>
   <modules>
     <module>server-bonita</module>
     <module>server-jboss</module>
@@ -26,5 +18,6 @@
     <module>server-tomcat</module>
     <module>module</module>
     <module>product</module>
+    <module>assembly</module>
   </modules>
 </project>
