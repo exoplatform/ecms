@@ -292,12 +292,12 @@ public class XJavascriptService implements Startable {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-      addSharedPortalJavascript(sharedPortal, null, true);
       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
       for(Node portal: livePortals) {
         addPortalJavascript(portal, null, true);
-      }
+      }      
+      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+      addSharedPortalJavascript(sharedPortal, null, true);
     } catch (PathNotFoundException e) {
       log.warn("Exception when merging inside Portal : WCM init is not completed.");
     } catch (Exception e) {
