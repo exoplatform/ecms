@@ -78,13 +78,13 @@ td {
   float: right;
 }
 
-.UIItemSelector .ItemDetailList .TemplateContainer .ClassicPortalImage {
+.UIItemSelector .ItemDetailList .TemplateContainer .classicImage {
   background: transparent url(background/classic.png) scroll center;
   height: 222px;
   margin-top: 9px;
 }
 
-.UIItemSelector .ItemDetailList .TemplateContainer .ACMEPortalImage {
+.UIItemSelector .ItemDetailList .TemplateContainer .acmeImage {
   background: transparent url(background/Acme.png) no-repeat center;
   height: 235px;
   width: 296px;

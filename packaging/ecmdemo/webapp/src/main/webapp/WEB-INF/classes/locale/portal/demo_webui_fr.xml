@@ -8,7 +8,7 @@
     <register>S'inscrire</register>
   </Signin>
 
-  <ACMEPortal>
+  <acme>
     <label>ACME Modèle</label>
-  </ACMEPortal>
+  </acme>
 </bundle>

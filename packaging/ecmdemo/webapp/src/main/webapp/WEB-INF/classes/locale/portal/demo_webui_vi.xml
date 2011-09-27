@@ -8,7 +8,7 @@
     <register>Đăng ký</register>
   </Signin>
 
-  <ACMEPortal>
+  <acme>
     <label>Mẫu website ACME</label>
-  </ACMEPortal>
+  </acme>
 </bundle>

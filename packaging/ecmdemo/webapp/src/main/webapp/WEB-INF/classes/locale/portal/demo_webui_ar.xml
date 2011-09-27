@@ -8,7 +8,7 @@
     <register>تسجل</register>
   </Signin>
 
-  <ACMEPortal>
+  <acme>
     <label>ACME نموذج </label>
-  </ACMEPortal>
+  </acme>
 </bundle>
