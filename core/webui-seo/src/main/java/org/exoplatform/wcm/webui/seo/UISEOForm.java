@@ -53,7 +53,7 @@ import javax.jcr.Node;
  * Jun 17, 2011  
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                 template = "app:/groovy/webui/seo/UISEOForm.gtmpl",
+                 template = "classpath:groovy/webui/seo/UISEOForm.gtmpl",
                  events = { 
                     @EventConfig(listeners = UISEOForm.SaveActionListener.class),
                     @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })

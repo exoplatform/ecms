@@ -44,7 +44,7 @@ import javax.jcr.Node;
  */
 
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                 template = "app:/groovy/webui/seo/UISEOPortletToolbar.gtmpl", events = {
+                 template = "classpath:groovy/webui/seo/UISEOPortletToolbar.gtmpl", events = {
                  @EventConfig(listeners = UISEOToolbarForm.AddSEOActionListener.class)
 })
 public class UISEOToolbarForm extends UIForm {
