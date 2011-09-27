@@ -217,14 +217,12 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.import-successful", null));
         
       } catch (AccessDeniedException ace) {
-        log.error("XML Import error " + ace, ace);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.access-denied", null,
             ApplicationMessage.WARNING));
         
         return;
       } catch (ConstraintViolationException con) {
-        log.error("XML Import error " + con, con);
         session.refresh(false);
         Object[] args = { uiExplorer.getCurrentNode().getPrimaryNodeType().getName() };
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.constraint-violation-exception",
@@ -233,7 +231,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         
         return;
       } catch (JCRItemExistsException iee) {
-        log.error("XML Import error " + iee, iee);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
                                                 new Object[] { iee.getIdentifier() },
@@ -241,7 +238,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         
         return;      
       } catch (Exception ise) {
-        log.error("XML Import error " + ise, ise);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null,
             ApplicationMessage.WARNING));
