@@ -876,21 +876,18 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 		}
 	}
 	var action = rws.getAttribute("action");
-	if(action){
+	
+	if (operation) {
+		var actionSaveTemp = rws.getAttribute("actionSaveTemp");
+		if (actionSaveTemp) {
+		  var additionParam = "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath) + '&itemPaths=' + strContent
+	  	  action = eXo.ecm.WCMUtils.addParamIntoAjaxEventRequest(actionSaveTemp, additionParam);
+		}else return;      
+	}else if(action){
 		action = action.substring(0, action.length - 2);
 		action += '&objectId=' + strContent + '\')';
-    if (operation) {
-      var opIndex = action.indexOf("op=");
-      if (opIndex>=0) {
-        var opEndIndex = action.indexOf("&", opIndex);
-        if (opEndIndex <0 ) 
-          opEndIndex = action.length;
-        action = action.substring(0, opIndex+3) + operation + action.substring(opEndIndex, action.length-2);
-        action = action + "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath) + "')";
-      }
-    }
-		eval(action);
-	}
+	} else return;	
+	eval(action);  
 };
 
 EcmContentSelector.prototype.addFile2ListContent = function(objNode) {  

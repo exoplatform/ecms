@@ -167,4 +167,8 @@ WCMUtils.prototype.changePriorityCss = function() {
 	  } ;
 	}
 }
+
+WCMUtils.prototype.addParamIntoAjaxEventRequest = function(eventReq, extParam) {
+    return eventReq.substring(0, eventReq.length - 2) + extParam +  "\')";	
+}
 eXo.ecm.WCMUtils = new WCMUtils();

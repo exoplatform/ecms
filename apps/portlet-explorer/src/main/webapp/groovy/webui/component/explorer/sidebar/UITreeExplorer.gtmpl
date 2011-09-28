@@ -195,8 +195,8 @@
 %>
 
 <div class="JCRMoveAction" style="display: none;" 
-		 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE, 'MultiSelection')%>" 
-		 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK, 'MultiSelection')%>">
+		 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" 
+		 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>">
 </div>
 <div class="SideBarContent">
   <div class="BarContent">

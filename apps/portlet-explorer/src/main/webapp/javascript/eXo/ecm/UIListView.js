@@ -777,7 +777,8 @@ var ListView = function() {
 			  url = moveActionNode.getAttribute("symlink");
 				ext += "&isLink="+true;
 			}
-			url = url.replace("MultiSelection", objectId.join(";") + ext);
+			var additionParam = "&objectId=" + objectId.join(";") + ext;
+			url = eXo.ecm.WCMUtils.addParamIntoAjaxEventRequest(url, additionParam);
 			eval(url); 
 		}
 	};

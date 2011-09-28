@@ -166,7 +166,7 @@
         <div style="clear: left"><span></span></div>
         <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
           <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
-          <div class="JCRMoveAction" style="display: none;" request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE, 'MultiSelection')%>" symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK, 'MultiSelection')%>"></div>
+          <div class="JCRMoveAction" style="display: none;" request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>"></div>
           <div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
             <div class="UIRightClickPopupMenu" style="display: block;">
               <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">
@@ -174,7 +174,7 @@
                   for(itemContext in managersMultiItemContext) {
                     action = itemContext.getUIExtensionName();
                     %>
-                      <a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action, 'MultiSelection')%>")>
+                      <a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>
                         <div class="ItemIcon ${action}16x16Icon"><%=_ctx.appRes("ECMContextMenu.event." + action)%></div>
                       </a>
                     <%

@@ -166,7 +166,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
     public void execute(Event<UIContentBrowsePanelMulti> event) throws Exception {
       UIContentBrowsePanelMulti contentBrowsePanelMulti = event.getSource();
       Node node=null;
-      String itemPaths = event.getRequestContext().getRequestParameter(OBJECTID);
+      String itemPaths = event.getRequestContext().getRequestParameter("itemPaths");
       String iDriver = event.getRequestContext().getRequestParameter("driverName");
       String iPath = event.getRequestContext().getRequestParameter("currentPath");
       String[] locations = (iPath == null) ? null : iPath.split(":");

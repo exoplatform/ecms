@@ -81,7 +81,7 @@ public class UICLVManualMode extends UICLVContainer {
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     
     String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
-    strQuery = strQuery.replaceAll("\"", "'");
+    if (strQuery != null) strQuery = strQuery.replaceAll("\"", "'");
     if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
         && UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)
         && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
