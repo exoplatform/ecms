@@ -248,7 +248,15 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 
 EcmContentSelector.prototype.listRootFolder = function(rootNode) {  
 	eXo.ecm.ECS.hideUpload();
-	if(eXo.ecm.ECS.typeObj != 'folder') return;
+	if(eXo.ecm.ECS.typeObj != 'folder') {
+		if(eXo.ecm.ECS.typeObj == "multi"){
+			eXo.ecm.ECS.listMutilFiles(null);
+		} else {		    
+			eXo.ecm.ECS.listFiles(null);
+		}
+		return;
+	}	
+	
 	var rightWS = document.getElementById('RightWorkspace');
 	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
@@ -391,7 +399,7 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 			var strHTML = '';
 			var strOnclick = '';
 			var node = document.getElementById(currentNode.id);
-			if(eXo.ecm.ECS.typeObj == "folder") {
+			if(!node.getAttribute("driverPath") && !node.getAttribute("currentfolder")) {
 				strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');eXo.ecm.ECS.listRootFolder('"+node.id+"');";		
 			} else {
 				strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
@@ -429,8 +437,10 @@ EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 		driverName =	currentNode.getAttribute('name');
 		eXo.ecm.ECS.driverName = driverName;
 		currentFolder = '';	
-	} else {
+	} else if (element.getAttribute("currentfolder")){
 		currentFolder = element.getAttribute("currentfolder");
+	} else {
+		return;
 	}
 	eXo.ecm.ECS.currentFolder = currentFolder;
 	eXo.ecm.ECS.currentNode = currentNode;
@@ -470,7 +480,14 @@ EcmContentSelector.prototype.listFiles = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');  
 	if(!list || list.length <= 0) {
 		if(viewType=="list") {
-			var tdNoContent = tblRWS.insertRow(0).insertCell(0);
+			var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+			var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+			if(rowsRWS && rowsRWS.length > 0) {
+				for(var i = 0; i < rowsRWS.length; i++) {
+					if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
+				}
+			} 
+			var tdNoContent = tblRWS.insertRow(1).insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
 			tdNoContent.className = "Item TRNoContent";
 			tdNoContent.setAttribute("colspan",3);
