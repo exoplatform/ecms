@@ -29,7 +29,10 @@
     <node>
       <uri>overview</uri>
       <name>overview</name>
-      <label>#{portal.acme.overview}</label>
+      <label xml:lang="en">Overview</label>
+      <label xml:lang="fr">Présentation</label>
+      <label xml:lang="vi">Giới thiệu</label>
+      <label xml:lang="pt-BR">Resumo</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::acme::overview</page-reference>
     </node>
@@ -37,7 +40,10 @@
     <node>
       <uri>news</uri>
       <name>news</name>
-      <label>#{portal.acme.news}</label>
+      <label xml:lang="en">News</label>
+      <label xml:lang="fr">Actualités</label>
+      <label xml:lang="vi">Tin tức</label>
+      <label xml:lang="pt-BR">Notícias</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::acme::news</page-reference>
     </node>
@@ -45,7 +51,10 @@
     <node>
       <uri>events</uri>
       <name>events</name>
-      <label>#{portal.acme.events}</label>
+      <label xml:lang="en">Events</label>
+      <label xml:lang="fr">Evénements</label>
+      <label xml:lang="vi">Sự kiện</label>
+      <label xml:lang="pt-BR">Eventos</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::acme::events</page-reference>
     </node>
@@ -53,7 +62,10 @@
     <node>
       <uri>newsletters</uri>
       <name>newsletters</name>
-      <label>#{portal.acme.newsletters}</label>
+      <label xml:lang="en">Newsletters</label>
+      <label xml:lang="fr">Lettres d'information</label>
+      <label xml:lang="vi">Thư giới thiệu</label>
+      <label xml:lang="pt-BR">Newsletters</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::acme::newsletters</page-reference>
     </node>
@@ -61,12 +73,18 @@
     <node>
       <uri>contactus</uri>
       <name>contactus</name>
-      <label>#{portal.acme.contactus}</label>
+      <label xml:lang="en">Contact Us</label>
+      <label xml:lang="fr">Contactez Nous</label>
+      <label xml:lang="vi">Liên hệ</label>
+      <label xml:lang="pt-BR">Contate-nos</label>
       <page-reference>portal::acme::contactus</page-reference>
       <node>
         <uri>contactus/confirmation</uri>
         <name>confirmation</name>
-        <label>#{portal.acme.confirmation}</label>
+        <label xml:lang="en">Contact Form Confirmation</label>
+        <label xml:lang="fr">Confirmation de contact</label>
+        <label xml:lang="vi">Xác nhận</label>
+        <label xml:lang="pt-BR">Confirmação de Formulário de Contato</label>        
         <visibility>HIDDEN</visibility>
         <page-reference>portal::acme::confirmation</page-reference>
       </node>
@@ -75,7 +93,10 @@
     <node>
       <uri>detail</uri>
       <name>detail</name>
-      <label>#{portal.acme.detail}</label>
+      <label xml:lang="en">Details</label>
+      <label xml:lang="fr">Détails</label>
+      <label xml:lang="vi">Chi tiết</label>
+      <label xml:lang="pt-BR">Detalhes</label>
       <visibility>SYSTEM</visibility>
       <page-reference>portal::acme::detail</page-reference>
     </node>
@@ -83,7 +104,10 @@
     <node>
       <uri>printviewer</uri>
       <name>printviewer</name>
-      <label>#{portal.acme.printviewer}</label>
+      <label xml:lang="en">Print Page</label>
+      <label xml:lang="fr">Imprimer la page</label>
+      <label xml:lang="vi">Trang in</label>
+      <label xml:lang="pt-BR">Imprimir página</label>
       <visibility>SYSTEM</visibility>
       <page-reference>portal::acme::printviewer</page-reference>
     </node>
@@ -91,7 +115,10 @@
     <node>
       <uri>searchResult</uri>
       <name>searchResult</name>
-      <label>#{portal.acme.searchResult}</label>
+      <label xml:lang="en">Search</label>
+      <label xml:lang="fr">Résultats de recherche</label>
+      <label xml:lang="vi">Kết quả tìm kiếm</label>
+      <label xml:lang="pt-BR">Procurar</label>
       <visibility>HIDDEN</visibility>
       <page-reference>portal::acme::searchResult</page-reference>
     </node>
@@ -99,7 +126,10 @@
     <node>
       <uri>newAccount</uri>
       <name>newAccount</name>
-      <label>#{portal.acme.newAccount}</label>
+      <label xml:lang="en">New Account</label>
+      <label xml:lang="fr">Nouveau compte</label>
+      <label xml:lang="vi">Đăng ký</label>
+      <label xml:lang="pt-BR">Nova conta</label>
       <visibility>HIDDEN</visibility>
       <page-reference>portal::acme::newAccount</page-reference>
     </node>
@@ -107,7 +137,10 @@
     <node>
       <uri>groupnavigation</uri>
       <name>groupnavigation</name>
-      <label>#{portal.acme.groupnavigation}</label>
+      <label xml:lang="en">Group Navigation</label>
+      <label xml:lang="fr">Navigation du Groupe</label>
+      <label xml:lang="vi">Quản lý thanh điều hướng cho nhóm</label>
+      <label xml:lang="pt-BR">Navegação de Grupos</label>      
       <visibility>SYSTEM</visibility>
       <page-reference>portal::acme::groupnavigation</page-reference>     
     </node>
@@ -115,7 +148,10 @@
     <node>
       <uri>portalnavigation</uri>
       <name>portalnavigation</name>
-      <label>#{portal.acme.portalnavigation}</label>
+      <label xml:lang="en">Portal Navigation</label>
+      <label xml:lang="fr">Navigation du Portail</label>
+      <label xml:lang="vi">Quản lý thanh điều hướng chung</label>
+      <label xml:lang="pt-BR">Navegação do Portal</label>
       <visibility>SYSTEM</visibility>
       <page-reference>portal::acme::portalnavigation</page-reference>      
     </node>
