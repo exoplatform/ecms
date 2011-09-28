@@ -75,7 +75,7 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 
 		uiDocumentWorkspace.style.position	= "absolute";
 		uiDocumentWorkspace.style.offsetLeft ;		
-		uiDocumentWorkspace.style.zIndex	= uiDocumentWorkspace.style.zIndex + 3;
+		uiDocumentWorkspace.style.zIndex	= uiDocumentWorkspace.style.zIndex + 10;
 		uiDocumentWorkspace.style.left		= "0px";
 		uiDocumentWorkspace.style.top		= "0px";
 		uiDocumentWorkspace.style.width		= oViewPaneSize.Width + "px";
