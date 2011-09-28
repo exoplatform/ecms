@@ -14,10 +14,6 @@
     This web.xml file is mandatory in each .par archive file.
   </description>
 			   
-  <listener>
-	<listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
-  </listener>
-	
   <filter>
     <filter-name>ResourceRequestFilter</filter-name>
     <filter-class>org.exoplatform.portal.application.ResourceRequestFilter</filter-class>
@@ -27,5 +23,10 @@
     <filter-name>ResourceRequestFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>    
+
+  <listener>
+    <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
+  </listener>
+
 
 </web-app>
