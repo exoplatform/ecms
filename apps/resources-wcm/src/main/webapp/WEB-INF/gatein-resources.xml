@@ -30,7 +30,7 @@
     <skin-name>Default</skin-name>
     <skin-module>WCMSkin</skin-module>
     <css-path>/skin/DefaultSkin/Stylesheet.css</css-path>
-    <css-priority>2</css-priority>
+    <css-priority>3</css-priority>
   </portal-skin>
 
   <javascript>
