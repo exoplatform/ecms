@@ -16,8 +16,11 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -175,6 +178,12 @@ public class UIPublicationPanel
       Calendar endDate = endPublication.getCalendar();
       Node node = publicationPanel.getCurrentNode();
       try {
+        if (startDate != null && endDate != null && startDate.after(endDate)) {
+          UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null));
+          return;
+        }
+        
         if ((!"".equals(startPublication.getValue())) || (!"".equals(endPublication.getValue()))) {
           if (!"".equals(startPublication.getValue()))
             node.setProperty(AuthoringPublicationConstant.START_TIME_PROPERTY, startDate);

@@ -3278,6 +3278,7 @@
     </action>
     <msg>
       <invalid-format>The datetime format is invalid. Please check again.</invalid-format>
+      <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>

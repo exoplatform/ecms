@@ -3294,6 +3294,7 @@
     </action>
     <msg>
       <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
+      <fromDate-after-toDate>Les dates ne sont pas cohérentes.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>

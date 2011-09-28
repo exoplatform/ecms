@@ -2877,6 +2877,7 @@
     </action>
     <msg>
       <invalid-format>التاريخ والوقت غير صالحة الشكل. يرجى مراجعة مرة أخرى</invalid-format>
+      <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>     
   <UIPopupWindow>

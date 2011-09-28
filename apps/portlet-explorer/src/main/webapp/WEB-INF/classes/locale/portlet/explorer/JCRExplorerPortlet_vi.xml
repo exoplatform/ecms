@@ -3296,6 +3296,7 @@
     </action>
     <msg>
       <invalid-format>Sai định dạng ngày tháng, hãy kiểm tra lại</invalid-format>
+      <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
