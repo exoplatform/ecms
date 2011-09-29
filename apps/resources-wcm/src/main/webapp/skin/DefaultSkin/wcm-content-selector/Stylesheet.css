@@ -259,8 +259,9 @@
   padding: 10px;
 }
 
-#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
+#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent, #UIContentSelectorOne .GrayTabContainer .UITabContent {
   background: white;
+  overflow: visible !important;
 }
 
 /* ===========================*/
