@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -73,12 +74,14 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   private NodeLocation views_;
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
-  private String viewName = null;
+  private String viewName = null;  
   private String permission = null;
   private List<String> listVersion = new ArrayList<String>() ;
   private String baseVersionName_;
   private VersionNode selectedVersion_;
   private VersionNode rootVersionNode;  
+  Map<String, String> templateMap = new HashMap<String, String>();
+  Map<String, String> tempMap = new HashMap<String, String>();
 
   public String getViewName() {
     return viewName;
@@ -87,7 +90,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   public void setViewName(String viewName) {
     this.viewName = viewName;
   }
-  
+    
   public String getPermission() {
   	return permission;
   }
@@ -115,8 +118,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     if(ecmTemplateHome != null) {
       NodeIterator iter = ecmTemplateHome.getNodes() ;
       while(iter.hasNext()) {
-        Node tempNode = iter.nextNode() ;
-        temp.add(new SelectItemOption<String>(tempNode.getName(),tempNode.getPath())) ;
+        Node tempNode = iter.nextNode() ; 
+        temp.add(new SelectItemOption<String>(tempNode.getName(),tempNode.getName())) ;
+        templateMap.put(tempNode.getName(), tempNode.getPath());
+        tempMap.put(tempNode.getPath(), tempNode.getName());
       }
     }
     addUIFormInput(new UIFormSelectBox(FIELD_TEMPLATE,FIELD_TEMPLATE, temp)) ;
@@ -296,8 +301,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     if(viewsNode != null) {
       getUIStringInput(FIELD_NAME).setEditable(false).setValue(viewsNode.getName()) ;
-      getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;
-      getUIFormSelectBox(FIELD_TEMPLATE).setValue(viewsNode.getProperty("exo:template").getString()) ;
+      getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;       
+      getUIFormSelectBox(FIELD_TEMPLATE).setValue(tempMap.get(viewsNode.getProperty("exo:template").getString()));
     }
     setInfoField(FIELD_TABS, getTabList()) ;
     String[] actionInfor ;
@@ -354,8 +359,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
-    String template = getUIFormSelectBox(FIELD_TEMPLATE).getValue() ;
-
+    String template = templateMap.get(getUIFormSelectBox(FIELD_TEMPLATE).getValue());
+    
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
     Node viewNode = NodeLocation.getNodeByLocation(views_);
     if(views_ == null || !isEnableVersioning) {

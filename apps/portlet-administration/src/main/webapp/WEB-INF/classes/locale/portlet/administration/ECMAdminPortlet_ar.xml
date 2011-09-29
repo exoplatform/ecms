@@ -1108,6 +1108,16 @@
       <comment>التعليق</comment>
       <vote>التصويت</vote>	  
       <manageSimpleCategories>إدارة التصنيفات البسيطة</manageSimpleCategories>
+	  <option>
+	  	<ListView>List View</ListView>
+		<TimelineView>Timeline View</TimelineView>
+		<ThumbnailsView>Thumbnails View</ThumbnailsView>
+		<CoverFlow>Cover Flow</CoverFlow>
+		<IconView>Icon View</IconView>
+		<SlideShowView>Slide Show View</SlideShowView>
+		<SystemView>System View</SystemView>
+		<ContentView>Content View</ContentView>
+	  </option>	
     </label>
   </UIViewFormTabPane>
   <PopupViewPermission>

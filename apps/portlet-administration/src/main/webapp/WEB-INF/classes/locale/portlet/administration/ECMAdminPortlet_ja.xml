@@ -1107,6 +1107,16 @@
       <comment>コメント</comment>
       <vote>投票</vote>	  
       <manageSimpleCategories>シンプルカテゴリの管理</manageSimpleCategories>
+	  <option>
+	  	<ListView>List View</ListView>
+		<TimelineView>Timeline View</TimelineView>
+		<ThumbnailsView>Thumbnails View</ThumbnailsView>
+		<CoverFlow>Cover Flow</CoverFlow>
+		<IconView>Icon View</IconView>
+		<SlideShowView>Slide Show View</SlideShowView>
+		<SystemView>System View</SystemView>
+		<ContentView>Content View</ContentView>
+	  </option>
     </label>
   </UIViewFormTabPane>
 
