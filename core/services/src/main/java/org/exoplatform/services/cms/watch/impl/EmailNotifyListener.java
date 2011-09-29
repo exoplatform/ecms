@@ -16,24 +16,48 @@
  */
 package org.exoplatform.services.cms.watch.impl;
 
+import groovy.text.GStringTemplateEngine;
+import groovy.text.TemplateEngine;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
+import javax.portlet.PortletRequest;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.mail.MailService;
 import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.Query;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.url.navigation.NodeURL;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
 /**
  * Created by The eXo Platform SAS
@@ -45,8 +69,14 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 public class EmailNotifyListener implements EventListener {
 
   private NodeLocation observedNode_ ;
-  final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern() ;
-  private static final Log LOG  = ExoLogger.getLogger(EmailNotifyListener.class);
+  
+  final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern();
+
+  private static final String SITE_EXPLORER       = "siteExplorer";
+
+  private static final String PATH_PARAM          = "path";
+
+  private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class);
 
   public EmailNotifyListener(Node oNode) {
     observedNode_ = NodeLocation.getNodeLocationByNode(oNode);
@@ -56,21 +86,18 @@ public class EmailNotifyListener implements EventListener {
    * This method is used for listening to all changes of property of a node, when there is a change,
    * message is sent to list of email
    */
-  @SuppressWarnings("unused")
   public void onEvent(EventIterator arg0) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    MailService mailService =
-      (MailService)container.getComponentInstanceOfType(MailService.class) ;
-    WatchDocumentServiceImpl watchService=
-      (WatchDocumentServiceImpl)container.getComponentInstanceOfType(WatchDocumentService.class) ;
-    MessageConfig messageConfig = watchService.getMessageConfig() ;
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    MailService mailService = (MailService) container.getComponentInstanceOfType(MailService.class);
+    WatchDocumentServiceImpl watchService = (WatchDocumentServiceImpl) 
+                                                container.getComponentInstanceOfType(WatchDocumentService.class);
+    MessageConfig messageConfig = watchService.getMessageConfig();
     List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
-    for(String receiver: emailList) {
-      Message message = createMessage(receiver,messageConfig) ;
+    for (String receiver : emailList) {
       try {
-        mailService.sendMessage(message) ;
-      }catch (Exception e) {
-        LOG.warn("===> Exeption when send message to: " + message.getTo());
+        Message message = createMessage(receiver, messageConfig);
+        mailService.sendMessage(message);
+      } catch (Exception e) {
         LOG.error("Unexpected error", e);
       }
     }
@@ -81,15 +108,154 @@ public class EmailNotifyListener implements EventListener {
    * @param receiver
    * @param messageConfig
    * @return
+   * @throws Exception 
    */
-  private Message createMessage(String receiver, MessageConfig messageConfig) {
-    Message message = new Message() ;
-    message.setFrom(messageConfig.getSender()) ;
-    message.setTo(receiver) ;
-    message.setSubject(messageConfig.getSubject()) ;
-    message.setBody(messageConfig.getContent()) ;
-    message.setMimeType(messageConfig.getMimeType()) ;
-    return message ;
+  private Message createMessage(String receiver, MessageConfig messageConfig) throws Exception {
+    Message message = new Message();
+    message.setFrom(messageConfig.getSender());
+    message.setTo(receiver);
+    message.setSubject(messageConfig.getSubject());
+    TemplateEngine engine = new GStringTemplateEngine();
+    Map<String, String> binding = new HashMap<String, String>();
+    Query query = new Query();
+    query.setEmail(receiver);
+    binding.put("user_name", WCMCoreUtils.getService(OrganizationService.class)
+                                         .getUserHandler()
+                                         .findUsersByQuery(query)
+                                         .load(0, 1)[0].getFullName());
+    binding.put("doc_title", NodeLocation.getNodeByLocation(observedNode_)
+                                        .getProperty("exo:title").getValue().getString());
+    binding.put("doc_name", NodeLocation.getNodeByLocation(observedNode_).getName());
+    binding.put("doc_url", getViewableLink());
+    message.setBody(engine.createTemplate(messageConfig.getContent()).make(binding).toString());
+    message.setMimeType(messageConfig.getMimeType());
+    return message;
+  }
+  
+  /**
+   * 
+   * @return
+   * @throws Exception
+   */
+  private String getViewableLink() throws Exception {
+    PortalRequestContext pContext = Util.getPortalRequestContext();
+    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
+    String nodePath = NodeLocation.getNodeByLocation(observedNode_).getPath();
+
+    ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
+    List<DriveData> driveList = manageDriveService.getDriveByUserRoles(pContext.getRemoteUser(),
+                                                                       getMemberships());
+    DriveData drive = getDrive(driveList,
+                               WCMCoreUtils.getRepository()
+                                           .getConfiguration()
+                                           .getDefaultWorkspaceName(),
+                               NodeLocation.getNodeByLocation(observedNode_).getPath());
+
+    String driverName = drive.getName();
+    String nodePathInDrive = "/".equals(drive.getHomePath()) ? nodePath
+                                                            : nodePath.substring(drive.getHomePath()
+                                                                                      .length());
+    UserNode siteExNode = getUserNodeByURI(SITE_EXPLORER);
+    nodeURL.setNode(siteExNode);
+
+    nodeURL.setQueryParameterValue(PATH_PARAM, WCMCoreUtils.getRepository()
+                                                           .getConfiguration()
+                                                           .getName()
+        + "/" + driverName + nodePathInDrive);
+
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletRequest portletRequest = portletRequestContext.getRequest();
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+        + String.format("%s", portletRequest.getServerPort());
+    return baseURI + nodeURL.toString();
+  }
+  
+  /**
+   * 
+   * @param lstDrive
+   * @param workspace
+   * @param nodePath
+   * @return
+   * @throws RepositoryException
+   */
+  private DriveData getDrive(List<DriveData> lstDrive, String workspace, String nodePath) throws RepositoryException {
+
+    DriveData driveData = null;
+    String[] elements = nodePath.split("/");
+    String driveMapper = "";
+    for (int i = 0; i < elements.length; i++) {
+      /**
+       * append elements in node path one by one to compare with driver example:
+       * node path = /a/b/c/d i == 0 => driveMapper = "/" (root node) i == 1 =>
+       * driveMapper = "/a" i == 2 => driveMapper = "/a/b" ...
+       */
+      if (i == 1) {
+        driveMapper = elements[i];
+      } else {
+        driveMapper = "/" + elements[i];
+      }
+      for (DriveData drive : lstDrive) {
+        if (workspace.equals(drive.getWorkspace()) && driveMapper.equals(drive.getHomePath())) {
+          driveData = drive;
+          break;
+        }
+      }
+    }
+    return driveData;
+  }
+  
+  /**
+   * 
+   * @param uri
+   * @return
+   */
+  private UserNode getUserNodeByURI(String uri) {
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+    List<UserNavigation> allNavs = userPortal.getNavigations();
+
+    for (UserNavigation nav : allNavs) {
+      if (nav.getKey().getType().equals(SiteType.GROUP)) {
+        UserNode userNode = userPortal.resolvePath(nav, null, uri);
+        if (userNode != null) {
+          return userNode;
+        }
+      }
+    }
+    return null;
+  }  
+  
+  /**
+   * 
+   * @return
+   * @throws Exception
+   */
+  public List<String> getMemberships() {
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    List<String> userMemberships = new ArrayList<String>();
+    userMemberships.add(userId);
+    // here we must retrieve memberships of the user using the
+    // IdentityRegistry Service instead of Organization Service to
+    // allow JAAS based authorization
+    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+    if (memberships != null) {
+      for (MembershipEntry membership : memberships) {
+        String role = membership.getMembershipType() + ":" + membership.getGroup();
+        userMemberships.add(role);
+      }
+    }
+    return userMemberships;
+  }
+  
+  /**
+   * 
+   * @param authenticatedUser
+   * @return
+   */
+  private Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+    return currentUserIdentity.getMemberships();
   }
 
   /**

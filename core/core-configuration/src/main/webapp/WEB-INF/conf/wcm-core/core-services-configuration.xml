@@ -121,10 +121,18 @@
         <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
           <field  name="sender"><string>support@exoplatform.com</string></field>
           <field  name="subject"><string>Your watching document is changed</string></field>
-          <field  name="mimeType"><string>text/plain</string></field>
+          <field  name="mimeType"><string>text/html</string></field>
           <field  name="content">
-          	<string>The document that you are watching is changed. 
-                    Please go to ecm to see this change
+            <string><![CDATA[
+                    Dear $user_name,<br>
+                    <br>
+                    The $doc_name ($doc_title) document that you are watching is changed.<br>
+                    <br>
+                    Please go to <a href="$doc_url">$doc_title</a> to see this change.<br>
+                    <br>
+                    Thank you,<br>
+                    eXo Support Team<br>
+                    ]]>
             </string>
           </field>          
         </object>
