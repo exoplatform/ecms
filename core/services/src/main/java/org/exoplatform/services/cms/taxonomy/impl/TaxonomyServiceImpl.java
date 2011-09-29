@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -68,15 +69,27 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   private RepositoryService      repositoryService_;
 
-  private final String           TAXONOMY_LINK   = "exo:taxonomyLink";
+  private static final String    TAXONOMY_LINK   = "exo:taxonomyLink";
 
-  private final String           EXOSYMLINK_LINK = "exo:symlink";
+  private static final String    EXOSYMLINK_LINK = "exo:symlink";
+  
+  private static final String    EXO_WORKSPACE   = "exo:workspace";
+  
+  private static final String    EXO_UUID        = "exo:uuid";
 
   private LinkManager            linkManager_;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
                                                      + "and exo:uuid = '$1' "
+                                                     + "and exo:workspace = '$2' "
                                                      + "order by exo:dateCreated DESC";
+  
+  private final String SQL_QUERY_EXACT_PATH = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
+                                                      + "and not jcr:path like '$0/%/%' "    
+                                                      + "and exo:uuid = '$1' "
+                                                      + "and exo:workspace = '$2' "
+                                                      + "order by exo:dateCreated DESC";
+  
 
   List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
 
@@ -404,6 +417,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           String sql = null;
           sql = StringUtils.replace(SQL_QUERY, "$0", rootNodeTaxonomy.getPath());
           sql = StringUtils.replace(sql, "$1", node.getUUID());
+          sql = StringUtils.replace(sql, "$2", node.getSession().getWorkspace().getName());
           session =
             repositoryService_.getCurrentRepository().login(rootNodeTaxonomy.getSession().getWorkspace().getName());
           QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -476,6 +490,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     try {
       Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
       for (String categoryPath : categoryPaths) {
+        //get category path
         if (rootNodeTaxonomy.getPath().equals("/")) {
           category = categoryPath;
         } else if (categoryPath.length() != 0) {
@@ -486,6 +501,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         } else {
           category = rootNodeTaxonomy.getPath();
         }
+        //get category node
         Node categoryNode;
         if (categoryPath.startsWith(rootNodeTaxonomy.getPath())) {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(categoryPath);
@@ -494,7 +510,27 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         } else {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
-        linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, node.getName());
+        //add mix referenceable for node
+        if (node.canAddMixin("mix:referenceable")) {
+          node.addMixin("mix:referenceable");
+          node.getSession().save();
+        }        
+        //generate unique linkName
+        String nodeUUID = node.getUUID();
+        String nodeWS = node.getSession().getWorkspace().getName();
+        String linkName = node.getName();
+        int index = 1;
+        while (categoryNode.hasNode(linkName)) {
+          Node taxonomyNode = categoryNode.getNode(linkName);
+          if (nodeUUID.equals(taxonomyNode.getProperty(EXO_UUID).getString()) &&
+              nodeWS.equals(taxonomyNode.getProperty(EXO_WORKSPACE).getString())) {
+            throw new ItemExistsException(); 
+          }
+          linkName = node.getName() + index++;
+        }
+        //create link
+        Node linkNode = linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
+        //linkNode.setProperty("exo:title", node.getName());
       }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
@@ -560,6 +596,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public void removeCategory(Node node, String taxonomyName, String categoryPath, boolean system)
       throws RepositoryException {
     try {
+      //get category node
       String category = "";
       Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
       if (rootNodeTaxonomy.getPath().equals("/")) {
@@ -570,7 +607,25 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         category = rootNodeTaxonomy.getPath() + categoryPath;
       }
       Node categoryNode = ((Node) rootNodeTaxonomy.getSession().getItem(category));
-      Node nodeTaxonomyLink = categoryNode.getNode(node.getName());
+      //get taxonomyLink node
+      String sql = StringUtils.replace(SQL_QUERY_EXACT_PATH, "$0", categoryNode.getPath());
+      sql = StringUtils.replace(sql, "$1", node.getUUID());
+      sql = StringUtils.replace(sql, "$2", node.getSession().getWorkspace().getName());
+      
+      QueryManager queryManager = categoryNode.getSession().getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(sql, Query.SQL);
+      QueryResult result = query.execute();
+      NodeIterator iterate = result.getNodes();
+
+      Node nodeTaxonomyLink = null;
+      if (iterate != null && iterate.hasNext()) {
+        nodeTaxonomyLink = iterate.nextNode();
+      }
+      
+      //remove taxonomyLink node
+      if (nodeTaxonomyLink == null) {
+        throw new RepositoryException("canot found taxonomy link node");
+      }
       nodeTaxonomyLink.remove();
       categoryNode.save();
       node.getSession().save();
