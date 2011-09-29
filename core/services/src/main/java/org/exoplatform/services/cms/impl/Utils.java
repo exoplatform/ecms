@@ -46,6 +46,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -254,6 +255,39 @@ public class Utils {
   public static boolean isInTrash(Node node) throws RepositoryException {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     return trashService.isInTrash(node);
+  }
+  
+  /**
+   * Gets the title.
+   *
+   * @param node the node
+   * @return the title
+   * @throws Exception the exception
+   */
+  public static String getTitle(Node node) throws Exception {
+    String title = null;
+    if (node.hasProperty("exo:title")) {
+      title = node.getProperty("exo:title").getValue().getString();
+    } else if (node.hasNode("jcr:content")) {
+      Node content = node.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch (Exception ex) {
+        }
+      }
+    }
+    if (title == null) {
+      if (node.isNodeType("nt:frozenNode")) {
+        String uuid = node.getProperty("jcr:frozenUuid").getString();
+        Node originalNode = node.getSession().getNodeByUUID(uuid);
+        title = originalNode.getName();
+      } else {
+        title = node.getName();
+      }
+
+    }
+    return Text.unescapeIllegalJcrChars(title);
   }
   
 }

@@ -7,6 +7,7 @@ import javax.jcr.Node;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -36,8 +37,9 @@ public class FCKFileHandler {
                                           Node displayNode,
                                           String currentPortal,
                                           LinkManager linkManager) throws Exception {
-    Element file = document.createElement("File");
+    Element file = document.createElement("File");    
     file.setAttribute("name", displayNode.getName());
+    file.setAttribute("name", Utils.getTitle(displayNode));
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
     file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
