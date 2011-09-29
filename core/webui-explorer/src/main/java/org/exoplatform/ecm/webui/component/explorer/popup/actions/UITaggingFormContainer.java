@@ -89,6 +89,7 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     String userName = uiExplorer.getSession().getUserID();
     String tagScope = uiTaggingForm.getUIFormSelectBox(UITaggingForm.TAG_SCOPES).getValue();
     int scope = uiTaggingForm.getIntValue(tagScope);
+    uiExplorer.setTagScope(scope);
 
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(UITaggingForm.PUBLIC_TAG_NODE_PATH);
 

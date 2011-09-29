@@ -141,6 +141,7 @@ public class UITaggingForm extends UIForm {
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
 
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
+    getAncestorOfType(UIJCRExplorer.class).setTagScope(getIntValue(tagScope));
     for (Node tag : folksonomyService.getLinkedTagsOfDocumentByScope(getIntValue(tagScope),
                                                                      getStrValue(tagScope,
                                                                                  currentNode),
