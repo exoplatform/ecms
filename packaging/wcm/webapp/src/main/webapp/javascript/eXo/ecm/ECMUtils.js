@@ -395,12 +395,18 @@
 		    }
 		    window.open(serverInfo + "/" + restContextName + "/private/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
 	   	} else {
-	 	  	window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" +workspace + nodePath, '_new');
+	   		eXo.ecm.ECMUtils.generateWebDAVUrl(serverInfo,portalName,restContextName,repository,workspace,nodePath,mimetype);	 	  	
 	 	  } 	  
 	  } else {
 		  window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath, '_new');
 	  } 
 	} ;
+	
+	ECMUtils.prototype.generateWebDAVUrl = function(serverInfo, portalName, restContextName, repository, workspace, nodePath, mimetype) {
+		my_window = window.open("");		
+    var downloadLink = serverInfo+ "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath;    
+		my_window.document.write('<script> window.location.href = "'+downloadLink+'"; </script>');
+	};
 	
 	var clip=null;
 	ECMUtils.prototype.initClipboard = function(id, level, size) {
