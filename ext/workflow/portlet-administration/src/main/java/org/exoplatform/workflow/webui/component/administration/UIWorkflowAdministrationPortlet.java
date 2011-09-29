@@ -54,7 +54,7 @@ public class UIWorkflowAdministrationPortlet extends UIPortletApplication {
     UIUploadProcess uiUploadProcess = createUIComponent(UIUploadProcess.class, null, null) ;
     uiPopup.setUIComponent(uiUploadProcess) ;
     uiPopup.setRendered(true) ;
-    uiPopup.setShowMask(true);
+    uiPopup.setShowMask(false);
     uiPopup.setShow(true) ;
   }
 
