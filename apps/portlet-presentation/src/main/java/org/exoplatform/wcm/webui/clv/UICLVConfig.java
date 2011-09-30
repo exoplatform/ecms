@@ -18,6 +18,8 @@ package org.exoplatform.wcm.webui.clv;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -29,6 +31,8 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -80,6 +84,8 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
   }
 )
 public class UICLVConfig extends UIForm  implements UISelectable {
+
+  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.wcm.webui.pclv.config.UIPCLVConfig");
 
   /** The Constant DISPLAY_MODE_FORM_RADIO_BOX_INPUT. */
   public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT       = "UICLVConfigDisplayModeFormRadioBoxInput";
@@ -168,19 +174,19 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
   /** The Constant PAGINATOR_TEMPLATE_CATEGORY. */
   public final static String PAGINATOR_TEMPLATE_CATEGORY             = "paginators";
-  
+
   /** The Constant CACHE_ENABLE_RADIOBOX_INPUT */
   public static final String CACHE_ENABLE_RADIOBOX_INPUT             = "UICLVConfigCacheEnableRadioBoxInput";
-  
+
   /** The Constant CONTENT_BY_QUERY_TEXT_AREA */
   public static final String CONTENT_BY_QUERY_TEXT_AREA              = "UICLVConfigContentByQueryTextArea";
-  
+
   /** The Constant WORKSPACE_FORM_SELECT_BOX. */
   public final static String WORKSPACE_FORM_SELECT_BOX               = "UICLVConfigWorkspaceFormSelectBox";
-  
+
   /** The Constant CACHE_MANAGEMENT_LABEL */
   public static final String CACHE_MANAGEMENT_LABEL                  = "UICLVConfigCacheManagementLabel";
-  
+
   /** The Constant CONTENT_BY_QUERY_LABEL */
   public static final String CONTENT_BY_QUERY_LABEL                  = "UICLVContentByQueryLabel";
 
@@ -204,7 +210,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public final static String CATEGORIES_CONTENT_TYPE                 = "CategoryContents";
 
   public final static String CATOGORIES_NAVIGATION_TYPE              = "CategoryNavigation";
-  
+
   /** The constant values for cache */
   public static final String ENABLE_CACHE                            = "ENABLE";
   public static final String DISABLE_CACHE                           = "DISABLE";
@@ -299,7 +305,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String itemsPerPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
 
     String contextualFolderMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
-    
+
     String showClvBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, null);
     String targetPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, null);
     String showScvWith = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, null);
@@ -375,15 +381,19 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     showAutomaticDetectionCheckBox.setChecked(showAutomaticDetection);
 
     List<SelectItemOption<String>> formViewerTemplateList = new ArrayList<SelectItemOption<String>>();
+
     /** DISPLAY TEMPLATE */
+    List<SelectItemOption<String>> viewerTemplateList = new ArrayList<SelectItemOption<String>>();
     if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATEGORIES_CONTENT_TYPE)
         || appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY)) {
-      formViewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER, DISPLAY_TEMPLATE_LIST));
+      viewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER, DISPLAY_TEMPLATE_LIST));
     }
     if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
-      formViewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER,
+      viewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER,
                                                     DISPLAY_TEMPLATE_CATEGORY));
     }
+    Collections.sort(viewerTemplateList, new TemplateNameComparator());
+    formViewerTemplateList.addAll(viewerTemplateList);
 
     UIFormSelectBox formViewTemplateSelector = new UIFormSelectBox(DISPLAY_TEMPLATE_FORM_SELECT_BOX,
                                                                    DISPLAY_TEMPLATE_FORM_SELECT_BOX,
@@ -392,6 +402,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
     /** PAGINATOR TEMPLATE */
     List<SelectItemOption<String>> paginatorTemplateList = getTemplateList(TEMPLATE_STORAGE_FOLDER, PAGINATOR_TEMPLATE_CATEGORY);
+    Collections.sort(paginatorTemplateList, new TemplateNameComparator());
     UIFormSelectBox paginatorTemplateSelector = new UIFormSelectBox(PAGINATOR_TEMPLATE_FORM_SELECT_BOX,
                                                                     PAGINATOR_TEMPLATE_FORM_SELECT_BOX,
                                                                     paginatorTemplateList);
@@ -483,7 +494,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     basePathInput.setEditable(false);
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
-    
+
     /** CACHE MODE */
     List<SelectItemOption<String>> cacheOptions = new ArrayList<SelectItemOption<String>>();
     cacheOptions.add(new SelectItemOption<String>(ENABLE_CACHE, ENABLE_CACHE));
@@ -492,24 +503,24 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                                                            CACHE_ENABLE_RADIOBOX_INPUT,
                                                                            cacheOptions);
     cacheEnableRadioBoxInput.setValue("true".equals(isCacheEnabled)? ENABLE_CACHE : DISABLE_CACHE);
-    
+
     /** WORKSPACE */
     List<SelectItemOption<String>> workspaceOptions = new ArrayList<SelectItemOption<String>>();
-    
+
     String[] workspaceList = WCMCoreUtils.getRepository().getWorkspaceNames();
-    
+
     for (String wkspace : workspaceList) {
       workspaceOptions.add(new SelectItemOption<String>(wkspace, wkspace));
     }
-    
+
     UIFormSelectBox workspaceSelector = new UIFormSelectBox(WORKSPACE_FORM_SELECT_BOX, WORKSPACE_FORM_SELECT_BOX, workspaceOptions);
     workspaceSelector.setValue(workspace);
-    
+
     /** CONTENT BY QUERY */
     UIFormTextAreaInput queryTextAreaInput = new UIFormTextAreaInput(CONTENT_BY_QUERY_TEXT_AREA,
                                                                      CONTENT_BY_QUERY_TEXT_AREA,
                                                                      contentByQuery);
-    
+
     /** ALLOW DYNAMIC URL */
     UIFormStringInput showScvWithInput = new UIFormStringInput(SHOW_SCV_WITH_STRING_INPUT,
                                                                SHOW_SCV_WITH_STRING_INPUT,
@@ -558,7 +569,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(targetPageInputSet);
     addChild(showScvWithInput);
     addChild(cacheEnableRadioBoxInput);
-    
+
     if (this.isContentListByQuery()) {
       addChild(workspaceSelector);
       addChild(queryTextAreaInput);
@@ -588,6 +599,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(portletName,
                                                                                 category,
                                                                                 WCMCoreUtils.getUserSessionProvider());
+
     for (Node templateNode : templateNodeList) {
       SelectItemOption<String> template = new SelectItemOption<String>();
       template.setLabel(templateNode.getName());
@@ -599,14 +611,14 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public boolean isCategoriesNavigation() {
     return appType.equals(CATOGORIES_NAVIGATION_TYPE);
   }
-  
+
   /**
-   * 
+   *
    * @return
    */
   public boolean isContentListByQuery() {
     return appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY);
-  }  
+  }
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
@@ -780,7 +792,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
       String cacheEnabled = ((UIFormRadioBoxInput) clvConfig.
           getChildById(UICLVConfig.CACHE_ENABLE_RADIOBOX_INPUT)).getValue();
-      
+
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
       PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
@@ -1048,5 +1060,18 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   }
   public boolean getModeInternal() {
     return this.modeInternal;
+  }
+
+  private class TemplateNameComparator implements Comparator<SelectItemOption<String>> {
+    public int compare(SelectItemOption<String> item1,SelectItemOption<String> item2) {
+      try {
+        String s1 = item1.getLabel();
+        String s2 = item2.getLabel();
+        return s1.compareTo(s2);
+      } catch (Exception e) {
+        LOG.error("Cannot compare nodes", e);
+      }
+      return 0;
+    }
   }
 }
