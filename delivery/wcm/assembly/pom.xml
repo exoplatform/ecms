@@ -334,6 +334,9 @@
       <version>${lucene-regex.version}</version>
       <type>jar</type>
     </dependency>
+    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.component.product</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
+    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.component.upgrade</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
+    
   </dependencies>
   <build>
     <plugins>

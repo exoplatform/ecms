@@ -273,11 +273,23 @@
       <type>war</type>
     </dependency>
     <dependency>
-       <groupId>org.exoplatform.ecms</groupId>
-       <artifactId>exo-ecms-core-webui-seo</artifactId>
-       <version>${project.version}</version>
-   </dependency>
-    <!-- End of xCMIS dependencies -->
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-webui-seo</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>exo.platform.commons.component.product</artifactId>
+      <version>${org.exoplatform.commons.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>exo.platform.commons.component.upgrade</artifactId>
+      <version>${org.exoplatform.commons.version}</version>
+      <type>jar</type>
+    </dependency>
+
   </dependencies>
 
 <!-- 
@@ -360,6 +372,16 @@ exo-ecms-packaging-ecmdemo-webapp
             <jarModule>
 			  <groupId>org.exoplatform.commons</groupId>
 			  <artifactId>exo.platform.commons.webui.ext</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+			  <groupId>org.exoplatform.commons</groupId>
+			  <artifactId>exo.platform.commons.component.product</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+			  <groupId>org.exoplatform.commons</groupId>
+			  <artifactId>exo.platform.commons.component.upgrade</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
