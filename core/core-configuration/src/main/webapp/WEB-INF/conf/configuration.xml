@@ -16,4 +16,5 @@
 	<import>war:/conf/wcm-core/ext-newsletter-configuration.xml</import>
 	<import>war:/conf/wcm-core/core-handler-configuration.xml</import>
 	<import>war:/conf/wcm-core/ext-xcmis-configuration.xml</import>
+	<import>war:/conf/wcm-core/wcm-migration.xml</import>	
 </configuration>

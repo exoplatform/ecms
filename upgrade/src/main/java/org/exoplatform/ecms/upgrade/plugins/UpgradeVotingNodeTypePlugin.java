@@ -1,21 +1,20 @@
 /*
-
- * Copyright (C) 2003-2008 eXo Platform SAS.
+ * Copyright (C) 2003-2011 eXo Platform SAS.
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Affero General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.migration;
+package org.exoplatform.ecms.upgrade.plugins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,8 @@ import java.util.List;
 import javax.jcr.PropertyType;
 import javax.jcr.Session;
 
+import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
@@ -31,14 +32,14 @@ import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
 
 /**
- * Add property 'exo:voterVoteValues' into 'mix:votable'
- * 
- * Created by The eXo Platform SARL Author : Nguyen Anh Vu vu.nguyen@exoplatform.com Sep 07, 2010
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          exo@exoplatform.com
+ * Sep 27, 2011  
  */
-public class VoteNodeTypeMigrationService implements Startable {
+public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
 
   private static final String VOTER_VOTEVALUE_PROP = "exo:voterVoteValues";
   private static final String MIX_VOTABLE = "mix:votable";
@@ -46,14 +47,17 @@ public class VoteNodeTypeMigrationService implements Startable {
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
   private Log log = ExoLogger.getLogger(this.getClass());
+  
 
-  public VoteNodeTypeMigrationService(RepositoryService repoService, DMSConfiguration dmsConfiguration) {
+  public UpgradeVotingNodeTypePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
+                               InitParams initParams) {
+    super(initParams);
     this.repoService_ = repoService;
     this.dmsConfiguration_ = dmsConfiguration;
   }
 
   @Override
-  public void start() {
+  public void processUpgrade(String oldVersion, String newVersion) {
     log.info("Start " + this.getClass().getName() + ".............");
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
@@ -73,7 +77,7 @@ public class VoteNodeTypeMigrationService implements Startable {
       }
       //add new property
       if (!propertyExists) {
-        propertyDefinitionList.add(new PropertyDefinitionValue(VOTER_VOTEVALUE_PROP, true, false, 1, false,
+        propertyDefinitionList.add(new PropertyDefinitionValue(VOTER_VOTEVALUE_PROP, false, false, 1, false,
                                                     new ArrayList<String>(), true, PropertyType.STRING, new ArrayList<String>()));
         mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
@@ -89,7 +93,8 @@ public class VoteNodeTypeMigrationService implements Startable {
   }
 
   @Override
-  public void stop() {
+  public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
+    return true;
   }
 
 }

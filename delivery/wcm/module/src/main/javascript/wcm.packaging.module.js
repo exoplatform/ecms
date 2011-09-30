@@ -19,6 +19,7 @@ function getModule(params) {
   var axiomVersion = "${axiom.version}";
   var jaxenVersion = "${jaxen.version}";
   var antlrVersion = "${org.antlr.version}";
+  var commonsVersion = "${org.exoplatform.commons.version}";
   module.relativeMavenRepo =  "org/exoplatform/ecms" ;
   module.relativeSRCRepo =  "ecms" ;
   module.name =  "wcm" ;
@@ -101,7 +102,9 @@ function getModule(params) {
     addDependency(new Project("org.apache.ws.commons.axiom", "axiom-api", "jar", axiomVersion)).
     addDependency(new Project("org.apache.ws.commons.axiom", "axiom-impl", "jar", axiomVersion)).
     addDependency(new Project("jaxen", "jaxen", "jar", jaxenVersion)).
-    addDependency(new Project("org.antlr", "antlr-runtime", "jar", antlrVersion));
+    addDependency(new Project("org.antlr", "antlr-runtime", "jar", antlrVersion)).
+    addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.component.product", "jar", commonsVersion)).
+    addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.component.upgrade", "jar", commonsVersion));
   
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 

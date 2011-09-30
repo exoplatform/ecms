@@ -28,3 +28,9 @@ wcm.linkjob.cron.expression=0 0/20 * * * ?
 
 For further information of expression meaning, please refer to: http://en.wikipedia.org/wiki/CRON_expression
 
+4. Migration mix:votable node type to adapt legacy data with new feature in VoteService:
+* Open /Jboss_home/server/default/conf/gatein/configuration.properties
+* Add new this configuration if not found
+
+# Commons Upgrade configuration
+commons.upgrade.proceedIfFirstRun=true

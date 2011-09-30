@@ -428,5 +428,6 @@
     <module>examples</module>
     <module>docs</module>
     <module>testsuite</module>
+    <module>upgrade</module>
   </modules>
 </project>

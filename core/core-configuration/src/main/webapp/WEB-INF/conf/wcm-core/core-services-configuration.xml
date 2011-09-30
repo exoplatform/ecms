@@ -23,9 +23,9 @@
     <type>org.exoplatform.services.migration.SCVPortletPreferenceMigrationService</type>
   </component-->
   
-  <component>
+  <!--component>
     <type>org.exoplatform.services.migration.VoteNodeTypeMigrationService</type>
-  </component>
+  </component-->
   
   <component>
     <type>org.exoplatform.services.migration.ActionMigrationService</type>
