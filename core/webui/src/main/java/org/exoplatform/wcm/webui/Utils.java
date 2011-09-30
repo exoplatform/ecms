@@ -224,7 +224,7 @@ public class Utils {
                                                String nodeIdentifier) {
     return getViewableNodeByComposer(repository, workspace, nodeIdentifier, null);
   }
-  
+
   /**
    * Gets the viewable node by WCMComposer (depends on site mode)
    *
@@ -244,7 +244,7 @@ public class Utils {
                                                String nodeIdentifier,
                                                String version) {
     return getViewableNodeByComposer(repository, workspace, nodeIdentifier, version, WCMComposer.VISIBILITY_USER);
-  }  
+  }
 
   /**
    * Gets the viewable node by WCMComposer (depends on site mode)
@@ -255,7 +255,7 @@ public class Utils {
    * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>
    *          )
    * @param cacheVisibility the visibility of cache
-   *                    
+   *
    * @return the viewable node. Return <code>null</code> if
    *         <code>nodeIdentifier</code> is invalid
    * @see #getViewableNodeByComposer(String repository, String workspace, String
@@ -273,7 +273,7 @@ public class Utils {
       String country = Util.getPortalRequestContext().getLocale().getCountry();
       if (country != null && country.length() > 0) {
         filterLang += "_" + country;
-      }      
+      }
       filters.put(WCMComposer.FILTER_LANGUAGE, filterLang);
       filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
@@ -425,11 +425,11 @@ public class Utils {
                                                        .getApplicationComponent(WCMConfigurationService.class);
     String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
     UserNode editorNode = getEditorNode(editorPageURI);
-    
+
     if (editorNode == null) {
       return "";
     }
-    
+
     NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
     nodeURL.setNode(editorNode).setQueryParameterValue("path", "/" + itemPath);
     if (isEditable) {
@@ -442,7 +442,7 @@ public class Utils {
 
     return nodeURL.toString();
   }
-  
+
   private static UserNode getEditorNode(String editorPageURI) {
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
     List<UserNavigation> allNavs = userPortal.getNavigations();
@@ -487,8 +487,8 @@ public class Utils {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
-  
-  
+
+
   public static void createPopupWindow(UIContainer container,
       UIComponent component,
       String popupWindowId,
@@ -504,8 +504,8 @@ public class Utils {
 		popupWindow.setCoordindate(top, left);
 		WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
 		requestContext.addUIComponentToUpdateByAjax(popupContainer);
-	}  
-  
+	}
+
 
   /**
    * Close popup window.
@@ -668,7 +668,7 @@ public class Utils {
 
     String originalNodePath = getRealNodePath(node);
     String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/"
-        + workspace + originalNodePath;
+        + workspace + Text.escape(originalNodePath, '%', true);
     if (imagePath.contains("?")) {
       imagePath += "&time=";
     } else {
@@ -694,7 +694,7 @@ public class Utils {
                                  boolean isWCMBase) throws RepositoryException {
     return getRealNode(strRepository, strWorkspace, strIdentifier, isWCMBase, WCMComposer.VISIBILITY_USER);
   }
-  
+
   /**
    * GetRealNode
    *
@@ -702,7 +702,7 @@ public class Utils {
    * @param strWorkspace
    * @param strIdentifier
    * @param cacheVisibility the visibility of cache
-   *  
+   *
    * @return the required node/ the target of a symlink node / null if node was
    *         in trash.
    * @throws RepositoryException
@@ -785,21 +785,21 @@ public class Utils {
   public static UserNavigation getSelectedNavigation() throws Exception {
     return Util.getUIPortal().getUserNavigation();
   }
-  
+
   public static String sanitize(String string) {
     return string
-       .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed 
+       .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed
        .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
-       .replaceAll("eval\\((.*)\\)", "");                   // case 3 : eval: are removed           
+       .replaceAll("eval\\((.*)\\)", "");                   // case 3 : eval: are removed
 //       .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
   }
-  
+
   public static boolean isEmptyContent(String inputValue) {
 	boolean isEmpty = true;
 	inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
 	inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
 	inputValue = inputValue.replaceAll("&nbsp;", "");
-	if(inputValue != null && inputValue.length() > 0) return false;	 	
+	if(inputValue != null && inputValue.length() > 0) return false;
 	return isEmpty;
   }
   /**
@@ -822,7 +822,7 @@ public class Utils {
 	  }
 	  return true;
   }
-  
+
   /**
    * get the parameter list from SQL query, the parameter have the ${PARAM} format. <br>
    * For example:
@@ -847,11 +847,11 @@ public class Utils {
     }
     return params;
   }
-  
+
   /**
    * Replace the parameter with the relevant value from <code>params</code>to
    * build the SQL query
-   * 
+   *
    * @param sqlQuery the input query that contain parameter
    * @param params list of all parameter(key, value) pass to the query
    * @return SQL query after replacing the parameter with value
@@ -866,10 +866,10 @@ public class Utils {
     }
     return query;
   }
-  
+
   /**
    * Check if the input SQL query contains any parameter or not.
-   * 
+   *
    * @param sqlQuery
    * @return <code>false</code> if input SQL query does not contain any
    *         parameter <br>

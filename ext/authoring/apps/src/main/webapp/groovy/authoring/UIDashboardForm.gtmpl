@@ -1,3 +1,8 @@
+<%
+import org.exoplatform.ecm.utils.text.Text;
+
+def escapeChar = '%' as char
+%>
 <style>
 .UIAuthoringDashboard {
   padding: 5px;
@@ -42,7 +47,7 @@ color: #ccc;
 
 .UIAuthoringDashboard .Header .Total {
 	background-color: #ee0000;
-	color: #fff;	
+	color: #fff;
 	min-width: 25px;
 	float: right;
 	text-align:center;
@@ -70,11 +75,11 @@ color: #888;
 		      <% } %>
 					<div style="clear:both;"><span></span></div>
         </div>
-        
+
         <div class="Elements">
         <%
           for (Node node:nodes) {
-            def path = node.getPath();
+            def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
           %>
@@ -98,11 +103,11 @@ color: #888;
 		      <% } %>
 					<div style="clear:both;"><span></span></div>
         </div>
-        
+
         <div class="Elements">
         <%
           for (Node node:nodes) {
-            def path = node.getPath();
+            def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
           %>
@@ -126,11 +131,11 @@ color: #888;
 		      <% } %>
 					<div style="clear:both;"><span></span></div>
         </div>
-        
+
         <div class="Elements">
         <%
           for (Node node:nodes) {
-            def path = node.getPath();
+            def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
           %>
