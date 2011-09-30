@@ -18,6 +18,8 @@
 package org.exoplatform.ecm.webui.component.admin.taxonomy;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeManager;
@@ -95,6 +97,19 @@ public class UITaxonomyTreeMainForm extends UIForm {
         workspace.add(new SelectItemOption<String>(wsName, wsName));
     }
     if (taxonomyTree == null) taxonomyTree = new TaxonomyTreeData();
+    
+    //sort workspace
+    Comparator<SelectItemOption<String>> comparator = new Comparator<SelectItemOption<String>>(){
+      @Override
+      public int compare(SelectItemOption<String> option1, SelectItemOption<String> option2) {
+        try {
+          return option1.getValue().compareToIgnoreCase(option2.getValue());
+        }catch (Exception ex){
+          return 0;
+        }        
+      }
+    };
+    Collections.sort(workspace, comparator);
     UIFormSelectBox uiSelectBox = getUIFormSelectBox(FIELD_WORKSPACE).setOptions(workspace);
     if (taxonomyTree.getTaxoTreeWorkspace() == null) {
       taxonomyTree.setTaxoTreeWorkspace(dmsSystemWorkspace);

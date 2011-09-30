@@ -2435,6 +2435,7 @@
 			<label>
   		<taxonomy-list>Liste des Taxonomies</taxonomy-list>
   		<admin-view>Détails</admin-view>
+  		<authoring-view>Autorité</authoring-view>
   		<taxonomy-icons>Icônes des Taxonomies</taxonomy-icons>
   		<anonymous-view>Icônes</anonymous-view>
   		<icon-view>Icônes</icon-view>

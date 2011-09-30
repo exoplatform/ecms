@@ -16,12 +16,17 @@
  */
 package org.exoplatform.ecm.webui.component.admin.drives;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import org.exoplatform.ecm.webui.component.admin.views.UIViewList.ViewBean;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputSet;
@@ -57,7 +62,9 @@ public class UIViewsInputSet extends UIFormInputSet {
   }
 
   private void clear() throws Exception {
+    
     List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews();
+    Collections.sort(views_, new ViewComparator());
     for(ViewConfig view : views_){
       String viewName = view.getName() ;
       if(getUIFormCheckBoxInput(viewName) != null) {
@@ -66,6 +73,15 @@ public class UIViewsInputSet extends UIFormInputSet {
         addUIFormInput(new UIFormCheckBoxInput<Boolean>(viewName, viewName, null)) ;
       }
 
+    }
+  }
+  
+  static public class ViewComparator implements Comparator<ViewConfig> {
+    public int compare(ViewConfig v1, ViewConfig v2) throws ClassCastException {
+      WebuiRequestContext webReqContext = WebuiRequestContext.getCurrentInstance();      
+      String displayName1 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v1.getName());
+      String displayName2 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v2.getName());
+      return displayName1.compareToIgnoreCase(displayName2);
     }
   }
 
