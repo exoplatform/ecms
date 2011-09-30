@@ -114,22 +114,29 @@ public class FavoriteServiceImpl implements FavoriteService {
    * {@inheritDoc}
    */
   public void removeFavorite(Node node, String userName) throws Exception {
+    Node targetNode = null;
+
     // check if node is symlink
-    if (linkManager.isLink(node)) return;
-    // remove favorite
-    Node userFavoriteNode = getUserFavoriteFolder(userName);
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (linkManager.isLink(childNode)) {
-        Node targetNode = null;
-        try {
-          targetNode = linkManager.getTarget(childNode);
-        } catch (Exception e) { }
-        if (node.isSame(targetNode)) {
-          childNode.remove();
-          userFavoriteNode.getSession().save();
-          return;
+    if (linkManager.isLink(node)) {
+      try {
+        targetNode = linkManager.getTarget(node);
+      } catch (Exception e) { }
+      if (targetNode != null) removeFavorite(targetNode, userName);
+    } else {
+      // remove favorite
+      Node userFavoriteNode = getUserFavoriteFolder(userName);
+      NodeIterator nodeIter = userFavoriteNode.getNodes();
+      while (nodeIter.hasNext()) {
+        Node childNode = nodeIter.nextNode();
+        if (linkManager.isLink(childNode)) {
+          try {
+            targetNode = linkManager.getTarget(childNode);
+          } catch (Exception e) { }
+          if (node.isSame(targetNode)) {
+            childNode.remove();
+            userFavoriteNode.getSession().save();
+            return;
+          }
         }
       }
     }
