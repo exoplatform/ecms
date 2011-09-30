@@ -77,7 +77,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
       if (!currentNode.hasProperty("exo:title")) {
-    	  currentNode.setProperty("exo:title", Text.unescapeIllegalJcrChars(currentNode.getName())); 
+    	  currentNode.setProperty("exo:title", Text.unescapeIllegalJcrChars(currentNode.getName()));
       }
     }
     if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")
@@ -89,7 +89,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     String nodePath = currentNode.getPath();
     currentNode = (Node)session.getItem(nodePath);
     currentNode.getSession().save();
-    
+
 
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
       currentNode = (Node)session.getItem(nodePath);
@@ -104,8 +104,13 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       }
     }
 
-    String siteName = Util.getPortalRequestContext().getPortalOwner();
-    String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    String siteName = null, remoteUser = null;
+    try {
+     siteName = Util.getPortalRequestContext().getPortalOwner();
+     remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    } catch (NullPointerException npe) {
+      if (log.isDebugEnabled()) log.debug("No portal context available");
+    }
     if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }
