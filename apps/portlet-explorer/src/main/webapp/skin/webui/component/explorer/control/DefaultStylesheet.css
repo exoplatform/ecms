@@ -60,7 +60,7 @@
 }
 
 .UIJCRExplorerPortlet .SetupPreferencesButton {
-  width: 24px;	
+  width: 24px;
   height: 28px;
   background: url('DefaultSkin/icons/IconSetupPreferences.gif') no-repeat bottom;
   float: right; /* orientation=lt */
@@ -70,7 +70,7 @@
 }
 
 .UIJCRExplorerPortlet .URLBackToButton {
-  width: 24px;	
+  width: 24px;
   height: 24px;
   background: url('DefaultSkin/icons/backIcon.png') no-repeat bottom;
   float: right; /* orientation=lt */
@@ -80,7 +80,7 @@
 }
 
 .UIJCRExplorerPortlet .SaveSessionButton {
-  width: 24px;	
+  width: 24px;
   height: 24px;
   background: url('DefaultSkin/icons/SaveSession.gif') no-repeat bottom;
   float: right; /* orientation=lt */
@@ -90,7 +90,7 @@
 }
 
 .UIJCRExplorerPortlet .RefreshSessionButton  {
-  width: 24px;	
+  width: 24px;
   height: 24px;
   background: url('DefaultSkin/icons/RefreshSessionButton.gif') no-repeat bottom;
 }
@@ -150,7 +150,7 @@
   float: right; /* orientation=rt */
   height: 16px;
 }
- 
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BlockMiddle {
   height: 20px; line-height: 20px;
   background: white;
@@ -189,7 +189,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BlockMiddle4 {
-  height: 20px; 
+  height: 20px;
   line-height: 20px;
   background: white;
   border: solid 1px #d8d8d8;
@@ -294,7 +294,7 @@
   border-top: solid 1px #fdfdfd;
   border-bottom: solid 1px #b7b7b7;
   height: 30px;
-  background:url('DefaultSkin/icons/HeaderBg.jpg') repeat-x center bottom; 
+  background:url('DefaultSkin/icons/HeaderBg.jpg') repeat-x center bottom;
 }
 
 .UIJCRExplorerPortlet .UIActionBarAlone .TabsContainer {
@@ -333,10 +333,10 @@
 }
 
 /* <ECM-1543>
-	* minh.js.exo 
-	* add to manage group icon 
+	* minh.js.exo
+	* add to manage group icon
 	*/
-	
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBar .StoreBoxContentContainer {
   position: relative;
   float: right; /* orientation=lt */
@@ -479,9 +479,9 @@
 /*New Search Bar*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .TblAddressBar{
-	table-layout: fixed; 
-	width: 99%; 
-	_width: auto; 	
+	table-layout: fixed;
+	width: 99%;
+	_width: auto;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .Block .IconFileExplorer{
@@ -507,7 +507,7 @@
 	margin-left: 236px; /* orientation=rt */
 	line-height:22px;
 }
-	
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .View {
 	height: 22px;
 }
@@ -520,7 +520,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIcon {
-	background: url(DefaultSkin/background/MoreViewIcon.gif) no-repeat; 
+	background: url(DefaultSkin/background/MoreViewIcon.gif) no-repeat;
 	width: 12px;
 	height: 21px;
 }
@@ -530,7 +530,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIconSelected {
-	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat;
 	width: 12px;
 	height: 21px;
 }
@@ -542,9 +542,9 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .ListExtendedView {
-  position: absolute; 
-  background: #f7f7f7; 
-  border: 1px solid #b7b7b7; 
+  position: absolute;
+  background: #f7f7f7;
+  border: 1px solid #b7b7b7;
   padding: 5px;
 }
 
@@ -559,7 +559,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DefaultViewSelected {
-	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat;
 	display: block;
 }
 
@@ -570,7 +570,7 @@
 
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .icon-view-selected{
-	background: url(DefaultSkin/background/IconViewSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/IconViewSelected.gif) no-repeat;
 	display: block;
 }
 
@@ -587,12 +587,12 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .simple-view{
-	background: url(DefaultSkin/background/ThumbnailView.gif) no-repeat; 
+	background: url(DefaultSkin/background/ThumbnailView.gif) no-repeat;
 	display: block;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .simple-view-selected{
-	background: url(DefaultSkin/background/ThumbnailViewSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/ThumbnailViewSelected.gif) no-repeat;
 	display: block;
 }
 
@@ -607,31 +607,31 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .slide-show {
-	background: url(DefaultSkin/background/SlideShow.png) no-repeat; 
+	background: url(DefaultSkin/background/SlideShow.png) no-repeat;
 	display: block;
 }
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .slide-show-selected {
-	background: url(DefaultSkin/background/SlideShowSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/SlideShowSelected.gif) no-repeat;
 	display: block;
 }
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .timeline-view {
-	background: url(DefaultSkin/background/TimeLine.png) no-repeat; 
+	background: url(DefaultSkin/background/TimeLine.png) no-repeat;
 	display: block;
 }
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .timeline-view-selected{
-	background: url(DefaultSkin/background/TimeLineSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/TimeLineSelected.gif) no-repeat;
 	display: block;
 }
 
 
 .UIJCRExplorerPortlet .RefreshSessionButton  {
-  width: 24px;	
+  width: 24px;
   height: 24px;
   background: url('DefaultSkin/icons/RefreshSessionButton.gif') no-repeat bottom;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BackBtn {
-	background: url(DefaultSkin/background/BackBtn.jpg) no-repeat; 
+	background: url(DefaultSkin/background/BackBtn.jpg) no-repeat;
 	height: 22px;
 	width: 28px;
 	display: block;
@@ -682,7 +682,7 @@
 }
 
 .UIJCRExplorerPortlet .Right .Advance .SearchBtn {
-	background: url(DefaultSkin/background/SearchBtn.jpg) no-repeat; 
+	background: url(DefaultSkin/background/SearchBtn.jpg) no-repeat;
 	width: 18px;
 	height: 16px;
 	float: right; /* orientation=lt */
@@ -691,7 +691,7 @@
 	margin-right: 2px; /* orientation=lt */
 	margin-left: 2px; /* orientation=rt */
 }
-	
+
 .UIJCRExplorerPortlet  .UIActionBar  {
 	background: #b7b7b7;
 	height: 57px;
@@ -699,10 +699,11 @@
 
 .UIJCRExplorerPortlet  .UIActionBar .MenuItemContainer{
 	padding: 0px 10px;
-}	
+}
 
 .UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .TabsContainer {
 	height: auto;
+	border-bottom-width: 0px;
 }
 
 .UIJCRExplorerPortlet  .UIActionBar  .UITab {
@@ -754,7 +755,7 @@
 .UIJCRExplorerPortlet .UIActionBar .AddIcon{
 	background: url(DefaultSkin/background/AddNewBtn.jpg) no-repeat;
 	height: 18px;
-}	
+}
 
 .UIJCRExplorerPortlet .UIActionBar .DocumentIcon{
 	background: url(DefaultSkin/background/NewDocument.jpg) no-repeat;
@@ -814,7 +815,7 @@
 
 .UIViewBarContainer {
 	float: right; /* orientation=lt */
-	float: left; /* orientation=rt */	
+	float: left; /* orientation=rt */
 	width: 85px;
 }
 
@@ -825,7 +826,7 @@
 }
 
 .DMSMenuItemContainer {
-	display: block; 
+	display: block;
 	left: 0px;  /* orientation=lt */
 	right: 0px;  /* orientation=rt */
 }

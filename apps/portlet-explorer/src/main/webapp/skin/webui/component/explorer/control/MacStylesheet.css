@@ -60,7 +60,7 @@
 }
 
 .UIJCRExplorerPortlet .BackToMainDriveButton {
-	width: 24px;	
+	width: 24px;
 	height: 24px;
   background: url('MacSkin/icons/BackToMainDriveButton.gif') no-repeat center ;
   float: right; /* orientation=lt */
@@ -70,7 +70,7 @@
 }
 
 .UIJCRExplorerPortlet .SetupPreferencesButton {
-  width: 24px;	
+  width: 24px;
   height: 22px;
   background: url('MacSkin/icons/SetupPreferencesButton.gif') no-repeat center;
   float: right; /* orientation=lt */
@@ -181,7 +181,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BlockMiddle4 {
-  height: 19px; 
+  height: 19px;
   line-height: 19px;
 }
 
@@ -281,7 +281,7 @@
   border-top: solid 1px #fdfdfd;
   border-bottom: solid 1px #b7b7b7;
   height: 30px;
-  background:url('MacSkin/background/HeaderBg.jpg') repeat-x center bottom; 
+  background:url('MacSkin/background/HeaderBg.jpg') repeat-x center bottom;
 }
 
 .UIJCRExplorerPortlet .UIActionBarAlone .TabsContainer {
@@ -320,10 +320,10 @@
 }
 
 /* <ECM-1543>
-	* minh.js.exo 
-	* add to manage group icon 
+	* minh.js.exo
+	* add to manage group icon
 	*/
-	
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBar .StoreBoxContentContainer {
   position: relative;
   float: right; /* orientation=lt */
@@ -466,9 +466,9 @@
 /*New Search Bar*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .TblAddressBar{
-	table-layout: fixed; 
-	width: 99%; 
-	_width: auto; 
+	table-layout: fixed;
+	width: 99%;
+	_width: auto;
 	margin: 16px 10px 0px 10px;
 }
 
@@ -499,7 +499,7 @@
 	margin-left: 236px; /* orientation=rt */
 	line-height:22px;
 }
-	
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .View {
 	height: 22px;
 }
@@ -513,7 +513,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIcon {
-	background: url(MacSkin/icons/MoreViewIcon.gif) no-repeat; 
+	background: url(MacSkin/icons/MoreViewIcon.gif) no-repeat;
 	width: 13px;
 	height: 21px;
 	margin-left: 2px; /* orientation=lt */
@@ -526,7 +526,7 @@
 
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIconSelected {
-	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat;
 	width: 12px;
 	height: 21px;
 }
@@ -538,14 +538,14 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .ListExtendedView {
-  position: absolute; 
-  background: #f7f7f7; 
-  border: 1px solid #b7b7b7; 
+  position: absolute;
+  background: #f7f7f7;
+  border: 1px solid #b7b7b7;
   padding: 5px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DefaultView {
-	background: url(DefaultSkin/background/DefaultView.gif) no-repeat; 
+	background: url(DefaultSkin/background/DefaultView.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .Block .BackAndRefreshBlock {
@@ -555,16 +555,16 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DefaultViewSelected {
-	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .icon-view{
-	background: url(MacSkin/icons/IconView.gif) no-repeat; 
+	background: url(MacSkin/icons/IconView.gif) no-repeat;
 }
 
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .icon-view-selected{
-	background: url(MacSkin/icons/IconViewSelected.gif) no-repeat; 
+	background: url(MacSkin/icons/IconViewSelected.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view{
@@ -588,11 +588,11 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .cover-flow{
-	background: url(MacSkin/icons/CoverflowView.gif) no-repeat; 
+	background: url(MacSkin/icons/CoverflowView.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .cover-flow-selected{
-	background: url(MacSkin/icons/CoverflowViewSelected.gif) no-repeat; 
+	background: url(MacSkin/icons/CoverflowViewSelected.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BackBtn {
@@ -664,7 +664,7 @@
 }
 
 .UIJCRExplorerPortlet .Right .Advance .SearchBtn {
-	background: url(MacSkin/icons/SearchBtn.gif) no-repeat; 
+	background: url(MacSkin/icons/SearchBtn.gif) no-repeat;
 	width: 18px;
 	height: 16px;
 	float: right; /* orientation=lt */
@@ -673,7 +673,7 @@
 	margin-right: 2px; /* orientation=lt */
 	margin-left: 2px; /* orientation=rt */
 }
-	
+
 .UIJCRExplorerPortlet  .UIActionBar  {
 	background: #b7b7b7;
 	height: 57px;
@@ -681,10 +681,11 @@
 
 .UIJCRExplorerPortlet  .UIActionBar .MenuItemContainer{
 	padding: 0px 10px;
-}	
+}
 
 .UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .TabsContainer {
 	height: auto;
+  border-bottom-width: 0px;
 }
 
 .UIJCRExplorerPortlet  .UIActionBar  .UITab {
@@ -735,7 +736,7 @@
 .UIJCRExplorerPortlet .UIActionBar .AddIcon{
 	background: url(DefaultSkin/background/AddNewBtn.jpg) no-repeat;
 	height: 18px;
-}	
+}
 
 .UIJCRExplorerPortlet .UIActionBar .DocumentIcon{
 	background: url(DefaultSkin/background/NewDocument.jpg) no-repeat;
@@ -809,7 +810,7 @@
 }
 
 .DMSMenuItemContainer {
-	display: block; 
+	display: block;
 	left: 0px;
 }
 

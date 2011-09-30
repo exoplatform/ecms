@@ -63,7 +63,7 @@
 }
 
 .UIJCRExplorerPortlet .BackToMainDriveButton {
-	width: 24px;	
+	width: 24px;
 	height: 24px;
   background: url('VistaSkin/icons/BackToMainDriveButton.gif') no-repeat center ;
   float: right; /* orientation=lt */
@@ -73,7 +73,7 @@
 }
 
 .UIJCRExplorerPortlet .SetupPreferencesButton {
-  width: 24px;	
+  width: 24px;
   height: 24px;
   background: url('VistaSkin/icons/SetupPreferencesButton.gif') no-repeat center;
   float: right; /* orientation=lt */
@@ -261,7 +261,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BlockMiddle4 {
-  height: 20px; 
+  height: 20px;
   line-height: 20px;
   background: white;
   border: solid 1px #7c8084;
@@ -311,10 +311,10 @@
 }
 
 /* <ECM-1543>
-	* minh.js.exo 
-	* add to manage group icon 
+	* minh.js.exo
+	* add to manage group icon
 	*/
-	
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBar .StoreBoxContentContainer {
   position: relative;
   float: right; /* orientation=lt */
@@ -446,9 +446,9 @@
 /**************New skin**************/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .TblAddressBar{
-	table-layout: fixed; 
-	width: 99%; 
-	_width: auto; 
+	table-layout: fixed;
+	width: 99%;
+	_width: auto;
 	margin: 4px;
 }
 
@@ -482,7 +482,7 @@
 	margin-right: 236px; /* orientation=lt */
 	margin-left: 236px; /* orientation=rt */
 }
-	
+
 .UIJCRExplorerPortlet .View {
 	height: 22px;
 	float: left; /* orientation=lt */
@@ -505,7 +505,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIcon {
-	background: url(VistaSkin/background/MoreViewIcon.gif) no-repeat; 
+	background: url(VistaSkin/background/MoreViewIcon.gif) no-repeat;
 	width: 12px;
 	height: 21px;
 }
@@ -516,7 +516,7 @@
 
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIconSelected {
-	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/MoreViewIconSelected.gif) no-repeat;
 	width: 12px;
 	height: 21px;
 }
@@ -528,15 +528,15 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .ListExtendedView {
-  position: absolute; 
-  background: #f7f7f7; 
-  border: 1px solid #b7b7b7; 
+  position: absolute;
+  background: #f7f7f7;
+  border: 1px solid #b7b7b7;
   padding: 5px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DefaultView {
-	background: url(DefaultSkin/background/DefaultView.gif) no-repeat left center; /* orientation=lt */ 
-	background: url(DefaultSkin/background/DefaultView.gif) no-repeat right center; /* orientation=rt */ 
+	background: url(DefaultSkin/background/DefaultView.gif) no-repeat left center; /* orientation=lt */
+	background: url(DefaultSkin/background/DefaultView.gif) no-repeat right center; /* orientation=rt */
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .Block .BackAndRefreshBlock {
@@ -553,24 +553,24 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DefaultViewSelected {
-	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat; 
+	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .icon-view{
-	background: url(VistaSkin/icons/IconView.gif) no-repeat center; 
+	background: url(VistaSkin/icons/IconView.gif) no-repeat center;
 }
 
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .icon-view-selected{
-	background: url(VistaSkin/icons/IconViewSelected.gif) no-repeat center; 
+	background: url(VistaSkin/icons/IconViewSelected.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view{
-	background: url(VistaSkin/icons/DetailView.gif) no-repeat center; 
+	background: url(VistaSkin/icons/DetailView.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view-selected{
-	background: url(VistaSkin/icons/DetailViewSelected.gif) no-repeat center; 
+	background: url(VistaSkin/icons/DetailViewSelected.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .simple-view{
@@ -579,15 +579,15 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar  .simple-view-selected{
-	background: url(VistaSkin/icons/ThumbnailViewSelected.gif) no-repeat center; 
+	background: url(VistaSkin/icons/ThumbnailViewSelected.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .cover-flow{
-	background: url(VistaSkin/icons/CoverflowView.gif) no-repeat center; 
+	background: url(VistaSkin/icons/CoverflowView.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .cover-flow-selected{
-	background: url(VistaSkin/icons/CoverflowViewSelected.gif) no-repeat center; 
+	background: url(VistaSkin/icons/CoverflowViewSelected.gif) no-repeat center;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .BackBtn {
@@ -659,7 +659,7 @@
 }
 
 .UIJCRExplorerPortlet .Right .Advance .SearchBtn {
-	background: url(VistaSkin/icons/SearchBtn.gif) no-repeat; 
+	background: url(VistaSkin/icons/SearchBtn.gif) no-repeat;
 	width: 18px;
 	height: 16px;
 	float: right; /* orientation=lt */
@@ -678,13 +678,13 @@
 
 .UIJCRExplorerPortlet  .UIActionBar .MenuItemContainer{
 	padding: 0px 10px;
-}	
+}
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBarAlone {
   border-top: solid 1px #fdfdfd;
   border-bottom: solid 1px #b7b7b7;
   height: 30px;
-  background:url('VistaSkin/background/HeaderBg.gif') repeat-x center bottom; 
+  background:url('VistaSkin/background/HeaderBg.gif') repeat-x center bottom;
 }
 
 .UIJCRExplorerPortlet .UIActionBarAlone .TabsContainer {
@@ -694,6 +694,7 @@
 
 .UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .TabsContainer {
 	height: auto;
+	border-bottom-width: 0px;
 }
 
 .UIJCRExplorerPortlet  .UIActionBar  .UITab {
@@ -745,7 +746,7 @@
 .UIJCRExplorerPortlet .UIActionBar .AddIcon{
 	background: url(DefaultSkin/background/AddNewBtn.jpg) no-repeat;
 	height: 18px;
-}	
+}
 
 .UIJCRExplorerPortlet .UIActionBar .DocumentIcon{
 	background: url(DefaultSkin/background/NewDocument.jpg) no-repeat;
@@ -816,7 +817,7 @@
 }
 
 .DMSMenuItemContainer {
-	display: block; 
+	display: block;
 	left: 0px;
 }
 
