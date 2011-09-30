@@ -29,10 +29,10 @@
   def rcontext = _ctx.getRequestContext() ;
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadNodeTypeScroll()');
-  
+
 %>
 
-	    
+
 <div class="UINodeTypeInfo" id="UINodeTypeInfoPopup">
   <div class="UIHorizontalTabs">
   	<div class="LeftHorizontalTabs">
@@ -40,22 +40,22 @@
   			<div class="CenterHorizontalTabs">
 				  <div class="TabsContainer">
 				  <%
-				  String style="SelectedTab" ;              
+				  String style="SelectedTab" ;
 				  for(nodeType in collect) {
 				  %>
-			      <div class="UITab NormalTabStyle">
+			      <li class="UITab NormalTabStyle">
 			        <div class="$style">
 			          <div class="LeftTab">
 			            <div class="RightTab">
-	                  <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)">$nodeType.name</div>
+	                  <div class="MiddleTab" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">$nodeType.name</div>
 	                </div>
 			          </div>
 			        </div>
-			      </div>
+			      </li>
 				  <%
 				    style = "NormalTab" ;
 				  }
-				  %>              
+				  %>
 					  <div class="NavigationButtonContainer">
 		          <div title="Previous Tabs" class="NavigationIcon ScrollBackArrow16x16Icon">
 		            <div title="More Tabs" class="NavigationIcon ScrollNextArrow16x16Icon"><span></span></div>
@@ -146,8 +146,8 @@
 	              <%
 	                StringBuilder contraints = new StringBuilder() ;
 							    String[] contraintValues = bean.getValueConstraints() ;
-							    if(contraintValues != null && contraintValues.length > 0) {											    
-								    for(value in contraintValues) {											
+							    if(contraintValues != null && contraintValues.length > 0) {
+								    for(value in contraintValues) {
 								      if(value != null) {
 								        if(contraints.length() > 0) contraints.append(",") ;
 									      contraints.append(value) ;
@@ -206,7 +206,7 @@
 	</div>
   <div class="UIAction">
 		<%for(action in uicomponent.getActions()) {
-		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
 		String link = uicomponent.event(action) ;
 		%>
 		<a  onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
