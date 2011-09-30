@@ -126,7 +126,7 @@
             <string><![CDATA[
                     Dear $user_name,<br>
                     <br>
-                    The $doc_name ($doc_title) document that you are watching is changed.<br>
+                    The document $doc_name ($doc_title) has changed.<br>
                     <br>
                     Please go to <a href="$doc_url">$doc_title</a> to see this change.<br>
                     <br>
