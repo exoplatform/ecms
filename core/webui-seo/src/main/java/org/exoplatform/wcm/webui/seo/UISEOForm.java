@@ -24,6 +24,7 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -275,10 +276,9 @@ public class UISEOForm extends UIForm{
           	
           SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
           seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
-          UISEOToolbarPortlet uiSEOToolbar = uiForm.getAncestorOfType(UISEOToolbarPortlet.class);          
-          if(uiSEOToolbar != null) {            
-            Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);
-          }         
+          UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
+          if(uiSEOToolbar != null)
+            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);                 
         } catch (Exception ex) {   
           LOG.error("Unexpected error ", ex);
           uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
@@ -304,10 +304,9 @@ public class UISEOForm extends UIForm{
           }
           metaModel.setUri(contentNode.getUUID());
           seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
-          UISEOToolbarPortlet uiSEOToolbar = uiForm.getAncestorOfType(UISEOToolbarPortlet.class);          
-          if(uiSEOToolbar != null) {            
-            Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);
-          }          
+          UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
+          if(uiSEOToolbar != null)
+            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);                 
         } catch (Exception ex) {
           LOG.error("Unexpected error ", ex);
           uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
@@ -321,9 +320,9 @@ public class UISEOForm extends UIForm{
   public static class CancelActionListener extends EventListener<UISEOForm> {
     public void execute(Event<UISEOForm> event) throws Exception {
       UISEOForm uiSEO = event.getSource();
-      UISEOToolbarPortlet uiSEOToolbar = uiSEO.getAncestorOfType(UISEOToolbarPortlet.class);
+      UIPopupContainer uiSEOToolbar = uiSEO.getAncestorOfType(UIPopupContainer.class);
       if(uiSEOToolbar != null)
-        Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);      
+        uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);      
     }
   }
 }

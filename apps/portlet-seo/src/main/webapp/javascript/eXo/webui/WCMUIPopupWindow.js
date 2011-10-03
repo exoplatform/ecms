@@ -125,13 +125,17 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
     var pageWidth = 0;
     var wsElement = document.getElementById('UIWorkingWorkspace');
     if(wsElement) pageWidth = wsElement.clientWidth;
-    left = left - (screen.width - pageWidth);    
+    if(screen.width - pageWidth <= 325)
+    	left = left - (screen.width - pageWidth);  
+    else
+			 left = left - (screen.width - pageWidth)/2;
     popup.style.top = top + 10 + "px";
     var deltaX = screen.width-left;
-    if(deltaX < 400) {
-      left = left - (400 - deltaX) - 70;
+    if(deltaX < 325) {
+      left = left - (325 - deltaX) - 70;
 		}  
     popup.style.left = left + "px";
+    popup.style.position = "fixed";
   } else {
 	 	var offsetParent = popup.offsetParent ;
 	 	var scrollY = 0;
