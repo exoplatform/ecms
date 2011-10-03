@@ -58,7 +58,7 @@
 			  <div class="TopTitle" style="float:left; width:82%; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(currentNode.name) %>">
 			   <%=Text.unescapeIllegalJcrChars(currentNode.name) %>
 			  </div>
-        <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+        <div style="float:right;padding: 4px 10px;" onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>			  
         <div style="clear:both"></div>
