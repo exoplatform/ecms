@@ -1421,7 +1421,7 @@
     <msg>
       <name-null>The category name is empty.</name-null>
       <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>The category name must have less than '{0}' characters.</name-too-long>
+      <name-too-long>Category name must not have more than {0} characters.</name-too-long>
       <exist>The category name already exists.</exist>
     </msg>
 	</UITaxonomyTreeCreateChildForm>
