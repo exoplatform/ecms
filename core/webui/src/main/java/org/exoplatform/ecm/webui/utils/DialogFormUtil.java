@@ -30,11 +30,13 @@ import javax.jcr.PropertyType;
 
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
+import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -48,7 +50,6 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NullFieldValidator;
 import org.exoplatform.webui.form.validator.NumberFormatValidator;
 import org.exoplatform.webui.form.validator.StringLengthValidator;
-import org.exoplatform.wcm.webui.Utils;
 
 /*
  * Created by The eXo Platform SAS
@@ -290,11 +291,13 @@ public class DialogFormUtil {
       return NumberFormatValidator.class;
     } else if (validatorType.equals("empty")){
       return MandatoryValidator.class ;
-    }else if(validatorType.equals("null")) {
-        return NullFieldValidator.class;
-    }else if(validatorType.equals("datetime")) {
+    } else if(validatorType.equals("null")) {
+      return NullFieldValidator.class;
+    } else if(validatorType.equals("datetime")) {
       return DateTimeValidator.class;
-    }else if(validatorType.equals("cronExpressionValidator")) {
+    } else if(validatorType.equals("date")) {
+      return DateValidator.class;
+    } else if(validatorType.equals("cronExpressionValidator")) {
       return CronExpressionValidator.class;
     }else if(validatorType.equals("repeatCountValidator")) {
       return RepeatCountValidator.class;

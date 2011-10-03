@@ -60,7 +60,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.date")%></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldDate = ["jcrPath=/node/dc:elementSet/dc:date", "options=displaytime", "visible=true"] ; 
+		        String[] fieldDate = ["jcrPath=/node/dc:elementSet/dc:date", "options=displaytime", "visible=true", "validate=date"] ; 
 		        uicomponent.addCalendarField("date", fieldDate) ;
 		      %>
 		    </td>
