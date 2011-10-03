@@ -434,7 +434,7 @@ public class UICLVPresentation extends UIContainer {
     } else {
       param += node.getPath();
     }
-    
+    param = Text.escape(param);
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
     nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
