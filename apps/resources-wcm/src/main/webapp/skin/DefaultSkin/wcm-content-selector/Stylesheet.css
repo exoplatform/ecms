@@ -709,3 +709,12 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.UIOneTaxonomySelector .Explorer .ExplorerTree .InnerExplorerTree .ScrollArea {
+  overflow-x:auto;
+}
+
+.UIOneTaxonomySelector .UITreeList{
+	margin-left:240px;
+	margin-right:-230px;
+	overflow:auto;
+}
