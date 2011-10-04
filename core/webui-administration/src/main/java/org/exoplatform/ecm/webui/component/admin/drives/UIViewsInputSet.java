@@ -19,9 +19,8 @@ package org.exoplatform.ecm.webui.component.admin.drives;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.MissingResourceException;
 
-import org.exoplatform.ecm.webui.component.admin.views.UIViewList.ViewBean;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
@@ -78,9 +77,18 @@ public class UIViewsInputSet extends UIFormInputSet {
   
   static public class ViewComparator implements Comparator<ViewConfig> {
     public int compare(ViewConfig v1, ViewConfig v2) throws ClassCastException {
-      WebuiRequestContext webReqContext = WebuiRequestContext.getCurrentInstance();      
-      String displayName1 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v1.getName());
-      String displayName2 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v2.getName());
+      WebuiRequestContext webReqContext = WebuiRequestContext.getCurrentInstance();
+      String displayName1, displayName2;
+      try {
+        displayName1 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v1.getName());  
+      } catch(MissingResourceException mre) {
+        displayName1 = v1.getName();
+      }
+      try {
+        displayName2 = webReqContext.getApplicationResourceBundle().getString("UIDriveForm.label." + v2.getName());
+      } catch(MissingResourceException mre) {
+        displayName2 = v2.getName();
+      }
       return displayName1.compareToIgnoreCase(displayName2);
     }
   }
