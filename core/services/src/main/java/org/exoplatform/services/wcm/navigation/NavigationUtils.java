@@ -31,6 +31,7 @@ import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
@@ -43,6 +44,17 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
+  
+  private static ThreadLocal<Boolean> gotNavigationKeeper = new ThreadLocal<Boolean>();
+  
+  public static boolean gotNavigation() { 
+    Boolean gotNavigation = gotNavigationKeeper.get();
+    return gotNavigation == null ? false : gotNavigation.booleanValue();
+  }
+  
+  public static void setGotNavigation(boolean value) {
+    gotNavigationKeeper.set(value);
+  }
   
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
 
@@ -62,6 +74,8 @@ public class NavigationUtils {
     UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
     UserNode root = userPortal.getNode(navigation, ECMS_NAVIGATION_SCOPE, filterConfig, null);
 
+    //set gotNavigation=true
+    setGotNavigation(true);
     return createJsonTree(navigation, root);
   }
   
