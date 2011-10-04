@@ -18,10 +18,14 @@ package org.exoplatform.services.wcm.publication.listener.post;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.webdav.WebDavService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -34,6 +38,8 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
   /** The pservice. */
   private WCMPublicationService publicationService;
 
+  private final static Log      LOG = ExoLogger.getLogger(PostWebDavUploadEventListener.class);
+
   public PostWebDavUploadEventListener(WCMPublicationService publicationService) {
     this.publicationService = publicationService;
   }
@@ -42,16 +48,26 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<WebDavService, Node> event) throws Exception {
-    Node currentNode = event.getData();    
-    if( currentNode.isNodeType("exo:cssFile") ||
-        currentNode.isNodeType("exo:template") ||
-        currentNode.isNodeType("exo:jsFile") ||
-        currentNode.isNodeType("exo:action") ){
-      return;
-    }    
-    publicationService.updateLifecyleOnChangeContent(currentNode, 
-                                                     "", 
-                                                     currentNode.getSession().getUserID());
+    Node currentNode = null;
+
+    try {
+      currentNode = event.getData();
+      LinkManager linkMng = WCMCoreUtils.getService(LinkManager.class);
+      if (linkMng.isLink(currentNode)) {
+        currentNode = linkMng.getTarget(currentNode);
+      }
+
+      if (currentNode == null || currentNode.isNodeType("exo:cssFile")
+          || currentNode.isNodeType("exo:template") || currentNode.isNodeType("exo:jsFile")
+          || currentNode.isNodeType("exo:action")) {
+        return;
+      }
+
+      publicationService.updateLifecyleOnChangeContent(currentNode, "", currentNode.getSession()
+                                                                                   .getUserID());
+    } catch (Exception ex) {
+      LOG.error("An expected exception has occured: ", ex);
+    }
   }
 
 }
