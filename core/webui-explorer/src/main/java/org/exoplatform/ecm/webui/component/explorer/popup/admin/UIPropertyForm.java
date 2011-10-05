@@ -48,8 +48,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -502,6 +502,14 @@ public class UIPropertyForm extends UIForm {
       boolean isMultiple = false;
       if(currentNode.isNodeType(Utils.NT_UNSTRUCTURED)){
         int type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue());
+        if (PropertyType.BOOLEAN == type) {
+          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setValue(FALSE);
+          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(false);
+          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(false);
+        } else {
+          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(true);
+          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(true);
+        }
           uiForm.removeChildById(FIELD_VALUE);
           isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
           if(isMultiple) {
@@ -519,6 +527,14 @@ public class UIPropertyForm extends UIForm {
           if (property.getName().equals(uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue())){
             isMultiple = property.isMultiple();
               int type = property.getRequiredType();
+              if (PropertyType.BOOLEAN == type) {
+                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setValue(FALSE);
+                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(false);
+                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(false);
+              } else {
+                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(true);
+                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(true);
+              }              
               uiForm.removeChildById(FIELD_VALUE);
               if(isMultiple) {
                     UIFormMultiValueInputSet uiFormMultiValue = 
