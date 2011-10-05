@@ -58,10 +58,6 @@ public class XSkinService implements Startable {
                                                            + "and jcr:mixinTypes <> 'exo:restoreLocation' "
                                                            + "order by exo:priority ASC".intern();
 
-  private static String           WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
-                                                           + "and exo:active='true' "
-                                                           + "order by exo:priority ASC".intern();
-
   /** The Constant SKIN_PATH_REGEXP. */
   public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/(.*)/(.*)/(.*).css".intern();
 
@@ -98,9 +94,9 @@ public class XSkinService implements Startable {
    * @param repositoryService the repository service
    * @throws Exception the exception
    */
-  public XSkinService() throws Exception {
+  public XSkinService(LivePortalManagerService livePortalService) throws Exception {
     this.skinService = WCMCoreUtils.getService(SkinService.class);
-    this.skinService.addResourceResolver(new WCMSkinResourceResolver(this.skinService));
+    this.skinService.addResourceResolver(new WCMSkinResourceResolver(this.skinService, livePortalService));
     this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     this.schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     this.servletContext = WCMCoreUtils.getService(ServletContext.class);
@@ -115,36 +111,7 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   public String getActiveStylesheet(Node webcontent) throws Exception {
-    StringBuffer buffer = new StringBuffer();
-    String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
-    // Need re-login to get session because this node is get from template and the session is not live anymore.
-    // If node is version (which is stored in system workspace) we have to login to system workspace to get data
-    NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
-    Session session = null;
-    try {
-      if (webcontentLocation.getPath().startsWith("/jcr:system"))
-        session = repository.getSystemSession(repository.getConfiguration().getSystemWorkspaceName());
-      else {
-        session = repository.getSystemSession(webcontentLocation.getWorkspace());
-      }
-
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(cssQuery, Query.SQL);
-      QueryResult queryResult = query.execute();
-      NodeIterator iterator = queryResult.getNodes();
-      while (iterator.hasNext()) {
-        Node registeredCSSFile = iterator.nextNode();
-        buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                       .getProperty(NodetypeConstant.JCR_DATA)
-                                       .getString());
-      }
-    } catch(Exception e) {
-      log.error("Unexpected problem happen when active stylesheet", e);
-    } finally {
-      if(session != null) session.logout();
-    }
-    return buffer.toString();
+    return WCMCoreUtils.getActiveStylesheet(webcontent);
   }
 
   /**

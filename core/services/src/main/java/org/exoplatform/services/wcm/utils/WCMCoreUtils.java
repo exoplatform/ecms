@@ -24,6 +24,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -40,6 +48,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.quartz.JobExecutionContext;
 
 /**
@@ -51,6 +61,11 @@ import org.quartz.JobExecutionContext;
 public class WCMCoreUtils {
 
   private static Log log = ExoLogger.getLogger("wcm.WCMCoreUtils");
+  
+  private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
+                                                + "and exo:active='true' "
+                                                + "order by exo:priority ASC".intern();
+
   
   /**
    * Gets the service.
@@ -252,5 +267,37 @@ public class WCMCoreUtils {
       throw new RuntimeException("Missing product information.");
     }
     return productInformationProperties.getProperty("project.current.version");
+  }
+  
+  public static String getActiveStylesheet(Node webcontent) throws Exception {
+    StringBuffer buffer = new StringBuffer();
+    String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
+    // Need re-login to get session because this node is get from template and the session is not live anymore.
+    // If node is version (which is stored in system workspace) we have to login to system workspace to get data
+    NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
+    ManageableRepository repository = getRepository();
+    Session session = null;
+    try {
+      if (webcontentLocation.getPath().startsWith("/jcr:system"))
+        session = 
+          WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getSystemWorkspaceName(), repository);
+      else {
+        session = WCMCoreUtils.getSystemSessionProvider().getSession(webcontentLocation.getWorkspace(), repository);
+      }
+
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(cssQuery, Query.SQL);
+      QueryResult queryResult = query.execute();
+      NodeIterator iterator = queryResult.getNodes();
+      while (iterator.hasNext()) {
+        Node registeredCSSFile = iterator.nextNode();
+        buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                       .getProperty(NodetypeConstant.JCR_DATA)
+                                       .getString());
+      }
+    } catch(Exception e) {
+      log.error("Unexpected problem happen when active stylesheet", e);
+    } 
+    return buffer.toString();
   }
 }

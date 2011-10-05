@@ -19,10 +19,16 @@ package org.exoplatform.services.wcm.skin;
 import java.io.Reader;
 import java.io.StringReader;
 
+import javax.jcr.Node;
+
 import org.exoplatform.portal.resource.Resource;
 import org.exoplatform.portal.resource.ResourceResolver;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -32,9 +38,14 @@ import org.exoplatform.portal.resource.SkinService;
  */
 public class WCMSkinResourceResolver implements ResourceResolver {
   private SkinService skinService;
-
-  public WCMSkinResourceResolver(SkinService skinService) {
+  private LivePortalManagerService livePortalService;
+  
+  /** The log. */
+  private static Log              log                  = ExoLogger.getLogger("wcm:WCMSkinResourceResolver");
+  
+  public WCMSkinResourceResolver(SkinService skinService, LivePortalManagerService livePortalService) {
     this.skinService = skinService;
+    this.livePortalService = livePortalService;
   }
 
   public Resource resolve(String path) {
@@ -57,13 +68,20 @@ public class WCMSkinResourceResolver implements ResourceResolver {
         }
       }
     }
-    final String cssData = skinService.getMergedCSS(cssPath);
-    if(cssData == null)
-      return null;
-    return new Resource(cssPath) {
-      public Reader read() {
-        return new StringReader(cssData);
-      }
-    };
+    try {
+      Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);  
+      final String cssData = WCMCoreUtils.getActiveStylesheet(portalNode);
+      if(cssData == null)
+        return null;
+      return new Resource(cssPath) {
+        public Reader read() {
+          return new StringReader(cssData);
+        }
+      };
+    } catch(Exception e) {
+      log.error("Unexpected error happens", e);
+    }
+    return null;
   }
+
 }
