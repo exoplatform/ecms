@@ -22,6 +22,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -104,12 +105,12 @@ public class UISEOToolbarForm extends UIForm {
 			fullStatus = "Empty";
 			paramsArray = null;
 	    String contentParam = null;
-	      Enumeration params = pcontext.getRequest().getParameterNames();   
+	      Enumeration params = pcontext.getRequest().getParameterNames(); 	      
 	      if(params.hasMoreElements()) {
 	        paramsArray = new ArrayList<String>();
 	        while(params.hasMoreElements()) {
 	          contentParam = params.nextElement().toString(); 
-	          paramsArray.add(pcontext.getRequestParameter(contentParam));          
+	          paramsArray.add(Text.unescape(pcontext.getRequestParameter(contentParam)));          
 	        }
 	      } 
 		}    
