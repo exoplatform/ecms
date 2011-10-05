@@ -8,19 +8,6 @@
   String[] arrLabel = ["fileName", "nodeName", "fileSize", "mimeType", "manageMetadata"];
 %>
 <div class="$uicomponent.id">
-	<div class="GridTitleBar">
-		<table>
-			<tr>
-				<td>
-				  <div class="GridTitleLeftBar">
-				    <div class="GridTitleRightBar">
-				      <div class="GridTitleMiddleBar"><%=_ctx.appRes("UIUploadContent.title.uploaded-file")%></div>
-				    </div>
-				  </div>
-				</td>
-			</tr>
-		</table>
-	</div>
 	<table class="UIGrid" cellspacing="0" borderspacing="0" style="width: 99%;">
 	  <col width="40px;"><col><col><col><col>
 	  <thead>
