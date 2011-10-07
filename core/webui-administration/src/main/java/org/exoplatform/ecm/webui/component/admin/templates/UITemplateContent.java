@@ -139,9 +139,8 @@ public class UITemplateContent extends UIForm implements UISelectable {
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(true) ;
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
         setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
-      }
-      String content = Utils.encodeHTML(templateContent)  ;
-      getUIFormTextAreaInput(FIELD_CONTENT).setValue(content) ;
+      }      
+      getUIFormTextAreaInput(FIELD_CONTENT).setValue(templateContent) ;
       getUIStringInput(FIELD_NAME).setValue(template.getName()) ;
       getUIStringInput(FIELD_NAME).setEditable(false) ;
       getUIStringInput(FIELD_VIEWPERMISSION).setValue(templateRole) ;

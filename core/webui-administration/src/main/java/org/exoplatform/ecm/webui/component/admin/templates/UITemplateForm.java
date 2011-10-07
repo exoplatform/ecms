@@ -131,17 +131,17 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
 
   private String getDefaultStyleSheet(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildStyleSheet(nodeType));
+    return templateService.buildStyleSheet(nodeType);
   }
 
   private String getDefaultView(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildViewForm(nodeType));
+    return templateService.buildViewForm(nodeType);
   }
 
   private String getDefaultDialog(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildDialogForm(nodeType));
+    return templateService.buildDialogForm(nodeType);
   }
 
   static public class TemplateNameComparator implements Comparator {
