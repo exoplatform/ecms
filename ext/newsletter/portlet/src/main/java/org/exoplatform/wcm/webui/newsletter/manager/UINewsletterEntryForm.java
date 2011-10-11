@@ -148,7 +148,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
                                                               selectedSubsctiption));
 
     // Prepare node: use title as a node name
-    Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(getChildren(), getInputProperties());
+    Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(getChildren(), getInputProperties(), getInputOptions());
     if(isAddNew()){
       String nodeName = Utils.cleanString(getUIStringInput("title").getValue());
       inputProperties.get("/node").setValue(nodeName);

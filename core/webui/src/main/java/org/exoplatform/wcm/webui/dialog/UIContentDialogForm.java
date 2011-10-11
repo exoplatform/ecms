@@ -396,7 +396,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           return;
         }
         Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs,
-                                                                                  contentDialogForm.getInputProperties());
+                                                                                  contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         if (canAccessParentNode(webContentNode)) {
           cmsService.storeNode(contentDialogForm.contentType,
@@ -536,7 +536,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           return;
         }
         Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs,
-                                                                                  contentDialogForm.getInputProperties());
+                                                                                  contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         cmsService.storeNode(contentDialogForm.contentType,
                              contentDialogForm.getNode().getParent(),

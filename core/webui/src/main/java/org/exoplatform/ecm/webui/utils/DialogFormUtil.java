@@ -65,6 +65,7 @@ public class DialogFormUtil {
   public static String VALIDATOR_PARAM_BEGIN      ="(";
   public static String VALIDATOR_PARAM_END        =")";
   public static String VALIDATOR_PARAM_SEPERATOR  =";";
+  public static String SANITIZATION_FLAG          ="noSanitization";
 
   /** Type of parameters which were passed for the validator
    * TODO: Please add all the possible type here and parser it in side the
@@ -85,6 +86,10 @@ public class DialogFormUtil {
    */
   @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties) throws Exception {
+  	return prepareMap(inputs, properties, null);
+  }
+  @SuppressWarnings("unchecked")
+  public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties, Map options) throws Exception {
     Map<String, JcrInputProperty> rawinputs = new HashMap<String, JcrInputProperty>();
     HashMap<String, JcrInputProperty> hasMap = new HashMap<String, JcrInputProperty>() ;
     String inputName = null;
@@ -94,6 +99,7 @@ public class DialogFormUtil {
     Map<String, JcrInputProperty> mimeTypes = new HashMap<String, JcrInputProperty>();
     for (int i = 0; i < inputs.size(); i++) {
       JcrInputProperty property = null;
+      String option = null;
       if(inputs.get(i) instanceof UIFormMultiValueInputSet) {
         inputName = ((UIFormMultiValueInputSet)inputs.get(i)).getName() ;
         if(!hasMap.containsKey(inputName)) {
@@ -107,6 +113,7 @@ public class DialogFormUtil {
       } else {
         UIFormInputBase input = (UIFormInputBase) inputs.get(i);
         property = (JcrInputProperty) properties.get(input.getName());
+        if(options != null && options.get(input.getName()) != null) option = (String)options.get(input.getName());        
         if(property != null) {
           if (input instanceof UIFormUploadInput) {
             UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
@@ -136,7 +143,7 @@ public class DialogFormUtil {
           	  String inputValue = input.getValue().toString().trim();
           	  boolean isEmpty = Utils.isEmptyContent(inputValue);
           	  if(isEmpty) inputValue = "";
-          	  else inputValue = Utils.sanitize(inputValue);
+          	  else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = Utils.sanitize(inputValue);
           	  property.setValue(inputValue);
           	} else {
           		property.setValue(input.getValue());

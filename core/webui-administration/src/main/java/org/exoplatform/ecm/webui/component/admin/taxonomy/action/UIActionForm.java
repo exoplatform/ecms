@@ -342,7 +342,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
 
       Node currentNode = taxonomyService.getTaxonomyTree(name, true);
       Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(uiActionForm
-          .getChildren(), uiActionForm.getInputProperties());
+          .getChildren(), uiActionForm.getInputProperties(), uiActionForm.getInputOptions());
       ActionServiceContainer actionServiceContainer = uiActionForm.getApplicationComponent(ActionServiceContainer.class);
 
       //Check existend action of node

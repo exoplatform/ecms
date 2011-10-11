@@ -141,6 +141,7 @@ public class UIDialogForm extends UIForm {
   protected boolean isShowingComponent;
   protected boolean isUpdateSelect;
   protected Map<String, JcrInputProperty> properties = new HashMap<String, JcrInputProperty>();
+  protected Map<String, String> options = new HashMap<String, String>();
   protected String repositoryName;
   protected JCRResourceResolver resourceResolver;
   private String childPath;
@@ -785,6 +786,8 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String option = formTextAreaField.getOptions();
+    setInputOption(name, option);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
@@ -1025,6 +1028,8 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String option = formTextField.getOptions();
+    setInputOption(name, option);
     String propertyName = getPropertyName(jcrPath);
     if(mixintype != null) inputProperty.setMixintype(mixintype);
     if(jcrPath.equals("/node") && nodetype != null ) inputProperty.setNodetype(nodetype);
@@ -1240,6 +1245,8 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String option = formUploadField.getOptions();
+    setInputOption(name, option);
     setMultiPart(true);
     if(formUploadField.isMultiValues()) {
       UIFormMultiValueInputSet multiValueField = renderMultiValuesInput(UIFormUploadInput.class,name,label);
@@ -1272,6 +1279,8 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String option = formWYSIWYGField.getOptions();
+    setInputOption(name, option);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
@@ -1422,6 +1431,8 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String option = richtextField.getOptions();
+    setInputOption(name, option);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
@@ -1463,8 +1474,11 @@ public class UIDialogForm extends UIForm {
   public String getContentType() { return contentType; };
 
   public Map<String, JcrInputProperty> getInputProperties() { return properties; }
+  
+  public Map<String, String> getInputOptions() { return options; }
 
   public JcrInputProperty getInputProperty(String name) { return properties.get(name); }
+  public String getInputOption(String name) { return options.get(name); }
   public JCRResourceResolver getJCRResourceResolver() { return resourceResolver; }
 
   public Node getNode() throws Exception {
@@ -1648,6 +1662,8 @@ public class UIDialogForm extends UIForm {
   public void setContentType(String type) { this.contentType = type; }
 
   public void setInputProperty(String name, JcrInputProperty value) { properties.put(name, value); }
+  
+  public void setInputOption(String name, String value) { options.put(name, value); }
 
   public void setIsNotEditNode(boolean isNotEditNode) { this.isNotEditNode = isNotEditNode; }
 
@@ -1709,7 +1725,7 @@ public class UIDialogForm extends UIForm {
   private boolean executePreSaveEventInterceptor() throws Exception {
     if (!prevScriptInterceptor.isEmpty()) {
       Map<String, JcrInputProperty> maps = DialogFormUtil.prepareMap(this.getChildren(),
-          getInputProperties());
+          getInputProperties(), getInputOptions());
       for (String interceptor : prevScriptInterceptor) {
         if(!executeScript(interceptor, maps, null, false)){
           return false;

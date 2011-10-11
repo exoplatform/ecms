@@ -383,7 +383,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         }
       }
     }
-    Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties());
+    Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties(), documentForm.getInputOptions());
     Node newNode = null;
     String nodeType;
     Node homeNode;

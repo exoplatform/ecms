@@ -223,7 +223,7 @@
 									if(htmlContent == null || htmlContent.equals("")) {
 										htmlContent = "<div class=\"DropCap\">T</div>ype the text here <div style=\"clear: left; height: 20px;\"><span></span></div>";
 									}
-									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px'", htmlContent];
+									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px',noSanitization", htmlContent];
 			    					uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 			      				%>
 								</td>
@@ -272,7 +272,7 @@
 										if (webContentNode != null && webContentNode.hasProperty("exo:summary")) 
 											summaryContent = webContentNode.getProperty("exo:summary").getValue().getString();
 									}
-									String[] fieldSummary = ["jcrPath=/node/exo:summary", "editable=if-null", summaryContent] ;
+									String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=noSanitization", "editable=if-null", summaryContent] ;
 									uicomponent.addRichtextField("exo:summary", fieldSummary) ;
 								%>
 								</td>
@@ -340,7 +340,7 @@
 											jsContent = jsNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
 										} 
 									} 
-									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", jsContent];
+									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
 								</td>

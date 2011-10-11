@@ -244,7 +244,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);
       String repository = actionForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(actionForm.getChildren(),
-                                                                             actionForm.getInputProperties());
+                                                                             actionForm.getInputProperties(), actionForm.getInputOptions());
 
       addInputInfo(sortedInputs, actionForm);
 

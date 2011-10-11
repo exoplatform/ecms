@@ -185,7 +185,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
       }
       if (node.hasNode(Utils.EXO_IMAGE)) {
         Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(),
-                                                        uiForm.getInputProperties());
+                                                        uiForm.getInputProperties(), uiForm.getInputOptions());
         try {
           multiLanguageService.addLanguage(node,
                                            inputProperties,
@@ -201,7 +201,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
         }
       } else if (uiForm.hasNodeTypeNTResource(node)) {
         Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(),
-                                                        uiForm.getInputProperties());
+                                                        uiForm.getInputProperties(), uiForm.getInputOptions());
         try {
           multiLanguageService.addFileLanguage(node,
                                                uiForm.getSelectedLanguage(),
@@ -215,7 +215,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           return;
         }
       } else if (node.isNodeType(Utils.NT_FOLDER) || node.isNodeType(Utils.NT_UNSTRUCTURED)) {
-        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties);
+        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties, uiForm.options);
         try {
           multiLanguageService.addFolderLanguage(node,
                                                  map,
@@ -231,7 +231,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           return;
         }
       } else {
-        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties);
+        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties, uiForm.options);
         try {
           multiLanguageService.addLanguage(node,
                                            map,

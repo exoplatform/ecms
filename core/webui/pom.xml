@@ -67,6 +67,11 @@
       <version>${org.exoplatform.commons.version}</version>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+  	  <groupId>org.owasp</groupId>
+	  <artifactId>antisamy</artifactId>
+	  <version>${org.owasp.antisamy.version}</version>
+	</dependency> 
   </dependencies>
   <build>
     <resources>

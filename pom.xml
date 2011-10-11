@@ -100,7 +100,8 @@
     <!-- ************** -->
     <exo.product.name>exo-wcm</exo.product.name>
     <exo.product.specification>2.0</exo.product.specification>
-
+    <org.owasp.antisamy.version>1.4</org.owasp.antisamy.version>
+		<org.apache.batik.version>1.7</org.apache.batik.version>
     <!-- exopackage -->
     <org.exoplatform.exopackage.version>1.1.4</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
@@ -284,7 +285,6 @@
         <artifactId>mockito-all</artifactId>
         <version>${mockito.version}</version>
       </dependency>
-     
     </dependencies>
   </dependencyManagement>
   <build>

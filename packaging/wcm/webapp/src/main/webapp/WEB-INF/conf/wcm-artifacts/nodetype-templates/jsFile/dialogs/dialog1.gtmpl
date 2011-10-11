@@ -78,7 +78,7 @@
                   uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                                                       
                   } 
                 }else {                           
-                String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
+                String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
                 uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                
               }
             %>      

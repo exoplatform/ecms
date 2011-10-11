@@ -305,7 +305,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           }
         }
       }
-      Map inputProperties = DialogFormUtil.prepareMap(inputs, uiForm.getInputProperties()) ;
+      Map inputProperties = DialogFormUtil.prepareMap(inputs, uiForm.getInputProperties(), uiForm.getInputOptions()) ;
       Node homeNode = uiForm.getNode().getParent() ;
       try {
         CmsService cmsService = uiForm.getApplicationComponent(CmsService.class) ;

@@ -357,7 +357,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         }
       }
       Map inputProperties = DialogFormUtil.prepareMap(fastContentCreatorForm.getChildren(),
-                                                      fastContentCreatorForm.getInputProperties());
+                                                      fastContentCreatorForm.getInputProperties(), fastContentCreatorForm.getInputOptions());
       Node homeNode = null;
       Node newNode = null ;
       try {

@@ -64,7 +64,7 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%
-  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,'height:410px'", ""] ;
+  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,'height:410px',noSanitization", ""] ;
   						uicomponent.addRichtextField("content", fieldContent) ;
 			      %>
 					</div>
