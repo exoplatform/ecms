@@ -68,7 +68,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIPresentationContainer extends UIContainer{
   public final static String PARAMETER_REGX       = "(.*)/(.*)";
-	
+
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;
   private String contentParameter = null;
@@ -106,25 +106,27 @@ public class UIPresentationContainer extends UIContainer{
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-
     String title = null;
     if (node.hasProperty("exo:title")) {
-      title = node.getProperty("exo:title").getValue().getString();
+      title = node.getProperty("exo:title").getValue().getString().trim();
     }
-    if (node.hasNode("jcr:content")) {
-      Node content = node.getNode("jcr:content");
-      if (content.hasProperty("dc:title")) {
-        try {
-          title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch (Exception e) {
-          title = null;
+    if (title == null || title.equals("")) {
+      if (node.hasNode("jcr:content")) {
+        Node content = node.getNode("jcr:content");
+        if (content.hasProperty("dc:title")) {
+          try {
+            title = content.getProperty("dc:title").getValues()[0].getString().trim();
+          } catch (Exception e) {
+          }
         }
       }
     }
-    if (title==null) title = node.getName();
-
+    if (title == null || title.equals("")) {
+      title = Utils.getRealNode(node).getName();
+    }
     return Text.unescapeIllegalJcrChars(title);
   }
+
   public boolean isPrinting() {
     return this.isPrint;
   }
@@ -208,7 +210,7 @@ public class UIPresentationContainer extends UIContainer{
     String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
     String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
     String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
-    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;    
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
     viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false, sharedCache);
     if (viewNode!=null) {
         boolean isDocumentType = false;
@@ -249,7 +251,7 @@ public class UIPresentationContainer extends UIContainer{
     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
     String sharedCache = preferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "false");
     sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
-    
+
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
       contentParameter = getRequestParameters();
@@ -314,7 +316,7 @@ public class UIPresentationContainer extends UIContainer{
       if (path == null){
         return null;
       }
-      parameters = Text.unescape(Util.getPortalRequestContext().getRequestParameter(parameterName));      
+      parameters = Text.unescape(Util.getPortalRequestContext().getRequestParameter(parameterName));
       return parameters.substring(1);
     }
     return Text.unescape(parameters);
@@ -347,7 +349,7 @@ public class UIPresentationContainer extends UIContainer{
     String workspace = tempNode.getSession().getWorkspace().getName();
     String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
     printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
-    
+
     String paramName = "/" + repository + "/" + workspace + strPath;
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), printPageUrl);
@@ -408,7 +410,7 @@ public class UIPresentationContainer extends UIContainer{
   			.append("')");
   	return sb.toString();
   }
-  
+
 
   /**
    * The listener interface for receiving preferencesAction events.
@@ -429,7 +431,7 @@ public class UIPresentationContainer extends UIContainer{
       Utils.createPopupWindow(presentationContainer, pcvConfigForm, UISingleContentViewerPortlet.UIPreferencesPopupID, 600);
     }
   }
-  
+
   public static class FastPublishActionListener extends EventListener<UIPresentationContainer> {
 
     /*
@@ -447,16 +449,16 @@ public class UIPresentationContainer extends UIContainer{
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
       HashMap<String, String> context = new HashMap<String, String>();
-      
+
       publicationService.changeState(node, "published", context);
     }
 
   }
-  
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
-    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, 
-                                                        inputType, idGenerator, cssClass, isGenericProperty, arguments);  	  
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue,
+                                                        inputType, idGenerator, cssClass, isGenericProperty, arguments);
   }
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception{
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
