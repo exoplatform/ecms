@@ -654,12 +654,16 @@ public class Utils {
   public static String getRealNodePath(Node node) throws Exception {
     if (node.isNodeType("nt:frozenNode")) {
       Node realNode = getRealNode(node);
-      return realNode.getPath() + "?version=" + node.getParent().getName();
+      return Text.escape(realNode.getPath(),'%',true) + "?version=" + node.getParent().getName();
     }
-    return node.getPath();
+    return Text.escape(node.getPath(),'%',true);
   }
 
   public static String getWebdavURL(Node node) throws Exception {
+    return getWebdavURL(node, true);
+  }
+
+  public static String getWebdavURL(Node node, boolean withTimeParam) throws Exception {
     NodeLocation location = NodeLocation.getNodeLocationByNode(getRealNode(node));
     String repository = location.getRepository();
     String workspace = location.getWorkspace();
@@ -668,13 +672,15 @@ public class Utils {
 
     String originalNodePath = getRealNodePath(node);
     String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/"
-        + workspace + Text.escape(originalNodePath, '%', true);
-    if (imagePath.contains("?")) {
-      imagePath += "&time=";
-    } else {
-      imagePath += "?time=";
+        + workspace + originalNodePath;
+    if (withTimeParam) {
+      if (imagePath.contains("?")) {
+        imagePath += "&time=";
+      } else {
+        imagePath += "?time=";
+      }
+      imagePath += System.currentTimeMillis();
     }
-    imagePath += System.currentTimeMillis();
     return imagePath;
   }
 
