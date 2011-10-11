@@ -7,10 +7,12 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.wcm.webui.Utils;
+
 
 	UIComponent uiParent = uicomponent.getParent();
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
-  String repository = rService.getCurrentRepository().getConfiguration().getName();	
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
 
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -27,16 +29,14 @@
     }
     return currentNode ;
   }
-	
+
   def originalNode = uiParent.getOriginalNode();
   def currentNode = getFileLangNode(uiParent.getNode()) ;
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  def binarySrc = Utils.getWebdavURL(currentNode);
 
-  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + repository + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
-  
 %>
 
 <!-- ############################ FLASH ########################################## -->
 <embed width="610" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash"/>
-		

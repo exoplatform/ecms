@@ -8,9 +8,10 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;
   import java.util.Calendar;
-   
+  import org.exoplatform.wcm.webui.Utils;
+
   UIComponent uiParent = uicomponent.getParent();
-  
+
   def presentNodes = uicomponent.getPresentNodes();
   def links = new ArrayList<String>();
   def title = "";
@@ -21,18 +22,18 @@
     presentNodes.add(currentNode);
   }
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
-  String repository = rService.getCurrentRepository().getConfiguration().getName() ;  
+  String repository = rService.getCurrentRepository().getConfiguration().getName() ;
   def link = "";
   def url = "";
   for(nodedata in presentNodes) {
-    link = "/".concat(uicomponent.getPortalName()).concat("/").concat(Utils.getRestContextName(uicomponent.getPortalName())).concat("/jcr/").concat(repository).concat("/").concat(nodedata.getSession().getWorkspace().getName()).concat(nodedata.getPath());
+    link = Utils.getWebdavURL(nodedata, false);
     url = url.concat("\n {url: '").concat(link).concat("'},");
     links.add(link);
   }
   url = url.length() == 0 ? url : url.substring(0, url.length() - 1);
   def rqcontext = _ctx.getRequestContext();
   def size = links.size();
-  
+
   Calendar lCDateCalendar = Calendar.getInstance();
   def timeCreated = lCDateCalendar.getTimeInMillis();
 %>
@@ -47,40 +48,40 @@
 		%>
   	<div id="player-$timeCreated" class="PlayerContent" style="$style ; z-index:0;"></div>
     <script>
-    <% print "\$" %> (function() { 
-      // install flowplayer into container 
-    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, {  
-      // fullscreen button not needed here 
-        plugins: { 
-          controls: { 
+    <% print "\$" %> (function() {
+      // install flowplayer into container
+    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, {
+      // fullscreen button not needed here
+        plugins: {
+          controls: {
             url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
-            fullscreen: true,  
+            fullscreen: true,
             height: 30,
-            // setup auto hide 
+            // setup auto hide
             autoHide: 'always',
             playlist: true
-          } 
-        }, 
-     
+          }
+        },
+
         playlist: [ ${url} ],
-        canvas: { 
-          backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)' 
-        }, 
-        clip: { 
-            autoPlay: false,  
+        canvas: {
+          backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)'
+        },
+        clip: {
+            autoPlay: false,
             autoBuffering: true,
-            // optional: when playback starts close the first audio playback 
-            onBeforeBegin: function() { 
-              flowplayer("player-$timeCreated").close();  
-            } 
+            // optional: when playback starts close the first audio playback
+            onBeforeBegin: function() {
+              flowplayer("player-$timeCreated").close();
+            }
         }
       });
     /*
-      here comes the magic plugin. It uses first div.clips element as the 
+      here comes the magic plugin. It uses first div.clips element as the
       root for as playlist entries. loop parameter makes clips play
       from the beginning to the end.
     */
-    <% 
+    <%
       if (size > 1) {
     %>
         flowplayer("player-$timeCreated").playlist("div.petrol", {loop:true});
@@ -89,26 +90,26 @@
     %>
   });
   </script>
-  <% 
+  <%
     if (size > 1) {
   %>
   	<div class="clips petrol ListPlayer" style="width: 220px;">
   <!-- single playlist entry -->
-  <% 
+  <%
     def name = "";
     for(int i = 0; i < links.size(); i++) {
         link = links.get(i);
         name = presentNodes.get(i).getName();
- %>         
+ %>
       <a href="${link}" class="first">
         ${name}
       </a>
 <%
-  } 
+  }
  %>
 		</div>
 <%
-  } 
+  }
  %>
  </div>
 <style>
@@ -120,17 +121,17 @@
   margin: auto;
 }
 
- .TopTitle {  
+ .TopTitle {
   padding-left: 10px;
   height: 22px; line-height: 22px;
-  color: #058ee6; font-weight: bold; 
+  color: #058ee6; font-weight: bold;
 }
 
- .TextContent pre {  
+ .TextContent pre {
    white-space: normal;
  }
- 
- .ContentDetail {  
+
+ .ContentDetail {
    text-align: center;
    overflow: visible;
  }
@@ -206,7 +207,5 @@ div.clips.petrol a:hover {
 	width: 242px;
 	margin: 0 0 0 4px;
 }
- 
-</style>
 
-    
+</style>
