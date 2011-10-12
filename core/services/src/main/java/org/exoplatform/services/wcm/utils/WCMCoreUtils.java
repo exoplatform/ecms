@@ -64,6 +64,7 @@ public class WCMCoreUtils {
   
   private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
                                                 + "and exo:active='true' "
+                                                + "and jcr:mixinTypes <> 'exo:restoreLocation' "
                                                 + "order by exo:priority ASC".intern();
 
   
@@ -275,7 +276,7 @@ public class WCMCoreUtils {
     // Need re-login to get session because this node is get from template and the session is not live anymore.
     // If node is version (which is stored in system workspace) we have to login to system workspace to get data
     NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
-    ManageableRepository repository = getRepository();
+    ManageableRepository repository = (ManageableRepository)webcontent.getSession().getRepository();
     Session session = null;
     try {
       if (webcontentLocation.getPath().startsWith("/jcr:system"))

@@ -20,14 +20,25 @@ import java.io.Reader;
 import java.io.StringReader;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.resource.Resource;
 import org.exoplatform.portal.resource.ResourceResolver;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -42,6 +53,13 @@ public class WCMSkinResourceResolver implements ResourceResolver {
   
   /** The log. */
   private static Log              log                  = ExoLogger.getLogger("wcm:WCMSkinResourceResolver");
+  
+  /** The SHARE d_ cs s_ query. */
+  private static String           SHARED_CSS_QUERY     = "select * from exo:cssFile where jcr:path like '{path}/%' "
+                                                           + "and exo:active='true' and exo:sharedCSS='true' "
+                                                           + "and jcr:mixinTypes <> 'exo:restoreLocation' "
+                                                           + "order by exo:priority ASC".intern();
+  
   
   public WCMSkinResourceResolver(SkinService skinService, LivePortalManagerService livePortalService) {
     this.skinService = skinService;
@@ -83,5 +101,52 @@ public class WCMSkinResourceResolver implements ResourceResolver {
     }
     return null;
   }
+  
+  /**
+   * Merge the registered css and new css file
+   * 
+   * @param portalNode the portal
+   * @param newCSSFile new css file
+   * @param isStartup flag to decide whether this situation is startup or not
+   * @return the merged css data as result of registered css and new css
+   * @throws Exception the exception
+   */
+  private String mergeCSSData(Node portalNode) throws Exception {
+    StringBuffer buffer = new StringBuffer();
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
+    // Get all css by query
+    Node cssFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class)
+                                        .getCSSFolder(portalNode);
+    String statement = StringUtils.replaceOnce(SHARED_CSS_QUERY, "{path}", cssFolder.getPath());
+    try {
+      QueryManager queryManager = portalNode.getSession().getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(statement, Query.SQL);
+      QueryResult queryResult = query.execute();
+      NodeIterator iterator = queryResult.getNodes();
+      while (iterator.hasNext()) {
+        Node registeredCSSFile = iterator.nextNode();
+        buffer.append(getActivedCSSData(registeredCSSFile));
+      }
+      buffer.append(WCMCoreUtils.getActiveStylesheet(portalNode));
+    } catch(Exception e) {
+      log.error("Unexpected problem happen when merge CSS data", e);
+    }   
+    return buffer.toString();
+  }
+  
+  private String getActivedCSSData(Node cssFile) throws ValueFormatException,
+                                              RepositoryException,
+                                              PathNotFoundException {
+    if (!cssFile.isNodeType("exo:restoreLocation") && cssFile.hasNode(NodetypeConstant.JCR_CONTENT)
+        && cssFile.getNode(NodetypeConstant.JCR_CONTENT).hasProperty(NodetypeConstant.JCR_DATA)
+        && cssFile.hasProperty(NodetypeConstant.EXO_ACTIVE)
+        && cssFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean() == true) {
+
+      return cssFile.getNode(NodetypeConstant.JCR_CONTENT)
+                   .getProperty(NodetypeConstant.JCR_DATA)
+                   .getString();
+    }
+    return "";
+  }  
 
 }

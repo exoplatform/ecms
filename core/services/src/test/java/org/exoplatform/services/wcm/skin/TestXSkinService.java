@@ -21,6 +21,7 @@ import java.util.Date;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.servlet.ServletContext;
 
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -237,10 +238,10 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
       configService = getService(SkinService.class);
-      configService.addSkin("", "Default", "", "");
+      configService.addSkin(webcontent.getName(), "Default", "", "");
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
-      String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
+      String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
       assertEquals("This is the default.css file.This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
@@ -326,10 +327,10 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
       configService = getService(SkinService.class);
-      configService.addSkin("", "Default", "", "");
+      configService.removeSkin(portal.getName(), "Default");
       skinService.updatePortalSkinOnRemove(portal, cssNode);
       session.save();
-      String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
+      String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
       assertEquals("This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
@@ -347,39 +348,15 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node webcontent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, "Test XSkin Service.", null);
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
+      session.save();
       configService = getService(SkinService.class);
-      configService.addSkin(portal.getName(), "Default", "", "");
+      configService.invalidateCachedSkin("/portal/css/jcr/classic/Default/Stylesheet.css");
+      configService.addSkin(portal.getName(), "Default", "", (ServletContext)null);
       skinService.updatePortalSkinOnRemove(portal, cssNode);
       session.save();
 
-      String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
+      String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
       assertEquals("Test XSkin Service.This is the sharedJsFile.css file.", cssData);
-    } catch(Exception e) {
-      fail();
-    }
-  }
-
-  /**
-   * Test update portal Skin on remove_06.
-   * When node input have jcr:data is "Test XSkin Service" and shared node have priority = 1.
-   */
-  public void testUpdatePortalSkinOnRemove_06() {
-    try {
-      Node portal = findPortalNode(sessionProvider, documentNode);
-      SkinService configService = null;
-      Node webcontent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, "Test XSkin Service.", null);
-      Node cssNode = webcontent.getNode("css").getNode("default.css");
-      createSharedCssNode(sharedCssNode);
-      Node sharedNode = sharedCssNode.getNode("sharedJsFile.css");
-      sharedNode.setProperty("exo:priority", 1);
-      session.save();
-      configService = getService(SkinService.class);
-      configService.addSkin(portal.getName(), "Default", "", "");
-      skinService.updatePortalSkinOnRemove(portal, cssNode);
-      session.save();
-
-      String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
-      assertEquals("This is the sharedJsFile.css file.Test XSkin Service.", cssData);
     } catch(Exception e) {
       fail();
     }
@@ -396,16 +373,14 @@ public class TestXSkinService extends BaseWCMTestCase {
       String sharedPortalName = configurationService.getSharedPortalName(REPO_NAME);
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, sharedPortalName);
       SkinService configService = getService(SkinService.class);
-      configService.addSkin("", "Default", "", "");
-      Node webcontent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, "Test XSkin Service.", null);
-      Node cssNode = webcontent.getNode("css").getNode("default.css");
       Node sharedNode = (Node) session.getItem("/sites content/live/" + sharedPortalName + "/css");
       createSharedCssNode(sharedNode);
-      skinService.updatePortalSkinOnRemove(portal, cssNode);
+      configService.invalidateCachedSkin("/portal/css/jcr/" + sharedPortalName + "/Default/Stylesheet.css");
+      skinService.updatePortalSkinOnRemove(portal, null);
       session.save();
 
-      String cssData = configService.getMergedCSS("/portal/css/jcr/" + sharedPortalName + "/Default/Stylesheet.css");
-      assertEquals("Test XSkin Service.This is the sharedJsFile.css file.", cssData);
+      String cssData = configService.getCSS("/portal/css/jcr/" + sharedPortalName + "/Default/Stylesheet.css");
+      assertEquals("This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
     }
