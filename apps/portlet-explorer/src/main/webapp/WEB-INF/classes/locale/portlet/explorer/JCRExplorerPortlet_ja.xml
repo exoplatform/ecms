@@ -1982,6 +1982,7 @@
   <UIMultiLanguageForm>
     <label>
       <languages>言語</languages>
+      <default>デフォルト</default>
     </label>
     <action>
       <AddLanguage>追加</AddLanguage>

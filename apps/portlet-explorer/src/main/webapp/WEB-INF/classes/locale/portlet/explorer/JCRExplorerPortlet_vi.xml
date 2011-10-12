@@ -2005,6 +2005,7 @@
   <UIMultiLanguageForm>
     <label>
       <languages>Ngôn ngữ</languages>
+      <default>mặc định</default>
     </label>
     <action>
       <AddLanguage>Thêm</AddLanguage>

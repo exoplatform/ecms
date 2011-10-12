@@ -19,12 +19,15 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.upload.UISingleUploadForm;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.resources.LocaleConfig;
 import org.exoplatform.services.resources.LocaleConfigService;
@@ -74,6 +77,13 @@ public class UILanguageTypeForm extends UIForm {
   }
 
   public List<SelectItemOption<String>> languages() throws Exception {
+    
+    // Get default locale
+    Locale defaultLocale = Locale.getDefault();
+    
+    // set default locale to current user selected language
+    Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
+    
     LocaleConfigService localService = getApplicationComponent(LocaleConfigService.class) ;
     List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
     Iterator<LocaleConfig> iter = localService.getLocalConfigs().iterator() ;
@@ -83,6 +93,10 @@ public class UILanguageTypeForm extends UIForm {
       languages.add(new SelectItemOption<String>(localConfig.getLocale().getDisplayLanguage(),
                                                  localConfig.getLocale().getLanguage())) ;
     }
+    
+    // Set back to the default locale
+    Locale.setDefault(defaultLocale);
+    
     return languages ;
   }
 

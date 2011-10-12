@@ -1821,6 +1821,7 @@
   <UIMultiLanguageForm>
     <label>
       <languages>Sprache</languages>
+      <default>default</default>
     </label>
     <action>
       <AddLanguage><![CDATA[Hinzuf&uuml;gen]]></AddLanguage>

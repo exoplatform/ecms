@@ -2035,6 +2035,7 @@
 	<UIMultiLanguageForm>
 		<label>
 			<languages>Taal</languages>
+			<default>default</default>
 		</label>
 		<action>
 			<AddLanguage>Toevoegen</AddLanguage>

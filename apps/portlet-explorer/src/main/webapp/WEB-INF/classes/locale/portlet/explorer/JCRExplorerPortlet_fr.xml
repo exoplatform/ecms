@@ -2010,6 +2010,7 @@
   <UIMultiLanguageForm>
     <label>
       <languages>Langues</languages>
+      <default>défaut</default>
     </label>
     <action>
       <AddLanguage>#{word.add}</AddLanguage>

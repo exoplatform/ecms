@@ -23,23 +23,24 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
-import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.webui.utils.PermissionUtil;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -84,7 +85,12 @@ public class UIMultiLanguageForm extends UIForm {
         break;
       }
     }
-    languages.add(new SelectItemOption<String>(defaultLangName + "(default)", defaultLang)) ;
+    WebuiRequestContext webReqContext = WebuiRequestContext.getCurrentInstance();
+
+    languages.add(new SelectItemOption<String>(defaultLangName
+        + " ("
+        + webReqContext.getApplicationResourceBundle()
+                       .getString("UIMultiLanguageForm.label.default") + ")", defaultLang));
     if (currentNode.hasNode(Utils.LANGUAGES)){
       Node languageNode = currentNode.getNode(Utils.LANGUAGES) ;
       NodeIterator iter  = languageNode.getNodes() ;

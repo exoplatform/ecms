@@ -2006,6 +2006,7 @@
   <UIMultiLanguageForm>
     <label>
       <languages>Language</languages>
+      <default>default</default>
     </label>
     <action>
       <AddLanguage>Add</AddLanguage>
