@@ -136,7 +136,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories1</categories>
+        <categories>Categories</categories>
         <record-properties>Record Properties</record-properties>
         <process-properties>Process Properties</process-properties>
         <note>File Plan Note</note>
