@@ -205,7 +205,7 @@
     <dependency><groupId>org.exoplatform.ws</groupId><artifactId>exo.ws.frameworks.servlet</artifactId><version>${org.exoplatform.ws.version}</version><type>jar</type></dependency>
 	<dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>${c3p0.version}</version><type>jar</type></dependency><!-- 0.9.1.2-->
 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
-	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat6</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
 	<dependency><groupId>net.oauth</groupId><artifactId>core</artifactId><version>${net.oauth.version}</version><type>jar</type></dependency><!-- 20080621-->
 	<dependency><groupId>cglib</groupId><artifactId>cglib</artifactId><version>${cglib.version}</version><type>jar</type></dependency><!-- 2.2-->
 	<dependency><groupId>commons-pool</groupId><artifactId>commons-pool</artifactId><version>${commons-pool.version}</version><type>jar</type></dependency><!-- 1.2-->
