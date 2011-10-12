@@ -25,7 +25,7 @@
   def currentPageData = uicomponent.getCurrentPageData();
   def keyword = uicomponent.getKeyword();
   if (keyword != null)
-    keyword = Utils.sanitize(keyword);
+    keyword = Utils.sanitizeSearch(keyword);
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
