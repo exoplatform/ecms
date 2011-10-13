@@ -69,7 +69,9 @@
             uicomponent.renderUIComponent(fileComponent);
           } else {
         %>
+          <div style="text-align:center; font-style:italic">
 					  <%=_ctx.appRes("File.view.label.not-viewable")%>
+					</div>
     		<%}%>   	      		
 				</div>
 		</div>
