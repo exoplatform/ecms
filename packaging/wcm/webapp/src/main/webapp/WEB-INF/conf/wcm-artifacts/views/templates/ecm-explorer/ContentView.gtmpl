@@ -258,7 +258,7 @@
           String strActs = "<div class=\"RightClickCustomItem\" style=\"display: none;\">" ;
           if (permLinkComponent != null) {
             permlink = permLinkComponent.getUIExtensionName();
-            strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\">" ;
+            strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" ;
             strActs +=  " <div class='MenuURLIcon ${permlink}16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
             strActs +=  " </div>";

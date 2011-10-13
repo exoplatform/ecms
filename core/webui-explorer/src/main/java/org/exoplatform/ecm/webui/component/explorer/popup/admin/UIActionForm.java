@@ -222,8 +222,6 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       String rssUrlKey = "/node/exo:url";
       if (input.get(rssUrlKey) == null) return;
       UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);
-      //repo
-      String repository = uiExplorer.getRepositoryName();
       //drive name
       UITreeExplorer treeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
       String driveName = treeExplorer.getDriveName();
@@ -232,7 +230,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
       NavigationResource resource = new NavigationResource(Util.getUIPortal().getSelectedUserNode());
       nodeURL.setResource(resource);
-      nodeURL.setQueryParameterValue("path", repository + "/" + driveName);
+      nodeURL.setQueryParameterValue("path", driveName);
       
       input.get(rssUrlKey).setValue(nodeURL.toString());
     }

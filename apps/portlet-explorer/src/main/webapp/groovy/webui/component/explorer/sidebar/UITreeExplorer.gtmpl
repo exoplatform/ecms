@@ -85,7 +85,7 @@
         //Begin permlink
   	    def permLinkComponent =  uicomponent.getWorkingArea().getPermlink(node);
         if (permLinkComponent != null) {
-            strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(node) + "\" target='_new' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\">";
+            strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(node) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">";
             strActs +=  " <div class='MenuURLIcon " + permLinkComponent.getUIExtensionName() + "16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permLinkComponent.getUIExtensionName());
             strActs +=  " </div>";
