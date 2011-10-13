@@ -146,8 +146,8 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     }
   }
 
-  public Node getNode() throws RepositoryException { 
-    return NodeLocation.getNodeByLocation(node_); 
+  public Node getNode() throws RepositoryException {
+    return NodeLocation.getNodeByLocation(node_);
   }
 
   public Node getOriginalNode() throws Exception {
@@ -212,7 +212,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     }
     return attachments;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -270,7 +270,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) { 
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
       node = NodeLocation.getNodeByLocation(originalNode_);
     }
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
@@ -351,26 +351,12 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     return Utils.encodeHTML(text) ;
   }
 
-  private Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.getNodes().getSize() > 0) {
-      NodeIterator nodeIter = currentNode.getNodes() ;
-      while(nodeIter.hasNext()) {
-        Node ntFile = nodeIter.nextNode() ;
-        if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
-          return ntFile ;
-        }
-      }
-      return currentNode ;
-    }
-    return currentNode ;
-  }
-
   static public class ChangeLanguageActionListener extends EventListener<UIViewVersion>{
     public void execute(Event<UIViewVersion> event) throws Exception {
       UIViewVersion uiViewVersion = event.getSource() ;
       UIApplication uiApp = uiViewVersion.getAncestorOfType(UIApplication.class) ;
       uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ;
-      
+
       return ;
     }
   }
@@ -378,7 +364,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   static  public class DownloadActionListener extends EventListener<UIViewVersion> {
     public void execute(Event<UIViewVersion> event) throws Exception {
       UIViewVersion uiComp = event.getSource() ;
-      String downloadLink = uiComp.getDownloadLink(uiComp.getFileLangNode(uiComp.getNode()));
+      String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
       event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + downloadLink + "');");
     }
   }
@@ -388,7 +374,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       UIViewVersion uiViewVersion =  event.getSource() ;
       UIApplication uiApp = uiViewVersion.getAncestorOfType(UIApplication.class) ;
       uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ;
-      
+
       return ;
     }
   }
@@ -419,9 +405,9 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
   }
 
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, 
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue,
       String inputType, String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
-    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType,
                                                                        idGenerator, cssClass, isGenericProperty, arguments);
   }
 

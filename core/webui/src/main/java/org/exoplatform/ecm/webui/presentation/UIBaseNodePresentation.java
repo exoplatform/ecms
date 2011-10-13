@@ -110,7 +110,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     }
     return attachments;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -153,14 +153,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getDownloadLink(javax.jcr.Node)
    */
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null;
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    dresource = new InputStreamDownloadResource(input, "image") ;
-    dresource.setDownloadName(node.getName()) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return org.exoplatform.wcm.webui.Utils.getDownloadLink(node);
   }
 
   /* (non-Javadoc)
@@ -421,25 +414,25 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public void setEnableVote(boolean value) {
     enableVote = value;
   }
-  
+
   /**
   * @param orgNode         Processed node
   * @param propertyName    which property used for editing
   * @param inputType       input type for editing: TEXT, TEXTAREA, WYSIWYG
   * @param cssClass        class name for CSS, should implement: cssClass, [cssClass]Title
   *                        Edit[cssClass] as relative css
-  *                        Should create the function: InlineEditor.presentationRequestChange[cssClass] 
+  *                        Should create the function: InlineEditor.presentationRequestChange[cssClass]
   *                        to request the rest-service
-  * @param isGenericProperty  set as true to use generic javascript function, other wise, must create 
+  * @param isGenericProperty  set as true to use generic javascript function, other wise, must create
   *                        the correctspond function InlineEditor.presentationRequestChange[cssClass]
   * @param arguments       Extra parameter for Input component (toolbar, width, height,.. for CKEditor/TextArea)
   * @return                String that can be put on groovy template
   * @throws                Exception
   * @author                vinh_nguyen
   */
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
-  	return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, 
+  	return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue,
   	                                                  inputType, idGenerator, cssClass, isGenericProperty, arguments);
   }
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {

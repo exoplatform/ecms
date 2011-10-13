@@ -231,13 +231,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   public String getLanguage() { return language_ ; }
 
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    InputStreamDownloadResource dresource ;
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    dresource = new InputStreamDownloadResource(input, "image") ;
-    dresource.setDownloadName(originalNode_.getName()) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return org.exoplatform.wcm.webui.Utils.getDownloadLink(node);
   }
 
   public String getImage(Node node) throws Exception {
@@ -286,7 +280,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
     }
     return attachments;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -436,20 +430,6 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
     return null;
   }
 
-  private Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.getNodes().getSize() > 0) {
-      NodeIterator nodeIter = currentNode.getNodes() ;
-      while(nodeIter.hasNext()) {
-        Node ntFile = nodeIter.nextNode() ;
-        if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
-          return ntFile ;
-        }
-      }
-      return currentNode ;
-    }
-    return currentNode ;
-  }
-
   static public class ChangeLanguageActionListener extends EventListener<UIDocumentDetail>{
     public void execute(Event<UIDocumentDetail> event) throws Exception {
       UIDocumentDetail uiDocument = event.getSource() ;
@@ -498,7 +478,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   static  public class DownloadActionListener extends EventListener<UIDocumentDetail> {
     public void execute(Event<UIDocumentDetail> event) throws Exception {
       UIDocumentDetail uiComp = event.getSource() ;
-      String downloadLink = uiComp.getDownloadLink(uiComp.getFileLangNode(uiComp.getNode()));
+      String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
       event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
     }
   }
@@ -517,10 +497,10 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   public void setEnableVote(boolean value) {
   }
 
-  public String getInlineEditingField(Node orgNode, String propertyName, 
-      String defaultValue, String inputType, String idGenerator, String cssClass, 
+  public String getInlineEditingField(Node orgNode, String propertyName,
+      String defaultValue, String inputType, String idGenerator, String cssClass,
       boolean isGenericProperty, String... arguments) throws Exception{
-    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType,
                                                                        idGenerator, cssClass, isGenericProperty, arguments);
   }
 

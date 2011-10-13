@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -33,6 +34,8 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
@@ -50,6 +53,7 @@ import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -86,8 +90,21 @@ public class Utils {
 
   /** The Quick edit attribute for HTTPSession */
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
+
   private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
+
   private static final String POLICY_FILE_LOCATION = "jar:/conf/portal/antisamy.xml";
+
+  private static final String JCR_CONTENT = "jcr:content";
+
+  private static final String JCR_DATA = "jcr:data";
+
+  private static final String JCR_MIMETYPE = "jcr:mimeType";
+
+  private static final String NT_FILE = "nt:file";
+
+  private static final String NT_UNSTRUCTURED = "nt:unstructured";
+
   private static ConfigurationManager cservice_ ;
   @Deprecated
   /**
@@ -804,11 +821,11 @@ public class Utils {
   	  AntiSamy as = new AntiSamy();
   	  CleanResults cr = as.scan(value, policy);
   	  value = cr.getCleanHTML();
-      return value;    
+      return value;
   	} catch(Exception ex) {
   		return value;
-  	}    
-  }  
+  	}
+  }
   public static String sanitizeSearch(String value) {
   	try {
   		value = sanitize(value);
@@ -907,5 +924,60 @@ public class Utils {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Get download link of a node which stored binary data
+   * @param node Node
+   * @return download link
+   * @throws Exception
+   */
+  public static String getDownloadLink(Node node) throws Exception {
+
+    if (!Utils.getRealNode(node).getPrimaryNodeType().getName().equals(NT_FILE)) return null;
+
+    // Get binary data from node
+    DownloadService dservice = WCMCoreUtils.getService(DownloadService.class);
+    Node jcrContentNode = node.getNode(JCR_CONTENT);
+    InputStream input = jcrContentNode.getProperty(JCR_DATA).getStream();
+
+    // Get mimeType of binary data
+    String mimeType = jcrContentNode.getProperty(JCR_MIMETYPE).getString() ;
+
+    // Make download stream
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType);
+
+    // Make extension part for file if it have not yet
+    DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
+    String ext = mimeTypeSolver.getExtension(mimeType) ;
+    String fileName = Utils.getRealNode(node).getName();
+    if(fileName.lastIndexOf("."+ext) < 0 && !mimeTypeSolver.getMimeType(fileName).equals(mimeType)){
+      fileName = fileName + "." +ext ;
+    }
+    dresource.setDownloadName(fileName) ;
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+  }
+
+  /**
+   * Get node nt:file if node support multi-language
+   *
+   * @param currentNode Current Node
+   * @return Node which has type nt:file
+   * @throws Exception
+   */
+  public static Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType(NT_UNSTRUCTURED)) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals(NT_FILE)) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
   }
 }

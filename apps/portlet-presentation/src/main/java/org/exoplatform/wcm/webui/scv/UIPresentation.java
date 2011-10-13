@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,31 +25,43 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
+import org.exoplatform.download.DownloadService;
+import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
+import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
@@ -59,10 +72,15 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  * Jun 9, 2008
  */
 @ComponentConfig(
-    lifecycle = Lifecycle.class
+    lifecycle = Lifecycle.class,
+    events = {
+      @EventConfig(listeners = UIPresentation.DownloadActionListener.class)
+  }
 )
 
 public class UIPresentation extends UIBaseNodePresentation {
+
+  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.wcm.webui.scv.UIPresentation");
 
   private NodeLocation originalNodeLocation;
 
@@ -154,12 +172,12 @@ public class UIPresentation extends UIBaseNodePresentation {
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(workspace);
   }
-  
+
   public ResourceResolver getTemplateResourceResolver() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(workspace);
-  }  
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()
@@ -213,7 +231,7 @@ public class UIPresentation extends UIBaseNodePresentation {
       }
       return null;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -243,9 +261,9 @@ public class UIPresentation extends UIBaseNodePresentation {
     String scvWith = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
         scvWith = UISingleContentViewerPortlet.DEFAULT_SHOW_SCV_WITH;
-    
+
     String param = "/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace();
-    
+
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
@@ -253,20 +271,20 @@ public class UIPresentation extends UIBaseNodePresentation {
     } else {
       param += node.getPath();
     }
-    
+
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
     nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
     String link = baseURI + nodeURL.toString();
-    
+
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
 
     return link;
   }
-  
+
   /**
-   * Gets the attachment nodes. 
+   * Gets the attachment nodes.
    * @param node the node that contains Attachment
    * @return the attachment Nodes
    * @throws Exception the exception
@@ -281,10 +299,27 @@ public class UIPresentation extends UIBaseNodePresentation {
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType = 
+      List<String> listCanCreateNodeType =
       	org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent, strRepository, templateService) ;
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }
     return attachments;
+  }
+
+  static public class DownloadActionListener extends EventListener<UIPresentation> {
+    public void execute(Event<UIPresentation> event) throws Exception {
+      UIPresentation uiComp = event.getSource();
+      UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
+      try {
+        String downloadLink = Utils.getDownloadLink(Utils.getFileLangNode(uiComp.getNode()));
+        event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
+      } catch(RepositoryException e) {
+         LOG.error("Repository cannot be found", e);
+        return ;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+    }
   }
 }

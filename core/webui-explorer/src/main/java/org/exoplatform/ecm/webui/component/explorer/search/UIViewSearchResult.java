@@ -135,7 +135,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     }
     return attachments;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -252,8 +252,8 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return false ;
   }
 
-  public void setNode(Node node) { 
-    node_ = NodeLocation.getNodeLocationByNode(node); 
+  public void setNode(Node node) {
+    node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
   public Node getNodeByUUID(String uuid) throws Exception{
@@ -352,14 +352,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     }
   }
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null;
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    dresource = new InputStreamDownloadResource(input, "image") ;
-    dresource.setDownloadName(node.getName()) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return org.exoplatform.wcm.webui.Utils.getDownloadLink(node);
   }
 
   public String encodeHTML(String text) throws Exception {
@@ -384,25 +377,10 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return null;
   }
 
-
-  private Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.getNodes().getSize() > 0) {
-      NodeIterator nodeIter = currentNode.getNodes() ;
-      while(nodeIter.hasNext()) {
-        Node ntFile = nodeIter.nextNode() ;
-        if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
-          return ntFile ;
-        }
-      }
-      return currentNode ;
-    }
-    return currentNode ;
-  }
-
   static  public class DownloadActionListener extends EventListener<UIViewSearchResult> {
     public void execute(Event<UIViewSearchResult> event) throws Exception {
       UIViewSearchResult uiComp = event.getSource() ;
-      String downloadLink = uiComp.getDownloadLink(uiComp.getFileLangNode(uiComp.getNode()));
+      String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
       event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + downloadLink + "');");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiComp.getParent()) ;
     }
@@ -438,8 +416,8 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   }
 
   @SuppressWarnings("unused")
-  public String getInlineEditingField(Node orgNode, String propertyName, 
-      String defaultValue, String inputType, String idGenerator, String cssClass, 
+  public String getInlineEditingField(Node orgNode, String propertyName,
+      String defaultValue, String inputType, String idGenerator, String cssClass,
       boolean isGenericProperty, String... arguments) throws Exception {
 	  if (orgNode.hasProperty(propertyName)) {
 	      return orgNode.getProperty(propertyName).getString();
@@ -452,6 +430,6 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     if (orgNode.hasProperty(propertyName)) {
         return orgNode.getProperty(propertyName).getString();
     }
-    return "";  
+    return "";
   }
 }

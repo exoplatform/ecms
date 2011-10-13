@@ -194,24 +194,24 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
 
-  public List<Node> getTodayNodes() throws Exception { 
-    return filterNodeList(NodeLocation.getNodeListByLocationList(todayNodes)); 
+  public List<Node> getTodayNodes() throws Exception {
+    return filterNodeList(NodeLocation.getNodeListByLocationList(todayNodes));
   }
 
-  public List<Node> getYesterdayNodes() throws Exception { 
-    return filterNodeList(NodeLocation.getNodeListByLocationList(yesterdayNodes)); 
+  public List<Node> getYesterdayNodes() throws Exception {
+    return filterNodeList(NodeLocation.getNodeListByLocationList(yesterdayNodes));
   }
 
-  public List<Node> getEarlierThisWeekNodes() throws Exception { 
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisWeekNodes)); 
+  public List<Node> getEarlierThisWeekNodes() throws Exception {
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisWeekNodes));
   }
 
-  public List<Node> getEarlierThisMonthNodes() throws Exception { 
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisMonthNodes)); 
+  public List<Node> getEarlierThisMonthNodes() throws Exception {
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisMonthNodes));
   }
 
-  public List<Node> getEarlierThisYearNodes() throws Exception { 
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisYearNodes)); 
+  public List<Node> getEarlierThisYearNodes() throws Exception {
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisYearNodes));
   }
 
   public void updateNodeLists() throws Exception {
@@ -361,19 +361,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    String mimeType = jcrContentNode.getProperty(Utils.JCR_MIMETYPE).getString() ;
-    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType) ;
-    DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
-    String ext = mimeTypeSolver.getExtension(mimeType) ;
-    String fileName = node.getName() ;
-    if(fileName.lastIndexOf("."+ext)<0){
-      fileName = fileName + "." +ext ;
-    }
-    dresource.setDownloadName(fileName) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return org.exoplatform.wcm.webui.Utils.getDownloadLink(node);
   }
 
   public String getImage(Node node) throws Exception {
@@ -499,7 +487,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     }
     return attachments;
   }
-  
+
   /**
    * use getViewableLink(Node attNode, Parameter[] params) instead
    * @param attNode
@@ -565,8 +553,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return 0;
   }
 
-  public void setNode(Node node) { 
-    currentNode_ = NodeLocation.getNodeLocationByNode(node); 
+  public void setNode(Node node) {
+    currentNode_ = NodeLocation.getNodeLocationByNode(node);
   }
 
   public boolean isRssLink() { return false ; }
@@ -611,7 +599,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     }
     return currentNode;
   }
-  
+
   public Node getCurrentNode() {
     return NodeLocation.getNodeByLocation(currentNode_);
   }
@@ -699,22 +687,6 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     UIActionBar uiActionBar = uiExplorer.findFirstComponentOfType(UIActionBar.class);
     UIComponent uicomponent = uiActionBar.getUIAction(COMMENT_COMPONENT);
     return (uicomponent != null ? uicomponent : this);
-  }
-
-  private Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.isNodeType(Utils.NT_UNSTRUCTURED)) {
-      if(currentNode.getNodes().getSize() > 0) {
-        NodeIterator nodeIter = currentNode.getNodes() ;
-        while(nodeIter.hasNext()) {
-          Node ntFile = nodeIter.nextNode() ;
-          if(ntFile.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
-            return ntFile ;
-          }
-        }
-        return currentNode ;
-      }
-    }
-    return currentNode ;
   }
 
   public boolean isEnableThumbnail() {
@@ -907,7 +879,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -949,7 +921,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
           }
           if (warningMSG != null) {
             uiApp.addMessage(new ApplicationMessage(warningMSG, null, ApplicationMessage.WARNING)) ;
-            
+
             return ;
           }
           uiExplorer.setDriveData(uicomp.getDrive(driveList, uiExplorer.getCurrentNode()));
@@ -957,21 +929,21 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiExplorer.updateAjax(event);
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1006,7 +978,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1028,7 +1000,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1050,7 +1022,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1064,13 +1036,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       UIDocumentInfo uiComp = event.getSource();
       UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
       try {
-        String downloadLink = uiComp.getDownloadLink(uiComp.getFileLangNode(uiComp.getNode()));
+        String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
         event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1111,13 +1083,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
             null,ApplicationMessage.WARNING));
-        
+
         return;
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1152,11 +1124,11 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         LOG.error("Access denied! No permission for modifying property " +
         Utils.EXO_FAVOURITER + " of node: " + node.getPath());
         uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-        
+
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
             ApplicationMessage.WARNING));
-        
+
         uiExplorer.updateAjax(event);
         return;
       } catch (ReferentialIntegrityException ref) {
@@ -1166,7 +1138,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
             .addMessage(new ApplicationMessage(
                 "UIPopupMenu.msg.remove-referentialIntegrityException", null,
                 ApplicationMessage.WARNING));
-        
+
         uiExplorer.updateAjax(event);
         return;
       } catch (ConstraintViolationException cons) {
@@ -1174,19 +1146,19 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiExplorer.refreshExplorer();
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
             null, ApplicationMessage.WARNING));
-        
+
         uiExplorer.updateAjax(event);
         return;
       } catch (LockException lockException) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
             ApplicationMessage.WARNING));
-        
+
         uiExplorer.updateAjax(event);
         return;
       } catch (Exception e) {
         LOG.error("an unexpected error occurs while removing the node", e);
         JCRExceptionManager.process(uiApp, e);
-        
+
         return;
       }
     }
@@ -1251,7 +1223,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -1304,13 +1276,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
   }
 
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, 
-      String inputType, String idGenerator, String cssClass, 
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue,
+      String inputType, String idGenerator, String cssClass,
       boolean isGenericProperty, String... arguments) throws Exception {
-		return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
+		return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType,
 		                                                                   idGenerator, cssClass, isGenericProperty, arguments);
 	}
-  
+
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }

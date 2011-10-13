@@ -137,19 +137,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
   }
 
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    Node jcrContentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getStream() ;
-    String mimeType = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_MIMETYPE).getString() ;
-    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType) ;
-    DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
-    String ext = mimeTypeSolver.getExtension(mimeType) ;
-    String fileName = node.getName() ;
-    if(fileName.lastIndexOf("."+ext)<0){
-      fileName = fileName + "." +ext ;
-    }
-    dresource.setDownloadName(fileName) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return Utils.getDownloadLink(node);
   }
 
   /* (non-Javadoc)
@@ -192,7 +180,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
     }
     return resourceResolver;
   }
-  
+
   /*
    * (non-Javadoc)
    * @see
@@ -211,7 +199,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
                                ApplicationMessage.ERROR);
     }
     return resourceResolver;
-  }  
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()
