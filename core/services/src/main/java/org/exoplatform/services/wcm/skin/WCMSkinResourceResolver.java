@@ -58,7 +58,7 @@ public class WCMSkinResourceResolver implements ResourceResolver {
   private static String           SHARED_CSS_QUERY     = "select * from exo:cssFile where jcr:path like '{path}/%' "
                                                            + "and exo:active='true' and exo:sharedCSS='true' "
                                                            + "and jcr:mixinTypes <> 'exo:restoreLocation' "
-                                                           + "order by exo:priority ASC".intern();
+                                                           + "order by exo:priority ASC";
   
   
   public WCMSkinResourceResolver(SkinService skinService, LivePortalManagerService livePortalService) {

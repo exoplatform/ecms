@@ -100,7 +100,7 @@ public class UIAddressBar extends UIForm {
   private String[]            arrView_                 = {};
   
   /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
-  private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support".intern();
+  private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support";
   final static private String FIELD_SIMPLE_SEARCH      = "simpleSearch";
   
   final static private  String ROOT_SQL_QUERY  = "select * from nt:base where " +

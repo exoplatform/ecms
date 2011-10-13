@@ -41,11 +41,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ManageViewPlugin extends BaseComponentPlugin {
 
-  private static String CB_PATH_TEMPLATE = "pathTemplate".intern() ;
-  private static String CB_QUERY_TEMPLATE = "queryTemplate".intern() ;
-  private static String CB_DETAIL_VIEW_TEMPLATE = "detailViewTemplate".intern() ;
-  private static String CB_SCRIPT_TEMPLATE = "scriptTemplate".intern() ;
-  private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate".intern() ;
+  private static String CB_PATH_TEMPLATE = "pathTemplate" ;
+  private static String CB_QUERY_TEMPLATE = "queryTemplate" ;
+  private static String CB_DETAIL_VIEW_TEMPLATE = "detailViewTemplate" ;
+  private static String CB_SCRIPT_TEMPLATE = "scriptTemplate" ;
+  private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;

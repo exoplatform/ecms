@@ -80,11 +80,11 @@ public class UIQueryConfig extends UIForm {
 
   final private String xpathDefault_ = "/jcr:root/Documents/Live//element(*, exo:article)";
   final private String sqlDefault_ = "select * from exo:article where jcr:path like '/Documents/Live%'";
-  final private static String NEW_QUERY = "New Query".intern();
-  final private static String EXISTING_QUERY = "Existing Query".intern();
-  final private static String PERSONAL_QUERY = "Personal Query".intern();
-  final private static String SHARED_QUERY = "Shared Query".intern();
-  final private static String EMPTYQUERY = "Query not found".intern();
+  final private static String NEW_QUERY = "New Query";
+  final private static String EXISTING_QUERY = "Existing Query";
+  final private static String PERSONAL_QUERY = "Personal Query";
+  final private static String SHARED_QUERY = "Shared Query";
+  final private static String EMPTYQUERY = "Query not found";
   protected boolean isEdit_ = false;
   private static final Log LOG  = ExoLogger.getLogger("browsecontent.UIQueryConfig");
   public UIQueryConfig() throws Exception {

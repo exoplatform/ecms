@@ -61,29 +61,29 @@ import org.exoplatform.webui.form.UIFormSelectBox;
     })
 public class UIPreferencesForm extends UIForm implements UIPopupComponent {
 
-  final static public String FIELD_ENABLESTRUCTURE  = "enableStructure".intern();
+  final static public String FIELD_ENABLESTRUCTURE  = "enableStructure";
 
-  final static public String FIELD_SHOWSIDEBAR      = "showSideBar".intern();
+  final static public String FIELD_SHOWSIDEBAR      = "showSideBar";
 
-  final static public String FIELD_SHOWNONDOCUMENT  = "showNonDocument".intern();
+  final static public String FIELD_SHOWNONDOCUMENT  = "showNonDocument";
 
-  final static public String FIELD_SHOWREFDOCUMENTS = "showRefDocuments".intern();
+  final static public String FIELD_SHOWREFDOCUMENTS = "showRefDocuments";
 
-  final static public String FIELD_SHOW_HIDDEN_NODE = "showHiddenNode".intern();
+  final static public String FIELD_SHOW_HIDDEN_NODE = "showHiddenNode";
 
-  final static public String FIELD_SHOW_ITEMS_BY_USER = "showItemsByUserInTimeline".intern();
+  final static public String FIELD_SHOW_ITEMS_BY_USER = "showItemsByUserInTimeline";
 
-  final static public String FIELD_ENABLE_DRAG_AND_DROP = "enableDragAndDrop".intern();
+  final static public String FIELD_ENABLE_DRAG_AND_DROP = "enableDragAndDrop";
 
-  final static public String FIELD_SHORTBY          = "sortBy".intern();
+  final static public String FIELD_SHORTBY          = "sortBy";
 
-  final static public String FIELD_ORDERBY          = "order".intern();
+  final static public String FIELD_ORDERBY          = "order";
 
-  final static public String FIELD_PROPERTY         = "property".intern();
+  final static public String FIELD_PROPERTY         = "property";
 
-  final static public String NODES_PER_PAGE         = "nodesPerPage".intern();
+  final static public String NODES_PER_PAGE         = "nodesPerPage";
 
-  final static public String FIELD_QUERY_TYPE       = "queryType".intern();
+  final static public String FIELD_QUERY_TYPE       = "queryType";
 
   private boolean advancePreferences = false;
 

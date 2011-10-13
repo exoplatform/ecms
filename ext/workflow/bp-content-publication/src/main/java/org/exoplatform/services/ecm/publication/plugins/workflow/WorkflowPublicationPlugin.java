@@ -52,46 +52,46 @@ import org.exoplatform.webui.form.UIForm;
  * Dec 17, 2008
  */
 public class WorkflowPublicationPlugin extends PublicationPlugin {
-  public static final String ENROLLED = "enrolled".intern();
-  public static final String PUBLISHED = "published".intern();
+  public static final String ENROLLED = "enrolled";
+  public static final String PUBLISHED = "published";
   public static final String CONTENT_VALIDATION = "content publishing";
   public static final String BACKUP = "backup";
   private static final Log LOG  = ExoLogger.getLogger(WorkflowPublicationPlugin.class);
 
-  public static final String PUBLICATION = "publication:publication".intern();
-  public static final String LIFECYCLE_NAME = "publication:lifecycleName".intern();
-  public static final String CURRENT_STATE = "publication:currentState".intern();
-  public static final String HISTORY = "publication:history".intern();
-  public static final String VALIDATOR = "publication:validator".intern();
-  public static final String PUBLICATION_BACKUP_PATH = "publication:backupPath".intern();
-  public static final String PUBLISH_MIXIN_TYPE = "exo:publishLocation".intern();
+  public static final String PUBLICATION = "publication:publication";
+  public static final String LIFECYCLE_NAME = "publication:lifecycleName";
+  public static final String CURRENT_STATE = "publication:currentState";
+  public static final String HISTORY = "publication:history";
+  public static final String VALIDATOR = "publication:validator";
+  public static final String PUBLICATION_BACKUP_PATH = "publication:backupPath";
+  public static final String PUBLISH_MIXIN_TYPE = "exo:publishLocation";
 
-  public static final String PENDING_MIXIN_TYPE = "exo:pendingLocation".intern();
+  public static final String PENDING_MIXIN_TYPE = "exo:pendingLocation";
 
-  public static final String BACKUP_MIXIN_TYPE = "exo:backupLocation".intern();
+  public static final String BACKUP_MIXIN_TYPE = "exo:backupLocation";
 
-  public static final String VALIDATOR_PUBLISHING = "exo:validator".intern();
+  public static final String VALIDATOR_PUBLISHING = "exo:validator";
 
-  public static final String DEST_WORKSPACE = "exo:publishWorkspace".intern();
+  public static final String DEST_WORKSPACE = "exo:publishWorkspace";
 
-  public static final String DESTPATH = "exo:publishPath".intern();
+  public static final String DESTPATH = "exo:publishPath";
 
-  public static final String PENDING_WORKSPACE = "exo:pendingWorkspace".intern();
+  public static final String PENDING_WORKSPACE = "exo:pendingWorkspace";
 
-  public static final String PENDING_PATH = "exo:pendingPath".intern();
+  public static final String PENDING_PATH = "exo:pendingPath";
 
-  public static final String BACUP_PATH = "exo:backupPath".intern();
+  public static final String BACUP_PATH = "exo:backupPath";
 
-  public static final String BACUP_WORKSPACE = "exo:backupWorkspace".intern();
+  public static final String BACUP_WORKSPACE = "exo:backupWorkspace";
 
-  public static final String BUSINESS_PROCESS = "publication:businessProcess".intern();
+  public static final String BUSINESS_PROCESS = "publication:businessProcess";
 
   public static final String POPUP_ID = "PopupComponent";
   public static final String POPUP_EDIT_ID = "PopupEditWorkflow";
 
-  public static final String MIXIN_TYPE = "publication:workflowPublication".intern();
+  public static final String MIXIN_TYPE = "publication:workflowPublication";
   public static final String MIXIN_MOVE = "exo:move";
-  public static final String IMG_PATH = "resources/images/".intern();
+  public static final String IMG_PATH = "resources/images/";
   public static final String WORKFLOW = "Workflow";
   protected static Log log;
 

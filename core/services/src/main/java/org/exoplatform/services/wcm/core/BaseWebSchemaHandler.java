@@ -34,10 +34,10 @@ import org.exoplatform.services.wcm.portal.LivePortalManagerService;
  */
 public abstract class BaseWebSchemaHandler extends BaseComponentPlugin implements WebSchemaHandler {
 
-  protected final String EXO_OWNABLE = "exo:owneable".intern();
-  protected final String NT_FOLDER = "nt:folder".intern();
-  protected final String NT_UNSTRUCTURED = "nt:unstructured".intern();
-  protected final String NT_FILE = "nt:file".intern() ;
+  protected final String EXO_OWNABLE = "exo:owneable";
+  protected final String NT_FOLDER = "nt:folder";
+  protected final String NT_UNSTRUCTURED = "nt:unstructured";
+  protected final String NT_FILE = "nt:file" ;
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.WebSchemaHandler#matchHandler(javax.jcr.Node)

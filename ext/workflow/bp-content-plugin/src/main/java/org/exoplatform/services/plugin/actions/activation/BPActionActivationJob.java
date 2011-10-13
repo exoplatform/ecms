@@ -33,7 +33,7 @@ import org.quartz.JobExecutionException;
  * Dec 30, 2008
  */
 public class BPActionActivationJob implements Job {
-  final private static String COUNTER_PROP = "exo:counter".intern() ;
+  final private static String COUNTER_PROP = "exo:counter" ;
   public void execute(JobExecutionContext context) throws JobExecutionException {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
     RepositoryService repositoryService =

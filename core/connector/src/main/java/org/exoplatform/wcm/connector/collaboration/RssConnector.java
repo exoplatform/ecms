@@ -66,25 +66,25 @@ import com.sun.syndication.io.SyndFeedOutput;
 public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /** The WORKSPACE. */
-  static private String WORKSPACE = "workspace".intern() ;
+  static private String WORKSPACE = "workspace" ;
 
   /** The REPOSITORY. */
-  static private String REPOSITORY = "repository".intern() ;
+  static private String REPOSITORY = "repository" ;
 
   /** The RS s_ version. */
-  static private String RSS_VERSION = "rss_2.0".intern() ;
+  static private String RSS_VERSION = "rss_2.0" ;
 
   /** The FEE d_ title. */
-  static private String FEED_TITLE = "exo:feedTitle".intern() ;
+  static private String FEED_TITLE = "exo:feedTitle" ;
 
   /** The DESCRIPTION. */
-  static private String DESCRIPTION = "exo:description".intern() ;
+  static private String DESCRIPTION = "exo:description" ;
 
   /** The TITLE. */
   static private String TITLE = "exo:title";
 
   /** The LINK. */
-  static private String LINK = "exo:link".intern() ;
+  static private String LINK = "exo:link" ;
 
   /** The SUMMARY. */
   static private String SUMMARY = "exo:summary";

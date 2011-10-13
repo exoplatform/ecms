@@ -50,13 +50,13 @@ import org.quartz.JobExecutionException;
 public class ExportContentJob implements Job {
   private static final Log log                  = ExoLogger.getLogger(ExportContentJob.class);
 
-  private static final String MIX_TARGET_PATH      = "mix:targetPath".intern();
+  private static final String MIX_TARGET_PATH      = "mix:targetPath";
 
-  private static final String MIX_TARGET_WORKSPACE = "mix:targetWorkspace".intern();
+  private static final String MIX_TARGET_WORKSPACE = "mix:targetWorkspace";
 
-  private static final String URL                  = "http://www.w3.org/2001/XMLSchema".intern();
+  private static final String URL                  = "http://www.w3.org/2001/XMLSchema";
 
-  private static final String START_TIME_PROPERTY  = "publication:startPublishedDate".intern();
+  private static final String START_TIME_PROPERTY  = "publication:startPublishedDate";
 
   private static String       fromState            = null;
 

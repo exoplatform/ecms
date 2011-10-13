@@ -40,10 +40,10 @@ import org.picocontainer.Startable;
 public class WCMPublicationServiceImpl implements WCMPublicationService, Startable {
 
   /** The Constant SIMPLE_LIFECYCLE_NAME. */
-  private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication".intern();
+  private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication";
 
   /** The Constant STATEVERSION_LIFECYCLE_NAME. */
-  public static final String STATEVERSION_LIFECYCLE_NAME = "States and versions based publication".intern();
+  public static final String STATEVERSION_LIFECYCLE_NAME = "States and versions based publication";
 
   /** The publication plugins. */
   private HashMap<String, WebpagePublicationPlugin> publicationPlugins =

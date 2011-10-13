@@ -47,9 +47,9 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
 )
 public class UIAllItemsPreferenceForm extends UIForm implements UIPopupComponent {
 
-  final static public String FIELD_SHOW_OWNED_BY_USER_DOC = "showOwnedByUser".intern();
-  final static public String FIELD_SHOW_FAVOURITES = "showFavourites".intern();
-  final static public String FIELD_SHOW_HIDDENS = "showHiddens".intern();
+  final static public String FIELD_SHOW_OWNED_BY_USER_DOC = "showOwnedByUser";
+  final static public String FIELD_SHOW_FAVOURITES = "showFavourites";
+  final static public String FIELD_SHOW_HIDDENS = "showHiddens";
 
   public UIAllItemsPreferenceForm() throws Exception {
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOW_OWNED_BY_USER_DOC,

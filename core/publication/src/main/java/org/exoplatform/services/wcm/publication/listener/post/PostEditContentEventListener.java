@@ -42,7 +42,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
     /** The pservice. */
   private WCMPublicationService publicationService;
   
-  public static final String POST_EDIT_CONTENT_EVENT = "PostEditContentEventListener.event.postEditContent".intern();
+  public static final String POST_EDIT_CONTENT_EVENT = "PostEditContentEventListener.event.postEditContent";
   /**
    * Instantiates a new post edit content event listener.
    *

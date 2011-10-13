@@ -57,41 +57,41 @@ import org.quartz.JobDataMap;
 
 abstract public class BaseActionPlugin implements ActionPlugin {
 
-  final static String JOB_NAME_PREFIX = "activate_".intern() ;
-  final static String PERIOD_JOB = "period".intern() ;
-  final static String CRON_JOB = "cron".intern() ;
+  final static String JOB_NAME_PREFIX = "activate_" ;
+  final static String PERIOD_JOB = "period" ;
+  final static String CRON_JOB = "cron" ;
 
-  final static String SCHEDULABLE_INFO_MIXIN = "exo:schedulableInfo".intern() ;
-  final static String SCHEDULED_INITIATOR = "exo:scheduledInitiator".intern() ;
-  final static String JOB_NAME_PROP = "exo:jobName".intern() ;
-  final static String JOB_GROUP_PROP = "exo:jobGroup".intern() ;
-  final static String JOB_DESCRIPTION_PROP = "exo:jobDescription".intern() ;
-  final static String JOB_CLASS_PROP = "exo:jobClass".intern() ;
-  final static String SCHEDULE_TYPE_PROP = "exo:scheduleType".intern() ;
-  final static String START_TIME_PROP = "exo:startTime".intern() ;
-  final static String END_TIME_PROP = "exo:endTime".intern() ;
-  final static String REPEAT_COUNT_PROP = "exo:repeatCount".intern() ;
-  final static String TIME_INTERVAL_PROP = "exo:timeInterval".intern() ;
-  final static String CRON_EXPRESSION_PROP = "exo:cronExpression".intern() ;
+  final static String SCHEDULABLE_INFO_MIXIN = "exo:schedulableInfo" ;
+  final static String SCHEDULED_INITIATOR = "exo:scheduledInitiator" ;
+  final static String JOB_NAME_PROP = "exo:jobName" ;
+  final static String JOB_GROUP_PROP = "exo:jobGroup" ;
+  final static String JOB_DESCRIPTION_PROP = "exo:jobDescription" ;
+  final static String JOB_CLASS_PROP = "exo:jobClass" ;
+  final static String SCHEDULE_TYPE_PROP = "exo:scheduleType" ;
+  final static String START_TIME_PROP = "exo:startTime" ;
+  final static String END_TIME_PROP = "exo:endTime" ;
+  final static String REPEAT_COUNT_PROP = "exo:repeatCount" ;
+  final static String TIME_INTERVAL_PROP = "exo:timeInterval" ;
+  final static String CRON_EXPRESSION_PROP = "exo:cronExpression" ;
 
-  final static String LIFECYCLE_PHASE_PROP = "exo:lifecyclePhase".intern() ;
-  final static String NODE_NAME_PROP = "exo:name".intern() ;
-  final static String COUNTER_PROP = "exo:counter".intern() ;
-  final static String EXO_ACTIONS = "exo:actions".intern();
-  final static String ACTION_STORAGE= "exo:actionStorage".intern();
+  final static String LIFECYCLE_PHASE_PROP = "exo:lifecyclePhase" ;
+  final static String NODE_NAME_PROP = "exo:name" ;
+  final static String COUNTER_PROP = "exo:counter" ;
+  final static String EXO_ACTIONS = "exo:actions";
+  final static String ACTION_STORAGE= "exo:actionStorage";
   final static long BUFFER_TIME = 500*1000 ;
 
-  final static String actionNameVar = "actionName".intern() ;
-  final static String srcRepository = "repository".intern() ;
-  final static String srcWorkspaceVar = "srcWorkspace".intern() ;
-  final static String initiatorVar = "initiator".intern() ;
-  final static String srcPathVar = "srcPath".intern() ;
-  final static String nodePath = "nodePath".intern() ;
-  final static String executableVar = "executable".intern() ;
+  final static String actionNameVar = "actionName" ;
+  final static String srcRepository = "repository" ;
+  final static String srcWorkspaceVar = "srcWorkspace" ;
+  final static String initiatorVar = "initiator" ;
+  final static String srcPathVar = "srcPath" ;
+  final static String nodePath = "nodePath" ;
+  final static String executableVar = "executable" ;
 
-  final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
-  final static String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
-  final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
+  final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes";
+  final static String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames";
+  final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES";
 
   protected Map<String, ECMEventListener> listeners_ = new HashMap<String, ECMEventListener>();
   private static final Log LOG  = ExoLogger.getLogger(BaseActionPlugin.class);

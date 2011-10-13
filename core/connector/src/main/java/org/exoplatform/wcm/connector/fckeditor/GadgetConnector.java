@@ -69,7 +69,7 @@ import org.w3c.dom.Element;
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
 
   /** The Constant FCK_RESOURCE_BUNDLE_FILE. */
-  public static final String         FCK_RESOURCE_BUNDLE_FILE      = "locale.services.fckeditor.FCKConnector".intern();
+  public static final String         FCK_RESOURCE_BUNDLE_FILE      = "locale.services.fckeditor.FCKConnector";
 
   /** The application registry service. */
   private ApplicationRegistryService applicationRegistryService;

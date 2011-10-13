@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -47,15 +48,15 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UISelectDocumentForm extends UIContainer {
 
-  private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator".intern();
+  private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator";
   
-  private final static String THUMBNAIL_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl".intern();
+  private final static String THUMBNAIL_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl";
   
-  private final static String LIST_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl".intern();
+  private final static String LIST_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl";
   
   private String uiComponentTemplate;
   
-  private Map<String, String> documentTemplates;
+  private Map<String, String> documentTemplates = new HashMap<String, String>();
   
   private String repository;
   

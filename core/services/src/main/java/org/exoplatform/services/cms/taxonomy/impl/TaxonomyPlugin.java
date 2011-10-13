@@ -81,9 +81,9 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
 
   private InitParams             params_;
 
-  final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
-  final static String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
-  final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
+  final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes";
+  final static String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames";
+  final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES";
 
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(TaxonomyPlugin.class);

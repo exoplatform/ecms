@@ -94,7 +94,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   private String currentAction = null;
 
 
-  private static final String EXO_ACTIONS = "exo:actions".intern();
+  private static final String EXO_ACTIONS = "exo:actions";
 
   public String getDriverName() {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);

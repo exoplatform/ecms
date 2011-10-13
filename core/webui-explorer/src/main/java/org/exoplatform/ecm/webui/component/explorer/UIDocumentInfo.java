@@ -145,9 +145,9 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 )
 public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
-  final private static String CONTENT_PAGE_ITERATOR_ID = "ContentPageIterator".intern();
+  final private static String CONTENT_PAGE_ITERATOR_ID = "ContentPageIterator";
 
-  final private static String COMMENT_COMPONENT = "Comment".intern();
+  final private static String COMMENT_COMPONENT = "Comment";
 
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIDocumentInfo");
 

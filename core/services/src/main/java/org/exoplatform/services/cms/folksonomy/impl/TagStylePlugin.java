@@ -38,9 +38,9 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 public class TagStylePlugin extends BaseComponentPlugin{
 
-  final private static String EXO_TAG_STYLE = "exo:tagStyle".intern() ;
-  final private static String TAG_RATE_PROP = "exo:styleRange".intern() ;
-  final private static String HTML_STYLE_PROP = "exo:htmlStyle".intern() ;
+  final private static String EXO_TAG_STYLE = "exo:tagStyle" ;
+  final private static String TAG_RATE_PROP = "exo:styleRange" ;
+  final private static String HTML_STYLE_PROP = "exo:htmlStyle" ;
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;

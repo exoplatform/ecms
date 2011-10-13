@@ -61,31 +61,31 @@ public class UISearchForm extends UIForm {
   private ResourceResolver   resourceResolver;
 
   /** The Constant KEYWORD_INPUT. */
-  public static final String KEYWORD_INPUT                   = "keywordInput".intern();
+  public static final String KEYWORD_INPUT                   = "keywordInput";
 
   /** The Constant SEARCH_OPTION. */
   public static final String SEARCH_OPTION                   = "searchOption";
   
   /** The Constant DOCUMENT_CHECKING. */
-  public static final String DOCUMENT_CHECKING               = "documentCheckBox".intern();
+  public static final String DOCUMENT_CHECKING               = "documentCheckBox";
 
   /** The Constant PAGE_CHECKING. */
-  public static final String PAGE_CHECKING                   = "pageCheckBox".intern();
+  public static final String PAGE_CHECKING                   = "pageCheckBox";
 
   /** The Constant PORTALS_SELECTOR. */
-  public static final String PORTALS_SELECTOR                = "portalSelector".intern();
+  public static final String PORTALS_SELECTOR                = "portalSelector";
 
   /** The Constant ALL_OPTION. */
-  public static final String ALL_OPTION                      = "all".intern();
+  public static final String ALL_OPTION                      = "all";
 
   /** The Constant MESSAGE_NOT_CHECKED_TYPE_SEARCH. */
-  public static final String MESSAGE_NOT_CHECKED_TYPE_SEARCH = "UISearchForm.message.not-checked".intern();
+  public static final String MESSAGE_NOT_CHECKED_TYPE_SEARCH = "UISearchForm.message.not-checked";
 
   /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
-  public static final String MESSAGE_NOT_SUPPORT_KEYWORD     = "UISearchForm.message.keyword-not-support".intern();
+  public static final String MESSAGE_NOT_SUPPORT_KEYWORD     = "UISearchForm.message.keyword-not-support";
 
   /** The Constant MESSAGE_NOT_EMPTY_KEYWORD. */
-  public static final String MESSAGE_NOT_EMPTY_KEYWORD       = "UISearchForm.message.keyword-not-empty".intern();
+  public static final String MESSAGE_NOT_EMPTY_KEYWORD       = "UISearchForm.message.keyword-not-empty";
 
   /**
    * Instantiates a new uI search form.

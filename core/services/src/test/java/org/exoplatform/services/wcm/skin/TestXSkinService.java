@@ -21,7 +21,6 @@ import java.util.Date;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.servlet.ServletContext;
 
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -238,7 +237,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
       configService = getService(SkinService.class);
-      configService.addSkin(webcontent.getName(), "Default", "", "");
+      configService.addSkin(webcontent.getName(), "Default", "");
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
       String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
@@ -260,10 +259,10 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node cssNode = webcontent.getNode("css").getNode("default.css");
       createSharedCssNode(sharedCssNode);
       configService = getService(SkinService.class);
-      configService.addSkin("", "Default", "", "");
+      configService.addSkin("", "Default", "");
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
-      String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
+      String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
       assertEquals("This is the default.css file.This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
@@ -351,7 +350,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       session.save();
       configService = getService(SkinService.class);
       configService.invalidateCachedSkin("/portal/css/jcr/classic/Default/Stylesheet.css");
-      configService.addSkin(portal.getName(), "Default", "", (ServletContext)null);
+      configService.addSkin(portal.getName(), "Default", "");
       skinService.updatePortalSkinOnRemove(portal, cssNode);
       session.save();
 

@@ -71,58 +71,58 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Define nodetype ACTIONABLE
    */
-  private static final String         ACTIONABLE           = "exo:actionable".intern();
+  private static final String         ACTIONABLE           = "exo:actionable";
 
   /**
    * Define nodetype ACTION
    */
-  private static final String         ACTION               = "exo:action".intern();
+  private static final String         ACTION               = "exo:action";
 
   /**
    * Define nodetype JOB_NAME_PROP
    */
-  private static final String         JOB_NAME_PROP        = "exo:jobName".intern();
+  private static final String         JOB_NAME_PROP        = "exo:jobName";
 
   /**
    * Define nodetype JOB_NAME_PROP
    */
-  private static final String         JOB_GROUP_PROP       = "exo:jobGroup".intern();
+  private static final String         JOB_GROUP_PROP       = "exo:jobGroup";
 
   /**
    * Define nodetype JOB_CLASS_PROP
    */
-  private static final String         JOB_CLASS_PROP       = "exo:jobClass".intern();
+  private static final String         JOB_CLASS_PROP       = "exo:jobClass";
 
   /**
    * Define nodetype LIFECYCLE_PHASE_PROP
    */
-  private static final String         LIFECYCLE_PHASE_PROP = "exo:lifecyclePhase".intern() ;
+  private static final String         LIFECYCLE_PHASE_PROP = "exo:lifecyclePhase" ;
 
   /**
    * Define query statement
    */
-  private static final String         ACTION_QUERY         = "//element(*, exo:action)".intern() ;
+  private static final String         ACTION_QUERY         = "//element(*, exo:action)" ;
 
   /**
    * Define sql query statement
    */
   private static final String ACTION_SQL_QUERY =
-                "select * from exo:action".intern() ;
+                "select * from exo:action" ;
 
   /**
    * Define sql append query operator.
    */
-  private static final String WHERE_OPERATOR = " where".intern() ;
+  private static final String WHERE_OPERATOR = " where" ;
 
   /**
    * Define sql path.
    */
-  private static final String JCR_PATH = " jcr:path".intern() ;
+  private static final String JCR_PATH = " jcr:path" ;
 
   /**
    * Define sql like operator.
    */
-  private static final String LIKE_OPERATOR = " like".intern() ;
+  private static final String LIKE_OPERATOR = " like" ;
 
   /**
    * Sql query single quote.
@@ -132,22 +132,22 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Define nodetype SCHEDULABLE_MIXIN
    */
-  private static final String         SCHEDULABLE_MIXIN    = "exo:schedulableInfo".intern();
+  private static final String         SCHEDULABLE_MIXIN    = "exo:schedulableInfo";
 
   /**
    * Define relative path for action node
    */
-  private static final String         EXO_ACTIONS          = "exo:actions".intern();
+  private static final String         EXO_ACTIONS          = "exo:actions";
 
   /**
    * Define nodetype ACTION_STORAGE
    */
-  private static final String         ACTION_STORAGE       = "exo:actionStorage".intern();
+  private static final String         ACTION_STORAGE       = "exo:actionStorage";
 
   /**
    * Define nodetype EXO_HIDDENABLE
    */
-  private static final String         EXO_HIDDENABLE       = "exo:hiddenable".intern();
+  private static final String         EXO_HIDDENABLE       = "exo:hiddenable";
 
   /**
    * RepositoryService

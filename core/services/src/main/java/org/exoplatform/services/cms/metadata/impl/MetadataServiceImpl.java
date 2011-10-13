@@ -59,12 +59,12 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * Property name INTERNAL_USE
    */
-  final static public String INTERNAL_USE = "exo:internalUse".intern();
+  final static public String INTERNAL_USE = "exo:internalUse";
 
   /**
    * NodeType METADATA_TYPE
    */
-  final static public String METADATA_TYPE = "exo:metadata".intern();
+  final static public String METADATA_TYPE = "exo:metadata";
 
   /**
    * Node name DIALOGS

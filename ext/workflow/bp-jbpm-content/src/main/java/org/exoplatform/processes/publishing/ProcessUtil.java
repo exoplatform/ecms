@@ -52,37 +52,37 @@ import org.jbpm.svc.Services;
  */
 public class ProcessUtil {
 
-  public final static String CURRENT_STATE = "exo:currentState".intern();
-  public final static String CURRENT_LOCATION = "exo:currentLocation".intern();
-  public final static String REQUEST_FOR_VALIDATION = "Request For Validation".intern();
-  public final static String VALIDATED = "Validated".intern();
-  public final static String PENDING = "Waiting For Publishing".intern();
-  public final static String REFUSED = "Refused".intern();
-  public final static String DISAPPROVED = "Disapproved".intern();
-  public final static String DELEGATED = "Delegated".intern();
-  public final static String ABORTED = "Aborted".intern();
-  public final static String EXPIRED = "Expired".intern();
-  public final static String LIVE = "Live".intern();
-  public final static String BACKUP = "Backup".intern();
-  public final static String IN_TRASH = "In Trash".intern();
+  public final static String CURRENT_STATE = "exo:currentState";
+  public final static String CURRENT_LOCATION = "exo:currentLocation";
+  public final static String REQUEST_FOR_VALIDATION = "Request For Validation";
+  public final static String VALIDATED = "Validated";
+  public final static String PENDING = "Waiting For Publishing";
+  public final static String REFUSED = "Refused";
+  public final static String DISAPPROVED = "Disapproved";
+  public final static String DELEGATED = "Delegated";
+  public final static String ABORTED = "Aborted";
+  public final static String EXPIRED = "Expired";
+  public final static String LIVE = "Live";
+  public final static String BACKUP = "Backup";
+  public final static String IN_TRASH = "In Trash";
 
-  public final static String EXO_PUBLISH_LOCATION = "exo:publishLocation".intern();
-  public final static String EXO_PENDING_LOCATION = "exo:pendingLocation".intern();
-  public final static String EXO_BACKUP_LOCATION = "exo:backupLocation".intern();
-  public final static String EXO_TRASH_LOCATION = "exo:trashLocation".intern();
+  public final static String EXO_PUBLISH_LOCATION = "exo:publishLocation";
+  public final static String EXO_PENDING_LOCATION = "exo:pendingLocation";
+  public final static String EXO_BACKUP_LOCATION = "exo:backupLocation";
+  public final static String EXO_TRASH_LOCATION = "exo:trashLocation";
 
-  public final static String ACTION_REASON = "exo:actionComment".intern();
+  public final static String ACTION_REASON = "exo:actionComment";
 
   public final static int REPOSITORY_INDEX = 0;
   public final static int WORKSPACE_INDEX = 1;
   public final static int PATH_INDEX = 2;
 
-  public final static String EXO_VALIDATIONREQUEST = "exo:validationRequest".intern();
-  public final static String EXO_CONENT_STATE = "exo:publishingState".intern();
-  public final static String CURRENT_STATE_PROP = "exo:currentState".intern();
-  public final static String CURRENT_WORKSPACE_PROP = "exo:currentWorkspace".intern();
-  public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository".intern();
-  public final static String CURRENT_PATH_PROP = "exo:currentPath".intern();
+  public final static String EXO_VALIDATIONREQUEST = "exo:validationRequest";
+  public final static String EXO_CONENT_STATE = "exo:publishingState";
+  public final static String CURRENT_STATE_PROP = "exo:currentState";
+  public final static String CURRENT_WORKSPACE_PROP = "exo:currentWorkspace";
+  public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository";
+  public final static String CURRENT_PATH_PROP = "exo:currentPath";
 
   private static Log log = ExoLogger.getLogger(ProcessUtil.class);
 

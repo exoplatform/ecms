@@ -33,16 +33,16 @@ public class UIWCMSearchPortlet extends UIPortletApplication {
   private PortletMode        mode                             = PortletMode.VIEW;
 
   /** The Constant SEARCH_FORM_TEMPLATE_PATH. */
-  public static final String SEARCH_FORM_TEMPLATE_PATH        = "searchFormTemplatePath".intern();
+  public static final String SEARCH_FORM_TEMPLATE_PATH        = "searchFormTemplatePath";
 
   /** The Constant SEARCH_RESULT_TEMPLATE_PATH. */
-  public static final String SEARCH_RESULT_TEMPLATE_PATH      = "searchResultTemplatePath".intern();
+  public static final String SEARCH_RESULT_TEMPLATE_PATH      = "searchResultTemplatePath";
 
   /** The Constant SEARCH_PAGINATOR_TEMPLATE_PATH. */
-  public static final String SEARCH_PAGINATOR_TEMPLATE_PATH   = "searchPaginatorTemplatePath".intern();
+  public static final String SEARCH_PAGINATOR_TEMPLATE_PATH   = "searchPaginatorTemplatePath";
 
   /** The Constant SEARCH_PAGE_LAYOUT_TEMPLATE_PATH. */
-  public static final String SEARCH_PAGE_LAYOUT_TEMPLATE_PATH = "searchPageLayoutTemplatePath".intern();
+  public static final String SEARCH_PAGE_LAYOUT_TEMPLATE_PATH = "searchPageLayoutTemplatePath";
 
   /** The Constant REPOSITORY. */
   public static final String REPOSITORY                       = "repository";

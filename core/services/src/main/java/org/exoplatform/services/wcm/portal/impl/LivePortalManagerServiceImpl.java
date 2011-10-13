@@ -53,7 +53,7 @@ import org.picocontainer.Startable;
  */
 public class LivePortalManagerServiceImpl implements LivePortalManagerService, Startable {
 
-  private final String                      PORTAL_FOLDER   = "exo:portalFolder".intern();
+  private final String                      PORTAL_FOLDER   = "exo:portalFolder";
 
   private static Log                        log             = ExoLogger.getLogger(LivePortalManagerServiceImpl.class);
 

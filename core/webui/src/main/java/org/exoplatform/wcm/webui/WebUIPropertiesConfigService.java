@@ -32,16 +32,16 @@ import org.exoplatform.container.xml.PropertiesParam;
 public class WebUIPropertiesConfigService {
 
   /** The Constant SCV_POPUP_SIZE_EDIT_PORTLET_MODE. */
-  public final static String SCV_POPUP_SIZE_EDIT_PORTLET_MODE = "SCV.popup.size.in.edit.portlet.mode".intern();
+  public final static String SCV_POPUP_SIZE_EDIT_PORTLET_MODE = "SCV.popup.size.in.edit.portlet.mode";
 
   /** The Constant SCV_POPUP_SIZE_QUICK_EDIT. */
-  public final static String SCV_POPUP_SIZE_QUICK_EDIT = "SCV.popup.size.in.quickdedit".intern();
+  public final static String SCV_POPUP_SIZE_QUICK_EDIT = "SCV.popup.size.in.quickdedit";
 
   /** The Constant CLV_POPUP_SIZE_EDIT_PORTLET_MODE. */
-  public final static String CLV_POPUP_SIZE_EDIT_PORTLET_MODE = "CLV.popup.size.in.edit.portlet.mode".intern();
+  public final static String CLV_POPUP_SIZE_EDIT_PORTLET_MODE = "CLV.popup.size.in.edit.portlet.mode";
 
   /** The Constant CLV_POPUP_SIZE_QUICK_EDIT. */
-  public final static String CLV_POPUP_SIZE_QUICK_EDIT = "CLV.popup.size.in.quickedit".intern();
+  public final static String CLV_POPUP_SIZE_QUICK_EDIT = "CLV.popup.size.in.quickedit";
 
   /** The properties map. */
   private ConcurrentHashMap<String,Object> propertiesMap = new ConcurrentHashMap<String,Object>();
@@ -108,10 +108,10 @@ public class WebUIPropertiesConfigService {
   public static class PopupWindowProperties {
 
     /** The Constant WIDTH. */
-    public final static String WIDTH = "width".intern();
+    public final static String WIDTH = "width";
 
     /** The Constant HEIGHT. */
-    public final static String HEIGHT = "height".intern();
+    public final static String HEIGHT = "height";
 
     /** The width. */
     private int width = 500;

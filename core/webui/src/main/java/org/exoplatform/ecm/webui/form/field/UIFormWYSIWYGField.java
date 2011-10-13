@@ -28,10 +28,10 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
  * Jun 23, 2008
  */
 public class UIFormWYSIWYGField extends DialogFormField {
-  private final String TOOBAR = "toolbar".intern();
-  private final String SOURCE_MODE = "SourceModeOnStartup".intern();
-  private final String WIDTH = "width".intern();
-  private final String HEIGHT = "height".intern();
+  private final String TOOBAR = "toolbar";
+  private final String SOURCE_MODE = "SourceModeOnStartup";
+  private final String WIDTH = "width";
+  private final String HEIGHT = "height";
 
   private String toolbarName;
   private boolean sourceModeOnStartup = false;

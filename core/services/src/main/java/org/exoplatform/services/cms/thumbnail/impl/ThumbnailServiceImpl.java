@@ -45,10 +45,10 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
  */
 public class ThumbnailServiceImpl implements ThumbnailService {
 
-  final private static String JCR_CONTENT = "jcr:content".intern();
-  final private static String JCR_MIMETYPE = "jcr:mimeType".intern();
-  final private static String JCR_DATA = "jcr:data".intern();
-  final private static String NT_FILE = "nt:file".intern();
+  final private static String JCR_CONTENT = "jcr:content";
+  final private static String JCR_MIMETYPE = "jcr:mimeType";
+  final private static String JCR_DATA = "jcr:data";
+  final private static String NT_FILE = "nt:file";
 
   private boolean isEnableThumbnail_ = false;
   private String smallSize_;

@@ -43,7 +43,7 @@ public interface MultiLanguageService {
   /**
    * Node name as COMMENTS
    */
-  final static public String COMMENTS     = "comments".intern();
+  final static public String COMMENTS     = "comments";
 
   /**
    * Get list of value in exo:language property in child node of current node

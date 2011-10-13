@@ -40,13 +40,13 @@ public class TOCGeneratorService {
   private final int MaxHeadingNumbers = 6;
 
   /** The Constant TAG_NAME. */
-  private static final String TAG_NAME =  "tagName=".intern();
+  private static final String TAG_NAME =  "tagName=";
 
   /** The Constant HEADING_LEVEL. */
-  private static final String HEADING_LEVEL = "headingLevel=".intern();
+  private static final String HEADING_LEVEL = "headingLevel=";
 
   /** The Constant HEADING_NUMBER_TEXT. */
-  private static final String HEADING_NUMBER_TEXT = "headingNumberText=".intern();
+  private static final String HEADING_NUMBER_TEXT = "headingNumberText=";
 
   /**
    * Update toc.
@@ -135,7 +135,7 @@ public class TOCGeneratorService {
    * @throws Exception the exception
    */
   public List<Heading> extractHeadings( HTMLDocument document) throws Exception {
-    String bodyPath = "html.body".intern();
+    String bodyPath = "html.body";
     NodePath path = NodePathParser.toPath(bodyPath);
     HTMLNode node = NodePathUtil.lookFor(document.getRoot(),path);
     int firstLevel = 0;

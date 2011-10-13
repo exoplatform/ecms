@@ -79,17 +79,17 @@ public class UITaggingForm extends UIForm {
 
   final static public String  LINKED_TAGS_SET        = "tagSet";
 
-  final static public String  TAG_STATUS_PROP        = "exo:tagStatus".intern();
+  final static public String  TAG_STATUS_PROP        = "exo:tagStatus";
 
-  final static public String  TAG_NAME_ACTION        = "tagNameAct".intern();
+  final static public String  TAG_NAME_ACTION        = "tagNameAct";
 
-  final static public String  ASCENDING_ORDER        = "Ascending".intern();
+  final static public String  ASCENDING_ORDER        = "Ascending";
 
-  private static final String USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy".intern();
+  private static final String USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy";
 
-  private static final String GROUP_FOLKSONOMY_ALIAS = "folksonomy".intern();
+  private static final String GROUP_FOLKSONOMY_ALIAS = "folksonomy";
 
-  private static final String GROUPS_ALIAS           = "groupsPath".intern();
+  private static final String GROUPS_ALIAS           = "groupsPath";
 
   final static public String  PUBLIC_TAG_NODE_PATH   = "exoPublicTagNode";
 

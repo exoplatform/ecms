@@ -86,7 +86,7 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
 )
 public class UIDocumentContent extends UIContainer implements NodePresentation {
   private NodeLocation node_ ;
-  public static final String DEFAULT_LANGUAGE = "default".intern() ;
+  public static final String DEFAULT_LANGUAGE = "default" ;
   private String language_ = DEFAULT_LANGUAGE ;
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentContent.class);
   public UIDocumentContent() throws Exception {}

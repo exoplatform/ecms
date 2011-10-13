@@ -60,12 +60,12 @@ import org.picocontainer.Startable;
  */
 public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable {
 
-  private static final String       USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy".intern();
+  private static final String       USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy";
 
 
-  private static final String       GROUPS_ALIAS           = "groupsPath".intern();
+  private static final String       GROUPS_ALIAS           = "groupsPath";
 
-  private static final String       TAG_STYLE_ALIAS        = "exoTagStylePath".intern();
+  private static final String       TAG_STYLE_ALIAS        = "exoTagStylePath";
 
   private static final String       PUBLIC_TAG_NODE_PATH   = "exoPublicTagNode";
 

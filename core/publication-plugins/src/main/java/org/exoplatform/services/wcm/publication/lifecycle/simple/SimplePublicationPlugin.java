@@ -88,28 +88,28 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
   public static final String DEFAULT_STATE = PublicationDefaultStates.DRAFT;
 
   /** The Constant PUBLICATION. */
-  public static final String PUBLICATION = "publication:publication".intern();
+  public static final String PUBLICATION = "publication:publication";
 
   /** The Constant LIFECYCLE_PROP. */
-  public static final String LIFECYCLE_PROP = "publication:lifecycleName".intern();
+  public static final String LIFECYCLE_PROP = "publication:lifecycleName";
 
   /** The Constant CURRENT_STATE. */
-  public static final String CURRENT_STATE = "publication:currentState".intern();
+  public static final String CURRENT_STATE = "publication:currentState";
 
   /** The Constant HISTORY. */
-  public static final String HISTORY = "publication:history".intern();
+  public static final String HISTORY = "publication:history";
 
   /** The Constant WCM_PUBLICATION_MIXIN. */
-  public static final String WCM_PUBLICATION_MIXIN = "publication:simplePublication".intern();
+  public static final String WCM_PUBLICATION_MIXIN = "publication:simplePublication";
 
   /** The Constant LIFECYCLE_NAME. */
-  public static final String LIFECYCLE_NAME = "Simple publication".intern();
+  public static final String LIFECYCLE_NAME = "Simple publication";
 
   /** The Constant LOCALE_FILE. */
-  private static final String LOCALE_FILE = "locale.services.publication.lifecycle.simple.SimplePublication".intern();
+  private static final String LOCALE_FILE = "locale.services.publication.lifecycle.simple.SimplePublication";
 
   /** The Constant IMG_PATH. */
-  public static final String IMG_PATH = "artifacts/".intern();
+  public static final String IMG_PATH = "artifacts/";
 
   /** The page event listener delegate. */
   private PageEventListenerDelegate pageEventListenerDelegate;
@@ -208,7 +208,7 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
   FileNotFoundException, Exception {
 
     byte[] bytes = null;
-    String fileName= "WCM".intern();
+    String fileName= "WCM";
     String currentState = node.getProperty(CURRENT_STATE).getString();
     if (PublicationDefaultStates.PUBLISHED.equals(currentState)) {
       fileName+="Published";

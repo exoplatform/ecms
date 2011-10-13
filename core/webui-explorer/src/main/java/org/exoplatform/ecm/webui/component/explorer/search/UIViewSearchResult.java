@@ -86,7 +86,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
   private NodeLocation node_ ;
   private String language_ ;
-  final private static String COMMENT_COMPONENT = "Comment".intern();
+  final private static String COMMENT_COMPONENT = "Comment";
   /**
    * Logger.
    */

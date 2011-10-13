@@ -69,11 +69,11 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   protected static final Log log = ExoLogger.getLogger("wcm:CreateTaxonomyPlugin");
 
-  public static final String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
+  public static final String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes";
 
-  public static final String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
+  public static final String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames";
 
-  public static final String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
+  public static final String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES";
 
   /** The workspace. */
   private String                  workspace                  = "";

@@ -52,7 +52,7 @@ public class NewGroupListener extends GroupEventListener
 
    private String groupsPath_;
 
-   final static private String NT_UNSTRUCTURED = "nt:unstructured".intern();
+   final static private String NT_UNSTRUCTURED = "nt:unstructured";
 
    final static private String GROUPS_PATH = "groupsPath";
 

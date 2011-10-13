@@ -58,7 +58,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
 
   private static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
-  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy".intern();
+  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy";
 
   public void activate() throws Exception {
     addChild(UIEditingTagList.class, null, null);

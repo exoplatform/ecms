@@ -44,7 +44,7 @@ import org.exoplatform.services.log.Log;
 public class DocumentTypeServiceImpl implements DocumentTypeService {
   private static final Log    LOG               = ExoLogger.getLogger("cms.documents.DocumentTypeServiceImpl");
 
-  private final static String OWNER             = "exo:owner".intern();
+  private final static String OWNER             = "exo:owner";
 
   private final static String QUERY             = " SELECT * FROM nt:resource WHERE";
 
@@ -52,9 +52,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
 
   private final static String EXO_DATE_MODIFIED = "exo:dateModified";
 
-  private final static String JCR_MINE_TYPE     = "jcr:mimeType".intern();
+  private final static String JCR_MINE_TYPE     = "jcr:mimeType";
 
-  private final static String JCR_PRIMARY_TYPE  = "jcr:primaryType".intern();
+  private final static String JCR_PRIMARY_TYPE  = "jcr:primaryType";
 
   private final static String SQL               = "sql";
 

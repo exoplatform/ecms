@@ -46,21 +46,21 @@ public class FCKUtils {
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   public static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
-  public static String GET_FOLDERS_AND_FILES="getFoldersAndFiles".intern();
-  public static String CREATE_FOLDER = "createFolder".intern();
-  public static String UPLOAD_FILE = "upload".intern();
+  public static String GET_FOLDERS_AND_FILES="getFoldersAndFiles";
+  public static String CREATE_FOLDER = "createFolder";
+  public static String UPLOAD_FILE = "upload";
 
-  public static final String EXO_HIDDENABLE = "exo:hiddenable".intern();
-  public static final String NT_FILE = "nt:file".intern();
-  public static final String NT_FOLDER = "nt:folder".intern();
-  public static final String NT_UNSTRUCTURED = "nt:unstructured".intern();
+  public static final String EXO_HIDDENABLE = "exo:hiddenable";
+  public static final String NT_FILE = "nt:file";
+  public static final String NT_FOLDER = "nt:folder";
+  public static final String NT_UNSTRUCTURED = "nt:unstructured";
 
-  public final static String DOCUMENT_TYPE = "file".intern();
+  public final static String DOCUMENT_TYPE = "file";
 
   /** The Constant IMAGE_TYPE. */
-  public final static String IMAGE_TYPE = "image".intern();
-  public final static String FLASH_TYPE = "flash".intern();
-  public final static String LINK_TYPE = "link".intern();
+  public final static String IMAGE_TYPE = "image";
+  public final static String FLASH_TYPE = "flash";
+  public final static String LINK_TYPE = "link";
 
 
   /**

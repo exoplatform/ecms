@@ -40,8 +40,8 @@ public class TestTemplateService extends BaseDMSTestCase {
   private String cmsTemplatesBasePath;
   private Session sessionDMS;
 
-  static private final String DMSSYSTEM_WS = "dms-system".intern();
-  static private final String EXO_ARTICLE = "exo:article".intern();
+  static private final String DMSSYSTEM_WS = "dms-system";
+  static private final String EXO_ARTICLE = "exo:article";
 
   public void setUp() throws Exception {
     super.setUp();

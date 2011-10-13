@@ -46,11 +46,11 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  */
 public class TestWatchDocumentService extends BaseDMSTestCase{
 
-  private final static String  EXO_WATCHABLE_MIXIN  = "exo:watchable".intern();
+  private final static String  EXO_WATCHABLE_MIXIN  = "exo:watchable";
 
-  private final static String  EMAIL_WATCHERS_PROP  = "exo:emailWatcher".intern();
+  private final static String  EMAIL_WATCHERS_PROP  = "exo:emailWatcher";
 
-  private final static String  RSS_WATCHERS_PROP    = "exo:rssWatcher".intern();
+  private final static String  RSS_WATCHERS_PROP    = "exo:rssWatcher";
 
   private WatchDocumentService watchDocumentService = null;
 

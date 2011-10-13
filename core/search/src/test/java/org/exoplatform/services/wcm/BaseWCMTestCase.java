@@ -40,13 +40,13 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   protected Session               session;
 
-  protected final String          REPO_NAME        = "repository".intern();
+  protected final String          REPO_NAME        = "repository";
 
-  protected final String          DMSSYSTEM_WS     = "dms-system".intern();
+  protected final String          DMSSYSTEM_WS     = "dms-system";
 
-  protected final String          SYSTEM_WS        = "system".intern();
+  protected final String          SYSTEM_WS        = "system";
 
-  protected final String          COLLABORATION_WS = "collaboration".intern();
+  protected final String          COLLABORATION_WS = "collaboration";
 
   public void setUp() throws Exception {
     container = PortalContainer.getInstance();

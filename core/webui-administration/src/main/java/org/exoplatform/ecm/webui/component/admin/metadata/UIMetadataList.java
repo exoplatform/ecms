@@ -53,7 +53,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIMetadataList extends UIPagingGridDecorator {
 
-  final static public String INTERNAL_USE = "exo:internalUse".intern() ;
+  final static public String INTERNAL_USE = "exo:internalUse" ;
 
   public UIMetadataList() throws Exception {
     getUIPageIterator().setId("MetaDataListIterator");

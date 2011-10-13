@@ -65,7 +65,7 @@ public class WCMCoreUtils {
   private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
                                                 + "and exo:active='true' "
                                                 + "and jcr:mixinTypes <> 'exo:restoreLocation' "
-                                                + "order by exo:priority ASC".intern();
+                                                + "order by exo:priority ASC";
 
   
   /**

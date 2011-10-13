@@ -56,11 +56,11 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    */
   private static final Log LOG  = ExoLogger.getLogger(ManageViewServiceImpl.class);
 
-  protected final static String EXO_TEMPLATE = "exo:template".intern() ;
-  protected final static String ADMIN_VIEW = "admin".intern() ;
-  protected final static String DEFAULT_VIEW = "default".intern() ;
-  protected final static String EXO_PERMISSIONS = "exo:accessPermissions".intern()  ;
-  protected final static String BUTTON_PROP = "exo:buttons".intern() ;
+  protected final static String EXO_TEMPLATE = "exo:template" ;
+  protected final static String ADMIN_VIEW = "admin" ;
+  protected final static String DEFAULT_VIEW = "default" ;
+  protected final static String EXO_PERMISSIONS = "exo:accessPermissions"  ;
+  protected final static String BUTTON_PROP = "exo:buttons" ;
 
   private final List<ManageViewPlugin> plugins_ = new ArrayList<ManageViewPlugin> ();
   private List<?> buttons_ ;

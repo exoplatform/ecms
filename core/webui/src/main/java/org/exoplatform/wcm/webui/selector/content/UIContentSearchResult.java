@@ -46,22 +46,22 @@ import org.exoplatform.webui.event.EventListener;
 public class UIContentSearchResult extends UIGrid {
 
   /** The Constant TITLE. */
-  public static final String TITLE = "title".intern();
+  public static final String TITLE = "title";
 
   /** The Constant NODE_EXPECT. */
-  public static final String NODE_EXPECT = "excerpt".intern();
+  public static final String NODE_EXPECT = "excerpt";
 
   /** The Constant SCORE. */
-  public static final String SCORE = "score".intern();
+  public static final String SCORE = "score";
 
   /** The Constant CREATE_DATE. */
-  public static final String CREATE_DATE = "CreateDate".intern();
+  public static final String CREATE_DATE = "CreateDate";
 
   /** The Constant PUBLICATION_STATE. */
-  public static final String PUBLICATION_STATE = "publicationstate".intern();
+  public static final String PUBLICATION_STATE = "publicationstate";
 
   /** The Constant NODE_PATH. */
-  public static final String NODE_PATH = "path".intern();
+  public static final String NODE_PATH = "path";
 
   /** The Actions. */
   public String[] Actions = {"Select", "View"};

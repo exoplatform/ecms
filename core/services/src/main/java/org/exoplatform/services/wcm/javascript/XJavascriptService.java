@@ -58,17 +58,17 @@ public class XJavascriptService implements Startable {
                                                           + "where jcr:path like '{path}/%' "
                                                           + "and exo:active='true' and exo:sharedJS='true' "
                                                           + "and jcr:mixinTypes <> 'exo:restoreLocation' "
-                                                          + "order by exo:priority ASC".intern();
+                                                          + "order by exo:priority ASC";
 
   private static String           WEBCONTENT_JS_QUERY = "select * from exo:jsFile "
                                                           + "where jcr:path like '{path}/%' and exo:active='true' "
-                                                          + "order by exo:priority ASC".intern();
+                                                          + "order by exo:priority ASC";
 
   /** The MODUL e_ name. */
-  final private String MODULE_NAME = "eXo.WCM.Live".intern();
+  final private String MODULE_NAME = "eXo.WCM.Live";
 
   /** The PATH. */
-  final private String PATH = "/javascript/eXo/{portalName}/live".intern();
+  final private String PATH = "/javascript/eXo/{portalName}/live";
 
   /** The js config service. */
   private JavascriptConfigService jsConfigService ;

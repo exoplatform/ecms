@@ -30,19 +30,19 @@ import org.exoplatform.services.log.Log;
 public class StageAndVersionPublicationState {
 
   /** The Constant ENROLLED. */
-  public static final String ENROLLED = "enrolled".intern();
+  public static final String ENROLLED = "enrolled";
 
   /** The Constant DRAFT. */
-  public static final String DRAFT = "draft".intern();
+  public static final String DRAFT = "draft";
 
   /** The Constant AWAITING. */
-  public static final String AWAITING = "awaiting".intern();
+  public static final String AWAITING = "awaiting";
 
   /** The Constant LIVE. */
-  public static final String PUBLISHED = "published".intern();
+  public static final String PUBLISHED = "published";
 
   /** The Constant OBSOLETE. */
-  public static final String OBSOLETE = "obsolete".intern();
+  public static final String OBSOLETE = "obsolete";
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(StageAndVersionPublicationState.class);

@@ -59,15 +59,15 @@ public class TestCommentService extends BaseDMSTestCase {
 
   private final static String TEXT = "exo:text";
 
-  private final static String COMMENT            = "comments".intern();
+  private final static String COMMENT            = "comments";
 
-  private final static String COMMENTOR          = "exo:commentor".intern();
+  private final static String COMMENTOR          = "exo:commentor";
 
-  private final static String COMMENTOR_EMAIL    = "exo:commentorEmail".intern();
+  private final static String COMMENTOR_EMAIL    = "exo:commentorEmail";
 
-  private final static String COMMENTOR_MESSAGES = "exo:commentContent".intern();
+  private final static String COMMENTOR_MESSAGES = "exo:commentContent";
 
-  private final static String ANONYMOUS = "anonymous".intern() ;
+  private final static String ANONYMOUS = "anonymous" ;
 
   private CommentsService     commentsService    = null;
 

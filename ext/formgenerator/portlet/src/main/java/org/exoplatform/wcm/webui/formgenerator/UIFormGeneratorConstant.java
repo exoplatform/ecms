@@ -76,8 +76,8 @@ public class UIFormGeneratorConstant {
   public static final String JSON_OBJECT_FORM_GENERATOR         = "UIFormGeneratorJsonObjectStringInput";
 
   /** The Constant PRE_CREATE_NODETYPE_EVENT. */
-  public static final String PRE_CREATE_NODETYPE_EVENT = "FormGenerator.event.preCreate".intern();
+  public static final String PRE_CREATE_NODETYPE_EVENT = "FormGenerator.event.preCreate";
 
   /** The Constant POST_CREATE_NODETYPE_EVENT. */
-  public static final String POST_CREATE_NODETYPE_EVENT = "FormGenerator.event.postCreate".intern();
+  public static final String POST_CREATE_NODETYPE_EVENT = "FormGenerator.event.postCreate";
 }

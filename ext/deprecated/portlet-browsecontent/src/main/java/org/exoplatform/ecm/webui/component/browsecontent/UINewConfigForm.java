@@ -63,7 +63,7 @@ public class UINewConfigForm extends UIForm {
   final static public String FIELD_DOCNAME = "docName";
   final static public String FIELD_ITEMPERPAGE = "itemPerPage";
   final static public String FIELD_ENABLETOOLBAR = "enableToolBar";
-  final public static String FIELD_ALLOW_PUBLISH = "isAllowPublish".intern();
+  final public static String FIELD_ALLOW_PUBLISH = "isAllowPublish";
   final static public String FIELD_ENABLEREFDOC = "enableRefDoc";
   final public static String FIELD_FILTER_CATEGORY = "filterCategory";
   final static public String FIELD_ENABLECHILDDOC = "enableChildDoc";

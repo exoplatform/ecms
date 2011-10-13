@@ -64,8 +64,8 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
 )
 public class UIPublicationForm extends UIForm {
 
-  final static public String VISIBILITY = "visibility".intern();
-  final static public String STATE = "state".intern();
+  final static public String VISIBILITY = "visibility";
+  final static public String STATE = "state";
 
   private VersionNode curentVersion_;
   private VersionNode rootVersion_;

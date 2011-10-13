@@ -77,47 +77,47 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
  * minh.dang@exoplatform.com May 8, 2008 3:13:32 PM
  */
 public class Utils {
-  final public static String WORKSPACE_NAME = "workspace".intern();
-  final public static String JCR_PATH = "path".intern();
-  final public static String DRIVE_FOLDER = "allowCreateFolder".intern();
-  final public static String MIN_WIDTH = "minwidth".intern();
-  final public static String CB_DOCUMENT_NAME = "documentName".intern();
-  final public static String CB_SCRIPT_NAME = "scriptName".intern();
-  final public static String CB_REF_DOCUMENT = "reference".intern();
-  final public static String CB_CHILD_DOCUMENT = "child".intern();
-  final public static String CB_NB_PER_PAGE = "nbPerPage".intern();
-  final public static String CB_QUERY_STATEMENT = "queryStatement".intern();
-  final public static String CB_QUERY_ISNEW = "isAddNew".intern();
-  final public static String CB_QUERY_TYPE = "queryType".intern();
-  final public static String CB_QUERY_STORE = "queryStore".intern();
-  final public static String CB_QUERY_LANGUAGE = "queryLanguage".intern();
-  final public static String CB_VIEW_TOOLBAR = "viewToolbar".intern();
-  final public static String CB_VIEW_TAGMAP = "viewTagMap".intern();
-  final public static String CB_VIEW_COMMENT = "viewComment".intern();
-  final public static String CB_VIEW_VOTE = "viewVote".intern();
-  final public static String CB_SEARCH_LOCATION = "searchLocation".intern();
-  final public static String CB_ENABLE_SEARCH_LOCATION = "enableSearch".intern();
-  final public static String CB_FILTER_CATEGORY = "filterCategory".intern();
+  final public static String WORKSPACE_NAME = "workspace";
+  final public static String JCR_PATH = "path";
+  final public static String DRIVE_FOLDER = "allowCreateFolder";
+  final public static String MIN_WIDTH = "minwidth";
+  final public static String CB_DOCUMENT_NAME = "documentName";
+  final public static String CB_SCRIPT_NAME = "scriptName";
+  final public static String CB_REF_DOCUMENT = "reference";
+  final public static String CB_CHILD_DOCUMENT = "child";
+  final public static String CB_NB_PER_PAGE = "nbPerPage";
+  final public static String CB_QUERY_STATEMENT = "queryStatement";
+  final public static String CB_QUERY_ISNEW = "isAddNew";
+  final public static String CB_QUERY_TYPE = "queryType";
+  final public static String CB_QUERY_STORE = "queryStore";
+  final public static String CB_QUERY_LANGUAGE = "queryLanguage";
+  final public static String CB_VIEW_TOOLBAR = "viewToolbar";
+  final public static String CB_VIEW_TAGMAP = "viewTagMap";
+  final public static String CB_VIEW_COMMENT = "viewComment";
+  final public static String CB_VIEW_VOTE = "viewVote";
+  final public static String CB_SEARCH_LOCATION = "searchLocation";
+  final public static String CB_ENABLE_SEARCH_LOCATION = "enableSearch";
+  final public static String CB_FILTER_CATEGORY = "filterCategory";
   final static public String EXO_AUDITABLE = "exo:auditable";
-  final public static String CB_BOX_TEMPLATE = "boxTemplate".intern();
+  final public static String CB_BOX_TEMPLATE = "boxTemplate";
   final public static String CB_TEMPLATE = "template";
-  final public static String CB_USECASE = "usecase".intern();
-  final public static String CB_ALLOW_PUBLISH = "isAllowPublish".intern();
+  final public static String CB_USECASE = "usecase";
+  final public static String CB_ALLOW_PUBLISH = "isAllowPublish";
 
-  final public static String FROM_PATH = "From Path".intern();
-  final public static String USE_DOCUMENT = "Document".intern();
-  final public static String USE_JCR_QUERY = "Using a JCR query".intern();
-  final public static String USE_SCRIPT = "Using a script".intern();
+  final public static String FROM_PATH = "From Path";
+  final public static String USE_DOCUMENT = "Document";
+  final public static String USE_JCR_QUERY = "Using a JCR query";
+  final public static String USE_SCRIPT = "Using a script";
 
-  final public static String CB_USE_FROM_PATH = "path".intern();
-  final public static String CB_USE_DOCUMENT = "detail-document".intern();
-  final public static String CB_USE_JCR_QUERY = "query".intern();
-  final public static String CB_USE_SCRIPT = "script".intern();
+  final public static String CB_USE_FROM_PATH = "path";
+  final public static String CB_USE_DOCUMENT = "detail-document";
+  final public static String CB_USE_JCR_QUERY = "query";
+  final public static String CB_USE_SCRIPT = "script";
 
-  final public static String SEMI_COLON = ";".intern();
-  final public static String COLON = ":".intern();
-  final public static String SLASH = "/".intern();
-  final public static String BACKSLASH = "\\".intern();
+  final public static String SEMI_COLON = ";";
+  final public static String COLON = ":";
+  final public static String SLASH = "/";
+  final public static String BACKSLASH = "\\";
   final public static String EXO_CREATED_DATE = "exo:dateCreated";
   final public static String EXO_DATETIME = "exo:datetime";
   final public static String EXO_MODIFIED_DATE = "exo:dateModified";
@@ -126,18 +126,18 @@ public class Utils {
   final public static String SPECIALCHARACTER[] = { SEMI_COLON, COLON, SLASH,
       BACKSLASH, "'", "|", ">", "<", "\"", "?", "!", "@", "#", "$", "%", "^",
       "&", "*", "(", ")", "[", "]", "{", "}" };
-  final public static String REPOSITORY = "repository".intern();
-  final public static String VIEWS = "views".intern();
-  final public static String DRIVE = "drive".intern();
+  final public static String REPOSITORY = "repository";
+  final public static String VIEWS = "views";
+  final public static String DRIVE = "drive";
   final static public String TRASH_HOME_NODE_PATH = "trashHomeNodePath"
-      .intern();
-  final static public String TRASH_REPOSITORY = "trashRepository".intern();
-  final static public String TRASH_WORKSPACE = "trashWorkspace".intern();
+      ;
+  final static public String TRASH_REPOSITORY = "trashRepository";
+  final static public String TRASH_WORKSPACE = "trashWorkspace";
   final public static String JCR_INFO = "jcrInfo";
   final static public String NT_UNSTRUCTURED = "nt:unstructured";
   final static public String NT_FILE = "nt:file";
   final static public String NT_FOLDER = "nt:folder";
-  final static public String NT_FROZEN = "nt:frozenNode".intern();
+  final static public String NT_FROZEN = "nt:frozenNode";
   final static public String EXO_TITLE = "exo:title";
   final static public String EXO_SUMMARY = "exo:summary";
   final static public String EXO_RELATION = "exo:relation";
@@ -226,10 +226,10 @@ public class Utils {
   private static final Log LOG = ExoLogger.getLogger("webui.Utils");
   public Map<String, Object> maps_ = new HashMap<String, Object>();
 
-  public static final String INPUT_TEXT_AREA = "TEXTAREA".intern();
-  public static final String INPUT_WYSIWYG = "WYSIWYG".intern();
-  public static final String INPUT_TEXT	= "TEXT".intern();
-  public static final String DEFAULT_CSS_NAME = "InlineText".intern();
+  public static final String INPUT_TEXT_AREA = "TEXTAREA";
+  public static final String INPUT_WYSIWYG = "WYSIWYG";
+  public static final String INPUT_TEXT	= "TEXT";
+  public static final String DEFAULT_CSS_NAME = "InlineText";
   public static final String LEFT2RIGHT = "left-to-right";
   public static final String RIGHT2LEFT = "right-to-left";
 

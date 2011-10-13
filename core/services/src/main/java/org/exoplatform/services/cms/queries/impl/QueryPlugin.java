@@ -37,10 +37,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class QueryPlugin extends BaseComponentPlugin {
 
-  private static String STATEMENT = "jcr:statement".intern() ;
-  private static String LANGUAGE = "jcr:language".intern() ;
-  private static String PERMISSIONS = "exo:accessPermissions".intern() ;
-  private static String CACHED_RESULT = "exo:cachedResult".intern() ;
+  private static String STATEMENT = "jcr:statement" ;
+  private static String LANGUAGE = "jcr:language" ;
+  private static String PERMISSIONS = "exo:accessPermissions" ;
+  private static String CACHED_RESULT = "exo:cachedResult" ;
 
   private InitParams params_ ;
   private boolean autoCreateInNewRepository_ = false;

@@ -70,10 +70,10 @@ import org.exoplatform.webui.form.UIFormStringInput;
 
 public class UIContentSearchForm extends UIForm {
 
-  public static final String LOCATION = "location".intern();
-  public static final String SEARCH_BY_NAME = "name".intern();
-  public static final String SEARCH_BY_CONTENT = "content".intern();
-  public static final String RADIO_NAME = "WcmRadio".intern();
+  public static final String LOCATION = "location";
+  public static final String SEARCH_BY_NAME = "name";
+  public static final String SEARCH_BY_CONTENT = "content";
+  public static final String RADIO_NAME = "WcmRadio";
   final static public String TIME_OPTION = "timeOpt";
   final static public String PROPERTY = "property";
   final static public String CONTAIN = "contain";
@@ -88,7 +88,7 @@ public class UIContentSearchForm extends UIForm {
   final static public String NOT_CONTAIN_PROPERTY = "notContainPro";
   final static public String DATE_PROPERTY = "datePro";
   final static public String NODETYPE_PROPERTY = "nodetypePro";
-  final static public String CHECKED_RADIO_ID = "checkedRadioId".intern();
+  final static public String CHECKED_RADIO_ID = "checkedRadioId";
 
   private String checkedRadioId;
 

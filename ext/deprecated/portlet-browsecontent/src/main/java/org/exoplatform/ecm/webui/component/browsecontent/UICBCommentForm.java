@@ -62,7 +62,7 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 )
 
 public class UICBCommentForm extends UIForm implements UIPopupComponent {
-  final public static String DEFAULT_LANGUAGE = "default".intern();
+  final public static String DEFAULT_LANGUAGE = "default";
   final private static String FIELD_EMAIL = "email";
   final private static String FIELD_WEBSITE = "website";
   final private static String FIELD_COMMENT = "comment";

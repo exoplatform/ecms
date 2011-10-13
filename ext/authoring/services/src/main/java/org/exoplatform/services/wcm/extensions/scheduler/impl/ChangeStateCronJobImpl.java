@@ -37,9 +37,9 @@ import org.quartz.JobExecutionException;
 public class ChangeStateCronJobImpl implements Job {
   private static final Log log                 = ExoLogger.getLogger(ChangeStateCronJobImpl.class);
 
-  private static final String START_TIME_PROPERTY = "publication:startPublishedDate".intern();
+  private static final String START_TIME_PROPERTY = "publication:startPublishedDate";
 
-  private static final String END_TIME_PROPERTY   = "publication:endPublishedDate".intern();
+  private static final String END_TIME_PROPERTY   = "publication:endPublishedDate";
 
   private String              fromState           = null;
 

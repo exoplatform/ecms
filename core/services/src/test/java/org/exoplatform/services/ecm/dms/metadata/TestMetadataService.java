@@ -39,7 +39,7 @@ public class TestMetadataService extends BaseDMSTestCase {
   private String baseMetadataPath;
   private Session sessionDMS;
 
-  static private final String EXO_ARTICLE = "exo:article".intern();
+  static private final String EXO_ARTICLE = "exo:article";
 
   public void setUp() throws Exception {
     super.setUp();

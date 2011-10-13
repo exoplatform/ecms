@@ -31,20 +31,20 @@ public interface NewFolksonomyService {
   /**
    * Property name TAG_RATE_PROP
    */
-  final public static String TAG_RATE_PROP   = "exo:styleRange".intern();
+  final public static String TAG_RATE_PROP   = "exo:styleRange";
 
   /**
    * Property name HTML_STYLE_PROP
    */
-  final public static String HTML_STYLE_PROP = "exo:htmlStyle".intern();
+  final public static String HTML_STYLE_PROP = "exo:htmlStyle";
 
-  final static public String EXO_TOTAL       = "exo:total".intern();
+  final static public String EXO_TOTAL       = "exo:total";
 
-  final static public String EXO_TAGGED      = "exo:tagged".intern();
+  final static public String EXO_TAGGED      = "exo:tagged";
 
-  final static public String EXO_UUID        = "exo:uuid".intern();
+  final static public String EXO_UUID        = "exo:uuid";
 
-  final static public String EXO_TAGSTYLE    = "exo:tagStyle".intern();
+  final static public String EXO_TAGSTYLE    = "exo:tagStyle";
 
   final static public int    PUBLIC          = 0;
 

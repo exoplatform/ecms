@@ -51,13 +51,13 @@ import org.w3c.dom.Element;
 @Path("/contents/editing/")
 public class InlineEditingService implements ResourceContainer{
   private static Log log = ExoLogger.getLogger(InlineEditingService.class);
-  final static public String EXO_TITLE 								= "exo:title".intern();
-  final static public String EXO_SUMMARY 							= "exo:summary".intern();
-  final static public String EXO_TEXT		 							= "exo:text".intern();
+  final static public String EXO_TITLE 								= "exo:title";
+  final static public String EXO_SUMMARY 							= "exo:summary";
+  final static public String EXO_TEXT		 							= "exo:text";
 
-  final static public String EXO_RSS_ENABLE 					= "exo:rss-enable".intern();	
-  public final static String POST_EDIT_CONTENT_EVENT 	= "CmsService.event.postEdit".intern();
-  private final String localeFile = "locale.portlet.i18n.WebUIDms".intern();
+  final static public String EXO_RSS_ENABLE 					= "exo:rss-enable";	
+  public final static String POST_EDIT_CONTENT_EVENT 	= "CmsService.event.postEdit";
+  private final String localeFile = "locale.portlet.i18n.WebUIDms";
   /**
    * SERVICE: Edit title of document.
    *

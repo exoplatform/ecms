@@ -42,16 +42,16 @@ public class TestDriveService extends BaseDMSTestCase {
   private Node rootNode;
   private String drivePath;
 
-  private static String WORKSPACE = "exo:workspace".intern() ;
-  private static String PERMISSIONS = "exo:accessPermissions".intern() ;
-  private static String VIEWS = "exo:views".intern() ;
-  private static String ICON = "exo:icon".intern() ;
-  private static String PATH = "exo:path".intern() ;
-  private static String VIEW_REFERENCES = "exo:viewPreferences".intern() ;
-  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument".intern() ;
-  private static String VIEW_SIDEBAR = "exo:viewSideBar".intern() ;
-  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode".intern() ;
-  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders".intern() ;
+  private static String WORKSPACE = "exo:workspace" ;
+  private static String PERMISSIONS = "exo:accessPermissions" ;
+  private static String VIEWS = "exo:views" ;
+  private static String ICON = "exo:icon" ;
+  private static String PATH = "exo:path" ;
+  private static String VIEW_REFERENCES = "exo:viewPreferences" ;
+  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument" ;
+  private static String VIEW_SIDEBAR = "exo:viewSideBar" ;
+  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode" ;
+  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
 
   /**
    * Set up for testing

@@ -40,7 +40,7 @@ public class TestDMSConfigurationService extends BaseDMSTestCase {
 
   private DMSConfiguration dmsConfiguration = null;
 
-  private final static String TEST_WS = "workspace-test".intern();
+  private final static String TEST_WS = "workspace-test";
 
   @Override
   public void setUp() throws Exception {

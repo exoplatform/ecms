@@ -54,15 +54,15 @@ public class TestVotingService extends BaseDMSTestCase {
 
   private final static String VOTEABLE = "mix:votable";
 
-  private final static String VOTER_PROP = "exo:voter".intern();
+  private final static String VOTER_PROP = "exo:voter";
   
   private final static String VOTER_VOTEVALUE_PROP = "exo:voterVoteValues";
 
-  private final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern();
+  private final static String VOTE_TOTAL_PROP = "exo:voteTotal";
 
-  private final static String VOTING_RATE_PROP = "exo:votingRate".intern();
+  private final static String VOTING_RATE_PROP = "exo:votingRate";
 
-  private final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern();
+  private final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang";
 
   private final static String ARTICLE = "exo:article";
 

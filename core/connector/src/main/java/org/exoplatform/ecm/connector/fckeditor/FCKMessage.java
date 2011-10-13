@@ -36,10 +36,10 @@ import org.w3c.dom.Element;
 public class FCKMessage {
 
   /** The Constant ERROR. */
-  public static final String ERROR                      = "Error".intern();
+  public static final String ERROR                      = "Error";
 
   /** The Constant INFO. */
-  public static final String INFO                       = "Info".intern();
+  public static final String INFO                       = "Info";
 
   /** The Constant FOLDER_CREATED. */
   public static final int    FOLDER_CREATED             = 100;
@@ -73,7 +73,7 @@ public class FCKMessage {
 
   /** The Constant FCK_RESOURCE_BUNDLE. */
   public static final String FCK_RESOURCE_BUNDLE_FILE   = "locale.services.fckeditor.FCKConnector"
-                                                            .intern();
+                                                            ;
 
   /**
    * Instantiates a new fCK message.

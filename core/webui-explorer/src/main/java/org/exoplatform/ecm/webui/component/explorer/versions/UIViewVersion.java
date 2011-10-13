@@ -89,7 +89,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   protected NodeLocation originalNode_ ;
   private String language_ ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIViewVersion");
-  final private static String COMMENT_COMPONENT = "Comment".intern();
+  final private static String COMMENT_COMPONENT = "Comment";
 
   public UIViewVersion() throws Exception {
     addChild(UINodeInfo.class, null, null) ;

@@ -71,16 +71,16 @@ import org.w3c.dom.Element;
 public class PortalLinkConnector implements ResourceContainer {
 
   /** The PUBLI c_ access. */
-  final private String PUBLIC_ACCESS       = "public".intern();
+  final private String PUBLIC_ACCESS       = "public";
 
   /** The PRIVAT e_ access. */
-  final private String PRIVATE_ACCESS      = "private".intern();
+  final private String PRIVATE_ACCESS      = "private";
 
   /** The EVERYON e_ permission. */
-  final private String EVERYONE_PERMISSION = "Everyone".intern();
+  final private String EVERYONE_PERMISSION = "Everyone";
 
   /** The RESOURC e_ type. */
-  final private String RESOURCE_TYPE       = "PortalPageURI".intern();
+  final private String RESOURCE_TYPE       = "PortalPageURI";
 
   /** The portal data storage. */
   private DataStorage  portalDataStorage;

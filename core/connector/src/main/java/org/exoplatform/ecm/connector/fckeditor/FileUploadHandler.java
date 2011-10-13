@@ -52,19 +52,19 @@ import org.w3c.dom.Element;
 public class FileUploadHandler {
 
   /** The Constant UPLOAD_ACTION. */
-  public final static String UPLOAD_ACTION = "upload".intern();
+  public final static String UPLOAD_ACTION = "upload";
 
   /** The Constant PROGRESS_ACTION. */
-  public final static String PROGRESS_ACTION = "progress".intern();
+  public final static String PROGRESS_ACTION = "progress";
 
   /** The Constant ABORT_ACTION. */
-  public final static String ABORT_ACTION = "abort".intern();
+  public final static String ABORT_ACTION = "abort";
 
   /** The Constant DELETE_ACTION. */
-  public final static String DELETE_ACTION = "delete".intern();
+  public final static String DELETE_ACTION = "delete";
 
   /** The Constant SAVE_ACTION. */
-  public final static String SAVE_ACTION = "save".intern();
+  public final static String SAVE_ACTION = "save";
 
   private UploadService uploadService;
 

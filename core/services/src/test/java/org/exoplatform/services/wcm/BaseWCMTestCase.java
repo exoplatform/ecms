@@ -42,16 +42,16 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
   protected Session               session;
 
   /** The REP o_ name. */
-  protected final String          REPO_NAME        = "repository".intern();
+  protected final String          REPO_NAME        = "repository";
 
   /** The DMSSYSTE m_ ws. */
-  protected final String          DMSSYSTEM_WS     = "dms-system".intern();
+  protected final String          DMSSYSTEM_WS     = "dms-system";
 
   /** The SYSTE m_ ws. */
-  protected final String          SYSTEM_WS        = "system".intern();
+  protected final String          SYSTEM_WS        = "system";
 
   /** The COLLABORATIO n_ ws. */
-  protected final String          COLLABORATION_WS = "collaboration".intern();
+  protected final String          COLLABORATION_WS = "collaboration";
 
   /* (non-Javadoc)
    * @see junit.framework.TestCase#setUp()

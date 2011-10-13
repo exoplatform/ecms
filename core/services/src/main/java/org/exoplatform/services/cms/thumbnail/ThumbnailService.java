@@ -37,13 +37,13 @@ import org.exoplatform.container.component.ComponentPlugin;
  */
 public interface ThumbnailService {
 
-  final public static String EXO_THUMBNAILS = "nt:unstructured".intern();
-  final public static String EXO_THUMBNAIL = "nt:unstructured".intern();
-  final public static String SMALL_SIZE = "exo:smallSize".intern();
-  final public static String MEDIUM_SIZE = "exo:mediumSize".intern();
-  final public static String BIG_SIZE = "exo:bigSize".intern();
-  final public static String THUMBNAIL_LAST_MODIFIED = "exo:thumbnailLastModified".intern();
-  final public static String EXO_THUMBNAILS_FOLDER = "exo:thumbnails".intern();
+  final public static String EXO_THUMBNAILS = "nt:unstructured";
+  final public static String EXO_THUMBNAIL = "nt:unstructured";
+  final public static String SMALL_SIZE = "exo:smallSize";
+  final public static String MEDIUM_SIZE = "exo:mediumSize";
+  final public static String BIG_SIZE = "exo:bigSize";
+  final public static String THUMBNAIL_LAST_MODIFIED = "exo:thumbnailLastModified";
+  final public static String EXO_THUMBNAILS_FOLDER = "exo:thumbnails";
   final public static String HIDDENABLE_NODETYPE = "exo:hiddenable";
 
   /**

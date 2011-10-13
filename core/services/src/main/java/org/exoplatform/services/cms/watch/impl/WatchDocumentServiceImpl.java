@@ -50,10 +50,10 @@ import org.picocontainer.Startable;
  */
 public class WatchDocumentServiceImpl implements WatchDocumentService, Startable {
 
-  final public static String EXO_WATCHABLE_MIXIN = "exo:watchable".intern() ;
-  final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern() ;
-  final public static String RSS_WATCHERS_PROP = "exo:rssWatcher".intern() ;
-  final private String initParamName = "messageConfig".intern();
+  final public static String EXO_WATCHABLE_MIXIN = "exo:watchable" ;
+  final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher" ;
+  final public static String RSS_WATCHERS_PROP = "exo:rssWatcher" ;
+  final private String initParamName = "messageConfig";
   final private static String WATCHABLE_MIXIN_QUERY = "//element(*,exo:watchable)" ;
 
   private RepositoryService repoService_ ;

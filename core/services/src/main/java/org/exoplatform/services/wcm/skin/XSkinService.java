@@ -40,10 +40,10 @@ import org.picocontainer.Startable;
 public class XSkinService implements Startable {
 
   /** The Constant SKIN_PATH_REGEXP. */
-  public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/(.*)/(.*)/(.*).css".intern();
+  public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/(.*)/(.*)/(.*).css";
 
   /** The Constant SKIN_PATH_PATTERN. */
-  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/(.*)/(.*)/Stylesheet.css".intern();
+  private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/(.*)/(.*)/Stylesheet.css";
 
   /** The log. */
   private static Log              log                  = ExoLogger.getLogger("wcm:XSkinService");
@@ -136,12 +136,12 @@ public class XSkinService implements Startable {
     Iterator<String> iterator = skinService.getAvailableSkinNames().iterator();
     if (iterator.hasNext() == false) {
       skinPath = StringUtils.replaceOnce(skinPath,"(.*)", "Default");
-      skinService.addSkin(portalNode.getName(), "Default", skinPath, (ServletContext)null);
+      skinService.addSkin(portalNode.getName(), "Default", skinPath);
     } else {
       while (iterator.hasNext()) {
         String skinName = iterator.next();
         skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
-        skinService.addSkin(portalNode.getName(), skinName, skinPath, (ServletContext)null);
+        skinService.addSkin(portalNode.getName(), skinName, skinPath);
       }
     }
   }
@@ -150,8 +150,6 @@ public class XSkinService implements Startable {
    * Adds the shared portal skin.
    *
    * @param portalNode the portal
-   * @param cssFile the css file
-   * @param isAddNew flag to decide whether this situation is startup or not
    *
    * @throws Exception the exception
    */
@@ -163,7 +161,7 @@ public class XSkinService implements Startable {
     for (Iterator<String> iterator = skinService.getAvailableSkinNames().iterator(); iterator.hasNext();) {
       String skinName = iterator.next();
       skinPath = StringUtils.replaceOnce(skinPath, "(.*)", skinName);
-      skinService.addPortalSkin(portalNode.getName(), skinName, skinPath, (ServletContext)null);
+      skinService.addPortalSkin(portalNode.getName(), skinName, skinPath);
     }
   }
 

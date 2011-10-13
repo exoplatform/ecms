@@ -41,11 +41,11 @@ import org.quartz.JobExecutionException;
 public class ImportContentsJob implements Job {
   private static final Log log                  = ExoLogger.getLogger(ImportContentsJob.class);
 
-  private static final String MIX_TARGET_PATH      = "mix:targetPath".intern();
+  private static final String MIX_TARGET_PATH      = "mix:targetPath";
 
-  private static final String MIX_TARGET_WORKSPACE = "mix:targetWorkspace".intern();
+  private static final String MIX_TARGET_WORKSPACE = "mix:targetWorkspace";
 
-  private static final String JCR_File_SEPARATOR   = "/".intern();
+  private static final String JCR_File_SEPARATOR   = "/";
 
   private static String       stagingStorage;
 

@@ -24,8 +24,8 @@ package org.exoplatform.workflow.webui.utils;
  * Jan 13, 2009
  */
 public class Utils {
-  final public static String REPOSITORY = "repository".intern();
-  final public static String EXO_ACTIONS = "exo:actions".intern();
+  final public static String REPOSITORY = "repository";
+  final public static String EXO_ACTIONS = "exo:actions";
 
 //  final static public String NT_FILE = "nt:file";
 //  final static public String EXO_RELATION = "exo:relation";

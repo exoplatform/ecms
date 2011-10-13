@@ -63,25 +63,25 @@ import org.exoplatform.webui.form.UIForm;
  */
 public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
-  public static final String ENROLLED = "enrolled".intern();
-  public static final String NON_PUBLISHED = "non published".intern();
-  public static final String PUBLISHED = "published".intern();
+  public static final String ENROLLED = "enrolled";
+  public static final String NON_PUBLISHED = "non published";
+  public static final String PUBLISHED = "published";
   public static final String DEFAULT_STATE = NON_PUBLISHED;
 
-  public static final String PUBLICATION = "publication:publication".intern();
-  public static final String LIFECYCLE_NAME = "publication:lifecycleName".intern();
-  public static final String CURRENT_STATE = "publication:currentState".intern();
-  public static final String HISTORY = "publication:history".intern();
+  public static final String PUBLICATION = "publication:publication";
+  public static final String LIFECYCLE_NAME = "publication:lifecycleName";
+  public static final String CURRENT_STATE = "publication:currentState";
+  public static final String HISTORY = "publication:history";
 
-  public static final String VISIBILITY = "publication:visibility".intern();
-  public static final String VERSIONS_PUBLICATION_STATES = "publication:versionsPublicationStates".intern();
+  public static final String VISIBILITY = "publication:visibility";
+  public static final String VERSIONS_PUBLICATION_STATES = "publication:versionsPublicationStates";
 
-  public static final String PUBLIC = "public".intern();
-  public static final String PRIVATE = "private".intern();
+  public static final String PUBLIC = "public";
+  public static final String PRIVATE = "private";
 
-  public static final String MIXIN_TYPE = "publication:staticAndDirectPublication".intern();
+  public static final String MIXIN_TYPE = "publication:staticAndDirectPublication";
 
-  public static final String IMG_PATH = "resources/images/".intern();
+  public static final String IMG_PATH = "resources/images/";
 
   protected static Log log;
 

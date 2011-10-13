@@ -47,17 +47,17 @@ public class CommentsServiceImpl implements CommentsService {
 
   private static Log LOG = ExoLogger.getLogger("ecm:CommentsService");
 
-  private final static String COMMENTS = "comments".intern() ;
-  private final static String COMMENTABLE = "mix:commentable".intern() ;
-  private final static String EXO_COMMENTS = "exo:comments".intern() ;
-  private final static String NT_UNSTRUCTURE = "nt:unstructured".intern() ;
-  private final static String MESSAGE = "exo:commentContent".intern() ;
-  private final static String COMMENTOR = "exo:commentor".intern() ;
-  private final static String COMMENTOR_EMAIL = "exo:commentorEmail".intern() ;
-  private final static String COMMENTOR_SITE = "exo:commentorSite".intern() ;
-  private final static String CREATED_DATE = "exo:commentDate".intern() ;
-  private static final String LANGUAGES = "languages".intern() ;
-  private static final String ANONYMOUS = "anonymous".intern() ;
+  private final static String COMMENTS = "comments" ;
+  private final static String COMMENTABLE = "mix:commentable" ;
+  private final static String EXO_COMMENTS = "exo:comments" ;
+  private final static String NT_UNSTRUCTURE = "nt:unstructured" ;
+  private final static String MESSAGE = "exo:commentContent" ;
+  private final static String COMMENTOR = "exo:commentor" ;
+  private final static String COMMENTOR_EMAIL = "exo:commentorEmail" ;
+  private final static String COMMENTOR_SITE = "exo:commentorSite" ;
+  private final static String CREATED_DATE = "exo:commentDate" ;
+  private static final String LANGUAGES = "languages" ;
+  private static final String ANONYMOUS = "anonymous" ;
 
   private ExoCache<String, List<Node>> commentsCache_ ;
   private MultiLanguageService multiLangService_ ;

@@ -31,13 +31,13 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 public interface PageMetadataService {
 
   /** The Constant HTTP META TAG KEYWORDS. */
-  public final static String KEYWORDS = "keywords".intern();
+  public final static String KEYWORDS = "keywords";
 
   /** The Constant HTTP META TAG ROBOTS. */
-  public final static String ROBOTS = "robots".intern();
+  public final static String ROBOTS = "robots";
 
   /** The Constant HTTP META TAG DESCRIPTION. */
-  public final static String DESCRIPTION = "description".intern();
+  public final static String DESCRIPTION = "description";
 
   /** The Constant eXo  META TAG SITE_TITLE. */
   public final static String SITE_TITLE = "siteTitle";

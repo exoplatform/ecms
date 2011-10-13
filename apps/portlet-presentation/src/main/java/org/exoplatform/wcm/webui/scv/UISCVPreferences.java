@@ -78,8 +78,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
 
   public static final String PRINT_PAGE_PARAMETER_INPUT   = "UISCVPrintPageParameter";
 
-  public static final String ENABLE_STRING                = "Enable".intern();
-  public static final String DISABLE_STRING               = "Disable".intern();
+  public static final String ENABLE_STRING                = "Enable";
+  public static final String DISABLE_STRING               = "Disable";
 
   protected PortletPreferences portletPreferences;
 

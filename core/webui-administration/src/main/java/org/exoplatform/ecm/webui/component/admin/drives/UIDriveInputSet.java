@@ -36,6 +36,8 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -67,6 +69,8 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   final static public String FIELD_UNSTRUCTURED_ONLY = "Unstructured folder";
   final static public String FIELD_ALLOW_CREATE_FOLDERS = "allowCreateFolders";
   final static public String SHOW_HIDDEN_NODE = "showHiddenNode";
+  
+  private final static Log  LOG  = ExoLogger.getLogger(UIDriveInputSet.class);
 
   public String bothLabel_;
   public String folderOnlyLabel_;
@@ -193,7 +197,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       }
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
     } catch (Exception e) {
-      e.printStackTrace();
+      LOG.error("Unexpected problem occurs while updating", e);
     }
   }
   private boolean isChildNodePrimaryTypeAllowed(Node parent, String childNodeTypeName) throws Exception{

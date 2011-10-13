@@ -83,13 +83,13 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 public class UINameWebContentForm extends UIForm {
 
   /** The Constant NAME_WEBCONTENT. */
-  public static final String NAME_WEBCONTENT    = "name".intern();
+  public static final String NAME_WEBCONTENT    = "name";
 
   /** The Constant SUMMARY_WEBCONTENT. */
-  public static final String SUMMARY_WEBCONTENT = "summary".intern();
+  public static final String SUMMARY_WEBCONTENT = "summary";
 
   /** The Constant FIELD_SELECT. */
-  public static final String FIELD_SELECT = "selectTemplate".intern();
+  public static final String FIELD_SELECT = "selectTemplate";
 
   /** The picture describe. */
   private String pictureDescribe;

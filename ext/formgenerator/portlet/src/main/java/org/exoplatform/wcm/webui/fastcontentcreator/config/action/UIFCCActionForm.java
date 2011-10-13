@@ -91,7 +91,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
   private boolean isAddNew = false;
 
   /** The Constant EXO_ACTIONS. */
-  private static final String EXO_ACTIONS = "exo:actions".intern();
+  private static final String EXO_ACTIONS = "exo:actions";
 
   /**
    * Instantiates a new uIFCC action form.

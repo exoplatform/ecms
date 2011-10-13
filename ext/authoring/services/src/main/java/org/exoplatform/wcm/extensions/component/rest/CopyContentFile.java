@@ -25,9 +25,9 @@ public class CopyContentFile implements ResourceContainer {
 
   private static final Log    log                           = ExoLogger.getLogger(CopyContentFile.class);
 
-  private static final String OK_RESPONSE                   = "OK".intern();
+  private static final String OK_RESPONSE                   = "OK";
 
-  private static final String KO_RESPONSE                   = "KO".intern();
+  private static final String KO_RESPONSE                   = "KO";
 
   private static String       stagingStorage;
 

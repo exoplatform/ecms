@@ -53,15 +53,15 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class TemplatePlugin extends BaseComponentPlugin {
 
-  static final public String   DIALOGS                    = "dialogs".intern();
+  static final public String   DIALOGS                    = "dialogs";
 
-  static final public String   VIEWS                      = "views".intern();
+  static final public String   VIEWS                      = "views";
 
-  static final public String   SKINS                      = "skins".intern();
+  static final public String   SKINS                      = "skins";
 
-  static final public String   DEFAULT_DIALOG             = "dialog1".intern();
+  static final public String   DEFAULT_DIALOG             = "dialog1";
 
-  static final public String   DEFAULT_VIEW               = "view1".intern();
+  static final public String   DEFAULT_VIEW               = "view1";
 
   static final String[]        UNDELETABLE_TEMPLATES      = { DEFAULT_DIALOG, DEFAULT_VIEW };
 
@@ -69,13 +69,13 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
   static final public String   DEFAULT_VIEWS_PATH         = "/" + VIEWS + "/" + DEFAULT_VIEW;
 
-  static final public String   NT_UNSTRUCTURED            = "nt:unstructured".intern();
+  static final public String   NT_UNSTRUCTURED            = "nt:unstructured";
 
-  static final public String   DOCUMENT_TEMPLATE_PROP     = "isDocumentTemplate".intern();
+  static final public String   DOCUMENT_TEMPLATE_PROP     = "isDocumentTemplate";
 
-  static final public String   TEMPLATE_LABEL             = "label".intern();
+  static final public String   TEMPLATE_LABEL             = "label";
 
-  public static final String[] EXO_ROLES_DEFAULT          = new String[] { "*".intern() };
+  public static final String[] EXO_ROLES_DEFAULT          = new String[] { "*" };
 
   private static final String  NAME;
 

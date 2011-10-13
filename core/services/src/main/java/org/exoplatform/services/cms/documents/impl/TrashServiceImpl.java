@@ -53,7 +53,7 @@ import org.exoplatform.services.seo.SEOService;
 public class TrashServiceImpl implements TrashService {
 
   private static final String FILE_EXPLORER_PORTLET = "FileExplorerPortlet";
-  final static public String EXO_TOTAL = "exo:total".intern();
+  final static public String EXO_TOTAL = "exo:total";
   final static public String MIX_REFERENCEABLE = "mix:referenceable";
   final static public String TAXONOMY_LINK   = "exo:taxonomyLink";
   final static public String UUID         = "exo:uuid";

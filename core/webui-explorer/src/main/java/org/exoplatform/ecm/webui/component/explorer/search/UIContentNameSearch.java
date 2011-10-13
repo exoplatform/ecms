@@ -52,9 +52,9 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIContentNameSearch extends UIForm {
 
-  private static String       KEYWORD             = "keyword".intern();
+  private static String       KEYWORD             = "keyword";
 
-  private static String       SEARCH_LOCATION     = "location".intern();
+  private static String       SEARCH_LOCATION     = "location";
 
   private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where jcr:path like '%/$1'"
                                                       + " order by exo:dateCreated DESC,jcr:primaryType DESC";

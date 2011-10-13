@@ -44,13 +44,13 @@ public class UISearchBox extends UIForm {
   private String             templatePath;
 
   /** The Constant KEYWORD_INPUT. */
-  public static final String KEYWORD_INPUT     = "keywordInput".intern();
+  public static final String KEYWORD_INPUT     = "keywordInput";
 
   /** The Constant PORTAL_NAME_PARAM. */
-  public static final String PORTAL_NAME_PARAM = "portal".intern();
+  public static final String PORTAL_NAME_PARAM = "portal";
 
   /** The Constant KEYWORD_PARAM. */
-  public static final String KEYWORD_PARAM     = "keyword".intern();
+  public static final String KEYWORD_PARAM     = "keyword";
 
   /**
    * Instantiates a new uI search box.

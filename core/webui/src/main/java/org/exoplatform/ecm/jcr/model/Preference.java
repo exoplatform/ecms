@@ -42,15 +42,15 @@ public class Preference {
 
   public static final String BLUE_DOWN_ARROW = "BlueDownArrow" ;
   public static final String BLUE_UP_ARROW = "BlueUpArrow" ;
-  public static final String NODES_PER_PAGE = "nbPerPage".intern();
-  public static final String PREFERENCE_ORDER_BY = "preferenceOrderBy".intern();
-  public static final String PREFERENCE_SORT_BY = "preferenceSortBy".intern();
-  public static final String PREFERENCE_QUERY_TYPE = "preferenceQueryType".intern();
-  public static final String PREFERENCE_ENABLESTRUCTURE = "enableStructure".intern();
-  public static final String PREFERENCE_SHOWSIDEBAR = "showSideBar".intern();
-  public static final String PREFERENCE_SHOWREFDOCUMENTS = "showRefDocuments".intern();
-  public static final String PREFERENCE_SHOW_ITEMS_BY_USER = "showItemsByUserInTimeline".intern();
-  public static final String PREFERENCE_SHOW_HIDDEN_NODE = "isShowHiddenNode".intern();
+  public static final String NODES_PER_PAGE = "nbPerPage";
+  public static final String PREFERENCE_ORDER_BY = "preferenceOrderBy";
+  public static final String PREFERENCE_SORT_BY = "preferenceSortBy";
+  public static final String PREFERENCE_QUERY_TYPE = "preferenceQueryType";
+  public static final String PREFERENCE_ENABLESTRUCTURE = "enableStructure";
+  public static final String PREFERENCE_SHOWSIDEBAR = "showSideBar";
+  public static final String PREFERENCE_SHOWREFDOCUMENTS = "showRefDocuments";
+  public static final String PREFERENCE_SHOW_ITEMS_BY_USER = "showItemsByUserInTimeline";
+  public static final String PREFERENCE_SHOW_HIDDEN_NODE = "isShowHiddenNode";
 
   private String sortType = SORT_BY_NODENAME ;
   private String order = ASCENDING_ORDER ;

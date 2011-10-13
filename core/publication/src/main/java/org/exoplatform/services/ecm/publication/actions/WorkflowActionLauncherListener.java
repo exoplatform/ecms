@@ -49,10 +49,10 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
   private static final String MIXIN_MOVE = "exo:move";
   private static final String WORKFLOW = "Workflow";
   private static final String VALIDATION_REQUEST = "validation request";
-  private static final String CURRENT_STATE = "publication:currentState".intern();
-  private static final String DEST_WORKSPACE = "exo:destWorkspace".intern();
-  private static final String DESTPATH = "exo:destPath".intern();
-  private static final String BACUP_PATH = "publication:backupPath".intern();
+  private static final String CURRENT_STATE = "publication:currentState";
+  private static final String DEST_WORKSPACE = "exo:destWorkspace";
+  private static final String DESTPATH = "exo:destPath";
+  private static final String BACUP_PATH = "publication:backupPath";
   private static final String DOCUMENT_BACUPUP = "documentsBackupPath";
   private static final Log LOG  = ExoLogger.getLogger(WorkflowActionLauncherListener.class);
 

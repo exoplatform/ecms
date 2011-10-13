@@ -70,7 +70,7 @@ public class EmailNotifyListener implements EventListener {
 
   private NodeLocation observedNode_ ;
   
-  final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern();
+  final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher";
 
   private static final String SITE_EXPLORER       = "siteExplorer";
 

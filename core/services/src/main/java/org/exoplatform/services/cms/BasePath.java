@@ -49,12 +49,12 @@ public interface BasePath {
   public static final String CB_SCRIPT_TEMPLATES = "cbScriptTemplates" ;
   public static final String CB_DETAIL_VIEW_TEMPLATES = "cbDetaiViewTemplates" ;
 
-  public static final String CMS_SCRIPTS_PATH = "cmsScriptsPath".intern() ;
-  public static final String CONTENT_BROWSER_SCRIPTS = "contentBrowserScripts".intern() ;
-  public static final String ECM_EXPLORER_SCRIPTS = "ecmExplorerScripts".intern() ;
-  public static final String ECM_ACTION_SCRIPTS = "ecmActionScripts".intern() ;
-  public static final String ECM_INTERCEPTOR_SCRIPTS = "ecmInterceptorScripts".intern() ;
-  public static final String ECM_WIDGET_SCRIPTS = "ecmWidgetScripts".intern() ;
+  public static final String CMS_SCRIPTS_PATH = "cmsScriptsPath" ;
+  public static final String CONTENT_BROWSER_SCRIPTS = "contentBrowserScripts" ;
+  public static final String ECM_EXPLORER_SCRIPTS = "ecmExplorerScripts" ;
+  public static final String ECM_ACTION_SCRIPTS = "ecmActionScripts" ;
+  public static final String ECM_INTERCEPTOR_SCRIPTS = "ecmInterceptorScripts" ;
+  public static final String ECM_WIDGET_SCRIPTS = "ecmWidgetScripts" ;
 
-  public static final String TRASH_PATH = "newDocumentsTrashPath".intern();
+  public static final String TRASH_PATH = "newDocumentsTrashPath";
 }

@@ -125,8 +125,8 @@ public class UIDialogForm extends UIForm {
   private static final Log LOG  = ExoLogger.getLogger("webui.form.UIDialogForm");
 
   private final String REPOSITORY = "repository";
-  protected final static String CANCEL_ACTION = "Cancel".intern();
-  protected final static String SAVE_ACTION = "Save".intern();
+  protected final static String CANCEL_ACTION = "Cancel";
+  protected final static String SAVE_ACTION = "Save";
   protected static final  String[]  ACTIONS = { SAVE_ACTION, CANCEL_ACTION };
   private static final String WYSIWYG_MULTI_ID = "WYSIWYGRichTextMultipleInputset";
 

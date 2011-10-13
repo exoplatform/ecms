@@ -29,9 +29,9 @@ import org.exoplatform.webui.form.UIFormInputBase;
  */
 public class UIFormRichtextField extends DialogFormField {
 
-  private final String TOOLBAR = "toolbar".intern();
-  private final String WIDTH = "width".intern();
-  private final String HEIGHT = "height".intern();
+  private final String TOOLBAR = "toolbar";
+  private final String WIDTH = "width";
+  private final String HEIGHT = "height";
 
   private String toolbar;
   private String width;

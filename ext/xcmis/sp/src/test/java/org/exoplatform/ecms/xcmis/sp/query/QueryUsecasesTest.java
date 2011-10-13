@@ -419,7 +419,7 @@ public class QueryUsecasesTest extends BaseQueryTest
          ObjectData objectData = storageA.getObjectById(id);
          if (objectData instanceof DocumentVersion) {
             DocumentVersion dd = (DocumentVersion)objectData;
-            if ("1".intern().equalsIgnoreCase(dd.getVersionLabel())) {
+            if ("1".equalsIgnoreCase(dd.getVersionLabel())) {
                dd.delete();
             }
          }

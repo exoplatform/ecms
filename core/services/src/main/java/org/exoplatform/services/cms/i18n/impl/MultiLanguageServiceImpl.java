@@ -95,22 +95,22 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
   /**
    * Property name exo:voter
    */
-  final static String         VOTER_PROP           = "exo:voter".intern();
+  final static String         VOTER_PROP           = "exo:voter";
 
   /**
    * Property name exo:votingRate
    */
-  final static String         VOTING_RATE_PROP     = "exo:votingRate".intern();
+  final static String         VOTING_RATE_PROP     = "exo:votingRate";
 
   /**
    * Property name exo:voteTotal
    */
-  final static String         VOTE_TOTAL_PROP      = "exo:voteTotal".intern();
+  final static String         VOTE_TOTAL_PROP      = "exo:voteTotal";
 
   /**
    * Property name exo:boteTotalOfLang
    */
-  final static String         VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern();
+  final static String         VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang";
 
   /**
    * Node path
