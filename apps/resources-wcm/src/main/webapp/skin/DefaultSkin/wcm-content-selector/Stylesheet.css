@@ -259,11 +259,13 @@
   padding: 10px;
 }
 
-#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent, #UIContentSelectorOne .GrayTabContainer .UITabContent {
+#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
   background: white;
-  overflow: visible !important;
 }
 
+#UIContentSelectorOne .GrayTabContainer .UITabContent {
+  overflow: visible !important;
+}
 /* ===========================*/
 
 /* Tree */
