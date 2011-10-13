@@ -9,7 +9,7 @@
   <artifactId>exo-ecms-upgrade</artifactId>
   <name>eXo ECMS Upgrade data</name>
   <description>eXo ECMS Upgrade data</description>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <dependencies>
     <dependency>
@@ -49,8 +49,7 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
-
-  <build>
+    <build>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -64,7 +63,7 @@
           </execution>
         </executions>
         <configuration>
-          <timestampFormat>{0, date,yyyyMMdd}</timestampFormat>
+          <timestampFormat>{0, date,yyyyMMddhhmmss}</timestampFormat>
         </configuration>
       </plugin>
     </plugins>
@@ -75,4 +74,8 @@
       </resource>
     </resources>
   </build>
+   <modules>
+    <module>favorite</module>
+    <module>voting-nodetype</module>
+   </modules>
 </project>
