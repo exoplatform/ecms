@@ -77,5 +77,6 @@
    <modules>
     <module>favorite</module>
     <module>voting-nodetype</module>
+    <module>thumbnails</module>
    </modules>
 </project>

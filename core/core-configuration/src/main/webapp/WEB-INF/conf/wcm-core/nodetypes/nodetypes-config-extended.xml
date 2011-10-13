@@ -862,14 +862,16 @@
   </nodeType>
 
   <nodeType name="exo:thumbnails" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-		<supertypes>
-      <supertype>nt:folder</supertype>
+	<supertypes>
+      <supertype>nt:hierarchyNode</supertype>
+      <supertype>nt:unstructured</supertype>
     </supertypes>
   </nodeType>
 
   <nodeType name="exo:thumbnail" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-		<supertypes>
-      <supertype>nt:folder</supertype>
+	<supertypes>
+      <supertype>nt:hierarchyNode</supertype>
+      <supertype>nt:unstructured</supertype>
     </supertypes>
     <propertyDefinitions>
 			<propertyDefinition name="exo:smallSize" requiredType="Binary" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
