@@ -37,24 +37,22 @@
   Calendar lCDateCalendar = Calendar.getInstance();
   def timeCreated = lCDateCalendar.getTimeInMillis();
 %>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.4.min.js"></script>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js"></script>
+<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.2.6.min.js"></script>
   <div class="ContentDetail">
 	  <%
 		  def style = "float:none; margin:auto;";
-		  if (size > 1) {
-		    style = "";
-		  }
+//		  if (size > 1) {
+//		    style = "";
+//		  }
 		%>
   	<div id="player-$timeCreated" class="PlayerContent" style="$style ; z-index:0;"></div>
-    <script>
-    <% print "\$" %> (function() {
+  	<script language="JavaScript">
       // install flowplayer into container
-    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, {
+    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.2.7.swf"}, {
       // fullscreen button not needed here
         plugins: {
           controls: {
-            url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
+            url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.2.5.swf',
             fullscreen: true,
             height: 30,
             // setup auto hide
@@ -76,41 +74,7 @@
             }
         }
       });
-    /*
-      here comes the magic plugin. It uses first div.clips element as the
-      root for as playlist entries. loop parameter makes clips play
-      from the beginning to the end.
-    */
-    <%
-      if (size > 1) {
-    %>
-        flowplayer("player-$timeCreated").playlist("div.petrol", {loop:true});
-    <%
-      }
-    %>
-  });
   </script>
-  <%
-    if (size > 1) {
-  %>
-  	<div class="clips petrol ListPlayer" style="width: 220px;">
-  <!-- single playlist entry -->
-  <%
-    def name = "";
-    for(int i = 0; i < links.size(); i++) {
-        link = links.get(i);
-        name = presentNodes.get(i).getName();
- %>
-      <a href="${link}" class="first">
-        ${name}
-      </a>
-<%
-  }
- %>
-		</div>
-<%
-  }
- %>
  </div>
 <style>
 .NavigationContainer {

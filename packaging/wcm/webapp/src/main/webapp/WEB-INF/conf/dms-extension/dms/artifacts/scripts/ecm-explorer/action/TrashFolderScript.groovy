@@ -47,7 +47,6 @@ public class TrashFolderScript implements CmsScript {
   }
   
   public void execute(Object context) {
-  	System.out.println("TrashFolderScript");
     Map variables = (Map) context;       
     String nodePath = (String)variables.get("nodePath");
 		String workspace = (String)variables.get("srcWorkspace");
@@ -66,10 +65,8 @@ public class TrashFolderScript implements CmsScript {
     } catch(Exception e) {
       LOG.warn("Exception when try to get node:" + nodePath);
     }
-    System.out.println("type: " + eventType);
     if ((eventType & Event.NODE_ADDED) > 0) {
     	if (!node.isNodeType(EXO_RESTORELOCATION)) {
-    		System.out.println("srcPath: " + srcPath);
     		node.addMixin(EXO_RESTORELOCATION);    		
   			node.setProperty(EXO_RESTOREPATH, fixRestorePath(srcPath));
   			node.setProperty(EXO_RESTORE_WORKSPACE, workspace);
