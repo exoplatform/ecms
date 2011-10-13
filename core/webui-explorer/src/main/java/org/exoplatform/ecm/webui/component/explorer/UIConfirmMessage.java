@@ -72,8 +72,7 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       uiWorkingArea.getChild(DeleteManageComponent.class).doDelete(uiConfirm.nodePath_, event);
       uiConfirm.isOK_ = true;
-      UIPopupContainer popupAction = uiConfirm.getAncestorOfType(UIPopupContainer.class);
-      popupAction.deActivate() ;
+      uiConfirm.deActivate();
     }
   }
 
