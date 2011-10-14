@@ -84,7 +84,7 @@
       <delete>Delete</delete>
     </action>
     <msg>
-      <not-valid-path>The item path is invalid.</not-valid-path>
+      <not-valid-path>The Folder Path is invalid.</not-valid-path>
       <saving-success>The portlet's preferences are saved.</saving-success>
     </msg>
   </UICLVConfig>
