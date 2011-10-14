@@ -93,12 +93,16 @@
 			  								 	}
 		  							})(this);" style="cursor: pointer; text-align: center; height: 23px; margin: 3px;font-weight:bold;text-decoration:underline;" >
 		  	$showProcess
-		  </div>
-			<%if(uicomponent.getStateImageURL() != "") {%>
-		    <div class="DefaultHide ActionContainer">					  		
+		  </div>			
+		    <div class="DefaultHide ActionContainer">
+		    <%if(uicomponent.getStateImageURL() != "") {%>					  		
 			  	<img src="$uicomponent.stateImageURL" alt="" />
-				</div>
-			<%}%>
+			  <%} else { %>
+			    <div style="text-align:center; font-style:italic">
+            <%=_ctx.appRes("UITask.label.process-diagram-not-available")%> 
+          </div>
+			  <%}%>
+				</div>			
 		</div>
   </div>
   <%uiform.end()%>

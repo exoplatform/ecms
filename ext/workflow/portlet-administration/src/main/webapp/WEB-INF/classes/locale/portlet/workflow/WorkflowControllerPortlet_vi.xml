@@ -60,6 +60,7 @@
     <label>
       <hide-process-link>Ẩn quá trình</hide-process-link>
       <show-process-link>Hiện thị quá trình</show-process-link>
+      <process-diagram-not-available>Minh hoạ quá trình không hiện hữu</process-diagram-not-available>
     </label>
   </UITask>
   <UIBPDefinition>

@@ -50,11 +50,12 @@
   </PopupDelegatedSelectorId>
   <UITask>
     <label>
-      <hide-process-link>Hide process link</hide-process-link>
-      <show-process-link>Show process link</show-process-link>
+      <hide-process-link>Hide Process Diagram</hide-process-link>
+      <show-process-link>Show Process Diagram</show-process-link>
+      <process-diagram-not-available>Process's diagram is not available</process-diagram-not-available>
     </label>
     <msg>
-      <has-not-got-delegate>You must choose any user to deletgate</has-not-got-delegate>
+      <has-not-got-delegate>You must choose any user to delegate</has-not-got-delegate>
     </msg>
     <title>
       <Delegate>Select User</Delegate>

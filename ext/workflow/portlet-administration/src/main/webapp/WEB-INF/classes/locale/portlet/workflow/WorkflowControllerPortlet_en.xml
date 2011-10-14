@@ -58,8 +58,9 @@
   </UITaksList>
   <UITask>
     <label>
-      <hide-process-link>Hide Process Link</hide-process-link>
-      <show-process-link>Show Process Link</show-process-link>
+      <hide-process-link>Hide Process Diagram</hide-process-link>
+      <show-process-link>Show Process Diagram</show-process-link>
+      <process-diagram-not-available>Process's diagram is not available</process-diagram-not-available>
     </label>
     <title>
       <Delegate>Select User</Delegate>

@@ -58,8 +58,9 @@
   </UITaksList>
   <UITask>
     <label>
-      <hide-process-link>Cacher le lien vers le processus</hide-process-link>
-      <show-process-link>Montrer le lien vers le processus</show-process-link>
+      <hide-process-link>Cacher Schéma Processus</hide-process-link>
+      <show-process-link>Montrer Schéma Processus</show-process-link>
+      <process-diagram-not-available>Schéma du processus n'est pas disponible</process-diagram-not-available>
     </label>
     <title>
       <Delegate>Saisir un utilisateur</Delegate>

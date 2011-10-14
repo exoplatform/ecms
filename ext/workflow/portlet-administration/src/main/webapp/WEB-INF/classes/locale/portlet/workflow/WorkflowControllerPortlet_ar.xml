@@ -59,6 +59,7 @@
     <label>
       <hide-process-link>إخفاء الارتباط إلى عملية</hide-process-link>
       <show-process-link>إظهار رابط نحو المهمة </show-process-link>
+      <process-diagram-not-available>Process's diagram is not available</process-diagram-not-available>
     </label>
     <msg>
       <has-not-got-delegate>الرجاء اختيار المستخدم الذي لتفويض</has-not-got-delegate>
