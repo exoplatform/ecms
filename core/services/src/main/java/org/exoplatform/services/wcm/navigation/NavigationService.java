@@ -23,6 +23,7 @@ import java.util.List;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.config.model.PageNode;
 import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.webui.util.Util;
 
 /**
  * Created by The eXo Platform SAS
@@ -70,12 +71,18 @@ public class NavigationService {
 		  if (isVisibleNode(node)) {
 			  if (!first) js.append(",");
 			  first=false;
+			  
+			  String link = "#";
+			  if (node.getPageReference() != null) {
+				  link = Util.getPortalRequestContext().getPortalURI() + node.getUri();
+			  } 
 			  js.append("{");
 			  js.append("\"icon\":"+(node.getIcon()!=null?"\""+node.getIcon()+"\"":"null")+",");
 			  js.append("\"label\":\""+node.getLabel()+"\",");
 			  js.append("\"name\":\""+node.getName()+"\",");
 			  js.append("\"resolvedLabel\":\""+node.getResolvedLabel()+"\",");
 			  js.append("\"uri\":\""+node.getUri()+"\",");
+			  js.append("\"link\":\"" + link + "\",");
 			  js.append("\"nodes\":"+addJsonNodes(node.getNodes()));
 			  js.append("}");
 		  }
