@@ -252,7 +252,7 @@
 												Node cssNode = webContentNode.getNode("css/default.css");
 												cssContent = cssNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
 											}
-											String[] fieldContentCSS = ["jcrPath=/node/css/default.css/jcr:content/jcr:data", cssContent] ;
+											String[] fieldContentCSS = ["jcrPath=/node/css/default.css/jcr:content/jcr:data", "options=noSanitization", cssContent] ;
 											uicomponent.addTextAreaField(cssFormId, fieldContentCSS) ;
 										%>
 									</td>
@@ -283,7 +283,7 @@
 												Node jsNode = webContentNode.getNode("js/default.js");
 												jsContent = jsNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
 											} 
-											String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", jsContent];
+											String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 											uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 										%>
 									</td>
