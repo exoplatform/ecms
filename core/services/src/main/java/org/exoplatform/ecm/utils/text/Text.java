@@ -341,6 +341,10 @@ public class Text {
   public static String escape(String string, char escape) {
     return escape(string, escape, false);
   }
+  
+  public static String escape(String string, char escape, boolean isPath) {
+    return escape(string, escape, isPath, "");
+  }
 
   /**
    * Does an URL encoding of the <code>string</code> using the <code>escape</code> character. The
@@ -354,18 +358,24 @@ public class Text {
    *          the escape character.
    * @param isPath
    *          if <code>true</code>, the string is treated as path
+   * @param extraCharacters
+   *          the extra characters that will not be encoded.
    * @return the escaped string
    * @throws NullPointerException
    *           if <code>string</code> is <code>null</code>.
    */
-  public static String escape(String string, char escape, boolean isPath) {
+  public static String escape(String string, char escape, boolean isPath, String extraCharacters) {
     try {
       BitSet validChars = isPath ? URISaveEx : URISave;
+      BitSet extraBitSet = (BitSet)URISave.clone();
+      for (char c : extraCharacters.toCharArray()) {
+        extraBitSet.set(c);
+      }
       byte[] bytes = string.getBytes("utf-8");
       StringBuffer out = new StringBuffer(bytes.length);
       for (int i = 0; i < bytes.length; i++) {
         int c = bytes[i] & 0xff;
-        if (validChars.get(c) && c != escape) {
+        if ((validChars.get(c) || extraBitSet.get(c))&& c != escape) {
           out.append((char) c);
         } else {
           out.append(escape);

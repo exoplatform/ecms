@@ -434,7 +434,7 @@ public class UICLVPresentation extends UIContainer {
     } else {
       param += node.getPath();
     }
-    param = Text.escape(param);
+    param = Text.escape(param, '%', true, " ");
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
     nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
@@ -448,7 +448,6 @@ public class UICLVPresentation extends UIContainer {
     link = baseURI + nodeURL.toString();
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
-    link = link.replaceAll("%27", "%2527");
 
     return link;
   }
