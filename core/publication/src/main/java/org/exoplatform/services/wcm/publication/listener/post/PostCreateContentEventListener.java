@@ -28,11 +28,13 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 
 /**
@@ -44,6 +46,8 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
   private static final Log log = ExoLogger.getLogger(PostCreateContentEventListener.class);
+  
+  public static final String POST_INIT_STATE_EVENT      = "PublicationService.event.postInitState";
 
   /** The publication service. */
   private WCMPublicationService publicationService;
@@ -82,6 +86,11 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     }
     if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")
         || currentNode.getParent().isNodeType("exo:actionStorage")) {
+      if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+        listenerService.broadcast(POST_INIT_STATE_EVENT, cmsService, currentNode);
+      }
       return;
     }
 

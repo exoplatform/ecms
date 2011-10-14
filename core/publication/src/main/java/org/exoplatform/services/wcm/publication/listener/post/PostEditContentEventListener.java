@@ -43,6 +43,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
   private WCMPublicationService publicationService;
   
   public static final String POST_EDIT_CONTENT_EVENT = "PostEditContentEventListener.event.postEditContent";
+  
   /**
    * Instantiates a new post edit content event listener.
    *
@@ -61,6 +62,11 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
         currentNode.isNodeType("exo:template") ||
         currentNode.isNodeType("exo:jsFile") ||
         currentNode.isNodeType("exo:action") ){
+      if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+        listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
+      }
       return;
     }    
     String siteName = "";
