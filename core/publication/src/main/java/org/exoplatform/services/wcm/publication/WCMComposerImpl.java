@@ -750,24 +750,30 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 */
 	private String getTemplatesSQLFilter(String repository) {
 		if (templatesFilter != null) return templatesFilter;
-		else {
-			try {
-				List<String> documentTypes = templateService.getDocumentTemplates(repository);
-				StringBuffer documentTypeClause = new StringBuffer("(");
-				for (int i = 0; i < documentTypes.size(); i++) {
-					String documentType = documentTypes.get(i);
-					documentTypeClause.append("jcr:primaryType = '" + documentType + "'");
-					if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
-				}
-				templatesFilter = documentTypeClause.toString();
-				templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
-				return templatesFilter;
-			} catch (Exception e) {
-				log.error("Error when perform getTemlatesSQLFilter: ", e);
-				return null;
-			}
-		}
-	}
+		return updateTemplatesSQLFilter(repository);
+	}	
+  /**
+	* Update all document nodetypes and write a query cause
+	* @param repository the repository's name
+	* @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
+	*/
+  public String updateTemplatesSQLFilter(String repository) {    
+    try {
+      List<String> documentTypes = templateService.getDocumentTemplates(repository);
+      StringBuffer documentTypeClause = new StringBuffer("(");
+      for (int i = 0; i < documentTypes.size(); i++) {
+        String documentType = documentTypes.get(i);
+        documentTypeClause.append("jcr:primaryType = '" + documentType + "'");
+        if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
+      }
+      templatesFilter = documentTypeClause.toString();
+      templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
+      return templatesFilter;
+    } catch (Exception e) {
+      log.error("Error when perform getTemlatesSQLFilter: ", e);
+      return null;
+    }
+  }
 	
 	/**
 	 * Gets the node by category.

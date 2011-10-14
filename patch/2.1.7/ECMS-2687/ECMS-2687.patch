@@ -1,0 +1,104 @@
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(revision 73260)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(working copy)
+@@ -750,24 +750,30 @@
+ 	 */
+ 	private String getTemplatesSQLFilter(String repository) {
+ 		if (templatesFilter != null) return templatesFilter;
+-		else {
+-			try {
+-				List<String> documentTypes = templateService.getDocumentTemplates(repository);
+-				StringBuffer documentTypeClause = new StringBuffer("(");
+-				for (int i = 0; i < documentTypes.size(); i++) {
+-					String documentType = documentTypes.get(i);
+-					documentTypeClause.append("jcr:primaryType = '" + documentType + "'");
+-					if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
+-				}
+-				templatesFilter = documentTypeClause.toString();
+-				templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
+-				return templatesFilter;
+-			} catch (Exception e) {
+-				log.error("Error when perform getTemlatesSQLFilter: ", e);
+-				return null;
+-			}
+-		}
+-	}
++		return updateTemplatesSQLFilter(repository);
++	}	
++  /**
++	* Update all document nodetypes and write a query cause
++	* @param repository the repository's name
++	* @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
++	*/
++  public String updateTemplatesSQLFilter(String repository) {    
++    try {
++      List<String> documentTypes = templateService.getDocumentTemplates(repository);
++      StringBuffer documentTypeClause = new StringBuffer("(");
++      for (int i = 0; i < documentTypes.size(); i++) {
++        String documentType = documentTypes.get(i);
++        documentTypeClause.append("jcr:primaryType = '" + documentType + "'");
++        if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
++      }
++      templatesFilter = documentTypeClause.toString();
++      templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
++      return templatesFilter;
++    } catch (Exception e) {
++      log.error("Error when perform getTemlatesSQLFilter: ", e);
++      return null;
++    }
++  }
+ 	
+ 	/**
+ 	 * Gets the node by category.
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java	(revision 73260)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java	(working copy)
+@@ -196,5 +196,11 @@
+ 	 * @throws Exception the exception
+ 	 */
+ 	public boolean isCached() throws Exception;
++	/**
++   * Update all document nodetypes and write a query cause   
++   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
++   * @throws Exception the exception
++   */
++  public String updateTemplatesSQLFilter(String repository) throws Exception;
+ 	
+ }
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateForm.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateForm.java	(revision 73260)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateForm.java	(working copy)
+@@ -52,6 +52,8 @@
+ import org.exoplatform.webui.form.UIFormTabPane;
+ import org.exoplatform.webui.form.UIFormTextAreaInput;
+ import org.exoplatform.webui.form.validator.MandatoryValidator;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
++import org.exoplatform.services.wcm.publication.WCMComposer;
+ 
+ /**
+  * Created by The eXo Platform SARL
+@@ -222,7 +224,9 @@
+       templateService.addTemplate(TemplateService.VIEWS, name, label, isDocumentTemplate,
+           TemplateService.DEFAULT_VIEW, roles, view, uiForm.getRepository()) ;
+       templateService.addTemplate(TemplateService.SKINS, name, label, isDocumentTemplate,
+-          TemplateService.DEFAULT_SKIN, roles, skin, uiForm.getRepository()) ;
++          TemplateService.DEFAULT_SKIN, roles, skin, uiForm.getRepository()) ;
++      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
++      composer.updateTemplatesSQLFilter(uiForm.getRepository());
+       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
+       uiManager.refresh() ;
+       uiForm.refresh() ;
+Index: docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/composer.wiki
+===================================================================
+--- docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/composer.wiki	(revision 73260)
++++ docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/composer.wiki	(working copy)
+@@ -12,5 +12,6 @@
+ | *getAllowedStates*| {{List<String>}} | {{getAllowedStates(String mode)}}{example}{example} {{throws Exception ;}} | returns allowed states for a specified mode.{example}{example}{example}{example} @param mode: the mode {example}{example} @return a jcr node {example}{example} @throws Exception: the exception |
+ | *cleanTemplates* | {{void}} | {{cleanTemplates()}}{example}{example} {{throws Exception ;}} | initialize the templates hashmap{example}{example}{example}{example} @throws Exception: the exception |
+ | *isCached* | {{boolean}} | {{isCached()}} {example}{example}{{throws Exception;}} | Check isCache or not {example}{example}@return the state of cache {example}{example} @throws Exception: the exception |
++| *updateTemplatesSQLFilter* | {{String}} | {{updateTemplatesSQLFilter(String repository)}} {example}{example}{{throws Exception;}} | Update all document nodetypes and write a query cause. {example}{example} @param repository: the repository {example}{example}{example}{example}@return: A part of the query allow search all document node and taxonomy link also. Return null if there is any exception. {example}{example} @throws Exception: the exception|
+ 
+ 

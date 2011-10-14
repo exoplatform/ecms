@@ -52,6 +52,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 
 /**
  * Created by The eXo Platform SARL
@@ -223,6 +225,8 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
           TemplateService.DEFAULT_VIEW, roles, view, uiForm.getRepository()) ;
       templateService.addTemplate(TemplateService.SKINS, name, label, isDocumentTemplate,
           TemplateService.DEFAULT_SKIN, roles, skin, uiForm.getRepository()) ;
+      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
+      composer.updateTemplatesSQLFilter(uiForm.getRepository());
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       uiManager.refresh() ;
       uiForm.refresh() ;
