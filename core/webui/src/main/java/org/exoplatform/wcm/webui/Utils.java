@@ -57,7 +57,6 @@ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
@@ -78,9 +77,11 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
+import org.owasp.validator.html.AntiSamy;
+import org.owasp.validator.html.CleanResults;
+import org.owasp.validator.html.Policy;
 
 import com.ibm.icu.text.Transliterator;
-import org.owasp.validator.html.*;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.phamvu@exoplatform.com
@@ -418,9 +419,7 @@ public class Utils {
 
   public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
     try {
-      String itemPath = ((ManageableRepository) node.getSession().getRepository()).getConfiguration()
-                                                                                  .getName()
-          + '/' + node.getSession().getWorkspace().getName() + '/' + node.getPath();
+      String itemPath = node.getSession().getWorkspace().getName() + node.getPath();
       return getEditLink(itemPath, isEditable, isNew);
     } catch (RepositoryException e) {
     }
@@ -452,7 +451,7 @@ public class Utils {
     }
 
     NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
-    nodeURL.setNode(editorNode).setQueryParameterValue("path", "/" + itemPath);
+    nodeURL.setNode(editorNode).setQueryParameterValue("path", itemPath);
     if (isEditable) {
       nodeURL.setQueryParameterValue("edit", "true");
     }
