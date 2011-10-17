@@ -296,7 +296,7 @@
       <AddFolder>Ajouter un répertoire</AddFolder>
       <AddDocument>Ajouter un contenu</AddDocument>
       <EditDocument>Editer un document</EditDocument>
-      <Upload>Uploader un/des document(s)</Upload>
+      <Upload>Uploader des fichiers</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <CreateTicket>Nouveau ticket</CreateTicket>
@@ -561,7 +561,7 @@
       <Custom>Personnaliser</Custom>
       <AddFolder>Ajouter un répertoire</AddFolder>
       <AddDocument>Ajouter un contenu</AddDocument>
-      <Upload>Uploader un/des document(s)</Upload>
+      <Upload>Uploader des fichiers</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
