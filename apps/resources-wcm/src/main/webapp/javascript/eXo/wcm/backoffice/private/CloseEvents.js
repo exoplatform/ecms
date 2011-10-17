@@ -38,17 +38,22 @@ function ajaxGet(url, callback) {
  * - manage CKeditor update in textareas
  **/
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
- if(action.toLowerCase() == "close" || action.toLowerCase() == "back") {
-   if (b_changed) {      
-			var answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
-    	if (answer) {
+  if(action.toLowerCase() == "changetype" || action.toLowerCase() == "close" || action.toLowerCase() == "back") {
+    if (b_changed) {      
+	  var answer = null;
+	  if (action.toLowerCase() == "changetype") {
+	  	answer = confirm(document.getElementById("ChangeTypeConfirmationMsg").innerHTML);
+	  } else {
+	  	answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
+	  }  
+	  
+      if (answer) {
       	b_changed = false;
-    	} 
-			else {
+      }	else {
       	return;
-    	}
-   }
- }
+      }
+    }
+  }    
  
  if (!callback) callback = null;
  var form = this.getFormElemt(formId) ;

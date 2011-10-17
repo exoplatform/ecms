@@ -3382,6 +3382,7 @@
   <UIDocumentForm>
 	  <msg>
 		  <confirm-close>Les changements que vous avez fait seront perdus si vous fermez ce formulaire.</confirm-close>
+		  <confirm-changeType>Les changements que vous avez fait seront perdus si vous changez le type de contenu.</confirm-changeType>
 		  <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>

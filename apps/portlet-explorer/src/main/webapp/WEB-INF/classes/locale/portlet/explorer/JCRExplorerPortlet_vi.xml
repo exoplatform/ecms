@@ -3383,6 +3383,7 @@
   <UIDocumentForm>
 	  <msg>
 		  <confirm-close>Dữ liệu mới cập nhất sẽ bị mất nếu bạn đóng biểu mẫu này.</confirm-close>
+		  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
 		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>

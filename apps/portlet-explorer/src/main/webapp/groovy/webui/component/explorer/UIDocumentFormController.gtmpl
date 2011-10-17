@@ -1,5 +1,6 @@
 <%  
   def messageClose = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-close") ;
+  def messageChangeType = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-changeType") ;
   def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
 %>
 <div class="UIDocumentFormController" id="$uicomponent.id" >	
@@ -32,6 +33,7 @@
 		%>	
 	<% } %>
 	<div id="CloseConfirmationMsg" style="display:none">${messageClose}</div>
+  <div id="ChangeTypeConfirmationMsg" style="display:none">${messageChangeType}</div>
 	<div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>
 </div>
 <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>

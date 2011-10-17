@@ -3357,6 +3357,7 @@
   <UIDocumentForm>
 	  <msg>
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+		  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
