@@ -325,6 +325,33 @@ public class TestVotingService extends BaseDMSTestCase {
     long voteTotal = votingService.getVoteTotal(test);
     assertEquals(voteTotal, test.getProperty(VOTE_TOTAL_PROP).getValue().getLong());
   }
+  
+  /**
+   * Test Method: getVoteTotal()
+   * Input: test node is set English default language and has MultiLanguage
+   *        test node is voted 4 times: root votes 1 times using default language.
+   *                                    john votes 1 times using default language.
+   *                                    marry votes 3 times using both fr, vi, and en language.
+   * Expected:
+   *       Total of votes of test node = value of VOTE_TOTAL_PROP property of test node.
+   *       In this case:
+   *       total = total of voters with default language + total of voter with other languages.
+   */
+  public void testGetVoteValueOfUser() throws Exception{
+    Node test = initNode();
+    String DefaultLang = multiLanguageService.getDefault(test);
+    votingService.vote(test, 5, "root", DefaultLang);
+    votingService.vote(test, 4, "john", DefaultLang);
+    votingService.vote(test, 4, "john", "en");
+    votingService.vote(test, 3, "john", "fr");
+    votingService.vote(test, 2, "john", "vi");
+    
+    assertEquals(5.0, votingService.getVoteValueOfUser(test, "root", DefaultLang));
+    assertEquals(4.0, votingService.getVoteValueOfUser(test, "john", DefaultLang));
+    assertEquals(4.0, votingService.getVoteValueOfUser(test, "john", "en"));
+    assertEquals(3.0, votingService.getVoteValueOfUser(test, "john", "fr"));
+    assertEquals(2.0, votingService.getVoteValueOfUser(test, "john", "vi"));
+  }
 
   /**
    * Clean data test

@@ -216,7 +216,7 @@
 } 
 
 .UIJCRExplorerPortlet .UIVoteForm .OptionsContainer .RatedVote {
-  background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') left -16px;
+  background: url('/eXoDMSResources/skin/images/vote/ImageRate.gif') left -35px;
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
 	margin: 2px 3px 0px;

@@ -26,6 +26,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.voting.VotingService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -53,8 +55,13 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
   public void deActivate() throws Exception {}
 
   public double getRating() throws Exception {
-    return getAncestorOfType(UIJCRExplorer.class).getCurrentNode().
-                                                  getProperty("exo:votingRate").getDouble() ;
+    VotingService votingService = WCMCoreUtils.getService(VotingService.class);
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    UIDocumentInfo uiDocInfo = uiExplorer.findFirstComponentOfType(UIDocumentInfo.class);
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+    return votingService.getVoteValueOfUser(uiExplorer.getCurrentNode(),
+                                            currentUser,
+                                            uiDocInfo.getLanguage());
   }
 
   static  public class VoteActionListener extends EventListener<UIVoteForm> {

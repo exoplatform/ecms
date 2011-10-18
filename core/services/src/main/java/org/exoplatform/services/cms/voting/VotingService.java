@@ -61,5 +61,16 @@ public interface VotingService {
    * @throws Exception
    */
   public boolean isVoted(Node node, String userName, String language) throws Exception;
+  
+  /**
+   * returns user's vote value on the given node
+   * 
+   * @param node the node that will be voted
+   * @param userName the name of user had voted
+   * @param language language of to-be-voted node
+   * @return
+   * @throws Exception
+   */  
+  public double getVoteValueOfUser(Node node, String userName, String language) throws Exception; 
 
 }

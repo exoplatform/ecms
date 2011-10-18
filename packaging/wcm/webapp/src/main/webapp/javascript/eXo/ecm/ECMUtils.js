@@ -10,6 +10,7 @@
 	    RightClick = eXo.webui.UIRightClickPopupMenu;
 	}
 	ECMUtils.prototype.popupArray = [];
+	ECMUtils.prototype.voteRate = 0;
 	ECMUtils.prototype.init = function(portletId) {
 		var portlet = document.getElementById(portletId) ;
 		if(!portlet) return ;
@@ -111,7 +112,7 @@
 
 	ECMUtils.prototype.initVote = function(voteId, rate) {
 		var vote = document.getElementById(voteId) ;
-		vote.rate = rate = parseInt(rate) ;
+		voteRate = vote.rate = rate = parseInt(rate) ;
 		var optsContainer = DOM.findFirstDescendantByClass(vote, "div", "OptionsContainer") ;
 		var options = DOM.getChildrenByTagName(optsContainer, "div") ;
 		for(var i = 0; i < options.length; i++) {
@@ -139,7 +140,10 @@
 		var i = opts.length;
 		for(--i; i >= 0; i--) {
 			if(opts[i] == this) break ;
-			opts[i].className = "NormalVote" ;
+			if (i < voteRate) 
+				opts[i].className = "RatedVote" ;
+			else
+				opts[i].className = "NormalVote" ;
 		}
 		if(opts[i].className == "OverVote") return ;
 		for(; i >= 0; i--) {

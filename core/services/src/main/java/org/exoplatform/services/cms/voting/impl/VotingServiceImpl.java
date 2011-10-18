@@ -243,4 +243,24 @@ public class VotingServiceImpl implements VotingService {
     }
     return node;
   }
+
+  @Override
+  public double getVoteValueOfUser(Node node, String userName, String language) throws Exception {
+    Session session = node.getSession();
+    node = handleUser(session, node, userName);
+    
+    if(!node.isNodeType(VOTABLE)) {
+      if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
+      else throw new NoSuchNodeTypeException() ;
+    }
+  
+    Node languageNode = handleLanguage(node, language);
+    Value voterVoteValue = getVoterVoteValue(languageNode, userName);
+    if (voterVoteValue != null) {
+      String stValue = voterVoteValue.getString();
+      return Double.parseDouble(stValue.substring(stValue.indexOf(SPACE) + 1));
+    } else {
+      return 0;
+    }
+  }
 }
