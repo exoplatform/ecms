@@ -99,7 +99,8 @@ public abstract class UICLVContainer extends UIContainer {
       int slashIndex = oldPath.indexOf("/");
       String path = oldPath.substring(slashIndex + 1);
       String[] repoWorkspace = oldPath.substring(0, slashIndex).split(":");
-      return repoWorkspace[0] + '/' + repoWorkspace[1] + '/' + path;
+      String strWorkspace = repoWorkspace[1];
+      return strWorkspace + '/' + path;
   }
 
 
