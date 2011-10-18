@@ -251,6 +251,7 @@
   border: solid 1px #939393; border-top: none;
   padding: 10px 0px 10px 4px; /* orientation=lt */
   padding: 10px 4px 10px 0px; /* orientation=rt */
+  background: none repeat scroll 0 0 white;
 }
 
 .UIJCRExplorerPortlet .UINodeTypeInfo .HorizontalLayout .UITabContentContainer {
