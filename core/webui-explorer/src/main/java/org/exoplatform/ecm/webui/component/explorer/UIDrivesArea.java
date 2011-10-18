@@ -100,14 +100,26 @@ public class UIDrivesArea extends UIContainer {
     }
   }
 
-  public String getGroupLabel(String groupId) {
-    RequestContext context = RequestContext.getCurrentInstance();
-    ResourceBundle res = context.getApplicationResourceBundle();
-    try {
-      return res.getString("Drives.label." + groupId.replace(".", ""));
-    } catch (MissingResourceException ex) {
-      return groupId.replace(".", " / ");
+  public String getGroupLabel(String groupId, boolean isFull) {
+    String ret = groupId.replace(".", "/");
+    if (!isFull) {
+      int count = 0;
+      int slashPosition = -1;
+      for (int i = 0; i < ret.length(); i++) {
+        if ('/' == ret.charAt(i)) {
+          if (++count == 4) {
+            slashPosition = i;
+            break;
+          }
+        }
+      }
+      if (slashPosition > 0) {
+        ret = ret.substring(0, slashPosition) + "...";
+      } else if (ret.length() > 70) {
+        ret = ret.substring(0, 70) + "...";
+      }
     }
+    return ret;
   }
 
   public List<String> getRepositoryList() {
