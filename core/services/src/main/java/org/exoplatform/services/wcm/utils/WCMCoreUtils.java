@@ -20,13 +20,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -40,6 +44,7 @@ import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -300,5 +305,33 @@ public class WCMCoreUtils {
       log.error("Unexpected problem happen when active stylesheet", e);
     } 
     return buffer.toString();
+  }
+  
+  public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
+    MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);    
+    Hashtable<String, String> templates = new Hashtable<String, String>();
+    List<String> metaDataList = metadataService.getMetadataList();
+
+    NodeType[] nodeTypes = node.getMixinNodeTypes();
+    for(NodeType nt : nodeTypes) {
+      if(metaDataList.contains(nt.getName())) {
+        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
+      }
+    }
+    Item primaryItem = null;
+    try {
+      primaryItem = node.getPrimaryItem();
+    } catch (ItemNotFoundException e) {
+    }
+    if (primaryItem != null && primaryItem.isNode()) {
+      Node primaryNode = (Node) node.getPrimaryItem();
+      NodeType[] primaryTypes = primaryNode.getMixinNodeTypes();
+      for(NodeType nt : primaryTypes) {
+        if(metaDataList.contains(nt.getName())) {
+          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
+        }
+      }
+    }
+    return templates;
   }
 }

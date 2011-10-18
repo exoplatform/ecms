@@ -21,6 +21,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.jcr.Node;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.HasMetadataTemplatesFilter;
@@ -28,6 +30,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBar
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataContainer;
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataManager;
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataTemplate;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -60,7 +63,10 @@ public class ViewMetadatasActionComponent extends UIComponent {
     public void processEvent(Event<ViewMetadatasActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiJCRExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
-      Hashtable<String, String> metaDataTemp = uiActionBar.getMetadataTemplates();
+      Node currentNode = uiJCRExplorer.getCurrentNode() ;
+      
+      
+      Hashtable<String, String> metaDataTemp = WCMCoreUtils.getMetadataTemplates(currentNode);
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(UIViewMetadataManager.class, 700);
       UIViewMetadataManager uiMetadataManager =

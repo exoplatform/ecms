@@ -19,8 +19,11 @@ package org.exoplatform.ecm.webui.component.explorer.control.filter;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
+import javax.jcr.Node;
+
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
+import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 /**
  * Created by The eXo Platform SAS
@@ -30,13 +33,19 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
  */
 public class HasMetadataTemplatesFilter extends UIExtensionAbstractFilter {
 
+  public HasMetadataTemplatesFilter() {
+    super("UIViewMetadataContainer.msg.path-not-found", UIExtensionFilterType.MANDATORY);
+  }
+  
   public boolean accept(Map<String, Object> context) throws Exception {
-    UIActionBar uiActionBar = (UIActionBar) context.get(UIActionBar.class.getName());
-    Hashtable<String, String> metaDataTemp = uiActionBar.getMetadataTemplates();
+    Node currentNode = (Node) context.get(Node.class.getName());
+    Hashtable<String, String> metaDataTemp = WCMCoreUtils.getMetadataTemplates(currentNode);
     return !metaDataTemp.isEmpty();
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    createUIPopupMessages(context, "UIViewMetadataContainer.msg.path-not-found");
+    
   }
+  
+  
 }

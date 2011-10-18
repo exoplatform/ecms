@@ -208,35 +208,6 @@ public class UIActionBar extends UIForm {
     return getApplicationComponent(QueryService.class).getQueries(userName, WCMCoreUtils.getSystemSessionProvider());
   }
 
-  public Hashtable<String, String> getMetadataTemplates() throws Exception {
-    MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    Node node = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
-    Hashtable<String, String> templates = new Hashtable<String, String>();
-    List<String> metaDataList = metadataService.getMetadataList();
-
-    NodeType[] nodeTypes = node.getMixinNodeTypes();
-    for(NodeType nt : nodeTypes) {
-      if(metaDataList.contains(nt.getName())) {
-        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-      }
-    }
-    Item primaryItem = null;
-    try {
-      primaryItem = node.getPrimaryItem();
-    } catch (ItemNotFoundException e) {
-    }
-    if (primaryItem != null && primaryItem.isNode()) {
-      Node primaryNode = (Node) node.getPrimaryItem();
-      NodeType[] primaryTypes = primaryNode.getMixinNodeTypes();
-      for(NodeType nt : primaryTypes) {
-        if(metaDataList.contains(nt.getName())) {
-          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
-        }
-      }
-    }
-    return templates;
-  }
-
   public synchronized UIComponent getUIAction(String action)  {
     try {
       UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
