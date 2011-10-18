@@ -479,6 +479,7 @@
 			maxSpace = parseInt(portletFrag.offsetWidth) - parseInt(viewBarContainer.offsetWidth);
 		}
 
+    var lastIndex = 0;
 		for(var i = 0; i <  uiTabs.length; i++){
 			uiTabs[i].style.display = "block" ;
 			listHideIcon.style.display = "block" ;
@@ -491,18 +492,27 @@
 				listHideIcon.className = "IconListHideElement ShowElementIcon";
 				listHideIcon.style.visibility = "hidden" ;
 				uiTabs[i].style.display = 'block';
+				var split = DOM.findFirstDescendantByClass(uiTabs[i], "div", "Non-Split");
+				if (split) {
+				  split.className = 'Split';
+				}
 				elementSpace += uiTabs[i].offsetWidth;
 				var subItem = DOM.findFirstDescendantByClass(uiTabs[i], "a", "SubTabIcon");
 				eXo.ecm.ECMUtils.removeElementListHide(subItem);
+				lastIndex = i;
 			}
 		}
-
+    var split = DOM.findFirstDescendantByClass(uiTabs[lastIndex], "div", "Split");
+    if (split) {
+      split.className = 'Non-Split';
+    }
 		eXo.core.Browser.addOnResizeCallback('ECMresize', function(){eXo.ecm.ECMUtils.checkAvailableSpace();});
 	};
 
 	ECMUtils.prototype.addElementListHide = function(obj) {
 		var tmpNode = obj.cloneNode(true);
 		var subItem = DOM.findFirstDescendantByClass(tmpNode, "a", "SubTabIcon");
+		var split = DOM.findFirstDescendantByClass(tmpNode, "div", "Split");
 		var listHideIcon = document.getElementById('IconListHideElement');
 		var listHideContainer = DOM.findFirstDescendantByClass(listHideIcon, "div", "ListHideContainer");
 		var uiTabs = DOM.findDescendantsByClass(listHideContainer, "div", "SubTabItem");
@@ -511,6 +521,9 @@
 			if(hideSubItem.className == subItem.className) {
 				return;
 			}
+		}
+		if (split) {
+		  split.className = 'Non-Split';
 		}
 		listHideContainer.appendChild(tmpNode);
 
