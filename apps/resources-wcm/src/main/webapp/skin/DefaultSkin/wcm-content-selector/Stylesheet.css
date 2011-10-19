@@ -46,6 +46,10 @@
   width: 15%;
 }
 
+#UIContentSelectorOne #UIContentSearchResult .UIGrid .action .ActionContainer img {
+  margin:0px;
+}
+
 .UIWebSearchResult .action {
   width: 15%;
 }
@@ -259,15 +263,11 @@
   padding: 10px;
 }
 
-#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
+#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent, #UIContentSelectorOne .GrayTabContainer .UITabContent {
   background: white;
 }
 
-#UIContentSelectorOne .GrayTabContainer .UITabContent {
-  overflow: visible !important;
-}
 /* ===========================*/
-
 /* Tree */
 .Tree .HomeNode {
 	background: url('background/TreeRoot24x18.gif') no-repeat left;
@@ -570,7 +570,7 @@
 }
 
 #UIContentSelectorOne .UIHorizontalTabs {
-	height: 24px;
+	height: 27px;
 	border-bottom: 1px solid #c7c7c7;
 }
 
