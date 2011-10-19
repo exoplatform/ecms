@@ -22,6 +22,8 @@ function getModule(params) {
   var commonsVersion = "${org.exoplatform.commons.version}";
   var antisamyVersion = "${org.owasp.antisamy.version}";
   var batikVersion = "${org.apache.batik.version}";
+  var batikUtilVersion = "${org.apache.batik-util.version}";
+  var sacVersion = "${org.w3c.sac.version}";
   module.relativeMavenRepo =  "org/exoplatform/ecms" ;
   module.relativeSRCRepo =  "ecms" ;
   module.name =  "wcm" ;
@@ -107,6 +109,8 @@ function getModule(params) {
     addDependency(new Project("org.antlr", "antlr-runtime", "jar", antlrVersion)).
 		addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
 		addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
+		addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
+		addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).
     addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.component.product", "jar", commonsVersion)).
     addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.component.upgrade", "jar", commonsVersion));
   
