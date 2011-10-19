@@ -395,24 +395,28 @@
 	ECMUtils.prototype.generateWebDAVLink = function(serverInfo,portalName,restContextName,repository,workspace,nodePath,mimetype) {
 	  // query parameter s must be encoded.
 	  var path = "/";
+	  var fEncode = false;
 	  nodePath = nodePath.substr(1).split("\/");
-	  for (var i=0; i < nodePath.length; i++) {
+	  for (var i=0; i < nodePath.length; i++) {	    
 	    path += encodeURIComponent(nodePath[i]) + "/";
+	    fEncode = true;
 	  }
+	  if(fEncode)
+	  	path = path.substr(0,path.length-1);
 	  if(eXo.core.Browser.getBrowserType() == "ie") {
 	    if(mimetype == "application/xls" || mimetype == "application/msword" || mimetype =="application/ppt") {
 	      window.open(serverInfo + "/" + restContextName + "/private/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
 	    } else {
-	      window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" +workspace + path, '_new');
+	      eXo.ecm.ECMUtils.generateWebDAVUrl(serverInfo,restContextName,repository,workspace,path,mimetype);
 	    }
 	  } else {
 	    window.open(serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + path, '_new');
 	  }
 	} ;
 
-	ECMUtils.prototype.generateWebDAVUrl = function(serverInfo, portalName, restContextName, repository, workspace, nodePath, mimetype) {
+	ECMUtils.prototype.generateWebDAVUrl = function(serverInfo, restContextName, repository, workspace, nodePath, mimetype) {
 		my_window = window.open("");
-    var downloadLink = serverInfo+ "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath;
+    var downloadLink = serverInfo+ "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath;
 		my_window.document.write('<script> window.location.href = "'+downloadLink+'"; </script>');
 	};
 
