@@ -19,9 +19,9 @@
     <type>org.exoplatform.services.migration.TemplateMigrationService</type>
   </component>
   
-  <!--component>
-    <type>org.exoplatform.services.migration.SCVPortletPreferenceMigrationService</type>
-  </component> --> 
+  <component>
+    <type>org.exoplatform.services.migration.ActionMigrationService</type>
+  </component>
 
   <component>
     <key>org.exoplatform.services.cms.CmsService</key>
