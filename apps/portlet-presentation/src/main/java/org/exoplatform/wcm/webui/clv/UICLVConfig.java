@@ -746,6 +746,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                  "UICLVConfig.msg.not-valid-path",
                                  null,
                                  ApplicationMessage.WARNING);
+        WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+        requestContext.addUIComponentToUpdateByAjax(clvConfig);
         return;
       }
       String orderBy = clvConfig.getUIFormSelectBox(ORDER_BY_FORM_SELECT_BOX).getValue();

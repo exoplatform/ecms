@@ -582,7 +582,6 @@ public class Utils {
                                         int type) {
     UIApplication application = container.getAncestorOfType(UIApplication.class);
     application.addMessage(new ApplicationMessage(message, args, type));
-    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
   }
 
   @Deprecated

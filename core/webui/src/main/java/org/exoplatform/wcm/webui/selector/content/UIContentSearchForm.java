@@ -227,6 +227,8 @@ public class UIContentSearchForm extends UIForm {
       if(field == null || "".equals(field) || (field.toString().trim().length() <= 0)) {
         uiApp.addMessage(new ApplicationMessage(
             "UIContentSearchForm.msg.empty-field", null, ApplicationMessage.WARNING));
+        WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+        requestContext.addUIComponentToUpdateByAjax(this);
         return true;
       }
     }
@@ -284,8 +286,9 @@ public class UIContentSearchForm extends UIForm {
   }
 
   static public class SearchWebContentActionListener extends EventListener<UIContentSearchForm> {
-    
+
     public void execute(Event<UIContentSearchForm> event) throws Exception {
+      WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
       UIContentSearchForm uiWCSearch = event.getSource();
       String typeSearch = uiWCSearch.getAncestorOfType(UIContentSelector.class)
                                       .getChild(UIContentBrowsePanel.class).getContentType();
@@ -323,28 +326,30 @@ public class UIContentSearchForm extends UIForm {
           } else if (UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
             UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
             UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
-            
+
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             dateFormat.setLenient(false);
-            
+
             try {
               dateFormat.parse(startDateInput.getValue());
             } catch (ParseException e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       new Object[] { resourceBundle.getString("UIContentSearchForm.title.FromDate") },
                                                       ApplicationMessage.WARNING));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
-            
+
             try {
               dateFormat.parse(endDateInput.getValue());
             } catch (ParseException e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       new Object[] { resourceBundle.getString("UIContentSearchForm.title.ToDate") },
                                                       ApplicationMessage.WARNING));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
-            
+
             Calendar startDate = startDateInput.getCalendar();
             Calendar endDate = endDateInput.getCalendar();
             if (uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue()))
@@ -359,7 +364,8 @@ public class UIContentSearchForm extends UIForm {
             if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
                                                       null,
-                                                      ApplicationMessage.WARNING));              
+                                                      ApplicationMessage.WARNING));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
             String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
@@ -390,6 +396,7 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
                                                       new Object[] { documentType },
                                                       ApplicationMessage.ERROR));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
           }
@@ -419,7 +426,8 @@ public class UIContentSearchForm extends UIForm {
             } catch (Exception e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
                                                       null,
-                                                      ApplicationMessage.WARNING));              
+                                                      ApplicationMessage.WARNING));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
             Calendar startDate = startDateInput.getCalendar();
@@ -436,7 +444,8 @@ public class UIContentSearchForm extends UIForm {
             if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
                                                       null,
-                                                      ApplicationMessage.WARNING));              
+                                                      ApplicationMessage.WARNING));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
             String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
@@ -465,6 +474,7 @@ public class UIContentSearchForm extends UIForm {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
                                                       new Object[] { documentType },
                                                       ApplicationMessage.ERROR));
+              requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
               return;
             }
           }
@@ -473,11 +483,13 @@ public class UIContentSearchForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
                                                 null,
                                                 ApplicationMessage.WARNING));
+        requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
         return;
       } catch (RepositoryException re) {
         uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
                                                 null,
                                                 ApplicationMessage.WARNING));
+        requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
         return;
       }
       UIContentSearchResult uiWCSearchResult = uiWCTabSelector.getChild(UIContentSearchResult.class);
