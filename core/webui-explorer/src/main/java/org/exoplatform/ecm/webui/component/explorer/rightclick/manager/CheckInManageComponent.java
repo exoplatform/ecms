@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
@@ -105,6 +106,10 @@ public class CheckInManageComponent extends UIAbstractManagerComponent {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       
+      return;
+    } catch (AccessDeniedException adEx) {
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-checkin-node", null, ApplicationMessage.WARNING));
+      uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);

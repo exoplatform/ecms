@@ -21,13 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.lock.Lock;
 import javax.jcr.lock.LockException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -45,6 +45,7 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -128,11 +129,12 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       JCRExceptionManager.process(uiApp, e);
       return;
     }
-    if(node.canAddMixin(Utils.MIX_LOCKABLE)){
-      node.addMixin(Utils.MIX_LOCKABLE);
-      node.save();
-    }
+    
     try {
+      if(node.canAddMixin(Utils.MIX_LOCKABLE)){
+        node.addMixin(Utils.MIX_LOCKABLE);
+        node.save();
+      }
       Lock lock = node.lock(false, false);
       LockUtil.keepLock(lock);
       LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
@@ -157,7 +159,12 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       
       uiExplorer.updateAjax(event);
       return;
-    } catch (Exception e) {
+    } catch (AccessDeniedException adEx) {
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-lock-node", null, ApplicationMessage.WARNING));
+      uiExplorer.updateAjax(event);
+      return;
+    }
+    catch (Exception e) {
       LOG.error("an unexpected error occurs while locking the node", e);
       JCRExceptionManager.process(uiApp, e);
       
