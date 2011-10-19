@@ -66,6 +66,17 @@
     </dialog>
   </Podcast>
   <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <content>コンテンツ</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+  <!--
   ###################### resoucebundle for exo:calendar dialogs template ####
   -->
   <Calendar>
