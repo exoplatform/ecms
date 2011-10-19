@@ -29,6 +29,7 @@ import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.publication.NodeLocationPaginatedResultIterator;
 import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
 import org.exoplatform.services.wcm.publication.Result;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -80,7 +81,7 @@ public class UICLVFolderMode extends UICLVContainer {
       messageKey = "UICLVContainer.msg.non-contents";
     }
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
-    PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(result, itemsPerPage); 
+    PaginatedResultIterator paginatedResultIterator = new NodeLocationPaginatedResultIterator(result, itemsPerPage); 
     getChildren().clear();
     clvPresentation = addChild(UICLVPresentation.class, null, null);
     ResourceResolver resourceResolver = getTemplateResourceResolver();
