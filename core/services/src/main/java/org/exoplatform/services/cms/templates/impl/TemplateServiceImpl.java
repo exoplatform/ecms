@@ -432,14 +432,16 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String getTemplateLabel(String nodeTypeName) throws Exception {
     SessionProvider provider = SessionProvider.createSystemProvider();
-    Node templateHome = getTemplatesHome(provider);
-    Node nodeType = templateHome.getNode(nodeTypeName);
-    String label = "";
-    if (nodeType.hasProperty("label")) {
-      label = nodeType.getProperty("label").getString();
+    try {
+      Node templateHome = getTemplatesHome(provider);
+      Node nodeType = templateHome.getNode(nodeTypeName);
+      if (nodeType.hasProperty("label")) {
+        return nodeType.getProperty("label").getString();
+      }  
+    } finally {
+      provider.close();
     }
-    provider.close();
-    return label;
+    return "";
   }
 
   /**
@@ -507,6 +509,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node managedNodeType = templatesHome.getNode(nodeTypeName);
     managedNodeType.remove();
+    templatesHome.save();
     //Update managedDocumentTypeMap
     List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     managedDocumentTypes.remove(nodeTypeName);
@@ -947,7 +950,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
       Node templateNode = (Node)session.getItem(templatePath);
       updateTemplate(templateNode,templateFile, roles);
-      templateNode.save();
+      session.save();
     } catch(PathNotFoundException e) {
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
           isDocumentTemplate, templateName, roles, templateFile);
