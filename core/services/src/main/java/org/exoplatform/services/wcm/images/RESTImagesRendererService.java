@@ -149,11 +149,11 @@ public class RESTImagesRendererService implements ResourceContainer{
   + */
   private Date getLastModifiedDate(Node node) throws Exception {
      Date lastModifiedDate = null;
-     if (node.hasNode("jcr:content")) {
+     if (node.hasNode("jcr:content") && node.getNode("jcr:content").hasProperty("jcr:lastModified")) {
        lastModifiedDate = node.getNode("jcr:content").getProperty("jcr:lastModified").getDate().getTime();
      } else if (node.hasProperty("exo:dateModified")) {
          lastModifiedDate = node.getProperty("exo:dateModified").getDate().getTime();
-     } else {
+     } else if (node.hasProperty("jcr:created")){
        lastModifiedDate = node.getProperty("jcr:created").getDate().getTime();
      }
      return lastModifiedDate;
@@ -175,7 +175,8 @@ public class RESTImagesRendererService implements ResourceContainer{
      Date lastModifiedDate = getLastModifiedDate(node);
     
      // Check if cached resource has not been modifed, return 304 code
-     if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
+     if (lastModifiedDate != null && ifModifiedSinceDate != null && 
+         ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
        return false;
      }   
      return true;
