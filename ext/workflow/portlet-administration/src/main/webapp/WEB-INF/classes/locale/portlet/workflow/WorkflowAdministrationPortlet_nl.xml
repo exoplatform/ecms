@@ -14,6 +14,8 @@
   <UITabPane>
     <title>
       <UIMonitor>Proces Monitor</UIMonitor>
+      <UICompletedProcess>Completed</UICompletedProcess>
+      <UIRunningProcess>Processing</UIRunningProcess>
     </title>
   </UITabPane>
   <UIMonitor>
@@ -138,7 +140,7 @@
       </label>
     </tab>    
   </TaskListOfProcessPopup>
-  <UIRunningProcessGrid>
+  <UIRunningProcess>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -150,8 +152,11 @@
     <msg>
       <empty>No process to view detail</empty>
     </msg>
-  </UIRunningProcessGrid>
-  <UICompletedProcessGrid>
+    <action>
+      <Cancel>Cancel</Cancel>
+    </action>				
+  </UIRunningProcess>
+  <UICompletedProcess>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -163,7 +168,11 @@
     <msg>
       <empty>No process to view detail</empty>
     </msg>
-  </UICompletedProcessGrid>
+    <action>
+      <FlushAll>Flush All</FlushAll>
+      <Cancel>Cancel</Cancel>
+    </action>				
+  </UICompletedProcess>
   <UITaskListOfProcess>    
     <tab>
       <label>

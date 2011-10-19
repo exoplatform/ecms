@@ -20,6 +20,8 @@
   <UITabPane>
     <title>
       <UIMonitor>Process Monitor</UIMonitor>
+						<UICompletedProcesses>Completed</UICompletedProcesses>
+						<UIRunningProcesses>Processing</UIRunningProcesses>
     </title>
   </UITabPane>
   <UIMonitor>
@@ -114,12 +116,6 @@
     </header>
   </UITasksGrid>
   <UIProcessDetail>
-    <tab>
-      <label>
-        <UICompletedProcessGrid>Completed</UICompletedProcessGrid>
-        <UIRunningProcessGrid>Processing</UIRunningProcessGrid>
-      </label>
-    </tab>
     <msg>
       <confirm-delete-completed-process>Are you sure to delete these completed processes?</confirm-delete-completed-process>
       <result-delete-completed-process>There is not any completed process to delete.</result-delete-completed-process>
@@ -139,7 +135,7 @@
       </label>
     </tab>    
   </TaskListOfProcessPopup>
-  <UIRunningProcessGrid>
+  <UIRunningProcesses>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -151,8 +147,11 @@
     <msg>
       <empty>There are no processes to view details.</empty>
     </msg>
-  </UIRunningProcessGrid>
-  <UICompletedProcessGrid>
+    <action>
+      <Cancel>Cancel</Cancel>
+    </action>
+  </UIRunningProcesses>
+  <UICompletedProcesses>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -164,7 +163,11 @@
     <msg>
       <empty>There are no processes to view details.</empty>
     </msg>
-  </UICompletedProcessGrid>
+    <action>
+      <FlushAll>Flush All</FlushAll>
+      <Cancel>Cancel</Cancel>
+    </action>				
+  </UICompletedProcesses>
   <UITaskListOfProcess>    
     <tab>
       <label>

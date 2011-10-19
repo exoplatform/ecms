@@ -14,6 +14,8 @@
   <UITabPane>
     <title>
       <UIMonitor>Prozess Monitor</UIMonitor>
+						<UICompletedProcesses>Completed</UICompletedProcesses>
+						<UIRunningProcesses>Processing</UIRunningProcesses>
     </title>
   </UITabPane>
   <UIMonitor>
@@ -80,7 +82,7 @@
       <process-successful>Erfolgreich hochgeladen!</process-successful>
     </msg>
   </UIUploadProcess>
-  <UIProcessDetailGrid>
+  <UICompletedProcesses>
     <header>
       <processInstanceId>Prozess Instanz Id</processInstanceId>
       <processId>Prozess Id</processId>
@@ -92,7 +94,22 @@
     <msg>
       <empty>Kein Prozess um Detail anzuschauen</empty>
     </msg>
-  </UIProcessDetailGrid>
+  </UICompletedProcesses>
+		
+  <UIRunningProcesses>
+    <header>
+      <processInstanceId>Prozess Instanz Id</processInstanceId>
+      <processId>Prozess Id</processId>
+      <processName>Prozessname</processName>
+      <startDate>Anfangsdatum</startDate>
+      <endDate>Enddatum</endDate>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <empty>Kein Prozess um Detail anzuschauen</empty>
+    </msg>
+  </UIRunningProcesses>
+				
   <UIProcessDetail>
     <msg>
       <confirm-delete-process><![CDATA[Wollen Sie diese Pozess Instanz l&ouml;schen?]]></confirm-delete-process>
@@ -113,12 +130,6 @@
   #############################################################################
   -->
   <UIProcessDetail>
-    <tab>
-      <label>
-        <UICompletedProcessGrid>Completed</UICompletedProcessGrid>
-        <UIRunningProcessGrid>Processing</UIRunningProcessGrid>
-      </label>
-    </tab>    
     <msg>
       <confirm-delete-completed-process>Do you want to delete these completed processes?</confirm-delete-completed-process>
       <result-delete-completed-process>There isn't any completed process to delete</result-delete-completed-process>
@@ -138,7 +149,7 @@
       </label>
     </tab>
   </TaskListOfProcessPopup>
-  <UIRunningProcessGrid>
+  <UIRunningProcess>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -150,8 +161,11 @@
     <msg>
       <empty>No process to view detail</empty>
     </msg>
-  </UIRunningProcessGrid>
-  <UICompletedProcessGrid>
+	    <action>
+      <Cancel>Cancel</Cancel>
+    </action>			
+  </UIRunningProcess>
+  <UICompletedProcess>
     <header>
       <processInstanceId>Process Instance Id</processInstanceId>
       <processId>Process Id</processId>
@@ -163,7 +177,11 @@
     <msg>
       <empty>No process to view detail</empty>
     </msg>
-  </UICompletedProcessGrid>
+    <action>
+      <FlushAll>Flush All</FlushAll>
+      <Cancel>Cancel</Cancel>
+    </action>				
+  </UICompletedProcess>
   <UITaskListOfProcess>    
     <tab>
       <label>

@@ -20,6 +20,8 @@
   <UITabPane>
     <title>
       <UIMonitor>مراجعة العمليات </UIMonitor>
+      <UICompletedProcess>الانتهاء</UICompletedProcess>
+      <UIRunningProcess>مستمرة</UIRunningProcess>						
     </title>
   </UITabPane>
   <UIMonitor>
@@ -138,7 +140,7 @@
       </label>
     </tab>    
   </TaskListOfProcessPopup>
-  <UIRunningProcessGrid>
+  <UIRunningProcess>
     <header>
       <processInstanceId>معرف عملية مثيل</processInstanceId>
       <processId>معرف العملية</processId>
@@ -150,8 +152,11 @@
     <msg>
       <empty>أي عملية لمعرفة التفاصيل</empty>
     </msg>
-  </UIRunningProcessGrid>
-  <UICompletedProcessGrid>
+    <action>
+      <Cancel>إلغاء</Cancel>
+    </action>				
+  </UIRunningProcess>
+  <UICompletedProcess>
     <header>
       <processInstanceId>معرف عملية مثيل</processInstanceId>
       <processId>معرف العملية</processId>
@@ -163,7 +168,11 @@
     <msg>
       <empty>لايوجد عملية لرؤية التفاصيل </empty>
     </msg>
-  </UICompletedProcessGrid>
+    <action>
+      <FlushAll>إزالة جميع</FlushAll>
+      <Cancel>إلغاء</Cancel>
+    </action>				
+  </UICompletedProcess>
   <UITaskListOfProcess>    
     <tab>
       <label>

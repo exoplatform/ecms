@@ -20,6 +20,8 @@
   <UITabPane>
     <title>
       <UIMonitor>Contrôler le Processus Métier</UIMonitor>
+						<UICompletedProcesses>Terminé</UICompletedProcesses>
+						<UIRunningProcesses>En cours</UIRunningProcesses>						
     </title>
   </UITabPane>
   <UIMonitor>
@@ -114,12 +116,6 @@
     </header>
   </UITasksGrid>
   <UIProcessDetail>
-    <tab>
-      <label>
-        <UICompletedProcessGrid>Terminé</UICompletedProcessGrid>
-        <UIRunningProcessGrid>En cours</UIRunningProcessGrid>
-      </label>
-    </tab>
     <msg>
       <confirm-delete-completed-process>Confirmez-vous vouloir supprimer les processus terminés?</confirm-delete-completed-process>
       <result-delete-completed-process>Il n'y a aucun processus terminé à supprimer</result-delete-completed-process>      
@@ -139,7 +135,7 @@
       </label>
     </tab>    
   </TaskListOfProcessPopup>
-  <UIRunningProcessGrid>
+  <UIRunningProcesses>
     <header>
       <processInstanceId>Id de l'instance du processus</processInstanceId>
       <processId>Id Processus</processId>
@@ -151,8 +147,11 @@
     <msg>
       <empty>Aucun processus pour voir le détail</empty>
     </msg>
-  </UIRunningProcessGrid>
-  <UICompletedProcessGrid>
+    <action>
+      <Cancel>Annuler</Cancel>
+    </action>				
+  </UIRunningProcesses>
+  <UICompletedProcesses>
     <header>
       <processInstanceId>Id de l'instance du processus</processInstanceId>
       <processId>Id Processus</processId>
@@ -164,7 +163,11 @@
     <msg>
       <empty>Aucun processus pour voir le détail</empty>
     </msg>
-  </UICompletedProcessGrid>
+    <action>
+      <FlushAll>Tout supprimer</FlushAll>
+      <Cancel>Annuler</Cancel>
+    </action>				
+  </UICompletedProcesses>
   <UITaskListOfProcess>    
     <tab>
       <label>
