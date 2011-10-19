@@ -37,7 +37,7 @@ if(uicomponent.userCode != null){
 				</div>
 				<div class="ClearLeft"><span></span></div>
 			</div>
-		
+		<div style="clear:both"><span></span></div>
 		<%for(NewsletterCategoryConfig category in uicomponent.getListCategories()){%>
 			<div class="UICategories" style="width:auto;">
 				<div style="width:auto;">
