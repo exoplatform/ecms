@@ -385,15 +385,15 @@ public class UICLVPresentation extends UIContainer {
     if (node.isNodeType("nt:frozenNode")){
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(originalNode.getPath());
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(node.getPath());
     }
     
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
     if (fullPath!=null) {
         String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-      link += "&"+clvBy+"="+fullPath;
+      link += "&"+clvBy+"="+Text.escape(fullPath);
     }
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
