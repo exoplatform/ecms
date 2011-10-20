@@ -1,0 +1,24 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/DeleteManageComponent.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/DeleteManageComponent.java	(revision 74915)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/DeleteManageComponent.java	(working copy)
+@@ -157,6 +157,8 @@
+ 
+   private void processRemoveOrMoveToTrash(String nodePath, Node node, Event<?> event, boolean isMultiSelect, boolean checkToMoveToTrash)
+   throws Exception {
++	boolean isNodeReferenceable = Utils.isReferenceable(node);
++	String nodeUUID = (isNodeReferenceable) ? node.getUUID() : null;
+ 	if (node.isNodeType(Utils.EXO_RESTORELOCATION) || !checkToMoveToTrash)
+ 	  processRemoveNode(nodePath, node, event, isMultiSelect);
+ 	else {
+@@ -176,8 +178,8 @@
+   	                                 categoryNode.getPath(), new HashMap<String, String>());
+         }
+     	  
+-        if (Utils.isReferenceable(node)) {
+-          wcmComposer.updateContent(parentRepo, parentWSpace, node.getUUID(), new HashMap<String, String>());
++        if (isNodeReferenceable) {
++          wcmComposer.updateContent(parentRepo, parentWSpace, nodeUUID, new HashMap<String, String>());
+         }
+         wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
+       }
