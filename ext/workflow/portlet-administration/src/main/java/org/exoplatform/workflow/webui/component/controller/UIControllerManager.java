@@ -90,7 +90,7 @@ public class UIControllerManager extends UIContainer {
         uiTaskManager.setIsStart(true);
         uiTaskManager.checkBeforeActive();
         uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
-        uiPopup.activate(uiTaskManager, 600, 500);
+        uiPopup.activate(uiTaskManager, 730, 500);
       } else {
         uiControllerManager.service_.startProcess(processId);
       }
