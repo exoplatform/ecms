@@ -1,0 +1,68 @@
+Index: apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(revision 72358)
++++ apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(working copy)
+@@ -16,6 +16,9 @@
+ 	ListView.prototype.colorSelected = "#e7f3ff";
+ 	ListView.prototype.colorHover = "#f2f8ff";
+ 	
++	ListView.prototype.t1 = 0;
++	ListView.prototype.t2 = 0;
++	
+ 	//init event
+ 	ListView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
+ 		eXo.ecm.UIListView.enableDragAndDrop = enableDragAndDrop;
+@@ -252,6 +255,8 @@
+ 		var element = this;
+ 		removeMobileElement();
+ 		Self.hideContextMenu();
++		var d = new Date();		
++    Self.t1 = d.getTime();   
+ 		Self.enableDragDrop = true;
+ 		Self.srcPath = element.getAttribute("objectId");
+ 		document.onselectstart = function(){return false};
+@@ -298,6 +303,10 @@
+ 			document.onselectstart = function(){return false;}
+ 			if (eXo.ecm.UIListView.enableDragAndDrop != "true")
+ 				return;
++			var d = new Date();      
++    	Self.t2 = d.getTime();      
++      if((Self.t2-Self.t1)<200) 
++				return;
+ 			var mobileElement = document.getElementById(Self.mobileId);
+ 			if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
+ 				mobileElement.style.display = "block";
+Index: apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UISimpleView.js
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UISimpleView.js	(revision 72358)
++++ apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UISimpleView.js	(working copy)
+@@ -15,6 +15,9 @@
+ 	SimpleView.prototype.colorSelected = "#e7f3ff";
+ 	SimpleView.prototype.colorHover = "#f2f8ff";
+ 	
++	SimpleView.prototype.t1 = 0;
++	SimpleView.prototype.t2 = 0;
++	
+ 	//init event
+ 	SimpleView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
+ 		eXo.ecm.UISimpleView.enableDragAndDrop = enableDragAndDrop;		
+@@ -219,6 +222,8 @@
+ 		var element = this;
+ 		removeMobileElement();
+ 		Self.hideContextMenu();
++		var d = new Date();		
++    Self.t1 = d.getTime();
+ 		Self.enableDragDrop = true;
+ 		Self.srcPath = element.getAttribute("objectId");
+ 		document.onselectstart = function(){return false};
+@@ -265,6 +270,10 @@
+ 			document.onselectstart = function(){return false;}
+ 			if (eXo.ecm.UIListView.enableDragAndDrop != "true")
+ 				return;
++			var d = new Date();      
++    	Self.t2 = d.getTime();      
++      if((Self.t2-Self.t1)<200) 
++				return;
+ 			var mobileElement = document.getElementById(Self.mobileId);
+ 			if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
+ 				mobileElement.style.display = "block";

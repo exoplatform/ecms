@@ -16,6 +16,9 @@ var ListView = function() {
 	ListView.prototype.colorSelected = "#e7f3ff";
 	ListView.prototype.colorHover = "#f2f8ff";
 	
+	ListView.prototype.t1 = 0;
+	ListView.prototype.t2 = 0;
+	
 	//init event
 	ListView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 		eXo.ecm.UIListView.enableDragAndDrop = enableDragAndDrop;
@@ -252,6 +255,8 @@ var ListView = function() {
 		var element = this;
 		removeMobileElement();
 		Self.hideContextMenu();
+		var d = new Date();		
+    Self.t1 = d.getTime();   
 		Self.enableDragDrop = true;
 		Self.srcPath = element.getAttribute("objectId");
 		document.onselectstart = function(){return false};
@@ -297,6 +302,10 @@ var ListView = function() {
 			var event = event || window.event;
 			document.onselectstart = function(){return false;}
 			if (eXo.ecm.UIListView.enableDragAndDrop != "true")
+				return;
+			var d = new Date();      
+    	Self.t2 = d.getTime();      
+      if((Self.t2-Self.t1)<200) 
 				return;
 			var mobileElement = document.getElementById(Self.mobileId);
 			if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
