@@ -155,6 +155,8 @@
     <dependency><groupId>org.apache.httpcomponents</groupId><artifactId>httpclient</artifactId><version>${org.apache.httpcomponents.version}</version><type>jar</type></dependency><!-- 4.0-->
     <dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>${com.google.guava.version}</version><type>jar</type></dependency><!-- r07-->
     <dependency><groupId>commons-codec</groupId><artifactId>commons-codec</artifactId><version>${commons-codec.version}</version><type>jar</type></dependency><!-- 1.4-->
+<dependency><groupId>org.w3c</groupId><artifactId>sac</artifactId><version>${org.w3c.sac.version}</version><type>jar</type></dependency>
+<dependency><groupId>batik</groupId><artifactId>batik-util</artifactId><version>${org.apache.batik-util.version}</version><type>jar</type></dependency>
     <!-- xCMIS dependencies -->
     <dependency>
       <groupId>org.xcmis</groupId>
