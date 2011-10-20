@@ -21,11 +21,13 @@
   def previousURI = session.getAttribute("previousURI");
   session.setAttribute("previousURI", selectedNodeUri);
   if (userName==null && session.getMaxInactiveInterval()>60) {
-    session.setAttribute("DefaultMaxInactiveInterval", session.getMaxInactiveInterval());
+    session.setAttribute("DefaultMaxInactiveInterval", new Integer(session.getMaxInactiveInterval()));
     session.setMaxInactiveInterval(60);  
   } else if (userName!=null && session.getMaxInactiveInterval()==60) {
-    int interval = session.getAttribute("DefaultMaxInactiveInterval");
-    session.setMaxInactiveInterval(interval);  
+    Integer interval = (Integer) session.getAttribute("DefaultMaxInactiveInterval");
+    if (interval != null) {
+      session.setMaxInactiveInterval(interval.intValue());
+    }
   }
 		String language = rcontext.getLocale().getLanguage();
 		String country = rcontext.getLocale().getCountry();
