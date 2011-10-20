@@ -293,9 +293,9 @@
   <UIActionBar>
     <tooltip>
       <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un document</AddDocument>
+      <AddDocument>Ajouter un contenu</AddDocument>
       <EditDocument>Editer un document</EditDocument>
-      <Upload>Uploader</Upload>
+      <Upload>Uploader des fichiers</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <CreateTicket>Nouveau ticket</CreateTicket>
@@ -553,8 +553,8 @@
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
       <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un document</AddDocument>
-      <Upload>Uploader</Upload>
+      <AddDocument>Ajouter un contenu</AddDocument>
+      <Upload>Uploader des fichiers</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>

@@ -1,0 +1,54 @@
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 75355)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -293,9 +293,9 @@
+   <UIActionBar>
+     <tooltip>
+       <AddFolder>Ajouter un répertoire</AddFolder>
+-      <AddDocument>Ajouter un document</AddDocument>
++      <AddDocument>Ajouter un contenu</AddDocument>
+       <EditDocument>Editer un document</EditDocument>
+-      <Upload>Uploader</Upload>
++      <Upload>Uploader des fichiers</Upload>
+       <Paste>Coller</Paste>
+       <Search>Chercher</Search>
+       <CreateTicket>Nouveau ticket</CreateTicket>
+@@ -553,8 +553,8 @@
+       <autoversion>Versioning automatique</autoversion>
+       <Custom>Personnaliser</Custom>
+       <AddFolder>Ajouter un répertoire</AddFolder>
+-      <AddDocument>Ajouter un document</AddDocument>
+-      <Upload>Uploader</Upload>
++      <AddDocument>Ajouter un contenu</AddDocument>
++      <Upload>Uploader des fichiers</Upload>
+       <MoveNode>Déplacer</MoveNode>
+       <UnLock>Déverrouiller</UnLock>
+       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 75355)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -294,9 +294,9 @@
+   <UIActionBar>
+     <tooltip>
+       <AddFolder>Add Folder</AddFolder>
+-      <AddDocument>Add Document</AddDocument>
++      <AddDocument>Add Content</AddDocument>
+       <EditDocument>Edit Document</EditDocument>
+-      <Upload>Upload</Upload>
++      <Upload>Upload Files</Upload>
+       <Paste>Paste</Paste>
+       <Search>Search</Search>
+       <CreateTicket>New Ticket</CreateTicket>
+@@ -553,8 +553,8 @@
+       <autoversion>Auto versioning</autoversion>
+       <Custom>Custom</Custom>
+       <AddFolder>Add folder</AddFolder>
+-      <AddDocument>Add document</AddDocument>
+-      <Upload>Upload</Upload>
++      <AddDocument>Add Content</AddDocument>
++      <Upload>Upload Files</Upload>
+       <MoveNode>Move</MoveNode>
+       <UnLock>Unlock</UnLock>
+       <ViewProperties>View properties</ViewProperties>
