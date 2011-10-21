@@ -694,4 +694,10 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
     ExtendedNode node = (ExtendedNode) getTarget();
     return node.getNodesLazily();
   }
+
+  @Override
+  public NodeIterator getNodesLazily(int pageSize) throws RepositoryException {
+    ExtendedNode node = (ExtendedNode) getTarget();
+    return node.getNodesLazily(pageSize);
+  }
 }
