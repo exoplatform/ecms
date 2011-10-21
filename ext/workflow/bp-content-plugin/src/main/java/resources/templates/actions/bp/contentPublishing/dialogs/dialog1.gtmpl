@@ -7,7 +7,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.id")%></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldId = ["jcrPath=/node", "mixintype=exo:publishLocation,exo:pendingLocation,exo:backupLocation,exo:trashLocation", "editable=false", "visible=if-not-null"] ;
+		        String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes,exo:publishLocation,exo:pendingLocation,exo:backupLocation,exo:trashLocation", "editable=false", "visible=if-not-null"] ;
 		        uicomponent.addMixinField("id", fieldId) ;  
 		      %>
 		    </td>
@@ -24,10 +24,12 @@
 		  <tr>
 	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.lifecycle")%></td>
 	      <td class="FieldComponent">
-		      <% 
-		        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,schedule,node_added,node_removed,property_added,property_removed,property_changed"] ;
-		        uiform.addSelectBoxField("lifecycle", fieldLifecycle) ;
-		      %>
+					  <% 
+							String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
+							                           "options=read,node_added,node_removed,property_added,property_removed,property_changed",
+							                           "multiValues=true", "onchange=true","size=5","validate=empty"] ;
+							uicomponent.addSelectBoxField("lifecycle", fieldLifecycle) ;
+					  %>
 		    </td>
 		  </tr>
 		  <tr>
@@ -129,6 +131,14 @@
           %>
         </td>
       </tr>
+      <tr>                       
+  			   <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.affectedNodeTypeNames")%></td>
+        <td class="FieldComponent">
+        <% 
+          String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
+          uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
+        %>
+      </tr>						
     </table>       
     <%/* start render action*/%>
 		<div class="UIAction"> 

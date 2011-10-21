@@ -32,11 +32,11 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.LocaleConfigService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.graph.exe.ExecutionContext;
 import org.jbpm.graph.exe.Token;
@@ -103,7 +103,7 @@ public class ProcessUtil {
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     try{
-      Node requestNode = getNode(context, repository,workspace,path, getSessionProvider());
+      Node requestNode = getNode(context, repository,workspace,path, WCMCoreUtils.getUserSessionProvider());
       if(!requestNode.isNodeType(EXO_CONENT_STATE)) {
         requestNode.addMixin(EXO_CONENT_STATE) ;
       }
@@ -131,7 +131,7 @@ public class ProcessUtil {
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     try {
-      Node validatedNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
+      Node validatedNode = getNode(context, repository,workspace,path,WCMCoreUtils.getUserSessionProvider()) ;
       if(!validatedNode.isNodeType("exo:approved")) {
         validatedNode.addMixin("exo:approved");
       }
@@ -157,7 +157,7 @@ public class ProcessUtil {
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     try {
-      Node disapprovedNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
+      Node disapprovedNode = getNode(context, repository,workspace,path,WCMCoreUtils.getUserSessionProvider()) ;
       if (!disapprovedNode.isNodeType("exo:disapproved")) {
         disapprovedNode.addMixin("exo:disapproved");
       }
@@ -189,8 +189,9 @@ public class ProcessUtil {
         publishedNode.addMixin("exo:published");
       }
       if(publishedNode.isNodeType("exo:published")) {
-        Date startDate = (Date)context.getVariable("startDate");
-        Date endDate = (Date)context.getVariable("endDate");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") ;
+        Date startDate = dateFormat.parse(context.getVariable("startDate").toString());
+        Date endDate = dateFormat.parse(context.getVariable("endDate").toString());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startDate);
         publishedNode.setProperty("exo:startPublication",calendar);
@@ -203,8 +204,9 @@ public class ProcessUtil {
       publishedNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
+    } finally {
+      provider.close();  
     }
-    provider.close();
   }
 
   public static void waitForPublish(ExecutionContext context) {
@@ -220,7 +222,8 @@ public class ProcessUtil {
         pendingNode.addMixin("exo:pending");
       }
       if(pendingNode.isNodeType("exo:pending")) {
-        Date startDate = (Date)context.getVariable("startDate");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") ;
+        Date startDate = dateFormat.parse(context.getVariable("startDate").toString());
         pendingNode.setProperty("exo:pendingStart",new GregorianCalendar());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startDate);
@@ -230,8 +233,9 @@ public class ProcessUtil {
       pendingNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
+    } finally {
+      provider.close();  
     }
-    provider.close();
   }
 
   public static void delegate(ExecutionContext context) {
@@ -241,7 +245,7 @@ public class ProcessUtil {
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     try {
-      Node delegateNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
+      Node delegateNode = getNode(context, repository,workspace,path, WCMCoreUtils.getUserSessionProvider()) ;
       if(!delegateNode.isNodeType("exo:delegated")) {
         delegateNode.addMixin("exo:delegated");
       }
@@ -282,8 +286,9 @@ public class ProcessUtil {
       backupNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
+    } finally {
+      provider.close();   
     }
-   provider.close();
   }
 
   public static void moveTrash(ExecutionContext context) {
@@ -307,8 +312,9 @@ public class ProcessUtil {
       trashNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
+    } finally {
+      provider.close();  
     }
-    provider.close();
   }
 
   @Deprecated
@@ -412,15 +418,4 @@ public class ProcessUtil {
     return builder.toString();
   }
 
-  /**
-   * Get SessionProvider of user. Only take this in current operating of user.
-   * DO NOT use in Job executing
-   *
-   * @return SessionProvider
-   */
-  private static SessionProvider getSessionProvider() {
-    SessionProviderService sessionProviderService = (SessionProviderService) ExoContainerContext.
-        getCurrentContainer().getComponentInstanceOfType(SessionProviderService.class);
-    return sessionProviderService.getSessionProvider(null);
-  }
 }

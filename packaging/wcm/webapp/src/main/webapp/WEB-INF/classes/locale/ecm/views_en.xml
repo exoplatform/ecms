@@ -603,7 +603,7 @@
   ###################### resoucebundle exo:contentPublishing dialogs template ####
   -->
   <ContentPublishing>
-    <dialog>
+    <view>
       <label>
         <id>Id</id>
         <name>#{word.name}</name>
@@ -619,8 +619,9 @@
         <backup-path>Backup Path</backup-path>
         <trash-workspace>Trash Workspace</trash-workspace>
         <trash-path>Trash Path</trash-path>
+								<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
-    </dialog>
+    </view>
   </ContentPublishing>
 		
   <SendMail>

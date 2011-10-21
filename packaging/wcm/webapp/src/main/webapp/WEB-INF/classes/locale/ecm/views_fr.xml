@@ -603,7 +603,7 @@
   ###################### resoucebundle exo:contentPublishing dialogs template ####
   -->
   <ContentPublishing>
-    <dialog>
+    <view>
       <label>
         <id>Id</id>
         <name>#{word.name}</name>
@@ -619,8 +619,9 @@
         <backup-path>Emplacement de la sauvegarde</backup-path>
         <trash-workspace>Espace de la corbeille</trash-workspace>
         <trash-path>Emplacement de la corbeille</trash-path>
+								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
-    </dialog>
+    </view>
   </ContentPublishing>
 		
 		<SendMail>

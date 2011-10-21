@@ -845,4 +845,30 @@
      </label>
    </dialog>
   </AutoVersioning>
+		
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>Tên</name>
+        <lifecycle>Vòng đời</lifecycle>
+        <description>Miêu tả</description>
+        <validator>Người xác thực</validator>
+        <supervisor>Người giám sát</supervisor>
+        <public-workspace>Vùng làm việc công bố</public-workspace>
+        <public-path>Đường dẫn công bố</public-path>
+        <pending-workspace>Vùng làm việc chờ đợi xử lý</pending-workspace>
+        <pending-path>Đường dẫn vùng làm việc chờ đợi xử lý</pending-path>
+        <backup-workspace>Sao lưu vùng làm việc</backup-workspace>
+        <backup-path>Đường dẫn sao lưu</backup-path>
+        <trash-workspace>Vùng làm việc rác</trash-workspace>
+        <trash-path>Đường dẫn vùng làm việc rác</trash-path>
+								<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>		
+		
 </bundle>

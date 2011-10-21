@@ -821,4 +821,30 @@
      </label> 
    </dialog>
   </AutoVersioning>
+	
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>バリデータ</validator>
+        <supervisor>スーパーバイザ</supervisor>
+        <public-workspace>公開ワークスペース</public-workspace>
+        <public-path>公開パス</public-path>
+        <pending-workspace>ペンディングワークスペース</pending-workspace>
+        <pending-path>ペンディングパス</pending-path>
+        <backup-workspace>バックアップワークスペース</backup-workspace>
+        <backup-path>バックアップパス</backup-path>
+        <trash-workspace>ごみ箱ワークスペース</trash-workspace>
+        <trash-path>ごみ箱パス</trash-path>
+								<affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>		
+		
 </bundle>

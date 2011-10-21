@@ -88,20 +88,37 @@ def node = uicomponent.getNode() ;%>
     </td>
   </tr>
   <tr>
-  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-workspace")%></td>
-  <td>
-    <%if(node.hasProperty("exo:backupWorkspace")) {%>
-      <%=node.getProperty("exo:backupWorkspace").getString()%>
-    <%}%>
-  </td>
-</tr>
-<tr>
-  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-path")%></td>
-  <td>
-    <%if(node.hasProperty("exo:backupPath")) {%>
-      <%=node.getProperty("exo:backupPath").getString()%>
-    <%}%>
-  </td>
-</tr>
+	  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-workspace")%></td>
+	  <td>
+	    <%if(node.hasProperty("exo:backupWorkspace")) {%>
+	      <%=node.getProperty("exo:backupWorkspace").getString()%>
+	    <%}%>
+	  </td>
+	</tr>
+	<tr>
+	  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-path")%></td>
+	  <td>
+	    <%if(node.hasProperty("exo:backupPath")) {%>
+	      <%=node.getProperty("exo:backupPath").getString()%>
+	    <%}%>
+	  </td>
+	</tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.affectedNodeTypeNames")%></td>
+    <td>
+    <%if(node.hasProperty("exo:affectedNodeTypeNames")){
+      sB = new StringBuilder();
+      def values = node.getProperty("exo:affectedNodeTypeNames").getValues();          
+      for(value in values) {
+        sB.append(value.getString()).append(",");
+      } 
+      if (sB.length() > 0) {
+      %>
+        <%= sB.deleteCharAt(sB.length()-1)%>        
+      <%
+        }
+      }%>
+    </td> 
+  </tr>
 	</table>
 </div>

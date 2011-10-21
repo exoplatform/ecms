@@ -602,7 +602,7 @@
   ###################### resoucebundle exo:contentPublishing dialogs template ####
   -->
   <ContentPublishing>
-    <dialog>
+    <view>
       <label>
         <id>المعرف</id>
         <name>#{word.name}</name>
@@ -618,8 +618,9 @@
         <backup-path>مسار الحفظ</backup-path>
         <trash-workspace>فضاء سلة المهملات</trash-workspace>
         <trash-path>مسار سلة المهملات</trash-path>
+								<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
       </label>
-    </dialog>
+    </view>
   </ContentPublishing>
 				<SendMail>
    <view>

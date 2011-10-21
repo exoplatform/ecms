@@ -846,4 +846,30 @@
      </label>
    </dialog>
   </AutoVersioning>
+		
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>Validateur</validator>
+        <supervisor>Superviseur</supervisor>
+        <public-workspace>Espace de publication</public-workspace>
+        <public-path>Emplacement de la publication</public-path>
+        <pending-workspace>Espace de mise en attente</pending-workspace>
+        <pending-path>Emplacement de la mise en attente</pending-path>
+        <backup-workspace>Espace de sauvegarde</backup-workspace>
+        <backup-path>Emplacement de la sauvegarde</backup-path>
+        <trash-workspace>Espace de la corbeille</trash-workspace>
+        <trash-path>Emplacement de la corbeille</trash-path>
+								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>
+				
 </bundle>

@@ -847,4 +847,29 @@
       </label>
     </dialog>
   </AutoVersioning>
+		
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>Validator</validator>
+        <supervisor>Supervisor</supervisor>
+        <public-workspace>Publishing Workspace</public-workspace>
+        <public-path>Publishing Path</public-path>
+        <pending-workspace>Pending Workspace</pending-workspace>
+        <pending-path>Pending Path</pending-path>
+        <backup-workspace>Backup Workspace</backup-workspace>
+        <backup-path>Backup Path</backup-path>
+        <trash-workspace>Trash Workspace</trash-workspace>
+        <trash-path>Trash Path</trash-path>
+								<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>		
 </bundle>

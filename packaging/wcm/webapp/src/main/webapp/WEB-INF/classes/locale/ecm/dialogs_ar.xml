@@ -816,4 +816,30 @@
      </label> 
    </dialog>
   </EnableVersioning>  
+		
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>المعرف</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>المصادق</validator>
+        <supervisor>المشرف</supervisor>
+        <public-workspace>فضاء النشر</public-workspace>
+        <public-path>مسار النشر</public-path>
+        <pending-workspace>فضاء في حالة انتظار</pending-workspace>
+        <pending-path>مسار في حالة انتظار</pending-path>
+        <backup-workspace>فضاء الحفظ</backup-workspace>
+        <backup-path>مسار الحفظ</backup-path>
+        <trash-workspace>فضاء سلة المهملات</trash-workspace>
+        <trash-path>مسار سلة المهملات</trash-path>
+								<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>		
+		
 </bundle>
