@@ -17,6 +17,7 @@
 package org.exoplatform.workflow.webui.component.controller;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -59,8 +60,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -277,8 +278,22 @@ public class UITask extends UIForm implements UISelectable {
           ((UIFormWYSIWYGInput)input).setToolBarName(UIFormWYSIWYGInput.DEFAULT_TOOLBAR);
           ((UIFormWYSIWYGInput)input).setEditable(editable);
         } else if (DATE.equals(component) || DATE_TIME.equals(component)) {
-          input = (value == null ? new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component)) :
-                                   new UIFormDateTimeInput(name, null, (Date)value, DATE_TIME.equals(component)));
+          if(value == null) 
+          {
+            input = new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component));
+          } else {
+            if(value instanceof String) {
+              if(value.toString().length() > 0) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+                input = new UIFormDateTimeInput(name, null, dateFormat.parse(value.toString()), DATE_TIME.equals(component));  
+              } else {
+                input = new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component));
+              }
+            } else {
+              input = new UIFormDateTimeInput(name, null, (Date)value, DATE_TIME.equals(component));
+            }
+              
+          }
           if (!visiable) {
             input.setValue("");
           }
@@ -501,7 +516,6 @@ public class UITask extends UIForm implements UISelectable {
       String nodePath = (String)variablesForService.get("nodePath");
       String srcPath = (String)variablesForService.get("srcPath");
       String srcWorkspace = (String)variablesForService.get("srcWorkspace");
-      String repository = (String)variablesForService.get("repository");
       RepositoryService repositoryService = uiTask.getApplicationComponent(RepositoryService.class);
       if (objectId.equals("delegate")) {
         String delegate = (String)maps.getWorkflowVariables().get(UITask.DELEGATE_FIELD);
@@ -513,15 +527,13 @@ public class UITask extends UIForm implements UISelectable {
             
             return;
         }
-        else {
-          // Check existence of delegated user
-          OrganizationService organizationService = uiTask.getApplicationComponent(OrganizationService.class);
-          if (organizationService.getUserHandler().findUserByName(delegate) == null)
-          {
-            uiApp.addMessage(new ApplicationMessage("UITask.msg.user-not-exist", null,
-                ApplicationMessage.WARNING));
-             return;
-          }
+        // Check existence of delegated user
+        OrganizationService organizationService = uiTask.getApplicationComponent(OrganizationService.class);
+        if (organizationService.getUserHandler().findUserByName(delegate) == null)
+        {
+          uiApp.addMessage(new ApplicationMessage("UITask.msg.user-not-exist", null,
+              ApplicationMessage.WARNING));
+          return;
         }
       }
       SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
