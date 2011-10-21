@@ -1871,7 +1871,7 @@
 		<header>
 			<name>#{word.name}</name>
 			<description>Omschrijving</description>
-			<lifecycle>Life Cycle</lifecycle>	
+			<lifecycle>Life Cycle</lifecycle>
 	        <triggeredaction>Triggered Action</triggeredaction>
 			<instanceOf>Instantie van Actie Type</instanceOf>
 			<action>Actie</action>
@@ -2326,7 +2326,7 @@
 			<anyPermission>Any Permission</anyPermission>
 		</label>
 	</UIAnyPermission>
-	
+
 	<anyPermission>
     	<title>
 		  <AddAnyPermission>Stel elke toestemming</AddAnyPermission>
@@ -2485,8 +2485,7 @@
 			<fileName-error>Invalid file name</fileName-error>
 			<constraint-violation>Current node does not allow to add '{0}' node
 				type</constraint-violation>
-			<repository-exception>Access deny! You don't have add permission in
-				this node</repository-exception>
+			<repository-exception>Access denied! You do not have the permission to add symlink to this node.</repository-exception>
 			<numberformat-exception>Can not save this folder. The name provided
 				must be a number format</numberformat-exception>
 			<path-node-invalid>Please enter Path Node!</path-node-invalid>
@@ -2691,7 +2690,7 @@
 		</msg>
 	</UIPopupMenu>
 
-	<!-- 
+	<!--
  	 #############	From DMS 2.5 #############
   -->
 	<UIActionBar>
@@ -2759,7 +2758,7 @@
 		</label>
 	</Drives>
 
-	<!-- 
+	<!--
  	 #############	From DMS 2.6 #############
   -->
 	<UIUploadContent>
@@ -2794,7 +2793,7 @@
 			</label>
 		</tab>
 	</UIUploadContainer>
-	<!-- 
+	<!--
   	############  From DMS 2.6 ##############
    -->
 	<UIFolderForm>
@@ -2869,8 +2868,8 @@
 	  <title>
 		  <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>
 	  </title>
-	</SameNamePopup>	
-		
+	</SameNamePopup>
+
 	<UISingleUploadForm>
     <title>Upload a file</title>
     <label>
@@ -2972,13 +2971,13 @@
       <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <Configuration>Set up preferences</Configuration>
     </label>
     <title>
       <allItems>All Items</allItems>
     </title>
   </UIAllItems>
-  
+
   <UIPreferencesForm>
     <label>
   	  <Alphabetic>Alphabetic</Alphabetic>
@@ -2989,23 +2988,23 @@
   		<Descending>Descending</Descending>
     </label>
   </UIPreferencesForm>
-  
+
   <UISavedSearches>
     <title>
       <savedSearches>Saved Searches</savedSearches>
     </title>
-  </UISavedSearches>  
-  
+  </UISavedSearches>
+
   <DocumentType>
     <label>
     	 <Images>Images</Images>
     	 <Video>Video</Video>
     	 <Music>Music</Music>
     	 <Documents>Documents</Documents>
-    	 <Contents>Contents</Contents> 
+    	 <Contents>Contents</Contents>
     </label>
   </DocumentType>
-  
+
   <UIDocumentFilterForm>
   	<label>
     	<Images>My Images</Images>
@@ -3014,10 +3013,10 @@
     <title>Set up filter preferences</title>
     <action>
   		<Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
   	<label>
   		<ByType>Filter By Type</ByType>
@@ -3029,28 +3028,28 @@
   	  <ShowImages>Show all image files</ShowImages>
   	  <ShowDocuments>Show all document files</ShowDocuments>
   	  <ShowContents>Show all contents type document</ShowContents>
-  	</title>  	
+  	</title>
   </UIAllItemsByType>
-  
+
   <Views>
     <label>
       <slide-show>Slide show</slide-show>
       <timeline-view>Timeline view</timeline-view>
     </label>
-  </Views>  
-  
+  </Views>
+
   <ECMContextMenu>
     <event>
       <PlayMedia>Play media</PlayMedia>
      </event>
-  </ECMContextMenu> 
+  </ECMContextMenu>
   <UICategoryForm>
 	  <label>
 	  	<name>Category Name</name>
 	  </label>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>      
+      <Cancel>Cancel</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3063,13 +3062,13 @@
       <AddCategory>Add category</AddCategory>
     </tooltip>
 	 </UIActionBar>
-		
+
 		<UIPopupMenu>
   	<msg>
-  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>	
+  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
     </msg>
   </UIPopupMenu>
-		
+
 		<PopupComponent>
     <title>
       <UINodeTypeSelector>Select node type</UINodeTypeSelector>
@@ -3080,7 +3079,7 @@
   		<ShowComponent>Show component</ShowComponent>
   		<removeReference>Remove</removeReference>
   	</title>
-  </UIActionForm>		 
+  </UIActionForm>
 		<EditFormAction>
   	<title>
   		<ShowComponent>Show component</ShowComponent>
@@ -3092,13 +3091,13 @@
       <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
       <empty-input>The value of field is null or empty!</empty-input>
     </msg>
-  </NodeTypeNameValidator>	
-		
+  </NodeTypeNameValidator>
+
 		<UIPreferencesForm>
   		<label>
 						<queryType>Query Type</queryType>
 						<SQL>SQL</SQL>
-						<XPATH>XPATH</XPATH>  			
+						<XPATH>XPATH</XPATH>
   		</label>
   </UIPreferencesForm>
   <UIDocumentForm>
@@ -3126,7 +3125,7 @@
 				<msg>
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
-		</UIActionBar> 
+		</UIActionBar>
 			<UIPublicationPanel>
     <button>
       <Close>Close</Close>
@@ -3195,7 +3194,7 @@
       <invalid-format>Invalid datetime format. Please check again</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
-  </UIPublicationPanel>     
+  </UIPublicationPanel>
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>Manage publication</UIPublicationContainer>
@@ -3213,19 +3212,19 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist>
   		</msg>
-  </UITagForm> 
-  <!-- 
+  </UITagForm>
+  <!--
   	############  From WCM 2.1.0 ##############
-  -->  
+  -->
   <UITreeTaxonomyList>
     <label>
       <rootNodePath>Root tree</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
-  <UIJCRExplorer>  
+  <UIJCRExplorer>
     <msg>
         <target-path-not-found>Target node not found!</target-path-not-found>
     </msg>
@@ -3240,16 +3239,16 @@
     	 <Close>Close</Close>
     </action>
   </UICategoryManagerSearch>
-  <UIJcrExplorerEditForm>  
-    <label>  
+  <UIJcrExplorerEditForm>
+    <label>
       <editInNewWindow>Edit in new window</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Show Action Bar</showActionBar>
       <showSideBar>Show Left Bar</showSideBar>
       <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
-  </UIJcrExplorerEditForm>  
-  
+  </UIJcrExplorerEditForm>
+
   <UIPreferencesForm>
   	 <action>
     	 <HideAdvance>Hide Advanced</HideAdvance>
@@ -3270,7 +3269,7 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
+  <UIJcrExplorerEditForm>
     <msg>
       <fields-saved>All field values saved!</fields-saved>
       <fields-cancelled>All field values cancelled!</fields-cancelled>
@@ -3284,7 +3283,7 @@
 	  </msg>
   </UIDocumentForm>
   <lifecyclePhase>
-    <label> 
+    <label>
   	<no>No</no>
 	  <yes>Yes</yes>
 	  <true>True</true>
@@ -3309,7 +3308,7 @@
 	  <node_removed>Content Removal</node_removed>
 	  <property_added>Property Addition</property_added>
 	  <property_removed>Property Removal</property_removed>
-	  <property_changed>Property Modification</property_changed>	
+	  <property_changed>Property Modification</property_changed>
 	</label>
-  </lifecyclePhase>	
+  </lifecyclePhase>
 </bundle>

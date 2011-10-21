@@ -39,6 +39,7 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -154,17 +155,17 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       Node node = uiExplorer.getCurrentNode() ;
       if(uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
-        
+
         return ;
       }
       if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-invalid", null)) ;
-        
+
         return ;
       }
       if(pathNode == null || pathNode.length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.path-node-invalid", null));
-        
+
         return ;
       }
       String workspaceName = pathNode.substring(0, pathNode.lastIndexOf(":/"));
@@ -176,7 +177,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         if(symLinkName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         }
       }
@@ -187,18 +188,18 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       } catch (ItemNotFoundException e) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch (RepositoryException re) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         LOG.error("An unexpected error occurs", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       try {
@@ -213,33 +214,33 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         uiExplorer.updateAjax(event);
       } catch (AccessControlException ace) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
       } catch(NumberFormatException nume) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.numberformat-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
       } catch(ConstraintViolationException cve) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
-        
+
         return;
       } catch(ItemExistsException iee) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.item-exists-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
       } catch(UnsupportedRepositoryOperationException unOperationException) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.UnsupportedRepositoryOperationException", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
-        
+
         return;
       }
     }
@@ -297,7 +298,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
         uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
         uiNodePathSelector.setIsShowSystem(false);
-        uiNodePathSelector.init(uiExplorer.getSystemProvider());
+        uiNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());
         uiNodePathSelector.setSourceComponent(uiSymLinkForm, new String[]{param});
       }else {
         Node node =uiExplorer.getCurrentNode();

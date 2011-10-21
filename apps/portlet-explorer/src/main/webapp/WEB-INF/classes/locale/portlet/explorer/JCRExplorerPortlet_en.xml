@@ -2435,7 +2435,7 @@
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>Cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied! You do not have the add permission in this node.</repository-exception>
+      <repository-exception>Access denied! You do not have the permission to add symlink to this node.</repository-exception>
       <numberformat-exception>Cannot save this folder. The name provided must be a numerical format.</numberformat-exception>
       <path-node-invalid>Please enter the path node.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>

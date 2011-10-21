@@ -1278,7 +1278,7 @@
     <msg>
       <noVersion>ما من إصدار</noVersion>
     </msg>
-    <eventName>      
+    <eventName>
       <e_1>تم إضافة العقدة</e_1>
       <e_2>تم حذف العقدة</e_2>
       <e_4>تم إضافة الصفة</e_4>
@@ -1303,16 +1303,16 @@
       <e_2097152>حذف الإصدار</e_2097152>
       <e_4194304>قفل</e_4194304>
       <e_8388608>تحرير القفل</e_8388608>
-      <e_16777216>مشاهدة المحتوى</e_16777216>      
+      <e_16777216>مشاهدة المحتوى</e_16777216>
     </eventName>
     <label>
       <operation>عملية</operation>
       <userName>اسم المستخدم</userName>
       <date>تايخ</date>
       <version>إصدار</version>
-    </label>              
+    </label>
   </UIAuditingInfo>
-  
+
   <!--
   ###############################################################################
   #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
@@ -1670,8 +1670,8 @@
     <header>
       <name>#{word.name}</name>
       <description>وصف</description>
-	  <lifecycle>Life Cycle</lifecycle>	
-	  <triggeredaction>Triggered Action</triggeredaction>	
+	  <lifecycle>Life Cycle</lifecycle>
+	  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>نموذج من نوع العمل</instanceOf>
       <action>إجراء</action>
     </header>
@@ -1698,7 +1698,7 @@
       <name>مشهد العمل</name>
     </label>
     <msg>
-      <!-- 
+      <!--
         Deeper test on DMS 2.4 RC1
         ECM-3873 Error content of message when type name of action by special character
 	    -->
@@ -2082,7 +2082,7 @@
       <anyPermission>التصريح للجميع</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <anyPermission>
     <title>
       <AddAnyPermission>ضع اي صلاحية</AddAnyPermission>
@@ -2138,7 +2138,7 @@
       <nodeValidationRequest>قد تم طلب المصادقة على هذه العقدة</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
-  
+
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2146,7 +2146,7 @@
   <UIJCRExporerPortlet>
     <nopermission>هذا ليس بقُرص أو انّك لا تملك الصلاحيّة الكافية للدّخول إلى هذا القُرص</nopermission>
   </UIJCRExporerPortlet>
-  
+
   <UIJcrExplorerEditForm>
     <title>مُستكشف الملفات مشهد التغيير</title>
     <action>
@@ -2157,14 +2157,14 @@
     <label>
       <repository>مُستودع البيانات</repository>
       <categoryMandatoryWhenFileUpload>الرجاء تحديد الفئة عند تحميلك للملفّ</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>حجم ملف التحميل(MB)</uploadFileSizeLimitMB>	
+      <uploadFileSizeLimitMB>حجم ملف التحميل(MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>القرص المباشر</isDirectlyDrive>
       <driveName>اسم القرص</driveName>
       <usecase>اختيار النّوع</usecase>
 				  <SelectNodePath>حدد مسار</SelectNodePath>
     </label>
   </UIJcrExplorerEditForm>
-  
+
   <UIDriveSelector>
     <label>
       <driveName>اسم القرص</driveName>
@@ -2184,25 +2184,25 @@
 						<path-edit-permission>لا يمكن تحرير المسار. من فضلك ، انقر على زر تحرير</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
-  
+
   <PopUpSelectDrive>
     <title>
       <UIDriveSelector>اختيار  قرص</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
-  
+
   <PopupSelectPath>
     <title>
       <UIOneNodePathSelector>حدد العقدة</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
-  
+
   <DriveNameInput>
     <title>
       <SelectDrive>اختيار  قرص</SelectDrive>
     </title>
   </DriveNameInput>
-  
+
   <!--
 	### Since ECM version 2.4.x ##############
   -->
@@ -2211,13 +2211,13 @@
       <AddSymLink>إضافة وصلة</AddSymLink>
 		</tooltip>
 	</UIActionBar>
-	
+
 	<UIPopupWindow>
 		<title>
 			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
-	
+
 	<UISymLinkForm>
 		<label>
       <symLinkName>إسم الرابط </symLinkName>
@@ -2233,8 +2233,8 @@
       <name-not-allowed>لا يسمح هذا الاسم.</name-not-allowed>
       <fileName-error>اسم الملف غير صالح</fileName-error>
       <constraint-violation>العقدة الحالية لا تسمح لإضافة '{0}' نوع العقدة'</constraint-violation>
-      <repository-exception>رفض الوصول! لم يكن لديك إضافة إذن في هذه العقدة</repository-exception>
-      <numberformat-exception>لا يمكن حفظ هذا المجلد. وقدم اسم يجب أن يكون تنسيق رقم</numberformat-exception>      
+      <repository-exception>رفض الوصول! ليس لديك إذن لإضافة الرمزي لهذه العقدة.</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا المجلد. وقدم اسم يجب أن يكون تنسيق رقم</numberformat-exception>
 			<path-node-invalid>الرجاء إدخال مسار عقدة!</path-node-invalid>
 			<path-node-not-allowed>لا يسمح هذا الاسم.</path-node-not-allowed>
 			<non-node>الرجاء اختيار الثقة عقدة الهدف أو لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة</non-node>
@@ -2243,25 +2243,25 @@
 			<UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
-	
+
 	<UIPopupSymLink>
 		<title>
 			<UIOneNodePathSelector>اختيار الهدف عقدة</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
-	
+
 	<ECMContextMenu>
 		<event>
 			<AddSymLink>إضافة رابط </AddSymLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkingArea>
     <msg>
       <create-link-problem>   '{1}' إلى '{0}' لا يمكنك إنشاء ارتباط لعقدة</create-link-problem>
       <dest-node-is-link>العقدة الوجهة'{0} 'هو بالفعل الارتباط الرمزي. بحيث لا يمكنك إنشاء الارتباط الرمزي داخله</dest-node-is-link>
       <selected-is-link>العقدة المحددة '{0}'هو بالفعل وجود صلة ، لا يمكنك إنشاء ارتباط إلى ارتباط آخر نقطة</selected-is-link>
-      <confirm-create-link>هل تريد حقاً انجاز رابط إلى هذا الموقع؟</confirm-create-link>    
+      <confirm-create-link>هل تريد حقاً انجاز رابط إلى هذا الموقع؟</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
@@ -2270,7 +2270,7 @@
       <CreateLink>إنشاء رابط</CreateLink>
     </event>
   </ECMContextMenu>
-    
+
   <UIWorkspaceList>
   	<msg>
   		<AccessDeniedException>ليمكنك الدخول إلى مساحة العمل هذه </AccessDeniedException>
@@ -2279,25 +2279,25 @@
       <taxonomyTree>شجرة التصنيف</taxonomyTree>
     </label>
   </UIWorkspaceList>
-  
+
   <UIPopupTaxonomy>
     <title>
 			<UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
-  
+
   <UITreeTaxonomyList>
   	<label>
       <taxonomyTree>شجرة التصنيف</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
-  
+
   <UIActionBar>
     <tooltip>
       <ManageSimpleCategories>نظم صلة واحدة</ManageSimpleCategories>
     </tooltip>
 	</UIActionBar>
-	
+
 	<UISimpleCategoryManager>
     <tab>
       <label>
@@ -2306,7 +2306,7 @@
       </label>
     </tab>
   </UISimpleCategoryManager>
-  
+
   <UICategoryManager>
     <tab>
       <label>
@@ -2314,15 +2314,15 @@
       </label>
     </tab>
   </UICategoryManager>
-  
+
   <UISimpleCategoryManager>
   	<action>
-  		<Close>أغلق</Close>	
+  		<Close>أغلق</Close>
   	</action>
-  </UISimpleCategoryManager>  
+  </UISimpleCategoryManager>
   <UIPopupWindow>
   	<title>
-  		<UISimpleCategoryManager>إضافة تصنيف</UISimpleCategoryManager>	
+  		<UISimpleCategoryManager>إضافة تصنيف</UISimpleCategoryManager>
   	</title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2330,26 +2330,26 @@
   		<ItemExistsException>وهناك فئة مع اسم سامي موجود مسبقا</ItemExistsException>
   	</msg>
 	</UICategoriesAddedList>
-	
+
 	<UIConfirmMessage>
 	  <label>
 	    <Close>#{word.close}</Close>
 	    <OK>موافق</OK>
 	  </label>
 	</UIConfirmMessage>
-	
+
 	<PopupComponent>
     <title>
 			<UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
-  
+
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>لا يمكن نقل : المجلد الوجهة هو نفس المصدر المجلد</can-not-move-to-itself>
     </msg>
-  </UIWorkingArea>  
-  
+  </UIWorkingArea>
+
     <UIImportNode>
     <label>
       <behavior> سلوك الـ UUID</behavior>
@@ -2359,8 +2359,8 @@
       <history-invalid-type>نوع الملف الخاص بتاريخ الإصدار غير صالح، الملف الصحيح يجب أن يكون من نوع *.zip</history-invalid-type>
       <history-invalid-content>محتوى بيانات تاريخ الإصدار غير صالح، يجب اختيار الملف الصحيح الذي ترغب في استيراده</history-invalid-content>
     </msg>
-  </UIImportNode>  
-  
+  </UIImportNode>
+
   <Import>
     <Behavior>
       <type0>صنع جديد</type0>
@@ -2369,26 +2369,26 @@
       <type3>إزالة</type3>
     </Behavior>
   </Import>
-  
+
   <UIExportNode>
     <action>
       <ExportHistory>تصدير تاريخ الإصدار</ExportHistory>
     </action>
   </UIExportNode>
-  
+
   <Import>
     <label>
       <docview>رؤية الوثيقة</docview>
       <sysview>رؤية النظام</sysview>
     </label>
   </Import>
-  
+
   <UIDocumentForm>
   	<msg>
   		<do-not-permission>لا تملك الصلاحية الكافية لرؤية هذا القالب</do-not-permission>
   	</msg>
   </UIDocumentForm>
-  
+
   <!--
   ###################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      			#
@@ -2404,13 +2404,13 @@
       <Search>بحث</Search>
     </obtion>
   </UIActionBar>
-  
+
   <UIPopupMenu>
   	<msg>
 			<can-not-unlock-node-is-checked-in> لايمكن فتح العقدة {0} إما لأنها محمية أو لأنها تم ادعوها </can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
-  <!-- 
+  <!--
  	 #############	From DMS 2.5 #############
   -->
   <UIActionBar>
@@ -2464,9 +2464,9 @@
 			<SharedUsersSpace>المشتركة للمستخدمين الفضاء</SharedUsersSpace>
 			<Systemfiles>نظام ملفات</Systemfiles>
 			<ValidationRequestsDocumentsCenter>مركز التحقق من صحة وثائق تطلب</ValidationRequestsDocumentsCenter>
-		</label>  
+		</label>
 	</Drives>
-	<!-- 
+	<!--
  	 #############	From DMS 2.6 #############
   -->
 	<UIUploadContent>
@@ -2475,7 +2475,7 @@
 		</tooltip>
 		<label>
 			<manageMetadata>إدارة البيانات الوصفية</manageMetadata>
-		</label>		
+		</label>
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
@@ -2501,9 +2501,9 @@
   		</label>
   	</tab>
   </UIUploadContainer>
-  <!-- 
+  <!--
   	############  From DMS 2.6 ##############
-   -->  
+   -->
   <UIFolderForm>
     <label>
       <nt_folder>مجلد الوثيقة</nt_folder>
@@ -2526,7 +2526,7 @@
 	    <drive-not-exist>ليمكنك الوصول إلى '{0} أو ليس لديك لحق للدخول </drive-not-exist>
 	  </msg>
 	 </UIDrivesBrowser>
-	 
+
  <UIExportNode>
   <msg>
     <OutOfMemoryError>عليك أن تختار "عرض نظام" لإصدار بيانات</OutOfMemoryError>
@@ -2534,10 +2534,10 @@
  </UIExportNode>
  <Taxonomy>
 		<msg>
-			<AccessDeniedException>ليس لديك إذن للوصول إلى أطروحة في التصنيفات</AccessDeniedException>		 	
+			<AccessDeniedException>ليس لديك إذن للوصول إلى أطروحة في التصنيفات</AccessDeniedException>
 		</msg>
 	 </Taxonomy>
-	 <UIJcrExplorerEditForm>    
+	 <UIJcrExplorerEditForm>
 		<msg>
 			<notNullDriveName>موقع فارغ ، أتمم الاسم منفضلك  !</notNullDriveName>
 			<notNullPath>المسار هو خالية أو فارغة. ملء المسار ، من فضلك!</notNullPath>
@@ -2573,7 +2573,7 @@
 		  <UIUploadBehaviorWithSameName>تحميل الملف</UIUploadBehaviorWithSameName>
 	  </title>
 	</SameNamePopup>
-	
+
 	<UISingleUploadForm>
     <title>تحميل الملف</title>
     <label>
@@ -2656,7 +2656,7 @@
       <Save>حفظ</Save>
     </action>
   </UISingleAddMetadataForm>
-  
+
   <UIPreferencesForm>
   	<label>
   	  <Alphabetic>أبجدي</Alphabetic>
@@ -2667,30 +2667,30 @@
   		<Descending>تنازلي</Descending>
   	</label>
   </UIPreferencesForm>
-  
+
   <UIAllItems>
     <label>
       <OwnedByMe>ملكي </OwnedByMe>
       <Favourites>المفضلة</Favourites>
       <Hidden>مخفي</Hidden>
       <Trash>نفاية</Trash>
-      <Configuration>إعداد تفضيلات</Configuration>      
+      <Configuration>إعداد تفضيلات</Configuration>
     </label>
     <title>
       <allItems>جميع البنود</allItems>
     </title>
   </UIAllItems>
-  
+
   <DocumentType>
     <label>
     	 <Images>الصور</Images>
     	 <Video>فيديو</Video>
     	 <Music>موسيقى</Music>
-    	 <Documents>وثائق</Documents> 
-     	 <Contents>محتويات</Contents>   	 
+    	 <Documents>وثائق</Documents>
+     	 <Contents>محتويات</Contents>
     </label>
   </DocumentType>
-  
+
   <UIDocumentFilterForm>
   	<label>
     	<Images>الصور</Images>
@@ -2699,10 +2699,10 @@
     <title>تعيين تصفية التفضيلات </title>
     <action>
   		<Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
   	<label>
   		<DocumentFilterConfiguration>تعيين تصفية التفضيلات </DocumentFilterConfiguration>
@@ -2713,8 +2713,8 @@
   	  <ShowImages>عرض جميع ملفات الصور</ShowImages>
   	  <ShowDocuments>عرض كل الملفات وثيقة</ShowDocuments>
   	  <ShowContents>وتظهر الوثيقة نوع كل محتويات</ShowContents>
-  	</title>  	
-  </UIAllItemsByType>  
+  	</title>
+  </UIAllItemsByType>
 
   <Views>
     <label>
@@ -2733,7 +2733,7 @@
 	  </label>
     <action>
       <Save>حفظ</Save>
-      <Cancel>إلغاء</Cancel>      
+      <Cancel>إلغاء</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -2748,7 +2748,7 @@
 	 </UIActionBar>
   <UIPopupMenu>
   	<msg>
-  		<node-locked-editing>هذه العقدة مع المسار {0} يتم تأمينه من قبل مستخدم آخر للتحرير!</node-locked-editing>	
+  		<node-locked-editing>هذه العقدة مع المسار {0} يتم تأمينه من قبل مستخدم آخر للتحرير!</node-locked-editing>
     </msg>
   </UIPopupMenu>
 
@@ -2757,13 +2757,13 @@
       <UINodeTypeSelector>حدد نوع العقدة</UINodeTypeSelector>
     </title>
   </PopupComponent>
-		
+
 		<UIActionForm>
   	<title>
   		<ShowComponent>عرض مكون</ShowComponent>
   		<removeReference>إزالة</removeReference>
   	</title>
-  </UIActionForm>		 
+  </UIActionForm>
 
 	 <EditFormAction>
   	<title>
@@ -2777,25 +2777,25 @@
       <empty-input>قيمة الحقل خالية أو فارغة!</empty-input>
     </msg>
   </NodeTypeNameValidator>
-  
+
   <UIPreferencesForm>
   		<label>
 						<queryType>Query Type</queryType>
 						<SQL>SQL</SQL>
-						<XPATH>XPATH</XPATH>  			
+						<XPATH>XPATH</XPATH>
   		</label>
   </UIPreferencesForm>
     <UIDocumentForm>
   	<msg>
   		<constraintviolation-exception>لا يمكن حفظ المستند. وغاب عن إدخال البيانات أو غير صالحة!</constraintviolation-exception>
   	</msg>
-  </UIDocumentForm> 
+  </UIDocumentForm>
   <UIActionForm>
   	<msg>
   		<constraintviolation-exception>لا يمكن حفظ المستند. وغاب عن إدخال البيانات أو غير صالحة!</constraintviolation-exception>
   	</msg>
   </UIActionForm>
-  
+
   <UIJcrExplorerEditForm>
     <label>
 	  <nodePath>حدد مسار</nodePath>
@@ -2811,7 +2811,7 @@
 				<msg>
 				  <not-exist-categories>لا توجد أي فئة</not-exist-categories>
 				</msg>
-		</UIActionBar>		 
+		</UIActionBar>
 			<UIPublicationPanel>
     <button>
       <Close>أغلق</Close>
@@ -2856,7 +2856,7 @@
       <restore-complete>أنجزت استعادة</restore-complete>
     </msg>
   </UIPublicationPanel>
-  
+
   <UIPublicationHistory>
     <header>
       <date>تاريخ</date>
@@ -2880,13 +2880,13 @@
       <invalid-format>التاريخ والوقت غير صالحة الشكل. يرجى مراجعة مرة أخرى</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
-  </UIPublicationPanel>     
+  </UIPublicationPanel>
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>إدارة النشر</UIPublicationContainer>
       <UIPublishingPanel>إدارة النشر</UIPublishingPanel>
     </title>
-  </UIPopupWindow> 
+  </UIPopupWindow>
   <WCMContentView>
     <header>
       <status>Status</status>
@@ -2899,16 +2899,16 @@
   <UIDocumentForm>
 	  <msg>
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-		  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>		  
+		  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm> 
+  </UIDocumentForm>
   <lifecyclePhase>
-    <label>	
+    <label>
   	<no>لا</no>
 	  <yes>نعم</yes>
 	  <true>صحيح</true>
-	  <false>خطأ</false>	
+	  <false>خطأ</false>
 	  <Electronic>إلكتروني</Electronic>
 	  <Paper>ورقة</Paper>
 	  <NONE>لا شيء</NONE>
@@ -2923,7 +2923,7 @@
 	  <quarterly> فصليا (كُل ثلاثَة أشْهُر)</quarterly>
 	  <yearly>سنويا</yearly>
 	  <ten-years>عشر سنوات</ten-years>
-		
+
 	  <read>إجراء المستخدم</read>
 	  <schedule>جدولة</schedule>
 	  <node_added>إضافة محتوى</node_added>
@@ -2932,5 +2932,5 @@
 	  <property_removed>إزالة الخاصية</property_removed>
 	  <property_changed>تعديل الملكية</property_changed>
 	</label>
-  </lifecyclePhase>						
+  </lifecyclePhase>
 </bundle>

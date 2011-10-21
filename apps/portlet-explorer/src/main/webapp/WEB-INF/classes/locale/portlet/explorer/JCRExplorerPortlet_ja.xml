@@ -200,7 +200,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
     </action>
-  </UIAllItemsPreferenceForm>  
+  </UIAllItemsPreferenceForm>
   <!--
   #########################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
@@ -461,10 +461,10 @@
     </title>
     <msg>
       <confirm-delete>ノード'{0}' を削除し、全てのコンテンツを削除しますか？</confirm-delete>
-      <confirm-delete-permanently>ノード'{0}'と全てのコンテンツを永続的に削除しますか？</confirm-delete-permanently>      
+      <confirm-delete-permanently>ノード'{0}'と全てのコンテンツを永続的に削除しますか？</confirm-delete-permanently>
       <confirm-restore>同じ名前のノードがノード'{0}' の古いロケーションにも存在します。このノードをリストアしますか？</confirm-restore>
       <confirm-delete-multi>これら {0} アイテムを削除しますか？</confirm-delete-multi>
-      <confirm-delete-permanently-multi>これら {0} アイテムを永続的に削除しますか？</confirm-delete-permanently-multi>      
+      <confirm-delete-permanently-multi>これら {0} アイテムを永続的に削除しますか？</confirm-delete-permanently-multi>
       <confirm-move>移動しますか？</confirm-move>
       <node-cut>ノード '{0}' を切取ります。</node-cut>
       <execute-successfully>カスタムアクション '{0}' は実行されます。</execute-successfully>
@@ -624,7 +624,7 @@
       <UIPublicationPagesContainer>ページ</UIPublicationPagesContainer>
       <UIPublicationHistory>履歴</UIPublicationHistory>
       <UIVersionViewer>バージョンビューワ</UIVersionViewer>
-      
+
       <UIPropertyTab>プロパティ</UIPropertyTab>
       <UIMetadataTab>メタデータ</UIMetadataTab>
       <UIPropertyForm>新しいプロパティの追加</UIPropertyForm>
@@ -1095,7 +1095,7 @@
       <View>このノードの観覧</View>
       <OpenFolder>フォルダへ移動</OpenFolder>
     </tooltip>
-  </UIShowAllFavouriteResult>  
+  </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
       <not-support>このノードのための観覧テンプレートはありません。</not-support>
@@ -1450,7 +1450,7 @@
     <msg>
       <noVersion>バージョンなし</noVersion>
     </msg>
-    <eventName>      
+    <eventName>
       <e_1>追加されたノード</e_1>
       <e_2>削除されたノード</e_2>
       <e_4>追加されたプロパティ</e_4>
@@ -1475,16 +1475,16 @@
       <e_2097152>バージョン削除</e_2097152>
       <e_4194304>ロック</e_4194304>
       <e_8388608>ロック解除</e_8388608>
-      <e_16777216>読む</e_16777216>      
+      <e_16777216>読む</e_16777216>
     </eventName>
     <label>
       <operation>オペレーション</operation>
       <userName>ユーザ名</userName>
       <date>日付</date>
       <version>バージョン</version>
-    </label>              
+    </label>
   </UIAuditingInfo>
-  
+
   <!--
   ###############################################################################
   #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
@@ -1843,8 +1843,8 @@
     <header>
       <name>#{word.name}</name>
       <description>説明</description>
-	  <lifecycle>Life Cycle</lifecycle>	
-	  <triggeredaction>Triggered Action</triggeredaction>	
+	  <lifecycle>Life Cycle</lifecycle>
+	  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>アクションタイプのインスタンス</instanceOf>
       <action>アクション</action>
     </header>
@@ -2253,7 +2253,7 @@
       <anyPermission>権限</anyPermission>
     </label>
   </UIAnyPermission>
-	
+
   <anyPermission>
     <title>
       <AddAnyPermission>権限をセット</AddAnyPermission>
@@ -2309,7 +2309,7 @@
       <nodeValidationRequest>ノードは要求されたバリデーションでした。</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
-  
+
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2317,7 +2317,7 @@
   <UIJCRExplorerPortlet>
     <nopermission>ドライブが存在しないか、このドライブにアクセスするために権限がありません。</nopermission>
   </UIJCRExplorerPortlet>
-  
+
   <UIJcrExplorerEditForm>
     <title>ファイルエクスプローラフォーム</title>
     <action>
@@ -2341,7 +2341,7 @@
       <nodePath>パスの選択</nodePath>
     </label>
   </UIJcrExplorerEditForm>
-  
+
   <UIDriveSelector>
     <label>
       <driveName>ドライブ名</driveName>
@@ -2361,7 +2361,7 @@
       <path-edit-permission>パスを編集できません。編集ボタンをクリックしてください。</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
-  
+
   <PopUpSelectDrive>
     <title>
       <UIDriveSelector>ドライブの選択</UIDriveSelector>
@@ -2373,13 +2373,13 @@
       <UIOneNodePathSelector>ノードの選択</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
-  
+
   <DriveNameInput>
     <title>
       <SelectDrive>ドライブの選択</SelectDrive>
     </title>
   </DriveNameInput>
-  
+
   <!--
   ### Since ECM version 2.4.x ##############
   -->
@@ -2389,13 +2389,13 @@
       <AddLocalizationLink>Translationの追加</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
-  
+
   <UIPopupWindow>
     <title>
       <UISymLinkManager>Add Link</UISymLinkManager>
     </title>
   </UIPopupWindow>
-  
+
   <UISymLinkForm>
     <label>
       <symLinkName>Symリンク名</symLinkName>
@@ -2411,8 +2411,8 @@
       <name-not-allowed>この名前は許されていません。.</name-not-allowed>
       <fileName-error>無効なファイル名</fileName-error>
       <constraint-violation>現在のノードは '{0}' ノードタイプを追加することを許していません。</constraint-violation>
-      <repository-exception>アクセスできません！ このノードに権限がありません。</repository-exception>
-      <numberformat-exception>このフォルダを保存できません。名前は数字である必要があります。</numberformat-exception>      
+      <repository-exception>アクセスが拒否されました！このノードへのシンボリックリンクを追加する権限がありません。</repository-exception>
+      <numberformat-exception>このフォルダを保存できません。名前は数字である必要があります。</numberformat-exception>
       <path-node-invalid>パスノードを入力してください！</path-node-invalid>
       <path-node-not-allowed>この名前は許されていません</path-node-not-allowed>
       <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
@@ -2421,35 +2421,35 @@
       <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
-  
+
   <UIPopupSymLink>
     <title>
       <UIOneNodePathSelector>ターゲットノードの選択</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
-  
+
   <ECMContextMenu>
     <event>
       <AddSymLink>Symリンクの追加</AddSymLink>
       <AddLocalizationLink>Translationの追加</AddLocalizationLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkingArea>
     <msg>
       <create-link-problem>'{1}' にノード '{0}' のリンクを作成することができません。</create-link-problem>
       <dest-node-is-link>ノード '{0}' は既にSymリンクです。このためSymリンクを作成できません。</dest-node-is-link>
       <selected-is-link>選択されたノード '{0}' は既にリンクです。他のリンクにリンクポイントを作成することは出来ません。</selected-is-link>
-      <confirm-create-link>本当にこのロケーションのためのリンクを作成しますか？</confirm-create-link>    
+      <confirm-create-link>本当にこのロケーションのためのリンクを作成しますか？</confirm-create-link>
     </msg>
   </UIWorkingArea>
-  
+
   <ECMContextMenu>
     <event>
       <CreateLink>リンクの作成</CreateLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkspaceList>
     <msg>
       <AccessDeniedException>アクセスできません！このワークスペースの読み込み権限がありません。</AccessDeniedException>
@@ -2458,13 +2458,13 @@
       <taxonomyTree>分類ツリー</taxonomyTree>
     </label>
   </UIWorkspaceList>
-  
+
   <UIPopupTaxonomy>
     <title>
       <UIOneTaxonomySelector>カテゴリの追加</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
-  
+
   <UITreeTaxonomyList>
     <label>
       <taxonomyTree>分類ツリー</taxonomyTree>
@@ -2472,13 +2472,13 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
-  
+
   <UIActionBar>
     <tooltip>
       <ManageSimpleCategories>シンプルカテゴリの管理</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
-  
+
   <UISimpleCategoryManager>
     <tab>
       <label>
@@ -2487,7 +2487,7 @@
       </label>
     </tab>
   </UISimpleCategoryManager>
-  
+
   <UICategoryManager>
     <tab>
       <label>
@@ -2495,15 +2495,15 @@
       </label>
     </tab>
   </UICategoryManager>
-  
+
   <UISimpleCategoryManager>
     <action>
-      <Close>閉じる</Close>  
+      <Close>閉じる</Close>
     </action>
-  </UISimpleCategoryManager>  
+  </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>カテゴリの追加</UISimpleCategoryManager> 
+      <UISimpleCategoryManager>カテゴリの追加</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2511,7 +2511,7 @@
       <ItemExistsException>同じ名前のカテゴリーが既に存在します。</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
-  
+
   <UIConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -2521,7 +2521,7 @@
       <Keepfile>両方のファイルをキープする</Keepfile>
     </label>
   </UIConfirmMessage>
-  
+
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -2531,14 +2531,14 @@
       <Keepfile>両方のファイルをキープする</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
-  
-  
+
+
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>カテゴリの追加</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
-  
+
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>移動できません：移動先のフォルダはソースフォルダとして同じです。</can-not-move-to-itself>
@@ -2554,8 +2554,8 @@
       <history-invalid-type>無効なバージョン履歴ファイルタイプです。正しいファイルはzipファイル形式である必要があります。</history-invalid-type>
       <history-invalid-content>無効なバージョン履歴データコンテンツです。インポートするために正しいファイルを選択してください。</history-invalid-content>
     </msg>
-  </UIImportNode>  
-  
+  </UIImportNode>
+
   <Import>
     <Behavior>
       <type0>新規作成</type0>
@@ -2564,33 +2564,33 @@
       <type3>例外</type3>
     </Behavior>
   </Import>
-  
+
   <UIExportNode>
     <action>
       <ExportHistory>バージョン履歴のエクスポート</ExportHistory>
     </action>
   </UIExportNode>
-  
+
   <UIPopupMenu>
     <msg>
       <node-locked-other-person>このノードもしくは親ノードは他のユーザにロックされています。削除できません!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
-  
+
   <Import>
     <label>
       <docview>ドキュメントビュー</docview>
       <sysview>システムビュー</sysview>
     </label>
   </Import>
-  
+
   <UIDocumentForm>
     <msg>
       <not-support>'{0}' のテンプレートをロード出来ませんでした。</not-support>
       <do-not-permission>'{0}' のテンプレートをロードするための権限がありません。</do-not-permission>
     </msg>
   </UIDocumentForm>
-  
+
   <!--
   ###################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
@@ -2606,14 +2606,14 @@
       <Search>検索</Search>
     </obtion>
   </UIActionBar>
-  
+
   <UIPopupMenu>
     <msg>
       <can-not-unlock-node-is-checked-in>ノード '{0}' もしくは '{0}' の原型はチェックインできないためロック解除できませんでした。</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
-  
-  <!-- 
+
+  <!--
    #############  From DMS 2.5 #############
   -->
   <UIActionBar>
@@ -2636,13 +2636,13 @@
       <allow-setProperty>このグループのプロパティを選択する必要があります。</allow-setProperty>
     </msg>
   </UIActionBar>
-  
+
   <UIActionForm>
     <msg>
       <name-not-allowed>このアクション名は許されません。</name-not-allowed>
     </msg>
   </UIActionForm>
-  
+
   <UISaveQueryForm>
     <msg>
       <name-not-allowed>このクエリ名は許されません。</name-not-allowed>
@@ -2652,7 +2652,7 @@
     <msg>
       <name-not-allowed>コンテンツ内で単語もしくは句許されていません。</name-not-allowed>
     </msg>
-  </UISimpleSearch> 
+  </UISimpleSearch>
   <Drives>
     <label>
       <Private>プライベート</Private>
@@ -2669,11 +2669,11 @@
       <SharedUsersSpace>共有ユーザスペース</SharedUsersSpace>
       <Systemfiles>システムファイル</Systemfiles>
       <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンタ</ValidationRequestsDocumentsCenter>
-    </label>  
-  </Drives> 
+    </label>
+  </Drives>
 
-  
-  <!-- 
+
+  <!--
    #############  From DMS 2.6 #############
   -->
   <UIUploadContent>
@@ -2682,7 +2682,7 @@
     </tooltip>
     <label>
       <manageMetadata>メタデータの管理</manageMetadata>
-    </label>    
+    </label>
   </UIUploadContent>
   <UIUploadForm>
     <action>
@@ -2696,14 +2696,14 @@
       <Cancel>キャンセル</Cancel>
     </action>
   </UIExternalMetadataForm>
-    <!-- 
+    <!--
    #############  From DMS 2.6 #############
    -->
   <ECMContextMenu>
       <event>
         <Permlink>ドキュメントの観覧</Permlink>
       </event>
-  </ECMContextMenu>  
+  </ECMContextMenu>
   <UIUploadContainer>
     <tab>
       <label>
@@ -2711,10 +2711,10 @@
       </label>
     </tab>
   </UIUploadContainer>
-  
-  <!-- 
+
+  <!--
     ############  From DMS 2.6 ##############
-   -->  
+   -->
   <UIFolderForm>
     <label>
       <nt_folder>ドキュメントフォルダ</nt_folder>
@@ -2746,29 +2746,29 @@
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>これらの分類にアクセスするための権限がありません。</AccessDeniedException>      
+      <AccessDeniedException>これらの分類にアクセスするための権限がありません。</AccessDeniedException>
     </msg>
   </Taxonomy>
-  
-  <UIJcrExplorerEditForm>    
+
+  <UIJcrExplorerEditForm>
     <msg>
       <notNullDriveName>ドライブ名はnullもしくは空です。ドライブ名を入力してください。</notNullDriveName>
       <notNullPath>パスはnullもしくは空です。パスを入力してください。</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
-    
+
   <UIViewSearchResult>
     <tooltip>
       <remove-attachment>この添付ファイルを削除したいですか？</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
-  
+
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>アップロードファイル</UIUploadBehaviorWithSameName>    
+      <UIUploadBehaviorWithSameName>アップロードファイル</UIUploadBehaviorWithSameName>
     </title>
-  </SameNamePopup>  
-    
+  </SameNamePopup>
+
   <UISingleUploadForm>
     <title>ファイルのアップロード</title>
     <label>
@@ -2858,13 +2858,13 @@
       <Favourites>お気に入り</Favourites>
       <Hidden>隠しファイル</Hidden>
       <Trash>ゴミ箱</Trash>
-      <Configuration>設定のセットアップ</Configuration>      
+      <Configuration>設定のセットアップ</Configuration>
     </label>
     <title>
       <allItems>全てのアイテム</allItems>
     </title>
   </UIAllItems>
-  
+
   <UIPreferencesForm>
       <label>
           <Alphabetic>アルファベット順</Alphabetic>
@@ -2875,7 +2875,7 @@
           <Descending>降順</Descending>
       </label>
   </UIPreferencesForm>
-  
+
   <UIDocumentInfo>
     <label>
       <Today>今日</Today>
@@ -2887,7 +2887,7 @@
     <header>
       <dateTime>日時</dateTime>
       <name>名前</name>
-    </header>   
+    </header>
     <tooltip>
       <View>ビュー</View>
       <RemoveFromFavourite>お気に入りから削除</RemoveFromFavourite>
@@ -2898,9 +2898,9 @@
       <timelineDateTimeDESC>降順オーダーの変更時間でソート</timelineDateTimeDESC>
       <timelineNameASC>昇順オーダーの名前でソート</timelineNameASC>
       <timelineNameDESC>降順オーダーの名前でソート</timelineNameDESC>
-    </tooltip>    
-  </UIDocumentInfo> 
-  
+    </tooltip>
+  </UIDocumentInfo>
+
   <UISavedSearches>
     <title>
       <savedSearches>保存された検索</savedSearches>
@@ -2915,7 +2915,7 @@
        <Contents>コンテンツ</Contents>
     </label>
   </DocumentType>
-  
+
   <UIDocumentFilterForm>
     <label>
       <Images>イメージ</Images>
@@ -2924,10 +2924,10 @@
     <title>優先フィルタの設定</title>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
     <label>
     	<ByType>フィルタタイプ</ByType>
@@ -2941,24 +2941,24 @@
       <ShowContents>全てのコンテンツタイプドキュメントを表示</ShowContents>
     </title>
   </UIAllItemsByType>
-  
+
   <Views>
     <label>
       <slide-show>スライドショー</slide-show>
       <timeline-view>タイムラインビュー</timeline-view>
     </label>
-  </Views>  
+  </Views>
   <ECMContextMenu>
     <event>
       <PlayMedia>メディアの再生</PlayMedia>
     </event>
-  </ECMContextMenu> 
+  </ECMContextMenu>
   <UIPopupWindow>
     <title>
       <UIDocumentFilterForm>フィルタードキュメントタイプ</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
-  
+
   <UIAllItemsPreferenceForm>
     <label>
       <showOwnedByUser>オーナー</showOwnedByUser>
@@ -2969,22 +2969,22 @@
     <title>フィルタ設定のセットアップ</title>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIAllItemsPreferenceForm>
-  
+
   <EmptyTrashManageComponent>
     <msg>
       <confirm-delete>ゴミ箱を空にしますか？</confirm-delete>
     </msg>
-  </EmptyTrashManageComponent> 
+  </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
       <name>カテゴリ名</name>
     </label>
     <action>
       <Save>保存</Save>
-      <Cancel>キャンセル</Cancel>      
+      <Cancel>キャンセル</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3004,12 +3004,12 @@
       <Group>グループ</Group>
       <Site>サイト</Site>
       <Private>プライベート</Private>
-      <tagScopes>タグスコープ</tagScopes>      
+      <tagScopes>タグスコープ</tagScopes>
     </label>
    </UITaggingForm>
-   
-   
-   
+
+
+
    <UITagExplorer>
     <title>
       <EditPrivateTags>プライベートタグの編集</EditPrivateTags>
@@ -3018,14 +3018,14 @@
       <PrivateTags>プライベートタグ</PrivateTags>
      </title>
    </UITagExplorer>
-   
+
   <UIEditingTagsForm>
     <header>
       <name>名前</name>
       <relatedDocuments>関係するドキュメント</relatedDocuments>
       <action>アクション</action>
     </header>
-  
+
   <action>
     <title>
       <EditTag>タグの編集</EditTag>
@@ -3037,8 +3037,8 @@
       <confirm-remove>削除したいですか？</confirm-remove>
     </msg>
   </UIEditingTagsForm>
-  
-  
+
+
   <UIPopupWindow>
     <title>
       <UIEditingTagsForm>タグフォームの編集</UIEditingTagsForm>
@@ -3061,10 +3061,10 @@
       <UITagForm>タグフォーム</UITagForm>
     </title>
   </TagPopup>
-    
+
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>このノード {0} は他のユーザが編集中のためロックされています。</node-locked-editing> 
+      <node-locked-editing>このノード {0} は他のユーザが編集中のためロックされています。</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -3072,13 +3072,13 @@
       <error-update>アップデート中のエラー</error-update>
     </msg>
   </UITagStyleForm>
-  
+
   <UIPopupMenu>
     <msg>
       <editTagAccessDenied>アクセスが許可されていません！</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
-  
+
   <UIPopupWindow>
     <title>
       <UITaggingFormContainer>タグマネージャー</UITaggingFormContainer>
@@ -3090,42 +3090,42 @@
       <UINodeTypeSelector>ノードタイプの選択</UINodeTypeSelector>
     </title>
   </PopupComponent>
-    
+
     <UIActionForm>
     <title>
       <ShowComponent>コンポーネントの表示</ShowComponent>
       <removeReference>削除</removeReference>
     </title>
-  </UIActionForm>   
-    
+  </UIActionForm>
+
   <EditFormAction>
     <title>
       <ShowComponent>コンポーネントの表示</ShowComponent>
       <removeReference>削除</removeReference>
     </title>
   </EditFormAction>
-    
+
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>無効な文字があります。別の値を入力してください!</Invalid-char>
       <empty-input>フィールドの値はnullか空です!</empty-input>
     </msg>
   </NodeTypeNameValidator>
-  
+
   <UIPreferencesForm>
       <label>
             <queryType>クエリタイプ</queryType>
             <SQL>SQL</SQL>
-            <XPATH>XPATH</XPATH>        
+            <XPATH>XPATH</XPATH>
       </label>
   </UIPreferencesForm>
-  
+
   <UIDocumentInfo>
     <msg>
       <repository-error>エラー。レポジトリに関する情報は失いました！</repository-error>
     </msg>
   </UIDocumentInfo>
-  
+
   <UITreeExplorer>
     <msg>
       <repository-error>エラー。レポジトリに関する情報は失いました！</repository-error>
@@ -3141,7 +3141,7 @@
       <constraintviolation-exception>ドキュメントを保存出来ません。データ入力が間違っているか無効です。</constraintviolation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UISelectRestorePath>
     <action>
       <Save>保存</Save>
@@ -3150,7 +3150,7 @@
     <label>
       <formInput>古いパスは失われました。新しいものを選択してください。</formInput>
     </label>
-  </UISelectRestorePath>         
+  </UISelectRestorePath>
   <PathNode>
     <title>
       <Add>追加</Add>
@@ -3166,12 +3166,12 @@
       <AddRootNode>ルートノードの追加</AddRootNode>
     </title>
   </rootNodeInfo>
-  
+
   <UIPopupWindow>
     <title>
       <UISelectRestorePath>リストアパスの選択</UISelectRestorePath>
     </title>
-  </UIPopupWindow>  
+  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>ホームパスは空です</homePath-emty>
@@ -3182,8 +3182,8 @@
     <msg>
       <not-exist-categories>カテゴリがありません</not-exist-categories>
     </msg>
-  </UIActionBar>		   
-		
+  </UIActionBar>
+
   <UIPublicationPanel>
     <button>
       <Close>閉じる</Close>
@@ -3252,13 +3252,13 @@
       <invalid-format>無効なDatetimeフォーマットです。もう一度チェックしてください。</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
-  </UIPublicationPanel>     
+  </UIPublicationPanel>
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>公開管理</UIPublicationContainer>
       <UIPublishingPanel>公開管理</UIPublishingPanel>
     </title>
-  </UIPopupWindow> 
+  </UIPopupWindow>
   <WCMContentView>
     <header>
       <status>ステータス</status>
@@ -3270,11 +3270,11 @@
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>タグ名は既に存在します。</NameAlreadyExist> 
+      <NameAlreadyExist>タグ名は既に存在します。</NameAlreadyExist>
     </msg>
   </UITagForm>
-  
-  <!-- 
+
+  <!--
   	############  From WCM 2.1.0 ##############
   -->
   <UICategoryManagerSearch>
@@ -3287,7 +3287,7 @@
     	 <Close>閉じる</Close>
     </action>
   </UICategoryManagerSearch>
-  
+
   <UIPreferencesForm>
   	 <action>
     	 <HideAdvance>詳細設定を隠す</HideAdvance>
@@ -3297,7 +3297,7 @@
     	<Advance>詳細設定</Advance>
     </label>
   </UIPreferencesForm>
-  
+
   <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>ファイルアクセスは許可されていません！</file-access-denied>
@@ -3311,7 +3311,7 @@
       <ShowDrives>ドライブの表示</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
+  <UIJcrExplorerEditForm>
     <msg>
       <fields-saved>全てのフィールドの値は保存されました。</fields-saved>
       <fields-cancelled>全てのフィールドの値はキャンセルされました。</fields-cancelled>
@@ -3329,7 +3329,7 @@
   	<no>いいえ</no>
 	  <yes>はい</yes>
 	  <true>True</true>
-	  <false>False</false>	
+	  <false>False</false>
 	  <Electronic>電子</Electronic>
 	  <Paper>紙</Paper>
 	  <NONE>無し</NONE>
@@ -3344,7 +3344,7 @@
 	  <quarterly>毎4半期</quarterly>
 	  <yearly>毎年</yearly>
 	  <ten-years>10年</ten-years>
-	  <read>ユーザアクション</read> 
+	  <read>ユーザアクション</read>
 	</label>
   </lifecyclePhase>
 </bundle>

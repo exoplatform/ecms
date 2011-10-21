@@ -2434,7 +2434,7 @@
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
       <fileName-error>Nom de fichier invalide</fileName-error>
       <constraint-violation>Le noeud courant ne permet pas d'ajouter le type de noeud '{0}'</constraint-violation>
-      <repository-exception>Accès refusé! Vous n'avez pas les droits d'ajout sur ce noeud</repository-exception>
+      <repository-exception>Accès refusé! Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
       <numberformat-exception>Impossible de sauver ce répertoire. Input must be a number format.</numberformat-exception>
 			<path-node-invalid>Veuillez saisir le chemin du noeud!</path-node-invalid>
 			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>

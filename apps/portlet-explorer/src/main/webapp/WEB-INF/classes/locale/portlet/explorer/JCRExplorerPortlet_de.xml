@@ -99,7 +99,7 @@
       <Close><![CDATA[Seitenbalken schlie&szlig;en]]></Close>
       <TagExplorer>Tag Wolke</TagExplorer>
       <Clipboard>Ablage</Clipboard>
-      
+
     </label>
     <title>
       <Control>Seitenbalken kotrollieren</Control>
@@ -246,7 +246,7 @@
       <UIMultiLanguageForm>Mehrsprachig</UIMultiLanguageForm>
       <UIMultiLanguageManager>Mehrsprachig</UIMultiLanguageManager>
       <UIThumbnailForm>Bild hinzufügen</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Vorliebeneinstellung</UIAllItemsPreferenceForm>      
+      <UIAllItemsPreferenceForm>Vorliebeneinstellung</UIAllItemsPreferenceForm>
     </title>
     <header>
       <workspace>Arbeitsplatz</workspace>
@@ -822,7 +822,7 @@
       <fileName-error><![CDATA[Bitte vergewissern Sie sich, dass sie die gew&auml;hlte Datei mit Hilfe des Uploadpiktogramms auf den Server hochgeladen haben.]]></fileName-error>
       <taxonomyPath-error>Bitte wählen Sie die Taxonomie!</taxonomyPath-error>
       <fileName-invalid><![CDATA[Ung&uuml;ltige Symbole in Dateinamen. Dateinamen eingeben oder andere Datei hochladen.]]></fileName-invalid>
-      <fileName-invalid-with-name><![CDATA[Ung&uuml;ltige Symbole in Dateinamen. Dateinamen eingeben oder andere Datei hochladen '{0}'.]]></fileName-invalid-with-name>      
+      <fileName-invalid-with-name><![CDATA[Ung&uuml;ltige Symbole in Dateinamen. Dateinamen eingeben oder andere Datei hochladen '{0}'.]]></fileName-invalid-with-name>
       <fileSize-too-big><![CDATA[Datei zu gro&szlig;. Sie sollten die Datei in kleinere Teile aufteilen oder WebDav Upload benutzen.]]></fileSize-too-big>
       <name-is-exist><![CDATA[Der Name '{0}' existiert. Sie k&ouml;nnen nicht die selbe Namensdatei hochladen au&szlig;er f&uuml;r 'nt:file']]></name-is-exist>
       <contraint-violation><![CDATA[Kann Knoten '{0}' nicht zu diesem Knoten hinzuf&uuml;gen, weil er nicht Nachfolger den Vorg&auml;ngerknotentypen sein kann]]></contraint-violation>
@@ -1284,7 +1284,7 @@
     <msg>
       <noVersion>Keine Version</noVersion>
     </msg>
-    <eventName>      
+    <eventName>
       <e_1>Knoten hinzugefügt</e_1>
       <e_2>Knoten entfernt</e_2>
       <e_4>Eigentum hinzugefügt</e_4>
@@ -1309,7 +1309,7 @@
       <e_2097152>Entfernen Version</e_2097152>
       <e_4194304>Lock</e_4194304>
       <e_8388608>Unlock</e_8388608>
-      <e_16777216>Lesen</e_16777216>      
+      <e_16777216>Lesen</e_16777216>
     </eventName>
     <label>
       <operation>Operation</operation>
@@ -1318,7 +1318,7 @@
       <version>Version</version>
     </label>
   </UIAuditingInfo>
-  
+
   <!--
   ###############################################################################
   #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
@@ -1534,7 +1534,7 @@
       <label>
         <UIRelationsAddedList>Verbunden Liste</UIRelationsAddedList>
       </label>
-    </tab>     
+    </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
@@ -1677,7 +1677,7 @@
     <header>
       <name>#{word.name}</name>
       <description>Beschreibung</description>
-	  <lifecycle>Life Cycle</lifecycle>	
+	  <lifecycle>Life Cycle</lifecycle>
 	  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Umstand des Aktionstypens</instanceOf>
       <action>Aktion</action>
@@ -1705,7 +1705,7 @@
       <name>Aktion Form</name>
     </label>
     <msg>
-    <!-- 
+    <!--
         Deeper test on DMS 2.4 RC1
         ECM-3873 Error content of message when type name of action by special character
 	  -->
@@ -1928,7 +1928,7 @@
   <PathNotFoundException>
     <msg><![CDATA[Pfad nicht gefunden! Vielleicht wurde er gel&ouml;scht oder ge&auml;ndert!]]></msg>
   </PathNotFoundException>
-  
+
   <!--
   ###################################################################################
   # Publication Manage																														  #
@@ -2090,7 +2090,7 @@
       <anyPermission>Jede Erlaubnis</anyPermission>
     </label>
   </UIAnyPermission>
-  
+
   <anyPermission>
     <title>
       <AddAnyPermission>Jede Erlaubnis</AddAnyPermission>
@@ -2146,7 +2146,7 @@
       <nodeValidationRequest>Der Knoten wurde Validierung beantragt</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
-  
+
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2154,7 +2154,7 @@
   <UIJCRExplorerPortlet>
     <nopermission>Es gibt kein Laufwerk, oder Sie haben keine Berechtigung für den Zugriff auf das Laufwerk</nopermission>
   </UIJCRExplorerPortlet>
-  
+
   <UIJcrExplorerEditForm>
     <title>Datei-Explorer bearbeiten Form</title>
     <action>
@@ -2172,7 +2172,7 @@
       <SelectNodePath>Wählen Sie Pfad</SelectNodePath>
     </label>
   </UIJcrExplorerEditForm>
-  
+
   <UIDriveSelector>
     <label>
       <driveName>Laufwerk Namen</driveName>
@@ -2192,25 +2192,25 @@
 						<path-edit-permission>Can not edit path. Please, click on Edit button</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
-  
+
   <PopUpSelectDrive>
     <title>
       <UIDriveSelector>Wählen Sie Drive</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
-  
+
   <PopupSelectPath>
     <title>
       <UIOneNodePathSelector>Wählen Sie die Knoten</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
-  
+
   <DriveNameInput>
     <title>
       <SelectDrive>Wählen Sie Drive</SelectDrive>
     </title>
   </DriveNameInput>
-  
+
   <!--
 	### Since ECM version 2.4.x ##############
   -->
@@ -2219,13 +2219,13 @@
       <AddSymLink>Symbolischer Link hinzufügen</AddSymLink>
 		</tooltip>
 	</UIActionBar>
-	
+
 	<UIPopupWindow>
 		<title>
 			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
-	
+
 	<UISymLinkForm>
 		<label>
       <symLinkName>Symbolischer Link Name</symLinkName>
@@ -2241,8 +2241,8 @@
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error>Ungültige Dateinamen</fileName-error>
       <constraint-violation>Aktueller Knoten ist es nicht möglich, um '{0}' Knotentyp</constraint-violation>
-      <repository-exception>Zugriff verweigern! Sie haben keine Erlaubnis führen in diesem Knoten</repository-exception>
-      <numberformat-exception>Kann nicht in diesem Ordner speichern. Input must be a number format.</numberformat-exception>      
+      <repository-exception>Zugriff verweigert! Sie haben nicht die Berechtigung, Symlink zu diesem Knoten hinzuzufügen.</repository-exception>
+      <numberformat-exception>Kann nicht in diesem Ordner speichern. Input must be a number format.</numberformat-exception>
 			<path-node-invalid>Bitte geben Sie Pfad Knoten!</path-node-invalid>
 			<path-node-not-allowed>Dieser Name ist nicht erlaubt.</path-node-not-allowed>
 			<non-node>Bitte wählen Sie Vertrauen Ziel Knoten oder Sie haben nicht genug Rechte um diese Knoten</non-node>
@@ -2251,19 +2251,19 @@
 			<UnsupportedRepositoryOperationException>Dieses Ziel-Knoten ist nicht referenceable</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
-	
+
 	<UIPopupSymLink>
 		<title>
 			<UIOneNodePathSelector>Wählen Sie Ziel-Knoten</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
-	
+
 	<ECMContextMenu>
 		<event>
 			<AddSymLink>Symbolischer Link hinzufügen</AddSymLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkingArea>
     <msg>
       <create-link-problem>Sie können nicht einen Link für den Knoten '{0}' in' '{1}'</create-link-problem>
@@ -2272,13 +2272,13 @@
       <confirm-create-link>Sind Sie sicher, dass erstellen möchten Link in dieser Lage?</confirm-create-link>
     </msg>
   </UIWorkingArea>
-  
+
   <ECMContextMenu>
     <event>
       <CreateLink>Link erstellen</CreateLink>
     </event>
-  </ECMContextMenu>  
-  
+  </ECMContextMenu>
+
   <UIWorkspaceList>
   	<msg>
   		<AccessDeniedException>Zugriff verweigern! Sie haben keine Leseberechtigung in diesem Arbeitsbereich</AccessDeniedException>
@@ -2287,25 +2287,25 @@
       <taxonomyTree>Taxonomie-Baum</taxonomyTree>
     </label>
   </UIWorkspaceList>
-  
+
   <UIPopupTaxonomy>
     <title>
 			<UIOneTaxonomySelector>Kategorien Hinzufügen</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
-  
+
   <UITreeTaxonomyList>
   	<label>
       <taxonomyTree>Taxonomie-Baum</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
-  
+
   <UIActionBar>
     <tooltip>
       <ManageSimpleCategories>Einfache Verwaltung von Kategorien</ManageSimpleCategories>
     </tooltip>
 	</UIActionBar>
-	
+
 	<UISimpleCategoryManager>
     <tab>
       <label>
@@ -2314,7 +2314,7 @@
       </label>
     </tab>
   </UISimpleCategoryManager>
-  
+
   <UICategoryManager>
     <tab>
       <label>
@@ -2322,15 +2322,15 @@
       </label>
     </tab>
   </UICategoryManager>
-  
+
   <UISimpleCategoryManager>
   	<action>
-  		<Close>Schließen</Close>	
+  		<Close>Schließen</Close>
   	</action>
-  </UISimpleCategoryManager>  
+  </UISimpleCategoryManager>
   <UIPopupWindow>
   	<title>
-  		<UISimpleCategoryManager>Kategorie hinzufügen</UISimpleCategoryManager>	
+  		<UISimpleCategoryManager>Kategorie hinzufügen</UISimpleCategoryManager>
   	</title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2338,25 +2338,25 @@
   		<ItemExistsException>Kategorie A mit dem gleichen Namen ist bereits vorhanden</ItemExistsException>
   	</msg>
 	</UICategoriesAddedList>
-	
+
 	<UIConfirmMessage>
 	  <label>
 	    <Close>#{word.close}</Close>
 	    <OK>OK</OK>
 	  </label>
 	</UIConfirmMessage>
-	
+
 	<PopupComponent>
     <title>
 			<UIOneTaxonomySelector>Kategorien hinzufügen</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
-  
+
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Kann nicht mehr bewegen: Der Ziel-Ordner ist der gleiche wie der Quelle-Ordner</can-not-move-to-itself>
     </msg>
-  </UIWorkingArea>  
+  </UIWorkingArea>
 
   <UIImportNode>
     <label>
@@ -2366,9 +2366,9 @@
     <msg>
       <history-invalid-type>Ungültige Version Geschichte Dateityp. Die richtige Datei ist eine ZIP-Datei</history-invalid-type>
       <history-invalid-content>Ungültige Version History-Daten Inhalt. Sollten Sie die richtige Datei zu importieren.</history-invalid-content>
-    </msg>    
-  </UIImportNode> 
-  
+    </msg>
+  </UIImportNode>
+
   <Import>
     <Behavior>
       <type0>Erstellen Sie eine neue</type0>
@@ -2377,33 +2377,33 @@
       <type3>Ausnahme werfen</type3>
     </Behavior>
   </Import>
-  
+
   <UIExportNode>
     <action>
       <ExportHistory>Export-Version der Geschichte</ExportHistory>
     </action>
   </UIExportNode>
-  
+
   <UIPopupMenu>
   	<msg>
   		<node-locked-other-person>Dieser Knoten oder Elternknoten wird durch andere Benutzer gesperrt, Sie können nicht gelöscht!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
- 
+
   <Import>
     <label>
       <docview>Document view</docview>
       <sysview>System view</sysview>
     </label>
-  </Import>   
-  
+  </Import>
+
   <UIDocumentForm>
   	<msg>
   		<not-support>Kann nicht geladen Vorlage der '{0}'.</not-support>
   		<do-not-permission>Sie haben keine Berechtigung zum Laden der Vorlage '{0}'.</do-not-permission>
   	</msg>
   </UIDocumentForm>
-  
+
   <!--
   ###################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIActionBar   			   			#
@@ -2419,13 +2419,13 @@
       <Search>Search</Search>
     </obtion>
   </UIActionBar>
-  
+
   <UIPopupMenu>
   	<msg>
 			<can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
-  <!-- 
+  <!--
  	 #############	From DMS 2.5 #############
   -->
   <UIActionBar>
@@ -2479,10 +2479,10 @@
 			<SharedUsersSpace>Shared Users Space</SharedUsersSpace>
 			<Systemfiles>System files</Systemfiles>
 			<ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-		</label>  
+		</label>
 	</Drives>
-	
-	<!-- 
+
+	<!--
  	 #############	From DMS 2.6 #############
   -->
 	<UIUploadContent>
@@ -2491,7 +2491,7 @@
 		</tooltip>
 		<label>
 			<manageMetadata>Manage Metadata</manageMetadata>
-		</label>		
+		</label>
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
@@ -2504,7 +2504,7 @@
 			<Add>Add</Add>
 			<Cancel>Cancel</Cancel>
 		</action>
-	</UIExternalMetadataForm>	
+	</UIExternalMetadataForm>
   <ECMContextMenu>
 	    <event>
 	    	<Permlink>View Document</Permlink>
@@ -2516,10 +2516,10 @@
   			<UIListMetadata>List external metadatas</UIListMetadata>
   		</label>
   	</tab>
-  </UIUploadContainer>	
-  <!-- 
+  </UIUploadContainer>
+  <!--
   	############  From DMS 2.6 ##############
-   -->  
+   -->
   <UIFolderForm>
     <label>
       <nt_folder>Dokumentenordner</nt_folder>
@@ -2542,7 +2542,7 @@
     <drive-not-exist>The drive '{0}' was not found or you don't have permission to access in this repository</drive-not-exist>
   </msg>
  </UIDrivesBrowser>
- 
+
  <UIExportNode>
   <msg>
     <OutOfMemoryError>You should choose SystemView when export large data</OutOfMemoryError>
@@ -2550,10 +2550,10 @@
  </UIExportNode>
  <Taxonomy>
 		<msg>
-			<AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>		 	
+			<AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>
 		</msg>
 	 </Taxonomy>
-	<UIJcrExplorerEditForm>    
+	<UIJcrExplorerEditForm>
 		<msg>
 			<notNullDriveName>Drive Name is null or empty. Fill Drive Name, please!</notNullDriveName>
 			<notNullPath>Path is null or empty. Fill the path, please!</notNullPath>
@@ -2585,8 +2585,8 @@
 	  <title>
 		  <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>
 	  </title>
-	</SameNamePopup>	
-	
+	</SameNamePopup>
+
 	<UISingleUploadForm>
     <title>Upload a file</title>
     <label>
@@ -2675,7 +2675,7 @@
       <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <Configuration>Set up preferences</Configuration>
     </label>
   </UISideBar>
   <ECMContextMenu>
@@ -2684,7 +2684,7 @@
       <RemoveFromFavourite>Remove from favourite</RemoveFromFavourite>
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-    </event>  
+    </event>
   </ECMContextMenu>
   <Views>
     <label>
@@ -2745,7 +2745,7 @@
       <type>Type</type>
       <dateCreated>Date created</dateCreated>
       <score>Score</score>
-      <AddRemoveFavourite>Add/remove to favourite</AddRemoveFavourite>      
+      <AddRemoveFavourite>Add/remove to favourite</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>Sort by document type in ascending</typeASC>
@@ -2791,9 +2791,9 @@
     <tooltip>
       <View>View this node</View>
       <OpenFolder>Go to folder</OpenFolder>
-      <RemoveHiddenAttribute>Remove hidden attribute</RemoveHiddenAttribute>      
+      <RemoveHiddenAttribute>Remove hidden attribute</RemoveHiddenAttribute>
     </tooltip>
-  </UIShowAllHiddenResult>  
+  </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
@@ -2824,10 +2824,10 @@
       <View>View this node</View>
       <OpenFolder>Go to folder</OpenFolder>
       <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from trash</RestoreFromTrash>      
+      <RestoreFromTrash>Restore from trash</RestoreFromTrash>
     </tooltip>
-  </UIShowAllTrashResult>  
-  
+  </UIShowAllTrashResult>
+
   <UIPreferencesForm>
     <label>
   	  <Alphabetic>Alphabetic</Alphabetic>
@@ -2843,20 +2843,20 @@
   #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
   #########################################################################################
   -->
-  
+
   <UIAllItems>
     <label>
       <OwnedByMe>Owned by me</OwnedByMe>
       <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <Configuration>Set up preferences</Configuration>
     </label>
     <title>
       <allItems>All Items</allItems>
     </title>
   </UIAllItems>
-    
+
   <UIAllItemsPreferenceForm>
     <title>Set up preferences</title>
     <action>
@@ -2876,7 +2876,7 @@
     <header>
       <dateTime>Date time</dateTime>
       <name>Name</name>
-    </header>   
+    </header>
     <tooltip>
       <View>View</View>
       <RemoveFromFavourite>Remove from favourite</RemoveFromFavourite>
@@ -2887,14 +2887,14 @@
       <timelineDateTimeDESC>Sort by modified time in descending order</timelineDateTimeDESC>
       <timelineNameASC>Sort by name in ascending order</timelineNameASC>
       <timelineNameDESC>Sort by name in descending order</timelineNameDESC>
-    </tooltip>    
-  </UIDocumentInfo> 
-  
+    </tooltip>
+  </UIDocumentInfo>
+
   <UISavedSearches>
     <title>
       <savedSearches>Saved Searches</savedSearches>
     </title>
-  </UISavedSearches>  
+  </UISavedSearches>
 
   <DocumentType>
     <label>
@@ -2902,10 +2902,10 @@
     	 <Video>Video</Video>
     	 <Music>Music</Music>
     	 <Documents>Documents</Documents>
-    	 <Contents>Contents</Contents>    	 
+    	 <Contents>Contents</Contents>
     </label>
   </DocumentType>
-  
+
   <UIDocumentFilterForm>
   	<label>
     	<Images>Images</Images>
@@ -2914,10 +2914,10 @@
     <title>Set up filter preferences</title>
     <action>
   		<Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
   	<label>
   		<ByType>Filter By Type</ByType>
@@ -2929,35 +2929,35 @@
   	  <ShowImages>Show all image files</ShowImages>
   	  <ShowDocuments>Show all document files</ShowDocuments>
   	  <ShowContents>Show all contents type document</ShowContents>
-  	</title>  	
+  	</title>
   </UIAllItemsByType>
-  
+
   <Views>
     <label>
       <slide-show>Slide show</slide-show>
       <timeline-view>Timeline view</timeline-view>
     </label>
-  </Views>  
-  
+  </Views>
+
  <ECMContextMenu>
     <event>
       <PlayMedia>Play media</PlayMedia>
      </event>
-  </ECMContextMenu> 
-  
+  </ECMContextMenu>
+
   <UIPreferencesForm>
     <label>
       <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
-      <enableDragAndDrop>Enable drag &amp; drop</enableDragAndDrop>      
+      <enableDragAndDrop>Enable drag &amp; drop</enableDragAndDrop>
     </label>
   </UIPreferencesForm>
-  
+
   <UIPopupWindow>
     <title>
       <UIRestoreConfirmMessage>Confirm restore</UIRestoreConfirmMessage>
     </title>
   </UIPopupWindow>
-  
+
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -2986,28 +2986,28 @@
     <title>Set up filter preferences</title>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIAllItemsPreferenceForm>
-  
+
   <EmptyTrashManageComponent>
     <msg>
       <confirm-delete>Empty all items from trash?</confirm-delete>
     </msg>
-  </EmptyTrashManageComponent>  
+  </EmptyTrashManageComponent>
 
   <ECMContextMenu>
     <event>
       <EmptyTrash>Empty trash</EmptyTrash>
     </event>
-  </ECMContextMenu>    
+  </ECMContextMenu>
   <UICategoryForm>
 	  <label>
 	  	<name>Category Name</name>
 	  </label>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>      
+      <Cancel>Cancel</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3040,14 +3040,14 @@
       <PrivateTags>Private tags</PrivateTags>
      </title>
    </UITagExplorer>
-   
+
   <UIEditingTagsForm>
     <header>
       <name>Name</name>
       <relatedDocuments>Related documents</relatedDocuments>
       <action>Action</action>
     </header>
-  
+
   <action>
     <title>
       <EditTag>Edit tag</EditTag>
@@ -3059,7 +3059,7 @@
       <confirm-remove>Are you sure want to delete?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
-  
+
   	   <UIPopupWindow>
     <title>
       <UIEditingTagsForm>Edit tag form</UIEditingTagsForm>
@@ -3088,25 +3088,25 @@
       <error-update>Error when updating</error-update>
     </msg>
   </UITagStyleForm>
-  
+
 		<UIPopupMenu>
   	<msg>
-  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>	
+  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
     </msg>
-  </UIPopupMenu> 
-		
+  </UIPopupMenu>
+
 		<UIPopupMenu>
     <msg>
       <editTagAccessDenied>Access denied!</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
-  
+
   <UIPopupWindow>
     <title>
       <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
-  
+
 		<PopupComponent>
     <title>
       <UINodeTypeSelector>Select node type</UINodeTypeSelector>
@@ -3117,7 +3117,7 @@
   		<ShowComponent>Show component</ShowComponent>
   		<removeReference>Remove</removeReference>
   	</title>
-  </UIActionForm>		 
+  </UIActionForm>
 		<EditFormAction>
   	<title>
   		<ShowComponent>Show component</ShowComponent>
@@ -3130,21 +3130,21 @@
       <empty-input>The value of field is null or empty!</empty-input>
     </msg>
   </NodeTypeNameValidator>
-  
+
   <UIPreferencesForm>
   		<label>
 						<queryType>Query Type</queryType>
 						<SQL>SQL</SQL>
-						<XPATH>XPATH</XPATH>  			
+						<XPATH>XPATH</XPATH>
   		</label>
   </UIPreferencesForm>
-  
+
   <UIDocumentInfo>
     <msg>
       <repository-error>Error, information about repository lost!</repository-error>
     </msg>
   </UIDocumentInfo>
-  
+
   <UITreeExplorer>
     <msg>
       <repository-error>Error, information about repository lost!</repository-error>
@@ -3159,7 +3159,7 @@
   	<msg>
   		<constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
   	</msg>
-  </UIActionForm>   
+  </UIActionForm>
   <UIJcrExplorerEditForm>
     <label>
 	  <nodePath>Select path</nodePath>
@@ -3173,7 +3173,7 @@
     <label>
       <formInput>Old path lost, please choose new one!</formInput>
     </label>
-  </UISelectRestorePath>         
+  </UISelectRestorePath>
   <PathNode>
     <title>
       <Add>Add</Add>
@@ -3193,7 +3193,7 @@
     <title>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
     </title>
-  </UIPopupWindow>  
+  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>The Home path is empty</homePath-emty>
@@ -3204,7 +3204,7 @@
 				<msg>
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
-		</UIActionBar>      
+		</UIActionBar>
 			<UIPublicationPanel>
     <button>
       <Close>Close</Close>
@@ -3273,7 +3273,7 @@
       <invalid-format>Invalid datetime format. Please check again</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
-  </UIPublicationPanel>     
+  </UIPublicationPanel>
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>Manage publication</UIPublicationContainer>
@@ -3291,19 +3291,19 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist>
   		</msg>
-  </UITagForm>    
-  <!-- 
+  </UITagForm>
+  <!--
   	############  From WCM 2.1.0 ##############
-   -->  
+   -->
   <UITreeTaxonomyList>
     <label>
       <rootNodePath>Root tree</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
-  <UIJCRExplorer>  
+  <UIJCRExplorer>
     <msg>
         <target-path-not-found>Target node not found!</target-path-not-found>
     </msg>
@@ -3318,16 +3318,16 @@
     	 <Close>Close</Close>
     </action>
   </UICategoryManagerSearch>
-  <UIJcrExplorerEditForm>  
-    <label>  
+  <UIJcrExplorerEditForm>
+    <label>
       <editInNewWindow>Edit in new window</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Show Action Bar</showActionBar>
       <showSideBar>Show Left Bar</showSideBar>
       <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
-  </UIJcrExplorerEditForm>  
-  
+  </UIJcrExplorerEditForm>
+
   <UIPreferencesForm>
   	 <action>
     	 <HideAdvance>Hide Advanced</HideAdvance>
@@ -3348,7 +3348,7 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
+  <UIJcrExplorerEditForm>
     <msg>
       <fields-saved>All field values saved!</fields-saved>
       <fields-cancelled>All field values cancelled!</fields-cancelled>
@@ -3387,7 +3387,7 @@
 	  <node_removed>Content Removal</node_removed>
 	  <property_added>Property Addition</property_added>
 	  <property_removed>Property Removal</property_removed>
-	  <property_changed>Property Modification</property_changed>	
+	  <property_changed>Property Modification</property_changed>
 	</label>
-  </lifecyclePhase>  
+  </lifecyclePhase>
 </bundle>
