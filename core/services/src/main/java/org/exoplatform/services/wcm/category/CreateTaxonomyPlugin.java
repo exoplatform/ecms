@@ -177,13 +177,17 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
       treeName = nameParam.getValue();
     }
 
-    treeName = StringUtils.replace(treeName, "{treeName}", portalName);
+    if (treeName.contains("{treeName}")) {
+      treeName = StringUtils.replace(treeName, "{treeName}", portalName);
+    } else {
+      treeName = treeName + "-" + portalName;
+    }
     path = StringUtils.replace(path, "{portalName}", portalName);
 
     Session session = null;
     try {
       // Get source information
-      Node srcTaxonomy = taxonomyService.getTaxonomyTree(portalName);
+      Node srcTaxonomy = taxonomyService.getTaxonomyTree(treeName);
       String srcWorkspace = srcTaxonomy.getSession().getWorkspace().getName();
 
       // Get destination information
