@@ -69,7 +69,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   final static public String FIELD_UNSTRUCTURED_ONLY = "Unstructured folder";
   final static public String FIELD_ALLOW_CREATE_FOLDERS = "allowCreateFolders";
   final static public String SHOW_HIDDEN_NODE = "showHiddenNode";
-  
+
   private final static Log  LOG  = ExoLogger.getLogger(UIDriveInputSet.class);
 
   public String bothLabel_;
@@ -99,7 +99,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWSIDEBAR, FIELD_VIEWSIDEBAR, null));
     addUIFormInput(new UIFormCheckBoxInput<String>(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
 
-    addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, FIELD_ALLOW_CREATE_FOLDERS, null));
+    addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, FIELD_ALLOW_CREATE_FOLDERS, null).addValidator(MandatoryValidator.class));
     UIFormStringInput filterNodeTypes =
       new UIFormStringInput(FIELD_ALLOW_NODETYPES_ON_TREE , FIELD_ALLOW_NODETYPES_ON_TREE , null);
     addUIFormInput(filterNodeTypes);
@@ -114,8 +114,8 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   public void update(DriveData drive) throws Exception {
     String[] wsNames = getApplicationComponent(RepositoryService.class)
                       .getCurrentRepository().getWorkspaceNames();
-    
-    
+
+
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
 
     List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
@@ -173,13 +173,13 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     getUIFormCheckBoxInput(FIELD_VIEWSIDEBAR).setChecked(false);
     getUIFormCheckBoxInput(SHOW_HIDDEN_NODE).setChecked(false);
   }
-  
+
   public void updateFolderAllowed(String path) {
     UIFormSelectBox sltWorkspace =  getChildById(UIDriveInputSet.FIELD_WORKSPACE);
     String strWorkspace = sltWorkspace.getSelectedValues()[0];
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
-      Session session = sessionProvider.getSession(strWorkspace, 
+      Session session = sessionProvider.getSession(strWorkspace,
                                 getApplicationComponent(RepositoryService.class).getCurrentRepository());
       Node rootNode = (Node)session.getItem(path);
       List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
@@ -187,7 +187,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       ResourceBundle res = context.getApplicationResourceBundle();
       for (String foldertype : setFoldertypes) {
         if (isChildNodePrimaryTypeAllowed(rootNode, foldertype) ){
-          try {          
+          try {
               foldertypeOptions.add(new SelectItemOption<String>(res.getString(getId() + ".label."
                   + foldertype.replace(":", "_")), foldertype));
           } catch (MissingResourceException mre) {
