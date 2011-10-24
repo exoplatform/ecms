@@ -2145,11 +2145,11 @@
 	<UIECMAdminControlPanel>
     <tab>
       <label>        
-	<ManageUnLock>ロック解除の管理</ManageUnLock>
+	<ManageUnLock>ロックの管理</ManageUnLock>
       </label>
     </tab>
     <label>
-      <UIUnLockManager>ロック解除の管理</UIUnLockManager>      
+      <UIUnLockManager>ロックの管理</UIUnLockManager>      
     </label>    
 	</UIECMAdminControlPanel>
 	<UIUnLockForm>

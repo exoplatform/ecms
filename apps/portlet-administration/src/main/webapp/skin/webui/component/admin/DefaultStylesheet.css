@@ -913,7 +913,7 @@ float: left;
 }
 
 .UILockHolderContainer .UIGroupMembershipSelector .MembershipSelector .OverflowContainer{
-  height: 132px;
+  height: 146px;
 }
 
 .UILockHolderContainer .UIGroupMembershipSelector .GroupSelector {
@@ -921,5 +921,5 @@ float: left;
 }
 
 .UILockHolderContainer .UIGroupMembershipSelector .MembershipSelector {
-  height: 168px;
+  height: 183px;
 }

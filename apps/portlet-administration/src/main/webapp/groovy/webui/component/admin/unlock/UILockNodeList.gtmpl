@@ -26,10 +26,10 @@
   <table class="UIGrid">
     <thead>
       <tr>
-  	    <th width="25px"></th>
+  	    <th style="width:36px;"></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
-  	    <th width="35px"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
+  	    <th style="width:75px;"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -43,13 +43,13 @@
   	      even = !even ;
       %>
           <tr class="$rowClass">
-            <td width="25px">
+            <td>
             		<div title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
 					  							</div>
 					  					</td>
             <td><div class="Text"><%= node.getPath(); %></div></td>
             <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
-	          	<td width="45px">
+	          	<td>
 		          	<div class="ActionContainer">
 				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon">
 			          </div>

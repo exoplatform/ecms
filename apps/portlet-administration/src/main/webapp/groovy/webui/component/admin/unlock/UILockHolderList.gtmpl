@@ -27,7 +27,7 @@
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UILockHolderList.header.name")%></th>  	    
-  	    <th width="35px"><%=_ctx.appRes("UILockHolderList.header.action")%></th>
+  	    <th style="width:55px;"><%=_ctx.appRes("UILockHolderList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -42,7 +42,7 @@
       %>
           <tr class="$rowClass">            
             <td><div class="Text">$settingLock</div></td>
-	          	<td width="45px">
+	          	<td style="width:55px;">
 		          	<div class="ActionContainer">
 				          <img onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" title="<%=_ctx.appRes("UILockHolderList.tooltip.DeleteLock")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon">
 			          </div>

@@ -2162,11 +2162,11 @@
 	<UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Gestion du déverouillage</ManageUnLock>
+        <ManageUnLock>Gestion du Verouillage</ManageUnLock>
       </label>
     </tab>
     <label>
-      <UIUnLockManager>Gestion du déverouillage</UIUnLockManager>      
+      <UIUnLockManager>Gestion du Verouillage</UIUnLockManager>      
     </label>    
 	</UIECMAdminControlPanel>
 	<UIUnLockForm>

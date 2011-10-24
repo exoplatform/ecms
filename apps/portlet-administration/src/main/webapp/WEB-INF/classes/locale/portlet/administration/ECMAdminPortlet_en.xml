@@ -2158,11 +2158,11 @@
 	<UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Manage UnLocks</ManageUnLock>
+        <ManageUnLock>Manage Locks</ManageUnLock>
       </label>
     </tab>
     <label>
-      <UIUnLockManager>Manage UnLocks</UIUnLockManager>      
+      <UIUnLockManager>Manage Locks</UIUnLockManager>      
     </label>    
 	</UIECMAdminControlPanel>
 	<UIUnLockForm>
