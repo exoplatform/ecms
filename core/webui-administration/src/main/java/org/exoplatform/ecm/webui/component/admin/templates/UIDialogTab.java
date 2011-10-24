@@ -135,7 +135,7 @@ public class UIDialogTab extends UIContainer {
         if(template.equals(templateName)) {
           UIApplication app = dialogTab.getAncestorOfType(UIApplication.class) ;
           Object[] args = {template} ;
-          app.addMessage(new ApplicationMessage("UIDialogTab.msg.undeletable", args)) ;
+          app.addMessage(new ApplicationMessage("UIDialogTab.msg.undeletable", args, ApplicationMessage.WARNING)) ;
           dialogTab.setTabRendered() ;
           return ;
         }

@@ -129,7 +129,7 @@ public class UIViewTab extends UIContainer {
         if(template.equals(templateName)){
           UIApplication app = viewTab.getAncestorOfType(UIApplication.class) ;
           Object[] args = {template} ;
-          app.addMessage(new ApplicationMessage("UIViewTab.msg.undeletable", args)) ;
+          app.addMessage(new ApplicationMessage("UIViewTab.msg.undeletable", args, ApplicationMessage.WARNING)) ;
           viewTab.setTabRendered() ;
           return ;
         }
