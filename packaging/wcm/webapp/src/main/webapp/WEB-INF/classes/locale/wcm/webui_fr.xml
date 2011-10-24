@@ -240,6 +240,9 @@
       <Select>Sélectionnez</Select>
       <View>Affichage</View>
     </title>
+    <msg>
+    	<template-not-support>Vous ne pouvez pas voir ce contenu en avant-permière. Ce masque de saisie n'est pas supporté</template-not-support>
+    </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>

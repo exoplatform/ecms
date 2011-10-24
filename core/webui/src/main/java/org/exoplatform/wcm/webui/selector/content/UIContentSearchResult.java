@@ -11,6 +11,7 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -22,10 +23,12 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.viewer.UIContentViewer;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -244,6 +247,7 @@ public class UIContentSearchResult extends UIGrid {
      */
     public void execute(Event<UIContentSearchResult> event) throws Exception {
       UIContentSearchResult contentSearchResult = event.getSource();
+      UIApplication uiApp = contentSearchResult.getAncestorOfType(UIApplication.class);
       String expression = event.getRequestContext().getRequestParameter(OBJECTID);
       NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(expression);
       String repository = nodeLocation.getRepository();
@@ -251,13 +255,20 @@ public class UIContentSearchResult extends UIGrid {
       String webcontentPath = nodeLocation.getPath();
       Node originalNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath, WCMComposer.BASE_VERSION);
       Node viewNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath);
-      UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
-      UIContentViewer contentResultViewer = contentSelector.getChild(UIContentViewer.class);
-      if (contentResultViewer == null) contentResultViewer = contentSelector.addChild(UIContentViewer.class, null, null);
-      contentResultViewer.setNode(viewNode);
-      contentResultViewer.setOriginalNode(originalNode);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
-      contentSelector.setSelectedTab(contentResultViewer.getId());
+      
+      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+      String nodeType = originalNode.getPrimaryNodeType().getName();
+      if(templateService.isManagedNodeType(nodeType)){
+        UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
+        UIContentViewer contentResultViewer = contentSelector.getChild(UIContentViewer.class);
+        if (contentResultViewer == null) contentResultViewer = contentSelector.addChild(UIContentViewer.class, null, null);
+        contentResultViewer.setNode(viewNode);
+        contentResultViewer.setOriginalNode(originalNode);
+        event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+        contentSelector.setSelectedTab(contentResultViewer.getId());
+      } else {
+        uiApp.addMessage(new ApplicationMessage("UIContentSearchResult.msg.template-not-support", null, ApplicationMessage.WARNING));              
+      }     
     }
   }
 }

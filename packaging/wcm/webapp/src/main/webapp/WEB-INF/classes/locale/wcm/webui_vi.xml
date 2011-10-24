@@ -240,6 +240,9 @@
       <Select>Chọn</Select>
       <View>Xem trước</View>
     </title>
+    <msg>
+    	<template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
