@@ -34,9 +34,6 @@ public class UIViewManager extends UIAbstractManager {
     UITemplateContainer uiECMTemp = addChild(UITemplateContainer.class, null, "ECMTemplate") ;
     uiECMTemp.addChild(UIECMTemplateList.class, null, null) ;
     uiECMTemp.setRendered(false) ;
-    UITemplateContainer uiCBTemp = addChild(UITemplateContainer.class, null, "CBTemplate") ;
-    uiCBTemp.addChild(UICBTemplateList.class, null, null) ;
-    uiCBTemp.setRendered(false) ;
   }
 
   public void refresh() throws Exception {
@@ -47,8 +44,6 @@ public class UIViewManager extends UIAbstractManager {
     getChild(UIViewContainer.class).update() ;
     UIECMTemplateList uiECMTemplateList = ((UITemplateContainer)getChildById("ECMTemplate")).getChild(UIECMTemplateList.class);
     uiECMTemplateList.refresh(uiECMTemplateList.getUIPageIterator().getCurrentPage());
-    UICBTemplateList uiCBTemplateList = ((UITemplateContainer)getChildById("CBTemplate")).getChild(UICBTemplateList.class);
-    uiCBTemplateList.refresh(uiCBTemplateList.getUIPageIterator().getCurrentPage());
   }
 }
 

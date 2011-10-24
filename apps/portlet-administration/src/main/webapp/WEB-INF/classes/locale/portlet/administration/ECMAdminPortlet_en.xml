@@ -1148,26 +1148,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>Name</name>
-      <path>Value</path>
-      <baseVersion>Base Version</baseVersion>
-      <action>Action</action>
-    </header>
-    <action>
-      <Add>Add</Add>
-    </action>
-    <msg>
-      <confirm-delete>Are you sure to delete this template?</confirm-delete>
-      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################

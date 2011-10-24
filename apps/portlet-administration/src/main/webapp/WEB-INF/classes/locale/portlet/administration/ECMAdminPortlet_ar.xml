@@ -1147,26 +1147,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList  #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>الإسم</name>
-      <path>القيمة</path>
-      <baseVersion>الإصدار الرئيسي</baseVersion>
-      <action>عمل</action>
-    </header>
-    <action>
-      <Add>أضف</Add>
-    </action>
-    <msg>
-      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-      <access-denied>غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة.</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
   ################################################################################

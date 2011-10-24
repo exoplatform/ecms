@@ -102,11 +102,7 @@ public class UIScriptList extends UIComponentDecorator {
   public void refresh(int currentPage) throws Exception {
     UIScriptManager sManager = getAncestorOfType(UIScriptManager.class);
     UIComponent parent = getParent();
-    if(parent instanceof UICBScripts) {
-      sManager.getChild(UICBScripts.class).refresh(currentPage);
-    } else {
-      sManager.getChild(UIECMScripts.class).refresh(currentPage);
-    }
+    sManager.getChild(UIECMScripts.class).refresh(currentPage);
   }
 
   public String[] getActions() {return new String[]{"AddNew"} ;}
@@ -147,14 +143,7 @@ public class UIScriptList extends UIComponentDecorator {
         uiForm.setId(UIECMScripts.SCRIPTFORM_NAME ) ;
         uiForm.update(null, true) ;
         uiManager.setRenderedChild(UIECMScripts.class) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-      } else if(uiScriptList.getId().equals(UICBScripts.SCRIPTLIST_NAME)) {
-    	uiScriptList.getAncestorOfType(UICBScripts.class).initFormPopup(CBScript_EDIT);
-        UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class) ;
-        uiForm.setId(UICBScripts.SCRIPTFORM_NAME ) ;
-        uiForm.update(null, true) ;
-        uiManager.setRenderedChild(UICBScripts.class) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
       }
     }
   }
@@ -170,13 +159,6 @@ public class UIScriptList extends UIComponentDecorator {
     	uiForm.setId(UIECMScripts.SCRIPTFORM_NAME ) ;
         uiForm.update(uiScriptList.getScriptNode(scriptName), false) ;
         uiManager.setRenderedChild(UIECMScripts.class) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;        
-      } else if(uiScriptList.getId().equals(UICBScripts.SCRIPTLIST_NAME)) {
-    	uiScriptList.getAncestorOfType(UICBScripts.class).initFormPopup(CBScript_EDIT);
-      	UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class) ;
-      	uiForm.setId(UICBScripts.SCRIPTFORM_NAME ) ;
-        uiForm.update(uiScriptList.getScriptNode(scriptName), false) ;
-        uiManager.setRenderedChild(UICBScripts.class) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;        
       }
     }
@@ -198,8 +180,6 @@ public class UIScriptList extends UIComponentDecorator {
       UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class) ;
       if(uiScriptList.getParent() instanceof UIECMScripts) {
         uiManager.setRenderedChild(UIECMScripts.class) ;
-      } else  if(uiScriptList.getParent() instanceof UICBScripts){
-        uiManager.setRenderedChild(UICBScripts.class) ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList.getParent()) ;
     }

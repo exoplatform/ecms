@@ -1150,26 +1150,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>Tên</name>
-      <path>Giá trị</path>
-      <baseVersion>Phiên bản cơ sở</baseVersion>
-      <action>Hành động</action>
-    </header>
-    <action>
-      <Add>Thêm mới</Add>
-    </action>
-    <msg>
-      <confirm-delete>Bạn có thực sự muốn xóa không</confirm-delete>
-      <access-denied>Bạn không có quyền truy cập vào chức năng này</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################

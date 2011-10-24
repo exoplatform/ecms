@@ -1150,26 +1150,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>Naam</name>
-      <path>Prijs</path>
-      <baseVersion>Base versie</baseVersion>
-      <action>Actie</action>
-    </header>
-    <action>
-      <Add>Toevoegen</Add>
-    </action>
-    <msg>
-      <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
-      <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################

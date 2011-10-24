@@ -1153,26 +1153,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>Nom</name>
-      <path>Répertoire</path>
-      <baseVersion>Version de base</baseVersion>
-      <action>Action</action>
-    </header>
-    <action>
-      <Add>Ajouter</Add>
-    </action>
-    <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
-      <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################

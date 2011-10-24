@@ -1147,26 +1147,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>名前</name>
-      <path>値</path>
-      <baseVersion>ベースバージョン</baseVersion>
-      <action>アクション</action>
-    </header>
-    <action>
-      <Add>追加</Add>
-    </action>
-    <msg>
-      <confirm-delete>本当に削除したいですか?</confirm-delete>
-      <access-denied>アクセスできません！権限がありません</access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################

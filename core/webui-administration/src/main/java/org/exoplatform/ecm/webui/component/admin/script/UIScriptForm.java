@@ -208,11 +208,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         String subNamePrefix =
           namePrefix.substring(namePrefix.lastIndexOf("/") + 1, namePrefix.length()) ;
         scriptDatas = uiEScripts.getECMScript(subNamePrefix) ;
-      } else if(uiForm.getId().equals(UICBScripts.SCRIPTFORM_NAME)){
-        curentList = uiManager.findComponentById(UICBScripts.SCRIPTLIST_NAME);
-        UICBScripts uiCBScripts = uiManager.getChild(UICBScripts.class) ;
-        namePrefix = curentList.getScriptCategory() ;
-        scriptDatas = uiCBScripts.getCBScript() ;
       }
       for(ScriptData data : scriptDatas) {
         listScript.add(data.getName()) ;
@@ -258,8 +253,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       uiForm.reset() ;      
       if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
         uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
-      else 
-    	  uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
       event.getRequestContext().addUIComponentToUpdateByAjax(curentList) ;
       curentList.refresh(1) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(curentList.getParent()) ;
@@ -275,8 +268,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       
       if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME)) {
         uiScriptList = uiManager.findComponentById(UIECMScripts.SCRIPTLIST_NAME);
-      } else if(uiForm.getId().equals(UICBScripts.SCRIPTFORM_NAME)){
-        uiScriptList = uiManager.findComponentById(UICBScripts.SCRIPTLIST_NAME);
       }      
       try {
     	Node node = uiScriptList.getScriptNode(name) ;
@@ -289,8 +280,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         }  
         if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
           uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
-        else 
-          uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       } catch (PathNotFoundException pathNotFoundException) {
     	  
@@ -306,8 +295,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
       if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME)) {
         uiScript = uiManager.findComponentById(UIECMScripts.SCRIPTLIST_NAME) ;
-      } else if(uiForm.getId().equals(UICBScripts.SCRIPTFORM_NAME)) {
-        uiScript = uiManager.findComponentById(UICBScripts.SCRIPTLIST_NAME) ;
       }
       Node node = uiScript.getScriptNode(name)  ;
       String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
@@ -328,11 +315,9 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         uiForm.update(null, true) ;
       } else {
         UIScriptManager uiScriptManager = uiForm.getAncestorOfType(UIScriptManager.class);
-        UIScriptList uiScriptList ;
+        UIScriptList uiScriptList = null;
         if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME)) {
           uiScriptList = uiScriptManager.findComponentById(UIECMScripts.SCRIPTLIST_NAME) ;
-        } else {
-          uiScriptList = uiScriptManager.findComponentById(UICBScripts.SCRIPTLIST_NAME) ;
         }
         try {
           Node script = uiScriptList.getScriptNode(sciptName) ;
@@ -358,8 +343,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
       if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
         uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
-      else 
-        uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

@@ -1147,26 +1147,6 @@
     </msg>
   </UIECMTemplateList>
   <!--
-  ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.action.UICBTemplateList	   #
-  ######################################################################################
-  -->
-  <UICBTemplateList>
-    <header>
-      <name>Name</name>
-      <path>Wert</path>
-      <baseVersion>Basis Version</baseVersion>
-      <action>Aktion</action>
-    </header>
-    <action>
-      <Add><![CDATA[Hinzuf&uuml;gen]]></Add>
-    </action>
-    <msg>
-      <confirm-delete><![CDATA[Wollen Sie wirklich l&ouml;schen ?]]></confirm-delete>
-      <access-denied><![CDATA[Zugang verweigert! Sie haben keine Genehmigung f&uuml;r diese Funktion.]]></access-denied>
-    </msg>
-  </UICBTemplateList>
-  <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm		 #
   ################################################################################
