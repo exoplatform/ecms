@@ -50,12 +50,10 @@
 
 .UIFormGenerator .GrayTabStyle .SelectedTab .LeftTab {
   background: url('DefaultSkin/background/TabGray.gif') no-repeat left -60px;
-  padding-left: 5px;
 }
 
 .UIFormGenerator .GrayTabStyle .SelectedTab .RightTab {
   background: url('DefaultSkin/background/TabGray.gif') no-repeat right -60px;
-  padding-right: 5px;
 }
 
 .UIFormGenerator .GrayTabStyle .SelectedTab .MiddleTab {
