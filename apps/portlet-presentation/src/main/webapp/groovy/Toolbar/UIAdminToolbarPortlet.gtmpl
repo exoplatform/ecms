@@ -2,9 +2,13 @@
 	import org.exoplatform.wcm.webui.toolbar.UIAdminToolbarPortlet;
 	import org.exoplatform.web.application.JavascriptManager;
 	import org.exoplatform.portal.mop.user.UserNavigation;
+	import org.exoplatform.portal.webui.util.Util;
+	import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+	import org.exoplatform.portal.webui.page.UIPage;
 	import org.exoplatform.services.organization.User;
 	import org.exoplatform.services.security.ConversationState;
 	import org.exoplatform.web.CacheUserProfileFilter;
+
 		
 	def rcontext = _ctx.getRequestContext();
 	
@@ -40,9 +44,13 @@
 				</li>
 			<% } %>
 			
-			<% if(userCouldEditPage){ %>
+			<% if(userCouldEditPage){ 
+        UIPortalApplication portalApp = Util.getUIPortalApplication();
+        UIPage uiPage = portalApp.findFirstComponentOfType(UIPage.class);//TODO: Find a better solution than this traversing
+        String editPageRequest = "javascript:ajaxGet(eXo.env.server.createPortalURL('" + uiPage.getId() + "', 'EditCurrentPage', true))";
+			  %>
 				<li class="MenuItem">
-					<a href="javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditCurrentPage', true))" title="" class="ItemIcon EditPageIcon">$editPageLabel</a>
+					<a href="$editPageRequest" title="" class="ItemIcon EditPageIcon">$editPageLabel</a>
 				</li>
 			<% } %>
 			
