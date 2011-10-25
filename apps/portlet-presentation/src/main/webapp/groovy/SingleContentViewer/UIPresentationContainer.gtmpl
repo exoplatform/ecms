@@ -24,9 +24,9 @@
         jsManager.addOnLoadJavascript("InlineEditor.loadLanguage(" + multiLangMsg + ")");
       }
       
-			def edittingStyle = "z-index: 1";
+			def edittingStyle = "z-index: 5";
 			if (isShowInfoBar)
-				edittingStyle = "z-index: 1; top:20px";
+				edittingStyle = "z-index: 5; top:20px";
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
@@ -140,7 +140,7 @@
 				%>
 	      <div class="$uicomponent.id" id="$uicomponent.id" 
 	      	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id' ">
-  				<div class="EdittingToolBarContainer" style=" z-index: 1">
+  				<div class="EdittingToolBarContainer" style=" z-index: 5">
           <div class="EdittingToolBar " >
            <div class="EdittingToolBarL">
              <div class="EdittingToolBarR">

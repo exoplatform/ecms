@@ -1,7 +1,7 @@
 /* ============== INLINE-EDITING feature css===========================*/
 .InlineEditing {
   width:100%;
-  height:100%;
+  height:auto;
 }
 .InlineEditing .AcceptButton{
   background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
