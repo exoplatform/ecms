@@ -57,7 +57,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			break;						
 		case "radio"		: 
 			fieldComponent  +=		"<td class='FieldLabel' value='Radio'>Radio field</td>";
-			fieldComponent  +=		"<td class='FieldComponent'><div class='RadioButton' idx='1'><input type='radio' class='Radio' value='radio1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Radio 1</span><div style='clear:left'></div></div></td>";
+			fieldComponent  +=		"<td class='FieldComponent'><div class='RadioButton' idx='1'><input type='radio' name='group1' class='Radio' value='radio1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Radio 1</span><div style='clear:left'></div></div></td>";
 			multivalue		= true;
 			break;			
 		case "datetime"	: 
@@ -342,19 +342,21 @@ UIFormGeneratorPortlet.prototype.updateValue = function(evt) {
 			var fieldComponent = DOMUtil.findFirstDescendantByClass(componentNode, "td", "FieldComponent");
 			var radioNodes = DOMUtil.findDescendantsByClass(fieldComponent, 'div', 'RadioButton');
 			var fieldNode = DOMUtil.findAncestorByClass(srcEle, 'FieldComponent');
-			var inputList = DOMUtil.getChildrenByTagName(fieldNode, 'input');
-			if (selectNode.options.length>srcIndex) {
-				var radioInputNode = DOMUtil.findFirstDescendantByClass(radioNodes[srcIndex], 'input', 'Radio');
-				if (srcEle.value.length>0) radioInputNode.value = srcEle.value;
-				var radioTextNode = DOMUtil.findDescendantsByTagName(radioNodes[srcIndex], 'span')[0];
-				if (srcEle.value.length>0) radioTextNode.innerHTML = srcEle.value;
-			}
+			var inputList = DOMUtil.findDescendantsByClass(fieldNode, 'input', 'InputText');
+      for(var i = 0 ; i < inputList.length; i++) {
+        if(inputList[i] == srcEle) {
+          var radioInputNode = DOMUtil.findFirstDescendantByClass(radioNodes[i], 'input', 'Radio');
+          if (srcEle.value.length>0) radioInputNode.value = srcEle.value;
+          var radioTextNode = DOMUtil.findDescendantsByTagName(radioNodes[i], 'span')[0];
+          if (srcEle.value.length>0) radioTextNode.innerHTML = srcEle.value;
+        } 
+      }
 			break;	
 		case "Checkbox" :
 			var fieldComponent = DOMUtil.findFirstDescendantByClass(componentNode, "td", "FieldComponent");
 			var checkboxNodes = DOMUtil.findDescendantsByClass(fieldComponent, 'div', 'CheckboxButton');
 			var fieldNode = DOMUtil.findAncestorByClass(srcEle, 'FieldComponent');
-			var inputList = DOMUtil.getChildrenByTagName(fieldNode, 'input');
+			var inputList = DOMUtil.findDescendantsByClass(fieldNode, 'input', 'InputText');
 			for(var i = 0 ; i < inputList.length; i++) {
 				if(inputList[i] == srcEle) {
 					var chkInputNode = DOMUtil.findFirstDescendantByClass(checkboxNodes[i], 'input', 'CheckBox');
@@ -435,10 +437,10 @@ UIFormGeneratorPortlet.prototype.addOption = function(obj) {
 		case "radio" :				
 			var radioNode  = document.createElement("div");
 			radioNode.setAttribute("idx",index);
-			radioNode.innerHTML = '<input type="radio" class="Radio" value="radio'+index+'" /><span style="padding : 0 5px 0 19px; display:block; line-height:12px">Radio '+index+'</span><div style="clear:left"></div>';
+			radioNode.innerHTML = '<input type="radio" name="group1" class="Radio" value="radio'+index+'" /><span style="padding : 0 5px 0 19px; display:block; line-height:12px">Radio '+index+'</span><div style="clear:left"></div>';
 			radioNode.className = "RadioButton";					
-			if (currentIndex < radioContainer.length ) {
-				eXo.ecm.UIFormGeneratorPortlet.insertAfter(radioContainer[currentIndex],radioNode);
+			if (currentIndex <= radioContainer.length ) {
+				eXo.ecm.UIFormGeneratorPortlet.insertAfter(radioContainer[currentIndex-1],radioNode);
       		}
 			var rContainer = DOMUtil.findDescendantsByClass(containerNode, 'div', 'RadioButton');		
 			var arrInputTexts =DOMUtil.findDescendantsByClass(brotherNode, 'input', 'InputText');				
@@ -504,8 +506,8 @@ UIFormGeneratorPortlet.prototype.removeOption = function(obj) {
       eXo.ecm.UIFormGeneratorPortlet.updateNodeIndex(rContainer,0);               
       for(var i=0; i< rContainer.length; i++){            
         if(arrInputTexts[i].value=="" || arrInputTexts[i].value.length <1) {                      
-          rContainer[i].firstChild.value="Option"+rContainer[i].getAttribute("idx");        
-          rContainer[i].firstChild.nextSibling.innerHTML="Option"+rContainer[i].getAttribute("idx");
+          rContainer[i].firstChild.value="Radio "+rContainer[i].getAttribute("idx");        
+          rContainer[i].firstChild.nextSibling.innerHTML="Radio "+rContainer[i].getAttribute("idx");
         }
       }           
       break;    
