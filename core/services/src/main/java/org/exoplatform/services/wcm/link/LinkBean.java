@@ -73,7 +73,9 @@ public class LinkBean {
   }
 
   public static LinkBean parse(String link) {
+    if (link == null) return new LinkBean("","");
     String[] links = link.split(SEPARATOR);
+    if (links.length < 2) return new LinkBean("","");
     String url = links[1].replaceAll(URL, "");
     String status = links[0];
     return new LinkBean(url,status);
