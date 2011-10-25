@@ -231,6 +231,10 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat right cente
   position: relative;
 }
 
+.MaskContainer .UITabPane .UITabContentContainer .UITabContent {
+  position: relative;
+}
+
 /* Context Help CSS END */
 
 
