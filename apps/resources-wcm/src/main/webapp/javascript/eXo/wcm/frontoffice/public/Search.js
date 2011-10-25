@@ -37,11 +37,11 @@ SearchPortlet.prototype.quickSearchOnEnter = function(event, resultPageURI) {
 		/*
 		Filter user input on client
 		- Escape markup on the client
-    - Remove eval(), javascript, and script from client 
+    - Remove eval(), javascript, and script from client
 		*/
 		keyword = keyword.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     keyword.replace(/[\"\'][\s]*javascript:(.*)[\"\']/gi, "\"\"");
-    keyword = keyword.replace(/script(.*)/gi, "");    
+    keyword = keyword.replace(/script(.*)/gi, "");
     keyword = keyword.replace(/eval\((.*)\)/gi, "");
 		var resultPageURIDefault = "searchResult";
 		var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
@@ -96,7 +96,7 @@ SearchPortlet.prototype.keepKeywordOnBoxSearch = function() {
 		if ((inputKeyInForm != null) && (inputKeyInForm.value.length != 0)) {
 			keyWordInput.value=inputKeyInForm.value;
 		}
-	}	
+	}
 };
 
 SearchPortlet.prototype.scrollToBottom = function(divId) {
@@ -109,10 +109,10 @@ SearchPortlet.prototype.changeColor = function(divId, count) {
 	if (!count)
 		count = 0;
 
-	var basicColor = 220;
+	var basicColor = 219;
 	var appliedColor = basicColor + count;
 
-	var divBlock = document.getElementById(divId);  							    
+	var divBlock = document.getElementById(divId);
 	if (divBlock) {
 		divBlock.style.backgroundColor = "#" + appliedColor.toString(16) + appliedColor.toString(16) + appliedColor.toString(16);
 		if (appliedColor < 255) {
