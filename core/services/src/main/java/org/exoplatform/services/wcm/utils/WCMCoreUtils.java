@@ -43,6 +43,8 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
+import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -333,5 +335,14 @@ public class WCMCoreUtils {
       }
     }
     return templates;
+  }
+  
+  public static String getRestContextName() {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+        getComponentInstance(PortalContainerConfig.class);
+    PortalContainerInfo containerInfo =
+      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    return portalContainerConfig.getRestContextName(containerInfo.getContainerName());
   }
 }

@@ -35,6 +35,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -83,6 +84,10 @@ public class UIDriveList extends UIPagingGridDecorator {
   @Deprecated
   public List<DriveData> getDrives(String repoName) throws Exception {
     return getDrives();
+  }
+  
+  public String getRequestContextName() {
+    return WCMCoreUtils.getRestContextName();
   }
 
   public List<DriveData> getDrives() throws Exception {
