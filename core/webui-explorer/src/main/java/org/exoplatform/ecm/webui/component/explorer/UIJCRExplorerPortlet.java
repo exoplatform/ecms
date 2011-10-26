@@ -312,25 +312,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         }
       }
     }
-
-    String nodePathUrl = pcontext.getNodePath();
-    String[] uri = nodePathUrl.split("/");
-    if (uri == null || uri.length < 3) return mapParam;
-    patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");
-    matcher = patternUrl.matcher(nodePathUrl);
-    if (matcher.find()) {
-      mapParam.put("repository", matcher.group(2));
-      mapParam.put("drive", matcher.group(3));
-      mapParam.put("path", "/" + matcher.group(4));
-    } else {
-      patternUrl = Pattern.compile("([^/]+)/([^/]+)/(.*)");
-      matcher = patternUrl.matcher(nodePathUrl);
-      if (matcher.find()) {
-        mapParam.put("repository", matcher.group(2));
-        mapParam.put("drive", matcher.group(3));
-        mapParam.put("path", "/");
-      }
-    }
     return mapParam;
   }
 
