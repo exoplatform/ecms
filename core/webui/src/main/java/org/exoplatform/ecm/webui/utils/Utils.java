@@ -71,6 +71,10 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.ext.UIExtension;
+import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -923,6 +927,25 @@ public class Utils {
 
     if (title ==null) title = nProcessNode.getName();
     return Text.unescapeIllegalJcrChars(title);
+  }
+
+  /**
+   * Get UIComponent to process render a node which has specified mimeType
+   * @param mimeType
+   * @param container
+   * @return
+   * @throws Exception
+   */
+  public static UIComponent getUIComponent(String mimeType, UIContainer container) throws Exception {
+    UIExtensionManager manager = WCMCoreUtils.getService(UIExtensionManager.class);
+    List<UIExtension> extensions = manager.getUIExtensions(FILE_VIEWER_EXTENSION_TYPE);
+    Map<String, Object> context = new HashMap<String, Object>();
+    context.put(MIME_TYPE, mimeType);
+    for (UIExtension extension : extensions) {
+      UIComponent uiComponent = manager.addUIExtension(extension, context, container);
+      if(uiComponent != null) return uiComponent;
+    }
+    return null;
   }
 
 }

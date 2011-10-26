@@ -221,15 +221,7 @@ public class UIPresentation extends UIBaseNodePresentation {
   }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
-    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
-      Map<String, Object> context = new HashMap<String, Object>();
-      context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
-      for (UIExtension extension : extensions) {
-        UIComponent uiComponent = manager.addUIExtension(extension, context, this);
-        if(uiComponent != null) return uiComponent;
-      }
-      return null;
+    return org.exoplatform.ecm.webui.utils.Utils.getUIComponent(mimeType, this);
   }
 
   /**

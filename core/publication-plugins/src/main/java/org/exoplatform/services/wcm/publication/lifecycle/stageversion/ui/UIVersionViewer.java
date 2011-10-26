@@ -17,9 +17,12 @@
 package org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -29,8 +32,12 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS
@@ -39,7 +46,10 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * Mar 5, 2009
  */
 @ComponentConfig(
-  lifecycle = Lifecycle.class
+  lifecycle = Lifecycle.class,
+  events = {
+    @EventConfig(listeners = UIVersionViewer.DownloadActionListener.class)
+  }
 )
 
 public class UIVersionViewer extends UIBaseNodePresentation {
@@ -147,15 +157,32 @@ public class UIVersionViewer extends UIBaseNodePresentation {
     return null;
   }
 
-public UIComponent getRemoveAttach() throws Exception {
-  return null;
-}
+  public UIComponent getRemoveAttach() throws Exception {
+    return null;
+  }
 
-public UIComponent getRemoveComment() throws Exception {
-  return null;
-}
+  public UIComponent getRemoveComment() throws Exception {
+    return null;
+  }
 
-public UIComponent getUIComponent(String mimeType) throws Exception {
-  return null;
-}
+  public UIComponent getUIComponent(String mimeType) throws Exception {
+    return Utils.getUIComponent(mimeType, this);
+  }
+
+  public static class DownloadActionListener extends EventListener<UIVersionViewer> {
+    public void execute(Event<UIVersionViewer> event) throws Exception {
+      UIVersionViewer uiComp = event.getSource();
+      UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
+      try {
+        String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
+        event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
+      } catch(RepositoryException e) {
+         log.error("Repository cannot be found", e);
+        return ;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+    }
+  }
 }

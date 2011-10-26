@@ -419,15 +419,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
-    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
-    Map<String, Object> context = new HashMap<String, Object>();
-    context.put(Utils.MIME_TYPE, mimeType);
-    for (UIExtension extension : extensions) {
-      UIComponent uiComponent = manager.addUIExtension(extension, context, this);
-      if(uiComponent != null) return uiComponent;
-    }
-    return null;
+    return Utils.getUIComponent(mimeType, this);
   }
 
   static public class ChangeLanguageActionListener extends EventListener<UIDocumentDetail>{
