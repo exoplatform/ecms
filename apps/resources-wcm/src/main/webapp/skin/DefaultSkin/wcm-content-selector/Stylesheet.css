@@ -716,6 +716,7 @@
 }
 
 .UIOneTaxonomySelector .UITreeList{
-	width: 325px;
+	margin-left:240px;
+	margin-right:-230px;
 	overflow:auto;
 }
