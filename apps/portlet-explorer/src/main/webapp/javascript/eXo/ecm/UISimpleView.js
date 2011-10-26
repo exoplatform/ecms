@@ -140,10 +140,14 @@ var SimpleView = function() {
 					position: "absolute",
 					display: "none",
 					overflow: "hidden",
-					background: "white",
-					width: element.offsetWidth + "px"
-				}
-			});
+          padding: "1px",
+          background: "white",
+          border: "1px solid gray",
+          width: element.offsetWidth + 50 + "px",
+          height: "25px"
+        }
+      });
+      eXo.core.Browser.setOpacity(mobileElement, 65);
 			Self.mobileId = mobileElement.id;
 			var coverElement = newElement({
 				className: "UITreeExplorer",
