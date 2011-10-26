@@ -197,11 +197,13 @@ public class UISearchResult extends UIContainer {
 																																														itemsPerPage, false);
 				setSearchTime(paginatedQueryResult.getQueryTimeInSecond());
 				setSuggestion(paginatedQueryResult.getSpellSuggestion());
-				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
-				suggestionURL += "?portal=" + portal + "&keyword=" + getSuggestion();
-				setSuggestionURL(suggestionURL);
-				setPageList(paginatedQueryResult);
-				searchForm.setSubmitAction(suggestionURL);
+			        if(paginatedQueryResult.getAvailable()<=0) {
+                                  String suggestion =paginatedQueryResult.getSpellSuggestion();
+                                  setSuggestionURL(suggestion);
+                                  searchForm.setSubmitAction(suggestion);
+                                }
+                                setPageList(paginatedQueryResult);
+				
 			} catch (Exception e) {
 				UIApplication uiApp = getAncestorOfType(UIApplication.class);
 				uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));

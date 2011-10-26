@@ -265,10 +265,11 @@ public class UISearchForm extends UIForm {
 				uiSearchResult.setPageList(paginatedQueryResult);
 				float timeSearch = paginatedQueryResult.getQueryTimeInSecond();
 				uiSearchResult.setSearchTime(timeSearch);
-				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
-        suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;
-				uiSearchResult.setSuggestion(suggestionURL);
-				uiSearchForm.setSubmitAction(suggestionURL);
+                                if(paginatedQueryResult.getAvailable()<=0) {
+                                  String suggestion = paginatedQueryResult.getSpellSuggestion();         
+                                  uiSearchResult.setSuggestion(suggestion);
+                                  uiSearchForm.setSubmitAction(suggestion);
+                                } 				
 				portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
 			} catch (Exception e) {
 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,

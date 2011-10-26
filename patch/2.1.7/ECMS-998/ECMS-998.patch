@@ -1,0 +1,43 @@
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(revision 75582)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(working copy)
+@@ -197,11 +197,13 @@
+ 																																														itemsPerPage, false);
+ 				setSearchTime(paginatedQueryResult.getQueryTimeInSecond());
+ 				setSuggestion(paginatedQueryResult.getSpellSuggestion());
+-				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
+-				suggestionURL += "?portal=" + portal + "&keyword=" + getSuggestion();
+-				setSuggestionURL(suggestionURL);
+-				setPageList(paginatedQueryResult);
+-				searchForm.setSubmitAction(suggestionURL);
++			        if(paginatedQueryResult.getAvailable()<=0) {
++                                  String suggestion =paginatedQueryResult.getSpellSuggestion();
++                                  setSuggestionURL(suggestion);
++                                  searchForm.setSubmitAction(suggestion);
++                                }
++                                setPageList(paginatedQueryResult);
++				
+ 			} catch (Exception e) {
+ 				UIApplication uiApp = getAncestorOfType(UIApplication.class);
+ 				uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(revision 75582)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(working copy)
+@@ -265,10 +265,11 @@
+ 				uiSearchResult.setPageList(paginatedQueryResult);
+ 				float timeSearch = paginatedQueryResult.getQueryTimeInSecond();
+ 				uiSearchResult.setSearchTime(timeSearch);
+-				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
+-        suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;
+-				uiSearchResult.setSuggestion(suggestionURL);
+-				uiSearchForm.setSubmitAction(suggestionURL);
++                                if(paginatedQueryResult.getAvailable()<=0) {
++                                  String suggestion = paginatedQueryResult.getSpellSuggestion();         
++                                  uiSearchResult.setSuggestion(suggestion);
++                                  uiSearchForm.setSubmitAction(suggestion);
++                                } 				
+ 				portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
+ 			} catch (Exception e) {
+ 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,
