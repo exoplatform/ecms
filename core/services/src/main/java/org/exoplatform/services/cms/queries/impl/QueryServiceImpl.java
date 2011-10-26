@@ -300,8 +300,9 @@ public class QueryServiceImpl implements QueryService, Startable{
     } catch (PathNotFoundException pe) {
       queryNode = (Node) getSession(WCMCoreUtils.getSystemSessionProvider(), true).getItem(queryPath);
     }
+    Node queriesHome = queryNode.getParent();
     queryNode.remove();
-    session.save();
+    queriesHome.save();
     removeFromCache(queryPath);
   }  
 
