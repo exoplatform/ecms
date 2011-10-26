@@ -1,0 +1,28 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(revision 74114)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(working copy)
+@@ -116,6 +116,9 @@
+ 			if(node.getParent().isNodeType("exo:webContent")) {
+ 			  node = node.getParent();
+ 			  linkNode = uicomponent.getSymlinkNode(node);
++			} else if (node.isNodeType("exo:comments")) {
++        node = node.getParent().getParent();
++        linkNode = uicomponent.getSymlinkNode(node);
+ 			} else {
+ 			  linkNode = uicomponent.getSymlinkNode(node);
+ 			}
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(revision 74114)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(working copy)
+@@ -275,6 +275,9 @@
+   public boolean isTaxonomyNode() { return isTaxonomyNode; }  
+   
+   public Node getSymlinkNode(Node targetNode) throws Exception {
++    if (targetNode == null || !targetNode.isNodeType("mix:referenceable")) {
++      return null;
++    }
+     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+     Session session = 
+       SessionProviderFactory.createSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());

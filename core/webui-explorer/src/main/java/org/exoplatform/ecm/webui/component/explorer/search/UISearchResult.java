@@ -275,6 +275,9 @@ public class UISearchResult extends UIContainer {
   public boolean isTaxonomyNode() { return isTaxonomyNode; }  
   
   public Node getSymlinkNode(Node targetNode) throws Exception {
+    if (targetNode == null || !targetNode.isNodeType("mix:referenceable")) {
+      return null;
+    }
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     Session session = 
       SessionProviderFactory.createSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());

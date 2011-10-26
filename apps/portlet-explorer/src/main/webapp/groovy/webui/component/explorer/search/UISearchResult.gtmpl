@@ -116,6 +116,9 @@
 			if(node.getParent().isNodeType("exo:webContent")) {
 			  node = node.getParent();
 			  linkNode = uicomponent.getSymlinkNode(node);
+			} else if (node.isNodeType("exo:comments")) {
+        node = node.getParent().getParent();
+        linkNode = uicomponent.getSymlinkNode(node);
 			} else {
 			  linkNode = uicomponent.getSymlinkNode(node);
 			}
