@@ -133,7 +133,6 @@
 	<dependency><groupId>jcr</groupId><artifactId>jcr</artifactId><version>${jcr.version}</version><type>jar</type></dependency><!-- 1.0-->
 	<dependency><groupId>org.exoplatform.ws</groupId><artifactId>exo.ws.frameworks.servlet</artifactId><version>${org.exoplatform.ws.version}</version><type>jar</type></dependency><!-- 2.1.6-GA-SNAPSHOT-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.gadgets-server</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
-	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>gatein.portal.component.wsrp</artifactId><version>${org.exoplatform.portal.version}</version><type>jar</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>stax</groupId><artifactId>stax-api</artifactId><version>${stax.version}</version><type>jar</type></dependency><!-- 1.0-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.eXoGadgets</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>org.exoplatform.tool</groupId><artifactId>exo.tool.webunit</artifactId><version>${org.exoplatform.tool.version}</version><type>jar</type></dependency><!-- 1.0.0-->
