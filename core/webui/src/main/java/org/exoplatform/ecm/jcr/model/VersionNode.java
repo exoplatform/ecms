@@ -63,7 +63,7 @@ public class VersionNode {
       } catch (Exception e) {}
       
       String uuid = version.getUUID();
-      QueryManager queryManager = version.getSession().getWorkspace().getQueryManager();
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery("//element(*, nt:version)[@jcr:predecessors='" + uuid + "']", Query.XPATH);
       QueryResult queryResult = query.execute();
       NodeIterator iterate = queryResult.getNodes();
