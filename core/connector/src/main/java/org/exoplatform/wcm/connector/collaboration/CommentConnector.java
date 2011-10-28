@@ -116,7 +116,9 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
         commentor.setTextContent(comment.getProperty("exo:commentor").getString());
         //exo:commentorEmail
         Element commentorEmail = document.createElement("email");
-        commentorEmail.setTextContent(comment.getProperty("exo:commentorEmail").getString());
+        if (comment.hasProperty("exo:commentorEmail")) {
+          commentorEmail.setTextContent(comment.getProperty("exo:commentorEmail").getString());
+        }
         //exo:commentDate
         Element date = document.createElement("date");
         date.setTextContent(comment.getProperty("exo:commentDate").getDate().getTime().toLocaleString());
