@@ -1,12 +1,12 @@
 <repository-service default-repository="repository">
   <repositories>
-    <repository name="repository" system-workspace="system" default-workspace="collaboration">
+    <repository name="repository" system-workspace="${gatein.jcr.workspace.system}" default-workspace="${gatein.jcr.workspace.default}">
       <security-domain>${portal.container.realm}</security-domain>
       <access-control>optional</access-control>
       <authentication-policy>org.exoplatform.services.jcr.impl.core.access.JAASAuthenticator</authentication-policy>
       <workspaces>
         <!-- Collaboration data -->
-	<workspace name="system">
+	       <workspace name="system">
           <container class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
             <properties>
               <property name="source-name" value="${gatein.jcr.datasource.name}${container.name.suffix}"/>
@@ -72,7 +72,7 @@
           </lock-manager>
         </workspace>
 				
-	<workspace name="collaboration">
+	       <workspace name="collaboration">
           <container class="org.exoplatform.services.jcr.impl.storage.jdbc.optimisation.CQJDBCWorkspaceDataContainer">
             <properties>
               <property name="source-name" value="${gatein.jcr.datasource.name}${container.name.suffix}"/>

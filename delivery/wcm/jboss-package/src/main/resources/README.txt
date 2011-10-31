@@ -34,3 +34,9 @@ For further information of expression meaning, please refer to: http://en.wikipe
 
 # Commons Upgrade configuration
 commons.upgrade.proceedIfFirstRun=true
+
+5. Adding 2 new properties in configuration.propeprties file.
+
+# Repository configuration
+gatein.jcr.workspace.system=system
+gatein.jcr.workspace.default=collaboration
