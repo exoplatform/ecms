@@ -111,8 +111,20 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     return attachments;
   }
   
+  /**
+   * use getViewableLink(Node attNode, Parameter[] params) function instead
+   * @param attNode
+   * @param params
+   * @return
+   * @throws Exception
+   */
+  @Deprecated
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
+	  return getViewableLink(attNode, params);
+  }
+  
   @Override
-  public String getAttachmentURL(Node attNode, Parameter[] params)
+  public String getViewableLink(Node attNode, Parameter[] params)
       throws Exception {
     return "";
   }

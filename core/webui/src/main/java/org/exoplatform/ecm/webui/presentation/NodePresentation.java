@@ -120,12 +120,22 @@ public interface NodePresentation {
   public List<Node> getAttachments() throws Exception;
 
   /**
+   * use getViewableLink(Node attNode, Parameter[] params) function instead
+   * @param attNode
+   * @param params
+   * @return
+   * @throws Exception
+   */
+  @Deprecated
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
+  
+  /**
    * Gets the attachment URL.
    * 
    * @return the attachment URL
    * @throws Exception the exception
    */
-  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
+  public String getViewableLink(Node attNode, Parameter[] params) throws Exception;
   
   
   /**

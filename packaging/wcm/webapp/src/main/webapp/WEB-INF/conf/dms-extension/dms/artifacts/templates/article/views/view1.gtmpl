@@ -90,45 +90,47 @@
 					                  <%=_ctx.appRes("Article.view.label.none-content")%>
 					                <%}%>
 				                </div>
-											</div>			                
+											</div>			 
+						<%if(relations.size() > 0) {%>
 			                <div class="ContainerLinks">
 			                	<div class="ContentLinks">
 				                  <div class="FieldIcon LinksIcon"><span></span></div>
-							            <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
-							            <div style="clear: left;"><span></span></div>
+							          <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
+							          <div style="clear: left;"><span></span></div>
 							          </div>
-							          <div class="WorkContentLinks">
-						    					<%if(relations.size() > 0) {%>
-								              <div class="Links">
-																<%
-												          for(rel in relations) {
-													          if(rel != null) {
-																	    String wsName = rel.getSession().getWorkspace().getName() ;
-																      String actionLink ;
-																	    String relPath = rel.getPath() ;
-																	    String relName = relPath.substring(relPath.lastIndexOf("/") + 1, relPath.length()) ; 
-																	    if(!uicomponent.isRssLink()) { 
-																	    	params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-																	      actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(relPath), params);
-																      } else { 
-																	 	    actionLink = uicomponent.getRssLink() + wsName + relPath ;
-																      }
-																    
-														    %>
-					  								    <div> - <a onclick="$actionLink" style="cursor: pointer;">$relName</a></div>
-					  							    <%		}
-					  							    	}%>
-							              </div>
-								          <%}%>
-								        </div>
-								        <div style="clear: left;"><span></span></div>
-				              </div>
+							          <div class="WorkContentLinks">						    					
+								      	<div class="Links">
+										  <%
+											for(rel in relations) {
+												if(rel != null) {
+													String wsName = rel.getSession().getWorkspace().getName() ;
+													String actionLink ;
+													String relPath = rel.getPath() ;
+													String relName = relPath.substring(relPath.lastIndexOf("/") + 1, relPath.length()) ; 
+													if(!uicomponent.isRssLink()) { 
+														params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+														actionLink =  uicomponent.getViewableLink(rel, params);
+													} else { 
+														actionLink = uicomponent.getRssLink() + wsName + relPath ;
+													}
+													def linkActionName = (actionLink.startsWith("http")) ? "href" : "onclick";
+										  %>
+				  									<div> - <a $linkActionName="$actionLink" style="cursor: pointer;">$relName</a></div>
+										  <%	}
+											}
+										  %>
+							            </div>
+								      </div>
+								    <div style="clear: left;"><span></span></div>
+								  </div>
+							  <%}%>
 				            </div>
 			            </div>
 			          </div>
 			        </div>
-					  </div>
+						</div>
 	          <div style="height: 10px;"><span></span></div>
+			  <%if(attachments.size() > 0) {%>
 	          <div class="ArticleFrame">
 						  <div class="TopLeftArticleFrame">
 						    <div class="TopRightArtictleFrame">
@@ -146,15 +148,14 @@
 			            <div class="ArticleFrameContainer">
 			              <div class="FieldContent">
 			              	<div class="FieldContainerContent">
-						        <%
-						        if(attachments.size() > 0) {
+						        <%						        
 							        def removeattachcomponent = uicomponent.getRemoveAttach();
 							        String wsName = "";
 									for (att in attachments) {
 										if(att != null) {
 			  							wsName = att.getSession().getWorkspace().getName();
 			  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-			  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
+			  							def viewAttachmentLink =  uicomponent.getViewableLink(att, params);
 			  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 										%>
 											<div class="AttachmentsContainer">	
@@ -172,13 +173,14 @@
 							                </div>
 						              <%	}
 						              	} 
-												 	}%>
+									  %>
 											</div>
 										</div>
 								  </div>
 							  </div>
 		          </div>
 		        </div>
+				<% } %>
 		        <div style="height: 10px;"><span></span></div>
 					</div>
 				</div>

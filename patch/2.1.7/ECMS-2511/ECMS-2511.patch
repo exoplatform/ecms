@@ -1,0 +1,332 @@
+Index: ext/deprecated/portlet-browsecontent/src/main/java/org/exoplatform/ecm/webui/component/browsecontent/UIDocumentDetail.java
+===================================================================
+--- ext/deprecated/portlet-browsecontent/src/main/java/org/exoplatform/ecm/webui/component/browsecontent/UIDocumentDetail.java	(revision 72333)
++++ ext/deprecated/portlet-browsecontent/src/main/java/org/exoplatform/ecm/webui/component/browsecontent/UIDocumentDetail.java	(working copy)
+@@ -289,8 +289,20 @@
+     return attachments;
+   }
+   
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+   }
+Index: ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentContent.java
+===================================================================
+--- ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentContent.java	(revision 72333)
++++ ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentContent.java	(working copy)
+@@ -286,8 +286,20 @@
+     return attachments;
+   }  
+   
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+   }
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java	(revision 72333)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java	(working copy)
+@@ -190,13 +190,25 @@
+   }
+   
+   /**
+-   * Gets the attachment URL.
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
++  /**
++   * Gets the viewable link (attachment url, relation document url).
+    * 
+    * @param node the node
+    * @return the attachment URL
+    * @throws Exception the exception
+    */
+-  public String getAttachmentURL(Node node, Parameter[] params) throws Exception {
++  public String getViewableLink(Node node, Parameter[] params) throws Exception {
+     String link = null;
+     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/article/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/article/views/view1.gtmpl	(revision 72333)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/article/views/view1.gtmpl	(working copy)
+@@ -90,45 +90,47 @@
+ 					                  <%=_ctx.appRes("Article.view.label.none-content")%>
+ 					                <%}%>
+ 				                </div>
+-											</div>			                
++											</div>			 
++						<%if(relations.size() > 0) {%>
+ 			                <div class="ContainerLinks">
+ 			                	<div class="ContentLinks">
+ 				                  <div class="FieldIcon LinksIcon"><span></span></div>
+-							            <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
+-							            <div style="clear: left;"><span></span></div>
++							          <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
++							          <div style="clear: left;"><span></span></div>
+ 							          </div>
+-							          <div class="WorkContentLinks">
+-						    					<%if(relations.size() > 0) {%>
+-								              <div class="Links">
+-																<%
+-												          for(rel in relations) {
+-													          if(rel != null) {
+-																	    String wsName = rel.getSession().getWorkspace().getName() ;
+-																      String actionLink ;
+-																	    String relPath = rel.getPath() ;
+-																	    String relName = relPath.substring(relPath.lastIndexOf("/") + 1, relPath.length()) ; 
+-																	    if(!uicomponent.isRssLink()) { 
+-																	    	params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+-																	      actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(relPath), params);
+-																      } else { 
+-																	 	    actionLink = uicomponent.getRssLink() + wsName + relPath ;
+-																      }
+-																    
+-														    %>
+-					  								    <div> - <a onclick="$actionLink" style="cursor: pointer;">$relName</a></div>
+-					  							    <%		}
+-					  							    	}%>
+-							              </div>
+-								          <%}%>
+-								        </div>
+-								        <div style="clear: left;"><span></span></div>
+-				              </div>
++							          <div class="WorkContentLinks">						    					
++								      	<div class="Links">
++										  <%
++											for(rel in relations) {
++												if(rel != null) {
++													String wsName = rel.getSession().getWorkspace().getName() ;
++													String actionLink ;
++													String relPath = rel.getPath() ;
++													String relName = relPath.substring(relPath.lastIndexOf("/") + 1, relPath.length()) ; 
++													if(!uicomponent.isRssLink()) { 
++														params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
++														actionLink =  uicomponent.getViewableLink(rel, params);
++													} else { 
++														actionLink = uicomponent.getRssLink() + wsName + relPath ;
++													}
++													def linkActionName = (actionLink.startsWith("http")) ? "href" : "onclick";
++										  %>
++				  									<div> - <a $linkActionName="$actionLink" style="cursor: pointer;">$relName</a></div>
++										  <%	}
++											}
++										  %>
++							            </div>
++								      </div>
++								    <div style="clear: left;"><span></span></div>
++								  </div>
++							  <%}%>
+ 				            </div>
+ 			            </div>
+ 			          </div>
+ 			        </div>
+-					  </div>
++						</div>
+ 	          <div style="height: 10px;"><span></span></div>
++			  <%if(attachments.size() > 0) {%>
+ 	          <div class="ArticleFrame">
+ 						  <div class="TopLeftArticleFrame">
+ 						    <div class="TopRightArtictleFrame">
+@@ -146,15 +148,14 @@
+ 			            <div class="ArticleFrameContainer">
+ 			              <div class="FieldContent">
+ 			              	<div class="FieldContainerContent">
+-						        <%
+-						        if(attachments.size() > 0) {
++						        <%						        
+ 							        def removeattachcomponent = uicomponent.getRemoveAttach();
+ 							        String wsName = "";
+ 									for (att in attachments) {
+ 										if(att != null) {
+ 			  							wsName = att.getSession().getWorkspace().getName();
+ 			  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+-			  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
++			  							def viewAttachmentLink =  uicomponent.getViewableLink(att, params);
+ 			  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
+ 										%>
+ 											<div class="AttachmentsContainer">	
+@@ -172,13 +173,14 @@
+ 							                </div>
+ 						              <%	}
+ 						              	} 
+-												 	}%>
++									  %>
+ 											</div>
+ 										</div>
+ 								  </div>
+ 							  </div>
+ 		          </div>
+ 		        </div>
++				<% } %>
+ 		        <div style="height: 10px;"><span></span></div>
+ 					</div>
+ 				</div>
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIViewSearchResult.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIViewSearchResult.java	(revision 72333)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIViewSearchResult.java	(working copy)
+@@ -135,8 +135,20 @@
+     return attachments;
+   }
+ 
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+   }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/versions/UIViewVersion.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/versions/UIViewVersion.java	(revision 72333)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/versions/UIViewVersion.java	(working copy)
+@@ -205,8 +205,20 @@
+     return attachments;
+   }
+   
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+   }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(revision 72333)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(working copy)
+@@ -496,8 +496,20 @@
+     return attachments;
+   }
+   
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+   }
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/NodePresentation.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/NodePresentation.java	(revision 72333)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/NodePresentation.java	(working copy)
+@@ -120,12 +120,22 @@
+   public List<Node> getAttachments() throws Exception;
+ 
+   /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
++  
++  /**
+    * Gets the attachment URL.
+    * 
+    * @return the attachment URL
+    * @throws Exception the exception
+    */
+-  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
++  public String getViewableLink(Node attNode, Parameter[] params) throws Exception;
+   
+   
+   /**
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/UIBaseNodePresentation.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/UIBaseNodePresentation.java	(revision 72333)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/presentation/UIBaseNodePresentation.java	(working copy)
+@@ -111,8 +111,20 @@
+     return attachments;
+   }
+   
++  /**
++   * use getViewableLink(Node attNode, Parameter[] params) function instead
++   * @param attNode
++   * @param params
++   * @return
++   * @throws Exception
++   */
++  @Deprecated
++  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
++	  return getViewableLink(attNode, params);
++  }
++  
+   @Override
+-  public String getAttachmentURL(Node attNode, Parameter[] params)
++  public String getViewableLink(Node attNode, Parameter[] params)
+       throws Exception {
+     return "";
+   }
