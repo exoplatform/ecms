@@ -267,6 +267,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       ret = false;
     } catch (VersionException e) {
       LOG.error("node is checked in, can't move to trash node:" + node.getPath());
+      removeMixinEXO_RESTORE_LOCATION(node);
       ApplicationMessage appMessage = 
         new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node", 
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
@@ -599,5 +600,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       deleteManage(event);
     }
   }
-
+  
+  private void removeMixinEXO_RESTORE_LOCATION(Node node) throws Exception {
+    if (node.isNodeType(Utils.EXO_RESTORELOCATION)) {
+      node.removeMixin(Utils.EXO_RESTORELOCATION);
+      node.save();
+    }
+  }
 }
