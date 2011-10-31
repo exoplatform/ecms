@@ -42,6 +42,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.log.ExoLogger;
@@ -95,7 +96,7 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     for(int i=0; i< nodePaths.length; i++) {
       processLock(nodePaths[i], event, uiExplorer);
     }
-    if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+    //if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
     uiExplorer.updateAjax(event);
   }
 
@@ -131,6 +132,9 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     }
     
     try {
+      if (!PermissionUtil.canSetProperty(node))
+        throw new AccessDeniedException("access denied, can't lock node:" + node.getPath());
+      
       if(node.canAddMixin(Utils.MIX_LOCKABLE)){
         node.addMixin(Utils.MIX_LOCKABLE);
         node.save();
@@ -154,13 +158,21 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       }
       session.save();
     } catch(LockException le) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cant-lock", null,
-          ApplicationMessage.WARNING));
+      ApplicationMessage appMessage = 
+        new ApplicationMessage("UIPopupMenu.msg.cant-lock", 
+                               new String[] {node.getPath()}, ApplicationMessage.ERROR);
+      appMessage.setArgsLocalized(false);
+      uiApp.addMessage(appMessage);
       
       uiExplorer.updateAjax(event);
       return;
     } catch (AccessDeniedException adEx) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-lock-node", null, ApplicationMessage.WARNING));
+      ApplicationMessage appMessage = 
+        new ApplicationMessage("UIPopupMenu.msg.can-not-lock-node", 
+                               new String[] {node.getPath()}, ApplicationMessage.ERROR);
+      appMessage.setArgsLocalized(false);
+      uiApp.addMessage(appMessage);
+      
       uiExplorer.updateAjax(event);
       return;
     }

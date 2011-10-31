@@ -359,7 +359,6 @@
       <can-not-rename-node>ليس لديك الصلاحية لإعادة تسمية هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة.</can-not-rename-node>
       <can-not-cut-node>ليس لديك الصلاحية لقص هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-cut-node>
 	  <can-not-remove-node>ليس لديك الصلاحية لحذف هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-remove-node>
-      <can-not-lock-node>ليس لديك الصلاحية لقفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-lock-node>
       <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
       <no-node>لم تختر عقدة بعد لإلصاقها</no-node>
       <can-not-paste-node>ليس لديك الصلاحية للصق هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-paste-node>
@@ -2933,4 +2932,12 @@
 	  <property_changed>تعديل الملكية</property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
+ 		<can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
+  	</msg>
+  </UIPopupMenu>
 </bundle>

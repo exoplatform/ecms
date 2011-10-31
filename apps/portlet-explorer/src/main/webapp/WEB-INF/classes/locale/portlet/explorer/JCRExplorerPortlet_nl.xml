@@ -421,8 +421,6 @@
 				contacteer uw beheerder</can-not-cut-node>
 			<can-not-remove-node>U hebt geen recht om deze node te verwijderen.
 				contacteer uw beheerder</can-not-remove-node>
-			<can-not-lock-node>U hebt geen recht om deze node op slot te zetten.
-				contacteer uw beheerder</can-not-lock-node>
 			<can-not-unlock-node>U hebt geen recht om deze node vrij te maken.
 				contacteer uw beheerder</can-not-unlock-node>
 			<no-node>Geen node is geselecteerd om te plakken</no-node>
@@ -3311,4 +3309,12 @@
 	  <property_changed>Property Modification</property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete> 		
+		<can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
+  	</msg>
+  </UIPopupMenu>  
 </bundle>

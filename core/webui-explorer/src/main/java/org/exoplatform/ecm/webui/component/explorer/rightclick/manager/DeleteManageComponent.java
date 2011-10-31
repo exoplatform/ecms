@@ -258,26 +258,35 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
     } catch (LockException e) {
       LOG.error("node is locked, can't move to trash node :" + node.getPath());
-      JCRExceptionManager.process(uiApp, e);
-      
+      ApplicationMessage appMessage = 
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-locked-node", 
+                               new String[] {node.getPath()}, ApplicationMessage.ERROR);
+      appMessage.setArgsLocalized(false);
+      uiApp.addMessage(appMessage);
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (VersionException e) {
       LOG.error("node is checked in, can't move to trash node:" + node.getPath());
-      JCRExceptionManager.process(uiApp, e);
-      
+      ApplicationMessage appMessage = 
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node", 
+                               new String[] {node.getPath()}, ApplicationMessage.ERROR);
+      appMessage.setArgsLocalized(false);
+      uiApp.addMessage(appMessage);
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (AccessDeniedException e) {
-      LOG.error("access denied, can't add move to trash to node:" + node.getPath());
-      JCRExceptionManager.process(uiApp, e);
-      
+      LOG.error("access denied, can't move to trash node:" + node.getPath());
+      ApplicationMessage appMessage = 
+        new ApplicationMessage("UIPopupMenu.msg.access-denied-to-delete", 
+                               new String[] {node.getPath()}, ApplicationMessage.ERROR);
+      appMessage.setArgsLocalized(false);
+      uiApp.addMessage(appMessage);
       uiExplorer.updateAjax(event);
       ret = false;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs", e);
-      JCRExceptionManager.process(uiApp, e);
-      
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unexpected-error", 
+                                              new String[] {node.getPath()}, ApplicationMessage.ERROR));
       uiExplorer.updateAjax(event);
       ret = false;
     }

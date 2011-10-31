@@ -388,7 +388,7 @@
       <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
       <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator to get the correct right.</can-not-cut-node>
       <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator to get the correct right.</can-not-remove-node>
-      <can-not-lock-node>You do not have permission to lock this node. Please contact the administrator to get the correct right.</can-not-lock-node>
+      <can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
       <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
       <no-node>Please select at least a node before pasting.</no-node>
       <can-not-paste-node>You do not have permission to paste to this node. Please contact the administrator to get the correct right.</can-not-paste-node>
@@ -3385,4 +3385,11 @@
 	  <property_changed>Property Modification</property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
+  	</msg>
+  </UIPopupMenu>  
 </bundle>

@@ -388,7 +388,6 @@
       <can-not-rename-node>Vous n'avez pas les droits suffisants pour renommer ce noeud.</can-not-rename-node>
       <can-not-cut-node>Vous n'avez pas les droits suffisants pour couper ce noeud.</can-not-cut-node>
       <can-not-remove-node>Vous n'avez pas les droits suffisants pour supprimer ce noeud.</can-not-remove-node>
-      <can-not-lock-node>Vous n'avez pas les droits suffisants pour verrouiller ce noeud.</can-not-lock-node>
       <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
       <no-node>Aucun noeud n'a été sélectionné.</no-node>
       <can-not-paste-node>Vous n'avez pas les droits suffisants pour coller ce noeud.</can-not-paste-node>
@@ -3415,4 +3414,12 @@
 	  <property_changed>Modification de la propriété</property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Le noeud {0} est verrouillé, vous ne pouvez pas le supprimer!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Le noeud 0 est dans l'état checkIn, vous ne pouvez pas le supprimer!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Accès refusé, vous ne pouvez pas supprimer le noeud {0}!</access-denied-to-delete>
+		<can-not-lock-node>Vous ne pouvez pas le pouvoir de verrouiller le noeud {0}.  Contactez votre administateur</can-not-lock-node>
+  	</msg>
+  </UIPopupMenu>  
 </bundle>

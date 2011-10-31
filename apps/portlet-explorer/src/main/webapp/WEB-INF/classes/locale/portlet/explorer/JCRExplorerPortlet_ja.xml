@@ -386,7 +386,6 @@
       <can-not-rename-node>このノードで名前変更するための権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-rename-node>
       <can-not-cut-node>このノードを切り取る権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-cut-node>
       <can-not-remove-node>このノードを削除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-remove-node>
-      <can-not-lock-node>このノードをロックする権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-lock-node>
       <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
       <no-node>貼り付けるために選択されたノードがありません。</no-node>
       <can-not-paste-node>このノードを貼り付ける権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-paste-node>
@@ -3347,5 +3346,13 @@
 	  <read>ユーザアクション</read>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete> 		
+		<can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
+  	</msg>
+  </UIPopupMenu>  
 </bundle>
 

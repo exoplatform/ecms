@@ -402,7 +402,6 @@
       <can-not-rename-node>Bạn không có quyền đổi tên của node này. Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-rename-node>
       <can-not-cut-node>Bạn không có quyền cắt node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền.</can-not-cut-node>
       <can-not-remove-node>Bạn không có quyền xóa node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-remove-node>
-      <can-not-lock-node>Bạn không có quyền khóa node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-lock-node>
       <can-not-unlock-node>Bạn không có quyền mở khóa node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-unlock-node>
       <no-node>Không có node nào được chọn để dán.</no-node>
       <can-not-paste-node>Bạn không có quyền dán node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-paste-node>
@@ -3414,4 +3413,12 @@
 	  <property_changed>Đặc tính thay đổi</property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPopupMenu>
+  	<msg>
+		<can-not-remove-locked-node>Node {0} đã bị khóa, không thể đưa vào Trash!</can-not-remove-locked-node>
+		<can-not-remove-checked-in-node>Node {0} đã bị check in, không thể đưa vào Trash!</can-not-remove-checked-in-node>
+		<access-denied-to-delete>Lỗi truy cập, bạn không có quyền đưa node {0} vào Trash!</access-denied-to-delete>
+		<can-not-lock-node>Bạn không có quyền khóa node {0}. Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-lock-node>
+  	</msg>
+  </UIPopupMenu>  
 </bundle>
