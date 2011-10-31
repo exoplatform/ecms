@@ -295,7 +295,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (totalSize==0) {
       SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
       nodeIterator = getViewableContents(repository, workspace, path, filters, systemProvider, false);
-      totalSize = nodeIterator.getSize();
+      if (nodeIterator != null) {
+        totalSize = nodeIterator.getSize();
+      }
     }
 
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
@@ -305,11 +307,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider, true);
     List<Node> nodes = new ArrayList<Node>();
     Node node = null, viewNode = null;
-    while (nodeIterator.hasNext()) {
-      node = nodeIterator.nextNode();
-      viewNode = getViewableContent(node, filters);
-      if (viewNode != null) {
-        nodes.add(viewNode);
+    if (nodeIterator != null) {
+      while (nodeIterator.hasNext()) {
+        node = nodeIterator.nextNode();
+        viewNode = getViewableContent(node, filters);
+        if (viewNode != null) {
+          nodes.add(viewNode);
+        }
       }
     }
     Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
