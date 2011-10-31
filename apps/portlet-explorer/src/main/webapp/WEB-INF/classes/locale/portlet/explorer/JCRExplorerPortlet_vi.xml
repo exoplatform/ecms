@@ -3416,9 +3416,9 @@
   <UIPopupMenu>
   	<msg>
 		<can-not-remove-locked-node>Node {0} đã bị khóa, không thể đưa vào Trash!</can-not-remove-locked-node>
-		<can-not-remove-checked-in-node>Node {0} đã bị check in, không thể đưa vào Trash!</can-not-remove-checked-in-node>
+		<can-not-remove-checked-in-node>Node {0} hoặc node cha đã bị check in, không thể đưa vào Trash!</can-not-remove-checked-in-node>
 		<access-denied-to-delete>Lỗi truy cập, bạn không có quyền đưa node {0} vào Trash!</access-denied-to-delete>
 		<can-not-lock-node>Bạn không có quyền khóa node {0}. Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-lock-node>
   	</msg>
-  </UIPopupMenu>  
+  </UIPopupMenu>
 </bundle>

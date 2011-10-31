@@ -3417,9 +3417,9 @@
   <UIPopupMenu>
   	<msg>
 		<can-not-remove-locked-node>Le noeud {0} est verrouillé, vous ne pouvez pas le supprimer!</can-not-remove-locked-node>
-		<can-not-remove-checked-in-node>Le noeud 0 est dans l'état checkIn, vous ne pouvez pas le supprimer!</can-not-remove-checked-in-node>
+		<can-not-remove-checked-in-node>Node {0} ou son parent est cochée, ne peut pas le déplacer à la corbeille!</can-not-remove-checked-in-node>
 		<access-denied-to-delete>Accès refusé, vous ne pouvez pas supprimer le noeud {0}!</access-denied-to-delete>
 		<can-not-lock-node>Vous ne pouvez pas le pouvoir de verrouiller le noeud {0}.  Contactez votre administateur</can-not-lock-node>
   	</msg>
-  </UIPopupMenu>  
+  </UIPopupMenu>
 </bundle>

@@ -3388,8 +3388,8 @@
   <UIPopupMenu>
   	<msg>
 		<can-not-remove-locked-node>Node {0} is locked, can not move it to Trash!</can-not-remove-locked-node>
-		<can-not-remove-checked-in-node>Node {0} is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
+		<can-not-remove-checked-in-node>Node {0} or its parent is checked in, can not move it to Trash!</can-not-remove-checked-in-node>
 		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
   	</msg>
-  </UIPopupMenu>  
+  </UIPopupMenu>
 </bundle>
