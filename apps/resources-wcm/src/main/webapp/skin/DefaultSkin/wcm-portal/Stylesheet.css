@@ -174,50 +174,51 @@ td {
 
 /* Context Help CSS START */
 .ShowHelpIcon {
-background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat right center;
+	background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat right center;
 }
 
 
 .IconInContextHelp {
-    width: 16px; height:16px;
-    float: left; margin: 0px 0px 0px 5px;
-    cursor: pointer;
-	position: relative;
+  width: 16px; height:16px;
+  cursor: pointer;
+  float: left;
 }
 
 /********Thanh css********/
 
 .InContextHelpContent {
   position: absolute;
-  width: 454px;
+  width: 450px;
   left: -450px;
   display: none;
-  top: 8px;
+  top: -13px;
   z-index: 100;
 }
 
-.InContextHelpPopup  {
+.LeftInContextHelpPopup  {
   background: #fff;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-box-shadow: 3px 5px 13px 0;
-  -webkit-box-shadow: 3px 5px 13px 0;
-  border: 1px solid #7b7b7b;
-  margin-right: 17px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 2px 2px 2px #cbcbcb;
+  -moz-box-shadow: 2px 2px 2px #cbcbcb;
+  -webkit-box-shadow: 2px 2px 2px #cbcbcb;
+  border: 1px solid #bcbcbc;
+  margin-right: 14px;
+  padding: 10px 10px 15px 10px;
+  position: relative;
+  z-index: -1;
 }
 
-.LeftInContextHelpPopup {
-  background: url('background/ContextHelp/TopRightLeft31x47.png') no-repeat top right;
-  padding: 10px 31px 10px 10px;
-  margin: -2px -19px 0px 0px;
-  min-height: 35px;
+.InContextHelpPopup {
+  background: url('background/ContextHelp/TopRightLeft15x14.png') no-repeat right 17px;
 }
 
 /********End Thanhcss********/
 
 .InContextHelpContentData {
-    white-space:normal;
-    cursor: text;
+  white-space:normal;
+  cursor: text;
   position: absolute;
   top: -35px;
 }

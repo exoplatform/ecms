@@ -537,7 +537,8 @@ width: 95%;
 }
 
 .UISingleContentViewerPortlet .UISCVPreferences #UISCVShowAdvanceOption {
-	margin-left:21px;
+  margin: 10px;
+  display: block;
 }
 
 .UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {

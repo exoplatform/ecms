@@ -18,12 +18,14 @@
                   <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> ><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
-                        <div class="InContextHelpContent" >                    
-                          <div class="InContextHelpPopup">
-                            <div id="ContentPathHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>
-                            </div>
-                          </div>                      
-                        </div>
+						<div style="position: relative;">
+	                        <div class="InContextHelpContent" >                    
+	                          <div class="InContextHelpPopup">
+	                         	 <div id="ContentPathHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>
+	                            </div>
+	                          </div>                      
+	                        </div>
+						</div>
                     </div>
                   </td>
                 </tr>
@@ -46,12 +48,14 @@
                   <td><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
-                        <div class="InContextHelpContent" >                    
-                          <div class="InContextHelpPopup">
-                            <div id="ShowOptionHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> 
-                            </div>
-                          </div>                      
-                        </div>
+						<div style="position: relative;">
+							<div class="InContextHelpContent" >                    
+							  <div class="InContextHelpPopup">
+								<div id="ShowOptionHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> 
+								</div>
+							  </div>                      
+							</div>
+						</div>
                      </div>
                   </td>
                 </tr>                
@@ -93,13 +97,15 @@
                     </div>
                   </td>
                   <td class ="tdShowHelp">
-                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
-                      <div class="InContextHelpContent" >                    
-                        <div class="InContextHelpPopup">
-                          <div id="ContextualHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>
-                          </div>
-                        </div>                      
-                      </div>
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
+						<div style="position: relative;">
+	                      <div class="InContextHelpContent" >                    
+	                        <div class="InContextHelpPopup">
+	                          <div id="ContextualHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>
+	                          </div>
+	                        </div>                      
+	                      </div>
+					  </div>
                   </div>
                 </td>
                 </tr>
@@ -107,13 +113,15 @@
                   <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class="FieldComponent" ><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class ="tdShowHelp">
-                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
-                      <div class="InContextHelpContent" >                    
-                        <div class="InContextHelpPopup">
-                          <div id="ParameterHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %>
-                          </div>
-                        </div>                      
-                      </div>
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
+						<div style="position: relative;">
+	                      <div class="InContextHelpContent" >                    
+	                        <div class="InContextHelpPopup">
+	                          <div id="ParameterHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %>
+	                          </div>
+	                        </div>                      
+	                      </div>
+					  </div>
                    </div>
                 </td>
                 </tr>                

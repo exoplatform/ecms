@@ -40,10 +40,6 @@
 }
 
 /*---------------------------UIViewerManagementForm------------------------------------*/
-.UICLVPortlet .UICLVConfig {
-  margin: 10px;
-}
-
 .UICLVPortlet .UICLVConfig .SelectFolderPathIcon {
   background: url('DefaultSkin/icons/AddPage.gif') no-repeat left center;
   width: 16px;
