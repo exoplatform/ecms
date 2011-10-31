@@ -78,7 +78,7 @@
 				      <%}%>
 				    </div>
 				    <div class="LineLeft"><span></span></div>
-				    <div class="ColumnName" style="width: 150px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+				    <div class="ColumnName" style="width: 125px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
 			        <%
 			          if (selectedSortType.equals("Alphabetic")) {
 			        %>
@@ -294,7 +294,7 @@
 						    <%}%>
 						  </div>
 		        </div>
-		        <div class="ColumnName" style="width: 150px;">
+		        <div class="ColumnName" style="width: 125px;">
 							<div class="NodeLabel">
 								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
 		 					</div>
