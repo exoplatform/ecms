@@ -208,11 +208,12 @@ public class UISearchForm extends UIForm {
       }
       
       uiSearchResult.clearResult();
-      
+      uiSearchResult.setKeyword(keyword);
       if (keyword == null || keyword.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_EMPTY_KEYWORD,
                                                 null,
                                                 ApplicationMessage.WARNING));
+        portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
         return;
       }
       if (!pageChecked && !documentChecked) {
@@ -276,10 +277,8 @@ public class UISearchForm extends UIForm {
                                                          queryCriteria,
                                                          itemsPerPage,
                                                          false);          
-        }
-
+        }        
         
-        uiSearchResult.setKeyword(keyword);
         uiSearchResult.setPageList(pageList);
         float timeSearch = pageList.getQueryTime() / 1000;
         uiSearchResult.setSearchTime(timeSearch);        
