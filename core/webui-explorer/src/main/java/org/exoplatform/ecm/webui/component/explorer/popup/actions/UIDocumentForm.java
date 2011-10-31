@@ -522,14 +522,16 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   
   public static void closeForm (Event<UIDocumentForm> event) throws Exception {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-    UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-    UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    event.getSource().releaseLock();
-    if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
-      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-    } else
-    uiExplorer.cancelAction();
-    uiExplorer.updateAjax(event);
+    if(uiExplorer != null) {
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      event.getSource().releaseLock();
+      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      } else
+        uiExplorer.cancelAction();
+      uiExplorer.updateAjax(event);
+    }
   }
 
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
