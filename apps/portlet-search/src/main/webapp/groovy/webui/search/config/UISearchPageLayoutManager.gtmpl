@@ -51,8 +51,8 @@
 				      <td class="FieldLabel">
 					      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION).getName()) %>
 				      </td>
-					  <td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION)); %></td>
-					  <td class="SelectTargetPageIcon" onclick="<%=uicomponent.event("SelectBasePath")%>"><span></span></td>													
+					  <td class="FieldComponent" style="padding:0px"><% uiform.renderField(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION)); %></td>
+					  <td ><span class="SelectTargetPageIcon" onclick="<%=uicomponent.event("SelectBasePath")%>"></span></td>													
 					</tr>		
 	      </table>  
       <div class="UIAction"> 
