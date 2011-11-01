@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
 import org.exoplatform.commons.utils.LazyPageList;
@@ -32,10 +33,14 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -55,6 +60,8 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIQueriesList extends UIPagingGridDecorator {
+  
+  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.ecm.webui.component.admin.queries.UIQueriesList");
 
   final static public String[] ACTIONS = {"AddQuery"} ;
   final static public String ST_ADD = "AddQueryForm" ;
@@ -149,11 +156,24 @@ public class UIQueriesList extends UIPagingGridDecorator {
   static public class DeleteActionListener extends EventListener<UIQueriesList> {
     public void execute(Event<UIQueriesList> event) throws Exception {
       UIQueriesList uiQueriesList = event.getSource();
+      UIApplication uiApp = uiQueriesList.getAncestorOfType(UIApplication.class);
       UIQueriesManager uiQueriesMan = event.getSource().getParent() ;
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       String queryName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       QueryService queryService = event.getSource().getApplicationComponent(QueryService.class) ;
-      queryService.removeQuery(queryName, userName) ;
+      try {
+        queryService.removeQuery(queryName, userName) ;
+      } catch (PathNotFoundException pe) {
+        uiApp.addMessage(new ApplicationMessage("UIQueriesList.msg.query-not-existed",
+                                                null,ApplicationMessage.WARNING));
+        return;
+      } catch (Exception ex) {
+        LOG.error("cannot remove the query", ex);
+        uiApp.addMessage(new ApplicationMessage("UIQueriesList.msg.can-not-remove",
+                                                null,ApplicationMessage.ERROR));
+        return;
+      }
+      
       event.getSource().refresh(uiQueriesList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQueriesMan) ;
     }

@@ -1843,6 +1843,8 @@
     </tooltip>
     <msg>
       <confirm-delete>Bent u echt wilt verwijderen?</confirm-delete>
+      <query-not-existed>The query does not exist anymore.</query-not-existed>
+      <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>

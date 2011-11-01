@@ -1848,6 +1848,8 @@
     </tooltip>
     <msg>
       <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <query-not-existed>La requête n'existe plus.</query-not-existed>
+      <can-not-remove>Vous ne pouvez pas supprimer cette requête. Veuillez contacter l'administrateur pour information.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
