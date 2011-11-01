@@ -54,12 +54,12 @@
 		    					if (uicomponent.isDeleteDelta(delta)) {
 		    				%>	   
 		    				<td class ="DiffDelete" style="background:#fce8d4; width: 50%">
-		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden; " content="<%=delta.getOriginal().toString()%>">
+		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto; " content="<%=delta.getOriginal().toString()%>">
 		    				    <div class="WorkContainerDiff"><span></span></div>
 		    				  </iframe>
 		    				</td>	 				
 		    				<td class = "DiffEmpty" style="background:#f1f1f1; width: 50%">
-		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden;" content="<%=delta.getRevised().toString()%>">
+		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
 		    				    <div class="WorkContainerDiffEmpty"><span></span></div>
 		    				  </iframe>
 		    				</td>	
@@ -67,12 +67,12 @@
 		    					} else if(uicomponent.isAddDelta(delta)) { 
 		    				%>
 		    				<td class = "DiffEmpty" style="background:#f1f1f1; width: 50%">
-		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden;" content="<%=delta.getOriginal().toString()%>">
+		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
 		    				    <div class="WorkContainerDiffEmpty"><span></span></div>
 		    				  </iframe>
 		    				</td>
 		    				<td class = "DiffAdd" style="background:#e7f9c8; width: 50%">
-		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden;" content="<%=delta.getRevised().toString()%>">
+		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
 		    				    <div class="WorkContainerDiff"></div>
 		    				  </iframe>
 		    				</td>	
@@ -80,12 +80,12 @@
 		    					} else {	    		
 		    				%>
 		    				<td class = "DiffModify" style="background:#fffdd3; width: 50%">
-		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden;" content="<%=delta.getOriginal().toString()%>">
+		    				  <iframe id="original${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto;" content="<%=delta.getOriginal().toString()%>">
 		    				    <div class="WorkContainerDiff"><span></span></div>
 		    				  </iframe>
 		    			  </td>	
 		    				<td class = "DiffModify" style="background:#fffdd3; width: 50%">
-		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :hidden;" content="<%=delta.getRevised().toString()%>">
+		    				  <iframe id="revised${i}" scrolling = "auto" style="border: 0px; height: 40px; width: 100%;overflow :auto;" content="<%=delta.getRevised().toString()%>">
 		    				    <div class="WorkContainerDiff"><span></span></div>
 		    				  </iframe>
 		    				</td>

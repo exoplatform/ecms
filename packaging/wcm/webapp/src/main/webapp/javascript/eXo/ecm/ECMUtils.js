@@ -337,16 +337,22 @@
   ECMUtils.prototype.insertContentToIframe = function(i) {
     var original = document.getElementById("original" + i);
     var resived = document.getElementById("revised" + i);
+    var css = '' +
+      '<style type="text/css">' +
+      'body{margin:0;padding:0;background:transparent;}' +
+      '</style>';
     try {
 	    if(resived != null) {
         resivedDoc = resived.contentWindow.document;
         resivedDoc.open() ;
+        resivedDoc.write(css);
 				resivedDoc.write(resived.getAttribute("content")) ;
 				resivedDoc.close() ;
 			}
 			if(original != null) {
   			var originaleDoc = original.contentWindow.document;
 				originaleDoc.open() ;
+        originaleDoc.write(css);
 				originaleDoc.write(original.getAttribute("content")) ;
 				originaleDoc.close() ;
 			}
