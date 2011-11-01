@@ -1,0 +1,70 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(revision 74797)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(working copy)
+@@ -49,6 +49,9 @@
+ import javax.jcr.Value;
+ import javax.jcr.lock.LockException;
+ import javax.jcr.nodetype.ConstraintViolationException;
++import javax.jcr.query.Query;
++import javax.jcr.query.QueryManager;
++import javax.jcr.query.QueryResult;
+ import javax.jcr.version.VersionException;
+ 
+ import org.exoplatform.commons.utils.ObjectPageList;
+@@ -219,9 +222,11 @@
+     String workspace = this.getWorkspaceName();
+     String userName = session.getUserID();
+     String nodePath = uiExplorer.getCurrentPath();
++    String tagPath = uiExplorer.getTagPath();
++    boolean isViewTag = uiExplorer.isViewTag();
+ //    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
+     todayNodes = timelineService.
+-          getDocumentsOfToday(nodePath, repository, workspace, sessionProvider, userName, false);
++          getDocumentsOfToday(nodePath, repository, workspace, sessionProvider, userName, false);    
+     yesterdayNodes = timelineService.
+           getDocumentsOfYesterday(nodePath, repository, workspace, sessionProvider, userName, false);
+     earlierThisWeekNodes = timelineService.
+@@ -230,13 +235,41 @@
+           getDocumentsOfEarlierThisMonth(nodePath, repository, workspace, sessionProvider, userName, false);
+     earlierThisYearNodes = timelineService.
+           getDocumentsOfEarlierThisYear(nodePath, repository, workspace, sessionProvider, userName, false);
+-    
++    if(isViewTag && tagPath != null) {
++    	if(todayNodes.size() > 0) todayNodes = filterDocumentsByTag(todayNodes, tagPath);
++    	if(yesterdayNodes.size() > 0) yesterdayNodes = filterDocumentsByTag(yesterdayNodes, tagPath);
++    	if(earlierThisWeekNodes.size() > 0) earlierThisWeekNodes = filterDocumentsByTag(earlierThisWeekNodes, tagPath);
++    	if(earlierThisMonthNodes.size() > 0) earlierThisMonthNodes = filterDocumentsByTag(earlierThisMonthNodes, tagPath);
++    	if(earlierThisYearNodes.size() > 0) earlierThisYearNodes = filterDocumentsByTag(earlierThisYearNodes, tagPath);
++    }
++    	
+     Collections.sort(todayNodes, new SearchComparator());
+     Collections.sort(yesterdayNodes, new SearchComparator());
+     Collections.sort(earlierThisWeekNodes, new SearchComparator());
+     Collections.sort(earlierThisMonthNodes, new SearchComparator());
+     Collections.sort(earlierThisYearNodes, new SearchComparator());   
+   }
++  
++  public List<Node> filterDocumentsByTag(List<Node> nodes, String path) throws Exception {
++  	List<Node> documents = new ArrayList<Node>();  	
++  	Session session = null;  	
++  	Node node = null;
++  	QueryManager queryManager = null;
++  	QueryResult queryResult = null;
++  	Query query = null;
++  	NodeIterator nodeIterator = null;
++  	for(int i=0; i<nodes.size(); i++) {
++  		node = nodes.get(i);
++  		session = node.getSession();
++  		String queryString = "SELECT * FROM exo:symlink where jcr:path like '" + path + "/%' and exo:uuid = '"+node.getUUID()+"' and exo:workspace='"+node.getSession().getWorkspace().getName()+"'";
++  		queryManager = session.getWorkspace().getQueryManager();
++      query = queryManager.createQuery(queryString, Query.SQL);
++      queryResult = query.execute();
++      nodeIterator = queryResult.getNodes();
++      if(nodeIterator.getSize() > 0) documents.add(node);      
++  	}
++  	return documents;
++  }
+ 
+   public UIPageIterator getContentPageIterator() {return pageIterator_ ; }
+ 
