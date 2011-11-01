@@ -19,6 +19,10 @@
   padding: 12px;
 }
 
+.UIJCRExplorerPortlet .UIVersionInfo .UITabPane {
+  height: auto;
+}
+
 .UIJCRExplorerPortlet .UIVersionInfo .FileContent {  
   padding: 10px 0px;
 }
