@@ -3,6 +3,7 @@
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.services.wcm.publication.WCMComposer;
+	import org.exoplatform.services.jcr.util.Text;
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -22,7 +23,7 @@
 		<div class="ContentPodcast">
 		  <table><tr>
 			 <td class="text"><%=_ctx.appRes("Podcast.view.label.podcast")%>: </td>
-			 <td class="TextDetail"><%=originalNode.getName()%></td>
+			 <td class="TextDetail"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></td>
 			</tr></table>
 		</div>
 		<div class="ContentPodcast">

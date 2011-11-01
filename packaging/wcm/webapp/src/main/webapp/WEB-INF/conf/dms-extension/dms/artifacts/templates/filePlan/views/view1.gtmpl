@@ -2,6 +2,7 @@
 	import java.text.SimpleDateFormat ;
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.ecm.webui.utils.Utils;
+	import org.exoplatform.services.jcr.util.Text;
 	
 	def node = uicomponent.getNode() ;
 	def originalNode = uicomponent.getOriginalNode();
@@ -26,7 +27,7 @@
 	<div>
 		<div class="ColIcon">
 			<div class="$iconName Icon"><span></span></div>
-			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=originalNode.getName()%></label></div>
+			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></label></div>
 			<div style="clear:left;"><span></span></div>
 		</div>
 		<table class="FilePlanContentTable">    
