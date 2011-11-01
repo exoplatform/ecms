@@ -1,0 +1,12 @@
+Index: ext/authoring/apps/src/main/webapp/groovy/authoring/UIDashboardForm.gtmpl
+===================================================================
+--- ext/authoring/apps/src/main/webapp/groovy/authoring/UIDashboardForm.gtmpl	(revision 70883)
++++ ext/authoring/apps/src/main/webapp/groovy/authoring/UIDashboardForm.gtmpl	(working copy)
+@@ -24,6 +24,7 @@
+ 	border-top: 1px solid #ccc;
+ 	padding: 2px 5px;
+ 	margin-right: 5px;
++	overflow:hidden;
+ }
+ 
+ .UIAuthoringDashboard .Header {
