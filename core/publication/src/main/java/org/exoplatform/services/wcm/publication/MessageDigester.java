@@ -28,7 +28,6 @@ public class MessageDigester {
         java.security.MessageDigest msgDigest = java.security.MessageDigest.getInstance("MD5");
         msgDigest.update(message.getBytes());
         byte[] aMessageDigest = msgDigest.digest();
-        // C'est pas beau mais on ne l'a pas décidé ;-)
         StringBuffer ticket = new StringBuffer();
         ticket = new StringBuffer();
         String tmp = null;
