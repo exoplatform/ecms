@@ -176,18 +176,21 @@
 }
 
 .UIFormGenerator .UITabPane .UITabContentContainer .RightContent .MiddleCenterViewBoxStyle .ViewBoxStyleContainer {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 525px;
 }
 
 .UIFormGenerator .UITabPane .UITabContentContainer .RightContent .TopContentBoxStyle {
   padding: 5px 0px;
+  width: 98%;
 }
 
 .UIFormGenerator .UITabPane .UITabContentContainer .RightContent .MiddleContentBoxStyle {
   background: #f3f7fb;
   border: 1px solid #dfdddd;
   padding: 10px 0px;
+  width: 98%;
 }
 
 .UIFormGenerator .UITabPane .UITabContentContainer .UIFormGrid {
