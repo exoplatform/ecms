@@ -251,8 +251,7 @@
     <header>
       <Mail>メール</Mail>
       <isBanned>Banned</isBanned>
-      <action>
-      </action>
+      <action>Actions</action>
       <UserName>ユーザ名</UserName>
       <FirstName>名前</FirstName>
       <LastName>姓</LastName>

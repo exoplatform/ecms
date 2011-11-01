@@ -261,8 +261,7 @@
     <header>
       <Mail>Email</Mail>
       <isBanned>Exclu</isBanned>
-      <action>
-      </action>
+      <action>Actions</action>
       <UserName>Nom d'utilisateur</UserName>
       <FirstName>Prénom</FirstName>
       <LastName>Nom</LastName>

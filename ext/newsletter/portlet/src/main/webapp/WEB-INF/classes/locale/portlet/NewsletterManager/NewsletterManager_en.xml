@@ -260,8 +260,7 @@
     <header>
       <Mail>Email</Mail>
       <isBanned>Banned</isBanned>
-      <action>
-      </action>
+      <action>Actions</action>
       <UserName>User Name</UserName>
       <FirstName>First Name</FirstName>
       <LastName>Last Name</LastName>

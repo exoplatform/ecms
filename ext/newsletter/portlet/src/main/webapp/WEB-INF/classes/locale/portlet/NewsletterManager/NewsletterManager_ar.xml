@@ -264,8 +264,7 @@
     <header>
       <Mail>البريد الإلكتروني</Mail>
       <isBanned>استبعاد</isBanned>
-      <action>
-      </action>
+      <action>Actions</action>
       <UserName>اسم المستخدم</UserName>
       <FirstName>اسم</FirstName>
       <LastName>اسم</LastName>
