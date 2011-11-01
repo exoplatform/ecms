@@ -356,6 +356,7 @@
       <is-not-referenable>Node '{0}' là không thể tham chiếu được.</is-not-referenable>
       <access-denied>Truy nhập bị hủy bỏ. Bạn không có quyền chỉnh sửa trên node này.</access-denied>
       <access-add-denied>Truy nhập bị hủy bỏ. Bạn không có quyền thêm mới trên node này.</access-add-denied>
+      <item-existed>Node này đã tồn tại và node đã chọn không cho phép hai node có tên giống nhau.</item-existed>      
       <removed-hidden-mixin>bạn đã xóa mixin ẩn thành công.</removed-hidden-mixin>
       <added-hidden-mixin>bạn đã thêm mixin ẩn thành công.</added-hidden-mixin>
       <not-supported>Chức năng này chỉ hỗ trợ cho kiểu tài liệu (document)</not-supported>

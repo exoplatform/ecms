@@ -54,11 +54,13 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.value.ValueFactoryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -77,8 +79,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -536,6 +538,10 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               }
             } else {
               Node node = selectedNode.getNode(name) ;
+              if (isTaxonomyChildNode(node)) {
+                LinkManager linkManager = getApplicationComponent(LinkManager.class);
+                node = linkManager.getTarget(node);
+              }              
               if(!node.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
                 Object[] args = { name } ;
                 uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args, 
@@ -647,10 +653,14 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     } catch(AccessControlException ace) {
       throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied", 
           null, ApplicationMessage.WARNING)); 
-    } catch(Exception e) {
+    } catch (ItemExistsException iee) {
+      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.item-existed",
+                                              null,
+                                              ApplicationMessage.WARNING));
+    } catch (Exception e) {
       LOG.error("An unexpected error occurs", e);
       JCRExceptionManager.process(uiApp, e);
-      return ;
+      return;
     }
   }
   
@@ -943,4 +953,21 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadForm.getParent());
     }
   }
+  
+  /**
+   * Check if a node is child node of taxonomy node or not
+   * 
+   * @param node
+   * @return
+   */
+  private boolean isTaxonomyChildNode(Node node) throws RepositoryException {
+    Node parentNode = node.getParent();
+    while (!((NodeImpl) parentNode).isRoot()) {
+      if (parentNode.isNodeType(Utils.EXO_TAXANOMY)) {
+        return true;
+      }
+      parentNode = parentNode.getParent();
+    }
+    return false;
+  }  
 }

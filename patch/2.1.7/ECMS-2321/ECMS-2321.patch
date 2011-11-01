@@ -1,0 +1,114 @@
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 72812)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -350,6 +350,7 @@
+       <is-not-referenable>Le noeud '{0}' ne supporte pas les références</is-not-referenable>
+       <access-denied>Accès interdit. Vous n'avez pas les droits d'accès sur ce noeud.</access-denied>
+       <access-add-denied>Vous n'avez pas les droits suffisants pour ajouter un document.</access-add-denied>
++      <item-existed>Il existe déjà un noeud frère à ce nom.</item-existed>      
+       <removed-hidden-mixin>Le noeud a été rendu visible!</removed-hidden-mixin>
+       <added-hidden-mixin>Le noeud a été caché!</added-hidden-mixin>
+       <not-supported>Cette fonction n'est accessible qu'au document</not-supported>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(revision 72812)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(working copy)
+@@ -356,6 +356,7 @@
+       <is-not-referenable>Node '{0}' là không thể tham chiếu được.</is-not-referenable>
+       <access-denied>Truy nhập bị hủy bỏ. Bạn không có quyền chỉnh sửa trên node này.</access-denied>
+       <access-add-denied>Truy nhập bị hủy bỏ. Bạn không có quyền thêm mới trên node này.</access-add-denied>
++      <item-existed>Node này đã tồn tại và node đã chọn không cho phép hai node có tên giống nhau.</item-existed>      
+       <removed-hidden-mixin>bạn đã xóa mixin ẩn thành công.</removed-hidden-mixin>
+       <added-hidden-mixin>bạn đã thêm mixin ẩn thành công.</added-hidden-mixin>
+       <not-supported>Chức năng này chỉ hỗ trợ cho kiểu tài liệu (document)</not-supported>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 72812)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -351,6 +351,7 @@
+       <is-not-referenable>Node '{0}' is not referenceable</is-not-referenable>
+       <access-denied>Access denied. You haven't got edit permission in this node.</access-denied>
+       <access-add-denied>Access denied. You haven't got 'Add' permission in this node.</access-add-denied>
++      <item-existed>The node already exists and same name sibling is not allowed.</item-existed>      
+       <removed-hidden-mixin>You removed hidden mixin successfully!</removed-hidden-mixin>
+       <added-hidden-mixin>You added hidden mixin successfully!</added-hidden-mixin>
+       <not-supported>This function supported only for document type</not-supported>
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(revision 72812)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(working copy)
+@@ -54,11 +54,13 @@
+ import org.exoplatform.services.cms.i18n.MultiLanguageService;
+ import org.exoplatform.services.cms.impl.DMSConfiguration;
+ import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
++import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.access.PermissionType;
+ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
++import org.exoplatform.services.jcr.impl.core.NodeImpl;
+ import org.exoplatform.services.jcr.impl.core.value.ValueFactoryImpl;
+ import org.exoplatform.services.listener.ListenerService;
+ import org.exoplatform.services.log.ExoLogger;
+@@ -77,8 +79,8 @@
+ import org.exoplatform.webui.core.UIPopupWindow;
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.event.Event;
++import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.event.EventListener;
+-import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.exception.MessageException;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
+@@ -536,6 +538,10 @@
+               }
+             } else {
+               Node node = selectedNode.getNode(name) ;
++              if (isTaxonomyChildNode(node)) {
++                LinkManager linkManager = getApplicationComponent(LinkManager.class);
++                node = linkManager.getTarget(node);
++              }              
+               if(!node.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
+                 Object[] args = { name } ;
+                 uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args, 
+@@ -647,10 +653,14 @@
+     } catch(AccessControlException ace) {
+       throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied", 
+           null, ApplicationMessage.WARNING)); 
+-    } catch(Exception e) {
++    } catch (ItemExistsException iee) {
++      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.item-existed",
++                                              null,
++                                              ApplicationMessage.WARNING));
++    } catch (Exception e) {
+       LOG.error("An unexpected error occurs", e);
+       JCRExceptionManager.process(uiApp, e);
+-      return ;
++      return;
+     }
+   }
+   
+@@ -943,4 +953,21 @@
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadForm.getParent());
+     }
+   }
++  
++  /**
++   * Check if a node is child node of taxonomy node or not
++   * 
++   * @param node
++   * @return
++   */
++  private boolean isTaxonomyChildNode(Node node) throws RepositoryException {
++    Node parentNode = node.getParent();
++    while (!((NodeImpl) parentNode).isRoot()) {
++      if (parentNode.isNodeType(Utils.EXO_TAXANOMY)) {
++        return true;
++      }
++      parentNode = parentNode.getParent();
++    }
++    return false;
++  }  
+ }

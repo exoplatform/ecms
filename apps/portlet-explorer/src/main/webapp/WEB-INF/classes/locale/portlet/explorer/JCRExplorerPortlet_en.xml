@@ -351,6 +351,7 @@
       <is-not-referenable>Node '{0}' is not referenceable</is-not-referenable>
       <access-denied>Access denied. You haven't got edit permission in this node.</access-denied>
       <access-add-denied>Access denied. You haven't got 'Add' permission in this node.</access-add-denied>
+      <item-existed>The node already exists and same name sibling is not allowed.</item-existed>      
       <removed-hidden-mixin>You removed hidden mixin successfully!</removed-hidden-mixin>
       <added-hidden-mixin>You added hidden mixin successfully!</added-hidden-mixin>
       <not-supported>This function supported only for document type</not-supported>
