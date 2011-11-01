@@ -1,0 +1,139 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java	(revision 72078)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java	(working copy)
+@@ -16,12 +16,13 @@
+  */
+ package org.exoplatform.ecm.webui.component.explorer.search;
+ 
++import javax.jcr.RepositoryException;
+ import javax.jcr.query.Query;
+ import javax.jcr.query.QueryManager;
+ import javax.jcr.query.QueryResult;
+ 
+ import org.apache.commons.lang.StringUtils;
+-import org.exoplatform.ecm.jcr.SearchValidator;
++import org.exoplatform.ecm.jcr.SimpleSearchValidator;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+@@ -29,8 +30,8 @@
+ import org.exoplatform.webui.core.UIApplication;
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.event.Event;
+-import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.event.Event.Phase;
++import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormInputInfo;
+ import org.exoplatform.webui.form.UIFormStringInput;
+@@ -59,7 +60,7 @@
+   
+   public UIContentNameSearch() throws Exception {
+     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));
+-    addChild(new UIFormStringInput(KEYWORD,null).addValidator(SearchValidator.class).addValidator(MandatoryValidator.class));
++    addChild(new UIFormStringInput(KEYWORD,null).addValidator(SimpleSearchValidator.class).addValidator(MandatoryValidator.class));
+   }
+   
+   public void setLocation(String location) {
+@@ -71,22 +72,9 @@
+       UIContentNameSearch contentNameSearch = event.getSource();
+       UIECMSearch uiECMSearch = contentNameSearch.getAncestorOfType(UIECMSearch.class);
+       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
++      UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
+       try {      
+         String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();        
+-        String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
+-        UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
+-        if (keyword == null || keyword.length() ==0) {
+-          application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null));
+-          event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+-          return;
+-        }
+-        for(String filterChar : arrFilterChar) {
+-          if(keyword.indexOf(filterChar) > -1) {
+-            application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null));
+-            event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+-            return;
+-          }
+-        }
+         keyword = keyword.trim();
+         UIJCRExplorer explorer = contentNameSearch.getAncestorOfType(UIJCRExplorer.class);
+         String currentNodePath = explorer.getCurrentNode().getPath();
+@@ -108,6 +96,9 @@
+         uiSearchResult.setSearchTime(time);
+         uiECMSearch.setRenderedChild(UISearchResult.class);
+         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
++      } catch (RepositoryException reEx) {        
++    	application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null, ApplicationMessage.WARNING));
++        return;
+       } catch (Exception e) {
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(null);
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java	(revision 72078)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java	(working copy)
+@@ -21,16 +21,17 @@
+ import java.util.ResourceBundle;
+ 
+ import javax.jcr.Node;
++import javax.jcr.RepositoryException;
+ import javax.jcr.query.Query;
+ import javax.jcr.query.QueryManager;
+ import javax.jcr.query.QueryResult;
+ 
+ import org.apache.commons.lang.StringUtils;
+-import org.exoplatform.services.log.Log;
+ import org.exoplatform.ecm.jcr.model.Preference;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+ import org.exoplatform.services.log.ExoLogger;
++import org.exoplatform.services.log.Log;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.web.application.RequestContext;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+@@ -39,8 +40,8 @@
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.core.model.SelectItemOption;
+ import org.exoplatform.webui.event.Event;
+-import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.event.Event.Phase;
++import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormInputInfo;
+ import org.exoplatform.webui.form.UIFormSelectBox;
+@@ -264,20 +265,8 @@
+         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+         return;
+       }
+-      uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
++      uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());      
+       
+-      //TODO need review this code. should use validator for text field
+-      String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
+-      if(text != null) {
+-        for(String filterChar : arrFilterChar) {
+-          if(text.indexOf(filterChar) > -1) {
+-            uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, 
+-                ApplicationMessage.WARNING));
+-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+-            return;
+-          }
+-        }
+-      }
+       Preference pref = uiExplorer.getPreference();
+       String queryType = pref.getQueryType();
+       String statement;
+@@ -312,7 +301,10 @@
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(queryResult);
+         uiSearchResult.updateGrid(true);
+-      } catch(Exception e) {
++      } catch (RepositoryException reEx) {
++        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
++        return;
++      }catch(Exception e) {
+         LOG.error("Unexpected error", e);
+         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null, 
+                                                 ApplicationMessage.WARNING));

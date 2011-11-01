@@ -21,16 +21,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -39,8 +40,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -264,20 +265,8 @@ public class UISimpleSearch extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
+      uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());      
       
-      //TODO need review this code. should use validator for text field
-      String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
-      if(text != null) {
-        for(String filterChar : arrFilterChar) {
-          if(text.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, 
-                ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
-      }
       Preference pref = uiExplorer.getPreference();
       String queryType = pref.getQueryType();
       String statement;
@@ -312,7 +301,10 @@ public class UISimpleSearch extends UIForm {
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
         uiSearchResult.updateGrid(true);
-      } catch(Exception e) {
+      } catch (RepositoryException reEx) {
+        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
+        return;
+      }catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null, 
                                                 ApplicationMessage.WARNING));
