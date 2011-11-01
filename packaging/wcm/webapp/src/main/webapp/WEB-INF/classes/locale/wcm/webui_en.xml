@@ -191,6 +191,7 @@
       <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
+      <time-to-late>The searching time is too late.</time-to-late>
       <empty-field>Please input a valid keyword for search.</empty-field>
       <invalid-format>Invalid format datetime in field '{0}'.</invalid-format>
       <invalid-date>"To Date" must be greater than "From Date"</invalid-date>

@@ -191,6 +191,7 @@
       <SearchWebContent>検索</SearchWebContent>
     </action>
     <msg>
+      <time-to-late>The searching time is too late.</time-to-late>
       <empty-field>正しい検索キーワードを入力してください</empty-field>
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
       <invalid-date>終了日は開始日より大きい必要があります</invalid-date>

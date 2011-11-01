@@ -191,6 +191,7 @@
       <SearchWebContent>Tìm</SearchWebContent>
     </action>
     <msg>
+      <time-to-late>The searching time is too late.</time-to-late>
       <empty-field>Hãy nhập từ khóa để tìm kiếm</empty-field>
       <invalid-format>Định dạng ngày tháng không đúng ở trường '{0}'</invalid-format>
       <invalid-date>"Đến ngày" phải lớn hơn "Từ ngày"</invalid-date>
