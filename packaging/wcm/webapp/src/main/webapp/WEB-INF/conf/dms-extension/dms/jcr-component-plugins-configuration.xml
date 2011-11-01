@@ -113,6 +113,12 @@
 	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.AddDateTimeAction</string></field>
 	                </object>
 	              </value>
+	              <value>
+	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+	                  <field  name="eventTypes"><string>addNode</string></field>	                  
+	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.AddFileDocumentAction</string></field>
+	                </object>
+	              </value>
 								<value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>removeNode</string></field>	                  
