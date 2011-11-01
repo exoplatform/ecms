@@ -17,15 +17,20 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
@@ -38,7 +43,10 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  */
 public class FavoriteServiceImpl implements FavoriteService {
 
-  private String FAVORITE_ALIAS = "userPrivateFavorites";
+  private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
+  private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
+  private static final String NT_UNSTRUCTURED = "nt:unstructured";  
+  private static final String FAVORITE_ALIAS = "userPrivateFavorites";
 
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
@@ -58,7 +66,12 @@ public class FavoriteServiceImpl implements FavoriteService {
   	// check if node is symlink
   	if (linkManager.isLink(node)) return;
   	// check if node has already been favorite node of current user
-    Node userFavoriteNode = getUserFavoriteFolder(userName);
+  	Node userFavoriteNode = null;
+  	try {
+  		userFavoriteNode = getUserFavoriteFolder(userName);
+  	} catch (PathNotFoundException e) {
+  		userFavoriteNode = createFavoriteFolder(userName);
+  	}
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
     	Node childNode = nodeIter.nextNode();
@@ -127,7 +140,13 @@ public class FavoriteServiceImpl implements FavoriteService {
     if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
     	node = lnkManager.getTarget(node);
     }
-    Node userFavoriteNode = getUserFavoriteFolder(userName);
+    
+    Node userFavoriteNode = null;
+    try {
+    	userFavoriteNode = getUserFavoriteFolder(userName);
+    }catch (PathNotFoundException e) {
+    	return false;
+    }
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
     	Node childNode = nodeIter.nextNode();
@@ -150,5 +169,25 @@ public class FavoriteServiceImpl implements FavoriteService {
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
   }
-  
+
+  private Node createFavoriteFolder(String userName) throws Exception {
+	// Get default favorite path
+  	Node userNode = 
+        nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+    String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
+
+    // Create favorite path
+	Node userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
+	
+	// Add Mixin types
+	userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
+	userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
+	
+	// Add permission
+    Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
+    permissionsMap.put(userName, PermissionType.ALL);
+    ((ExtendedNode)userFavoriteNode).setPermissions(permissionsMap);
+    
+    return userFavoriteNode;
+  }
 }

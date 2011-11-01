@@ -35,6 +35,7 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -95,7 +96,7 @@ public class TrashServiceImpl implements TrashService {
 
       ManageableRepository manageableRepository 
       = repositoryService.getRepository(repository);
-      Session trashSession = sessionProvider.getSession(trashWorkspace,
+      Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(trashWorkspace,
           manageableRepository);
       String actualTrashPath = trashPath	+ (trashPath.endsWith("/") ? "" : "/") + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
