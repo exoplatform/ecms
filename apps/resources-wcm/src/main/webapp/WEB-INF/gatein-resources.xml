@@ -40,11 +40,6 @@
     </param>
     <param>
       <js-module>eXo.ecm.BackPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/UIWCMTreeView.js</js-path>
-      <js-priority>60</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.ecm.BackPrivate</js-module>
       <js-path>/javascript/eXo/wcm/backoffice/private/Newsletter.js</js-path>
       <js-priority>60</js-priority>
     </param>
@@ -72,14 +67,6 @@
       <js-path>/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js</js-path>
       <js-priority>65</js-priority>
     </param>
-    <!-- 
-    <param>
-      <js-module>eXo.ecm.FrontPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</js-path>
-      <js-priority>70</js-priority>
-    </param>
-     -->
   </javascript>
-  
 </gatein-resources>
 
