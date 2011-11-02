@@ -29,6 +29,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.filter.ActionFilter;
@@ -41,6 +42,7 @@ import javax.portlet.filter.RenderFilter;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -56,28 +58,36 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
   private static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
   private static final String NO_CACHE = "nocache";
   
-   public PortletCacheFilter()
-   {
-   }
+  public PortletCacheFilter()
+  {
+  }
 
-   public void init(FilterConfig cfg) throws PortletException
-   {
-   }
+  public void init(FilterConfig cfg) throws PortletException
+  {
+  }
 
-   public void destroy()
-   {
-   }
+  public void destroy()
+  {
+  }
 
-   public void doFilter(ActionRequest req, ActionResponse resp, FilterChain chain) throws IOException, PortletException
-   {
-      chain.doFilter(req, resp);
-   }
+  public void doFilter(ActionRequest req, ActionResponse resp, FilterChain chain) throws IOException, PortletException
+  {
+    chain.doFilter(req, resp);
+  }
 
    public void doFilter(EventRequest req, EventResponse resp, FilterChain chain) throws IOException, PortletException
    {
       chain.doFilter(req, resp);
    }
 
+   /**
+    * @return true if current context is PortalEditMode
+    * @author vinh_nguyen
+    */
+   private boolean isPortalEditMode() {
+     return Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE;
+   }
+   
    public void doFilter(RenderRequest req, RenderResponse resp, FilterChain chain) throws IOException, PortletException
    {
         String exoCacheUsageRequestParam = Util.getPortalRequestContext().getRequestParameter(EXO_CACHE);
@@ -85,7 +95,11 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
         Boolean quickEdit = (Boolean) ctx.getRequest().getSession().getAttribute(TURN_ON_QUICK_EDIT);
         if (quickEdit==null) quickEdit=false;
         Boolean sharedCache = TRUE.equals(req.getPreferences().getValue(SHARED_CACHE, FALSE));
-        if (!NO_CACHE.equals(exoCacheUsageRequestParam) && (req.getRemoteUser() == null || (!quickEdit && sharedCache))) {     
+        PortletMode portletMode = req.getPortletMode();
+        
+        if (!NO_CACHE.equals(exoCacheUsageRequestParam) && 
+            (req.getRemoteUser() == null || (!quickEdit && sharedCache && !isPortalEditMode())) &&
+            !PortletMode.EDIT.equals(portletMode)) {     
          Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
          //
          Locale locale = ctx.getLocale();
