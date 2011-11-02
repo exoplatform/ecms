@@ -207,6 +207,8 @@
       <version-exception><![CDATA[Dieser Knoten wurde nicht gepr&uuml;ft bzw. Vorg&auml;nger des Knotens wurde nicht &uuml;berpr&uuml;ft.]]></version-exception>
       <lock-exception>Der Knoten ist gesperrt. Entsperren vor Wiederbenennung.</lock-exception>
       <constraintViolation-exception><![CDATA['{0}' ist nicht als Nachfolgeknotentyp f&uuml;r Vorl&auml;uferknotentyp erlaubt]]></constraintViolation-exception>
+      <unknown-prefix>Prefix '{0} "wurde noch nicht registriert</unknown-prefix>
+      <rename-error>Fehler beim Umbenennen von diesem Knoten. Bitte prüfen Sie erneut.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>

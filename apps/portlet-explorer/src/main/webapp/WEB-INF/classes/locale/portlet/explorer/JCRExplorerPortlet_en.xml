@@ -226,6 +226,8 @@
       <version-exception>This node or the ancestor of this node is not checked out.</version-exception>
       <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
       <constraintViolation-exception>An error occurred while renaming the node '{0}'. Please check again.</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' has not been registered yet.</unknown-prefix>
+      <rename-error>An error occurred while renaming this node. Please check again.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>

@@ -225,6 +225,8 @@
       <version-exception>このノードはチェックアウトされていない可能性があります。</version-exception>
       <lock-exception>このノードはロックされています。このノードを置き換える前にロックを解除してください。</lock-exception>
       <constraintViolation-exception>'{0}' は親ノードタイプのため子ノードタイプとしてゆるされていません。</constraintViolation-exception>
+      <unknown-prefix>接頭辞'{0}'はまだ登録されていません。</unknown-prefix>
+      <rename-error>エラーは、名前の変更は、このノード中に発生しました。もう一度確認してください。</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>

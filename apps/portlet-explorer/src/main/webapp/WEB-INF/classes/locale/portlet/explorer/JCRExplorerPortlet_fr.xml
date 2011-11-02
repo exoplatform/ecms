@@ -225,6 +225,8 @@
       <version-exception>Vous devez d'abord effectuer un check out</version-exception>
       <lock-exception>Ce noeud est verrouillé. Veuillez le déverrouiller avant de le renommer.</lock-exception>
       <constraintViolation-exception>'{0}' n'est pas autorisé en tant que type noeud fils</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' n'a pas encore été enregistrée.</unknown-prefix>
+      <rename-error>Une erreur s'est produite lors de renommer ce noeud. S'il vous plaît vérifier à nouveau.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>

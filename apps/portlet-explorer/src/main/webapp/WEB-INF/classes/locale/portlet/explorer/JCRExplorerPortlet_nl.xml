@@ -225,6 +225,8 @@
 			</lock-exception>
 			<constraintViolation-exception>'{0}' is niet toegelaten als child's
 				node type voor parent node type</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' is nog niet geregistreerd.</unknown-prefix>
+      <rename-error>Er is een fout opgetreden bij het hernoemen van dit knooppunt. Controleer nogmaals.</rename-error>
 		</msg>
 	</UIRenameForm>
 	<UIPopupWindow>

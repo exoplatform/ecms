@@ -205,6 +205,8 @@
       <version-exception>.هذه العقدة أو سلف منها لم يتم مراجعتها بعد</version-exception>
       <lock-exception>هذه العقدة مقفلة. حرر العقدة قبل إعادة التسمية.</lock-exception>
       <constraintViolation-exception>.غير مسموح بإضافة النوع المختار من العقد '{0}' تحت هذه العقدة</constraintViolation-exception>
+      <unknown-prefix>البادئة "{0}' لم يسجل حتى الآن</unknown-prefix>
+      <rename-error>حدث خطأ أثناء إعادة تسمية هذه العقدة. يرجى التحقق مرة أخرى.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>

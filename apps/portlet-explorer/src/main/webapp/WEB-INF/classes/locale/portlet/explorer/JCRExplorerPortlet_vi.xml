@@ -231,6 +231,8 @@
       <version-exception>Node này chưa được check out hoặc node cha của nó chưa được check out.</version-exception>
       <lock-exception>Node này đã bị khóa. Mở khóa trước khi đổi tên node này.</lock-exception>
       <constraintViolation-exception>'{0}' không cho phép đổi tên. Vui lòng kiểm tra điều kiện rằng buộc.</constraintViolation-exception>
+      <unknown-prefix>Prefix '{0}' chưa được đăng ký.</unknown-prefix>
+      <rename-error>Lỗi xảy ra trong quá trình thay đổi tên. Vui lòng kiểm tra lại.></rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
