@@ -1,0 +1,34 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java	(revision 70674)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java	(working copy)
+@@ -26,6 +26,7 @@
+ 
+ import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
++import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+ import org.exoplatform.ecm.webui.component.explorer.search.UIContentNameSearch;
+@@ -147,7 +148,8 @@
+       String wsName = uiSavedSearches.getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();      
+       UIApplication uiApp = uiSavedSearches.getAncestorOfType(UIApplication.class);
+       QueryService queryService = uiSavedSearches.getApplicationComponent(QueryService.class);
+-      UIComponent uiSearch = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
++      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
++      UIComponent uiSearch = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+       UISearchResult uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
+       QueryResult queryResult = null;
+       try {        
+@@ -167,7 +169,10 @@
+         uiSearchResult.setQueryResults(queryResult);
+         uiSearchResult.updateGrid(true);
+       }
+-      ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class);
++      UIDrivesArea uiDrivesArea = uiWorkingArea.getChild(UIDrivesArea.class);
++      if (uiDrivesArea != null) uiDrivesArea.setRendered(false);
++      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);      
++      ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class); 
+     }
+   }
+   
