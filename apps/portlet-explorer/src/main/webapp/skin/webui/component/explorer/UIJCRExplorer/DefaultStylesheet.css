@@ -44,14 +44,13 @@
 	width: 5px;
 	cursor:col-resize;
 	height: 475px;
-	position: relative;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeButton{
 	background: url('DefaultSkin/background/ResizeButton.gif') no-repeat center center;
 	width: 5px;
 	height: 10px;
-	position : absolute;
+	position: relative;
 	margin : auto;
 	cursor : pointer;
 }

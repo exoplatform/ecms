@@ -1,0 +1,27 @@
+Index: apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css	(revision 73868)
++++ apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css	(working copy)
+@@ -44,14 +44,13 @@
+ 	width: 5px;
+ 	cursor:col-resize;
+ 	height: 475px;
+-	position: relative;
+ }
+ 
+ .UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeButton{
+ 	background: url('DefaultSkin/background/ResizeButton.gif') no-repeat center center;
+ 	width: 5px;
+ 	height: 10px;
+-	position : absolute;
++	position: relative;
+ 	margin : auto;
+ 	cursor : pointer;
+ }
+@@ -1336,4 +1335,4 @@
+ }
+ .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
+  overflow: hidden;
+-}
++}
+\ No newline at end of file
