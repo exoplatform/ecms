@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.jcr.Node;
+import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -313,8 +314,24 @@ public class UISearchResult extends UIContainer {
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-    return node.hasProperty("exo:title") ? node.getProperty("exo:title").getValue().getString()
-                                        : node.getName().replaceFirst("mop:", "");
+    if (node.hasProperty("exo:title")) {
+      return node.getProperty("exo:title").getValue().getString();
+    } else {
+      Session session = node.getSession();
+      Node mopLink = (Node) session.getItem(node.getPath() + "/mop:link");
+      if (mopLink != null && mopLink.hasProperty("mop:page")) {
+        String mopPageLink = mopLink.getProperty("mop:page").getValue().getString();
+        Node mopPage = (Node) session.getItem(mopPageLink);
+        if (mopPage != null && mopPage.hasProperty("gtn:name")) {
+          return mopPage.getProperty("gtn:name").getValue().getString();
+        } else {
+          return node.getName().replaceFirst("mop:", "");
+        }
+      } else {
+        return node.getName().replaceFirst("mop:", "");
+      }
+      
+    }
   }
 
   /**

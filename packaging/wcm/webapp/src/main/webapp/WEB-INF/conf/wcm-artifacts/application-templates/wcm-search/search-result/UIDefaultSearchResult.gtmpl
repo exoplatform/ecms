@@ -104,6 +104,7 @@
      }
      def editor = resultNode.getEditor();
      def itemExcerpt = resultNode.getExcerpt();
+     String description = resultNode.getDescription();
      def itemScore = resultNode.getScore();
      %>
       <div class="SearchItem">
@@ -113,7 +114,9 @@
        <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
        		<div class="ItemExcerpt" style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: $editor</div>
           $itemExcerpt
-       <%}%>
+       <%} else if (description != null && description.trim().length() > 0){ %>
+          <div><span>$description</span></div>
+       <%}%>       
        <div class="ItemInfo">
         <span class="ItemUrl"><%=itemUrl%></span> - <span class="ItemScore"><%= itemScore %></span>
         <%

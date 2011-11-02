@@ -196,6 +196,19 @@ public class ResultNode implements Node{
     }
     return null;
   }
+  
+  /**
+   * Get the meta tag SEO's description of page node
+   * 
+   * @return
+   * @throws Exception
+   */
+  public String getDescription() throws Exception {
+    if (getNode().hasProperty("exo:metaDescription")) {
+      return getNode().getProperty("exo:metaDescription").getString();
+    }
+    return null;
+  }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#addMixin(java.lang.String)
