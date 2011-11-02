@@ -76,7 +76,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       UIJCRExplorerPortlet uiFEPortlet = getParent();
       PortletPreferences preference = uiFEPortlet.getPortletPreferences();
       initExplorerPreference(preference);
-      String driveName = preference.getValue("driveName", "");
+      String driveName = preference.getValue(UIJCRExplorerPortlet.DRIVE_NAME, "");
+      String nodePath = preference.getValue(UIJCRExplorerPortlet.PARAMETERIZE_PATH, "");
       String repoName = preference.getValue(Utils.REPOSITORY, "");
       RepositoryService rservice = getApplicationComponent(RepositoryService.class);
       ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
@@ -123,6 +124,10 @@ public class UIJcrExplorerContainer extends UIContainer {
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
       if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
+      if (nodePath != null && nodePath.trim().length() > 0 && !"/".equals(nodePath.trim())) {
+        homePath = homePath + "/" + nodePath;
+      }
+      homePath = homePath.replaceAll("//", "/");
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
   
       uiJCRExplorer.setDriveData(drive);
