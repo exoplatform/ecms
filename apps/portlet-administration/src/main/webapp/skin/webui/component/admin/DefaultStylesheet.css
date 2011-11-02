@@ -312,7 +312,7 @@
 }
 
 .UIECMAdminPortlet .UIFormGrid .FieldLabel {
-  width: 110px;
+  width: 138px;
 }
 
 .UIECMAdminPortlet .ECMLayoutSeparator {
@@ -571,7 +571,6 @@
 
 .UIECMAdminPortlet .UIScriptFilterForm .UIForm .UIFormGrid td.FieldComponent {
 	padding: 7px 4px 0px 4px;
-	line-height: 25px;
 }
 
 .UIECMScripts .ECMScriptForm .HorizontalLayout {
@@ -587,6 +586,7 @@
 .UIECMAdminPortlet .UIECMScripts .UIScriptFilterForm .UIFormGrid .FieldLabel {
   width: 110px;
   padding: 0px 4px 0px 10px;
+		vertical-align: middle;
 }
 
 .UIECMAdminPortlet .UIECMScripts .UIScriptFilterForm .UIFormGrid .FieldComponent select {
