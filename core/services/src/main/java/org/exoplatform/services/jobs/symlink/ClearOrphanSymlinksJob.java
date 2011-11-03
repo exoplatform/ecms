@@ -1,7 +1,9 @@
 package org.exoplatform.services.jobs.symlink;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
@@ -27,9 +29,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.quartz.Job;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;//import org.exoplatform.services.scheduler.impl.JobSchedulerServiceImpl;
+import org.quartz.JobExecutionException;
 
 /**
  * Created by The eXo Platform SARL
@@ -54,7 +55,8 @@ public class ClearOrphanSymlinksJob implements Job {
     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
     
-    Session session = null;    
+    SessionProvider sessionProvider = null;
+    Session session = null;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
@@ -68,7 +70,7 @@ public class ClearOrphanSymlinksJob implements Job {
             break;
           }
       if (trashWorkspace == null) return;
-      SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
       
       for (String workspace : workspaces) {
@@ -79,18 +81,25 @@ public class ClearOrphanSymlinksJob implements Job {
           QueryResult queryResult = query.execute();
           NodeIterator nodeIterator = queryResult.getNodes();
           List<Node> deleteNodeList = new ArrayList<Node>();
+          Set<Session> targetSession = new HashSet<Session>();
           while (nodeIterator.hasNext()) {
             Node symlinkNode = nodeIterator.nextNode();
             if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
               continue;
             //get list of node to delete
+            Node targetNode = null;
             try {
-              Node targetNode = linkManager.getTarget(symlinkNode, true);
+              targetNode = linkManager.getTarget(symlinkNode, true);
               if (targetNode.isNodeType(EXO_RESTORELOCATION))
                 deleteNodeList.add(symlinkNode);
             } catch (ItemNotFoundException e) {
               deleteNodeList.add(symlinkNode);
-            } catch (RepositoryException e) {}
+            } catch (RepositoryException e) {
+              
+            } finally {
+              targetSession.add(targetNode.getSession());
+            }
+            
             //move the nodes in list to trash
           }
           for (Node node : deleteNodeList) {
@@ -102,15 +111,20 @@ public class ClearOrphanSymlinksJob implements Job {
               log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
             }
           }
+          for (Session ses : targetSession) {
+            if (ses != null && ses.isLive()) {
+              ses.logout();
+            }
+          }          
         } catch (RepositoryException e) {
           log.error("ClearOrphanSymlinksJob: Error when deleting orphan symlinks in workspace: " + workspace, e);
         }
       }
+
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
     } finally {
-      if (session != null && session.isLive())
-        session.logout();
+      sessionProvider.close();
     }
     log.info("ClearOrphanSymlinksJob: Done!");
   }

@@ -130,23 +130,28 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    */
   private void createLiveSharePortalFolders() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = 
-      (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
-      String repoName = locationEntry.getRepository();
-      try {
-        ManageableRepository repository = repositoryService.getRepository(repoName);      
-        Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
-        Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
-        String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
-        if(!livePortalsStorage.hasNode(liveSharedPortalName)) {
-          livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
-          session.save(); 
-        }        
-      } catch (Exception e) {
-        log.error("Error when try to create share portal folder for repository: "+ repoName, e);
-      }            
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    SessionProvider sessionProvider = null;
+    try {
+      sessionProvider = SessionProvider.createSystemProvider();
+      for (NodeLocation locationEntry : wcmConfigService.getAllLivePortalsLocation()) {
+        String repoName = null;
+        try {
+          repoName = locationEntry.getRepository();
+          ManageableRepository repository = repositoryService.getRepository(repoName);
+          Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
+          Node livePortalsStorage = (Node) session.getItem(locationEntry.getPath());
+          String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
+          if (!livePortalsStorage.hasNode(liveSharedPortalName)) {
+            livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
+            session.save();
+          }
+        } catch (Exception e) {
+          log.error("Error when try to create share portal folder for repository: " + repoName, e);
+        }
+      }
+    } finally {
+      sessionProvider.close();
     }
   }
   

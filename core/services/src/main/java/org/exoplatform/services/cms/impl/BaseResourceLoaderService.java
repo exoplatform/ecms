@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 public abstract class BaseResourceLoaderService implements Startable{
@@ -226,11 +227,10 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public InputStream getResourceAsStream(String resourceName, String repository) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node resourcesHome = getResourcesHome(repository,sessionProvider);
     Node resourceNode = resourcesHome.getNode(resourceName);
     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-    sessionProvider.close();
     return stream;
   }  
 

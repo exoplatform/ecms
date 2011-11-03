@@ -37,6 +37,7 @@ import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -208,7 +209,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
       metadataHome.save();
     }    
     session.save(); 
-    session.logout();
     return path;
   }
 
@@ -243,7 +243,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     metadata.remove();
     metadataHome.save();
     session.save();
-    session.logout();
   } 
 
   /**
@@ -303,7 +302,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     if(!hasMetadata(name, repository)) return null;
     if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
     else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
-    session.logout();
     return templateService.getTemplate(template);
   }
 
@@ -320,7 +318,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     } else {
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
-    session.logout();
     return template.getPath();
   }
 
@@ -337,7 +334,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     } else {
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
-    session.logout();
     return templateService.getTemplateRoles(template);
   }  
 
@@ -348,10 +344,8 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     Session session = getSession(repository);
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     if(metadataHome.hasNode(name)) {
-      session.logout();
       return true; 
     }
-    session.logout();
     return false; 
   }
 
@@ -380,9 +374,10 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    * @return              Session
    * @throws Exception
    */
-  private Session getSession(String repository) throws Exception{ 
+  private Session getSession(String repository) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
-    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
   }
 }

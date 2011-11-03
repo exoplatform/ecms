@@ -42,7 +42,6 @@ import javax.portlet.PortletPreferences;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.TypeNodeComparator;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -69,7 +68,6 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.link.ItemLinkAware;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
@@ -80,6 +78,8 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -87,7 +87,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -346,9 +345,9 @@ public class UIJCRExplorer extends UIContainer {
   @Deprecated
   public void setAddressPath(Set<String> s) {/*addressPath_ = s;*/} ;
 
-  public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }  
+  public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }  
 
-  public SessionProvider getSystemProvider() { return SessionProviderFactory.createSystemProvider(); }  
+  public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }  
 
   /**
    * @return the session of the current node (= UIJCRExplorer.getCurrentNode())

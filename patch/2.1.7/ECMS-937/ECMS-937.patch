@@ -1,0 +1,467 @@
+Index: ext/newsletter/services/src/main/java/org/exoplatform/services/wcm/newsletter/NewsletterInitializationService.java
+===================================================================
+--- ext/newsletter/services/src/main/java/org/exoplatform/services/wcm/newsletter/NewsletterInitializationService.java	(revision 74681)
++++ ext/newsletter/services/src/main/java/org/exoplatform/services/wcm/newsletter/NewsletterInitializationService.java	(working copy)
+@@ -89,8 +89,9 @@
+    */
+   public void start() {
+     log.info("Starting NewsletterInitializationService ... ");
++    SessionProvider sessionProvider = null;
+     try {
+-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
++      sessionProvider= SessionProvider.createSystemProvider();
+       Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalNames.get(0));
+       Session session = dummyNode.getSession();
+       Node serviceFolder = session.getRootNode().getNode("exo:services");
+@@ -134,6 +135,8 @@
+       }
+     } catch (Throwable e) {
+       log.info("Starting NewsletterInitializationService fail because of ", e);
++    } finally {
++      sessionProvider.close();
+     }
+   }
+ 
+Index: core/services/src/main/java/org/exoplatform/services/cms/impl/BaseResourceLoaderService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/impl/BaseResourceLoaderService.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/cms/impl/BaseResourceLoaderService.java	(working copy)
+@@ -36,6 +36,7 @@
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+ import org.exoplatform.services.wcm.core.NodetypeConstant;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.picocontainer.Startable;
+ 
+ public abstract class BaseResourceLoaderService implements Startable{
+@@ -226,11 +227,10 @@
+    * @throws Exception
+    */
+   public InputStream getResourceAsStream(String resourceName, String repository) throws Exception {
+-    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
++    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+     Node resourcesHome = getResourcesHome(repository,sessionProvider);
+     Node resourceNode = resourcesHome.getNode(resourceName);
+     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
+-    sessionProvider.close();
+     return stream;
+   }  
+ 
+Index: core/services/src/main/java/org/exoplatform/services/cms/metadata/impl/MetadataServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/metadata/impl/MetadataServiceImpl.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/cms/metadata/impl/MetadataServiceImpl.java	(working copy)
+@@ -37,6 +37,7 @@
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
++import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+@@ -208,7 +209,6 @@
+       metadataHome.save();
+     }    
+     session.save(); 
+-    session.logout();
+     return path;
+   }
+ 
+@@ -243,7 +243,6 @@
+     metadata.remove();
+     metadataHome.save();
+     session.save();
+-    session.logout();
+   } 
+ 
+   /**
+@@ -303,7 +302,6 @@
+     if(!hasMetadata(name, repository)) return null;
+     if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
+     else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+-    session.logout();
+     return templateService.getTemplate(template);
+   }
+ 
+@@ -320,7 +318,6 @@
+     } else {
+       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+     }
+-    session.logout();
+     return template.getPath();
+   }
+ 
+@@ -337,7 +334,6 @@
+     } else {
+       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+     }
+-    session.logout();
+     return templateService.getTemplateRoles(template);
+   }  
+ 
+@@ -348,10 +344,8 @@
+     Session session = getSession(repository);
+     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+     if(metadataHome.hasNode(name)) {
+-      session.logout();
+       return true; 
+     }
+-    session.logout();
+     return false; 
+   }
+ 
+@@ -380,9 +374,10 @@
+    * @return              Session
+    * @throws Exception
+    */
+-  private Session getSession(String repository) throws Exception{ 
+-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
++  private Session getSession(String repository) throws Exception {
++    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+-    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
++    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
++    return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
+   }
+ }
+\ No newline at end of file
+Index: core/services/src/main/java/org/exoplatform/services/cms/views/impl/ManageViewServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/views/impl/ManageViewServiceImpl.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/cms/views/impl/ManageViewServiceImpl.java	(working copy)
+@@ -365,6 +365,7 @@
+     Node templateHome = (Node)session.getItem(homeTemplate) ;
+     String templatePath = templateService.updateTemplate(templateHome.getNode(name), new ByteArrayInputStream(content.getBytes()), new String[] {"*"});
+     session.save();
++    session.logout();
+     return templatePath;
+   }
+ 
+Index: core/services/src/main/java/org/exoplatform/services/cms/documents/impl/TrashServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/documents/impl/TrashServiceImpl.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/cms/documents/impl/TrashServiceImpl.java	(working copy)
+@@ -169,14 +169,10 @@
+       }
+ 
+       trashSession.save();
+-      trashSession.logout();
+ 
+     }
+     
+     nodeSession.save();
+-    if (deep == 0) {
+-    	nodeSession.logout();
+-    }
+   }
+   
+   private boolean isInTaxonomyTree(String repository, Node taxonomyNode, Node targetNode) {
+Index: core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java	(working copy)
+@@ -239,7 +239,7 @@
+   	// Get all css by query
+   	Node cssFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getCSSFolder(portalNode);
+   	String statement = StringUtils.replaceOnce(SHARED_CSS_QUERY, "{path}", cssFolder.getPath());
+-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
++    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+     NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
+     ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
+     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
+@@ -277,7 +277,7 @@
+   	} catch(Exception e) {
+   	  log.error("Unexpected problem happen when merge CSS data", e);
+   	} finally {
+-  	  session.logout();
++  	  sessionProvider.close();
+   	}
+     return buffer.toString();     
+   }  
+@@ -286,7 +286,7 @@
+    * @see org.picocontainer.Startable#start()
+    */
+   public void start() {  
+-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();    
++    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+     try {      
+       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+@@ -295,8 +295,10 @@
+       for(Node portal: livePortals) {
+         addPortalSkin(portal, null, true);
+       }
+-    }catch (Exception e) {
+-    	log.error("Exception when start XSkinService", e);
++    } catch (Exception e) {
++      log.error("Exception when start XSkinService", e);
++    } finally {
++      sessionProvider.close();
+     }
+   }
+ 
+Index: core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java	(working copy)
+@@ -213,7 +213,7 @@
+   	Node jsFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getJSFolder(portalNode);
+   	String statement = StringUtils.replaceOnce(SHARED_JS_QUERY, "{path}", jsFolder.getPath());
+   	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+-  	SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
++  	SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+   	NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
+   	ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
+   	Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
+@@ -248,7 +248,7 @@
+     		buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+     	}	
+   	}
+-    
++  	sessionProvider.close();
+     return buffer.toString();    
+   }
+ 
+@@ -256,7 +256,7 @@
+    * @see org.picocontainer.Startable#start()
+    */
+   public void start() {    
+-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();    
++    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+     try {
+       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+@@ -266,9 +266,11 @@
+         addPortalJavascript(portal, null, true);
+       }
+     } catch (PathNotFoundException e) {
+-    	log.warn("Exception when merging inside Portal : WCM init is not completed.");
+-    }catch (Exception e) {
+-    	log.error("Exception when start XJavascriptService");
++      log.warn("Exception when merging inside Portal : WCM init is not completed.");
++    } catch (Exception e) {
++      log.error("Exception when start XJavascriptService");
++    } finally {
++      sessionProvider.close();
+     }
+   }
+ 
+Index: core/services/src/main/java/org/exoplatform/services/wcm/core/impl/WebSchemaConfigServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/core/impl/WebSchemaConfigServiceImpl.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/wcm/core/impl/WebSchemaConfigServiceImpl.java	(working copy)
+@@ -130,23 +130,28 @@
+    */
+   private void createLiveSharePortalFolders() {
+     ExoContainer container = ExoContainerContext.getCurrentContainer();
+-    RepositoryService repositoryService = 
+-      (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
+-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+-    for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
+-      String repoName = locationEntry.getRepository();
+-      try {
+-        ManageableRepository repository = repositoryService.getRepository(repoName);      
+-        Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
+-        Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
+-        String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
+-        if(!livePortalsStorage.hasNode(liveSharedPortalName)) {
+-          livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
+-          session.save(); 
+-        }        
+-      } catch (Exception e) {
+-        log.error("Error when try to create share portal folder for repository: "+ repoName, e);
+-      }            
++    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
++    SessionProvider sessionProvider = null;
++    try {
++      sessionProvider = SessionProvider.createSystemProvider();
++      for (NodeLocation locationEntry : wcmConfigService.getAllLivePortalsLocation()) {
++        String repoName = null;
++        try {
++          repoName = locationEntry.getRepository();
++          ManageableRepository repository = repositoryService.getRepository(repoName);
++          Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
++          Node livePortalsStorage = (Node) session.getItem(locationEntry.getPath());
++          String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
++          if (!livePortalsStorage.hasNode(liveSharedPortalName)) {
++            livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
++            session.save();
++          }
++        } catch (Exception e) {
++          log.error("Error when try to create share portal folder for repository: " + repoName, e);
++        }
++      }
++    } finally {
++      sessionProvider.close();
+     }
+   }
+   
+Index: core/services/src/main/java/org/exoplatform/services/jobs/symlink/ClearOrphanSymlinksJob.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/jobs/symlink/ClearOrphanSymlinksJob.java	(revision 74681)
++++ core/services/src/main/java/org/exoplatform/services/jobs/symlink/ClearOrphanSymlinksJob.java	(working copy)
+@@ -1,7 +1,9 @@
+ package org.exoplatform.services.jobs.symlink;
+ 
+ import java.util.ArrayList;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ import javax.jcr.ItemNotFoundException;
+ import javax.jcr.Node;
+@@ -27,9 +29,8 @@
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+ import org.quartz.Job;
+-import org.quartz.JobDataMap;
+ import org.quartz.JobExecutionContext;
+-import org.quartz.JobExecutionException;//import org.exoplatform.services.scheduler.impl.JobSchedulerServiceImpl;
++import org.quartz.JobExecutionException;
+ 
+ /**
+  * Created by The eXo Platform SARL
+@@ -54,7 +55,8 @@
+     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
+     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
+     
+-    Session session = null;    
++    SessionProvider sessionProvider = null;
++    Session session = null;
+     try {
+       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+ 
+@@ -68,7 +70,7 @@
+             break;
+           }
+       if (trashWorkspace == null) return;
+-      SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
++      sessionProvider = SessionProvider.createSystemProvider();
+       String[] workspaces = manageableRepository.getWorkspaceNames();
+       
+       for (String workspace : workspaces) {
+@@ -79,18 +81,25 @@
+           QueryResult queryResult = query.execute();
+           NodeIterator nodeIterator = queryResult.getNodes();
+           List<Node> deleteNodeList = new ArrayList<Node>();
++          Set<Session> targetSession = new HashSet<Session>();
+           while (nodeIterator.hasNext()) {
+             Node symlinkNode = nodeIterator.nextNode();
+             if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
+               continue;
+             //get list of node to delete
++            Node targetNode = null;
+             try {
+-              Node targetNode = linkManager.getTarget(symlinkNode, true);
++              targetNode = linkManager.getTarget(symlinkNode, true);
+               if (targetNode.isNodeType(EXO_RESTORELOCATION))
+                 deleteNodeList.add(symlinkNode);
+             } catch (ItemNotFoundException e) {
+               deleteNodeList.add(symlinkNode);
+-            } catch (RepositoryException e) {}
++            } catch (RepositoryException e) {
++              
++            } finally {
++              targetSession.add(targetNode.getSession());
++            }
++            
+             //move the nodes in list to trash
+           }
+           for (Node node : deleteNodeList) {
+@@ -102,15 +111,20 @@
+               log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
+             }
+           }
++          for (Session ses : targetSession) {
++            if (ses != null && ses.isLive()) {
++              ses.logout();
++            }
++          }          
+         } catch (RepositoryException e) {
+           log.error("ClearOrphanSymlinksJob: Error when deleting orphan symlinks in workspace: " + workspace, e);
+         }
+       }
++
+     } catch (Exception e) {
+       log.error("Error occurs in ClearOrphanSymlinksJob", e);
+     } finally {
+-      if (session != null && session.isLive())
+-        session.logout();
++      sessionProvider.close();
+     }
+     log.info("ClearOrphanSymlinksJob: Done!");
+   }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorer.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorer.java	(revision 74681)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorer.java	(working copy)
+@@ -42,7 +42,6 @@
+ import javax.servlet.http.Cookie;
+ import javax.servlet.http.HttpServletRequest;
+ 
+-import org.exoplatform.services.log.Log;
+ import org.exoplatform.ecm.jcr.TypeNodeComparator;
+ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
+ import org.exoplatform.ecm.jcr.model.Preference;
+@@ -69,7 +68,6 @@
+ import org.exoplatform.services.cms.impl.DMSConfiguration;
+ import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+ import org.exoplatform.services.cms.link.ItemLinkAware;
+-import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.cms.link.LinkUtils;
+ import org.exoplatform.services.cms.link.NodeFinder;
+ import org.exoplatform.services.cms.link.NodeLinkAware;
+@@ -80,6 +78,8 @@
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.log.ExoLogger;
++import org.exoplatform.services.log.Log;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.application.WebuiRequestContext;
+ import org.exoplatform.webui.application.portlet.PortletRequestContext;
+@@ -87,7 +87,6 @@
+ import org.exoplatform.webui.core.UIApplication;
+ import org.exoplatform.webui.core.UIComponent;
+ import org.exoplatform.webui.core.UIContainer;
+-import org.exoplatform.webui.core.UIPopupComponent;
+ import org.exoplatform.webui.core.UIPopupContainer;
+ import org.exoplatform.webui.core.UIPopupWindow;
+ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
+@@ -346,9 +345,9 @@
+   @Deprecated
+   public void setAddressPath(Set<String> s) {/*addressPath_ = s;*/} ;
+ 
+-  public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }  
++  public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }  
+ 
+-  public SessionProvider getSystemProvider() { return SessionProviderFactory.createSystemProvider(); }  
++  public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }  
+ 
+   /**
+    * @return the session of the current node (= UIJCRExplorer.getCurrentNode())
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/nodetype/UINodeTypeList.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/nodetype/UINodeTypeList.java	(revision 74681)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/nodetype/UINodeTypeList.java	(working copy)
+@@ -29,9 +29,9 @@
+ 
+ import org.exoplatform.commons.utils.ObjectPageList;
+ import org.exoplatform.commons.utils.PageList;
+-import org.exoplatform.ecm.webui.utils.Utils;
+ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
++import org.exoplatform.ecm.webui.utils.Utils;
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+@@ -191,7 +191,8 @@
+           tab.setActions(null, null) ;
+         }
+       }
+-      uiForm.removeChildTabs(TAB_REMOVE) ;
++      uiForm.removeChildTabs(TAB_REMOVE) ;
++      session.logout();
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+     }
+   }

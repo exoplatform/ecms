@@ -365,6 +365,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     Node templateHome = (Node)session.getItem(homeTemplate) ;
     String templatePath = templateService.updateTemplate(templateHome.getNode(name), new ByteArrayInputStream(content.getBytes()), new String[] {"*"});
     session.save();
+    session.logout();
     return templatePath;
   }
 

@@ -170,14 +170,10 @@ public class TrashServiceImpl implements TrashService {
       }
 
       trashSession.save();
-      trashSession.logout();
 
     }
     
     nodeSession.save();
-    if (deep == 0) {
-    	nodeSession.logout();
-    }
   }
   
   private boolean isInTaxonomyTree(String repository, Node taxonomyNode, Node targetNode) {
