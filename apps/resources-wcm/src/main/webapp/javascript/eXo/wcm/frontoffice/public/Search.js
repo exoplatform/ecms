@@ -57,9 +57,10 @@ SearchPortlet.prototype.search = function(comId) {
 	inputKey.onkeypress = function(event) {
 		var keyNum = eXo.ecm.SearchPortlet.getKeynum(event);
 		if (keyNum == 13) {
-			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(
-					this.form, "div", "SearchButton");
-			searchButton.onclick();
+			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(this.form, "div", "SearchButton");
+			var searchLink = eXo.core.DOMUtil.findFirstDescendantByClass(searchButton, "a", "SearchLink");
+			searchLink.onclick();
+			eval(searchLink.getAttribute("href"));
 		}
 	}
 };

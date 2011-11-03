@@ -1,0 +1,39 @@
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js	(revision 74752)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js	(working copy)
+@@ -57,9 +57,10 @@
+ 	inputKey.onkeypress = function(event) {
+ 		var keyNum = eXo.ecm.SearchPortlet.getKeynum(event);
+ 		if (keyNum == 13) {
+-			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(
+-					this.form, "div", "SearchButton");
+-			searchButton.onclick();
++			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(this.form, "div", "SearchButton");
++			var searchLink = eXo.core.DOMUtil.findFirstDescendantByClass(searchButton, "a", "SearchLink");
++			searchLink.onclick();
++			eval(searchLink.getAttribute("href"));
+ 		}
+ 	}
+ };
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl	(revision 74752)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl	(working copy)
+@@ -68,14 +68,13 @@
+           <table class="ActionContainer">
+             <tr>
+               <td>
+-                <div onclick="$link"
+-                    class="ActionButton LightBlueStyle SearchButton"
++                <div class="ActionButton LightBlueStyle SearchButton"
+                     onmouseover="this.style.color = '#058ee6'"
+                     onmouseout="this.style.color='black'">
+                   <div class="ButtonLeft">
+                     <div class="ButtonRight">
+                       <div class="ButtonMiddle">
+-                        <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a>
++                        <a class="SearchLink" href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a>
+                       </div>
+                     </div>
+                   </div>
