@@ -78,7 +78,7 @@
               				<div class="ButtonLeft">
                 				<div class="ButtonRight">
                   					<div class="ButtonMiddle" onclick="eXo.ecm.ECS.insertMultiContent();">
-                    					Save
+                    					<%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%>
                   					</div>
                 				</div>
               				</div>
@@ -87,7 +87,7 @@
               				<div class="ButtonLeft">
                 				<div class="ButtonRight">
                   					<div class="ButtonMiddle" onclick="<%= uicomponent.event("Close") %>">
-                    					Cancel
+                    					<%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%>
                   					</div>
 				                </div>
               				</div>

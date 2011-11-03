@@ -1,0 +1,124 @@
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java	(revision 71479)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java	(working copy)
+@@ -199,6 +199,12 @@
+   public String getDeleteConfirmationMsg() {
+ 	return  org.exoplatform.ecm.webui.utils.Utils.getResourceBundle(org.exoplatform.ecm.webui.utils.Utils.LOCALE_WEBUI_DMS, deleteConfirmationMsg, UIContentBrowsePanelMulti.class.getClassLoader());
+   }
++  
++  public String getLocaleMsg(String key) {
++	    return org.exoplatform.ecm.webui.utils.Utils.getResourceBundle(org.exoplatform.ecm.webui.utils.Utils.LOCALE_WEBUI_DMS,
++	                                                                   key,
++	                                                                   UIContentBrowsePanelMulti.class.getClassLoader());
++  }
+   /**
+    * The listener interface for receiving closeAction events.
+    * The class that is interested in processing a closeAction
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_pt_BR.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_pt_BR.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_pt_BR.properties	(working copy)
+@@ -31,3 +31,5 @@
+ UINodeTypeList.action.Refresh=Atualizar
+ UINodeTypeList.action.Close=Fechar
+ UIBrowserPanel.Confirm.Delete=Quer mesmo remover este conte\u00fado ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_fr.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_fr.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_fr.properties	(working copy)
+@@ -94,3 +94,6 @@
+ #UINodeTypeList.action.Close=Fermer
+ UINodeTypeList.action.Close=Fermer
+ UIBrowserPanel.Confirm.Delete=Voulez-vous supprimer ce contenu ?
++
++UIContentBrowsePanelMulti.action.Save=Appliquer
++UIContentBrowsePanelMulti.action.Cancel=Annuler
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_de.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_de.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_de.properties	(working copy)
+@@ -31,3 +31,5 @@
+ UINodeTypeList.action.Refresh=Refresh
+ UINodeTypeList.action.Close=Close
+ UIBrowserPanel.Confirm.Delete=Are you sure you want to remove this content ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_nl.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_nl.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_nl.properties	(working copy)
+@@ -31,3 +31,5 @@
+ UINodeTypeList.action.Refresh=Refresh
+ UINodeTypeList.action.Close=Close
+ UIBrowserPanel.Confirm.Delete=Are you sure you want to remove this content ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_it.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_it.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_it.properties	(working copy)
+@@ -31,5 +31,7 @@
+ UINodeTypeList.action.Refresh=Aggiorna
+ UINodeTypeList.action.Close=Chiudi
+ UIBrowserPanel.Confirm.Delete=Sei sicuro di voler rimuovere questo contenuto?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+ 
+ 
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_vi.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_vi.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_vi.properties	(working copy)
+@@ -31,3 +31,5 @@
+ UINodeTypeList.action.Refresh=Làm tươi
+ UINodeTypeList.action.Close=Đóng
+ UIBrowserPanel.Confirm.Delete=Bạn muốn xóa nội dung này không ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_ar.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_ar.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_ar.properties	(working copy)
+@@ -31,3 +31,5 @@
+ UINodeTypeList.action.Refresh=Refresh
+ UINodeTypeList.action.Close=Close
+ UIBrowserPanel.Confirm.Delete=Are you sure you want to remove this content ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+Index: core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_en.properties
+===================================================================
+--- core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_en.properties	(revision 71479)
++++ core/webui/src/main/resources/locale/portlet/i18n/WebUIDms_en.properties	(working copy)
+@@ -31,5 +31,7 @@
+ UINodeTypeList.action.Refresh=Refresh
+ UINodeTypeList.action.Close=Close
+ UIBrowserPanel.Confirm.Delete=Are you sure you want to remove this content ?
++UIContentBrowsePanelMulti.action.Save=Save
++UIContentBrowsePanelMulti.action.Cancel=Cancel
+ 
+ 
+Index: core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl
+===================================================================
+--- core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl	(revision 71479)
++++ core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl	(working copy)
+@@ -78,7 +78,7 @@
+               				<div class="ButtonLeft">
+                 				<div class="ButtonRight">
+                   					<div class="ButtonMiddle" onclick="eXo.ecm.ECS.insertMultiContent();">
+-                    					Save
++                    					<%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%>
+                   					</div>
+                 				</div>
+               				</div>
+@@ -87,7 +87,7 @@
+               				<div class="ButtonLeft">
+                 				<div class="ButtonRight">
+                   					<div class="ButtonMiddle" onclick="<%= uicomponent.event("Close") %>">
+-                    					Cancel
++                    					<%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%>
+                   					</div>
+ 				                </div>
+               				</div>
