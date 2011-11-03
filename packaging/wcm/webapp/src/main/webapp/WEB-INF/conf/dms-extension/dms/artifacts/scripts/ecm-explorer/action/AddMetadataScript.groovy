@@ -19,6 +19,10 @@ import java.util.Map;
 
 import javax.jcr.Session;
 import javax.jcr.Node;
+import javax.jcr.Item;
+
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.log.ExoLogger;
 
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -37,6 +41,8 @@ public class AddMetadataScript implements CmsScript {
   private RepositoryService repositoryService_ ;
   private SessionProviderService seProviderService_;
   
+  private static final Log LOG  = ExoLogger.getLogger(AddMetadataScript.class);  
+  
   public AddMetadataScript(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     repositoryService_ = repositoryService ;
     seProviderService_ = sessionProviderService;
@@ -47,6 +53,7 @@ public class AddMetadataScript implements CmsScript {
     String metadataName = (String)context.get("exo:mixinMetadata") ;
     String srcWorkspace = (String)context.get("srcWorkspace") ;
     String nodePath = (String)context.get("nodePath") ;
+    String srcPath = (String)context.get("srcPath") ;
     Session session = null ;
     try {
     	ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
@@ -55,16 +62,20 @@ public class AddMetadataScript implements CmsScript {
     		sessionProvider = seProviderService_.getSystemSessionProvider(null);
     	}
       session = sessionProvider.getSession(srcWorkspace, manageableRepository);
-      Node node = (Node) session.getItem(nodePath);
-      if(node.canAddMixin(metadataName)) {
-        node.addMixin(metadataName) ;
-        node.save() ;
-        session.save() ;
-      } else {
-        System.out.println("\n\nCan not add mixin\n\n");
+      Item item = session.getItem(nodePath);
+      if (!(item instanceof Node)) {
+        item = session.getItem(srcPath);
+      }
+      if (item instanceof Node) {
+        Node currentNode = (Node) item;
+        if(currentNode.canAddMixin(metadataName)) {
+          currentNode.addMixin(metadataName) ;
+          currentNode.save() ;
+          session.save() ;
+        }
       }
     } catch(Exception e) {
-      e.printStackTrace() ;
+      LOG.error("An expected error occurs while executing add meta data script: ", e);
     }
   }
 
