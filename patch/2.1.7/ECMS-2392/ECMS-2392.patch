@@ -1,0 +1,26 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(revision 75944)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(working copy)
+@@ -17,6 +17,8 @@
+ package org.exoplatform.ecm.webui.component.explorer.upload;
+ 
+ import java.io.BufferedInputStream;
++import java.io.ByteArrayInputStream;
++import java.io.FileNotFoundException;
+ import java.io.InputStream;
+ import java.security.AccessControlException;
+ import java.util.ArrayList;
+@@ -411,7 +413,11 @@
+             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+             return;
+           }      
+-          inputStream = new BufferedInputStream(uiFormUploadInput.getUploadDataAsStream());
++          try {
++            inputStream = new BufferedInputStream(uiFormUploadInput.getUploadDataAsStream());
++          } catch (FileNotFoundException e) {
++            inputStream = new BufferedInputStream(new ByteArrayInputStream(new byte[] {}));
++          }
+           if (index == 0){
+             name = getUIStringInput(FIELD_NAME).getValue();
+           } else {
