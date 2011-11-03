@@ -90,13 +90,13 @@
       if (resultList != null && resultList.size() > 0) {
 	    def count = 0;
         for (row in resultList) {          
-          found = true;
-          if (even) rowClass = "EvenRow";  
-          else rowClass =  "OddRow"; 
-          even = !even;
+          
           String nodePath = row.getJcrPath();
           try {
             node = uicomponent.getNodeByPath(nodePath);
+            if (node==null) {
+              continue;
+            };
           } catch(Exception e) {
             continue;
           }
@@ -104,12 +104,15 @@
             node = node.getParent();
             nodePath = node.getPath();
           }
-
-          String excerpt = row.getRepExcerpt();
-          excerpt = StringEscapeUtils.unescapeHtml(excerpt);
+        found = true;
+        if (even) rowClass = "EvenRow";  
+        else rowClass =  "OddRow"; 
+        even = !even;
+        String excerpt = row.getRepExcerpt();
+        excerpt = StringEscapeUtils.unescapeHtml(excerpt);
 //          excerpt += row.getValue("rep:spellcheck()") == null ? "NNUULLLL" : 
 //          	row.getValue("rep:spellcheck()").getString();
-          String score = row.getJcrScore();
+        String score = row.getJcrScore();
 			if (node != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {		  
       %>
           <tr class="$rowClass">
