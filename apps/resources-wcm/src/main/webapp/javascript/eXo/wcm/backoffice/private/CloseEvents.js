@@ -179,7 +179,29 @@ window.onbeforeunload = closeIt;
 /**
  * Catch when some content has changed in the form
  **/
-document.getElementById("UIDocumentForm").onchange = changed;
+if (navigator.userAgent.indexOf("MSIE") >= 0) {
+  var UIDocForm = document.getElementById("UIDocumentForm");
+
+  //add onchange event into <input> tags
+  var inputTags = UIDocForm.getElementsByTagName("input");
+  for (var i = 0; i < inputTags.length; i++) {
+    inputTags[i].attachEvent("onchange", new Function ("changed();"));
+  }
+
+  //add onchange event into <select> tags
+  var selectTags = UIDocForm.getElementsByTagName("select");
+  for (var i = 0; i < selectTags.length; i++) {
+    selectTags[i].attachEvent("onchange", new Function ("changed();"));
+  }
+
+  //add onchange event into <textarea> tags
+  var textareaTags = UIDocForm.getElementsByTagName("textarea");
+  for (var i = 0; i < textareaTags.length; i++) {
+    textareaTags[i].attachEvent("onchange", new Function ("changed();"));
+  }
+} else {
+  document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
+}
 
 
 /**

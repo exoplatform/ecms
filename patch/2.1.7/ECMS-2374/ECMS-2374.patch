@@ -1,0 +1,380 @@
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js	(revision 75825)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js	(working copy)
+@@ -179,9 +179,31 @@
+ /**
+  * Catch when some content has changed in the form
+  **/
+-document.getElementById("UIDocumentForm").onchange = changed;
++if (navigator.userAgent.indexOf("MSIE") >= 0) {
++  var UIDocForm = document.getElementById("UIDocumentForm");
+ 
++  //add onchange event into <input> tags
++  var inputTags = UIDocForm.getElementsByTagName("input");
++  for (var i = 0; i < inputTags.length; i++) {
++    inputTags[i].attachEvent("onchange", new Function ("changed();"));
++  }
+ 
++  //add onchange event into <select> tags
++  var selectTags = UIDocForm.getElementsByTagName("select");
++  for (var i = 0; i < selectTags.length; i++) {
++    selectTags[i].attachEvent("onchange", new Function ("changed();"));
++  }
++
++  //add onchange event into <textarea> tags
++  var textareaTags = UIDocForm.getElementsByTagName("textarea");
++  for (var i = 0; i < textareaTags.length; i++) {
++    textareaTags[i].attachEvent("onchange", new Function ("changed();"));
++  }
++} else {
++  document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
++}
++
++
+ /**
+  * Update each textarea when you type inside CKEditor
+  * Inform the page that some content has changed
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/pictureOnHeadWebContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/pictureOnHeadWebContent/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/pictureOnHeadWebContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -350,29 +350,9 @@
+ 													
+ 				</div>   <!-- End of UITabContentContainer -->     	
+ 				
+-				<div class="UIAction"> 
+-					<table align="center" class="ActionContainer">
+-						<tr>
+-							<td align="center">
+-							<% 
+-								for(action in uicomponent.getActions()) { 
+-									String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-									String link = uicomponent.event(action) ;
+-							%>
+-									<a href="$link" class="ActionButton LightBlueStyle">
+-										<div class="ButtonLeft">
+-											<div class="ButtonRight">
+-												<div class="ButtonMiddle">
+-													$actionLabel
+-												</div>
+-											</div>
+-										</div>
+-									</a>
+-								<%}%>          
+-							</td>
+-						</tr>
+-					</table>
+-				</div>  <!-- End of UIAction-->    	
++				<%/* start render action*/%>
++    		    <%uiform.processRenderAction()%>
++				<%/* end render action*/%>
+ 			</div>  
+ 		<%uiform.end()%>						 
+ 		</div>   <!-- End of WorkingAreaWithHelp -->
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/htmlFile/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/htmlFile/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/htmlFile/dialogs/dialog1.gtmpl	(working copy)
+@@ -52,30 +52,9 @@
+           </td>
+         </tr>       
+     </table>       
+-    <%/* start render action*/%>
+-    <div class="UIAction"> 
+-      <table class="ActionContainer" align="center">
+-        <tr>
+-          <td align="center">
+-            <% for(action in uicomponent.getActions()) { 
+-                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-                 String link = uicomponent.event(action) ;
+-            %>
+-              <a href="$link" class="ActionButton LightBlueStyle">
+-                <div class="ButtonLeft">
+-                  <div class="ButtonRight">
+-                    <div class="ButtonMiddle">
+-                      $actionLabel
+-                    </div>
+-                  </div>
+-                </div>
+-              </a>
+-            <%}%>          
+-          </td>
+-        </tr>
+-      </table>
+-    </div>
+-    <%/* end render action*/%>
++	<%/* start render action*/%>
++    <%uiform.processRenderAction()%>
++	<%/* end render action*/%>
+   </div>
+   <%uiform.end()%>
+ </div>
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteBreadcrumbWebContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteBreadcrumbWebContent/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteBreadcrumbWebContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -359,29 +359,9 @@
+ 													
+ 				</div>   <!-- End of UITabContentContainer -->     	
+ 				
+-				<div class="UIAction"> 
+-					<table align="center" class="ActionContainer">
+-						<tr>
+-							<td align="center">
+-							<% 
+-								for(action in uicomponent.getActions()) { 
+-									String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-									String link = uicomponent.event(action) ;
+-							%>
+-									<a href="$link" class="ActionButton LightBlueStyle">
+-										<div class="ButtonLeft">
+-											<div class="ButtonRight">
+-												<div class="ButtonMiddle">
+-													$actionLabel
+-												</div>
+-											</div>
+-										</div>
+-									</a>
+-								<%}%>          
+-							</td>
+-						</tr>
+-					</table>
+-				</div>  <!-- End of UIAction-->    	
++				<%/* start render action*/%>
++    		    <%uiform.processRenderAction()%>
++				<%/* end render action*/%>
+ 			</div>  
+ 		<%uiform.end()%>						 
+ 		</div>   <!-- End of WorkingAreaWithHelp -->
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/cssFile/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/cssFile/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/cssFile/dialogs/dialog1.gtmpl	(working copy)
+@@ -80,30 +80,9 @@
+         </tr>
+                
+     </table>       
+-    <%/* start render action*/%>
+-    <div class="UIAction" style="display:block;"> 
+-      <table class="ActionContainer" align="center">
+-        <tr>
+-          <td align="center">
+-            <% for(action in uicomponent.getActions()) { 
+-                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-                 String link = uicomponent.event(action) ;
+-            %>
+-              <a href="$link" class="ActionButton LightBlueStyle">
+-                <div class="ButtonLeft">
+-                  <div class="ButtonRight">
+-                    <div class="ButtonMiddle">
+-                      $actionLabel
+-                    </div>
+-                  </div>
+-                </div>
+-              </a>
+-            <%}%>          
+-          </td>
+-        </tr>
+-      </table>
+-    </div>
+-    <%/* end render action*/%>
++	<%/* start render action*/%>
++    <%uiform.processRenderAction()%>
++	<%/* end render action*/%>
+   </div>
+   <%uiform.end()%>
+ </div>
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -288,31 +288,9 @@
+ 							</table>
+ 						</div>
+ 					</div>   <!-- End of UITabContentContainer -->     	
+-					<div class="UIAction"> 
+-						<table align="center" class="ActionContainer">
+-							<tr>
+-								<td align="center">
+-									<% 
+-										for(action in uicomponent.getActions()) { 
+-											String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-											String link = uicomponent.event(action) ;
+-											%>
+-												<a href="$link" class="ActionButton LightBlueStyle">
+-													<div class="ButtonLeft">
+-														<div class="ButtonRight">
+-															<div class="ButtonMiddle">
+-																$actionLabel
+-															</div>
+-														</div>
+-													</div>
+-												</a>
+-											<%
+-										}
+-									%>          
+-								</td>
+-							</tr>
+-						</table>
+-					</div>  <!-- End of UIAction-->    	
++				<%/* start render action*/%>
++    		    <%uiform.processRenderAction()%>
++				<%/* end render action*/%>   	
+ 				</div>  
+ 		</div>   <!-- End of WorkingAreaWithHelp -->
+ 	</div>  <!-- End of TabPaneContent -->
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webLink/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webLink/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webLink/dialogs/dialog1.gtmpl	(working copy)
+@@ -59,30 +59,9 @@
+         </tr>
+                
+     </table>       
+-    <%/* start render action*/%>
+-    <div class="UIAction" style="display:block;"> 
+-      <table class="ActionContainer" align="center">
+-        <tr>
+-          <td align="center">
+-            <% for(action in uicomponent.getActions()) { 
+-                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-                 String link = uicomponent.event(action) ;
+-            %>
+-              <a href="$link" class="ActionButton LightBlueStyle">
+-                <div class="ButtonLeft">
+-                  <div class="ButtonRight">
+-                    <div class="ButtonMiddle">
+-                      $actionLabel
+-                    </div>
+-                  </div>
+-                </div>
+-              </a>
+-            <%}%>          
+-          </td>
+-        </tr>
+-      </table>
+-    </div>
+-    <%/* end render action*/%>
++	<%/* start render action*/%>
++    <%uiform.processRenderAction()%>
++	<%/* end render action*/%>
+   </div>
+   <%uiform.end()%>
+ </div>
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/jsFile/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/jsFile/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/jsFile/dialogs/dialog1.gtmpl	(working copy)
+@@ -80,30 +80,9 @@
+         </tr>
+                
+     </table>       
+-    <%/* start render action*/%>
+-    <div class="UIAction" style="display:block;"> 
+-      <table class="ActionContainer" align="center">
+-        <tr>
+-          <td align="center">
+-            <% for(action in uicomponent.getActions()) { 
+-                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-                 String link = uicomponent.event(action) ;
+-            %>
+-              <a href="$link" class="ActionButton LightBlueStyle">
+-                <div class="ButtonLeft">
+-                  <div class="ButtonRight">
+-                    <div class="ButtonMiddle">
+-                      $actionLabel
+-                    </div>
+-                  </div>
+-                </div>
+-              </a>
+-            <%}%>          
+-          </td>
+-        </tr>
+-      </table>
+-    </div>
+-    <%/* end render action*/%>
++	<%/* start render action*/%>
++    <%uiform.processRenderAction()%>
++	<%/* end render action*/%>
+   </div>
+   <%uiform.end()%>
+ </div>
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteSearchBoxWebContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteSearchBoxWebContent/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteSearchBoxWebContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -292,29 +292,9 @@
+ 													
+ 				</div>   <!-- End of UITabContentContainer -->     	
+ 				
+-				<div class="UIAction"> 
+-					<table align="center" class="ActionContainer">
+-						<tr>
+-							<td align="center">
+-							<% 
+-								for(action in uicomponent.getActions()) { 
+-									String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-									String link = uicomponent.event(action) ;
+-							%>
+-									<a href="$link" class="ActionButton LightBlueStyle">
+-										<div class="ButtonLeft">
+-											<div class="ButtonRight">
+-												<div class="ButtonMiddle">
+-													$actionLabel
+-												</div>
+-											</div>
+-										</div>
+-									</a>
+-								<%}%>          
+-							</td>
+-						</tr>
+-					</table>
+-				</div>  <!-- End of UIAction-->    	
++				<%/* start render action*/%>
++    		    <%uiform.processRenderAction()%>
++				<%/* end render action*/%>	
+ 			</div>  
+ 		<%uiform.end()%>						 
+ 		</div>   <!-- End of WorkingAreaWithHelp -->
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteNavigationWebContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteNavigationWebContent/dialogs/dialog1.gtmpl	(revision 75825)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/siteNavigationWebContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -478,29 +478,9 @@
+ 													
+ 				</div>   <!-- End of UITabContentContainer -->     	
+ 				
+-				<div class="UIAction"> 
+-					<table align="center" class="ActionContainer">
+-						<tr>
+-							<td align="center">
+-							<% 
+-								for(action in uicomponent.getActions()) { 
+-									String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+-									String link = uicomponent.event(action) ;
+-							%>
+-									<a href="$link" class="ActionButton LightBlueStyle">
+-										<div class="ButtonLeft">
+-											<div class="ButtonRight">
+-												<div class="ButtonMiddle">
+-													$actionLabel
+-												</div>
+-											</div>
+-										</div>
+-									</a>
+-								<%}%>          
+-							</td>
+-						</tr>
+-					</table>
+-				</div>  <!-- End of UIAction-->    	
++				<%/* start render action*/%>
++    		    <%uiform.processRenderAction()%>
++				<%/* end render action*/%>
+ 			</div>  
+ 		<%uiform.end()%>						 
+ 		</div>   <!-- End of WorkingAreaWithHelp -->
