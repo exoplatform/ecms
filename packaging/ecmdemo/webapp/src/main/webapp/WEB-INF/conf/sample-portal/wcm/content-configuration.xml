@@ -111,6 +111,32 @@
       </object-param>
     </init-params>
   </component-plugin>
+  <!--
+
+  Example about how to remove a context by configuration
+
+  <component-plugin>
+    <name>RemoveContext</name>
+    <set-method>removeContext</set-method>
+    <type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
+    <init-params>
+      <object-param>
+        <name>contexts</name>
+        <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
+          <field  name="contexts">
+            <collection type="java.util.ArrayList">
+              <value>
+                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+                  <field name="name"><string>contextdefault</string></field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+  -->
 </external-component-plugins>
 
 

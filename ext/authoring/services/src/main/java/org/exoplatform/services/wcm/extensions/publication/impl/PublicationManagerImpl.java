@@ -51,12 +51,38 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     }
   }
 
+  public void removeLifecycle(ComponentPlugin plugin) {
+    if (plugin instanceof StatesLifecyclePlugin) {
+    if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
+      for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
+        if (lifecycles.get(l.getName())!=null) {
+          log.info("Removing Lifecyle : "+l.getName());
+          lifecycles.remove(l.getName());
+        }
+      }
+    }
+    }
+  }
+
   public void addContext(ComponentPlugin plugin) {
     if (plugin instanceof ContextPlugin) {
       if (((ContextPlugin) plugin).getContextConfig() != null) {
         for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
           log.info("Adding Context : "+c.getName());
-        contexts.put(c.getName(), c);
+          contexts.put(c.getName(), c);
+        }
+      }
+    }
+  }
+
+  public void removeContext(ComponentPlugin plugin) {
+    if (plugin instanceof ContextPlugin) {
+      if (((ContextPlugin) plugin).getContextConfig() != null) {
+        for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
+          if (contexts.get(c.getName())!=null) {
+            log.info("Removing Context : "+c.getName());
+            contexts.remove(c.getName());
+          }
         }
       }
     }

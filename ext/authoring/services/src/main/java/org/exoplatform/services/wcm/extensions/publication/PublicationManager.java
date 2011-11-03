@@ -14,7 +14,11 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 public interface PublicationManager {
   public void addLifecycle(ComponentPlugin plugin);
 
+  public void removeLifecycle(ComponentPlugin plugin);
+
   public void addContext(ComponentPlugin plugin);
+
+  public void removeContext(ComponentPlugin plugin);
 
   public List<Lifecycle> getLifecycles();
 
