@@ -3423,4 +3423,9 @@
 		<can-not-lock-node>Bạn không có quyền khóa node {0}. Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-lock-node>
   	</msg>
   </UIPopupMenu>
+  <UIPropertyForm>
+  	<msg>
+	  <unknown-error>Đã có lỗi xảy ra trong quá trình xử lý, bạn không thể sửa property này</unknown-error>
+    </msg>
+  </UIPropertyForm>
 </bundle>

@@ -3394,4 +3394,9 @@
 		<access-denied-to-delete>Access denied, can not move node {0} to Trash!</access-denied-to-delete>
   	</msg>
   </UIPopupMenu>
+  <UIPropertyForm>
+  	<msg>
+	  <unknown-error>There are some error occurs, you can not edit this property</unknown-error>
+    </msg>
+  </UIPropertyForm>
 </bundle>

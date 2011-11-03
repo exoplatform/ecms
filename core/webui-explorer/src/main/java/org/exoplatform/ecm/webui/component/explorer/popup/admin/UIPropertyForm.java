@@ -434,6 +434,7 @@ public class UIPropertyForm extends UIForm {
       } else {
         UIFormStringInput uiStringInput = (UIFormStringInput)uiChild;
         value = uiStringInput.getValue();
+        if (value == null) value = "";
       }
     }
     return value;
@@ -651,6 +652,8 @@ public class UIPropertyForm extends UIForm {
         
         return;
       } catch(Exception e) {
+        uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.unknown-error", null,
+                                                ApplicationMessage.WARNING));
         LOG.error("Unexpected error", e);
         JCRExceptionManager.process(uiApp, e);
         return;

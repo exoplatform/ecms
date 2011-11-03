@@ -19,7 +19,9 @@ package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -67,7 +69,7 @@ public class UIPropertyTab extends UIContainer {
   private final static String PRO_KEY_BINARYTYPE = "binary" ;
   private final static String PRO_KEY_CANNOTGET = "cannotget" ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPropertyTab");
-  private List<String> propertiesName_ = new ArrayList<String>();
+  private Set<String> propertiesName_ = new HashSet<String>();
 
   public String[] getBeanFields() { return PRO_BEAN_FIELD ;}
 
@@ -82,7 +84,7 @@ public class UIPropertyTab extends UIContainer {
     return getCurrentNode().getProperties() ;
   }
 
-  private List<String> propertiesName() throws Exception {
+  private Set<String> propertiesName() throws Exception {
     if(propertiesName_.size() == 0) {
       Node currentNode = getCurrentNode();
       NodeType nodetype = currentNode.getPrimaryNodeType() ;
@@ -104,8 +106,17 @@ public class UIPropertyTab extends UIContainer {
     return true;
   }
 
+  public boolean isCanbeRemoved(String propertyName) throws Exception {
+    Property property = getCurrentNode().getProperty(propertyName);
+    if (property == null || !PermissionUtil.canSetProperty(property.getParent()) ||
+        property.getDefinition().isMandatory() || property.getDefinition().isProtected()) 
+      return false;
+    return true;
+  }
+
   public boolean isCanbeEdit(Property property) throws Exception {
-    if(property.getDefinition().isAutoCreated() || property.getDefinition().isProtected()) {
+    if(!PermissionUtil.canSetProperty(property.getParent()) || 
+       property.getDefinition().isProtected()) {
       return false;
     }
     return true;

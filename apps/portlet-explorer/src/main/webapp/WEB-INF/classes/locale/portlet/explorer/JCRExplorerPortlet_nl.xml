@@ -3319,4 +3319,9 @@
 		<can-not-lock-node>You do not have permission to lock node {0}. Please contact the administrator to get the correct right.</can-not-lock-node>
   	</msg>
   </UIPopupMenu>  
+  <UIPropertyForm>
+  	<msg>
+	  <unknown-error>There are some error occurs, you can not edit this property</unknown-error>
+    </msg>
+  </UIPropertyForm>
 </bundle>

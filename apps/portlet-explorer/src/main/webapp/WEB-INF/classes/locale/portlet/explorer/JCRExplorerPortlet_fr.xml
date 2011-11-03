@@ -3424,4 +3424,9 @@
 		<can-not-lock-node>Vous ne pouvez pas le pouvoir de verrouiller le noeud {0}.  Contactez votre administateur</can-not-lock-node>
   	</msg>
   </UIPopupMenu>
+  <UIPropertyForm>
+  	<msg>
+	  <unknown-error>A cause d'erreurs, vous ne pouvez pas modifier cette propriété</unknown-error>
+    </msg>
+  </UIPropertyForm>
 </bundle>

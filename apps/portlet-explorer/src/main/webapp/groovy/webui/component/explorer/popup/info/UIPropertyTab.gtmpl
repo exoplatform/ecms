@@ -69,7 +69,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
 					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
 					    <%}%>
-					    <%if(uicomponent.addedByUser(bean.getName())) {%>
+					    <%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
 					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
 					    <%}%>  
 				    </div>
