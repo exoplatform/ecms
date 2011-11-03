@@ -24,6 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -56,6 +57,7 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
     UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     String nodePath = event.getRequestContext().getRequestParameter(UIComponent.OBJECTID);
+    nodePath = Text.escapeIllegalJcrChars(nodePath);
     try {
       Node currentNode;
       if (nodePath != null && nodePath.length() != 0 && !nodePath.contains(";")) {
