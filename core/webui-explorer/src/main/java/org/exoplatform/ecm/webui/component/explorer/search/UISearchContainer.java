@@ -101,7 +101,7 @@ public class UISearchContainer extends UIContainer {
     uiOneTaxonomySelector.setSourceComponent(uiConstraintsForm, new String[] {UIConstraintsForm.CATEGORY_TYPE});
     UIPopupContainer UIPopupContainer = getChild(UIPopupContainer.class);
     UIPopupContainer.getChild(UIPopupWindow.class).setId(CATEGORY_POPUP) ;
-    UIPopupContainer.activate(uiCategoryManagerSearch, 630, 500);
+    UIPopupContainer.activate(uiCategoryManagerSearch, 650, 500);
   }
 
   public void initSaveQueryPopup(String statement, boolean isSimpleSearch, String queryType) throws Exception {
