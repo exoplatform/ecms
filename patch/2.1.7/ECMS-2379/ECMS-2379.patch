@@ -1,0 +1,29 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(revision 75827)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(working copy)
+@@ -29,7 +29,24 @@
+ 	<% } %>
+ </div>
+ <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
++<script type="text/javascript">
++    //focus to the first element in the form after loading successfuly
++	autoFocus = function() {
++		var uiDocumentForm = document.getElementById("UIDocumentForm");
++		for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
++		  
++		setTimeout(function() {
++			try {
++				uiDocumentForm.elements[i].focus();
++			} catch(err){}
++		}, 200);
++	}
++</script>
+ <%  
++    def rcontext = _ctx.getRequestContext() ;
++	def jsManager = rcontext.getJavascriptManager();
++	jsManager.addOnLoadJavascript("autoFocus");
++
+ 	String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
+ 	String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
+ 	def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
