@@ -17,8 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.upload;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
@@ -413,11 +411,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
           }      
-          try {
-            inputStream = new BufferedInputStream(uiFormUploadInput.getUploadDataAsStream());
-          } catch (FileNotFoundException e) {
-            inputStream = new BufferedInputStream(new ByteArrayInputStream(new byte[] {}));
-          }
+          inputStream = new BufferedInputStream(uiFormUploadInput.getUploadDataAsStream());
           if (index == 0){
             name = getUIStringInput(FIELD_NAME).getValue();
           } else {
