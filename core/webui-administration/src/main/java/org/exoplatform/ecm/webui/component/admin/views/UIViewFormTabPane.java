@@ -150,6 +150,7 @@ public class UIViewFormTabPane extends UIFormTabPane {
       ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
       uiTabForm.setRendered(false);
       uiViewForm.setRendered(true);
+      uiViewForm.update(null, false, null);
       uiViewTabPane.setSelectedTab(uiViewForm.getId());
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer);
