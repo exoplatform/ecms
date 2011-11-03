@@ -5,7 +5,7 @@
  *          hunghvit@gmail.com
  * Dec 22, 2009
  * 11:00:48 AM 
- */
+ */  
 %>
 <div class="UINodeTypeSearh $uicomponent.id">
   <div class="UIBarStyle">
@@ -21,8 +21,10 @@
                 <td class="GroupInput">
                     <%
                       uicomponent.renderChildren();
+                      def rcontext = _ctx.getRequestContext() ;
+                      rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.WCMUtils.searchNodeTypeOnKeyPress");
                     %>
-                </td>
+                </td>  
                 <td class="ButtonCell">
                     <a href="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><div class="SearchIcon"></div></a>
                 </td>

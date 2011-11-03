@@ -171,4 +171,30 @@ WCMUtils.prototype.changePriorityCss = function() {
 WCMUtils.prototype.addParamIntoAjaxEventRequest = function(eventReq, extParam) {
     return eventReq.substring(0, eventReq.length - 2) + extParam +  "\')";	
 }
+
+WCMUtils.prototype.searchNodeTypeOnKeyPress = function() {
+  //process Enter press action
+  var element = document.getElementById("NodeTypeText");
+  if (element == null) return false;
+
+  element.onkeypress= function(event) {
+    var keynum = false;
+    if (window.event) { /* IE */
+      keynum = window.event.keyCode;
+      event = window.event;
+    } else if (event.which) { /* Netscape/Firefox/Opera */
+      keynum = event.which;
+    }
+    if (keynum == 0) {
+      keynum = event.keyCode;
+    } 
+    if (keynum == 13) {
+    	var divUINodeTypeSearch = eXo.core.DOMUtil.findAncestorByClass(this,"UINodeTypeSearh");
+    	var tdButtonCell = eXo.core.DOMUtil.findFirstDescendantByClass(divUINodeTypeSearch, "td", "ButtonCell");
+    	var btnSearch = eXo.core.DOMUtil.findDescendantsByTagName(tdButtonCell, "a")[0];
+        eval(btnSearch.getAttribute("href"));
+        return false;
+    }
+  }	
+}
 eXo.ecm.WCMUtils = new WCMUtils();
