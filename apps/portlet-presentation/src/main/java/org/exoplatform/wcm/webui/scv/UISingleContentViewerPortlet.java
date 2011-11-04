@@ -185,11 +185,6 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       title.setTextContent(uiPresentation.getTitle(nodeView));
       response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);      
     }
-    RenderResponse response = context.getResponse();
-    Element elementS = response.createElement("script");
-    elementS.setAttribute("type", "text/javascript");      
-    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/frontoffice/public/jquery-1.5.1.js");
-    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS); 
 
     super.processRender(app, context) ;
   }

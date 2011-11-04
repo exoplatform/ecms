@@ -199,12 +199,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     elementS.setAttribute("type", "text/javascript");
     elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");        
     response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
-    
-    elementS = response.createElement("script");
-    elementS.setAttribute("type", "text/javascript");
-    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/frontoffice/public/jquery-1.5.1.js");
-    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
-    
+        
     super.processRender(app, context);
   }
 
