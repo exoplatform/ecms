@@ -2649,7 +2649,7 @@
 	<Drives>
 		<label>
 			<Private>Privé</Private>
-			<Public>Publique</Public>
+			<Public>Public</Public>
 			<BackupCenter>Centre de Sauvegarder</BackupCenter>
 			<CategorizedDocumentsCenter>Centre Document des Catégories </CategorizedDocumentsCenter>
 			<CollaborationCenter>Centre de Collaboration</CollaborationCenter>

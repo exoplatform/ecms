@@ -1,0 +1,15 @@
+Index: patch/2.1.7/ECMS-2521/ECMS-2521.patch
+===================================================================
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -2649,7 +2649,7 @@
+ 	<Drives>
+ 		<label>
+ 			<Private>Privé</Private>
+-			<Public>Publique</Public>
++			<Public>Public</Public>
+ 			<BackupCenter>Centre de Sauvegarder</BackupCenter>
+ 			<CategorizedDocumentsCenter>Centre Document des Catégories </CategorizedDocumentsCenter>
+ 			<CollaborationCenter>Centre de Collaboration</CollaborationCenter>
