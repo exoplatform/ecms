@@ -212,7 +212,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }
       return null;
     } catch (AccessControlException e) {
-      LOG.error("Unexpected error", e);
+      LOG.error("AccessControlException: user [" + userName + "] does not have access to the template for content type [" +
+      		      contentType + "] in repository + [" + repositoryName + "]");
       return null;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
