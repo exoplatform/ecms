@@ -110,7 +110,11 @@ public class UISEOToolbarForm extends UIForm {
 	        paramsArray = new ArrayList<String>();
 	        while(params.hasMoreElements()) {
 	          contentParam = params.nextElement().toString(); 
-	          paramsArray.add(Text.unescape(pcontext.getRequestParameter(contentParam)));          
+	          try {
+	          	paramsArray.add(Text.unescape(pcontext.getRequestParameter(contentParam)));
+	          } catch(Exception ex) {
+	          	paramsArray.add(pcontext.getRequestParameter(contentParam));
+	          }	                    
 	        }
 	      } 
 		}    
