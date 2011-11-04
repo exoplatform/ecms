@@ -411,7 +411,9 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           String saveMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "") ;
           if (saveMessage == null) saveMessage = "saved-successfully";
           Object[] args = { saveMessage } ;
-          uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.saved-successfully", args)) ;
+          ApplicationMessage appMessage = new ApplicationMessage("UIFCCForm.msg.saved-successfully", args); 
+          appMessage.setArgsLocalized(false);
+          uiApp.addMessage(appMessage) ;
           
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent()) ;
