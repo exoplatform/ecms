@@ -1,0 +1,13 @@
+Index: core/viewer/src/main/java/org/exoplatform/ecm/REST/viewer/PDFViewerRESTService.java
+===================================================================
+--- core/viewer/src/main/java/org/exoplatform/ecm/REST/viewer/PDFViewerRESTService.java	(revision 71442)
++++ core/viewer/src/main/java/org/exoplatform/ecm/REST/viewer/PDFViewerRESTService.java	(working copy)
+@@ -234,7 +234,7 @@
+   		String mimeType = contentNode.getProperty("jcr:mimeType").getString();
+   		InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream()); 
+   		// Create temp file to store data of nt:file node 
+-  		if (name.indexOf(".") > 0) name = name.substring(0, name.indexOf("."));
++  		if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
+   		content = File.createTempFile(name, ".pdf");
+   		content.deleteOnExit();
+   		// Convert to pdf if need
