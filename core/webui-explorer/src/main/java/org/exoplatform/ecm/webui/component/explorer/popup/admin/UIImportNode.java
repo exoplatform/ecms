@@ -188,7 +188,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         //Process import
         session.importXML(nodePath, xmlInputStream, importBehavior);
         try {
-          if (!uiExplorer.getPreference().isJcrEnable()) session.save();
+          session.save();
         } catch (ConstraintViolationException e) {
           session.refresh(false);
           Object[] args = { uiExplorer.getCurrentNode().getPrimaryNodeType().getName() };
