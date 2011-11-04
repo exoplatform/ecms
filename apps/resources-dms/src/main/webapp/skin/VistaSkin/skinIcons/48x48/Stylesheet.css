@@ -311,17 +311,17 @@
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/kfx-document.gif') no-repeat;  
 }
 /*############################## -- End NodeType Icon -- ########################*/
-.application_msword48x48Icon {
+.application_msword48x48Icon, .application_vnd_openxmlformats-officedocument_wordprocessingml_document48x48Icon {
   width: 48px; height: 48px;
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/doc.gif') no-repeat;  
 }
 
-.application_xls48x48Icon {
+.application_xls48x48Icon, .application_vnd_openxmlformats-officedocument_spreadsheetml_sheet48x48Icon {
   width: 48px; height: 48px;
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/xls.gif') no-repeat;  
 }
 
-.application_ppt48x48Icon {
+.application_ppt48x48Icon, .application_vnd_openxmlformats-officedocument_presentationml_presentation48x48Icon {
   width: 48px; height: 48px;
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/ppt.gif') no-repeat;  
 }

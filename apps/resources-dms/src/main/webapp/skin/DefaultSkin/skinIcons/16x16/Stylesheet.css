@@ -354,17 +354,17 @@
 	background: url('icons/NodeTypes/kfx-document.gif') no-repeat right center; /* orientation=rt */  
 }
 /*############################## -- End NodeType Icon -- ########################*/
-.application_msword16x16Icon {
+.application_msword16x16Icon, .application_vnd_openxmlformats-officedocument_wordprocessingml_document16x16Icon {
   background: url('icons/NodeTypes/doc.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/doc.gif') no-repeat right center; /* orientation=rt */
 }
 
-.application_xls16x16Icon {
+.application_xls16x16Icon, .application_vnd_openxmlformats-officedocument_spreadsheetml_sheet16x16Icon {
   background: url('icons/NodeTypes/xls.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/xls.gif') no-repeat right center; /* orientation=rt */
 }
 
-.application_ppt16x16Icon {
+.application_ppt16x16Icon, .application_vnd_openxmlformats-officedocument_presentationml_presentation16x16Icon {
   background: url('icons/NodeTypes/ppt.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/ppt.gif') no-repeat right center; /* orientation=rt */
 }
