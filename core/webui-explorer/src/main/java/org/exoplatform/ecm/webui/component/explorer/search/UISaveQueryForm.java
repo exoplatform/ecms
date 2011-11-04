@@ -34,6 +34,7 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -57,7 +58,9 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
   private String queryType_ ;
 
   public UISaveQueryForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(QUERY_NAME, QUERY_NAME, null).addValidator(ECMNameValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(QUERY_NAME, QUERY_NAME, null).
+                   addValidator(ECMNameValidator.class).
+                   addValidator(MandatoryValidator.class)) ;
   }
 
   public void activate() throws Exception {}
@@ -80,20 +83,20 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
       String queryName = uiSaveQueryForm.getUIStringInput(QUERY_NAME).getValue() ;
       if(queryName == null || queryName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.query-name-null", null)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch);
         return ;
       }
       try {
         queryService.addQuery(queryName, uiSaveQueryForm.statement_, uiSaveQueryForm.queryType_, userName) ;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.access-denied", null,
-                                                ApplicationMessage.WARNING)) ;
-        
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch);
         return ;
       } catch (Exception e){
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.save-failed", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch);
         return ;
       }
       uiECMSearch.getChild(UISavedQuery.class).updateGrid(1);
@@ -102,7 +105,7 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
         UIPopupContainer uiPopup = uiSearchContainer.getChild(UIPopupContainer.class) ;
         uiPopup.deActivate() ;
       }
-      uiECMSearch.setRenderedChild(UISavedQuery.class) ;
+      uiECMSearch.setSelectedTab(uiECMSearch.getChild(UISavedQuery.class).getId()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch) ;
     }
   }

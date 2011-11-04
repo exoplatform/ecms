@@ -16,10 +16,15 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UITabPane;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -30,17 +35,18 @@ import org.exoplatform.webui.core.UIPopupComponent;
  * Editor: pham tuan Oct 27, 2006
  */
 
-@ComponentConfig( template = "system:/groovy/webui/core/UITabPane.gtmpl" )
-public class UIECMSearch extends UIContainer implements UIPopupComponent {
+@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", events = {@EventConfig(listeners = UIECMSearch.SelectTabActionListener.class)})
+public class UIECMSearch extends UITabPane implements UIPopupComponent {
 
   static public String ADVANCED_RESULT = "AdvancedSearchResult" ;
 
   public UIECMSearch() throws Exception {
     addChild(UIContentNameSearch.class,null,null);
-    addChild(UISearchContainer.class, null, null).setRendered(false) ;
-    addChild(UIJCRAdvancedSearch.class, null, null).setRendered(false);
-    addChild(UISavedQuery.class, null, null).setRendered(false) ;
-    UISearchResult uiSearchResult = addChild(UISearchResult.class, null, ADVANCED_RESULT).setRendered(false) ;
+    setSelectedTab("UIContentNameSearch");
+    addChild(UISearchContainer.class, null, null) ;
+    addChild(UIJCRAdvancedSearch.class, null, null);
+    addChild(UISavedQuery.class, null, null);
+    UISearchResult uiSearchResult = addChild(UISearchResult.class, null, ADVANCED_RESULT);
     UIPageIterator uiPageIterator = uiSearchResult.getChild(UIPageIterator.class) ;
     uiPageIterator.setId("AdvanceSearchIterator") ;
   }
@@ -53,5 +59,19 @@ public class UIECMSearch extends UIContainer implements UIPopupComponent {
   }
 
   public void deActivate() throws Exception {
+  }
+  
+  static public class SelectTabActionListener extends EventListener<UIECMSearch>
+  {
+     public void execute(Event<UIECMSearch> event) throws Exception
+     {
+        WebuiRequestContext context = event.getRequestContext();
+        String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+        if (renderTab == null)
+           return;
+        event.getSource().setSelectedTab(renderTab);
+        context.setResponseComplete(true);
+        context.addUIComponentToUpdateByAjax(event.getSource().getParent());
+     }
   }
 }

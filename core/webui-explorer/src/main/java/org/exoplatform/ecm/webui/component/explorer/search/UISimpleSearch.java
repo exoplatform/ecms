@@ -23,8 +23,6 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -218,8 +216,8 @@ public class UISimpleSearch extends UIForm {
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
       String text = uiSimpleSearch.getUIStringInput(INPUT_SEARCH).getValue();
       if((text == null) && uiSimpleSearch.constraints_.size() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-save-null", null));
-        
+        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-save-null", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
       }
       UISearchContainer uiSearchContainer = uiSimpleSearch.getParent();
@@ -276,8 +274,8 @@ public class UISimpleSearch extends UIForm {
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
       if(text == null && uiSimpleSearch.constraints_.size() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-null", null));
-        
+        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.value-null", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
       }
       uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
@@ -313,17 +311,18 @@ public class UISimpleSearch extends UIForm {
         uiSearchResult.updateGrid();
       } catch (RepositoryException reEx) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
       }
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
-      uiECMSearch.setRenderedChild(UISearchResult.class);
+      uiECMSearch.setSelectedTab(uiSearchResult.getId());
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNode.getPath());
     }
   }

@@ -65,7 +65,7 @@ public class UIContentNameSearch extends UIForm {
 
   public UIContentNameSearch() throws Exception {
     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));
-    addChild(new UIFormStringInput(KEYWORD,null).addValidator(SimpleSearchValidator.class).addValidator(MandatoryValidator.class));
+    addChild(new UIFormStringInput(KEYWORD,null).addValidator(MandatoryValidator.class));
   }
 
   public void setLocation(String location) {
@@ -79,7 +79,7 @@ public class UIContentNameSearch extends UIForm {
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
       UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
       try {
-        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();      
+        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();
         keyword = keyword.trim();
         UIJCRExplorer explorer = contentNameSearch.getAncestorOfType(UIJCRExplorer.class);
         String currentNodePath = explorer.getCurrentNode().getPath();
@@ -96,15 +96,15 @@ public class UIContentNameSearch extends UIForm {
         uiSearchResult.updateGrid();
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
-        uiECMSearch.setRenderedChild(UISearchResult.class);
         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
+        uiECMSearch.setSelectedTab(uiSearchResult.getId());
       } catch (RepositoryException reEx) {        
         application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(contentNameSearch);
         return;
       } catch (Exception e) {
         uiSearchResult.setQuery(null, null, null, false, null);
         uiSearchResult.updateGrid();
-        uiECMSearch.setRenderedChild(UISearchResult.class);
       }
     }
   }

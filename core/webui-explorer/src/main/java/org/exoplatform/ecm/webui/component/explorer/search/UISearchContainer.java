@@ -48,10 +48,10 @@ public class UISearchContainer extends UIContainer {
   final static public String CATEGORY_POPUP = "CategoryPopup" ;
 
   public UISearchContainer() throws Exception {
-    addChild(UISimpleSearch.class, null, null) ;
-    addChild(UIConstraintsForm.class, null, null).setRendered(false) ;
-    UIPopupContainer popup = addChild(UIPopupContainer.class, null, METADATA_POPUP) ;
-    popup.getChild(UIPopupWindow.class).setId(METADATA_POPUP + "_Popup") ;
+    addChild(UISimpleSearch.class, null, null);
+    addChild(UIConstraintsForm.class, null, null).setRendered(false);
+    UIPopupContainer popup = addChild(UIPopupContainer.class, null, METADATA_POPUP);
+    popup.getChild(UIPopupWindow.class).setId(METADATA_POPUP + "_Popup");
   }
 
   public void initMetadataPopup(String fieldName) throws Exception {
@@ -112,6 +112,6 @@ public class UISearchContainer extends UIContainer {
     uiSaveQueryForm.setSimpleSearch(isSimpleSearch) ;
     uiSaveQueryForm.setQueryType(queryType) ;
     uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
-    uiPopup.activate(uiSaveQueryForm, 400, 250) ;
+    uiPopup.activate(uiSaveQueryForm, 420, 200) ;
   }
 }

@@ -377,7 +377,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         return;
       }
       if (isExactly) {
@@ -386,7 +386,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return;
         }
         String value = uiForm.getUIStringInput(CONTAIN_EXACTLY).getValue() ;
@@ -394,7 +394,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.exactly-require",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return;
         }
         uiForm.addConstraint(0) ;
@@ -404,14 +404,14 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if(property == null || property.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         String value = uiForm.getUIStringInput(CONTAIN).getValue() ;
         if(value == null || value.trim().length() < 0) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         uiForm.addConstraint(1) ;
@@ -421,14 +421,14 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if(property == null || property.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         String value = uiForm.getUIStringInput(NOT_CONTAIN).getValue() ;
         if(value == null || value.trim().length() < 0) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         uiForm.addConstraint(2) ;
@@ -439,13 +439,13 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if(fromDate == null || fromDate.trim().length() == 0) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-required", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         if(!fromDate.matches(DATETIME_REGEX) || !uiForm.isValidDateTime(fromDate)) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-invalid", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         Calendar bfDate = uiForm.getUIFormDateTimeInput(START_TIME).getCalendar() ;
@@ -454,13 +454,13 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
           if(!toDate.matches(DATETIME_REGEX) || !uiForm.isValidDateTime(toDate)) {
             uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
             return ;
           }
           if(bfDate.compareTo(afDate) == 1) {
             uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.date-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
             return ;
           }
         }
@@ -471,7 +471,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if(property == null || property.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
               ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         uiForm.addConstraint(4) ;
@@ -481,7 +481,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if (category == null || category.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required",
               null, ApplicationMessage.WARNING));
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return;
         }
         uiForm.addConstraint(5);
@@ -521,7 +521,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       if(property == null || property.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-null", null,
                                                  ApplicationMessage.WARNING)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintForm);
         return ;
       }
       String currentPath = uiExplorer.getCurrentNode().getPath() ;
@@ -533,7 +533,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       QueryResult result = query.execute() ;
       if(result == null || result.getNodes().getSize() == 0) {
         uiApp.addMessage(new ApplicationMessage("UICompareExactlyForm.msg.not-result-found", null)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintForm);
         return ;
       }
       UISearchContainer uiContainer = uiConstraintForm.getParent() ;

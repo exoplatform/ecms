@@ -166,8 +166,8 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
         uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
       } else {
         uiSearch = uiQuery.getParent();
-        ((UIECMSearch)uiSearch).setRenderedChild(UISearchResult.class);
         uiSearchResult = ((UIECMSearch)uiSearch).getChild(UISearchResult.class);
+        ((UIECMSearch)uiSearch).setSelectedTab(uiSearchResult.getId());
       }
       Query query = null;
       QueryResult queryResult = null;
@@ -180,13 +180,13 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
-        if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setRenderedChild(UISavedQuery.class);
+        if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setSelectedTab(uiQuery.getId());
         return;
       } finally {
         if(queryResult == null || queryResult.getNodes().getSize() ==0) {
           uiApp.addMessage(new ApplicationMessage("UISavedQuery.msg.not-result-found", null));
           
-          if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setRenderedChild(UISavedQuery.class);
+          if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setSelectedTab(uiQuery.getId());
           return;
         }
         uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true, null);
@@ -212,7 +212,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       uiQuery.initPopupEditForm(query);
       if(!uiQuery.isQuickSearch_) {
         UIECMSearch uiECSearch = uiQuery.getParent();
-        uiECSearch.setRenderedChild(UISavedQuery.class);
+        uiECSearch.setSelectedTab(uiQuery.getId());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiECSearch);
       } else {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiQuery.getParent());

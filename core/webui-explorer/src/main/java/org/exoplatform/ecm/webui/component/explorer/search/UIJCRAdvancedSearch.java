@@ -23,7 +23,6 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -49,6 +48,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -82,7 +82,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   private String queryLanguage_;
 
   public UIJCRAdvancedSearch() throws Exception  {
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null));
     List<SelectItemOption<String>> ls = new ArrayList<SelectItemOption<String>>() ;
     ls.add(new SelectItemOption<String>("SQL", "sql")) ;
     ls.add(new SelectItemOption<String>("xPath", "xpath")) ;
@@ -139,12 +139,11 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       UIJCRAdvancedSearch uiJAdvancedSearch = event.getSource() ;
       if(uiJAdvancedSearch.isEdit_) {
         UIPopupWindow uiPopup = uiJAdvancedSearch.getParent() ;
-        uiPopup.setShow(false) ;
+        uiPopup.setShow(false) ;  
         uiPopup.setRendered(false) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiJAdvancedSearch.getParent()) ;
       } else {
         uiJAdvancedSearch.getAncestorOfType(UIPopupContainer.class).deActivate() ;
-        uiJAdvancedSearch.getAncestorOfType(UIJCRExplorer.class).cancelAction() ;
       }
     }
   }
@@ -171,12 +170,12 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
-        uiSearch.setRenderedChild(UIECMSearch.ADVANCED_RESULT) ;
+        uiSearch.setSelectedTab(UIECMSearch.ADVANCED_RESULT) ;
       } catch (Exception e){
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.invalid-queryStatement", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         return ;
       }
     }
@@ -217,7 +216,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       if(statement == null || statement.trim().length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.value-save-null", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         return ;
       }
 
@@ -225,8 +224,8 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
         String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
         if(name == null || name.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.query-name-null", null)) ;
-          
+          uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.query-name-null", null, ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
@@ -235,7 +234,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
           if(name.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.name-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
-            
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
             return ;
           }
         }
@@ -245,13 +244,13 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         } catch(Exception e){
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         UIECMSearch uiSearch = uiForm.getParent() ;
         uiSearch.getChild(UISavedQuery.class).updateGrid(1);
         uiForm.update(null) ;
-        uiSearch.setRenderedChild(UISavedQuery.class) ;
+        uiSearch.setSelectedTab(uiSearch.getChild(UISavedQuery.class).getId()) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSearch) ;
       } else {
         UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
@@ -261,7 +260,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         } catch(Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
           return ;
         }
         ManageableRepository repository =

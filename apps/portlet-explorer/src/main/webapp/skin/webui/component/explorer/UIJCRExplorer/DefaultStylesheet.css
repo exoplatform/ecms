@@ -1348,3 +1348,7 @@
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
  overflow: hidden;
 }
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UISaveQueryForm .UIFormGrid .FieldLabel {
+    width: 80px;
+}
