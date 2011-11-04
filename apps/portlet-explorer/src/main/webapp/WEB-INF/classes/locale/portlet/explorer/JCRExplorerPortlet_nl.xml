@@ -1873,6 +1873,9 @@
 		</msg>
 		<action>
 			<Close>#{word.close}</Close>
+			<View>View</View>
+      		<Edit>Edit</Edit>
+      		<Delete>Delete</Delete>
 		</action>
 	</UIActionList>
 	<UIActionForm>
@@ -2442,7 +2445,7 @@
 
 	<UIPopupWindow>
 		<title>
-			<UISymLinkManager>Sym Link Manager</UISymLinkManager>
+			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
 
@@ -3179,6 +3182,15 @@
       <UIPublishingPanel>Manage publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Author</author>
+      <date>Created date</date>
+      <title>Document title</title>
+      <lastUser>Last User</lastUser>
+    </header>
+  </WCMContentView>
   <UITagForm>
   		<msg>
   			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 

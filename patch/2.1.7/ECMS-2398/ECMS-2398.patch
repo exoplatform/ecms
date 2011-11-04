@@ -1,0 +1,306 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/admin/UIActionList.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/admin/UIActionList.gtmpl	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/admin/UIActionList.gtmpl	(working copy)
+@@ -55,7 +55,7 @@
+ 			        <%
+ 			          for(act in uicomponent.getActions()) { 
+ 			        %>
+-	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event(act, action.getName())%>"  title="$act"/>
++	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event(act, action.getName())%>"  title="<%=_ctx.appRes("UIActionList.action." + act)%>"/>
+ 			        <%} %>
+ 	           	</div>
+ 		        </td>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 76100)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -1858,6 +1858,9 @@
+     </msg>
+     <action>
+       <Close>#{word.close}</Close>
++      <View>Voir</View>
++      <Edit>Editer</Edit>
++      <Delete>Supprimer</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2387,7 +2390,7 @@
+ 	
+ 	<UIPopupWindow>
+ 		<title>
+-			<UISymLinkManager>Gestionnaire de Raccourcis</UISymLinkManager>
++			<UISymLinkManager>Ajouter un lien</UISymLinkManager>
+ 		</title>
+ 	</UIPopupWindow>
+ 	
+@@ -3275,6 +3278,7 @@
+      <author>L'auteur</author>
+      <date>La date de création</date>
+      <title>Le titre du document</title>
++     <lastUser>Dernier utilisateur</lastUser>
+ 	</header>
+   </WCMContentView>
+   <UITagForm>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(working copy)
+@@ -1675,6 +1675,9 @@
+     </msg>
+     <action>
+       <Close>#{word.close}</Close>
++      <View>View</View>
++      <Edit>Edit</Edit>
++      <Delete>Delete</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2200,7 +2203,7 @@
+ 	
+ 	<UIPopupWindow>
+ 		<title>
+-			<UISymLinkManager>Symbolischer Link Manager</UISymLinkManager>
++			<UISymLinkManager>Add Link</UISymLinkManager>
+ 		</title>
+ 	</UIPopupWindow>
+ 	
+@@ -3257,6 +3260,15 @@
+       <UIPublishingPanel>Manage publication</UIPublishingPanel>
+     </title>
+   </UIPopupWindow>
++  <WCMContentView>
++    <header>
++      <status>Status</status>
++      <author>Author</author>
++      <date>Created date</date>
++      <title>Document title</title>
++      <lastUser>Last User</lastUser>
++    </header>
++  </WCMContentView>
+   <UITagForm>
+   		<msg>
+   			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(working copy)
+@@ -1095,7 +1095,7 @@
+ UISingleUploadContent.label.fileName=Nome file
+ UIShowAllOwnedByUserResult.msg.not-support=Non vi \u00E8 alcun template per questo nodo
+ UIActionBar.msg.not-relationable=Questo nodo non \u00E8 stato ancora relazionato
+-UIPopupWindow.title.UISymLinkManager=Gestione link simbolici
++UIPopupWindow.title.UISymLinkManager=Add Link
+ UIUploadForm.label.name=Nome
+ UIPropertyForm.action.Save=#{word.save}
+ UIPopupWindow.title.UIPermissionManager=Gestione permessi
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(working copy)
+@@ -1873,6 +1873,9 @@
+ 		</msg>
+ 		<action>
+ 			<Close>#{word.close}</Close>
++			<View>View</View>
++      		<Edit>Edit</Edit>
++      		<Delete>Delete</Delete>
+ 		</action>
+ 	</UIActionList>
+ 	<UIActionForm>
+@@ -2442,7 +2445,7 @@
+ 
+ 	<UIPopupWindow>
+ 		<title>
+-			<UISymLinkManager>Sym Link Manager</UISymLinkManager>
++			<UISymLinkManager>Add Link</UISymLinkManager>
+ 		</title>
+ 	</UIPopupWindow>
+ 
+@@ -3179,6 +3182,15 @@
+       <UIPublishingPanel>Manage publication</UIPublishingPanel>
+     </title>
+   </UIPopupWindow>
++  <WCMContentView>
++    <header>
++      <status>Status</status>
++      <author>Author</author>
++      <date>Created date</date>
++      <title>Document title</title>
++      <lastUser>Last User</lastUser>
++    </header>
++  </WCMContentView>
+   <UITagForm>
+   		<msg>
+   			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml	(working copy)
+@@ -1844,6 +1844,9 @@
+     </msg>
+     <action>
+       <Close>#{word.close}</Close>
++      <View>View</View>
++      <Edit>Edit</Edit>
++      <Delete>Delete</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2374,7 +2377,7 @@
+   
+   <UIPopupWindow>
+     <title>
+-      <UISymLinkManager>Symリンクマネージャ</UISymLinkManager>
++      <UISymLinkManager>Add Link</UISymLinkManager>
+     </title>
+   </UIPopupWindow>
+   
+@@ -3246,6 +3249,7 @@
+       <author>作者</author>
+       <date>作成日</date>
+       <title>ドキュメントタイトル</title>
++      <lastUser>Last User</lastUser>
+     </header>
+   </WCMContentView>
+   <UITagForm>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(working copy)
+@@ -1853,6 +1853,9 @@
+     </msg>
+     <action>
+       <Close>Đóng</Close>
++      <View>View</View>
++      <Edit>Edit</Edit>
++      <Delete>Delete</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2379,7 +2382,7 @@
+ 	
+ 	<UIPopupWindow>
+ 		<title>
+-			<UISymLinkManager>Quản lý liên kết</UISymLinkManager>
++			<UISymLinkManager>Add Link</UISymLinkManager>
+ 		</title>
+ 	</UIPopupWindow>
+ 	
+@@ -3283,6 +3286,7 @@
+       <author>Tác giả</author>
+       <date>Ngày tạo</date>
+       <title>Tiêu đề của tài liệu</title>
++      <lastUser>Last User</lastUser>
+     </header>
+   </WCMContentView>
+   <UITagForm>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml	(working copy)
+@@ -1668,6 +1668,9 @@
+     </msg>
+     <action>
+       <Close>#{word.close}</Close>
++      <View>View</View>
++      <Edit>Edit</Edit>
++      <Delete>Delete</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2192,7 +2195,7 @@
+ 	
+ 	<UIPopupWindow>
+ 		<title>
+-			<UISymLinkManager>رابط إداري </UISymLinkManager>
++			<UISymLinkManager>Add Link</UISymLinkManager>
+ 		</title>
+ 	</UIPopupWindow>
+ 	
+@@ -2863,6 +2866,15 @@
+       <UIPublishingPanel>إدارة النشر</UIPublishingPanel>
+     </title>
+   </UIPopupWindow> 
++  <WCMContentView>
++    <header>
++      <status>Status</status>
++      <author>Author</author>
++      <date>Created date</date>
++      <title>Document title</title>
++      <lastUser>Last User</lastUser>
++    </header>
++  </WCMContentView>
+   <UIDocumentForm>
+ 	  <msg>
+ 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -1858,6 +1858,9 @@
+     </msg>
+     <action>
+       <Close>#{word.close}</Close>
++      <View>View</View>
++      <Edit>Edit</Edit>
++      <Delete>Delete</Delete>
+     </action>
+   </UIActionList>
+   <UIActionForm>
+@@ -2388,7 +2391,7 @@
+   
+   <UIPopupWindow>
+     <title>
+-      <UISymLinkManager>Sym Link Manager</UISymLinkManager>
++      <UISymLinkManager>Add Link</UISymLinkManager>
+     </title>
+   </UIPopupWindow>
+   
+@@ -3263,6 +3266,7 @@
+       <author>Author</author>
+       <date>Created date</date>
+       <title>Document title</title>
++      <lastUser>Last User</lastUser>
+     </header>
+   </WCMContentView>
+   <UITagForm>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(revision 76098)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(working copy)
+@@ -1093,7 +1093,7 @@
+ UISingleUploadContent.label.fileName=Nome do Arquivo
+ UIShowAllOwnedByUserResult.msg.not-support=N\u00e3o h\u00e1 modelo de View para este node
+ UIActionBar.msg.not-relationable=Este node n\u00e3o \u00e9 relacion\u00e1vel ainda
+-UIPopupWindow.title.UISymLinkManager=Gerenciador de Links Simb\u00f3licos
++UIPopupWindow.title.UISymLinkManager=Add Link
+ UIUploadForm.label.name=Nome
+ UIPropertyForm.action.Save=#{word.save}
+ UIPopupWindow.title.UIPermissionManager=Gerenciamento de Permiss\u00e3o
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/views/templates/ecm-explorer/ContentView.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/views/templates/ecm-explorer/ContentView.gtmpl	(revision 76098)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/views/templates/ecm-explorer/ContentView.gtmpl	(working copy)
+@@ -141,10 +141,10 @@
+           <%
+             if (selectedSortType.equals("LastUser")) {
+               %>
+-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">Last User</div>
++                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.lastUser")%></div>
+               <%
+             } else {
+-              %>Last User<%
++              %><%=_ctx.appRes("WCMContentView.header.lastUser")%><%
+             }
+           %>
+         </div>
+@@ -367,7 +367,7 @@
+ <!-- Status-->
+               <div class="ColumnStatus Column" style="width: 93px;">
+                 <div class="NodeLabel">
+-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%= status %></div>
++                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
+                 </div>
+               </div>
+               <div style="clear: both"><span></span></div>
