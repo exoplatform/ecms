@@ -1067,8 +1067,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   private class TemplateNameComparator implements Comparator<SelectItemOption<String>> {
     public int compare(SelectItemOption<String> item1,SelectItemOption<String> item2) {
       try {
-        String s1 = item1.getLabel();
-        String s2 = item2.getLabel();
+        String s1 = item1.getLabel().toLowerCase();
+        String s2 = item2.getLabel().toLowerCase();
         return s1.compareTo(s2);
       } catch (Exception e) {
         LOG.error("Cannot compare nodes", e);
