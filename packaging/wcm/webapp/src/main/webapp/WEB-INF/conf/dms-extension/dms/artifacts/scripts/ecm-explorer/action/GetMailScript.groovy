@@ -25,7 +25,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
-
+import org.apache.commons.io.IOUtils;
 import java.io.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -148,8 +148,13 @@ public class GetMailScript implements CmsScript {
         if(part.isMimeType("text/plain")){
           newMail.setProperty("exo:content", (String)part.getContent());
         }else if(!part.isMimeType("text/html")){
-          MimeMultipart mimeMultiPart = (MimeMultipart)part.getContent() ;
-          newMail.setProperty("exo:content", (String)mimeMultiPart.getBodyPart(0).getContent());        
+          Object objPart = part.getContent();          
+          if(objPart instanceof Multipart) {
+          	MimeMultipart mimeMultiPart = (MimeMultipart)objPart;
+          	newMail.setProperty("exo:content", (String)mimeMultiPart.getBodyPart(0).getContent());
+          } else {            
+            newMail.setProperty("exo:content", IOUtils.toString(objPart, "UTF-8"));
+          }           
         }       
       } else if (disposition.equalsIgnoreCase(Part.ATTACHMENT) || disposition.equalsIgnoreCase(Part.INLINE)) {
         Node attachment = newMail.addNode(getMD5MsgId(part.getAllHeaders()), "nt:file") ;
