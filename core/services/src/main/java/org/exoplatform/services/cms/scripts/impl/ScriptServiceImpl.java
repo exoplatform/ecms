@@ -357,7 +357,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   /**
    * {@inheritDoc}
    */
-  public CmsScript getScript(String scriptName) throws Exception {
+  public synchronized CmsScript getScript(String scriptName) throws Exception {
     CmsScript scriptObject = (CmsScript) resourceCache_.get(scriptName);
     if (scriptObject != null) return scriptObject;
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
