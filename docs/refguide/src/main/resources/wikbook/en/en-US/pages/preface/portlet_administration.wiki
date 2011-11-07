@@ -11,7 +11,7 @@ This is an example of the *Administration* portlet used in eXo Content:
 * *Available preferences*: When using this portlet, you can customize the following preference: {anchor:id=CONTref.Portlets.Administration.AvailablePreferences}
 
 || *Preference* || *Type*|| *Value* || *Description* ||
-| *repository* | {{String}} | {{Repository}} | The name of the current repository.|
+| *repository* | {{string}} | {{Repository}} | The name of the current repository.|
 
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.Administration.SampleConfiguration}

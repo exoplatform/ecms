@@ -45,11 +45,11 @@ The configuration is applied mainly in _packaging/workflow/webapp/src/main/webap
 
 In which:
 
-* *name*: {{deploy.predefined.processes}}
-* *set-method*: {{addPlugin}}
-* *type*: {{org.exoplatform.services.workflow.PredefinedProcessesPlugin}}
+* *name*: _deploy.predefined.processes_
+* *set-method*: _addPlugin_
+* *type*: _org.exoplatform.services.workflow.PredefinedProcessesPlugin_
 
 * *Object type*: {{org.exoplatform.services.workflow.ProcessesConfig}}
 ||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||
 | *processLocation* | {{string}} | {{war:/conf/bp}} | The path to the process. |
-| *predefinedProcess* | {{HashSet}} | _{noformat}{java.util.HashSet}{noformat}_| The list of the processes. |
+| *predefinedProcess* | {{HashSet}} | {{java.util.HashSet}} | The list of the processes. |

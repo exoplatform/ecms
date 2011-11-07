@@ -121,9 +121,9 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 {code}
 
 In which:
-* *name*: {{exo:scriptAction}}
-* *set-method* : {{addPlugin}}
-* *type*: {{org.exoplatform.services.cms.actions.impl.ScriptActionPlugin}}
+* *name*: _exo:scriptAction_
+* *set-method* : _addPlugin_
+* *type*: _org.exoplatform.services.cms.actions.impl.ScriptActionPlugin_
 
 * *Object type*: {{org.exoplatform.services.cms.actions.impl.ActionConfig}}
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||

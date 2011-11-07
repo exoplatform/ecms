@@ -37,10 +37,10 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{predefinedTagPermissionPlugin}}
-* *Set-method*: {{addTagPermissionPlugin}}
-* *Type*: {{org.exoplatform.services.cms.folksonomy.impl.TagPermissionPlugin}}
+* *Name*: _predefinedTagPermissionPlugin_
+* *Set-method*: _addTagPermissionPlugin_
+* *Type*: _org.exoplatform.services.cms.folksonomy.impl.TagPermissionPlugin_
 
-* *Object type*: {{org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig}}
+* *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig_
 ||  *Name*  ||  *Type*  ||  *Value*   ||  *Description*  ||
-| *tagPermissionList* | {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The users/groups that have the permission. |
+| *tagPermissionList* | {{ArrayList}} | {noformat}{java.util.ArrayList}{noformat} | The users/groups that have the permission. |

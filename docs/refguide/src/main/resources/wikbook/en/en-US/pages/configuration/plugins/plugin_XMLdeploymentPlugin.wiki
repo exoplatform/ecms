@@ -58,19 +58,19 @@ The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp
 {code}
 
 In which:
-* *name*: {{Content Initializer Service}}
-* *set-method*: {{addPlugin}}
-* *type*: {{org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin}}
+* *name*: _Content Initializer Service_
+* *set-method*: _addPlugin_
+* *type*: _org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin_
 
-* *Object type*: {{org.exoplatform.services.deployment.DeploymentDescriptor}}
+* *Object type*: _org.exoplatform.services.deployment.DeploymentDescriptor_
 || *Name* || *Type* || *Value* || *Description* ||
 | *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node which will contain the imported node. |
-| *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml<}} | The absolute path of the XML file. |
-| *cleanupPublication* | {{Boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
-| *versionHistoryPath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |
+| *sourcePath* | {{string}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml<}} | The absolute path of the XML file. |
+| *cleanupPublication* | {{boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
+| *versionHistoryPath* | {{string}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |
 
 * *Object type*: {{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}
 || *Field* || *Type* || *Value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | The repository name of the target node. |
-| *workspace* | {{String}} | {{collaboration}} | The collaboration name of the target node. |
-| *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node. |
+| *repository* | {{string}} | {{repository}} | The repository name of the target node. |
+| *workspace* | {{string}} | {{collaboration}} | The collaboration name of the target node. |
+| *nodePath* | {{string}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node. |

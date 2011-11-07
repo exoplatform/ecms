@@ -121,8 +121,8 @@ In which:
 
 * *Object type*: {{org.exoplatform.services.cms.queries.impl.QueryData}}
 || *Field* || *Type*  || *Description* ||
-|*name*| {{String}}  |The name of the query. |
-|*language*| {{String}} |The language of the query (Xpath, SQL). |
-|*statement*| {{String}} |The query statement. |
+|*name*| {{string}}  |The name of the query. |
+|*language*| {{string}} |The language of the query (Xpath, SQL). |
+|*statement*| {{string}} |The query statement. |
 |*permissions*| {{ArrayList}} |The permission which users must have to use this query.|
-|*cachedResult*| {{Boolean}} | Specify if the query is cached or not.|
+|*cachedResult*| {{boolean}} | Specify if the query is cached or not.|

@@ -26,6 +26,6 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 * *Value-param*:
 ||*Name*||*Type*||*Value*||*Description*||
-|*workspace*|{{String}}|{{system}}|The workspace name.|
+|*workspace*|{{string}}|{{system}}|The workspace name.|
 |*relativePath*|{{Private/Queries}}|{{Private/Queries}}|The path to the query location.|
-|*group*|{{String}}| {noformat}*:/admin{noformat}|The group is allowed to access the query folder.|
+|*group*|{{string}}| {noformat}*:/admin{noformat}|The group is allowed to access the query folder.|

@@ -127,17 +127,17 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 </external-component-plugins>
 {code}
 
-* *Name*: {{predefinedTagStylePlugin}}
-* *Set-method*: {{addTagStylePlugin}}
-* *Type*: {{org.exoplatform.services.cms.folksonomy.impl.TagStylePlugin}}
+* *Name*: _predefinedTagStylePlugin_
+* *Set-method*: _addTagStylePlugin_
+* *Type*: _org.exoplatform.services.cms.folksonomy.impl.TagStylePlugin_
 
-* *Object type*: {{org.exoplatform.services.cms.folksonomy.impl.TagStyleConfi}}
+* *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig_
 ||*Name*||*Type*||*Value*||*Description*||
 |*autoCreatedInNewRepository*|{{boolean}}|{{true}}|Specify whether the tag style is added automatically in a new reposistory or not.|
 |*repository*|{{string}}|{{repository}}|Name of the repository where the tag style is added.|
-|*tagStyleList*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_|The list of tag styles.|
+|*tagStyleList*|{{ArrayList}}|{{ {noformat}{java.util.ArrayList}{noformat} }}|The list of tag styles.|
 
-* *Object type*: {{org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle}}
+* *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle_
 ||*Name*||*Type*||*Description*||
 |*name*|{{string}}| The name of the tag.|
 |*tagRate*|{{string}}| The number of times that a tag is used which will decide the respective tag style.|

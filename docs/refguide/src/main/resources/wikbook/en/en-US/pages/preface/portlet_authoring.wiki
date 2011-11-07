@@ -10,9 +10,9 @@ This is an example of the *Authoring* portlet used in eXo Content:
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
 || *Preference* || *Type*|| *Value*|| *Description* ||
-| *repository* | {{String}} | {{Repository}} |The name of the repository.|
-| *workspace* | {{String}} | {{Collaboration}} |The name of the workspace.|
-| *drive* | {{String}} | {{Collaboration}} |The name of the drive.|
+| *repository* | {{string}} | {{Repository}} |The name of the repository.|
+| *workspace* | {{string}} | {{Collaboration}} |The name of the workspace.|
+| *drive* | {{string}} | {{Collaboration}} |The name of the drive.|
 
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.Authoring.SampleConfiguration}

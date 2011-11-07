@@ -1,7 +1,7 @@
 h1. ThumbnailRESTService
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-| *ThumbnailRESTService* | {noformat}{portalname}/{restcontextname}/thumbnailImage/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-services{noformat}  |Return a responding data as a thumbnail image. |
+| *ThumbnailRESTService* | {{ {noformat}{portalname}/{restcontextname}/thumbnailImage/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-services{noformat} }}  |Return a responding data as a thumbnail image. |
 
 {note}
 * {noformat}{portalname}{noformat}: The name of the portal.
@@ -10,149 +10,149 @@ h1. ThumbnailRESTService
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getThumbnailImage* |{noformat}{portalname}/{restcontextname}/thumbnailImage/medium/{repoName}/{workspaceName}/{nodePath}/{noformat} |repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}String {example}{example}String|Return an image with the medium size (64x64).|
-|*getLargeImage* |{noformat}{portalname}/{restcontextname}/thumbnailImage/large/{repoName}/{workspaceName}/{nodePath}/{noformat}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}String {example}{example}String  |Return an image with the large size (300x300).|
-|*getSmallImage* |{noformat}{portalname}/{restcontextname}/thumbnailImage/small/{repoName}/{workspaceName}/{nodePath}/{noformat}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}String {example}{example}String |Return an image with the small size (32x32).|
-|*getCustomImage* |{noformat}{portalname}/{restcontextname}/thumbnailImage/custom/{size}/{repoName}/{workspaceName}/{nodePath}/{noformat}|size{example}{example}repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}String {example}{example}String {example}{example}String |Return an image with the custom size.|
-|*getOriginImage* |{noformat}{portalname}/{restcontextname}/thumbnailImage/origin/{repoName}/{workspaceName}/{nodePath}/{noformat}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}String {example}{example}String |Return an image with the original size.|
+|*getThumbnailImage* |{{ {noformat}{portalname}/{restcontextname}/thumbnailImage/medium/{repoName}/{workspaceName}/{nodePath}/{noformat} }} |repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}{{string}} {example}{example}{{string}}|Return an image with the medium size (64x64).|
+|*getLargeImage* |{{ {noformat}{portalname}/{restcontextname}/thumbnailImage/large/{repoName}/{workspaceName}/{nodePath}/{noformat} }}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}{{string}} {example}{example}{{string}}  |Return an image with the large size (300x300).|
+|*getSmallImage* |{{ {noformat}{portalname}/{restcontextname}/thumbnailImage/small/{repoName}/{workspaceName}/{nodePath}/{noformat} }}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}{{string}} {example}{example}{{string}} |Return an image with the small size (32x32).|
+|*getCustomImage* |{{ {noformat}{portalname}/{restcontextname}/thumbnailImage/custom/{size} }}/{repoName}/{workspaceName}/{nodePath}/{noformat} }}|size{example}{example}repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} |Return an image with the custom size.|
+|*getOriginImage* |{{ {noformat}{portalname}/{restcontextname}/thumbnailImage/origin/{repoName}/{workspaceName}/{nodePath}/{noformat} }}|repoName {example}{example}workspaceName{example}{example}nodePath |String {example}{example}{{string}} {example}{example}{{string}} |Return an image with the original size.|
 
 h1. RssConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.RssConnector}
 
 || *Service name* || *Service URL* || *Location* || *Description* ||
-|*RssConnector*|{noformat}{portalname}/{restcontextname}/feed/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Generate an RSS feed.|
+|*RssConnector*|{{ {noformat}{portalname}/{restcontextname}/feed/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }}|Generate an RSS feed.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*generate*|{noformat}{portalname}/{restcontextname}/feed/rss/{noformat}|repository{example}{example}workspace{example}{example}server{example}{example}siteName{example}{example}title{example}{example}desc{example}{example}folderPath{example}{example}orderBy{example}{example}orderType{example}{example} lang{example}{example}detailPage{example}{example}detailParam{example}{example}recursive|String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String{example}{example} String|Generate an RSS feed.|
+|*generate*|{{ {noformat}{portalname}/{restcontextname}/feed/rss/{noformat} }}|{{repository}}{example}{example}{{workspace}}{example}{example}{{server}}{example}{example}{{siteName}}{example}{example}{{title}}{example}{example}{{desc}}{example}{example}{{folderPath}}{example}{example}{{orderBy}}{example}{example}{{orderType}}{example}{example} {{lang}}{example}{example}{{detailPage}}{example}{example}{{detailParam}}{example}{example}{{recursive}}|{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}{example}{example} {{string}}|Generate an RSS feed.|
 
 h1. FCKCoreRESTConnector {anchor:id=CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*FCKCoreRESTConnector*|{noformat}{portalname}/{restcontextname}//fckconnector/jcr/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Get a list of files and folders, and create a folder and upload files.|
+|*FCKCoreRESTConnector*|{{ {noformat}{portalname}/{restcontextname}//fckconnector/jcr/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }} |Get a list of files and folders, and create a folder and upload files.|
 
 * *APIs usage*:  
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getFoldersAndFiles*|{noformat}{portalname}/{restcontextname}/fckconnector/jcr/getFoldersAndFiles/{repositoryName}/{workspaceName}/{currentFolder}/{command}/{type}/{noformat} |repositoryName{example}{example}workspaceName {example}{example}currentFolder {example}{example}command {example}{example}type| String{example}{example}String {example}{example}String {example}{example}String {example}{example}String|Return the folders and the files in the current folder.|
-|*createFolder*|{noformat}{portalname}/{restcontextname}/fckconnector/jcr/createFolder/{repositoryName}/{workspaceName}/{currentFolder}/{newFolderName}/{language}/{noformat}|repositoryName{example}{example}workspaceName{example}{example}currentFolder {example}{example}newFolderName {example}{example}language|String {example}{example}String {example}{example} String{example}{example}String {example}{example}String| Create a folder under the current folder.|
-|*uploadFile*|{noformat}{portalname}/{restcontextname}/fckconnector/jcr/uploadFile/upload/{noformat}|servletRequest|HttpServletRequest|Uploads a file with the HttpServletRequest.|
-|*processUpload *|{noformat}{portalname}/{restcontextname}/fckconnector/jcr/uploadFile/control/{repositoryName}/{workspaceName}/{currentFolder}/{action}/{language}/{fileName}/{uploadId}/{noformat}|repositoryName{example}{example}workspaceName{example}{example}currentFolder{example}{example}action{example}{example}language{example}{example}fileName{example}{example}uploadId|String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example} String{example}{example}String|Control the process of uploading a file, such as aborting, deleting or progressing the file.|
+|*getFoldersAndFiles*|{{ {noformat}{portalname}/{restcontextname}/fckconnector/jcr/getFoldersAndFiles/{repositoryName}/{workspaceName}/{currentFolder}/{command}/{type}/{noformat} }} | {{repositoryName}}{example}{example}{{workspaceName}} {example}{example}{{currentFolder}} {example}{example}{{command}} {example}{example}{{type}}| {{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}|Return the folders and the files in the current folder.|
+|*createFolder*|{{ {noformat}{portalname}/{restcontextname}/fckconnector/jcr/createFolder/{repositoryName}/{workspaceName}/{currentFolder}/{newFolderName}/{language}/{noformat} }} | {{repositoryName}}{example}{example}{{workspaceName}}{example}{example}{{currentFolder}} {example}{example}{{newFolderName}} {example}{example}{{language}}| {{string}} {example}{example}{{string}} {example}{example} {{string}}{example}{example}{{string}} {example}{example}{{string}}| Create a folder under the current folder.|
+|*uploadFile*|{{ {noformat}{portalname}/{restcontextname}/fckconnector/jcr/uploadFile/upload/{noformat} }}|{{servletRequest}}|{{HttpServletRequest}}| Uploads a file with the _HttpServletRequest_.|
+|*processUpload *|{{ {noformat}{portalname}/{restcontextname}/fckconnector/jcr/uploadFile/control/{repositoryName}/{workspaceName}/{currentFolder}/{action}/{language}/{fileName}/{uploadId}/{noformat} }} | {{repositoryName}}{example}{example}{{workspaceName}}{example}{example}{{currentFolder}}{example}{example}{{action}}{example}{example}{{language}}{example}{example}{{fileName}}{example}{example} {{uploadId}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example} {{string}}{example}{example}{{string}}|Control the process of uploading a file, such as aborting, deleting or progressing the file.|
 
 h1. ResourceBundleConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.ResourceBundleConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*ResourceBundleConnector*|{noformat}{portalname}/{restcontextname}/bundle/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Get the bundle basing on the key and the locale.|
+|*ResourceBundleConnector*|{{ {noformat}{portalname}/{restcontextname}/bundle/{noformat} }}|*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }} |Get the bundle basing on the key and the locale.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getBundle*|{noformat}{portalname}/{restcontextname}/bundle/getBundle/{key}/{locale}/{noformat}|key{example}{example}locale|String{example}{example}String|Get the bundle basing on the key and the locale.|
+|*getBundle*|{{ {noformat}{portalname}/{restcontextname}/bundle/getBundle/{key}/{locale}/{noformat} }}|{{key}}{example}{example}{{locale}}|{{string}}{example}{example}{{string}}|Get the bundle basing on the key and the locale.|
 
 h1. VoteConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.VoteConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*VoteConnector*|{noformat}{portalname}/{restcontextname}/contents/vote/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Return and set a vote value of a given node in the sent parameter.|
+|*VoteConnector*|{{ {noformat}{portalname}/{restcontextname}/contents/vote/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }} |Return and set a vote value of a given node in the sent parameter.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*postVote*|{noformat}{portalname}/{restcontextname}/contents/vote/postVote/{repositoryName}/{workspaceName}/{jcrPath}/{vote}/{lang}/{noformat}|repositoryName  {example}{example} workspaceName  {example}{example} jcrPath {example}{example}  vote  {example}{example} lang| String {example}{example}String{example}{example} String{example}{example}String{example}{example}String{example}{example}String |Set a vote value for a given content.|
-|*getVote*|{noformat}{portalname}/{restcontextname}/contents/vote/getVote/{repositoryName}/{workspaceName}/{jcrPath}/{noformat}|repositoryName{example}{example} workspaceName{example}{example} jcrPath|String {example}{example}String {example}{example}String|Return a vote value for a given content.|
+|*postVote*|{{ {noformat}{portalname}/{restcontextname}/contents/vote/postVote/{repositoryName}/{workspaceName}/{jcrPath}/{vote}/{lang}/{noformat} }}| {{repositoryName}}  {example}{example} {{workspaceName}}  {example}{example} {{jcrPath}} {example}{example}  {{vote}}  {example}{example} {{lang}} | {{string}} {example}{example}{{string}}{example}{example} {{string}}{example}{example}{{string}}{example}{example}{{string}}{example}{example}{{string}} |Set a vote value for a given content.|
+|*getVote*|{{ {noformat}{portalname}/{restcontextname}/contents/vote/getVote/{repositoryName}/{workspaceName}/{jcrPath}/{noformat} }} | {{repositoryName}}{example}{example} {{workspaceName}}{example}{example} {{jcrPath}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} | Return a vote value for a given content.|
 
 
 h1. DriverConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.DriverConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*DriverConnector*|{noformat}{portalname}/{restcontextname}/wcmDriver/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Return a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action. |
+|*DriverConnector*|{{ {noformat}{portalname}/{restcontextname}/wcmDriver/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }}  | Return a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action. |
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getDrivers*|{noformat}{portalname}/{restcontextname}/wcmDriver/getDrivers/{noformat}|lang|String|Return a list of drives for the current user.|
-|*getFoldersAndFiles*|{noformat}{portalname}/{restcontextname}/wcmDriver/getFoldersAndFiles/{noformat}|driverName{example}{example} currentFolder{example}{example} currentPortal{example}{example} repositoryName{example}{example} workspaceName{example}{example} filterBy|String{example}{example}String {example}{example} String{example}{example}String {example}{example}String {example}{example}String|Return all folders and files in a given location.|
-|*uploadFile*|{noformat}{portalname}/{restcontextname}/wcmDriver/uploadFile/upload/{noformat} |uploadId|String|Uploads a file.|
-|*processUpload*|{noformat}{portalname}/{restcontextname}/wcmDriver/uploadFile/control/{noformat}|repositoryName{example}{example} workspaceName{example}{example} driverName{example}{example} currentFolder{example}{example} currentPortal{example}{example} userId{example}{example} jcrPath{example}{example} action{example}{example} language{example}{example} fileName{example}{example} uploadId|String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String{example}{example} String|Control the process of uploading a file, such as aborting, deleting or processing the file.|
+|*getDrivers*|{{ {noformat}{portalname}/{restcontextname}/wcmDriver/getDrivers/{noformat} }} |lang|{{string}}|Return a list of drives for the current user.|
+|*getFoldersAndFiles*|{{ {noformat}{portalname}/{restcontextname}/wcmDriver/getFoldersAndFiles/{noformat} }} | {{driverName}}{example}{example} {{currentFolder}}{example}{example} {{currentPortal}}{example}{example} {{repositoryName}}{example}{example} {{workspaceName}}{example}{example} {{filterBy}} |{{string}}{example}{example}{{string}} {example}{example} {{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}|Return all folders and files in a given location.|
+|*uploadFile*|{{ {noformat}{portalname}/{restcontextname}/wcmDriver/uploadFile/upload/{noformat} }} | {{uploadId}} | {{string}} |Uploads a file.|
+|*processUpload*|{{ {noformat}{portalname}/{restcontextname}/wcmDriver/uploadFile/control/{noformat} }} | {{repositoryName}}{example}{example} {{workspaceName}}{example}{example} {{driverName}}{example}{example} {{currentFolder}} {example}{example} {{currentPortal}} {example}{example} {{userId}}} {example}{example} {{jcrPath}} {example}{example} {{action}} {example}{example} {{language}}{example}{example} {{fileName}}{example}{example} {{uploadId}} | {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example} {{string}}|Control the process of uploading a file, such as aborting, deleting or processing the file.|
 
 h1. GadgetConnector    {anchor:id=CONTref.Devref.PublicRestAPIs.GadgetConnector}
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*GadgetConnector*|{noformat}{portalname}/{restcontextname}/wcmGadget/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Instantiate a new gadget connector.|
+|*GadgetConnector*|{{ {noformat}{portalname}/{restcontextname}/wcmGadget/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat}  }}| Instantiate a new gadget connector.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getFoldersAndFiles*|{noformat}{portalname}/{restcontextname}/wcmGadget/getFoldersAndFiles/{currentFolder}/{lang}/{host}/{noformat}| currentFolder{example}{example} lang{example}{example} host|String{example}{example}String {example}{example}String|Get the folders and files.|
+|*getFoldersAndFiles*|{{ {noformat}{portalname}/{restcontextname}/wcmGadget/getFoldersAndFiles/{currentFolder}/{lang}/{host}/{noformat} }} | {{currentFolder}}{example}{example} {{lang}}{example}{example} {{host}}|{{string}}{example}{example}{{string}} {example}{example}{{string}} | Get the folders and files.|
 
 
 h1. PortalLinkConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.PortalLinkConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*PortalLinkConnector*|{noformat}{portalname}/{restcontextname}/portalLinks/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-connector{noformat} |Return a page URI for a given location.|
+|*PortalLinkConnector*|{{ {noformat}{portalname}/{restcontextname}/portalLinks/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-connector{noformat} }} | Return a page URI for a given location.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getPageURI*|{noformat}{portalname}/{restcontextname}/portalLinks/getFoldersAndFiles/{noformat}|currentFolder {example}{example} {example}{example}|String{example}{example}String {example}{example}String|Get the page URI.|
+|*getPageURI*|{{ {noformat}{portalname}/{restcontextname}/portalLinks/getFoldersAndFiles/{noformat} }} | {{currentFolder}} {example}{example} {example}{example}|{{string}}{example}{example}{{string}} {example}{example}{{string}} | Get the page URI.|
 
 
 h1. GetEditedDocumentRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*GetEditedDocumentRESTService*|{noformat}{portalname}/{restcontextname}/presentation/document/edit/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-publication{noformat} |Return the latest edited documents.|
+|*GetEditedDocumentRESTService*|{{ {noformat}{portalname}/{restcontextname}/presentation/document/edit/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-publication{noformat} }} | Return the latest edited documents.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getLastEditedDoc*|{noformat}{portalname}/{restcontextname}/presentation/document/edit/{repository}/{noformat}|repository|String|Return the latest edited documents.|
+|*getLastEditedDoc*|{{ {noformat}{portalname}/{restcontextname}/presentation/document/edit/{repository}/{noformat} }} | {{repository}}| {{string}} | Return the latest edited documents.|
 
 
 h1. PublicationGetDocumentRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*PublicationGetDocumentRESTService*|{noformat}{portalname}/{restcontextname}/publication/presentation/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-publication{noformat} |Return a list of published documents.|
+|*PublicationGetDocumentRESTService*|{{ {noformat}{portalname}/{restcontextname}/publication/presentation/{noformat} }} | *Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-publication{noformat} }} | Return a list of published documents.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getPublishDocument*|{noformat}{portalname}/{restcontextname}/publication/presentation/{repository}/{workspace}/{state}/{noformat} |repository{example}{example} workspace{example}{example} state{example}{example}showItems| String{example}{example} String{example}{example} String{example}{example}String|Return a list of published document by the default plugin.|
-|*getPublishedListDocument*|{noformat}{portalname}/{restcontextname}/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}/{noformat} |repository{example}{example} workspace{example}{example} publicationPluginName{example}{example} state{example}{example} showItems|String {example}{example}String {example}{example}String {example}{example}String{example}{example}String {example}{example}String|Return a list of published documents by a specific plugin.|
+|*getPublishDocument*|{{ {noformat}{portalname}/{restcontextname}/publication/presentation/{repository}/{workspace}/{state}/{noformat} }} |{{repository}}{example}{example} {{workspace}}{example}{example} {{state}}{example}{example}{{showItems}} | {{string}}{example}{example} {{string}}{example}{example} {{string}}{example}{example}{{string}} | Return a list of published document by the default plugin.|
+|*getPublishedListDocument*|{{ {noformat}{portalname}/{restcontextname}/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}/{noformat} }} | {{repository}}{example}{example} {{workspace}}{example}{example} {{publicationPluginName}}{example}{example} {{state}}{example}{example} {{showItems}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}{example}{example}{{string}} {example}{example}{{string}} | Return a list of published documents by a specific plugin.|
 
 
 h1. FavoriteRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.FavoriteRESTService}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*FavoriteRESTService*|{noformat}{portalname}/{restcontextname}/favorite/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-services{noformat} |Return a list of favourite documents of a given user.|
+|*FavoriteRESTService*|{{ {noformat}{portalname}/{restcontextname}/favorite/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-services{noformat} }} | Return a list of favourite documents of a given user.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getFavoriteByUser*|{noformat}{portalname}/{restcontextname}/favorite/all/{repoName}/{workspaceName}/{userName}{noformat}|repoName{example}{example} workspaceName{example}{example} userName{example}{example} showItems|String {example}{example}String {example}{example}String {example}{example}String|Return a list of favourite documents of a given user.|
+|*getFavoriteByUser*|{{ {noformat}{portalname}/{restcontextname}/favorite/all/{repoName}/{workspaceName}/{userName}{noformat} }} | {{repoName}}{example}{example} {{workspaceName}}{example}{example} {{userName}}{example}{example} {{showItems}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} | Return a list of favourite documents of a given user.|
 
 
 h1. RESTImagesRendererService   {anchor:id=CONTref.Devref.PublicRestAPIs.RESTImagesRendererService}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*RESTImagesRendererService*|{noformat}{portalname}/{restcontextname}/images/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-core-services{noformat} |Get the image binary data of a given image node.|
+|*RESTImagesRendererService*|{{ {noformat}{portalname}/{restcontextname}/images/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-services{noformat} }} | Get the image binary data of a given image node.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*serveImage*|{noformat}{portalname}/{restcontextname}/images/{repositoryName}/{workspaceName}/{nodeIdentifier}/{noformat}|repositoryName {example}{example}workspaceName{example}{example} nodeIdentifier{example}{example} param|String{example}{example}String {example}{example}String {example}{example}String|Get the image binary data of a given image node.|
+|*serveImage*|{{ {noformat}{portalname}/{restcontextname}/images/{repositoryName}/{workspaceName}/{nodeIdentifier}/{noformat} }} | {{repositoryName}}} {example}{example}{{workspaceName}}{example}{example} {{nodeIdentifier}}{example}{example} {{param|{{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} | Get the image binary data of a given image node.|
 
 
 h1. LifecycleConnector  {anchor:id=CONTref.Devref.PublicRestAPIs.LifecycleConnector}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*LifecycleConnector*|{noformat}{portalname}/{restcontextname}/authoring/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-ext-authoring-services{noformat} |Return a list of contents in a given state range of the publication lifecycle.|
+|*LifecycleConnector*|{{ {noformat}{portalname}/{restcontextname}/authoring/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}{{exo-ecms-ext-authoring-services}}{noformat} }} | Return a list of contents in a given state range of the publication lifecycle.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*byState*|{noformat}{portalname}/{restcontextname}/authoring/bystate/{noformat}|fromstate{example}{example} user{example}{example} lang{example}{example} workspace{example}{example} json|String {example}{example}String {example}{example}String {example}{example}String {example}{example}String|Return a list of contents from the given state to the last state.|
-|*toState*|{noformat}{portalname}/{restcontextname}/authoring/toState/{noformat}|fromstate{example}{example} tostate{example}{example} user{example}{example} lang{example}{example} workspace{example}{example} json|String {example}{example}String {example}{example}String {example}{example}String {example}{example}String {example}{example}String|Return a list of contents from the beginning state to the last state.|
-|*byDate*|{noformat}{portalname}/{restcontextname}/authoring/byDate/{noformat}|fromstate{example}{example} date{example}{example} lang{example}{example} workspace{example}{example} json|String{example}{example}String {example}{example}String {example}{example} String{example}{example}String{example}{example} String|Return a list of contents from the given beginning state and published before the given date.|
+|*byState*|{{ {noformat}{portalname}/{restcontextname}/authoring/bystate/{noformat} }} | {{fromstate}}{example}{example} {{user}}{example}{example} {{lang}}{example}{example} {{workspace}}{example}{example} {{json}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} | Return a list of contents from the given state to the last state.|
+|*toState*|{{ {noformat}{portalname}/{restcontextname}/authoring/toState/{noformat} }} |{{fromstate}}{example}{example} {{tostate}}{example}{example} {{user}}{example}{example} {{lang}}{example}{example} {{workspace}} {example}{example} {{json}} | {{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}|Return a list of contents from the beginning state to the last state.|
+|*byDate*|{{ {noformat}{portalname}/{restcontextname}/authoring/byDate/{noformat} }} |{{fromstate}}{example}{example} {{date}}{example}{example} {{lang}}{example}{example} {{workspace}}{example}{example} {{json}} | {{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example} {{string}}{example}{example}{{string}}{example}{example} {{string}} | Return a list of contents from the given beginning state and published before the given date.|
 
 
 h1. CopyContentFile {anchor:id=CONTref.Devref.PublicRestAPIs.CopyContentFile}
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*CopyContentFile*|{noformat}{portalname}/{restcontextname}/copyfile/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: {noformat}exo-ecms-ext-authoring-services{noformat} | Copy a file.|
+|*CopyContentFile*|{{ {noformat}{portalname}/{restcontextname}/copyfile/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-ext-authoring-services{noformat} }}| Copy a file.|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*copyFile*|{noformat}{portalname}/{restcontextname}/copyfile/copy/{noformat}|param - the file information|String|Copy a file.|
+|*copyFile*|{{ {noformat}{portalname}/{restcontextname}/copyfile/copy/{noformat} }} |param - the file information|{{string}}|Copy a file.|
 
 h1. PDFViewerRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PDFViewerRESTService}
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
-|*PDFViewerRESTService*|{noformat}{portalname}/{restcontextname}/pdfviewer//{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/{noformat} |*Maven groupId*: org.exoplatform.ecms {example}{example} *ArtifactId*: ecms-core-viewer| Return the pdf content to display on the web page|
+|*PDFViewerRESTService*|{{ {noformat}{portalname}/{restcontextname}/pdfviewer//{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ecms-core-viewer}} | Return the pdf content to display on the web page|
 
 * *APIs usage*:
 || *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
-|*getCoverImage*|{noformat}{portalname}/{restcontextname}/pdfviewer//{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/{noformat} | repoName{example}{example} workspaceName{example}{example}uuid{example}{example}pageNumber{example}{example}rotation {example}{example}scale|String{example}{example}String {example}{example}String {example}{example}String {example}{example}String |Return a thumbnail image for a pdf document. |
+|*getCoverImage*|{{ {noformat}{portalname}/{restcontextname}/pdfviewer//{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/{noformat} }} | {{repoName}}{example}{example} {{workspaceName}}{example}{example}{{uuid}}{example}{example}{{pageNumber}}{example}{example}{{rotation}} {example}{example}{{scale}} | {{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}} |Return a thumbnail image for a pdf document. |

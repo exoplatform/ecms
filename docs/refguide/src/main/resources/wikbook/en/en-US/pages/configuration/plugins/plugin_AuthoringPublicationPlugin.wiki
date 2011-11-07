@@ -15,6 +15,6 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 {code}
 
 In which: 
-* *Name*: {{Authoring publication}}
-* *Set-method*: {{addPublicationPlugin}}
-* *Type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin}}
+* *Name*: _Authoring publication_
+* *Set-method*: _addPublicationPlugin_
+* *Type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin_

@@ -11,16 +11,16 @@ By default, this porlet is applied for the Contact Us portlet in eXo Content.
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.FastContentCreator.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||
-| *mode* | {{String}} | {{basic}} | The default mode of the *Fast Content Creator* portlet. |
-| *repository* | {{String}} | {{repository}} | The name of the current repository.|
-| *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored. |
-| *path* | {{String}} | {{/Groups/platform/users/Documents}} | The destination path where the content is stored. |
-| *type* | {{String}} | {{exo:article}} | The node type of document which is shown on the dialog form. |
-| *saveButton* | {{String}} | {{Save}} | The custom button: *Save*. |
-| *saveMessage* | {{String}} | {{This node has been saved successfully}} | The custom message when the user clicks the *Save* button. |
-| *isRedirect* | {{Boolean}} | {{false}} | Specify whether redirecting to another page or not. |
-| *redirectPath* | {{String}} | http://www.google.com.vn | The path to which the page will redirect.|
-| *isActionNeeded* | {{Boolean}} | {{true}} | Specify whether an action is needed to save to the configuration or not. |
+| *mode* | {{string}} | {{basic}} | The default mode of the *Fast Content Creator* portlet. |
+| *repository* | {{string}} | {{repository}} | The name of the current repository.|
+| *workspace* | {{string}} | {{collaboration}} | The workspace where the content is stored. |
+| *path* | {{string}} | {{/Groups/platform/users/Documents}} | The destination path where the content is stored. |
+| *type* | {{string}} | {{exo:article}} | The node type of document which is shown on the dialog form. |
+| *saveButton* | {{string}} | {{Save}} | The custom button: *Save*. |
+| *saveMessage* | {{string}} | {{This node has been saved successfully}} | The custom message when the user clicks the *Save* button. |
+| *isRedirect* | {{boolean}} | {{false}} | Specify whether redirecting to another page or not. |
+| *redirectPath* | {{string}} | http://www.google.com.vn | The path to which the page will redirect.|
+| *isActionNeeded* | {{boolean}} | {{true}} | Specify whether an action is needed to save to the configuration or not. |
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.FastContentCreator.SampleConfiguration}
 

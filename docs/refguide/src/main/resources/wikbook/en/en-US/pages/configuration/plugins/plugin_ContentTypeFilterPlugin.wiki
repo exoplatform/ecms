@@ -42,12 +42,12 @@ The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WE
 {code}
 
 In which:
-* *Name*: {{FilterContentTypeForWCMSpecificFolder}}
-* *Set-method*: {{addContentTypeFilterPlugin}}
-* *Type*: {{org.exoplatform.services.cms.templates.ContentTypeFilterPlugin}}
+* *Name*: _FilterContentTypeForWCMSpecificFolder_
+* *Set-method*: _addContentTypeFilterPlugin_
+* *Type*: _org.exoplatform.services.cms.templates.ContentTypeFilterPlugin_
 
-* *Object type*: {{org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig}}
+* *Object type*: _org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig_
 ||*Field*||*Type*||*Value*||*Description*||
-|*folderType*| {{String}}| {{exo:cssFolder}}|The folder type. |
-|*contentTypes*| {{ArrayList}}| _{noformat}{java.util.ArrayList}{noformat}_| The content type. |
+|*folderType*| {{string}} | {{exo:cssFolder}}|The folder type. |
+|*contentTypes*| {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The content type. |
 

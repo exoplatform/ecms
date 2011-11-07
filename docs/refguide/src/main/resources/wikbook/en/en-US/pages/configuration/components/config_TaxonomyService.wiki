@@ -58,15 +58,15 @@ The tree of taxonomies can be managed simply, such as copying/cutting/pasting no
 {code}
 
 *Details*:
-* *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission}}
+* *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission_
 || *Field* || *Type* || *Value*|| *Description* ||
 | *permissions* | {{ArrayList}}| _{noformat}{java.util.ArrayList}{noformat}_ | The list of the default user permissions to access the taxonomy tree. |
-* *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission}}
+* *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission_
 
 ||*Field *||*Type*||*Description*||
-| *identity* | {{String}} | The name of user, group or membership. |
-| *read* |{{Boolean}} | The permission to read the taxonomy tree. |
-| *addNode* | {{Boolean}}| The permission to add a node to the taxonomy tree. |
-| *setProperty* | {{Boolean}} | The permission to set properties for a node in the taxonomy tree. |
-| *remove* | {{Boolean}} | The permission to remove a node from the taxonomy tree. |
+| *identity* | {{string}} | The name of user, group or membership. |
+| *read* |{{boolean}} | The permission to read the taxonomy tree. |
+| *addNode* | {{boolean}}| The permission to add a node to the taxonomy tree. |
+| *setProperty* | {{boolean}} | The permission to set properties for a node in the taxonomy tree. |
+| *remove* | {{boolean}} | The permission to remove a node from the taxonomy tree. |
 

@@ -141,16 +141,16 @@ The configuration of this component is found in _packaging/ecmdemo/webapp/src/ma
 * *Value-param*
 
 ||*Name*||*Type*||*Value*||*Description*||
-|*portalNames* |{{String}}|{{classic, acme}}|The portal names.|
-|*administrators* |{{String}}|{{root}}|The administrator who manages the newsletter portlet.|
+|*portalNames* | {{string}} | {{classic, acme}} | The portal names.|
+|*administrators* | {{string}} | {{root}} | The administrator who manages the newsletter portlet.|
 
 * *Object-param*:
 ** *object type*: {{org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig}}
 ||*Field*||*Type*||*Description*||
-|*name* |{{String}}| The name of categories or subscriptions.|
-|*title* |{{String}} |The title of categories or subscriptions.|
-|*description*|{{String}} |The description of categories or subscriptions. |
-|*moderator* |{{String}}|The users or groups that can moderate the newsletter portlet.|
-|*categoryName* |{{String}}|The categories name.|
-|*redactor* |{{String}}|The users or groups that are newsletter redactor.|
-|*mail*|{{String}} |The email that user uses to subscribe.|
+|*name* |{{string}}| The name of categories or subscriptions.|
+|*title* |{{string}} |The title of categories or subscriptions.|
+|*description*|{{string}} |The description of categories or subscriptions. |
+|*moderator* |{{string}}|The users or groups that can moderate the newsletter portlet.|
+|*categoryName* |{{string}}|The categories name.|
+|*redactor* |{{string}}|The users or groups that are newsletter redactor.|
+|*mail*|{{string}} |The email that user uses to subscribe.|

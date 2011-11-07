@@ -95,15 +95,15 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{AddLifecycle}}
-* *Set-method*: {{addLifecycle}}
-* *Type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin}}
+* *Name*: _AddLifecycle_
+* *Set-method*: _addLifecycle_
+* *Type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin_
 
 * *Object type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle}}
 ||*Field*||*Type*||*Value*||*Description*||
-|*name*|{{String}}|{{lifecycle1}}|The name of the lifecycle.|
-|*publicationPlugin*|{{string}}|{{Authoring publication}}|The publication plugin name.|
-|*states*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_|The list of the publication states.|
+|*name*|{{string}}|{{lifecycle1}}| The name of the lifecycle.|
+|*publicationPlugin*|{{string}}| {{Authoring publication}}| The publication plugin name.|
+|*states*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_| The list of the publication states.|
 
 
 * *Object type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State}}

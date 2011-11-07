@@ -34,11 +34,11 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{PDFThumbnailPlugin}}
-* *Set-method*: {{addPlugin}}
-* *Type*: {{org.exoplatform.services.cms.thumbnail.impl.PDFThumbnailPlugin}}
+* *Name*: _PDFThumbnailPlugin_
+* *Set-method*: _addPlugin_
+* *Type*: _org.exoplatform.services.cms.thumbnail.impl.PDFThumbnailPlugin_
 
-* *Object type*: {{org.exoplatform.services.cms.thumbnail.impl.ThumbnailType}}
+* *Object type*: _org.exoplatform.services.cms.thumbnail.impl.ThumbnailType_
 ||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||
 | *mimeTypes* | {{String}} | {{application/pdf}} | The MIME type of the pdf thumbnail. |
 

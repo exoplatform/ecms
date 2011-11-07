@@ -22,5 +22,5 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 * *Value-param*:
 ||Name||*Type*||*Value*||*Description*||
-|*host*|{{The host IP}}|{{127.0.0.1}}|The host from which a document is converted into different office formats.|
-|*port*|{{The port number}}|{{8100}}|The port number is open to accept converting a document into different office formats.|
+|*host*| {{The host IP}} | {{127.0.0.1}} | The host from which a document is converted into different office formats.|
+|*port*| {{The port number}}| {{8100}} | The port number is open to accept converting a document into different office formats.|

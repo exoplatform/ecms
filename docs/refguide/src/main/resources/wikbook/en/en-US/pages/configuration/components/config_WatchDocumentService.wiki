@@ -30,9 +30,9 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 *Details*:
 
 * *object-param*:
-** *Object type:* {{org.exoplatform.services.cms.watch.impl.MessageConfig}}
+** *Object type:* _org.exoplatform.services.cms.watch.impl.MessageConfig_
 
 ||*Field*||*Type*||*Value*||*Description*||
-|*sender* |{{String}}|{{support@exoplatform.com}}|The sender who sends the notification mail.|
-|*subject* |{{String}}|{{Your watching document is changed.}}|The subject of the notification mail.|
-|*content* |{{String}}|{{The document that you are watching is changed. Please go to ecm to see this change.}}|The content of the notification mail. |
+|*sender* | {{string}} | {{support@exoplatform.com}} | The sender who sends the notification mail.|
+|*subject* | {{string}} | {{Your watching document is changed.}} | The subject of the notification mail.|
+|*content* | {{string}} | {{The document that you are watching is changed. Please go to ecm to see this change.}} | The content of the notification mail. |

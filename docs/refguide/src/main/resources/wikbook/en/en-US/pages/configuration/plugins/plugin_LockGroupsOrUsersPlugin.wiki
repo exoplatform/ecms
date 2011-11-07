@@ -35,9 +35,9 @@ The configuration is applied mainly in _core/core-configuration/src/main/webapp/
 
 In which:
 
-* *Name*: {{predefinedLockGroupsOrUsersPlugin}}
-* *Set-method*: {{addLockGroupsOrUsersPlugin}}
-* *Type*: {{org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin}}
+* *Name*: _predefinedLockGroupsOrUsersPlugin_
+* *Set-method*: _addLockGroupsOrUsersPlugin_
+* *Type*: _org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersPlugin_
 
 * *Object type*: {{org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig}}
 ||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||

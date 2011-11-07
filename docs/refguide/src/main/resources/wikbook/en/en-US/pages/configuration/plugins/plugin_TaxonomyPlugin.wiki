@@ -78,33 +78,33 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{predefinedTaxonomyPlugin}}
+* *Name*: _predefinedTaxonomyPlugin_
 
-* *Set-method*: {{addTaxonomyPlugin}}
+* *Set-method*: _addTaxonomyPlugin_
 
-* *Type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin}}
+* *Type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin_
 
 * *Init-param*:
 || *Value-param*|| *Type* || *Value* || *Description*||
-| *autoCreateInNewRepository* | {{Boolean}} |{{true}}| Enable/Disable the creation of the taxonomies in the newly created repository. |
-| *repository* | {{String}} |{{repository}}| The name of the repository where taxonomies are created. |
-| *workspace* | {{String}} |{{dms-system}}| The name of the workspace where taxonomies are created. |
-| *treeName* | {{String}} | {{system}}|The name of the taxonomy tree created. |
+| *autoCreateInNewRepository* | {{boolean}} |{{true}}| Enable/Disable the creation of the taxonomies in the newly created repository. |
+| *repository* | {{string}} |{{repository}}| The name of the repository where taxonomies are created. |
+| *workspace* | {{string}} |{{dms-system}}| The name of the workspace where taxonomies are created. |
+| *treeName* | {{string}} | {{system}}|The name of the taxonomy tree created. |
 
-* *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}}
+* *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig_
 ||*Name*||*Type*||*Value*||*Description*||
-|*taxonomies*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_| The list of taxonomies to be configured with permission.|
+|*taxonomies*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}| The list of taxonomies to be configured with permission.|
 
-* *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy}}
+* *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy_
 ||*Name*||*Type*||*Value*||*Description*||
-|*permissions*|{{ArrayList}}|_{noformat}{java.util.ArrayList}{noformat}_|The list of permissions for users or groups to access the taxonomy.|
+|*permissions*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}|The list of permissions for users or groups to access the taxonomy.|
 
 * *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission}}
 ||*Name*||*Type*||*Value*||*Description*||
-|*identity*|{{String}}|{noformat}*:/platform/users{noformat}|The name of the user, group or membership.|
-|*read*|{{Boolean}}|{{true}}|The permission to read the taxonomy tree.|
-|*addNode*| {{Boolean}}|{{true}}|The permission to add a node to the taxonomy tree.|
-|*setProperty*|{{Boolean}}|{{true}}|The permission to set properties for a node in the taxonomy tree. |
-|*remove*| {{Boolean}}|{{false}} |The permission to remove a node from the taxonomy tree. |
+|*identity*|{{string}}|{noformat}*:/platform/users{noformat}|The name of the user, group or membership.|
+|*read*|{{boolean}}|{{true}}|The permission to read the taxonomy tree.|
+|*addNode*| {{boolean}}|{{true}}|The permission to add a node to the taxonomy tree.|
+|*setProperty*|{{boolean}}|{{true}}|The permission to set properties for a node in the taxonomy tree. |
+|*remove*| {{boolean}}|{{false}} |The permission to remove a node from the taxonomy tree. |
 
 

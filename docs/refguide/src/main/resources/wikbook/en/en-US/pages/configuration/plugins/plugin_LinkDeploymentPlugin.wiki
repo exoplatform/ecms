@@ -60,11 +60,11 @@ The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp
 
 In which:
 
-* *Name*: {{Content Initializer Service}}
-* *Set-method*: {{addPlugin}}
-* *Type*: {{org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin}}
+* *Name*: _Content Initializer Service_
+* *Set-method*: _addPlugin_
+* *Type*: _org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin_
 
-* *Object type*: {{org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor}}
+* *Object type*: _org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor_
 ||*Field*||*Type*||*Value*||*Description*||
-|*sourcePath*|{{string}}|{{repository:collaboration:/sites content/live/acme/web contents/News/News1}}|The path to the source where this plugin will get data.|
-|*targetPath*|{{string}}|{{repository:collaboration:/sites content/live/acme/categories/acme}}|The path to the target where this plugin will deploy.|
+|*sourcePath*|{{string}}|{{repository:collaboration:/sites content/live/acme/web contents/News/News1}}| The path to the source where this plugin will get data.|
+|*targetPath*|{{string}}|{{repository:collaboration:/sites content/live/acme/categories/acme}}| The path to the target where this plugin will deploy.|

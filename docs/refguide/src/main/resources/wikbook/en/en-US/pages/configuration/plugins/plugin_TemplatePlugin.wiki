@@ -8,7 +8,6 @@ Like the dialog template, the view template renders information of the node. You
 With this kind of template, node information is only displayed but cannot be edited.
 See details at [ContentType|#CONTref.CONTref.InsideWCMTemplates.ContentTypes].
 
-
 To use the plugin in the component configuration, you must use the following target-component:
 
 {code:xml}
@@ -20,7 +19,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 *Sample configuration*:
 
 This below example is configuration for the _{noformat}nt:file{noformat}_ template, any other template will be put in the same level with this template starting from the line
-{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}} as the another node type.
+_{noformat}<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType>{noformat}_ as the another node type.
 
 {code:xml}
 <external-component-plugins>
@@ -143,36 +142,36 @@ This below example is configuration for the _{noformat}nt:file{noformat}_ templa
 {code}
 In which:
 
-* *name*: {{addTemplates}}
+* *name*: _addTemplates_
 
-* *set-method*: {{addTemplates}}
+* *set-method*: _addTemplates_
 
-* *type*: {{org.exoplatform.services.cms.templates.impl.TemplatePlugin}}
+* *type*: _org.exoplatform.services.cms.templates.impl.TemplatePlugin_
 
 * *Init-params*:
 
 ||*Value-param*||*Type*||*Value*||*Description*||
-|autoCreateInNewRepository|{{Boolean}}|{{true}}|Enable the application to import predefined templates at the start-up of template service automatically.|
-|storedLocation|{{String}}|{{war:/conf/dms-extension/dms/artifacts/templates}}|The location of stored templates.|
-|repository|{{String}}|{{repository}}|Location of stored templates.|
+|autoCreateInNewRepository|{{boolean}}|{{true}}|Enable the application to import predefined templates at the start-up of template service automatically.|
+|storedLocation|{{string}}|{{war:/conf/dms-extension/dms/artifacts/templates}}|The location of stored templates.|
+|repository|{{string}}|{{repository}}|Location of stored templates.|
 
-* *Object-type*: {{org.exoplatform.services.cms.templates.impl.TemplateConfig}} that defines all available template files, using the "collection type" configuration.
+* *Object-type*: _org.exoplatform.services.cms.templates.impl.TemplateConfig_ that defines all available template files, using the "collection type" configuration.
 
 * *type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
 ||*Field* || *Type*||*Value* ||*Description*||
-|*nodeTypes*|{{ArrayList}}|{noformat}{java.util.ArrayList}{noformat}|The node type of the template.|
+|*nodeTypes*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}| The node type of the template.|
 
 * *Object-type*: {{org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType}}
 ||*Field*||*Type*||*Value* ||*Description*||
-|*nodetypeName*|{{String}}|nt:file |The name of template that is saved as a node in system.|
-|*documentTemplate*|{{Boolean}}| {{true}}|Determine if the node type is a document type.|
-|*label*|{{String}}| {{file}}| Visual display of the title for this node.|
-|*referencedView*|{{ArrayList}} |{noformat}{java.util.ArrayList}{noformat} |Determine how to display a view. |
-|*referencedDialog*|{{ArrayList}} |{noformat}{java.util.ArrayList}{noformat}|Determine how to display a dialog to input information. |
-|*referencedSkin*|{{ArrayList}} |{noformat}{java.util.ArrayList}{noformat}|Determine the stylesheet for display. |
+|*nodetypeName*|{{string}}|nt:file |The name of template that is saved as a node in system.|
+|*documentTemplate*|{{boolean}}| {{true}}|Determine if the node type is a document type.|
+|*label*|{{string}}| {{file}}| Visual display of the title for this node.|
+|*referencedView*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }} |Determine how to display a view. |
+|*referencedDialog*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }}|Determine how to display a dialog to input information. |
+|*referencedSkin*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }}|Determine the stylesheet for display. |
 
 * *Object type:* {{org.exoplatform.services.cms.templates.impl.TemplateConfig$Template}}
 
 ||*Field *||*Type*||*Description*||
-|*templateFile*|{{String}}|The location of the file store for the template's presentation.|
-|*roles*|{{String}}|Determine who can access this object (View/Dialog/CSS).|
+|*templateFile*|{{string}}|The location of the file store for the template's presentation.|
+|*roles*|{{string}}|Determine who can access this object (View/Dialog/CSS).|

@@ -6,10 +6,10 @@ In general, this service stands between publication and cache.
 _Package org.exoplatform.services.wcm.publication.WCMComposer_
 
 || *Method* ||*Param* || *Return* || *Description* ||
-| *getContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{nodeIdentifier}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | Node | Return contents at the specified path based on filters. |
-| *getContents*(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{path}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | List<Node> | Return contents at the specified path based on filters.|
-| *updateContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters)throws Exception; |{{epository}} {example}{example}{{workspace}} {example}{example} {{path}} {example}{example} {{filters}} | boolean | Update content.|
-| *getAllowedStates*String mode)throws Exception; |{{mode}}| List<String> | Return allowed states for a specified mode.  |
-| *cleanTemplates*()throws Exception;|N/A | void |Initialize the template hashmap.|
-| *isCached*()throws Exception;|N/A | boolean |  Check isCache or not.|
-| *updateTemplatesSQLFilter*()throws Exception; |N/A|String | Update all document nodetypes and write a query cause. It returns a part of the query that allows to search all document nodes and taxonomy links. Return null if there is any exception.|
+| *getContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{nodeIdentifier}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | {{Node}} | Return contents at the specified path based on filters. |
+| *getContents*(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{path}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | {{List<Node>}} | Return contents at the specified path based on filters.|
+| *updateContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters)throws Exception; |{{epository}} {example}{example}{{workspace}} {example}{example} {{path}} {example}{example} {{filters}} | {{boolean}} | Update content.|
+| *getAllowedStates*String mode)throws Exception; |{{mode}}| {{List<String>}} | Return allowed states for a specified mode.  |
+| *cleanTemplates*()throws Exception;| {{N/A}} | {{void}} |Initialize the template hashmap.|
+| *isCached*()throws Exception;| {{N/A}} | {{boolean}} |  Check isCache or not.|
+| *updateTemplatesSQLFilter*()throws Exception; | {{N/A}} | {{String}} | Update all document nodetypes and write a query cause. It returns a part of the query that allows to search all document nodes and taxonomy links. Return null if there is any exception.|

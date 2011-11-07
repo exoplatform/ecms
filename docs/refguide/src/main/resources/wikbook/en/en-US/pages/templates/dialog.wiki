@@ -3,13 +3,13 @@ Dialogs are Groovy templates that generate forms by mixing static HTML fragments
 h1. Common parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters}
 
 These following parameters are common and can be used for all input fields.
-||*Parameter*||*Type*||*Required*||*Description*||*Example*||
-|*jcrPath*|{{String}}|!images/check.gif!|The relative path inside the current node.|{{jcrPath=/node/exo:title}}|
-|*mixintype*|{{String}} with the commas (,) character.|!images/error.gif!|The list of mixin types you want to initialize when creating the content.|{example}{{mixintype=mix:i18n}}{example} {example}{{mixintype=mix:votable,mix:commentable,mix:i18n}}{example}|
-|*validate*|{{String}} with the comma (,) character|!images/error.gif!|The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes.|{{validate=empty}}{example} {example}{{validate=empty,name}}{example}{example}{{validate=org.exoplatform.webui.form.validator.StringLengthValidator}}|
-|*editable*|{{String}}|!images/error.gif!|The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|{{editable=if-null}}|
-|*multiValues*|{{Boolean}}|!images/error.gif!|Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|{{multiValues=true}}|
-|*visible*|{{Boolean}}|!images/error.gif!|The input is visible if this value is true.|{{visible=true}}|
+||*Parameter*||*Type*||*Required*||*Example*||*Description*||
+|*jcrPath*|{{string}}|!images/check.gif!|{{jcrPath=/node/exo:title}}|The relative path inside the current node.|
+|*mixintype*|{{string}} with the commas (,) character.|!images/error.gif!|{example}{{mixintype=mix:i18n}}{example} {example}{{mixintype=mix:votable,mix:commentable,mix:i18n}}{example}|The list of mixin types you want to initialize when creating the content.|
+|*validate*|{{string}} with the comma (,) character|!images/error.gif!|{{validate=empty}}{example} {example}{{validate=empty,name}}{example}{example}{{validate=org.exoplatform.webui.form.validator.StringLengthValidator}}|The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes.|
+|*editable*|{{string}}|!images/error.gif!|{{editable=if-null}}|The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
+|*multiValues*|{{boolean}}|!images/error.gif!|{{multiValues=true}}|Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
+|*visible*|{{boolean}}|!images/error.gif!|{{visible=true}}|The input is visible if this value is true.|
 
 See also:
 
@@ -77,10 +77,10 @@ h1. Rich Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Ri
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.AdditionParameters}
 
 ||*Parameter*||*Type*||*Required*||*Description*||*Example*||
-|*options*|{{String}} with the semicolon (;) character|!images/error.gif!|Some options for CKEditor field: toolbar, width and height.|{{options=CompleteWCM;width:'100%';height:'200px';}}|
-|*toolbar*|{{String}}|!images/error.gif!|The predefined toolbar for CKEditor. The value can be: {{Default}}, {{Basic}}, {{CompleteWCM}}, {{BasicWCM}}, {{SuperBasicWCM}}.|{{options=CompleteWCM}}|
-|*width*|{{String}}|!images/error.gif!|The width of CKEditor. Its value can be the percent of pixel.|{{options=width:'100%'}}|
-|*height*|{{String}}|!images/error.gif!|The height of CKEditor. Its value can be the percent of pixel.|{{options=height:'200px'}}|
+|*options*|{{string}} with the semicolon (;) character|!images/error.gif!|Some options for CKEditor field: toolbar, width and height.|{{options=CompleteWCM;width:'100%';height:'200px';}}|
+|*toolbar*|{{string}}|!images/error.gif!|The predefined toolbar for CKEditor. The value can be: {{Default}}, {{Basic}}, {{CompleteWCM}}, {{BasicWCM}}, {{SuperBasicWCM}}.|{{options=CompleteWCM}}|
+|*width*|{{string}}|!images/error.gif!|The width of CKEditor. Its value can be the percent of pixel.|{{options=width:'100%'}}|
+|*height*|{{string}}|!images/error.gif!|The height of CKEditor. Its value can be the percent of pixel.|{{options=height:'200px'}}|
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.Example}
@@ -96,7 +96,7 @@ h1. Calendar Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Cal
 
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *options* | {{String}} | !images/error.gif! | An option for the calendar field: Display time. | {{options=displaytime}} |
+| *options* | {{string}} | !images/error.gif! | An option for the calendar field: Display time. | {{options=displaytime}} |
 
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
@@ -189,7 +189,7 @@ h1. Radio Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioF
 
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *options* | {{String}} with the comma (,) characters | !images/error.gif! | Some radio values. | {{options=radio1,radio2,radio3}} |
+| *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some radio values. | {{options=radio1,radio2,radio3}} |
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.Example}
@@ -203,7 +203,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 h1. Select box Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *options* | {{String}} with the comma (,) characters | !images/error.gif! | Some option values. | {{options=option1,option2,option3}} |
+| *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some option values. | {{options=option1,option2,option3}} |
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField.Example}
@@ -219,7 +219,7 @@ h1. Checkbox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Che
 
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *options* | {{String}} with the comma (,) characters | !images/error.gif! | Some checkbox values. | {{options=checkbox1,checkbox2,checkbox3}} |
+| *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some checkbox values. | {{options=checkbox1,checkbox2,checkbox3}} |
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.Example}
@@ -251,15 +251,15 @@ h1. Action Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Actio
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.AdditionParameters}
 
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *selectorClass* | {{String}} | !images/check.gif! | The component to display. | {{selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} |
-| *selectorIcon* | {{String}} | !images/check.gif! | The action icon. | {{selectorIcon=SelectPath24x24Icon}} |
+| *selectorClass* | {{string}} | !images/check.gif! | The component to display. | {{selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} |
+| *selectorIcon* | {{string}} | !images/check.gif! | The action icon. | {{selectorIcon=SelectPath24x24Icon}} |
 
 Depending on the {{selectorClass}}, some other parameters can be added.
 
 For example, the component {{org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} needs the following parameter:
 
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *workspaceField* | {{String}} | !images/error.gif! | The field which enables you to select a workspace. | {{workspaceField=targetWorkspace}} |
+| *workspaceField* | {{string}} | !images/error.gif! | The field which enables you to select a workspace. | {{workspaceField=targetWorkspace}} |
 
 The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} does not need any special parameters.
 
@@ -278,8 +278,8 @@ h1. Interceptors {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Inter
 
 To add an interceptor to a dialog, you can use this method {{*uicomponent.addInterceptor(String scriptPath, String type)*}}
 || *Parameters* ||*Type* ||*Description* ||
-| *scriptPath* | {{String}} | The relative path to the script file. |
-| *type* | {{String}} | The type of interceptor: {{prev}} or {{post}}. |
+| *scriptPath* | {{string}} | The relative path to the script file. |
+| *type* | {{string}} | The type of interceptor: {{prev}} or {{post}}. |
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Interceptors.Example}
 

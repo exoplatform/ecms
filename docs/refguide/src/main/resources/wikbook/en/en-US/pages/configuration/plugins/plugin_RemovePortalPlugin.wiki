@@ -1,1 +1,1 @@
-This is an abstract class and the parent of *[RemoveTaxonomyPlugin|#CONTref.Configuration.Plugins.RemoveTaxonomyPlugin]*. You can create a link from this plugin to its children.
+This is an abstract class and the parent of [_RemoveTaxonomyPlugin_|#CONTref.Configuration.Plugins.RemoveTaxonomyPlugin]. You can create a link from this plugin to its children.

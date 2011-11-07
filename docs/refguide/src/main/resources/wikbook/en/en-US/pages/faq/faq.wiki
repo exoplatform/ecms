@@ -1,12 +1,12 @@
 h1. How to deploy a workflow? {anchor:id=CONTref.FAQ.HowToDeployWorkflow}
  
-The _*addPlugin()*_ function of *WorkflowServiceContainer* service is used to register a Business Process when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure the workflow service to invoke the _*addPlugin()*_ function by adding the _*external-component-plugins*_ element to the configuration file.
+The _addPlugin()_ function of _WorkflowServiceContainer_ service is used to register a Business Process when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure the workflow service to invoke the _addPlugin()_ function by adding the _external-component-plugins_ element to the configuration file.
 
-You have to set values for the name and location of the workflow which you want to use. There are *TWO* ways to configure the location of the workflow.
+You have to set values for the name and location of the workflow which you want to use. There are two ways to configure the location of the workflow.
 
-h2. Deploy a workflow inside a *.war* file {anchor:id=CONTref.FAQ.DeployWorkflowWarFile}
+h2. Deploy a workflow inside a _.war_ file {anchor:id=CONTref.FAQ.DeployWorkflowWarFile}
 
-You can use "war:(FOLDER_PATH)" to configure which *.jar* files contain your workflow processes inside the _*.war*_ file.
+You can use "war:(FOLDER_PATH)" to configure which _.jar_ files contain your workflow processes inside the _.war_ file.
 	
 {code:xml}
 <external-component-plugins>
@@ -43,10 +43,10 @@ You can use "war:(FOLDER_PATH)" to configure which *.jar* files contain your wor
 </external-component-plugins>
 {code}
 
-h2. Deploy a workflow inside a *.jar* file {anchor:id=CONTref.FAQ.DeployWorkflowJarFile}
+h2. Deploy a workflow inside a .jar file {anchor:id=CONTref.FAQ.DeployWorkflowJarFile}
 
 
-You can use "classpath:" to configure which *.jar* files contain your workflow processes inside the _*.jar*_ file.
+You can use _{noformat}classpath:{noformat}_ to configure which _.jar_ files contain your workflow processes inside the _.jar_ file.
 	
 {code:xml}
 <external-component-plugins>
@@ -77,4 +77,4 @@ You can use "classpath:" to configure which *.jar* files contain your workflow p
 </external-component-plugins>
 {code}	
   
-The notification message is displayed when you deploy a workflow on Jboss. If you use "classpath:" to register, you must put your workflow in the *.jar* files inside the _*gatein.ear/lib*_ folder (instead of the *_lib_* folder) to make it work.
+The notification message is displayed when you deploy a workflow on Jboss. If you use _{noformat}classpath:{noformat}_ to register, you must put your workflow in the _.jar_ files inside the _{noformat}gatein.ear/lib{noformat}_ folder (instead of the _lib_ folder) to make it work.

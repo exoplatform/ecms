@@ -83,34 +83,34 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{manage.view.plugin}}
-* *Set-method*: {{setManageViewPlugin}}
-* *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
+* *Name*: _manage.view.plugin_
+* *Set-method*: _setManageViewPlugin_
+* *Type*: _org.exoplatform.services.cms.views.impl.ManageViewPlugin_
 
 * *Init-param*:
 
 || *value-param* || *Type* || *Value*|| *Description* ||
-|*autoCreateInNewRepository*|{{Boolean}} |{{true}} |Allow creating a predefined View in this repository if the value is "true". |
-|*predefinedViewsLocation*|{{String}} |war:/conf/dms-extension/dms/artifacts |The location of the View node in the repository. |
-|*repository*|{{String}} |{{repository}} |The repository name. |
+|*autoCreateInNewRepository*|{{boolean}} |{{true}} |Allow creating a predefined View in this repository if the value is "true". |
+|*predefinedViewsLocation*|{{string}} |war:/conf/dms-extension/dms/artifacts |The location of the View node in the repository. |
+|*repository*| {{string}} | {{repository}} | The repository name. |
 
-* *Object type*: {{org.exoplatform.services.cms.views.ViewConfig}}
+* *Object type*: _org.exoplatform.services.cms.views.ViewConfig_
 
 || *Field* || *Type* || *Value*|| *Description* ||
-| *name* | {{String}} |{{system-view}}| The name of view which must be unique inside WCM. |
-| *permissions* | {{String}} |_{noformat}*:/platform/administrators{noformat}_| Visibility of the view based on eXo rights.|
-| *template* | {{String}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify path to the template location. |
+| *name* | {{string}} |{{system-view}}| The name of view which must be unique inside WCM. |
+| *permissions* | {{string}} |_{noformat}*:/platform/administrators{noformat}_| Visibility of the view based on eXo rights.|
+| *template* | {{string}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify path to the template location. |
 | *tabList* | {{ArrayList}}| _{noformat}{java.util.ArrayList}{noformat}_ | Include a set of view names. |
 
-* *Object type*: {{org.exoplatform.services.cms.views.ViewConfig$Tab}}
+* *Object type*: _org.exoplatform.services.cms.views.ViewConfig$Tab_
 
 || *Field* || *Type* ||*Value*||  *Description* ||
-| *tabName* | {{String}} | {{Info}}|The name of tab which must be unique.  |
-| *button* | {{String}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names. |
+| *tabName* | {{string}} | {{Info}}|The name of tab which must be unique.  |
+| *button* | {{string}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names. |
 
-* *Object type*: {{org.exoplatform.services.cms.views.TemplateConfig}}
+* *Object type*: _org.exoplatform.services.cms.views.TemplateConfig_
 
 || *Field* || *Type* || *Vsalue*||  *Description* ||
-| *type* | {{String}} | {{ecmExplorerTemplate}}| Specify if a name is truly a class representing all properties of a view.  |
-| *name* | {{String}} | {{system-view}}| Specify a set of view component names. |
-| *warPath*| {{String}} |{{/ecm-explorer/SystemView.gtmpl}}| Specify a template location to view.|
+| *type* | {{string}} | {{ecmExplorerTemplate}}| Specify if a name is truly a class representing all properties of a view.  |
+| *name* | {{string}} | {{system-view}}| Specify a set of view component names. |
+| *warPath*| {{string}} |{{/ecm-explorer/SystemView.gtmpl}}| Specify a template location to view.|

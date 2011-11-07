@@ -58,9 +58,9 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{FriendlyService.addConfiguration}}
-* *Set-method*: {{addConfiguration}}
-* *Type*: {{org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin}}
+* *Name*: _FriendlyService.addConfiguration_
+* *Set-method*: _addConfiguration_
+* *Type*: _org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin_
 
 * *Object type*: {{org.exoplatform.services.wcm.friendly.impl.FriendlyConfig}}
 ||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||

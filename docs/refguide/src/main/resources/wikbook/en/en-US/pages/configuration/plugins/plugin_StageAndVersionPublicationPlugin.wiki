@@ -17,7 +17,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *name*: {{States and versions based publication}}
-* *set method*: {{addPublicationPlugin}}
-* *type*: {{org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin}}
+* *name*: _States and versions based publication_
+* *set method*: _addPublicationPlugin_
+* *type*: _org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin_
 

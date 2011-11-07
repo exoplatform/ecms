@@ -10,7 +10,7 @@ This is an example of the *Form Builder* portlet used in eXo Content:
 
 * *Available preferences*: When using this portlet, you can customize the following preference: {anchor:id=CONTref.Portlets.FormBuilder.AvailablePreferences}
 || *Preference* || *Type*|| *Value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | The current repository name which is always "repository". |
+| *repository* | {{string}} | {{repository}} | The current repository name which is always "repository". |
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.FormBuilder.SampleConfiguration}
 

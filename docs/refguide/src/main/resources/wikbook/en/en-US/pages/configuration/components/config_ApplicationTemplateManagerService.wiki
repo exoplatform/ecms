@@ -18,4 +18,4 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 * *Properties-param*:
 || *Name* || *Property name* || *Type* || *Value* || *Description* ||
-| *storedLocations* | {{repository}} | {{String}} | {{system}} | The repository name. |
+| *storedLocations* | {{repository}} | {{string}} | {{system}} | The repository name. |

@@ -48,14 +48,14 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 In which:
 
-* *Name*: {{clv.templates.plugin}}
-* *Set-method*: {{addPlugin}}
-* *Type*: {{org.exoplatform.services.cms.views.PortletTemplatePlugin}}
+* *Name*: _clv.templates.plugin_
+* *Set-method*: _addPlugin_
+* *Type*: _org.exoplatform.services.cms.views.PortletTemplatePlugin_
 
 * *Init-param*:
 ||  *Value-param*  ||  *Type*  ||  *Value*   ||  *Description*  ||
-|*portletName*|{{String}} |{{content-list-viewer}} |The name of the portlet. |
-|*portlet.template.path*|{{String}} |{{war:/conf/wcm-artifacts/application-templates/content-list-viewer}} |The path to the configuration of the portlet. |
+|*portletName*| {{string}} | {{content-list-viewer}} | The name of the portlet. |
+|*portlet.template.path*| {{string}} | {{war:/conf/wcm-artifacts/application-templates/content-list-viewer}} |The path to the configuration of the portlet. |
 
 * *Object type*: _org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig_
 ||  *Field*  ||  *Type*  ||  *Description*  ||

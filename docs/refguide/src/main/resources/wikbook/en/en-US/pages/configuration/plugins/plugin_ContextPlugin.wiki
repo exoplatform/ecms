@@ -46,11 +46,11 @@ The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp
 {code}
 
 In which:
-* *Name*: {{AddContext}}
-* *Set-method*: {{addContext}}
-* *Type*: {{org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin}}
+* *Name*: _AddContext_
+* *Set-method*: _addContext_
+* *Type*: _org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin_
 
-* *Object type*: {{org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig}}
+* *Object type*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
 ||*Field*||*Type*||*Value*||*Description*||
 |*name*|{{string}}|{{context2}}|The name of the context. |
 |*priority*|{{string}}|{{100}}|The context priority, the higher number indicates higher priority. Because a site may have several lifecycles, the lifecycle with higher priority will be executed sooner.|
