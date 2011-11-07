@@ -65,7 +65,7 @@
     <org.jsecurity.version>0.9.0</org.jsecurity.version>
     <javax.transaction.version>1.0.1B</javax.transaction.version>
     <net.oauth.version>20080621</net.oauth.version>
-    <org.gatein.pc.version>2.3.0-Beta06</org.gatein.pc.version>
+    <org.gatein.pc.version>2.3.0-GA</org.gatein.pc.version>
     <commons-lang.version>2.6</commons-lang.version>
     <org.gatein.shindig.version>1.0-r790473-Patch05</org.gatein.shindig.version>
     <javax.mail.version>1.4.4</javax.mail.version>
