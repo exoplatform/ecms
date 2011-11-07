@@ -1,0 +1,13 @@
+Index: core/services/src/test/java/org/exoplatform/services/ecm/dms/folksonomy/TestNewFolksonomyService.java
+===================================================================
+--- core/services/src/test/java/org/exoplatform/services/ecm/dms/folksonomy/TestNewFolksonomyService.java	(revision 76136)
++++ core/services/src/test/java/org/exoplatform/services/ecm/dms/folksonomy/TestNewFolksonomyService.java	(working copy)
+@@ -542,7 +542,7 @@
+ 		Node sportTagNode = folksonomyNode.getNode("sport");
+ 		newFolksonomyService_.removeTagOfDocument(sportTagNode.getPath(), test, REPO_NAME, COLLABORATION_WS);
+ 
+-		assertEquals("testRemoveTagOfDocument failed! ", 0, sportTagNode.getNodes().getSize());
++	    assertFalse(test.hasNode("sport"));
+ 	}
+ 	/**
+ 	 * Clean data test

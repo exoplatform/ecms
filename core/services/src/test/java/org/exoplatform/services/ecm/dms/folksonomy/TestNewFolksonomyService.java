@@ -542,7 +542,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 		Node sportTagNode = folksonomyNode.getNode("sport");
 		newFolksonomyService_.removeTagOfDocument(sportTagNode.getPath(), test, REPO_NAME, COLLABORATION_WS);
 
-		assertEquals("testRemoveTagOfDocument failed! ", 0, sportTagNode.getNodes().getSize());
+	    assertFalse(test.hasNode("sport"));
 	}
 	/**
 	 * Clean data test
