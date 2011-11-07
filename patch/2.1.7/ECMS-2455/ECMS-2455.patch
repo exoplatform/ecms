@@ -1,0 +1,35 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/views/templates/ecm-explorer/ThumbnailsView.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/views/templates/ecm-explorer/ThumbnailsView.gtmpl	(revision 72682)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/views/templates/ecm-explorer/ThumbnailsView.gtmpl	(working copy)
+@@ -39,6 +39,21 @@
+ 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
+ %>
+ <div id="$componentId">
++<script language="JavaScript">
++function loadImageOnError(objImage) {
++  var tryCount = objImage.getAttribute("retryCount");
++  if (tryCount ==null) return;
++  tryCount = parseInt(tryCount);
++  if (tryCount>15) return;
++  tryCount++;
++  if (eXo.ecm.UISimpleView != null) {
++    eXo.ecm.UISimpleView.errorCallback(objImage);
++  }else {
++    objImage.setAttribute("retryCount", tryCount);
++    setTimeout(function(){loadImageOnError(objImage)},300);
++  }
++}
++</script>
+ 	<div id="${componentId}-$viewComponentId">
+ 		<div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
+ 			<div class="JCRMoveIcon" style="display: none;"><div class="MoveNode"><span>{number}</span></div></div>
+@@ -186,7 +201,7 @@
+ 							        <%if(uicomponent.isSymLink(data)) {%>
+ 							          <div class="Link"></div>
+ 							        <%}%>
+-							        <img src="$thumbnailImage" onerror='eXo.ecm.UISimpleView.errorCallback(this);' onload="this.parentNode.style.backgroundImage = 'url(' + this.src + ')';this.style.display = 'none';" />
++							        <img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' onload="this.parentNode.style.backgroundImage = 'url(' + this.src + ')';this.style.display = 'none';" />
+ 							    </div>
+ 							    <div style="display: none;" class="Icon48x48 default48x48Icon <%=Utils.getNodeTypeIcon(data, "48x48Icon")%>">
+                       <%if(isLocked) {%>
