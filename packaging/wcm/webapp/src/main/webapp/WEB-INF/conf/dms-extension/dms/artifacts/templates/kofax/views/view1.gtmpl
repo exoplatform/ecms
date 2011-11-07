@@ -1,6 +1,7 @@
 <%
 	import org.exoplatform.web.application.Parameter ;  
   import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.jcr.util.Text;
 
   def node = uicomponent.getNode() ;
   def originalNode = uicomponent.getOriginalNode();
@@ -17,7 +18,7 @@
 	<table class="UIGrid">      	 			
 	  <tr>
 	    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.document-name")%></td>
-	    <td><%=originalNode.getName()%></td>
+	    <td><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></td>
 	  </tr>
 	
 	  <%

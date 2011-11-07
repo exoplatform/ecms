@@ -2,6 +2,7 @@
 	import java.text.SimpleDateFormat ;
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
+	import org.exoplatform.services.jcr.util.Text;
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -20,7 +21,7 @@
 		<div class="ContentPodcast">
 			<% def originalNode = uicomponent.getOriginalNode(); %>
 			<span class="text"><%=_ctx.appRes("Podcast.view.label.podcast")%>: <span>
-			<span class="TextDetail"><%=originalNode.getName()%></span>
+			<span class="TextDetail"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></span>
 		</div>
 		<div class="ContentPodcast">
 			<span class="text"><%=_ctx.appRes("Podcast.view.label.title")%>: </span>

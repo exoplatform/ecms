@@ -1,0 +1,97 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl	(revision 75864)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl	(working copy)
+@@ -5,6 +5,7 @@
+   import org.exoplatform.ecm.webui.utils.Utils;
+   import org.exoplatform.webui.core.UIPopupWindow;
+   import org.exoplatform.ecm.webui.utils.Utils;
++  import org.exoplatform.services.jcr.util.Text;
+   
+ 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
+   def resizeBlock = "class=\"UIResizableBlock\"";
+@@ -22,7 +23,7 @@
+ 	<div class="WorkSample">
+ 		<div class="SampleBG">
+ 				<label class="text"><%=_ctx.appRes("Sample.view.label.node-name")%> </label>
+-				<span class="text"><%=originalNode.getName()%></span>
++				<span class="text"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></span>
+ 		</div>
+ 		<div class="SampleBG">
+ 			<label class="text"><%=_ctx.appRes("Sample.view.label.title")%> </label>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/kofax/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/kofax/views/view1.gtmpl	(revision 75864)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/kofax/views/view1.gtmpl	(working copy)
+@@ -1,6 +1,7 @@
+ <%
+ 	import org.exoplatform.web.application.Parameter ;  
+   import org.exoplatform.ecm.webui.utils.Utils;
++  import org.exoplatform.services.jcr.util.Text;
+ 
+   def node = uicomponent.getNode() ;
+   def originalNode = uicomponent.getOriginalNode();
+@@ -17,7 +18,7 @@
+ 	<table class="UIGrid">      	 			
+ 	  <tr>
+ 	    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.document-name")%></td>
+-	    <td><%=originalNode.getName()%></td>
++	    <td><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></td>
+ 	  </tr>
+ 	
+ 	  <%
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/filePlan/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/filePlan/views/view1.gtmpl	(revision 75864)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/filePlan/views/view1.gtmpl	(working copy)
+@@ -2,6 +2,7 @@
+ 	import java.text.SimpleDateFormat ;
+ 	import org.exoplatform.web.application.Parameter;
+ 	import org.exoplatform.ecm.webui.utils.Utils;
++	import org.exoplatform.services.jcr.util.Text;
+ 	
+ 	def node = uicomponent.getNode() ;
+ 	def originalNode = uicomponent.getOriginalNode();
+@@ -26,7 +27,7 @@
+ 	<div>
+ 		<div class="ColIcon">
+ 			<div class="$iconName Icon"><span></span></div>
+-			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=originalNode.getName()%></label></div>
++			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></label></div>
+ 			<div style="clear:left;"><span></span></div>
+ 		</div>
+ 		<table class="FilePlanContentTable">    
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/podcast/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/podcast/views/view1.gtmpl	(revision 75864)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/podcast/views/view1.gtmpl	(working copy)
+@@ -2,6 +2,7 @@
+ 	import java.text.SimpleDateFormat ;
+ 	import org.exoplatform.webui.core.UIPopupWindow;
+ 	import org.exoplatform.web.application.Parameter;
++	import org.exoplatform.services.jcr.util.Text;
+ 	
+ 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
+   def resizeBlock = "class=\"UIResizableBlock\"";
+@@ -20,7 +21,7 @@
+ 		<div class="ContentPodcast">
+ 			<% def originalNode = uicomponent.getOriginalNode(); %>
+ 			<span class="text"><%=_ctx.appRes("Podcast.view.label.podcast")%>: <span>
+-			<span class="TextDetail"><%=originalNode.getName()%></span>
++			<span class="TextDetail"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></span>
+ 		</div>
+ 		<div class="ContentPodcast">
+ 			<span class="text"><%=_ctx.appRes("Podcast.view.label.title")%>: </span>
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/utils/DialogFormUtil.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/utils/DialogFormUtil.java	(revision 75864)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/utils/DialogFormUtil.java	(working copy)
+@@ -132,7 +132,7 @@
+             property.setValue(((UIFormCheckBoxInput)input).isChecked()) ;
+           } else {
+           	if(input.getValue()!=null) {
+-          		String inputValue = input.getValue().toString();          		
++          		String inputValue = input.getValue().toString().trim();          		
+           		property.setValue(Utils.sanitize(inputValue));
+           	} else {
+           		property.setValue(input.getValue());

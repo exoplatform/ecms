@@ -5,6 +5,7 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.webui.core.UIPopupWindow;
   import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.jcr.util.Text;
   
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -22,7 +23,7 @@
 	<div class="WorkSample">
 		<div class="SampleBG">
 				<label class="text"><%=_ctx.appRes("Sample.view.label.node-name")%> </label>
-				<span class="text"><%=originalNode.getName()%></span>
+				<span class="text"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></span>
 		</div>
 		<div class="SampleBG">
 			<label class="text"><%=_ctx.appRes("Sample.view.label.title")%> </label>
