@@ -1,0 +1,91 @@
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml	(working copy)
+@@ -1411,7 +1411,7 @@
+     <msg>
+ 			<name-null>Naam is null</name-null>
+ 			<name-invalid>Naam is ongeldig</name-invalid>
+-			<name-too-long>Taxonomie naam dient minder dan '{0}' tekens</name-too-long>
++			<name-too-long>Taxonomie naam dient minder dan {0} tekens</name-too-long>
+ 			<exist>Naam bestaat al</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(working copy)
+@@ -1411,7 +1411,7 @@
+     <msg>
+ 			<name-null>Tên danh mục trống</name-null>
+ 			<name-invalid>Tên danh mục không hợp lệ</name-invalid>
+-			<name-too-long>Tên Taxonomy phải nhỏ hơn hoặc bằng '{0}' kí tự</name-too-long>
++			<name-too-long>Tên Taxonomy phải nhỏ hơn hoặc bằng {0} kí tự</name-too-long>
+ 			<exist>Tên danh mục đã tồn tại</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(working copy)
+@@ -1409,7 +1409,7 @@
+     <msg>
+ 			<name-null>Name is null</name-null>
+ 			<name-invalid>Name is invalid</name-invalid>
+-			<name-too-long>Category name must have less than '{0}' characters.</name-too-long>
++			<name-too-long>Category name cannot have more than {0} characters.</name-too-long>
+ 			<exist>Name already exists</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_pt_BR.properties
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_pt_BR.properties	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_pt_BR.properties	(working copy)
+@@ -325,7 +325,7 @@
+ UIQueriesForm.action.Save=#{word.save}
+ UIPermissionInfo.header.remove=Remover
+ UITagPermissionInfo.header.action=A\u00e7\u00e3o
+-UITaxonomyTreeCreateChildForm.msg.name-too-long=Nome \u00e9 muito grande
++UITaxonomyTreeCreateChildForm.msg.name-too-long=Nome da categoria n\u00e3o podem ter mais de {0} caracteres
+ UIWorkspaceWizard.label.swapPath=Caminho do Swap
+ UINodeTypeForm.tab.label.RequiredTypeTab=Primary requerido
+ UIActionForm.msg.constraint-violation-exception=N\u00e3o pode adicionar o node '{0}' para '{1}' no workspace '{2}' porque voc\u00ea tem problemas com condi\u00e7\u00f5es de restri\u00e7\u00e3o de permiss\u00e3o
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(working copy)
+@@ -1414,7 +1414,7 @@
+     <msg>
+ 			<name-null>Le nom est vide</name-null>
+ 			<name-invalid>Le nom est invalide</name-invalid>
+-			<name-too-long>Le nom de la catégorie ne peut excéder '{0}' caractères</name-too-long>
++			<name-too-long>Le nom de la catégorie ne peut excéder {0} caractères</name-too-long>
+ 			<exist>Le nom existe déjà</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml	(working copy)
+@@ -1408,7 +1408,7 @@
+     <msg>
+ 			<name-null>Der Name ist null</name-null>
+ 			<name-invalid>Name ist ungültig</name-invalid>
+-			<name-too-long>Taxonomie Name muss weniger als '{0}' Buchstaben beinhalten.</name-too-long>
++			<name-too-long>Taxonomie Name muss weniger als {0} Buchstaben beinhalten.</name-too-long>
+ 			<exist>Name ist bereits vorhanden</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_it.properties
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_it.properties	(revision 73387)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_it.properties	(working copy)
+@@ -327,7 +327,7 @@
+ UIQueriesForm.action.Save=#{word.save}
+ UIPermissionInfo.header.remove=Rimuovi
+ UITagPermissionInfo.header.action=Azione
+-UITaxonomyTreeCreateChildForm.msg.name-too-long=Il nome \u00E8 troppo lungo
++UITaxonomyTreeCreateChildForm.msg.name-too-long=Nome della categoria non pu\u00f2 avere pi\u00f9 di {0} caratteri
+ UIWorkspaceWizard.label.swapPath=Percorso di swap
+ UINodeTypeForm.tab.label.RequiredTypeTab=Principale richiesto
+ UIActionForm.msg.constraint-violation-exception=Impossibile aggiungere il nodo '{0}' a '{1}' in un workspace '{2}' perch\u00E9 hai problemi con permessi o condizioni di vincolo

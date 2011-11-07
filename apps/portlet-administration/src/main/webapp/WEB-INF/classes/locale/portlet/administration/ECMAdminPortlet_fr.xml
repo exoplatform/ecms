@@ -1414,7 +1414,7 @@
     <msg>
 			<name-null>Le nom est vide</name-null>
 			<name-invalid>Le nom est invalide</name-invalid>
-			<name-too-long>Le nom de la catégorie ne peut excéder '{0}' caractères</name-too-long>
+			<name-too-long>Le nom de la catégorie ne peut excéder {0} caractères</name-too-long>
 			<exist>Le nom existe déjà</exist>
 		</msg>
 	</UITaxonomyTreeCreateChildForm>

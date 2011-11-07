@@ -1409,7 +1409,7 @@
     <msg>
 			<name-null>Name is null</name-null>
 			<name-invalid>Name is invalid</name-invalid>
-			<name-too-long>Category name must have less than '{0}' characters.</name-too-long>
+			<name-too-long>Category name cannot have more than {0} characters.</name-too-long>
 			<exist>Name already exists</exist>
 		</msg>
 	</UITaxonomyTreeCreateChildForm>

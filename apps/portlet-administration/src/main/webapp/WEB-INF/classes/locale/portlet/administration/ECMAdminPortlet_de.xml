@@ -1408,7 +1408,7 @@
     <msg>
 			<name-null>Der Name ist null</name-null>
 			<name-invalid>Name ist ungültig</name-invalid>
-			<name-too-long>Taxonomie Name muss weniger als '{0}' Buchstaben beinhalten.</name-too-long>
+			<name-too-long>Taxonomie Name muss weniger als {0} Buchstaben beinhalten.</name-too-long>
 			<exist>Name ist bereits vorhanden</exist>
 		</msg>
 	</UITaxonomyTreeCreateChildForm>
