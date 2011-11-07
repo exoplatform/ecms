@@ -101,7 +101,7 @@
 		<label>
 			<TaxoTreeName>名前</TaxoTreeName>
 			<TaxoTreeWorkspace>ワークスペース</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>ホームパス</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>ホームパス</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		

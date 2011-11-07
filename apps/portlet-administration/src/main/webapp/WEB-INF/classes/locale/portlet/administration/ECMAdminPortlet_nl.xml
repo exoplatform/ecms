@@ -103,7 +103,7 @@
 		<label>
 			<TaxoTreeName>Naam</TaxoTreeName>
 			<TaxoTreeWorkspace>Werkruimte</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>Home pad</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>Home pad</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		

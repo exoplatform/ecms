@@ -102,7 +102,7 @@
 		<label>
 			<TaxoTreeName>Nom</TaxoTreeName>
 			<TaxoTreeWorkspace>Espace de travail</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>Chemin racine</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>Chemin racine</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		

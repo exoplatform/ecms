@@ -100,7 +100,7 @@
 		<label>
 			<TaxoTreeName>اسم</TaxoTreeName>
 			<TaxoTreeWorkspace>عمل</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>الصفحة الرئيسية الطريق</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>الصفحة الرئيسية الطريق</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		

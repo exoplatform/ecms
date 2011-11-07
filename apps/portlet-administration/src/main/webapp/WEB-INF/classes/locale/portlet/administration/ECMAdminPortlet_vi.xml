@@ -100,7 +100,7 @@
 		<label>
 			<TaxoTreeName>Tên</TaxoTreeName>
 			<TaxoTreeWorkspace>Vùng làm việc</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>Đường dẫn</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>Đường dẫn</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		

@@ -58,7 +58,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     events = {
       @EventConfig(listeners = UITaxonomyTreeMainForm.ChangeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UITaxonomyTreeMainForm.ResetActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITaxonomyTreeMainForm.AddPathActionListener.class),
+      @EventConfig(listeners = UITaxonomyTreeMainForm.AddPathActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UITaxonomyTreeMainForm.NextViewPermissionActionListener.class)
     }
 )

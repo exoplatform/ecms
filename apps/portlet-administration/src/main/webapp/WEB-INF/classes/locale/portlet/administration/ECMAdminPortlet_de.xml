@@ -100,7 +100,7 @@
 		<label>
 			<TaxoTreeName>Name</TaxoTreeName>
 			<TaxoTreeWorkspace>Arbeitsplatz</TaxoTreeWorkspace>
-			<TaxonomyTreeHomePath>Home pfad</TaxonomyTreeHomePath>
+			<TaxoTreeHomePath>Home pfad</TaxoTreeHomePath>
 		</label>
   </TaxonomyTreeMainForm>
 		
