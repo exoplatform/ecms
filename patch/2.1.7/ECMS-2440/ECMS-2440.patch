@@ -1,0 +1,13 @@
+Index: apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(revision 71329)
++++ apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(working copy)
+@@ -980,7 +980,7 @@
+ 		var leftContainer = document.getElementById("LeftContainer");
+ 		var dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;		
+ 		var listGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
+-		root.style.overflow = "hidden";
++		root.style.overflow = "auto";
+ 		var rightContainer = DOM.findAncestorByClass(listGrid, "RightContainer");
+ 		if(eXo.ecm.UIListView.widthListView) {
+ 			
