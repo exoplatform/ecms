@@ -206,7 +206,11 @@ public class PDFViewerRESTService implements ResourceContainer {
      File file = null;
      try {
        file= File.createTempFile("imageCapture1_" + pageNum,".png");
+       /*
        file.deleteOnExit();
+         PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
+         Each JVM reference takes 1KB of system memory and leads to a memleak
+       */
        ImageIO.write(rendImage, "png", file);
      } catch (IOException e) {
        LOG.error(e);
@@ -252,7 +256,11 @@ public class PDFViewerRESTService implements ResourceContainer {
       // Create temp file to store data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
       content = File.createTempFile(name, ".pdf");
-      content.deleteOnExit();
+      /*
+      file.deleteOnExit();
+        PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
+        Each JVM reference takes 1KB of system memory and leads to a memleak
+      */
       // Convert to pdf if need
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       if ("pdf".equals(extension)) {
@@ -314,6 +322,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       return key;
     }
 
+/*
     @Override
     public void finalize() {
       String path = (String) pdfCache.get(new ObjectKey(key));
@@ -322,6 +331,9 @@ public class PDFViewerRESTService implements ResourceContainer {
         f.delete();
       }
     }
+      PM Comment : I removed this method because it removes the file from the FS too fast
+      Because the ObjectKey has no real reference in the Exo Cache and is then removed by the GC just after creation.
+*/
 
     public String getKey() {
       return key;
