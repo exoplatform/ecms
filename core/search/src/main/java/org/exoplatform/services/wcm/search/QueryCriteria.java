@@ -18,6 +18,8 @@ package org.exoplatform.services.wcm.search;
 
 import java.util.Calendar;
 
+import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Hoa Pham
@@ -492,6 +494,9 @@ public class QueryCriteria {
 
     /** The value. */
     private String value;
+    
+    /** The comparison type */
+    private COMPARISON_TYPE comparisonType;
 
     /**
      * Gets the name.
@@ -527,6 +532,23 @@ public class QueryCriteria {
      */
     public void setValue(String value) {
       this.value = value;
+    }
+
+    /**
+     * @param comparisonType the comparisonType to set
+     */
+    public void setComparisonType(COMPARISON_TYPE comparisonType) {
+      this.comparisonType = comparisonType;
+    }
+
+    /**
+     * @return the comparisonType
+     */
+    public COMPARISON_TYPE getComparisonType() {
+      if (comparisonType == null) {
+        return COMPARISON_TYPE.LIKE;
+      }
+      return comparisonType;
     }
   }
 

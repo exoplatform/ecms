@@ -341,4 +341,11 @@ public abstract class AbstractQueryBuilder {
    * The Enum ORDERBY function for query
    */
   public enum ORDERBY { ASC, DESC };
+  
+  /**
+   * The Enum COMPARISON_TYPE function for query
+   */
+  public enum COMPARISON_TYPE {
+    EQUAL, LIKE
+  };
 }

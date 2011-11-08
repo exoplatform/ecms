@@ -58,6 +58,7 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
@@ -239,6 +240,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       QueryProperty prop = queryCriteria.new QueryProperty();
       prop.setName("mop:page");
       prop.setValue(page);
+      prop.setComparisonType(COMPARISON_TYPE.EQUAL);
       queryProps.add(prop);
     }
     QueryProperty prop = queryCriteria.new QueryProperty();
@@ -526,10 +528,18 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if (queryProperty == null || queryProperty.length == 0)
       return;
     queryBuilder.openGroup(condition);
-    queryBuilder.like(queryProperty[0].getName(), queryProperty[0].getValue(), LOGICAL.NULL);
+    if (queryProperty[0].getComparisonType() == COMPARISON_TYPE.EQUAL) {
+      queryBuilder.equal(queryProperty[0].getName(), queryProperty[0].getValue(), LOGICAL.NULL);
+    } else {
+      queryBuilder.like(queryProperty[0].getName(), queryProperty[0].getValue(), LOGICAL.NULL);
+    }
     if (queryProperty.length > 1) {
       for (int i = 1; i < queryProperty.length; i++) {
-        queryBuilder.like(queryProperty[i].getName(), queryProperty[i].getValue(), LOGICAL.OR);
+        if (queryProperty[i].getComparisonType() == COMPARISON_TYPE.EQUAL) {
+          queryBuilder.equal(queryProperty[i].getName(), queryProperty[i].getValue(), LOGICAL.OR);
+        } else {
+          queryBuilder.like(queryProperty[i].getName(), queryProperty[i].getValue(), LOGICAL.OR);
+        }
       }
     }
     queryBuilder.closeGroup();
