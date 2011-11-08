@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -47,8 +48,6 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
@@ -63,8 +62,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
@@ -119,10 +116,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The limit. */
   private int limit;
 
-  private PortalContainer manager;
-
-  private OrganizationService organizationService=null;
-
   private ResourceBundleService resourceBundleService=null;
 
   private String resourceBundleNames[];
@@ -137,7 +130,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   public DriverConnector(InitParams params) {
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
-    manager = PortalContainer.getInstance() ;
   }
 
   /**
@@ -166,7 +158,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
     rootElement.setAttribute("isUpload", "false");
     rootElement.appendChild(appendDrivers(document, generalDrivers(listDriver), "General Drives", lang));
-    rootElement.appendChild(appendDrivers(document, groupDrivers(listDriver, userId), "Group Drives", lang));
+    rootElement.appendChild(appendDrivers(document, groupDrivers(listDriver), "Group Drives", lang));
     rootElement.appendChild(appendDrivers(document, personalDrivers(listDriver, userId), "Personal Drives", lang));
 
     CacheControl cacheControl = new CacheControl();
@@ -427,12 +419,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @throws Exception the exception
    */
-  private List<DriveData> groupDrivers(List<DriveData> driverList, String userId) throws Exception {
+  private List<DriveData> groupDrivers(List<DriveData> driverList) throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
       ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     List<DriveData> groupDrivers = new ArrayList<DriveData>();
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    List<String> groups = getGroups(userId);
+    Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
     for(DriveData drive : driverList) {
       if(drive.getHomePath().startsWith(groupPath)) {
         for(String group : groups) {
@@ -510,33 +502,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
-  }
-
-  /**
-   * Gets the groups.
-   *
-   * @param userId the user id
-   *
-   * @return the groups
-   *
-   * @throws Exception the exception
-   */
-  private List<String> getGroups(String userId) throws Exception {
-    if (organizationService ==null ) {
-      organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    }
-    ((ComponentRequestLifecycle) organizationService).startRequest(manager);
-    List<String> groupList = new ArrayList<String> ();
-    Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
-    Object[] objects = groups.toArray();
-    for(int i = 0; i < objects.length; i ++ ){
-      Group group = (Group)objects[i];
-      String groupPath = null;
-      if(group.getParentId() == null || group.getParentId().length() == 0) groupPath = "/" + group.getGroupName();
-      else groupPath = group.getParentId() + "/" + group.getGroupName();
-      groupList.add(groupPath);
-    }
-    return groupList;
   }
 
   private Response buildXMLResponseForChildren(Node node,
