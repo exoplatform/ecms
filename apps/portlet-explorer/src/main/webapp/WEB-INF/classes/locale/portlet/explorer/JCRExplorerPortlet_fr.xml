@@ -121,6 +121,7 @@
       <currentDrive>Espace courant</currentDrive>
       <selectView>Choisir une vue</selectView>
       <showSideBar>Afficher la barre latérale</showSideBar>
+      <more>Plus</more>
     </label>
   </UIViewBar>
   <Views>

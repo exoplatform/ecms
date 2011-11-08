@@ -510,7 +510,7 @@
 				if (split) {
 				  split.className = 'Split';
 				}
-				elementSpace += uiTabs[i].offsetWidth;
+				elementSpace += uiTabs[i].offsetWidth + 10;
 				var subItem = DOM.findFirstDescendantByClass(uiTabs[i], "a", "SubTabIcon");
 				eXo.ecm.ECMUtils.removeElementListHide(subItem);
 				lastIndex = i;
@@ -659,6 +659,114 @@
 		eXo.core.Browser.setPositionInContainer(workingArea, resizeDiv, X_Resize, Y_Resize);
 	}
 
+	ECMUtils.prototype.resizeVisibleComponent = function() {
+				
+		var container = document.getElementById("LeftContainer");
+		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");
+		var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+		
+		var selectedItem = DOM.findFirstDescendantByClass(selectContent, "div", "SelectedItem");
+		var lstNormalItem = DOM.findDescendantsByClass(selectContent, "div", "NormalItem");
+		var moreButton = DOM.findFirstDescendantByClass(selectContent, "div", "MoreItem");
+		
+		//count the visible items
+		var visibleItemsCount = 0;		
+		if (selectedItem != null) {
+			visibleItemsCount ++;
+		}
+		
+		if (lstNormalItem != null) {
+			visibleItemsCount += lstNormalItem.length;
+		}
+		
+		if (moreButton != null && moreButton.style.display == 'block' ) {
+			visibleItemsCount ++;
+		}
+		
+		var resizableBlockWidth = resizableBlock.clientWidth;
+		var componentWidth = selectedItem.clientWidth;	
+		var newVisibleItemCount = Math.floor((resizableBlockWidth - 8) / componentWidth); 		
+		if (newVisibleItemCount < visibleItemsCount){								
+			//display 'More' button
+			if (moreButton != null && moreButton.style.display == 'none' ) {
+				moreButton.style.display = 'block';
+			}
+			
+			var newVisibleComponentCount = newVisibleItemCount - 1; //one space for 'more' button
+			var newVisibleNormalComponentCount = newVisibleComponentCount - 1; //discount the selected component 
+			
+			for (var i = lstNormalItem.length - 1; i >= newVisibleNormalComponentCount; i--) {
+				//move item to dropdown box
+				eXo.ecm.ECMUtils.moveItemToDropDown(lstNormalItem[i]);
+			}			
+		} else {
+			var lstExtendedComponent = document.getElementById('ListExtendedComponent');
+			var lstHiddenComponent = DOM.getChildrenByTagName(lstExtendedComponent, 'a');			
+			
+			if (lstHiddenComponent.length > 0) {
+				var movedComponentCount = (newVisibleItemCount - visibleItemsCount) > lstHiddenComponent.length ? lstHiddenComponent.length : (newVisibleItemCount - visibleItemsCount);  
+				for (var i = 0; i < movedComponentCount; i++){
+					eXo.ecm.ECMUtils.moveItemToVisible(lstHiddenComponent[i]);
+				}
+				
+				lstHiddenComponent = DOM.getChildrenByTagName(lstExtendedComponent, 'a');
+				if (lstHiddenComponent.length <= 0) {
+					moreButton.style.display = 'none';
+				}
+			}			
+		}
+	}
+
+	ECMUtils.prototype.moveItemToDropDown = function(movedItem) {
+		var lstExtendedComponent = document.getElementById('ListExtendedComponent');
+		var iconOfMovedItem = DOM.getChildrenByTagName(movedItem, 'div')[0];
+		var classesOfIcon = iconOfMovedItem.className.split(' ');		
+		
+		var link = document.createElement('a');
+		link.setAttribute('title', movedItem.getAttribute('title'));
+		link.className = 'IconPopup ' +  classesOfIcon[classesOfIcon.length - 1];
+		link.setAttribute('href', movedItem.getAttribute('onclick'));
+		
+		var lstHiddenComponent = DOM.getChildrenByTagName(lstExtendedComponent, 'a');
+		if (lstHiddenComponent.length > 0) {
+			lstExtendedComponent.insertBefore(link, lstHiddenComponent[0]);
+		} else {		
+			lstExtendedComponent.appendChild(link);
+		}
+		
+		//remove from visible area
+		var parentOfMovedNode = movedItem.parentNode;
+		parentOfMovedNode.removeChild(movedItem);
+	}
+	
+	ECMUtils.prototype.moveItemToVisible = function(movedItem) {
+		
+		var container = document.getElementById("LeftContainer");
+		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");
+		var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+		var moreButton = DOM.findFirstDescendantByClass(selectContent, "div", "MoreItem");
+		
+		var normalItem = document.createElement('div');
+		normalItem.className = 'NormalItem';
+		normalItem.setAttribute('title', movedItem.getAttribute('title'));
+		normalItem.setAttribute('onclick', movedItem.getAttribute('href'));
+		
+		var iconItem = document.createElement('div');
+		var lstClassOfMovedItem = movedItem.className.split(' ');		
+		iconItem.className = 'ItemIcon DefaultIcon ' + lstClassOfMovedItem[lstClassOfMovedItem.length - 1];
+		
+		var emptySpan = document.createElement('span');
+		
+		iconItem.appendChild(emptySpan);
+		normalItem.appendChild(iconItem);
+		
+		selectContent.insertBefore(normalItem, moreButton);
+		
+		//remove from visible area
+		var parentOfMovedNode = movedItem.parentNode;
+		parentOfMovedNode.removeChild(movedItem);
+	}
+
 	ECMUtils.prototype.resizeMouseUpSideBar = function(event) {
 		document.onmousemove = null;
 
@@ -675,12 +783,14 @@
   var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");
 		var allowedWidth = parseInt(workingArea.offsetWidth) / 2;
 		// Fix minimium width can be resized
-		if ((eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance > 50) &
+		if ((eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance > 100) &
 				  (eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance <= allowedWidth)) {
 			eXo.ecm.ECMUtils.isResizedLeft = true;
 			container.style.width = eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance + "px";
 			resizableBlock.style.width = eXo.ecm.ECMUtils.resizableBlockWidth + eXo.ecm.ECMUtils.savedResizeDistance + "px";
 		}
+		
+		eXo.ecm.ECMUtils.resizeVisibleComponent();
 
 		// Remove new added div
 		var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");

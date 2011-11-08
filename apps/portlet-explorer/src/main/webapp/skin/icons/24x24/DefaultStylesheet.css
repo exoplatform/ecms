@@ -200,9 +200,9 @@
 }
 
 .AddDocumentIcon {
-	height: 21px;
-  background: url('DefaultSkin/AddDocument.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/AddDocument.gif') no-repeat right center; /* orientation=rt */
+	height: 23px;
+  background: url('DefaultSkin/AddDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/AddDocument.png') no-repeat right center; /* orientation=rt */
 }
 
 .CreateTicketIcon {
@@ -219,20 +219,20 @@
 
 .AddFolderIcon {
 	height: 20px;
-  background: url('DefaultSkin/AddFolder.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/AddFolder.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/AddFolder.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/AddFolder.png') no-repeat right center; /* orientation=rt */
 }
 
 .UploadIcon {
 	height: 17px;
-  background: url('DefaultSkin/UploadFile.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/UploadFile.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/UploadFile.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/UploadFile.png') no-repeat right center; /* orientation=rt */
 }
 
 .AddSymLinkIcon {
   height: 24px;
-  background: url('DefaultSkin/AddSymLink.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/AddSymLink.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/AddSymLink.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddSymLink.png') no-repeat right center; /* orientation=rt */
 }
 
 .AddLocalizationLinkIcon {
@@ -243,8 +243,8 @@
 
 .OverloadThumbnailIcon {
 	height: 24px;
-  background: url('DefaultSkin/OverloadThumbnailIcon.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/OverloadThumbnailIcon.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/OverloadThumbnailIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/OverloadThumbnailIcon.png') no-repeat right center; /* orientation=rt */
 }
 
 .ViewReferencesIcon {

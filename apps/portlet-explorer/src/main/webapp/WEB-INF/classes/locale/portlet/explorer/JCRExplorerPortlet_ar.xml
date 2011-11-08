@@ -119,6 +119,7 @@
       <currentDrive>القرص الحالي</currentDrive>
       <selectView>اختيار المشهد</selectView>
       <showSideBar>فتح المحتوى الجانبي</showSideBar>
+      <more>More</more>
     </label>
   </UIViewBar>
   <Views>

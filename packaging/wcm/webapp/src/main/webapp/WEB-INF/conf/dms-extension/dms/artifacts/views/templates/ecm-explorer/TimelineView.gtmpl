@@ -60,7 +60,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 	<div class="UITimelineView">
 		<div style="padding:4px 3px 0px 3px;">
 			<div class="TitleTable">
-				<div style="width: 40px;" class="LeftColumn Split">
+				<div class="LeftColumn Split">
 					<span></span>
 				</div>
 				<div style="width: 26px;" class="LeftColumn Split">
@@ -127,14 +127,14 @@ import org.exoplatform.services.jcr.RepositoryService;
 						List<Node> nodeList = nodeLists.get(i);
 						if (nodeList.size() == 0) continue;
 			%>
-			<div class="TextTitleDay">
-				<%=_ctx.appRes(label)%>
-			</div>
+			
 			<div class="RowView Normal">
 				<div class="BorderRow">
 					<% for (node in nodeList) {%>
-						<div style="width: 31px;" class="LeftColumn">
-						<span></span>
+						<div style="width: 121px;" class="LeftColumn">
+							<div class="TextTitleDay">
+								<%=_ctx.appRes(label)%>
+							</div>
 						</div>
 						<div style="width: 26px; padding-top: 5px;" class="LeftColumn">
 							<% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>

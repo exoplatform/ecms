@@ -56,11 +56,18 @@ public class UISideBar extends UIContainer {
   private static final Log                 LOG            = ExoLogger.getLogger("dms.UISideBar");
 
   public static final String               EXTENSION_TYPE = "org.exoplatform.ecm.dms.UISideBar";
+  
+  public static final int VISIBLE_COMPONENT_SIZE = 5;
+
 
   private List<UIAbstractManagerComponent> managers
       = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
   private String selectedComp;
+    
+  private List<UIAbstractManagerComponent> lstVisibleComp;
+    
+  private List<UIAbstractManagerComponent> lstHiddenComp;
 
 
   public UISideBar() throws Exception {
@@ -72,6 +79,51 @@ public class UISideBar extends UIContainer {
     addChild(UIAllItems.class, null, null);
     addChild(UIAllItemsByType.class, null, null);
   }
+  
+  public List<UIAbstractManagerComponent> getLstVisibleComp() {
+    return lstVisibleComp;
+  }
+   
+  public void setLstVisibleComp(List<UIAbstractManagerComponent> lstVisibleComp) {
+    this.lstVisibleComp = lstVisibleComp;
+  }
+   
+  public List<UIAbstractManagerComponent> getLstHiddenComp() {
+    return lstHiddenComp;
+  }
+  
+  public void setLstHiddenComp(List<UIAbstractManagerComponent> lstHiddenComp) {
+    this.lstHiddenComp = lstHiddenComp;
+  }
+  
+  public void setSelectedComp(String componentName) {
+    selectedComp = componentName;
+  }
+  
+  private UIAbstractManagerComponent getManagerComponent(List<UIAbstractManagerComponent> list, String componentName) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getUIExtensionName().equals(componentName)){
+        return list.get(i);
+      }
+    }
+    return null;
+  }
+  
+  private void initComponents(){
+	lstVisibleComp = new ArrayList<UIAbstractManagerComponent>(VISIBLE_COMPONENT_SIZE); 
+	lstHiddenComp = new ArrayList<UIAbstractManagerComponent>(); 
+    List<UIAbstractManagerComponent> managers = getManagers();
+    for (int i = 0; i < managers.size(); i++) {
+      UIAbstractManagerComponent component = managers.get(i);
+      
+      if (i < VISIBLE_COMPONENT_SIZE) {
+        lstVisibleComp.add(component);
+      } else {
+        lstHiddenComp.add(component);
+      }
+    }
+  }
+
 
   public String getCurrentComp() {
     if(currentComp == null || currentComp.length() == 0)
@@ -83,10 +135,6 @@ public class UISideBar extends UIContainer {
     if(selectedComp == null || selectedComp.length() == 0)
       selectedComp = "Explorer";
     return selectedComp;
-  }
-
-  public void setSelectedComp(String selectedComp) {
-    this.selectedComp = selectedComp;
   }
 
   public void updateSideBarView() throws Exception {
@@ -144,6 +192,7 @@ public class UISideBar extends UIContainer {
         managers.add((UIAbstractManagerComponent) component);
       }
     }
+    initComponents();
   }
 
   private synchronized UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {

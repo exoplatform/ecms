@@ -127,6 +127,7 @@
       <currentDrive>Ổ đĩa hiển thị</currentDrive>
       <selectView>Lựa chọn cách xem</selectView>
       <showSideBar>Hiển thị cây thư mục</showSideBar>
+      <more>More</more>
     </label>
   </UIViewBar>
   <Views>

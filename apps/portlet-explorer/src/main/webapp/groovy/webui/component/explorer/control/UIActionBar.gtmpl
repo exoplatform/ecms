@@ -114,10 +114,10 @@
   	    
   			<div class="ClearRight"><span></span></div>
   		</div>
-  		<div id="IconListHideElement" style="float:right; padding-top: 2px;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event);">
-  			<a class="ListHideElementIcon"></a>
-  			<div class="ListHideContainer" id="ListHideContainer" style="display:none">								
-  			</div>
+  		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event);">
+  			<%=_ctx.appRes("UIViewBar.label.more")%>
+			<div class="WhiteBG"><span></span></div>
+  			<div class="ListHideContainer UIRightClickPopupMenu" id="ListHideContainer" style="display:none"></div>
   		</div>
 	</div>
 </div>
@@ -133,4 +133,3 @@
 <%}%>
 
 		  
-

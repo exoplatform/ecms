@@ -121,6 +121,7 @@
       <currentDrive>Aktuelle Laufwerk</currentDrive>
       <selectView>Wählen Sie Ansicht</selectView>
       <showSideBar>Show-Bar</showSideBar>
+      <more>More</more>
     </label>
   </UIViewBar>
   <Views>

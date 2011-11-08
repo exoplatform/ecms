@@ -6,28 +6,7 @@
 }
 
 .UIVote .VoteResultContainer {
-	margin-right: auto;
-	padding-right: 8px;
-	width: 370px;
-	height: 26px;
-}
-
-.UIVote .LeftVoteBar {
-	background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left -32px;
-	padding-left: 5px;
-	height: 26px;
-}
-
-.UIVote .RightVoteBar {
-	background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat right -32px;
-	padding-right: 5px;
-	height: 26px;
-}
-
-.UIVote .CenterVoteBar {
-	height: 26px; 
-	line-height: 26px;
-	background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') repeat-x left -58px;
+	width: 270px;
 }
 
  .UIVote .VoteResultContainer .RatingInfoContainer {

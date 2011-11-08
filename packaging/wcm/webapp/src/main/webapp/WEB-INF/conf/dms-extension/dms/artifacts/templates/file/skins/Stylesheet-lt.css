@@ -2,21 +2,30 @@
   LTR skin for nt:file template
 */
 .FileContent {  
-	padding: 10px;
 	color: #0e396c;
 }
 
-.FileContent .NavigationContainer {  
-	padding-bottom: 5px;
-	background: url('/eXoDMSResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
-	border: 1px solid #cbcbcb;
+.FileContent .TopTitle {  
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+    color: #4F4F4F;
+    font-weight: bold;
+    height: 28px;
+    line-height: 26px;
+    padding-left: 10px;
 }
 
-.FileContent .TopTitle {  
-	padding-left: 10px;
-	height: 22px; line-height: 22px;
-	color: #058ee6; font-weight: bold; 
-  overflow: hidden;
+.FileContent .ActionButton{
+  padding: 4px 0 !important;
+}
+
+.FileContent .ActionButton a{
+  -moz-border-radius: 3px 3px 3px 3px;
+    -moz-box-shadow: 0 -18px 12px #F7F7F7 inset;
+    border: 1px solid #E1E1E1;
+    color: #4F4F4F;
+    line-height: 20px;
+    padding: 7px 8px 8px;
 }
 
 .FileContent .ECMIframe {
@@ -34,7 +43,7 @@
 
 .FileContent .Content {  
 	white-space: normal;
-	padding: 10px;
+	padding: 20px 0;
 }
 
 .FileContent .Content .TextContent {  

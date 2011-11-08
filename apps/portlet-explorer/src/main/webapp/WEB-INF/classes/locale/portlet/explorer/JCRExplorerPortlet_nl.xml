@@ -131,6 +131,7 @@
 			<currentDrive>Current drive</currentDrive>
 			<selectView>Select view</selectView>
 			<showSideBar>Show side bar</showSideBar>
+			<more>More</more>
 		</label>
 	</UIViewBar>
 	<Views>
