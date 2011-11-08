@@ -1,0 +1,182 @@
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(revision 73728)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(working copy)
+@@ -123,7 +123,7 @@
+ 	var treeHTML = '';
+ 	var nodeList = xmlTreeNodes.getElementsByTagName("Folders");
+ 	for(var i = 0 ; i < nodeList.length; i++)	 {
+-		var strName = nodeList[i].getAttribute("name") ;
++		var strName = nodeList[i].getAttribute("name") ;		
+ 		var id = eXo.ecm.ECS.generateIdDriver(nodeList[i]);
+ 		var isUpload = nodeList[i].getAttribute("isUpload");
+ 		var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+@@ -132,7 +132,7 @@
+ 		treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
+ 		treeHTML += 	'<div class="ExpandIcon">';		
+ 		treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+-		treeHTML +=				decodeURIComponent(strName);	
++		treeHTML +=				decodeURIComponent(strName);
+ 		treeHTML +=			'</a>';
+ 		treeHTML += 	'</div>';			
+ 		treeHTML += '</div>';			
+@@ -281,13 +281,14 @@
+ 		for(var i = 0; i < nodeList.length; i++) {
+ 			var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
+ 			var strName = nodeList[i].getAttribute("name");
++			var strTitle = nodeList[i].getAttribute("title");
+ 			var isUpload = nodeList[i].getAttribute("isUpload");
+ 			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+ 			if (nodeDriveName==null) nodeDriveName='';
+ 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
+ 			treeHTML += 	'<div class="ExpandIcon">';
+-			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+-			treeHTML +=				decodeURIComponent(strName);	
++			treeHTML +=			'<a title="'+ decodeURIComponent(strTitle) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
++			treeHTML +=				decodeURIComponent(strTitle);	
+ 			treeHTML += 		'</a>';
+ 			treeHTML +=		'</div>';
+ 			treeHTML +=	'</div>';
+@@ -302,13 +303,14 @@
+ 			for(var i = 0; i < currentNodeList.length; i++) {
+ 				var id = eXo.ecm.ECS.generateIdNodes(currentNodeList[i], currentNode.id);
+ 				var	strName	= currentNodeList[i].getAttribute("name");
++				var strTitle = currentNodeList[i].getAttribute("title");
+ 				var isUpload = currentNodeList[i].getAttribute("isUpload");
+ 				var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
+ 				if (nodeDriveName==null) nodeDriveName='';
+ 				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
+ 				treeHTML += 	'<div class="ExpandIcon">';
+-				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+-				treeHTML +=				decodeURIComponent(strName);	
++				treeHTML +=			'<a title="'+decodeURIComponent(strTitle)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
++				treeHTML +=				decodeURIComponent(strTitle);	
+ 				treeHTML += 		'</a>';
+ 				treeHTML +=		'</div>';
+ 				treeHTML +=	'</div>';
+Index: core/services/src/main/java/org/exoplatform/services/cms/impl/Utils.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/impl/Utils.java	(revision 73728)
++++ core/services/src/main/java/org/exoplatform/services/cms/impl/Utils.java	(working copy)
+@@ -22,6 +22,7 @@
+ import javax.jcr.PathNotFoundException;
+ import javax.jcr.RepositoryException;
+ 
++import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.services.jcr.core.ExtendedNode;
+ 
+ /**
+@@ -57,5 +58,36 @@
+     }
+     return node;
+   }
+-
++  
++  /**
++   * Gets the title.
++   * 
++   * @param node the node
++   * @return the title
++   * @throws Exception the exception
++   */
++  public static String getTitle(Node node) throws Exception {
++	  String title = null;
++	  if (node.hasProperty("exo:title")) {
++	  	title = node.getProperty("exo:title").getValue().getString();
++	  } else if (node.hasNode("jcr:content")) {
++		  Node content = node.getNode("jcr:content");
++		  if (content.hasProperty("dc:title")) {
++		    try {
++		      title = content.getProperty("dc:title").getValues()[0].getString();
++		    } catch(Exception ex) {}
++		  }
++	  }
++	  if (title==null) {
++	  	if (node.isNodeType("nt:frozenNode")){
++	  		String uuid = node.getProperty("jcr:frozenUuid").getString();
++	  		Node originalNode = node.getSession().getNodeByUUID(uuid);
++	  		title = originalNode.getName();
++	  	} else {
++	  		title = node.getName();
++	  	}
++	  	
++	  }
++	  return Text.unescapeIllegalJcrChars(title);
++  }
+ }
+\ No newline at end of file
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(revision 73728)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(working copy)
+@@ -23,13 +23,10 @@
+ import java.util.Collection;
+ import java.util.Collections;
+ import java.util.Date;
+-import java.util.HashSet;
+-import java.util.Iterator;
+ import java.util.List;
+ import java.util.Locale;
+ import java.util.MissingResourceException;
+ import java.util.ResourceBundle;
+-import java.util.Set;
+ 
+ import javax.jcr.Node;
+ import javax.jcr.NodeIterator;
+@@ -56,7 +53,6 @@
+ import org.exoplatform.container.xml.InitParams;
+ import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+ import org.exoplatform.ecm.utils.text.Text;
+-import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.BasePath;
+ import org.exoplatform.services.cms.drives.DriveData;
+ import org.exoplatform.services.cms.drives.ManageDriveService;
+@@ -68,7 +64,6 @@
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+ import org.exoplatform.services.organization.Group;
+-import org.exoplatform.services.organization.Membership;
+ import org.exoplatform.services.organization.OrganizationService;
+ import org.exoplatform.services.resources.ResourceBundleService;
+ import org.exoplatform.services.rest.resource.ResourceContainer;
+@@ -87,6 +82,7 @@
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ import org.w3c.dom.NodeList;
++import org.exoplatform.services.cms.impl.Utils;
+ 
+ /**
+  * Created by The eXo Platform SEA
+@@ -866,8 +862,9 @@
+   	return createFolderElement(document, child, folderType, childName, null);
+   }
+   private Element createFolderElement(Document document, Node child, String folderType, String childName, String nodeDriveName) throws Exception {
+-	  	Element folder = document.createElement("Folder");
++	  	Element folder = document.createElement("Folder");	  		
+ 	  	folder.setAttribute("name", childName);
++	  	folder.setAttribute("title", Utils.getTitle(child));
+ 	  	folder.setAttribute("url", FCKUtils.createWebdavURL(child));
+ 	  	folder.setAttribute("folderType", folderType);
+ 	  	folder.setAttribute("path", child.getPath());
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java	(revision 73728)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java	(working copy)
+@@ -19,6 +19,7 @@
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
++import org.exoplatform.services.cms.impl.Utils;
+ 
+ public class FCKFileHandler {
+ 
+@@ -29,7 +30,8 @@
+   public static Element createFileElement(
+   		Document document, String fileType, Node sourceNode, Node displayNode, String currentPortal, LinkManager linkManager) throws Exception {   
+   	Element file = document.createElement("File");
+-    file.setAttribute("name", displayNode.getName());     
++    file.setAttribute("name", displayNode.getName());    
++    file.setAttribute("title", Utils.getTitle(displayNode));         
+     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);    
+     file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
+     if(sourceNode.hasProperty("exo:dateModified")) {

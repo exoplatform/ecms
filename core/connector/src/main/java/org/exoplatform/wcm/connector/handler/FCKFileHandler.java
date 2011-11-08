@@ -19,6 +19,7 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.exoplatform.services.cms.impl.Utils;
 
 public class FCKFileHandler {
 
@@ -29,7 +30,8 @@ public class FCKFileHandler {
   public static Element createFileElement(
   		Document document, String fileType, Node sourceNode, Node displayNode, String currentPortal, LinkManager linkManager) throws Exception {   
   	Element file = document.createElement("File");
-    file.setAttribute("name", displayNode.getName());     
+    file.setAttribute("name", displayNode.getName());    
+    file.setAttribute("title", Utils.getTitle(displayNode));         
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);    
     file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
     if(sourceNode.hasProperty("exo:dateModified")) {

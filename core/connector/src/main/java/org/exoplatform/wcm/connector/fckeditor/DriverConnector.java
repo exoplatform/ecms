@@ -23,13 +23,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -56,7 +53,6 @@ import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -68,7 +64,6 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -87,6 +82,7 @@ import org.exoplatform.wcm.connector.handler.FCKFileHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.exoplatform.services.cms.impl.Utils;
 
 /**
  * Created by The eXo Platform SEA
@@ -866,8 +862,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	return createFolderElement(document, child, folderType, childName, null);
   }
   private Element createFolderElement(Document document, Node child, String folderType, String childName, String nodeDriveName) throws Exception {
-	  	Element folder = document.createElement("Folder");
+	  	Element folder = document.createElement("Folder");	  		
 	  	folder.setAttribute("name", childName);
+	  	folder.setAttribute("title", Utils.getTitle(child));
 	  	folder.setAttribute("url", FCKUtils.createWebdavURL(child));
 	  	folder.setAttribute("folderType", folderType);
 	  	folder.setAttribute("path", child.getPath());
