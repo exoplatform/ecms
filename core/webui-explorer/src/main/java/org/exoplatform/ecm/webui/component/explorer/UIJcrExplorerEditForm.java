@@ -70,6 +70,8 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
   public static final String PARAM_PATH_INPUT = "nodePath";
 
   private static final String POPUP_SELECT_PATH_INPUT = "PopupSelectPath";
+  
+  private static boolean isException = false;
 
   public UIJcrExplorerEditForm() throws Exception {
     UIFormSelectBox repository = new UIFormSelectBox(UIJCRExplorerPortlet.REPOSITORY,
@@ -195,6 +197,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       UIFormInputSetWithAction driveNameInput = getChildById("DriveNameInput");
       UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
       stringInputDrive.setValue("");
+      isException = true;
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIJcrExplorerEditForm.msg.not-have-social", null));
     }
@@ -302,16 +305,19 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
         stringInputDrive.setValue("");
         driveNameInput.setRendered(true);
       } else if (typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SOCIAL)) {
+      	isException = false;
         String groupId = uiForm.getGroupId();
-        if (groupId == null || groupId.equals("")) {
-          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-          stringInputDrive.setValue("");
-        } else {
-          groupId = groupId.replaceAll("/",".");
-          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-          stringInputDrive.setValue(groupId);
+        if(!isException) {
+	        if (groupId == null || groupId.equals("")) {
+	          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
+	          stringInputDrive.setValue("");
+	        } else {
+	          groupId = groupId.replaceAll("/",".");
+	          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
+	          stringInputDrive.setValue(groupId);
+	        }        
+	        driveNameInput.setRendered(false);
         }
-        driveNameInput.setRendered(false);
       } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SELECTION)) {
         DriveData personalPrivateDrive =
           uiJExplorerPortlet.getUserDrive("private");
