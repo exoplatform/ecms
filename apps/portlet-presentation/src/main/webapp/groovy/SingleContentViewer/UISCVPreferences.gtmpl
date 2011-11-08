@@ -15,7 +15,7 @@
               <table class="UIFormGrid" style="width:100%">    
                 <tr>                  
                   <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent" title="<%=uicomponent.getSelectedNodePath()%>" colspan="2"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> colspan="2"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
                       <div style="position: absolute;">

@@ -1,0 +1,26 @@
+Index: apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl	(revision 72301)
++++ apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl	(working copy)
+@@ -55,7 +55,7 @@
+             </tr>
+             <tr>
+               <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+-              <td class="FieldComponent" title="<%=uicomponent.getSavedPath()%>" colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
++              <td class="FieldComponent" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+               <td style="align:right; width:30px;">
+                 <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
+                   <div style="position: absolute;">
+Index: apps/portlet-presentation/src/main/webapp/groovy/SingleContentViewer/UISCVPreferences.gtmpl
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/groovy/SingleContentViewer/UISCVPreferences.gtmpl	(revision 72301)
++++ apps/portlet-presentation/src/main/webapp/groovy/SingleContentViewer/UISCVPreferences.gtmpl	(working copy)
+@@ -15,7 +15,7 @@
+               <table class="UIFormGrid" style="width:100%">    
+                 <tr>                  
+                   <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+-                  <td class="FieldComponent" title="<%=uicomponent.getSelectedNodePath()%>" colspan="2"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
++                  <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> colspan="2"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                   <td class ="tdShowHelp">
+                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
+                       <div style="position: absolute;">
