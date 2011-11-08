@@ -130,7 +130,7 @@
 						
 						<div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
 							<div class="UIRightClickPopupMenu" style="display: block;">
-								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">									
+								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">									
 											<%
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
@@ -151,13 +151,13 @@
 											 top: 0px; left: 0px; display: none;">
 							<% if (uicomponent.getDocumentSourceType() == DocumentProviderUtils.CURRENT_NODE_ITEMS) {%>
 								<div class="UIRightClickPopupMenu" style="display: block;">
-									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">					
+									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">					
 										<%
 													for(itemGroundContext in managersGroundContext) {
 													action = itemGroundContext.getUIExtensionName();
 										%>
 									<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
-											<div class="MenuIcon ${action}16x16Icon">
+											<div class="ItemIcon ${action}16x16Icon">
 												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 											</div>
 									 	</a>
@@ -193,7 +193,7 @@
           if (permLinkComponent != null) {
             permlink = permLinkComponent.getUIExtensionName();
             strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\">" ;
-            strActs +=  " <div class='MenuURLIcon ${permlink}16x16Icon'>" ;
+            strActs +=  " <div class='ItemIcon ${permlink}16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
             strActs +=  " </div>";
             strActs +=  "</a>";
@@ -202,12 +202,12 @@
           if (data.getPrimaryNodeType().getName().equals("nt:file")) {
     		  	String mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
     		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+repository+"','"+ preferenceWS+ "','" +Utils.formatNodeName(data.getPath())+"','"+mimeType+"')";				  					  					  	
-    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;	        
+    		  	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;	        
     		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
     			  strActs += 		"</a>" ;				  	
     		  } else {
     		  	String link = serverUrl + "/" + portalName + "/rest/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(data.getPath()); 
-    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
+    		  	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
     		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
     			  strActs += 		"</a>" ;				  	
     		  }
@@ -218,7 +218,7 @@
 	          for (act in customActs) {
 	            String actName = act.getProperty("exo:name").getValue().getString() ;
 	            params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
-	            strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
+	            strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
 	            strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
 	            strActs += "</a>" ;
 	          }            
@@ -226,7 +226,7 @@
 	        
 	        String clipboardLink = serverUrl + "/" + portalName + "/rest/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
 	        strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
-	  			strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
+	  			strActs +=  "	<div class='ItemIcon GetURL16x16Icon'>" ;
 	  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
 	  			strActs +=  "	</div>" ;
 	  	 		strActs +=  "</a>";	   

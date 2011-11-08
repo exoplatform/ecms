@@ -81,7 +81,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 												</div>
 												<div class="MiddleLeftRightClickPopupMenu">
 													<div class="MiddleRightRightClickPopupMenu">
-														<div class="UIRightPopupMenuContainer" style="background: none;margin: 0px; padding-left: 8px; padding-right: 8px;">
+														<div class="UIRightPopupMenuContainer">
 															<!-- Detail action -->
 															<div class="MenuItem" onclick="javaScript:void(0)">
 																<div class="ItemIcon openFolder" style="padding-left:30px;text-align:left;">

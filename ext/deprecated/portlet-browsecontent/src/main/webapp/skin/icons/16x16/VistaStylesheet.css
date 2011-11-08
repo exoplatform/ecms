@@ -705,11 +705,6 @@
   background: url('DefaultSkin/UnPublished.gif') no-repeat right center; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UIRightClickPopupMenu .MenuItem .ItemIcon{
-	background-position: 6px center; /* orientation=lt */
-  background-position: 98% center; /* orientation=rt */
-}
-
 /*
 * minh.js.exo
 * ECM-2418

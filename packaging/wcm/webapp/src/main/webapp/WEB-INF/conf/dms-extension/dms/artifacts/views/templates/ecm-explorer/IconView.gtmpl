@@ -45,9 +45,9 @@
 				<div class="JCRMoveIcon" style="display: none;"><div class="MoveNode"><span>{number}</span></div></div>
 				<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 				<div class="JCRMoveAction" style="display: none;" request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>"></div>
-				<div class="ItemContextMenu" style="background: #F6F6F6; position: absolute;	top: 0px; display: none;" >
+				<div class="ItemContextMenu" style="position: absolute;	top: 0px; display: none;" >
 					<div class="UIRightClickPopupMenu" style="display: block;">
-						<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">						
+						<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">						
 								<%
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
@@ -64,15 +64,15 @@
 						 </div>	
 					 </div>
 				</div>
-				<div class="GroundContextMenu" style="background: #F6F6F6; position: absolute;	top: 0px; display: none;">
+				<div class="GroundContextMenu" style="position: absolute;	top: 0px; display: none;">
 						<div class="UIRightClickPopupMenu" style="display: block;">
-							<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">
+							<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">
 									<%
 												for(itemGroundContext in managersGroundContext) {
 												action = itemGroundContext.getUIExtensionName();
 										%>
 										<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
-											<div class="MenuIcon ${action}16x16Icon">
+											<div class="ItemIcon ${action}16x16Icon">
 												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 											</div>
 									 	</a>
@@ -102,7 +102,7 @@
 	            if (permLinkComponent != null) {
 	              permlink = permLinkComponent.getUIExtensionName();
     	          strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" 
-    	          strActs +=  " <div class='MenuURLIcon ${permlink}16x16Icon'>";
+    	          strActs +=  " <div class='ItemIcon ${permlink}16x16Icon'>";
     	          strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
                 strActs +=  " </div>";
                 strActs +=  "</a>";
@@ -117,7 +117,7 @@
 									}
 									String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath(); 
 							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
-				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\">" ;	        
+				        	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\">" ;	        
 							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 							  	strActs += 		"</a>" ;				  	
 							  }else {
@@ -126,7 +126,7 @@
 							  	if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
 							  	if (dataTarget != null) {
   							  	String link = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + dataTarget.getPath(); 
-  				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\"  style=\"{behavior: url(#default#AnchorClick);}\" href=\"" + link + "\" target='_new' folder=\"" + link +"\">" ;	        
+  				        	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\"  style=\"{behavior: url(#default#AnchorClick);}\" href=\"" + link + "\" target='_new' folder=\"" + link +"\">" ;	        
   							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
   							  	strActs += 		"</a>" ;
 							  	}
@@ -140,7 +140,7 @@
           for(act in customActs) {
             String actName = act.getProperty("exo:name").getValue().getString() ;
             params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",act.getName())] ;
-            strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",nodePath,params) + "\">" ;
+            strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",nodePath,params) + "\">" ;
             strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
             strActs += "</a>" ;
           }            
@@ -149,7 +149,7 @@
       	if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
       		String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
 	       strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
-								strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
+								strActs +=  "	<div class='ItemIcon GetURL16x16Icon'>" ;
 								strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
 								strActs +=  "	</div>" ;
 						 		strActs +=  "</a>";

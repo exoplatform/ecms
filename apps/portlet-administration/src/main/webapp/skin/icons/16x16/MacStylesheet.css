@@ -849,12 +849,6 @@
   background: url('DefaultSkin/Save.gif') no-repeat right center; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UIRightClickPopupMenu .MenuItem .ItemIcon{
-	background-position: 6px center; /* orientation=lt */
-  background-position: 96% center; /* orientation=rt */
-  _background-position: 99% center; /* orientation=rt */
-}
-
 /*############################## -- End BC Portlet Icon -- ########################*/
 
 .UIVersionTreeList .TrueIcon {

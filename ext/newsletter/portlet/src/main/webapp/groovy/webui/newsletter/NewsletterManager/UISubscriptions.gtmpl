@@ -75,7 +75,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 								<div class="Line" style="background: none;" onclick="eXo.ecm.NewsletterManager.show(this, event);">
 									<a href="#" onclick="javaScript:void(0);" class="NewsAdmin ActionButton LightBlueStyle"><%=_ctx.appRes("UICategories.title.Administration")%></a>
 									<div style="position:absolute;">
-										<div class="UIPopupCategory" style="display:none">
+										<div class="UIPopupCategory" style="display:none; top: -2px;">
 											<div class="UIRightClickPopupMenu UINewLetterPopup" style="display:block;min-width:130px;">
 												<div class="UIContextMenuContainer BorderOutline">											
 													<div class="TopLeftRightClickPopupMenu">
@@ -85,7 +85,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 													</div>
 													<div class="MiddleLeftRightClickPopupMenu">
 														<div class="MiddleRightRightClickPopupMenu">
-															<div class="UIRightPopupMenuContainer" style="background: none;margin: 0px; padding-left: 8px; padding-right: 8px;">
+															<div class="UIRightPopupMenuContainer">
 																<!-- Detail action -->
 																<%
 																if(uicomponent.isAdministrator() || uicomponent.isModerator()){%>
