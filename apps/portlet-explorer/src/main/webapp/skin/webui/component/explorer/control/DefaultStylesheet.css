@@ -69,6 +69,19 @@
   padding: 2px 10px 0px 0px; /* orientation=rt */
 }
 
+.UIJCRExplorerPortlet .ShowDrivesButton{
+	background: url('DefaultSkin/icons/DriversButton.png') no-repeat right center; /* orientation=lt */
+	background: url('DefaultSkin/icons/DriversButton.png') no-repeat left center; /* orientation=rt */
+	cursor: pointer;
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+  height:28px;
+	/*margin-top:2px;*/
+	width:24px;
+  padding: 2px 0px 0px 10px; /* orientation=lt */
+  padding: 2px 10px 0px 0px; /* orientation=rt */
+}
+
 .UIJCRExplorerPortlet .URLBackToButton {
   width: 24px;
   height: 24px;

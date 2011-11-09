@@ -111,6 +111,10 @@
   	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>
   	    <%}%>  	      
   	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+
+			 <%if (!uicomponent.isDirectlyDrive()) {%>
+  	     <a class="ShowDrivesButton" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	   <%}%>
   	    
   			<div class="ClearRight"><span></span></div>
   		</div>

@@ -31,6 +31,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
+import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
@@ -89,7 +90,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIActionBar.ChangeTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.PreferencesActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.SaveSessionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionBar.BackToActionListener.class, phase=Phase.DECODE)
+      @EventConfig(listeners = UIActionBar.BackToActionListener.class, phase=Phase.DECODE),
+      @EventConfig(listeners = UIActionBar.ShowDrivesActionListener.class, phase=Phase.DECODE)
     }
 )
 
@@ -186,6 +188,16 @@ public class UIActionBar extends UIForm {
 
   public void setSelectedTab(String tabName) {
     selectedTabName_ = tabName;
+  }
+
+  public boolean isDirectlyDrive() {
+    PortletPreferences portletPref =
+      getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences();
+    String usecase =  portletPref.getValue("usecase", "").trim();
+    if ("selection".equals(usecase)) {
+      return false;
+    }
+    return true;
   }
 
   public String getSelectedTab() throws Exception {
@@ -349,6 +361,22 @@ public class UIActionBar extends UIForm {
       UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
       String mess = "UIJCRExplorer.msg.save-session-success" ;
       uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
+    }
+  }
+
+  static public class ShowDrivesActionListener extends EventListener<UIActionBar> {
+    public void execute(Event<UIActionBar> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDrivesArea uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
+      if (uiDriveArea.isRendered()) {
+      uiDriveArea.setRendered(false);
+      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
+      } else {
+      uiDriveArea.setRendered(true);
+      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
   }
 
