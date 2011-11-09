@@ -1,0 +1,73 @@
+Index: apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css	(revision 73619)
++++ apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css	(working copy)
+@@ -94,3 +94,27 @@
+ .UITaxonomyManager .UIBreadcumbs {
+ 	padding-bottom: 10px;
+ }
++
++.UIJCRExplorer .UIDocumentWorkspace .UITabPane .UITabContent a:link {
++    color: #2200C1;
++    cursor: pointer;
++    text-decoration: none;
++}
++
++.UIJCRExplorer .UIDocumentWorkspace .UITabPane .UITabContent a:visited {
++    color: #800080;
++    text-decoration: none;
++}
++
++.UIJCRExplorer .UIDocumentWorkspace .UITabPane .UITabContent a:hover {
++    color: #2200C1;
++    cursor: pointer;    
++    text-decoration: underline;
++}
++
++.UIJCRExplorer .UIDocumentWorkspace .UITabPane .UITabContent a:active {
++    color: #2200C1;
++    cursor: pointer;
++    text-decoration: underline;
++}
++
+Index: apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css
+===================================================================
+--- apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css	(revision 73619)
++++ apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css	(working copy)
+@@ -34,6 +34,29 @@
+ 	background:#fff;
+ }
+ 
++.cke_show_borders a:link {
++    color: #2200C1;
++    cursor: pointer;
++    text-decoration: none;
++}
++
++.cke_show_borders a:visited {
++    color: #800080;
++    text-decoration: none;
++}
++
++.cke_show_borders a:hover {
++    color: #2200C1;
++    cursor: pointer;
++    text-decoration: underline;
++}
++
++.cke_show_borders a:active {
++    color: #2200C1;
++    cursor: pointer;
++    text-decoration: underline;
++}
++
+ .UISiteAdminToolBar {
+ 	height: auto;
+ 	padding-right: 20px;
+@@ -180,4 +203,4 @@
+ 	padding-left: 32px;
+ }
+ 
+-*/
+\ No newline at end of file
++*/

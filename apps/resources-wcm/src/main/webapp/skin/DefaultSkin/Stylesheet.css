@@ -34,6 +34,29 @@
 	background:#fff;
 }
 
+.cke_show_borders a:link {
+    color: #2200C1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cke_show_borders a:visited {
+    color: #800080;
+    text-decoration: none;
+}
+
+.cke_show_borders a:hover {
+    color: #2200C1;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.cke_show_borders a:active {
+    color: #2200C1;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .UISiteAdminToolBar {
 	height: auto;
 	padding-right: 20px;
