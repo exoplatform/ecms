@@ -30,6 +30,7 @@ import javax.jcr.Node;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -153,6 +154,10 @@ public class UIPublicationPanel
         context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
       }
       try {
+        if(currentNode.isLocked()) {
+          currentNode.getSession().addLockToken(LockUtil.getLockToken(currentNode));
+        }
+        
         publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
         String siteName = Util.getPortalRequestContext().getPortalOwner();
@@ -182,6 +187,10 @@ public class UIPublicationPanel
           UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null));
           return;
+        }
+        
+        if(node.isLocked()) {
+          node.getSession().addLockToken(LockUtil.getLockToken(node));
         }
         
         if ((!"".equals(startPublication.getValue())) || (!"".equals(endPublication.getValue()))) {
