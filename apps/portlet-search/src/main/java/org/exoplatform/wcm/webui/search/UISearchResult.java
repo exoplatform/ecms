@@ -187,7 +187,8 @@ public class UISearchResult extends UIContainer {
       
       queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
       queryCriteria.setSiteName(portal);
-      queryCriteria.setKeyword(keyword.toLowerCase());
+      queryCriteria.setKeyword(
+             org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(keyword).toLowerCase());
       queryCriteria.setSearchWebpage(isWebPage);
       queryCriteria.setSearchDocument(isSearchDocument);
       queryCriteria.setSearchWebContent(isSearchDocument);

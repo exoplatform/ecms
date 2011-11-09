@@ -20,7 +20,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.jcr.SimpleSearchValidator;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -29,8 +28,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -56,12 +55,13 @@ public class UIContentNameSearch extends UIForm {
 
   private static String       SEARCH_LOCATION     = "location";
 
-  private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where jcr:path like '%/$1'"
-                                                      + " order by exo:dateCreated DESC,jcr:primaryType DESC";
+  private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where " +
+                                                    "contains(exo:name, '$1') or contains(exo:title, '$1') or  " +
+                                                    "lower(exo:name) like '%$2%' order by exo:title ASC";
 
-  private static final String PATH_SQL_QUERY      = "select * from nt:base where jcr:path like '$0/%/$1'"
-                                                      + " or jcr:path like '$0/$1'"
-                                                      + " order by exo:dateCreated DESC,jcr:primaryType DESC";
+  private static final String PATH_SQL_QUERY      = "select * from nt:base where jcr:path like '$0/%' AND " +
+                                                    "( contains(exo:name, '$1') or contains(exo:title, '$1') or " + 
+                                                    "lower(exo:name) like '%$2%') order by exo:title ASC";
 
   public UIContentNameSearch() throws Exception {
     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));
@@ -81,14 +81,17 @@ public class UIContentNameSearch extends UIForm {
       try {
         String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();
         keyword = keyword.trim();
+        String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(keyword);
         UIJCRExplorer explorer = contentNameSearch.getAncestorOfType(UIJCRExplorer.class);
         String currentNodePath = explorer.getCurrentNode().getPath();
         String statement = null;
         if("/".equalsIgnoreCase(currentNodePath)) {
-          statement = StringUtils.replace(ROOT_PATH_SQL_QUERY,"$1",keyword);
+          statement = StringUtils.replace(ROOT_PATH_SQL_QUERY,"$1",escapedText);
+          statement = StringUtils.replace(statement,"$2",escapedText.toLowerCase());
         }else {
           statement = StringUtils.replace(PATH_SQL_QUERY,"$0",currentNodePath);
-          statement = StringUtils.replace(statement,"$1",keyword);
+          statement = StringUtils.replace(statement,"$1",escapedText);
+          statement = StringUtils.replace(statement,"$2",escapedText.toLowerCase());
         }
         long startTime = System.currentTimeMillis();
         uiSearchResult.setQuery(statement, explorer.getTargetSession().getWorkspace().getName(), Query.SQL, 

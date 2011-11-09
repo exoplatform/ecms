@@ -58,6 +58,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class Utils {
   private final static Log   log          = ExoLogger.getLogger("org.exoplatform.services.cms.impl.Utils");
   
+  private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"";
+
   public static final String MAPPING_FILE = "mapping.properties";
 
   public static Node makePath(Node rootNode, String path, String nodetype)
@@ -289,5 +291,14 @@ public class Utils {
     }
     return Text.unescapeIllegalJcrChars(title);
   }
+  
+  public static String escapeIllegalCharacterInQuery(String query) {
+    String ret = query;
+    for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
+      ret = ret.replace(c + "", "\\" + c);
+    }
+    return ret;
+  }
+
   
 }

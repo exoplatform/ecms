@@ -252,7 +252,8 @@ public class UISearchForm extends UIForm {
       queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 
       queryCriteria.setSiteName(selectedPortal);
-      queryCriteria.setKeyword(keyword);
+      queryCriteria.setKeyword(
+               org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(keyword));
       if (documentChecked) {
         queryCriteria.setSearchDocument(true);
         queryCriteria.setSearchWebContent(true);

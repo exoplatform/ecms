@@ -140,13 +140,14 @@ public class UISimpleSearch extends UIForm {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
     String text = getUIStringInput(INPUT_SEARCH).getValue();
+    String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
     if(text != null && constraints_.size() == 0) {
       if ("/".equals(currentNode.getPath())) {
         statement.append(ROOT_XPATH_QUERY);
       } else {
         statement.append(StringUtils.replace(XPATH_QUERY, "$0", currentNode.getPath()));
       }
-      statement.append("[(jcr:contains(.,'").append(text.replaceAll("'", "''")).append("'))]");
+      statement.append("[(jcr:contains(.,'").append(escapedText.replaceAll("'", "''")).append("'))]");
     } else if(constraints_.size() > 0) {
       if(text == null) {
         if ("/".equals(currentNode.getPath())) {
@@ -162,7 +163,7 @@ public class UISimpleSearch extends UIForm {
           statement.append(StringUtils.replace(XPATH_QUERY, "$0", currentNode.getPath()));
         }
         statement.append("[(jcr:contains(.,'")
-                 .append(text.replaceAll("'", "''"))
+                 .append(escapedText.replaceAll("'", "''"))
                  .append("')) ")
                  .append(operator)
                  .append(" (");
@@ -179,13 +180,14 @@ public class UISimpleSearch extends UIForm {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
     String text = getUIStringInput(INPUT_SEARCH).getValue();
+    String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
     if(text != null && constraints_.size() == 0) {
       if ("/".equals(currentNode.getPath())) {
         statement.append(ROOT_SQL_QUERY);
       } else {
         statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
       }
-      statement.append("AND CONTAINS(*,'").append(text.replaceAll("'", "''")).append("')");
+      statement.append("AND CONTAINS(*,'").append(escapedText.replaceAll("'", "''")).append("')");
     } else if(constraints_.size() > 0) {
       if(text == null) {
         if ("/".equals(currentNode.getPath())) {
@@ -199,7 +201,7 @@ public class UISimpleSearch extends UIForm {
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
         }
-        statement.append("AND CONTAINS(*,'").append(text.replaceAll("'", "''")).append("') ");
+        statement.append("AND CONTAINS(*,'").append(escapedText.replaceAll("'", "''")).append("') ");
       }
       String operator = getUIFormSelectBox(FIRST_OPERATOR).getValue();
       statement.append(operator).append(" ");

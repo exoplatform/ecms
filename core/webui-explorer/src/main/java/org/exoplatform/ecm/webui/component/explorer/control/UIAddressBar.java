@@ -37,17 +37,11 @@ import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
@@ -57,8 +51,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 
@@ -94,7 +88,7 @@ public class UIAddressBar extends UIForm {
   public final static String  EXO_TARGETPATH           = "exo:targetPath";
 
   public final static String  EXO_TARGETWORKSPACE      = "exo:targetWorkspace";
-
+  
   private String              selectedViewName_;
 
   private String[]            arrView_                 = {};
@@ -269,8 +263,9 @@ public class UIAddressBar extends UIForm {
       }else {
         queryStatement = StringUtils.replace(SQL_QUERY,"$0",currentNode.getPath());
       }
-      queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
-      queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
+      String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
+      queryStatement = StringUtils.replace(queryStatement,"$1", escapedText.replaceAll("'", "''"));
+      queryStatement = StringUtils.replace(queryStatement,"$2", escapedText.replaceAll("'", "''").toLowerCase());
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
