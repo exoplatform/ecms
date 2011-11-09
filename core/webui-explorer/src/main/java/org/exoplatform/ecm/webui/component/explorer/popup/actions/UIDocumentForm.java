@@ -276,6 +276,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         for (int i = 0; i < inputs.size(); i++) {
           UIFormInput input = (UIFormInput) inputs.get(i);
           if ((input.getName() != null) && input.getName().equals("name")) {
+            input.setValue(input.getValue().toString().trim());
             String[] arrFilterChar = {"]", "["};
             String valueName = input.getValue().toString();
             if (!Utils.isNameValid(valueName, arrFilterChar)) {
