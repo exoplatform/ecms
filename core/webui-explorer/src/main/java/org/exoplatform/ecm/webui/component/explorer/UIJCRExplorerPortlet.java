@@ -94,8 +94,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   final static public String JAILED             = "jailed";
 
-  final static public String SOCIAL             = "social";
-
   final static public String SELECTION          = "selection";
 
   final static public String PERSONAL           = "personal";

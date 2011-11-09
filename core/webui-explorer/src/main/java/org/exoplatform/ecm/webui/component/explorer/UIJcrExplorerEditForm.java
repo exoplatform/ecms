@@ -70,8 +70,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
   public static final String PARAM_PATH_INPUT = "nodePath";
 
   private static final String POPUP_SELECT_PATH_INPUT = "PopupSelectPath";
-  
-  private static boolean isException = false;
+
 
   public UIJcrExplorerEditForm() throws Exception {
     UIFormSelectBox repository = new UIFormSelectBox(UIJCRExplorerPortlet.REPOSITORY,
@@ -98,8 +97,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     String usecase = getPreference().getValue(UIJCRExplorerPortlet.USECASE, "");
     listType.add(new SelectItemOption<String>("Selection", "selection"));
     listType.add(new SelectItemOption<String>("Jailed", "jailed"));
-    listType.add(new SelectItemOption<String>("Personal", "personal"));
-    listType.add(new SelectItemOption<String>("Social", "social"));
+    listType.add(new SelectItemOption<String>("Personal", "personal"));    
     listType.add(new SelectItemOption<String>("Parameterize", "parameterize"));
     UIFormSelectBox typeSelectBox = new UIFormSelectBox(UIJCRExplorerPortlet.USECASE, UIJCRExplorerPortlet.USECASE, listType);
     typeSelectBox.setValue(usecase);
@@ -164,62 +162,14 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       setFlagSelectRender(true);
     } else if(usecase.equals(UIJCRExplorerPortlet.PERSONAL)) {
       driveNameInput.setRendered(false);
-      setFlagSelectRender(true);
-    } else if (usecase.equals(UIJCRExplorerPortlet.SOCIAL)) {
-      driveNameInput.setRendered(false);
-      getGroupId();
-      setFlagSelectRender(true);
+      setFlagSelectRender(true);    
     } else if (usecase.equals(UIJCRExplorerPortlet.PARAMETERIZE)) {
       uiParamPathInput.setRendered(true);
       setFlagSelectRender(true);
     }
     setActions(new  String[] {"Save", "Cancel"});
   }
-
-  public String getGroupId() {
-    try {
-      PortalRequestContext pcontext = Util.getPortalRequestContext();
-      String requestUrl = pcontext.getRequestURI();
-      String portalUrl = pcontext.getPortalURI();
-      String spaceUrl = requestUrl.replace(portalUrl,"");
-      if (spaceUrl.contains("/")) spaceUrl = spaceUrl.split("/")[0];
-      Object space = getSpaceByUrl(spaceUrl);
-      Class clazzSpace = Class.forName("org.exoplatform.social.space.Space");
-      Method[] methods = clazzSpace.getDeclaredMethods();
-      for (Method m : methods) {
-        if (m.getName().trim().equals("getGroupId")) {
-          return (String) m.invoke(space);
-        }
-      }
-    } catch (Exception e) {
-      UIFormSelectBox typeSelectBox = getChildById(UIJCRExplorerPortlet.USECASE);
-      typeSelectBox.setValue(UIJCRExplorerPortlet.SELECTION);
-      UIFormInputSetWithAction driveNameInput = getChildById("DriveNameInput");
-      UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-      stringInputDrive.setValue("");
-      isException = true;
-      UIApplication uiApp = getAncestorOfType(UIApplication.class);
-      uiApp.addMessage(new ApplicationMessage("UIJcrExplorerEditForm.msg.not-have-social", null));
-    }
-    return null;
-  }
-
-  public Object getSpaceByUrl(String url) throws Exception {
-    try {
-      Class clazz = Class.forName("org.exoplatform.social.space.SpaceService");
-      Object obj = PortalContainer.getInstance().getComponentInstanceOfType(clazz);
-      Method[] methods = clazz.getDeclaredMethods();
-      for (Method m : methods) {
-        if (m.getName().trim().equals("getSpaceByUrl")) {
-          return m.invoke(obj, url);
-        }
-      }
-    } catch(Exception e) {
-      return null;
-    }
-    return null;
-  }
-
+  
   public boolean isFlagSelectRender() {
     return flagSelectRender;
   }
@@ -303,21 +253,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       if (typeSelectBox.getValue().equals(UIJCRExplorerPortlet.JAILED)) {
         UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
         stringInputDrive.setValue("");
-        driveNameInput.setRendered(true);
-      } else if (typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SOCIAL)) {
-      	isException = false;
-        String groupId = uiForm.getGroupId();
-        if(!isException) {
-	        if (groupId == null || groupId.equals("")) {
-	          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-	          stringInputDrive.setValue("");
-	        } else {
-	          groupId = groupId.replaceAll("/",".");
-	          UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-	          stringInputDrive.setValue(groupId);
-	        }        
-	        driveNameInput.setRendered(false);
-        }
+        driveNameInput.setRendered(true);      
       } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SELECTION)) {
         DriveData personalPrivateDrive =
           uiJExplorerPortlet.getUserDrive("private");
