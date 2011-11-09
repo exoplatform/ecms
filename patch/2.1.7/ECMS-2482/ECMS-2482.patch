@@ -1,0 +1,63 @@
+Index: core/services/src/main/java/org/exoplatform/services/cms/actions/impl/BaseActionLauncherListener.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/actions/impl/BaseActionLauncherListener.java	(revision 71567)
++++ core/services/src/main/java/org/exoplatform/services/cms/actions/impl/BaseActionLauncherListener.java	(working copy)
+@@ -82,6 +82,10 @@
+         node = (Node) jcrSession.getItem(srcPath_);
+         String userId = event.getUserID();
+         Node actionNode = actionServiceContainer.getAction(node, actionName_);
++        if (actionNode == null) {
++          jcrSession.logout();
++          return;
++        }
+         Property rolesProp = actionNode.getProperty("exo:roles");        
+         Value[] roles = rolesProp.getValues();        
+         boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIMultiLanguageForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIMultiLanguageForm.java	(revision 71567)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIMultiLanguageForm.java	(working copy)
+@@ -152,24 +152,8 @@
+       UIDocumentInfo uiDocumentInfo = uiJCRExplorer.findFirstComponentOfType(UIDocumentInfo.class) ;
+       String selectedLanguage = uiForm.getUIFormSelectBox(Utils.LANGUAGES).getValue() ;
+       uiDocumentInfo.setLanguage(selectedLanguage);
+-      uiJCRExplorer.setLanguage(selectedLanguage);
+-      MultiLanguageService multiLanguageService = uiForm.getApplicationComponent(MultiLanguageService.class);
+-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+-      try {
+-        multiLanguageService.setDefault(uiJCRExplorer.getCurrentNode(), selectedLanguage, uiJCRExplorer.getRepositoryName()) ;
+-      } catch(AccessDeniedException ace) {
+-        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null, 
+-                                                ApplicationMessage.WARNING)) ;
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-        return ;
+-      } catch(Exception e) {
+-        LOG.error("Unexpected error", e);
+-        JCRExceptionManager.process(uiApp, e) ;
+-        return ;
+-      }
+       uiJCRExplorer.setIsHidePopup(false);
+-      uiJCRExplorer.refreshExplorer();      
+-      event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer);
++      uiJCRExplorer.updateAjax(event);
+     }
+   }
+ }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(revision 71567)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(working copy)
+@@ -583,6 +583,13 @@
+       if(!getLanguage().equals(defaultLang)) {
+     	  MultiLanguageService multiServ = getApplicationComponent(MultiLanguageService.class);
+     	  Node curNode = multiServ.getLanguage(currentNode_, getLanguage());
++        if (currentNode_.isNodeType(Utils.NT_FOLDER) || currentNode_.isNodeType(Utils.NT_UNSTRUCTURED)) {
++          try {
++            return curNode.getNode(currentNode_.getName());
++          } catch (Exception e) {
++            return curNode;
++          }
++        }
+         return curNode ;
+       }
+     }    

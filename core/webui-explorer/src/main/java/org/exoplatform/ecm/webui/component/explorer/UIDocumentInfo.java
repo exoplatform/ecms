@@ -628,6 +628,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       if(!getLanguage().equals(defaultLang)) {
     	  MultiLanguageService multiServ = getApplicationComponent(MultiLanguageService.class);
     	  Node curNode = multiServ.getLanguage(currentNode_, getLanguage());
+        if (currentNode_.isNodeType(Utils.NT_FOLDER) || currentNode_.isNodeType(Utils.NT_UNSTRUCTURED)) {
+          try {
+            return curNode.getNode(currentNode_.getName());
+          } catch (Exception e) {
+            return curNode;
+          }
+        }
         return curNode ;
       }
     }    

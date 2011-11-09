@@ -82,6 +82,10 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
         node = (Node) jcrSession.getItem(srcPath_);
         String userId = event.getUserID();
         Node actionNode = actionServiceContainer.getAction(node, actionName_);
+        if (actionNode == null) {
+          jcrSession.logout();
+          return;
+        }
         Property rolesProp = actionNode.getProperty("exo:roles");        
         Value[] roles = rolesProp.getValues();        
         boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;
