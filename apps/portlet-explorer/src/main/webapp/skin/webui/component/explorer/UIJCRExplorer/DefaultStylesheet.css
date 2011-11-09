@@ -1232,8 +1232,7 @@
 /*===============================UIDrivesArea===================================*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDrivesArea {
-	overflow: auto;
-  height: 575px;
+	
 }
 
 .UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer{

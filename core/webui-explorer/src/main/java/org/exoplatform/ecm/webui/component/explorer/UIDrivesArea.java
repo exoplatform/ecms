@@ -101,7 +101,7 @@ public class UIDrivesArea extends UIContainer {
   }
 
   public String getGroupLabel(String groupId, boolean isFull) {
-    String ret = groupId.replace(".", "/");
+    String ret = groupId.replace(".", " / ");
     if (!isFull) {
       int count = 0;
       int slashPosition = -1;

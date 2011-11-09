@@ -683,9 +683,9 @@
 			visibleItemsCount ++;
 		}
 		
-		var resizableBlockWidth = resizableBlock.clientWidth;
-		var componentWidth = selectedItem.clientWidth;	
-		var newVisibleItemCount = Math.floor((resizableBlockWidth - 8) / componentWidth); 		
+		var resizableBlockWidth = resizableBlock.offsetWidth;
+		var componentWidth = selectedItem.offsetWidth;	
+		var newVisibleItemCount = Math.floor(resizableBlockWidth / componentWidth); 		
 		if (newVisibleItemCount < visibleItemsCount){								
 			//display 'More' button
 			if (moreButton != null && moreButton.style.display == 'none' ) {
@@ -725,7 +725,8 @@
 		var link = document.createElement('a');
 		link.setAttribute('title', movedItem.getAttribute('title'));
 		link.className = 'IconPopup ' +  classesOfIcon[classesOfIcon.length - 1];
-		link.setAttribute('href', movedItem.getAttribute('onclick'));
+		link.setAttribute('onclick', movedItem.getAttribute('onclick'));
+		link.setAttribute('href', 'javascript:void(0);');
 		
 		var lstHiddenComponent = DOM.getChildrenByTagName(lstExtendedComponent, 'a');
 		if (lstHiddenComponent.length > 0) {
@@ -749,7 +750,7 @@
 		var normalItem = document.createElement('div');
 		normalItem.className = 'NormalItem';
 		normalItem.setAttribute('title', movedItem.getAttribute('title'));
-		normalItem.setAttribute('onclick', movedItem.getAttribute('href'));
+		normalItem.setAttribute('onclick', movedItem.getAttribute('onclick'));
 		
 		var iconItem = document.createElement('div');
 		var lstClassOfMovedItem = movedItem.className.split(' ');		

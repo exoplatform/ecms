@@ -15,7 +15,7 @@
      %>
         <div class="Info" style="padding-left: 25px;font-size:12px;margin-bottom:12px">
           <%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>
-          &nbsp;<img src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/DriversButton.gif" />
+          &nbsp;<img src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png" />
         </div>
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>

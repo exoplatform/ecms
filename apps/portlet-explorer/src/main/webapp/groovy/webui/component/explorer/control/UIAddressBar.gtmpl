@@ -86,7 +86,6 @@
   										%>
   									</div>
   								</div>
-  								<a href="#" class="HomeLabel">Home</a>
   								<div class="DropDownButtonBox" onmousedown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)">
   									<div class="DropDownButton Style1DownArrow16x16Icon" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
   								</div>
