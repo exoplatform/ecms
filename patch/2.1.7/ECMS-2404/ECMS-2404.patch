@@ -1,0 +1,53 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl	(revision 70923)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl	(working copy)
+@@ -1,10 +1,14 @@
+ <%
+   import org.exoplatform.web.application.Parameter ;
++  import org.exoplatform.portal.webui.util.Util;
++  import java.util.Locale;
++  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+   
+   def commentsList = uicomponent.getComments() ;
+   def uicomment = uicomponent.getCommentComponent();
+   if(commentsList.size() > 0) {
+-    java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy") ;
++    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
++    java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy", locale) ;
+     def lastComment = commentsList.get(0) ;
+     def rcontext = _ctx.getRequestContext() ;
+     
+@@ -110,4 +114,4 @@
+ 			<%}%>
+ 		</div>
+   </div>
+-<%}%>
+\ No newline at end of file
++<%}%>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_fr.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_fr.xml	(revision 70923)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_fr.xml	(working copy)
+@@ -49,7 +49,7 @@
+       <label>
+         <postedBy>Dernier commentaire posté par</postedBy>
+         <at>à</at>
+-        <comments>Commentaires</comments>
++        <comments>Commentaire(s)</comments>
+         <show-comments>Afficher les commentaires</show-comments>
+         <hide-comments>Cacher les commentaires</hide-comments>
+         <comment-by>Commenté par</comment-by>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_en.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_en.xml	(revision 70923)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/views_en.xml	(working copy)
+@@ -49,7 +49,7 @@
+       <label>
+         <postedBy>Last comment posted by</postedBy>
+         <at>at</at>
+-        <comments>Comments</comments>
++        <comments>Comment(s)</comments>
+         <show-comments>Show comments</show-comments>
+         <hide-comments>Hide comments</hide-comments>
+         <comment-by>Commented by</comment-by>

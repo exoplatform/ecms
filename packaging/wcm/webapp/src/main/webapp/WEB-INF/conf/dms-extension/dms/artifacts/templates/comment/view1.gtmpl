@@ -1,11 +1,15 @@
 <%
   import java.net.URLEncoder;
   import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.portal.webui.util.Util;
+  import java.util.Locale;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   
   def commentsList = uicomponent.getComments() ;
   def uicomment = uicomponent.getCommentComponent();
   if(commentsList.size() > 0) {
-    java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy") ;
+    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+    java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy", locale) ;
     def lastComment = commentsList.get(0) ;
     def rcontext = _ctx.getRequestContext() ;
     
