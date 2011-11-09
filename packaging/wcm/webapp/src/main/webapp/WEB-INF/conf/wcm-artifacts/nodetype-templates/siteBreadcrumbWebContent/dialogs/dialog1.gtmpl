@@ -162,7 +162,7 @@
 									if("".equals(htmlContent)) {
 										htmlContent = "<div id=\"breadcrumb-generator\"><div class=\"UIWCMBreadcrumbsPortlet\"><div class=\"BCHome16x16Icon\"><span></span></div></div></div>";
 									}
-									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px'", htmlContent];
+									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px',noSanitization", htmlContent];
 			    					uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 			      				%>
 								</td>
@@ -344,7 +344,7 @@
 																				"document.getElementById(\"breadcrumb-generator\").innerHTML = html;\n" +
 																			"}";
 									}
-									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", jsContent];
+									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
 								</td>

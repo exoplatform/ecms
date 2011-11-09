@@ -16,7 +16,8 @@ function getModule(params) {
   module.relativeMavenRepo =  "org/exoplatform/ecm/wcm" ;
   module.relativeSRCRepo =  "ecm/wcm" ;
   module.name =  "wcm" ;
-  
+  var antisamyVersion = "${org.owasp.antisamy.version}";
+  var batikVersion = "${org.apache.batik.version}";
   module.portlet = {};
   
   module.portlet.webpresentation = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-presentation", "exo-portlet", module.version).       
@@ -66,7 +67,10 @@ function getModule(params) {
 
   module.extension = {};
   
-  module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);
+  module.extension.war = 
+  new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
+  addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
+	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion));
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 
   module.demo = {};

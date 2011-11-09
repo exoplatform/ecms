@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo-ecms</artifactId>
-  <version>2.1.7-SNAPSHOT</version>
+  <version>2.1.7-SNAPSHOT</version>   
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -36,6 +36,8 @@
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.0.7-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
+		<org.owasp.antisamy.version>1.4</org.owasp.antisamy.version>
+  	<org.apache.batik.version>1.7</org.apache.batik.version>
     <chromattic.version>1.0.4</chromattic.version>
     <xcmis.version>1.2.1</xcmis.version>
     <xml.parser.version>3.1</xml.parser.version>

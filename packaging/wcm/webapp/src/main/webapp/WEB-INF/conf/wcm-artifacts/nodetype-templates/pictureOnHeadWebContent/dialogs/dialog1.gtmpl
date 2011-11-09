@@ -216,9 +216,9 @@
 										}
 									}
 									if(htmlContent == null || htmlContent.equals("")) {
-										htmlContent = "<div class=\"DropCap\">T</div>ype the text here <div style=\"clear: left; height: 20px;\"><span></span></div>";
+										htmlContent = "<div class=\"DropCap\">Type the text here </div><div style=\"clear: left; height: 20px;\"><span></span></div>";
 									}
-									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px'", htmlContent];
+									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px', noSanitization", htmlContent];
 			    					uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 			      				%>
 								</td>
@@ -335,7 +335,7 @@
 											jsContent = jsNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
 										} 
 									} 
-									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", jsContent];
+									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
 								</td>

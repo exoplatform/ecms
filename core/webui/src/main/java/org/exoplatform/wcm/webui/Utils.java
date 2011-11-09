@@ -22,7 +22,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
-
+import java.io.InputStream;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -62,8 +63,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
-
 import com.ibm.icu.text.Transliterator;
+import org.owasp.validator.html.*;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.phamvu@exoplatform.com
@@ -73,6 +74,9 @@ public class Utils {
 
 	/** The Quick edit attribute for HTTPSession */
 	public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
+	
+	private static final String POLICY_FILE_LOCATION = "jar:/conf/portal/antisamy.xml";
+	private static ConfigurationManager cservice_ ;
 	
 	@Deprecated
   /**
@@ -689,13 +693,37 @@ public class Utils {
      return Util.getUIPortal().getSelectedNavigation();
   }
   
-  public static String sanitize(String string) {
-    return string
-       .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed 
-       .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
-       .replaceAll("eval\\((.*)\\)", "");                   // case 3 : eval: are removed           
-//       .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
+  public static String sanitize(String value) {
+  	try {
+  		cservice_ = WCMCoreUtils.getService(ConfigurationManager.class);
+  		InputStream in = cservice_.getInputStream(POLICY_FILE_LOCATION) ;
+  	  Policy policy = Policy.getInstance(in);
+  	  AntiSamy as = new AntiSamy();
+  	  CleanResults cr = as.scan(value, policy);
+  	  value = cr.getCleanHTML();
+      return value;    
+  	} catch(Exception ex) {
+  		ex.printStackTrace();
+  		return value;
+  	}    
+  }  
+  public static String sanitizeSearch(String value) {
+  	try {
+  		value = sanitize(value);
+  		value = value.replaceAll("<iframe", "").replaceAll("<frame", "").replaceAll("<frameset", "");
+  		return value;
+  	} catch(Exception ex) {
+  		return value;
+  	}
   }
-
+  
+  public static boolean isEmptyContent(String inputValue) {
+  	boolean isEmpty = true;
+  	inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
+  	inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
+  	inputValue = inputValue.replaceAll("&nbsp;", "");
+  	if(inputValue != null && inputValue.length() > 0) return false;
+  	return isEmpty;
+  }
   
 }

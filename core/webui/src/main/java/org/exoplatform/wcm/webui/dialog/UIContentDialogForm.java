@@ -385,7 +385,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	  Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.non-categories", null, ApplicationMessage.WARNING);
           return;
       	}
-      	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties());
+      	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         if (canAccessParentNode(webContentNode)) {
           cmsService.storeNode(contentDialogForm.contentType, webContentNode.getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
@@ -506,7 +506,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.non-categories", null, ApplicationMessage.WARNING);
           return;
         }
-      	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties());
+      	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         cmsService.storeNode(contentDialogForm.contentType, contentDialogForm.getNode().getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
         

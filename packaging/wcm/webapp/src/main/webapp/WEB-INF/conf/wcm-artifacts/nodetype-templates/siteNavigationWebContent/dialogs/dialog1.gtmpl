@@ -167,7 +167,7 @@
 														"</div>" + 
 														"<script type=\"text/javascript\">/* <![CDATA[ */ renderNavigations(); /* ]]> */</script>";
 									}
-									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM", htmlContent];
+									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,noSanitization", htmlContent];
 			    				uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 			      				%>
 								</td>
@@ -463,7 +463,7 @@
 																	"\tdocument.getElementById('navigation-generator').innerHTML = html;\n" +
 																	"}";
 									}
-									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", jsContent];
+									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
 								</td>

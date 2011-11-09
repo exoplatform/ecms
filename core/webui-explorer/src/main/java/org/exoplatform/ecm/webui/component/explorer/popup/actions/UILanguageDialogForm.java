@@ -191,7 +191,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
         return;
       }
       if(node.hasNode(Utils.EXO_IMAGE)) {
-        Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.getInputProperties());
+        Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.getInputProperties(), uiForm.getInputOptions());
         try {
           multiLanguageService.addLanguage(node, inputProperties, uiForm.getSelectedLanguage(), uiForm.isDefaultLanguage(), Utils.EXO_IMAGE);
         } catch(AccessDeniedException ace) {
@@ -201,7 +201,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           return;
         }
       } else if(uiForm.hasNodeTypeNTResource(node)) {
-        Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.getInputProperties());
+        Map inputProperties = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.getInputProperties(), uiForm.getInputOptions());
         try {
           multiLanguageService.addFileLanguage(node, uiForm.getSelectedLanguage(), inputProperties, uiForm.isDefaultLanguage());
         } catch(AccessDeniedException ace) {
@@ -211,7 +211,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           return;
         }
       } else if(node.isNodeType(Utils.NT_FOLDER) || node.isNodeType(Utils.NT_UNSTRUCTURED)) {
-        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties);
+        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties, uiForm.options);
         try {
           multiLanguageService.addFolderLanguage(node, map, uiForm.getSelectedLanguage(), uiForm.isDefaultLanguage(), nodeTypeName, uiExplorer.getRepositoryName());
         } catch(AccessDeniedException ace) {
@@ -221,7 +221,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
           return;        
         }
       } else {
-        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties);
+        Map map = DialogFormUtil.prepareMap(uiForm.getChildren(), uiForm.properties, uiForm.options);
         try {
           multiLanguageService.addLanguage(node, map, uiForm.getSelectedLanguage(), uiForm.isDefaultLanguage());
         } catch(AccessDeniedException ace) {
