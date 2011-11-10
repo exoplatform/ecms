@@ -927,13 +927,13 @@ float: left;
 /*#######################-VTabStyle3 VerticalSlideTabs-######################*/
 
 
-.UIVerticalSlideTabs .VTabStyle3 .TabRepeat {
+.UIECMAdminPortlet .UIECMAdminControlPanel .UIVerticalSlideTabs .VTabStyle3 .TabRepeat {
 	height: 28px;
 	background: #f8f8f8;
 	border: 1px solid #e1e1e1;
 }
 
-.UIVerticalSlideTabs .VTabStyle3 .TabLabel {
+.UIECMAdminPortlet .UIECMAdminControlPanel .UIVerticalSlideTabs .VTabStyle3 .TabLabel {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
 	height: 28px; line-height: 28px;
@@ -942,7 +942,7 @@ float: left;
 	padding: 0px 12px;
 }
 
-.UIVerticalSlideTabs .VTabStyle3 .NormalTab .SwitchButton {
+.UIECMAdminPortlet .UIECMAdminControlPanel .UIVerticalSlideTabs .VTabStyle3 .NormalTab .SwitchButton {
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
 	width: 16px;	height: 16px;
@@ -963,7 +963,7 @@ float: left;
 /***-SeltectedTab VerticalSlideTabs-***/
 
 
-.UIVerticalSlideTabs .VTabStyle3 .SelectedTab .SwitchButton {
+.UIECMAdminPortlet .UIECMAdminControlPanel .UIVerticalSlideTabs .VTabStyle3 .SelectedTab .SwitchButton {
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
 	width: 16px; height: 16px;
