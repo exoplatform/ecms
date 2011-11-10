@@ -464,10 +464,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         uiExplorer.updateAjax(event);
         return newNode;
       } catch(Exception e) {
-        if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+        uiExplorer.getSession().refresh(false);
         uiExplorer.updateAjax(event);
       }
-      if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+      uiExplorer.getSession().save();
       uiExplorer.updateAjax(event);
     } catch (AccessControlException ace) {
       throw new AccessDeniedException(ace.getMessage());

@@ -822,7 +822,7 @@
 .UIViewBarContainer {
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
-	/*width: 85px;*/
+	width: 110px;
 }
 
 .ListHideContainer {

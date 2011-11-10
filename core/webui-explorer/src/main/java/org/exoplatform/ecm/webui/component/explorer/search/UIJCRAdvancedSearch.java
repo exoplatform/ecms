@@ -270,7 +270,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         queryNode.setProperty("jcr:language", queryLang) ;
         queryNode.setProperty("jcr:statement", statement) ;
         queryNode.save() ;
-        if(!uiExplorer.getPreference().isJcrEnable()) session.save() ;
+        session.save() ;
         session.logout() ;
         UISavedQuery uiSavedQuery = uiForm.getAncestorOfType(UISavedQuery.class) ;
         uiSavedQuery.updateGrid(1);

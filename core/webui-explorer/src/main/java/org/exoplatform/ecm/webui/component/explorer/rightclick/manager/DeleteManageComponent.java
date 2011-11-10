@@ -424,8 +424,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       processRemove(nodePath, wsName, event, false);
     }
     uiExplorer.updateAjax(event);
-    if (!uiExplorer.getPreference().isJcrEnable())
-      uiExplorer.getSession().save();
+    uiExplorer.getSession().save();
   }
 
   public void doDeleteWithoutTrash(String nodePath, Event<?> event) throws Exception {
@@ -476,8 +475,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       }
     }
     uiExplorer.updateAjax(event);
-    if (!uiExplorer.getPreference().isJcrEnable())
-      uiExplorer.getSession().save();
+    uiExplorer.getSession().save();
   }
 
   public static void deleteManage(Event<? extends UIComponent> event) throws Exception {

@@ -222,10 +222,7 @@ public class UIPermissionInfo extends UIContainer {
             return ;
           }
         }
-        if(!uiJCRExplorer.getPreference().isJcrEnable()) {
-          node.getSession().save() ;
-          node.getSession().refresh(false) ;
-        }
+        node.getSession().save() ;
       } else {
         uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-tochange", null,
             ApplicationMessage.WARNING)) ;

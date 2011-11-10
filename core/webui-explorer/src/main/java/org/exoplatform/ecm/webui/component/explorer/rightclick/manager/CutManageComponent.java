@@ -134,7 +134,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       if(isMultiSelect) {
         uiWorkingArea.getVirtualClipboards().add(clipboard);
       } else {
-        if(!uiExplorer.getPreference().isJcrEnable()) session.save();
+        session.save();
         uiExplorer.updateAjax(event);
       }
     } catch (Exception e) {
@@ -149,7 +149,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     for(int i=0; i< nodePaths.length; i++) {
       processCut(nodePaths[i], event, uiExplorer, true);
     }
-    if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+    uiExplorer.getSession().save();
     uiExplorer.updateAjax(event);
   }
 

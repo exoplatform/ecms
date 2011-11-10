@@ -256,7 +256,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
       uiLanguageTypeForm.resetLanguage();
       uiAddContainer.removeChild(UILanguageDialogForm.class);
       uiAddContainer.setComponentDisplay(uiForm.documentType_);
-      if(!uiExplorer.getPreference().isJcrEnable()) node.getSession().save();
+      node.getSession().save();
       uiExplorer.setIsHidePopup(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
       uiExplorer.updateAjax(event);

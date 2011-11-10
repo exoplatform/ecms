@@ -96,7 +96,6 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     for(int i=0; i< nodePaths.length; i++) {
       processLock(nodePaths[i], event, uiExplorer);
     }
-    //if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
     uiExplorer.updateAjax(event);
   }
 

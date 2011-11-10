@@ -89,7 +89,6 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIActionBar.SavedQueriesActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.ChangeTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.PreferencesActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionBar.SaveSessionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.BackToActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UIActionBar.ShowDrivesActionListener.class, phase=Phase.DECODE)
     }
@@ -206,11 +205,6 @@ public class UIActionBar extends UIForm {
       return tabList_.get(0);
     }
     return selectedTabName_;
-  }
-
-  public boolean isShowSaveSession() throws Exception {
-    UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
-    return uiExplorer.getPreference().isJcrEnable() ;
   }
 
   public List<String> getTabList() { return tabList_; }
@@ -351,18 +345,7 @@ public class UIActionBar extends UIForm {
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
-  }
-
-  static public class SaveSessionActionListener extends EventListener<UIActionBar> {
-    public void execute(Event<UIActionBar> event) throws Exception {
-      UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
-      uiJCRExplorer.getSession().save() ;
-      uiJCRExplorer.getSession().refresh(false) ;
-      UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
-      String mess = "UIJCRExplorer.msg.save-session-success" ;
-      uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
-    }
-  }
+  }  
 
   static public class ShowDrivesActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {

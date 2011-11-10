@@ -95,7 +95,6 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
         }
         node.save();
         node.getSession().save();
-        if(!uiExplorer.getPreference().isJcrEnable())  { node.getSession().save(); }
         uiExplorer.updateAjax(event);
       } catch(ConstraintViolationException cve) {
         Object[] arg = { type };

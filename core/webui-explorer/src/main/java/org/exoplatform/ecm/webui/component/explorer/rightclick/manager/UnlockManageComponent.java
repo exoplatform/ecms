@@ -178,8 +178,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
         if (acceptForMultiNode(event, nodePath))
           processUnlock(nodePath, event, uiExplorer);
       }
-      if (!uiExplorer.getPreference().isJcrEnable())
-        uiExplorer.getSession().save();
+      uiExplorer.getSession().save();
       uiExplorer.updateAjax(event);
     }
 

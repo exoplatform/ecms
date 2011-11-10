@@ -120,7 +120,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       clipboard.setWorkspace(wsName);
       uiExplorer.getAllClipBoard().add(clipboard);
       if(isMultiSelect) uiWorkingArea.getVirtualClipboards().add(clipboard);
-      if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+      uiExplorer.getSession().save();
       uiExplorer.updateAjax(event);
     } catch(ConstraintViolationException cons) {
       uiExplorer.getSession().refresh(false);

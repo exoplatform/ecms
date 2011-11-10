@@ -170,8 +170,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       
       return;
     }
-    if (!uiExplorer.getPreference().isJcrEnable())
-      session.save();
+    session.save();
     uiExplorer.updateAjax(event);
   }
 

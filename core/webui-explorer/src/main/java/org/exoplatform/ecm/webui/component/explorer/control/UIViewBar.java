@@ -54,7 +54,6 @@ import org.exoplatform.webui.form.UIFormSelectBox;
       @EventConfig(listeners = UIViewBar.ShowSideBarActionListener.class),
       @EventConfig(listeners = UIViewBar.PreferencesActionListener.class),
       @EventConfig(listeners = UIViewBar.BackActionListener.class),
-      @EventConfig(listeners = UIViewBar.SaveSessionActionListener.class),
       @EventConfig(listeners = UIViewBar.RefreshSessionActionListener.class),
       @EventConfig(listeners = UIViewBar.ChangeViewActionListener.class)
     }
@@ -84,11 +83,6 @@ public class UIViewBar extends UIForm {
   public void setViewOptions(List<SelectItemOption<String>> viewOptions) {
     getUIFormSelectBox(FIELD_SELECT_VIEW).setOptions(viewOptions) ;
     getUIFormSelectBox(FIELD_SELECT_VIEW).setValue(viewOptions.get(0).getValue()) ;
-  }
-
-  public boolean isShowSaveSession() throws Exception {
-    UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
-    return uiExplorer.getPreference().isJcrEnable() ;
   }
 
   public boolean isShowSideBar() throws Exception {
@@ -127,17 +121,6 @@ public class UIViewBar extends UIForm {
       UIPreferencesForm uiPrefForm = popupAction.activate(UIPreferencesForm.class,600) ;
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
-    }
-  }
-
-  static public class SaveSessionActionListener extends EventListener<UIViewBar> {
-    public void execute(Event<UIViewBar> event) throws Exception {
-      UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
-      uiJCRExplorer.getSession().save() ;
-      uiJCRExplorer.getSession().refresh(false) ;
-      UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
-      String mess = "UIJCRExplorer.msg.save-session-success" ;
-      uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
     }
   }
 

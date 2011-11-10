@@ -327,7 +327,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
               + sortedInputs.get("/node/exo:name").getValue().toString());
           session.save();
 
-          if (!uiExplorer.getPreference().isJcrEnable()) currentNode.getSession().save();
+          currentNode.getSession().save();
           if (actionForm.isEditInList_) {
             UIActionManager uiManager = actionForm.getAncestorOfType(UIActionManager.class);
             UIPopupWindow uiPopup = uiManager.findComponentById("editActionPopup");
@@ -366,7 +366,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
         actionServiceContainer.addAction(parentNode, actionForm.nodeTypeName_, sortedInputs);
         actionForm.setIsOnchange(false);
-        if (!uiExplorer.getPreference().isJcrEnable()) parentNode.getSession().save();
+        parentNode.getSession().save();
         UIActionManager uiActionManager = actionForm.getAncestorOfType(UIActionManager.class);
         actionForm.createNewAction(uiExplorer.getCurrentNode(), actionForm.nodeTypeName_, true);
         UIActionList uiActionList = uiActionManager.findFirstComponentOfType(UIActionList.class);
