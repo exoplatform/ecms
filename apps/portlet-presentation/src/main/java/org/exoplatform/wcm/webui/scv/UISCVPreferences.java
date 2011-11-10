@@ -29,6 +29,7 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
@@ -47,9 +48,9 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     template = "app:/groovy/SingleContentViewer/UISCVPreferences.gtmpl",
     events = {
       @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.SelectFolderPathActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.CancelActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class)
+      @EventConfig(listeners = UISCVPreferences.SelectFolderPathActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UISCVPreferences.CancelActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UISCVPreferences extends UIForm implements UISelectable{
