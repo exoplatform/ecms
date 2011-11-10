@@ -235,9 +235,13 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     try {
       Node taxonomyDef = getRootTaxonomyDef();
-      Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
-      if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
-        return linkManager_.getTarget(taxonomyTree, system);
+      try { 
+        Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
+        if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
+          return linkManager_.getTarget(taxonomyTree, system);
+      }catch (PathNotFoundException pne) {
+        return null;
+      }
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
