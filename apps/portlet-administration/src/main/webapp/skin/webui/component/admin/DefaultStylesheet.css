@@ -923,3 +923,51 @@ float: left;
 .UILockHolderContainer .UIGroupMembershipSelector .MembershipSelector {
   height: 183px;
 }
+
+/*#######################-VTabStyle3 VerticalSlideTabs-######################*/
+
+
+.UIVerticalSlideTabs .VTabStyle3 .TabRepeat {
+	height: 28px;
+	background: #f8f8f8;
+	border: 1px solid #e1e1e1;
+}
+
+.UIVerticalSlideTabs .VTabStyle3 .TabLabel {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	height: 28px; line-height: 28px;
+	color: #4f4f4f;
+	font-size: 14px;
+	padding: 0px 12px;
+}
+
+.UIVerticalSlideTabs .VTabStyle3 .NormalTab .SwitchButton {
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	width: 16px;	height: 16px;
+	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/GrayNextArrow2.gif') no-repeat center;
+	margin: 6px 3px 0px 0px; /* orientation=lt */
+	margin: 6px 0px 0px 3px; /* orientation=rt */
+	cursor: pointer;
+}
+
+.UIECMAdminPortlet .UIECMAdminControlPanel .UIVerticalSlideTabs .VTabStyle3 .UIVTabContent {
+	background: #ffffff;
+	border: solid 1px #e1e1e1;
+	padding: 5px;
+	border-top: none;
+	margin: 0px;
+}
+
+/***-SeltectedTab VerticalSlideTabs-***/
+
+
+.UIVerticalSlideTabs .VTabStyle3 .SelectedTab .SwitchButton {
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	width: 16px; height: 16px;
+	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/GrayDownArrow2.gif') no-repeat center;
+	margin: 6px 3px 0px 0px; /* orientation=lt */
+	margin: 6px 0px 0px 3px; /* orientation=rt */
+}
