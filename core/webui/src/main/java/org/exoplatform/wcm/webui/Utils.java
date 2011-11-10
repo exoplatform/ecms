@@ -487,32 +487,71 @@ public class Utils {
    * @param container the current container
    * @param component the component which will be display as a popup
    * @param popupWindowId the popup's ID
-   * @param width the width of the popup
-   * @param height the height of the popup
+   * @param width the width of the popup   
    * @throws Exception the exception
    */
   public static void createPopupWindow(UIContainer container,
                                        UIComponent component,
                                        String popupWindowId,
                                        int width) throws Exception {
-    UIPopupContainer popupContainer = getPopupContainer(container);
-    popupContainer.removeChildById(popupWindowId);
-    UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
-    popupWindow.setUIComponent(component);
-    popupWindow.setWindowSize(width, 0);
-    popupWindow.setShow(true);
-    popupWindow.setRendered(true);
-    popupWindow.setResizable(true);
-    popupWindow.setShowMask(true);
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+    requestContext.addUIComponentToUpdateByAjax(popupContainer);
+  }
+  
+  /**
+   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
+   * . <br/>
+   * Every <code>UIPopupWindow</code> created by this method is belong to this
+   * container.
+   *
+   * @param container the current container
+   * @param component the component which will be display as a popup
+   * @param popupWindowId the popup's ID
+   * @param width the width of the popup
+   * @param isShowMask Set as true to create mask layer
+   * @throws Exception the exception
+   */
+  public static void createPopupWindow(UIContainer container,
+                                       UIComponent component,
+                                       String popupWindowId,
+                                       int width, boolean isShowMask) throws Exception {
+  	UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
+    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);        
+    popupWindow.setShowMask(isShowMask);
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
 
-
+  /**
+   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
+   * . <br/>
+   * Every <code>UIPopupWindow</code> created by this method is belong to this
+   * container.
+   *
+   * @param container the current container
+   * @param component the component which will be display as a popup
+   * @param popupWindowId the popup's ID
+   * @param width the width of the popup
+   * @param top the top of the popup
+   * @param left the left of the popup
+   * @throws Exception the exception
+   */
   public static void createPopupWindow(UIContainer container,
       UIComponent component,
       String popupWindowId,
       int width, int top, int left) throws Exception {
+  	UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
+    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
+		popupWindow.setCoordindate(top, left);
+		WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+		requestContext.addUIComponentToUpdateByAjax(popupContainer);
+	}
+  
+  private static UIPopupContainer initPopup(UIContainer container,
+      UIComponent component,
+      String popupWindowId,
+      int width) throws Exception {
 		UIPopupContainer popupContainer = getPopupContainer(container);
 		popupContainer.removeChildById(popupWindowId);
 		UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
@@ -520,10 +559,9 @@ public class Utils {
 		popupWindow.setWindowSize(width, 0);
 		popupWindow.setShow(true);
 		popupWindow.setRendered(true);
-		popupWindow.setResizable(true);
-		popupWindow.setCoordindate(top, left);
-		WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-		requestContext.addUIComponentToUpdateByAjax(popupContainer);
+		popupWindow.setResizable(true);		
+		popupWindow.setShowMask(true);
+		return popupContainer;
 	}
 
 

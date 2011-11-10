@@ -382,7 +382,7 @@ public class UINewsletterEntryManager extends UIForm {
       Utils.createPopupWindow(uiNewsletterEntryManager,
                               entryContainer,
                               UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW,
-                              800);
+                              800, false);
     }
   }
 

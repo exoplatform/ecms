@@ -716,7 +716,7 @@ public class UISubscriptions extends UIForm {
       Utils.createPopupWindow(uiSubscriptions,
                               entryContainer,
                               UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW,
-                              800);
+                              800, false);
     }
   }
 }

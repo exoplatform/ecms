@@ -343,7 +343,7 @@ public class UICategories extends UIContainer {
       entryContainer.setCategoryConfig(null);
       entryContainer.getChild(UINewsletterEntryDialogSelector.class).init(null, null);
       Utils.createPopupWindow(uiCategories, entryContainer,
-          UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW, 800);
+          UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW, 800, false);
     }
   }
 

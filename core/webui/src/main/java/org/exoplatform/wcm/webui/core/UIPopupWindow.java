@@ -57,10 +57,4 @@ public class UIPopupWindow extends org.exoplatform.webui.core.UIPopupWindow {
       event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
     }
   }
-  
-  public boolean isShowMask()
-  {
-     return true;
-  }
-
 }
