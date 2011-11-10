@@ -844,6 +844,12 @@
     z-index: 2;
 }
 
+.IconListHideElement .MoreLabel{
+    color: #4F4F4F; 
+    font-size: 12px; 
+    line-height: 20px;
+}
+
 .DMSMenuItemContainer {
 	display: block;
 	left: 0px;  /* orientation=lt */

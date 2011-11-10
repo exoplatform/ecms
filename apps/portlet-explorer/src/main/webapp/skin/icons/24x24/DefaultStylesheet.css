@@ -92,38 +92,38 @@
 
 .EditDocumentIcon {
 	height: 24px;
-	background: url('DefaultSkin/EditDocument.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/EditDocument.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/EditDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/EditDocument.png') no-repeat right center; /* orientation=rt */
 }
 
 .WatchDocumentIcon {
 	height: 24px;
-	background: url('DefaultSkin/WatchDocument.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/WatchDocument.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/WatchDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/WatchDocument.png') no-repeat right center; /* orientation=rt */
 }
 
 .ViewMetadatasIcon {
 	height: 24px;
-	background: url('DefaultSkin/ViewMatadata.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ViewMatadata.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/ViewMatadata.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ViewMatadata.png') no-repeat right center; /* orientation=rt */
 }
 
 .VoteIcon {
 	height: 24px;
-	background: url('DefaultSkin/VoteDocument.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/VoteDocument.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/VoteDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/VoteDocument.png') no-repeat right center; /* orientation=rt */
 }
 
 .CommentIcon {
 	height: 24px;
-	background: url('DefaultSkin/Comment.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/Comment.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/Comment.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/Comment.png') no-repeat right center; /* orientation=rt */
 }
 
 .TaggingDocumentIcon {
 	height: 24px;
-  background: url('DefaultSkin/Tagging.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/Tagging.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/Tagging.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/Tagging.png') no-repeat right center; /* orientation=rt */
 }
 
 .MultiLanguageIcon {
@@ -134,14 +134,14 @@
 
 .ManageVersionsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManageVersions.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageVersions.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageVersions.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageVersions.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageAuditingIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManageAuditing.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageAuditing.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageAuditing.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageAuditing.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManagePublicationsIcon {
@@ -152,8 +152,8 @@
 
 .ManageActionsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManageActions.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageActions.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageActions.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageActions.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageCategoriesIcon {
@@ -170,26 +170,26 @@
 
 .ManageRelationsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManageRelations.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageRelations.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageRelations.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageRelations.png') no-repeat right center; /* orientation=rt */
 }
 
 .ImportNodeIcon {
 	height: 24px;
-  background: url('DefaultSkin/ImportNode.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ImportNode.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ImportNode.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ImportNode.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageHiddenIcon {
   height: 24px;
-  background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/AddRemoveHidden.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/AddRemoveHidden.png') no-repeat right center; /* orientation=rt */
 }
 
 .ExportNodeIcon {
 	height: 24px;
-  background: url('DefaultSkin/ExportNode.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ExportNode.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ExportNode.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ExportNode.png') no-repeat right center; /* orientation=rt */
 }
 
 .SearchIcon {
@@ -237,8 +237,14 @@
 
 .AddLocalizationLinkIcon {
   height: 24px;
-  background: url('DefaultSkin/AddLocalizationLink.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/AddLocalizationLink.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/AddLocalizationLink.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddLocalizationLink.png') no-repeat right center; /* orientation=rt */
+}
+
+.ShowDrivesIcon {
+  height: 24px;
+  background: url('DefaultSkin/ShowDrivesIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ShowDrivesIcon.png') no-repeat right center; /* orientation=rt */
 }
 
 .OverloadThumbnailIcon {
@@ -249,8 +255,8 @@
 
 .ViewReferencesIcon {
 	height: 24px;
-  background: url('DefaultSkin/ViewReferences.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ViewReferences.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ViewReferences.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewReferences.png') no-repeat right center; /* orientation=rt */
 }
 
 /* <ECM-1543>
@@ -270,33 +276,33 @@ a:hover .ShowHideBoxContainer {
 
 .ShowJCRStructureIcon {
 	height: 24px;
-  background: url('DefaultSkin/ShowJCRStructure.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ShowJCRStructure.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ShowJCRStructure.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ShowJCRStructure.png') no-repeat right center; /* orientation=rt */
 }
 
 .ViewNodeTypeIcon {
 	height: 24px;
-  background: url('DefaultSkin/ViewNodeType.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ViewNodeType.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ViewNodeType.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewNodeType.png') no-repeat right center; /* orientation=rt */
   
 }
 
 .ViewPropertiesIcon {
 	height: 24px;
-  background: url('DefaultSkin/ViewProperties.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ViewProperties.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ViewProperties.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewProperties.png') no-repeat right center; /* orientation=rt */
 }
 
 .ViewRelationsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ViewRelations.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ViewRelations.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ViewRelations.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewRelations.png') no-repeat right center; /* orientation=rt */
 }
 
 .ViewPermissionsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ViewPermission.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/ViewPermission.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ViewPermission.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewPermission.png') no-repeat right center; /* orientation=rt */
 }
 
 .HardDisk24x24Icon {
@@ -495,8 +501,8 @@ a:hover .ShowHideBoxContainer {
 }
 .ConfigPortlet24x24Icon {
   width: 24px;	height: 24px;
-  background: url('DefaultSkin/ManageActions.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageActions.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageActions.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageActions.png') no-repeat right center; /* orientation=rt */
 }
 
 .AddNewConfig24x24Icon {
