@@ -503,13 +503,16 @@ public class UIPropertyForm extends UIForm {
       boolean isMultiple = false;
       if(currentNode.isNodeType(Utils.NT_UNSTRUCTURED)){
         int type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue());
-        if (PropertyType.BOOLEAN == type) {
-          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setValue(FALSE);
-          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(false);
-          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(false);
-        } else {
-          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(true);
-          uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(true);
+        UIFormSelectBox multiSelect = uiForm.getUIFormSelectBox(FIELD_MULTIPLE);
+        if(multiSelect != null) {
+	        if (PropertyType.BOOLEAN == type) {
+	        	multiSelect.setValue(FALSE);
+	        	multiSelect.setEditable(false);
+	        	multiSelect.setEnable(false);
+	        } else {
+	        	multiSelect.setEditable(true);
+	        	multiSelect.setEnable(true);
+	        }
         }
           uiForm.removeChildById(FIELD_VALUE);
           isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
@@ -528,14 +531,17 @@ public class UIPropertyForm extends UIForm {
           if (property.getName().equals(uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue())){
             isMultiple = property.isMultiple();
               int type = property.getRequiredType();
-              if (PropertyType.BOOLEAN == type) {
-                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setValue(FALSE);
-                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(false);
-                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(false);
-              } else {
-                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(true);
-                uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(true);
-              }              
+              UIFormSelectBox multiSelect = uiForm.getUIFormSelectBox(FIELD_MULTIPLE);
+              if(multiSelect != null) {
+	              if (PropertyType.BOOLEAN == type) {
+	              	multiSelect.setValue(FALSE);
+	              	multiSelect.setEditable(false);
+	              	multiSelect.setEnable(false);
+	              } else {
+	              	multiSelect.setEditable(true);
+	              	multiSelect.setEnable(true);
+	              }              	              
+              }
               uiForm.removeChildById(FIELD_VALUE);
               if(isMultiple) {
                     UIFormMultiValueInputSet uiFormMultiValue = 
