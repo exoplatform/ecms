@@ -111,8 +111,6 @@
 						} // End for loop
 					} // End if
 				%>
-				<!-- </div> -->
-				</div>
 				<div class="CaptionFunc">
 					<% 
 						  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
@@ -129,6 +127,7 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class);
 						} 
 					%>
-					<div style="clear:left"><span></span></div>
+					<div style="clear:both;"><span></span></div>
+				</div>
 				</div>
 </div>

@@ -1,0 +1,325 @@
+Index: apps/portlet-presentation/src/main/webapp/skin/ContentListViewer/DefaultStylesheet.css
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/skin/ContentListViewer/DefaultStylesheet.css	(revision 70867)
++++ apps/portlet-presentation/src/main/webapp/skin/ContentListViewer/DefaultStylesheet.css	(working copy)
+@@ -184,7 +184,7 @@
+ 
+ .UICLVPortlet .CaptionFunc .UIPaginatorDefault {
+   text-align: right;
+-  float: left;
++  float: right;
+ }
+ 
+ .UICLVPortlet .CaptionFunc .CaptionRefresh {
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/ContentListViewerDefault.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/ContentListViewerDefault.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/ContentListViewerDefault.gtmpl	(working copy)
+@@ -165,5 +165,6 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class)
+ 						} 
+ 					%>
++					<div style="clear: both;"><span></span></div>
+ 				</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/DocumentsTemplate.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/DocumentsTemplate.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/DocumentsTemplate.gtmpl	(working copy)
+@@ -118,27 +118,27 @@
+ 				    		<%
+ 				  		}
+ 				  	%>
++					<div class="CaptionFunc">
++					<%
++		  				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
++		  				def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
++      					if (isShowRefresh) { 
++							String link = uicomponent.event("Refresh");
++					%>				
++							<div class="CaptionRefresh">
++								<a href="$link">$labelRefreshAction</a>
++							</div>
++						<% 
++						}
++						if (uicomponent.showPaginator()) {
++							uicomponent.renderChild(UICustomizeablePaginator.class);
++						} 
++					%>
++						<div style="clear: both"><span></span></div>
++					</div>				  	
+ 			  	</div>
+ 			  <%	
+ 			}
+ 		%>
+ 	</div>
+-	<div class="CaptionFunc">
+-		<% 
+-		  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+-		  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+-      if (isShowRefresh) { 
+-				String link = uicomponent.event("Refresh");
+-				%>				
+-					<div class="CaptionRefresh">
+-						<a href="$link">$labelRefreshAction</a>
+-					</div>
+-				<% 
+-			}
+-			if (uicomponent.showPaginator()) {
+-				uicomponent.renderChild(UICustomizeablePaginator.class);
+-			} 
+-		%>
+-		<div style="clear: left"><span></span></div>
+-	</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplate.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplate.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplate.gtmpl	(working copy)
+@@ -108,8 +108,6 @@
+ 						} // End for loop
+ 					} // End if
+ 				%>
+-				<!-- </div> -->
+-				</div>
+ 				<div class="CaptionFunc">
+ 					<% 
+ 						if (uicomponent.showRefreshButton()) {
+@@ -123,8 +121,9 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class);
+ 						} 
+ 					%>
+-					<div style="clear:left"><span></span></div>
++					<div style="both"><span></span></div>
+ 				</div>
++				</div>
+ 			<%
+ 		uiform.end();
+ 	%>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/OneColumnCLVTemplate.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/OneColumnCLVTemplate.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/OneColumnCLVTemplate.gtmpl	(working copy)
+@@ -109,27 +109,28 @@
+ 				    		<%
+ 				  		}
+ 				  	%>
++					<div class="CaptionFunc">
++					<%
++		  				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
++		  				def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
++      					if (isShowRefresh) { 
++							String link = uicomponent.event("Refresh");
++					%>				
++							<div class="CaptionRefresh">
++								<a href="$link">$labelRefreshAction</a>
++							</div>
++						<% 
++						}
++						if (uicomponent.showPaginator()) {
++							uicomponent.renderChild(UICustomizeablePaginator.class);
++						} 
++					%>
++						<div style="clear: both;"><span></span></div>
++					</div>				  	
+ 			  	</div>
+ 			  <%	
+ 			}
+ 		%>
+-		<div class="CaptionFunc">
+-			<% 	
+-				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+-		    def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+-		    if (isShowRefresh) { 
+-					String link = uicomponent.event("Refresh");
+-					%>				
+-						<div class="CaptionRefresh">
+-							<a href="$link">$labelRefreshAction</a>
+-						</div>
+-					<% 
+-				}
+-				if (uicomponent.showPaginator()) { 
+-						uicomponent.renderChild(UICustomizeablePaginator.class)
+-				} 
+-			%>
+-			<div style="clear: left;"><span></span></div>
+-		</div>
++
+ 	</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplate.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplate.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplate.gtmpl	(working copy)
+@@ -143,8 +143,6 @@
+ 						} // End for loop
+ 					} // End if
+ 				%>
+-				<!-- </div> -->
+-				</div>
+ 				<div class="CaptionFunc">
+ 					<% 
+ 						if (uicomponent.showRefreshButton()) {
+@@ -158,8 +156,9 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class);
+ 						} 
+ 					%>
+-					<div style="clear:left"><span></span></div>
++					<div style="clear:both;"><span></span></div>
+ 				</div>
++				</div>
+ 			<%
+ 		uiform.end();
+ 	%>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplateCLV.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplateCLV.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/EventsTemplateCLV.gtmpl	(working copy)
+@@ -111,8 +111,6 @@
+ 						} // End for loop
+ 					} // End if
+ 				%>
+-				<!-- </div> -->
+-				</div>
+ 				<div class="CaptionFunc">
+ 					<% 
+ 						  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+@@ -129,6 +127,7 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class);
+ 						} 
+ 					%>
+-					<div style="clear:left"><span></span></div>
++					<div style="clear:both;"><span></span></div>
+ 				</div>
++				</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationBigImage.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationBigImage.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationBigImage.gtmpl	(working copy)
+@@ -113,6 +113,7 @@
+ 						uicomponent.renderChild(UICustomizeablePaginator.class)
+ 				} 
+ 			%>
++			<div style="clear: both;"><span></span></div>
+ 		</div>
+ 	</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl	(working copy)
+@@ -112,6 +112,7 @@
+ 						uicomponent.renderChild(UICustomizeablePaginator.class)
+ 				} 
+ 			%>
++			<div style="clear: both;"><span></span></div>
+ 		</div>
+ 	</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIParameterizedContentListViewerDefault.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIParameterizedContentListViewerDefault.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIParameterizedContentListViewerDefault.gtmpl	(working copy)
+@@ -145,8 +145,6 @@
+ 						} // End for loop
+ 					} // End if
+ 				%>
+-				<!-- </div> -->
+-				</div>
+ 				<div class="CaptionFunc">
+ 					<% 
+ 						if (uicomponent.showRefreshButton()) {
+@@ -160,7 +158,9 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class)
+ 						} 
+ 					%>
++					<div style="clear: both;"><span></span></div>
+ 				</div>
++				</div>
+ 			<%
+ 		uiform.end()
+ 	%>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl	(working copy)
+@@ -112,6 +112,7 @@
+ 						uicomponent.renderChild(UICustomizeablePaginator.class);
+ 				} 
+ 			%>
++			<div style="clear: both;"><span></span></div>
+ 		</div>
+ 	</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplateCLV.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplateCLV.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/BigHotNewsTemplateCLV.gtmpl	(working copy)
+@@ -153,8 +153,6 @@
+ 						} // End for loop
+ 					} // End if
+ 				%>
+-				<!-- </div> -->
+-				</div>
+ 				<div class="CaptionFunc">
+ 					<% 
+ 						  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+@@ -171,6 +169,7 @@
+ 							uicomponent.renderChild(UICustomizeablePaginator.class);
+ 						} 
+ 					%>
+-					<div style="clear:left"><span></span></div>
++					<div style="clear:both"><span></span></div>
++				</div>				
+ 				</div>
+ </div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/TwoColumnsCLVTemplate.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/TwoColumnsCLVTemplate.gtmpl	(revision 70867)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/TwoColumnsCLVTemplate.gtmpl	(working copy)
+@@ -115,25 +115,26 @@
+ 				
+ 	    <%
+ 				}
+-			%>	</div> <%
++			%>
++			<div class="CaptionFunc">
++				<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
++				  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
++					if (isShowRefresh) { 
++						String link = uicomponent.event("Refresh");
++				%>
++							<div class="CaptionRefresh">
++								<a href="$link">$labelRefreshAction</a>
++							</div>
++				<% 
++					}
++					if (uicomponent.showPaginator()) { 
++						uicomponent.renderChild(UICustomizeablePaginator.class)
++					} 
++				%>
++				<div style="clear: both;"><span></span></div>
++			</div>				
++			</div> <%
+ 			}
+ 		%>
+-		<div class="CaptionFunc">
+-			<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+-			  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+-				if (isShowRefresh) { 
+-					String link = uicomponent.event("Refresh");
+-					%>				
+-						<div class="CaptionRefresh">
+-							<a href="$link">$labelRefreshAction</a>
+-						</div>
+-					<% 
+-				}
+-				if (uicomponent.showPaginator()) { 
+-						uicomponent.renderChild(UICustomizeablePaginator.class)
+-				} 
+-			%>
+-			<div style="clear: left;"><span></span></div>
+-		</div>
+ 	</div>
+ </div>

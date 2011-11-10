@@ -143,8 +143,6 @@
 						} // End for loop
 					} // End if
 				%>
-				<!-- </div> -->
-				</div>
 				<div class="CaptionFunc">
 					<% 
 						if (uicomponent.showRefreshButton()) {
@@ -158,7 +156,8 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class);
 						} 
 					%>
-					<div style="clear:left"><span></span></div>
+					<div style="clear:both;"><span></span></div>
+				</div>
 				</div>
 			<%
 		uiform.end();
