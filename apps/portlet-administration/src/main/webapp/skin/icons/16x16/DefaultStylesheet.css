@@ -481,8 +481,8 @@
 
 .Delete16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/DustBin.gif') no-repeat left center; /* orientation=lt */  
-  background: url('DefaultSkin/DustBin.gif') no-repeat right center; /* orientation=rt */  
+  background: url('DefaultSkin/DustBin.png') no-repeat left center; /* orientation=lt */  
+  background: url('DefaultSkin/DustBin.png') no-repeat right center; /* orientation=rt */  
 }
 
 .Locked16x16Icon {
@@ -598,7 +598,7 @@
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
   width: 16px; height: 16px;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat ;
   cursor: pointer;   
 }
 
