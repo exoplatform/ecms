@@ -1,0 +1,18 @@
+Index: apps/resources-wcm/src/main/webapp/skin/DefaultSkin/wcm-portal/Stylesheet.css
+===================================================================
+--- apps/resources-wcm/src/main/webapp/skin/DefaultSkin/wcm-portal/Stylesheet.css	(revision 74680)
++++ apps/resources-wcm/src/main/webapp/skin/DefaultSkin/wcm-portal/Stylesheet.css	(working copy)
+@@ -421,4 +421,10 @@
+   float: left;
+ }
+ 
+-/* QUICK EDIT END */
+\ No newline at end of file
++/* QUICK EDIT END */
++
++.UIWizardPageSetInfo .SelectedPageInfo .UIFormWithTitle .UIFormGrid {
++    margin: auto;
++    width: auto;
++    position: relative;
++}
+\ No newline at end of file

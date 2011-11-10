@@ -422,3 +422,9 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
 }
 
 /* QUICK EDIT END */
+
+.UIWizardPageSetInfo .SelectedPageInfo .UIFormWithTitle .UIFormGrid {
+    margin: auto;
+    width: auto;
+    position: relative;
+}
