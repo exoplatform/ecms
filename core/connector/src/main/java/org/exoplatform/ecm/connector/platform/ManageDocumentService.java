@@ -49,6 +49,7 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -351,6 +352,8 @@ public class ManageDocumentService implements ResourceContainer {
     Node referNode = null;
     for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
       Node child = iterator.nextNode();
+      if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
+        continue;
       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
         String sourceWs = child.getProperty("exo:workspace").getString();
         Session sourceSession = getSession(sourceWs);
