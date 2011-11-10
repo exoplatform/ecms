@@ -946,7 +946,7 @@ float: left;
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
 	width: 16px;	height: 16px;
-	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/GrayNextArrow2.gif') no-repeat center;
+	background: url('DefaultSkin/background/GrayNextArrow2.gif') no-repeat center;
 	margin: 6px 3px 0px 0px; /* orientation=lt */
 	margin: 6px 0px 0px 3px; /* orientation=rt */
 	cursor: pointer;
@@ -967,7 +967,7 @@ float: left;
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
 	width: 16px; height: 16px;
-	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/GrayDownArrow2.gif') no-repeat center;
+	background: url('DefaultSkin/background/GrayDownArrow2.gif') no-repeat center;
 	margin: 6px 3px 0px 0px; /* orientation=lt */
 	margin: 6px 0px 0px 3px; /* orientation=rt */
 }
