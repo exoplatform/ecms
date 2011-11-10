@@ -51,7 +51,7 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     // Remove drive for the site content storage
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     try {
-      manageDriveService.removeDrive(portalName);
+      manageDriveService.removeDrive(String.format("%s-category", portalName));
       log.info("Removed drive for portal: " + portalName);
     } catch (Exception e) {
       log.error("Error when remove drive for portal: " + portalName, e);
