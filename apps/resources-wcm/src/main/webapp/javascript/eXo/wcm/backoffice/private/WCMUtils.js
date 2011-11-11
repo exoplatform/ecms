@@ -197,11 +197,5 @@ WCMUtils.prototype.searchNodeTypeOnKeyPress = function() {
     }
   }	
 }
-WCMUtils.prototype.toggleVisibility = function(elemtClicked) {		
-	if(elemtClicked.style.display == 'none') {		
-		elemtClicked.style.display = 'block';
-	} else {			
-		elemtClicked.style.display = 'none';
-	}
-};
+
 eXo.ecm.WCMUtils = new WCMUtils();

@@ -9,6 +9,7 @@
 		eXo.require('eXo.webui.UIRightClickPopupMenu');
 	    RightClick = eXo.webui.UIRightClickPopupMenu;
 	}
+	DOM.hideElements();
 	ECMUtils.prototype.popupArray = [];
 	ECMUtils.prototype.voteRate = 0;
 	ECMUtils.prototype.init = function(portletId) {
@@ -155,13 +156,10 @@
 	  var elemt = document.getElementById("ListExtendedView");
 	  event = event || window.event;
 	  event.cancelBubble = true;
-    var iconTree = document.getElementById("iconTreeExplorer");
 	  if(elemt.style.display == 'none') {
 	    elemt.style.display = 'block';
-	    iconTree.style.position = 'static';
 	  } else {
 	    elemt.style.display = 'none' ;
-	    iconTree.style.position = 'relative';
 	  }
 	  DOM.listHideElements(elemt);
 	}
@@ -1034,6 +1032,18 @@
 	  if (select)
 		select.className = select.className + " " + "SelectedNode";
 	}
+	
+	ECMUtils.prototype.toggleVisibility = function(event) {
+	  var elemt = document.getElementById("ListExtendedComponent");
+	  event = event || window.event;
+	  event.cancelBubble = true;
+	  if(elemt.style.display == 'none') {
+	    elemt.style.display = 'block';
+	  } else {
+	    elemt.style.display = 'none' ;
+	  }
+	  DOM.listHideElements(elemt);
+	}	
 
 	//private method
 	function checkRoot() {

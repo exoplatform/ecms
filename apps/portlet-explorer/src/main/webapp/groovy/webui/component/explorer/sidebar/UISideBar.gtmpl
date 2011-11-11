@@ -31,7 +31,7 @@
 			<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
 				<!--More button -->
 				<div class="MoreItem">
-					<div class="ItemIcon ActionItem" onclick="javascript:void(eXo.ecm.WCMUtils.toggleVisibility(document.getElementById('ListExtendedComponent')))"><span></span></div>
+					<div class="ItemIcon ActionItem" onclick="eXo.ecm.ECMUtils.toggleVisibility(event);"><span></span></div>
 					
 					<!-- Hidden drop down-->
 					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem">
@@ -46,7 +46,7 @@
 			<% } else { %>
 				<!--More button -->
 				<div class="MoreItem" style="display:none">
-					<div class="ItemIcon ActionItem" onclick="javascript:void(eXo.ecm.WCMUtils.toggleVisibility(document.getElementById('ListExtendedComponent')))"><span></span></div>
+					<div class="ItemIcon ActionItem" onclick="eXo.ecm.ECMUtils.toggleVisibility(event);"><span></span></div>
 					
 					<!-- Hidden drop down-->
 					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem"></div>						
