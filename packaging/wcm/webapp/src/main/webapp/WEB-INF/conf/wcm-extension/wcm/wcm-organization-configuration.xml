@@ -26,6 +26,18 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
    
   <!-- This is the system configuration for ecm. Be careful if you want to change this configuration -->
+  <component>
+    <key>org.exoplatform.portal.config.UserACL</key>
+    <type>org.exoplatform.portal.config.UserACL</type>   
+    <init-params>      
+      <values-param>
+        <name>mandatory.mstypes</name>
+        <description>Membership type that can not be deleted.</description>
+        <value>*</value>
+      </values-param>                 
+    </init-params>   
+  </component>  
+		
   <external-component-plugins>
     <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
     <component-plugin>
