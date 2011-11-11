@@ -101,6 +101,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
@@ -118,6 +119,10 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 /**
  * Created by The eXo Platform SARL
@@ -223,6 +228,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     String workspace = this.getWorkspaceName();
     String userName = session.getUserID();
     String nodePath = uiExplorer.getCurrentPath();
+    String tagPath = uiExplorer.getTagPath();
+    boolean isViewTag = uiExplorer.isViewTag();
 //    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     todayNodes = NodeLocation.getLocationsByNodeList(timelineService.
           getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, false));
@@ -235,11 +242,42 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
           getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, false));
 
+    if(isViewTag && tagPath != null) {
+    	if(todayNodes.size() > 0) todayNodes = filterDocumentsByTag(todayNodes, tagPath);
+    	if(yesterdayNodes.size() > 0) yesterdayNodes = filterDocumentsByTag(yesterdayNodes, tagPath);
+    	if(earlierThisWeekNodes.size() > 0) earlierThisWeekNodes = filterDocumentsByTag(earlierThisWeekNodes, tagPath);
+    	if(earlierThisMonthNodes.size() > 0) earlierThisMonthNodes = filterDocumentsByTag(earlierThisMonthNodes, tagPath);
+    	if(earlierThisYearNodes.size() > 0) earlierThisYearNodes = filterDocumentsByTag(earlierThisYearNodes, tagPath);
+    }
+    
     Collections.sort(todayNodes, new SearchComparator());
     Collections.sort(yesterdayNodes, new SearchComparator());
     Collections.sort(earlierThisWeekNodes, new SearchComparator());
     Collections.sort(earlierThisMonthNodes, new SearchComparator());
     Collections.sort(earlierThisYearNodes, new SearchComparator());
+  }
+  
+  public List<NodeLocation> filterDocumentsByTag(List<NodeLocation> nodes, String path) throws Exception {
+  	List<Node> documents = new ArrayList<Node>();  	
+  	Session session = null;  	
+  	Node node = null;
+  	QueryManager queryManager = null;
+  	QueryResult queryResult = null;
+  	Query query = null;
+  	NodeIterator nodeIterator = null;
+  	for(int i=0; i<nodes.size(); i++) {
+  		node = NodeLocation.getNodeByLocation(nodes.get(i));
+  		if (node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+	  		session = node.getSession();
+	  		String queryString = "SELECT * FROM exo:symlink where jcr:path like '" + path + "/%' and exo:uuid = '"+node.getUUID()+"' and exo:workspace='"+node.getSession().getWorkspace().getName()+"'";
+	  		queryManager = session.getWorkspace().getQueryManager();
+	      query = queryManager.createQuery(queryString, Query.SQL);
+	      queryResult = query.execute();
+	      nodeIterator = queryResult.getNodes();
+	      if(nodeIterator.getSize() > 0) documents.add(node);      
+  		}
+  	}
+  	return NodeLocation.getLocationsByNodeList(documents);
   }
 
   public UIPageIterator getContentPageIterator() {return pageIterator_ ; }

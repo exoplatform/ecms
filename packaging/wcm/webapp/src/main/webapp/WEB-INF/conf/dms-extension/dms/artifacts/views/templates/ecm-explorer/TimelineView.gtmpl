@@ -60,7 +60,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 	<div class="UITimelineView">
 		<div style="padding:4px 3px 0px 3px;">
 			<div class="TitleTable">
-				<div class="LeftColumn Split">
+				<div style="width: 40px;" class="LeftColumn Split">
 					<span></span>
 				</div>
 				<div style="width: 26px;" class="LeftColumn Split">
@@ -80,7 +80,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 					</div>
 					<% } %>
 				</div>
-				<div style="border: medium none; width: 278px" class="RightColumn">
+				<div style="border: medium none; width: 100px" class="RightColumn">
 					<% if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_UP_ARROW)) {%>
   	      	  <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
   	      	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
@@ -126,16 +126,16 @@ import org.exoplatform.services.jcr.RepositoryService;
 						String label = labels.get(i);
 						List<Node> nodeList = nodeLists.get(i);
 						if (nodeList.size() == 0) continue;
-			%>
-			
+			%>		
+			<div class="TextTitleDay">
+				<%=_ctx.appRes(label)%>
+			</div>	
 			<div class="RowView Normal">
 				<div class="BorderRow">
-					<% for (node in nodeList) {%>
-						<div style="width: 121px;" class="LeftColumn">
-							<div class="TextTitleDay">
-								<%=_ctx.appRes(label)%>
-							</div>
-						</div>
+					<% for (node in nodeList) {%>	
+						<div style="width: 31px;" class="LeftColumn">
+						<span></span>
+						</div>								
 						<div style="width: 26px; padding-top: 5px;" class="LeftColumn">
 							<% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>
 								<div class="StarLight" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
@@ -155,7 +155,7 @@ import org.exoplatform.services.jcr.RepositoryService;
               <%}%>
 		      		<span></span>
 	      		</div>
-						<div style="border: medium none; width: 270px" class="RightColumn">
+						<div style="border: medium none; width: 100px" class="RightColumn">
 							<%=formatDateTime.format(node.getProperty(Utils.EXO_MODIFIED_DATE).getValue().getDate().getTime())%>
 						</div>
 						<div class="ResizeColumn">
