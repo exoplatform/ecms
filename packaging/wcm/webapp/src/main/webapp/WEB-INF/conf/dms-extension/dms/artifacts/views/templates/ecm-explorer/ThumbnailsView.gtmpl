@@ -176,6 +176,7 @@
               String isInTrash = "false";
               String isMediaType = "false";
               String isTrashHome = "false";
+              String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
               if (data.isLocked()) {
                 isLocked = true;
                 lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
@@ -220,7 +221,7 @@
 			          else subName = title.substring(0,15) + "..." ;
 			        %>
 			        <div class="ActionIconLabel" style="width: auto;">
-			          <a class="ActionLabel" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(subName)%></a>
+			          <a class="ActionLabel" style="$hiddenStyle" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(subName)%></a>
 			        </div>
 			      </div>
 			      $strActs

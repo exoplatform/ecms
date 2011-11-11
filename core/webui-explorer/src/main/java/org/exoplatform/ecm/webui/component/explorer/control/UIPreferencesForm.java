@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UIAllItems;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -269,6 +270,12 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       pref.setShowNonDocumentType(uiForm.getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked());
       pref.setShowPreferenceDocuments(uiForm.getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
       pref.setShowHiddenNode(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());
+      if (pref.isShowHiddenNode()) {
+        uiExplorer.getAllItemFilterMap().add(UIAllItems.HIDDEN);
+      } else {
+        uiExplorer.getAllItemFilterMap().remove(UIAllItems.HIDDEN);
+      }
+
       //pref.setShowItemsByUser(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked());
       pref.setEnableDragAndDrop(uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked());
       pref.setSortType(uiForm.getUIFormSelectBox(FIELD_SHORTBY).getValue());

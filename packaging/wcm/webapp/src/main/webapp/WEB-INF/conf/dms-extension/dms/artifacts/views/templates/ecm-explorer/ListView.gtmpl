@@ -272,6 +272,7 @@
           String isInTrash = "false";
           String isMediaType = "false";
           String isTrashHome = "false";
+          String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
           if (data.isLocked()) {
             isLocked = true;
             lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
@@ -296,7 +297,7 @@
 		        </div>
 		        <div class="ColumnName" style="width: 125px;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
 		 					</div>
 		        </div>
 		        <!--

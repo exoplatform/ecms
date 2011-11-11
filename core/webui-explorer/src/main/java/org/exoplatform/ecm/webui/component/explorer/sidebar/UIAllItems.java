@@ -87,9 +87,16 @@ public class UIAllItems extends UIComponent {
       String filterType = event.getRequestContext().getRequestParameter(OBJECTID);
       if (allItemFilterMap.contains(filterType)) {
         allItemFilterMap.remove(filterType);
+        if (filterType.equals(HIDDEN)) {
+          uiExplorer.getPreference().setShowHiddenNode(false);
+        }
       } else {
         allItemFilterMap.add(filterType);
+        if (filterType.equals(HIDDEN)) {
+          uiExplorer.getPreference().setShowHiddenNode(true);
+        }
       }
+
 
       // new code
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);

@@ -164,8 +164,9 @@ import org.exoplatform.services.jcr.RepositoryService;
 			          	def preferenceWS = node.getSession().getWorkspace().getName() ;
 		      		    String path = node.getPath() + "&workspaceName=" + preferenceWS ;
 		  		        String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", preferenceWS));
+                  String hiddenStyle = (node.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
 								%>
-								<a href="$actionLink" alt="" workspaceName="$preferenceWS"
+								<a href="$actionLink" alt="" style="$hiddenStyle" workspaceName="$preferenceWS"
 									title="<%=_ctx.appRes("UIDocumentInfo.tooltip.View")%>"/>
 									<%= uiWorkingArea.getTitle(node) %>
 								</a>

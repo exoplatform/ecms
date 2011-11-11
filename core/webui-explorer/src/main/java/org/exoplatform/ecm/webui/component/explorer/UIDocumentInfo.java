@@ -864,11 +864,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         !favoriteService.isFavoriter(userId, node))
           return false;
     //Hidden
-    if (allItemsFilterSet.contains(UIAllItems.HIDDEN)) {
-      if (!node.isNodeType(Utils.EXO_HIDDENABLE))
-        return false;
-      uiExplorer.getPreference().setShowHiddenNode(true);
-    }
+/*
+    Behaviour of this filter is different from the others, it shows up hidden nodes or not, not just filter them.
+*/
 
     //By types
     for (String documentType : allItemsByTypeFilterSet) {

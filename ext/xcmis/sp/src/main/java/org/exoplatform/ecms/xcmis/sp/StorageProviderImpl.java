@@ -288,6 +288,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
       Node xCmisSystem = session.itemExists(StorageImpl.XCMIS_SYSTEM_PATH) //
          ? (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH) //
          : root.addNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1), "xcmis:system");
+      if (!xCmisSystem.isNodeType("exo:hiddenable")) xCmisSystem.addMixin("exo:hiddenable");
 
       if (!xCmisSystem.hasNode(StorageImpl.XCMIS_WORKING_COPIES))
       {

@@ -233,6 +233,7 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
       Node applicationDataFolder = portalFolder.addNode("ApplicationData", NT_UNSTRUCTURED);
       addMixin(applicationDataFolder, "exo:owneable");
       addMixin(applicationDataFolder,"exo:datetime");
+      addMixin(applicationDataFolder, "exo:hiddenable");
       applicationDataFolder.setProperty("exo:dateCreated", calendar);
 
       Node newsletterApplicationFolder = applicationDataFolder.addNode("NewsletterApplication", NT_UNSTRUCTURED);
