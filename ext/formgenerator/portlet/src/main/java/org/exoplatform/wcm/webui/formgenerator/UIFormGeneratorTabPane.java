@@ -26,6 +26,7 @@ import java.util.List;
 import javax.jcr.PropertyType;
 import javax.jcr.version.OnParentVersionAction;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -82,6 +83,9 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
 
   /** The Constant NODE_SUFFIX. */
   public static final String NODE_SUFFIX = "_fg_n";
+  
+  /** The Constant INPUT_NAME_PREFIX_NUM. */
+  public static final String INPUT_NAME_PREFIX_NUM = "fg_num";
 
   /**
    * Instantiates a new uI form generator tab pane.
@@ -221,7 +225,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
 
     for (UIFormGeneratorInputBean form : formBeans) {
       PropertyDefinitionValue property = new PropertyDefinitionValue() ;
-      property.setName(getPropertyName(form.getName())) ;
+      property.setName(getPropertyName(formatInputName(form.getName()))) ;
       property.setRequiredType(getNumberRequireType(form.getType(), formBeans.size())) ;
       property.setMultiple(false) ;
       property.setMandatory(form.isMandatory()) ;
@@ -327,7 +331,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     dialogTemplate.append("%>\n");
     for (int i = 0; i < forms.size(); i++) {
       UIFormGeneratorInputBean form = forms.get(i);
-      String inputName = form.getName();
+      String inputName = formatInputName(form.getName());
       String inputType = form.getType();
       String inputFieldName = cleanString(inputName) + "FieldName";
       String validate = "validate=";
@@ -366,8 +370,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else {
         dialogTemplate.append("      <tr>\n");
 
-        dialogTemplate.append("        <td class=\"FieldLabel\"><%=_ctx.appRes(\""
-                              + templateName + ".label." + inputName + "\")%></td>\n");
+        dialogTemplate.append("        <td class=\"FieldLabel\">"
+                              + form.getName() + "</td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
 
@@ -491,7 +495,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     viewTemplate.append("       <th>Value</th>\n");
     viewTemplate.append("     </tr>\n");
     for (UIFormGeneratorInputBean form : forms) {
-      String propertyName = getPropertyName(form.getName());
+      String propertyName = getPropertyName(formatInputName(form.getName()));
       viewTemplate.append("   <tr>\n");
       viewTemplate.append("     <%\n");
       viewTemplate.append("       if (currentNode.hasProperty(\"" + propertyName + "\")) {\n");
@@ -530,6 +534,14 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     viewTemplate.append(" </div>\n");
     viewTemplate.append("<!--VIEW_END-->\n");
     return viewTemplate.toString();
+  }
+  
+  private String formatInputName(String name) {
+    name = cleanString(name);
+    if (StringUtils.isNumeric(name))
+      return String.format("num%s", name);
+    else
+      return name;
   }
 
   /**
