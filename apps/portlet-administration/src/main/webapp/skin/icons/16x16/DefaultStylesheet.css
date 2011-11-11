@@ -26,7 +26,7 @@
 
 .Remove16x16Icon {
 	width: 16px; height: 16px;
-  background: url('DefaultSkin/DustBin.gif') no-repeat;  
+  background: url('DefaultSkin/DustBin.png') no-repeat;  
   cursor: pointer;
 }
 
@@ -72,7 +72,7 @@
 	float: right; /* orientation=rt */
 	width: 16px; height: 16px;
  margin: 2px 4px 0px 4px;
- background: url('DefaultSkin/DustBin.gif') no-repeat center; 
+ background: url('DefaultSkin/DustBin.png') no-repeat center; 
  cursor: pointer; 
 }
 
@@ -90,7 +90,7 @@
 	float: right; /* orientation=rt */
 	width: 16px; height: 16px;
  margin: 2px 4px 0px 4px;
- background: url('DefaultSkin/DustBin.gif') no-repeat center; 
+ background: url('DefaultSkin/DustBin.png') no-repeat center; 
  cursor: pointer; 
 }
 
@@ -101,7 +101,7 @@
 
 .UIGrid .DeleteIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/DustBin.gif') no-repeat ;
+  background: url('DefaultSkin/DustBin.png') no-repeat ;
 }
 
 .EnrolIcon {
@@ -115,7 +115,7 @@
 
 .UIGrid .EditInfoIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat ;
 }
 
 .PermissionIcon16x16 {
@@ -142,7 +142,7 @@
 .RemoveFile {
 	width: 16px;
 	height: 18px;
-	background: url('DefaultSkin/DustBin.gif') no-repeat center;
+	background: url('DefaultSkin/DustBin.png') no-repeat center;
 	margin-left: 10px;
 }
 
@@ -375,32 +375,32 @@
 
 .DeleteIconInfo {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/DustBin.gif') no-repeat center; 
+  background: url('DefaultSkin/DustBin.png') no-repeat center; 
   cursor: pointer;
   margin-left: 3px;
 }
 
 .EditStyleIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat ;
   cursor: pointer;
 }
 
 .RemoveStyleIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/DustBin.gif') no-repeat ;
+  background: url('DefaultSkin/DustBin.png') no-repeat ;
   cursor: pointer;
 }
 
 .EditTagIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat ;
   cursor: pointer;
 }
 
 .RemoveTagIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/DustBin.gif') no-repeat ;
+  background: url('DefaultSkin/DustBin.png') no-repeat ;
   cursor: pointer;
 }
 
@@ -408,7 +408,7 @@
 
 .EditIcon {
   width: 16px ;  height: 16px ;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat ;
   cursor: pointer;
 }
 
@@ -876,8 +876,8 @@
 }
 
 .UIRightClickPopupMenu .Delete16x16Icon {
-  background: url('DefaultSkin/DustBin.gif') no-repeat left center; /* orientation=lt */
-  background: url('DefaultSkin/DustBin.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/DustBin.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/DustBin.png') no-repeat right center; /* orientation=rt */
 }
 
 .UIRightClickPopupMenu .Lock16x16Icon {
