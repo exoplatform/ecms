@@ -1,0 +1,13 @@
+Index: apps/resources-static/src/main/webapp/eXoPlugins/insertPortalLink/js/LinkSelector.js
+===================================================================
+--- apps/resources-static/src/main/webapp/eXoPlugins/insertPortalLink/js/LinkSelector.js	(revision 73743)
++++ apps/resources-static/src/main/webapp/eXoPlugins/insertPortalLink/js/LinkSelector.js	(working copy)
+@@ -104,6 +104,8 @@
+ 		treeHTML +=			'</div>';
+ 		treeHTML +=		'</div>';
+ 		treeHTML +=	'</div>';
++		treeHTML +=	'<div class="ChildrenContainer" style="display:none;">';
++		treeHTML +=	'</div>';
+ 	}
+ 	nodeGroup.innerHTML = treeHTML;
+ 	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0]
