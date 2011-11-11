@@ -82,4 +82,32 @@ public class UIECMAdminControlPanel extends UIContainer {
   void unregister(UIAbstractManagerComponent component) {
     managers.remove(component);
   }
+
+  /**
+   * Check whether a specified category is the same to category of current render manager item.
+   *
+   * @param currentCategory Current Category
+   * @param categories List of categories of side blocks
+   * @param managersGroup Contain managers groups
+   * @return true: the same, false: not the same
+   */
+  public boolean isSameCategoryWithCurrentRenderedManager (String currentCategory,
+                                                           ArrayList<String> categories,
+                                                           ArrayList<ArrayList<UIAbstractManagerComponent>> managersGroup) {
+    int i = 0;
+    UIECMAdminWorkingArea workingArea = this.getAncestorOfType(UIECMAdminPortlet.class).getChild(UIECMAdminWorkingArea.class);
+    String currentRenderId = workingArea.getRenderedCompId();
+    for(String category : categories) {
+      if (category.equals(currentCategory)) {
+        ArrayList<UIAbstractManagerComponent> groups = managersGroup.get(i);
+        for(UIAbstractManagerComponent group : groups) {
+          String extensionName =   group.getUIExtensionName();
+          if (extensionName.equals(currentRenderId))
+            return true;
+        }
+      }
+      i++;
+    }
+    return false;
+  }
 }

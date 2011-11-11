@@ -22,12 +22,19 @@
 <div class="UIECMAdminControlPanel">
 	<div class="UIVerticalSlideTabs">
     <%
-    	int i = 0;
-    	for(type in typeManage) {
+     int i = 0;
+     for(type in typeManage) {
+       def currentBlockStyleClass = null;
+       def currentBlockContentStyleClass = null;
+       if (!uicomponent.isSameCategoryWithCurrentRenderedManager(type, typeManage, managersGroup)) {
+         currentBlockStyleClass = "class=\"NormalTab\"";
+         currentBlockContentStyleClass = "style=\"display:none; height: 0px;\"";
+       } else {
+         currentBlockStyleClass = "class=\"SelectedTab\"";
+       }
     %>
 	    <div class="UIVTab VTabStyle3">
-
-			<div class="NormalTab">
+			<div <%=currentBlockStyleClass%>>
 				<div class="TabRepeat ClearFix" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
 					  <div class="TabLabel">
 						<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>
@@ -35,7 +42,7 @@
 					  <div class="SwitchButton"><span></span></div>
 				</div>
 			</div>
-			<div class="UIVTabContent" style="display:none; height: 0px;"><div>
+			<div class="UIVTabContent" <%=currentBlockContentStyleClass%>><div>
 			<%
 				def groups = managersGroup.get(i) ;
 				for(group in groups) {
