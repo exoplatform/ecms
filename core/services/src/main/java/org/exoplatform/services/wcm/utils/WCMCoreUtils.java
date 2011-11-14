@@ -309,6 +309,32 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
   
+  public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
+    StringBuffer buffer = new StringBuffer();
+    try {
+      NodeIterator iterator = siteNode.getNodes();
+      while (iterator.hasNext()) {
+        Node cssFolder = iterator.nextNode();
+        if (cssFolder.isNodeType(NodetypeConstant.EXO_CSS_FOLDER)) {
+          NodeIterator iter = cssFolder.getNodes();
+          while (iter.hasNext()) {
+            Node registeredCSSFile = iter.nextNode();
+            if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) && 
+                registeredCSSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
+              //System.out.println(registeredCSSFile.getPath());
+              buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                             .getProperty(NodetypeConstant.JCR_DATA)
+                                             .getString());
+            }
+          }
+        }
+      }
+    } catch(Exception e) {
+      log.error("Unexpected problem happen when active stylesheet", e);
+    } 
+    return buffer.toString();
+  }
+  
   public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
     MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);    
     Hashtable<String, String> templates = new Hashtable<String, String>();

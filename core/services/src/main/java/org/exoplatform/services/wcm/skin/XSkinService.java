@@ -132,15 +132,16 @@ public class XSkinService implements Startable {
     String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "(.*)", portalNode.getName())
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
-    skinService.invalidateCachedSkin(skinPath);
     Iterator<String> iterator = skinService.getAvailableSkinNames().iterator();
     if (iterator.hasNext() == false) {
       skinPath = StringUtils.replaceOnce(skinPath,"(.*)", "Default");
+      skinService.invalidateCachedSkin(skinPath);
       skinService.addSkin(portalNode.getName(), "Default", skinPath);
     } else {
       while (iterator.hasNext()) {
         String skinName = iterator.next();
         skinPath = StringUtils.replaceOnce(skinPath,"(.*)",skinName);
+        skinService.invalidateCachedSkin(skinPath);        
         skinService.addSkin(portalNode.getName(), skinName, skinPath);
       }
     }
@@ -157,10 +158,10 @@ public class XSkinService implements Startable {
     String skinPath = StringUtils.replaceOnce(SKIN_PATH_PATTERN, "(.*)", portalNode.getName())
                                  .replaceFirst("\\{docBase\\}",
                                                servletContext.getServletContextName());
-    skinService.invalidateCachedSkin(skinPath);
     for (Iterator<String> iterator = skinService.getAvailableSkinNames().iterator(); iterator.hasNext();) {
       String skinName = iterator.next();
       skinPath = StringUtils.replaceOnce(skinPath, "(.*)", skinName);
+      skinService.invalidateCachedSkin(skinPath);
       skinService.addPortalSkin(portalNode.getName(), skinName, skinPath);
     }
   }
