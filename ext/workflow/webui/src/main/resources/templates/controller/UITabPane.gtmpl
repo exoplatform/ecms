@@ -3,7 +3,9 @@
   import org.exoplatform.webui.core.UIPopupWindow;
   
   def rcontext = _ctx.getRequestContext() ;
-	
+  def messageClose = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-close") ;
+  def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
+  	
   private String getDisplayTab(String selectedTab) {
     if ((uicomponent.getSelectedTab() == null && selectedTab.equals("UITask"))
         || selectedTab.equals(uicomponent.getSelectedTab())  ) {
@@ -69,17 +71,9 @@
         %>
       </div>  
     </div>  
-  </div>  
+  </div>
+  <div id="CloseConfirmationMsg" style="display:none">${messageClose}</div>
+  <div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>	  
 </div>
 <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
-<%  
-  String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
-  String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
-  def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
-  def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
-%>
-<script type="text/javascript"> 
-  setClosingConfirmationMsg('<%=messageClose%>');
-  setNavigatingConfirmationMsg('<%=messageNavigate%>');
-</script>
 

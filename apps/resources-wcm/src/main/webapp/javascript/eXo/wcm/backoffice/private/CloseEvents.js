@@ -3,8 +3,6 @@
  * - true if some content has changed
  **/
 var b_changed = false;
-var document_closing_confirm_msg = "";
-var document_navigating_confirm_msg = "";
 
 /**
  * Change the current state to inform some content has changed
@@ -21,7 +19,7 @@ function changed() {
 function ajaxGet(url, callback) {
   var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
   if (b_changed && bypassActionbar<=0) {
-    var answer = confirm(document_navigating_confirm_msg);
+    var answer = confirm(document.getElementById("NavigateConfirmationMsg").innerHTML);
     if (answer) {
       b_changed = false;
     } else {
@@ -39,17 +37,10 @@ function ajaxGet(url, callback) {
  * - manage changes popup
  * - manage CKeditor update in textareas
  **/
-function setClosingConfirmationMsg(msg) {
-  document_closing_confirm_msg = msg;
-}
-
-function setNavigatingConfirmationMsg(msg) {
-  document_navigating_confirm_msg = msg;
-}
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  if(action.toLowerCase() == "close") {
    if (b_changed) {      
-			var answer = confirm(document_closing_confirm_msg);
+			var answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
     	if (answer) {
       	b_changed = false;
     	} 
@@ -179,31 +170,26 @@ window.onbeforeunload = closeIt;
 /**
  * Catch when some content has changed in the form
  **/
-if (navigator.userAgent.indexOf("MSIE") >= 0) {
   var UIDocForm = document.getElementById("UIDocumentForm");
 
   //add onchange event into <input> tags
   var inputTags = UIDocForm.getElementsByTagName("input");
   for (var i = 0; i < inputTags.length; i++) {
-    inputTags[i].attachEvent("onchange", new Function ("changed();"));
+    inputTags[i].onchange = new Function ("changed();");
   }
 
   //add onchange event into <select> tags
   var selectTags = UIDocForm.getElementsByTagName("select");
   for (var i = 0; i < selectTags.length; i++) {
-    selectTags[i].attachEvent("onchange", new Function ("changed();"));
+    selectTags[i].onchange = new Function ("changed();");
   }
 
   //add onchange event into <textarea> tags
   var textareaTags = UIDocForm.getElementsByTagName("textarea");
   for (var i = 0; i < textareaTags.length; i++) {
-    textareaTags[i].attachEvent("onchange", new Function ("changed();"));
+    textareaTags[i].onchange = new Function ("changed();");
   }
-} else {
-  document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
-}
-
-
+  
 /**
  * Update each textarea when you type inside CKEditor
  * Inform the page that some content has changed

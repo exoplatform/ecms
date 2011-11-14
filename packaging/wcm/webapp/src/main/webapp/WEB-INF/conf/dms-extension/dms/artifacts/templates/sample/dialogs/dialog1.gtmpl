@@ -19,7 +19,7 @@
           %>
           <script>
           titleField = document.getElementById("title");
-          titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+          titleField.onblur = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
           </script>
         </td>
       </tr>
