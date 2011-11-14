@@ -51,7 +51,7 @@
 	
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 
-	String[] arrColumns = ["exo:owner;123px","exo:dateModified;123px","exo:dateCreated;121px"];
+	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
 <div id="$componentId">
 	<div id="${componentId}-$viewComponentId" class="UIListView">	
@@ -104,7 +104,7 @@
 				    </div>
 					-->
 					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-				    <div class="ColumnVersion" style="width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+				    <div class="ColumnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (selectedSortType.equals("Versionable")) {
 			        %>
@@ -310,7 +310,7 @@
 		            %>
 		        </div>
 						-->
-		        <div class="ColumnVersion" style="width: 108px;">
+		        <div class="ColumnVersion" style="width: 98px;">
 			         	<%=Utils.isVersionable(data)%>
 			          <%
 			            if(Utils.isVersionable(data) && !uicomponent.getVersionName(data).equals("jcr:rootVersion")) {
