@@ -71,7 +71,7 @@ import org.exoplatform.webui.form.UIForm;
     template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionTreeForm.SaveActionListener.class),
-      @EventConfig(listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.PreviousActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ResetActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectUserActionListener.class),
