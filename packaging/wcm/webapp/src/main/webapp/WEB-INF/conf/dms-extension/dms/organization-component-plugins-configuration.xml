@@ -238,6 +238,7 @@
 		                <field name="mixinTypes">
 			                <collection type="java.util.ArrayList">
 			                  <value><string>exo:searchFolder</string></value>
+                        <value><string>exo:hiddenable</string></value>
 			                </collection>
 			              </field>
 	              	</object>
@@ -260,6 +261,7 @@
                     <field name="mixinTypes">
                       <collection type="java.util.ArrayList">
                         <value><string>exo:folksonomyFolder</string></value>
+                        <value><string>exo:hiddenable</string></value>
                       </collection>
                     </field>
                   </object>
