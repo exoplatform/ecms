@@ -103,6 +103,9 @@ public class UIDrivesArea extends UIContainer {
   public String getGroupLabel(String groupId, boolean isFull) {
     String ret = groupId.replace(".", " / ");
     if (!isFull) {
+      if (ret.startsWith(" / spaces")) {
+        return ret.substring(ret.lastIndexOf("/") + 1).trim();
+      }
       int count = 0;
       int slashPosition = -1;
       for (int i = 0; i < ret.length(); i++) {

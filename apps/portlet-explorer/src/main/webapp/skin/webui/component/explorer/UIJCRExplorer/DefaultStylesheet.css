@@ -1276,6 +1276,16 @@
 	margin:3px auto 0;
 }
 
+.UIJCRExplorer .UIDrivesArea .RowDrivesGroups .DriveLabel {
+  padding-left: 33px;
+  word-wrap: break-word;
+  display: block;
+}
+
+.UIJCRExplorer .UIDrivesArea .RowDrivesGroups .Drive {
+  height: 70px;
+}
+
 .UIJCRExplorer .UIDrivesArea .DriveIcon {
 	margin: 0px 5px 3px 0px; /* orientation=lt */
 	margin: 0px 0px 3px 5px; /* orientation=rt */

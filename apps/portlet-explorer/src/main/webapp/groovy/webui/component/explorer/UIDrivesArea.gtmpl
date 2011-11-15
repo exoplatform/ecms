@@ -49,7 +49,7 @@
 			</div>
 		<%}%>
 		<%if(groupDrives.size() > 0) {%>
-			<div class="RowDrives">
+			<div class="RowDrives RowDrivesGroups">
 				<div class="IconArrowDrives TextTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></div>
 	        <%
 	          for(groupDrive in groupDrives) {
