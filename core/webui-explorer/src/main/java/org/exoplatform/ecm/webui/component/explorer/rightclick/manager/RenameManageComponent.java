@@ -111,8 +111,8 @@ public class RenameManageComponent extends UIAbstractManagerComponent {
       return;
     }
     try {
-      UIControl uiControl = uiExplorer.getChild(UIControl.class);
-      UIActionBar uiActionBar = uiControl.getChild(UIActionBar.class);
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       UIRenameForm uiRenameForm = uiActionBar.createUIComponent(UIRenameForm.class, null, null);
       uiRenameForm.update(renameNode);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);

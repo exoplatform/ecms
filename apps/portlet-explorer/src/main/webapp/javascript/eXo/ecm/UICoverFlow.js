@@ -31,17 +31,29 @@ var CoverFlow = function() {
 	};
 	
 	CoverFlow.prototype.setHeight = function() {
-		
 		 // lampt's update
-		 Self.portletId = portletId;
-		 var portlet = document.getElementById(portletId);
-			var workingArea = DOM.findAncestorByClass(portlet, "UIWorkingArea");
-			
-		 
-			var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-			var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
-			sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
-			resizeButton.style.height = workingArea.offsetHeight + 'px';						
+		var root = document.getElementById("UIDocumentInfo");
+		var workingArea = document.getElementById('UIWorkingArea');			
+	 	var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");
+		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
+		var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
+		var actionBar = document.getElementById('UIActionBar');	
+		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");	
+		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "MCBox");	
+		var workingAreaHeight = workingArea.offsetHeight;
+		sizeBarContainer.style.height = workingAreaHeight + 'px';	
+		resizeButton.style.height = workingAreaHeight + 'px';	
+		if (documentWorkspace)		{		
+	 		documentWorkspace.style.height = (workingAreaHeight - actionBar.offsetHeight) + 'px';	
+		}	
+		if (page) {
+			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
+
+				if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight - page.offsetHeight + 'px';
+			}
+		} else {
+		  	if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';
+		}				
  }
 	
 };

@@ -175,8 +175,10 @@
 						</html>
 					</textarea>
 				</div>
-				<% if(uicomponent.getContentPageIterator().getAvailablePage()>1) { %>	
-					<div style="background:#fff;">
+				<% 
+        int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
+        if (availablePage > 1) { %>	
+					<div class="PageAvailable" pageAvailable='$availablePage'>
 						<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
 					</div>
 				<% } %>

@@ -251,7 +251,7 @@
   border: 1px solid #e1e1e1;
 }
 
-.UIJCRExplorerPortlet .UIListGrid .ColumnIcon .BlueDownArrow16x16Icon{
+.UIJCRExplorerPortlet .UIListGrid .BlueDownArrow16x16Icon{
 	margin: 6px 0px 0px 0px;
 	background-position: center center;
 }

@@ -842,7 +842,8 @@ var ListView = function() {
 	ListView.prototype.setHeight = function() {		
 		var root = document.getElementById("UIDocumentInfo");
 		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
-		var workingArea = document.getElementById('UIWorkingArea');		
+		var workingArea = document.getElementById('UIWorkingArea');
+		var actionBar = document.getElementById('UIActionBar');				
 		var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");
 		var workingContainer = document.getElementById('UIDocumentContainer');								
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");
@@ -851,27 +852,29 @@ var ListView = function() {
 		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");		
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
 		var barContent = DOM.findFirstDescendantByClass(workingArea, "div", "BarContent");	
+		
+		var workingAreaHeight = workingArea.offsetHeight;
 		if (sizeBarContainer)
-			sizeBarContainer.style.height = workingArea.offsetHeight + 'px';
+			sizeBarContainer.style.height = workingAreaHeight + 'px';
 		if (resizeSizeBar)
-			resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
+			resizeSizeBar.style.height = workingAreaHeight + 'px';
 		
 		if (documentWorkspace)									
-	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';
-	 if (page) {
+	 		documentWorkspace.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';
+	 	if (page) {
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
 				if (view) {
-  				if (documentWorkspace) {
-  				  view.style.height = (documentWorkspace.offsetHeight - page.offsetHeight) + 'px';
-  				}else {
-  				  view.style.height = (workingContainer.offsetHeight - page.offsetHeight) + 'px';
-  				}
-  				view.style.overflow = "auto";
-  			}
+	  				if (documentWorkspace) {
+	  				  view.style.height = (documentWorkspace.offsetHeight - page.offsetHeight) + 'px';
+	  				}else {
+	  				  view.style.height = (workingContainer.offsetHeight - page.offsetHeight) + 'px';
+	  				}
+	  				view.style.overflow = "auto";
+	  			}
 			}
 		} else {
 			  if (view) 
-					view.style.height = workingArea.offsetHeight + 'px';										
+					view.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';										
 		}
 		var container = document.getElementById("UITreeExplorer");
 		if (!container && uiResizableBlock) {

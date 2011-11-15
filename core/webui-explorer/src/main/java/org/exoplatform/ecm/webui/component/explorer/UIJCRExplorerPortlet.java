@@ -426,14 +426,14 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiAddressBar.setRendered(isShowTopBar());
 //    if (viewList.size() == 1) uiAddressBar.setRendered(false);
 
-    UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+    UIWorkingArea uiWorkingArea = findFirstComponentOfType(UIWorkingArea.class);
+    UIActionBar uiActionbar = uiWorkingArea.getChild(UIActionBar.class);
 //  uiActionbar.setTabOptions(viewList.get(0));
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
     uiExplorer.setSelectNode(driveData.getWorkspace(), path);
 
-    UIWorkingArea uiWorkingArea = findFirstComponentOfType(UIWorkingArea.class);
     UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
     if (uiSideBar.isRendered()) {
       uiSideBar.updateSideBarView();

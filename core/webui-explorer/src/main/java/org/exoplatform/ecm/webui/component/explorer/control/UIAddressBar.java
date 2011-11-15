@@ -243,8 +243,7 @@ public class UIAddressBar extends UIForm {
       }
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID);
       uiAddressBar.setSelectedViewName(viewName);
-      UIControl uiControl = uiAddressBar.getParent() ;
-      UIActionBar uiActionBar = uiControl.getChild(UIActionBar.class) ;
+      UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionBar.setTabOptions(viewName) ;
       uiExplorer.updateAjax(event);
     }
@@ -304,8 +303,8 @@ public class UIAddressBar extends UIForm {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiJCRExplorer.getSession().refresh(false) ;
       uiJCRExplorer.refreshExplorer() ;
-      UIControl uiControl = event.getSource().getParent() ;
-      UIActionBar uiActionBar = uiControl.getChild(UIActionBar.class) ;
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionBar.setTabOptions(event.getSource().getSelectedViewName()) ;
       UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
       String mess = "UIJCRExplorer.msg.refresh-session-success" ;

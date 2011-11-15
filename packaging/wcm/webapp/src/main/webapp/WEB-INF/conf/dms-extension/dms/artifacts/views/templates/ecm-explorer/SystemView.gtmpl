@@ -49,7 +49,7 @@
 			    %>
 			    <% String actionURL = uicomponent.event("Sort", typeActionLink + "Type"); %>
 			    
-			    <div class="LeftColumn" onclick="$actionURL" style="float: left; border-right: 1px solid #b7b7b7; width: 30px; height: 19px; cursor:pointer;">
+			    <div class="LeftColumn" onclick="$actionURL" style="float: left; width: 30px; height: 19px; cursor:pointer;">
 		        <%
 		          if (typeSort.equals("Type")) {
 		        %>
@@ -198,7 +198,7 @@
 	        <div class="RightColumn" style="width: 105px;">
 	        	<%=dateFormat.format(uicomponent.getDateCreated(data))%>
 	        </div>
-	        <div class="ResizeColumn">
+	        <div class="ResizeColumn" style="float:left;">
 							<div class="NodeLabel">
 								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%>"><%=Text.unescapeIllegalJcrChars(subName)%></div>
 		 					</div>
@@ -208,9 +208,10 @@
 	      <%}%>
 		</div>
 	</div>
-	<% if(uicomponent.getContentPageIterator().getAvailablePage()>1) { %>	
-		<div style="margin:4px 0px 4px 0px;">
-			<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
-		</div>
+	<% int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
+     if (availablePage > 1) { %>	
+  		<div class="PageAvailable" pageAvailable='$availablePage'>
+  			<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+  		</div>
 	<% } %>
 </div>	

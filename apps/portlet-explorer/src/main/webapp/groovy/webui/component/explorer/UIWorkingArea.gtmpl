@@ -11,6 +11,7 @@
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar ;
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace ;
+  import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.jcr.model.Preference;
@@ -57,6 +58,7 @@
 	
   <div class="$className">
 		<% 
+		  uicomponent.renderChild(UIActionBar.class) ;
 		  uicomponent.renderChild(UIDocumentWorkspace.class) ;
 		  uicomponent.renderChild(UIDrivesArea.class);
 		%>

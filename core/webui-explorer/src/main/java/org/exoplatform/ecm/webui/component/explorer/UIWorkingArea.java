@@ -32,6 +32,7 @@ import javax.jcr.Value;
 
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -107,6 +108,7 @@ public class UIWorkingArea extends UIContainer {
   public UIWorkingArea() throws Exception {
     addChild(UIRightClickPopupMenu.class, "ECMContextMenu", null);
     addChild(UISideBar.class, null, null);
+    addChild(UIActionBar.class, null, null) ;
     addChild(UIDocumentWorkspace.class, null, null);
     addChild(UIDrivesArea.class, null, null).setRendered(false);
   }

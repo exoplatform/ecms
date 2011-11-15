@@ -282,13 +282,13 @@ public class UIDrivesArea extends UIContainer {
       uiJCRExplorer.refreshExplorer();
       String selectedView = viewList.get(0);
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class).setRendered(true);
-      UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionbar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionbar.setTabOptions(selectedView);
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
       uiAddressBar.setViewList(viewList);
       uiAddressBar.setSelectedViewName(selectedView);
       explorerContainer.setRenderedChild(UIJCRExplorer.class);
-      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
       uiWorkingArea.getChild(UISideBar.class).initialize();
       for(UIComponent uiComp : uiWorkingArea.getChildren()) {
         if(uiComp instanceof UIDrivesArea) uiComp.setRendered(false);

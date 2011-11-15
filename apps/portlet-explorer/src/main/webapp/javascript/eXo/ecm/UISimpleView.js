@@ -874,21 +874,33 @@ var SimpleView = function() {
 	SimpleView.prototype.setHeight = function() {
 		var root = document.getElementById("UIDocumentInfo");
 		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIThumbnailsView");
-		var workingArea = document.getElementById('UIWorkingArea');		
+		var workingArea = document.getElementById('UIWorkingArea');
+		var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");	
+		var actionBar = document.getElementById('UIActionBar');	
 		var workingContainer = document.getElementById('UIDocumentContainer');		
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");		
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
 		var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
+		
+		var workingAreaHeight = workingArea.offsetHeight;
+
 		if (sizeBarContainer)
-			sizeBarContainer.style.height = workingArea.offsetHeight + 'px';
+			sizeBarContainer.style.height = workingAreaHeight + 'px';
+
 		if (resizeButton)
-			resizeButton.style.height = workingArea.offsetHeight + 'px';
+			resizeButton.style.height = workingAreaHeight + 'px';
+		if (documentWorkspace)		{		
+	 		documentWorkspace.style.height = (workingAreaHeight - actionBar.offsetHeight) + 'px';	
+		}
+	
 		if (page) {
+
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
-				if (view) view.style.height = workingArea.offsetHeight - page.offsetHeight + 'px';
+
+				if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight - page.offsetHeight + 'px';
 			}
 		} else {
-		  if (view) view.style.height = workingArea.offsetHeight + 'px';
+		  	if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';
 		}
 	};
 };

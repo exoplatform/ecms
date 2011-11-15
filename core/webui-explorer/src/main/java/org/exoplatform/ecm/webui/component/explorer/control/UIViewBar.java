@@ -21,11 +21,7 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
-import org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowserContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
-import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
+import org.exoplatform.ecm.webui.component.explorer.*;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -118,7 +114,7 @@ public class UIViewBar extends UIForm {
       UIViewBar viewBar = event.getSource();
       UIJCRExplorer uiJCRExplorer = viewBar.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIPreferencesForm uiPrefForm = popupAction.activate(UIPreferencesForm.class,600) ;
+      UIPreferencesForm uiPrefForm = popupAction.activate(UIPreferencesForm.class, 600) ;
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
@@ -129,8 +125,8 @@ public class UIViewBar extends UIForm {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiJCRExplorer.getSession().refresh(false) ;
       uiJCRExplorer.refreshExplorer() ;
-      UIControl uiControl = event.getSource().getParent() ;
-      UIActionBar uiActionBar = uiControl.getChild(UIActionBar.class) ;
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       String viewName = event.getSource().getUIFormSelectBox(FIELD_SELECT_VIEW).getValue() ;
       uiActionBar.setTabOptions(viewName) ;
       UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
@@ -142,9 +138,10 @@ public class UIViewBar extends UIForm {
   static public class ChangeViewActionListener extends EventListener<UIViewBar> {
     public void execute(Event<UIViewBar> event) throws Exception {
       UIViewBar uiViewBar = event.getSource();
+      UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       String viewName = uiViewBar.getUIFormSelectBox(FIELD_SELECT_VIEW).getValue() ;
-      UIControl uiControl = uiViewBar.getParent() ;
-      UIActionBar uiActionBar = uiControl.getChild(UIActionBar.class) ;
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionBar.setTabOptions(viewName) ;
     }
   }

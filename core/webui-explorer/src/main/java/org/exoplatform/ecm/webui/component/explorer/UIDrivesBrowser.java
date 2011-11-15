@@ -212,7 +212,8 @@ public class UIDrivesBrowser extends UIContainer {
       uiJCRExplorer.refreshExplorer();
       String selectedView = viewList.get(0);
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class);
-      UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      UIActionBar uiActionbar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionbar.setTabOptions(selectedView);
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
       uiAddressBar.setViewList(viewList);

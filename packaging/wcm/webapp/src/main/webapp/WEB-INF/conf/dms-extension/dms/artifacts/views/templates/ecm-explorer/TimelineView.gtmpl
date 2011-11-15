@@ -57,7 +57,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 %>
 <div id="$componentId">
 <div id="${componentId}-$viewComponentId" class="UIListView" style="">
-	<div class="UITimelineView">
+	<div class="UIListGrid UITimelineView">
 		<div style="padding:4px 3px 0px 3px;">
 			<div class="TitleTable">
 				<div style="width: 40px;" class="LeftColumn Split">

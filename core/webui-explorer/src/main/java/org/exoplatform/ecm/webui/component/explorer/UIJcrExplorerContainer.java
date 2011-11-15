@@ -161,16 +161,16 @@ public class UIJcrExplorerContainer extends UIContainer {
       pref.setShowHiddenNode(drive.getShowHiddenNode());
       uiJCRExplorer.refreshExplorer();
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class);
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
 
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
       uiAddressBar.setViewList(viewList);
       uiAddressBar.setSelectedViewName(viewList.get(0));
       uiAddressBar.setRendered(uiFEPortlet.isShowTopBar());
-      UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+      UIActionBar uiActionbar = uiWorkingArea.getChild(UIActionBar.class);
       boolean isShowActionBar = uiFEPortlet.isShowActionBar();
       uiActionbar.setTabOptions(viewList.get(0));
       uiActionbar.setRendered(isShowActionBar);
-      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
       String usecase =  preference.getValue(UIJCRExplorerPortlet.USECASE, "").trim();
       if ((usecase != null) && UIJCRExplorerPortlet.SELECTION.equals(usecase)) {
         uiWorkingArea.setRenderedChild(UIDrivesArea.class);

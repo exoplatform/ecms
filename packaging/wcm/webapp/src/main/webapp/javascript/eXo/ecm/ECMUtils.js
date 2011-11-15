@@ -65,8 +65,10 @@
 	};
 
 	ECMUtils.prototype.controlLayout = function(portletId) {
+
 		var portlet = document.getElementById(portletId) ;
 		var uiWorkingArea = DOM.findFirstDescendantByClass(portlet, 'div', 'UIWorkingArea');
+		var actionBar = document.getElementById('UIActionBar');		
 		if (!uiWorkingArea) return;
 		var delta = document.body.scrollHeight - eXo.core.Browser.getBrowserHeight();
 		var uiDocumentWorkspace = DOM.findFirstDescendantByClass(portlet, 'div', 'UIDocumentWorkspace');
@@ -79,7 +81,7 @@
 			}
 			if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiDocumentWorkspace.offsetHeight - delta + "px";
 		}
-		if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight + "px";
+		if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight - actionBar.offsetHeight + "px";
 		eXo.core.Browser.addOnResizeCallback('controlLayout', function(){eXo.ecm.ECMUtils.controlLayout(portletId)});
 	};
 
@@ -483,7 +485,7 @@
 		var listHideIcon = document.getElementById('IconListHideElement');
 		var viewBarContainer = document.getElementById("UIViewBarContainer");
 		var elementSpace = 9;
-		var portletFrag = DOM.findAncestorByClass(actionBar, "PORTLET-FRAGMENT");
+		var portletFrag = DOM.findAncestorByClass(actionBar, "RightContainer");
 		var maxSpace = 0;
 		if(eXo.core.Browser.browserType == 'ie') {
 			maxSpace = parseInt(actionBar.offsetWidth) - parseInt(viewBarContainer.offsetWidth);

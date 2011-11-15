@@ -30,6 +30,7 @@
 	rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');    
 	rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecmexplorer/javascript/');
 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
+  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.setHeight");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
 %>
@@ -310,10 +311,11 @@
             </html>
           </textarea>
         </div>
-        <% if(uicomponent.getContentPageIterator().getAvailablePage()>1) { %> 
-          <div style="background:#fff;">
-            <%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
-          </div>
+        <% int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
+           if (availablePage > 1) { %> 
+            <div class="PageAvailable" pageAvailable='$availablePage'>
+              <%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+            </div>
         <% } %>
       </div>
     </div>
