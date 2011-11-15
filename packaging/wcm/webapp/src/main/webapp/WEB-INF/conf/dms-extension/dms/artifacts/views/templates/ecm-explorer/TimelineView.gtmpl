@@ -80,7 +80,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 					</div>
 					<% } %>
 				</div>
-				<div style="border: medium none; width: 100px" class="RightColumn">
+				<div style="border: medium none; width: 130px" class="RightColumn">
 					<% if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_UP_ARROW)) {%>
   	      	  <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
   	      	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
@@ -158,8 +158,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 						<div style="border: medium none; width: 100px" class="RightColumn">
 							<%=formatDateTime.format(node.getProperty(Utils.EXO_MODIFIED_DATE).getValue().getDate().getTime())%>
 						</div>
-						<div class="ResizeColumn">
-							<div class="PositionIconDocumen">
+						<div class="ResizeColumn" style="width:495px;">
+							<div class="PositionIconDocument">
 								<%
 			          	def preferenceWS = node.getSession().getWorkspace().getName() ;
 		      		    String path = node.getPath() + "&workspaceName=" + preferenceWS ;

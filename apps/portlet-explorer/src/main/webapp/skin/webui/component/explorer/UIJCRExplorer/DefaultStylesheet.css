@@ -262,6 +262,12 @@
 	line-height: 19px; height: 19px;
 }
 
+.UIJCRExplorerPortlet .UIListView .ColumnName .NodeLabel {
+  font-size: 12px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
 .UIJCRExplorerPortlet .UIListGrid .ColumnIcon {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
@@ -607,16 +613,17 @@
 	height: 10px;
 }
 
-.UIJCRExplorerPortlet .UITimelineView .ResizeColumn .PositionIconDocumen{
+.UIJCRExplorerPortlet .UITimelineView .ResizeColumn .PositionIconDocument{
 	margin-left:70px; /* orientation=lt */
 	margin-right:70px; /* orientation=rt */
 	padding-left:30px; /* orientation=lt */
 	padding-right:30px; /* orientation=rt */
+	overflow:hidden;
 	_margin-left:10px; /* orientation=lt */
 	_margin-right:10px; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UITimelineView .ResizeColumn .PositionIconDocumen a{
+.UIJCRExplorerPortlet .UITimelineView .ResizeColumn .PositionIconDocument a{
 	color: #4f4f4f;
 	font-size: 12px;
 	line-height: 25px;

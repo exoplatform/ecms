@@ -297,7 +297,7 @@
 		        </div>
 		        <div class="ColumnName" style="width: 125px;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
 		 					</div>
 		        </div>
 		        <!--

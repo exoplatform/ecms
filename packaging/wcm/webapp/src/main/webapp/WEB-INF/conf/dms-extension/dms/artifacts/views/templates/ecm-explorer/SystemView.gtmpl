@@ -59,7 +59,7 @@
 			      <%}%>
 			    </div>
 			    
-			    <div class="RightColumn" style="border: none">
+			    <div class="RightColumn" style="border: none; width:80px;">
 			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
 			        <%
 			          if (typeSort.equals("Auditing")) {
@@ -73,7 +73,7 @@
 			      </a>
 			    </div>
 			    
-			    <div class="RightColumn">
+			    <div class="RightColumn" style="width:80px;">
 			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (typeSort.equals("Versionable")) {
@@ -93,10 +93,10 @@
 			          if (typeSort.equals("Owner")) {
 			        %>
 				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.owner")%>
+				        	<%=_ctx.appRes("ListView.view.label.exo_owner")%>
 				        </div>
 				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.owner")%>
+				        <%=_ctx.appRes("ListView.view.label.exo_owner")%>
 				      <%} %>
 			      </a>
 			    </div>
@@ -107,10 +107,10 @@
 			          if (typeSort.equals("ModifiedDate")) {
 			        %>
 				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.dateModified")%>
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateModified")%>
 				        </div>
 				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.dateModified")%>
+				        <%=_ctx.appRes("ListView.view.label.exo_dateModified")%>
 				      <%} %>
 			      </a>
 			    </div>
@@ -121,10 +121,10 @@
 			          if (typeSort.equals("CreatedDate")) {
 			        %>
 				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.dateCreated")%>
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateCreated")%>
 				        </div>
 				      <%} else { %>
-				        	<%=_ctx.appRes("ListView.view.label.dateCreated")%>
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateCreated")%>
 				      <%} %>
 			      </a>
 			    </div>
@@ -172,7 +172,7 @@
 	  	        if (title.length() < 50) subName = title;
 			        else subName = title.substring(0,50) + "...";
 		        %>
-	        <div class="RightColumn" style="border: none"><!--added CPop Bull SA -->
+	        <div class="RightColumn" style="border: none;width:80px;"><!--added CPop Bull SA -->
 	           <%= Utils.isAuditable(data)%>
 	           <% if (Utils.isAuditable(data)&& uicomponent.hasAuditHistory(data)) 
 	                println "("+ uicomponent.getNumAuditHistory(data)+")";
@@ -180,7 +180,7 @@
 	                println ""; 
 	            %>
 	        </div>
-	        <div class="RightColumn">
+	        <div class="RightColumn" style="width:80px;">
 		         	<%=Utils.isVersionable(data)%>
 		          <%
 		            if(Utils.isVersionable(data) && !uicomponent.getVersionName(data).equals("jcr:rootVersion")) {
@@ -200,7 +200,7 @@
 	        </div>
 	        <div class="ResizeColumn" style="float:left;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%>"><%=Text.unescapeIllegalJcrChars(subName)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:150px; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(title)%>"><%=Text.unescapeIllegalJcrChars(subName)%></div>
 		 					</div>
 	        </div>
 	        <div style="clear: both"><span></span></div>
