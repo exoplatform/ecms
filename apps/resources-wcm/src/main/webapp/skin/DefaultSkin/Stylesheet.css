@@ -112,7 +112,8 @@
 	overflow: auto;
 }
 
-/* UIRightClickPopupMenu*/
+/* UIRightClickPopupMenu */
+/* re-writing css instead of re-using itseft from exogtn to avoid the case that UI of this popup broken in EPP */
 
 
 .UIRightClickPopupMenu {
@@ -129,8 +130,7 @@
 }
 
 .UIContextMenuContainer {
-	background: transparent;
-	border: none;
+	background: #ffffff;
 } 
 
 .UIRightClickPopupMenu .UIRightPopupMenuContainer {
