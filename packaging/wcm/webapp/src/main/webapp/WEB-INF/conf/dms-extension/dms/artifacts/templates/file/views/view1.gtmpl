@@ -55,7 +55,7 @@
   </style>
 	<div class="FileContent">
 			<div class="NavigationContainer">       
-			  <div class="TopTitle" style="float:left; width:82%; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(currentNode.name) %>">
+			  <div class="TopTitle" style="float:left; width:80%; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(currentNode.name) %>">
 			   <%=Text.unescapeIllegalJcrChars(currentNode.name) %>
 			  </div>
         <div style="text-align:right;margin-top:1px" onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
