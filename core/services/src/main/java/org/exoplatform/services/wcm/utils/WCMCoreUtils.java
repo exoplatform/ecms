@@ -321,10 +321,11 @@ public class WCMCoreUtils {
             Node registeredCSSFile = iter.nextNode();
             if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) && 
                 registeredCSSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
-              //System.out.println(registeredCSSFile.getPath());
-              buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                             .getProperty(NodetypeConstant.JCR_DATA)
-                                             .getString());
+              try {
+                buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                               .getProperty(NodetypeConstant.JCR_DATA)
+                                               .getString());
+              } catch (Exception e) {}
             }
           }
         }
@@ -335,6 +336,33 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
   
+  public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
+    StringBuffer buffer = new StringBuffer();
+    try {
+      NodeIterator iterator = siteNode.getNodes();
+      while (iterator.hasNext()) {
+        Node jsFolder = iterator.nextNode();
+        if (jsFolder.isNodeType(NodetypeConstant.EXO_JS_FOLDER)) {
+          NodeIterator iter = jsFolder.getNodes();
+          while (iter.hasNext()) {
+            Node registeredJSFile = iter.nextNode();
+            if (registeredJSFile.isNodeType(NodetypeConstant.EXO_JS_FILE) && 
+                registeredJSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
+              try {
+                buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                               .getProperty(NodetypeConstant.JCR_DATA)
+                                               .getString());
+              } catch (Exception e) {}
+            }
+          }
+        }
+      }
+    } catch(Exception e) {
+      log.error("Unexpected problem happen when active javascript", e);
+    } 
+    return buffer.toString();
+  }
+
   public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
     MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);    
     Hashtable<String, String> templates = new Hashtable<String, String>();

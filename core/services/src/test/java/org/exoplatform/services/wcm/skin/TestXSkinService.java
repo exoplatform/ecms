@@ -241,7 +241,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
       String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
-      assertEquals("This is the default.css file.This is the sharedJsFile.css file.", cssData);
+      assertEquals("This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
     }
@@ -263,7 +263,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       skinService.updatePortalSkinOnModify(portal, cssNode);
       session.save();
       String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
-      assertEquals("This is the default.css file.This is the sharedJsFile.css file.", cssData);
+      assertEquals("This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
     }
@@ -355,7 +355,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       session.save();
 
       String cssData = configService.getCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
-      assertEquals("Test XSkin Service.This is the sharedJsFile.css file.", cssData);
+      assertEquals("This is the sharedJsFile.css file.", cssData);
     } catch(Exception e) {
       fail();
     }

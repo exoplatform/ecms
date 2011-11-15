@@ -16,7 +16,9 @@
  */
 package org.exoplatform.services.wcm.javascript;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -38,11 +40,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
-import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.javascript.Javascript;
 import org.exoplatform.web.application.javascript.JavascriptConfigService;
+import org.exoplatform.web.application.javascript.Javascript.PortalJScript;
 import org.picocontainer.Startable;
 
 /**
@@ -53,13 +55,6 @@ import org.picocontainer.Startable;
  */
 public class XJavascriptService implements Startable {
 
-  /** The SHARE d_ j s_ query. */
-  private static String           SHARED_JS_QUERY     = "select * from exo:jsFile "
-                                                          + "where jcr:path like '{path}/%' "
-                                                          + "and exo:active='true' and exo:sharedJS='true' "
-                                                          + "and jcr:mixinTypes <> 'exo:restoreLocation' "
-                                                          + "order by exo:priority ASC";
-
   private static String           WEBCONTENT_JS_QUERY = "select * from exo:jsFile "
                                                           + "where jcr:path like '{path}/%' and exo:active='true' "
                                                           + "order by exo:priority ASC";
@@ -67,6 +62,8 @@ public class XJavascriptService implements Startable {
   /** The MODUL e_ name. */
   final private String MODULE_NAME = "eXo.WCM.Live";
 
+  public final static String JS_PATH_REGEXP = "/(.*)/javascript/eXo/(.*)/live";
+  
   /** The PATH. */
   final private String PATH = "/javascript/eXo/{portalName}/live";
 
@@ -75,15 +72,17 @@ public class XJavascriptService implements Startable {
 
   /** The configuration service. */
   private WCMConfigurationService configurationService;
-
-  /** The schema config service. */
-  private WebSchemaConfigService schemaConfigService;
-
-  /** The s context. */
-  private ServletContext sContext ;
+  
+  private LivePortalManagerService livePortalManagerService_;
+  
+  /** The servlet context. */
+  private ServletContext servletContext;
 
   /** The log. */
   private Log log = ExoLogger.getLogger("wcm:XJavascriptService");
+  
+  private Set<String> loadedJSModule = new HashSet<String>();
+  private Set<String> loadedSharedJSModule = new HashSet<String>();
 
   /**
    * Instantiates a new x javascript service.
@@ -96,11 +95,13 @@ public class XJavascriptService implements Startable {
    *
    * @throws Exception the exception
    */
-  public XJavascriptService() throws Exception{
+  public XJavascriptService(LivePortalManagerService livePortalService) throws Exception{
+    this.livePortalManagerService_ = livePortalService;
     this.jsConfigService = WCMCoreUtils.getService(JavascriptConfigService.class);
-    this.sContext = WCMCoreUtils.getService(ServletContext.class);
-    this.schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
+    this.jsConfigService.addResourceResolver(
+      new WCMJavascriptResourceResolver(livePortalManagerService_, jsConfigService));
     this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    this.servletContext = WCMCoreUtils.getService(ServletContext.class);
   }
 
   /**
@@ -182,11 +183,16 @@ public class XJavascriptService implements Startable {
    */
   private void addPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-    String jsData = mergeJSData(portalNode, jsFile, isStartup);
-    if(jsConfigService.isModuleLoaded(MODULE_NAME)) {
-      jsConfigService.removeExtendedJavascript(MODULE_NAME, javascriptPath, sContext) ;
+                                                     
+    String moduleName = MODULE_NAME + '.' + portalNode.getName();
+    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() + 
+                                            javascriptPath);
+    if (!loadedJSModule.contains(moduleName)) {
+      loadedJSModule.add(moduleName);
+      jsConfigService.addPortalJScript(
+        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 
+                          10, portalNode.getName()));
     }
-    jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
   }
 
   /**
@@ -196,79 +202,15 @@ public class XJavascriptService implements Startable {
    */
   private void addSharedPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-    String jsData = mergeJSData(portalNode, jsFile, isStartup);
-    if(jsConfigService.isModuleLoaded(MODULE_NAME)) {
-      jsConfigService.removeExtendedJavascript(MODULE_NAME, javascriptPath, sContext) ;
+    String moduleName = MODULE_NAME + '.' + portalNode.getName();
+    jsConfigService.invalidateMergedCommonJScripts();
+    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() + 
+                                            javascriptPath);
+    if (!loadedSharedJSModule.contains(moduleName)) {
+      loadedSharedJSModule.add(moduleName);
+      jsConfigService.addCommonJScript(
+         new Javascript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 10));
     }
-    jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
-  }
-
-  /**
-   * Gets the jS data by sql query.
-   *
-   * @param session the session
-   * @param queryStatement the query statement
-   * @param exceptPath the except path
-   *
-   * @return the jS data by sql query
-   *
-   * @throws Exception the exception
-   */
-  private String mergeJSData(Node portalNode, Node newJSFile, boolean isStartup) throws Exception {
-    StringBuffer buffer = new StringBuffer();
-
-    // Get all js by query
-    Node jsFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class)
-                                       .getJSFolder(portalNode);
-    String statement = StringUtils.replaceOnce(SHARED_JS_QUERY, "{path}", jsFolder.getPath());
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeLocation portalNodeLocation = NodeLocation.getNodeLocationByNode(portalNode);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    QueryResult queryResult = null;
-    Query query = queryManager.createQuery(statement, Query.SQL);
-    queryResult = query.execute();
-    NodeIterator iterator = queryResult.getNodes();
-
-    if (isStartup) {
-      while(iterator.hasNext()) {
-        Node registeredJSFile = iterator.nextNode();
-        buffer.append(getActivedJSData(registeredJSFile));
-      }
-    } else if (!iterator.hasNext()) {
-        buffer.append(getActivedJSData(newJSFile));
-    } else {      
-      boolean isApplied = false;
-      while(iterator.hasNext()) {
-        
-        Node registeredJSFile = iterator.nextNode();
-        if (newJSFile != null) {
-          // Modify
-          if (!isApplied && newJSFile.getPath().equals(registeredJSFile.getPath())) {
-            buffer.append(getActivedJSData(newJSFile));
-            isApplied = true;
-            continue;
-          }
-          
-          // Add new
-          long newJSFilePriority = newJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-          long registeredJSFilePriority = registeredJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-          if (!isApplied && newJSFilePriority < registeredJSFilePriority) {
-            buffer.append(getActivedJSData(newJSFile));
-            isApplied = true;
-          }
-        }
-        
-        buffer.append(getActivedJSData(registeredJSFile));
-      }     
-      if (!isApplied) {
-        buffer.append(getActivedJSData(newJSFile));
-      }
-    }
-    sessionProvider.close();
-    return buffer.toString();
   }
 
   private String getActivedJSData(Node jsFile) throws ValueFormatException,
