@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.Session;
-
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -106,7 +106,7 @@ public class AddTaxonomyActionScript implements CmsScript {
 	  		cNode = cNode.getNode(subPath);
 	  	}
 	  	String nodeName = nodePath.substring(nodePath.lastIndexOf("/") + 1);
-	  	// defend node with same name is overwrited
+	  	// defend node with same name is overwritted
 	  	String generatedNodeName = idGenerator_.generateStringID(nodeName);
 	  	String targetParentPath = cNode.getPath(); 
 	  	targetPath = cNode.getPath().concat("/").concat(generatedNodeName).replaceAll("/+", "/");
@@ -134,21 +134,33 @@ public class AddTaxonomyActionScript implements CmsScript {
 		      targetNode.addMixin("exo:privilegeable");
 		    sessionTargetNode.save();
 		    String t_title;
+		    Node dest;
 		    try {
-		      Node dest =(Node)  sessionTargetNode.getItem(destPath);
+		      dest =(Node)  sessionTargetNode.getItem(destPath);
           t_title = dest.getProperty("exo:title").getString();          
         } catch (Exception e) {
           //No need to process with exception here
+          dest= null;
         }
         try {
           Node source =(Node)  sessionTargetNode.getItem(nodePath);
           String currentTitle = source.hasProperty("exo:title")?source.getProperty("exo:title").getString():null;
           source.setProperty("exo:title", t_title);
-          System.out.println("nodePath: " + nodePath + " title: " + source.getProperty("exo:title").getString());
           source.save();
         } catch (Exception e) {
           //No need to process with exception here
         }
+        
+        if (dest != null) {        
+          if(dest.hasProperty("exo:owner")) {
+            String owner = dest.getProperty("exo:owner").getString();
+            try {
+              dest.setPermission(owner, PermissionType.ALL);
+            }catch (Exception e) {
+              //avoid broken UI if setPermission failed 
+            }
+          }
+        }         
 	    }
     } catch (Exception e) {
     	LOG.error("Exception when try move node and create link", e);
