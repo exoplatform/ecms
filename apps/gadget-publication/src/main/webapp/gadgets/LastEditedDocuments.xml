@@ -13,7 +13,7 @@
 		directory_title="Last edited documents"
 		title_url="http://www.exoplatform.org"
 		description="The last edited documents"
-    thumbnail="http://localhost:8080/eXoDMSGadgets/skin/DefaultSkin/gadgetIcons/PublishedDocument.png"
+		thumbnail="/eXoResources/skin/sharedImages/Icon80x80/DefaultPortlet.png"
 		height="230">
 	</ModulePrefs>
 	<Content type="html">
