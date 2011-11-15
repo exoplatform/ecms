@@ -70,14 +70,29 @@
 }
 
 .UIJCRExplorerPortlet .ShowDrivesButton{
-	background: url('DefaultSkin/icons/DriversButton.png') no-repeat right center; /* orientation=lt */
-	background: url('DefaultSkin/icons/DriversButton.png') no-repeat left center; /* orientation=rt */
-	cursor: pointer;
-	float: right; /* orientation=lt */
-	float: left; /* orientation=rt */
+  background: white url('DefaultSkin/icons/DriversButton.png') no-repeat center 11px;
+  cursor: pointer;
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
+  height:42px;
+  /*margin-top:2px;*/
+  width:24px;
+  padding: 2px 0px 0px 10px; /* orientation=lt */
+  padding: 2px 10px 0px 0px; /* orientation=rt */
+  border-left: 1px solid #E1E1E1;
+  border-right: 1px solid #E1E1E1;
+  position: relative;
+  z-index: 10;
+}
+
+.UIJCRExplorerPortlet .NoneDrivesButton{
+  background: url('DefaultSkin/icons/DriversButton.png') no-repeat center 11px;
+  cursor: pointer;
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
   height:28px;
-	/*margin-top:2px;*/
-	width:24px;
+  /*margin-top:2px;*/
+  width:24px;
   padding: 2px 0px 0px 10px; /* orientation=lt */
   padding: 2px 10px 0px 0px; /* orientation=rt */
 }
@@ -700,10 +715,9 @@
 }
 
 .UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .TabsContainer {
-	height: 29px;
-	border: none;
-	line-height: 29px;
-	
+	height: 31px;
+ 	border: none;
+ 	line-height: 29px;	
 }
 
 .UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .SelectedActionBarTab{

@@ -76,8 +76,7 @@ import org.exoplatform.webui.event.EventListener;
     events = {
         @EventConfig(listeners = UITreeExplorer.ExpandActionListener.class),
         @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class),
-        @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class),
-        @EventConfig(listeners = UITreeExplorer.ShowDrivesAreaActionListener.class)
+        @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class)
     }
 )
 
@@ -497,15 +496,4 @@ public class UITreeExplorer extends UIContainer {
       }
     }
   }
-
-  static public class ShowDrivesAreaActionListener extends EventListener<UITreeExplorer> {
-    public void execute(Event<UITreeExplorer> event) throws Exception {
-      UITreeExplorer uiTreeExplorer = event.getSource() ;
-      UIWorkingArea uiWorkingArea = uiTreeExplorer.getAncestorOfType(UIWorkingArea.class);
-      uiWorkingArea.getChild(UIDrivesArea.class).setRendered(true);
-      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
-    }
-  }
-
 }

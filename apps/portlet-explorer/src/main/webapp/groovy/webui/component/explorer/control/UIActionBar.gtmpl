@@ -12,6 +12,8 @@
   import java.util.ArrayList;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
   
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -31,6 +33,16 @@
 	if(tabAvailableList.size() < 2) {
     actionBarStyle = "UIActionBarAlone";
     displayTabContainer = "display: none;";
+  }
+  
+  public String getCSSClassOfDrivesButton() {
+    def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+    def uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+    def uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
+    if (uiDriveArea.isRendered()) {
+      return "ShowDrivesButton";  
+    } 
+    return "NoneDrivesButton";
   }
 %>
 
@@ -110,7 +122,7 @@
   	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
 
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
-  	     <a class="ShowDrivesButton" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
   	    
   			<div class="ClearRight"><span></span></div>

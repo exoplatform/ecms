@@ -19,17 +19,13 @@ package org.exoplatform.ecm.webui.component.explorer.control;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
@@ -49,7 +45,6 @@ import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
@@ -57,10 +52,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -353,11 +346,11 @@ public class UIActionBar extends UIForm {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDrivesArea uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
       if (uiDriveArea.isRendered()) {
-      uiDriveArea.setRendered(false);
-      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
+        uiDriveArea.setRendered(false);
+        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       } else {
-      uiDriveArea.setRendered(true);
-      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
+        uiDriveArea.setRendered(true);
+        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }

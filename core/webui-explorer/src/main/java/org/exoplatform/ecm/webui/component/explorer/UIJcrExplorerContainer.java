@@ -173,7 +173,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiActionbar.setRendered(isShowActionBar);
       String usecase =  preference.getValue(UIJCRExplorerPortlet.USECASE, "").trim();
       if ((usecase != null) && UIJCRExplorerPortlet.SELECTION.equals(usecase)) {
-        uiWorkingArea.setRenderedChild(UIDrivesArea.class);
+        uiWorkingArea.setRenderedChildrenOfTypes(new Class[] {UIActionBar.class, UIDocumentWorkspace.class});
+        uiJCRExplorer.refreshExplorer();
       } else {
         uiWorkingArea.setRenderedChild(UIDocumentWorkspace.class);
         uiJCRExplorer.refreshExplorer();

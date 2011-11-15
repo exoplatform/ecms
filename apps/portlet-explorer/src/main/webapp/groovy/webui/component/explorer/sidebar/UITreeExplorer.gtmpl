@@ -206,12 +206,7 @@
   			<div class="BarContentM">
 			    <div class="Title" style="cursor: pointer;" title="<%=uicomponent.getLabel()%>" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
 			      <%=uicomponent.getLabel()%>
-			    </div>
-			  	<%if (!uicomponent.isDirectlyDrive()) {%>
-			  		<a href="<%=uicomponent.event("ShowDrivesArea")%>">
-			  				<div class="DriversButton" title="<%= _ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives") %>"><span></span></div>
-			  	 </a>
-			  	<%}%>
+			    </div>			  	
 			  	<div class="ClearLeft"><span></span></div>
 			  </div>
 			</div>
