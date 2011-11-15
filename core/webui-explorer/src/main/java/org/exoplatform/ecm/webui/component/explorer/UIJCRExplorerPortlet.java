@@ -116,6 +116,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   
   final static public String EDIT_IN_NEW_WINDOW = "editInNewWindow";
   
+  private String backTo ="";
+  
   private boolean flagSelect = false;
   
   public UIJCRExplorerPortlet() throws Exception {
@@ -149,6 +151,10 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "false"));
   }
  
+  public String getBacktoValue() {
+    return backTo;
+  }
+  
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
@@ -156,8 +162,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     HashMap<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
-    if (backToValue != null && backToValue.length() > 0) {
-      getPortletPreferences().setValue(Utils.URL_BACKTO, backToValue);
+    if (!portletReqContext.useAjax()) {
+    	backTo = backToValue;
     }
     HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");
     if (changeDrive!=null) {

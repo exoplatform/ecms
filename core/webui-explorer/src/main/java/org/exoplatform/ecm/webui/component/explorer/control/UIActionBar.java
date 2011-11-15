@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.control;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -34,7 +33,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
@@ -51,7 +49,6 @@ import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.metadata.MetadataService;
@@ -150,14 +147,14 @@ public class UIActionBar extends UIForm {
     uiExplorer.setRenderTemplate(template);
   }
   public boolean hasBackButton() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
-    if (newLink != null)
+  	String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
+    if (newLink != null && newLink.length()>0)
       backLink = newLink;
     return backLink != null;
   }
   public String getBackLink() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
-    if (newLink != null)
+    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
+    if (newLink != null && newLink.length()>0)
     	backLink = URLDecoder.decode(newLink);
     return backLink;
   }

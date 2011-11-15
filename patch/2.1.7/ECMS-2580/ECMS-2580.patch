@@ -1,0 +1,156 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVContainer.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVContainer.java	(revision 74770)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVContainer.java	(working copy)
+@@ -83,7 +83,7 @@
+   }
+   
+   public String getEditLink(boolean isEditable, boolean isNew) {
+-    String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
++    String itemPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+     if (itemPath==null) itemPath="";
+ 	  return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
+   }
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/control/UIActionBar.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/control/UIActionBar.gtmpl	(revision 74770)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/control/UIActionBar.gtmpl	(working copy)
+@@ -33,10 +33,10 @@
+     displayTabContainer = "display: none;";
+   }
+ %>
+- 
++
++<%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
+ <% uiform.begin() %>
+ <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
+-<%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
+ 	<div class="UIHorizontalTabs">
+ 		<div class="TabsContainer">
+ 		  <div style="overflow: hidden; $displayTabContainer">
+@@ -116,7 +116,14 @@
+   			</div>
+   		</div>
+ 	</div>
+-  <% } %>	
+ </div>
+-		  
+ <% uiform.end() %>
++<% } else if (uicomponent.hasBackButton()) {%>
++  <% uiform.begin() %>
++    <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
++      <div class="UIViewBarContainer" id="UIViewBarContainer">
++        <a class ="URLBackToButton" style = "padding-top:28px!important" href="<%=uicomponent.event("BackTo")%>"></a>
++      </div>
++    </div>
++  <% uiform.end() %>
++<%}%>
+\ No newline at end of file
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CLV.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CLV.js	(revision 74770)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CLV.js	(working copy)
+@@ -144,7 +144,19 @@
+ };
+ 
+ ContentListViewer.prototype.addURL = function(aDiv) {
+-	aDiv.setAttribute("href", aDiv.getAttribute("href") + escape(location.search));
++  var strHref = aDiv.getAttribute("href");
++  var fIdx = strHref.indexOf("&backto");
++  if (fIdx < 0 ) fIdx = strHref.indexOf("?backto");
++  if (fIdx<0) return;
++  var lIdx = strHref.indexOf("&", fIdx+1);
++  var lString ="";
++  var fString =strHref;
++  if (lIdx >0) {
++    lString = strHref.substr(lIdx);
++    fString = strHref.substr(0, lIdx);
++  }
++  strHref = fString + escape(location.search)  + lString;
++  aDiv.setAttribute("href", strHref);
+ }
+ 
+ eXo.ecm.CLV = new ContentListViewer();
+\ No newline at end of file
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(revision 74770)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(working copy)
+@@ -17,7 +17,6 @@
+ package org.exoplatform.ecm.webui.component.explorer.control;
+ 
+ import java.net.URLDecoder;
+-import java.net.URLEncoder;
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ import java.util.Hashtable;
+@@ -34,7 +33,6 @@
+ import javax.jcr.query.Query;
+ import javax.jcr.query.QueryManager;
+ import javax.jcr.query.QueryResult;
+-import javax.servlet.http.HttpServletRequest;
+ 
+ import org.apache.commons.lang.StringUtils;
+ import org.exoplatform.ecm.jcr.SearchValidator;
+@@ -51,7 +49,6 @@
+ import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
+ import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+ import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
+-import org.exoplatform.portal.application.PortalRequestContext;
+ import org.exoplatform.portal.webui.util.SessionProviderFactory;
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.metadata.MetadataService;
+@@ -150,14 +147,14 @@
+     uiExplorer.setRenderTemplate(template);
+   }
+   public boolean hasBackButton() {
+-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+-    if (newLink != null)
++  	String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
++    if (newLink != null && newLink.length()>0)
+       backLink = newLink;
+     return backLink != null;
+   }
+   public String getBackLink() {
+-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+-    if (newLink != null)
++    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
++    if (newLink != null && newLink.length()>0)
+     	backLink = URLDecoder.decode(newLink);
+     return backLink;
+   }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java	(revision 74770)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java	(working copy)
+@@ -116,6 +116,8 @@
+   
+   final static public String EDIT_IN_NEW_WINDOW = "editInNewWindow";
+   
++  private String backTo ="";
++  
+   private boolean flagSelect = false;
+   
+   public UIJCRExplorerPortlet() throws Exception {
+@@ -149,6 +151,10 @@
+     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "false"));
+   }
+  
++  public String getBacktoValue() {
++    return backTo;
++  }
++  
+   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
+     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
+@@ -156,8 +162,8 @@
+     HashMap<String, String> map = getElementByContext(context);
+     PortalRequestContext pcontext = Util.getPortalRequestContext();
+     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
+-    if (backToValue != null && backToValue.length() > 0) {
+-      getPortletPreferences().setValue(Utils.URL_BACKTO, backToValue);
++    if (!portletReqContext.useAjax()) {
++    	backTo = backToValue;
+     }
+     HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");
+     if (changeDrive!=null) {

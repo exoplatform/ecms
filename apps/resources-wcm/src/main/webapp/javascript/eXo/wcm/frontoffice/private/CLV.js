@@ -144,7 +144,19 @@ ContentListViewer.prototype.disableClvInput = function(obj){
 };
 
 ContentListViewer.prototype.addURL = function(aDiv) {
-	aDiv.setAttribute("href", aDiv.getAttribute("href") + escape(location.search));
+  var strHref = aDiv.getAttribute("href");
+  var fIdx = strHref.indexOf("&backto");
+  if (fIdx < 0 ) fIdx = strHref.indexOf("?backto");
+  if (fIdx<0) return;
+  var lIdx = strHref.indexOf("&", fIdx+1);
+  var lString ="";
+  var fString =strHref;
+  if (lIdx >0) {
+    lString = strHref.substr(lIdx);
+    fString = strHref.substr(0, lIdx);
+  }
+  strHref = fString + escape(location.search)  + lString;
+  aDiv.setAttribute("href", strHref);
 }
 
 eXo.ecm.CLV = new ContentListViewer();
