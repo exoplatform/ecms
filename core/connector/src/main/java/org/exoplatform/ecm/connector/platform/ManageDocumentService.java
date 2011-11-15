@@ -20,7 +20,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -48,10 +47,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
@@ -59,7 +56,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -126,20 +122,22 @@ public class ManageDocumentService implements ResourceContainer {
   @Path("/getDrives/")
   @RolesAllowed("users")
   public Response getDrives(@QueryParam("driveType")String driveType) throws Exception {
-    List<DriveData> totalUserDrives = getDrivesByUserId();
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    List<String> userRoles = getMemberships();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document document = builder.newDocument();
 
     Element rootElement = document.createElement("Folders");
     document.appendChild(rootElement);
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
     List<DriveData> driveList = new ArrayList<DriveData>();
     if (DriveType.GENERAL.toString().equalsIgnoreCase(driveType)) {
-      driveList = getGeneralDrives(totalUserDrives);
+      driveList = manageDriveService.getMainDrives(userId, userRoles);
     } else if (DriveType.GROUP.toString().equalsIgnoreCase(driveType)) {
-      driveList = getGroupDrives(totalUserDrives);
+      driveList = manageDriveService.getGroupDrives(userId, userRoles, new ArrayList<String>(groups));
     } else if (DriveType.PERSONAL.toString().equalsIgnoreCase(driveType)) {
-      driveList = getPersonalDrives(totalUserDrives);
+      driveList = manageDriveService.getPersonalDrives(userId, userRoles);
     }
     rootElement.appendChild(buildXMLDriveNodes(document, driveList, driveType));
     return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cc).build();
@@ -504,21 +502,6 @@ public class ManageDocumentService implements ResourceContainer {
   }
   
   /**
-   * Gets the drives by user id.
-   *
-   * @param userId the user id
-   *
-   * @return the drives by user id
-   *
-   * @throws Exception the exception
-   */
-  private List<DriveData> getDrivesByUserId() throws Exception {
-    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
-    List<String> userRoles = getMemberships();
-    return driveService.getDriveByUserRoles(ConversationState.getCurrent().getIdentity().getUserId(), userRoles);
-  }
-  
-  /**
    * Build drive node from drive list.
    *
    * @param document the document
@@ -566,107 +549,6 @@ public class ManageDocumentService implements ResourceContainer {
       userMemberships.add(role);
     }
     return userMemberships;
-  }
-
-  /**
-   * Gets the groups.
-   *
-   * @param userId the user id
-   *
-   * @return the groups
-   *
-   * @throws Exception the exception
-   */
-  private List<String> getGroups() throws Exception {
-    List<String> groupList = new ArrayList<String>();
-    Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
-    Object[] objects = groups.toArray();
-    for (int i = 0; i < objects.length; i++) {
-      groupList.add((String) objects[i]);
-    }
-    return groupList;
-  }
-  
-
-
-  /**
-   * Get personal drives from drive list.
-   *
-   * @param driveList the drive list
-   *
-   * @return the list< drive data>
-   *
-   * @throws Exception the exception
-   */
-  private List<DriveData> getPersonalDrives(List<DriveData> driveList) throws Exception {
-    List<DriveData> personalDrives = new ArrayList<DriveData>();
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    for(DriveData drive : driveList) {
-      String driveHomePath = Utils.getPersonalDrivePath(drive.getHomePath(), userId);
-      if(driveHomePath.startsWith(userNode.getPath())) {
-        drive.setHomePath(driveHomePath);
-        personalDrives.add(drive);
-      }
-    }
-    Collections.sort(personalDrives);
-    return personalDrives;
-  }
-
-  /**
-   * Get group drives from drive list.
-   *
-   * @param driveList the drive list
-   *
-   * @return the list< drive data>
-   *
-   * @throws Exception the exception
-   */
-  private List<DriveData> getGroupDrives(List<DriveData> driveList) throws Exception {
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
-    List<DriveData> groupDrives = new ArrayList<DriveData>();
-    String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    List<String> groups = getGroups();
-    for(DriveData drive : driveList) {
-      if(drive.getHomePath().startsWith(groupPath)) {
-        for(String group : groups) {
-          if(drive.getHomePath().equals(groupPath + group)) {
-            groupDrives.add(drive);
-            break;
-          }
-        }
-      }
-    }
-    Collections.sort(groupDrives);
-    return groupDrives;
-  }
-
-  /**
-   * Get general drives from drive list.
-   *
-   * @param driveList the drive list
-   *
-   * @return the list< drive data>
-   *
-   * @throws Exception the exception
-   */
-  private List<DriveData> getGeneralDrives(List<DriveData> driveList) throws Exception {
-    List<DriveData> generalDrives = new ArrayList<DriveData>();
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
-    String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
-    String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    for(DriveData drive : driveList) {
-      if((!drive.getHomePath().startsWith(userPath) && !drive.getHomePath().startsWith(groupPath))
-          || drive.getHomePath().equals(userPath)) {
-        generalDrives.add(drive);
-      }
-    }
-    return generalDrives;
   }
   
   /**
