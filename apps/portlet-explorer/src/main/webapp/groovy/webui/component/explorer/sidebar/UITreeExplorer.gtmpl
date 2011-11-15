@@ -12,6 +12,7 @@
 	import java.util.ArrayList;
   import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.apache.commons.lang.StringEscapeUtils;
   
 %>
 
@@ -61,6 +62,7 @@
     	}
 	    String path = node.getPath() ;
 	    String treeNodeName = uicomponent.getWorkingArea().getTitle(node);
+	    treeNodeName = StringEscapeUtils.escapeHtml(treeNodeName);
 	    def isPreferenceNode = uicomponent.isPreferenceNode(node) ;
 	    def preferenceWS = node.getSession().getWorkspace().getName() ;
 	    String mode = "ExpandTree";

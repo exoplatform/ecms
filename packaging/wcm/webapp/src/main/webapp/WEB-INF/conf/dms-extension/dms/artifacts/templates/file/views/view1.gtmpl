@@ -9,6 +9,7 @@
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.ecm.utils.text.Text;
 	import org.exoplatform.services.jcr.RepositoryService;
+	import org.apache.commons.lang.StringEscapeUtils;
 	
 	public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -42,6 +43,7 @@
   currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
+  def title = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(currentNode.name));
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
@@ -55,8 +57,8 @@
   </style>
 	<div class="FileContent">
 			<div class="NavigationContainer">       
-			  <div class="TopTitle" style="float:left; width:80%; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(currentNode.name) %>">
-			   <%=Text.unescapeIllegalJcrChars(currentNode.name) %>
+			  <div class="TopTitle" style="float:left; width:80%; overflow:hidden;" title="<%=title %>">
+			   <%=title %>
 			  </div>
         <div style="text-align:right;margin-top:1px" onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>

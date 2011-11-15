@@ -17,7 +17,7 @@
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.jcr.RepositoryService;
-  
+  import org.apache.commons.lang.StringEscapeUtils;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   
@@ -230,11 +230,11 @@
           //   Title
           def title = uiWorkingArea.getTitle(data);
           title = Text.unescapeIllegalJcrChars(title);
-          
+          title = StringEscapeUtils.escapeHtml(title);
           //   Name
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
           name = Text.unescapeIllegalJcrChars(name);
-          
+          name = StringEscapeUtils.escapeHtml(name);
           //   Datetime
           def date = getDate(data, status);
           def datetime = dateFormat.format(date);

@@ -91,6 +91,7 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -484,7 +485,7 @@ public class UIJCRExplorer extends UIContainer {
 
   public void setPathToAddressBar(String path) throws Exception {
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(
-                                          UIAddressBar.FIELD_ADDRESS).setValue(filterPath(path)) ;
+                                          UIAddressBar.FIELD_ADDRESS).setValue(Text.unescapeIllegalJcrChars(filterPath(path))) ;
   }
 
   private void refreshExplorer(Node currentNode) throws Exception {
@@ -502,7 +503,7 @@ public class UIJCRExplorer extends UIContainer {
       setCurrentPath(currentRootPath_);
     }
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(UIAddressBar.FIELD_ADDRESS).
-        setValue(filterPath(currentPath_)) ;
+        setValue(Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocumentWorkspace.isRendered()) {
@@ -654,7 +655,7 @@ public class UIJCRExplorer extends UIContainer {
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
 
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
-        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+    		Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();

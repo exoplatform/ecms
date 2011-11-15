@@ -8,6 +8,7 @@
 	 */
 
 	 import org.exoplatform.ecm.utils.text.Text;
+	 import org.apache.commons.lang.StringEscapeUtils;
 %>
 <div class="UIForm $uicomponent.id">
   <%
@@ -19,6 +20,7 @@
 		  }
     }
     msgValue = Text.unescapeIllegalJcrChars(msgValue);
+    msgValue = StringEscapeUtils.escapeHtml(msgValue);
   %>
   <div class="HorizontalLayout">
     <div class="">

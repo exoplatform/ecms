@@ -16,6 +16,7 @@
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.apache.commons.lang.StringEscapeUtils;
   
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -155,6 +156,7 @@
 	          String nodePath = data.getPath();
 	          String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length());   
             String title = uiWorkingArea.getTitle(data);
+            title = StringEscapeUtils.escapeHtml(title);
 	          String subName;
 	          //nodePath = nodePath + "&workspaceName=" + preferenceWS;
 	          String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
@@ -200,7 +202,7 @@
 	        </div>
 	        <div class="ResizeColumn" style="float:left;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:150px; overflow:hidden;" title="<%=Text.unescapeIllegalJcrChars(title)%>"><%=Text.unescapeIllegalJcrChars(subName)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:150px; overflow:hidden;" title="<%=title%>"><%=subName%></div>
 		 					</div>
 	        </div>
 	        <div style="clear: both"><span></span></div>

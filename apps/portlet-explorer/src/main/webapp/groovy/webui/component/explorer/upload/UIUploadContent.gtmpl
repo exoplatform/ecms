@@ -1,6 +1,7 @@
 <%
- import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.ecm.webui.utils.Utils;
 	import java.net.URLEncoder;
+	import org.apache.commons.lang.StringEscapeUtils;
 %>
 <%
   List<String[]> listValues = uicomponent.listUploadValues();
@@ -26,6 +27,7 @@
 	      <%
 	        int index = 0;
 	        for(value in arrValues) {
+	          value = StringEscapeUtils.escapeHtml(value);
 	          String subValue = value;
 	          index++; 
 	          if(value.length() > 20) subValue = value.substring(0,15) + "..." ;

@@ -14,7 +14,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.jcr.RepositoryService;
-  
+  import org.apache.commons.lang.StringEscapeUtils;
 %>
 <%
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
@@ -262,6 +262,7 @@
                   wsName = image.getSession().getWorkspace().getName();
                   primaryType = image.getPrimaryNodeType().getName();
                   def title = uiWorkingArea.getTitle(image);
+                  title = StringEscapeUtils.escapeHtml(title);
                   def thumbnailNode = uicomponent.getThumbnailNode(image);
                   boolean isShowSlideShow = false;
                   if(thumbnailNode != null && thumbnailNode.hasProperty("exo:bigSize")) {
@@ -277,7 +278,7 @@
                   } else {
                     continue;
                   }
-                  data = data.concat("'").concat(imgSrc).concat("' : { caption: '").concat(Text.unescapeIllegalJcrChars(title)).concat(".' },");
+                  data = data.concat("'").concat(imgSrc).concat("' : { caption: '").concat(title).concat(".' },");
                 }
                 if (data.length() > 0) {
                   data = "{".concat(data.substring(0,data.length() - 1)).concat("}");

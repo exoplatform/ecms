@@ -10,6 +10,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.cms.link.LinkManager;  
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.apache.commons.lang.StringEscapeUtils;
       
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -108,6 +109,7 @@
 		          def preferenceWS = data.getSession().getWorkspace().getName() ;
 		          String name = data.getPath().substring(data.getPath().lastIndexOf("/") + 1) ;
               String title = uiWorkingArea.getTitle(data);
+              title = StringEscapeUtils.escapeHtml(title);
 		          String nodePath = data.getPath();
 		          String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
 		          String strActs = "<div class=\"RightClickCustomItem\" style=\"display: none;\">";
@@ -221,7 +223,7 @@
 			          else subName = title.substring(0,15) + "..." ;
 			        %>
 			        <div class="ActionIconLabel" style="width: auto;">
-			          <a class="ActionLabel" style="$hiddenStyle" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(subName)%></a>
+			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><%=subName%></a>
 			        </div>
 			      </div>
 			      $strActs

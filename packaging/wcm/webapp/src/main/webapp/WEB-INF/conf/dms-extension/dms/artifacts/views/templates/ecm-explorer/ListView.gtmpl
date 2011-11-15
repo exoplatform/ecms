@@ -19,7 +19,7 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  
+  import org.apache.commons.lang.StringEscapeUtils;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   
@@ -204,6 +204,7 @@
           String nodePath = data.getPath() ;
           String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;   
           String title = uiWorkingArea.getTitle(data);
+          title = StringEscapeUtils.escapeHtml(title);
           String subName ;
           String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
           //Begin permlink
@@ -297,7 +298,7 @@
 		        </div>
 		        <div class="ColumnName" style="width: 125px;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=title%> $lockedLabel"><%=title%></div>
 		 					</div>
 		        </div>
 		        <!--

@@ -14,6 +14,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.apache.commons.lang.StringEscapeUtils;
 %>
 <%
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
@@ -125,6 +126,7 @@
 							    actionLink = uicomponent.event("ChangeNode", image.getPath(), new Parameter("workspaceName", wsName));
 							    primaryType = image.getPrimaryNodeType().getName();
                   def title = uiWorkingArea.getTitle(image);
+                  title = StringEscapeUtils.escapeHtml(title);
 	  					    def thumbnailNode = uicomponent.getThumbnailNode(image);
 	  					    boolean isShowCoverFlow = false;
 	  					    String[] arrSize = {};
@@ -138,21 +140,21 @@
 	                imgSrc = "/" + portalName + "/" + restContextName + "/thumbnailImage/big/" + repository + "/" + wsName + image.getPath() + "/?";
 	  					    if((!linkManager.isLink(image) || linkManager.isTargetReachable(image)) && uicomponent.isSupportedThumbnailImage(image)) {
 								    if(isShowCoverFlow) {
-	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
 								    } else {
-								      println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" onload='this.setAttribute(\"w\", (this.width || 300)); this.setAttribute(\"h\", (this.height || 300));' alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+								      println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" onload='this.setAttribute(\"w\", (this.width || 300)); this.setAttribute(\"h\", (this.height || 300));' alt=\""+title+"\"/>";
 								    }
 							    } else if(primaryType.equals("nt:unstructured") || primaryType.equals("nt:folder")) {
 	  						    if(isShowCoverFlow) {
-	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
 	  						    } else {
-  	  						    println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+  	  						    println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+title+"\"/>";
 	  						    }
 							    } else {
 							      if(isShowCoverFlow) {
-	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
 	  						    } else {
-	  						      println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+	  						      println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+title+"\"/>";
 	                  }
 							    }
 							  }
