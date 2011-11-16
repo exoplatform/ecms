@@ -1,6 +1,12 @@
 The _NewsletterInitializationService_ component is used to initiate some data for the newsletter portlet.
 The configuration of this component is found in _packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/wcm/newsletter-configuration.xml_.
 
+{docbook}
+<warning><para>
+The Newsletter portlet and its services are deprecated. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
+</para></warning>
+{docbook}
+
 {code:xml}
 <component>
     <type>org.exoplatform.services.wcm.newsletter.NewsletterInitializationService</type>

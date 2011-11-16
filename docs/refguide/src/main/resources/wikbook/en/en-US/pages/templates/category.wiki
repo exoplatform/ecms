@@ -1,4 +1,5 @@
 The *Category Navigation Template* displays all contents under the categories.
+
 ||*Template* || *Description* ||
 |*CategoryList.gtmpl*|Display categories as a navigation bar.|
 |*CategoryTree.gtmpl*|Display categories as a tree. |
