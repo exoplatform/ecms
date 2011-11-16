@@ -36,13 +36,13 @@ var CoverFlow = function() {
 		var workingArea = document.getElementById('UIWorkingArea');			
 	 	var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-		var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
+		var resizeSideBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");
 		var actionBar = document.getElementById('UIActionBar');	
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");	
 		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "MCBox");	
 		var workingAreaHeight = workingArea.offsetHeight;
 		sizeBarContainer.style.height = workingAreaHeight + 'px';	
-		resizeButton.style.height = workingAreaHeight + 'px';	
+		resizeSideBar.style.height = workingAreaHeight + 'px';	
 		if (documentWorkspace)		{		
 	 		documentWorkspace.style.height = (workingAreaHeight - actionBar.offsetHeight) + 'px';	
 		}	

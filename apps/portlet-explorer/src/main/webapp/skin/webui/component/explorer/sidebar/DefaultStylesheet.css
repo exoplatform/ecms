@@ -15,7 +15,7 @@
 
 .UIJCRExplorerPortlet .UISideBar .ResizeTreeExplorer{
 	height: 18px;
-	cursor: row-resize;
+	/*cursor: row-resize;*/
 }
 
 .UIJCRExplorerPortlet .UISideBar .ResizeTreeButton{

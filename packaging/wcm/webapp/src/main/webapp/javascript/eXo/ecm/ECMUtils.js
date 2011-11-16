@@ -1,6 +1,6 @@
  function ECMUtils() {
 	var Self = this;
-
+	var showSideBar = true;
 	//set private property;
 	var DOM = eXo.core.DOMUtil;
 	var Browser = eXo.core.Browser;
@@ -637,8 +637,6 @@
 		var deltaX = event.clientX - eXo.ecm.ECMUtils.currentMouseX ;
 		eXo.ecm.ECMUtils.savedResizeDistance = deltaX;
 		var sideBarContent = DOM.findFirstDescendantByClass(container, "div", "SideBarContent");
-		var title = DOM.findFirstDescendantByClass(sideBarContent, "div", "Title");
-		title.style.width = eXo.ecm.ECMUtils.currentTitleWidth + deltaX + "px";
 		// container.style.width = eXo.ecm.ECMUtils.currentWidth + deltaX + "px";
 		// resizableBlock.style.width = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
 		eXo.ecm.ECMUtils.savedResizableMouseX = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
@@ -714,6 +712,14 @@
 					moreButton.style.display = 'none';
 				}
 			}			
+		}
+
+		if(!showSideBar) {
+			var container = document.getElementById("LeftContainer");
+			var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");
+			var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
+			container.style.display = 'none';
+			resizeButton.className = "ResizeButton ShowLeftContent";			
 		}
 	}
 
@@ -814,9 +820,11 @@
 	  if(container.style.display == 'none') {
 	    container.style.display = 'block';
 		resizeButton.className = "ResizeButton";
+		showSideBar = true;
 	  } else {
 		container.style.display = 'none';
 		resizeButton.className = "ResizeButton ShowLeftContent";
+		showSideBar = false;
 	  }
 	}
 
@@ -1049,19 +1057,19 @@
 
 	//private method
 	function checkRoot() {
-		var workingArea = document.getElementById('UIWorkingArea');
-		var root = document.getElementById("UIDocumentInfo");
+		
+		root = document.getElementById("UIDocumentWorkspace");
 		if (root) {
-			var uiListGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
-			eXo.ecm.ECMUtils.defaultHeight = uiListGrid.offsetHeight;
-		} else {
-			root = document.getElementById("UIDocumentWorkspace");
-			if (root) {
-				eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
-			} else {
-				root = eXo.core.DOMUtil.findFirstDescendantByClass(workingArea, "div", "RightContainer");
-			  eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
+			eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
+			var actionBar = document.getElementById('UIActionBar');	
+			
+			if (actionBar) {
+				eXo.ecm.ECMUtils.defaultHeight += actionBar.offsetHeight;
 			}
+			
+		} else {
+			root = eXo.core.DOMUtil.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+		  eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
 		}
 		return root;
 	}
@@ -1079,4 +1087,3 @@ ECMUtils.prototype.showInContextHelp = function(){
 };
 
 eXo.ecm.ECMUtils = new ECMUtils();
-

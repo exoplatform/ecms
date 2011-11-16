@@ -3371,7 +3371,7 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Vous pouvez accéder à cette vue en utilisant le bouton Lecteurs à votre gauche</allDrives>
+      <allDrives>Cliquez sur le bouton Montrer les lecteurs sur la barre d'action pour afficher / cacher la liste des lecteurs.</allDrives>
       <ShowDrives>Montrer les lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

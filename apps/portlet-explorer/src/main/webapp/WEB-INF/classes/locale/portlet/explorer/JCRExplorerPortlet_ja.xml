@@ -3308,7 +3308,7 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>
-	      左パネルのドライブボタンを使って表示にアクセスすることができます
+	      Click the Show Drives button on the action bar to show/hide a list of drives.
       </allDrives>
       <ShowDrives>ドライブの表示</ShowDrives>
     </DrivesArea>

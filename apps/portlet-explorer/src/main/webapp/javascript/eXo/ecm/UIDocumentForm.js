@@ -5,12 +5,17 @@ var UIDocumentForm = function() {
 }
 
 UIDocumentForm.prototype.AdjustHeight = function() {
+	var workingArea = document.getElementById('UIWorkingArea');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
 	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
 	var uiHorizontalTabs = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIHorizontalTabs");
 	var horizontalLayout = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "HorizontalLayout");
 	
+	var workingAreaHeight = workingArea.offsetHeight;
+	if (uiDocumentWorkspace)									
+	 	uiDocumentWorkspace.style.height = workingAreaHeight + 2 + 'px';
+
 	var uiActionHeight = 0;
 	var uiHorizontalTabsHeight = 0;
 	horizontalLayout.style.height = 'auto';
@@ -22,7 +27,7 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 		uiHorizontalTabsHeight = uiHorizontalTabs.offsetHeight;
 	}
 	
-	horizontalLayout.style.height = uiDocumentWorkspace.offsetHeight - uiActionHeight - uiHorizontalTabsHeight - 60 + 'px';
+	horizontalLayout.style.height = workingAreaHeight - uiActionHeight - uiHorizontalTabsHeight - 10 + 'px';
 }
 
 UIDocumentForm.prototype.UpdateGUI = function () {

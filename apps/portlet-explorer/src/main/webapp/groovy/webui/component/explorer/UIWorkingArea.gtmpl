@@ -51,7 +51,7 @@
 	%>
 	
 	<% if( uicomponent.isShowSideBar() ) {%>
-		<div class="ResizeSideBar" style="" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
+		<div class="ResizeSideBar">
 			<div class="ResizeButton" style=" top:250px;"  onclick="eXo.ecm.ECMUtils.showHideSideBar(this)"><span></span></div>
 		</div>
 	<% } %>

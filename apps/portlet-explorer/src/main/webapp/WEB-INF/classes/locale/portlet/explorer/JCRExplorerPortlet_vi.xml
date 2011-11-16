@@ -3372,7 +3372,7 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
+      <allDrives>Click the Show Drives button on the action bar to show/hide a list of drives.</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>

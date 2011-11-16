@@ -880,15 +880,15 @@ var SimpleView = function() {
 		var workingContainer = document.getElementById('UIDocumentContainer');		
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");		
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-		var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
+		var resizeSideBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");
 		
 		var workingAreaHeight = workingArea.offsetHeight;
 
 		if (sizeBarContainer)
 			sizeBarContainer.style.height = workingAreaHeight + 'px';
 
-		if (resizeButton)
-			resizeButton.style.height = workingAreaHeight + 'px';
+		if (resizeSideBar)
+			resizeSideBar.style.height = workingAreaHeight + 'px';
 		if (documentWorkspace)		{		
 	 		documentWorkspace.style.height = (workingAreaHeight - actionBar.offsetHeight) + 'px';	
 		}

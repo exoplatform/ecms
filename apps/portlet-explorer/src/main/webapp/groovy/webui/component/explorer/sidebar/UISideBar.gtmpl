@@ -54,7 +54,7 @@
 			<% } %>
 		</div>
     <% if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) { %>   
-	    <div class="ResizeTreeExplorer" onmousedown="eXo.ecm.ECMUtils.resizeTreeInSideBar(event)">
+	    <div class="ResizeTreeExplorer">
 				<div class="ResizeTreeButton" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)"><span></span></div>
 			</div>
       <div class="SelectItem" id ="SelectItemArea">

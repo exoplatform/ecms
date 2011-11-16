@@ -5,7 +5,7 @@
 <%/*Begin UITabPane*/%>
 <div class="UITabPane">
   <%/*Begin TabPaneContent*/%>
-  <div class="TabPaneContent"> 
+  <div class="TabPaneContent" style="padding:0px"> 
     <%/*Begin WorkingArea*/%>
     <div class="WorkingAreaWithHelp">
     	<%/*Begin Tabs*/%>
