@@ -81,7 +81,13 @@
 			}
 			if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiDocumentWorkspace.offsetHeight - delta + "px";
 		}
-		if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight - actionBar.offsetHeight + "px";
+		if (uiDocumentWorkspace) {
+			if (actionBar) {
+				uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight - actionBar.offsetHeight + "px";
+			} else {
+				uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight + "px";
+			}
+		}
 		eXo.core.Browser.addOnResizeCallback('controlLayout', function(){eXo.ecm.ECMUtils.controlLayout(portletId)});
 	};
 
