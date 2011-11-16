@@ -91,7 +91,7 @@ public class ManageSimpleCategoriesActionComponent extends UIComponent {
           uiSimpleCategoryManager.getChild(UISimpleCategoriesAddedList.class);
       uiNodePathSelector.setSourceComponent(uiSimpleCategoriesAddedList, null);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      UIPopupContainer.activate(uiSimpleCategoryManager, 630, 500);
+      UIPopupContainer.activate(uiSimpleCategoryManager, 650, 500);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }

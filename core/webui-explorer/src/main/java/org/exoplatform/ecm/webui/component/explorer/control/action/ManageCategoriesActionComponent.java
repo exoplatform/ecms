@@ -88,7 +88,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
         UICategoriesAddedList uiCateAddedList = uiManager.getChild(UICategoriesAddedList.class);
         uiOneTaxonomySelector.setSourceComponent(uiCateAddedList, null);
         UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-        UIPopupContainer.activate(uiManager, 630, 500);
+        UIPopupContainer.activate(uiManager, 650, 500);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
       } else {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.not-exist-categories", null));
