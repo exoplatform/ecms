@@ -228,13 +228,10 @@
           if (status == null) status = "";
           
           //   Title
-          def title = uiWorkingArea.getTitle(data);
-          title = Text.unescapeIllegalJcrChars(title);
-          title = StringEscapeUtils.escapeHtml(title);
+          def title = uiWorkingArea.getTitle(data);          
           //   Name
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
-          name = Text.unescapeIllegalJcrChars(name);
-          name = StringEscapeUtils.escapeHtml(name);
+          name = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(name));         
           //   Datetime
           def date = getDate(data, status);
           def datetime = dateFormat.format(date);

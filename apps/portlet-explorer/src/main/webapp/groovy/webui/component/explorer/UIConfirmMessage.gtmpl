@@ -19,8 +19,7 @@
 	  	  msgValue = msgValue.replaceAll("\\{" + i + "\\}", msgArguments[i]);
 		  }
     }
-    msgValue = Text.unescapeIllegalJcrChars(msgValue);
-    msgValue = StringEscapeUtils.escapeHtml(msgValue);
+    msgValue = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(msgValue));    
   %>
   <div class="HorizontalLayout">
     <div class="">

@@ -19,7 +19,6 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  import org.apache.commons.lang.StringEscapeUtils;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   
@@ -203,8 +202,7 @@
           def preferenceWS = data.getSession().getWorkspace().getName() ;
           String nodePath = data.getPath() ;
           String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;   
-          String title = uiWorkingArea.getTitle(data);
-          title = StringEscapeUtils.escapeHtml(title);
+          String title = uiWorkingArea.getTitle(data);          
           String subName ;
           String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
           //Begin permlink

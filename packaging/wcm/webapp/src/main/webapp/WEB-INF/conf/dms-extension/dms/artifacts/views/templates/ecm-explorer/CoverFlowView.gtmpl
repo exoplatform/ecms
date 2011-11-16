@@ -14,7 +14,6 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.apache.commons.lang.StringEscapeUtils;
 %>
 <%
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
@@ -125,8 +124,7 @@
 							    wsName = image.getSession().getWorkspace().getName();
 							    actionLink = uicomponent.event("ChangeNode", image.getPath(), new Parameter("workspaceName", wsName));
 							    primaryType = image.getPrimaryNodeType().getName();
-                  def title = uiWorkingArea.getTitle(image);
-                  title = StringEscapeUtils.escapeHtml(title);
+                  def title = uiWorkingArea.getTitle(image);                  
 	  					    def thumbnailNode = uicomponent.getThumbnailNode(image);
 	  					    boolean isShowCoverFlow = false;
 	  					    String[] arrSize = {};

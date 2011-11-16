@@ -20,7 +20,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.apache.commons.lang.StringEscapeUtils;
 %>
 
 <%
@@ -169,7 +168,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 								%>
 								<a href="$actionLink" alt="" style="$hiddenStyle" workspaceName="$preferenceWS"
 									title="<%=_ctx.appRes("UIDocumentInfo.tooltip.View")%>"/>
-									<%= StringEscapeUtils.escapeHtml(uiWorkingArea.getTitle(node)) %>
+									<%= uiWorkingArea.getTitle(node) %>
 								</a>
 							</div>
 						</div>

@@ -155,8 +155,7 @@
 	          def preferenceWS = data.getSession().getWorkspace().getName();
 	          String nodePath = data.getPath();
 	          String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length());   
-            String title = uiWorkingArea.getTitle(data);
-            title = StringEscapeUtils.escapeHtml(title);
+            String title = uiWorkingArea.getTitle(data);            
 	          String subName;
 	          //nodePath = nodePath + "&workspaceName=" + preferenceWS;
 	          String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
