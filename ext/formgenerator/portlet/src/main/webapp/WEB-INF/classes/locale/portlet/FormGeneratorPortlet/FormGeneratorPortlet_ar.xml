@@ -22,6 +22,7 @@
       <AddNewsSuccessful>تم إنشاء النموذج بنجاح</AddNewsSuccessful>
       <duplicate-name>اسم الحقل تسمية ذو شقين ، الرجاء إدخال اسم الفرق</duplicate-name>
       <select-value-empty> لا يمكن لبعض الحقول أن تترك فارغة </select-value-empty>
+      <input-only-special-characters>The field Label must has alphanumeric character</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>

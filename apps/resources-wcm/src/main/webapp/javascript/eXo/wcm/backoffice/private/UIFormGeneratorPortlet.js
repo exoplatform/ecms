@@ -548,7 +548,7 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 		nameComp = defaultValue;
 	}
 	
-	strObject += '"name":"'+nameComp+'",';
+	strObject += '"name":"'+ encodeURIComponent(nameComp)+'",';
 	switch(comp.getAttribute("typeComponent")) {
 		case "input" :
 			inputNode = DOMUtil.findFirstDescendantByClass(topContent, 'input', "InputText");

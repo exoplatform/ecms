@@ -22,6 +22,7 @@
       <AddNewsSuccessful>Le formulaire a été créé avec succès</AddNewsSuccessful>
       <duplicate-name>Nom du champ label est double, s'il vous plaît le nom de différence d'entrée</duplicate-name>
       <select-value-empty>Certains champs de la valeur par défaut de boîte de sélection ne peut pas être vide, s'il vous plaît valeur d'entrée pour lui.</select-value-empty>
+      <input-only-special-characters>Le champ Label a de caractères alphanumériques doit</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>

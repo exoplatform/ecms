@@ -37,6 +37,7 @@
 		    </div>
 	    </div>
 	    <% uiform.begin() %>
+				<div><input type="hidden" id="<%=uicomponent.RENDER_TAB%>" name="<%=uicomponent.RENDER_TAB%>" value="$uicomponent.selectedTabId"/></div>
 		    <div class="UITabContentContainer GrayTabStyleContainer">
 		    	<%
     				for(formInput in uicomponent.getChildren()) {

@@ -26,7 +26,9 @@ import java.util.List;
 import javax.jcr.PropertyType;
 import javax.jcr.version.OnParentVersionAction;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -43,8 +45,8 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -85,7 +87,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
   public static final String NODE_SUFFIX = "_fg_n";
   
   /** The Constant INPUT_NAME_PREFIX_NUM. */
-  public static final String INPUT_NAME_PREFIX_NUM = "fg_num";
+  public static final String INPUT_NAME_PREFIX = "num";
 
   /**
    * Instantiates a new uI form generator tab pane.
@@ -112,9 +114,9 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     // formGeneratorGeneralTab.addUIFormInput(new
     // UIFormUploadInput(UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT,
     // UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT));
-    addUIFormInput(formGeneratorGeneralTab);
+    addUIFormInput(formGeneratorGeneralTab).setRendered(true);
 
-    addChild(UIFormGeneratorDnDTab.class, null, null);
+    addChild(UIFormGeneratorDnDTab.class, null, null).setRendered(true);
 
     setSelectedTab(formGeneratorGeneralTab.getId());
   }
@@ -150,7 +152,16 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
           cleanedStr.deleteCharAt(i--);
       }
-      return cleanedStr.toString().toLowerCase();
+      
+      if (!Character.isLetterOrDigit(cleanedStr.charAt(0))) {
+        cleanedStr.deleteCharAt(0);
+      }
+      
+      if (cleanedStr.length() > 0 && !Character.isLetterOrDigit(cleanedStr.charAt(cleanedStr.length()-1))) {
+        cleanedStr.deleteCharAt(cleanedStr.length()-1);
+      }
+      
+      return cleanedStr.toString().toLowerCase().replaceAll("-","_");
   }
 
   /**
@@ -274,7 +285,6 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
    */
   private String generateDialogTemplate(String templateName, List<UIFormGeneratorInputBean> forms) throws Exception {
     int numberFormUploadInput = 0;
-    boolean renderFormUploadInput = true;
     for (int i = 0; i < forms.size(); i++) {
       UIFormGeneratorInputBean form = forms.get(i);
       String inputType = form.getType();
@@ -333,7 +343,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormGeneratorInputBean form = forms.get(i);
       String inputName = formatInputName(form.getName());
       String inputType = form.getType();
-      String inputFieldName = cleanString(inputName) + "FieldName";
+      String inputFieldName = inputName + "FieldName";
       String validate = "validate=";
       String inputField = "";
       String guideline = form.getGuideline();
@@ -369,12 +379,10 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         dialogTemplate.append("      </tr>\n");
       } else {
         dialogTemplate.append("      <tr>\n");
-
-        dialogTemplate.append("        <td class=\"FieldLabel\">"
-                              + form.getName() + "</td>\n");
+        dialogTemplate.append("        <td class=\"FieldLabel\"><pre>"
+                              + Text.unescape(form.getName()).replaceAll("\\$", "&#036;").replaceAll("\\\\", "&#92;") + "</pre></td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
-
         if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
           String extraFormUploadInput = "";
           String realDataNodeName = "jcr:content"  + (inputFieldName);
@@ -537,9 +545,11 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
   }
   
   private String formatInputName(String name) {
-    name = cleanString(name);
-    if (StringUtils.isNumeric(name))
-      return String.format("num%s", name);
+    name = cleanString(StringEscapeUtils.unescapeHtml(Text.unescape(name)));
+    
+    char firstChar = name.substring(0, 1).toCharArray()[0];
+    if (!Character.isLetter(firstChar))
+      return String.format("%s%s", INPUT_NAME_PREFIX, name);
     else
       return name;
   }
@@ -567,9 +577,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormHiddenInput hiddenInputJSonObject = formGeneratorGeneralTab.
           getChildById(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR);
       String jsonObjectGenerated = hiddenInputJSonObject.getValue();
-
       jsonObjectGenerated = jsonObjectGenerated.replaceAll("\n", "<br/>");
-
+      
       JsonHandler jsonHandler = new JsonDefaultHandler();
       Charset cs = Charset.forName("utf-8");
       new JsonParserImpl().parse(new InputStreamReader(new ByteArrayInputStream(jsonObjectGenerated.getBytes("utf-8")),
@@ -585,10 +594,23 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
             Utils.createPopupMessage(formGeneratorTabPane,
                                      "UIFormGeneratorTabPane.msg.duplicate-name",
                                      null,
-                                     ApplicationMessage.INFO);
+                                     ApplicationMessage.WARNING);
+            event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
             return;
           }
         }
+        
+        // If there are only special characters, warning message
+        String strCheckSpecialChars = StringEscapeUtils.unescapeHtml(Text.unescape(forms.get(i).getName())).replaceAll("[^a-zA-Z0-9]", StringUtils.EMPTY);
+        if (StringUtils.isEmpty(strCheckSpecialChars)) {
+          Utils.createPopupMessage(formGeneratorGeneralTab,
+                                   "UIFormGeneratorTabPane.msg.input-only-special-characters",
+                                   null,
+                                   ApplicationMessage.WARNING);
+          event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
+          return;
+        }
+        
         if(forms.get(i).getType().equals(UIFormGeneratorConstant.SELECT)) {
           String[] advance = null;
           boolean isEmptyValue = false;

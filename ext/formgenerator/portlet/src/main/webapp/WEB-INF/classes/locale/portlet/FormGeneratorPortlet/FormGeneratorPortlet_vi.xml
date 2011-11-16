@@ -22,6 +22,7 @@
       <AddNewsSuccessful>Mẫu của nodetype {0}'đã được tạo thành công</AddNewsSuccessful>
       <duplicate-name>Tên của trường này đã tồn tại, hãy sử dụng tên khác</duplicate-name>
       <select-value-empty>Giá trị mặc định của trường này phải có giá trị.</select-value-empty>
+      <input-only-special-characters>Phải tồn tại ký tự hoặc số trong field Label</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>

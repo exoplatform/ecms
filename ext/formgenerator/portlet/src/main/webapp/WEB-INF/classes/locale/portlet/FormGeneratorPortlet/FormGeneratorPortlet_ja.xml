@@ -22,6 +22,7 @@
       <AddNewsSuccessful>ノードタイプ {0} のテンプレートが生成されました。</AddNewsSuccessful>
       <duplicate-name>フィールドラベルの名前が重複しています。別の名前を入力してください。</duplicate-name>
       <select-value-empty>セレクトボックスのデフォルト値のいくつかのフィールドは空にできません。値を入力してください。</select-value-empty>
+      <input-only-special-characters>The field Label must has alphanumeric character</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>
