@@ -47,11 +47,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -97,6 +99,31 @@ public class ManageDocumentService implements ResourceContainer {
   private enum DriveType {
     GENERAL, GROUP, PERSONAL
   }
+  
+  final static public String   EXO_MUSICFOLDER      = "exo:musicFolder";
+
+  final static public String   EXO_VIDEOFOLDER      = "exo:videoFolder";
+
+  final static public String   EXO_PICTUREFOLDER    = "exo:pictureFolder";
+
+  final static public String   EXO_DOCUMENTFOLDER   = "exo:documentFolder";
+
+  final static public String   EXO_SEARCHFOLDER     = "exo:searchFolder";
+
+  final static public String   EXO_SYMLINK          = "exo:symlink";
+
+  final static public String   EXO_PRIMARYTYPE      = "exo:primaryType";
+
+  final static public String   EXO_TRASH_FOLDER     = "exo:trashFolder";
+
+  final static public String   EXO_FAVOURITE_FOLDER = "exo:favoriteFolder";
+
+  final static public String   NT_UNSTRUCTURED      = "nt:unstructured";
+
+  final static public String   NT_FOLDER            = "nt:folder";
+  
+  final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
+    EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
   /**
    * Instantiates a new platform document selector.
@@ -328,7 +355,7 @@ public class ManageDocumentService implements ResourceContainer {
                                            userId,
                                            action,
                                            language,
-                                           fileName,
+                                           Text.escapeIllegalJcrChars(fileName),
                                            uploadId);
       }
     } catch (Exception e) {
@@ -417,7 +444,7 @@ public class ManageDocumentService implements ResourceContainer {
     folder.setAttribute("path", child.getPath());
     folder.setAttribute("canRemove", String.valueOf(canRemove));
     folder.setAttribute("canAddChild", String.valueOf(canAddChild));
-    folder.setAttribute("nodeType", child.getPrimaryNodeType().getName());
+    folder.setAttribute("nodeType", getNodeTypeIcon(child));
     folder.setAttribute("workspaceName", workspaceName);
     folder.setAttribute("driveName", driveName);
     folder.setAttribute("currentFolder", currentFolder + child.getName());
@@ -510,15 +537,13 @@ public class ManageDocumentService implements ResourceContainer {
    *
    * @return the element
    */
-  private Element buildXMLDriveNodes(Document document,
-                                List<DriveData> drivesList,
-                                String driveType) throws Exception {
+  private Element buildXMLDriveNodes(Document document, List<DriveData> drivesList, String driveType) throws Exception {
     Element folders = document.createElement("Folders");
     folders.setAttribute("name", driveType);
     for (DriveData drive : drivesList) {
       Element folder = document.createElement("Folder");
       folder.setAttribute("name", drive.getName());
-      folder.setAttribute("nodeType", "exo:drive");
+      folder.setAttribute("nodeType", driveType + " " + drive.getName().replaceAll(" ", "_"));
       folder.setAttribute("workspaceName", drive.getWorkspace());
       folder.setAttribute("canAddChild", drive.getAllowCreateFolders());
       folders.appendChild(folder);
@@ -549,6 +574,40 @@ public class ManageDocumentService implements ResourceContainer {
       userMemberships.add(role);
     }
     return userMemberships;
+  }
+  
+  public static String getNodeTypeIcon(Node node) throws RepositoryException {
+    StringBuilder str = new StringBuilder();
+    if (node == null)
+      return "";
+    String nodeType = node.getPrimaryNodeType().getName();
+    if (node.isNodeType(EXO_SYMLINK)) {
+      LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
+                                                                 .getComponentInstanceOfType(LinkManager.class);
+      try {
+        nodeType = node.getProperty(EXO_PRIMARYTYPE).getString();
+        node = linkManager.getTarget(node);
+        if (node == null)
+          return "";
+      } catch (Exception e) {
+        return "";
+      }
+    }
+    if (node.isNodeType(EXO_TRASH_FOLDER)) {
+      nodeType = EXO_TRASH_FOLDER;
+    }
+    if (node.isNodeType(EXO_FAVOURITE_FOLDER))
+      nodeType = EXO_FAVOURITE_FOLDER;
+    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
+      for (String specificFolder : SPECIFIC_FOLDERS) {
+        if (node.isNodeType(specificFolder)) {
+          nodeType = specificFolder;
+          break;
+        }
+      }
+    }
+    str.append(nodeType);
+    return str.toString();
   }
   
   /**
