@@ -567,7 +567,8 @@
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
   width: 16px; height: 16px;
-  background: url('DefaultSkin/Edit.gif') no-repeat ;
+  background: url('DefaultSkin/Edit.png') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Edit.png') no-repeat right center; /* orientation=rt */
   cursor: pointer;   
 }
 
@@ -622,73 +623,89 @@
 
 .AddDrive16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat ;   
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat right center; /* orientation=rt */
 }
 
 .Custom16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat ;
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat right center; /* orientation=rt */
 }
 
 .Upload16x16Icon {
 	width: 16px; height: 16px;
-  background: url('DefaultSkin/UploadFile.gif') no-repeat ;
+  background: url('DefaultSkin/UploadFile.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/UploadFile.gif') no-repeat right center; /* orientation=rt */
 }
 
 .AddSymLink16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/AddSymLink.gif') no-repeat ;
+  background: url('DefaultSkin/AddSymLink.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddSymLink.gif') no-repeat right center; /* orientation=rt */
 }
 
 .AddFolder16x16Icon {
 	width: 16px; height: 16px;
-  background: url('DefaultSkin/AddFolder.gif') no-repeat ;
+  background: url('DefaultSkin/AddFolder.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddFolder.gif') no-repeat right center; /* orientation=rt */
 }
 
 .AddDocument16x16Icon {
 	width: 16px; height: 16px;
-  background: url('DefaultSkin/AddDocument.gif') no-repeat ;
+  background: url('DefaultSkin/AddDocument.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddDocument.gif') no-repeat right center; /* orientation=rt */
 }
 
 .ViewProperties16x16Icon {
 	width: 16px; height: 16px;
-  background: url('DefaultSkin/ViewProperties.gif') no-repeat ;
+  background: url('DefaultSkin/ViewProperties.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewProperties.gif') no-repeat right center; /* orientation=rt */
 }
 
 .AddView16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat ;   
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/BlueCirclePlus.gif') no-repeat right center; /* orientation=rt */
 }
 
 .Paste16x16Icon {
   width: 16px; height: 16px;
-  background: url('DefaultSkin/OrangeNote.gif') no-repeat ;
+  background: url('DefaultSkin/OrangeNote.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/OrangeNote.gif') no-repeat right center; /* orientation=rt */
 }
 .Select16x16Icon {
   width: 16px; height: 16px;
-  background-image: url('DefaultSkin/SelectPage.gif');  
+  background-image: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
   cursor: pointer;
 }
 
 .Export16x16Icon {
-  background-image: url('DefaultSkin/Export.gif');  
+  background-image: url('DefaultSkin/Export.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/Export.gif') no-repeat right center; /* orientation=rt */
 }
 
 .UncheckAll16x16Icon {
-  background-image: url('DefaultSkin/UnCheckAll.gif');  
+  background-image: url('DefaultSkin/UnCheckAll.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/UnCheckAll.gif') no-repeat right center; /* orientation=rt */
 }
 
 .CheckAll16x16Icon {
-  background-image: url('DefaultSkin/CheckAll.gif');  
+  background-image: url('DefaultSkin/CheckAll.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/CheckAll.gif') no-repeat right center; /* orientation=rt */
 }
 
 .Import16x16Icon {
-  background-image: url('DefaultSkin/Import.gif');  
+  background-image: url('DefaultSkin/Import.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/Import.gif') no-repeat right center; /* orientation=rt */
 }
 .Active16x16Icon {
   width: 16px; height: 16px;
-  background-image: url('DefaultSkin/SelectPage.gif');  
+  background-image: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
+  background-image: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
 }
+
 /*############################## -- End Action Icon  -- ##############################*/
 
 .ExtendButton16x16Icon {
