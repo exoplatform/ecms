@@ -1,993 +1,1352 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
-%BOOK_ENTITIES;
-]>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+        "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+        <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+        %BOOK_ENTITIES;
+        ]>
 <section id="sect-User_Guide-Contribute_Content">
-  <title>Contribute Content</title>
-  <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
-    <title>Edit Mode</title>
-    <para>
-   A site in &PRODUCT; has two modes (Published mode and Edit mode) which are specific for editing site and viewing site. You can easily switch between these modes by selecting in the drop-down list at the top left corner.
-  </para>
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata align="center" fileref="images/twomodes.png" format="PNG"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata width="148mm" align="center" fileref="images/twomodes.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-    <itemizedlist>
-      <listitem>
+    <title>Contribute content</title>
+    <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
+        <title>Edit mode</title>
+        <para>When you access a site, by default, the site contents are in the published mode and you cannot edit
+            them.
+        </para>
         <para>
-     <emphasis role="bold">Edit mode</emphasis>: In this mode, you can edit all contents of the current site. When hovering the mouse over contents, you can see edit icons which enable you to quickly edit these contents. You can take advantage of this feature to submit contents to a page.
-    </para>
-      </listitem>
-      <listitem>
-        <para>
-     <emphasis role="bold">Published mode</emphasis>: In this mode, you only can view the current site without editing the contents of the site.
-    </para>
-      </listitem>
-    </itemizedlist>
-    <para>
-   When you login to a site, by default, the page is in the published mode, you cannot see any quick edit icon and cannot edit site contents at this time:
-  </para>
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata align="center" fileref="images/publishedmode.png" format="PNG"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/publishedmode.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-    <para>
-   When a page is switched to the Edit mode, you can see quick edit icons on the site contents when mousing over them.
-  </para>
-    <para>
-   For Single Content Viewer (SCV), you can see the current state of the content, the Edit Content icon and References icon.
-  </para>
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-    <para>
-   For Content List Viewer (CLV), you can see the current state of the content, the Edit Content, References icon, the Add Content icon and the Management Content icon.
-  </para>
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata align="center" fileref="images/lcv.png" format="PNG"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/lcv.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-  </section>
-  <section id="sect-User_Guide-Contribute_Content-InContext_Editing">
-    <title>InContext Editing</title>
-    <para>
-   <emphasis role="bold">InContext Editing</emphasis> enables you to edit content &quot;in context&quot; rather than having a WYSIWYG editor pop-up over the top of the page. This feature makes page editing a much more user intuitive process, with the new content automatically taking on the previous contents.
-  </para>
-    <para>
-   To use <emphasis role="bold">InContext Editing</emphasis>, turn on the <emphasis role="bold">Edit Mode</emphasis>.
-  </para>
-    <section id="sect-User_Guide-InContext_Editing-Add_Content">
-      <title>Add Content</title>
-      <para>
-    Adding a new content by InContext Editing is enabled for the Content List Viewer (CLV).
-   </para>
-      <para>
-    Do the following:
-   </para>
-      <procedure id="proc-User_Guide-Add_Content-Add_a_new_content">
-        <title>Add a new content</title>
-        <step>
-          <para>
-      Turn on the <emphasis role="bold">Edit Mode</emphasis>, and then hover the mouse over the CLV that you want to add a new content in.
-     </para>
-        </step>
-        <step>
-          <para>
-      Click the <emphasis role="bold">Add Content</emphasis> icon on the CLV.
-     </para>
-          <para>
-      You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with a list of content templates for you to select.
-     </para>
-          <mediaobject id="proc-User_Guide-Add_Content-Add_a_new_content-Content_Types">
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/documentform.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-        <step id="proc-User_Guide-Add_Content-Add_a_new_content-step3">
-            <para>
-                Select a template for your content by clicking it and the corresponding template is opened. Each template has an Info bar on the top of the template:
-            </para>
+            However, each site in &PRODUCT; has the
+            <emphasis role="bold">Edit</emphasis>
+            mode which enables you to edit all contents of the current site. When hovering your cursor over contents,
+            you can see edit icons which enable you to quickly edit these contents. You can take advantage of this
+            feature to submit contents to a page.
+        </para>
+        <para>To turn on the
+            <emphasis role="bold">Edit</emphasis>
+            mode, hover your cursor over
+            <emphasis role="bold">Edit</emphasis>
+            on the Administration bar, then select
+            <emphasis role="bold">Content</emphasis>
+            from the drop-down menu.
             <mediaobject>
+                <imageobject role="html">
+                    <imagedata align="center" fileref="images/twomodes.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata width="148mm" align="center" fileref="images/twomodes.png" format="PNG"/>
+                </imageobject>
+            </mediaobject>
+        </para>
+        <para>
+            For Single Content Viewer (SCV), you can see the current state of the content, the Edit Content icon and
+            Preferences icon.
+        </para>
+        <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" fileref="images/info_bar.png" format="PNG"/>
+                <imagedata align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/info_bar.png" format="PNG"/>
+                <imagedata width="150mm" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
             </imageobject>
-          </mediaobject>
-            <para>Details:</para>
-            <itemizedlist>
-                <listitem>
-                    <para><guilabel>Change content type</guilabel>: this link allows you to select another content type.</para>
-                </listitem>
-                <listitem>
-                    <para><guilabel>Save</guilabel>: this button allows you to save the content without closing the content form.</para>
-                </listitem>
-                <listitem>
-                    <para><guilabel>Save &amp; Close</guilabel>: this button allows you to save the content and close the content form.</para>
-                </listitem>
-                <listitem>
-                    <para><guilabel>Close</guilabel>: this button allows you close the content form without saving the content.</para>
-                </listitem>
-                <listitem>
+        </mediaobject>
+        <para>
+            For Content List Viewer (CLV), you can see the current state of the content, the Edit Content icon, the
+            Preferences icon, the Add Content icon and the Management Content icon.
+        </para>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata align="center" fileref="images/lcv.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata width="150mm" align="center" fileref="images/lcv.png" format="PNG"/>
+            </imageobject>
+        </mediaobject>
+    </section>
+    <section id="sect-User_Guide-Contribute_Content-InContext_Editing">
+        <title>InContext Editing</title>
+        <para>
+            By using the
+            <emphasis role="bold">InContext Editing</emphasis>
+            feature, the process of editing a page becomes more intuitive. This feature allows you to edit content
+            &quot;in context&quot; without using the WYSIWYG editor, and the new content will automatically override old
+            one.
+        </para>
+        <para>
+            To use <emphasis role="bold">InContext Editing</emphasis>, turn on the <emphasis role="bold">Edit Mode</emphasis>.
+        </para>
+        <section id="sect-User_Guide-InContext_Editing-Add_Content">
+            <title>Add a content</title>
+            <para>
+                Adding a new content by using
+                <emphasis role="bold">InContext Editing</emphasis>
+                is enabled for the
+                <emphasis role="bold">Content List Viewer</emphasis>
+                (CLV).
+            </para>
+            <procedure>
+                <step>
                     <para>
+                        Turn on the <emphasis role="bold">Edit Mode</emphasis>, then hover your cursor over the CLV to
+                        which you want to add a new content.
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="6mm" fileref="images/fullscreen_option.png" format="PNG"/>
+                                <imagedata fileref="images/Add_Content_icon.png" format="PNG"/>
                             </imageobject>
-                        </inlinemediaobject>: this option allows you to witch on/off the fullscreen mode.
+                        </inlinemediaobject>
+                        on the CLV.
                     </para>
-                </listitem>
-            </itemizedlist>
-        </step>
-        <step>
-            <para>
-                Fulfill all the fields in the form. See
-                <xref linkend="sect-User_Guide-Actions-Add_a_document"/>
-                to know how to create the different content types.
-            </para>
-        </step>
-        <step>
-            <para>
-                Click
-                <guilabel>Save</guilabel>
-                or <guilabel>Save and Close</guilabel> to save the document.
-            </para>
-        </step>
-      </procedure>
-      <note>
-        <para>
-     Saving a document in which folder depends on the path you choose in <xref linkend="sect-User_Guide-InContext_Editing-Preferences"/>.
-    </para>
-      </note>
-    </section>
-    <section id="sect-User_Guide-InContext_Editing-Edit_Content">
-      <title>Edit Content</title>
-      <para>
-    You can edit any contents on the homepage for SCV and CLV with InContext Editing. For CLV, you only can edit each content in it.
-   </para>
-      <para>
-    Do the following:
-   </para>
-      <procedure id="proc-User_Guide-Edit_Content-Edit_a_content">
-        <title>Edit a content</title>
-        <step>
-          <para>
-      Turn on the <emphasis role="bold">Edit Mode</emphasis> &gt; Hover the mouse over the content you want to edit.
-     </para>
-        </step>
-        <step>
-          <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata width="6mm" fileref="images/inline_edit_icon.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>pencil</phrase>
-              </textobject>
-            </inlinemediaobject> icon at the right corner of the content you want to edit. You will be redirected to <emphasis role="bold">Content Explorer </emphasis> with the document form for you to edit.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/editform.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/editform.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      Edit the content, and then click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to save your changes.
-     </para>
-        </step>
-        <step>
-          <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata width="9mm" fileref="images/backicon.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>green reverse arrow</phrase>
-              </textobject>
-            </inlinemediaobject> icon to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the &quot;Draft&quot; state with its visible modification.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/draftcontent.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/draftcontent.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-          <step>
-              <para>To publish the edited content, click the
-                  <inlinemediaobject>
-                      <imageobject>
-                          <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
-                      </imageobject>
-                  </inlinemediaobject>
-                  icon, or click
-                  <inlinemediaobject>
-                      <imageobject>
-                          <imagedata width="5mm" fileref="images/ publish_icon1.png" format="PNG"/>
-                      </imageobject>
-                  </inlinemediaobject>
-                  on the action bar and it is now in the published state.
-              </para>
-          </step>
-      </procedure>
-        <note>
-            <para>
-                You cannot see the edited content in the Publish mode. To know more about the Publication process of a
-                content, see <xref linkend="sect-User_Guide-Contribute_Content-Publication_Process"/>.
-            </para>
-        </note>
-    </section>
-    <section id="sect-User_Guide-InContext_Editing-Manage_Content">
-      <title>Manage Content</title>
-      <para>
-    With InContext Editing, you can easily manage a Content List Viewer on the homepage. You can add a new content in the CLV, edit, delete an existing content or copy/cut/paste to another CLV and take more actions in the right-click menu.</para>
-      <para>
-    Do the following to manage content in the CLV.</para>
-      <procedure id="proc-User_Guide-Manage_Content-Manage_Content">
-        <title>Manage Content</title>
-        <step>
-          <para>
-      Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> the <emphasis role="bold">Manage Content</emphasis> icon of the Content List Viewer that you want to manage on the homepage.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/managecontent.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/managecontent.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      The browser will redirect to <emphasis role="bold">Content Explorer</emphasis>:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/managecontent1.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/managecontent1.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      To add a new document to the CLV, click <emphasis role="bold">Add Document</emphasis> on the action bar and do the same steps as <xref linkend="sect-User_Guide-InContext_Editing-Add_Content"/>.
-     </para>
-          <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down menu. See more details how to take the actions in <xref linkend="sect-User_Guide-Actions_on_Folders_and_Documents"/> </para>
-        </step>
-      </procedure>
-    </section>
-    <section id="sect-User_Guide-InContext_Editing-Preferences">
-      <title>Preferences</title>
-      <para>
-    Preferences enable you to edit contents in the Single Content Viewer (SCV) and the Content List Viewer (CLV), reset the display of the contents in SCV and CLV and publish contents.
-   </para>
-      <formalpara id="form-User_Guide-Preferences-Content_Detail_Preferences">
-        <title>Content Detail Preferences</title>
-        <para>
-     To edit the Single Content Viewer, do the followings:
-    </para>
-      </formalpara>
-      <procedure id="proc-User_Guide-Preferences-_Edit_Content_Detail_Viewer">
-        <title> Edit Content Detail Viewer</title>
-        <step>
-          <para>
-      Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Single Content Viewer.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/scvpreferences.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/scvpreferences.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      The Content Detail Preferences dialog appears:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/scvpreferences1.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/scvpreferences1.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      Details:
-     </para>
-          <para>
-      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata width="7mm" fileref="images/blueplusicon.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>blue plus</phrase>
-              </textobject>
-            </inlinemediaobject> icon.
-     </para>
-          <para>
-      <emphasis role="bold">Display Settings:</emphasis> Allow configuring Title, Date and OptionBar visibility.
-     </para>
-          <itemizedlist>
-            <listitem>
-              <para>
-        <emphasis role="bold">Show Title</emphasis>: Specify whether the title of the content is displayed or not.
-       </para>
-            </listitem>
-            <listitem>
-              <para>
-        <emphasis role="bold">Show Date</emphasis>: Specify whether the date of the content publication is displayed or not.
-       </para>
-            </listitem>
-            <listitem>
-              <para>
-        <emphasis role="bold">Show Option Bar:</emphasis>Show or hide the Option bar used to show the print link.
-       </para>
-            </listitem>
-          </itemizedlist>
-          <para>
-      <emphasis role="bold">Print Setting:</emphasis>
-     </para>
-          <itemizedlist>
-            <listitem>
-              <para>
-        <emphasis role="bold">Show in page</emphasis>: The content is shown in the page.
-       </para>
-            </listitem>
-            <listitem>
-              <para>
-        <emphasis role="bold">with</emphasis>: Parameters contains the content path.
-       </para>
-            </listitem>
-          </itemizedlist>
-            <para>
-                <emphasis role="bold">Advanced</emphasis>
-                link: When clicking on this link, the Advanced pane will be shown.
-            </para>
-            <itemizedlist>
-                <listitem>
-                    <para><guilabel>Contextual Content</guilabel>: If
-                        <emphasis role="bold">Contextual Content</emphasis>
-                        property is set as &quot;Disable&quot;, the Advanced pane is closed by default. The content
-                        should
-                        enable “dynamic navigation” that interprets the URL and shows a content.
-                    </para>
-                </listitem>
-                <listitem>
                     <para>
-                        <guilabel>Contents Visibility</guilabel>: Allows you to use a cache shared between users to get
-                        contents. If you want the contents displayed in CLV or SCV to be got from one cache,
-                        select
-                        <guilabel>Restricted by Authentication</guilabel>, and in verse, select <guilabel>Restricted by
-                        Users</guilabel>.
+                        You will be redirected to the
+                        <emphasis role="bold">Sites Explorer</emphasis>
+                        with a list of content templates for you to select.
                     </para>
-                </listitem>
-            </itemizedlist>
-          <note>
+                    <mediaobject id="proc-User_Guide-Add_Content-Add_a_new_content-Content_Types">
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/documentform.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </step>
+                <step>
+                    <para xml:id="proc-User_Guide-Add_Content-Add_a_new_content-step3">
+                        Click one template for your content. Each template has an Info bar on the top of the template.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/info_bar.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/info_bar.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                    <para>
+                        <emphasis role="bold">Details:</emphasis>
+                    </para>
+                    <table>
+                        <tgroup cols="2">
+                            <thead>
+                                <row>
+                                    <entry>Field</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Change Content Type</emphasis>
+                                    </entry>
+                                    <entry>Select another content types.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Save</emphasis>
+                                    </entry>
+                                    <entry>Save the content without closing the content form.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Save &amp; Close</emphasis>
+                                    </entry>
+                                    <entry>Save the content and close the content form.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Close</emphasis>
+                                    </entry>
+                                    <entry>Close the content form without saving the content.</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <inlinemediaobject>
+                                            <imageobject>
+                                                <imagedata width="6mm" fileref="images/fullscreen_option.png"
+                                                           format="PNG"/>
+                                            </imageobject>
+                                        </inlinemediaobject>
+                                    </entry>
+                                    <entry>Switch on/off the full-screen mode.</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </step>
+                <step>
+                    <para>
+                        Fill all the fields in the form. See the
+                        <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link>
+                        section to know how to create the different content types.
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
+                        <emphasis role="bold">Save</emphasis>
+                        or
+                        <emphasis role="bold">Save &amp; Close</emphasis>
+                        to save the document.
+                    </para>
+                </step>
+            </procedure>
+            <note>
+                <para>The folder, where a document is saved, is the path you have selected in the
+                <link linkend="sect-User_Guide-InContext_Editing-Preferences">Preferences</link>
+                section.</para>
+            </note>
+        </section>
+        <section id="sect-User_Guide-InContext_Editing-Edit_Content">
+            <title>Edit a content</title>
             <para>
-       Click the 
-       <inlinemediaobject>
-                <imageobject>
-                  <imagedata width="6mm" fileref="images/questionicon.png" format="PNG"/>
-                </imageobject>
-                <textobject>
-                  <phrase>question mark</phrase>
-                </textobject>
-              </inlinemediaobject> icon to see a quick help pane for each section.
-      </para>
-          </note>
-        </step>
-        <step>
-          <para>
-      Click the plus icon next to the <emphasis role="bold">Content Path</emphasis> to re-select another content. The Select Content dialog appears:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/selectcontent.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/selectcontent.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      Choose a folder on the left panel and a content in the folder on the right panel. The content chosen will be displayed in the <emphasis role="bold">Content Path</emphasis> field.
-     </para>
-        </step>
-        <step>
-          <para>
-            Tick the checkboxes, including the <emphasis role="bold">Show Title</emphasis> box, the <emphasis role="bold">Show Date</emphasis> and the <emphasis role="bold">Show Option bar</emphasis> box if you want to display the content title, the publication date and the print button like the illustration below:
-           </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/editedscv.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/editedscv.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      In the <emphasis role="bold">Print Setting</emphasis> part, click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>magnifying glass</phrase>
-              </textobject>
-            </inlinemediaobject> icon to open the <emphasis role="bold">UIPageselector</emphasis> dialog, you will see <emphasis role="bold">Printviewer.</emphasis>
-     </para>
-          <para>
-      Click the <emphasis role="bold">Print</emphasis> button, the content is opened in the print viewer page.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/printreview.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/printreview.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/Introduce&amp;isPrint=true
-     </para>
-          <para>
-      In which:
-     </para>
-          <itemizedlist>
-            <listitem>
-              <para>
-        <emphasis role="bold">printviewer?</emphasis>: the print viewer page of the content.
-       </para>
-            </listitem>
-            <listitem>
-              <para>
-        <emphasis role="bold">content-id</emphasis>: the parameter containing the content path.
-       </para>
-            </listitem>
-          </itemizedlist>
-        </step>
-        <step>
-          <para>
-      Click <emphasis role="bold">Save </emphasis> to save all the changes.
-     </para>
-        </step>
-      </procedure>
-      <formalpara id="form-User_Guide-Preferences-Content_List_Preferences.">
-        <title>Content List Preferences</title>
-        <para>
-     To edit the Single Content Viewer, do the following:
-    </para>
-      </formalpara>
-      <procedure id="proc-User_Guide-Preferences-Edit_Content_List_Viewer">
-        <title>Edit Content List Viewer</title>
-        <step>
-          <para>
-      Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Content List Viewer.
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/clvpreferences.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/clvpreferences.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      The Content List Preferences dialog appears:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/clvpreferences1.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/clvpreferences1.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      Details:
-     </para>
-          <table frame="all">
-            <title/>
-            <tgroup cols="2">
-              <colspec colname="c1"/>
-              <colspec colname="c2"/>
-              <tbody>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Mode</emphasis>
-                  </entry>
-                  <entry> This mode is to select web content for list viewer. There are two modes: <para>
-           By Folder: This mode allows you to select a content folder in the Folder path field.
-          </para><para>
-           By Content: This mode allows you to select by the content in a specific folder in Folder path field.
-          </para></entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Folder path</emphasis>
-                  </entry>
-                  <entry> The path to a location of a folder that contains the content. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Order by</emphasis>
-                  </entry>
-                  <entry> The field is selected to sort content in the list viewer. You can sort content by Title, Date created or Date modified in ascending or descending order. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Header</emphasis>
-                  </entry>
-                  <entry> The title of all contents that are listed in List Viewer. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Viewer template</emphasis>
-                  </entry>
-                  <entry> The template is used to view content list. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Paginator template</emphasis>
-                  </entry>
-                  <entry> The template is used to view each content in the list. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Items per page</emphasis>
-                  </entry>
-                  <entry> The number of items will be displayed per page. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show image</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide the illustration of each published web content/document. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show summary</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide the summary of each web content/document. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show header</emphasis>
-                  </entry>
-                  <entry> The option is whether to show a header or not. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show refresh button</emphasis>
-                  </entry>
-                  <entry> The option is whether to show the refresh button at the left bottom of this page or not. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show title</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide title of each published web content and/or document. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show date created</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide the created date of each published web content/document. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Show link</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide the link of web content and/or document. </entry>
-                </row>
-                <row>
-                  <entry>
-                    <emphasis role="bold">Read more</emphasis>
-                  </entry>
-                  <entry> The option is to show or hide the Read more to read all the content of a web content and/or document. </entry>
-                </row>
-              </tbody>
-            </tgroup>
-          </table>
-        </step>
-        <step>
-          <para>
-      Browse the documents or web content of an available site by clicking the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/plusicon.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>blue plus</phrase>
-              </textobject>
-            </inlinemediaobject> icon next to the<emphasis role="bold"> folder path</emphasis> field.
-     </para>
-        </step>
-        <step>
-          <para>
-      If you select the <emphasis role="bold">By folder</emphasis> mode, select an available site on the left, then select a folder that contains contents (documents and/or web content) on the right by clicking the folder.
-     </para>
-          <para>
-      If you select the <emphasis role="bold">By content </emphasis>mode, select an available folder from the left panel, all content in this folder will be listed on the right panel. Click a content on the right that you want to add to the content list. A message informs that you have successfully added it in the Content List. The selected content is listed in the Content List.
-     </para>
-        </step>
-        <step>
-          <para>
-      Enter a header for the content list in the <emphasis role="bold">Header</emphasis> field if you want.
-     </para>
-        </step>
-        <step>
-          <para>
-      Select a template to display the content list in the template list.
-     </para>
-        </step>
-        <step>
-          <para>
-      Tick/untick some options that you want.
-     </para>
-        </step>
-        <step>
-          <para>
-      Click <emphasis role="bold">Save</emphasis> to save all the changes.
-     </para>
-        </step>
-      </procedure>
-    </section>
-  </section>
-  <section id="sect-User_Guide-Contribute_Content-Inline_Editing">
-    <title>Inline Editing</title>
-    <para>The Inline Editing allows users to edit directly on the page without going to a separate one. 
-    Now, your interaction will become more intuitive as you can edit the text right at the shown same location. 
-    </para>
-    <para>
-    To do the inline editing, do as follows:
-    </para>
-    <procedure>
-      <step>
-        <para>Select the page you want to edit. For example, &quot;acme&quot;.</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/acme_inline_editing.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/acme_inline_editing.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Select the <emphasis role="bold">Edit</emphasis> mode on the administration bar.
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/Edit_mode_Inline.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/Edit_mode_Inline.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-        <para>You will be directed to the edit mode of your selected page.</para>
-      </step>
-      <step>
-        <para>Hover your cursor over the area you want to edit.
-    </para>
-        <para>The editable area will be highlighted as below.</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Double-click the area until the Edit area is shown as below.
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-        <para> In case the hovered area is in the Rich Text format, the Edit area will be displayed with the <ulink url="http://docs.cksource.com/CKEditor_3.x/Users_Guide">CKEditor</ulink> as below:</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Make changes on the Edit area, then click
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata width="5mm" fileref="images/Accepticon.png" format="PNG"/>
-            </imageobject>
-          </inlinemediaobject>
-     to accept;</para>
-        <para> Or click 
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata width="5mm" fileref="images/Cancelicon.png" format="PNG"/>
-            </imageobject>
-          </inlinemediaobject>
-     to discard changes.
-      </para>
-      </step>
-        <step>
-            <para>Publish the edited content:</para>
-            <para>After the content is changed, it is in the Draft state:</para>
-            <mediaobject>
-                <imageobject role="html">
-                    <imagedata align="center" fileref="images/publish_Inline.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                    <imagedata width="150mm" align="center" fileref="images/publish_Inline.png" format="PNG"/>
-                </imageobject>
-            </mediaobject>
-            <para>Click the
-                <inlinemediaobject>
-                    <imageobject>
-                        <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
-                    </imageobject>
-                </inlinemediaobject>
-               icon to publish the content, and it is now in the Published state:
+                You can edit any contents on the homepage for SCV and CLV with InContext Editing. However, for CLV, you only can
+                edit each content in it.
             </para>
-            <mediaobject>
-                <imageobject role="html">
-                    <imagedata align="center" fileref="images/publish-state.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                    <imagedata width="150mm" align="center" fileref="images/publish-state.png" format="PNG"/>
-                </imageobject>
-            </mediaobject>
+            <procedure>
+                <step>
+                    <para>
+                        Turn on the
+                        <emphasis role="bold">Edit</emphasis>
+                        mode by hovering your cursor over
+                        <emphasis role="bold">Edit</emphasis>
+                        on the Administration bar, then selecting
+                        <emphasis role="bold">Content.</emphasis>
+                    </para>
+                </step>
+                <step>
+                    <para>Hover your cursor over the content you want to edit, and click
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata width="6mm" fileref="images/inline_edit_icon.png" format="PNG"/>
+                            </imageobject>
+                            <textobject>
+                                <phrase>pencil</phrase>
+                            </textobject>
+                        </inlinemediaobject>
+                        at the right corner. You will be directed to
+                        <emphasis role="bold">Sites Explorer</emphasis>
+                        with the document form for you to edit.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/editform.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/editform.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </step>
+                <step>
+                    <para>
+                        Make changes on the content, then click
+                        <emphasis role="bold">Save</emphasis>
+                        or
+                        <emphasis role="bold">Save &amp; Close</emphasis>
+                        to accept your changes.
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata width="9mm" fileref="images/backicon.png" format="PNG"/>
+                            </imageobject>
+                            <textobject>
+                                <phrase>green reverse arrow</phrase>
+                            </textobject>
+                        </inlinemediaobject>
+                        to return to the site. In the
+                        <emphasis role="bold">Edit</emphasis>
+                        mode, your new content will be in the &quot;Draft&quot; state with its visible modifications.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/draftcontent.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/draftcontent.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </step>
+                <step>
+                    <para>Click
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                            </imageobject>
+                        </inlinemediaobject>
+                        , or
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata width="5mm" fileref="images/publish_icon1.png" format="PNG"/>
+                            </imageobject>
+                        </inlinemediaobject>
+                        on the action bar to publish your edited content. Your content is now in the "Published" state.
+                    </para>
+                </step>
+            </procedure>
+            <note>
+                <para>
+                    You cannot see the edited content in the draft state when you turn off the
+                    <emphasis role="bold">Edit</emphasis>
+                    mode.
+                </para>
+            </note>
+        </section>
+        <section id="sect-User_Guide-InContext_Editing-Manage_Content">
+            <title>Manage contents</title>
+            <para>
+                With <emphasis role="bold">InContext Editing</emphasis>, you can easily manage a Content List Viewer on
+                the homepage. You can add a new content in the CLV, edit, delete an existing content or copy/cut/paste
+                to another CLV and take more actions in the right-click menu.
+            </para>
+            <citetitle>
+            <para xml:id="proc-User_Guide-Manage_Content-Manage_Content">
+                <emphasis role="bold">
+                    Manage content in the CLV
+                </emphasis>
+            </para>
+            </citetitle>
+            <procedure>
+                <step>
+                    <para>
+                        Turn on the
+                        <emphasis role="bold">Edit</emphasis>
+                        mode.
+                    </para>
+                </step>
+                <step>
+                    <para>Hover your cursor over the CLV which you want to manage on the homepage, and click
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/Manage_content.png" format="PNG"/>
+                            </imageobject>
+                        </inlinemediaobject>
+                        .
+                    </para>
+                    <para>
+                        You will be directed to the
+                        <emphasis role="bold">Sites Explorer</emphasis>
+                        page.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/managecontent1.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/managecontent1.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </step>
+                <step>
+                    <para>
+                        To add a new document to the CLV, click
+                        <emphasis role="bold">Add Content</emphasis>
+                        on the action bar and do the same steps as in the
+                        <link linkend="sect-User_Guide-InContext_Editing-Add_Content">Add Content</link>
+                        section.
+                    </para>
+                    <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down
+                        menu. For more details, see the
+                        <link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and
+                            documents
+                        </link>
+                        section.
+                    </para>
+                </step>
+            </procedure>
+        </section>
+        <section id="sect-User_Guide-InContext_Editing-Preferences">
+            <title>Preferences</title>
+            <para>
+                Preferences enable you to edit contents in the Single Content Viewer (SCV) and the Content List Viewer
+                (CLV), reset the display of the contents in SCV and CLV and publish contents.
+            </para>
+            <citetitle>
+            <para xml:id="form-User_Guide-Preferences-Content_Detail_Preferences"><emphasis role="bold">Content Detail Preferences</emphasis></para>
+            </citetitle>
+                <para>
+                    To edit the Single Content Viewer, do as follows:
+                </para>
+
+                <procedure>
+                    <step>
+                        <para>
+                            Turn on the
+                            <emphasis role="bold">Edit</emphasis>
+                            mode.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Select
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/Preferences_icon.png" format="PNG"/>
+                                </imageobject>
+                            </inlinemediaobject>
+                            of a Single Content Viewer.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/scvpreferences.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center" fileref="images/scvpreferences.png"
+                                           format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                        <para>
+                            The
+                            <emphasis role="bold">Content Detail Preferences</emphasis>
+                            dialog appears.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/scvpreferences1.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center" fileref="images/scvpreferences1.png"
+                                           format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                        <para>
+                            <emphasis role="bold">Details:</emphasis>
+                        </para>
+                        <table>
+                            <tgroup cols="2">
+                                <thead>
+                                    <row>
+                                        <entry>
+                                            Field
+                                        </entry>
+                                        <entry>
+                                            Description
+                                        </entry>
+
+                                    </row>
+
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Content Selection</emphasis>
+                                        </entry>
+                                        <entry>
+                                            Select the path of the content that you want to show by clicking
+                                            <inlinemediaobject>
+                                                <imageobject>
+                                                    <imagedata width="7mm" fileref="images/blueplusicon.png"
+                                                               format="PNG"/>
+                                                </imageobject>
+                                                <textobject>
+                                                    <phrase>blue plus</phrase>
+                                                </textobject>
+                                            </inlinemediaobject>
+                                            .
+                                        </entry>
+
+                                    </row>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Display Settings</emphasis>
+                                        </entry>
+                                        <entry>
+                                            Configure the visibility of Title, Date and Option bar.
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Title:</emphasis>
+                                                        Select this checkbox to display the title of the content.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Date:</emphasis>
+                                                        Select this checkbox to display the date of the content
+                                                        publication.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Option Bar:</emphasis>
+                                                        Select this checkbox to display the
+                                                        <emphasis role="bold">Option</emphasis>
+                                                        bar which is used to show the print link.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </entry>
+
+                                    </row>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Print Settings</emphasis>
+                                        </entry>
+                                        <entry>
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show in Page:</emphasis>
+                                                        The content is shown in the page.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">with:</emphasis>
+                                                        Parameters contains the content path.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </entry>
+                                    </row>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Advanced</emphasis>
+                                            link:
+                                        </entry>
+                                        <entry>When clicking this link, the
+                                            <emphasis role="bold">Advanced</emphasis>
+                                            pane will be shown with two parts.
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Dynamic Navigation:</emphasis>
+                                                        Allow you to get a parameter to configure the
+                                                        portlet by URL. It means that the URL containing the content
+                                                        path can be dynamically changed.
+                                                    </para>
+                                                    <itemizedlist>
+                                                        <listitem>
+                                                            <para>
+                                                                <emphasis role="bold">Disable:</emphasis>
+                                                                By default, if the property is set as &quot;Disable&quot;,
+                                                                the
+                                                                <emphasis role="bold">Advanced</emphasis>
+                                                                pane is closed by default. It means the single content
+                                                                will be opened by an URL
+                                                                containing the Content Path.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                <emphasis role="bold">Enable:</emphasis>
+                                                                This portlet is configured with the provided parameter
+                                                                ("content-id" by default) and the content.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                <emphasis role="bold">By:</emphasis>
+                                                                This parameter is the key in the URL to let SCV know
+                                                                which really is the path in the current URL. It is
+                                                                editable when the
+                                                                <emphasis role="bold">Contextual Content</emphasis>
+                                                                is set to "Enable".
+                                                            </para>
+                                                        </listitem>
+                                                    </itemizedlist>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Contents Visibility:</emphasis>
+                                                        Allow you to use a cache shared between users to
+                                                        get contents. If you want to get contents, which are displayed
+                                                        in CLV or SCV, from one cache, select
+                                                        <emphasis role="bold">Restricted by Authentication.</emphasis>
+                                                        If not, select
+                                                        <emphasis role="bold">Restricted by User Roles.</emphasis>
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </entry>
+                                    </row>
+
+
+                                </tbody>
+
+                            </tgroup>
+
+                        </table>
+                        <note>
+                            <para>
+                                Hover your cursor over
+                                <inlinemediaobject>
+                                    <imageobject>
+                                        <imagedata width="6mm" fileref="images/questionicon.png" format="PNG"/>
+                                    </imageobject>
+                                    <textobject>
+                                        <phrase>question mark</phrase>
+                                    </textobject>
+                                </inlinemediaobject>
+                                to see a quick help for each section.
+                            </para>
+                        </note>
+                    </step>
+                    <step>
+                        <para>
+                            Click
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/plus_icon.png" format="PNG"/>
+                                </imageobject>
+                            </inlinemediaobject>
+                            next to the
+                            <emphasis role="bold">Content Path</emphasis>
+                            to select another content. The
+                            <emphasis role="bold">Select Content</emphasis>
+                            dialog appears.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="user-guide/images/Select_Content_window.png"
+                                           format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center"
+                                           fileref="user-guide/images/Select_Content_window.png" format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                    </step>
+                    <step>
+                        <para>
+                            Select a folder on the left pane, and content in the folder on the right pane. The selected
+                            content will be displayed in the
+                            <emphasis role="bold">Content Path</emphasis>
+                            field.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Tick the checkboxes, including
+                            <emphasis role="bold">Show Title, Show Date</emphasis>
+                            and
+                            <emphasis role="bold">Show Option Bar,</emphasis>
+                            if you want to display the content title, the publication date and the print button like the
+                            illustration below.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/editedscv.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center" fileref="images/editedscv.png" format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                        <para>
+                            <emphasis role="bold">i.</emphasis>
+                            In the
+                            <emphasis role="bold">Print Setting</emphasis>
+                            part, click
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
+                                </imageobject>
+                                <textobject>
+                                    <phrase>magnifying glass</phrase>
+                                </textobject>
+                            </inlinemediaobject>
+                            to open the
+                            <emphasis role="bold">UIPageselector</emphasis>
+                            dialog. You will see
+                            <emphasis role="bold">Printviewer.</emphasis>
+                        </para>
+                        <para>
+                            <emphasis role="bold">ii.</emphasis>
+                            Click the
+                            <emphasis role="bold">Print</emphasis>
+                            button. The content is opened in the print viewer page.
+                        </para>
+                        <!--    <para>
+                   <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/Introduce&amp;isPrint=true
+                  </para>
+                       <para>
+                   In which:
+                  </para>
+                       <itemizedlist>
+                         <listitem>
+                           <para>
+                     <emphasis role="bold">printviewer?</emphasis>: the print viewer page of the content.
+                    </para>
+                         </listitem>
+                         <listitem>
+                           <para>
+                     <emphasis role="bold">content-id</emphasis>: the parameter containing the content path.
+                    </para>
+                         </listitem>
+                       </itemizedlist> -->
+                    </step>
+                    <step>
+                        <para>
+                            Click
+                            <emphasis role="bold">Save</emphasis>
+                            to save all your changes.
+                        </para>
+                    </step>
+                </procedure>
+             <citetitle>
+            <para xml:id="form-User_Guide-Preferences-Content_List_Preferences.">
+                <emphasis role="bold">Content List Preferences</emphasis>
+                </para>
+                 </citetitle>
+                <para>
+                    To edit the Content List Viewer, do as follows:
+                </para>
+                <procedure>
+                    <step>
+                        <para>
+                            Turn on the
+                            <emphasis role="bold">Edit</emphasis>
+                            mode.
+                        </para>
+                    </step>
+                    <step>
+                        <para>Select the
+                            <emphasis role="bold">Preferences</emphasis>
+                            icon of a Content List Viewer.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/clvpreferences.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center" fileref="images/clvpreferences.png"
+                                           format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                        <para>
+                            The
+                            <emphasis role="bold">Content List Preferences</emphasis>
+                            dialog appears.
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/clvpreferences1.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata width="150mm" align="center" fileref="images/clvpreferences1.png"
+                                           format="PNG"/>
+                            </imageobject>
+                        </mediaobject>
+                        <para>
+                            <emphasis role="bold">Details:</emphasis>
+                        </para>
+                        <table>
+                            <tgroup cols="2">
+                                <thead>
+                                    <row>
+                                        <entry>
+                                            Field
+                                        </entry>
+                                        <entry>
+                                            Description
+                                        </entry>
+                                    </row>
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Contents Selection</emphasis>
+                                        </entry>
+                                        <entry>
+                                            <para><emphasis role="bold">Mode:</emphasis> This mode is to select web
+                                                content for the list viewer. There are two modes:
+                                            </para>
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">By Folder:</emphasis>
+                                                        This mode allows you to select a content folder in the
+                                                        <emphasis role="bold">Folder Path</emphasis>
+                                                        field.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">By Contents:</emphasis>
+                                                        This mode allows you to select by the content in a specific
+                                                        folder in
+                                                        <emphasis role="bold">Folder Path</emphasis>
+                                                        field.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                            <para>
+                                                <emphasis role="bold">Folder Path:</emphasis>
+                                                The path to a location of a folder that contains the content.
+                                            </para>
+                                            <para>
+                                                <emphasis role="bold">Order by:</emphasis>
+                                                Sort content in the List Viewer by
+                                                <emphasis role="bold">Title, Date Created</emphasis>
+                                                or
+                                                <emphasis role="bold">Date Modified</emphasis>
+                                                in ascending or descending order.
+                                            </para>
+                                        </entry>
+                                    </row>
+                                    <row>
+                                        <entry>
+                                            <emphasis role="bold">Display Settings</emphasis>
+                                        </entry>
+                                        <entry>
+                                            <para>
+                                                <emphasis role="bold">Header:</emphasis>
+                                                The title of all contents that are listed in the List Viewer.
+                                            </para>
+                                            <para>
+                                                <emphasis role="bold">Template:</emphasis>
+                                                The template which is used to view the content list.
+                                            </para>
+                                            <para>
+                                                <emphasis role="bold">Paginator:</emphasis>
+                                                The template which is used to view each content in the list.
+                                            </para>
+                                            <para>
+                                                <emphasis role="bold">Items per Page:</emphasis>
+                                                The number of items which will be displayed per page.
+                                            </para>
+                                            <para>The following options which can be shown or hidden by ticking or
+                                                unticking checkboxes respectively.
+                                            </para>
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Title:</emphasis>
+                                                        Title of each published web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Header:</emphasis>
+                                                        Header of each published web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Refresh:</emphasis>
+                                                        The
+                                                        <emphasis role="bold">Refresh</emphasis>
+                                                        button at the left bottom of the page.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Image:</emphasis>
+                                                        The illustration of each published web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Date:</emphasis>
+                                                        The created date of each published web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show More Link:</emphasis>
+                                                        The
+                                                        <emphasis role="bold">Read more</emphasis>
+                                                        link to read all the content of a web content and/or document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Summary:</emphasis>
+                                                        The summary of each web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show Link:</emphasis>
+                                                        The link of web content/document.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show RSS Link:</emphasis>
+                                                        The RSS link of all contents of a web content/document.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </entry>
+                                    </row>
+                                    <row>
+                                        <entry xml:id="Dynamic-Navigation">
+                                            <emphasis role="bold">Advanced</emphasis>
+                                            link
+                                        </entry>
+                                        <entry>
+                                            <para>
+                                                <emphasis role="bold">Dynamic Navigation</emphasis>
+                                            </para>
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Disable:</emphasis>
+                                                        The single content will be opened by an URL containing the
+                                                        Content Path.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Enable:</emphasis>
+                                                        This portlet is configured with the provided parameter
+                                                        (content-id by default).
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">By:</emphasis>
+                                                        This parameter is the key in the URL to let CLV know which
+                                                        really is the path in the current URL.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">Show in Page:</emphasis>
+                                                        A single content in CLV will be shown in a selected page. You
+                                                        can select any page but should take one with a Content Detail
+                                                        Portlet. The "Dynamic Navigation" is enabled in the Content
+                                                        Detail Portlet that interprets the URL and shows a single
+                                                        content.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <emphasis role="bold">With:</emphasis>
+                                                        This parameter is the key in the URL to let SCV know which
+                                                        really is the path in the current URL.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                            <para>
+                                                <emphasis role="bold">Content Visibility:</emphasis>
+                                                Allow you to use a cache shared between users to
+                                                get contents. If you want to get contents, which are displayed in CLV or
+                                                SCV, from one cache, select
+                                                <emphasis role="bold">Restricted by Authentication.</emphasis>
+                                                If not, select
+                                                <emphasis role="bold">Restricted by User Roles.</emphasis>
+                                            </para>
+                                        </entry>
+                                    </row>
+                                </tbody>
+                            </tgroup>
+                        </table>
+                    </step>
+                    <step>
+                        <para>
+                            Browse the documents or web content of an available site by clicking
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/plusicon.png" format="PNG"/>
+                                </imageobject>
+                                <textobject>
+                                    <phrase>blue plus</phrase>
+                                </textobject>
+                            </inlinemediaobject>
+                            next to the
+                            <emphasis role="bold">Folder Path</emphasis>
+                            field.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            If you select the
+                            <emphasis role="bold">By Folder</emphasis>
+                            mode, select an available site on the left, then select a folder that contains contents
+                            (documents and/or web content) on the right by clicking the folder.
+                        </para>
+                        <para>
+                            If you select the <emphasis role="bold">By Contents</emphasis> mode, select an available
+                            folder from the left pane, all content in this folder will be listed on the right pane.
+                            Click a content on the right that you want to add to the content list. There will be a
+                            message, informing that you have successfully added it to the Content List. The selected
+                            content will be listed in the Content List.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Enter a header for the content list in the
+                            <emphasis role="bold">Header</emphasis>
+                            field if you want.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Select a template to display the content list in the template list.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Tick/Untick your desired options.
+                        </para>
+                    </step>
+                    <step>
+                        <para>
+                            Click
+                            <emphasis role="bold">Save</emphasis>
+                            to accept your changes.
+                        </para>
+                    </step>
+                </procedure>
+        </section>
+    </section>
+    <section id="sect-User_Guide-Contribute_Content-Inline_Editing">
+        <title>Inline Editing</title>
+        <para>The
+            <emphasis role="bold">Inline Editing</emphasis>
+            mode allows you to edit directly on the page without going to a separate one.
+            By using this mode, you can edit the text in the same location in such an intuitive and convenient manner.
+        </para>
+        <para>
+            To do the inline editing, do as follows:
+        </para>
+        <procedure>
+            <step>
+                <para>Turn on the
+                    <emphasis role="bold">Edit</emphasis>
+                    mode on the Administration bar.
+                </para>
+            </step>
+            <step>
+                <para>Hover your cursor over the area you want to edit. The editable area will be highlighted.
+                </para>
+            </step>
+            <step>
+                <para>Double-click the area until the Edit area is shown as below.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="150mm" align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+                <para>In case the hovered area is in the Rich Text format, the Edit area will be displayed with the
+                    <ulink url="http://docs.cksource.com/CKEditor_3.x/Users_Guide">CKEditor</ulink>
+                    as below. (See more information about CKEditor <link linkend="sect-User_Guide-Contribute_Content-CKEditor">here</link>.)
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="150mm" align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Make changes on your selected area, then click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata width="5mm" fileref="images/Accepticon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to accept,
+                </para>
+                <para>or
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata width="5mm" fileref="images/Cancelicon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to discard changes.
+                </para>
+            </step>
+        </procedure>
+        <itemizedlist>
+            <listitem>
+                <para>After you have made changes on your content, it is only in the
+                    <emphasis role="bold">Draft</emphasis>
+                    state.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/publish_Inline.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="150mm" align="center" fileref="images/publish_Inline.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </listitem>
+            <listitem>
+                <para>Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to publish the content. Now, your edited content in the
+                    <emphasis role="bold">Published</emphasis>
+                    state.
+                </para>
+            </listitem>
+        </itemizedlist>
+        </section>
+        <section id="sect-User_Guide-Contribute_Content-CKEditor">
+            <title>CKEditor</title>
+        <para>
+            When using CKEditor to write/edit a document, you can also:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>Insert a portal link to the document.</para>
+            </listitem>
+            <listitem>
+                <para>Insert a content link to the document.</para>
+            </listitem>
+        </itemizedlist>
+            <citetitle>
+        <para>
+            <emphasis role="bold">Insert a portal link</emphasis>
+        </para>
+            </citetitle>
+        <procedure>
+            <step>
+                <para>Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to open the
+                    <emphasis role="bold">Insert Portal Link</emphasis>
+                    form.
+                </para>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Enter the title of the portal in the
+                    <emphasis role="bold">Title</emphasis>
+                    field.
+                </para>
+            </step>
+            <step>
+                <para>Enter the portal URL manually, or you can also click
+                    <emphasis role="bold">Get portal link</emphasis>
+                    to open a page containing all the portals in the same server, then select one that you want.
+                </para>
+            </step>
+            <step>
+                <para>Click
+                    <emphasis role="bold">Preview</emphasis>
+                    to view the portal.
+                </para>
+            </step>
+            <step>
+                <para>Click
+                    <emphasis role="bold">Save</emphasis>
+                    to accept inserting the portal to the document.
+                </para>
+            </step>
+        </procedure>
+            <citetitle>
+        <para>
+            <emphasis role="bold">Insert a content link</emphasis>
+        </para></citetitle>
+        <procedure>
+            <step>
+                <para>Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/insert_content.png"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to open a page.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/content_selector.png" format="PNG" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Click the plus before the document name or click directly the document name on the left pane to
+                    show the contents in the right pane or click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/upload_file.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    to upload a file from your local device.
+                </para>
+            </step>
+            <step>
+                <para>Click a content that you want to insert to the document.</para>
+            </step>
+        </procedure>
+    </section>
+    <section id="sect-User_Guide-Contribute_Content-Publication_Process">
+        <title>Publication process</title>
+        <para>
+            After a new content has been created, it is saved as draft and you can easily to publish it on your site.
+            The publication process consists of four steps:
+        </para>
+        <para>
+            <emphasis role="bold">Request for Approval --> Approval --> Stage --> Publish</emphasis>
+        </para>
+        <para>
+            In case you want to publish your content without having the "Approve" or "Publish" right, you first need to
+            send your request for approval.
+        </para>
+        <para>
+            In case you have the right to approve or publish a content, you can yourself publish it with the
+            <emphasis role="bold">Stage</emphasis>
+            step immediately.
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="bold">Request Approval:</emphasis>
+                    When a new content is created, it must be approved before publishing by clicking
+                    <emphasis role="bold">Request Approval</emphasis>
+                    on the action bar of the Sites Explorer or clicking
+                    <emphasis role="bold">Pending</emphasis>
+                    in the
+                    <emphasis role="bold">Manage Publication</emphasis>
+                    form.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/managepublication.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="150mm" align="center" fileref="images/managepublication.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="bold">Approve:</emphasis>
+                    To approve a content, click
+                    <emphasis role="bold">Approve</emphasis>
+                    on the action bar of the Sites Explorer, or
+                    <emphasis role="bold">Approved</emphasis>
+                    in the
+                    <emphasis role="bold">Manage Publication.</emphasis>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="bold">Stage:</emphasis>
+                    This step allows you to publish a content in a period. After selecting the publication schedule for
+                    the content, it will be automatically published as the schedule.
+                </para>
+                <para>
+                    To publish your content just in a stage, click
+                    <emphasis role="bold">Stage.</emphasis>
+                    Then, click
+                    <emphasis role="bold">From/To</emphasis>
+                    to select the start and end dates for publication from a mini-calendar.
+                </para>
+                <para>
+                    To publish your content forever, you should not set time in the
+                    <emphasis role="bold">To</emphasis>
+                    field.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="bold">Publish:</emphasis>
+                    A content will be published when you have completed the
+                    <emphasis role="bold">Stage</emphasis>
+                    step.
+                </para>
+                <note>
+                    <para>
+                        You will see a list of draft contents, pending contents which are waiting for your approval if
+                        you have the approval right, and contents that will be published at the bottom of the <emphasis
+                            role="bold">Sites Explorer</emphasis>. Click your desired contents to review, approve or
+                        publish.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/bottombar.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/bottombar.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </note>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <!-- remove
+  <section>
+      CKEditor</title>
+      <para>eXo Content offers CKEditor to allow you to write/edit documents easily. Refer <ulink url="http://docs.cksource.com/FCKeditor_2.x/Users_Guide"/>  to know how to use CKEditor.</para>
+      <para>Moreover, when use CKEditor in eXo Content,  you can also:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Insert a portal link: allows inserting a portal link to the document. </para>
+        </listitem>
+        <listitem>
+          <para>Insert a content link: allows inserting a content as a link to the document.</para>
+        </listitem>
+      </itemizedlist>
+      <procedure>
+        <title>Insert a portal link</title>
+        <step>
+          <para>Click <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+              </imageobject>
+            </inlinemediaobject> to open the <emphasis role="bold">InsertPortalLink</emphasis> form:</para>
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+        </step>
+        <step>
+          <para>Enter the title of the portal in the Title field.</para>
+        </step>
+        <step>
+          <para>Enter the portal URL manually, or you can also click <emphasis role="bold">Get portal link</emphasis> to open a page including all the portals in the same server, then select one that you want.</para>
+        </step>
+        <step>
+          <para>Click <emphasis role="bold">Preview</emphasis> to view the portal.</para>
+        </step>
+        <step>
+          <para>Click <emphasis role="bold">Save</emphasis> to accept inserting the portal link to the document.</para>
         </step>
       </procedure>
-        <note>
-          <title>CKEditor</title>
-          <para>When using CKEditor to write/edit a document, you can also:</para>
-          <itemizedlist>
-            <listitem>
-              <para>Insert a portal link: allows inserting a portal link to the document. </para>
-            </listitem>
-            <listitem>
-              <para>Insert a content link: allows inserting a content as a link to the document.</para>
-            </listitem>
-          </itemizedlist>
-          <procedure>
-            <title>Insert a portal link</title>
-            <step>
-              <para>Click <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
-                  </imageobject>
-                </inlinemediaobject> to open the <emphasis role="bold">InsertPortalLink</emphasis> form:</para>
-              <mediaobject>
-                <imageobject>
-                  <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
-                </imageobject>
-              </mediaobject>
-            </step>
-            <step>
-              <para>Enter the title of the portal in the <emphasis role="bold">Title</emphasis> field.</para>
-            </step>
-            <step>
-              <para>Enter the portal URL manually, or you can also click <emphasis role="bold">Get portal link</emphasis> to open a page including all the portals in the same server, then select one that you want.</para>
-            </step>
-            <step>
-              <para>Click <emphasis role="bold">Preview</emphasis> to view the portal.</para>
-            </step>
-            <step>
-              <para>Click <emphasis role="bold">Save</emphasis> to accept inserting the portal to the document.</para>
-            </step>
-          </procedure>
-          <procedure>
-            <title>Insert a content link</title>
-            <step>
-              <para>Click <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/insert_content.png"/>
-                  </imageobject>
-                </inlinemediaobject> to open a page:</para>
-              <mediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/content_selector.png" format="PNG" align="center"/>
-                </imageobject>
-              </mediaobject>
-            </step>
-            <step>
-              <para>Click + in the left panel to list the contents in the right panel or click <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/upload_file.png" format="PNG"/>
-                  </imageobject>
-                </inlinemediaobject> to upload a file from your local device.</para>
-            </step>
-            <step>
-              <para>Click a content that you want to insert to the document.</para>
-            </step>
-          </procedure>
-        </note>
-  </section>
-  <section id="sect-User_Guide-Contribute_Content-Publication_Process">
-    <title>Publication Process</title>
-    <para>
-   After a new content is created, it is saved as draft and you can easily to publish it on your site. The publication process consists of four steps:
-  </para>
-    <para>
-   <emphasis role="bold">Request approval &gt; Approval &gt; Stage &gt; Publish</emphasis>
-  </para>
-    <para>
-   If you do not have the right to approve or publish a content, so when you want to publish your content, you need to send your approval request first.
-  </para>
-    <para>
-   If you have the right to approve or publish a content, you do not need to send a request approval. You can yourself publish it with the <emphasis role="bold">Stage</emphasis> step immediately.
-  </para>
-    <itemizedlist>
-      <listitem>
-        <para>
-     <emphasis role="bold">Request approval</emphasis>: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/managepublication.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/managepublication.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </listitem>
-      <listitem>
-        <para>
-     <emphasis role="bold">Approve</emphasis>: To approve a content, click <emphasis role="bold">Approve </emphasis>on the action bar of the Content Explorer or click <emphasis role="bold">Approved</emphasis> in the Manage Publication.
-    </para>
-      </listitem>
-      <listitem>
-        <para>
-     <emphasis role="bold">Stage</emphasis>: Stage enables you to publish a content in a period. After selecting the publication schedule for the content, it will be automatically published as the schedule.
-    </para>
-        <para>
-     To publish content for a stage, click<emphasis role="bold"> Stage &gt;</emphasis> Click <emphasis role="bold">From/ To</emphasis> to open a mini calendar <emphasis role="bold">&gt;</emphasis> Select the date to publish.
-    </para>
-        <para>
-     To publish your content forever, you should not set time in the <emphasis role="bold">To</emphasis> field.
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/stage.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/stage.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </listitem>
-      <listitem>
-        <para>
-     <emphasis role="bold">Publish</emphasis>: A content will be published when you have completed the <emphasis role="bold">Stage</emphasis> step.
-    </para>
-        <note>
-          <para>
-      You will see a list of draft contents, pending contents which are waiting to be your approval if you have the approval right and contents that will be published at the bottom of the Content Explorer. Click your desired contents to review, approve or publish.
-     </para>
-        </note>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/bottombar.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/bottombar.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </listitem>
-    </itemizedlist>
-  </section>
-  
-<!-- remove
-<section>
-    CKEditor</title>
-    <para>eXo Content offers CKEditor to allow you to write/edit documents easily. Refer <ulink url="http://docs.cksource.com/FCKeditor_2.x/Users_Guide"/>  to know how to use CKEditor.</para>
-    <para>Moreover, when use CKEditor in eXo Content,  you can also:</para>
-    <itemizedlist>
-      <listitem>
-        <para>Insert a portal link: allows inserting a portal link to the document. </para>
-      </listitem>
-      <listitem>
-        <para>Insert a content link: allows inserting a content as a link to the document.</para>
-      </listitem>
-    </itemizedlist>
-    <procedure>
-      <title>Insert a portal link</title>
-      <step>
-        <para>Click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+      <procedure>
+        <title>Insert a content link</title>
+        <step>
+          <para>Click <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/insert_content.png"/>
+              </imageobject>
+            </inlinemediaobject> to open a page:</para>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/content_selector.png" format="PNG"/>
             </imageobject>
-          </inlinemediaobject> to open the <emphasis role="bold">InsertPortalLink</emphasis> form:</para>
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Enter the title of the portal in the Title field.</para>
-      </step>
-      <step>
-        <para>Enter the portal URL manually, or you can also click <emphasis role="bold">Get portal link</emphasis> to open a page including all the portals in the same server, then select one that you want.</para>
-      </step>
-      <step>
-        <para>Click <emphasis role="bold">Preview</emphasis> to view the portal.</para>
-      </step>
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept inserting the portal link to the document.</para>
-      </step>
-    </procedure>
-    <procedure>
-      <title>Insert a content link</title>
-      <step>
-        <para>Click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/insert_content.png"/>
-            </imageobject>
-          </inlinemediaobject> to open a page:</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/content_selector.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Click +  in the left panel to list the contents in the right panel or click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/upload_file.png" format="PNG"/>
-            </imageobject>
-          </inlinemediaobject> to upload a file from your local machine.</para>
-      </step>
-      <step>
-        <para>Click a content that you want to insert to the document.</para>
-      </step>
-    </procedure>
-  </section>-->
+          </mediaobject>
+        </step>
+        <step>
+          <para>Click +  in the left panel to list the contents in the right panel or click <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/upload_file.png" format="PNG"/>
+              </imageobject>
+            </inlinemediaobject> to upload a file from your local machine.</para>
+        </step>
+        <step>
+          <para>Click a content that you want to insert to the document.</para>
+        </step>
+      </procedure>
+    </section>-->
 </section> 

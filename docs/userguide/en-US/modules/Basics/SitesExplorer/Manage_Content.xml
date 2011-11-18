@@ -1,414 +1,388 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
-%BOOK_ENTITIES;
-]>
+        <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+        %BOOK_ENTITIES;
+        ]>
 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer">
-	<title>Manage Content In Content Explorer</title>
-	 <para>
-		A web content is a key resource to make a site. Other resources make a site more dynamic and animated by using layout, color, font, and more.This section focuses on how to manage a web content in a specific site.
-	</para>
-	 <note>
-		<para>
-			Only users who have the right to access <emphasis role="bold">Sites Management</emphasis> drive can do it.
-		</para>
+  <title>Manage content in Sites Explorer</title>
+  <para>
+   Web content is a key resource which is used for a site. Other resources make a site more dynamic and animated by using
+    layout, color, font, and more. This section focuses on how to manage a web content in a specific site.
+  </para>
+  <note>
+    <para>
+      Only users who have the right to access the 
+      <emphasis role="bold">Sites Management</emphasis>
+      drive can do it.
+    </para>
+  </note>
+  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Create_a_new_web_content">
+    <title>Create a new web content</title>
+    <para>
+      This function is used to add a new web content to a specific site.
+    </para>
+    <procedure>
+      <step>
+        <para>
+          Go to the 
+          <emphasis role="bold">Sites Management</emphasis>
+          drive, then select a site to which you want to add a web content.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select the
+          <emphasis role="bold">web contents</emphasis>
+          folder on the left.
+        </para>
+        <note>
+          <para>
+            In this step, you also can add a new web content into another folders (documents and media folders) of a
+            site but you are recommended to select the
+            <emphasis role="bold">web contents</emphasis>
+            folder because:
+          </para>
+              <para>
+                Managing web content of a site becomes more easily.
+              </para>
+              <para>
+                You only may add a new web content in this folder so that you do not need to select a web content
+                document in the list of document types. It makes adding a new web content more flexibly.
+              </para>
+        </note>
+      </step>
+      <step>
+        <para>
+          Click 
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
+            </imageobject>
+            <textobject>
+              <phrase>[ Add Document ]</phrase>
+            </textobject>
+          </inlinemediaobject>
+          on the Action bar to open a list of content templates.
+        </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" width="150mm"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+          Select a template to present the web content by clicking one.
+        </para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              <emphasis role="bold">Free layout web content:</emphasis> This template is a free layout.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="bold">Picture on head layout web content:</emphasis> The site's content is
+              presented in two spaces. One is for inserting an image and the other for editing the site's content.
+              The image will be put at the head of a site.
+            </para>
+          </listitem>
+        </itemizedlist>
+        <!--  Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          -->
+      </step>
+      <step>
+        <para>
+          Enter values in the fields of the <emphasis role="bold">Add New Document</emphasis> form.
+        </para>
+      </step>
+      <step>
+        <para>
+          Click
+          <emphasis role="bold">Save</emphasis>
+          or
+          <emphasis role="bold">Save &amp; Close</emphasis>
+          to save the content or
+          <emphasis role="bold">Close</emphasis>
+          to quit the <emphasis role="bold">Add New Document</emphasis> form.
+        </para>
+      </step>
+    </procedure>
+     <citetitle>
+     <para>
+     <emphasis role="bold"> Tabs in the Add New Document form</emphasis>
+        </para>
+      </citetitle>
+      <para>
+        The
+        <emphasis role="bold">Main Content</emphasis>
+        tab
+      </para>
+      <table>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>
+                Field
+              </entry>
+              <entry>
+                Description
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+           <row>
+              <entry>
+                <emphasis role="bold">Title</emphasis>
+              </entry>
+              <entry>
+                The title of a web content.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="bold">Name</emphasis>
+              </entry>
+              <entry>
+                The name of the web content that you want to add new.
+              </entry>
+            </row>
+             <row>
+              <entry>
+                <emphasis role="bold">Language</emphasis>
+              </entry>
+              <entry>
+                The language of the web content. At present, eXo Platform 3.5 supports two languages: English and French.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="bold">Main Content</emphasis>
+              </entry>
+              <entry>
+                The main content that you want to display when publishing this web content.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>
+        The <emphasis role="bold">Illustration</emphasis> tab allows you to upload an illustration that makes the site's content more attractive.
+      </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata align="center" fileref="images/illustrationtab.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata align="center" fileref="images/illustrationtab.png" format="PNG" width="150mm"/>
+        </imageobject>
+      </mediaobject>
+        <para>
+            <emphasis role="bold">Details:</emphasis>
+        </para>
+      <table>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>
+                Field
+              </entry>
+              <entry>
+                Description
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <emphasis role="bold">Illustration Image</emphasis>
+              </entry>
+              <entry>
+                The path to an image that you want to upload into a site. This image will be used like an illustration of that site.
+              </entry>
+            </row>
+            <row>
+              <entry>
+               <emphasis role="bold">Summary</emphasis>
+              </entry>
+              <entry>
+                You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <citetitle>
+      <para xml:id="proc-User_Guide-Add_new_content-_Upload_an_image">
+	  <emphasis role="bold">
+        Upload an image
+	   </emphasis>
+      </para>
+      </citetitle>
+      <procedure>
+        <step>
+          <para>
+            Browse a list of images on your local device by clicking the <emphasis role="bold">Browse...</emphasis> button, then select a specific location.
+          </para>
+        </step>
+        <step>
+          <para>
+            Select an image in the list to upload.
+          </para>
+        </step>
+      </procedure>
+      <para>
+        The <emphasis role="bold">Advanced</emphasis> tab includes two parts: CSS Data and JS Data.
+      </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata align="center" fileref="images/advancedtab.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata align="center" fileref="images/advancedtab.png" format="PNG" width="150mm"/>
+        </imageobject>
+      </mediaobject>
+        <para>
+            <emphasis role="bold">Details:</emphasis>
+        </para>
+      <table>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>
+                Field
+              </entry>
+              <entry>
+                Description
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <emphasis role="bold">CSS Data</emphasis>
+              </entry>
+              <entry>
+                Contain the CSS definition to present data in a web content. You can optionally enter CSS data into this
+                field to specify the style.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="bold">JS Data</emphasis>
+              </entry>
+              <entry>
+                Contain the JS content to make the web content more dynamic after being published. You can optionally enter
+                the JS content in this field.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+  </section>
 
-	</note>
-	 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Create_a_new_web_content">
-		<title>Create a new web content</title>
-		 <para>
-			This function is used to add a new web content into a specific site.
-		</para>
-		 <para>
-			Do the following:
-		</para>
-		 <procedure id="proc-User_Guide-Create_a_new_web_content-Add_new_content">
-			<title>Add new content</title>
-			 <step>
-				<para>
-					Go to <emphasis role="bold">Sites Management</emphasis> drive, and then select a site that you want to add a web content.
-				</para>
-			</step>
-			 <step>
-				<para>
-					Select the web content folder on the left.
-				</para>
-				 <note>
-					<para>
-						In this step, you also can add a new web content into another folders (documents and media folder) of a site but you are recommended to select the web content folder because:
-					</para>
-					 <itemizedlist>
-						<listitem>
-							<para>
-								Manage web content of a site more easily.
-							</para>
+  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
+    <title>Edit a web content</title>
+    <para>
+      This function is used to edit a web content in a specific drive of an existing site.
+    </para>
+    <procedure>
+      <step>
+        <para>
+          Go into the folder of a site which contains the web content that you want to edit.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select the web content by double-clicking it on the left tree or on the right pane. The detailed information
+          of web content will be viewed on the right pane.
+        </para>
 
-						</listitem>
-						 <listitem>
-							<para>
-								You only may add a new web content in this folder so that you don't need to select a web content document in the list of document types. It makes adding a new web content more flexibly.
-							</para>
+      </step>
+      <step>
+        <para>
+          Click 
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm"/>
+            </imageobject>
+            <textobject>
+              <phrase>[ Edit Document ]</phrase>
+            </textobject>
+          </inlinemediaobject>
+          on the Action bar to show the form to edit the selected web content. This form is similar to that of creating
+          a new document.
+        </para>
+      </step>
+      <step>
+        <para>
+          Make changes on current values in the fields of this form.
+        </para>
+      </step>
+      <step>
+        <para>
+          Complete editing the selected web content by clicking 
+          <emphasis role="bold">Save</emphasis>
+          or <emphasis role="bold">Save &amp; Close.</emphasis>
+        </para>
+      </step>
+    </procedure>
+    <note>
+      <para>
+        When you click <emphasis role="bold">Edit Document,</emphasis> the web content will be auto-locked for your
+        editing. After finishing, the content is back to the unlock status. You can manage "Locks" in the <link linkend="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">Unlock a node</link> section.
+      </para>
+    </note>
+  </section>
 
-						</listitem>
+  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
+    <title>Delete a web content</title>
+    <para>
+      This function is used to remove a web content from the web content folder in a specific site's drive.
+    </para>
+    <procedure>
+      <step>
+        <para>
+          Right-click the name of the web content that you want to delete, then select
+          <emphasis role="bold">Delete</emphasis>
+          from the drop-down menu.
+        </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/selectdelete.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata align="center" fileref="images/selectdelete.png" format="PNG" width="75mm"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+          Click
+          <emphasis role="bold">OK</emphasis>
+          to accept your deletion in the confirmation message.
+        </para>
+      </step>
+    </procedure>
+  </section>
 
-					</itemizedlist>
-
-				</note>
-
-			</step>
-			 <step>
-				<para>
-					Open a list of content templates by clicking the
-					<inlinemediaobject>
-						<imageobject>
-                     <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
-						</imageobject>
-                  <textobject>
-                     <phrase>[ Add Document ]</phrase>
-                  </textobject>
-					</inlinemediaobject> icon on the Action bar.
-				</para>
-                 <mediaobject>
-                     <imageobject role="html">
-                         <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"/>
-                     </imageobject>
-                     <imageobject role="fo">
-                         <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" width="150mm"/>
-                     </imageobject>
-                 </mediaobject>
-			</step>
-			 <step>
-                 <para>
-                     Select a template to present the web content by clicking one.
-                 </para>
-                 <itemizedlist>
-                     <listitem>
-                         <para>
-                             <emphasis role="bold">Picture on head layout web content:</emphasis>The site's content is
-                             presented in two spaces. One for inserting an image and one for editing the site's content.
-                             In which, the image is put at the head of a site.
-                         </para>
-                     </listitem>
-                     <listitem>
-                         <para>
-                             <emphasis role="bold">Free layout web content:</emphasis>This template is a free layout.
-                         </para>
-                     </listitem>
-                 </itemizedlist>
-				<!--  Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          -->
-			</step>
-			 <step>
-				<para>
-					Enter values in the fields of the Add New Document form.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to save the content or <guilabel>Close</guilabel> to quit the Add New Document form.
-				</para>
-
-			</step>
-			<formalpara>
-                <title>Tabs in the Add New Document form</title>
-                <para>
-                    The<emphasis role="bold">Main Content</emphasis> tab includes:
-                </para>
-				 <table>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Field
-								</entry>
-								 <entry>
-									Options
-								</entry>
-
-							</row>
-
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									Name
-								</entry>
-								 <entry>
-									The name of a web content that you want to add new
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Title
-								</entry>
-								 <entry>
-									The title of a web content
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Main content
-								</entry>
-								 <entry>
-									The main content that you want to display when publishing this web content
-								</entry>
-
-							</row>
-
-
-						</tbody>
-
-					</tgroup>
-
-				</table>
-				 <para>
-					The <emphasis role="bold">Illustration</emphasis> tab: enables you to upload an illustration that makes the site's content more attractive
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/illustrationtab.png" format="PNG"   />
-					</imageobject>
-					 <imageobject role="fo">
-                  <imagedata align="center"  fileref="images/illustrationtab.png" format="PNG" width="150mm" />
-					</imageobject>
-
-				</mediaobject>
-				 <table>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Field
-								</entry>
-								 <entry>
-									Option
-								</entry>
-
-							</row>
-
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									Illustration Image
-								</entry>
-								 <entry>
-									The path to an image that you want to upload into a site. This image will be used like an illustration of that site.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Summary
-								</entry>
-								 <entry>
-									You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
-								</entry>
-
-							</row>
-
-						</tbody>
-
-					</tgroup>
-
-				</table>
-				 <para>
-					Do the following to upload an image:
-				</para>
-				 <procedure id="proc-User_Guide-Add_new_content-_Upload_an_image">
-					<title> Upload an image</title>
-					 <step>
-						<para>
-							Browse an image list on your local computer by clicking the <emphasis role="bold">Browse</emphasis>... button and then select a specific location.
-						</para>
-
-					</step>
-					 <step>
-						<para>
-							Select an image in the list to upload.
-						</para>
-
-					</step>
-
-				</procedure>
-				
-				 <para>
-					The <emphasis role="bold">Advanced </emphasis>tab:
-				</para>
-				 <para>
-					This tab includes two parts: CSS data and JS data:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/advancedtab.png" format="PNG"   />
-					</imageobject>
-					 <imageobject role="fo">
-                  <imagedata align="center"  fileref="images/advancedtab.png" format="PNG" width="150mm" />
-					</imageobject>
-
-				</mediaobject>
-				 <table>
-					<title></title>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Field
-								</entry>
-								 <entry>
-									Information
-								</entry>
-
-							</row>
-
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									CSS data
-								</entry>
-								 <entry>
-									Contains CSS definition to present data in a web content. You can optionally enter CSS data into this field to specify the style.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									JS data
-								</entry>
-								 <entry>
-									Contains JS content to make the web content more dynamic when after publishing. You can optionally enter JS content in this field.
-								</entry>
-
-							</row>
-
-						</tbody>
-
-					</tgroup>
-
-				</table>
-				<!--                         END                         -->
-			</formalpara>
-
-		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
-		<title>Edit a web content</title>
-		 <para>
-			This function is used to edit a web content in a specific drive of an existing site.
-		</para>
-		 <para>
-			Do the following:
-		</para>
-		 <procedure id="proc-User_Guide-Edit_a_web_content-Edit_a_web_content">
-			<title>Edit a web content</title>
-			 <step>
-				<para>
-					Go into the folder of a site which contains the web content that you want to edit.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select the web content by double-clicking it on the left tree or on the right panel. The detailed information of web content will be viewed on the right panel.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-                     <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm" />
-						</imageobject>
-                  <textobject>
-                     <phrase>[ Edit Document ]</phrase>
-                  </textobject>
-					</inlinemediaobject> icon on the action bar to show the form to edit the selected web content. This form is like the form to create a new document.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Change the current values in the fields of this form.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Complete editing the selected web content by clicking <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel>.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-		 <note>
-			<title>Auto-lock</title>
-			 <para>
-				When you click <emphasis role="bold">Edit Document</emphasis>, the web-content will be auto-locked for your editing. After finishing, the content is back to unlock status. You can manage Locks in the Administration portlet.
-			</para>
-
-		</note>
-
-	</section>
-	
-	 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
-		<title>Delete a web content</title>
-		 <para>
-			This function is used to remove a web content from the web content folder in a specific site's drive.
-		</para>
-		 <para>
-			To delete a web-content, do the following:
-		</para>
-		 <procedure id="proc-User_Guide-Delete_a_web_content-Delete_a_web_content">
-			<title>Delete a web content</title>
-			 <step>
-				<para>
-					Right-click the name of the web content that you want to delete and then select <emphasis role="bold">Delete</emphasis> in the drop-down menu:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/selectdelete.png" format="PNG"  />
-					</imageobject>
-					 <imageobject role="fo">
-                  <imagedata align="center"  fileref="images/selectdelete.png" format="PNG" width="75mm"/>
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					There will be a confirmation message. Click <emphasis role="bold">OK</emphasis> to accept the deletion, or <emphasis role="bold">Cancel</emphasis> to quit without deleting.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
-		<title>Publish a web content</title>
-		 <para>
-			This function helps you publish a web content that you have added to web content folder in Content Explorer.
-		</para>
-		 <para>
-			See <xref linkend="sect-User_Guide-Contribute_Content-Publication_Process" /> to know how to publish a web content.
-		</para>
-		 <para>
-			After the content is published, all users who have the right to access that position can view the published web content as a page on the Navigation bar.
-		</para>
-
-	</section>
-
+  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
+    <title>Publish a web content</title>
+    <para>
+      This function helps you publish a web content that you have added to web content folder in <emphasis role="bold">Sites Explorer</emphasis>.
+    </para>
+    <para>
+      See the
+      <link linkend="sect-User_Guide-Contribute_Content-Publication_Process">Publication process</link>
+      section to know how to publish a web content.
+    </para>
+    <para>
+      After the content is published, all users who have the right to access that position can view the published web
+      content as a page on the Navigation bar.
+    </para>
+  </section>
+  <xi:include href="Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </section>
-
-

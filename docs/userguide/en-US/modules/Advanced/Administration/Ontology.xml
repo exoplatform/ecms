@@ -1,497 +1,614 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
-%BOOK_ENTITIES;
-]>
+        <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+        %BOOK_ENTITIES;
+        ]>
 <section id="sect-User_Guide-Categories_and_Tags">
-  <title>Categories and Tags</title>
-  <section id="sect-User_Guide-Categories_and_Tags-Manage_Tags">
-    <title>Manage Tags</title>
-    <para>
-   Manage Tags enables you to manage tag styles. The tag style will change depending on the number of documents in a tag.
-  </para>
-    <para>
-   Go to <guimenu>Administration &gt; Categories and Tags &gt; Manage Tags</guimenu>.
-  </para>
-    <mediaobject>
-       <imageobject role="html">
-          <imagedata fileref="images/JBoss_product_and_documentation_overview.png" format="PNG" align="center"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/JBoss_product_and_documentation_overview.png" format="PNG" align="center" width="150mm" />
-       </imageobject>
-    </mediaobject>
-    <section id="sect-User_Guide-Manage_Tags-Add_a_tag_style">
-      <title>Add a tag style</title>
-      <para>
-    Furthermore, you  can add a new tag style as follows:
-   </para>
-      <procedure id="proc-User_Guide-Add_a_tag_style-Add_a_Tag_Style">
-        <title>Add a Tag Style</title>
-        <step>
-          <para>
-      Click the <guibutton>Add style</guibutton> button. The <guibutton>Add tag style configuration</guibutton> form will appear:
-     </para>
-          <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
-          </mediaobject>
-          <para>
-      Details:
-     </para>
-          <variablelist>
-            <varlistentry>
-              <term>Style name</term>
-              <listitem>
-                <para>
-         Give the tag name. You cannot edit it.
+    <title>Categories and Tags</title>
+    <section id="sect-User_Guide-Categories_and_Tags-Manage_Tags">
+        <title>Manage tags</title>
+        <para>
+            The
+            <emphasis role="bold">Manage Tags</emphasis>
+            function enables you to manage tag styles. The tag styles will change, depending on the number of documents
+            in a tag.
         </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>Document Range</term>
-              <listitem>
-                <para>
-         Give the number of document assigned to a tag. (*Required).
+        <para>
+            Go to
+            <emphasis role="bold">Categories and Tags --> Manage Tags.</emphasis>
         </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>HTML style</term>
-              <listitem>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/ManageTag.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/ManageTag.png" format="PNG" align="center" width="150mm"/>
+            </imageobject>
+        </mediaobject>
+        <section id="sect-User_Guide-Manage_Tags-Add_a_tag_style">
+         <citetitle> <para xml:id="proc-User_Guide-Add_a_tag_style-Add_a_Tag_Style">
+                <emphasis role="bold">Add a tag style</emphasis>
+            </para>
+         </citetitle>
+            <procedure>
+                <step>
+                    <para>
+                        Click the
+                        <emphasis role="bold">Add Style</emphasis>
+                        button. The
+                        <emphasis role="bold">Edit Tag Style Configuration</emphasis>
+                        form will appear.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"
+                                       width="150mm"/>
+                        </imageobject>
+                    </mediaobject>
+                    <para>
+                        <emphasis role="bold">Details:</emphasis>
+                    </para>
+                    <table>
+                        <tgroup cols="2">
+                            <thead>
+                                <row>
+                                    <entry>Field</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Asterisk (*)</emphasis>
+                                    </entry>
+                                    <entry>This mark next to each field means that it is required to input values.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Style Name</emphasis>
+                                    </entry>
+                                    <entry>Give the tag name which cannot be edited.</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Document Range</emphasis>
+                                    </entry>
+                                    <entry>Give the number of document assigned to a tag.</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">HTML Style</emphasis>
+                                    </entry>
+                                    <entry>Include font-size, font-weight, color, font-family, text-decoration.</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </step>
+                <step>
+                    <para>
+                        Input values in the fields:
+                        <emphasis role="bold">Style Name, Document Range, HTML Style.</emphasis>
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
+                        <emphasis role="bold">Update</emphasis>
+                        to accept adding a new tag style.
+                    </para>
+                </step>
+            </procedure>
+            <note>
                 <para>
-         Include font-size, font-weight, color, font-family, text-decoration. (*Required).
-        </para>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </step>
-        <step>
-          <para>
-      Input values in the fields: <guilabel>Style name</guilabel>, <guilabel>Document range</guilabel>, <guilabel>HTML style</guilabel>, all of which are required.
-     </para>
-        </step>
-        <step>
-          <para>
-      Click <guilabel>Update</guilabel> to accept adding a new tag style.</para>
-        </step>
-      </procedure>
-      <note>
-        <title>Note</title>
-        <itemizedlist>
-          <listitem>
+                    The format of valid range must be: a..b where &apos;a&apos;, &apos;b&apos; are positive
+                    integers. You can use * instead of &apos;b&apos; to indicate it is unlimited. For example,
+                    0..2 (means 0-2 documents assigned to a tag), 10..* (means at least 10 documents assigned to
+                    a tag).
+                </para>
+                <para>
+                    The &apos;HTML style&apos; textbox cannot be empty. You can change values of font-size,
+                    font–weight, color, font-family, and text-decoration.
+                </para>
+            </note>
+        </section>
+        <section id="sect-User_Guide-Manage_Tags-Edit">
+            <title>Edit a tag style</title>
             <para>
-       The format of valid range must be: a..b where &apos;a&apos;, &apos;b&apos; are positive integers. You can use * instead of &apos;b&apos; to indicate it is unlimited. For example, 0..2 (means 0-2 documents assigned to a tag), 10..* (means at least 10 documents assigned to a tag).
-      </para>
-          </listitem>
-          <listitem>
+                The
+                <emphasis role="bold">Tag Manager</emphasis>
+                tab enables you to edit the existing tags.
+            </para>
+            <citetitle>
+            <para xml:id="proc-User_Guide-Edit-Editing_existing_tabs">
+                <emphasis role="bold">Edit an existing tag</emphasis>
+            </para>
+            </citetitle>
+            <procedure>
+                <step>
+                    <para>
+                        Click the pen icon corresponding to the tag name which you want to edit in the
+                        <emphasis role="bold">Action</emphasis>
+                        column to edit the tag style configuration. The
+                        <emphasis role="bold">Edit Tag Style Configuration</emphasis>
+                        form appears which is similar to that of adding a tag style.
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Change values in the fields, including <emphasis role="bold">Document Range</emphasis> and <emphasis role="bold">HTML Style</emphasis>, except <emphasis role="bold">Style
+                        name.</emphasis>
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
+                        <emphasis role="bold">Update</emphasis>
+                        to save new changes.
+                    </para>
+                </step>
+            </procedure>
+        </section>
+        <section id="sect-User_Guide-Manage_Tags-Delete_a_tag_style">
+            <title>Delete a tag style</title>
+            <para>To delete one tag style, simply click the corresponding
+                <emphasis role="bold">Delete</emphasis>
+                icon and select
+                <emphasis role="bold">OK</emphasis>
+                in the confirmation to accept your deletion.
+            </para>
+        </section>
+        <section id="sect-User_Guide-Manage_Tags-Tag_Permission_Manager">
+            <title>Tag Permission Manager</title>
             <para>
-       The &apos;HTML style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
-      </para>
-          </listitem>
-        </itemizedlist>
-      </note>
+                The
+                <emphasis role="bold">Tag Permission Manager</emphasis>
+                tab helps you set permissions regarding to editing and deleting public tags.
+            </para>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center"/>
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center" width="150mm"/>
+                </imageobject>
+            </mediaobject>
+            <citetitle>
+            <para xml:id="proc-User_Guide-Tag_Permission_Manager-Set_Permission_To_Tag_Management">
+                <emphasis role="bold">Set Permission To Tag Management</emphasis>
+            </para>
+            </citetitle>
+            <procedure>
+                <step>
+                    <para>
+                        Click
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
+                            </imageobject>
+                            <textobject>
+                                <phrase>"Select user"</phrase>
+                            </textobject>
+                        </inlinemediaobject>
+                        beside the
+                        <emphasis role="bold">Memberships</emphasis>
+                        field to select memberships to add a permission to those memberships. The
+                        <emphasis role="bold">Select Membership</emphasis>
+                        form will appear.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata fileref="images/selectmembership.png" format="PNG" align="center"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata fileref="images/selectmembership.png" format="PNG" align="center" width="146mm"/>
+                        </imageobject>
+                    </mediaobject>
+                </step>
+                <step>
+                    <para>
+                        Select a group on the left and the corresponding membership on the right. The selected
+                        membership will appear in the
+                        <emphasis role="bold">Memberships</emphasis>
+                        field.
+                    </para>
+                </step>
+                <step>
+                    <para>
+                        Click
+                        <emphasis role="bold">Save</emphasis>
+                        to accept adding a permission for the membership to the
+                        <emphasis role="bold">Memberships</emphasis>
+                        column.
+                    </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata fileref="images/managemembership.png" format="PNG" align="center"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata fileref="images/managemembership.png" format="PNG" align="center" width="150mm"/>
+                        </imageobject>
+                    </mediaobject>
+                    <para>
+                        You can also delete memberships that have permissions by clicking
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                            </imageobject>
+                        </inlinemediaobject>
+                        regarding to that membership, then click
+                        <emphasis role="bold">OK</emphasis>
+                        in the confirmation message.
+                    </para>
+                </step>
+            </procedure>
+        </section>
     </section>
-    <section id="sect-User_Guide-Manage_Tags-Edit">
-      <title>Edit</title>
-      <para>
-    <emphasis role="bold">Tag manager</emphasis> tab enables you to edit the existing tags.
-   </para>
-      <para>
-    Do the following:
-   </para>
-      <procedure id="proc-User_Guide-Edit-Editing_existing_tabs">
-        <title>Editing existing tabs</title>
-        <step>
-          <para>
-      Click the pen icon corresponding to the tag name which you want to edit in the <emphasis role="bold">Action</emphasis> column to edit the tag style configuration. The <emphasis role="bold">Edit tag style configuration</emphasis> form appears like the form to add a tag style.</para>
-        </step>
-        <step>
-          <para>
-      Change values in the fields <guimenu>Document range</guimenu> and <guimenu>HTML style</guimenu>, except <guimenu>Style name</guimenu>.</para>
-        </step>
-        <step>
-          <para>
-      Click <guimenu>Update</guimenu> to save new changes.
-     </para>
-        </step>
-      </procedure>
+    <section id="sect-User_Guide-Categories_and_Tags-Manage_Taxonomy">
+        <title>Manage categories</title>
+        <para>
+            A category can be understood as a classification practice and science. It is used to sort documents, aiming
+            at facilitating searches. The category management includes adding, editing and deleting a category tree.
+        </para>
+        <para>
+            Go to
+            <emphasis role="bold">Categories and Tags --> Manage Categories.</emphasis>
+        </para>
+        <mediaobject>
+            <imageobject role="html">
+                <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+                <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center" width="150mm"/>
+            </imageobject>
+        </mediaobject>
     </section>
-    <section id="sect-User_Guide-Manage_Tags-Delete_a_tag_style">
-      <title>Delete a tag style</title>
-      <para>To delete one tag style, simply click the corresponding <emphasis role="bold">Delete</emphasis> icon and select <emphasis role="bold">OK</emphasis> in the confirmation to accept your deletion. 
-   </para>
-      <mediaobject>
-         <imageobject role="html">
-            <imagedata fileref="images/confirmdeletion.png" format="PNG" align="center"/>
-         </imageobject>
-         <imageobject role="fo">
-            <imagedata fileref="images/confirmdeletion.png" format="PNG" align="center" width="101mm" />
-         </imageobject>
-      </mediaobject>
+    <section id="sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree">
+        <title>Add a category tree</title>
+
+        <procedure>
+            <step>
+                <para>
+                    Click the
+                    <emphasis role="bold">Add Category Tree</emphasis>
+                    button to add a new category. The
+                    <emphasis role="bold">Add Category Tree</emphasis>
+                    form will appear.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Enter the category tree name in the
+                    <emphasis role="bold">Name</emphasis>
+                    field which is required.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Select the workspace you want to work with.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Select the home path by clicking
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/Plus_tree_icon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    . The
+                    <emphasis role="bold">Select Home Path</emphasis>
+                    form will appear.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/select_home_path.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/Select_path_icon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    if you want to select the root path or click the arrow icon to go to the up level path. Click the
+                    plus sign to expand the folder.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/Select_path_icon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                    corresponding to the path that you want to select as a home path.
+                </para>
+                <para>
+                    Click
+                    <emphasis role="bold">Reset</emphasis>
+                    if you want to reset values that have just been selected or
+                    <emphasis role="bold">Next</emphasis>
+                    to select permissions for a category tree.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
+                        </imageobject>
+                        <textobject>
+                            <phrase>"Select user"</phrase>
+                        </textobject>
+                    </inlinemediaobject>
+                    to select a user or
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
+                        </imageobject>
+                        <textobject>
+                            <phrase>"Select memberships"</phrase>
+                        </textobject>
+                    </inlinemediaobject>
+                    to select memberships or
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/alluserpermission.png" format="PNG" width="7mm"/>
+                        </imageobject>
+                        <textobject>
+                            <phrase>"Select everyone"</phrase>
+                        </textobject>
+                    </inlinemediaobject>
+                    to select everyone to set permissions. The user or membership that you have just selected will be
+                    displayed in the
+                    <emphasis role="bold">User or Group</emphasis>
+                    field.
+                </para>
+                <para>
+                    Then, check at least one of these below options to set rights for the selected user to membership:
+                </para>
+                <table>
+                    <tgroup cols="2">
+                        <thead>
+                            <row>
+                                <entry>Field</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>
+                                    <emphasis role="bold">Read Right</emphasis>
+                                </entry>
+                                <entry>Select the
+                                    <emphasis role="bold">Read</emphasis>
+                                    right or not.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <emphasis role="bold">Add Note Right</emphasis>
+                                </entry>
+                                <entry>Select the
+                                    <emphasis role="bold">Add Node</emphasis>
+                                    right or not.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <emphasis role="bold">Set Property Right</emphasis>
+                                </entry>
+                                <entry>select the
+                                    <emphasis role="bold">Set Property</emphasis>
+                                    right or not.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <emphasis role="bold">HTML Style</emphasis>
+                                </entry>
+                                <entry>Include font-size, font-weight, color, font-family, text-decoration.</entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <emphasis role="bold">Remove Right</emphasis>
+                                </entry>
+                                <entry>Select the
+                                    <emphasis role="bold">Remove</emphasis>
+                                    right or not.
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <emphasis role="bold">Save</emphasis>
+                    to save all values, or
+                    <emphasis role="bold">Reset</emphasis>
+                    to change values that have just been set. After clicking <emphasis role="bold">Save</emphasis>, click
+                    <emphasis role="bold">Next</emphasis>
+                    to go to the next step.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/action_gimme.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/action_gimme.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Enter the name for an action of the category tree in the
+                    <emphasis role="bold">Name</emphasis>
+                    field which is required.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Select values for
+                    <emphasis role="bold">Lifecycle, Node Types, Target Workspace, Target Path, Affected Node Types
+                    </emphasis>
+                    which are required.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <emphasis role="bold">Save</emphasis>
+                    to save all values, then select
+                    <emphasis role="bold">Next</emphasis>
+                    to go to the next step.
+                </para>
+            </step>
+        </procedure>
+        <note>
+            <para>
+                Do not input some special characters into the
+                <emphasis role="bold">Name</emphasis>
+                field, such as: !,@,#,$,%,&amp;,*,(,).
+            </para>
+            <para>
+                Do not add a category which has the same name and level with existing taxonomies in a node.
+            </para>
+            <para>
+                The category name must contain less than 30 characters.
+            </para>
+        </note>
     </section>
-    <section id="sect-User_Guide-Manage_Tags-Tag_Permission_Manager">
-      <title>Tag Permission Manager</title>
-      <para>
-    The <guilabel>Tag permission manager</guilabel> tab helps you  set permissions regarding editing and deleting public tags.
-   </para>
-      <mediaobject>
-         <imageobject role="html">
-            <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center"/>
-         </imageobject>
-         <imageobject role="fo">
-            <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center" width="150mm"/>
-         </imageobject>
-      </mediaobject>
-      <procedure id="proc-User_Guide-Tag_Permission_Manager-Set_Permission_To_Tag_Management">
-        <title>Set Permission To Tag Management</title>
-        <step>
-          <para>
-      Click the <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>"Select user"</phrase>
-              </textobject>
-            </inlinemediaobject> icon beside the <guilabel>Memberships</guilabel> field to select memberships in order to add a permission for those memberships. The Select membership form will appear:
-     </para>
-          <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/selectmembership.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/selectmembership.png" format="PNG" align="center" width="146mm"/>
-             </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      Select a group on the left and the corresponding membership on the right. The selected membership will appear in the <guilabel>Memberships</guilabel> field:
-     </para>
-          <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/memberships.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/memberships.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
-          </mediaobject>
-        </step>
-        <step>
-          <para>
-      Click <guibutton>Save</guibutton> to accept adding a permission for the  membership to the <guilabel>Memberships</guilabel> column.
-     </para>
-          <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/managemembership.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/managemembership.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
-          </mediaobject>
-          <para>
-      You can also delete memberships that have permissions by clicking the Delete icon relevant to that membership, and then click <emphasis role="bold">OK</emphasis> in the confirmation message.</para>
-          <mediaobject>
-            <imageobject>
-              <imagedata  align="center" fileref="images/accept_delete.png" format="PNG" width="104mm" />
-            </imageobject>
-          </mediaobject>
-        </step>
-      </procedure>
+    <section id="sect-User_Guide-Categories_and_Tags-Edit_a_Taxonomy_Tree">
+        <title>Edit a category tree</title>
+        <procedure>
+            <step>
+                <para>
+                    Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                        </imageobject>
+                        <textobject>
+                            <phrase>pencil</phrase>
+                        </textobject>
+                    </inlinemediaobject>
+                    corresponding to the category tree you want to edit.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
+                        </imageobject>
+                        <textobject>
+                            <phrase>plus</phrase>
+                        </textobject>
+                    </inlinemediaobject>
+                    in the
+                    <emphasis role="bold">Action</emphasis>
+                    field to add more category trees. The
+                    <emphasis role="bold">Edit Category Tree</emphasis>
+                    form will appear.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>
+                    Enter a category name in the
+                    <emphasis role="bold">Category Name</emphasis>
+                    field which is required.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <emphasis role="bold">Save</emphasis>
+                    to save the category name.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <emphasis role="bold">Previous</emphasis>
+                    to return to the previous steps.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <emphasis role="bold">Save</emphasis>
+                    to save all changes, or
+                    <emphasis role="bold">Previous</emphasis>
+                    or
+                    <emphasis role="bold">Next</emphasis>
+                    if you want to edit more.
+                </para>
+            </step>
+        </procedure>
+        <note>
+            <para>
+                You can delete a category by clicking
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                    </imageobject>
+                </inlinemediaobject>
+                corresponding to the category that you want to delete. Click
+                <emphasis role="bold">OK</emphasis>
+                in the confirmation message to accept your deletion.
+            </para>
+            <para>
+                You cannot delete categories that have been referenced.
+            </para>
+        </note>
     </section>
-  </section>
-  <section id="sect-User_Guide-Categories_and_Tags-Manage_Taxonomy">
-    <title>Manage Categories</title>
-    <para>
-   A category may be understood as a classification practice and science. It is used to sort documents, aiming at facilitating searches. The category management includes adding, editing and deleting a category  tree.
-  </para>
-    <para>
-   Go to <guilabel>Administration &gt; Categories and Tags &gt; Manage Categories</guilabel>.
-  </para>
-    <mediaobject>
-       <imageobject role="html">
-          <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center" width="150mm" />
-       </imageobject>
-    </mediaobject>
-  </section>
-  <section id="sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree">
-    <title>Add a Taxonomy Tree</title>
-    <para>
-   Perform the steps in <xref linkend="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree"/> to add a taxonomy tree.
-  </para>
-    <procedure id="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree">
-      <title>Add a Taxonomy Tree</title>
-      <step>
-        <para>
-     Click the <guibutton>Add Taxonomy Tree</guibutton> button to add a new taxonomy. The <guilabel>Add taxonomy tree</guilabel> form will appear.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Enter the taxonomy tree name in the <guilabel>Name</guilabel> field. (*Required).
-    </para>
-      </step>
-      <step>
-        <para>
-     Select the workspace you want to work with.
-    </para>
-      </step>
-      <step>
-        <para>
-     Select the home path by clicking the plus item. The <guibutton>Select Home Path</guibutton> form will appear:
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/select_home_path.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Click the tick icon if you want to select the root path or click the arrow icon to go to the up level path. Click the plus sign to expand the folder.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click the tick icon corresponding to the path that you want to select as a home path.
-    </para>
-        <para>
-     Click <guimenu>Reset</guimenu> if you want to reset values that have just been selected or <guimenu>Next</guimenu> to select permissions for a taxonomy tree.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Click the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>"Select user"</phrase>
-            </textobject>
-          </inlinemediaobject>
-      icon to select a user or the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>"Select memberships"</phrase>
-            </textobject>
-          </inlinemediaobject>
-      icon to select memberships or the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/alluserpermission.png" format="PNG" width="7mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>"Select everyone"</phrase>
-            </textobject>
-          </inlinemediaobject>
-      icon to select everyone in order to set permissions. The user or membership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
-    </para>
-        <para>
-     Then, check at least one of these below options to set rights for the selected user to membership:
-    </para>
-        <variablelist>
-          <varlistentry>
-            <term>Read Right</term>
-            <listitem>
-              <para>
-        The option is to select the read right or not.
-       </para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Add Note Right</term>
-            <listitem>
-              <para>
-        The option is to select the Add Node right or not.
-       </para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Set Property Right</term>
-            <listitem>
-              <para>
-        The option is to select the Set Property Right or not.
-       </para>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term>Remove Right</term>
-            <listitem>
-              <para>
-        The option is to select the Remove right or not.
-       </para>
-            </listitem>
-          </varlistentry>
-        </variablelist>
-      </step>
-      <step>
-        <para>
-     Click <guibutton>Save</guibutton> to save all values, or <guibutton>Reset</guibutton> to change values that have just been set. After clicking <guibutton>Save</guibutton>, click <guibutton>Next</guibutton> to go to the next step.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/action_gimme.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/action_gimme.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Enter the name for an action of the taxonomy tree in the Name field. (*Required).
-    </para>
-      </step>
-      <step>
-        <para>
-     Select values for <guilabel>Life-cycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <guibutton>Save</guibutton> to save all values and, click <guibutton>Next</guibutton> to go to the next step.
-    </para>
-      </step>
-    </procedure>
-    <note>
-      <title>Note</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-      Do not input some special characters in the &apos;Name&apos; field like: !,@,#,$,%,&amp;,*,(,).
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      Do not add a taxonomy which has the same name and level with existing taxonomies in a node.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      The taxonomy name must contain less than 30 characters.
-     </para>
-        </listitem>
-      </itemizedlist>
-    </note>
-  </section>
-  <section id="sect-User_Guide-Categories_and_Tags-Edit_a_Taxonomy_Tree">
-    <title>Edit a Taxonomy Tree</title>
-    <para>
-   Perform the following steps to edit a taxonomy tree.
-  </para>
-    <procedure id="proc-User_Guide-Edit_a_Taxonomy_Tree-Edit_a_Taxonomy_Tree">
-      <title>Edit a Taxonomy Tree</title>
-      <step>
-        <para>
-     Click the edit icon 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>pencil</phrase>
-            </textobject>
-          </inlinemediaobject>
-     icon that corresponds to the taxonomy tree you want to edit.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Click the icon 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>plus</phrase>
-            </textobject>
-          </inlinemediaobject>
-      icon in the <guilabel>Action</guilabel> field to add more taxonomy trees. The Edit taxonomy tree will appear:
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Enter a taxonomy name in the Taxonomy name field. (*Required).
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <guibutton>Save</guibutton>to save the taxonomy name.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <guibutton>Previous</guibutton> to return to the previous steps.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <guibutton>Save</guibutton> to save all changes and the <guibutton>Previous</guibutton> or <guibutton>Next</guibutton> if you want to edit more.
-    </para>
-      </step>
-    </procedure>
-    <note>
-      <title>Note</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-      You can delete a taxonomy by clicking the trash icon corresponding to the taxonomy that you want to delete. Click <guibutton>OK</guibutton> on the confirmation message to accept deleting this taxonomy, or click Cancel to discard this action.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      You cannot delete taxonomies that have been referenced.
-     </para>
-        </listitem>
-      </itemizedlist>
-    </note>
-  </section>
 </section>

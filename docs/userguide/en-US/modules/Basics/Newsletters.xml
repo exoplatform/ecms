@@ -4,20 +4,22 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Newsletters">
-  <title>Newsletters</title>
   <para>
-  &PRODUCT; provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
+  &PRODUCT; provides the <emphasis role="bold">Newsletters</emphasis> service, aiming at helping users quickly get the updated newsletters from a website.
  </para>
   <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
     <title>Newsletter Viewer</title>
-    <para>With Newsletters, you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
-    <para>
-   Do the following to subscribe to newsletters from eXo Service:
+    <para>With <emphasis role="bold">Newsletters,</emphasis> you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
+    <citetitle>
+	<para><emphasis role="bold">
+   Subscribe your email to get newsletters from eXo Service.
+   </emphasis>
   </para>
+  </citetitle>
     <procedure>
       <step>
         <para>
-     Go to <emphasis role="bold">Newsletters</emphasis> on the navigation bar. The Newsletters page will appear:
+     Go to <emphasis role="bold">Newsletters</emphasis> on the navigation bar. The <emphasis role="bold">Newsletters</emphasis> page will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -37,50 +39,54 @@
         <para>
      Select the checkbox corresponding to the subscription that you want to get newsletters.
     </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/newsletters-subscription.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/newsletters-subscription.png" format="PNG" align="center" width="143mm" />
-           </imageobject>
-        </mediaobject>
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Subscribe</emphasis>. A message informing that you have just subscribed to the selected newsletter will appear.
+     Click <emphasis role="bold">Subscribe.</emphasis> A message informing that you have just subscribed to the selected newsletter will appear.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message. You can reselect the subscription that you want or do not want to receive newsletters by re-selecting the checkbox in the<emphasis role="bold"> Check to subscribe</emphasis> column.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/newsletters-subscript_select.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/newsletters-subscript_select.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Click <emphasis role="bold">Change </emphasis><emphasis role="bold">your subscriptions</emphasis> to update your changes.
+     Click <emphasis role="bold">OK</emphasis> in the confirmation message. You can reselect the subscription that you want or do not want to receive newsletters by re-selecting the checkbox in the <emphasis role="bold">Check to subscribe</emphasis> column.
     </para>
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Forget this email</emphasis> if you want to unsubscribe from newsletters.
+     Click <emphasis role="bold">Change your subscriptions</emphasis> to update your changes.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Forget this email</emphasis> if you want to unsubscribe from newsletters.
     </para>
       </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
-    <title>Manage Newsletters</title>
+    <title>Newsletter Manager</title>
     <para>
-   &PRODUCT; facilitates administrators to easily and quickly manage newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
+   &PRODUCT; facilitates administrators to easily and quickly manage newsletters.
   </para>
+    <para>To use this portlet, you first need to add it to a specific page by dragging and dropping <emphasis role="bold">Newsletter Manager</emphasis> from
+      <emphasis role="bold">Page Editor</emphasis> to the main pane. This can be done when
+      <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link>
+      or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link>
+      or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.
+  </para>
+  <mediaobject>
+    <imageobject role="html">
+      <imagedata align="center" fileref="images/NewsletterManagementPortlet.png" format="PNG"/>
+    </imageobject>
+    <imageobject role="fo">
+      <imagedata align="center" fileref="images/NewsletterManagementPortlet.png" format="PNG" width="150mm"/>
+    </imageobject>
+  </mediaobject>
+  <note>
+  <para>
+  In eXo Platform, the <emphasis role="bold">Newsletter Manager</emphasis> portlet is put in <emphasis role="bold">Page Editor --> Applications --> Newsletter Manager.</emphasis>
+  </para>
+  </note>
+    <para>Access the page with the <emphasis role="bold">Newsletter Management</emphasis> portlet to open the <emphasis role="bold">newsletter</emphasis> page.</para>
     <mediaobject>
        <imageobject role="html">
           <imagedata fileref="images/newsletters-newsletter_manager.png" format="PNG" align="center"/>
@@ -90,17 +96,30 @@
        </imageobject>
     </mediaobject>
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
-      <title>Category Management</title>
+      <title>Manage categories in Newsletter</title>
       <para>
-    This section details category management.
+    This section shows you how to manage categories in a Newsletter page, including:
    </para>
+    <itemizedlist>
+	<listitem>
+	<para>Add a new category</para>
+	</listitem>
+	<listitem>
+	<para>Edit a category</para>
+	</listitem>
+	<listitem>
+	<para>Delete a category</para>
+	</listitem>
+	<listitem>
+	<para>Manage users</para>
+	</listitem>
+	</itemizedlist>
       <section id="sect-User_Guide-Category_Management-Add_a_new_category">
         <title>Add a new category</title>
-        <procedure id="proc-User_Guide-Add_a_new_category-Add_a_new_category">
-          <title>Add a new category</title>
+        <procedure>
           <step>
             <para>
-       Click <emphasis role="bold">New Category</emphasis> on the action bar of the Newsletters page. The Category form will appear.
+       Click <emphasis role="bold">New Category</emphasis> on the Action bar of the <emphasis role="bold">Newsletter</emphasis> page. The  <emphasis role="bold">Create New Category</emphasis> form will appear.
       </para>
             <mediaobject>
                <imageobject role="html">
@@ -110,8 +129,8 @@
                   <imagedata fileref="images/newsletters-category_form.png" format="PNG" align="center" width="116mm" />
                </imageobject>
             </mediaobject>
+              <para><emphasis role="bold">Details:</emphasis></para>
             <table id="tabl-User_Guide-Add_a_new_category-Category_Form_Field_Details">
-              <title>Category Form Field Details</title>
               <tgroup cols="2">
                 <thead>
                   <row>
@@ -120,95 +139,134 @@
                   </row>
                 </thead>
                 <tbody>
-                  <row>
-                    <entry> Name </entry>
-                    <entry> The name of a category. This field is required. </entry>
+                    <row>
+                    <entry><emphasis role="bold">Asterisk (*) </emphasis> </entry>
+                    <entry>This mark next to each field means that it is required to enter values into that field. </entry>
                   </row>
                   <row>
-                    <entry> Title </entry>
-                    <entry> The title of a category. This field is required. </entry>
+                    <entry><emphasis role="bold">Name</emphasis> </entry>
+                    <entry> The name of a category. </entry>
                   </row>
                   <row>
-                    <entry> Description </entry>
+                    <entry><emphasis role="bold">Title</emphasis> </entry>
+                    <entry> The title of a category. </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="bold">Description</emphasis> </entry>
                     <entry> A brief description of the category. </entry>
                   </row>
                   <row>
-                    <entry> Moderator </entry>
-                    <entry> Select users/groups who have rights to manage this category.</entry>
+                    <entry><emphasis role="bold">Moderator</emphasis> </entry>
+                    <entry> Select users/groups who have rights to manage this category. </entry>
                   </row>
                   <row>
-                    <entry> Save </entry>
-                    <entry> Accepts the addition of a new category. </entry>
+                    <entry><emphasis role="bold">Save</emphasis> </entry>
+                    <entry> Accept the addition of a new category. </entry>
                   </row>
                   <row>
-                    <entry> Cancel </entry>
-                    <entry> Quits the category form without adding a category. </entry>
+                    <entry><emphasis role="bold">Cancel</emphasis> </entry>
+                    <entry> Quit the category form without adding a category. </entry>
                   </row>
                 </tbody>
               </tgroup>
             </table>
           </step>
-          <step id="step-User_Guide-Add_a_new_category-Input_values_for_fields">
-            <title>Input values for fields</title>
+          <step>
+            <para xml:id="step-User_Guide-Add_a_new_category-Input_values_for_fields">Input values into fields.</para>
             <substeps>
               <step>
-                <para>Select a moderator for a category by clicking the 
-                     <inlinemediaobject>
-                    <imageobject>
-                      <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
-                    </imageobject>
-                    <textobject>
-                       <phrase>"Select user"</phrase>
-                    </textobject>
-                  </inlinemediaobject> icon next to the Moderator field to select a user. The <emphasis role="bold">User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis>
-               </para>
-            </step>
-            <step>
-               <para>
-                  Click the <inlinemediaobject>
-                    <imageobject>
-                      <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
-                    </imageobject>
-                    <textobject>
-                       <phrase>green tick</phrase>
-                    </textobject>
-                  </inlinemediaobject>  corresponding to a user in the list that you want to select.
-               </para>
-               <mediaobject>
+                  <para>
+                      <emphasis role="bold">i.</emphasis>
+                      Select a moderator for a category by clicking
+                      <inlinemediaobject>
+                          <imageobject>
+                              <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
+                          </imageobject>
+                          <textobject>
+                              <phrase>"Select user"</phrase>
+                          </textobject>
+                      </inlinemediaobject>
+                      next to the
+                      <emphasis role="bold">Moderator</emphasis>
+                      field to select a user. The
+                      <emphasis role="bold">User Selector</emphasis>
+                      form will appear.
+                  </para>
+                <mediaobject>
                <imageobject role="html">
                   <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center"/>
                </imageobject>
                <imageobject role="fo">
                   <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center" width="150mm"/>
                </imageobject>
-            </mediaobject>
+                </mediaobject>
+                  <itemizedlist>
+                      <listitem>
+                              <para>
+                                  Click
+                                  <inlinemediaobject>
+                                      <imageobject>
+                                          <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                                      </imageobject>
+                                      <textobject>
+                                          <phrase>green tick</phrase>
+                                      </textobject>
+                                  </inlinemediaobject>
+                                  corresponding to a user in the list that you want to select.
+                              </para>
+                      </listitem>
+                  </itemizedlist>
+
             </step>
               <step>
-                <para>
-                     Click the 
-                  <inlinemediaobject>
-                    <imageobject>
-                      <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
-                    </imageobject>
-                    <textobject>
-                       <phrase>"Select membership"</phrase>
-                    </textobject>
-                  </inlinemediaobject> icon to select users in a specific group. The Group selector will appear</para>
-                <mediaobject>
-                   <imageobject role="html">
-                      <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"/>
-                   </imageobject>
-                   <imageobject role="fo">
-                      <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center" width="139mm" />
-                   </imageobject>
-                </mediaobject>
-                <para>
-                   Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
-               </para>
+                  <para>
+                      <emphasis role="bold">ii.</emphasis>
+                      Click
+                      <inlinemediaobject>
+                          <imageobject>
+                              <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
+                          </imageobject>
+                          <textobject>
+                              <phrase>"Select membership"</phrase>
+                          </textobject>
+                      </inlinemediaobject>
+                      to select users in a specific group. The
+                      <emphasis role="bold">Group Selector</emphasis>
+                      window will appear.
+                  </para>
+                  <mediaobject>
+                      <imageobject role="html">
+                          <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"/>
+                      </imageobject>
+                      <imageobject role="fo">
+                          <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"
+                                     width="139mm"/>
+                      </imageobject>
+                  </mediaobject>
+                  <itemizedlist>
+                      <listitem>
+                          <para>
+                              Select a group from the left pane and a membership type from the right pane. The
+                              membership and group selected will be displayed in the
+                              <emphasis role="bold">Moderator</emphasis>
+                              field.
+                          </para>
+                      </listitem>
+					  <listitem>
+					  <para>You will see your added category in the list of categories.
+					  </para>
+					  </listitem>
+                  </itemizedlist>
               </step>
             </substeps>
+			<itemizedlist>
+			<listitem>
             <para>After creating a category, you can create new subscriptions or newsletters for this category.</para>
-            <para>When clicking the <emphasis role="bold">Administration</emphasis> button, you see a drop-down menu consisting of all actions on this category.</para>
+			</listitem>
+			<listitem>
+            <para>When clicking the <emphasis role="bold">Administration</emphasis> button, you will see a drop-down menu consisting of all actions on this category.</para>
+			</listitem>
+			</itemizedlist>
           </step>
         </procedure>
       </section>
@@ -217,21 +275,36 @@
         <procedure>
           <step>
             <para>
-       Select a category that you want to edit<emphasis role="bold"> &gt;</emphasis> Click <emphasis role="bold">Administration &gt; Edit Category</emphasis> in the drop-down menu to bring up the Category form.
-      </para>
-         <mediaobject>
-            <imageobject role="html">
-               <imagedata fileref="images/newsletters-existing_category_form.png" format="PNG" align="center"/>
-            </imageobject>
-            <imageobject role="fo">
-               <imagedata fileref="images/newsletters-existing_category_form.png" format="PNG" align="center" width="124mm" />
-            </imageobject>
-         </mediaobject>
+              Select a category that you want to edit.
+             </para>
+             </step>
+             <step>
+             <para>
+              Click
+              <emphasis role="bold">Administration --> Edit Category</emphasis> from the drop-down menu.
+            </para>
+            <mediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/EditCategory1.png" format="PNG" align="center"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/EditCategory1.png" format="PNG" align="center" width="124mm"/>
+              </imageobject>
+            </mediaobject>
+            <para>The
+              <emphasis role="bold">Create New Category</emphasis>
+              form appears.
+            </para>
           </step>
           <step>
             <para>
-       Change the values in the Title and Description fields as required.
-      (Note: You cannot change the name of the category).</para>
+       Change the values in the <emphasis role="bold">Title</emphasis> and <emphasis role="bold">Description</emphasis> fields as required.
+      </para>
+	  <note>
+	  <para>
+	  The category name cannot be changed.
+	  </para>
+	  </note>
           </step>
           <step>
             <para>
@@ -242,39 +315,54 @@
       </section>
       <section id="sect-User_Guide-Category_Management-Delete_a_category">
         <title>Delete a category</title>
-        <procedure id="proc-User_Guide-Delete_a_category-Delete_a_category">
-          <title>Delete a category</title>
+        <procedure>
           <step>
             <para>
-       Click <emphasis role="bold">Delete category</emphasis> in the menu. A confirmation will appear:
-      </para>
-            <mediaobject>
-              <imageobject role="html">
-                <imagedata align="center"  fileref="images/newsletters_category_delete_confirm.png" format="PNG"/>
-              </imageobject>
-              <imageobject role="fo">
-                <imagedata  align="center" fileref="images/newsletters_category_delete_confirm.png" format="PNG" width="104mm"/>
-              </imageobject>
-            </mediaobject>
+              Select a category that you want to edit.
+              </para>
+              </step>
+              <step>
+              <para>
+              Click
+              <emphasis role="bold">Administration</emphasis>, then select <emphasis role="bold">Delete Category</emphasis> from the drop-down menu.
+            </para>
           </step>
           <step>
             <para>
-       Click <emphasis role="bold">OK</emphasis> to delete the category or <emphasis role="bold">Cancel</emphasis> to exit without deleting.
+       Click <emphasis role="bold">OK</emphasis> to delete the category.
       </para>
           </step>
         </procedure>
       </section>
       <section id="sect-User_Guide-Category_Management-Manage_Users">
-        <title>Manage Users</title>
+        <title>Manage users</title>
         <para>
-     Administrators can manage users accounts and activity with <emphasis>edit</emphasis>, <emphasis>ban</emphasis>, <emphasis>remove ban</emphasis> or <emphasis>delete</emphasis> actions.
+     Administrators can manage users accounts and activities with actions, such as <emphasis>editing, banning, removing bans,</emphasis> or <emphasis>deleting.</emphasis>
     </para>
         <procedure>
-          <title/>
           <step>
             <para>
-       Click <emphasis role="bold">Administration &gt; Manage Users</emphasis> in the menu. The <emphasis role="bold">Manage Users</emphasis> form will appear:
-      </para>
+             Select a category that you want to edit.
+            </para>
+          </step>
+          <step>
+          <para>
+              Select
+              <emphasis role="bold">Administration --> Manage Users</emphasis>
+              from the drop-down menu.
+            </para>
+            <mediaobject>
+              <imageobject role="html">
+                <imagedata align="center" fileref="images/ManageUsers-Cat.png" format="PNG"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata align="center" fileref="images/ManageUsers-Cat.png" format="PNG" width="142mm"/>
+              </imageobject>
+            </mediaobject>
+            <para>The
+              <emphasis role="bold">Manage Users</emphasis>
+              form will appear.
+            </para>
             <mediaobject>
               <imageobject role="html">
                 <imagedata  align="center"  fileref="images/newsletters_manage_users_form.png" format="PNG"/>
@@ -283,29 +371,29 @@
                 <imagedata   align="center" fileref="images/newsletters_manage_users_form.png" format="PNG" width="142mm"/>
               </imageobject>
             </mediaobject>
+            <para><emphasis role="bold">Details:</emphasis></para>
             <table>
-              <title/>
               <tgroup cols="2">
                 <thead>
                   <row>
                     <entry> Field </entry>
-                    <entry> Details </entry>
+                    <entry> Description </entry>
                   </row>
                 </thead>
                 <tbody>
                   <row>
-                    <entry> Email </entry>
+                    <entry><emphasis role="bold"> Email</emphasis> </entry>
                     <entry> The email address of user who has subscribed this subscription. </entry>
                   </row>
                   <row>
-                    <entry> Banned </entry>
+                    <entry><emphasis role="bold">Banned</emphasis> </entry>
                     <entry>
                       <para>
             This field has two values:
            </para>
                       <variablelist>
                         <varlistentry>
-                          <term>False</term>
+                          <term><emphasis role="bold">False</emphasis></term>
                           <listitem>
                             <para>
                The user is allowed to get email.
@@ -313,10 +401,10 @@
                           </listitem>
                         </varlistentry>
                         <varlistentry>
-                          <term>True</term>
+                          <term><emphasis role="bold">True</emphasis></term>
                           <listitem>
                             <para>
-               The user isn&apos;t allowed to get email.
+               The user is not allowed to get email.
               </para>
                           </listitem>
                         </varlistentry>
@@ -331,7 +419,7 @@
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
-                    <entry> To ban this user from receiving email. </entry>
+                    <entry> Ban this user from receiving emails. </entry>
                   </row>
                   <row>
                     <entry>
@@ -341,7 +429,7 @@
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
-                    <entry> To remove a ban on a user. </entry>
+                    <entry> Remove a ban on a user. </entry>
                   </row>
                   <row>
                     <entry>
@@ -351,7 +439,7 @@
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
-                    <entry> To delete the user. </entry>
+                    <entry> Delete the user. </entry>
                   </row>
                 </tbody>
               </tgroup>
@@ -368,16 +456,24 @@
     <section id="sect-User_Guide-Manage_Newsletters-Subscriptions">
       <title>Subscriptions</title>
       <para>
-    An administrator can add more subscriptions to any category. There are two ways to do this:
+    Administrators can add more subscriptions to any category via two ways as follows:
    </para>
-      <procedure id="proc-User_Guide-Subscriptions-Method_One">
-        <title>Method One</title>
+   <para xml:id="proc-User_Guide-Subscriptions-Method_One"><emphasis role="bold">The first way</emphasis></para>
+      <procedure>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscriptions</emphasis> on the Action bar.
+      Click <emphasis role="bold">New Subscription</emphasis> on the Action bar.
+       <mediaobject>
+            <imageobject role="html">
+              <imagedata  align="center"  fileref="images/NewSubscription.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata   align="center" fileref="images/NewSubscription.png" format="PNG" width="128mm"/>
+            </imageobject>
+          </mediaobject>
      </para>
           <para>
-      The <emphasis role="bold">Subscription form</emphasis> will appear:
+      The <emphasis role="bold">Create New Subscription</emphasis> form will appear.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -387,35 +483,39 @@
               <imagedata   align="center" fileref="images/newsletters_subscription_form.png" format="PNG" width="128mm"/>
             </imageobject>
           </mediaobject>
+          <para><emphasis role="bold">Details:</emphasis></para>
           <table>
-            <title/>
             <tgroup cols="2">
               <thead>
                 <row>
                   <entry> Field </entry>
-                  <entry> Details </entry>
+                  <entry> Description </entry>
                 </row>
               </thead>
               <tbody>
-                <row>
-                  <entry> Category </entry>
-                  <entry> The category that contains this subscription. </entry>
+               <row>
+                  <entry><emphasis role="bold"> Asterisk (*) </emphasis></entry>
+                  <entry> This mark next to each field means that it is required to enter values into that field. </entry>
                 </row>
                 <row>
-                  <entry> Name </entry>
-                  <entry> The name of the subscription. This field is required. </entry>
+                  <entry><emphasis role="bold">Category</emphasis> </entry>
+                  <entry> The category which contains this subscription. </entry>
                 </row>
                 <row>
-                  <entry> Title </entry>
-                  <entry> The title of the subscription. This field is required. </entry>
+                  <entry><emphasis role="bold"> Name</emphasis> </entry>
+                  <entry> The name of the subscription. </entry>
                 </row>
                 <row>
-                  <entry> Description </entry>
-                  <entry> The brief description about the subscription. This field is not required. </entry>
+                  <entry><emphasis role="bold">Title</emphasis> </entry>
+                  <entry> The title of the subscription. </entry>
                 </row>
                 <row>
-                  <entry> Redactor </entry>
-                  <entry> Select users/groups who have rights to manage this subscription This field is required. </entry>
+                  <entry><emphasis role="bold"> Description</emphasis> </entry>
+                  <entry> The brief description about the subscription. </entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">Redactor</emphasis> </entry>
+                  <entry> Select users/groups who have rights to manage this subscription. </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -423,16 +523,11 @@
         </step>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>scroll arrows</phrase>
-              </textobject>
-            </inlinemediaobject> icon and select the category from the drop-down menu.
-     </para>
+            Click the
+            <emphasis role="bold">Category</emphasis>
+            field
+            and select a category from the drop-down menu.
+          </para>
         </step>
         <step>
           <para>
@@ -441,15 +536,15 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to create the new subscription or <emphasis role="bold">Cancel</emphasis> to quit without creating a new subscription.
+      Click <emphasis role="bold">Save</emphasis> to create the new subscription.
      </para>
         </step>
       </procedure>
-      <procedure id="proc-User_Guide-Subscriptions-Method_Two">
-        <title>Method Two</title>
+	  <para xml:id="proc-User_Guide-Subscriptions-Method_Two"><emphasis role="bold">The second way</emphasis></para>
+      <procedure>
         <step>
           <para>
-      Click directly  the category to which you want to create a new subscription:
+      Click directly the category to which you want to add a new subscription.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -462,10 +557,10 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscriptions</emphasis> on the Action bar.
+      Click <emphasis role="bold">New Subscription</emphasis> on the Action bar.
      </para>
           <para>
-      The <emphasis role="bold">Subscription form</emphasis> pops    up:
+      The <emphasis role="bold">Create New Subscription</emphasis> form pops up.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -476,14 +571,23 @@
             </imageobject>
           </mediaobject>
         </step>
-      </procedure>
+      <step>
       <para>
-    Do the same steps as <emphasis role="bold">Method One</emphasis>.</para>
-      <para>Administrators can create newsletters for each subscriptions.
+    Do the same steps (3, 4) as stated in the <link linkend="proc-User_Guide-Subscriptions-Method_One">first way</link>.
+	  </para>
+	  </step>
+	  </procedure>
+	  <itemizedlist>
+	  <listitem>
+      <para>Administrators can create newsletters for each subscription.
    </para>
+   </listitem>
+   <listitem>
       <para>
     These Newsletters can be opened, edited, deleted or converted to a template for reuse.
    </para>
+   </listitem>
+   </itemizedlist>
       <mediaobject>
         <imageobject role="html">
           <imagedata  align="center"  fileref="images/newsletters_manage_subscriptions.png" format="PNG"/>
@@ -492,13 +596,13 @@
           <imagedata   align="center" fileref="images/newsletters_manage_subscriptions.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
+      <para><emphasis role="bold">Details:</emphasis></para>
       <table>
-        <title/>
         <tgroup cols="2">
           <thead>
             <row>
               <entry> Element </entry>
-              <entry> Details </entry>
+              <entry> Description </entry>
             </row>
           </thead>
           <tbody>
@@ -524,7 +628,7 @@
               <entry>
                 <emphasis role="bold">Date</emphasis>
               </entry>
-              <entry> The date and time when creating this letter. </entry>
+              <entry> The date and time when creating this newsletter. </entry>
             </row>
             <row>
               <entry>
@@ -536,22 +640,21 @@
               <entry>
                 <emphasis role="bold">Moderation</emphasis>
               </entry>
-              <entry> This button allows you to take actions on a newsletter that you select. </entry>
+              <entry> This button allows you to take actions on your selected newsletter. </entry>
             </row>
           </tbody>
         </tgroup>
       </table>
     </section>
     <section id="sect-User_Guide-Manage_Newsletters-Open_a_Newsletter">
-      <title>Open a Newsletter</title>
+      <title>Open a newsletter</title>
       <para>
-    Administrators can easily view the content of a newsletter.
+    Administrators can easily view the content of a newsletter as follows:
    </para>
       <procedure>
-        <title/>
         <step>
           <para>
-      Choose a category by left-clicking it or checking the box and then selecting <emphasis role="bold">Administration &gt; Open</emphasis>.
+      Open the <emphasis role="bold">subscription</emphasis> containing the letter you want to open by clicking it or checking the corresponding box and then selecting <emphasis role="bold">Administration --> Open</emphasis>.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -564,7 +667,9 @@
         </step>
         <step>
           <para>
-      Select the newsletter that you want to open by left-clicking it, or selecting the checkbox.
+      Directly click the newsletter;
+		</para>
+		<para> Or, select the checkbox corresponding to your desired newsletter, then click <emphasis role="bold">Administration --> Open.</emphasis>
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -574,29 +679,8 @@
               <imagedata   align="center" fileref="images/newsletters_newsletter_administration2.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
-        </step>
-        <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/newsletters_moderation_icon.png" format="PNG" width="32mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>[ Moderation ]</phrase>
-              </textobject>
-            </inlinemediaobject> button, then select <emphasis role="bold">Open</emphasis> in the menu:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center"  fileref="images/newsletters_moderation_open.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata  align="center" fileref="images/newsletters_moderation_open.png" format="PNG" width="41mm"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-      The <emphasis role="bold">View Newsletter&apos;s Content</emphasis> form pops up:
+      The <emphasis role="bold">View Newsletter&apos;s Content</emphasis> form pops up.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -616,19 +700,15 @@
     </section>
     <section id="sect-User_Guide-Manage_Newsletters-Edit_a_newsletter">
       <title>Edit a newsletter</title>
-      <para>
-    Do the following to edit a newsletter.
-   </para>
-      <procedure id="proc-User_Guide-Edit_a_newsletter-Edit_a_newsletter">
-        <title>Edit a newsletter</title>
+      <procedure>
         <step>
           <para>
-      In a specific subscription, select the newsletter you want to edit by selecting the checkbox.
+      Select the newsletter you want to edit by ticking the relevant checkbox in a specific subscription. 
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
@@ -636,7 +716,7 @@
               <textobject>
                  <phrase>[ Moderation ]</phrase>
               </textobject>
-            </inlinemediaobject> button then select <emphasis role="bold">Edit</emphasis> in the menu.
+            </inlinemediaobject>, then select <emphasis role="bold">Edit</emphasis> from the drop-down menu.
      </para>
          <mediaobject>
             <imageobject role="html">
@@ -647,7 +727,7 @@
             </imageobject>
          </mediaobject>
           <para>
-      The <emphasis role="bold">Newsletter entry form</emphasis> pops up:
+      The <emphasis role="bold">Newsletter Entry</emphasis> pops up.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -660,7 +740,7 @@
         </step>
         <step>
           <para>
-      Change the values in the fields that you want to edit: <emphasis role="bold">Template</emphasis>, <emphasis role="bold">Send date</emphasis>, <emphasis role="bold">Category</emphasis>, <emphasis role="bold">Subscription</emphasis>.
+      Change the values in the fields that you want to edit: <emphasis role="bold">Template, Send Date, Category, Subscription.</emphasis>
      </para>
         </step>
         <step>
@@ -670,12 +750,12 @@
         </step>
         <step>
           <para>
-      Change the values in the fields <emphasis role="bold">Title</emphasis> and <emphasis role="bold">Main content</emphasis>.
+      Change values in the <emphasis role="bold">Title</emphasis> and <emphasis role="bold">Main Content</emphasis> fields.
      </para>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to save as draft, or click <emphasis role="bold">Send</emphasis>.
+      Click <emphasis role="bold">Save</emphasis> to save as draft, or click <emphasis role="bold">Send.</emphasis>
      </para>
         </step>
       </procedure>
@@ -685,24 +765,15 @@
       <para>
     Administrator can delete obsolete newsletters.
    </para>
-      <procedure id="proc-User_Guide-Delete_a_newsletter-Delete_a_newsletter">
-        <title>Delete a newsletter</title>
+      <procedure>
         <step>
           <para>
-      In a specific subscription, select the newsletter that you want to delete by selecting the checkbox.
+      In a specific subscription, select the newsletter you want to delete by ticking the corresponding checkbox.
      </para>
-          <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center" width="40mm" />
-             </imageobject>
-          </mediaobject>
         </step>
         <step>
           <para>
-      Click the 
+      Click 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
@@ -710,34 +781,30 @@
               <textobject>
                  <phrase>[ Moderation ]</phrase>
               </textobject>
-            </inlinemediaobject> button then click <emphasis role="bold">Delete</emphasis> in the menu.
-     </para>
-          <para>
-      The confirmation message will be displayed:
+            </inlinemediaobject>, then select <emphasis role="bold">Delete</emphasis> in the menu.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/newsletter-deleteconfirmdialog.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/newsletter-deleteconfirmdialog.png" format="PNG" align="center" width="96mm" />
-             </imageobject>
-          </mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center" width="41mm" />
+            </imageobject>
+         </mediaobject>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">OK</emphasis> to accept deleting this newsletter, or <emphasis role="bold">Cancel</emphasis> to quit without deleting.
+      Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion.
      </para>
         </step>
       </procedure>
     </section>
     <section id="sect-User_Guide-Manage_Newsletters-Convert_as_Template">
-      <title>Convert as Template</title>
+      <title>Convert as template</title>
       <para>
     The administrator can reuse the template of the frequently used newsletter template.
    </para>
-      <procedure id="proc-User_Guide-Convert_as_Template-Convert_to_template">
-        <title>Convert to template</title>
+      <procedure>
         <step>
           <para>
       Select the newsletter that you want to create as a template.
@@ -745,7 +812,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
@@ -753,7 +820,7 @@
               <textobject>
                  <phrase>[ Moderation ]</phrase>
               </textobject>
-            </inlinemediaobject> button then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+            </inlinemediaobject>, then select <emphasis role="bold">Convert As Template</emphasis> from the drop-down menu. For the next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
      </para>
         </step>
       </procedure>
@@ -761,18 +828,18 @@
     <section id="sect-User_Guide-Manage_Newsletters-Newsletters">
       <title>Newsletters</title>
       <para>
-    Each subscription consists of many newsletters. <emphasis role="bold">&PRODUCT;</emphasis> helps you easily create newsletters by following these steps.
+    Each subscription consists of many newsletters. In eXo Platform, you can easily create newsletters by following these steps.
    </para>
-      <procedure id="proc-User_Guide-Newsletters-Creating_Newsletters">
-        <title>Creating Newsletters</title>
+   <para id="proc-User_Guide-Newsletters-Creating_Newsletters"><emphasis role="bold">Create a newsletter</emphasis></para>
+      <procedure>
         <step>
           <para>
-      Go to <emphasis role="bold">Group &gt; Newsletters </emphasis> on the administration bar. The eXo Newsletter appears.
+      Select a subscription where you want to create a newsletter.
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/newletterbutton.png" format="PNG" width="35mm"/>
@@ -780,7 +847,7 @@
               <textobject>
                  <phrase>[ New Letter ]</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
+            </inlinemediaobject> on the Action bar. The <emphasis role="bold">Newsletter Entry</emphasis> form appears.
      </para>
           <mediaobject>
             <imageobject>
@@ -788,36 +855,37 @@
             </imageobject>
           </mediaobject>
           <para>
+	<emphasis role="bold">
       Details:
+	</emphasis>
      </para>
           <table>
-            <title/>
             <tgroup cols="2">
               <thead>
                 <row>
                   <entry> Field </entry>
-                  <entry> Details </entry>
+                  <entry> Description </entry>
                 </row>
               </thead>
               <tbody>
                 <row>
-                  <entry> Template </entry>
-                  <entry> The template for your newsletter form. <emphasis role="bold">Basic Template</emphasis> is set by default.. </entry>
+                  <entry><emphasis role="bold">Template</emphasis> </entry>
+                  <entry> The template for your newsletter form. <emphasis role="bold">Basic Template</emphasis> is set by default. </entry>
                 </row>
                 <row>
-                  <entry> Send date </entry>
+                  <entry><emphasis role="bold">Send Date</emphasis> </entry>
                   <entry> The date and time to send the newsletter.</entry>
                 </row>
                 <row>
-                  <entry> Category </entry>
+                  <entry><emphasis role="bold">Category</emphasis> </entry>
                   <entry> The category contains this newsletter. </entry>
                 </row>
                 <row>
-                  <entry> Subscription </entry>
+                  <entry><emphasis role="bold">Subscription</emphasis> </entry>
                   <entry> The subscription contains this newsletter. </entry>
                 </row>
                 <row>
-                  <entry> Update sending parameters </entry>
+                  <entry><emphasis role="bold">Update Sending Parameters</emphasis> </entry>
                   <entry> This button allows you to update information about this newsletter. </entry>
                 </row>
               </tbody>
@@ -826,20 +894,15 @@
         </step>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>scroll arrows</phrase>
-              </textobject>
-            </inlinemediaobject> icon to select the template for the newsletter.
-     </para>
+            Click the
+            <emphasis role="bold">Template</emphasis>
+            field
+            to select the template for the newsletter.
+          </para>
         </step>
         <step>
           <para>
-      Click the <emphasis role="bold">Send Date</emphasis> field. The calendar will appear to allow you to choose the date and time when you want to send the newsletter.
+      Click the <emphasis role="bold">Send Date</emphasis> field. The calendar will appear, allowing you to select the date and time when you want to send the newsletter.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -852,20 +915,13 @@
         </step>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>scroll arrows</phrase>
-              </textobject>
-            </inlinemediaobject> icon in the category field to select the category and the subscription in list.
+      Click the <emphasis role="bold">Category</emphasis> and <emphasis role="bold">Subscription</emphasis> to
+      select the category and the subscription in the list.
      </para>
         </step>
         <step>
           <para>
-      Click the <emphasis role="bold">Update sending parameters</emphasis> button to update information about this newsletter. A message pops up and informs you that you have updated information successfully.
+      Click the <emphasis role="bold">Update Sending Parameters</emphasis> button to update information about this newsletter. A message pops up and informs you that you have updated information successfully.
      </para>
         </step>
         <step>
@@ -875,7 +931,7 @@
         </step>
         <step>
           <para>
-      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> text box.
+      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main Content</emphasis> textbox.
      </para>
         </step>
         <step>
@@ -883,7 +939,7 @@
       Click <emphasis role="bold">Save</emphasis> to save this newsletter as draft, or click <emphasis role="bold">Send</emphasis> to send this newsletter.
      </para>
         </step>
-        <step>
+    <!--    <step>
           <para>
       Select <emphasis role="bold">Contact Us</emphasis> on the navigation bar, or go to <emphasis role="bold">Site &gt; Acme &gt; Contact Us</emphasis>.
      </para>
@@ -907,7 +963,6 @@
              </imageobject>
           </mediaobject>
           <table>
-            <title/>
             <tgroup cols="2">
               <thead>
                 <row>
@@ -953,7 +1008,7 @@
           <para>
       Click <emphasis role="bold">Save</emphasis> to save a message.
      </para>
-        </step>
+        </step>  -->
       </procedure>
     </section>
   </section>

@@ -5,20 +5,11 @@
 ]>
 <section id="sect-User_Guide-Content_By_Query">
     <title>Contents By Query</title>
-    <para>The Contents By Query portlet allows you to collect and display data throughout a workspace instead of selecting items by a folder or by contents.</para>
-    <para>To use this portlet, do as follows:</para>
+    <para>The <emphasis role="bold">Contents By Query</emphasis> portlet allows you to collect and display data throughout a workspace instead of selecting items by a folder or by contents.</para>
+    <para>To use this portlet, first you need to add the <emphasis role="bold">Contents By Query</emphasis> portlet to a specific page as follows:</para>
     <procedure>
-        <title>Add a Contents By Query portlet</title>
         <step>
-            <title>Create a page:</title>
-            <para>Go to <menuchoice>
-                <guimenu>Site Editor</guimenu>
-                <guimenuitem>Add New Page</guimenuitem>
-            </menuchoice>, and then fill out all the necessary fields in the Wizard form.</para>
-        </step>
-        <step>
-            <title>Drag and drop the Contents By Query portlet:</title>
-            <para>In the step 3 of the page creation, from the <guilabel>content</guilabel> of the <guilabel>Page Editor</guilabel>, drag and drop the <guilabel>Contents By Query</guilabel> portlet in the page:</para>
+            <para>Drag and drop the <emphasis role="bold">Contents By Query</emphasis> portlet from the <emphasis role="bold">Page Editor --> Applications --> Contents</emphasis> to the main pane. You can do this step while <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link> or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link> or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.</para>
             <mediaobject>
                 <imageobject role="html">
                     <imagedata align="center" fileref="images/content_by_query.png" format="PNG"/>
@@ -27,11 +18,10 @@
                     <imagedata align="center" fileref="images/content_by_query.png" format="PNG" width="210mm"/>
                 </imageobject>
             </mediaobject>
-        </step>
+       </step>
         <step>
-            <title>Edit the Contents By Query portlet:</title>
             <para>
-                Hover your mouse over the Contents By Query portlet, then click the
+                Edit the <emphasis role="bold">Contents By Query</emphasis> portlet by hovering your cursor over it, then click
                 <inlinemediaobject>
                     <imageobject>
                         <imagedata fileref="images/editicon4.png" format="PNG"/>
@@ -39,8 +29,7 @@
                     <textobject>
                         <phrase>pencil</phrase>
                     </textobject>
-                </inlinemediaobject>
-                icon to edit the portlet.
+                </inlinemediaobject> to edit the portlet.
             </para>
             <mediaobject>
                 <imageobject role="html">
@@ -51,8 +40,7 @@
                 </imageobject>
             </mediaobject>
             <para>The form with the
-            <emphasis role="bold">Edit Mode</emphasis>
-            tab appears: </para>
+            <emphasis role="bold">Edit Mode</emphasis> tab appears.</para>
             <mediaobject>
                 <imageobject role="html">
                     <imagedata align="center" fileref="images/edit_mode_query.png" format="PNG"/>
@@ -63,19 +51,31 @@
             </mediaobject>
             </step>
         <step>
-            <para>Enter a valid query into the <guilabel>by query</guilabel> field to get data that you want to display.</para>
+            <para>Enter a valid query into the <emphasis role="bold">by query</emphasis> field to get data that you want to display.</para>
         </step>
         <step>
-            <para>Select a workspace where you want to get data from.</para>
+            <para>Select a workspace where you want to get data.</para>
         </step>
         <step>
-            <para>Click <guilabel>Save</guilabel> to complete adding the <guilabel>Contents By Query</guilabel> portlet.</para>
+            <para>Click <emphasis role="bold">Save</emphasis> to complete adding the <emphasis role="bold">Contents By Query</emphasis> portlet.</para>
         </step>
         <step>
-            <para>Click <guilabel>Finish</guilabel> to quit the <guilabel>Page Editor</guilabel> page and see the displayed data.</para>
+            <para>Click
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/Finish_icon1.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>pencil</phrase>
+                    </textobject>
+                </inlinemediaobject>
+                to quit the
+                <emphasis role="bold">Page Editor</emphasis>
+                page and see the displayed data.
+            </para>
         </step>
     </procedure>
     <note>
-        <para>To lear more about the fields in the <guilabel>Edit Mode</guilabel>, refer to <xref linkend="form-User_Guide-Preferences-Content_List_Preferences."/></para>
+        <para>To learn more about fields in the <emphasis role="bold">Edit Mode</emphasis> tab, refer to <link linkend="form-User_Guide-Preferences-Content_List_Preferences.">Content List Preferences</link>.</para>
     </note>
 </section>

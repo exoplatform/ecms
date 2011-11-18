@@ -7,13 +7,30 @@
 <section id="sect-User_Guide-Form_Builder">
    <title>Form Builder</title>
   <para>
-  The <emphasis role="bold">Form Builder</emphasis> portlet enables users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
+  The <emphasis role="bold">Form Builder</emphasis> portlet allows users to create and edit the template of document types. Documents are stored in the so-called node; therefore, the term "node" and node types are often applied.
  </para>
+  <para>To use this porlet, you need to add it to a specific page first by dragging and dropping <emphasis role="bold">Form Generator Portlet</emphasis> from
+      <emphasis role="bold">Page Editor --> Applications --> Form Generator Portlet</emphasis>
+      to the main pane. This can be done when
+      <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link>
+      or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link>
+      or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.
+  </para>
+  <mediaobject>
+    <imageobject role="html">
+      <imagedata align="center" fileref="images/FormGeneratorPortlet.png" format="PNG"/>
+    </imageobject>
+    <imageobject role="fo">
+      <imagedata align="center" fileref="images/FormGeneratorPortlet.png" format="PNG" width="150mm"/>
+    </imageobject>
+  </mediaobject>
+  <citetitle>
+  <para xml:id="sect-User_Guide-Form_Builder-Create_content_template"><emphasis role="bold">Create a content template</emphasis></para>
+  </citetitle>
   <procedure>
-    <title/>
     <step>
       <para>
-    Go to <emphasis role="bold">Group &gt; Form Builder</emphasis> on the <emphasis role="bold">administration</emphasis> bar. The <emphasis role="bold">Form Builder</emphasis> will appear:
+    Open the <emphasis role="bold">Form Builder</emphasis> portlet.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -26,17 +43,17 @@
     </step>
     <step>
       <para>
-    Enter the node name into the <emphasis role="bold">Name</emphasis> field. (* Required)
+    Enter the template name into the <emphasis role="bold">Name</emphasis> field which is required.
    </para>
     </step>
     <step>
       <para>
-    Enter a brief description about the node.
+    Enter a brief description about the template.
    </para>
     </step>
     <step>
       <para>
-    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for a node. Available components are displayed on the left pane.
+    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for the template. Available components are displayed on the left pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -54,7 +71,7 @@
     </step>
     <step>
       <para>
-    Click the 
+    Click 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/componentuparrow.png" format="PNG" width="5mm"/>
@@ -63,7 +80,7 @@
             <phrase>up arrow</phrase>
          </textobject>
         </inlinemediaobject>
-     corresponding to the component to move this component up or the 
+     corresponding to the component to move this component up; or click 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/componentdownarrow.png" format="PNG" width="5mm"/>
@@ -77,7 +94,7 @@
     </step>
     <step>
       <para>
-    Click the 
+    Click 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
@@ -85,7 +102,7 @@
           <textobject>
              <phrase>pencil</phrase>
           </textobject>
-        </inlinemediaobject> icon that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
+        </inlinemediaobject> corresponding to the component to edit properties of that component. The form to edit properties appears like the illustration below:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -95,76 +112,63 @@
           <imagedata   align="center" fileref="images/editcomponentpropertiesform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
+        <para>
+                <emphasis role="bold">Details:</emphasis>
+        </para>
       <table>
-        <title/>
         <tgroup cols="2">
           <thead>
             <row>
               <entry> Field </entry>
-              <entry> Details </entry>
+              <entry> Description </entry>
             </row>
           </thead>
           <tbody>
             <row>
-              <entry> Field Label </entry>
-              <entry> To enter the field label. </entry>
+              <entry><emphasis role="bold"> Field Label</emphasis> </entry>
+              <entry> The label of the field. </entry>
             </row>
             <row>
-              <entry> Width </entry>
-              <entry>To enter the field width. If the <inlinemediaobject>
+              <entry><emphasis role="bold">Width</emphasis></entry>
+              <entry> The width of the field width.</entry>
+             </row>
+             <row>
+             <entry> <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="39mm"/>
                   </imageobject>
                   <textobject>
                      <phrase>[ Rules: ]</phrase>
                   </textobject>
-                </inlinemediaobject> checkbox is marked, the <inlinemediaobject>
+                </inlinemediaobject></entry>
+                <entry>
+                If the checkbox is marked, the asterisk (<inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/redstarasterix.png" format="PNG" width="4mm"/>
                   </imageobject>
                   <textobject>
                      <phrase>red asterix</phrase>
                   </textobject>
-                </inlinemediaobject> will appear beside the text box, indicating that values in this box are required. </entry>
+                </inlinemediaobject>) will appear beside the textbox, indicating that it is required to enter values in this field. 
+                </entry>
             </row>
             <row>
-              <entry> Height </entry>
-              <entry> To enter the field height. </entry>
+              <entry><emphasis role="bold">Height</emphasis> </entry>
+              <entry> The height of the field. </entry>
             </row>
             <row>
-              <entry> Default Value </entry>
-              <entry> To display the default value </entry>
+              <entry><emphasis role="bold">Default Value</emphasis> </entry>
+              <entry> Display the default value. </entry>
             </row>
             <row>
-              <entry> Guidelines for User </entry>
-              <entry> To display instructions about this component. </entry>
+              <entry><emphasis role="bold">Guidelines for User</emphasis> </entry>
+              <entry> Display instructions about this component. </entry>
             </row>
           </tbody>
         </tgroup>
       </table>
       <para>
-    To delete the component, click the 
-    <inlinemediaobject>
-          <imageobject>
-            <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
-          </imageobject>
-          <textobject>
-             <phrase>trash can</phrase>
-          </textobject>
-        </inlinemediaobject> corresponding to the component.
-   </para>
-      <para>
-    Click the <inlinemediaobject>
-          <imageobject>
-            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
-          </imageobject>
-          <textobject>
-             <phrase>pencil</phrase>
-          </textobject>
-        </inlinemediaobject> icon again to hide the form to edit the properties.
-   </para>
-      <para>
-    After editing the properties of the components, the components look like the below illustration:
+    After editing the properties of the components, the components look like the below illustration.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -174,13 +178,46 @@
           <imagedata   align="center" fileref="images/formgenerator.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
+	  	  <itemizedlist>
+	  <listitem>
+      <para>
+    To delete the component, click  
+    <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+          </imageobject>
+          <textobject>
+             <phrase>trash can</phrase>
+          </textobject>
+        </inlinemediaobject> corresponding to the component.
+   </para>
+   </listitem>
+   <listitem>
+      <para>
+    Click <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
+          </imageobject>
+          <textobject>
+             <phrase>pencil</phrase>
+          </textobject>
+        </inlinemediaobject> again to hide the form to edit the properties.
+   </para>
+   </listitem>
+   </itemizedlist>
     </step>
     <step>
       <para>
-    Click <emphasis role="bold">Save</emphasis> to accept creating a new node, or <emphasis role="bold">Reset</emphasis> to edit this node again before saving.</para>
-      <para>
-    A message will inform that you created a node successfully.
+    Click <emphasis role="bold">Save</emphasis> to accept creating a new template, or <emphasis role="bold">Reset</emphasis> to edit this template again before saving.</para>
+    <itemizedlist>
+	<listitem>	<para>
+    A message will inform that you have created the template successfully.
    </para>
+   </listitem>
+   <listitem>
+      <para>After the template has been created, you will see it in the content template list when creating a content.</para>
+	</listitem>
+	</itemizedlist>
     </step>
   </procedure>
 </section>

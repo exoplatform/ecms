@@ -7,13 +7,13 @@
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Fast Content Creator</title>
   <para>
-     <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT;  enables you to quickly create and save a new document with only one template in a specific location without accessing Content Explorer. This helps you save a lot of time when creating a new document.
+     The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.
   </para>
    <para>
-         There are two modes in Fast Content Creator: <emphasis role="bold">Basic Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
+         There are two modes in <emphasis role="bold">Fast Content Creator:</emphasis> <emphasis role="bold">Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
   </para>
   <para>
-     The <emphasis role="bold">Standard Content Creator </emphasis>mode enables you to add an action to your document. Thus, when configuring it by opening the <emphasis role="bold">Edit Mode</emphasis> tab (see the details at <xref linkend="sect-User_Guide-Fast_Content_Creator-Configuration"/> ), there is the <emphasis role="bold">Actions</emphasis> part that enables you to add an action to the document and view actions added to the document.
+     The <emphasis role="bold">Standard Content Creator</emphasis> mode allows you to add an action to your document. When <link linkend="sect-User_Guide-Fast_Content_Creator-Configuration">Configuring Fast Content Creator</link>, the <emphasis role="bold">Edit Mode</emphasis> tab has the <emphasis role="bold">Actions</emphasis> part that allows you to add an action to the document and view actions added to the document.
    </para>
    <mediaobject>
       <imageobject role="html">
@@ -24,67 +24,75 @@
       </imageobject>
     </mediaobject>
     <para>
-       To add an action to a document, click <emphasis role="bold">Add</emphasis> or the <inlinemediaobject>
+       To add an action to a document, click <emphasis role="bold">Add</emphasis> or <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/plusicon1.png" format="PNG"/>
         </imageobject>
           <textobject>
              <phrase>plus</phrase>
           </textobject>
-      </inlinemediaobject> icon to open the<emphasis role="bold"> Add action form</emphasis>. Do the same steps in <xref linkend="sect-User_Guide-Manage_Actions-Add_an_action"/>.
+      </inlinemediaobject> to open the <emphasis role="bold">Add Action</emphasis> form. Do the same steps in the <link linkend="sect-User_Guide-Manage_Actions-Add_an_action">Add an action</link> section.
    </para>
+   <para>To use the
+       <emphasis role="bold">Fast Content Creator</emphasis>
+       portlet, you need to add it to a specific page first by dragging and dropping
+       <emphasis role="bold">Content Creator</emphasis>
+       or
+       <emphasis role="bold">Standard Content Creator</emphasis>
+       from
+       <emphasis role="bold">Page Editor --> Applications --> Forms</emphasis>
+       to the main pane. This can be done when
+       <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link>
+       or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link>
+       or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.
+       <mediaobject>
+           <imageobject role="html">
+               <imagedata align="center" fileref="images/drag_drop_fcc.png" format="PNG"/>
+           </imageobject>
+           <imageobject role="fo">
+               <imagedata align="center" fileref="images/drag_drop_fcc.png" format="PNG" width="210mm"/>
+           </imageobject>
+       </mediaobject>
+      </para>
 
   <section id="sect-User_Guide-Fast_Content_Creator-Configuration">
-    <title>Configuration</title>
-    <para>
-       In &PRODUCT;,  the Fast Content Creator is applied in the <emphasis role="bold">Contact Us</emphasis> portlet with  the <emphasis role="bold">Basic Content Creator</emphasis> mode by default.  Thus, in this case, you can configure the Fast Content Creator by editing the <emphasis role="bold">Contact Us</emphasis> portlet.
+    <title>Configuration of Fast Content Creator</title>
+  <para>
+       In &PRODUCT;, the <emphasis role="bold">Fast Content Creator</emphasis> is applied in the <emphasis role="bold">Question?</emphasis> portlet with the <emphasis role="bold">Content Creator</emphasis> mode by default. Thus, in this guide, you are instructed how to configure the Fast Content Creator by editing the <emphasis role="bold">Question?</emphasis> portlet as an example.
    </para>
-    <para>
-       To configure the Fast Content Creator, do the following:
-   </para>
+
     <procedure>
-      <title>Configuration of Fast Content Creator</title>
-      <step>
-        <para>
-     Go to <emphasis role="bold">Contact Us</emphasis> on the Navigation bar or go to 
-         <menuchoice>
-            <guimenu>Site</guimenu>
-            <guimenuitem>Acme</guimenuitem>
-            <guimenuitem>Contact Us</guimenuitem>
-          </menuchoice>
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <menuchoice>
-            <guimenu>Site Editor</guimenu>
-            <guimenuitem>Edit Page</guimenuitem>
-          </menuchoice> on the administration bar. The <emphasis role="bold">Page Editor</emphasis> will be displayed.
-    </para>
-      </step>
-      <step>
-        <para>
-           Hover the mouse over the Contact Us portlet and the tool-bar appears.
-         </para>
-         <para>
-            Click the <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-               <phrase>pencil</phrase>
-            </textobject>
-          </inlinemediaobject> icon to edit the portlet.</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center"  fileref="images/contactusportlet.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata align="center" fileref="images/contactusportlet.png" format="PNG" width="150mm"/>
-          </imageobject>
-        </mediaobject>
-        <para>The form with the <emphasis role="bold">Edit Mode</emphasis> tab appears:
-    </para>
+            <step><para>Open the <emphasis role="bold">Question?</emphasis> page.</para></step>
+            <step>
+                <para>Hover your cursor over <emphasis role="bold">Edit --> Page</emphasis>, then click <emphasis role="bold">Layout</emphasis> on the Administration bar.</para>
+                <para>The edit page appear.</para>
+            </step>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata align="center" fileref="images/content-creator.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata align="center" fileref="images/content-creator.png" format="PNG" width="210mm"/>
+                </imageobject>
+            </mediaobject>
+
+        <step>
+            <para>
+                Hover your cursor over the portlet, then click
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/editicon4.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                        <phrase>pencil</phrase>
+                    </textobject>
+                </inlinemediaobject>
+                to edit the portlet.
+            </para>
+            <para>The form with the
+                <emphasis role="bold">Edit Mode</emphasis>
+                tab appears.
+            </para>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/editnodetab.png" format="PNG"/>
@@ -93,38 +101,38 @@
             <imagedata align="center" fileref="images/editnodetab.png" format="PNG" width="150mm" />
           </imageobject>
         </mediaobject>
+            <para><emphasis role="bold">Details:</emphasis></para>
         <table>
-          <title/>
           <tgroup cols="2">
             <thead>
               <row>
                 <entry> Field </entry>
-                <entry> Details </entry>
+                <entry> Description </entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry> Location to save </entry>
+                <entry><emphasis role="bold">Location to Save</emphasis> </entry>
                 <entry> Select the location to save documents or messages. </entry>
               </row>
               <row>
-                <entry> Select template </entry>
-                <entry> Select a document template. There are different input fields corresponding to each template.</entry>
+                <entry><emphasis role="bold">Select Template</emphasis> </entry>
+                <entry> Select a template for the document. There are different input fields corresponding to each selected template.</entry>
               </row>
               <row>
-                <entry> Custom save button </entry>
-                <entry> Change the label for the save button. </entry>
+                <entry><emphasis role="bold">Custom Save Button</emphasis> </entry>
+                <entry> Change the label for the "Save" button. </entry>
               </row>
               <row>
-                <entry> Custom save message </entry>
-                <entry> Show a custom message that informs you have just saved a document. </entry>
+                <entry><emphasis role="bold">Custom Save Message</emphasis> </entry>
+                <entry> Change the content of custom message that informs you have just saved a document. </entry>
               </row>
               <row>
-                <entry> Redirect </entry>
-                <entry> Allow you to redirect the path in the Redirect path field. </entry>
+                <entry><emphasis role="bold"> Redirect</emphasis> </entry>
+                <entry> Allow you to redirect the path in the <emphasis role="bold">Redirect Path</emphasis> field. </entry>
               </row>
               <row>
-                <entry> Redirect path </entry>
+                <entry><emphasis role="bold">Redirect Path</emphasis> </entry>
                 <entry> Show a path to which you will be directed after clicking <emphasis role="bold">OK</emphasis> in the confirmation message. </entry>
               </row>
             </tbody>
@@ -132,10 +140,9 @@
         </table>
       </step>
       <step>
-        <para>Select the location to save</para>
-        <substeps>
-          <step>
-            <para>Click the
+        <para>Select a specific location to save documents.</para>
+          <para> <emphasis role="bold">i.</emphasis>
+              Click
      <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/previewicon.png" format="PNG"/>
@@ -143,7 +150,7 @@
                 <textobject>
                    <phrase>magnifying glass</phrase>
                 </textobject>
-              </inlinemediaobject> icon to select a specific location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:</para>
+              </inlinemediaobject> to open the <emphasis role="bold">Select Location</emphasis> form.</para>
             <mediaobject>
               <imageobject role="html">
                 <imagedata align="center"  fileref="images/selectlocationform.png" format="PNG"/>
@@ -152,9 +159,9 @@
                 <imagedata align="center" fileref="images/selectlocationform.png" format="PNG" width="150mm"/>
               </imageobject>
             </mediaobject>
-          </step>
-          <step>
-            <para>Select the parent node on the left panel and click the
+
+            <para><emphasis role="bold">ii.</emphasis>
+                Select the parent node on the left pane and click
      <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/greentick.png" format="PNG"/>
@@ -162,10 +169,8 @@
                 <textobject>
                    <phrase>green tick</phrase>
                 </textobject>
-              </inlinemediaobject> icon in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save</emphasis> field. Created documents will be saved in this location.
+              </inlinemediaobject> in the <emphasis role="bold">Add</emphasis> column to select the child node on the right pane. After being selected, this location will be displayed on the <emphasis role="bold">Location to Save</emphasis> field. Created documents will be saved in this location.
             </para>
-          </step>
-        </substeps>
       </step>
       <step>
         <para>
@@ -173,56 +178,49 @@
     </para>
       </step>
       <step>
-        <para>Change the label for <emphasis role="bold">Custom save</emphasis> <emphasis role="bold">button</emphasis>, and the content for <emphasis role="bold">Custom save message</emphasis>.</para>
+        <para>Change the label for the <emphasis role="bold">Custom Save</emphasis> button, and the content for <emphasis role="bold">Custom Save Message.</emphasis></para>
       </step>
       <step>
         <para>
-     Tick the <emphasis role="bold">Redirect</emphasis> checkbox if you want to redirect to the path in the <emphasis role="bold">Redirect path</emphasis> field after clicking <emphasis role="bold">OK</emphasis> in the save message.
+     Tick the <emphasis role="bold">Redirect</emphasis> checkbox if you want to redirect to the path in the <emphasis role="bold">Redirect Path</emphasis> field after clicking <emphasis role="bold">OK</emphasis> in the confirmation message.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to finish the configuration of Fast Content Creator. There will be an inform message, click the <emphasis role="bold">OK </emphasis>button to confirm.</para>
+     Click <emphasis role="bold">Save</emphasis> to finish the configuration of <emphasis role="bold">Fast Content Creator</emphasis>. Then, click <emphasis role="bold">OK</emphasis> in the notification message to accept your changes.</para>
       </step>
       <step>
         <para>
-    Click <emphasis role="bold">Close</emphasis> to quit the form to edit the configuration of Fast Content Creator.</para>
+    Click <emphasis role="bold">Close</emphasis> to quit the form to edit the configuration of <emphasis role="bold">Fast Content Creator</emphasis>.</para>
       </step>
     </procedure>
+
   </section>
-  <section>
-    <title>Create a new document</title>
-    <para>To create a new document by the Fast Content Creator, do the following:</para>
-    <procedure>
-      <title>Create a new document</title>
+  <section id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
+    <title>Create a new document by Fast Content Creator</title>
+       <procedure>
       <step>
         <para>
-           Go to 
-           <menuchoice>
-            <guimenu>Site</guimenu>
-            <guimenuitem>Acme</guimenuitem>
-            <guimenuitem>Contact Us</guimenuitem>
-            </menuchoice>
+           Go to your newly created page.
          </para>
       </step>
       <step>
-        <para>Fill values in all the fields in the <emphasis role="bold">Contact Us</emphasis> portlet.</para>
+        <para>Fill values in all the fields in the page.</para>
       </step>
       <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept creating the new document. A message appears to let you know that the document is created successfully at the location that you established at &quot;<emphasis role="bold">location to save</emphasis>&quot;.</para>
+        <para>Click <emphasis role="bold">Save</emphasis> to accept creating the new document. A message appears to let you know that the document is created successfully at the location selected in the <emphasis role="bold">Location to Save</emphasis> field.</para>
       </step>
     </procedure>
-  </section>
-  <section>
-    <title>View a new document</title>
-    <para>After creating a new document, you can view it by do the following:</para>
+      </section>
+    <section id="sect-User_Guide-Fast_Content_Creator-view_document_by_Fast_Content_Creator">
+        <title>View a document</title>
+    <para>After creating a new document by <emphasis role="bold">Fast Content Creator</emphasis>, you can view it as follows:</para>
     <procedure>
-      <title> View a new document</title>
       <step>
-        <para>Go to <emphasis role="bold">Content Explorer</emphasis>.</para>
+        <para>Go to <emphasis role="bold">Sites Explorer.</emphasis></para>
       </step>
       <step>
-        <para>Select the drive and the path that you established in the configuration of Fast Content Creator. You will see this  document.</para>
+        <para>Select the drive and the path that you established in the configuration of <emphasis role="bold">Fast Content Creator.</emphasis> You will see this document.</para>
       </step>
     </procedure>
   </section>

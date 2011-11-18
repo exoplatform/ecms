@@ -4,52 +4,57 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_Inside_Categories">
-  <title>Content Inside Categories</title>
-	 <para>
-		You can create new contents in any folders or directly in a CLV with Incontext Editing. However, creating contents inside a category helps you easily and quickly manage and publish them.
+  <title>Content inside categories</title>
+    <para>
+		In eXo Platform, you can create new contents in any folders or directly in a CLV with <emphasis role="bold">Incontext Editing.</emphasis>
+    However, to facilitate the content management, categories are usually used to sort and organize documents that makes your desired searches more quickly. Also, creating contents inside a category helps you manage and publish them effectively.
 	</para>
-	 <section id="sect-User_Guide-Content_Inside_Categories-What_is_a_Category_in_eXo_Content">
-		<title>What is a Category in &PRODUCT;?</title>
-		 <para>
-
-		</para>
-		 <para>
-			Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it to a category. You should directly create documents in a category, then the documents are automatically created links to them in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.
-		</para>
-		 <para>
-			Categories are stored in the JCR itself .
-		</para>
-
-	</section>
-	
+  <para>
+ After creating a document, you should categorize it by adding it to a category. Otherwise, documents should be created right in a category and links to those documents will be automatically created in the category. In eXo Platform, categories are stored in JCR.
+	 </para>
 	 <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
-		<title>Create a Content</title>
+		<title>Create a content</title>
 		 <para>
 			This section will show you how to create a content in a category.
 		</para>
-		 <para>
-			Do the following:
-		</para>
-		 <procedure id="proc-User_Guide-Create_a_Content-Create_a_content">
-			<title>Create a content</title>
+		 <procedure>
 			 <step>
-				<para>
-					Go to <emphasis role="bold">Group &gt; Content Explorer &gt; </emphasis>select a category in a drive. For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.
-				</para>
-             <mediaobject>
-                <imageobject role="html">
-                   <imagedata fileref="images/selectcategory.png" format="PNG" align="center"/>
-                </imageobject>
-                <imageobject role="fo">
-                   <imagedata fileref="images/selectcategory.png" format="PNG" align="center" width="150mm" />
-                </imageobject>
-             </mediaobject>
-
+         <para>
+           Hover your cursor over 
+           <inlinemediaobject>
+             <imageobject>
+               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+             </imageobject>
+           </inlinemediaobject>
+           <emphasis role="bold"> --> Content --> Sites Explorer</emphasis>
+           on the Administration bar.
+         </para>
+         <mediaobject>
+           <imageobject role="html">
+             <imagedata align="center" fileref="images/SitesExplorer.png" format="PNG"/>
+           </imageobject>
+           <imageobject role="fo">
+             <imagedata align="center" fileref="images/SitesExplorer.png" format="PNG" width="150mm"/>
+           </imageobject>
+         </mediaobject>
+         <para>For example, select the
+           <emphasis>acme-category</emphasis>
+           drive as the following illustration.
+         </para>
+         <mediaobject>
+           <imageobject role="html">
+             <imagedata fileref="images/selectcategory.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+             <imagedata fileref="images/selectcategory.png" format="PNG" align="center" width="150mm"/>
+           </imageobject>
+         </mediaobject>
 			</step>
 			 <step>
 				<para>
-					Click the <emphasis role="bold">Add Document</emphasis> button to create a new content. See <xref linkend="sect-User_Guide-Actions-Add_a_document" /> to know how to add a new content. The new content is a symlink.
-				</para>
+					Click the <emphasis role="bold">Add Content</emphasis> button to create a new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add a new content. The new content is a Symlink.
+					To view the content, simply click the Symlink.
+        </para>
              <mediaobject>
                 <imageobject role="html">
                    <imagedata fileref="images/createdcontent.png" format="PNG" align="center"/>
@@ -57,18 +62,12 @@
                 <imageobject role="fo">
                    <imagedata fileref="images/createdcontent.png" format="PNG" align="center" width="150mm" />
                 </imageobject>
-             </mediaobject>
-				 <para>
-					Click the symlink to view the content.
-				</para>
-
+             </mediaobject>        
 			</step>
-
 		</procedure>
-		
-
 	</section>
-	
+</section>
+
 	<!--  Remove
   <section id="sect-User_Guide-Content_Inside_Categories-Organize_Content">
     <title>Organize Content</title>
@@ -82,6 +81,5 @@
     <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish a content.</para>
   </section>
  -->
-</section>
 
 

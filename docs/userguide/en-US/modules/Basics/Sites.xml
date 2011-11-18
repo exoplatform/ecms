@@ -288,7 +288,6 @@
        Details:
       </para>
       <table>
-        <title/>
         <tgroup cols="2">
           <thead>
             <row>
@@ -359,8 +358,8 @@
       </mediaobject>
       <para>
             Editing the banner portlet is similar to editing the Sign-in portlet and the footer portlet so in this guide, we only show how to edit the banner of the  site as an example of editing the layout.</para>
-      <procedure id="proc-User_Guide-How_to_edit_the_current_Site-Edit_Banner">
-        <title>Edit Banner</title>
+       <para xml:id="proc-User_Guide-How_to_edit_the_current_Site-Edit_Banner"><emphasis role="bold">Edit Banner</emphasis></para>
+	  <procedure>
         <step>
           <para>
                   Show the form to edit a banner by clicking the <inlinemediaobject>
@@ -381,7 +380,7 @@
             </imageobject>
           </mediaobject>
           <para>
-      A form to edit the current banner will appear:
+      A form to edit the current banner will appear.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -464,9 +463,11 @@
              </imageobject>
           </mediaobject>
           <para>
+	 <emphasis role="bold">
       Details:
+	  </emphasis>
+	  </para>
       <table frame="all">
-              <title/>
               <tgroup cols="2">
                 <colspec colname="c1"/>
                 <colspec colname="c2"/>
@@ -522,7 +523,6 @@
                 </tbody>
               </tgroup>
             </table>
-     </para>
         </step>
         <step>
           <para>
@@ -631,10 +631,7 @@
       <procedure>
         <step>
           <para>
-      Click <menuchoice>
-         <guimenu>Site</guimenu>
-         <guimenuitem>Edit Layout</guimenuitem>
-      </menuchoice> to open a form to edit the site layout.
+      Click <emphasis role="bold">Site --> Edit Layout</emphasis> to open a form to edit the site layout.
      </para>
         </step>
         <step>
@@ -652,10 +649,7 @@
       <procedure>
         <step>
           <para>
-      Click <menuchoice>
-         <guimenu>Site</guimenu>
-         <guimenuitem>Edit Navigation</guimenuitem>
-      </menuchoice> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
+      Click <emphasis role="bold">Site --> Edit Navigation</emphasis> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
           <mediaobject>
             <imageobject role="html">
                <imagedata fileref="images/navigationmanagement.png" format="PNG" align="center"/>
@@ -683,12 +677,13 @@
              </imageobject>
           </mediaobject>
           <para>
+	 <emphasis role="bold">
       Details:
+	  </emphasis>
      </para>
-          <para>
+        
       <table frame="all">
-              <title/>
-              <tgroup cols="2">
+                          <tgroup cols="2">
                 <colspec colname="c1"/>
                 <colspec colname="c2"/>
                 <tbody>
@@ -719,7 +714,6 @@
                 </tbody>
               </tgroup>
             </table>
-     </para>
         </step>
         <step>
           <para>
@@ -737,7 +731,6 @@
       Details:
      </para>
           <table frame="all">
-            <title/>
             <tgroup cols="2">
               <colspec colname="c1"/>
               <colspec colname="c2"/>
@@ -807,10 +800,7 @@
       <procedure>
         <step>
           <para>
-       Click <menuchoice>
-          <guimenu>Site</guimenu>
-          <guimenuitem> Edit Portal's Config</guimenuitem>
-       </menuchoice> to open the same form as the form to create a site.
+       Click <emphasis role="bold">Site --> Edit Portal's Config</emphasis> to open the same form as the form to create a site.
       </para>
         </step>
         <step>
@@ -825,10 +815,9 @@
    <section id="sect-User_Guide-Manage_a_site-Switch_between_sites">
     <title>Switch between sites</title>
     <para>
-   This function is used to change the current web site by another one.
+   This function is used to change the current website by another one.
   </para>
     <procedure>
-      <title/>
       <step>
         <para>
      Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
@@ -860,11 +849,7 @@
     <para>
    This function is used to delete a portal (site) from the portal list.
   </para>
-    <para>
-   Do the following:
-  </para>
     <procedure>
-      <title/>
       <step>
         <para>
      Show a portal list by clicking <emphasis role="bold">Site</emphasis> on the administration bar:
@@ -901,4 +886,6 @@
       </step>
     </procedure>
   </section>
+  <xi:include href="View.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="SearchPorlet.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </section>

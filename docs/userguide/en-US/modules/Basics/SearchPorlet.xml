@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Search_portlet">
-    <title>Search Porlet</title>
+    <title>Search content in a site</title>
     <para>The
         <guilabel>Search</guilabel>
         function allows you to quickly search for any contents in the system with a keyword from the front page, even if you
@@ -42,9 +42,8 @@
                         <imagedata align="center" fileref="images/nosearchresult.png" format="PNG" width="150mm"/>
                     </imageobject>
                 </mediaobject>
-                <para>Details of the Search form:</para>
+                <para><emphasis role="bold">Details of the Search form</emphasis></para>
                 <table frame="all">
-                    <title/>
                     <tgroup cols="2">
                         <colspec colname="c1"/>
                         <colspec colname="c2"/>
@@ -127,7 +126,8 @@
                 <para>There are two way:</para>
                 <itemizedlist>
                     <listitem>
-                        <para><emphasis role="bold">The 1st way</emphasis>: Turn on the Edit mode, and then click the
+                        <para><emphasis role="bold">The first way</emphasis></para>
+							<para>Turn on the Edit mode, and then click the
                             <inlinemediaobject>
                                 <imageobject>
                                     <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
@@ -149,11 +149,9 @@
                         </mediaobject>
                     </listitem>
                     <listitem>
-                        <para><emphasis role="bold">The 2nd way</emphasis>: Click
-                            <menuchoice>
-                                <guimenu>Site Editor</guimenu>
-                                <guimenuitem>Edit Page</guimenuitem>
-                            </menuchoice>
+                        <para><emphasis role="bold">The second way</emphasis></para>
+							<para>Click
+                            <emphasis role="bold">Site Editor --> Edit Page</emphasis>
                             on the administration bar. The
                             <guilabel>Page Editor</guilabel>
                             will be displayed.
@@ -162,7 +160,7 @@
                             <listitem>
                                 <para>Hover the mouse pointer over the
                                     <guilabel>SearchResult</guilabel>
-                                    portlet and the toolbar appears:
+                                    portlet and the toolbar appears.
                                 </para>
                                 <mediaobject>
                                     <imageobject role="html">
@@ -175,7 +173,7 @@
                                 </mediaobject>
                             </listitem>
                             <listitem>
-                                <para>Click the
+                                <para>Click 
                                     <inlinemediaobject>
                                         <imageobject>
                                             <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
@@ -184,14 +182,14 @@
                                             <phrase>pencil</phrase>
                                         </textobject>
                                     </inlinemediaobject>
-                                    icon to edit the portlet.
+                                    to edit the portlet.
                                 </para>
                             </listitem>
                         </itemizedlist>
                     </listitem>
                 </itemizedlist>
 
-                <para>The form to edit the Search portlet appears:</para>
+                <para>The form to edit the Search portlet appears.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG"/>
@@ -200,9 +198,8 @@
                         <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG" width="150mm"/>
                     </imageobject>
                 </mediaobject>
-                <para>Details:</para>
+                <para><emphasis role="bold">Details:</emphasis></para>
                 <table frame="all">
-                        <title/>
                         <tgroup cols="2">
                             <colspec colname="c1"/>
                             <colspec colname="c2"/>

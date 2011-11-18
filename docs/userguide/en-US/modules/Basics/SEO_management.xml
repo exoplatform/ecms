@@ -1,158 +1,183 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
-%BOOK_ENTITIES;
-]>
+        <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+        %BOOK_ENTITIES;
+        ]>
 <section id="sect-User_Guide-SEO_Management">
-	<title>SEO Management</title>
-    <para>
-       SEO (Search Engine Optimization) allows you to improve the visibility of your web pages and web content in the major search engines (Google, Yahoo, MSN, Live) via the search results. The higher your website position is in the search engine results page, the more visitors access it. Therefore, it is very important for you to maximize your web pages and contents'
-       position in the search engines.
-    </para>
-    <para>
-      &PRODUCT; supplies you with the <emphasis role="bold">SEO Management</emphasis> feature to meet this target. By using <emphasis role="bold">SEO Management</emphasis>, you can easily manage SEO data of web pages and web content and optimize your website for search engines.
-    </para>
-    <para>To use this feature, do as follows:</para>
-    <procedure>
-        <title>Manage SEO data</title>
-        <step>
-            <title>Open the SEO Management form:</title>
-            <para>
-                Click the
-                <inlinemediaobject>
-                    <imageobject>
-                        <imagedata fileref="images/SEO_red_icon.png" format="PNG"/>
-                    </imageobject>
-                </inlinemediaobject>
-                icon on the Administration bar and the SEO Management form appears. Depending on your SEO management for a page or a content, the content of the SEO Management form will be different:
-            </para>
-            <figure>
-                <title dir="ltr">The SEO Management form for a content</title>
-                <screenshot>
-                    <mediaobject>
-                        <imageobject role="html">
-                            <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"/>
-                        </imageobject>
-                        <imageobject role="fo">
-                            <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"
-                                       width="210mm"/>
-                        </imageobject>
-                    </mediaobject>
-                </screenshot>
-            </figure>
-            <figure>
-                <title>The SEO Management form for a page</title>
-                <mediaobject>
-                    <imageobject role="html">
-                        <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>
-                    </imageobject>
-                    <imageobject role="fo">
-                        <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="210mm"/>
-                    </imageobject>
-                </mediaobject>
-            </figure>
-            <para><emphasis role="bold">Details</emphasis>:</para>
-            <table>
-          <title/>
-          <tgroup cols="2">
-            <thead>
-              <row>
-                <entry> Field </entry>
-                <entry> Information </entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry> Description </entry>
-                <entry> The description of your page/content. This description will be seen in the results list of search engines. </entry>
-              </row>
-              <row>
-                <entry> Keywords </entry>
-                <entry> By using these keywords, other users can find out your page/ content via search engines. </entry>
-              </row>
-              <row>
-                <entry> Robots </entry>
-                <entry> Search engines can access the whole directories on a web site, or individual pages, or individual links on a page and list your page/content or not, it depends on your options: <itemizedlist>
-                    <listitem>
-                        <para><guilabel>INDEX</guilabel>: Allows search engines to index your page/content on the search engine results page.</para>
-                    </listitem>
-                    <listitem>
-                        <para><guilabel>NOINDEX</guilabel>: Restrict search engines from indexing your page/content on the search engine results page. Use this option in case you want to keep your page private.</para>
-                    </listitem>
-                    <listitem>
-                        <para><guilabel>FOLLOW</guilabel>: Allows search engines to follow links from your page to find other pages.</para>
-                    </listitem>
-                    <listitem>
-                        <para><guilabel>NOFOLLOW</guilabel>: Restricts search engines from following links from your page to find other pages. Use this option in case you want to prevent spam links in comments of blogs, forum and others.</para>
-                    </listitem>
-                </itemizedlist> </entry>
-              </row>
-              <row>
-                <entry> Sitemap </entry>
-                <entry> Allows you to see the pages of the sites in the tree-like structure.</entry>
-              </row>
-              <row>
-                <entry> Frequency </entry>
-                <entry> Shows how often pages are updated on the site. Also, setting your frequency levels tells the search engines which pages should be crawled over other pages. The frequency levels include: Always, Hourly, Daily, Weekly, Monthly, Yearly and Never. If you set "Never" for the frequency level, meaning that this page never gets updated, so search engines will move onto other pages that get updated more frequently. </entry>
-              </row>
-              <row>
-                <entry> Priority </entry>
-                <entry> Allows search engines to search the page with the higher priority level first. The acceptable value in this field is 0 - 1. 0 is the lowest priority level and 1 is the highest.</entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-        </step>
-        <step>
-            <para> Fill out all the fields in the form.</para>
-        </step>
-        <step>
-            <para>Click <guibutton>Save</guibutton> to finish creating SEO data.</para>
-        </step>
-    </procedure>
-    <note>
-        <title>The color of the SEO Management icon</title>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="images/SEO_red_icon.png" format="PNG"/>
-                        </imageobject>
-                    </inlinemediaobject>
-                    means that the SEO information is empty.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="images/SEO_orange_icon.png" format="PNG"/>
-                        </imageobject>
-                    </inlinemediaobject>
-                    means that the SEO information has been updated but some information are not filled out yet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="images/SEO_green_icon.png" format="PNG"/>
-                        </imageobject>
-                    </inlinemediaobject>
-                    means that the SEO Management form is filled out with the full SEO information.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="images/SEO_gray_icon.png" format="PNG"/>
-                        </imageobject>
-                    </inlinemediaobject>
-                    means that the SEO Management feature is disabled.
-                </para>
-            </listitem>
-        </itemizedlist>
-    </note>
+  <title>SEO Management</title>
+  <para>
+    SEO (Search Engine Optimization) allows you to improve the visibility of your webpages and web content in the major
+    search engines (Google, Yahoo, MSN, Live) via the search results. The higher your website position is in the search
+    engine results page, the more visitors access it. Therefore, it is very important for you to maximize your webpages
+    and contents' position in the search engines.
+  </para>
+  <para>
+    In &PRODUCT;, the <emphasis role="bold">SEO Management</emphasis> feature is featured to meet this target. By using <emphasis role="bold">SEO Management,</emphasis> you can easily manage SEO data
+    of web pages and web content and optimize your website for search engines.
+  </para>
+  <citetitle>
+  <para xml:id="sect-User_Guide-SEO_Management-Manage_SEO_data"><emphasis role="bold">Manage the SEO data</emphasis></para>
+  </citetitle>
+  <procedure>
+    <step>
+      <para>Open a page or a content that you want to edit the SEO data.</para>
+    </step>
+    <step>
+      <para>
+        Open the <emphasis role="bold">SEO Management</emphasis> form by hovering your cursor over
+        <emphasis role="bold">Edit --> Page --> SEO</emphasis> on the Administration bar.
+      </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata align="center" fileref="images/SEO_edit.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata align="center" fileref="images/SEO_edit.png" format="PNG"
+                     width="210mm"/>
+        </imageobject>
+      </mediaobject>
+
+      <para>Depending on your SEO management for a page or a content, the content of the SEO Management form will be different.
+      </para>
+      <itemizedlist>
+      <listitem>
+      <para>The SEO Management form for a content is as follows.</para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"
+                     width="210mm"/>
+        </imageobject>
+      </mediaobject>
+      </listitem>
+      <listitem>
+      <para>The SEO Management form for a page is as follows.</para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="210mm"/>
+        </imageobject>
+      </mediaobject>
+      </listitem>
+      </itemizedlist>
+      <para><emphasis role="bold">Details:</emphasis>
+      </para>
+      <table>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>Field</entry>
+              <entry>Description</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><emphasis role="bold">Description</emphasis></entry>
+              <entry>The description of your page/content. This description will be seen in the results list of search
+                engines.
+              </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Keywords</emphasis></entry>
+              <entry>By using these keywords, other users can find out your page/content via search engines.</entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Robots</emphasis></entry>
+              <entry>Search engines can access the whole directories on a website, or individual pages, or individual
+                links on a page and list your page/content or not, it depends on your options:
+                <itemizedlist>
+                  <listitem>
+                    <para><guilabel>INDEX:</guilabel> Allow search engines to index your page/content on the search
+                      engine results page.
+                    </para>
+                  </listitem>
+                  <listitem>
+                    <para><guilabel>NOINDEX:</guilabel> Restrict search engines from indexing your page/content on the
+                      search engine results page. Use this option if you want to keep your page private.
+                    </para>
+                  </listitem>
+                  <listitem>
+                    <para><guilabel>FOLLOW:</guilabel> Allow search engines to follow links from your page to find
+                      other pages.
+                    </para>
+                  </listitem>
+                  <listitem>
+                    <para><guilabel>NOFOLLOW:</guilabel> Restrict search engines from following links from your page to
+                      find other pages. Use this option if you want to prevent spam links in comments of blogs,
+                      forums and others.
+                    </para>
+                  </listitem>
+                </itemizedlist>
+              </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Sitemap</emphasis></entry>
+              <entry>Allow you to see pages of the sites in the tree-like structure.</entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Frequency</emphasis></entry>
+              <entry>Show how often pages are updated on the site. Also, setting your frequency levels tells the search
+                engines which pages should be crawled over other pages. The frequency levels include: Always, Hourly,
+                Daily, Weekly, Monthly, Yearly and Never. If you set "Never" for the frequency level, meaning that this
+                page never gets updated, so search engines will move onto other pages that get updated more frequently.
+              </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Priority</emphasis></entry>
+              <entry>Allow search engines to search the page with the higher priority level first. The acceptable value
+                in this field is from 0 to 1. In which, 0 is the lowest priority level and 1 is the highest.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </step>
+    <step>
+      <para>Fill out all the fields in the form.</para>
+    </step>
+    <step>
+      <para>Click
+        <emphasis role="bold">Save</emphasis>
+        to finish creating SEO data.
+      </para>
+    </step>
+  </procedure>
+  <note>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/SEO_red_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+          means that the SEO information is empty.
+        </para>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/SEO_orange_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+          means that the SEO information has been updated but some information are not filled out yet.
+        </para>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/SEO_green_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+          means that the SEO Management form is filled out with the full SEO information.
+        </para>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/SEO_gray_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+          means that the SEO Management feature is disabled.
+        </para>
+  </note>
 </section>

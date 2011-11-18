@@ -256,6 +256,7 @@ Repositories are proxied in http://repository.exoplatform.org/public, should be 
             <configuration>
               <sources>
                 <source>src/main/resources</source>
+                <source>en-US</source>
               </sources>
             </configuration>
           </execution>

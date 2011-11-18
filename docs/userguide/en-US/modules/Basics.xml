@@ -8,22 +8,18 @@
 	 <para>
 		These actions are for all registered users after they have logged in the accounts.
 	</para>
-	 <xi:include href="Basics/View.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Print.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
     <xi:include href="Basics/Sites.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Contribute_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Content_Inside_Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Dynamic_Navigation.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/SEO_management.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-     <xi:include href="Basics/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-    <xi:include href="Basics/SearchPorlet.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Newsletters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/Content_By_Query.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+   <xi:include href="Basics/SEO_management.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+   <xi:include href="Basics/Content_By_Query.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </chapter>
 

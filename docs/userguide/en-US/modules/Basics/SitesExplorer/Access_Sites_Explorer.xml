@@ -4,16 +4,22 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Access_Content_Explorer">
-	<title>Access Content Explorer</title>
+	<title>Access Sites Explorer</title>
 	 <para>
-		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but performing actions on Content Explorer depending on the role of each user.
+		This page is used to manage all documents in different drives. This is really a flexible way because you can do through Internet whenever and wherever. 
+    By default, anyone can access <emphasis role="bold">Sites Explorer,</emphasis> but the ability to do actions on <emphasis role="bold">Sites Explorer</emphasis> depends on the role of each user.
 	</para>
 	 <procedure>
-		<title></title>
 		 <step>
 			<para>
-				Go to <emphasis role="bold">Group &gt; Content Explorer </emphasis>on the administration bar:
+				Hover your cursor over 
+        <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject> on the Administration bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
 			</para>
+     
 			 <mediaobject>
 				<imageobject role="html">
 					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG"   />
@@ -21,10 +27,9 @@
 				 <imageobject role="fo">
                <imagedata align="center"  fileref="images/sitesexplorer.png" format="PNG" width="150mm" />
 				</imageobject>
-
 			</mediaobject>
 			 <para>
-				A list of all drives organized in groups: Personal drives, Group drives and General drives in the Content Explorer displays:
+				A list of all drives organized in groups (Personal drives, Group drives and General drives) in the <emphasis role="bold">Sites Explorer</emphasis> displays:
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -40,63 +45,38 @@
 			</para>
 			 <variablelist>
 				<varlistentry>
-					<term>Personal drives:</term>
-					 <listitem>
-						<para>
-							Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resources and share them with others, work in the Public drive.
-						</para>
-						 <mediaobject>
-							<imageobject role="html">
-								<imagedata align="center" fileref="images/personaldrivesharing.png" format="PNG"  />
-							</imageobject>
-							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/personaldrivesharing.png" format="PNG" width="86mm"/>
-							</imageobject>
-
-						</mediaobject>
-
-					</listitem>
-
+					<term><emphasis role="bold">Personal drives</emphasis></term>
+          <listitem>
+            <para>
+              Personal drive is the working space of a user. If you want to do in private, select the Private drive, no
+              one else can access or get your private resources. If you want to create resources and share them with
+              others, work in the Public drive.
+            </para>
+          </listitem>
 				</varlistentry>
 				 <varlistentry>
-					<term>Group drives:</term>
-					 <listitem>
-						<para>
-							The drive of a group is the working space of users in that group.
-						</para>
-						 <para>
-							In the following example, the user "root" joins in three groups : "executive-board", "administrators" and "users" so he has the right to access these group's drive.
-						</para>
-						 <mediaobject>
-							<imageobject role="html">
-								<imagedata align="center" fileref="images/groupdrives.png" format="PNG"   />
-							</imageobject>
-							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/groupdrives.png" format="PNG" width="150mm" />
-							</imageobject>
-
-						</mediaobject>
-
-					</listitem>
-
+					<term><emphasis role="bold">Group drives</emphasis></term>
+           <listitem>
+             <para>
+               The drive of a group is the working space of users in that group.
+             </para>
+             <para>
+               In the following example, the user &quot;root&quot; joins in three groups : &quot;executive-board&quot;, &quot;administrators&quot;and
+               &quot;users&quot; so he has the right to access these group's drive.
+             </para>
+           </listitem>
 				</varlistentry>
 				 <varlistentry>
-					<term>General drives:</term>
+					<term><emphasis role="bold">General drives</emphasis></term>
 					 <listitem>
 						<para>
-							This is the working space for everyone but your access right in different drives depends on your role. If you access as administrator role, you can see all drives; otherwise, you can see some drives only as a web contributor role.
+							This is the working space for everyone but your access right in different drives depends on your role. If you access as an administrator role, you can see all drives; otherwise, you can see some drives only as a web contributor role.
 						</para>
-
 					</listitem>
-
 				</varlistentry>
-
 			</variablelist>
-
 		</step>
-
 	</procedure>
-
 </section>
 
 

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Preferences">
+  <title>Preferences</title>
+  <para>
+  This function is used to set up your browsing preferences.
+ </para>
+  <procedure>
+    <step>
+      <para>
+    Click <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm"/>
+          </imageobject>
+          <textobject>
+             <phrase>sprocket</phrase>
+          </textobject>
+        </inlinemediaobject> on the right side of the <emphasis role="bold">Sites Explorer</emphasis> portlet.
+   </para>
+      <para>
+    The <emphasis role="bold">Preferences</emphasis> window will appear.
+   </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata  align="center"  fileref="images/preferencesettingform.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata   align="center" fileref="images/preferencesettingform.png" format="PNG" width="150mm"/>
+        </imageobject>
+      </mediaobject>
+        <para>
+            <emphasis role="bold">Details:</emphasis>
+        </para>
+      <table>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry> Field </entry>
+              <entry> Description</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><emphasis role="bold"> Sort by </emphasis></entry>
+              <entry> Sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date</entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Show Sidebar</emphasis> </entry>
+              <entry> Display/Hide the sidebar. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Enable Drag &amp; Drop</emphasis> </entry>
+              <entry> Enable/Disable the &quot;drag and drop&quot; action. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Nodes Per Page</emphasis> </entry>
+              <entry> This number of nodes displayed per page. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Show Non-document Nodes</emphasis> </entry>
+              <entry> Display/Hide nodes that are non–documents. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Show Referenced Documents</emphasis> </entry>
+              <entry> Display/Hide referenced documents. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Show Hidden Nodes</emphasis> </entry>
+              <entry>Display/Hide hidden nodes. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Query Type</emphasis> </entry>
+              <entry> This query type. </entry>
+            </row>
+            <row>
+              <entry><emphasis role="bold">Enable DMS Structure</emphasis> </entry>
+              <entry>Display/Hide nodes in a document  the tree structure. </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </step>
+    <step>
+      <para>
+    Configure the preferences as required and click <emphasis role="bold">Save</emphasis> to set them;
+   </para>
+      <para>
+    Or click <emphasis role="bold">Close</emphasis> to quit without submitting changes.
+   </para>
+    </step>
+  </procedure>
+</section>

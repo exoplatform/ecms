@@ -7,13 +7,12 @@
 <section id="sect-User_Guide-Content_Types">
   <title>Content Types</title>
   <section id="sect-User_Guide-Content_Types-The_Namespace_Registry">
-    <title>The Namespace Registry</title>
+    <title>Namespace registry</title>
     <para>The namespace is a prefix in the node type name. It enables you to create node types without fearing any conflict with existing node types.
 The registry helps you manage the namespaces used in the system.</para>
     <para>
-   Go to <emphasis role="bold">
-        <emphasis><guimenuitem>Administration &gt; Content Types &gt; Namespace Registry</guimenuitem> to open the Namespace Registry form.</emphasis>
-      </emphasis><!--   Go to Administration | Content Types | Namespace Registry    -->
+   Select
+        <emphasis role="bold">Content Types --> Namespace Registry</emphasis> to open the <emphasis role="bold">Namespace Registry</emphasis> form.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -23,11 +22,13 @@ The registry helps you manage the namespaces used in the system.</para>
           <imagedata fileref="images/namespaceregistry.png" format="PNG" align="center" width="150mm" />
        </imageobject>
     </mediaobject>
-    <procedure id="proc-User_Guide-The_Namespace_Registry-Registering_a_Namespace">
-      <title>Registering a Namespace</title>
+      <citetitle>
+	<para xml:id="proc-User_Guide-The_Namespace_Registry-Registering_a_Namespace"><emphasis role="bold">Register a namespace</emphasis></para>
+    </citetitle>
+      <procedure>
       <step>
-        <para>
-     Click the <guibutton>Register</guibutton> button on the Namespace Registry form to register a new namespace.
+    <para>
+     Click the <emphasis role="bold">Register</emphasis> button on the <emphasis role="bold">Namespace Registry</emphasis> form to register a new namespace.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -40,23 +41,23 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Enter the value for the Namespace Prefix field. (* Required).
+     Enter the value for the <emphasis role="bold">Namespace Prefix</emphasis> field that is required.
     </para>
       </step>
       <step>
         <para>
-     Enter the value for the URI field. This field must be unique. (*Required).
+     Enter the value for the URI field which must be unique and required.
     </para>
-        <important>
+        <note>
           <para>
-      The namespace must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+      The namespace must not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
      </para>
-        </important>
+        </note>
       </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Content_Types-Manage_Node_Types">
-    <title>Manage Node Types</title>
+    <title>Manage node types</title>
     <para>
    This function is used to control all node types in &PRODUCT;.
   </para>
@@ -70,11 +71,16 @@ The registry helps you manage the namespaces used in the system.</para>
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Content_Types-View_Node_Types">
-    <title>View Node Types</title>
+    <title>View node types</title>
     <procedure>
       <step>
         <para>
-     Click the icon that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
+     Click <inlinemediaobject>
+          <mediaobject>
+            <imageobject fileref="magnifyingglassicon.png" format="PNG"/>
+          </mediaobject>
+     </inlinemediaobject>
+                that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -87,18 +93,18 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click <guibutton>Close</guibutton> to exit this form.
+     Click <emphasis role="bold">Close</emphasis> to exit this form.
     </para>
       </step>
     </procedure>
-    <procedure id="proc-User_Guide-View_Node_Types-Add_Node_Type">
-      <title>Add Node Type</title>
+      <citetitle>
+	<para xml:id="proc-User_Guide-View_Node_Types-Add_Node_Type"><emphasis role="bold">Add a node type</emphasis></para>
+    </citetitle>
+      <procedure>
       <step>
-        <para>
-     Open the Add/Edit Node Type Definitions form by clicking the <guibutton>Add</guibutton> button on the Manage Node Type Form.
+        <para xml:id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
+     Open the <emphasis role="bold">Add/Edit Node Type Definitions</emphasis> form by clicking the <emphasis role="bold">Add</emphasis> button on the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
-        <figure id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
-          <title>Add Node Type Form</title>
           <mediaobject>
              <imageobject role="html">
                 <imagedata fileref="images/addnodetype.png" format="PNG" align="center"/>
@@ -107,7 +113,6 @@ The registry helps you manage the namespaces used in the system.</para>
                 <imagedata fileref="images/addnodetype.png" format="PNG" align="center" width="150mm" />
              </imageobject>
           </mediaobject>
-        </figure>
       </step>
       <step>
         <para>
@@ -115,78 +120,80 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
       </step>
       <step>
-        <para>Enter a name in the Node type name field. This field is mandatory and its value must be unique.</para>
-        <important>
+        <para>Enter a name in the <emphasis role="bold">Node Type Name</emphasis> field. This field is mandatory and its value must be unique.</para>
+        <note>
           <para>
-      The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+      The name must not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
      </para>
-        </important>
+        </note>
       </step>
       <step>
         <para>
-     Select a value for the &quot;Is mixin type&quot; field.
+     Select a value for the <emphasis role="bold">Is Mixin Type</emphasis> field.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       True: this node is mixin type.
+       True: This node is Mixin type.
       </para>
           </listitem>
           <listitem>
             <para>
-       False: this node is not mixin type.
+       False: This node is not Mixin type.
       </para>
           </listitem>
         </itemizedlist>
       </step>
       <step>
         <para>
-     Select a value for the &quot;Orderable child nodes&quot; field:
+     Select a value for the <emphasis role="bold">Orderable Child Nodes</emphasis> field.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       True: child nodes are ordered.
+       True: Child nodes are ordered.
       </para>
           </listitem>
           <listitem>
             <para>
-       False: child nodes are not ordered.
+       False: Child nodes are not ordered.
       </para>
           </listitem>
         </itemizedlist>
       </step>
       <step>
         <para>
-     Enter a value for the Primary item name field.
+     Enter a value for the <emphasis role="bold">Primary Item Name</emphasis> field.
     </para>
       </step>
       <step>
         <para>
-     Super Types: Click the <guibutton>+</guibutton> button to add more parent types.
+     Super Types: Click the plus icon to add more parent types.
     </para>
       </step>
       <step>
         <para>
-     Property definitions: lists all definition names of Property tab.
+     Property Definitions: List all definition names of the <emphasis role="bold">Property</emphasis> tab.
     </para>
       </step>
       <step>
         <para>
-     Child node definitions: lists all definition names of Child node tab.
+     Child Node Definitions: List all definition names of the <emphasis role="bold">Child Node</emphasis> tab.
     </para>
       </step>
       <step>
         <para>
-     Click <guibutton>Save</guibutton> to accept adding a new node type, or <guibutton>Save draft</guibutton> to save this node type as a draft, or <guibutton>Cancel</guibutton> to quit.
+     Click <emphasis role="bold">Save</emphasis> to accept adding a new node type, or <emphasis role="bold">Save as Draft</emphasis> to save this node type as draft.
     </para>
       </step>
     </procedure>
-    <procedure id="proc-User_Guide-View_Node_Types-Export_Node_Types">
-      <title>Export Node Types</title>
+      <citetitle>
+	<para xml:id="proc-User_Guide-View_Node_Types-Export_Node_Types"><emphasis role="bold">Export Node Types</emphasis></para>
+    </citetitle>
+      <procedure>
       <step>
-        <para>
-     Open the Export Node Types form by clicking the <guibutton>Export</guibutton> button on the Manage Node Type Form.
+    <para>
+     Open the <emphasis role="bold">Export Node Types</emphasis> form by clicking the <emphasis role="bold">Export</emphasis> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
       <mediaobject>
          <imageobject role="html">
@@ -196,15 +203,10 @@ The registry helps you manage the namespaces used in the system.</para>
             <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center" width="130mm" />
          </imageobject>
       </mediaobject>
-          <mediaobject>
-            <imageobject>
-              <imagedata  align="center" fileref="images/exportnodetypes.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
       </step>
       <step>
         <para>
-     Click <guibutton>Uncheck all</guibutton> if you do not want to export all node types. After clicking <guibutton>Uncheck all</guibutton>, this button becomes the <guibutton>Check all</guibutton> button.
+     Click <emphasis role="bold">Uncheck all</emphasis> if you do not want to export all node types. After clicking <emphasis role="bold">Uncheck all</emphasis>, this button becomes the <emphasis role="bold">Check all</emphasis> button.
     </para>
       </step>
       <step>
@@ -214,25 +216,27 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <guibutton>Export</guibutton> button in this form.
+     Click the <emphasis role="bold">Export</emphasis> button in this form.
     </para>
       </step>
       <step>
         <para>
-     Select the location in your computer to save the exported node.
+     Select the location in your device to save the exported node.
     </para>
-        <important>
+        <note>
           <para>
-      You must select at least 1 node type to be exported. If you do not want to export the node, click <guibutton>Cancel</guibutton> to quit this pop-up.
+      You must select at least 1 node type to be exported. If you do not want to export the node, click <emphasis role="bold">Cancel</emphasis> to quit this pop-up.
      </para>
-        </important>
+        </note>
       </step>
     </procedure>
-    <procedure id="proc-User_Guide-View_Node_Types-Import_Node_Types">
-      <title>Import Node Types</title>
+      <citetitle>
+	<para xml:id="proc-User_Guide-View_Node_Types-Import_Node_Types"><emphasis role="bold">Import Node Types</emphasis></para>
+    </citetitle>
+      <procedure>
       <step>
         <para>
-     Open the Import Node Type from XML file form by clicking the <guibutton>Import</guibutton> button on the Manage Node Type Form.
+     Open the <emphasis role="bold">Import Node Type From XML File</emphasis> form by clicking the <emphasis role="bold">Import</emphasis> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -245,29 +249,26 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <guibutton>Browse</guibutton> button to upload a file.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/browsefornodes.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/browsefornodes.png" format="PNG" align="center" width="129mm" />
-           </imageobject>
-        </mediaobject>
-        <important>
-          <para>
-      You must upload an XML file. This file is in the node type&apos;s format.
-     </para>
-        </important>
-      </step>
-      <step>
-        <para>
-     Click the <guibutton>Upload</guibutton> button.
+     Click the <emphasis role="bold">Browse...</emphasis> button to upload a file.
     </para>
         <note>
           <para>
-      If you want to upload a different file, click the <guibutton>trash </guibutton>icon to delete the file which has just been uploaded, then upload other files.
+      You must upload an XML file. This file is in the node type&apos;s format.
+     </para>
+        </note>
+      </step>
+      <step>
+        <para>
+     Click the <emphasis role="bold">Upload</emphasis> button.
+    </para>
+        <note>
+          <para>
+      If you want to upload another file, click   
+<inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject> to delete the file which has just been uploaded, then upload other files.
      </para>
         </note>
       </step>
@@ -278,7 +279,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Import </emphasis>button to complete importing a node type.
+     Click the <emphasis role="bold">Import</emphasis> button to complete importing a node type.
     </para>
       </step>
     </procedure>

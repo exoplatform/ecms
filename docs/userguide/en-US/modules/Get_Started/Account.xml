@@ -59,27 +59,27 @@
             <tbody>
               <row>
                 <entry> User Name </entry>
-                <entry> The user name that is used to log into the system. It must be unique. The user name must be started with a character. </entry>
+                <entry> The user name that is used to login into the system. It must be unique. The user name must be started with a character. </entry>
               </row>
               <row>
                 <entry> Password </entry>
-                <entry> The security characters are used to log in. It must have at least 6 characters. </entry>
+                <entry> The security characters are used to login. It must have at least 6 characters. </entry>
               </row>
               <row>
                 <entry> Confirm Password </entry>
-                <entry> The re-typed password above. The password in the <guilabel>Password</guilabel> field and this field must be the same. </entry>
+                <entry> The re-typed password above. The password in Password field and this field must be the same. </entry>
               </row>
               <row>
                 <entry> First Name </entry>
-                <entry> Your first name. </entry>
+                <entry> Your first name </entry>
               </row>
               <row>
                 <entry> Last Name </entry>
-                <entry> Your last name. </entry>
+                <entry> Your last name </entry>
               </row>
               <row>
                 <entry> Email Address </entry>
-                <entry> Your email address. It must have a right format: <replaceable>username@abc.com</replaceable>.</entry>
+                <entry> Your email address. It must have a right format: <replaceable>username@abc.com</replaceable></entry>
               </row>
             </tbody>
           </tgroup>
@@ -124,34 +124,34 @@
         <itemizedlist>
           <listitem>
             <para>
-       The <guilabel>Username</guilabel> is existing or invalid.
+       User name is existing or invalid.
       </para>
           </listitem>
           <listitem>
             <para>
-      The <guilabel>Password</guilabel> has less than 6 characters.
+       Password has less than 6 characters.
       </para>
           </listitem>
           <listitem>
             <para>
-       The <guilabel>Password</guilabel> and <guilabel>Confirm Password</guilabel> are not the same.
+       Password and Confirm Password are not the same.
       </para>
           </listitem>
           <listitem>
             <para>
-      The <guilabel>Email Address</guilabel> is in a invalid format.
+       Email Address has invalid format.
       </para>
           </listitem>
           <listitem>
             <para>
-      Any of the required fields are empty.
+       Required fields are empty.
       </para>
           </listitem>
         </itemizedlist>
       </step>
     </procedure>
     <para>
-   After adding a new account, contact the administrator to get the confirmation.
+   After adding a new account, contact with the administrator to get the confirmation.
   </para>
     <note>
       <title>Email </title>
@@ -169,7 +169,7 @@
       <title>Sign in</title>
       <step>
         <para>
-     Go to your portal's home page by entering the URL in the address bar (e.g. <ulink url="http://localhost:8080//portal/public/classic/" type="http"/>).
+     Go to the &PRODUCT; in the public mode by inputting the URL in the address bar (e.g: <ulink url="http://localhost:8080//portal/public/classic/" type="http"/>).
     </para>
       </step>
       <step>
@@ -187,7 +187,7 @@
       </step>
       <step>
         <para>
-     Input your registered Username and Password.
+     Input your registered User name and Password.
     </para>
       </step>
       <step>
@@ -205,7 +205,7 @@
             </thead>
             <tbody>
               <row>
-                <entry> Username </entry>
+                <entry> User name </entry>
                 <entry> To input the registered username. </entry>
               </row>
               <row>
@@ -213,8 +213,8 @@
                 <entry> To input the password of your username. </entry>
               </row>
               <row>
-                <entry> Forgot your Username/Password </entry>
-                <entry> To retrieve the forgotten username or password. </entry>
+                <entry> Forgot your User Name/Password </entry>
+                <entry> To retrieve the forgotten user name or password when you forget. </entry>
               </row>
               <row>
                 <entry> Sign in </entry>
@@ -228,15 +228,15 @@
           </tgroup>
         </table>
         <para>
-     If the Username does not exist or the input Username/Password is invalid, there will be an alert message that requires you to input right values. The page will be redirected to the private security checking mode.
+     If the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security checking mode.
     </para>
         <para>
-     To login again, enter Username and Password again.
+     To login again, enter User Name and Password again.
     </para>
       </step>
     </procedure>
     <para>
-   After signing in, you will be presented with the authenticated homepage:
+   After signing in, you will be redirected to the authenticated homepage like the illustration.
   </para>
    <mediaobject>
       <imageobject role="html">
@@ -246,19 +246,6 @@
         <imagedata   align="center" fileref="images/authhomepage.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
-      <note>
-          <title>Toolbar Visibility</title>
-          <para>
-              The toolbar in the image above is, by default, only visible to members of the
-              <emphasis>/platform/web-contributors</emphasis>
-              role.
-          </para>
-          <para>
-              See
-              <xref linkend="sect-User_Guide-Account-Toolbar_Visibility"/>
-              for information about how to add the required permissions and/or change the default portal behavior.
-          </para>
-      </note>
   </section>
   <section id="sect-User_Guide-Account-Sign_Out">
     <title>Sign Out</title>
@@ -277,10 +264,10 @@
       </imageobject>
     </mediaobject>
     <para>
-   Alternatively, members of the <emphasis>/platform/web-contributors</emphasis> role can click <menuchoice>
+   or click <menuchoice>
       <guimenu>Start Logo</guimenu>
       <guimenuitem>Sign Out</guimenuitem>
-   </menuchoice> from the toolbar:
+   </menuchoice> from the menu:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -292,7 +279,7 @@
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Account-Retrieve_user_namepassword">
-    <title>Retrieve Username/Password</title>
+    <title>Retrieve user name/password</title>
     <para>
    If you forget your account or password, you can recover them by doing as follows:
   </para>
@@ -300,7 +287,7 @@
       <title/>
       <step>
         <para>
-     Click the link <emphasis role="bold">Forgot your Username/Password?</emphasis> in the <guilabel>Sign in</guilabel> form.
+     Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
     </para>
         <para>
      This form offers two options:
@@ -315,7 +302,7 @@
         </mediaobject>
         <variablelist>
           <varlistentry>
-            <term>Forgot My Password:</term>
+            <term>Forgot my password:</term>
             <listitem>
               <para>
         If you forgot your password, you need to select this option.
@@ -323,7 +310,7 @@
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term>Forgot My Username:</term>
+            <term>Forgot my username:</term>
             <listitem>
               <para>
         If you forgot your username, you need to select this option.
@@ -337,7 +324,7 @@
      Select one of these two options in this form. The selected option will be shown:
     </para>
         <para>
-     If the <emphasis role="bold">Forgot My Password</emphasis> option is selected, the form to recover the password appears:
+     If the <emphasis role="bold">Forgot my password</emphasis> option is selected the form to recover the password appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -348,7 +335,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     If the <emphasis role="bold">Forgot My Username</emphasis> option is selected, the form to recover the username appears:
+     If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -366,15 +353,15 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Send</emphasis> to send the input values.
+     Click <emphasis role="bold">Send</emphasis> to send the inputted values.
     </para>
         <para>
-     Once the information has been sent, you will receive an email with your Username/Password in your email address that you registered.
+     Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       If you forget Username: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
+       If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
       </para>
           </listitem>
           <listitem>
@@ -430,7 +417,7 @@
       </step>
       <step>
         <para>
-     Change your First Name, Last Name and Email. You cannot change your Username.
+     Change your First Name, Last Name and Email. You cannot change your User Name.
     </para>
       </step>
       <step>
@@ -476,60 +463,4 @@
       </step>
     </procedure>
   </section>
-    <section id="sect-User_Guide-Account-Toolbar_Visibility">
-        <title>Toolbar Visibility</title>
-        <!-- Source Metadata
-        URL: https://access.redhat.com/kb/docs/DOC-54051
-        Author: Red Hat GSS
-        License: -->
-        <para>
-            Newly registered users (or other users who are not members of the
-            <emphasis>/platform/web-contributors</emphasis>
-            role) will not see the toolbar at the top of the home page. These users will, however, be able to sign into
-            and out of the Portal using the appropriate buttons in the site header.
-        </para>
-        <para>
-            Portal administrators can add individual users to the
-            <emphasis>/platform/web-contributors</emphasis>
-            through the graphical user interface (GUI):
-        </para>
-        <procedure>
-            <title>Add Permission via GUI</title>
-            <step>
-                <para>
-                    Click
-                    <menuchoice>
-                        <guimenu>Group</guimenu>
-                        <guimenuitem>Organization</guimenuitem>
-                        <guimenuitem>Users and groups management</guimenuitem>
-                    </menuchoice>
-                    , then click <guilabel>Group Management</guilabel>.
-                </para>
-            </step>
-            <step>
-                <para>
-                    Click
-                    <menuchoice>
-                        <guimenu>Platform</guimenu>
-                        <guimenuitem>Content Manager</guimenuitem>
-                    </menuchoice>
-                    in the left pane.
-                </para>
-            </step>
-            <step>
-                <para>
-                    Enter the required username in the
-                    <guilabel>Add member</guilabel>
-                    box (the above lists all users already in that role).
-                </para>
-            </step>
-        </procedure>
-        <warning>
-            <title>CMS Access</title>
-            <para>
-                Be aware that granting this membership will also give the user access to the Content Management System
-                (CMS).
-            </para>
-        </warning>
-    </section>
 </section>
