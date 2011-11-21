@@ -1,0 +1,326 @@
+Index: ext/workflow/bp-content-publication/src/main/java/org/exoplatform/services/ecm/publication/plugins/workflow/WorkflowPublicationPlugin.java
+===================================================================
+--- ext/workflow/bp-content-publication/src/main/java/org/exoplatform/services/ecm/publication/plugins/workflow/WorkflowPublicationPlugin.java	(revision 69986)
++++ ext/workflow/bp-content-publication/src/main/java/org/exoplatform/services/ecm/publication/plugins/workflow/WorkflowPublicationPlugin.java	(working copy)
+@@ -63,9 +63,7 @@
+   public static final String CURRENT_STATE = "publication:currentState".intern();
+   public static final String HISTORY = "publication:history".intern();
+   public static final String VALIDATOR = "publication:validator".intern();
+-  /*public static final String DEST_WORKSPACE = "exo:destWorkspace".intern();
+-  public static final String DESTPATH = "exo:destPath".intern();
+-  public static final String BACUP_PATH = "publication:backupPath".intern();*/
++  public static final String PUBLICATION_BACKUP_PATH = "publication:backupPath".intern();
+   public static final String PUBLISH_MIXIN_TYPE = "exo:publishLocation".intern();
+ 
+   public static final String PENDING_MIXIN_TYPE = "exo:pendingLocation".intern();
+@@ -146,6 +144,9 @@
+   @Override
+   public void addMixin(Node node) throws Exception {
+     node.addMixin(MIXIN_TYPE) ;
++    if (!node.hasProperty(PUBLICATION_BACKUP_PATH)) {
++      node.setProperty(PUBLICATION_BACKUP_PATH, "");
++    }
+   }
+ 
+   @Override
+@@ -175,10 +176,6 @@
+         IdentityRegistry identityRegistry = (IdentityRegistry)container.getComponentInstanceOfType(IdentityRegistry.class);
+         String repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
+         String workspaceName = node.getSession().getWorkspace().getName();
+-        if (node.canAddMixin(MIXIN_MOVE)) {
+-          node.addMixin(MIXIN_MOVE);
+-          node.getSession().save();
+-        }
+         if (node.canAddMixin(PUBLISH_MIXIN_TYPE)) {
+           node.addMixin(PUBLISH_MIXIN_TYPE);
+           node.getSession().save();
+Index: core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIVersionTreeList.java
+===================================================================
+--- core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIVersionTreeList.java	(revision 69986)
++++ core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIVersionTreeList.java	(working copy)
+@@ -33,7 +33,7 @@
+  * Jun 26, 2008 9:22:51 AM
+  */
+ @ComponentConfig(
+-    template = "classpath:resources/templates/webui/UIVersionTreeList.gtmpl",
++    template = "classpath:groovy/workflow/webui/UIVersionTreeList.gtmpl",
+     events = {
+         @EventConfig(listeners = UIVersionTreeList.SelectActionListener.class)
+     }
+Index: core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIPublicationLogList.java
+===================================================================
+--- core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIPublicationLogList.java	(revision 69986)
++++ core/publication-plugins/src/main/java/org/exoplatform/services/ecm/publication/plugins/webui/UIPublicationLogList.java	(working copy)
+@@ -41,7 +41,7 @@
+  * Jun 26, 2008 1:16:08 AM
+  */
+ @ComponentConfig(
+-    template = "classpath:resources/templates/webui/UIPublicationLogList.gtmpl",
++    template = "classpath:groovy/workflow/webui/UIPublicationLogList.gtmpl",
+     events = {
+         @EventConfig(listeners = UIPublicationLogList.CloseActionListener.class)
+     }
+Index: core/publication-plugins/src/main/java/resources/templates/webui/UIVersionTreeList.gtmpl
+===================================================================
+--- core/publication-plugins/src/main/java/resources/templates/webui/UIVersionTreeList.gtmpl	(revision 69986)
++++ core/publication-plugins/src/main/java/resources/templates/webui/UIVersionTreeList.gtmpl	(working copy)
+@@ -1,59 +0,0 @@
+-<%	
+-	import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
+-
+-	VersionNode rootNode = uicomponent.getRootVersionNode() ;  
+-  public void writeNodes(List nodes, int level) {
+-  	boolean even = true ;
+-  	int n = 0;
+-  	for (node in nodes) {  		  			  		
+-			def clazz = "ExpandIcon" ;
+-			def clazzRow = "EvenRow" ;
+-			def selectItem = "ItemIcon TrueIcon";
+-			if(uicomponent.isSelectedVersion(node)) {
+-			  clazz = "CollapseIcon" ;
+-			  clazzRow = "SelectRow" ;
+-			  selectItem = "ItemIcon TrueSelectIcon" ;
+-			}  
+-    	println("<tr class=\""+clazzRow+"\"><td><div class=\""+selectItem+"\"><span></span></div></td>");
+-  	  println("<td><div class=\"Node Text\">");  		      	
+-		  println("<div class=\"" +clazz+ "\">");
+-			String show = "Version: " + node.getName();					
+-			println("<a href=\""+uicomponent.event("Select",   node.getPath()) + "\">");
+-			println(show);				
+-			println("</a>")	
+-			println("</div></div></td><td>");
+-			if(uicomponent.isPublised(node)) {
+-				println("<div class=\"ItemIcon Publishedicon\">");					
+-			} else {
+-				println("<div class=\"ItemIcon UnPublishedicon\">");					
+-			}
+-			println("<span></span></div></td></tr>");							
+-    	if (node.getChildrenSize() > 0) writeNodes(node.getChildren(), level + 1) ;  		
+-	  }  	
+-  }
+-%>
+-<%
+-  if(rootNode != null) {
+-%>
+-<div class="UIVersionTreeList">
+-	<div class="UITrees">
+-    <table class="UIGrid">
+-		  <thead>
+-			  <tr>
+-					<th width="40"></th>
+-					<th><%=_ctx.appRes("UIVersionTreeList.header.version")%></th>
+-					<th width="40"><%=_ctx.appRes("UIVersionTreeList.header.state")%></th>
+-				</tr>
+-			 </thead>
+-			 <tbody>
+-			 
+-			 <%
+-					writeNodes(rootNode.getChildren(), 0 );
+-				  uicomponent.renderChildren(); 
+-			 %>
+-			</tbody>
+-		</table>
+-	</div>
+-</div>
+-<%}%>
+-
+Index: core/publication-plugins/src/main/java/resources/templates/webui/UIPublicationLogList.gtmpl
+===================================================================
+--- core/publication-plugins/src/main/java/resources/templates/webui/UIPublicationLogList.gtmpl	(revision 69986)
++++ core/publication-plugins/src/main/java/resources/templates/webui/UIPublicationLogList.gtmpl	(working copy)
+@@ -1,63 +0,0 @@
+-<%
+-/**
+- * Created by The eXo Platform SARL
+- * Author : Dang Van Minh
+- *          minh.dang@exoplatform.com
+- * Dec 26, 2008
+- * 9:36:26 AM 
+- */
+-%>
+-
+-<div class="$uicomponent.id" id="$uicomponent.id">
+-  <table class="UIGrid">
+-    <thead>
+-      <tr>
+-  	    <th><%=_ctx.appRes("UIPublicationLogList.header.date")%></th>
+-  	    <th><%=_ctx.appRes("UIPublicationLogList.header.newState")%></th>
+-  	    <th><%=_ctx.appRes("UIPublicationLogList.header.user")%></th>
+-  	    <th><%=_ctx.appRes("UIPublicationLogList.header.description")%></th>
+-  	   </tr>
+-    </thead>
+-    <tbody>
+-      <%
+-        def rowClass = null ;
+-  	    boolean even = true ;
+-  	    for (bean in uicomponent.getLogList()) {
+-  	      if(even) rowClass = "EvenRow" ;  
+-  	      else rowClass =  "OddRow" ; 
+-  	      even = !even ;
+-  	      out.println("<tr class=\"" + rowClass + "\">");  	   			
+-					out.println("<td><div class=\"Text\">" + bean.getDate() + "</div></td>");	          
+-					out.println("<td><div class=\"Text\">" + bean.getNewState() + "</div></td>");	          
+-					out.println("<td><div class=\"Text\">" + bean.getUser() + "</div></td>");	          
+-					out.println("<td><div class=\"Text\">" + bean.getDescription() + "</div></td>");	          
+-					out.println("</tr>");	        
+-        }  
+-      %>  
+-    </tbody>
+-  </table>
+-  <% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
+-  <div style="margin:1px 0px 5px 0px;">
+-    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+-  </div>
+-  <% } %>
+-	<div class="UIAction">
+-    <table class="ActionContainer">
+-    	<tr>
+-    		<td>
+-		      <% for(action in uicomponent.getActions()) { %>
+-	          <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle">
+-	  					<div class="ButtonLeft">
+-	  					  <div class="ButtonRight">
+-	  						  <div class="ButtonMiddle">
+-	  							  <a href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></a>
+-	  				      </div>
+-	  				    </div>
+-	  			    </div>
+-	  				</div>
+-		      <% } %>
+-    		</td>
+-    	</tr>
+-    </table>
+-  </div>
+-</div>
+Index: core/publication-plugins/src/main/resources/groovy/workflow/webui/UIVersionTreeList.gtmpl
+===================================================================
+--- core/publication-plugins/src/main/resources/groovy/workflow/webui/UIVersionTreeList.gtmpl	(revision 0)
++++ core/publication-plugins/src/main/resources/groovy/workflow/webui/UIVersionTreeList.gtmpl	(revision 0)
+@@ -0,0 +1,59 @@
++<%	
++	import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
++
++	VersionNode rootNode = uicomponent.getRootVersionNode() ;  
++  public void writeNodes(List nodes, int level) {
++  	boolean even = true ;
++  	int n = 0;
++  	for (node in nodes) {  		  			  		
++			def clazz = "ExpandIcon" ;
++			def clazzRow = "EvenRow" ;
++			def selectItem = "ItemIcon TrueIcon";
++			if(uicomponent.isSelectedVersion(node)) {
++			  clazz = "CollapseIcon" ;
++			  clazzRow = "SelectRow" ;
++			  selectItem = "ItemIcon TrueSelectIcon" ;
++			}  
++    	println("<tr class=\""+clazzRow+"\"><td><div class=\""+selectItem+"\"><span></span></div></td>");
++  	  println("<td><div class=\"Node Text\">");  		      	
++		  println("<div class=\"" +clazz+ "\">");
++			String show = "Version: " + node.getName();					
++			println("<a href=\""+uicomponent.event("Select",   node.getPath()) + "\">");
++			println(show);				
++			println("</a>")	
++			println("</div></div></td><td>");
++			if(uicomponent.isPublised(node)) {
++				println("<div class=\"ItemIcon Publishedicon\">");					
++			} else {
++				println("<div class=\"ItemIcon UnPublishedicon\">");					
++			}
++			println("<span></span></div></td></tr>");							
++    	if (node.getChildrenSize() > 0) writeNodes(node.getChildren(), level + 1) ;  		
++	  }  	
++  }
++%>
++<%
++  if(rootNode != null) {
++%>
++<div class="UIVersionTreeList">
++	<div class="UITrees">
++    <table class="UIGrid">
++		  <thead>
++			  <tr>
++					<th width="40"></th>
++					<th><%=_ctx.appRes("UIVersionTreeList.header.version")%></th>
++					<th width="40"><%=_ctx.appRes("UIVersionTreeList.header.state")%></th>
++				</tr>
++			 </thead>
++			 <tbody>
++			 
++			 <%
++					writeNodes(rootNode.getChildren(), 0 );
++				  uicomponent.renderChildren(); 
++			 %>
++			</tbody>
++		</table>
++	</div>
++</div>
++<%}%>
++
+Index: core/publication-plugins/src/main/resources/groovy/workflow/webui/UIPublicationLogList.gtmpl
+===================================================================
+--- core/publication-plugins/src/main/resources/groovy/workflow/webui/UIPublicationLogList.gtmpl	(revision 0)
++++ core/publication-plugins/src/main/resources/groovy/workflow/webui/UIPublicationLogList.gtmpl	(revision 0)
+@@ -0,0 +1,63 @@
++<%
++/**
++ * Created by The eXo Platform SARL
++ * Author : Dang Van Minh
++ *          minh.dang@exoplatform.com
++ * Dec 26, 2008
++ * 9:36:26 AM 
++ */
++%>
++
++<div class="$uicomponent.id" id="$uicomponent.id">
++  <table class="UIGrid">
++    <thead>
++      <tr>
++  	    <th><%=_ctx.appRes("UIPublicationLogList.header.date")%></th>
++  	    <th><%=_ctx.appRes("UIPublicationLogList.header.newState")%></th>
++  	    <th><%=_ctx.appRes("UIPublicationLogList.header.user")%></th>
++  	    <th><%=_ctx.appRes("UIPublicationLogList.header.description")%></th>
++  	   </tr>
++    </thead>
++    <tbody>
++      <%
++        def rowClass = null ;
++  	    boolean even = true ;
++  	    for (bean in uicomponent.getLogList()) {
++  	      if(even) rowClass = "EvenRow" ;  
++  	      else rowClass =  "OddRow" ; 
++  	      even = !even ;
++  	      out.println("<tr class=\"" + rowClass + "\">");  	   			
++					out.println("<td><div class=\"Text\">" + bean.getDate() + "</div></td>");	          
++					out.println("<td><div class=\"Text\">" + bean.getNewState() + "</div></td>");	          
++					out.println("<td><div class=\"Text\">" + bean.getUser() + "</div></td>");	          
++					out.println("<td><div class=\"Text\">" + bean.getDescription() + "</div></td>");	          
++					out.println("</tr>");	        
++        }  
++      %>  
++    </tbody>
++  </table>
++  <% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
++  <div style="margin:1px 0px 5px 0px;">
++    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
++  </div>
++  <% } %>
++	<div class="UIAction">
++    <table class="ActionContainer">
++    	<tr>
++    		<td>
++		      <% for(action in uicomponent.getActions()) { %>
++	          <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle">
++	  					<div class="ButtonLeft">
++	  					  <div class="ButtonRight">
++	  						  <div class="ButtonMiddle">
++	  							  <a href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></a>
++	  				      </div>
++	  				    </div>
++	  			    </div>
++	  				</div>
++		      <% } %>
++    		</td>
++    	</tr>
++    </table>
++  </div>
++</div>

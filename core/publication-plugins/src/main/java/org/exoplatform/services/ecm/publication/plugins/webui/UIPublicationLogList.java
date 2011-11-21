@@ -41,7 +41,7 @@ import org.exoplatform.webui.event.EventListener;
  * Jun 26, 2008 1:16:08 AM
  */
 @ComponentConfig(
-    template = "classpath:resources/templates/webui/UIPublicationLogList.gtmpl",
+    template = "classpath:groovy/workflow/webui/UIPublicationLogList.gtmpl",
     events = {
         @EventConfig(listeners = UIPublicationLogList.CloseActionListener.class)
     }
