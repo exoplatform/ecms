@@ -17,11 +17,13 @@
 package org.exoplatform.services.cms.webdav;
 
 import java.io.InputStream;
-import java.util.List;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
 import javax.ws.rs.HeaderParam;
@@ -43,6 +45,7 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.webdav.util.TextUtil;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.ExtHttpHeaders;
@@ -59,6 +62,7 @@ import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
 import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
 import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -76,7 +80,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
    */
   private static Log log = ExoLogger.getLogger("cms.webdav.WebDavServiceImpl");
   
+  private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
+  
   private final NodeFinder nodeFinder;
+  
+  private ListenerService listenerService;
   
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
@@ -84,6 +92,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            NodeFinder nodeFinder) throws Exception {
     super(params, repositoryService, sessionProviderService);
     this.nodeFinder = nodeFinder;
+    this.listenerService = WCMCoreUtils.getService(ListenerService.class);
   }
 
   private String getRealDestinationHeader(String baseURI, String repoName, String destinationHeader) {
@@ -350,9 +359,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.CONTENTTYPE) MediaType mediaType,
                       InputStream inputStream) {
 
+    Session session = null;
     try {
       Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))), true);
       repoPath = item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+      session = item.getSession();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -361,7 +372,19 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-    return super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, inputStream);
+    Response res =  super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, inputStream);
+    try {
+      Node currentNode = (Node) session.getItem(path(repoPath));
+      listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);      
+    } catch (PathNotFoundException npfe) {
+      return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
+    } catch (RepositoryException re) {
+      return Response.status(HTTPStatus.NOT_FOUND).entity(re.getMessage()).build();
+    } catch (Exception e) {
+      return Response.serverError().build();
+    }
+
+    return res;
   }
 
   @REPORT
