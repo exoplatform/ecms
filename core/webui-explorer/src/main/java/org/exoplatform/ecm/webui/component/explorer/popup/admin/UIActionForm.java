@@ -224,7 +224,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       String repository = uiExplorer.getRepositoryName();
       StringBuilder url = new StringBuilder("") ;
       url.append(rssUrl.substring(0, rssUrl.indexOf("/", 8))).
-          append(requestUri).append("/").
+          append(requestUri).append("?path=").
           append(repository).append("/").
           append(driveName);
       input.get(rssUrlKey).setValue(url.toString());

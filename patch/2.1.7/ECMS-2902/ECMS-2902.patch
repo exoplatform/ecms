@@ -1,0 +1,114 @@
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(revision 76784)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(working copy)
+@@ -366,8 +366,9 @@
+ 		String workspace = portletPreferences.getValue(UIWCMSearchPortlet.WORKSPACE, null);
+ 		String baseURI = portletRequest.getScheme() + "://"	+ portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+ 		String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
++		String detailParameterName = portletPreferences.getValue(UIWCMSearchPortlet.DETAIL_PARAMETER_NAME, "content-id");
+ 		
+-    link = baseURI + portalURI + basePath + "/" + repository + "/" + workspace;		
++    link = baseURI + portalURI + basePath + "?" + detailParameterName + "=/" + repository + "/" + workspace;		
+     if (node.isNodeType("nt:frozenNode")){
+       String uuid = node.getProperty("jcr:frozenUuid").getString();
+       Node originalNode = node.getSession().getNodeByUUID(uuid);      
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java	(revision 76784)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java	(working copy)
+@@ -59,7 +59,10 @@
+ 	public final static String	PAGE_MODE										      = "pageMode";
+ 
+ 	/** The Constant SHOW_DATE_CREATED. */
+-  public final static String  BASE_PATH                          = "basePath";
++	public final static String  BASE_PATH                          = "basePath";
++  
++  	/** The Constant DETAIL_PARAMETER_NAME. */
++    public final static String DETAIL_PARAMETER_NAME            = "detailParameterName";
+ 
+ 	/**
+ 	 * Instantiates a new uIWCM search portlet.
+Index: packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml
+===================================================================
+--- packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml	(revision 76784)
++++ packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml	(working copy)
+@@ -861,6 +861,11 @@
+             <value>detail</value>
+             <read-only>false</read-only>
+           </preference>
++          <preference>
++            <name>detailParameterName</name>
++            <value>content-id</value>
++            <read-only>false</read-only>
++          </preference>
+         </preferences>
+       </portlet>
+       <title>SearchResult</title>
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java	(revision 76784)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java	(working copy)
+@@ -68,7 +68,7 @@
+     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
+     String repository = uiExplorer.getRepositoryName();
+     StringBuffer bf = new StringBuffer(1024);
+-    return bf.append(portalUrl).append(portletId).append("/").append(repository).append("/").append(drivename).append(nodePath).toString();
++    return bf.append(portalUrl).append(portletId).append("?path=").append(repository).append("/").append(drivename).append(nodePath).toString();
+   }
+   
+   @Override
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java	(revision 76784)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIJCRExplorerPortlet.java	(working copy)
+@@ -309,27 +309,16 @@
+ 	      mapParam.put("drive", matcher.group(2));
+ 	      mapParam.put("path", matcher.group(3));
+ 	      return mapParam;
++	    } else {
++	    	patternUrl = Pattern.compile("([^/]+)/(.*)");
++	    	matcher = patternUrl.matcher(nodePathParam);
++	    	if (matcher.find()) {
++	    	  mapParam.put("repository", matcher.group(1));
++	    	  mapParam.put("drive", matcher.group(2));
++	    	  mapParam.put("path", "/");
++	    	}
+ 	    }
+-    }
+-    
+-    String nodePathUrl = pcontext.getNodePath().substring(1);
+-    String[] uri = nodePathUrl.split("/");
+-    if (uri == null || uri.length < 3) return mapParam;
+-    patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");
+-    matcher = patternUrl.matcher(nodePathUrl);
+-    if (matcher.find()) {
+-      mapParam.put("repository", matcher.group(2));
+-      mapParam.put("drive", matcher.group(3));
+-      mapParam.put("path", "/" + matcher.group(4));
+-    } else {
+-      patternUrl = Pattern.compile("([^/]+)/([^/]+)/(.*)");
+-      matcher = patternUrl.matcher(nodePathUrl);
+-      if (matcher.find()) {
+-        mapParam.put("repository", matcher.group(2));
+-        mapParam.put("drive", matcher.group(3));
+-        mapParam.put("path", "/");
+-      }  
+-    }
++    } 
+     return mapParam;
+   }
+ 
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActionForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActionForm.java	(revision 76784)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActionForm.java	(working copy)
+@@ -224,7 +224,7 @@
+       String repository = uiExplorer.getRepositoryName();
+       StringBuilder url = new StringBuilder("") ;
+       url.append(rssUrl.substring(0, rssUrl.indexOf("/", 8))).
+-          append(requestUri).append("/").
++          append(requestUri).append("?path=").
+           append(repository).append("/").
+           append(driveName);
+       input.get(rssUrlKey).setValue(url.toString());

@@ -68,7 +68,7 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
     String repository = uiExplorer.getRepositoryName();
     StringBuffer bf = new StringBuffer(1024);
-    return bf.append(portalUrl).append(portletId).append("/").append(repository).append("/").append(drivename).append(nodePath).toString();
+    return bf.append(portalUrl).append(portletId).append("?path=").append(repository).append("/").append(drivename).append(nodePath).toString();
   }
   
   @Override
