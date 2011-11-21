@@ -355,9 +355,43 @@ public class QueryUsecasesTest extends BaseQueryTest
    }
    
    
+   public void testQueryWithSearchAllVersionFalse() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+
+      // checkout/checkin
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      ContentStream cs1 =
+         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData document = createDocument(rootFolder, "testQueryWithSearchAllVersionFalse", "cmis:document", cs1, null);
+      
+      DocumentData pwc = document.checkout();
+      ContentStream cs2 =
+         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
+            
+      // search for document, searchAllVersion = false
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      query = new Query(sql.toString(), false);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{checkin});
+   }
+   
    public void testDeleteVersion() throws Exception
    {
-      FolderData folder1 = createFolder(testRoot, "multifiledChildFolderTest01", "cmis:folder");
+      FolderData folder1 = createFolder(testRoot, "testDeleteVersion", "cmis:folder");
       
       // SEARCH TEST
       String queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";

@@ -281,7 +281,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
                   }
                }
             }
-            //remove one by one. ignore exceptions
+            // MAIN PART in two updates: first remove one by one ignore exceptions, then add with a list.
             for (String uuid : removedNodes)
             {
                try

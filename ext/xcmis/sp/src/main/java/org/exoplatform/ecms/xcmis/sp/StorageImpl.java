@@ -27,7 +27,14 @@ import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.Visitors;
 import org.xcmis.search.model.constraint.And;
+import org.xcmis.search.model.constraint.Comparison;
+import org.xcmis.search.model.constraint.Constraint;
 import org.xcmis.search.model.constraint.DescendantNode;
+import org.xcmis.search.model.constraint.Operator;
+import org.xcmis.search.model.operand.DynamicOperand;
+import org.xcmis.search.model.operand.Literal;
+import org.xcmis.search.model.operand.PropertyValue;
+import org.xcmis.search.model.operand.StaticOperand;
 import org.xcmis.search.model.source.Selector;
 import org.xcmis.search.model.source.SelectorName;
 import org.xcmis.search.parser.CmisQueryParser;
@@ -841,7 +848,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             }
             catch (RepositoryException re)
             {
-               throw new CmisRuntimeException("Unable get root folder id. ", re);
+               throw new CmisRuntimeException("Unable get root folder id with path '" + rootFolderPath + "'. ", re);
             }
          }
 
@@ -900,9 +907,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             boolean isRootStorage = "/".equals(getJcrRootPath());
             org.xcmis.search.model.Query realQuery = cmisQueryParser.parseQuery(query.getStatement());
+            
             if (!isRootStorage)
             {
-
                //add drive path constrain
                DescendantNode rootDescendantConstraint =
                   new DescendantNode(((Selector)realQuery.getSource()).getAlias(), "["
@@ -913,6 +920,22 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                      ? rootDescendantConstraint : new And(realQuery.getConstraint(), rootDescendantConstraint),
                      realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
             }
+            
+            if (!query.isSearchAllVersions())
+            {
+               // add latest version constraint
+               SelectorName selectorName = realQuery.getColumns().iterator().next().getSelectorName();
+               DynamicOperand dynamicOperand = new PropertyValue(selectorName, "cmis:isLatestVersion");
+               StaticOperand staticOperand = new Literal("true");
+               //add drive path constrain
+               Constraint allVersionsConstraint = new Comparison(dynamicOperand, Operator.EQUAL_TO, staticOperand);
+
+               realQuery =
+                  new org.xcmis.search.model.Query(realQuery.getSource(), realQuery.getConstraint() == null
+                     ? allVersionsConstraint : new And(realQuery.getConstraint(), allVersionsConstraint),
+                     realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
+            }
+            
             List<ScoredRow> rows = searchService.execute(realQuery);
             //check if needed default sorting
             if (realQuery.getOrderings().size() == 0)
