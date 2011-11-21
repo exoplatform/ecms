@@ -1,0 +1,38 @@
+Index: core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java	(revision 76797)
++++ core/services/src/main/java/org/exoplatform/services/wcm/skin/XSkinService.java	(working copy)
+@@ -289,12 +289,12 @@
+     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+     try {      
+       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+-      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+-      addSharedPortalSkin(sharedPortal, null, true);
+       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
+       for(Node portal: livePortals) {
+         addPortalSkin(portal, null, true);
+       }
++      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
++      addSharedPortalSkin(sharedPortal, null, true);      
+     } catch (Exception e) {
+       log.error("Exception when start XSkinService", e);
+     } finally {
+Index: core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java	(revision 76797)
++++ core/services/src/main/java/org/exoplatform/services/wcm/javascript/XJavascriptService.java	(working copy)
+@@ -259,12 +259,12 @@
+     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+     try {
+       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+-      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+-      addSharedPortalJavascript(sharedPortal, null, true);
+       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
+       for(Node portal: livePortals) {
+         addPortalJavascript(portal, null, true);
+       }
++      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
++      addSharedPortalJavascript(sharedPortal, null, true);      
+     } catch (PathNotFoundException e) {
+       log.warn("Exception when merging inside Portal : WCM init is not completed.");
+     } catch (Exception e) {

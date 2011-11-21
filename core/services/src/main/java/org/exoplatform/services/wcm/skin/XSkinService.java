@@ -289,12 +289,12 @@ public class XSkinService implements Startable {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {      
       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-      addSharedPortalSkin(sharedPortal, null, true);
       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
       for(Node portal: livePortals) {
         addPortalSkin(portal, null, true);
       }
+      Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+      addSharedPortalSkin(sharedPortal, null, true);      
     } catch (Exception e) {
       log.error("Exception when start XSkinService", e);
     } finally {
