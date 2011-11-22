@@ -31,10 +31,10 @@
          </para>
          <mediaobject>
            <imageobject role="html">
-             <imagedata align="center" fileref="images/SitesExplorer.png" format="PNG"/>
+             <imagedata align="center" fileref="images/sitesexplorer.png" format="PNG"/>
            </imageobject>
            <imageobject role="fo">
-             <imagedata align="center" fileref="images/SitesExplorer.png" format="PNG" width="150mm"/>
+             <imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" width="150mm"/>
            </imageobject>
          </mediaobject>
          <para>For example, select the

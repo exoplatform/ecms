@@ -602,16 +602,6 @@
                             <emphasis role="bold">Select Content</emphasis>
                             dialog appears.
                         </para>
-                        <mediaobject>
-                            <imageobject role="html">
-                                <imagedata align="center" fileref="user-guide/images/Select_Content_window.png"
-                                           format="PNG"/>
-                            </imageobject>
-                            <imageobject role="fo">
-                                <imagedata width="150mm" align="center"
-                                           fileref="user-guide/images/Select_Content_window.png" format="PNG"/>
-                            </imageobject>
-                        </mediaobject>
                     </step>
                     <step>
                         <para>
