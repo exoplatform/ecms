@@ -139,11 +139,16 @@ public class PDFViewer extends UIForm {
   public void setPageNumber(int pageNum) { currentPageNumber_ = pageNum; };
   
   public String getResourceBundle(String key) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
-    ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
-    return resourceBundle.getString(key);
+	try {
+	  ExoContainer container = ExoContainerContext.getCurrentContainer();
+	  Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+	  ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
+	  ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
+	  return resourceBundle.getString(key);
+	}
+    catch (java.util.MissingResourceException e) {
+      return key;
+    } 
   }
 
   private Document getDocument(Node node) throws RepositoryException, Exception {

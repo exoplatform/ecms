@@ -1,0 +1,65 @@
+Index: core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_it.properties
+===================================================================
+--- core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_it.properties	(revision 75042)
++++ core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_it.properties	(working copy)
+@@ -1,4 +1,4 @@
+-\ufeffPDFViewer.label.nextPage=Pagina successiva
++PDFViewer.label.nextPage=Pagina successiva
+ PDFViewer.label.previousPage=Pagina precedente
+ PDFViewer.label.page=Pagina
+ PDFViewer.label.of=di
+@@ -17,4 +17,4 @@
+ PDFViewer.metadata.modDate=Data di modifica
+ PDFViewer.label.zoomOutPage=Clicca per diminuire l'ingrandimento della pagina intera
+ PDFViewer.label.zoomInPage=Clicca per incrementare l'ingrandimento della pagina intera
+-PDFViewer.metadata.fileName=Nome file
++PDFViewer.metadata.fileName=Nome file
+\ No newline at end of file
+Index: core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_vi.properties
+===================================================================
+--- core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_vi.properties	(revision 75042)
++++ core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_vi.properties	(working copy)
+@@ -17,4 +17,4 @@
+ PDFViewer.metadata.modDate=Ngày sửa
+ PDFViewer.label.zoomOutPage=Giảm độ phóng đại của trang
+ PDFViewer.label.zoomInPage=Tăng độ phóng đại của trang
+-PDFViewer.metadata.fileName=Tên tài liệu
++PDFViewer.metadata.fileName=Tên tài liệu
+\ No newline at end of file
+Index: core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_pt_BR.properties
+===================================================================
+--- core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_pt_BR.properties	(revision 75042)
++++ core/viewer/src/main/java/locale/portlet/viewer/PDFViewer_pt_BR.properties	(working copy)
+@@ -17,4 +17,4 @@
+ PDFViewer.metadata.modDate=Data de modifica\u00e7\u00e3o
+ PDFViewer.label.zoomOutPage=Clique para descrescer a amplia\u00e7\u00e3o da p\u00e1gina inteira
+ PDFViewer.label.zoomInPage=Clique para aumentar a amplia\u00e7\u00e3o da p\u00e1gina inteira
+-PDFViewer.metadata.fileName=Nome do arquivo
++PDFViewer.metadata.fileName=Nome do arquivo
+\ No newline at end of file
+Index: core/viewer/src/main/java/org/exoplatform/ecm/webui/viewer/PDFViewer.java
+===================================================================
+--- core/viewer/src/main/java/org/exoplatform/ecm/webui/viewer/PDFViewer.java	(revision 75042)
++++ core/viewer/src/main/java/org/exoplatform/ecm/webui/viewer/PDFViewer.java	(working copy)
+@@ -139,11 +139,16 @@
+   public void setPageNumber(int pageNum) { currentPageNumber_ = pageNum; };
+   
+   public String getResourceBundle(String key) {
+-    ExoContainer container = ExoContainerContext.getCurrentContainer();
+-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
+-    ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
+-    return resourceBundle.getString(key);
++	try {
++	  ExoContainer container = ExoContainerContext.getCurrentContainer();
++	  Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
++	  ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
++	  ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
++	  return resourceBundle.getString(key);
++	}
++    catch (java.util.MissingResourceException e) {
++      return key;
++    } 
+   }
+ 
+   private Document getDocument(Node node) throws RepositoryException, Exception {
