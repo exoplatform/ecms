@@ -294,8 +294,10 @@ public class Utils {
   
   public static String escapeIllegalCharacterInQuery(String query) {
     String ret = query;
-    for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
-      ret = ret.replace(c + "", "\\" + c);
+    if(ret != null) {
+	    for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
+	      ret = ret.replace(c + "", "\\" + c);
+	    }
     }
     return ret;
   }
