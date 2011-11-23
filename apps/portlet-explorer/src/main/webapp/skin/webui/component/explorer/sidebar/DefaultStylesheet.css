@@ -126,7 +126,7 @@
 }
 
 .UIJCRExplorerPortlet .UISideBar .BarContent .TagExplorer {
-  background: url('DefaultSkin/icons/Tags.gif') no-repeat center;
+  background: url('DefaultSkin/icons/Tags.png') no-repeat center;
   width: 15px; height: 15px;
 	cursor: pointer;
 	float: right; /* orientation=lt */
