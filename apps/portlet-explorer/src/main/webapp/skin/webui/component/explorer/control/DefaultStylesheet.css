@@ -82,7 +82,6 @@
   border-left: 1px solid #E1E1E1;
   border-right: 1px solid #E1E1E1;
   position: relative;
-  z-index: 10;
 }
 
 .UIJCRExplorerPortlet .NoneDrivesButton{
@@ -545,7 +544,7 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .DetailMoreViewIcon {
-	width: 13px;
+	width: 17px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .MoreViewIconSelected {

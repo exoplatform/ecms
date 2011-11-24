@@ -252,9 +252,14 @@
   border: 1px solid #e1e1e1;
 }
 
+.UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
+	background-position: center center;
+}
+
 .UIJCRExplorerPortlet .UIListGrid .BlueDownArrow16x16Icon{
 	margin: 6px 0px 0px 0px;
-	background-position: center center;
+	line-height: 14px;
+	padding-left: 0px !important;
 }
 
 .UIJCRExplorerPortlet .UIListView .OverHeader {
@@ -264,7 +269,6 @@
 }
 
 .UIJCRExplorerPortlet .UIListView .ColumnName .NodeLabel {
-  font-size: 12px;
   margin-right: 10px;
   overflow: hidden;
 }
@@ -286,7 +290,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnAuditing {
@@ -297,7 +300,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnVersion {
@@ -308,7 +310,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .Columnowner {
@@ -319,7 +320,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumndateModified {
@@ -330,7 +330,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumndateCreated {
@@ -341,7 +340,6 @@
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnName .NodeLabel div{
@@ -351,6 +349,10 @@
 .UIJCRExplorerPortlet .UIListGrid .RowView {
 	line-height: 19px;
 	margin-top: 6px;
+}
+
+.MoveItem .UIListGrid .RowView {
+	margin-top: 0px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .RowView .ColumnIcon {
@@ -372,7 +374,25 @@
 }
 
 .UIJCRExplorerPortlet .UIListGrid .RowView .ColumnVersion {
-	padding: 2px 0px 2px 3px;
+	padding: 2px 0px 2px 13px;
+ 	border-right: none; /* orientation=lt */
+ 	border-left: none; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIListGrid .RowView .ColumndateModified{
+	padding: 2px 0px 2px 10px;
+ 	border-right: none; /* orientation=lt */
+ 	border-left: none; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIListGrid .RowView .ColumnDatetime{
+	padding: 2px 0px 2px 10px;
+ 	border-right: none; /* orientation=lt */
+ 	border-left: none; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIListGrid .RowView .ColumndateCreated{
+	padding: 2px 0px 2px 10px;
  	border-right: none; /* orientation=lt */
  	border-left: none; /* orientation=rt */
 }
@@ -426,7 +446,8 @@
   float: left;/* orientation=lt */
   float: right;/* orientation=rt */
   cursor: col-resize;
-  margin-top: 4px;
+  margin: 4px 0px 0px;
+  padding: 0px 2px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ResizeHandle {
@@ -462,14 +483,6 @@
 	line-height: 23px; height: 28px;
   background: #f8f8f8;
   border: solid 1px #e1e1e1;
-}
-
-.UIJCRExplorerPortlet .UIListView .UITimelineView .TitleTable div {
-	font-size: 12px;
-}
-
-.UIJCRExplorerPortlet .UIListView .UITimelineView .Split div {
-	font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIListView .UITimelineView .Split{
@@ -532,10 +545,6 @@
 
 .UIJCRExplorerPortlet .UITimelineView .ResizeColumn {
 	height: 23px;
-	margin: 0px 295px 0px 0px; /* orientation=lt */
-	margin: 0px 0px 0px 295px; /* orientation=rt */
-	padding-left: 163px; /* orientation=lt */
-	padding-right: 163px; /* orientation=rt */
 	_padding-left: 15px; /* orientation=lt */
 	_padding-right: 15px; /* orientation=rt */
 	white-space: nowrap;
@@ -562,7 +571,6 @@
 	padding: 2px 3px 2px 0px; /* orientation=rt */
  	border-right: none; /* orientation=lt */
  	border-left: none; /* orientation=rt */
-	font-size: 12px;
 }
 
 .UIJCRExplorerPortlet ..UITimelineView .RowView .LeftColumn {
@@ -620,8 +628,8 @@
 	padding-left:30px; /* orientation=lt */
 	padding-right:30px; /* orientation=rt */
 	overflow:hidden;
-	_margin-left:10px; /* orientation=lt */
-	_margin-right:10px; /* orientation=rt */
+	*margin-left:10px; /* orientation=lt */
+	*margin-right:10px; /* orientation=rt */
 }
 
 .UIJCRExplorerPortlet .UITimelineView .ResizeColumn .PositionIconDocument a{
@@ -719,7 +727,6 @@
 
 .UIJCRExplorerPortlet .UIThumbnailsView .ActionIconLabel a {
   color: #4f4f4f;
-  font-size: 12px;
 }
 
 .UIJCRExplorerPortlet .UIThumbnailsView .ActionIconLabel a:hover {
@@ -1361,6 +1368,11 @@
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnIcon .BlueUpArrow16x16Icon{
- margin: 6px 0px 0px 0px;
  background-position: center center;
+}
+
+.UIJCRExplorerPortlet .UIListGrid .BlueUpArrow16x16Icon{
+ margin: 6px 0px 0px 0px;
+ line-height: 14px;
+ padding-left: 0px !important;
 }

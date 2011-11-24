@@ -23,8 +23,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 %>
 
 <%
-	def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
-	String componentId = uicomponent.getId();
+  def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
+  String componentId = uicomponent.getId();
     String serverUrl= uicomponent.getWebDAVServerPrefix();
     String portalName = uicomponent.getPortalName();
     RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
@@ -35,149 +35,149 @@ import org.exoplatform.services.jcr.RepositoryService;
     rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
     rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId');");
     rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
-	uicomponent.updateNodeLists();
- 	List<String> labels = new ArrayList<String>();
- 	labels.add("UIDocumentInfo.label.Today");
- 	labels.add("UIDocumentInfo.label.Yesterday");
- 	labels.add("UIDocumentInfo.label.EarlierThisWeek");
- 	labels.add("UIDocumentInfo.label.EarlierThisMonth");
- 	labels.add("UIDocumentInfo.label.EarlierThisYear");
+  uicomponent.updateNodeLists();
+  List<String> labels = new ArrayList<String>();
+  labels.add("UIDocumentInfo.label.Today");
+  labels.add("UIDocumentInfo.label.Yesterday");
+  labels.add("UIDocumentInfo.label.EarlierThisWeek");
+  labels.add("UIDocumentInfo.label.EarlierThisMonth");
+  labels.add("UIDocumentInfo.label.EarlierThisYear");
 
- 	List<List<Node>> nodeLists = new ArrayList<List<Node>>();
- 	nodeLists.add(uicomponent.getTodayNodes());
- 	nodeLists.add(uicomponent.getYesterdayNodes());
- 	nodeLists.add(uicomponent.getEarlierThisWeekNodes());
- 	nodeLists.add(uicomponent.getEarlierThisMonthNodes());
- 	nodeLists.add(uicomponent.getEarlierThisYearNodes());
+  List<List<Node>> nodeLists = new ArrayList<List<Node>>();
+  nodeLists.add(uicomponent.getTodayNodes());
+  nodeLists.add(uicomponent.getYesterdayNodes());
+  nodeLists.add(uicomponent.getEarlierThisWeekNodes());
+  nodeLists.add(uicomponent.getEarlierThisMonthNodes());
+  nodeLists.add(uicomponent.getEarlierThisYearNodes());
 
- 	SimpleDateFormat formatDateTime = uicomponent.getSimpleDateFormat();
+  SimpleDateFormat formatDateTime = uicomponent.getSimpleDateFormat();
 
- 	int listCount = 5;
+  int listCount = 5;
 
 %>
 <div id="$componentId">
 <div id="${componentId}-$viewComponentId" class="UIListView" style="">
-	<div class="UIListGrid UITimelineView">
-		<div style="padding:4px 3px 0px 3px;">
-			<div class="TitleTable">
-				<div style="width: 40px;" class="LeftColumn Split">
-					<span></span>
-				</div>
-				<div style="width: 26px;" class="LeftColumn Split">
-					<% if (uicomponent.getTimeLineSortByFavourite().equals(Preference.BLUE_DOWN_ARROW)) { %>
-						<div  class="StarLight"
-								  style="margin-top: 5px;"
-									onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("favourite"))%>"
-									title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteDESC")%>">
-							<span></span>
-						</div>
-					<% } else {%>
-					<div  class="StarLight"
-							  style="margin-top: 5px;"
-								onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("favourite"))%>"
-								title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteASC")%>">
-						<span></span>
-					</div>
-					<% } %>
-				</div>
-				<div style="border: medium none; width: 130px" class="RightColumn">
-					<% if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_UP_ARROW)) {%>
-  	      	  <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
-  	      	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
-    	      		<%=_ctx.appRes("UIDocumentInfo.header.dateTime")%>
-      	    		<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon">
-	      	  	</div>
-					<% } else if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_DOWN_ARROW)) {	%>
-		      	  <div onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("dateTime"))%>"
-					 	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeDESC")%>">
-					   		<%=_ctx.appRes("UIDocumentInfo.header.dateTime")%>
-					   		<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon">
-					  	</div>
-					<% } else { %>
-      	  		<div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
- 	  		 			 		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
-   							<%=_ctx.appRes("UIDocumentInfo.header.dateTime")%>
-			  			</div>
-					<% } %>
-				</div>
-				<div class="ResizeColumn Split">
-					<% if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_UP_ARROW)) {%>
-			    	  <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
-			    	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
-			      		<%=_ctx.appRes("UIDocumentInfo.header.name")%>
-				    		<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon">
-			  	  	</div>
-					<% } else if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_DOWN_ARROW)) {	%>
-			    	  <div onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("name"))%>"
-					 	  		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameDESC")%>">
-					   		<%=_ctx.appRes("UIDocumentInfo.header.name")%>
-					   		<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon">
-					  	</div>
-					<% } else { %>
-				  		<div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
-					 			 		 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
-									<%=_ctx.appRes("UIDocumentInfo.header.name")%>
-			  			</div>
-					<% } %>
-				</div>
-				<div style="clear: both;"><span></span></div>
-			</div>
-			<% for(int i = 0; i < 5; i++) {
-						String label = labels.get(i);
-						List<Node> nodeList = nodeLists.get(i);
-						if (nodeList.size() == 0) continue;
-			%>		
-			<div class="TextTitleDay">
-				<%=_ctx.appRes(label)%>
-			</div>	
-			<div class="RowView Normal">
-				<div class="BorderRow">
-					<% for (node in nodeList) {%>	
-						<div style="width: 31px;" class="LeftColumn">
-						<span></span>
-						</div>								
-						<div style="width: 26px; padding-top: 5px;" class="LeftColumn">
-							<% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>
-								<div class="StarLight" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
-										 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.RemoveFromFavourite")%>"/>
-									<span></span>
-								</div>
-							<% } else { %>
-								<div class="StarOff" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
-										 title="<%=_ctx.appRes("UIDocumentInfo.tooltip.AddToFavourite")%>"/>
-									<span></span>
-								</div>
-							<% }%>
-						</div>
-          	<div class="LeftColumn default16x16Icon ItemIcon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>" style="margin-left:10px; width: 26px; padding-top: 5px;">
+  <div class="UIListGrid UITimelineView">
+    <div style="padding:4px 3px 0px 3px;">
+      <div class="TitleTable">
+        <div style="width: 40px;" class="LeftColumn Split">
+          <span></span>
+        </div>
+        <div style="width: 26px;" class="LeftColumn Split">
+          <% if (uicomponent.getTimeLineSortByFavourite().equals(Preference.BLUE_DOWN_ARROW)) { %>
+            <div  class="StarLight"
+                  style="margin-top: 5px;"
+                  onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("favourite"))%>"
+                  title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteDESC")%>">
+              <span></span>
+            </div>
+          <% } else {%>
+          <div  class="StarLight"
+                style="margin-top: 5px;"
+                onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("favourite"))%>"
+                title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteASC")%>">
+            <span></span>
+          </div>
+          <% } %>
+        </div>
+        <div style="border: medium none; width: 130px; padding: 0px 3px;" class="RightColumn">
+          <% if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_UP_ARROW)) {%>
+              <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
+                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
+                <div class="BlueUpArrow16x16Icon"> <%=_ctx.appRes("UIDocumentInfo.header.dateTime")%></div>
+            
+              </div>
+          <% } else if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_DOWN_ARROW)) { %>
+              <div onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("dateTime"))%>"
+                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeDESC")%>">
+                <div class="BlueDownArrow16x16Icon"><%=_ctx.appRes("UIDocumentInfo.header.dateTime")%></div>
+              
+              </div>
+          <% } else { %>
+              <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
+                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
+                <%=_ctx.appRes("UIDocumentInfo.header.dateTime")%>
+              </div>
+          <% } %>
+        </div>
+        <div class="ResizeColumn Split" style="margin-left: 163px;" >
+          <% if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_UP_ARROW)) {%>
+              <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
+                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
+                <div class="BlueUpArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.name")%></div>
+                
+              </div>
+          <% } else if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_DOWN_ARROW)) { %>
+              <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("name"))%>"
+                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameDESC")%>">
+                <div class="BlueDownArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.name")%></div>
+                
+              </div>
+          <% } else { %>
+              <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
+                     title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
+                  <%=_ctx.appRes("UIDocumentInfo.header.name")%>
+              </div>
+          <% } %>
+        </div>
+        <div style="clear: both;"><span></span></div>
+      </div>
+      <% for(int i = 0; i < 5; i++) {
+            String label = labels.get(i);
+            List<Node> nodeList = nodeLists.get(i);
+            if (nodeList.size() == 0) continue;
+      %>    
+      <div class="TextTitleDay">
+        <%=_ctx.appRes(label)%>
+      </div>  
+      <div class="RowView Normal">
+        <div class="BorderRow">
+          <% for (node in nodeList) {%> 
+            <div style="width: 31px;" class="LeftColumn">
+            <span></span>
+            </div>                
+            <div style="width: 26px; padding-top: 5px;" class="LeftColumn">
+              <% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>
+                <div class="StarLight" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
+                     title="<%=_ctx.appRes("UIDocumentInfo.tooltip.RemoveFromFavourite")%>"/>
+                  <span></span>
+                </div>
+              <% } else { %>
+                <div class="StarOff" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
+                     title="<%=_ctx.appRes("UIDocumentInfo.tooltip.AddToFavourite")%>"/>
+                  <span></span>
+                </div>
+              <% }%>
+            </div>
+            <div class="LeftColumn default16x16Icon ItemIcon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>" style="margin-left:10px; width: 26px; padding-top: 5px;">
               <%if(Utils.isSymLink(node)) {%>
                 <div class="LinkSmall"></div>
               <%}%>
-		      		<span></span>
-	      		</div>
-						<div style="border: medium none; width: 100px" class="RightColumn">
-							<%=formatDateTime.format(node.getProperty(Utils.EXO_MODIFIED_DATE).getValue().getDate().getTime())%>
-						</div>
-						<div class="ResizeColumn" style="width:495px;">
-							<div class="PositionIconDocument">
-								<%
-			          	def preferenceWS = node.getSession().getWorkspace().getName() ;
-		      		    String path = node.getPath() + "&workspaceName=" + preferenceWS ;
-		  		        String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", preferenceWS));
+              <span></span>
+            </div>
+            <div style="border: medium none; width: 120px" class="RightColumn">
+              <%=formatDateTime.format(node.getProperty(Utils.EXO_MODIFIED_DATE).getValue().getDate().getTime())%>
+            </div>
+            <div class="ResizeColumn" style="width:495px; *width: 425px;">
+              <div class="PositionIconDocument">
+                <%
+                  def preferenceWS = node.getSession().getWorkspace().getName() ;
+                  String path = node.getPath() + "&workspaceName=" + preferenceWS ;
+                  String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", preferenceWS));
                   String hiddenStyle = (node.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
-								%>
-								<a href="$actionLink" alt="" style="$hiddenStyle" workspaceName="$preferenceWS"
-									title="<%=_ctx.appRes("UIDocumentInfo.tooltip.View")%>"/>
-									<%= uiWorkingArea.getTitle(node) %>
-								</a>
-							</div>
-						</div>
-						<div style="clear: both;"><span></span></div>
-					<% } %>
-				</div>
-			</div>
-			<% } %>
-		</div>
-	</div>
+                %>
+                <a href="$actionLink" alt="" style="$hiddenStyle" workspaceName="$preferenceWS"
+                  title="<%=_ctx.appRes("UIDocumentInfo.tooltip.View")%>"/>
+                  <%= uiWorkingArea.getTitle(node) %>
+                </a>
+              </div>
+            </div>
+            <div style="clear: both;"><span></span></div>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
 </div>
 </div>

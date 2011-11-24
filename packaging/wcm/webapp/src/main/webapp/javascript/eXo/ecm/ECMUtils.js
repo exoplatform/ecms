@@ -832,6 +832,9 @@
 		resizeButton.className = "ResizeButton ShowLeftContent";
 		showSideBar = false;
 	  }
+
+	  Self.checkAvailableSpace();
+	  Self.updateListGridWidth();
 	}
 
 	ECMUtils.prototype.loadEffectedSideBar = function(id) {
@@ -1063,7 +1066,7 @@
 
 	//private method
 	function checkRoot() {
-		
+		var workingArea = document.getElementById('UIWorkingArea');
 		root = document.getElementById("UIDocumentWorkspace");
 		if (root) {
 			eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
@@ -1078,6 +1081,32 @@
 		  eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;
 		}
 		return root;
+	}
+	
+	ECMUtils.prototype.updateListGridWidth = function() {
+		var documentInfo = document.getElementById("UIDocumentInfo");
+		var listGrid = eXo.core.DOMUtil.findFirstDescendantByClass(documentInfo, "div", "UIListGrid");
+		if (listGrid){
+			var minimumWidth = Self.getMinimumWidthOfUIListGrid(listGrid);
+			listGrid.style.width = (documentInfo.offsetWidth < minimumWidth) ? minimumWidth + 'px' : 'auto';
+		}
+	}
+
+	ECMUtils.prototype.getMinimumWidthOfUIListGrid = function(listGrid) {
+		if (!listGrid) return 0;
+		var titleTable = eXo.core.DOMUtil.findFirstDescendantByClass(listGrid, "div", "TitleTable");
+	
+		var chidrenItems = eXo.core.DOMUtil.getChildrenByTagName(titleTable, "div");
+	
+		var minimumWidth = 0;
+		for (var i = 0; i < chidrenItems.length; i++) {
+			if (chidrenItems[i].className == "LineLeft" || chidrenItems[i].className.indexOf("Column") == 0) {
+				minimumWidth += chidrenItems[i].offsetWidth;
+			}
+		}	
+		
+		minimumWidth += 5; //for border
+		return 	minimumWidth;
 	}
 
 };

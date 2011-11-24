@@ -40,10 +40,8 @@
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;
-	  String className = "" ;
 
 	  if( uicomponent.isShowSideBar() ) {
-	    className = "RightContainer"
 	    println "<div class=\"LeftCotainer\" id=\"LeftContainer\">" ;
 	  	uicomponent.renderChild(UISideBar.class) ; 
 	  	println "</div>" ;
@@ -56,7 +54,7 @@
 		</div>
 	<% } %>
 	
-  <div class="$className">
+  <div class="RightContainer">
 		<% 
 		  uicomponent.renderChild(UIActionBar.class) ;
 		  uicomponent.renderChild(UIDocumentWorkspace.class) ;
