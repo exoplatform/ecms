@@ -661,7 +661,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   
   static  public class SaveAndCloseActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
-      UIDocumentForm.saveDocument(event);
+      Node newNode = UIDocumentForm.saveDocument(event);
+      if (newNode != null) {
+        event.getRequestContext().setAttribute("nodePath",newNode.getPath());
+      }
       UIDocumentForm.closeForm(event);
     }
   }

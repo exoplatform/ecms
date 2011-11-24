@@ -127,6 +127,7 @@ public class UIDialogForm extends UIForm {
   private final String REPOSITORY = "repository";
   protected final static String CANCEL_ACTION = "Cancel";
   protected final static String SAVE_ACTION = "Save";
+  protected static final String SAVE_AND_CLOSE = "SaveAndClose";
   protected static final  String[]  ACTIONS = { SAVE_ACTION, CANCEL_ACTION };
   private static final String WYSIWYG_MULTI_ID = "WYSIWYGRichTextMultipleInputset";
 
@@ -1532,7 +1533,7 @@ public class UIDialogForm extends UIForm {
   public void processAction(WebuiRequestContext context) throws Exception {
     String action = context.getRequestParameter(UIForm.ACTION);
     boolean clearInterceptor = false;
-    if (SAVE_ACTION.equalsIgnoreCase(action)) {
+    if (SAVE_ACTION.equalsIgnoreCase(action) || SAVE_AND_CLOSE.equalsIgnoreCase(action)) {
       try {
         if (executePreSaveEventInterceptor()) {
           super.processAction(context);

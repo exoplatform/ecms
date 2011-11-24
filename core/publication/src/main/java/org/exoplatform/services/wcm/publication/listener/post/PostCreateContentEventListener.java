@@ -96,9 +96,8 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
     Session session = currentNode.getSession();
     String nodePath = currentNode.getPath();
-    currentNode = (Node)session.getItem(nodePath);
     currentNode.getSession().save();
-
+    currentNode = (Node)session.getItem(nodePath);
 
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
       currentNode = (Node)session.getItem(nodePath);
