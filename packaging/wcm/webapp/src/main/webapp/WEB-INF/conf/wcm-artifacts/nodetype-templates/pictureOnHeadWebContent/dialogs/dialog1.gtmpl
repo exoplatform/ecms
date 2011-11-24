@@ -93,7 +93,7 @@
 			</div> <!-- End of UIHorizontalTabs -->
 			
 			<%/*Start UITabContentContainer*/%>			
-			<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px; overflow:auto; border-bottom:1px solid #AEAEAE">	  
+			<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px; overflow:auto; ">	  
 				<div class="UITabContentContainer">
 					<div class="UITabContent" style="display: block;">
 						<table class="UIFormGrid">

@@ -1,33 +1,37 @@
+var tblSavedStyles;
+
 var UIDocumentForm = function() {
 	this.Name = 'UIDocumentForm';
-	this.SavedStyle = "";
-	
 }
 
 UIDocumentForm.prototype.AdjustHeight = function() {
 	var workingArea = document.getElementById('UIWorkingArea');
+	var uiWorkingWorkspace = document.getElementById('UIWorkingWorkspace');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
 	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
 	var uiHorizontalTabs = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIHorizontalTabs");
 	var horizontalLayout = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "HorizontalLayout");
-	
-	var workingAreaHeight = workingArea.offsetHeight;
-	if (uiDocumentWorkspace)									
-	 	uiDocumentWorkspace.style.height = workingAreaHeight + 2 + 'px';
 
-	var uiActionHeight = 0;
-	var uiHorizontalTabsHeight = 0;
-	horizontalLayout.style.height = 'auto';
-	if (uiAction) {
-		uiActionHeight = uiAction.offsetHeight;
-	}
+	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
+		
+		var workingAreaHeight = workingArea.offsetHeight;
+		if (uiDocumentWorkspace)									
+		 	uiDocumentWorkspace.style.height = workingAreaHeight + 2 + 'px';
+
+		var uiActionHeight = 0;
+		var uiHorizontalTabsHeight = 0;
+		horizontalLayout.style.height = 'auto';
+		if (uiAction) {
+			uiActionHeight = uiAction.offsetHeight;
+		}
 	
-	if (uiHorizontalTabs) {
-		uiHorizontalTabsHeight = uiHorizontalTabs.offsetHeight;
-	}
+		if (uiHorizontalTabs) {
+			uiHorizontalTabsHeight = uiHorizontalTabs.offsetHeight;
+		}
 	
-	horizontalLayout.style.height = workingAreaHeight - uiActionHeight - uiHorizontalTabsHeight - 10 + 'px';
+		horizontalLayout.style.height = workingAreaHeight - uiActionHeight - uiHorizontalTabsHeight - 10 + 'px';
+	}
 }
 
 UIDocumentForm.prototype.UpdateGUI = function () {
@@ -35,11 +39,11 @@ UIDocumentForm.prototype.UpdateGUI = function () {
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
 	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
-	var fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "div", "MaximizeScreen20x20Icon");
+	var fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "MaximizeScreen20x20Icon");
 	var changeTypeLink = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "ChangeTypeLink");
 
 	if (!fullscreenDiv) {
-		fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "div", "MinimizeScreen20x20Icon");
+		fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "MinimizeScreen20x20Icon");
 	}
 	
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
@@ -58,9 +62,14 @@ UIDocumentForm.prototype.UpdateGUI = function () {
 UIDocumentForm.prototype.FullScreenToggle = function(element) {
 	var uiWorkingWorkspace = document.getElementById('UIWorkingWorkspace');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
-	var uiAction = eXo.core.DOMUtil.findAncestorByClass(element, "UIAction");
-	var changeTypeLink = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "ChangeTypeLink");
+	var uiDocumentForm = document.getElementById("UIDocumentForm");
+	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
+	var changeTypeLink = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "ChangeTypeLink");	
 	
+	if (!eXo.webui.UIDocForm.horizontalLayout) {	
+		eXo.webui.UIDocForm.horizontalLayout = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "HorizontalLayout");
+	}
+
 	if (element.className == "MaximizeScreen20x20Icon") {
 		element.className = "MinimizeScreen20x20Icon";
 	} else {
@@ -72,9 +81,10 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 			changeTypeLink.style.display = "none";
 		}
 		
-		//save style
-		this.SavedStyle = UIDocumentForm.SaveStyles(uiDocumentWorkspace);
-		
+		//save style		
+		UIDocumentForm.SaveStyles("UIDocumentWorkspace", uiDocumentWorkspace);
+		UIDocumentForm.SaveStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
+
 		// Resize.
 		var oViewPaneSize = UIDocumentForm.GetViewPaneSize(uiWorkingWorkspace) ;
 
@@ -86,6 +96,8 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		uiDocumentWorkspace.style.width		= oViewPaneSize.Width + "px";
 		uiDocumentWorkspace.style.height	= oViewPaneSize.Height + "px";
 		uiDocumentWorkspace.style.background = '#FFFFFF';
+
+		eXo.webui.UIDocForm.horizontalLayout.style.height = 'auto';
 		
 		window.scrollTo(0, 0)
 	} else {
@@ -93,38 +105,57 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 			changeTypeLink.style.display = "inline-block";
 		}
 		// Restore original size
-		UIDocumentForm.RestoreStyles( uiDocumentWorkspace , this.SavedStyle ) ;
+		UIDocumentForm.RestoreStyles("UIDocumentWorkspace", uiDocumentWorkspace) ;
+		UIDocumentForm.RestoreStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
+
+		delete eXo.webui.UIDocForm.horizontalLayout;
 	}
-	eXo.webui.UIDocForm.AdjustHeight();
 	eXo.webui.UIDocForm.AutoFocus();
+	eXo.webui.UIDocForm.AdjustHeight();
 }
 
-UIDocumentForm.SaveStyles = function( element ) {
-	var oSavedStyles = new Object() ;
+UIDocumentForm.GetStyleData = function( element ) {
+	var objStyleData = new Object() ;
 
 	if ( element.className.length > 0 )	{
-		oSavedStyles.Class = element.className ;
+		objStyleData.Class = element.className ;
 		element.className = '' ;
 	}
-
-	var sInlineStyle = element.getAttribute( 'style' ) ;
-
-	if ( sInlineStyle && sInlineStyle.length > 0 ) {
-		oSavedStyles.Inline = sInlineStyle ;
+	var sInlineStyle = element.style.cssText ;
+	if ( sInlineStyle  ) {
+		objStyleData.Inline = sInlineStyle ;
 		element.setAttribute( 'style', '', 0 ) ;	// 0 : Case Insensitive
 	}
-
-	return oSavedStyles ;
+	return objStyleData ;
 }
 
-UIDocumentForm.RestoreStyles = function( element, savedStyles )
+UIDocumentForm.SetStyleData = function( element, objStyleData )
 {
-	element.className = savedStyles.Class || '' ;
+	element.className = objStyleData.Class || '' ;
 
-	if ( savedStyles.Inline )
-		element.setAttribute('style', savedStyles.Inline, 0);	// 0 : Case Insensitive
+	if ( objStyleData.Inline )
+		element.style.cssText = objStyleData.Inline;
 	else
 		element.removeAttribute('style', 0);
+}
+
+UIDocumentForm.SaveStyles = function( key, element ) {
+	var styleData = this.GetStyleData(element);
+	if (!tblSavedStyles) {
+		tblSavedStyles = new eXo.core.HashMap();
+	}
+	if (tblSavedStyles.get(key)) {
+		tblSavedStyles.remove(key);
+	}
+	tblSavedStyles.put(key, styleData);
+}
+
+UIDocumentForm.RestoreStyles = function( key, element ) {
+	if (!tblSavedStyles.get(key)) {
+		return;
+	}
+	var styleData = tblSavedStyles.get(key);
+	UIDocumentForm.SetStyleData(element, styleData);
 }
 
 // Returns and object with the "Width" and "Height" properties.

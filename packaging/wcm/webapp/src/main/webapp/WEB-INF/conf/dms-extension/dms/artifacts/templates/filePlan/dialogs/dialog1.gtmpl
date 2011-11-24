@@ -63,7 +63,7 @@
       <%/*End UIHorizontalTabs*/%>
       <%/*Start UITabContentContainer*/%>   
 							
-				<div class="HorizontalLayout" style="overflow:auto; border-bottom:1px solid #AEAEAE">	  
+				<div class="HorizontalLayout" style="overflow:auto;">	  
       
 		      <div class="UITabContentContainer">
 		      	<div class="UITabContent" style="display: block;">
