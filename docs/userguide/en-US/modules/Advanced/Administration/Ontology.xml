@@ -16,7 +16,7 @@
         </para>
         <para>
             Go to
-            <emphasis role="bold">Categories and Tags --> Manage Tags.</emphasis>
+            <emphasis role="bold">Categories &amp; Tags --> Manage Tags.</emphasis>
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -142,7 +142,7 @@
                 <step>
                     <para>
                         Change values in the fields, including <emphasis role="bold">Document Range</emphasis> and <emphasis role="bold">HTML Style</emphasis>, except <emphasis role="bold">Style
-                        name.</emphasis>
+                        Name.</emphasis>
                     </para>
                 </step>
                 <step>
@@ -257,7 +257,7 @@
         </para>
         <para>
             Go to
-            <emphasis role="bold">Categories and Tags --> Manage Categories.</emphasis>
+            <emphasis role="bold">Categories &amp; Tags --> Manage Categories.</emphasis>
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -428,16 +428,10 @@
                                 <entry>
                                     <emphasis role="bold">Set Property Right</emphasis>
                                 </entry>
-                                <entry>select the
+                                <entry>Select the
                                     <emphasis role="bold">Set Property</emphasis>
                                     right or not.
                                 </entry>
-                            </row>
-                            <row>
-                                <entry>
-                                    <emphasis role="bold">HTML Style</emphasis>
-                                </entry>
-                                <entry>Include font-size, font-weight, color, font-family, text-decoration.</entry>
                             </row>
                             <row>
                                 <entry>
@@ -547,8 +541,8 @@
                         </textobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Action</emphasis>
-                    field to add more category trees. The
+                    <emphasis role="bold">Add</emphasis>
+                    column to add more category trees. The
                     <emphasis role="bold">Edit Category Tree</emphasis>
                     form will appear.
                 </para>

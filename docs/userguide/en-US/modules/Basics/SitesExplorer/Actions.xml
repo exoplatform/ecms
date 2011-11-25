@@ -565,7 +565,7 @@
             </textobject>
           </inlinemediaobject>
           on the
-          <emphasis role="bold">Actions</emphasis>
+          <emphasis role="bold">Action</emphasis>
           bar to open a list of content templates.
         </para>
       </step>
@@ -594,7 +594,7 @@
             </textobject>
           </inlinemediaobject>
           on the
-          <emphasis role="bold">Actions</emphasis>
+          <emphasis role="bold">Action</emphasis>
           bar.
         </para>
         <para>
@@ -1009,7 +1009,7 @@ After being created successfully, a file document with type text/html will be di
       <emphasis role="bold">Relations</emphasis>
       area is used to list all its related documents. See the
         <link
-                linkend="sect-User_Guide-Manage_Relations-View_Relations">View Relation
+                linkend="sect-User_Guide-Manage_Relations-View_Relations">View relations
         </link>
         section.
     </para>
@@ -1665,7 +1665,7 @@ After being created successfully, a file document with type text/html will be di
         <para>
           Select the document to which you have added the translation, then click the
           <emphasis role="bold">Relation</emphasis>
-          button on the sidebar.
+          button on the <emphasis role="bold">Filter</emphasis> bar.
         </para>
         <para>
           You will see the available language for the selected document. Click the language on this pane to view the
@@ -2203,7 +2203,7 @@ After being created successfully, a file document with type text/html will be di
         <step>
           <para>
             Select the
-            <emphasis role="bold">Add Actions</emphasis>
+            <emphasis role="bold">Add Action</emphasis>
             tab.
           </para>
           <mediaobject>
@@ -2243,7 +2243,7 @@ After being created successfully, a file document with type text/html will be di
               <tbody>
                 <row>
                   <entry><emphasis role="bold">exo:AddMetadataAction</emphasis></entry>
-                  <entry>Add metadata</entry>
+                  <entry>Add metadata.</entry>
                 </row>
                 <row>
                   <entry><emphasis role="bold">exo:autoVersioning</emphasis></entry>
@@ -2270,7 +2270,7 @@ After being created successfully, a file document with type text/html will be di
                   <entry>Send mails.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:taxonomy/Action</emphasis></entry>
+                  <entry><emphasis role="bold">exo:taxonomyAction</emphasis></entry>
                   <entry>Create categories.</entry>
                 </row>
                 <row>
@@ -2396,7 +2396,7 @@ After being created successfully, a file document with type text/html will be di
         Once an action is added to a node, it is auto-added to any child nodes of the selected node.
       </para>
       <para>
-        If an action is added with the lifecycle named &apos;user action&apos;, it will be applied to the current node. If an
+        If an action is added with the lifecycle named &apos;User Action&apos;, it will be applied to the current node. If an
         action is added with other lifecycles, it will be applied to the child nodes.
       </para>
       <note>
@@ -2483,7 +2483,7 @@ After being created successfully, a file document with type text/html will be di
         </step>
         <step>
           <para>
-            Edit properties in the <emphasis role="bold">Actions Form.</emphasis>
+            Edit properties in the <emphasis role="bold">Action Form.</emphasis>
           </para>
           <mediaobject>
             <imageobject role="html">
@@ -2632,7 +2632,7 @@ After being created successfully, a file document with type text/html will be di
   <section id="sect-User_Guide-Actions-Manage_Categories">
     <title>Manage categories</title>
     <section id="sect-User_Guide-Manage_Categories-Add_a_category_for_a_node">
-      <title>Add a category to a node</title>
+      <title>Assign a category to a node</title>
       <para>
         You can add categories to the document type nodes only.
       </para>
@@ -2827,14 +2827,14 @@ After being created successfully, a file document with type text/html will be di
         </para>
   </section>
   <section id="sect-User_Guide-Actions-Manage_Publications">
-    <title>Manage publications</title>
+    <title>Manage publication</title>
     <para>
-      This function is used to manage node publications.
+      This function is used to manage node publication.
     </para>
     <procedure>
       <step>
         <para>
-          Select a node (on the left or right pane) which you want to manage its publications.
+          Select a node (on the left or right pane) which you want to manage its publication.
         </para>
       </step>
       <step>
@@ -2848,11 +2848,11 @@ After being created successfully, a file document with type text/html will be di
               <phrase>[ Manage Publications ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Actions</emphasis> bar.
+          on the <emphasis role="bold">Action</emphasis> bar.
         </para>
         <para>
           The
-          <emphasis role="bold">Manage Publications</emphasis>
+          <emphasis role="bold">Manage Publication</emphasis>
           form appears:
         </para>
         <mediaobject>
@@ -2928,7 +2928,7 @@ After being created successfully, a file document with type text/html will be di
       <procedure>
           <step>
           <para>
-            Select the node you want to add a relations to.
+            Select the node you want to add a relation to.
           </para>
         </step>
         <step>
@@ -3551,7 +3551,7 @@ After being created successfully, a file document with type text/html will be di
         </para>
         <para>
           Select the
-          <emphasis role="bold">Set default</emphasis>
+          <emphasis role="bold">Set Default</emphasis>
           checkbox if you want to set your selected language as a default language.
         </para>
       </step>
@@ -3627,7 +3627,7 @@ After being created successfully, a file document with type text/html will be di
     <title>Overload thumbnails</title>
     <para xml:id="proc-User_Guide-Overload_Thumbnails-Overload_thumbnails">
       You can overload a thumbnail image for a folder. Overloading allows a folder to be represented by a
-      thumbnail image, rather than a folder icon.
+      thumbnail image, rather than a folder icon (see the <link linkend="sect-User_Guide-Views-Thumbnails_View">Thumnail view</link> section).
     </para>
     <procedure>
       <step>
@@ -3724,7 +3724,7 @@ After being created successfully, a file document with type text/html will be di
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Approve Content</emphasis> button is only invisible for users who have the right to approve contents.
+            The <emphasis role="bold">Approve Content</emphasis> button is only visible for users who have the right to approve contents.
           </para>
           <para>
             By default, this button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
@@ -3774,7 +3774,7 @@ After being created successfully, a file document with type text/html will be di
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Publish Content</emphasis> button is only invisible for users who have the "Publish" right.
+            The <emphasis role="bold">Publish Content</emphasis> button is only visible for users who have the "Publish" right.
           </para>
           <para>
             By default, the button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
@@ -3826,7 +3826,7 @@ After being created successfully, a file document with type text/html will be di
   <section id="sect-User_Guide-Actions-Show_JCR_Structure">
     <title>Show JCR Structure</title>
     <para>
-      This function allows you to view nodes in documents in a tree structure.
+      This function allows you to view document nodes in a tree structure.
     </para>
     <citetitle>
     <para xml:id="step-User_Guide-Show_JCR_Structure-Show_the_JCR_structure"><emphasis role="bold">Show the JCR Structure</emphasis></para>
@@ -3839,13 +3839,6 @@ After being created successfully, a file document with type text/html will be di
       </step>
       <step>
         <para>
-          Select the
-          <emphasis role="bold">Info</emphasis>
-          tab.
-        </para>
-      </step>
-      <step>
-        <para>
           Click 
           <inlinemediaobject>
             <imageobject>
@@ -3854,7 +3847,7 @@ After being created successfully, a file document with type text/html will be di
             <textobject>
               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
             </textobject>
-          </inlinemediaobject>.
+          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar.
         </para>
       </step>
       <step>
@@ -4098,7 +4091,7 @@ After being created successfully, a file document with type text/html will be di
       </step>
       <step>
         <para>
-          Browse and select a file on your computer by clicking the <emphasis role="bold">Browse...</emphasis> button.
+          Browse and select a file on your device by clicking the <emphasis role="bold">Browse...</emphasis> button.
           The selected file name will be displayed in the
           <emphasis role="bold">Select File</emphasis>
           field.
@@ -4133,12 +4126,10 @@ After being created successfully, a file document with type text/html will be di
               <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject>
-          to close the <emphasis role="bold">Upload File</emphasis> form.
+          to close a <emphasis role="bold">Upload File</emphasis> form.
         </para>
-      </step>
-      <step>
         <para>
-          You can change the uploaded file by clicking 
+          To change the uploaded file, click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
@@ -4147,13 +4138,16 @@ After being created successfully, a file document with type text/html will be di
               <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject>
-          and select <emphasis role="bold">Browse...</emphasis> again to select another one.
+          in the
+          <emphasis role="bold">Select File</emphasis>
+          field and select <emphasis role="bold">Browse...</emphasis> again to select another one.
         </para>
       </step>
       <step>
         <para>
-          By default, the name of the uploaded file will be kept as original. However, if you want to change, you can type the
-          new name in the <emphasis role="bold">Name</emphasis> field which is not required. Special characters (! @ $ % &amp; [ ]) are not allowed in this field.
+            Optionally, type a name in the <emphasis role="bold">Name</emphasis> field which is not required. Special characters (! @ $ % &amp; [ ]) are not allowed in this field.
+          If not, the name of the uploaded file will be kept as original.
+          new name in
         </para>
       </step>
       <step>
@@ -4167,7 +4161,7 @@ After being created successfully, a file document with type text/html will be di
               <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject>
-          next to the <emphasis role="bold">List Taxonomy</emphasis> field to add categories to this file.
+          next to the <emphasis role="bold">Categories List</emphasis> field to select categories to which you want to add this file.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4177,10 +4171,10 @@ After being created successfully, a file document with type text/html will be di
             <imagedata width="150mm" align="center" fileref="images/addcategories.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-      </step>
-      <step>
         <para>
-          Select categories by clicking 
+          <emphasis role="bold">i.</emphasis> Select a category in the left pane to open its child nodes in the right pane.</para>
+         <para>
+             <emphasis role="bold">ii.</emphasis> Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
@@ -4188,9 +4182,7 @@ After being created successfully, a file document with type text/html will be di
             <textobject>
               <phrase>green tick</phrase>
             </textobject>
-          </inlinemediaobject>. Click the
-          <emphasis role="bold">plus</emphasis>
-          to open child nodes of categories.
+          </inlinemediaobject> corresponding to a child node that you want.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4241,8 +4233,6 @@ After being created successfully, a file document with type text/html will be di
           Complete uploading file by clicking
           <emphasis role="bold">Save.</emphasis>
         </para>
-      </step>
-      <step>
         <para>
           After being saved, the main information of the uploaded file will be displayed.
         </para>
@@ -4257,7 +4247,7 @@ After being created successfully, a file document with type text/html will be di
       </step>
       <step>
         <para>
-          Click 
+          Optionally, click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
@@ -4268,7 +4258,7 @@ After being created successfully, a file document with type text/html will be di
           </inlinemediaobject>
           to see more details about its external metadata information. The
           <emphasis role="bold">List External Metadata</emphasis>
-          tab will be enabled and you can input value in this tab.
+          tab will be enabled and you can do some actions in this tab.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4278,17 +4268,24 @@ After being created successfully, a file document with type text/html will be di
             <imagedata width="150mm" align="center" fileref="images/externalmetadata.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-      </step>
-      <step>
-        <para>
-          Optionally, click
+          <itemizedlist>
+              <listitem>
+         <para>Click
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>pencil</phrase>
+            </textobject>
+          </inlinemediaobject> corresponding metadata that you want to edit.</para>
+              </listitem>
+              <listitem>
+                  <para>
+          Click
           <emphasis role="bold">Add metadata</emphasis>
-          to add more metadata to the uploaded file.
-        </para>
-      </step>
-      <step>
-        <para>
-          Tick the checkbox, then click <emphasis role="bold">Add.</emphasis>
+          to add more metadata to the uploaded file. Then,
+             tick the checkbox, and click <emphasis role="bold">Add.</emphasis>
            <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/addexternalmetadata.png" format="PNG"/>
@@ -4297,24 +4294,21 @@ After being created successfully, a file document with type text/html will be di
             <imagedata width="103mm" align="center" fileref="images/addexternalmetadata.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-        </para>
-        <para>
-          The new metadata are displayed in the list of External Metadata and you also can edit it by clicking 
-          <inlinemediaobject>
-            <imageobject>
-              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>pencil</phrase>
-            </textobject>
-          </inlinemediaobject>.
-        </para>
-      </step>
+         </para>
+                  <para>
+                      The new metadata are displayed in the
+                      <emphasis role="bold">List External Metadata</emphasis>
+                      tab.
+                  </para>
+
+              </listitem>
+          </itemizedlist>
+        </step>
       <step>
         <para>
           Click
           <emphasis role="bold">Close</emphasis>
-          to quit the Uploaded information form.
+          to quit the <emphasis role="bold">Upload File</emphasis> form.
         </para>
         <para>
           After being uploaded, the tree is displayed in the left pane.
@@ -4449,7 +4443,7 @@ After being created successfully, a file document with type text/html will be di
   <section id="sect-User_Guide-Actions-View_Permissions">
     <title>View permissions</title>
     <para>
-      This function enables an administrator to manage the permissions for nodes.
+      This function allows an administrator to manage the permissions for nodes.
     </para>
 	<procedure>
       <step>
@@ -4529,16 +4523,22 @@ After being created successfully, a file document with type text/html will be di
       </step>
       <step>
         <para xml:id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group"><emphasis role="bold">Select users from a specific group</emphasis></para>
-        <para><emphasis role="bold">i.</emphasis>
+        <itemizedlist>
+            <listitem>
+          <para>
           Enter a group name in the
           <emphasis role="bold">Group</emphasis>
           field at the top of the form (for example, <emphasis role="bold">/platform/users</emphasis>). All users in the
           nominated group will be displayed.
         </para>
+        </listitem>
+        </itemizedlist>
         <para>
           Or;
         </para>
-        <para> <emphasis role="bold">ii.</emphasis>
+          <itemizedlist>
+              <listitem>
+        <para>
          Click
           <inlinemediaobject>
             <imageobject>
@@ -4553,6 +4553,8 @@ After being created successfully, a file document with type text/html will be di
           field to open a form that lists groups and their sub-groups. Select a sub-group to add all users to that
           sub-group.
         </para>
+              </listitem>
+        </itemizedlist>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/groupssubgroups.png" format="PNG"/>
@@ -4853,11 +4855,11 @@ After being created successfully, a file document with type text/html will be di
   <section id="sect-User_Guide-Actions-View_Relations">
     <title>View relations</title>
     <para>
-      This function shows/hide documents related to a selected node.
+      This function shows/hides documents related to a selected node.
     </para>
     <itemizedlist>
       <listitem><citetitle>
-        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis></para>
+        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis>.</para>
           </citetitle>
         <para>
           Select a node, then click 
@@ -4868,7 +4870,7 @@ After being created successfully, a file document with type text/html will be di
             <textobject>
               <phrase>[ Show/Hide Relations ]</phrase>
             </textobject>
-          </inlinemediaobject>. Documents related to the selected node will be shown in the sidebar.
+          </inlinemediaobject>. Documents related to the selected node will be shown in the <emphasis role="bold">Filter</emphasis> bar.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4880,7 +4882,7 @@ After being created successfully, a file document with type text/html will be di
         </mediaobject>
         <para>
           If the node does not have any related documents, the message
-          <emphasis role="bold">No related document</emphasis>
+          <emphasis role="bold">No Related Document</emphasis>
           will appear instead.
         </para>
         <mediaobject>
@@ -5019,7 +5021,7 @@ After being created successfully, a file document with type text/html will be di
       </inlinemediaobject>.
     </para>
     <para>
-      A message will appear for you to confirm the action.
+      A message will appear to confirm the action.
     </para>
   </section>
 </section>

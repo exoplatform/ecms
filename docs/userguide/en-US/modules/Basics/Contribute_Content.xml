@@ -22,7 +22,7 @@
             <emphasis role="bold">Edit</emphasis>
             mode, hover your cursor over
             <emphasis role="bold">Edit</emphasis>
-            on the Administration bar, then select
+            on the <emphasis role="bold">Administration</emphasis> bar, then select
             <emphasis role="bold">Content</emphasis>
             from the drop-down menu.
             <mediaobject>
@@ -48,7 +48,7 @@
         </mediaobject>
         <para>
             For Content List Viewer (CLV), you can see the current state of the content, the Edit Content icon, the
-            Preferences icon, the Add Content icon and the Management Content icon.
+            Preferences icon, the Add Content icon and the Manage Content icon.
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -203,7 +203,7 @@
         <section id="sect-User_Guide-InContext_Editing-Edit_Content">
             <title>Edit a content</title>
             <para>
-                You can edit any contents on the homepage for SCV and CLV with InContext Editing. However, for CLV, you only can
+                You can edit any contents on the homepage for SCV and CLV with <emphasis role="bold">InContext Editing</emphasis>. However, for CLV, you only can
                 edit each content in it.
             </para>
             <procedure>
@@ -213,7 +213,7 @@
                         <emphasis role="bold">Edit</emphasis>
                         mode by hovering your cursor over
                         <emphasis role="bold">Edit</emphasis>
-                        on the Administration bar, then selecting
+                        on the <emphasis role="bold">Administration</emphasis> bar, then selecting
                         <emphasis role="bold">Content.</emphasis>
                     </para>
                 </step>
@@ -286,7 +286,7 @@
                                 <imagedata width="5mm" fileref="images/publish_icon1.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
-                        on the action bar to publish your edited content. Your content is now in the "Published" state.
+                        on the <emphasis role="bold">Action</emphasis> bar to publish your edited content. Your content is now in the "Published" state.
                     </para>
                 </step>
             </procedure>
@@ -299,7 +299,7 @@
             </note>
         </section>
         <section id="sect-User_Guide-InContext_Editing-Manage_Content">
-            <title>Manage contents</title>
+            <title>Manage content</title>
             <para>
                 With <emphasis role="bold">InContext Editing</emphasis>, you can easily manage a Content List Viewer on
                 the homepage. You can add a new content in the CLV, edit, delete an existing content or copy/cut/paste
@@ -347,7 +347,7 @@
                     <para>
                         To add a new document to the CLV, click
                         <emphasis role="bold">Add Content</emphasis>
-                        on the action bar and do the same steps as in the
+                        on the <emphasis role="bold">Action</emphasis> bar and do the same steps as in the
                         <link linkend="sect-User_Guide-InContext_Editing-Add_Content">Add Content</link>
                         section.
                     </para>
@@ -499,7 +499,7 @@
                                                 <listitem>
                                                     <para>
                                                         <emphasis role="bold">with:</emphasis>
-                                                        Parameters contains the content path.
+                                                        Parameters contain the content path.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -916,7 +916,7 @@
                                                 </listitem>
                                             </itemizedlist>
                                             <para>
-                                                <emphasis role="bold">Content Visibility:</emphasis>
+                                                <emphasis role="bold">Contents Visibility:</emphasis>
                                                 Allow you to use a cache shared between users to
                                                 get contents. If you want to get contents, which are displayed in CLV or
                                                 SCV, from one cache, select
@@ -1002,7 +1002,7 @@
             <step>
                 <para>Turn on the
                     <emphasis role="bold">Edit</emphasis>
-                    mode on the Administration bar.
+                    mode on the <emphasis role="bold">Administration</emphasis> bar.
                 </para>
             </step>
             <step>
@@ -1202,7 +1202,7 @@
                     <emphasis role="bold">Request Approval:</emphasis>
                     When a new content is created, it must be approved before publishing by clicking
                     <emphasis role="bold">Request Approval</emphasis>
-                    on the action bar of the Sites Explorer or clicking
+                    on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer or clicking
                     <emphasis role="bold">Pending</emphasis>
                     in the
                     <emphasis role="bold">Manage Publication</emphasis>
@@ -1222,7 +1222,7 @@
                     <emphasis role="bold">Approve:</emphasis>
                     To approve a content, click
                     <emphasis role="bold">Approve</emphasis>
-                    on the action bar of the Sites Explorer, or
+                    on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer, or
                     <emphasis role="bold">Approved</emphasis>
                     in the
                     <emphasis role="bold">Manage Publication.</emphasis>

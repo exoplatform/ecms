@@ -62,7 +62,7 @@
               <phrase>[ Add Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the Action bar to open a list of content templates.
+          on the <emphasis role="bold">Action</emphasis> bar to open a list of content templates.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -80,12 +80,12 @@
         <itemizedlist>
           <listitem>
             <para>
-              <emphasis role="bold">Free layout web content:</emphasis> This template is a free layout.
+              <emphasis role="bold">Free layout webcontent:</emphasis> This template is a free layout.
             </para>
           </listitem>
           <listitem>
             <para>
-              <emphasis role="bold">Picture on head layout web content:</emphasis> The site's content is
+              <emphasis role="bold">Picture on head layout webcontent:</emphasis> The site's content is
               presented in two spaces. One is for inserting an image and the other for editing the site's content.
               The image will be put at the head of a site.
             </para>
@@ -138,7 +138,7 @@
                 <emphasis role="bold">Title</emphasis>
               </entry>
               <entry>
-                The title of a web content.
+                The title of a webcontent.
               </entry>
             </row>
             <row>
@@ -146,7 +146,7 @@
                 <emphasis role="bold">Name</emphasis>
               </entry>
               <entry>
-                The name of the web content that you want to add new.
+                The name of the webcontent that you want to add new.
               </entry>
             </row>
              <row>
@@ -154,7 +154,7 @@
                 <emphasis role="bold">Language</emphasis>
               </entry>
               <entry>
-                The language of the web content. At present, eXo Platform 3.5 supports two languages: English and French.
+                The language of the webcontent. At present, eXo Platform 3.5 supports two languages: English and French.
               </entry>
             </row>
             <row>
@@ -162,7 +162,7 @@
                 <emphasis role="bold">Main Content</emphasis>
               </entry>
               <entry>
-                The main content that you want to display when publishing this web content.
+                The main content that you want to display when publishing this webcontent.
               </entry>
             </row>
           </tbody>
@@ -208,7 +208,7 @@
                <emphasis role="bold">Summary</emphasis>
               </entry>
               <entry>
-                You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
+                You can give a short description about the webcontent because it will be displayed with the illustration image when the webcontent is listed. The main content will be shown when it is selected to be viewed.
               </entry>
             </row>
           </tbody>
@@ -265,7 +265,7 @@
                 <emphasis role="bold">CSS Data</emphasis>
               </entry>
               <entry>
-                Contain the CSS definition to present data in a web content. You can optionally enter CSS data into this
+                Contain the CSS definition to present data in a webcontent. You can optionally enter CSS data into this
                 field to specify the style.
               </entry>
             </row>
@@ -274,7 +274,7 @@
                 <emphasis role="bold">JS Data</emphasis>
               </entry>
               <entry>
-                Contain the JS content to make the web content more dynamic after being published. You can optionally enter
+                Contain the JS content to make the webcontent more dynamic after being published. You can optionally enter
                 the JS content in this field.
               </entry>
             </row>
@@ -284,20 +284,20 @@
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
-    <title>Edit a web content</title>
+    <title>Edit a webcontent</title>
     <para>
-      This function is used to edit a web content in a specific drive of an existing site.
+      This function is used to edit a webcontent in a specific drive of an existing site.
     </para>
     <procedure>
       <step>
         <para>
-          Go into the folder of a site which contains the web content that you want to edit.
+          Go into the folder of a site which contains the webcontent that you want to edit.
         </para>
       </step>
       <step>
         <para>
-          Select the web content by double-clicking it on the left tree or on the right pane. The detailed information
-          of web content will be viewed on the right pane.
+          Select the webcontent by double-clicking it on the left tree or on the right pane. The detailed information
+          of webcontent will be viewed on the right pane.
         </para>
 
       </step>
@@ -312,7 +312,7 @@
               <phrase>[ Edit Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the Action bar to show the form to edit the selected web content. This form is similar to that of creating
+          on the <emphasis role="bold">Action</emphasis> bar to show the form to edit the selected webcontent. This form is similar to that of creating
           a new document.
         </para>
       </step>
@@ -323,7 +323,7 @@
       </step>
       <step>
         <para>
-          Complete editing the selected web content by clicking 
+          Complete editing the selected webcontent by clicking
           <emphasis role="bold">Save</emphasis>
           or <emphasis role="bold">Save &amp; Close.</emphasis>
         </para>
@@ -331,21 +331,21 @@
     </procedure>
     <note>
       <para>
-        When you click <emphasis role="bold">Edit Document,</emphasis> the web content will be auto-locked for your
+        When you click <emphasis role="bold">Edit Document,</emphasis> the webcontent will be auto-locked for your
         editing. After finishing, the content is back to the unlock status. You can manage "Locks" in the <link linkend="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">Unlock a node</link> section.
       </para>
     </note>
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
-    <title>Delete a web content</title>
+    <title>Delete a webcontent</title>
     <para>
-      This function is used to remove a web content from the web content folder in a specific site's drive.
+      This function is used to remove a webcontent from the webcontent folder in a specific site's drive.
     </para>
     <procedure>
       <step>
         <para>
-          Right-click the name of the web content that you want to delete, then select
+          Right-click the name of the webcontent that you want to delete, then select
           <emphasis role="bold">Delete</emphasis>
           from the drop-down menu.
         </para>
@@ -369,18 +369,18 @@
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
-    <title>Publish a web content</title>
+    <title>Publish a webcontent</title>
     <para>
-      This function helps you publish a web content that you have added to web content folder in <emphasis role="bold">Sites Explorer</emphasis>.
+      This function helps you publish a webcontent that you have added to webcontent folder in <emphasis role="bold">Sites Explorer</emphasis>.
     </para>
     <para>
       See the
       <link linkend="sect-User_Guide-Contribute_Content-Publication_Process">Publication process</link>
-      section to know how to publish a web content.
+      section to know how to publish a webcontent.
     </para>
     <para>
       After the content is published, all users who have the right to access that position can view the published web
-      content as a page on the Navigation bar.
+      content as a page on the <emphasis role="bold">Navigation</emphasis> bar.
     </para>
   </section>
   <xi:include href="Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>

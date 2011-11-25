@@ -249,9 +249,16 @@
                         </citetitle>
                         <para>
                             <emphasis role="bold">i.</emphasis>
-                            Click the
-                            <emphasis role="bold">trash can</emphasis>
-                            icon in the dialog row you want to edit.
+                            Click
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                                </imageobject>
+                                <textobject>
+                                    <phrase>trash can</phrase>
+                                </textobject>
+                            </inlinemediaobject>
+                            in the dialog row you want to edit.
                         </para>
                         <para>
                             <emphasis role="bold">ii.</emphasis>
@@ -325,9 +332,9 @@
                             </para>
                             <para>
                                 If you click
-                                <emphasis role="bold">Enable Version</emphasis>
+                                <emphasis role="bold">is Enable Version</emphasis>
                                 checkbox, this view automatically increments one version after you have clicked <emphasis
-                                    role="bold">Save</emphasis>. It is displayed at &apos; version&apos; column in the
+                                    role="bold">Save</emphasis>. It is displayed at <emphasis role="bold">Version</emphasis> column in the
                                 <emphasis role="bold">View</emphasis>
                                 tab.
                             </para>
@@ -523,10 +530,8 @@
         <para>
             The
             <emphasis role="bold">Manage View</emphasis>
-            function is used to control view ways of a user. It has three tabs:
-            <emphasis role="bold">View, ECM Templates</emphasis>
-            and
-            <emphasis role="bold">BC Templates.</emphasis>
+            function is used to control view ways of a user. It has two tabs:
+            <emphasis role="bold">View</emphasis> and <emphasis>ECM Templates</emphasis>
         </para>
         <para>
             To open the
@@ -646,8 +651,8 @@
                     <para>
                         If you select the
                         <emphasis role="bold">Enable Version</emphasis>
-                        checkbox, this view automatically increases to one version after you click<emphasis role="bold">
-                        Save</emphasis>. It is displayed at &apos; version&apos; column in the
+                        checkbox, this view automatically increases to one version after you click <emphasis role="bold">
+                        Save</emphasis>. It is displayed at the <emphasis role="bold">Base Version</emphasis> column in the
                         <emphasis role="bold">View</emphasis>
                         tab.
                     </para>
@@ -802,7 +807,7 @@
         </procedure>
         </section>
         <section id="sect-User_Guide-Manage_Views-ECM_Templates">
-            <title>ECM Templates</title>
+            <title>ECM Templates tab</title>
             <citetitle>
             <para xml:id="proc-User_Guide-ECM_Templates-Add_a_new_ECM_Template">
                 <emphasis role="bold">Add a new ECM Template</emphasis>
@@ -897,13 +902,13 @@
                             You cannot edit the template name.
                         </para>
                         <para>
-                            If you tick the &apos;Enable Version&apos; checkbox, this template will automatically
+                            If you tick the <emphasis role="bold">Enable Version</emphasis> checkbox, this template will automatically
                             increase to 1 version after you have clicked <emphasis role="bold">Save</emphasis>. It is
-                            displayed at the &apos;Base version&apos; column in &apos;ECM template&apos; tab.
+                            displayed at the <emphasis role="bold">Base Version</emphasis> column in the <emphasis role="bold">ECMS Template</emphasis> tab.
                         </para>
                         <para>
-                            If the template has at least two versions, in the &apos;Edit ECM Template&apos; form, it
-                            displays the Restore button that allows restoring the template version.
+                            If the template has at least two versions, in the <emphasis role="bold">Edit ECM Template</emphasis> form, it
+                            displays the <emphasis role="bold">Restore</emphasis> button that allows restoring the template version.
                         </para>
                     </note>
                 </step>
@@ -922,7 +927,7 @@
                                 <imagedata fileref="images/Delete_icon.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
-                        corresponding with the template you want to edit. A confirmation message will appear.
+                        corresponding with the template you want to delete. A confirmation message will appear.
                     </para>
                 </step>
                 <step>
@@ -934,7 +939,7 @@
                 </step>
             </procedure>
         </section>
-        <section id="sect-User_Guide-Manage_Views-BC_Templates">
+    <!-- Remove    <section id="sect-User_Guide-Manage_Views-BC_Templates">
             <title>BC Templates</title>
             <citetitle>
             <para xml:id="proc-User_Guide-BC_Templates-Adding_a_New_Template">
@@ -1075,7 +1080,7 @@
                     </para>
                 </step>
             </procedure>
-        </section>
+        </section> -->
     </section>
     <section id="sect-User_Guide-Content_Presentation_Manager-Drives_Management">
         <title>Manage drives</title>
@@ -1127,8 +1132,7 @@
                 </step>
                 <step>
                     <para>
-                        Select a workspace for the drive. There are 4 available workspaces: system, collaboration,
-                        backup, and dms-system.
+                        Select a workspace for the drive from the drop-down menu by clicking the <emphasis role="bold">Workspace</emphasis> entry.
                     </para>
                     <mediaobject>
                         <imageobject role="html">
@@ -1178,8 +1182,7 @@
                         <emphasis role="bold">Workspace Icon</emphasis>
                         entry.
                     </para>
-                </step>
-                <step>
+
                     <para>
                         Select an icon by clicking
                         <inlinemediaobject>
@@ -1190,7 +1193,7 @@
                                 <phrase>green tick</phrase>
                             </textobject>
                         </inlinemediaobject>
-                        corresponding to your desired icon file:
+                        corresponding to your desired icon file.
                     </para>
                     <mediaobject>
                         <imageobject role="html">
@@ -1262,12 +1265,10 @@
                     </para>
                     <variablelist>
                         <varlistentry>
-                            <term>Folder</term>
+                            <term>exo:jsFolder</term>
                             <listitem>
                                 <para>
-                                    Only
-                                    <emphasis role="bold">nt:folder</emphasis>
-                                    folders can be created in this drive.
+
                                 </para>
                             </listitem>
                         </varlistentry>
@@ -1281,13 +1282,47 @@
                                 </para>
                             </listitem>
                         </varlistentry>
+                        <varlistentry>
+                            <term>exo:webFolder</term>
+                            <listitem>
+                                <para>
+
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                        <varlistentry>
+                            <term>exo:linkFolder</term>
+                            <listitem>
+                                <para>
+
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                        <varlistentry>
+                            <term>exo:cssFolder</term>
+                            <listitem>
+                                <para>
+
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                        <varlistentry>
+                            <term>Folder</term>
+                            <listitem>
+                                <para>
+                                    Only
+                                    <emphasis role="bold">nt:folder</emphasis>
+                                    folders can be created in this drive.
+                                </para>
+                            </listitem>
+                        </varlistentry>
                     </variablelist>
                 </step>
                 <step>
                     <para>
                         Select the
                         <emphasis role="bold">Apply Views</emphasis>
-                        tab and select the view type you want to be available in the drive.
+                        tab and select the view types you want to be available in the drive.
                     </para>
                     <mediaobject>
                         <imageobject role="html">

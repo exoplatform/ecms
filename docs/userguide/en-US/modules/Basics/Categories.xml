@@ -5,7 +5,7 @@
 ]>
 <section id="sect-User_Guide-Category_Navigation">
 <!--  This document was created with Syntext Serna Free.  -->
-  <title>Category Navigation</title>
+  <title>Category navigation</title>
   <para>
   <emphasis role="bold">Category Navigation Portlet</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
  </para>
@@ -15,7 +15,7 @@
   <procedure>
     <step>
       <para>
-    Go to <emphasis role="bold">News</emphasis> on the navigation bar.
+    Go to <emphasis role="bold">News</emphasis> on the <emphasis role="bold">Navigation</emphasis> bar.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -61,7 +61,7 @@
     <step>
         <para>
             Open
-            <emphasis role="bold">News</emphasis> page on the Navigation bar.
+            <emphasis role="bold">News</emphasis> page on the <emphasis role="bold">Navigation</emphasis> bar.
         </para>
     </step>
     <step>Hover your cursor over <emphasis role="bold">Edit --> Page --> Layout </emphasis>

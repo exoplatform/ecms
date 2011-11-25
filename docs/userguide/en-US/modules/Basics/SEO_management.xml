@@ -4,7 +4,7 @@
         %BOOK_ENTITIES;
         ]>
 <section id="sect-User_Guide-SEO_Management">
-  <title>SEO Management</title>
+  <title>SEO management</title>
   <para>
     SEO (Search Engine Optimization) allows you to improve the visibility of your webpages and web content in the major
     search engines (Google, Yahoo, MSN, Live) via the search results. The higher your website position is in the search
@@ -25,7 +25,7 @@
     <step>
       <para>
         Open the <emphasis role="bold">SEO Management</emphasis> form by hovering your cursor over
-        <emphasis role="bold">Edit --> Page --> SEO</emphasis> on the Administration bar.
+        <emphasis role="bold">Edit --> Page --> SEO</emphasis> on the <emphasis role="bold">Administration</emphasis> bar.
       </para>
       <mediaobject>
         <imageobject role="html">
@@ -37,11 +37,11 @@
         </imageobject>
       </mediaobject>
 
-      <para>Depending on your SEO management for a page or a content, the content of the SEO Management form will be different.
+      <para>Depending on your SEO management for a page or a content, the content of the <emphasis role="bold">SEO Management</emphasis> form will be different.
       </para>
       <itemizedlist>
       <listitem>
-      <para>The SEO Management form for a content is as follows.</para>
+      <para>The <emphasis role="bold">SEO Management</emphasis> form for a content is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"/>
@@ -169,7 +169,7 @@
               <imagedata fileref="images/SEO_green_icon.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
-          means that the SEO Management form is filled out with the full SEO information.
+          means that the <emphasis role="bold">SEO Management</emphasis> form is filled out with the full SEO information.
         </para>
         <para>
           <inlinemediaobject>
@@ -177,7 +177,7 @@
               <imagedata fileref="images/SEO_gray_icon.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
-          means that the SEO Management feature is disabled.
+          means that the <emphasis role="bold">SEO Management</emphasis> feature is disabled.
         </para>
   </note>
 </section>

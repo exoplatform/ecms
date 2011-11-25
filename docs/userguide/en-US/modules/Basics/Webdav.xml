@@ -42,7 +42,7 @@
     </variablelist>
   </section>
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
-    <title>Why uses WebDAV?</title>
+    <title>Why use WebDAV?</title>
     <para>
    With WebDAV, you can manage content efficiently with the following actions:
   </para>
@@ -154,7 +154,7 @@
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
             </imageobject>
-          </inlinemediaobject> on the Administration bar, then select <emphasis role="bold"> Content --> Sites Explorer </emphasis> from the drop-down menu.
+          </inlinemediaobject> on the <emphasis role="bold">Administration</emphasis> bar, then select <emphasis role="bold"> Content --> Sites Explorer </emphasis> from the drop-down menu.
 			</para>
       </step>
       <step>

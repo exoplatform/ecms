@@ -45,7 +45,7 @@
           <tbody>
             <row>
               <entry> Sort by </entry>
-              <entry> To sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date</entry>
+              <entry> To sort nodes in the nodes list by <emphasis role="bold">Alphabetic</emphasis>, <emphasis role="bold">Type</emphasis>, <emphasis role="bold">Created Date</emphasis>, or <emphasis role="bold">Modified Date</emphasis>.</entry>
             </row>
             <row>
               <entry> Show sidebar </entry>
@@ -53,7 +53,7 @@
             </row>
             <row>
               <entry> Enable drag and drop </entry>
-              <entry> To enable/disable the “drag and drop” action. </entry>
+              <entry> To enable/disable the "drag and drop" action. </entry>
             </row>
             <row>
               <entry> Nodes per page </entry>

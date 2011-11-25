@@ -17,7 +17,7 @@
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
             </imageobject>
-          </inlinemediaobject> on the Administration bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
+          </inlinemediaobject> on the <emphasis>Administration</emphasis> bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
 			</para>
      
 			 <mediaobject>
@@ -61,7 +61,7 @@
                The drive of a group is the working space of users in that group.
              </para>
              <para>
-               In the following example, the user &quot;root&quot; joins in three groups : &quot;executive-board&quot;, &quot;administrators&quot;and
+               In the following example, the user &quot;root&quot; joins in three groups : &quot;executive-board&quot;, &quot;administrators&quot; and
                &quot;users&quot; so he has the right to access these group's drive.
              </para>
            </listitem>

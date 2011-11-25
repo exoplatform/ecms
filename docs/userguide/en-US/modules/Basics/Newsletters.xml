@@ -8,7 +8,7 @@
   &PRODUCT; provides the <emphasis role="bold">Newsletters</emphasis> service, aiming at helping users quickly get the updated newsletters from a website.
  </para>
   <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
-    <title>Newsletter Viewer</title>
+    <title>Newsletter viewer</title>
     <para>With <emphasis role="bold">Newsletters,</emphasis> you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
     <citetitle>
 	<para><emphasis role="bold">
@@ -19,7 +19,7 @@
     <procedure>
       <step>
         <para>
-     Go to <emphasis role="bold">Newsletters</emphasis> on the navigation bar. The <emphasis role="bold">Newsletters</emphasis> page will appear.
+     Go to <emphasis role="bold">Newsletters</emphasis> on the <emphasis role="bold">Navigation</emphasis> bar. The <emphasis role="bold">Newsletters</emphasis> page will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -63,7 +63,7 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
-    <title>Newsletter Manager</title>
+    <title>Newsletter manager</title>
     <para>
    &PRODUCT; facilitates administrators to easily and quickly manage newsletters.
   </para>
@@ -83,10 +83,10 @@
   </mediaobject>
   <note>
   <para>
-  In eXo Platform, the <emphasis role="bold">Newsletter Manager</emphasis> portlet is put in <emphasis role="bold">Page Editor --> Applications --> Newsletter Manager.</emphasis>
+  In eXo Platform, the <emphasis role="bold">Newsletter Manager</emphasis> portlet is put in <emphasis role="bold">Page Editor --> Applications --> Newsletter.</emphasis>
   </para>
   </note>
-    <para>Access the page with the <emphasis role="bold">Newsletter Management</emphasis> portlet to open the <emphasis role="bold">newsletter</emphasis> page.</para>
+    <para>Access the page with the <emphasis role="bold">Newsletter Manager</emphasis> portlet to open the <emphasis role="bold">newsletter</emphasis> page.</para>
     <mediaobject>
        <imageobject role="html">
           <imagedata fileref="images/newsletters-newsletter_manager.png" format="PNG" align="center"/>
@@ -98,7 +98,7 @@
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
       <title>Manage categories in Newsletter</title>
       <para>
-    This section shows you how to manage categories in a Newsletter page, including:
+    This section shows you how to manage categories in a <emphasis role="bold">Newsletter</emphasis> page, including:
    </para>
     <itemizedlist>
 	<listitem>
@@ -119,7 +119,7 @@
         <procedure>
           <step>
             <para>
-       Click <emphasis role="bold">New Category</emphasis> on the Action bar of the <emphasis role="bold">Newsletter</emphasis> page. The  <emphasis role="bold">Create New Category</emphasis> form will appear.
+       Click <emphasis role="bold">New Category</emphasis> on the <emphasis role="bold">Action</emphasis> bar of the <emphasis role="bold">Newsletter</emphasis> page. The  <emphasis role="bold">Create New Category</emphasis> form will appear.
       </para>
             <mediaobject>
                <imageobject role="html">
@@ -462,7 +462,7 @@
       <procedure>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscription</emphasis> on the Action bar.
+      Click <emphasis role="bold">New Subscription</emphasis> on the <emphasis role="bold">Action</emphasis> bar.
        <mediaobject>
             <imageobject role="html">
               <imagedata  align="center"  fileref="images/NewSubscription.png" format="PNG"/>
@@ -557,7 +557,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscription</emphasis> on the Action bar.
+      Click <emphasis role="bold">New Subscription</emphasis> on the <emphasis role="bold">Action</emphasis> bar.
      </para>
           <para>
       The <emphasis role="bold">Create New Subscription</emphasis> form pops up.
@@ -820,7 +820,7 @@
               <textobject>
                  <phrase>[ Moderation ]</phrase>
               </textobject>
-            </inlinemediaobject>, then select <emphasis role="bold">Convert As Template</emphasis> from the drop-down menu. For the next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+            </inlinemediaobject>, then select <emphasis role="bold">Convert As Template</emphasis> from the drop-down menu. For the next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter Entry</emphasis> form.
      </para>
         </step>
       </procedure>
@@ -847,7 +847,7 @@
               <textobject>
                  <phrase>[ New Letter ]</phrase>
               </textobject>
-            </inlinemediaobject> on the Action bar. The <emphasis role="bold">Newsletter Entry</emphasis> form appears.
+            </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Newsletter Entry</emphasis> form appears.
      </para>
           <mediaobject>
             <imageobject>

@@ -5,7 +5,7 @@
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
 <!--  This document was created with Syntext Serna Free.  -->
-  <title>Fast Content Creator</title>
+  <title>Fast content creator</title>
   <para>
      The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.
   </para>
@@ -56,15 +56,15 @@
       </para>
 
   <section id="sect-User_Guide-Fast_Content_Creator-Configuration">
-    <title>Configuration of Fast Content Creator</title>
+    <title>Configuration of fast content creator</title>
   <para>
-       In &PRODUCT;, the <emphasis role="bold">Fast Content Creator</emphasis> is applied in the <emphasis role="bold">Question?</emphasis> portlet with the <emphasis role="bold">Content Creator</emphasis> mode by default. Thus, in this guide, you are instructed how to configure the Fast Content Creator by editing the <emphasis role="bold">Question?</emphasis> portlet as an example.
+       In &PRODUCT;, the <emphasis role="bold">Fast Content Creator</emphasis> is applied in the <emphasis role="bold">Question?</emphasis> portlet with the <emphasis role="bold">Content Creator</emphasis> mode by default. Thus, in this guide, you are instructed how to configure the <emphasis role="bold">Fast Content Creator</emphasis> by editing the <emphasis role="bold">Question?</emphasis> portlet as an example.
    </para>
 
     <procedure>
             <step><para>Open the <emphasis role="bold">Question?</emphasis> page.</para></step>
             <step>
-                <para>Hover your cursor over <emphasis role="bold">Edit --> Page</emphasis>, then click <emphasis role="bold">Layout</emphasis> on the Administration bar.</para>
+                <para>Hover your cursor over <emphasis role="bold">Edit --> Page</emphasis>, then click <emphasis role="bold">Layout</emphasis> on the <emphasis role="bold">Administration</emphasis> bar.</para>
                 <para>The edit page appear.</para>
             </step>
             <mediaobject>
@@ -197,7 +197,7 @@
 
   </section>
   <section id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
-    <title>Create a new document by Fast Content Creator</title>
+    <title>Create a new document by fast content creator</title>
        <procedure>
       <step>
         <para>

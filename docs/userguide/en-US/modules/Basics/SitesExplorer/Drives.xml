@@ -8,7 +8,7 @@
 	 <section id="sect-User_Guide-Drives-Private_drive">
 		<title>Private drive</title>
 		 <para>
-			The Private drive contains personal data of registered users. Hence, only these individuals can access data in this drive type.
+			The <emphasis role="bold">Private</emphasis> drive contains personal data of registered users. Hence, only these individuals can access data in this drive type.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -23,7 +23,7 @@
 			By default, there are some initialized folders to store private resources of users.
 		</para>
      <para>
-				In Private drive, there are many functions on the action bar, including:
+				In <emphasis role="bold">Private</emphasis> drive, there are many functions on the <emphasis role="bold">Action</emphasis> bar, including:
 				</para>
 		 <itemizedlist>
 
@@ -78,7 +78,7 @@
 					</listitem>
 					 <listitem>
 						<para>
-							Set multi-display languages for document.
+							Set multiple languages for a document.
 						</para>
 
 					</listitem>

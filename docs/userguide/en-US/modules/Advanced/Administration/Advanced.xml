@@ -163,35 +163,14 @@
           <imagedata fileref="images/managescriptsform.png" format="PNG" align="center" width="150mm" />
        </imageobject>
     </mediaobject>
-    <para>
-	<emphasis role="bold">
-   Details:
-   </emphasis>
-   </para>
-   <itemizedlist>
-        <listitem>
-          <para>
-      <emphasis role="bold">ECM</emphasis> <emphasis role="bold">Scripts</emphasis>: Scripts used in <emphasis role="bold">ECM.</emphasis>
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      <emphasis role="bold">BC Scripts</emphasis>: Scripts used in <emphasis role="bold">Content Browser.</emphasis>
-     </para>
-        </listitem>
-      </itemizedlist>
+
       <citetitle>
 	<para xml:id="proc-User_Guide-Manage_Scripts-Add_a_new_script_in_ECM"><emphasis role="bold">Add a new script in ECM</emphasis></para>
       </citetitle>
     <procedure>
       <step>
-    <para>
-     Select the <emphasis role="bold">ECM Scripts</emphasis> tab in the <emphasis role="bold">Manage Script</emphasis> page.
-    </para>
-      </step>
-      <step>
         <para>
-     Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Add/Edit Script</emphasis> form.
+     Click the <emphasis role="bold">Add</emphasis> button in the <emphasis role="bold">Manage Script</emphasis> page to open the <emphasis role="bold">Add/Edit Script</emphasis> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -286,115 +265,12 @@
     </para>
       </step>
     </procedure>
-    <para>
-   <emphasis role="bold">The BC Scripts tab</emphasis>
-  </para>
-    <mediaobject>
-       <imageobject role="html">
-          <imagedata fileref="images/bcscriptstab.png" format="PNG" align="center"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/bcscriptstab.png" format="PNG" align="center" width="150mm" />
-       </imageobject>
-    </mediaobject>
-      <citetitle>
-	  <para xml:id="proc-User_Guide-Manage_Scripts-Add_a_BC_script"><emphasis role="bold">Add a BC script</emphasis></para>
-      </citetitle>
-    <procedure>
-      <step>
-        <para>
-     In the <emphasis role="bold">Manage Scripts</emphasis>, select the <emphasis role="bold">BC Scripts</emphasis> tab.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <emphasis role="bold">Add</emphasis> to open the <emphasis role="bold">Add/Edit script</emphasis> form.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/bcaddeditscriptform.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/bcaddeditscriptform.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Input content into the <emphasis role="bold">Script Content</emphasis> field.
-    </para>
-      </step>
-      <step>
-        <para>
-     Input a script name into the <emphasis role="bold">Name</emphasis> field.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <emphasis role="bold">Save</emphasis> to finish adding the new script.
-    </para>
-      </step>
-    </procedure>
-      <citetitle>
-	<para xml:id="proc-User_Guide-Manage_Scripts-Edit_a_BC_script"><emphasis role="bold">Edit a BC script</emphasis></para>
-      </citetitle>
-    <procedure>
-      <step>
-        <para>
-     In the <emphasis role="bold">BC Script</emphasis> tab, click 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>pencil</phrase>
-            </textobject>
-          </inlinemediaobject>
-      on a script that you want to edit.
-    </para>
-        <para>
-     The <emphasis role="bold">Add/Edit Script</emphasis> form will appear.
-    </para>
-      </step>
-      <step>
-        <para>
-     Edit the properties that you want.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <emphasis role="bold">Save</emphasis> to accept all changes.
-    </para>
-      </step>
-    </procedure>
-      <citetitle>
-	<para xml:id="proc-User_Guide-Manage_Scripts-Delete_a_BC_script"><emphasis role="bold">Delete a BC script</emphasis></para>
-      </citetitle>
-    <procedure>
-      <step>
-        <para>
-     In the <emphasis role="bold">BC Scripts</emphasis> tab, click 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>trash can</phrase>
-            </textobject>
-          </inlinemediaobject> on the script you want to delete.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click <emphasis role="bold">OK</emphasis> to accept deleting this script in the confirmation message.
-    </para>
-      </step>
-    </procedure>
-  </section>
+    </section>
+
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Unlocks">
-    <title>Manage unlocks</title>
+    <title>Manage locks</title>
     <para>
-   All locked nodes are listed and managed by administrators in the <emphasis role="bold">Content Administration</emphasis> page. There are two ways that help administrators unlock nodes: unlock nodes in the right-click the menu in <emphasis role="bold">Sites Explorer</emphasis> or unlock nodes in the <emphasis role="bold">Content Administration</emphasis> page.
+   All locked nodes are listed and managed by administrators in the <emphasis role="bold">Content Administration</emphasis> page. There are two ways that help administrators lock nodes: unlock nodes in the right-click menu in <emphasis role="bold">Sites Explorer</emphasis> or unlock nodes in the <emphasis role="bold">Content Administration</emphasis> page.
   </para>
       <citetitle>
    <para xml:id="proc-User_Guide-Manage_Unlocks-Unlock_Nodes"><emphasis role="bold">Unlock a node</emphasis></para>
@@ -432,7 +308,7 @@
       </step>
       <step>
         <para>
-     Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Group and Users</emphasis> column. However, administrators can also click
+     Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Groups Or Users</emphasis> column. However, administrators can also click
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
@@ -487,7 +363,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Action Type Form</emphasis> form.
+     Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Action Type</emphasis> form.
     </para>
         <mediaobject>
            <imageobject role="html">

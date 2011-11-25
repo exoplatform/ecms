@@ -9,11 +9,11 @@
 		There are many drives in <emphasis role="bold">Sites Explorer</emphasis>. Each drive has some views that enable you to view data in the drive in a particular way. Each view has some action tabs and each action tab contains some functions.
 	</para>
 	 <para>
-		&PRODUCT; supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.
+		&PRODUCT; supports you some ways to view nodes in a specific folder and show actions of corresponding tab on the <emphasis role="bold">Action</emphasis> bar.
 	</para>
 	 <note>
 		 <para>
-			The number of View types depends on which drive you are browsing. In eXo Platform, you can manage view types by selecting 
+			The number of view types depends on which drive you are browsing. In eXo Platform, you can manage view types by selecting
       <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
@@ -147,7 +147,7 @@
 		</para>
 
 		 <para>
-			If nodes are image files, their thumbnails will be shown like the screenshot below:
+			If nodes are image files, their thumbnails will be shown like the screenshot below.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -156,9 +156,9 @@
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/thumbnailimages.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
-		 <para>Especially, in this view, you can <emphasis role="bold">overload a thumbnail image</emphasis> for a node as follows:
+
+	<!--	 <para>Especially, in this view, you can <emphasis role="bold">overload a thumbnail image</emphasis> for a node as follows:
 		</para>
 		 <procedure>
 			 <step>
@@ -194,7 +194,7 @@
 					Return to the parent folder ("Pictures" in this example) which contains the selected folder to see an icon used to display.
 				</para>
 			</step>
-		</procedure>
+		</procedure>   -->
 	</section>
 		 <section id="sect-User_Guide-Views-Slide_Show_View">
 		<title>Slide Show view</title>

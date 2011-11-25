@@ -46,7 +46,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Enter the value for the URI field which must be unique and required.
+     Enter the value for the <emphasis role="bold">URI</emphasis> field which must be unique and required.
     </para>
         <note>
           <para>
@@ -77,7 +77,7 @@ The registry helps you manage the namespaces used in the system.</para>
         <para>
      Click <inlinemediaobject>
           <mediaobject>
-            <imageobject fileref="magnifyingglassicon.png" format="PNG"/>
+            <imageobject fileref="Glass_icon.png" format="PNG"/>
           </mediaobject>
      </inlinemediaobject>
                 that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.

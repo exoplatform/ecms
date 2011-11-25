@@ -62,26 +62,26 @@
   </para>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-CopyPaste">
-    <title>Copy/Paste</title>
+    <title>Copy/Paste &amp; Cut/Paste</title>
     <para>
    This function is used to make a copy of a node (including sub-nodes) to other places.
   </para>
     <para>
-   There are two ways to cut/copy/paste the node:
+   There are two ways to cut/copy &amp; paste the node:
   </para>
   <para xml:id="proc-User_Guide-CopyPaste-Method_One"><emphasis role="bold">The first way</emphasis></para>
     <procedure>
       <step>
     <para>
-     Right-click the node, then select <emphasis role="bold">Copy</emphasis> from the drop-down menu.
+     Right-click the node, then select <emphasis role="bold">Copy</emphasis> or <emphasis role="bold">Cut</emphasis> from the drop-down menu.
     </para>
       </step>
       <step>
     <para>
-     Right-click a destination node that you want to be the parent node of the cut/copied node, then select <emphasis role="bold">Paste</emphasis> from the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy</emphasis> action.
+     Right-click a destination node that you want to be the parent node of the copied/cut node, then select <emphasis role="bold">Paste</emphasis> from the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy/Cut</emphasis> action.
     </para>
     <para>
-     The copied folder (and its sub-folders) will be pasted into the new selected path.
+     The copied/cut folder (and its sub-folders) will be pasted into the new selected path.
     </para>
       </step>
     </procedure>
@@ -89,7 +89,7 @@
     <procedure>
       <step>
         <para>
-     Right-click the node and select <emphasis role="bold">Copy</emphasis> from the drop-down menu.
+     Right-click the node and select <emphasis role="bold">Copy/Cut</emphasis> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -99,8 +99,7 @@
       </step>
       <step>
         <para>
-     Select the Clipboard icon on the sidebar.
-    
+     Select the <emphasis>Clipboard</emphasis> icon on the <emphasis role="bold">Filter</emphasis> bar.
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
@@ -111,7 +110,7 @@
         </mediaobject>
       </para>
       <para>
-     The Clipboard window will appear.
+     The <emphasis>Clipboard</emphasis> window will appear.
     
         <mediaobject>
           <imageobject role="html">
@@ -133,7 +132,7 @@
             <textobject>
               <phrase>clipboard</phrase>
             </textobject>
-          </inlinemediaobject> in the clipboard window to paste the copied node into the selected destination node in Step 3.
+          </inlinemediaobject> in the clipboard window to paste the copied/cut node into the selected destination node in Step 3.
     </para>
       </step>
       </procedure>
@@ -538,7 +537,7 @@
     <itemizedlist>
     <listitem>
       <para>To view information of a document, right-click the document, and select <emphasis role="bold">View Information</emphasis> from the drop-down menu.
-        <para>The <emphasis role="bold">View Information</emphasis> form appears as below:</para>
+        <para>The <emphasis role="bold">View Information</emphasis> form appears as below.</para>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/view-information1.png" format="PNG"/>
@@ -567,7 +566,7 @@
     </itemizedlist>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
-    <title>Copy URL To Clipboard</title>
+    <title>Copy a URL to the clipboard</title>
     <para>
    The <emphasis role="bold">Copy URL To Clipboard</emphasis> enables you to copy the WebDAV URL of a selected folder or a document. You then can view it with the WebDAV view on a browser.
   </para>
@@ -613,7 +612,7 @@
     <procedure>
       <step>
         <para xml:id="proc-User_Guide-Manage_Tags-Edit_a_tag-Step_1">
-     Click <emphasis role="bold">Tag Cloud </emphasis> on the sidebar, then click
+     Click <emphasis role="bold">Tag Cloud </emphasis> on the <emphasis role="bold">Filter</emphasis> bar, then click
      <inlinemediaobject>
             <imageobject>
               <imagedata width="8mm" fileref="images/cloudicon.png" format="PNG"/>
@@ -729,7 +728,7 @@
           </imageobject>
         </mediaobject>
      <para>
-     Depending on the popularity of tag, the display of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added to over 10 documents, it will be displayed in red color, size:20px, bold. This can also be configured in the Administration portlet.
+     Depending on the popularity of tag, the display of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added to over 10 documents, it will be displayed in red color, size:20px, bold. This can also be configured in the <link linkend="sect-User_Guide-Categories_and_Tags-Manage_Tags">Manage Tag</link> tab.
     </para>
       </step>
       <step>
