@@ -599,14 +599,86 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view{
-	background: url(DefaultSkin/background/DetailView.gif) no-repeat center;
+	background: url(DefaultSkin/background/DetailView.png) no-repeat center;
 	width: 23px;
 	height: 24px;
 	display: block;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .anonymous-view{
+	background: url(DefaultSkin/background/DefaultView.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .authoring-view{
+	background: url(DefaultSkin/background/authoring-view.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .taxonomy-list{
+	background: url(DefaultSkin/background/taxonomy-list.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .system-view{
+	background: url(DefaultSkin/background/system-view.png) no-repeat center;
+	display: block;
+}
+
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .wcm-category-view{
+	background: url(DefaultSkin/background/wcm-category-view.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .wcm-view{
+	background: url(DefaultSkin/background/wcm-view.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .taxonomy-icons{
+	background: url(DefaultSkin/background/taxonomy-icons.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .anonymous-view-selected{
+	background: url(DefaultSkin/background/DefaultViewSelected.gif) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .authoring-view-selected{
+	background: url(DefaultSkin/background/authoring-view-selected.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .taxonomy-list-selected{
+	background: url(DefaultSkin/background/taxonomy-list-selected.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .system-view-selected{
+	background: url(DefaultSkin/background/system-view-selected.png) no-repeat center;
+	display: block;
+}
+
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .wcm-category-view-selected{
+	background: url(DefaultSkin/background/wcm-category-view-selected.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .wcm-view-selected{
+	background: url(DefaultSkin/background/wcm-view-selected.png) no-repeat center;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .taxonomy-icons-selected{
+	background: url(DefaultSkin/background/taxonomy-icons-selected.png) no-repeat center;
+	display: block;
+}
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view-selected{
-	background: url(DefaultSkin/background/DetailViewSelected.gif) no-repeat center;
+	background: url(DefaultSkin/background/DetailViewSelected.png) no-repeat center;
 	display: block;
 }
 
