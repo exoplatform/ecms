@@ -38,7 +38,7 @@
            </imageobject>
          </mediaobject>
          <para>For example, select the
-           <emphasis>acme-category</emphasis>
+           <emphasis role="bold">acme-category</emphasis>
            drive as the following illustration.
          </para>
          <mediaobject>

@@ -321,8 +321,8 @@
                         <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="150mm"/>
                     </imageobject>
                 </mediaobject>
-            </step>
-            <step>
+                <itemizedlist>
+                    <listitem>
                 <para>
                     Click
                     <inlinemediaobject>
@@ -330,12 +330,13 @@
                             <imagedata fileref="images/Select_path_icon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
-                    if you want to select the root path or click the arrow icon to go to the up level path. Click the
-                    plus sign to expand the folder.
+                    next to <emphasis role="bold">Root Path</emphasis> if you want to select the root path or;
                 </para>
-            </step>
-            <step>
-                <para>
+                    </listitem>
+                    <listitem>
+                        <para> Click the arrow icon to go to the up level path and click the
+                    plus sign to expand the folder in the left pane.</para>
+                        <para>
                     Click
                     <inlinemediaobject>
                         <imageobject>
@@ -344,6 +345,10 @@
                     </inlinemediaobject>
                     corresponding to the path that you want to select as a home path.
                 </para>
+                    </listitem>
+                </itemizedlist>
+            </step>
+            <step>
                 <para>
                     Click
                     <emphasis role="bold">Reset</emphasis>
@@ -359,9 +364,7 @@
                         <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="150mm"/>
                     </imageobject>
                 </mediaobject>
-            </step>
-            <step>
-                <para>
+                <para> <emphasis role="bold">i.</emphasis>
                     Click
                     <inlinemediaobject>
                         <imageobject>
@@ -394,8 +397,8 @@
                     <emphasis role="bold">User or Group</emphasis>
                     field.
                 </para>
-                <para>
-                    Then, check at least one of these below options to set rights for the selected user to membership:
+                <para><emphasis role="bold">ii.</emphasis>
+                    Check at least one of these below options to set rights for the selected user to membership:
                 </para>
                 <table>
                     <tgroup cols="2">
@@ -446,6 +449,7 @@
                     </tgroup>
                 </table>
             </step>
+
             <step>
                 <para>
                     Click

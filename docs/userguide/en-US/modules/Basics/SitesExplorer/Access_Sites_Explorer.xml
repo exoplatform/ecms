@@ -17,7 +17,7 @@
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
             </imageobject>
-          </inlinemediaobject> on the <emphasis>Administration</emphasis> bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
+          </inlinemediaobject> on the <emphasis role="bold">Administration</emphasis> bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
 			</para>
      
 			 <mediaobject>
@@ -29,7 +29,7 @@
 				</imageobject>
 			</mediaobject>
 			 <para>
-				A list of all drives organized in groups (Personal drives, Group drives and General drives) in the <emphasis role="bold">Sites Explorer</emphasis> displays:
+				A list of all drives organized in groups (<emphasis role="bold">Personal</emphasis> drives, <emphasis role="bold">Group</emphasis> drives and <emphasis role="bold">General</emphasis> drives) in the <emphasis role="bold">Sites Explorer</emphasis> displays.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -48,9 +48,9 @@
 					<term><emphasis role="bold">Personal drives</emphasis></term>
           <listitem>
             <para>
-              Personal drive is the working space of a user. If you want to do in private, select the Private drive, no
+              <emphasis role="bold">Personal</emphasis> drive is the working space of a user. If you want to do in private, select the <emphasis role="bold">Private</emphasis> drive, no
               one else can access or get your private resources. If you want to create resources and share them with
-              others, work in the Public drive.
+              others, work in the <emphasis role="bold">Public</emphasis> drive.
             </para>
           </listitem>
 				</varlistentry>

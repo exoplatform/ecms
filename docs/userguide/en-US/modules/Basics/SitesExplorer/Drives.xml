@@ -23,7 +23,7 @@
 			By default, there are some initialized folders to store private resources of users.
 		</para>
      <para>
-				In <emphasis role="bold">Private</emphasis> drive, there are many functions on the <emphasis role="bold">Action</emphasis> bar, including:
+				In Private drive, there are many functions on the <emphasis role="bold">Action</emphasis> bar, including:
 				</para>
 		 <itemizedlist>
 
@@ -161,6 +161,12 @@
 
 	 <section id="sect-User_Guide-Drives-Public_drive">
 		<title>Public drive</title>
+         <para>
+			With the <emphasis role="bold">Public</emphasis> drive, there is no initialized folder but you can create by yourself.
+		</para>
+		 <para>
+			In the <emphasis role="bold">Public</emphasis> drive, you also can take similar actions to those in the <emphasis role="bold">Private</emphasis> drive.
+		</para>
 		 <mediaobject>
 			<imageobject role="html">
 				<imagedata align="center" fileref="images/publicdrive.png" format="PNG"   />
@@ -168,14 +174,7 @@
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/publicdrive.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
-		 <para>
-			With the <emphasis role="bold">Public</emphasis> drive, there is no initialized folder but you can create by yourself.
-		</para>
-		 <para>
-			In the <emphasis role="bold">Public</emphasis> drive, you also can take actions that is similar in the <emphasis role="bold">Private</emphasis> drive.
-		</para>
 
 	</section>
 	
@@ -194,7 +193,7 @@
 		</mediaobject>
 	</section>
 	
-	 <section id="sect-User_Guide-Drives-Shared_Users_Space_drive">
+	<!-- <section id="sect-User_Guide-Drives-Shared_Users_Space_drive">
 		<title>Shared Users Space drive</title>
      <para>
 			By default, there will be a list of all existing users, and each user has a folder named as his username. This folder includes two sub-folders (private and public). You can see both your private and public folders but only can see the public folder of other users.
@@ -273,7 +272,7 @@
 
 		</itemizedlist>
 
-	</section>
+	</section>         -->
 	
 	 <section id="sect-User_Guide-Drives-Showhide_the_sidebar_in_a_drive">
 		<title>Hide/Show the sidebar in a drive</title>
@@ -310,17 +309,6 @@
 						<para>
 							Deselect the <emphasis role="bold">Show Sidebar</emphasis> checkbox, then click <emphasis role="bold">Save</emphasis> to accept your changes.
 						</para>
-						 <para>
-							The drive will be displayed like the illustration below.
-						</para>
-						 <mediaobject>
-							<imageobject role="html">
-								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG"   />
-							</imageobject>
-							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" />
-							</imageobject>
-						</mediaobject>
 					</step>
 				</procedure>
           <itemizedlist>
@@ -331,10 +319,17 @@
 					</listitem>
          </itemizedlist>
 				<para xml:id="proc-User_Guide-Showhide_the_sidebar_in_a_drive-Method_2"><emphasis role="bold">The second way</emphasis></para>		 
-				<procedure>
-					 <step>
+				<itemizedlist>
+                    <listitem>
 						<para>
-							Simply click the <emphasis role="bold">Expand</emphasis> icon to hide the sidebar as the illustration below.
+							Simply click  <inlinemediaobject>
+								<imageobject>
+                           <imagedata fileref="images/expand_icon.png" format="PNG" width="10mm" />
+								</imageobject>
+                        <textobject>
+                           <phrase>sprocket</phrase>
+                        </textobject>
+							</inlinemediaobject> to hide the sidebar as the illustration below.
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -344,12 +339,31 @@
                         <imagedata align="center"  fileref="images/sidebarborder.png" format="PNG" width="150mm" />
 							</imageobject>
 						</mediaobject>
-					</step>
-					 <step>
-						<para>
-							Click the <emphasis role="bold">Collapse</emphasis> icon to show the sidebar.
+                        <para>
+							The drive will be displayed like the illustration below.
 						</para>
-					</step>
-				</procedure>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG"   />
+							</imageobject>
+							 <imageobject role="fo">
+                        <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" />
+							</imageobject>
+						</mediaobject>
+                    </listitem>
+                    <listitem>
+						<para>
+							Click  <inlinemediaobject>
+								<imageobject>
+                           <imagedata fileref="images/collapse_icon.png" format="PNG" width="10mm" />
+								</imageobject>
+                        <textobject>
+                           <phrase>sprocket</phrase>
+                        </textobject>
+							</inlinemediaobject> to show the sidebar.
+						</para>
+                    </listitem>
+                </itemizedlist>
+
 	</section>
 </section>

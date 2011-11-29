@@ -7,8 +7,6 @@
 <section id="sect-User_Guide-Content_Presentation_Manager">
     <!--    This document was created with Syntext Serna Free.    -->
     <title>Content Presentation</title>
-    <para>
-    </para>
     <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
         <title>Manage a template</title>
         <para>
@@ -69,7 +67,7 @@
                 <para>
                     Specify a name for the template in the
                     <emphasis role="bold">Label</emphasis>
-                    field.
+                    field. It is required.
                 </para>
             </step>
             <step>
@@ -91,13 +89,15 @@
                     <emphasis role="bold">Permission</emphasis>
                     field to open the
                     <emphasis role="bold">Select Permission</emphasis>
-                    dialog.
+                    dialog. It is required.
                 </para>
-            </step>
-            <step>
+                <itemizedlist>
+                    <listitem>
                 <para>
                     Select the group from the left pane and the membership from the right pane. Or,
                 </para>
+                    </listitem>
+                    <listitem>
                 <para>
                     You can set permissions for everyone by clicking
                     <inlinemediaobject>
@@ -108,6 +108,8 @@
                     next to
                     <emphasis role="bold">Any Permission.</emphasis>
                 </para>
+                    </listitem>
+                </itemizedlist>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
@@ -120,7 +122,7 @@
             </step>
             <step>
                 <para>
-                    Select the
+                    Optionally, select the
                     <emphasis role="bold">Dialog</emphasis>
                     tab and enter the value in the
                     <emphasis role="bold">Dialog Content</emphasis>
@@ -129,7 +131,7 @@
             </step>
             <step>
                 <para>
-                    Select the
+                    Optionally, select the
                     <emphasis role="bold">View</emphasis>
                     tab and enter the value in the
                     <emphasis role="bold">View Content</emphasis>
@@ -138,7 +140,7 @@
             </step>
             <step>
                 <para>
-                    Select the
+                    Optionally, select the
                     <emphasis role="bold">CSS</emphasis>
                     tab and enter the value in the
                     <emphasis role="bold">CSS Content</emphasis>
@@ -170,7 +172,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
@@ -225,7 +227,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                                    <imagedata fileref="images/editicon4.png" format="PNG"/>
                                 </imageobject>
                             </inlinemediaobject>
                             in the dialog row you want to edit.
@@ -307,7 +309,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                                    <imagedata fileref="images/editicon4.png" format="PNG"/>
                                 </imageobject>
                             </inlinemediaobject>
                             in the
@@ -433,6 +435,14 @@
                     Click
                     <emphasis role="bold">Content Presentation --> Manage Metadata.</emphasis>
                 </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/manage_metadata.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="150mm" align="center" fileref="images/manage_metadata.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
             </step>
             <step>
                 <para>
@@ -470,11 +480,11 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Template's Action</emphasis>
+                    <emphasis role="bold">Template's Actions</emphasis>
                     column, corresponding to the metadata you want to edit.
                 </para>
                 <para>
@@ -531,7 +541,7 @@
             The
             <emphasis role="bold">Manage View</emphasis>
             function is used to control view ways of a user. It has two tabs:
-            <emphasis role="bold">View</emphasis> and <emphasis>ECM Templates</emphasis>
+            <emphasis role="bold">View</emphasis> and <emphasis role="bold">ECM Templates</emphasis>
         </para>
         <para>
             To open the
@@ -588,14 +598,12 @@
                 <para>
                     Specify the view name in the
                     <emphasis role="bold">Name</emphasis>
-                    field that must be unique, and only contains standard alphanumeric characters.
+                    field that must be unique, and only contains standard alphanumeric characters. It is required.
                 </para>
             </step>
             <step>
                 <para>
-                    Set permissions for the view by clicking the plus icon. Select a group from the left pane and the
-                    membership from the right pane.
-                </para>
+                    Set permissions for the view by clicking the plus icon. It is required. </para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
@@ -605,13 +613,71 @@
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
+                <itemizedlist>
+                    <listitem>
+                        <para>Click <inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/plus_icon.png" format="PNG"/>
+                        </imageobject>
+                    </inlinemediaobject>
+                        next to <emphasis role="bold">Any Permission</emphasis> to assign permission to every one. </para>
+                    </listitem>
+                    <listitem>
+                        <para>Or select a group from the left pane and the
+                    membership from the right pane.</para>
+                    </listitem>
+                </itemizedlist>
+
             </step>
             <step>
                 <para>
                     Click the
                     <emphasis role="bold">Templates</emphasis>
-                    field and select the correct template for this view.
+                    field and select a template from the drop-down menu for this view.
                 </para>
+            </step>
+            <step>
+                <para>Click the <emphasis role="bold">Add Tab</emphasis> button to create a functional tab on this view. It is required.</para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/tabform.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="146mm" align="center" fileref="images/tabform.png"
+                                   format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+
+                        <para><emphasis role="bold">i.</emphasis> Enter the name for the tab in the <emphasis role="bold">Name</emphasis> field. </para>
+
+                        <para><emphasis role="bold">ii.</emphasis> Specify functions to add to the tab.</para>
+
+                        <para><emphasis role="bold">iii.</emphasis> Click <emphasis role="bold">Save</emphasis> to finish creating a tab;</para>
+                        <para>Or click
+                            <emphasis role="bold">Reset</emphasis>
+                            to clear the
+                            <emphasis role="bold">Tab</emphasis>
+                            form;
+                        </para>
+                        <para>
+                            Or click
+                            <emphasis role="bold">Back</emphasis>
+                            to return to the
+                            <emphasis role="bold">View Form</emphasis>
+                            tab of the
+                            <emphasis role="bold">Add View</emphasis>
+                            form.
+                        </para>
+                <para>The newly created tab is displayed on the <emphasis role="bold">Tabs</emphasis> field.</para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/addviewform.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="146mm" align="center" fileref="images/addviewform.png"
+                                   format="PNG"/>
+                    </imageobject>
+                </mediaobject>
             </step>
             <step>
                 <para>
@@ -632,13 +698,22 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
                     <emphasis role="bold">Action</emphasis>
-                    column, corresponding to view you want to edit.
+                    column, corresponding to the view you want to edit.
                 </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/addviewform.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata width="146mm" align="center" fileref="images/addviewform.png"
+                                   format="PNG"/>
+                    </imageobject>
+                </mediaobject>
             </step>
             <step>
                 <para>
@@ -669,56 +744,17 @@
             </step>
             <step>
                 <para>
-                    Click the
+                    Optionally, click the
                     <emphasis role="bold">Add Tab</emphasis>
                     button to open the
                     <emphasis role="bold">Tab Form</emphasis>
                     tab that allows you to add more Tabs to the View.
-                    <mediaobject>
-                        <imageobject role="html">
-                            <imagedata align="center" fileref="images/img-View_Form.png" format="PNG"/>
-                        </imageobject>
-                        <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/img-View_Form.png" format="PNG"/>
-                        </imageobject>
-                    </mediaobject>
                 </para>
-                <substeps>
-                    <step performance="optional">
-                        <para>
-                            <emphasis role="bold">i.</emphasis>
-                            Specify the Tab name and select functions for the Tab.
-                        </para>
-                    </step>
-                    <step performance="optional">
-                        <para>
-                            <emphasis role="bold">ii.</emphasis>
-                            Click
-                            <emphasis role="bold">Save</emphasis>
-                            to accept adding a new Tab to the View;
-                        </para>
-                        <para>Or click
-                            <emphasis role="bold">Reset</emphasis>
-                            to clear the
-                            <emphasis role="bold">Tab</emphasis>
-                            form;
-                        </para>
-                        <para>
-                            Or click
-                            <emphasis role="bold">Back</emphasis>
-                            to return to the
-                            <emphasis role="bold">View Form</emphasis>
-                            tab of the
-                            <emphasis role="bold">Edit View</emphasis>
-                            form.
-                        </para>
-                    </step>
-                </substeps>
             </step>
             <step>
                 <para>Optionally, click an added
                     <emphasis role="bold">Tab</emphasis>
-                    to add or remove functions on it.
+                    to add or remove functions on it. Note that you cannot change the tab name.
                 </para>
             </step>
             <step>
@@ -820,6 +856,14 @@
                         <emphasis role="bold">ECM Templates</emphasis>
                         tab.
                     </para>
+                    <mediaobject>
+                        <imageobject role="html">
+                            <imagedata align="center" fileref="images/ECMS-template.png" format="PNG"/>
+                        </imageobject>
+                        <imageobject role="fo">
+                            <imagedata width="150mm" align="center" fileref="images/ECMS-template.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
                 </step>
                 <step>
                     <para>
@@ -880,7 +924,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                                <imagedata fileref="images/editicon4.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
                         next to the template you want to edit.
@@ -1004,7 +1048,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                                <imagedata fileref="images/editicon4.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
                         in the

@@ -110,7 +110,7 @@
         </mediaobject>
       </para>
       <para>
-     The <emphasis>Clipboard</emphasis> window will appear.
+     The <emphasis role="bold">Clipboard</emphasis> window will appear.
     
         <mediaobject>
           <imageobject role="html">
@@ -197,138 +197,6 @@
     <para>
    To edit a document, refer to the <link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">Edit a web content</link> section.
   </para>
-  </section>
-  <section id="sect-User_Guide-Actions_on_Folders_and_Documents-CutPaste">
-    <title>Cut/Paste</title>
-    <para>
-   This function is used to move a node (including sub-nodes) to other places. There are two ways to cut/paste documents:
-  </para>
-  <para xml:id="proc-User_Guide-CutPaste-Method_One"><emphasis role="bold">The first way</emphasis></para>
-    <procedure>
-      <step>
-        <para>
-     Right-click a node, then select <emphasis role="bold">Cut</emphasis> from the drop-down menu.
-    </para>
-      </step>
-      <step>
-        <para>
-     Right-click the destination node that you want to be the parent node of the cut node, and click <emphasis role="bold">Paste</emphasis> from the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after the <emphasis role="bold">Cut</emphasis> action has been selected.
-    </para>
-      </step>
-      <step>
-    <para>
-     The cut node (and its sub-nodes) will be pasted into the newly selected path.
-    </para>
-      </step>
-    </procedure>
-	<para xml:id="proc-User_Guide-CutPaste-Method_Two"><emphasis role="bold">The second way</emphasis></para>
-    <procedure>
-      <step>
-        <para>
-     Right-click a node, then select <emphasis role="bold">Cut</emphasis> from the drop-down menu.
-    </para>
-      </step>
-      <step>
-        <para>
-     Select the destination node that you want to be the parent node of the cut node.
-    </para>
-      </step>
-      <step>
-        <para>
-     Select the Clipboard icon.
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="60mm" align="center" fileref="images/clipboarditem.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-        <para>
-     The <emphasis role="bold">Clipboard</emphasis> window will appear.
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="61mm" align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>
-     Click 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata width="6mm" fileref="images/clipboardicon.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>clipboard</phrase>
-            </textobject>
-          </inlinemediaobject> in the Clipboard window to paste the copied node into the selected destination node in Step 3.
-    </para>
-      </step>
-      </procedure>
-    <itemizedlist>
-    <listitem>
-        <para>
-     You can click 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>trash can</phrase>
-            </textobject>
-          </inlinemediaobject> to delete a specific waiting statement.
-    </para>
-      </listitem>
-      <listitem>
-        <para>
-     You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
-    </para>
-      </listitem>
-   <listitem>
-    <para>
-   After the action has been taken, a confirmation message will appear with detailed information about the destination path.
-  </para>
-  </listitem>
-  </itemizedlist>
-    <note>
-      <para>See the important note about Cut/Paste information <link linkend="note-copy-paste-info">here</link>.</para>
-    <!--  <title>Cut/Paste Information</title>
-      <para>You he ineed to pay attention to the followings:</para>
-      <itemizedlist>
-        <listitem>
-          <para>
-      Only can take the <emphasis role="bold">Cut</emphasis> action if you have the right on the source node.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      Only can take the <emphasis role="bold">Paste</emphasis> action if you have the right on the destination node.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-    If the destination node has the same name with the cut/copied node, after being pasted, an index will be added to the name of the pasted node, for example <emphasis>Live</emphasis> and <emphasis>Live[2]</emphasis>. 
-
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      You cannot cut a content folder into a document folder.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      After taking the <emphasis role="bold">Cut</emphasis> action, you can take the <emphasis role="bold">Paste</emphasis> action on different nodes before taking the another <emphasis role="bold">Cut</emphasis> action.
-     </para>
-        </listitem>
-      </itemizedlist> -->
-    </note>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
     <title>Delete folders and documents</title>
@@ -647,7 +515,7 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+              <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>

@@ -66,10 +66,10 @@
         </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"/>
+            <imagedata align="center" fileref="images/template_list.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" width="150mm"/>
+            <imagedata align="center" fileref="images/template_list.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -77,7 +77,7 @@
         <para>
           Select a template to present the web content by clicking one.
         </para>
-        <itemizedlist>
+      <!--  <itemizedlist>
           <listitem>
             <para>
               <emphasis role="bold">Free layout webcontent:</emphasis> This template is a free layout.
@@ -90,7 +90,7 @@
               The image will be put at the head of a site.
             </para>
           </listitem>
-        </itemizedlist>
+        </itemizedlist>  -->
         <!--  Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          -->
       </step>
       <step>
@@ -349,14 +349,6 @@
           <emphasis role="bold">Delete</emphasis>
           from the drop-down menu.
         </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/selectdelete.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata align="center" fileref="images/selectdelete.png" format="PNG" width="75mm"/>
-          </imageobject>
-        </mediaobject>
       </step>
       <step>
         <para>

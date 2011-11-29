@@ -81,7 +81,7 @@
                 Hover your cursor over the portlet, then click
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="images/editicon4.png" format="PNG"/>
+                        <imagedata fileref="images/edit_icon1.png" format="PNG"/>
                     </imageobject>
                     <textobject>
                         <phrase>pencil</phrase>
@@ -145,7 +145,7 @@
               Click
      <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/previewicon.png" format="PNG"/>
+                  <imagedata fileref="images/previewicon1.png" format="PNG"/>
                 </imageobject>
                 <textobject>
                    <phrase>magnifying glass</phrase>

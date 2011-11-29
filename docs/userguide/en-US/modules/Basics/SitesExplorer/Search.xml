@@ -120,7 +120,7 @@
               <phrase>"Saved Search"</phrase>
             </textobject>
           </inlinemediaobject>
-          on the sidebar.
+          on the <emphasis role="bold">Filter</emphasis> bar.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -369,7 +369,7 @@
           <para>
             Add the required constraints using one of the following methods:
           </para>
-          <orderedlist>
+          <itemizedlist>
             <listitem>
               <para>
                 <link linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values">Add a constraint for exact values</link>
@@ -395,7 +395,7 @@
                 <link linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_category">Add a constraint by category</link>
               </para>
             </listitem>
-          </orderedlist>
+          </itemizedlist>
         </step>
         <step>
           <para>
@@ -459,7 +459,7 @@
             </step>
             <step>
               <para>
-                Enter the property you want to locate or click the
+                Enter the property you want to locate or click
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="9mm"/>
@@ -468,7 +468,7 @@
                     <phrase>"Add property"</phrase>
                   </textobject>
                 </inlinemediaobject>
-                icon.
+                .
               </para>
               <mediaobject>
                 <imageobject role="html">

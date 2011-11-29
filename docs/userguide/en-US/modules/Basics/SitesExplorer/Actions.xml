@@ -53,8 +53,8 @@
   <section id="sect-User_Guide-Actions-Add_a_document">
     <title>Add a document</title>
     <para>
-      There are several types of document in &PRODUCT;, including <emphasis role="bold">File, Article, Podcast, Sample
-      node, File Plan, Kofax</emphasis>.
+      There are several types of document in &PRODUCT;, such as <emphasis role="bold">File, Article, Podcast, Sample
+      node, File Plan, Kofax and more.</emphasis>.
     </para>
     <para>
       The table below shows types of nodes which can be added to various document types. The rows indicate which nodes
@@ -855,6 +855,14 @@ After being created successfully, a file document with type text/html will be di
             <emphasis role="bold">Podcast</emphasis>
             form.
         </para>
+          <mediaobject>
+              <imageobject role="html">
+                  <imagedata align="center" fileref="images/podcast_form.png" format="PNG"/>
+              </imageobject>
+              <imageobject role="fo">
+                  <imagedata width="150mm" align="center" fileref="images/podcast_form.png" format="PNG"/>
+              </imageobject>
+          </mediaobject>
         <para>
           <emphasis role="bold">Details:</emphasis>
         </para>
@@ -956,9 +964,9 @@ After being created successfully, a file document with type text/html will be di
         <imagedata width="150mm" align="center" fileref="images/podcastscreen.png" format="PNG"/>
       </imageobject>
     </mediaobject>
-    <para>
+   <!-- <para>
       Podcasts can be listened to immediately, or transferred to another device.
-    </para>
+    </para>       -->
      <citetitle>
 	<para xml:id="proc-User_Guide-Add_a_document-Create_a_new_Sample_node"><emphasis role="bold">Create a new Sample node</emphasis></para>
     </citetitle>
@@ -1560,7 +1568,7 @@ After being created successfully, a file document with type text/html will be di
       </step>
       <step>
         <para>
-          Input value for both <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Title</emphasis> fields which are required. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in these fields.
+          Input values for both <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Title</emphasis> fields which are required. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in these fields.
         </para>
       </step>
       <step>
@@ -1685,12 +1693,12 @@ After being created successfully, a file document with type text/html will be di
   <section id="sect-User_Guide-Actions-Add_symlink">
     <title>Add a Symlink</title>
     <para>
-      You also easily add a Symlink for a document. This function allows you to access your desired documents quickly.
+      You also easily add a Symlink to a document. This function allows you to access your desired documents quickly.
     </para>
     <procedure>
       <step>
         <para>
-          Select a document that you want to add a Symlink.
+          Select a node where you want to add a Symlink.
         </para>
       </step>
       <step>
@@ -2214,86 +2222,9 @@ After being created successfully, a file document with type text/html will be di
               <imagedata width="150mm" align="center" fileref="images/addactionstab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
-        </step>
-        <step>
-          <para>
-            Select one type for your action from the
-            <emphasis role="bold">Create Action of Type</emphasis>
-            drop-down menu.
-          </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/typeactions.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="64mm" align="center" fileref="images/typeactions.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-          <para>
-            <emphasis role="bold">Details:</emphasis>
-          </para>
-          <table>
-            <tgroup cols="2">
-              <thead>
-                <row>
-                  <entry>Field</entry>
-                  <entry>Description</entry>
-                </row>
-              </thead>
-              <tbody>
-                <row>
-                  <entry><emphasis role="bold">exo:AddMetadataAction</emphasis></entry>
-                  <entry>Add metadata.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:autoVersioning</emphasis></entry>
-                  <entry>Add a version automatically.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:createRSSFeedAction</emphasis></entry>
-                  <entry>Create an RSS file.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:enableVersioning</emphasis></entry>
-                  <entry>Enable versioning.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:getMailAction</emphasis> </entry>
-                  <entry>Fetch mails.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:populateToMenu</emphasis></entry>
-                  <entry>This type is not supported.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:sendMailAction</emphasis></entry>
-                  <entry>Send mails.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:taxonomyAction</emphasis></entry>
-                  <entry>Create categories.</entry>
-                </row>
-                <row>
-                  <entry><emphasis role="bold">exo:transformBinaryTo TextAction</emphasis></entry>
-                  <entry>Convert 
-                    <emphasis>.pdf</emphasis>
-                    or
-                    <emphasis>.doc</emphasis>
-                    file types into plain text.
-                  </entry>
-                </row>
-              </tbody>
-            </tgroup>
-          </table>
-        </step>
-        <step>
-          <para>
-            Complete all the fields in the form. The <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Lifecycle</emphasis> fields are required.
-          </para>
           <para>
                 <emphasis role="bold">Details:</emphasis>
             </para>
-          <para>
             <table frame="all">
               <tgroup cols="2">
                 <colspec colname="c1"/>
@@ -2377,6 +2308,81 @@ After being created successfully, a file document with type text/html will be di
                 </tbody>
               </tgroup>
             </table>
+        </step>
+        <step>
+          <para>
+            Select one type for your action from the
+            <emphasis role="bold">Create Action of Type</emphasis>
+            drop-down menu.
+          </para>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/typeactions.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="64mm" align="center" fileref="images/typeactions.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+          <para>
+            <emphasis role="bold">Details:</emphasis>
+          </para>
+          <table>
+            <tgroup cols="2">
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>Description</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry><emphasis role="bold">exo:AddMetadataAction</emphasis></entry>
+                  <entry>Add metadata.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:autoVersioning</emphasis></entry>
+                  <entry>Add a version automatically.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:createRSSFeedAction</emphasis></entry>
+                  <entry>Create an RSS file.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:enableVersioning</emphasis></entry>
+                  <entry>Enable versioning.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:getMailAction</emphasis> </entry>
+                  <entry>Fetch mails.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:populateToMenu</emphasis></entry>
+                  <entry>This type is not supported.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:sendMailAction</emphasis></entry>
+                  <entry>Send mails.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:taxonomyAction</emphasis></entry>
+                  <entry>Create categories.</entry>
+                </row>
+                <row>
+                  <entry><emphasis role="bold">exo:transformBinaryTo TextAction</emphasis></entry>
+                  <entry>Convert 
+                    <emphasis>.pdf</emphasis>
+                    or
+                    <emphasis>.doc</emphasis>
+                    file types into plain text.
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </step>
+        <step>
+          <para>
+            Complete all the fields in the form. The <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Lifecycle</emphasis> fields are required.
           </para>
         </step>
         <step>
@@ -2401,7 +2407,7 @@ After being created successfully, a file document with type text/html will be di
       </para>
       <note>
         <para>
-          Not all actions are listed in a right-click menu of nodes. Some actions will be performed immediately when that action is
+          Not all actions are listed in a right-click menu of nodes. Some actions can be performed immediately when that action is
           added.
         </para>
       </note>
@@ -2516,10 +2522,10 @@ After being created successfully, a file document with type text/html will be di
           </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" fileref="images/availableactions.png" format="PNG"/>
+              <imagedata align="center" fileref="images/availableactions1.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/availableactions.png" format="PNG"/>
+              <imagedata width="150mm" align="center" fileref="images/availableactions1.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2713,6 +2719,14 @@ After being created successfully, a file document with type text/html will be di
           <para>
             Select your desired category. The documents in that category will be listed.
           </para>
+          <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/view-category.pngg" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="105mm" align="center" fileref="images/view-category.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
         </step>
       </procedure>
       <note>
@@ -2724,14 +2738,6 @@ After being created successfully, a file document with type text/html will be di
           When copying and pasting a node in the category tree, a reference to the original node will be created. This
           reference is a link rather than a copy. This feature is used to preserve the disk space.
 		</para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/categoryreferencednodes.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata width="105mm" align="center" fileref="images/categoryreferencednodes.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
       </note>
     </section>
     <section id="sect-User_Guide-Manage_Categories-Delete_a_Category">
@@ -2853,7 +2859,7 @@ After being created successfully, a file document with type text/html will be di
         <para>
           The
           <emphasis role="bold">Manage Publication</emphasis>
-          form appears:
+          form appears.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -3052,7 +3058,7 @@ After being created successfully, a file document with type text/html will be di
         </step>
         <step>
           <para>
-            Click the relation button on the side pane.
+            Click the relation button on the <emphasis role="bold">Filter</emphasis> bar.
           </para>
           <mediaobject>
             <imageobject role="html">
@@ -3504,7 +3510,7 @@ After being created successfully, a file document with type text/html will be di
         </para>
         <para>
           The
-          <emphasis role="bold">Multi-language</emphasis>
+          <emphasis role="bold">Multi Language</emphasis>
           form will appear.
         </para>
         <mediaobject>
@@ -3578,7 +3584,7 @@ After being created successfully, a file document with type text/html will be di
         <para>
           Select a document that you want to view the languages list, then click the
           <emphasis role="bold">Relation</emphasis>
-          button on side pane:
+          button on the <emphasis role="bold">Filter</emphasis> bar:
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -3608,7 +3614,7 @@ After being created successfully, a file document with type text/html will be di
         <para>
             For more details about <emphasis role="bold">Relations</emphasis>, refer to the
             <link
-                    linkend="sect-User_Guide-Manage_Relations-View_Relations">Views Relations
+                    linkend="sect-User_Guide-Manage_Relations-View_Relations">Views relations
             </link>
             section.
         </para>
@@ -3627,7 +3633,7 @@ After being created successfully, a file document with type text/html will be di
     <title>Overload thumbnails</title>
     <para xml:id="proc-User_Guide-Overload_Thumbnails-Overload_thumbnails">
       You can overload a thumbnail image for a folder. Overloading allows a folder to be represented by a
-      thumbnail image, rather than a folder icon (see the <link linkend="sect-User_Guide-Views-Thumbnails_View">Thumnail view</link> section).
+      thumbnail image, rather than a folder icon (see the <link linkend="sect-User_Guide-Views-Thumbnails_View">Thumbnail view</link> section).
     </para>
     <procedure>
       <step>
@@ -3739,7 +3745,7 @@ After being created successfully, a file document with type text/html will be di
               <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.
               </emphasis>
               See the
-              <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage Views</link>
+              <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link>
               section
               to know how to add the
               <emphasis role="bold">Approve Content</emphasis>
@@ -3786,7 +3792,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
             </imageobject>
             </inlinemediaobject> <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.</emphasis> See the
-            <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage Views</link> section
+            <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section
             to know how to add the <emphasis role="bold">Publish Content</emphasis> button to the tabs on the <emphasis role="bold">Action</emphasis> bar in <emphasis role="bold">Sites Explorer.</emphasis>
           </para>
         </note>
@@ -3850,7 +3856,7 @@ After being created successfully, a file document with type text/html will be di
           </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar.
         </para>
       </step>
-      <step>
+    <!--  <step>
         <para>
           Click 
           <inlinemediaobject>
@@ -3874,7 +3880,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata width="142mm" align="center" fileref="images/savemessage.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-      </step>
+      </step>     -->
       </procedure>
       <citetitle>
       <para xml:id="step-User_Guide-Show_JCR_Structure-Hide_the_JCR_structure"><emphasis role="bold">Hide the JCR Structure</emphasis></para>
@@ -4327,9 +4333,8 @@ After being created successfully, a file document with type text/html will be di
     <title>View metadata</title>
     <para>
       This function allows you to view metadata attached to File nodes, Podcast nodes, File Plan child nodes and
-      uploaded file nodes (
-      <emphasis role="bold">nt:file</emphasis>
-      nodes)
+      uploaded file nodes (<emphasis role="bold">nt:file</emphasis>
+      nodes).
     </para>
     <procedure>
       <step>
@@ -4651,7 +4656,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+              <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
@@ -4836,7 +4841,7 @@ After being created successfully, a file document with type text/html will be di
       In this form, you can edit a property by clicking 
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+          <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>pencil</phrase>
@@ -4990,7 +4995,15 @@ After being created successfully, a file document with type text/html will be di
     <para>
       <emphasis role="bold">Watch a document</emphasis></para> </citetitle>
         <para>
-          Select the document you want to watch.
+          Select the document you want to watch and click
+      <inlinemediaobject>
+        <imageobject>
+          <imagedata width="8mm" fileref="images/watchicon.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>eye</phrase>
+        </textobject>
+      </inlinemediaobject>.
         </para>
         <para>
           The

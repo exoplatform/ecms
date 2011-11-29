@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Introduction_Content_Structure">
+    <para>
+        <emphasis role="bold">Content</emphasis> is a main part of a website that may consist of various elements, such as texts, images, sounds, videos,
+        animations, and more. In eXo Platform, you can manage both structured and unstructured content.
+    </para>
+
+    <para>To create and manage the content more effectively and dynamically, you need to pay attention to the structure
+        of each content, including:
+    </para>
+
+    <para><emphasis role="bold">Main content</emphasis> contains all key contents, such as texts, images, links, tables, and more.</para>
+
+    <para><emphasis role="bold">Illustration</emphasis> is an image which is used to clarify or explain the content. Also, a summary also can be added to
+        this image.
+    </para>
+
+    <para><emphasis role="bold">default.css</emphasis> contains CSS data which are used to present the web content, such as layout, font, color, and
+        more.
+    </para>
+
+    <para><emphasis role="bold">default.js</emphasis> contains JS data which are used to make web content more animating and dynamic.</para>
+
+</section>

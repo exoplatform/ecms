@@ -355,18 +355,18 @@
             </textobject>
 			</inlinemediaobject>.
 		</para>
-		 <para>
-			All the nodes, which have been created and uploaded, will be displayed.
-		</para>
-		 <mediaobject>
+         <mediaobject>
 			<imageobject role="html">
 				<imagedata align="center" fileref="images/timelineview.png" format="PNG"  />
 			</imageobject>
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/timelineview.png" format="PNG" width="62mm" />
 			</imageobject>
-
 		</mediaobject>
+		 <para>
+			All the nodes, which have been created and uploaded, will be displayed.
+		</para>
+
 		 <para>
 			You can directly click the node name to view its content in details.
 		</para>
