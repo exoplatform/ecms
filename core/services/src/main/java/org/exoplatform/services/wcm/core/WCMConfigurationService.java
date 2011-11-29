@@ -54,6 +54,8 @@ public class WCMConfigurationService {
   public static final String PRINT_VIEWER_PAGE              = "printViewerPage";
 
   public static final String EDITOR_PAGE_URI                = "editorPageURI";
+  
+  public static final String SITE_EXPLORER_URI              = "siteExplorerURI";
 
   public static final String CREATE_WIKI_PAGE_URI           = "createWikiPageURI";
 

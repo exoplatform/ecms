@@ -443,7 +443,9 @@ public class Utils {
     String backto = pContext.getRequestURI();
     WCMConfigurationService configurationService = Util.getUIPortalApplication()
                                                        .getApplicationComponent(WCMConfigurationService.class);
-    String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
+    String editorPageURI = configurationService.getRuntimeContextParam(
+                               isEditable || isNew ? WCMConfigurationService.EDITOR_PAGE_URI :
+                                                     WCMConfigurationService.SITE_EXPLORER_URI);
     UserNode editorNode = getEditorNode(editorPageURI);
 
     if (editorNode == null) {

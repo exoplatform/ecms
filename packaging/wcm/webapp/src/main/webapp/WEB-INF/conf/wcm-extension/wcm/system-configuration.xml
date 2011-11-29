@@ -40,6 +40,7 @@
         <property name="printViewerPage" value="printviewer" />
         <property name="createWikiPageURI" value="wikipresentation" />
         <property name="editorPageURI" value="editor" />
+        <property name="siteExplorerURI" value="siteExplorer" />
 
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
         <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
