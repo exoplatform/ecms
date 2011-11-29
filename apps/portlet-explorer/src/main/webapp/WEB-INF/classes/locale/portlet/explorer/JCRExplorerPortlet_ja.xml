@@ -858,7 +858,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>アップロードアイコンを使ったサーバに選択されたファイルがアップロードされたことを確認してください。</fileName-error>
+      <fileName-error>Please select a file to upload.</fileName-error>
       <taxonomyPath-error>分類を選択してください。</taxonomyPath-error>
       <fileName-invalid>ファイル名に無効な文字列が使われています。ファイル名入力するか、他のファイルを選択してください。</fileName-invalid>
       <fileName-invalid-with-name>ファイル名 '{0}' に無効な文字列が使われています。ファイル名入力するか、他のファイルを選択してください。</fileName-invalid-with-name>

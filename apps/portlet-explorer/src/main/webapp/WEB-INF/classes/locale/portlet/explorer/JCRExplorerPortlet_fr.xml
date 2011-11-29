@@ -866,7 +866,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Assurez-vous d'avoir uploadé le fichier sur le serveur (icône d'upload).</fileName-error>
+      <fileName-error>S'il vous plaît,sélectionner un fichier à uploader.</fileName-error>
       <taxonomyPath-error>Choisissez une taxonomie!</taxonomyPath-error>
       <fileName-invalid>Caractères invalides détectés dans le nom du fichier uploadé.</fileName-invalid>
       <fileName-invalid-with-name>Caractères invalides détectés dans le nom du fichier uploadé '{0}'.</fileName-invalid-with-name>

@@ -873,7 +873,7 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <fileName-error>Xin vui lòng chắc chắn rằng bạn đã lên tập tin đã chọn lên máy chủ bằng cách sử dụng biểu tượng tải lên.</fileName-error>
+      <fileName-error>Vui lòng chọn một file để tải lên.</fileName-error>
       <taxonomyPath-error>Vui lòng chọn danh mục!</taxonomyPath-error>
       <fileName-invalid>Có một số kí tự không hợp lệ trong tên tập tin. Vui lòng gõ lại tên tập tin hoặc tải một tập tin khác.</fileName-invalid>
       <fileName-invalid-with-name>Có một số kí tự không hợp lệ trong tên tập tin '{0}'. Vui lòng gõ lại tên tập tin hoặc tải một tập tin khác.</fileName-invalid-with-name>

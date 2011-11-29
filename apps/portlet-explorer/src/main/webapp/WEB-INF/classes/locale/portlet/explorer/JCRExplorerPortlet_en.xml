@@ -867,7 +867,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please upload the selected file to the server by using the upload icon.</fileName-error>
+      <fileName-error>Please select a file to upload.</fileName-error>
       <taxonomyPath-error>Please select the category.</taxonomyPath-error>
       <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
       <fileName-invalid-with-name>The file name '{0}' contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid-with-name>

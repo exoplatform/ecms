@@ -947,8 +947,7 @@
 			<Cancel>#{word.cancel}</Cancel>
 		</action>
 		<msg>
-			<fileName-error>Gebruik upload icoon op geselecteerd bestand naar
-				server up te loaden</fileName-error>
+			<fileName-error>Please select a file to upload.</fileName-error>
 			<taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
 			<fileName-invalid>Bestandsnaam bevat ongeldige karakters. Type
 				bestandsnaam of andere bestand uploaden.</fileName-invalid>

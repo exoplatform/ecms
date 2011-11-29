@@ -816,7 +816,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>يرجى التأكد من تحميل الملف عن طريق استخدام أيقونة التحميل.</fileName-error>
+      <fileName-error>Please select a file to upload.</fileName-error>
       <taxonomyPath-error>اختر التصنيف!</taxonomyPath-error>
       <fileName-invalid>هذا الاسم يحمل حروف غير مناسبة. أدخل اسم الملف أو حمل ملف آخر.</fileName-invalid>
       <fileSize-too-big>حجم الملف كبير جدا. يجب تقسيم لبعض الملفات أو استخدام التحميل عن طريق WebDav.</fileSize-too-big>

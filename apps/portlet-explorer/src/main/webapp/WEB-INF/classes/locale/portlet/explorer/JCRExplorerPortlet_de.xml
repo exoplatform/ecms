@@ -2601,7 +2601,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the upload icon.</fileName-error>
+      <fileName-error>Please select a file to upload.</fileName-error>
       <taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
       <fileName-invalid>Have some invalid characters in file name. Type file name or upload other file, please.</fileName-invalid>
       <fileSize-too-big>File size is too big. You should split to some small files or use WebDav upload.</fileSize-too-big>
