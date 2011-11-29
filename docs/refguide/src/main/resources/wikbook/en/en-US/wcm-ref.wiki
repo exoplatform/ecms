@@ -184,6 +184,9 @@ h3. SiteSearchService {anchor:id=CONTref.JavaServices.SiteSearchService}
 h3. SEOService  {anchor:id=CONTref.JavaServices.SEOService}
  {include:document="pages/services/SEO.wiki" /}
 
+h2. Deprecated portlets {anchor:id=CONTref.Deprecated_portlets}
+{include:document="pages/deprecatedPortlets.wiki" /}
+
 h2. FAQ {anchor:id=CONTref.FAQ}
   {include:document="pages/faq/faq.wiki" /}
 
