@@ -70,18 +70,25 @@
 }
 
 .UIJCRExplorerPortlet .ShowDrivesButton{
-  background: white url('DefaultSkin/icons/DriversButton.png') no-repeat center 11px;
+  background: white url('DefaultSkin/icons/DriversButton.png') no-repeat center 8px;
   cursor: pointer;
   float: right; /* orientation=lt */
   float: left; /* orientation=rt */
-  height:42px;
   /*margin-top:2px;*/
   width:24px;
   padding: 2px 0px 0px 10px; /* orientation=lt */
   padding: 2px 10px 0px 0px; /* orientation=rt */
-  border-left: 1px solid #E1E1E1;
-  border-right: 1px solid #E1E1E1;
+  border: 1px solid #E1E1E1;
+  border-bottom: none;
   position: relative;
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
+    -moz-box-shadow: 0 -15px 16px #F8F8F8 inset;
+	-webkit-box-shadow: 0 -15px 16px #F8F8F8 inset;
+	box-shadow: 0 -15px 16px #F8F8F8 inset;
+    height: 38px;
+    margin-top: 3px;
 }
 
 .UIJCRExplorerPortlet .NoneDrivesButton{
@@ -94,6 +101,7 @@
   width:24px;
   padding: 2px 0px 0px 10px; /* orientation=lt */
   padding: 2px 10px 0px 0px; /* orientation=rt */
+  margin: 1px 1px 0px 0px
 }
 
 .UIJCRExplorerPortlet .URLBackToButton {

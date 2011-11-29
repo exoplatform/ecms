@@ -1242,14 +1242,15 @@
 /*===============================UIDrivesArea===================================*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDrivesArea {
-	border: 1px solid #E1E1E1;
-    box-shadow: 0 0 6px #B7B7B7;
-    margin: 4px;
+	background:#F8F8F8;
+    border: 1px solid #E1E1E1;
+    padding: 6px;
 }
 
 .UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer{
 	padding: 10px;
 	color: #666666;
+	background: white;
 }
 
 .UIJCRExplorer .UIDrivesArea .RowDrives{
@@ -1345,6 +1346,11 @@
 
 .UIJCRExplorer .UIDrivesArea .IconDrivesPublic{
 	background: url('DefaultSkin/background/IconDrivesArea.gif') no-repeat center -138px;
+	height: 25px;
+}
+
+.UIJCRExplorer .UIDrivesArea .IconDrivesPersonal{
+	background: url('DefaultSkin/background/IconDrivesArea.gif') no-repeat center bottom;
 	height: 23px;
 }
 
