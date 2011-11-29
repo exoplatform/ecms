@@ -364,8 +364,10 @@ public class UISearchResult extends UIContainer {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequest portletRequest = getPortletRequest();
 
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-        + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName();
+    if (portletRequest.getServerPort() != 80) {
+      baseURI += ":" + String.format("%s", portletRequest.getServerPort());
+    }
     if (navNodeURI.startsWith(baseURI))
       return navNodeURI;
     

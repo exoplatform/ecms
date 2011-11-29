@@ -788,8 +788,11 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
         PortletRequest portletRequest = portletRequestContext.getRequest();
 
-        String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-            + String.format("%s", portletRequest.getServerPort()) + portalRequestContext.getPortalContextPath();
+        String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName();
+        if (portletRequest.getServerPort() != 80) {
+          baseURI += ":" + String.format("%s", portletRequest.getServerPort());
+        }
+        baseURI += portalRequestContext.getPortalContextPath();
         if (node.isNodeType("mop:pagelink")) {
           node = node.getParent();
         }
