@@ -5,7 +5,12 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Form_Builder">
-   <title>Form builder</title>
+   <title>Form Builder</title>
+   <note>
+   <para>
+    The <emphasis role="bold">Form Builder</emphasis> portlet is deprecated in eXo Platform. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
+   </para>
+   </note>
   <para>
   The <emphasis role="bold">Form Builder</emphasis> portlet allows users to create and edit the template of document types. Documents are stored in the so-called node; therefore, the term "node" and node types are often applied.
  </para>

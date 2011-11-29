@@ -9,6 +9,11 @@
  </para>
   <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
     <title>Newsletter viewer</title>
+	<note>
+   <para>
+    The <emphasis role="bold">Newsletter</emphasis> portlet is deprecated in eXo Platform. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
+   </para>
+   </note>
     <para>With <emphasis role="bold">Newsletters,</emphasis> you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
     <citetitle>
 	<para><emphasis role="bold">
@@ -63,7 +68,12 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
-    <title>Newsletter manager</title>
+    <title>Newsletter Manager</title>
+	<note>
+   <para>
+    The <emphasis role="bold">Newsletter Manager</emphasis> portlet is deprecated in eXo Platform. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
+   </para>
+   </note>
     <para>
    &PRODUCT; facilitates administrators to easily and quickly manage newsletters.
   </para>
