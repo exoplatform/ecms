@@ -1,7 +1,7 @@
 {docbook}
-<warning><para>
+<note><para>
 The Newsletter portlet and its services are deprecated. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
-</para></warning>
+</para></note>
 {docbook}
 
 The *Newsletter* portlet is used to help users quickly get the updated newsletter from a site.

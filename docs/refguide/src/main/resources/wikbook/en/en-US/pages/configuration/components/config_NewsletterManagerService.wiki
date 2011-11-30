@@ -2,9 +2,9 @@ The _NewsletterManagerService_ component is used to send newsletters to subscrib
 The configuration of this component is found in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/ext-newsletter-configuration.xml_.
 
 {docbook}
-<warning><para>
+<note><para>
 The Newsletter Manager portlet and its services are deprecated. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
-</para></warning>
+</para></note>
 {docbook}
 
 {code:xml}

@@ -1,8 +1,8 @@
 
 {docbook}
-<warning><para>
+<note><para>
 The Form Builder portlet and its services are deprecated. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.
-</para></warning>
+</para></note>
 {docbook}
 
 The *Form Builder* portlet allows users to create node types and document templates for node types.
