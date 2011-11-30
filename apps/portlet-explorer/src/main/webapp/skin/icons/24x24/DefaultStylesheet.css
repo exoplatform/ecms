@@ -8,8 +8,8 @@
  
 .DefaultActionIcon {
 	height: 24px;
-	background: url('DefaultSkin/DefaultActionIcon.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/DefaultActionIcon.gif') no-repeat right center; /* orientation=rt */
+	background: url('DefaultSkin/DefaultActionIcon.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/DefaultActionIcon.png') no-repeat right center; /* orientation=rt */
 }
  
 .Relations24x24Icon {
@@ -128,8 +128,20 @@
 
 .MultiLanguageIcon {
 	height: 24px;
-  background: url('DefaultSkin/MultiLanguages.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/MultiLanguages.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/MultiLanguages.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/MultiLanguages.png') no-repeat right center; /* orientation=rt */
+}
+
+.PublicationPublishIcon {
+	height: 24px;
+  background: url('DefaultSkin/PublicationPublish.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/PublicationPublish.png') no-repeat right center; /* orientation=rt */
+}
+
+.PublicationRequestApprovalIcon {
+	height: 24px;
+  background: url('DefaultSkin/PublicationRequestApproval.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/PublicationRequestApproval.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageVersionsIcon {
@@ -146,8 +158,8 @@
 
 .ManagePublicationsIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManagerPuplication.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManagerPuplication.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManagerPuplication.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManagerPuplication.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageActionsIcon {
@@ -158,8 +170,8 @@
 
 .ManageCategoriesIcon {
 	height: 24px;
-  background: url('DefaultSkin/ManageCategories.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageCategories.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageCategories.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/ManageCategories.png') no-repeat right center; /* orientation=rt */
 }
 
 .ManageSimpleCategoriesIcon {
