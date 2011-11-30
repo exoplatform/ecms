@@ -10,6 +10,7 @@ These following parameters are common and can be used for all input fields.
 |*editable*|{{string}}|!images/error.gif!|{{editable=if-null}}|The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
 |*multiValues*|{{boolean}}|!images/error.gif!|{{multiValues=true}}|Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
 |*visible*|{{boolean}}|!images/error.gif!|{{visible=true}}|The input is visible if this value is true.|
+|*options*|{{String}} separated by the commas (,) character.}}|!images/error.gif!|A list of parameters which are input while the content templates are initialized.|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |
 
 See also:
 
@@ -353,3 +354,20 @@ Finally, to display the selected tab, simply add it to the style of UITabContent
 {code:html}
 <div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
 {code}
+
+h1. How to prevent XSS attacks {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HowToPreventXSS}
+In the content management sytem, its typical feature is enabling JavaScript in a content. This causes the XSS (Cross-site Scripting) attacks to the content displayed in the HTML format.
+
+However, there is no solution to keep JavaScript and to prevent the XSS attacks at the same time, so eXo Content allows you to decide whether
+JavaScript is allowed to run on a field of the content template or not by using the {{option}} parameter.
+
+* To allow JavaScript to execute, add "{{options = noSanitization}}" to the dialog template file. Normally, this file is named {{dialog1.gtmpl}}.
+
+* For example: The following code shows how to enable JavaScript in the *Main Content* field of the *Free Layout Wecontent* content:
+
+{code:java}
+String [] htmlArguments = ["jcrPath = / node / default.html / JCR: content / JCR: data", "options = toolbar: CompleteWCM, height: '410px ', noSanitization" htmlContent];
+{code}
+
+* By default, there is no "{{options = noSanitization}}" parameter in the dialog template file and this helps you prevent the XSS attacks. When end-users input JavaScript into a content, the JavaScript is automatically deleted when the content is saved.
+
