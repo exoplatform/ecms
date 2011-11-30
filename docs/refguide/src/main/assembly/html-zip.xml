@@ -22,6 +22,8 @@
     <outputDirectory>org.exoplatform.ecms/images</outputDirectory>
     <includes>
       <include>**/*.gif</include>
+      <include>**/*.png</include>
+      <include>**/*.jpg</include>
      </includes>
    </fileSet>
   </fileSets>
