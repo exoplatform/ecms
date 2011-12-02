@@ -849,6 +849,20 @@
 .UIJCRExplorerPortlet .UISearchContainer .ConstraintOption .IconConstraint {
 	cursor: pointer;
 }
+
+.UIJCRExplorerPortlet #UIECMSearch {
+	padding: 8px;
+	height: auto;
+}
+
+.UIJCRExplorerPortlet #UIECMSearch .TabsContainer {
+	border-bottom: 1px solid #AEAEAE;
+}
+
+.UIJCRExplorerPortlet #UIECMSearch .UITabContentContainer .UITabContent {
+	background: #ffffff;
+}
+
 /*================================UIConstraintsForm=================================*/
 
 /*================================UIMetadataSelectForm=================================*/
