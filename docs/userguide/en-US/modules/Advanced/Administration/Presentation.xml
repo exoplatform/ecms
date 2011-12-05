@@ -1307,7 +1307,7 @@
                     <para>
                         Select the document type that will be created in this drive.
                     </para>
-                    <variablelist>
+                 <!--   <variablelist>
                         <varlistentry>
                             <term>exo:jsFolder</term>
                             <listitem>
@@ -1360,7 +1360,7 @@
                                 </para>
                             </listitem>
                         </varlistentry>
-                    </variablelist>
+                    </variablelist>  -->
                 </step>
                 <step>
                     <para>
