@@ -65,11 +65,11 @@
                     String mimeType = content.getProperty("jcr:mimeType").getString() ;
                     if(mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0){
                       if(mimeType.equals("text/html")) {
-                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
+                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization", "", "validate=empty"] ;
                               uicomponent.addRichtextField("contentHtml", fieldSummary) ;      
                         //uicomponent.removeComponent("content");
                       } else {
-                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
+                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization", "validate=empty"] ;
                               uicomponent.addTextAreaField("content", fieldSummary) ;
                       }
                     } else {

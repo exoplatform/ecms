@@ -1,0 +1,59 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java	(revision 77236)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java	(working copy)
+@@ -719,9 +719,7 @@
+         portlet.getChild(UICLVManualMode.class).init();
+       }
+       
+-      if (Utils.isPortalEditMode()) {
+-    	  Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
+-      } else {
++      if (!Utils.isPortalEditMode()) {    	
+     	  if (clvConfig.getModeInternal()) {
+     		  portlet.changeToViewMode();
+     	  }else {
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl	(revision 77218)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl	(working copy)
+@@ -83,7 +83,7 @@
+ 										%><img src="$imgSrc" width="91" style="float:left" /><% 
+ 									}
+ 									if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) { 
+-										%><div <%=marginstyle%> ><%=itemSummary%></div><div style="clear:both"/><% 
++										%><div <%=marginstyle%> ><%=itemSummary%></div><div style="clear:both" ><span></span></div><% 
+ 									} 
+ 								%>															
+ 							</div>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl	(revision 77218)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/list/UIContentListPresentationSmall.gtmpl	(working copy)
+@@ -86,7 +86,7 @@
+ 										%><div <%=marginstyle%> ><%=itemSummary%></div><% 
+ 									} 
+ 								%>
+-								<div style="clear:both"></div>
++								<div style="clear:both"><span></span></div>
+ 							</div>			
+ 	            <%
+ 	            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/file/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/file/dialogs/dialog1.gtmpl	(revision 77218)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/file/dialogs/dialog1.gtmpl	(working copy)
+@@ -65,11 +65,11 @@
+                     String mimeType = content.getProperty("jcr:mimeType").getString() ;
+                     if(mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0){
+                       if(mimeType.equals("text/html")) {
+-                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
++                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization", "", "validate=empty"] ;
+                               uicomponent.addRichtextField("contentHtml", fieldSummary) ;      
+                         //uicomponent.removeComponent("content");
+                       } else {
+-                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
++                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization", "validate=empty"] ;
+                               uicomponent.addTextAreaField("content", fieldSummary) ;
+                       }
+                     } else {

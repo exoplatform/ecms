@@ -86,7 +86,7 @@
 										%><div <%=marginstyle%> ><%=itemSummary%></div><% 
 									} 
 								%>
-								<div style="clear:both"></div>
+								<div style="clear:both"><span></span></div>
 							</div>			
 	            <%
 	            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {

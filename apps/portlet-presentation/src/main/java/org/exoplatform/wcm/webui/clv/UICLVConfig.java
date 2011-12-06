@@ -719,9 +719,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         portlet.getChild(UICLVManualMode.class).init();
       }
       
-      if (Utils.isPortalEditMode()) {
-    	  Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
-      } else {
+      if (!Utils.isPortalEditMode()) {    	
     	  if (clvConfig.getModeInternal()) {
     		  portlet.changeToViewMode();
     	  }else {
