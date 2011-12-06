@@ -148,4 +148,15 @@ WCMUtils.prototype.setScrollBar = function()  {
     catch(err){}
 }; 
 
+//focus to the first element in the form after loading successfuly
+WCMUtils.prototype.autoFocus = function() {
+	var uiDocumentForm = document.getElementById("UIDocumentForm");
+	for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
+	setTimeout(function() {
+		try {
+			uiDocumentForm.elements[i].focus();
+		} catch(err){}
+	}, 200);
+}
+
 eXo.ecm.WCMUtils = new WCMUtils();

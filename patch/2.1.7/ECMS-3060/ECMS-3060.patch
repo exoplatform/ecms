@@ -1,0 +1,49 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(revision 76755)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(working copy)
+@@ -35,21 +35,9 @@
+ 	<div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>	
+ </div>
+ <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
+-<script type="text/javascript">
+-    //focus to the first element in the form after loading successfuly
+-	autoFocus = function() {
+-		var uiDocumentForm = document.getElementById("UIDocumentForm");
+-		for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
+-		  
+-		setTimeout(function() {
+-			try {
+-				uiDocumentForm.elements[i].focus();
+-			} catch(err){}
+-		}, 200);
+-	}
+-</script>
++
+ <%  
+     def rcontext = _ctx.getRequestContext() ;
+ 	def jsManager = rcontext.getJavascriptManager();
+-	jsManager.addOnLoadJavascript("autoFocus");
++	jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.autoFocus");
+ %>
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js	(revision 76755)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js	(working copy)
+@@ -148,4 +148,15 @@
+     catch(err){}
+ }; 
+ 
++//focus to the first element in the form after loading successfuly
++WCMUtils.prototype.autoFocus = function() {
++	var uiDocumentForm = document.getElementById("UIDocumentForm");
++	for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
++	setTimeout(function() {
++		try {
++			uiDocumentForm.elements[i].focus();
++		} catch(err){}
++	}, 200);
++}
++
+ eXo.ecm.WCMUtils = new WCMUtils();
+\ No newline at end of file
