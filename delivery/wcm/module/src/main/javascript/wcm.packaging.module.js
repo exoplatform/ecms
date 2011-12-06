@@ -18,6 +18,8 @@ function getModule(params) {
   module.name =  "wcm" ;
   var antisamyVersion = "${org.owasp.antisamy.version}";
   var batikVersion = "${org.apache.batik.version}";
+  var batikUtilVersion = "${org.apache.batik-util.version}";
+  var sacVersion = "${org.w3c.sac.version}";
   module.portlet = {};
   
   module.portlet.webpresentation = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-presentation", "exo-portlet", module.version).       
@@ -70,7 +72,10 @@ function getModule(params) {
   module.extension.war = 
   new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
   addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
-	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion));
+	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
+  addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
+  addDependency(new Project("org.w3c", "sac", "jar", sacVersion));
+
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 
   module.demo = {};

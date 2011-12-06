@@ -159,6 +159,12 @@
       <artifactId>exo-ecms-core-parser</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.w3c</groupId>
+      <artifactId>sac</artifactId>
+      <version>${org.w3c.sac.version}</version>
+      <type>jar</type>
+    </dependency> 
   </dependencies>
 
 <!-- 
@@ -251,6 +257,11 @@ exo-ecms-packaging-ecmdemo-webapp
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-search</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.w3c</groupId>
+              <artifactId>sac</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <webModule>

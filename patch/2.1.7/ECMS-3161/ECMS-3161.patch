@@ -1,0 +1,94 @@
+Index: delivery/wcm/assembly/pom.xml
+===================================================================
+--- delivery/wcm/assembly/pom.xml	(révision 77230)
++++ delivery/wcm/assembly/pom.xml	(copie de travail)
+@@ -214,6 +214,8 @@
+ 	  <version>${org.exoplatform.ws.version}</version>
+ 	  <type>jar</type>
+ 	</dependency>
++  <dependency><groupId>org.w3c</groupId><artifactId>sac</artifactId><version>${org.w3c.sac.version}</version><type>jar</type></dependency>
++  <dependency><groupId>batik</groupId><artifactId>batik-util</artifactId><version>${org.apache.batik-util.version}</version><type>jar</type></dependency>
+ 	<dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>${c3p0.version}</version><type>jar</type></dependency><!-- 0.9.1.2-->
+ 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+ 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+Index: delivery/wcm/module/src/main/javascript/wcm.packaging.module.js
+===================================================================
+--- delivery/wcm/module/src/main/javascript/wcm.packaging.module.js	(révision 77230)
++++ delivery/wcm/module/src/main/javascript/wcm.packaging.module.js	(copie de travail)
+@@ -18,6 +18,8 @@
+   module.name =  "wcm" ;
+   var antisamyVersion = "${org.owasp.antisamy.version}";
+   var batikVersion = "${org.apache.batik.version}";
++  var batikUtilVersion = "${org.apache.batik-util.version}";
++  var sacVersion = "${org.w3c.sac.version}";
+   module.portlet = {};
+   
+   module.portlet.webpresentation = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-presentation", "exo-portlet", module.version).       
+@@ -70,7 +72,10 @@
+   module.extension.war = 
+   new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
+   addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
+-	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion));
++	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
++  addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
++  addDependency(new Project("org.w3c", "sac", "jar", sacVersion));
++
+   module.extension.war.deployName = "ecm-wcm-extension";	      	    
+ 
+   module.demo = {};
+Index: packaging/wcm/ear/pom.xml
+===================================================================
+--- packaging/wcm/ear/pom.xml	(révision 77230)
++++ packaging/wcm/ear/pom.xml	(copie de travail)
+@@ -159,6 +159,12 @@
+       <artifactId>exo-ecms-core-parser</artifactId>
+       <version>${project.version}</version>
+     </dependency>
++    <dependency>
++      <groupId>org.w3c</groupId>
++      <artifactId>sac</artifactId>
++      <version>${org.w3c.sac.version}</version>
++      <type>jar</type>
++    </dependency> 
+   </dependencies>
+ 
+ <!-- 
+@@ -253,6 +259,11 @@
+               <artifactId>exo-ecms-core-search</artifactId>
+               <includeInApplicationXml>true</includeInApplicationXml>
+             </jarModule>
++            <jarModule>
++              <groupId>org.w3c</groupId>
++              <artifactId>sac</artifactId>
++              <includeInApplicationXml>true</includeInApplicationXml>
++            </jarModule>
+             <webModule>
+               <groupId>org.exoplatform.ecms</groupId>
+               <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java	(révision 77230)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java	(copie de travail)
+@@ -702,8 +702,7 @@
+   	  CleanResults cr = as.scan(value, policy);
+   	  value = cr.getCleanHTML();
+       return value;    
+-  	} catch(Exception ex) {
+-  		ex.printStackTrace();
++  	} catch(Exception ex) {  		
+   		return value;
+   	}    
+   }  
+Index: pom.xml
+===================================================================
+--- pom.xml	(révision 77230)
++++ pom.xml	(copie de travail)
+@@ -38,6 +38,8 @@
+     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
+ 		<org.owasp.antisamy.version>1.4</org.owasp.antisamy.version>
+   	<org.apache.batik.version>1.7</org.apache.batik.version>
++		<org.apache.batik-util.version>1.6</org.apache.batik-util.version>
++		<org.w3c.sac.version>1.3</org.w3c.sac.version>
+     <chromattic.version>1.0.4</chromattic.version>
+     <xcmis.version>1.2.1</xcmis.version>
+     <xml.parser.version>3.1</xml.parser.version>

@@ -702,8 +702,7 @@ public class Utils {
   	  CleanResults cr = as.scan(value, policy);
   	  value = cr.getCleanHTML();
       return value;    
-  	} catch(Exception ex) {
-  		ex.printStackTrace();
+  	} catch(Exception ex) {  		
   		return value;
   	}    
   }  

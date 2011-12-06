@@ -214,6 +214,8 @@
 	  <version>${org.exoplatform.ws.version}</version>
 	  <type>jar</type>
 	</dependency>
+  <dependency><groupId>org.w3c</groupId><artifactId>sac</artifactId><version>${org.w3c.sac.version}</version><type>jar</type></dependency>
+  <dependency><groupId>batik</groupId><artifactId>batik-util</artifactId><version>${org.apache.batik-util.version}</version><type>jar</type></dependency>
 	<dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>${c3p0.version}</version><type>jar</type></dependency><!-- 0.9.1.2-->
 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
