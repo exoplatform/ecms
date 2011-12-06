@@ -1,0 +1,13 @@
+Index: core/viewer/src/main/java/resources/templates/ImageViewer.gtmpl
+===================================================================
+--- core/viewer/src/main/java/resources/templates/ImageViewer.gtmpl	(revision 77160)
++++ core/viewer/src/main/java/resources/templates/ImageViewer.gtmpl	(working copy)
+@@ -32,7 +32,7 @@
+   }
+ 
+   def originalNode = uiParent.getOriginalNode();
+-  def currentNode = uiParent.getNode();
++  def currentNode = getFileLangNode(uiParent.getNode());
+   def binarySrc = Utils.getWebdavURL(currentNode);
+   def contentNode = currentNode.getNode("jcr:content") ;
+   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
