@@ -1,10 +1,14 @@
 _PublicationService_ is to manage the publication.
 
 || *Method* || *Param* ||*Return* ||  *Description* ||
-| *addLifecycle*(ComponentPlugin plugin)| {{N/A}} | {{void}} |  Add plugins context for the publication service. |
-| *getLifecycle*(String name) | {{name}}: The name of the wanted lifecycle.| {{Lifecycle}} | Get a specific lifecycle with the given name. |
+| *addLifecycle*(ComponentPlugin plugin)| {{plugin}} | {{void}} |  Add publication plugin to the publication service. |
+| *removeLifecycle*(ComponentPlugin plugin)| {{plugin}}|{{void}}| Remove publication plugin from the publication service.  |
+| *addContext*(ComponentPlugin plugin)| {{plugin}}|{{void}}| Add publication plugin context to the publication service. |
+| *removeContext*(ComponentPlugin plugin)| {{plugin}}|{{void}}| Remove publication plugin context from the publication service.|
+| *getLifecycle*(String name) | {{name}} - The name of the wanted lifecycle.| {{Lifecycle}} | Get a specific lifecycle with the given name. |
 | *getLifecycles*() |{{N/A}}| {{ List<Lifecycle> }} | Get all the lifecycles which were added to service instances. |
 | *getContext*(String name) | {{name}} | {{Context}} | Get a specific context with the given names. |
 | *getContexts*() |{{N/A}} | {{ List<Context> }} | Get all the contexts which were added to service instances. |
-| *getContents*(String fromstate, String tostate, String date, String user, String lang , String workspace) throws Exception; |{{fromstate/tostate}}: The current range state of node.{example}{example}{{user}}: The last user of node.{example}{example}{{lang}}: The node's language.{example}{example}{{workspace}}: The Workspace of the node's location. | {{List<Node>}} | Get all the nodes. |
-| *getLifecyclesFromUser*(String remoteUser, String state);| {{remoteUser}}: The current user of publication service.{example}{example}{{state}}: The current state of the node.   | {{ List<Lifecycle> }} | Get all the Lifecycle of a specific user. |
+| *getContents*(String fromstate, String tostate, String date, String user, String lang , String workspace) throws Exception; |{{fromstate/tostate}} - The current range state of node.{example}{example}{{user}} - The last user of node.{example}{example}{{lang}} - The node's language.{example}{example}{{workspace}} - The Workspace of the node's location. | {{List<Node>}} | Get all the nodes. |
+| *getLifecyclesFromUser*(String remoteUser, String state);| {{remoteUser}} - The current user of publication service.{example}{example}{{state}} - The current state of the node.   | {{ List<Lifecycle> }} | Get all the Lifecycle of a specific user. |
+
