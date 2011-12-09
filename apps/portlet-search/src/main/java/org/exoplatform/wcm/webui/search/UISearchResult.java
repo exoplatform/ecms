@@ -372,7 +372,7 @@ public class UISearchResult extends UIContainer {
     if (node.isNodeType("nt:frozenNode")){
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);      
-      link += originalNode.getPath() + "?version=" + node.getParent().getName();
+      link += originalNode.getPath() + "&version=" + node.getParent().getName();
     } else {
       link += node.getPath();
     }

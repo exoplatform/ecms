@@ -1,0 +1,13 @@
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(revision 77323)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(working copy)
+@@ -372,7 +372,7 @@
+     if (node.isNodeType("nt:frozenNode")){
+       String uuid = node.getProperty("jcr:frozenUuid").getString();
+       Node originalNode = node.getSession().getNodeByUUID(uuid);      
+-      link += originalNode.getPath() + "?version=" + node.getParent().getName();
++      link += originalNode.getPath() + "&version=" + node.getParent().getName();
+     } else {
+       link += node.getPath();
+     }
