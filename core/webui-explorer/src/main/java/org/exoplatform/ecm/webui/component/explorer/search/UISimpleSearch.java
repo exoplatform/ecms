@@ -326,6 +326,7 @@ public class UISimpleSearch extends UIForm {
       uiSearchResult.setSearchTime(time);
       uiECMSearch.setSelectedTab(uiSearchResult.getId());
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNode.getPath());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch);
     }
   }
 

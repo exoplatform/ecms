@@ -575,12 +575,6 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     /* Set value for checkbox is checked */
     getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(true);
     UISearchContainer uiSearchContainer = getAncestorOfType(UISearchContainer.class);
-    /* Disable all tab */
-    for(UIComponent uiComponent : getAncestorOfType(UIECMSearch.class).getChildren()) {
-      uiComponent.setRendered(false);
-    }
-    /* Focus on Advance search tab */
-    uiSearchContainer.setRendered(true);
     /*
      *  Close popup window when finish choose category
      */
