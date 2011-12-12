@@ -13,7 +13,7 @@
  After creating a document, you should categorize it by adding it to a category. Otherwise, documents should be created right in a category and links to those documents will be automatically created in the category. In eXo Platform, categories are stored in JCR.
 	 </para>
 	 <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
-		<title>Create a content</title>
+		<title>Create a content inside a category</title>
 		 <para>
 			This section will show you how to create a content in a category.
 		</para>

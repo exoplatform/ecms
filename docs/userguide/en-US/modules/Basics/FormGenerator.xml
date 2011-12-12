@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Form_Builder">
-   <title>Form Builder</title>
+   <title>Create content templates</title>
    <note>
    <para>
     The <emphasis role="bold">Form Builder</emphasis> portlet is deprecated in eXo Platform. It remains fully supported for eXo customers, however it will not receive any enhancement and will be removed from the product scope in the future.

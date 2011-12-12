@@ -6,8 +6,9 @@
 ]>
 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
  <title>Manage content with WebDAV</title>
-  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
-    <title>What is WebDAV?</title>
+  <citetitle>
+    <para xml:id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV"><emphasis role="bold">What is WebDAV?</emphasis></para>
+    </citetitle>
     <para>
    <emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web-based Distributed Authoring</emphasis> and <emphasis role="bold">Versioning.</emphasis> It is used to publish and manage files and directories on a remote server. It also enables users to perform these functions on a website.
   </para>
@@ -40,9 +41,9 @@
         </listitem>
       </varlistentry>
     </variablelist>
-  </section>
-  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
-    <title>Why use WebDAV?</title>
+  <citetitle>
+     <para xml:id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV"><emphasis role="bold">Why use WebDAV?</emphasis></para>
+  </citetitle>
     <para>
    With WebDAV, you can manage content efficiently with the following actions:
   </para>
@@ -63,7 +64,6 @@
     </para>
       </listitem>
     </itemizedlist>
-  </section>
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
     <title>How to use WebDAV in &PRODUCT;?</title>
     <para>To use WebDAV in
@@ -202,12 +202,6 @@
       </step>
     </procedure>
   </section>
-  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
-    <title>Actions</title>
-    <para>
-   You will see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
-   This means you can copy/paste files, list folders, rename, and more, in system directories.
-  </para>
     <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
       <title>Add new content to a specific site</title>
       <para>
@@ -261,5 +255,4 @@
         </step>
       </procedure>
     </section>
-  </section>
 </section>

@@ -4,8 +4,8 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_By_Query">
-    <title>Contents by query</title>
-    <para>The <emphasis role="bold">Contents By Query</emphasis> portlet allows you to collect and display data throughout a workspace instead of selecting items by a folder or by contents.</para>
+    <title>Contents list viewer by query</title>
+    <para>The <emphasis role="bold">Contents By Query</emphasis> portlet allows you to collect and display data throughout a workspace by using a query instead of selecting items by a folder or by contents.</para>
     <para>To use this portlet, first you need to add the <emphasis role="bold">Contents By Query</emphasis> portlet to a specific page as follows:</para>
     <procedure>
         <step>

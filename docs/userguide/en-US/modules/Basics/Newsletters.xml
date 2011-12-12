@@ -112,16 +112,16 @@
    </para>
     <itemizedlist>
 	<listitem>
-	<para>Add a new category</para>
+	<link linkend="sect-User_Guide-Category_Management-Add_a_new_category">Add a new category</link>
 	</listitem>
 	<listitem>
-	<para>Edit a category</para>
+	<link linkend="sect-User_Guide-Category_Management-Edit_a_category">Edit a category</link>
 	</listitem>
 	<listitem>
-	<para>Delete a category</para>
+	<link linkend="sect-User_Guide-Category_Management-Delete_a_category">Delete a category</link>
 	</listitem>
 	<listitem>
-	<para>Manage users</para>
+	<link linkend="sect-User_Guide-Category_Management-Manage_Users">Manage users</link>
 	</listitem>
 	</itemizedlist>
       <section id="sect-User_Guide-Category_Management-Add_a_new_category">
@@ -836,11 +836,10 @@
       </procedure>
     </section>
     <section id="sect-User_Guide-Manage_Newsletters-Newsletters">
-      <title>Newsletters</title>
-      <para>
-    Each subscription consists of many newsletters. In eXo Platform, you can easily create newsletters by following these steps.
+      <title>Create a newsletter</title>
+      <para xml:id="proc-User_Guide-Newsletters-Creating_Newsletters"><emphasis role="bold">
+    Each subscription consists of many newsletters. In eXo Platform, you can easily create newsletters by following these steps</emphasis>.
    </para>
-   <para id="proc-User_Guide-Newsletters-Creating_Newsletters"><emphasis role="bold">Create a newsletter</emphasis></para>
       <procedure>
         <step>
           <para>
