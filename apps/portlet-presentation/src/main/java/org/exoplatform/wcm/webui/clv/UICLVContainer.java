@@ -155,9 +155,16 @@ public abstract class UICLVContainer extends UIContainer {
     return UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(
               Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE));
   }
+  
+  public boolean hasFolderPath() {
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+        
+    return (itemPath != null && itemPath.length() > 0) ? true : false;
+  }
 
   public boolean isShowManageContent() {
-    return (Utils.isShowQuickEdit() && isModeByFolder());
+    return (Utils.isShowQuickEdit() && isModeByFolder() && hasFolderPath());
   }
 
   public boolean isShowAddContent() {

@@ -292,7 +292,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
     String nodePathParam = pcontext.getRequestParameter("path");
     String currentRepo = WCMCoreUtils.getRepository().getConfiguration().getName();
-    if (nodePathParam!=null) {
+    if (nodePathParam != null && nodePathParam.length() > 0) {
       patternUrl = Pattern.compile("([^/]+)/(.*)");
       matcher = patternUrl.matcher(nodePathParam);
       if (matcher.find()) {
