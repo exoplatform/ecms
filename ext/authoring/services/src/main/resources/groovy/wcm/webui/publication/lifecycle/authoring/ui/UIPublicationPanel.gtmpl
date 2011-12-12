@@ -34,7 +34,7 @@
 <% uicomponent.begin(); %>
 <div class="UIPublicationPanel" id="$uicomponent.id">
 
-  <% if (states.size == 0) { %>
+  <% if (states.size() == 0) { %>
   <%=_ctx.appRes("UIPublicationPanel.msg.no-states")%> 
   <% } %>
 
