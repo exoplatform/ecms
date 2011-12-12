@@ -266,6 +266,12 @@
       <version>${lucene-regex.version}</version>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>org.w3c</groupId>
+      <artifactId>sac</artifactId>
+      <version>${org.w3c.sac.version}</version>
+      <type>jar</type>
+    </dependency>    
 	<dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-apps-portlet-seo</artifactId>
@@ -486,6 +492,11 @@ exo-ecms-packaging-ecmdemo-webapp
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <!-- End of xCMIS jars -->
+            <jarModule>
+              <groupId>org.w3c</groupId>
+              <artifactId>sac</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
