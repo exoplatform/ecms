@@ -16,17 +16,24 @@
  */
 package org.exoplatform.services.wcm.core;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.exoplatform.commons.utils.ExoProperties;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /*
  * Created by The eXo Platform SAS
@@ -35,12 +42,6 @@ import org.exoplatform.services.log.Log;
  * Jun 20, 2008
  */
 public class WCMConfigurationService {
-
-  private static Log log = ExoLogger.getLogger("wcm:WCMConfiguarationService");
-  private HashMap<String, NodeLocation> livePortalsLocations = new HashMap<String, NodeLocation>();
-  private HashMap<String, String> sharedPortals = new HashMap<String, String>();
-  private ExoProperties runtimeContextParams;
-  private DriveData siteDriveConfig;
 
   public static final String SITE_PATH_EXP = "\\{sitePath\\}";
   public static final String SITE_NAME_EXP = "\\{siteName\\}";
@@ -67,19 +68,24 @@ public class WCMConfigurationService {
 
   public static final String PAGINATOR_TEMPLAET_PATH        = "paginatorTemplatePath";
   
+  private static Log log = ExoLogger.getLogger("wcm:WCMConfiguarationService");
+  private NodeLocation livePortalsLocation = null;
+  private ExoProperties runtimeContextParams;
+  private DriveData siteDriveConfig;
+
+  private String sharedPortal = null;
+  
   private String defaultRepo = null;
 
   @SuppressWarnings("unchecked")
-  public WCMConfigurationService(InitParams initParams) throws Exception {
+  public WCMConfigurationService(InitParams initParams, RepositoryService repoService) throws Exception {
     Iterator<PropertiesParam> iterator = initParams.getPropertiesParamIterator();
     while (iterator.hasNext()) {
       PropertiesParam param = iterator.next();
       if ("share.portal.config".endsWith(param.getName())) {
-        String repository = param.getProperty("repository");
-        defaultRepo = repository;
         String portalName = param.getProperty("portalName");
-        sharedPortals.put(repository, portalName);
-        log.info("Name of shared portal to share resources for all portals in repository: "+ repository + " is: "+ portalName);
+        sharedPortal = portalName;
+        log.info("Name of shared portal to share resources for all portals in repository is: "+ portalName);
       } else if("RuntimeContextParams".equalsIgnoreCase(param.getName())) {
         runtimeContextParams = param.getProperties();
       }
@@ -89,8 +95,8 @@ public class WCMConfigurationService {
       ObjectParameter objectParameter = locations.next();
       if ("live.portals.location.config".equals(objectParameter.getName())) {
         NodeLocation objectParam = (NodeLocation)objectParameter.getObject();
-        livePortalsLocations.put(objectParam.getRepository(), objectParam);
-        log.info("Location that resources for all live portal is stored in repository:" + objectParam.getRepository()
+        livePortalsLocation  = objectParam;
+        log.info("Location that resources for all live portal is stored in repository"
             + " is in workspace: "+ objectParam.getWorkspace() + " and with path: "+objectParam.getPath());
 
       }
@@ -101,13 +107,16 @@ public class WCMConfigurationService {
   }
 
   public DriveData getSiteDriveConfig() {return this.siteDriveConfig; }
+  
+  @Deprecated
   public NodeLocation getLivePortalsLocation(final String repository) {
-    NodeLocation nodeLocation = livePortalsLocations.get(repository);
-    //Check if the current tenant doesn't contains the live portal then get the default one.
-    if(nodeLocation == null) nodeLocation = livePortalsLocations.get(defaultRepo);
-    return nodeLocation;
+    return getLivePortalsLocation();
   }
 
+  public NodeLocation getLivePortalsLocation() {
+    return livePortalsLocation;
+  }
+  
   public String getRuntimeContextParam(String paramName) {
     if(runtimeContextParams != null)
       return runtimeContextParams.get(paramName);
@@ -120,11 +129,17 @@ public class WCMConfigurationService {
     return null;
   }
 
+  @Deprecated
   public String getSharedPortalName(final String repository) {
-    return sharedPortals.get(repository);
+    return sharedPortal;
+  }
+
+  public String getSharedPortalName() {
+    return sharedPortal;
   }
 
   public Collection<NodeLocation> getAllLivePortalsLocation() {
-    return livePortalsLocations.values();
+    return Arrays.asList(new NodeLocation[]{livePortalsLocation});
   }
+  
 }

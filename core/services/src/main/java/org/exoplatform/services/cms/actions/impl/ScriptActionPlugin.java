@@ -166,13 +166,18 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   }
 
   @SuppressWarnings("unchecked")
-  public void activateAction(String userId, String executable, Map variables, String repository) throws Exception {
-    variables.put("repository",repository) ;
+  public void activateAction(String userId, String executable, Map variables) throws Exception {
     executeAction(userId,executable,variables) ;
   }
 
+  @Override
+  public void activateAction(String userId, String executable, Map variables, String repository) throws Exception {
+    activateAction(userId, executable, variables);
+  }
+  
   protected Class createActivationJob() throws Exception {
     return ScriptActionActivationJob.class ;
   }
+
 
 }

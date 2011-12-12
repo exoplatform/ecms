@@ -37,11 +37,6 @@
             <portlet-ref>SingleContentViewer</portlet-ref>
             <preferences>
               <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
                 <name>workspace</name>
                 <value>collaboration</value>
                 <read-only>false</read-only>
@@ -87,11 +82,6 @@
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
 	              <preference>
-	                <name>repository</name>
-	                <value>repository</value>
-	                <read-only>false</read-only>
-	              </preference>
-	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
 	                <read-only>false</read-only>
@@ -133,11 +123,6 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
-	              <preference>
-	                <name>repository</name>
-	                <value>repository</value>
-	                <read-only>false</read-only>
-	              </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -183,11 +168,6 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
-	              <preference>
-	                <name>repository</name>
-	                <value>repository</value>
-	                <read-only>false</read-only>
-	              </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -300,11 +280,6 @@
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
 	              <preference>
-	                <name>repository</name>
-	                <value>repository</value>
-	                <read-only>false</read-only>
-	              </preference>
-	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
 	                <read-only>false</read-only>
@@ -345,11 +320,6 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
-	              <preference>
-	                <name>repository</name>
-	                <value>repository</value>
-	                <read-only>false</read-only>
-	              </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -399,11 +369,6 @@
         <application-ref>searches</application-ref>
         <portlet-ref>WCMAdvanceSearchPortlet</portlet-ref>
         <preferences>
-          <preference>
-            <name>repository</name>
-            <value>repository</value>
-            <read-only>false</read-only>
-          </preference>
           <preference>
             <name>workspace</name>
             <value>collaboration</value>

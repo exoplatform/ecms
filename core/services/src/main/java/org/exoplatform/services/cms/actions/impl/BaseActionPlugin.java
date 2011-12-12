@@ -583,7 +583,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     variables.put(actionNameVar, actionName);
     variables.put(executableVar,actionExecutable) ;
     variables.put(srcWorkspaceVar, srcWorkspace);
-    variables.put(srcRepository, repository);
+//    variables.put(srcRepository, repository);
     variables.put(srcPathVar, srcPath);
     variables.put(nodePath, srcPath);
     Map<String,Object> executionVariables = getExecutionVariables(mappings) ;

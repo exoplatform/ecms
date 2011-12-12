@@ -12,10 +12,6 @@
           <name>adminIdentity</name>
           <value>*:/Platform/Administrators</value>
         </value-param>
-        <value-param>
-          <name>repository</name>
-          <value>repository</value>
-      </value-param>
     </init-params>
   </component>	
 	

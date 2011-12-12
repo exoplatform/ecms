@@ -26,11 +26,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
       <keywords>Form Generator Portlet</keywords>
     </portlet-info>
     <portlet-preferences>
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
     </portlet-preferences>
   </portlet>
 
@@ -57,12 +52,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
       <keywords>ECM</keywords>
     </portlet-info>
     <portlet-preferences>
-      <!-- Setup the default repository name for fast content creator portlet -->
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
       <!-- Specify the workspace name will be use in repository	-->
       <preference>
         <name>workspace</name>
@@ -138,11 +127,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
         <read-only>true</read-only>
       </preference>
       <!-- Setup the default repository name for fast content creator portlet -->
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
       <!-- Specify the workspace name will be use in repository	-->
       <preference>
         <name>workspace</name>
@@ -225,11 +209,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
         <read-only>true</read-only>
       </preference>
       <!-- Setup the default repository name for fast content creator portlet -->
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
       <!-- Specify the workspace name will be use in repository	-->
       <preference>
         <name>workspace</name>

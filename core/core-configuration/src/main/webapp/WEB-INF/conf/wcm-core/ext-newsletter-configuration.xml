@@ -8,10 +8,6 @@
     <type>org.exoplatform.services.wcm.newsletter.NewsletterManagerService</type>
     <init-params>
       <value-param>
-        <name>repository</name>
-        <value>repository</value>
-      </value-param>
-      <value-param>
         <name>workspace</name>
         <value>collaboration</value>
       </value-param>

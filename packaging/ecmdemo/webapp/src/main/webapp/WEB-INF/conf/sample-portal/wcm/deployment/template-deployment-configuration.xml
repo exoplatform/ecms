@@ -53,9 +53,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -75,9 +72,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -97,9 +91,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -119,9 +110,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -141,9 +129,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -163,9 +148,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -185,9 +167,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>
@@ -207,9 +186,6 @@
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
               <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
                 <field name="workspace">
                   <string>collaboration</string>
                 </field>

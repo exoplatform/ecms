@@ -536,10 +536,6 @@
 	      <type>org.exoplatform.services.cms.templates.ContentTypeFilterPlugin</type>
 	      <description>this plugin is used to filter node type for folder</description>
 	      <init-params>	        
-	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>	        
           <object-param>
             <name>nt:unstructured</name>
             <description>allow all document node type for this folder</description>

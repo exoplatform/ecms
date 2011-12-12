@@ -18,10 +18,6 @@
 	        	<value>true</value>
 	        </value-param>	        
 	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>
-	        <value-param>
 	        	<name>predefinedScriptsLocation</name>
 	        	<value>jar:/conf/dms/artifacts</value>
 	        </value-param>	        

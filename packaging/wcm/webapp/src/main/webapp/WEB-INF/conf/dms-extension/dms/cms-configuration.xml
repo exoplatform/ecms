@@ -68,7 +68,6 @@
 	        <name>cms.configuration</name>
 	        <description>configuration for the cms path</description>
 	        <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-	        	<field  name="repository"><string>repository</string></field>
 	        	<field name="workspaces">
 	          	<collection type="java.util.ArrayList">
 	          		<value><string>collaboration</string></value>	          		               
@@ -195,7 +194,6 @@
           <name>cms.configuration</name>
           <description>configuration for the digital-assets path</description>
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>collaboration</string></value>              	              
@@ -381,7 +379,6 @@
           <name>cms.configuration</name>
           <description>configuration for documents management</description>
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>collaboration</string></value>              	               
@@ -638,7 +635,6 @@
           <name>cms.configuration</name>
           <description>configuration for record management spaces</description>
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>collaboration</string></value>              	               
@@ -699,7 +695,6 @@
           <name>cms.configuration</name>
           <description>configuration for backup workspace</description>
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>backup</string></value>              	               
@@ -766,7 +761,6 @@
           <name>cms.configuration</name>
           <description>configuration for public tag node</description>
           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-            <field name="repository"><string>repository</string></field>
             <field name="workspaces">
               <collection type="java.util.ArrayList">
                 <value><string>collaboration</string></value>                               

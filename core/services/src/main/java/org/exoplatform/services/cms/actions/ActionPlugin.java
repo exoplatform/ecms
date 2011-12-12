@@ -85,7 +85,10 @@ public interface ActionPlugin {
   public void executeAction(String userId, Node actionNode, Map variables, String repository) throws Exception;
 
   public void executeAction(String userId, String executable, Map variables, String repository) throws Exception;
+  
+  public void activateAction(String userId, String executable, Map variables) throws Exception;  
 
+  @Deprecated
   public void activateAction(String userId, String executable, Map variables, String repository) throws Exception;
 
 }

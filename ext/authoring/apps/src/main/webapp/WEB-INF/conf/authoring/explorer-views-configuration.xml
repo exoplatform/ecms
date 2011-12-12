@@ -41,10 +41,6 @@
           <name>predefinedViewsLocation</name>
           <value>war:/conf/authoring</value>
         </value-param>
-        <value-param>
-          <name>repository</name>
-          <value>repository</value>
-        </value-param>
         <object-param>
           <name>WCM-Authoring-View</name>
           <description>View configuration of WCM contributors</description>

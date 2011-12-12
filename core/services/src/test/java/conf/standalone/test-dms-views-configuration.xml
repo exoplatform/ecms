@@ -21,10 +21,6 @@
 	        	<name>predefinedViewsLocation</name>
 	        	<value>classpath:/conf/dms/artifacts</value>
 	        </value-param>	        
-	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>
 		      <object-param>	      
 		        <name>System-View</name>
 		        <description>View configuration for System workspace</description>

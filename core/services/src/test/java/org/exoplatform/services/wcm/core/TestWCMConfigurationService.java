@@ -62,8 +62,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
    * Test get live portals location.
    */
   public void testGetLivePortalsLocation() {
-    NodeLocation nodeLocation = configurationService.getLivePortalsLocation("repository");
-    assertEquals("repository", nodeLocation.getRepository());
+    NodeLocation nodeLocation = configurationService.getLivePortalsLocation();
     assertEquals("collaboration", nodeLocation.getWorkspace());
     assertEquals("/sites content/live", nodeLocation.getPath());
   }

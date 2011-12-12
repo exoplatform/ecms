@@ -36,10 +36,6 @@
        	<name>autoCreateInNewRepository</name>
        	<value>true</value>
        </value-param>	        
-       <value-param>
-       	<name>repository</name>
-       	<value>repository</value>
-       </value-param>	        		        		    		    
        <object-param>        
          <name>CreatedDocuments</name>
          <description>documents created by the current user</description>

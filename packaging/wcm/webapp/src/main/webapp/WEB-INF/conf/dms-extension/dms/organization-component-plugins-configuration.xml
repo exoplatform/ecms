@@ -16,7 +16,6 @@
 	        <name>configuration></name>
 	        <description>description</description>
 	        <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>collaboration</string></value>
@@ -147,7 +146,6 @@
 	        <name>configuration</name>
 	        <description>description</description>
 	        <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-          	<field  name="repository"><string>repository</string></field>
            	<field name="workspaces">
              	<collection type="java.util.ArrayList">
               	<value><string>collaboration</string></value>
@@ -306,7 +304,6 @@
 	        <name>configuration</name>
 	        <description>description</description>
 	        <object type="org.exoplatform.services.cms.queries.impl.NewUserConfig">
-	        	<field name="repository"><string>repository</string></field>
 	          <field name="template"><string>template</string></field>
 	          <field name="users">
 	            <collection type="java.util.ArrayList">

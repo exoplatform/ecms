@@ -134,4 +134,9 @@ public class BPActionPlugin extends BaseActionPlugin implements ComponentPlugin 
     return BPActionActivationJob.class ;
   }
 
+  @Override
+  public void activateAction(String userId, String executable, Map variables) throws Exception {
+    executeAction(userId, executable, variables) ;
+  }
+
 }

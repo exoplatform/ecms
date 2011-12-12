@@ -241,7 +241,7 @@ public class ProcessUtil {
   public static void delegate(ExecutionContext context) {
     context.setVariable(CURRENT_STATE,DELEGATED);
     String[] location = getCurrentLocation(context);
-    String repository = location[REPOSITORY_INDEX];
+    String repository = WCMCoreUtils.getRepository().getConfiguration().getName();
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     try {

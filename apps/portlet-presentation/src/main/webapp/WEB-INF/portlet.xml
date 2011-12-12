@@ -28,11 +28,6 @@
 		
 		<portlet-preferences>
 			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
 				<name>workspace</name>
 				<value>collaboration</value>
 				<read-only>false</read-only>
@@ -152,11 +147,6 @@
 			<keywords>WCM Admin</keywords>
 		</portlet-info>
 		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
 			<preference>
 				<name>workspace</name>
 				<value>collaboration</value>
@@ -500,11 +490,6 @@
 		</portlet-info>
 		
     <portlet-preferences>
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
       <preference>
         <name>workspace</name>
         <value>collaboration</value>

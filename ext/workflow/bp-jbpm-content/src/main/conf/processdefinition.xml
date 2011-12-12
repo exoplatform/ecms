@@ -60,7 +60,6 @@
     <variable name="delegator" access="read,write" mapped-name="exo:validator" />
     <variable name="document-type" access="read,write" mapped-name="document-type" />    
     <variable name="nodePath" access="read,write" mapped-name="nodePath" />   
-    <variable name="repository" access="read,write" mapped-name="repository" />
     <variable name="srcWorkspace" access="read,write" mapped-name="srcWorkspace" />   
     <variable name="srcPath" access="read,write" mapped-name="srcPath" />                        
     <variable name="actionName" access="read,write" mapped-name="actionName" />    

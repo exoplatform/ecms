@@ -14,10 +14,6 @@
       <description>DMS Repository configuration</description>
       <init-params>
        <value-param>
-       	 <name>repository</name>
-       	 <value>repository</value>
-       </value-param>	        		        		    		    
-       <value-param>
          <name>systemWorkspace</name>
          <value>dms-system</value>
        </value-param>

@@ -62,11 +62,11 @@ public class QueryPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     Session session = null ;
     if(autoCreateInNewRepository_) {
-      session = getSession() ;
+      session = getSession();
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
       while(it.hasNext()) {
         QueryData data = (QueryData)it.next().getObject() ;
-        addQuery(queryHomeNode,data) ;
+        addQuery(queryHomeNode,data);
       }
       queryHomeNode.save();
       session.save();

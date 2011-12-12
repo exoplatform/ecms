@@ -43,6 +43,7 @@ public class ScriptPlugin extends BaseComponentPlugin{
     return Boolean.parseBoolean(param.getValue()) ;
   }
 
+  @Deprecated
   public String getInitRepository() {
     ValueParam param = params_.getValueParam("repository") ;
     if(param == null) return null ;

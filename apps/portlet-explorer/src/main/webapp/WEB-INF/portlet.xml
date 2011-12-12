@@ -30,11 +30,6 @@
       <keywords>Contents</keywords>
     </portlet-info>
     <portlet-preferences>
-    	<preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>false</read-only>
-      </preference>
       <preference>
         <name>workspace</name>
         <value></value>
@@ -84,11 +79,6 @@
       <preference>
         <name>trashHomeNodePath</name>     
         <value>/Trash</value>        
-        <read-only>false</read-only>
-      </preference>   
-      <preference>
-        <name>trashRepository</name>     
-        <value>repository</value>        
         <read-only>false</read-only>
       </preference>   
       <preference>
