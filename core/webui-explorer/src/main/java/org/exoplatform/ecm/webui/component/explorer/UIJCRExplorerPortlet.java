@@ -134,7 +134,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   public boolean isShowActionBar() {
     PortletPreferences portletpref = getPortletPreferences();
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_ACTION_BAR, "false")) &&
-           !this.findFirstComponentOfType(UIJCRExplorer.class).isAddingDocument();
+           (!this.findFirstComponentOfType(UIJCRExplorer.class).isAddingDocument() ||
+             this.findFirstComponentOfType(UIWorkingArea.class).getChild(UIActionBar.class).hasBackButton());
   }
 
   public boolean isShowSideBar() {
