@@ -200,7 +200,7 @@ public class UISavedSearches extends UIComponent {
       contentNameSearch.setLocation(currentNodePath);
       UISimpleSearch uiSimpleSearch = uiECMSearch.findFirstComponentOfType(UISimpleSearch.class);
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNodePath);
-      UIPopupContainer.activate(uiECMSearch, 700, 500);
+      UIPopupContainer.activate(uiECMSearch, 700, 500, false);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
