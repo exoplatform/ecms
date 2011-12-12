@@ -457,6 +457,14 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       if (languagesNode.canAddMixin("exo:hiddenable"))
         languagesNode.addMixin("exo:hiddenable");
     }
+    if (!translationNode.isNodeType("mix:i18n")) {
+      translationNode.addMixin("mix:i18n");
+      translationNode.save();
+    }
+    if (!node.isNodeType("mix:i18n")) {
+      node.addMixin("mix:i18n");
+      node.save();
+    }
     String lang = translationNode.getProperty("exo:language").getString();
     if (languagesNode.hasNode(lang)) {
       throw new ItemExistsException();
