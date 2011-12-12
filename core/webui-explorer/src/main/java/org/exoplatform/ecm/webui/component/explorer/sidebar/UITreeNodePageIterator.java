@@ -71,15 +71,18 @@ public class UITreeNodePageIterator extends UIPageIterator {
         else
           uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo");
       }
-      if(uiDocumentInfo == null || !uiDocumentInfo.isRendered()) return ;
+      
+      if (uiDocumentInfo == null) return;
+      
       String currentPath = uiExplorer.getCurrentNode().getPath();
       if(!currentPath.equalsIgnoreCase(uiPageIterator.getSelectedPath())) return ;
 
       UIPageIterator iterator = uiDocumentInfo.getContentPageIterator();
       iterator.setCurrentPage(page);
-      UIDrivesArea uiDrivesArea = uiExplorer.findFirstComponentOfType(UIDrivesArea.class);
-      if (!uiDrivesArea.isRendered())
+      
+      if (uiDocumentWorkspace.isRendered() && uiDocumentContainer.isRendered() && uiDocumentInfo.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
+      }
     }
   }
 }

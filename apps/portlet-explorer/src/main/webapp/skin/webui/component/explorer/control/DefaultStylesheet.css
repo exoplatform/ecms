@@ -235,14 +235,14 @@
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .InputContainer {
-  margin: 0 30px 0 0;
+  margin: 0 4px 0 0;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .InputContainer input {
   border: solid 0px white;
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
-  width: 100%;
+  width: 96%;
   height: 16px;
 }
 
@@ -893,13 +893,15 @@
 }
 
 .UIJCRExplorerPortlet .ShowElementIcon:hover {
-	border: 1px solid #e1e1e1;
-	-moz-border-radius: 4px 4px 0 0;
-	border-bottom: none;
-	margin: 3px 0 0 0;
-	-moz-box-shadow: 2px 3px 2px #E1E1E1;
-	-webkit-box-shadow: 2px 3px 2px #E1E1E1;
-	box-shadow: 2px 3px 2px #E1E1E1;
+	 background: white url(DefaultSkin/icons/DownArowIcon.gif) no-repeat right center;
+	 border: 1px solid #e1e1e1;
+	 -moz-border-radius: 4px 4px 0 0;
+	 border-bottom: none;
+	 margin: 3px 0 0 0;
+	 -moz-box-shadow: 2px 3px 2px #E1E1E1;
+	 -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+	 box-shadow: 2px 3px 2px #E1E1E1;
+
 }
 
 .UIJCRExplorerPortlet .ShowElementSelect {
@@ -927,7 +929,7 @@
 	z-index: 1;
 }
 
-.IconListHideElement .WhiteBG{
+.UIJCRExplorerPortlet .ShowElementIcon:hover .WhiteBG{
     background: white;
     height: 4px;
     margin-left: -8px;

@@ -506,21 +506,22 @@ public class UIJCRExplorer extends UIContainer {
         setValue(Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    
+    UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
+    UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
+    UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
+    uiDocumentWithTree.updatePageListData();
+    uiDocumentInfo.updatePageListData();
+    
     if(uiDocumentWorkspace.isRendered()) {
       if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) == null ||
           !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
-        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
-        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
         if(isShowViewFile() &&  !(isShowDocumentViewForFile())) {
-          uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {
-          UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-          uiDocumentInfo.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
-          uiDocumentWithTree.updatePageListData();
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       } else {
         UIDocumentFormController uiDocController = uiDocumentWorkspace.getChild(UIDocumentFormController.class);

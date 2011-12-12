@@ -5,14 +5,20 @@
 	color: #0e396c;
 }
 
-.FileContent .TopTitle {  
+.FileContent .TopNavContent {  
     background: #F8F8F8;
     border: 1px solid #E1E1E1;
+}
+
+.FileContent .TopTitle {  
     color: #4F4F4F;
     font-weight: bold;
     height: 28px;
     line-height: 26px;
     padding-left: 10px;
+	width:75%;
+	overflow:hidden;
+	float:left;
 }
 
 .FileContent .ActionButton{
@@ -20,12 +26,11 @@
 }
 
 .FileContent .ActionButton a{
-  -moz-border-radius: 3px 3px 3px 3px;
-    -moz-box-shadow: 0 -18px 12px #F7F7F7 inset;
-    border: 1px solid #E1E1E1;
-    color: #4F4F4F;
+    background: url("/eXoDMSResources/skin/images/file/DownloadFile.png") no-repeat scroll 4px center transparent;
+    border-left: 1px solid #E1E1E1;
+    color: #058EE6;
     line-height: 20px;
-    padding: 7px 8px 8px;
+    padding: 3px 10px 3px 29px;
 }
 
 .FileContent .ECMIframe {
