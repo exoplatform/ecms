@@ -171,14 +171,9 @@ public class UIJcrExplorerContainer extends UIContainer {
       boolean isShowActionBar = uiFEPortlet.isShowActionBar();
       uiActionbar.setTabOptions(viewList.get(0));
       uiActionbar.setRendered(isShowActionBar);
-      String usecase =  preference.getValue(UIJCRExplorerPortlet.USECASE, "").trim();
-      if ((usecase != null) && UIJCRExplorerPortlet.SELECTION.equals(usecase)) {
-        uiWorkingArea.setRenderedChildrenOfTypes(new Class[] {UIActionBar.class, UIDocumentWorkspace.class});
-        uiJCRExplorer.refreshExplorer();
-      } else {
-        uiWorkingArea.setRenderedChild(UIDocumentWorkspace.class);
-        uiJCRExplorer.refreshExplorer();
-      }
+      uiWorkingArea.setRenderedChildrenOfTypes(new Class[] { UIActionBar.class,
+          UIDocumentWorkspace.class });
+      uiJCRExplorer.refreshExplorer();
       UIRightClickPopupMenu uiRightClickPopupMenu = uiWorkingArea.findFirstComponentOfType(UIRightClickPopupMenu.class);
       if(uiRightClickPopupMenu!=null && !uiRightClickPopupMenu.isRendered())
         uiRightClickPopupMenu.setRendered(true);
