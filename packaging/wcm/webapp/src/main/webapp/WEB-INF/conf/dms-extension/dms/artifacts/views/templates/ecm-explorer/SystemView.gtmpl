@@ -157,6 +157,7 @@
             String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length());   
             String title = uiWorkingArea.getTitle(data);            
             String subName;
+             String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
             //nodePath = nodePath + "&workspaceName=" + preferenceWS;
             String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
         %>
@@ -199,7 +200,7 @@
           <div class="RightColumn" style="width: 112px;">
             <%=dateFormat.format(uicomponent.getDateCreated(data))%>
           </div>
-          <div class="ResizeColumn" style="float:left; width: 119px; padding-left: 6px;">
+          <div class="ResizeColumn" style="float:left; width: 119px; padding-left: 6px;$hiddenStyle;">
               <div class="NodeLabel">
                 <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:113px; overflow:hidden;" title="<%=title%>"><%=subName%></div>
               </div>
