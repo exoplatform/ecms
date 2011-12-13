@@ -12,11 +12,11 @@ import org.exoplatform.services.command.action.Action;
  */
 
 public class AddFileDocumentAction implements Action{
-	public boolean execute(Context context) throws Exception {
-    Node node = (Node)context.get("currentItem");    
+  public boolean execute(Context context) throws Exception {
+    Node node = (Node)context.get("currentItem");
     if(node.isNodeType("nt:file") && node.canAddMixin("mix:referenceable")) {
-      node.addMixin("mix:referenceable");      
-    }    
+      node.addMixin("mix:referenceable");
+    }
     return false;
   }
 }

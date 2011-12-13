@@ -177,14 +177,17 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       UIScriptForm uiForm = event.getSource() ;
       ScriptService scriptService = uiForm.getApplicationComponent(ScriptService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim();
+      StringBuffer name = new StringBuffer();
+      name.append(uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim());
       String content = uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).getValue() ;
-      if(content == null) content = "" ;
-      if(name == null || name.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-null", null,
-                                                ApplicationMessage.WARNING)) ;
-        
-        return ;
+      if (content == null)
+        content = "";
+      if (name == null || name.toString().trim().length() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-null",
+                                                null,
+                                                ApplicationMessage.WARNING));
+
+        return;
       }
       String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!", "\""};
       for(String filterChar : arrFilterChar) {
@@ -195,7 +198,9 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           return ;
         }
       }
-      if(!name.contains(SCRIPT_FILE_TYPE)) name = name + SCRIPT_FILE_TYPE ;
+      if (name.indexOf(SCRIPT_FILE_TYPE) < 0) {
+        name.append(SCRIPT_FILE_TYPE);
+      }
       UIScriptList curentList = null ;
       UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
       List<String> listScript = new ArrayList<String>() ;
@@ -234,7 +239,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         }
       } else {
         try {
-          Node node = curentList.getScriptNode(name) ;
+          Node node = curentList.getScriptNode(name.toString()) ;
           if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
           else node.checkout() ;
           scriptService.addScript(namePrefix + "/" + name,
@@ -261,7 +266,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
 
   static public class RestoreActionListener extends EventListener<UIScriptForm> {
     public void execute(Event<UIScriptForm> event) throws Exception {    
-	  UIScriptForm uiForm = event.getSource();     
+      UIScriptForm uiForm = event.getSource();
       String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue() ;
       UIScriptList uiScriptList = null ;
       UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;    
@@ -270,8 +275,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         uiScriptList = uiManager.findComponentById(UIECMScripts.SCRIPTLIST_NAME);
       }      
       try {
-    	Node node = uiScriptList.getScriptNode(name) ;
-        String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
+        Node node = uiScriptList.getScriptNode(name);
+        String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue();
         String baseVesion = node.getBaseVersion().getName() ;
         if(!vesion.equals(baseVesion)) {
           node.checkout() ;
@@ -282,7 +287,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       } catch (PathNotFoundException pathNotFoundException) {
-    	  
+
       }
     }
   }

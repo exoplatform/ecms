@@ -392,8 +392,15 @@ public class UISearchResult extends UIContainer {
     private LinkManager linkManager = null;
     private String keyword ="";
     private List<String> documentTypes;
-    final static private String  CHECK_LINK_MATCH_QUERY1= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:title) like '%$2%')";
-    final static private String  CHECK_LINK_MATCH_QUERY2= "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:title) like '%$2%')";
+
+    final static private String  CHECK_LINK_MATCH_QUERY1 = "select * from nt:base "
+                                                             + "where jcr:path = '$0' and ( contains(*, '$1') "
+                                                             + "or lower(exo:name) like '%$2%' "
+                                                             + "or lower(exo:title) like '%$2%')";
+
+    final static private String  CHECK_LINK_MATCH_QUERY2 = "select * from nt:base where jcr:path like '$0/%' "
+                                                             + "and ( contains(*, '$1') or lower(exo:name) like '%$2%' "
+                                                             + "or lower(exo:title) like '%$2%')";
     
     public NodeFilter(List<String> categories, String keyword, List<String> documentTypes) {
       taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);

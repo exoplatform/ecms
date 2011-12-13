@@ -249,12 +249,15 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     getUIFormSelectBox(AUTOCREATED).setValue(String.valueOf(property.isAutoCreate()));
     getUIFormSelectBox(PROTECTED).setValue(String.valueOf(property.isReadOnly()));
     List<String> cons = property.getValueConstraints();
-    String valueConstraints = null;
-    for(String value : cons) {
-      if(valueConstraints == null) valueConstraints = value;
-      else valueConstraints = valueConstraints + "," + value;
+    StringBuffer valueConstraints = null;
+    for (String value : cons) {
+      if (valueConstraints == null) {
+        valueConstraints = new StringBuffer(value);
+      } else {
+        valueConstraints.append(",").append(value);
+      }
     }
-    getUIStringInput(VALUE_CONSTRAINTS).setValue(valueConstraints);
+    getUIStringInput(VALUE_CONSTRAINTS).setValue(valueConstraints.toString());
     String parentVersion = Integer.toString(property.getOnVersion());
     getUIFormSelectBox(PARENTVERSION).setValue(parentVersion);
   }
@@ -321,22 +324,26 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));        
         return;
       }
-      for(int i = 0; i < name.length(); i ++){
+      for (int i = 0; i < name.length(); i++) {
         char c = name.charAt(i);
         if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-        uiApp.addMessage(new ApplicationMessage(
-            "UIPropertyDefinitionForm.msg.property-name", null,
-            ApplicationMessage.WARNING));        
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name",
+                                                null,
+                                                ApplicationMessage.WARNING));
         return;
       }
-      if(prefix != null && prefix.length() > 0 ) name = prefix + ":" + name;
-      if (propertyInfo ==  null) {
+      if (propertyInfo == null) {
         propertyInfo = new PropertyDefinitionValue();
       }
-      propertyInfo.setName(name);
+      if (prefix != null && prefix.length() > 0) {
+        propertyInfo.setName(prefix + ":" + name);
+      } else {
+        propertyInfo.setName(name);
+      }
+      
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
       String isMultiple = uiForm.getUIFormSelectBox(MULTIPLE).getValue();
@@ -392,15 +399,19 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-        uiApp.addMessage(new ApplicationMessage(
-            "UIPropertyDefinitionForm.msg.property-name", null,
-            ApplicationMessage.WARNING));        
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name",
+                                                null,
+                                                ApplicationMessage.WARNING));
         return;
       }
-      if(prefix != null && prefix.length() > 0 ) propertyName = prefix + ":" + propertyName;
-      UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
       PropertyDefinitionValue propertyInfo = new PropertyDefinitionValue();
-      propertyInfo.setName(propertyName);
+      if (prefix != null && prefix.length() > 0) {
+        propertyInfo.setName(prefix + ":" + propertyName);
+      } else {
+        propertyInfo.setName(propertyName);
+      }
+      UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
+      
 
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
@@ -520,7 +531,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
-      String strValues = null;
+      StringBuffer strValues = null;
       if(uiPropertyForm.getRequiredValue().equals("9")) {
         List<String> selectedNodes = new ArrayList<String>();
         List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
@@ -532,21 +543,27 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
             count ++;
           }
         }
-        for(int i = 0; i < selectedNodes.size(); i++) {
-          if(strValues == null) strValues = selectedNodes.get(i);
-          else strValues = strValues + "," + selectedNodes.get(i);
+        for (int i = 0; i < selectedNodes.size(); i++) {
+          if (strValues == null) {
+            strValues = new StringBuffer(selectedNodes.get(i));
+          } else {
+            strValues.append(",").append(selectedNodes.get(i));
+          }
         }
       } else if(uiPropertyForm.getRequiredValue().equals("1")) {
         UIFormMultiValueInputSet uiMulti = uiForm.getUIInput(CONSTRAINTS);
         List<String> constraintValues = (List<String>)uiMulti.getValue();
         if(constraintValues == null) constraintValues = new ArrayList<String>();
-        for(int i = 0; i < constraintValues.size(); i++) {
-          if(strValues == null) strValues = constraintValues.get(i);
-          else strValues = strValues + "," + constraintValues.get(i);
+        for (int i = 0; i < constraintValues.size(); i++) {
+          if (strValues == null) {
+            strValues = new StringBuffer(constraintValues.get(i));
+          } else {
+            strValues.append(",").append(constraintValues.get(i));
+          }
         }
 
       }
-      uiForm.getUIStringInput(VALUE_CONSTRAINTS).setValue(strValues);
+      uiForm.getUIStringInput(VALUE_CONSTRAINTS).setValue(strValues.toString());
       uiForm.removeChildById("Contraints");
       uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());

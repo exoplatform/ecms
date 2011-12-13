@@ -16,13 +16,10 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import org.exoplatform.commons.exception.ExoMessageException;
-import org.exoplatform.commons.utils.PageList;
+import java.util.ArrayList;
+
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -58,7 +55,9 @@ public class NodeLocationPaginatedResultIterator extends PaginatedResultIterator
     result.getFiltersDescriber().put(WCMComposer.FILTER_LIMIT, ""+this.getPageSize());
     result.getFiltersDescriber().put(WCMComposer.FILTER_OFFSET, ""+(this.getPageSize()*(page-1)));
     result.getFiltersDescriber().put(WCMComposer.FILTER_TOTAL, ""+this.result.getNumTotal());
-    result = composer.getPaginatedContents(result.getNodeLocationDescriber(), result.getFiltersDescriber(), WCMCoreUtils.getUserSessionProvider());
+    result = composer.getPaginatedContents(result.getNodeLocationDescriber(),
+                                           result.getFiltersDescriber(),
+                                           WCMCoreUtils.getUserSessionProvider());
 
     currentListPage_ = NodeLocation.getLocationsByNodeList(result.getNodes());
 

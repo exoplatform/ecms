@@ -24,9 +24,6 @@ import java.util.TreeSet;
 import javax.jcr.Node;
 import javax.jcr.lock.Lock;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;

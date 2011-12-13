@@ -16,7 +16,6 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator;
 
-import javax.jcr.RepositoryException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 

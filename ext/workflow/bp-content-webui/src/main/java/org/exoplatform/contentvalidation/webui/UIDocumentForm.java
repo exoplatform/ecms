@@ -90,7 +90,7 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
         @EventConfig(listeners = UIDocumentForm.CancelActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.AddActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class, 
+        @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class,
             confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
@@ -124,7 +124,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   public void setRepositoryName(String repositoryName){ this.repositoryName = repositoryName; }
 
   public void setWorkspace(String workspace) { workspaceName = workspace; }
-  
+
   private String getRepository() throws Exception {
     ManageableRepository manaRepo = (ManageableRepository)getCurrentNode().getSession().getRepository() ;
     return manaRepo.getConfiguration().getName() ;
@@ -299,7 +299,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                       null,
                                                       ApplicationMessage.WARNING));
-              
+
               return;
             }
           }
@@ -353,7 +353,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             } catch(AccessDeniedException accessDeniedException) {
               uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
                   ApplicationMessage.WARNING));
-              
+
             } catch (Exception e) {
               continue;
             }
@@ -373,20 +373,20 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         LOG.error("Unexpected error", ve);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch (ConstraintViolationException constraintViolationException) {
         LOG.error("Unexpected error occurrs", constraintViolationException);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         String key = "UIDocumentForm.msg.cannot-save" ;
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
-        
+
         return;
       }
     }
@@ -445,11 +445,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
-          
+
           return;
         }
       } else {
@@ -465,7 +465,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       uiForm.isShowingComponent = true;
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID);
       Map fieldPropertiesMap = uiForm.componentSelectors.get(fieldName);
-      
+
       // get Param = fieldPropertiesMap.get("selectorParams");
       // Param = Param.split("'");
       String classPath = (String)fieldPropertiesMap.get("selectorClass");
@@ -475,23 +475,23 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIComponent uiComp = uiContainer.createUIComponent(clazz, null, null);
       String selectorParams = (String)fieldPropertiesMap.get("selectorParams");
       if(uiComp instanceof UIOneNodePathSelector) {
-     	SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();   
-    	String repositoryName = uiForm.getRepository(); 
-    	String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
+       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+      String repositoryName = uiForm.getRepository();
+      String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
         String wsName = "";
         if(wsFieldName != null && wsFieldName.length() > 0) {
           if (uiForm.<UIFormInputBase>getUIInput(wsFieldName) != null) {
             wsName = (String)uiForm.<UIFormInputBase>getUIInput(wsFieldName).getValue();
             ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);
           } else {
-           	wsName = uiForm.getCurrentNode().getSession().getWorkspace().getName();             
+             wsName = uiForm.getCurrentNode().getSession().getWorkspace().getName();
             ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, false);
-          }                
+          }
         }
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",");
           if(arrParams.length == 4) {
-            ((UIOneNodePathSelector)uiComp).setAcceptedNodeTypesInPathPanel(new String[] {Utils.NT_FILE, 
+            ((UIOneNodePathSelector)uiComp).setAcceptedNodeTypesInPathPanel(new String[] {Utils.NT_FILE,
                 Utils.NT_FOLDER, Utils.NT_UNSTRUCTURED, Utils.EXO_TAXONOMY});
             wsName = arrParams[1];
             rootPath = arrParams[2];
@@ -510,19 +510,19 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       } else if (uiComp instanceof UIOneTaxonomySelector) {
         NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
         DMSConfiguration dmsConfig = uiForm.getApplicationComponent(DMSConfiguration.class);
-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(); 
+        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
         String workspaceName = dmsRepoConfig.getSystemWorkspace();
         ((UIOneTaxonomySelector)uiComp).setIsDisable(workspaceName, false);
-        String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);      
+        String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
         Session session = uiForm.getSession();
-        Node rootTree = (Node) session.getItem(rootTreePath);      
+        Node rootTree = (Node) session.getItem(rootTreePath);
         NodeIterator childrenIterator = rootTree.getNodes();
         while (childrenIterator.hasNext()) {
           Node childNode = childrenIterator.nextNode();
           rootTreePath = childNode.getPath();
           break;
         }
-        
+
         ((UIOneTaxonomySelector)uiComp).setRootNodeLocation(uiForm.repositoryName, workspaceName, rootTreePath);
         ((UIOneTaxonomySelector)uiComp).init(WCMCoreUtils.getSystemSessionProvider());
       }
@@ -532,7 +532,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       ((ComponentSelector)uiComp).setSourceComponent(uiForm, params);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
-  }  
+  }
 
   static public class RemoveReferenceActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
@@ -542,9 +542,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       uiForm.getUIStringInput(fieldName).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
-  }  
-  
-  
+  }
+
+
   static public class RemoveActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiDocumentForm = event.getSource();

@@ -101,8 +101,10 @@ public class UIContentNameSearch extends UIForm {
         uiSearchResult.setSearchTime(time);
         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
         uiECMSearch.setSelectedTab(uiSearchResult.getId());
-      } catch (RepositoryException reEx) {        
-        application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null, ApplicationMessage.WARNING));
+      } catch (RepositoryException reEx) {
+        application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed",
+                                                      null,
+                                                      ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(contentNameSearch);
         return;
       } catch (Exception e) {

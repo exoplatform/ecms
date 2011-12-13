@@ -283,11 +283,11 @@ public class UISearchForm extends UIForm {
         uiSearchResult.setPageList(pageList);
         float timeSearch = pageList.getQueryTime() / 1000;
         uiSearchResult.setSearchTime(timeSearch);        
-        if(pageList.getAvailable()<=0) {
-        	String suggestion = pageList.getSpellSuggestion();         
-        	uiSearchResult.setSuggestion(suggestion);
-        	uiSearchForm.setSubmitAction(suggestion);         
-        } 
+        if (pageList.getAvailable() <= 0) {
+          String suggestion = pageList.getSpellSuggestion();
+          uiSearchResult.setSuggestion(suggestion);
+          uiSearchForm.setSubmitAction(suggestion);
+        }
         portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,

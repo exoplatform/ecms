@@ -16,9 +16,6 @@
  */
 package org.exoplatform.wcm.webui.viewer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 
@@ -35,9 +32,6 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
-import org.exoplatform.webui.ext.UIExtensionManager;
-import org.exoplatform.webui.ext.UIExtension;
-import java.util.List;
 
 /**
  * Created by The eXo Platform SAS

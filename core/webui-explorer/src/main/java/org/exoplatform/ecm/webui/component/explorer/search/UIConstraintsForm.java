@@ -35,7 +35,6 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -224,41 +223,50 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
   }
 
   private String getNodeTypeQueryString(String nodeTypes) {
-    String advanceQuery = "" ;
-    String[] arrNodeTypes = {} ;
-    if (nodeTypes.indexOf(",") > -1)
-      arrNodeTypes = nodeTypes.split(",");
-    if (arrNodeTypes.length > 0) {
-      for (String nodeType : arrNodeTypes) {
-        if (advanceQuery.length() == 0)
-          advanceQuery = "@jcr:primaryType = '" + nodeType + "'";
-        else
-          advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "@jcr:primaryType = '"
-              + nodeType + "'";
-      }
-    } else {
-      advanceQuery = "@jcr:primaryType = '" + nodeTypes + "'" ;
-    }
-    return advanceQuery;
-  }
-
-  private String getNodeTypeSQLQueryString(String nodeTypes) {
-    String advanceQuery = "";
+    StringBuffer advanceQuery = new StringBuffer();
     String[] arrNodeTypes = {};
     if (nodeTypes.indexOf(",") > -1)
       arrNodeTypes = nodeTypes.split(",");
     if (arrNodeTypes.length > 0) {
       for (String nodeType : arrNodeTypes) {
         if (advanceQuery.length() == 0)
-          advanceQuery = "jcr:primaryType = '" + nodeType + "'";
+          advanceQuery.append("@jcr:primaryType = '").append(nodeType).append("'");
         else
-          advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "jcr:primaryType = '" + nodeType
-              + "'";
+          advanceQuery.append(" ")
+                      .append(OR_OPERATION)
+                      .append(" ")
+                      .append("@jcr:primaryType = '")
+                      .append(nodeType)
+                      .append("'");
       }
     } else {
-      advanceQuery = "jcr:primaryType = '" + nodeTypes + "'";
+      advanceQuery.append("@jcr:primaryType = '").append(nodeTypes).append("'");
     }
-    return advanceQuery;
+    return advanceQuery.toString();
+  }
+
+  private String getNodeTypeSQLQueryString(String nodeTypes) {
+    StringBuffer advanceQuery = new StringBuffer();
+    String[] arrNodeTypes = {};
+    if (nodeTypes.indexOf(",") > -1)
+      arrNodeTypes = nodeTypes.split(",");
+    if (arrNodeTypes.length > 0) {
+      for (String nodeType : arrNodeTypes) {
+        if (advanceQuery.length() == 0)
+          advanceQuery.append("jcr:primaryType = '").append(nodeType).append("'");
+        else
+          advanceQuery.append(advanceQuery)
+                      .append(" ")
+                      .append(OR_OPERATION)
+                      .append(" ")
+                      .append("jcr:primaryType = '")
+                      .append(nodeType)
+                      .append("'");
+      }
+    } else {
+      advanceQuery.append("jcr:primaryType = '").append(nodeTypes).append("'");
+    }
+    return advanceQuery.toString();
   }
 
   /**
@@ -525,11 +533,13 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         return ;
       }
       String currentPath = uiExplorer.getCurrentNode().getPath() ;
-      String statement = "select * from nt:base where " ;
-      if(!currentPath.equals("/")) statement = statement + "jcr:path like '"+ currentPath +"/%' AND " ;
-      statement = statement + ""+property+" is not null" ;
+      StringBuffer statement = new StringBuffer("select * from nt:base where ");
+      if (!currentPath.equals("/")) {
+        statement.append("jcr:path like '").append(currentPath).append("/%' AND ");
+      }
+      statement.append(property).append(" is not null");
       QueryManager queryManager = uiExplorer.getTargetSession().getWorkspace().getQueryManager() ;
-      Query query = queryManager.createQuery(statement, Query.SQL) ;
+      Query query = queryManager.createQuery(statement.toString(), Query.SQL) ;
       QueryResult result = query.execute() ;
       if(result == null || result.getNodes().getSize() == 0) {
         uiApp.addMessage(new ApplicationMessage("UICompareExactlyForm.msg.not-result-found", null)) ;

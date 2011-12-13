@@ -70,14 +70,16 @@ public class UISelectedCategoriesGrid extends UIGrid {
     for(String categoryPath: getSelectedCategories()) {
       CategoryData bean = new CategoryData();
       String[] array = categoryPath.split("/");
-      String value = "";
       if (array.length > 4) {
+        StringBuffer value = new StringBuffer();
         for (int i = 4; i < array.length; i++) {
-          value += array[i];
-          if (i < array.length - 1) value += "/";
+          value.append(array[i]);
+          if (i < array.length - 1) value.append("/");
         }
-      } else value = categoryPath;
-      bean.setCategoryName(value);
+        bean.setCategoryName(value.toString());
+      } else {
+        bean.setCategoryName(categoryPath);
+      }
       bean.setCategoryPath(categoryPath);
       categoryDataList.add(bean);
     }

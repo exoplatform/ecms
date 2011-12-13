@@ -113,13 +113,15 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
 
 
   private void setFieldValues(String fieldName, List<String> selectedNodes) throws Exception {
-    String strNodeList = null ;
+    StringBuffer strNodeList = null ;
     UINodeTypeForm uiNodeTypeForm = getParent() ;
-    for(int i = 0 ; i < selectedNodes.size() ; i++) {
-      if(strNodeList == null) strNodeList = selectedNodes.get(i) ;
-      else strNodeList = strNodeList + "," + selectedNodes.get(i) ;
+    for (int i = 0; i < selectedNodes.size(); i++) {
+      if (strNodeList == null)
+        strNodeList = new StringBuffer(selectedNodes.get(i));
+      else
+        strNodeList.append(",").append(selectedNodes.get(i));
     }
-    uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList) ;
+    uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList.toString()) ;
     if(fieldName.equals(UINodeTypeForm.SUPER_TYPE)) {
       for(UIComponent uiComp : uiNodeTypeForm.getChildren()) {
         UIFormInputSetWithAction tab = uiNodeTypeForm.getChildById(uiComp.getId()) ;

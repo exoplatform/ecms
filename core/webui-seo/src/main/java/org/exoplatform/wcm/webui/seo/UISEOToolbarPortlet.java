@@ -25,7 +25,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
-import org.exoplatform.wcm.webui.seo.UISEOToolbarForm;
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform

@@ -19,9 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.versions;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -63,8 +61,6 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SARL

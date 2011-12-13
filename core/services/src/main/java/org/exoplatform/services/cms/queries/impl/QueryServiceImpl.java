@@ -226,12 +226,15 @@ public class QueryServiceImpl implements QueryService, Startable{
    */
   private Node getNodeByRelativePath(Node userHome, String relativePath) throws Exception {
     String[] paths = relativePath.split("/");
-    String relPath = null;
+    StringBuffer relPath = null;
     Node queriesHome = null;
-    for(String path : paths) {
-      if(relPath == null) relPath = path;
-      else relPath = relPath + "/" + path;
-      if(!userHome.hasNode(relPath)) queriesHome = userHome.addNode(relPath);
+    for (String path : paths) {
+      if (relPath == null)
+        relPath = new StringBuffer(path);
+      else
+        relPath.append("/").append(path);
+      if (!userHome.hasNode(relPath.toString()))
+        queriesHome = userHome.addNode(relPath.toString());
     }
     return queriesHome;
   }

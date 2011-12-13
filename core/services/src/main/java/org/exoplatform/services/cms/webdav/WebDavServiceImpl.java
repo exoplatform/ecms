@@ -83,13 +83,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
    * Logger.
    */
   private static Log log = ExoLogger.getLogger("cms.webdav.WebDavServiceImpl");
-  
+
   private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
 
   private final NodeFinder nodeFinder;
-  
+
   private final RepositoryService repositoryService;
-  
+
   private ListenerService listenerService;
 
   public WebDavServiceImpl(InitParams params,
@@ -364,7 +364,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     }
     return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
-  
+
   @Deprecated
   public Response put(String repoName, String repoPath, String lockTokenHeader, String ifHeader,
       String fileNodeTypeHeader, String contentNodeTypeHeader, String mixinTypes, MediaType mediatype,
@@ -373,7 +373,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     return put(repoName, repoPath, lockTokenHeader, ifHeader, fileNodeTypeHeader, contentNodeTypeHeader, mixinTypes,
         mediatype, inputStream, null);
   }
-      
+
 
   @PUT
   @Path("/{repoName}/{repoPath:.*}/")
@@ -427,7 +427,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     try {
       Node currentNode = (Node) session.getItem(path(repoPath));
       if (currentNode.isCheckedOut())
-      	listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);       
+        listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
     } catch (RepositoryException re) {
@@ -588,7 +588,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     return mkcol(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, mixinTypesHeader, null);
 
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -604,7 +604,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
-      repoPath = 
+      repoPath =
         item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
@@ -642,7 +642,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     }
     return super.delete(repoName, repoPath, lockTokenHeader, ifHeader);
   }
-  
+
   private String convertRepoPath(String repoPath, boolean giveTarget) throws Exception{
     try {
       Item item = nodeFinder.getItem(workspaceName(repoPath), path(normalizePath(repoPath)), giveTarget);
@@ -652,5 +652,5 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
   }
-  
+
 }

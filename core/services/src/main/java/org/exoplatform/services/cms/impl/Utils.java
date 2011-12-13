@@ -57,7 +57,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class Utils {
   private final static Log   log          = ExoLogger.getLogger("org.exoplatform.services.cms.impl.Utils");
-  
+
   private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"";
 
   public static final String MAPPING_FILE = "mapping.properties";
@@ -93,7 +93,7 @@ public class Utils {
 
   /**
    * this function used to process import version history for a node
-   * 
+   *
    * @param currentNode
    * @param versionHistorySourceStream
    * @param mapHistoryValue
@@ -145,7 +145,7 @@ public class Utils {
 
   /**
    * do import a version into a node
-   * 
+   *
    * @param versionableNode
    * @param versionHistoryStream
    * @param baseVersionUuid
@@ -169,7 +169,7 @@ public class Utils {
 
   /**
    * get data from the version history file
-   * 
+   *
    * @param importHistorySourceStream
    * @return
    * @throws Exception
@@ -226,18 +226,18 @@ public class Utils {
     String[] arrHistoryValue = valueHistory.split(";");
     return arrHistoryValue[0];
   }
-  
+
   public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
-    return StringUtils.replaceOnce(parameterizedDrivePath, 
-                                   nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}", 
+    return StringUtils.replaceOnce(parameterizedDrivePath,
+                                   nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}",
                                    userNode.getPath());
   }
-  
+
   public static List<PropertyDefinition> getProperties(Node node) throws Exception {
-    List<PropertyDefinition> properties = new ArrayList<PropertyDefinition>();      
+    List<PropertyDefinition> properties = new ArrayList<PropertyDefinition>();
     NodeType nodetype = node.getPrimaryNodeType() ;
     Collection<NodeType> types = new ArrayList<NodeType>() ;
     types.add(nodetype) ;
@@ -250,7 +250,7 @@ public class Utils {
             properties.add(property);
           }
         }
-    } 
+    }
     return properties;
   }
 
@@ -258,7 +258,7 @@ public class Utils {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     return trashService.isInTrash(node);
   }
-  
+
   /**
    * Gets the title.
    *
@@ -291,16 +291,16 @@ public class Utils {
     }
     return Text.unescapeIllegalJcrChars(title);
   }
-  
+
   public static String escapeIllegalCharacterInQuery(String query) {
     String ret = query;
     if(ret != null) {
-	    for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
-	      ret = ret.replace(c + "", "\\" + c);
-	    }
+      for (char c : ILLEGAL_SEARCH_CHARACTERS.toCharArray()) {
+        ret = ret.replace(c + "", "\\" + c);
+      }
     }
     return ret;
   }
 
-  
+
 }

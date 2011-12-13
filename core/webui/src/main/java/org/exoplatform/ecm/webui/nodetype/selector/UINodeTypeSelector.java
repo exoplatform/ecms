@@ -240,9 +240,11 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       UIFormStringInput uiInputNodeType = (UIFormStringInput)uiNodeTypeSelect.findComponentById("NodeTypeText");
       String nodeTypeName = uiInputNodeType.getValue();
       if (nodeTypeName == null || nodeTypeName.length() == 0) return;
-      nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*")
-                                                                                 : nodeTypeName;
-      Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
+      if (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) {
+        nodeTypeName = nodeTypeName.replace("*", ".*");
+      }
+      Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"),
+                                  Pattern.CASE_INSENSITIVE);
       if (uiNodeTypeSelect.lstNodetype == null) {
         uiNodeTypeSelect.lstNodetype = uiNodeTypeSelect.getAllNodeTypes();
       }

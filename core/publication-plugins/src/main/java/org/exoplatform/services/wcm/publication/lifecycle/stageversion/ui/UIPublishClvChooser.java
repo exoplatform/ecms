@@ -27,7 +27,6 @@ import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;

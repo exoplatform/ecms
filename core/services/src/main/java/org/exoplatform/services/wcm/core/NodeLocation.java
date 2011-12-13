@@ -58,9 +58,9 @@ public class NodeLocation extends ItemLocation {
    * @param workspace the workspace
    * @param path the path
    * @param uuid the uuid
-   * @param isSystem if the node session is system 
+   * @param isSystem if the node session is system
    */
-  public NodeLocation(final String repository, final String workspace, final String path, final String uuid, 
+  public NodeLocation(final String repository, final String workspace, final String path, final String uuid,
       final boolean isSystem) {
     super(repository, workspace, path, uuid, isSystem);
   }
@@ -76,7 +76,7 @@ public class NodeLocation extends ItemLocation {
   public NodeLocation(final String repository, final String workspace, final String path, final String uuid ) {
     super(repository, workspace, path, uuid, false);
   }
-  
+
   /**
    * Instantiates a new node location.
    *
@@ -85,9 +85,9 @@ public class NodeLocation extends ItemLocation {
    * @param path the path
    */
   public NodeLocation(final String repository, final String workspace, final String path) {
-	  super(repository, workspace, path, null, false);
+    super(repository, workspace, path, null, false);
   }
-  
+
   /**
    * Instantiates a new node location.
    *
@@ -95,7 +95,7 @@ public class NodeLocation extends ItemLocation {
   public NodeLocation(ItemLocation location) {
     super(location);
   }
-  
+
   /**
    * Parses the.
    *
@@ -114,7 +114,7 @@ public class NodeLocation extends ItemLocation {
     String[] temp = split(exp, ":");
     if (temp.length == 3 && temp[2].indexOf("/") == 0) {
       return new NodeLocation(temp[0], temp[1], temp[2]);
-    } 
+    }
     throw new IllegalArgumentException("Invalid expression: " + exp
         + ". An valid expression has pattern repository:workspace:path");
   }
@@ -160,7 +160,7 @@ public class NodeLocation extends ItemLocation {
       String workspace = temp[1];
       String nodepath = exp.substring(repository.length() + workspace.length() + 2);
       return new NodeLocation(repository, workspace, nodepath);
-    } 
+    }
     throw new IllegalArgumentException("Invalid expression: " + exp
         + ". An valid expression has pattern repository:workspace:path");
   }
@@ -204,73 +204,73 @@ public class NodeLocation extends ItemLocation {
    */
   @SuppressWarnings("unchecked")
   public static final List getNodeListByLocationList(final List locationList) {
-	  List ret = new ArrayList();
-	  try {	  
-		  ManageableRepository repository = WCMCoreUtils.getRepository();
-		  SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
-		  SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-		  String systemWorkspace = repository.getConfiguration().getSystemWorkspaceName();
-		  Session session = null;
-		  Node node;
-		  for (Object obj : locationList) 
-			  if (obj instanceof NodeLocation) {
-				  node = null;
-				  try {
-					 NodeLocation location = (NodeLocation)obj;
-					 session = (systemWorkspace.equals(location.getWorkspace()) || location.isSystemSession)? 
-							  			systemSessionProvider.getSession(location.getWorkspace(), repository) : 
-							  			sessionProvider.getSession(location.getWorkspace(), repository);
-							  			
-					 node = location.getUUID() != null ? session.getNodeByUUID(location.getUUID()) :
-					  															(Node)session.getItem(location.getPath());
-					 ret.add(node);
-				  } catch (Exception e) {}
-			  } else {
-			  	ret.add(obj);
-			  }
-	  } catch (Exception e) {
-		  return ret;
-	  }
-	  return ret;
+    List ret = new ArrayList();
+    try {
+      ManageableRepository repository = WCMCoreUtils.getRepository();
+      SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+      String systemWorkspace = repository.getConfiguration().getSystemWorkspaceName();
+      Session session = null;
+      Node node;
+      for (Object obj : locationList)
+        if (obj instanceof NodeLocation) {
+          node = null;
+          try {
+           NodeLocation location = (NodeLocation)obj;
+           session = (systemWorkspace.equals(location.getWorkspace()) || location.isSystemSession)?
+                      systemSessionProvider.getSession(location.getWorkspace(), repository) :
+                      sessionProvider.getSession(location.getWorkspace(), repository);
+
+           node = location.getUUID() != null ? session.getNodeByUUID(location.getUUID()) :
+                                          (Node)session.getItem(location.getPath());
+           ret.add(node);
+          } catch (Exception e) {}
+        } else {
+          ret.add(obj);
+        }
+    } catch (Exception e) {
+      return ret;
+    }
+    return ret;
   }
-  
+
   /**
-   * returns the list of node location from the node list 
+   * returns the list of node location from the node list
    * @param nodeList the node list
    * @return node location list
    */
   @SuppressWarnings("unchecked")
   public static final List getLocationsByNodeList(final List nodeList) {
-	  List ret = new ArrayList();
-	  for(Object obj : nodeList)
-	    if (obj instanceof ItemLinkAware) {
-	      ret.add(obj);
-	    } else if (obj instanceof Node) {
-			  NodeLocation location = getNodeLocationByNode((Node)obj);
-			  if (location != null)
-				  ret.add(location);
-		  } else {
-		  	ret.add(obj);
-		  }
-	  return ret;
+    List ret = new ArrayList();
+    for(Object obj : nodeList)
+      if (obj instanceof ItemLinkAware) {
+        ret.add(obj);
+      } else if (obj instanceof Node) {
+        NodeLocation location = getNodeLocationByNode((Node)obj);
+        if (location != null)
+          ret.add(location);
+      } else {
+        ret.add(obj);
+      }
+    return ret;
   }
-  
+
   /**
    * returns the list of node location from the node iterator
    * @param nodeIterator the Node iterator
    * @return node location list
    */
   public static final List<NodeLocation> getLocationsByIterator(final NodeIterator nodeIterator) {
-	  List<NodeLocation> ret = new ArrayList<NodeLocation>();
-	  while (nodeIterator.hasNext()) {
-		  NodeLocation location = getNodeLocationByNode(nodeIterator.nextNode());
-		  if (location != null)
-			  ret.add(location);
-	  }
-	  return ret;
+    List<NodeLocation> ret = new ArrayList<NodeLocation>();
+    while (nodeIterator.hasNext()) {
+      NodeLocation location = getNodeLocationByNode(nodeIterator.nextNode());
+      if (location != null)
+        ret.add(location);
+    }
+    return ret;
   }
-  
-  
+
+
   /**
    * Get a node by an expression.
    *
@@ -326,29 +326,29 @@ public class NodeLocation extends ItemLocation {
           .append(path);
     return buffer.toString();
   }
-  
+
   public boolean equals(Object obj) {
     if (obj == null || !(obj instanceof NodeLocation)) return false;
     NodeLocation location2 = (NodeLocation)obj;
     return equalsString(this.repository, location2.getRepository()) &&
                 equalsString(this.getWorkspace(), location2.getWorkspace()) &&
-                (equalsString(this.getPath(), location2.getPath()) || 
+                (equalsString(this.getPath(), location2.getPath()) ||
                     equalsString(this.getUUID(), location2.getUUID()));
   }
-  
+
   public boolean equalsString(String st1, String st2) {
     if (st1 == null && st2 == null) return true;
     if (st1 == null || st2 == null) return false;
     return st1.equals(st2);
   }
-  
+
   public int hashCode() {
     return (repository == null ? 0 : repository.hashCode()) +
-           (workspace == null ? 0 : workspace.hashCode()) + 
+           (workspace == null ? 0 : workspace.hashCode()) +
            (uuid == null ? 0 : uuid.hashCode()) +
            (path == null ? 0 : path.hashCode());
   }
-  
+
   private static final String[] split(String s, String ch) {
     int maxLength = 3;
     String[] ss = new String[maxLength];

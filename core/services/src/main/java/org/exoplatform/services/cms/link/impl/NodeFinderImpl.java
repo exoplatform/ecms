@@ -28,7 +28,6 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
@@ -245,9 +244,7 @@ public class NodeFinderImpl implements NodeFinder {
    * @param repository
    * @param workspace
    * @throws RepositoryException
-   * @throws RepositoryConfigurationException
    */
-
   private Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     SessionProviderService service =

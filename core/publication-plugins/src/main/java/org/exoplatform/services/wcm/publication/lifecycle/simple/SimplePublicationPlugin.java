@@ -208,15 +208,15 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
   FileNotFoundException, Exception {
 
     byte[] bytes = null;
-    String fileName= "WCM";
+    StringBuffer fileName= new StringBuffer("WCM");
     String currentState = node.getProperty(CURRENT_STATE).getString();
     if (PublicationDefaultStates.PUBLISHED.equals(currentState)) {
-      fileName+="Published";
+      fileName.append("Published");
     } else {
-      fileName+="Unpublished";
+      fileName.append("Unpublished");
     }
-    String fileNameLocalized =fileName+"_"+locale.getLanguage();
-    String completeFileName=IMG_PATH+fileNameLocalized+".gif";
+    String fileNameLocalized = fileName.toString() + "_" + locale.getLanguage();
+    String completeFileName = IMG_PATH + fileNameLocalized + ".gif";
 
     InputStream in = this.getClass().getClassLoader().getResourceAsStream(completeFileName);
     if (in==null) {

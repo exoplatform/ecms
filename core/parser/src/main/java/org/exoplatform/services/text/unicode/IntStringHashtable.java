@@ -38,15 +38,15 @@ public class IntStringHashtable
       this.defaultValue = defaultValue;
    }
 
-   public void put(int key, String value)
-   {
-      if (value == defaultValue)
-      {
-         table.remove(key);
-         return;
+  public void put(int key, String value) {
+    if (value != null) {
+      if (value.equals(defaultValue)) {
+        table.remove(key);
+        return;
       }
       table.put(key, value);
-   }
+    }
+  }
 
    public String get(int key)
    {

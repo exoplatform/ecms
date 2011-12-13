@@ -18,7 +18,18 @@ package org.exoplatform.wcm.webui.seo;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.exoplatform.wcm.webui.Utils;
+
+import javax.jcr.Node;
+
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.seo.PageMetadataModel;
+import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.wcm.webui.validator.FloatNumberValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -26,43 +37,33 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
-import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
-import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.wcm.webui.validator.FloatNumberValidator;
-import org.exoplatform.services.seo.PageMetadataModel;
-import org.exoplatform.services.seo.SEOService;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import javax.jcr.Node;
 
 
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Jun 17, 2011  
+ * Jun 17, 2011
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
                  template = "classpath:groovy/webui/seo/UISEOForm.gtmpl",
-                 events = { 
+                 events = {
                     @EventConfig(listeners = UISEOForm.SaveActionListener.class),
                     @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })
-                 
-public class UISEOForm extends UIForm{ 
-  
+
+public class UISEOForm extends UIForm{
+
   public static final String DESCRIPTION             = "description";
-  public static final String KEYWORDS                = "keywords";  
+  public static final String KEYWORDS                = "keywords";
   public static final String ROBOTS                  = "robots";
   public static final String SITEMAP                 = "sitemap";
   public static final String ISINHERITED             = "isInherited";
@@ -71,8 +72,8 @@ public class UISEOForm extends UIForm{
   public static final String FREQUENCY               = "frequency";
   public static final String ROBOTS_INDEX            = "index";
   public static final String ROBOTS_FOLLOW           = "follow";
-  public static final String FREQUENCY_DEFAULT_VALUE = "Always";    
-  
+  public static final String FREQUENCY_DEFAULT_VALUE = "Always";
+
   String description = "";
   String keywords = "";
   String priority = "";
@@ -81,61 +82,61 @@ public class UISEOForm extends UIForm{
   String follow = "";
   boolean sitemap = true;
   boolean inherited = false;
-  
-  private static String contentPath = null;  
+
+  private static String contentPath = null;
   private boolean onContent = false;
   private boolean isInherited = false;
   private ArrayList<String> paramsArray = null;
   //private String pageParent = null;
-  
+
   private static final Log LOG  = ExoLogger.getLogger("seo.UISEOForm");
-  
+
   public String getContentPath() {
     return this.contentPath;
   }
-  
+
   public void setContentPath(String contentPath) {
     this.contentPath = contentPath;
   }
-    
+
   public boolean getOnContent() {
     return this.onContent;
-  }  
-  
+  }
+
   public void setOnContent(boolean onContent) {
     this.onContent = onContent;
   }
-  
+
   public boolean getIsInherited() {
-  	return this.isInherited;
+    return this.isInherited;
   }
-  
+
   public void setIsInherited(boolean isInherited) {
-  	this.isInherited = isInherited;
+    this.isInherited = isInherited;
   }
-  
-  public ArrayList<String> getParamsArray() { 
+
+  public ArrayList<String> getParamsArray() {
     return this.paramsArray;
   }
-  
+
   public void setParamsArray(ArrayList<String> params) {
     this.paramsArray = params;
   }
-  
-  /*public String getPageParent() { 
+
+  /*public String getPageParent() {
     if(pageParent != null && pageParent.length() > 0)
       return pageParent.trim();
-    return pageParent; 
+    return pageParent;
   }
   public void setPageParent(String pageParent) { this.pageParent = pageParent; }*/
-      
-  public UISEOForm() throws Exception {    
+
+  public UISEOForm() throws Exception {
     setActions(new String[]{"Save", "Cancel"});
   }
-  
+
   public void initSEOForm(PageMetadataModel pageModel) throws Exception{
-    
-    if(pageModel != null) {      
+
+    if(pageModel != null) {
       description = pageModel.getDescription();
       keywords = pageModel.getKeywords();
       frequency = pageModel.getFrequency();
@@ -147,32 +148,32 @@ public class UISEOForm extends UIForm{
       }
       sitemap = pageModel.getSitemap();
     }
-    
+
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
-       
+
     UIFormTextAreaInput uiDescription = new UIFormTextAreaInput(DESCRIPTION, DESCRIPTION, null);
     uiDescription.setValue(description);
     addUIFormInput(uiDescription);
-        
+
     UIFormTextAreaInput uiKeywords = new UIFormTextAreaInput(KEYWORDS, KEYWORDS, null);
     uiKeywords.setValue(keywords);
-    addUIFormInput(uiKeywords); 
-    
-    if(!onContent) {    	
-    	/*if(pageParent != null) {
-    		if(seoService.getPageMetadata(pageParent) != null && pageModel == null) {
-    			setIsInherited(true);
-    			UIFormCheckBoxInput<Boolean> isInherited = new UIFormCheckBoxInput<Boolean>(ISINHERITED, ISINHERITED, null);
-    			isInherited.setChecked(inherited);
+    addUIFormInput(uiKeywords);
+
+    if(!onContent) {
+      /*if(pageParent != null) {
+        if(seoService.getPageMetadata(pageParent) != null && pageModel == null) {
+          setIsInherited(true);
+          UIFormCheckBoxInput<Boolean> isInherited = new UIFormCheckBoxInput<Boolean>(ISINHERITED, ISINHERITED, null);
+          isInherited.setChecked(inherited);
           addUIFormInput(isInherited);
-    		}
-    	}*/
+        }
+      }*/
       List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
       List<String> robotsindexOptions = seoService.getRobotsIndexOptions();
       List<String> robotsfollowOptions = seoService.getRobotsFollowOptions();
       List<String> frequencyOptions = seoService.getFrequencyOptions();
-      
+
       if(robotsindexOptions != null && robotsindexOptions.size() > 0) {
         for(int i = 0; i < robotsindexOptions.size(); i++) {
           robotIndexItemOptions.add(new SelectItemOption<String>((robotsindexOptions.get(i).toString())));
@@ -184,67 +185,68 @@ public class UISEOForm extends UIForm{
       else
         robots_index.setValue(ROBOTS_INDEX);
       addUIFormInput(robots_index);
-      
-      
+
+
       List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<SelectItemOption<String>>();
-      if(robotsfollowOptions != null && robotsfollowOptions.size() > 0) {        
+      if(robotsfollowOptions != null && robotsfollowOptions.size() > 0) {
         for(int i = 0; i < robotsfollowOptions.size(); i++) {
           robotFollowItemOptions.add(new SelectItemOption<String>((robotsfollowOptions.get(i).toString())));
         }
       }
       UIFormSelectBox robots_follow = new UIFormSelectBox(ROBOTS_FOLLOW, null, robotFollowItemOptions);
-      if(follow != null && follow.length() > 0) 
+      if(follow != null && follow.length() > 0)
         robots_follow.setValue(follow);
       else
         robots_follow.setValue(ROBOTS_FOLLOW);
-      addUIFormInput(robots_follow);    
-      
+      addUIFormInput(robots_follow);
+
       UIFormCheckBoxInput<Boolean> visibleSitemapCheckbox = new UIFormCheckBoxInput<Boolean>(SITEMAP, SITEMAP, null);
       visibleSitemapCheckbox.setChecked(sitemap);
       addUIFormInput(visibleSitemapCheckbox);
-      
+
       UIFormStringInput uiPrority = new UIFormStringInput(PRIORITY, null);
       if(priority == null || priority.length() == 0) {
         WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
-        priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");     
+        priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");
       }
       uiPrority.setValue(priority);
       addUIFormInput(uiPrority.addValidator(FloatNumberValidator.class));
-      
+
       List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<SelectItemOption<String>>();
-      if(frequencyOptions != null && frequencyOptions.size() > 0) {
-        for(int i = 0; i < frequencyOptions.size(); i++) {
-          frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),(frequencyOptions.get(i).toString())));              
+      if (frequencyOptions != null && frequencyOptions.size() > 0) {
+        for (int i = 0; i < frequencyOptions.size(); i++) {
+          frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
+                                                                (frequencyOptions.get(i).toString())));
         }
       }
       UIFormSelectBox frequencySelectbox = new UIFormSelectBox(FREQUENCY, null, frequencyItemOptions);
       if(frequency != null && frequency.length() > 0)
         frequencySelectbox.setValue(frequency);
-      else 
+      else
         frequencySelectbox.setValue(FREQUENCY_DEFAULT_VALUE);
-      addUIFormInput(frequencySelectbox); 
+      addUIFormInput(frequencySelectbox);
     }
   }
-  
-   
+
+
   public static class SaveActionListener extends EventListener<UISEOForm> {
- 
+
     public void execute(Event<UISEOForm> event) throws Exception {
       UISEOForm uiForm = event.getSource();
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;      
-      String description = uiForm.getUIFormTextAreaInput(DESCRIPTION).getValue();      
-      String keywords = uiForm.getUIFormTextAreaInput(KEYWORDS).getValue() ;      
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
+      String description = uiForm.getUIFormTextAreaInput(DESCRIPTION).getValue();
+      String keywords = uiForm.getUIFormTextAreaInput(KEYWORDS).getValue() ;
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
       String fullStatus = null;
-      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef(); 
-      
-      if(!uiForm.onContent) {              
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+
+      if(!uiForm.onContent) {
         String robots_index = uiForm.getUIFormSelectBox(ROBOTS_INDEX).getValue() ;
         String robots_follow = uiForm.getUIFormSelectBox(ROBOTS_FOLLOW).getValue() ;
-        String rebots_content = robots_index + ", " + robots_follow;           
-        boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();        
+        String rebots_content = robots_index + ", " + robots_follow;
+        boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
           priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
@@ -255,11 +257,11 @@ public class UISEOForm extends UIForm{
           }
         }
         String frequency = uiForm.getUIFormSelectBox(FREQUENCY).getValue() ;
-        try {          
+        try {
           PageMetadataModel metaModel = new PageMetadataModel();
           metaModel.setDescription(description);
           metaModel.setFrequency(frequency);
-          metaModel.setKeywords(keywords);          
+          metaModel.setKeywords(keywords);
           metaModel.setPriority(priority);
           metaModel.setRobotsContent(rebots_content);
           metaModel.setSiteMap(isVisibleSitemap);
@@ -270,26 +272,28 @@ public class UISEOForm extends UIForm{
           else fullStatus = "Partial";
           metaModel.setFullStatus(fullStatus);
           /*if(uiForm.isInherited) {
-          	if(uiForm.getUIFormCheckBoxInput(ISINHERITED).isChecked())
-          		metaModel.setPageParent(uiForm.pageParent);
+            if(uiForm.getUIFormCheckBoxInput(ISINHERITED).isChecked())
+              metaModel.setPageParent(uiForm.pageParent);
           }*/
-          	
+
           SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
           seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
           UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
           if(uiSEOToolbar != null)
-            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);                 
-        } catch (Exception ex) {   
+            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
+        } catch (Exception ex) {
           LOG.error("Unexpected error ", ex);
-          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
+          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           return;
         }
       } else {
-        try {                    
+        try {
           PageMetadataModel metaModel = new PageMetadataModel();
-          metaModel.setDescription(description);          
+          metaModel.setDescription(description);
           metaModel.setKeywords(keywords);
-          metaModel.setUri(uri); 
+          metaModel.setUri(uri);
           metaModel.setPageReference(pageReference);
           if(description != null && keywords != null)
             fullStatus = "Full";
@@ -306,23 +310,25 @@ public class UISEOForm extends UIForm{
           seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
           UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
           if(uiSEOToolbar != null)
-            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);                 
+            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
         } catch (Exception ex) {
           LOG.error("Unexpected error ", ex);
-          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception", null, ApplicationMessage.ERROR));          
+          uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           return;
         }
       }
-      
+
     }
   }
-  
+
   public static class CancelActionListener extends EventListener<UISEOForm> {
     public void execute(Event<UISEOForm> event) throws Exception {
       UISEOForm uiSEO = event.getSource();
       UIPopupContainer uiSEOToolbar = uiSEO.getAncestorOfType(UIPopupContainer.class);
       if(uiSEOToolbar != null)
-        uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);      
+        uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
     }
   }
 }

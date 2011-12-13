@@ -17,7 +17,6 @@
 
 package org.exoplatform.services.wcm.javascript;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -27,7 +26,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.javascript.JavascriptConfigService;
 
 /**
  * The Class TestXJavaScriptService.

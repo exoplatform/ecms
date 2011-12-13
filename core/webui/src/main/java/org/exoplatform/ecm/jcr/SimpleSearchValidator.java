@@ -21,7 +21,6 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
 
-
 /**
  * @author hai_lethanh
  *
@@ -30,9 +29,11 @@ public class SimpleSearchValidator implements Validator {
 
   @Override
   public void validate(UIFormInput uiInput) throws Exception {
-    String inputValue = ((String)uiInput.getValue());
-	if (inputValue == null || inputValue.trim().length() == 0) {
-	  throw new MessageException(new ApplicationMessage("SearchValidator.msg.empty-input", new Object[] {uiInput.getName()} , ApplicationMessage.WARNING));
-	}	
+    String inputValue = ((String) uiInput.getValue());
+    if (inputValue == null || inputValue.trim().length() == 0) {
+      throw new MessageException(new ApplicationMessage("SearchValidator.msg.empty-input",
+                                                        new Object[] { uiInput.getName() },
+                                                        ApplicationMessage.WARNING));
+    }
   }
 }

@@ -344,21 +344,21 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       String inputName = formatInputName(form.getName());
       String inputType = form.getType();
       String inputFieldName = inputName + "FieldName";
-      String validate = "validate=";
+      StringBuffer bufVal = new StringBuffer("validate=");
       String inputField = "";
       String guideline = form.getGuideline();
       if (guideline == null || "null".equals(guideline)) guideline = "";
       String value = form.getValue();
       if (value==null || "null".equals(value)) value="";
       if (form.isMandatory())
-        validate += "org.exoplatform.wcm.webui.validator.MandatoryValidator,";
+        bufVal.append("org.exoplatform.wcm.webui.validator.MandatoryValidator,");
       if (UIFormGeneratorConstant.TEXTAREA.equals(inputType)) {
         inputField = "TextAreaField";
       } else if (UIFormGeneratorConstant.WYSIWYG.equals(inputType)) {
         inputField = "RichtextField";
       } else if (UIFormGeneratorConstant.DATE.equals(inputType)) {
         inputField = "CalendarField";
-        validate += "datetime,";
+        bufVal.append("datetime,");
       } else if (UIFormGeneratorConstant.SELECT.equals(inputType)) {
         inputField = "SelectBoxField";
       } else if (UIFormGeneratorConstant.CHECKBOX.equals(inputType)){
@@ -368,6 +368,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else {
         inputField = "TextField";
       }
+      String validate = bufVal.toString();
       if (validate.endsWith(",")) validate = validate.substring(0, validate.length() - 1);
       if (validate.endsWith("=")) validate = "";
       String propertyName = getPropertyName(inputName);
@@ -380,7 +381,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else {
         dialogTemplate.append("      <tr>\n");
         dialogTemplate.append("        <td class=\"FieldLabel\"><pre>"
-                              + Text.unescape(form.getName()).replaceAll("\\$", "&#036;").replaceAll("\\\\", "&#92;") + "</pre></td>\n");
+            + Text.unescape(form.getName()).replaceAll("\\$", "&#036;").replaceAll("\\\\", "&#92;")
+            + "</pre></td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
         if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
@@ -601,7 +603,10 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         }
         
         // If there are only special characters, warning message
-        String strCheckSpecialChars = StringEscapeUtils.unescapeHtml(Text.unescape(forms.get(i).getName())).replaceAll("[^a-zA-Z0-9]", StringUtils.EMPTY);
+        String strCheckSpecialChars = StringEscapeUtils.unescapeHtml(Text.unescape(forms.get(i)
+                                                                                        .getName()))
+                                                       .replaceAll("[^a-zA-Z0-9]",
+                                                                   StringUtils.EMPTY);
         if (StringUtils.isEmpty(strCheckSpecialChars)) {
           Utils.createPopupMessage(formGeneratorGeneralTab,
                                    "UIFormGeneratorTabPane.msg.input-only-special-characters",

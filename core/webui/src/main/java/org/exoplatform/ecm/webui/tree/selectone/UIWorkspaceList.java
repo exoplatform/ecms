@@ -176,7 +176,11 @@ public class UIWorkspaceList extends UIForm {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();
-      if(!uiJBrowser.isDisable()) value = uiJBrowser.getWorkspaceName() + ":" + value;
+      if (!uiJBrowser.isDisable()) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(uiJBrowser.getWorkspaceName()).append(":").append(value);
+        value = sb.toString();
+      }
       ((UISelectable)uiJBrowser.getSourceComponent()).doSelect(returnField, value);
     }
   }

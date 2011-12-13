@@ -71,7 +71,7 @@ public abstract class HTMLNode implements Node<Name>
 
    public boolean isNode(Name n)
    {
-      return name == n;
+      return name.equals(n);
    }
 
    public Name getName()

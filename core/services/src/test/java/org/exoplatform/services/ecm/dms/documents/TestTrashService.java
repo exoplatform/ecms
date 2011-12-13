@@ -28,19 +28,19 @@ public class TestTrashService extends BaseDMSTestCase {
    * {@inheritDoc}
    */
   public void tearDown() throws Exception {
-//	  Node trashNode = session.getRootNode().getNode("TrashNode");
-//	  trashNode.remove();
+//    Node trashNode = session.getRootNode().getNode("TrashNode");
+//    trashNode.remove();
     session.logout();
   }
 
   /**
    * test method moveToTrash when node workspace and trash workspace are the same
-   * input: 		/TestNode/node0
-   * 				/TestNode/node1
-   * 				/TestNode/node2
+   * input:     /TestNode/node0
+   *         /TestNode/node1
+   *         /TestNode/node2
    * tested action: move these 3 nodes to /TrashNode/
    * expectedValue : 0 (number of nodes remain in /TestNode/ )
-   * 				   3 (number of nodes in /TrashNode/)
+   *            3 (number of nodes in /TrashNode/)
    *
    * @throws Exception
    */
@@ -72,11 +72,11 @@ public class TestTrashService extends BaseDMSTestCase {
 
   /**
    * test method moveToTrash when node workspace and trash workspace are different
-   * input: 		/TestNode/node0
-   * 				/TestNode/node1
+   * input:     /TestNode/node0
+   *         /TestNode/node1
    * tested action: move these 2 nodes to /TrashNode/
    * expectedValue : 0 (number of nodes remain in /TestNode/ )
-   * 				   2 (number of nodes in /TrashNode/)
+   *            2 (number of nodes in /TrashNode/)
    *
    * @throws Exception
    */
@@ -109,13 +109,13 @@ public class TestTrashService extends BaseDMSTestCase {
 
   /**
    * test method restoreFromTrash when node workspace and trash workspace are the same
-   * input: 		/TrashNode/node0
-   * 				/TrashNode/node1
-   * 				/TrashNode/node2
-   * 				/TrashNode/node3
+   * input:     /TrashNode/node0
+   *         /TrashNode/node1
+   *         /TrashNode/node2
+   *         /TrashNode/node3
    * tested action: restore these 4 nodes from /TrashNode/ to /TestNode
    * expectedValue : 0 (number of nodes remain in /TrashNode/ )
-   * 				   4 (number of nodes in /TestNode/)
+   *            4 (number of nodes in /TestNode/)
    *
    * @throws Exception
    */
@@ -162,14 +162,14 @@ public class TestTrashService extends BaseDMSTestCase {
 
   /**
    * test method restoreFromTrash when node workspace and trash workspace are different
-   * input: 		/TrashNode/node0
-   * 				/TrashNode/node1
-   * 				/TrashNode/node2
-   * 				/TrashNode/node3
-   * 			    /TrashNode/node4
+   * input:     /TrashNode/node0
+   *         /TrashNode/node1
+   *         /TrashNode/node2
+   *         /TrashNode/node3
+   *           /TrashNode/node4
    * tested action: restore these 4 nodes from /TrashNode/ to /TestNode
    * expectedValue : 1 (number of nodes remain in /TrashNode/ )
-   * 				   4 (number of nodes in /TestNode/)
+   *            4 (number of nodes in /TestNode/)
    *
    * @throws Exception
    */
@@ -185,11 +185,11 @@ public class TestTrashService extends BaseDMSTestCase {
     Node node2 = testNode.addNode("node2");
     Node node3 = testNode.addNode("node3");
     Node node4 = testNode.addNode("node4");
-//		String node0Path = node0.getPath();
-//		String node1Path = node1.getPath();
-//		String node2Path = node2.getPath();
-//		String node3Path = node3.getPath();
-//		String node4Path = node4.getPath();
+//    String node0Path = node0.getPath();
+//    String node1Path = node1.getPath();
+//    String node2Path = node2.getPath();
+//    String node3Path = node3.getPath();
+//    String node4Path = node4.getPath();
 
     session.save();
     session.save();
@@ -227,14 +227,14 @@ public class TestTrashService extends BaseDMSTestCase {
 
   /**
    * test method getAllNodeInTrash
-   * input: 		/TrashNode/node0
-   * 				/TrashNode/node0/node1
-   * 				/TrashNode/node2
-   * 				/TrashNode/node2/node5
-   * 			    /TrashNode/node4
+   * input:     /TrashNode/node0
+   *         /TrashNode/node0/node1
+   *         /TrashNode/node2
+   *         /TrashNode/node2/node5
+   *           /TrashNode/node4
    * tested action: restore these nodes from /TrashNode/ to /TestNode
    * expectedValue : 0 (number of nodes remain in /TrashNode/)
-   * 				   3 (number of nodes in /TestNode/, node0, node2 and node4)
+   *            3 (number of nodes in /TestNode/, node0, node2 and node4)
    *
    * @throws Exception
    */
@@ -274,13 +274,13 @@ public class TestTrashService extends BaseDMSTestCase {
 
   /**
    * test method getAllNodeInTrashByUser
-   * input: 		/TrashNode/node0
-   * 				/TrashNode/node0/node1
-   * 				/TrashNode/node2
-   * 				/TrashNode/node2/node5
+   * input:     /TrashNode/node0
+   *         /TrashNode/node0/node1
+   *         /TrashNode/node2
+   *         /TrashNode/node2/node5
    * tested action: restore these nodes from /TrashNode/ to /TestNode
    * expectedValue : 0 (number of nodes remain in /TrashNode/)
-   * 				   2 (number of nodes in /TestNode/, node0 and node2)
+   *            2 (number of nodes in /TestNode/, node0 and node2)
    *
    * @throws Exception
    */
@@ -308,51 +308,51 @@ public class TestTrashService extends BaseDMSTestCase {
 
     session.save();
 
-//		assertEquals("testGetAllNodeInTrash failed!", 2, count);
+//    assertEquals("testGetAllNodeInTrash failed!", 2, count);
     trashNode.remove();
     testNode.remove();
     session.save();
     session.save();
   }
-  
+
   /**
    * test method isInTrash()
    * input:     /TestNode/node1
    *        /TestNode/node2
    *        /TestNode/node3
    * test action: move two nodes, node1 and node2, to /Trash/
-   * expectedValue: node1 and node2 is in trash, <code>isInTrash()</code> return <code>true</code>. 
+   * expectedValue: node1 and node2 is in trash, <code>isInTrash()</code> return <code>true</code>.
    * And node3 is NOT in trash, <code>isInTrash()</code> return <code>false</code>
    * @throws Exception
    */
   public void testIsInTrash1() throws Exception {
     Node rootNode = session.getRootNode();
-    
+
     Node trashRootNode = session.getRootNode();
-    
+
     Node trashNode = trashRootNode.addNode("Trash");
-    
+
     Node testNode = rootNode.addNode("testNode");
     Node node1 = testNode.addNode("node1");
     Node node2 = testNode.addNode("node2");
     testNode.addNode("node3");
-    
+
     session.save();
-    
+
     trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
     trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
-    
+
     session.save();
-    
+
     assertEquals(true, trashService.isInTrash(trashNode.getNode("node1")));
     assertEquals(true, trashService.isInTrash(trashNode.getNode("node2")));
     assertEquals(false, trashService.isInTrash(testNode.getNode("node3")));
-    
+
     trashNode.remove();
     testNode.remove();
     session.save();
   }
-  
+
   /**
    * test method isInTrash()
    * input:     /TestNode/node0
@@ -364,29 +364,29 @@ public class TestTrashService extends BaseDMSTestCase {
    */
   public void testIsInTrash2() throws Exception {
     Node rootNode = session.getRootNode();
-    
+
     Node trashRootNode = session.getRootNode();
-    
+
     Node trashNode = trashRootNode.addNode("Trash");
-    
+
     Node testNode = rootNode.addNode("testNode");
     Node node0 = testNode.addNode("node0");
     node0.addNode("node1");
     node0.addNode("node2");
-    
+
     session.save();
-    
+
     trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
-    
+
     session.save();
-    
+
     assertEquals(true, trashService.isInTrash(trashNode.getNode("node0")));
     assertEquals(true, trashService.isInTrash(trashNode.getNode("node0/node1")));
     assertEquals(true, trashService.isInTrash(trashNode.getNode("node0/node2")));
-    
+
     trashNode.remove();
     testNode.remove();
     session.save();
-  }  
-  
+  }
+
 }

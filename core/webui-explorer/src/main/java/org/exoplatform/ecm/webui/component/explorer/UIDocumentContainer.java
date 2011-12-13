@@ -45,15 +45,15 @@ import javax.jcr.Node;
               }
 )
 public class UIDocumentContainer extends UIContainer {
-	
-	private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
+
+  private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
   private List<UIComponent> listExtenstion = new ArrayList<UIComponent>();
   private boolean isDisplayOptionPanel = false;
 
   public UIDocumentContainer() throws Exception {
     addChild(UIDocumentWithTree.class, null, null) ;
     addChild(UIDocumentInfo.class, null, null) ;
-    this.initOptionBlockPanel();    
+    this.initOptionBlockPanel();
   }
 
   public boolean isShowViewFile() throws Exception {
@@ -63,17 +63,17 @@ public class UIDocumentContainer extends UIContainer {
   public boolean isJcrEnable() {
     return getAncestorOfType(UIJCRExplorer.class).getPreference().isJcrEnable() ;
   }
-  
+
   public boolean isDocumentNode() {
-  	try {
-  		Node currentNode = this.getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
-  		TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    try {
+      Node currentNode = this.getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
+      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
       if(documentNodeTypes.contains(currentNode.getPrimaryNodeType().getName())) return true;
       return false;
-  	} catch(Exception ex) {
-  		return false;
-  	}  	
+    } catch(Exception ex) {
+      return false;
+    }
   }
 
   public static class ChangeTabActionListener  extends EventListener<UIDocumentContainer> {
@@ -97,49 +97,49 @@ public class UIDocumentContainer extends UIContainer {
   * This method get Option Block Panel extenstion and add it into this
   *
   * */
-	 public void addOptionBlockPanel() throws Exception {
-	
-	   UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-	    List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
-	
-	    for (UIExtension extension : extensions) {
-	      UIComponent uicomp = manager.addUIExtension(extension, null, this);
-	      uicomp.setRendered(false);
-	      listExtenstion.add(uicomp);
-	    }
-	 }
-	 /*
-	  * This method checks and returns true if the Option Block Panel is configured to display, else it returns false
-	  * */
-	 public boolean isHasOptionBlockPanel() {
-	   UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-	    List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
-	    if(extensions != null) {
-	      return true;
-	    }
-	   return false;
-	 }
-	 
-	 public void setDisplayOptionBlockPanel(boolean display) {
-	   for(UIComponent uicomp : listExtenstion) {	  	 
-	     uicomp.setRendered(display);	     
-	   }
-	   isDisplayOptionPanel = display;
-	 }
-	 
-	 public boolean isDisplayOptionBlockPanel() {
-	   return isDisplayOptionPanel;
-	 }
-	 
-	 public void initOptionBlockPanel() throws Exception {	 		 	
-	   if(isHasOptionBlockPanel()) {
-	     addOptionBlockPanel();
-	     UIOptionBlockPanel optionBlockPanel = this.getChild(UIOptionBlockPanel.class);
-	
-	     if(optionBlockPanel.isHasOptionBlockExtension()) {	    	 
-	       optionBlockPanel.addOptionBlockExtension();
-	       setDisplayOptionBlockPanel(true);
-	     }
-	   }
-	 }
+   public void addOptionBlockPanel() throws Exception {
+
+     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+      List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
+
+      for (UIExtension extension : extensions) {
+        UIComponent uicomp = manager.addUIExtension(extension, null, this);
+        uicomp.setRendered(false);
+        listExtenstion.add(uicomp);
+      }
+   }
+   /*
+    * This method checks and returns true if the Option Block Panel is configured to display, else it returns false
+    * */
+   public boolean isHasOptionBlockPanel() {
+     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+      List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
+      if(extensions != null) {
+        return true;
+      }
+     return false;
+   }
+
+   public void setDisplayOptionBlockPanel(boolean display) {
+     for(UIComponent uicomp : listExtenstion) {
+       uicomp.setRendered(display);
+     }
+     isDisplayOptionPanel = display;
+   }
+
+   public boolean isDisplayOptionBlockPanel() {
+     return isDisplayOptionPanel;
+   }
+
+   public void initOptionBlockPanel() throws Exception {
+     if(isHasOptionBlockPanel()) {
+       addOptionBlockPanel();
+       UIOptionBlockPanel optionBlockPanel = this.getChild(UIOptionBlockPanel.class);
+
+       if(optionBlockPanel.isHasOptionBlockExtension()) {
+         optionBlockPanel.addOptionBlockExtension();
+         setDisplayOptionBlockPanel(true);
+       }
+     }
+   }
 }

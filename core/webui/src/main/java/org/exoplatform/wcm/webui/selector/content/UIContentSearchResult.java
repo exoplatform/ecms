@@ -253,22 +253,28 @@ public class UIContentSearchResult extends UIGrid {
       String repository = nodeLocation.getRepository();
       String workspace = nodeLocation.getWorkspace();
       String webcontentPath = nodeLocation.getPath();
-      Node originalNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath, WCMComposer.BASE_VERSION);
+      Node originalNode = Utils.getViewableNodeByComposer(repository,
+                                                          workspace,
+                                                          webcontentPath,
+                                                          WCMComposer.BASE_VERSION);
       Node viewNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath);
       
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       String nodeType = originalNode.getPrimaryNodeType().getName();
-      if(templateService.isManagedNodeType(nodeType)){
+      if (templateService.isManagedNodeType(nodeType)) {
         UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
         UIContentViewer contentResultViewer = contentSelector.getChild(UIContentViewer.class);
-        if (contentResultViewer == null) contentResultViewer = contentSelector.addChild(UIContentViewer.class, null, null);
+        if (contentResultViewer == null)
+          contentResultViewer = contentSelector.addChild(UIContentViewer.class, null, null);
         contentResultViewer.setNode(viewNode);
         contentResultViewer.setOriginalNode(originalNode);
         event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
         contentSelector.setSelectedTab(contentResultViewer.getId());
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIContentSearchResult.msg.template-not-support", null, ApplicationMessage.WARNING));              
-      }     
+        uiApp.addMessage(new ApplicationMessage("UIContentSearchResult.msg.template-not-support",
+                                                null,
+                                                ApplicationMessage.WARNING));
+      }  
     }
   }
 }

@@ -352,7 +352,9 @@ public class UIPresentationContainer extends UIContainer{
 
     String paramName = "/" + repository + "/" + workspace + strPath;
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), printPageUrl);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), printPageUrl);
     nodeURL.setResource(resource);
     nodeURL.setQueryParameterValue(printParameterName, paramName);
     nodeURL.setQueryParameterValue("isPrint", "true");
@@ -380,35 +382,31 @@ public class UIPresentationContainer extends UIContainer{
   }
 
   public Node getOriginalNode() {
-  	UIPresentation presentation = getChild(UIPresentation.class);
-  	if (presentation == null)
-  		return null;
-  	try {
-  		return presentation.getOriginalNode();
-  	} catch (Exception e) {
-  		return null;
-  	}
+    UIPresentation presentation = getChild(UIPresentation.class);
+    if (presentation == null)
+      return null;
+    try {
+      return presentation.getOriginalNode();
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   public boolean isViewMode() {
-  	return Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE);
+    return Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE);
   }
 
   public String getInlineEditingMsg() {
-  	StringBuffer sb = new StringBuffer();
-  	sb.append("new Array(");
-  	ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance()
-  	.getApplicationResourceBundle();
-  	sb.append("'").append(
-  	    Text.escapeIllegalJcrChars(
-  			resourceBundle
-  			.getString("UIPresentationContainer.msg.internal-server-error")))
-  			.append("', '").append(
-  	    Text.escapeIllegalJcrChars(
-  			resourceBundle
-  			.getString("UIPresentationContainer.msg.empty-title-error")) )
-  			.append("')");
-  	return sb.toString();
+    StringBuffer sb = new StringBuffer();
+    sb.append("new Array(");
+    ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance()
+                                                       .getApplicationResourceBundle();
+    sb.append("'")
+      .append(Text.escapeIllegalJcrChars(resourceBundle.getString("UIPresentationContainer.msg.internal-server-error")))
+      .append("', '")
+      .append(Text.escapeIllegalJcrChars(resourceBundle.getString("UIPresentationContainer.msg.empty-title-error")))
+      .append("')");
+    return sb.toString();
   }
 
 

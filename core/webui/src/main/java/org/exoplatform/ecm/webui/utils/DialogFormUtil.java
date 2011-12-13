@@ -86,7 +86,7 @@ public class DialogFormUtil {
    */
   @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties) throws Exception {
-  	return prepareMap(inputs, properties, null);
+    return prepareMap(inputs, properties, null);
   }
   @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties, Map options) throws Exception {
@@ -113,7 +113,7 @@ public class DialogFormUtil {
       } else {
         UIFormInputBase input = (UIFormInputBase) inputs.get(i);
         property = (JcrInputProperty) properties.get(input.getName());
-        if(options != null && options.get(input.getName()) != null) option = (String)options.get(input.getName());        
+        if(options != null && options.get(input.getName()) != null) option = (String)options.get(input.getName());
         if(property != null) {
           if (input instanceof UIFormUploadInput) {
             UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
@@ -139,15 +139,15 @@ public class DialogFormUtil {
           } else if(input instanceof UIFormCheckBoxInput) {
             property.setValue(((UIFormCheckBoxInput)input).isChecked()) ;
           } else {
-          	if(input.getValue()!=null) {          		
-          	  String inputValue = input.getValue().toString().trim();
-          	  boolean isEmpty = Utils.isEmptyContent(inputValue);
-          	  if(isEmpty) inputValue = "";
-          	  else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = Utils.sanitize(inputValue);
-          	  property.setValue(inputValue);
-          	} else {
-          		property.setValue(input.getValue());
-          	}
+            if(input.getValue()!=null) {
+              String inputValue = input.getValue().toString().trim();
+              boolean isEmpty = Utils.isEmptyContent(inputValue);
+              if(isEmpty) inputValue = "";
+              else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = Utils.sanitize(inputValue);
+              property.setValue(inputValue);
+            } else {
+              property.setValue(input.getValue());
+            }
           }
         }
       }

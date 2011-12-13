@@ -71,14 +71,14 @@ public class UIRemoveModerators extends UIForm {
     public void execute(Event<UIRemoveModerators> event) throws Exception {
       UIRemoveModerators removeModerators = event.getSource();
       UIFormCheckBoxInput<Boolean> checkBoxInput;
-      String result = "";
+      StringBuffer sbResult = new StringBuffer();
       boolean isChecked = false;
       // Get all permissions which are not checked to remove
       for(String str : removeModerators.listModerators){
         checkBoxInput = removeModerators.getChildById(str);
         if(!checkBoxInput.isChecked()){
-          if(result.trim().length() > 0) result += ",";
-          result += str;
+          if(sbResult.length() > 0) sbResult.append(",");
+          sbResult.append(str);
         } else {
           isChecked = true;
         }
@@ -132,7 +132,7 @@ public class UIRemoveModerators extends UIForm {
         inputId = UISubcriptionForm.SELECT_REDACTOR;
       }
       UIFormStringInput formStringInput = (UIFormStringInput)formInputSetWithAction.getChildById(inputId);
-      formStringInput.setValue(result);
+      formStringInput.setValue(sbResult.toString());
       event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
       Utils.closePopupWindow(removeModerators, UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW);
     }

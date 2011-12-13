@@ -416,7 +416,11 @@ public class ManageDocumentService implements ResourceContainer {
     return checkNode.isNodeType(NodetypeConstant.NT_FILE);
   }
 
-  private Element createFolderElement(Document document, Node child, String workspaceName, String driveName, String currentFolder) throws Exception {
+  private Element createFolderElement(Document document,
+                                      Node child,
+                                      String workspaceName,
+                                      String driveName,
+                                      String currentFolder) throws Exception {
     Element folder = document.createElement("Folder");
     boolean hasChild = false;
     boolean canRemove = true;

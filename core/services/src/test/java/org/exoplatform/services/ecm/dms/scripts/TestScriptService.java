@@ -22,7 +22,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;

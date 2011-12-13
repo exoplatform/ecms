@@ -266,21 +266,18 @@ public class DocumentVersion extends DocumentDataImpl
     * {@inheritDoc}
     */
    @Override
-   public void delete() throws StorageException
-   {
-      try
-      {
-         Node node = entry.getNode();
-         Version version = (Version)node.getParent();
-         VersionHistory versionHistory = version.getContainingHistory();
-         versionHistory.removeVersion(getVersionLabel());
-         versionHistory.save();
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable to delete document version with label '" + getVersionLabel() + "'. " + re.getMessage(), re);
-      }
-   }
+  public void delete() throws StorageException {
+    try {
+      Node node = entry.getNode();
+      Version version = (Version) node.getParent();
+      VersionHistory versionHistory = version.getContainingHistory();
+      versionHistory.removeVersion(getVersionLabel());
+      versionHistory.save();
+    } catch (RepositoryException re) {
+      throw new CmisRuntimeException("Unable to delete document version with label '"
+          + getVersionLabel() + "'. " + re.getMessage(), re);
+    }
+  }
 
    /**
     * {@inheritDoc}

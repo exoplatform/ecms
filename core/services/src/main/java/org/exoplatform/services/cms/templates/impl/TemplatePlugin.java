@@ -408,7 +408,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
     for (PropertyDefinition prodef : prodefs) {
       // Dismiss all auto created property
       String propertyName = prodef.getName();
-      if (prodef.isAutoCreated() || "*".equals(propertyName) || JCR_PRIMARY_TYPE.equals(propertyName) || JCR_MIXIN_TYPES.equals(propertyName)) continue;
+      if (prodef.isAutoCreated() || "*".equals(propertyName)
+          || JCR_PRIMARY_TYPE.equals(propertyName) || JCR_MIXIN_TYPES.equals(propertyName))
+        continue;
       propertyNameFormat = propertyName.replace(":", "_");
       propertyPath = jcrPath.concat(propertyName);
       propertyId = propertyPath.replace(":", "_");
@@ -553,12 +555,16 @@ public class TemplatePlugin extends BaseComponentPlugin {
       if (prodef.getRequiredType() == PropertyType.BINARY) {
         if (prodef.isMultiple()) {
           buildViewNodeType.append("\t\t\t\t\t// Render for multi value;\n");
-          buildViewNodeType.append("\t\t\t\t\tvalues = ").append(GET_PROPERTY.replace("${propertyname}", prodef.getName())).append(".getValues()").append(";\n");
+          buildViewNodeType.append("\t\t\t\t\tvalues = ")
+                           .append(GET_PROPERTY.replace("${propertyname}", prodef.getName()))
+                           .append(".getValues()")
+                           .append(";\n");
           buildViewNodeType.append("\t\t\t\t\tvalueDisplay = \"\";\n");
           buildViewNodeType.append("\t\t\t\t\tfor(value in values) {\n" );
           buildViewNodeType.append("\t\t\t\t\t\tvalueDisplay += \"BINARY DATA\" + \",\";\n" );
           buildViewNodeType.append("\t\t\t\t\t}\n" );
-          buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
+          buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) "
+              + "valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
           
         } else {
           buildViewNodeType.append("\t\t\t\t\t// Render for single value;\n");
@@ -567,16 +573,22 @@ public class TemplatePlugin extends BaseComponentPlugin {
       } else {
         if (prodef.isMultiple()) {
           buildViewNodeType.append("\t\t\t\t\t// Render for multi value;\n");
-          buildViewNodeType.append("\t\t\t\t\tvalues = ").append(GET_PROPERTY.replace("${propertyname}", prodef.getName())).append(".getValues()").append(";\n");
+          buildViewNodeType.append("\t\t\t\t\tvalues = ")
+                           .append(GET_PROPERTY.replace("${propertyname}", prodef.getName()))
+                           .append(".getValues()")
+                           .append(";\n");
           buildViewNodeType.append("\t\t\t\t\tvalueDisplay = \"\";\n");
           buildViewNodeType.append("\t\t\t\t\tfor(value in values) {\n" );
           buildViewNodeType.append("\t\t\t\t\t\tvalueDisplay += value.getString() + \",\";\n" );
           buildViewNodeType.append("\t\t\t\t\t}\n" );
-          buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
+          buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) "
+              + "valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
           
         } else {
           buildViewNodeType.append("\t\t\t\t\t// Render for single value;\n");
-          buildViewNodeType.append("\t\t\t\t\tvalueDisplay = ").append(GET_PROPERTY.replace("${propertyname}", prodef.getName())).append(".getString();");
+          buildViewNodeType.append("\t\t\t\t\tvalueDisplay = ")
+                           .append(GET_PROPERTY.replace("${propertyname}", prodef.getName()))
+                           .append(".getString();");
         }
       }
       buildViewNodeType.append(END_JAVA);

@@ -134,7 +134,8 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
           // process import version history
           Node currentNode = (Node) session.getItem(deploymentDescriptor.getTarget().getNodePath());
 
-          Map<String, String> mapHistoryValue = Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
+          Map<String, String> mapHistoryValue = 
+            Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
           Utils.processImportHistory(currentNode,
                                      configurationManager.getInputStream(versionHistoryPath),
                                      mapHistoryValue);

@@ -138,7 +138,7 @@ public class RSSServiceImpl implements RSSService{
     String summary = (String)context.get(SUMMARY);
     String feedType = (String) context.get(FEED_TYPE) ;
     String feedDescription = (String) context.get(DESCRIPTION) ;
-    String storePath = (String) context.get(STORE_PATH) ;
+    String storePath = (String) context.get(STORE_PATH) + "/" + feedType;
     String feedName = (String) context.get(FEED_NAME) ;
     String queryPath = (String) context.get(QUERY_PATH) ;
     String rssUrl = (String) context.get(URL) ;
@@ -150,7 +150,6 @@ public class RSSServiceImpl implements RSSService{
     }catch (Exception e) {
       pubDate= new Date() ;
     }
-    storePath = storePath + "/" + feedType ;
     if(feedName == null || feedName.length() == 0) feedName = actionName ;
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
     Session session = null;
@@ -245,12 +244,11 @@ public class RSSServiceImpl implements RSSService{
       String imageURL = (String) context.get(IMAGE_URL) ;
       String categories = (String) context.get(CATEGORY) ;
       String keywords = (String) context.get(KEYWORDS) ;
-      String storePath = (String) context.get(STORE_PATH) ;
+      String storePath = (String) context.get(STORE_PATH) + "/" + feedType;
       String feedName = (String) context.get(FEED_NAME) ;
       String rssVersion = (String) context.get(RSS_VERSION) ;
       String queryPath = (String) context.get(QUERY_PATH) ;
       String rssUrl = (String) context.get(URL) ;
-      storePath = storePath + "/" + feedType ;
       if(feedName == null || feedName.length() == 0) feedName = actionName ;
       if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
       session = repositoryService_.getCurrentRepository().getSystemSession(srcWorkspace);

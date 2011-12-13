@@ -21,10 +21,8 @@ import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.jcr.Node;
@@ -70,8 +68,6 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SARL

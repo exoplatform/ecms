@@ -209,7 +209,11 @@ public class UITreeTaxonomyBuilder extends UIContainer {
     String path = buffer.toString();
     if (rootPath.endsWith(path)) rootPath = rootPath.substring(0, rootPath.length() - path.length());
     path = path.replaceAll("/+", "/");
-    if (!path.startsWith(rootPath)) path = rootPath + path;
+    if (!path.startsWith(rootPath)) {
+      StringBuffer sb = new StringBuffer();
+      sb.append(rootPath).append(path);
+      path = sb.toString();
+    }
     if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
     if (path.length() == 0) path = "/";
     if (buffer.length() == 0) return NodeLocation.getNodeByLocation(currentNode);

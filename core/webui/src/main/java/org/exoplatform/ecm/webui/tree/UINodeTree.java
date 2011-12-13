@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.tree;
 
-import java.net.URLEncoder;
 import java.util.MissingResourceException;
 
 import javax.jcr.Node;

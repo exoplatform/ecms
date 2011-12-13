@@ -441,9 +441,11 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
           // Append extension if necessary
           String mimeType = mimeTypeSolver.getMimeType(fileName);
-          String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-          if(name.lastIndexOf("."+ext) < 0 && !mimeTypeSolver.getMimeType(name).equals(mimeType)){
-            name = name + "." +ext ;
+          String ext = "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+          if (name.lastIndexOf(ext) < 0 && !mimeTypeSolver.getMimeType(name).equals(mimeType)) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(name).append(ext);
+            name = sb.toString();
           }
 
           List<String> listTaxonomyNameNew = new ArrayList<String>();

@@ -232,7 +232,7 @@ public class Utils {
 
   public static final String INPUT_TEXT_AREA = "TEXTAREA";
   public static final String INPUT_WYSIWYG = "WYSIWYG";
-  public static final String INPUT_TEXT	= "TEXT";
+  public static final String INPUT_TEXT  = "TEXT";
   public static final String DEFAULT_CSS_NAME = "InlineText";
   public static final String LEFT2RIGHT = "left-to-right";
   public static final String RIGHT2LEFT = "right-to-left";
@@ -658,17 +658,17 @@ public class Utils {
    *
    * @param orgNode         Processed node
    * @param propertyName    which property used for editing
-   * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
-   * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
-   * 												Edit[cssClass] as relative css
-   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass]
-   * 												to request the rest-service
+   * @param inputType        input type for editing: TEXT, TEXTAREA, WYSIWYG
+   * @param cssClass        class name for CSS, should implement: cssClass, [cssClass]Title
+   *                         Edit[cssClass] as relative css
+   *                         Should create the function: InlineEditor.presentationRequestChange[cssClass]
+   *                         to request the rest-service
    * @param isGenericProperty  set as true to use generic javascript function, other wise, must create
    *                        the correctspond function InlineEditor.presentationRequestChange[cssClass]
    * @param arguments       Extra parameter for Input component (toolbar, width, height,.. for CKEditor/TextArea)
-   * @return								String that can be put on groovy template
-   * @throws 								Exception
-   * @author 								vinh_nguyen
+   * @return                String that can be put on groovy template
+   * @throws                 Exception
+   * @author                 vinh_nguyen
    */
   public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
                     String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {

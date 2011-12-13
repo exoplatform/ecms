@@ -16,12 +16,9 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -29,8 +26,6 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.download.DownloadService;
-import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
@@ -41,7 +36,6 @@ import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -49,7 +43,6 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
@@ -62,8 +55,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SAS
@@ -254,19 +245,25 @@ public class UIPresentation extends UIBaseNodePresentation {
     if (scvWith == null || scvWith.length() == 0)
         scvWith = UISingleContentViewerPortlet.DEFAULT_SHOW_SCV_WITH;
 
-    String param = "/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace();
+    StringBuffer param = new StringBuffer();
+    param.append("/")
+         .append(nodeLocation.getRepository())
+         .append("/")
+         .append(nodeLocation.getWorkspace());
 
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      param += originalNode.getPath();
+      param.append(originalNode.getPath());
     } else {
-      param += node.getPath();
+      param.append(node.getPath());
     }
 
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
-    nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), basePath);
+    nodeURL.setResource(resource).setQueryParameterValue(scvWith, param.toString());
     String link = baseURI + nodeURL.toString();
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
@@ -291,8 +288,9 @@ public class UIPresentation extends UIBaseNodePresentation {
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType =
-      	org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent, strRepository, templateService) ;
+      List<String> listCanCreateNodeType = org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent,
+                                                                                                        strRepository,
+                                                                                                        templateService);
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }
     return attachments;

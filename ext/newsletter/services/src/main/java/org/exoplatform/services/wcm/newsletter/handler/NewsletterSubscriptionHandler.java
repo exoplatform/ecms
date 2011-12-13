@@ -186,12 +186,12 @@ public class NewsletterSubscriptionHandler {
     subscriptionConfig.setCategoryName(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_CATEGORY_NAME)
                                                        .getString());
     // get permission for this category
-    String permission = "";
+    StringBuffer permission = new StringBuffer();
     for(String per : NewsletterConstant.getAllPermissionOfNode(subscriptionNode)){
-      if(permission.length() > 0) permission += ",";
-      permission += per;
+      if(permission.length() > 0) permission.append(",");
+      permission.append(per);
     }
-    subscriptionConfig.setRedactor(permission);
+    subscriptionConfig.setRedactor(permission.toString());
     return subscriptionConfig;
   }
 

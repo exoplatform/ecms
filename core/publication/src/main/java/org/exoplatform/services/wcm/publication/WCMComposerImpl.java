@@ -16,8 +16,6 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.management.annotations.Managed;
@@ -31,7 +29,6 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -288,7 +285,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return nodes;
   }
 
-  public Result getPaginatedContents(NodeLocation nodeLocation, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
+  public Result getPaginatedContents(NodeLocation nodeLocation,
+                                     HashMap<String, String> filters,
+                                     SessionProvider sessionProvider) throws Exception {
     String path = nodeLocation.getPath();
     String workspace = nodeLocation.getWorkspace();
     
@@ -588,10 +587,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
                 List<Node> lstTaxonomyTrees = getAllTaxonomyTrees();
                 if (listCategory != null && listCategory.size() > 0) {
                   for (Node categoryNode: listCategory) {
-                    String value = displayCategory(categoryNode, lstTaxonomyTrees);
-                    if(value!=null && !value.equals("")) {
-                      value = value + "/" + node.getName();
-                      hash = getHash(value,
+                    StringBuffer valBuf = new StringBuffer();
+                    valBuf.append(displayCategory(categoryNode, lstTaxonomyTrees));
+                    if (valBuf != null && valBuf.length() > 0) {
+                      valBuf.append("/").append(node.getName());
+                      hash = getHash(valBuf.toString(),
                                      filters.get(FILTER_VERSION),
                                      remoteUser,
                                      lang,
@@ -828,13 +828,15 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @return the order sql filter
    */
   private String getOrderSQLFilter(HashMap<String, String> filters) {
-    String orderQuery = " ORDER BY ";
+    StringBuffer orderQuery = new StringBuffer(" ORDER BY ");
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
-    if (orderType == null) orderType = "DESC";
-    if (orderBy == null) orderBy = "exo:title";
-    orderQuery += orderBy + " " + orderType;
-    return orderQuery;
+    if (orderType == null)
+      orderType = "DESC";
+    if (orderBy == null)
+      orderBy = "exo:title";
+    orderQuery.append(orderBy).append(" ").append(orderType);
+    return orderQuery.toString();
   }
 
   /**

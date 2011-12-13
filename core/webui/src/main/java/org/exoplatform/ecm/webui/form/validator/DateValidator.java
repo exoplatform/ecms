@@ -71,7 +71,8 @@ public class DateValidator extends DateTimeValidator {
       if(label.charAt(label.length() - 1) == ':') label = label.substring(0, label.length() - 1);
       
       //throw exception with msg
-      throw new MessageException(new ApplicationMessage("DateTimeValidator.msg.Invalid-input", new Object[]{ label, inputValue })) ;
+      throw new MessageException(new ApplicationMessage("DateTimeValidator.msg.Invalid-input",
+                                                        new Object[] { label, inputValue }));
     }
   }
 

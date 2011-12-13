@@ -23,7 +23,6 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin.PortletTemplateConfig;
@@ -126,7 +125,8 @@ public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
    */
   public void testGetTemplateByPath() throws Exception {
     assertNotNull(appTemplateManagerService.getTemplateByPath(REPO_NAME,
-        "/exo:ecm/views/templates/content-browser/detail-document/DocumentView", sessionProviderService_.getSystemSessionProvider(null)));
+                                                              "/exo:ecm/views/templates/content-browser/detail-document/DocumentView",
+                                                              sessionProviderService_.getSystemSessionProvider(null)));
   }
 
   /**

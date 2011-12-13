@@ -103,7 +103,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       if (viewList.isEmpty()) {
         return;
       }
-      String viewListStr = "";
+      StringBuffer viewListStr = new StringBuffer();
       List<SelectItemOption<String>> viewOptions = new ArrayList<SelectItemOption<String>>();
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
       ResourceBundle res = context.getApplicationResourceBundle();
@@ -115,16 +115,18 @@ public class UIJcrExplorerContainer extends UIContainer {
           viewLabel = viewName;
         }
         viewOptions.add(new SelectItemOption<String>(viewLabel, viewName));
-        if(viewListStr.length() > 0) viewListStr = viewListStr + "," + viewName;
-        else viewListStr = viewName;
+        if(viewListStr.length() > 0) viewListStr.append(",").append(viewName);
+        else viewListStr.append(viewName);
       }
-      drive.setViews(viewListStr);
-      String homePath = drive.getHomePath();
-      if (homePath.contains("${userId}")) 
-        homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
-      if (nodePath!=null && nodePath.length()>0 && !nodePath.equals("/"))
-        homePath = homePath+"/"+nodePath;
-      homePath = homePath.replaceAll("//", "/");
+      drive.setViews(viewListStr.toString());
+      StringBuffer homePathBuf = new StringBuffer();
+      homePathBuf.append(drive.getHomePath());
+      if (homePathBuf.indexOf("${userId}") >= 0) 
+        homePathBuf = new StringBuffer(org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePathBuf.toString(),
+                                                                                                    userId));
+      if (nodePath != null && nodePath.length() > 0 && !nodePath.equals("/"))
+        homePathBuf.append("/").append(nodePath);
+      String homePath = homePathBuf.toString().replaceAll("//", "/");
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
 
       uiJCRExplorer.setDriveData(drive);

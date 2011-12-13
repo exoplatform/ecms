@@ -76,8 +76,9 @@ public abstract class UIVersionTreeList extends UIContainer {
   }
 
   public boolean isPublised(VersionNode versionNode) throws Exception {
-    Value[] publicationStates =  
-      NodeLocation.getNodeByLocation(node_).getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES).getValues() ;
+    Value[] publicationStates = NodeLocation.getNodeByLocation(node_)
+                                            .getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES)
+                                            .getValues();
     for(Value value : publicationStates) {
       String[] arrPublicationState = value.getString().split(",") ;
       for(int i=0; i < arrPublicationState.length; i++) {

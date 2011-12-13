@@ -304,12 +304,16 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-        uiApp.addMessage(new ApplicationMessage(
-            "UIChildNodeDefinitionForm.msg.child-invalid", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-invalid",
+                                                null,
+                                                ApplicationMessage.WARNING));
         return;
       }
-      if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
+      if(prefix != null && prefix.length() > 0) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(prefix).append(":").append(childNodeName);
+        childNodeName = sb.toString();
+      }
       if (nodeTypeValue == null) {
         nodeTypeValue = new NodeDefinitionValue();
       }
@@ -385,7 +389,11 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
             ApplicationMessage.WARNING));
         return;
       }
-      if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
+      if (prefix != null && prefix.length() > 0) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(prefix).append(":").append(childNodeName);
+        childNodeName = sb.toString();
+      }
       nodeTypeValue.setName(childNodeName);
       String defaultType =
         uiForm.getUIStringInput(DEFAULT_PRIMARY_TYPE).getValue();

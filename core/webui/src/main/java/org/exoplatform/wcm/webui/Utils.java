@@ -291,12 +291,14 @@ public class Utils {
                                                String cacheVisibility) {
     try {
       HashMap<String, String> filters = new HashMap<String, String>();
-      String filterLang = Util.getPortalRequestContext().getLocale().getLanguage();
+      StringBuffer filterLang = new StringBuffer(Util.getPortalRequestContext()
+                                                     .getLocale()
+                                                     .getLanguage());
       String country = Util.getPortalRequestContext().getLocale().getCountry();
       if (country != null && country.length() > 0) {
-        filterLang += "_" + country;
+        filterLang.append("_").append(country);
       }
-      filters.put(WCMComposer.FILTER_LANGUAGE, filterLang);
+      filters.put(WCMComposer.FILTER_LANGUAGE, filterLang.toString());
       filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
       PortletMode portletMode = portletRequestContext.getApplicationMode();
@@ -306,7 +308,7 @@ public class Utils {
       filters.put(WCMComposer.FILTER_VISIBILITY, cacheVisibility);
       return WCMCoreUtils.getService(WCMComposer.class)
                          .getContent(workspace,
-                        		     Text.escapeIllegalJcrChars(nodeIdentifier),
+                                 Text.escapeIllegalJcrChars(nodeIdentifier),
                                      filters,
                                      WCMCoreUtils.getUserSessionProvider());
     } catch (Exception e) {
@@ -489,18 +491,18 @@ public class Utils {
    * @param container the current container
    * @param component the component which will be display as a popup
    * @param popupWindowId the popup's ID
-   * @param width the width of the popup   
+   * @param width the width of the popup
    * @throws Exception the exception
    */
   public static void createPopupWindow(UIContainer container,
                                        UIComponent component,
                                        String popupWindowId,
                                        int width) throws Exception {
-    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
-  
+
   /**
    * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
    * . <br/>
@@ -518,8 +520,8 @@ public class Utils {
                                        UIComponent component,
                                        String popupWindowId,
                                        int width, boolean isShowMask) throws Exception {
-  	UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
-    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);        
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
+    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
     popupWindow.setShowMask(isShowMask);
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
@@ -543,28 +545,28 @@ public class Utils {
       UIComponent component,
       String popupWindowId,
       int width, int top, int left) throws Exception {
-  	UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);    
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
     UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-		popupWindow.setCoordindate(top, left);
-		WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-		requestContext.addUIComponentToUpdateByAjax(popupContainer);
-	}
-  
+    popupWindow.setCoordindate(top, left);
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+    requestContext.addUIComponentToUpdateByAjax(popupContainer);
+  }
+
   private static UIPopupContainer initPopup(UIContainer container,
       UIComponent component,
       String popupWindowId,
       int width) throws Exception {
-		UIPopupContainer popupContainer = getPopupContainer(container);
-		popupContainer.removeChildById(popupWindowId);
-		UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
-		popupWindow.setUIComponent(component);
-		popupWindow.setWindowSize(width, 0);
-		popupWindow.setShow(true);
-		popupWindow.setRendered(true);
-		popupWindow.setResizable(true);		
-		popupWindow.setShowMask(true);
-		return popupContainer;
-	}
+    UIPopupContainer popupContainer = getPopupContainer(container);
+    popupContainer.removeChildById(popupWindowId);
+    UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
+    popupWindow.setUIComponent(component);
+    popupWindow.setWindowSize(width, 0);
+    popupWindow.setShow(true);
+    popupWindow.setRendered(true);
+    popupWindow.setResizable(true);
+    popupWindow.setShowMask(true);
+    return popupContainer;
+  }
 
 
   /**
@@ -730,17 +732,25 @@ public class Utils {
     String portalName = PortalContainer.getCurrentPortalContainerName();
 
     String originalNodePath = getRealNodePath(node);
-    String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/"
-        + workspace + originalNodePath;
+    StringBuffer imagePath = new StringBuffer();
+    imagePath.append("/")
+             .append(portalName)
+             .append("/")
+             .append(currentProtal)
+             .append("/jcr/")
+             .append(repository)
+             .append("/")
+             .append(workspace)
+             .append(originalNodePath);
     if (withTimeParam) {
-      if (imagePath.contains("?")) {
-        imagePath += "&time=";
+      if (imagePath.indexOf("?") > 0) {
+        imagePath.append("&time=");
       } else {
-        imagePath += "?time=";
+        imagePath.append("?time=");
       }
-      imagePath += System.currentTimeMillis();
+      imagePath.append(System.currentTimeMillis());
     }
-    return imagePath;
+    return imagePath.toString();
   }
 
   /**
@@ -852,34 +862,34 @@ public class Utils {
   }
 
   public static String sanitize(String value) {
-  	try {
-  		cservice_ = WCMCoreUtils.getService(ConfigurationManager.class);
-  		InputStream in = cservice_.getInputStream(POLICY_FILE_LOCATION) ;
-  	  Policy policy = Policy.getInstance(in);
-  	  AntiSamy as = new AntiSamy();
-  	  CleanResults cr = as.scan(value, policy);
-  	  value = cr.getCleanHTML();
+    try {
+      cservice_ = WCMCoreUtils.getService(ConfigurationManager.class);
+      InputStream in = cservice_.getInputStream(POLICY_FILE_LOCATION) ;
+      Policy policy = Policy.getInstance(in);
+      AntiSamy as = new AntiSamy();
+      CleanResults cr = as.scan(value, policy);
+      value = cr.getCleanHTML();
       return value;
-  	} catch(Exception ex) {
-  		return value;
-  	}
+    } catch(Exception ex) {
+      return value;
+    }
   }
   public static String sanitizeSearch(String value) {
-  	try {
-  		value = sanitize(value);
-  		value = value.replaceAll("<iframe", "").replaceAll("<frame", "").replaceAll("<frameset", "");
-  		return value;
-  	} catch(Exception ex) {
-  		return value;
-  	}
+    try {
+      value = sanitize(value);
+      value = value.replaceAll("<iframe", "").replaceAll("<frame", "").replaceAll("<frameset", "");
+      return value;
+    } catch(Exception ex) {
+      return value;
+    }
   }
   public static boolean isEmptyContent(String inputValue) {
-	boolean isEmpty = true;
-	inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
-	inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
-	inputValue = inputValue.replaceAll("&nbsp;", "");
-	if(inputValue != null && inputValue.length() > 0) return false;
-	return isEmpty;
+  boolean isEmpty = true;
+  inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
+  inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
+  inputValue = inputValue.replaceAll("&nbsp;", "");
+  if(inputValue != null && inputValue.length() > 0) return false;
+  return isEmpty;
   }
   /**
    * @purpose     Check if a query is valid
@@ -890,16 +900,16 @@ public class Utils {
    * @author vinh_nguyen from ECMS
    */
   public static boolean checkQuery(String workspace, String strQuery, String SQLLanguage) {
-	  try {
-		  Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace,
-				  	WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository());
-		  QueryManager qm = session.getWorkspace().getQueryManager();
-		  Query query = qm.createQuery(strQuery, SQLLanguage);
-		  query.execute();
-	  }catch(Exception e) {
-		  return false;
-	  }
-	  return true;
+    try {
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace,
+            WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository());
+      QueryManager qm = session.getWorkspace().getQueryManager();
+      Query query = qm.createQuery(strQuery, SQLLanguage);
+      query.execute();
+    }catch(Exception e) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -987,12 +997,14 @@ public class Utils {
 
     // Make extension part for file if it have not yet
     DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
-    String ext = mimeTypeSolver.getExtension(mimeType) ;
+    String ext = "." + mimeTypeSolver.getExtension(mimeType) ;
     String fileName = Utils.getRealNode(node).getName();
-    if(fileName.lastIndexOf("."+ext) < 0 && !mimeTypeSolver.getMimeType(fileName).equals(mimeType)){
-      fileName = fileName + "." +ext ;
+    if (fileName.lastIndexOf(ext) < 0 && !mimeTypeSolver.getMimeType(fileName).equals(mimeType)) {
+      dresource.setDownloadName(fileName + ext);
+    } else {
+      dresource.setDownloadName(fileName);
     }
-    dresource.setDownloadName(fileName) ;
+
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 

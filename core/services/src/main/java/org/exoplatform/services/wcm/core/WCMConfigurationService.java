@@ -16,14 +16,9 @@
  */
 package org.exoplatform.services.wcm.core;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.exoplatform.commons.utils.ExoProperties;
 import org.exoplatform.container.xml.InitParams;
@@ -33,7 +28,6 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /*
  * Created by The eXo Platform SAS

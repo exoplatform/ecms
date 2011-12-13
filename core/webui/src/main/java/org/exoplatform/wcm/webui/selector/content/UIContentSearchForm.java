@@ -283,7 +283,8 @@ public class UIContentSearchForm extends UIForm {
             dateFormat.parse(startDateInput.getValue());
           } catch (ParseException e) {
             uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
-                                                    new Object[] { resourceBundle.getString("UIContentSearchForm.title.FromDate") },
+                                                    new Object[] 
+                                                               { resourceBundle.getString("UIContentSearchForm.title.FromDate") },
                                                     ApplicationMessage.WARNING));
             requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
             return;
@@ -305,12 +306,13 @@ public class UIContentSearchForm extends UIForm {
               DateFormat dateFormat = new SimpleDateFormat(endDateInput.getDatePattern_().trim());
               dateFormat.setLenient(false);
               dateFormat.parse(endDateInput.getValue());
-            }catch (ParseException e) {
+            } catch (ParseException e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
-                                                      new Object[] { resourceBundle.getString("UIContentSearchForm.title.ToDate") },
+                                                      new Object[] 
+                                                                 { resourceBundle.getString("UIContentSearchForm.title.ToDate") },
                                                       ApplicationMessage.WARNING));
               requestContext.addUIComponentToUpdateByAjax(uiWCSearch);
-              return;    
+              return;
             }
             
             endDate = endDateInput.getCalendar();

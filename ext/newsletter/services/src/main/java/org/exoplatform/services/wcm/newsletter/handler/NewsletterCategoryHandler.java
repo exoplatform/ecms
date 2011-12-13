@@ -104,12 +104,12 @@ public class NewsletterCategoryHandler {
       categoryConfig.setDescription(categoryNode.getProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION).getString());
     }
     // get permission for this category
-    String permission = "";
+    StringBuffer permission = new StringBuffer();
     for(String per : NewsletterConstant.getAllPermissionOfNode(categoryNode)){
-      if(permission.length() > 0) permission += ",";
-      permission += per;
+      if(permission.length() > 0) permission.append(",");
+      permission.append(per);
     }
-    categoryConfig.setModerator(permission);
+    categoryConfig.setModerator(permission.toString());
     return categoryConfig;
   }
 

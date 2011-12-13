@@ -40,7 +40,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIFormTabPane.gtmpl",
-    events = {    	
+    events = {
       @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
       @EventConfig(listeners = UIViewFormTabPane.ResetActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.EditTabActionListener.class),
@@ -58,7 +58,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIViewFormTabPane extends UIFormTabPane {
 
-  final static public String POPUP_PERMISSION = "PopupViewPermission" ;  
+  final static public String POPUP_PERMISSION = "PopupViewPermission" ;
 
   private UIViewForm uiViewForm ;
   private UITabForm uiTabForm ;
@@ -126,7 +126,7 @@ public class UIViewFormTabPane extends UIFormTabPane {
       uiViewTabPane.uiViewForm.setRendered(false);
       uiViewTabPane.setSelectedTab(uiViewTabPane.uiTabForm.getId());
       ((UIFormStringInput) uiViewTabPane.uiTabForm.
-          getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);      
+          getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
       uiViewTabPane.uiViewForm.setViewName(((UIFormStringInput)
           uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
       uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput)
@@ -143,7 +143,9 @@ public class UIViewFormTabPane extends UIFormTabPane {
       UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
       String tabName = uiViewForm.getTabList();
       if (tabName != null && tabName.length() != 0) {
-        tabName = tabName.indexOf(",") > 0 ? tabName.substring(0, tabName.indexOf(",")) : tabName;
+        if (tabName.indexOf(",") > 0) {
+          tabName = tabName.substring(0, tabName.indexOf(","));
+        }
       }
       ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();
       ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());

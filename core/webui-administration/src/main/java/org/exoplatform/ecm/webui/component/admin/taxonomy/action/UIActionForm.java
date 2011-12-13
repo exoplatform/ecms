@@ -285,7 +285,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       String name = taxoTreeData.getTaxoTreeName();
       String workspace = taxoTreeData.getTaxoTreeWorkspace();
       String homePath = taxoTreeData.getTaxoTreeHomePath();
-      homePath = homePath != null ? homePath : "";
+      if (homePath == null) {
+        homePath = "";
+      }
       boolean isEditTree = taxoTreeData.isEdit();
       if (homePath.length() == 0) {
         if (dmsSysWorkspace.equals(workspace)) {

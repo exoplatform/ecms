@@ -28,7 +28,6 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
@@ -121,7 +120,8 @@ private final RepositoryService repositoryService_;
   /**
    * {@inheritDoc}
    */
-  public Item getItemTarget(Session session, String absPath, boolean giveTarget, boolean system) throws PathNotFoundException, RepositoryException {
+  public Item getItemTarget(Session session, String absPath, boolean giveTarget, boolean system) throws PathNotFoundException,
+                                                                                                RepositoryException {
     return getItem(session, absPath, giveTarget, 0, system);
   }
 
@@ -151,7 +151,11 @@ private final RepositoryService repositoryService_;
    * @param giveTarget Indicates if the target must be returned in case the item is a link
    * @return the item corresponding to the path
    */
-  private Item getItem(Session session, String absPath, boolean giveTarget, int fromIdx, boolean system) throws PathNotFoundException, RepositoryException {
+  private Item getItem(Session session,
+                       String absPath,
+                       boolean giveTarget,
+                       int fromIdx,
+                       boolean system) throws PathNotFoundException, RepositoryException {
     if (session.itemExists(absPath)) {
       // The item corresponding to absPath can be found
       Item item = session.getItem(absPath);
@@ -198,16 +202,14 @@ private final RepositoryService repositoryService_;
 
   /**
    * Get session of user in given workspace and repository
+   * 
    * @param repository
    * @param workspace
    * @throws RepositoryException
-   * @throws RepositoryConfigurationException
    */
-
-  private Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException{
+  private Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service =
-      (SessionProviderService)container.getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService service = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     return service.getSystemSessionProvider(null).getSession(workspace, manageableRepository);
   }
 

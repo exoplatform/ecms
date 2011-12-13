@@ -297,16 +297,15 @@ public void addFile(String entryName, File file) {
         String filePath = f.getAbsolutePath();
         if (filePath.startsWith(path)) {
           if (containParent && file_.isDirectory())
-            filePath = file_.getName() + File.separator + filePath.substring(path.length() + 1);
+            filePath = file_.getName() + File.separator + filePath.substring(path.length() + 1) + File.separator;
           else if (file_.isDirectory())
-            filePath = filePath.substring(path.length() + 1);
+            filePath = filePath.substring(path.length() + 1) + File.separator;
           else
             filePath = file_.getName();
         }
         if (f.isFile()) {
           bufInput = new FileInputStream(f);
-        } else
-          filePath += "/";
+        }
         addToArchive(jos, bufInput, filePath);
       }
 
@@ -371,16 +370,15 @@ public void addFile(String entryName, File file) {
         String filePath = f.getAbsolutePath();
         if (filePath.startsWith(path)) {
           if (containParent && file_.isDirectory())
-            filePath = file_.getName() + File.separator + filePath.substring(path.length() + 1);
+            filePath = file_.getName() + File.separator + filePath.substring(path.length() + 1) + File.separator;
           else if (file_.isDirectory())
-            filePath = filePath.substring(path.length() + 1);
+            filePath = filePath.substring(path.length() + 1) + File.separator;
           else
             filePath = file_.getName();
         }
         if (f.isFile()) {
           bufInput = new FileInputStream(f);
-        } else
-          filePath += "/";
+        }
         addToArchive(zos, bufInput, filePath);
       }
     }

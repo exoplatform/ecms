@@ -133,7 +133,7 @@ public class VotingServiceImpl implements VotingService {
     }
     DecimalFormat format = new DecimalFormat("###.##") ;
     double formatedRating= format.parse(format.format(newRating)).doubleValue() ;
-    
+
     //set new voters
     Value[] voterVoteValues = {} ;
     Value[] newVoterVoteValues = null;
@@ -155,7 +155,7 @@ public class VotingServiceImpl implements VotingService {
     node.setProperty(VOTE_TOTAL_PROP,getVoteTotal(node)+(voterVoteValue == null ? 1 : 0)) ;
     languageNode.setProperty(VOTE_TOTAL_LANG_PROP,voteTotalOfLang+(voterVoteValue == null ? 1 : 0)) ;
     languageNode.setProperty(VOTING_RATE_PROP,formatedRating) ;
-    
+
     node.getSession().save() ;
     languageNode.getSession().save();
   }
@@ -175,7 +175,7 @@ public class VotingServiceImpl implements VotingService {
   }
 
   //replace old VoterVoteValue by the new one
-  private Value[] replaceOldValue(Value[] voterVoteValues, String userName, double rate, Session session) 
+  private Value[] replaceOldValue(Value[] voterVoteValues, String userName, double rate, Session session)
     throws Exception {
     for (int i = 0; i < voterVoteValues.length; i++) {
       if (voterVoteValues[i].getString().startsWith(userName + SPACE)) {
@@ -223,8 +223,8 @@ public class VotingServiceImpl implements VotingService {
           }
         }
       } else {
-	    languageNode = node;
-	  }
+      languageNode = node;
+    }
     }
     return languageNode;
   }
@@ -248,12 +248,12 @@ public class VotingServiceImpl implements VotingService {
   public double getVoteValueOfUser(Node node, String userName, String language) throws Exception {
     Session session = node.getSession();
     node = handleUser(session, node, userName);
-    
+
     if(!node.isNodeType(VOTABLE)) {
       if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
       else throw new NoSuchNodeTypeException() ;
     }
-  
+
     Node languageNode = handleLanguage(node, language);
     Value voterVoteValue = getVoterVoteValue(languageNode, userName);
     if (voterVoteValue != null) {

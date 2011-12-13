@@ -268,7 +268,8 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       documentEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
       documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
       documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
-      documentEntry.setValue(CmisConstants.OBJECT_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
+      documentEntry.setValue(CmisConstants.OBJECT_ID, 
+                             documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
       documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
       documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
       // TODO : support for checked-out initial state
@@ -502,7 +503,8 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                // Delete version
                Version version = (Version)node.getParent();
                VersionHistory versionHistory = version.getContainingHistory();
-               DocumentDataImpl documentDataImpl = new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
+               DocumentDataImpl documentDataImpl = 
+                 new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
                documentDataImpl.delete();
             } else {
                // Delete object

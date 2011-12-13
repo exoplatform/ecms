@@ -28,7 +28,6 @@ import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -99,14 +98,14 @@ public class UIECMScripts extends UIContainer {
   }
   
   public void initFormPopup(String id) throws Exception {
-	removeChildById(id) ;
-	UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id) ;
-	uiPopup.setShowMask(true);
-	uiPopup.setWindowSize(600, 500) ;
-	UIScriptForm uiForm = createUIComponent(UIScriptForm.class, null, null) ;	
-    uiPopup.setUIComponent(uiForm) ;
-    uiPopup.setRendered(true) ;
-    uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;
+    removeChildById(id);
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
+    uiPopup.setShowMask(true);
+    uiPopup.setWindowSize(600, 500);
+    UIScriptForm uiForm = createUIComponent(UIScriptForm.class, null, null);
+    uiPopup.setUIComponent(uiForm);
+    uiPopup.setRendered(true);
+    uiPopup.setShow(true);
+    uiPopup.setResizable(true);
   }
 }

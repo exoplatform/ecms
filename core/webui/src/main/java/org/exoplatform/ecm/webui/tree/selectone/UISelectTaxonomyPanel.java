@@ -21,7 +21,6 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
-import org.exoplatform.ecm.webui.tree.selectone.UISelectPathPanel;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -89,9 +88,13 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
       String taxoTreePath = taxoTreeNode.getPath();
       value = value.replace(taxoTreePath, taxoTreeName);
 
-      if(uiTreeSelector instanceof UIOneNodePathSelector) {
-        if(!((UIOneNodePathSelector)uiTreeSelector).isDisable()) {
-          value = ((UIOneNodePathSelector)uiTreeSelector).getWorkspaceName() + ":" + value ;
+      if (uiTreeSelector instanceof UIOneNodePathSelector) {
+        if (!((UIOneNodePathSelector) uiTreeSelector).isDisable()) {
+          StringBuffer sb = new StringBuffer();
+          sb.append(((UIOneNodePathSelector) uiTreeSelector).getWorkspaceName())
+            .append(":")
+            .append(value);
+          value = sb.toString();
         }
       }
 

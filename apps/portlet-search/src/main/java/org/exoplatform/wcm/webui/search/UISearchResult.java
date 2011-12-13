@@ -42,7 +42,6 @@ import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
-import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -213,10 +212,10 @@ public class UISearchResult extends UIContainer {
         
         setSearchTime(pageList.getQueryTime() / 1000);
         setSuggestion(pageList.getSpellSuggestion());
-        if(pageList.getAvailable()<=0) {
-          String suggestion =pageList.getSpellSuggestion();        
-        	setSuggestionURL(suggestion);        
-        	searchForm.setSubmitAction(suggestion);
+        if (pageList.getAvailable() <= 0) {
+          String suggestion = pageList.getSpellSuggestion();
+          setSuggestionURL(suggestion);
+          searchForm.setSubmitAction(suggestion);
         }
         setPageList(pageList);        
       } catch (Exception e) {
@@ -364,15 +363,18 @@ public class UISearchResult extends UIContainer {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequest portletRequest = getPortletRequest();
 
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName();
+    StringBuffer baseURI = new StringBuffer();
+    baseURI.append(portletRequest.getScheme()).append("://").append(portletRequest.getServerName());
     if (portletRequest.getServerPort() != 80) {
-      baseURI += ":" + String.format("%s", portletRequest.getServerPort());
+      baseURI.append(":").append(String.format("%s", portletRequest.getServerPort()));
     }
-    if (navNodeURI.startsWith(baseURI))
+    if (navNodeURI.startsWith(baseURI.toString()))
       return navNodeURI;
     
     NodeURL nodeURL = portalRequestContext.createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(portalRequestContext.getSiteType(), portalRequestContext.getSiteName(), navNodeURI);
+    NavigationResource resource = new NavigationResource(portalRequestContext.getSiteType(),
+                                                         portalRequestContext.getSiteName(),
+                                                         navNodeURI);
     nodeURL.setResource(resource);
     return baseURI + nodeURL.toString();
   }
@@ -392,20 +394,23 @@ public class UISearchResult extends UIContainer {
     String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
     String detailParameterName = portletPreferences.getValue(UIWCMSearchPortlet.DETAIL_PARAMETER_NAME, null);    
 
-    String path = "/" + repository + "/" + workspace;
+    StringBuffer path = new StringBuffer();
+    path.append("/").append(repository).append("/").append(workspace);
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);   
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), basePath);
     nodeURL.setResource(resource);
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      path += originalNode.getPath();      
+      path.append(originalNode.getPath());      
       nodeURL.setQueryParameterValue("version", node.getParent().getName());
     } else {
-      path += node.getPath();
+      path.append(node.getPath());
     }
 
-    nodeURL.setQueryParameterValue(detailParameterName, path);
+    nodeURL.setQueryParameterValue(detailParameterName, path.toString());
     nodeURL.setSchemeUse(true);
     return nodeURL.toString();
   }
@@ -553,10 +558,10 @@ public class UISearchResult extends UIContainer {
   public void clearResult() {
     moreListResult = new ArrayList<ResultNode>();
     morePageSet = new HashSet<Integer>();
-     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-     String itemsPerPage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
-    setPageList(new ObjectPageList(new ArrayList<ResultNode>(), 
-                                   Integer.parseInt(itemsPerPage)));
+    PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest()
+                                                                                                              .getPreferences();
+    String itemsPerPage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
+    setPageList(new ObjectPageList(new ArrayList<ResultNode>(), Integer.parseInt(itemsPerPage)));
   }
   
   /**

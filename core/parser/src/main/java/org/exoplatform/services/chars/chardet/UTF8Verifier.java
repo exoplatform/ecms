@@ -25,7 +25,6 @@
 
 package org.exoplatform.services.chars.chardet;
 
-import org.exoplatform.services.chars.chardet.Verifier;
 
 public class UTF8Verifier extends Verifier
 {

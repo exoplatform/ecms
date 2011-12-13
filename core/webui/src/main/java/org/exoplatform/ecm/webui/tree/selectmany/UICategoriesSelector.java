@@ -127,31 +127,36 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
   }
 
   public void changeGroup(String groupId, Object context) throws Exception {
-    String stringPath = pathTaxonomy ;
-    UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class) ;
-    if (groupId == null) groupId = "" ;
-    List<LocalPath> listLocalPath = uiBreadcumb.getPath() ;
-    if (listLocalPath == null || listLocalPath.size() == 0) return ;
-    List<String> listLocalPathString = new ArrayList<String>() ;
+    StringBuffer sbPath = new StringBuffer(pathTaxonomy);
+    UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
+    if (groupId == null)
+      groupId = "";
+    List<LocalPath> listLocalPath = uiBreadcumb.getPath();
+    if (listLocalPath == null || listLocalPath.size() == 0)
+      return;
+    List<String> listLocalPathString = new ArrayList<String>();
     for (LocalPath localPath : listLocalPath) {
-      listLocalPathString.add(localPath.getId().trim()) ;
+      listLocalPathString.add(localPath.getId().trim());
     }
     if (listLocalPathString.contains(groupId)) {
-      int index = listLocalPathString.indexOf(groupId) ;
-      if (index == listLocalPathString.size() - 1) return ;
-      for (int i = listLocalPathString.size() - 1 ; i > index ; i--) {
-        listLocalPathString.remove(i) ;
-        listLocalPath.remove(i) ;
+      int index = listLocalPathString.indexOf(groupId);
+      if (index == listLocalPathString.size() - 1)
+        return;
+      for (int i = listLocalPathString.size() - 1; i > index; i--) {
+        listLocalPathString.remove(i);
+        listLocalPath.remove(i);
       }
-      uiBreadcumb.setPath(listLocalPath) ;
-      for (int i = 0 ; i < listLocalPathString.size() ; i++) {
-        String pathName = listLocalPathString.get(i) ;
-        if (pathName != null || !pathName.equals("")) {
-          stringPath += pathName.trim() ;
-          if (i < listLocalPathString.size() - 1) stringPath += "/" ;
+      uiBreadcumb.setPath(listLocalPath);
+      for (int i = 0; i < listLocalPathString.size(); i++) {
+        String pathName = listLocalPathString.get(i);
+        if (pathName != null && pathName.trim().length() != 0) {
+          sbPath.append(pathName.trim());
+          if (i < listLocalPathString.size() - 1) {
+            sbPath.append("/");
+          }
         }
       }
-      changeNode(stringPath, context) ;
+      changeNode(sbPath.toString(), context);
     }
   }
 

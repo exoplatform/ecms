@@ -43,13 +43,15 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class PageListFactory {
 
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
-                                                String workspace,
-                                                String language,
-                                                boolean isSystemSession, 
-                                                NodeSearchFilter filter,
-                                                SearchDataCreator<E> dataCreator,
-                                                int pageSize,
-                                                int bufferSize) throws LoginException, NoSuchWorkspaceException, RepositoryException {
+                                                       String workspace,
+                                                       String language,
+                                                       boolean isSystemSession,
+                                                       NodeSearchFilter filter,
+                                                       SearchDataCreator<E> dataCreator,
+                                                       int pageSize,
+                                                       int bufferSize) throws LoginException,
+                                                                      NoSuchWorkspaceException,
+                                                                      RepositoryException {
     if (pageSize == 0) {
       pageSize = AbstractPageList.DEFAULT_PAGE_SIZE;
     }
@@ -73,11 +75,13 @@ public class PageListFactory {
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
-                                                String workspace,
-                                                String language,
-                                                boolean isSystemSession, 
-                                                NodeSearchFilter filter,
-                                                SearchDataCreator<E> dataCreator) throws LoginException, NoSuchWorkspaceException, RepositoryException {
+                                                       String workspace,
+                                                       String language,
+                                                       boolean isSystemSession,
+                                                       NodeSearchFilter filter,
+                                                       SearchDataCreator<E> dataCreator) throws LoginException,
+                                                                                        NoSuchWorkspaceException,
+                                                                                        RepositoryException {
     return createPageList(queryStatement, workspace, language,
                           isSystemSession, filter, dataCreator,
                           AbstractPageList.DEFAULT_PAGE_SIZE, AbstractPageList.DEAFAULT_BUFFER_SIZE);

@@ -143,15 +143,14 @@ public class ImportContentsJob implements Job {
 
                       String contentTargetPath = reader.getAttributeValue(0);
                       String[] strContentPath = contentTargetPath.split(":");
-                      String contentPath = "";
+                      StringBuffer sbContPath = new StringBuffer();
                       boolean flag = true;
                       for (int index = 2; index < strContentPath.length; index++) {
                         if (flag) {
-                          contentPath += strContentPath[index];
+                          sbContPath.append(strContentPath[index]);
                           flag = false;
                         } else {
-                          contentPath += ":";
-                          contentPath += strContentPath[index];
+                          sbContPath.append(":").append(strContentPath[index]);
                         }
                       }
                       sessionProvider = SessionProvider.createSystemProvider();
@@ -159,6 +158,7 @@ public class ImportContentsJob implements Job {
                       manageableRepository = repositoryService_.getCurrentRepository();
                       String workspace = strContentPath[1];
                       session = sessionProvider.getSession(workspace, manageableRepository);
+                      String contentPath = sbContPath.toString();
                       if (session.itemExists(contentPath)) {
                         Node currentContent = (Node) session.getItem(contentPath);
                         HashMap<String, String> variables = new HashMap<String, String>();
@@ -254,30 +254,30 @@ public class ImportContentsJob implements Job {
           if (hasNewContent) {
             for (LinkObject obj : listLink) {
               String[] linkTarget = obj.getLinkTargetPath().split(":");
-              String itemPath = "";
+              StringBuffer itemPath = new StringBuffer();
               boolean flag = true;
               for (int index = 2; index < linkTarget.length; index++) {
                 if (flag) {
-                  itemPath += linkTarget[index];
+                  itemPath.append(linkTarget[index]);
                   flag = false;
                 } else {
-                  itemPath += ":";
-                  itemPath += linkTarget[index];
+                  itemPath.append(":");
+                  itemPath.append(linkTarget[index]);
                 }
               }
               String[] linkSource = obj.getSourcePath().split(":");
               session = sessionProvider.getSession(linkTarget[1], manageableRepository);
-              Node parentNode = (Node) session.getItem(itemPath);
+              Node parentNode = (Node) session.getItem(itemPath.toString());
 
-              String sourcePath = "";
+              StringBuffer sourcePath = new StringBuffer();
               boolean flagSource = true;
               for (int index = 2; index < linkSource.length; index++) {
                 if (flagSource) {
-                  sourcePath += linkSource[index];
+                  sourcePath.append(linkSource[index]);
                   flagSource = false;
                 } else {
-                  sourcePath += ":";
-                  sourcePath += linkSource[index];
+                  sourcePath.append(":");
+                  sourcePath.append(linkSource[index]);
                 }
               }
 
@@ -286,7 +286,7 @@ public class ImportContentsJob implements Job {
                 existedNode.remove();
               }
               session = sessionProvider.getSession(linkSource[1], manageableRepository);
-              Node targetNode = (Node) session.getItem(sourcePath);
+              Node targetNode = (Node) session.getItem(sourcePath.toString());
               LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
               linkManager.createLink(parentNode, obj.getLinkType(), targetNode, obj.getLinkTitle());
             }

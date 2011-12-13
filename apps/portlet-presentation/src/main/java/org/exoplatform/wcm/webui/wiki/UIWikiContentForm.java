@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.application.PortletPreferences;
 import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
@@ -32,7 +31,6 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.page.UIPage;
@@ -409,7 +407,9 @@ public class UIWikiContentForm extends UIForm {
     String serverPort = String.valueOf(reqWrapper.getServerPort());
     
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), newNodeUri);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), newNodeUri);
     nodeURL.setResource(resource);
     String link = scheme + "://" + serverName + ":" + serverPort + nodeURL.toString();
     

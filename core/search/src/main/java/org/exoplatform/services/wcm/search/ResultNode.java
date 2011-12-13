@@ -67,7 +67,7 @@ public class ResultNode implements Node{
 
   /** The excerpt. */
   private String excerpt;
-  
+
   /** user navigation node's uri **/
   private String userNavigationURI;
 
@@ -85,13 +85,13 @@ public class ResultNode implements Node{
     this.excerpt = excerpt == null ? "" : excerpt.getString();
     this.score = row.getValue("jcr:score").getLong();
   }
-  
+
   public ResultNode(Node node, float score, String excerpt) {
-  	this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
-  	this.excerpt = excerpt;
-  	this.score = score;
+    this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    this.excerpt = excerpt;
+    this.score = score;
   }
-  
+
   public ResultNode(Node node, Row row, String userNavURI) throws RepositoryException {
     this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
     this.userNavigationURI = userNavURI;
@@ -196,10 +196,10 @@ public class ResultNode implements Node{
     }
     return null;
   }
-  
+
   /**
    * Get the meta tag SEO's description of page node
-   * 
+   *
    * @return
    * @throws Exception
    */
@@ -767,7 +767,7 @@ public class ResultNode implements Node{
     }
     return false;
   }
-  
+
   @Override
   public int hashCode() {
     return nodeLocation.hashCode() + (int)score +

@@ -228,11 +228,11 @@ public class NewsletterManagerService {
       if(listEmailAddress != null && listEmailAddress.size() > 0) {
         message = new Message();
         message.setTo(listEmailAddress.get(0));
-        String receiver = "";
+        StringBuffer receiver = new StringBuffer();
         for (int i = 1; i < listEmailAddress.size(); i++) {
-          receiver += listEmailAddress.get(i) + ",";
+          receiver.append(listEmailAddress.get(i)).append(",");
         }
-        message.setBCC(receiver);
+        message.setBCC(receiver.toString());
         message.setSubject(newsletterEntry.getProperty("exo:title").getString());
         message.setBody(entryHandler.getContent(sessionProvider, newsletterEntry));
         message.setMimeType("text/html");

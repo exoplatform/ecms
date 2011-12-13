@@ -513,7 +513,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       workspaceOptions.add(new SelectItemOption<String>(wkspace, wkspace));
     }
 
-    UIFormSelectBox workspaceSelector = new UIFormSelectBox(WORKSPACE_FORM_SELECT_BOX, WORKSPACE_FORM_SELECT_BOX, workspaceOptions);
+    UIFormSelectBox workspaceSelector = new UIFormSelectBox(WORKSPACE_FORM_SELECT_BOX,
+                                                            WORKSPACE_FORM_SELECT_BOX,
+                                                            workspaceOptions);
     workspaceSelector.setValue(workspace);
 
     /** CONTENT BY QUERY */
@@ -659,20 +661,20 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   private String getTitles(String itemPath) throws RepositoryException {
     if (itemPath == null || itemPath.length() == 0)
       return "";
-    String titles = "";
+    StringBuffer titles = new StringBuffer();
     List<String> tmpItems;
     tmpItems = Arrays.asList(itemPath.split(";"));
-    for (String item:tmpItems) {
+    for (String item : tmpItems) {
       String title = getTitle(item);
-      if (title!=null) {
-        if (titles.length()>0) {
-           titles  = titles + ";" + title;
-        }else {
-            titles  = title;
+      if (title != null) {
+        if (titles.length() > 0) {
+          titles.append(";").append(title);
+        } else {
+          titles.append(title);
         }
       }
     }
-    return titles;
+    return titles.toString();
   }
 
  /**
@@ -976,10 +978,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         items.set(offset - 1, items.get(offset));
         items.set(offset, temp);
       }
-      String itemPath = "";
+      StringBuffer sb = new StringBuffer("");
       for (String item : items) {
-        itemPath += item + ";";
+        sb.append(item).append(";");
       }
+      String itemPath = sb.toString();
       clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
       clvConfig.setSavedPath(itemPath);
 
@@ -1011,10 +1014,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         items.set(offset + 1, items.get(offset));
         items.set(offset, temp);
       }
-      String itemPath = "";
+      StringBuffer sb = new StringBuffer("");
       for (String item : items) {
-        itemPath += item + ";";
+        sb.append(item).append(";");
       }
+      String itemPath = sb.toString();
       clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
       clvConfig.setSavedPath(itemPath);
     }

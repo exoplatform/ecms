@@ -141,8 +141,8 @@ public class UISelectPathPanel extends UIContainer {
   }
 
   public void updateGrid() throws Exception {
-    ListAccess<Object> selectableNodeList = new ListAccessImpl<Object>(Object.class,
-                                                                       NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
+    ListAccess<Object> selectableNodeList = new ListAccessImpl<Object>(Object.class, 
+        NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
     LazyPageList<Object> objPageList = new LazyPageList<Object>(selectableNodeList, 10);
     uiPageIterator_.setPageList(objPageList);
   }
@@ -212,20 +212,21 @@ public class UISelectPathPanel extends UIContainer {
       UISelectPathPanel uiSelectPathPanel = event.getSource();
       UIContainer uiTreeSelector = uiSelectPathPanel.getParent();
       UIBreadcumbs uiBreadcumbs = uiTreeSelector.getChild(UIBreadcumbs.class);
-      String breadcumbsPaths = "";
+      StringBuffer breadcumbsPaths = new StringBuffer();
       for(LocalPath iterLocalPath: uiBreadcumbs.getPath()) {
-        breadcumbsPaths += "/" + iterLocalPath.getId();
+        breadcumbsPaths.append("/").append(iterLocalPath.getId());
       }
-      String value = event.getRequestContext().getRequestParameter(OBJECTID);
+      StringBuffer sbPath = new StringBuffer();
+      String objectid = event.getRequestContext().getRequestParameter(OBJECTID);
 
-      value = breadcumbsPaths + value.substring(value.lastIndexOf("/"));
+      sbPath.append(breadcumbsPaths).append(objectid.substring(objectid.lastIndexOf("/")));
       if(uiTreeSelector instanceof UIOneNodePathSelector) {
         if(!((UIOneNodePathSelector)uiTreeSelector).isDisable()) {
-          value = ((UIOneNodePathSelector)uiTreeSelector).getWorkspaceName() + ":" + value ;
+          sbPath.insert(0, ":").insert(0, ((UIOneNodePathSelector)uiTreeSelector).getWorkspaceName());
         }
       }
       String returnField = ((UIBaseNodeTreeSelector)uiTreeSelector).getReturnFieldName();
-      ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, value) ;
+      ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, sbPath.toString()) ;
 
       UIComponent uiOneNodePathSelector = uiSelectPathPanel.getParent();
       if (uiOneNodePathSelector instanceof UIOneNodePathSelector) {

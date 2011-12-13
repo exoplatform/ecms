@@ -148,7 +148,9 @@ public class UINewsletterEntryForm extends UIDialogForm {
                                                               selectedSubsctiption));
 
     // Prepare node: use title as a node name
-    Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(getChildren(), getInputProperties(), getInputOptions());
+    Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(getChildren(),
+                                                                              getInputProperties(),
+                                                                              getInputOptions());
     if(isAddNew()){
       String nodeName = Utils.cleanString(getUIStringInput("title").getValue());
       inputProperties.get("/node").setValue(nodeName);
@@ -286,7 +288,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         MailService mailService = (MailService)container.getComponentInstanceOfType(MailService.class) ;
         Message message = null;
         List<String> listEmailAddress = new ArrayList<String>();
-        String receiver = "";
+        StringBuffer sbReceiver = new StringBuffer();
         Node subscriptionNode = newsletterNode.getParent();
         NewsletterManagerService newsletterManagerService = newsletterEntryForm.
             getApplicationComponent(NewsletterManagerService.class);
@@ -308,7 +310,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
           message = new Message() ;
           message.setTo(listEmailAddress.get(0));
           for (int i = 1; i < listEmailAddress.size(); i ++) {
-            receiver += listEmailAddress.get(i) + ",";
+            sbReceiver.append(listEmailAddress.get(i)).append(",");
           }
           String content = 
             newsletterManagerService.getEntryHandler().getContent(WCMCoreUtils.getUserSessionProvider(), newsletterNode);
@@ -343,7 +345,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
               break;
             }
           } while(index >= 0);
-          message.setBCC(receiver);
+          message.setBCC(sbReceiver.toString());
           message.setSubject(newsletterNode.getName()) ;
           message.setBody(content) ;
           message.setMimeType("text/html") ;

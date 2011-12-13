@@ -396,7 +396,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           return;
         }
         Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs,
-                                                                                  contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
+                                                                                  contentDialogForm.getInputProperties(),
+                                                                                  contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         if (canAccessParentNode(webContentNode)) {
           cmsService.storeNode(contentDialogForm.contentType,
@@ -463,20 +464,21 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * @return true, if successful
    */
   private boolean checkCategories(UIContentDialogForm contentDialogForm) {
-    String categoriesPath = "";
     String[] categoriesPathList = null;
     int index = 0;
     if (contentDialogForm.isReference) {
       UIFormMultiValueInputSet uiSet = contentDialogForm.getChild(UIFormMultiValueInputSet.class);
       if ((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
         List<UIComponent> listChildren = uiSet.getChildren();
+        StringBuffer sb = new StringBuffer();
         for (UIComponent component : listChildren) {
           UIFormStringInput uiStringInput = (UIFormStringInput) component;
           if (uiStringInput.getValue() != null) {
             String value = uiStringInput.getValue().trim();
-            categoriesPath += value + ",";
+            sb.append(value).append(",");
           }
         }
+        String categoriesPath = sb.toString();
         if (categoriesPath != null && categoriesPath.length() > 0) {
           try {
             if (categoriesPath.endsWith(",")) {
@@ -536,7 +538,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
           return;
         }
         Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs,
-                                                                                  contentDialogForm.getInputProperties(), contentDialogForm.getInputOptions());
+                                                                                  contentDialogForm.getInputProperties(),
+                                                                                  contentDialogForm.getInputOptions());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         cmsService.storeNode(contentDialogForm.contentType,
                              contentDialogForm.getNode().getParent(),

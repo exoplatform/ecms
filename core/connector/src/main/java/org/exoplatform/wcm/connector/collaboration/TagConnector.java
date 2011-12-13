@@ -99,9 +99,12 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
 
     try {
-      Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+      Node content = getContent(workspaceName, jcrPath, null, false);
 
-      List<Node> tags = tagService.getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC, "", content, repositoryName,  workspaceName) ;
+      List<Node> tags = tagService.getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC,
+                                                                  "",
+                                                                  content,
+                                                                  workspaceName);
 
       Document document =
         DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();

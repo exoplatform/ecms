@@ -26,8 +26,6 @@ import javax.jcr.query.QueryManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -37,17 +35,18 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -152,20 +151,21 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
     public void execute(Event<UIJCRAdvancedSearch> event) throws Exception {
       UIJCRAdvancedSearch uiForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
-      String queryS = uiForm.getUIFormTextAreaInput(FIELD_QUERY).getValue() ;
+      StringBuffer queryS = new StringBuffer();
+      queryS.append(uiForm.getUIFormTextAreaInput(FIELD_QUERY).getValue());
       String searchType = uiForm.getUIFormSelectBox(FIELD_SELECT_BOX).getValue() ;
       UIECMSearch uiSearch = uiForm.getParent() ;
       long startTime = System.currentTimeMillis();
       try {
-        if(queryS.toLowerCase().indexOf("order by") < 0) {
+        if(queryS.toString().toLowerCase().indexOf("order by") < 0) {
           if(searchType.equals("sql")) {
-            queryS = queryS + " order by exo:dateCreated DESC" ;
+            queryS.append(" order by exo:dateCreated DESC");
           } else if(searchType.equals("xpath")) {
-            queryS = queryS + " order by @exo:dateCreated descending" ;
+            queryS.append(" order by @exo:dateCreated descending");
           }
         }
         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
-        uiSearchResult.setQuery(queryS, uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
+        uiSearchResult.setQuery(queryS.toString(), uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
                                 IdentityConstants.SYSTEM.equals(uiExplorer.getTargetSession().getUserID()), null);
         uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;

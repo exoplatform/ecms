@@ -35,7 +35,8 @@ import org.exoplatform.webui.event.EventListener;
  * Editor: pham tuan Oct 27, 2006
  */
 
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", events = {@EventConfig(listeners = UIECMSearch.SelectTabActionListener.class)})
+@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", 
+                 events = { @EventConfig(listeners = UIECMSearch.SelectTabActionListener.class) })
 public class UIECMSearch extends UITabPane implements UIPopupComponent {
 
   static public String ADVANCED_RESULT = "AdvancedSearchResult" ;

@@ -131,35 +131,37 @@ abstract class BaseJcrStorage implements TypeManager
 
    protected final String rootPath;
 
-   public BaseJcrStorage(Session session, StorageConfiguration storageConfiguration,
-      Map<String, TypeMapping> nodeTypeMapping)
-   {
-      this.session = session;
-      this.storageConfiguration = storageConfiguration;
-      this.nodeTypeMapping = nodeTypeMapping;
-      String rootPath = storageConfiguration.getRootNodePath();
-      if (rootPath.contains("${userId}"))
-      {
-         // process root path template
-         String userPath = null;
-         try 
-         {
-            // get user node path
-            userPath = WCMCoreUtils.getService(NodeHierarchyCreator.class).getUserNode(SessionProvider.createSystemProvider(), session.getUserID()).getPath();
-         } catch (Exception e) {
-            // nothing
-         }
-         if (userPath != null) 
-         {
-            // add to the path the /Private or /Public path segment from the template
-            userPath += rootPath.substring(rootPath.indexOf("${userId}") + "${userId}".length());
-            
-            storageConfiguration.setRootNodePath(userPath);
-            rootPath = userPath;
-         }
+  public BaseJcrStorage(Session session,
+                        StorageConfiguration storageConfiguration,
+                        Map<String, TypeMapping> nodeTypeMapping) {
+    this.session = session;
+    this.storageConfiguration = storageConfiguration;
+    this.nodeTypeMapping = nodeTypeMapping;
+    String rootPath = storageConfiguration.getRootNodePath();
+    if (rootPath.contains("${userId}")) {
+      // process root path template
+      String userPath = null;
+      try {
+        // get user node path
+        userPath = WCMCoreUtils.getService(NodeHierarchyCreator.class)
+                               .getUserNode(SessionProvider.createSystemProvider(),
+                                            session.getUserID())
+                               .getPath();
+      } catch (Exception e) {
+        // nothing
       }
-      this.rootPath = rootPath;
-   }
+      if (userPath != null) {
+        // add to the path the /Private or /Public path segment from the template
+        StringBuffer sb = new StringBuffer();
+        sb.append(userPath).append(rootPath.substring(rootPath.indexOf("${userId}") + "${userId}".length()));
+        userPath = sb.toString();
+
+        storageConfiguration.setRootNodePath(userPath);
+        rootPath = userPath;
+      }
+    }
+    this.rootPath = rootPath;
+  }
 
    // ================= TypeManager =================
 
@@ -1180,121 +1182,99 @@ abstract class BaseJcrStorage implements TypeManager
       }
    }
 
-   public JcrNodeEntry getEntry(String id) throws ObjectNotFoundException
-   {
-      if (id == null)
-      {
-         throw new CmisRuntimeException("Id may not be null.");
-      }
-      String internal;
-      String v = null;
+  public JcrNodeEntry getEntry(String id) throws ObjectNotFoundException {
+    if (id == null) {
+      throw new CmisRuntimeException("Id may not be null.");
+    }
+    String internal;
+    String v = null;
 
-      if (id.contains(JcrCMIS.ID_SEPARATOR))
-      {
-         String[] tmp = id.split(JcrCMIS.ID_SEPARATOR);
-         internal = tmp[0];
-         v = tmp[1];
-      }
-      else
-      {
-         internal = id;
-      }
-      try
-      {
-         Node node = ((ExtendedSession)session).getNodeByIdentifier(internal);
-         if (node.isNodeType(JcrCMIS.NT_VERSION_HISTORY) && v != null)
-         {
-            VersionHistory vh = (VersionHistory)node;
-            try
-            {
-               node = vh.getVersion(v).getNode(JcrCMIS.JCR_FROZEN_NODE);
-            }
-            catch (VersionException ve)
-            {
-               
-               int lastVersion = -1;
-               try {
-                  long allVersionSize = vh.getAllVersions().getSize();
-                  Version lastVersionNode = vh.getVersion(String.valueOf(allVersionSize));
-                  String propertyObjectId = lastVersionNode.getNode(JcrCMIS.JCR_FROZEN_NODE).getProperty(JcrCMIS.OBJECT_ID).getString();
-                  lastVersion = Integer.parseInt(propertyObjectId.split(JcrCMIS.ID_SEPARATOR)[1]) + 1;
-                  // it works since last version cannot be deleted
-               } catch (RepositoryException e) {
-                  // There are no version with provided name (the size of version history with no deleted nodes) in the version history
-                  lastVersion = Integer.parseInt(String.valueOf(vh.getAllVersions().getSize()));
-               }
-               
-               if ("1".equals(v) || lastVersion == Integer.parseInt(v))
-               {
-                  node = ((ExtendedSession)session).getNodeByIdentifier(vh.getVersionableUUID());
-               }
-               else
-               {
-                  throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
-               }
-            }
-         }
-         return fromNode(node);
-      }
-      catch (NotSupportedNodeTypeException unsupp)
-      {
-         throw new ObjectNotFoundException("Object '" + id + "' does not exist. " + unsupp.getMessage());
-      } 
-      catch (ItemNotFoundException nfe)
-      {
-         throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException(re.getMessage(), re);
-      }
-   }
+    if (id.contains(JcrCMIS.ID_SEPARATOR)) {
+      String[] tmp = id.split(JcrCMIS.ID_SEPARATOR);
+      internal = tmp[0];
+      v = tmp[1];
+    } else {
+      internal = id;
+    }
+    try {
+      Node node = ((ExtendedSession) session).getNodeByIdentifier(internal);
+      if (node.isNodeType(JcrCMIS.NT_VERSION_HISTORY) && v != null) {
+        VersionHistory vh = (VersionHistory) node;
+        try {
+          node = vh.getVersion(v).getNode(JcrCMIS.JCR_FROZEN_NODE);
+        } catch (VersionException ve) {
 
-   public JcrNodeEntry fromNode(Node node) throws ObjectNotFoundException
-   {
-      try
-      {
-         // Need for set checkedOut state after WebDAV
-         if (!node.isCheckedOut())
-         {
-            node.checkout();
-         }
-         if (node.isNodeType("exo:symlink"))
-         {
-            Node link = node;
-            try
-            {
-               node = ((ExtendedSession)session).getNodeByIdentifier(node.getProperty("exo:uuid").getString());
-            }
-            catch (ItemNotFoundException e)
-            {
-               throw new ObjectNotFoundException("Target of exo:symlink " + link.getPath() + " is not exist any more. ");
-            }
-            return new SymLinkNodeEntry(link, node, this);
-         }
-         else if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
-         {
-            javax.jcr.Property propertyWithId = null;
-            for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
-            {
-               javax.jcr.Property nextProperty = iter.nextProperty();
-               // iterate while don't get the property with CMIS Object Id in the name.
-               // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
-               if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
-                  propertyWithId = nextProperty;
-               }
-            }
-            Node target = propertyWithId.getNode();
-            
-            return new JcrNodeEntry(target, this);
-         }
-         return new JcrNodeEntry(node, this);
+          int lastVersion = -1;
+          try {
+            long allVersionSize = vh.getAllVersions().getSize();
+            Version lastVersionNode = vh.getVersion(String.valueOf(allVersionSize));
+            String propertyObjectId = lastVersionNode.getNode(JcrCMIS.JCR_FROZEN_NODE)
+                                                     .getProperty(JcrCMIS.OBJECT_ID)
+                                                     .getString();
+            lastVersion = Integer.parseInt(propertyObjectId.split(JcrCMIS.ID_SEPARATOR)[1]) + 1;
+            // it works since last version cannot be deleted
+          } catch (RepositoryException e) {
+            // There are no version with provided name (the size of version
+            // history with no deleted nodes) in the version history
+            lastVersion = Integer.parseInt(String.valueOf(vh.getAllVersions().getSize()));
+          }
+
+          if ("1".equals(v) || lastVersion == Integer.parseInt(v)) {
+            node = ((ExtendedSession) session).getNodeByIdentifier(vh.getVersionableUUID());
+          } else {
+            throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
+          }
+        }
       }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException(re.getMessage(), re);
+      return fromNode(node);
+    } catch (NotSupportedNodeTypeException unsupp) {
+      throw new ObjectNotFoundException("Object '" + id + "' does not exist. "
+          + unsupp.getMessage());
+    } catch (ItemNotFoundException nfe) {
+      throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
+    } catch (RepositoryException re) {
+      throw new CmisRuntimeException(re.getMessage(), re);
+    }
+  }
+
+  public JcrNodeEntry fromNode(Node node) throws ObjectNotFoundException {
+    try {
+      // Need for set checkedOut state after WebDAV
+      if (!node.isCheckedOut()) {
+        node.checkout();
       }
-   }
+      if (node.isNodeType("exo:symlink")) {
+        Node link = node;
+        try {
+          node = ((ExtendedSession) session).getNodeByIdentifier(node.getProperty("exo:uuid")
+                                                                     .getString());
+        } catch (ItemNotFoundException e) {
+          throw new ObjectNotFoundException("Target of exo:symlink " + link.getPath()
+              + " is not exist any more. ");
+        }
+        return new SymLinkNodeEntry(link, node, this);
+      } else if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)) {
+        javax.jcr.Property propertyWithId = null;
+        for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) {
+          javax.jcr.Property nextProperty = iter.nextProperty();
+          // iterate while don't get the property with CMIS Object Id in the
+          // name.
+          // xcmis:linkedFile extends nt:base which has two properties by
+          // default: jcr:primaryType and jcr:mixinTypes
+          if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE)
+              && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
+            propertyWithId = nextProperty;
+          }
+        }
+        Node target = propertyWithId.getNode();
+
+        return new JcrNodeEntry(target, this);
+      }
+      return new JcrNodeEntry(node, this);
+    } catch (RepositoryException re) {
+      throw new CmisRuntimeException(re.getMessage(), re);
+    }
+  }
 
    public String getJcrRootPath()
    {

@@ -92,14 +92,18 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
   }
 
   public void setNodeTypes(List<String> selectedNodeTypes) {
-    String strNodeTypes = null ;
-    UISearchContainer uiContainer = getAncestorOfType(UISearchContainer.class) ;
-    UIConstraintsForm uiConstraintsForm = uiContainer.findFirstComponentOfType(UIConstraintsForm.class) ;
-    for(int i = 0 ; i < selectedNodeTypes.size() ; i++) {
-      if(strNodeTypes == null) strNodeTypes = selectedNodeTypes.get(i) ;
-      else strNodeTypes = strNodeTypes + "," + selectedNodeTypes.get(i) ;
+    StringBuffer strNodeTypes = null;
+    UISearchContainer uiContainer = getAncestorOfType(UISearchContainer.class);
+    UIConstraintsForm uiConstraintsForm = uiContainer.findFirstComponentOfType(UIConstraintsForm.class);
+    for (int i = 0; i < selectedNodeTypes.size(); i++) {
+      if (strNodeTypes == null) {
+        strNodeTypes = new StringBuffer(selectedNodeTypes.get(i));
+      } else {
+        strNodeTypes.append(",").append(selectedNodeTypes.get(i));
+      }
     }
-    uiConstraintsForm.getUIStringInput(UIConstraintsForm.DOC_TYPE).setValue(strNodeTypes) ;
+    uiConstraintsForm.getUIStringInput(UIConstraintsForm.DOC_TYPE)
+                     .setValue(strNodeTypes.toString());
   }
 
   public void activate() throws Exception {}

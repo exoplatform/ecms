@@ -49,11 +49,11 @@ public class TestTimelineService extends BaseDMSTestCase {
 
   /**
    * test method getDocumentsOfToday
-   * input:		/testNode/today1(dateModified is today)
-   * 			/testNode/today2(dateModified is today)
-   * 			/testNode/yesterday1(dateModified is yesterday)
-   * action:	getDocumentsOfToday
-   * expectedValue:	2(today1 and today2);
+   * input:    /testNode/today1(dateModified is today)
+   *       /testNode/today2(dateModified is today)
+   *       /testNode/yesterday1(dateModified is yesterday)
+   * action:  getDocumentsOfToday
+   * expectedValue:  2(today1 and today2);
    * @throws Exception
    */
   public void testGetDocumentsOfToday() throws Exception {
@@ -87,11 +87,11 @@ public class TestTimelineService extends BaseDMSTestCase {
 
   /**
    * test method getDocumentsOfYesterday
-   * input:		/testNode/today1(dateModified is today)
-   * 			/testNode/today2(dateModified is today)
-   * 			/testNode/yesterday1(dateModified is yesterday)
-   * action:	getDocumentsOfYesterday
-   * expectedValue:	1(yesterday1);
+   * input:    /testNode/today1(dateModified is today)
+   *       /testNode/today2(dateModified is today)
+   *       /testNode/yesterday1(dateModified is yesterday)
+   * action:  getDocumentsOfYesterday
+   * expectedValue:  1(yesterday1);
    * @throws Exception
    */
   public void testGetDocumentsOfYesterday() throws Exception {
@@ -131,13 +131,13 @@ public class TestTimelineService extends BaseDMSTestCase {
 
   /**
    * test method getDocumentsOfEarlierThisWeek
-   * input:		/testNode/Sunday
-   * 			/testNode/Monday
-   * 			/testNode/Tuesday
-   * 			...
-   * 			/testNode/${today} (depends on current date time)
-   * action:	getDocumentsOfEarlierThisWeek
-   * expectedValue:	(depends on current date time, must calculate yourself);
+   * input:    /testNode/Sunday
+   *       /testNode/Monday
+   *       /testNode/Tuesday
+   *       ...
+   *       /testNode/${today} (depends on current date time)
+   * action:  getDocumentsOfEarlierThisWeek
+   * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
   public void testGetDocumentsOfEarlierThisWeek() throws Exception {
@@ -164,20 +164,20 @@ public class TestTimelineService extends BaseDMSTestCase {
 
     session.save();
   List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
-//	assertEquals("testGetDocumentsOfEarlierThisWeek falied! ", Math.min(5, count), res.size());
+//  assertEquals("testGetDocumentsOfEarlierThisWeek falied! ", Math.min(5, count), res.size());
   System.out.println("Expected: " + count);
   System.out.println("actual: " + res.size());
   }
 
   /**
    * test method getDocumentsOfEarlierThisMonth
-   * input:		/testNode/1stOfThisMonth
-   * 			/testNode/2ndOfThisMonth
-   * 			/testNode/3rdOfThisMonth
-   * 			...
-   * 			/testNode/${today} (depends on current date time)
-   * action:	getDocumentsOfEarlierThisMonth
-   * expectedValue:	(depends on current date time, must calculate yourself);
+   * input:    /testNode/1stOfThisMonth
+   *       /testNode/2ndOfThisMonth
+   *       /testNode/3rdOfThisMonth
+   *       ...
+   *       /testNode/${today} (depends on current date time)
+   * action:  getDocumentsOfEarlierThisMonth
+   * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
   public void testGetDocumentsOfEarlierThisMonth() throws Exception {
@@ -204,20 +204,20 @@ public class TestTimelineService extends BaseDMSTestCase {
 
     session.save();
   List<Node> res = timelineService.getDocumentsOfEarlierThisMonth(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
-//	assertEquals("testGetDocumentsOfEarlierThisMonth falied! ", Math.min(5, count), res.size());
+//  assertEquals("testGetDocumentsOfEarlierThisMonth falied! ", Math.min(5, count), res.size());
   System.out.println("Expected: " + count);
   System.out.println("actual: " + res.size());
   }
 
   /**
    * test method getDocumentsOfEarlierThisYear
-   * input:		/testNode/1stOfThisYear
-   * 			/testNode/2ndOfThisYear
-   * 			/testNode/3rdOfThisYear
-   * 			...
-   * 			/testNode/${today} (depends on current date time)
-   * action:	getDocumentsOfEarlierThisYear
-   * expectedValue:	(depends on current date time, must calculate yourself);
+   * input:    /testNode/1stOfThisYear
+   *       /testNode/2ndOfThisYear
+   *       /testNode/3rdOfThisYear
+   *       ...
+   *       /testNode/${today} (depends on current date time)
+   * action:  getDocumentsOfEarlierThisYear
+   * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
   public void testGetDocumentsOfEarlierThisYear() throws Exception {

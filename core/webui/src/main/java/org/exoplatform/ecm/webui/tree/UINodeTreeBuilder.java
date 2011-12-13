@@ -205,8 +205,13 @@ public class UINodeTreeBuilder extends UIContainer {
       buffer.append("/").append(iterLocalPath.getId());
     }
     String path = buffer.toString();
-    if (path.startsWith("//")) path = path.substring(1);
-    if (!path.startsWith(rootPath)) path = rootPath + path;
+    if (path.startsWith("//"))
+      path = path.substring(1);
+    if (!path.startsWith(rootPath)) {
+      StringBuffer sb = new StringBuffer();
+      sb.append(rootPath).append(path);
+      path = sb.toString();
+    }
     if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
     if (path.length() == 0) path = "/";
     if (buffer.length() == 0) return NodeLocation.getNodeByLocation(currentNode);

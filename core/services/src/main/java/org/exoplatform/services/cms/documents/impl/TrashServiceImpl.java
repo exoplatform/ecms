@@ -172,8 +172,8 @@ public class TrashServiceImpl implements TrashService {
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
     String taxonomyLinkWS = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(EXO_WORKSPACE).getString() : null;
     if(nodeUUID != null) {
-    	SEOService seoService = (SEOService)myContainer.getComponentInstanceOfType(SEOService.class);
-    	cache.remove(seoService.getHash(nodeUUID));
+      SEOService seoService = (SEOService)myContainer.getComponentInstanceOfType(SEOService.class);
+      cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
       node.addMixin(EXO_RESTORE_LOCATION);

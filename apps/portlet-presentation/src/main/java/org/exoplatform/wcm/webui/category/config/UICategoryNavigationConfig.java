@@ -25,7 +25,6 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -40,8 +39,6 @@ import org.exoplatform.wcm.webui.category.UICategoryNavigationPortlet;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationUtils;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.web.url.PortalURL;
-import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.form;
 
 import javax.jcr.Node;
-import javax.jcr.Value;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;

@@ -127,7 +127,11 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
     int squareBracketIndex = symLinkName.indexOf('[');
     if (squareBracketIndex > -1)
       symLinkName = symLinkName.substring(0, squareBracketIndex);
-    if (!(symLinkName.indexOf(".lnk") > -1)) symLinkName += ".lnk";
+    if (symLinkName.indexOf(".lnk") < 0) {
+      StringBuffer sb = new StringBuffer();
+      sb.append(symLinkName).append(".lnk");
+      symLinkName = sb.toString();
+    }
     symLinkName = Text.unescapeIllegalJcrChars(symLinkName);
     if (!localizationMode) getUIStringInput(FIELD_NAME).setValue(symLinkName);
     UISymLinkManager uiSymLinkManager = getParent();

@@ -275,7 +275,9 @@ public class UICLVPresentation extends UIContainer {
     String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
     
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), basePath);
     nodeURL.setResource(resource).setQueryParameterValue(clvBy, params);
     link = baseURI + nodeURL.toString();
 
@@ -426,17 +428,24 @@ public class UICLVPresentation extends UIContainer {
     if (scvWith == null || scvWith.length() == 0)
       scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
     
-    String param = "/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace();
+    StringBuffer sb = new StringBuffer();
+    sb.append("/")
+      .append(nodeLocation.getRepository())
+      .append("/")
+      .append(nodeLocation.getWorkspace());
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      param += originalNode.getPath();
+      sb.append(originalNode.getPath());
     } else {
-      param += node.getPath();
+      sb.append(node.getPath());
     }
+    String param = sb.toString();
     param = Text.escape(param, '%', true, " ");
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), basePath);
     nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
 
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
@@ -792,7 +801,9 @@ public class UICLVPresentation extends UIContainer {
     String preferencePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);    
     String targetPage = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), targetPage);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(), targetPage);
     nodeURL.setResource(resource);
     
     if (currentPath.contains(preferencePath)) {

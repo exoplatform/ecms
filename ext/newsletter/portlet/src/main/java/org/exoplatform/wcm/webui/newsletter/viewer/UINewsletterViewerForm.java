@@ -142,7 +142,7 @@ public class UINewsletterViewerForm extends UIForm {
           this.inputEmail.setRendered(true);
           this.inputEmail.setValue(useraccount.getEmail());
           this.setActions(new String[] { "Subcribe" });  
-        	this.isUpdated = false;
+          this.isUpdated = false;
         }
       }
 

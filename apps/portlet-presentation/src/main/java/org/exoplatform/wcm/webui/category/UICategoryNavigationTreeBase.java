@@ -281,12 +281,15 @@ public class UICategoryNavigationTreeBase extends UITree {
     // categories: {"/", "News", "News/France", "News/France/Blah", "News/France/Blah/Bom"}
     List<String> categories = new ArrayList<String>();
     String[] tempCategories = categoryUri.split("/");
-    String tempCategory = "";
+    StringBuffer tempCategory = new StringBuffer();
     for (int i = 0; i < tempCategories.length; i++) {
-      if (i == 0) tempCategory = "";
-      else if (i == 1) tempCategory = tempCategories[1];
-      else tempCategory += "/" + tempCategories[i];
-      categories.add(tempCategory);
+      if (i == 0)
+        tempCategory = new StringBuffer("");
+      else if (i == 1)
+        tempCategory = new StringBuffer(tempCategories[1]);
+      else
+        tempCategory.append("/").append(tempCategories[i]);
+      categories.add(tempCategory.toString());
     }
     return categories;
   }
@@ -313,7 +316,10 @@ public class UICategoryNavigationTreeBase extends UITree {
     categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName)-1);
 
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), preferenceTargetPage);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(),
+                                                         preferenceTargetPage);
     nodeURL.setResource(resource).setQueryParameterValue("path", categoryPath);
     String link = nodeURL.toString();
 

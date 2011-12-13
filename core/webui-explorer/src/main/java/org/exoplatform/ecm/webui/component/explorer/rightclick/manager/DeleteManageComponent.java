@@ -509,12 +509,12 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
                                                                                // them
       // in the deleting node list
       // build node list to string to add into the confirm message
-      String strNodesHaveRelations = "";
+      StringBuffer sb = new StringBuffer();
       for (int i = 0; i < listNodesHaveRelations.size(); i++) {
-        strNodesHaveRelations += "'" + listNodesHaveRelations.get(i) + "', ";
+        sb.append("'").append(listNodesHaveRelations.get(i)).append("', ");
       }
       //remove "," character at the end of string
-      strNodesHaveRelations = strNodesHaveRelations.substring(0, strNodesHaveRelations.length() - 2);
+      String strNodesHaveRelations = sb.substring(0, sb.length() - 2);
 
       //show message
       if (nodePath.indexOf(";") < 0) {  //in case: delete one node that has relations

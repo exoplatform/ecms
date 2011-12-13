@@ -24,7 +24,6 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;

@@ -16,10 +16,11 @@
  */
 package org.exoplatform.services.seo;
 
-import javax.jcr.Node;
 import java.util.ArrayList;
+
+import javax.jcr.Node;
+
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.exoplatform.services.seo.SEOService;
 
 /**
  * Created by The eXo Platform SAS

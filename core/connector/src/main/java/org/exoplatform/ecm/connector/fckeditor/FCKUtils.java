@@ -82,9 +82,9 @@ public class FCKUtils {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     doc = builder.newDocument();
-    String currentPath = node.getPath();
-    if (!currentPath.endsWith("/")) {
-      currentPath = currentPath + "/";
+    StringBuffer currentPath = new StringBuffer(node.getPath());
+    if (!currentPath.toString().endsWith("/")) {
+      currentPath.append("/");
     }
     Element rootElement = doc.createElement("Connector");
     doc.appendChild(rootElement);
@@ -93,7 +93,7 @@ public class FCKUtils {
     Element currentFolderElement = doc.createElement("CurrentFolder");
     currentFolderElement.setAttribute("name", node.getName());
     currentFolderElement.setAttribute("folderType", folderType);
-    currentFolderElement.setAttribute("path", currentPath);
+    currentFolderElement.setAttribute("path", currentPath.toString());
     currentFolderElement.setAttribute("url", createWebdavURL(node));
     rootElement.appendChild(currentFolderElement);
     return rootElement;

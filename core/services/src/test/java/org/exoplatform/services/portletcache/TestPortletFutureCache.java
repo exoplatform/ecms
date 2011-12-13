@@ -58,21 +58,51 @@ public class TestPortletFutureCache extends BasicTestCase {
   }
 
   private void injectContents(long  content1Duration, long content2Duration, long content3Duration) {
-    windowKey1 = new WindowKey("wid1", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-    fragment1 = new MarkupFragment(System.currentTimeMillis() +  content1Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+    windowKey1 = new WindowKey("wid1",
+                               WindowState.NORMAL,
+                               PortletMode.VIEW,
+                               Locale.FRENCH,
+                               new HashMap<String, String[]>(),
+                               new HashMap<String, String[]>());
+    fragment1 = new MarkupFragment(System.currentTimeMillis() + content1Duration, new byte[10]); // New
+                                                                                                 // Fragment,
+                                                                                                 // to
+                                                                                                 // be
+                                                                                                 // kept
+                                                                                                 // FRAGMENT_DURATION
 
     portletFutureCache.put(windowKey1, fragment1);
 
     if (content2Duration != -1) {
-      windowKey2 = new WindowKey("wid2", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-      fragment2 = new MarkupFragment(System.currentTimeMillis() + content2Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+      windowKey2 = new WindowKey("wid2",
+                                 WindowState.NORMAL,
+                                 PortletMode.VIEW,
+                                 Locale.FRENCH,
+                                 new HashMap<String, String[]>(),
+                                 new HashMap<String, String[]>());
+      fragment2 = new MarkupFragment(System.currentTimeMillis() + content2Duration, new byte[10]); // New
+                                                                                                   // Fragment,
+                                                                                                   // to
+                                                                                                   // be
+                                                                                                   // kept
+                                                                                                   // FRAGMENT_DURATION
 
       portletFutureCache.put(windowKey2, fragment2);
     }
 
     if (content3Duration != -1) {
-      windowKey3 = new WindowKey("wid3", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-      fragment3 = new MarkupFragment(System.currentTimeMillis() + content3Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+      windowKey3 = new WindowKey("wid3",
+                                 WindowState.NORMAL,
+                                 PortletMode.VIEW,
+                                 Locale.FRENCH,
+                                 new HashMap<String, String[]>(),
+                                 new HashMap<String, String[]>());
+      fragment3 = new MarkupFragment(System.currentTimeMillis() + content3Duration, new byte[10]); // New
+                                                                                                   // Fragment,
+                                                                                                   // to
+                                                                                                   // be
+                                                                                                   // kept
+                                                                                                   // FRAGMENT_DURATION
 
       portletFutureCache.put(windowKey3, fragment3);
     }

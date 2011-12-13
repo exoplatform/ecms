@@ -194,13 +194,14 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       String nodePath = currentNode.getPath();
       String srcWorkspace = currentNode.getSession().getWorkspace().getName();
       String destWorkspace = WorkflowPublicationPlugin.BACKUP;
-      String realDestPath = currentNode.getProperty(WorkflowPublicationPlugin.BACUP_PATH).getString();
-      if (!realDestPath.equals("/")) {
-        realDestPath += "/";
+      StringBuffer realDestPath = new StringBuffer();
+      realDestPath.append(currentNode.getProperty(WorkflowPublicationPlugin.BACUP_PATH).getString());
+      if (!"/".equals(realDestPath.toString())) {
+        realDestPath.append("/");
       }
-      realDestPath += currentNode.getName();
+      realDestPath.append(currentNode.getName());
       WorkflowMoveNodeAction.moveNode(repositoryService, nodePath, srcWorkspace, destWorkspace,
-            realDestPath, viewForm.getRepositoryName());
+            realDestPath.toString(), viewForm.getRepositoryName());
 
       UIApplication uiApp = viewForm.getAncestorOfType(UIApplication.class);
 

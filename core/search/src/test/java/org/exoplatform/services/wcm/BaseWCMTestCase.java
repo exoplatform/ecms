@@ -94,7 +94,11 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     + "min";
   }
 
-  protected Node createWebcontentNode(Node parentNode, String nodeName, String htmlData, String cssData, String jsData) throws Exception {
+  protected Node createWebcontentNode(Node parentNode,
+                                      String nodeName,
+                                      String htmlData,
+                                      String cssData,
+                                      String jsData) throws Exception {
     Node webcontent = parentNode.addNode(nodeName, "exo:webContent");
     webcontent.addMixin("exo:datetime");
     webcontent.setProperty("exo:title", nodeName);

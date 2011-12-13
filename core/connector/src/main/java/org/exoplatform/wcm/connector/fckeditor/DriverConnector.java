@@ -325,7 +325,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> getDriversByUserId(String userId) throws Exception {
-    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
+    ManageDriveService driveService = 
+      (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
     List<String> userRoles = getMemberships(userId);
     return driveService.getDriveByUserRoles(userId, userRoles);
   }

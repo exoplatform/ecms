@@ -111,10 +111,9 @@ public class UINewsletterEntryManager extends UIForm {
    */
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
-    ListAccess<NewsletterManagerConfig> newsletterList = new ListAccessImpl<NewsletterManagerConfig>(NewsletterManagerConfig.class,
-                                                                                                     setListNewsletterEntries());
-    LazyPageList<NewsletterManagerConfig> dataPageList = new LazyPageList<NewsletterManagerConfig>(newsletterList,
-                                                                                                   10);
+    ListAccess<NewsletterManagerConfig> newsletterList = new ListAccessImpl<NewsletterManagerConfig>(
+        NewsletterManagerConfig.class, setListNewsletterEntries());
+    LazyPageList<NewsletterManagerConfig> dataPageList = new LazyPageList<NewsletterManagerConfig>(newsletterList, 10);
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, PAGEITERATOR_ID);
     addChild(uiPageIterator_);
     uiPageIterator_.setPageList(dataPageList);

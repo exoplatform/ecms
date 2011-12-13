@@ -248,11 +248,13 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
       String path = buffer.toString();
       path = path.replaceAll("/+", "/");
       if (!path.startsWith(rootTreePath)) {
+        StringBuffer buf = new StringBuffer();
         if (currentNode.getPath().contains(parentRoot.getPath())) {
-          path = currentNode.getPath();
-        }else {
-          path = rootTreePath + path;
+          buf.append(currentNode.getPath());
+        } else {
+          buf.append(rootTreePath).append(path);
         }
+        path = buf.toString();
       }
       if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
       if (path.length() == 0) path = "/";
@@ -279,9 +281,9 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
   }
 
   public void changeGroup(String groupId, Object context) throws Exception {
-    String stringPath = rootTreePath;
+    StringBuffer stringPath = new StringBuffer(rootTreePath);
     if (!rootTreePath.equals("/")) {
-      stringPath += "/";
+      stringPath.append("/");
     }
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     if (groupId == null) groupId = "";
@@ -303,12 +305,12 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
       uiBreadcumb.setPath(listLocalPath);
       for (int i = 0; i < listLocalPathString.size(); i++) {
         String pathName = listLocalPathString.get(i);
-        if (pathName != null || !pathName.equals("")) {
-          stringPath += pathName.trim();
-          if (i < listLocalPathString.size() - 1) stringPath += "/";
+        if (pathName != null && pathName.trim().length() != 0) {
+          stringPath.append(pathName.trim());
+          if (i < listLocalPathString.size() - 1) stringPath.append("/");
         }
       }
-      changeNode(stringPath, context);
+      changeNode(stringPath.toString(), context);
     }
   }
 

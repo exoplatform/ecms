@@ -432,8 +432,8 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   */
   public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
-  	return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue,
-  	                                                  inputType, idGenerator, cssClass, isGenericProperty, arguments);
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue,
+                                                      inputType, idGenerator, cssClass, isGenericProperty, arguments);
   }
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);

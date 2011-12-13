@@ -66,7 +66,6 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
@@ -411,10 +410,10 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public String getInlineEditingField(Node orgNode, String propertyName,
       String defaultValue, String inputType, String idGenerator, String cssClass,
       boolean isGenericProperty, String... arguments) throws Exception {
-	  if (orgNode.hasProperty(propertyName)) {
-	      return orgNode.getProperty(propertyName).getString();
-	  }
-	  return defaultValue;
+    if (orgNode.hasProperty(propertyName)) {
+        return orgNode.getProperty(propertyName).getString();
+    }
+    return defaultValue;
   }
 
   public String getInlineEditingField(Node orgNode, String propertyName)

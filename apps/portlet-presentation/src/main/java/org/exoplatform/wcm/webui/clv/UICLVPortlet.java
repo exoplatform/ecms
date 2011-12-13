@@ -25,7 +25,6 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;

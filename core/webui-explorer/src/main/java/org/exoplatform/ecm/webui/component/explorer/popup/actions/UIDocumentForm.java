@@ -139,7 +139,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     String action = "ChangeType";
     String strChangeTypeLabel = res.getString(getName() + ".action." + action);
     StringBuilder link = new StringBuilder();
-    link.append("<a onclick=\"").append(event(action)).append("\" class=\"ChangeTypeLink\">(").append(strChangeTypeLabel).append(")</a>");
+    link.append("<a onclick=\"")
+        .append(event(action))
+        .append("\" class=\"ChangeTypeLink\">(")
+        .append(strChangeTypeLabel)
+        .append(")</a>");
     return link.toString();
   }
 
@@ -212,8 +216,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }
       return null;
     } catch (AccessControlException e) {
-      LOG.error("AccessControlException: user [" + userName + "] does not have access to the template for content type [" +
-      		      contentType + "] in repository + [" + repositoryName + "]");
+      LOG.error("AccessControlException: user [" + userName
+          + "] does not have access to the template for content type [" + contentType
+          + "] in repository + [" + repositoryName + "]");
       return null;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
@@ -259,14 +264,19 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<a href=\"javascript:void(0);\"").
-		  	append("onclick=\"").append(link).append("\" class=\"ActionButton LightBlueStyle\">").
-		  	append(actionLabel).append("</a>");
+      writer.append("<a href=\"javascript:void(0);\"")
+            .append("onclick=\"")
+            .append(link)
+            .append("\" class=\"ActionButton LightBlueStyle\">")
+            .append(actionLabel)
+            .append("</a>");
     }    
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
     writer.append("</td>");
     writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px; text-align: left;\">");
-    writer.append("<a href=\"javascript:void(0);\"").append(fullscreen).append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this)'></a>");
+    writer.append("<a href=\"javascript:void(0);\"")
+          .append(fullscreen)
+          .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this)'></a>");
     writer.append("</td>");
     writer.append("</tr>");
     writer.append("</table>");

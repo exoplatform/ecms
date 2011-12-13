@@ -85,7 +85,8 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
       log.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable'!", e);
+        log.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP
+            + "' for node type 'mix:votable'!", e);
       }
     } finally {
       sessionProvider.close();

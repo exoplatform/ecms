@@ -110,34 +110,34 @@ public class PDFViewerRESTService implements ResourceContainer {
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
     Session session = null;
     try {
-    	Object objCache = pdfCache.get(new ObjectKey(bd.toString()));
-    	InputStream is = null;
-    	ManageableRepository repository = repositoryService_.getCurrentRepository();
+      Object objCache = pdfCache.get(new ObjectKey(bd.toString()));
+      InputStream is = null;
+      ManageableRepository repository = repositoryService_.getCurrentRepository();
       session = getSystemProvider().getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);
-    	if(objCache!=null) {
-	      File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
-	      if (!content.exists()) {	        
-	        initDocument(currentNode, repoName);	        
-	      }  
-	      is = pushToCache(new File((String) pdfCache.get(new ObjectKey(bd.toString()))),
+      if(objCache!=null) {
+        File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
+        if (!content.exists()) {
+          initDocument(currentNode, repoName);
+        }
+        is = pushToCache(new File((String) pdfCache.get(new ObjectKey(bd.toString()))),
             repoName,
             wsName,
             uuid,
             pageNumber,
             strRotation,
             strScale);
-    	} else {	     		
-    		File file = getPDFDocumentFile(currentNode, repoName);
-    		is = pushToCache(file,
+      } else {
+        File file = getPDFDocumentFile(currentNode, repoName);
+        is = pushToCache(file,
             repoName,
             wsName,
             uuid,
             pageNumber,
             strRotation,
-            strScale);   	
-    	}
-    	String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
+            strScale);
+      }
+      String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
           .append("/jcr:lastModified")
           .toString()));
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
@@ -164,7 +164,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       File file = buildFileImage(content, uuid, pageNumber, strRotation, strScale);
       filePath = file.getPath();
       pdfCache.put(new ObjectKey(bd.toString()), filePath);
-    }    
+    }
     return new BufferedInputStream(new FileInputStream(new File(filePath)));
   }
 

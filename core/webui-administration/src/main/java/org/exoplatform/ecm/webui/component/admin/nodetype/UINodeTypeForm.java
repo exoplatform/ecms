@@ -559,7 +559,11 @@ public class UINodeTypeForm extends UIFormTabPane {
           }
         }
       }
-      if(prefix != null && prefix.length() > 0 ) nodeTypeName = prefix + ":" + nodeTypeName ;
+      if (prefix != null && prefix.length() > 0) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(prefix).append(":").append(nodeTypeName);
+        nodeTypeName = sb.toString();
+      }
       String superTypes = uiForm.getUIStringInput(SUPER_TYPE).getValue() ;
       if(uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false")) {
         if(superTypes == null || superTypes.trim().length() == 0) {
@@ -655,7 +659,11 @@ public class UINodeTypeForm extends UIFormTabPane {
           }
         }
       }
-      if(prefix != null && prefix.length() > 0 ) nodeTypeName = prefix + ":" + nodeTypeName ;
+      if (prefix != null && prefix.length() > 0) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(prefix).append(":").append(nodeTypeName);
+        nodeTypeName = sb.toString();
+      }
       Node systemNode = (Node)session.getItem("/jcr:system") ;
       Node nodeTypeDraft ;
       if(systemNode.hasNode(JCR_NODETYPE_DRAFT)) {

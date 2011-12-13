@@ -364,21 +364,23 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         }
       }
     }
-    String viewListStr = "";
+    StringBuffer viewListStr = new StringBuffer();
     List<SelectItemOption<String>> viewOptions = new ArrayList<SelectItemOption<String>>();
     ResourceBundle res = context.getApplicationResourceBundle();
     String viewLabel = null;
     for (String viewName : viewList) {
       try {
-        viewLabel = res.getString("Views.label." + viewName) ;
+        viewLabel = res.getString("Views.label." + viewName);
       } catch (MissingResourceException e) {
         viewLabel = viewName;
       }
       viewOptions.add(new SelectItemOption<String>(viewLabel, viewName));
-      if(viewListStr.length() > 0) viewListStr = viewListStr + "," + viewName;
-      else viewListStr = viewName;
+      if (viewListStr.length() > 0)
+        viewListStr.append(",").append(viewName);
+      else
+        viewListStr.append(viewName);
     }
-    driveData.setViews(viewListStr);
+    driveData.setViews(viewListStr.toString());
     String homePath = driveData.getHomePath();
     if (homePath.contains("${userId}")) 
       homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
@@ -471,7 +473,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
         AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));        
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied",
+                                                null,
+                                                ApplicationMessage.WARNING));
       }
     }
     uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());

@@ -167,10 +167,12 @@ public class UILockNodeList extends UIPagingGridDecorator {
       }
 
       if (lockedNode == null) {
-        Object[] args = {nodePath};
-        ApplicationMessage msg = new ApplicationMessage("UILockNodeList.msg.access-denied-exception", args, ApplicationMessage.WARNING);
+        Object[] args = { nodePath };
+        ApplicationMessage msg = new ApplicationMessage("UILockNodeList.msg.access-denied-exception",
+                                                        args,
+                                                        ApplicationMessage.WARNING);
         msg.setArgsLocalized(false);
-        uiApp.addMessage(msg);        
+        uiApp.addMessage(msg);
         uiUnLockManager.refresh();
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;

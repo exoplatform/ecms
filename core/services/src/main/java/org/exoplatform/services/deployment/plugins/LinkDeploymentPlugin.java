@@ -104,7 +104,8 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
           Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
           linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
           ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+          PortalContainerInfo containerInfo = 
+            (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
           String containerName = containerInfo.getContainerName();
           ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
                                                                     containerName);

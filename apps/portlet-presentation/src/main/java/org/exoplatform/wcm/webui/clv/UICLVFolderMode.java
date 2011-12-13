@@ -112,12 +112,12 @@ public class UICLVFolderMode extends UICLVContainer {
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
-    String filterLang = Util.getPortalRequestContext().getLocale().getLanguage();
+    StringBuffer filterLang = new StringBuffer(Util.getPortalRequestContext().getLocale().getLanguage());
     String country = Util.getPortalRequestContext().getLocale().getCountry();
     if (country != null && country.length() > 0) {
-      filterLang += "_" + country;
+      filterLang.append("_").append(country);
     }
-    filters.put(WCMComposer.FILTER_LANGUAGE, filterLang);
+    filters.put(WCMComposer.FILTER_LANGUAGE, filterLang.toString());
     filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?
         WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);

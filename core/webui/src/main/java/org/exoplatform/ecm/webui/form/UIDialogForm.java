@@ -961,23 +961,24 @@ public class UIDialogForm extends UIForm {
       addUIFormInput(uiTextArea);
     }
     if (node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
-      String value = null;
+      StringBuffer value = new StringBuffer();
       if (node.hasProperty(propertyName)) {
-        value = node.getProperty(propertyName).getValue().getString();
+        value.append(node.getProperty(propertyName).getValue().getString());
       } else if (node.isNodeType("nt:file")) {
         Node jcrContentNode = node.getNode("jcr:content");
         if (jcrContentNode.hasProperty(propertyName)) {
           if (jcrContentNode.getProperty(propertyName).getDefinition().isMultiple()) {
             Value[] values = jcrContentNode.getProperty(propertyName).getValues();
             for (Value v : values) {
-              value = value + v.getString();
+              value.append(v.getString());
             }
+            uiTextArea.setValue(value.toString());
           } else {
-            value = jcrContentNode.getProperty(propertyName).getValue().getString();
+            uiTextArea.setValue(jcrContentNode.getProperty(propertyName).getValue().getString());
           }
         }
       }
-      uiTextArea.setValue(value);
+      
     }
     if (isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if (node != null && node.hasNode("jcr:content") && childNode != null) {
@@ -1825,7 +1826,11 @@ public class UIDialogForm extends UIForm {
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<a class=\"ActionButton LightBlueStyle\" onclick =\"").append(link).append("\"  href=\"javascript:void(0);\">").append(actionLabel).append("</a>");
+      writer.append("<a class=\"ActionButton LightBlueStyle\" onclick =\"")
+            .append(link)
+            .append("\"  href=\"javascript:void(0);\">")
+            .append(actionLabel)
+            .append("</a>");
     }
     writer.append("</div>");
   }

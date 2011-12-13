@@ -124,8 +124,10 @@ public class TestFriendlyService extends TestCase {
     fserv.addFriendly("acme", "/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents");
     fserv.addFriendly("collab", "/public/acme/detail?path=/repository/collaboration");
 
-    assertEquals("http://monsite/ecmdemo/content/acme/News/News1", fserv.getFriendlyUri("http://monsite/ecmdemo/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents/News/News1"));
-    assertEquals("http://monsite/ecmdemo/content/collab/Doc/Doc1", fserv.getFriendlyUri("http://monsite/ecmdemo/public/acme/detail?path=/repository/collaboration/Doc/Doc1"));
+    assertEquals("http://monsite/ecmdemo/content/acme/News/News1",
+                 fserv.getFriendlyUri("http://monsite/ecmdemo/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents/News/News1"));
+    assertEquals("http://monsite/ecmdemo/content/collab/Doc/Doc1",
+                 fserv.getFriendlyUri("http://monsite/ecmdemo/public/acme/detail?path=/repository/collaboration/Doc/Doc1"));
 
 
   }

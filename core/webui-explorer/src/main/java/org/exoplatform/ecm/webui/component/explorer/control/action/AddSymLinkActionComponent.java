@@ -126,10 +126,12 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
                 symLinkName = selectedNode.getName() + ".lnk";
               linkManager.createLink(currentNode, Utils.EXO_SYMLINK, selectedNode, symLinkName);
             } catch (Exception e) {
-              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
-              uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
-                  ApplicationMessage.WARNING));
-              
+              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()),
+                  Text.unescapeIllegalJcrChars(currentNode.getPath()) };
+              uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem",
+                                                      arg,
+                                                      ApplicationMessage.WARNING));
+
               return;
             }
           }
@@ -167,10 +169,12 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
             try {
               linkManager.createLink(currentNode, Utils.EXO_SYMLINK, selectedNode, symLinkName);
             } catch (Exception e) {
-              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
-              uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
-                  ApplicationMessage.WARNING));
-              
+              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()),
+                  Text.unescapeIllegalJcrChars(currentNode.getPath()) };
+              uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem",
+                                                      arg,
+                                                      ApplicationMessage.WARNING));
+
               return;
             }
             uiExplorer.updateAjax(event);

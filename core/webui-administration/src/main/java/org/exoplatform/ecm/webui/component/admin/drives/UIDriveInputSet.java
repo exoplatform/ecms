@@ -99,7 +99,9 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWSIDEBAR, FIELD_VIEWSIDEBAR, null));
     addUIFormInput(new UIFormCheckBoxInput<String>(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
 
-    addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, FIELD_ALLOW_CREATE_FOLDERS, null).addValidator(MandatoryValidator.class));
+    addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, 
+                                       FIELD_ALLOW_CREATE_FOLDERS, 
+                                       null).addValidator(MandatoryValidator.class));
     UIFormStringInput filterNodeTypes =
       new UIFormStringInput(FIELD_ALLOW_NODETYPES_ON_TREE , FIELD_ALLOW_NODETYPES_ON_TREE , null);
     addUIFormInput(filterNodeTypes);

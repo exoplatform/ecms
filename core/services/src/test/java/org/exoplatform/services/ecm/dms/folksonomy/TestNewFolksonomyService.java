@@ -58,7 +58,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     linkManager
     = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
 
-//		String userName = session.getUserID();
+//    String userName = session.getUserID();
     String userName = session.getUserID();
     Node root = session.getRootNode();
     Node applicationData = root.hasNode("Application Data") ?
@@ -272,19 +272,19 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method: getAllDocumentsByTag()
    * Input: Nodes 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' and 'test2' of current user
-   * 							get all documents by tag 'sport'
+   *               get all documents by tag 'sport'
    * Expected Result:
-   *							'test' and 'test2'
+   *              'test' and 'test2'
    */
   public void testGetAllDocumentsByTag() throws Exception {
     String[] tags = { "sport", "weather" };
     String user = session.getUserID();
-//		Node sportTagNode = folksonomyNode.getNode("sport");
-//		System.out.println(sportTagNode.getProperty(EXO_TOTAL).getLong());
-//		NodeIterator iter = sportTagNode.getNodes();
-//		while (iter.hasNext()) {
-//			System.out.println(iter.nextNode().getPath());
-//		}
+//    Node sportTagNode = folksonomyNode.getNode("sport");
+//    System.out.println(sportTagNode.getProperty(EXO_TOTAL).getLong());
+//    NodeIterator iter = sportTagNode.getNodes();
+//    while (iter.hasNext()) {
+//      System.out.println(iter.nextNode().getPath());
+//    }
     newFolksonomyService_.addPrivateTag(tags,
                                        test,
                                        COLLABORATION_WS,
@@ -313,12 +313,12 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method: getAllGroupTagsOfManyRoles()
    * Input: Node 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in group 'a' and 'b'
-   * 							add 2 tags 'sport' and 'music' for node 'test2' in group 'a' and 'b'
-   * 							get all tags of groups 'a' and 'b'
+   *               add 2 tags 'sport' and 'music' for node 'test2' in group 'a' and 'b'
+   *               get all tags of groups 'a' and 'b'
    * Expected Result:
-   * 							'sport', 'weather', 'music' of a
-   * 							'sport', 'weather', 'music' of b
-   * 							total 6
+   *               'sport', 'weather', 'music' of a
+   *               'sport', 'weather', 'music' of b
+   *               total 6
    */
   public void testGetAllGroupTagsOfManyRoles() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -342,10 +342,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method: getAllGroupTags()
    * Input: Node 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in group 'a' and 'b'
-   * 							add 2 tags 'sport' and 'music' for node 'test2' in group 'a' and 'b'
-   * 							get all tags of groups 'a'
+   *               add 2 tags 'sport' and 'music' for node 'test2' in group 'a' and 'b'
+   *               get all tags of groups 'a'
    * Expected Result:
-   * 							'sport', 'weather', 'music'
+   *               'sport', 'weather', 'music'
    */
   public void testGetAllGroupTags() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -369,10 +369,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method: testGetAllPrivateTags()
    * Input: Node 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' of current user
-   * 							add 2 tags 'sport' and 'xyz' for node 'test2' of current user
-   * 							get all private tags of current user
+   *               add 2 tags 'sport' and 'xyz' for node 'test2' of current user
+   *               get all private tags of current user
    * Expected Result:
-   * 							'sport', 'weather', 'xyz'
+   *               'sport', 'weather', 'xyz'
    */
   public void testGetAllPrivateTags() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -394,10 +394,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method : getAllPublicTags()
    * Input: Node 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in public
-   * 							add 3 tags 'sport', 'boy', 'girl' for node 'test2' in public
-   * 							get all public tags
+   *               add 3 tags 'sport', 'boy', 'girl' for node 'test2' in public
+   *               get all public tags
    * Expected Result:
-   * 							sport, weather, boy, girl
+   *               sport, weather, boy, girl
    */
   public void testGetAllPublicTags() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -428,10 +428,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method : getAllSiteTags()
    * Input: Node 'test', 'test2'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in site 'portal1'
-   * 							add 3 tags 'sport', 'boy', 'girl' for node 'test2' in site 'portal1'
-   * 							get all tags of site 'portal1'
+   *               add 3 tags 'sport', 'boy', 'girl' for node 'test2' in site 'portal1'
+   *               get all tags of site 'portal1'
    * Expected Result:
-   * 							sport, weather, boy, girl
+   *               sport, weather, boy, girl
    */
   public void testGetAllSiteTags() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -460,11 +460,11 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method : modifyTagName()
    * Input: Node 'test',
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in public
-   * 							rename tag 'sport' to 'football'
-   * 							get all public tags
+   *               rename tag 'sport' to 'football'
+   *               get all public tags
    * Expected Result:
-   * 							get all public tags -> football, weather
-   * 							node 'football' must have a symlink child which points to 'test' node
+   *               get all public tags -> football, weather
+   *               node 'football' must have a symlink child which points to 'test' node
    */
   public void testModifyTagName() throws Exception {
     String[] tags = { "sport", "weather" };
@@ -474,7 +474,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
                                        test,
                                        COLLABORATION_WS);
     Node sportNode = publicFolksonomyNode.getNode("sport");
-    Node football = newFolksonomyService_.modifyTagName(sportNode.getPath()	, "football", COLLABORATION_WS);
+    Node football = newFolksonomyService_.modifyTagName(sportNode.getPath()  , "football", COLLABORATION_WS);
 
     assertTrue("testModifyTagName failed! ", publicFolksonomyNode.hasNode("football"));
     assertTrue("testModifyTagName failed! ", publicFolksonomyNode.getNode("football").isSame(football));
@@ -488,10 +488,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method : removeTag()
    * Input: Node 'test',
    * Test action: add 3 tags 'sport', 'nobita' and 'weather' for node 'test' in public
-   * 							remove  tag 'sport'
-   * 							get all public tags
+   *               remove  tag 'sport'
+   *               get all public tags
    * Expected Result:
-   * 							'nobita', 'weather'
+   *               'nobita', 'weather'
    */
   public void testRemoveTag() throws Exception {
     String[] tags = { "sport", "weather", "nobita"};
@@ -518,10 +518,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Test Method: removeTagOfDocument()
    * Input: Node 'test'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' of current user
-   * 							remove tag 'sport' of current user
-   * 							get all symlinks of tags 'sport'
+   *               remove tag 'sport' of current user
+   *               get all symlinks of tags 'sport'
    * Expected Result:
-   * 							none
+   *               none
    */
   public void testRemoveTagOfDocument() throws Exception {
     String[] tags = { "sport", "weather" };

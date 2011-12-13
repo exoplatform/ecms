@@ -62,10 +62,11 @@ public class UINodeTypeSearchForm extends UIForm {
         UIFormStringInput uiInputNodeType = (UIFormStringInput)uiForm.findComponentById("NodeTypeText");
         String nodeTypeName = uiInputNodeType.getValue();
         if (nodeTypeName == null || nodeTypeName.length() == 0) return;
-        nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*",
-                                                                                                           ".*")
-                                                                                   : nodeTypeName;
-        Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
+        if (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) {
+          nodeTypeName = nodeTypeName.replace("*", ".*");
+        }
+        Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"),
+                                    Pattern.CASE_INSENSITIVE);
         List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
         List lstNodetype = new ArrayList<UINodeTypeList.NodeTypeBean>();
         for (Object nodeType : lstAllNodetype) {

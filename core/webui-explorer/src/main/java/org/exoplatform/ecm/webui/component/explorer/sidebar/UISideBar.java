@@ -100,22 +100,13 @@ public class UISideBar extends UIContainer {
     selectedComp = componentName;
   }
   
-  private UIAbstractManagerComponent getManagerComponent(List<UIAbstractManagerComponent> list, String componentName) {
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getUIExtensionName().equals(componentName)){
-        return list.get(i);
-      }
-    }
-    return null;
-  }
-  
-  private void initComponents(){
-	lstVisibleComp = new ArrayList<UIAbstractManagerComponent>(VISIBLE_COMPONENT_SIZE); 
-	lstHiddenComp = new ArrayList<UIAbstractManagerComponent>(); 
+  private void initComponents() {
+    lstVisibleComp = new ArrayList<UIAbstractManagerComponent>(VISIBLE_COMPONENT_SIZE);
+    lstHiddenComp = new ArrayList<UIAbstractManagerComponent>();
     List<UIAbstractManagerComponent> managers = getManagers();
     for (int i = 0; i < managers.size(); i++) {
       UIAbstractManagerComponent component = managers.get(i);
-      
+
       if (i < VISIBLE_COMPONENT_SIZE) {
         lstVisibleComp.add(component);
       } else {
@@ -123,7 +114,6 @@ public class UISideBar extends UIContainer {
       }
     }
   }
-
 
   public String getCurrentComp() {
     if(currentComp == null || currentComp.length() == 0)

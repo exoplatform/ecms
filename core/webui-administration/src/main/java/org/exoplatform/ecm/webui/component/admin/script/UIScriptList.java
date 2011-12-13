@@ -28,14 +28,12 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIComponentDecorator;
 import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
@@ -135,14 +133,14 @@ public class UIScriptList extends UIComponentDecorator {
 
   static public class AddNewActionListener extends EventListener<UIScriptList> {
     public void execute(Event<UIScriptList> event) throws Exception {
-      UIScriptList uiScriptList = event.getSource() ;
-      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class) ;
-      if(uiScriptList.getId().equals(UIECMScripts.SCRIPTLIST_NAME)) {        
+      UIScriptList uiScriptList = event.getSource();
+      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class);
+      if (uiScriptList.getId().equals(UIECMScripts.SCRIPTLIST_NAME)) {
         uiScriptList.getAncestorOfType(UIECMScripts.class).initFormPopup(ECMScript_EDIT);
-    	UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class) ;        
-        uiForm.setId(UIECMScripts.SCRIPTFORM_NAME ) ;
-        uiForm.update(null, true) ;
-        uiManager.setRenderedChild(UIECMScripts.class) ;
+        UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class);
+        uiForm.setId(UIECMScripts.SCRIPTFORM_NAME);
+        uiForm.update(null, true);
+        uiManager.setRenderedChild(UIECMScripts.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
       }
     }
@@ -150,16 +148,16 @@ public class UIScriptList extends UIComponentDecorator {
 
   static public class EditActionListener extends EventListener<UIScriptList> {
     public void execute(Event<UIScriptList> event) throws Exception {
-      UIScriptList uiScriptList = event.getSource() ;
+      UIScriptList uiScriptList = event.getSource();
       String scriptName = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class) ;
-      if(uiScriptList.getId().equals(UIECMScripts.SCRIPTLIST_NAME)) {
-    	uiScriptList.getAncestorOfType(UIECMScripts.class).initFormPopup(ECMScript_EDIT);
-    	UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class) ;
-    	uiForm.setId(UIECMScripts.SCRIPTFORM_NAME ) ;
-        uiForm.update(uiScriptList.getScriptNode(scriptName), false) ;
-        uiManager.setRenderedChild(UIECMScripts.class) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;        
+      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class);
+      if (uiScriptList.getId().equals(UIECMScripts.SCRIPTLIST_NAME)) {
+        uiScriptList.getAncestorOfType(UIECMScripts.class).initFormPopup(ECMScript_EDIT);
+        UIScriptForm uiForm = uiManager.findFirstComponentOfType(UIScriptForm.class);
+        uiForm.setId(UIECMScripts.SCRIPTFORM_NAME);
+        uiForm.update(uiScriptList.getScriptNode(scriptName), false);
+        uiManager.setRenderedChild(UIECMScripts.class);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
       }
     }
   }

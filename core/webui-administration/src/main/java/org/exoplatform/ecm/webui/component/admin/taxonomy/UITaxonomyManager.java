@@ -169,7 +169,8 @@ public class UITaxonomyManager extends UIAbstractManager {
   }
 
   public void changeGroup(String groupId, Object context) throws Exception {
-    String stringPath = getTaxonomyNode().getPath() + "/";
+    StringBuffer sbPath = new StringBuffer();
+    sbPath.append(getTaxonomyNode().getPath()).append("/");
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     if (groupId == null) groupId = "";
     List<LocalPath> listLocalPath = uiBreadcumb.getPath();
@@ -189,12 +190,12 @@ public class UITaxonomyManager extends UIAbstractManager {
       for (int i = 0; i < listLocalPathString.size(); i++) {
         String pathName = listLocalPathString.get(i);
         if (pathName != null && pathName.length() > 0) {
-          stringPath += pathName.trim();
-          if (i < listLocalPathString.size() - 1) stringPath += "/";
+          sbPath.append(pathName.trim());
+          if (i < listLocalPathString.size() - 1) sbPath.append("/");
         }
       }
       UITaxonomyTree uiTaxonomyTree = getChild(UITaxonomyTree.class);
-      uiTaxonomyTree.setNodeSelect(stringPath);
+      uiTaxonomyTree.setNodeSelect(sbPath.toString());
     }
   }
 

@@ -292,7 +292,8 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       }
       UIFCCActionList fastContentCreatorActionList = null;
       Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(fccActionForm.getChildren(),
-                                                                             fccActionForm.getInputProperties(), fccActionForm.getInputOptions());
+                                                                             fccActionForm.getInputProperties(),
+                                                                             fccActionForm.getInputOptions());
       String repository = UIFCCUtils.getPreferenceRepository() ;
       // Update action node:
       if(!fccActionForm.isAddNew) {

@@ -16,14 +16,10 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
@@ -34,8 +30,6 @@ import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
-import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -531,8 +525,6 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    * keyWord = null;
-   * @throws RepositoryException
-   * @throws PathNotFoundException
    */
 //  public void testSearchPagesDocument_CategoryUUIDS() throws Exception{
 //    this.searchIsLiveMode = true;

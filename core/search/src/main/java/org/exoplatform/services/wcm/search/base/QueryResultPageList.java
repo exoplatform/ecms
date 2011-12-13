@@ -174,8 +174,10 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     if (sortByField != null) {
       String statement = queryData_.getQueryStatement().toUpperCase(); 
       int orderByIndex = statement.lastIndexOf(ORDER_BY);
-      String[] orderStrings = orderByIndex >= 0 ? queryData_.getQueryStatement().substring(orderByIndex + ORDER_BY.length()).split(",") : 
-                                                  new String[] {};
+      String[] orderStrings = orderByIndex >= 0 ? queryData_.getQueryStatement()
+                                                            .substring(orderByIndex
+                                                                + ORDER_BY.length())
+                                                            .split(",") : new String[] {};
       
       StringBuffer newStatement = orderByIndex >= 0 ?
         new StringBuffer(queryData_.getQueryStatement().substring(0, orderByIndex + ORDER_BY.length())) : 

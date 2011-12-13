@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.jcr.sessions.impl;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.exoplatform.services.jcr.access.AccessControlEntry;

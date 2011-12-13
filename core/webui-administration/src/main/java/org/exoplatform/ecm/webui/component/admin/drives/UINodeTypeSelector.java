@@ -59,9 +59,9 @@ public class UINodeTypeSelector extends
       String nodeTypeName = uiInputNodeType.getValue();
       if (nodeTypeName == null || nodeTypeName.length() == 0)
         return;
-      nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*",
-                                                                                                         ".*")
-                                                                                 : nodeTypeName;
+      if (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) {
+        nodeTypeName = nodeTypeName.replace("*", ".*");
+      }
       Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"),
                                   Pattern.CASE_INSENSITIVE);
       if (uiNodeTypeSelector.getLSTNodetype() == null)
@@ -138,12 +138,18 @@ public class UINodeTypeSelector extends
           }
         }
       }
-      String nodeTypeString = "";
+      StringBuffer sb = new StringBuffer("");
       int index=0;
       for (String strNodeType : selectedNodetypes) {
-        if (index==0) nodeTypeString += strNodeType; else nodeTypeString += "," + strNodeType;
+        if (index == 0) {
+          sb.append(strNodeType);
+        }
+        else {
+          sb.append(",").append(strNodeType);
+        }
         index++;
       }
+      String nodeTypeString = sb.toString();
       ((UISelectable)uiNodeTypeSelector.getSourceComponent()).doSelect(returnField, nodeTypeString);
       selectedNodetypes.clear();
       UIPopupWindow uiPopup = uiNodeTypeSelector.getParent();

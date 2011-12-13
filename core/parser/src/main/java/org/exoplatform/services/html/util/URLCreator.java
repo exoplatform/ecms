@@ -34,17 +34,18 @@ public class URLCreator
       return createURL(url.getHost(), url.getPort(), url.getProtocol(), link);
    }
 
-   public synchronized String createURL(String host, int port, String protocol, String link)
-   {
-      if (link.startsWith("http") || link.startsWith("https") || link.startsWith("ftp"))
-         return link;
+  public synchronized String createURL(String host, int port, String protocol, String link) {
+    if (link.startsWith("http") || link.startsWith("https") || link.startsWith("ftp"))
+      return link;
 
-      String url = protocol + "://" + host;
-      if (port >= 0)
-         url += ":" + String.valueOf(port);
-      url += link;
-      return url;
-   }
+    StringBuffer url = new StringBuffer();
+    url.append(protocol).append("://").append(host);
+    if (port >= 0 && port != 80) {
+      url.append(":").append(String.valueOf(port));
+    }
+    url.append(link);
+    return url.toString();
+  }
 
    public synchronized String createURL(String address, String link)
    {
@@ -62,16 +63,16 @@ public class URLCreator
 
       if (file.trim().length() < 1)
          return '/' + link;
-      String value;
+      StringBuffer buf = new StringBuffer();
       if (file.endsWith("/"))
-         value = file + link;
+        buf.append(file).append(link);
       else if (file.endsWith("?") || link.startsWith("?"))
-         value = file + link;
+        buf.append(file).append(link);
       else
-         value = file.trim().substring(0, file.lastIndexOf("/") + 1) + link;
-      value = value.trim();
-      if (value.charAt(0) != '/')
-         value = '/' + value;
-      return value;
+        buf.append(file.trim().substring(0, file.lastIndexOf("/") + 1)).append(link);
+      buf.toString().trim();
+      if (buf.charAt(0) != '/')
+        buf.insert(0, '/');
+      return buf.toString();
    }
 }

@@ -229,12 +229,14 @@ public class UIDrivesArea extends UIContainer {
         
         return;
       }
-      String viewListStr = "";
-      for(String viewName : viewList) {
-        if(viewListStr.length() > 0) viewListStr = viewListStr + "," + viewName;
-        else viewListStr = viewName;
+      StringBuffer viewListStr = new StringBuffer();
+      for (String viewName : viewList) {
+        if (viewListStr.length() > 0)
+          viewListStr.append(",").append(viewName);
+        else
+          viewListStr.append(viewName);
       }
-      drive.setViews(viewListStr);
+      drive.setViews(viewListStr.toString());
       String homePath = drive.getHomePath();
       if(homePath.contains("${userId}")) {
         homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);

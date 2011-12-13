@@ -121,8 +121,10 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
    * Instantiates a new wCM publication plugin.
    */
   public DumpPublicationPlugin() {
-    pageEventListenerDelegate = new PageEventListenerDelegate(LIFECYCLE_NAME, ExoContainerContext.getCurrentContainer());
-    navigationEventListenerDelegate = new NavigationEventListenerDelegate(LIFECYCLE_NAME, ExoContainerContext.getCurrentContainer());
+    pageEventListenerDelegate = new PageEventListenerDelegate(LIFECYCLE_NAME,
+                                                              ExoContainerContext.getCurrentContainer());
+    navigationEventListenerDelegate = new NavigationEventListenerDelegate(LIFECYCLE_NAME,
+                                                                          ExoContainerContext.getCurrentContainer());
 
   }
 
@@ -376,26 +378,26 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
    * @throws Exception the exception
    */
   public List<String> getListUserNavigationUri(Page page, String remoteUser) throws Exception {
-	List<String> listPageNavigationUri = new ArrayList<String>();
-	for (String portalName : getRunningPortals(remoteUser)) {
-	    	
-	  UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-	  UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
-	     																		   remoteUser,
-	                                                                               PortalRequestContext.USER_PORTAL_CONTEXT);
-	  UserPortal userPortal = userPortalCfg.getUserPortal();
-	        
-	  //get nodes
-	  List<UserNavigation> navigationList = userPortal.getNavigations();
-	  for(UserNavigation nav : navigationList) {
-	  UserNode root = userPortal.getNode(nav, Scope.ALL, null, null);
-	  List<UserNode> userNodeList = PublicationUtil.findUserNodeByPageId(root, page.getPageId());
-	    for (UserNode node : userNodeList) {
-	      listPageNavigationUri.add(PublicationUtil.setMixedNavigationUri(portalName, node.getURI()));
-	    }
-	  }
-	}
-	return listPageNavigationUri;
+  List<String> listPageNavigationUri = new ArrayList<String>();
+  for (String portalName : getRunningPortals(remoteUser)) {
+
+    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
+                                              remoteUser,
+                                                                                 PortalRequestContext.USER_PORTAL_CONTEXT);
+    UserPortal userPortal = userPortalCfg.getUserPortal();
+
+    //get nodes
+    List<UserNavigation> navigationList = userPortal.getNavigations();
+    for(UserNavigation nav : navigationList) {
+    UserNode root = userPortal.getNode(nav, Scope.ALL, null, null);
+    List<UserNode> userNodeList = PublicationUtil.findUserNodeByPageId(root, page.getPageId());
+      for (UserNode node : userNodeList) {
+        listPageNavigationUri.add(PublicationUtil.setMixedNavigationUri(portalName, node.getURI()));
+      }
+    }
+  }
+  return listPageNavigationUri;
   }
 
   /**

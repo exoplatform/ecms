@@ -162,13 +162,6 @@ public abstract class BaseTest extends TestCase
          {
             wc.nextNode().remove();
          }
-         //         for (NodeIterator unfiled =
-         //            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
-         //            .hasNext();)
-         //         {
-         //            unfiled.nextNode().remove();
-         //         }
-
          session.save();
          if (session.getRootNode().hasNode(cmisRootPath))
          {

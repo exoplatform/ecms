@@ -307,6 +307,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       CmsService cmsService = fastContentCreatorForm.getApplicationComponent(CmsService.class) ;
       TaxonomyService taxonomyService = fastContentCreatorForm.getApplicationComponent(TaxonomyService.class);
       boolean hasCategories = false;
+      StringBuffer sb = new StringBuffer();
       String categoriesPath = "";
       String[] categoriesPathList = null;
       List inputs = fastContentCreatorForm.getChildren();
@@ -332,9 +333,10 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             UIFormStringInput uiStringInput = (UIFormStringInput)component;
             if(uiStringInput.getValue() != null) {
               String value = uiStringInput.getValue().trim();
-              categoriesPath += value + ",";
+              sb.append(value).append(",");
             }
           }
+          categoriesPath = sb.toString();
           if (categoriesPath.endsWith(",")) categoriesPath = categoriesPath.substring(0, categoriesPath.length()-1).trim();
           categoriesPathList = categoriesPath.split(",");
           if ((categoriesPathList == null) || (categoriesPathList.length == 0)) {
@@ -357,7 +359,8 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         }
       }
       Map inputProperties = DialogFormUtil.prepareMap(fastContentCreatorForm.getChildren(),
-                                                      fastContentCreatorForm.getInputProperties(), fastContentCreatorForm.getInputOptions());
+                                                      fastContentCreatorForm.getInputProperties(),
+                                                      fastContentCreatorForm.getInputOptions());
       Node homeNode = null;
       Node newNode = null ;
       try {

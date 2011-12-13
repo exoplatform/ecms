@@ -100,10 +100,11 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       try {
         TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
         if (name.length() > Integer.parseInt(taxonomyService.getCategoryNameLength())) {
-        	Object[] args = { taxonomyService.getCategoryNameLength() };
+          Object[] args = { taxonomyService.getCategoryNameLength() };
           uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
-          		args, ApplicationMessage.WARNING));
-          
+                                                  args,
+                                                  ApplicationMessage.WARNING));
+
           return;
         }
         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();

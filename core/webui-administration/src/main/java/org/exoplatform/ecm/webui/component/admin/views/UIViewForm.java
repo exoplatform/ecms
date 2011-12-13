@@ -74,12 +74,12 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   private NodeLocation views_;
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
-  private String viewName = null;  
+  private String viewName = null;
   private String permission = null;
   private List<String> listVersion = new ArrayList<String>() ;
   private String baseVersionName_;
   private VersionNode selectedVersion_;
-  private VersionNode rootVersionNode;  
+  private VersionNode rootVersionNode;
   Map<String, String> templateMap = new HashMap<String, String>();
   Map<String, String> tempMap = new HashMap<String, String>();
 
@@ -90,13 +90,13 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   public void setViewName(String viewName) {
     this.viewName = viewName;
   }
-    
+
   public String getPermission() {
-  	return permission;
+    return permission;
   }
-  
+
   public void setPermission(String permission) {
-  	this.permission = permission;
+    this.permission = permission;
   }
 
   public UIViewForm(String name) throws Exception {
@@ -107,9 +107,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     versions.setOnChange("ChangeVersion");
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;    
-    addUIFormInput(new UIFormStringInput(
-        FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class).addValidator(PermissionValidator.class));                                                                             
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true)
+                                                                                  .addValidator(MandatoryValidator.class)
+                                                                                  .addValidator(PermissionValidator.class));
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
@@ -118,7 +119,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     if(ecmTemplateHome != null) {
       NodeIterator iter = ecmTemplateHome.getNodes() ;
       while(iter.hasNext()) {
-        Node tempNode = iter.nextNode() ; 
+        Node tempNode = iter.nextNode() ;
         temp.add(new SelectItemOption<String>(tempNode.getName(),tempNode.getName())) ;
         templateMap.put(tempNode.getName(), tempNode.getPath());
         tempMap.put(tempNode.getPath(), tempNode.getName());
@@ -137,9 +138,9 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   }
 
   public void doSelect(String selectField, Object value) {
-  	UIFormStringInput uiStringInput = getUIStringInput(selectField);
-  	if (selectField.equals(UIViewForm.FIELD_PERMISSION)){
-  		String membership = value.toString();
+    UIFormStringInput uiStringInput = getUIStringInput(selectField);
+    if (selectField.equals(UIViewForm.FIELD_PERMISSION)){
+      String membership = value.toString();
       String valuePermissions = uiStringInput.getValue();
       List<String> permissionsList = new ArrayList<String>();
       StringBuilder newsPermissions = new StringBuilder();
@@ -161,17 +162,17 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         }
         uiStringInput.setValue(newsPermissions.toString());
       } else uiStringInput.setValue(value.toString());
-  	} else {
-  		uiStringInput.setValue(value.toString());
-  	}    
+    } else {
+      uiStringInput.setValue(value.toString());
+    }
     UIViewContainer uiContainer = getAncestorOfType(UIViewContainer.class) ;
     uiContainer.removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
   }
 
   public boolean isView() { return isView_ ; }
 
-  public Node getViews() { 
-    return NodeLocation.getNodeByLocation(views_); 
+  public Node getViews() {
+    return NodeLocation.getNodeByLocation(views_);
   }
 
   public boolean canEnableVersionning(Node node) throws Exception {
@@ -284,7 +285,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
       }
     }
-    Node viewsNode = NodeLocation.getNodeByLocation(views_);    
+    Node viewsNode = NodeLocation.getNodeByLocation(views_);
     if (selectedVersion != null) {
       viewsNode.restore(selectedVersion.getName(), false) ;
       viewsNode.checkout() ;
@@ -301,7 +302,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     if(viewsNode != null) {
       getUIStringInput(FIELD_NAME).setEditable(false).setValue(viewsNode.getName()) ;
-      getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;       
+      getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;
       getUIFormSelectBox(FIELD_TEMPLATE).setValue(tempMap.get(viewsNode.getProperty("exo:template").getString()));
     }
     setInfoField(FIELD_TABS, getTabList()) ;
@@ -345,22 +346,22 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     String permissions = getUIStringInput(FIELD_PERMISSION).getValue() ;
     if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
-    	permissions = permissions.substring(0,permissions.length()-1);
+      permissions = permissions.substring(0,permissions.length()-1);
     String[] arrPermissions = permissions.split(",");
-  	for(String itemPermission : arrPermissions) {  		
-  		if(itemPermission!=null && itemPermission.trim().equals("*")) {
-  			permissions = "*";
-  			break;
-  		}  			
-  	}
-    
+    for(String itemPermission : arrPermissions) {
+      if(itemPermission!=null && itemPermission.trim().equals("*")) {
+        permissions = "*";
+        break;
+      }
+    }
+
     if(tabMap_.size() < 1 ){
       message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null,
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
     String template = templateMap.get(getUIFormSelectBox(FIELD_TEMPLATE).getValue());
-    
+
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
     Node viewNode = NodeLocation.getNodeByLocation(views_);
     if(views_ == null || !isEnableVersioning) {
@@ -391,7 +392,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
         WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-        
+
         return ;
       }
     }
@@ -421,8 +422,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   }
 
   public void changeVersion() throws Exception {
-    String path =
-      NodeLocation.getNodeByLocation(views_).getVersionHistory().getVersion(getUIFormSelectBox(FIELD_VERSION).getValue()).getPath();
+    String path = NodeLocation.getNodeByLocation(views_)
+                              .getVersionHistory()
+                              .getVersion(getUIFormSelectBox(FIELD_VERSION).getValue())
+                              .getPath();
     VersionNode selectedVesion = rootVersionNode.findVersionNode(path);
     update(null, false, selectedVesion) ;
   }
@@ -437,17 +440,17 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource() ;
       UIViewContainer uiContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      String memberShip = uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue() ;            
+      String memberShip = uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue() ;
       uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(memberShip);
       uiContainer.initPopupPermission(memberShip) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }
-  
+
   static public class RemovePermissionActionListener extends EventListener<UIViewFormTabPane> {
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
-    	UIViewFormTabPane uiViewTabPane = event.getSource();    	
-    	uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(null);
+      UIViewFormTabPane uiViewTabPane = event.getSource();
+      uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane);
     }
   }

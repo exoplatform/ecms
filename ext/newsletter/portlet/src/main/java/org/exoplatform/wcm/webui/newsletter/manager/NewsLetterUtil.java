@@ -55,7 +55,9 @@ public class NewsLetterUtil {
     url = portalContext.getRequest().getRequestURL().toString();
     url = url.replaceFirst("http://", "") ;
     url = url.substring(0, url.indexOf("/")) ;
-    link = "http://" + url + link;
+    StringBuffer buf = new StringBuffer();
+    buf.append("http://").append(url).append(link);
+    link = buf.toString();
     return link.replaceFirst("private", "public");
   }
 

@@ -82,7 +82,8 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
     addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE).addValidator(MandatoryValidator.class)
                                                                   .addValidator(IllegalDMSCharValidator.class));
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME).addValidator(MandatoryValidator.class)
-                                                                .addValidator(IllegalDMSCharValidator.class).addValidator(ECMNameValidator.class));
+                                                                .addValidator(IllegalDMSCharValidator.class)
+                                                                .addValidator(ECMNameValidator.class));
   }
 
   public void update(Node renameNode) throws Exception {

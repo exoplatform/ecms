@@ -51,13 +51,18 @@ import org.w3c.dom.Element;
 @Path("/contents/editing/")
 public class InlineEditingService implements ResourceContainer{
   private static Log log = ExoLogger.getLogger(InlineEditingService.class);
-  final static public String EXO_TITLE 								= "exo:title";
-  final static public String EXO_SUMMARY 							= "exo:summary";
-  final static public String EXO_TEXT		 							= "exo:text";
 
-  final static public String EXO_RSS_ENABLE 					= "exo:rss-enable";	
-  public final static String POST_EDIT_CONTENT_EVENT 	= "CmsService.event.postEdit";
-  private final String localeFile = "locale.portlet.i18n.WebUIDms";
+  final static public String EXO_TITLE               = "exo:title";
+
+  final static public String EXO_SUMMARY             = "exo:summary";
+
+  final static public String EXO_TEXT                = "exo:text";
+
+  final static public String EXO_RSS_ENABLE          = "exo:rss-enable";
+
+  public final static String POST_EDIT_CONTENT_EVENT = "CmsService.event.postEdit";
+
+  private final String       localeFile              = "locale.portlet.i18n.WebUIDms";
   /**
    * SERVICE: Edit title of document.
    *
@@ -192,10 +197,10 @@ public class InlineEditingService implements ResourceContainer{
     try {
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = 
+      RepositoryService repositoryService =
         (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      Session session = sessionProvider.getSession(workspaceName, manageableRepository);		    
+      Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       try {
         localeMsg = document.createElement("bundle");
         Node node = session.getNodeByUUID(nodeUIID);
@@ -204,9 +209,9 @@ public class InlineEditingService implements ResourceContainer{
           if (!sameValue(newValue, node, propertyName)) {
             if (newValue.length() > 0) {
               newValue = Text.unescapeIllegalJcrChars(newValue.trim());
-              PortalContainerInfo containerInfo = 
+              PortalContainerInfo containerInfo =
                 (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
-              String containerName = containerInfo.getContainerName();		    	    	    
+              String containerName = containerInfo.getContainerName();
               ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
               if (propertyName.equals(EXO_TITLE)) {
                 if (!node.hasProperty(EXO_TITLE))
@@ -247,7 +252,7 @@ public class InlineEditingService implements ResourceContainer{
           localeMsg.setAttribute("message", message);
           document.appendChild(localeMsg);
           return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
-        }				
+        }
       } catch (AccessDeniedException ace) {
         log.error("AccessDeniedException: ", ace);
         messageKey = "AccessDeniedException.msg";
@@ -261,7 +266,7 @@ public class InlineEditingService implements ResourceContainer{
         message = resourceBundle.getString(messageKey);
         localeMsg.setAttribute("message", message);
         document.appendChild(localeMsg);
-        return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();	    
+        return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       }  catch (LockException lockex) {
         log.error("LockException", lockex);
         messageKey = "LockException.msg";
@@ -277,7 +282,7 @@ public class InlineEditingService implements ResourceContainer{
       localeMsg.setAttribute("message", message);
       document.appendChild(localeMsg);
       return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
-    } 		
+    }
     localeMsg.setAttribute("message", "OK");
     document.appendChild(localeMsg);
     return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
@@ -287,12 +292,12 @@ public class InlineEditingService implements ResourceContainer{
    *
    * @param newValue the new value of property
    * @param node the document node
-   * 
+   *
    * @return the result of compare
-   * 
+   *
    * @throws Exception the exception
    */
-  private boolean sameValue(String newValue, Node node, String propertyName) throws Exception {	      
+  private boolean sameValue(String newValue, Node node, String propertyName) throws Exception {
     if (!node.hasProperty(propertyName))
       return (newValue == null || newValue.length() == 0);
     if (node.getProperty(propertyName).getDefinition().isMultiple()){

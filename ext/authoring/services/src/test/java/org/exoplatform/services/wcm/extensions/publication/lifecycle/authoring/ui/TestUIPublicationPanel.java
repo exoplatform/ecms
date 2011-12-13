@@ -161,8 +161,21 @@ public class TestUIPublicationPanel extends TestCase {
     when(panel.isAuthorizedByMembership(any(State.class), any(Identity.class))).thenCallRealMethod();
     when(panel.isAuthorizedByRole(any(State.class), any(Identity.class), any(NodeImpl.class))).thenCallRealMethod();
 
-    assertTrue("tom should be allowed", panel.canReachState(state, "tom", node));  // not allowed by membership, allowed by role
-    assertFalse("bill should be allowed", panel.canReachState(state, "bill", node)); // not allowed by membership, not allowed by role
+    assertTrue("tom should be allowed", panel.canReachState(state, "tom", node)); // not
+                                                                                  // allowed
+                                                                                  // by
+                                                                                  // membership,
+                                                                                  // allowed
+                                                                                  // by
+                                                                                  // role
+    assertFalse("bill should be allowed", panel.canReachState(state, "bill", node)); // not
+                                                                                     // allowed
+                                                                                     // by
+                                                                                     // membership,
+                                                                                     // not
+                                                                                     // allowed
+                                                                                     // by
+                                                                                     // role
 
   }
 

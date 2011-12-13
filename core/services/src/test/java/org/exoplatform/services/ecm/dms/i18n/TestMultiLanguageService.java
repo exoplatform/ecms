@@ -307,12 +307,16 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       assertTrue(test.hasNode("languages/fr"));
       Node testlanguage = test.getNode("languages/fr");
       assertTrue(testlanguage.hasNode(CONTENT));
-      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
+      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
+                                              .openStream(),
+                                    testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
       multiLanguageService.addLanguage(test, createFileInput(), "vi", true, CONTENT);
       defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
       assertEquals("vi", defaultLanguage);
       assertTrue(test.hasNode(CONTENT));
-      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
+      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
+                                              .openStream(),
+                                    test.getNode(CONTENT).getProperty(DATA).getStream()));
     } catch (ConstraintViolationException e) {
       // TODO: handle exception
     }
@@ -388,14 +392,12 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("en", defaultLanguage);
 
-    Value contentValue1 = session.getValueFactory().createValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    Value contentValue1 = session.getValueFactory()
+                                 .createValue(getClass().getResource("/conf/standalone/system-configuration.xml")
+                                                        .openStream());
     multiLanguageService.addFileLanguage(test, "test-configuration.xml" , contentValue1, "text/xml", "vi", REPO_NAME, true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
-//    assertTrue(test.hasNode("languages/en/test/jcr:content"));
-//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode("languages/en/test/jcr:content").getProperty(DATA).getStream()));
-//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
-
   }
 
   /**
@@ -420,14 +422,18 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertEquals("en", defaultLanguage);
     assertTrue(test.hasNode("languages/fr"));
     Node testlanguage = test.getNode("languages/fr");
-    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
+    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
+                                            .openStream(),
+                                  testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
     assertEquals("this is podcast", testlanguage.getProperty(TITLE).getString());
     assertEquals("connect", testlanguage.getProperty(LINK).getString());
 
     multiLanguageService.addFileLanguage(test, "vi" , createPodcastMapInput(), true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
-    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
+    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
+                                            .openStream(),
+                                  test.getNode(CONTENT).getProperty(DATA).getStream()));
     assertEquals("this is podcast", test.getProperty(TITLE).getString());
     assertEquals("connect", test.getProperty(LINK).getString());
   }

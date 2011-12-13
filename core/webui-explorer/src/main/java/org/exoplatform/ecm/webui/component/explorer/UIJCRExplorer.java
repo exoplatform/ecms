@@ -91,7 +91,6 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -360,7 +359,7 @@ public class UIJCRExplorer extends UIContainer {
     if(isReferenceNode_) return getSessionProvider().getSession(referenceWorkspace_, getRepository()) ;
     return getSessionProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
   }
-  
+
   public String getWorkspaceName() {
     return (isReferenceNode_ ? referenceWorkspace_ : currentDriveWorkspaceName_);
   }
@@ -656,7 +655,7 @@ public class UIJCRExplorer extends UIContainer {
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
 
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
-    		Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();
@@ -729,7 +728,7 @@ public class UIJCRExplorer extends UIContainer {
   public void record(String str, String ws) {
     /**
      * Uncomment this line if you have problem with the history
-     * 
+     *
      */
     //LOG.info("record(" + str + ", " + ws + ")", new Exception());
     nodesHistory_.add(str);
@@ -956,7 +955,7 @@ public class UIJCRExplorer extends UIContainer {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
         WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-        
+
         String workspace = null;
         try {
           workspace = session.getWorkspace().getName();

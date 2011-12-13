@@ -256,7 +256,9 @@ public class TestManageViewService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplateHome() throws Exception {
-    Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH, REPO_NAME, WCMCoreUtils.getSystemSessionProvider());
+    Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH,
+                                                      REPO_NAME,
+                                                      WCMCoreUtils.getSystemSessionProvider());
     assertEquals("/exo:ecm/views/userviews", homeNode.getPath());
   }
 
@@ -267,9 +269,13 @@ public class TestManageViewService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetAllTemplates() throws Exception {
-    List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, REPO_NAME, WCMCoreUtils.getSystemSessionProvider());
+    List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
+                                                           REPO_NAME,
+                                                           WCMCoreUtils.getSystemSessionProvider());
     assertEquals(5, lstNode.size());
-    List<String> templates = Arrays.asList(new String[]{lstNode.get(0).getName(), lstNode.get(1).getName(), lstNode.get(2).getName(), lstNode.get(3).getName(), lstNode.get(4).getName()});
+    List<String> templates = Arrays.asList(new String[] { lstNode.get(0).getName(),
+        lstNode.get(1).getName(), lstNode.get(2).getName(), lstNode.get(3).getName(),
+        lstNode.get(4).getName() });
     assertTrue(templates.contains("SystemView"));
     assertTrue(templates.contains("CoverFlow"));
     assertTrue(templates.contains("IconView"));
@@ -284,7 +290,9 @@ public class TestManageViewService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplate1() throws Exception {
-    manageViewService.getTemplate("/exo:ecm/views/templates/content-browser/detail-document/DocumentView", REPO_NAME, WCMCoreUtils.getSystemSessionProvider());
+    manageViewService.getTemplate("/exo:ecm/views/templates/content-browser/detail-document/DocumentView",
+                                  REPO_NAME,
+                                  WCMCoreUtils.getSystemSessionProvider());
   }
 
   /**
@@ -295,7 +303,9 @@ public class TestManageViewService extends BaseDMSTestCase {
    */
   public void testGetTemplate2() throws Exception {
     try {
-      manageViewService.getTemplate("/exo:ecm/views/templates/content-browser/detail-document/DocumentView1", REPO_NAME, WCMCoreUtils.getSystemSessionProvider());
+      manageViewService.getTemplate("/exo:ecm/views/templates/content-browser/detail-document/DocumentView1",
+                                    REPO_NAME,
+                                    WCMCoreUtils.getSystemSessionProvider());
     } catch (PathNotFoundException e) {
     }
   }

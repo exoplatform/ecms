@@ -37,7 +37,6 @@ import org.exoplatform.portal.mop.navigation.NavigationService;
 import org.exoplatform.portal.mop.navigation.NodeContext;
 import org.exoplatform.portal.mop.navigation.NodeModel;
 import org.exoplatform.portal.mop.navigation.Scope;
-import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -163,7 +162,9 @@ public class NavigationEventListenerDelegate {
     List<String> listPortalNavigationUri = new ArrayList<String>();
     List<String> listPageReference = new ArrayList<String>();
     for (NodeContext<?> context : listNodeContext) {
-      String mixedNavigationNodeUri = PublicationUtil.setMixedNavigationUri(portalName, PublicationUtil.buildUserNodeURI(context).toString());
+      String mixedNavigationNodeUri = PublicationUtil.setMixedNavigationUri(portalName,
+                                                                            PublicationUtil.buildUserNodeURI(context)
+                                                                                           .toString());
       listPortalNavigationUri.add(mixedNavigationNodeUri);
       listPageReference.add(context.getState().getPageRef());
     }
@@ -252,7 +253,9 @@ public class NavigationEventListenerDelegate {
     content.setProperty("publication:applicationIDs", PublicationUtil.toValues(valueFactory, listExistedApplicationId));
 
     List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
-    String mixedNavigationNodeUri = PublicationUtil.setMixedNavigationUri(portalName, PublicationUtil.buildUserNodeURI(nodeContext).toString());
+    String mixedNavigationNodeUri = PublicationUtil.setMixedNavigationUri(portalName,
+                                                                          PublicationUtil.buildUserNodeURI(nodeContext)
+                                                                                         .toString());
     listExistedNavigationNodeUri.add(mixedNavigationNodeUri);
     content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
 

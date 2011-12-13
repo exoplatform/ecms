@@ -68,7 +68,9 @@ public class PaginatedResultIterator extends PageList {
     result.getFiltersDescriber().put(WCMComposer.FILTER_LIMIT, ""+this.getPageSize());
     result.getFiltersDescriber().put(WCMComposer.FILTER_OFFSET, ""+(this.getPageSize()*(page-1)));
     result.getFiltersDescriber().put(WCMComposer.FILTER_TOTAL, ""+this.result.getNumTotal());
-    result = composer.getPaginatedContents(result.getNodeLocationDescriber(), result.getFiltersDescriber(), WCMCoreUtils.getUserSessionProvider());
+    result = composer.getPaginatedContents(result.getNodeLocationDescriber(),
+                                           result.getFiltersDescriber(),
+                                           WCMCoreUtils.getUserSessionProvider());
 
     currentListPage_ = result.getNodes();
 

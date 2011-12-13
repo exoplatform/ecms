@@ -223,7 +223,9 @@ public class UIWorkspaceList extends UIForm {
         uiTreeJCRExplorer.setRootTreeNode(uiWorkspaceList.getRootNode(wsName));
       } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
-        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));        
+        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException",
+                                                null,
+                                                ApplicationMessage.WARNING));
         return;
       } catch(Exception e) {
         return;
@@ -259,7 +261,11 @@ public class UIWorkspaceList extends UIForm {
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();
-      if(!uiJBrowser.isDisable()) value = uiJBrowser.getWorkspaceName() + ":" + value;
+      if (!uiJBrowser.isDisable()) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(uiJBrowser.getWorkspaceName()).append(":").append(value);
+        value = sb.toString();
+      }
       ((UISelectable)uiJBrowser.getSourceComponent()).doSelect(returnField, value);
     }
   }

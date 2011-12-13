@@ -17,6 +17,10 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.DocumentData;
@@ -25,14 +29,6 @@ import org.xcmis.spi.StorageException;
 import org.xcmis.spi.VersioningException;
 import org.xcmis.spi.model.AccessControlEntry;
 import org.xcmis.spi.model.Property;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 
 /**
  * @author <a href="mailto:andrey00x@gmail.com">Andrey Parfonov</a>

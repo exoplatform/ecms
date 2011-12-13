@@ -72,9 +72,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private static final String    TAXONOMY_LINK   = "exo:taxonomyLink";
 
   private static final String    EXOSYMLINK_LINK = "exo:symlink";
-  
+
   private static final String    EXO_WORKSPACE   = "exo:workspace";
-  
+
   private static final String    EXO_UUID        = "exo:uuid";
 
   private LinkManager            linkManager_;
@@ -83,13 +83,13 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
                                                      + "and exo:uuid = '$1' "
                                                      + "and exo:workspace = '$2' "
                                                      + "order by exo:dateCreated DESC";
-  
+
   private final String SQL_QUERY_EXACT_PATH = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
-                                                      + "and not jcr:path like '$0/%/%' "    
+                                                      + "and not jcr:path like '$0/%/%' "
                                                       + "and exo:uuid = '$1' "
                                                       + "and exo:workspace = '$2' "
                                                       + "order by exo:dateCreated DESC";
-  
+
 
   List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
 
@@ -116,22 +116,22 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = repoService;
     linkManager_ = linkManager;
-    dmsConfiguration_ = dmsConfiguration;  
+    dmsConfiguration_ = dmsConfiguration;
     ValueParam valueParam = initParams.getValueParam("categoryNameLength");
     if(valueParam!=null)
-    	categoryNameLength_ = valueParam.getValue();
+      categoryNameLength_ = valueParam.getValue();
     else
-    	categoryNameLength_ = "150";
-    ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");    
+      categoryNameLength_ = "150";
+    ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
         = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
   }
-  
+
   public String getCategoryNameLength() {
     return categoryNameLength_;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -141,12 +141,12 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       plugin.init(repository);
     }
   }
-  
+
   public void init() throws Exception {
     for (TaxonomyPlugin plugin : plugins_) {
       plugin.init();
     }
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -164,7 +164,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public List<Node> getAllTaxonomyTrees(String repository) throws RepositoryException {
     return getAllTaxonomyTrees(repository, false);
   }
-  
+
   public List<Node> getAllTaxonomyTrees() throws RepositoryException {
     return getAllTaxonomyTrees(false);
   }
@@ -177,7 +177,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     return getAllTaxonomyTrees(system);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -211,13 +211,13 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public Node getTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
     return getTaxonomyTree(repository, taxonomyName, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public Node getTaxonomyTree(String taxonomyName) throws RepositoryException {
     return getTaxonomyTree(taxonomyName, false);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -227,7 +227,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     return getTaxonomyTree(taxonomyName, system);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -235,7 +235,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     try {
       Node taxonomyDef = getRootTaxonomyDef();
-      try { 
+      try {
         Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
         if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
           return linkManager_.getTarget(taxonomyTree, system);
@@ -263,14 +263,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     }
     return false;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Deprecated
   public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
     return hasTaxonomyTree(taxonomyName);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -358,7 +358,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throw new RepositoryException(e2);
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -366,7 +366,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public void addTaxonomyNode(String repository, String workspace, String parentPath, String taxoNodeName,
       String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
     addTaxonomyNode(workspace, parentPath, taxoNodeName, creatorUser);
-  }  
+  }
 
   private boolean containsUser(List<AccessControlEntry> entries, String userName) {
     if (userName == null) return false;
@@ -384,7 +384,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     removeTaxonomyNode(workspace, absPath);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -399,7 +399,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
     }
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -518,7 +518,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (node.canAddMixin("mix:referenceable")) {
           node.addMixin("mix:referenceable");
           node.getSession().save();
-        }        
+        }
         //generate unique linkName
         String nodeUUID = node.getUUID();
         String nodeWS = node.getSession().getWorkspace().getName();
@@ -528,7 +528,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           Node taxonomyNode = categoryNode.getNode(linkName);
           if (nodeUUID.equals(taxonomyNode.getProperty(EXO_UUID).getString()) &&
               nodeWS.equals(taxonomyNode.getProperty(EXO_WORKSPACE).getString())) {
-            throw new ItemExistsException(); 
+            throw new ItemExistsException();
           }
           linkName = node.getName() + index++;
         }
@@ -567,7 +567,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       String destPath, String type) throws RepositoryException {
     moveTaxonomyNode(workspace, srcPath, destPath, type);
   }
-  
+
   public void moveTaxonomyNode(String workspace, String srcPath, String destPath, String type) throws RepositoryException {
     Session systemSession = null;
     try {
@@ -615,7 +615,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       String sql = StringUtils.replace(SQL_QUERY_EXACT_PATH, "$0", categoryNode.getPath());
       sql = StringUtils.replace(sql, "$1", node.getUUID());
       sql = StringUtils.replace(sql, "$2", node.getSession().getWorkspace().getName());
-      
+
       QueryManager queryManager = categoryNode.getSession().getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(sql, Query.SQL);
       QueryResult result = query.execute();
@@ -625,7 +625,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       if (iterate != null && iterate.hasNext()) {
         nodeTaxonomyLink = iterate.nextNode();
       }
-      
+
       //remove taxonomyLink node
       if (nodeTaxonomyLink == null) {
         throw new RepositoryException("canot found taxonomy link node");

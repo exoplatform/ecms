@@ -94,106 +94,82 @@ import javax.jcr.nodetype.NodeType;
 class JcrNodeEntry
 {
 
-   private class ChildrenIterator extends LazyIterator<JcrNodeEntry>
-   {
-      private final NodeIterator iter;
+  private class ChildrenIterator extends LazyIterator<JcrNodeEntry> {
+    private final NodeIterator iter;
 
-      public ChildrenIterator(NodeIterator iter)
-      {
-         this.iter = iter;
-         fetchNext();
-      }
+    public ChildrenIterator(NodeIterator iter) {
+      this.iter = iter;
+      fetchNext();
+    }
 
-      @Override
-      protected void fetchNext()
-      {
-         next = null;
-         while (next == null && iter.hasNext())
-         {
-            Node node = iter.nextNode();
-            try
-            {
-               if (SKIP_CHILD_ITEMS.contains(node.getName()))
-               {
-                  continue;
-               }
+    @Override
+    protected void fetchNext() {
+      next = null;
+      while (next == null && iter.hasNext()) {
+        Node node = iter.nextNode();
+        try {
+          if (SKIP_CHILD_ITEMS.contains(node.getName())) {
+            continue;
+          }
 
-               if (!((NodeImpl)node).isValid())
-               {
-                  continue; // TODO temporary. Be sure it fixed in JCR back-end.
-               }
+          if (!((NodeImpl) node).isValid()) {
+            continue; // TODO temporary. Be sure it fixed in JCR back-end.
+          }
 
-               if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
-               {
-                  javax.jcr.Property propertyWithId = null;
-                  for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
-                  {
-                     javax.jcr.Property nextProperty = iter.nextProperty();
-                     // iterate while don't get the property with CMIS Object Id in the name.
-                     // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
-                     if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
-                        propertyWithId = nextProperty;
-                     }
-                  }
-                  node = propertyWithId.getNode();
-                  try
-                  {
-                     next = storage.fromNode(node);
-                  }
-                  catch (ObjectNotFoundException e)
-                  {
-                     continue;
-                  }
-               }
-               else if (node.isNodeType("exo:symlink"))
-               {
-                  try
-                  {
-                     // May be sub-types of exo:symlink
-                     next = storage.fromNode(node);
-                  }
-                  catch (ObjectNotFoundException e)
-                  {
-                     continue;
-                  }
-               }
-               else
-               {
-                  try
-                  {
-                     next = storage.fromNode(node);
-                  }
-                  catch (ObjectNotFoundException e)
-                  {
-                     continue;
-                  }
-               }
+          if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)) {
+            javax.jcr.Property propertyWithId = null;
+            for (PropertyIterator iter = node.getProperties(); iter.hasNext()
+                && propertyWithId == null;) {
+              javax.jcr.Property nextProperty = iter.nextProperty();
+              // iterate while don't get the property with CMIS Object Id in the
+              // name.
+              // xcmis:linkedFile extends nt:base which has two properties by
+              // default: jcr:primaryType and jcr:mixinTypes
+              if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE)
+                  && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
+                propertyWithId = nextProperty;
+              }
             }
-            catch (NotSupportedNodeTypeException iae)
-            {
-               if (LOG.isDebugEnabled())
-               {
-                  // Show only in debug mode. It may cause a lot of warn when
-                  // unsupported by xCMIS nodes met.
-                  LOG.warn("Unable get next object . " + iae.getMessage());
-               }
+            node = propertyWithId.getNode();
+            try {
+              next = storage.fromNode(node);
+            } catch (ObjectNotFoundException e) {
+              continue;
             }
-            catch (javax.jcr.RepositoryException re)
-            {
-               LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+          } else if (node.isNodeType("exo:symlink")) {
+            try {
+              // May be sub-types of exo:symlink
+              next = storage.fromNode(node);
+            } catch (ObjectNotFoundException e) {
+              continue;
             }
-         }
+          } else {
+            try {
+              next = storage.fromNode(node);
+            } catch (ObjectNotFoundException e) {
+              continue;
+            }
+          }
+        } catch (NotSupportedNodeTypeException iae) {
+          if (LOG.isDebugEnabled()) {
+            // Show only in debug mode. It may cause a lot of warn when
+            // unsupported by xCMIS nodes met.
+            LOG.warn("Unable get next object . " + iae.getMessage());
+          }
+        } catch (javax.jcr.RepositoryException re) {
+          LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+        }
       }
+    }
 
-      /**
-       * {@inheritDoc}
-       */
-      public int size()
-      {
-         // Size is unknown since may met nodes with unsupported node type.
-         return -1;
-      }
-   }
+    /**
+     * {@inheritDoc}
+     */
+    public int size() {
+      // Size is unknown since may met nodes with unsupported node type.
+      return -1;
+    }
+  }
 
    static final Set<String> SKIP_CHILD_ITEMS = new HashSet<String>();
 
@@ -1189,25 +1165,23 @@ class JcrNodeEntry
       }
    }
 
-   void moveTo(JcrNodeEntry target) throws NameConstraintViolationException, StorageException
-   {
-      try
-      {
-         Session session = node.getSession();
-         String objectPath = path();
-         String destinationPath = target.getNode().getPath();
-         destinationPath += destinationPath.equals("/") ? getName() : ("/" + getName());
-         session.getWorkspace().move(objectPath, destinationPath);
+  void moveTo(JcrNodeEntry target) throws NameConstraintViolationException, StorageException {
+    try {
+      Session session = node.getSession();
+      String objectPath = path();
+      StringBuffer destinationPath = new StringBuffer(target.getNode().getPath());
+      if ("/".equals(destinationPath.toString())) {
+        destinationPath.append(getName());
+      } else {
+        destinationPath.append("/").append(getName());
       }
-      catch (ItemExistsException ie)
-      {
-         throw new NameConstraintViolationException("Object with the same name already exists in target folder.");
-      }
-      catch (javax.jcr.RepositoryException re)
-      {
-         throw new StorageException("Unable to move object. " + re.getMessage(), re);
-      }
-   }
+      session.getWorkspace().move(objectPath, destinationPath.toString());
+    } catch (ItemExistsException ie) {
+      throw new NameConstraintViolationException("Object with the same name already exists in target folder.");
+    } catch (javax.jcr.RepositoryException re) {
+      throw new StorageException("Unable to move object. " + re.getMessage(), re);
+    }
+  }
 
    Collection<JcrNodeEntry> getParents()
    {

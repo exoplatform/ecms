@@ -207,10 +207,13 @@ public class UITemplateContent extends UIForm implements UISelectable {
   public void doSelect(String selectField, Object value) {
     String viewPermission = getUIStringInput(FIELD_VIEWPERMISSION).getValue();
     if (viewPermission == null) viewPermission = "";
-    if ((viewPermission != null) && (viewPermission.length() == 0))
+    if ((viewPermission != null) && (viewPermission.length() == 0)) {
       viewPermission = value.toString();
-    else
-      viewPermission += "," + value.toString();
+    } else {
+      StringBuffer sb = new StringBuffer();
+      sb.append(viewPermission).append(",").append(value.toString());
+      viewPermission = sb.toString();
+    }
     getUIStringInput(FIELD_VIEWPERMISSION).setValue(viewPermission) ;
     UITemplatesManager uiManager = getAncestorOfType(UITemplatesManager.class) ;
     uiManager.removeChildById(getId() + TEMPLATE_PERMISSION) ;

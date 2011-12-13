@@ -28,7 +28,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.PageList;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -386,7 +385,10 @@ public class UIPCLVForm extends UIForm {
     String itemPath = path.substring(path.lastIndexOf(((UIPCLVContainer) getParent()).getTaxonomyTreeName()));
     
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), preferenceTargetPage);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL,
+                                                         Util.getPortalRequestContext()
+                                                             .getPortalOwner(),
+                                                         preferenceTargetPage);
     nodeURL.setResource(resource).setQueryParameterValue("path", itemPath);
     String link = nodeURL.toString();
     

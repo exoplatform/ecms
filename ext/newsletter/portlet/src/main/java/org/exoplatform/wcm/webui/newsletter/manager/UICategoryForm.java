@@ -134,16 +134,20 @@ public class UICategoryForm extends UIForm implements UIPopupComponent, UISelect
     UIFormStringInput stringInput = formCategoryModerator.getChildById(selectField);
     List<String> values = new ArrayList<String>();
     String oldValue = stringInput.getValue();
-    if(oldValue != null && oldValue.length() > 0)
+    if (oldValue != null && oldValue.length() > 0) {
       values.addAll(Arrays.asList(oldValue.split(",")));
-    String result = (String) value;
-    if(!values.contains(result)) values.add(result);
-    result = "";
-    for(String str : values){
-      if(result.trim().length() > 0) result += ",";
-      result += str;
     }
-    stringInput.setValue(result);
+    if (!values.contains((String) value)) {
+      values.add((String) value);
+    }
+    StringBuffer sbResult = new StringBuffer();
+    for (String str : values) {
+      if (sbResult.toString().trim().length() > 0) {
+        sbResult.append(",");
+      }
+      sbResult.append(str);
+    }
+    stringInput.setValue(sbResult.toString());
     Utils.closePopupWindow(this, popupId);
   }
 

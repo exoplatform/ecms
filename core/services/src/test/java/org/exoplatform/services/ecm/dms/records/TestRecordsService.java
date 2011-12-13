@@ -16,15 +16,9 @@
  */
 package org.exoplatform.services.ecm.dms.records;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.services.cms.records.RecordsService;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;

@@ -84,12 +84,12 @@ public class PublicationServiceImpl implements PublicationService {
     List<Value> newValues = new ArrayList<Value>();
     Value[] values = node.getProperty(HISTORY).getValues();
     newValues.addAll(Arrays.<Value>asList(values)) ;
-    String string2add = "";
+    StringBuffer string2add = new StringBuffer();
     for (int i=0; i<args.length;i++) {
-      if (i==0) string2add += args[i];
-      else string2add += ","+args[i];
+      if (i==0) string2add.append(args[i]);
+      else string2add.append(",").append(args[i]);
     }
-    Value value2add=systemSession.getValueFactory().createValue(string2add);
+    Value value2add=systemSession.getValueFactory().createValue(string2add.toString());
     newValues.add(value2add);
     node.setProperty(HISTORY,newValues.toArray(new Value[newValues.size()])) ;
     systemSession.logout();

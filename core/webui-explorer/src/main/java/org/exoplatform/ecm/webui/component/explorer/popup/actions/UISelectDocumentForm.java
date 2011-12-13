@@ -49,31 +49,33 @@ import org.exoplatform.webui.event.EventListener;
 public class UISelectDocumentForm extends UIContainer {
 
   private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator";
-  
-  private final static String THUMBNAIL_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl";
-  
-  private final static String LIST_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl";
-  
+
+  private final static String THUMBNAIL_VIEW_TEMPLATE       =
+    "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl";
+
+  private final static String LIST_VIEW_TEMPLATE            =
+    "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl";
+
   private String uiComponentTemplate;
-  
+
   private Map<String, String> documentTemplates = new HashMap<String, String>();
-  
+
   private String repository;
-  
+
   private UIPageIterator pageIterator;
 
   public UISelectDocumentForm() throws Exception {
     pageIterator = addChild(UIPageIterator.class, null, DOCUMENT_TEMPLATE_ITERATOR_ID);
-  } 
+  }
 
   public Map<String, String> getDocumentTemplates() {
     return documentTemplates;
   }
-  
+
   public void setDocumentTemplates(Map<String, String> templates) {
-    this.documentTemplates = templates;       
+    this.documentTemplates = templates;
   }
-  
+
   public void updatePageListData() throws Exception {
     List<String> templateList = new ArrayList<String>();
     Iterator<String> iter = getDocumentTemplates().keySet().iterator();
@@ -81,21 +83,21 @@ public class UISelectDocumentForm extends UIContainer {
       String key = iter.next();
       templateList.add(key);
     }
-        
+
     ListAccess<String> nodeAccList = new ListAccessImpl<String>(String.class, templateList);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     int nodesPerPage = uiExplorer.getPreference().getNodesPerPage();
     pageIterator.setPageList(new LazyPageList<String>(nodeAccList, nodesPerPage));
   }
-  
+
   public String getContentType (String label) {
     return getDocumentTemplates().get(label);
   }
-  
+
   public String getTemplateIconStylesheet(String contentType) {
     return contentType.replace(":", "_") + "70x80Icon";
   }
-  
+
   public List<?> getChildrenList() throws Exception {
     return pageIterator.getCurrentPageData();
   }
@@ -107,49 +109,49 @@ public class UISelectDocumentForm extends UIContainer {
   public void setRepository(String repository) {
     this.repository = repository;
   }
-  
+
   public UIPageIterator getContentPageIterator() {
     return pageIterator;
   }
-  
+
   public String getTemplate() {
-	  return uiComponentTemplate != null ? uiComponentTemplate : super.getTemplate();
+    return uiComponentTemplate != null ? uiComponentTemplate : super.getTemplate();
   }
-  
+
   public void setTemplate(String template) {
-	  this.uiComponentTemplate = template;
+    this.uiComponentTemplate = template;
   }
 
   static public class SelectTemplateActionListener extends EventListener<UISelectDocumentForm> {
     public void execute(Event<UISelectDocumentForm> event) throws Exception {
       String contentType = event.getRequestContext().getRequestParameter(OBJECTID);
       UISelectDocumentForm uiSelectForm = event.getSource() ;
-      UIDocumentFormController uiDCFormController = uiSelectForm.getParent() ;            
+      UIDocumentFormController uiDCFormController = uiSelectForm.getParent() ;
       UIDocumentForm documentForm = uiDCFormController.getChild(UIDocumentForm.class) ;
-      documentForm.addNew(true);      
+      documentForm.addNew(true);
       documentForm.getChildren().clear() ;
       documentForm.resetInterceptors();
-      documentForm.resetProperties();            
+      documentForm.resetProperties();
       documentForm.setContentType(contentType);
-      
+
       uiSelectForm.setRendered(false);
       documentForm.setRendered(true);
-      
+
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController) ;
     }
   }
-  
+
   static public class ChangeViewActionListener extends EventListener<UISelectDocumentForm> {
     private static final String THUMBNAIL_VIEW_TYPE = "ThumbnailView";
 
-	public void execute(Event<UISelectDocumentForm> event) throws Exception {
+  public void execute(Event<UISelectDocumentForm> event) throws Exception {
       String viewType = event.getRequestContext().getRequestParameter(OBJECTID);
       UISelectDocumentForm uiSelectForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiSelectForm.getAncestorOfType(UIJCRExplorer.class);
       if (viewType.equals(THUMBNAIL_VIEW_TYPE)) {
-    	uiSelectForm.setTemplate(THUMBNAIL_VIEW_TEMPLATE);
+      uiSelectForm.setTemplate(THUMBNAIL_VIEW_TEMPLATE);
       } else {
-    	uiSelectForm.setTemplate(LIST_VIEW_TEMPLATE);
+      uiSelectForm.setTemplate(LIST_VIEW_TEMPLATE);
       }
       uiExplorer.updateAjax(event);
     }

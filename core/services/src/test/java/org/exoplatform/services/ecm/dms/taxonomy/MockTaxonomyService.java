@@ -47,7 +47,9 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 public class MockTaxonomyService extends TaxonomyServiceImpl {
   
   private RepositoryService      repositoryService_;
-  private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' and exo:uuid = '$1' order by exo:dateCreated DESC";
+
+  private final String           SQL_QUERY = "Select * from exo:taxonomyLink where jcr:path like '$0/%' and exo:uuid = '$1' "
+                                               + "order by exo:dateCreated DESC";
   private SessionProviderService providerService_;
   
   public MockTaxonomyService(InitParams initParams, SessionProviderService providerService,
@@ -85,8 +87,11 @@ public class MockTaxonomyService extends TaxonomyServiceImpl {
           String sql = null;
           sql = StringUtils.replace(SQL_QUERY, "$0", rootNodeTaxonomy.getPath());
           sql = StringUtils.replace(sql, "$1", node.getUUID());
-          session = providerService_.getSystemSessionProvider(null).getSession(rootNodeTaxonomy.getSession().getWorkspace().getName(),
-              repositoryService_.getCurrentRepository());
+          session = providerService_.getSystemSessionProvider(null)
+                                    .getSession(rootNodeTaxonomy.getSession()
+                                                                .getWorkspace()
+                                                                .getName(),
+                                                repositoryService_.getCurrentRepository());
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();

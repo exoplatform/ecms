@@ -202,8 +202,8 @@ public class UIPublicationPanel
         uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
         
         return;
-      }catch (ItemExistsException iee){
-    	LOG.error("Error when adding properties to node");    	 
+      } catch (ItemExistsException iee) {
+        LOG.error("Error when adding properties to node");
       }
       UIPopupContainer uiPopupContainer = (UIPopupContainer) publicationPanel.getAncestorOfType(UIPopupContainer.class);
       uiPopupContainer.deActivate();

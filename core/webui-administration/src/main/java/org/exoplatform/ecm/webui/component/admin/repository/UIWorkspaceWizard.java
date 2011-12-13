@@ -438,9 +438,12 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       String lockTimeOut = uiWSFormStep1.getUIStringInput(UIWizardStep1.FIELD_TIMEOUT).getValue() ;
       UIFormInputSet uiWSFormStep2 = uiFormWizard.getChildById(UIWorkspaceWizard.FIELD_STEP2) ;
       boolean isExternalStoreage = uiWSFormStep2.getUIFormCheckBoxInput(UIWizardStep2.FIELD_EXTERNAL_STORE).isChecked() ;
-      String storePath = null;
-      if(isExternalStoreage) storePath = uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_STOREPATH).getValue() ;
-      String swapPath =  uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_SWAPPATH).getValue() ;
+      StringBuffer storePath = null;
+      if (isExternalStoreage)
+        storePath = new StringBuffer(uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_STOREPATH)
+                                                  .getValue());
+      StringBuffer swapPath = new StringBuffer(uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_SWAPPATH)
+                                                            .getValue());
       UIApplication uiApp = uiFormWizard.getAncestorOfType(UIApplication.class) ;
       if(uiFormWizard.isCheckValid_) {
         if(uiWSFormStep1.isRendered()) {
@@ -501,22 +504,23 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
             
             return;
           }
-          if(!Utils.isNameEmpty(swapPath)) {
-            if(!swapPath.contains(wsName))  swapPath = swapPath + wsName ;
+          if(!Utils.isNameEmpty(swapPath.toString())) {
+            if(!swapPath.toString().contains(wsName))  swapPath.append(wsName);
           }
-          if(isExternalStoreage && !Utils.isNameEmpty(storePath)) {
-            if(!storePath.contains(wsName))  storePath = storePath + wsName ;
-            uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_STOREPATH).setValue(storePath) ;
+          if(isExternalStoreage && !Utils.isNameEmpty(storePath.toString())) {
+            if(!storePath.toString().contains(wsName))  storePath.append(wsName);
+            uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_STOREPATH)
+                         .setValue(storePath.toString());
           }
-          uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_SWAPPATH).setValue(swapPath) ;
+          uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_SWAPPATH).setValue(swapPath.toString());
         }
       }
       if(uiFormWizard.isNewWizard_){
-        String swapPathAuto = swapPath ;
+        String swapPathAuto = swapPath.toString();
         swapPathAuto = swapPath.substring(0,swapPath.lastIndexOf("/")+1) + wsName ;
         uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_SWAPPATH).setValue(swapPathAuto) ;
         if(isExternalStoreage) {
-          String storePathAuto = storePath ;
+          String storePathAuto = storePath.toString();
           storePathAuto = storePath.substring(0,storePath.lastIndexOf("/")+1) + wsName ;
           uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_STOREPATH).setValue(storePathAuto) ;
         }

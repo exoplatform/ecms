@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;

@@ -16,28 +16,31 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import org.apache.pdfbox.TextToPDF;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.comments.CommentsService;
-import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import javax.jcr.Node;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /*
  * Created by The eXo Platform SAS
@@ -76,7 +79,6 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
     Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
 
-    // TODO
     commentsService.addComment(content, content.getSession().getUserID(), null, null, comment,null);
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);

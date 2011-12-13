@@ -107,7 +107,9 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getQueryList() throws Exception { return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); }
+  public List getQueryList() throws Exception {
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData());
+  }
 
   public void initPopupEditForm(Query query) throws Exception {
     removeChildById(EDIT_FORM);

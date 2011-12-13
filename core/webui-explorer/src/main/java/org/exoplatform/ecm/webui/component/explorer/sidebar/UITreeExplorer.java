@@ -297,11 +297,11 @@ public class UITreeExplorer extends UIContainer {
       path = jcrExplorer.getCurrentPath();
     String[] arr = path.replaceFirst(treeRoot.getPath(), "").split("/");
     TreeNode temp = treeRoot;
-    String subPath = null;
+    StringBuffer subPath = null;
     String rootPath = treeRoot.getPath();
-    String prefix = rootPath;
+    StringBuffer prefix = new StringBuffer(rootPath);
     if (!rootPath.equals("/")) {
-      prefix += "/";
+      prefix.append("/");
     }
     if(isTimelineView()) {
       temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(rootPath, false)));
@@ -323,21 +323,24 @@ public class UITreeExplorer extends UIContainer {
         treeRoot_ = treeRoot;
         return;
       }
-      if (subPath == null)
-        subPath = prefix + nodeName;
-      else
-        subPath = subPath + "/" + nodeName;
-      if(isTimelineView()) {
-        temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(subPath, false)));
+      if (subPath == null) {
+        subPath = new StringBuffer();
+        subPath.append(prefix).append(nodeName);
       } else {
-        temp.setChildren(jcrExplorer.getChildrenList(subPath, false));
+        subPath.append("/").append(nodeName);
+      }
+      if (isTimelineView()) {
+        temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(subPath.toString(),
+                                                                            false)));
+      } else {
+        temp.setChildren(jcrExplorer.getChildrenList(subPath.toString(), false));
       }
 
       if (temp.getChildrenSize() > nodePerPages) {
         ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
                                                                           temp.getChildren());
         LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
-        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath, path);
+        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
       }
     }
     treeRoot_ = treeRoot;

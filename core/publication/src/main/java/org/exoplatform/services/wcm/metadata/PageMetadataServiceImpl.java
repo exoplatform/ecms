@@ -158,10 +158,12 @@ public class PageMetadataServiceImpl implements PageMetadataService {
       portalKeywords = medatata.get(KEYWORDS);
     }
     String pageTitle = getProperty(node,"exo:title");
-    if(pageTitle == null)
+    if (pageTitle == null)
       pageTitle = node.getName();
-    if(siteTitle != null) {
-      pageTitle = pageTitle + "-" + siteTitle;
+    if (siteTitle != null) {
+      StringBuffer sb = new StringBuffer();
+      sb.append(pageTitle).append("-").append(siteTitle);
+      pageTitle = sb.toString();
     }
     String description = getProperty(node,"exo:summary");
     medatata.put(PAGE_TITLE,pageTitle);

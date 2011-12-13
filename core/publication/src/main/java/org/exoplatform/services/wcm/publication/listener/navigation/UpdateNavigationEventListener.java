@@ -44,7 +44,8 @@ public class UpdateNavigationEventListener extends Listener<NavigationServiceWra
    */
   public void onEvent(Event<NavigationServiceWrapper, SiteKey> event) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WCMPublicationService publicationService = (WCMPublicationService) container.getComponentInstanceOfType(WCMPublicationService.class);
+    WCMPublicationService publicationService = 
+      (WCMPublicationService) container.getComponentInstanceOfType(WCMPublicationService.class);
     NavigationServiceWrapper navigationWrapper = event.getSource();
     SiteKey key = event.getData();
     NavigationContext navigationContext = navigationWrapper.loadNavigation(key);

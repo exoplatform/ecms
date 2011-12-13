@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
-import org.exoplatform.ecm.webui.component.admin.drives.UIDriveInputSet;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;

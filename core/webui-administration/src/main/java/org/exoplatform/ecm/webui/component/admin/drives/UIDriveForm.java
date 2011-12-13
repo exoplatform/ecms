@@ -43,8 +43,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -261,15 +261,15 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
       String views = viewsInputSet.getViewsSelected();
       String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
-      	permissions = permissions.substring(0,permissions.length()-1);
+      if (permissions.subSequence(permissions.length() - 1, permissions.length()).equals(","))
+        permissions = permissions.substring(0, permissions.length() - 1);
       String[] arrPermissions = permissions.split(",");
-    	for(String itemPermission : arrPermissions) {
-    		if(itemPermission!=null && itemPermission.trim().equals("*")) {
-    			permissions = "*";
-    			break;
-    		}
-    	}
+      for (String itemPermission : arrPermissions) {
+        if (itemPermission != null && itemPermission.trim().equals("*")) {
+          permissions = "*";
+          break;
+        }
+      }
 
       if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name) != null)) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null,

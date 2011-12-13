@@ -21,15 +21,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.MembershipType;
 
 
 
@@ -41,48 +39,56 @@ import org.exoplatform.services.organization.MembershipType;
  */
 
 public class PermissionValidator implements Validator {
-	public void validate(UIFormInput uiInput) throws Exception {
-		if (uiInput.getValue()==null || ((String)uiInput.getValue()).trim().length()==0 || ((String)uiInput.getValue()).trim().equals("*")) return;
-		String permissions = ((String)uiInput.getValue()).trim();		
-		
-  	OrganizationService oservice =
-      (OrganizationService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(
-         OrganizationService.class);  	
-  	List<String> listMemberhip;
+  public void validate(UIFormInput uiInput) throws Exception {
+    if (uiInput.getValue() == null || ((String) uiInput.getValue()).trim().length() == 0
+        || ((String) uiInput.getValue()).trim().equals("*"))
+      return;
+    String permissions = ((String) uiInput.getValue()).trim();
+
+    OrganizationService oservice = 
+      (OrganizationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(OrganizationService.class);
+    List<String> listMemberhip;
     Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-    listMemberhip  = new ArrayList<String>(5);
-    for(Object obj : collection){
-      listMemberhip.add(((MembershipType)obj).getName());
+    listMemberhip = new ArrayList<String>(5);
+    for (Object obj : collection) {
+      listMemberhip.add(((MembershipType) obj).getName());
     }
     listMemberhip.add("*");
-    
+
     String[] arrPermissions = permissions.split(",");
-  	for(String itemPermission : arrPermissions) {  		
-  		if(itemPermission.length() == 0) {
-  			Object[] args = { itemPermission };
-  			throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",args));    			
-  		} 
-  		if(itemPermission.equals("*")) continue;
-  		else if (itemPermission.contains(":")) {
-  			String[] permission = itemPermission.split(":");
-  			if((permission[0] == null) || (permission[0].length() == 0)){
-  				Object[] args = { itemPermission };
-  				throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid", args)); 
-  			} else if(!listMemberhip.contains(permission[0])) {
-  				Object[] args = { itemPermission };
-  				throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid", args));
-  			}  			
-  			if((permission[1] == null) || (permission[1].length() == 0)) {
-  				Object[] args = { itemPermission };
-  				throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid", args));
-  			} else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
-  				Object[] args = { itemPermission };
-  				throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid", args));
-  			}
-  		} else {
-  			Object[] args = { itemPermission };
-  			throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid", args));
-  		}
-  	}
-	}
+    for (String itemPermission : arrPermissions) {
+      if (itemPermission.length() == 0) {
+        Object[] args = { itemPermission };
+        throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                          args));
+      }
+      if (itemPermission.equals("*"))
+        continue;
+      else if (itemPermission.contains(":")) {
+        String[] permission = itemPermission.split(":");
+        if ((permission[0] == null) || (permission[0].length() == 0)) {
+          Object[] args = { itemPermission };
+          throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                            args));
+        } else if (!listMemberhip.contains(permission[0])) {
+          Object[] args = { itemPermission };
+          throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                            args));
+        }
+        if ((permission[1] == null) || (permission[1].length() == 0)) {
+          Object[] args = { itemPermission };
+          throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                            args));
+        } else if (oservice.getGroupHandler().findGroupById(permission[1]) == null) {
+          Object[] args = { itemPermission };
+          throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                            args));
+        }
+      } else {
+        Object[] args = { itemPermission };
+        throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
+                                                          args));
+      }
+    }
+  }
 }

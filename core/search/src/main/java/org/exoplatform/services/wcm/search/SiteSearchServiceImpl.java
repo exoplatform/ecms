@@ -681,8 +681,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(displayNode);
         WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
         HashMap<String, String> filters = new HashMap<String, String>();
-        filters.put(WCMComposer.FILTER_MODE, queryCriteria.isLiveMode()? WCMComposer.MODE_LIVE :
-                                                                                                                        WCMComposer.MODE_EDIT);
+        filters.put(WCMComposer.FILTER_MODE, queryCriteria.isLiveMode() ? WCMComposer.MODE_LIVE
+                                                                       : WCMComposer.MODE_EDIT);
         return wcmComposer.getContent(nodeLocation.getWorkspace(),
                                                                   nodeLocation.getPath(),
                                                                   filters,
@@ -788,11 +788,12 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
         PortletRequest portletRequest = portletRequestContext.getRequest();
 
-        String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName();
+        StringBuffer baseURI = new StringBuffer();
+        baseURI.append(portletRequest.getScheme()).append("://").append(portletRequest.getServerName());
         if (portletRequest.getServerPort() != 80) {
-          baseURI += ":" + String.format("%s", portletRequest.getServerPort());
+          baseURI.append(":").append(String.format("%s", portletRequest.getServerPort()));
         }
-        baseURI += portalRequestContext.getPortalContextPath();
+        baseURI.append(portalRequestContext.getPortalContextPath());
         if (node.isNodeType("mop:pagelink")) {
           node = node.getParent();
         }
@@ -800,7 +801,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         if (node.isNodeType("gtn:language")) {
           node = node.getParent().getParent();
         }
-        String userNaviUri = baseURI + "/" + PageDataCreator.getUserNavigationURI(node).toString();
+        String userNaviUri = baseURI.toString() + "/" + PageDataCreator.getUserNavigationURI(node).toString();
         if (userNavigationUriList.contains(userNaviUri)) {
           return null;
         }

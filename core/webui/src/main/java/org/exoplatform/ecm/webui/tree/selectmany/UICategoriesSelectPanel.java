@@ -67,7 +67,7 @@ public class UICategoriesSelectPanel extends UIContainer{
 
   public void updateGrid() throws Exception {
     ListAccess<Object> selectableNodeList = new ListAccessImpl<Object>(Object.class,
-                                                                       NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
+        NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
     LazyPageList<Object> objPageList = new LazyPageList<Object>(selectableNodeList, 4);
     uiPageIterator_.setPageList(objPageList);
   }

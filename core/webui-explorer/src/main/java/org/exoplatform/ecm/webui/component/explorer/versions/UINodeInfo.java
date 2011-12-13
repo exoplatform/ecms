@@ -16,9 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
-import javax.jcr.Node;
-import javax.jcr.version.Version;
-
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;

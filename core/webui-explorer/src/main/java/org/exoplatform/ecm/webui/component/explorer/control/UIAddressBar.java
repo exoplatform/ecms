@@ -88,25 +88,27 @@ public class UIAddressBar extends UIForm {
   public final static String  EXO_TARGETPATH           = "exo:targetPath";
 
   public final static String  EXO_TARGETWORKSPACE      = "exo:targetWorkspace";
-  
+
   private String              selectedViewName_;
 
   private String[]            arrView_                 = {};
-  
+
   /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
   private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support";
   final static private String FIELD_SIMPLE_SEARCH      = "simpleSearch";
-  
+
   final static private  String ROOT_SQL_QUERY  = "select * from nt:base where " +
-  		                         "(jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-  		                         " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') order by exo:title ASC";
+                               "(jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') order by exo:title ASC";
   final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' AND " +
-  		                         "( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-  		                         " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') ) order by exo:title ASC";
+                               "( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') ) order by exo:title ASC";
 
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null));
-    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SimpleSearchValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH,
+                                         FIELD_SIMPLE_SEARCH,
+                                         null).addValidator(SimpleSearchValidator.class));
   }
 
   public void setViewList(List<String> viewList) {
@@ -165,12 +167,12 @@ public class UIAddressBar extends UIForm {
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.no-node-history",
                                                 null, ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
     }
@@ -190,16 +192,16 @@ public class UIAddressBar extends UIForm {
         uiExplorer.setCurrentStatePath(nodePath) ;
         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
         UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-        if(!uiDocumentWorkspace.isRendered()) {          
+        if(!uiDocumentWorkspace.isRendered()) {
           uiDocumentWorkspace.setRendered(true);
         } else {
           uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class);
-        }                      
+        }
       } catch(Exception e) {
         UIApplication uiApp = uiAddress.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.path-not-found", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
       uiExplorer.updateAjax(event) ;
@@ -225,7 +227,7 @@ public class UIAddressBar extends UIForm {
         UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
     }
@@ -255,7 +257,7 @@ public class UIAddressBar extends UIForm {
       UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class);
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
-      Node currentNode = uiExplorer.getCurrentNode();      
+      Node currentNode = uiExplorer.getCurrentNode();
       String queryStatement = null;
       if("/".equals(currentNode.getPath())) {
         queryStatement = ROOT_SQL_QUERY;
@@ -277,10 +279,10 @@ public class UIAddressBar extends UIForm {
           (ManageableRepository)currentNode.getSession().getRepository());
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
       long startTime = System.currentTimeMillis();
-      uiSearchResult.setQuery(queryStatement, session.getWorkspace().getName(), Query.SQL, 
+      uiSearchResult.setQuery(queryStatement, session.getWorkspace().getName(), Query.SQL,
                               IdentityConstants.SYSTEM.equals(session.getUserID()), text);
       try {
-      	uiSearchResult.updateGrid();
+        uiSearchResult.updateGrid();
       } catch (InvalidQueryException invalidEx) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
         return;
@@ -290,7 +292,7 @@ public class UIAddressBar extends UIForm {
       }
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
-      
+
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);

@@ -27,9 +27,11 @@ import org.exoplatform.webui.form.UIFormInput;
 public class DrivePermissionValidator extends PermissionValidator {
 
   public void validate(UIFormInput uiInput) throws Exception {
-    if (uiInput.getValue()==null || ((String)uiInput.getValue()).trim().length()==0 ||
-        "*".equals(((String)uiInput.getValue()).trim()) ||
-        "${userId}".equals(((String)uiInput.getValue()).trim()) || "*:${groupId}".equals(((String)uiInput.getValue()).trim())) return;
+    if (uiInput.getValue() == null || ((String) uiInput.getValue()).trim().length() == 0
+        || "*".equals(((String) uiInput.getValue()).trim())
+        || "${userId}".equals(((String) uiInput.getValue()).trim())
+        || "*:${groupId}".equals(((String) uiInput.getValue()).trim()))
+      return;
     super.validate(uiInput);
   }
 }

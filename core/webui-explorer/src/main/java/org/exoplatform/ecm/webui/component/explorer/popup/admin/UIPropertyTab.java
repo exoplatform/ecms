@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
@@ -34,10 +33,10 @@ import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -109,13 +108,13 @@ public class UIPropertyTab extends UIContainer {
   public boolean isCanbeRemoved(String propertyName) throws Exception {
     Property property = getCurrentNode().getProperty(propertyName);
     if (property == null || !PermissionUtil.canSetProperty(property.getParent()) ||
-        property.getDefinition().isMandatory() || property.getDefinition().isProtected()) 
+        property.getDefinition().isMandatory() || property.getDefinition().isProtected())
       return false;
     return true;
   }
 
   public boolean isCanbeEdit(Property property) throws Exception {
-    if(!PermissionUtil.canSetProperty(property.getParent()) || 
+    if(!PermissionUtil.canSetProperty(property.getParent()) ||
        property.getDefinition().isProtected()) {
       return false;
     }
@@ -181,25 +180,25 @@ public class UIPropertyTab extends UIContainer {
       if(!PermissionUtil.canSetProperty(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       if(uiExplorer.nodeIsLocked(currentNode)) {
         Object[] arg = { currentNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg));
-        
+
         return;
       }
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-        
+
         return;
       }
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIPropertyForm uiForm = uiManager.getChild(UIPropertyForm.class);
       if(uiForm == null) {
-    	  uiForm = uiManager.addChild(UIPropertyForm.class, null, null);
-    	  uiForm.init(currentNode);
+        uiForm = uiManager.addChild(UIPropertyForm.class, null, null);
+        uiForm.init(currentNode);
       }
       uiForm.loadForm(propertyName);
       uiManager.setIsEditProperty(true);
@@ -222,7 +221,7 @@ public class UIPropertyTab extends UIContainer {
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);

@@ -50,24 +50,28 @@ public class ViewPropertiesActionComponent extends UIComponent {
       UIPropertiesManager uiPropertiesManager =
         uiJCRExplorer.createUIComponent(UIPropertiesManager.class, null, null);      
       try {
-        if (node.isNodeType(Utils.NT_UNSTRUCTURED)){
+        if (node.isNodeType(Utils.NT_UNSTRUCTURED)) {
           UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
           uiForm.init(node);
-          uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE).setOptions(uiForm.getNamespaces());
+          uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE)
+                .setOptions(uiForm.getNamespaces());
         } else {
-          if(org.exoplatform.services.cms.impl.Utils.getProperties(node) != null && org.exoplatform.services.cms.impl.Utils.getProperties(node).size() > 0) {
+          if (org.exoplatform.services.cms.impl.Utils.getProperties(node) != null
+              && org.exoplatform.services.cms.impl.Utils.getProperties(node).size() > 0) {
             UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
             uiForm.init(node);
-            uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT).setOptions(uiForm.renderProperties(node));
-            
-            if(uiJCRExplorer.nodeIsLocked(node)){
+            uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT)
+                  .setOptions(uiForm.renderProperties(node));
+
+            if (uiJCRExplorer.nodeIsLocked(node)) {
               uiPropertiesManager.setLockForm(true);
             } else {
               uiPropertiesManager.setLockForm(!PermissionUtil.canSetProperty(node));
             }
           }
         }
-      } catch (NullPointerException npe){}    
+      } catch (NullPointerException npe) {
+      } 
       
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiPropertiesManager, 700, 0);

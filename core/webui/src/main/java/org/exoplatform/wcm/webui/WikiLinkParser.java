@@ -120,7 +120,8 @@ public class WikiLinkParser {
     NavigationResource resource = new NavigationResource(SiteType.PORTAL, portalRequestContext.getPortalOwner(), wikiContext);
     nodeURL.setResource(resource);
     
-    return servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":" + servletRequest.getServerPort() + nodeURL.toString();
+    return servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":"
+        + servletRequest.getServerPort() + nodeURL.toString();
   }
 
   /**

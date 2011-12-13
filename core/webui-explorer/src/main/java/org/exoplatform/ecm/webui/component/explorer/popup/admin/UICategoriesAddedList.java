@@ -74,9 +74,9 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getListCategories() throws Exception { 
-    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
-	}
+  public List getListCategories() throws Exception {
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData());
+  }
 
   public void updateGrid(int currentPage) throws Exception {
     ListAccess<Object> categoryList = new ListAccessImpl<Object>(Object.class,

@@ -16,24 +16,20 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.ecm.webui.utils.Utils;
 
 /**
  * Created by The eXo Platform SARL
@@ -65,7 +61,8 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
     Node currentNode = getCurrentNode();
     properties = org.exoplatform.services.cms.impl.Utils.getProperties(currentNode);
     
-    if(!isEditProperty && currentNode != null && !currentNode.isNodeType(Utils.NT_UNSTRUCTURED) && (properties == null || properties.size() == 0)) {
+    if (!isEditProperty && currentNode != null && !currentNode.isNodeType(Utils.NT_UNSTRUCTURED)
+        && (properties == null || properties.size() == 0)) {
       removeChild(UIPropertyForm.class);
     }
     super.processRender(context);

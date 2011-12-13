@@ -283,11 +283,14 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
       if (value != null && !value.equals("")) {
         arrayTaxonomy = value.split(",");
         if (arrayTaxonomy.length > 0) {
-          if (arrayTaxonomy[0].startsWith("["))
-            arrayTaxonomy[0] = arrayTaxonomy[0].substring(1, arrayTaxonomy[0].length());
-          if (arrayTaxonomy[arrayTaxonomy.length - 1].endsWith("]")) {
-            arrayTaxonomy[arrayTaxonomy.length - 1] =
-              arrayTaxonomy[arrayTaxonomy.length - 1].substring(0, arrayTaxonomy[arrayTaxonomy.length - 1].length() - 1);
+          if (arrayTaxonomy[0].startsWith("[")) {
+            String taxo0 = arrayTaxonomy[0].substring(1, arrayTaxonomy[0].length());
+            arrayTaxonomy[0] = taxo0;
+          }
+          int len = arrayTaxonomy.length - 1;
+          if (arrayTaxonomy[len].endsWith("]")) {
+            String taxon = arrayTaxonomy[len].substring(0, arrayTaxonomy[len].length() - 1);
+            arrayTaxonomy[len] = taxon;
           }
         }
       }

@@ -22,7 +22,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
-import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -71,7 +70,9 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       log.info("Start " + this.getClass().getName() + ".............");
-      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig().getSystemWorkspace(), repoService_.getCurrentRepository());
+      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig()
+                                                                    .getSystemWorkspace(),
+                                                   repoService_.getCurrentRepository());
       ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager) session.getWorkspace().getNodeTypeManager();
 
       // update exo:thumbnails nodetype
@@ -94,7 +95,8 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
    * @param exoThumbnailNodeTypeValue
    * @throws RepositoryException
    */
-  private void updateSuperType(ExtendedNodeTypeManager nodeTypeManager, NodeTypeValue exoThumbnailNodeTypeValue) throws RepositoryException {
+  private void updateSuperType(ExtendedNodeTypeManager nodeTypeManager,
+                               NodeTypeValue exoThumbnailNodeTypeValue) throws RepositoryException {
     List<String> lstDeclaredSupertype = exoThumbnailNodeTypeValue.getDeclaredSupertypeNames();
 
     // remove nt:folder super type

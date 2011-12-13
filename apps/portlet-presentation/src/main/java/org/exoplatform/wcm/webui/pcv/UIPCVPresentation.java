@@ -16,24 +16,17 @@
  */
 package org.exoplatform.wcm.webui.pcv;
 
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.download.DownloadService;
-import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
@@ -42,8 +35,6 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
 
 /*
  * Created by The eXo Platform SAS

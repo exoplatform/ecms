@@ -395,12 +395,12 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
   public byte[] getStateImage(Node node,Locale locale) throws IOException,FileNotFoundException,Exception {
 
     byte[] bytes = null;
-    String fileName= "staticAndDirect";
+    StringBuffer fileName= new StringBuffer("staticAndDirect");
     String currentState = node.getProperty(CURRENT_STATE).getString();
     if (currentState.equals(PUBLISHED)) {
-      fileName+="Published";
+      fileName.append("Published");
     } else {
-      fileName+="Unpublished";
+      fileName.append("Unpublished");
     }
     //should never be in state enrolled
 
@@ -511,23 +511,23 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
       String visibility = node.getProperty(VISIBILITY).getValue().getString() ;
 
       //create the correct string
-      String result = "";
+      StringBuffer result = new StringBuffer();
       if (label.equals("")) {
         String [] valuesLocale = {name};
-        result += publicationService.getLocalizedAndSubstituteLog(locale, "PublicationService."
-            + "StaticAndDirectPublicationPlugin." + "versionPublishedWithoutLabel", valuesLocale);
+        result.append(publicationService.getLocalizedAndSubstituteLog(locale, "PublicationService."
+            + "StaticAndDirectPublicationPlugin." + "versionPublishedWithoutLabel", valuesLocale));
       } else {
         String [] valuesLocale = {name,label};
-        result += publicationService.getLocalizedAndSubstituteLog(locale, "PublicationService."
-            + "StaticAndDirectPublicationPlugin." + "versionPublishedWithLabel", valuesLocale);
+        result.append(publicationService.getLocalizedAndSubstituteLog(locale, "PublicationService."
+            + "StaticAndDirectPublicationPlugin." + "versionPublishedWithLabel", valuesLocale));
       }
 
       if (visibility.equals(PUBLIC)) {
-        result += resourceBundle.getString("PublicationService.StaticAndDirectPublicationPlugin.visibilityPublic");
+        result.append(resourceBundle.getString("PublicationService.StaticAndDirectPublicationPlugin.visibilityPublic"));
       } else {
-        result += resourceBundle.getString("PublicationService.StaticAndDirectPublicationPlugin.visibilityPrivate");
+        result.append(resourceBundle.getString("PublicationService.StaticAndDirectPublicationPlugin.visibilityPrivate"));
       }
-      return result;
+      return result.toString();
     } else {
       //should not append : unknown state
       throw new Exception("StaticAndDirectPublicationPlugin.getUserInfo : Unknown state : "
