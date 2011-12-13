@@ -588,7 +588,21 @@
 			DOM.listHideElements(listHideContainer);
 		}
 	};
-
+	
+	ECMUtils.prototype.showListTrigger = function() {
+		var listHideIcon = document.getElementById('IconListHideElement');
+		if (listHideIcon ==null) return;
+    var listHideContainer = DOM.findFirstDescendantByClass(listHideIcon, "div", "ListHideContainer");
+    if (listHideContainer ==null) return;
+    var currentClassName = listHideIcon.className;
+    if (listHideContainer.style.display != 'none') {
+      listHideIcon.className =currentClassName.replace("ShowElementIcon", "ShowElementAlways");
+      setTimeout("eXo.ecm.ECMUtils.showListTrigger()",81);
+    }else {
+      listHideIcon.className =currentClassName.replace("ShowElementAlways", "ShowElementIcon");
+    }
+	}
+	
 	ECMUtils.prototype.showDocumentInformation = function(obj, event) {
 		if(!obj) return;
 	  event = event || window.event;

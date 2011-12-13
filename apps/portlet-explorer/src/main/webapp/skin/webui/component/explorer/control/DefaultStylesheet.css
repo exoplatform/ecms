@@ -914,6 +914,21 @@
 	box-shadow: 2px 3px 2px #E1E1E1;
 }
 
+.UIJCRExplorerPortlet .ShowElementAlways {
+  background: url(DefaultSkin/icons/DownArowIcon.gif) no-repeat right center;
+  line-height:23px;
+  padding: 0px 18px 0px 8px;
+  border: 1px solid #e1e1e1;
+  -moz-border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  margin: 3px 0 0 0;
+  -moz-box-shadow: 2px 3px 2px #E1E1E1;
+  -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+  box-shadow: 2px 3px 2px #E1E1E1;
+  position: relative !important;
+  z-index: 2;
+}
+
 .UIViewBarContainer {
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */

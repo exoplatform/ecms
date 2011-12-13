@@ -127,7 +127,7 @@
   	    
   			<div class="ClearRight"><span></span></div>
   		</div>
-  		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event);">
+  		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event); eXo.ecm.ECMUtils.showListTrigger();">
   			<div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
         <div class="WhiteBG"><span></span></div>
   			<div class="ListHideContainer UIRightClickPopupMenu" id="ListHideContainer" style="display:none"></div>
@@ -144,5 +144,3 @@
     </div>
   <% uiform.end() %>
 <%}%>
-
-		  
