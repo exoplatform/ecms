@@ -347,8 +347,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     if(!hasMetadata(name)) return null;
     if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
     else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+    String ret = templateService.getTemplate(template);
     session.logout();
-    return templateService.getTemplate(template);
+    return ret;
   }  
 
   /**
@@ -372,8 +373,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     } else {
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
+    String ret = template.getPath();
     session.logout();
-    return template.getPath();
+    return ret;
   }  
 
   /**
@@ -397,8 +399,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     } else {
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
+    String ret = templateService.getTemplateRoles(template);
     session.logout();
-    return templateService.getTemplateRoles(template);
+    return ret;
   }  
 
   /**
