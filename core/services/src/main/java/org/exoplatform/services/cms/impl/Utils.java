@@ -88,6 +88,7 @@ public class Utils {
         }
       }
     }
+    rootNode.save();
     return node;
   }
 
