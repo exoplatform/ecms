@@ -56,8 +56,12 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			fieldComponent  +=		"<td class='FieldComponent'><div class='CheckboxButton'><input type='checkbox' class='CheckBox' value='checkbox1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Checkbox 1</span><div style='clear:left'></div></div></td>";
 			break;						
 		case "radio"		: 
+		  var groupId = "radiogroup" + UIFormGeneratorPortlet.prototype.getRandomInt(1,100);		  
+		  while(document.getElementsByName(groupId) > 0) {
+		    groupId = "radiogroup" + UIFormGeneratorPortlet.prototype.getRandomInt(1,100);
+		  }
 			fieldComponent  +=		"<td class='FieldLabel' value='Radio'>Radio field</td>";
-			fieldComponent  +=		"<td class='FieldComponent'><div class='RadioButton' idx='1'><input type='radio' name='group1' class='Radio' value='radio1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Radio 1</span><div style='clear:left'></div></div></td>";
+			fieldComponent  +=		"<td class='FieldComponent'><div class='RadioButton' idx='1'><input type='radio' name='"+groupId+"' class='Radio' value='radio1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Radio 1</span><div style='clear:left'></div></div></td>";
 			multivalue		= true;
 			break;			
 		case "datetime"	: 
@@ -434,10 +438,12 @@ UIFormGeneratorPortlet.prototype.addOption = function(obj) {
 				}
 			}						
 			break;
-		case "radio" :				
+		case "radio" :		
+		  var radioElement = DOMUtil.findFirstDescendantByClass(ancestorNode, 'input', 'Radio');
+		  var radioName = radioElement.getAttribute('name');		
 			var radioNode  = document.createElement("div");
 			radioNode.setAttribute("idx",index);
-			radioNode.innerHTML = '<input type="radio" name="group1" class="Radio" value="radio'+index+'" /><span style="padding : 0 5px 0 19px; display:block; line-height:12px">Radio '+index+'</span><div style="clear:left"></div>';
+			radioNode.innerHTML = '<input type="radio" name="'+radioName+'" class="Radio" value="radio'+index+'" /><span style="padding : 0 5px 0 19px; display:block; line-height:12px">Radio '+index+'</span><div style="clear:left"></div>';
 			radioNode.className = "RadioButton";					
 			if (currentIndex <= radioContainer.length ) {
 				eXo.ecm.UIFormGeneratorPortlet.insertAfter(radioContainer[currentIndex-1],radioNode);
@@ -637,6 +643,10 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 	strObject += "}";
 	return strObject;
 };
+
+UIFormGeneratorPortlet.prototype.getRandomInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 UIFormGeneratorPortlet.prototype.submitForm = function() {
 	var strJsonObject = eXo.ecm.UIFormGeneratorPortlet.getStringJsonObject();
