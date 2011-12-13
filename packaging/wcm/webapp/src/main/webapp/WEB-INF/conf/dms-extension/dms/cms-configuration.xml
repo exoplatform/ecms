@@ -582,7 +582,7 @@
 	                  <field  name="path"><string>/Trash</string></field>
                     <field name="mixinTypes">
                       <collection type="java.util.ArrayList">
-                        <!--<value><string>exo:hiddenable</string></value>-->
+                        <value><string>exo:hiddenable</string></value>
                         <value><string>exo:trashFolder</string></value>
                       </collection>
                     </field>                      
