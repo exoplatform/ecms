@@ -877,6 +877,9 @@ var SimpleView = function() {
 		var workingArea = document.getElementById('UIWorkingArea');
 		var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");	
 		var actionBar = document.getElementById('UIActionBar');	
+		var actionBaroffsetHeight = 0;
+		if(actionBar)
+		  actionBaroffsetHeight = actionBar.offsetHeight;
 		var workingContainer = document.getElementById('UIDocumentContainer');		
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");		
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
@@ -890,17 +893,17 @@ var SimpleView = function() {
 		if (resizeSideBar)
 			resizeSideBar.style.height = workingAreaHeight + 'px';
 		if (documentWorkspace)		{		
-	 		documentWorkspace.style.height = (workingAreaHeight - actionBar.offsetHeight) + 'px';	
+	 		documentWorkspace.style.height = (workingAreaHeight - actionBaroffsetHeight) + 'px';	
 		}
 	
 		if (page) {
 
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
 
-				if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight - page.offsetHeight + 'px';
+				if (view) view.style.height = workingAreaHeight - actionBaroffsetHeight - page.offsetHeight + 'px';
 			}
 		} else {
-		  	if (view) view.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';
+		  	if (view) view.style.height = workingAreaHeight - actionBaroffsetHeight + 'px';
 		}
 	};
 };

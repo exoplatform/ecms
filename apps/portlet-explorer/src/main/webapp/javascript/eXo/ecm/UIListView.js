@@ -847,7 +847,10 @@ var ListView = function() {
 		var root = document.getElementById("UIDocumentInfo");
 		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
 		var workingArea = document.getElementById('UIWorkingArea');
-		var actionBar = document.getElementById('UIActionBar');				
+		var actionBar = document.getElementById('UIActionBar');	
+		var actionBaroffsetHeight = 0;
+		if(actionBar)
+		  actionBaroffsetHeight = actionBar.offsetHeight;
 		var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");
 		var workingContainer = document.getElementById('UIDocumentContainer');								
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");
@@ -864,7 +867,7 @@ var ListView = function() {
 			resizeSizeBar.style.height = workingAreaHeight + 'px';
 		
 		if (documentWorkspace)									
-	 		documentWorkspace.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';
+	 		documentWorkspace.style.height = workingAreaHeight - actionBaroffsetHeight + 'px';
 	 	if (page) {
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
 				if (view) {
@@ -878,7 +881,7 @@ var ListView = function() {
 			}
 		} else {
 			  if (view) 
-					view.style.height = workingAreaHeight - actionBar.offsetHeight + 'px';										
+					view.style.height = workingAreaHeight - actionBaroffsetHeight + 'px';										
 		}
 		var container = document.getElementById("UITreeExplorer");
 		if (!container && uiResizableBlock) {

@@ -1077,8 +1077,11 @@ EcmContentSelector.prototype.fixHeightTrees = function() {
 	var titleBar = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleBar");
 	var uiWorkingWorkspace = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIWorkingWorkspace");
 	var actionBar = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "ActionBar");
+	var actionBaroffsetHeight = 0;
+	if(actionBar)
+	  actionBaroffsetHeight = actionBar.offsetHeight;
 	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
-	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBar.offsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
+	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 };
 
 EcmContentSelector.prototype.isShowFilter = function() {
