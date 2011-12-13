@@ -33,7 +33,7 @@ function getTheSelectedText(editor) {
 	var titleLink = "";
 	var txtSelection = editor.getSelection();
 	var selectedText = '';
-	if (CKEDITOR.env.ie && CKEDITOR.env.version < 8) {
+	if (CKEDITOR.env.ie) {
 		  txtSelection.unlock(true);
 		  selectedText = txtSelection.getNative().createRange().text;
 	} else {

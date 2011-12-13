@@ -93,13 +93,13 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 										'</tr>'+
 										'<tr>'+
 											'<td class="FieldLabel">'+
-												'<label>URL: </label>'+
+												'<label style="float: left; margin-bottom: 3px; margin-top: 3px;">URL: </label>'+
 											'</td>'+
 											'<td class="FieldComponent">'+
-												'<input type="text" id="txtUrl" />'+
+												'<input style="float: left; margin-bottom: 3px; margin-top: 3px;" type="text" id="txtUrl" />'+
 											'</td>'+
 											'<td class="FieldComponent">'+
-												'<div class="UIAction">'+
+												'<div style="float: left;" class="UIAction">'+
 													'<table align="center" class="ActionContainer">'+
 														'<tbody>'+
 															'<tr>'+
@@ -132,7 +132,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 					    			'<tbody>'+
 											'<tr>'+
 					      				'<td align="center">'+
-					        				'<div class="ActionButton LightBlueStyle" onclick="previewLink();">'+
+					        				'<div style="float: left; display: block;" class="ActionButton LightBlueStyle" onclick="previewLink();">'+
 					          					'<div class="ButtonLeft">'+
 					            					'<div class="ButtonRight">'+
 					              						'<div class="ButtonMiddle">'+
@@ -145,7 +145,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 					            					'</div>'+
 					          					'</div>'+
 					        				'</div>'+
-					        				'<div class="ActionButton LightBlueStyle" onclick="addURL();">'+
+					        				'<div style="float: left; display: block;" class="ActionButton LightBlueStyle" onclick="addURL();">'+
 					          					'<div class="ButtonLeft">'+
 					            					'<div class="ButtonRight">'+
 					              						'<div class="ButtonMiddle">'+
