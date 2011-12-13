@@ -5,9 +5,9 @@
 ]>
 <section id="sect-User_Guide-Category_Navigation">
 <!--  This document was created with Syntext Serna Free.  -->
-  <title>Category navigation</title>
+  <title>Manage Category Navigation</title>
   <para>
-  <emphasis role="bold">Category Navigation Portlet</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
+  <emphasis role="bold">Category Navigation</emphasis> portlet and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
  </para>
  <citetitle>
  <para xml:id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet"><emphasis role="bold">Access the Category Navigation portlet</emphasis></para>
@@ -52,11 +52,11 @@
       </mediaobject>
     </step>
   </procedure>
-  <formalpara>
-    <title><emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Category Navigation Portlet</emphasis></title>
+  <citetitle>
+    <para><emphasis role="bold">Configuration of Category Navigation</emphasis> </para>
+  </citetitle>
     <para>
    Administrators can edit the <emphasis role="bold">Category Navigation</emphasis> portlet as follows:</para>
-  </formalpara>
   <procedure>
     <step>
         <para>

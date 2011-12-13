@@ -5,9 +5,8 @@
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
 <!--  This document was created with Syntext Serna Free.  -->
-  <title>Create a content quickly</title>
-  <para>
-     The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.
+  <title>Manage contents with Fast Content Creator</title>
+  <para> The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.
   </para>
    <para>
          There are two modes in <emphasis role="bold">Fast Content Creator:</emphasis> <emphasis role="bold">Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
@@ -56,7 +55,7 @@
       </para>
 
   <section id="sect-User_Guide-Fast_Content_Creator-Configuration">
-    <title>Configuration of fast content creator</title>
+    <title>Configuration of Fast Content Creator</title>
   <para>
        In &PRODUCT;, the <emphasis role="bold">Fast Content Creator</emphasis> is applied in the <emphasis role="bold">Question?</emphasis> portlet with the <emphasis role="bold">Content Creator</emphasis> mode by default. Thus, in this guide, you are instructed how to configure the <emphasis role="bold">Fast Content Creator</emphasis> by editing the <emphasis role="bold">Question?</emphasis> portlet as an example.
    </para>
@@ -197,7 +196,7 @@
 
   </section>
   <section id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
-    <title>Create a new content by fast content creator</title>
+    <title>Create a new content</title>
        <procedure>
       <step>
         <para>
