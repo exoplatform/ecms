@@ -413,7 +413,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.setRepositoryName(repositoryName);
     uiExplorer.setWorkspaceName(driveData.getWorkspace());
     uiExplorer.setRootPath(homePath);
-    path = homePath.concat(path).replaceAll("/+", "/");
+    path = path.replaceAll("/+", "/");
     Preference pref = uiExplorer.getPreference();
     pref.setShowSideBar(driveData.getViewSideBar());
     pref.setShowNonDocumentType(driveData.getViewNonDocument());

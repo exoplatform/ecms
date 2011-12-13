@@ -231,6 +231,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       NavigationResource resource = new NavigationResource(Util.getUIPortal().getSelectedUserNode());
       nodeURL.setResource(resource);
       nodeURL.setQueryParameterValue("path", driveName);
+      nodeURL.setSchemeUse(true);
       
       input.get(rssUrlKey).setValue(nodeURL.toString());
     }
