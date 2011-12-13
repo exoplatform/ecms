@@ -34,13 +34,8 @@ import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.queries.QueryService;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -165,38 +160,6 @@ public class UISavedSearches extends UIComponent {
       UIECMSearch uiECMSearch = event.getSource().createUIComponent(UIECMSearch.class, null, null);
       UIContentNameSearch contentNameSearch = uiECMSearch.findFirstComponentOfType(UIContentNameSearch.class);
       String currentNodePath = uiJCRExplorer.getCurrentNode().getPath();
-      Node currentNode = uiJCRExplorer.getCurrentNode();
-      if (currentNode.isNodeType(Utils.EXO_TAXONOMY)) {
-        TaxonomyService taxonomyService = uiJCRExplorer.getApplicationComponent(TaxonomyService.class);
-        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
-        for (Node taxonomyNode : TaxonomyTrees) {
-          if (currentNode.getPath().startsWith(taxonomyNode.getPath())) {
-            ActionServiceContainer actionService = uiJCRExplorer.getApplicationComponent(ActionServiceContainer.class);
-            List<Node> listAction = actionService.getActions(taxonomyNode);
-            for (Node actionNode : listAction) {
-              if (actionNode.isNodeType(ACTION_TAXONOMY)) {
-                String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
-                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();
-                uiJCRExplorer.setSelectNode(searchWorkspace, searchPath);
-                uiJCRExplorer.setCurrentStatePath(searchPath);
-                currentNodePath = uiJCRExplorer.getCurrentNode().getPath();
-                ManageDriveService manageDriveService = uiJCRExplorer.getApplicationComponent(ManageDriveService.class);
-                List<DriveData> driveList =
-                  manageDriveService.getAllDrives();
-                for (DriveData drive : driveList) {
-                  if (searchWorkspace.equals(drive.getWorkspace())
-                      && searchPath.contains(drive.getHomePath()) && drive.getHomePath().equals("/")) {
-                    uiJCRExplorer.setDriveData(drive);
-                    break;
-                  }
-                }
-                uiJCRExplorer.updateAjax(event);
-                break;
-              }
-            }
-          }
-        }
-      }
       contentNameSearch.setLocation(currentNodePath);
       UISimpleSearch uiSimpleSearch = uiECMSearch.findFirstComponentOfType(UISimpleSearch.class);
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNodePath);

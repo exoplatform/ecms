@@ -151,6 +151,22 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   
   public abstract void sortData();
   
+  protected void removeRedundantPages(int availablePage) {
+    for (int i = 1; i < Math.min(availablePage, this.getAvailablePage()); i++) {
+      try {
+        int currentPageSize = this.getPage(i).size();
+        if (currentPageSize == 0) {
+          this.setAvailablePage((i-1)*this.getPageSize());
+          break;
+        }
+        if (currentPageSize < this.getPageSize()) {
+          this.setAvailablePage(i*this.getPageSize());
+          break;
+        }
+      } catch (Exception e) {}
+    }
+  }
+  
 //  @SuppressWarnings("unchecked")
 //  protected List<NodeLocation> filterNodes(List<Node> nodes) {
 //    if (filter == null) {

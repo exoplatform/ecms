@@ -405,6 +405,7 @@ public class UISearchResult extends UIContainer {
     public NodeFilter(List<String> categories, String keyword, List<String> documentTypes) {
       taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
       nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      linkManager = WCMCoreUtils.getService(LinkManager.class);
       rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
       categoryPathList = categories;
       this.keyword = keyword;
@@ -417,13 +418,18 @@ public class UISearchResult extends UIContainer {
             for (String categoryPath : categoryPathList) {
               int index = categoryPath.indexOf("/");
               String taxonomyName = categoryPath;
-              if (categoryPath.indexOf("/") > 0) {
+              String postFixTaxonomy = "";
+              if (index > 0) {
                 taxonomyName = categoryPath.substring(0, index);
+                postFixTaxonomy = categoryPath.substring(index + 1);
               }
               
               List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = rootTreePath + "/" + categoryPath;
-              List<Node> listCategories = taxonomyService.getCategories(node, taxonomyName);
+              String searchCategory = taxonomyService.getTaxonomyTree(taxonomyName).getPath() + 
+                                      ("".equals(postFixTaxonomy) ? "" : "/" + postFixTaxonomy);
+              Node targetNode = node.isNodeType(Utils.EXO_SYMLINK) ? 
+                                        linkManager.getTarget(node) : node;
+              List<Node> listCategories = taxonomyService.getCategories(targetNode, taxonomyName);
               for (Node category : listCategories) {
                 pathCategoriesList.add(category.getPath());
               }

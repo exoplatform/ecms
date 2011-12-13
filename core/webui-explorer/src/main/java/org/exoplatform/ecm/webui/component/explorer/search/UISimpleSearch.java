@@ -39,8 +39,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -87,6 +87,8 @@ public class UISimpleSearch extends UIForm {
   private static final String XPATH_QUERY      = "/jcr:root$0//*";
 
   private static final String ROOT_SQL_QUERY   = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
+  
+  private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') ";
 
   private static final String SQL_QUERY        = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
 
@@ -169,7 +171,8 @@ public class UISimpleSearch extends UIForm {
                  .append(" (");
       }
       for(String constraint : constraints_) {
-        statement.append(constraint);
+        if (!constraint.contains("exo:category"))
+          statement.append(constraint);
       }
       statement.append(")]");
     }
@@ -181,32 +184,47 @@ public class UISimpleSearch extends UIForm {
     StringBuilder statement = new StringBuilder(1024);
     String text = getUIStringInput(INPUT_SEARCH).getValue();
     String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
-    if(text != null && constraints_.size() == 0) {
+    if(text != null && constraints_.size() == 0) {//no constraint
       if ("/".equals(currentNode.getPath())) {
         statement.append(ROOT_SQL_QUERY);
       } else {
         statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
       }
-      statement.append("AND CONTAINS(*,'").append(escapedText.replaceAll("'", "''")).append("')");
-    } else if(constraints_.size() > 0) {
+      statement.append(LINK_REQUIREMENT).append(" OR ( CONTAINS(*,'").
+                append(escapedText.replaceAll("'", "''")).append("') ) )");
+    } else if(constraints_.size() > 0) {//constraint != null
+      //get constraint statement
+      StringBuilder tmpStatement = new StringBuilder();
+      String operator = getUIFormSelectBox(FIRST_OPERATOR).getValue();
+      for(String constraint : constraints_) {
+        if (!constraint.contains("exo:category")) {
+          tmpStatement.append(constraint);
+        }
+      }
+      String str = tmpStatement.toString().trim();
+      if (str.toLowerCase().startsWith("or")) str = str.substring("or".length());
+      if (str.toLowerCase().startsWith("and")) str = str.substring("and".length());
+      String constraintsStatement = str.length() == 0 ? str : operator + " ( " + str + " ) ";
+      //get statement
       if(text == null) {
         if ("/".equals(currentNode.getPath())) {
           statement.append(ROOT_SQL_QUERY);
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
         }
+        if (constraintsStatement.length() > 0)
+          statement.append(constraintsStatement);
       } else {
         if ("/".equals(currentNode.getPath())) {
           statement.append(ROOT_SQL_QUERY);
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
         }
-        statement.append("AND CONTAINS(*,'").append(escapedText.replaceAll("'", "''")).append("') ");
-      }
-      String operator = getUIFormSelectBox(FIRST_OPERATOR).getValue();
-      statement.append(operator).append(" ");
-      for(String constraint : constraints_) {
-        statement.append(constraint);
+        statement.append(LINK_REQUIREMENT).append("OR ( CONTAINS(*,'").
+                  append(escapedText.replaceAll("'", "''")).append("') ");
+        if (constraintsStatement.length() > 0)
+          statement.append(constraintsStatement);
+        statement.append(" ) )");
       }
     }
     return statement.toString();
@@ -285,31 +303,17 @@ public class UISimpleSearch extends UIForm {
       Preference pref = uiExplorer.getPreference();
       String queryType = pref.getQueryType();
       String statement;
-      List<String> searchCategoryPathList = uiSimpleSearch.getCategoryPathList();
+      //List<String> searchCategoryPathList = uiSimpleSearch.getCategoryPathList();
       if (queryType.equals(Preference.XPATH_QUERY)) {
         statement = uiSimpleSearch.getQueryStatement() + " order by @exo:dateCreated descending";
-        if ((searchCategoryPathList != null) && (searchCategoryPathList.size() > 0)) {
-          for (String searchCategoryPath : searchCategoryPathList) {
-            String statementReplace = statement.replaceAll("@exo:category = '" + searchCategoryPath + "'",
-                "@jcr:mixinTypes = 'mix:referenceable'");
-            statement = statementReplace;
-          }
-        }
       } else {
         statement = uiSimpleSearch.getSQLStatement() + " order by exo:dateCreated DESC";
-        if ((searchCategoryPathList != null) && (searchCategoryPathList.size() > 0)) {
-          for (String searchCategoryPath : searchCategoryPathList) {
-            String statementReplace = statement.replaceAll("exo:category = '" + searchCategoryPath + "'",
-                "jcr:mixinTypes = 'mix:referenceable'");
-            statement = statementReplace;
-          }
-        }
       }
       long startTime = System.currentTimeMillis();
       try {
         uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
                                 queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
-                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
+                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), text);
         uiSearchResult.updateGrid();
       } catch (RepositoryException reEx) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));

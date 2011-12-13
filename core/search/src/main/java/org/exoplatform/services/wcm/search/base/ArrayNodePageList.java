@@ -41,6 +41,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
   /** Constructor */
   public ArrayNodePageList(int pageSize) {
     super(pageSize);
+    removeRedundantPages(0);
   }
 
   /** Constructor */
@@ -63,6 +64,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
       }
     } catch (Exception e) {}
     setAvailablePage(dataList.size());
+    removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
   }  
   
@@ -90,6 +92,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
       }
     } catch (RepositoryException e) {}
     setAvailablePage(dataList.size());
+    removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
   }
   
