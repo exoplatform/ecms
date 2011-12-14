@@ -98,6 +98,11 @@
     text-decoration: underline;
 }
 
+.cke_show_borders ol, ul, dl {
+    padding: 0 40px;
+    margin-top: 15px;		
+}
+
 .UISiteAdminToolBar {
 	height: auto;
 	padding-right: 20px;
