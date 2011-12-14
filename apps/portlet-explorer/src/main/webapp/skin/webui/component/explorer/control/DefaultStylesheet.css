@@ -944,7 +944,7 @@
 	z-index: 1;
 }
 
-.UIJCRExplorerPortlet .ShowElementIcon:hover .WhiteBG{
+.UIJCRExplorerPortlet .ShowElementIcon:hover .WhiteBG, .UIJCRExplorerPortlet .ShowElementAlways .WhiteBG{
     background: white;
     height: 4px;
     margin-left: -8px;
@@ -954,7 +954,7 @@
     z-index: 2;
 }
 
-.IconListHideElement .MoreLabel{
+.IconListHideElement .MoreLabel, .ShowElementAlways .MoreLabel{
     color: #4F4F4F; 
     font-size: 12px; 
     line-height: 20px;
