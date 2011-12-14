@@ -99,7 +99,7 @@
       <CategoryTitle>Category Title</CategoryTitle>
       <CategoryDescription>Category Description</CategoryDescription>
       <FormCategoryModerator>Category moderator</FormCategoryModerator>
-      <CategoryModerator></CategoryModerator>
+      <CategoryModerator>Moderator</CategoryModerator>
     </label>
     <action>
       <Save>Save</Save>
@@ -198,6 +198,8 @@
       <SubcriptionTitle>Subcription Title</SubcriptionTitle>
       <SubcriptionDescription>Description</SubcriptionDescription>
       <CategoryName>Category</CategoryName>
+      <UIWCMSubscriptionRedactor>Redactor</UIWCMSubscriptionRedactor>
+      <UIWCMFormSubscriptionRedactor>Redactor</UIWCMFormSubscriptionRedactor>
     </label>
   </UISubcriptionForm>
 

@@ -101,7 +101,7 @@
       <CategoryTitle>لقب</CategoryTitle>
       <CategoryDescription>وصف</CategoryDescription>
       <FormCategoryModerator>وسيط</FormCategoryModerator>
-      <CategoryModerator></CategoryModerator>
+      <CategoryModerator>مشرف</CategoryModerator>
     </label>
     <action>
       <Save>حفظ</Save>
@@ -207,6 +207,7 @@
       <SubcriptionTitle>عنوان </SubcriptionTitle>
       <SubcriptionDescription>وصف</SubcriptionDescription>
       <CategoryName>فئة</CategoryName>
+      <UIWCMSubscriptionRedactor>محرر</UIWCMSubscriptionRedactor>
       <UIWCMFormSubscriptionRedactor>محرر</UIWCMFormSubscriptionRedactor>
     </label>
     <action>

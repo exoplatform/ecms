@@ -101,7 +101,7 @@
       <CategoryTitle>Titre</CategoryTitle>
       <CategoryDescription>Description</CategoryDescription>
       <FormCategoryModerator>Modérateur</FormCategoryModerator>
-      <CategoryModerator></CategoryModerator>
+      <CategoryModerator>Modérateur</CategoryModerator>
     </label>
     <action>
       <Save>Sauver</Save>
@@ -204,6 +204,7 @@
       <SubcriptionTitle>Titre</SubcriptionTitle>
       <SubcriptionDescription>Description</SubcriptionDescription>
       <CategoryName>Catégorie</CategoryName>
+      <UIWCMSubscriptionRedactor>Rédacteur</UIWCMSubscriptionRedactor>
       <UIWCMFormSubscriptionRedactor>Rédacteur</UIWCMFormSubscriptionRedactor>
     </label>
     <action>

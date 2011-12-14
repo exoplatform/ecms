@@ -101,7 +101,7 @@
       <CategoryTitle>タイトル</CategoryTitle>
       <CategoryDescription>説明</CategoryDescription>
       <FormCategoryModerator>モデレータ</FormCategoryModerator>
-      <CategoryModerator></CategoryModerator>
+      <CategoryModerator>減速材</CategoryModerator>
     </label>
     <action>
       <Save>保存</Save>
@@ -198,6 +198,7 @@
       <SubcriptionTitle>タイトル</SubcriptionTitle>
       <SubcriptionDescription>説明</SubcriptionDescription>
       <CategoryName>カテゴリ</CategoryName>
+      <UIWCMSubscriptionRedactor>編集者</UIWCMSubscriptionRedactor>
       <UIWCMFormSubscriptionRedactor>編集者</UIWCMFormSubscriptionRedactor>
     </label>
   </UISubcriptionForm>
