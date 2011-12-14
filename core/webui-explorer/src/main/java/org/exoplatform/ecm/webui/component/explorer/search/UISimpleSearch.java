@@ -88,7 +88,8 @@ public class UISimpleSearch extends UIForm {
 
   private static final String ROOT_SQL_QUERY   = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
   
-  private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') ";
+  private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or " + 
+                                                        "jcr:primaryType like 'exo:taxonomyLink') ";
 
   private static final String SQL_QUERY        = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
 
