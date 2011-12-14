@@ -388,6 +388,8 @@
 
 .ListContainer .RightWorkspace .MultiListContainer .ListFileContainer {
 	margin-top:6px;
+	overflow: auto;
+	height: 130px;
 }
 
 .UIWCMSearchContainer .LeftWorkspace a:hover {
