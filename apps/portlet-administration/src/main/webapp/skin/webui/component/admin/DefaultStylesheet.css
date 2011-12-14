@@ -790,7 +790,8 @@ float: left;
 }
 
 .UITaxonomyTreeWizard .WorkingArea .TaxonomyTreeMainForm .FieldComponent .FieldComponent input {
-	width: 235px;
+  width: 235px;
+  !width: 210px;
 }
 
 .UITaxonomyTreeWizard .WorkingArea .UIWizardAction .StepNavigationBar a {
