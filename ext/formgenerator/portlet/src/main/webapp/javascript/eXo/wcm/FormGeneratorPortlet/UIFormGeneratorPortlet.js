@@ -126,7 +126,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	formGenerator  +=							"</tr>";
 	formGenerator  +=							"<tr>";
 	formGenerator  +=								"<td class='FieldLabel'>Height</td>";	
-	formGenerator  +=								"<td class='FieldComponent' style='padding:0px;'>";
+	formGenerator  +=								"<td class='FieldComponent'>";
 	formGenerator  +=									"<input type='number' value='' class='InputText' style='width: 50%; float:left;' onkeyup='eXo.ecm.UIFormGeneratorPortlet.updateHeight(this);' />";
 	formGenerator  +=								"</td>";
 	formGenerator  +=								"<td class='FieldIcon'><span></span></td>";
