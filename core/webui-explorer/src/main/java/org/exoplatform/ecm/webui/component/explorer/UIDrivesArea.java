@@ -26,6 +26,8 @@ import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -37,6 +39,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UIAllItems;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -226,7 +229,7 @@ public class UIDrivesArea extends UIContainer {
       if(viewList.isEmpty()) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.no-view-found", args));
-        
+
         return;
       }
       StringBuffer viewListStr = new StringBuffer();
@@ -248,10 +251,18 @@ public class UIDrivesArea extends UIContainer {
 
       Preference pref = uiJCRExplorer.getPreference();
       pref.setShowSideBar(drive.getViewSideBar());
-      pref.setShowNonDocumentType(drive.getViewNonDocument());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
-      pref.setShowHiddenNode(drive.getShowHiddenNode());
+      HttpServletRequest request = Util.getPortalRequestContext().getRequest();
+      Cookie[] cookies = request.getCookies();
+      Cookie getCookieForUser = UIJCRExplorer.getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);
+      if (uiJCRExplorer.getChild(UIAllItems.class) == null
+          || getCookieForUser == null) {        
+        pref.setShowHiddenNode(drive.getShowHiddenNode());
+      }
+      if (getCookieForUser == null) {
+        pref.setShowNonDocumentType(drive.getViewNonDocument());        
+      }
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       uiJCRExplorer.setPreferencesSaved(true);
