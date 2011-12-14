@@ -66,7 +66,7 @@
 							
 							if (itemSummary == null) itemSummary = "";
 							if (imgSrc == null) 
-								imgSrc = "/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIPCLVDefault/background/IIlustrationImages.jpg";
+							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIContentListPresentationDefault/background/IIlustrationImages.jpg";
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
 								%>

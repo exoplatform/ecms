@@ -70,7 +70,7 @@
 							def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
 							def isShowImage = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION) && imgSrc != null;
 							if (imgSrc == null) 
-								imgSrc = "/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UICLVHotNews/background/IIlustrationImages.jpg";
+							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIContentListPresentationDefault/background/IIlustrationImages.jpg";
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
 							
