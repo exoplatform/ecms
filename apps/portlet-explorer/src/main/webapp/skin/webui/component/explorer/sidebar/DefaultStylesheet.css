@@ -212,7 +212,7 @@
 }
 
 .UIJCRExplorerPortlet .UISideBar .AdvancedSearch {
-	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SearchIcon.png') no-repeat center;
+	background: url("/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/SearchIcon.png") no-repeat scroll center center transparent;
 	width: 17px; height: 17px;
 	cursor: pointer;
 	float: right;
