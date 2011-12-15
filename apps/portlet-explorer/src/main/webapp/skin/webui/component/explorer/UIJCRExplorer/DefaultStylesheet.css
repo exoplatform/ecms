@@ -223,7 +223,7 @@
 	*/
 
 .UIJCRExplorerPortlet .RightContainer {
-  overflow: hidden;
+  margin-left: 264px;
 }
 
 .UIJCRExplorerPortlet .UIDocumentWorkspace {
@@ -1265,6 +1265,7 @@
 	padding: 10px;
 	color: #666666;
 	background: white;
+  overflow: hidden;
 }
 
 .UIJCRExplorer .UIDrivesArea .RowDrives{

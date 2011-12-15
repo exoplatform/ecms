@@ -836,15 +836,18 @@
 	ECMUtils.prototype.showHideSideBar = function(event) {
 	  var container = document.getElementById("LeftContainer");
 	  var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
 	  var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");
 	  if(container.style.display == 'none') {
 	    container.style.display = 'block';
-		resizeButton.className = "ResizeButton";
-		showSideBar = true;
+		  resizeButton.className = "ResizeButton";
+		  showSideBar = true;
+		  rightContainer.style.marginLeft = '264px';
 	  } else {
-		container.style.display = 'none';
-		resizeButton.className = "ResizeButton ShowLeftContent";
-		showSideBar = false;
+		  container.style.display = 'none';
+		  resizeButton.className = "ResizeButton ShowLeftContent";
+		  showSideBar = false;
+		  rightContainer.style.marginLeft = '0px';
 	  }
 
 	  Self.checkAvailableSpace();
