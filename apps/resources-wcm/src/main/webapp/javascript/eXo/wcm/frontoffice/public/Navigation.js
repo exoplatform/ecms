@@ -355,18 +355,17 @@ WCMNavigationPortlet.prototype.onMenuItemOut = function(e) {
  */
 WCMNavigationPortlet.prototype.loadScroll = function(e) {
   var uiNav = eXo.ecm.WCMNavigationPortlet;
-  var portalNav = document.getElementById("PortalNavigationTopContainer");
+  var portalNav = document.getElementById("navigation-generator");
   if (portalNav) {
     // Creates new ScrollManager and initializes it
-    uiNav.scrollMgr = eXo.portal.UIPortalControl.newScrollManager("PortalNavigationTopContainer");
+    uiNav.scrollMgr = eXo.portal.UIPortalControl.newScrollManager("navigation-generator");
     uiNav.scrollMgr.initFunction = uiNav.initScroll;
     // Adds the tab elements to the manager
-    var tabs = eXo.core.DOMUtil.findAncestorByClass(portalNav, "UIHorizontalTabs");
-    uiNav.scrollMgr.mainContainer = tabs;
-    uiNav.scrollMgr.arrowsContainer = eXo.core.DOMUtil.findFirstDescendantByClass(tabs, "div", "ScrollButtons");
-    uiNav.scrollMgr.loadElements("UITab");
+    uiNav.scrollMgr.mainContainer = portalNav;
+    uiNav.scrollMgr.arrowsContainer = eXo.core.DOMUtil.findFirstDescendantByClass(portalNav, "li", "ScrollButtons");
+    uiNav.scrollMgr.loadElements("UITab"); 
     // Configures the arrow buttons
-    var arrowButtons = eXo.core.DOMUtil.findDescendantsByTagName(uiNav.scrollMgr.arrowsContainer, "div");
+    var arrowButtons = eXo.core.DOMUtil.findDescendantsByTagName(uiNav.scrollMgr.arrowsContainer, "a");
     if (arrowButtons.length == 2) {
       uiNav.scrollMgr.initArrowButton(arrowButtons[0], "left", "ScrollLeftButton", "HighlightScrollLeftButton", "DisableScrollLeftButton");
       uiNav.scrollMgr.initArrowButton(arrowButtons[1], "right", "ScrollRightButton", "HighlightScrollRightButton", "DisableScrollRightButton");
@@ -429,5 +428,4 @@ WCMNavigationPortlet.prototype.getCurrentNodes = function(navigations, selectedN
 	return currentNodes;
 };
 
-if(!window.wcm) eXo.ecm = new Object();
 eXo.ecm.WCMNavigationPortlet = new WCMNavigationPortlet();
