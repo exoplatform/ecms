@@ -16,20 +16,35 @@
  */
 package org.exoplatform.ecms.upgrade.plugins;
 
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.nodetype.NodeType;
 
+import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -51,13 +66,25 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
   private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
+  private static final String NODE_TYPE_ADD_TO_FAVORITE_ACTION = "exo:addToFavoriteAction";
+  private static final String FILE_NAME_ADD_TO_FAVORITE_ACTION = "AddToFavoriteScript.groovy";
 
   private ActionServiceContainer actionServiceContainer;
   private TemplateService templateService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private OrganizationService organizationService;
+  private DMSConfiguration dmsConfiguration;
+  private RepositoryService repoService;
+  private ScriptService scriptService;
+  private ConfigurationManager configurationManager;
+  private FavoriteService favoriteService;
 
-  public FavoriteActionUpgradePlugin(ActionServiceContainer actionServiceContainer,
+  public FavoriteActionUpgradePlugin(RepositoryService repoService,
+                                     DMSConfiguration dmsConfiguration,
+                                     ScriptService scriptService,
+                                     ConfigurationManager configurationManager,
+                                     FavoriteService favoriteService,
+                                     ActionServiceContainer actionServiceContainer,
                                      TemplateService templateService,
                                      NodeHierarchyCreator nodeHierarchyCreator,
                                      OrganizationService organizationService,
@@ -69,6 +96,11 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     this.organizationService = organizationService;
     this.actionServiceContainer = actionServiceContainer;
     this.templateService = templateService;
+    this.repoService = repoService;
+    this.dmsConfiguration = dmsConfiguration;
+    this.scriptService = scriptService;
+    this.configurationManager = configurationManager;
+    this.favoriteService = favoriteService;
   }
 
   @Override
@@ -80,19 +112,50 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   public void processUpgrade(String oldVersion, String newVersion) {
     try {
       log.info("Start " + this.getClass().getName() + ".............");
-
       RequestLifeCycle.begin(PortalContainer.getInstance());
+      
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
+                                                   repoService.getCurrentRepository());
+      
+      // Register Script if necessary
+      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
+      try {
+        session.getItem(scriptPath);
+      }
+      catch (PathNotFoundException pne) {
+        StringWriter writer = new StringWriter();
+        IOUtils.copy(configurationManager.getURL("classpath:/script/AddToFavoriteScript.groovy").openStream(), writer);
+        String scriptContent = writer.toString();
+        scriptService.addScript("ecm-explorer/action/" + FILE_NAME_ADD_TO_FAVORITE_ACTION, scriptContent, sessionProvider);
+      }
+      
+      // Register Node Type exo:addToFavoriteAction if neccessary
+      ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
+      try {
+        nodeTypeManager.getNodeType(NODE_TYPE_ADD_TO_FAVORITE_ACTION);
+      } catch (NoSuchNodeTypeException e) {
+        // Register Node Type
+        nodeTypeManager.registerNodeTypes(configurationManager.getURL("classpath:/conf/portal/AddToFavoriteAction_NodeType_Definition.xml").openStream(),
+                                          ExtendedNodeTypeManager.IGNORE_IF_EXISTS,
+                                          NodeTypeDataManager.TEXT_XML);
+      }
 
       // Get all users and apply exo:addToFavoriteAction action for favorite folder
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
       List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
       for (User user : userList) {
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, user.getUserName());
         String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-        Node favoriteNode = userNode.getNode(favoritePath);
-        if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) == null)
-          applyAddToFavoriteAction(favoriteNode);
+        Node favoriteNode = null;
+        try {
+          favoriteNode = userNode.getNode(favoritePath);
+          if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) == null) {
+            applyAddToFavoriteAction(favoriteNode);
+          }
+          setFavoritesForOldItems(favoriteNode, user.getUserName());
+        }
+        catch (javax.jcr.PathNotFoundException pne) {}
       }
       log.info("End " + this.getClass().getName() + ".............");
     }
@@ -104,6 +167,35 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+  /**
+   * Set favorites for all document nodes which stay in specified folder
+   * 
+   * @param node Specified Node
+   * @param userName UserName
+   * @throws Exception
+   */
+  private void setFavoritesForOldItems(Node node, String userName) throws Exception {
+    NodeIterator iterrator = node.getNodes();
+    while (iterrator.hasNext()) {
+      Node child = (Node) iterrator.next();
+      if (isDocument(child) && !favoriteService.isFavoriter(userName, child)) {
+        favoriteService.addFavorite(child, userName);
+      }
+      setFavoritesForOldItems(child, userName);
+    }
+  }
+  
+  /**
+   * Check if node is document
+   * 
+   * @param node a Node
+   * @return true: is document; false: is not document 
+   * @throws Exception 
+   */
+  private boolean isDocument(Node node) throws Exception {
+    NodeType nodeType = node.getPrimaryNodeType();
+    return templateService.getDocumentTemplates().contains(nodeType.getName());
+  }
   /**
    * Apply AddToFavoriteAction action to favorite Node.
    * When user create new document node in favorite Node, it will be add favorite too.
