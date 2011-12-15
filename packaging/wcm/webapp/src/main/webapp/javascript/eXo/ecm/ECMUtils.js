@@ -1135,4 +1135,15 @@ ECMUtils.prototype.showInContextHelp = function(){
   }
 };
 
+ECMUtils.prototype.onDbClickOnTreeExplorer = function(){
+  if(new RegExp("MSIE 8").test(navigator.userAgent)) {
+    document.ondblclick = function() {
+      if (window.getSelection)
+        window.getSelection().removeAllRanges();
+      else if (document.selection)
+        document.selection.empty();
+    }
+  }
+};
+
 eXo.ecm.ECMUtils = new ECMUtils();

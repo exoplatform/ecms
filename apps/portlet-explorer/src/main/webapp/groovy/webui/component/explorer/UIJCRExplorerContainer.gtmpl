@@ -4,6 +4,7 @@
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.ZeroClipboard','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
+  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.onDbClickOnTreeExplorer();");
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.init('UIJCRExplorerPortlet');");
   rcontext.getJavascriptManager().addJavascript("eXo.session.itvInit();");
   
