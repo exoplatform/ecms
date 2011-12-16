@@ -43,6 +43,8 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -58,7 +60,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Add exo:addToFavoriteAction action to all favorite node of all user which have not that action yet
  *
  * Author : eXoPlatform
- *          exo@exoplatform.com
+ *          dongpd@exoplatform.com
  * Oct 4, 2011
  */
 public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
@@ -68,6 +70,9 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
   private static final String NODE_TYPE_ADD_TO_FAVORITE_ACTION = "exo:addToFavoriteAction";
   private static final String FILE_NAME_ADD_TO_FAVORITE_ACTION = "AddToFavoriteScript.groovy";
+  private static final String NT_UNSTRUCTURED = "nt:unstructured";
+  private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
+  private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
 
   private ActionServiceContainer actionServiceContainer;
   private TemplateService templateService;
@@ -119,7 +124,8 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
                                                    repoService.getCurrentRepository());
       
       // Register Script if necessary
-      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
+      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + 
+                          "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
       try {
         session.getItem(scriptPath);
       }
@@ -135,27 +141,34 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       try {
         nodeTypeManager.getNodeType(NODE_TYPE_ADD_TO_FAVORITE_ACTION);
       } catch (NoSuchNodeTypeException e) {
-        // Register Node Type
-        nodeTypeManager.registerNodeTypes(configurationManager.getURL("classpath:/conf/portal/AddToFavoriteAction_NodeType_Definition.xml").openStream(),
-                                          ExtendedNodeTypeManager.IGNORE_IF_EXISTS,
-                                          NodeTypeDataManager.TEXT_XML);
+        nodeTypeManager.registerNodeTypes(
+          configurationManager.getURL("classpath:/conf/portal/AddToFavoriteAction_NodeType_Definition.xml").openStream(),
+          ExtendedNodeTypeManager.IGNORE_IF_EXISTS,
+          NodeTypeDataManager.TEXT_XML);
       }
 
       // Get all users and apply exo:addToFavoriteAction action for favorite folder
       ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
       List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
+      Node favoriteNode = null;
       for (User user : userList) {
-        Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, user.getUserName());
+        String userName = user.getUserName();
+        Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
         String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-        Node favoriteNode = null;
+        
         try {
           favoriteNode = userNode.getNode(favoritePath);
+        }
+        catch (PathNotFoundException pne) {
+          favoriteNode = createFavoriteFolder(userName);
+        }
+        
+        if (favoriteNode != null) {
           if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) == null) {
             applyAddToFavoriteAction(favoriteNode);
           }
-          setFavoritesForOldItems(favoriteNode, user.getUserName());
+          setFavoritesForOldItems(favoriteNode, userName);
         }
-        catch (javax.jcr.PathNotFoundException pne) {}
       }
       log.info("End " + this.getClass().getName() + ".............");
     }
@@ -168,7 +181,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   }
 
   /**
-   * Set favorites for all document nodes which stay in specified folder
+   * Set favorites for all document nodes which stay in specified folder.
    * 
    * @param node Specified Node
    * @param userName UserName
@@ -186,7 +199,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   }
   
   /**
-   * Check if node is document
+   * Check if node is document.
    * 
    * @param node a Node
    * @return true: is document; false: is not document 
@@ -196,9 +209,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     NodeType nodeType = node.getPrimaryNodeType();
     return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
+  
   /**
    * Apply AddToFavoriteAction action to favorite Node.
    * When user create new document node in favorite Node, it will be add favorite too.
+   * 
+   * @param favoriteNode Favorite Node
+   * @throws Exception
    */
   private void applyAddToFavoriteAction(Node favoriteNode) throws Exception {
     Map<String,JcrInputProperty> mappings = new HashMap<String,JcrInputProperty>();
@@ -238,7 +255,44 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     // Specify affected Node Type Names
     Node actionNode = actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION);
     actionNode.addMixin("mix:affectedNodeTypes");
-    actionNode.setProperty("exo:affectedNodeTypeNames", templateService.getAllDocumentNodeTypes().toArray(new String[0]));
+    actionNode.setProperty("exo:affectedNodeTypeNames",
+                           templateService.getAllDocumentNodeTypes().toArray(new String[0])
+                           );
     actionNode.save();
+  }
+  
+  /**
+   * Create Favorite Folder.
+   * 
+   * @param userName UserName
+   * @return Favorite Node
+   * @throws Exception
+   */
+  private Node createFavoriteFolder(String userName) throws Exception {
+    Node userFavoriteNode = null;
+    try {
+      // Get default favorite path
+      Node userNode =
+        nodeHierarchyCreator.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userName);
+      String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
+  
+      // Create favorite path
+      userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
+  
+      // Add Mixin types
+      userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
+      userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
+  
+      // Add permission
+      Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
+      permissionsMap.put(userName, PermissionType.ALL);
+      ((ExtendedNode)userFavoriteNode).setPermissions(permissionsMap);
+      
+      userNode.getSession().save();
+      
+    } catch (PathNotFoundException pne) {
+      log.warn("Private Folder of User " + userName + " not found");
+    }
+    return userFavoriteNode;
   }
 }
