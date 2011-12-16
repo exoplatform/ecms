@@ -25,9 +25,11 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
 import javax.portlet.PortletPreferences;
 
 import org.apache.ws.commons.util.Base64;
@@ -45,6 +47,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -229,13 +232,13 @@ public class UITreeExplorer extends UIContainer {
   public String getEncodeCurrentPath() {
     return encodeBase64(getAncestorOfType(UIJCRExplorer.class).getCurrentPath());
   }
-  
+
   public String getEncodeExpandPath() {
     if(expandPath != null)
       return encodeBase64(expandPath);
     else return null;
   }
-  
+
   public boolean getIsExpand() {
     return isExpand;
   }
@@ -360,8 +363,8 @@ public class UITreeExplorer extends UIContainer {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     return encodeBase64(uiExplorer.getCurrentPath());
   }
-  
-  
+
+
   static public class ExpandActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource();
@@ -379,23 +382,23 @@ public class UITreeExplorer extends UIContainer {
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(ItemNotFoundException inf) {
           uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
               ApplicationMessage.WARNING)) ;
-          
+
           return ;
       } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(RepositoryException e) {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -444,32 +447,32 @@ public class UITreeExplorer extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       } catch (ItemNotFoundException inf) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       } catch (AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       } catch(RepositoryException e) {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
       if (isInTrash(item))
-        return;      
+        return;
       if (uiExplorer.getPreference().isShowSideBar()
           && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
@@ -491,12 +494,67 @@ public class UITreeExplorer extends UIContainer {
         LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
     }
+  }
+
+  /**
+   * Check the node is passed have child node or not.
+   *
+   * @param node
+   * @return
+   * @throws Exception
+   */
+  public boolean hasChildNode(Node node) throws Exception {
+    List<Node> childrenList = new ArrayList<Node>();
+    if(!node.hasNodes()) return false;
+    UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
+    Preference preferences = uiExplorer.getPreference();
+    NodeIterator iterator = node.getNodes();
+    while(iterator.hasNext()) {
+      Node tmpNode = iterator.nextNode();
+      // Not allow to show hidden and non-document nodes
+      if (!preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
+        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode))
+          childrenList.add(tmpNode);
+      }
+      // Not allow to show non-document nodes
+      else if (preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
+        if(isDocumentOrFolderType(tmpNode))
+          childrenList.add(tmpNode);
+      }
+      // Not allow to show hidden nodes
+      else if (!preferences.isShowHiddenNode() && preferences.isShowNonDocumentType()) {
+        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE))
+          childrenList.add(tmpNode);
+      }
+      // Allow to show hidden and non-document nodes
+      else {
+        childrenList.add(tmpNode);
+      }
+    }
+    if (childrenList.size() > 0)
+      return true;
+    else
+      return false;
+  }
+  /**
+   * Check the node is passed is a document/folder or not.
+   *
+   * @param node
+   * @return
+   * @throws Exception
+  */
+  private boolean isDocumentOrFolderType(Node node) throws Exception {
+    if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
+        node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
+    TemplateService templateService = getApplicationComponent(TemplateService.class);
+    NodeType nodeType = node.getPrimaryNodeType();
+    return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
 }
