@@ -255,9 +255,8 @@ public class UIDrivesArea extends UIContainer {
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       HttpServletRequest request = Util.getPortalRequestContext().getRequest();
       Cookie[] cookies = request.getCookies();
-      Cookie getCookieForUser = UIJCRExplorer.getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);
-      if (uiJCRExplorer.getChild(UIAllItems.class) == null
-          || getCookieForUser == null) {        
+      Cookie getCookieForUser = UIJCRExplorer.getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);      
+      if (uiJCRExplorer.findFirstComponentOfType(UIAllItems.class) == null || getCookieForUser == null) {        
         pref.setShowHiddenNode(drive.getShowHiddenNode());
       }
       if (getCookieForUser == null) {
