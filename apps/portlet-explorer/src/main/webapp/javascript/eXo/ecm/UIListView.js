@@ -919,6 +919,9 @@ var ListView = function() {
 	
 	
 	ListView.prototype.resizeColumn = function(obj, event) {
+		//disable text selection on browsers
+		document.onmousedown = function(){return false};   
+		document.onselectstart = function(){return false};
 		var event = event || window.event;
 		event.cancelBubble = true;
 		var previousClass = DOM.findPreviousElementByTagName(obj, "div");					
@@ -961,6 +964,10 @@ var ListView = function() {
 	}
 			
 	ListView.prototype.resizeMouseUpListView = function(event) {
+		//enable text selection on browsers
+    document.onmousedown = function(){return true};   
+    document.onselectstart = function(){return true};
+    
 		var event = event || window.event;
 		event.cancelBubble = true;		
 		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;		

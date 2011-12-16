@@ -98,7 +98,7 @@
             }
           %>
         </div>
-        <div class="LineLeft"><span></span></div>
+        <div class="LineLeft" style="cursor:default;"><span></span></div>
 <!-- Title -->
         <div class="ColumnName" style="width: 200px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
           <%
@@ -139,7 +139,7 @@
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Last User --> 
-        <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
+        <div class="ColumnLastUser Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
             if (selectedSortType.equals("LastUser")) {
               %>
@@ -329,7 +329,7 @@
           if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
           %>
             <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">$strActs
-              <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 30px;">
+              <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
                 <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>
                     <div class="IconLocked"></div>
@@ -341,36 +341,42 @@
                   %>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
 <!-- Title-->
               <div class="ColumnName" style="width: 200px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" title="$title $lockedLabel">$title</div>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
 <!-- Date created -->
-              <div class="ColumnDatetime Column" style="width: 93px;">
+              <div class="ColumnDatetime Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= datetime %>"><%= datetime %></div>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
 <!-- Author -->
-              <div class="ColumnAuthor Column" style="width: 93px;">
+              <div class="ColumnAuthor Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= author %>"><%= author %></div>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
 <!-- Last User -->
-              <div class="ColumnAuthor Column" style="width: 93px;">
+              <div class="ColumnLastUser Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= lastUser %>"><%= lastUser %></div>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
 <!-- Status-->
-              <div class="ColumnStatus Column" style="width: 93px;">
+              <div class="ColumnStatus Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
                 </div>
               </div>
+              <div class="LineLeftItem"><span></span></div>
               <div style="clear: both"><span></span></div>
             </div>
           <%

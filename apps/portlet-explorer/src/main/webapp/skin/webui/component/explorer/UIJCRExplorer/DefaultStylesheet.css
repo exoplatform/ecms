@@ -238,7 +238,7 @@
 .UIJCRExplorerPortlet .UITabPane .UIListView {
 	background: white;
 	border: 1px solid #b7b7b7;
-	min-width: 650px;
+	min-width: 660px;
 }
 
 .UIJCRExplorerPortlet .UIListView .UIListGrid {
@@ -446,6 +446,15 @@
   float: left;/* orientation=lt */
   float: right;/* orientation=rt */
   cursor: col-resize;
+  margin: 4px 0px 0px;
+  padding: 0px 2px;
+}
+
+.UIJCRExplorerPortlet .RowView .LineLeftItem {  
+  width: 3px;
+  height: 19px;
+  float: left;/* orientation=lt */
+  float: right;/* orientation=rt */  
   margin: 4px 0px 0px;
   padding: 0px 2px;
 }
