@@ -29,7 +29,8 @@
 				edittingStyle = "z-index: 5; top:20px";
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
-				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
+				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' "
+				onfocus="this.className = '$uicomponent.id $hoverClass' " onblur="this.className = '$uicomponent.id' ">
 			<%     
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="EdittingToolBarContainer" style="$edittingStyle">
@@ -139,7 +140,8 @@
 		  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage() && Utils.isShowQuickEdit()) {
 				%>
 	      <div class="$uicomponent.id" id="$uicomponent.id" 
-	      	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id' ">
+	      	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id' "
+	      	onfocus="this.className = '$uicomponent.id $hoverClass'" onblur="this.className = '$uicomponent.id' ">
   				<div class="EdittingToolBarContainer" style=" z-index: 5">
           <div class="EdittingToolBar " >
            <div class="EdittingToolBarL">

@@ -48,6 +48,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'span' ,'PopupTitle') ;
 
 	popupBar.onmousedown = this.initDND;
+	popupBar.onkeydown = this.initDND;
 	
 	if(isShow == false) {
 		this.superClass.hide(popup) ;
@@ -56,8 +57,9 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	
 	if(isResizable) {
 		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "span", "ResizeButton");
-		resizeBtn.style.display = 'block' ;
-		resizeBtn.onmousedown = this.startResizeEvt ;
+		resizeBtn.style.display = 'block';
+		resizeBtn.onmousedown = this.startResizeEvt;
+		resizeBtn.onkeydown = this.startResizeEvt;
 	}
 	
 	popup.style.visibility = "hidden" ;
@@ -200,7 +202,7 @@ WCMUIPopupWindow.prototype.startResizeEvt = function(evt) {
 //	var portalApp = document.getElementById("UIPortalApplication") ;
 	eXo.webui.WCMUIPopupWindow.popupId = eXo.core.DOMUtil.findAncestorByClass(this, "WCMUIPopupWindow").id ;
 	document.onmousemove = eXo.webui.WCMUIPopupWindow.resize;
-	document.onmouseup = eXo.webui.WCMUIPopupWindow.endResizeEvt ;
+	document.onmouseup = eXo.webui.WCMUIPopupWindow.endResizeEvt;
 }
 
 /**

@@ -19,6 +19,9 @@
 		portlet.onmousedown = function(event) {
 			eXo.ecm.ECMUtils.closeAllPopup() ;
 		}
+    portlet.onkeydown = function(event) {
+      eXo.ecm.ECMUtils.closeAllPopup() ;
+    }		
 		if(document.getElementById("UIPageDesktop")) {
 			Self.fixHeight(portletId) ;
 			var uiPageDeskTop = document.getElementById("UIPageDesktop");
@@ -108,6 +111,10 @@
 			var event = event || window.event ;
 			event.cancelBubble = true ;
 		}
+    showBlock.onkeydown = function(event) {
+      var event = event || window.event ;
+      event.cancelBubble = true ;
+    }		
 		Self.popupArray.push(showBlock);
 		showBlock.style.top = popupSelector.offsetHeight + "px";
 	};

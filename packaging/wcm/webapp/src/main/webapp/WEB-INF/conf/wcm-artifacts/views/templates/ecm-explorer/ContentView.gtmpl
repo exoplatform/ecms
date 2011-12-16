@@ -111,7 +111,8 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Date created -->
         <div class="ColumnDatetime Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
@@ -124,7 +125,8 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Author --> 
         <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
@@ -137,7 +139,8 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Last User --> 
         <div class="ColumnLastUser Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
@@ -150,7 +153,8 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
         <div class="ColumnStatus Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
@@ -163,14 +167,15 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
         <div style="clear: left"><span></span></div>
         <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
           <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
           <div class="JCRMoveAction" style="display: none;" request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>"></div>
           <div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
             <div class="UIRightClickPopupMenu" style="display: block;">
-              <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">
+              <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">
                 <%
                   for(itemContext in managersMultiItemContext) {
                     action = itemContext.getUIExtensionName();
@@ -186,7 +191,7 @@
           </div>
           <div class="GroundContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
             <div class="UIRightClickPopupMenu" style="display: block;">
-              <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">
+              <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">
                 <%
                   for(itemGroundContext in managersGroundContext) {
                     action = itemGroundContext.getUIExtensionName();

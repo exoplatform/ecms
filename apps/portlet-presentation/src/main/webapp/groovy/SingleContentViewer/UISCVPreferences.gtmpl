@@ -17,7 +17,9 @@
                   <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> ><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
-                    <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" 
+                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')"
+                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
 						<div style="position: relative;">
 	                        <div class="InContextHelpContent" >                    
 	                          <div class="InContextHelpPopup">
@@ -47,7 +49,9 @@
                   <td  class="FieldComponent AlignRight" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td class ="tdShowHelp">
-                    <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" 
+                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')"
+                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
 						<div style="position: relative;">
 							<div class="InContextHelpContent" >                    
 							  <div class="InContextHelpPopup">
@@ -97,7 +101,9 @@
                     </div>
                   </td>
                   <td class ="tdShowHelp">
-	                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" 
+	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')"
+	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
 						<div style="position: relative;">
 	                      <div class="InContextHelpContent" >                    
 	                        <div class="InContextHelpPopup">
@@ -113,7 +119,9 @@
                   <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class="FieldComponent" ><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class ="tdShowHelp">
-	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" 
+	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')"
+	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
 						<div style="position: relative;">
 	                      <div class="InContextHelpContent" >                    
 	                        <div class="InContextHelpPopup">

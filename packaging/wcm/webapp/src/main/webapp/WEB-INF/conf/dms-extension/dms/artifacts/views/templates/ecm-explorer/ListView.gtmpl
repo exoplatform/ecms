@@ -89,7 +89,8 @@
 				      <%} %>
 				    </div>
 					<!--
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
+					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 				    <div class="ColumnAuditing" style="border: none; width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
 			        <%
 			          if (selectedSortType.equals("Auditing")) {
@@ -102,7 +103,8 @@
 				      <%} %>
 				    </div>
 					-->
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
+					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 				    <div class="ColumnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (selectedSortType.equals("Versionable")) {
@@ -118,7 +120,8 @@
 			      for(String sortType : arrColumns) {
 							def arrColumn = sortType.split(";");
 			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
               <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}" onclick="<%= uicomponent.event("Sort", typeActionLink + arrColumn[0])%>">
 			       <%  
 			       if (arrColumn[0].equals(selectedSortType)) {
@@ -133,7 +136,8 @@
 			    <%
 		  	    }
 			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 		      </a>
 			    <div style="clear: left"><span></span></div>
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
@@ -147,7 +151,7 @@
 						
 						<div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
 							<div class="UIRightClickPopupMenu" style="display: block;">
-								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">									
+								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">									
 											<%
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
@@ -167,7 +171,7 @@
 						<div class="GroundContextMenu" style="position: absolute;
 											 top: 0px; left: 0px; display: none;">
 								<div class="UIRightClickPopupMenu" style="display: block;">
-									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">					
+									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">					
 										<%
 													for(itemGroundContext in managersGroundContext) {
 													action = itemGroundContext.getUIExtensionName();

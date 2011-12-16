@@ -14,7 +14,8 @@ int numberUploadFile = uicomponent.getNumberUploadFile();
 	          if(field.isRendered()) {
 	          if(field.getName().indexOf("name") >= 0) {
 	          %>
-	          <tr onmouseover="this.style.background='#E7F3FF'" onmouseout="this.style.background='transparent'">
+	          <tr onmouseover="this.style.background='#E7F3FF'" onmouseout="this.style.background='transparent'" 
+	          onfocus="this.style.background='#E7F3FF'" onblur="this.style.background='transparent'">
               <td><table>	            
 	          <%
 	          } 

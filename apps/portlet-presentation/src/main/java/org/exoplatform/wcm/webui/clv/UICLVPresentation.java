@@ -722,7 +722,8 @@ public class UICLVPresentation extends UIContainer {
     String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
-        + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "' \">");
+        + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "\" onfocus=\"this.className  = '" + cssClass + " "
+        + hoverClass + "' \" onblur=\"this.className = '" + cssClass + "' \">");
     if (Utils.isShowQuickEdit()) {
       sb.append("  <div class=\"EdittingContent\" style=\" z-index: 1\">");
       sb.append("    <div class=\"EdittingToolBar \" >");

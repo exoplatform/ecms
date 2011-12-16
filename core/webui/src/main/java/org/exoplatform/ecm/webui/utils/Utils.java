@@ -739,6 +739,8 @@ public class Utils {
     sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
        append("', '").append(editBlockEditorID).append("');\"");
     sb.append("onmouseout=\"this.className='").append(cssClass).
+       append("';\" onblur=\"this.className='").append(cssClass).
+       append("';\" onfocus=\"this.className='").append(cssClass).append("Hover").
        append("';\" onmouseover=\"this.className='").
        append(cssClass).append("Hover';\">").
        append(currentValue).

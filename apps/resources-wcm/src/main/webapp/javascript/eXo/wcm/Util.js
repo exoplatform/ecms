@@ -179,7 +179,8 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 	}
 	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupTitle') ;
 
-	popupBar.onmousedown = this.initDND ;
+	popupBar.onmousedown = this.initDND;
+	popupBar.onkeydown = this.initDND;
 	
 	if(isShow == false) {
 		this.superClass.hide(popup) ;
@@ -188,9 +189,10 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 	
 	if(isResizable) {
 		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "div", "ResizeButton");
-		resizeBtn.style.display = 'block' ;
-		resizeBtn.onmousedown = this.startResizeEvt ;
-		portalApp.onmouseup = this.endResizeEvt ;
+		resizeBtn.style.display = 'block';
+		resizeBtn.onmousedown = this.startResizeEvt;
+		resizeBtn.onkeydown = this.startResizeEvt;
+		portalApp.onmouseup = this.endResizeEvt;
 	}
 	
 	popup.style.visibility = "hidden" ;
@@ -449,8 +451,25 @@ function showPopupMenu(obj) {
 				objParent.className = 'TBItem';
 				mnuItemContainer.onmouseover = null;
 				mnuItemContainer.onmouseout = null;
+        mnuItemContainer.onfocus = null;
+        mnuItemContainer.onblur = null;				
 			},1*10);
 		}
+		
+    mnuItemContainer.onblur = function(){
+      if(eXo.core.Browser.browserType == 'ie')  {
+       if(uiNavi) uiNavi.style.position = "relative";
+       if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "relative";
+      }
+      obj.Timeout = setTimeout(function() {
+        mnuItemContainer.style.display = 'none';
+        objParent.className = 'TBItem';
+        mnuItemContainer.onmouseover = null;
+        mnuItemContainer.onmouseout = null;
+        mnuItemContainer.onfocus = null;
+        mnuItemContainer.onblur = null;     
+      },1*10);
+    }		
 
 		mnuItemContainer.onmouseover = function() {
 			objParent.className = 'TBItemHover';
@@ -461,7 +480,19 @@ function showPopupMenu(obj) {
 			if(obj.Timeout) clearTimeout(obj.Timeout);
 			obj.Timeout = null;
 		}
-		obj.onmouseout = mnuItemContainer.onmouseout;	
+		
+    mnuItemContainer.onfocus = function() {
+      objParent.className = 'TBItemHover';
+      if(eXo.core.Browser.browserType == 'ie')  {
+        if(uiNavi) uiNavi.style.position = "static";
+        if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
+      }
+      if(obj.Timeout) clearTimeout(obj.Timeout);
+      obj.Timeout = null;
+    }
+    		
+		obj.onmouseout = mnuItemContainer.onmouseout;
+		obj.onblur = mnuItemContainer.onblur;
 	}
 }		
 
@@ -481,16 +512,36 @@ function showPopupSubMenu(obj) {
 				objParent.className = 'MenuItem ArrowIcon';
 				subMenuItemContainer.onmouseover = null;
 				subMenuItemContainer.onmouseout = null;
+        subMenuItemContainer.onfocus = null;
+        subMenuItemContainer.onblur = null;
 			}, 1*10);
 		}
+		
+    subMenuItemContainer.onblur = function() {
+      objParent.Timeout = setTimeout(function() {
+        subMenuItemContainer.style.display = 'none';
+        objParent.className = 'MenuItem ArrowIcon';
+        subMenuItemContainer.onmouseover = null;
+        subMenuItemContainer.onmouseout = null;
+        subMenuItemContainer.onfocus = null;
+        subMenuItemContainer.onblur = null;
+      }, 1*10);
+    }		
 		
 		subMenuItemContainer.onmouseover = function() {
 			objParent.className = 'MenuItemHover ArrowIcon';
 			if(objParent.Timeout) clearTimeout(objParent.Timeout);
 			objParent.Timeout =  null;
 		}
+		
+    subMenuItemContainer.onfocus = function() {
+      objParent.className = 'MenuItemHover ArrowIcon';
+      if(objParent.Timeout) clearTimeout(objParent.Timeout);
+      objParent.Timeout =  null;
+    }		
 
 		obj.onmouseout = subMenuItemContainer.onmouseout;
+		obj.onblur = subMenuItemContainer.onblur;
 		subMenuItemContainer.style.width = subMenuItemContainer.offsetWidth - parseInt(DOMUtil.getStyle(subMenuItemContainer, "borderLeftWidth")) - parseInt(DOMUtil.getStyle(subMenuItemContainer, "borderRightWidth")) + 'px';
 		subMenuItemContainer.style.left = objParent.offsetLeft + objParent.offsetWidth + 'px';
 		subMenuItemContainer.style.top =  eXo.core.Browser.findPosYInContainer(objParent,subMenuItemContainer.offsetParent) + 'px';

@@ -28,6 +28,7 @@ var SimpleView = function() {
 		if (!actionArea) return; 
 		Self.allItems = DOM.findDescendantsByClass(actionArea, "div", "ActionIconBox");
 		var mousedown = null;
+		var keydown = null;
 		for (var i in Self.allItems) {
 			if (Array.prototype[i]) continue;
 			var item = Self.allItems[i];
@@ -38,18 +39,30 @@ var SimpleView = function() {
 				item.onmousedown = null;
 				item.removeAttribute("onmousedown");
 			}
+      if (item.getAttribute("onkeydown")) {
+        keydown = Self.allItems[i].getAttributeNode("onkeydown").value;
+        item.setAttribute("keydown", keydown);
+        item.onmousedown = null;
+        item.removeAttribute("onkeydown");
+      }			
 //			if (enableDragAndDrop == "true") {			
 				item.onmouseover = Self.mouseOverItem;
+				item.onfocus = Self.mouseOverItem;
 				item.onmousedown = Self.mouseDownItem;
+				item.onkeydown = Self.mouseDownItem;
 				item.onmouseup = Self.mouseUpItem;
 				item.onmouseout = Self.mouseOutItem;
+				item.onblur = Self.mouseOutItem;
 //			}
 			//eXo.core.Browser.setOpacity(item, 85);
 		}
 		actionArea.onmousedown = Self.mouseDownGround;
+		actionArea.onkeydown = Self.mouseDownGround;
 		actionArea.onmouseup = Self.mouseUpGround;
 		actionArea.onmouseover = Self.mouseOverGround;
 		actionArea.onmouseout = Self.mouseOutGround;
+    actionArea.onfocus = Self.mouseOverGround;
+    actionArea.onblur = Self.mouseOutGround;		
 		
 
 		//remove context menu
@@ -68,10 +81,17 @@ var SimpleView = function() {
 							mousedown = element.getAttributeNode("onmousedown").value;
 							element.setAttribute("mousedown", mousedown);
 						}
+            if (element.getAttribute("onkeydown") && !element.getAttribute("keydown")) {
+              keydown = element.getAttributeNode("onkeydown").value;
+              element.setAttribute("keydown", keydown);
+            }						
 						element.onmousedown = Self.mouseDownTree;
+						element.onkeydown = Self.mouseDownTree;
 						element.onmouseup = Self.mouseUpTree;
 						element.onmouseover = Self.mouseOverTree;
 						element.onmouseout = Self.mouseOutTree;
+            element.onfocus = Self.mouseOverTree;
+            element.onblur = Self.mouseOutTree;						
 					}
 			);
 		}
@@ -732,6 +752,7 @@ var SimpleView = function() {
 			
 		contextMenu.onmouseup = Self.hideContextMenu;
 		document.body.onmousedown = Self.hideContextMenu;
+		document.body.onkeydown = Self.hideContextMenu;
 	};
 	
 	// working with ground context menu
@@ -771,6 +792,7 @@ var SimpleView = function() {
 	
 		contextMenu.onmouseup = Self.hideContextMenu;
 		document.body.onmousedown = Self.hideContextMenu;
+		document.body.onkeydown = Self.hideContextMenu;
 	};
 	
 	// hide context menu

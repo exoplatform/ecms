@@ -240,6 +240,7 @@ function refresh(onload) {
 	
 	/* Set slider attributes */
 	slider_div.onmousedown = function () { dragstart(this); };
+	slider_div.onkeydown = function () { dragstart(this); };
 	slider_div.style.cursor = conf_slider_cursor;
 
 	/* Cache EVERYTHING! */

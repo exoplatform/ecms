@@ -8,7 +8,9 @@
 		def rcontext = _ctx.getRequestContext() ;
 %>
 <div class="$uicomponent.id " id="$uicomponent.id" 
-	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'">
+	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'"
+	onfocus="this.className = '$uicomponent.id $hoverClass'" onblur="this.className = '$uicomponent.id'"
+	>
 	<%
 	
 		String portletId = Utils.getRealPortletId(rcontext);

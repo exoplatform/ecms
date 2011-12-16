@@ -210,6 +210,8 @@ UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
     var item = topItems[i];
     item.onmouseover = eXo.portal.UIWCMNavigation.setTabStyleOnMouseOver ;
     item.onmouseout = eXo.portal.UIWCMNavigation.setTabStyleOnMouseOut ;
+    item.onfocus = eXo.portal.UIWCMNavigation.setTabStyleOnMouseOver ;
+    item.onblur = eXo.portal.UIWCMNavigation.setTabStyleOnMouseOut ;    
     if (!item.getAttribute('hidesubmenu')) {
       item.onmousemove = eXo.portal.UIWCMNavigation.tabOnMouseMove ;
     }
@@ -233,6 +235,8 @@ UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
     var menuItem = menuItems[i];
     menuItem.onmouseover = eXo.portal.UIWCMNavigation.onMenuItemOver;
     menuItem.onmouseout = eXo.portal.UIWCMNavigation.onMenuItemOut;
+    menuItem.onfocus = eXo.portal.UIWCMNavigation.onMenuItemOver;
+    menuItem.onblur = eXo.portal.UIWCMNavigation.onMenuItemOut;    
 
     // Set an id to each container for future reference
     var cont = DOMUtil.findAncestorByClass(menuItem, this.containerStyleClass) ;
