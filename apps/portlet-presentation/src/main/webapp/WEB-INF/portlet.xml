@@ -573,34 +573,6 @@
     </portlet-preferences>
 	</portlet>
 	
-	<!--portlet>
-		<description xml:lang="EN">Wiki Mode</description>
-		<portlet-name>wikipresentation</portlet-name>
-		<display-name xml:lang="EN">Wiki mode portlet</display-name>
-		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
-		
-		<init-param>
-			<name>webui.configuration</name>
-			<value>/WEB-INF/conf/portlet/WikiPresentation/webui/configuration.xml</value>
-		</init-param>
-		
-		<expiration-cache>0</expiration-cache>
-		
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>help</portlet-mode>
-			<portlet-mode>edit</portlet-mode>
-		</supports>
-		<supported-locale>en</supported-locale>
-		<resource-bundle>locale.portlet.WikiPresentation.WikiPresentation</resource-bundle>
-		
-		<portlet-info>
-			<title>Wiki Presentation</title>
-			<short-title>Wiki Presentation</short-title>
-			<keywords>portlet, content</keywords>
-		</portlet-info>
-	</portlet-->
-	
 	<portlet>
 	
 		<description xml:lang="EN">Category Navigation</description>
