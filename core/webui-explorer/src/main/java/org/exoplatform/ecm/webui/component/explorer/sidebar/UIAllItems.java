@@ -17,13 +17,15 @@
 package org.exoplatform.ecm.webui.component.explorer.sidebar;
 
 import java.util.Set;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAllItemsPreferenceForm;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -83,17 +85,21 @@ public class UIAllItems extends UIComponent {
       UIAllItems UIAllItems = event.getSource();
       UIJCRExplorer uiExplorer = UIAllItems.getAncestorOfType(UIJCRExplorer.class);
       Set<String> allItemFilterMap = uiExplorer.getAllItemFilterMap();
-
+      HttpServletResponse response = Util.getPortalRequestContext().getResponse();
+      String userId = Util.getPortalRequestContext().getRemoteUser();
+      String cookieName = Preference.PREFERENCE_SHOW_HIDDEN_NODE + userId;      
       String filterType = event.getRequestContext().getRequestParameter(OBJECTID);
       if (allItemFilterMap.contains(filterType)) {
         allItemFilterMap.remove(filterType);
         if (filterType.equals(HIDDEN)) {
           uiExplorer.getPreference().setShowHiddenNode(false);
+          response.addCookie(new Cookie(cookieName, "false"));
         }
       } else {
         allItemFilterMap.add(filterType);
         if (filterType.equals(HIDDEN)) {
           uiExplorer.getPreference().setShowHiddenNode(true);
+          response.addCookie(new Cookie(cookieName, "true"));
         }
       }
 
