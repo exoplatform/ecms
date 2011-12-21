@@ -35,7 +35,7 @@ The registry helps you manage the namespaces used in the system.</para>
               <imagedata fileref="images/namespaceregistrationform.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/namespaceregistrationform.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/namespaceregistrationform.png" format="PNG" align="center" width="100mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -77,7 +77,7 @@ The registry helps you manage the namespaces used in the system.</para>
         <para>
      Click <inlinemediaobject>
           <mediaobject>
-            <imageobject fileref="Glass_icon.png" format="PNG"/>
+            <imageobject fileref="Glass_icon.png" format="PNG" scalefit="1" width="4mm"/>
           </mediaobject>
      </inlinemediaobject>
                 that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
@@ -87,7 +87,7 @@ The registry helps you manage the namespaces used in the system.</para>
               <imagedata fileref="images/viewnodetypeinformation.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/viewnodetypeinformation.png" format="PNG" align="center" width="150mm"/>
+              <imagedata fileref="images/viewnodetypeinformation.png" format="PNG" align="center" width="100mm" scalefit="1"/>
            </imageobject>
         </mediaobject>
       </step>
@@ -110,7 +110,7 @@ The registry helps you manage the namespaces used in the system.</para>
                 <imagedata fileref="images/addnodetype.png" format="PNG" align="center"/>
              </imageobject>
              <imageobject role="fo">
-                <imagedata fileref="images/addnodetype.png" format="PNG" align="center" width="150mm" />
+                <imagedata fileref="images/addnodetype.png" format="PNG" align="center" width="100mm" scalefit="1" />
              </imageobject>
           </mediaobject>
       </step>
@@ -200,7 +200,7 @@ The registry helps you manage the namespaces used in the system.</para>
             <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center"/>
          </imageobject>
          <imageobject role="fo">
-            <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center" width="130mm" />
+            <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center" width="100mm" scalefit="1" />
          </imageobject>
       </mediaobject>
       </step>
@@ -243,7 +243,7 @@ The registry helps you manage the namespaces used in the system.</para>
               <imagedata fileref="images/importnodetype.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/importnodetype.png" format="PNG" align="center" width="130mm" />
+              <imagedata fileref="images/importnodetype.png" format="PNG" align="center" width="100mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -266,7 +266,7 @@ The registry helps you manage the namespaces used in the system.</para>
       If you want to upload another file, click   
 <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+              <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject> to delete the file which has just been uploaded, then upload other files.
      </para>

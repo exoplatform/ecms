@@ -35,7 +35,7 @@
               <imagedata fileref="images/addqueryform.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/addqueryform.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/addqueryform.png" format="PNG" align="center" width="100mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -79,7 +79,7 @@
      Select permissions for a group that can use this query by clicking 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
+              <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>green plus</phrase>
@@ -102,7 +102,7 @@
      Click
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>pencil</phrase>
@@ -131,7 +131,7 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>trash can</phrase>
@@ -177,7 +177,7 @@
               <imagedata fileref="images/ecmaddeditscriptsform.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/ecmaddeditscriptsform.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/ecmaddeditscriptsform.png" format="PNG" align="center" width="100mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -218,7 +218,7 @@
      In the <emphasis role="bold">ECM Scripts</emphasis> tab, click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>pencil</phrase>
@@ -227,8 +227,11 @@
       corresponding to the script that you want to edit. The <emphasis role="bold">Add/Edit script</emphasis> form will appear.
     </para>
         <mediaobject>
-          <imageobject>
+          <imageobject role="html">
             <imagedata  align="center" fileref="images/addeditscriptsform.png" format="PNG"/>
+          </imageobject>
+            <imageobject role="fo">
+            <imagedata  align="center" fileref="images/addeditscriptsform.png" format="PNG" scalefit="1" width="100mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -251,7 +254,7 @@
         <para>
      In the <emphasis role="bold">ECM Scripts</emphasis> tab, click <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>trash can</phrase>
@@ -281,7 +284,7 @@
               <imagedata fileref="images/createactiontypetab.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/createactiontypetab.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/createactiontypetab.png" format="PNG" align="center" width="150mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -294,7 +297,7 @@
               <imagedata fileref="images/createactiontypeform.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/createactiontypeform.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/createactiontypeform.png" format="PNG" align="center" width="100mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -322,7 +325,7 @@
         <para>
      Click <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>plus</phrase>
@@ -332,7 +335,7 @@
        <para> Click
             <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>trash can</phrase>
@@ -366,7 +369,7 @@
               <imagedata fileref="images/manageunlockstab.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/manageunlockstab.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/manageunlockstab.png" format="PNG" align="center" width="150mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -375,7 +378,7 @@
      In the <emphasis role="bold">Locked Node</emphasis> tab on the right pane, administrators can unlock nodes by clicking 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/unlockicon.png" format="PNG" width="8mm"/>
+              <imagedata fileref="images/unlockicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>open lock</phrase>
@@ -392,7 +395,7 @@
      Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Groups Or Users</emphasis> column. However, administrators can also click
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>plus</phrase>
@@ -404,7 +407,7 @@
               <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" scalefit="1" />
            </imageobject>
         </mediaobject>
       </step>
@@ -413,7 +416,7 @@
      In case you, as an administrator, want to remove the "Unlock" permission of groups, click
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>trash can</phrase>

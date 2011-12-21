@@ -40,7 +40,7 @@
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -78,7 +78,7 @@
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/previewicon2.png" format="PNG" width="3mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -90,7 +90,7 @@
           Or click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/folder-icon.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/folder-icon.png" format="PNG" width="3mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>preview</phrase>
@@ -114,7 +114,7 @@
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/savedsearchicon.png" format="PNG" width="12mm"/>
+              <imagedata fileref="images/savedsearchicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>"Saved Search"</phrase>
@@ -127,7 +127,7 @@
             <imagedata align="center" fileref="images/savedsearches.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata align="center" fileref="images/savedsearches.png" format="PNG" width="65mm"/>
+            <imagedata align="center" fileref="images/savedsearches.png" format="PNG" width="50mm" scalefit="1"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -136,7 +136,7 @@
           Then click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="3mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -301,46 +301,74 @@
               </thead>
               <tbody>
                 <row>
-                  <entry>1</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/1.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>You can add more than one constraint with either of two operators (AND and OR).</entry>
                 </row>
                 <row>
-                  <entry>2</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/2.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by a property with specific values.
                   </entry>
                 </row>
                 <row>
-                  <entry>3</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/3.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by a property that contains one of the
                     word in the specific string.
                   </entry>
                 </row>
                 <row>
-                  <entry>4</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/4.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by a property that does not contain the
                     specific string.
                   </entry>
                 </row>
                 <row>
-                  <entry>5</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/5.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by a duration of date (created, modified).
                   </entry>
                 </row>
                 <row>
-                  <entry>6</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/6.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by a document type, including File,
                     Article, Podcast, Sample node, File Plan, Kofax).
                   </entry>
                 </row>
                 <row>
-                  <entry>7</entry>
+                  <entry><inlinemediaobject>
+                      <imageobject>
+                        <imagedata fileref="images/7.png" format="PNG" width="4mm" scalefit="1"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
                   <entry>Add a constraint to search by categories.</entry>
                 </row>
                 <row>
                   <entry>
                     <inlinemediaobject>
                       <imageobject>
-                        <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="9mm"/>
+                        <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="4mm" scalefit="1"/>
                       </imageobject>
                     </inlinemediaobject>
                   </entry>
@@ -350,7 +378,7 @@
                   <entry>
                     <inlinemediaobject>
                       <imageobject>
-                        <imagedata fileref="images/addcategoryicon.png" format="PNG" width="6mm"/>
+                        <imagedata fileref="images/addcategoryicon.png" format="PNG" width="4mm" scalefit="1"/>
                       </imageobject>
                     </inlinemediaobject>
                   </entry>
@@ -413,14 +441,14 @@
               <imagedata align="center" fileref="images/SQLsearchform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata align="center" fileref="images/SQLsearchform.png" format="PNG" width="150mm"/>
+              <imagedata align="center" fileref="images/SQLsearchform.png" format="PNG" width="120mm" scalefit="1"/>
             </imageobject>
           </mediaobject>
           <para>
             Remove unnecessary constraints with the
             <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata fileref="images/trashicon.png" format="PNG" width="3mm" scalefit="1"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -462,7 +490,7 @@
                 Enter the property you want to locate or click
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="9mm"/>
+                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="4mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                     <phrase>"Add property"</phrase>
@@ -475,7 +503,7 @@
                   <imagedata align="center" fileref="images/addpropertyiconform.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/addpropertyiconform.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/addpropertyiconform.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -486,7 +514,7 @@
                   <imagedata align="center" fileref="images/propertieslist.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/propertieslist.png" format="PNG" width="129mm"/>
+                  <imagedata align="center" fileref="images/propertieslist.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>
@@ -505,7 +533,7 @@
                 field or click the
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
+                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG" scalefit="1" width="4mm"/>
                   </imageobject>
                   <textobject>
                     <phrase>Find exactly</phrase>
@@ -518,7 +546,7 @@
                   <imagedata align="center" fileref="images/containexactlyform.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/containexactlyform.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/containexactlyform.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -531,7 +559,7 @@
                   <imagedata align="center" fileref="images/filterform.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/filterform.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/filterform.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -550,7 +578,7 @@
                     field and click the
                     <inlinemediaobject>
                       <imageobject>
-                        <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="9mm"/>
+                        <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="4mm" scalefit="1"/>
                       </imageobject>
                       <textobject>
                         <phrase>corresponding</phrase>
@@ -567,7 +595,7 @@
                   <imagedata align="center" fileref="images/containexactlypopulated.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/containexactlypopulated.png" format="PNG" width="141mm"/>
+                  <imagedata align="center" fileref="images/containexactlypopulated.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>
@@ -592,7 +620,7 @@
                 field or click
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
+                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG" scalefit="1" width="4mm"/>
                   </imageobject>
                   <textobject>
                     <phrase>Add Property</phrase>
@@ -646,7 +674,7 @@
                   <imagedata align="center" fileref="images/datesearchcondition.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/datesearchcondition.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/datesearchcondition.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -686,7 +714,7 @@
                 Enter the document type you want to search for or click
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="9mm"/>
+                    <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="4mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                     <phrase>"Add node type"</phrase>
@@ -699,7 +727,7 @@
                   <imagedata align="center" fileref="images/documenttypelist.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/documenttypelist.png" format="PNG" width="103mm"/>
+                  <imagedata align="center" fileref="images/documenttypelist.png" format="PNG" width="80mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>
@@ -717,7 +745,7 @@
                   <imagedata align="center" fileref="images/documenttypepopulated.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/documenttypepopulated.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/documenttypepopulated.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>
@@ -738,7 +766,7 @@
                 Enter the category you want to search for or click
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/addcategoryicon.png" format="PNG" width="6mm"/>
+                    <imagedata fileref="images/addcategoryicon.png" format="PNG" width="4mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                     <phrase>"Add category"</phrase>
@@ -751,7 +779,7 @@
                   <imagedata align="center" fileref="images/categorylist.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata align="center" fileref="images/categorylist.png" format="PNG" width="150mm"/>
+                  <imagedata align="center" fileref="images/categorylist.png" format="PNG" width="100mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>
@@ -760,7 +788,7 @@
                 Click
                 <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                    <imagedata fileref="images/greentick.png" format="PNG" width="3mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                     <phrase>green tick</phrase>
@@ -848,7 +876,7 @@
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/searchsprocket.png" format="PNG" width="7mm"/>
+                <imagedata fileref="images/searchsprocket.png" format="PNG" width="3mm" scalefit="1"/>
               </imageobject>
               <textobject>
                 <phrase>sprocket</phrase>
@@ -864,7 +892,7 @@
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="3mm" scalefit="1"/>
               </imageobject>
               <textobject>
                 <phrase>pencil</phrase>
@@ -880,7 +908,7 @@
             Click the
             <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata fileref="images/trashicon.png" format="PNG" width="3mm" scalefit="1"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -903,7 +931,7 @@
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/savedsearchicon.png" format="PNG" width="12mm"/>
+              <imagedata fileref="images/savedsearchicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>

@@ -15,7 +15,7 @@
                     <imagedata align="center" fileref="images/content_by_query.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata align="center" fileref="images/content_by_query.png" format="PNG" width="210mm"/>
+                    <imagedata align="center" fileref="images/content_by_query.png" format="PNG" width="150mm" scalefit="1"/>
                 </imageobject>
             </mediaobject>
        </step>
@@ -24,7 +24,7 @@
                 Edit the <emphasis role="bold">Contents By Query</emphasis> portlet by hovering your cursor over it, then click
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                        <imagedata fileref="images/edit_icon1.png" format="PNG" scalefit="1" width="4mm"/>
                     </imageobject>
                     <textobject>
                         <phrase>pencil</phrase>
@@ -63,7 +63,7 @@
             <para>Click
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="images/Finish_icon.png" format="PNG"/>
+                        <imagedata fileref="images/Finish_icon.png" format="PNG" scalefit="1" width="3mm"/>
                     </imageobject>
                     <textobject>
                         <phrase>pencil</phrase>

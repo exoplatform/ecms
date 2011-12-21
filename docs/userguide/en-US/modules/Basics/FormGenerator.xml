@@ -79,7 +79,7 @@
     Click 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/componentuparrow.png" format="PNG" width="5mm"/>
+            <imagedata fileref="images/componentuparrow.png" format="PNG" width="3mm" scalefit="1"/>
           </imageobject>
           <textobject>
             <phrase>up arrow</phrase>
@@ -88,7 +88,7 @@
      corresponding to the component to move this component up; or click 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/componentdownarrow.png" format="PNG" width="5mm"/>
+            <imagedata fileref="images/componentdownarrow.png" format="PNG" width="3mm" scalefit="1"/>
           </imageobject>
           <textobject>
             <phrase>down arrow</phrase>
@@ -102,7 +102,7 @@
     Click 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
+            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="4mm" scalefit="1"/>
           </imageobject>
           <textobject>
              <phrase>pencil</phrase>
@@ -114,7 +114,7 @@
           <imagedata  align="center"  fileref="images/editcomponentpropertiesform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata   align="center" fileref="images/editcomponentpropertiesform.png" format="PNG" width="150mm"/>
+          <imagedata   align="center" fileref="images/editcomponentpropertiesform.png" format="PNG" width="100mm"/>
         </imageobject>
       </mediaobject>
         <para>
@@ -140,7 +140,7 @@
              <row>
              <entry> <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="39mm"/>
+                    <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="30mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                      <phrase>[ Rules: ]</phrase>
@@ -149,7 +149,7 @@
                 <entry>
                 If the checkbox is marked, the asterisk (<inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/redstarasterix.png" format="PNG" width="4mm"/>
+                    <imagedata fileref="images/redstarasterix.png" format="PNG" width="4mm" scalefit="1"/>
                   </imageobject>
                   <textobject>
                      <phrase>red asterix</phrase>
@@ -180,7 +180,7 @@
           <imagedata  align="center"  fileref="images/formgenerator.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata   align="center" fileref="images/formgenerator.png" format="PNG" width="150mm"/>
+          <imagedata   align="center" fileref="images/formgenerator.png" format="PNG" width="100mm"/>
         </imageobject>
       </mediaobject>
 	  	  <itemizedlist>
@@ -189,7 +189,7 @@
     To delete the component, click  
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            <imagedata fileref="images/trashicon.png" format="PNG" width="3mm" scalefit="1"/>
           </imageobject>
           <textobject>
              <phrase>trash can</phrase>
@@ -201,7 +201,7 @@
       <para>
     Click <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
+            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="3mm" scalefit="1"/>
           </imageobject>
           <textobject>
              <phrase>pencil</phrase>

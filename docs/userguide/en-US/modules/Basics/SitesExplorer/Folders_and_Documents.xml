@@ -19,7 +19,7 @@
       <imagedata align="center" fileref="images/documentactions.png" format="PNG"/>
     </imageobject>
     <imageobject role="fo">
-      <imagedata width="68mm" align="center" fileref="images/documentactions.png" format="PNG"/>
+      <imagedata width="40mm" align="center" fileref="images/documentactions.png" format="PNG" scalefit="1"/>
     </imageobject>
   </mediaobject>
   <para>
@@ -30,7 +30,7 @@
       <imagedata align="center" fileref="images/folderactions.png" format="PNG"/>
     </imageobject>
     <imageobject role="fo">
-      <imagedata width="65mm" align="center" fileref="images/folderactions.png" format="PNG"/>
+      <imagedata width="40mm" align="center" fileref="images/folderactions.png" format="PNG" scalefit="1"/>
     </imageobject>
   </mediaobject>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_to_favorites">
@@ -49,7 +49,7 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="27mm" fileref="images/addfavorite.png" format="PNG"/>
+              <imagedata width="20mm" fileref="images/addfavorite.png" format="PNG" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Add to favorite ]</phrase>
@@ -105,7 +105,7 @@
             <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="60mm" align="center" fileref="images/clipboarditem.png" format="PNG"/>
+            <imagedata width="60mm" scalefit="1" align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </para>
@@ -117,7 +117,7 @@
             <imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="61mm" align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
+            <imagedata width="60mm" scalefit="1" align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         </para>
@@ -127,7 +127,7 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/clipboardicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/clipboardicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>clipboard</phrase>
@@ -142,7 +142,7 @@
      You can click  
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -225,7 +225,7 @@
      Hover your cursor over folders/documents in the right pane, or hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders/documents at once until the cursor changes to 
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="9mm" fileref="images/handcursor.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/handcursor.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>a pointing hand</phrase>
@@ -242,7 +242,7 @@
             <imagedata align="center" fileref="images/draggingfolders.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/draggingfolders.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/draggingfolders.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -307,7 +307,7 @@
             <imagedata align="center" fileref="images/renameform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/renameform.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/renameform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -411,7 +411,7 @@
             <imagedata align="center" fileref="images/view-information1.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/view-information1.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/view-information1.png" format="PNG"/>
           </imageobject>
         </mediaobject>
        </para>
@@ -483,7 +483,7 @@
      Click <emphasis role="bold">Tag Cloud </emphasis> on the <emphasis role="bold">Filter</emphasis> bar, then click
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/cloudicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/cloudicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>tag</phrase>
@@ -495,7 +495,7 @@
             <imagedata align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="65mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
+            <imagedata width="50mm" scalefit="1" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -506,7 +506,7 @@
             <imagedata align="center" fileref="images/tageditform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/tageditform.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/tageditform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -515,7 +515,7 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/edit_icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
@@ -532,7 +532,7 @@
             <imagedata align="center" fileref="images/tagform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/tagform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/tagform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -556,7 +556,7 @@
      Click
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -578,7 +578,7 @@
      Click
      <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/cloudicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/cloudicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>tag</phrase>

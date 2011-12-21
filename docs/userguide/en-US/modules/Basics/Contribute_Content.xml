@@ -30,7 +30,7 @@
                     <imagedata align="center" fileref="images/twomodes.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata width="148mm" align="center" fileref="images/twomodes.png" format="PNG"/>
+                    <imagedata width="100mm" scalefit="1" align="center" fileref="images/twomodes.png" format="PNG"/>
                 </imageobject>
             </mediaobject>
         </para>
@@ -43,7 +43,7 @@
                 <imagedata align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-                <imagedata width="150mm" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
+                <imagedata width="150mm" scalefit="1" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
             </imageobject>
         </mediaobject>
         <para>
@@ -92,7 +92,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/Add_Content_icon.png" format="PNG"/>
+                                <imagedata fileref="images/Add_Content_icon.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
                         on the CLV.
@@ -107,7 +107,7 @@
                             <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/documentform.png" format="PNG"/>
+                            <imagedata width="70mm" scalefit="1" align="center" fileref="images/documentform.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -166,7 +166,7 @@
                                     <entry>
                                         <inlinemediaobject>
                                             <imageobject>
-                                                <imagedata width="6mm" fileref="images/fullscreen_option.png"
+                                                <imagedata width="4mm" scalefit="1" fileref="images/fullscreen_option.png"
                                                            format="PNG"/>
                                             </imageobject>
                                         </inlinemediaobject>
@@ -221,7 +221,7 @@
                     <para>Hover your cursor over the content you want to edit, and click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="6mm" fileref="images/inline_edit_icon.png" format="PNG"/>
+                                <imagedata width="3mm" scalefit="1" fileref="images/inline_edit_icon.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>pencil</phrase>
@@ -254,7 +254,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="9mm" fileref="images/backicon.png" format="PNG"/>
+                                <imagedata width="3mm" scalefit="1" fileref="images/backicon.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>green reverse arrow</phrase>
@@ -277,13 +277,13 @@
                     <para>Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                                <imagedata width="3mm" scalefit="1" fileref="images/publish-icon.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
                         , or
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="5mm" fileref="images/publish_icon1.png" format="PNG"/>
+                                <imagedata width="9mm" scalefit="1" fileref="images/publish_icon1.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
                         on the <emphasis role="bold">Action</emphasis> bar to publish your edited content. Your content is now in the "Published" state.
@@ -324,7 +324,7 @@
                     <para>Hover your cursor over the CLV which you want to manage on the homepage, and click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/Manage_content.png" format="PNG"/>
+                                <imagedata fileref="images/Manage_content.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
                         .
@@ -387,7 +387,7 @@
                             Select
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/Preferences_icon.png" format="PNG"/>
+                                    <imagedata fileref="images/Preferences_icon.png" format="PNG" scalefit="1" width="3mm"/>
                                 </imageobject>
                             </inlinemediaobject>
                             of a Single Content Viewer.
@@ -397,7 +397,7 @@
                                 <imagedata align="center" fileref="images/scvpreferences.png" format="PNG"/>
                             </imageobject>
                             <imageobject role="fo">
-                                <imagedata width="150mm" align="center" fileref="images/scvpreferences.png"
+                                <imagedata width="100mm" scalefit="1" align="center" fileref="images/scvpreferences.png"
                                            format="PNG"/>
                             </imageobject>
                         </mediaobject>
@@ -411,7 +411,7 @@
                                 <imagedata align="center" fileref="images/scvpreferences1.png" format="PNG"/>
                             </imageobject>
                             <imageobject role="fo">
-                                <imagedata width="150mm" align="center" fileref="images/scvpreferences1.png"
+                                <imagedata width="100mm" scalefit="1" align="center" fileref="images/scvpreferences1.png"
                                            format="PNG"/>
                             </imageobject>
                         </mediaobject>
@@ -441,7 +441,7 @@
                                             Select the path of the content that you want to show by clicking
                                             <inlinemediaobject>
                                                 <imageobject>
-                                                    <imagedata width="7mm" fileref="images/blueplusicon.png"
+                                                    <imagedata width="4mm" scalefit="1" fileref="images/blueplusicon.png"
                                                                format="PNG"/>
                                                 </imageobject>
                                                 <textobject>
@@ -578,7 +578,7 @@
                                 Hover your cursor over
                                 <inlinemediaobject>
                                     <imageobject>
-                                        <imagedata width="6mm" fileref="images/questionicon.png" format="PNG"/>
+                                        <imagedata width="4mm" scalefit="1" fileref="images/questionicon.png" format="PNG"/>
                                     </imageobject>
                                     <textobject>
                                         <phrase>question mark</phrase>
@@ -593,7 +593,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/plus_icon.png" format="PNG"/>
+                                    <imagedata fileref="images/plus_icon.png" format="PNG" scalefit="1" width="3mm"/>
                                 </imageobject>
                             </inlinemediaobject>
                             next to the
@@ -635,7 +635,7 @@
                             part, click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
+                                    <imagedata width="4mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
                                 </imageobject>
                                 <textobject>
                                     <phrase>magnifying glass</phrase>
@@ -935,7 +935,7 @@
                             Browse the documents or web content of an available site by clicking
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/plusicon.png" format="PNG"/>
+                                    <imagedata fileref="images/plusicon.png" format="PNG" scalefit="1" width="4mm"/>
                                 </imageobject>
                                 <textobject>
                                     <phrase>blue plus</phrase>
@@ -1037,7 +1037,7 @@
                 <para>Make changes on your selected area, then click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata width="5mm" fileref="images/Accepticon.png" format="PNG"/>
+                            <imagedata width="4mm" scalefit="1" fileref="images/Accepticon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     to accept,
@@ -1045,7 +1045,7 @@
                 <para>or
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata width="5mm" fileref="images/Cancelicon.png" format="PNG"/>
+                            <imagedata width="4mm" scalefit="1" fileref="images/Cancelicon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     to discard changes.
@@ -1071,7 +1071,7 @@
                 <para>Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                            <imagedata width="3mm" scalefit="1" fileref="images/publish-icon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
                     to publish the content. Now, your edited content in the
@@ -1104,7 +1104,7 @@
                 <para>Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+                            <imagedata fileref="images/insert_portal_link.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     to open the
@@ -1112,8 +1112,11 @@
                     form.
                 </para>
                 <mediaobject>
-                    <imageobject>
+                    <imageobject role="html">
                         <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG" scalefit="1" width="100mm"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -1151,7 +1154,7 @@
                 <para>Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/insert_content.png"/>
+                            <imagedata fileref="images/insert_content.png" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     to open a page.
@@ -1160,6 +1163,9 @@
                     <imageobject role="html">
                         <imagedata fileref="images/content_selector.png" format="PNG" align="center"/>
                     </imageobject>
+                    <imageobject role="fo">
+                        <imagedata fileref="images/content_selector.png" format="PNG" align="center" scalefit="1" width="100mm"/>
+                    </imageobject>
                 </mediaobject>
             </step>
             <step>
@@ -1167,7 +1173,7 @@
                     show the contents in the right pane or click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/upload_file.png" format="PNG"/>
+                            <imagedata fileref="images/upload_file.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     to upload a file from your local device.
@@ -1213,7 +1219,7 @@
                         <imagedata align="center" fileref="images/managepublication.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="150mm" align="center" fileref="images/managepublication.png" format="PNG"/>
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/managepublication.png" format="PNG"/>
                     </imageobject>
                 </mediaobject>
             </listitem>
@@ -1266,7 +1272,7 @@
                             <imagedata align="center" fileref="images/bottombar.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/bottombar.png" format="PNG"/>
+                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/bottombar.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </note>

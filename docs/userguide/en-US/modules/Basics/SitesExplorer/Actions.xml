@@ -29,7 +29,7 @@
           Select
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="27mm" fileref="images/addcategorybutton.png" format="PNG"/>
+              <imagedata width="15mm" fileref="images/addcategorybutton.png" format="PNG" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Add category ]</phrase>
@@ -54,7 +54,7 @@
     <title>Add a document</title>
     <para>
       There are several types of document in &PRODUCT;, such as <emphasis role="bold">File, Article, Podcast, Sample
-      node, File Plan, Kofax and more.</emphasis>.
+      node, File Plan, Kofax and more</emphasis>.
     </para>
     <para>
       The table below shows types of nodes which can be added to various document types. The rows indicate which nodes
@@ -558,7 +558,7 @@
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="28mm" fileref="images/adddocumenticon.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/adddocumenticon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add Document ]</phrase>
@@ -607,7 +607,7 @@
             <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="141mm" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -627,7 +627,7 @@
           to select the attachment file. You can click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -644,8 +644,11 @@
         </para>
         <para>To view the attached file directly in <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis>,</emphasis> simply click its name.</para>
         <mediaobject>
-          <imageobject>
+          <imageobject role="html">
             <imagedata align="center" fileref="images/pdf-viewer.png" format="PNG"/>
+          </imageobject>
+            <imageobject role="fo">
+            <imagedata align="center" fileref="images/pdf-viewer.png" format="PNG" scalefit="1" width="150mm"/>
           </imageobject>
         </mediaobject>
         <note>
@@ -655,43 +658,38 @@
         </note>
       </step>
     </procedure>
-    <!--  <procedure id="proc-User_Guide-Add_a_document-Create_a_new_File_document">
- <title>Create a new File document</title>
+  <citetitle><para xml:id="proc-User_Guide-Add_a_document-Create_a_new_File_documen"><emphasis role="bold">Create a new File document</emphasis></para></citetitle>
+    <procedure>
  <step>
    <para>
-Follow the steps in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> form.
-   <para>
-The <emphasis role="bold">Add New Document</emphasis> form will be displayed.
-</para>
+Follow the steps in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section to open the corresponding form to add a <emphasis role="bold">File</emphasis> document.
+   </para>
  </step>
  <step>
    <para>
-Input a name for the file document in the <emphasis role="bold">Name</emphasis> field. Some special characters cannot be used in the Name field: @ # % &amp; * ( ) “ &apos; : ; [ ] {} / !
+Input a name for the file document in the <emphasis role="bold">Name</emphasis> field. Some special characters (@ # % &amp; * ( ) “ &apos; : ; [ ] {} / !) cannot be used in the <emphasis role="bold">Name</emphasis> field.
 </para>
  </step>
  <step>
    <para>
 Click the
-<inlinemediaobject>
-       <imageobject>
-         <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
-       </imageobject>
-       <textobject>
-         <phrase>scroll arrows</phrase>
-       </textobject>
-     </inlinemediaobject> icon to see the <emphasis role="bold">Mime Type</emphasis> list and select one. There are two types of File document for you to choose:
+<emphasis role="bold">Mime Type</emphasis> field and select one type. There are three types of <emphasis role="bold">File</emphasis> document:
 </para>
    <itemizedlist>
      <listitem>
        <para>
-  <emphasis role="bold">text/html</emphasis>: when creating a text/html File document, you can input value in the Content field like source code (HyperText Markup Language HTML). After being created, it will generate the content you want, then you can see both the inputted source code and the generated content in that document.
+  <emphasis role="bold">text/html</emphasis>: when creating a text/html File document, you can input values like source code (HyperText Markup Language HTML) in the <emphasis role="bold">Content</emphasis> field . After being created, it will generate the content you want, then you can see both the input source code and the generated content in that document.
  </para>
      </listitem>
      <listitem>
        <para>
-  <emphasis role="bold">text/plain</emphasis>: after being created, it will display exactly what you inputted in the Content field.html.
+  <emphasis role="bold">text/plain</emphasis>: after a text/plain File document is created, it will display exactly what you input in the <emphasis role="bold">Content</emphasis> field.
  </para>
      </listitem>
+       <listitem>
+           <para>
+               <emphasis role="bold">application/x-groovy+html</emphasis>: it indicates your file as a groovy file. </para>
+       </listitem>
    </itemizedlist>
  </step>
  <step>
@@ -701,35 +699,27 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
    <itemizedlist>
      <listitem>
        <para>
-  <emphasis role="bold">text/html</emphasis>: If you want to create a File document with a source code and generated content, click the
+  <emphasis role="bold">text/html</emphasis> or <emphasis role="bold">application/x-groovy+html</emphasis>: if you want to create a <emphasis role="bold">File</emphasis> document with a source code and generated content, click the
   <inlinemediaobject>
            <imageobject>
-             <imagedata width="21mm" fileref="images/sourceicon.png" format="PNG"/>
+             <imagedata width="10mm" fileref="images/sourceicon.png" format="PNG" scalefit="1"/>
            </imageobject>
            <textobject>
              <phrase>[ Source ]</phrase>
            </textobject>
-         </inlinemediaobject> button in the editor bar. In this mode, only Save, New Page, Preview icons in editor bar are visible for using. Click the
-  <inlinemediaobject>
-           <imageobject>
-             <imagedata width="7mm" fileref="images/previewicon.png" format="PNG"/>
-           </imageobject>
-           <textobject>
-             <phrase>magnifying glass</phrase>
-           </textobject>
-         </inlinemediaobject> icon to preview the generated content.
+         </inlinemediaobject> button in the <emphasis role="bold">Editor</emphasis> bar.
  </para>
      </listitem>
      <listitem>
        <para>
-  <emphasis role="bold">text/plain</emphasis>: If you select text/plain type, the content field will be displayed like the following illustration:
+  <emphasis role="bold">text/plain</emphasis>: if you select text/plain type, the content field will be displayed like the following illustration.
  </para>
        <mediaobject>
          <imageobject role="html">
            <imagedata align="center" fileref="images/plaintextcontentform.png" format="PNG"/>
          </imageobject>
          <imageobject role="fo">
-           <imagedata width="150mm" align="center" fileref="images/plaintextcontentform.png" format="PNG"/>
+           <imagedata width="100mm" scalefit="1" align="center" fileref="images/plaintextcontentform.png" format="PNG"/>
          </imageobject>
        </mediaobject>
      </listitem>
@@ -737,7 +727,7 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
  </step>
  <step>
    <para>
-Fill values in all the fields, including <emphasis role="bold">Title</emphasis>, <emphasis role="bold">Description</emphasis>, <emphasis role="bold">Creator</emphasis> and <emphasis role="bold">Source</emphasis>.
+Optionally, fill values in all the rest fields, including <emphasis role="bold">Title</emphasis>, <emphasis role="bold">Description</emphasis>, <emphasis role="bold">Creator</emphasis> and <emphasis role="bold">Source</emphasis>.
 </para>
    <para>
 Click the plus icon to open more fields.
@@ -745,29 +735,30 @@ Click the plus icon to open more fields.
  </step>
  <step>
    <para>
-Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to accept creating a new file document.
+Click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to accept creating a new file document.
 </para>
    <para>
-After being created successfully, a file document with type text/html will be displayed like the illustration below:
+After being created successfully, a file document with the <emphasis>text/html</emphasis> type will be displayed like the illustration below.
 </para>
    <mediaobject>
      <imageobject role="html">
        <imagedata align="center" fileref="images/htmltab.png" format="PNG"/>
      </imageobject>
      <imageobject role="fo">
-       <imagedata width="150mm" align="center" fileref="images/htmltab.png" format="PNG"/>
+       <imagedata width="120mm" scalefit="1" align="center" fileref="images/htmltab.png" format="PNG"/>
      </imageobject>
    </mediaobject>
+   <para></para>
    <mediaobject>
      <imageobject role="html">
        <imagedata align="center" fileref="images/texttab.png" format="PNG"/>
      </imageobject>
      <imageobject role="fo">
-       <imagedata width="150mm" align="center" fileref="images/texttab.png" format="PNG"/>
+       <imagedata width="120mm" scalefit="1" align="center" fileref="images/texttab.png" format="PNG"/>
      </imageobject>
    </mediaobject>
  </step>
-</procedure>     -->
+</procedure>
 <citetitle><para xml:id="proc-User_Guide-Add_a_document-Create_a_new_Article"><emphasis role="bold">Create a new article</emphasis></para></citetitle>
     <procedure>    
       <step>
@@ -824,7 +815,7 @@ After being created successfully, a file document with type text/html will be di
       the attachments by clicking
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+          <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>trash can</phrase>
@@ -860,7 +851,7 @@ After being created successfully, a file document with type text/html will be di
                   <imagedata align="center" fileref="images/podcast_form.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                  <imagedata width="150mm" align="center" fileref="images/podcast_form.png" format="PNG"/>
+                  <imagedata width="120mm" scalefit="1" align="center" fileref="images/podcast_form.png" format="PNG"/>
               </imageobject>
           </mediaobject>
         <para>
@@ -961,7 +952,7 @@ After being created successfully, a file document with type text/html will be di
         <imagedata align="center" fileref="images/podcastscreen.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/podcastscreen.png" format="PNG"/>
+        <imagedata width="120mm" scalefit="1" align="center" fileref="images/podcastscreen.png" format="PNG"/>
       </imageobject>
     </mediaobject>
    <!-- <para>
@@ -1009,7 +1000,7 @@ After being created successfully, a file document with type text/html will be di
         <imagedata align="center" fileref="images/samplenodeformcompleted.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/samplenodeformcompleted.png" format="PNG"/>
+        <imagedata width="150mm" scalefit="1" align="center" fileref="images/samplenodeformcompleted.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -1044,7 +1035,7 @@ After being created successfully, a file document with type text/html will be di
                 <imagedata align="center" fileref="images/addfileplanform.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata width="150mm" align="center" fileref="images/addfileplanform.png" format="PNG"/>
+                <imagedata width="120mm" scalefit="1" align="center" fileref="images/addfileplanform.png" format="PNG"/>
               </imageobject>
             </mediaobject>
         </para>
@@ -1071,7 +1062,7 @@ After being created successfully, a file document with type text/html will be di
                     <entry>The categories of your file plan. Select the categories for your file plan by clicking
                       <inlinemediaobject>
                         <imageobject>
-                          <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+                          <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
                         </imageobject>
                         <textobject>
                           <phrase>plus</phrase>
@@ -1099,7 +1090,7 @@ After being created successfully, a file document with type text/html will be di
                 <imagedata align="center" fileref="images/record-properties.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata width="150mm" align="center" fileref="images/record-properties.png" format="PNG"/>
+                <imagedata width="120mm" scalefit="1" align="center" fileref="images/record-properties.png" format="PNG"/>
               </imageobject>
             </mediaobject>
             <table>
@@ -1175,7 +1166,7 @@ After being created successfully, a file document with type text/html will be di
                 <imagedata align="center" fileref="images/processproperties.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata width="150mm" align="center" fileref="images/processproperties.png" format="PNG"/>
+                <imagedata width="120mm" scalefit="1" align="center" fileref="images/processproperties.png" format="PNG"/>
               </imageobject>
             </mediaobject>
             <table>
@@ -1303,7 +1294,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/addnewkofax.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/addnewkofax.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/addnewkofax.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1317,7 +1308,7 @@ After being created successfully, a file document with type text/html will be di
           Select categories for a Kofax document by clicking
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -1341,7 +1332,7 @@ After being created successfully, a file document with type text/html will be di
         <imagedata align="center" fileref="images/kofaxdocumentview.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="147mm" align="center" fileref="images/kofaxdocumentview.png" format="PNG"/>
+        <imagedata width="120mm" scalefit="1" align="center" fileref="images/kofaxdocumentview.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     </para>
@@ -1413,7 +1404,7 @@ After being created successfully, a file document with type text/html will be di
         <imagedata align="center" fileref="images/eventdisplay.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/eventdisplay.png" format="PNG"/>
+        <imagedata width="120mm" scalefit="1" align="center" fileref="images/eventdisplay.png" format="PNG"/>
       </imageobject>
     </mediaobject>
 	</para>
@@ -1542,7 +1533,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="24mm" fileref="images/addfolderbutton.png" format="PNG"/>
+              <imagedata width="20mm" fileref="images/addfolderbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add Folder ]</phrase>
@@ -1557,7 +1548,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/addfolderwindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/addfolderwindow.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/addfolderwindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1608,7 +1599,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/selectarticle.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="50mm" align="center" fileref="images/selectarticle.png" format="PNG"/>
+            <imagedata width="50mm" scalefit="1" align="center" fileref="images/selectarticle.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1617,7 +1608,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="31mm" fileref="images/addtranslationicon.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/addtranslationicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add Translation ]</phrase>
@@ -1633,7 +1624,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/symlinkmanager2.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/symlinkmanager2.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/symlinkmanager2.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1642,7 +1633,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -1684,7 +1675,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="51mm" align="center" fileref="images/availablelanguages.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1706,7 +1697,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="27mm" fileref="images/addsymlinkbutton.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/addsymlinkbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add Sym Link ]</phrase>
@@ -1719,7 +1710,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/symlinkmanager.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/symlinkmanager.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/symlinkmanager.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -1751,7 +1742,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -1772,7 +1763,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>green tick</phrase>
@@ -1787,7 +1778,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/symlinkmanagercompleted.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/symlinkmanagercompleted.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/symlinkmanagercompleted.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1802,7 +1793,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/symlinkadded.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/symlinkadded.png" format="PNG"/>
+            <imagedata width="150mm" scalefit="1" align="center" fileref="images/symlinkadded.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1830,7 +1821,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="39mm" fileref="images/commentdocumentbutton.png" format="PNG"/>
+              <imagedata width="30mm" scalefit="1" fileref="images/commentdocumentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Comment this document ]</phrase>
@@ -1867,7 +1858,7 @@ After being created successfully, a file document with type text/html will be di
         <imagedata align="center" fileref="images/commentdisplay.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="150mm" align="center" fileref="images/commentdisplay.png" format="PNG"/>
+        <imagedata width="150mm" scalefit="1" align="center" fileref="images/commentdisplay.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -1887,7 +1878,7 @@ After being created successfully, a file document with type text/html will be di
       You can edit your comment by clicking
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="5mm" fileref="images/editicon2.png" format="PNG"/>
+          <imagedata width="4mm" scalefit="1" fileref="images/editicon2.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>pencil</phrase>
@@ -1896,7 +1887,7 @@ After being created successfully, a file document with type text/html will be di
       or delete it by clicking
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+          <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>trash can</phrase>
@@ -1921,7 +1912,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="38mm" fileref="images/editdocumenticon.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/editdocumenticon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Edit Document ]</phrase>
@@ -1980,7 +1971,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="39mm" fileref="images/exportnode.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/exportnode.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Export Node ]</phrase>
@@ -1995,7 +1986,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/exportnodeform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/exportnodeform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/exportnodeform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2076,7 +2067,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="25mm" fileref="images/importnodebutton.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/importnodebutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Import Node ]</phrase>
@@ -2091,7 +2082,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/importnodeform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/importnodeform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/importnodeform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2194,7 +2185,7 @@ After being created successfully, a file document with type text/html will be di
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="31mm" fileref="images/manageactionsbutton.png" format="PNG"/>
+                <imagedata width="22mm" scalefit="1" fileref="images/manageactionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Actions ]</phrase>
@@ -2219,7 +2210,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/addactionstab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/addactionstab.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/addactionstab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -2429,7 +2420,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="7mm" fileref="images/previewicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/previewicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>magnifying glass</phrase>
@@ -2447,7 +2438,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/actionsinfotab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/actionsinfotab.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/actionsinfotab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2469,7 +2460,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/availableactions.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2478,7 +2469,7 @@ After being created successfully, a file document with type text/html will be di
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/editicon4.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>pencil</phrase>
@@ -2496,7 +2487,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/editactionform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/editactionform.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/editactionform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2525,7 +2516,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/availableactions1.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/availableactions1.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/availableactions1.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2534,7 +2525,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -2569,7 +2560,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2584,7 +2575,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/auditingactivated.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="103mm" align="center" fileref="images/auditingactivated.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/auditingactivated.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2600,7 +2591,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2618,7 +2609,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/auditinformation.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2629,7 +2620,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/noauditinformation.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2653,7 +2644,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="33mm" fileref="images/managecategoriesicon.png" format="PNG"/>
+                <imagedata width="17mm" scalefit="1" fileref="images/managecategoriesicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Categories ]</phrase>
@@ -2678,7 +2669,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/showcategoriestab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/showcategoriestab.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/showcategoriestab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2687,7 +2678,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>green tick</phrase>
@@ -2753,7 +2744,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="33mm" fileref="images/managecategoriesicon.png" format="PNG"/>
+                <imagedata width="17mm" scalefit="1" fileref="images/managecategoriesicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Categories ]</phrase>
@@ -2773,7 +2764,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -2804,7 +2795,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="35mm" fileref="images/hideshowcontentbutton.png" format="PNG"/>
+              <imagedata width="25mm" scalefit="1" fileref="images/hideshowcontentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Hide/Show content ]</phrase>
@@ -2824,7 +2815,7 @@ After being created successfully, a file document with type text/html will be di
           To show a hidden node, click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/hideshowcontentbutton.png" format="PNG"/>
+              <imagedata fileref="images/hideshowcontentbutton.png" format="PNG" scalefit="1" width="25mm"/>
             </imageobject>
             <textobject>
               <phrase>[ Hide/Show content ]</phrase>
@@ -2848,7 +2839,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="34mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
+              <imagedata width="25mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Publications ]</phrase>
@@ -2866,7 +2857,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/managepublicationsform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/managepublicationsform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/managepublicationsform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2880,7 +2871,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -2889,7 +2880,7 @@ After being created successfully, a file document with type text/html will be di
           to view the content of the node or click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="10mm" fileref="images/restoreversionicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/restoreversionicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Restore Version ]</phrase>
@@ -2942,7 +2933,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="31mm" fileref="images/managerelationsicon.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -2968,7 +2959,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>green tick</phrase>
@@ -3006,7 +2997,7 @@ After being created successfully, a file document with type text/html will be di
             Click the
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="31mm" fileref="images/managerelationsicon.png" format="PNG"/>
+                <imagedata width="22mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3027,7 +3018,7 @@ After being created successfully, a file document with type text/html will be di
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -3065,7 +3056,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="67mm" align="center" fileref="images/relationsbutton.png" format="PNG"/>
+              <imagedata width="67mm" scalefit="1" align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -3076,7 +3067,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/relationslist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="62mm" align="center" fileref="images/relationslist.png" format="PNG"/>
+              <imagedata width="67mm" scalefit="1" align="center" fileref="images/relationslist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3103,7 +3094,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3138,10 +3129,10 @@ After being created successfully, a file document with type text/html will be di
           </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" fileref="images/versionmenu.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versionmenu.png" format="PNG" scalefit="0" width="100mm"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="61mm" align="center" fileref="images/versionmenu.png" format="PNG"/>
+              <imagedata width="60mm" scalefit="1" align="center" fileref="images/versionmenu.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3150,7 +3141,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3209,7 +3200,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3223,7 +3214,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="9mm" fileref="images/versionplusicon.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/versionplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>plus</phrase>
@@ -3240,7 +3231,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/addlabelform.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3276,7 +3267,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3290,7 +3281,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="8mm" fileref="images/versionminusicon.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/versionminusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>minus</phrase>
@@ -3307,7 +3298,7 @@ After being created successfully, a file document with type text/html will be di
               <imagedata align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/removelabelform.png" format="PNG"/>
+              <imagedata width="100mm" scalefit="1" align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3338,7 +3329,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3351,7 +3342,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>magnifying glass</phrase>
@@ -3377,7 +3368,7 @@ After being created successfully, a file document with type text/html will be di
           If you click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -3400,7 +3391,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3418,7 +3409,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="10mm" fileref="images/restoreversionicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/restoreversionicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>&quot;Restore Version&quot;</phrase>
@@ -3442,7 +3433,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3455,7 +3446,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -3498,7 +3489,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="59mm" fileref="images/localisedcontents.png" format="PNG"/>
+              <imagedata width="30mm" scalefit="1" fileref="images/localisedcontents.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add/Edit localized contents ]</phrase>
@@ -3543,7 +3534,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/addlanguageform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3591,7 +3582,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/relationbutton.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="67mm" align="center" fileref="images/relationbutton.png" format="PNG"/>
+            <imagedata width="50mm" scalefit="1" align="center" fileref="images/relationbutton.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3604,7 +3595,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/languagelist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="62mm" align="center" fileref="images/languagelist.png" format="PNG"/>
+            <imagedata width="50mm" scalefit="1" align="center" fileref="images/languagelist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -3739,7 +3730,7 @@ After being created successfully, a file document with type text/html will be di
               Enable this function by selecting
               <inlinemediaobject>
                   <imageobject>
-                      <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+                      <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="3mm"/>
                   </imageobject>
               </inlinemediaobject>
               <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.
@@ -3789,7 +3780,7 @@ After being created successfully, a file document with type text/html will be di
             Enable this function by selecting 
             <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+              <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
             </inlinemediaobject> <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.</emphasis> See the
             <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section
@@ -3808,7 +3799,7 @@ After being created successfully, a file document with type text/html will be di
       To show drives, click 
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="44mm" fileref="images/showhidedrives.png" format="PNG"/>
+          <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>[ Show/Hide Drives ]</phrase>
@@ -3820,7 +3811,7 @@ After being created successfully, a file document with type text/html will be di
       To hide drives, click 
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="44mm" fileref="images/showhidedrives.png" format="PNG"/>
+          <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>[ Show/Hide Drives ]</phrase>
@@ -3848,7 +3839,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="46mm" fileref="images/jcrstructure.png" format="PNG"/>
+              <imagedata width="30mm" fileref="images/jcrstructure.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
@@ -3896,7 +3887,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="46mm" fileref="images/jcrstructure.png" format="PNG"/>
+              <imagedata width="30mm" fileref="images/jcrstructure.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
@@ -3928,7 +3919,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="51mm" fileref="images/taggingdocument.png" format="PNG"/>
+              <imagedata width="22mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Tagging this document ]</phrase>
@@ -3942,7 +3933,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/tagmanager.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/tagmanager.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/tagmanager.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -4006,7 +3997,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4030,7 +4021,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="51mm" fileref="images/taggingdocument.png" format="PNG"/>
+              <imagedata width="22mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Tagging this document ]</phrase>
@@ -4044,7 +4035,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4078,7 +4069,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="17mm" fileref="images/uploadicon2.png" format="PNG"/>
+              <imagedata width="17mm" scalefit="1" fileref="images/uploadicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Upload ]</phrase>
@@ -4091,7 +4082,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="141mm" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4106,7 +4097,7 @@ After being created successfully, a file document with type text/html will be di
           If you want to upload multiple files at the same time, click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -4119,14 +4110,14 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/multipleuploadform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/multipleuploadform.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/multipleuploadform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4138,7 +4129,7 @@ After being created successfully, a file document with type text/html will be di
           To change the uploaded file, click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4161,7 +4152,7 @@ After being created successfully, a file document with type text/html will be di
           You can click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -4174,7 +4165,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/addcategories.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/addcategories.png" format="PNG"/>
+            <imagedata width="150mm" scalefit="1" align="center" fileref="images/addcategories.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -4183,7 +4174,7 @@ After being created successfully, a file document with type text/html will be di
              <emphasis role="bold">ii.</emphasis> Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>green tick</phrase>
@@ -4203,7 +4194,7 @@ After being created successfully, a file document with type text/html will be di
             You can add more categories to a file by clicking
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>plus</phrase>
@@ -4215,7 +4206,7 @@ After being created successfully, a file document with type text/html will be di
             Click 
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>trash can</phrase>
@@ -4247,7 +4238,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/uploadedfileview.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/uploadedfileview.png" format="PNG"/>
+            <imagedata width="120mm" align="center" fileref="images/uploadedfileview.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4256,7 +4247,7 @@ After being created successfully, a file document with type text/html will be di
           Optionally, click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
@@ -4271,7 +4262,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/externalmetadata.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/externalmetadata.png" format="PNG"/>
+            <imagedata width="120mm" align="center" fileref="images/externalmetadata.png" format="PNG"/>
           </imageobject>
         </mediaobject>
           <itemizedlist>
@@ -4279,7 +4270,7 @@ After being created successfully, a file document with type text/html will be di
          <para>Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
@@ -4347,7 +4338,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="28mm" fileref="images/viewmetadatasbutton.png" format="PNG"/>
+              <imagedata width="22mm" scalefit="1" fileref="images/viewmetadatasbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Metadatas ]</phrase>
@@ -4361,7 +4352,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/viewmetadatasform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/viewmetadatasform.png" format="PNG"/>
+            <imagedata width="120mm" align="center" fileref="images/viewmetadatasform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4381,7 +4372,7 @@ After being created successfully, a file document with type text/html will be di
           form. Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -4394,7 +4385,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/addeditpropertiesform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/addeditpropertiesform.png" format="PNG"/>
+            <imagedata width="120mm" align="center" fileref="images/addeditpropertiesform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4421,7 +4412,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
+              <imagedata width="22mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Node Types ]</phrase>
@@ -4434,7 +4425,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
+            <imagedata width="100mm" scalefit="1" align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4461,7 +4452,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" fileref="images/viewpermissionsbutton.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/viewpermissionsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Permissions ]</phrase>
@@ -4475,7 +4466,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4495,7 +4486,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/usericon.png" format="PNG"/>
+              <imagedata width="3mm" scalefit="1" fileref="images/usericon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>&quot;Select user&quot;</phrase>
@@ -4510,14 +4501,14 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/Select_User_Permission.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="140mm" align="center" fileref="images/Select_User_Permission.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/Select_User_Permission.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para> <emphasis role="bold">ii.</emphasis>
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>green tick</phrase>
@@ -4547,7 +4538,7 @@ After being created successfully, a file document with type text/html will be di
          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="7mm" fileref="images/magnifyingglassicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -4565,7 +4556,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/groupssubgroups.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="140mm" align="center" fileref="images/groupssubgroups.png" format="PNG"/>
+            <imagedata width="120mm" scalefit="1" align="center" fileref="images/groupssubgroups.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4577,7 +4568,7 @@ After being created successfully, a file document with type text/html will be di
         <para><emphasis role="bold">ii.</emphasis> Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="7mm" fileref="images/magnifyingglassicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -4592,7 +4583,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/userpermissionbutton.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/userpermissionbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>&quot;Select membership&quot;</phrase>
@@ -4617,7 +4608,7 @@ After being created successfully, a file document with type text/html will be di
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/grouppermission.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/grouppermission.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>&quot;Select everyone&quot;</phrase>
@@ -4656,7 +4647,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/edit_icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
@@ -4691,7 +4682,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4724,7 +4715,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="48mm" fileref="images/viewnodepropertiesbutton.png" format="PNG"/>
+              <imagedata width="28mm" scalefit="1" fileref="images/viewnodepropertiesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Node Properties ]</phrase>
@@ -4749,7 +4740,7 @@ After being created successfully, a file document with type text/html will be di
                   <imagedata align="center" fileref="images/propertiesmanagement.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="150mm" align="center" fileref="images/propertiesmanagement.png" format="PNG"/>
+                  <imagedata width="120mm" scalefit="1" align="center" fileref="images/propertiesmanagement.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
             </listitem>
@@ -4765,7 +4756,7 @@ After being created successfully, a file document with type text/html will be di
                   <imagedata align="center" fileref="images/addnewproperties.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="150mm" align="center" fileref="images/addnewproperties.png" format="PNG"/>
+                  <imagedata width="120mm" scalefit="1" align="center" fileref="images/addnewproperties.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
             </listitem>
@@ -4802,7 +4793,7 @@ After being created successfully, a file document with type text/html will be di
           To add multiple new values, click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -4814,7 +4805,7 @@ After being created successfully, a file document with type text/html will be di
           To remove a value, click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>trash can</phrase>
@@ -4841,7 +4832,7 @@ After being created successfully, a file document with type text/html will be di
       In this form, you can edit a property by clicking 
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="6mm" fileref="images/edit_icon1.png" format="PNG"/>
+          <imagedata width="4mm" scalefit="1" fileref="images/edit_icon1.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>pencil</phrase>
@@ -4849,7 +4840,7 @@ After being created successfully, a file document with type text/html will be di
       </inlinemediaobject>, or delete it by clicking
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+          <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>trash can</phrase>
@@ -4870,7 +4861,7 @@ After being created successfully, a file document with type text/html will be di
           Select a node, then click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="34mm" fileref="images/showhiderelations.png" format="PNG"/>
+              <imagedata width="28mm" scalefit="1" fileref="images/showhiderelations.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Show/Hide Relations ]</phrase>
@@ -4937,7 +4928,7 @@ After being created successfully, a file document with type text/html will be di
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="44mm" fileref="images/votefordocument.png" format="PNG"/>
+              <imagedata width="30mm" scalefit="1" fileref="images/votefordocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Vote for document ]</phrase>
@@ -4998,7 +4989,7 @@ After being created successfully, a file document with type text/html will be di
           Select the document you want to watch and click
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="8mm" fileref="images/watchicon.png" format="PNG"/>
+          <imagedata width="25mm" scalefit="1" fileref="images/watchicon.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>eye</phrase>
@@ -5016,7 +5007,7 @@ After being created successfully, a file document with type text/html will be di
             <imagedata align="center" fileref="images/watchingdocumentform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/watchingdocumentform.png" format="PNG"/>
+            <imagedata width="100mm" align="center" fileref="images/watchingdocumentform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         </para>
@@ -5026,7 +5017,7 @@ After being created successfully, a file document with type text/html will be di
 <para>Select the document and click
       <inlinemediaobject>
         <imageobject>
-          <imagedata width="8mm" fileref="images/watchicon.png" format="PNG"/>
+          <imagedata width="25mm" scalefit="1" fileref="images/watchicon.png" format="PNG"/>
         </imageobject>
         <textobject>
           <phrase>eye</phrase>

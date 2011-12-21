@@ -52,7 +52,7 @@
                     </imageobject>
                     <imageobject role="fo">
                         <imagedata fileref="images/Add_Template_Form.png" format="PNG" align="center" scalefit="1"
-                                   contentwidth="150mm"/>
+                                   width="100mm"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -82,7 +82,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Plus_permission_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Plus_permission_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     next to the
@@ -102,7 +102,7 @@
                     You can set permissions for everyone by clicking
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/plus_icon.png" format="PNG"/>
+                            <imagedata fileref="images/plus_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     next to
@@ -115,7 +115,7 @@
                         <imagedata align="center" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="146mm" align="center" fileref="images/img-Select_Permissions_Dialog.png"
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/img-Select_Permissions_Dialog.png"
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
@@ -172,7 +172,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/editicon4.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
@@ -227,7 +227,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/editicon4.png" format="PNG"/>
+                                    <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                                 </imageobject>
                             </inlinemediaobject>
                             in the dialog row you want to edit.
@@ -254,7 +254,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                                    <imagedata fileref="images/trashicon.png" format="PNG" scalefit="1" width="4mm"/>
                                 </imageobject>
                                 <textobject>
                                     <phrase>trash can</phrase>
@@ -309,7 +309,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/editicon4.png" format="PNG"/>
+                                    <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                                 </imageobject>
                             </inlinemediaobject>
                             in the
@@ -360,7 +360,7 @@
                             Click
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                                    <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                                 </imageobject>
                             </inlinemediaobject>
                             in the
@@ -393,7 +393,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                            <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
                         </imageobject>
                         <textobject>
                             <phrase>trash can</phrase>
@@ -449,7 +449,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Glass_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Glass_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     corresponding to the metadata you want to view.
@@ -464,7 +464,7 @@
                         <imagedata align="center" fileref="images/img-Metadata_Form.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="150mm" align="center" fileref="images/img-Metadata_Form.png" format="PNG"/>
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/img-Metadata_Form.png" format="PNG"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -480,7 +480,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/editicon4.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
@@ -520,7 +520,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     corresponding to the metadata you want to delete.
@@ -557,7 +557,7 @@
                 <imagedata align="center" fileref="images/img-Manage_Views_Form.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-                <imagedata width="150mm" align="center" fileref="images/img-Manage_Views_Form.png" format="PNG"/>
+                <imagedata width="150mm" scalefit="1" align="center" fileref="images/img-Manage_Views_Form.png" format="PNG"/>
             </imageobject>
         </mediaobject>
         <section id="sect-User_Guide-Manage_Views-Views_Tab">
@@ -590,7 +590,7 @@
                     </imageobject>
                     <imageobject role="fo">
                         <imagedata fileref="images/Add_view.png" format="PNG" align="center" scalefit="1"
-                                   contentwidth="150mm"/>
+                                   width="100mm"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -609,7 +609,7 @@
                         <imagedata align="center" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="146mm" align="center" fileref="images/img-Select_Permissions_Dialog.png"
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/img-Select_Permissions_Dialog.png"
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
@@ -617,7 +617,7 @@
                     <listitem>
                         <para>Click <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/plus_icon.png" format="PNG"/>
+                            <imagedata fileref="images/plus_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                         next to <emphasis role="bold">Any Permission</emphasis> to assign permission to every one. </para>
@@ -643,7 +643,7 @@
                         <imagedata align="center" fileref="images/tabform.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="146mm" align="center" fileref="images/tabform.png"
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/tabform.png"
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
@@ -674,7 +674,7 @@
                         <imagedata align="center" fileref="images/addviewform.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="146mm" align="center" fileref="images/addviewform.png"
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/addviewform.png"
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
@@ -698,7 +698,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/editicon4.png" format="PNG"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
@@ -710,7 +710,7 @@
                         <imagedata align="center" fileref="images/addviewform.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="146mm" align="center" fileref="images/addviewform.png"
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/addviewform.png"
                                    format="PNG"/>
                     </imageobject>
                 </mediaobject>
@@ -778,7 +778,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     corresponding to the view you want to delete in the
@@ -810,7 +810,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Glass_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Glass_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     in the
@@ -827,7 +827,7 @@
                         <imagedata align="center" fileref="images/img-View_Form.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata width="150mm" align="center" fileref="images/img-View_Form.png" format="PNG"/>
+                        <imagedata width="100mm" scalefit="1" align="center" fileref="images/img-View_Form.png" format="PNG"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -861,7 +861,7 @@
                             <imagedata align="center" fileref="images/ECMS-template.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/ECMS-template.png" format="PNG"/>
+                            <imagedata width="150mm" scalefit="1" align="center" fileref="images/ECMS-template.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -878,7 +878,7 @@
                             <imagedata align="center" fileref="images/addecmtemplate.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/addecmtemplate.png" format="PNG"/>
+                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/addecmtemplate.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -924,7 +924,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/editicon4.png" format="PNG"/>
+                                <imagedata fileref="images/editicon4.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
                         next to the template you want to edit.
@@ -968,7 +968,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                                <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
                         corresponding with the template you want to delete. A confirmation message will appear.
@@ -1163,7 +1163,7 @@
                             <imagedata align="center" fileref="images/add_drive.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="140mm" align="center" fileref="images/add_drive.png" format="PNG"/>
+                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/add_drive.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -1192,7 +1192,7 @@
                         Select the home path for the drive by clicking
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="7mm" fileref="images/deplussy.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/deplussy.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>plus</phrase>
@@ -1207,7 +1207,7 @@
                             <imagedata align="center" fileref="images/home_path.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/home_path.png" format="PNG"/>
+                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/home_path.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -1216,7 +1216,7 @@
                         Browse an icon for the workspace by clicking
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>plus</phrase>
@@ -1231,7 +1231,7 @@
                         Select an icon by clicking
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>green tick</phrase>
@@ -1253,7 +1253,7 @@
                         Select permissions for groups that have access rights to this drive by clicking
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="8mm" fileref="images/pluspermissionbutton.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/pluspermissionbutton.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>plus</phrase>
@@ -1396,7 +1396,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/editicon4.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>pencil</phrase>
@@ -1411,7 +1411,7 @@
                             <imagedata align="center" fileref="images/editdriveform.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="146mm" align="center" fileref="images/editdriveform.png" format="PNG"/>
+                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/editdriveform.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -1442,7 +1442,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
+                                <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
                             </imageobject>
                             <textobject>
                                 <phrase>trash can</phrase>

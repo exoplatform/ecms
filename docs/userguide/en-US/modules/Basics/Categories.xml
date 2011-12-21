@@ -47,7 +47,7 @@
           <imagedata align="center" scale="" fileref="images/categorypanes.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="150mm"/>
+          <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="100mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
     </step>
@@ -81,7 +81,7 @@
      Click  
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/editicon5.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>pencil</phrase>
@@ -93,7 +93,7 @@
               <imagedata fileref="images/cneditmode.png" format="PNG" align="center"/>
            </imageobject>
            <imageobject role="fo">
-              <imagedata fileref="images/cneditmode.png" format="PNG" align="center" width="150mm" />
+              <imagedata fileref="images/cneditmode.png" format="PNG" align="center" width="150mm" scalefit="1" />
            </imageobject>
       </mediaobject>
     </step>
@@ -102,7 +102,7 @@
     Click  
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/plusicon.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/plusicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>plus icon</phrase>
@@ -135,7 +135,7 @@
         <para>Click
             <inlinemediaobject>
                 <imageobject>
-                    <imagedata fileref="images/finishbutton.png" format="PNG" width="6mm"/>
+                    <imagedata fileref="images/finishbutton.png" format="PNG" width="3mm" scalefit="1"/>
                 </imageobject>
             </inlinemediaobject>
         on the <emphasis role="bold">Page Editor</emphasis> form to finish editing the <emphasis role="bold">Category Navigation</emphasis> portlet. </para>

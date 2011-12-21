@@ -19,13 +19,13 @@
         <imagedata align="center"  fileref="images/standard-mode1.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata align="center" fileref="images/standard-mode1.png" format="PNG"  width="210mm"/>
+        <imagedata align="center" fileref="images/standard-mode1.png" format="PNG"  width="100mm" scalefit="1"/>
       </imageobject>
     </mediaobject>
     <para>
        To add an action to a document, click <emphasis role="bold">Add</emphasis> or <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/plusicon1.png" format="PNG"/>
+          <imagedata fileref="images/plusicon1.png" format="PNG" scalefit="1" width="4mm"/>
         </imageobject>
           <textobject>
              <phrase>plus</phrase>
@@ -49,7 +49,7 @@
                <imagedata align="center" fileref="images/drag_drop_fcc.png" format="PNG"/>
            </imageobject>
            <imageobject role="fo">
-               <imagedata align="center" fileref="images/drag_drop_fcc.png" format="PNG" width="210mm"/>
+               <imagedata align="center" fileref="images/drag_drop_fcc.png" format="PNG" width="150mm" scalefit="1"/>
            </imageobject>
        </mediaobject>
       </para>
@@ -71,7 +71,7 @@
                     <imagedata align="center" fileref="images/content-creator.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata align="center" fileref="images/content-creator.png" format="PNG" width="210mm"/>
+                    <imagedata align="center" fileref="images/content-creator.png" format="PNG" width="150mm" scalefit="1"/>
                 </imageobject>
             </mediaobject>
 
@@ -80,7 +80,7 @@
                 Hover your cursor over the portlet, then click
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="images/edit_icon1.png" format="PNG"/>
+                        <imagedata fileref="images/edit_icon1.png" format="PNG" scalefit="1" width="4mm"/>
                     </imageobject>
                     <textobject>
                         <phrase>pencil</phrase>
@@ -144,7 +144,7 @@
               Click
      <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/previewicon1.png" format="PNG"/>
+                  <imagedata fileref="images/previewicon1.png" format="PNG" scalefit="1" width="4mm"/>
                 </imageobject>
                 <textobject>
                    <phrase>magnifying glass</phrase>
@@ -155,7 +155,7 @@
                 <imagedata align="center"  fileref="images/selectlocationform.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata align="center" fileref="images/selectlocationform.png" format="PNG" width="150mm"/>
+                <imagedata align="center" fileref="images/selectlocationform.png" format="PNG" width="120mm" scalefit="1"/>
               </imageobject>
             </mediaobject>
 
@@ -163,7 +163,7 @@
                 Select the parent node on the left pane and click
      <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/greentick.png" format="PNG"/>
+                  <imagedata fileref="images/greentick.png" format="PNG" scalefit="1" width="4mm"/>
                 </imageobject>
                 <textobject>
                    <phrase>green tick</phrase>

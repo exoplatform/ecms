@@ -14,7 +14,7 @@
       <para>
 				Hover your cursor over <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+              <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject> <emphasis role="bold"> --> Content --> Content Administration </emphasis> on the <emphasis role="bold">Administration</emphasis> bar.
 			</para>
@@ -23,7 +23,7 @@
           <imagedata  align="center"  fileref="images/WCM_admin.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata   align="center" fileref="images/WCM_admin.png" format="PNG" width="150mm"/>
+          <imagedata   align="center" fileref="images/WCM_admin.png" format="PNG" width="70mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
       <para>
@@ -34,7 +34,7 @@
           <imagedata  align="center"  fileref="images/sites_admin.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata   align="center" fileref="images/sites_admin.png" format="PNG" width="150mm"/>
+          <imagedata   align="center" fileref="images/sites_admin.png" format="PNG" width="150mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
     </step>

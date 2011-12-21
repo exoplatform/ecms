@@ -305,7 +305,7 @@
 							Click
 							<inlinemediaobject>
 								<imageobject>
-                           <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm" />
+                           <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="3mm" scalefit="1" />
 								</imageobject>
                         <textobject>
                            <phrase>sprocket</phrase>
@@ -317,7 +317,7 @@
 								<imagedata align="center" fileref="images/preferencesetting.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/preferencesetting.png" format="PNG" width="143mm" />
+                        <imagedata align="center"  fileref="images/preferencesetting.png" format="PNG" width="100mm" scalefit="1" />
 							</imageobject>
 						</mediaobject>
 					</step>
@@ -340,7 +340,7 @@
 						<para>
 							Simply click  <inlinemediaobject>
 								<imageobject>
-                           <imagedata fileref="images/expand_icon.png" format="PNG" width="10mm" />
+                           <imagedata fileref="images/expand_icon.png" format="PNG" width="3mm" scalefit="1" />
 								</imageobject>
                         <textobject>
                            <phrase>sprocket</phrase>
@@ -352,7 +352,7 @@
 								<imagedata align="center" fileref="images/sidebarborder.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/sidebarborder.png" format="PNG" width="150mm" />
+                        <imagedata align="center"  fileref="images/sidebarborder.png" format="PNG" width="150mm" scalefit="1" />
 							</imageobject>
 						</mediaobject>
                         <para>
@@ -363,7 +363,7 @@
 								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-                        <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" />
+                        <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" scalefit="1" />
 							</imageobject>
 						</mediaobject>
                     </listitem>
@@ -371,7 +371,7 @@
 						<para>
 							Click  <inlinemediaobject>
 								<imageobject>
-                           <imagedata fileref="images/collapse_icon.png" format="PNG" width="10mm" />
+                           <imagedata fileref="images/collapse_icon.png" format="PNG" width="3mm" scalefit="1"/>
 								</imageobject>
                         <textobject>
                            <phrase>sprocket</phrase>

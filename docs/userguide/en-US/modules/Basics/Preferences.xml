@@ -15,7 +15,7 @@
       <para>
     Click the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm"/>
+            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="4mm" scalefit="1"/>
           </imageobject>
           <textobject>
              <phrase>sprocket</phrase>
@@ -30,7 +30,7 @@
           <imagedata  align="center"  fileref="images/preferencesettingform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata   align="center" fileref="images/preferencesettingform.png" format="PNG" width="150mm"/>
+          <imagedata   align="center" fileref="images/preferencesettingform.png" format="PNG" width="100mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
       <table>

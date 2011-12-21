@@ -56,7 +56,7 @@
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
+              <imagedata fileref="images/adddocumenticon.png" format="PNG" width="20mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Add Document ]</phrase>
@@ -306,7 +306,7 @@
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm"/>
+              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="25mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Edit Document ]</phrase>

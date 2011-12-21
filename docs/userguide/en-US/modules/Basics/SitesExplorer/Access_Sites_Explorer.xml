@@ -15,7 +15,7 @@
 				Hover your cursor over 
         <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+              <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="3mm"/>
             </imageobject>
           </inlinemediaobject> on the <emphasis role="bold">Administration</emphasis> bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
 			</para>
@@ -25,7 +25,7 @@
 					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG"   />
 				</imageobject>
 				 <imageobject role="fo">
-               <imagedata align="center"  fileref="images/sitesexplorer.png" format="PNG" width="150mm" />
+               <imagedata align="center"  fileref="images/sitesexplorer.png" format="PNG" scalefit="1" width="70mm" />
 				</imageobject>
 			</mediaobject>
 			 <para>

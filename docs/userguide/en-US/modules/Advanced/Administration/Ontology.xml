@@ -23,7 +23,7 @@
                 <imagedata fileref="images/ManageTag.png" format="PNG" align="center"/>
             </imageobject>
             <imageobject role="fo">
-                <imagedata fileref="images/ManageTag.png" format="PNG" align="center" width="150mm"/>
+                <imagedata fileref="images/ManageTag.png" format="PNG" align="center" width="150mm" scalefit="1"/>
             </imageobject>
         </mediaobject>
         <section id="sect-User_Guide-Manage_Tags-Add_a_tag_style">
@@ -45,8 +45,8 @@
                             <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"
-                                       width="150mm"/>
+                            <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center" scalefit="1"
+                                       width="100mm"/>
                         </imageobject>
                     </mediaobject>
                     <para>
@@ -189,7 +189,7 @@
                         Click
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
+                                <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="4mm" scalefit="1"/>
                             </imageobject>
                             <textobject>
                                 <phrase>"Select user"</phrase>
@@ -206,7 +206,7 @@
                             <imagedata fileref="images/selectmembership.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/selectmembership.png" format="PNG" align="center" width="146mm"/>
+                            <imagedata fileref="images/selectmembership.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -238,7 +238,7 @@
                         You can also delete memberships that have permissions by clicking
                         <inlinemediaobject>
                             <imageobject>
-                                <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                                <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
                         regarding to that membership, then click
@@ -285,7 +285,7 @@
                         <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -306,7 +306,7 @@
                     Select the home path by clicking
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Plus_tree_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Plus_tree_icon.png" format="PNG" scalefit="1" width="3mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     . The
@@ -318,7 +318,7 @@
                         <imagedata fileref="images/select_home_path.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
                 <itemizedlist>
@@ -327,7 +327,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Select_path_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Select_path_icon.png" format="PNG" scalefit="1" width="3mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     next to <emphasis role="bold">Root Path</emphasis> if you want to select the root path or;
@@ -340,7 +340,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/Select_path_icon.png" format="PNG"/>
+                            <imagedata fileref="images/Select_path_icon.png" format="PNG" scalefit="1" width="3mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     corresponding to the path that you want to select as a home path.
@@ -361,14 +361,14 @@
                         <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
                 <para> <emphasis role="bold">i.</emphasis>
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
+                            <imagedata fileref="images/usericon.png" format="PNG" width="3mm" scalefit="1"/>
                         </imageobject>
                         <textobject>
                             <phrase>"Select user"</phrase>
@@ -377,7 +377,7 @@
                     to select a user or
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
+                            <imagedata fileref="images/grouppermission.png" format="PNG" width="4mm" scalefit="1"/>
                         </imageobject>
                         <textobject>
                             <phrase>"Select memberships"</phrase>
@@ -386,7 +386,7 @@
                     to select memberships or
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/alluserpermission.png" format="PNG" width="7mm"/>
+                            <imagedata fileref="images/alluserpermission.png" format="PNG" width="4mm" scalefit="1"/>
                         </imageobject>
                         <textobject>
                             <phrase>"Select everyone"</phrase>
@@ -465,7 +465,7 @@
                         <imagedata fileref="images/action_gimme.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/action_gimme.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/action_gimme.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -516,7 +516,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                            <imagedata fileref="images/editicon4.png" format="PNG" width="4mm" scalefit="1"/>
                         </imageobject>
                         <textobject>
                             <phrase>pencil</phrase>
@@ -529,7 +529,7 @@
                         <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -538,7 +538,7 @@
                     Click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
+                            <imagedata fileref="images/blueplusicon.png" format="PNG" width="4mm" scalefit="1"/>
                         </imageobject>
                         <textobject>
                             <phrase>plus</phrase>
@@ -555,7 +555,7 @@
                         <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center" width="150mm"/>
+                        <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center" width="100mm" scalefit="1"/>
                     </imageobject>
                 </mediaobject>
             </step>
@@ -597,7 +597,7 @@
                 You can delete a category by clicking
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="images/Delete_icon.png" format="PNG"/>
+                        <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                     </imageobject>
                 </inlinemediaobject>
                 corresponding to the category that you want to delete. Click

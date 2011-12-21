@@ -33,7 +33,7 @@
         </imageobject>
         <imageobject role="fo">
           <imagedata align="center" fileref="images/SEO_edit.png" format="PNG"
-                     width="210mm"/>
+                     width="80mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
 
@@ -48,7 +48,7 @@
         </imageobject>
         <imageobject role="fo">
           <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"
-                     width="210mm"/>
+                     width="80mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
       </listitem>
@@ -59,7 +59,7 @@
           <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="210mm"/>
+          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="150mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
       </listitem>
@@ -150,7 +150,7 @@
         <para>
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/SEO_red_icon.png" format="PNG"/>
+              <imagedata fileref="images/SEO_red_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>
           means that the SEO information is empty.
@@ -158,7 +158,7 @@
         <para>
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/SEO_orange_icon.png" format="PNG"/>
+              <imagedata fileref="images/SEO_orange_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>
           means that the SEO information has been updated but some information are not filled out yet.
@@ -166,7 +166,7 @@
         <para>
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/SEO_green_icon.png" format="PNG"/>
+              <imagedata fileref="images/SEO_green_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>
           means that the <emphasis role="bold">SEO Management</emphasis> form is filled out with the full SEO information.
@@ -174,7 +174,7 @@
         <para>
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/SEO_gray_icon.png" format="PNG"/>
+              <imagedata fileref="images/SEO_gray_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>
           means that the <emphasis role="bold">SEO Management</emphasis> feature is disabled.

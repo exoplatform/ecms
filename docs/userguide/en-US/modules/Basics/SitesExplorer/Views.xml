@@ -16,7 +16,7 @@
 			The number of view types depends on which drive you are browsing. In eXo Platform, you can manage view types by selecting
       <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/sawtooth_icon.png" format="PNG"/>
+              <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject> <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage View.</emphasis> See the <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section for more details.
 		</para>
@@ -31,7 +31,7 @@
 				<imagedata align="center" fileref="images/detailsview.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/detailsview.png" format="PNG" width="150mm" />
+            <imagedata align="center"  fileref="images/detailsview.png" format="PNG" width="150mm" scalefit="1" />
 			</imageobject>
 		</mediaobject>
 		 <para>
@@ -42,7 +42,7 @@
 			<para>
 			<inlinemediaobject>
 				<imageobject>
-					<imagedata fileref="images/descendingarrow.png" format="PNG" width="5mm"/>
+					<imagedata fileref="images/descendingarrow.png" format="PNG" width="3mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>ascending arrow</phrase>
@@ -54,7 +54,7 @@
 			<para>
 			<inlinemediaobject>
 				<imageobject>
-               <imagedata fileref="images/ascendingarrow.png" format="PNG" width="5mm"/>
+               <imagedata fileref="images/ascendingarrow.png" format="PNG" width="3mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>descending arrow</phrase>
@@ -74,7 +74,7 @@
 				<imagedata align="center" fileref="images/imagefolders.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/imagefolders.png" format="PNG" width="150mm" />
+            <imagedata align="center"  fileref="images/imagefolders.png" format="PNG" width="150mm" scalefit="1" />
 			</imageobject>
 
 		</mediaobject>
@@ -133,7 +133,7 @@
 				<imagedata align="center" fileref="images/iconsview.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/iconsview.png" format="PNG" width="150mm" />
+            <imagedata align="center"  fileref="images/iconsview.png" format="PNG" width="150mm" scalefit="1"/>
 			</imageobject>
 
 		</mediaobject>
@@ -154,7 +154,7 @@
 				<imagedata align="center" fileref="images/thumbnailimages.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/thumbnailimages.png" format="PNG" width="150mm" />
+            <imagedata align="center"  fileref="images/thumbnailimages.png" format="PNG" width="150mm" scalefit="1" />
 			</imageobject>
 		</mediaobject>
 
@@ -205,7 +205,7 @@
 			To view pictures in the slide show, click
       <inlinemediaobject>
 				<imageobject>
-               <imagedata fileref="images/slideshowicon.png" format="PNG" width="7mm"/>
+               <imagedata fileref="images/slideshowicon.png" format="PNG" width="5mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>slide show</phrase>
@@ -217,7 +217,7 @@
 				<imagedata align="center" fileref="images/imageslideshow.png" format="PNG"  />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/imageslideshow.png" format="PNG" width="63mm"/>
+            <imagedata align="center"  fileref="images/imageslideshow.png" format="PNG" width="50mm" scalefit="1"/>
 			</imageobject>
 		</mediaobject>
 		 <para>
@@ -228,7 +228,7 @@
 				<imagedata align="center" fileref="images/pictureslideshowscreen.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/pictureslideshowscreen.png" format="PNG" width="138mm" />
+            <imagedata align="center"  fileref="images/pictureslideshowscreen.png" format="PNG" width="100mm" scalefit="1" />
 			</imageobject>
 
 		</mediaobject>
@@ -254,7 +254,7 @@
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/slideshownavfirst.png" format="PNG" width="7mm" />
+                           <imagedata align="center" fileref="images/slideshownavfirst.png" format="PNG" width="4mm" scalefit="1"/>
 								</imageobject>
 
 							</mediaobject>
@@ -269,7 +269,7 @@
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/slideshownavprev.png" format="PNG" width="7mm" />
+                           <imagedata align="center" fileref="images/slideshownavprev.png" format="PNG" width="4mm" scalefit="1" />
 								</imageobject>
 
 							</mediaobject>
@@ -283,7 +283,7 @@
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/slideshownavpause.png" format="PNG" width="7mm" />
+                           <imagedata align="center" fileref="images/slideshownavpause.png" format="PNG" width="4mm" scalefit="1" />
 								</imageobject>
 							</mediaobject>
 						</entry>
@@ -291,17 +291,17 @@
 							Pause the slide show. After clicking this button, 
               <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/slideshownavpause.png" format="PNG"/>
+              <imagedata fileref="images/slideshownavpause.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject> will become 
            <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/slideshownavplay.png" format="PNG"/>
+              <imagedata fileref="images/slideshownavplay.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>. Click 
              <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/slideshownavplay.png" format="PNG"/>
+              <imagedata fileref="images/slideshownavplay.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject> to continue viewing the pictures node.
           </entry>
@@ -310,7 +310,7 @@
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/slideshownavnext.png" format="PNG" width="7mm" />
+                           <imagedata align="center" fileref="images/slideshownavnext.png" format="PNG" width="4mm" scalefit="1"/>
 								</imageobject>
 
 							</mediaobject>
@@ -324,7 +324,7 @@
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/slideshownavlast.png" format="PNG" width="7mm" />
+                           <imagedata align="center" fileref="images/slideshownavlast.png" format="PNG" width="4mm" scalefit="1"/>
 								</imageobject>
 
 							</mediaobject>
@@ -348,7 +348,7 @@
 			This view enables users to view all nodes created and uploaded by simply clicking
 			<inlinemediaobject>
 				<imageobject>
-               <imagedata fileref="images/timeline.png" format="PNG" width="5mm"/>
+               <imagedata fileref="images/timeline.png" format="PNG" width="4mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>clock</phrase>
@@ -360,7 +360,7 @@
 				<imagedata align="center" fileref="images/timelineview.png" format="PNG"  />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/timelineview.png" format="PNG" width="62mm" />
+            <imagedata align="center"  fileref="images/timelineview.png" format="PNG" width="62mm" scalefit="1" />
 			</imageobject>
 		</mediaobject>
 		 <para>
@@ -375,7 +375,7 @@
 				<imagedata align="center" fileref="images/timelinedetails.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-            <imagedata align="center"  fileref="images/timelinedetails.png" format="PNG" width="150mm" />
+            <imagedata align="center"  fileref="images/timelinedetails.png" format="PNG" width="150mm" scalefit="1" />
 			</imageobject>
 
 		</mediaobject>
@@ -383,7 +383,7 @@
 			You can also click
 			<inlinemediaobject>
 				<imageobject>
-               <imagedata fileref="images/favestar.png" format="PNG" width="6mm"/>
+               <imagedata fileref="images/favestar.png" format="PNG" width="5mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>star</phrase>
@@ -391,7 +391,7 @@
 			</inlinemediaobject> to mark your item as favorite, or 
 			<inlinemediaobject>
 				<imageobject>
-               <imagedata fileref="images/unfavestar.png" format="PNG" width="8mm" />
+               <imagedata fileref="images/unfavestar.png" format="PNG" width="5mm" scalefit="1"/>
 				</imageobject>
             <textobject>
                <phrase>star</phrase>
