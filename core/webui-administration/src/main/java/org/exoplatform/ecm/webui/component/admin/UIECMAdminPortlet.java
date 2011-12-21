@@ -68,7 +68,6 @@ public class UIECMAdminPortlet extends UIPortletApplication {
     UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class, null, "UIECMAdminUIPopupAction");
     uiPopupAction.getChild(UIPopupWindow.class).setId("UIECMAdminUIPopupWindow") ;
     try{
-      getApplicationComponent(RepositoryService.class).getCurrentRepository();
       UIECMAdminControlPanel controlPanel = addChild(UIECMAdminControlPanel.class, null, null) ;
       controlPanel.initialize();
       UIECMAdminWorkingArea workingArea = addChild(UIECMAdminWorkingArea.class, null, null);
