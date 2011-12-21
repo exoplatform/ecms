@@ -91,8 +91,6 @@ import org.ow2.bonita.util.BonitaException;
 import org.ow2.bonita.util.Misc;
 import org.picocontainer.Startable;
 
-//TODO remove all commented code.
-
 /**
  * Bonita implementation of the Workflow Service in eXo Platform
  *
@@ -203,7 +201,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       this.formsService.removeForms(processId);
       this.fileDefinitionService.remove(processId);
     } catch (Exception e) {
-      //TODO add exception management
+      LOG.error("An unexpected problem occurs while deleting this process "+processId+" ");
     }
   }
 

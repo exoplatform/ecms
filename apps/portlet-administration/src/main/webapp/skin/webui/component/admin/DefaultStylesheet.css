@@ -56,217 +56,11 @@
 	vertical-align: top;
 }
 
-.UIECMAdminPortlet .UIRepositoryControl {
-	overflow: hidden;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .ControlLayout {
-	font-size: 11px ;
-  background: url('DefaultSkin/background/ECMAdmin.gif') repeat-x left -16px ; 
-  height: 34px;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .SelectorArea {
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
-  margin: auto ;
-  height: 34px;
-	line-height: 34px;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .SelectorArea .RepoNameLabel {
-	font-weight: bold ;
-	float: left; /* orientation=lt */
-	float: right; /* orientation=rt */
-	padding: 0px 7px 0px 20px; /* orientation=lt */
-	padding: 0px 20px 0px 7px; /* orientation=rt */
-	line-height: 30px;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .SelectorArea .UISelect {
-	 width: 190px;
-	 float: left;
-	 height: 34px; 
-}
-
 .UIECMAdminPortlet .UISelect .UIForm .HorizontalLayout {
 	padding: 0px;
 	background: none;
 	border: none;
 }
-
-.UIECMAdminPortlet .UIRepositoryControl .SelectorArea .UISelect .selectbox {
-	 width: 180px;
-	 float: left; 
-	 margin-top: 2px;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .ActionsArea {
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
-  height: 34px;
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .ActionButton {
-	width: 24px ; height: 24px;
-	float: left ; /* orientation=lt */
-	float: right ; /* orientation=rt */
-	margin: 5px 0px 0px 5px;	/* orientation=lt */
-	margin: 5px 5px 0px 0px;	/* orientation=rt */
-}
-
-.UIECMAdminPortlet .UIRepositoryControl .SeparatorLine {
-  width: 2px;
-  height: 30px;
-  margin: 2px 2px 0px 8px;	/* orientation=lt */
-  margin: 2px 8px 0px 2px;	/* orientation=rt */
-  background: url('DefaultSkin/background/SeparatorLine2x1.gif') repeat-y;
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
- 
-}
-
-/*############################## --Begin UIRepositoryManager -- ########################*/
-
-.UIECMAdminPortlet .UIRepositoryForm {
-	padding: 10px;
-}
-
-.UIECMAdminPortlet .UIFormInputSet .AddIcon16x16 {
-	margin-left: 5px;
-	float: none;
-}
-
-.UIECMAdminPortlet .UIRepositoryForm .FormContainer .UIFormGrid .FieldLabel {
-	width: 128px;
-}
-
-.UIECMAdminPortlet .UIRepositoryFormContainer .UIGrid {
-	width: 95%;
-	margin: 10px auto;
-}
-
-.UIECMAdminPortlet .UIRepositoryFormContainer .UIGrid .SelectIcon {
-	background: url('DefaultSkin/background/ECMAdmin.gif') no-repeat top left;
-	width: 16px; 
-	height: 16px;
-}
-
-.UIECMAdminPortlet .UIRepositoryFormContainer .FormContainer .FieldComponent a:hover {
-	color: #0183F1; 
-}
-
-/*=====================================UIWorkspaceWizardContainer==========================*/
-
-.UIRepositoryFormContainer .UIWorkspaceWizard {
-	border: 1px solid #b7b7b7;
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .UIForm .HorizontalLayout .UIFormInputSet {
-	padding-bottom: 0px;
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .HiddenLabel {
-	display: none  ;	
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .SelectedLabel {
-	border-bottom: 1px solid #B7B7B7 ;
-	padding: 15px 0px;
-	line-height: 15px;
-	background: #f9f9f9;
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .WizardLabel {
-  font-weight: bold; 
-  margin: 0px 7px;
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .UIWizardAction {
-	background: #f9f9f9;
-}
-
-.UIWorkspaceWizard .UIWizardAction .StepNavigationTitle {
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
-  font-weight: bold;
-  margin: 0px 10px 0px 15px; /* orientation=lt */
-  margin: 0px 15px 0px 10px; /* orientation=rt */
-}
-
-.UIWorkspaceWizard .UIWizardAction .StepNavigationBar {
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
-  line-height: 38px;
-}
-
-.UIWorkspaceWizard .UIWizardAction .StepNavigationBar a{
-  float: left; /* orientation=lt */
-  float: right; /* orientation=rt */
-  width: 18px; line-height: 18px;
-  font-weight: bold;
-  text-align: center;
-  margin: 9px 3px 0px 3px; 
-  border: solid 1px gray;
-}
-
-.UIWorkspaceWizard .UIWizardAction .StepNavigationBar a:hover {
-  color: orange;
-  background: #f8f8f8;
-  border: solid 1px #fdb913 ;
-}
-
-.UIWorkspaceWizard .UIWizardAction .StepNavigationBar a.SelectedStep {
-  color: red;
-}
-
-.UIWorkspaceWizard .UIWizardAction .UIAction {
-	float: right; /* orientation=lt */
-	float: left; /* orientation=rt */
-	padding-right: 10px; /* orientation=lt */
-	padding-left: 10px; /* orientation=rt */
-}
-
-.UIWorkspaceWizard .UIWizardAction .UIAction .ActionContainer {
-	margin: 0px;
-}
-
-.UIWorkspaceWizardContainer .UIWorkspaceWizard .UIFormTabPane {
-	padding: 0px;
-}
-
-.UIWorkspaceWizardContainer .UIWorkspaceWizard .UITabPane .TabPaneContent {
-	padding: 0px;
-}
-
-.UIRepositoryFormContainer .UIWorkspaceWizard .UITabPane .UITabContentContainer {
-	border-left: none;
-	border-right: none;
-}
-
-.UIWorkspaceWizard .HorizontalLayout .UITabContentContainer .UITabContent .UIFormInputSet .FormContainer {
-	width: 500px;
-	margin: auto;
-}
-
-.UIWorkspaceWizard .HorizontalLayout .UITabContent .step1 .UIFormInputSet .AddPermissionIcon  {
-	margin: 0px;
-}
-
-.UIWorkspaceWizard .TabPaneContent .InfoDetail {
- padding: 0px 0px 2px 50px;  
- color:#ef5604 ;
-}
-
-.UIRepositoryFormContainer .UIPermissionContainer .UIWorkspacePermissionForm {
-  padding: 10px;
-}
-
-.UIRepositoryFormContainer .UIPermissionContainer .UIWorkspacePermissionForm .UIFormGrid {
-  width: auto;
-}
-
-/*############################## --End UIRepositoryControl -- ########################*/
 
 .UIECMAdminPortlet .UIResizableBlock {
 	overflow: auto;
@@ -317,7 +111,6 @@
 
 .UIECMAdminPortlet .ECMLayoutSeparator {
 	width: 6px;
-	background: url('DefaultSkin/background/LayoutSeparator.gif') repeat-y left center;
 }
 
 .UIECMAdminPortlet .CollapseSideBar {
@@ -744,7 +537,7 @@ float: left;
 	line-height: 16px;
 }
  .UIFormGrid .MultiRadioInput input{
-	float: lef; /* orientation=lt */ 
+	float: left; /* orientation=lt */ 
 	float: right; /* orientation=rt */
 	clear: both;
 }

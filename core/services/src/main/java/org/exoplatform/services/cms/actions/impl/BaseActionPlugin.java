@@ -44,7 +44,6 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.DMSEvent;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -153,7 +152,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         srcWorkspace, srcPath, variables, actionType);
     Session session = getSystemSession(srcWorkspace);
     ObservationManager obsManager = session.getWorkspace().getObservationManager();
-    // TODO all actions are stored at srcNode/exo:actions node
     String listenerKey = repoName + ":" + srcPath + "/exo:actions/" + actionName;
     if (listeners_.containsKey(listenerKey)) {
       obsManager.removeEventListener(listeners_.get(listenerKey));
@@ -204,7 +202,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
                              : null;
     String actionType = storedActionNode.getPrimaryNodeType().getName() ;
     String srcWorkspace = storedActionNode.getSession().getWorkspace().getName() ;
-    //TODO all actions are stored in srcNode/exo:actions
     String srcPath = storedActionNode.getParent().getParent().getPath() ;
     Map<String,Object> variables = new HashMap<String,Object>() ;
     NodeType nodeType = storedActionNode.getPrimaryNodeType() ;
@@ -224,7 +221,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     ECMEventListener listener =
       createEventListener(actionName, actionExecutable, repository, srcWorkspace, srcPath, variables, actionType);
     Session session = getSystemSession(srcWorkspace);
-    //TODO all actions are stored at srcNode/exo:actions node
     String listenerKey = repository + ":" + srcPath + "/exo:actions/" +actionName;
     ObservationManager obsManager = session.getWorkspace().getObservationManager();
     if(listeners_.containsKey(listenerKey)){
@@ -257,7 +253,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String srcWorkspace = storedActionNode.getSession().getWorkspace().getName() ;
     String scheduleType = storedActionNode.getProperty(SCHEDULE_TYPE_PROP).getString() ;
     String initiator = storedActionNode.getProperty(SCHEDULED_INITIATOR).getString() ;
-    //TODO all action node is stored in /exo:actions
     String srcPath = storedActionNode.getParent().getParent().getPath() ;
     String jobName = storedActionNode.getProperty(JOB_NAME_PROP).getString() ;
     String jobGroup = storedActionNode.getProperty(JOB_GROUP_PROP).getString() ;
@@ -281,9 +276,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String actionExecutable = getActionExecutable(actionType);
     variables.put(initiatorVar,initiator) ;
     variables.put(actionNameVar, actionName);
-//    variables.put(srcRepository, repository) ;
     variables.put(executableVar,actionExecutable) ;
-    //variables.put("nodePath", path);
     variables.put(srcWorkspaceVar, srcWorkspace);
     variables.put(srcPathVar, srcPath);
     JobDataMap jdatamap = new JobDataMap() ;
@@ -408,7 +401,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
       } catch (Exception e) {
         if(session != null) session.logout();
         LOG.warn(" ==> Can not init action '" + action.getName()
-            //+ "' in repository '"+ getRepositoryName()
             +"' and workspace '"+action.getSrcWorkspace()+"'") ;
       }
     }
@@ -420,16 +412,14 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Session session = null ;
     for (Iterator iter = actions.iterator(); iter.hasNext();) {
       ActionConfig.Action action = (ActionConfig.Action) iter.next();
-//      if(repository.equals(getRepositoryName())) {
-        try {
-          session = getSystemSession(action.getSrcWorkspace());
-          importAction(action,session) ;
-        } catch (Exception e) {
-          if(session != null) session.logout();
-          LOG.warn(" ==> Can not init action '" + action.getName()
-              + "' in current repository and workspace '"+action.getSrcWorkspace()+"'") ;
-        }
-//      }
+      try {
+        session = getSystemSession(action.getSrcWorkspace());
+        importAction(action,session) ;
+      } catch (Exception e) {
+        if(session != null) session.logout();
+        LOG.warn(" ==> Can not init action '" + action.getName()
+            + "' in current repository and workspace '"+action.getSrcWorkspace()+"'") ;
+      }
     }
   }
 
@@ -441,10 +431,8 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ActionServiceContainer actionContainer = (ActionServiceContainer) container
         .getComponentInstanceOfType(ActionServiceContainer.class);
-    RepositoryService repositoryService = (RepositoryService) container
-    .getComponentInstanceOfType(RepositoryService.class);
-    TemplateService templateService = (TemplateService) container
-    .getComponentInstanceOfType(TemplateService.class);
+    RepositoryService repositoryService = 
+        (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageRepo = repositoryService.getCurrentRepository();
     Node actionNodeName = null;
     try {
@@ -457,7 +445,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
       if (!srcNode.isNodeType("exo:actionable")) {
         srcNode.addMixin("exo:actionable");
       }
-      //TODO now, each node will have actions storage. It's better to store all actions in one storage like version storage
       try {
         actionsNode = srcNode.getNodes(EXO_ACTIONS).nextNode();
       } catch (Exception e) {

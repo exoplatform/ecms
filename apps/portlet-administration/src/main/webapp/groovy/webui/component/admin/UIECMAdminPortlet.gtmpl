@@ -1,5 +1,4 @@
 <%
-  import org.exoplatform.ecm.webui.component.admin.repository.UIRepositoryControl ;
   import org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel ;
   import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea ;
   import org.exoplatform.webui.core.UIPopupContainer;
@@ -13,9 +12,6 @@
 %>
 <div class="UIECMAdminPortlet" id="UIECMAdminPortlet">
   <%uicomponent.renderChild(UIPopupContainer.class);%>
-	<%
-	/* uicomponent.renderChild(UIRepositoryControl.class); */
-	%>
 	<div class="UIResizableBlock" style="height: 600px">
 	  <%
 	    int style = 6;
