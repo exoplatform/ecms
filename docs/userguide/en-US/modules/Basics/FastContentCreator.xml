@@ -55,7 +55,7 @@
       </para>
 
   <section id="sect-User_Guide-Fast_Content_Creator-Configuration">
-    <title>Configuration of Fast Content Creator</title>
+    <title>Configure Fast Content Creator</title>
   <para>
        In &PRODUCT;, the <emphasis role="bold">Fast Content Creator</emphasis> is applied in the <emphasis role="bold">Question?</emphasis> portlet with the <emphasis role="bold">Content Creator</emphasis> mode by default. Thus, in this guide, you are instructed how to configure the <emphasis role="bold">Fast Content Creator</emphasis> by editing the <emphasis role="bold">Question?</emphasis> portlet as an example.
    </para>

@@ -53,7 +53,7 @@
     </step>
   </procedure>
   <citetitle>
-    <para><emphasis role="bold">Configuration of Category Navigation</emphasis> </para>
+    <para><emphasis role="bold">Configure Category Navigation</emphasis> </para>
   </citetitle>
     <para>
    Administrators can edit the <emphasis role="bold">Category Navigation</emphasis> portlet as follows:</para>
@@ -112,8 +112,8 @@
     </step>
     <step>
       <para>
-     Edit some fields in the <emphasis role="bold">Display Settings</emphasis> part as you want. See more details in the <xref
-              linkend="form-User_Guide-Preferences-Content_List_Preferences."/> section.
+     Edit some fields in the <emphasis role="bold">Display Settings</emphasis> part as you want. See more details in the <link
+              linkend="form-User_Guide-Preferences-Content_List_Preferences.">Content List Preferences</link> section.
     </para>
     </step>
     <step>

@@ -65,7 +65,7 @@
       </listitem>
     </itemizedlist>
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
-    <title>How to use WebDAV in &PRODUCT;?</title>
+    <title>Use WebDAV in &PRODUCT;</title>
     <para>To use WebDAV in
    &PRODUCT;, you first need to have the Internet or Intranet connected. Next, you can follow one of the two following ways:</para>
    
@@ -120,7 +120,7 @@
         <para>
      Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field.
     </para>
-          <para>For example, the address of the demonstration site <emphasis>Acme</emphasis> is <code>http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme.</code></para>
+          <para>For example, the address of the demonstration site <emphasis>Acme</emphasis> is <code>http://mycompany.com:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme.</code></para>
       </step>
       <step>
         <para>
@@ -210,7 +210,7 @@
       <procedure>
         <step>
           <para>
-      Access a site via WebDAV (refer to the <link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">How to use WebDAV in eXo Platform?</link> section), then go to a <emphasis role="bold">web content</emphasis> folder of the site.
+      Access a site via WebDAV (refer to the <link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">Use WebDAV in eXo Platform</link> section), then go to a <emphasis role="bold">web content</emphasis> folder of the site.
      </para>
         </step>
         <step>
