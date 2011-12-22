@@ -183,9 +183,7 @@
           </step>
           <step>
             <para xml:id="step-User_Guide-Add_a_new_category-Input_values_for_fields">Input values into fields.</para>
-            <substeps>
-              <step>
-                  <para>
+                 <para>
                       <emphasis role="bold">i.</emphasis>
                       Select a moderator for a category by clicking
                       <inlinemediaobject>
@@ -227,8 +225,6 @@
                       </listitem>
                   </itemizedlist>
 
-            </step>
-              <step>
                   <para>
                       <emphasis role="bold">ii.</emphasis>
                       Click
@@ -256,19 +252,20 @@
                   <itemizedlist>
                       <listitem>
                           <para>
-                              Select a group from the left pane and a membership type from the right pane. The
+                              Select a group from the left pane and a membership type from the right pane.</para>
+                          <para>The
                               membership and group selected will be displayed in the
                               <emphasis role="bold">Moderator</emphasis>
                               field.
                           </para>
                       </listitem>
-					  <listitem>
-					  <para>You will see your added category in the list of categories.
-					  </para>
-					  </listitem>
                   </itemizedlist>
               </step>
-            </substeps>
+              <step>
+                  <para>Click <emphasis role="bold">Save</emphasis> to accept creating a new category.</para>
+
+                 <para>You will see your added category in the list of categories.
+					  </para>
 			<itemizedlist>
 			<listitem>
             <para>After creating a category, you can create new subscriptions or newsletters for this category.</para>
