@@ -230,13 +230,6 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
         
         return;
       }
-      if (srcPath == null) {
-        Object[] arg = { realPath };
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.no-taxonomy-selected",
-            arg, ApplicationMessage.WARNING));
-        
-        return;
-      }
       String destPath = realPath + srcPath.substring(srcPath.lastIndexOf("/"));
       Node realNode = uiTaxonomyTreeCreateChild.getNodeByPath(realPath);
       if (realNode.hasNode(srcPath.substring(srcPath.lastIndexOf("/") + 1))) {
@@ -282,7 +275,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       UITaxonomyTreeWorkingArea uiManager = event.getSource();
       UITaxonomyTreeCreateChild uiTaxonomyTreeCreateChild = uiManager.getParent();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIPopupContainer uiPopupContainer = uiTaxonomyTreeCreateChild.initPopupPermission(UITaxonomyManager.PERMISSION_ID_POPUP);
+      UIPopupContainer uiPopupContainer = uiTaxonomyTreeCreateChild.initPopupPermission(UITaxonomyTreeCreateChild.PERMISSION_ID_POPUP);
       UIPermissionManager uiPerMan = uiPopupContainer.createUIComponent(UIPermissionManager.class, null, null);
       uiPerMan.getChild(UIPermissionInfo.class).setCurrentNode(uiTaxonomyTreeCreateChild.getNodeByPath(path));
       uiPerMan.getChild(UIPermissionForm.class).setCurrentNode(uiTaxonomyTreeCreateChild.getNodeByPath(path));

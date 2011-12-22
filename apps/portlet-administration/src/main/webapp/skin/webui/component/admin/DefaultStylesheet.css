@@ -218,6 +218,11 @@
 	padding: 0px;
 }
 
+.UIECMAdminPortlet .UIFormInputSet .AddIcon16x16 {
+  margin-left: 5px;
+  float: none;
+}
+
 .UIECMAdminPortlet .UIFormInputSetWithAction .ActionField {
   margin-bottom: 5px ;
   max-width: 400px;
@@ -291,7 +296,6 @@
 
 .UIECMAdminPortlet .UIDriveManager .UIGrid td {
     border-color: #FFFFFF -moz-use-text-color #FFFFFF #FFFFFF;
-    border-style: solid none solid solid;
     border-width: 1px 0 1px 1px;
     padding: 5px;
     vertical-align: middle;

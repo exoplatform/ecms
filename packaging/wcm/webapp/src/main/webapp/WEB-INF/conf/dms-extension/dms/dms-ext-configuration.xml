@@ -293,14 +293,6 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageCategoriesActionComponent</string></field>
 					</object>
 				</object-param>					
-				<!--object-param>
-					<name>ManageSimpleCategories</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ManageSimpleCategories</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageSimpleCategoriesActionComponent</string></field>
-					</object>
-				</object-param-->					
 				<object-param>
 					<name>ManageRelations</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
@@ -350,16 +342,6 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerTreesComponent</string></field>
 					</object>
 				</object-param>
-				<!-- object-param>
-					<name>UITaxonomyManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>120</int></field>
-						<field name="name"><string>UITaxonomyManager</string></field>
-						<field name="category"><string>Ontologies</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerComponent</string></field>
-					</object>
-				</object-param-->
 				<object-param>
 					<name>UIFolksonomyManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
@@ -370,18 +352,6 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyManagerComponent</string></field>
 					</object>
 				</object-param>
-				
-<!--           <object-param>
-          <name>UIFolksonomyTreeManager</name>
-          <object type="org.exoplatform.webui.ext.UIExtension">
-            <field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-            <field name="rank"><int>140</int></field>
-            <field name="name"><string>UIFolksonomyTreeManager</string></field>
-            <field name="category"><string>Ontologies</string></field>
-            <field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyTreeManagerComponent</string></field>
-          </object>
-        </object-param>
--->          
 				<object-param>
 					<name>UITemplatesManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
