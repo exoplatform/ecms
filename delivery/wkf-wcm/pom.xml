@@ -11,10 +11,6 @@
   <name>eXo ECM Suite :: Delivery :: WKF WCM</name>
   <description>eXo Entreprise Content Management Suite :: Delivery :: Workflow WCM</description>
   <modules>
-    <module>server-bonita</module>
-    <module>server-jboss</module>
-    <module>server-jboss-ear</module>
-    <module>server-jonas</module>
     <module>server-tomcat</module>
     <module>module</module>
     <module>product</module>

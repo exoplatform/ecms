@@ -12,6 +12,5 @@
   <description>eXo Entreprise Content Management Suite :: Extensions :: Deprecated</description>
   <modules>
     <module>portlet-browsecontent</module>
-    <module>portlet-jcrconsole</module>
   </modules>
 </project>

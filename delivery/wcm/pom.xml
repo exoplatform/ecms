@@ -11,10 +11,7 @@
   <name>eXo ECM Suite :: Delivery :: WCM</name>
   <description>eXo Entreprise Content Management Suite :: Delivery :: WCM</description>
   <modules>
-    <module>server-jonas</module>
     <module>server-tomcat</module>
-    <module>server-jboss-ear</module>
-    <module>server-jboss</module>
     <module>module</module>
     <module>product</module>
     <module>jboss-package</module>
