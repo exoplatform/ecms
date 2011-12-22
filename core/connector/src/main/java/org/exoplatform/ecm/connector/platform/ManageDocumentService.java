@@ -369,8 +369,6 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   private Response buildXMLResponseForChildren(Node node, String driveName, String currentFolder ) throws Exception {
-    Session session = node.getSession();
-    String workspaceName = session.getWorkspace().getName();
     Document document = createNewDocument();
     Element rootElement = document.createElement("Folder");
     Element folders = document.createElement("Folders");
