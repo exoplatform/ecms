@@ -20,21 +20,22 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.services.jcr.RepositoryService;
-%>
 
-<%
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   String componentId = uicomponent.getId();
-    String serverUrl= uicomponent.getWebDAVServerPrefix();
-    String portalName = uicomponent.getPortalName();
-    RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
-    String repository = rService.getCurrentRepository().getConfiguration().getName();
-    def viewComponentId  = new Date().getTime();
-    def rcontext = _ctx.getRequestContext() ;
-    rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
-    rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
-    rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId');");
-    rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
+  String serverUrl= uicomponent.getWebDAVServerPrefix();
+  String portalName = uicomponent.getPortalName();
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
+  def viewComponentId  = new Date().getTime();
+  def rcontext = _ctx.getRequestContext() ;
+  UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
+  def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
+  def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
+  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId');");
+  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
   uicomponent.updateNodeLists();
   List<String> labels = new ArrayList<String>();
   labels.add("UIDocumentInfo.label.Today");
@@ -42,16 +43,16 @@ import org.exoplatform.services.jcr.RepositoryService;
   labels.add("UIDocumentInfo.label.EarlierThisWeek");
   labels.add("UIDocumentInfo.label.EarlierThisMonth");
   labels.add("UIDocumentInfo.label.EarlierThisYear");
-
+  
   List<List<Node>> nodeLists = new ArrayList<List<Node>>();
   nodeLists.add(uicomponent.getTodayNodes());
   nodeLists.add(uicomponent.getYesterdayNodes());
   nodeLists.add(uicomponent.getEarlierThisWeekNodes());
   nodeLists.add(uicomponent.getEarlierThisMonthNodes());
   nodeLists.add(uicomponent.getEarlierThisYearNodes());
-
+  
   SimpleDateFormat formatDateTime = uicomponent.getSimpleDateFormat();
-
+  
   int listCount = 5;
 
 %>
@@ -122,6 +123,45 @@ import org.exoplatform.services.jcr.RepositoryService;
         </div>
         <div style="clear: both;"><span></span></div>
       </div>
+      
+      <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
+        <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
+        
+        <div class="JCRMoveAction" 
+             style="display: none;" 
+             request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" 
+             symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>">
+        </div>
+        <div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
+          <div class="UIRightClickPopupMenu" style="display: block;">
+            <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">                  
+            <%
+              for(itemContext in managersMultiItemContext) {
+                action = itemContext.getUIExtensionName();
+            %>
+                <a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>   
+                  <div class="ItemIcon ${action}16x16Icon"><%=_ctx.appRes("ECMContextMenu.event." + action)%></div>
+                </a>
+            <%}%>            
+           </div> 
+         </div> 
+       </div>
+       <div class="GroundContextMenu" style="position: absolute;top: 0px; left: 0px; display: none;">
+          <div class="UIRightClickPopupMenu" style="display: block;">
+            <div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;">          
+              <%
+                for(itemGroundContext in managersGroundContext) {
+                action = itemGroundContext.getUIExtensionName();
+              %>
+                <a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;">  
+                  <div class="ItemIcon ${action}16x16Icon"><%=_ctx.appRes("ECMContextMenu.event." + action)%></div>
+                </a>
+              <%}%>     
+             </div> 
+           </div>
+         </div>
+       </div>
+       
       <% for(int i = 0; i < 5; i++) {
             String label = labels.get(i);
             List<Node> nodeList = nodeLists.get(i);
@@ -130,11 +170,40 @@ import org.exoplatform.services.jcr.RepositoryService;
       <div class="TextTitleDay">
         <%=_ctx.appRes(label)%>
       </div>  
-      <div class="RowView Normal">
-        <div class="BorderRow">
-          <% for (node in nodeList) {%> 
+      <div class="BorderRow">
+          <% for (node in nodeList) {
+            def data = node;
+            def rightClickMenu = "" ;
+            def isPreferenceNode = uicomponent.isPreferenceNode(data);
+            def preferenceWS = data.getSession().getWorkspace().getName();
+            String nodePath = data.getPath();
+            String path = node.getPath() + "&workspaceName=" + preferenceWS ;
+            String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length());   
+            String title = uiWorkingArea.getTitle(data);            
+            String subName;
+            String hiddenStyle = (node.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
+            String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
+            permLinkComponent =  uiWorkingArea.getPermlink(data);
+            String isFavourite = "false";
+            String isInTrash = "false";
+            String isMediaType = "false";
+            String isTrashHome = "false";
+            Boolean isLocked = false;
+            String lockedLabel = "";
+            if (data.isLocked()) {
+              isLocked = true;
+              lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
+            }
+            if (uicomponent.isFavouriter(data)) isFavourite = "true";
+            if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
+            if (uicomponent.isMediaType(data)) isMediaType = "true";
+            if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
+            if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;
+            
+            %>
+            <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">
             <div style="width: 31px;" class="LeftColumn">
-            <span></span>
+              <span></span>
             </div>                
             <div style="width: 26px; padding-top: 5px;" class="LeftColumn">
               <% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>
@@ -153,6 +222,9 @@ import org.exoplatform.services.jcr.RepositoryService;
               <%if(Utils.isSymLink(node)) {%>
                 <div class="LinkSmall"></div>
               <%}%>
+              <%if(isLocked) {%>
+              <div class="IconLocked"></div>
+              <%}%>
               <span></span>
             </div>
             <div style="border: medium none; width: 120px" class="RightColumn">
@@ -160,22 +232,15 @@ import org.exoplatform.services.jcr.RepositoryService;
             </div>
             <div class="ResizeColumn" style="width:495px; *width: 425px;">
               <div class="PositionIconDocument">
-                <%
-                  def preferenceWS = node.getSession().getWorkspace().getName() ;
-                  String path = node.getPath() + "&workspaceName=" + preferenceWS ;
-                  String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", preferenceWS));
-                  String hiddenStyle = (node.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
-                %>
-                <a href="$actionLink" alt="" style="$hiddenStyle" workspaceName="$preferenceWS"
-                  title="<%=_ctx.appRes("UIDocumentInfo.tooltip.View")%>"/>
-                  <%= uiWorkingArea.getTitle(node) %>
-                </a>
+                <div class="NodeLabel">
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=title%> $lockedLabel"><%=title%></div>
+                </div>                
               </div>
             </div>
             <div style="clear: both;"><span></span></div>
+            </div>
           <% } %>
         </div>
-      </div>
       <% } %>
     </div>
   </div>
