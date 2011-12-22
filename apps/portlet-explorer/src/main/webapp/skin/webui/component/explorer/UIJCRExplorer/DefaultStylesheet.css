@@ -223,7 +223,7 @@
 	*/
 
 .UIJCRExplorerPortlet .RightContainer {
-  margin-left: 264px;
+  margin-left: 0px;
 }
 
 .UIJCRExplorerPortlet .UIDocumentWorkspace {
@@ -618,6 +618,7 @@
 	padding: 5px 0px 0px 10px; /* orientation=lt */
 	padding: 5px 10px 0px 0px; /* orientation=rt */
 	font-weight: bold;
+
 
 }
 

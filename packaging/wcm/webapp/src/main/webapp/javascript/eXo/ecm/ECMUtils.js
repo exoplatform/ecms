@@ -687,6 +687,9 @@
 	ECMUtils.prototype.resizeVisibleComponent = function() {
 				
 		var container = document.getElementById("LeftContainer");
+		var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");
+    var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+    rightContainer.style.marginLeft = '264px';
 		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");
 		var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
 		
