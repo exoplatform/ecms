@@ -272,7 +272,9 @@ public class ManageDocumentService implements ResourceContainer {
                                   NodetypeConstant.NT_UNSTRUCTURED);
       node.save();
       Document document = createNewDocument();
-      Element folderNode = createFolderElement(document, newNode, workspaceName, driveName, currentFolder);
+      String childFolder = StringUtils.isEmpty(currentFolder) ? newNode.getName() : currentFolder.concat("/")
+                                                                                                 .concat(newNode.getName());
+      Element folderNode = createFolderElement(document, newNode, workspaceName, driveName, childFolder);
       document.appendChild(folderNode);
       return getResponse(document);
     } catch (AccessDeniedException e) {
@@ -370,7 +372,7 @@ public class ManageDocumentService implements ResourceContainer {
     Session session = node.getSession();
     String workspaceName = session.getWorkspace().getName();
     Document document = createNewDocument();
-    Element rootElement = createFolderElement(document, node, workspaceName, driveName,currentFolder);
+    Element rootElement = document.createElement("Folder");
     Element folders = document.createElement("Folders");
     Element files = document.createElement("Files");
     Node sourceNode = null;
@@ -387,11 +389,13 @@ public class ManageDocumentService implements ResourceContainer {
       referNode = sourceNode != null ? sourceNode : child;
 
       if (isFolder(referNode)) {
+        String childFolder = StringUtils.isEmpty(currentFolder) ? referNode.getName() : currentFolder.concat("/")
+                                                                                                     .concat(referNode.getName());
         Element folder = createFolderElement(document,
                                              referNode,
                                              referNode.getSession().getWorkspace().getName(),
                                              driveName,
-                                             currentFolder);
+                                             childFolder);
         folders.appendChild(folder);
       } else   if (isFile(referNode)) {
         Element file = createFileElement(document, referNode, child, 
@@ -431,7 +435,6 @@ public class ManageDocumentService implements ResourceContainer {
         break;
       }
     }
-    currentFolder = (StringUtils.EMPTY.equals(currentFolder)) ? currentFolder : currentFolder + "/";    
     try {
       getSession(workspaceName).checkPermission(child.getPath(), PermissionType.REMOVE);
     } catch (Exception e) {
@@ -445,14 +448,17 @@ public class ManageDocumentService implements ResourceContainer {
     }
     
     folder.setAttribute("name", child.getName());
+    folder.setAttribute("title", Utils.getTitle(child));
     folder.setAttribute("path", child.getPath());
     folder.setAttribute("canRemove", String.valueOf(canRemove));
     folder.setAttribute("canAddChild", String.valueOf(canAddChild));
     folder.setAttribute("nodeType", getNodeTypeIcon(child));
     folder.setAttribute("workspaceName", workspaceName);
     folder.setAttribute("driveName", driveName);
-    folder.setAttribute("currentFolder", currentFolder + child.getName());
+    folder.setAttribute("currentFolder", currentFolder);
     folder.setAttribute("hasChild", String.valueOf(hasChild));
+    folder.setAttribute("titlePath", createTitlePath(driveName, workspaceName, currentFolder));
+      
     return folder;
   }
 
@@ -463,6 +469,7 @@ public class ManageDocumentService implements ResourceContainer {
     Element file = document.createElement("File");
     boolean canRemove = true;
     file.setAttribute("name", displayNode.getName());
+    file.setAttribute("title", Utils.getTitle(displayNode));
     file.setAttribute("workspaceName", workspaceName);
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
@@ -644,5 +651,21 @@ public class ManageDocumentService implements ResourceContainer {
       return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId);
     }
     return fileUploadHandler.control(uploadId, action);
+  }
+  
+  private String createTitlePath(String driveName, String workspaceName, String currentFolder) throws Exception {
+    String[] folders = currentFolder.split("/");
+    StringBuilder sb = new StringBuilder();
+    StringBuilder tempFolder = new StringBuilder();
+    for (int i = 0; i < folders.length; i++) {
+      tempFolder = tempFolder.append(folders[i]);
+      Node node = getNode(driveName, workspaceName, tempFolder.toString());
+      tempFolder = tempFolder.append("/");
+      sb.append(Utils.getTitle(node));
+      if (i != folders.length - 1) {
+        sb.append("/");
+      }
+    }
+    return sb.toString();
   }
 }
