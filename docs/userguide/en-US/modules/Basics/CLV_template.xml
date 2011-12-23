@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-CLV_templates">
+    <title>Manage CLV templates in Sites Explorer</title>
+    <para>
+        This section shows you how to manage templates for CLV in <emphasis role="bold"> Sites Explorer</emphasis> via the following topics:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para> <link linkend="sect-User_Guide-CLV_templates-Create_template">Create a CLV template</link></para>
+        </listitem>
+        <listitem>
+            <para> <link linkend="sect-User_Guide-CLV_templates-Edit_template">Edit a CLV template</link></para>
+        </listitem>
+        <listitem>
+            <para> <link linkend="sect-User_Guide-CLV_templates-Delete_template">Delete a CLV template</link></para>
+        </listitem>
+    </itemizedlist>
+    <section id="sect-User_Guide-CLV_templates-Create_template">
+        <title>Create a CLV template</title>
+        <procedure>
+            <step>
+                <para> <link linkend="sect-User_Guide-Access_Content_Explorer"> Access <emphasis role="bold">Sites Explorer</emphasis></link>, then select <emphasis role="bold">DMS
+                    Administration</emphasis>.
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/DMS_Drive.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/DMS_Drive.png" format="PNG" scalefit="1" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Click <emphasis role="bold">exo:ecms --> views --> templates --> content-list-viewer --> list</emphasis>.</para>
+            </step>
+            <step>
+                <para>Right-click in the white space, then select <emphasis role="bold">Add Content</emphasis> in the menu;
+                    or select <emphasis role="bold">Add Content</emphasis> on the <emphasis role="bold">Action</emphasis> bar.</para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/DMS_Drive_Add_Content.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/DMS_Drive_Add_Content.png" format="PNG" scalefit="1" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Select <emphasis role="bold">File</emphasis> from the content templates list. The form to add the <emphasis role="bold">File</emphasis>
+                document appears:
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/File_CLV_Template.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/File_CLV_Template.png" format="PNG" scalefit="1" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+            </step>
+            <step>
+                <para>Enter all the fields in the form. The fields marked with the asterisk (*) are required.</para>
+                 <para>In the <emphasis role="bold">Mime Type</emphasis> field, select <emphasis role="bold">application/x-groovy+html</emphasis> from the
+                drop-down menu.</para>
+            </step>
+            <step>
+                 <para>Click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to accept creating the CLV template.</para>
+            </step>
+        </procedure>
+        <note>
+            <para>See more details about the <emphasis role="bold">File</emphasis> document in the <link linkend="proc-User_Guide-Add_a_document-Create_a_new_File_documen">Create a new File document</link> section.</para>
+        </note>
+    </section>
+    <section id="sect-User_Guide-CLV_templates-Edit_template">
+        <title>Edit a CLV template</title>
+         <procedure>
+             <step>
+                <para>Click <emphasis role="bold">exo:ecms --> views --> templates --> content-list-viewer --> list</emphasis> in the <emphasis role="bold">DMS Administration</emphasis> drive.</para>
+            </step>
+             <step>
+                 <para>Right-click a template that you want to edit, then select <emphasis role="bold">Edit</emphasis> from the drop-down menu. </para>
+             </step>
+             <step>
+                 <para>Edit your desired fields, then click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to accept your changes.</para>
+             </step>
+         </procedure>
+    </section>
+    <section id="sect-User_Guide-CLV_templates-Delete_template">
+        <title>Delete a CLV template</title>
+         <procedure>
+             <step>
+                <para>Click <emphasis role="bold">exo:ecms --> views --> templates --> content-list-viewer --> list</emphasis> in the <emphasis role="bold">DMS Administration</emphasis> drive.</para>
+            </step>
+             <step>
+                 <para>Right-click a template that you want to delete, then select <emphasis role="bold">Delete</emphasis> from the drop-down menu. </para>
+             </step>
+             <step>
+                 <para>Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion.</para>
+             </step>
+        </procedure>
+    </section>
+</section>
