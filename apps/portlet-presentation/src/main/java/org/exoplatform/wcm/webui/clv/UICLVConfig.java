@@ -51,8 +51,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
@@ -190,14 +190,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** The Constant CONTENT_BY_QUERY_LABEL */
   public static final String CONTENT_BY_QUERY_LABEL                  = "UICLVContentByQueryLabel";
 
-  /**
-   * TODO: Need to improve, we should get portlet's name by API, not hardcode
-   * like this
-   */
-  /** The Constant PORTLET_NAME. */
-  public final static String PORTLET_NAME                            = "Content List Viewer";
-
-  /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
   /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
   public final static String DISPLAY_TEMPLATE_CATEGORY               = "navigation";
 
@@ -322,13 +314,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     boolean showImage = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, null));
     boolean showDateCreated = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED,
                                                                                null));
-//    boolean showMoreLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_MORE_LINK, null));
     boolean showReadmore  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, null));
 
     boolean showSummary  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SUMMARY, null));
     boolean showLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_LINK, null));
     boolean showRssLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_RSSLINK, null));
-//
 
     /** DISPLAY MODE */
     List<SelectItemOption<String>> displayModeOptions = new ArrayList<SelectItemOption<String>>();
@@ -556,7 +546,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(showHeaderCheckBox);
     addChild(showRefreshCheckbox);
 
-//    addChild(showIllustrationCheckbox);
     addChild(showImageCheckbox);
     addChild(showDateCreatedCheckbox);
     addChild(showMoreLinkCheckbox);
@@ -564,7 +553,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(showSummaryCheckbox);
     addChild(showLinkCheckbox);
     addChild(showRssLinkCheckbox);
-//    addChild(showReadmoreCheckbox);
 
     addChild(contextualFolderRadioBoxInput);
     addChild(showClvByInput);
@@ -813,7 +801,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE, paginatorTemplate);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, itemsPerPage);
 
-//      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, showIllustration);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_TITLE, showTitle);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_HEADER, showHeader);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON, showRefresh);

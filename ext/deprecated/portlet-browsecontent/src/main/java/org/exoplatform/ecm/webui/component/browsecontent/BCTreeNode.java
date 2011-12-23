@@ -29,7 +29,6 @@ import javax.jcr.RepositoryException;
  * Jan 3, 2007 3:24:37 PM
  */
 public class BCTreeNode {
-  //TODO can use TreeNode instead of this class
   private boolean isExpanded_ ;
   private Node node_ ;
   private List<BCTreeNode> children_ = new ArrayList<BCTreeNode>() ;

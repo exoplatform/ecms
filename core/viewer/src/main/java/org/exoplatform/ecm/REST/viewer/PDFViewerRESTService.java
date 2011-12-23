@@ -292,8 +292,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   private void read(InputStream is, OutputStream os) throws Exception {
-    int bufferLength = 1024; // TODO: Better to compute bufferLength in term of
-    // -Xms, -Xmx properties
+    int bufferLength = 1024; 
     int readLength = 0;
     while (readLength > -1) {
       byte[] chunk = new byte[bufferLength];

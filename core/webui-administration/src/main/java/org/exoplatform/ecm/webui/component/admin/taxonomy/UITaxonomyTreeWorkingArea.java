@@ -275,7 +275,8 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       UITaxonomyTreeWorkingArea uiManager = event.getSource();
       UITaxonomyTreeCreateChild uiTaxonomyTreeCreateChild = uiManager.getParent();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIPopupContainer uiPopupContainer = uiTaxonomyTreeCreateChild.initPopupPermission(UITaxonomyTreeCreateChild.PERMISSION_ID_POPUP);
+      UIPopupContainer uiPopupContainer = 
+          uiTaxonomyTreeCreateChild.initPopupPermission(UITaxonomyTreeCreateChild.PERMISSION_ID_POPUP);
       UIPermissionManager uiPerMan = uiPopupContainer.createUIComponent(UIPermissionManager.class, null, null);
       uiPerMan.getChild(UIPermissionInfo.class).setCurrentNode(uiTaxonomyTreeCreateChild.getNodeByPath(path));
       uiPerMan.getChild(UIPermissionForm.class).setCurrentNode(uiTaxonomyTreeCreateChild.getNodeByPath(path));

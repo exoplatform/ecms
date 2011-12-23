@@ -180,10 +180,7 @@ public class UICBSearchForm extends UIForm {
     duration_ = 0;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     List<String> documentNodeTypes = templateService.getDocumentTemplates();
-    //TODO Why we have to add nt:resource, need to check again
     documentNodeTypes.add("nt:resource");
-    //TODO need review this code to improve performance
-    //TODO need define one nodetype as a super type of all documents node type
     for(String ntDocument : documentNodeTypes) {
       String queryStatement = StringUtils.replace(statement, "$0", ntDocument);
       long beforeTime = System.currentTimeMillis();

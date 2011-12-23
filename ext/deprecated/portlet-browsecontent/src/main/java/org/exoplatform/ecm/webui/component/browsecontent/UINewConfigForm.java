@@ -149,7 +149,6 @@ public class UINewConfigForm extends UIForm {
       String browseType = uiForm.getUIFormSelectBox(FIELD_BROWSETYPE).getValue();
       String workSpace = uiForm.getUIFormSelectBox(FIELD_WORKSPACE).getValue();
       String repository = uiForm.getUIFormSelectBox(FIELD_REPOSITORY).getValue();
-      // TODO ECMS-2132 This one is need to be change for supporting multi-tenant or not???
       uiConfigTabPane.initNewConfig(browseType, repository, workSpace);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
     }

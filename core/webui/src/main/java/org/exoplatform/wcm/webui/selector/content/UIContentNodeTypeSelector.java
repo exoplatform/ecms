@@ -62,7 +62,6 @@ public class UIContentNodeTypeSelector extends UIForm {
     }
   }
 
-  /** TODO: Need for changed in gatein !fieldName.equals(field.getName()) */
   public String getLabel(ResourceBundle res, String id)  {
     try {
       return res.getString("UIContentNodeTypeSelector.label." + id) ;

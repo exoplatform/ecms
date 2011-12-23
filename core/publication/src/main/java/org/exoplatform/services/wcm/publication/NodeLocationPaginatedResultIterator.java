@@ -48,9 +48,6 @@ public class NodeLocationPaginatedResultIterator extends PaginatedResultIterator
     }
     currentListPage_ = new ArrayList();
 
-    /** TODO : TO UPDATE
-     *
-     */
     WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
     result.getFiltersDescriber().put(WCMComposer.FILTER_LIMIT, ""+this.getPageSize());
     result.getFiltersDescriber().put(WCMComposer.FILTER_OFFSET, ""+(this.getPageSize()*(page-1)));
