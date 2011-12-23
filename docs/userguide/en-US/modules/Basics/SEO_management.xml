@@ -53,13 +53,13 @@
       </mediaobject>
       </listitem>
       <listitem>
-      <para>The SEO Management form for a page is as follows.</para>
+      <para>The <emphasis role="bold">SEO Management</emphasis> form for a page is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="150mm" scalefit="1"/>
+          <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG" width="70mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
       </listitem>

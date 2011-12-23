@@ -1173,7 +1173,7 @@
                     show the contents in the right pane or click
                     <inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="images/upload_file.png" format="PNG" scalefit="1" width="4mm"/>
+                            <imagedata fileref="images/upload_file.png" format="PNG" scalefit="1" width="20mm"/>
                         </imageobject>
                     </inlinemediaobject>
                     to upload a file from your local device.
