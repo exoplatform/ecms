@@ -111,7 +111,6 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		delete eXo.webui.UIDocForm.horizontalLayout;
 	}
 	eXo.webui.UIDocForm.AutoFocus();
-	eXo.webui.UIDocForm.AdjustHeight();
 }
 
 UIDocumentForm.GetStyleData = function( element ) {

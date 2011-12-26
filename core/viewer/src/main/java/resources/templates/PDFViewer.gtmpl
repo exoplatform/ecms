@@ -222,7 +222,7 @@
 		<%}%>
 	</div>
 	<div class="PDFViewerContent">
-  	<div class="ImageView" style="overflow:auto;height:375px;" id ="pdf_viewer_image" name="pdf_viewer_image">
+  	<div class="ImageView" style="overflow:auto;" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";			  
 		%>

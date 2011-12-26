@@ -67,11 +67,13 @@
   }
 
   String imageWidthStr = "610";
+  def imageHeight = 0;
   try {
   	ImageReader reader = ImageIO.getImageReadersByMIMEType(mimeType).next();
   	ImageInputStream iis = ImageIO.createImageInputStream(contentNode.getProperty("jcr:data").getStream());
   	reader.setInput(iis, true);
   	def imageWidth = reader.getWidth(0);
+    imageHeight = reader.getHeight(0);
   	iis.close();
   	reader.dispose();
   	
@@ -79,10 +81,16 @@
   	  imageWidthStr = "40";
   	else if (imageWidth < 610)
   	  imageWidthStr = imageWidth + "";
-  	
+    else {
+      imageHeight = Math.floor(610*imageHeight/imageWidth);
+    }
+    	
   } catch (Exception e) {}
-  
 %>
+<% if (imageHeight <= 610) { %>
   <div style="text-align:center">
+<% } else { %>
+  <div style="text-align:center; height:610px; overflow:auto;">
+<% } %>
     <a title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><image src="$binarySrc" width="$imageWidthStr"/></a>
   </div>

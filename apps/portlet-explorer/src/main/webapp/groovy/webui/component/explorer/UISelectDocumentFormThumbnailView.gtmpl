@@ -1,28 +1,3 @@
-<script type="text/javascript">
-	function setHeight () {
-	    var workingArea = document.getElementById('UIWorkingArea');
-	    var documentFormController = document.getElementById('UIDocumentFormController');
-	    var selectDocForm = eXo.core.DOMUtil.findFirstDescendantByClass(documentFormController, "div", "UISelectDocumentForm");
-	
-	    if (selectDocForm) {
-	    	var page = eXo.core.DOMUtil.findFirstDescendantByClass(selectDocForm, "div", "PageAvailable");
-	    	var view = eXo.core.DOMUtil.findFirstDescendantByClass(selectDocForm, "div", "SelectTemplateThumbnailView");
-		        
-			if (page) {
-				if (parseInt(page.getAttribute('pageAvailable')) > 1) {
-					if (view) {			
-						view.style.height = workingArea.offsetHeight - page.offsetHeight - 20 + 'px';
-					}
-				}
-			} else {
-			  if (view) { 			
-				view.style.height = workingArea.offsetHeight - 20 + 'px';
-			  }
-			}
-	     }		
-	}
-</script>
-
 <div id="$uicomponent.id" class="$uicomponent.id">
 	<div class="SelectTemplateThumbnailView">
 		<div class="SelectTemplateTitle" style="height:25px">
@@ -69,8 +44,5 @@
 	<div class="PageAvailable" pageAvailable='$availablePage'>
 		<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
 	</div>
-	<% } 
-	   def rcontext = _ctx.getRequestContext() ;
-	   rcontext.getJavascriptManager().addOnLoadJavascript("setHeight");
-	%>
+  <% } %>
 </div>

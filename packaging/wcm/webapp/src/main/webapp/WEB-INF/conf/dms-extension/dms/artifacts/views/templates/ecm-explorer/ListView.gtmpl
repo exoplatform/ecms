@@ -44,7 +44,6 @@
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');  
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
 	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIListView.loadEffectedWidthColumn');
 	

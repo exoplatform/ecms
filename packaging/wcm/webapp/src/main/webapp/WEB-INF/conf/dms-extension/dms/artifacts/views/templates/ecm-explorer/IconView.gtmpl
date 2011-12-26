@@ -34,8 +34,7 @@
   def rcontext = _ctx.getRequestContext() ;
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UISimpleView','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/') ;  
-  rcontext.getJavascriptManager().addOnLoadJavascript("function(){eXo.ecm.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');}");
- 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UISimpleView.setHeight");
+  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
  	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
 %>
 <div id="$componentId">

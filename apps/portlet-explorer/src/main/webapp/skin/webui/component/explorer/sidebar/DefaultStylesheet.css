@@ -297,7 +297,7 @@
 /*############################## -- Begin UITreeExplorer   -- ##############################*/
 .UIJCRExplorerPortlet .UITreeExplorer {
 	padding-bottom: 20px;
-	_overflow: auto;
+	overflow: auto;
 	height: 185px;
 	_overflow-x: hidden;
 	_width: 183px;

@@ -25,7 +25,6 @@
 	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecmexplorer/javascript/');
 	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');    
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
-	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.setHeight");
 	  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
 	  String repository = rService.getCurrentRepository().getConfiguration().getName();	  
 %>

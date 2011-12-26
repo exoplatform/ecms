@@ -39,7 +39,6 @@ import org.exoplatform.services.jcr.RepositoryService;
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UITimelineView','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UITimelineView.setHeight");
   uicomponent.updateNodeLists();
   List<String> labels = new ArrayList<String>();
   labels.add("UIDocumentInfo.label.Today");

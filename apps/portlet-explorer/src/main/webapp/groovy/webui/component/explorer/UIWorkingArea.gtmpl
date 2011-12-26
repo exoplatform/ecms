@@ -28,13 +28,11 @@
   
   String componentId = uicomponent.getId();
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
+  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
   if(!isExpand && focusNode != null)
   	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
   else if(isExpand && expandNode != null)
-  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
-  rcontext.getJavascriptManager().addOnResizeJavascript("eXo.ecm.UIListView.setHeight");
+  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;  
 %>
 
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">
@@ -50,7 +48,7 @@
 	
 	<% if( uicomponent.isShowSideBar() ) {%>
 		<div class="ResizeSideBar">
-			<div class="ResizeButton" style=" top:250px;"  onclick="eXo.ecm.ECMUtils.showHideSideBar(this)"><span></span></div>
+			<div class="ResizeButton" onclick="eXo.ecm.ECMUtils.showHideSideBar(this)"><span></span></div>
 		</div>
 	<% } %>
 	

@@ -5,6 +5,7 @@
   def managers = uicomponent.getManagers();
   
   _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.resizeVisibleComponent");
+  _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.loadEffectedItemsInSideBar");
   
   public String getCSSClassName(String item) {
     if (uicomponent.getSelectedComp().equals(item)) return "SelectedItem";

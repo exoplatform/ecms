@@ -22,7 +22,6 @@ var ListView = function() {
 	//init event
 	ListView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 		eXo.ecm.UIListView.enableDragAndDrop = enableDragAndDrop;
-//		alert("Init all events, enableDragAndDrop: " + enableDragAndDrop);
 		Self.contextMenuId = "JCRContextMenu";
 		Self.actionAreaId = actionAreaId;
 		var actionArea = document.getElementById(actionAreaId);
@@ -40,26 +39,32 @@ var ListView = function() {
 				item.onmousedown = null;
 				item.removeAttribute("onmousedown");
 			}
-      if (item.getAttribute("onkeydown")) {
-        keydown = item.getAttributeNode("onkeydown").value;
-        item.setAttribute("keydown", keydown);
-        item.onkeydown = null;
-        item.removeAttribute("onkeydown");
-      }			
-//			if (enableDragAndDrop == "true") {
-				item.onmouseover = Self.mouseOverItem;
-				item.onfocus = Self.mouseOverItem;
-				item.onmousedown = Self.mouseDownItem;
-				item.onkeydown = Self.mouseDownItem;
-				item.onmouseup = Self.mouseUpItem;
-				item.onmouseout = Self.mouseOutItem;
-				item.onblur = Self.mouseOutItem;
-//			}
-			//eXo.core.Browser.setOpacity(item, 85);
+            if (item.getAttribute("onkeydown")) {
+                keydown = item.getAttributeNode("onkeydown").value;
+                item.setAttribute("keydown", keydown);
+                item.onkeydown = null;
+                item.removeAttribute("onkeydown");
+            }			
+			item.onmouseover = Self.mouseOverItem;
+			item.onfocus = Self.mouseOverItem;
+			item.onmousedown = Self.mouseDownItem;
+			item.onkeydown = Self.mouseDownItem;
+			item.onmouseup = Self.mouseUpItem;
+			item.onmouseout = Self.mouseOutItem;
+			item.onblur = Self.mouseOutItem;
 		}
 		actionArea.onmousedown = Self.mouseDownGround;
 		actionArea.onkeydown = Self.mouseDownGround;
 		actionArea.onmouseup = Self.mouseUpGround;
+		
+		var fillOutElement = document.createElement('div');
+		fillOutElement.id = "FillOutElement";
+		
+		var listGrid = DOM.findFirstDescendantByClass(actionArea, "div", "UIListGrid");
+		if (listGrid) {
+			listGrid.appendChild(fillOutElement);
+		}
+		
 		//remove context menu
 		var contextMenu = document.getElementById(Self.contextMenuId);
 		if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);

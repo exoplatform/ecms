@@ -61,8 +61,12 @@ var SimpleView = function() {
 		actionArea.onmouseup = Self.mouseUpGround;
 		actionArea.onmouseover = Self.mouseOverGround;
 		actionArea.onmouseout = Self.mouseOutGround;
-    actionArea.onfocus = Self.mouseOverGround;
-    actionArea.onblur = Self.mouseOutGround;		
+        actionArea.onfocus = Self.mouseOverGround;
+        actionArea.onblur = Self.mouseOutGround;	
+    
+        var fillOutElement = document.createElement('div');
+		fillOutElement.id = "FillOutElement";
+		actionArea.appendChild(fillOutElement);	
 		
 
 		//remove context menu

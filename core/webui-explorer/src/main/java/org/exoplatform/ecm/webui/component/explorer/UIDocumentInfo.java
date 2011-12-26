@@ -173,7 +173,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private DocumentTypeService documentTypeService;
   private TemplateService templateService;
 
-  public UIDocumentInfo() throws Exception {
+  public UIDocumentInfo() throws Exception {    
     pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);
     favoriteService = this.getApplicationComponent(FavoriteService.class);
     documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
@@ -1240,7 +1240,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       UIJCRExplorer explorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);
       UITreeExplorer treeExplorer = explorer.findFirstComponentOfType(UITreeExplorer.class);
       try {
-        if(treeExplorer == null || !treeExplorer.isRendered()) return;
+        if(treeExplorer == null) return;
         String componentId = explorer.getCurrentNode().getPath();
         UITreeNodePageIterator extendedPageIterator = treeExplorer.getUIPageIterator(componentId);
         if(extendedPageIterator == null) return;

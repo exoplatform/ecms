@@ -5,7 +5,6 @@
   
   def rcontext = _ctx.getRequestContext() ;
 	def queryListData = uicomponent.queryList();
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight()");
 %>
 <div class="SideBarContent">
    <div class="BarContent">

@@ -14,7 +14,6 @@
   String[] beanActions =  uicomponent.getBeanActions() ;
   String name = uicomponent.getName() ;
   def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight()");
 %>
 <div class="SideBarContent">
   <div class="BarContent">

@@ -228,7 +228,6 @@
 
 .UIJCRExplorerPortlet .UIDocumentWorkspace {
   overflow: auto;
-  height: 475px;
 }
 
 .UIJCRExplorerPortlet .UIListView {
@@ -243,6 +242,7 @@
 
 .UIJCRExplorerPortlet .UIListView .UIListGrid {
 	-moz-user-select: none;
+	overflow: auto;
 }
 
 .UIJCRExplorerPortlet .UIListView .TitleTable {

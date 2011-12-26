@@ -74,21 +74,12 @@
 		var actionBar = document.getElementById('UIActionBar');		
 		if (!uiWorkingArea) return;
 		var delta = document.body.scrollHeight - eXo.core.Browser.getBrowserHeight();
-		var uiDocumentWorkspace = DOM.findFirstDescendantByClass(portlet, 'div', 'UIDocumentWorkspace');
 		if (delta < 0) {
 			var resizeObj = DOM.findDescendantsByClass(portlet, 'div', 'UIResizableBlock');
 			if(resizeObj.length) {
 				for(var i = 0; i < resizeObj.length; i++) {
 					resizeObj[i].style.height = resizeObj[i].offsetHeight - delta + "px" ;
 				}
-			}
-			if (uiDocumentWorkspace) uiDocumentWorkspace.style.height = uiDocumentWorkspace.offsetHeight - delta + "px";
-		}
-		if (uiDocumentWorkspace) {
-			if (actionBar) {
-				uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight - actionBar.offsetHeight + "px";
-			} else {
-				uiDocumentWorkspace.style.height = uiWorkingArea.offsetHeight + "px";
 			}
 		}
 		eXo.core.Browser.addOnResizeCallback('controlLayout', function(){eXo.ecm.ECMUtils.controlLayout(portletId)});
@@ -248,10 +239,10 @@
 
 	ECMUtils.prototype.focusCurrentNodeInTree = function(id) {
 		var element = document.getElementById(id);
-		if (!element) return;
-		var sidebar = DOM.findAncestorByClass(element,  "SideContent");
+		var uiTreeExplorer = document.getElementById("UITreeExplorer");
+		if (!element || !uiTreeExplorer) return;
 		var top = element.offsetTop;
-		sidebar.scrollTop = (top - sidebar.offsetTop);
+		uiTreeExplorer.scrollTop = (top - uiTreeExplorer.offsetTop);
 	};
 
 	ECMUtils.prototype.collapseExpand = function(element) {
@@ -966,105 +957,347 @@
 	}
 
 	ECMUtils.prototype.showHideItemsInSideBar = function(event) {
-	  var workingArea = document.getElementById('UIWorkingArea');
-	  var resizeBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
 	  var itemArea = document.getElementById("SelectItemArea");
-	  var container = document.getElementById("UITreeExplorer");
-	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizeBlock, "div", "ResizeTreeButton");
-
-		// var workspace = document.getElementById("UIDocumentWorkspace");
-		var workspace = checkRoot();
-	  var isOtherTabs;
-	  var listContainers;
-
-	  if (!container) {
-		listContainers = DOM.findDescendantsByClass(resizeBlock, "div", "SideBarContent");
-		for (var k=0; k < listContainers.length; k++) {
-			if (listContainers[k].parentNode.className!="UIResizableBlock") {
-				container = listContainers[k-1];
-				isOtherTabs = true;
-				break;
-			}
-		}
+	  
+	  Self.clearFillOutElement();
+	  
+	  if(itemArea.style.display == 'none') {
+	  	Self.showSelectItemArea();
+	  } else {
+	  	Self.hideSelectItemArea();
 	  }
-
+	  
+	  Self.adjustResizeSideBar();
+	  Self.adjustFillOutElement();
+	}
+	
+	ECMUtils.prototype.showSelectItemArea = function() {
+	  var treeExplorer = document.getElementById("UITreeExplorer");	 	  
+	  var itemArea = document.getElementById("SelectItemArea"); 
+	  
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var resizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
+	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeButton");
+	  
+	  if (treeExplorer) {
+	  	Self.collapseTreeExplorer()
+	  } else {  		
+		Self.collapseSideBarContent();  //collapse other tabs
+	  }
+	  
+	  itemArea.style.display = "block";
+	  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
+	  resizeTreeButton.className = "ResizeTreeButton";
+	}
+	
+	ECMUtils.prototype.hideSelectItemArea = function() {
+	  var treeExplorer = document.getElementById("UITreeExplorer");	 
+	  var itemArea = document.getElementById("SelectItemArea"); 
+	  
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var resizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
+	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeButton");
+	  		
+	  if (treeExplorer) {
+		Self.expandTreeExplorer();
+	  } else {
+	    Self.expandSideBarContent();
+	  }
+	  
+	  itemArea.style.display = "none";
+	  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "none";
+	  resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+	}
+	
+	ECMUtils.prototype.collapseTreeExplorer = function() {
+	  var treeExplorer = document.getElementById("UITreeExplorer");	 	  
+	  treeExplorer.style.height = treeExplorer.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea - 20 + "px";
+	}
+	
+	ECMUtils.prototype.expandTreeExplorer = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+	  
+	  var resizableBlock = DOM.findFirstDescendantByClass(leftContainer, "div", "UIResizableBlock");	  
+	  var sideBarContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "SideBarContent");
+	  var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+	  var resizeTreeExplorer = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeExplorer");	  	  
+	  var barContent = DOM.findFirstDescendantByClass(sideBarContent, "div", "BarContent");
+	  
+	  var treeExplorer = document.getElementById("UITreeExplorer");	 
+	  var itemArea = document.getElementById("SelectItemArea");	  
+	  	  
+	  if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
+	  	treeExplorer.style.height = treeExplorer.offsetHeight + itemArea.offsetHeight - 20 + "px";	
+	  } else {
+	  	//expand the tree explorer to equal to the right container
+	  	var treeExplorerHeight = rightContainer.offsetHeight;
+		
+		if (selectContent) {
+		  treeExplorerHeight -= selectContent.offsetHeight;
+		}
+		
+		if (resizeTreeExplorer) {
+		  treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
+		}
+		
+		if (barContent) {
+		  treeExplorerHeight -= barContent.offsetHeight;
+		} 		
+		
+		treeExplorer.style.height = treeExplorerHeight - 28 + 'px';
+	  }	  
+	}
+	
+	ECMUtils.prototype.collapseSideBarContent = function() {
+	  var container = Self.getContainerToResize();
+	  container.style.height = eXo.ecm.ECMUtils.initialHeightOfOtherTab - 4 + "px";
+	}
+	
+	ECMUtils.prototype.expandSideBarContent = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");	   
+	  
+	  var resizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		  
+	  var sideBarContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "SideBarContent");
+	  var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+	  var resizeTreeExplorer = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeExplorer");	
+	  
+	  var itemArea = document.getElementById("SelectItemArea");
+	  	    
+	  var container = Self.getContainerToResize();	 	  
+	  eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
+	  
+	  if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
+	  	container.style.height = container.offsetHeight + itemArea.offsetHeight + "px";
+	  } else {	 	  		  
+	  	var previousElement = DOM.findPreviousElementByTagName(container, "div");
+	  	var containerHeight = rightContainer.offsetHeight;
+	  	
+	  	if (selectContent) {
+	  		containerHeight -= selectContent.offsetHeight;
+	  	}
+	  	
+	  	if (resizeTreeExplorer) {
+	  		containerHeight -= resizeTreeExplorer.offsetHeight;
+	  	}	  	
+		
+		if (previousElement) {
+		  containerHeight -= previousElement.offsetHeight;
+		}
+		  	
+		container.style.height = containerHeight + "px";
+	  }
+	}
+	
+	//get SideBarContent for resizing
+	ECMUtils.prototype.getContainerToResize = function() {	  
+	  var treeExplorer = document.getElementById("UITreeExplorer");
+	  if (treeExplorer) {
+	  	return treeExplorer;
+	  }
+	  
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var resizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
+	  
+	  listContainers = DOM.findDescendantsByClass(resizableBlock, "div", "SideBarContent");
+	  for (var k=0; k < listContainers.length; k++) {
+		if (listContainers[k].parentNode.className!="UIResizableBlock") {
+		  return listContainers[k-1];
+		}
+      }
+	}
+	
+	ECMUtils.prototype.loadEffectedItemsInSideBar = function() {
+	  window.setTimeout("eXo.ecm.ECMUtils.adjustItemsInSideBar()",100);
+	}
+	
+	ECMUtils.prototype.adjustItemsInSideBar = function() {
+	  var treeExplorer = document.getElementById("UITreeExplorer");
+	  var itemArea = document.getElementById("SelectItemArea");	
+	  
 	  if(typeof(eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
 	    eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
 	  }
-
-      if(typeof(eXo.ecm.ECMUtils.heightOfTree) == "undefined") {
-		eXo.ecm.ECMUtils.heightOfTree = container.offsetHeight;
-	  }
-
-	  if(itemArea.style.display == 'none') {
-		if (isOtherTabs)
-		{
-			if (eXo.ecm.ECMUtils.heightOfTree != eXo.ecm.UIListView.initialHeightOfContainer) {
-				eXo.ecm.ECMUtils.heightOfTree = eXo.ecm.UIListView.initialHeightOfContainer
-				//container.style.height = container.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea - 10 + "px";
-			}
-			container.style.height = eXo.ecm.ECMUtils.heightOfTree - 4 + "px";
-		}
-		else
-		{
-			// Case of tree explorer tab
-			container.style.height = container.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea - 20 + "px";
-		}
-	    itemArea.style.display = 'block';
-	    eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'block';
-		resizeTreeButton.className = "ResizeTreeButton";
+	  
+	  //adjust the height of items in side bar
+	  if (treeExplorer) {
+	  	Self.adjustTreeExplorer();
 	  } else {
-
-		if (isOtherTabs)  {
-
-			//container.style.height = container.offsetHeight + itemArea.offsetHeight + "px";
-			container.style.height = workspace.offsetHeight - 20 + "px";
-			var previousElement = DOM.findPreviousElementByTagName(container, "div");
-			if (previousElement)
-				container.style.height = workspace.offsetHeight - 25 - previousElement.offsetHeight + "px";
-		}
-		else {
-			container.style.height = container.offsetHeight + itemArea.offsetHeight - 20 + "px";
-		}
-
-		if (container.offsetHeight > workspace.offsetHeight) {
-			var exceed = container.offsetHeight - workspace.offsetHeight;
-			if (exceed > 0) {
-
-				// Assign default value for treeExplorer div
-				container.style.height = workspace.offsetHeight - 20 + "px";
-			}
-		}
-		itemArea.style.display = 'none';
-		eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'none';
-		resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+	  	Self.adjustAnotherTab();
 	  }
-	  eXo.ecm.ECMUtils.reloadHeight();
+	  
+	  Self.adjustResizeSideBar();
+	  Self.adjustFillOutElement();
 	}
+	
+	ECMUtils.prototype.adjustTreeExplorer = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+	  
+	  var resizableBlock = DOM.findFirstDescendantByClass(leftContainer, "div", "UIResizableBlock");	  
+	  var sideBarContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "SideBarContent");
+	  var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+	  var resizeTreeExplorer = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeExplorer");	  	
+	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizeTreeExplorer, "div", "ResizeTreeButton");  
+	  var barContent = DOM.findFirstDescendantByClass(sideBarContent, "div", "BarContent");
+	  
+	  var treeExplorer = document.getElementById("UITreeExplorer");
+	  var itemArea = document.getElementById("SelectItemArea");	
+	  
+	  //keep some parameters
+	  if(typeof(eXo.ecm.ECMUtils.initialHeightOfTreeExplorer) == "undefined") {
+	    eXo.ecm.ECMUtils.initialHeightOfTreeExplorer = treeExplorer.offsetHeight;
+	  }
+	  
+	  if(typeof(eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) == "undefined") {
+	    eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree = leftContainer.offsetHeight;
+	  }
+	  
+	  if(typeof(eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea) == "undefined") {
+	    eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
+	  }
+	  
+	  //show or hide the SelectItemArea
+	  itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;	  	
+	  if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
+	    resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+	  } else {
+	    resizeTreeButton.className = "ResizeTreeButton";
+	  }
 
-	ECMUtils.prototype.reloadHeight = function() {
-		var workingArea = document.getElementById('UIWorkingArea');
-		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");
-		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';
-		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
-	}
-
-	ECMUtils.prototype.loadEffectedItemsInSideBar = function() {
-	  var container = document.getElementById("UITreeExplorer");
-		if(eXo.ecm.ECMUtils.savedTreeSizeMouseY) {
-			container.style.height = eXo.ecm.ECMUtils.savedTreeSizeMouseY;
+	  //adjust the height of tree explorer
+	  if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) {
+	    var treeExplorerHeight = rightContainer.offsetHeight;
+	  	
+		if (itemArea) {
+		  treeExplorerHeight -= itemArea.offsetHeight;
 		}
-		var itemArea = document.getElementById("SelectItemArea");
-		if(eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea) {
-		  if(eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == 'none') {
-	      container.style.height = container.offsetHeight + eXo.ecm.ECMUtils.heightOfItemArea + "px";
-		    itemArea.style.display = 'none';
-		  } else {
-	  	  container.style.height = container.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea + "px";
-	  	  itemArea.style.display = 'block';
+		
+		if (selectContent) {
+		  treeExplorerHeight -= selectContent.offsetHeight;
+		}
+		
+		if (resizeTreeExplorer) {
+		  treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
+		}
+		
+		if (barContent) {
+		  treeExplorerHeight -= barContent.offsetHeight;
+		}
+		
+		var treeExplorerFull = DOM.getChildrenByTagName(treeExplorer, "div")[0];
+		if (treeExplorerHeight > treeExplorerFull.offsetHeight){
+		  treeExplorerHeight = treeExplorerFull.offsetHeight
+		} 		
+		
+		treeExplorer.style.height = treeExplorerHeight - 28 + 'px';
+	  } else {
+	    if (itemArea.style.display == 'none') {
+	      treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer + eXo.ecm.ECMUtils.heightOfItemArea - 20 + 'px'; 
+	  	} else {
+	  	  treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer - 20 + 'px';
+	  	}
+	  }
+	}
+	
+	ECMUtils.prototype.adjustAnotherTab = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+	  
+	  var resizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		  
+	  var sideBarContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "SideBarContent");
+	  var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
+	  var resizeTreeExplorer = DOM.findFirstDescendantByClass(resizableBlock, "div", "ResizeTreeExplorer");
+	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizeTreeExplorer, "div", "ResizeTreeButton");	
+	  
+	  var itemArea = document.getElementById("SelectItemArea");
+	  var container = Self.getContainerToResize();
+	  	  
+	  //keep some parameters
+	  eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
+	  eXo.ecm.ECMUtils.initialHeightOfLeftContainerAnotherTab = leftContainer.offsetHeight;
+	  
+	  if(typeof(eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea) == "undefined") {
+	    eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
+	  }
+	  
+	  //show or hide the SelectItemArea
+	  itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;	  	
+	  if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
+	    resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+	  } else {
+	    resizeTreeButton.className = "ResizeTreeButton";
+	  }
+	  
+	  //adjust the height of container
+	  if (itemArea.style.display == 'none') {
+	    if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerAnotherTab) {
+	  	  var previousElement = DOM.findPreviousElementByTagName(container, "div");
+	  	  var containerHeight = rightContainer.offsetHeight;
+	  	
+	  	  if (selectContent) {
+	  	    containerHeight -= selectContent.offsetHeight;
+	  	  }
+	  	
+	  	  if (resizeTreeExplorer) {
+	  	    containerHeight -= resizeTreeExplorer.offsetHeight;
+	  	  }	  
+	  	
+	  	  if (itemArea) {
+	  	    containerHeight -= itemArea.offsetHeight;
+	  	  }	
+		
+		  if (previousElement) {
+		    containerHeight -= previousElement.offsetHeight;
 		  }
+		  	
+		  container.style.height = containerHeight + "px";
+	    } else {
+	      container.style.height = eXo.ecm.ECMUtils.initialHeightOfOtherTab + eXo.ecm.ECMUtils.heightOfItemArea + 'px'; 
+	    }
+	  }
+	}
+	
+	ECMUtils.prototype.clearFillOutElement = function() {
+		var fillOutElement = document.getElementById('FillOutElement');
+		if (fillOutElement) {
+		  fillOutElement.style.width = "0px";
+		  fillOutElement.style.height = "0px";
 		}
+	}
+	
+	ECMUtils.prototype.adjustFillOutElement = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+	  if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
+		var fillOutElement = document.getElementById('FillOutElement');		
+		if (fillOutElement) {
+		  fillOutElement.style.width = "0px";
+		  fillOutElement.style.height = leftContainer.offsetHeight - rightContainer.offsetHeight + "px";
+		}
+	  }
+	}
+	
+	ECMUtils.prototype.adjustResizeSideBar = function() {
+	  var workingArea = document.getElementById('UIWorkingArea');
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
+	  var resizeSideBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");
+	  var resizeButton = DOM.findFirstDescendantByClass(resizeSideBar, "div", "ResizeButton");
+	  
+	  if (rightContainer.offsetHeight < leftContainer.offsetHeight){
+	    resizeSideBar.style.height = leftContainer.offsetHeight + "px";
+	    resizeButton.style.height = leftContainer.offsetHeight + "px";
+	  } else {
+	  	resizeSideBar.style.height = rightContainer.offsetHeight + "px";
+	    resizeButton.style.height = rightContainer.offsetHeight + "px";
+	  }
 	}
 
 	ECMUtils.prototype.disableAutocomplete = function(id) {
