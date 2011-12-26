@@ -30,7 +30,7 @@
 
 #set($node = $uicomponent.getNode())
 <div style="width: 100%;background:url('/cms-content/images/title-bg.gif') repeat-x ; height:20px; float: left; border-bottom: 1px solid #a3abb6;margin-bottom:1px" >
-  <label class="text"><font size="2" color="black"><b>Business Process:</b></font></label>
+  <label class="text"><font size="2" color="black"><strong>Business Process:</strong></font></label>
   <label class="text"><font size="2" color="black">$node.getName()</font></label>
 </div>
 #set($childs = $node.getChildNodes())<br><br>
@@ -53,7 +53,7 @@
               <li>
                 <div style="text-align: left; margin-top: 5px; border: 1px solid #a3abb6">
                   <div syle="width: 100%; height: 20px; float: left;border-bottom: 1px solid #a3abb6; margin-bottom:1px" >
-                    <b><font color="black">${name}</font></b>
+                    <strong><font color="black">${name}</font></strong>
                   </div>		
                   <div style="width: 95%; font-size: 12px; color: gray; padding: 5px">
                     #set($text = $uicomponent.toHTML($data))
@@ -88,7 +88,7 @@
               <li>
                 <div style="text-align: left; margin-top: 5px; border: 1px solid #a3abb6">
                   <div style="width: 100%; height: 20px; float: left;border-bottom: 1px solid #a3abb6; margin-bottom:1px" >
-                    <b><font color="black">${name}</font></b>
+                    <strong><font color="black">${name}</font></strong>
                   </div>	
                   <div style="width: 95%; font-size: 12px; color: gray; padding: 5px">
                     #set($text = $uicomponent.toHTML($data))

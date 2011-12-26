@@ -9,7 +9,7 @@
 %>
 <div class="UIForm $uicomponent.id">
 	<div class="TitleBar">
-		<b><%=_ctx.appRes("UIPCLVConfig.label.Title")%></b>
+		<strong><%=_ctx.appRes("UIPCLVConfig.label.Title")%></strong>
 	</div>
   <%uiform.begin()%>
   <div class="HorizontalLayout">

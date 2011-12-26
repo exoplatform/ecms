@@ -57,11 +57,11 @@
     			def content = "<pre>";
 	    		if (contentNode.hasProperty("exo:linkURL")) {
 	    			def url = uicomponent.encodeHTML(contentNode.getProperty("exo:linkURL").getString());
-	    			content += "	<b>" + _ctx.appRes("WebLink.view.label.url") + ": </b><a onclick=\"javascript:window.open('" + url + "');\" style='cursor:pointer'>" + url + "</a><br/>";
+	    			content += "	<strong>" + _ctx.appRes("WebLink.view.label.url") + ": </strong><a onclick=\"javascript:window.open('" + url + "');\" style='cursor:pointer'>" + url + "</a><br/>";
 	    		}
 	    		if (contentNode.hasProperty("exo:linkDescription")) {
 	    			def description = uicomponent.encodeHTML(contentNode.getProperty("exo:linkDescription").getString());
-	    			content += "	<b>" + _ctx.appRes("WebLink.view.label.description") + ": </b>" + description;
+	    			content += "	<strong>" + _ctx.appRes("WebLink.view.label.description") + ": </strong>" + description;
 	    		}
 				content += "</pre>";
     			println content;

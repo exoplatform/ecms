@@ -34,7 +34,7 @@
 	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.changeColor('NewResultData')");
   %>
    <div class="ResultHeader">
-    <div class="CaptionSearchType"><b><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></b></div>
+    <div class="CaptionSearchType"><strong><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></strong></div>
     <% 
     if (currentPageData != null && !currentPageData.isEmpty()) {
     	def currentPage = uicomponent.getCurrentPage();
@@ -48,12 +48,12 @@
                                     (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
       %>
        <div class="SearchSummary">
-        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b>
+        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <strong><%= startItemIndex %></strong> - <strong><%= endItemIndex %></strong>
         <% if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) { %>
-          <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b>
-          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <b><%= keyword %></b>
+          <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <strong><%= totalItem %></strong>
+          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
         <% } %>
-        (<b><%= searchTime %></b> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
+        (<strong><%= searchTime %></strong> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
        </div>
       <%
      }
@@ -66,7 +66,7 @@
     def suggestionURL = uiSearchForm.event("Search", suggestion);
      %>
      <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.new-suggestion") %> : <b style="font-size: 15px; font-style: italic;"><a href="<%= suggestionURL %>"><%= suggestion %></a></b>
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.new-suggestion") %> : <strong style="font-size: 15px; font-style: italic;"><a href="<%= suggestionURL %>"><%= suggestion %></a></strong>
      </p>
     <%
    }
@@ -74,7 +74,7 @@
    if (uicomponent.getRealCurrentPageData().isEmpty()) {
     %>
      <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <b style="font-size: 15px; font-style: italic;"> <%= keyword %> </b> - 
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= keyword %> </strong> - 
       <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= _ctx.appRes("UIDefaultSearchResult.label." + resultType.toLowerCase()) %>
      </p>
     <%
