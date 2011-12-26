@@ -6,13 +6,96 @@ These following parameters are common and can be used for all input fields.
 ||*Parameter*||*Type*||*Required*||*Example*||*Description*||
 |*jcrPath*|{{string}}|!images/check.gif!|{{jcrPath=/node/exo:title}}|The relative path inside the current node.|
 |*mixintype*|{{string}} with the commas (,) character.|!images/error.gif!|{example}{{mixintype=mix:i18n}}{example} {example}{{mixintype=mix:votable,mix:commentable,mix:i18n}}{example}|The list of mixin types you want to initialize when creating the content.|
-|*validate*|{{string}} with the comma (,) character|!images/error.gif!|{{validate=empty}}{example} {example}{{validate=empty,name}}{example}{example}{{validate=org.exoplatform.webui.form.validator.StringLengthValidator}}|The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes.|
+|*validate*|{{string}} with the comma (,) character|!images/error.gif!|{{validate=empty}}{example} {example}{{validate=empty,name}}{example}{example}{{validate=org.exoplatform.webui.form.validator.StringLengthValidator}}|The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes. To know how to pass parameters to validators, refer [here|#CONTref.InsideWCMTemplates.ContentTypes.How_to_pass_parameters_to_validators]|
 |*editable*|{{string}}|!images/error.gif!|{{editable=if-null}}|The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
 |*multiValues*|{{boolean}}|!images/error.gif!|{{multiValues=true}}|Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
 |*visible*|{{boolean}}|!images/error.gif!|{{visible=true}}|The input is visible if this value is true.|
 |*options*|{{String}} separated by the commas (,) character.}}|!images/error.gif!|A list of parameters which are input while the content templates are initialized.|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |
 
-See also:
+{docbook}
+<citetitle>
+<para xml:id="CONTref.InsideWCMTemplates.ContentTypes.How_to_pass_parameters_to_validators">
+<emphasis role="bold">
+Pass parameters to validators
+</emphasis>
+</para>
+</citetitle>
+{docbook}
+
+
+* "name" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=name", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "email" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=email", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "number" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=number", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "empty" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "null" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=null", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "datetime" validator:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=datetime", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+* "length" validator:
+
+For a maximum length of 50 characters:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(50;int)", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+For a minimum length of 6 characters and maximum length of 50 characters:
+
+{code:java}
+String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(6;50;int)", "editable=if-null"];
+
+uicomponent.addTextField("title", webContentFieldTitle) ;
+{code}
+
+{docbook}
+<para>
+<prompt>
+    <emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
 
 * [Text Field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField]
 * [Hidden Field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField]
