@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
@@ -36,6 +38,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -116,6 +119,35 @@ public class UIDriveList extends UIPagingGridDecorator {
     return driveList ;
   }
 
+  /**
+   * Get Drive Views Labels from resource Bundle.
+   * 
+   * @param driveData DriveData
+   * @return Views Labels
+   */
+  public String getDriveViews(DriveData driveData) {
+    ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();
+    String[] viewNames = driveData.getViews().split(",");
+    StringBuilder strBuilder = new StringBuilder();
+    String viewName = null;
+    for (int i = 0; i < viewNames.length; i++) {
+      viewName = viewNames[i].trim();
+      String label = null;
+      try {
+        label = res.getString("Views.label." + viewName);
+      } catch (MissingResourceException e) {
+        label = viewName;
+      }
+      
+      if (strBuilder.length() > 0) {
+        strBuilder.append(", ");
+      }
+      
+      strBuilder.append(label);
+    }
+    return strBuilder.toString();
+  }
+  
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container

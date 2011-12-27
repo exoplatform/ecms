@@ -61,7 +61,7 @@
             <td><div class="Text" title="$drive.workspace">$drive.workspace</div></td>
             <td><div class="Text" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
             <td><div class="Text" title="$drive.permissions">$drive.permissions</div></td>
-            <td><div class="Text" title="$drive.views">$drive.views</div></td>
+            <td><div class="Text" title="<%=uicomponent.getDriveViews(drive)%>"><%=uicomponent.getDriveViews(drive)%></div></td>
 	          <td>
 	          	<div class="ActionContainer">
 	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon" />
