@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 
@@ -35,6 +37,7 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -73,7 +76,7 @@ public class UIViewList extends UIPagingGrid {
 
   public UIViewList() throws Exception {
     getUIPageIterator().setId("UIViewsGrid") ;
-    configure("name", VIEW_BEAN_FIELD, VIEW_ACTION) ;
+    configure("id", VIEW_BEAN_FIELD, VIEW_ACTION) ;
   }
 
   private String getBaseVersion(String name) throws Exception {
@@ -236,12 +239,14 @@ public class UIViewList extends UIPagingGrid {
   }
 
   public class ViewBean {
+    private String id;
     private String name ;
     private String permissions ;
     private String tabList ;
     private String baseVersion =  "";
 
     public ViewBean(String n, String per, List tabs) {
+      id = n;
       name = n ;
       permissions = per ;
       StringBuilder str = new StringBuilder() ;
@@ -254,7 +259,16 @@ public class UIViewList extends UIPagingGrid {
     public String getBaseVersion() { return baseVersion; }
     public void setBaseVersion(String s) { baseVersion = s;
     }
-    public String getName() { return name; }
+    public String getName() {
+      ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();
+      String label = null;
+      try {
+        label = res.getString("Views.label." + name);
+      } catch (MissingResourceException e) {
+        label = name;
+      }
+      return label;
+    }
     public void setName(String s) { name = s; }
 
     public String getPermissions() { return permissions; }
@@ -262,5 +276,7 @@ public class UIViewList extends UIPagingGrid {
 
     public String getTabList() { return tabList; }
     public void setTabList(String ls) { tabList = ls; }
+    
+    public String getId() { return id; }
   }
 }

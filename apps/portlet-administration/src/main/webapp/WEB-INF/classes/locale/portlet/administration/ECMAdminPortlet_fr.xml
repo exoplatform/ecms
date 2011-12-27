@@ -1116,7 +1116,7 @@
       <manageSimpleCategories>Gérer les catégories simples</manageSimpleCategories>
 	  <option>
 	  	<ListView>Vue de liste</ListView>
-		<TimelineView>=Vue de chronologie</TimelineView>
+		<TimelineView>Vue de chronologie</TimelineView>
 		<ThumbnailsView>Vue des vignettes</ThumbnailsView>
 		<CoverFlow>Flux de couverture</CoverFlow>
 		<IconView>Visualisation de l'icône</IconView>

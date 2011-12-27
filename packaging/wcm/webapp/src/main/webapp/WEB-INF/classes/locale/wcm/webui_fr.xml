@@ -47,6 +47,16 @@
       <icon-view>Vue icônes</icon-view>
       <thumbails-view>Vue vignettes</thumbails-view>
       <cover-flow>Vue défilé</cover-flow>
+      <simple-view>Vue simple</simple-view>
+      <system-view>Vue système</system-view>
+      <anonymous-view>Vue anonyme</anonymous-view>
+      <taxonomy-list>Vue liste de taxinomie</taxonomy-list>
+      <taxonomy-icons>Vue icône de taxinomie</taxonomy-icons>
+      <timeline-view>Vue frise chronologique</timeline-view>
+      <list-view>Vue liste</list-view>
+      <authoring-view>Vue auteur</authoring-view>
+      <slide-show>Vue diaporama</slide-show>
+      <wcm-category-view>Vue catégorie du WCM</wcm-category-view>
     </label>
   </Views>
 

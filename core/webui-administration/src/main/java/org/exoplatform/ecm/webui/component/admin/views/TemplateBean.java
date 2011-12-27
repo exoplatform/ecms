@@ -16,6 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.exoplatform.web.application.RequestContext;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -37,7 +42,16 @@ public class TemplateBean {
   public String getBaseVersion() { return baseVersion; }
   public void setBaseVersion(String baVer) { baseVersion = baVer; }
 
-  public String getName() { return name ; }
+  public String getName() {
+    ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();
+    String label = null;
+    try {
+      label = res.getString("UIViewFormTabPane.label.option." + name);
+    } catch (MissingResourceException e) {
+      label = name;
+    }
+    return label;
+  }
   public void setName(String n) { name = n ; }
 
   public String getPath() { return path ; }
