@@ -217,6 +217,12 @@
 	background: url('DefaultSkin/AddDocument.png') no-repeat right center; /* orientation=rt */
 }
 
+.DeleteNodeIcon {
+	height: 24px;
+  background: url('DefaultSkin/DeleteNode.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/DeleteNode.png') no-repeat right center; /* orientation=rt */
+}
+
 .CreateTicketIcon {
 	height: 24px;
   background: url('DefaultSkin/AddTicket.gif') no-repeat left center; /* orientation=lt */
