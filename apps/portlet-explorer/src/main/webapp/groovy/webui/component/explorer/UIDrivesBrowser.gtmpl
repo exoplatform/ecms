@@ -47,7 +47,7 @@
 			                  String[] personalIconPath = personalDrive.getIcon().split(":/") ;
 			              %>
 			                <div class="Icon" onclick="<%=uicomponent.event("SelectDrive","${personalDrive.name}")%>">
-			                	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="" width="48" height="41" />			                				                			                  
+			                	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="${personalDrive.name}" width="48" height="41" />			                				                			                  
 			                </div>
 			              <%} else {%>
 			                <div class="Icon UserDriveIcon" style="margin:auto" onclick="<%=uicomponent.event("SelectDrive","${personalDrive.name}")%>"><span></span></div>
@@ -108,7 +108,7 @@
                         String[] groupIconPath = groupDrive.getIcon().split(":/") ;
 			              %>
 			                <div class="Icon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>">
-			                	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
+			                	<img alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
 			                </div>
 			              <%} else {%>
 			                <div class="Icon GroupDriveIcon" style="margin:auto" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>"><span></span></div>
@@ -169,7 +169,7 @@
   				                String[] generalIconPath = drive.getIcon().split(":/") ;
 				              %>
 				                <div class="Icon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>">
-				                	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${generalIconPath[0]}/${generalIconPath[1]}" width="48" height="41" />
+				                	<img alt="${drive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${generalIconPath[0]}/${generalIconPath[1]}" width="48" height="41" />
 				                </div>
 				              <%} else {%>
 				                <div class="Icon DefaultDriveIcon Admin${drive.workspace}Icon" style="margin:auto" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"><span></span></div>

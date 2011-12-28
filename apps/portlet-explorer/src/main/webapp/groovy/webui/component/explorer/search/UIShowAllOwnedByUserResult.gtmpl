@@ -35,14 +35,14 @@
           %>
             <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.typeASC")%>">
               <%=_ctx.appRes("UIShowAllOwnedByUserResult.header.type")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon">
+              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.typeASC")%>" class="BlueUpArrow16x16Icon">
             </div>
           <%
             } else if (uicomponent.iconType.equals("BlueDownArrow")) {
           %>
           <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.typeDESC")%>">
             <%=_ctx.appRes("UIShowAllOwnedByUserResult.header.type")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon">
+            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon">
           </div>
           <%
             } else {
@@ -58,14 +58,14 @@
           %>
             <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.nameASC")%>">
               <%=_ctx.appRes("UIShowAllOwnedByUserResult.header.name")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon"/>
+              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.nameASC")%>" class="BlueUpArrow16x16Icon"/>
             </a>
           <%
             } else if (uicomponent.iconName.equals("BlueDownArrow")) {
           %>
           <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.nameDESC")%>">
             <%=_ctx.appRes("UIShowAllOwnedByUserResult.header.name")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon"/>
+            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllOwnedByUserResult.title.nameDESC")%>" class="BlueDownArrow16x16Icon"/>
           </a>
           <%
             } else {
@@ -115,7 +115,7 @@
             <td>
               <div class="ActionContainer">
                 <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" 
-                     alt="" 
+                     alt="<%=_ctx.appRes("UIShowAllOwnedByUserResult.tooltip.View")%>"
                      title="<%=_ctx.appRes("UIShowAllOwnedByUserResult.tooltip.View")%>" 
                      src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
               </div>

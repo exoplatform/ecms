@@ -36,7 +36,7 @@
 							  <%
 							    if (uiInput.getName().equals("delegator")) {
 							   %>
-							   <img onclick="<%=uicomponent.event("SelectUser")%>" title = "<%= _ctx.appRes("UITask.title.Delegate")%>" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="SelectUserIcon" />
+							   <img onclick="<%=uicomponent.event("SelectUser")%>" title = "<%= _ctx.appRes("UITask.title.Delegate")%>" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%= _ctx.appRes("UITask.title.Delegate")%>" class="SelectUserIcon" />
 							   <%
 							    }
 							  %>
@@ -96,7 +96,7 @@
 		  </div>			
 		    <div class="DefaultHide ActionContainer">
 		    <%if(uicomponent.getStateImageURL() != "") {%>					  		
-			  	<img src="$uicomponent.stateImageURL" alt="" />
+			  	<img src="$uicomponent.stateImageURL" alt="<%=_ctx.appRes("UITask.title.state-image")%>" />
 			  <%} else { %>
 			    <div style="text-align:center; font-style:italic">
             <%=_ctx.appRes("UITask.label.process-diagram-not-available")%> 

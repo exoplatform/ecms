@@ -43,7 +43,7 @@
 		String imageWidth = getRimOfImage("exo:imageWidth", currentNode);
 		String imageHeight = getRimOfImage("exo:imageHeight", currentNode);
 		%>
-			<div style="float:left; padding-right: 10px;"><img src="$imageURI" width="<%=imageWidth%>" height="<%=imageHeight%>"/></div>
+			<div style="float:left; padding-right: 10px;"><img alt="$imageURI" src="$imageURI" width="<%=imageWidth%>" height="<%=imageHeight%>"/></div>
 		<%
 	}
 	if((css != null) && (css.length() > 0)) {

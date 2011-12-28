@@ -60,7 +60,7 @@
 					<%=uicomponent.addQuickEditDiv("CaptionItem", viewNode)%>
 				<%
                 if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
-                    %><img src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%
+                    %><img alt="$itemName" src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%
                 }
 								if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE)) {
 									%>

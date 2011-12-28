@@ -35,7 +35,7 @@
 	        %>
 	        <td>
 	        	<div class="Text">
-	          	<img alt="" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="default16x16Icon ${metaType}16x16Icon"/>
+	          	<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="$metadataType.name" class="default16x16Icon ${metaType}16x16Icon"/>
 		          <span>$metadataType.name</span>
 		        </div>
 	        </td>
@@ -52,7 +52,7 @@
 	            }
 	          %>
 	          <div class="ActionContainer Text">
-	          	<img alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${iconType}16x16Icon"/>
+	          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="${iconType}16x16Icon"/>
 		          <span>$booleanText</span>
 		        </div>
 	        </td>
@@ -67,7 +67,7 @@
 	            }
 	          %>
 	          <div class="ActionContainer Text">
-	          	<img alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 ${iconType}16x16Icon"/>
+	          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 ${iconType}16x16Icon"/>
 		          <span>$booleanText</span>
 		        </div>
 	        </td>

@@ -64,6 +64,7 @@
     </label>
     <title>
       <Delegate>Select User</Delegate>
+      <state-image>State Image</state-image>
     </title>
     <msg>
       <has-not-got-delegate>You must select any users to delegate.</has-not-got-delegate>

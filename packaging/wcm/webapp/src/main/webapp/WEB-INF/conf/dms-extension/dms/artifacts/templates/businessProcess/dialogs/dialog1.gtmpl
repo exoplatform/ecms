@@ -33,7 +33,7 @@
 
 <ul class="menu">
   <li>
-      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt=""/>
+      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.expand")%>"/>
       <a href="#" onclick="javascript:expand(this)" style="font-weight: bold">Properties</a>
     <ul>
       #if($childs.size() > 0)
@@ -64,7 +64,7 @@
 <ul class="menu">
   <li>
     <>
-      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt=""/>
+      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.expand")%>"/>
       <a href="#" onclick="javascript:expand(this)" style="font-weight: bold"> XML </a>
     <ul>
       #if($childs.size() > 0)

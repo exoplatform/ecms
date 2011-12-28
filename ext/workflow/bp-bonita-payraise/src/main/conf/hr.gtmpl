@@ -24,7 +24,7 @@
     	<tr>
 		    <th colspan="2" height="50" align="center">
 		      <%=resWorkflow.getString("my-custom-groovy-form")%><br>
-		      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" border="0">
+		      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" alt="<%=resWorkflow.getString("my-custom-groovy-form")%>" border="0">
 		    </th>
 		  </tr>    	
 			<%for(inputInfo in uicomponent.getInputInfo())  {%>

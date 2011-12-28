@@ -28,7 +28,7 @@
 						</td>
 					</tr>
  				</table>
- 				<div style="margin: auto;width:427px;"><img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="46" width="472" border="0" alt=""/><br /></div>
+ 				<div style="margin: auto;width:427px;"><img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="46" width="472" border="0" alt="<%=uicomponent.getStateName()%>"/><br /></div>
 			</div>
 		</div>
 	</div>

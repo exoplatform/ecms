@@ -64,6 +64,7 @@
     </label>
     <title>
       <Delegate>Saisir un utilisateur</Delegate>
+      <state-image>image de l'état</state-image>
     </title>
     <msg>
       <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer</has-not-got-delegate>

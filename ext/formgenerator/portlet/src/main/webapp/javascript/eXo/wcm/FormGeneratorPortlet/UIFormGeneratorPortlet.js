@@ -77,7 +77,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			break;
 		case "upload"		: 
 			fieldComponent  +=		"<td class='FieldLabel' value='Upload'>Upload field</td>";
-			fieldComponent  +=		"<td class='FieldComponent'><input type='file' class='Upload' disabled='disabled'/><img src='/eXoResources/skin/sharedImages/Blank.gif' alt='' class='UploadButton'/></td>";
+			fieldComponent  +=		"<td class='FieldComponent'><input type='file' class='Upload' disabled='disabled'/><img src='/eXoResources/skin/sharedImages/Blank.gif' alt='Upload' class='UploadButton'/></td>";
 			break;
 	}
 

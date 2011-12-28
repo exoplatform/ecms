@@ -65,8 +65,8 @@ UITable.prototype.generateInputs = function() {
   out += '</table>';
 
   out += '<div style="float:right;">';
-  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction Remove16x16Icon" alt="" title="Remove Item" onclick="javascript:eXo.ecm.UITable.removeRow();">';  
-  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction AddNewNodeIcon" alt="" title="Add Item" onclick="javascript:eXo.ecm.UITable.addRow();">';
+  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction Remove16x16Icon" alt="Remove Item" title="Remove Item" onclick="javascript:eXo.ecm.UITable.removeRow();">';  
+  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction AddNewNodeIcon" alt="Add Item" title="Add Item" onclick="javascript:eXo.ecm.UITable.addRow();">';
   out += '</div>';
   
   inp.innerHTML = out;

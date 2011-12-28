@@ -30,7 +30,7 @@
 	      even = !even ;
   %>
 	    <tr class="$rowClass">
-	      <td class="Text"><img src="<%=uicomponent.getIconURL(task)%>" alt="" /></td>
+	      <td class="Text"><img src="<%=uicomponent.getIconURL(task)%>" alt="$task.taskName" /></td>
 	      <td class="Text">
 	        <%
             if(task.getActorId().indexOf(":/") > -1) println "<div class=\"Group16x16Icon\"></div>" ;

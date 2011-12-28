@@ -35,14 +35,14 @@
           %>
             <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.typeASC")%>">
               <%=_ctx.appRes("UIShowAllTrashResult.header.type")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon">
+              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeASC")%>" class="BlueUpArrow16x16Icon">
             </div>
           <%
             } else if (uicomponent.iconType.equals("BlueDownArrow")) {
           %>
           <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.typeDESC")%>">
             <%=_ctx.appRes("UIShowAllTrashResult.header.type")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon">
+            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon">
           </div>
           <%
             } else {
@@ -58,14 +58,14 @@
           %>
             <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.nameASC")%>">
               <%=_ctx.appRes("UIShowAllTrashResult.header.name")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueUpArrow16x16Icon"/>
+              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.nameASC")%>" class="BlueUpArrow16x16Icon"/>
             </a>
           <%
             } else if (uicomponent.iconName.equals("BlueDownArrow")) {
           %>
           <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("name"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.nameDESC")%>">
             <%=_ctx.appRes("UIShowAllTrashResult.header.name")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="BlueDownArrow16x16Icon"/>
+            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.nameDESC")%>" class="BlueDownArrow16x16Icon"/>
           </a>
           <%
             } else {
@@ -123,12 +123,12 @@
                      title="<%=_ctx.appRes("UIShowAllTrashResult.tooltip.View")%>" 
                      src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>-->
                 <img onclick="<%=uicomponent.event("Delete", node.getSession().getWorkspace().getName() + ":" + Utils.formatNodeName(node.getPath()))%>"
-                     alt=""
+                     alt="<%=_ctx.appRes("UIShowAllTrashResult.tooltip.DeletePermanently")%>"
                      title="<%=_ctx.appRes("UIShowAllTrashResult.tooltip.DeletePermanently")%>"
                      src="/eXoResources/skin/sharedImages/Blank.gif"
                      class = "Delete16x16Icon"/>
                 <img onclick="<%=uicomponent.event("Restore", node.getSession().getWorkspace().getName() + ":" + Utils.formatNodeName(node.getPath()))%>"
-                     alt=""
+                     alt="<%=_ctx.appRes("UIShowAllTrashResult.tooltip.RestoreFromTrash")%>"
                      title="<%=_ctx.appRes("UIShowAllTrashResult.tooltip.RestoreFromTrash")%>"
                      src="/eXoResources/skin/sharedImages/Blank.gif"
                 	 class = "RestoreFromTrash16x16Icon"/>                    	 	

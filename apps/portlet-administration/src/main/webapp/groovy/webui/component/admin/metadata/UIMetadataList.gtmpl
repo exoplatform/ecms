@@ -58,24 +58,24 @@
 	                String internalText = _ctx.appRes("UIMetadataList.label." + meta.getInternalUse()) ;
 	                String internalIconType = meta.getInternalUse() ;                
 	              %>
-				          <img class="Icon16x16 ${internalIconType}16x16Icon" alt="" src="/eXoResources/skin/sharedImages/Blank.gif"/>
+				          <img class="Icon16x16 ${internalIconType}16x16Icon" alt="$internalText" src="/eXoResources/skin/sharedImages/Blank.gif"/>
 		              <span>$internalText</span>
 		           </div>
             </td>
             <td>
             	<div class="ActionContainer">
-			          <img class="Icon16x16 True16x16Icon" alt="" src="/eXoResources/skin/sharedImages/Blank.gif"/>
-	              <span>true</span>
+			          <img class="Icon16x16 True16x16Icon" alt="<%=_ctx.appRes("UIMetadataList.label.True")%>" src="/eXoResources/skin/sharedImages/Blank.gif"/>
+	              <span><%=_ctx.appRes("UIMetadataList.label.True")%></span>
 	            </div>
             </td>
             <td>
             	<div class="ActionContainer">
-	                <img onclick="<%=uicomponent.event("View", meta.getName())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="MetaView16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.view")%>"/>
-	                <img onclick="<%=uicomponent.event("Edit", meta.getName())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"/>
+	                <img onclick="<%=uicomponent.event("View", meta.getName())%>" alt="<%=_ctx.appRes("UIMetadataList.title.view")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="MetaView16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.view")%>"/>
+	                <img onclick="<%=uicomponent.event("Edit", meta.getName())%>" alt="<%=_ctx.appRes("UIMetadataList.title.edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"/>
 	              <%
 	              	if(meta.hasTemplate()) {
 	              	%>
-			              <img onclick="<%=uicomponent.event("Delete", meta.getName())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"/>
+			              <img onclick="<%=uicomponent.event("Delete", meta.getName())%>" alt="<%=_ctx.appRes("UIMetadataList.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"/>
 	              	<%
 	              	}
 	              %>

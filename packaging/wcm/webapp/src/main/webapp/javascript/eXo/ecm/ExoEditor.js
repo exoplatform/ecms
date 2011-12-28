@@ -96,7 +96,7 @@ MyToolbar.prototype.getButton = function(instance, btName) {
 						'<option value="7">7 (36 pt)</option>' +
 						'</select>';
 	}
-	return '<a href="#" class="MyButtonNormal" onclick="return eXo.ecm.ExoEditor.execCommand(\'' + instance + '\',\'' + btName + '\');"><img title="' + btName + '" src="/ecm/skin/ExoEditor/images/toolbar/' + btName + '.gif" /></a>' ;
+	return '<a href="#" class="MyButtonNormal" onclick="return eXo.ecm.ExoEditor.execCommand(\'' + instance + '\',\'' + btName + '\');"><img alt="' + btName + '" title="' + btName + '" src="/ecm/skin/ExoEditor/images/toolbar/' + btName + '.gif" /></a>' ;
 };
 var myToolbar = new MyToolbar() ;
 

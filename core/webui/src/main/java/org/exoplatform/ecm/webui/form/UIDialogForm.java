@@ -1609,7 +1609,8 @@ public class UIDialogForm extends UIForm {
         w.write("<td class=\"MultiValueContainerShow\">");
         w.write("<a style=\"cursor:pointer;\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
-            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img class='ActionIcon "
+            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img alt='" + rs.getString("Ecm.dialog.label.add") 
+            + "' class='ActionIcon "
             + iconClass + "' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
@@ -1621,7 +1622,8 @@ public class UIDialogForm extends UIForm {
               + getId()
               + "','RemoveReference','&objectId="
               + fieldName
-              + "' )\"><img class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
+              + "' )\"><img alt='"+ rs.getString("Ecm.dialog.label.remove") 
+              +"' class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
               + "</a>");
         w.write("</td>");
         w.write("</tr>");

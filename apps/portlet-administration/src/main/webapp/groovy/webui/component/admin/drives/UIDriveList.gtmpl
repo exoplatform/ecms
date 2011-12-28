@@ -52,7 +52,7 @@
               if(drive.getIcon() != null && drive.getIcon().length() > 0) {
                 String[] iconPath = drive.getIcon().split(":/") ;
             %>
-                <img src="/${uicomponent.getRequestContextName()}/jcr/${repository}/${iconPath[0]}/${iconPath[1]}" alt="" width="20px" height="20px" />
+                <img src="/${uicomponent.getRequestContextName()}/jcr/${repository}/${iconPath[0]}/${iconPath[1]}" alt="${iconPath[1]}" width="20px" height="20px" />
             <%} else {%>
               <span></span>
             <%}%>
@@ -64,8 +64,8 @@
             <td><div class="Text" title="<%=uicomponent.getDriveViews(drive)%>"><%=uicomponent.getDriveViews(drive)%></div></td>
 	          <td>
 	          	<div class="ActionContainer">
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon" />
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
+	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" class="Edit16x16Icon" />
+	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" class="Delete16x16Icon" />
 			        </div>
 	          </td>	                    
           </tr>

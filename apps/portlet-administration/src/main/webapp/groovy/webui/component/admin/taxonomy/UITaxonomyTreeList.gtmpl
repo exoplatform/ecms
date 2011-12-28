@@ -67,11 +67,11 @@
               <td>
                 <div class="ActionContainer">
                   <% if (taxonomyTree.isEdit()) { %>
-                    <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon" />
+                    <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" class="Edit16x16Icon" />
                   <% } else { %>
-                    <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="" />
+                    <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="None Edit" />
                   <% } %>
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" class="Delete16x16Icon" />
                 </div>
               </td>                     
             </tr>

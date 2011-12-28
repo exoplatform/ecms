@@ -61,12 +61,12 @@
 	          	  <%
 	          	  if (uicomponent.canEditNode(node)) {
 	          	  %>
-			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
+			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
 			      <%
 	          	  }
 	          	  if (uicomponent.canRemoveNode(node)) {
 	          	  %>	          	
-	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
 	              <%  
 	          	  }%>
 		          </div>

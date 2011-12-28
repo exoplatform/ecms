@@ -79,7 +79,7 @@
 							<div class="CaptionContent">				
 								<% 
 									if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
-										%><img src="$imgSrc" width="91" /><% 
+										%><img alt="$itemName" src="$imgSrc" width="91" /><% 
 									}
 									if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
                       if (itemSummaryField!=null) {

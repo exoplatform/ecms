@@ -78,9 +78,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                    <img onclick="<%=uicomponent.event(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="" />
+	                    <img onclick="<%=uicomponent.event(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
 	              <%  }else{ %>
-	                    <img onclick="<%=uicomponent.url(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="" />
+	                    <img onclick="<%=uicomponent.url(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>                 

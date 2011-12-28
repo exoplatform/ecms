@@ -149,7 +149,7 @@
 			              %>
 		                    <a class="NodeLabel" href="$actionLinkSub">
 		                     <%if(uicomponent.isSymLink(subCat)) {%> 
-		                       <img class="LinkSmall" />
+		                       <img alt="symlink" class="LinkSmall" />
 		                     <%}%> 
 		                    $catName</a>
 			                  <div class="SeparatorLine"><span></span></div>
@@ -288,7 +288,7 @@
 							                  %>					                      	
 				                        <a class="NodeLabel" href="$subChildLink">
 				                        <%if(uicomponent.isSymLink(subChild)) {%> 
-						                      <img class="LinkSmall" />
+						                      <img alt="symlink" class="LinkSmall" />
 						                    <%}%> 
 				                        $subChildName
 				                        </a>

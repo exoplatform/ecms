@@ -15,7 +15,7 @@
      %>
         <div class="Info" style="padding-left: 25px;font-size:12px;margin-bottom:12px">
           <%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>
-          &nbsp;<img src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png" />
+          &nbsp;<img alt="<%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>" src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png" />
         </div>
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
@@ -28,7 +28,7 @@
   	          String[] mainIconPath = drive.getIcon().split(":/") ;
   	    %>
   	          <div class="DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="${drive.name}">
-    	          <img src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${repository}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
+    	          <img alt="${drive.name}" src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${repository}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
     	        </div>
 		          <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
@@ -58,7 +58,7 @@
 		  		      String[] groupIconPath = groupDrive.getIcon().split(":/") ;
 		      %>
 			        <div class="Icon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupDrive.name}">
-			        	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
+			        	<img alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
 			        </div>
 	        <%  } else {  %>
 				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName(), true)%>"><span></span></div>
@@ -83,7 +83,7 @@
 	            String[] personalIconPath = drive.getIcon().split(":/") ;
 	      %>
 			        <div class="DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="${drive.name}">
-			        	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="" width="48" height="41" />			                				                			                  
+			        	<img alt="${drive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="" width="48" height="41" />			                				                			                  
 			        </div>
 	      <%  } else { %>
 	            <div class="IconDrives${drive.name} DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" title="<%=uicomponent.getLabel(drive.getName())%>">

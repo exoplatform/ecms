@@ -28,6 +28,7 @@
   <FormGeneratorDialog>
     <label>
       <Download>Télécharger ce document</Download>
+      <remove>Supprimer</remove>
     </label>
   </FormGeneratorDialog>
   <ECMNameValidator>

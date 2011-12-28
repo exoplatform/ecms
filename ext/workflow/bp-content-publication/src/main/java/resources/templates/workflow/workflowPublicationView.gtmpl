@@ -107,7 +107,7 @@
 	<%if (uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale()) != "") {%>
     <div class="DefaultHide ActionContainer">	
       <div style="margin: auto; width:447px;">
-        <img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="450" width="447" border="0" alt=""/><br />
+        <img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="450" width="447" border="0" alt="<%=_ctx.appRes("UITask.title.state-image")%>"/><br />
       </div>
 		</div>
 	<%}%>  

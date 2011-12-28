@@ -49,8 +49,8 @@
 	          <td><div class="Text" title="<%=node.getPath()%>"><%=nodePath%></div></td>
 	          <td>
 	          	<div class="ActionContainer">
-	            	<img class="View16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", wsName))%>" title="<%=_ctx.appRes("UICBSearchResults.tooltip.View")%>"/>
-	            	<img class="OpenFolder16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event("Goto", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UICBSearchResults.tooltip.Goto")%>"/>
+	            	<img class="View16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UICBSearchResults.tooltip.View")%>" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()), new Parameter("workspaceName", wsName))%>" title="<%=_ctx.appRes("UICBSearchResults.tooltip.View")%>"/>
+	            	<img class="OpenFolder16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UICBSearchResults.tooltip.Goto")%>" onclick="<%=uicomponent.event("Goto", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UICBSearchResults.tooltip.Goto")%>"/>
 	           	</div>
 	          </td>	                    
           </tr>

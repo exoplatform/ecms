@@ -23,7 +23,7 @@
 		    <th colspan="2" height="50">
 		    	<div style="text-align: center">
 			      <%=resWorkflow.getString("my-custom-groovy-form")%><br>
-			      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" alt="" border="0">
+			      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" alt="<%=resWorkflow.getString("my-custom-groovy-form")%>" border="0">
 			    </div>
 		    </th>
 		  </tr>    	

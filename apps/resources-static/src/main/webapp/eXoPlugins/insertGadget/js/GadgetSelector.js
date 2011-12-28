@@ -110,7 +110,7 @@ GadgetSelector.loadGadgets = function() {
 		tblGadget 	+=	'<table class="ThumbnailTable">';
 		tblGadget		+=		'<tr>';
 		tblGadget		+=			'<td>';
-		tblGadget		+=				'<img name="'+nameGadget+'" height="80" src="'+srcImg+'" onclick="GadgetSelector.insertGadget(this);">';		
+		tblGadget		+=				'<img alt="'+nameGadget+'" name="'+nameGadget+'" height="80" src="'+srcImg+'" onclick="GadgetSelector.insertGadget(this);">';		
 		tblGadget		+=				'<div>'+nameGadget+'</div>';		
 		tblGadget		+=			'</td>';
 		tblGadget		+=		'</tr>';		
