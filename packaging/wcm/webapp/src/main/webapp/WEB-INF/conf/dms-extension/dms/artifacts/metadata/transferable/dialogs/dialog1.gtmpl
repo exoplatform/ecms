@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">
   		<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Transferable.dialog.label.transfer-executed")%></td>
+	      <td class="FieldLabel"><label for="transferExecuted"><%=_ctx.appRes("Transferable.dialog.label.transfer-executed")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTransferExecuted = ["jcrPath=/node/rma:holdExecuted", "false", "options=false,true"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Transferable.dialog.label.transfer-date")%></td>
+	      <td class="FieldLabel"><label for="transferDate"><%=_ctx.appRes("Transferable.dialog.label.transfer-date")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTransferDate = ["jcrPath=/node/rma:transferDate", "visible=true"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Transferable.dialog.label.transfer-location")%></td>
+	      <td class="FieldLabel"><label for="transferLocation"><%=_ctx.appRes("Transferable.dialog.label.transfer-location")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTransferLocation = ["jcrPath=/node/rma:transferLocation" ] ;

@@ -9,8 +9,7 @@
 						%>
 						  <tr>
 						    <td class="FieldLabel" style="width:100px; text-align:right">
-						      <!--%=uicomponent.getLabel(field.getName()) %> : -->
-						      <%=_ctx.appRes("UISubcriptionForm.title." + field.getName())%> :
+						      <label for="<%=field.getId()%>"><%=_ctx.appRes("UISubcriptionForm.title." + field.getName())%> :</label>
 						    </td>
 						    <td class="FieldComponent" style="padding-left:10px; white-space:nowrap;">
 									<% uiform.renderField(field) %>

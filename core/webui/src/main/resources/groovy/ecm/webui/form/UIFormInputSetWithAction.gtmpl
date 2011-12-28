@@ -30,7 +30,7 @@
                 String label = _ctx.appRes(formName + ".label." + inputEntry.getId()) ;
                 if(!label.equals(inputEntry.getId()) || inputEntry instanceof UIFormCheckBoxInput) {
               %>
-                  <td class="FieldLabel"><%=label%></td>
+                  <td class="FieldLabel"><label for="<%=inputEntry.getId()%>"><%=label%></label></td>
                <%}%>
                 <td class="FieldComponent">
                 <% 

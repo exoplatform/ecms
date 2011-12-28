@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">
   		<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.title")%></td>
+	      <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTitle = ["jcrPath=/node/dc:elementSet/dc:title", "multiValues=true"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></td>
+	      <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCreator = ["jcrPath=/node/dc:elementSet/dc:creator", "multiValues=true"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.subject")%></td>
+	      <td class="FieldLabel"><label for="subject"><%=_ctx.appRes("ElementSet.dialog.label.subject")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSubject = ["jcrPath=/node/dc:elementSet/dc:subject", "multiValues=true"] ;
@@ -30,7 +30,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.source")%></td>
+	      <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSource = ["jcrPath=/node/dc:elementSet/dc:source", "multiValues=true"] ;
@@ -39,7 +39,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.contributor")%></td>
+	      <td class="FieldLabel"><label for="contributor"><%=_ctx.appRes("ElementSet.dialog.label.contributor")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldContributor = ["jcrPath=/node/dc:elementSet/dc:contributor", "multiValues=true"] ;
@@ -48,7 +48,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.resource-type")%></td>
+	      <td class="FieldLabel"><label for="resourceType"><%=_ctx.appRes("ElementSet.dialog.label.resource-type")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldResourceType = ["jcrPath=/node/dc:elementSet/dc:resourceType", "multiValues=true"] ;
@@ -57,7 +57,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.date")%></td>
+	      <td class="FieldLabel"><label for="date"><%=_ctx.appRes("ElementSet.dialog.label.date")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDate = ["jcrPath=/node/dc:elementSet/dc:date", "options=displaytime", "visible=true", "validate=date"] ; 
@@ -66,7 +66,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.publisher")%></td>
+	      <td class="FieldLabel"><label for="publisher"><%=_ctx.appRes("ElementSet.dialog.label.publisher")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldPublisher = ["jcrPath=/node/dc:elementSet/dc:publisher", "multiValues=true"] ;
@@ -75,7 +75,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.description")%></td>
+	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDescription = ["jcrPath=/node/dc:elementSet/dc:description", "multiValues=true"] ;
@@ -84,7 +84,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.rights")%></td>
+	      <td class="FieldLabel"><label for="rights"><%=_ctx.appRes("ElementSet.dialog.label.rights")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRights = ["jcrPath=/node/dc:elementSet/dc:rights", "multiValues=true"] ;
@@ -93,7 +93,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.relation")%></td>
+	      <td class="FieldLabel"><label for="relation"><%=_ctx.appRes("ElementSet.dialog.label.relation")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRelation = ["jcrPath=/node/dc:elementSet/dc:relation", "multiValues=true"] ;
@@ -102,7 +102,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.format")%></td>
+	      <td class="FieldLabel"><label for="format"><%=_ctx.appRes("ElementSet.dialog.label.format")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldFormat = ["jcrPath=/node/dc:elementSet/dc:format", "multiValues=true"] ;
@@ -111,7 +111,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.coverage")%></td>
+	      <td class="FieldLabel"><label for="coverage"><%=_ctx.appRes("ElementSet.dialog.label.coverage")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCoverage = ["jcrPath=/node/dc:elementSet/dc:coverage", "multiValues=true"] ;
@@ -120,7 +120,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.identifier")%></td>
+	      <td class="FieldLabel"><label for="identifier"><%=_ctx.appRes("ElementSet.dialog.label.identifier")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldIdentifier = ["jcrPath=/node/dc:elementSet/dc:identifier", "multiValues=true"] ;
@@ -129,7 +129,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+	      <td class="FieldLabel"><label for="language"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldLanguage= ["jcrPath=/node/dc:elementSet/dc:language", "multiValues=true"] ;

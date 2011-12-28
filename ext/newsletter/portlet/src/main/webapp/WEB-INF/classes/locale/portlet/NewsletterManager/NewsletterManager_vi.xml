@@ -269,6 +269,7 @@
       <Letter>Letter</Letter>
       <Date>Date</Date>
       <Status>Status</Status>
+      <CheckAll>Check All</CheckAll>
     </title>
   </UINewsletterEntryManager>
 

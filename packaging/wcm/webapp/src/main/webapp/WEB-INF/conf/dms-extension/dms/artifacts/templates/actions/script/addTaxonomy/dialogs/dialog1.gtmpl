@@ -12,7 +12,7 @@
   <div class="HorizontalLayout">	  
 		<table class="UIFormGrid">	
   		<tr>
-	      <td class="FieldLabel" style="display:none"><%=_ctx.appRes("ScriptAction.dialog.label.id")%></td>
+	      <td class="FieldLabel" style="display:none"><label for="id"><%=_ctx.appRes("ScriptAction.dialog.label.id")%></label></td>
 	      <td class="FieldComponent" style="display:none">
 		      <%
 		        String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes", "editable=false", "visible=if-not-null"];
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.name")%></td>
+			  <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("ScriptAction.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 				  <% 
 						String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
@@ -30,7 +30,7 @@
 				</td>
 			</tr>		          					
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.lifecycle")%></td>
+			  <td class="FieldLabel"><label for="lifecycle"><%=_ctx.appRes("ScriptAction.dialog.label.lifecycle")%></label></td>
 			  <td class="FieldComponent">
 			  <% 
           String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
@@ -41,7 +41,7 @@
 				</td>
 			</tr>
 			<tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.isDeep")%></td>
+        <td class="FieldLabel"><label for="isDeep"><%=_ctx.appRes("ScriptAction.dialog.label.isDeep")%></label></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
@@ -50,7 +50,7 @@
         </td>
       </tr>
       <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.nodetypes")%></td>
+        <td class="FieldLabel"><label for="nodetypes"><%=_ctx.appRes("ScriptAction.dialog.label.nodetypes")%></label></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
@@ -59,7 +59,7 @@
         </td>
       </tr>
       <tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.homePath")%></td>
+			  <td class="FieldLabel"><label for="homePath"><%=_ctx.appRes("ScriptAction.dialog.label.homePath")%></label></td>
 			  <td class="FieldComponent">
 				  <% 
 						String[] fieldHomePath = ["jcrPath=/node/exo:storeHomePath", "validate=empty", "editable=false"];
@@ -68,25 +68,25 @@
 				</td>
 			</tr>			
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.targetWorkspace")%></td>
+	      <td class="FieldLabel"><label for="targetWorkspace"><%=_ctx.appRes("ScriptAction.dialog.label.targetWorkspace")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldWorkspace = ["jcrPath=/node/exo:targetWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
 		        uicomponent.addSelectBoxField("targetWorkspace", fieldWorkspace) ;
 		      %>
 		    </td>
-		  </tr>				
+		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.targetPath")%></td>
+	      <td class="FieldLabel"><label for="targetPath"><%=_ctx.appRes("ScriptAction.dialog.label.targetPath")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
-		        String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorAction=selectDestPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
-		        uicomponent.addActionField("targetPath", fieldPath)  ;
+		        String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorAction=selectDestPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
+		        uicomponent.addActionField("targetPath", fieldPath);
 		      %>
 		    </td>
 		  </tr>
 		  <tr>
-  		  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.affectedNodeTypeNames")%></td>
+  		  <td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("ScriptAction.dialog.label.affectedNodeTypeNames")%></td>
   		  <td class="FieldComponent">
   		  <% 
     		  String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false", "defaultValues=nt:file,exo:article,exo:podcast,exo:sample,rma:filePlan,kfx:document"];

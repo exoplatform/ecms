@@ -37,7 +37,7 @@ int numberUploadFile = uicomponent.getNumberUploadFile();
 							        fieldName = "fieldListTaxonomy";
 							      }
                     %>
-                    <%=uicomponent.getLabel(fieldName)%>
+                    <label for="<%=field.getId()%>"><%=uicomponent.getLabel(fieldName)%></label>
                   </td>
                  <% if (uicomponent.getTaxonomyMandatory() && (field.getId().indexOf("fieldListTaxonomy") >= 0)){                 		
                  		if (field.getValidators() != null) field.getValidators().clear();

@@ -9,7 +9,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
   		<tr>
-	      <td class="FieldLabel" style="display:none"><%=_ctx.appRes("Getmail.dialog.label.id")%></td>
+	      <td class="FieldLabel" style="display:none"><label for="id"><%=_ctx.appRes("Getmail.dialog.label.id")%></label></td>
 	      <td class="FieldComponent" style="display:none">
 		      <%
 		        String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes", "editable=false", "visible=if-not-null"] ;
@@ -18,7 +18,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.name")%></td>
+	      <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("Getmail.dialog.label.name")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
@@ -27,7 +27,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.lifecycle")%></td>
+	      <td class="FieldLabel"><label for="lifecycle"><%=_ctx.appRes("Getmail.dialog.label.lifecycle")%></label></td>
 	      <td class="FieldComponent">
 	      <% 
           String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
@@ -38,7 +38,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.protocol")%></td>
+	      <td class="FieldLabel"><label for="protocol"><%=_ctx.appRes("Getmail.dialog.label.protocol")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldProtocol = ["jcrPath=/node/exo:protocol", "options=pop3,imap"] ; 
@@ -47,7 +47,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.host")%></td>
+	      <td class="FieldLabel"><label for="host"><%=_ctx.appRes("Getmail.dialog.label.host")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		       	String[] fieldHost = ["jcrPath=/node/exo:host", "validate=empty"] ;
@@ -56,7 +56,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.port")%></td>
+	      <td class="FieldLabel"><label for="port"><%=_ctx.appRes("Getmail.dialog.label.port")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldPort = ["jcrPath=/node/exo:port", "validate=empty,number"] ;
@@ -65,7 +65,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.folder")%></td>
+	      <td class="FieldLabel"><label for="folder"><%=_ctx.appRes("Getmail.dialog.label.folder")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldFolder = ["jcrPath=/node/exo:folder", "Inbox"] ;
@@ -74,7 +74,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.username")%></td>
+	      <td class="FieldLabel"><label for="userName"><%=_ctx.appRes("Getmail.dialog.label.username")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldUsername = ["jcrPath=/node/exo:userName", "support@exoplatform.com", "validate=email"] ;
@@ -83,7 +83,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.password")%></td>
+	      <td class="FieldLabel"><label for="password"><%=_ctx.appRes("Getmail.dialog.label.password")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldPassword = ["jcrPath=/node/exo:password", "type=password"] ;
@@ -92,7 +92,7 @@
 		    </td>
 		  </tr>
 		  <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.isDeep")%></td>
+        <td class="FieldLabel"><label for="isDeep"><%=_ctx.appRes("Getmail.dialog.label.isDeep")%></label></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
@@ -101,7 +101,7 @@
         </td>
       </tr>
       <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.nodetypes")%></td>
+        <td class="FieldLabel"><label for="nodetypes"><%=_ctx.appRes("Getmail.dialog.label.nodetypes")%></label></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
@@ -110,7 +110,7 @@
         </td>
       </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.description")%></td>
+	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("Getmail.dialog.label.description")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;         
@@ -119,7 +119,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.stote-path")%></td>
+	      <td class="FieldLabel"><label for="storePath"><%=_ctx.appRes("Getmail.dialog.label.stote-path")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
   		      def sessionProvider = WCMCoreUtils.getUserSessionProvider();
@@ -133,7 +133,7 @@
 		    </td>
 		  </tr>
 		  <tr>                       
-        <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.affectedNodeTypeNames")%></td>
+        <td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("Getmail.dialog.label.affectedNodeTypeNames")%></label></td>
         <td class="FieldComponent">
         <% 
           String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];

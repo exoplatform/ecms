@@ -19,7 +19,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
-          <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.name")%></td>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("File.dialog.label.name")%></label></td>
           <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"] ;
@@ -29,7 +29,7 @@
         </tr>
 				<%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
 					<tr>
-			      <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.categories")%></td>
+			      <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("File.dialog.label.categories")%></label></td>
 			      <td class="FieldComponent">
 				      <% 
 				        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
@@ -41,7 +41,7 @@
         <%
         if(!uicomponent.isEditing()){%>
             <tr>                        
-              <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.mimeType")%></td>
+              <td class="FieldLabel"><label for="mimetype"><%=_ctx.appRes("File.dialog.label.mimeType")%></label></td>
               <td class="FieldComponent">
                 <%
                   String[] mimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "text/html", "options=text/html,text/plain,application/x-groovy+html", "onchange=true"] ;
@@ -51,7 +51,7 @@
             </tr>
         <%}%>
 		<tr>
-        	<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 			<td class="FieldComponent">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
@@ -61,7 +61,7 @@
 			</td>
 		</tr>
         <tr>
-          <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.content")%></td>
+          <td class="FieldLabel"><label for="content"><%=_ctx.appRes("File.dialog.label.content")%></label></td>
           <td class="FieldComponent">
               <%
                 if(uicomponent.isEditing()) { 
@@ -124,7 +124,7 @@
           </td>
         </tr>       
           <tr>
-            <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.title")%></td>
+            <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
@@ -133,7 +133,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.description")%></td>
+            <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
@@ -142,7 +142,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></td>
+            <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
@@ -151,7 +151,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.source")%></td>
+            <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;

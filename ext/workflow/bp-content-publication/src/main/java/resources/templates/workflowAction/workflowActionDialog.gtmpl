@@ -9,7 +9,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
   		<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.id")%></td>
+	      <td class="FieldLabel"><label for="id"><%=_ctx.appRes("Workflow.dialog.label.id")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldId = ["jcrPath=/node", "mixintype=exo:move,mix:affectedNodeTypes", "editable=false", "visible=if-not-null"] ;
@@ -18,7 +18,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.name")%></td>
+	      <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("Workflow.dialog.label.name")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
@@ -27,7 +27,7 @@
 		    </td>
 		  </tr>
 		  <tr>                        
-      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.isDeep")%></td>
+      <td class="FieldLabel"><label for="isDeep"><%=_ctx.appRes("Workflow.dialog.label.isDeep")%></label></td>
       <td class="FieldComponent"> 
       <% 
         String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
@@ -36,7 +36,7 @@
       </td>
     </tr>
     <tr>                        
-      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.nodetypes")%></td>
+      <td class="FieldLabel"><label for="nodetypes"><%=_ctx.appRes("Workflow.dialog.label.nodetypes")%></label></td>
       <td class="FieldComponent"> 
       <% 
         String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
@@ -45,7 +45,7 @@
       </td>
     </tr>
 		  <tr>
-        <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.lifecycle")%></td>
+        <td class="FieldLabel"><label for="lifecycle"><%=_ctx.appRes("Workflow.dialog.label.lifecycle")%></label></td>
         <td class="FieldComponent">
         <% 
           String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
@@ -56,7 +56,7 @@
         </td>
       </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.description")%></td>
+	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("Workflow.dialog.label.description")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ; 
@@ -65,7 +65,7 @@
 		    </td>
 		  </tr>
       <tr>                       
-        <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.affectedNodeTypeNames")%></td>
+        <td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("Workflow.dialog.label.affectedNodeTypeNames")%></label></td>
         <td class="FieldComponent">
         <% 
           String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
@@ -73,7 +73,7 @@
         %>
       </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.validator")%></td>
+	      <td class="FieldLabel"><label for="validator"><%=_ctx.appRes("Workflow.dialog.label.validator")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldValidator = ["jcrPath=/node/exo:validator", "selectorAction=selectPermission", "selectorClass=org.exoplatform.ecm.webui.selector.UIPermissionSelector", "selectorIcon=Permission24x24Icon", "validate=empty", "editable=false"] ;
@@ -82,7 +82,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.to-workspace")%></td>
+	      <td class="FieldLabel"><label for="destWorkspace"><%=_ctx.appRes("Workflow.dialog.label.to-workspace")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldWorkspace = ["jcrPath=/node/exo:destWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
@@ -91,7 +91,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Workflow.dialog.label.with-path")%></td>
+	      <td class="FieldLabel"><label for="destPath"><%=_ctx.appRes("Workflow.dialog.label.with-path")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
 		        String[] fieldPath = ["jcrPath=/node/exo:destPath", "selectorAction=selectDestPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=destWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;

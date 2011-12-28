@@ -19,11 +19,11 @@
 					if(field.isRendered()) {
 			%>
 						<tr>
-							<td class="FieldLabel">
+							<td class="FieldLabel"><label for="<%=field.getId()%>">
 								<%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>												
 										<%=uicomponent.getLabel(field.getName())+": " %>
 								<%}%>
-							</td>
+							</label></td>
 							<td class="FieldComponent">
 								<%if(field instanceof UIFormRadioBoxInput) {
 										println "<div class=\"MultiRadioInput\" >" ;

@@ -14,7 +14,7 @@ if(uicomponent.userCode != null){
 		<div class="NewsletterBoxContent">
 			<div class="UserName" style="height:32px;width:auto;line-height:32px;width:auto;margin-bottom:7px;">
 				<div class="LeftUserName" style="float:left; margin-left:18px;">
-					<%=_ctx.appRes("UINewsletterViewerForm.title.userEmail")%>
+					<label for="inputEmail"><%=_ctx.appRes("UINewsletterViewerForm.title.userEmail")%></label>
 				</div>
 				<div class="RightUserName" style="float:left;">
 					<div class="Input" style="float:left;padding:0px 5px 0px 10px;">

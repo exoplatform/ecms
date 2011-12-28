@@ -7,7 +7,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">
   		<tr>
-	      <td class="FieldLabel">Title</td>
+	      <td class="FieldLabel"><label for="title">Title</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTitle = ["jcrPath=/node/metadata:dc_elementSet/dc:title"] ;
@@ -16,7 +16,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Creator</td>
+	      <td class="FieldLabel"><label for="creator">Creator</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCreator = ["jcrPath=/node/metadata:dc_elementSet/dc:creator"] ;
@@ -25,7 +25,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Subject</td>
+	      <td class="FieldLabel"><label for="subject">Subject</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSubject = ["jcrPath=/node/metadata:dc_elementSet/dc:subject"] ;
@@ -34,7 +34,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Source</td>
+	      <td class="FieldLabel"><label for="source">Source</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSource = ["jcrPath=/node/metadata:dc_elementSet/dc:source"] ;
@@ -43,7 +43,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Contributor</td>
+	      <td class="FieldLabel"><label for="contributor">Contributor</label></td>
 	      <td class="FielComponent">
 		      <%
 		        String[] fieldContributor = ["jcrPath=/node/metadata:dc_elementSet/dc:contributor"] ;
@@ -52,7 +52,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">ResourceType </td>
+	      <td class="FieldLabel"><label for="resourcetype">ResourceType</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldResourceType = ["jcrPath=/node/metadata:dc_elementSet/dc:resourceType"] ;
@@ -61,7 +61,7 @@
 				</td>    
 			</tr>
 			<tr>
-	      <td class="FieldLabel">Date</td>
+	      <td class="FieldLabel"><label for="date">Date</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDate = ["jcrPath=/node/metadata:dc_elementSet/dc:date", "options=displaytime", "visible=true"]; 
@@ -70,16 +70,16 @@
 		    </td>
 			</tr>    
 			<tr>
-	      <td class="FieldLabel">Publisher</td>
+	      <td class="FieldLabel"><label for="publisher">Publisher</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldPublisher = ["jcrPath=/node/metadata:dc_elementSet/dc:publisher"] ;
-		        uicomponent.addTextField("publicsher", fieldPublisher) ;
+		        uicomponent.addTextField("publisher", fieldPublisher) ;
 		      %>
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Description</td>
+	      <td class="FieldLabel"><label for="description">Description</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDescription = ["jcrPath=/node/metadata:dc_elementSet/dc:description"] ;
@@ -88,7 +88,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Rights </td>
+	      <td class="FieldLabel"><label for="right">Rights</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRights = ["jcrPath=/node/metadata:dc_elementSet/dc:rights"] ;
@@ -97,7 +97,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Relation</td>
+	      <td class="FieldLabel"><label for="relation">Relation</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRelation = ["jcrPath=/node/metadata:dc_elementSet/dc:relation"] ;
@@ -106,7 +106,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Format</td>
+	      <td class="FieldLabel"><label for="format">Format</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldFormat = ["jcrPath=/node/metadata:dc_elementSet/dc:format"] ;
@@ -115,7 +115,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Coverage </td>
+	      <td class="FieldLabel"><label for="coverage">Coverage</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCoverage = ["jcrPath=/node/metadata:dc_elementSet/dc:coverage"] ;
@@ -124,7 +124,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel">Identifier</td>
+	      <td class="FieldLabel"><label for="identifier">Identifier</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldIdentifier = ["jcrPath=/node/metadata:dc_elementSet/dc:identifier"] ;
@@ -133,7 +133,7 @@
 		    </td>
 		  </tr>
     	<tr>
-	      <td class="FieldLabel">Language</td>
+	      <td class="FieldLabel"><label for="language">Language</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldLanguage= ["jcrPath=/node/metadata:dc_elementSet/dc:language"] ;

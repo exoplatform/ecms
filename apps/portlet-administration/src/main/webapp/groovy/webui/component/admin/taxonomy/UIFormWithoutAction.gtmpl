@@ -17,7 +17,7 @@
     %>
 			<tr>
       <%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>                        
-				<td class="FieldLabel"><%=uicomponent.getLabel(field.getName())%></td>
+				<td class="FieldLabel"><label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())%></label></td>
   		  <td class="FieldComponent"><% uiform.renderField(field) %></td>
       <%} else {%>
         <td colspan="2" class="FieldComponent"><% uiform.renderField(field) %></td>

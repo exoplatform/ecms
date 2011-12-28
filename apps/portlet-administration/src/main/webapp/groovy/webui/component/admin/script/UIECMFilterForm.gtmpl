@@ -18,7 +18,7 @@
 							  <%for(field in uiform.getChildren()) { 
 							      if(field.isRendered()) {%>
 			              <tr>
-				              <td class="FieldLabel"><%=uicomponent.getLabel(field.getName())+ ": " %></td>
+				              <td class="FieldLabel"><label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())+ ": " %></td>
 									    <td class="FieldComponent"><% uiform.renderField(field) %></td>
 									  </tr>
 							  <%  

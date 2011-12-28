@@ -21,7 +21,7 @@
    <table style="margin: auto; width: auto;">
      <tr>
        <td style="line-height:32px">
-          <%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%>
+          <label for="ALL_DOCUMENT_TYPES"><%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%></label>
        </td>
        <td class="FieldLabel">
         <%

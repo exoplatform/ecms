@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
     	<tr>	
-	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-executed")%></td>
+	      <td class="FieldLabel"><label for="holdExecuted"><%=_ctx.appRes("Holdable.dialog.label.hold-executed")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldHoldExecuted = ["jcrPath=/node/rma:holdExecuted", "false", "options=false,true"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-until")%></td>
+	      <td class="FieldLabel"><label for="holdUntil"><%=_ctx.appRes("Holdable.dialog.label.hold-until")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldHoldUntil = ["jcrPath=/node/rma:holdUntil", "visible=true"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.holds-discretionary")%></td>
+	      <td class="FieldLabel"><label for="holdsDiscretionary"><%=_ctx.appRes("Holdable.dialog.label.holds-discretionary")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldHoldDiscretionary = ["jcrPath=/node/rma:holdsDiscretionary", "false", "options=false,true"] ;
@@ -30,7 +30,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-until-event")%></td>
+	      <td class="FieldLabel"><label for="holdUntilEvent"><%=_ctx.appRes("Holdable.dialog.label.hold-until-event")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldHoldUntilEvent = ["jcrPath=/node/rma:holdUntilEvent"] ;
@@ -39,7 +39,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.freeze")%></td>
+	      <td class="FieldLabel"><label for="freeze"><%=_ctx.appRes("Holdable.dialog.label.freeze")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldFreeze = ["jcrPath=/node/rma:freeze", "false", "options=false,true"] ;

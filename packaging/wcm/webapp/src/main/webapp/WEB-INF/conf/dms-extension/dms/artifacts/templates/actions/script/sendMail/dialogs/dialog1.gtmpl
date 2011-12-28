@@ -4,7 +4,7 @@
   <div class="HorizontalLayout">	
   	<table class="UIFormGrid">
 				<tr>
-				  <td class="FieldLabel" style="display:none"><%=_ctx.appRes("SendMail.dialog.label.id")%></td>
+				  <td class="FieldLabel" style="display:none"><label for="id"><%=_ctx.appRes("SendMail.dialog.label.id")%></label></td>
 				  <td class="FieldComponent" style="display:none">
 				  <%
 					 String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes", "editable=false", "visible=if-not-null"] ;
@@ -13,7 +13,7 @@
 				  </td>
 				</tr>				
 				<tr>
-				  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.name")%></td>
+				  <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("SendMail.dialog.label.name")%></label></td>
 				  <td class="FieldComponent">				  
 				  <% 
 						String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
@@ -22,7 +22,7 @@
 				  </td>
 				</tr>				
 				<tr>
-				  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.lifecycle")%></td>
+				  <td class="FieldLabel"><label for="lifecycle"><%=_ctx.appRes("SendMail.dialog.label.lifecycle")%></label></td>
 				  <td class="FieldComponent">				  
 				  <% 
 						String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
@@ -38,7 +38,7 @@
 					if(selectValue != null) {		
 						if(selectValue.contains("schedule")) { 
 				%>		<tr>
-							  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.schedule-type")%></td>	          					
+							  <td class="FieldLabel"><label for="scheduleType"><%=_ctx.appRes("SendMail.dialog.label.schedule-type")%></label></td>	          					
 							  <td class="FieldComponent">	
 							  <% 
 									String[] fieldScheduleType = ["jcrPath=/node/exo:scheduleType", "options=cron,period", "onchange=true"] ;
@@ -50,7 +50,7 @@
 							String ScheduleType = uicomponent.getSelectBoxFieldValue("scheduleType") ;
 							if(ScheduleType.equals("period")) {%>
 								<tr>  					
-								  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.start-time")%></td>
+								  <td class="FieldLabel"><label for="startTime"><%=_ctx.appRes("SendMail.dialog.label.start-time")%></label></td>
 								  <td class="FieldComponent">	
 								  <% 
 										String[] fieldStartTime = ["jcrPath=/node/exo:startTime", "options=displaytime", "validate=datetime", "visible=true"];
@@ -59,7 +59,7 @@
 								  </td>
 								</tr>								
 								<tr>		          					
-								  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.end-time")%></td>
+								  <td class="FieldLabel"><label for="endTime"><%=_ctx.appRes("SendMail.dialog.label.end-time")%></label></td>
 								  <td class="FieldComponent">	
 								  <% 
 								  	String[] fieldEndTime = ["jcrPath=/node/exo:endTime", "options=displaytime", "validate=datetime", "visible=true"];
@@ -68,7 +68,7 @@
 								  </td>
 								</tr>								
 								<tr>		          					
-								  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.repeat-count")%></td>
+								  <td class="FieldLabel"><label for="repeatCount"><%=_ctx.appRes("SendMail.dialog.label.repeat-count")%></label></td>
 								  <td class="FieldComponent">	
 								  <% 
 										String[] fieldRepeatCount= ["jcrPath=/node/exo:repeatCount", "-1", "validate=repeatCountValidator"] ;
@@ -77,7 +77,7 @@
 								  </td>
 								</tr>
 								<tr>		          					
-								  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.time-inteval")%></td>
+								  <td class="FieldLabel"><label for="timeInterval"><%=_ctx.appRes("SendMail.dialog.label.time-inteval")%></label></td>
 								  <td class="FieldComponent">	
 								  <% 
 										String[] fieldTimeInterval = ["jcrPath=/node/exo:timeInterval", "1", "validate=repeatIntervalValidator"] ;
@@ -88,7 +88,7 @@
 								<% uicomponent.removeChildById("cronExpression") ; %>
 						<%} else {%>
 								<tr>		          					
-								  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.cron-expression")%></td>
+								  <td class="FieldLabel"><label for="cronExpression"><%=_ctx.appRes("SendMail.dialog.label.cron-expression")%></label></td>
 								  <td class="FieldComponent">	
 								  <% 
 										String[] fieldCronExpression = ["jcrPath=/node/exo:cronExpression","validate=cronExpressionValidator"] ;
@@ -113,7 +113,7 @@
 				  }
 			 %>	
 			<tr>		          					
-			  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.isDeep")%></td>
+			  <td class="FieldLabel"><label for="isDeep"><%=_ctx.appRes("SendMail.dialog.label.isDeep")%></label></td>
 			  <td class="FieldComponent">	
 			  <% 
 					String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
@@ -122,7 +122,7 @@
 			  </td>
 			</tr>
 			<tr>		          					
-  			<td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.nodetypes")%></td>
+  			<td class="FieldLabel"><label for="nodetypes"><%=_ctx.appRes("SendMail.dialog.label.nodetypes")%></label></td>
   			<td class="FieldComponent">	
   			<% 
     			String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
@@ -131,7 +131,7 @@
   			</td>
 			</tr>
 			<tr>		          					
-			<td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.description")%></td>
+			<td class="FieldLabel"><label for="description"><%=_ctx.appRes("SendMail.dialog.label.description")%></label></td>
 			<td class="FieldComponent">	
 			<% 
 			String[] fieldDescription = ["jcrPath=/node/exo:description"];         
@@ -140,7 +140,7 @@
 			</td>
 			</tr>
       <tr>                       
-  			<td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.affectedNodeTypeNames")%></td>
+  			<td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("SendMail.dialog.label.affectedNodeTypeNames")%></label></td>
         <td class="FieldComponent">
         <% 
           String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
@@ -148,7 +148,7 @@
         %>
       </tr>		          					
 			<tr>		          					
-			  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.mail-to")%></td>
+			  <td class="FieldLabel"><label for="to"><%=_ctx.appRes("SendMail.dialog.label.mail-to")%></label></td>
 			  <td class="FieldComponent">
 			  <% 
 					String[] fieldMailTo = ["jcrPath=/node/exo:to", "validate=empty,email"];

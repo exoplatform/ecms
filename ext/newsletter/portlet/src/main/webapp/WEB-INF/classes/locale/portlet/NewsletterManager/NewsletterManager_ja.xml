@@ -294,6 +294,7 @@
       <Date>日付</Date>
       <Status>ステータス</Status>
       <EditSubscription>購読の編集</EditSubscription>
+      <CheckAll>Check All</CheckAll>
     </title>
   </UINewsletterEntryManager>
 

@@ -18,7 +18,7 @@
   <div class="HorizontalLayout">	
   	<table class="UIFormGrid">      
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.name")%></td>
+	      <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Podcast.dialog.label.name")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
@@ -28,7 +28,7 @@
 	    </tr>	    
 	    <%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
 		    <tr>
-		      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.categories")%></td>
+		      <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("Podcast.dialog.label.categories")%></label></td>
 		      <td class="FieldComponent">
 			      <% 
 			        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
@@ -38,7 +38,7 @@
 			  </tr>
       <%}%>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.title")%></td>
+	      <td class="FieldLabel"><label for="title"><%=_ctx.appRes("Podcast.dialog.label.title")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldTitle = ["jcrPath=/node/exo:title"] ;
@@ -47,7 +47,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.link")%></td>
+	      <td class="FieldLabel"><label for="link"><%=_ctx.appRes("Podcast.dialog.label.link")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldLink = ["jcrPath=/node/exo:link", "validate=empty"] ;
@@ -56,7 +56,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.author")%></td>
+	      <td class="FieldLabel"><label for="author"><%=_ctx.appRes("Podcast.dialog.label.author")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldAuthor = ["jcrPath=/node/exo:author"] ;
@@ -65,7 +65,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.explicit")%></td>
+	      <td class="FieldLabel"><label for="explicit"><%=_ctx.appRes("Podcast.dialog.label.explicit")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldExplicit = ["jcrPath=/node/exo:explicit", "no", "options=no,yes"] ;
@@ -74,7 +74,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.category")%></td>
+	      <td class="FieldLabel"><label for="category"><%=_ctx.appRes("Podcast.dialog.label.category")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCategory = ["jcrPath=/node/exo:podcastCategory"] ;
@@ -83,7 +83,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.keywords")%></td>
+	      <td class="FieldLabel"><label for="keywords"><%=_ctx.appRes("Podcast.dialog.label.keywords")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 			      String[] fieldKeywords = ["jcrPath=/node/exo:keywords"] ;
@@ -92,7 +92,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.publish-date")%></td>
+	      <td class="FieldLabel"><label for="publishedDate"><%=_ctx.appRes("Podcast.dialog.label.publish-date")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldPublishedDate = ["jcrPath=/node/exo:publishedDate", "options=displaytime", "validate=datetime", "visible=true"] ;
@@ -101,7 +101,7 @@
 		    </td>
 	    </tr>
 		<tr>
-        	<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 			<td class="FieldComponent">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
@@ -111,7 +111,7 @@
 			</td>
 		</tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.description")%></td>
+	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("Podcast.dialog.label.description")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
@@ -155,7 +155,7 @@
 		    </td>
 	    </tr>
 	    <tr>	
-	    <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.mime-type")%></td>
+	    <td class="FieldLabel"><label for="mediamimetype"><%=_ctx.appRes("Podcast.dialog.label.mime-type")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldMediamimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "audio/mp3", "options=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
@@ -164,7 +164,7 @@
 		    </td>
 	    </tr>
 	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.lenght")%></td>
+	      <td class="FieldLabel"><label for="medialength"><%=_ctx.appRes("Podcast.dialog.label.lenght")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		       String[] fieldSize = ["jcrPath=/node/exo:length", "validate=number"] ;

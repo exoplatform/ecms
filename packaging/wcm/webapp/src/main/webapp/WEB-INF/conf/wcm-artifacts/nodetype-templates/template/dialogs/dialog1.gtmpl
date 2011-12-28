@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">	  
    <table class="UIFormGrid">
 			<tr>
-			  <td class="FieldLabel">Name</td>
+			  <td class="FieldLabel"><label for="name">Name</label></td>
 			  <td class="FieldComponent">
 			  <%
 	        String[] fieldName = ["jcrPath=/node", "mixintype=exo:datetime,exo:owneable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
@@ -12,7 +12,7 @@
         </td>
 			</tr>
 			<tr>
-        		<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        		<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 				<td class="FieldComponent">
 				<%
 				  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
@@ -22,7 +22,7 @@
 				</td>
 			</tr>
 			<tr>
-			  <td class="FieldLabel">Template</td>
+			  <td class="FieldLabel"><label for="templateFile">Template</label></td>
 			  <td class="FieldComponent">
 			  <style>
 			  	textarea#templateFile {

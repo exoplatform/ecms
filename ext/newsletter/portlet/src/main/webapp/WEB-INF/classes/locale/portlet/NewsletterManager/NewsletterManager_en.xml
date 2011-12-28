@@ -304,6 +304,7 @@
       <Date>Date</Date>
       <Status>Status</Status>
       <EditSubscription>Edit Subscription</EditSubscription>
+      <CheckAll>Check All</CheckAll>
     </title>
   </UINewsletterEntryManager>
 

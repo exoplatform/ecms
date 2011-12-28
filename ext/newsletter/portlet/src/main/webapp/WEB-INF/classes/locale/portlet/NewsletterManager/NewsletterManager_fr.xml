@@ -305,6 +305,7 @@
       <Date>Date</Date>
       <Status>État</Status>
       <EditSubscription>Modifier l'abonnement</EditSubscription>
+      <CheckAll>Check All</CheckAll>
     </title>
   </UINewsletterEntryManager>
 

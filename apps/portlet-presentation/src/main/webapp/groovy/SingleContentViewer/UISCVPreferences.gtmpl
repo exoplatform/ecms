@@ -14,7 +14,7 @@
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.ContentPathBlock") %></legend>
               <table class="UIFormGrid" >    
                 <tr>                  
-                  <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldLabel"><label for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></label></td>
                   <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> ><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" 
@@ -72,11 +72,11 @@
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.PrintSettingBlock") %></legend>
               <table class="UIFormGrid">
                 <tr>                  
-                  <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></td>
+                  <td class="FieldLabel"><label for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></label></td>
                   <td class="FieldComponent" ><% uiform.renderField(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></td>          
                 </tr>
                 <tr>                  
-                <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></td>
+                <td class="FieldLabel"><label for="<%=uicomponent.PRINT_PAGE_PARAMETER_INPUT%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></label></td>
                 <td class="FieldComponent"><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></td>              
               </tr>
               </table>
@@ -116,7 +116,7 @@
                 </td>
                 </tr>
                 <tr>                  
-                  <td class="FieldLabel" ><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></td>
+                  <td class="FieldLabel"><label for="<%=uicomponent.PARAMETER_INPUT_BOX%>"><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></label></td>
                   <td class="FieldComponent" ><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class ="tdShowHelp">
 	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" 

@@ -322,7 +322,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      * (show name, use timestamp, convert from another field like exo:title for example)
      */
     dialogTemplate.append("        <tr style=\"display:none;\">\n");
-    dialogTemplate.append("          <td class=\"FieldLabel\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></td>\n");
+    dialogTemplate.append("          <td class=\"FieldLabel\"><label for=\"name\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></label></td>\n");
     dialogTemplate.append("          <td class=\"FieldComponent\">\n");
     dialogTemplate.append("            $timestampName \n               <div style=\"display:none;\"><%\n");
     dialogTemplate.append("              String[] fieldName = [\"jcrPath=/node\", \"mixintype=mix:i18n\", ");

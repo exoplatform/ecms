@@ -85,7 +85,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 									'<tbody>' +
 										'<tr>' +
 											'<td class="FieldLabel">'+
-												'<label>Title: </label>'+
+												'<label for="inputTitle">Title: </label>'+
 											'</td>'+
 											'<td colspan="2" class="FieldComponent">'+
 												'<input type="text" id="inputTitle" value="'+ title +'" />'+

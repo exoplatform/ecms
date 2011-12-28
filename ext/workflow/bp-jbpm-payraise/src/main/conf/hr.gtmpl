@@ -29,7 +29,7 @@
 		  </tr>    	
 			<%for(inputInfo in uicomponent.getInputInfo())  {%>
 					<tr>
-					  <td class="FieldLabel"><%=inputInfo.getLabel()%></td>
+					  <td class="FieldLabel"><label for="<%=inputInfo.getId()%>"><%=inputInfo.getLabel()%></label></td>
 					  <td class="FieldComponent"><% uicomponent.renderField(inputInfo.getInput()); %></td>
 					</tr>
 			<%}%>

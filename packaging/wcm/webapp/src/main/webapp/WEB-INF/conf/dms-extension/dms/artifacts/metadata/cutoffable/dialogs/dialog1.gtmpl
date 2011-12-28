@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">
   		<tr>
-      	<td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-executed")%></td>
+      	<td class="FieldLabel"><label for="cutoffExecuted"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-executed")%></label></td>
       	<td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffExecuted = ["jcrPath=/node/rma:cutoffExecuted", "false", "options=false,true"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>
     	<tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-now")%></td>
+	      <td class="FieldLabel"><label for="cutoffNow"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-now")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffNow = ["jcrPath=/node/rma:cutoffNow", "false", "options=false,true"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-date-time")%></td>
+	      <td class="FieldLabel"><label for="cutoffDateTime"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-date-time")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffDateTime = ["jcrPath=/node/rma:cutoffDateTime", "options=displaytime", "visible=true"] ;
@@ -30,7 +30,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-event")%></td>
+	      <td class="FieldLabel"><label for="cutoffEvent"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-event")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffEvent = ["jcrPath=/node/rma:cutoffEvent"] ;
@@ -39,7 +39,7 @@
 	      </td>
 	    </tr>
 	    <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-obsolete")%></td>
+	      <td class="FieldLabel"><label for="cutoffObsolete"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-obsolete")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffObsolete = ["jcrPath=/node/rma:cutoffObsolete", "false", "options=false,true"] ;
@@ -48,7 +48,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-superseded")%></td>
+	      <td class="FieldLabel"><label for="cutoffSuperseded"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-superseded")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldCutoffSupereded = ["jcrPath=/node/rma:cutoffSuperseded", "false", "options=false,true"] ;

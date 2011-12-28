@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
   		<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.supplemental-marking-list")%></td>
+	      <td class="FieldLabel"><label for="supplementalMArkingList"><%=_ctx.appRes("Record.dialog.label.supplemental-marking-list")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSupplemental = ["jcrPath=/node/rma:supplementalMArkingList"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.subject")%></td>
+	      <td class="FieldLabel"><label for="subject"><%=_ctx.appRes("Record.dialog.label.subject")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSubject = ["jcrPath=/node/rma:subject"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.record-identifier")%></td>
+	      <td class="FieldLabel"><label for="recordIdentifier"><%=_ctx.appRes("Record.dialog.label.record-identifier")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRecordIdentifier = ["jcrPath=/node/rma:recordIdentifier"] ;
@@ -30,7 +30,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.originator")%></td>
+	      <td class="FieldLabel"><label for="originator"><%=_ctx.appRes("Record.dialog.label.originator")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldOriginator = ["jcrPath=/node/rma:Originator"] ;
@@ -39,7 +39,7 @@
 				</td>	      
 			</tr>
 			<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.format")%></td>
+	      <td class="FieldLabel"><label for="format"><%=_ctx.appRes("Record.dialog.label.format")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldFormat = ["jcrPath=/node/rma:format"] ;
@@ -48,7 +48,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.addresses")%></td>
+	      <td class="FieldLabel"><label for="addressees"><%=_ctx.appRes("Record.dialog.label.addresses")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldAddressees = ["jcrPath=/node/rma:addressees"] ;
@@ -57,7 +57,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.originating-organization")%></td>
+	      <td class="FieldLabel"><label for="originatingOrganization"><%=_ctx.appRes("Record.dialog.label.originating-organization")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldOriginating = ["jcrPath=/node/rma:originatingOrganization"] ;
@@ -66,7 +66,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.other-addresses")%></td>
+	      <td class="FieldLabel"><label for="otherAddressees"><%=_ctx.appRes("Record.dialog.label.other-addresses")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldOtherAddressees = ["jcrPath=/node/rma:otherAddressees"] ;
@@ -75,7 +75,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.publication-date")%></td>
+	      <td class="FieldLabel"><label for="publicationDate"><%=_ctx.appRes("Record.dialog.label.publication-date")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldPublicationDate = ["jcrPath=/node/rma:publicationDate", "options=displaytime", "visible=true"] ;
@@ -84,7 +84,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.record-note")%></td>
+	      <td class="FieldLabel"><label for="recordNote"><%=_ctx.appRes("Record.dialog.label.record-note")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRecordNote = ["jcrPath=/node/rma:recordNote"] ;
@@ -93,7 +93,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.date-received")%></td>
+	      <td class="FieldLabel"><label for="dateReceived"><%=_ctx.appRes("Record.dialog.label.date-received")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDateReceived = ["jcrPath=/node/rma:dateReceived", "options=displaytime", "visible=true"] ;
@@ -102,7 +102,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.media-format")%></td>
+	      <td class="FieldLabel"><label for="mediaFormat"><%=_ctx.appRes("Record.dialog.label.media-format")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldMediaFormat = ["jcrPath=/node/rma:mediaFormat"] ;
@@ -111,7 +111,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.is-obsolete")%></td>
+	      <td class="FieldLabel"><label for="isObsolete"><%=_ctx.appRes("Record.dialog.label.is-obsolete")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldIsObsolete = ["jcrPath=/node/rma:isObsolete", "options= ,true,false"] ;
@@ -120,16 +120,16 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.date-field")%></td>
+	      <td class="FieldLabel"><label for="dateField"><%=_ctx.appRes("Record.dialog.label.date-field")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDate = ["jcrPath=/node/rma:dateFiled", "options=displaytime", "visible=true"];
-		        uicomponent.addCalendarField("dateFiled", fieldDate) ;        
+		        uicomponent.addCalendarField("dateField", fieldDate) ;        
 		      %>
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.superseded")%></td>
+	      <td class="FieldLabel"><label for="superseded"><%=_ctx.appRes("Record.dialog.label.superseded")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldSuperseded = ["jcrPath=/node/rma:superseded"] ;
@@ -138,7 +138,7 @@
 		    </td>
 		  </tr>
 		  <tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.uuid")%></td>
+	      <td class="FieldLabel"><label for="uuid"><%=_ctx.appRes("Record.dialog.label.uuid")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldUUID = ["jcrPath=/node/rma:uuid"] ;

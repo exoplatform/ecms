@@ -117,7 +117,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 								Status
 							</th>
 							<th class="ContentView" style="border-left:1px solid black;width:40px;">
-								<input type="checkbox">
+								<input type="checkbox" title="checked">
 							</th>
 						</tr>
 						<%int count = 0;

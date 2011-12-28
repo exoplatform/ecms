@@ -10,11 +10,11 @@
 		<div class="FormContainer">
 			<table class="UIFormGrid">
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></td>
+			    	<td class="FieldLabel"><label for="<%=uicomponent.DESCRIPTION%>"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></label></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.DESCRIPTION) %></td>
 			    </tr>
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></td>
+			    	<td class="FieldLabel"><label for="<%=uicomponent.KEYWORDS%>"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></label></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.KEYWORDS) %></td>
 			    </tr>
 			    <%if(!uicomponent.getOnContent()) { 
@@ -39,7 +39,7 @@
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.FREQUENCY) %></td>
 			    </tr>
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></td>
+			    	<td class="FieldLabel"><label for="<%=uicomponent.PRIORITY%>"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></label></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PRIORITY) %></td>
 			    </tr>
 			    <%}%>			

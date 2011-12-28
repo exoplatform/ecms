@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
 			<tr>
-	  		<td class="FieldLabel"><%=_ctx.appRes("Accessionable.dialog.label.accession-executed")%></td>
+	  		<td class="FieldLabel"><label for="accessionExecuted"><%=_ctx.appRes("Accessionable.dialog.label.accession-executed")%></label></td>
 	  		<td class="FieldComponent">
 		      <%
 		        String[] fieldAccessionExecuted = ["jcrPath=/node/rma:accessionExecuted", "false", "options=false,true"] ;
@@ -12,7 +12,7 @@
 				</td>
 			</tr>
 			<tr>
-	  		<td class="FieldLabel"><%=_ctx.appRes("Accessionable.dialog.label.accession-date")%></td>
+	  		<td class="FieldLabel"><label for="accessionDate"><%=_ctx.appRes("Accessionable.dialog.label.accession-date")%></label></td>
 	  		<td class="FieldComponent">
 		      <%
 		        String[] fieldTransferDate = ["jcrPath=/node/rma:accessionDate", "visible=true"] ;

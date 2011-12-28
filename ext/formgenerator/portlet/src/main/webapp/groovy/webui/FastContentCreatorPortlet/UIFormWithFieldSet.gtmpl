@@ -21,7 +21,7 @@
 											String fieldName = uicomponent.getLabel(field.getName());
 											if(!"UIFormFieldSet".equals(fieldName) && fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId())) {
 												%>
-													<td class="FieldLabel">$fieldName</td>
+													<td class="FieldLabel"><label for="<%=field.getId%>">$fieldName</label></td>
 													<td class="FieldComponent"><% uiform.renderField(field) %></td>
 												<%
 											} else {

@@ -13,7 +13,7 @@
   <div class="HorizontalLayout">	  
    <table class="UIFormGrid">
       <tr>
-        <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
+        <td class="FieldLabel"><label for="title"><%=_ctx.appRes("Article.dialog.label.title")%></label></td>
         <td class="FieldComponent">
         <%
           String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
@@ -23,7 +23,7 @@
       </tr>  
 
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.name")%></td>
+			  <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Article.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 			  <%
 	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
@@ -37,7 +37,7 @@
 			</tr>
 			
       <tr>
-        <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        <td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
         <td class="FieldComponent">
         <%
           String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
@@ -48,7 +48,7 @@
       </tr>  
 
       <tr>
-        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.location")%></td>
+        <td class="FieldLabel"><label for="location"><%=_ctx.appRes("Event.dialog.label.location")%></label></td>
         <td class="FieldComponent">
         <%
           String[] fieldLocation = ["jcrPath=/node/exo:location", "validate=empty"] ;
@@ -58,7 +58,7 @@
       </tr>  
 
       <tr>                        
-        <td class="FieldLabel">Google Maps ?</td>
+        <td class="FieldLabel"><label for="withMap">Google Maps ?</label></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldMaps = ["jcrPath=/node/exo:maps", "defaultValues=false"];         
@@ -68,7 +68,7 @@
       </tr>
 			
       <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.start-date-time")%></td>
+        <td class="FieldLabel"><label for="startEvent"><%=_ctx.appRes("Event.dialog.label.start-date-time")%></label></td>
         <td class="FieldComponent">
           <%
             String[] fieldStartEvent = ["jcrPath=/node/exo:startEvent", "validate=datetime", "visible=true"] ; 
@@ -78,7 +78,7 @@
       </tr>
 			
       <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.end-date-time")%></td>
+        <td class="FieldLabel"><label for="endEvent"><%=_ctx.appRes("Event.dialog.label.end-date-time")%></label></td>
         <td class="FieldComponent">
           <%
             String[] fieldEndEvent = ["jcrPath=/node/exo:endEvent", "validate=datetime", "visible=true"] ; 
@@ -88,7 +88,7 @@
       </tr>
 
       <tr>
-        <td class="FieldLabel">URL</td>
+        <td class="FieldLabel"><label for="url">URL</label></td>
         <td class="FieldComponent">
         <%
           String[] fieldUrl = ["jcrPath=/node/exo:url"] ;
@@ -99,7 +99,7 @@
       
 			
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.summary")%></td>
+			  <td class="FieldLabel"><label for="summary"><%=_ctx.appRes("Article.dialog.label.summary")%></label></td>
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">					
 						<%
@@ -111,7 +111,7 @@
 			</tr>  
 			
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.content")%></td>
+			  <td class="FieldLabel"><label for="content"><%=_ctx.appRes("Article.dialog.label.content")%></label></td>
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%

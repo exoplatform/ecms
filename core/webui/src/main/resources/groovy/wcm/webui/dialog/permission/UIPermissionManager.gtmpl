@@ -17,15 +17,15 @@
 			<div class="FormContainer">
 				<table class="UIFormGrid">
 					<tr>
-						<td class="FieldLabel"><%= uicomponent.getLabel(uicomponent.PERMISSION_INPUT_SET) %></td>
+						<td class="FieldLabel"><label for="<%=uicomponent.PERMISSION_INPUT_SET%>"><%= uicomponent.getLabel(uicomponent.PERMISSION_INPUT_SET) %></label></td>
 						<td class="FieldComponent"><% uiform.renderField(uicomponent.PERMISSION_INPUT_SET); %></td>
 					</tr>
 					<tr>
-						<td class="FieldLabel"><%= uicomponent.getLabel(uicomponent.ACCESSIBLE_CHECKBOX_INPUT) %></td>
+						<td class="FieldLabel"><label for="<%=uicomponent.ACCESSIBLE_CHECKBOX_INPUT%>"><%= uicomponent.getLabel(uicomponent.ACCESSIBLE_CHECKBOX_INPUT) %></label></td>
 						<td class="FieldComponent"><% uiform.renderField(uicomponent.ACCESSIBLE_CHECKBOX_INPUT); %></td>
 					</tr>
 					<tr>
-						<td class="FieldLabel"><%= uicomponent.getLabel(uicomponent.EDITABLE_CHECKBOX_INPUT) %></td>
+						<td class="FieldLabel"><label for="<%=uicomponent.EDITABLE_CHECKBOX_INPUT%>"><%= uicomponent.getLabel(uicomponent.EDITABLE_CHECKBOX_INPUT) %></label></td>
 						<td class="FieldComponent"><% uiform.renderField(uicomponent.EDITABLE_CHECKBOX_INPUT); %></td>
 					</tr>
 				</table>

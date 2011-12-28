@@ -154,7 +154,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 									isDisable = "DISABLED";
 							%>
 							<th class="thContent Title" style="border-right:none;">
-								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" <%=isDisable%> onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
+								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" title="<%=_ctx.appRes("UINewsletterEntryManager.title.CheckAll")%>" <%=isDisable%> onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
 							</th>
 						</tr>
 						<%int count = 0;

@@ -20,7 +20,7 @@
 	              	if(fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId())) {
 	              %>                        
   	              <td class="FieldLabel">
-                      <%=uicomponent.getLabel(field.getName(), "label") %>
+                      <label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName(), "label") %></label>
                   </td>
   	              <td class="FieldComponent"><% uiform.renderField(field)%></td>
 	              <%} else {%>

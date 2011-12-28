@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">	
     	<tr>
-	      <td class="FieldLabel"><%=_ctx.appRes("Destroyable.dialog.label.destruction-date")%></td>
+	      <td class="FieldLabel"><label for="destructionDate"><%=_ctx.appRes("Destroyable.dialog.label.destruction-date")%></label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDestructionDate = ["jcrPath=/node/rma:destructionDate", "visible=true"] ;

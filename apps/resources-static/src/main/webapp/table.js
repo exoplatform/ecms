@@ -36,7 +36,7 @@ UITable.prototype.generateInputs = function() {
   for (i=1 ; i<(this.rows+1) ; i++) {
 	out += '<tr>';
     for (j=1 ; j<(this.cols.length+1) ; j++) {
-      out += '<td class="FieldLabel">'+this.cols[j-1]+'</td>';
+      out += '<td class="FieldLabel"><label for="' + this.id + '-' + i + '-' + j + '">'+this.cols[j-1]+'</td>';
       var s = '';
       if (data!=undefined) {
     	  var obj = data[i-1];

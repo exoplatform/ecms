@@ -13,7 +13,7 @@
   <div class="HorizontalLayout">
 		<table class="UIFormGrid">			
 			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("Kofax.dialog.label.name")%></td>
+			  <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Kofax.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 	      <%
 	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
@@ -23,7 +23,7 @@
 			</tr>
 			<%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>		
 				<tr>
-		      <td class="FieldLabel"><%=_ctx.appRes("Kofax.dialog.label.categories")%></td>
+		      <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("Kofax.dialog.label.categories")%></label></td>
 		      <td class="FieldComponent">
 			      <% 
 			        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
@@ -33,7 +33,7 @@
 			  </tr>
 		  <%}%>
 			<tr>
-        		<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        		<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 				<td class="FieldComponent">
 				<%
 				  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
@@ -46,9 +46,11 @@
 	      int i = 1;
 	      for(property in node.getProperties()) {
 	        def propertyName = property.getName() ;
-	        if(propertyName.startsWith(namespace)) { %>
+	        if(propertyName.startsWith(namespace)) {
+	          String compid = "component_" + i;
+	        %>
 	        <tr>		 
-	        	<td class="FieldLabel"><%=propertyName.substring(namespace.length(), propertyName.length())%></td>         					
+	        	<td class="FieldLabel"><label for="$compid"><%=propertyName.substring(namespace.length(), propertyName.length())%></label></td>         					
 	        	<td class="FieldComponent">
 			      <%
 			        String[] param = ["jcrPath=/node/" + propertyName] ;

@@ -68,7 +68,7 @@ public class UIFormFieldSet extends UIContainer {
         writer.write("<tr>") ;
         String componentName = uiForm.getLabel(component.getId());
         if(componentName != null && componentName.length() > 0 && !componentName.equals(getId())) {
-          writer.write("<td class=\"FieldLabel\">" + componentName + "</td>") ;
+          writer.write("<td class=\"FieldLabel\"><label for=\"" + component.getId() + "\">" + componentName + "</td>");
           writer.write("<td class=\"FieldComponent\">") ;
           renderUIComponent(component) ;
           writer.write("</td>") ;
