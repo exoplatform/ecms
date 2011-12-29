@@ -80,11 +80,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-delivery-wcm-server-jonas</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-packaging-ecmdemo-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
