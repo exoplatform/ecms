@@ -28,7 +28,7 @@
 		    <table class="UIFormGrid">
 					<%for(inputInfo in uicomponent.getInputInfo())  {%>
 							<tr>
-							  <td class="FieldLabel"><label for="<%=nputInfo.getId()%>"><%=inputInfo.getLabel()%></label></td>
+							  <td class="FieldLabel"><label for="<%=inputInfo.getId()%>"><%=inputInfo.getLabel()%></label></td>
 							  <%
 							    UIFormInput uiInput =  inputInfo.getInput();
 							  %>
