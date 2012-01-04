@@ -19,8 +19,6 @@ package org.exoplatform.services.wcm.portal.artifacts;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
 
@@ -38,15 +36,18 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   private ListenerService listenerService;
 
   @SuppressWarnings("unchecked")
-  public CreatePortalArtifactsServiceImpl(InitParams initParams, ListenerService listenerService) {
-    ValuesParam valuesParam = initParams.getValuesParam("ignored.portals");
-    if(valuesParam != null) {
-      initialPortals = valuesParam.getValues();
-    }
+  public CreatePortalArtifactsServiceImpl(ListenerService listenerService) {
     this.listenerService = listenerService;
   }
   public void addPlugin(CreatePortalPlugin artifactsPlugin) throws Exception {
     artifactPlugins.put(artifactsPlugin.getName(),artifactsPlugin);
+  }
+  
+  public void addIgnorePortalPlugin(IgnorePortalPlugin ignorePortalPlugin) throws Exception {
+    ArrayList<String> ignoredPortals = ignorePortalPlugin.getIgnorePortals();
+    if (ignoredPortals != null && !ignoredPortals.isEmpty()) {
+      initialPortals.addAll(ignoredPortals);
+    }
   }
 
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName)
