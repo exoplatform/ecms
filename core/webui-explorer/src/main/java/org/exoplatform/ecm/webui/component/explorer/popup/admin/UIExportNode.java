@@ -45,7 +45,7 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.compress.CompressData;
+import org.exoplatform.services.compress.CompressData;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

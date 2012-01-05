@@ -229,10 +229,6 @@
   </component>
 
 	<component>
-    <type>org.exoplatform.services.cms.compress.CompressData</type>
-  </component>
-
-	<component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
     <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
     <init-params>
