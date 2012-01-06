@@ -130,12 +130,12 @@ public class UITagForm extends UIForm {
         }
         // rename tag
         else {
-          if (!existTag(tagName, null, workspace, scope, uiForm, userName)) {
+          if (!existTag(tagName, workspace, scope, uiForm, userName)) {
             newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, workspace);
+            uiExplorer.setTagPath(uiForm.oldTagPath_.replace(uiForm.oldName_, tagName));
           } else if (!tagName.equals(uiForm.oldName_)) {
-           uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
+            uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
                           ApplicationMessage.WARNING));
-//           
           }
         }
 
@@ -159,7 +159,7 @@ public class UITagForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent()) ;
     }
 
-    private boolean existTag(String tagName, String repo, String workspace, int scope,
+    private boolean existTag(String tagName, String workspace, int scope,
                              UITagForm uiForm, String userName) throws Exception {
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);

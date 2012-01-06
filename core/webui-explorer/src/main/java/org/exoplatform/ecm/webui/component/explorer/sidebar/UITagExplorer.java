@@ -130,18 +130,7 @@ public class UITagExplorer extends UIContainer {
       UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setSelectRootNode();
       uiExplorer.setTagPath(tagPath);
-
-      // Reset status of document flag updated by lampt
-      //uiExplorer.setViewDocument(false);
       uiExplorer.setIsViewTag(true);
-
-//      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-//      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-//      if(uiDocumentWorkspace.isRendered()) {
-//        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class) ;
-//        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-//        uiDocumentInfo.setDocumentSourceType(DocumentProviderUtils.CURRENT_NODE_ITEMS);
-//      }
       uiExplorer.updateAjax(event);
     }
   }

@@ -131,7 +131,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
       removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
-
+      uiExplorer.setTagPath(uiExplorer.getCurrentPath());
       Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);

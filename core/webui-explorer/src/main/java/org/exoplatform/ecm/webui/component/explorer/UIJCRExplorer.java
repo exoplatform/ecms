@@ -954,8 +954,6 @@ public class UIJCRExplorer extends UIContainer {
       if (firstTime) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
-        WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-
         String workspace = null;
         try {
           workspace = session.getWorkspace().getName();

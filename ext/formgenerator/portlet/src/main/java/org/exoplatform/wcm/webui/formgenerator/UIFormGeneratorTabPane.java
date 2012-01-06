@@ -322,7 +322,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      * (show name, use timestamp, convert from another field like exo:title for example)
      */
     dialogTemplate.append("        <tr style=\"display:none;\">\n");
-    dialogTemplate.append("          <td class=\"FieldLabel\"><label for=\"name\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></label></td>\n");
+    dialogTemplate.append("          <td class=\"FieldLabel\">" +
+    		"<label for=\"name\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></label></td>\n");
     dialogTemplate.append("          <td class=\"FieldComponent\">\n");
     dialogTemplate.append("            $timestampName \n               <div style=\"display:none;\"><%\n");
     dialogTemplate.append("              String[] fieldName = [\"jcrPath=/node\", \"mixintype=mix:i18n\", ");
@@ -421,7 +422,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           dialogTemplate.append("                     <image src=\"$imgSrc\" width=\"100px\" height=\"80px\"/>\n");
           dialogTemplate.append("                     <a href=\"$actionLink\">\n");
           dialogTemplate.append("                       <img src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" ");
-          dialogTemplate.append("alt=\"<%=_ctx.appRes(\"FormGeneratorDialog.label.remove\")%>\" class=\"ActionIcon Remove16x16Icon\"/>\n");
+          dialogTemplate.append(
+              "alt=\"<%=_ctx.appRes(\"FormGeneratorDialog.label.remove\")%>\" class=\"ActionIcon Remove16x16Icon\"/>\n");
           dialogTemplate.append("                     </a>\n");
           dialogTemplate.append("                   </div>\n");
           dialogTemplate.append("                 <%\n");
