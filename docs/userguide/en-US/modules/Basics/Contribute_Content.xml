@@ -203,7 +203,7 @@
         <section id="sect-User_Guide-InContext_Editing-Edit_Content">
             <title>Edit a content</title>
             <para>
-                You can edit any contents on the homepage for SCV and CLV with <emphasis role="bold">InContext Editing</emphasis>. However, for CLV, you only can
+                You can edit any content on the homepage for SCV and CLV with <emphasis role="bold">InContext Editing</emphasis>. However, for CLV, you only can
                 edit each content in it.
             </para>
             <procedure>
@@ -213,8 +213,8 @@
                         <emphasis role="bold">Edit</emphasis>
                         mode by hovering your cursor over
                         <emphasis role="bold">Edit</emphasis>
-                        on the <emphasis role="bold">Administration</emphasis> bar, then selecting
-                        <emphasis role="bold">Content.</emphasis>
+                        on the <emphasis role="bold">Administration</emphasis> bar, then select 
+                        <emphasis role="bold">Content</emphasis>.
                     </para>
                 </step>
                 <step>
@@ -308,7 +308,7 @@
             <citetitle>
             <para xml:id="proc-User_Guide-Manage_Content-Manage_Content">
                 <emphasis role="bold">
-                    Manage content in the CLV
+                    Add content in the CLV
                 </emphasis>
             </para>
             </citetitle>
@@ -345,21 +345,31 @@
                 </step>
                 <step>
                     <para>
-                        To add a new document to the CLV, click
+                        Click
                         <emphasis role="bold">Add Content</emphasis>
-                        on the <emphasis role="bold">Action</emphasis> bar and do the same steps as in the
+                        on the <emphasis role="bold">Action</emphasis> bar.
+				    </para>
+				</step>
+				<step>
+				    <para>
+						Do the same steps as in the
                         <link linkend="sect-User_Guide-InContext_Editing-Add_Content">Add Content</link>
                         section.
                     </para>
-                    <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down
-                        menu. For more details, see the
-                        <link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and
-                            documents
+			    </step>
+				</procedure>
+				<para>
+				<citetitle>
+					   <emphasis role="bold">Do other actions
+					   </emphasis>
+			    </citetitle>
+				</para>
+				<para>
+					Right-click a specific content in the CLV to open the drop-down
+                        menu. From here, you can do many actions as mentiond in the <link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and documents
                         </link>
                         section.
                     </para>
-                </step>
-            </procedure>
         </section>
         <section id="sect-User_Guide-InContext_Editing-Preferences">
             <title>Preferences</title>
@@ -368,11 +378,8 @@
                 (CLV), reset the display of the contents in SCV and CLV and publish contents.
             </para>
             <citetitle>
-            <para xml:id="form-User_Guide-Preferences-Content_Detail_Preferences"><emphasis role="bold">Content Detail Preferences</emphasis></para>
+            <para xml:id="form-User_Guide-Preferences-Content_Detail_Preferences"><emphasis role="bold">Edit the Single Content Viewer</emphasis></para>
             </citetitle>
-                <para>
-                    To edit the Single Content Viewer, do as follows:
-                </para>
 
                 <procedure>
                     <step>
@@ -605,7 +612,7 @@
                     </step>
                     <step>
                         <para>
-                            Select a folder on the left pane, and content in the folder on the right pane. The selected
+                            Select a folder in the left pane, and its content in the right pane. The selected
                             content will be displayed in the
                             <emphasis role="bold">Content Path</emphasis>
                             field.
@@ -681,12 +688,9 @@
                 </procedure>
              <citetitle>
             <para xml:id="form-User_Guide-Preferences-Content_List_Preferences.">
-                <emphasis role="bold">Content List Preferences</emphasis>
+                <emphasis role="bold">Edit the Content List Viewer</emphasis>
                 </para>
                  </citetitle>
-                <para>
-                    To edit the Content List Viewer, do as follows:
-                </para>
                 <procedure>
                     <step>
                         <para>
@@ -955,7 +959,7 @@
                         </para>
                         <para>
                             If you select the <emphasis role="bold">By Contents</emphasis> mode, select an available
-                            folder from the left pane, all content in this folder will be listed on the right pane.
+                            folder from the left pane, all content in this folder will be listed in the right pane.
                             Click a content on the right that you want to add to the content list. There will be a
                             message, informing that you have successfully added it to the Content List. The selected
                             content will be listed in the Content List.
@@ -996,7 +1000,11 @@
             By using this mode, you can edit the text in the same location in such an intuitive and convenient manner.
         </para>
         <para>
-            To do the inline editing, do as follows:
+		<citetitle>
+		<emphasis role="bold">
+			Do the Inline Editing
+		</emphasis>
+		</citetitle>
         </para>
         <procedure>
             <step>
@@ -1034,15 +1042,17 @@
                 </mediaobject>
             </step>
             <step>
-                <para>Make changes on your selected area, then click
+                <para>Make changes on your selected area.
+				</para>
+			</step>
+			<step>
+			<para>Click
                     <inlinemediaobject>
                         <imageobject>
                             <imagedata width="4mm" scalefit="1" fileref="images/Accepticon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
-                    to accept,
-                </para>
-                <para>or
+                    to accept, or
                     <inlinemediaobject>
                         <imageobject>
                             <imagedata width="4mm" scalefit="1" fileref="images/Cancelicon.png" format="PNG"/>
@@ -1074,7 +1084,7 @@
                             <imagedata width="3mm" scalefit="1" fileref="images/publish-icon.png" format="PNG"/>
                         </imageobject>
                     </inlinemediaobject>
-                    to publish the content. Now, your edited content in the
+                    to publish the content. Now, your edited content is in the
                     <emphasis role="bold">Published</emphasis>
                     state.
                 </para>
@@ -1088,14 +1098,14 @@
         </para>
         <itemizedlist>
             <listitem>
-                <para>Insert a portal link to the document.</para>
+                <para><link linkend="sect-User_Guide-Contribute_Content-CKEditor-Insert_portal_link">Insert a portal link to the document.</link></para>
             </listitem>
             <listitem>
-                <para>Insert a content link to the document.</para>
+                <para><link linkend="sect-User_Guide-Contribute_Content-CKEditor-Insert_content_link">Insert a content link to the document.</link></para>
             </listitem>
         </itemizedlist>
             <citetitle>
-        <para>
+        <para xml:id="sect-User_Guide-Contribute_Content-CKEditor-Insert_portal_link">
             <emphasis role="bold">Insert a portal link</emphasis>
         </para>
             </citetitle>
@@ -1146,7 +1156,7 @@
             </step>
         </procedure>
             <citetitle>
-        <para>
+        <para xml:id="sect-User_Guide-Contribute_Content-CKEditor-Insert_content_link">
             <emphasis role="bold">Insert a content link</emphasis>
         </para></citetitle>
         <procedure>
@@ -1164,13 +1174,13 @@
                         <imagedata fileref="images/content_selector.png" format="PNG" align="center"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata fileref="images/content_selector.png" format="PNG" align="center" scalefit="1" width="100mm"/>
+                        <imagedata fileref="images/content_selector.png" format="PNG" align="center" scalefit="1" width="140mm"/>
                     </imageobject>
                 </mediaobject>
             </step>
             <step>
-                <para>Click the plus before the document name or click directly the document name on the left pane to
-                    show the contents in the right pane or click
+                <para>Click the plus before the document name, or click directly the document name in the left pane to
+                    show the contents in the right pane, or click
                     <inlinemediaobject>
                         <imageobject>
                             <imagedata fileref="images/upload_file.png" format="PNG" scalefit="1" width="20mm"/>

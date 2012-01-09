@@ -12,17 +12,22 @@
     <para>To create and manage the content more effectively and dynamically, you need to pay attention to the structure
         of each content, including:
     </para>
-
+	<itemizedlist>
+	<listitem>
     <para><emphasis role="bold">Main content</emphasis> contains all key contents, such as texts, images, links, tables, and more.</para>
-
+	</listitem>
+	<listitem>
     <para><emphasis role="bold">Illustration</emphasis> is an image which is used to clarify or explain the content. Also, a summary also can be added to
         this image.
     </para>
-
+	</listitem>
+	<listitem>
     <para><emphasis role="bold">default.css</emphasis> contains CSS data which are used to present the web content, such as layout, font, color, and
         more.
     </para>
-
+	</listitem>
+	<listitem>
     <para><emphasis role="bold">default.js</emphasis> contains JS data which are used to make web content more animating and dynamic.</para>
-
+	</listitem>
+	</itemizedlist>
 </section>

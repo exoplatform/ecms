@@ -137,12 +137,12 @@
                <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to the query you want to delete. A confirmation message will appear.
+      corresponding to the query you want to delete.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> to accept deleting this query, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+     Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion, or <emphasis role="bold">Cancel</emphasis> to discard this action.
     </para>
       </step>
     </procedure>
@@ -188,19 +188,7 @@
       </step>
       <step>
         <para>
-     Enter a script name for the <emphasis role="bold">Script Name</emphasis> field.
-     <itemizedlist>
-            <listitem>
-              <para>
-        The script name must be unique
-       </para>
-            </listitem>
-            <listitem>
-              <para>
-        The name must not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
-       </para>
-            </listitem>
-          </itemizedlist>
+     Enter a script name for the <emphasis role="bold">Script Name</emphasis> field that must be unique and not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
     </para>
       </step>
       <step>
@@ -215,7 +203,7 @@
     <procedure>
       <step>
         <para>
-     In the <emphasis role="bold">ECM Scripts</emphasis> tab, click 
+      Click 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="4mm" scalefit="1"/>
@@ -224,7 +212,7 @@
                <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to the script that you want to edit. The <emphasis role="bold">Add/Edit script</emphasis> form will appear.
+      corresponding to the script that you want to edit in the <emphasis role="bold">ECM Scripts</emphasis> tab. The <emphasis role="bold">Add/Edit script</emphasis> form will appear.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -252,19 +240,19 @@
     <procedure>
       <step>
         <para>
-     In the <emphasis role="bold">ECM Scripts</emphasis> tab, click <inlinemediaobject>
+     Click <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> on the script that you want to delete. A confirmation message will appear.
+          </inlinemediaobject> on the script that you want to delete in the <emphasis role="bold">ECM Scripts</emphasis> tab.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> to accept your deletion, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+     Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion, or <emphasis role="bold">Cancel</emphasis> to discard this action.
     </para>
       </step>
     </procedure>
@@ -332,6 +320,8 @@
             </textobject>
           </inlinemediaobject>
          next to <emphasis role="bold">Variables</emphasis> field to add more values for the action.</para>
+		 <itemizedlist>
+		 <listitem>
        <para> Click
             <inlinemediaobject>
             <imageobject>
@@ -342,6 +332,8 @@
             </textobject>
           </inlinemediaobject> to delete a value.
     </para>
+	</listitem>
+	</itemizedlist>
       </step>
       <step>
         <para>
@@ -362,7 +354,7 @@
     <procedure>
       <step>
         <para>
-     Select <emphasis role="bold">Advanced Configuration --> Manage Locks</emphasis> on the <emphasis role="bold">Manage ECM Main Functions</emphasis> pane on the left. The locked nodes will be listed on the right pane.
+     Select <emphasis role="bold">Advanced Configuration --> Manage Locks</emphasis> on the <emphasis role="bold">Manage ECM Main Functions</emphasis> pane on the left. The locked nodes will be listed in the right pane.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -375,7 +367,7 @@
       </step>
       <step>
         <para>
-     In the <emphasis role="bold">Locked Node</emphasis> tab on the right pane, administrators can unlock nodes by clicking 
+     Click
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/unlockicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -384,7 +376,7 @@
                <phrase>open lock</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to nodes which need to be unlocked. The unlocked nodes will disappear from the locked nodes list.
+      corresponding to nodes which need to be unlocked in the <emphasis role="bold">Locked Node</emphasis> tab in the right pane. The unlocked nodes will disappear from the locked nodes list.
     </para>
         <para>
      Administrators can manage and add the unlock permission for another group and users in the <emphasis role="bold">Manage Lock</emphasis> tab.
@@ -392,7 +384,12 @@
       </step>
       <step>
         <para>
-     Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Groups Or Users</emphasis> column. However, administrators can also click
+     Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Groups Or Users</emphasis> column. 
+	 </para>
+    <itemizedlist>
+	<listitem>
+	 <para>
+	  Click
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/blueplusicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -400,7 +397,7 @@
             <textobject>
                <phrase>plus</phrase>
             </textobject>
-          </inlinemediaobject> if you want to allow any users to unlock nodes.
+          </inlinemediaobject> to allow any users to unlock nodes.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -410,10 +407,10 @@
               <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" scalefit="1" />
            </imageobject>
         </mediaobject>
-      </step>
-      <step>
+    </listitem>
+	<listitem>
         <para>
-     In case you, as an administrator, want to remove the "Unlock" permission of groups, click
+     Click
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -421,8 +418,10 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> corresponding to the group to remove them form the "Unlock" permission list, except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
+          </inlinemediaobject> corresponding to the group which you want to remove form the "Unlock" permission list, except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
     </para>
+	</listitem>
+	</itemizedlist>
       </step>
     </procedure>
   </section>

@@ -7,7 +7,7 @@
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Manage Category Navigation</title>
   <para>
-  <emphasis role="bold">Category Navigation</emphasis> portlet and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
+  <emphasis role="bold">Category Navigation</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
  </para>
  <citetitle>
  <para xml:id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet"><emphasis role="bold">Access the Category Navigation portlet</emphasis></para>
@@ -64,8 +64,8 @@
             <emphasis role="bold">News</emphasis> page on the <emphasis role="bold">Navigation</emphasis> bar.
         </para>
     </step>
-    <step>Hover your cursor over <emphasis role="bold">Edit --> Page --> Layout </emphasis>
-        <para>The page for you to edit the <emphasis role="bold">Category Navigation</emphasis> portlet will appear.
+    <step>Hover your cursor over <emphasis role="bold">Edit --> Page --> Layout</emphasis>.
+        <para>The page which allows you to edit the <emphasis role="bold">Category Navigation</emphasis> portlet will appear.
         </para>
       <mediaobject>
            <imageobject role="html">

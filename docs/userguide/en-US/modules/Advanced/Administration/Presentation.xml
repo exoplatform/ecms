@@ -971,14 +971,14 @@
                                 <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
-                        corresponding with the template you want to delete. A confirmation message will appear.
+                        corresponding with the template you want to delete.
                     </para>
                 </step>
                 <step>
                     <para>
                         Click
                         <emphasis role="bold">OK</emphasis>
-                        to accept deleting this template.
+                        in the confirmation message to accept your deletion.
                     </para>
                 </step>
             </procedure>

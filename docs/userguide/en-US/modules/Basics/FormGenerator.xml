@@ -58,7 +58,7 @@
     </step>
     <step>
       <para>
-    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for the template. Available components are displayed on the left pane.
+    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for the template. Available components are displayed in the left pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -71,7 +71,7 @@
     </step>
     <step>
       <para>
-    Click the desired components on the left pane. The selected components will be displayed on the right pane.
+    Click the desired components in the left pane. The selected components will be displayed in the right pane.
    </para>
     </step>
     <step>

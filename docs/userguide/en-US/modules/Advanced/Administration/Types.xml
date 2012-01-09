@@ -69,18 +69,21 @@ The registry helps you manage the namespaces used in the system.</para>
           <imagedata fileref="images/themanagenodetypeform.png" format="PNG" align="center" width="150mm"/>
        </imageobject>
     </mediaobject>
-  </section>
-  <section id="sect-User_Guide-Content_Types-View_Node_Types">
-    <title>View node types</title>
+	
+	<citetitle>
+	<para xml:id="sect-User_Guide-Content_Types-View_Node_Types"><emphasis role="bold">View node types</emphasis></para>
+    </citetitle>
     <procedure>
       <step>
         <para>
      Click <inlinemediaobject>
-          <mediaobject>
-            <imageobject fileref="Glass_icon.png" format="PNG" scalefit="1" width="4mm"/>
-          </mediaobject>
-     </inlinemediaobject>
-                that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
+            <imageobject>
+              <imagedata fileref="images/Glass_icon.png" format="PNG" width="4mm" scalefit="1" />
+            </imageobject>
+            <textobject>
+              <phrase>[ Glass icon ]</phrase>
+            </textobject>
+          </inlinemediaobject> that corresponds to the node you want to view. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -168,18 +171,27 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Super Types: Click the plus icon to add more parent types.
+     Click <inlinemediaobject>
+            <imageobject>
+              <imagedata width="4mm" scalefit="1" fileref="images/Add_icon.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>[ Plus icon ]</phrase>
+            </textobject>
+          </inlinemediaobject> to add more parent types in the <emphasis role="bold">Super Types</emphasis> field.
     </para>
-      </step>
-      <step>
+    <itemizedlist>
+	<listitem>
         <para>
-     Property Definitions: List all definition names of the <emphasis role="bold">Property</emphasis> tab.
+    <emphasis role="bold">Property Definitions</emphasis>: List all definition names of the <emphasis role="bold">Property</emphasis> tab.
     </para>
-      </step>
-      <step>
-        <para>
-     Child Node Definitions: List all definition names of the <emphasis role="bold">Child Node</emphasis> tab.
+	</listitem>
+    <listitem>
+    <para>
+    <emphasis role="bold">Child Node Definitions</emphasis>: List all definition names of the <emphasis role="bold">Child Node</emphasis> tab.
     </para>
+	</listitem>
+	</itemizedlist>
       </step>
       <step>
         <para>
@@ -283,5 +295,5 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
       </step>
     </procedure>
-  </section>
+</section>
 </section>

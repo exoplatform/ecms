@@ -169,14 +169,6 @@
                     <entry><emphasis role="bold">Moderator</emphasis> </entry>
                     <entry> Select users/groups who have rights to manage this category. </entry>
                   </row>
-                  <row>
-                    <entry><emphasis role="bold">Save</emphasis> </entry>
-                    <entry> Accept the addition of a new category. </entry>
-                  </row>
-                  <row>
-                    <entry><emphasis role="bold">Cancel</emphasis> </entry>
-                    <entry> Quit the category form without adding a category. </entry>
-                  </row>
                 </tbody>
               </tgroup>
             </table>
@@ -196,9 +188,9 @@
                       </inlinemediaobject>
                       next to the
                       <emphasis role="bold">Moderator</emphasis>
-                      field to select a user. The
+                      field to open the 
                       <emphasis role="bold">User Selector</emphasis>
-                      form will appear.
+                      form.
                   </para>
                 <mediaobject>
                <imageobject role="html">
@@ -336,7 +328,7 @@
           </step>
           <step>
             <para>
-       Click <emphasis role="bold">OK</emphasis> to delete the category.
+       Click <emphasis role="bold">OK</emphasis> in the confirmation message to delete the category.
       </para>
           </step>
         </procedure>
@@ -661,7 +653,7 @@
       <procedure>
         <step>
           <para>
-      Open the <emphasis role="bold">subscription</emphasis> containing the letter you want to open by clicking it or checking the corresponding box and then selecting <emphasis role="bold">Administration --> Open</emphasis>.
+      Open the <emphasis role="bold">subscription</emphasis> containing the letter you want to open by clicking it or ticking the corresponding checkbox, then select <emphasis role="bold">Administration --> Open</emphasis>.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -770,12 +762,12 @@
     <section id="sect-User_Guide-Manage_Newsletters-Delete_a_newsletter">
       <title>Delete a newsletter</title>
       <para>
-    Administrator can delete obsolete newsletters.
+    Administrator can delete obsolete newsletters in a specific subscription.
    </para>
       <procedure>
         <step>
           <para>
-      In a specific subscription, select the newsletter you want to delete by ticking the corresponding checkbox.
+      Select the newsletter you want to delete by ticking the corresponding checkbox.
      </para>
         </step>
         <step>
@@ -788,7 +780,7 @@
               <textobject>
                  <phrase>[ Moderation ]</phrase>
               </textobject>
-            </inlinemediaobject>, then select <emphasis role="bold">Delete</emphasis> in the menu.
+            </inlinemediaobject>, then select <emphasis role="bold">Delete</emphasis> from the drop-down menu.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -834,8 +826,8 @@
     </section>
     <section id="sect-User_Guide-Manage_Newsletters-Newsletters">
       <title>Create a newsletter</title>
-      <para xml:id="proc-User_Guide-Newsletters-Creating_Newsletters"><emphasis role="bold">
-    Each subscription consists of many newsletters. In eXo Platform, you can easily create newsletters by following these steps</emphasis>.
+      <para xml:id="proc-User_Guide-Newsletters-Creating_Newsletters">
+    Each subscription consists of many newsletters. In eXo Platform, you can easily create newsletters by following these steps.
    </para>
       <procedure>
         <step>
@@ -853,7 +845,7 @@
               <textobject>
                  <phrase>[ New Letter ]</phrase>
               </textobject>
-            </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Newsletter Entry</emphasis> form appears.
+            </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Newsletter Entry</emphasis> form.
      </para>
           <mediaobject>
             <imageobject>

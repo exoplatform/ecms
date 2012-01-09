@@ -7,7 +7,7 @@
 <section id="sect-User_Guide-Search_in_Content_Explorer">
   <title>Search in Sites Explorer</title>
   <para>
-    There are three ways to search an existing node:
+    There are three ways to search for an existing node:
   </para>
   <itemizedlist>
     <listitem>
@@ -78,7 +78,7 @@
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/previewicon2.png" format="PNG" width="3mm" scalefit="1"/>
+              <imagedata fileref="images/previewicon2.png" format="PNG" width="4mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>magnifying glass</phrase>
@@ -133,7 +133,7 @@
       </step>
       <step>
         <para>
-          Then click
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="3mm" scalefit="1"/>
@@ -273,9 +273,7 @@
         </step>
         <step>
           <para>
-            Click
-            <emphasis role="bold">Show/hide constraints form</emphasis>
-            to add more constraints.
+            Click <emphasis role="bold">Show/Hide Constraint Form</emphasis> to add more constraints.
           </para>
           <para>
             A further constraint options window will appear.
@@ -444,8 +442,10 @@
               <imagedata align="center" fileref="images/SQLsearchform.png" format="PNG" width="120mm" scalefit="1"/>
             </imageobject>
           </mediaobject>
+		  <itemizedlist>
+		  <listitem>
           <para>
-            Remove unnecessary constraints with the
+            Remove unnecessary constraints by clicking  
             <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="3mm" scalefit="1"/>
@@ -453,9 +453,10 @@
               <textobject>
                 <phrase>trash can</phrase>
               </textobject>
-            </inlinemediaobject>
-            icon.
+            </inlinemediaobject>.
           </para>
+		  </listitem>
+		  </itemizedlist>
         </step>
         <step>
           <para>
@@ -482,12 +483,12 @@
             <procedure>
             <step>
               <para>
-                Check the box that corresponds to the constraint you want.
+                Tick the checkbox that corresponds to the constraint you want.
               </para>
             </step>
             <step>
               <para>
-                Enter the property you want to locate or click
+                Enter the property you want to locate, or click
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -530,7 +531,7 @@
               <para>
                 Define the property value to search for by entering a value into the
                 <emphasis role="bold">Contain Exactly</emphasis>
-                field or click the
+                field, or click 
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/furtherpropertyicon.png" format="PNG" scalefit="1" width="4mm"/>
@@ -538,8 +539,7 @@
                   <textobject>
                     <phrase>Find exactly</phrase>
                   </textobject>
-                </inlinemediaobject>
-                icon.
+                </inlinemediaobject>.
               </para>
               <mediaobject>
                 <imageobject role="html">
@@ -563,7 +563,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-                All pre-existing values for the property you selected will appear.
+                All pre-existing values for your selected property will appear.
               </para>
               <itemizedlist>
                 <listitem>
@@ -575,7 +575,7 @@
                   <para>
                     If the value you require is not in the list, enter it in the
                     <emphasis role="bold">Filter</emphasis>
-                    field and click the
+                    field and click 
                     <inlinemediaobject>
                       <imageobject>
                         <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -583,8 +583,7 @@
                       <textobject>
                         <phrase>corresponding</phrase>
                       </textobject>
-                    </inlinemediaobject>
-                    icon. The value will populate the
+                    </inlinemediaobject>. The value will populate the
                     <emphasis role="bold">Contain Exactly</emphasis>
                     field of the constraints form.
                   </para>
@@ -606,7 +605,7 @@
             <procedure>
             <step>
               <para>
-                Check the box corresponding to the
+                Tick the checkbox corresponding to the
                 <emphasis role="bold">Contain</emphasis>
                 or
                 <emphasis role="bold">Not Contain</emphasis>
@@ -617,7 +616,7 @@
               <para>
                 Enter the required property in the
                 <emphasis role="bold">Property</emphasis>
-                field or click
+                field, or click
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/furtherpropertyicon.png" format="PNG" scalefit="1" width="4mm"/>
@@ -649,7 +648,7 @@
             <procedure>
             <step>
               <para>
-                Click the check box beside the field with the drop-down menu (below the
+                Tick the checkbox beside the field with the drop-down menu (below the
                 <emphasis role="bold">Property</emphasis>
                 entries).
               </para>
@@ -704,14 +703,14 @@
             <procedure>
             <step>
               <para>
-                Click the checkbox beside the
+                Tick the checkbox beside the
                 <emphasis role="bold">Document Type</emphasis>
                 field.
               </para>
             </step>
             <step>
               <para>
-                Enter the document type you want to search for or click
+                Enter the document type you want to search, or click
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -720,7 +719,7 @@
                     <phrase>"Add node type"</phrase>
                   </textobject>
                 </inlinemediaobject>
-                to open a list of document types:
+                to open a list of document types.
               </para>
               <mediaobject>
                 <imageobject role="html">
@@ -733,7 +732,7 @@
             </step>
             <step>
               <para>
-                Click the checkbox of the document type you want and click <emphasis role="bold">Save</emphasis>.
+                Tick the checkbox corresponding to your desired document type, then click <emphasis role="bold">Save</emphasis>.
               </para>
               <para>
                 The selected document type will populate the
@@ -756,14 +755,14 @@
             <procedure>
             <step>
               <para>
-                Click the checkbox beside the
+                Tick the checkbox beside the
                 <emphasis role="bold">Category</emphasis>
                 field.
               </para>
             </step>
             <step>
               <para>
-                Enter the category you want to search for or click
+                Enter the category you want to search, or click
                 <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/addcategoryicon.png" format="PNG" width="4mm" scalefit="1"/>
@@ -772,7 +771,7 @@
                     <phrase>"Add category"</phrase>
                   </textobject>
                 </inlinemediaobject>
-                for a list of categories:
+                for a list of categories.
               </para>
               <mediaobject>
                 <imageobject role="html">
@@ -794,7 +793,7 @@
                     <phrase>green tick</phrase>
                   </textobject>
                 </inlinemediaobject>
-                that corresponds to the category you want.
+                that corresponds to your desired category.
               </para>
               <para>
                 The selected category will populate the
@@ -840,17 +839,17 @@
             <emphasis role="bold">Search</emphasis>
             to perform the search and display the results in the
             <emphasis role="bold">Search Results</emphasis>
-            tab.
+            tab;
           </para>
           <para>
-            Or click
+            Or, click
             <emphasis role="bold">Save</emphasis>
             to save the search query to the
             <emphasis role="bold">Saved Query</emphasis>
-            tab.
+            tab;
           </para>
           <para>
-            Or click
+            Or, click
             <emphasis role="bold">Cancel</emphasis>
             to quit.
           </para>
@@ -860,7 +859,7 @@
     <section id="sect-User_Guide-Advanced_Search-Search_by_existing_queries">
       <title>Search by existing queries</title>
       <para>
-        This tab lists all saved search queries (that you have access rights to use).
+        This tab lists all saved search queries that you have access rights to use.
       </para>
       <mediaobject>
         <imageobject role="html">
@@ -882,7 +881,7 @@
                 <phrase>sprocket</phrase>
               </textobject>
             </inlinemediaobject>
-            to perform the search and see the results in the
+            to perform the search. You will see results in the
             <emphasis role="bold">Search Results</emphasis>
             tab.
           </para>
@@ -905,7 +904,7 @@
         </listitem>
         <listitem>
           <para>
-            Click the
+            Click 
             <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="3mm" scalefit="1"/>

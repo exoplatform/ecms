@@ -160,7 +160,7 @@
             </mediaobject>
 
             <para><emphasis role="bold">ii.</emphasis>
-                Select the parent node on the left pane and click
+                Select the parent node in the left pane, then click
      <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/greentick.png" format="PNG" scalefit="1" width="4mm"/>
@@ -168,7 +168,7 @@
                 <textobject>
                    <phrase>green tick</phrase>
                 </textobject>
-              </inlinemediaobject> in the <emphasis role="bold">Add</emphasis> column to select the child node on the right pane. After being selected, this location will be displayed on the <emphasis role="bold">Location to Save</emphasis> field. Created documents will be saved in this location.
+              </inlinemediaobject> in the <emphasis role="bold">Add</emphasis> column to select the child node in the right pane. After being selected, this location will be displayed on the <emphasis role="bold">Location to Save</emphasis> field. Created documents will be saved in this location.
             </para>
       </step>
       <step>

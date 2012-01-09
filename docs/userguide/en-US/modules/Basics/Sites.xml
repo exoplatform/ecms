@@ -185,7 +185,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-        You can assign the edit permission to a group with a specific membership by clicking the <emphasis role="bold">Select Permission </emphasis> button in the <emphasis role="bold">Edit Permission Setting</emphasis> tab to open the Permission Selector form. Select a group on the left panel and a corresponding membership on the right panel:
+        You can assign the edit permission to a group with a specific membership by clicking the <emphasis role="bold">Select Permission </emphasis> button in the <emphasis role="bold">Edit Permission Setting</emphasis> tab to open the Permission Selector form. Select a group in the left pane and a corresponding membership in the right pane.
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -196,7 +196,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-        The (<emphasis role="bold">*</emphasis>) from the Select a Membership panel means that you assign the right for everyone in the selected group from left panel.
+        The asterisk (<emphasis role="bold">*</emphasis>) from the <emphasis role="bold">Select a Membership</emphasis> pane means that you assign the right for everyone in the selected group from left pane.
        </para>
               <para>
         After selecting a group, the Current Permission will be displayed with detailed information:
@@ -561,11 +561,11 @@
         </imageobject>
      </mediaobject>
           <para>
-      The <emphasis role="bold">ListPermissionSelector</emphasis> form appears. Select a group on the left pane and a membership on the right pane.
+      The <emphasis role="bold">ListPermissionSelector</emphasis> form appears. Select a group in the left pane and a membership in the right pane.
      </para>
           <note>
             <para>
-       The * on the right pane means all members in the group.
+       The asterisk (<emphasis role="bold">*</emphasis>) in the right pane means all members in the group.
       </para>
           </note>
         </step>

@@ -29,7 +29,7 @@
 				</imageobject>
 			</mediaobject>
 			 <para>
-				A list of all drives organized in groups (<emphasis role="bold">Personal</emphasis> drives, <emphasis role="bold">Group</emphasis> drives and <emphasis role="bold">General</emphasis> drives) in the <emphasis role="bold">Sites Explorer</emphasis> displays.
+				A list of all drives organized in groups (<emphasis role="bold">Personal</emphasis> drives, <emphasis role="bold">Group</emphasis> drives and <emphasis role="bold">General</emphasis> drives) in the <emphasis role="bold">Sites Explorer</emphasis> are displayed.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -48,7 +48,7 @@
 					<term><emphasis role="bold">Personal drives</emphasis></term>
           <listitem>
             <para>
-              <emphasis role="bold">Personal</emphasis> drive is the working space of a user. If you want to do in private, select the <emphasis role="bold">Private</emphasis> drive, no
+              This is the working space of a user. If you want to do in private, select the <emphasis role="bold">Private</emphasis> drive, no
               one else can access or get your private resources. If you want to create resources and share them with
               others, work in the <emphasis role="bold">Public</emphasis> drive.
             </para>
@@ -58,11 +58,11 @@
 					<term><emphasis role="bold">Group drives</emphasis></term>
            <listitem>
              <para>
-               The drive of a group is the working space of users in that group.
+               The working space of users of a specific group.
              </para>
              <para>
-               In the following example, the user &quot;root&quot; joins in three groups : &quot;executive-board&quot;, &quot;administrators&quot; and
-               &quot;users&quot; so he has the right to access these group's drive.
+               In the following example, the user &quot;root&quot; joins in three groups: &quot;executive-board&quot;, &quot;administrators&quot; and
+               &quot;users&quot; so he has the right to access these groups' drives.
              </para>
            </listitem>
 				</varlistentry>

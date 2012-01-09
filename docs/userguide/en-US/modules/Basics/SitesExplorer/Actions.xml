@@ -54,7 +54,7 @@
     <title>Add a document</title>
     <para>
       There are several types of document in &PRODUCT;, such as <emphasis role="bold">File, Article, Podcast, Sample
-      node, File Plan, Kofax and more</emphasis>.
+      node, File Plan, Kofax,</emphasis> and more.
     </para>
     <para>
       The table below shows types of nodes which can be added to various document types. The rows indicate which nodes
@@ -729,8 +729,15 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
    <para>
 Optionally, fill values in all the rest fields, including <emphasis role="bold">Title</emphasis>, <emphasis role="bold">Description</emphasis>, <emphasis role="bold">Creator</emphasis> and <emphasis role="bold">Source</emphasis>.
 </para>
-   <para>
-Click the plus icon to open more fields.
+<para>
+Click <inlinemediaobject>
+		<imageobject>
+		  <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
+		</imageobject>
+		<textobject>
+		  <phrase>plus</phrase>
+		</textobject>
+	  </inlinemediaobject> to open more fields.
 </para>
  </step>
  <step>
@@ -977,9 +984,9 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          To upload an image, click the
+          Click
           <emphasis role="bold">Browse...</emphasis>
-          button and select an image from your computer.
+          to locate your desired image, and upload it.
         </para>
       </step>
       <step>
@@ -1308,7 +1315,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Select categories for a Kofax document by clicking
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -1539,9 +1546,9 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Folder ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar. The
+          on the <emphasis role="bold">Action</emphasis> bar to open the 
           <emphasis role="bold">Add Folder</emphasis>
-          form is displayed:
+          form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -1615,9 +1622,9 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject> on the
           <emphasis role="bold">Action</emphasis>
-          bar. The
+          bar to open the 
           <emphasis role="bold">Symlink Manager</emphasis>
-          will appear.
+          form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -1633,7 +1640,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -1653,7 +1660,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          After you have selected the document, click
+          Click
           <emphasis role="bold">Save</emphasis>
           on the
           <emphasis role="bold">Symlink Manager</emphasis>
@@ -1703,7 +1710,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Sym Link ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Symlink Manager</emphasis> pop-up will appear.
+          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Symlink Manager</emphasis> form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -1827,12 +1834,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Comment this document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar.
-        </para>
-        <para>
-          The
-          <emphasis role="bold">Comment</emphasis>
-          form appears.
+          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Comment</emphasis> form.
         </para>
       </step>
       <step>
@@ -3455,14 +3457,13 @@ After being created successfully, a file document with the <emphasis>text/html</
             corresponding to the version you want to delete.
           </para>
           <para>
-            A confirmation message will appear.
           </para>
         </step>
         <step>
           <para>
             Click
             <emphasis role="bold">OK</emphasis>
-            to delete the version.
+            in the confirmation message to accept your deletion.
           </para>
         </step>
       </procedure>
@@ -3588,7 +3589,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          The list of language (and all related documents) will be displayed on the left pane.
+          The list of language (and all related documents) will be displayed in the left pane.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -3744,9 +3745,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <emphasis role="bold">Action</emphasis>
               bar in
               <emphasis role="bold">
-                  <emphasis role="bold">Sites Explorer</emphasis>
+                  <emphasis role="bold">Sites Explorer.</emphasis>
               </emphasis>
-              .
           </para>
         </note>
       </step>
@@ -4149,7 +4149,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          You can click 
+          Click 
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -4194,7 +4194,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             You can add more categories to a file by clicking
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
+                <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>plus</phrase>
@@ -4372,7 +4372,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           form. Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="3mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>plus</phrase>
@@ -4598,8 +4598,8 @@ After being created successfully, a file document with the <emphasis>text/html</
           <emphasis role="bold">Select Membership</emphasis>
           form will appear that allows you to select users by membership.</para>
           <para><emphasis role="bold">ii.</emphasis>
-              Select a group on the left pane, and
-          membership types on the right.
+              Select a group in the left pane, and
+          membership types in the right pane.
         </para>
       </step>
       <step>
@@ -4855,7 +4855,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </para>
     <itemizedlist>
       <listitem><citetitle>
-        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis>.</para>
+        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis></para>
           </citetitle>
         <para>
           Select a node, then click 
@@ -4891,7 +4891,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
       </listitem>
       <listitem><citetitle>
-        <para xml:id="step-User_Guide-View_Relations-To_Hide_Relations"><emphasis role="bold">Hide relation</emphasis></para>
+        <para xml:id="step-User_Guide-View_Relations-To_Hide_Relations"><emphasis role="bold">Hide relations</emphasis></para>
         </citetitle>
           <para>
           Click 

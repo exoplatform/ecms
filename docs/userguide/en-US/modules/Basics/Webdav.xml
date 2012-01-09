@@ -183,7 +183,7 @@
       </step>
       <step>
         <para>
-     Right-click the site you want to view with WebDAV and select the <emphasis role="bold">Download and Allow Edition</emphasis> item in the menu.
+     Right-click your desired site to view with WebDAV, and select <emphasis role="bold">Download and Allow Edition</emphasis> from the menu.
     </para>
         <para>
      The selected site will be shown in WebDAV.
@@ -223,7 +223,7 @@
         </step>
       </procedure>
       <para>
-    After a new content is added, it can be viewed as a folder in WebDAV or as a page content using a web browser.
+    After the new content is added, it can be viewed as a folder in WebDAV or as a page content using a web browser.
    </para>
     </section>
     <section id="sect-User_Guide-Actions-Delete_a_web_content">
