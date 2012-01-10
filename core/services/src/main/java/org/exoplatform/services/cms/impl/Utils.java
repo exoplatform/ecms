@@ -79,6 +79,12 @@ public class Utils {
           node = node.getNode(token) ;
         } else {
           node = node.addNode(token, nodetype);
+          
+          // TODO work around until PLF-2697 is fixed
+          node.getSession().save();
+          node = (Node)node.getSession().getItem(node.getPath());
+          //
+          
           if (node.canAddMixin("exo:privilegeable")){
             node.addMixin("exo:privilegeable");
           }
