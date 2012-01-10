@@ -228,7 +228,7 @@ td {
     background: #ffffff;
 }
 
-.UITableColumnContainer .UIPopupWindow .PopupContent {
+.UICLVConfig {
   position: relative;
 }
 
