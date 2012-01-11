@@ -75,6 +75,9 @@
     <msg>
       <child-not-found>No Page Found.</child-not-found>
     </msg>
+    <title>
+      <select>Select</select>
+    </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
@@ -426,5 +429,9 @@
       <access-denied-exception>Access denied. Maybe, you do not have the read permission; Or the node was removed or changed.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
-  
+  <UIPortalApplication>
+    <title>
+      <abort>Abort</abort>
+    </title>
+  </UIPortalApplication>    
 </bundle>

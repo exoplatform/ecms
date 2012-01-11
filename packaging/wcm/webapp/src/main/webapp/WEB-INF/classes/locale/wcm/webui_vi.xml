@@ -65,6 +65,9 @@
     <msg>
       <child-not-found>Không có trang nào được tìm thấy</child-not-found>
     </msg>
+    <title>
+      <select>Select</select>
+    </title>    
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
@@ -418,4 +421,9 @@
     </msg>
   </UIDocumentInfo>
   
+  <UIPortalApplication>
+    <title>
+      <abort>Abort</abort>
+    </title>
+  </UIPortalApplication>
 </bundle>

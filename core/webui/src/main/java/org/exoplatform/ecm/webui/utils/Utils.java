@@ -705,6 +705,8 @@ public class Utils {
     String workspace = orgNode.getSession().getWorkspace().getName();
     String uuid = orgNode.getUUID();
     String strSuggestion="";
+    String acceptButton = "";
+    String cancelButton = "";
     portletRealID = portletRealID.replace('-', '_');
     String showBlockId = "Current" + idGenerator + "_" + portletRealID;
     String editBlockEditorID = "Edit" + idGenerator + "_" + portletRealID;
@@ -714,6 +716,8 @@ public class Utils {
     String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
     try {
       strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
+      acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
+      cancelButton = resourceBundle.getString("UIPresentation.title.CancelButton");
     }catch (Exception E){}
     actionsb.append(" return InlineEditor.presentationRequestChange");
 
@@ -752,15 +756,25 @@ public class Utils {
        append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
 
     if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").
-         append(strAction).append("\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
+        .append(strAction)
+        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
       sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").
          append("onClick=\"InlineEditor.presentationSwitchBlock('");
-      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
+      sb.append(editBlockEditorID)
+        .append("', '")
+        .append(showBlockId)
+        .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
     } else {
-      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
-      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
-      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ")
+        .append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      sb.append(editBlockEditorID)
+        .append("', '")
+        .append(showBlockId)
+        .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"")
+        .append(strAction)
+        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
     }
     sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 

@@ -75,6 +75,9 @@
     <msg>
       <child-not-found>Aucune page trouvée</child-not-found>
     </msg>
+    <title>
+      <select>Sélection</select>
+    </title>    
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
@@ -426,4 +429,9 @@
     </msg>
   </UIDocumentInfo>
   
+  <UIPortalApplication>
+    <title>
+      <abort>Abandonner</abort>
+    </title>
+  </UIPortalApplication>  
 </bundle>

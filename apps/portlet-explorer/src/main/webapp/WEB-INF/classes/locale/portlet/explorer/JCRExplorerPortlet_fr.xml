@@ -1954,6 +1954,7 @@
       <exeButton>Atteindre l'emplacement</exeButton>
       <backButton>Retour au noeud précédent</backButton>
       <showHistory>Afficher l'historique des adresses</showHistory>
+      <changeNode>Changer le noeud</changeNode>
     </title>
   </UIAddressBar>
   <!--

@@ -55,7 +55,7 @@
 				          $nodeName</div>
 				        </td>
 				        <td>
-		              <a href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>">
+		              <a href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
 		                <div class="Select16x16Icon" style="margin-left:15px;"></div>
 		              </a>
 				        </td>

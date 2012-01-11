@@ -185,6 +185,6 @@
           <span class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></span>
           <span class="LoadingProgressBar"></span>
           
-          <a href="javascript:ajaxAbort();" class="CloseLoadIcon">&nbsp;</a>
+          <a href="javascript:ajaxAbort();" class="CloseLoadIcon" title="<%=_ctx.appRes("UIPortalApplication.title.abort")%>">&nbsp;</a>
           
 	  </div>

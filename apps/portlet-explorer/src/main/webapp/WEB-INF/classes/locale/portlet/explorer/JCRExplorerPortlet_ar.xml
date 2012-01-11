@@ -1758,6 +1758,7 @@
       <exeButton>أدى</exeButton>
       <backButton>عودة إلى العقدة السابقة</backButton>
       <showHistory>النظر في سجل العناوين</showHistory>
+      <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
   <!--

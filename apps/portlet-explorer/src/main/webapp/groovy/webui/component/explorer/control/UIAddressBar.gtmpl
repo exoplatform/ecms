@@ -90,7 +90,7 @@
   									<div class="DropDownButton Style1DownArrow16x16Icon" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
   								</div>
   								<div class="InputContainer"  id="AddressBarControl">
-  									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation"></a>
+  									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
   									<% uicomponent.renderChild(0); %>
   								</div>
   								<div style="clear: both;"><span></span></div>

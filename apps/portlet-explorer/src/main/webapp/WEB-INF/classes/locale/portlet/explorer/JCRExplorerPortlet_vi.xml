@@ -1949,6 +1949,7 @@
       <exeButton>Go</exeButton>
       <backButton>Quay trả lại node trước</backButton>
       <showHistory>Hiển thị nhật kí địa chỉ.</showHistory>
+      <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
   <!--

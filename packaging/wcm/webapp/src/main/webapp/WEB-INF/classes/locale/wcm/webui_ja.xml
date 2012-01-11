@@ -65,6 +65,9 @@
     <msg>
       <child-not-found>ページがありません</child-not-found>
     </msg>
+    <title>
+      <select>Select</select>
+    </title>    
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
@@ -417,4 +420,9 @@
     </msg>
   </UIDocumentInfo>
   
+  <UIPortalApplication>
+    <title>
+      <abort>Abort</abort>
+    </title>
+  </UIPortalApplication>  
 </bundle>

@@ -1968,6 +1968,7 @@
 			<exeButton>Ga</exeButton>
 			<backButton>Terug naar vorige node</backButton>
 			<showHistory>Toon geschiedenis adres</showHistory>
+			<changeNode>Change Node</changeNode>
 		</title>
 	</UIAddressBar>
 	<!--

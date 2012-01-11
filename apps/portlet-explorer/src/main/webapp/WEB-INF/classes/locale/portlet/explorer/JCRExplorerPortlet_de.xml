@@ -1765,6 +1765,7 @@
       <exeButton>Los</exeButton>
       <backButton><![CDATA[Zur&uuml;ck zu vorherigen Knoten]]></backButton>
       <showHistory>Geschichtsadresse anzeigen</showHistory>
+      <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
   <!--

@@ -1926,6 +1926,7 @@
       <exeButton>Go</exeButton>
       <backButton>前のノードの戻る</backButton>
       <showHistory>履歴アドレスの表示</showHistory>
+      <changeNode>Change Node</changeNode>
     </title>
   </UIAddressBar>
   <!--
