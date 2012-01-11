@@ -2,7 +2,7 @@ The *Search* portlet allows users to do a search with any string. In eXo Content
 
 The users can find this porlet in the front page. This is an example of the *Search* portlet used in eXo Content:
 
-!images/search-portlet.png|align="center"!
+!images/search-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
 * *Packaging*: This portlet is packaged in the _searches.war_ file.
 

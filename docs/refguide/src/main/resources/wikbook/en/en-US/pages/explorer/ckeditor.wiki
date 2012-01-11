@@ -15,4 +15,4 @@ Basically, if you want to add a rich text area to your dialogs, you can use the 
 </script>
 {code}
 
-!images/custom_ck.png!
+!images/custom_ck.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!

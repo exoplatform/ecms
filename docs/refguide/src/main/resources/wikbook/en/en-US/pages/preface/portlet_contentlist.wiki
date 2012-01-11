@@ -2,7 +2,7 @@ The *Content List* portlet shows a list of contents which already exist in the s
 
 This is an example of the *Content List* portlet used in eXo Content:
 
-!images/content-list-portlet.png|align="center"!
+!images/content-list-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
 * *Packaging*: This porlet is packaged in the _presentation.war_ file.
 
