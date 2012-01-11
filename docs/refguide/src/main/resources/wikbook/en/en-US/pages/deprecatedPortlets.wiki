@@ -1,14 +1,14 @@
 In eXo Content, there are some deprecated portlets, including *Browse Content* (BC),
- *Parameterized Content Viewer* (PCV), *Parameterized Content List Viewer* (PCLV), *Category Navigation* (CN), and *Newsletter Viewer*.
+ *Parameterized Content Viewer* (PCV), *Parameterized Content List Viewer* (PCLV), *Category Navigation* (CN), *Newsletter Viewer*, *Newsletter Manager*, *Form Builder*.
 
 In which:
 
-- The *BC* and *Newsletter Viewer* portlets are not used anymore.
+- The *BC*, *Newsletter Viewer*, *Newsletter Manager* and *Form Builder* portlets are not used anymore.
 
-- The *PCV* portlet is still used, but its java class named _UIPCVPortlet_ is replaced with _UISingleContentViewerPortlet_ of the *Single Content Viewer* (SCV) portlet.
+- The *PCV* portlet is still used, but its java class named _UIPCVPortlet_ is replaced by _UISingleContentViewerPortlet_ of the *Single Content Viewer* (SCV) portlet.
 
-- The *PCLV* portlet is still used, but its java class named _UIPCLVPortlet_ is replaced with _UICLVPortlet_ of the *Content List Viewer* (CLV) porlet.
+- The *PCLV* portlet is still used, but its java class named _UIPCLVPortlet_ is replaced by _UICLVPortlet_ of the *Content List Viewer* (CLV) porlet.
 
-- The *CN* portlet is still used, but its java class named _UICategoryNavigationPortlet_ is replaced with _UICLVPortlet_ of the *CLV* porlet.
+- The *CN* portlet is still used, but its java class named _UICategoryNavigationPortlet_ is replaced by _UICLVPortlet_ of the *CLV* porlet.
 
 
