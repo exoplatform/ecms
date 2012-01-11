@@ -4476,14 +4476,32 @@ After being created successfully, a file document with the <emphasis>text/html</
       <emphasis role="bold">Permission Management</emphasis>
       form, you can perform the following actions:
     </para>
+      <itemizedlist>
+          <listitem>
+              <para>
+                  <link linkend="proc-User_Guide-View_Permissions-Add_Permissions">Add permissions</link>
+              </para>
+          </listitem>
+          <listitem>
+              <para>
+                  <link linkend="proc-User_Guide-View_Permissions-Edit_Permissions">Edit permissions</link>
+              </para>
+          </listitem>
+          <listitem>
+              <para>
+                  <link linkend="proc-User_Guide-View_Permissions-Delete_Permissions">Delete permissions</link>
+              </para>
+          </listitem>
+      </itemizedlist>
     <citetitle>
 	<para xml:id="proc-User_Guide-View_Permissions-Add_Permissions"><emphasis role="bold">Add permissions</emphasis></para>
     </citetitle>
     <procedure>
       <step>
-        <para xml:id="step-User_Guide-Add_Permissions-To_add_permission_for_specific_users"><emphasis role="bold">Add permission for specific users</emphasis></para>
-        <para> <emphasis role="bold">i.</emphasis>
-          Click
+          <para>Select a user or a group to whom you want to assign permissions.</para>
+        <itemizedlist>
+            <listitem>
+               <para xml:id="step-User_Guide-Add_Permissions-To_add_permission_for_specific_users"> Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="3mm" scalefit="1" fileref="images/usericon.png" format="PNG"/>
@@ -4494,7 +4512,9 @@ After being created successfully, a file document with the <emphasis>text/html</
           </inlinemediaobject>
           next to the
           <emphasis role="bold">User Or Group</emphasis>
-          field.
+          field to add permission for a specific user.</para>
+                <para>
+          The <emphasis role="bold">Select User Permission</emphasis> form appears.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4504,34 +4524,17 @@ After being created successfully, a file document with the <emphasis>text/html</
             <imagedata width="120mm" scalefit="1" align="center" fileref="images/Select_User_Permission.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-        <para> <emphasis role="bold">ii.</emphasis>
-          Click
-          <inlinemediaobject>
-            <imageobject>
-              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>green tick</phrase>
-            </textobject>
-          </inlinemediaobject>
-          next to the users to whom you want to grant permissions.
-        </para>
-      </step>
-      <step>
-        <para xml:id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group"><emphasis role="bold">Select users from a specific group</emphasis></para>
+          <para xml:id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group"><emphasis role="bold">i.</emphasis> Select a user from a specific group</para>
         <itemizedlist>
             <listitem>
           <para>
           Enter a group name in the
           <emphasis role="bold">Group</emphasis>
           field at the top of the form (for example, <emphasis role="bold">/platform/users</emphasis>). All users in the
-          nominated group will be displayed.
+          nominated group will be displayed. Or;
         </para>
         </listitem>
         </itemizedlist>
-        <para>
-          Or;
-        </para>
           <itemizedlist>
               <listitem>
         <para>
@@ -4546,11 +4549,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           </inlinemediaobject>
           beside the
           <emphasis role="bold">Group</emphasis>
-          field to open a form that lists groups and their sub-groups. Select a sub-group to add all users to that
-          sub-group.
-        </para>
-              </listitem>
-        </itemizedlist>
+          field to open a form that lists groups and their sub-groups. Select a sub-group and all users of the sub-group will be displayed.</para>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/groupssubgroups.png" format="PNG"/>
@@ -4559,13 +4558,17 @@ After being created successfully, a file document with the <emphasis>text/html</
             <imagedata width="120mm" scalefit="1" align="center" fileref="images/groupssubgroups.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-      </step>
-      <step>
-        <para xml:id="step-User_Guide-Add_Permissions-To_search_for_a_user"><emphasis role="bold">Search for a user</emphasis></para>
-        <para> <emphasis role="bold">i.</emphasis>
-          Select an information parameter (Username, First Name, Last Name, Email) from the drop-down menu in the other
-          field at the top of the page and enter information into the textbox.</para>
-        <para><emphasis role="bold">ii.</emphasis> Click
+                      </listitem>
+        </itemizedlist>
+                 <para xml:id="step-User_Guide-Add_Permissions-To_search_for_a_user"> <emphasis role="bold">ii.</emphasis> Or search for a user in any groups
+                 by Username, First Name, Last Name, or Email.
+                 </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Enter the information of the user ino the textbox.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
@@ -4574,13 +4577,24 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject>
-          to search for users matching with your selected information.
+          to search for users matching with your selected information.</para>
+                    </listitem>
+                </itemizedlist>
+
+        <para> <emphasis role="bold">iii. </emphasis>Click
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>green tick</phrase>
+            </textobject>
+          </inlinemediaobject>
+          next to the user to whom you want to grant permissions.
         </para>
-      </step>
-      <step>
-        <para xml:id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships"><emphasis role="bold">Add permissions based on memberships</emphasis></para>
-        <para> <emphasis role="bold">i.</emphasis>
-          Click
+        </listitem>
+            <listitem>
+                <para xml:id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships">Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/userpermissionbutton.png" format="PNG"/>
@@ -4591,24 +4605,19 @@ After being created successfully, a file document with the <emphasis>text/html</
           </inlinemediaobject>
           next to the
           <emphasis role="bold">User Or Group</emphasis>
-          field.
+          field to add permissions based on memberships.</para>
+          <para>
+              Then, select a group in the left pane, and
+          membership types in the right pane in the <emphasis role="bold">Select Membership</emphasis>
+          form.
         </para>
-        <para>
-          The
-          <emphasis role="bold">Select Membership</emphasis>
-          form will appear that allows you to select users by membership.</para>
-          <para><emphasis role="bold">ii.</emphasis>
-              Select a group in the left pane, and
-          membership types in the right pane.
-        </para>
-      </step>
-      <step>
-        <para xml:id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access"><emphasis role="bold">Add all users/groups with read access</emphasis></para>
-        <para>
-          Click
+            </listitem>
+            <listitem>
+               <para xml:id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
+             Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="4mm" scalefit="1" fileref="images/grouppermission.png" format="PNG"/>
+              <imagedata width="4mm" scalefit="1" fileref="images/alluserpermission.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>&quot;Select everyone&quot;</phrase>
@@ -4616,8 +4625,9 @@ After being created successfully, a file document with the <emphasis>text/html</
           </inlinemediaobject>
           next to the
           <emphasis role="bold">User Or Group</emphasis>
-          field.
-        </para>
+          field to assign the "read" permission to all users/groups. </para>
+            </listitem>
+          </itemizedlist>
       </step>
       <step>
         <para>
