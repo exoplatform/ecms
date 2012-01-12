@@ -1190,7 +1190,8 @@
 		}
 		
 		var treeExplorerFull = DOM.getChildrenByTagName(treeExplorer, "div")[0];
-		if (treeExplorerHeight > treeExplorerFull.offsetHeight){
+		if (treeExplorerFull.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfTreeExplorer 
+		    && treeExplorerHeight > treeExplorerFull.offsetHeight){
 		  treeExplorerHeight = treeExplorerFull.offsetHeight
 		} 		
 		
