@@ -596,32 +596,35 @@ body {
 	color: black;
 }
 /* ################# Select View Type ###################*/
+.ViewType a {  
+    margin: 0 6px 0 0;
+}
 .list-view{
-	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailView.gif") no-repeat scroll 0 0 transparent;
+	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-view.png") no-repeat scroll center center transparent;
   display: block;
-  height: 21px;
-  width: 23px;
+  height: 25px;
+  width: 28px;
   float: right;
 }
 .list-view-selected{
-	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.gif") no-repeat scroll 0 0 transparent;
+	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-view-selected.png") no-repeat scroll center center transparent;
   display: block;
-	height: 21px;
-  width: 23px;
+  height: 25px;
+  width: 28px;
   float: right;
 }
 .thumbnail-view{
-  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailView.gif") no-repeat scroll 0 0 transparent;
+  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailView.gif") no-repeat scroll center center transparent;
   display: block;
-	height: 21px;
-  width: 23px;
+	height: 25px;
+  width: 28px;
   float: right;
 }
 .thumbnail-view-selected{
-  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailViewSelected.gif") no-repeat scroll 0 0 transparent;
+  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailViewSelected.gif") no-repeat scroll center center transparent;
   display: block;
-	height: 21px;
-  width: 23px;
+	height: 25px;
+  width: 28px;
   float: right;
 }
 /*############################## -- Begin UIThumbnailsView -- ##############################*/

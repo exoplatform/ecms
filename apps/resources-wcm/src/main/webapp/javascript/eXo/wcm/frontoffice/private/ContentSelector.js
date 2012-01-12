@@ -519,10 +519,12 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		var listItem = '';
 		for(var i = 0; i < list.length; i++) {      
 			var url 			= list[i].getAttribute("url");
+			url = encodeURIComponent(url);
 			var path 			= list[i].getAttribute("path");
 			var nodeType	= list[i].getAttribute("nodeType");
       var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
 			var node = list[i].getAttribute("name");
+			node = encodeURIComponent(node);
 			var size = 	list[i].getAttribute("size");
 			if(size == 0) size = "";
 			else size += '&nbsp;kb';
@@ -533,14 +535,14 @@ EcmContentSelector.prototype.listFiles = function(list) {
 				var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 				var newRow = tblRWS.insertRow(i+1);
 				newRow.className = clazz;					
-				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = 					"overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
+				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
 				newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 				newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 			} else {				  
         var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');			
 				var strViewContent = "";
 				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
-				strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';	        
+				strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
 				container.innerHTML += strViewContent;
 			}
 		}			
@@ -835,8 +837,10 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
    temp = temp.replace("%27","%2527");
  		index = temp.indexOf("%27");
   }
-  url = eXo.ecm.ECS.hostName+temp;    
+  url = encodeURIComponent(eXo.ecm.ECS.hostName+temp);
+  url = decodeURIComponent(url);    
  	var name 	= encodeURIComponent(objNode.title);
+ 	name = decodeURIComponent(name);
 		var strHTML = '';	
 		var editor = eXo.ecm.ECS.currentEditor ;    
     if(eXo.ecm.ECS.components=="") {
