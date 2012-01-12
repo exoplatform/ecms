@@ -4524,21 +4524,35 @@ After being created successfully, a file document with the <emphasis>text/html</
             <imagedata width="120mm" scalefit="1" align="center" fileref="images/Select_User_Permission.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-          <para xml:id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group"><emphasis role="bold">i.</emphasis> Select a user from a specific group</para>
+          <para>Click
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>green tick</phrase>
+            </textobject>
+          </inlinemediaobject>
+          corresponding to your desired user. Also, you can use the <emphasis role="bold">Search</emphasis> function to look for your desired users quickly.</para>
+                <citetitle>
+                    <para><emphasis role="bold">Search for users</emphasis></para>
+                </citetitle>
+          <para xml:id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group"><emphasis role="bold">Search for a user in a specific group</emphasis></para>
         <itemizedlist>
             <listitem>
           <para>
           Enter a group name in the
           <emphasis role="bold">Group</emphasis>
-          field at the top of the form (for example, <emphasis role="bold">/platform/users</emphasis>). All users in the
-          nominated group will be displayed. Or;
+          field at the top of the form (for example, <emphasis role="bold">/platform/users</emphasis>). Then press <emphasis role="bold">Enter</emphasis>.
+              All users in the
+          nominated group will be displayed.
         </para>
         </listitem>
         </itemizedlist>
           <itemizedlist>
               <listitem>
         <para>
-         Click
+        Or, click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
@@ -4560,8 +4574,8 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
                       </listitem>
         </itemizedlist>
-                 <para xml:id="step-User_Guide-Add_Permissions-To_search_for_a_user"> <emphasis role="bold">ii.</emphasis> Or search for a user in any groups
-                 by Username, First Name, Last Name, or Email.
+                 <para xml:id="step-User_Guide-Add_Permissions-To_search_for_a_user"> <emphasis role="bold">Search for a user in any groups
+                 by Username, First Name, Last Name, or Email</emphasis>
                  </para>
                 <itemizedlist>
                     <listitem>
@@ -4580,18 +4594,6 @@ After being created successfully, a file document with the <emphasis>text/html</
           to search for users matching with your selected information.</para>
                     </listitem>
                 </itemizedlist>
-
-        <para> <emphasis role="bold">iii. </emphasis>Click
-          <inlinemediaobject>
-            <imageobject>
-              <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>green tick</phrase>
-            </textobject>
-          </inlinemediaobject>
-          next to the user to whom you want to grant permissions.
-        </para>
         </listitem>
             <listitem>
                 <para xml:id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships">Click
@@ -4649,7 +4651,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     <procedure>
       <step>
         <para>
-          Select the permission of a user or a group in the table of list permissions.
+          Select the permission of a user or a group in the permissions table.
         </para>
       </step>
       <step>
