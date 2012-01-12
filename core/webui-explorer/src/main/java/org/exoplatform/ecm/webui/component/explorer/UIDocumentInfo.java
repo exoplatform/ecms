@@ -154,7 +154,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIDocumentInfo");
 
   private String typeSort_ = Preference.SORT_BY_NODETYPE;
-  private String sortOrder_ = Preference.BLUE_DOWN_ARROW;
+  private String sortOrder_ = Preference.BLUE_UP_ARROW;
   private NodeLocation currentNode_ ;
 
   private UIPageIterator pageIterator_ ;
@@ -165,9 +165,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private List<NodeLocation> earlierThisMonthNodes;
   private List<NodeLocation> earlierThisYearNodes;
 
-  private String timeLineSortByFavourite = Preference.BLUE_DOWN_ARROW;
+  private String timeLineSortByFavourite = "";
   private String timeLineSortByName = "";
-  private String timeLineSortByDate = "";
+  private String timeLineSortByDate = Preference.BLUE_UP_ARROW;
 
   private FavoriteService favoriteService;
   private DocumentTypeService documentTypeService;
@@ -1147,7 +1147,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
           }
         }
         //uiStar.changeFavourite();
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo.getParent());
+        uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
         LOG.error("Access denied! No permission for modifying property " +
         Utils.EXO_FAVOURITER + " of node: " + node.getPath());
