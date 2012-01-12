@@ -175,6 +175,7 @@
           <include>**/*.gtmpl</include>
           <include>**/*.groovy</include>
           <include>**/*.jpg</include>
+          <include>**/*.conf</include>
         </includes>
       </testResource>
     </testResources>

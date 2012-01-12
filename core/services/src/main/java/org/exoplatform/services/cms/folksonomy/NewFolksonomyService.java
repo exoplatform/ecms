@@ -613,8 +613,33 @@ public interface NewFolksonomyService {
    * @param scope Scope of tag
    * @param memberships Memberships
    * @return true If it is possible
+   * 
+   * @see NewFolksonomyService#canEditTag(Node, int, List)
+   * @see NewFolksonomyService#canEditTag(String, String, int, List)
    */
+  @Deprecated
   public boolean canEditTag(int scope, List<String> memberships);
+  
+  /**
+   * Can edit tag or not?
+   * @param workspace
+   * @param tagName
+   * @param scope
+   * @param memberships
+   * @return
+   * @throws Exception
+   */
+  public boolean canEditTag(String workspace, String tagName, int scope, List<String> memberships) throws Exception;
+  
+  /**
+   * Can edit tag or not?
+   * @param tagNode
+   * @param scope
+   * @param memberships
+   * @return
+   * @throws Exception
+   */
+  public boolean canEditTag(Node tagNode, int scope, List<String> memberships) throws Exception;
 
   /**
    * Get all tag names which start within given scope

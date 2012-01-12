@@ -111,6 +111,12 @@
 	              </value>
 	              <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+	                  <field  name="eventTypes"><string>addNode</string></field>	                  
+	                  <field  name="actionClassName"><string>org.exoplatform.services.jcr.ext.owner.AddOwneableAction</string></field>
+	                </object>
+	              </value>
+	              <value>
+	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>removeNode</string></field>
 	                  <field  name="nodeTypes"><string>exo:auditable</string></field>
 	                  <field  name="isDeep"><boolean>false</boolean></field>

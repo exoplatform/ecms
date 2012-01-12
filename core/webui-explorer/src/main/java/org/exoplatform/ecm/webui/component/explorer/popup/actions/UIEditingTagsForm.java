@@ -25,14 +25,17 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -110,11 +113,24 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
   static public class EditTagActionListener extends EventListener<UIEditingTagsForm> {
     public void execute(Event<UIEditingTagsForm> event) throws Exception {
       UIEditingTagsForm uiEditingTagsForm = event.getSource() ;
+      UIJCRExplorer uiExplorer = uiEditingTagsForm.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      
+      String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
+      int scope = uiExplorer.getTagScope();
+      List<String> memberships = Utils.getMemberships();
+      NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
+      if (!newFolksonomyService.canEditTag(workspace, selectedName, scope, memberships)) {
+        UIApplication uiApp = uiEditingTagsForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        return;
+      }
+      
       Node selectedTag = uiEditingTagsForm.getSelectedTag(selectedName) ;
       uiEditingTagsForm.initTaggingFormPopup(selectedTag) ;
 
-      UIJCRExplorer uiExplorer = uiEditingTagsForm.getAncestorOfType(UIJCRExplorer.class);
       Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
@@ -129,6 +145,19 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       UIEditingTagsForm uiEdit = event.getSource();
       UIJCRExplorer uiExplorer = uiEdit.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
+      
+      String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
+      int scope = uiExplorer.getTagScope();
+      List<String> memberships = Utils.getMemberships();
+      NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
+      if (!newFolksonomyService.canEditTag(workspace, selectedName, scope, memberships)) {
+        UIApplication uiApp = uiEdit.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        return;
+      }      
+      
       removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
       uiExplorer.setTagPath(uiExplorer.getCurrentPath());

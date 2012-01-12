@@ -49,6 +49,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -233,8 +235,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   public void addPublicTag(String treePath,
                            String[] tagsName,
                            Node documentNode,
-                           String workspace) throws Exception {
-    Node publicFolksonomyTreeNode = getNode(workspace, treePath);
+                           String workspace) throws Exception {    
+    Node publicFolksonomyTreeNode = getNode(workspace, treePath, WCMCoreUtils.getUserSessionProvider());
     Node targetNode = getTargetNode(documentNode);
     for (String tag : tagsName) {
       try {
@@ -903,7 +905,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   /**
    * {@inheritDoc}
+   * 
+   * @see NewFolksonomyServiceImpl#canEditTag(Node, int, List)
+   * @see NewFolksonomyServiceImpl#canEditTag(String, String, int, List)
    */
+  @Deprecated 
   public boolean canEditTag(int scope, List<String> memberships) {
     if (scope == PUBLIC) {
       if (tagPermissionList != null)
@@ -918,6 +924,58 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       return false;
     }
     return true;
+  }
+  
+  public boolean canEditTag(String workspace, String tagName, int scope, List<String> memberships) throws Exception {
+    if (scope == PUBLIC) {
+      String tagPath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH) + '/' + tagName;
+      Node tagNode = getNode(workspace, tagPath);      
+      return canEditPublicTag(tagNode, scope, memberships);
+    }
+    return true;
+  }
+  
+  public boolean canEditTag(Node tagNode, int scope, List<String> memberships) throws Exception {
+    if (scope == PUBLIC) {
+      return canEditPublicTag(tagNode, scope, memberships);
+    }
+    return true;
+  }
+  
+  /**
+   * used to check a public tag could be edited or not
+   * @param tagNode
+   * @param scope
+   * @param memberships
+   * @return
+   * @throws Exception
+   */
+  private boolean canEditPublicTag(Node tagNode, int scope, List<String> memberships) throws Exception {
+    //check if tagNode is not a public tag
+    if (!tagNode.getPath().startsWith(nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH))) {
+      return false;
+    }
+    
+    //tag owner can edit tag 
+    if (tagNode.hasProperty("exo:owner")) {
+      String owner = tagNode.getProperty("exo:owner").getString();
+      String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+      if (owner != null && currentUser != null && owner.equals(currentUser)) {
+        return true;
+      }
+    }
+
+    //check tag permission
+    if (tagPermissionList != null)
+      for (String membership : memberships) {
+        if (tagPermissionList.contains(membership))
+          return true;
+        if (membership.contains(":")) {
+          if (tagPermissionList.contains("*" + membership.substring(membership.indexOf(":"))))
+            return true;
+        }
+      }
+    return false;
   }
 
   /**

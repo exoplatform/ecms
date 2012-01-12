@@ -20,13 +20,18 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.StandaloneContainer;
+import org.exoplatform.services.ecm.dms.folksonomy.DumpThreadLocalSessionProviderService;
+import org.exoplatform.services.ecm.dms.folksonomy.DumpThreadLocalSessionProviderService.DumpSessionProvider;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.CredentialsImpl;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.test.BasicTestCase;
 
 /**
@@ -61,39 +66,63 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
   protected final String         COLLABORATION_WS = "collaboration";
 
   public void setUp() throws Exception {
+    applySystemSession();
+  }
+  
+  /**
+   * used to change to setup environment to use User Session
+   * @throws Exception
+   */
+  public void applyUserSession(String username, String password) throws Exception {
 
+    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/system-configuration.xml").toString();
+    StandaloneContainer.addConfigurationURL(containerConf);
+
+    container = PortalContainer.getInstance();
+    repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    repositoryService.setCurrentRepositoryName(REPO_NAME);
+    repository = repositoryService.getCurrentRepository();
+    
+    String loginConf = BaseDMSTestCase.class.getResource("/conf/standalone/login.conf").toString();
+    System.setProperty("java.security.auth.login.config", loginConf);
+    credentials = new CredentialsImpl(username, password.toCharArray());
+    
+    closeOldSession();
+    session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);    
+    
+    sessionProviderService_ = WCMCoreUtils.getService(DumpThreadLocalSessionProviderService.class);
+    ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(session);
+  }
+  
+  /**
+   * used to change to setup environment to use System Session
+   * @throws Exception
+   */
+  public void applySystemSession() throws Exception {
     System.setProperty("gatein.tenant.repository.name", REPO_NAME);
-
-//    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/system-configuration.xml").toString();
-
-//    StandaloneContainer.addConfigurationURL(containerConf);
-//
-//    String loginConf = Thread.currentThread().getContextClassLoader().getResource("conf/standalone/login.conf").toString();
-//    System.setProperty("java.security.auth.login.config", loginConf);
 
     container = PortalContainer.getInstance();
 
-//    if (System.getProperty("java.security.auth.login.config") == null)
-//       System.setProperty("java.security.auth.login.config", Thread.currentThread().getContextClassLoader()
-//          .getResource("conf/standalone/login.conf").toString());
-
-//    credentials = new CredentialsImpl("root", "gtn".toCharArray());
-
     repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-//    System.out.println("\n\nRepository====" +repositoryService.getRepository(REPO_NAME).getConfiguration().getName()+ "\n\n");
-//    if(repositoryService.getRepository(REPO_NAME) == null) {
-//      ((RepositoryServiceConfigurationImpl) container.getComponentInstanceOfType(RepositoryServiceConfigurationImpl.class)).start();
-//      ((RepositoryServiceImpl) container.getComponentInstanceOfType(RepositoryServiceImpl.class)).start();
-//    }
     sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     repositoryService.setCurrentRepositoryName(REPO_NAME);
     repository = repositoryService.getCurrentRepository();
+    
+    closeOldSession();
     session = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
-    //session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);
-    //sessionProviderService_.setSessionProvider(null, new SessionProvider(session.getUserState()));
-
-
-
+  }
+  
+  /**
+   * close old session if it exists, prepare for switching to another session
+   * @throws Exception
+   */
+  private void closeOldSession() throws Exception {
+    if (session != null && session.isLive()) {
+      session.logout();
+      
+      //remove user session
+      ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(null);
+    }
   }
 
   protected void checkMixins(String[] mixins, NodeImpl node) {

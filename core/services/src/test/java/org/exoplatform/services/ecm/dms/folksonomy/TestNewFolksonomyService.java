@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.ecm.dms.folksonomy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -52,13 +53,11 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 
   @Override
   public void setUp() throws Exception {
-    super.setUp();
-    newFolksonomyService_ = (NewFolksonomyService)
-        container.getComponentInstanceOfType(NewFolksonomyService.class);
-    linkManager
-    = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+    super.setUp();  
+    
+    newFolksonomyService_ = (NewFolksonomyService)container.getComponentInstanceOfType(NewFolksonomyService.class);
+    linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
 
-//    String userName = session.getUserID();
     String userName = session.getUserID();
     Node root = session.getRootNode();
     Node applicationData = root.hasNode("Application Data") ?
@@ -138,6 +137,137 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     assertEquals("testAddPrivateTag failed! ", 1L, sportTagNode.getProperty(EXO_TOTAL).getLong());
     assertEquals("testAddPrivateTag failed! ", 1L, weatherTagNode.getProperty(EXO_TOTAL).getLong());
   }
+  
+  /**   * 
+   * Test Method: canEditTag()
+   * Description: Can edit the PRIVATE tags or not?
+   * Input: Node 'test'
+   * Test action: add 2 PRIVATE tags 'sport' and 'weather' for node 'test'
+   * Expected Result:
+   *        return true
+   */
+  public void testCanEditTag_Case01() throws Exception {
+    String[] tags = { "sport", "weather" };    
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    
+    assertTrue("testCanEditTag_Case01 failed! ", folksonomyNode.hasNode("sport"));
+    assertTrue("testCanEditTag_Case01 failed! ", folksonomyNode.hasNode("weather"));
+    
+    List<String> memberships = new ArrayList<String>();
+    boolean canEditSport = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                            "sport", 
+                                                            NewFolksonomyService.PRIVATE, 
+                                                            memberships);
+    boolean canEditWeather = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                              "weather", 
+                                                              NewFolksonomyService.
+                                                              PRIVATE, memberships);
+    
+    assertTrue("testCanEditTag_Case01 failed!", canEditSport);
+    assertTrue("testCanEditTag_Case01 failed!", canEditWeather);
+  }
+  
+  /**    
+   * Test Method: canEditTag()
+   * Description: Can edit the PUBLIC tags (which user is owner) or not?
+   * Input: Node 'test'
+   * Test action: add 2 PUBLIC tags 'sport' and 'weather' for node 'test'
+   * Expected Result:
+   *        return true
+   */
+  public void testCanEditTag_Case02() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
+    String[] publicTags = { "sport", "weather" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, publicTags, test, COLLABORATION_WS); 
+
+    assertTrue("testCanEditTag_Case02 failed! ", publicFolksonomyNode.hasNode("sport"));
+    assertTrue("testCanEditTag_Case02 failed! ", publicFolksonomyNode.hasNode("weather"));
+    
+    List<String> memberships = new ArrayList<String>();
+    boolean canEditSport = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                            "sport", 
+                                                            NewFolksonomyService.PUBLIC, 
+                                                            memberships);
+    boolean canEditWeather = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                              "weather", 
+                                                              NewFolksonomyService.PUBLIC, 
+                                                              memberships);
+    
+    assertTrue("testCanEditTag_Case02 failed!", canEditSport);
+    assertTrue("testCanEditTag_Case02 failed!", canEditWeather);
+  }
+  
+  /**
+   * Test Method: canEditTag()
+   * Description: Can edit the PUBLIC tags (which user is NOT owner BUT is administrator) or not?
+   * Input: Node 'test'
+   * Test action: add 2 PUBLIC tags 'sport' and 'weather' for node 'test'
+   * Expected Result:
+   *        return true
+   */
+  public void testCanEditTag_Case03() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
+    String[] publicTags = { "sport", "weather" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, publicTags, test, COLLABORATION_WS); 
+
+    assertTrue("testCanEditTag_Case03 failed! ", publicFolksonomyNode.hasNode("sport"));
+    assertTrue("testCanEditTag_Case03 failed! ", publicFolksonomyNode.hasNode("weather"));
+    
+    applyUserSession("john", "exo");
+    List<String> memberships = new ArrayList<String>();
+    memberships.add("*:/platform/administrators");
+    boolean canEditSport = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                            "sport", 
+                                                            NewFolksonomyService.PUBLIC, 
+                                                            memberships);
+    boolean canEditWeather = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                              "weather", 
+                                                              NewFolksonomyService.PUBLIC, 
+                                                              memberships);
+    
+    assertTrue("testCanEditTag_Case03 failed!", canEditSport);
+    assertTrue("testCanEditTag_Case03 failed!", canEditWeather);
+  }
+  
+  /**
+   * Test Method: canEditTag()
+   * Description: Can edit the PUBLIC tags (which user is NOT owner and is NOT administrator) or not?
+   * Input: Node 'test'
+   * Test action: add 2 PUBLIC tags 'sport' and 'weather' for node 'test'
+   * Expected Result:
+   *        return false
+   */
+  public void testCanEditTag_Case04() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
+    String[] publicTags = { "sport", "weather" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, publicTags, test, COLLABORATION_WS); 
+
+    assertTrue("testCanEditTag_Case04 failed! ", publicFolksonomyNode.hasNode("sport"));
+    assertTrue("testCanEditTag_Case04 failed! ", publicFolksonomyNode.hasNode("weather"));
+    
+    applyUserSession("john", "exo");
+    List<String> memberships = new ArrayList<String>();
+    boolean canEditSport = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                            "sport", 
+                                                            NewFolksonomyService.PUBLIC, 
+                                                            memberships);
+    boolean canEditWeather = newFolksonomyService_.canEditTag(COLLABORATION_WS, 
+                                                              "weather", 
+                                                              NewFolksonomyService.PUBLIC, 
+                                                              memberships);
+    
+    assertFalse("testCanEditTag_Case04 failed!", canEditSport);
+    assertFalse("testCanEditTag_Case04 failed!", canEditWeather);
+  }
 
   /**
    * Test Method: addGroupsTag()
@@ -202,12 +332,16 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *        property 'exo:total' of 'weather' node must be 1   *
    */
   public void testAddPublicTag() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather" };
     String publicFolksonomyTreePath = "/Application Data/Tags";
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags,
                                        test,
-                                       COLLABORATION_WS);
+                                       COLLABORATION_WS); 
+    
     assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("sport"));
     assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("weather"));
 
@@ -237,6 +371,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *        property 'exo:total' of 'weather' node must be 1   *
    */
   public void testAddSiteTag() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather" };
     String site = "portal1";
     Node root = session.getRootNode();
@@ -400,6 +537,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *               sport, weather, boy, girl
    */
   public void testGetAllPublicTags() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
     String publicFolksonomyTreePath = "/Application Data/Tags";
@@ -434,6 +574,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *               sport, weather, boy, girl
    */
   public void testGetAllSiteTags() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
     String site = "portal1";
@@ -467,6 +610,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *               node 'football' must have a symlink child which points to 'test' node
    */
   public void testModifyTagName() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather" };
     String publicFolksonomyTreePath = "/Application Data/Tags";
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
@@ -494,6 +640,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    *               'nobita', 'weather'
    */
   public void testRemoveTag() throws Exception {
+    //In this testcase, we need to use User session, instead of using System Session like other testcases
+    applyUserSession("root", "exo");
+    
     String[] tags = { "sport", "weather", "nobita"};
     String publicFolksonomyTreePath = "/Application Data/Tags";
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
@@ -536,6 +685,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    * Clean data test
    */
   public void tearDown() throws Exception {
+    applySystemSession();
     String[] nodes = {"/Application Data/Tags",
                       "/Users/" + session.getUserID() + "/Private/Folksonomy",
                       "Groups/platform/users/ApplicationData/Tags",
