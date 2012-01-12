@@ -284,12 +284,10 @@ public class UIPresentation extends UIBaseNodePresentation {
     Node parent  = getOriginalNode();
     NodeIterator childrenIterator = parent.getNodes();;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    String strRepository = getRepository();
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType = org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent,
-                                                                                                        strRepository,
                                                                                                         templateService);
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }

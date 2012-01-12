@@ -33,11 +33,8 @@ import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.navigation.NavigationUtils;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -115,7 +112,6 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   private UISCVPreferences popPreferences;
   private UIPresentationContainer uiPresentation;
   PortletPreferences preferences;
-  private static final Log log = ExoLogger.getLogger(UISingleContentViewerPortlet.class);
 
   /**
    * Instantiates a new uI single content viewer portlet.
@@ -126,8 +122,6 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     preferences = portletRequestContext.getRequest().getPreferences();
-    //popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);
-    //uiPresentation = addChild(UIPresentationContainer.class, null, null);
   }
 
   /**
@@ -206,17 +200,6 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
       portletRequestContext.setApplicationMode(PortletMode.VIEW);
   }
-  public Node getNodeByPreference() {
-    try {
-      //String repository = preferences.getValue(REPOSITORY, null);
-      String workspace = preferences.getValue(WORKSPACE, null);
-      String nodeIdentifier = preferences.getValue(IDENTIFIER, null) ;
-      WCMService wcmService = getApplicationComponent(WCMService.class);
-      return wcmService.getReferencedContent(WCMCoreUtils.getUserSessionProvider(), workspace, nodeIdentifier);
-    } catch (Exception e) {
-      return null;
-    }
-  }
   
   @Override
   public void serveResource(WebuiRequestContext context) throws Exception {
@@ -239,7 +222,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Collection<UserNode> children = null;
 
-    UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
 
     // make filter
     UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();

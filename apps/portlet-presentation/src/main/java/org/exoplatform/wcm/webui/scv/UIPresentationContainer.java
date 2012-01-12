@@ -197,7 +197,6 @@ public class UIPresentationContainer extends UIContainer{
               String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
               presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
               presentation.setNode(viewNode);
-//              return viewNode.getSession().getNodeByUUID(nodeUUID);
             } catch (Exception ex) {
               return viewNode;
             }
@@ -279,8 +278,6 @@ public class UIPresentationContainer extends UIContainer{
         String nodeUUID = nodeView.getProperty("jcr:frozenUuid").getString();
         presentation.setOriginalNode(nodeView.getSession().getNodeByUUID(nodeUUID));
         presentation.setNode(nodeView);
-      } else if (nodeView == null) {
-        return null;
       } else {
         presentation.setOriginalNode(nodeView);
         presentation.setNode(nodeView);

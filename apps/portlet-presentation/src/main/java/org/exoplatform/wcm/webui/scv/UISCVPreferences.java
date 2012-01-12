@@ -28,8 +28,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
@@ -348,8 +348,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
           uiScvPref.getSelectedNodeRepository() == null || uiScvPref.getSelectedNodeRepository().length() == 0)
         return "";
       ManageDriveService managerDriveService = uiScvPref.getApplicationComponent(ManageDriveService.class);
-      DriveData driveData = managerDriveService.getDriveByName(uiScvPref.getSelectedNodeDrive(),
-                                                               uiScvPref.getSelectedNodeRepository());
+      DriveData driveData = managerDriveService.getDriveByName(uiScvPref.getSelectedNodeDrive());
       if (!path.startsWith(driveData.getHomePath()))
         return "";
       if ("/".equals(driveData.getHomePath()))
