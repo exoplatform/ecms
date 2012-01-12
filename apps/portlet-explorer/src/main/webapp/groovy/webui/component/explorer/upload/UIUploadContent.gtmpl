@@ -26,8 +26,7 @@
 	    <tr>
 	      <%
 	        int index = 0;
-	        for(value in arrValues) {
-	          value = StringEscapeUtils.escapeHtml(value);
+	        for(value in arrValues) {	          
 	          String subValue = value;
 	          index++; 
 	          if(value.length() > 20) subValue = value.substring(0,15) + "..." ;
@@ -42,7 +41,7 @@
 		              <div class="Icon16x16 Edit16x16Icon" style="margin-left: 30px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>"><span></span></div>
 	                </a>
 		            <%} else {%>
-		              <span title="$value"><%=subValue%></span>
+		              <span title="$value"><%=StringEscapeUtils.escapeHtml(subValue)%></span>
 		            <% } %>
 	            </td>
 	      <%
