@@ -63,6 +63,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.scripts.CmsScript;
@@ -167,8 +168,6 @@ public class UIDialogForm extends UIForm {
 
   /** Selected Tab id */
   private String selectedTab;
-
-  final static private String TAXONOMIES_ALIAS = "exoTaxonomiesPath" ;
 
   private String SEPARATOR_VALUE = "::";
 
@@ -1018,7 +1017,7 @@ public class UIDialogForm extends UIForm {
       session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, getRepository());
     else
       session = WCMCoreUtils.createAnonimProvider().getSession(workspace, getRepository());
-    return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(TAXONOMIES_ALIAS))).getPath();
+    return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH))).getPath();
   }
 
   @SuppressWarnings("unchecked")

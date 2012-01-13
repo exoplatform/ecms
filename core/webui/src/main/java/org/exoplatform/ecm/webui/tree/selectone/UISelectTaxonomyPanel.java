@@ -67,11 +67,6 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
     return nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
   }
 
-  public String getPathSystemTaxonomy() throws Exception {
-    NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
-    return nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH);
-  }
-
   public String getDisplayName(Node node) throws RepositoryException {
     return getAncestorOfType(UIOneTaxonomySelector.class).getTaxonomyLabel(node);
   }

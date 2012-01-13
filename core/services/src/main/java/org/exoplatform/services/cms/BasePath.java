@@ -29,8 +29,6 @@ public interface BasePath {
   public static final String CMS_VIEWTEMPLATES_PATH = "viewTemplatesPath" ;
   public static final String CMS_VIEWS_PATH = "userViewsPath" ;
   public static final String EXO_ECM_SYSTEM_PATH = "exoECMSystemPath" ;
-  public static final String EXO_TAXONOMIES_PATH = "exoTaxonomiesPath" ;
-  public static final String CALENDAR_CATEGORIES_PATH = "calendarPath" ;
   public static final String TAXONOMIES_TREE_DEFINITION_PATH = "exoTaxoTreesDefinitionPath";
   public static final String TAXONOMIES_TREE_STORAGE_PATH = "exoTaxoTreesStoragePath";
   public static final String EXO_FOLKSONOMY_PATH = "exoFolksonomiesPath";

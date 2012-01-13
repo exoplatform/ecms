@@ -110,12 +110,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   final static public String FIELD_TAXONOMY = "categories";
   final static public String POPUP_TAXONOMY = "PopupComponent";
-  final static public String PATH_TAXONOMY = "exoTaxonomiesPath";
-
   private List<String> listTaxonomyName = new ArrayList<String>();
-  
   private boolean canChangeType = true;
-
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
 
   public boolean isCanChangeType() {

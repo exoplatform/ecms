@@ -31,7 +31,6 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
-import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -140,15 +139,8 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
   public void doSelect(String selectField, Object value) throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     UICategoryManager uiCategoryManager = getAncestorOfType(UICategoryManager.class);
-    String rootTaxonomyName;
-    if (uiCategoryManager == null) {
-      UISimpleCategoryManager uiSimpleCategoryManager = getAncestorOfType(UISimpleCategoryManager.class);
-      UIOneNodePathSelector uiNodePathSelector = uiSimpleCategoryManager.getChild(UIOneNodePathSelector.class);
-      rootTaxonomyName = uiNodePathSelector.getRootTaxonomyName();
-    } else {
-      UIOneTaxonomySelector uiOneTaxonomySelector = uiCategoryManager.getChild(UIOneTaxonomySelector.class);
-      rootTaxonomyName = uiOneTaxonomySelector.getRootTaxonomyName();
-    }
+    UIOneTaxonomySelector uiOneTaxonomySelector = uiCategoryManager.getChild(UIOneTaxonomySelector.class);
+    String rootTaxonomyName = uiOneTaxonomySelector.getRootTaxonomyName();
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     try {
       Node currentNode = uiJCRExplorer.getCurrentNode();

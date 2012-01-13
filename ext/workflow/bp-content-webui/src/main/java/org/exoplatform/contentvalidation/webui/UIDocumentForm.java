@@ -99,8 +99,6 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
 public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UISelectable {
   final static public String FIELD_TAXONOMY = "categories";
   final static public String POPUP_TAXONOMY = "PopupComponent";
-  final static public String PATH_TAXONOMY = "exoTaxonomiesPath";
-
   private List<String> listTaxonomyName = new ArrayList<String>();
   private String documentType_ ;
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
