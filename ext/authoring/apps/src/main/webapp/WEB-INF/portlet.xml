@@ -26,7 +26,7 @@
     <portlet-info>
       <title>WCM Authoring Dashboard</title>
       <short-title>Authoring Dashboard</short-title>
-      <keywords>Contents</keywords>
+      <keywords>Content</keywords>
     </portlet-info>
 
     <portlet-preferences>

@@ -50,8 +50,8 @@
       <seoPath>Content path</seoPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
+      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
 	    <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>      

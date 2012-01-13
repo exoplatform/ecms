@@ -58,7 +58,7 @@
   <searchOption>
     <label>
       <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Contents</documentCheckBox>
+      <documentCheckBox>in Content</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>

@@ -3002,7 +3002,7 @@
     	 <Video>Video</Video>
     	 <Music>Music</Music>
     	 <Documents>Documents</Documents>
-    	 <Contents>Contents</Contents>
+    	 <Contents>Content</Contents>
     </label>
   </DocumentType>
 
@@ -3028,7 +3028,7 @@
   	  <ShowMusic>Show all music files</ShowMusic>
   	  <ShowImages>Show all image files</ShowImages>
   	  <ShowDocuments>Show all document files</ShowDocuments>
-  	  <ShowContents>Show all contents type document</ShowContents>
+  	  <ShowContents>Show all content type document</ShowContents>
   	</title>
   </UIAllItemsByType>
 

@@ -2905,7 +2905,7 @@
     	 <Video>Video</Video>
     	 <Music>Music</Music>
     	 <Documents>Documents</Documents>
-    	 <Contents>Contents</Contents>
+    	 <Contents>Content</Contents>
     </label>
   </DocumentType>
 
@@ -2931,7 +2931,7 @@
   	  <ShowMusic>Show all music files</ShowMusic>
   	  <ShowImages>Show all image files</ShowImages>
   	  <ShowDocuments>Show all document files</ShowDocuments>
-  	  <ShowContents>Show all contents type document</ShowContents>
+  	  <ShowContents>Show all content type document</ShowContents>
   	</title>
   </UIAllItemsByType>
 
@@ -2974,7 +2974,7 @@
   <UIWorkingArea>
     <msg>
       <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
-      <confirm-delete-permanently>Are you sure want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>
+      <confirm-delete-permanently>Are you sure want to delete the node '{0}' and all its content permanently?</confirm-delete-permanently>
       <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>
     </msg>
   </UIWorkingArea>

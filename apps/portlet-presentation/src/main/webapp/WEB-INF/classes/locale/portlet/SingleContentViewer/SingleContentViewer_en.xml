@@ -65,8 +65,8 @@
       <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Show in Page</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Lock</LockStatus>
-      <CacheManagement>Contents Visibility</CacheManagement>
-      <UISCVCacheRadioBox>Share Contents</UISCVCacheRadioBox>
+      <CacheManagement>Content Visibility</CacheManagement>
+      <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
       <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the dynamic navigation (See the Advanced mode below).</ContentPathBlock>

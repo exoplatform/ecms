@@ -90,7 +90,7 @@ import org.w3c.dom.NodeList;
 public class DriverConnector extends BaseConnector implements ResourceContainer {
 
   /** The Constant FILE_TYPE_WEBCONTENT. */
-  public static final String FILE_TYPE_WEBCONTENT                        = "Web Contents";
+  public static final String FILE_TYPE_WEBCONTENT                        = "Web Content";
 
   /** The Constant FILE_TYPE_DMSDOC. */
   public static final String FILE_TYPE_DMSDOC                        = "DMS Documents";

@@ -15,7 +15,7 @@
   <UIPCLVConfig>
     <label>
       <Title>Parameterized Content List Viewer Configuration</Title>
-      <ContentSelectionBlock>Contents Selection</ContentSelectionBlock>
+      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
       <OrderBy>Order by</OrderBy>
       <option>
         <exo:title>Title</exo:title>

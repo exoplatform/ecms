@@ -35,14 +35,14 @@
       <description>this listener init the portlets are registered in PortletRegister</description>
       <init-params>
         <object-param>
-          <name>Contents</name>
-          <description>Contents</description>
+          <name>Content</name>
+          <description>Content</description>
           <object type="org.exoplatform.application.registry.ApplicationCategory">
             <field name="name">
-              <string>Contents</string>
+              <string>Content</string>
             </field>
             <field name="displayName">
-              <string>Contents</string>
+              <string>Content</string>
             </field>
             <field name="accessPermissions">
               <collection type="java.util.ArrayList" item-type="java.lang.String">
@@ -56,7 +56,7 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>SingleContentViewer</string>
@@ -82,7 +82,7 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>ContentListViewerPortlet</string>
@@ -108,13 +108,13 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>ContentListViewerByQueryPortlet</string>
                     </field>
                     <field name="displayName">
-                      <string>Contents By Query</string>
+                      <string>Content By Query</string>
                     </field>
                     <field name="type">
                       <string>portlet</string>
@@ -134,7 +134,7 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>ParameterizedContentViewerPortlet</string>
@@ -160,7 +160,7 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>CategoryNavigationPortlet</string>
@@ -186,13 +186,13 @@
                 <value>
                   <object type="org.exoplatform.application.registry.Application">
                     <field name="categoryName">
-                      <string>Contents</string>
+                      <string>Content</string>
                     </field>
                     <field name="applicationName">
                       <string>ParameterizedContentListViewerPortlet</string>
                     </field>
                     <field name="displayName">
-                      <string>Category Contents</string>
+                      <string>Category Content</string>
                     </field>
                     <field name="type">
                       <string>portlet</string>

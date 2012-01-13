@@ -23,7 +23,7 @@
 		<portlet-info>
 			<title>Content Detail</title>
 			<short-title>Content Detail</short-title>
-			<keywords>Contents</keywords>
+			<keywords>Content</keywords>
 		</portlet-info>
 		
 		<portlet-preferences>
@@ -174,7 +174,7 @@
 		<portlet-info>
 			<title>Content List</title>
 			<short-title>Content List</short-title>
-			<keywords>Contents</keywords>
+			<keywords>Content</keywords>
 		</portlet-info>
 		<portlet-preferences>
 			<preference>
@@ -307,7 +307,7 @@
 	 <portlet>
     <description xml:lang="EN">Content List Viewer By Query</description>
     <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
-    <display-name>Contents By Query</display-name>
+    <display-name>Content By Query</display-name>
     <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
     <init-param>
       <name>webui.configuration</name>
@@ -321,9 +321,9 @@
     <supported-locale>en</supported-locale>
     <resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
     <portlet-info>
-      <title>Contents By Query</title>
-      <short-title>Contents By Query</short-title>
-      <keywords>Contents</keywords>
+      <title>Content By Query</title>
+      <short-title>Content By Query</short-title>
+      <keywords>Content</keywords>
     </portlet-info>
     <portlet-preferences>
       <preference>
@@ -486,7 +486,7 @@
 		<portlet-info>
 			<title>Content by URL</title>
 			<short-title>Content by URL</short-title>
-			<keywords>Contents</keywords>
+			<keywords>Content</keywords>
 		</portlet-info>
 		
     <portlet-preferences>
@@ -593,7 +593,7 @@
 		<portlet-info>
 			<title>Category Navigation</title>
 			<short-title>Category Navigation</short-title>
-			<keywords>Contents</keywords>
+			<keywords>Content</keywords>
 		</portlet-info>
 		<portlet-preferences>
 			<preference>
@@ -725,9 +725,9 @@
 	</portlet>
 	
 	<portlet>
-		<description xml:lang="EN">Category Contents</description>
+		<description xml:lang="EN">Category Content</description>
 		<portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
-		<display-name xml:lang="EN">Category Contents</display-name>
+		<display-name xml:lang="EN">Category Content</display-name>
 		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
 		<init-param>
 			<name>webui.configuration</name>
@@ -741,9 +741,9 @@
 		<supported-locale>en</supported-locale>
 		<resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
 		<portlet-info>
-			<title>Category Contents</title>
-			<short-title>Category Contents</short-title>
-			<keywords>Contents</keywords>
+			<title>Category Content</title>
+			<short-title>Category Content</short-title>
+			<keywords>Content</keywords>
 		</portlet-info>
 		<portlet-preferences>
 			<preference>

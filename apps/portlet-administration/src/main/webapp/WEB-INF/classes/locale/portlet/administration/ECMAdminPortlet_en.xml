@@ -1325,7 +1325,7 @@
   <CBScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Script Contents</scriptContent>
+      <scriptContent>Script Content</scriptContent>
       <scriptName>Script Name</scriptName>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
@@ -1343,7 +1343,7 @@
   <ECMScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Script Contents</scriptContent>
+      <scriptContent>Script Content</scriptContent>
       <scriptName>Script Name</scriptName>
       <enableVersion>is Enabled Version</enableVersion>
     </label>

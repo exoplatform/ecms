@@ -59,14 +59,14 @@
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>ページに表示</UICLVConfigTargetPageFormInputSet>
       <content-not-found>コンテンツがありません！</content-not-found>
-      <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
+      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-    	<ModeSelectionHelp>コンテンツの表示には2つのモードがあります。"By folder"は選んだフォルダ/カテゴリ内の全てのコンテンツを取得します。 "By Contents"は表示したいコンテンツを手動で選択します。</ModeSelectionHelp>
+    	<ModeSelectionHelp>コンテンツの表示には2つのモードがあります。"By folder"は選んだフォルダ/カテゴリ内の全てのコンテンツを取得します。 "By Content"は表示したいコンテンツを手動で選択します。</ModeSelectionHelp>
     	<FolderPathHelp>表示したいコンテンツを選択してください。ダイナミックナビゲーション（詳細モード。下記参照）を有効化すると、このデフォルト選択が動的に変化します。</FolderPathHelp>
     	<HeaderOptionHelp>コンテンツリストの最上部にヘッダを表示。自動検知を有効化すると、現在の選択に基づき、ヘッダを見つけようとします。</HeaderOptionHelp>
     	<GeneralOptionHelp>リストに表示したい画像要素を選択。選択したテンプレートによっては一部の要素は使用できないということに注意してください。</GeneralOptionHelp>
@@ -89,7 +89,7 @@
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
       <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Contents</ManualViewerMode>
+      <ManualViewerMode>By Content</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
 

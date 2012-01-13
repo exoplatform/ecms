@@ -4,7 +4,7 @@
     <label>
       <title>Authoring Dashboard</title>
       <nocontent>No Content</nocontent>
-      <mydraft>My Draft Contents</mydraft>
+      <mydraft>My Draft Content</mydraft>
       <waitingapproval>Waiting For My Approval</waitingapproval>
       <approve>Approve</approve>
       <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>

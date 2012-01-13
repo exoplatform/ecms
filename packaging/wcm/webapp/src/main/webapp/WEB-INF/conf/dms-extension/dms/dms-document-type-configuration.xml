@@ -10,7 +10,7 @@
     <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
 		<init-params>
       <object-param>
-				<name>Contents</name>
+				<name>Content</name>
 				<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
 					<field name="contentsType"><string>true</string></field>
 					<field name="mimeTypes">

@@ -5,11 +5,11 @@
 ]>
 <section id="sect-User_Guide-Content_By_Query">
     <title>Manage contents list viewer by query</title>
-    <para>The <emphasis role="bold">Contents By Query</emphasis> portlet allows you to collect and display data throughout a workspace by using a query instead of selecting items by a folder or by contents.</para>
-    <para>To use this portlet, first you need to add the <emphasis role="bold">Contents By Query</emphasis> portlet to a specific page as follows:</para>
+    <para>The <emphasis role="bold">Content By Query</emphasis> portlet allows you to collect and display data throughout a workspace by using a query instead of selecting items by a folder or by contents.</para>
+    <para>To use this portlet, first you need to add the <emphasis role="bold">Content By Query</emphasis> portlet to a specific page as follows:</para>
     <procedure>
         <step>
-            <para>Drag and drop the <emphasis role="bold">Contents By Query</emphasis> portlet from the <emphasis role="bold">Page Editor --> Applications --> Contents</emphasis> to the main pane. You can do this step while <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link> or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link> or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.</para>
+            <para>Drag and drop the <emphasis role="bold">Content By Query</emphasis> portlet from the <emphasis role="bold">Page Editor --> Applications --> Content</emphasis> to the main pane. You can do this step while <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link> or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link> or <link linkend="proc-User_Guide-Manage_Portals-Edit_Layout">editing the layout of a portal</link>.</para>
             <mediaobject>
                 <imageobject role="html">
                     <imagedata align="center" fileref="images/content_by_query.png" format="PNG"/>
@@ -21,7 +21,7 @@
        </step>
         <step>
             <para>
-                Edit the <emphasis role="bold">Contents By Query</emphasis> portlet by hovering your cursor over it, then click
+                Edit the <emphasis role="bold">Content By Query</emphasis> portlet by hovering your cursor over it, then click
                 <inlinemediaobject>
                     <imageobject>
                         <imagedata fileref="images/edit_icon1.png" format="PNG" scalefit="1" width="4mm"/>
@@ -57,7 +57,7 @@
             <para>Select a workspace where you want to get data.</para>
         </step>
         <step>
-            <para>Click <emphasis role="bold">Save</emphasis> to complete adding the <emphasis role="bold">Contents By Query</emphasis> portlet.</para>
+            <para>Click <emphasis role="bold">Save</emphasis> to complete adding the <emphasis role="bold">Content By Query</emphasis> portlet.</para>
         </step>
         <step>
             <para>Click

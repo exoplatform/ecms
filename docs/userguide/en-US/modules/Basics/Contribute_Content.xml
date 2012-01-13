@@ -561,7 +561,7 @@
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Contents Visibility:</emphasis>
+                                                        <emphasis role="bold">Content Visibility:</emphasis>
                                                         Allow you to use a cache shared between users to
                                                         get contents. If you want to get contents, which are displayed
                                                         in CLV or SCV, from one cache, select
@@ -745,7 +745,7 @@
                                 <tbody>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Contents Selection</emphasis>
+                                            <emphasis role="bold">Content Selection</emphasis>
                                         </entry>
                                         <entry>
                                             <para><emphasis role="bold">Mode:</emphasis> This mode is to select web
@@ -762,7 +762,7 @@
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">By Contents:</emphasis>
+                                                        <emphasis role="bold">By Content:</emphasis>
                                                         This mode allows you to select by the content in a specific
                                                         folder in
                                                         <emphasis role="bold">Folder Path</emphasis>
@@ -920,7 +920,7 @@
                                                 </listitem>
                                             </itemizedlist>
                                             <para>
-                                                <emphasis role="bold">Contents Visibility:</emphasis>
+                                                <emphasis role="bold">Content Visibility:</emphasis>
                                                 Allow you to use a cache shared between users to
                                                 get contents. If you want to get contents, which are displayed in CLV or
                                                 SCV, from one cache, select
@@ -958,7 +958,7 @@
                             (documents and/or web content) on the right by clicking the folder.
                         </para>
                         <para>
-                            If you select the <emphasis role="bold">By Contents</emphasis> mode, select an available
+                            If you select the <emphasis role="bold">By Content</emphasis> mode, select an available
                             folder from the left pane, all content in this folder will be listed in the right pane.
                             Click a content on the right that you want to add to the content list. There will be a
                             message, informing that you have successfully added it to the Content List. The selected
