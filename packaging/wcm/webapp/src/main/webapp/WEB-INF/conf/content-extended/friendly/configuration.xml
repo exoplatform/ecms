@@ -91,7 +91,7 @@
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>documents</string></field>
-                  <field name="unfriendlyUri"><string>/public/acme/detail?content-id=/repository/collaboration</string></field>
+                  <field name="unfriendlyUri"><string>/acme/detail?content-id=/repository/collaboration</string></field>
                 </object>
               </value>
               <value>
