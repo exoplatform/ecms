@@ -680,7 +680,8 @@
 		var container = document.getElementById("LeftContainer");
 		var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");
     var rightContainer = DOM.findFirstDescendantByClass(workingArea, "div", "RightContainer");
-    rightContainer.style.marginLeft = '264px';
+    if(showSideBar) rightContainer.style.marginLeft = '264px';    
+    else rightContainer.style.marginLeft = '0px';
 		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");
 		var selectContent = DOM.findFirstDescendantByClass(resizableBlock, "div", "UISelectContent");
 		
