@@ -234,6 +234,7 @@ public class UISearchForm extends UIForm {
         uiKeywordInput.setValue(newKey);
       }
       keyword = keyword.replace('-', ' ').toLowerCase(portletRequestContext.getLocale());
+      keyword = keyword.replaceAll("'","''");
       uiSearchResult.setResultType(resultType);
       String selectedPortal = uiPortalSelectBox.getValue();
       QueryCriteria queryCriteria = new QueryCriteria();

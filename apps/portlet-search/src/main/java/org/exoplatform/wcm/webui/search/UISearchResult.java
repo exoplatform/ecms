@@ -389,7 +389,7 @@ public class UISearchResult extends UIContainer {
   public String getURL(Node node) throws Exception {
     PortletRequest portletRequest = getPortletRequest();
     PortletPreferences portletPreferences = portletRequest.getPreferences();
-    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);
+    String repository = WCMCoreUtils.getRepository().getConfiguration().getName();
     String workspace = portletPreferences.getValue(UIWCMSearchPortlet.WORKSPACE, null);
     String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
     String detailParameterName = portletPreferences.getValue(UIWCMSearchPortlet.DETAIL_PARAMETER_NAME, null);    

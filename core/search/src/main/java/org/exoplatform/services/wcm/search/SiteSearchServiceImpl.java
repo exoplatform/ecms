@@ -430,7 +430,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       return;
     QueryTermHelper queryTermHelper = new QueryTermHelper();
     String queryTerm = null;
-    keyword = keyword.replaceAll("'", "''");
     if (isEnabledFuzzySearch) {
       if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
