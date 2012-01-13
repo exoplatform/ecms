@@ -260,8 +260,8 @@ public class NewsletterEntryHandler {
   public String getContent(SessionProvider sessionProvider, Node webContent) throws Exception{
     try {
       StringBuilder sb = new StringBuilder();
-      sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"  ");
-      sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+      sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"  ");
+      sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
       sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\" dir=\"ltr\">");
       sb.append("<head>");
       sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
