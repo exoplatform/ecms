@@ -296,8 +296,8 @@ public class UISearchResult extends UIContainer {
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
       uiExplorer.setSelectNode(workspaceName, path) ;
-
-      uiExplorer.updateAjax(event) ;
+      
+      uiExplorer.refreshExplorer((Node)item, true);
     }
 
     private boolean isInTrash(Item item) throws RepositoryException {
@@ -325,7 +325,7 @@ public class UISearchResult extends UIContainer {
       }
 
       uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
-      uiExplorer.updateAjax(event);
+      uiExplorer.refreshExplorer(node, true);
     }
   }
 
