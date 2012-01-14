@@ -125,6 +125,15 @@ public interface MultiLanguageService {
   public void addLinkedLanguage(Node node, Node translationNode) throws Exception;
 
   /**
+   * Add new translation for one node and synchronize all related translation nodes.
+   * 
+   * @param selectedNode Selected Node
+   * @param newTranslationNode New Translation Node
+   * @throws Exception
+   */
+  public void addSynchronizedLinkedLanguage(Node selectedNode, Node newTranslationNode) throws Exception;
+  
+  /**
    * Add new language node as a folder
    * @param node
    * @param inputs

@@ -209,8 +209,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       try {
         Node targetNode = (Node) nodeFinder.getItem(workspaceName, pathNode);
         if (uiSymLinkForm.localizationMode) {
-            MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);
-            langService.addLinkedLanguage(node, targetNode);
+          MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);
+          langService.addSynchronizedLinkedLanguage(node, targetNode);
         } else {
           LinkManager linkManager = uiSymLinkForm.getApplicationComponent(LinkManager.class);
           linkManager.createLink(node, Utils.EXO_SYMLINK, targetNode, symLinkName);

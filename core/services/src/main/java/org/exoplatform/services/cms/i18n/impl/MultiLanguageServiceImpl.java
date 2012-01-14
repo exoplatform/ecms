@@ -475,8 +475,45 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     ((ExtendedNode)linkNode).setPermission(IdentityConstants.ANY, new String[]{PermissionType.READ});
     linkNode.getSession().save();
   }
-
-
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void addSynchronizedLinkedLanguage(Node selectedNode, Node newTranslationNode) throws Exception {
+    String newLang = newTranslationNode.getProperty("exo:language").getString();
+    
+    // Only add new translation if lang of new translation
+    // has not existed yet inside selected Node
+    if (getLanguage(selectedNode, newLang) == null) {
+      
+      // Get all real translation Nodes of selected node.
+      // If there are some, add new translation for them
+      List<Node> realTranslationNodes = getRealTranslationNodes(selectedNode);
+      for (Node node : realTranslationNodes) {
+        try {
+          addLinkedLanguage(node, newTranslationNode);
+        }
+        catch(ItemExistsException ex) {}
+        
+        // Update translations for new translation Node
+        try {
+          addLinkedLanguage(newTranslationNode, node);
+        }
+        catch(ItemExistsException ex) {}
+      }
+      
+      try {
+        addLinkedLanguage(newTranslationNode, selectedNode);
+      }
+      catch(ItemExistsException ex) {}
+      
+      // Add new translation to selected Node
+      addLinkedLanguage(selectedNode, newTranslationNode);
+    } else {
+      throw new ItemExistsException();
+    }
+  }
+    
   /**
    * {@inheritDoc}
    */
@@ -704,6 +741,29 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       }
     }
     return languages;
+  }
+  
+  /**
+   * Get all current supported translation Nodes of specified node
+   * @param node Specified Node
+   * @return All current supported translation Nodes
+   * @throws Exception
+   */
+  private List<Node> getRealTranslationNodes(Node node) throws Exception {
+    LinkManager linkManager =
+      (LinkManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+    List<Node> translationNodes = new ArrayList<Node>();
+    if(node.hasNode(LANGUAGES)){
+      Node languageNode = node.getNode(LANGUAGES) ;
+      NodeIterator iter  = languageNode.getNodes() ;
+      while(iter.hasNext()) {
+        Node currNode = iter.nextNode();
+        if (currNode.isNodeType("exo:symlink")) {
+          translationNodes.add(linkManager.getTarget(currNode));
+        }
+      }
+    }
+    return translationNodes;
   }
 
   /**
