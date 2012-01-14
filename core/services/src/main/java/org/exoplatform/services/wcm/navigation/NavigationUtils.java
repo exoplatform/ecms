@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.navigation;
 
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Iterator;
 
 import javax.portlet.MimeResponse;
@@ -114,8 +116,9 @@ public class NavigationUtils {
       MimeResponse res = context.getResponse();
       ResourceURL resourceURL = res.createResourceURL();
       resourceURL.setResourceID(res.encodeURL(child.getURI()));
-
-      sbJsonTree.append("\"getNodeURL\":\"").append(resourceURL.toString()).append("\",");
+      Writer w = new StringWriter();
+      resourceURL.write(w, true);      
+      sbJsonTree.append("\"getNodeURL\":\"").append(w.toString()).append("\",");
       sbJsonTree.append("\"nodes\":").append(addJsonNodes(child.getChildren().iterator()));
       sbJsonTree.append("}");
     }
