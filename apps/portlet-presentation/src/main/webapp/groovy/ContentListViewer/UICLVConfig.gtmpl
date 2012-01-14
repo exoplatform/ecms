@@ -61,7 +61,7 @@
               </td>
             </tr>
             <tr class="OrderBlock">
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
+              <td class="FieldLabel"><label for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></label></td>
               <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
             </tr>
             <tr class="OrderBlock">
@@ -143,11 +143,11 @@
               </td>
             </tr>
             <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
+              <td class="FieldLabel"><label for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></label></td>
               <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
             </tr>
             <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
+              <td class="FieldLabel"><label for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></label></td>
               <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
             </tr>
             <tr>
@@ -280,7 +280,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel" colspan="2"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
+            <td class="FieldLabel" colspan="2"><label for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></label></td>
             <td class="FieldComponent"><% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
           </tr>
         <% } %> 

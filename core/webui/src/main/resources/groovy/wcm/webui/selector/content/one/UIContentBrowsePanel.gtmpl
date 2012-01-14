@@ -17,7 +17,7 @@
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar">
-		<div class="FilterTitle">Filter</div>
+		<div class="FilterTitle"><label for="Filter">Filter</label></div>
 		<div class="FilterInput">
 			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
 				<option selected="selected" value="All">All</option>

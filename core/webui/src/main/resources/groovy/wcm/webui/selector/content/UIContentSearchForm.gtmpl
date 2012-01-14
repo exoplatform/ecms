@@ -15,7 +15,7 @@
 <div class="$uicomponent.id">
   <%uiform.begin();%>
     <div class="ContentSearchForm">
-    <span><%= _ctx.appRes("UIContentSearchForm.title.Location")%>: </span> <%uiform.renderField(uiform.getChildById(uicomponent.LOCATION));%>
+    <span><label for="<%=uicomponent.LOCATION%>"><%= _ctx.appRes("UIContentSearchForm.title.Location")%>: </label></span> <%uiform.renderField(uiform.getChildById(uicomponent.LOCATION));%>
     </div>
     <input type="hidden" class="hidden" id="<%=uicomponent.CHECKED_RADIO_ID%>" name="<%=uicomponent.CHECKED_RADIO_ID%>" />
     <div class="ContentSearchForm"> 

@@ -29,7 +29,7 @@
 			if(eXo.ecm.ECS.insertContentType=="Image") {
 				strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
 			} else {
-				strHTML = "<div class=\"FinterTitle\" userLanguage=\"UserLanguage.Filter\">Filter</div>";
+				strHTML = "<div class=\"FinterTitle\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\">Filter</label></div>";
 				strHTML += "<div class=\"FinterInput\"><select class=\"Pinter\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
 				strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
 				strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";

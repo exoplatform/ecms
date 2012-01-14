@@ -25,7 +25,7 @@
 			        </tr>
 			        <%}%>
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ROBOTS) %></td>
+			    	<td class="FieldLabel"><label for="$uicomponent.ROBOTS_INDEX"><%=uicomponent.getLabel(uicomponent.ROBOTS) %></label></td>
 			    	<td class="FieldComponent"><% uiform.renderField(uicomponent.ROBOTS_INDEX) %></td>
 			    	<td class="FieldComponent"><% uiform.renderField(uicomponent.ROBOTS_FOLLOW) %></td>
 			    </tr>
@@ -35,7 +35,7 @@
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SITEMAP) %> <span style="vertical-align: middle;"><%=uicomponent.getLabel(uicomponent.SITEMAP_VISIBLE) %></span></td>
 			    </tr>			    
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.FREQUENCY) %></td>
+			    	<td class="FieldLabel"><label for="$uicomponent.FREQUENCY"><%=uicomponent.getLabel(uicomponent.FREQUENCY) %></label></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.FREQUENCY) %></td>
 			    </tr>
 			    <tr>

@@ -11,7 +11,7 @@
   <div class="SelectViewBox">
     <% uiform.begin() %>
     <div class="SelectBox">
-      <label class="SelectViewLabel"><%=_ctx.appRes("UIViewBar.label.selectView")%></label><% uicomponent.renderChildren(); %>
+      <label class="SelectViewLabel" for="views"><%=_ctx.appRes("UIViewBar.label.selectView")%></label><% uicomponent.renderChildren(); %>
     </div>
     <%uiform.end()%>    
   </div>  

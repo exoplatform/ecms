@@ -19,7 +19,7 @@
 		<div class="FormContainer">
 			<table class="UIFormGrid">
 			  <tr>
-			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.sortBy")%></td>
+			  <td class="FieldLabel"><label for="$FIELD_SHORTBY"><%=_ctx.appRes("UIPreferencesForm.label.sortBy")%></label></td>
 			    <td colspan="3"><% uiform.renderField(FIELD_SHORTBY) %> &nbsp;&nbsp;&nbsp;&nbsp; <% uiform.renderField(FIELD_ORDERBY) %></td>
 			  </tr>
 			  <tr>
@@ -29,7 +29,7 @@
 			    <td class="FieldComponent"><% uiform.renderField(FIELD_ENABLE_DRAG_AND_DROP) %></td>
 			  </tr>
 			  <tr>
-			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.nodesPerPage")%></td>
+			  <td class="FieldLabel"><label for="$NODES_PER_PAGE"><%=_ctx.appRes("UIPreferencesForm.label.nodesPerPage")%></label></td>
 			    <td class="FieldComponent"><% uiform.renderField(NODES_PER_PAGE) %></td>			    
 			    <td colspan="2" align="right"></td>
 			  </tr>
@@ -64,7 +64,7 @@
 							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></td>
 							  </tr>
 							  <tr>									    
-							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></td>
+							    <td width="35%" class="FieldLabel"><label for="$FIELD_QUERY_TYPE"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></label></td>
 							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_QUERY_TYPE) %></td>
 							    <td colspan="2"></td>
 							  </tr>
