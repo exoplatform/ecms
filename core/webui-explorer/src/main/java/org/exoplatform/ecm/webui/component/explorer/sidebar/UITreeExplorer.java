@@ -322,7 +322,6 @@ public class UITreeExplorer extends UIContainer {
         continue;
       temp = temp.getChildByName(nodeName);
       if (temp == null) {
-        LOG.error("The node '" + nodeName + "' has not child node");
         treeRoot_ = treeRoot;
         return;
       }
