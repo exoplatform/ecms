@@ -18,6 +18,8 @@ package org.exoplatform.services.cms.watch;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.cms.watch.impl.MessageConfigPlugin;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
@@ -73,4 +75,12 @@ public interface WatchDocumentService {
    * @throws Exception
    */
   public void unwatchDocument(Node documentNode, String userName, int notificationType) throws Exception;
+  
+  /**
+   * Initialize the notification email contents of watching document when the
+   * notification type is by email.
+   * 
+   * @param msgConfigPlugin The message configuration plug-in
+   */
+  public void initializeMessageConfig(MessageConfigPlugin msgConfigPlugin);
 }

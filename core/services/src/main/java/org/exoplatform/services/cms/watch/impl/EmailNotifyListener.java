@@ -158,10 +158,7 @@ public class EmailNotifyListener implements EventListener {
     UserNode siteExNode = getUserNodeByURI(SITE_EXPLORER);
     nodeURL.setNode(siteExNode);
 
-    nodeURL.setQueryParameterValue(PATH_PARAM, WCMCoreUtils.getRepository()
-                                                           .getConfiguration()
-                                                           .getName()
-        + "/" + driverName + nodePathInDrive);
+    nodeURL.setQueryParameterValue(PATH_PARAM, "/" + driverName + nodePathInDrive);
 
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
