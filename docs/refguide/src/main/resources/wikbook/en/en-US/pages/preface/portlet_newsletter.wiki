@@ -8,7 +8,7 @@ The *Newsletter* portlet is used to help users quickly get the updated newslette
 
 This is an example of the *Newsletter* portlet used in eXo Content:
 
-!images/newsletter-portlet.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!
+!images/newsletter-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
 * *Packaging*: This portlet is packaged in the _newsletter.war_ file.
 
