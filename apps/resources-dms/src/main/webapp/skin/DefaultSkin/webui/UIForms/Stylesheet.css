@@ -142,12 +142,11 @@
 }
 
 .UIViewMetadataManager .LabelMetadata {
-	border-bottom: 1px dotted #666666;
-	padding-bottom: 5px;
+  border-bottom: 1px dotted #666666;
+  padding-bottom: 5px;
   height:14px;
   font-weight: bold;
   font-size: 12px;
-  font-style: Verdana;
   text-align: left; /* orientation=lt */
   text-align: right; /* orientation=rt */
   color: #f68822;
@@ -156,7 +155,6 @@
 .UIViewMetadataManager .Header {
   font-weight: bold;
   font-size: 14px;
-  font-style: Verdana;
   text-align: left; /* orientation=lt */
   text-align: right; /* orientation=rt */
 }

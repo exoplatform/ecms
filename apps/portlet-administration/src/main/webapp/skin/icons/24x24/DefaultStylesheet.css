@@ -453,15 +453,15 @@ a:hover .ShowHideBoxContainer {
 }
 
 .ContentPresentationIcon {
-	width: 24px;	height: 24px;
+  width: 24px;	height: 24px;
   background: url('DefaultSkin/DisplayDocuments.gif') no-repeat left center; /* orientation=lt */
-	sbackground: url('DefaultSkin/DisplayDocuments.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/DisplayDocuments.gif') no-repeat right center; /* orientation=rt */
 }
 
 .AdvanceConfiguarationIcon {
-	width: 24px;	height: 24px;
+  width: 24px;	height: 24px;
   background: url('DefaultSkin/ManageDynamicContent.gif') no-repeat left center; /* orientation=lt */
-	background: url('DefaultSkin/ManageDynamicContent.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/ManageDynamicContent.gif') no-repeat right center; /* orientation=rt */
 }
 
 .RefreshSession24x24Icon {

@@ -49,13 +49,11 @@
 }
 .UISEOToolbarPorlet .SEOToolbar .Enable {
 	cursor: pointer;
-	display: auto; 
 	line-height: 32px; 
 	padding: 0 20px 0 5px;
 }
 
 .UISEOToolbarPorlet .SEOToolbar .Disable {
-	display: auto; 
 	line-height: 32px; 
 	padding: 0 20px 0 5px;
 }

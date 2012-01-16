@@ -707,34 +707,34 @@
 }
 .Select16x16Icon {
   width: 16px; height: 16px;
-  background-image: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
   cursor: pointer;
 }
 
 .Export16x16Icon {
-  background-image: url('DefaultSkin/Export.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/Export.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/Export.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Export.gif') no-repeat right center; /* orientation=rt */
 }
 
 .UncheckAll16x16Icon {
-  background-image: url('DefaultSkin/UnCheckAll.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/UnCheckAll.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/UnCheckAll.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/UnCheckAll.gif') no-repeat right center; /* orientation=rt */
 }
 
 .CheckAll16x16Icon {
-  background-image: url('DefaultSkin/CheckAll.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/CheckAll.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/CheckAll.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/CheckAll.gif') no-repeat right center; /* orientation=rt */
 }
 
 .Import16x16Icon {
-  background-image: url('DefaultSkin/Import.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/Import.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/Import.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Import.gif') no-repeat right center; /* orientation=rt */
 }
 .Active16x16Icon {
   width: 16px; height: 16px;
-  background-image: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
-  background-image: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
+  background: url('DefaultSkin/SelectPage.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/SelectPage.gif') no-repeat right center; /* orientation=rt */
 }
 /*############################## -- End Action Icon  -- ##############################*/
 

@@ -295,7 +295,7 @@
 }
 
 .UIECMAdminPortlet .UIDriveManager .UIGrid td {
-    border-color: #FFFFFF -moz-use-text-color #FFFFFF #FFFFFF;
+    border-color: #FFFFFF;
     border-width: 1px 0 1px 1px;
     padding: 5px;
     vertical-align: middle;
@@ -535,12 +535,12 @@
 .UINamespaceManager UINamespaceList .UIPageIterator .PageIteratorContainer{
 float: left;
 }
- .UIFormGrid .MultiRadioInput{
-	float: lef; /* orientation=lt */
+ .UIFormGrid .MultiRadioInput {
+	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
 	line-height: 16px;
 }
- .UIFormGrid .MultiRadioInput input{
+ .UIFormGrid .MultiRadioInput input {
 	float: left; /* orientation=lt */ 
 	float: right; /* orientation=rt */
 	clear: both;

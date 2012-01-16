@@ -447,7 +447,7 @@
 
 .UITreeNodePageIterator .DisablePage {
 	filter:alpha(opacity=40); -moz-opacity:.40; opacity:.40;
-	cursor: normal;
+	cursor: default;
 }
 
 .UITreeNodePageIterator .Icon {

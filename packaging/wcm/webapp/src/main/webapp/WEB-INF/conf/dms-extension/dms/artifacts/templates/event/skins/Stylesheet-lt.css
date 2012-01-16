@@ -10,15 +10,15 @@
 	background: white;
 	padding: 0px 0px 5px 10px;
 	font-size: 16px;
-	font-color: #666;
+	color: #060606;
 	font-weight: bold;
 }
 
 .LocationLabel {
   padding: 0px 0px 5px 10px;
   font-size: 12px;
-  font-color: #888;
-	font-weight: bold;
+  color: #080808;
+  font-weight: bold;
 }
 
 .MapsFrame {
@@ -220,12 +220,12 @@ padding-bottom: 2px;
 }
 
 .UIArticle .Links a {
-	text-decortaion: none;
+	text-decoration: none;
 	color: #058ee6;
 }
 
 .UIArticle .Links a:hover {
-	text-decortaion: underline;
+	text-decoration: underline;
 	color: orange;
 }
 

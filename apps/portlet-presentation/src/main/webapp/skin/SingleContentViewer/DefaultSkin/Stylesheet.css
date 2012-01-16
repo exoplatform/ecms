@@ -312,7 +312,7 @@
     width:100%;
     line-height: 20px;    
     padding: 2px 0 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .UIPresentationContainer .TitleHover {
     background: #fffacd;
@@ -388,7 +388,7 @@
 .UISingleContentViewerPortlet .UIContainerConfigOptions .ContainerConfigOptions .StepNavigationTitle {
   font-weight: bold;
   line-height: 20px;
-  margin-bottom: 1px solid #b7b7b7;
+  margin-bottom: 1px;
 }
 
 *+html .UICategoriesSelector .UICategoriesSelectPanel .UIGrid { 

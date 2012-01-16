@@ -218,9 +218,6 @@
 }
 
 /*############################## -- Begin UIDocumentWorkspace -- ##############################*/
- /*
-	* minh.js.exo
-	*/
 
 .UIJCRExplorerPortlet .RightContainer {
   margin-left: 0px;
@@ -231,7 +228,7 @@
 }
 
 .UIJCRExplorerPortlet .UIListView {
-	posititon: relative;
+	position: relative;
 }
 
 .UIJCRExplorerPortlet .UITabPane .UIListView {
@@ -582,7 +579,7 @@
  	border-left: none; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet ..UITimelineView .RowView .LeftColumn {
+.UIJCRExplorerPortlet .UITimelineView .RowView .LeftColumn {
 	padding: 2px 0px;
  	border-right: none; /* orientation=lt */
  	border-left: none; /* orientation=rt */

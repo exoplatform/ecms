@@ -29,7 +29,7 @@
     width:100%;
     line-height: 20px;    
     padding: 2px 0 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .GtmplTitleHover {
     background: #fffacd;
@@ -38,7 +38,7 @@
     line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditGtmplTitle {
@@ -62,7 +62,7 @@
     width:100%;
     line-height: 20px;    
     padding: 2px 0 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .InlineTextHover {
@@ -72,7 +72,7 @@
     line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditInlineText {
@@ -90,13 +90,13 @@
     width:99%;
     border: 1px solid #BFD5ED;
 }
-* ============== Groovy title in small text ===============================================*/
+/* ============== Groovy title in small text ===============================================*/
 
 .InlineEditing .TdGtmplTitle {
     width:100%;
     line-height: 20px;    
     padding: 2px 0 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .TdGtmplTitleHover {
     background: #fffacd;
@@ -104,7 +104,7 @@
     line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditTdGtmplTitle {
@@ -128,14 +128,14 @@
     width: 100%;
     height: 99%;
     padding: 1px 0px 1px 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .ContentHover {
     width:100%;
     height:99%;
     padding: 1px 0px 1px 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditContent {
@@ -165,7 +165,7 @@
     width:99%;
     height:99%;
     padding: 1px 0px 1px 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .CLV1ColumnPresentHover {
     background: #fffacd;
@@ -173,7 +173,7 @@
     height:99%;
     padding: 1px 0px 1px 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditCLV1ColumnPresent {
@@ -215,7 +215,7 @@
     width:99%;
     line-height: 20px;    
     padding: 2px 0 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .GroovyCLVTitleHover {
     background: #fffacd;
@@ -223,7 +223,7 @@
     line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditGroovyCLVTitle {
@@ -258,7 +258,7 @@
     width:100%;
     height:99%;
     padding: 1px 0px 1px 0;
-    over-flow: hidden;
+    overflow: hidden;
 }
 .InlineEditing .CLV2ColSummaryHover {
     background: #fffacd;
@@ -266,7 +266,7 @@
     height:99%;
     padding: 1px 0px 1px 0;
     cursor: text;
-    over-flow: hidden;
+    overflow: hidden;
 }
 
 .InlineEditing .EditCLV2ColSummary {

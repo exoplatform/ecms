@@ -194,12 +194,12 @@
 }
 
 .UIArticle .Links a {
-	text-decortaion: none;
+	text-decoration: none;
 	color: #058ee6;
 }
 
 .UIArticle .Links a:hover {
-	text-decortaion: underline;
+	text-decoration: underline;
 	color: orange;
 }
 
