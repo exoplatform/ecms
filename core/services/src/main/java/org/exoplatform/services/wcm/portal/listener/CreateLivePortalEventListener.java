@@ -16,11 +16,16 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
+import java.util.ArrayList;
+
 import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -42,7 +47,25 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
   private static Log log = ExoLogger.getLogger(CreateLivePortalEventListener.class);
+  private boolean autoCreatedDrive = true;
+  private ArrayList<String> targetDrives = null;
+  public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
+  public static String TARGET_DRIVES = "targetDrives";
 
+  public CreateLivePortalEventListener() {
+  }
+
+  @SuppressWarnings("unchecked")
+  public CreateLivePortalEventListener(InitParams params) throws Exception {
+    if(params != null) {
+      ValueParam autoCreated = params.getValueParam(AUTO_CREATE_DRIVE);
+      if(autoCreated != null)
+        autoCreatedDrive = Boolean.parseBoolean(autoCreated.getValue());
+      ValuesParam targets = params.getValuesParam(TARGET_DRIVES);
+      if(targets != null)
+        targetDrives = targets.getValues();
+    }
+  }
   /*
    * (non-Javadoc)
    *
@@ -63,15 +86,17 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       log.error("Error when create new resource storage: " + portalConfig.getName(), e);
     }
     // create drive for the site content storage
-    ManageDriveService manageDriveService = (ManageDriveService) container
-    .getComponentInstanceOfType(ManageDriveService.class);
-    WCMConfigurationService configurationService = (WCMConfigurationService) container
-    .getComponentInstanceOfType(WCMConfigurationService.class);
-    try {
-      Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
-      createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
-    } catch (Exception e) {
-      log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+    if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && !targetDrives.contains(portalConfig.getName()))) {
+      ManageDriveService manageDriveService = (ManageDriveService) container
+      .getComponentInstanceOfType(ManageDriveService.class);
+      WCMConfigurationService configurationService = (WCMConfigurationService) container
+      .getComponentInstanceOfType(WCMConfigurationService.class);
+      try {
+        Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
+        createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
+      } catch (Exception e) {
+        log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+      }
     }
     //Deploy initial artifacts for this portal
     CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
