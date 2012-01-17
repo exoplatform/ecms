@@ -240,7 +240,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
           return linkManager_.getTarget(taxonomyTree, system);
       }catch (PathNotFoundException pne) {
-        return null;
+      	throw new RepositoryException(pne);
       }
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);

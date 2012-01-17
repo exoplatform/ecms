@@ -125,13 +125,13 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   public UIDocumentForm() throws Exception {
     setActions(new String[]{"Save", "SaveAndClose", "Close"});
   }
-  
+
   private String getChangeTypeActionLink () throws Exception {
     if (!isAddNew || !canChangeType) return "";
-    
+
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
-    
+
     String action = "ChangeType";
     String strChangeTypeLabel = res.getString(getName() + ".action." + action);
     StringBuilder link = new StringBuilder();
@@ -225,31 +225,31 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       return null;
     }
   }
-  
+
   private String getTemplateLabel() throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return templateService.getTemplateLabel(contentType);
   }
 
-  @Override  
+  @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     context.getJavascriptManager().importJavascript("eXo.ecm.UIDocumentForm", "/ecmexplorer/javascript/");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AutoFocus");
     super.processRender(context);
   }
-  
+
   public void processRenderAction() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     Writer writer = context.getWriter();
     writer.append("<div class=\"UIAction UIDialogAction\" >");
-    writer.append("<span class='UIDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>"); 
+    writer.append("<span class='UIDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");
     writer.append("<table style=\"margin-right:5px; width:auto; float:right\">");
     writer.append("<tr>");
     writer.append("<td>");
     String[] listAction = getActions();
-    
+
     String actionLabel;
     String link;
     for (String action : listAction) {
@@ -265,7 +265,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             .append("\" class=\"ActionButton LightBlueStyle\">")
             .append(actionLabel)
             .append("</a>");
-    }    
+    }
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
     writer.append("</td>");
     writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px; text-align: left;\">");
@@ -332,7 +332,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
     return removedList;
   }
-  
+
   public static Node saveDocument (Event <UIDocumentForm> event) throws Exception {
     UIDocumentForm documentForm = event.getSource();
     UIJCRExplorer uiExplorer = documentForm.getAncestorOfType(UIJCRExplorer.class);
@@ -350,7 +350,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if (!Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
                 ApplicationMessage.WARNING));
-            
+
             return null;
           }
         }
@@ -365,7 +365,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         hasCategories = true;
         listTaxonomy = (List<String>) uiSet.getValue();
         for (String category : listTaxonomy) {
-          categoriesPath.concat(category).concat(",");
+          categoriesPath = categoriesPath.concat(category).concat(",");
         }
 
         if (listTaxonomy != null && listTaxonomy.size() > 0) {
@@ -383,7 +383,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            
+
             return null;
           }
         }
@@ -397,7 +397,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     if(documentForm.isAddNew()) {
       UIDocumentFormController uiDFController = documentForm.getParent();
       homeNode = currentNode;
-      nodeType = uiDFController.getChild(UIDocumentForm.class).getContentType(); 
+      nodeType = uiDFController.getChild(UIDocumentForm.class).getContentType();
       if(homeNode.isLocked()) {
         homeNode.getSession().addLockToken(LockUtil.getLockToken(homeNode));
       }
@@ -453,7 +453,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             } catch(AccessDeniedException accessDeniedException) {
               uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
                   ApplicationMessage.WARNING));
-              
+
             } catch (Exception e) {
               continue;
             }
@@ -479,53 +479,53 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     } catch(VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
           ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(ItemNotFoundException item) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.item-not-found", null,
           ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(AccessDeniedException accessDeniedException) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception-permission", null,
           ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(ItemExistsException existedex) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-allowed-same-name-sibling",
                                               null,
                                               ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(ConstraintViolationException constraintViolationException) {
     LOG.error("Unexpected error occurrs", constraintViolationException);
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                               null,
                                               ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(RepositoryException repo) {
       LOG.error("Unexpected error occurrs", repo);
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(NumberFormatException nume) {
       String key = "UIDocumentForm.msg.numberformat-exception";
       uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-      
+
       return null;
     } catch(Exception e) {
       LOG.error("Unexpected error occurs", e);
       String key = "UIDocumentForm.msg.cannot-save";
       uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-      
+
       return null;
     } finally {
        documentForm.releaseLock();
     }
     return null;
   }
-  
+
   public static void closeForm (Event<UIDocumentForm> event) throws Exception {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     if(uiExplorer != null) {
@@ -546,7 +546,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       synchronized (documentForm) {
         UIJCRExplorer uiExplorer = documentForm.getAncestorOfType(UIJCRExplorer.class);
         UIApplication uiApp = documentForm.getAncestorOfType(UIApplication.class);
-        
+
         Node newNode = UIDocumentForm.saveDocument(event);
         if (newNode != null) {
           event.getRequestContext().setAttribute("nodePath",newNode.getPath());
@@ -652,7 +652,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIDocumentForm.closeForm(event);
     }
   }
-  
+
   static  public class ChangeTypeActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiDocumentForm = event.getSource();
@@ -663,7 +663,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController);
     }
   }
-  
+
   static  public class SaveAndCloseActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       Node newNode = UIDocumentForm.saveDocument(event);
@@ -715,11 +715,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);
-          
+
           return;
         }
       } else {
