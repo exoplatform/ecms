@@ -8,10 +8,10 @@
 	<external-component-plugins>
 		<target-component>org.exoplatform.commons.upgrade.UpgradeProductService</target-component>
 		<component-plugin>
-			<name>UpgradeVotingNodeTypePlugin</name>
+			<name>UpgradePublicationPublicationNodeTypePlugin</name>
 			<set-method>addUpgradePlugin</set-method>
-			<type>org.exoplatform.ecms.upgrade.plugins.UpgradeVotingNodeTypePlugin</type>
-			<description>Upgrade voting node type plugin</description>
+			<type>org.exoplatform.ecms.upgrade.plugins.UpgradePublicationPublicationNodeTypePlugin</type>
+			<description>Upgrade publication:publication node type plugin</description>
 			<init-params>
 				<value-param>
 					<name>product.group.id</name>

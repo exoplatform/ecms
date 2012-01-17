@@ -18,9 +18,11 @@ package org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +34,13 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
-
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -549,6 +551,15 @@ public class UIPublicationPanel extends UIForm {
       Node currentNode = publicationPanel.getCurrentNode();
       String versionUUID = event.getRequestContext().getRequestParameter(OBJECTID);
       Version version = (Version)publicationPanel.getRevisionByUUID(versionUUID);
+
+      String userId = "";
+      try {
+        userId = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception ex) {
+        userId = currentNode.getSession().getUserID();
+      }
+      
+      //restore the version
       try {
         currentNode.restore(version,true);
         if(!currentNode.isCheckedOut())
@@ -564,7 +575,9 @@ public class UIPublicationPanel extends UIForm {
             currentState = PublicationDefaultStates.OBSOLETE;
           }
         }
+        //set current state
         currentNode.setProperty("publication:currentState", currentState);
+        //set revision data
         Map<String, VersionData> revisionsDataMap = publicationPanel.getRevisionData(currentNode);
         revisionsDataMap.get(currentNode.getUUID()).setState(PublicationDefaultStates.ENROLLED);
         List<Value> valueList = new ArrayList<Value>();
@@ -573,6 +586,20 @@ public class UIPublicationPanel extends UIForm {
           valueList.add(factory.createValue(versionData.toStringValue()));
         }
         currentNode.setProperty(StageAndVersionPublicationConstant.REVISION_DATA_PROP,valueList.toArray(new Value[]{}));
+        //log the history
+        VersionLog versionLog = 
+          new VersionLog(currentNode.getName(), 
+                         currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString(), 
+                         userId, 
+                         GregorianCalendar.getInstance(), 
+                         StageAndVersionPublicationConstant.PUBLICATION_LOG_RESTORE_VERSION + " from " + 
+                         version.getName());
+        values = currentNode.getProperty(StageAndVersionPublicationConstant.HISTORY).getValues();
+        ValueFactory valueFactory = currentNode.getSession().getValueFactory();
+        List<Value> list = new ArrayList<Value>(Arrays.asList(values));
+        list.add(valueFactory.createValue(versionLog.toString()));
+        currentNode.setProperty(StageAndVersionPublicationConstant.HISTORY, list.toArray(new Value[] {}));
+        //save data and update ui
         currentNode.getSession().save();
         publicationPanel.updatePanel();
       } catch (Exception e) {

@@ -12,7 +12,7 @@
         <valueConstraints/>
       </propertyDefinition>
       <propertyDefinition name="publication:history" requiredType="String" autoCreated="false" mandatory="true"
-        onParentVersion="COPY" protected="false" multiple="true">
+        onParentVersion="IGNORE" protected="false" multiple="true">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>

@@ -54,6 +54,10 @@ public interface StageAndVersionPublicationConstant {
   public static final String PUBLICATION_LOG_OBSOLETE   =
     "PublicationService.StageAndVersionPublicationPlugin.changeState.obsolete";
 
+  /** The Constant RESTORE_VERSION. */
+  public static final String PUBLICATION_LOG_RESTORE_VERSION = 
+    "PublicationService.StageAndVersionPublicationPlugin.restoreVersion";
+
   /** The Constant PUBLICATION_LIFECYCLE_NAME. */
   public static final String PUBLICATION_LIFECYCLE_NAME = "publication:lifecycleName";
 
