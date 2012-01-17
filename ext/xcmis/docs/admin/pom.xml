@@ -54,7 +54,7 @@
          <plugin>
             <groupId>org.wikbook</groupId>
             <artifactId>wikbook.maven</artifactId>
-            <version>0.9.26</version>
+            <version>0.9.35</version>
             <executions>
                <execution>
                   <phase>prepare-package</phase>
@@ -102,7 +102,7 @@
          <plugin>
             <groupId>com.agilejava.docbkx</groupId>
             <artifactId>docbkx-maven-plugin</artifactId>
-            <version>2.0.7</version>
+            <version>2.0.13</version>
             <executions>
                <execution>
                   <id>Generate HTML</id>
@@ -117,7 +117,7 @@
                      <admonGraphicsPath>images/admons/</admonGraphicsPath>
                   </configuration>
                </execution>
-               <execution>
+               <!--execution>
                   <id>Generate PDF</id>
                   <goals>
                      <goal>generate-pdf</goal>
@@ -128,7 +128,7 @@
                      <imgSrcPath>${wikbook.target}/src/resources/images/</imgSrcPath>
                      <admonGraphicsPath>${wikbook.target}/src/resources/images/admons/</admonGraphicsPath>
                   </configuration>
-               </execution>
+               </execution-->
             </executions>
             <configuration>
                <sourceDirectory>${wikbook.target}/src</sourceDirectory>
@@ -212,7 +212,7 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
             <executions>
-               <execution>
+               <!--execution>
                   <id>attach-artifacts</id>
                   <phase>package</phase>
                   <goals>
@@ -230,7 +230,7 @@
 		        </artifact>
                      </artifacts>
                   </configuration>
-               </execution>
+               </execution-->
             </executions>
          </plugin>
       </plugins>
