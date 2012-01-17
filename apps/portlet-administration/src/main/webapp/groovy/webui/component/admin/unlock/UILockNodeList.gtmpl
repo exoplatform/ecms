@@ -51,7 +51,7 @@
             <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
 	          	<td>
 		          	<div class="ActionContainer">
-				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon">
+				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
 			          </div>
 	          	</td>	                    
           </tr>

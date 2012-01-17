@@ -35,14 +35,14 @@
           %>
             <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.typeASC")%>">
               <%=_ctx.appRes("UIShowAllTrashResult.header.type")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeASC")%>" class="BlueUpArrow16x16Icon">
+              <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeASC")%>" class="BlueUpArrow16x16Icon" />
             </div>
           <%
             } else if (uicomponent.iconType.equals("BlueDownArrow")) {
           %>
           <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllTrashResult.title.typeDESC")%>">
             <%=_ctx.appRes("UIShowAllTrashResult.header.type")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon">
+            <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllTrashResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon" />
           </div>
           <%
             } else {
