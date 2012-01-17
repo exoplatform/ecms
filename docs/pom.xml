@@ -16,7 +16,7 @@
     <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
     <wikbook.resources>${project.basedir}/src/main/resources</wikbook.resources>
     <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.26</wikbook.version>
+    <wikbook.version>0.9.35</wikbook.version>
   </properties>
   
    <modules>

@@ -16,7 +16,7 @@
     <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
     <wikbook.resources>${project.basedir}/src/main/resources/wikbook/images</wikbook.resources>
     <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.30</wikbook.version>
+    <wikbook.version>0.9.35</wikbook.version>
   </properties>
 
   <dependencies>
@@ -126,7 +126,7 @@
 	       <plugin>
 	         <groupId>com.agilejava.docbkx</groupId>
 	         <artifactId>docbkx-maven-plugin</artifactId>
-	         <version>2.0.7</version>
+	         <version>2.0.13</version>
 	         <executions>
 	           <execution>
 	             <goals>
@@ -143,9 +143,9 @@
 	               <htmlStylesheet>css/ecms.css</htmlStylesheet>
 	
 	               <!-- PDF -->
-	               <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
+	               <!--foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
 	               <imgSrcPath />
-	               <admonGraphicsPath>images/admons/</admonGraphicsPath>
+	               <admonGraphicsPath>images/admons/</admonGraphicsPath-->
 	
 	               <!-- Highlight source code -->
 	               <highlightSource>1</highlightSource>
@@ -241,7 +241,7 @@
 	              </sources>
 	            </configuration>
 	          </execution>
-	          <execution>
+	          <!--execution>
 	            <id>attach-artifacts</id>
 	            <phase>package</phase>
 	            <goals>
@@ -259,7 +259,7 @@
 	                </artifact>
 	              </artifacts>
 	            </configuration>
-	          </execution>
+	          </execution-->
 	        </executions>
 	      </plugin>
         </plugins>
