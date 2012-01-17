@@ -5,7 +5,7 @@
   ul.menu ul {display: none;}
 </style>
 
-<script>
+<script type="text/javascript">
   var currentObject;
   function expand(n)
   {

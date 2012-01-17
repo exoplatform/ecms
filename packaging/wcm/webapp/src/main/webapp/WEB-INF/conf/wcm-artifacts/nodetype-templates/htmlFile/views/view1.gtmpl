@@ -17,4 +17,4 @@
 %>  
 <style><%=css%></style>
 <%=contentNode.getProperty("jcr:data").getString() ;%>
-<script><%=js%></script>
+<script type="text/javascript"><%=js%></script>

@@ -26,7 +26,7 @@
           }
         %>
       </table>
-      <script>
+      <script type="text/javascript">
         titleField = document.getElementById("title");
         titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
       </script>

@@ -47,7 +47,7 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
             </td>
           </tr>
         </table>
-        <script>
+        <script type="text/javascript">
         
         function toggleSet()
         {

@@ -29,7 +29,7 @@
 	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ;
       	%>
-          <script>
+          <script type="text/javascript">
           titleField = document.getElementById("title");
           titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
           </script>
