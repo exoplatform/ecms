@@ -56,9 +56,6 @@
         <name>live.portals.location.config</name>
         <description>configuration for the cms path</description>
         <object type="org.exoplatform.services.wcm.core.NodeLocation">
-          <field name="repository">
-            <string>repository</string>
-          </field>
           <field name="workspace">
             <string>collaboration</string>
           </field>

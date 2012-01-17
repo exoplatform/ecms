@@ -49,8 +49,6 @@ public class ChangeStateCronJobImpl implements Job {
 
   private String              workspace           = null;
 
-  private String              repository          = null;
-
   private String              contentPath         = null;
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -67,9 +65,8 @@ public class ChangeStateCronJobImpl implements Job {
           toState = jdatamap.getString("toState");
           predefinedPath = jdatamap.getString("predefinedPath");
           String[] pathTab = predefinedPath.split(":");
-          repository = pathTab[0];
-          workspace = pathTab[1];
-          contentPath = pathTab[2];
+          workspace = pathTab[0];
+          contentPath = pathTab[1];
         }
         if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
             + toState);
@@ -79,7 +76,7 @@ public class ChangeStateCronJobImpl implements Job {
         PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
         ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
         if (manageableRepository == null) {
-          if (log.isDebugEnabled()) log.debug("Repository '" + repository + "' not found., ignoring");
+          if (log.isDebugEnabled()) log.debug("Repository not found. Ignoring");
           return;
         }
         session = sessionProvider.getSession(workspace, manageableRepository);
@@ -158,7 +155,7 @@ public class ChangeStateCronJobImpl implements Job {
       }
 
     } catch (RepositoryException ex) {
-      if (log.isErrorEnabled()) log.error("Repository '" + repository + "' not found., ignoring");
+      if (log.isErrorEnabled()) log.error("Repository not found. Ignoring");
     } catch (Exception ex) {
       if (log.isErrorEnabled()) log.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {

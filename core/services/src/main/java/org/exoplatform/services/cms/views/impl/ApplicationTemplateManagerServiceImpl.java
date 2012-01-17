@@ -28,7 +28,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
@@ -83,8 +82,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @throws Exception the exception
    */
   public ApplicationTemplateManagerServiceImpl(RepositoryService repositoryService,
-      NodeHierarchyCreator hierarchyCreator, InitParams params,
-      DMSConfiguration dmsConfiguration) throws Exception{
+      NodeHierarchyCreator hierarchyCreator, DMSConfiguration dmsConfiguration) throws Exception {
     this.repositoryService = repositoryService;
     dmsConfiguration_ = dmsConfiguration;
     this.hierarchyCreator = hierarchyCreator;

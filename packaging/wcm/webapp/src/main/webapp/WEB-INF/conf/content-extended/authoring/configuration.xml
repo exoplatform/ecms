@@ -167,7 +167,8 @@
             <description>General parameters for job</description>
               <property name="fromState" value="staged"/>
               <property name="toState" value="published"/>
-              <property name="predefinedPath" value="repository:collaboration:/"/>
+														<!--The syntax of predefinedPath must follow this structure: workspaceName:nodePath-->
+              <property name="predefinedPath" value="collaboration:/"/>
           </properties-param>
         </init-params>
       </component-plugin>
@@ -194,11 +195,11 @@
             <description>General parameters for job</description>
               <property name="fromState" value="published"/>
               <property name="toState" value="unpublished"/>
-              <property name="predefinedPath" value="repository:collaboration:/"/>
+														<!--The syntax of predefinedPath must follow this structure: workspaceName:nodePath-->
+              <property name="predefinedPath" value="collaboration:/"/>
           </properties-param>
         </init-params>
       </component-plugin>
     </external-component-plugins>
-  
   
 </configuration>

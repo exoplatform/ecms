@@ -206,18 +206,12 @@
     <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailRESTService</type>
   </component>
 
-	<component>
+	 <component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
     <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
-    <init-params>
-        <properties-param>
-        <name>storedLocations</name>
-        	<property name="repository" value="system"/>
-        </properties-param>
-      </init-params>
   </component>
 
-	<component>
+	 <component>
     <key>org.exoplatform.services.cms.link.NodeFinder</key>
     <type>org.exoplatform.services.cms.link.impl.NodeFinderImpl</type>
   </component>
