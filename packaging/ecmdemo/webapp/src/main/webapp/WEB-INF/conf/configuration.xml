@@ -39,5 +39,4 @@
   <import>war:/conf/sample-portal/wcm/taxonomy/acme-taxonomies-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/taxonomy/classic-taxonomies-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/taxonomy/events-taxonomies-configuration.xml</import>
-  <import>war:/conf/sample-portal/wcm/drives-configuration.xml</import>
 </configuration>

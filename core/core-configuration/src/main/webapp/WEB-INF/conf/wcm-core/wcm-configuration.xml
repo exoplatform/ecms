@@ -169,7 +169,27 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigCreated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>     
+      <description>this listener create new live portal content storage</description>     
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigRemoved</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigUpdated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+  </external-component-plugins>
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
     <component-plugin>

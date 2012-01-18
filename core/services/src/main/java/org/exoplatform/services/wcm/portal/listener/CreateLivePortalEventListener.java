@@ -86,7 +86,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       log.error("Error when create new resource storage: " + portalConfig.getName(), e);
     }
     // create drive for the site content storage
-    if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && !targetDrives.contains(portalConfig.getName()))) {
+    if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
       ManageDriveService manageDriveService = (ManageDriveService) container
       .getComponentInstanceOfType(ManageDriveService.class);
       WCMConfigurationService configurationService = (WCMConfigurationService) container
