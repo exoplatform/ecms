@@ -22,6 +22,8 @@
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.webui.core.UIPageIterator;
+  import org.exoplatform.services.wcm.core.NodeLocation;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -46,25 +48,24 @@
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
-  uicomponent.updateNodeLists();
+  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
   List<String> labels = new ArrayList<String>();
-  labels.add("UIDocumentInfo.label.Today");
-  labels.add("UIDocumentInfo.label.Yesterday");
-  labels.add("UIDocumentInfo.label.EarlierThisWeek");
-  labels.add("UIDocumentInfo.label.EarlierThisMonth");
-  labels.add("UIDocumentInfo.label.EarlierThisYear");
+  labels.add(uicomponent.CATEGORY_TODAY);
+  labels.add(uicomponent.CATEGORY_YESTERDAY);
+  labels.add(uicomponent.CATEGORY_WEEK);
+  labels.add(uicomponent.CATEGORY_MONTH);
+  labels.add(uicomponent.CATEGORY_YEAR);
   
-  List<List<Node>> nodeLists = new ArrayList<List<Node>>();
-  nodeLists.add(uicomponent.getTodayNodes());
-  nodeLists.add(uicomponent.getYesterdayNodes());
-  nodeLists.add(uicomponent.getEarlierThisWeekNodes());
-  nodeLists.add(uicomponent.getEarlierThisMonthNodes());
-  nodeLists.add(uicomponent.getEarlierThisYearNodes());
+  List<UIPageIterator> pageInterators = new ArrayList<UIPageIterator>();
+  pageInterators.add(uicomponent.getTodayPageIterator());
+  pageInterators.add(uicomponent.getYesterdayPageIterator());
+  pageInterators.add(uicomponent.getWeekPageIterator());
+  pageInterators.add(uicomponent.getMonthPageIterator());
+  pageInterators.add(uicomponent.getYearPageIterator());
   
   SimpleDateFormat formatDateTime = uicomponent.getSimpleDateFormat();
+  UIPageIterator displayPaginator = null;
   
-  int listCount = 5;
-
 %>
 <div id="$componentId">
 <div id="${componentId}-$viewComponentId" class="UIListView" style="">
@@ -115,19 +116,19 @@
           <% if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_UP_ARROW)) {%>
               <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
                    title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
-                <div class="BlueUpArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.name")%></div>
+                <div class="BlueUpArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.title")%></div>
                 
               </div>
           <% } else if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_DOWN_ARROW)) { %>
               <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("name"))%>"
                    title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameDESC")%>">
-                <div class="BlueDownArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.name")%></div>
+                <div class="BlueDownArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.title")%></div>
                 
               </div>
           <% } else { %>
               <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
                      title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
-                  <%=_ctx.appRes("UIDocumentInfo.header.name")%>
+                  <%=_ctx.appRes("UIDocumentInfo.header.title")%>
               </div>
           <% } %>
         </div>
@@ -176,14 +177,32 @@
         int k = 0; 
         for(int i = 0; i < 5; i++) {
             String label = labels.get(i);
-            List<Node> nodeList = nodeLists.get(i);
+            UIPageIterator pageInterator = pageInterators.get(i);
+            if (pageInterator.getAvailablePage() > 1) {
+              displayPaginator = pageInterator;
+            }
+            List<Node> nodeList = NodeLocation.getNodeListByLocationList(pageInterator.getCurrentPageData());
             if (nodeList.size() == 0) continue;
       %>    
       <div class="TextTitleDay">
+        <% if (uicomponent.getDisplayCategory().equals(uicomponent.CATEGORY_ALL)) { 
+             if (uicomponent.getIsExpanded().get(label) == uicomponent.YES) {
+        %>
+        <a class="ExpandCategory" href="<%=uicomponent.event("ExpandTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.expand")%>"><%=_ctx.appRes(label)%> >></a>
+        <%
+             } else {
+        %>
         <%=_ctx.appRes(label)%>
+        <%   
+             }
+        %>
+        <% } else { %>
+        <a class="CollapseCategory" href="<%=uicomponent.event("CollapseTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.collapse")%>"><%=_ctx.appRes(label)%> <<</a>
+        <% } %>
       </div>  
       <div class="BorderRow">
-          <% for (node in nodeList) {
+          <%
+            for (node in nodeList) {
             def data = node;
             k++;
             def rightClickMenu = "" ;
@@ -312,9 +331,23 @@
               <div style="clear: both;"><span></span></div>
             </div>
           <% } %>
-        </div>
+          <% if (!uicomponent.getDisplayCategory().equals(uicomponent.CATEGORY_ALL)) { %>
+            <div id="FillOutElement"></div>
+          <% } %>   
+      </div>
       <% } %>
     </div>
   </div>
+  <%
+    if (displayPaginator != null) {
+      int availablePage = displayPaginator.getAvailablePage();
+      if (availablePage > 1) { 
+  %>
+        <div class="PageAvailable" pageAvailable='$availablePage'>
+          <%_ctx.renderUIComponent(displayPaginator)%>
+        </div>
+  <%  }
+    } 
+  %>
 </div>
 </div>

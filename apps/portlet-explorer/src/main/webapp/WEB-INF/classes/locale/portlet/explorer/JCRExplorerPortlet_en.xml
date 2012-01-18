@@ -2916,10 +2916,15 @@
       <EarlierThisWeek>Earlier This Week</EarlierThisWeek>
       <EarlierThisMonth>Earlier This Month</EarlierThisMonth>
       <EarlierThisYear>Earlier This Year</EarlierThisYear>
+      <tooltip>
+        <expand>Click here to view full list of this category</expand>
+        <collapse>Click here to view all categories</collapse>
+      </tooltip>
     </label>
     <header>
       <dateTime>Date time</dateTime>
       <name>Name</name>
+      <title>Document Title</title>
     </header>
     <tooltip>
       <View>View</View>

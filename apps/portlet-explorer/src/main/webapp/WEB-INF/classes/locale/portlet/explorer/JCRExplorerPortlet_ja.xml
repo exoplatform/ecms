@@ -2886,10 +2886,15 @@
       <EarlierThisWeek>今週中</EarlierThisWeek>
       <EarlierThisMonth>今月中</EarlierThisMonth>
       <EarlierThisYear>今年中</EarlierThisYear>
+      <tooltip>
+        <expand>Click here to view full list of this category</expand>
+        <collapse>Click here to view all categories</collapse>
+      </tooltip>      
     </label>
     <header>
       <dateTime>日時</dateTime>
       <name>名前</name>
+      <title>Document Title</title>
     </header>
     <tooltip>
       <View>ビュー</View>

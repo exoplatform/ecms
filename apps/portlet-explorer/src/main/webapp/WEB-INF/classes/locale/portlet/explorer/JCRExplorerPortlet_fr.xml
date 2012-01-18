@@ -2913,10 +2913,15 @@
       <EarlierThisWeek>Plus tôt Cette Semaine</EarlierThisWeek>
       <EarlierThisMonth>Plus tôt Ce mois-ci</EarlierThisMonth>
       <EarlierThisYear>Plus tôt Cette Année</EarlierThisYear>
+      <tooltip>
+        <expand>Voir tous les documents de cette liste</expand>
+        <collapse>Voir toutes les catégories</collapse>
+      </tooltip>      
     </label>
     <header>
       <dateTime>Date</dateTime>
       <name>Nom</name>
+      <title>Le titre du document</title>
     </header>
     <tooltip>
       <View>Vue</View>

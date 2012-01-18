@@ -142,42 +142,93 @@ import org.exoplatform.webui.ext.UIExtensionManager;
         @EventConfig(listeners = UIDocumentInfo.StarClickActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.ShowPageActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SortTimelineASCActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.SortTimelineDESCActionListener.class)
+        @EventConfig(listeners = UIDocumentInfo.SortTimelineDESCActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.ExpandTimelineCatergoryActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class)
     }
 )
 public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
-  final private static String CONTENT_PAGE_ITERATOR_ID = "ContentPageIterator";
+  private static final String   NO                                 = "NO";
 
-  final private static String COMMENT_COMPONENT = "Comment";
+  private static final String   YES                                = "YES";
 
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIDocumentInfo");
+  final private static String   COMMENT_COMPONENT                  = "Comment";
 
-  private String typeSort_ = Preference.SORT_BY_NODETYPE;
-  private String sortOrder_ = Preference.BLUE_UP_ARROW;
-  private NodeLocation currentNode_ ;
+  final private static String   CATEGORY_ALL                       = "All";
 
-  private UIPageIterator pageIterator_ ;
+  final private static String   CATEGORY_TODAY                     = "UIDocumentInfo.label.Today";
 
-  private List<NodeLocation> todayNodes;
-  private List<NodeLocation> yesterdayNodes;
-  private List<NodeLocation> earlierThisWeekNodes;
-  private List<NodeLocation> earlierThisMonthNodes;
-  private List<NodeLocation> earlierThisYearNodes;
+  final private static String   CATEGORY_YESTERDAY                 = "UIDocumentInfo.label.Yesterday";
 
-  private String timeLineSortByFavourite = "";
-  private String timeLineSortByName = "";
-  private String timeLineSortByDate = Preference.BLUE_UP_ARROW;
+  final private static String   CATEGORY_WEEK                      = "UIDocumentInfo.label.EarlierThisWeek";
 
-  private FavoriteService favoriteService;
-  private DocumentTypeService documentTypeService;
-  private TemplateService templateService;
+  final private static String   CATEGORY_MONTH                     = "UIDocumentInfo.label.EarlierThisMonth";
+
+  final private static String   CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
+
+  final protected static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
+  
+  final protected static String CONTENT_TODAY_PAGE_ITERATOR_ID     = "ContentTodayPageIterator";
+
+  final protected static String CONTENT_YESTERDAY_PAGE_ITERATOR_ID = "ContentYesterdayPageIterator";
+
+  final protected static String CONTENT_WEEK_PAGE_ITERATOR_ID      = "ContentWeekPageIterator";
+
+  final protected static String CONTENT_MONTH_PAGE_ITERATOR_ID     = "ContentMonthPageIterator";
+
+  final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
+  
+  private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class);
+
+  private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
+
+  private String                sortOrder_                         = Preference.BLUE_UP_ARROW;
+
+  private String                displayCategory_;
+  
+  private int                   itemsPerTimeline;
+
+  private NodeLocation          currentNode_;
+
+  private UIPageIterator        pageIterator_;
+
+  private UIPageIterator        todayPageIterator_;
+
+  private UIPageIterator        yesterdayPageIterator_;
+
+  private UIPageIterator        earlierThisWeekPageIterator_;
+
+  private UIPageIterator        earlierThisMonthPageIterator_;
+
+  private UIPageIterator        earlierThisYearPageIterator_;
+
+  private String                timeLineSortByFavourite            = "";
+
+  private String                timeLineSortByName                 = "";
+
+  private String                timeLineSortByDate                 = Preference.BLUE_UP_ARROW;
+
+  private FavoriteService       favoriteService;
+
+  private DocumentTypeService   documentTypeService;
+
+  private TemplateService       templateService;
+  
+  private HashMap<String, String> isExpanded_;
 
   public UIDocumentInfo() throws Exception {    
-    pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);
+    pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
+    todayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_TODAY_PAGE_ITERATOR_ID);
+    yesterdayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YESTERDAY_PAGE_ITERATOR_ID);
+    earlierThisWeekPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_WEEK_PAGE_ITERATOR_ID);
+    earlierThisMonthPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_MONTH_PAGE_ITERATOR_ID);
+    earlierThisYearPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YEAR_PAGE_ITERATOR_ID);
     favoriteService = this.getApplicationComponent(FavoriteService.class);
     documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
     templateService = getApplicationComponent(TemplateService.class) ;
+    displayCategory_ = UIDocumentInfo.CATEGORY_ALL;
+    isExpanded_ = new HashMap<String, String>();
   }
 
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
@@ -195,30 +246,10 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     this.timeLineSortByDate = timeLineSortByDate;
   }
 
-
-  public List<Node> getTodayNodes() throws Exception {
-    return filterNodeList(NodeLocation.getNodeListByLocationList(todayNodes));
-  }
-
-  public List<Node> getYesterdayNodes() throws Exception {
-    return filterNodeList(NodeLocation.getNodeListByLocationList(yesterdayNodes));
-  }
-
-  public List<Node> getEarlierThisWeekNodes() throws Exception {
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisWeekNodes));
-  }
-
-  public List<Node> getEarlierThisMonthNodes() throws Exception {
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisMonthNodes));
-  }
-
-  public List<Node> getEarlierThisYearNodes() throws Exception {
-    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisYearNodes));
-  }
-
   public void updateNodeLists() throws Exception {
     TimelineService timelineService = getApplicationComponent(TimelineService.class);
-
+    itemsPerTimeline = timelineService.getItemPerTimeline();
+    
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     Session session = uiExplorer.getSession();
@@ -227,17 +258,118 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     String nodePath = uiExplorer.getCurrentPath();
     String tagPath = uiExplorer.getTagPath();
     boolean isViewTag = uiExplorer.isViewTag();
-//    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
-    todayNodes = NodeLocation.getLocationsByNodeList(timelineService.
-          getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, false));
-    yesterdayNodes = NodeLocation.getLocationsByNodeList(timelineService.
-          getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, false));
-    earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
-          getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, false));
-    earlierThisMonthNodes = NodeLocation.getLocationsByNodeList(timelineService.
-          getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, false));
-    earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
-          getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, false));
+    boolean isLimit = false;
+    int nodesPerPage;
+    List<NodeLocation> todayNodes = new ArrayList<NodeLocation>();
+    List<NodeLocation> yesterdayNodes = new ArrayList<NodeLocation>();
+    List<NodeLocation> earlierThisWeekNodes = new ArrayList<NodeLocation>();
+    List<NodeLocation> earlierThisMonthNodes = new ArrayList<NodeLocation>();
+    List<NodeLocation> earlierThisYearNodes = new ArrayList<NodeLocation>();
+    isExpanded_ = new HashMap<String, String>();
+    if (CATEGORY_ALL.equalsIgnoreCase(displayCategory_))  {
+      nodesPerPage = Integer.MAX_VALUE; // always display in one page (no paginator)
+      todayNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                       getDocumentsOfToday(nodePath, workspace, 
+                                                                           sessionProvider, userName, false, isLimit));
+      if (todayNodes.size() > this.getItemsPerTimeline()) {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_TODAY, YES);
+        todayNodes = todayNodes.subList(0, this.getItemsPerTimeline());        
+      } else {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_TODAY, NO);
+      }
+      yesterdayNodes = NodeLocation.getLocationsByNodeList(timelineService.getDocumentsOfYesterday(nodePath,
+                                                                                                   workspace,
+                                                                                                   sessionProvider,
+                                                                                                   userName,
+                                                                                                   false,
+                                                                                                   isLimit));
+      if (yesterdayNodes.size() > this.getItemsPerTimeline()) {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_YESTERDAY, YES);
+        yesterdayNodes = yesterdayNodes.subList(0, this.getItemsPerTimeline());        
+      } else {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_YESTERDAY, NO);
+      }
+      earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                 getDocumentsOfEarlierThisWeek(nodePath, 
+                                                                                               workspace, 
+                                                                                               sessionProvider,
+                                                                                               userName,
+                                                                                               false,
+                                                                                               isLimit));
+      if (earlierThisWeekNodes.size() > this.getItemsPerTimeline()) {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_WEEK, YES);
+        earlierThisWeekNodes = earlierThisWeekNodes.subList(0, this.getItemsPerTimeline());
+      } else {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_WEEK, NO);
+      }
+      earlierThisMonthNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                  getDocumentsOfEarlierThisMonth(nodePath, 
+                                                                                                 workspace, 
+                                                                                                 sessionProvider, 
+                                                                                                 userName,
+                                                                                                 false, 
+                                                                                                 isLimit));
+      if (earlierThisMonthNodes.size() > this.getItemsPerTimeline()) {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_MONTH, YES);
+        earlierThisMonthNodes = earlierThisMonthNodes.subList(0, this.getItemsPerTimeline());
+      } else {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_MONTH, NO);
+      }
+      earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                 getDocumentsOfEarlierThisYear(nodePath,
+                                                                                               workspace,
+                                                                                               sessionProvider,
+                                                                                               userName,
+                                                                                               false,
+                                                                                               isLimit));   
+      if (earlierThisYearNodes.size() > this.getItemsPerTimeline()) {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_YEAR, YES);
+        earlierThisYearNodes = earlierThisYearNodes.subList(0, this.getItemsPerTimeline());        
+      } else {
+        isExpanded_.put(UIDocumentInfo.CATEGORY_YEAR, NO);
+      }
+    } else {
+      nodesPerPage = uiExplorer.getPreference().getNodesPerPage();
+      if (CATEGORY_TODAY.equalsIgnoreCase(displayCategory_)) {
+        todayNodes = NodeLocation.getLocationsByNodeList(timelineService.getDocumentsOfToday(nodePath,
+                                                                                             workspace,
+                                                                                             sessionProvider,
+                                                                                             userName,
+                                                                                             false,
+                                                                                             isLimit));
+      } else if (CATEGORY_YESTERDAY.equalsIgnoreCase(displayCategory_)) {
+        yesterdayNodes = NodeLocation.getLocationsByNodeList(timelineService.getDocumentsOfYesterday(nodePath,
+                                                                                                     workspace,
+                                                                                                     sessionProvider,
+                                                                                                     userName,
+                                                                                                     false,
+                                                                                                     isLimit));        
+      } else if (CATEGORY_WEEK.equalsIgnoreCase(displayCategory_)) {
+        earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                   getDocumentsOfEarlierThisWeek(nodePath,
+                                                                                                 workspace,
+                                                                                                 sessionProvider,
+                                                                                                 userName,
+                                                                                                 false,
+                                                                                                 isLimit));
+      } else if (CATEGORY_MONTH.equalsIgnoreCase(displayCategory_)) {
+        earlierThisMonthNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                    getDocumentsOfEarlierThisMonth(nodePath,
+                                                                                                   workspace,
+                                                                                                   sessionProvider,
+                                                                                                   userName,
+                                                                                                   false,
+                                                                                                   isLimit));        
+      } else if (CATEGORY_YEAR.equalsIgnoreCase(displayCategory_)) {
+        earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
+                                                                   getDocumentsOfEarlierThisYear(nodePath,
+                                                                                                 workspace,
+                                                                                                 sessionProvider,
+                                                                                                 userName,
+                                                                                                 false,
+                                                                                                 isLimit));
+      }
+    }
 
     if(isViewTag && tagPath != null) {
       if(todayNodes.size() > 0) todayNodes = filterDocumentsByTag(todayNodes, tagPath);
@@ -252,6 +384,21 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     Collections.sort(earlierThisWeekNodes, new SearchComparator());
     Collections.sort(earlierThisMonthNodes, new SearchComparator());
     Collections.sort(earlierThisYearNodes, new SearchComparator());
+    
+    ListAccess<NodeLocation> todayNodesList = new ListAccessImpl<NodeLocation>(NodeLocation.class, todayNodes);
+    todayPageIterator_.setPageList(new LazyPageList<NodeLocation>(todayNodesList, nodesPerPage));
+    
+    ListAccess<NodeLocation> yesterdayNodesList = new ListAccessImpl<NodeLocation>(NodeLocation.class, yesterdayNodes);
+    yesterdayPageIterator_.setPageList(new LazyPageList<NodeLocation>(yesterdayNodesList, nodesPerPage));
+    
+    ListAccess<NodeLocation> earlierThisWeekList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisWeekNodes);
+    earlierThisWeekPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisWeekList, nodesPerPage));
+    
+    ListAccess<NodeLocation> earlierThisMonthList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisMonthNodes);
+    earlierThisMonthPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisMonthList, nodesPerPage));
+    
+    ListAccess<NodeLocation> earlierThisYearList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisYearNodes);
+    earlierThisYearPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisYearList, nodesPerPage));    
   }
 
   public List<NodeLocation> filterDocumentsByTag(List<NodeLocation> nodes, String path) throws Exception {
@@ -280,7 +427,39 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return NodeLocation.getLocationsByNodeList(documents);
   }
 
-  public UIPageIterator getContentPageIterator() {return pageIterator_ ; }
+  public String getDisplayCategory() {
+    if (displayCategory_ == null || displayCategory_.trim().length() == 0) {
+      return CATEGORY_ALL;
+    }
+    return displayCategory_;
+  }
+
+  public UIPageIterator getContentPageIterator() {
+    return pageIterator_;
+  }
+  
+  /**
+   * @return the todayPageIterator_
+   */
+  public UIPageIterator getTodayPageIterator() {
+    return todayPageIterator_;
+  }
+  
+  public UIPageIterator getYesterdayPageIterator() {
+    return yesterdayPageIterator_;
+  }
+  
+  public UIPageIterator getWeekPageIterator() {
+    return earlierThisWeekPageIterator_;
+  }
+  
+  public UIPageIterator getMonthPageIterator() {
+    return earlierThisMonthPageIterator_;
+  }
+  
+  public UIPageIterator getYearPageIterator() {
+    return earlierThisYearPageIterator_;
+  }  
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
     return Utils.getUIComponent(mimeType, this);
@@ -690,6 +869,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
     pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
+    
+    updateNodeLists();    
   }
 
   @SuppressWarnings("unchecked")
@@ -983,7 +1164,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   static public class SortActionListener extends EventListener<UIDocumentInfo> {
     public void execute(Event<UIDocumentInfo> event) throws Exception {
       UIDocumentInfo uicomp = event.getSource() ;
-      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ;
+      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
@@ -1209,6 +1390,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiDocumentInfo.timeLineSortByName = "";
         uiDocumentInfo.timeLineSortByDate = Preference.BLUE_DOWN_ARROW;
       }
+      uiDocumentInfo.updateNodeLists();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
     }
   }
 
@@ -1229,6 +1412,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uiDocumentInfo.timeLineSortByName = "";
         uiDocumentInfo.timeLineSortByDate = Preference.BLUE_UP_ARROW;
       }
+      uiDocumentInfo.updateNodeLists();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
     }
   }
@@ -1236,6 +1420,11 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   static public class ShowPageActionListener extends EventListener<UIPageIterator> {
     public void execute(Event<UIPageIterator> event) throws Exception {
       UIPageIterator uiPageIterator = event.getSource() ;
+      
+      // If in the timeline view, then does not have the equivalent paginator on the left tree view explorer
+      if (!UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID.equalsIgnoreCase(uiPageIterator.getId())) {
+        return;
+      }
       UIApplication uiApp = uiPageIterator.getAncestorOfType(UIApplication.class);
       UIJCRExplorer explorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);
       UITreeExplorer treeExplorer = explorer.findFirstComponentOfType(UITreeExplorer.class);
@@ -1279,8 +1468,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
         } else if (timeLineSortByName.length() != 0) {
           int factor = timeLineSortByName.equals(Preference.BLUE_DOWN_ARROW) ? 1 : -1;
-          String s1 = node1.getName();
-          String s2 = node2.getName();
+          String s1 = Utils.getTitle(node1).toLowerCase();
+          String s2 = Utils.getTitle(node2).toLowerCase();
           return factor * s1.compareTo(s2);
         }
       } catch (Exception e) {
@@ -1288,6 +1477,33 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       }
       return 0;
     }
+  }
+  
+  static public class CollapseTimelineCatergoryActionListener extends EventListener<UIDocumentInfo> {
+
+    @Override
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
+      UIDocumentInfo uiDocumentInfo = event.getSource();
+      UIJCRExplorer uiExplorer = uiDocumentInfo.getAncestorOfType(UIJCRExplorer.class);
+      uiDocumentInfo.displayCategory_ = UIDocumentInfo.CATEGORY_ALL;
+
+      uiExplorer.updateAjax(event);
+    }
+
+  }
+
+  static public class ExpandTimelineCatergoryActionListener extends EventListener<UIDocumentInfo> {
+
+    @Override
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
+      UIDocumentInfo uiDocumentInfo = event.getSource();
+      UIJCRExplorer uiExplorer = uiDocumentInfo.getAncestorOfType(UIJCRExplorer.class);
+      String category = event.getRequestContext().getRequestParameter(OBJECTID);
+      uiDocumentInfo.displayCategory_ = category;
+
+      uiExplorer.updateAjax(event);
+    }
+
   }
 
   public boolean isEnableComment() {
@@ -1314,4 +1530,23 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }
+
+  /**
+   * @return the itemsPerTimeline
+   */
+  public int getItemsPerTimeline() {
+    if (itemsPerTimeline <=0 ) {
+      return 5;
+    }
+    return itemsPerTimeline;
+  }
+
+  /**
+   * 
+   * @return
+   */
+  public HashMap<String, String> getIsExpanded() {
+    return isExpanded_;
+  }
+  
 }

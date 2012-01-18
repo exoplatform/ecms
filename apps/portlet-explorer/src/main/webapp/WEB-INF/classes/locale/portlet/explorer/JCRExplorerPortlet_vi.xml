@@ -2959,10 +2959,15 @@
       <EarlierThisWeek>Trong tuần</EarlierThisWeek>
       <EarlierThisMonth>Trong tháng</EarlierThisMonth>
       <EarlierThisYear>Trong năm</EarlierThisYear>
+      <tooltip>
+        <expand>Click here to view full list of this category</expand>
+        <collapse>Click here to view all categories</collapse>
+      </tooltip>      
     </label>
     <header>
       <dateTime>Ngày đổi</dateTime>
       <name>Tên</name>
+      <title>Document Title</title>
     </header>
     <tooltip>
       <View>Xem</View>

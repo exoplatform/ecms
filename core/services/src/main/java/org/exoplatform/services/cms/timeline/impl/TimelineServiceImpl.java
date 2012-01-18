@@ -89,6 +89,18 @@ public class TimelineServiceImpl implements TimelineService {
                                                   SessionProvider sessionProvider,
                                                   String userName,
                                                   boolean byUser) throws Exception {
+    return getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, byUser, true);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getDocumentsOfEarlierThisYear(String nodePath,
+                                                  String workspace,
+                                                  SessionProvider sessionProvider,
+                                                  String userName,
+                                                  boolean byUser,
+                                                  boolean isLimit) throws Exception {
 
     List<Node> documentsOfYear = new ArrayList<Node>();
     Session session = getSession(sessionProvider, workspace);
@@ -113,7 +125,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     sb.append(" ORDER BY ").append(EXO_MODIFIED_DATE);
 
-    QueryResult result = executeQuery(session, sb.toString(), Query.SQL);
+    QueryResult result = executeQuery(session, sb.toString(), Query.SQL, isLimit);
     NodeIterator nodeIter = result.getNodes();
     while (nodeIter.hasNext()) {
       documentsOfYear.add(nodeIter.nextNode());
@@ -138,6 +150,17 @@ public class TimelineServiceImpl implements TimelineService {
                                                    SessionProvider sessionProvider,
                                                    String userName,
                                                    boolean byUser) throws Exception {
+    return getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, byUser, true);
+  }
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
+                                                   String workspace,
+                                                   SessionProvider sessionProvider,
+                                                   String userName,
+                                                   boolean byUser,
+                                                   boolean isLimit) throws Exception {
 
     List<Node> documentsOfMonth = new ArrayList<Node>();
     Session session = getSession(sessionProvider, workspace);
@@ -162,7 +185,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     sb.append(" ORDER BY ").append(EXO_MODIFIED_DATE);
 
-    QueryResult result = executeQuery(session, sb.toString(), Query.SQL);
+    QueryResult result = executeQuery(session, sb.toString(), Query.SQL, isLimit);
     NodeIterator nodeIter = result.getNodes();
     while (nodeIter.hasNext()) {
       documentsOfMonth.add(nodeIter.nextNode());
@@ -191,6 +214,17 @@ public class TimelineServiceImpl implements TimelineService {
                                                   SessionProvider sessionProvider,
                                                   String userName,
                                                   boolean byUser) throws Exception {
+    return getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, byUser, true);
+  }
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
+                                                  String workspace,
+                                                  SessionProvider sessionProvider,
+                                                  String userName,
+                                                  boolean byUser,
+                                                  boolean isLimit) throws Exception {
 
     List<Node> documentsOfWeek = new ArrayList<Node>();
     Session session = getSession(sessionProvider, workspace);
@@ -215,7 +249,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     sb.append(" ORDER BY ").append(EXO_MODIFIED_DATE);
 
-    QueryResult result = executeQuery(session, sb.toString(), Query.SQL);
+    QueryResult result = executeQuery(session, sb.toString(), Query.SQL, isLimit);
     NodeIterator nodeIter = result.getNodes();
     while(nodeIter.hasNext()) {
       documentsOfWeek.add(nodeIter.nextNode());
@@ -244,6 +278,18 @@ public class TimelineServiceImpl implements TimelineService {
                                             SessionProvider sessionProvider,
                                             String userName,
                                             boolean byUser) throws Exception {
+    return getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, byUser, true);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getDocumentsOfYesterday(String nodePath,
+                                            String workspace,
+                                            SessionProvider sessionProvider,
+                                            String userName,
+                                            boolean byUser,
+                                            boolean isLimit) throws Exception {
 
     List<Node> documentsOfYesterday = new ArrayList<Node>();
     Session session = getSession(sessionProvider, workspace);
@@ -268,7 +314,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     sb.append(" ORDER BY ").append(EXO_MODIFIED_DATE);
 
-    QueryResult result = executeQuery(session, sb.toString(), Query.SQL);
+    QueryResult result = executeQuery(session, sb.toString(), Query.SQL, isLimit);
     NodeIterator nodeIter = result.getNodes();
     while(nodeIter.hasNext()) {
       documentsOfYesterday.add(nodeIter.nextNode());
@@ -297,6 +343,18 @@ public class TimelineServiceImpl implements TimelineService {
                                         SessionProvider sessionProvider,
                                         String userName,
                                         boolean byUser) throws Exception {
+    return getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, byUser, true);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getDocumentsOfToday(String nodePath,
+                                        String workspace,
+                                        SessionProvider sessionProvider,
+                                        String userName,
+                                        boolean byUser,
+                                        boolean isLimit) throws Exception {
     List<Node> documentsOfToday = new ArrayList<Node>();
     Session session = getSession(sessionProvider, workspace);
     Calendar currentTime = new GregorianCalendar();
@@ -316,7 +374,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     sb.append(" ORDER BY ").append(EXO_MODIFIED_DATE).append(" DESC");
 
-    QueryResult result = executeQuery(session, sb.toString(), Query.SQL);
+    QueryResult result = executeQuery(session, sb.toString(), Query.SQL, isLimit);
     NodeIterator nodeIter = result.getNodes();
     while(nodeIter.hasNext()) {
       documentsOfToday.add(nodeIter.nextNode());
@@ -324,20 +382,24 @@ public class TimelineServiceImpl implements TimelineService {
     return documentsOfToday;
   }
 
-  private Session getSession(SessionProvider sessionProvider, String workspace
-  ) throws RepositoryException, RepositoryConfigurationException {
+  private Session getSession(SessionProvider sessionProvider, String workspace) throws RepositoryException,
+                                                                               RepositoryConfigurationException {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return sessionProvider.getSession(workspace, manageableRepository);
   }
 
-  private QueryResult executeQuery(Session session, String statement, String language
-  ) throws Exception {
+  private QueryResult executeQuery(Session session,
+                                   String statement,
+                                   String language,
+                                   boolean isLimt) throws Exception {
     try {
       QueryManager queryManager = session.getWorkspace().getQueryManager();
-      QueryImpl query = (QueryImpl)queryManager.createQuery(statement, language);
-      query.setLimit(itemPerTimeline);
+      QueryImpl query = (QueryImpl) queryManager.createQuery(statement, language);
+      if (isLimt) {
+        query.setLimit(itemPerTimeline);
+      }
       return query.execute();
-    } catch(Exception e) {
+    } catch (Exception e) {
       LOG.error("Can not execute query", e);
       return null;
     }
@@ -402,5 +464,19 @@ public class TimelineServiceImpl implements TimelineService {
     theFirst.set(time.get(Calendar.YEAR), 0, 1, 0, 0, 0);
     String theFirstDate = formatDateTime.format(theFirst.getTime());
     return theFirstDate + TIME_FORMAT_TAIL;
+  }
+
+  /**
+   * Get the number of items per category displayed in Timeline view. this is
+   * get from initialize parameter of Timeline Service class If less than or
+   * equal zero then use default value 5 items per category.
+   * 
+   * @return
+   */
+  public int getItemPerTimeline() {
+    if (itemPerTimeline <= 0) {
+      return 5;
+    }
+    return itemPerTimeline;
   }
 }

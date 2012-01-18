@@ -68,6 +68,24 @@ public interface TimelineService {
                                         SessionProvider sessionProvider,
                                         String userName,
                                         boolean byUser) throws Exception;
+  
+  /**
+   * Get all documents of Today
+   * 
+   * @param nodePath Path of current node
+   * @param workspace Workspace name
+   * @param sessionProvider SessionProvider
+   * @param userName Logged in user
+   * @param byUser show documents by current user or by all users
+   * @param isLimit indicate that the limitation of query is enabled or not
+   * @return List<Node>
+   */
+  public List<Node> getDocumentsOfToday(String nodePath,
+                                        String workspace,
+                                        SessionProvider sessionProvider,
+                                        String userName,
+                                        boolean byUser,
+                                        boolean isLimit) throws Exception;  
 
   /**
    * Get all documents of Yesterday
@@ -102,7 +120,25 @@ public interface TimelineService {
                                             String workspace,
                                             SessionProvider sessionProvider,
                                             String userName,
-                                            boolean byUser) throws Exception; 
+                                            boolean byUser) throws Exception;
+  
+  /**
+   * Get all documents of Yesterday
+   * 
+   * @param nodePath Path of current node
+   * @param workspace Workspace name
+   * @param sessionProvider SessionProvider
+   * @param userName Logged in user
+   * @param byUser show documents by current user or by all users
+   * @param isLimit indicate that the limitation of query is enabled or not
+   * @return List<Node>
+   */
+  public List<Node> getDocumentsOfYesterday(String nodePath,
+                                            String workspace,
+                                            SessionProvider sessionProvider,
+                                            String userName,
+                                            boolean byUser,
+                                            boolean isLimit) throws Exception;   
 
   /**
    * Get all documents earlier this week
@@ -137,7 +173,25 @@ public interface TimelineService {
                                                   String workspace,
                                                   SessionProvider sessionProvider,
                                                   String userName,
-                                                  boolean byUser) throws Exception; 
+                                                  boolean byUser) throws Exception;
+  
+  /**
+   * Get all documents earlier this week
+   * 
+   * @param nodePath Path of current node
+   * @param workspace Workspace name
+   * @param sessionProvider SessionProvider
+   * @param userName Logged in user
+   * @param byUser show documents by current user or by all users
+   * @param isLimit indicate that the limitation of query is enabled or not
+   * @return List<Node>
+   */
+  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
+                                                  String workspace,
+                                                  SessionProvider sessionProvider,
+                                                  String userName,
+                                                  boolean byUser,
+                                                  boolean isLimit) throws Exception;
 
   /**
    * Get all documents earlier this month
@@ -172,7 +226,25 @@ public interface TimelineService {
                                                    String workspace,
                                                    SessionProvider sessionProvider,
                                                    String userName,
-                                                   boolean byUser) throws Exception;  
+                                                   boolean byUser) throws Exception;
+  
+  /**
+   * Get all documents earlier this month
+   * 
+   * @param nodePath Path of current node
+   * @param workspace Workspace name
+   * @param sessionProvider SessionProvider
+   * @param userName Logged in user
+   * @param byUser show documents by current user or by all users
+   * @param isLimit indicate that the limitation of query is enabled or not
+   * @return List<Node>
+   */
+  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
+                                                   String workspace,
+                                                   SessionProvider sessionProvider,
+                                                   String userName,
+                                                   boolean byUser,
+                                                   boolean isLimit) throws Exception;  
 
   /**
    * Get all documents earlier this year
@@ -207,5 +279,32 @@ public interface TimelineService {
                                                   String workspace,
                                                   SessionProvider sessionProvider,
                                                   String userName,
-                                                  boolean byUser) throws Exception;  
+                                                  boolean byUser) throws Exception;
+  
+  /**
+   * Get all documents earlier this year
+   * 
+   * @param nodePath Path of current node
+   * @param workspace Workspace name
+   * @param sessionProvider SessionProvider
+   * @param userName Logged in user
+   * @param byUser show documents by current user or by all users
+   * @param isLimit indicate that the limitation of query is enabled or not
+   * @return List<Node>
+   */
+  public List<Node> getDocumentsOfEarlierThisYear(String nodePath,
+                                                  String workspace,
+                                                  SessionProvider sessionProvider,
+                                                  String userName,
+                                                  boolean byUser,
+                                                  boolean isLimit) throws Exception;
+  
+  /**
+   * Get the number of items per category displayed in Timeline view. this is
+   * get from initialize parameter of Timeline Service class If less than or
+   * equal zero then use default value 5 items per category.
+   * 
+   * @return
+   */
+  public int getItemPerTimeline();
 }

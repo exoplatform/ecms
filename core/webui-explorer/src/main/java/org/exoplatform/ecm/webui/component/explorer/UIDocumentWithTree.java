@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.explorer;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPageIterator;
 
 
 /**
@@ -41,7 +40,12 @@ import org.exoplatform.webui.core.UIPageIterator;
 public class UIDocumentWithTree extends UIDocumentInfo {
 
   public UIDocumentWithTree() throws Exception {
-    getChild(UIPageIterator.class).setId("PageIteratorWithTreeView") ;
+    getChildById(CONTENT_PAGE_ITERATOR_ID).setId("PageIteratorWithTreeView");
+    getChildById(CONTENT_TODAY_PAGE_ITERATOR_ID).setId("TodayPageIteratorWithTreeView");
+    getChildById(CONTENT_YESTERDAY_PAGE_ITERATOR_ID).setId("YesterdayPageIteratorWithTreeView");
+    getChildById(CONTENT_WEEK_PAGE_ITERATOR_ID).setId("WeekPageIteratorWithTreeView");
+    getChildById(CONTENT_MONTH_PAGE_ITERATOR_ID).setId("MonthPageIteratorWithTreeView");
+    getChildById(CONTENT_YEAR_PAGE_ITERATOR_ID).setId("YearPageIteratorWithTreeView");    
   }
 
   public String getTemplate() {

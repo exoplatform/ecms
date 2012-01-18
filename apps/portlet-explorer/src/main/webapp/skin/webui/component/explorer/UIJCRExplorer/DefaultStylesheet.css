@@ -611,12 +611,22 @@
 	overflow: hidden;
 }
 
-.UIJCRExplorerPortlet .UITimelineView .TextTitleDay{
-	padding: 5px 0px 0px 10px; /* orientation=lt */
-	padding: 5px 10px 0px 0px; /* orientation=rt */
-	font-weight: bold;
+.UIJCRExplorerPortlet .UITimelineView .TextTitleDay {
+  padding: 5px 0px 0px 10px; /* orientation=lt */
+  padding: 5px 10px 0px 0px; /* orientation=rt */
+  font-weight: bold;
+}
+ 
+.UIJCRExplorerPortlet .UITimelineView .TextTitleDay a:hover {
+  color: blue;
+}
 
+.UIJCRExplorerPortlet .UITimelineView .ExpandCategory {
+  cursor: pointer;
+}
 
+.UIJCRExplorerPortlet .UITimelineView .CollapseCategory {
+  cursor: pointer;
 }
 
 .UIJCRExplorerPortlet .StarLight{
