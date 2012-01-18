@@ -7,7 +7,7 @@
   <title>Manage content in Sites Explorer</title>
   <para>
    Web content is a key resource which is used for a site. Other resources make a site more dynamic and animated by using
-    layout, color, font, and more. This section focuses on how to manage a web content in a specific site.
+    layout, color, font, and more. This section focuses on how to manage web content in a specific site.
   </para>
   <note>
     <para>
@@ -17,37 +17,37 @@
     </para>
   </note>
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Create_a_new_web_content">
-    <title>Create a new web content</title>
+    <title>Create new web content</title>
     <para>
-      This function is used to add a new web content to a specific site.
+      This function is used to add new web content to a specific site.
     </para>
     <procedure>
       <step>
         <para>
           Go to the 
           <emphasis role="bold">Sites Management</emphasis>
-          drive, then select a site to which you want to add a web content.
+          drive, then select a site to which you want to add web content.
         </para>
       </step>
       <step>
         <para>
           Select the
-          <emphasis role="bold">web contents</emphasis>
+          <emphasis role="bold">web content</emphasis>
           folder on the left.
         </para>
         <note>
           <para>
-            In this step, you also can add a new web content into another folders (documents and media folders) of a
+            In this step, you also can add new web content into another folders (documents and media folders) of a
             site but you are recommended to select the
-            <emphasis role="bold">web contents</emphasis>
+            <emphasis role="bold">web content</emphasis>
             folder because:
           </para>
               <para>
                 Managing web content of a site becomes more easily.
               </para>
               <para>
-                You only may add a new web content in this folder so that you do not need to select a web content
-                document in the list of document types. It makes adding a new web content more flexibly.
+                You only may add new web content in this folder so that you do not need to select web content
+                document in the list of document types. It makes adding new web content more flexibly.
               </para>
         </note>
       </step>
@@ -80,12 +80,12 @@
       <!--  <itemizedlist>
           <listitem>
             <para>
-              <emphasis role="bold">Free layout webcontent:</emphasis> This template is a free layout.
+              <emphasis role="bold">Free layout web content:</emphasis> This template is a free layout.
             </para>
           </listitem>
           <listitem>
             <para>
-              <emphasis role="bold">Picture on head layout webcontent:</emphasis> The site's content is
+              <emphasis role="bold">Picture on head layout web content:</emphasis> The site's content is
               presented in two spaces. One is for inserting an image and the other for editing the site's content.
               The image will be put at the head of a site.
             </para>
@@ -138,7 +138,7 @@
                 <emphasis role="bold">Title</emphasis>
               </entry>
               <entry>
-                The title of a webcontent.
+                The title of the web content.
               </entry>
             </row>
             <row>
@@ -146,7 +146,7 @@
                 <emphasis role="bold">Name</emphasis>
               </entry>
               <entry>
-                The name of the webcontent that you want to add new.
+                The name of the web content that you want to add new.
               </entry>
             </row>
              <row>
@@ -154,7 +154,7 @@
                 <emphasis role="bold">Language</emphasis>
               </entry>
               <entry>
-                The language of the webcontent. At present, eXo Platform 3.5 supports two languages: English and French.
+                The language of the web content. At present, eXo Platform 3.5 supports two languages: English and French.
               </entry>
             </row>
             <row>
@@ -162,7 +162,7 @@
                 <emphasis role="bold">Main Content</emphasis>
               </entry>
               <entry>
-                The main content that you want to display when publishing this webcontent.
+                The main content that you want to display when publishing this web content.
               </entry>
             </row>
           </tbody>
@@ -208,7 +208,7 @@
                <emphasis role="bold">Summary</emphasis>
               </entry>
               <entry>
-                You can give a short description about the webcontent because it will be displayed with the illustration image when the webcontent is listed. The main content will be shown when it is selected to be viewed.
+                You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
               </entry>
             </row>
           </tbody>
@@ -265,7 +265,7 @@
                 <emphasis role="bold">CSS Data</emphasis>
               </entry>
               <entry>
-                Contain the CSS definition to present data in a webcontent. You can optionally enter CSS data into this
+                Contain the CSS definition to present data in the web content. You can optionally enter CSS data into this
                 field to specify the style.
               </entry>
             </row>
@@ -274,7 +274,7 @@
                 <emphasis role="bold">JS Data</emphasis>
               </entry>
               <entry>
-                Contain the JS content to make the webcontent more dynamic after being published. You can optionally enter
+                Contain the JS content to make the web content more dynamic after being published. You can optionally enter
                 the JS content in this field.
               </entry>
             </row>
@@ -284,20 +284,20 @@
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
-    <title>Edit a webcontent</title>
+    <title>Edit web content</title>
     <para>
-      This function is used to edit a webcontent in a specific drive of an existing site.
+      This function is used to edit web content in a specific drive of an existing site.
     </para>
     <procedure>
       <step>
         <para>
-          Go into the folder of a site which contains the webcontent that you want to edit.
+          Go into the folder of a site which contains the web content that you want to edit.
         </para>
       </step>
       <step>
         <para>
-          Select the webcontent by double-clicking it in the left tree or in the right pane. The detailed information
-          of webcontent will be viewed in the right pane.
+          Select the web content by double-clicking it in the left tree or in the right pane. The detailed information
+          of web content will be viewed in the right pane.
         </para>
 
       </step>
@@ -312,7 +312,7 @@
               <phrase>[ Edit Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to show the form to edit the selected webcontent. This form is similar to that of creating
+          on the <emphasis role="bold">Action</emphasis> bar to show the form to edit the selected web content. This form is similar to that of creating
           a new document.
         </para>
       </step>
@@ -323,7 +323,7 @@
       </step>
       <step>
         <para>
-          Complete editing the selected webcontent by clicking
+          Complete editing the selected web content by clicking
           <emphasis role="bold">Save</emphasis>
           or <emphasis role="bold">Save &amp; Close.</emphasis>
         </para>
@@ -331,21 +331,21 @@
     </procedure>
     <note>
       <para>
-        When you click <emphasis role="bold">Edit Document,</emphasis> the webcontent will be auto-locked for your
+        When you click <emphasis role="bold">Edit Document,</emphasis> the web content will be auto-locked for your
         editing. After finishing, the content is back to the unlock status. You can manage "Locks" in the <link linkend="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">Unlock a node</link> section.
       </para>
     </note>
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
-    <title>Delete a webcontent</title>
+    <title>Delete web content</title>
     <para>
-      This function is used to remove a webcontent from the webcontent folder in a specific site's drive.
+      This function is used to remove web content from the web content folder in a specific site's drive.
     </para>
     <procedure>
       <step>
         <para>
-          Right-click the name of the webcontent that you want to delete, then select
+          Right-click the name of the web content that you want to delete, then select
           <emphasis role="bold">Delete</emphasis>
           from the drop-down menu.
         </para>
@@ -361,14 +361,14 @@
   </section>
 
   <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
-    <title>Publish a webcontent</title>
+    <title>Publish web content</title>
     <para>
-      This function helps you publish a webcontent that you have added to webcontent folder in <emphasis role="bold">Sites Explorer</emphasis>.
+      This function helps you publish web content that you have added to a web content folder in <emphasis role="bold">Sites Explorer</emphasis>.
     </para>
     <para>
       See the
       <link linkend="sect-User_Guide-Contribute_Content-Publication_Process">Publication process</link>
-      section to know how to publish a webcontent.
+      section to know how to publish web content.
     </para>
     <para>
       After the content is published, all users who have the right to access that position can view the published web

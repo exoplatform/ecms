@@ -9,7 +9,7 @@
     SEO (Search Engine Optimization) allows you to improve the visibility of your webpages and web content in the major
     search engines (Google, Yahoo, MSN, Live) via the search results. The higher your website position is in the search
     engine results page, the more visitors access it. Therefore, it is very important for you to maximize your webpages
-    and contents' position in the search engines.
+    and content's position in the search engines.
   </para>
   <para>
     In &PRODUCT;, the <emphasis role="bold">SEO Management</emphasis> feature is featured to meet this target. By using <emphasis role="bold">SEO Management,</emphasis> you can easily manage SEO data
@@ -20,7 +20,7 @@
   </citetitle>
   <procedure>
     <step>
-      <para>Open a page or a content that you want to edit the SEO data.</para>
+      <para>Open a page or content that you want to edit the SEO data.</para>
     </step>
     <step>
       <para>
@@ -37,11 +37,11 @@
         </imageobject>
       </mediaobject>
 
-      <para>Depending on your SEO management for a page or a content, the content of the <emphasis role="bold">SEO Management</emphasis> form will be different.
+      <para>Depending on your SEO management for a page or content, the content of the <emphasis role="bold">SEO Management</emphasis> form will be different.
       </para>
       <itemizedlist>
       <listitem>
-      <para>The <emphasis role="bold">SEO Management</emphasis> form for a content is as follows.</para>
+      <para>The <emphasis role="bold">SEO Management</emphasis> form for content is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"/>

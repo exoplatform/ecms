@@ -33,7 +33,7 @@
 			</imageobject>
 		</mediaobject>
 		 <para>
-			The Site Content are stored in collaboration workspaces of Java Content Repository (JCR).
+			The Site Content is stored in collaboration workspaces of Java Content Repository (JCR).
 		</para>
 		 <variablelist id="vari-User_Guide-Site_Content_Structure-Details">
 			<title>Details:</title>
@@ -204,12 +204,12 @@
 		 <section id="sect-User_Guide-Terminologies-Repository">
 			<title>Repository</title>
 			 <para>
-				A repository is a place where contents are stored and maintained. The content repository is:
+				A repository is a place where content is stored and maintained. The content repository is:
 			</para>
 			 <itemizedlist>
 				<listitem>
 					<para>
-						A place where contents are stored.
+						A place where content is stored.
 					</para>
 
 				</listitem>
@@ -260,7 +260,7 @@
 					<term>Collaboration workspace:</term>
 					 <listitem>
 						<para>
-							Allows users to validate and manage documents. This is the central place to store and edit contents and media.
+							Allows users to validate and manage documents. This is the central place to store and edit content and media.
 						</para>
 
 					</listitem>

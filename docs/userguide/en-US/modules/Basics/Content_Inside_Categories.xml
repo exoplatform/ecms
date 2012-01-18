@@ -6,16 +6,16 @@
 <section id="sect-User_Guide-Content_Inside_Categories">
   <title>Content inside categories</title>
     <para>
-		In eXo Platform, you can create new contents in any folders or directly in a CLV with <emphasis role="bold">Incontext Editing.</emphasis>
-    However, to facilitate the content management, categories are usually used to sort and organize documents that makes your desired searches more quickly. Also, creating contents inside a category helps you manage and publish them effectively.
+		In eXo Platform, you can create new content in any folders or directly in a CLV with <emphasis role="bold">Incontext Editing.</emphasis>
+    However, to facilitate the content management, categories are usually used to sort and organize documents that makes your desired searches more quickly. Also, creating content inside a category helps you manage and publish them effectively.
 	</para>
   <para>
  After creating a document, you should categorize it by adding it to a category. Otherwise, documents should be created right in a category and links to those documents will be automatically created in the category. In eXo Platform, categories are stored in JCR.
 	 </para>
 	 <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
-		<title>Create a content inside a category</title>
+		<title>Create content inside a category</title>
 		 <para>
-			This section will show you how to create a content in a category.
+			This section will show you how to create content in a category.
 		</para>
 		 <procedure>
 			 <step>
@@ -52,7 +52,7 @@
 			</step>
 			 <step>
 				<para>
-					Click the <emphasis role="bold">Add Content</emphasis> button to create a new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add a new content. The new content is a Symlink.
+					Click the <emphasis role="bold">Add Content</emphasis> button to create new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add new content. The new content is a Symlink.
 					To view the content, simply click the Symlink.
         </para>
              <mediaobject>
@@ -71,14 +71,14 @@
 	<!--  Remove
   <section id="sect-User_Guide-Content_Inside_Categories-Organize_Content">
     <title>Organize Content</title>
-    <para>  After a content is created in a category, it will be stored in Category Navigation. ( See more about Category Navigation at <xref linkend="sect-User_Guide-Category_Navigation"/> .) </para>
+    <para>  After content is created in a category, it will be stored in Category Navigation. ( See more about Category Navigation at <xref linkend="sect-User_Guide-Category_Navigation"/> .) </para>
     <para>If the content is not published, you cannot see it in the Published Mode. To see it in Category Navigation, turn on the Edit Mode.</para>
     <mediaobject>
       <imageobject>
         <imagedata  align="center" fileref="images/organizecontent.png" format="PNG"/>
       </imageobject>
     </mediaobject>
-    <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish a content.</para>
+    <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish content.</para>
   </section>
  -->
 

@@ -572,7 +572,7 @@
       <step>
         <para>
           Click your desired template. See more details in
-          <link linkend="proc-User_Guide-Add_Content-Add_a_new_content-step3">Step 3</link> of the <link linkend="sect-User_Guide-InContext_Editing-Add_Content">Add a content</link> section.
+          <link linkend="proc-User_Guide-Add_Content-Add_a_new_content-step3">Step 3</link> of the <link linkend="sect-User_Guide-InContext_Editing-Add_Content">Add content</link> section.
         </para>
         <para>
           Each document (except Article) must be added to categories when being created.
@@ -2779,7 +2779,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </section>
   </section>
   <section id="sect-User_Guide-Actions-ShowHide_Content">
-    <title>Show/Hide a content</title>
+    <title>Show/Hide content</title>
     <para>
       Nodes can be hidden or shown easily.
     </para>
@@ -3490,10 +3490,10 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" scalefit="1" fileref="images/localisedcontents.png" format="PNG"/>
+              <imagedata width="30mm" scalefit="1" fileref="images/localisedcontent.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>[ Add/Edit localized contents ]</phrase>
+              <phrase>[ Add/Edit localized content ]</phrase>
             </textobject>
           </inlinemediaobject>
           on the 
@@ -3697,21 +3697,21 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
         <para>
           The content is displayed at the bottom of the <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis></emphasis> of the people who have the right to approve
-          contents.
+          content.
         </para>
       </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Approve_Content">
-    <title>Approve a content</title>
+    <title>Approve content</title>
     <para xml:id="proc-User_Guide-Approve_Content-Approve_a_content">
-      When a content is created by users, it is possible to approve the publication if there is an approval request. To approve a
+      When content is created by users, it is possible to approve the publication if there is an approval request. To approve
       content, do the followings:
     </para>
     <procedure>
       <step>
         <para>
-          Select a content that needs approving.
+          Select content that needs approving.
         </para>
       </step>
       <step>
@@ -3722,7 +3722,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Approve Content</emphasis> button is only visible for users who have the right to approve contents.
+            The <emphasis role="bold">Approve Content</emphasis> button is only visible for users who have the right to approve content.
           </para>
           <para>
             By default, this button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
@@ -3753,14 +3753,14 @@ After being created successfully, a file document with the <emphasis>text/html</
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Publish_Content">
-    <title>Publish a content</title>
+    <title>Publish content</title>
     <para>
       After the content is approved, it can be published by people who have the "Publish" permission.
     </para>
     <procedure>
       <step>
         <para>
-          Select a content that you want to publish.
+          Select content that you want to publish.
         </para>
       </step>
       <step>

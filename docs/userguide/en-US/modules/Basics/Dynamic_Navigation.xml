@@ -64,7 +64,7 @@
 									<itemizedlist>
 										<listitem>
 											<para>
-												Disable: It means a single content will be opened by an URL containing the Content Path.
+												Disable: It means the single content will be opened by an URL containing the Content Path.
 											</para>
 
 										</listitem>
@@ -100,10 +100,10 @@
 				</table>
 			</para>
 			 <para>
-				For example, open a single content with the Content Path "ACME Introduce". The URL of the content is the following:
+				For example, open single content with the Content Path "ACME Introduce". The URL of the content is the following:
 			</para>
 			 <para>
-				URL: ... <emphasis role="italic">/ecmdemo/private/acme/printviewer?content-id=/repository/collaboration/sites content/live/acme/web contents/site artifacts/Introduce&amp;isPrint=true</emphasis>
+				URL: ... <emphasis role="italic">/ecmdemo/private/acme/printviewer?content-id=/repository/collaboration/sites content/live/acme/web content/site artifacts/Introduce&amp;isPrint=true</emphasis>
 			</para>
 			 <para>
 				<emphasis role="bold">Dynamic Navigation in CLV</emphasis>
@@ -134,7 +134,7 @@
 									<itemizedlist>
 										<listitem>
 											<para>
-												Disable: It means a single content will be opened by an URL containing the Folder Path (for CLV)
+												Disable: It means the single content will be opened by an URL containing the Folder Path (for CLV)
 											</para>
 
 										</listitem>
@@ -164,7 +164,7 @@
 									<emphasis role="bold">Show in page</emphasis>
 								</entry>
 								 <entry>
-									A single content in CLV will be shown in a selected page. You can choose any page but you should take one with a Content Detail Portlet. The Content Detail Portlet should enable “dynamic navigation” that interprets the URL and shows a single content.
+									The single content in CLV will be shown in a selected page. You can choose any page but you should take one with a Content Detail Portlet. The Content Detail Portlet should enable “dynamic navigation” that interprets the URL and shows the single content.
 								</entry>
 
 							</row>

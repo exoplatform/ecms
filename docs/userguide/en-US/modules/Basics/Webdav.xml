@@ -223,11 +223,11 @@
         </step>
       </procedure>
       <para>
-    After the new content is added, it can be viewed as a folder in WebDAV or as a page content using a web browser.
+    After the new content is added, it can be viewed as a folder in WebDAV or as a page using a web browser.
    </para>
     </section>
     <section id="sect-User_Guide-Actions-Delete_a_web_content">
-      <title>Delete a web content</title>
+      <title>Delete web content</title>
       <para>
     This function enables site administrators to delete web content files separately or in batches.
    </para>

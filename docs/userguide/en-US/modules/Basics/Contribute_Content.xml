@@ -8,15 +8,15 @@
     <title>Contribute content</title>
     <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
         <title>Edit mode</title>
-        <para>When you access a site, by default, the site contents are in the published mode and you cannot edit
+        <para>When you access a site, by default, the site content is in the published mode and you cannot edit
             them.
         </para>
         <para>
             However, each site in &PRODUCT; has the
             <emphasis role="bold">Edit</emphasis>
-            mode which enables you to edit all contents of the current site. When hovering your cursor over contents,
-            you can see edit icons which enable you to quickly edit these contents. You can take advantage of this
-            feature to submit contents to a page.
+            mode which enables you to edit all content of the current site. When hovering your cursor over content,
+            you can see edit icons which enable you to quickly edit this content. You can take advantage of this
+            feature to submit content to a page.
         </para>
         <para>To turn on the
             <emphasis role="bold">Edit</emphasis>
@@ -72,9 +72,9 @@
             To use <emphasis role="bold">InContext Editing</emphasis>, turn on the <emphasis role="bold">Edit Mode</emphasis>.
         </para>
         <section id="sect-User_Guide-InContext_Editing-Add_Content">
-            <title>Add a content</title>
+            <title>Add content</title>
             <para>
-                Adding a new content by using
+                Adding new content by using
                 <emphasis role="bold">InContext Editing</emphasis>
                 is enabled for the
                 <emphasis role="bold">Content List Viewer</emphasis>
@@ -84,7 +84,7 @@
                 <step>
                     <para>
                         Turn on the <emphasis role="bold">Edit Mode</emphasis>, then hover your cursor over the CLV to
-                        which you want to add a new content.
+                        which you want to add new content.
                     </para>
                 </step>
                 <step>
@@ -201,7 +201,8 @@
             </note>
         </section>
         <section id="sect-User_Guide-InContext_Editing-Edit_Content">
-            <title>Edit a content</title>
+            <title>Edit
+                content</title>
             <para>
                 You can edit any content on the homepage for SCV and CLV with <emphasis role="bold">InContext Editing</emphasis>. However, for CLV, you only can
                 edit each content in it.
@@ -302,7 +303,7 @@
             <title>Manage content</title>
             <para>
                 With <emphasis role="bold">InContext Editing</emphasis>, you can easily manage a Content List Viewer on
-                the homepage. You can add a new content in the CLV, edit, delete an existing content or copy/cut/paste
+                the homepage. You can add new content in the CLV, edit, delete an existing content or copy/cut/paste
                 to another CLV and take more actions in the right-click menu.
             </para>
             <citetitle>
@@ -365,8 +366,8 @@
 			    </citetitle>
 				</para>
 				<para>
-					Right-click a specific content in the CLV to open the drop-down
-                        menu. From here, you can do many actions as mentiond in the <link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and documents
+					Right-click specific content in the CLV to open the drop-down
+                        menu. From here, you can do many actions as mentioned in the <link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and documents
                         </link>
                         section.
                     </para>
@@ -374,8 +375,8 @@
         <section id="sect-User_Guide-InContext_Editing-Preferences">
             <title>Preferences</title>
             <para>
-                Preferences enable you to edit contents in the Single Content Viewer (SCV) and the Content List Viewer
-                (CLV), reset the display of the contents in SCV and CLV and publish contents.
+                Preferences enable you to edit content in the Single Content Viewer (SCV) and the Content List Viewer
+                (CLV), reset the display of the content in SCV and CLV and publish content.
             </para>
             <citetitle>
             <para xml:id="form-User_Guide-Preferences-Content_Detail_Preferences"><emphasis role="bold">Edit the Single Content Viewer</emphasis></para>
@@ -563,7 +564,7 @@
                                                     <para>
                                                         <emphasis role="bold">Content Visibility:</emphasis>
                                                         Allow you to use a cache shared between users to
-                                                        get contents. If you want to get contents, which are displayed
+                                                        get content. If you want to get content, which are displayed
                                                         in CLV or SCV, from one cache, select
                                                         <emphasis role="bold">Restricted by Authentication.</emphasis>
                                                         If not, select
@@ -660,7 +661,7 @@
                             button. The content is opened in the print viewer page.
                         </para>
                         <!--    <para>
-                   <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/Introduce&amp;isPrint=true
+                   <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20content/site%20artifacts/Introduce&amp;isPrint=true
                   </para>
                        <para>
                    In which:
@@ -791,7 +792,7 @@
                                         <entry>
                                             <para>
                                                 <emphasis role="bold">Header:</emphasis>
-                                                The title of all contents that are listed in the List Viewer.
+                                                The title of all content that is listed in the List Viewer.
                                             </para>
                                             <para>
                                                 <emphasis role="bold">Template:</emphasis>
@@ -846,7 +847,7 @@
                                                         <emphasis role="bold">Show More Link:</emphasis>
                                                         The
                                                         <emphasis role="bold">Read more</emphasis>
-                                                        link to read all the content of a web content and/or document.
+                                                        link to read all the content of web content and/or document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
@@ -864,7 +865,7 @@
                                                 <listitem>
                                                     <para>
                                                         <emphasis role="bold">Show RSS Link:</emphasis>
-                                                        The RSS link of all contents of a web content/document.
+                                                        The RSS link of all content of web content/document.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -904,7 +905,7 @@
                                                 <listitem>
                                                     <para>
                                                         <emphasis role="bold">Show in Page:</emphasis>
-                                                        A single content in CLV will be shown in a selected page. You
+                                                        The single content in CLV will be shown in a selected page. You
                                                         can select any page but should take one with a Content Detail
                                                         Portlet. The "Dynamic Navigation" is enabled in the Content
                                                         Detail Portlet that interprets the URL and shows a single
@@ -922,7 +923,7 @@
                                             <para>
                                                 <emphasis role="bold">Content Visibility:</emphasis>
                                                 Allow you to use a cache shared between users to
-                                                get contents. If you want to get contents, which are displayed in CLV or
+                                                get content. If you want to get content, which are displayed in CLV or
                                                 SCV, from one cache, select
                                                 <emphasis role="bold">Restricted by Authentication.</emphasis>
                                                 If not, select
@@ -954,13 +955,13 @@
                         <para>
                             If you select the
                             <emphasis role="bold">By Folder</emphasis>
-                            mode, select an available site on the left, then select a folder that contains contents
+                            mode, select an available site on the left, then select a folder that contains content
                             (documents and/or web content) on the right by clicking the folder.
                         </para>
                         <para>
                             If you select the <emphasis role="bold">By Content</emphasis> mode, select an available
                             folder from the left pane, all content in this folder will be listed in the right pane.
-                            Click a content on the right that you want to add to the content list. There will be a
+                            Click content on the right that you want to add to the content list. There will be a
                             message, informing that you have successfully added it to the Content List. The selected
                             content will be listed in the Content List.
                         </para>
@@ -1180,7 +1181,7 @@
             </step>
             <step>
                 <para>Click the plus before the document name, or click directly the document name in the left pane to
-                    show the contents in the right pane, or click
+                    show the content in the right pane, or click
                     <inlinemediaobject>
                         <imageobject>
                             <imagedata fileref="images/upload_file.png" format="PNG" scalefit="1" width="20mm"/>
@@ -1190,14 +1191,14 @@
                 </para>
             </step>
             <step>
-                <para>Click a content that you want to insert to the document.</para>
+                <para>Click content that you want to insert to the document.</para>
             </step>
         </procedure>
     </section>
     <section id="sect-User_Guide-Contribute_Content-Publication_Process">
         <title>Publication process</title>
         <para>
-            After a new content has been created, it is saved as draft and you can easily to publish it on your site.
+            After new content has been created, it is saved as draft and you can easily to publish it on your site.
             The publication process consists of four steps:
         </para>
         <para>
@@ -1208,7 +1209,7 @@
             send your request for approval.
         </para>
         <para>
-            In case you have the right to approve or publish a content, you can yourself publish it with the
+            In case you have the right to approve or publish content, you can yourself publish it with the
             <emphasis role="bold">Stage</emphasis>
             step immediately.
         </para>
@@ -1216,7 +1217,7 @@
             <listitem>
                 <para>
                     <emphasis role="bold">Request Approval:</emphasis>
-                    When a new content is created, it must be approved before publishing by clicking
+                    When new content is created, it must be approved before publishing by clicking
                     <emphasis role="bold">Request Approval</emphasis>
                     on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer or clicking
                     <emphasis role="bold">Pending</emphasis>
@@ -1236,7 +1237,7 @@
             <listitem>
                 <para>
                     <emphasis role="bold">Approve:</emphasis>
-                    To approve a content, click
+                    To approve content, click
                     <emphasis role="bold">Approve</emphasis>
                     on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer, or
                     <emphasis role="bold">Approved</emphasis>
@@ -1247,7 +1248,7 @@
             <listitem>
                 <para>
                     <emphasis role="bold">Stage:</emphasis>
-                    This step allows you to publish a content in a period. After selecting the publication schedule for
+                    This step allows you to publish content in a period. After selecting the publication schedule for
                     the content, it will be automatically published as the schedule.
                 </para>
                 <para>
@@ -1266,15 +1267,15 @@
             <listitem>
                 <para>
                     <emphasis role="bold">Publish:</emphasis>
-                    A content will be published when you have completed the
+                    Content will be published when you have completed the
                     <emphasis role="bold">Stage</emphasis>
                     step.
                 </para>
                 <note>
                     <para>
-                        You will see a list of draft contents, pending contents which are waiting for your approval if
-                        you have the approval right, and contents that will be published at the bottom of the <emphasis
-                            role="bold">Sites Explorer</emphasis>. Click your desired contents to review, approve or
+                        You will see a list of draft content, pending content which are waiting for your approval if
+                        you have the approval right, and content that will be published at the bottom of the <emphasis
+                            role="bold">Sites Explorer</emphasis>. Click your desired content to review, approve or
                         publish.
                     </para>
                     <mediaobject>
@@ -1344,7 +1345,7 @@
           </mediaobject>
         </step>
         <step>
-          <para>Click +  in the left panel to list the contents in the right panel or click <inlinemediaobject>
+          <para>Click +  in the left panel to list the content in the right panel or click <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/upload_file.png" format="PNG"/>
               </imageobject>

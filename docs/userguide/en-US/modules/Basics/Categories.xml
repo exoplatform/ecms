@@ -7,7 +7,7 @@
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Manage Category Navigation</title>
   <para>
-  <emphasis role="bold">Category Navigation</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
+  <emphasis role="bold">Category Navigation</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view content and enable users to see published documents or web content in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
  </para>
  <citetitle>
  <para xml:id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet"><emphasis role="bold">Access the Category Navigation portlet</emphasis></para>
@@ -28,7 +28,7 @@
 	<itemizedlist>
 	<listitem>
       <para>
-    The left pane lists all the categories containing documents or web contents.
+    The left pane lists all the categories containing documents or web content.
    </para>
    </listitem>
    <listitem>
@@ -107,7 +107,7 @@
             <textobject>
                <phrase>plus icon</phrase>
             </textobject>
-          </inlinemediaobject> to select the folder path which restores contents you want do display.
+          </inlinemediaobject> to select the folder path which restores content you want do display.
     </para>
     </step>
     <step>

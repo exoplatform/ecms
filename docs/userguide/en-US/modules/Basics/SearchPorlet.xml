@@ -8,13 +8,13 @@
     <title>Search content in a site</title>
     <para>The
         <guilabel>Search</guilabel>
-        function allows you to quickly search for any contents in the system with a keyword from the front page, even if you
+        function allows you to quickly search for any content in the system with a keyword from the front page, even if you
         do not log in. However, the number of the search results displayed depends on your role.
     </para>
     <para>For example, if you do not log in, you only see the search results that are published.</para>
-    <section id="sect-User_Guide-Search_portlet-Search_Contents">
-        <title>How to search for contents?</title>
-        <para>To search for contents, do the followings:</para>
+    <section id="sect-User_Guide-Search_portlet-Search_content">
+        <title>How to search for content?</title>
+        <para>To search for content, do the followings:</para>
         <procedure>
             <step>
                 <para>
@@ -119,7 +119,7 @@
         <procedure>
             <title>Edit the Search portlet</title>
             <step>
-                <para>Open the Search page as <xref linkend="sect-User_Guide-Search_portlet-Search_Contents"/>.</para>
+                <para>Open the Search page as <xref linkend="sect-User_Guide-Search_portlet-Search_content"/>.</para>
             </step>
             <step>
                 <title>Open the form to edit the Search portlet</title>

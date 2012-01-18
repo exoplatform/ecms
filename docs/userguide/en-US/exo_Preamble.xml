@@ -31,8 +31,8 @@
   </section>
   <section id="sect-User_Guide-Overall_Introduction-Why_Use_eXo_Content">
     <title>Why Use eXo Content</title>
-    <para>
-   If you are looking for a powerful tool and strategies in managing website and contents, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be organized, reconstructed easily, which helps you keep your website under the control. eXo Content really brings interesting experience for all users and changes their way of thinking about website. The followings are key features of eXo Content:
+    <para>                                                                      
+   If you are looking for a powerful tool and strategies in managing website and content, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be organized, reconstructed easily, which helps you keep your website under the control. eXo Content really brings interesting experience for all users and changes their way of thinking about website. The followings are key features of eXo Content:
   </para>
     <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Website_Creation">
       <title>Website Creation</title>
@@ -249,7 +249,7 @@
       </listitem>
       <listitem>
         <para>
-     <emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write contents but also can create new pages or edit them in the current site.
+     <emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write content but also can create new pages or edit them in the current site.
     </para>
       </listitem>
     </itemizedlist>

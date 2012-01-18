@@ -119,7 +119,7 @@
   <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Web_Content_Folders">
     <title>Web Content Folders</title>
     <para>
-   This folder contains all web content used in sites. It is recommended to put all the web contents files here, to manage them more easily, or in case you want to reuse them in another site.</para>
+   This folder contains all web content used in sites. It is recommended to put all the web content files here, to manage them more easily, or in case you want to reuse them in another site.</para>
     <mediaobject>
       <imageobject role="html">
         <imagedata align="center"  fileref="images/webcontentfiles.png" format="PNG"/>

@@ -5,7 +5,7 @@
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
 <!--  This document was created with Syntext Serna Free.  -->
-  <title>Manage contents with Fast Content Creator</title>
+  <title>Manage content with Fast Content Creator</title>
   <para> The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.
   </para>
    <para>
@@ -196,7 +196,7 @@
 
   </section>
   <section id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
-    <title>Create a new content</title>
+    <title>Create new content</title>
        <procedure>
       <step>
         <para>
@@ -212,7 +212,7 @@
     </procedure>
       </section>
     <section id="sect-User_Guide-Fast_Content_Creator-view_document_by_Fast_Content_Creator">
-        <title>View a content</title>
+        <title>View content</title>
     <para>After creating a new document by <emphasis role="bold">Fast Content Creator</emphasis>, you can view it as follows:</para>
     <procedure>
       <step>
