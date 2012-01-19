@@ -98,7 +98,7 @@
     text-decoration: underline;
 }
 
-.cke_show_borders ol, ul, dl {
+.cke_show_borders ol, .cke_show_borders ul, .cke_show_borders dl {
     padding: 0 40px;
     margin-top: 15px;		
 }
