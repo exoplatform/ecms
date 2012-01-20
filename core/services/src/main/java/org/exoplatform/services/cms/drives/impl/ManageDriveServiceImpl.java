@@ -237,7 +237,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     } else {
       allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
     }
-    if ((allDrives != null) && (allDrives.size() > 0)) return allDrives;
+    if ((allDrives != null) && (allDrives.size() > 0) && (groupDriveTemplate_ != null)) {
+      return allDrives;
+    }
 
     // Get from jcr
     Session session = getSession() ;
