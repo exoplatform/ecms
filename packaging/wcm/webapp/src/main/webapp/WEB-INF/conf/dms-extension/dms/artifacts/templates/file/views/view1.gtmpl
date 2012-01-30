@@ -47,6 +47,10 @@
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
+  String serverUrl = uicomponent.getWebDAVServerPrefix();
+  String portalName = uicomponent.getPortalName() ;
+  String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
+  
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
@@ -61,8 +65,16 @@
         <div class="TopTitle" title="<%=title %>">
           <%=title %>
         </div>
-        <div style="text-align:right;margin-top:1px" onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
-          <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
+        <%
+          StringBuilder sb = new StringBuilder();
+          String ndPath = currentNode.getPath();
+          if (ndPath.startsWith("/")) ndPath.substring(1);
+          sb.append(serverUrl).append("/").append(restContextName).append("/contents/download/");
+          sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(currentNode.getPath());
+          def downloadLink = sb.toString();
+        %>
+        <div style="text-align:right;margin-top:1px"" class="ActionButton LightBlueStyle">
+          <a href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>        
       </div>
       <div class="Content">
