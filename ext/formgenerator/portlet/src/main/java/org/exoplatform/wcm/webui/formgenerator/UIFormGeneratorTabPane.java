@@ -419,7 +419,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
                                 + realDataNodeName + "\");\n");
           dialogTemplate.append("                 %>\n");
           dialogTemplate.append("                   <div>\n");
-          dialogTemplate.append("                     <image src=\"$imgSrc\" width=\"100px\" height=\"80px\"/>\n");
+          dialogTemplate.append("                     <img src=\"$imgSrc\" alt=\"<%=_ctx.appRes(\"FormGeneratorDialog.label.remove\")%>\" width=\"100px\" height=\"80px\"/>\n");
           dialogTemplate.append("                     <a href=\"$actionLink\">\n");
           dialogTemplate.append("                       <img src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" ");
           dialogTemplate.append(

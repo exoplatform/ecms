@@ -50,7 +50,7 @@
 				          
 				          <div class="$clazz <%=nodeTypeIcon%>">
 				          <%if(Utils.isSymLink(node)) {%>
-	                  <image class="LinkSmall" />
+	                  <img class="LinkSmall" alt="<%=nodeName%>" />
 	                <%}%>
 				          $nodeName</div>
 				        </td>

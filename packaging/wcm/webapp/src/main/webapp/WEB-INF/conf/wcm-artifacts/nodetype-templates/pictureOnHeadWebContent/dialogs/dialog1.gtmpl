@@ -145,7 +145,7 @@
 													def actionLink = uicomponent.event("RemoveData", "exo:image");
 										%>		
 													<div>
-														<image src="$imgSrc" width="100px" height="80px"/>
+														<img src="$imgSrc" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" width="100px" height="80px"/>
 														<a href="$actionLink">
 															<img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
 														</a>

@@ -283,7 +283,7 @@
                   data = "{".concat(data.substring(0,data.length() - 1)).concat("}");
                 }
               } else {
-                println "<image src=\"\" w=\"676\" h=\"429\"/>";
+                println "<img src=\"\" alt=\"Empty\" w=\"676\" h=\"429\"/>";
               }
             %>
             <%
