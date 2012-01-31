@@ -72,7 +72,6 @@ public class StorageClosableImpl implements Storage
       this.defaultNodetypeMapping = defaultNodetypeMapping;
    }
 
-   @Override
    public AllowableActions calculateAllowableActions(ObjectData object)
    {
       Session session = null;
@@ -84,17 +83,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.calculateAllowableActions(object);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -103,7 +94,6 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
    public DocumentData copyDocument(DocumentData source, FolderData parent, Map<String, Property<?>> properties,
       List<AccessControlEntry> acl, Collection<PolicyData> policies, VersioningState versioningState)
       throws ConstraintException, NameConstraintViolationException, StorageException
@@ -117,17 +107,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.copyDocument(source, parent, properties, acl, policies, versioningState);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -136,7 +118,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public DocumentData createDocument(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, ContentStream content, List<AccessControlEntry> acl,
       Collection<PolicyData> policies, VersioningState versioningState) throws ConstraintException,
@@ -151,17 +133,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.createDocument(parent, typeDefinition, properties, content, acl, policies, versioningState);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -170,7 +144,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public FolderData createFolder(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws ConstraintException, NameConstraintViolationException, StorageException
@@ -184,17 +158,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.createFolder(parent, typeDefinition, properties, acl, policies);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -203,7 +169,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public PolicyData createPolicy(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws ConstraintException, NameConstraintViolationException, StorageException
@@ -217,17 +183,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.createPolicy(parent, typeDefinition, properties, acl, policies);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -236,7 +194,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public RelationshipData createRelationship(ObjectData source, ObjectData target, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws NameConstraintViolationException, StorageException
@@ -250,17 +208,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.createRelationship(source, target, typeDefinition, properties, acl, policies);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -269,7 +219,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public void deleteObject(ObjectData object, boolean deleteAllVersions) throws VersioningException,
       UpdateConflictException, StorageException
    {
@@ -282,17 +232,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          storage.deleteObject(object, deleteAllVersions);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -300,7 +242,7 @@ public class StorageClosableImpl implements Storage
       }
    }
 
-   @Override
+   
    public Collection<String> deleteTree(FolderData folder, boolean deleteAllVersions, UnfileObject unfileObject,
       boolean continueOnFailure) throws UpdateConflictException
    {
@@ -313,17 +255,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.deleteTree(folder, deleteAllVersions, unfileObject, continueOnFailure);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -332,7 +266,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public Collection<DocumentData> getAllVersions(String versionSeriesId) throws ObjectNotFoundException
    {
       Session session = null;
@@ -344,17 +278,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getAllVersions(versionSeriesId);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -363,7 +289,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ItemsIterator<ChangeEvent> getChangeLog(String changeLogToken) throws ConstraintException
    {
       Session session = null;
@@ -375,17 +301,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getChangeLog(changeLogToken);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -394,7 +312,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ItemsIterator<DocumentData> getCheckedOutDocuments(FolderData folder, String orderBy)
    {
       Session session = null;
@@ -406,17 +324,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getCheckedOutDocuments(folder, orderBy);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -425,7 +335,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public String getId()
    {
       Session session = null;
@@ -437,17 +347,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getId();
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -456,7 +358,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ObjectData getObjectById(String objectId) throws ObjectNotFoundException
    {
       Session session = null;
@@ -468,17 +370,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getObjectById(objectId);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -487,7 +381,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ObjectData getObjectByPath(String path) throws ObjectNotFoundException
    {
       Session session = null;
@@ -499,17 +393,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getObjectByPath(path);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -518,7 +404,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ItemsIterator<Rendition> getRenditions(ObjectData object)
    {
       Session session = null;
@@ -530,17 +416,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getRenditions(object);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -549,7 +427,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public RepositoryInfo getRepositoryInfo()
    {
       Session session = null;
@@ -561,17 +439,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getRepositoryInfo();
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -580,7 +450,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public Iterator<String> getUnfiledObjectsId() throws StorageException
    {
       Session session = null;
@@ -592,17 +462,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getUnfiledObjectsId();
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -611,7 +473,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ObjectData moveObject(ObjectData object, FolderData target, FolderData source)
       throws UpdateConflictException, VersioningException, NameConstraintViolationException, StorageException
    {
@@ -624,17 +486,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.moveObject(object, target, source);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -643,7 +497,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ItemsIterator<Result> query(Query query)
    {
       Session session = null;
@@ -655,17 +509,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.query(query);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -674,7 +520,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public void unfileObject(ObjectData object)
    {
       Session session = null;
@@ -686,17 +532,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          storage.unfileObject(object);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -704,7 +542,7 @@ public class StorageClosableImpl implements Storage
       }
    }
 
-   @Override
+   
    public String addType(TypeDefinition type) throws ConstraintException, StorageException
    {
       Session session = null;
@@ -716,17 +554,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.addType(type);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -735,7 +565,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public ItemsIterator<TypeDefinition> getTypeChildren(String typeId, boolean includePropertyDefinitions)
       throws TypeNotFoundException
    {
@@ -748,17 +578,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getTypeChildren(typeId, includePropertyDefinitions);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -767,7 +589,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public TypeDefinition getTypeDefinition(String typeId, boolean includePropertyDefinition)
       throws TypeNotFoundException
    {
@@ -780,17 +602,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.getTypeDefinition(typeId, includePropertyDefinition);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -799,7 +613,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   @Override
+   
    public void removeType(String typeId) throws ConstraintException, TypeNotFoundException, StorageException
    {
       Session session = null;
@@ -811,17 +625,9 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          storage.removeType(typeId);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
@@ -840,23 +646,30 @@ public class StorageClosableImpl implements Storage
             new StorageImpl(session, rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
          return storage.isSupportedNodeType(nodeTypeName);
       }
-      catch (LoginException e)
+      catch (Exception e)
       {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (NoSuchWorkspaceException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
-      }
-      catch (RepositoryException e)
-      {
-         LOG.error(e.getLocalizedMessage(), e);
+         processException(e);
       }
       finally
       {
          session.logout();
       }
       return false;
+   }
+   
+   private static void processException(Exception e) {
+     if(e instanceof LoginException) 
+     {
+       LOG.error(e.getLocalizedMessage(), e);
+     }
+     else if(e instanceof NoSuchWorkspaceException) 
+     {
+       LOG.error(e.getLocalizedMessage(), e);
+     }
+     else if(e instanceof RepositoryException) 
+     {
+       LOG.error(e.getLocalizedMessage(), e);
+     }
    }
 
 }
