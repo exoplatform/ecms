@@ -28,7 +28,6 @@ import javax.jcr.version.OnParentVersionAction;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -36,6 +35,7 @@ import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeDefinitionValue;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.form.UIFormRichtextInput;

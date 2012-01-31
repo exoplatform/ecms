@@ -31,7 +31,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
@@ -40,6 +39,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.url.navigation.NavigationResource;
