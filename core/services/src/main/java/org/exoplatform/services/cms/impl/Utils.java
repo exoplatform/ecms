@@ -56,7 +56,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @author benjaminmestrallet
  */
 public class Utils {
-  private final static Log   log          = ExoLogger.getLogger("org.exoplatform.services.cms.impl.Utils");
+  private final static Log   LOG          = ExoLogger.getLogger(Utils.class);
 
   private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"";
 
@@ -79,6 +79,8 @@ public class Utils {
           node = node.getNode(token) ;
         } else {
           node = node.addNode(token, nodetype);
+          node.getSession().save();
+          node = (Node)node.getSession().getItem(node.getPath());
           if (node.canAddMixin("exo:privilegeable")){
             node.addMixin("exo:privilegeable");
           }
@@ -127,10 +129,10 @@ public class Utils {
             currentNode.getSession().save();
           } catch (ItemNotFoundException item) {
             currentNode.getSession().refresh(false);
-            log.error("Can not found versionable node" + item, item);
+            LOG.error("Can not found versionable node" + item, item);
           } catch (Exception e) {
             currentNode.getSession().refresh(false);
-            log.error("Import version history failed " + e, e);
+            LOG.error("Import version history failed " + e, e);
           }
           zipInputStream.closeEntry();
           entry = zipInputStream.getNextEntry();
@@ -277,6 +279,7 @@ public class Utils {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
         } catch (Exception ex) {
+          title = null;
         }
       }
     }
