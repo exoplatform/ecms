@@ -55,7 +55,7 @@ public class TimelineServiceImpl implements TimelineService {
   private static final String EXO_MODIFIED_DATE = "exo:dateModified";
   private static final String EXO_OWNER = "exo:owner";
   private static final String SELECT_QUERY = "SELECT * FROM " + EXO_DATETIME + " WHERE ";
-  private static final String TIME_FORMAT_TAIL = "T00:00:00.000+07:00";
+  private static final String TIME_FORMAT_TAIL = "T00:00:00.000";
   private static final SimpleDateFormat formatDateTime = new SimpleDateFormat();
   private RepositoryService repositoryService_;
   private TemplateService templateService_;
