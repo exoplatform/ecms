@@ -32,6 +32,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -125,6 +126,7 @@ public class ManageDocumentService implements ResourceContainer {
   final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
     EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
+  private static final String  PRIVATE              = "Private";
   /**
    * Instantiates a new platform document selector.
    *
@@ -148,7 +150,8 @@ public class ManageDocumentService implements ResourceContainer {
   @GET
   @Path("/getDrives/")
   @RolesAllowed("users")
-  public Response getDrives(@QueryParam("driveType")String driveType) throws Exception {
+  public Response getDrives(@QueryParam("driveType") String driveType,
+                            @DefaultValue("false") @QueryParam("showPrivate") String showPrivate) throws Exception {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     List<String> userRoles = getMemberships();
     DocumentBuilder builder = factory.newDocumentBuilder();
@@ -165,6 +168,14 @@ public class ManageDocumentService implements ResourceContainer {
       driveList = manageDriveService.getGroupDrives(userId, userRoles, new ArrayList<String>(groups));
     } else if (DriveType.PERSONAL.toString().equalsIgnoreCase(driveType)) {
       driveList = manageDriveService.getPersonalDrives(userId, userRoles);
+      if (!Boolean.valueOf(showPrivate)) {
+        for (DriveData driveData : driveList) {
+          if (PRIVATE.equals(driveData.getName())) {
+            driveList.remove(driveData);
+            break;
+          }
+        }
+      }
     }
     rootElement.appendChild(buildXMLDriveNodes(document, driveList, driveType));
     return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cc).build();
@@ -186,10 +197,11 @@ public class ManageDocumentService implements ResourceContainer {
   @RolesAllowed("users")
   public Response getFoldersAndFiles(@QueryParam("driveName") String driveName,
                                      @QueryParam("workspaceName") String workspaceName,
-                                     @QueryParam("currentFolder") String currentFolder){
+                                     @QueryParam("currentFolder") String currentFolder,
+                                     @DefaultValue("false") @QueryParam("showHidden") String showHidden) {
     try {
       Node node = getNode(driveName, workspaceName, currentFolder);
-      return buildXMLResponseForChildren(node, driveName,currentFolder);
+      return buildXMLResponseForChildren(node, driveName, currentFolder, Boolean.valueOf(showHidden));
     } catch (AccessDeniedException e) {
       log.debug("Access is denied when perform get Folders and files: ", e);
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
@@ -368,16 +380,20 @@ public class ManageDocumentService implements ResourceContainer {
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
-  private Response buildXMLResponseForChildren(Node node, String driveName, String currentFolder ) throws Exception {
+  private Response buildXMLResponseForChildren(Node node, String driveName, String currentFolder, boolean showHidden) throws Exception {
     Document document = createNewDocument();
-    Element rootElement = document.createElement("Folder");
+    Element rootElement = createFolderElement(document,
+                                              node,
+                                              node.getSession().getWorkspace().getName(),
+                                              driveName,
+                                              currentFolder);
     Element folders = document.createElement("Folders");
-    Element files = document.createElement("Files");
-    Node sourceNode = null;
-    Node referNode = null;
+    Element files = document.createElement("Files");   
     for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
+      Node sourceNode = null;
+      Node referNode = null;
       Node child = iterator.nextNode();
-      if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
+      if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
         continue;
       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
         String sourceWs = child.getProperty("exo:workspace").getString();
