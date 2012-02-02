@@ -1,0 +1,73 @@
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(revision 76784)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(working copy)
+@@ -3324,7 +3324,7 @@
+   </UIJCRExplorerPortlet>
+   <UIDrivesArea>
+     <DrivesArea>
+-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
++      <allDrives>You can access this view using the Drives button on the left panel</allDrives>
+       <ShowDrives>Show Drives</ShowDrives>
+     </DrivesArea>
+   </UIDrivesArea>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(revision 76784)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(working copy)
+@@ -3246,7 +3246,7 @@
+   </UIJCRExplorerPortlet>
+   <UIDrivesArea>
+     <DrivesArea>
+-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
++      <allDrives>You can access this view using the Drives button on the left panel</allDrives>
+       <ShowDrives>Show Drives</ShowDrives>
+     </DrivesArea>
+   </UIDrivesArea>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(revision 76784)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(working copy)
+@@ -3344,7 +3344,7 @@
+   </UIJCRExplorerPortlet>
+   <UIDrivesArea>
+     <DrivesArea>
+-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
++      <allDrives>You can access this view using the Drives button on the left panel</allDrives>
+       <ShowDrives>Show Drives</ShowDrives>
+     </DrivesArea>
+   </UIDrivesArea>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 76784)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -261,7 +261,7 @@
+       <UIConfirmMessage>Confirm delete</UIConfirmMessage>
+       <UIRestoreConfirmMessage>Confirm restore</UIRestoreConfirmMessage>
+       <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
+-      <UITaggingForm>Tagging this document</UITaggingForm>
++      <UITaggingForm>Tag Document</UITaggingForm>
+       <UIMultiLanguageForm>Multi language</UIMultiLanguageForm>
+       <UIMultiLanguageManager>Multi language</UIMultiLanguageManager>
+       <UIThumbnailForm>Add thumbnail image</UIThumbnailForm>
+@@ -301,9 +301,9 @@
+       <Search>Search</Search>
+       <CreateTicket>New Ticket</CreateTicket>
+       <WatchDocument>Watch/Unwatch this document</WatchDocument>
+-      <TaggingDocument>Tagging this document</TaggingDocument>
++      <TaggingDocument>Tag Document</TaggingDocument>
+       <MultiLanguage>Add/Edit localised contents</MultiLanguage>
+-      <Vote>Vote for document</Vote>
++      <Vote>Add your vote</Vote>
+       <Comment>Comment this document</Comment>
+       <ManageVersions>Manage Versions</ManageVersions>
+       <ManageAuditing>Manage Auditing</ManageAuditing>
+@@ -3306,7 +3306,7 @@
+   </UIJCRExplorerPortlet>
+   <UIDrivesArea>
+     <DrivesArea>
+-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
++      <allDrives>You can access this view using the Drives button on the left panel</allDrives>
+       <ShowDrives>Show Drives</ShowDrives>
+     </DrivesArea>
+   </UIDrivesArea>

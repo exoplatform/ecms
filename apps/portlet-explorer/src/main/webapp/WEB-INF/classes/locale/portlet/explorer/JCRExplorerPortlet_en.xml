@@ -261,7 +261,7 @@
       <UIConfirmMessage>Confirm delete</UIConfirmMessage>
       <UIRestoreConfirmMessage>Confirm restore</UIRestoreConfirmMessage>
       <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
-      <UITaggingForm>Tagging this document</UITaggingForm>
+      <UITaggingForm>Tag Document</UITaggingForm>
       <UIMultiLanguageForm>Multi language</UIMultiLanguageForm>
       <UIMultiLanguageManager>Multi language</UIMultiLanguageManager>
       <UIThumbnailForm>Add thumbnail image</UIThumbnailForm>
@@ -301,9 +301,9 @@
       <Search>Search</Search>
       <CreateTicket>New Ticket</CreateTicket>
       <WatchDocument>Watch/Unwatch this document</WatchDocument>
-      <TaggingDocument>Tagging this document</TaggingDocument>
+      <TaggingDocument>Tag Document</TaggingDocument>
       <MultiLanguage>Add/Edit localised contents</MultiLanguage>
-      <Vote>Vote for document</Vote>
+      <Vote>Add your vote</Vote>
       <Comment>Comment this document</Comment>
       <ManageVersions>Manage Versions</ManageVersions>
       <ManageAuditing>Manage Auditing</ManageAuditing>
@@ -3306,7 +3306,7 @@
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
+      <allDrives>You can access this view using the Drives button on the left panel</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
