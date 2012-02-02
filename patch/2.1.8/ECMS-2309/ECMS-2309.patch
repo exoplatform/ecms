@@ -1,0 +1,759 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(revision 78411)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(working copy)
+@@ -80,15 +80,14 @@
+       </tr>
+     </thead>
+     <tbody>
+-    <%
+-    
+-    def rowClass = null ;
++    <%    
++    	def rowClass = null ;
+       boolean even = true ;
+       boolean found = false ;
+       Node node = null; 
+-	  def listAddedResult = new ArrayList<Node>();
++      
+       if (resultList != null && resultList.size() > 0) {
+-	    def count = 0;
++      	def count = 0;
+         for (row in resultList) {          
+           found = true;
+           if (even) rowClass = "EvenRow";  
+@@ -108,26 +107,10 @@
+           String excerpt = row.getValue("rep:excerpt(.)")== null ? "" : row.getValue("rep:excerpt(.)").getString();
+           excerpt = StringEscapeUtils.unescapeHtml(excerpt);
+ //          excerpt += row.getValue("rep:spellcheck()") == null ? "NNUULLLL" : 
+-//          	row.getValue("rep:spellcheck()").getString();
++//          row.getValue("rep:spellcheck()").getString();
+           String score = row.getValue("jcr:score")== null ? "" : row.getValue("jcr:score").getString();
+           String s = ""; 
+-		  def linkNode = null;
+-		  if(uicomponent.isTaxonomyNode()) {
+-			if(node.getParent().isNodeType("exo:webContent")) {
+-			  node = node.getParent();
+-			  linkNode = uicomponent.getSymlinkNode(node);
+-			} else if (node.isNodeType("exo:comments")) {
+-        node = node.getParent().getParent();
+-        linkNode = uicomponent.getSymlinkNode(node);
+-			} else {
+-			  linkNode = uicomponent.getSymlinkNode(node);
+-			}
+-		  } else {
+-			linkNode = node;
+-		  }
+-		  if(!listAddedResult.contains(linkNode)) listAddedResult.add(linkNode);
+-		  else continue;
+-		  if (linkNode != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {	
++          if (node != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {
+             count++;		  
+       %>
+           <tr class="$rowClass">
+@@ -136,17 +119,17 @@
+             </td>
+             <td>
+               <div class="Text" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
+-                <%=Text.unescapeIllegalJcrChars(linkNode.getName())%>
++              	<%=Utils.getTitleWithSymlink(node)%>
+               </div>
+               <div>$excerpt</div>
+-              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=linkNode.getPath()%></div>
++              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=node.getPath()%></div>
+               <div><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></div>
+             </td>
+             <td><div class="ActionContainer">$score</div></td>
+             <td>
+               <div class="ActionContainer">
+-                <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(linkNode.getPath()))%>" alt="" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
+-                <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(linkNode.getPath()))%>" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="" class="OpenFolder16x16Icon"/>
++              <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
++              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="" class="OpenFolder16x16Icon"/>
+               </div>
+             </td>                   
+           </tr>
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(working copy)
+@@ -65,8 +65,8 @@
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.core.model.SelectItemOption;
+ import org.exoplatform.webui.event.Event;
+-import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.event.Event.Phase;
++import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.webui.ext.UIExtensionManager;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormSelectBox;
+@@ -294,7 +294,6 @@
+       QueryResult queryResult = query.execute();                  
+       uiSearchResult.clearAll();
+       uiSearchResult.setQueryResults(queryResult);            
+-      uiSearchResult.updateGrid(true);
+       long time = System.currentTimeMillis() - startTime;
+       uiSearchResult.setSearchTime(time);
+       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(working copy)
+@@ -42,14 +42,8 @@
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
+ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+ import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+-import org.exoplatform.ecm.webui.utils.Utils;
+-import org.exoplatform.portal.webui.util.Util;
+-import org.exoplatform.services.cms.actions.ActionServiceContainer;
+ import org.exoplatform.services.cms.link.LinkUtils;
+-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+-import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.security.ConversationState;
+ import org.exoplatform.web.application.ApplicationMessage;
+@@ -100,8 +94,8 @@
+   private String[] arrView_ = {};
+   final static private String FIELD_SIMPLE_SEARCH = "simpleSearch" ;
+ 
+-  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where contains(*, '$1') or lower(exo:name) like '%$2%' order by exo:dateCreated DESC, jcr:primaryType DESC" ;
+-  final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' ) order by jcr:path DESC, jcr:primaryType DESC";
++  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where not (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') and (contains(*, '$1') or lower(exo:name) like '%$2%' )order by exo:dateCreated DESC, jcr:primaryType DESC" ;
++  final static private String SQL_QUERY = "select * from nt:base where not (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') and (jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )) order by jcr:path DESC, jcr:primaryType DESC";
+      
+   public UIAddressBar() throws Exception {
+     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
+@@ -249,67 +243,6 @@
+       UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class);
+       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
+       Node currentNode = uiExplorer.getCurrentNode();
+-      boolean isTaxonomyNode = false;
+-      if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
+-        TaxonomyService taxonomyService = uiAddressBar.getApplicationComponent(TaxonomyService.class);
+-        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+-        for (Node taxonomyNode : TaxonomyTrees) {
+-          if (currentNode.getPath().startsWith(taxonomyNode.getPath())) {
+-            ActionServiceContainer actionService = uiAddressBar.getApplicationComponent(ActionServiceContainer.class);
+-            List<Node> listAction = actionService.getActions(taxonomyNode);
+-            for (Node actionNode : listAction) {
+-              if (actionNode.isNodeType(ACTION_TAXONOMY)) {
+-                String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
+-                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
+-                String queryStatement = null;
+-                if("/".equals(searchPath)) {
+-                  queryStatement = ROOT_SQL_QUERY;        
+-                }else {
+-                  queryStatement = StringUtils.replace(SQL_QUERY,"$0", searchPath);
+-                }
+-                queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
+-                queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
+-                isTaxonomyNode = true;
+-                uiExplorer.removeChildById("ViewSearch");
+-                UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
+-                
+-                RepositoryService repositoryService = 
+-                  Util.getUIPortal().getApplicationComponent(RepositoryService.class);
+-                SessionProviderService sessionProviderService = 
+-                  Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
+-                SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);                
+-                Session session = sessionProvider.getSession(searchWorkspace, 
+-                    repositoryService.getRepository(uiExplorer.getRepositoryName()));      
+-                UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
+-                QueryManager queryManager =session.getWorkspace().getQueryManager();
+-                        
+-                long startTime = System.currentTimeMillis();
+-                QueryResult queryResult = null;
+-                try {
+-                	Query query = queryManager.createQuery(queryStatement, Query.SQL);        
+-                	queryResult = query.execute();
+-                } catch (InvalidQueryException invalidEx) {
+-                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+-                  return;
+-                } catch (RepositoryException reEx) {
+-                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+-                  return;
+-                }
+-                uiSearchResult.clearAll();
+-                uiSearchResult.setQueryResults(queryResult);            
+-                uiSearchResult.updateGrid(true);
+-                uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
+-                long time = System.currentTimeMillis() - startTime;
+-                uiSearchResult.setSearchTime(time);
+-                uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
+-                event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
+-                if (session != null) session.logout();
+-                return;
+-              }
+-            }
+-          }
+-        }
+-      }
+       String queryStatement = null;
+       if("/".equals(currentNode.getPath())) {
+         queryStatement = ROOT_SQL_QUERY;        
+@@ -343,11 +276,11 @@
+         return;
+       }               
+       uiSearchResult.clearAll();
+-      uiSearchResult.setQueryResults(queryResult);  
+-      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
+-      uiSearchResult.updateGrid(true);
++      uiSearchResult.setRootLink( currentNode.getPath(), text.replaceAll("'", "''"), 
++      														currentNode.getSession().getWorkspace().getName());
+       long time = System.currentTimeMillis() - startTime;
+-      uiSearchResult.setSearchTime(time);      
++      uiSearchResult.setSearchTime(time);
++      uiSearchResult.setQueryResults(queryResult);
+       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
+       if(!uiDocumentWorkspace.isRendered()) {
+         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIContentNameSearch.java	(working copy)
+@@ -91,7 +91,6 @@
+         QueryResult queryResult = query.execute();
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(queryResult);
+-        uiSearchResult.updateGrid(true);
+         long time = System.currentTimeMillis() - startTime;
+         uiSearchResult.setSearchTime(time);
+         uiECMSearch.setRenderedChild(UISearchResult.class);
+@@ -102,7 +101,6 @@
+       } catch (Exception e) {
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(null);
+-        uiSearchResult.updateGrid(true);
+         uiECMSearch.setRenderedChild(UISearchResult.class);
+       }
+     }  
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(working copy)
+@@ -39,6 +39,7 @@
+ import javax.jcr.query.Row;
+ import javax.jcr.query.RowIterator;
+ 
++import org.apache.commons.lang.StringUtils;
+ import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
+ import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+@@ -49,15 +50,20 @@
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+ import org.exoplatform.services.cms.BasePath;
++import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.cms.link.LinkUtils;
+ import org.exoplatform.services.cms.link.NodeFinder;
+ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+ import org.exoplatform.services.jcr.RepositoryService;
++import org.exoplatform.services.jcr.core.ManageableRepository;
++import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+ import org.exoplatform.services.jcr.impl.core.JCRPath;
+ import org.exoplatform.services.jcr.impl.core.SessionImpl;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
++import org.exoplatform.services.security.ConversationState;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+ import org.exoplatform.webui.config.annotation.EventConfig;
+@@ -97,7 +103,7 @@
+   private long searchTime_ = 0; 
+   private boolean flag_ = false;
+   private UIQueryResultPageIterator uiPageIterator_;
+-  private List<Node> currentListNodes_ = new ArrayList<Node>();
++  private List<String> currentListNodes_ = new ArrayList<String>();
+   private List<Row> currentListRows_ = new ArrayList<Row>();
+   private int currentAvailablePage_ = 0;
+   private boolean isEndOfIterator_ = false;
+@@ -110,7 +116,18 @@
+   private boolean isTaxonomyNode = false;
+   private String workspaceName = null;
+   private String currentPath = null;
++  protected boolean continueWithLink = false;
++  protected boolean checkWithLink = false;
++  protected String linkRootPath = null;
++  protected String keyword = null;
++  protected RowIterator resultIter = null;
++  protected LinkManager linkManager = null;
++  protected Session checkSymlinkSession = null;
++  protected String linkWorkspace  = null;
++  final static private  String GET_ALL_LINK  = "select * from exo:symlink where jcr:path like '$0/%'";
++  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
+   
++  
+   public List<String> getCategoryPathList() { return categoryPathList; }
+   public void setCategoryPathList(List<String> categoryPathListItem) {
+     categoryPathList = categoryPathListItem; 
+@@ -126,7 +143,9 @@
+   }
+ 
+   public void setQueryResults(QueryResult queryResult) throws Exception {
+-    queryResult_ = queryResult;         
++    queryResult_ = queryResult;
++    resultIter = queryResult.getRows();
++    updateGrid(true);
+   }  
+   
+   public long getSearchTime() { return searchTime_; }
+@@ -141,19 +160,22 @@
+     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
+   }
+   
+-  private void addNode(List<Node> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
+-    List<Node> checkList = new ArrayList<Node>();
++  private boolean addNode(List<String> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
++    List<String> checkList = new ArrayList<String>();
+     if (flag_) checkList = currentListNodes_; 
+     else checkList = listNodes;
+     if (node.getName().equals(Utils.JCR_CONTENT)) {
+-      if (!checkList.contains(node.getParent())) {
+-        listNodes.add(node.getParent());
++      if (!checkList.contains(node.getParent().getPath())) {
++        listNodes.add(node.getParent().getPath());
+         listRows.add(r);
++        return true;
+       }
+-    } else if (!checkList.contains(node)) {
+-      listNodes.add(node);
++    } else if (!checkList.contains(node.getPath())) {
++      listNodes.add(node.getPath());
+       listRows.add(r);
++      return true;
+     }
++    return false;
+   }
+   
+   public Session getSession() throws Exception {
+@@ -180,81 +202,70 @@
+     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
+     String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
+-    List<Node> listNodes = new ArrayList<Node>();
++    List<String> listNodes = new ArrayList<String>();
+     List<Row> listRows = new ArrayList<Row>();
++    if (resultIter == null) return new ArrayList<Row>();
++    if (!resultIter.hasNext()) 
++    {
++    	if (continueWithLink) {    		
++    		getAllLink();
++    	}
++    }
++    Row r = null;
++    int count = 0;
+     Node resultNode = null;
+-    if (queryResult_ == null) return new ArrayList<Row>();
+-    long resultListSize = queryResult_.getNodes().getSize();
+-    if (!queryResult_.getRows().hasNext()) return currentListRows_;    
+-    if (resultListSize > 100) {
+-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
+-        Row r = iter.nextRow();
+-        String path = r.getValue("jcr:path").getString();
+-        try {
+-          resultNode = getNodeByPath(path);
+-        } catch (Exception e) {
+-          LOG.warn("Can't get node by path " + path, e);
+-          continue;
+-        }
+-        if (resultNode != null) {
+-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
+-            for (String categoryPath : categoryPathList) {            
+-              int index = categoryPath.indexOf("/");
+-              List<String> pathCategoriesList = new ArrayList<String>();
+-              String searchCategory = rootTreePath + "/" + categoryPath;
+-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
+-              for (Node category : listCategories) {
+-                pathCategoriesList.add(category.getPath());
+-              }
+-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
+-            }
+-          } else {
+-            addNode(listNodes, resultNode, listRows, r);
+-          }
+-        }
+-        if (!iter.hasNext()) isEndOfIterator_ = true;
+-        if (listNodes.size() == 100) {
+-          currentListNodes_.addAll(listNodes);
+-          currentListRows_.addAll(listRows); 
+-          break;
+-        }
+-        if (listNodes.size() < 100 && iter.hasNext()) {
+-          currentListNodes_.addAll(listNodes);
+-          currentListRows_.addAll(listRows);
+-          flag_ = true;
+-        }
+-      }
+-    } else {
+-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
+-        Row r = iter.nextRow();
+-        if (!iter.hasNext()) isEndOfIterator_ = true;
+-        String path = r.getValue("jcr:path").getString();
+-        try {
+-          resultNode = getNodeByPath(path);
+-        } catch (Exception e) {
+-          LOG.warn("Can't get node by path " + path, e);
+-          continue;
+-        }
+-        if (resultNode != null) {
+-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
+-            for (String categoryPath : categoryPathList) {
+-              int index = categoryPath.indexOf("/");
+-              List<String> pathCategoriesList = new ArrayList<String>();
+-              String searchCategory = rootTreePath + "/" + categoryPath;
+-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
+-              for (Node category : listCategories) {
+-                pathCategoriesList.add(category.getPath());
+-              }
+-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
+-            }
+-          } else {
+-            addNode(listNodes, resultNode, listRows, r);
+-          }
+-        }
+-      }
+-      currentListNodes_= listNodes;
+-      currentListRows_ = listRows;
++    while (resultIter.hasNext()) {    		
++    	r = resultIter.nextRow();      
++    	String path = r.getValue("jcr:path").getString();    	
++    	try {
++    		resultNode = getNodeByPath(path);
++    	} catch (Exception e) {
++    		LOG.warn("Can't get node by path " + path, e);
++    		continue;
++    	}
++    	if (resultNode != null) {
++    		if ((categoryPathList != null) && (categoryPathList.size() > 0)){
++    			for (String categoryPath : categoryPathList) {
++    				int index = categoryPath.indexOf("/");
++    				List<String> pathCategoriesList = new ArrayList<String>();
++    				String searchCategory = rootTreePath + "/" + categoryPath;
++    				List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
++    				for (Node category : listCategories) {
++    					pathCategoriesList.add(category.getPath());
++    				}
++    				if (pathCategoriesList.contains(searchCategory)) {
++    					if (!checkWithLink) {
++    						if (addNode(listNodes, resultNode, listRows, r) )	count ++;
++    					}else {
++    						if (checkTargetMatch(resultNode, keyword)) {
++    							if (addNode(listNodes, resultNode, listRows, r) )	count ++;
++    						}
++    					}
++    				}
++    			}
++    		} else {	        	
++    			if (!checkWithLink) {
++    				if (addNode(listNodes, resultNode, listRows, r) )count ++;
++    			}else {
++    				if (checkTargetMatch(resultNode, keyword)) {
++    					if (addNode(listNodes, resultNode, listRows, r) )count ++;
++    				}
++    			}
++
++    			if (count == 100 ) break;
++    			if (!resultIter.hasNext() && continueWithLink) {
++    				getAllLink();
++    			}
++    		}
++    		if (!resultIter.hasNext()) isEndOfIterator_ = true;
++    		if (listNodes.size() < 100 && !isEndOfIterator_) {
++    			flag_ = true;
++    		}
++    	}
+     }
++    
++    currentListNodes_.addAll(listNodes);
++		currentListRows_.addAll(listRows);
+     return currentListRows_;
+   }
+   
+@@ -262,18 +273,93 @@
+     flag_ = false;
+     isEndOfIterator_ = false;
+     currentListNodes_.clear();
++    currentListRows_.clear();
++    continueWithLink = false;
++    linkRootPath  = null;
++    checkWithLink = false;
++    resultIter = null;
+   }
++  /**
++    * Force this search continue do searching with symlink/taxonomylink
++    * @param fromPath
++    * @param keyword
++    * @param workspace
++    * @Author Nguyen The Vinh from ExoPlatform
++  */
++  public void setRootLink(String fromPath, String keyword, String workspace) {
++  	if (fromPath != null && fromPath.trim().length()>0  && keyword != null && keyword.trim().length()>0) {
++  		this.keyword = keyword;
++  		linkRootPath = fromPath;
++  		continueWithLink = true;
++  		linkWorkspace = workspace;
++  	}
++  }
++  /**
++   * Get all the link/taxonomy link under a path
++   * @throws Exception
++   * @Author Nguyen The Vinh from ExoPlatform
++   */
++  private void getAllLink() throws Exception{  	
++  	String queryStatement = GET_ALL_LINK;  	
++  	if (checkSymlinkSession==null) {
++  		SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
++  		RepositoryService rs = WCMCoreUtils.getService(RepositoryService.class);
++  		checkSymlinkSession = sessionProvider.getSession(linkWorkspace, rs.getCurrentRepository());    																						
++  	}
++  	QueryManager queryManager = checkSymlinkSession.getWorkspace().getQueryManager();
++  	queryStatement = StringUtils.replace(queryStatement,"$0", linkRootPath);
++  	Query query = queryManager.createQuery(queryStatement, Query.SQL);
++  	QueryResult queryResult = query.execute();
++  	resultIter = queryResult.getRows();
++  	continueWithLink = false;
++  	checkWithLink = true;
++  }
++  /**
++   * Check a symlink/taxonomylink if its target matches with keyword for searching ...link
++   * @param linkPath
++   * @param keyword
++   * @return
++   * @Author Nguyen The Vinh from ExoPlatform
++   */
++  protected boolean checkTargetMatch(Node symlinkNode, String keyword) {
++  	String queryStatament = CHECK_LINK_MATCH_QUERY;
++  	Node target=null;
++  	if (linkManager==null) {
++  		linkManager = WCMCoreUtils.getService(LinkManager.class);
++  	}
++  	try {
++  		if (!linkManager.isLink(symlinkNode)) return true;
++  		target = linkManager.getTarget(symlinkNode);
++  		if (target == null) return false;	
++  		queryStatament = StringUtils.replace(queryStatament,"$0", target.getPath());
++  		queryStatament = StringUtils.replace(queryStatament,"$1", keyword.replaceAll("'", "''"));
++  		queryStatament = StringUtils.replace(queryStatament,"$2", keyword.replaceAll("'", "''").toLowerCase());
++
++  		if (checkSymlinkSession==null) {
++  			SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());        
++  			checkSymlinkSession = sessionProvider.getSession(target.getSession().getWorkspace().getName(), 
++  					(ManageableRepository)target.getSession().getRepository());
++  		}
++  		QueryManager queryManager = checkSymlinkSession.getWorkspace().getQueryManager();
++  		Query query = queryManager.createQuery(queryStatament, Query.SQL);
++  		QueryResult queryResult = query.execute();
++  		return queryResult.getNodes().getSize()>0;
++  	} catch (RepositoryException e) {
++  		return false;
++  	}
++  }
+   
+   public UIQueryResultPageIterator getUIPageIterator() { return uiPageIterator_; }
+   
++  @Deprecated
+   public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
+     this.isTaxonomyNode = isTaxonomyNode;
+     this.workspaceName = workspaceName;
+     this.currentPath = currentPath;
+   }
+-   
++  @Deprecated 
+   public boolean isTaxonomyNode() { return isTaxonomyNode; }  
+-  
++  @Deprecated
+   public Node getSymlinkNode(Node targetNode) throws Exception {
+     if (targetNode == null || !targetNode.isNodeType("mix:referenceable")) {
+       return null;
+@@ -293,11 +379,7 @@
+ 
+   public void updateGrid(boolean flagCheck) throws Exception {
+     SearchResultPageList pageList;
+-    if (flagCheck) {
+-      pageList = new SearchResultPageList(queryResult_, getResultList(), PAGE_SIZE, isEndOfIterator_);
+-    } else {
+-      pageList = new SearchResultPageList(queryResult_, currentListRows_, PAGE_SIZE, isEndOfIterator_);
+-    }
++    pageList = new SearchResultPageList(queryResult_, getResultList(), PAGE_SIZE, isEndOfIterator_);
+     currentAvailablePage_ = currentListNodes_.size()/PAGE_SIZE;
+     uiPageIterator_.setSearchResultPageList(pageList);
+     uiPageIterator_.setPageList(pageList);
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISimpleSearch.java	(working copy)
+@@ -300,7 +300,6 @@
+         QueryResult queryResult = query.execute();
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(queryResult);
+-        uiSearchResult.updateGrid(true);
+       } catch (RepositoryException reEx) {
+         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
+         return;
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISavedQuery.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISavedQuery.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISavedQuery.java	(working copy)
+@@ -29,8 +29,6 @@
+ import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+-import org.exoplatform.webui.core.UIPopupComponent;
+-import org.exoplatform.webui.core.UIPopupContainer;
+ import org.exoplatform.portal.webui.util.SessionProviderFactory;
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.queries.QueryService;
+@@ -44,6 +42,8 @@
+ import org.exoplatform.webui.core.UIComponent;
+ import org.exoplatform.webui.core.UIContainer;
+ import org.exoplatform.webui.core.UIPageIterator;
++import org.exoplatform.webui.core.UIPopupComponent;
++import org.exoplatform.webui.core.UIPopupContainer;
+ import org.exoplatform.webui.core.UIPopupWindow;
+ import org.exoplatform.webui.event.Event;
+ import org.exoplatform.webui.event.EventListener;
+@@ -192,7 +192,6 @@
+         }        
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(queryResult);
+-        uiSearchResult.updateGrid(true);
+       }
+       if(uiQuery.isQuickSearch_) {
+         ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class);
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIJCRAdvancedSearch.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIJCRAdvancedSearch.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UIJCRAdvancedSearch.java	(working copy)
+@@ -162,7 +162,6 @@
+         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;      
+         uiSearchResult.clearAll() ;
+         uiSearchResult.setQueryResults(queryResult) ;
+-        uiSearchResult.updateGrid(true) ;
+         long time = System.currentTimeMillis() - startTime;
+         uiSearchResult.setSearchTime(time);
+         uiSearch.setRenderedChild(UIECMSearch.ADVANCED_RESULT) ;
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java	(revision 78411)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/sidebar/UISavedSearches.java	(working copy)
+@@ -167,7 +167,6 @@
+         }        
+         uiSearchResult.clearAll();
+         uiSearchResult.setQueryResults(queryResult);
+-        uiSearchResult.updateGrid(true);
+       }
+       UIDrivesArea uiDrivesArea = uiWorkingArea.getChild(UIDrivesArea.class);
+       if (uiDrivesArea != null) uiDrivesArea.setRendered(false);
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java	(revision 78411)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java	(working copy)
+@@ -18,7 +18,16 @@
+ 
+ import java.io.InputStream;
+ import java.text.DecimalFormat;
+-import java.util.*;
++import java.util.ArrayList;
++import java.util.Collection;
++import java.util.Comparator;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Locale;
++import java.util.Map;
++import java.util.MissingResourceException;
++import java.util.ResourceBundle;
++import java.util.Set;
+ import java.util.zip.ZipInputStream;
+ 
+ import javax.imageio.ImageIO;
+@@ -30,14 +39,14 @@
+ import javax.jcr.nodetype.NodeType;
+ import javax.jcr.nodetype.NodeTypeManager;
+ 
+-import org.exoplatform.services.log.Log;
+ import org.exoplatform.container.ExoContainer;
+ import org.exoplatform.container.ExoContainerContext;
+ import org.exoplatform.container.definition.PortalContainerConfig;
+ import org.exoplatform.download.DownloadService;
+ import org.exoplatform.download.InputStreamDownloadResource;
++import org.exoplatform.ecm.utils.text.Text;
++import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+-import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.cms.templates.TemplateService;
+ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+@@ -46,6 +55,7 @@
+ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.log.ExoLogger;
++import org.exoplatform.services.log.Log;
+ import org.exoplatform.services.resources.ResourceBundleService;
+ import org.exoplatform.services.security.ConversationState;
+ import org.exoplatform.services.security.Identity;
+@@ -599,4 +609,59 @@
+ 	  return portalContainerConfig.getRestContextName(portalContainerName);
+   }
+   
+-}
++    /**
++     * 
++     * @param node
++     * @return
++     * @throws Exception
++     * @Author Nguyen The Vinh from ECM of ExoPlatform
++     */
++  	public static String getTitleWithSymlink(Node node) throws Exception {
++  		String title = null;
++  		Node nProcessNode = node;
++  		if (title==null) {
++  			nProcessNode = node;
++  			if (nProcessNode.hasProperty("exo:title")) {
++  				title = nProcessNode.getProperty("exo:title").getValue().getString();
++  			}
++  			if (nProcessNode.hasNode("jcr:content")) {
++  				Node content = nProcessNode.getNode("jcr:content");
++  				if (content.hasProperty("dc:title")) {
++  					try {
++  						title = content.getProperty("dc:title").getValues()[0].getString();
++  					} catch (Exception e) {
++  						title = null;
++  					}
++  				}
++  			}
++  			if (title != null) title = title.trim();
++  		}
++  		if (title !=null && title.length()>0) return Text.unescapeIllegalJcrChars(title);
++  		if (isSymLink(node)) {
++  			nProcessNode = getNodeSymLink(nProcessNode);
++  			if (nProcessNode == null ) {
++  			nProcessNode = node;
++  			}
++  			if (nProcessNode.hasProperty("exo:title")) {
++  				title = nProcessNode.getProperty("exo:title").getValue().getString();
++  			}
++  			if (nProcessNode.hasNode("jcr:content")) {
++  				Node content = nProcessNode.getNode("jcr:content");
++  				if (content.hasProperty("dc:title")) {
++  					try {
++  						title = content.getProperty("dc:title").getValues()[0].getString();
++  					} catch (Exception e) {
++  						title = null;
++  					}
++  				}
++  			}
++  			if (title != null) { 
++  				title = title.trim();
++  				if (title.length()==0) title = null;
++  			}
++  		}		
++  		
++  		if (title ==null) title = nProcessNode.getName();
++  		return Text.unescapeIllegalJcrChars(title);
++  	}
++}
+\ No newline at end of file

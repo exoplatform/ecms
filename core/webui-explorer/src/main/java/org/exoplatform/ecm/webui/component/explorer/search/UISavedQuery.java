@@ -29,8 +29,6 @@ import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
@@ -44,6 +42,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -192,7 +192,6 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
         }        
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
       }
       if(uiQuery.isQuickSearch_) {
         ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class);

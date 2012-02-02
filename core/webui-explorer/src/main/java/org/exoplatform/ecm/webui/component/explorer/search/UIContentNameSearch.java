@@ -91,7 +91,6 @@ public class UIContentNameSearch extends UIForm {
         QueryResult queryResult = query.execute();
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
         uiECMSearch.setRenderedChild(UISearchResult.class);
@@ -102,7 +101,6 @@ public class UIContentNameSearch extends UIForm {
       } catch (Exception e) {
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(null);
-        uiSearchResult.updateGrid(true);
         uiECMSearch.setRenderedChild(UISearchResult.class);
       }
     }  

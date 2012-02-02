@@ -42,14 +42,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -100,8 +94,8 @@ public class UIAddressBar extends UIForm {
   private String[] arrView_ = {};
   final static private String FIELD_SIMPLE_SEARCH = "simpleSearch" ;
 
-  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where contains(*, '$1') or lower(exo:name) like '%$2%' order by exo:dateCreated DESC, jcr:primaryType DESC" ;
-  final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' ) order by jcr:path DESC, jcr:primaryType DESC";
+  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where not (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') and (contains(*, '$1') or lower(exo:name) like '%$2%' )order by exo:dateCreated DESC, jcr:primaryType DESC" ;
+  final static private String SQL_QUERY = "select * from nt:base where not (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink') and (jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )) order by jcr:path DESC, jcr:primaryType DESC";
      
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
@@ -249,67 +243,6 @@ public class UIAddressBar extends UIForm {
       UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
       Node currentNode = uiExplorer.getCurrentNode();
-      boolean isTaxonomyNode = false;
-      if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
-        TaxonomyService taxonomyService = uiAddressBar.getApplicationComponent(TaxonomyService.class);
-        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
-        for (Node taxonomyNode : TaxonomyTrees) {
-          if (currentNode.getPath().startsWith(taxonomyNode.getPath())) {
-            ActionServiceContainer actionService = uiAddressBar.getApplicationComponent(ActionServiceContainer.class);
-            List<Node> listAction = actionService.getActions(taxonomyNode);
-            for (Node actionNode : listAction) {
-              if (actionNode.isNodeType(ACTION_TAXONOMY)) {
-                String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
-                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
-                String queryStatement = null;
-                if("/".equals(searchPath)) {
-                  queryStatement = ROOT_SQL_QUERY;        
-                }else {
-                  queryStatement = StringUtils.replace(SQL_QUERY,"$0", searchPath);
-                }
-                queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
-                queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
-                isTaxonomyNode = true;
-                uiExplorer.removeChildById("ViewSearch");
-                UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
-                
-                RepositoryService repositoryService = 
-                  Util.getUIPortal().getApplicationComponent(RepositoryService.class);
-                SessionProviderService sessionProviderService = 
-                  Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
-                SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);                
-                Session session = sessionProvider.getSession(searchWorkspace, 
-                    repositoryService.getRepository(uiExplorer.getRepositoryName()));      
-                UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-                QueryManager queryManager =session.getWorkspace().getQueryManager();
-                        
-                long startTime = System.currentTimeMillis();
-                QueryResult queryResult = null;
-                try {
-                	Query query = queryManager.createQuery(queryStatement, Query.SQL);        
-                	queryResult = query.execute();
-                } catch (InvalidQueryException invalidEx) {
-                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
-                  return;
-                } catch (RepositoryException reEx) {
-                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
-                  return;
-                }
-                uiSearchResult.clearAll();
-                uiSearchResult.setQueryResults(queryResult);            
-                uiSearchResult.updateGrid(true);
-                uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
-                long time = System.currentTimeMillis() - startTime;
-                uiSearchResult.setSearchTime(time);
-                uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
-                if (session != null) session.logout();
-                return;
-              }
-            }
-          }
-        }
-      }
       String queryStatement = null;
       if("/".equals(currentNode.getPath())) {
         queryStatement = ROOT_SQL_QUERY;        
@@ -343,11 +276,11 @@ public class UIAddressBar extends UIForm {
         return;
       }               
       uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);  
-      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
-      uiSearchResult.updateGrid(true);
+      uiSearchResult.setRootLink( currentNode.getPath(), text.replaceAll("'", "''"), 
+      														currentNode.getSession().getWorkspace().getName());
       long time = System.currentTimeMillis() - startTime;
-      uiSearchResult.setSearchTime(time);      
+      uiSearchResult.setSearchTime(time);
+      uiSearchResult.setQueryResults(queryResult);
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);

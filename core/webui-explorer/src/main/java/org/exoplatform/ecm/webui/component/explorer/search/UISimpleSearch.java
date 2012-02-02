@@ -300,7 +300,6 @@ public class UISimpleSearch extends UIForm {
         QueryResult queryResult = query.execute();
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
       } catch (RepositoryException reEx) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
         return;

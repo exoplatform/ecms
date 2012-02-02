@@ -18,7 +18,16 @@ package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
@@ -30,14 +39,14 @@ import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
@@ -46,6 +55,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
@@ -599,4 +609,59 @@ public class Utils {
 	  return portalContainerConfig.getRestContextName(portalContainerName);
   }
   
+    /**
+     * 
+     * @param node
+     * @return
+     * @throws Exception
+     * @Author Nguyen The Vinh from ECM of ExoPlatform
+     */
+  	public static String getTitleWithSymlink(Node node) throws Exception {
+  		String title = null;
+  		Node nProcessNode = node;
+  		if (title==null) {
+  			nProcessNode = node;
+  			if (nProcessNode.hasProperty("exo:title")) {
+  				title = nProcessNode.getProperty("exo:title").getValue().getString();
+  			}
+  			if (nProcessNode.hasNode("jcr:content")) {
+  				Node content = nProcessNode.getNode("jcr:content");
+  				if (content.hasProperty("dc:title")) {
+  					try {
+  						title = content.getProperty("dc:title").getValues()[0].getString();
+  					} catch (Exception e) {
+  						title = null;
+  					}
+  				}
+  			}
+  			if (title != null) title = title.trim();
+  		}
+  		if (title !=null && title.length()>0) return Text.unescapeIllegalJcrChars(title);
+  		if (isSymLink(node)) {
+  			nProcessNode = getNodeSymLink(nProcessNode);
+  			if (nProcessNode == null ) {
+  			nProcessNode = node;
+  			}
+  			if (nProcessNode.hasProperty("exo:title")) {
+  				title = nProcessNode.getProperty("exo:title").getValue().getString();
+  			}
+  			if (nProcessNode.hasNode("jcr:content")) {
+  				Node content = nProcessNode.getNode("jcr:content");
+  				if (content.hasProperty("dc:title")) {
+  					try {
+  						title = content.getProperty("dc:title").getValues()[0].getString();
+  					} catch (Exception e) {
+  						title = null;
+  					}
+  				}
+  			}
+  			if (title != null) { 
+  				title = title.trim();
+  				if (title.length()==0) title = null;
+  			}
+  		}		
+  		
+  		if (title ==null) title = nProcessNode.getName();
+  		return Text.unescapeIllegalJcrChars(title);
+  	}
 }

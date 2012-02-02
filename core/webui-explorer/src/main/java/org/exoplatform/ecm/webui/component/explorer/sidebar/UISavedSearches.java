@@ -167,7 +167,6 @@ public class UISavedSearches extends UIComponent {
         }        
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
       }
       UIDrivesArea uiDrivesArea = uiWorkingArea.getChild(UIDrivesArea.class);
       if (uiDrivesArea != null) uiDrivesArea.setRendered(false);

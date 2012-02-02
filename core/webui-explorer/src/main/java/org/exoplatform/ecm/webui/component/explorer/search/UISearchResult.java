@@ -39,6 +39,7 @@ import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -49,15 +50,20 @@ import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -97,7 +103,7 @@ public class UISearchResult extends UIContainer {
   private long searchTime_ = 0; 
   private boolean flag_ = false;
   private UIQueryResultPageIterator uiPageIterator_;
-  private List<Node> currentListNodes_ = new ArrayList<Node>();
+  private List<String> currentListNodes_ = new ArrayList<String>();
   private List<Row> currentListRows_ = new ArrayList<Row>();
   private int currentAvailablePage_ = 0;
   private boolean isEndOfIterator_ = false;
@@ -110,6 +116,17 @@ public class UISearchResult extends UIContainer {
   private boolean isTaxonomyNode = false;
   private String workspaceName = null;
   private String currentPath = null;
+  protected boolean continueWithLink = false;
+  protected boolean checkWithLink = false;
+  protected String linkRootPath = null;
+  protected String keyword = null;
+  protected RowIterator resultIter = null;
+  protected LinkManager linkManager = null;
+  protected Session checkSymlinkSession = null;
+  protected String linkWorkspace  = null;
+  final static private  String GET_ALL_LINK  = "select * from exo:symlink where jcr:path like '$0/%'";
+  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
+  
   
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
@@ -126,7 +143,9 @@ public class UISearchResult extends UIContainer {
   }
 
   public void setQueryResults(QueryResult queryResult) throws Exception {
-    queryResult_ = queryResult;         
+    queryResult_ = queryResult;
+    resultIter = queryResult.getRows();
+    updateGrid(true);
   }  
   
   public long getSearchTime() { return searchTime_; }
@@ -141,19 +160,22 @@ public class UISearchResult extends UIContainer {
     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
   }
   
-  private void addNode(List<Node> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
-    List<Node> checkList = new ArrayList<Node>();
+  private boolean addNode(List<String> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
+    List<String> checkList = new ArrayList<String>();
     if (flag_) checkList = currentListNodes_; 
     else checkList = listNodes;
     if (node.getName().equals(Utils.JCR_CONTENT)) {
-      if (!checkList.contains(node.getParent())) {
-        listNodes.add(node.getParent());
+      if (!checkList.contains(node.getParent().getPath())) {
+        listNodes.add(node.getParent().getPath());
         listRows.add(r);
+        return true;
       }
-    } else if (!checkList.contains(node)) {
-      listNodes.add(node);
+    } else if (!checkList.contains(node.getPath())) {
+      listNodes.add(node.getPath());
       listRows.add(r);
+      return true;
     }
+    return false;
   }
   
   public Session getSession() throws Exception {
@@ -180,81 +202,70 @@ public class UISearchResult extends UIContainer {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
-    List<Node> listNodes = new ArrayList<Node>();
+    List<String> listNodes = new ArrayList<String>();
     List<Row> listRows = new ArrayList<Row>();
-    Node resultNode = null;
-    if (queryResult_ == null) return new ArrayList<Row>();
-    long resultListSize = queryResult_.getNodes().getSize();
-    if (!queryResult_.getRows().hasNext()) return currentListRows_;    
-    if (resultListSize > 100) {
-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
-        Row r = iter.nextRow();
-        String path = r.getValue("jcr:path").getString();
-        try {
-          resultNode = getNodeByPath(path);
-        } catch (Exception e) {
-          LOG.warn("Can't get node by path " + path, e);
-          continue;
-        }
-        if (resultNode != null) {
-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
-            for (String categoryPath : categoryPathList) {            
-              int index = categoryPath.indexOf("/");
-              List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = rootTreePath + "/" + categoryPath;
-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
-              for (Node category : listCategories) {
-                pathCategoriesList.add(category.getPath());
-              }
-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
-            }
-          } else {
-            addNode(listNodes, resultNode, listRows, r);
-          }
-        }
-        if (!iter.hasNext()) isEndOfIterator_ = true;
-        if (listNodes.size() == 100) {
-          currentListNodes_.addAll(listNodes);
-          currentListRows_.addAll(listRows); 
-          break;
-        }
-        if (listNodes.size() < 100 && iter.hasNext()) {
-          currentListNodes_.addAll(listNodes);
-          currentListRows_.addAll(listRows);
-          flag_ = true;
-        }
-      }
-    } else {
-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
-        Row r = iter.nextRow();
-        if (!iter.hasNext()) isEndOfIterator_ = true;
-        String path = r.getValue("jcr:path").getString();
-        try {
-          resultNode = getNodeByPath(path);
-        } catch (Exception e) {
-          LOG.warn("Can't get node by path " + path, e);
-          continue;
-        }
-        if (resultNode != null) {
-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
-            for (String categoryPath : categoryPathList) {
-              int index = categoryPath.indexOf("/");
-              List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = rootTreePath + "/" + categoryPath;
-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
-              for (Node category : listCategories) {
-                pathCategoriesList.add(category.getPath());
-              }
-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
-            }
-          } else {
-            addNode(listNodes, resultNode, listRows, r);
-          }
-        }
-      }
-      currentListNodes_= listNodes;
-      currentListRows_ = listRows;
+    if (resultIter == null) return new ArrayList<Row>();
+    if (!resultIter.hasNext()) 
+    {
+    	if (continueWithLink) {    		
+    		getAllLink();
+    	}
     }
+    Row r = null;
+    int count = 0;
+    Node resultNode = null;
+    while (resultIter.hasNext()) {    		
+    	r = resultIter.nextRow();      
+    	String path = r.getValue("jcr:path").getString();    	
+    	try {
+    		resultNode = getNodeByPath(path);
+    	} catch (Exception e) {
+    		LOG.warn("Can't get node by path " + path, e);
+    		continue;
+    	}
+    	if (resultNode != null) {
+    		if ((categoryPathList != null) && (categoryPathList.size() > 0)){
+    			for (String categoryPath : categoryPathList) {
+    				int index = categoryPath.indexOf("/");
+    				List<String> pathCategoriesList = new ArrayList<String>();
+    				String searchCategory = rootTreePath + "/" + categoryPath;
+    				List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
+    				for (Node category : listCategories) {
+    					pathCategoriesList.add(category.getPath());
+    				}
+    				if (pathCategoriesList.contains(searchCategory)) {
+    					if (!checkWithLink) {
+    						if (addNode(listNodes, resultNode, listRows, r) )	count ++;
+    					}else {
+    						if (checkTargetMatch(resultNode, keyword)) {
+    							if (addNode(listNodes, resultNode, listRows, r) )	count ++;
+    						}
+    					}
+    				}
+    			}
+    		} else {	        	
+    			if (!checkWithLink) {
+    				if (addNode(listNodes, resultNode, listRows, r) )count ++;
+    			}else {
+    				if (checkTargetMatch(resultNode, keyword)) {
+    					if (addNode(listNodes, resultNode, listRows, r) )count ++;
+    				}
+    			}
+
+    			if (count == 100 ) break;
+    			if (!resultIter.hasNext() && continueWithLink) {
+    				getAllLink();
+    			}
+    		}
+    		if (!resultIter.hasNext()) isEndOfIterator_ = true;
+    		if (listNodes.size() < 100 && !isEndOfIterator_) {
+    			flag_ = true;
+    		}
+    	}
+    }
+    
+    currentListNodes_.addAll(listNodes);
+		currentListRows_.addAll(listRows);
     return currentListRows_;
   }
   
@@ -262,18 +273,93 @@ public class UISearchResult extends UIContainer {
     flag_ = false;
     isEndOfIterator_ = false;
     currentListNodes_.clear();
+    currentListRows_.clear();
+    continueWithLink = false;
+    linkRootPath  = null;
+    checkWithLink = false;
+    resultIter = null;
+  }
+  /**
+    * Force this search continue do searching with symlink/taxonomylink
+    * @param fromPath
+    * @param keyword
+    * @param workspace
+    * @Author Nguyen The Vinh from ExoPlatform
+  */
+  public void setRootLink(String fromPath, String keyword, String workspace) {
+  	if (fromPath != null && fromPath.trim().length()>0  && keyword != null && keyword.trim().length()>0) {
+  		this.keyword = keyword;
+  		linkRootPath = fromPath;
+  		continueWithLink = true;
+  		linkWorkspace = workspace;
+  	}
+  }
+  /**
+   * Get all the link/taxonomy link under a path
+   * @throws Exception
+   * @Author Nguyen The Vinh from ExoPlatform
+   */
+  private void getAllLink() throws Exception{  	
+  	String queryStatement = GET_ALL_LINK;  	
+  	if (checkSymlinkSession==null) {
+  		SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
+  		RepositoryService rs = WCMCoreUtils.getService(RepositoryService.class);
+  		checkSymlinkSession = sessionProvider.getSession(linkWorkspace, rs.getCurrentRepository());    																						
+  	}
+  	QueryManager queryManager = checkSymlinkSession.getWorkspace().getQueryManager();
+  	queryStatement = StringUtils.replace(queryStatement,"$0", linkRootPath);
+  	Query query = queryManager.createQuery(queryStatement, Query.SQL);
+  	QueryResult queryResult = query.execute();
+  	resultIter = queryResult.getRows();
+  	continueWithLink = false;
+  	checkWithLink = true;
+  }
+  /**
+   * Check a symlink/taxonomylink if its target matches with keyword for searching ...link
+   * @param linkPath
+   * @param keyword
+   * @return
+   * @Author Nguyen The Vinh from ExoPlatform
+   */
+  protected boolean checkTargetMatch(Node symlinkNode, String keyword) {
+  	String queryStatament = CHECK_LINK_MATCH_QUERY;
+  	Node target=null;
+  	if (linkManager==null) {
+  		linkManager = WCMCoreUtils.getService(LinkManager.class);
+  	}
+  	try {
+  		if (!linkManager.isLink(symlinkNode)) return true;
+  		target = linkManager.getTarget(symlinkNode);
+  		if (target == null) return false;	
+  		queryStatament = StringUtils.replace(queryStatament,"$0", target.getPath());
+  		queryStatament = StringUtils.replace(queryStatament,"$1", keyword.replaceAll("'", "''"));
+  		queryStatament = StringUtils.replace(queryStatament,"$2", keyword.replaceAll("'", "''").toLowerCase());
+
+  		if (checkSymlinkSession==null) {
+  			SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());        
+  			checkSymlinkSession = sessionProvider.getSession(target.getSession().getWorkspace().getName(), 
+  					(ManageableRepository)target.getSession().getRepository());
+  		}
+  		QueryManager queryManager = checkSymlinkSession.getWorkspace().getQueryManager();
+  		Query query = queryManager.createQuery(queryStatament, Query.SQL);
+  		QueryResult queryResult = query.execute();
+  		return queryResult.getNodes().getSize()>0;
+  	} catch (RepositoryException e) {
+  		return false;
+  	}
   }
   
   public UIQueryResultPageIterator getUIPageIterator() { return uiPageIterator_; }
   
+  @Deprecated
   public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
     this.isTaxonomyNode = isTaxonomyNode;
     this.workspaceName = workspaceName;
     this.currentPath = currentPath;
   }
-   
+  @Deprecated 
   public boolean isTaxonomyNode() { return isTaxonomyNode; }  
-  
+  @Deprecated
   public Node getSymlinkNode(Node targetNode) throws Exception {
     if (targetNode == null || !targetNode.isNodeType("mix:referenceable")) {
       return null;
@@ -293,11 +379,7 @@ public class UISearchResult extends UIContainer {
 
   public void updateGrid(boolean flagCheck) throws Exception {
     SearchResultPageList pageList;
-    if (flagCheck) {
-      pageList = new SearchResultPageList(queryResult_, getResultList(), PAGE_SIZE, isEndOfIterator_);
-    } else {
-      pageList = new SearchResultPageList(queryResult_, currentListRows_, PAGE_SIZE, isEndOfIterator_);
-    }
+    pageList = new SearchResultPageList(queryResult_, getResultList(), PAGE_SIZE, isEndOfIterator_);
     currentAvailablePage_ = currentListNodes_.size()/PAGE_SIZE;
     uiPageIterator_.setSearchResultPageList(pageList);
     uiPageIterator_.setPageList(pageList);

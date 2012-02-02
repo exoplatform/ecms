@@ -65,8 +65,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -294,7 +294,6 @@ public class UIActionBar extends UIForm {
       QueryResult queryResult = query.execute();                  
       uiSearchResult.clearAll();
       uiSearchResult.setQueryResults(queryResult);            
-      uiSearchResult.updateGrid(true);
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
