@@ -34,12 +34,6 @@
       <version>${org.exoplatform.jcr.version}</version>
       <scope>compile</scope>
     </dependency>
-		<dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-parser</artifactId>
-      <version>${project.version}</version>
-      <scope>compile</scope>
-    </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.ext</artifactId>
@@ -98,6 +92,11 @@
       <artifactId>exo.ws.frameworks.json</artifactId>
       <version>${org.exoplatform.ws.version}</version>
     </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>${xml.parser.version}</version>
+    </dependency>    
     <dependency>
       <groupId>com.totsp.feedpod</groupId>
       <artifactId>itunes-com-podcast</artifactId>

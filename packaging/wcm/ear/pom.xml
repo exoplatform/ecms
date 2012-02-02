@@ -156,11 +156,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-parser</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-ext-webui</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -320,11 +315,6 @@ exo-ecms-packaging-ecmdemo-webapp
           <displayName>ecm-wcm-extension</displayName>
           <defaultLibBundleDir>lib</defaultLibBundleDir>
           <modules>
-            <jarModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-parser</artifactId>
-              <includeInApplicationXml>true</includeInApplicationXml>
-            </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-services</artifactId>

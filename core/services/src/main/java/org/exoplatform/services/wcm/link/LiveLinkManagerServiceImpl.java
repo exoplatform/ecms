@@ -18,7 +18,6 @@ package org.exoplatform.services.wcm.link;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -38,9 +37,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
-import org.exoplatform.services.html.HTMLDocument;
-import org.exoplatform.services.html.HTMLNode;
-import org.exoplatform.services.html.parser.HTMLParser;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -73,7 +69,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
   private String internalServerPath;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(LiveLinkManagerServiceImpl.class);
+  final private static Log LOG = ExoLogger.getLogger(LiveLinkManagerServiceImpl.class);
 
   /**
    * Instantiates a new live link manager service impl.
@@ -165,7 +161,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
         updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");
       }
     } catch (Exception e) {
-      log.error("Error when perform updateLinks: ", e);
+      LOG.error("Error when perform updateLinks: ", e);
     }
   }
 
@@ -180,7 +176,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       Session session = portal.getSession();
       updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");
     } catch (Exception e) {
-      log.error("Error when perform updateLinks: ", e);
+      LOG.error("Error when perform updateLinks: ", e);
     }
   }
 
@@ -215,7 +211,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
           String oldUrl = linkBean.getUrl();
           String oldStatus = getLinkStatus(oldUrl);
           String updatedLink = new LinkBean(oldUrl, oldStatus).toString();
-          log.info(updatedLink);
+          LOG.info(updatedLink);
           newValues[iValues] = valueFactory.createValue(updatedLink);
           if (oldStatus.equals(LinkBean.STATUS_BROKEN)) {
             listBrokenLinks.add(oldUrl);
@@ -249,7 +245,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       }
       return LinkBean.STATUS_BROKEN;
     } catch (Exception e) {
-      log.info("URL Link: \"" + strUrl + "\" is broken");
+      LOG.info("URL Link: \"" + strUrl + "\" is broken");
       return LinkBean.STATUS_BROKEN;
     }
   }
@@ -259,19 +255,12 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
    */
   public List<String> extractLinks(Node htmlFile) throws Exception {
     String htmlData = htmlFile.getNode("jcr:content").getProperty("jcr:data").getString();
-    HTMLDocument document = HTMLParser.createDocument(htmlData);
     List<String> listHyperlink = new ArrayList<String>();
-    HTMLNode htmlRootNode = document.getRoot();
-    HyperLinkUtilExtended linkUtil = new HyperLinkUtilExtended();
-    for (Iterator<String> iterLink = linkUtil.getSiteLink(htmlRootNode).iterator(); iterLink.hasNext();) {
-      String link = iterLink.next();
-      if (!listHyperlink.contains(link))
-        listHyperlink.add(link);
-    }
-    for (Iterator<String> iterImage = linkUtil.getImageLink(htmlRootNode).iterator(); iterImage.hasNext();){
-      String image = iterImage.next();
-      if (!listHyperlink.contains(image))
-        listHyperlink.add(image);
+    HTMLLinkExtractor htmlLinkExtractor = new HTMLLinkExtractor();
+    List<HTMLLinkExtractor.HtmlLink> htmlLinks = htmlLinkExtractor.grabHTMLLinks(htmlData);
+    for (HTMLLinkExtractor.HtmlLink link : htmlLinks) {
+      if (!listHyperlink.contains(link.toString()))
+        listHyperlink.add(link.toString());
     }
     return listHyperlink;
   }

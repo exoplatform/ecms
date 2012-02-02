@@ -169,17 +169,12 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     Node parent = node.getParent();
     if(!parent.isNodeType("exo:webContent"))
       return;
-    if (!parent.isCheckedOut() || parent.isLocked() || !node.isCheckedOut() || node.isLocked()) {
+    if (!parent.isCheckedOut() || parent.isLocked() || !node.isCheckedOut()) {
       return;
     }
     LiveLinkManagerService liveLinkManagerService = getService(LiveLinkManagerService.class);
     List<String> newLinks = liveLinkManagerService.extractLinks(node);
     liveLinkManagerService.updateLinkDataForNode(parent,newLinks);
-//    TOCGeneratorService tocGeneratorService = getService(TOCGeneratorService.class);
-//    List<Heading> headings = tocGeneratorService.extractHeadings(document);
-//    if(headings != null) {
-//      tocGeneratorService.updateTOC(node,headings);
-//    }
   }
 
 }
