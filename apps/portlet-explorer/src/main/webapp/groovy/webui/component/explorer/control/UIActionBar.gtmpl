@@ -53,15 +53,19 @@
 				      isSelected = true;
 				      tabStyle = "SelectedActionBarTab";
 				    }
-				    def tabName = _ctx.appRes(uicomponent.getId() + ".obtion." + tab);
-				    def tabSize = tabName.length()*3 + 40;
+				    String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
+				    String displayTabName = fullTabName;
+				    if (fullTabName.length() > 14)
+				    {
+				      displayTabName = fullTabName.substring(0, 11) + "..."
+				    }
 				%>
 					    <div class="UITab" style="display: block;">
 						    <div class="$tabStyle">
 								  <div class="TabL">
 								    <div class="TabR">
-										  <div class="TabM" style="width: ${tabSize}px;">
-										    <a href="<%=uicomponent.event("ChangeTab", tab)%>" class="TabLabel">$tabName</a>
+										  <div class="TabM" style="width: 125px;">
+										    <a href="<%=uicomponent.event("ChangeTab", tab)%>" title="$fullTabName" class="TabLabel">$displayTabName</a>
 										  </div>
 								    </div>
 								  </div>  
