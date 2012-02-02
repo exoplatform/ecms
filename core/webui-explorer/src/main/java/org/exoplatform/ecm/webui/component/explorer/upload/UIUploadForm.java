@@ -485,15 +485,6 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           } else {
             if(selectedNode.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
               if(!selectedNode.isCheckedOut()) selectedNode.checkout() ; 
-              Node contentNode = selectedNode.getNode(Utils.JCR_CONTENT);
-              if(contentNode.getProperty(Utils.JCR_MIMETYPE).getString().equals(mimeType)) {
-                contentNode.setProperty(Utils.JCR_DATA, inputStream);
-                contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
-                selectedNode.save() ;
-                uiManager.setRendered(false);
-                uiExplorer.updateAjax(event);
-                return;
-              }
             }
             if(!isExist || isKeepFile) {            
               newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode, 
