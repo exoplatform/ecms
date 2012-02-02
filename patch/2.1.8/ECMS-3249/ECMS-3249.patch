@@ -1,0 +1,16 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java	(revision 78414)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/rightclick/manager/PermlinkActionComponent.java	(working copy)
+@@ -60,7 +60,10 @@
+     PortalRequestContext pcontext = Util.getPortalRequestContext();
+     String portalUrl = pcontext.getPortalURI();
+     String nodePathUrl = pcontext.getNodePath();
+-    String portletId = nodePathUrl.split("/")[1];
++	String portletId = "";
++	if (nodePathUrl.length() > 1 && nodePathUrl.indexOf("/") >= 0 && nodePathUrl.split("/").length > 1) {
++	  portletId = nodePathUrl.split("/")[1];
++	}
+     String drivename = uiExplorer.getDriveData().getName();
+     String drivePath = uiExplorer.getDriveData().getHomePath();
+     String userId = Util.getPortalRequestContext().getRemoteUser();
