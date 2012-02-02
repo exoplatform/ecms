@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFil
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -65,6 +66,9 @@ public class PublicationApproveContentAction extends UIComponent {
 			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
 			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
 			Node node = uiExplorer.getCurrentNode();
+                    if(node.isLocked()) {
+                      node.getSession().addLockToken(LockUtil.getLockToken(node));
+                    }
 		    HashMap<String,String> context = new HashMap<String,String>();
 			
 		    publicationService.changeState(node, "approved", context);

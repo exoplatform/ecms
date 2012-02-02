@@ -1,0 +1,46 @@
+Index: ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationApproveContentAction.java
+===================================================================
+--- ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationApproveContentAction.java	(révision 77867)
++++ ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationApproveContentAction.java	(copie de travail)
+@@ -28,6 +28,7 @@
+ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
++import org.exoplatform.ecm.webui.utils.LockUtil;
+ import org.exoplatform.services.ecm.publication.PublicationService;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+ import org.exoplatform.webui.config.annotation.EventConfig;
+@@ -65,6 +66,9 @@
+ 			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+ 			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+ 			Node node = uiExplorer.getCurrentNode();
++                    if(node.isLocked()) {
++                      node.getSession().addLockToken(LockUtil.getLockToken(node));
++                    }
+ 		    HashMap<String,String> context = new HashMap<String,String>();
+ 			
+ 		    publicationService.changeState(node, "approved", context);
+Index: ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationRequestApprovalAction.java
+===================================================================
+--- ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationRequestApprovalAction.java	(révision 77867)
++++ ext/authoring/webui/src/main/java/org/exoplatform/wcm/extensions/ui/PublicationRequestApprovalAction.java	(copie de travail)
+@@ -28,6 +28,7 @@
+ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
++import org.exoplatform.ecm.webui.utils.LockUtil;
+ import org.exoplatform.services.ecm.publication.PublicationService;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+ import org.exoplatform.webui.config.annotation.EventConfig;
+@@ -65,6 +66,11 @@
+ 			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+ 			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+ 			Node node = uiExplorer.getCurrentNode();
++			
++			if(node.isLocked()) {
++				node.getSession().addLockToken(LockUtil.getLockToken(node));
++			}
++			
+ 		    HashMap<String,String> context = new HashMap<String,String>();
+ 			
+ 		    publicationService.changeState(node, "pending", context);
