@@ -1,0 +1,16 @@
+Index: apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css
+===================================================================
+--- apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css	(revision 78581)
++++ apps/resources-wcm/src/main/webapp/skin/DefaultSkin/Stylesheet.css	(working copy)
+@@ -57,6 +57,11 @@
+     text-decoration: underline;
+ }
+ 
++.cke_show_borders ol, .cke_show_borders ul, .cke_show_borders dl {
++    padding: 0 40px;
++    margin-top: 15px;		
++}
++
+ .UISiteAdminToolBar {
+ 	height: auto;
+ 	padding-right: 20px;
