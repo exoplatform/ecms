@@ -1,0 +1,13 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl	(revision 77010)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/nodetype-templates/webContent/dialogs/dialog1.gtmpl	(working copy)
+@@ -131,7 +131,7 @@
+ 		            	   		%>
+                     <script>
+                     titleField = document.getElementById("title");
+-                    titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
++                    titleField.onblur = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+                     </script>
+ 	          			 	</td>
+ 	        			</tr>
