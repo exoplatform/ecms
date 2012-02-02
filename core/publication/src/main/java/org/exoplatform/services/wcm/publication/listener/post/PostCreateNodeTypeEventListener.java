@@ -46,6 +46,9 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
   private TaxonomyService taxonomyService;
   
   private ActionServiceContainer actionServiceContainer;
+  
+  /** Node Type: exo:taxonomyAction **/
+  private static final String NT_TAXONOMY_ACTION = "exo:taxonomyAction";
     
   /**
    * Instantiates a new post create content event listener.
@@ -71,16 +74,25 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
 	  String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
 	  List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
 	  for (Node taxonomyTree : taxonomyTrees) {
-		  Node action = actionServiceContainer.getAction(taxonomyTree, "taxonomyAction");
-		  Session session = action.getSession();
+		  // Get node whose type is exo:taxonomyAction
+		  Node taxonomyAction = null;
+		  List<Node> actions = actionServiceContainer.getActions(taxonomyTree);
+		  for (Node action : actions) {
+			  if (action.isNodeType(NT_TAXONOMY_ACTION)) {
+				  taxonomyAction = action;
+				  break;
+			  }
+		  }
+		  
+		  Session session = taxonomyAction.getSession();
 		  ValueFactory valueFactory = session.getValueFactory();
-		  Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
+		  Value[] values = taxonomyAction.getProperty("exo:affectedNodeTypeNames").getValues();
 		  List<Value> tmpValues = new ArrayList<Value>();
 		  for (Value value : values) {
 			  tmpValues.add(value);
 		  }
 		  tmpValues.add(valueFactory.createValue(nodetypeName));
-		  action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
+		  taxonomyAction.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
 		  session.save();
 		  session.logout();
 	  }
