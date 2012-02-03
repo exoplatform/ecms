@@ -1,0 +1,12 @@
+Index: ext/workflow/bp-jbpm-payraise/src/main/conf/hr.gtmpl
+===================================================================
+--- ext/workflow/bp-jbpm-payraise/src/main/conf/hr.gtmpl	(revision 78500)
++++ ext/workflow/bp-jbpm-payraise/src/main/conf/hr.gtmpl	(working copy)
+@@ -29,7 +29,6 @@
+ 		    <th colspan="2" height="50">
+ 		    	<div style="text-align: center">
+ 			      <%=resWorkflow.getString("my-custom-groovy-form")%><br>
+-			      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" alt="" border="0">
+ 			    </div>
+ 		    </th>
+ 		  </tr>    	
