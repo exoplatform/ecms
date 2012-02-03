@@ -1,0 +1,85 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(revision 78411)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(working copy)
+@@ -250,14 +250,15 @@
+     PortletRequest portletRequest = portletRequestContext.getRequest();
+     String portalURI = portalRequestContext.getPortalURI();
+     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
++    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + 
++                     String.format("%s", portletRequest.getServerPort());
+     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
+     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+     if (clvBy == null || clvBy.length() == 0)
+     	clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+     
+     String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
+-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params);
++    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params, '%', true, " :");
+     
+     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+     link = friendlyService.getFriendlyUri(link);
+@@ -385,15 +386,17 @@
+     if (node.isNodeType("nt:frozenNode")){
+       String uuid = node.getProperty("jcr:frozenUuid").getString();
+       Node originalNode = node.getSession().getNodeByUUID(uuid);
+-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(originalNode.getPath());
++      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + 
++                       nodeLocation.getWorkspace() + Text.escape(originalNode.getPath(), '%', true, " ");
+     } else {
+-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(node.getPath());
++      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + 
++                       nodeLocation.getWorkspace() + Text.escape(node.getPath(), '%', true, " ");
+     }
+     
+     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+     if (fullPath!=null) {
+         String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+-      link += "&"+clvBy+"="+Text.escape(fullPath);
++      link += "&"+clvBy+"="+Text.escape(fullPath, '%', true, " :");
+     }
+     
+     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+Index: core/services/src/main/java/org/exoplatform/ecm/utils/text/Text.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/ecm/utils/text/Text.java	(revision 78411)
++++ core/services/src/main/java/org/exoplatform/ecm/utils/text/Text.java	(working copy)
+@@ -339,6 +339,10 @@
+   public static String escape(String string, char escape) {
+     return escape(string, escape, false);
+   }
++  
++  public static String escape(String string, char escape, boolean isPath) {
++    return escape(string, escape, isPath, "");
++  }
+ 
+   /**
+    * Does an URL encoding of the <code>string</code> using the <code>escape</code> character. The
+@@ -352,18 +356,24 @@
+    *          the escape character.
+    * @param isPath
+    *          if <code>true</code>, the string is treated as path
++   * @param extraCharacters
++   *          the extra characters that will not be encoded.
+    * @return the escaped string
+    * @throws NullPointerException
+    *           if <code>string</code> is <code>null</code>.
+    */
+-  public static String escape(String string, char escape, boolean isPath) {
++  public static String escape(String string, char escape, boolean isPath, String extraCharacters) {
+     try {
+       BitSet validChars = isPath ? URISaveEx : URISave;
++      BitSet extraBitSet = (BitSet)URISave.clone();
++      for (char c : extraCharacters.toCharArray()) {
++        extraBitSet.set(c);
++      }
+       byte[] bytes = string.getBytes("utf-8");
+       StringBuffer out = new StringBuffer(bytes.length);
+       for (int i = 0; i < bytes.length; i++) {
+         int c = bytes[i] & 0xff;
+-        if (validChars.get(c) && c != escape) {
++        if ((validChars.get(c) || extraBitSet.get(c))&& c != escape) {
+           out.append((char) c);
+         } else {
+           out.append(escape);

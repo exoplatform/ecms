@@ -250,14 +250,15 @@ public class UICLVPresentation extends UIContainer {
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + 
+                     String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
     if (clvBy == null || clvBy.length() == 0)
     	clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
     
     String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params);
+    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params, '%', true, " :");
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -385,15 +386,17 @@ public class UICLVPresentation extends UIContainer {
     if (node.isNodeType("nt:frozenNode")){
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(originalNode.getPath());
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + 
+                       nodeLocation.getWorkspace() + Text.escape(originalNode.getPath(), '%', true, " ");
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + Text.escape(node.getPath());
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + 
+                       nodeLocation.getWorkspace() + Text.escape(node.getPath(), '%', true, " ");
     }
     
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
     if (fullPath!=null) {
         String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-      link += "&"+clvBy+"="+Text.escape(fullPath);
+      link += "&"+clvBy+"="+Text.escape(fullPath, '%', true, " :");
     }
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
