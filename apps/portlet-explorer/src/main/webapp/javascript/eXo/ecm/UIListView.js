@@ -166,10 +166,14 @@ var ListView = function() {
 					position: "absolute",
 					display: "none",
 					overflow: "hidden",
+					padding: "1px",
 					background: "white",
-					width: element.offsetWidth + "px"
+					border: "1px solid gray",
+					width: element.offsetWidth + 50 + "px",
+					height: "25px"
 				}
 			});
+			eXo.core.Browser.setOpacity(mobileElement, 65);
 			Self.mobileId = mobileElement.id;
 			var coverElement = newElement({
 				className: "UITreeExplorer",
