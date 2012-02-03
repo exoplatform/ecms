@@ -1,0 +1,40 @@
+Index: ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_vi.xml
+===================================================================
+--- ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_vi.xml	(revision 78493)
++++ ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_vi.xml	(working copy)
+@@ -130,7 +130,7 @@
+       <checkOnlyOneNewsletterToDelete>Please check only one newsletter to delete!</checkOnlyOneNewsletterToDelete>
+       <checkOnlyOneNewsletterToOpen>Please check only one newsletter to open!</checkOnlyOneNewsletterToOpen>
+       <checkOnlyOneNewsletterToConvert>Please check only one newsletter to convert!</checkOnlyOneNewsletterToConvert>
+-      <convertSuccessful>Convert successful!</convertSuccessful>
++      <convertSuccessful>Converted successfully!</convertSuccessful>
+       <templateIsExist>Already exist a template have same name! Please check again.</templateIsExist>
+     </msg>
+     <title>
+@@ -261,4 +261,4 @@
+     </title>
+   </UINewsletterEntryManager>
+ 
+-</bundle>
+\ No newline at end of file
++</bundle>
+Index: ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_en.xml
+===================================================================
+--- ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_en.xml	(revision 78493)
++++ ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterManager/NewsletterManager_en.xml	(working copy)
+@@ -137,7 +137,7 @@
+       <checkOnlyOneNewsletterToDelete>Please check any newsletter to delete!</checkOnlyOneNewsletterToDelete>
+       <checkOnlyOneNewsletterToOpen>Please check only one newsletter to open!</checkOnlyOneNewsletterToOpen>
+       <checkOnlyOneNewsletterToConvert>Please check only one newsletter to convert!</checkOnlyOneNewsletterToConvert>
+-      <convertSuccessful>Convert successful!</convertSuccessful>
++      <convertSuccessful>Converted successfully!</convertSuccessful>
+       <templateIsExist>Already exist a template have same name! Please check again.</templateIsExist>
+       <get-list-subscriptions>Error when perform get list subscriptions.</get-list-subscriptions>
+     </msg>
+@@ -321,4 +321,4 @@
+       <donotMoveYourSelt>You have just removed your permission from list, please check again!</donotMoveYourSelt>
+     </msg>
+   </UIRemoveModeratorsFormPopupWindow>
+-</bundle>
+\ No newline at end of file
++</bundle>

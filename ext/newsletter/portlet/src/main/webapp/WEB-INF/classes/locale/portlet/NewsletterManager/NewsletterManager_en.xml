@@ -137,7 +137,7 @@
       <checkOnlyOneNewsletterToDelete>Please check any newsletter to delete!</checkOnlyOneNewsletterToDelete>
       <checkOnlyOneNewsletterToOpen>Please check only one newsletter to open!</checkOnlyOneNewsletterToOpen>
       <checkOnlyOneNewsletterToConvert>Please check only one newsletter to convert!</checkOnlyOneNewsletterToConvert>
-      <convertSuccessful>Convert successful!</convertSuccessful>
+      <convertSuccessful>Converted successfully!</convertSuccessful>
       <templateIsExist>Already exist a template have same name! Please check again.</templateIsExist>
       <get-list-subscriptions>Error when perform get list subscriptions.</get-list-subscriptions>
     </msg>
