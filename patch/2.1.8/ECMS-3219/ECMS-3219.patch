@@ -1,0 +1,78 @@
+Index: apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css	(revision 78436)
++++ apps/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultStylesheet.css	(working copy)
+@@ -138,8 +138,7 @@
+ }
+ 
+ .UIJCRExplorerPortlet .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td {
+- 	padding: 4px 8px 4px 0px; /* orientation=lt */
+- 	padding: 4px 0px 4px 8px; /* orientation=rt */
++ 	padding: 4px;
+ }
+ 
+ .UIJCRExplorerPortlet .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid .tagSet td {
+@@ -169,28 +168,15 @@
+ }
+ 
+ .UIJCRExplorerPortlet .DriveNameInput .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid {
+-  width: auto;
++  width: 100%;
+ }
+ 
+ .UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid {
+-  width: auto;
++  width: 100%;
+ }
+ 
+-.UIJCRExplorerPortlet .DriveNameInput .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
+- 	padding: 4px 8px 4px 0px; /* orientation=lt */
+- 	padding: 4px 0px 4px 8px; /* orientation=rt */
+- 	_width: 120px;
+-	width: 148px;
+-}
+ 
+-.UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
+- 	padding: 4px 8px 4px 0px; /* orientation=lt */
+- 	padding: 4px 0px 4px 8px; /* orientation=rt */
+- 	_width: 120px;
+-	width: 148px;
+-}
+ 
+-
+ .UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIOneNodePathSelector .UIWorkspaceList .UIFormGrid {
+ 	width: 15%;
+ }
+@@ -1335,4 +1321,4 @@
+ }
+ .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
+  overflow: hidden;
+-}
+\ No newline at end of file
++}
+Index: apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UIForms/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UIForms/Stylesheet.css	(revision 78436)
++++ apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UIForms/Stylesheet.css	(working copy)
+@@ -67,8 +67,14 @@
+ 
+ .UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldLabel {
+ 	vertical-align: middle;
++	width:240px;
++	padding-right: 8px;
+ }
+ 
++.UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldComponent {
++  padding-left: 0px;
++}
++
+ .UIAnyPermission .UIForm .HorizontalLayout .UIFormGrid {
+ 	width: auto;
+ 	margin: 0px;
+@@ -154,4 +160,4 @@
+ .UIViewMetadataManager .MetaImage {
+   float: left; /* orientation=lt */
+   float: right; /* orientation=rt */
+-}
+\ No newline at end of file
++}
