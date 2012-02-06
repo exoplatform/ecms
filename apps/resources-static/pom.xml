@@ -11,5 +11,15 @@
   <name>eXo Static Resources</name>
   <build>
     <finalName>eXoStaticResources</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <warSourceExcludes>**/ckeditor/_source/, **/ckeditor/ckeditor_source.js, **/ckeditor/ckeditor_basic_source.js, **/ckeditor/ckeditor.pack, **/ckeditor/lang_and_plugins.pack</warSourceExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
