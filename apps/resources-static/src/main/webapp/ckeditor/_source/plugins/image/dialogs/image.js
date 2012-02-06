@@ -28,26 +28,28 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 				value = aMatch[1];
 			}
 
+			var newImg = new Image();
+			newImg.src = document.getElementById(previewImageId).src;
+			var img_height = newImg.height;
+			var img_width = newImg.width;
+
 			// Only if ratio is locked
 			if ( dialog.lockRatio )
 			{
 				var oImageOriginal = dialog.originalElement;
-				if ( oImageOriginal.getCustomData( 'isReady' ) == 'true' )
+				if ( this.id == 'txtHeight' )
 				{
-					if ( this.id == 'txtHeight' )
-					{
-						if ( value && value != '0' )
-							value = Math.round( oImageOriginal.$.width * ( value  / oImageOriginal.$.height ) );
-						if ( !isNaN( value ) )
-							dialog.setValueOf( 'info', 'txtWidth', value );
-					}
-					else		//this.id = txtWidth.
-					{
-						if ( value && value != '0' )
-							value = Math.round( oImageOriginal.$.height * ( value  / oImageOriginal.$.width ) );
-						if ( !isNaN( value ) )
-							dialog.setValueOf( 'info', 'txtHeight', value );
-					}
+					if ( value && value != '0' )
+						value = Math.round( img_width * ( value  / img_height ) );
+					if ( !isNaN( value ) )
+						dialog.setValueOf( 'info', 'txtWidth', value );
+				}
+				else		//this.id = txtWidth.
+				{
+					if ( value && value != '0' )
+						value = Math.round( img_height * ( value  / img_width ) );
+					if ( !isNaN( value ) )
+						dialog.setValueOf( 'info', 'txtHeight', value );
 				}
 			}
 			updatePreview( dialog );
@@ -503,6 +505,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 									children :
 									[
 										{
+											editor: editor.name,
 											id : 'txtUrl',
 											type : 'text',
 											label : editor.lang.common.url,
@@ -564,11 +567,6 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													element.data( 'cke-saved-src', this.getValue() );
 													element.setAttribute( 'src', this.getValue() );
 												}
-												else if ( type == CLEANUP )
-												{
-													element.setAttribute( 'src', '' );	// If removeAttribute doesn't work.
-													element.removeAttribute( 'src' );
-												}
 											},
 											validate : CKEDITOR.dialog.validate.notEmpty( editor.lang.image.urlMissing )
 										},
@@ -580,7 +578,10 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											style : 'display:inline-block;margin-top:10px;',
 											align : 'center',
 											label : editor.lang.common.browseServer,
-											hidden : true,
+											onClick: function () {
+                    										window.open(CKEDITOR.eXoPath + 'eXoPlugins/content/content.html?insertContentType=Image&viewType=thumbnail&components=' + previewImageId + '&currentInstance=' + editor.name, 'WCMGadgetSelector', 'width=1024,height=600');
+                									},
+											hidden : false,
 											filebrowser : 'info:txtUrl'
 										}
 									]
@@ -639,6 +640,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													children :
 													[
 														{
+															editor: editor.name,
 															type : 'text',
 															width: '40px',
 															id : 'txtWidth',
@@ -689,6 +691,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 															}
 														},
 														{
+															editor: editor.name,
 															type : 'text',
 															id : 'txtHeight',
 															width: '40px',
@@ -810,6 +813,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											children :
 											[
 												{
+													editor: editor.name,
 													type : 'text',
 													id : 'txtBorder',
 													width: '60px',
@@ -866,6 +870,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													}
 												},
 												{
+													editor: editor.name,
 													type : 'text',
 													id : 'txtHSpace',
 													width: '60px',
@@ -929,6 +934,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													}
 												},
 												{
+													editor: editor.name,
 													type : 'text',
 													id : 'txtVSpace',
 													width : '60px',
@@ -991,6 +997,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 													}
 												},
 												{
+													editor: editor.name,
 													id : 'cmbAlign',
 													type : 'select',
 													widths : [ '35%','65%' ],

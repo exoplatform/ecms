@@ -334,7 +334,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		this.parts.close.on( 'click', function( evt )
 				{
 					if ( this.fire( 'cancel', { hide : true } ).hide !== false )
-						this.hide();
+						this.closeDialog();
 					evt.data.preventDefault();
 				}, this );
 
@@ -639,6 +639,12 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 			this._.element.remove();
 		},
 
+		closeDialog : function()
+		{
+		   this.destroy();  //remove dialog
+		   removeCovers();  //remove cover (mask layer)
+		},
+
 		/**
 		 * Resizes the dialog.
 		 * @param {Number} width The width of the dialog in pixels.
@@ -763,8 +769,8 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 			var definition = this.definition;
 			if ( !( element.getParent() && element.getParent().equals( CKEDITOR.document.getBody() ) ) )
 				element.appendTo( CKEDITOR.document.getBody() );
-			else
-				element.setStyle( 'display', 'block' );
+			
+			element.setStyle( 'display', 'block' );
 
 			// FIREFOX BUG: Fix vanishing caret for Firefox 2 or Gecko 1.8.
 			if ( CKEDITOR.env.gecko && CKEDITOR.env.version < 10900 )
@@ -1434,7 +1440,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 						{
 							var dialog = evt.data.dialog;
 							if ( dialog.fire( 'ok', { hide : true } ).hide !== false )
-								dialog.hide();
+								dialog.closeDialog();
 						}
 					}, override, true );
 				};
@@ -1468,7 +1474,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 						{
 							var dialog = evt.data.dialog;
 							if ( dialog.fire( 'cancel', { hide : true } ).hide !== false )
-								dialog.hide();
+								dialog.closeDialog();
 						}
 					}, override, true );
 				};

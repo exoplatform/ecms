@@ -91,6 +91,7 @@ if ( !CKEDITOR.editor )
 	 */
 	CKEDITOR.editor.replace = function( elementOrIdOrName, config )
 	{
+		CKEDITOR.editor.name = elementOrIdOrName;
 		var element = elementOrIdOrName;
 
 		if ( typeof element != 'object' )

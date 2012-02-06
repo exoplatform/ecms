@@ -15,6 +15,33 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 		data.info[id] = this.getValue();
 	};
 
+	/* get the value of a multi-value attribute (key) in a stylesheet string 
+	 * Ex: 
+	 *   - styleString: 	"border: 10px solid rgb(0, 0, 0); padding: 10px;"
+	 *   - key: 		border
+	 *   - valueNum: 	1
+	 *   - return value: 	10px
+	 */	
+        var getValueFromMultiValuesStyle = function (styleString, key, valueNum) {
+            var valuesArray = styleString.split(";");
+            for (i = 0; i < valuesArray.length; i++) {
+                if (valuesArray[i].split(":")[0].replace(" ", "") == key) return (valuesArray[i].split(":")[1].split(" ")[valueNum].replace("px", ""));
+            }
+        };
+        
+	/* get the value of a single-value attribute (key) in a stylesheet string 
+	 * Ex: 
+	 *   - styleString: 	"border: 10px solid rgb(0, 0, 0); padding: 10px;"
+	 *   - key: 		padding
+	 *   - return value: 	10px
+	 */
+        var getValueFromStyle = function (styleString, key) {
+            var valuesArray = styleString.split(";");
+            for (i = 0; i < valuesArray.length; i++) {
+                if (valuesArray[i].split(":")[0].replace(" ", "") == key) return valuesArray[i].split(":")[1].replace(" ", "").replace("px", "");
+            }
+        };
+
 	function tableColumns( table )
 	{
 		var cols = 0, maxCols = 0;
@@ -142,15 +169,28 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 						var tbody = table.append( makeElement( 'tbody' ) ),
 							rows = parseInt( info.txtRows, 10 ) || 0,
 							cols = parseInt( info.txtCols, 10 ) || 0;
-
 						for ( var i = 0 ; i < rows ; i++ )
 						{
 							var row = tbody.append( makeElement( 'tr' ) );
 							for ( var j = 0 ; j < cols ; j++ )
 							{
 								var cell = row.append( makeElement( 'td' ) );
+								// set border & padding for cells
+								var styleString = 'border:' + info.txtBorder + 'px solid #000000; padding:' + info.txtCellPad + 'px;';
+								cell.$.style.cssText = styleString;
 								if ( !CKEDITOR.env.ie )
 									cell.append( makeElement( 'br' ) );
+							}
+						}
+					} else { 	
+						//in case: right click on the table, choose "Table Properties" command, edit some stylesheet value and then click OK						
+						var rows = parseInt( info.txtRows, 10 ) || 0;
+						var cols = parseInt( info.txtCols, 10 ) || 0;
+						if (rows > 0 && cols > 0) {
+							var cellNumber = rows * cols;
+							var styleString = 'border:' + info.txtBorder + 'px solid #000000; padding:' + info.txtCellPad + 'px;';
+							for (var i = 0; i < cellNumber; i++) {
+								this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
 							}
 						}
 					}
@@ -377,14 +417,24 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidBorder ),
 											setup : function( selectedTable )
 											{
-												this.setValue( selectedTable.getAttribute( 'border' ) || '' );
+												// set value for txtBorder 
+												var styleString = selectedTable.$.style.cssText.toLowerCase(); 
+												if (navigator.userAgent.indexOf("Firefox") >= 0) {
+												    this.setValue(getValueFromMultiValuesStyle(styleString, 'border', 1));
+												} else {
+												    this.setValue(getValueFromMultiValuesStyle(styleString, 'border-top', 2));
+												}
 											},
 											commit : function( data, selectedTable )
 											{
-												if ( this.getValue() )
-													selectedTable.setAttribute( 'border', this.getValue() );
-												else
-													selectedTable.removeAttribute( 'border' );
+												// get value from txtBorder & set style for the table
+												if (this.getValue()) {
+													var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
+													styles && styles.updateStyle( 'border', this.getValue() + 'px solid #000000' ) ;
+												}
+												var id = this.id;
+												if (!data.info) data.info = {};
+												data.info[id] = this.getValue();
 											}
 										},
 										{
@@ -399,17 +449,37 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 												[ editor.lang.common.alignCenter , 'center'],
 												[ editor.lang.common.alignRight , 'right']
 											],
+											onChange : function()
+											{
+												// update table style when we change the value of cmbAlign
+												var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
+												if (this.getValue() == 'center') {
+												    styles && styles.updateStyle( 'margin-left', 'auto' ) ;
+												    styles && styles.updateStyle( 'margin-right', 'auto' );
+												} else if (this.getValue() == 'right') {
+												    styles && styles.updateStyle( 'margin-left', 'auto' );
+												    styles && styles.updateStyle( 'margin-right', '0px' );
+												} else {
+												    styles && styles.updateStyle( 'margin-left', '0px' );
+												    styles && styles.updateStyle( 'margin-right', '0px' );
+												}
+											},
 											setup : function( selectedTable )
 											{
-												this.setValue( selectedTable.getAttribute( 'align' ) || '' );
+												//set value for cmbAlign
+												var left = selectedTable.getStyle( 'margin-left' );
+												var right = selectedTable.getStyle( 'margin-right' );
+												var alignValue = '';
+												if (left == 'auto' && right == 'auto') {
+												    alignValue = 'center';
+												} else if (left == 'auto' && right != 'auto') {
+												    alignValue = 'right';
+												} else if (left != 'auto' && right == 'auto') {
+												    alignValue = 'left';
+												}
+												this.setValue( alignValue || '' );
 											},
-											commit : function( data, selectedTable )
-											{
-												if ( this.getValue() )
-													selectedTable.setAttribute( 'align', this.getValue() );
-												else
-													selectedTable.removeAttribute( 'align' );
-											}
+											commit : commitValue
 										}
 									]
 								},
@@ -488,14 +558,22 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											validate : CKEDITOR.dialog.validate.number( editor.lang.table.invalidCellSpacing ),
 											setup : function( selectedTable )
 											{
-												this.setValue( selectedTable.getAttribute( 'cellSpacing' ) || '' );
+												//set value for txtCellSpace
+												var styleString = selectedTable.$.style.cssText.toLowerCase();
+												this.setValue(getValueFromStyle(styleString, 'border-spacing') || '');
 											},
 											commit : function( data, selectedTable )
 											{
-												if ( this.getValue() )
-													selectedTable.setAttribute( 'cellSpacing', this.getValue() );
-												else
-													selectedTable.removeAttribute( 'cellSpacing' );
+												//set cell spacing for the table
+												if (this.getValue()) {
+												    selectedTable.setAttribute('cellSpacing', this.getValue());
+
+												    var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
+												    styles && styles.updateStyle( 'border-collapse', 'separate' );
+												    styles && styles.updateStyle( 'border-spacing', this.getValue() + 'px' );
+												} else {
+												    selectedTable.removeAttribute('cellspacing');
+												}
 											}
 										},
 										{
@@ -507,15 +585,15 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											validate : CKEDITOR.dialog.validate.number( editor.lang.table.invalidCellPadding ),
 											setup : function( selectedTable )
 											{
-												this.setValue( selectedTable.getAttribute( 'cellPadding' ) || '' );
-											},
-											commit : function( data, selectedTable )
-											{
-												if ( this.getValue() )
-													selectedTable.setAttribute( 'cellPadding', this.getValue() );
-												else
-													selectedTable.removeAttribute( 'cellPadding' );
-											}
+												//set value for txtCellPad
+												var cellStyle = selectedTable.$.getElementsByTagName('td')[0].style.cssText.toLowerCase();
+												if (navigator.userAgent.indexOf("Firefox") >= 0) {
+												    this.setValue(getValueFromStyle(cellStyle, 'padding') || '');
+												} else {
+												    this.setValue(getValueFromStyle(cellStyle, 'padding-right') || '');
+												}
+											},											
+											commit : commitValue
 										}
 									]
 								}

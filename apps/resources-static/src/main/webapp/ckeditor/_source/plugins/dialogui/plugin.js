@@ -223,7 +223,11 @@ CKEDITOR.plugins.add( 'dialogui' );
 					return;
 
 				initPrivateObject.call( this, elementDefinition );
-				var domId = this._.inputId = CKEDITOR.tools.getNextId() + '_textInput',
+
+				var editor_name = '';
+    				if (elementDefinition.editor) editor_name = elementDefinition.editor;
+    				else editor_name = CKEDITOR.editor.name;
+    				var domId = this._.inputId = editor_name + '_' + elementDefinition.id,
 					attributes = { 'class' : 'cke_dialog_ui_input_' + elementDefinition.type, id : domId, type : 'text' },
 					i;
 
@@ -1230,6 +1234,7 @@ CKEDITOR.plugins.add( 'dialogui' );
 				 * @param {Boolean} noChangeEvent Internal commit, to supress 'change' event on this element.
 				 */
 				setValue : function( value, noChangeEvent )
+
 				{
 					var children = this._.children,
 						item;
