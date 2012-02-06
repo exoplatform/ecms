@@ -35,16 +35,17 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
 import org.gatein.pc.api.info.PreferencesInfo;
-import org.exoplatform.services.seo.SEOService;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -161,12 +162,16 @@ public class TrashServiceImpl implements TrashService {
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
 
-
+    if (deep == 0 && !node.isNodeType(SYMLINK)) {
+      try {
+        Utils.removeDeadSymlinks(node);
+      } catch (Exception e) {}
+    }
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    List<Node> categories = taxonomyService_.getAllCategories(node, true);
+    //List<Node> categories = taxonomyService_.getAllCategories(node, true);
     String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
@@ -215,28 +220,6 @@ public class TrashServiceImpl implements TrashService {
       }
 
       nodeSession.save();
-      trashSession.save();
-      //remove categories
-      if (deep == 0 && nodeUUID != null) {
-        for (Node category : categories) {
-          NodeIterator iter = category.getNodes();
-          while (iter.hasNext()) {
-            Node categoryChild = iter.nextNode();
-            if (categoryChild.isNodeType(TAXONOMY_LINK) && categoryChild.hasProperty(UUID)
-                && categoryChild.hasProperty(EXO_WORKSPACE)
-                && nodeUUID.equals(categoryChild.getProperty(UUID).getString())
-                && nodeWorkspaceName.equals(categoryChild.getProperty(EXO_WORKSPACE).getString())) {
-              try {
-                moveToTrash(categoryChild,
-                            sessionProvider,
-                            deep + 1);
-              } catch (Exception e) {
-              }
-            }
-          }
-        }
-      }
-
       trashSession.save();
 
       //check and delete target node when there is no its symlink

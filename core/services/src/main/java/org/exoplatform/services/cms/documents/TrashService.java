@@ -77,6 +77,11 @@ public interface TrashService {
   public void moveToTrash(Node node,
                           SessionProvider sessionProvider) throws Exception;  
 
+  public void moveToTrash(Node node,
+      String trashPath,
+      String trashWorkspace,
+      SessionProvider sessionProvider, int deep) throws Exception;
+    
   /**
    * Restore node from trash
    * @param trashHomeNode trash home node

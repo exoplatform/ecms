@@ -19,9 +19,10 @@ package org.exoplatform.services.cms.jcrext;
 import javax.jcr.Node;
 
 import org.apache.commons.chain.Context;
-import org.exoplatform.container.ExoContainer;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -30,19 +31,23 @@ import org.exoplatform.services.command.action.Action;
  * Nov 21, 2008 3:43:43 PM
  */
 public class RemoveNodeAction implements Action {
-
+  
+  private ThumbnailService thumbnailService;
+  
   public boolean execute(Context context) throws Exception {
-    ExoContainer container = (ExoContainer)context.get("exocontainer");
-    ThumbnailService thumbnailService =
-      (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
+    thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
+    
+    //remove thumbnail of node
+    Node node = (Node)context.get("currentItem");
     if(thumbnailService.isEnableThumbnail()) {
-      Node node = (Node)context.get("currentItem");
       try {
         thumbnailService.processRemoveThumbnail(node);
       } catch(Exception e) {
         return false;
       }
     }
+    //remove dead symlinks
+    Utils.removeDeadSymlinks(node);    
     return false;
   }
 
