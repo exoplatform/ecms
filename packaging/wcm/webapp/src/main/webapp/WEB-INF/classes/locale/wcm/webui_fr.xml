@@ -50,8 +50,8 @@
       <simple-view>Vue simple</simple-view>
       <system-view>Vue système</system-view>
       <anonymous-view>Vue anonyme</anonymous-view>
-      <taxonomy-list>Vue liste de taxinomie</taxonomy-list>
-      <taxonomy-icons>Vue icône de taxinomie</taxonomy-icons>
+      <taxonomy-list>Vue liste de taxonomie</taxonomy-list>
+      <taxonomy-icons>Vue icône de taxonomie</taxonomy-icons>
       <timeline-view>Vue frise chronologique</timeline-view>
       <list-view>Vue liste</list-view>
       <authoring-view>Vue auteur</authoring-view>
@@ -156,7 +156,7 @@
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Sauver</SaveCategories>
+      <SaveCategories>Enregistrer</SaveCategories>
       <Cancel>Annuler</Cancel>
     </action>
   </UICLVContentSelectedGrid>
@@ -238,7 +238,7 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UIContentNodeTypeSelector>
@@ -261,7 +261,7 @@
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Sauver le brouillon</SaveDraft>
+      <SaveDraft>Enregistrer le brouillon</SaveDraft>
       <FastPublish>Publication rapide</FastPublish>
       <Preferences>Préférences</Preferences>
       <Close>Fermer</Close>
@@ -285,7 +285,7 @@
       <UIEditableCheckboxInput>Droit de modifié</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Clear>Clair</Clear>
       <title>
         <Edit>Modifier</Edit>

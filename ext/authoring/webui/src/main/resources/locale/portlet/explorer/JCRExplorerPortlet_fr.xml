@@ -10,7 +10,7 @@
       <PublicationRequestApproval>Demander Approbation</PublicationRequestApproval>
       <PublicationApproveContent>Approuver</PublicationApproveContent>
       <PublicationPublish>Publier</PublicationPublish>
-      <ShowDrives>Montrer/Cacher Lecteurs</ShowDrives>
+      <ShowDrives>Afficher/Cacher Lecteurs</ShowDrives>
     </tooltip>
   </UIActionBar>
 </bundle>

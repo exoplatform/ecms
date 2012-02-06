@@ -27,17 +27,17 @@
       <UICategoryNavigationTemplateFormSelectBox>Le modèle de l'abre vue</UICategoryNavigationTemplateFormSelectBox>
     </label>
     <msg>
-      <not-support-encoding>L'encodage est prend pas en charge.</not-support-encoding>
-      <render> erreur lorsque processus de rendu. </render>
-      <saving-success>Ce portlet a été mis à jour</saving-success>
+      <not-support-encoding>L'encodage n'est pas pris en charge.</not-support-encoding>
+      <render>Erreur lorsque processus de rendu. </render>
+      <saving-success>Cette portlet a été mise à jour</saving-success>
     </msg>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
     </action>
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>Cette catégorie n'est pas existé</not-existed-category>
+      <not-existed-category>Cette catégorie n'existe pas</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 
@@ -45,14 +45,14 @@
     <label>
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
-      <AdvancedBlock>Advance</AdvancedBlock>
+      <DisplaySettingBlock>Afficher les paramètres</DisplaySettingBlock>
+      <AdvancedBlock>Avancée</AdvancedBlock>
 	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
 	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
-	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
-	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
-	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
-	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>Entête</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatique</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>Navigation Dynamique</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>avec</UICategoryNavigationWithClvFormStringInput>
 	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
     </label>
   </UICategoryNavigationConfig>  

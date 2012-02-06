@@ -39,7 +39,7 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Lecture impossible à parti du fichier source ou la catégorie de destination est une sous-catégorie</referential-integrity>
+      <referential-integrity>Lecture impossible à partir du fichier source ou la catégorie de destination est une sous-catégorie</referential-integrity>
       <no-taxonomy-selected>Vous devez copier ou couper au moins 1 catégorie</no-taxonomy-selected>
       <node-is-cutting>Impossible de copier ici. La catégorie sélectionnée ('{0}') a probablement été déplacée ou supprimée.</node-is-cutting>
       <can-not-paste>Le presse-papier ne contient aucune donnée à copier.</can-not-paste>
@@ -49,7 +49,7 @@
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <title>
       <add>Ajouter</add>
@@ -87,7 +87,7 @@
 	<UITaxonomyTreeMainForm>
 		<action>
 			<ViewPermission>Voir les Permissions</ViewPermission>
-			<Reset>Initialiser</Reset>
+			<Reset>Réinitialiser</Reset>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -128,7 +128,7 @@
 			<usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
 			<read>Lecture</read>
 			<addNode>Ajout de Noeud</addNode>
-			<setProperty>Modification de Propriété</setProperty>
+			<setProperty>Editer la Propriété</setProperty>
 			<remove>Suppression</remove>
 			<action>Action</action>
 		</header>
@@ -145,12 +145,12 @@
 			<userOrGroup>Utilisateur ou Groupe</userOrGroup>
 			<read>Lecture</read>
 			<add_node>Ajout de Noeud</add_node>
-			<set_property>Modification de Propriété</set_property>
+			<set_property>Editer la Propriété</set_property>
 			<remove>Suppression</remove>
 		</label>
 		<action>
-			<Save>Sauver</Save>
-			<Reset>Initialiser</Reset>
+			<Save>Enregistrer</Save>
+			<Reset>Réinitialiser</Reset>
 		</action>
 		<msg>
 		  <have-not-any-permission>Ajouter une Permission au noeud</have-not-any-permission>
@@ -166,7 +166,7 @@
 	<UIActionForm>
 		<title>Ajouter une Action pour la taxonomie</title>
 		<action>
-			<Save>Sauver</Save>
+			<Save>Enregistrer</Save>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -210,7 +210,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Le préfixe ou l'uri existe déjà !</register-unsuccessfull>
+      <register-unsuccessfull>Le préfixe ou l'uri existe déjà!</register-unsuccessfull>
       <prefix-null>Veuillez saisir un préfixe</prefix-null>
       <uri-null>Veuillez saisir un uri</uri-null>
     </msg>
@@ -260,7 +260,7 @@
       <action>Actions possibles sur le formulaire</action>
     </header>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <delete-successful>les formulaires de '{0}' ont été supprimés</delete-successful>
     </msg>
     <action>
@@ -365,7 +365,7 @@
       <EditInfo>Editer</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <action>
       <AddDrive>Nouveau lecteur</AddDrive>
@@ -385,13 +385,13 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <drive-exists>Lecteur déjà existant !</drive-exists>
-      <workspace-path-invalid>Espace de travail invalide !</workspace-path-invalid>
-      <drive-views-invalid>Vue invalide !</drive-views-invalid>
-      <icon-not-found>Icône non trouvé !</icon-not-found>
+      <drive-exists>Lecteur déjà existant!</drive-exists>
+      <workspace-path-invalid>Espace de travail invalide!</workspace-path-invalid>
+      <drive-views-invalid>Vue invalide!</drive-views-invalid>
+      <icon-not-found>Icône non trouvé!</icon-not-found>
       <permission-null>Permissions invalides</permission-null>
 						<allowedCreateFolder>Veuillez choisir le type de répertoire que l'on peut créer</allowedCreateFolder>
-      <name-null>Veuillez saisir un nom de lecteur !</name-null>
+      <name-null>Veuillez saisir un nom de lecteur!</name-null>
       <fileName-invalid>Le nom du lecteur contient des caractères invalides</fileName-invalid>
     </msg>
     <tab>
@@ -443,12 +443,12 @@
       <repoName>Dépôt de données courant</repoName>
     </label>
     <title>
-      <repoAdd>Ajouter un Dépôt de données</repoAdd>
-      <repoEdit>Editer le Dépôt de données</repoEdit>
+      <repoAdd>Ajouter un dépôt de données</repoAdd>
+      <repoEdit>Editer le dépôt de données</repoEdit>
       <repoDelete>Supprimer le Dépôt de données</repoDelete>
     </title>
     <msg>
-      <cannot-deleteRepo>"{0}" est un dépôt de données par défaut. Suppression interdite !</cannot-deleteRepo>
+      <cannot-deleteRepo>"{0}" est un dépôt de données par défaut. Suppression interdite!</cannot-deleteRepo>
     </msg>
   </UIRepositoryControl>
   <UIECMAdminUIPopupWindow>
@@ -500,12 +500,12 @@
       <repMode>Mode de réplication</repMode>
       <repTestMode>Réplication en mode test</repTestMode>
       <directoryPath>Répertoire</directoryPath>
-      <maxBufferSize>Taille Max Buffer</maxBufferSize>
+      <maxBufferSize>Taille Max du Buffer</maxBufferSize>
     </label>
     <msg>
       <cannot-delete-default-workspace>Impossible de supprimer le workspace '{0}' car il s'agit du workspace par défaut.</cannot-delete-default-workspace>
-      <repoName-exist>Le dépôt de données '{0}' existe déjà !</repoName-exist>
-      <repoName-not-alow>Caractères invalides dans le nom !</repoName-not-alow>
+      <repoName-exist>Le dépôt de données '{0}' existe déjà!</repoName-exist>
+      <repoName-not-alow>Caractères invalides dans le nom!</repoName-not-alow>
       <workspace-isrequire>Veuillez indiquer au moins un espace de travail</workspace-isrequire>
       <cannot-delete-workspace>Suppression impossible de '{0}'</cannot-delete-workspace>
       <workspace-setdefault>Un espace de travail par défaut doit être défini</workspace-setdefault>
@@ -518,7 +518,7 @@
       <sessionTime-required>Veuillez indiquer un timeout de session</sessionTime-required>
       <workspace-bseBuffer>Veuillez indiquer une taille maximum de buffer</workspace-bseBuffer>
       <authen-isrequire>Veuillez indiquer une méthode d'authentification</authen-isrequire>
-      <confirm-workspace-delete>Confirmez-vous la suppression de cette espace de travail ?</confirm-workspace-delete>
+      <confirm-workspace-delete>Confirmez-vous la suppression de cette espace de travail?</confirm-workspace-delete>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -529,7 +529,7 @@
   </UIRepositoryForm>
   <UIRepositoryList>
     <titlebar>
-      <label>Gérer les  fonctions principales d'ECM</label>
+      <label>Gérer les fonctions principales d'ECM</label>
     </titlebar>
     <header>
       <name>Nom</name>
@@ -544,7 +544,7 @@
     </action>
     <msg>
       <cannot-delete>Suppression du dépôt '{0}' (probablement en cours d'utilisation)</cannot-delete>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
   </UIRepositoryList>
   <UIWorkspacePermissionForm>
@@ -574,13 +574,13 @@
   </PermissionPopupSelect>
   <UIWorkspaceWizard>
     <msg>
-      <wsname-exist>L'espace de travail "{0}" existe déjà dans cette base de données !</wsname-exist>
+      <wsname-exist>L'espace de travail "{0}" existe déjà dans cette base de données!</wsname-exist>
       <name-require>Veuillez indiquer un nom d'espace de travail</name-require>
       <permission-require>Veuillez sélectionner une permission</permission-require>
       <nodeType-invalid>Le nodetype d'initialisation par défaut de l'espace de travail doit être "nt:unstructured"</nodeType-invalid>
       <!--DMS 2.4.x ECM-3611-->
       <nodeType-invalidSystemWs>Le nodetype d'initialisation par défaut de l'espace de travail système de DMS doit être "nt:unstructured"</nodeType-invalidSystemWs>
-      <lockTimeOut-required>Veuillez indiquer un timeout verrouillage</lockTimeOut-required>
+      <lockTimeOut-required>Veuillez indiquer un timeout de verrouillage</lockTimeOut-required>
       <lockTimeOut-invalid>Le format du timeout de verrouillage est incorrect</lockTimeOut-invalid>
       <buffer-invalid>Le format de la taille du buffer est invalide</buffer-invalid>
       <buffer-require>Veuillez indiquer une taille de buffer</buffer-require>
@@ -633,7 +633,7 @@
       <info>
         <step1>1ère étape : choix du nom de l'espace de travail, du nodetype...</step1>
         <step2>2ème étape : configuration du container, stockage ...</step2>
-        <step3>3ème étape : configuration du cache, gestionnaire de requêtes .. .</step3>
+        <step3>3ème étape : configuration du cache, gestionnaire de requêtes ...</step3>
       </info>
     </tab>
     <action>
@@ -690,7 +690,7 @@
       <Delete>Supprimer</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -754,12 +754,12 @@
       <childNodename>Nom</childNodename>
       <requiredPrimaryType>Types primaires requis</requiredPrimaryType>
       <defaultPrimaryType>Type primaire par défaut</defaultPrimaryType>
-      <valueconstraints>Constraintes</valueconstraints>
+      <valueconstraints>Contraintes</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Sauver un brouillon</SaveDraft>
+      <SaveDraft>Enregistrer un brouillon</SaveDraft>
       <AddProperty>Ajouter une propriété</AddProperty>
       <AddChild>Ajouter un fils</AddChild>
       <AddConstraints>Ajouter des contraintes</AddConstraints>
@@ -777,14 +777,14 @@
     <msg>
       <register-successfully>Type de noeud '{0}' enregistré avec succès</register-successfully>
       <supertype-is-madatory>Le super type est obligatoire pour créer un nouveau type de noeud. Vous devez en sélectionner au moins 1.</supertype-is-madatory>
-      <register-failed>Enregistrement du type de noeud impossible. Ce type de noeudexiste déjà, ou le super type est invalide</register-failed>
+      <register-failed>Enregistrement du type de noeud impossible. Ce type de noeud existe déjà, ou le super type est invalide</register-failed>
       <nodeType-name>Nom du type de noeud requis</nodeType-name>
       <fileName-invalid>Caractères invalides dans le nom.</fileName-invalid>
-      <node-type-exists>Le type de noeud '{0}' existe déjà !</node-type-exists>
-      <node-type-name>Nom du type de noeud invalide !</node-type-name>
+      <node-type-exists>Le type de noeud '{0}' existe déjà!</node-type-exists>
+      <node-type-name>Nom du type de noeud invalide!</node-type-name>
       <values-error>Veuillez sélectionner un seul type de noeud pour le type primaire par défaut</values-error>
-      <confirm-delete-child>Confirmez-vous la suppression de ce noeud fils ?</confirm-delete-child>
-      <confirm-delete-property>Confirmez-vous la suppression de cette propriété ?</confirm-delete-property>
+      <confirm-delete-child>Confirmez-vous la suppression de ce noeud fils?</confirm-delete-child>
+      <confirm-delete-property>Confirmez-vous la suppression de cette propriété?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
@@ -795,7 +795,7 @@
       </label>
     </tab>
     <msg>
-      <property-name>Nom de la propriété invalide !</property-name>
+      <property-name>Nom de la propriété invalide!</property-name>
       <not-supported-value-constraints>Ce type requis ne supporte pas les contraintes</not-supported-value-constraints>
     </msg>
   </UIPropertyDefinitionForm>
@@ -905,8 +905,8 @@
     </header>
     <title>Sélection d'un type de noeud à importer</title>
     <msg>
-      <no-nodetype-registered>Aucun type de noeud enregistré !</no-nodetype-registered>
-      <nodetype-registered>Enregistrement réussi !</nodetype-registered>
+      <no-nodetype-registered>Aucun type de noeud enregistré!</no-nodetype-registered>
+      <nodetype-registered>Enregistrement réussi!</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -928,8 +928,8 @@
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
       <RemovePermission>Supprimer la Permission</RemovePermission>
-      <AddIcon>Ajouter une Icône</AddIcon>
-      <AddPath>Ajouter un Emplacement</AddPath>
+      <AddIcon>Ajouter une icône</AddIcon>
+      <AddPath>Ajouter un emplacement</AddPath>
     </title>
   </DriveInputSet>
   <!--
@@ -974,8 +974,8 @@
     </action>
     <msg>
       <action-type-added>'{0}' a été ajouté.</action-type-added>
-      <action-type-create-error>Création du type d'action impossible !</action-type-create-error>
-      <action-name-invalid>'{0}' invalide ! Le nom doit débuter par 'exo:'</action-name-invalid>
+      <action-type-create-error>Création du type d'action impossible!</action-type-create-error>
+      <action-name-invalid>'{0}' invalide! Le nom doit débuter par 'exo:'</action-name-invalid>
       <action-exist>Ce type d'action existe déjà</action-exist>
       <fileName-invalid>Le nom de l'action comporte des caractères invalides</fileName-invalid>
     </msg>
@@ -1014,9 +1014,9 @@
       <AddView>Ajouter une vue</AddView>
     </action>
     <msg>
-      <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
       <template-in-use>Suppression impossible de la vue '{0}' (probablement en cours d'utilisation)</template-in-use>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
@@ -1107,7 +1107,7 @@
       <showJCRStructure>Afficher la structure du JCR</showJCRStructure>
       <watchDocument>S'abonner à un document</watchDocument>
       <taggingDocument>Marquer un document</taggingDocument>
-      <multiLanguage>Multi Languages</multiLanguage>
+      <multiLanguage>Multilangues</multiLanguage>
       <viewMetadatas>Voir les métadonnées</viewMetadatas>
       <overloadThumbnail>Surcharger une vignette</overloadThumbnail>
       <manageHidden>Cacher/Montrer le contenu</manageHidden>
@@ -1148,8 +1148,8 @@
     </action>
     <msg>
       <template-in-use>Suppresion impossible du formulaire '{0}' (probablement en cours d'utilisation)</template-in-use>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
-      <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
+      <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1274,7 +1274,7 @@
       <AddNew>Ajouter</AddNew>
     </action>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <header>
       <scriptName>Nom</scriptName>
@@ -1314,7 +1314,7 @@
       <version-restored>la version {0} a été restaurée avec succès.</version-restored>
       <name-null>Veuillez saisir un nom de script</name-null>
       <name-exist>Le script '{0}' existe déjà</name-exist>
-      <fileName-invalid>Caractères invalides détectés dns le nom du script.</fileName-invalid>
+      <fileName-invalid>Caractères invalides détectés dans le nom du script.</fileName-invalid>
     </msg>
   </UIScriptForm>
   <!--
@@ -1451,14 +1451,14 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Nome</name>
+      <name>Nom</name>
       <workspace>Espace de travail</workspace>
       <homePath>Chemin racine</homePath>
       <permissions>Permissions</permissions>
       <action>Action</action>
     </header>
     <action>
-      <AddTaxonomyTree>Ajouter une taxonomies</AddTaxonomyTree>
+      <AddTaxonomyTree>Ajouter une taxonomie</AddTaxonomyTree>
     </action>
     <tooltip>
       <EditTaxonomyTree>Editer la taxonomie</EditTaxonomyTree>
@@ -1467,8 +1467,8 @@
     <title>Parcourir la taxonomie</title>
     <msg>
       <no-list>Aucune taxonomie disponible</no-list>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
-      <is-in-trash>Cet arbre de catégorie était déplacé à la Corbeille !</is-in-trash>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
+      <is-in-trash>Cet arbre de catégorie était déplacé à la Corbeille!</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
@@ -1493,9 +1493,9 @@
     <label>
       <UIPopupWindow>Selectionner</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>Utilisateur Ou Groupe</userOrGroup>
+      <userOrGroup>Utilisateur uu Groupe</userOrGroup>
       <read>Droit de Lecture</read>
-      <add_node>Droit d'ajout de Noeud</add_node>
+      <add_node>Droit d'ajout de noeud</add_node>
       <set_property>Droit de MAJ des propriétés</set_property>
       <remove>Droit de suppression</remove>
     </label>
@@ -1503,13 +1503,13 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Initialiser</Reset>
+      <Reset>Rénitialiser</Reset>
     </action>
     <msg>
       <checkbox-require>Vous devez choisir au moins une permission</checkbox-require>
       <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant de sauver la permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission</not-change-permission>
-      <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
+      <access-denied>Accès refusé! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionTreeForm>
   
@@ -1527,20 +1527,20 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Ajouter une Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Choisir une Permission</UIPermissionSelector>
+      <AddDrivePermissionSelector>Ajouter une permission</AddDrivePermissionSelector>
+      <UIPermissionSelector>Choisir une permission</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
   <UIPopupWindow>
     <title>
-      <UIPermissionManager>Gestion des Permissions</UIPermissionManager>
+      <UIPermissionManager>Gestion des permissions</UIPermissionManager>
     </title>
    </UIPopupWindow>
 
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Gestion des Permissions</UIUserContainer>
+      <UIUserContainer>Gestion des permissions</UIUserContainer>
     </title>
    </PopupUserSelector>
    
@@ -1552,18 +1552,18 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Uilisateur Ou Groupe</usersOrGroups>
+      <usersOrGroups>Uilisateur ou Groupe</usersOrGroups>
       <read>Lecture</read>
-      <addNode>Ajout de Noeud</addNode>
-      <setProperty>MAJ des Propriétés</setProperty>
+      <addNode>Ajout de noeud</addNode>
+      <setProperty>MAJ des propriétés</setProperty>
       <remove>Suppression</remove>
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Souhaitez-vous supprimer cette permission ?</confirm-delete-permission>
+      <confirm-delete-permission>Souhaitez-vous supprimer cette permission?</confirm-delete-permission>
       <no-permission-tochange>Vous n'avez pas les droits requis pour supprimer la permission</no-permission-tochange>
       <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire ni l'utilisateur "system"</no-permission-remove>
-      <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
+      <access-denied>Accès refusé! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
@@ -1598,35 +1598,35 @@
     <label>
       <UIPopupWindow>Sélectionner</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Utilisateur Ou Groupe</userOrGroup>
-      <read>Droit de Lecture</read>
-      <add_node>Droit d'Ajout de Noeud</add_node>
-      <set_property>Droit de MAJ des Propriétés</set_property>
-      <remove>Droit de Suppression</remove>
+      <userOrGroup>Utilisateur ou Groupe</userOrGroup>
+      <read>Droit de lecture</read>
+      <add_node>Droit d'ajout de noeud</add_node>
+      <set_property>Droit de MAJ des propriétés</set_property>
+      <remove>Droit de suppression</remove>
     </label>
     <title>Ajouter une permission à ce noeud</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Initialiser</Reset>
+      <Reset>Réinitialiser</Reset>
     </action>
     <msg>
       <checkbox-require>Vous devez selectionner au moins une propriété</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant de sauver cette permission</userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant de sauvegarder cette permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas les droits requis pour ajouter une permission</not-change-permission>
-      <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
+      <access-denied>Accès refusé! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionForm>
   
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Ajouter une Taxonomie</UITaxonomyForm>
+      <UITaxonomyForm>Ajouter une taxonomie</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
   
   <UITaxonomyManager>
     <title>
-      <permission>Gestion des Permissions</permission>
+      <permission>Gestion des permissions</permission>
     </title>
   </UITaxonomyManager>
   <!--
@@ -1643,9 +1643,9 @@
       <AddNew>Ajouter</AddNew>
     </action>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
-      <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
-      <editing-template>Accès interdit ! Vous ne pouvez pas supprimer et modifier le template en même temps.</editing-template>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
+      <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <editing-template>Accès interdit! Vous ne pouvez pas supprimer et modifier le template en même temps.</editing-template>
     </msg>
   </UITemplateList>
   <!--
@@ -1655,7 +1655,7 @@
   -->
   <AddNewTemplatePermission>
     <title>
-      <UIPermissionSelector>Sélection d'une Permission</UIPermissionSelector>
+      <UIPermissionSelector>Sélection d'une permission</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
   <TemplatePopup>
@@ -1745,8 +1745,8 @@
       <action>Actions</action>
     </header>
     <msg>
-      <undeletable>'{0}' est le formulaire par défaut. Suppression interdite !</undeletable>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <undeletable>'{0}' est le formulaire par défaut. Suppression interdite!</undeletable>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1768,8 +1768,8 @@
       <action>Actions</action>
     </header>
     <msg>
-      <undeletable>'{0}' est le formulaire par défaut. Suppression interdite !</undeletable>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <undeletable>'{0}' est le formulaire par défaut. Suppression interdite!</undeletable>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1792,13 +1792,13 @@
     </action>
     <msg>
       <name-invalid>Le nom contient des caractères invalides</name-invalid>
-      <roles-invalid>Veuillez saisir au moins une persmission.</roles-invalid>
+      <roles-invalid>Veuillez saisir au moins une permission.</roles-invalid>
       <version-restored>Version {0} restaurée avec succès.</version-restored>
       <name-exist>Le formulaire '{0}' existe déjà</name-exist>
     </msg>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
-      <RemovePermission>Supprimer de la permission</RemovePermission>
+      <RemovePermission>Supprimer la permission</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
@@ -1847,9 +1847,9 @@
       <Delete>Supprimer cette requête</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <query-not-existed>La requête n'existe plus.</query-not-existed>
-      <can-not-remove>Vous ne pouvez pas supprimer cette requête. Veuillez contacter l'administrateur pour information.</can-not-remove>
+      <can-not-remove>Vous ne pouvez pas supprimer cette requête. Veuillez contacter l'administrateur pour plus d'information.</can-not-remove>
     </msg>
   </UIQueriesList>
   <UIQueriesForm>
@@ -1869,7 +1869,7 @@
       <permission-require>Vous devez sélectionner au moins une permission</permission-require>
       <name-invalid>Caractères invalides détectés dans le nom de la requête</name-invalid>
       <name-existing>Une requête du même nom existe déjà</name-existing>
-      <invalid-query>Requuêtes invalide. Veuillez vérifier le code de votre requête !</invalid-query>
+      <invalid-query>Requêtes invalide. Veuillez vérifier le code de votre requête!</invalid-query>
       <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>
     </msg>
   </UIQueriesForm>
@@ -1934,7 +1934,7 @@
   <ECMNameValidator>
     <msg>
       <Invalid-char>Caractères invalide détectés dans le champ '{0}'.</Invalid-char>
-      <empty-input>La valeur du champ '{0}' est nulle ou vide !</empty-input>
+      <empty-input>La valeur du champ '{0}' est nulle ou vide!</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
@@ -1949,7 +1949,7 @@
   -->
   <PermissionValidator>
   	<msg>
-  		<permission-path-invalid>La permission de '{0}' est invalide !</permission-path-invalid>
+  		<permission-path-invalid>La permission de '{0}' est invalide!</permission-path-invalid>
   	</msg>
   </PermissionValidator>
   <!--
@@ -1971,22 +1971,22 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
     <title>
-      <AddPermission>Ajouter une Permission</AddPermission>
+      <AddPermission>Ajouter une permission</AddPermission>
     </title>
   </template>
   <metadataTypeTab>
     <title>
-      <AddPermission>Ajouter une Permission</AddPermission>
+      <AddPermission>Ajouter une permission</AddPermission>
     </title>
   </metadataTypeTab>
   <PermissionButton>
     <title>
-      <AddPermission>Ajouter une Permission</AddPermission>
+      <AddPermission>Ajouter une permission</AddPermission>
     </title>
   </PermissionButton>
   <nodeTypeDefinition>
@@ -1996,13 +1996,13 @@
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Ajouter un Type Requis</AddRequiredType>
-      <AddDefaultType>Ajouter un Type par Défaut</AddDefaultType>
+      <AddRequiredType>Ajouter un type requis</AddRequiredType>
+      <AddDefaultType>Ajouter un type par Défaut</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
     <title>
-      <AddConstraints>Ajouter des Contraintes</AddConstraints>
+      <AddConstraints>Ajouter des contraintes</AddConstraints>
     </title>
   </propertyDefinition>
   <authInputSet>
@@ -2028,12 +2028,12 @@
   </ECMTemplate>
   <step1>
     <title>
-      <AddPermission>Ajouter une Permission</AddPermission>
+      <AddPermission>Ajouter une permission</AddPermission>
     </title>
   </step1>
   <step2>
     <title>
-      <SelectContainer>Sélectionner un Conteneur</SelectContainer>
+      <SelectContainer>Sélectionner un conteneur</SelectContainer>
       <SelectStore>Sélectionner le lieu de stockage</SelectStore>
     </title>
   </step2>
@@ -2084,7 +2084,7 @@
   -->  
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Ajouter un Raccourci</addSymLink>
+      <addSymLink>Ajouter un raccourci</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2100,7 +2100,7 @@
   
   <UIDriveForm>
 		<msg>
-  		<permission-path-invalid>La permission de '{0}' est invalide !</permission-path-invalid>	
+  		<permission-path-invalid>La permission de '{0}' est invalide!</permission-path-invalid>	
   	</msg>
   </UIDriveForm>
   
@@ -2112,7 +2112,7 @@
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   	<msg>
-  		<exist>Ce nœud de l'arbre est l'existence!</exist>
+  		<exist>Ce nœud existe déjà!</exist>
   	</msg>
   </UITaxonomyWorkingArea>
     
@@ -2141,8 +2141,8 @@
   -->   
   <DriveInputSet>
     <label>
-      <nt_folder>Dossier de documents</nt_folder>
-      <nt_unstructured>Dossier de contenus</nt_unstructured>
+      <nt_folder>Dossier</nt_folder>
+      <nt_unstructured>Dossier des contenus</nt_unstructured>
     </label>
   </DriveInputSet>
   <UIDriveForm>
@@ -2152,23 +2152,23 @@
   </UIDriveForm>
   <UIPermissionTreeInfo>
   	<msg>
-  		<confirm-delete-permission>Souhaitez-vous vraiement supprimer cette permission ?</confirm-delete-permission>
+  		<confirm-delete-permission>Souhaitez-vous vraiement supprimer cette permission?</confirm-delete-permission>
   	</msg>
   </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
 		<msg>
-			<no-right-target-path>Vous devez choisir un autre chemin d'acceuil</no-right-target-path>
+			<no-right-target-path>Vous devez choisir un autre chemin d'accueil</no-right-target-path>
 		</msg>
 	</UITaxonomyTreeMainForm>
 	
 	<UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Gestion du Verouillage</ManageUnLock>
+        <ManageUnLock>Gestion du verouillage</ManageUnLock>
       </label>
     </tab>
     <label>
-      <UIUnLockManager>Gestion du Verouillage</UIUnLockManager>      
+      <UIUnLockManager>Gestion du verouillage</UIUnLockManager>      
     </label>    
 	</UIECMAdminControlPanel>
 	<UIUnLockForm>
@@ -2187,7 +2187,7 @@
   </UIUnLockForm>
   <UILockHolderList>
   	<header>
-  		<name>Groupes Ou Utilisateurs</name>
+  		<name>Groupes ou Utilisateurs</name>
   		<action>Action</action>
   	</header>
   	<tooltip>
@@ -2212,7 +2212,7 @@
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Gestion des Verrous</UIUnLockForm>
+      <UIUnLockForm>Gestion des verrous</UIUnLockForm>
     </title>
   </EditUnLockForm>  
   <UITabPane>
@@ -2220,15 +2220,15 @@
       <Close>Fermer</Close>
     </action>
     <title>
-    		<UILockHolderContainer>Gestion des Verrous</UILockHolderContainer>
-    		<UILockNodeList>Noeud Verouillé</UILockNodeList>
+    		<UILockHolderContainer>Gestion des verrous</UILockHolderContainer>
+    		<UILockNodeList>Noeud verouillé</UILockNodeList>
     </title>
   </UITabPane> 
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Ajoute un Onglet</AddTabForm>
-      <AddTab>Sauver</AddTab>
+      <AddTabForm>Ajouter un onglet</AddTabForm>
+      <AddTab>Enregistrer</AddTab>
       <BackViewForm>Précédent</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2250,12 +2250,12 @@
   <UISkinTab>
     <header>
       <name>Nom</name>
-      <roles>Roles</roles>
+      <roles>Rôles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
-      <undeletable>'{0}' ne peut pas être supprimé, c'est celui qui est utilisé par défaut !</undeletable>
+      <undeletable>'{0}' ne peut pas être supprimé, celui-ci est utilisé par défaut!</undeletable>
       <confirm-delete>Souhaitez vous réellement supprimer?</confirm-delete>
     </msg>
     <action>
@@ -2288,7 +2288,7 @@
 	     </title>
 	   </action>
 	   <msg>
-	     <confirm-delete>Etes-vous sûr de vouloir supprimer ce style ?</confirm-delete>
+	     <confirm-delete>Etes-vous sûr de vouloir supprimer ce style?</confirm-delete>
 	   </msg>
 	 </UITagManager>
 		
@@ -2300,14 +2300,14 @@
 	 <UITaxonomyTreeMainForm>			
 				<action>
 					<NextViewPermission>Suivant</NextViewPermission>
-					<Reset>Initialiser</Reset>
+					<Reset>Réinitialiser</Reset>
 				</action>
 			</UITaxonomyTreeMainForm>
 			  
 		<UIPermissionTreeForm>
 			<action>
-				<Save>Sauver</Save>
-				<Reset>Initialiser</Reset>
+				<Save>Enregistrer</Save>
+				<Reset>Réinitialiser</Reset>
 				<NextAddAction>Suivant</NextAddAction>
 				<Previous>Précédent</Previous>
 			</action>
@@ -2350,10 +2350,10 @@
   <UITagPermissionForm>
     <title>Ajouter une permission</title>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
     </action>
     <label>
-      <userOrGroup>Rôles : </userOrGroup>
+      <userOrGroup>Rôles: </userOrGroup>
       <permission></permission>
     </label>
     <msg>
@@ -2380,7 +2380,7 @@
   </UIFolksonomyManager>  
 		<UIActionForm>
   	<title>
-  		<ShowComponent>Ouvrir Fenêtre</ShowComponent>
+  		<ShowComponent>Ouvrir la fenêtre</ShowComponent>
   		<removeReference>Supprimer</removeReference>
   	</title>
   </UIActionForm>		   
@@ -2409,13 +2409,13 @@
   
   <UIViewFormTabPane>
   		<label>
-  				<addCategory>Ajouter une Catégorie</addCategory>
-          <addLocalizationLink>Ajoute une Traduction</addLocalizationLink>
+  				<addCategory>Ajouter une catégorie</addCategory>
+          <addLocalizationLink>Ajoute une traduction</addLocalizationLink>
   		</label>
   </UIViewFormTabPane>
   <UIDriveForm>
 			<label>
-  		<taxonomy-list>Liste des Taxonomies</taxonomy-list>
+  		<taxonomy-list>Liste des taxonomies</taxonomy-list>
   		<admin-view>Détails</admin-view>
   		<authoring-view>Autorité</authoring-view>
   		<taxonomy-icons>Icônes des Taxonomies</taxonomy-icons>
@@ -2453,17 +2453,17 @@
 	</UINodeTypeSelector>
 	<UIScriptForm>
  		<msg>
-					<PathNotFoundException>The script is not already exists in '{0}' folder</PathNotFoundException>      
+					<PathNotFoundException>Le script '{0}' n'existe pas dans ce dossier</PathNotFoundException>      
    </msg>
  </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   		<no-list>Il n'y a aucun type de noeud à condition de recherche</no-list>
+   		<no-list>Il n'y a pas de type de noeud comme condition de recherche</no-list>
    </msg>
  </UINodeTypeList>
  <UIActionForm>
  	<msg>
- 			<canotChangeActionId>You can not change action id</canotChangeActionId>
+ 			<canotChangeActionId>Impossible de changer l'identifiant de l'action</canotChangeActionId>
  	</msg>
  </UIActionForm>
  <PopupComponent>
@@ -2473,7 +2473,7 @@
  </PopupComponent>
   <UIPermissionTreeInfo>
   	<msg>
-      <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
+      <no-permission-remove>Impossible de supprimer le propriétaire ou l'utilisateur "system"</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo> 
  <UIPageIterator>

@@ -5,7 +5,7 @@
           <publicationRequestApproval>Publication > Demande de validation</publicationRequestApproval>
           <publicationApproveContent>Publication > Approuver</publicationApproveContent>
           <publicationPublish>Publication > Publier</publicationPublish>
-          <showDrives>Montrer Lecteurs</showDrives>
+          <showDrives>Afficher Lecteurs</showDrives>
   		</label>
   </UIViewFormTabPane>
 </bundle>

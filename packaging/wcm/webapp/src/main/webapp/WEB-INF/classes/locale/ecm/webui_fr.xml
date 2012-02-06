@@ -27,7 +27,7 @@
       <action>Action</action>
     </header>
     <action>
-      <SaveCategories>Sauver</SaveCategories>
+      <SaveCategories>Enregistrer</SaveCategories>
       <Cancel>Annuler</Cancel>
     </action>
     <msg>

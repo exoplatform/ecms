@@ -24,8 +24,8 @@
         <publication:liveDate>Date de publication</publication:liveDate>
         <exo:startEvent>Date d'événement</exo:startEvent>
       </option>
-      <DisplaySettingBlock>L'écran de réglage</DisplaySettingBlock>
-      <Header>Header</Header>
+      <DisplaySettingBlock>Paramètre d'affichage</DisplaySettingBlock>
+      <Header>Entête</Header>
       <AutomaticDetection>Détection automatique</AutomaticDetection>
       <FormViewTemplate>Modèle de vue</FormViewTemplate>
       <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
@@ -42,10 +42,10 @@
       <ShowLink>Afficher le lien</ShowLink>
       <LinkFormatBlock>Le format de lien</LinkFormatBlock>
       <UIParameterizedTagetPageInputSetAction>Page cible</UIParameterizedTagetPageInputSetAction>
-      <content-not-found>Il n'ya pas de contenu trouvé</content-not-found>
+      <content-not-found>Aucun contenu trouvé</content-not-found>
     </label>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UIPCLVConfig>
@@ -59,7 +59,7 @@
 
   <UIParameterizedTagetPageInputSetAction>
     <title>
-      <SelectTargetPage>Sélectionnez page cible</SelectTargetPage>
+      <SelectTargetPage>Sélectionnez la page cible</SelectTargetPage>
     </title>
   </UIParameterizedTagetPageInputSetAction>
 </bundle>

@@ -6,10 +6,10 @@
       <changeState>
         <obsoleted>Le contenu est obsolète</obsoleted>
         <published>Le contenu est publié</published>
-				<unpublished>Le contenu n'est non publié</unpublished>
+				<unpublished>Le contenu est non publié</unpublished>
 				<archived>Le contenu est archivé</archived>
 				<staged>Le contenu est prêt à publier</staged>
-				<approved>Le contenu est apprové</approved>
+				<approved>Le contenu est approuvé</approved>
 				<pending>Le contenu est suspendu</pending>
 				<draft>Le contenu est brouillon</draft>
       </changeState>

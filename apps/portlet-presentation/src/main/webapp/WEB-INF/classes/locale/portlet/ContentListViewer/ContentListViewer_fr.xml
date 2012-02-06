@@ -5,7 +5,7 @@
       <non-contents>Excusez-nous, aucun article n'est disponible.</non-contents>
       <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
       <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
-      <category-back>Aller à la précédente</category-back>
+      <category-back>Aller à la catégorie précédente</category-back>
     </msg>
   </UICLVContainer>
 
@@ -41,11 +41,11 @@
       <Down>Dessendre</Down>      
     </label>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
+      <not-valid-path>Ce chemin est invalide</not-valid-path>
       <saving-success>Vos préférences ont été enregistrées</saving-success>
     </msg>
   </UICLVConfig>
@@ -129,7 +129,7 @@
       <UICLVConfigShowRssLinkFormCheckboxInput>Afficher les flux RSS</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Afficher "En savoir plus"</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <AdvancedBlock>Avancé</AdvancedBlock>
+      <AdvancedBlock>Avancée</AdvancedBlock>
 	  <UICLVConfigDynamicNavigationLabel>Navigation dynamique</UICLVConfigDynamicNavigationLabel>
 	  <UICLVConfigContextualFolderRadioBoxInput>Répertoire contextuel</UICLVConfigContextualFolderRadioBoxInput> 	
 	  <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
@@ -143,9 +143,9 @@
       <UICLVConfigContentByQueryTextArea>par requête</UICLVConfigContentByQueryTextArea>
     </label>
     <help>
-      <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
+      <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage de tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
       <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique (voir Avancé, ci-dessous)</FolderPathHelp>
-      <HeaderOptionHelp>Affiche un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
+      <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
       <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le modèle de vue choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
       <ContextualHelp>Active la navigation dynamique. Les contenus peuvent être changés dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
         <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
@@ -188,7 +188,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
   	<label>
 	  <ENABLE>Limité par l'authentification</ENABLE>
-	  <DISABLE>Limité par le rôle d'utilisateur</DISABLE>
+	  <DISABLE>Limité par le rôle de l'utilisateur</DISABLE>
   	</label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

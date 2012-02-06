@@ -11,7 +11,7 @@
    <print>Imprimer</print>
   </label>
   <msg>
-   <no-content>Il n'y a pas de contenu</no-content>
+   <no-content>Aucun contenu</no-content>
    <internal-server-error>Une erreur s'est produite lors de la sauvegarde.</internal-server-error>
    <empty-title-error>Entrer un nouveau titre</empty-title-error>
   </msg>
@@ -23,7 +23,7 @@
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
   	 <msg>
-  	 		<AccessControlException>Vous n'avez pas la permission d'accéder au mode d'édition</AccessControlException>
+  	 		<AccessControlException>Vous n'avez pas les droits pour accéder au mode d'édition</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
@@ -40,7 +40,7 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-     <Save>Sauver</Save>
+     <Save>Enregistrer</Save>
      <Abort>Annuler</Abort>
      <Cancel>Annuler</Cancel>
      <Print>Imprimer</Print>
@@ -71,7 +71,7 @@
     </label>
     <help>
       <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (mode Avancé, voir ci-dessous)</ContentPathBlock>
-      <DisplaySettingBlock>Vous pouvez choisir d'afficher ou de cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
+      <DisplaySettingBlock>Vous pouvez afficher ou cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
       <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
     </help>

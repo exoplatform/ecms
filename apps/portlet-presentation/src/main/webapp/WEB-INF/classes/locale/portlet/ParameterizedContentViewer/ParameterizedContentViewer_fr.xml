@@ -30,7 +30,7 @@
       <ShowBar>Afficher la barre d'options</ShowBar>
     </label>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UIPCVConfig>

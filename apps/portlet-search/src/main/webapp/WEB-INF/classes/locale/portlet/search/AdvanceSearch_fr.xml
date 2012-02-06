@@ -50,7 +50,7 @@
       </option>      
     </label>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UISearchPageLayoutManager>
