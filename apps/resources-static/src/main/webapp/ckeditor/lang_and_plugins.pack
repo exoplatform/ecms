@@ -1,0 +1,843 @@
+/*
+ * CKPackager - Sample Package file
+ */
+
+header :
+	'/*'																			+ '\n' +
+	'Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.'	+ '\n' +
+	'For licensing, see LICENSE.html or http://ckeditor.com/license'				+ '\n' +
+	'*/'																			+ '\n' +
+	'\n',
+
+noCheck : false,
+
+constants :
+	{
+		
+	},
+
+packages :
+	[
+		//compress all files inside the folder "./_source/lang", put them into the folder "./lang"
+		{
+			"wrap": false,
+		        "output": "./lang/fr-ca.js",
+		        "files": [
+		            "./_source/lang/fr-ca.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/nl.js",
+		        "files": [
+		            "./_source/lang/nl.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/lv.js",
+		        "files": [
+		            "./_source/lang/lv.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/is.js",
+		        "files": [
+		            "./_source/lang/is.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/hi.js",
+		        "files": [
+		            "./_source/lang/hi.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/eo.js",
+		        "files": [
+		            "./_source/lang/eo.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ka.js",
+		        "files": [
+		            "./_source/lang/ka.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/it.js",
+		        "files": [
+		            "./_source/lang/it.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/tr.js",
+		        "files": [
+		            "./_source/lang/tr.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/pl.js",
+		        "files": [
+		            "./_source/lang/pl.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/vi.js",
+		        "files": [
+		            "./_source/lang/vi.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/_languages.js",
+		        "files": [
+		            "./_source/lang/_languages.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/sl.js",
+		        "files": [
+		            "./_source/lang/sl.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/no.js",
+		        "files": [
+		            "./_source/lang/no.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/sr.js",
+		        "files": [
+		            "./_source/lang/sr.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/sk.js",
+		        "files": [
+		            "./_source/lang/sk.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ca.js",
+		        "files": [
+		            "./_source/lang/ca.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/gl.js",
+		        "files": [
+		            "./_source/lang/gl.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/en-au.js",
+		        "files": [
+		            "./_source/lang/en-au.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/eu.js",
+		        "files": [
+		            "./_source/lang/eu.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/es.js",
+		        "files": [
+		            "./_source/lang/es.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/th.js",
+		        "files": [
+		            "./_source/lang/th.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/bn.js",
+		        "files": [
+		            "./_source/lang/bn.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/bg.js",
+		        "files": [
+		            "./_source/lang/bg.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ar.js",
+		        "files": [
+		            "./_source/lang/ar.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/mn.js",
+		        "files": [
+		            "./_source/lang/mn.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/hr.js",
+		        "files": [
+		            "./_source/lang/hr.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/gu.js",
+		        "files": [
+		            "./_source/lang/gu.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ko.js",
+		        "files": [
+		            "./_source/lang/ko.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/he.js",
+		        "files": [
+		            "./_source/lang/he.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/zh.js",
+		        "files": [
+		            "./_source/lang/zh.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/fr.js",
+		        "files": [
+		            "./_source/lang/fr.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/de.js",
+		        "files": [
+		            "./_source/lang/de.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/fi.js",
+		        "files": [
+		            "./_source/lang/fi.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/hu.js",
+		        "files": [
+		            "./_source/lang/hu.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/fa.js",
+		        "files": [
+		            "./_source/lang/fa.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/af.js",
+		        "files": [
+		            "./_source/lang/af.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/en.js",
+		        "files": [
+		            "./_source/lang/en.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/nb.js",
+		        "files": [
+		            "./_source/lang/nb.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/zh-cn.js",
+		        "files": [
+		            "./_source/lang/zh-cn.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/en-ca.js",
+		        "files": [
+		            "./_source/lang/en-ca.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/cy.js",
+		        "files": [
+		            "./_source/lang/cy.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/cs.js",
+		        "files": [
+		            "./_source/lang/cs.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/uk.js",
+		        "files": [
+		            "./_source/lang/uk.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/lt.js",
+		        "files": [
+		            "./_source/lang/lt.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ms.js",
+		        "files": [
+		            "./_source/lang/ms.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ro.js",
+		        "files": [
+		            "./_source/lang/ro.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/sv.js",
+		        "files": [
+		            "./_source/lang/sv.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/sr-latn.js",
+		        "files": [
+		            "./_source/lang/sr-latn.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/pt.js",
+		        "files": [
+		            "./_source/lang/pt.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/pt-br.js",
+		        "files": [
+		            "./_source/lang/pt-br.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ru.js",
+		        "files": [
+		            "./_source/lang/ru.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/en-gb.js",
+		        "files": [
+		            "./_source/lang/en-gb.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/el.js",
+		        "files": [
+		            "./_source/lang/el.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/fo.js",
+		        "files": [
+		            "./_source/lang/fo.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/da.js",
+		        "files": [
+		            "./_source/lang/da.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/km.js",
+		        "files": [
+		            "./_source/lang/km.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/ja.js",
+		        "files": [
+		            "./_source/lang/ja.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/et.js",
+		        "files": [
+		            "./_source/lang/et.js"
+		        ]
+		},
+		{
+			"wrap": false,
+		        "output": "./lang/bs.js",
+		        "files": [
+		            "./_source/lang/bs.js"
+		        ]
+		},
+
+		//compress all files inside the folder "./_source/plugins", put them into the folder "./plugins"
+		{
+			"wrap": false,
+		        "output": "./plugins/smiley/dialogs/smiley.js",
+		        "files": [
+		            "./_source/plugins/smiley/dialogs/smiley.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/docprops/dialogs/docprops.js",
+		        "files": [
+		            "./_source/plugins/docprops/dialogs/docprops.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/docprops/plugin.js",
+		        "files": [
+		            "./_source/plugins/docprops/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/button.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/button.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/hiddenfield.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/hiddenfield.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/radio.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/radio.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/textarea.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/textarea.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/form.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/form.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/select.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/select.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/checkbox.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/checkbox.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/forms/dialogs/textfield.js",
+		        "files": [
+		            "./_source/plugins/forms/dialogs/textfield.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/adobeair/plugin.js",
+		        "files": [
+		            "./_source/plugins/adobeair/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/about/dialogs/about.js",
+		        "files": [
+		            "./_source/plugins/about/dialogs/about.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/a11yhelp/dialogs/a11yhelp.js",
+		        "files": [
+		            "./_source/plugins/a11yhelp/dialogs/a11yhelp.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/a11yhelp/lang/he.js",
+		        "files": [
+		            "./_source/plugins/a11yhelp/lang/he.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/a11yhelp/lang/en.js",
+		        "files": [
+		            "./_source/plugins/a11yhelp/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/find/dialogs/find.js",
+		        "files": [
+		            "./_source/plugins/find/dialogs/find.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/wsc/dialogs/wsc.js",
+		        "files": [
+		            "./_source/plugins/wsc/dialogs/wsc.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/uicolor/dialogs/uicolor.js",
+		        "files": [
+		            "./_source/plugins/uicolor/dialogs/uicolor.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/uicolor/lang/he.js",
+		        "files": [
+		            "./_source/plugins/uicolor/lang/he.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/uicolor/lang/en.js",
+		        "files": [
+		            "./_source/plugins/uicolor/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/uicolor/plugin.js",
+		        "files": [
+		            "./_source/plugins/uicolor/plugin.js"
+		        ]
+		},
+//		{
+//		        "wrap": false,
+//		        "output": "./plugins/uicolor/yui/yui.js",
+//		        "files": [
+//		            "./_source/plugins/uicolor/yui/yui.js"
+//		        ]
+//		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/table/dialogs/table.js",
+		        "files": [
+		            "./_source/plugins/table/dialogs/table.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/pastefromword/filter/default.js",
+		        "files": [
+		            "./_source/plugins/pastefromword/filter/default.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/iframedialog/plugin.js",
+		        "files": [
+		            "./_source/plugins/iframedialog/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/dialog/dialogDefinition.js",
+		        "files": [
+		            "./_source/plugins/dialog/dialogDefinition.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/scayt/dialogs/options.js",
+		        "files": [
+		            "./_source/plugins/scayt/dialogs/options.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/tabletools/dialogs/tableCell.js",
+		        "files": [
+		            "./_source/plugins/tabletools/dialogs/tableCell.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/templates/dialogs/templates.js",
+		        "files": [
+		            "./_source/plugins/templates/dialogs/templates.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/templates/templates/default.js",
+		        "files": [
+		            "./_source/plugins/templates/templates/default.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/placeholder/dialogs/placeholder.js",
+		        "files": [
+		            "./_source/plugins/placeholder/dialogs/placeholder.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/placeholder/lang/he.js",
+		        "files": [
+		            "./_source/plugins/placeholder/lang/he.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/placeholder/lang/en.js",
+		        "files": [
+		            "./_source/plugins/placeholder/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/placeholder/plugin.js",
+		        "files": [
+		            "./_source/plugins/placeholder/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/liststyle/dialogs/liststyle.js",
+		        "files": [
+		            "./_source/plugins/liststyle/dialogs/liststyle.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/tableresize/plugin.js",
+		        "files": [
+		            "./_source/plugins/tableresize/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/devtools/lang/en.js",
+		        "files": [
+		            "./_source/plugins/devtools/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/devtools/plugin.js",
+		        "files": [
+		            "./_source/plugins/devtools/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/ajax/plugin.js",
+		        "files": [
+		            "./_source/plugins/ajax/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/link/dialogs/anchor.js",
+		        "files": [
+		            "./_source/plugins/link/dialogs/anchor.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/link/dialogs/link.js",
+		        "files": [
+		            "./_source/plugins/link/dialogs/link.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/xml/plugin.js",
+		        "files": [
+		            "./_source/plugins/xml/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/colordialog/dialogs/colordialog.js",
+		        "files": [
+		            "./_source/plugins/colordialog/dialogs/colordialog.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/pastetext/dialogs/pastetext.js",
+		        "files": [
+		            "./_source/plugins/pastetext/dialogs/pastetext.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/stylesheetparser/plugin.js",
+		        "files": [
+		            "./_source/plugins/stylesheetparser/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/styles/styles/default.js",
+		        "files": [
+		            "./_source/plugins/styles/styles/default.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/iframe/dialogs/iframe.js",
+		        "files": [
+		            "./_source/plugins/iframe/dialogs/iframe.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/clipboard/dialogs/paste.js",
+		        "files": [
+		            "./_source/plugins/clipboard/dialogs/paste.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/image/dialogs/image.js",
+		        "files": [
+		            "./_source/plugins/image/dialogs/image.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/specialchar/dialogs/specialchar.js",
+		        "files": [
+		            "./_source/plugins/specialchar/dialogs/specialchar.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/specialchar/lang/en.js",
+		        "files": [
+		            "./_source/plugins/specialchar/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/specialchar/lang/en.js",
+		        "files": [
+		            "./_source/plugins/specialchar/lang/en.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/flash/dialogs/flash.js",
+		        "files": [
+		            "./_source/plugins/flash/dialogs/flash.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/bbcode/plugin.js",
+		        "files": [
+		            "./_source/plugins/bbcode/plugin.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/div/dialogs/div.js",
+		        "files": [
+		            "./_source/plugins/div/dialogs/div.js"
+		        ]
+		},
+		{
+		        "wrap": false,
+		        "output": "./plugins/autogrow/plugin.js",
+		        "files": [
+		            "./_source/plugins/autogrow/plugin.js"
+		        ]
+		}
+	]
