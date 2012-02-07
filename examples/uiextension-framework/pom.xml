@@ -14,5 +14,6 @@
     <module>manage-wcm-cache</module>
     <module>helloworld-optionblock</module>
     <module>helloworld-sidebar</module>
+    <module>manage-personal-folder</module>
   </modules>
 </project>

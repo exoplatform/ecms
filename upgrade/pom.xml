@@ -79,5 +79,6 @@
     <module>voting-nodetype</module>
     <module>thumbnails</module>
     <module>publication-publication-nodetype</module>
+    <module>users-folder-permission</module>
    </modules>
 </project>

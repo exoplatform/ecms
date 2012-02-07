@@ -329,5 +329,14 @@
 	      </object-param>
 	    </init-params>
 	  </component-plugin>
+	  
+	  <component-plugin>
+      <name>AdjustDrivePermissionNewUserListener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.cms.permission.AdjustDrivePermissionNewUserListener</type>
+      <description>description</description>
+    </component-plugin>
+	  
+	  
 	</external-component-plugins>
 </configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPersonalFolderForm>
+    <label>
+    	  <userName>User Name</userName>
+    </label>
+		</UIPersonalFolderForm>
+		<UIECMAdminControlPanel>
+			 <tab>
+			 	 <label>
+			 	 	 <ManagePersonalFolder>Personal Folder Management</ManagePersonalFolder>
+			 	 </label>
+			 </tab>
+				<label>
+					 <ManagePersonalFolder>Re-create Personal Folder</ManagePersonalFolder>
+      <UIPersonalFolderManager>Personal Folder Form</UIPersonalFolderManager>
+				</label>
+		</UIECMAdminControlPanel>
+		<UIPersonalFolderForm>
+			 <action>
+			 	 <Save>Re-create Personal Folder</Save>
+			 </action>
+				<msg>
+					 <initSuccessed>Initializing the user directory of '{0}' successful!</initSuccessed>
+						<notExisting>Initializing stopped! The user '{0}' doesn't exist</notExisting>
+				</msg>
+		</UIPersonalFolderForm>
+</bundle>
