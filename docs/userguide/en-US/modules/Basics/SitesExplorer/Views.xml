@@ -366,37 +366,52 @@
 		 <para>
 			All the nodes, which have been created and uploaded, will be displayed.
 		</para>
-
-		 <para>
-			You can directly click the node name to view its content in details.
-		</para>
-		 <mediaobject>
+         <mediaobject>
 			<imageobject role="html">
 				<imagedata align="center" fileref="images/timelinedetails.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/timelinedetails.png" format="PNG" width="150mm" scalefit="1" />
 			</imageobject>
-
 		</mediaobject>
-		 <para>
-			You can also click
-			<inlinemediaobject>
-				<imageobject>
-               <imagedata fileref="images/favestar.png" format="PNG" width="5mm" scalefit="1"/>
-				</imageobject>
-            <textobject>
-               <phrase>star</phrase>
-            </textobject>
-			</inlinemediaobject> to mark your item as favorite, or 
-			<inlinemediaobject>
-				<imageobject>
-               <imagedata fileref="images/unfavestar.png" format="PNG" width="5mm" scalefit="1"/>
-				</imageobject>
-            <textobject>
-               <phrase>star</phrase>
-            </textobject>
-			</inlinemediaobject> of a favorite node again to remove it from favorites.
-		</para>
-	</section>
+         <itemizedlist>
+             <listitem>
+                 <para>
+                     Click the node name to view its content in details.
+                 </para>
+             </listitem>
+             <listitem>
+                 <para>Click a timeline category, such as <emphasis role="bold">Today</emphasis>,
+                     <emphasis role="bold">Yesterday</emphasis>, <emphasis role="bold">Earlier This Week</emphasis>,
+                     <emphasis role="bold">Earlier This Month</emphasis>,
+                     and
+                     <emphasis role="bold">Ealier This Year</emphasis>
+                     to review all the nodes of the category. Click it again to return the the default.
+                 </para>
+             </listitem>
+             <listitem>
+                 <para>
+                     Click
+                     <inlinemediaobject>
+                         <imageobject>
+                             <imagedata fileref="images/favestar.png" format="PNG" width="5mm" scalefit="1"/>
+                         </imageobject>
+                         <textobject>
+                             <phrase>star</phrase>
+                         </textobject>
+                     </inlinemediaobject>
+                     to mark your item as favorite, or
+                     <inlinemediaobject>
+                         <imageobject>
+                             <imagedata fileref="images/unfavestar.png" format="PNG" width="5mm" scalefit="1"/>
+                         </imageobject>
+                         <textobject>
+                             <phrase>star</phrase>
+                         </textobject>
+                     </inlinemediaobject>
+                     of a favorite node again to remove it from favorites.
+                 </para>
+             </listitem>
+         </itemizedlist>
+     </section>
 </section>
