@@ -37,15 +37,11 @@
       </values-param>
       <values-param>
         <name>init.resources</name>
-        <value>locale.navigation.portal.classic</value>
-        <value>locale.navigation.portal.acme</value>
         <value>locale.navigation.group.platform.web-contributors</value>
         <value>locale.portal.demo_webui</value>
       </values-param>
       <values-param>
         <name>portal.resource.names</name>
-        <value>locale.navigation.portal.classic</value>
-        <value>locale.navigation.portal.acme</value>
         <value>locale.navigation.group.platform.web-contributors</value>
         <value>locale.portal.demo_webui</value>
       </values-param>
