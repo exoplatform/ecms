@@ -963,6 +963,7 @@ public class UIDialogForm extends UIForm {
       StringBuffer value = new StringBuffer();
       if (node.hasProperty(propertyName)) {
         value.append(node.getProperty(propertyName).getValue().getString());
+        uiTextArea.setValue(value.toString());
       } else if (node.isNodeType("nt:file")) {
         Node jcrContentNode = node.getNode("jcr:content");
         if (jcrContentNode.hasProperty(propertyName)) {
@@ -977,7 +978,6 @@ public class UIDialogForm extends UIForm {
           }
         }
       }
-      
     }
     if (isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if (node != null && node.hasNode("jcr:content") && childNode != null) {
