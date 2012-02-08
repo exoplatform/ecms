@@ -36,7 +36,7 @@
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.1.7-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
-    <chromattic.version>1.1.1</chromattic.version>
+    <chromattic.version>1.1.2</chromattic.version>
     <org.xcmis.version>1.2.2</org.xcmis.version>
     <abdera.version>0.4.0-incubating</abdera.version>
     <lucene-regex.version>2.4.1</lucene-regex.version>
