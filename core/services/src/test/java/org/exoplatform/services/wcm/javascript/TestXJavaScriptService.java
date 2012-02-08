@@ -371,7 +371,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 		    configService.writeMergedJavascript(baos);
 		    baos.close();
 		    String jsData = baos.toString("UTF-8");
-			assertEquals("", jsData);
+			assertEquals("This is the sharedJsFile.js file.", jsData);
 		} catch(Exception e) {
 			fail();
 		}
@@ -583,7 +583,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
     jsContent.setProperty("jcr:encoding", "UTF-8");
     jsContent.setProperty("jcr:mimeType", "text/javascript");
     jsContent.setProperty("jcr:lastModified", new Date().getTime());
-    String jsData = "This is the default.js file.";
+    String jsData = "This is the sharedJsFile.js file.";
     jsContent.setProperty("jcr:data", jsData);
     session.save();
   }

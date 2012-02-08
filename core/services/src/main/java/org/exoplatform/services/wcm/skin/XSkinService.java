@@ -21,7 +21,10 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -50,9 +53,9 @@ import org.picocontainer.Startable;
 public class XSkinService implements Startable {    
   
   /** The SHARE d_ cs s_ query. */
-  private static String SHARED_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' and exo:sharedCSS='true' order by exo:priority DESC".intern();  
+  private static String SHARED_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' and exo:sharedCSS='true' and jcr:mixinTypes <> 'exo:restoreLocation' order by exo:priority ASC".intern();
   
-  private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' order by exo:priority DESC".intern();
+  private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' order by exo:priority ASC".intern();
   
   /** The Constant SKIN_PATH_REGEXP. */
   public final static String SKIN_PATH_REGEXP = "/(.*)/css/jcr/(.*)/(.*)/(.*).css".intern();  
@@ -112,7 +115,7 @@ public class XSkinService implements Startable {
   	
   	// Need re-login to get session because this node is get from template and the session is not live anymore.
   	// If node is version (which is stored in system workspace) we have to login to system workspace to get data 
-  	NodeLocation webcontentLocation = NodeLocation.make(webcontent);
+  	NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
   	ManageableRepository repository = repositoryService.getRepository(webcontentLocation.getRepository());
   	Session session = null;
   	try {
@@ -240,7 +243,7 @@ public class XSkinService implements Startable {
   	Node cssFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getCSSFolder(portalNode);
   	String statement = StringUtils.replaceOnce(SHARED_CSS_QUERY, "{path}", cssFolder.getPath());
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
+    NodeLocation portalNodeLocation = NodeLocation.getNodeLocationByNode(portalNode);
     ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
   	try {
@@ -254,26 +257,35 @@ public class XSkinService implements Startable {
   	      Node registeredCSSFile = iterator.nextNode();
   	      buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
   	    }
-  	  } else {
-  	    boolean isAdded = false;
-  	    while(iterator.hasNext()) {
-  	      Node registeredCSSFile = iterator.nextNode();
-  	      // Add new
-  	      long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-  	      long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-  	      if (!isAdded && newCSSFilePriority < registeredCSSFilePriority) {
-  	        buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
-  	        isAdded = true;
-  	        continue;
-  	      }
-  	      // Modify
-  	      if (newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
-  	        buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-  	        continue;
-  	      }
-  	      buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-  	    }  		
-  	  }
+  	  } else if (!iterator.hasNext()) {
+  		buffer.append(getActivedCSSData(newCSSFile));
+	  } else {      
+	    boolean isApplied = false;
+	    while(iterator.hasNext()) {
+	    
+	      Node registeredCSSFile = iterator.nextNode();
+	      if (newCSSFile != null) {
+	        // Modify
+	        if (!isApplied && newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
+	          buffer.append(getActivedCSSData(newCSSFile));
+	          isApplied = true;
+	          continue;
+	        }
+	      
+	        // Add new
+	        long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+	        long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+	        if (!isApplied && newCSSFilePriority < registeredCSSFilePriority) {
+	          buffer.append(getActivedCSSData(newCSSFile));
+	          isApplied = true;
+	        }
+	      }
+	      buffer.append(getActivedCSSData(registeredCSSFile));
+	    }     
+	    if (!isApplied) {
+	      buffer.append(getActivedCSSData(newCSSFile));
+	    }
+	  }
   	} catch(Exception e) {
   	  log.error("Unexpected problem happen when merge CSS data", e);
   	} finally {
@@ -281,6 +293,19 @@ public class XSkinService implements Startable {
   	}
     return buffer.toString();     
   }  
+  
+  private String getActivedCSSData(Node cssFile) throws ValueFormatException, RepositoryException, PathNotFoundException {
+    if (cssFile != null && !cssFile.isNodeType("exo:restoreLocation")
+    		&& cssFile.hasNode(NodetypeConstant.JCR_CONTENT)
+    		&& cssFile.getNode(NodetypeConstant.JCR_CONTENT).hasProperty(NodetypeConstant.JCR_DATA)
+    		&& cssFile.hasProperty(NodetypeConstant.EXO_ACTIVE)
+    		&& cssFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean() == true) {
+	   
+	  return cssFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA)
+	  				.getString();
+	}
+	return "";
+  }
 
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#start()
