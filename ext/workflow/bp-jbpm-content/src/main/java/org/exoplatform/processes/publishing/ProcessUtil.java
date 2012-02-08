@@ -378,9 +378,11 @@ public class ProcessUtil {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") ;
     String startDateOfWeek = dateFormat.format(calendar.getTime());
     String[] arrStartDate = startDateOfWeek.split("/") ;
-    String startWeekDay = arrStartDate[0] ;       
+    String startWeekDay = arrStartDate[0] ;
+    String startWeekMonth = monthNames[calendar.get(Calendar.MONTH)];
     calendar.add(Calendar.DATE, 6);
     String endDateOfWeek = dateFormat.format(calendar.getTime());
+    String endWeekMonth = monthNames[calendar.get(Calendar.MONTH)];
     String[] arrEndDate = endDateOfWeek.split("/") ;
     String endWeekDay = arrEndDate[0] ;       
     StringBuilder builder = new StringBuilder();
@@ -389,9 +391,9 @@ public class ProcessUtil {
     //Month folder
            .append(currentMonth).append("/")
     //week folder
-           .append(startWeekDay).append(" ").append(currentMonth)
+           .append(startWeekDay).append(" ").append(startWeekMonth)
            .append("-")
-           .append(endWeekDay).append(" ").append(currentMonth)
+           .append(endWeekDay).append(" ").append(endWeekMonth)
            .append(" ").append(currentYear).append("/");
     return builder.toString();
   }

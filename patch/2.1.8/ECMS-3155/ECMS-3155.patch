@@ -1,0 +1,29 @@
+Index: ext/workflow/bp-jbpm-content/src/main/java/org/exoplatform/processes/publishing/ProcessUtil.java
+===================================================================
+--- ext/workflow/bp-jbpm-content/src/main/java/org/exoplatform/processes/publishing/ProcessUtil.java	(revision 77236)
++++ ext/workflow/bp-jbpm-content/src/main/java/org/exoplatform/processes/publishing/ProcessUtil.java	(working copy)
+@@ -378,9 +378,11 @@
+     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") ;
+     String startDateOfWeek = dateFormat.format(calendar.getTime());
+     String[] arrStartDate = startDateOfWeek.split("/") ;
+-    String startWeekDay = arrStartDate[0] ;       
++    String startWeekDay = arrStartDate[0] ;
++    String startWeekMonth = monthNames[calendar.get(Calendar.MONTH)];
+     calendar.add(Calendar.DATE, 6);
+     String endDateOfWeek = dateFormat.format(calendar.getTime());
++    String endWeekMonth = monthNames[calendar.get(Calendar.MONTH)];
+     String[] arrEndDate = endDateOfWeek.split("/") ;
+     String endWeekDay = arrEndDate[0] ;       
+     StringBuilder builder = new StringBuilder();
+@@ -389,9 +391,9 @@
+     //Month folder
+            .append(currentMonth).append("/")
+     //week folder
+-           .append(startWeekDay).append(" ").append(currentMonth)
++           .append(startWeekDay).append(" ").append(startWeekMonth)
+            .append("-")
+-           .append(endWeekDay).append(" ").append(currentMonth)
++           .append(endWeekDay).append(" ").append(endWeekMonth)
+            .append(" ").append(currentYear).append("/");
+     return builder.toString();
+   }
