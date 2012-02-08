@@ -34,7 +34,7 @@
       <value-param>
         <name>super.user</name>
         <description>administrator</description>
-        <value>${gatein.user.super:root}</value>	    
+        <value>${exo.super.user:root}</value>	    
       </value-param>
       
       <value-param>
