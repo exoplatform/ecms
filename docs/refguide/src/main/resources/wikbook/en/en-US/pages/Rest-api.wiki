@@ -1,4 +1,4 @@
-h1. ThumbnailRESTService
+h1. ThumbnailRESTService {anchor:id=CONTref.Devref.PublicRestAPIs.ThumnailRestService}
 
 || *Service name* || *Service URL* || *Location* ||  *Description* ||
 | *ThumbnailRESTService* | {{ {noformat}{portalname}/{restcontextname}/thumbnailImage/{noformat} }} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{ {noformat}exo-ecms-core-services{noformat} }}  |Return a responding data as a thumbnail image. |
@@ -170,3 +170,12 @@ h1. ManageDocumentService {anchor:id=CONTref.JavaServices.ManageDocumentService}
 | *deleteFolderOrFile*|{{ {noformat}{portalname}/{restcontextname}/managedocument/deleteFolderOrFile/{noformat} }} | {{driveName}} - the drive name {example}{example} {{workspaceName}} - the workspace name {example}{example} {{itemPath }} - the path to the folder/file. |{{string}} {example}{example} {{string}}{example}{example}{{string}}| Delete a folder or a file.|
 | *upload*|{{  {noformat}{portalname}/{restcontextname}/managedocument//uploadFile/upload/{noformat} }} | {{servletRequest}} - the servlet request{example}{example} {{uploadId}} - the Id of the upload resource  | {{HttpServletRequest}}{example}{example} {{string}} |Upload a file to the server. |
 | *control*|{{  {noformat}{portalname}/{restcontextname}/managedocument//uploadFile/control/{noformat} }} | {{workspaceName}} - the workspace name{example}{example} {{driveName}} - the drive name {example}{example} {{currentFolder}} - the path to the current folder {example}{example} {{currentPortal}} - the current site {example}{example} {{action}} - the action to perform (save, process and more){example}{example} {{language}} - the language of the user{example}{example} {{fileName}} - the file name{example}{example} {{uploadId}} - the Id of the upload resource | {{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}{example}{example}{{string}}{example}{example}{{string}} {example}{example}{{string}} {example}{example}{{string}}|Return the information about the upload status of a file (upload percentage, file name, and more). |
+
+h1. DownloadConnector {anchor:id=CONTref.JavaServices.DownloadConnector}
+|| *Service name* || *Service URL* || *Location* ||  *Description* ||
+|*DownloadConnector*|{{{{portalname}/{restcontextname}/contents/}}} |*Maven groupId*: {{org.exoplatform.ecms}} {example}{example} *ArtifactId*: {{exo-ecms-core-connector}}| Enable downloading the content of _nt\:file_.|
+
+
+* *APIs usage*:
+|| *Name* || *Service URL endpoint* || *Parameters* || *Values* || *Description* ||
+|*download*|{{{{portalname}/{restcontextname}/contents/download/{workspace}/{path:.*}/}}} |{{workspace}} - the workspace where stores the document node {example}{example} {{path}} - the path of the document node |{{string}} {example}{example} {{string}}|Return to browser a stream got from _jcr\:content_/_jcr\:data_ for downloading the content of the node.|
