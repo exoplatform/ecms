@@ -157,6 +157,10 @@ public class UIPublicationPanel
         
         publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
+        String nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
+        if (!nodeVersionUUID.isEmpty()) {          
+          publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
+        }
         String siteName = Util.getPortalRequestContext().getPortalOwner();
         String remoteUser = Util.getPortalRequestContext().getRemoteUser();
         wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser, state);
@@ -166,7 +170,7 @@ public class UIPublicationPanel
         JCRExceptionManager.process(uiApp, e);
       }
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
+      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());      
     }
   }
 
