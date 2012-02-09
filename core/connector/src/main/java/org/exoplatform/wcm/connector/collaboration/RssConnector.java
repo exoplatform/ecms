@@ -233,7 +233,16 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       Iterator<Node> iter = nodes.iterator();
       while (iter.hasNext()) {
         Node node = iter.next();
-        String url = contentUrl + node.getPath() ;
+        
+        String url = contentUrl;
+        if (node.isNodeType("nt:frozenNode")) {
+          String uuid = node.getProperty("jcr:frozenUuid").getString();
+          Node originalNode = node.getSession().getNodeByUUID(uuid);
+          url += originalNode.getPath() + "&version=" + node.getParent().getName();
+        } else {
+          url += node.getPath();
+        }
+        
         SyndEntry entry = new SyndEntryImpl();
 
         if (node.hasProperty(TITLE)) {
@@ -262,9 +271,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       feed.setEntries(entries);
 
       SyndFeedOutput output = new SyndFeedOutput();
-      String feedXML = output.outputString(feed);
-      feedXML = StringUtils.replace(feedXML,"&amp;","&");
-      return feedXML;
+      return output.outputString(feed);
     } catch (Exception e) {
       log.error("Error when perform generateRSS: ", e);
     }
