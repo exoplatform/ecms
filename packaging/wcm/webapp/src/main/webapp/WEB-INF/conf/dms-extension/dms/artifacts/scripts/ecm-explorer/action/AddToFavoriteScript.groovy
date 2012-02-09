@@ -27,7 +27,7 @@ import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.portal.webui.util.Util;
-
+import org.exoplatform.services.security.ConversationState;
 /**
  * Created by The eXo Platform SAS
  * Author : dongpd@exoplatform.com
@@ -56,9 +56,9 @@ public class AddToFavoriteScript implements CmsScript {
       // Get new added node
       session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService_.getCurrentRepository());
       Node addedNode = (Node) session.getItem(nodePath);
-
+      String userID = ConversationState.getCurrent().getIdentity().getUserId();
       // Add new node to favorite
-      favoriteService_.addFavorite(addedNode, Util.getPortalRequestContext().getRemoteUser());
+      favoriteService_.addFavorite(addedNode, userID);
     } catch (Exception e) {
       LOG.error("Add Favorite failed", e);
     }
