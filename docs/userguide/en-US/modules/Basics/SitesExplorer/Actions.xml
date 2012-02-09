@@ -3490,7 +3490,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" scalefit="1" fileref="images/localisedcontent.png" format="PNG"/>
+              <imagedata width="30mm" scalefit="1" fileref="images/localisedcontents.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Add/Edit localized content ]</phrase>
