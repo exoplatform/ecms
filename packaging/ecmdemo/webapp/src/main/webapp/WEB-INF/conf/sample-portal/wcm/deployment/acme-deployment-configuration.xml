@@ -379,10 +379,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/News/News1</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/News/News1</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/categories/acme</string>
             </field>
           </object>
         </object-param>
@@ -391,10 +391,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/News/News2</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/News/News2</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/categories/acme</string>
             </field>
           </object>
         </object-param>
@@ -403,10 +403,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/News/News3</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/News/News3</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/categories/acme</string>
             </field>
           </object>
         </object-param>
@@ -415,10 +415,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/News/News4</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/News/News4</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/categories/acme</string>
             </field>
           </object>
         </object-param>
@@ -427,10 +427,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/News/News1</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/News/News1</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/categories/acme/World</string>
+              <string>r${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/categories/acme/World</string>
             </field>
           </object>
         </object-param>
@@ -439,10 +439,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events/All/Products</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Products</string>
             </field>
           </object>
         </object-param>
@@ -451,10 +451,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events/All/Products</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Products</string>
             </field>
           </object>
         </object-param>
@@ -463,10 +463,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/mondial-expo-are-you-ready-for-the-future</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/mondial-expo-are-you-ready-for-the-future</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events/All/Releases</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Releases</string>
             </field>
           </object>
         </object-param>
@@ -475,10 +475,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events/All/Use Cases</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Use Cases</string>
             </field>
           </object>
         </object-param>
@@ -487,10 +487,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events/All</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All</string>
             </field>
           </object>
         </object-param>
@@ -499,10 +499,10 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
             </field>
             <field name="targetPath">
-              <string>repository:collaboration:/sites content/live/acme/events</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events</string>
             </field>
           </object>
         </object-param>
