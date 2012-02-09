@@ -1779,6 +1779,7 @@
       <selectTemplate>Sélectionner votre template dans la liste en dessous</selectTemplate>
       <ThumbnailView>Vignettes</ThumbnailView>
       <ListView>Liste de visualisation</ListView>
+      <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
   <!--

@@ -25,7 +25,9 @@ import java.util.Map;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -43,7 +45,8 @@ import org.exoplatform.webui.event.EventListener;
     template = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl",
     events = {
       @EventConfig(listeners = UISelectDocumentForm.ChangeViewActionListener.class),
-      @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class)
+      @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class),
+      @EventConfig(listeners = UISelectDocumentForm.CancelActionListener.class)
     }
 )
 public class UISelectDocumentForm extends UIContainer {
@@ -154,6 +157,21 @@ public class UISelectDocumentForm extends UIContainer {
       uiSelectForm.setTemplate(LIST_VIEW_TEMPLATE);
       }
       uiExplorer.updateAjax(event);
+    }
+  }
+  
+  static public class CancelActionListener extends EventListener<UISelectDocumentForm> {
+  public void execute(Event<UISelectDocumentForm> event) throws Exception {
+    UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+    if(uiExplorer != null) {
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      } else
+        uiExplorer.cancelAction();
+      uiExplorer.updateAjax(event);
+    }
     }
   }
 }

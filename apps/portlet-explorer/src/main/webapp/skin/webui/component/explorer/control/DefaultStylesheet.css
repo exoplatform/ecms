@@ -114,6 +114,22 @@
   padding: 2px 10px 0px 0px; /* orientation=rt */
 }
 
+.UIJCRExplorerPortlet .CancelNewDoc {
+  width: 25px;
+  height: 28px;
+  background: url('DefaultSkin/icons/cancel_select.png') no-repeat right top;
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
+  padding: 2px 0px 0px 10px; /* orientation=lt */
+  padding: 2px 10px 0px 0px; /* orientation=rt */
+/*  border-left: 1px solid #9F9F9F; */
+  margin-left: 5px;
+}
+
+.UIJCRExplorerPortlet .CancelNewDoc:hover {
+  background: url('DefaultSkin/icons/cancel_hover.png') no-repeat right top;
+}
+
 .UIJCRExplorerPortlet .SaveSessionButton {
   width: 24px;
   height: 24px;

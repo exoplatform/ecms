@@ -1772,6 +1772,7 @@
 			<selectTemplate>Select your template in the list below</selectTemplate>
 			<ThumbnailView>Thumbnail View</ThumbnailView>
       		<ListView>List View</ListView>
+      		<Cancel>#{word.cancel}</Cancel>
 		</label>
 	</UISelectDocumentForm>
 	<!--
