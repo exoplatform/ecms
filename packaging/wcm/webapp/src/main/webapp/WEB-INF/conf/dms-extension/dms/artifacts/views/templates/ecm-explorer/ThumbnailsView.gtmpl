@@ -197,7 +197,10 @@
 							<div class="NodeLabel">
 								<div class="ThumbnailImage">
                   <%
-									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + data.getPath() + "/?reloadnum=" + Math.random();
+                    def encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "utf-8");
+                    encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
+                    
+									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + encodedPath;
 									%>
 							    <div style="display: block;" class="LoadingProgressIcon">
 							        <%if(uicomponent.isSymLink(data)) {%>
