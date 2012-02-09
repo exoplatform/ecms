@@ -25,36 +25,36 @@
         <fr>Tiếng Pháp</fr>
         <ru>Tiếng Nga</ru>
         <vi>Tiếng Việt Nam</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <nl>Tiếng Hà Lan</nl>
+        <de>Tiếng Đức</de>
+        <uk>Tiếng Ucraina</uk>
+        <ar>Tiếng Ả Rập</ar>
       </option>
     </label>
 	<tip>
-		<priority>Valid values range from 0.0 to 1.0</priority>
+		<priority>Giá trị hợp lệ từ 0.0 đến 1.0</priority>
 	</tip>  
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Cập nhật</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+      <repository-exception>Có lỗi xảy ra trên hệ thộng. Không thể cập nhật được dữ liệu.</repository-exception>	
     </msg>
   </UISEOForm>
   <UISEOPopupWindow>
   	<title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>Quản lý SEO</UISEOForm>
   	</title>
   </UISEOPopupWindow>
   <UISEOToolbarForm>
   	<title>
-      <seo>SEO Management</seo>
+      <seo>Quản lý SEO</seo>
   	</title>
   </UISEOToolbarForm>
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>
+      <Invalid-number>Trường {0} chỉ nhận giá trị số kiểu float.</Invalid-number>
     </msg>
   </FloatNumberValidator> 
 </bundle>

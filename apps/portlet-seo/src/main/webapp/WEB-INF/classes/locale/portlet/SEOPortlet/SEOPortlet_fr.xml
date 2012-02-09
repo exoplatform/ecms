@@ -2,26 +2,26 @@
 <bundle>
   <UISEOForm>
     <label>
-	  <title>Title: </title>
+      <title>Titre: </title>
       <description>Description: </description>
-      <keywords>Keywords: </keywords>
-      <language>Language: </language>
+      <keywords>Mots clés: </keywords>
+      <language>Langue: </language>
       <robots>Robots: </robots>
       <sitemap>Sitemap: </sitemap>
-      <sitemapvisible>Visible in sitemap</sitemapvisible>
-      <priority>Priority: </priority>
-      <frequency>Frequency: </frequency>  
+      <sitemapvisible>Visible dans le sitemap</sitemapvisible>
+      <priority>Priorité: </priority>
+      <frequency>Fréquence: </frequency>  
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Always>Toujours</Always>
+        <Hourly>Toutes les heures</Hourly>
+        <Daily>Journalier</Daily>
+        <Weekly>Hebdomadaire</Weekly>
+        <Monthly>Mensuel</Monthly>
+        <Yearly>Annuel</Yearly>
+        <Never>Jamais</Never>
       </option>    
       <option>
-      	<en>English</en>
+        <en>English</en>
         <fr>French</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
@@ -31,30 +31,30 @@
         <ar>Arabic</ar>
       </option>
     </label>
-	<tip>
-		<priority>Valeurs valides se rangent de 0.0 à 1.0.</priority>
-	</tip>  
+    <tip>
+        <priority>Valeurs valides de 0.0 à 1.0.</priority>
+    </tip>  
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Sauvegarder</Save>
+      <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+      <repository-exception>Une erreure inattendue est apparue! Sauvegarde impossible des métadonnées.</repository-exception>   
     </msg>
   </UISEOForm>
   <UISEOPopupWindow>
-  	<title>
+    <title>
       <UISEOForm>SEO Management</UISEOForm>
-  	</title>
+    </title>
   </UISEOPopupWindow>
   <UISEOToolbarForm>
-  	<title>
+    <title>
       <seo>SEO Management</seo>
-  	</title>
+    </title>
   </UISEOToolbarForm>
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>
+      <Invalid-number>Le champ '{0}' est un nombre invalide (float).</Invalid-number>
     </msg>
   </FloatNumberValidator> 
 </bundle>

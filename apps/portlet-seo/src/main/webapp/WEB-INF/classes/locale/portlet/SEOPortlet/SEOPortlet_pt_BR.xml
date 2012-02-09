@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>   
+      <description>Descrição: </description>
+      <keywords>Palavras chave: </keywords>
+      <language>Idioma: </language>
+      <robots>Robos: </robots>
+      <sitemap>Mapa do site: </sitemap>
+      <sitemapvisible>Vísivel no mapa do site</sitemapvisible>
+      <isInherited>Herdado da página pai</isInherited>
+      <priority>Prioridade: </priority>
+      <frequency>Frequência: </frequency>  
+      <option>
+        <Always>Sempre</Always>
+        <Hourly>Hora</Hourly>
+        <Daily>Diária</Daily>
+        <Weekly>Semanal</Weekly>
+        <Monthly>Mensal</Monthly>
+        <Yearly>Anual</Yearly>
+        <Never>Nunca</Never>
+      </option> 
+    </label>
+    <tip>
+        <priority>Valores válidos de 0.0 a 1.0</priority>
+    </tip>        
+    <action>
+      <Save>Salvar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Ocorreu um erro inesperado enquanto salvava a página metadata.</repository-exception>   
+    </msg>
+    <help> 
+        <priority>A prioridade desta URL relacionada a outras URLs do seu site. Os valores válidos são de 0.0 a 1.0. Este valor não afeta como suas páginas são comparadas com as páginas de outros sites, este valor apenas informa aos mecanismos de buscas como suas páginas são priorizadas pelos buscadores. A prioridade padrão é 0.5.</priority>
+    </help>   
+  </UISEOForm>
+  <UISEOPopupWindow>
+    <title>
+      <UISEOForm>Administração SEO</UISEOForm>
+    </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+    <title>
+      <seo>Administração SEO</seo>
+    </title>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>O valor do campo prioridade deve ser no formato numérico. Os valores válidos são de 0.0 a 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+</bundle>
