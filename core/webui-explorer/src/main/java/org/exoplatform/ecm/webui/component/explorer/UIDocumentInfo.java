@@ -154,6 +154,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private static final String   YES                                = "YES";
 
   final private static String   COMMENT_COMPONENT                  = "Comment";
+  
+  final private static String   Contents_Document_Type             = "Content";
 
   final private static String   CATEGORY_ALL                       = "All";
 
@@ -1027,7 +1029,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
     return (allItemsByTypeFilterSet.size() > 0 || allItemsFilterSet.size() > 0);
   }
-
+  
   private boolean filterOk(Node node) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 
@@ -1050,27 +1052,31 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 */
 
     //By types
-    for (String documentType : allItemsByTypeFilterSet) {
-      boolean found = false;
-      if (documentTypeService.isContentsType(documentType)) {
-        for (String documentNodeType : templateService.getAllDocumentNodeTypes())
-          if (node.isNodeType(documentNodeType)) {
-            found = true;
-            break;
-          }
-      }
-      if (!found)
+    if(allItemsByTypeFilterSet.isEmpty())
+      return true;
+    boolean found = false;
+    try {
+      for (String documentType : allItemsByTypeFilterSet) {
         for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
           if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
             found = true;
             break;
           }
         }
-      if (!found)
-        return false;
-    }
+      }
+    } catch (PathNotFoundException ep) {
+      // Cannot found the node path in the repository. We will continue filter by content type in the next block code.
+  }
 
-    return true;
+    if(!found && allItemsByTypeFilterSet.contains(Contents_Document_Type)) {
+      for(String contentType:templateService.getAllDocumentNodeTypes()){
+        if (contentType.equals(node.getPrimaryNodeType().getName())){
+          found=true;
+          break;
+        }
+      }
+    }
+    return found;
   }
 
   static public class ViewNodeActionListener extends EventListener<UIDocumentInfo> {
