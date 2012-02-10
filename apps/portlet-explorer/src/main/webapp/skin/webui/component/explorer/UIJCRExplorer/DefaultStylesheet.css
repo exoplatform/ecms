@@ -859,6 +859,9 @@
 	padding: 10px;
 }
 
+.UIJCRExplorerPortlet .UISimpleSearch .UIFormGrid{
+ table-layout: fixed;
+}
 /*================================UIJCRAdvancedSearch=================================*/
 
 .UIJCRExplorerPortlet .UIJCRAdvancedSearch .FormContainer {
