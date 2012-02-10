@@ -40,7 +40,7 @@
           <%
             } else if (uicomponent.iconType.equals("BlueDownArrow")) {
           %>
-          <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.typeDESC")%>" />
+          <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UIShowAllHiddenResult.title.typeDESC")%>">
             <%=_ctx.appRes("UIShowAllHiddenResult.header.type")%>
             <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIShowAllHiddenResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon" />
           </div>
