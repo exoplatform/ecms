@@ -133,6 +133,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
   final static String         TEMP_NODE            = "temp";
 
   private static final String MIX_REFERENCEABLE    = "mix:referenceable";
+  
+  private static final String MIX_COMMENTABLE ="mix:commentable";
 
   private static final String COUNTRY_VARIANT      = "_";
   /**
@@ -610,6 +612,9 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
           newLanguageNode = languagesNode.getNode(defaultLanguage) ;
         } catch(PathNotFoundException pe) {
           newLanguageNode = languagesNode.addNode(defaultLanguage) ;
+          if (newLanguageNode.canAddMixin(MIX_COMMENTABLE)) {
+            newLanguageNode.addMixin(MIX_COMMENTABLE);
+          }
         }
         oldJcrContent.setProperty(JCR_MIMETYPE, mimeType) ;
         oldJcrContent.setProperty(JCRDATA, value) ;
@@ -620,6 +625,9 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
           newLanguageNode = languagesNode.getNode(language) ;
         } catch(PathNotFoundException pe) {
           newLanguageNode = languagesNode.addNode(language) ;
+          if (newLanguageNode.canAddMixin(MIX_COMMENTABLE)) {
+            newLanguageNode.addMixin(MIX_COMMENTABLE);
+          }
           if(languagesNode.canAddMixin("exo:hiddenable"))
             languagesNode.addMixin("exo:hiddenable");
         }

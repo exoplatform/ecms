@@ -35,6 +35,7 @@ import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
 /**
@@ -180,9 +181,9 @@ public class CommentsServiceImpl implements CommentsService {
     }
     if(!languageNode.hasNode(COMMENTS)) return new ArrayList<Node>() ;
     Session session = document.getSession();
-    ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
-    Session systemSession = repository.getSystemSession(session.getWorkspace().getName()) ;
+    Session systemSession = WCMCoreUtils.getSystemSessionProvider().getSession(session.getWorkspace().getName(),
+                                                                               WCMCoreUtils.getRepository()) ;
     List<Node> list = new ArrayList<Node>() ;
     try {
       commentsNode = (Node)systemSession.getItem(languageNode.getPath() + "/" + COMMENTS) ;
@@ -196,8 +197,6 @@ public class CommentsServiceImpl implements CommentsService {
       commentsCache_.put(commentsNode.getPath(),list) ;
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to get comments", e);
-    } finally {
-      systemSession.logout();
     }
     return list;
   }
