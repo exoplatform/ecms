@@ -117,9 +117,11 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   private boolean flagSelect = false;
 
   public UIJCRExplorerPortlet() throws Exception {
-    UIJcrExplorerContainer explorerContainer = addChild(UIJcrExplorerContainer.class, null, null);
-    explorerContainer.initExplorer();
-    addChild(UIJcrExplorerEditContainer.class, null, null).setRendered(false);
+    if (Util.getPortalRequestContext().getRemoteUser() != null) {
+      UIJcrExplorerContainer explorerContainer = addChild(UIJcrExplorerContainer.class, null, null);
+      explorerContainer.initExplorer();
+      addChild(UIJcrExplorerEditContainer.class, null, null).setRendered(false);
+    }
   }
 
   public boolean isFlagSelect() { return flagSelect; }
@@ -151,6 +153,13 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     return backTo;
   }
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+    if (Util.getPortalRequestContext().getRemoteUser() == null) {
+      ((PortletRequestContext)context).getWriter().write(
+        String.format("<p style='text-align:center'>%s</p>",
+        context.getApplicationResourceBundle().getString("UIJCRExplorerPortlet.msg.anonymous-access-denied")));
+      return;
+    }
+    
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
     PortletRequestContext portletReqContext = (PortletRequestContext) context ;

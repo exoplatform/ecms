@@ -3375,6 +3375,7 @@
   <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>Lỗi truy cập file!</file-access-denied>
+	  <anonymous-access-denied>Người dùng nặc danh không có quyền sử dụng chức năng này.</anonymous-access-denied>
 	</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
