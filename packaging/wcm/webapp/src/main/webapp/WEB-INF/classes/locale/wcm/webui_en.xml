@@ -305,10 +305,9 @@
       <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
-      <node-locked>The path element (0) or one of its parents is locked.</node-locked>
+      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
       <userOrGroup-required>You must select a user or a group.</userOrGroup-required>
       <checkbox-require>You must set rights.</checkbox-require>
-      <node-locked>The item with the path {0} or the upper level is locked.</node-locked>
       <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
