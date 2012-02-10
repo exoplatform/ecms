@@ -98,7 +98,7 @@
 		        				<td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%></label></td>
 		          				<td class="FieldComponent">
 		            			<%
-			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null","validate=name,empty"] ;
+			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "options=noSanitization", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null","validate=name,empty"] ;
 			              	 		uicomponent.addTextField("name", webContentFieldName) ; 
 			              	 		String[] cssFolder = ["jcrPath=/node/css", "nodetype=exo:cssFolder", "defaultValues=css"] ;
 			              	 		String[] jsFolder = ["jcrPath=/node/js", "nodetype=exo:jsFolder", "defaultValues=js"] ;
@@ -121,7 +121,7 @@
 								<td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%></label></td>
 							  	<td class="FieldComponent">
 								<%
-							        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
+							        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "options=noSanitization", "validate=empty", "editable=if-null"];
 							        uicomponent.addTextField("title", webContentFieldTitle) ;
 							    %>
 								</td>

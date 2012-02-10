@@ -4,7 +4,7 @@
   import org.exoplatform.ecm.webui.utils.Utils ;
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIPopupWindow;
-  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.services.jcr.RepositoryService;  
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -70,7 +70,7 @@
         %>
         <a onclick="javascript:window.open('$strURL');" style="cursor:pointer">
         <%}%>
-        <%=node.getProperty("exo:title").getString()%>
+        <%=Utils.getTitle(node)%>
         <%if(node.hasProperty("exo:url")) { %>
         </a>
         <%}%>           

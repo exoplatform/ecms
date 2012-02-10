@@ -145,8 +145,7 @@
 							  	}
 							  }
 							  //End WebDav Action
-		          }
-              String subName ;
+		          }              
               List customActs = uicomponent.getCustomActions(data) ;
               Parameter[] params  ;
               if(customActs.size() > 0) {            
@@ -217,13 +216,9 @@
 							        <%}%>
 							    </div>
 								</div>
-							</div>
-			        <%
-			          if(title.length() < 20) subName = title ;
-			          else subName = title.substring(0,15) + "..." ;
-			        %>
-			        <div class="ActionIconLabel" style="width: auto;">
-			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><%=subName%></a>
+							</div>			        
+			        <div class="ActionIconLabel" style="width: auto; overflow: hidden;">
+			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><%=title%></a>
 			        </div>
 			      </div>
 			      $strActs

@@ -679,7 +679,8 @@ public class Utils {
     if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
       if (orgNode.hasProperty(propertyName)) {
         try {
-          return orgNode.getProperty(propertyName).getString() ;
+        	if(propertyName.equals(Utils.EXO_TITLE))
+        		return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString())) ;        	
         } catch (Exception e) {
           return defaultValue;
         }

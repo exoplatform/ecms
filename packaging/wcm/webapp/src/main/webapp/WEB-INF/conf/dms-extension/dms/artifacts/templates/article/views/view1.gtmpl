@@ -28,7 +28,7 @@
 			<div class="ArticleTLDecorator">
 				<div class="ArticleTRDecorator">
 					<div class="ArticleTCDecorator">
-		        <div class="TitleLabel" title="<%=node.getProperty("exo:title").getString()%>">
+		        <div class="TitleLabel" title="<%=Utils.getTitle(node)%>">
 		          <% print uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "GtmplTitle", "GtmplTitle", true); %>
 		        </div>
 	        </div>

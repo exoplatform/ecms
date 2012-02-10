@@ -127,7 +127,7 @@
 	      <td class="FieldLabel"><label for="feed-name"><%=_ctx.appRes("Rss.dialog.label.feed-node-name")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		         String[] fieldFeedName = ["jcrPath=/node/exo:feedName"] ;
+		         String[] fieldFeedName = ["jcrPath=/node/exo:feedName", "options=noSanitization"] ;
 		         uicomponent.addTextField("feed-name", fieldFeedName) ; 
 		      %>
 		    </td>
@@ -157,7 +157,7 @@
 	      <td class="FieldLabel"><label for="title"><%=_ctx.appRes("Rss.dialog.label.title")%></label></td>
 	      <td class="FieldComponent">
 		      <% 
-		         String[] title = ["jcrPath=/node/exo:title", "validate=empty", "exo:title"] ;
+		         String[] title = ["jcrPath=/node/exo:title", "options=noSanitization", "validate=empty", "exo:title"] ;
 		         uicomponent.addTextField("title", title) ;
 		      %>
 		    </td>
