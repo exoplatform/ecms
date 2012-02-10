@@ -26,12 +26,12 @@
       <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
-        <title>Title</title>
-        <dateCreated>Created Date</dateCreated>
-        <dateModified>Modified Date</dateModified>
-        <liveDate>Published Date</liveDate>
-        <startEvent>Event Date</startEvent>
-        <index>Index</index>
+        <exo:title>Title</exo:title>
+        <exo:dateCreated>Created Date</exo:dateCreated>
+        <exo:dateModified>Modified Date</exo:dateModified>
+        <publication:liveDate>Published Date</publication:liveDate>
+        <exo:startEvent>Event Date</exo:startEvent>
+        <exo:index>Index</exo:index>
       </option>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
