@@ -9,7 +9,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 	curInstance = editor.name;
 	var title = '';
 	return {
-		title : 'InsertPortalLink',
+		title : editor.lang.WCMInsertPortalLinkDialogTitle,
 		minWidth : 390,
 		minHeight : 230,
 		contents : [
@@ -85,7 +85,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 									'<tbody>' +
 										'<tr>' +
 											'<td class="FieldLabel">'+
-												'<label for="inputTitle">Title: </label>'+
+												'<label for="inputTitle">' + editor.lang.WCMInsertPortalLinkInputTitle + '</label>'+
 											'</td>'+
 											'<td colspan="2" class="FieldComponent">'+
 												'<input type="text" id="inputTitle" value="'+ title +'" />'+
@@ -93,7 +93,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 										'</tr>'+
 										'<tr>'+
 											'<td class="FieldLabel">'+
-												'<label style="float: left; margin-bottom: 3px; margin-top: 3px;">URL: </label>'+
+												'<label style="float: left; margin-bottom: 3px; margin-top: 3px;">' + editor.lang.WCMInsertPortalLinkInputUrl + '</label>'+
 											'</td>'+
 											'<td class="FieldComponent">'+
 												'<input style="float: left; margin-bottom: 3px; margin-top: 3px;" type="text" id="txtUrl" />'+
@@ -110,7 +110,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 																				'<div class="ButtonMiddle">'+
 																					'<label>'+
 																						'<a src="http://www.w3.org/1999/xhtml">'+
-																							'Get portal link'+
+																							editor.lang.WCMInsertPortalLinkButtonGet +
 																						'</a>'+
 																					'</label>'+
 																				'</div>'+
@@ -138,7 +138,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 					              						'<div class="ButtonMiddle">'+
 					              							'<label >'+
 																				'<a src="http://www.w3.org/1999/xhtml">'+
-																					'Preview'+
+																					editor.lang.WCMInsertPortalLinkButtonPreview +
 																				'</a>'+
 																			'</label>'+
 					              						'</div>'+
@@ -151,7 +151,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 					              						'<div class="ButtonMiddle">'+
 					                						'<label fcklang="WCMInsertPortalLinkButtonSave">'+
 																				'<a src="http://www.w3.org/1999/xhtml">'+
-																					'Save'+
+																					editor.lang.WCMInsertPortalLinkButtonSave +
 																				'</a>'+
 																			'</label>'+
 					              						'</div>'+

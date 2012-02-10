@@ -13,6 +13,7 @@ CKEDITOR.editorConfig = function( config ){
 	config.resize_enabled = false; // config to disable editor resizing in CKEDITOR
 	config.extraPlugins = 'content,insertGadget,insertPortalLink';
 	config.toolbarCanCollapse = false;
+	config.language = eXo.env.portal.language || 'en';
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
 		['Source','Templates'],

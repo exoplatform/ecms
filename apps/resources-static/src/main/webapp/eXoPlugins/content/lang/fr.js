@@ -37,3 +37,8 @@ var UserLanguage = {
 	LabelAlert						: 	"Veuillez choisir un fichier avant l'upload",
 	LabelName						: 	"Nom"
 }
+
+CKEDITOR.plugins.setLang( 'content', 'fr',
+{ 
+  WCMInsertContentPlugins        : 'Insérer un lien contenu'
+} );

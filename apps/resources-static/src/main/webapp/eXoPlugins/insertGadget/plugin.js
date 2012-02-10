@@ -1,12 +1,13 @@
 CKEDITOR.plugins.add('insertGadget',
 	{
+		lang : ['en','fr','vi'],
 		init : function(editor) {
 			var pluginName = 'insertGadget';
 			var mypath = this.path;	
 			editor.ui.addButton(
 				'insertGadget.btn',
 				{
-					label : "WCM Insert Gadget",
+					label : editor.lang.WCMInsertGadgetPlugins,
 					command : 'gadget.cmd',
 					icon : mypath + '/images/insertGadget.gif'
 				}

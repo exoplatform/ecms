@@ -1,12 +1,13 @@
 CKEDITOR.plugins.add('content',
 	{
+    lang : ['en','fr','vi'],
 		init : function(editor) {
 			var pluginName = 'content';
 			var mypath = this.path;	
 			editor.ui.addButton(
 				'content.btn',
 				{
-					label : "Insert Content Link",
+					label : editor.lang.WCMInsertContentPlugins,
 					command : 'content.cmd',
 					icon : mypath + '/images/content.jpg'
 				}

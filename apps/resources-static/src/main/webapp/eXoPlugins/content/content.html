@@ -22,9 +22,7 @@
 			var CKEDITOR = window.opener.CKEDITOR || {};
 			eXp.init();      
 			eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
-			window.onload = function() {
-				eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
-			}
+    		eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
 			var strHTML = "";   
 			if(eXo.ecm.ECS.insertContentType=="Image") {
 				strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
@@ -365,10 +363,10 @@
 <div class="Mask" id="Mask"></div>
 <div class="PopupContainer"  id="PopupContainer"></div>
 <script type="text/javascript">
-	window.onload = function(){
-		eXo.ecm.ECS.initRequestXmlTree('editor');
-		eXo.ecm.ECS.languageInit();
-	};
+    window.onload = function(){
+	  eXo.ecm.ECS.initRequestXmlTree('editor');
+      eXo.ecm.ECS.languageInit();
+    };
 </script>
 </body>
 </html>

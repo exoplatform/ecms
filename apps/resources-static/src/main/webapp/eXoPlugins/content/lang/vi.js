@@ -38,3 +38,8 @@ var UserLanguage = {
 	LabelName						: 	"Tên",
 	LabelAlert						: 	"Hãy chọn file trước khi upload"
 }
+
+CKEDITOR.plugins.setLang( 'content', 'vi',
+{ 
+  WCMInsertContentPlugins        : 'Chèn Liên kết nội dung'
+} );

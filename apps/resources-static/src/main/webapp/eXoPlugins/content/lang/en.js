@@ -36,4 +36,9 @@ var UserLanguage = {
 	LabelFolder							: 	"Folder",
 	LabelAlert							: 	"Please choose a file before upload",
 	LabelName							: 	"Name"
-}
+};
+
+CKEDITOR.plugins.setLang( 'content', 'en',
+{ 
+  WCMInsertContentPlugins        : 'Insert Content Link'
+} );

@@ -1,2 +1,5 @@
-FCKLang.WCMInsertGadgetPlugins = "Insert gadgets";
-FCKLang.WCMInsertGadgetDialogTitle = "Insert gadgets";
+CKEDITOR.plugins.setLang( 'insertGadget', 'en',
+{ 
+  WCMInsertGadgetPlugins        : 'Insert gadgets',
+  WCMInsertGadgetDialogTitle    : 'Insert gadgets'
+} );

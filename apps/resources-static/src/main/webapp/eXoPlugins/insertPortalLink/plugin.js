@@ -1,11 +1,12 @@
 CKEDITOR.plugins.add( 'insertPortalLink',
 {
 	requires : [ 'dialog' ],
+	lang : ['en','fr','vi'],
 	init : function( editor )
 	{
 		editor.ui.addButton( 'insertPortalLink.btn',
 		{
-			label : 'InsertPortalLink',
+			label : editor.lang.WCMInsertPortalLinkPlugins,
 			command : 'insertPortalLink.cmd',
 			icon : this.path + 'images/insertPortalLink.gif'
 		});
