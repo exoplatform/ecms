@@ -90,11 +90,11 @@
 	              </div>
 	              <div class="LeftHomeTab">
 	                <div class="RightHomeTab">
-	                  <div class="MiddleHomeTab">
+	                  <div class="MiddleHomeTab ClearFix">
 	                  	<div class="LeftIcon CBHome16x16Icon" title="<%= _ctx.appRes( componentName  +".title.home") %>"><span></span></div>
 	                    <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(rootNode.getPath()))%>" ><%= _ctx.appRes(componentName + ".label.home") %></a>
 	                    <div class="RightIcon CBDropDownArrow16x16Icon" onmouseup="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2)"><span></span></div>
-	                    <div class="ClearBoth"><span></span></div>
+	                    
 	                  </div>
 	                </div>
 	              </div>
@@ -112,12 +112,12 @@
 	                    <div class="$className"> 
 	                      <div class="LeftTab">
 	                        <div class="RightTab">
-	                          <div class="MiddleTab">
+	                          <div class="MiddleTab ClearFix">
 	                          	<div class="Icon CBDefaultFolder16x16Icon"><span></span></div>
 	                            <div class="LabelButton">                            	
 	                              <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(tab) + "&workspace=" + currentNode.getSession().getWorkspace().getName());%>">$tabName</a>
 	                            </div>
-	                            <div style="clear:left;"><span></span></div>
+	                            
 	                          </div>
 	                        </div>
 	                      </div>
@@ -129,7 +129,7 @@
 								<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
 									<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 								</div>
-					  		<!--<div style="clear:both"><span></span></div>-->
+					  		
 							</div>                  
 	          </div>
 	          <div class="UICBSubNavigation">
@@ -153,7 +153,7 @@
 												<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
 													<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 												</div>
-					              <!--<div style="clear:both"><span></span></div>-->
+					              
 					            </div>
 					          </div>
 				          </div> 
@@ -166,14 +166,16 @@
 	  
 	  <%/*Begin UIEventViewer*/%>
 	  <div class="UIEventViewer">
+	  	<div class="ClearFix">
 	  	<%if(hasNoDocument){%>
+	  	<div class="ClearFix">
 	    <div class="UISubContent">
 	      <div class ="UIDocumentContentInfo">
 	        <div class="NoneDocumentMessage">
-	          <div class="MessageContainer">
+	          <div class="MessageContainer ClearFix">
 	            <div class="Info16x16Icon"><span></span></div>
 	            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
-	            <div style="clear:left;"><span></span></div>
+	            
 	          </div>
 	        </div>
 	      </div>  
@@ -226,19 +228,19 @@
 	      %>
 	    </div>
 	    <%if(isShowAllDoc) {%>
-	    <div class="ViewPreviousDocument"> 
+	    <div class="ViewPreviousDocument ClearFix"> 
 	      <div class="BackIcon"><span></span></div>
 	      <a href="<%=uicomponent.event('Back')%>">
 	      	<%=_ctx.appRes(componentName + ".label.previous")%>
 	      </a>
-	      <div style="clear:left"><span></span></div>
+	      
 	    </div>
-	    <div style="clear:left"><span></span></div>
+	    </div>
 	    <%}%>
 	    <% if(totalPages>1){ %>
 	    <div class="DocumentsPageIterator"><%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%></div>
 	    <% } %>
-	    <div class="clearLeft"><span></span></div>
+	    </div>
 	    <%}%>
 	    <%if(!isShowAllDoc) {/*Begin UISubContent*/%>
 	        <div class="UISubContent" >
@@ -288,7 +290,7 @@
 																	<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs")%>"><!--<span></span>-->
 																		<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 																	</div>
-										              <!--<div style="clear:both"><span></span></div>-->
+										              
 										            </div>                  
 		                   			</div>                   		
 		                   		</div>
@@ -320,7 +322,7 @@
 	                      %>
 	                            <tr>
 	                              <td>
-	                                <div class="DocumentInfo">
+	                                <div class="DocumentInfo ClearFix">
 	                                  <div class="DocNodeIcon CBDefaultDocument16x16Icon $icon">
 	                                    <%if(Utils.isSymLink(doc)) {%>
 	                                      <div class="LinkSmall"></div>
@@ -329,7 +331,7 @@
 	                                  <div class="DocumentLabel">
 	                                    <a href="$docActionLink"><%=docName%></a>
 	                                  </div>
-	                                  <div style="clear:both"><span></span></div>  
+	                                  
 	                                </div>
 	                              </td>
 	                              <td>
@@ -345,14 +347,14 @@
 				                              if(!(docChilds.size() < itemPerBlock)) {
 				                              	String label = componentName + ".label.more" ;
 				                             %>
-				                             	<div class="ViewMoreDocument">
+				                             	<div class="ViewMoreDocument ClearFix">
 				                                	<div class="NextIcon"><span></span></div>
 				                                	<a href="$subCatLink">
 																						<%=_ctx.appRes(label)%>
 																					</a>
-				                                	<div style="clear: left;"><span></span></div>                               
+				                                	                              
 				                            	</div>
-				                          		<div style="clear:right"><span></span></div>
+				                          		
 				                             <% 	
 				                              }
 				                            %>

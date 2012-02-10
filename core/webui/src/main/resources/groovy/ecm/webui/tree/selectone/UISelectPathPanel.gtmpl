@@ -12,6 +12,7 @@
 	import java.net.URLEncoder;
 	import org.exoplatform.services.jcr.util.Text;
 %>
+<div class=" ClearFix">
 <div id="$uicomponent.id" class="UITreeList">
   <table class="UIGrid">
 	  <col></col>
@@ -79,4 +80,4 @@
   </div>
   <% } %>
 </div>
-<div class="ClearLeft"><span></span></div>
+</div>

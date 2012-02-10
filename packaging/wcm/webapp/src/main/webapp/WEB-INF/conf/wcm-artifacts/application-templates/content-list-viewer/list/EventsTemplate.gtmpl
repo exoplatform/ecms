@@ -23,7 +23,7 @@
     def isShowLink = uicomponent.isShowField(UIPCLVPortlet.SHOW_LINK);
     def isShowReadmore = uicomponent.isShowField(UIPCLVPortlet.SHOW_READMORE);
 			%>
-			<div class="TopBoxParameterized">
+			<div class="TopBoxParameterized ClearFix">
         <% if (isShowHeader) { %>
 				<div class="Title">
 					<div class="Header">$header</div>
@@ -32,13 +32,13 @@
 				<%
 					if (isShowRSSLink) {
 						%>
-            <div class="RssBar">
-	  					<a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer">RSS Feed</a>
-            </div>
+	            <div class="RssBar">
+		  					<a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer">RSS Feed</a>
+	            </div>
 						<%
 					}
 				%>
-				<div class="ClearBoth"><span></span></div>
+				
 			</div>
 			<div class="CaptionItem">
 				<% 
@@ -70,7 +70,7 @@
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
 								%>
-									<div class="NormalNews">
+									<div class="NormalNews ClearFix">
 										<% 
 											if (isShowIllustrationImg) {
 												%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" src="$imgSrc" /></a><%
@@ -107,7 +107,7 @@
 												} 
 											%>
 										</div>
-										<div style="clear: both;"><span></span></div>
+										
 									</div>
 									<% if (isShowReadmore) {
 											  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div>

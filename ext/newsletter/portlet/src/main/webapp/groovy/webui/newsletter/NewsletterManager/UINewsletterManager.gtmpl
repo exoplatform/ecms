@@ -6,16 +6,17 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 
 	<div class="UINewsletterPortlet">
 	<% uiform.begin() %>
-			<div class="BreadCumbs">
-				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
+		<div class="ClearFix">
+		<div class="BreadCumbs">
+			<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
 					eXo Newsletter
-				</a>
-				>
-				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
+			</a>
+			>
+			<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
 					<%=uicomponent.categoryConfig.getTitle()%>
-				</a>
-				>
-				<a class="ItemContent"><%=uicomponent.subscriptionConfig.getTitle()%></a>
+			</a>
+			>
+			<a class="ItemContent"><%=uicomponent.subscriptionConfig.getTitle()%></a>
 		 </div>
 		
 		 <div class="UIAction" style="float:left; margin-left: 20px; height: 35px;"> 
@@ -27,11 +28,11 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 				</div>
   	  		</div>
 		</div>
-		<div style="clear:left"><span></span></div>
+		</div>
 		<div class="UICategories">
 			<div style="width:100%;">
 				<!-- Subscription infor -->
-				<div style="width:100%;height:30px;line-height:30px;">
+				<div class=" ClearFix" style="width:100%;height:30px;line-height:30px;">
 					<div style="float:left;">
 						<strong><%=uicomponent.subscriptionConfig.getTitle() %></strong>:
 						<%=uicomponent.subscriptionConfig.getDescription() %>
@@ -99,7 +100,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 						
 					<!-- end action of this category -->
 					
-					<div style="clear:both;"><span></span></div>
+					
 				</div>
 				
 				

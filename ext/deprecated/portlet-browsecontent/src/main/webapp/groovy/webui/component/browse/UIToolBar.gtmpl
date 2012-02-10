@@ -9,7 +9,7 @@
   Boolean isEnableSearch = uicomponent.enableSearch() ;
   Node root = uicomponent.getRootNode() ;
 %>
-<div class="UIToolBar" id="$uicomponent.id">
+<div class="UIToolBar ClearFix" id="$uicomponent.id">
 
     <div class="SeparatorBarLeft Separator"><span></span></div>      
 	<%
@@ -62,7 +62,7 @@
 
     <%}%> 
 
-	<div class="CBActionContainer">
+	<div class="CBActionContainer ClearFix">
     <%
       String actionLabel = "" ;
       String link = "" ;
@@ -98,7 +98,7 @@
 	    	<a class="Icon Style1BackArrow24x24Icon" href="$link" title="$actionLabel"><span></span></a>   
 	    <%}%>   
  	 	<div class="SeparatorLine"><span></span></div>
-    <div class="ClearLeft"><span></span></div>
+    
   </div>
-  <div class="ClearBoth"><span></span></div>
+
 </div>

@@ -2,12 +2,12 @@
 <div class="BarContent">
 	<div class="BarContentL">
 		<div class="BarContentR">
-			<div class="BarContentM">
-		    <div class="Title">Hello Side Bar Extension</div>
-		  	<div class="TagExplorer" 
+			<div class="BarContentM ClearFix">
+		    	<div class="Title">Hello Side Bar Extension</div>
+		  		<div class="TagExplorer" 
 		  			 title="Hello Side Bar"
 		  			 onclick="" ><span></span></div>
-		  	<div class="ClearLeft"><span></span></div>
+		  	
 		  </div>
 		</div>
 	</div>

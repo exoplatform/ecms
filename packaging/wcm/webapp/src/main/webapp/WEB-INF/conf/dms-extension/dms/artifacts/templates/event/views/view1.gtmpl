@@ -26,7 +26,7 @@
 	 if(node.hasProperty("exo:title")) {
 	%>
 		<div class="UIArticle">
-
+		<div class="ClearFix">
       <%if(node.hasProperty("exo:endEvent")) {
         Calendar cal = node.getProperty("exo:endEvent").getDate();
         def day = cal.get(Calendar.DAY_OF_MONTH);
@@ -76,7 +76,7 @@
         <%}%>           
 			</div>
 			
-			<div style="clear:both"></div>
+			</div>
 												
 			<div class="ArticleFrame">
         <% if(node.hasProperty("exo:summary")) { %>
@@ -113,11 +113,11 @@
 				  <div class="TopLeftArticleFrame">
 				    <div class="TopRightArtictleFrame">
 				      <div class="TopCenterArticleFrame">
-				        <div class="ArticleField">
-		              <div class="FieldIcon SummaryIcon"><span></span></div>
-		              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
-		              <div style="clear: left;"><span></span></div>
-                </div>
+				        <div class="ArticleField ClearFix">
+			              <div class="FieldIcon SummaryIcon"><span></span></div>
+			              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
+			              
+	                	</div>
 				      </div>
 				    </div>
 				  </div>
@@ -166,13 +166,13 @@
         <div style="height: 10px;"><span></span></div>
         <div class="ArticleFrame">
 				  <div class="TopLeftArticleFrame">
-				    <div class="TopRightArtictleFrame">
+				    <div class="TopRightArtictleFrame ClearFix">
 				      <div class="TopCenterArticleFrame">
 			          <div class="ArticleField">
 		              <div class="FieldIcon AttachmentsIcon"><span></span></div>
 		              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.attachment")%> :</div>
-				          <div style="clear: left;"><span></span></div>
-				        </div>
+			          
+			        </div>
 	            </div>
 	          </div>
 			    </div> 
@@ -191,7 +191,8 @@
 							  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
 							  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 												%>
-												  <div class="AttachmentsContainer">	
+
+												  <div class="AttachmentsContainer ClearFix">	
 					                  <div class="AttachmentsContentIcon">
 					                  <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;"><%=att.getName()%></a>
 					                  </div>
@@ -202,9 +203,10 @@
 					                    <a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 					                      <div class="RemoveAttachments"><span></span></div>
 					                    </a>
+
                               <% }
                                }%>
-					                  <div style="clear: left;"><span></span></div>
+					                  
 					                </div>
 				              <%	}
 				              	} %>

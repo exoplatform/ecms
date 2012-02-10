@@ -56,7 +56,7 @@ import java.util.List;
 				<div class="UICategories">
 					<div style="width:100%;">
 						<!-- Category infor -->
-						<div class="CategoryTitle">
+						<div class="CategoryTitle ClearFix">
 							<div class="LeftTitle">
 								<div class="RightTitle">
 									<div class="CenterTitle" style="max-width:350px; overflow:hidden;">
@@ -70,7 +70,7 @@ import java.util.List;
 								if (categoryDescription.length() > 30) categoryDescription = categoryDescription.substring(0, 30) + " ...";
 							%>
 							<span title="<%=category.getDescription()%>" style="line-height:26px;padding-left:10px">$categoryDescription</span>
-							<div class="ClearLeft"><span></span></div>
+							
 						</div>
 						<!-- All subscriptions -->
 						<div class="Subscriptions">

@@ -5,12 +5,12 @@
   <div class="BarContent">
   	<div class="BarContentL">
   		<div class="BarContentR">
-  			<div class="BarContentM">
+  			<div class="BarContentM ClearFix">
 			    <div class="Title"><%=_ctx.appRes("UITagExplorer.title.PrivateTags")%></div>
 			  	<div class="TagExplorer" 
 			  			 title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
 			  			 onclick="<%=uicomponent.event("EditTags", "Private")%>"><span></span></div>
-			  	<div class="ClearLeft"><span></span></div>
+			  	
 			  </div>
   		</div>
 		</div>
@@ -42,13 +42,13 @@
 <div class="SideBarContent">
 <div class="BarContent">
 	<div class="BarContentL">
-		<div class="BarContentR">
+		<div class="BarContentR ClearFix">
 			<div class="BarContentM">
 		    <div class="Title"><%=_ctx.appRes("UITagExplorer.title.PublicTags")%></div>
 		  	<div class="TagExplorer" 
 		  			 title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
 		  			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ><span></span></div>
-		  	<div class="ClearLeft"><span></span></div>
+		  	
 		  </div>
 		</div>
 	</div>

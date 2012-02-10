@@ -13,7 +13,7 @@
   }
 %>
 <div class="UISideBar" id="UISideBar">
-  <div class="UISideBarContainer">
+  <div class="UISideBarContainer ClearFix">
     <div class="UIResizableBlock">
       <% 
         String[] arrComp = [uicomponent.getCurrentComp()];
@@ -67,7 +67,6 @@
       <% } %>
     </div>
     
-    <div style="clear: both;"><span></span></div>
   </div>
  
 </div>

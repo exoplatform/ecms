@@ -37,7 +37,7 @@
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
 							<div class="EdittingToolBarR">
-								<div class="EdittingToolBarC clearfix">
+								<div class="EdittingToolBarC ClearFix">
 								<%								
 								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
@@ -75,7 +75,7 @@
 				 <div class="EdittingToolBar " >
 					<div class="EdittingToolBarL">
 						<div class="EdittingToolBarR">
-							<div class="EdittingToolBarC clearfix">
+							<div class="EdittingToolBarC ClearFix">
 							<%								
 							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
@@ -146,7 +146,7 @@
           <div class="EdittingToolBar " >
            <div class="EdittingToolBarL">
              <div class="EdittingToolBarR">
-               <div class="EdittingToolBarC clearfix">
+               <div class="EdittingToolBarC ClearFix">
                  <div style="float: right">
                    <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
                      &nbsp;

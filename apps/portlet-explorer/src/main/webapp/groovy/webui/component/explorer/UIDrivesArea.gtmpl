@@ -19,7 +19,7 @@
         </div>
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
-			<div class="RowDrives">
+			<div class="RowDrives ClearFix">
 				<div class="IconArrowDrives TextTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></div>
 				<%
 				  for(drive in mainDrives) {
@@ -45,11 +45,10 @@
 				    println("</div>");
 				  }
 				%>
-	      <div class="ClearLeft"><span></span></div>
 			</div>
 		<%}%>
 		<%if(groupDrives.size() > 0) {%>
-			<div class="RowDrives RowDrivesGroups">
+			<div class="RowDrives RowDrivesGroups ClearFix">
 				<div class="IconArrowDrives TextTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></div>
 	        <%
 	          for(groupDrive in groupDrives) {
@@ -70,11 +69,11 @@
 		          println("</div>");
 		        }
 		      %>
-	      <div class="ClearLeft"><span></span></div>
+	      
 			</div>
 		<%}%>	
 		<%if(personalDrives.size() > 0) {%>
-			<div class="RowNormal">
+			<div class="RowNormal ClearFix">
 				<div class="IconArrowDrives TextTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></div>
         <%
           for(drive in personalDrives) {
@@ -97,7 +96,7 @@
             println("</div>");
           }
         %>
-	      <div class="ClearLeft"><span></span></div>
+	     
 			</div>  
 		<%}%>
 	</div>

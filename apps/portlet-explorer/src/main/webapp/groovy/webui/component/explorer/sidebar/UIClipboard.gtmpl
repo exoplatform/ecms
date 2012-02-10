@@ -19,9 +19,9 @@
   <div class="BarContent">
   	<div class="BarContentL">
   		<div class="BarContentR">
-  			<div class="BarContentM">
+  			<div class="BarContentM ClearFix">
 			    <div class="Title">Clipboard</div>
-			  	<div class="ClearLeft"><span></span></div>
+			  	
 			  </div>
 			</div>
 		</div>
@@ -77,11 +77,11 @@
 				    }%>
 				  <tr class="EvenRow">
 			      <td class="Text" colspan="3">
-			        <div class="ClearAllBlock" style="text-align: center">
+			        <div class="ClearAllBlock ClearFix" style="text-align: center">
 								<a  class="Icon ScissorsEraserWarning16x16Icon" href="<%=uicomponent.event('ClearAll', 'All')%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								  <%=_ctx.appRes(name+".action.clearall")%>
 								</a>
-							  <div style="clear: both"><span></span></div>
+							 
 							</div>
 			      </td>
 			    </tr>  

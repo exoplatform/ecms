@@ -3,10 +3,10 @@ import javax.jcr.Node;
 %>
 <div class="UITagList"> 
   <div class="TagmapHolder">
-    <div class="TagmapTitle">
-    	<div class="Icon"><span></span></div>
+    <div class="TagmapTitle ClearFix">
+      <div class="Icon"><span></span></div>
       <div class="TagLabel"><%=_ctx.appRes(uicomponent.id + ".label.PrivateTags")%></div>
-      <div style="clear:left;"><span></span></div>
+      
     </div>
     <div class ="TagmapContent"> 
       <%
@@ -28,10 +28,10 @@ import javax.jcr.Node;
   </div>
   
   <div class="TagmapHolder">
-	  <div class="TagmapTitle">
+	  <div class="TagmapTitle ClearFix">
 	  	<div class="Icon"><span></span></div>
 	    <div class="TagLabel"><%=_ctx.appRes(uicomponent.id + ".label.PublicTags")%></div>
-	    <div style="clear:left;"><span></span></div>
+	    
 	  </div>
 	  <div class ="TagmapContent"> 
 	    <%

@@ -35,14 +35,14 @@
       <label calss="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Contain")%> :</span> </label> <%uiform.renderField(uiform.getChildById(uicomponent.CONTAIN));%>
     </div>
  
-    <div class="ContentSearchForm">
+    <div class="ContentSearchForm ClearFix">
       <input style="float:left;" type="radio" class="radioboxes" id="<%=uicomponent.TIME_OPTION%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.TIME_OPTION%>"/>
       <div style="float:left;"><%uiform.renderField(uiform.getChildById(uicomponent.TIME_OPTION));%> </div>
       <span class="TitleTextBox"><%= _ctx.appRes("UIContentSearchForm.title.FromDate")%></span>
       <div class="DateInput"><%uiform.renderField(uiform.getChildById(uicomponent.START_TIME));%></div>
       <span class="TitleTextBox"><%= _ctx.appRes("UIContentSearchForm.title.ToDate")%></span>
       <div class="DateInput"><%uiform.renderField(uiform.getChildById(uicomponent.END_TIME));%></div>
-	  	<div style="clear:left;"><span></span></div>
+	  	
     </div>
  
     <div class="ContentSearchForm">

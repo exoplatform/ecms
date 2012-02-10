@@ -15,7 +15,7 @@
 		  if(clazz == "Even") clazz = "";
       else clazz = "Even" ;
 	    println """
-			  <div class="Node$clazz"">
+			  <div class="Node$clazz ClearFix">
 			    <div class="NodeActionsContainer">
 			""";
 			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
@@ -67,7 +67,7 @@
 			String titleLable = displayLabel.toString();
 			println """
 				    <div class="NodeLabel" title="$dateCreated : $titleLable">$show</div>
-				    <div style="clear: both;"><span></span></div>
+				    
 			  </div>
 	    """;
 	    if(node.getChildrenSize() > 0 && node.isExpanded()) writeNodes(node.getChildren(), clazz, level + 1) ;

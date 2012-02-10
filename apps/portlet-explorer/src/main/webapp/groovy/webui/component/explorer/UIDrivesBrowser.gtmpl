@@ -38,7 +38,7 @@
 			    </div>
 			    <div class="DecoratorMiddleLeft">
 			      <div class="DecoratorMiddleRight">
-			        <div class="DecoratorMiddle">
+			        <div class="DecoratorMiddle ClearFix">
 			          <%for(personalDrive in personalDrives) {%>
 		              <div class="Drive">
 		              	<div class="DriveContainer">
@@ -50,7 +50,7 @@
 			                	<img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="${personalDrive.name}" width="48" height="41" />			                				                			                  
 			                </div>
 			              <%} else {%>
-			                <div class="Icon UserDriveIcon" style="margin:auto" onclick="<%=uicomponent.event("SelectDrive","${personalDrive.name}")%>"><span></span></div>
+			               	<div class="Icon UserDriveIcon" style="margin:auto" onclick="<%=uicomponent.event("SelectDrive","${personalDrive.name}")%>"><span></span></div>
 			              <%}%>
 			                <div class="DriveLabel">
 			                  <div class="LeftBar">
@@ -61,10 +61,10 @@
 			                    </div>
 			                  </div>
 			                </div>
-			            	</div>    
+			              </div>    
 		              </div>
 			          <%}%>
-								<div class="ClearLeft"><span></span></div>
+					 
 			        </div>
 			      </div>
 			    </div>
@@ -99,7 +99,7 @@
 			    </div>
 			    <div class="DecoratorMiddleLeft">
 			      <div class="DecoratorMiddleRight">
-			        <div class="DecoratorMiddle">
+			        <div class="DecoratorMiddle ClearFix">
 			          <%for(groupDrive in groupDrives) {%>
 		              <div class="Drive">
 		              	<div class="DriveContainer">
@@ -125,7 +125,7 @@
 			            	</div>    
 		              </div>
 			          <%}%>
-								<div class="ClearLeft"><span></span></div>
+								
 			        </div>
 			      </div>
 			    </div>
@@ -156,7 +156,7 @@
 			    </div>
 			    <div class="DecoratorMiddleLeft">
 			      <div class="DecoratorMiddleRight">
-			        <div class="DecoratorMiddle">
+			        <div class="DecoratorMiddle ClearFix">
 			          <%
 			            def drives = uicomponent.generalDrives() ;
 			            if(drives.size() > 0) {
@@ -195,7 +195,7 @@
 			            	</div>
 			            </div>
 			          <%}%>
-								<div class="ClearLeft"><span></span></div>
+								
 			        </div>
 			      </div>
 			    </div>

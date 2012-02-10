@@ -4,7 +4,7 @@
   import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 %>
 <div class="UIGroupMembershipSelector" id="$uicomponent.id">
-  <div class="Container">
+  <div class="Container ClearFix">
 		<div class="SelectedGroupPath"><% uicomponent.renderChild(UIBreadcumbs.class); %></div>
 		
 		<%
@@ -56,6 +56,6 @@
 	      </div>
 	    </div>
 	  </div>
-		<div style="clear: left"><span></span></div>
+		
 	</div>
 </div> 		

@@ -1386,17 +1386,6 @@
 	height: 23px;
 }
 
-.UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer .ClearLeft{
-	clear: left;
-}
-
-.UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer .ClearRight{
-	clear: right;
-}
-
-.UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer .ClearBoth{
-	clear: both;
-}
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
  overflow: hidden;
 }

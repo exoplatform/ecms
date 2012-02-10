@@ -24,7 +24,7 @@
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
-		  <div class="TopBoxHeader">
+		  <div class="TopBoxHeader ClearFix">
 				<%	
 			  if (isShowHeader) {
 					%>
@@ -41,7 +41,7 @@
 					<%
 				}
 				%>
-				<div class="ClearBoth"><span></span></div>
+				
 			</div>
 			<%
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
@@ -85,13 +85,14 @@
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
       					%>
-                <%=uicomponent.addQuickEditDiv("Column1", viewNode)%>
+                <%=uicomponent.addQuickEditDiv("Column1 ClearFix", viewNode)%>
                 <%
       			    	if (isShowImage) {
                     %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
 											}
 											%>
 												<div class="Content">
+													<div class="ClearFix">
 													<%
 													if (isShowTitle) {
 														%><div title="$itemName" class="FloatLeft $itemIcon"></div><%
@@ -116,21 +117,23 @@
                                 print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
                               }
                             %>
-                            </div><% 
+                            </div></div><% 
 													}
 													if (isShowReadmore) {
-													  %><div class="ClearBoth"><span></span></div><div class="ReadLink"><a href="$itemWebdavLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+													  %>
+													  
+													  <div class="ReadLink"><a href="$itemWebdavLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 													}
 													%>
 												</div>
-												<div class="ClearBoth"><span></span></div>
+												
 											<%
 										%>
 									</div>
 				    		<%
 				  		}
 				  	%>
-					<div class="CaptionFunc">
+					<div class="CaptionFunc ClearFix">
 					<%
 		  				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
 		  				def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
@@ -146,7 +149,7 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class);
 						} 
 					%>
-						<div style="clear: both"><span></span></div>
+						
 					</div>				  	
 			  	</div>
 			  <%	

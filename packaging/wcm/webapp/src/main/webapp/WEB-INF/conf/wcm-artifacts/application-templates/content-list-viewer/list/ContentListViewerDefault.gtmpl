@@ -14,7 +14,7 @@
 		def isShowRSSLink = uicomponent.isShowRssLink();
 		
 		%>
-		<div class="TopBoxHeader">
+		<div class="TopBoxHeader ClearFix">
       <% if (isShowHeader) { %>
 			<div class="Title">
 				<div class="Header">$header</div>
@@ -29,7 +29,7 @@
 					<%
 				}
 			%>
-			<div class="ClearBoth"><span></span></div>
+			
 		</div>
 		
 			<div class="CaptionItem">
@@ -71,6 +71,7 @@
 										if(count == 0) {
 											%>																						
 											<%=uicomponent.addQuickEditDiv("HotNews", viewNode)%>
+											<div class="ClearFix">
 											<%
 													if (isShowIllustrationImg) {
 														%><a class="ImageHotNews" href="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
@@ -103,7 +104,7 @@
 															}
 														%>
 													</div>
-													<div class="ClearBoth"><span></span></div>
+													</div>
 													<% if (isShowReadmore) { %>
 												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 													}%>
@@ -112,7 +113,7 @@
 											count = 1;
 										} else {
 											%>																						
-											<%=uicomponent.addQuickEditDiv("NormalNews", viewNode)%>
+											<%=uicomponent.addQuickEditDiv("NormalNews ClearFix", viewNode)%>
 												<%
 														if (isShowIllustrationImg) {
 															%><a class="ImageNormalNews" href="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
@@ -151,7 +152,7 @@
 															} 
 														%>
 													</div>
-													<div style="clear: both;"><span></span></div>
+													
 												</div>
 												<% if (isShowReadmore) { %>
 												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
@@ -167,7 +168,7 @@
 				%>
 				<!-- </div> -->
 				</div>
-				<div class="CaptionFunc">
+				<div class="CaptionFunc ClearFix">
 					<% 
 					  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
 					  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
@@ -183,6 +184,6 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class)
 						} 
 					%>
-					<div style="clear: both;"><span></span></div>
+					
 				</div>
 </div>

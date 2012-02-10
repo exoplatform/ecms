@@ -17,6 +17,7 @@
 	%>
 		<div class="UIDocumentList">
 			<%/*Begin UIEventViewer*/%>
+		  <div class="ClearFix">
 			<div class="UIEventViewer">
 		 	<%if(!hasNoDocument){%>
   				<div class="EventContent">
@@ -67,14 +68,14 @@
    			<% if(totalPages>1){ %>
 		    <div class="DocumentsPageIterator"><%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%></div>
 		    <% } %>
-		    <div style="clear:left"><span></span></div>
+		    </div>
    		<%}%>
-	    <div class="ViewPreviousDocument"> 
+	    <div class="ViewPreviousDocument ClearFix"> 
 	      <div class="BackIcon"><span></span></div>
 	      <a href="<%=uicomponent.event('Back')%>">
 	      	<%=_ctx.appRes(componentName + ".label.previous")%>
 	      </a>
-	      <div style="clear:left"><span></span></div>
+	      
 	    </div>
 			<%/*End UIEventViewer*/%>
 			</div>

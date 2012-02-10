@@ -45,7 +45,7 @@
     <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
-      <div class="StatusLink">
+      <div class="StatusLink ClearFix">
         <%
 		
  for (State state : states) {
@@ -87,7 +87,7 @@
   			
   			<span class="StatusArrow"></span>
   			<%}else{%>
-  			<div style="clear: left;"><span></span></div>  
+  			 
   			<%}
 			
 	   }%>
@@ -161,7 +161,7 @@
                   }
                 }
               %>
-              <div style="clear: left"><span></span></div>
+              
             </td>
           </tr>
         <%

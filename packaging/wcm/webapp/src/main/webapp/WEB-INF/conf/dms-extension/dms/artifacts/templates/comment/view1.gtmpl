@@ -34,10 +34,10 @@
 			  			  <%=commentDateFormat.format(lastComment.getProperty("exo:commentDate").getDate().getTime())%>
 			  			<%}%>  
 		  			</div>
-		  			<div class="ShowComment">
+		  			<div class="ShowComment ClearFix">
 			  			<div style="float: left;"><%=commentsList.size()%> <%=_ctx.appRes("Comment.view.label.comments")%></div>
 			  			<div style="float: right;" onclick="eXo.ecm.WCMUtils.showHideComponent(this)"><a><%=_ctx.appRes("Comment.view.label.show-comments")%></a><span style="display: none"><a><%=_ctx.appRes("Comment.view.label.hide-comments")%></a></span></div>
-			  			<div style="clear: both;"><span></span></div>
+			  			
 			  	  </div>
 			 		</div>
 				</div>

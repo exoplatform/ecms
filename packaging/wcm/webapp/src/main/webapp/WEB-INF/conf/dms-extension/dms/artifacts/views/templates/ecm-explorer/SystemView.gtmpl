@@ -36,7 +36,7 @@
 <div id="$componentId">
   <div id="${componentId}-$viewComponentId" class="UIListView" style="">  
     <div class="UIListGrid">
-        <div class="TitleTable">
+        <div class="TitleTable ClearFix">
           
           <%
             String typeSort = uicomponent.getTypeSort();
@@ -143,7 +143,7 @@
               <%} %>
             </a>
           </div>
-          <div style="clear: both"><span></span></div>
+          
         </div>
         <%
           String serverUrl = uicomponent.getWebDAVServerPrefix();
@@ -161,7 +161,7 @@
             //nodePath = nodePath + "&workspaceName=" + preferenceWS;
             String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
         %>
-        <div class="RowView Normal" ondblclick="$actionLink">
+        <div class="RowView Normal ClearFix" ondblclick="$actionLink">
           <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px;  border-right: none;">
             <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">              
             <%if(uicomponent.isSymLink(data)) {%>
@@ -200,12 +200,12 @@
           <div class="RightColumn" style="width: 112px;">
             <%=dateFormat.format(uicomponent.getDateCreated(data))%>
           </div>
-          <div class="ResizeColumn" style="float:left; width: 119px; padding-left: 6px;$hiddenStyle;">
+          <div class="ResizeColumn" style="float:left; width: 113px; padding-left: 6px;$hiddenStyle;">
               <div class="NodeLabel">
                 <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:113px; overflow:hidden;" title="<%=title%>"><%=subName%></div>
               </div>
           </div>
-          <div style="clear: both"><span></span></div>
+          
         </div>
         <%}%>
     </div>

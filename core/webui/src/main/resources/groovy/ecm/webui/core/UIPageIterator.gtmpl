@@ -4,7 +4,7 @@
   def maxPageSize = uicomponent.getItemsPerPage();
   def int[] maxItemPerPageList = uicomponent.getMaxItemPerPageList(); 
 %>
-<div class="UIPageIterator">
+<div class="UIPageIterator ClearFix">
 <% if(totalPage > 1) {%> 
   <% if(currentPage + 10 <= totalPage) {%>        
   <a href="<%=uicomponent.event("ShowPage","${currentPage + 10}")%>" class="Icon NextTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"></a>
@@ -66,7 +66,7 @@
   } %>
   </select>
   <% } %>
-  <div class="ClearRight"><span></span></div>
+  
 <%} else {%>
   <% if (uicomponent.isUseMaxSizeSetting()) {
     def pageSizeIdBottom = "maxPageSize_" + String.valueOf(System.currentTimeMillis()+1);
@@ -82,9 +82,6 @@
   <% } 
   } %>
   </select>
-  <div class="ClearLeft"><span></span></div>
-  <% } else {%>
-  <div class="ClearRight"><span></span></div>
-  <% } %>
+    <% } %>
   <%}%> 
 </div>

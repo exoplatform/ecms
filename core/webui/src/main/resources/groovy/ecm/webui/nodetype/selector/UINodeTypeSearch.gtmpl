@@ -7,7 +7,7 @@
  * 11:00:48 AM 
  */  
 %>
-<div class="UINodeTypeSearh $uicomponent.id">
+<div class="UINodeTypeSearh $uicomponent.id  ClearFix">
   <div class="UIBarStyle">
     <div class="NormalBarStyle">
       <div class="LeftBar">
@@ -35,7 +35,7 @@
       </div>        
     </div>
   </div>
-  <div class="ClearBoth"><span></span></div>
+ 
 </div>
 
 

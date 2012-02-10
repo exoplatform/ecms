@@ -12,11 +12,12 @@ if(uicomponent.userCode != null){
 <div class="UINewsletterPortlet $uicomponent.id">
 	<%uiform.begin()%>
 		<div class="NewsletterBoxContent">
-			<div class="UserName" style="height:32px;width:auto;line-height:32px;width:auto;margin-bottom:7px;">
+		<div class="ClearFix">
+			<div class="UserName ClearFix" style="height:32px;width:auto;line-height:32px;width:auto;margin-bottom:7px;">
 				<div class="LeftUserName" style="float:left; margin-left:18px;">
 					<label for="inputEmail"><%=_ctx.appRes("UINewsletterViewerForm.title.userEmail")%></label>
 				</div>
-				<div class="RightUserName" style="float:left;">
+				<div class="RightUserName ClearFix" style="float:left;">
 					<div class="Input" style="float:left;padding:0px 5px 0px 10px;">
 						<%uicomponent.renderChild("inputEmail");%> 
 						<a href="#" style="color:#0101FF;text-decoration:underline;font-weight:bold;"><%=uicomponent.userMail%></a>
@@ -33,16 +34,16 @@ if(uicomponent.userCode != null){
 				  		</div>
 			  			<%}%>
 					</div>
-					<div style="clear:both;"><span></span></div>
+					
 				</div>
-				<div class="ClearLeft"><span></span></div>
+				
 			</div>
-		<div style="clear:both"><span></span></div>
+			</div>
 		<%for(NewsletterCategoryConfig category in uicomponent.getListCategories()){%>
 			<div class="UICategories" style="width:auto;">
 				<div style="width:auto;">
 					<!-- Category infor -->
-					<div class="CategoryTitle">
+					<div class="CategoryTitle ClearFix">
 						<div class="LeftTitle">
 							<div class="RightTitle">
 								<div class="CenterTitle">
@@ -55,7 +56,7 @@ if(uicomponent.userCode != null){
 							if (categoryDescription == null) categoryDescription = "";
 						%>
 						<div style="float:left;line-height:26px;padding-left:10px">$categoryDescription</div>
-						<div class="ClearLeft"><span></span></div>
+					
 					</div>
 					<!-- All subscriptions -->
 					<div class="Subscriptions">

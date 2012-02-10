@@ -8,6 +8,7 @@
 	 
 	 import org.exoplatform.webui.core.UIPageIterator;
 %>
+<div class=" ClearFix">
 <div id="UIPageSelectorPanel" class="UIPageSelectorPanel">
 	<table class="UIGrid">
 		<thead>
@@ -62,4 +63,4 @@
   		} 
   	%>
 </div>
-<div class="ClearLeft"><span></span></div>
+</div>

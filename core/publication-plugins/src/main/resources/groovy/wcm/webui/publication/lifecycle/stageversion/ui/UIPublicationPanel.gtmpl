@@ -21,7 +21,7 @@
     <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
-      <div class="StatusLink">
+      <div class="StatusLink ClearFix">
         <%
           if (isCurrentRevision("enrolled", currentRevision)) {
             %>
@@ -32,7 +32,7 @@
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
-              <div style="clear: left;"><span></span></div>
+              
             <%
           } else if (isCurrentRevision("draft",currentRevision)) {
             %>
@@ -43,7 +43,7 @@
               <a class="ActiveStatus" href="<%= uicomponent.event("Live")%>"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
-              <div style="clear: left;"><span></span></div>              
+                           
             <%
           } else if (isCurrentRevision("published",currentRevision)) {
             %>
@@ -54,7 +54,7 @@
               <a class="CurrentStatus"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
               <a class="ActiveStatus" href="<%= uicomponent.event("obsolete")%>"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
-              <div style="clear: left;"><span></span></div>
+              
             <%
           } else if (isCurrentRevision("obsolete", currentRevision)) {
             %>
@@ -65,7 +65,7 @@
               <a class="DisableStatus"><%=_ctx.appRes("UIPublicationPanel.status.live")%></a>
               <span class="StatusArrow"></span>
               <a class="CurrentStatus"><%=_ctx.appRes("UIPublicationPanel.status.obsolete")%></a>
-              <div style="clear: left;"><span></span></div>
+              
             <%
           }
         %>
@@ -130,7 +130,7 @@
                   }
                 }
               %>
-              <div style="clear: left"><span></span></div>
+              
             </td>
           </tr>
         <%

@@ -49,7 +49,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 		<div class="UICategories">
 			<div style="width:100%;">
 				<!-- Category infor -->
-				<div class="CategoryTitle">
+				<div class="CategoryTitle ClearFix">
 					<div class="LeftTitle">
 						<div class="RightTitle">
 							<div class="CenterTitle">
@@ -132,7 +132,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 					</div>
 					<!-- end action of this category -->
 					
-					<div class="ClearBoth"><span></span></div>
+					
 				</div>
 				
 				<!-- All subscriptions -->

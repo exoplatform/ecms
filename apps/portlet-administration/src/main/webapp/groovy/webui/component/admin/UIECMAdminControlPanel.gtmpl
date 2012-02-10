@@ -33,7 +33,7 @@
          currentBlockStyleClass = "class=\"SelectedTab\"";
        }
     %>
-	    <div class="UIVTab VTabStyle3">
+	    <div class="UIVTab VTabStyle3 ClearFix">
 			<div <%=currentBlockStyleClass%>>
 				<div class="TabRepeat ClearFix" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
 					  <div class="TabLabel">
@@ -56,7 +56,6 @@
 				  </a>
 				</div>
 			<%} %>
-			<div style="clear: both;"><span></span></div>
 			</div>
 		  </div>
 		</div>

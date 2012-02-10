@@ -23,7 +23,7 @@
   <div class="VoteResultContainer">
 	  <div class="LeftVoteBar">
 	    <div class="RightVoteBar">
-	      <div class="CenterVoteBar">
+	      <div class="CenterVoteBar ClearFix">
 					<div class="RatingInfoContainer">
 					  <div class="AvgRatingImages">
 					    <%
@@ -40,10 +40,10 @@
 						</div>
 					</div>
 					<div class="VoteRatingInfo">
-				    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.avg-rating")%>: </div><div class="VotedInfo">$voteRating</div>
-				    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.subscription")%>: </div><div class="VotedInfo">$voteTotal</div>
+					    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.avg-rating")%>: </div><div class="VotedInfo">$voteRating</div>
+					    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.subscription")%>: </div><div class="VotedInfo">$voteTotal</div>
 					</div>
-					<div style="clear: left;"><span></span></div>
+				
 				</div>
 		 	</div>
 		</div>

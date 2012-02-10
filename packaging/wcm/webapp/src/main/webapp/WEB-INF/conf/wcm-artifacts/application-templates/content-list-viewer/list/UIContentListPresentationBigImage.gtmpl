@@ -14,7 +14,7 @@
 		def isShowRssLink = uicomponent.isShowRssLink();
 	  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 		%>
-	  <div class="TopBoxHeader">
+	  <div class="TopBoxHeader ClearFix">
 			<%	
 			if (isShowHeader) {
 				%>
@@ -25,7 +25,7 @@
 				%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
 			}
 			%>
-				<div class="ClearBoth"><span></span></div>
+				
 			</div>
 		<div class="Caption">
 		<% 	
@@ -101,7 +101,7 @@
 				} //end for
 			} //end else	
 		%>
-		<div class="CaptionFunc">
+		<div class="CaptionFunc ClearFix">
 			<% 
 			  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
         if (isShowRefresh) { 
@@ -116,7 +116,7 @@
 						uicomponent.renderChild(UICustomizeablePaginator.class)
 				} 
 			%>
-			<div style="clear: both;"><span></span></div>
+			
 		</div>
 	</div>
 </div>

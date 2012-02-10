@@ -203,11 +203,11 @@
   <div class="BarContent">
   	<div class="BarContentL">
   		<div class="BarContentR">
-  			<div class="BarContentM">
+  			<div class="BarContentM ClearFix">
 			    <div class="Title" style="cursor: pointer;" title="<%=uicomponent.getLabel()%>" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
 			      <%=uicomponent.getLabel()%>
 			    </div>			  	
-			  	<div class="ClearLeft"><span></span></div>
+			  	
 			  </div>
 			</div>
 		</div>

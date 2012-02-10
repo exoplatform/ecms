@@ -22,10 +22,10 @@
     msgValue = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(msgValue));    
   %>
   <div class="HorizontalLayout">
-    <div class="">
+    <div class="ClearFix">
     	<div class="RecycleBinFull"><span></span></div>
     	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>
-    	<div style="clear: left"><span></span></div>
+    	
     </div>
  <div class="UIAction">
 		<%

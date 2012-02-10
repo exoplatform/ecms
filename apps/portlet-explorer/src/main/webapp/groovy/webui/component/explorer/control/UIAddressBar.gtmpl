@@ -75,7 +75,7 @@
   				<div class="BgLeftAddressBar">
   					<div class="BgRightAddressBar">
   						<div class="BgCenterAddressBar">
-  							<div class="BlockMiddle${viewSize} UIPopupSelector">
+  							<div class="BlockMiddle${viewSize} UIPopupSelector ClearFix">
   								<div style="position: relative;">
   									<div class="UISelectContent">
   										<%
@@ -93,7 +93,7 @@
   									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
   									<% uicomponent.renderChild(0); %>
   								</div>
-  								<div style="clear: both;"><span></span></div>
+  								
   							 </div>
   						</div>
   					</div>

@@ -25,10 +25,10 @@
 </style>     
 <div class="UIDivInfo" id="UIFilePlanView">
 	<div>
-		<div class="ColIcon">
+		<div class="ColIcon ClearFix">
 			<div class="$iconName Icon"><span></span></div>
 			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></label></div>
-			<div style="clear:left;"><span></span></div>
+			
 		</div>
 		<table class="FilePlanContentTable">    
 			<tr>

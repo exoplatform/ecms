@@ -3,7 +3,7 @@
 %>
 
 <div class="UICBSearchForm">
-  <div class="HorizontalLayout">
+  <div class="HorizontalLayout ClearFix">
   	<%uiform.begin()
     for(field in uiform.getChildren()) { 
       if(field.isRendered()) {
@@ -28,7 +28,7 @@
        <a class="SearchIcon" href="<%=uicomponent.event('Search')%>" title="<%=_ctx.appRes("UICBSearchForm.title.search")%>"><span></span></a>
        <a class="SearchLabel" href="<%=uicomponent.event('Search')%>"><%=_ctx.appRes("UICBSearchForm.label.search")%></a>
      </div>
-     <div style="clear:left;"><span></span></div>
+     
 	   <%uiform.end()%>   
 	</div>       
 </div>

@@ -13,7 +13,7 @@
 <div class="UIFormGenerator">
 	<div class="UITabPane">
 		<div class="UIHorizontalTabs">
-			<div class="TabsContainer">
+			<div class="TabsContainer ClearFix">
 				<%
     				String selTabId = uicomponent.getSelectedTabId() ;
       				for(inputSet in uicomponent.getChildren()) {
@@ -33,7 +33,7 @@
 						<%
     				}
     			%>
-			    <div class="ClearLeft"><span></span></div>
+			  
 		    </div>
 	    </div>
 	    <% uiform.begin() %>

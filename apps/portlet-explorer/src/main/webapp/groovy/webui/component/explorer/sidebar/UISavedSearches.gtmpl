@@ -10,10 +10,10 @@
    <div class="BarContent">
   	<div class="BarContentL">
   		<div class="BarContentR">
-  			<div class="BarContentM">
+  			<div class="BarContentM ClearFix">
 			    <div class="Title"><%=_ctx.appRes("UISavedSearches.title.savedSearches")%></div>
 			  	<div class="AdvancedSearch" onclick="<%=uicomponent.event("AdvanceSearch")%>" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"><span></span></div>
-			  	<div class="ClearLeft"><span></span></div>
+			  	
 			  </div>
 			</div>
 		</div>

@@ -18,7 +18,7 @@
 	}
 	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"', '" +itemTargetPath +"')");%>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div class="ActionBar">
+	<div class="ActionBar ClearFix">
 		<div class="FilterTitle"><label for="Filter">Filter</label></div>
 		<div class="FilterInput">
 			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter" action="<%= uicomponent.event("ChangeContentType") %>">
@@ -29,13 +29,13 @@
 			</select>
 		</div>
 		<div class="SeparatorLineL"><span></span></div>
-		<div style="clear: both;"><span></span></div>
+		
 	</div>
 	<div class="BreadcumbsPortlet">
 		<div class="HomeIcon"><span></span></div> 
 		<div id="BreadcumbsContainer" class="BreadcumbsContainer"></div>
 	</div>
-	<div class="ListContainer">
+	<div class="ListContainer ClearFix">
 		<div class="LeftWorkspace" id="LeftWorkspace">
 			<div class ="LoadingProgress"><span></span></div>
 		</div>
@@ -71,9 +71,9 @@
 			</div>
 		</div>
 		<div class="UIAction">
-      <a href="#" class="ActionButton LightBlueStyle" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></a>    
-      <a href="#" class="ActionButton LightBlueStyle" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></a>          
-     </div>
-		<div style="clear: left;"><span></span></div>
+	      <a href="#" class="ActionButton LightBlueStyle" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></a>    
+	      <a href="#" class="ActionButton LightBlueStyle" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></a>          
+	    </div>
+		
 	</div>
 </div>

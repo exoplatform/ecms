@@ -22,16 +22,16 @@
 		          String tabName = inputSet.getName(); 
   	          tabName = _ctx.appRes(compName + ".tab.info." + inputSet.name);
         %>	        
-				        <div class="$className">
+				        <div class="$className ClearFix">
 				        	<span class="WizardLabel">
 				        		$tabName
 				        	</span>
-				        	<div style="clear:left;"><span></span></div>
+				        	
 				        </div>
         <% }
           }
         %>
-    	  <div class="HorizontalLayout">
+    	  <div class="HorizontalLayout ClearFix">
 		        <div class="UITabContentContainer">
 	            <%
 	              for(formInput in uicomponent.getChildren()) { 
@@ -42,17 +42,17 @@
 	                  <%uicomponent.renderUIComponent(formInput) ;%>
 	                </div>
 	            <%}%>
-	          </div>
-						<div class="UIAction">
-					     <%for(action in uicomponent.getActions()) { 
-			          		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
-										String link = uicomponent.event(action) ;
-			          %>
-								<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
-							 <%}%>
-		         	</div>
-	 	        <div style="clear:right;"><span></span></div>
-			    </div>
+	          	</div>
+				<div class="UIAction">
+				  <%for(action in uicomponent.getActions()) { 
+		          		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+									String link = uicomponent.event(action) ;
+		          %>
+							<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+						 <%}%>
+	         	</div>
+	 	        
+			 </div>
 		  </div>
     </div>
 	</div>  

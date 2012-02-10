@@ -48,14 +48,15 @@
 	  	<div class="$style">
 			<%/*Begin UIEventViewer*/%>
 					<div class="UIEventViewer">
+			<div class="ClearFix">
 				 	<%if(hasNoDocument){%>
 			    <div class="UISubContent">
 			      <div class ="UIDocumentContentInfo">
 			        <div class="NoneDocumentMessage">
-			          <div class="MessageContainer">
+			          <div class="MessageContainer ClearFix">
 			            <div class="Info16x16Icon"><span></span></div>
 			            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
-			            <div style="clear:left;"><span></span></div>
+			            
 			          </div>
 			        </div>
 			      </div>  
@@ -103,14 +104,14 @@
 			      %>
 	   			</div>
 	   			 <%if(isShowAllDoc) {%>
-					    <div class="ViewPreviousDocument"> 
-					      <div class="BackIcon"><span></span></div>
-					      <a href="<%=uicomponent.event('Back')%>">
-					      	<%=_ctx.appRes(componentName + ".label.previous")%>
-					      </a>
-					      <div style="clear:left"><span></span></div>
-					    </div>
-					    <div style="clear:left"><span></span></div>
+			    <div class="ViewPreviousDocument ClearFix"> 
+			      <div class="BackIcon"><span></span></div>
+			      <a href="<%=uicomponent.event('Back')%>">
+			      	<%=_ctx.appRes(componentName + ".label.previous")%>
+			      </a>
+			      
+			    </div>
+			    </div>
 	    		<%}%>
 	    		<% if(totalPages>1){ %>
 			    <div class="DocumentsPageIterator">
@@ -133,7 +134,7 @@
 								   def iconSubCat = Utils.getNodeTypeIcon(subCatNode, "16x16Icon");
 								   int numbDocument = docChilds.size() ;
 							%>
-										<div class="TiteContentView">										  
+										<div class="TiteContentView ClearFix">										  
 										  <a class="TiteLabel" href="$actionLinkSub">
 										  	<div class="TiteContentIcon CBDefaultFolder16x16Icon $iconSubCat">
 										  	<%if(Utils.isSymLink(subCatNode)) {%>
@@ -142,16 +143,16 @@
 										  	</div>
 										  	<%=catName%>
 										  </a>
-										  <div style="clear:left"><span></span></div>
+										  
 										</div>
 										<%if(docChilds.isEmpty()) {%>
 										<div class="UISubContent">
 								      <div class ="UIDocumentContentInfo">
 								        <div class="NoneDocumentMessage">
-								          <div class="MessageContainer">
+								          <div class="MessageContainer ClearFix">
 								            <div class="Info16x16Icon"><span></span></div>
 								            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
-								            <div style="clear:left;"><span></span></div>
+								            
 								          </div>
 								        </div>
 								      </div>  
@@ -168,19 +169,19 @@
 									          String docId = Utils.formatNodeName(subChild.getPath()) + "&category=" + Utils.formatNodeName(subCat) + "&workspace=" + subChild.getSession().getWorkspace().getName() ;
 			                      String subChildLink = uicomponent.event("ChangeNode", docId);                       
 											 %>
-														<div class="$cssStyle">
+														<div class="$cssStyle ClearFix">
 															<div class="Icon48x48 DefaultIconImage <%=Utils.getNodeTypeIcon(subChild, "48x48Icon")%>">
-															<%if(Utils.isSymLink(subChild)) {%>
-	                               <div class="Link"></div>
-	                            <%}%>
+																<%if(Utils.isSymLink(subChild)) {%>
+								                               		<div class="Link"></div>
+								                            	<%}%>
 															</div>
 															<div class="ContentLabel">
 																<div class="UserName"><a href="$subChildLink"><%=subChild.getName()%></a></div>
 																<div class="Author">
-									                Author:<%=uicomponent.getOwner(subChild)%>
-									              </div>
+													                Author:<%=uicomponent.getOwner(subChild)%>
+													            </div>
 															</div>
-															<div style="clear:left;"><span></span></div>
+															
 														</div>
 												<%
 														if(isRight) println "<div style=\"clear: both\"><span></span></div>" ;
@@ -190,12 +191,12 @@
 				                  if(!(docChilds.size() < itemPerBlock)) {
 				                  	String label = componentName + ".label.more" ;
 				                %>
-				                     <div class="ViewMoreDocument">
+				                     <div class="ViewMoreDocument ClearFix">
 				                    	<div class="NextIcon"><span></span></div>
 				                    	<a href="<%=actionLinkSub%>">
 				                    		<%=_ctx.appRes(label)%>
-															</a>
-				                    	<div style="clear: left;"><span></span></div>                               
+										</a>
+				                    	                             
 				                    </div>
 				                  	<div style="clear:right"><span></span></div>										  
 				                <%}%>

@@ -982,10 +982,6 @@
 	right: 0px;  /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UIJCRExplorer .UIActionBar .CleanRTL{
-	clear:left;  /* orientation=lt */
-	clear: right;  /* orientation=rt */
-}
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UICalendarComponent {
    position: absolute;

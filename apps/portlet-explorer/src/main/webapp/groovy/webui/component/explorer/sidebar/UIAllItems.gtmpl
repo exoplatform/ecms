@@ -17,12 +17,12 @@
 		<div class="BarContent">
 	  	<div class="BarContentL">
 	  		<div class="BarContentR">
-	  			<div class="BarContentM">
+	  			<div class="BarContentM ClearFix">
 						<div class="Title"><%=_ctx.appRes("UIAllItems.title.allItems")%></div>
 						<div class="SideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>">
 							<span></span>
 						</div>
-						<div class="ClearLeft"><span></span></div>
+						
 				  </div>
 				</div>
 			</div>

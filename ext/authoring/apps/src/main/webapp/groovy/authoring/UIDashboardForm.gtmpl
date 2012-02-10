@@ -83,13 +83,14 @@ color: #888;
       <%
         def nodes = uicomponent.getContents("draft");
       %>
+     <div class="ClearFix">
      <div class="AlignLeft">
-        <div class="Header">
+        <div class="Header ClearFix">
 		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.mydraft")%></div>
 		      <% if (nodes.size()>0) { %>
 		        <div class="Total"><%=nodes.size()%></div>
 		      <% } %>
-					<div style="clear:both;"><span></span></div>
+					
         </div>
 
         <div class="Elements">
@@ -113,12 +114,12 @@ color: #888;
         nodes = uicomponent.getContents("pending", "approved");
       %>
      <div class="AlignLeft">
-        <div class="Header">
+        <div class="Header ClearFix">
 		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.waitingapproval")%></div>
 		      <% if (nodes.size()>0) { %>
 		        <div class="Total"><%=nodes.size()%></div>
 		      <% } %>
-					<div style="clear:both;"><span></span></div>
+					
         </div>
 
         <div class="Elements">
@@ -142,12 +143,12 @@ color: #888;
         nodes = uicomponent.getContents("staged", null, "2");
       %>
      <div class="AlignLeft">
-        <div class="Header">
+        <div class="Header ClearFix">
 		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.publishedtomorrow")%></div>
 		      <% if (nodes.size()>0) { %>
 		        <div class="Total"><%=nodes.size()%></div>
 		      <% } %>
-					<div style="clear:both;"><span></span></div>
+					
         </div>
 
         <div class="Elements">
@@ -167,7 +168,7 @@ color: #888;
           <% } %>
         </div>
      </div>
-	   <div style="clear:both"><span></span></div>
+	 </div>
      <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" title="refresh">refresh</a></div><br/>
 	</div>
 	<% uiform.end(); %>

@@ -244,7 +244,7 @@
 	        if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
 	        if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;	          
 	      %>
-		      <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">
+		      <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">
 			      $strActs
 		        <div class="LeftColumn" style="padding: 2px 0px; 	border-right: none;">
 						  <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
@@ -288,8 +288,8 @@
 									<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(name)%>"><%=Text.unescapeIllegalJcrChars(subName)%></div>
 			 					</div>
 		        </div>
-		        <div style="clear: both"><span></span></div>
-			    </div>
+		       
+			  </div>
 	      <%}%>
 	      
 	      </div>

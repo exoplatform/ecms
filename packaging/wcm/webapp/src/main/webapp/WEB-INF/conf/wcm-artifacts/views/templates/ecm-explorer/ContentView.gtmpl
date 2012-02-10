@@ -78,6 +78,7 @@
   <div id="${componentId}-$viewComponentId" class="UIListView">
     <div class="UIListGrid">
       <div class="TitleTable">
+      <div class="ClearFix">
         <%
           String selectedSortType = uicomponent.getTypeSort() ;   
           String sortOrder = uicomponent.getSortOrder();
@@ -166,9 +167,8 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
-        onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-        <div style="clear: left"><span></span></div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        </div>
         <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
           <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
           <div class="JCRMoveAction" style="display: none;" request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>"></div>
@@ -332,7 +332,7 @@
           if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
           if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
           %>
-            <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">$strActs
+            <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">$strActs
               <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
                 <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>
@@ -381,7 +381,7 @@
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>
-              <div style="clear: both"><span></span></div>
+              
             </div>
           <%
         }

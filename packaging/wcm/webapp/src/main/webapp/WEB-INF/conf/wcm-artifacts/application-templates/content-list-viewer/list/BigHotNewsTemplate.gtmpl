@@ -19,7 +19,7 @@
 		def isShowRSSLink = uicomponent.isShowField(UIPCLVPortlet.SHOW_RSS_LINK);
 		if (isShowHeader) {
 			%>
-				<div class="TopBoxParameterized">
+				<div class="TopBoxParameterized ClearFix">
 					<div class="Title">
 						<div class="Header">$header</div>
 					</div>
@@ -28,7 +28,7 @@
 							%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer">RSS Feed</a><%
 						}
 					%>
-					<div class="ClearBoth"><span></span></div>
+					
 				</div>
 			<%
 		}
@@ -71,7 +71,7 @@
 							if(count == 0) { 
 							  count = 1;
 								%>
-									<div class="HotNews">
+									<div class="HotNews ClearFix">
 										<%
 											if (isShowIllustrationImg) {
 												%><a class="ImageHotNews" href="$itemLink"><img width="200" alt="$imgSrc" src="$imgSrc" /></a><%
@@ -104,7 +104,7 @@
 												}
 											%>
 										</div>
-										<div class="ClearRight"><span></span></div>
+										
 									</div>
 									<%if (isShowReadmore) {
 										  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
@@ -112,10 +112,11 @@
 								<%
 							} else {
 								%>
-									<div class="NormalNews">
+									<div class="NormalNews ClearFix">
 										<% 
 											if (isShowIllustrationImg) {
-												%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" src="$imgSrc" /></a><%
+												%>
+										<a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" src="$imgSrc" /></a><%
 											} 
 										%>
 										<div class="ContentNormalNews">
@@ -135,23 +136,25 @@
 												}
 											
 												if (isShowSumary) {
-													%><div class="Summary">
+													%>
+														<div class="Summary">
 													<%
-                            if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
-                              if (itemSummaryField!=null) {
-                                print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
-                              }
-                            }
-                          %>
-													</div><%
+							                            if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
+							                              if (itemSummaryField!=null) {
+							                                print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+							                              }
+							                            }
+							                          %>
+														</div><%
 												} 
 												
 												if (isShowCreatedDate) {
-													%><div class="Date"><%=itemDateCreated%></div><%
+													%>
+													<div class="Date"><%=itemDateCreated%></div><%
 												} 
 											%>
 										</div>
-										<div style="clear: both;"><span></span></div>
+										
 									</div>
 									<% if (isShowReadmore) {
 											  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div>
@@ -161,7 +164,7 @@
 						} // End for loop
 					} // End if
 				%>
-				<div class="CaptionFunc">
+				<div class="CaptionFunc ClearFix">
 					<% 
 						if (uicomponent.showRefreshButton()) {
 							%>				
@@ -174,7 +177,7 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class);
 						} 
 					%>
-					<div style="clear:both;"><span></span></div>
+					
 				</div>
 				</div>
 			<%

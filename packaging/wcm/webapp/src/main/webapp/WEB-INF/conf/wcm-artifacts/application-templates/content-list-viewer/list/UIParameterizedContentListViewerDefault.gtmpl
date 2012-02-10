@@ -23,7 +23,7 @@
 						}
 						%>
 					</div>
-					<!--div class="ClearBoth"><span></span></div-->
+					
 				</div>
 			<%
 		}
@@ -68,6 +68,7 @@
 										if(count == 0) { 
 											%>
 												<div class="HotNews">
+												<div class="ClearFix">
 													<%
 														if (isShowIllustrationImg) {
 															%><a class="ImageHotNews" href="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
@@ -100,7 +101,7 @@
 															}
 														%>
 													</div>
-													<div class="ClearBoth"><span></span></div>
+													</div>
 													<% if (isShowReadmore) { %>
 												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
 													}%>
@@ -109,7 +110,7 @@
 											count = 1;
 										} else {
 											%>
-												<div class="NormalNews">
+												<div class="NormalNews ClearFix">
 													<% 
 														if (isShowIllustrationImg) {
 															%><a class="ImageNormalNews" href="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
@@ -148,7 +149,7 @@
 															} 
 														%>
 													</div>
-													<div style="clear: both;"><span></span></div>
+													
 												</div>
 												<% if (isShowReadmore) { %>
 												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
@@ -162,7 +163,7 @@
 						} // End for loop
 					} // End if
 				%>
-				<div class="CaptionFunc">
+				<div class="CaptionFunc ClearFix">
 					<% 
 						if (uicomponent.showRefreshButton()) {
 							%>				
@@ -175,7 +176,7 @@
 							uicomponent.renderChild(UICustomizeablePaginator.class)
 						} 
 					%>
-					<div style="clear: both;"><span></span></div>
+					
 				</div>
 				</div>
 			<%

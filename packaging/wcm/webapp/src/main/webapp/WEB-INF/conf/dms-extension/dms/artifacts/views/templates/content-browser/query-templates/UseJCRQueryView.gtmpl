@@ -28,15 +28,15 @@
 	/*End TagMap*/%>
   <div style="$styleWithTag">
   <%/*Begin UIEventViewer*/%>
-  <div class="UIEventViewer">
+  <div class="UIEventViewer ClearFix">
   	<%if(hasNoDocument){%>
     <div class="UISubContent">
       <div class ="UIDocumentContentInfo">
         <div class="NoneDocumentMessage">
-          <div class="MessageContainer">
+          <div class="MessageContainer ClearFix">
             <div class="Info16x16Icon"><span></span></div>
             <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
-            <div style="clear:left;"><span></span></div>
+            
           </div>
         </div>
       </div>  
@@ -85,19 +85,19 @@
       %>
     </div>
     <%if(isShowDocByTag) {%>
-    <div class="ViewPreviousDocument"> 
+    <div class="ViewPreviousDocument ClearFix"> 
       <div class="BackIcon"><span></span></div>
       <a href="<%=uicomponent.event('Back')%>">
       	<%=_ctx.appRes(componentName + ".label.previous")%>
       </a>
-      <div style="clear:left"><span></span></div>
+      
     </div>
     <div style="clear:left"><span></span></div>
     <%}%>
     <% if(totalPages>1){ %>
     <div class="DocumentsPageIterator"><%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%></div>
     <% } %>
-    <div style="clear:left"><span></span></div>
+    
     <%}%>    
     
   </div>  

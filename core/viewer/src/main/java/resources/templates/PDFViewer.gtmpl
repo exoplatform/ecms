@@ -166,7 +166,7 @@
 	if (maximumPage > 0) {
 %>    
 	<div class="UIPDFViewerContainer">   
- 	 <div class="PDFViewerBar">
+ 	 <div class="PDFViewerBar ClearFix">
 		<div class="ControlButton">
 			<a href="<%=uicomponent.event("PreviousPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>"><div class="ButtonBack"><span></span></div></a>
 		</div>
@@ -199,7 +199,7 @@
 			</a>
 		</div>
 		<div class="ControlButton">
-      <div class="selectbox"><%uiform.renderField(uicomponent.getChildById("scalePage"))%></div>
+		   <div class="selectbox"><%uiform.renderField(uicomponent.getChildById("scalePage"))%></div>
 		</div>
 		<div class="ControlButton">
 			<a href="<%=uicomponent.event("RotateLeftPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>">
@@ -213,7 +213,7 @@
 			<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>"><span></span></div>
 		</div>
 		<a href="javascript: void(0)"><div class="DownLoadIcon" onclick="<%=uicomponent.event("DownloadFile")%>"><%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%></div></a>
-		<div class="ClearBoth"><span></span></div>
+		
 	</div>
 	<div class="InfoPopup" id="metadatas" style="display: none;position: absolute;">
 		<div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%></span>: <span class="metaValue"><%=StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(originalNode.getName()))%></span></div>

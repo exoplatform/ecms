@@ -6,6 +6,7 @@
  * April 13, 2009
  */
 %>
+<div class="ClearFix">
 <div class="$uicomponent.id UITreeList" id="$uicomponent.id">
   <table class="UIGrid">
 	  <col></col>
@@ -80,4 +81,4 @@
 		<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
 	<%}%>
 </div>
-<div class="ClearLeft"><span></span></div>
+</div>

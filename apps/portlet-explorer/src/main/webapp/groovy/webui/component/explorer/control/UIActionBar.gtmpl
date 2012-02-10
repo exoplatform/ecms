@@ -51,7 +51,7 @@
 <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
 	<div class="UIHorizontalTabs">
 		<div class="TabsContainer">
-		  <div style="overflow: hidden; $displayTabContainer">
+		  <div style="overflow: hidden; $displayTabContainer" class="ClearFix">
 				<%
 			    def isSelected = false;
 					def selectedTab = uicomponent.getSelectedTab();
@@ -86,7 +86,7 @@
 				<%
 				  }
 				%>
-				<div class="CleanRTL"><span></span></div>
+				
 		  </div>
 		 <%if(isSelected) {%>
 		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer">
@@ -114,7 +114,7 @@
 				</div>
 		 <%}%>
 		</div>
-  		<div class="UIViewBarContainer" id="UIViewBarContainer">
+  		<div class="UIViewBarContainer ClearFix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
   		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
@@ -125,7 +125,7 @@
   	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
   	    
-  			<div class="ClearRight"><span></span></div>
+  			
   		</div>
   		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event); eXo.ecm.ECMUtils.showListTrigger();">
   			<div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>

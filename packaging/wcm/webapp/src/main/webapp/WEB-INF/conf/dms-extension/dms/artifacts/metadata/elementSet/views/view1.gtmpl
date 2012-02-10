@@ -27,7 +27,7 @@
     <div><% renderDCValues("dc:title") %></div>
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%;">
       <div class="ContentBlock">
         <div class="Title">
@@ -44,10 +44,10 @@
         <div><% renderDCValues("dc:subject") %></div>
       </div>
     </div>
-    <div style="clear: both;"><span></span></div>
+    
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -64,10 +64,10 @@
         <div><% renderDCValues("dc:language") %></div>
       </div>
     </div> 
-    <div style="clear: both;"><span></span></div>             
+             
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -84,10 +84,10 @@
         <div><% renderDCValues("dc:publisher") %></div>
       </div>
     </div>  
-    <div style="clear: both;"><span></span></div>            
+           
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -104,10 +104,10 @@
         <div><% renderDCValues("dc:identifier") %></div>
       </div>
     </div>  
-    <div style="clear: both;"><span></span></div>            
+         
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -124,10 +124,10 @@
         <div><% renderDCValues("dc:format") %></div>
       </div>
     </div>   
-    <div style="clear: both;"><span></span></div>           
+   
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -144,10 +144,10 @@
         <div><% renderDCValues("dc:rights") %></div>
       </div>
     </div>  
-    <div style="clear: both;"><span></span></div>            
+      
   </div>
 
-  <div>
+  <div class=" ClearFix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -164,7 +164,7 @@
         <div><% renderDCValues("dc:coverage") %></div>
       </div>
     </div>              
-    <div style="clear: both;"><span></span></div>
+   
   </div>  
 </div>
 <%/* start render action*/%>

@@ -1,8 +1,9 @@
 <div class="WCMPublication">
-	<div class="PanelCenter">
-		<% //uiform.renderChild("UIPublicationAction") %>
+	<div class="ClearFix">
+		<div class="PanelCenter">
+			<% //uiform.renderChild("UIPublicationAction") %>
+		</div>
 	</div>
-	<div style="clear: both;"></div>
 	<div class="PanelBottom">
 		<% uiform.renderChild("UIPublicationComponentStatus") %>
 	</div>

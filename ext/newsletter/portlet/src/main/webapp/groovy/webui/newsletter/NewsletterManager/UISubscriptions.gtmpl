@@ -53,7 +53,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 		<div class="UICategories">
 			<div style="width:100%;">
 				<!-- Category infor -->
-				<div class="CategoryTitle">
+				<div class="CategoryTitle ClearFix">
 					<div class="LeftTitle">
 						<div class="RightTitle">
 							<div class="CenterTitle">
@@ -159,7 +159,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 				      		</div>
 						</div>
 						<!-- end action of this category -->
-					<div class="ClearLeft"><span></span></div>
+					
 				</div>
 				<!-- All subscriptions -->
 				<%List<NewsletterSubscriptionConfig> listSubscriptions = uicomponent.getListSubscription(); %>

@@ -3,7 +3,7 @@
   import  org.exoplatform.webui.core.UITree; 
 %>
 <div class="UIGroupMembershipSelector" id="$uicomponent.id">
-  <div class="Container">
+  <div class="Container ClearFix">
 		<div class="SelectedGroupPath"><% uicomponent.renderChild(UIBreadcumbs.class); %></div>
 		<div class="GroupSelector">
 			<div class="ContentContainer">
@@ -31,6 +31,6 @@
 	      </div>
 	    </div>
 	  </div>
-		<div style="clear: left"><span></span></div>
+		
 	</div>
 </div> 		

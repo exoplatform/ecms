@@ -1,5 +1,5 @@
 
-<div class="UIHomePagePortlet" id="$uicomponent.id">
+<div class="UIHomePagePortlet ClearFix" id="$uicomponent.id">
 	<div class="TRContainer">
 		<div class="PortletDecoration">					
 			<div class="GuideText">This is the Home Page of the "sample-portal" contained in gatein-sample-extension.ear/war, as you can see the skin has changed, we added new pages, we use our customized resource bundles as you can see below:
@@ -32,17 +32,17 @@
 						<div class="MiddleAccountsContainer">
 							<div class="InstructionTitle">Try GateIn 3.0 with one of these user accounts
 							</div>
-							<div class="AccountsContainerDeco">
+							<div class="AccountsContainerDeco ClearFix">
 								<div class="AccountBlock AdministratorUser">
 									<div class="AccountInfos">
 										<div class="AccountTitle">Administrator</div>
-										<div class="Username">
+										<div class="Username ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Username")%></div><span>root</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
-										<div class="Passwords">
+										<div class="Passwords ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Password")%></div><span>gtn</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
 									</div>
 								</div>	
@@ -50,13 +50,13 @@
 								<div class="AccountBlock ManagerUser">
 									<div class="AccountInfos">
 										<div class="AccountTitle">Manager</div>
-										<div class="Username">
+										<div class="Username ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Username")%></div><span>john</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
-										<div class="Passwords">
+										<div class="Passwords ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Password")%></div><span>gtn</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
 									</div>
 								</div>
@@ -64,13 +64,13 @@
 								<div class="AccountBlock NormalUser">
 									<div class="AccountInfos">
 										<div class="AccountTitle">User</div>
-										<div class="Username">
+										<div class="Username ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Username")%></div><span>mary</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
-										<div class="Passwords">
+										<div class="Passwords ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Password")%></div><span>gtn</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
 									</div>
 								</div>
@@ -78,17 +78,17 @@
 								<div class="AccountBlock DemoUser" style="margin-right: 0px;">
 									<div class="AccountInfos">
 										<div class="AccountTitle">Demo</div>
-										<div class="Username">
+										<div class="Username ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Username")%></div><span>demo</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
-										<div class="Passwords">
+										<div class="Passwords ClearFix">
 											<div class="Lable"><%=_ctx.appRes("UIHomePagePortlet.Label.Password")%></div><span>gtn</span>
-											<div class="ClearBoth"><span></span></div>
+											
 										</div>
 									</div>
 								</div>
-								<div class="ClearBoth"><span></span></div>
+								
 							</div>
 						</div>
 					</div>
@@ -97,7 +97,7 @@
 			
 		</div>	
 	</div>	
-	<div class="ClearBoth"><span></span></div>
+	
 </div>
 <div class="BottomDecoratorHome">
 	<div class="BottomDecoratorLeft">

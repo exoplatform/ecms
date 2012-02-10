@@ -20,7 +20,7 @@
 
 <div class="Header">RMA:ACCESSIONABLE</div>
 <div id="rma_accessionable">     
-  <div id="ContainerNote">
+  <div id="ContainerNote ClearFix">
     <div id="ContentLeftNote"  style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -37,7 +37,7 @@
         <div><% renderDCValues("rma:accessionDate") %></div>
       </div>
     </div> 
-    <div style="clear: both"><span></span></div>             
+          
   </div>
 </div>
 <%/* start render action*/%>

@@ -57,6 +57,7 @@
 <%
 
   if(uicomponent.isDisplayOptionBlockPanel()) {
+  	println "<div class=\"ClearFix\">";
     for(uiChild in uicomponent.getChildren()) { 
       String width = "30%";	  
       if(uiChild.getId().indexOf("OptionBlock")<0) continue;
@@ -65,7 +66,7 @@
       uicomponent.renderUIComponent(uiChild) ;
       println "</div>" ;
     }
-    print "<div style=\"clear: both;\"><span></span></div>";
+    println "</div>";
   }
 %>
 

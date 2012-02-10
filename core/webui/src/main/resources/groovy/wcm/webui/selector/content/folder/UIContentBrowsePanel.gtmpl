@@ -18,8 +18,8 @@
 	}
 %>
 
-<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div class="ActionBar">
+<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id  ClearFix">
+	<div class="ActionBar ClearFix">
 	  <div class="FilterTitle"><label for="Filter">Filter</label></div>
 		<div class="FilterInput">
 			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
@@ -29,7 +29,7 @@
 			</select>
 		</div>
 		<div class="SeparatorLineL"><span></span></div>
-		<div style="clear: both;"><span></span></div>
+		
 	</div>
 	<div class="BreadcumbsPortlet">
 		<div class="HomeIcon"><span></span></div> 
@@ -53,5 +53,5 @@
 		</div>
 		<div class="PageIterator" id="pageNavPosition"></div>
 	</div>	
-	<div style="clear: left;"><span></span></div>
+	
 </div>

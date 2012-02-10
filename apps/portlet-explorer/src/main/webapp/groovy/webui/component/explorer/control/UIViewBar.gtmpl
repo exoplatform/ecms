@@ -7,7 +7,7 @@
 	 * version: $Id$	 
 	 */
 %>
-<div class="UIViewBar">
+<div class="UIViewBar ClearFix">
   <div class="SelectViewBox">
     <% uiform.begin() %>
     <div class="SelectBox">
@@ -24,5 +24,5 @@
 	  <a class="Icon ShowSideBarButton" href="<%=uicomponent.event("ShowSideBar")%>" title="<%=_ctx.appRes("UIViewBar.label.showSideBar")%>"><span></span></a>
 	<%}%>		
 	<div class="Separator ViewBarSeparator"><span></span></div>		
-  <div class="ClearBoth"><span></span></div>
+
 </div>

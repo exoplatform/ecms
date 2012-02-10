@@ -6,7 +6,8 @@
 <div class="UIDocumentFormController" id="$uicomponent.id" >	
 	<%
 	  if(uicomponent.isDisplayOptionBlockPanel()) {
-	%>		
+	%>	
+	<div class="ClearFix">
 		<%
 	   	for(uiChild in uicomponent.getChildren()) { 
 	   		String width = "70%";	  
@@ -20,7 +21,7 @@
 	    	 println "</div>" ;
 	   	}
 		%>						
-		<div style="clear: both;"><span></span></div>		
+		</div>
 	<% } else { %>	
 		<%
 	   		for(uiChild in uicomponent.getChildren()) { 
