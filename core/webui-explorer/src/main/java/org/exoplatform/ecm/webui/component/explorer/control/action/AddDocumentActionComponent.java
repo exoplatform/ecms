@@ -36,6 +36,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBar
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -111,8 +112,8 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
-      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
-      uiDocumentContainer.setRendered(false);
+      uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
+      uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
       UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
       if (controller != null) {
         controller.getChild(UIDocumentForm.class).releaseLock();

@@ -50,6 +50,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionContainer;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionTypeForm;
+import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -198,8 +199,8 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
           uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
           uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
         }
-        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
-        uiDocumentContainer.setRendered(false);
+        uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
+        uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
         UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
         if (controller != null) {
           controller.getChild(UIDocumentForm.class).releaseLock();
