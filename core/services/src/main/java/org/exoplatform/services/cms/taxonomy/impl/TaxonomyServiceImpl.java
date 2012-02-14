@@ -18,8 +18,10 @@ package org.exoplatform.services.cms.taxonomy.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemExistsException;
@@ -428,9 +430,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();
           NodeIterator iterate = result.getNodes();
-          while (iterate.hasNext()) {
+          Set<String> addedNode = new HashSet<String>();          
+          while (iterate.hasNext()) {          	
             Node parentCate = iterate.nextNode().getParent();
-            listCate.add(parentCate);
+            // We need filtering duplicated result to fix the problem of ECMS-3282.            
+            if (!addedNode.contains(parentCate.getSession().getWorkspace().getName() + ":/" + parentCate.getPath())) {
+              listCate.add(parentCate);
+              addedNode.add(parentCate.getSession().getWorkspace().getName() + ":/" + parentCate.getPath());
+            }
           }
         }
       }
