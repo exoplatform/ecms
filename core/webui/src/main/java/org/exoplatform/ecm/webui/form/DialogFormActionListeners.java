@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.form;
 
 import javax.jcr.Node;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.event.Event;
@@ -36,7 +37,23 @@ public class DialogFormActionListeners {
       UIDialogForm uiForm = event.getSource();
 //      uiForm.isRemovePreference = true;
       String referenceNodePath = event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID);
+      //String removedNode = event.getRequestContext().getRequestParameter('removedNode");
       uiForm.releaseLock();
+      if (referenceNodePath.indexOf("$") > -1) {
+        int index = referenceNodePath.indexOf("$");
+        String removedNode = referenceNodePath.substring(index + 1);
+        referenceNodePath = referenceNodePath.substring(0, index);
+        if (StringUtils.isNotEmpty(removedNode)) {
+          Node currentNode = uiForm.getNode();
+          if (currentNode.isLocked()) {
+            Object[] args = { currentNode.getPath() };
+            org.exoplatform.wcm.webui.Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
+                ApplicationMessage.WARNING);
+            return;
+          }
+          uiForm.addRemovedNode(removedNode);
+        }
+      }
       if (referenceNodePath.startsWith("/")) {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
         if(referenceNode.hasProperty(Utils.JCR_DATA)) {

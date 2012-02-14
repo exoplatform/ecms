@@ -74,6 +74,11 @@
   background: url('icons/NodeTypes/exo-article.gif') no-repeat right center; /* orientation=rt */
 }
 
+.exo_accessibleMedia16x16Icon {
+  background: url('icons/NodeTypes/exo-accessibleMedia.png') no-repeat left center; /* orientation=lt */
+  background: url('icons/NodeTypes/exo-accessibleMedia.png') no-repeat right center; /* orientation=rt */
+}
+
 .exo_article_reference16x16Icon {
   background: url('icons/NodeTypes/exo-article-reference.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/exo-article-reference.gif') no-repeat right center; /* orientation=rt */

@@ -26,8 +26,10 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
+import org.exoplatform.ecm.webui.presentation.NodePresentation;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
@@ -40,8 +42,10 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -65,7 +69,9 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     lifecycle = Lifecycle.class,
     events = {
-      @EventConfig(listeners = UIPresentation.DownloadActionListener.class)
+      @EventConfig(listeners = UIPresentation.DownloadActionListener.class),
+      @EventConfig(listeners = UIPresentation.SwitchToAudioDescriptionActionListener.class),
+      @EventConfig(listeners = UIPresentation.SwitchToOriginalActionListener.class)
   }
 )
 
@@ -101,17 +107,33 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public Node getNode() throws Exception {
+    Node ret = getDisplayNode();
+    if (NodePresentation.MEDIA_STATE_DISPLAY.equals(getMediaState()) &&
+          (ret.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) ||
+              (ret.isNodeType(NodetypeConstant.NT_FROZEN_NODE) && 
+               NodetypeConstant.EXO_ACCESSIBLE_MEDIA.equals(ret.getProperty("jcr:frozenPrimaryType").getString())))) {
+      Node audioDescription = org.exoplatform.services.cms.impl.Utils.getChildOfType(ret, NodetypeConstant.EXO_AUDIO_DESCRIPTION);
+      if (audioDescription != null) {
+        return audioDescription;
+      }
+    }
+    return ret;
+  }
+  
+  public Node getDisplayNode() throws Exception {
     if (viewNodeLocation == null) return null;
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
     String sharedCache = preferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
     sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
-    return Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(),
+    Node ret = Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(),
                                            viewNodeLocation.getWorkspace(),
                                            viewNodeLocation.getPath(),
                                            null,
                                            sharedCache);
+    return ret;
   }
+  
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setNode(javax.jcr.Node)
@@ -293,7 +315,42 @@ public class UIPresentation extends UIBaseNodePresentation {
     }
     return attachments;
   }
-
+  
+  @Override
+  public boolean isDisplayAlternativeText() {
+    try {
+      Node node = this.getNode();
+      return ( node.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) || 
+               (node.isNodeType(NodetypeConstant.NT_FROZEN_NODE) && 
+                   NodetypeConstant.EXO_ACCESSIBLE_MEDIA.equals(node.getProperty("jcr:frozenPrimaryType").getString()))) &&
+             node.hasProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT) &&
+             StringUtils.isNotEmpty(node.getProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT).getString());
+    } catch (Exception e) { return false; }
+  }
+  
+  @Override
+  public boolean playAudioDescription() {
+    try {
+      Node node = this.getNode();
+      return ( node.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) || 
+                (node.isNodeType(NodetypeConstant.NT_FROZEN_NODE) && 
+                 NodetypeConstant.EXO_ACCESSIBLE_MEDIA.equals(node.getProperty("jcr:frozenPrimaryType").getString()))) &&
+                 org.exoplatform.services.cms.impl.Utils.hasChild(node, NodetypeConstant.EXO_AUDIO_DESCRIPTION);
+    } catch (Exception e) { return false; }
+  }
+  
+  @Override
+  public boolean switchBackAudioDescription() {
+    try {
+      Node node = this.getNode();
+      Node parent = node.getParent();
+      return node.isNodeType(NodetypeConstant.EXO_AUDIO_DESCRIPTION) &&
+              ( parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) || 
+                  (parent.isNodeType(NodetypeConstant.NT_FROZEN_NODE) && 
+                   NodetypeConstant.EXO_ACCESSIBLE_MEDIA.equals(parent.getProperty("jcr:frozenPrimaryType").getString())));
+    } catch (Exception e) { return false; }
+  }
+  
   static public class DownloadActionListener extends EventListener<UIPresentation> {
     public void execute(Event<UIPresentation> event) throws Exception {
       UIPresentation uiComp = event.getSource();
@@ -310,4 +367,23 @@ public class UIPresentation extends UIBaseNodePresentation {
       }
     }
   }
+  
+  static public class SwitchToAudioDescriptionActionListener extends EventListener<UIPresentation> {
+    public void execute(Event<UIPresentation> event) throws Exception {
+      UIPresentation uiPresentation = event.getSource();
+      UIPresentationContainer uiContainer = uiPresentation.getAncestorOfType(UIPresentationContainer.class);
+      uiPresentation.switchMediaState();        
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
+    }
+  }
+  
+  static public class SwitchToOriginalActionListener extends EventListener<UIPresentation> {
+    public void execute(Event<UIPresentation> event) throws Exception {
+      UIPresentation uiPresentation = event.getSource();
+      UIPresentationContainer uiContainer = uiPresentation.getAncestorOfType(UIPresentationContainer.class);
+      uiPresentation.switchMediaState();        
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
+    }
+  }
+  
 }

@@ -1,0 +1,268 @@
+<%
+
+  import org.exoplatform.services.wcm.core.NodetypeConstant;
+  import org.exoplatform.web.application.Parameter;
+   
+  private void setUploadFields(name, nodeType, mixinType, fieldName, mimeTypes) {
+    String changeInJcrPathParam = "";
+    String sName = name;
+    if (!("".equals(name))) {
+      String[] hiddenField1 = ["jcrPath=/node/\$" + name, "nodetype=" + nodeType, "mixintype=" + mixinType, 
+                               "changeInJcrPathParam=\$"+name, "defaultValues=\$"+name];
+      uicomponent.addHiddenField(name + "HiddenField1", hiddenField1);
+      changeInJcrPathParam = "changeInJcrPathParam=\$" + name;
+      name = "\$" + name + "/";
+    }
+    String[] hiddenField2 = ["jcrPath=/node/" + name + "jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false", changeInJcrPathParam]; 
+    String[] hiddenField3 = ["jcrPath=/node/" + name + "jcr:content/jcr:encoding", "visible=false", "UTF-8", changeInJcrPathParam];  
+    String[] hiddenField4 = ["jcrPath=/node/" + name + "jcr:content/jcr:lastModified", "visible=false", changeInJcrPathParam];
+    String[] hiddenField5 = ["jcrPath=/node/" + name + "jcr:content/dc:date", "visible=false", changeInJcrPathParam];                  
+    uicomponent.addHiddenField(sName + "HiddenField2", hiddenField2);
+    uicomponent.addHiddenField(sName + "HiddenField3", hiddenField3);
+    uicomponent.addCalendarField(sName + "HiddenField4", hiddenField4);
+    uicomponent.addCalendarField(sName + "HiddenField5", hiddenField5);
+    
+    String[] field = ["jcrPath=/node/"+ name + "jcr:content/jcr:data", changeInJcrPathParam];
+    if (mimeTypes != null) {
+      field = ["jcrPath=/node/"+ name + "jcr:content/jcr:data", changeInJcrPathParam, "mimetype=" + mimeTypes];
+    }
+    uicomponent.addUploadField(fieldName, field);  
+  }
+  
+  def node = uicomponent.getNode();
+  Parameter[] params;
+  
+%>
+<div class="UIForm FormLayout FormScrollLayout">  
+  <% uiform.begin() %>
+  <%/* start render action*/%>
+  <% if (uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+  <%/* end render action*/%>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("File.dialog.label.name")%></label></td>
+          <td class="FieldComponent">
+            <%
+              String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"] ;
+              uicomponent.addTextField("name", fieldName) ; 
+            %>
+          </td>
+        </tr>
+        <%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
+          <tr>
+            <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("File.dialog.label.categories")%></label></td>
+            <td class="FieldComponent">
+              <% 
+                String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
+                uicomponent.addTextField("categories", fieldCategories);
+              %>
+            </td>
+          </tr>
+        <%}%>
+    <tr>
+      <td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+      <td class="FieldComponent">
+      <%
+        String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+        String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+        uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+      %>
+      </td>
+    </tr>
+        <tr>
+          <td class="FieldLabel"><label for="content"><%=_ctx.appRes("File.dialog.label.content")%></label></td>
+          <td class="FieldComponent">
+          <%          
+            def content = "content";
+            if(node != null && (uicomponent.findComponentById(content) == null)) {
+              def resourceNode = node.getNode("jcr:content");
+              if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
+                def nodeName = node.getName();
+                def actionLink = uicomponent.event("RemoveData", "/jcr:content");
+                %>    
+                  <div>
+                    <span><%=nodeName%></span>
+                    <a onclick="$actionLink">
+                      <img alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" class="ActionIcon Remove16x16Icon"/>
+                    </a>
+                  </div>
+                <%
+              } else {
+                setUploadFields("", "nt:file", "", content, "video/x-flv,audio/mp3");
+              }
+            } else {
+              setUploadFields("", "nt:file", "", content, "video/x-flv,audio/mp3");
+            }
+          %>
+          </td>
+        </tr>       
+          <tr>
+            <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
+            <td class="FieldComponent">
+              <%
+                String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
+                uicomponent.addTextField("title", fieldTitle) ;
+              %>
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label></td>
+            <td class="FieldComponent">
+              <%
+                String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
+                uicomponent.addTextField("description", fieldDescription) ; ;
+              %>
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label></td>
+            <td class="FieldComponent">
+              <%
+                String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
+                uicomponent.addTextField("creator", fieldCreator) ;
+              %>
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label></td>
+            <td class="FieldComponent">
+              <%
+                String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;
+                uicomponent.addTextField("source", fieldSource) ;
+              %>
+            </td>
+          </tr>
+          
+          <!-- Captions -->
+          <tr>
+          <td class="FieldLabel"><%=_ctx.appRes("AccessibleMedia.dialog.label.captions")%></td>
+          <td class="FieldComponent">
+            <%          
+              String captions = "captions";
+              def captionsNode = uicomponent.getNodeByType(NodetypeConstant.EXO_CAPTIONS);
+              if(captionsNode != null && (uicomponent.findComponentById(captions) == null)) {
+                def captionsResourceNode = captionsNode.getNode("jcr:content");
+                if(captionsResourceNode.getProperty("jcr:data").getStream().available() > 0) {
+                  def captionsName = captionsNode.getName();
+                  //params = [new Parameter("removeNode", captionsName)];
+                  def captionsActionLink = uicomponent.event("RemoveData", "/" + captionsName + "/jcr:content" +
+                  		                                                     "\$" + captionsName);
+                  %>    
+                    <div>
+                      <span><%=captionsName%></span>
+                      <a onclick="$captionsActionLink">
+                        <img alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" class="ActionIcon Remove16x16Icon"/>
+                      </a>
+                    </div>
+                  <%
+                } else {
+                  setUploadFields(captions, "nt:file", "exo:captions", captions, null);
+                }
+              } else {
+                setUploadFields(captions, "nt:file", "exo:captions", captions, null);
+              }
+            %>
+          </td>
+          <td class ="tdShowHelp">
+            <div class="IconInContextHelp ShowHelpIcon" id="CaptionsHelp" 
+                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'false')"
+                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'false')">
+              <div style="position: relative;">
+                <div class="InContextHelpContent" >                    
+                  <div class="InContextHelpPopup">
+                   <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+                     <%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>
+                    </div>
+                  </div>                      
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <!-- End of Captions -->
+
+        <!-- Audio description -->
+        <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("AccessibleMedia.dialog.label.audioDescription")%></td>
+        <td class="FieldComponent">
+          <%          
+            String audioDescription = "audioDescription";
+            def audioDescriptionNode = uicomponent.getNodeByType(NodetypeConstant.EXO_AUDIO_DESCRIPTION);
+            if(audioDescriptionNode != null && (uicomponent.findComponentById(audioDescription) == null)) {
+              def audioResourceNode = audioDescriptionNode.getNode("jcr:content");
+              if(audioResourceNode.getProperty("jcr:data").getStream().available() > 0) {
+                def audioDescriptionName = audioDescriptionNode.getName();
+                //params = [new Parameter("removeNode", audioDescriptionName)];
+                def audioActionLink = uicomponent.event("RemoveData", "/" + audioDescriptionName + "/jcr:content" + 
+                                                                      "\$" + audioDescriptionName);
+                %>    
+                  <div>
+                    <span><%=audioDescriptionName%></span>
+                    <a onclick="$audioActionLink">
+                      <img alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" class="ActionIcon Remove16x16Icon"/>
+                    </a>
+                  </div>
+                <%
+              } else {
+                setUploadFields(audioDescription, "nt:file", "exo:audioDescription", audioDescription, "video/x-flv,audio/mp3");
+              }
+            } else {
+              setUploadFields(audioDescription, "nt:file", "exo:audioDescription", audioDescription, "video/x-flv,audio/mp3");
+            }
+          %>
+        </td>
+        <td class ="tdShowHelp">
+        <div class="IconInContextHelp ShowHelpIcon" id="AudioDescriptionHelp" 
+              onmouseover="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'false')"
+              onfocus="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'false')">
+          <div style="position: relative;">
+            <div class="InContextHelpContent" >                    
+              <div class="InContextHelpPopup">
+               <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+                 <%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>
+                </div>
+              </div>                      
+            </div>
+          </div>
+        </div>
+        </td>
+      </tr>
+      <!-- End of Audio description -->
+      
+      <!-- Alternative text-->
+      <tr>
+        <td class="FieldLabel"><label for="alternativeText"><%=_ctx.appRes("AccessibleMedia.dialog.label.alternativeText")%></label></td>
+        <td class="FieldComponent">
+          <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
+             uicomponent.addRichtextField("alternativeText", fieldAltText) ;            
+          %>
+        </td>
+        <td class ="tdShowHelp">
+        <div class="IconInContextHelp ShowHelpIcon" id="AlternativeTextHelp" 
+              onmouseover="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'false')"
+              onfocus="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'false')">
+          <div style="position: relative;">
+            <div class="InContextHelpContent" >                    
+              <div class="InContextHelpPopup">
+               <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+                 <%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>
+               </div>
+              </div>                      
+            </div>
+          </div>
+        </div>
+        </td>
+      </tr>
+      <!-- End of Alternative text -->
+    </table>       
+  </div>
+  <% if (!uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+  <%uiform.end()%>
+</div>

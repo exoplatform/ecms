@@ -35,11 +35,13 @@ import java.util.Set;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.lock.LockException;
+import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.download.DownloadService;
@@ -82,6 +84,7 @@ import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -160,6 +163,7 @@ public class UIDialogForm extends UIForm {
   private List<String> prevScriptInterceptor = new ArrayList<String>();
 
   private List<String> listTaxonomy = new ArrayList<String>();
+  private List<String> removedNodes = new ArrayList<String>();
   private String storedPath;
 
   protected String workspaceName;
@@ -281,6 +285,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = formActionField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formActionField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     Node node = getNode();
     UIComponent uiInput;
@@ -382,6 +387,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = calendarField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(calendarField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     if(calendarField.isMultiValues()) {
       renderMultiValuesInput(UIFormDateTimeInput.class,name,label);
@@ -441,6 +447,8 @@ public class UIDialogForm extends UIForm {
     String jcrPath = formHiddenField.getJcrPath();
     JcrInputProperty inputProperty = formHiddenField.createJcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formHiddenField.getChangeInJcrPathParam());
+    inputProperty.setValue(formHiddenField.getDefaultValue());
     if(formHiddenField.getMixinTypes() != null) inputProperty.setMixintype(formHiddenField.getMixinTypes());
     if(formHiddenField.getNodeType() != null ) inputProperty.setNodetype(formHiddenField.getNodeType());
     setInputProperty(name, inputProperty);
@@ -463,6 +471,7 @@ public class UIDialogForm extends UIForm {
     String mixintype = mixinField.getMixinTypes();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(mixinField.getChangeInJcrPathParam());
     if (nodetype != null || mixintype != null) {
       inputProperty.setType(JcrInputProperty.NODE);
       if(nodetype != null) inputProperty.setNodetype(nodetype);
@@ -495,6 +504,7 @@ public class UIDialogForm extends UIForm {
     if (defaultValue == null) defaultValue = "false";
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formCheckBoxField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
@@ -564,6 +574,7 @@ public class UIDialogForm extends UIForm {
     fieldNames.put(propertyName, name);
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formRadioBoxField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     Node node = getNode();
     Node childNode = getChildNode();
@@ -744,6 +755,7 @@ public class UIDialogForm extends UIForm {
     if (inputProperty== null) {
       inputProperty = new JcrInputProperty();
       inputProperty.setJcrPath(jcrPath);
+      inputProperty.setChangeInJcrPathParam(formSelectBoxField.getChangeInJcrPathParam());
       setInputProperty(name, inputProperty);
     } else {
       if (inputProperty.getValue() != null) {
@@ -785,6 +797,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = formTextAreaField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formTextAreaField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String option = formTextAreaField.getOptions();
     setInputOption(name, option);
@@ -1028,6 +1041,7 @@ public class UIDialogForm extends UIForm {
     String nodetype = formTextField.getNodeType();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formTextField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String option = formTextField.getOptions();
     setInputOption(name, option);
@@ -1245,6 +1259,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = formUploadField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formUploadField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String option = formUploadField.getOptions();
     setInputOption(name, option);
@@ -1279,6 +1294,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = formWYSIWYGField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(formWYSIWYGField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String option = formWYSIWYGField.getOptions();
     setInputOption(name, option);
@@ -1362,7 +1378,7 @@ public class UIDialogForm extends UIForm {
     }
     if (!formField.isMultiValues() && isFirstTimeRender) {
       if(!isShowingComponent && !isRemovePreference) {
-        if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
+        if(node != null && (node.isNodeType("nt:file") || isNTFile) && formField.isFillJcrDataFile()) {
           Node jcrContentNode = node.getNode("jcr:content");
           formInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
         } else {
@@ -1373,7 +1389,7 @@ public class UIDialogForm extends UIForm {
       }
       if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         Node childNode = getChildNode();
-        if(node != null && node.hasNode("jcr:content") && childNode != null) {
+        if(node != null && node.hasNode("jcr:content") && childNode != null && formField.isFillJcrDataFile()) {
           Node jcrContentNode = node.getNode("jcr:content");
           formInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
         } else {
@@ -1431,6 +1447,7 @@ public class UIDialogForm extends UIForm {
     String jcrPath = richtextField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
+    inputProperty.setChangeInJcrPathParam(richtextField.getChangeInJcrPathParam());
     setInputProperty(name, inputProperty);
     String option = richtextField.getOptions();
     setInputOption(name, option);
@@ -1714,6 +1731,12 @@ public class UIDialogForm extends UIForm {
     } catch (Exception e) {}
     return d;
   }
+  
+  protected List<String> getRemovedNodes() { return removedNodes; }
+  
+  public void addRemovedNode(String path) { removedNodes.add(path); }
+  
+  public void clearRemovedNode() { removedNodes = new ArrayList<String>(); }
 
   private void executePostSaveEventInterceptor(String nodePath_) throws Exception {
     if (postScriptInterceptor.size() > 0) {
@@ -1834,6 +1857,17 @@ public class UIDialogForm extends UIForm {
             .append("</a>");
     }
     writer.append("</div>");
+  }
+  
+  public Node getNodeByType(String nodeType) throws Exception {
+    if (this.getNode() == null) return null;
+    NodeIterator nodeIter = this.getNode().getNodes();
+    while (nodeIter.hasNext()) {
+      Node node = nodeIter.nextNode();
+      if (node.isNodeType(nodeType))
+        return node;
+    }
+    return null;
   }
 
   static public class AddActionListener extends EventListener<UIFormMultiValueInputSet> {

@@ -37,7 +37,7 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
-import org.exoplatform.ecm.webui.presentation.NodePresentation;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -59,7 +59,6 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -80,7 +79,7 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
         @EventConfig(listeners = UIDocumentContent.ChangeNodeActionListener.class)
     }
 )
-public class UIDocumentContent extends UIContainer implements NodePresentation {
+public class UIDocumentContent extends UIBaseNodePresentation {
   private NodeLocation node_ ;
   public static final String DEFAULT_LANGUAGE = "default" ;
   private String language_ = DEFAULT_LANGUAGE ;

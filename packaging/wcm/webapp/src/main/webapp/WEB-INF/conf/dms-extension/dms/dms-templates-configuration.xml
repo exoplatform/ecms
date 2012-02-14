@@ -85,7 +85,7 @@
                         </collection>
                       </field>                                    
                     </object>
-                  </value>                  
+                  </value>
                   <value>
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field  name="nodetypeName"><string>exo:article</string></field>
@@ -716,7 +716,52 @@
                         </collection>
                       </field>                                    
                     </object>
-                  </value>                  
+                  </value>
+
+	                <value>
+                    <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
+                      <field  name="nodetypeName"><string>exo:accessibleMedia</string></field>
+                      <field  name="documentTemplate"><boolean>true</boolean></field>
+                      <field  name="label"><string>Accessible Media</string></field>
+                      <field  name="referencedView">
+                        <collection type="java.util.ArrayList">
+                          <value>                    
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/accessibleMedia/views/view1.gtmpl</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                      
+                          </value>
+                        </collection>
+                      </field>                  
+                      <field  name="referencedDialog">
+                        <collection type="java.util.ArrayList">
+                          <value>                    
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/accessibleMedia/dialogs/dialog1.gtmpl</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                      
+                          </value>
+                        </collection>
+                      </field>
+                      <field  name="referencedSkin">
+                        <collection type="java.util.ArrayList">
+                          <value>
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/accessibleMedia/skins/Stylesheet-lt.css</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                                                   
+                          </value>
+                          <value>
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/accessibleMedia/skins/Stylesheet-rt.css</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                                                   
+                          </value>  
+                        </collection>
+                      </field>                                    
+                    </object>
+                  </value>    
+                                                      
                 </collection>
               </field>
             </object>

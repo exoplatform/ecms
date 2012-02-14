@@ -19,9 +19,11 @@ package org.exoplatform.ecm.webui.utils;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -29,6 +31,7 @@ import javax.jcr.Property;
 import javax.jcr.PropertyType;
 
 import org.exoplatform.commons.utils.IOUtil;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -90,6 +93,7 @@ public class DialogFormUtil {
   }
   @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties, Map options) throws Exception {
+    Map<String, String> changeInJcrPathParamMap = new HashMap<String, String>();
     Map<String, JcrInputProperty> rawinputs = new HashMap<String, JcrInputProperty>();
     HashMap<String, JcrInputProperty> hasMap = new HashMap<String, JcrInputProperty>() ;
     String inputName = null;
@@ -117,10 +121,18 @@ public class DialogFormUtil {
         if(property != null) {
           if (input instanceof UIFormUploadInput) {
             UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
-            if (uploadResource == null) continue;
+            if (uploadResource == null) { 
+              if (property.getChangeInJcrPathParam() != null)
+                changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(), "");
+              continue;
+            }
               String location = uploadResource.getStoreLocation();
               byte[] uploadData = IOUtil.getFileContentAsBytes(location);
               property.setValue(uploadData);
+              //change param in jcr path
+              if (property.getChangeInJcrPathParam() != null) 
+                changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(), 
+                                            Text.escapeIllegalJcrChars(uploadResource.getFileName()));
 
               mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
               JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
@@ -216,7 +228,37 @@ public class DialogFormUtil {
       rawinputs.putAll(jcrPropertiesToAdd);
     }
 
-    return rawinputs;
+    if (changeInJcrPathParamMap.isEmpty()) {
+      return rawinputs;
+    }
+    
+    Map<String, JcrInputProperty> ret = new HashMap<String, JcrInputProperty>();
+    Set<String> removedKeys = new HashSet<String>();
+    for (Map.Entry<String, String> changeEntry : changeInJcrPathParamMap.entrySet()) {
+      for (Map.Entry<String, JcrInputProperty> entry : rawinputs.entrySet()) {
+        if (entry.getKey().contains(changeEntry.getKey())) {
+          removedKeys.add(entry.getKey());
+          JcrInputProperty value = entry.getValue();
+          if (value.getJcrPath() != null) {
+            value.setJcrPath(value.getJcrPath().replace(changeEntry.getKey(), changeEntry.getValue()));
+          }
+          if (value.getValue() != null && value.getValue() instanceof String) {
+            value.setValue(((String)value.getValue()).replace(changeEntry.getKey(), changeEntry.getValue()));
+          }
+          if (value != null && !"".equals(value) && changeEntry.getValue() != null && !"".equals(changeEntry.getValue())) {
+            ret.put(entry.getKey().replace(changeEntry.getKey(), changeEntry.getValue()), 
+                    value);
+          }
+        }
+      }
+    }
+    for (Map.Entry<String, JcrInputProperty> entry : rawinputs.entrySet()) {
+      if (!removedKeys.contains(entry.getKey())) {
+        ret.put(entry.getKey(), entry.getValue());
+      }
+    }
+    
+    return ret;
   }
 
   private static JcrInputProperty clone(JcrInputProperty fileNodeInputProperty) {

@@ -1394,4 +1394,30 @@ ECMUtils.prototype.onDbClickOnTreeExplorer = function(){
   }
 };
 
+ECMUtils.prototype.displayFullAlternativeText = function(displayDiv) {
+  if (displayDiv) {
+    var parentDiv = eXo.core.DOMUtil.findAncestorByTagName(displayDiv, "div");
+    if (parentDiv) {
+      parentDiv.style.display="none";
+      var closeDiv = eXo.core.DOMUtil.findNextElementByTagName(parentDiv, "div");
+      if (closeDiv) {
+    	  closeDiv.style.display="block";
+      }
+    }
+  }
+};
+
+ECMUtils.prototype.collapseAlternativeText = function(displayDiv) {
+  if (displayDiv) {
+    var parentDiv = eXo.core.DOMUtil.findAncestorByTagName(displayDiv, "div");
+    if (parentDiv) {
+      parentDiv.style.display="none";
+      var closeDiv = eXo.core.DOMUtil.findPreviousElementByTagName(parentDiv, "div");
+      if (closeDiv) {
+    	  closeDiv.style.display="block";
+      }
+    }
+  }
+};
+
 eXo.ecm.ECMUtils = new ECMUtils();

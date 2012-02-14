@@ -54,6 +54,8 @@ public abstract class DialogFormField {
   protected final String ROW_SIZE = "rows" + SEPARATOR ;
   protected final String COL_SIZE = "columns" + SEPARATOR ;
   protected final String SIZE = "size" + SEPARATOR ;
+  protected final String CHANGE_IN_JCR_PATH_PARAM = "changeInJcrPathParam" + SEPARATOR;
+  protected final String FILL_JCR_DATA_OF_FILE = "fillJcrDataOfFile" + SEPARATOR;
 
   protected String editable;
   protected String defaultValue;
@@ -80,6 +82,8 @@ public abstract class DialogFormField {
   protected String[] scriptParams;
   protected String type;
   protected String size;
+  protected String changeInJcrPathParam;
+  protected String fillJcrDataOfFile = "true";
 
   public DialogFormField(String name, String label, String[] arguments) {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
@@ -105,6 +109,8 @@ public abstract class DialogFormField {
     this.groovyScript = parsedArguments.get(SCRIPT);
     this.type = parsedArguments.get(TYPE);
     this.size = parsedArguments.get(SIZE);
+    this.changeInJcrPathParam = parsedArguments.get(CHANGE_IN_JCR_PATH_PARAM);
+    this.fillJcrDataOfFile = parsedArguments.get(FILL_JCR_DATA_OF_FILE);
     String scriptParam = parsedArguments.get(SCRIPT_PARAMS);
     if(scriptParam != null) {
       scriptParams = scriptParam.split(",");
@@ -217,12 +223,19 @@ public abstract class DialogFormField {
 
   public String getSize() { return size; }
   public void setSize(String size) { this.size = size;}
+  
+  public String getChangeInJcrPathParam() { return changeInJcrPathParam; }
+  public void setChangeInJcrPathParam(String value) { this.changeInJcrPathParam = value; }
+  
+  public String getFillJcrDataFile() { return fillJcrDataOfFile; }
+  public void setFillJcrDataFile(String value) { fillJcrDataOfFile = value; }
 
   public boolean isMultiValues() { return "true".equalsIgnoreCase(multiValues); }
   public boolean isReference() { return "true".equalsIgnoreCase(reference); }
   public boolean isEditable() { return !"false".equalsIgnoreCase(editable); }
   public boolean isEditableIfNull() { return "if-null".equalsIgnoreCase(editable); }
   public boolean isVisibleIfNotNull() { return "if-not-null".equals(visible); }
+  public boolean isFillJcrDataFile() { return "true".equals(fillJcrDataOfFile); }
 
   private HashMap<String,String> parseArguments(String[] arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
@@ -282,6 +295,12 @@ public abstract class DialogFormField {
       } else if(argument.startsWith(SIZE)) {
         map.put(SIZE, value) ;
         continue ;
+      } else if (argument.startsWith(CHANGE_IN_JCR_PATH_PARAM)) {
+        map.put(CHANGE_IN_JCR_PATH_PARAM, value);
+        continue;
+      } else if (argument.startsWith(FILL_JCR_DATA_OF_FILE)) {
+        map.put(FILL_JCR_DATA_OF_FILE, value);
+        continue;
       } else {
         map.put(DEFAULT_VALUES,argument);
       }

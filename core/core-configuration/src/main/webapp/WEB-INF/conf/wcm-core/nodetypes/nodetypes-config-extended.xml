@@ -997,5 +997,37 @@
     </propertyDefinition>
 			</propertyDefinitions>
   </nodeType>
+  
+	<nodeType name="exo:accessibleMedia" isMixin="false" hasOrderableChildNodes="true" primaryItemName="" >
+		<supertypes>
+			<supertype>nt:file</supertype>
+		</supertypes>
+		<propertyDefinitions>
+			<propertyDefinition name="exo:alternativeText" requiredType="String" autoCreated="false" mandatory="false" 
+													onParentVersion="COPY" protected="false" multiple="false" >
+				<valueConstraints/>
+			</propertyDefinition>
+		</propertyDefinitions>
+		<childNodeDefinitions>
+			<childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false" mandatory="false" 
+														onParentVersion="COPY" protected="false" sameNameSiblings="false" >
+				<requiredPrimaryTypes>
+					<requiredPrimaryType>nt:file</requiredPrimaryType>
+				</requiredPrimaryTypes>
+			</childNodeDefinition>
+		</childNodeDefinitions>
+	</nodeType>
+  
+	<nodeType name="exo:audioDescription" isMixin="true" hasOrderableChildNodes="false" primaryItemName="" >
+		<supertypes>
+			<supertype>nt:base</supertype>
+		</supertypes>
+	</nodeType>
+	
+	<nodeType name="exo:captions" isMixin="true" hasOrderableChildNodes="false" primaryItemName="" >
+		<supertypes>
+			<supertype>nt:base</supertype>
+		</supertypes>
+	</nodeType>
 
 </nodeTypes>

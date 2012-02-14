@@ -721,4 +721,19 @@
      </label> 
    </view>
   </AutoVersioning>
+  
+  <AccessibleMedia>
+    <view>
+      <label>
+      	<Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
+      	<Read-more>Lire la suite</Read-more>
+      	<Read-less>Réduire</Read-less>
+      	<Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      	<A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+  
 </bundle>

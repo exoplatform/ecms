@@ -10,6 +10,12 @@
   cursor: pointer;
 }
 
+.exo_accessibleMedia70x80Icon {
+  width: 70px; height: 80px;
+  background: url('icons/exo_accessibleMedia.png') no-repeat;  
+  cursor: pointer;
+}
+
 .exo_contact_us70x80Icon {
   width: 70px; height: 80px;
   background: url('icons/exo_contact_us.png') no-repeat;  

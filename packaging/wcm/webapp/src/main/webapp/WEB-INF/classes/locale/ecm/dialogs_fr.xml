@@ -875,4 +875,19 @@
     </dialog>
   </ContentPublishing>
 				
+  <AccessibleMedia>
+  	<dialog>
+  		<label>
+  			<captions>Sous-titres</captions>
+				<audioDescription>Description audio</audioDescription>
+				<alternativeText>Texte alternatif</alternativeText>
+			</label>
+		</dialog>
+		<help>
+			<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
+			<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
+			<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
+		</help>
+	</AccessibleMedia>
+  
 </bundle>

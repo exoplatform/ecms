@@ -172,7 +172,9 @@ public class CmsServiceImpl implements CmsService {
                 for(String inputType : inputMixinTypes) {
                   if (inputType.equals(type)) {
                     String childPath = jcrInputProperty.getJcrPath().replaceAll(NODE + "/", "");
-                    createNodeRecursively(jcrInputProperty.getJcrPath(), currentNode.getNode(childPath), mixinType, mappings);
+                    if (currentNode.hasNode(childPath)) {
+                      createNodeRecursively(jcrInputProperty.getJcrPath(), currentNode.getNode(childPath), mixinType, mappings);
+                    }
                   }
                 }
               }
@@ -496,13 +498,27 @@ public class CmsServiceImpl implements CmsService {
     List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;
     NodeTypeManager nodeTypeManger = currentNode.getSession().getWorkspace().getNodeTypeManager();
     List<Object> childs = new ArrayList<Object>();
-    if (create) {
-      for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) {
-        childs.add(childNodeDef);
-      }
-    } else {
+    Set<String> childNames = new HashSet<String>();
+    
+    for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) { 
+      childs.add(childNodeDef);
+      NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
+      NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
+      childNames.add(childNodeDef.getName() + 
+                     (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+                     (defaultPrimaryType == null? null : defaultPrimaryType.getName()) );
+    }
+    if (currentNode != null) {
       for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
-        childs.add(iterator.nextNode());
+        NodeDefinition childNodeDef = iterator.nextNode().getDefinition();
+        NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
+        NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
+        
+        if (!childNames.contains(childNodeDef.getName() + 
+                                 (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+                                 (defaultPrimaryType == null? null : defaultPrimaryType.getName()))) {
+          childs.add(childNodeDef);
+        }
       }
     }
     Set<String> childItemPaths = new HashSet<String>();
@@ -531,7 +547,7 @@ public class CmsServiceImpl implements CmsService {
             mixinTypes = input.getMixintype().split(",") ;
           }
           Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;
-          if (!childItemPaths.contains(childItemPath))
+          if (childNode != null && !childItemPaths.contains(childItemPath))
             processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
           childItemPaths.add(childItemPath);
         }
@@ -1229,6 +1245,8 @@ public class CmsServiceImpl implements CmsService {
    * @throws Exception
    */
   private Node doAddNode(Node currentNode, String nodeName, String nodeType, String[] mixinTypes) throws Exception {
+    if (StringUtils.isEmpty(nodeName))
+      return null;
     Node childNode = null;
     try {
       childNode = currentNode.getNode(nodeName);

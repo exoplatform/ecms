@@ -136,6 +136,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       UIDocumentForm uiDocumentForm = uiController.getChild(UIDocumentForm.class);
       uiDocumentForm.setRepositoryName(uiExplorer.getRepositoryName());
       uiDocumentForm.setContentType(nodeType);
+      uiDocumentForm.clearRemovedNode();
       if(uiDocumentForm.getTemplate() == null) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));        
         return;

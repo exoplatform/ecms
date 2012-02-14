@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 
 import org.exoplatform.container.ExoContainer;
@@ -63,6 +64,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   private String language_ ;
   private boolean enableVote;
   private boolean enableComment;
+  private String mediaState = MEDIA_STATE_NONE;
   private static final Log LOG  = ExoLogger.getLogger("admin.UIBaseNodePresentation");
 
   /* (non-Javadoc)
@@ -87,7 +89,9 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    *
    * @throws Exception the exception
    */
-  public abstract String getRepositoryName() throws Exception ;
+  public String getRepositoryName() throws Exception {
+    return WCMCoreUtils.getRepository().getConfiguration().getName();
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#encodeHTML(java.lang.String)
@@ -438,4 +442,25 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }
+  
+  public String getMediaState() { return mediaState; }
+  
+  public void switchMediaState() { 
+    mediaState = MEDIA_STATE_DISPLAY.equals(mediaState) ? MEDIA_STATE_NONE : MEDIA_STATE_DISPLAY; 
+  }
+  
+  public boolean isDisplayAlternativeText() {
+    return false;
+  }
+
+  @Override
+  public boolean playAudioDescription() {
+    return false;
+  }
+  
+  @Override
+  public boolean switchBackAudioDescription() {
+    return false;
+  }
+  
 }

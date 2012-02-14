@@ -54,6 +54,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -70,6 +71,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.NodePresentation;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -113,7 +115,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.event.Event;
@@ -144,10 +145,12 @@ import org.exoplatform.webui.ext.UIExtensionManager;
         @EventConfig(listeners = UIDocumentInfo.SortTimelineASCActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.SortTimelineDESCActionListener.class),
         @EventConfig(listeners = UIDocumentInfo.ExpandTimelineCatergoryActionListener.class),
-        @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class)
+        @EventConfig(listeners = UIDocumentInfo.CollapseTimelineCatergoryActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.SwitchToAudioDescriptionActionListener.class),
+        @EventConfig(listeners = UIDocumentInfo.SwitchToOriginalActionListener.class)
     }
 )
-public class UIDocumentInfo extends UIContainer implements NodePresentation {
+public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private static final String   NO                                 = "NO";
 
@@ -789,7 +792,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return getCurrentNode().getSession().getWorkspace().getName();
   }
 
-  public Node getNode() throws Exception {
+  public Node getDisplayNode() throws Exception {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
     currentNode_ = NodeLocation.getNodeLocationByNode(currentNode);
     if(currentNode.hasProperty(Utils.EXO_LANGUAGE)) {
@@ -809,6 +812,18 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       }
     }
     return currentNode;
+  }
+  
+  public Node getNode() throws Exception {
+    Node ret = getDisplayNode();
+    if (NodePresentation.MEDIA_STATE_DISPLAY.equals(getMediaState()) &&
+        ret.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA)) {
+      Node audioDescription = org.exoplatform.services.cms.impl.Utils.getChildOfType(ret, NodetypeConstant.EXO_AUDIO_DESCRIPTION);
+      if (audioDescription != null) {
+        return audioDescription;
+      }
+    }
+    return ret;
   }
 
   public Node getCurrentNode() {
@@ -1422,6 +1437,32 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
     }
   }
+  
+  static public class SwitchToAudioDescriptionActionListener extends EventListener<UIDocumentInfo> {
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
+      UIDocumentInfo uiDocumentInfo = event.getSource();
+      UIJCRExplorer uiExplorer = uiDocumentInfo.getAncestorOfType(UIJCRExplorer.class);
+      uiDocumentInfo.switchMediaState();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+    }
+  }
+  
+  static public class SwitchToOriginalActionListener extends EventListener<UIDocumentInfo> {
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
+      UIDocumentInfo uiDocumentInfo = event.getSource();
+      UIJCRExplorer uiExplorer = uiDocumentInfo.getAncestorOfType(UIJCRExplorer.class);
+      uiDocumentInfo.switchMediaState();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+    }
+  }
+  
+//  public boolean isRenderAccessibleMedia() {
+//    Node originalNode = getOriginalNode();
+//    if (!originalNode.hasNode("audioDescription")) return false;
+//    Node audioDescription = originalNode.getNode("audioDescription");
+//    if (!audioDescription.isNodeType("exo:audioDescription")) return false;
+//    return true;
+//  }
 
   static public class ShowPageActionListener extends EventListener<UIPageIterator> {
     public void execute(Event<UIPageIterator> event) throws Exception {
@@ -1555,4 +1596,32 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return isExpanded_;
   }
   
+  @Override
+  public boolean isDisplayAlternativeText() {
+    try {
+      Node node = this.getNode();
+      return node.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) &&
+             node.hasProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT) &&
+             StringUtils.isNotEmpty(node.getProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT).getString());
+    } catch (Exception e) { return false; }
+  }
+  
+  @Override
+  public boolean playAudioDescription() {
+    try {
+      Node node = this.getNode();
+      return node.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA) &&
+             org.exoplatform.services.cms.impl.Utils.hasChild(node, NodetypeConstant.EXO_AUDIO_DESCRIPTION);
+    } catch (Exception e) { return false; }
+  }
+  
+  @Override
+  public boolean switchBackAudioDescription() {
+    try {
+      Node node = this.getNode();
+      Node parent = node.getParent();
+      return node.isNodeType(NodetypeConstant.EXO_AUDIO_DESCRIPTION) &&
+             parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA);
+    } catch (Exception e) { return false; }
+  }
 }

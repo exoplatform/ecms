@@ -39,7 +39,7 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
-import org.exoplatform.ecm.webui.presentation.NodePresentation;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
@@ -63,7 +63,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
@@ -84,7 +83,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIDocumentDetail extends UIContainer implements NodePresentation, UIPopupComponent {
+public class UIDocumentDetail extends UIBaseNodePresentation implements UIPopupComponent {
   protected Node node_ ;
   private Node originalNode_;
   private String language_ ;

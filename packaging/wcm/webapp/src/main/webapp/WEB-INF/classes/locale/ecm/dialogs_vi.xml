@@ -869,6 +869,21 @@
 								<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
       </label>
     </dialog>
-  </ContentPublishing>		
-		
+  </ContentPublishing>
+
+  <AccessibleMedia>
+  	<dialog>
+  		<label>
+  			<captions>Chú thích</captions>
+				<audioDescription>File mô tả</audioDescription>
+				<alternativeText>Văn bản thay thế</alternativeText>
+			</label>
+		</dialog>
+		<help>
+			<CaptionsHelp>Chú thích nên hỗ trợ mô tả bằng văn bản cho các đoạn hội thoại và âm thanh quan trọng</CaptionsHelp>
+			<AudioDescriptionHelp>File âm thanh mô tả là đoạn thuật lại của video</AudioDescriptionHelp>
+			<AlternativeTextHelp>Cung cấp một cách có thể truy cập khác để trình bày các thông tin</AlternativeTextHelp>
+		</help>
+	</AccessibleMedia>
+	
 </bundle>

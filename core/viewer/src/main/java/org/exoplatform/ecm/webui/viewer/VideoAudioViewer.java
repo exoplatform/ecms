@@ -23,10 +23,12 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -91,6 +93,10 @@ public class VideoAudioViewer extends UIComponent {
       }
     }
     return currentNode ;
+  }
+  
+  public Node getChildNode(Node parent, String childType) throws Exception {
+    return Utils.getChildOfType(parent, childType);
   }
 
 }

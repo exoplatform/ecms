@@ -850,6 +850,21 @@
 								<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
       </label>
     </dialog>
-  </ContentPublishing>		
-		
+  </ContentPublishing>
+  
+  <AccessibleMedia>
+  	<dialog>
+  		<label>
+  			<captions>Captions</captions>
+				<audioDescription>Audio description</audioDescription>
+				<alternativeText>Alternative text</alternativeText>
+			</label>
+		</dialog>
+		<help>
+			<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+			<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+			<AlternativeTextHelp>Provide an accessible alternative way of presenting the information</AlternativeTextHelp>
+		</help>
+	</AccessibleMedia>
+  
 </bundle>

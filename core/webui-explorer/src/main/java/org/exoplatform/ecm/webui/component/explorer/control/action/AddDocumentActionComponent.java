@@ -117,6 +117,7 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
       UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
       if (controller != null) {
         controller.getChild(UIDocumentForm.class).releaseLock();
+        controller.getChild(UIDocumentForm.class).clearRemovedNode();
       }
       uiDocumentWorkspace.addChild(uiController);
       uiController.bindContentType();

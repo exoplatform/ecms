@@ -725,13 +725,17 @@ public class Utils {
   }
 
   public static String getWebdavURL(Node node, boolean withTimeParam) throws Exception {
+    return getWebdavURL(node, withTimeParam, true);
+  }
+  
+  public static String getWebdavURL(Node node, boolean withTimeParam, boolean isGetRealNodePath) throws Exception {
     NodeLocation location = NodeLocation.getNodeLocationByNode(getRealNode(node));
     String repository = location.getRepository();
     String workspace = location.getWorkspace();
     String currentProtal = PortalContainer.getCurrentRestContextName();
     String portalName = PortalContainer.getCurrentPortalContainerName();
 
-    String originalNodePath = getRealNodePath(node);
+    String originalNodePath = isGetRealNodePath ? getRealNodePath(node) : Text.escape(node.getPath(),'%',true);
     StringBuffer imagePath = new StringBuffer();
     imagePath.append("/")
              .append(portalName)

@@ -70,7 +70,19 @@
 						</collection>
 					</field>
 				</object>
-			</object-param>
+				</object-param>
+	      <object-param>
+    			<name>accessibleMedia</name>
+    			<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
+          	<field name="contentsType"><string>false</string></field>
+      			<field name="mimeTypes">
+            	<collection type="java.util.ArrayList">
+         				<value><string>video/x-flv</string></value>
+         				<value><string>audio/mp3</string></value>
+        			</collection>
+      			</field>
+    			</object>
+   			</object-param>
 		</init-params>
   </component>	
 </configuration>

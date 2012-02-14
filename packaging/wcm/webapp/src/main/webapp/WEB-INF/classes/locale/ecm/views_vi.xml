@@ -91,7 +91,7 @@
   <File>
     <view>
       <label>
-        <not-viewable>Không thể xem nội dung. Xin vui lòng tải nó về hoặc dùng WebDAV</not-viewable>
+        <not-viewable>Không thể xem nội dung. Xin vui lòng tải về hoặc dùng WebDAV</not-viewable>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
         <download>Tải file về</download>
@@ -720,4 +720,19 @@
      </label> 
    </view>
   </AutoVersioning>
+
+  <AccessibleMedia>
+    <view>
+      <label>
+      	<Play-audio-description-of-this-video>File âm thanh mô tả</Play-audio-description-of-this-video>
+      	<Read-more>Đọc thêm</Read-more>
+      	<Read-less>Thu gọn</Read-less>
+      	<Switch-back-to-original-video>Video ban đầu</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      	<A-second-media-file-is-available-as-audio-description>File đa phương tiện thứ hai, được dùng như file âm thanh mô tả</A-second-media-file-is-available-as-audio-description>
+      </tooltip>      
+    </view>
+  </AccessibleMedia>
+  
 </bundle>

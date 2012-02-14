@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.presentation;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.web.application.Parameter;
 
@@ -30,6 +31,9 @@ import org.exoplatform.webui.core.UIComponent;
  */
 
 public interface NodePresentation {
+  
+  public static final String MEDIA_STATE_DISPLAY = "DISPLAY";
+  public static final String MEDIA_STATE_NONE = "NONE";
 
   /**
    * Sets enable vote
@@ -324,4 +328,34 @@ public interface NodePresentation {
   public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception;
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception;
+  
+  /**
+   * gets the status of display audio description for accessible media
+   * @return status of display audio description for accessible media
+   */
+  public String getMediaState();
+  
+  /**
+   * switches the status of display audio description for accessible media
+   */
+  public void switchMediaState();
+  
+  /**
+   * 
+   * @return true if node can display audio description
+   */
+  public boolean isDisplayAlternativeText();
+  
+  /**
+   * 
+   * @return true if can switch to play audio description of the media
+   */
+  public boolean playAudioDescription();
+  
+  /**
+   * 
+   * @return true if can switch back from original node from audio description
+   */
+  public boolean switchBackAudioDescription();
+  
 }

@@ -53,6 +53,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
+import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
@@ -68,6 +69,8 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -135,6 +138,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   final static public String FIELD_TAXONOMY = "fieldTaxonomy";
   final static public String FIELD_LISTTAXONOMY = "fieldListTaxonomy";
   final static public String POPUP_TAXONOMY = "UIPopupTaxonomy";
+  final static public String ACCESSIBLE_MEDIA = "accessibleMedia";
 
   private boolean isMultiLanguage_;
   private String language_;
@@ -146,6 +150,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   private HashMap<String, List<String>> mapTaxonomies = new HashMap<String, List<String>>();
   private List<NodeLocation> listUploadedNodes = new ArrayList<NodeLocation>();
   private boolean taxonomyMandatory = false;
+  
+  private DocumentTypeService docService;
 
   public UIUploadForm() throws Exception {
     setMultiPart(true) ;
@@ -166,6 +172,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     }
     uiInput.setAutoUpload(true);
     addUIFormInput(uiInput);
+    docService = WCMCoreUtils.getService(DocumentTypeService.class);
   }
 
   public int getNumberUploadFile() {
@@ -514,7 +521,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               }
             }
             if(!isExist || isKeepFile) {
-              newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode,
+              String nodeType = contains(docService.getMimeTypes(ACCESSIBLE_MEDIA), mimeType) ? 
+                                NodetypeConstant.EXO_ACCESSIBLE_MEDIA : Utils.NT_FILE; 
+              newNodeUUID = cmsService.storeNodeByUUID(nodeType, selectedNode,
                   getInputProperties(name, inputStream, mimeType), true) ;
               selectedNode.save();
               selectedNode.getSession().save();
@@ -796,6 +805,18 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
     }
     return true;
+  }
+  
+  private boolean contains(String[] arr, String item) {
+    if (arr != null) {
+      for (String arrItem : arr) {
+        if (arrItem != null && arrItem.equals(item))
+          return true;
+        if (arrItem == item)
+          return true;
+      }
+    }
+    return false;
   }
 
   static  public class SaveActionListener extends EventListener<UIUploadForm> {

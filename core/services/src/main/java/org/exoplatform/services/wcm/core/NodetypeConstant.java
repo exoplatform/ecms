@@ -39,6 +39,8 @@ public class NodetypeConstant {
   public static final String JCR_ROOT_VERSION                 = "jcr:rootVersion";
 
   public static final String JCR_FROZEN_NODE                  = "jcr:frozenNode";
+  
+  public static final String NT_FROZEN_NODE                   = "nt:frozenNode";
 
   public static final String JCR_CONTENT                      = "jcr:content";
 
@@ -147,6 +149,22 @@ public class NodetypeConstant {
   public static final String PUBLICATION_LIVE_REVISION        = "publication:liveRevision";
 
   public static final String PUBLICATION_WEBPAGES_PUBLICATION = "publication:webpagesPublication";
+  
+  public static final String EXO_ACCESSIBLE_MEDIA = "exo:accessibleMedia";
+  
+  public static final String EXO_ALTERNATIVE_TEXT = "exo:alternativeText";
+  
+  public static final String EXO_CAPTIONS = "exo:captions";
+  
+  public static final String EXO_AUDIO_DESCRIPTION = "exo:audioDescription";
+  
+  public static final String EXO_ACCESSIBLE_MEDADATA_TYPE = "exo:accessibleMetadataType";
+  
+  public static final String MEDIA_CAPTIONS = "captions";
+  
+  public static final String MEDIA_AUDIO_DESCRIPTION = "audioDescription";
+  
+  public static final String MEDIA_ALTERNATIVE_TEXT = "alternativeText";
 
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";

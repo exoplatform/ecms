@@ -9,6 +9,7 @@
   import org.exoplatform.services.jcr.RepositoryService;
   import java.util.Calendar;
   import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.core.NodetypeConstant;
 
   UIComponent uiParent = uicomponent.getParent();
 
@@ -24,12 +25,18 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;
   def link = "";
-  def url = "";
+  StringBuffer urlBuf = new StringBuffer();
   for(nodedata in presentNodes) {
     link = Utils.getWebdavURL(nodedata, false);
-    url = url.concat("\n {url: '").concat(link).concat("'},");
+    urlBuf.append("\n {url: '").append(link).append("'");
+    def captionChild = uicomponent.getChildNode(Utils.getRealNode(nodedata), NodetypeConstant.EXO_CAPTIONS);
+    if (captionChild != null) {
+      urlBuf.append(", captionUrl : '").append(Utils.getWebdavURL(captionChild, false)).append("'");
+    }
+    urlBuf.append("},");
     links.add(link);
   }
+  def url = urlBuf.toString();
   url = url.length() == 0 ? url : url.substring(0, url.length() - 1);
   def rqcontext = _ctx.getRequestContext();
   def size = links.size();
@@ -37,7 +44,10 @@
   Calendar lCDateCalendar = Calendar.getInstance();
   def timeCreated = lCDateCalendar.getTimeInMillis();
 %>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.2.6.min.js"></script>
+<script type="text/javascript">
+  var finFpl = false;
+</script>
+<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.6.min.js"></script>
   <div class="ContentDetail">
 	  <%
 		  def style = "float:none; margin:auto;";
@@ -46,18 +56,59 @@
 //		  }
 		%>
   	<div id="player-$timeCreated" class="PlayerContent" style="$style ; z-index:0;"></div>
-  	<script language="JavaScript">
+  	<script type="text/javascript">
+     var timemili = 0;
+     function insertFlv() {
       // install flowplayer into container
-    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.2.7.swf"}, {
+    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer-3.2.7.swf"}, {
       // fullscreen button not needed here
         plugins: {
+          captions: {
+            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.captions-3.2.3.swf',
+    
+            // pointer to a content plugin (see below)
+            captionTarget: 'content'
+          },    	  
+    	  
+          /*
+          configure a content plugin so that it 
+          looks good for showing subtitles
+          */
+          content: {
+            url:'/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.content-3.2.0.swf',
+            bottom: 35,
+            height:40,
+            backgroundColor: 'transparent',
+            backgroundGradient: 'none',
+            border: 0,
+                  textDecoration: 'outline',
+            style: { 
+              body: { 
+                fontSize: 14, 
+                fontFamily: 'Arial',
+                textAlign: 'center',
+                color: '#ffffff'
+              } 
+            } 
+          },
+          
           controls: {
-            url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.2.5.swf',
-            fullscreen: true,
+            url: '/eXoWCMResources/javascript/eXo/wcm/flowplayer/flowplayer.controls-tube-3.2.5.swf',
             height: 30,
             // setup auto hide
-            autoHide: 'always',
-            playlist: true
+            autoHide: false,
+            playlist: true,
+            tooltips:  {
+              // a shortcut for enabling tooltips for buttons (English)
+              buttons: true
+            },
+            stop: true, 
+            play: true,
+            scrubber: true,
+            time: true, 
+            mute: true,
+            volume: true,
+            fullscreen: true,
           }
         },
 
@@ -74,6 +125,18 @@
             }
         }
       });
+     }
+     
+    function timedCount() {
+       timemili++;
+       if (finFpl == false && timemili < 10) {
+         setTimeout("timedCount()", 100);
+       } else {
+         insertFlv();
+       }
+     }
+     
+     timedCount();
   </script>
  </div>
 <style>

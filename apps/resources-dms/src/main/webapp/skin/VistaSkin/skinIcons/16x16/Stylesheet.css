@@ -51,6 +51,10 @@
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/exo-article.gif') no-repeat;  
 }
 
+.exo_accessibleMedia16x16Icon {
+  background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/exo-accessibleMedia.png') no-repeat;  
+}
+
 .exo_article_reference16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/exo-article-reference.gif') no-repeat;  
 }

@@ -31,6 +31,7 @@ public class JcrInputProperty {
   private String mixintype;
   private Object value;
   private int valueType = 0;
+  private String changeInJcrPathParam = null;
 
   public String getJcrPath() {
     return jcrPath;
@@ -66,5 +67,13 @@ public class JcrInputProperty {
 
   public void setValueType(int type){ valueType = type ; }
   public int  getValueType(){ return valueType ; }
+  
+  public String getChangeInJcrPathParam() {
+    return changeInJcrPathParam;
+  }
+  
+  public void setChangeInJcrPathParam(String changeInJcrPathParam) {
+    this.changeInJcrPathParam = changeInJcrPathParam;
+  }
 
 }

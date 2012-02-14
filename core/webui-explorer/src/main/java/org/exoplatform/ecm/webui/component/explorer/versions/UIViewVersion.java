@@ -34,7 +34,7 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
-import org.exoplatform.ecm.webui.presentation.NodePresentation;
+import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -57,7 +57,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -80,7 +79,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIViewVersion extends UIContainer implements NodePresentation {
+public class UIViewVersion extends UIBaseNodePresentation {
   private NodeLocation node_ ;
   protected NodeLocation originalNode_ ;
   private String language_ ;

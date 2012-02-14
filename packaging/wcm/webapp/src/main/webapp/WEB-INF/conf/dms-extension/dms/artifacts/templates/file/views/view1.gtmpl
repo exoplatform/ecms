@@ -79,7 +79,7 @@
           sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
           def downloadLink = sb.toString();
         %>
-        <div style="text-align:right;margin-top:1px"" class="ActionButton LightBlueStyle">
+        <div style="text-align:right;margin-top:1px" class="ActionButton LightBlueStyle">
           <a href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>        
       </div>
@@ -93,7 +93,8 @@
         <div style="text-align:center; font-style:italic">
           <%=_ctx.appRes("File.view.label.not-viewable")%>
         </div>
-        <%}%>               
+        <%}%>
+        
       </div>
     </div>
     <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>

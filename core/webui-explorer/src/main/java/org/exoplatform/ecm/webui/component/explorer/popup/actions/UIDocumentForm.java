@@ -403,6 +403,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }
     } else {
       Node documentNode = documentForm.getNode();
+      for (String removedNode : documentForm.getRemovedNodes()) {
+        documentNode.getNode(removedNode).remove();
+      }
       homeNode = documentNode.getParent();
       nodeType = documentNode.getPrimaryNodeType().getName();
       if(documentNode.isLocked()) {

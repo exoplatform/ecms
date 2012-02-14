@@ -755,12 +755,12 @@
 	<yearly>Yearly</yearly>
 	<ten-years>Ten Years</ten-years>
 	<read>User Action</read>
-	     <schedule>Scheduler</schedule>
-        <node_added>Content Addition</node_added>
-        <node_removed>Content Removal</node_removed>
-        <property_added>Property Addition</property_added>
-        <property_removed>Property Removal</property_removed>
-        <property_changed>Property Modification</property_changed>
+  <schedule>Scheduler</schedule>
+  <node_added>Content Addition</node_added>
+  <node_removed>Content Removal</node_removed>
+  <property_added>Property Addition</property_added>
+  <property_removed>Property Removal</property_removed>
+  <property_changed>Property Modification</property_changed>
   <SendMail>
     <dialog>
       <label>
@@ -874,5 +874,21 @@
 								<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
       </label>
     </dialog>
-  </ContentPublishing>		
+  </ContentPublishing>
+  
+  <AccessibleMedia>
+  	<dialog>
+  		<label>
+  			<captions>Captions</captions>
+				<audioDescription>Audio description</audioDescription>
+				<alternativeText>Alternative text</alternativeText>
+			</label>
+		</dialog>
+		<help>
+			<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
+			<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
+			<AlternativeTextHelp>Provide an accessible alternative way of presenting the information</AlternativeTextHelp>
+		</help>
+	</AccessibleMedia>
+  
 </bundle>

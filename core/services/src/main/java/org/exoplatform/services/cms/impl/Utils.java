@@ -362,5 +362,22 @@ public class Utils {
     }
   }
   
+  public static Node getChildOfType(Node node, String childType) throws Exception {
+    if (node == null) {
+      return null;
+    }
+    NodeIterator iter = node.getNodes();
+    while (iter.hasNext()) {
+      Node child = iter.nextNode();
+      if (child.isNodeType(childType)) {
+        return child;
+      }
+    }
+    return null;
+  }
+  
+  public static boolean hasChild(Node node, String childType) throws Exception {
+    return (getChildOfType(node, childType) != null);
+  }
   
 }
