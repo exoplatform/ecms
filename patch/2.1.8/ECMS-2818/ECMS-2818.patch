@@ -1,0 +1,503 @@
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 76138)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -37,7 +37,7 @@
+     </title>
+     <button>
+       <label>
+-        <cancel>Annuler</cancel>
++        <cancel>#{word.cancel}</cancel>
+       </label>
+     </button>
+     <msg>
+@@ -96,13 +96,13 @@
+     <label>
+       <Relation>Relation</Relation>
+       <Explorer>Explorateur de fichiers</Explorer>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+       <TagExplorer>Nuage de tags</TagExplorer>
+       <Clipboard>Presse-papier</Clipboard>
+     </label>
+     <title>
+       <Control>Barre latérale</Control>
+-      <Close>Fermer la barre latérale</Close>
++      <Close>#{word.close} la barre latérale</Close>
+     </title>
+   </UISideBar>
+   <!--
+@@ -116,7 +116,7 @@
+       <backToJCR>Retour aux Lecteurs principaux</backToJCR>
+       <setUpBrowser>Définissez vos préférences de navigation</setUpBrowser>
+       <refesh>Actualiser</refesh>
+-      <saveSession>Sauver la Session</saveSession>
++      <saveSession>#{word.save} la Session</saveSession>
+       <currentDrive>Espace courant</currentDrive>
+       <selectView>Choisir une vue</selectView>
+       <showSideBar>Afficher la barre latérale</showSideBar>
+@@ -488,7 +488,7 @@
+       <Rename>Renommer</Rename>
+       <Cut>Couper</Cut>
+       <Copy>Copier</Copy>
+-      <Save>Sauver</Save>
++      <Save>#{word.save}</Save>
+       <RemoveNode>Supprimer</RemoveNode>
+       <Checkin>Checkin</Checkin>
+       <Checkout>Checkout</Checkout>
+@@ -538,7 +538,7 @@
+       <Copy>Copier</Copy>
+       <Rename>Renommer</Rename>
+       <Delete>Supprimer</Delete>
+-      <Save>Sauver</Save>
++      <Save>#{word.save}</Save>
+       <Cut>Couper</Cut>
+       <Paste>Coller</Paste>
+       <CheckOut>CheckOut</CheckOut>
+@@ -609,7 +609,7 @@
+       <path>Chemin</path>
+     </header>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+   </UIReferencesList>
+   <!--
+@@ -702,7 +702,7 @@
+     </label>
+     <action>
+       <Save>#{word.save}</Save>
+-      <Cancel>Annuler</Cancel>
++      <Cancel>#{word.cancel}</Cancel>
+       <Reset>Rétablir</Reset>
+     </action>
+     <msg>
+@@ -911,8 +911,8 @@
+   </UIExternalMetadataForm>
+   <UIAddMetadataForm>
+     <action>
+-      <Cancel>Annuler</Cancel>
+-      <Save>Sauver</Save>
++      <Cancel>#{word.cancel}</Cancel>
++      <Save>#{word.save}</Save>
+     </action>
+   </UIAddMetadataForm>
+   <!--
+@@ -946,7 +946,7 @@
+       <node-def-dnt>DNT</node-def-dnt>
+     </label>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+   </UINodeTypeInfo>
+   <!--
+@@ -961,7 +961,7 @@
+       </label>
+     </tab>
+    <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+    </action> 
+   </UICategoryManagerSearch>
+   <UIContentNameSearch>
+@@ -1237,8 +1237,8 @@
+   </SaveQueryPopup>
+   <UINodeTypeSelectForm>
+     <action>
+-      <Cancel>Annuler</Cancel>
+-      <Save>Sauver</Save>
++      <Cancel>#{word.cancel}</Cancel>
++      <Save>#{word.save}</Save>
+     </action>
+   </UINodeTypeSelectForm>
+   <UICompareExactlyForm>
+@@ -1325,7 +1325,7 @@
+   <pLabel>Propriété:</pLabel> 
+     <action>
+       <Add>Ajouter</Add>
+-      <Cancel>Annuler</Cancel>
++      <Cancel>#{word.cancel}</Cancel>
+     </action>
+   </UISelectPropertyForm>
+   <ExactlyFormPopup>
+@@ -1449,8 +1449,8 @@
+       <invalid-item-state>Vous ne pouvez pas restaurer cette version. Probablement un ou plusieurs éléments ont été déplacés ou supprimés par une autre session.</invalid-item-state>
+     </msg>
+     <action>
+-      <close>Fermer</close>
+-      <close-view>Fermer la vue</close-view>
++      <close>#{word.close}</close>
++      <close-view>#{word.close} la vue</close-view>
+     </action>
+   </UIVersionInfo>
+   <!--
+@@ -1480,7 +1480,7 @@
+       <e_16384>Check out</e_16384>
+       <e_32768>Restaurer</e_32768>
+       <e_65536>Fusionner</e_65536>
+-      <e_131072>Annuler une fusion</e_131072>
++      <e_131072>#{word.cancel} une fusion</e_131072>
+       <e_262144>Fusion achevée</e_262144>
+       <e_524288>Ajouter une étiquette de version</e_524288>
+       <e_1048576>Supprimer une étiquette de version</e_1048576>
+@@ -1507,7 +1507,7 @@
+       <note>Le versionning n'a pas été activé pour ce noeud</note>
+       <question>Confirmez-vous l'activation ?</question>
+       <button-active>Activer</button-active>
+-      <button-cancel>Annuler</button-cancel>
++      <button-cancel>#{word.cancel}</button-cancel>
+     </label>
+   </UIActivateVersion>
+   <!--
+@@ -1522,7 +1522,7 @@
+       <action>Action</action>
+     </header>
+     <action>
+-      <Cancel>Fermer</Cancel>
++      <Cancel>#{word.close}</Cancel>
+     </action>
+     <grid>
+       <msg>
+@@ -1546,7 +1546,7 @@
+     </label>
+     <action>
+       <activate>Activer</activate>
+-      <cancel>Annuler</cancel>
++      <cancel>#{word.cancel}</cancel>
+     </action>
+   </UIActivateAuditing>
+   <!--
+@@ -1600,7 +1600,7 @@
+     </label>
+     <action>
+       <Save>#{word.save}</Save>
+-      <Cancel>Annuler</Cancel>
++      <Cancel>#{word.cancel}</Cancel>
+     </action>
+     <title>Ajout d'un libellé</title>
+     <msg>
+@@ -1655,7 +1655,7 @@
+   -->
+   <UICategoryManager>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+     <tab>
+       <label>
+@@ -1700,7 +1700,7 @@
+   -->
+   <UIRelationManager>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+     <tab>
+       <label>
+@@ -1773,7 +1773,7 @@
+   <UIDocumentForm>
+     <title>Ajout d'un document</title>
+     <action>
+-      <Save>Sauver comme brouillon</Save>
++      <Save>#{word.save} comme brouillon</Save>
+       <Cancel>#{word.cancel}</Cancel>
+       <Close>#{word.close}</Close>
+     </action>
+@@ -2114,8 +2114,8 @@
+     </label>
+     <action>
+       <Save>Sauvegarder</Save>
+-      <UnsubcriberLifeCycle>Annuler l'inscription</UnsubcriberLifeCycle>
+-      <Cancel>Annuler</Cancel>
++      <UnsubcriberLifeCycle>#{word.cancel} l'inscription</UnsubcriberLifeCycle>
++      <Cancel>#{word.cancel}</Cancel>
+     </action>
+   </UIPublicationForm>
+   <!--
+@@ -2209,7 +2209,7 @@
+       <visibility>Visibilité</visibility>
+     </header>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+   </UIPublicationLogList>
+   <!--
+@@ -2269,7 +2269,7 @@
+   -->
+   <UICategoriesSelector>
+     <action>
+-      <close>Fermer</close>
++      <close>#{word.close}</close>
+     </action>
+   </UICategoriesSelector>
+   <!--
+@@ -2325,8 +2325,8 @@
+     <title>Panneau de personnalisation de l'explorateur de fichiers</title>
+     <action>
+       <Edit>Editer</Edit>
+-      <Save>Sauver</Save>
+-      <Cancel>Annuler</Cancel>
++      <Save>#{word.save}</Save>
++      <Cancel>#{word.cancel}</Cancel>
+     </action>
+     <label>
+       <repository>Dépôt de données</repository>
+@@ -2494,7 +2494,7 @@
+   
+   <UISimpleCategoryManager>
+   	<action>
+-  		<Close>Fermer</Close>	
++  		<Close>#{word.close}</Close>	
+   	</action>
+   </UISimpleCategoryManager>  
+   <UIPopupWindow>
+@@ -2689,7 +2689,7 @@
+ 	<UIExternalMetadataForm>
+ 		<action>
+ 			<Add>Ajouter</Add>
+-			<Cancel>Annuler</Cancel>
++			<Cancel>#{word.cancel}</Cancel>
+ 		</action>
+ 	</UIExternalMetadataForm>	
+ 		<!-- 
+@@ -2821,7 +2821,7 @@
+   <UISingleExternalMetadataForm>
+ 		<action>
+ 			<Add>Ajouter</Add>
+-			<Cancel>Annuler</Cancel>
++			<Cancel>#{word.cancel}</Cancel>
+ 		</action>
+ 	</UISingleExternalMetadataForm>
+ 	<UISingleUploadContainer>
+@@ -2843,8 +2843,8 @@
+   </UISingleExternalMetadataForm>
+   <UISingleAddMetadataForm>
+     <action>
+-      <Cancel>Annuler</Cancel>
+-      <Save>Sauver</Save>
++      <Cancel>#{word.cancel}</Cancel>
++      <Save>#{word.save}</Save>
+     </action>
+   </UISingleAddMetadataForm>
+ 
+@@ -2997,8 +2997,8 @@
+ 	  	<name>Nom de la catégorie</name>
+ 	  </label>
+     <action>
+-      <Save>Sauver</Save>
+-      <Cancel>Annuler</Cancel>      
++      <Save>#{word.save}</Save>
++      <Cancel>#{word.cancel}</Cancel>      
+     </action>
+   </UICategoryForm>
+   <UIPopupWindow>
+@@ -3158,8 +3158,8 @@
+   
+    	  <UISelectRestorePath>
+     <action>
+-      <Save>Sauver</Save>
+-      <Cancel>Annuler</Cancel>
++      <Save>#{word.save}</Save>
++      <Cancel>#{word.cancel}</Cancel>
+     </action>
+     <label>
+       <formInput>Ancien chemin perdu, veuillez en choisir un autre</formInput>
+@@ -3200,7 +3200,7 @@
+ 		
+ 	<UIPublicationPanel>
+     <button>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </button>
+     <revisions>
+       <version>Versions</version>
+@@ -3260,7 +3260,9 @@
+       <end>Fin de la publication</end>
+     </label>
+     <action>
+-      <Save>Sauver</Save>
++      <Save>#{word.save}</Save>
++      <Close>#{word.close}</Close>
++      <Reset>Réinitialiser</Reset>
+     </action>
+     <msg>
+       <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
+@@ -3308,7 +3310,7 @@
+       </label>
+     </tab>
+     <action>
+-    	 <Close>Fermer</Close>
++    	 <Close>#{word.close}</Close>
+     </action>
+   </UICategoryManagerSearch>
+   <UIJcrExplorerEditForm>  
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(revision 76138)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(working copy)
+@@ -268,6 +268,9 @@
+ UIRenameForm.msg.rename-denied=Accesso negato\! Non \u00E8 possibile rinominare questo nodo.
+ UISingleUploadContent.msg.has-not-template=Il template di '{0}' \u00E8 nullo o vuoto.
+ UIActionList.header.action=Azione
++UIActionList.tooltip.View=View
++UIActionList.tooltip.Edit=Edit
++UIActionList.tooltip.Delete=Delete
+ UIJCRAdvancedSearch.msg.invalid-queryStatement=Istruzione di query non valida.
+ PopupComponent.title.UIOneNodePathSelector=Seleziona posizione
+ UISavedQuery.header.name=Nome
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(revision 76138)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(working copy)
+@@ -93,6 +93,9 @@
+ UIPropertyForm.msg.can-not-add=Voc\u00ea n\u00e3o pode adicionar propriedades para este node. Apenas para nodes de tipo nt\:unstructured
+ UIActivateVersion.label.question=Voc\u00ea deseja ativ\u00e1-lo ?
+ UIActionList.header.instanceOf=Inst\u00e2ncia de Tipo de A\u00e7\u00e3o
++UIActionList.tooltip.View=Ver
++UIActionList.tooltip.Edit=Editar
++UIActionList.tooltip.Delete=Suprimir
+ UIJcrExplorerEditForm.label.driveName=Nome da Unidade
+ UIAuditingInfo.eventName.e_8388608=Unlock
+ UIShowAllHiddenResult.tooltip.View=Ver este node
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(revision 76138)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(working copy)
+@@ -70,7 +70,7 @@
+ 			<info>
+ 				<UITaxonomyTreeMainForm>Choisir un nom de taxonomie, choisir un espace de travail et choisir le chemin de la racine de la taxonomie</UITaxonomyTreeMainForm>
+ 				<UIPermissionTreeManager>Choisir les droits d'accès à l'arbre de taxonomies</UIPermissionTreeManager>
+-				<UIActionTaxonomyManager>Enregistrer l'action exo:taxonomyAction</UIActionTaxonomyManager>
++				<UIActionTaxonomyManager>#{word.save} l'action exo:taxonomyAction</UIActionTaxonomyManager>
+ 				<UITaxonomyTreeCreateChild>Editer l'arbre de taxonomies and choisir les permissions</UITaxonomyTreeCreateChild>
+ 			</info>
+ 		</tab>
+@@ -149,7 +149,7 @@
+ 			<remove>Suppression</remove>
+ 		</label>
+ 		<action>
+-			<Save>Sauver</Save>
++			<Save>#{word.save}</Save>
+ 			<Reset>Initialiser</Reset>
+ 		</action>
+ 		<msg>
+@@ -166,7 +166,7 @@
+ 	<UIActionForm>
+ 		<title>Ajouter une Action pour la taxonomie</title>
+ 		<action>
+-			<Save>Sauver</Save>
++			<Save>#{word.save}</Save>
+ 		</action>
+ 		<msg>
+   		<name-not-allowed>Nom non autorisé</name-not-allowed>
+@@ -336,7 +336,7 @@
+       <metadataView>Information Métadonnées</metadataView>
+     </tab>
+     <action>
+-      <Cancel>Fermer</Cancel>
++      <Cancel>#{word.close}</Cancel>
+       <Back>#{word.back}</Back>
+     </action>
+   </UIMetadataView>
+@@ -477,7 +477,7 @@
+       <action>Sélection</action>
+     </header>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+   </UIRepositoryValueSelect>
+   <UIRepositorySelectForm>
+@@ -759,7 +759,7 @@
+     <action>
+       <Cancel>#{word.cancel}</Cancel>
+       <Save>#{word.save}</Save>
+-      <SaveDraft>Sauver un brouillon</SaveDraft>
++      <SaveDraft>#{word.save} un brouillon</SaveDraft>
+       <AddProperty>Ajouter une propriété</AddProperty>
+       <AddChild>Ajouter un fils</AddChild>
+       <AddConstraints>Ajouter des contraintes</AddConstraints>
+@@ -1514,7 +1514,7 @@
+     </action>
+     <msg>
+       <checkbox-require>Vous devez choisir au moins une permission</checkbox-require>
+-      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant de sauver la permission</userOrGroup-required>
++      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant d'enregistrer la permission</userOrGroup-required>
+       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission</not-change-permission>
+       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
+     </msg>
+@@ -1619,7 +1619,7 @@
+     </action>
+     <msg>
+       <checkbox-require>Vous devez selectionner au moins une propriété</checkbox-require>
+-      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant de sauver cette permission</userOrGroup-required>
++      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant d'enregistrer cette permission</userOrGroup-required>
+       <not-change-permission>Vous n'avez pas les droits requis pour ajouter une permission</not-change-permission>
+       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
+     </msg>
+@@ -2207,7 +2207,7 @@
+   </EditUnLockForm>  
+   <UITabPane>
+     <action>
+-      <Close>Fermer</Close>
++      <Close>#{word.close}</Close>
+     </action>
+     <title>
+     		<UILockHolderContainer>Gestion des Verrous</UILockHolderContainer>
+@@ -2218,7 +2218,7 @@
+   <UIViewFormTabPane>
+     <action>
+       <AddTabForm>Ajoute un Onglet</AddTabForm>
+-      <AddTab>Sauver</AddTab>
++      <AddTab>#{word.save}</AddTab>
+       <BackViewForm>Précédent</BackViewForm>
+     </action>
+   </UIViewFormTabPane>
+@@ -2284,7 +2284,7 @@
+ 		
+ <UITaxonomyTreeContainer>
+ 		<action>
+-			<Cancel>Fermer</Cancel>
++			<Cancel>#{word.close}</Cancel>
+ 		</action>
+ 	</UITaxonomyTreeContainer>
+ 	 <UITaxonomyTreeMainForm>			
+@@ -2296,7 +2296,7 @@
+ 			  
+ 		<UIPermissionTreeForm>
+ 			<action>
+-				<Save>Sauver</Save>
++				<Save>#{word.save}</Save>
+ 				<Reset>Initialiser</Reset>
+ 				<NextAddAction>Suivant</NextAddAction>
+ 				<Previous>Précédent</Previous>
+@@ -2340,7 +2340,7 @@
+   <UITagPermissionForm>
+     <title>Ajouter une permission</title>
+     <action>
+-      <Save>Sauver</Save>
++      <Save>#{word.save}</Save>
+     </action>
+     <label>
+       <userOrGroup>Rôles : </userOrGroup>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/dialogs_fr.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/dialogs_fr.xml	(revision 76138)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/ecm/dialogs_fr.xml	(working copy)
+@@ -720,10 +720,10 @@
+ 	<quarterly>Trimestriel</quarterly>
+ 	<yearly>Annuel</yearly>
+ 	<ten-years>Tous les 10 ans</ten-years>
+-	<read>Action Utilisateur</read>    	
+-	    <schedule>Planificateur</schedule>
+-        <node_added>Content Addition</node_added>
+-        <node_removed>Ajout de contenu</node_removed>
++	<read>Action d'utilisateur</read>    	
++	<schedule>Planificateur</schedule>
++        <node_added>Ajout de contenu</node_added>
++        <node_removed>Enlèvement de contenu</node_removed>
+         <property_added>Ajout de la propriété</property_added>
+         <property_removed>Enlèvement de la propriété</property_removed>
+         <property_changed>Modification de la propriété</property_changed>

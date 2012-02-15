@@ -70,7 +70,7 @@
 			<info>
 				<UITaxonomyTreeMainForm>Choisir un nom de taxonomie, choisir un espace de travail et choisir le chemin de la racine de la taxonomie</UITaxonomyTreeMainForm>
 				<UIPermissionTreeManager>Choisir les droits d'accès à l'arbre de taxonomies</UIPermissionTreeManager>
-				<UIActionTaxonomyManager>Enregistrer l'action exo:taxonomyAction</UIActionTaxonomyManager>
+				<UIActionTaxonomyManager>#{word.save} l'action exo:taxonomyAction</UIActionTaxonomyManager>
 				<UITaxonomyTreeCreateChild>Editer l'arbre de taxonomies and choisir les permissions</UITaxonomyTreeCreateChild>
 			</info>
 		</tab>
@@ -149,7 +149,7 @@
 			<remove>Suppression</remove>
 		</label>
 		<action>
-			<Save>Sauver</Save>
+			<Save>#{word.save}</Save>
 			<Reset>Initialiser</Reset>
 		</action>
 		<msg>
@@ -166,7 +166,7 @@
 	<UIActionForm>
 		<title>Ajouter une Action pour la taxonomie</title>
 		<action>
-			<Save>Sauver</Save>
+			<Save>#{word.save}</Save>
 		</action>
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
@@ -336,7 +336,7 @@
       <metadataView>Information Métadonnées</metadataView>
     </tab>
     <action>
-      <Cancel>Fermer</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -477,7 +477,7 @@
       <action>Sélection</action>
     </header>
     <action>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIRepositoryValueSelect>
   <UIRepositorySelectForm>
@@ -759,7 +759,7 @@
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Sauver un brouillon</SaveDraft>
+      <SaveDraft>#{word.save} un brouillon</SaveDraft>
       <AddProperty>Ajouter une propriété</AddProperty>
       <AddChild>Ajouter un fils</AddChild>
       <AddConstraints>Ajouter des contraintes</AddConstraints>
@@ -1514,7 +1514,7 @@
     </action>
     <msg>
       <checkbox-require>Vous devez choisir au moins une permission</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant de sauver la permission</userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant d'enregistrer la permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission</not-change-permission>
       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
@@ -1619,7 +1619,7 @@
     </action>
     <msg>
       <checkbox-require>Vous devez selectionner au moins une propriété</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant de sauver cette permission</userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un utilisateur ou un groupe avant d'enregistrer cette permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas les droits requis pour ajouter une permission</not-change-permission>
       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
@@ -2207,7 +2207,7 @@
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
     <title>
     		<UILockHolderContainer>Gestion des Verrous</UILockHolderContainer>
@@ -2218,7 +2218,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Ajoute un Onglet</AddTabForm>
-      <AddTab>Sauver</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Précédent</BackViewForm>
     </action>
   </UIViewFormTabPane>
@@ -2284,7 +2284,7 @@
 		
 <UITaxonomyTreeContainer>
 		<action>
-			<Cancel>Fermer</Cancel>
+			<Cancel>#{word.close}</Cancel>
 		</action>
 	</UITaxonomyTreeContainer>
 	 <UITaxonomyTreeMainForm>			
@@ -2296,7 +2296,7 @@
 			  
 		<UIPermissionTreeForm>
 			<action>
-				<Save>Sauver</Save>
+				<Save>#{word.save}</Save>
 				<Reset>Initialiser</Reset>
 				<NextAddAction>Suivant</NextAddAction>
 				<Previous>Précédent</Previous>
@@ -2340,7 +2340,7 @@
   <UITagPermissionForm>
     <title>Ajouter une permission</title>
     <action>
-      <Save>Sauver</Save>
+      <Save>#{word.save}</Save>
     </action>
     <label>
       <userOrGroup>Rôles : </userOrGroup>
