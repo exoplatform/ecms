@@ -148,6 +148,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   final private static String CONTENT_PAGE_ITERATOR_ID = "ContentPageIterator".intern();
 
   final private static String COMMENT_COMPONENT = "Comment".intern();
+  
+  final private static String Contents_Document_Type = "Contents";
 
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIDocumentInfo");
   
@@ -869,6 +871,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   	UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
   	FavoriteService favoriteService = this.getApplicationComponent(FavoriteService.class);
   	DocumentTypeService documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
+  	TemplateService templateService = getApplicationComponent(TemplateService.class) ;
   	
   	Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
   	Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
@@ -893,22 +896,30 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   	}
   	
   	//By types
-  	for (String documentType : allItemsByTypeFilterSet) { 
-  		if (allItemsByTypeFilterSet.contains(documentType)) {
-  			boolean found = false;
-  			for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
-  				if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
-  					found = true;
-  					break;
-  				}
-  			}  			
-  			
-  			if (!found)
-  				return false;
-  		}
+  	if(allItemsByTypeFilterSet.isEmpty())
+      return true;
+  	boolean found = false;
+  	try {
+	  	for (String documentType : allItemsByTypeFilterSet) {   		  			
+				for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
+					if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
+						found = true;
+						break;
+					}
+				} 		
+	  	}  	
+  	} catch (PathNotFoundException ep) {
+  		// Cannot found the node path in the repository. We will continue filter by content type in the next block code.
   	}
-  	
-  	return true;
+  	if(!found && allItemsByTypeFilterSet.contains(Contents_Document_Type)) {
+  		for(String contentType:templateService.getAllDocumentNodeTypes(getRepository())){
+        if (contentType.equals(node.getPrimaryNodeType().getName())){
+          found=true;
+          break;
+        }
+      }
+  	}
+  	return found;
   }
   
   static public class ViewNodeActionListener extends EventListener<UIDocumentInfo> {
