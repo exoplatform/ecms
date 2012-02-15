@@ -276,6 +276,14 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public UIPageIterator getContentPageIterator() {return pageIterator_ ; }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
+    //check for correct mimeType first
+    Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
+    String realMimeType = DMSMimeTypeResolver.getInstance().getMimeType(currentNode.getName());
+    if ( ((mimeType == null || "".equals(mimeType)) != (realMimeType == null || "".equals(realMimeType))) ||
+         !mimeType.equals(realMimeType) ) {
+      return null;
+    }
+    //get the UIComponent used to display file
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
     Map<String, Object> context = new HashMap<String, Object>();
