@@ -357,6 +357,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
                       @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypes,
                       @HeaderParam(ExtHttpHeaders.CONTENTTYPE) MediaType mediaType,
+                      @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream) {
 
     Session session = null;
@@ -372,7 +373,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-    Response res =  super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, inputStream);
+    Response res =  super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, userAgent, inputStream);
     try {
       Node currentNode = (Node) session.getItem(path(repoPath));
       listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);      
