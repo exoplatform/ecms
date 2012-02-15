@@ -266,15 +266,15 @@
 
 /*############################## -- End NodeType Icon -- ########################*/
 
-.application_msword16x16Icon {
+.application_msword16x16Icon, .application_vnd_openxmlformats-officedocument_wordprocessingml_document16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/doc.gif') no-repeat;  
 }
 
-.application_xls16x16Icon {
+.application_xls16x16Icon, .application_vnd_openxmlformats-officedocument_spreadsheetml_sheet16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/xls.gif') no-repeat;  
 }
 
-.application_ppt16x16Icon {
+.application_ppt16x16Icon, .application_vnd_openxmlformats-officedocument_presentationml_presentation16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/ppt.gif') no-repeat;  
 }
 
