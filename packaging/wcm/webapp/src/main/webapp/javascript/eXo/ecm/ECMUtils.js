@@ -27,14 +27,6 @@
 					if (uiResizeBlock) uiResizeBlock.style.overflow = "hidden";
 				}
 			}
-		} else {
-			Self.controlLayout(portletId) ;
-			eXo.core.Browser.addOnResizeCallback(
-				'controlLayout',
-				function(){
-					eXo.ecm.ECMUtils.controlLayout(portletId);
-				}
-			);
 		}
 	};
 	

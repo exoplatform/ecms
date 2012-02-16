@@ -1,0 +1,39 @@
+Index: packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js	(révision 78727)
++++ packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js	(copie de travail)
+@@ -27,14 +27,6 @@
+ 					if (uiResizeBlock) uiResizeBlock.style.overflow = "hidden";
+ 				}
+ 			}
+-		} else {
+-			Self.controlLayout(portletId) ;
+-			eXo.core.Browser.addOnResizeCallback(
+-				'controlLayout',
+-				function(){
+-					eXo.ecm.ECMUtils.controlLayout(portletId);
+-				}
+-			);
+ 		}
+ 	};
+ 	
+Index: core/viewer/src/main/java/resources/templates/PDFViewer.gtmpl
+===================================================================
+--- core/viewer/src/main/java/resources/templates/PDFViewer.gtmpl	(révision 78727)
++++ core/viewer/src/main/java/resources/templates/PDFViewer.gtmpl	(copie de travail)
+@@ -234,7 +234,7 @@
+ 		<%}%>
+ 	</div>
+ 	<div class="PDFViewerContent">
+-  	<div class="ImageView" style="overflow:auto;height:375px;" id ="pdf_viewer_image" name="pdf_viewer_image">
++  	<div class="ImageView" style="overflow:auto;" id ="pdf_viewer_image" name="pdf_viewer_image">
+ 		<%
+ 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
+ 		%>
+@@ -247,4 +247,4 @@
+ 	    <%=_ctx.appRes("File.view.label.not-viewable")%>
+ 	  </div>
+ <% }%>
+-<%uiform.end()%>		
+\ No newline at end of file
++<%uiform.end()%>		
