@@ -61,8 +61,8 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     String portalUrl = pcontext.getPortalURI();
     String nodePathUrl = pcontext.getNodePath();
 	String portletId = "";
-	if (nodePathUrl.length() > 1 && nodePathUrl.indexOf("/") >= 0 && nodePathUrl.split("/").length > 1) {
-	  portletId = nodePathUrl.split("/")[1];
+	if (nodePathUrl.length() > 1 && nodePathUrl.startsWith("/")) {
+	  portletId = nodePathUrl.substring(nodePathUrl.indexOf("/") + 1);
 	}
     String drivename = uiExplorer.getDriveData().getName();
     String drivePath = uiExplorer.getDriveData().getHomePath();
