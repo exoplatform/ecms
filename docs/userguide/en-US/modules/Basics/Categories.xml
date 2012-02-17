@@ -111,10 +111,15 @@
     </para>
     </step>
     <step>
-      <para>
-     Edit some fields in the <emphasis role="bold">Display Settings</emphasis> part as you want. See more details in the <link
-              linkend="form-User_Guide-Preferences-Content_List_Preferences.">Content List Preferences</link> section.
-    </para>
+        <para>
+            Edit some fields in the
+            <emphasis role="bold">Display Settings</emphasis>
+            part as you want. See more details in the
+            <link
+                    linkend="form-User_Guide-Preferences-Content_List_Preferences.">Content List Preferences
+            </link>
+            section.
+        </para>
     </step>
     <step>
         <para>

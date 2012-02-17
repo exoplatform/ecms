@@ -94,12 +94,12 @@
                 <itemizedlist>
                     <listitem>
                 <para>
-                    Select the group from the left pane and the membership from the right pane. Or,
+                    Select the group from the left pane and the membership from the right pane;
                 </para>
                     </listitem>
                     <listitem>
                 <para>
-                    You can set permissions for everyone by clicking
+                    Or, you can set permissions for everyone by clicking
                     <inlinemediaobject>
                         <imageobject>
                             <imagedata fileref="images/plus_icon.png" format="PNG" scalefit="1" width="4mm"/>
@@ -268,13 +268,14 @@
                             <emphasis role="bold">OK</emphasis>
                             to accept your deletion.
                         </para>
+                        <note>
+                            <para>
+                                You cannot delete the default dialog. You must create a new one before you can delete
+                                the
+                                current default dialog.
+                            </para>
+                        </note>
                     </listitem>
-                    <note>
-                        <para>
-                            You cannot delete the default dialog. You must create a new one before you can delete the
-                            current default dialog.
-                        </para>
-                    </note>
                     <listitem>
                         <para>In the
                             <emphasis role="bold">View</emphasis>
@@ -620,10 +621,10 @@
                             <imagedata fileref="images/plus_icon.png" format="PNG" scalefit="1" width="4mm"/>
                         </imageobject>
                     </inlinemediaobject>
-                        next to <emphasis role="bold">Any Permission</emphasis> to assign permission to every one. </para>
+                        next to <emphasis role="bold">Any Permission</emphasis> to assign permission to every one; </para>
                     </listitem>
                     <listitem>
-                        <para>Or select a group from the left pane and the
+                        <para>Or, select a group from the left pane and the
                     membership from the right pane.</para>
                     </listitem>
                 </itemizedlist>
@@ -653,14 +654,14 @@
                         <para><emphasis role="bold">ii.</emphasis> Specify functions to add to the tab.</para>
 
                         <para><emphasis role="bold">iii.</emphasis> Click <emphasis role="bold">Save</emphasis> to finish creating a tab;</para>
-                        <para>Or click
+                        <para>Or, click
                             <emphasis role="bold">Reset</emphasis>
                             to clear the
                             <emphasis role="bold">Tab</emphasis>
                             form;
                         </para>
                         <para>
-                            Or click
+                            Or, click
                             <emphasis role="bold">Back</emphasis>
                             to return to the
                             <emphasis role="bold">View Form</emphasis>
@@ -907,9 +908,7 @@
                     <para>
                         Click
                         <emphasis role="bold">Save</emphasis>
-                        to accept adding a new template, or
-                        <emphasis role="bold">Reset</emphasis>
-                        to change values.
+                        to accept adding a new template.
                     </para>
                 </step>
             </procedure>

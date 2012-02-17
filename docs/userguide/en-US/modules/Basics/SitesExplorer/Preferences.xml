@@ -46,7 +46,7 @@
           <tbody>
             <row>
               <entry><emphasis role="bold"> Sort by </emphasis></entry>
-              <entry> Sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date</entry>
+              <entry> Sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date.</entry>
             </row>
             <row>
               <entry><emphasis role="bold">Show Sidebar</emphasis> </entry>
@@ -78,7 +78,7 @@
             </row>
             <row>
               <entry><emphasis role="bold">Enable DMS Structure</emphasis> </entry>
-              <entry>Display/Hide nodes in a document  the tree structure. </entry>
+              <entry>Display/Hide document nodes in the tree structure. </entry>
             </row>
           </tbody>
         </tgroup>
@@ -89,7 +89,7 @@
     Configure the preferences as required and click <emphasis role="bold">Save</emphasis> to set them;
    </para>
       <para>
-    Or click <emphasis role="bold">Close</emphasis> to quit without submitting changes.
+    Or, click <emphasis role="bold">Close</emphasis> to quit without submitting changes.
    </para>
     </step>
   </procedure>

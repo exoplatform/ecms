@@ -50,7 +50,7 @@
      <itemizedlist>
             <listitem>
               <para>
-        <emphasis role="bold">xpath</emphasis> (XML Path Language) is a language for selecting nodes. For example, <filename>/jcr:root/Documents/Live</filename>.
+        <emphasis role="bold">xPath</emphasis> (XML Path Language) is a language for selecting nodes. For example, <filename>/jcr:root/Documents/Live</filename>.
        </para>
             </listitem>
             <listitem>
@@ -301,7 +301,7 @@
       </step>
       <step>
         <para>
-     Check/uncheck the <emphasis role="bold">is Action Move</emphasis> option. The action will have exo:move property or not.
+     Check/uncheck the <emphasis role="bold">is Action Move</emphasis> option. The action will have <emphasis>exo:move</emphasis> property or not.
     </para>
       </step>
       <step>

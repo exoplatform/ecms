@@ -1066,7 +1066,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                   </row>
                   <row>
                     <entry><emphasis role="bold">Categories</emphasis></entry>
-                    <entry>The categories of your file plan. Select the categories for your file plan by clicking
+                    <entry>Categories of your file plan. Select the categories for your file plan by clicking
                       <inlinemediaobject>
                         <imageobject>
                           <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -1141,8 +1141,8 @@ After being created successfully, a file document with the <emphasis>text/html</
                   </row>
                   <row>
                     <entry><emphasis role="bold">Default Marking List</emphasis></entry>
-                    <entry>Handling and classifying information that are printed at the bottom of the record, such as
-                      UNCLASSIFIED or NOCONTRACT.
+                    <entry>Handling and classifying information that is printed at the bottom of the record, such as
+                      UNCLASSIFIED, or NOCONTRACT.
                     </entry>
                   </row>
                   <row>
@@ -3176,7 +3176,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <note>
         <para>
           No actions (copying/cutting/renaming) can be taken on a node in the
-          <emphasis role="bold">Check In</emphasis>
+          <emphasis role="bold">CheckIn</emphasis>
           status. You must check it out before you can perform any actions on it.
         </para>
         <para>
@@ -3681,7 +3681,7 @@ After being created successfully, a file document with the <emphasis>text/html</
   <section id="sect-User_Guide-Actions-Request_Approval">
     <title>Request approval</title>
     <para xml:id="proc-User_Guide-Request_Approval-Request_Approval">
-    If you want to publish one created content but not obtaining the 'Publish' right, you must send a request for approving your content.
+    If you want to publish one created content but you do not obtain the 'Publish' right, you must send a request for approving your content.
     </para>
     <procedure>
       <step>
@@ -4144,7 +4144,6 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
             Optionally, type a name in the <emphasis role="bold">Name</emphasis> field which is not required. Special characters (! @ $ % &amp; [ ]) are not allowed in this field.
           If not, the name of the uploaded file will be kept as original.
-          new name in
         </para>
       </step>
       <step>
@@ -4686,7 +4685,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     <procedure>
       <step>
         <para>
-          Select the permission of a user or a group in the table of list permissions.
+          Select the permission of a user or a group in the permissions table.
         </para>
       </step>
       <step>

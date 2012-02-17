@@ -23,7 +23,7 @@
 			By default, there are some initialized folders to store private resources of users.
 		</para>
      <para>
-				In Private drive, there are many functions on the <emphasis role="bold">Action</emphasis> bar, including:
+				In <emphasis role="bold">Private</emphasis> drive, there are many functions on the <emphasis role="bold">Action</emphasis> bar, including:
 				</para>
 		 <itemizedlist>
 
@@ -179,7 +179,7 @@
     <section id="sect-User_Guide-Drives-Personal_Document_drive">
         <title>Personal Documents drive</title>
         <para>This drive consists of the <emphasis role="bold">Private</emphasis> and <emphasis role="bold">Public</emphasis> folders. The <emphasis role="bold">
-            Private</emphasis> folder contains all your personal data resources that cannot be accessed by other users, inversely the <emphasis role="bold">Public</emphasis>
+            Private</emphasis> folder contains all your personal data resources that cannot be accessed by other users, meanwhile the <emphasis role="bold">Public</emphasis>
             one is accessible for all users.
         </para>
         <mediaobject>

@@ -594,12 +594,12 @@
           </imageobject>
         </mediaobject>
      <para>
-     Depending on the popularity of tag, the display of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added to over 10 documents, it will be displayed in red color, size:20px, bold. This can also be configured in the <link linkend="sect-User_Guide-Categories_and_Tags-Manage_Tags">Manage Tag</link> tab.
+     Depending on the popularity of tag, the display of each tag will be different from others by font-size, font-weight, color, font-family, and text-decoration. For example, when a tag is added to over 10 documents, it will be displayed in red color, size:20px, bold. This can also be configured in the <link linkend="sect-User_Guide-Categories_and_Tags-Manage_Tags">Manage Tag</link> tab.
     </para>
       </step>
       <step>
         <para>
-     Each tag is similar to a link which lists all documents that it is added. To display the documents list in the right pane, click a tag name.
+     Each tag is similar to a link listing all documents to which it is added. To display the documents list in the right pane, click a tag name.
     </para>
       </step>
     </procedure>

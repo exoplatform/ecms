@@ -6,7 +6,7 @@
 <section id="sect-User_Guide-View_a_site">
 	<title>View a site</title>
 	 <para>
-		In &PRODUCT;, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
+		In &PRODUCT;, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the <emphasis role="bold">Administration</emphasis> bar:
 	</para>
 	 <mediaobject>
 		<imageobject role="html">

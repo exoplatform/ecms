@@ -23,7 +23,7 @@
     <procedure>
       <step>
         <para>
-     Click <emphasis role="bold">Site</emphasis> on the administration bar. A list of existing portals is listed.
+     Click <emphasis role="bold">Site</emphasis> on the <emphasis role="bold">Administration</emphasis> bar. A list of existing portals is listed.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -223,10 +223,10 @@
       </step>
     </procedure>
     <para>
-   After creating a new site, a list of the existing sites will be displayed on the screen. This new site will be added to the exiting site list in <emphasis role="bold">Site </emphasis> on the administration bar and to  a  drive list that includes all its default files.
+   After creating a new site, a list of the existing sites will be displayed on the screen. This new site will be added to the exiting site list in <emphasis role="bold">Site </emphasis> on the <emphasis role="bold">Administration</emphasis> bar and to  a  drive list that includes all its default files.
   </para>
     <para>
-   To see it in the drive list, click <emphasis role="bold">Group &gt; Content Explorer</emphasis> on the administrator bar.
+   To see it in the drive list, click <emphasis role="bold">Group &gt; Content Explorer</emphasis> on the <emphasis role="bold">Administration</emphasis> bar.
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -820,7 +820,7 @@
     <procedure>
       <step>
         <para>
-     Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
+     Just select a site in the site list that appears when you move the cursor to Sites on the <emphasis role="bold">Administration</emphasis> bar:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -852,7 +852,7 @@
     <procedure>
       <step>
         <para>
-     Show a portal list by clicking <emphasis role="bold">Site</emphasis> on the administration bar:
+     Show a portal list by clicking <emphasis role="bold">Site</emphasis> on the <emphasis role="bold">Administration</emphasis> bar:
     </para>
         <mediaobject>
           <imageobject role="html">

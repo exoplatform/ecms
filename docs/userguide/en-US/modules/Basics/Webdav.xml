@@ -120,7 +120,7 @@
         <para>
      Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field.
     </para>
-          <para>For example, the address of the demonstration site <emphasis>Acme</emphasis> is <code>http://mycompany.com:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme.</code></para>
+          <para>For example, the address of the <emphasis>Acme</emphasis> demonstration site is <code>http://mycompany.com:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme.</code></para>
       </step>
       <step>
         <para>

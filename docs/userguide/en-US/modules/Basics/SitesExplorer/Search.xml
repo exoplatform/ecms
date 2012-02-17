@@ -46,9 +46,9 @@
               <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject>
-          to perform the search.
+          to perform the search;
         </para>
-        <para>Or press <emphasis role="bold">Enter</emphasis>.
+        <para>Or, press <emphasis role="bold">Enter</emphasis>.
         </para>
         <para>
           The search results will be displayed in the right pane.
@@ -84,10 +84,10 @@
               <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject>
-          to view the content containing the keyword.
+          to view the content containing the keyword;
         </para>
         <para>
-          Or click
+          Or, click
           <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/folder-icon.png" format="PNG" width="3mm" scalefit="1"/>
