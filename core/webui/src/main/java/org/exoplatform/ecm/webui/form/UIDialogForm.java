@@ -41,9 +41,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.lock.LockException;
-import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
@@ -79,12 +79,12 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -92,8 +92,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -1264,24 +1264,53 @@ public class UIDialogForm extends UIForm {
     String option = formUploadField.getOptions();
     setInputOption(name, option);
     setMultiPart(true);
-    if(formUploadField.isMultiValues()) {
-      UIFormMultiValueInputSet multiValueField = renderMultiValuesInput(UIFormUploadInput.class,name,label);
-      if (mimeTypes != null) {
-        multiValueField.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
-      }
-      return;
-    }
-    UIFormUploadInput uiInputUpload = findComponentById(name);
-    if(uiInputUpload == null) {
-      uiInputUpload = formUploadField.createUIFormInput();
-      if (mimeTypes != null) {
-          uiInputUpload.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
-      }
-      addUIFormInput(uiInputUpload);
-    }
     String propertyName = getPropertyName(jcrPath);
+    properties.put(name, inputProperty);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
+    Node node = getNode();
+    if(formUploadField.isMultiValues()) {
+      UIFormMultiValueInputSet multiValueField = getChildById(name);
+      if (multiValueField == null) {
+        String propertyPath = jcrPath.substring("/node/".length());
+        if (node != null && node.hasNode(propertyPath)) {
+          multiValueField = createUIComponent(UIFormUploadMultiValueInputSet.class, null, null);
+          multiValueField.setId(name);
+          multiValueField.setName(name);
+          multiValueField.setType(UIFormUploadInputNoUploadButton.class);
+          addUIFormInput(multiValueField);
+          NodeIterator nodeIter = node.getNode(propertyPath).getNodes();
+          int count = 0;
+          while (nodeIter.hasNext()) {
+            Node childNode = nodeIter.nextNode();
+            if (!childNode.isNodeType(NodetypeConstant.NT_FILE)) continue;
+            UIFormInputBase uiInput = multiValueField.createUIFormInput(count++);
+            ((UIFormUploadInputNoUploadButton)uiInput).setFileName(childNode.getName());
+            Value value = childNode.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getValue();
+            ((UIFormUploadInputNoUploadButton)uiInput).setByteValue(
+                                                                    IOUtil.getStreamContentAsBytes(value.getStream()));    
+          }
+          if(label != null) multiValueField.setLabel(label);
+          multiValueField.setType(UIFormUploadInputNoRemoveButton.class);
+          renderField(name);
+          return;
+        }
+        multiValueField = renderMultiValuesInput(UIFormUploadInputNoRemoveButton.class,name,label);
+        if (mimeTypes != null) {
+          multiValueField.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
+        }
+        return;
+      }
+    } else {
+      UIFormUploadInput uiInputUpload = findComponentById(name);
+      if(uiInputUpload == null) {
+        uiInputUpload = formUploadField.createUIFormInput();
+        if (mimeTypes != null) {
+            uiInputUpload.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
+        }
+        addUIFormInput(uiInputUpload);
+      }
+    }
     renderField(name);
   }
 
@@ -1657,6 +1686,12 @@ public class UIDialogForm extends UIForm {
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
 
+  public String getImage(InputStream input, String nodeName) throws Exception {
+    DownloadService dservice = getApplicationComponent(DownloadService.class);    
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image");
+    dresource.setDownloadName(nodeName);
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
+  }
 
   @Deprecated
   public boolean dataRemoved() { return dataRemoved_; }
@@ -1815,7 +1850,13 @@ public class UIDialogForm extends UIForm {
   }
 
   private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
-    UIFormMultiValueInputSet uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
+    UIFormMultiValueInputSet uiMulti = null;
+    if (UIFormUploadInput.class.isAssignableFrom(type)) {
+      uiMulti = createUIComponent(UIFormUploadMultiValueInputSet.class, null, null);
+    }
+    else {
+      uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
+    }
     uiMulti.setId(name);
     uiMulti.setName(name);
     uiMulti.setType(type);

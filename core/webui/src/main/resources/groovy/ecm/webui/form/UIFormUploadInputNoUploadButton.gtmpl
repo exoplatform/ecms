@@ -1,0 +1,15 @@
+<%
+  String uploadId = uicomponent.getUploadId();
+  String fileName = uicomponent.getFileName();
+  boolean isAutoUpload = uicomponent.isAutoUpload();
+  def rcontext = _ctx.getRequestContext();
+//  rcontext.getJavascriptManager().importJavascript('eXo.webui.UIUpload');
+//  rcontext.getJavascriptManager().addCustomizedOnLoadScript("eXo.webui.UIUpload.initUploadEntry('"+uploadId+"',"+isAutoUpload+");");
+%>
+<div class="UIFormUploadInput" id="$uploadId">
+  <div class="SelectFileFrame" style="display: block;">
+    <div class="FileName">
+      <div class="FileNameLabel"><span><%=fileName%></span></div>
+    </div>
+  </div>
+</div>

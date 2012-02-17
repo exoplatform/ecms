@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -32,6 +33,7 @@ import javax.jcr.PropertyType;
 
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.form.UIFormUploadInputNoUploadButton;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -105,12 +107,58 @@ public class DialogFormUtil {
       JcrInputProperty property = null;
       String option = null;
       if(inputs.get(i) instanceof UIFormMultiValueInputSet) {
-        inputName = ((UIFormMultiValueInputSet)inputs.get(i)).getName() ;
+        UIFormMultiValueInputSet inputI = (UIFormMultiValueInputSet)inputs.get(i);
+        inputName = (inputI).getName() ;
         if(!hasMap.containsKey(inputName)) {
-          List<String> values = (List<String>) ((UIFormMultiValueInputSet)inputs.get(i)).getValue() ;
-          property = (JcrInputProperty) properties.get(inputName);
-          if(property != null){
-            property.setValue(values.toArray(new String[values.size()])) ;
+          List<UIComponent> inputChild = inputI.getChildren();
+          property = (JcrInputProperty) properties.get(inputName);          
+          if (inputChild != null && inputChild.size() > 0 && 
+              inputChild.get(0) instanceof UIFormUploadInput) {
+            Map<String, List> uploadDataMap = new TreeMap<String, List>();
+            for (UIComponent child : inputChild) {
+              UIFormUploadInput uploadInput = (UIFormUploadInput)child;
+              String uploadDataName = null;
+              String uploadMimeType = null;
+              byte[] uploadData = null;
+              if (uploadInput instanceof UIFormUploadInputNoUploadButton) {
+                uploadDataName = ((UIFormUploadInputNoUploadButton)uploadInput).getFileName();
+                uploadMimeType = ((UIFormUploadInputNoUploadButton)uploadInput).getMimeType();
+                uploadData = ((UIFormUploadInputNoUploadButton)uploadInput).getByteValue();
+              } else {
+                UploadResource uploadResource = (uploadInput).getUploadResource();
+                if (uploadResource != null) {
+                String location = uploadResource.getStoreLocation();
+                uploadDataName = uploadResource.getFileName();
+                uploadData = IOUtil.getFileContentAsBytes(location);
+                uploadMimeType = uploadResource.getMimeType();
+                }
+              }
+              if (uploadDataName != null && uploadData != null) {
+                List data = new ArrayList();
+                data.add(uploadMimeType);
+                data.add(uploadData);
+                if (!uploadDataMap.containsKey(uploadDataName)) {
+                  uploadDataMap.put(uploadDataName, data);
+                } else {
+                  int count = 1;
+                  while (uploadDataMap.containsKey(uploadDataName + count)) {
+                    count ++;
+                  }
+                  uploadDataMap.put(uploadDataName + count, data);
+                }
+              }
+//                mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
+//                JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
+//                mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
+//                mimeTypeInputPropertyTmp.setValue(((UIFormUploadInput) input).getUploadResource().getMimeType());
+//                mimeTypes.put(mimeTypeJcrPath, mimeTypeInputPropertyTmp);              
+            }
+            property.setValue(uploadDataMap);            
+          } else {
+            List<String> values = (List<String>) (inputI).getValue() ;
+            if(property != null){
+              property.setValue(values.toArray(new String[values.size()])) ;
+            }
           }
         }
         hasMap.put(inputName, property) ;

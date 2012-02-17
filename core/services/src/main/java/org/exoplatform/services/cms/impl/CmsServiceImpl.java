@@ -56,6 +56,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 
 /**
@@ -409,6 +410,15 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       }
+      
+      //process multiple binary data
+      for (Object key : jcrVariables.keySet()) {
+        Object value = jcrVariables.get(key);
+        if (((JcrInputProperty)value).getValue() instanceof Map) {
+          processProperty(key.toString().substring(path.length() + 1), currentNode, 
+                          PropertyType.BINARY, ((JcrInputProperty)value).getValue(), true);
+        }
+      }      
     }
   }
 
@@ -468,6 +478,7 @@ public class CmsServiceImpl implements CmsService {
       for (NodeType mixinNodeType : mixinNodeTypes) {
         Collections.addAll(lstPropertyDefinitionAll, mixinNodeType.getPropertyDefinitions());
       }
+      // process property
       for (PropertyDefinition propertyDef: lstPropertyDefinitionAll) {
         String propertyName = propertyDef.getName();
         Object value = null;
@@ -493,7 +504,18 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       }
+      
+      //process multiple binary data
+      for (Object key : jcrVariables.keySet()) {
+        Object value = jcrVariables.get(key);
+        if (((JcrInputProperty)value).getValue() instanceof Map) {
+          processProperty(key.toString().substring(itemPath.length() + 1), currentNode, 
+                          PropertyType.BINARY, ((JcrInputProperty)value).getValue(), true);
+        }
+      }
     }
+    
+    //process child node
     int itemLevel = StringUtils.countMatches(itemPath, "/") ;
     List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;
     NodeTypeManager nodeTypeManger = currentNode.getSession().getWorkspace().getNodeTypeManager();
@@ -621,19 +643,41 @@ public class CmsServiceImpl implements CmsService {
       }
       break;
     case PropertyType.BINARY:
-      if (value == null) {
-        if (!node.hasProperty(propertyName)) {        
-          node.setProperty(propertyName, "");
+      if (isMultiple) {
+        Node storedNode = node.hasNode(propertyName) ? node.getNode(propertyName) : 
+                                                       node.addNode(propertyName, NodetypeConstant.NT_UNSTRUCTURED);
+        if(value instanceof Map) {
+          for (Map.Entry<String, List> entry : ((Map<String, List>)value).entrySet()) {
+            String fileName = entry.getKey();
+            List param = entry.getValue();
+            Node fileNode = null;
+            Node jcrContentNode = null;
+            if (!storedNode.hasNode(fileName)) {
+              fileNode = storedNode.addNode(fileName, NodetypeConstant.NT_FILE);
+              jcrContentNode = fileNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
+              jcrContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, (String)param.get(0));
+              jcrContentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream((byte[])param.get(1)));
+            } else {
+              jcrContentNode = storedNode.getNode(fileName).getNode(NodetypeConstant.JCR_CONTENT);
+            }
+            jcrContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
+          }
         }
-      } else if(value instanceof InputStream) {
-        node.setProperty(propertyName, (InputStream)value);
-      } else if (value instanceof byte[]) {
-        node.setProperty(propertyName,
-            new ByteArrayInputStream((byte[]) value));
-      } else if (value instanceof String) {
-        node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
-      } else if (value instanceof String[]) {
-        node.setProperty(propertyName, (String[]) value, PropertyType.BINARY);
+      } else {
+        if (value == null) {
+          if (!node.hasProperty(propertyName)) {        
+            node.setProperty(propertyName, "");
+          }
+        } else if(value instanceof InputStream) {
+          node.setProperty(propertyName, (InputStream)value);
+        } else if (value instanceof byte[]) {
+          node.setProperty(propertyName,
+              new ByteArrayInputStream((byte[]) value));
+        } else if (value instanceof String) {
+          node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
+        } else if (value instanceof String[]) {
+          node.setProperty(propertyName, (String[]) value, PropertyType.BINARY);
+        }
       }
       break;
     case PropertyType.BOOLEAN:
@@ -862,25 +906,42 @@ public class CmsServiceImpl implements CmsService {
       }
       break;
     case PropertyType.BINARY:
-      if (value == null) {
-        if (!node.hasProperty(propertyName)) {        
-          node.setProperty(propertyName, "");
+      if (isMultiple) {
+        Node storedNode = node.hasNode(propertyName) ? node.getNode(propertyName) : node.addNode(propertyName);
+        if(value instanceof Map) {
+          for (Map.Entry<String, List> entry : ((Map<String, List>)value).entrySet()) {
+            String fileName = entry.getKey();
+            List param = entry.getValue();
+            Node fileNode = null;
+            Node jcrContentNode = null;
+            if (!storedNode.hasNode(fileName)) {
+              fileNode = storedNode.addNode(fileName, NodetypeConstant.NT_FILE);
+              jcrContentNode = fileNode.addNode(NodetypeConstant.JCR_CONTENT);
+              jcrContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, (String)param.get(0));
+              jcrContentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream((byte[])param.get(1)));
+            } else {
+              jcrContentNode = storedNode.getNode(fileName).getNode(NodetypeConstant.JCR_CONTENT);
+            }
+            jcrContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
+          }
         }
-      } else if(value instanceof InputStream) {
-        if(!property.getValue().getStream().equals(value)) {
-          node.setProperty(propertyName, (InputStream)value);
-        }
-      } else if (value instanceof byte[]) {
-        if(!property.getValue().getStream().equals(new ByteArrayInputStream((byte[]) value))) {
-          node.setProperty(propertyName, new ByteArrayInputStream((byte[]) value));
-        }
-      } else if (value instanceof String) {
-        if(!property.getValue().getStream().equals(new ByteArrayInputStream(((String)value).getBytes()))) {
-          node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
-        }
-      } else if (value instanceof String[]) {
-        if(!property.getValue().getStream().equals(new ByteArrayInputStream((((String[]) value)).toString().getBytes()))) {
-          node.setProperty(propertyName, (String[]) value, PropertyType.BINARY);
+      } else {
+        if (value == null) {
+          if (!node.hasProperty(propertyName)) {        
+            node.setProperty(propertyName, "");
+          }
+        } else if(value instanceof InputStream) {
+          if(!property.getValue().getStream().equals(value)) {
+            node.setProperty(propertyName, (InputStream)value);
+          }
+        } else if (value instanceof byte[]) {
+          if(!property.getValue().getStream().equals(new ByteArrayInputStream((byte[]) value))) {
+            node.setProperty(propertyName, new ByteArrayInputStream((byte[]) value));
+          }
+        } else if (value instanceof String) {
+          if(!property.getValue().getStream().equals(new ByteArrayInputStream(((String)value).getBytes()))) {
+            node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
+          }
         }
       }
       break;

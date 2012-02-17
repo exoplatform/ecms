@@ -592,6 +592,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 
+  public String getImage(InputStream input, String nodeName) throws Exception {
+    DownloadService dservice = getApplicationComponent(DownloadService.class);    
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image");
+    dresource.setDownloadName(nodeName);
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
+  }
+  
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
     String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
