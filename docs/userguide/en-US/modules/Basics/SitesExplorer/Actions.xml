@@ -1691,8 +1691,10 @@ After being created successfully, a file document with the <emphasis>text/html</
   <section id="sect-User_Guide-Actions-Add_symlink">
     <title>Add a Symlink</title>
     <para>
-      You also easily add a Symlink to a document. This function allows you to access your desired documents quickly.
+      A symlink in Content works like shortcut to a directory or file. To add a Symlink, you can follow one of these ways.
     </para>
+
+    <para><emphasis role="bold">The first way</emphasis></para>
     <procedure>
       <step>
         <para>
@@ -1734,11 +1736,11 @@ After being created successfully, a file document with the <emphasis>text/html</
             <tbody>
               <row>
                 <entry><emphasis role="bold">Path Node</emphasis></entry>
-                <entry>The path of a link.</entry>
+                <entry>The path to the target node.</entry>
               </row>
               <row>
                 <entry><emphasis role="bold">Symlink Name</emphasis></entry>
-                <entry>The name of a link.</entry>
+                <entry>The name of the Symlink.</entry>
               </row>
             </tbody>
           </tgroup>
@@ -1805,6 +1807,52 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
       </step>
     </procedure>
+
+
+      <para><emphasis role="bold">The second way</emphasis></para>
+        <procedure>
+            <step>
+                <para>Right-click a node that you want to create a Symlink. Note that if you follow this way, the Symlink will be created to the current node.</para>
+	        </step>
+	        <step>
+		        <para>Click <emphasis role="bold">Add Symlink</emphasis> from the drop-down menu.</para>
+	        </step>
+        </procedure>
+	  <para>This node will become a Symlink to the current node.</para>
+
+<mediaobject>
+      <imageobject role="html">
+         <imagedata align="center" fileref="images/Add_symlink_rightclick.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+         <imagedata width="100mm" scalefit="1" align="center" fileref="images/Add_symlink_rightclick.png" format="PNG"/>
+      </imageobject>
+</mediaobject>
+
+<note>
+    <para>
+        You should notice the different behaviour between adding a Symlink via the <emphasis role="bold">Action</emphasis> bar and the right-click menu.
+    </para>
+<itemizedlist><listitem>
+	<para>
+        After you have right-clicked a node, then selected <emphasis role="bold">Add Symlink</emphasis>, a Symlink to the current node is created.
+    </para>
+</listitem>
+<listitem>
+	<para>
+        Meanwhile, when you select <emphasis role="bold">Add Symlink</emphasis> on the <emphasis role="bold">Action</emphasis> bar, a <emphasis role="bold">Symlink Manager</emphasis> form will appear to let you select the target node.
+    </para>
+</listitem>
+</itemizedlist>
+</note>
+
+<warning>
+    <para>
+        You will get an error message if you create a Symlink inside the following content types: Article, CSS, Event, HTML, JS, Kofax, Podcast, Sample node, Weblink.
+    </para>
+</warning>
+
+
   </section>
   <section id="sect-User_Guide-Actions-Comment">
     <title>Comment</title>
@@ -2714,10 +2762,10 @@ After being created successfully, a file document with the <emphasis>text/html</
           </para>
           <mediaobject>
           <imageobject role="html">
-            <imagedata align="center" fileref="images/view-category.pngg" format="PNG"/>
+            <imagedata align="center" fileref="images/view-category.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="105mm" align="center" fileref="images/view-category.png" format="PNG"/>
+            <imagedata width="105mm" scalefit="1" align="center" fileref="images/view-category.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         </step>
