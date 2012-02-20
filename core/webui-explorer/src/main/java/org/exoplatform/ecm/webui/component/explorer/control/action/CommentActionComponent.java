@@ -67,7 +67,7 @@ public class CommentActionComponent extends UIComponent {
         uiCommentForm.setNodeCommentPath(Text.escapeIllegalJcrChars(commentNodePath));
         uiCommentForm.setEdit(true);
       }
-      uiPopupContainer.activate(uiCommentForm, 750, 700);
+      uiPopupContainer.activate(uiCommentForm, 750, 0);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
   }

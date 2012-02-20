@@ -1,0 +1,43 @@
+<% 
+String fieldName;
+String userName = uicomponent.getUserName();
+%>
+<div class="UIForm $uicomponent.id">
+  <%uiform.begin()%>
+  <div class="HorizontalLayout">
+    <div class="FormContainer">
+      <table class="UIFormGrid">
+        <%
+          for(field in uiform.getChildren()) {
+            if(field.isRendered()) {
+        %>
+              <tr>
+                <%fieldName = uicomponent.getLabel(field.getName());%>
+                <%
+                  if(fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId()) && !fieldName.equals(field.getName()) && (userName==null || userName.length()==0)) {
+                %>
+                  <td class="FieldLabel">
+                    <%=uicomponent.getLabel(field.getName()) %>
+                  </td>
+                  <td class="FieldComponent"><% uiform.renderField(field) %></td>
+                <%} else {%>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(field) %></td>
+                <%}%>
+              </tr>
+        <%
+            }
+          }
+        %>
+      </table>
+      <div class="UIAction">
+        <% for(action in uicomponent.getActions()) {
+             String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+             String link = uicomponent.event(action);
+        %>
+              <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+        <%}%>
+      </div>
+    </div>
+  </div>
+  <%uiform.end()%>
+</div>

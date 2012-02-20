@@ -59,7 +59,7 @@ import org.exoplatform.webui.form.validator.EmailAddressValidator;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl",
+    template = "app:/groovy/webui/component/explorer/popup/action/UICommentForm.gtmpl",
     events = {
       @EventConfig(listeners = UICommentForm.SaveActionListener.class),
       @EventConfig(listeners = UICommentForm.CancelActionListener.class, phase = Phase.DECODE)
@@ -77,6 +77,8 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
   private boolean edit;
 
   private String nodeCommentPath;
+
+  private String userName;
 
   public boolean isEdit() {
     return edit;
@@ -99,9 +101,13 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
 
   }
 
+  public String getUserName() {
+    return userName;
+  }
+
   private void prepareFields() throws Exception{
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    String userName = requestContext.getRemoteUser();
+    userName = requestContext.getRemoteUser();
     if(userName == null || userName.length() == 0){
       addUIFormInput(new UIFormStringInput(FIELD_EMAIL, FIELD_EMAIL, null).addValidator(EmailAddressValidator.class)) ;
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null)) ;
@@ -127,11 +133,11 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     document_ = null ;
   }
 
-  public Node getDocument() { return 
-    NodeLocation.getNodeByLocation(document_); 
+  public Node getDocument() { return
+    NodeLocation.getNodeByLocation(document_);
   }
-  public void setDocument(Node doc) { 
-    document_ = NodeLocation.getNodeLocationByNode(doc); 
+  public void setDocument(Node doc) {
+    document_ = NodeLocation.getNodeLocationByNode(doc);
   }
 
   public static class CancelActionListener extends EventListener<UICommentForm>{
@@ -151,7 +157,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       }
       if (uiForm.isEdit()) {
         try {
-          Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(), 
+          Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(),
               NodeLocation.getNodeByLocation(uiForm.document_).getSession());
           commentsService.updateComment(commentNode, comment);
         } catch (Exception e) {
@@ -176,8 +182,8 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
 
         try {
           String language = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class).
-          getChild(UIDocumentContainer.class).getChild(UIDocumentInfo.class).getLanguage() ;
-          commentsService.addComment(NodeLocation.getNodeByLocation(uiForm.document_), 
+          getChild(UIDocumentContainer.class).getChild(UIDocumentInfo.class).getLanguage();
+          commentsService.addComment(NodeLocation.getNodeByLocation(uiForm.document_),
               userName, email, website, comment, language);
         } catch (Exception e) {
           LOG.error(e);

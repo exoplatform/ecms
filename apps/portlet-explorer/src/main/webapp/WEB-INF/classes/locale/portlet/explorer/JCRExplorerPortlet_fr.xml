@@ -307,7 +307,7 @@
       <TaggingDocument>Tagguer ce document</TaggingDocument>
       <MultiLanguage>Ajouter/Editer des contenus localisés</MultiLanguage>
       <Vote>Voter pour ce document</Vote>
-      <Comment>Commenter ce document</Comment>
+      <Comment>Commenter</Comment>
       <ManageVersions><![CDATA[G&eacute;rer les versions]]></ManageVersions>
       <ManageAuditing><![CDATA[G&eacute;rer la tra&ccedil;abilit&eacute;]]></ManageAuditing>
       <ManagePublications><![CDATA[G&eacute;rer les publications]]></ManagePublications>
