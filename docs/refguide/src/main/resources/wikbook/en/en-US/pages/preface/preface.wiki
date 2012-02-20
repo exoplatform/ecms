@@ -1,0 +1,5 @@
+This chapter helps you make acquainted with eXo Content via the following topics:
+
+* [Get Started with eXo Content|#CONTref.Preface.GetStarted]
+* [Package|#CONTref.Preface.Package]
+Then, you can easily use eXo Content and build your own content system by yourself.
