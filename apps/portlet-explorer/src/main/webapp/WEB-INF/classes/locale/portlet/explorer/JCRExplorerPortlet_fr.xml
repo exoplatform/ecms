@@ -296,8 +296,8 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un contenu</AddDocument>
+      <AddFolder>Nouveau répertoire</AddFolder>
+      <AddDocument>Nouveau contenu</AddDocument>
       <EditDocument>Editer</EditDocument>
       <Upload>Uploader</Upload>
       <Paste>Coller</Paste>

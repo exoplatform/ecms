@@ -299,8 +299,8 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Add Folder</AddFolder>
-      <AddDocument>Add Content</AddDocument>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
       <EditDocument>Edit</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
