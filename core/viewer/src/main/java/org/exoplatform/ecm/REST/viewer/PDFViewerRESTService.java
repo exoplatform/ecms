@@ -188,8 +188,22 @@ public class PDFViewerRESTService implements ResourceContainer {
   private File buildFileImage(File input, String path, String pageNumber, String strRotation, String strScale) {
      Document document = buildDocumentImage(input, path);
      // save page capture to file.
-     float scale = Float.parseFloat(strScale);
-     float rotation = Float.parseFloat(strRotation);
+     float scale = 1.0f;
+     try {
+       scale = Float.parseFloat(strScale);
+       // maximum scale support is 300%
+       if (scale > 3.0f) {
+         scale = 3.0f;
+       }
+     } catch (NumberFormatException e) {
+       scale = 1.0f;
+     }
+     float rotation = 0.0f;
+     try {
+       rotation = Float.parseFloat(strRotation);
+     } catch (NumberFormatException e) {
+       rotation = 0.0f;
+     }
      int maximumOfPage = document.getNumberOfPages();
      int pageNum = 1;
      try {
@@ -255,7 +269,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
-      content = File.createTempFile(name + "_tmp", ".pdf");      
+      content = File.createTempFile(name + "_tmp", ".pdf");
       /*
       file.deleteOnExit();
         PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
@@ -292,7 +306,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   private void read(InputStream is, OutputStream os) throws Exception {
-    int bufferLength = 1024; 
+    int bufferLength = 1024;
     int readLength = 0;
     while (readLength > -1) {
       byte[] chunk = new byte[bufferLength];
