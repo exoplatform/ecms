@@ -59,6 +59,7 @@
    	  <DisplaySettingBlock>Thiết lập hiển thị</DisplaySettingBlock>
    	  <ContentPathBlock>Lựa chọn nội dung</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>Nội dung</UISCVConfigItemPathFormInputSet>
+	  <UISCVContentPathConfigurationInputBox>Nội dung</UISCVContentPathConfigurationInputBox>
    	  <Advance>Nâng cao</Advance>
    	  <ContextCaption>Điều hướng</ContextCaption>
    	  <UISCVContextualRadioBox>Nội dung theo ngữ cảnh</UISCVContextualRadioBox>

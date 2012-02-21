@@ -26,6 +26,7 @@
       <ContentSelectionBlock>コンテンツ選択</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>モード</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>フォルダパス</UICLVConfigItemPathFormInputSet>
+	  <UICLVConfigItemPathFormStringInput>フォルダパス</UICLVConfigItemPathFormStringInput>	
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>タイトル</exo:title>

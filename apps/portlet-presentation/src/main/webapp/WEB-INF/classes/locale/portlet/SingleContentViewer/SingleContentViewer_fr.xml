@@ -58,6 +58,7 @@
    	  <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
    	  <ContentPathBlock>Sélection de contenu</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
+	  <UISCVContentPathConfigurationInputBox>Chemin du contenu</UISCVContentPathConfigurationInputBox>
    	  <Advance>Avancé</Advance>
    	  <ContextCaption>Navigation Dynamique</ContextCaption>
    	  <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>

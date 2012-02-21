@@ -24,6 +24,7 @@
       <ContentSelectionBlock>Chọn nội dung</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Chế độ</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Đường dẫn</UICLVConfigItemPathFormInputSet>
+	  <UICLVConfigItemPathFormStringInput>Đường dẫn</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Sắp xếp theo</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Tiêu đề</exo:title>

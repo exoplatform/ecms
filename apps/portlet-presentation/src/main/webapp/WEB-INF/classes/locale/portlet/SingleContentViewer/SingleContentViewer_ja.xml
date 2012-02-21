@@ -58,6 +58,7 @@
    	  <DisplaySettingBlock>表示設定</DisplaySettingBlock>
    	  <ContentPathBlock>コンテンツ選択</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>コンテンツパス</UISCVConfigItemPathFormInputSet>
+	  <UISCVContentPathConfigurationInputBox>コンテンツパス</UISCVContentPathConfigurationInputBox>
    	  <Advance>詳細</Advance>
    	  <ContextCaption>ダイナミックナビゲーション</ContextCaption>
    	  <UISCVContextualRadioBox>コンテクスチュアルコンテント</UISCVContextualRadioBox>

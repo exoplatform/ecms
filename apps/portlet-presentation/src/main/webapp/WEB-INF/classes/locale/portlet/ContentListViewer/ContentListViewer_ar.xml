@@ -24,6 +24,7 @@
       <ContentSelectionBlock>اختيار المحتوى</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>طريقة</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>مسار المجلد</UICLVConfigItemPathFormInputSet>
+	  <UICLVConfigItemPathFormStringInput>مسار المجلد</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>تصنيف</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>عنوان </exo:title>
