@@ -298,33 +298,33 @@
     <tooltip>
       <AddFolder>Ajouter un répertoire</AddFolder>
       <AddDocument>Ajouter un contenu</AddDocument>
-      <EditDocument>Editer un document</EditDocument>
-      <Upload>Uploader des fichiers</Upload>
+      <EditDocument>Editer</EditDocument>
+      <Upload>Uploader</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <CreateTicket>Nouveau ticket</CreateTicket>
-      <WatchDocument>S'abonner/Se désabonner à ce document</WatchDocument>
-      <TaggingDocument>Tagguer ce document</TaggingDocument>
-      <MultiLanguage>Ajouter/Editer des contenus localisés</MultiLanguage>
-      <Vote>Voter pour ce document</Vote>
+      <WatchDocument>S'abonner/Se désabonner</WatchDocument>
+      <TaggingDocument>Tagguer</TaggingDocument>
+      <Vote>Voter</Vote>
       <Comment>Commenter</Comment>
-      <ManageVersions><![CDATA[G&eacute;rer les versions]]></ManageVersions>
-      <ManageAuditing><![CDATA[G&eacute;rer la tra&ccedil;abilit&eacute;]]></ManageAuditing>
-      <ManagePublications><![CDATA[G&eacute;rer les publications]]></ManagePublications>
-      <ManageCategories><![CDATA[G&eacute;rer les cat&eacute;gories]]></ManageCategories>
-      <ManageRelations><![CDATA[G&eacute;rer les relations]]></ManageRelations>
-      <ManageActions><![CDATA[G&eacute;rer les actions]]></ManageActions>
-      <ExportNode>Exporter un noeud</ExportNode>
-      <ImportNode>Importer un noeud</ImportNode>
+      <MultiLanguage>Ajouter/Editer des contenus localisés</MultiLanguage>
+      <ManageVersions>Versions</ManageVersions>
+      <ManageAuditing><![CDATA[Tra&ccedil;abilit&eacute;]]></ManageAuditing>
+      <ManagePublications>Publications></ManagePublications>
+      <ManageCategories><![CDATA[Cat&eacute;gories]]></ManageCategories>
+      <ManageRelations>Relations</ManageRelations>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Exporter</ExportNode>
+      <ImportNode>Importer</ImportNode>
       <OverloadThumbnail>Surcharger la vignette</OverloadThumbnail>
-      <ManageHidden>Cacher/Montrer le contenu</ManageHidden>
-      <ViewReferences>Visualiser références</ViewReferences>
-      <ViewNodeType>Visualiser les types du noeud</ViewNodeType>
-      <ViewPermissions>Visualiser les permissions</ViewPermissions>
-      <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
-      <ViewMetadatas>Visualiser les métadonnées</ViewMetadatas>
+      <ManageHidden>Cacher/Montrer</ManageHidden>
+      <ViewReferences>Références</ViewReferences>
+      <ViewNodeType>Types</ViewNodeType>
+      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewProperties>Propriétés</ViewProperties>
+      <ViewMetadatas>Métadonnées</ViewMetadatas>
       <ViewRelations>Afficher/Masquer les relations</ViewRelations>
-      <ShowJCRStructure>Afficher/Masquer la structure JCR brute</ShowJCRStructure>
+      <ShowJCRStructure>Afficher/Masquer la structure</ShowJCRStructure>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Action interdite sur le noeud racine</cannot-action-in-rootnode>

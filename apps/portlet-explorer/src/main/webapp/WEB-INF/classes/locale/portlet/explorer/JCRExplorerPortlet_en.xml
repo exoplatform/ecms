@@ -301,33 +301,33 @@
     <tooltip>
       <AddFolder>Add Folder</AddFolder>
       <AddDocument>Add Content</AddDocument>
-      <EditDocument>Edit Document</EditDocument>
-      <Upload>Upload Files</Upload>
+      <EditDocument>Edit</EditDocument>
+      <Upload>Upload</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
       <CreateTicket>New Ticket</CreateTicket>
-      <WatchDocument>Watch/Unwatch Document</WatchDocument>
-     <TaggingDocument>Tag Document</TaggingDocument>
-      <MultiLanguage>Add/Edit Localised Content</MultiLanguage>
-      <Vote>Vote For Document</Vote>
+      <WatchDocument>Watch/Unwatch</WatchDocument>
+      <TaggingDocument>Tag</TaggingDocument>
+      <Vote>Vote</Vote>
       <Comment>Comment</Comment>
-      <ManageVersions>Manage Versions</ManageVersions>
-      <ManageAuditing>Manage Audit</ManageAuditing>
-      <ManagePublications>Manage Publications</ManagePublications>
-      <ManageCategories>Manage Categories</ManageCategories>
-      <ManageRelations>Manage Relations</ManageRelations>
-      <ManageActions>Manage Actions</ManageActions>
-      <ExportNode>Export Node</ExportNode>
-      <ImportNode>Import Node</ImportNode>
+      <MultiLanguage>Add/Edit Localised Content</MultiLanguage>
+      <ManageVersions>Versions</ManageVersions>
+      <ManageAuditing>Audit</ManageAuditing>
+      <ManagePublications>Publications</ManagePublications>
+      <ManageCategories>Categories</ManageCategories>
+      <ManageRelations>Relations</ManageRelations>
+      <ManageActions>Actions</ManageActions>
+      <ExportNode>Export</ExportNode>
+      <ImportNode>Import</ImportNode>
       <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
-      <ManageHidden>Hide/Show Content</ManageHidden>
-      <ViewReferences>View References</ViewReferences>
-      <ViewNodeType>View Node Types</ViewNodeType>
-      <ViewPermissions>View Permissions</ViewPermissions>
-      <ViewProperties>View Node Properties</ViewProperties>
-      <ViewMetadatas>View Metadata</ViewMetadatas>
+      <ManageHidden>Show/Hide Content</ManageHidden>
+      <ViewReferences>References</ViewReferences>
+      <ViewNodeType>Types</ViewNodeType>
+      <ViewPermissions>Permissions</ViewPermissions>
+      <ViewProperties>Properties</ViewProperties>
+      <ViewMetadatas>Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
-      <ShowJCRStructure>Show/Hide Like JCR Structure</ShowJCRStructure>
+      <ShowJCRStructure>Show/Hide Content Structure</ShowJCRStructure>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>You cannot do this action in the root node.</cannot-action-in-rootnode>

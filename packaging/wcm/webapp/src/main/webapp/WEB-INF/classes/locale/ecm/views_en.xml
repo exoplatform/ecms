@@ -94,7 +94,7 @@
         <not-viewable>This content is not viewable. Please download it or use WebDAV to access the content</not-viewable>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
-        <download>Download this File</download>
+        <download>Download</download>
         <htmlview>View as HTML</htmlview>
         <plaintextview>View as Plain text</plaintextview>
       </label>

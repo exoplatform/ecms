@@ -94,7 +94,7 @@
         <not-viewable>Ce contenu n'est pas consultable. Veuillez le télécharger ou utiliser WebDAV pour y accéder.</not-viewable>
         <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
         <webDAV>Vue WebDAV</webDAV>
-        <download>Télécharger ce fichier</download>
+        <download>Télécharger</download>
         <htmlview>Vue HTML</htmlview>
         <plaintextview>Vue texte brut</plaintextview>
       </label>
