@@ -157,8 +157,11 @@ public class UIPublicationPanel
         
         publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        String nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
-        if (!nodeVersionUUID.isEmpty()) {          
+        
+        String nodeVersionUUID = null;
+        if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP))
+          nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
+        if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {          
           publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
         }
         String siteName = Util.getPortalRequestContext().getPortalOwner();
