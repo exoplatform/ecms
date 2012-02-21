@@ -24,20 +24,7 @@
 			
 			a {
 				text-decoration: none;
-			}
-			
-			.FloatLeft{
-				float: left;
-			}
-			.FloatRight{
-				float: right;
-			}
-			.ClearRight{
-				clear:right;
-			}
-			.ClearLeft{
-				clear: left;
-			}
+			}			
 			
 			.GadgetBgTitleLeft{
 				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -70px;

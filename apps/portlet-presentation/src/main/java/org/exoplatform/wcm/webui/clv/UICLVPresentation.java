@@ -734,7 +734,7 @@ public class UICLVPresentation extends UIContainer {
       sb.append("  <div class=\"EdittingContent\" style=\" z-index: 1\">");
       sb.append("    <div class=\"EdittingToolBar \" >");
       sb.append("      <div class=\"EdittingToolBarL\">");
-      sb.append("        <div class=\"EdittingToolBarC clearfix\">");
+      sb.append("        <div class=\"EdittingToolBarC ClearFix\">");
       if (Utils.isShowDelete(viewNode)) {
         String strDeleteBundle = "Delete";
         try {

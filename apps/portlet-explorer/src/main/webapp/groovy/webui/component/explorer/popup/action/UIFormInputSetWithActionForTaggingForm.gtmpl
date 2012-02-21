@@ -97,7 +97,7 @@
                         </a>
                      <%} else { %>
                      <div class="ClearFix">
-                          <div class="ActionField FloatLeft">
+                          <div class="ActionField FL">
                             <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
                               <%=arrInfor[i].trim()%>
                           </a>

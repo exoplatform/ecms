@@ -36,7 +36,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 			<div class="RightActionBar">
 				<div class="CenterActionBar">
 					<div class="NewsletterActionBar">			
-						<div class="Line FloatLeft">
+						<div class="Line FL">
 							<a class="Newsletter" onclick="<%=uicomponent.event("AddEntry")%>" href="javascript:void(0);">
 		  	  			<%=_ctx.appRes("NewsletterPortlet.action.CreateLetter")%>
 		  	  		</a>

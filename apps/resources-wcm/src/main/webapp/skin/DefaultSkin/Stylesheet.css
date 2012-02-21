@@ -38,15 +38,6 @@
 @import url('seo/Stylesheet.css');
 
 
-.FL {
-	float: left;
-}
-
-.FR {
-	float: right;
-}
-
-
 .UIPageIterator .selectbox {
   display:block; 
   float:left; 

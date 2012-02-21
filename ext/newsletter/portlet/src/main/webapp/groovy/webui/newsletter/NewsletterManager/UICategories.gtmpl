@@ -21,22 +21,22 @@ import java.util.List;
 				<div class="RightActionBar">
 					<div class="CenterActionBar">
 						<div class="NewsletterActionBar">			
-							<div class="Line FloatLeft">
+							<div class="Line FL">
 								<a href="javaScript:void(0);" onclick="<%=uicomponent.event("AddEntry")%>" class="Newsletter">
 									<%=_ctx.appRes("UICategories.title.NewsLetter")%>
 								</a>
 							</div>
-							<div class="Line FloatLeft">
+							<div class="Line FL">
 								<a href="javaScript:void(0);" onclick="<%=uicomponent.event("AddSubcription")%>" class="NewsSubcript">
 									<%=_ctx.appRes("UICategories.title.NewsSubscription")%>
 								</a>
 							</div>
-							<div class="Line FloatLeft">
+							<div class="Line FL">
 								<a href="javaScript:void(0);" onclick="<%=uicomponent.event("AddCategory")%>" class="NewsCategory">
 									<%=_ctx.appRes("UICategories.title.NewsCategory")%>
 								</a>
 							</div>
-							<div class="Line FloatLeft">
+							<div class="Line FL">
 								<a href="javaScript:void(0);" onclick="<%=uicomponent.event("ManagerUsers")%>" class="NewsAdmin">
 									<%=_ctx.appRes("UISubscription.title.ManageUsers")%>
 								</a>
