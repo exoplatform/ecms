@@ -108,7 +108,9 @@ public class LinkManagerImpl implements LinkManager {
       try {
         updateAccessPermissionToLink(linkNode, target);
       } catch(Exception e) {
-        LOG.error("CAN NOT UPDATE ACCESS PERMISSIONS FROM TARGET NODE TO LINK NODE", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("CAN NOT UPDATE ACCESS PERMISSIONS FROM TARGET NODE TO LINK NODE", e);
+        }
       }
       linkNode.setProperty(WORKSPACE, target.getSession().getWorkspace().getName());
       linkNode.setProperty(PRIMARY_TYPE, target.getPrimaryNodeType().getName());
@@ -118,7 +120,9 @@ public class LinkManagerImpl implements LinkManager {
       try {
         listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
       } catch (Exception e) {
-        LOG.error("Error while broadcasting event: " + e.getMessage());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error while broadcasting event: " + e.getMessage());
+        }
       }
       return linkNode;
     }
@@ -190,7 +194,9 @@ public class LinkManagerImpl implements LinkManager {
     try {
       updateAccessPermissionToLink(linkNode, targetNode);
     } catch(Exception e) {
-      LOG.error("CAN NOT UPDATE ACCESS PERMISSIONS FROM TARGET NODE TO LINK NODE", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("CAN NOT UPDATE ACCESS PERMISSIONS FROM TARGET NODE TO LINK NODE", e);
+      }
     }
     linkNode.setProperty(UUID, targetNode.getUUID());
     linkNode.setProperty(PRIMARY_TYPE, targetNode.getPrimaryNodeType().getName());

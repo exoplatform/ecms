@@ -46,7 +46,9 @@ public class XScriptJob extends BaseJob {
       jsService.start();
       skinService.start();
     } catch (Exception e) {
-      log.error("Error when execute Javascript service updater", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when execute Javascript service updater", e);
+      }
     }
   }
 }

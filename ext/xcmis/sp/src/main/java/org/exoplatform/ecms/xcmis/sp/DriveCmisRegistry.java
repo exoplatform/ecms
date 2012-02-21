@@ -155,7 +155,9 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       }
       catch (Exception e)
       {
-         LOG.error(e.getMessage(), e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e.getMessage(), e);
+        }
       }
 
       if (availableDrives != null)
@@ -175,7 +177,9 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                }
                catch (Exception e)
                {
-                  LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
+                 if (LOG.isErrorEnabled()) {
+                   LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
+                 }
                }
                // NOTE New storage is not add in registry.
                // At the moment met only private/public user's storage.
@@ -196,7 +200,9 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                }
                catch (Exception e)
                {
-                  LOG.error(e.getMessage(), e);
+                 if (LOG.isErrorEnabled()) {
+                   LOG.error(e.getMessage(), e);
+                 }
                }
                finally
                {
@@ -274,7 +280,9 @@ public class DriveCmisRegistry extends JcrCmisRegistry
          }
          catch (Exception e)
          {
-            LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage(), e);
+           if (LOG.isErrorEnabled()) {
+             LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage(), e);
+           }
          }
       }
       super.start();

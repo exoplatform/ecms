@@ -1062,7 +1062,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         String s2 = item2.getLabel().toLowerCase();
         return s1.compareTo(s2);
       } catch (Exception e) {
-        LOG.error("Cannot compare nodes", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot compare nodes", e);
+        }
       }
       return 0;
     }

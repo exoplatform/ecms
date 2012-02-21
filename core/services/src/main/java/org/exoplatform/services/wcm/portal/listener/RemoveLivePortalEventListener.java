@@ -52,9 +52,13 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     try {
       manageDriveService.removeDrive(String.format("%s-category", portalName));
-      log.info("Removed drive for portal: " + portalName);
+      if (log.isInfoEnabled()) {
+        log.info("Removed drive for portal: " + portalName);
+      }
     } catch (Exception e) {
-      log.error("Error when remove drive for portal: " + portalName, e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when remove drive for portal: " + portalName, e);
+      }
     }
 
     // Remove initial artifacts for this portal
@@ -64,9 +68,13 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     // Remove site content storage for the portal
     try {
       livePortalManagerService.removeLivePortal(sessionProvider, portalConfig);
-      log.info("Removed resource storage for portal: " + portalName);
+      if (log.isInfoEnabled()) {
+        log.info("Removed resource storage for portal: " + portalName);
+      }
     } catch (Exception e) {
-      log.error("Error when remove resource storage: " + portalName, e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when remove resource storage: " + portalName, e);
+      }
     }
   }
 

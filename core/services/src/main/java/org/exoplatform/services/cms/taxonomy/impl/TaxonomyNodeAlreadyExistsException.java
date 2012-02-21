@@ -31,6 +31,8 @@ public class TaxonomyNodeAlreadyExistsException extends Throwable {
   private static final Log LOG = ExoLogger.getLogger(TaxonomyNodeAlreadyExistsException.class);
 
   TaxonomyNodeAlreadyExistsException() {
-    LOG.info("\nTaxonomy Name is existed");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("\nTaxonomy Name is existed");
+    }
   }
 }

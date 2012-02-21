@@ -83,14 +83,18 @@ public class RecordsJob extends BaseJob {
               recordsService_.computeAccessions(filePlan);
               recordsService_.computeDestructions(filePlan);
             } catch (RepositoryException ex) {
-              LOG.error(ex.getMessage(), ex);
+              if (LOG.isErrorEnabled()) {
+                LOG.error(ex.getMessage(), ex);
+              }
             }
           }
           session.logout();
         }
       } else {
-        LOG.warn("Repository '" + repository.getConfiguration().getName()
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Repository '" + repository.getConfiguration().getName()
               + "' is not started. Execution skipped.");
+        }
       }
     } catch (Exception e) {
       if (session != null) {

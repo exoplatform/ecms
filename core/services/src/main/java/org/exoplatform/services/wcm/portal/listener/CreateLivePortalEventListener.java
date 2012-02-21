@@ -81,9 +81,13 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     // Create site content storage for the portal
     try {
       livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
-      log.info("Create new resource storage for portal: " + portalConfig.getName());
+      if (log.isInfoEnabled()) {
+        log.info("Create new resource storage for portal: " + portalConfig.getName());
+      }
     } catch (Exception e) {
-      log.error("Error when create new resource storage: " + portalConfig.getName(), e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when create new resource storage: " + portalConfig.getName(), e);
+      }
     }
     // create drive for the site content storage
     if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
@@ -95,7 +99,9 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
         Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
         createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
       } catch (Exception e) {
-        log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+        if (log.isErrorEnabled()) {
+          log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+        }
       }
     }
     //Deploy initial artifacts for this portal
@@ -104,7 +110,9 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     try {
       artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName());
     } catch (Exception e) {
-      log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+      }
     }
   }
 
@@ -143,6 +151,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
                           showHiddenNode,
                           allowCreateFolder,
                           allowNodeTypesOnTree);
-    log.info("Create new drive for portal: " + portalConfig.getName());
+    if (log.isInfoEnabled()) {
+      log.info("Create new drive for portal: " + portalConfig.getName());
+    }
   }
 }

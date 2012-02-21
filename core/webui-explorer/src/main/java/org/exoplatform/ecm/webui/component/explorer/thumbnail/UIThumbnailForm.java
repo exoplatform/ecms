@@ -145,7 +145,9 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
         
         return;
       } catch(Exception e) {
-        LOG.error("An unexpected error occurs", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("An unexpected error occurs", e);
+        }
         JCRExceptionManager.process(uiApp, e);
         
         return;
@@ -187,7 +189,9 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
           
           return;
         } catch(Exception e) {
-          LOG.error("An unexpected error occurs", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs", e);
+          }
           JCRExceptionManager.process(uiApp, e);
           
           return;

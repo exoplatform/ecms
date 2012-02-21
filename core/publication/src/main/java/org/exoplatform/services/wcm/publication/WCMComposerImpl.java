@@ -866,7 +866,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
       return templatesFilter;
     } catch (Exception e) {
-      log.error("Error when perform getTemlatesSQLFilter: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform getTemlatesSQLFilter: ", e);
+      }
       return null;
     }
   }

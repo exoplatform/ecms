@@ -195,7 +195,9 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
         Date date2 = formatter.parse(getDateTime(node2));
         return date2.compareTo(date1);
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
       return 0;
     }

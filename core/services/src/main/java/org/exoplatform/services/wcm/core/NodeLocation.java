@@ -141,7 +141,9 @@ public class NodeLocation extends ItemLocation {
       String path = node.getPath();
       return new NodeLocation(repository, workspace, path);
     } catch (RepositoryException e) {
-      log.error("make() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("make() failed because of ", e);
+      }
     }
     return null;
   }

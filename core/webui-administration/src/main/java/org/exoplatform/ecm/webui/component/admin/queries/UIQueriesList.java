@@ -168,7 +168,9 @@ public class UIQueriesList extends UIPagingGridDecorator {
                                                 null,ApplicationMessage.WARNING));
         return;
       } catch (Exception ex) {
-        LOG.error("cannot remove the query", ex);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("cannot remove the query", ex);
+        }
         uiApp.addMessage(new ApplicationMessage("UIQueriesList.msg.can-not-remove",
                                                 null,ApplicationMessage.ERROR));
         return;

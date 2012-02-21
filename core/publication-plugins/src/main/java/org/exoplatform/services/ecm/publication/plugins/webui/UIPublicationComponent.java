@@ -66,7 +66,9 @@ public class UIPublicationComponent extends UIComponent {
     try {
       return getNode().getName();
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return "Error in getNodeName";
     }
   }
@@ -76,7 +78,9 @@ public class UIPublicationComponent extends UIComponent {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
       return service.getNodeLifecycleName(getNode());
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return "Error in getLifeCycleName";
     }
   }
@@ -86,7 +90,9 @@ public class UIPublicationComponent extends UIComponent {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
       return service.getCurrentState(getNode());
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return "Error in getStateName";
     }
   }
@@ -101,7 +107,9 @@ public class UIPublicationComponent extends UIComponent {
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return "Error in getStateImage";
     }
   }

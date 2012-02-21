@@ -78,7 +78,9 @@ public class UIECMAdminWorkingArea extends UIContainer {
             uiManager.init();
             renderedCompId_ = uiManager.getId();
           } catch (Exception e) {
-            LOG.error("The manager " + uiManager.getClass() + " cannot be initialized, it will be unregistered", e);
+            if (LOG.isErrorEnabled()) {
+              LOG.error("The manager " + uiManager.getClass() + " cannot be initialized, it will be unregistered", e);
+            }
             if (rejectedManagers == null) {
               rejectedManagers = new ArrayList<UIAbstractManagerComponent>();
             }

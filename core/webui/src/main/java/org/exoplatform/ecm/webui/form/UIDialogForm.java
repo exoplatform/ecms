@@ -221,7 +221,9 @@ public class UIDialogForm extends UIForm {
             LockUtil.removeLock(currentNode);
           }
         } catch(LockException le) {
-          LOG.error("Fails when unlock node that is editing", le);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Fails when unlock node that is editing", le);
+          }
         }
       }
     }
@@ -620,7 +622,9 @@ public class UIDialogForm extends UIForm {
           String[] scriptParams = formSelectBoxField.getScriptParams();
           executeScript(script, uiSelectBox, scriptParams, true);
         } catch (Exception e) {
-          LOG.error("An unexpected error occurs", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs", e);
+          }
           uiSelectBox.setOptions(optionsList);
         }
       } else if (options != null && options.length() >0) {
@@ -1618,9 +1622,8 @@ public class UIDialogForm extends UIForm {
       ResourceBundle rs = context.getApplicationResourceBundle();
       return rs.getString(key);
     } catch(MissingResourceException e) {
-      if (LOG.isDebugEnabled()) {
+      if (LOG.isWarnEnabled()) {
         LOG.warn("Missing resource " + key);
-
       }
       key = key.contains(".") ? key.substring(key.lastIndexOf(".") + 1) : key;
       return key;
@@ -1808,7 +1811,9 @@ public class UIDialogForm extends UIForm {
       return true;
     } catch (Exception e) {
       if(printException){
-        LOG.warn("An unexpected error occurs", e);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("An unexpected error occurs", e);
+        }
       } else {
         UIApplication uiApp = getAncestorOfType(UIApplication.class);
         if (e instanceof DialogFormException) {
@@ -1834,7 +1839,9 @@ public class UIDialogForm extends UIForm {
         // do nothing
       }
     }
-    LOG.error("No node with uuid ='" + uuid + "' can be found");
+    if (LOG.isErrorEnabled()) {
+      LOG.error("No node with uuid ='" + uuid + "' can be found");
+    }
     return null;
   }
 

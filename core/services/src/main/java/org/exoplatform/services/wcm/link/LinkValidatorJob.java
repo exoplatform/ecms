@@ -41,7 +41,9 @@ public class LinkValidatorJob extends BaseJob {
     try {
       linkManagerService.updateLinks();
     } catch (Exception e) {
-      log.error("Error when execute link validator job by scheduler", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when execute link validator job by scheduler", e);
+      }
     }
   }
 

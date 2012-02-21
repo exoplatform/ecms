@@ -42,7 +42,9 @@ public class BackupContentActionHandler implements ActionHandler {
       executed = true;
       backupContent(context);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       ProcessUtil.deleteTimer(context, "backupTimer", context.getToken());
       context.getToken().signal("backup-done");

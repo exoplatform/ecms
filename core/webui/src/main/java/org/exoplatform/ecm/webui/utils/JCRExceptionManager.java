@@ -61,7 +61,9 @@ public class JCRExceptionManager {
    * @throws Exception the exception
    */
   public static void process(UIApplication uiApp,Exception e,String messageKey) throws Exception{
-    LOG.error("The following error occurs : " + e);
+    if (LOG.isErrorEnabled()) {
+      LOG.error("The following error occurs : " + e);
+    }
     if(e instanceof LoginException) {
       if(messageKey == null) messageKey = "LoginException.msg";
     } else if(e instanceof AccessDeniedException) {

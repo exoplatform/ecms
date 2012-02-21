@@ -49,7 +49,9 @@ public class NodeIteratorLinkAware extends RangeIteratorLinkAware implements Nod
       return new NodeLinkAware(originalWorkspace, LinkUtils.createPath(virtualPath, node.getName()
           + (node.getIndex() > 1 ? "[" + node.getIndex() + "]" : "")), node);
     } catch (RepositoryException e) {
-      LOG.error("Cannot create an instance of NodeLinkAware", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot create an instance of NodeLinkAware", e);
+      }
     }
     return node;
   }

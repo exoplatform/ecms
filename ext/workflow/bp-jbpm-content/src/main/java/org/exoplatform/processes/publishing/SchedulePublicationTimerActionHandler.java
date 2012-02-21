@@ -45,7 +45,9 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
       try {
         publishContent(context);
       } catch (Exception e) {
-        log.error(e);
+        if (log.isErrorEnabled()) {
+          log.error(e);
+        }
       }
       //context.getToken().signal("publication-done");
       context.getProcessInstance().getRootToken().signal("publication-done");
@@ -53,7 +55,9 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
       try{
         moveToPending(context);
       }catch (Exception e) {
-        log.error(e);
+        if (log.isErrorEnabled()) {
+          log.error(e);
+        }
       }
       //Create and save the Action object
       Delegation delegation = new Delegation();

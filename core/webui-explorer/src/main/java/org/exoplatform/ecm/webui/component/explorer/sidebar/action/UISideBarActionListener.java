@@ -87,7 +87,9 @@ public abstract class UISideBarActionListener<T extends UIComponent> extends
                                                         null,
                                                         ApplicationMessage.WARNING));
     } catch (Exception e) {
-      LOG.error("Unexpected problem occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem occurs", e);
+      }
     }
     return context;
   }

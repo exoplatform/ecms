@@ -117,10 +117,12 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
         }
       }
     } catch (Exception ex) {
-      log.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
+      if (log.isErrorEnabled()) {
+        log.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
                     + deploymentDescriptor.getTargetPath() + " is FAILURE at "
                     + new Date().toString() + "\n",
                 ex);
+      }
       throw ex;
     }
   }

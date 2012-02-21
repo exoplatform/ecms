@@ -120,7 +120,9 @@ public class ProcessUtil {
       }
       requestNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     }
   }
 
@@ -146,7 +148,9 @@ public class ProcessUtil {
       validatedNode.setProperty(CURRENT_STATE_PROP,"Approved");
       validatedNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     }
   }
 
@@ -172,7 +176,9 @@ public class ProcessUtil {
       }
       disapprovedNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     }
   }
 
@@ -203,7 +209,9 @@ public class ProcessUtil {
       publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);
       publishedNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     } finally {
       provider.close();  
     }
@@ -232,7 +240,9 @@ public class ProcessUtil {
       }
       pendingNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     } finally {
       provider.close();  
     }
@@ -262,7 +272,9 @@ public class ProcessUtil {
       delegateNode.setProperty(CURRENT_STATE_PROP,DELEGATED);
       delegateNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     }
   }
 
@@ -285,7 +297,9 @@ public class ProcessUtil {
       backupNode.setProperty(CURRENT_STATE_PROP,BACKUP);
       backupNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     } finally {
       provider.close();   
     }
@@ -311,7 +325,9 @@ public class ProcessUtil {
       trashNode.setProperty(CURRENT_STATE_PROP,IN_TRASH);
       trashNode.getSession().save();
     } catch (Exception e) {
-      log.error(e);
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
     } finally {
       provider.close();  
     }

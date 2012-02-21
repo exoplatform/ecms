@@ -51,7 +51,9 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
   @Override
   @SuppressWarnings("unchecked")
   public void onEvent(Event<ConversationRegistry, ConversationState> event) throws Exception {
-    log.info("Removing the locks of all locked nodes");
+    if (log.isInfoEnabled()) {
+      log.info("Removing the locks of all locked nodes");
+    }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     ConversationState conversationState = event.getData();
     String userid = conversationState.getIdentity().getUserId();
@@ -85,14 +87,18 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
           node.removeMixin("mix:lockable");
           node.save();
         } catch (Exception e) {
-          log.error("Error while unlocking the locked nodes",e);
+          if (log.isErrorEnabled()) {
+            log.error("Error while unlocking the locked nodes",e);
+          }
         } finally {
           if(session != null) session.logout();
         }
       }
       lockedNodes.clear();
     } catch(Exception ex) {
-      log.error("Error during the time unlocking the locked nodes",ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error during the time unlocking the locked nodes",ex);
+      }
     } finally {
       sessionProvider.close();
     }

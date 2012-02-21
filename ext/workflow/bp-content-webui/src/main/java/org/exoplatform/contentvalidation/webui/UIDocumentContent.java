@@ -113,7 +113,9 @@ public class UIDocumentContent extends UIBaseNodePresentation {
       if(isNodeTypeSupported()) return getTemplatePath() ;
       return super.getTemplate() ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return null ;
   }
@@ -124,7 +126,9 @@ public class UIDocumentContent extends UIBaseNodePresentation {
       String wsName = dmsConfiguration.getConfig().getSystemWorkspace();
       return new JCRResourceResolver(wsName);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return super.getTemplateResourceResolver(context, template);
   }
@@ -234,7 +238,9 @@ public class UIDocumentContent extends UIBaseNodePresentation {
         }
       }
     } catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return nodeTypes ;
   }
@@ -372,7 +378,9 @@ public class UIDocumentContent extends UIBaseNodePresentation {
       Class object = loader.loadClass(className);
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
-      LOG.error("Unexpected error", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", ex);
+      }
     }
     return service;
   }

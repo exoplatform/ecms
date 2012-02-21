@@ -200,7 +200,9 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
 
         return;
       } catch(Exception e) {
-        LOG.error("An unexpected error occurs", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("An unexpected error occurs", e);
+        }
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
 
@@ -242,7 +244,9 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
 
         return;
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
 
         return;

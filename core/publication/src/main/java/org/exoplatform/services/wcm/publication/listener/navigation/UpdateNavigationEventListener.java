@@ -58,7 +58,9 @@ public class UpdateNavigationEventListener extends Listener<NavigationServiceWra
                                                                               .getIdentity()
                                                                               .getUserId());
     } catch (Exception e) {
-      log.error("Exception when update publication lifecyle", e);
+      if (log.isErrorEnabled()) {
+        log.error("Exception when update publication lifecyle", e);
+      }
     }
   }
 }

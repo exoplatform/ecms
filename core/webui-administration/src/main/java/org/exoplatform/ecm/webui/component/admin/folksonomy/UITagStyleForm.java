@@ -90,7 +90,9 @@ public class UITagStyleForm extends UIForm {
     try {
       vars = StringUtils.split(range,"..") ;
     } catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return false ;
     }
     if(vars == null || vars.length!= 2) return false ;

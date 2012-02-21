@@ -227,7 +227,9 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
       try{
         queryManager = session.getWorkspace().getQueryManager() ;
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
       if(queryManager == null) {
         session.logout();
@@ -247,9 +249,13 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
         }
         session.logout();
       } catch (Exception e) {
-        LOG.warn("==>>> Cannot init observer for node: "
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("==>>> Cannot init observer for node: "
             +e.getLocalizedMessage() + " in '"+repo.getName()+"' repository");
-        LOG.error("Unexpected error", e);
+        }
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }
@@ -268,7 +274,9 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     try {
       reInitObserver() ;
     }catch (Exception e) {
-      LOG.warn("==>>> Exeption when startd WatchDocumentSerice!!!!");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("==>>> Exeption when startd WatchDocumentSerice!!!!");
+      }
     }
   }
 

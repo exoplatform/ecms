@@ -199,7 +199,9 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       }
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
     } catch (Exception e) {
-      LOG.error("Unexpected problem occurs while updating", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem occurs while updating", e);
+      }
     }
   }
   private boolean isChildNodePrimaryTypeAllowed(Node parent, String childNodeTypeName) throws Exception{

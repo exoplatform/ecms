@@ -168,7 +168,9 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
        try {
          deActivate();
        } catch (Exception ex) {
-         LOG.error("Unknown err:", ex);
+         if (LOG.isErrorEnabled()) {
+           LOG.error("Unknown err:", ex);
+         }
        }
      }
      return (T)res;

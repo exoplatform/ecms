@@ -131,7 +131,9 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       commentsCache_.remove(commentNode.getPath()) ;
     } catch(Exception e) {
-      LOG.error("Unexpected problem happen when try to add comment", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when try to add comment", e);
+      }
     } finally {
       systemSession.logout();
     }
@@ -196,7 +198,9 @@ public class CommentsServiceImpl implements CommentsService {
       Collections.sort(list,new DateComparator()) ;
       commentsCache_.put(commentsNode.getPath(),list) ;
     } catch(Exception e) {
-      LOG.error("Unexpected problem happen when try to get comments", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when try to get comments", e);
+      }
     }
     return list;
   }

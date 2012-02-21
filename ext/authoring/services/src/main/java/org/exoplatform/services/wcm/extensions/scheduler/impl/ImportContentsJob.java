@@ -62,7 +62,9 @@ public class ImportContentsJob implements Job {
         JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
         stagingStorage = jdatamap.getString("stagingStorage");
         temporaryStorge = jdatamap.getString("temporaryStorge");
-        log.debug("Init parameters first time :");
+        if (log.isDebugEnabled()) {
+          log.debug("Init parameters first time :");
+        }
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
       String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
@@ -174,18 +176,24 @@ public class ImportContentsJob implements Job {
                           publicationPlugin.changeState(currentContent,
                                                         PublicationDefaultStates.UNPUBLISHED,
                                                         variables);
-                          log.info("Change the status of the node " + currentContent.getPath()
+                          if (log.isInfoEnabled()) {
+                            log.info("Change the status of the node " + currentContent.getPath()
                               + " from " + PublicationDefaultStates.PUBLISHED + " to "
                               + PublicationDefaultStates.UNPUBLISHED);
+                          }
                         }
                       } else {
-                        log.warn("The node " + contentPath + " does not exist");
+                        if (log.isWarnEnabled()) {
+                          log.warn("The node " + contentPath + " does not exist");
+                        }
                       }
 
                     }
 
                   } catch (Exception ie) {
-                    log.warn("Error in ImportContentsJob: " + ie.getMessage());
+                    if (log.isWarnEnabled()) {
+                      log.warn("Error in ImportContentsJob: " + ie.getMessage());
+                    }
                   }
                 }
                 reader.close();
@@ -297,9 +305,13 @@ public class ImportContentsJob implements Job {
         log.info("End Execute ImportXMLJob");
       }
     } catch (RepositoryException ex) {
-      log.debug("Repository 'repository ' not found.");
+      if (log.isDebugEnabled()) {
+        log.debug("Repository 'repository ' not found.");
+      }
     } catch (Exception ex) {
-      log.error("Error when importing Contents : " + ex.getMessage(), ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error when importing Contents : " + ex.getMessage(), ex);
+      }
     } finally {
       if (session != null)
         session.logout();

@@ -12,7 +12,9 @@ public class PostUpdateStateEventListener extends Listener {
 
   @Override
   public void onEvent(Event event) throws Exception {
-    log.debug("this listener will be called every time a content changes its current state");
+    if (log.isDebugEnabled()) {
+      log.debug("this listener will be called every time a content changes its current state");
+    }
 
   }
 

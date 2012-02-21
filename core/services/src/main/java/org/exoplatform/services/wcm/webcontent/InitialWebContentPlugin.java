@@ -115,6 +115,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
       configure(portalNode, portalName);
       portalNode.getSession().save();
     } catch (Exception ex) {
+      if (log.isErrorEnabled()) {
       log.error("deploy the portal "
                     + portalName
                     + " from "
@@ -125,6 +126,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
                                           portalName) + " is FAILURE at " + new Date().toString()
                     + "\n",
                 ex);
+      }
       throw ex;
     }
   }

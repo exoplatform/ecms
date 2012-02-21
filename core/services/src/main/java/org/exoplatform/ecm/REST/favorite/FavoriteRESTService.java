@@ -81,11 +81,17 @@ public class FavoriteRESTService implements ResourceContainer {
         }
       }
     } catch (ItemNotFoundException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
       return Response.serverError().build();
     }
     ListResultNode listResultNode = new ListResultNode();

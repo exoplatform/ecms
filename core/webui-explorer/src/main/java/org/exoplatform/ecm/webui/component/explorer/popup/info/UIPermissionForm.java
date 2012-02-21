@@ -148,7 +148,9 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       lockForm(value.toString().equals(getExoOwner(node)));
       getUIStringInput(selectField).setValue(value.toString());
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

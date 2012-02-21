@@ -134,7 +134,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       // Cached all nodetypes that is document type in the map
       getDocumentTemplates();
     } catch (Exception e) {
-      LOG.error("An unexpected exception occurs when init plugins", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected exception occurs when init plugins", e);
+      }
     }
   }
 
@@ -218,7 +220,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       Session session = getSession(provider);
       return (Node) session.getItem(cmsTemplatesBasePath_);
     } catch (AccessDeniedException ace) {
-      LOG.error("Access denied. You can not access to this template");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Access denied. You can not access to this template");
+      }
       return null;
     }
   }
@@ -1043,7 +1047,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       getSession(WCMCoreUtils.getSystemSessionProvider()).save();
       return contentNode.getPath();
     } catch (Exception e) {
-      LOG.error("An error has been occurred when adding template", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error has been occurred when adding template", e);
+      }
     } 
     return null;
   }
@@ -1060,7 +1066,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       getSession(WCMCoreUtils.getSystemSessionProvider()).save();
       return template.getPath();
     } catch (Exception e) {
-      LOG.error("An error has been occurred when updating template", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error has been occurred when updating template", e);
+      }
     } 
     return null;
   }
@@ -1073,7 +1081,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       Node resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
       return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
     } catch (Exception e) {
-      LOG.error("An error has been occurred when getting template", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error has been occurred when getting template", e);
+      }
     }
     return null;
   }
@@ -1092,7 +1102,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       }
       return roles.toString();
     } catch (Exception e) {
-      LOG.error("An error has been occurred when getting template's roles", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error has been occurred when getting template's roles", e);
+      }
     }
     return null;
   }
@@ -1109,7 +1121,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         String repositoryName = System.getProperty("gatein.tenant.repository.name");
         return repositoryName;
       }
-      LOG.error("Repository exception occurs:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository exception occurs:", e);
+      }
       return null;
     }
   }

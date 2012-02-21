@@ -66,7 +66,9 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
       publicationService.updateLifecyleOnChangeContent(currentNode, "", currentNode.getSession()
                                                                                    .getUserID());
     } catch (Exception ex) {
-      LOG.error("An expected exception has occured: ", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An expected exception has occured: ", ex);
+      }
     }
   }
 

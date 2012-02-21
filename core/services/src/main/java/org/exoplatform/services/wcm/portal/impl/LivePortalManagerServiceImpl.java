@@ -248,7 +248,9 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   }
 
   public void start() {
-    log.info("Start LivePortalManagementService....");
+    if (log.isInfoEnabled()) {
+      log.info("Start LivePortalManagementService....");
+    }
     SessionProvider sessionProvider = null;
     Session session = null;
     try {
@@ -264,7 +266,9 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
         livePortalPaths.putIfAbsent(portalNode.getName(),portalNode.getPath());
       }
     } catch (Exception e) {
-      log.error("Error when starting LivePortalManagerService: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when starting LivePortalManagerService: ", e);
+      }
     } finally {
       sessionProvider.close();
     }

@@ -282,7 +282,9 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
             throw new AccessDeniedException();
           }
         } catch (AccessDeniedException e) {
-          LOG.error("Access denied! No permission for deleting node: " + node.getPath());
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Access denied! No permission for deleting node: " + node.getPath());
+          }
           uiApp.addMessage(new ApplicationMessage("UIShowAllTrashResult.msg.accessDenied", null, ApplicationMessage.WARNING));
           
           } catch (VersionException ve) {
@@ -316,7 +318,9 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
             uiExplorer.updateAjax(event);
             return;
           } catch (Exception e) {
-            LOG.error("an unexpected error occurs while removing the node", e);
+            if (LOG.isErrorEnabled()) {
+              LOG.error("an unexpected error occurs while removing the node", e);
+            }
             JCRExceptionManager.process(uiApp, e);
             
             return;
@@ -395,16 +399,22 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
             throw new AccessDeniedException();
           }
         } catch (LockException e) {
-          LOG.error("node is locked, can't restore node :" + node.getPath());
+          if (LOG.isErrorEnabled()) {
+            LOG.error("node is locked, can't restore node :" + node.getPath());
+          }
           JCRExceptionManager.process(uiApp, e);
           
           uiExplorer.updateAjax(event);
         } catch (AccessDeniedException e) {
-          LOG.error("Access denied! No permission for restoring node: " + node.getPath());
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Access denied! No permission for restoring node: " + node.getPath());
+          }
           uiApp.addMessage(new ApplicationMessage("UIShowAllTrashResult.msg.accessDenied", null, ApplicationMessage.WARNING));
           
         } catch (Exception e) {
-          LOG.error("an unexpected error occurs", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("an unexpected error occurs", e);
+          }
           JCRExceptionManager.process(uiApp, e);
           
           uiExplorer.updateAjax(event);
@@ -428,7 +438,9 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
             return name1.compareTo(name2);
           }
         } catch (Exception e) {
-          LOG.error("Cannot compare nodes", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Cannot compare nodes", e);
+          }
         }
         return 0;
       }

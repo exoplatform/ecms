@@ -218,27 +218,39 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
         uiPopupContainer.removeChild(UISelectRestorePath.class);
         uiExplorer.updateAjax(event);
       } catch (PathNotFoundException e) {
-        LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
       } catch (LockException e) {
-        LOG.error("node is locked, can't restore node :" + trashNode.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("node is locked, can't restore node :" + trashNode.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
       } catch (VersionException e) {
-        LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
       } catch (AccessDeniedException e) {
-        LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
       } catch (ConstraintViolationException e) {
-        LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs", e);
+        }
         JCRExceptionManager.process(uiApp, e);
         
       }

@@ -39,7 +39,9 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
   private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksCronJobImpl.class);
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    log.debug("Start Executing ClearOrphanSymlinksCronJobImpl");
+    if (log.isDebugEnabled()) {
+      log.debug("Start Executing ClearOrphanSymlinksCronJobImpl");
+    }
 
     String queryString = "SELECT * FROM exo:symlink order by exo:dateCreated DESC";
 
@@ -85,13 +87,19 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
             try {
               String nodePath = node.getPath();
               trashService.moveToTrash(node, sessionProvider);
-              log.info("ClearOrphanSymlinksCronJobImpl: move orphan symlink " + nodePath + " to Trash");
+              if (log.isInfoEnabled()) {
+                log.info("ClearOrphanSymlinksCronJobImpl: move orphan symlink " + nodePath + " to Trash");
+              }
             } catch (Exception e) {
-              log.error("ClearOrphanSymlinksCronJobImpl: Can not move to trash node :" + node.getPath(), e);
+              if (log.isErrorEnabled()) {
+                log.error("ClearOrphanSymlinksCronJobImpl: Can not move to trash node :" + node.getPath(), e);
+              }
             }
           }
         } catch (RepositoryException e) {
-          log.error("ClearOrphanSymlinksCronJobImpl: Error when deleting orphan symlinks in workspace: " + workspace, e);
+          if (log.isErrorEnabled()) {
+            log.error("ClearOrphanSymlinksCronJobImpl: Error when deleting orphan symlinks in workspace: " + workspace, e);
+          }
         } finally {
           if (session != null && session.isLive())
             session.logout();
@@ -102,7 +110,9 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
           targetSession.logout();
       }
     } catch (Exception e) {
-      log.error("Error occurs in ClearOrphanSymlinksCronJobImpl", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error occurs in ClearOrphanSymlinksCronJobImpl", e);
+      }
       sessionProvider.close();
     }
   }

@@ -185,7 +185,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     Query query = createQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
     AbstractPageList<ResultNode> pageList = null;
-    log.debug("execute query: " + query.getStatement().toLowerCase());
+    if (log.isDebugEnabled()) {
+      log.debug("execute query: " + query.getStatement().toLowerCase());
+    }
     pageList = PageListFactory.createPageList(query.getStatement(),
                                               session.getWorkspace().getName(),
                                               query.getLanguage(),
@@ -214,7 +216,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     long startTime = System.currentTimeMillis();
     Query query = createSearchPageQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
-    log.debug("execute query: " + query.getStatement().toLowerCase());
+    if (log.isDebugEnabled()) {
+      log.debug("execute query: " + query.getStatement().toLowerCase());
+    }
     AbstractPageList<ResultNode> pageList = PageListFactory.createPageList(query.getStatement(),
                                                                            session.getWorkspace()
                                                                                   .getName(),
@@ -279,7 +283,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     queryCriteria.setKeyword(keyword);
     queryCriteria.setSearchWebpage(true);
     Query query = createSearchPageByTitleQuery(queryCriteria, queryManager);
-    log.debug("execute query: " + query.getStatement().toLowerCase());
+    if (log.isDebugEnabled()) {
+      log.debug("execute query: " + query.getStatement().toLowerCase());
+    }
     List<String> pageList = PageListFactory.createPageList(query.getStatement(),
                                                            session.getWorkspace().getName(),
                                                            query.getLanguage(),

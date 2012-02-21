@@ -317,7 +317,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     try {
       repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
     } catch (RepositoryException e) {
-      log.error(e.getMessage(), e);
+      if (log.isErrorEnabled()) {
+        log.error(e.getMessage(), e);
+      }
     }
 
     String repoName = repositoryEntry.getName();
@@ -332,7 +334,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
         Node storedTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
         importPredefinedTemplateToDB(storedTemplateHome);
       } catch (Exception e) {
-        log.error("Exception when import predefine application template into repository: " + repository, e);
+        if (log.isErrorEnabled()) {
+          log.error("Exception when import predefine application template into repository: " + repository, e);
+        }
       }
     }
     sessionProvider.close();

@@ -111,7 +111,9 @@ public class NewsletterManageUserHandler {
       try {
         listString.add(value.getString());
       }catch (Exception e) {
-        log.error("Error when convert values to array: ", e);
+        if (log.isErrorEnabled()) {
+          log.error("Error when convert values to array: ", e);
+        }
       }
     }
     return listString;
@@ -134,7 +136,9 @@ public class NewsletterManageUserHandler {
                                                   .getValues());
       }
     } catch (Exception ex) {
-      log.error("getAllAdministrator() failed because of ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("getAllAdministrator() failed because of ", ex);
+      }
     }
     return new ArrayList<String>();
   }
@@ -179,7 +183,9 @@ public class NewsletterManageUserHandler {
       }
       session.save();
     }catch(Exception ex){
-      log.info("Add administrator for newsletter failed because of ", ex);
+      if (log.isInfoEnabled()) {
+        log.info("Add administrator for newsletter failed because of ", ex);
+      }
     }
   }
 
@@ -217,7 +223,9 @@ public class NewsletterManageUserHandler {
    * @throws Exception
    */
   public Node add(SessionProvider sessionProvider, String portalName, String userMail) throws Exception {
-    log.info("Trying to add user " + userMail);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to add user " + userMail);
+    }
     Node userNode = null;
     Session session = null;
     try {
@@ -233,7 +241,9 @@ public class NewsletterManageUserHandler {
       userNode.setProperty(NewsletterConstant.USER_PROPERTY_IS_CONFIRM, false);
       session.save();
     } catch (Exception e) {
-      log.error("Add user " + userMail + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Add user " + userMail + " failed because of ", e);
+      }
     }
     if(userNode == null){
       throw new Exception("Can not add new user");
@@ -277,7 +287,9 @@ public class NewsletterManageUserHandler {
                               String portalName,
                               String userMail,
                               boolean isBanClicked) {
-    log.info("Trying to ban/unban user " + userMail);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to ban/unban user " + userMail);
+    }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -287,7 +299,9 @@ public class NewsletterManageUserHandler {
                            !userNode.getProperty(NewsletterConstant.USER_PROPERTY_BANNED).getBoolean());
       session.save();
     } catch (Exception e) {
-      log.error("Ban/UnBan user " + userMail + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Ban/UnBan user " + userMail + " failed because of ", e);
+      }
     }
   }
 
@@ -299,7 +313,9 @@ public class NewsletterManageUserHandler {
    * @param SessionProvider the sessionprovider
    */
   public void delete(SessionProvider sessionProvider, String portalName, String userMail) {
-    log.info("Trying to delete user " + userMail);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to delete user " + userMail);
+    }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -332,7 +348,9 @@ public class NewsletterManageUserHandler {
       }
       session.save();
     } catch (Exception e) {
-      log.error("Delete user " + userMail + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Delete user " + userMail + " failed because of ", e);
+      }
     }
   }
 
@@ -403,7 +421,9 @@ public class NewsletterManageUserHandler {
                                               String portalName,
                                               String categoryName,
                                               String subscriptionName) {
-    log.info("Trying to get list user by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to get list user by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
+    }
     List<String> subscribedUsers = new ArrayList<String>();
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -419,8 +439,10 @@ public class NewsletterManageUserHandler {
         }
       }
     } catch (Exception e) {
-      log.error("Get list user by subscription " + portalName + "/" + categoryName + "/"
+      if (log.isErrorEnabled()) {
+        log.error("Get list user by subscription " + portalName + "/" + categoryName + "/"
           + subscriptionName + " failed because of ", e);
+      }
     }
     return subscribedUsers;
   }
@@ -438,7 +460,9 @@ public class NewsletterManageUserHandler {
                                            String portalName,
                                            String categoryName,
                                            String subscriptionName) {
-    log.info("Trying to get user's quantity by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to get user's quantity by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
+    }
     int countUser = 0;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -451,8 +475,10 @@ public class NewsletterManageUserHandler {
         countUser = subscribedUserProperty.getValues().length;
       }
     } catch (Exception e) {
-      log.error("Get user's quantity by subscription " + portalName + "/" + categoryName + "/"
+      if (log.isErrorEnabled()) {
+        log.error("Get user's quantity by subscription " + portalName + "/" + categoryName + "/"
           + subscriptionName + " failed because of ", e);
+      }
     }
     return countUser;
   }
@@ -473,7 +499,9 @@ public class NewsletterManageUserHandler {
       }
       return false;
     } catch (Exception e) {
-      log.error("checkExistedEmail() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("checkExistedEmail() failed because of ", e);
+      }
     }
     return false;
   }
@@ -502,7 +530,9 @@ public class NewsletterManageUserHandler {
       }
       return WCMCoreUtils.hasPermission(userId, administrators, false);
     } catch (Exception e) {
-      log.error("isAdministrator() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("isAdministrator() failed because of ", e);
+      }
     }
     return false;
   }
@@ -522,7 +552,9 @@ public class NewsletterManageUserHandler {
       List<String> moderators = Arrays.asList(config.getModerator().split(","));
       return WCMCoreUtils.hasPermission(userId, moderators, false);
     } catch (Exception e) {
-      log.error("isModerator() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("isModerator() failed because of ", e);
+      }
     }
     return false;
   }

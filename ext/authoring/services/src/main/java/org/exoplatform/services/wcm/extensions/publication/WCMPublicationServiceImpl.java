@@ -137,7 +137,9 @@ public class WCMPublicationServiceImpl
         }
       }
     } catch (Exception ex) {
-      log.error("Couldn't complete the enrollement : ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Couldn't complete the enrollement : ", ex);
+      }
     }
   }
 
@@ -151,7 +153,9 @@ public class WCMPublicationServiceImpl
   private void setInitialState(Node node, Lifecycle lifecycle, String remoteUser) throws Exception {
     List<State> states = lifecycle.getStates();
     if (states == null || states.size() <= 0) {
-      log.warn("could not find an initial state in lifecycle " + lifecycle.getName());
+      if (log.isWarnEnabled()) {
+        log.warn("could not find an initial state in lifecycle " + lifecycle.getName());
+      }
     } else {
       String initialState = states.get(0).getState();
       PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
@@ -189,7 +193,9 @@ public class WCMPublicationServiceImpl
         node.setProperty("publication:lastUser", remoteUser);
         node.getSession().save();
       } catch (Exception e) {
-        log.error("Error setting staged state : ", e);
+        if (log.isErrorEnabled()) {
+          log.error("Error setting staged state : ", e);
+        }
       }
     }
 

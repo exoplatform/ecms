@@ -239,7 +239,9 @@ public class UIPropertyForm extends UIForm {
         }
       }
     } catch (Exception e) {
-       LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -645,14 +647,18 @@ public class UIPropertyForm extends UIForm {
         currentNode.save();
         currentNode.getSession().save();
       } catch(ValueFormatException vf) {
+        if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", vf);
+        }
           uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.valueFormatEx", null,
               ApplicationMessage.WARNING));
 
           return;
       }
       catch(NullPointerException ne) {
-        LOG.error("Unexpected error", ne);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ne);
+        }
         uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyValu-null", null,
             ApplicationMessage.WARNING));
 
@@ -665,7 +671,9 @@ public class UIPropertyForm extends UIForm {
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.unknown-error", null,
                                                 ApplicationMessage.WARNING));
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         JCRExceptionManager.process(uiApp, e);
         return;
       }

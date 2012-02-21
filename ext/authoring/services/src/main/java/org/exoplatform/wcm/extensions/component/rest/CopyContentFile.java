@@ -78,12 +78,16 @@ public class CopyContentFile implements ResourceContainer {
         ops.write(contents.getBytes());
         ops.close();
       } else {
-        log.warn("Anthentification failed...");
+        if (log.isWarnEnabled()) {
+          log.warn("Anthentification failed...");
+        }
         return Response.ok(KO_RESPONSE + "...Anthentification failed", "text/plain")
                                .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
     } catch (Exception ex) {
-      log.error("error when copying content file" + ex.getMessage());
+      if (log.isErrorEnabled()) {
+        log.error("error when copying content file" + ex.getMessage());
+      }
       return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain")
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();

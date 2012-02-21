@@ -73,7 +73,9 @@ public class UIECMAdminPortlet extends UIPortletApplication {
       UIECMAdminWorkingArea workingArea = addChild(UIECMAdminWorkingArea.class, null, null);
       workingArea.init();
     } catch(Exception e) {
-      LOG.error("An expected error occured while initializing the portlet", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An expected error occured while initializing the portlet", e);
+      }
     }
   }
 

@@ -116,7 +116,9 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
     try {
-      log.info("Start " + this.getClass().getName() + ".............");
+      if (log.isInfoEnabled()) {
+        log.info("Start " + this.getClass().getName() + ".............");
+      }
       RequestLifeCycle.begin(PortalContainer.getInstance());
       
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -170,10 +172,14 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           setFavoritesForOldItems(favoriteNode, userName);
         }
       }
-      log.info("End " + this.getClass().getName() + ".............");
+      if (log.isInfoEnabled()) {
+        log.info("End " + this.getClass().getName() + ".............");
+      }
     }
     catch (Exception e) {
-      log.error(this.getClass().getName() + " failed:", e);
+      if (log.isErrorEnabled()) {
+        log.error(this.getClass().getName() + " failed:", e);
+      }
     }
     finally {
       RequestLifeCycle.end();
@@ -291,7 +297,9 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       userNode.getSession().save();
       
     } catch (PathNotFoundException pne) {
-      log.warn("Private Folder of User " + userName + " not found");
+      if (log.isWarnEnabled()) {
+        log.warn("Private Folder of User " + userName + " not found");
+      }
     }
     return userFavoriteNode;
   }

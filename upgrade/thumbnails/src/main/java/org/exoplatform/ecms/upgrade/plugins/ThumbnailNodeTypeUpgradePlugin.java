@@ -69,7 +69,9 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
   public void processUpgrade(String oldVersion, String newVersion) {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
-      log.info("Start " + this.getClass().getName() + ".............");
+      if (log.isInfoEnabled()) {
+        log.info("Start " + this.getClass().getName() + ".............");
+      }
       Session session = sessionProvider.getSession(dmsConfiguration_.getConfig()
                                                                     .getSystemWorkspace(),
                                                    repoService_.getCurrentRepository());
@@ -83,9 +85,13 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
       NodeTypeValue exoThumbnailNodeTypeValue = nodeTypeManager.getNodeTypeValue(EXO_THUMBNAIL);
       updateSuperType(nodeTypeManager, exoThumbnailNodeTypeValue);
 
-      log.info("End " + this.getClass().getName() + ".............");
+      if (log.isInfoEnabled()) {
+        log.info("End " + this.getClass().getName() + ".............");
+      }
     } catch (Exception e) {
-      log.error(this.getClass().getName() + " failed:", e);
+      if (log.isErrorEnabled()) {
+        log.error(this.getClass().getName() + " failed:", e);
+      }
     } 
   }
 

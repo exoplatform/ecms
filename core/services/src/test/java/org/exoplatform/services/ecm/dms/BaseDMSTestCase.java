@@ -22,7 +22,6 @@ import javax.jcr.Session;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.StandaloneContainer;
 import org.exoplatform.services.ecm.dms.folksonomy.DumpThreadLocalSessionProviderService;
-import org.exoplatform.services.ecm.dms.folksonomy.DumpThreadLocalSessionProviderService.DumpSessionProvider;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.CredentialsImpl;
 import org.exoplatform.services.jcr.core.ManageableRepository;

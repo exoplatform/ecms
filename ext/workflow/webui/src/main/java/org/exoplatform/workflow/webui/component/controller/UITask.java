@@ -484,7 +484,9 @@ public class UITask extends UIForm implements UISelectable {
         Map variables = maps.getWorkflowVariables();
         uiTask.serviceContainer.endTask(uiTask.identification_, variables);
       } catch (Exception ex) {
-        LOG.warn(ex.getMessage(), ex);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ex.getMessage(), ex);
+        }
       }
       uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
     }
@@ -562,7 +564,9 @@ public class UITask extends UIForm implements UISelectable {
             uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
             return;
           } catch (Exception e) {
-          LOG.warn(e.getMessage(), e);
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage(), e);
+            }
           }
         }
       }

@@ -105,7 +105,9 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
         uicomponent.updateAjax(requestcontext);
         return;
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs while removing the node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs while removing the node", e);
+        }
         JCRExceptionManager.process(uiApp, e);        
         return;
       }

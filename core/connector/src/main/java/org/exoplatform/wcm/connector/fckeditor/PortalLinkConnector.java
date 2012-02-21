@@ -140,7 +140,9 @@ public class PortalLinkConnector implements ResourceContainer {
       String userId = getCurrentUser();
       return buildReponse(currentFolder, command, userId);
     } catch (Exception e) {
-      log.error("Error when perform getPageURI: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform getPageURI: ", e);
+      }
     }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
@@ -156,7 +158,9 @@ public class PortalLinkConnector implements ResourceContainer {
       ConversationState conversationState = ConversationState.getCurrent();
       return conversationState.getIdentity().getUserId();
     } catch (Exception e) {
-      log.error("Error when perform getCurrentUser: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform getCurrentUser: ", e);
+      }
     }
     return null;
   }

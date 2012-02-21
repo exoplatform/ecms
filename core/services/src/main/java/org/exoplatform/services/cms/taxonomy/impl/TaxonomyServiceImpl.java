@@ -711,7 +711,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         plugin.init() ;
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

@@ -201,7 +201,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       this.formsService.removeForms(processId);
       this.fileDefinitionService.remove(processId);
     } catch (Exception e) {
-      LOG.error("An unexpected problem occurs while deleting this process "+processId+" ");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected problem occurs while deleting this process "+processId+" ");
+      }
     }
   }
 
@@ -215,7 +217,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       RuntimeAPI rApi = AccessorUtil.getAPIAccessor().getRuntimeAPI();
       rApi.deleteProcessInstance(UUIDFactory.getProcessInstanceUUID(processInstanceId));
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -238,7 +242,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         zis.getNextEntry().getName();
         zis.close();
       } catch (Exception e1) {
-        LOG.error(e1);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e1);
+        }
         xpdl = true;
       }
       in.close();
@@ -254,7 +260,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
           processes = dAPI.deployBar(barFile).values();
         } catch(Exception e) {
           processes=null;
-          LOG.error(e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error(e);
+          }
           throw e;
         }
       }
@@ -348,7 +356,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       // Finish the task
       rApi.finishTask(UUIDFactory.getTaskUUID(taskId), true);
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -403,7 +413,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       ProcessDefinition pd = dAPI.getProcess(uuid);
       p = new ProcessData(pd);
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return p;
 
@@ -449,7 +461,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       org.ow2.bonita.facade.runtime.ProcessInstance instance = rApi.getProcessInstance(uuid);
       p = new ProcessInstanceData(instance);
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return p;
   }
@@ -477,7 +491,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       }
       Collections.sort(list, new ProcessInstanceComparator());
     } catch (BonitaException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return list;
   }
@@ -500,7 +516,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       ActivityInstance<TaskInstance> taskInstance = rApi.getTask(uuid);
       task = new TaskData(taskInstance);
     } catch (BonitaException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return task;
   }
@@ -533,7 +551,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         try {
           tasks.add(new TaskData(task));
         } catch (Exception e) {
-          LOG.error(e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error(e);
+          }
         }
       }
     }
@@ -598,7 +618,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       try {
         tasks.add(new TaskData(task));
       } catch (Exception e) {
-        LOG.error(e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e);
+        }
       }
     }
     Collections.sort(tasks, new TaskComparator());
@@ -696,7 +718,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       //        }
 
     } catch (BonitaException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
 
     return variables;
@@ -755,13 +779,17 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
               this.deployProcess(iS);
             } catch (Exception e) {
               // Process does not exist
-              LOG.error(e);
+              if (LOG.isErrorEnabled()) {
+                LOG.error(e);
+              }
             }
           }
         }
       }
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } finally {
       try {
         /*
@@ -851,11 +879,17 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       // instantiate the process
       ProcessInstanceUUID instanceUuid = rApi.instantiateProcess(uuid, variables);
     } catch (ProcessNotFoundException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } catch (ParseException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } catch (VariableNotFoundException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -885,7 +919,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       }
 
     } catch (BonitaException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -906,7 +942,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         try {
           lc = new LoginContext("Bonita", s);
         } catch (LoginException le) {
-          LOG.error(le);
+          if (LOG.isErrorEnabled()) {
+            LOG.error(le);
+          }
         }
       } else {
         try {

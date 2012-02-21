@@ -104,7 +104,9 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
     try {
       getUIStringInput(selectField).setValue(value.toString());
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

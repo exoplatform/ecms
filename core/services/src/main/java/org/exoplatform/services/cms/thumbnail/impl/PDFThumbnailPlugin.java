@@ -75,13 +75,21 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
       InputStream input = contentNode.getProperty("jcr:data").getStream() ;
       document.setInputStream(input, nodePath);
     } catch (PDFException ex) {
-      LOG.warn("Error parsing PDF document " + ex);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error parsing PDF document " + ex);
+      }
     } catch (PDFSecurityException ex) {
-      LOG.warn("Error encryption not supported " + ex);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error encryption not supported " + ex);
+      }
     } catch (FileNotFoundException ex) {
-      LOG.warn("Error file not found " + ex);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error file not found " + ex);
+      }
     } catch (IOException ex) {
-      LOG.warn("Error handling PDF document " + ex);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error handling PDF document " + ex);
+      }
     }
     // Paint each pages content to an image and write the image to file
     BufferedImage image = (BufferedImage) document.getPageImage(0, GraphicsRenderingHints.SCREEN,

@@ -64,9 +64,13 @@ public class SendMailScript implements CmsScript {
        msg.setSubject(subject);
        msg.setContent(message, "text/html ; charset=ISO-8859-1");
        service.sendMessage(msg);
-       LOG.info("Message was sent from " + from + " to " + to);
+       if (LOG.isInfoEnabled()) {
+         LOG.info("Message was sent from " + from + " to " + to);
+       }
      } catch (Exception e) {
-       LOG.error("Message sending failed", e);
+       if (LOG.isErrorEnabled()) {
+         LOG.error("Message sending failed", e);
+       }
      }
   }
 

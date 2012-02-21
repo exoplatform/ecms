@@ -29,7 +29,9 @@ public class ClearOrphanSymlinksCronJob extends CronJob {
     expression = props.getProperty("expression");
 
     if (expression.startsWith("$")) {
-      log.info("CronJob Param...expression: no default value for : "+expression);
+      if (log.isInfoEnabled()) {
+        log.info("CronJob Param...expression: no default value for : "+expression);
+      }
       expression = "0 30 1 * * ?";
       props.setProperty("expression", expression);
       jobDataMap.put("expression", expression);

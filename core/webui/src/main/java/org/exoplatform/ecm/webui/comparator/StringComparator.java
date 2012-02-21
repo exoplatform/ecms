@@ -111,7 +111,9 @@ public class StringComparator implements Comparator<Node> {
         returnCompare = compare(auditing1, auditing2);
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return returnCompare;
   }

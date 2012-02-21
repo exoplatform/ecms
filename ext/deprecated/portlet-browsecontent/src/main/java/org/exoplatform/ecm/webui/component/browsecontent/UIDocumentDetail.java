@@ -155,7 +155,9 @@ public class UIDocumentDetail extends UIBaseNodePresentation implements UIPopupC
           ApplicationMessage.ERROR));
       return null;
     }catch(Exception e) {
-      LOG.error("Exception when get template ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when get template ", e);
+      }
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { template };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
@@ -182,7 +184,9 @@ public class UIDocumentDetail extends UIBaseNodePresentation implements UIPopupC
                                                                               .getDmsSystemWorkspace();
       jcrTemplateResourceResolver_ = new JCRResourceResolver(systemWorkspace);
     } catch (Exception e) {
-      LOG.error("Exception when get template resource", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when get template resource", e);
+      }
     }
   }
 
@@ -194,7 +198,9 @@ public class UIDocumentDetail extends UIBaseNodePresentation implements UIPopupC
       Class object = loader.loadClass(className);
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
-      LOG.error("Not found class " + className, ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Not found class " + className, ex);
+      }
     }
     return service;
   }

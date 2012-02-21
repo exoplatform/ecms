@@ -186,7 +186,9 @@ public abstract class BaseTest extends TestCase
       }
       catch (Exception e)
       {
-         LOG.error("Exception in tearDown() ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Exception in tearDown() ", e);
+        }
       }
       finally
       {

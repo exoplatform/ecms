@@ -77,7 +77,9 @@ public class ScheduleBackupTimerActionHandler extends BackupContentActionHandler
       }
     } catch (Exception ex) {
       ExoLogger.getLogger(this.getClass()).equals(ex);
-      LOG.error("Unexpected error", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", ex);
+      }
     }
   }
 

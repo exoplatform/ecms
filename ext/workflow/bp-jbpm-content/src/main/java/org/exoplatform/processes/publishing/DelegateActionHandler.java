@@ -36,13 +36,17 @@ public class DelegateActionHandler implements ActionHandler {
 
   public void execute(ExecutionContext context) {
     try {
-      LOG.info("Delegate" + context.getVariable("delegator").toString());
-      LOG.info("initiator" + context.getVariable("initiator").toString());
-      LOG.info("exo:validator" + context.getVariable("exo:validator").toString());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Delegate" + context.getVariable("delegator").toString());
+        LOG.info("initiator" + context.getVariable("initiator").toString());
+        LOG.info("exo:validator" + context.getVariable("exo:validator").toString());
+      }
       context.setVariable("delegate_flg", "true");                /* Set flag for delegate process */
       ProcessUtil.delegate(context);
     } catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
   }
 

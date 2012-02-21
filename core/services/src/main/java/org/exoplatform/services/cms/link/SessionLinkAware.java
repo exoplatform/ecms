@@ -132,7 +132,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       getTargetSession().addLockToken(lt);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -199,7 +201,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       return getTargetSession().getAttribute(name);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -211,7 +215,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       return getTargetSession().getAttributeNames();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -242,7 +248,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       return getTargetSession().getLockTokens();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -375,7 +383,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       sessions = getSessions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
       return false;
     }
     for (int i = 0, length = sessions.length; i < length; i++) {
@@ -403,7 +413,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       sessions = getSessions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
       return;
     }
     for (int i = 0, length = sessions.length; i < length; i++) {
@@ -452,7 +464,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       getTargetSession().removeLockToken(lt);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -489,7 +503,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       return getTargetSession().getId();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -501,7 +517,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       return getTargetSession().getLocationFactory();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -528,7 +546,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     try {
       getTargetSession().registerLifecycleListener(listener);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 

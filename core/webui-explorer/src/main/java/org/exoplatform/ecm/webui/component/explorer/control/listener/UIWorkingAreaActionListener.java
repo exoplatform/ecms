@@ -99,7 +99,9 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
       UIExtensionManager manager = event.getSource().getApplicationComponent(UIExtensionManager.class);
       return manager.accept(getExtensionType(), event.getName(), context);
     } catch (Exception e) {
-      LOG.error("an unexpected error occurs while filter the node", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs while filter the node", e);
+      }
     }
     return false;
   }
@@ -125,7 +127,9 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
       throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null,
           ApplicationMessage.WARNING)) ;
     } catch(Exception e) {
-      LOG.error("Unexpected problem occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem occurs", e);
+      }
     }
     return context;
   }

@@ -116,18 +116,22 @@ public class PublicationDeploymentPlugin extends DeploymentPlugin {
               log.info(sourcePath + " has been published.");
             }
           } catch (Exception ex) {
-            log.error("publication for " + sourcePath + " FAILED at "
+            if (log.isErrorEnabled()) {
+              log.error("publication for " + sourcePath + " FAILED at "
                           + new Date().toString() + "\n",
                       ex);
+            }
           }
         }
 
 
       }
     } catch (Exception ex) {
-      log.error("publication plugin FAILED at "
+      if (log.isErrorEnabled()) {
+        log.error("publication plugin FAILED at "
                     + new Date().toString() + "\n",
                 ex);
+      }
       throw ex;
     }
   }

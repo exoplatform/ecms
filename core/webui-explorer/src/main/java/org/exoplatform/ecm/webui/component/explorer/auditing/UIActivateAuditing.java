@@ -80,7 +80,9 @@ public class UIActivateAuditing extends UIContainer implements UIPopupComponent 
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied",null,ApplicationMessage.WARNING)) ;
         
       } catch(Exception e){
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         UIActivateAuditing uiActivateAuditing = event.getSource();
         UIJCRExplorer uiExplorer = uiActivateAuditing.getAncestorOfType(UIJCRExplorer.class) ;
         WebuiRequestContext contx = event.getRequestContext();

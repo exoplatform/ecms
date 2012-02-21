@@ -58,7 +58,9 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    log.info("Start " + this.getClass().getName() + ".............");
+    if (log.isInfoEnabled()) {
+      log.info("Start " + this.getClass().getName() + ".............");
+    }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       //get info
@@ -82,7 +84,9 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
         mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
-      log.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
+      if (log.isInfoEnabled()) {
+        log.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
+      }
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP

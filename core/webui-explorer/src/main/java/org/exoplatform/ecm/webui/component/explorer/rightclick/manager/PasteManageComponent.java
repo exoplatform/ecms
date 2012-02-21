@@ -377,13 +377,17 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         workspace.copy(srcWorkspaceName, srcPath, destPath);
         // workspace.clone(srcWorkspaceName, srcPath, destPath, true);
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs while pasting the node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs while pasting the node", e);
+        }
         if (LOG.isDebugEnabled())
           LOG.debug("Copy to other workspace by clone");
         try {
           workspace.clone(srcWorkspaceName, srcPath, destPath, false);
         } catch (Exception f) {
-          LOG.error("an unexpected error occurs while pasting the node", f);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("an unexpected error occurs while pasting the node", f);
+          }
         }
       }
     }

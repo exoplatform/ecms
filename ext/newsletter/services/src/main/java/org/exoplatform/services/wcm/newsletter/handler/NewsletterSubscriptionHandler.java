@@ -207,7 +207,9 @@ public class NewsletterSubscriptionHandler {
   public void add(SessionProvider sessionProvider,
                   String portalName,
                   NewsletterSubscriptionConfig subscription) throws Exception {
-    log.info("Trying to add subcription " + subscription.getName());
+    if (log.isInfoEnabled()) {
+      log.info("Trying to add subcription " + subscription.getName());
+    }
     Session session = null;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -222,7 +224,9 @@ public class NewsletterSubscriptionHandler {
       this.updatePermissionForSubscriptionNode(subscriptionNode, subscription, true);
       session.save();
     } catch (Exception e) {
-      log.error("Add subcription " + subscription.getName() + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Add subcription " + subscription.getName() + " failed because of ", e);
+      }
       throw e;
     }
   }
@@ -235,7 +239,9 @@ public class NewsletterSubscriptionHandler {
    * @param sessionProvider the session provider
    */
   public void edit(SessionProvider sessionProvider, String portalName, NewsletterSubscriptionConfig subscription) {
-    log.info("Trying to edit subcription " + subscription.getName());
+    if (log.isInfoEnabled()) {
+      log.info("Trying to edit subcription " + subscription.getName());
+    }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -258,7 +264,9 @@ public class NewsletterSubscriptionHandler {
       }
       categoryNode.save();
     } catch (Exception e) {
-      log.error("Edit subcription " + subscription.getName() + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Edit subcription " + subscription.getName() + " failed because of ", e);
+      }
     }
   }
 
@@ -273,7 +281,9 @@ public class NewsletterSubscriptionHandler {
   public void delete(SessionProvider sessionProvider, String portalName,
                      String categoryName, NewsletterSubscriptionConfig subscription) {
 
-    log.info("Trying to delete subcription " + subscription.getName());
+    if (log.isInfoEnabled()) {
+      log.info("Trying to delete subcription " + subscription.getName());
+    }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -294,7 +304,9 @@ public class NewsletterSubscriptionHandler {
       subscriptionNode.remove();
       session.save();
     } catch (Exception e) {
-      log.error("Delete subcription " + subscription.getName() + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Delete subcription " + subscription.getName() + " failed because of ", e);
+      }
     }
   }
 
@@ -327,7 +339,9 @@ public class NewsletterSubscriptionHandler {
           if(!childNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
           listSubscriptions.add(getSubscriptionFormNode(childNode));
         }catch(Exception ex){
-          log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
+          if (log.isErrorEnabled()) {
+            log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
+          }
         }
       }  
     } catch(RepositoryException repo) {
@@ -357,8 +371,10 @@ public class NewsletterSubscriptionHandler {
         if (NewsletterConstant.hasPermission(userName, subscriptionNode))
           listSubs.add(getSubscriptionFormNode(subscriptionNode));
       } catch (Exception ex) {
-        log.error("Error when get subcriptions by category " + categoryName + " failed because of ",
+        if (log.isErrorEnabled()) {
+          log.error("Error when get subcriptions by category " + categoryName + " failed because of ",
                   ex);
+        }
       }
     }
     return listSubs;
@@ -391,7 +407,9 @@ public class NewsletterSubscriptionHandler {
       try{
         listSubscriptions.add(getSubscriptionFormNode(nodeIterator.nextNode()));
       } catch(Exception ex) {
-        log.error("getSubscriptionIdsByPublicUser() failed because of ", ex);
+        if (log.isErrorEnabled()) {
+          log.error("getSubscriptionIdsByPublicUser() failed because of ", ex);
+        }
       }
     }
     return listSubscriptions;
@@ -421,7 +439,9 @@ public class NewsletterSubscriptionHandler {
         Node subNode = categoryNode.getNode(subCriptionName);
         return getSubscriptionFormNode(subNode);
       } catch (Exception e) {
-        log.info("Node name is not found: " + subCriptionName);
+        if (log.isInfoEnabled()) {
+          log.info("Node name is not found: " + subCriptionName);
+        }
         return null;
       }
   }

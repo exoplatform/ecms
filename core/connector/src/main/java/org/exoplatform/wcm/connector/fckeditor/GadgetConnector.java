@@ -117,7 +117,9 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       if (response != null)
         return response;
     } catch (Exception e) {
-      log.error("Error when perform getFoldersAndFiles: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform getFoldersAndFiles: ", e);
+      }
     }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();

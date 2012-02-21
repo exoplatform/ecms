@@ -394,7 +394,9 @@ public class UITreeExplorer extends UIContainer {
 
         return ;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -461,7 +463,9 @@ public class UITreeExplorer extends UIContainer {
 
         return;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -490,7 +494,9 @@ public class UITreeExplorer extends UIContainer {
         uiExplorer.setSelectNode(path) ;
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 

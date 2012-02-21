@@ -42,12 +42,14 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
 
   public void addLifecycle(ComponentPlugin plugin) {
     if (plugin instanceof StatesLifecyclePlugin) {
-    if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
-      for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
-        log.info("Adding Lifecyle : "+l.getName());
-      lifecycles.put(l.getName(), l);
+      if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
+        for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
+          if (log.isInfoEnabled()) {
+            log.info("Adding Lifecyle : "+l.getName());
+          }
+          lifecycles.put(l.getName(), l);
+        }
       }
-    }
     }
   }
 
@@ -56,7 +58,9 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
       for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
         if (lifecycles.get(l.getName())!=null) {
-          log.info("Removing Lifecyle : "+l.getName());
+          if (log.isInfoEnabled()) {
+            log.info("Removing Lifecyle : "+l.getName());
+          }
           lifecycles.remove(l.getName());
         }
       }
@@ -68,7 +72,9 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     if (plugin instanceof ContextPlugin) {
       if (((ContextPlugin) plugin).getContextConfig() != null) {
         for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
-          log.info("Adding Context : "+c.getName());
+          if (log.isInfoEnabled()) {
+            log.info("Adding Context : "+c.getName());
+          }
           contexts.put(c.getName(), c);
         }
       }
@@ -80,7 +86,9 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
       if (((ContextPlugin) plugin).getContextConfig() != null) {
         for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
           if (contexts.get(c.getName())!=null) {
-            log.info("Removing Context : "+c.getName());
+            if (log.isInfoEnabled()) {
+              log.info("Removing Context : "+c.getName());
+            }
             contexts.remove(c.getName());
           }
         }

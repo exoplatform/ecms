@@ -79,7 +79,9 @@ public class WCMConfigurationService {
       if ("share.portal.config".endsWith(param.getName())) {
         String portalName = param.getProperty("portalName");
         sharedPortal = portalName;
-        log.info("Name of shared portal to share resources for all portals in repository is: "+ portalName);
+        if (log.isInfoEnabled()) {
+          log.info("Name of shared portal to share resources for all portals in repository is: "+ portalName);
+        }
       } else if("RuntimeContextParams".equalsIgnoreCase(param.getName())) {
         runtimeContextParams = param.getProperties();
       }
@@ -90,9 +92,10 @@ public class WCMConfigurationService {
       if ("live.portals.location.config".equals(objectParameter.getName())) {
         NodeLocation objectParam = (NodeLocation)objectParameter.getObject();
         livePortalsLocation  = objectParam;
-        log.info("Location that resources for all live portal is stored in repository"
+        if (log.isInfoEnabled()) {
+          log.info("Location that resources for all live portal is stored in repository"
             + " is in workspace: "+ objectParam.getWorkspace() + " and with path: "+objectParam.getPath());
-
+        }
       }
       if("site.drive.config".equals(objectParameter.getName())) {
         siteDriveConfig = (DriveData)objectParameter.getObject();

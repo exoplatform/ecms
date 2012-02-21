@@ -89,7 +89,9 @@ public class NodetypeUtils {
     while (nodeIterator.hasNext()) {
       Node childNode = nodeIterator.nextNode();
       displayOneNode(childNode);
-      LOG.info("\n------------------\n");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("\n------------------\n");
+      }
       displayAllChildNode(childNode);
     }
   }
@@ -102,16 +104,22 @@ public class NodetypeUtils {
    * @throws Exception the exception
    */
   public static void displayOneNode(Node node) throws Exception {
-    LOG.info("Node name: " + node.getName());
-    LOG.info("Node path: " + node.getPath());
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Node name: " + node.getName());
+      LOG.info("Node path: " + node.getPath());
+    }
     PropertyIterator propertyIterator = node.getProperties();
     while (propertyIterator.hasNext()) {
       Property property = propertyIterator.nextProperty();
       try {
-        LOG.info("\t" + property.getName() + ": " + property.getString());
+        if (LOG.isInfoEnabled()) {
+          LOG.info("\t" + property.getName() + ": " + property.getString());
+        }
       } catch (Exception e) {
         for (Value value : property.getValues()) {
-          LOG.info("\t" + property.getName() + ": " + value.getString());
+          if (LOG.isInfoEnabled()) {
+            LOG.info("\t" + property.getName() + ": " + value.getString());
+          }
         }
       }
     }

@@ -75,7 +75,9 @@ public class AddMetadataScript implements CmsScript {
         }
       }
     } catch(Exception e) {
-      LOG.error("Unexpected error occurs while executing add meta data script: ", e);
+      if (LOG.isErrorEnabled()) {
+      	LOG.error("Unexpected error occurs while executing add meta data script: ", e);
+      }	
     }
   }
 

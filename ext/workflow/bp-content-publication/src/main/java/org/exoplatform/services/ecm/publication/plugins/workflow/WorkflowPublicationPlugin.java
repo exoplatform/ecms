@@ -158,13 +158,16 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   @Override
   public void changeState(Node node, String newState, HashMap<String, String> context)
   throws IncorrectStateUpdateLifecycleException, Exception {
-    log.info("Change node state to " + newState);
+    if (log.isInfoEnabled()) {
+      log.info("Change node state to " + newState);
+    }
     if (newState.equals(ENROLLED)) {
       node.save();
-
-      log.info("###########################");
-      log.info("#  Add log                #");
-      log.info("###########################\n");
+      if (log.isInfoEnabled()) {
+        log.info("###########################");
+        log.info("#  Add log                #");
+        log.info("###########################\n");
+      }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
           getComponentInstanceOfType(PublicationService.class);
@@ -205,9 +208,11 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         node.setProperty(CURRENT_STATE, CONTENT_VALIDATION);
         node.setProperty(BACUP_PATH, backupPath);
         node.setProperty(BACUP_WORKSPACE, backupWorkspace);
-        log.info("###########################");
-        log.info("#  Add log                #");
-        log.info("###########################\n");
+        if (log.isInfoEnabled()) {
+          log.info("###########################");
+          log.info("#  Add log                #");
+          log.info("###########################\n");
+        }
         PublicationService publicationService = (PublicationService) container.
             getComponentInstanceOfType(PublicationService.class);
         String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
@@ -245,15 +250,19 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         jcrSession.logout();
 
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     } else if (newState.equals(BACKUP)) {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.BACKUP);
       node.getSession().save();
 
-      log.info("###########################");
-      log.info("#  Add log                #");
-      log.info("###########################\n");
+      if (log.isInfoEnabled()) {
+        log.info("###########################");
+        log.info("#  Add log                #");
+        log.info("###########################\n");
+      }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
           getComponentInstanceOfType(PublicationService.class);
@@ -265,9 +274,11 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     } else if (newState.equals(PUBLISHED)) {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.PUBLISHED);
 
-      log.info("###########################");
-      log.info("#  Add log                #");
-      log.info("###########################\n");
+      if (log.isInfoEnabled()) {
+        log.info("###########################");
+        log.info("#  Add log                #");
+        log.info("###########################\n");
+      }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
           getComponentInstanceOfType(PublicationService.class);
@@ -350,7 +361,9 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     String fileName= "workflowPublication.gif";
 
     String completeFileName=IMG_PATH + fileName;
-    log.trace("\nLoading file '" + name + "' from file system '" + completeFileName + "'");
+    if (log.isTraceEnabled()) {
+      log.trace("\nLoading file '" + name + "' from file system '" + completeFileName + "'");
+    }
 
     InputStream in = this.getClass().getClassLoader().getResourceAsStream(completeFileName);
     ByteArrayOutputStream out = new ByteArrayOutputStream();

@@ -151,7 +151,9 @@ public class RESTImagesRendererService implements ResourceContainer{
     }catch (ItemNotFoundException e) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
     }catch (Exception e) {
-      log.error("Error when serveImage: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when serveImage: ", e);
+      }
       return Response.serverError().build();
     }
   }

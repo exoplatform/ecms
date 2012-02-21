@@ -80,12 +80,16 @@ public class RemoveCommentComponent extends AbstractActionComponent {
       commentService.deleteComment(commentNode);
       uicomponent.updateAjax(requestcontext);
     } catch(VersionException e) {
-      LOG.error("Version exception");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Version exception");
+      }
       Object[] args = { nodepath } ;
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-delete-version", args,
           ApplicationMessage.WARNING));      
     } catch (Exception e) {
-      LOG.error("an unexpected error occurs while removing the node", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs while removing the node", e);
+      }
       JCRExceptionManager.process(uiApp, e);      
     }
   }

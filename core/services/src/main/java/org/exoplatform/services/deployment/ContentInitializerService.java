@@ -77,8 +77,10 @@ public class ContentInitializerService implements Startable{
             logData.append("deploy " + deploymentPlugin.getName()
                 + " deployment plugin succesful at " + date.toString() + "\n");
           } catch (Exception e) {
-            LOG.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+            if (LOG.isErrorEnabled()) {
+              LOG.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
                 + date.toString() + " by " + e.getMessage() + "\n");
+            }
             logData.append("deploy " + deploymentPlugin.getName()
                 + " deployment plugin failure at " + date.toString() + " by " + e.getMessage()
                 + "\n");
@@ -94,7 +96,9 @@ public class ContentInitializerService implements Startable{
         session.save();
       }
     } catch (Exception e) {
-      LOG.error("An unexpected problem occurs when deploy contents", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected problem occurs when deploy contents", e);
+      }
     } finally {
       sessionProvider.close();
     }

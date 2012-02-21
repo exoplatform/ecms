@@ -108,7 +108,9 @@ public class QueryServiceImpl implements QueryService, Startable{
       try{
         queryPlugin.init(baseQueriesPath_);
       }catch (Exception e) {
-        LOG.error("Can not start query plugin '" + queryPlugin.getName() + "'", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not start query plugin '" + queryPlugin.getName() + "'", e);
+        }
       }
     }
   }
@@ -135,7 +137,9 @@ public class QueryServiceImpl implements QueryService, Startable{
       try{
         queryPlugin.init(baseQueriesPath_);
       }catch (Exception e) {
-        LOG.error("Can not init query plugin '" + queryPlugin.getName() + "'", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not init query plugin '" + queryPlugin.getName() + "'", e);
+        }
       }
     }
   }  
@@ -527,7 +531,9 @@ public class QueryServiceImpl implements QueryService, Startable{
     try {
       queryNode = (Node) session.getItem(queryPath);
     } catch (PathNotFoundException e) {
-      LOG.warn("Can not find node by path " + queryPath + " in dms-system workspace");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can not find node by path " + queryPath + " in dms-system workspace");
+      }
       queryNode = (Node) querySession.getItem(queryPath);
     }
     if (queryNode != null && queryNode.hasProperty("exo:cachedResult")
@@ -690,7 +696,9 @@ public class QueryServiceImpl implements QueryService, Startable{
     try {
       queryNode = (Node) session.getItem(queryPath);
     } catch (PathNotFoundException e) {
-      LOG.warn("Can not find node by path " + queryPath + " in dms-system workspace");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can not find node by path " + queryPath + " in dms-system workspace");
+      }
       queryNode = (Node) querySession.getItem(queryPath);
     }
     return createQuery(querySession, queryNode, userId);

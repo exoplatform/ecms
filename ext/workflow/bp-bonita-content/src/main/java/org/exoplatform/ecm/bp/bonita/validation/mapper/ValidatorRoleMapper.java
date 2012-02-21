@@ -62,9 +62,13 @@ public class ValidatorRoleMapper implements RoleMapper {
       delegate = (Boolean) readonlyapiaccessor.getQueryRuntimeAPI().getProcessInstanceVariable(
           instanceId, DELEGATE_NAME);
     } catch (InstanceNotFoundException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } catch (VariableNotFoundException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     // Delegate the call
     Set<String> candidats = ExoOrganizationMapper.GetUsersFromMembershipAndGroup(roleName);

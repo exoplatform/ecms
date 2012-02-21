@@ -74,7 +74,9 @@ public class UISingleAddMetadataForm extends UIDialogForm {
     try {
       return metadataService.getMetadataPath(nodeType_, true) ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return null ;
   }

@@ -70,7 +70,9 @@ public class FragmentCacheService implements Startable {
       try {
         cleanupCache = Integer.parseInt(cleanupCacheConfig);
       } catch (NumberFormatException e) {
-        log.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
+        if (log.isWarnEnabled()) {
+          log.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
+        }
       }
     }
 
@@ -79,7 +81,9 @@ public class FragmentCacheService implements Startable {
       try {
         cacheSize = Integer.parseInt(cacheSizeConfig);
       } catch (NumberFormatException e) {
-        log.warn("Invalid cache-size setting " + cacheSizeConfig);
+        if (log.isWarnEnabled()) {
+          log.warn("Invalid cache-size setting " + cacheSizeConfig);
+        }
       }
     }
 

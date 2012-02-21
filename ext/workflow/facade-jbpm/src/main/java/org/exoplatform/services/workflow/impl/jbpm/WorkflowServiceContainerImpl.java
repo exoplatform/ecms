@@ -140,7 +140,9 @@ public class WorkflowServiceContainerImpl implements
       // Start JobExecutor that replace old class file ExoScheduler
       jbpmConfiguration.startJobExecutor();
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
   }
 
@@ -177,12 +179,16 @@ public class WorkflowServiceContainerImpl implements
             jbpmContext.deployProcessDefinition(processDefinition);
           } catch (Exception e) {
             // process does not exist
-            LOG.error(e);
+            if (LOG.isErrorEnabled()) {
+              LOG.error(e);
+            }
           }
         }
       }
     } catch(Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     } finally {
       closeJbpmContext();
     }
@@ -201,7 +207,9 @@ public class WorkflowServiceContainerImpl implements
       jbpmContext = null;
     } catch (Throwable t) {
       jbpmContext.setRollbackOnly();
-      LOG.error(t);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(t);
+      }
     }
     threadLocal_.set(null);
   }

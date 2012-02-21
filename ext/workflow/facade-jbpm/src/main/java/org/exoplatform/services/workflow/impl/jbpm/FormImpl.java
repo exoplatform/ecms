@@ -83,7 +83,9 @@ public class FormImpl implements Form{
         }
         content = sb.toString();
       } catch (Exception e) {
-        log.debug("resource bundle not found");
+        if (log.isDebugEnabled()) {
+          log.debug("resource bundle not found");
+        }
       }
     }
 
@@ -99,17 +101,25 @@ public class FormImpl implements Form{
           content = new String(buf, "UTF-8");
           is.close();
         } catch (Exception e) {
-          log.debug("resource bundle not found");
+          if (log.isDebugEnabled()) {
+            log.debug("resource bundle not found");
+          }
         }
       }
     }
 
-    log.debug("Try to find localised resource : " + localisedFileName);
+    if (log.isDebugEnabled()) {
+      log.debug("Try to find localised resource : " + localisedFileName);
+    }
     if (content.length() > 0) {
-      log.debug("resource bundle found true");
+      if (log.isDebugEnabled()) {
+        log.debug("resource bundle found true");
+      }
       resourceBundle = new ExoResourceBundle(content);
     } else{
-      log.debug("resource bundle not found");
+      if (log.isDebugEnabled()) {
+        log.debug("resource bundle not found");
+      }
     }
 
     childElement = element.element("state-name");

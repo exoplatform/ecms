@@ -210,7 +210,9 @@ public class UIPublicationPanel
         
         return;
       } catch (ItemExistsException iee) {
-        LOG.error("Error when adding properties to node");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when adding properties to node");
+        }
       }
       UIPopupContainer uiPopupContainer = (UIPopupContainer) publicationPanel.getAncestorOfType(UIPopupContainer.class);
       uiPopupContainer.deActivate();
@@ -251,7 +253,9 @@ public class UIPublicationPanel
     try {
       lifecycleName = cNode.getProperty("publication:lifecycle").getString();
     } catch (Exception e) {
-      LOG.error("Failed to get States for node " + cNode, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Failed to get States for node " + cNode, e);
+      }
     }
     return lifecycleName;
   }
@@ -350,7 +354,9 @@ public class UIPublicationPanel
       }
 
     } catch (Exception e) {
-      LOG.error("Failed to extract node permissions", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Failed to extract node permissions", e);
+      }
     }
     return false;
   }

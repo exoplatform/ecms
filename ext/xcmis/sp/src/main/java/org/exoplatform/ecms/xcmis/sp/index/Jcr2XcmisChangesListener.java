@@ -266,7 +266,9 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
         try {
           searchService.update(addedEntries, Collections.EMPTY_SET);
         } catch (IndexModificationException e) {
-          LOG.error(e.getLocalizedMessage(), e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error(e.getLocalizedMessage(), e);
+          }
         }
       }
     }

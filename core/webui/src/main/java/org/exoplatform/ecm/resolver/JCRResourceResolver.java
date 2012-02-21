@@ -104,7 +104,9 @@ public class JCRResourceResolver extends ResourceResolver {
       Node template = (Node)session.getItem(removeScheme(url));
       inputStream = new ByteArrayInputStream(templateService.getTemplate(template).getBytes());
     } catch(Exception e) {
-      LOG.error("Unexpected problem happen when try to process with url");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when try to process with url");
+      }
     } finally {
       session.logout();
     }

@@ -80,7 +80,9 @@ public class ExportContentJob implements Job {
     Session session = null;
     try {
 
-      log.info("Start Execute ExportContentJob");
+      if (log.isInfoEnabled()) {
+        log.info("Start Execute ExportContentJob");
+      }
       if (fromState == null) {
 
         JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
@@ -96,12 +98,13 @@ public class ExportContentJob implements Job {
         workspace = pathTab[1];
         contentPath = pathTab[2];
 
-        log.debug("Init parameters first time :");
-        log.debug("\tFromState = " + fromState);
-        log.debug("\tToState = " + toState);
-        log.debug("\tLocalTempDir = " + localTempDir);
-        log.debug("\tTargetServerUrl = " + targetServerUrl);
-
+        if (log.isDebugEnabled()) {
+          log.debug("Init parameters first time :");
+          log.debug("\tFromState = " + fromState);
+          log.debug("\tToState = " + toState);
+          log.debug("\tLocalTempDir = " + localTempDir);
+          log.debug("\tTargetServerUrl = " + targetServerUrl);
+        }
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 
@@ -159,7 +162,9 @@ public class ExportContentJob implements Job {
             HashMap<String, String> context_ = new HashMap<String, String>();
             context_.put("containerName", containerName);
             publicationPlugin.changeState(node_, toState, context_);
-            log.info("change the status of the node " + node_.getPath() + " to " + toState);
+            if (log.isInfoEnabled()) {
+              log.info("change the status of the node " + node_.getPath() + " to " + toState);
+            }
             bos = new ByteArrayOutputStream();
 
             NodeLocation nodeLocation = NodeLocation.make(node_);
@@ -291,20 +296,30 @@ public class ExportContentJob implements Job {
           out.close();
           String string = null;
           while ((string = inStream.readLine()) != null) {
-            log.debug("The response of the production server:" + string);
+            if (log.isDebugEnabled()) {
+              log.debug("The response of the production server:" + string);
+            }
           }
           connection.disconnect();
           files[i].delete();
         }
       }
 
-      log.info("End Execute ExportContentJob");
+      if (log.isInfoEnabled()) {
+        log.info("End Execute ExportContentJob");
+      }
     } catch (RepositoryException ex) {
-      log.error("Repository 'repository ' not found.", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Repository 'repository ' not found.", ex);
+      }
     } catch (ConnectException ex) {
-      log.error("The front server is down.", ex);
+      if (log.isErrorEnabled()) {
+        log.error("The front server is down.", ex);
+      }
     } catch (Exception ex) {
-      log.error("Error when exporting content : ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error when exporting content : ", ex);
+      }
     } finally {
       if (session != null)
         session.logout();

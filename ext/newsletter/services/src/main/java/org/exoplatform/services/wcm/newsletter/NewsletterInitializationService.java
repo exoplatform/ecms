@@ -92,7 +92,9 @@ public class NewsletterInitializationService implements Startable {
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    log.info("Starting NewsletterInitializationService ... ");
+    if (log.isInfoEnabled()) {
+      log.info("Starting NewsletterInitializationService ... ");
+    }
     SessionProvider sessionProvider = null;
     try {
       sessionProvider = SessionProvider.createSystemProvider();
@@ -146,7 +148,9 @@ public class NewsletterInitializationService implements Startable {
         }
       }
     } catch (Throwable e) {
-      log.info("Starting NewsletterInitializationService fail because of ", e);
+      if (log.isInfoEnabled()) {
+        log.info("Starting NewsletterInitializationService fail because of ", e);
+      }
     } finally {
       sessionProvider.close(); 
     }
@@ -156,6 +160,8 @@ public class NewsletterInitializationService implements Startable {
    * @see org.picocontainer.Startable#stop()
    */
   public void stop() {
-    log.info("Stopping NewsletterInitializationService ... ");
+    if (log.isInfoEnabled()) {
+      log.info("Stopping NewsletterInitializationService ... ");
+    }
   }
 }

@@ -77,7 +77,9 @@ public class PropertyValueComparator implements Comparator<Node> {
         throw new RepositoryException("Unknown type " + requireType);
       }
     } catch (Exception e) {
-      LOG.warn("Unexpected error", e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Unexpected error", e);
+      }
       return 0;
     }
   }
@@ -89,7 +91,9 @@ public class PropertyValueComparator implements Comparator<Node> {
       }
       return -1;
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return -1;
     }
   }
@@ -107,7 +111,9 @@ public class PropertyValueComparator implements Comparator<Node> {
       }
       return propertyValue1.compareToIgnoreCase(propertyValue0);
     } catch(RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return 0;
     }
   }
@@ -121,7 +127,9 @@ public class PropertyValueComparator implements Comparator<Node> {
         }
         return date1.compareTo(date0) ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return 0;
   }

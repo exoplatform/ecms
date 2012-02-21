@@ -85,7 +85,9 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
       throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null,
           ApplicationMessage.WARNING)) ;
     } catch(Exception e) {
-      LOG.error("Unexpected problem occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem occurs", e);
+      }
     }
     return context;
   }

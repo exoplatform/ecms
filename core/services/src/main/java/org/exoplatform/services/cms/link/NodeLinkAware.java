@@ -117,9 +117,13 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
     try {
       return getTarget();
     } catch (AccessDeniedException e) {
-      LOG.warn("Cannot access to the target of the node " + nodeLocation.getPath());
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot access to the target of the node " + nodeLocation.getPath());
+      }
     } catch (ItemNotFoundException e) {
-      LOG.warn("The target of the node " + nodeLocation.getPath() + " doesn't exist anymore");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("The target of the node " + nodeLocation.getPath() + " doesn't exist anymore");
+      }
     }
     return null;
   }

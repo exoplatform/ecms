@@ -84,7 +84,9 @@ public class PageMetadataRequestFilter implements Filter {
       if(!check)
         setPortalMetadata(req);
     } catch (Exception e) {
-      log.error("Error when doFilter: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when doFilter: ", e);
+      }
     }
     chain.doFilter(servletRequest,servletResponse);
   }

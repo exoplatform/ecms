@@ -59,7 +59,9 @@ public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductP
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    log.info("Start " + this.getClass().getName() + ".............");
+    if (log.isInfoEnabled()) {
+      log.info("Start " + this.getClass().getName() + ".............");
+    }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       //get info
@@ -86,7 +88,9 @@ public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductP
         mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
-      log.info("Change property '" + PUBLICATION_HISTORY + "' for node type 'publication:publication' successfully!");
+      if (log.isInfoEnabled()) {
+        log.info("Change property '" + PUBLICATION_HISTORY + "' for node type 'publication:publication' successfully!");
+      }
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when change property '" + PUBLICATION_HISTORY

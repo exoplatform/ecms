@@ -98,7 +98,9 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
       updateGrid(relateService.getRelations(currentNode, WCMCoreUtils.getUserSessionProvider()), 1);
       setRenderSibling(UIRelationsAddedList.class) ;
     } catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

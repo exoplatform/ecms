@@ -113,7 +113,9 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
         plugin.init() ;
       }
     } catch(Exception e) {
-      LOG.error("an error occured while starting the component", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an error occured while starting the component", e);
+      }
     }
   }
 

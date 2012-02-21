@@ -113,7 +113,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     try {
       init();
     } catch (Exception e) {
-      LOG.error("===>>>>Exception when init FolksonomySerice", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("===>>>>Exception when init FolksonomySerice", e);
+      }
     }
   }
 
@@ -163,8 +165,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
         userFolksonomyNode.getSession().save();
       } catch (Exception e) {
-        LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for user: "
+        if (LOG.isErrorEnabled()) {
+          LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for user: "
             + userName);
+        }
       }
     }
   }  
@@ -210,8 +214,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
           }
           groupFolksonomyNode.getSession().save();
         } catch (Exception e) {
-          LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for group: "
+          if (LOG.isErrorEnabled()) {
+            LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for group: "
               + group);
+          }
         }
       }
     }
@@ -257,8 +263,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
         publicFolksonomyTreeNode.getSession().save();
       } catch (Exception e) {
-        LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath()
+        if (LOG.isErrorEnabled()) {
+          LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath()
             + " in public folksonomy tree!");
+        }
       }
     }
   }  
@@ -454,7 +462,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       if (repositoryName != null) {
         return repositoryName;
       }
-      LOG.error("Repository exception occurs:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository exception occurs:", e);
+      }
       return null;
     }
   }
@@ -521,7 +531,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       try {
         plugin.init();
       } catch (Exception e) {
-        LOG.error("can not init tag style: ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("can not init tag style: ", e);
+        }
       }
     }
 
@@ -529,7 +541,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       try {
         tagPermissionList.addAll(plugin.initPermission());
       } catch (Exception e) {
-        LOG.error("can not init tag permission: ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("can not init tag permission: ", e);
+        }
       }
     }
 

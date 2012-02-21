@@ -98,7 +98,9 @@ public class EmailNotifyListener implements EventListener {
         Message message = createMessage(receiver, messageConfig);
         mailService.sendMessage(message);
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }
@@ -278,7 +280,9 @@ public class EmailNotifyListener implements EventListener {
         }
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return emailList ;
   }

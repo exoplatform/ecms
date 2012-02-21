@@ -186,7 +186,9 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
           commentsService.addComment(NodeLocation.getNodeByLocation(uiForm.document_),
               userName, email, website, comment, language);
         } catch (Exception e) {
-          LOG.error(e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error(e);
+          }
         }
       }
       UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");

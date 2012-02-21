@@ -400,7 +400,9 @@ public class TimelineServiceImpl implements TimelineService {
       }
       return query.execute();
     } catch (Exception e) {
-      LOG.error("Can not execute query", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Can not execute query", e);
+      }
       return null;
     }
   }

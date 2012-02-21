@@ -105,7 +105,9 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return "Error in getStateImage";
     }
   }

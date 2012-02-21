@@ -54,7 +54,9 @@ public class RemovePageEventListener extends Listener<DataStorageImpl, Page>{
                                                                         .getIdentity()
                                                                         .getUserId());
     } catch (Exception e) {
-      log.error("Exception when update publication lifecyle", e);
+      if (log.isErrorEnabled()) {
+        log.error("Exception when update publication lifecyle", e);
+      }
     }
   }
 }

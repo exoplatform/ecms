@@ -180,7 +180,9 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
         
         return;
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         Object[] arg = { path };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.path-error", arg,
             ApplicationMessage.WARNING));

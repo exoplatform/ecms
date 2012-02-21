@@ -146,25 +146,33 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
         favoriteService.removeFavorite(node, session.getUserID());
         uiExplorer.updateAjax(event);
       } catch (LockException e) {
-        LOG.error("node is locked, can't remove favourite of node :" + node.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("node is locked, can't remove favourite of node :" + node.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
         uiExplorer.updateAjax(event);
       } catch (VersionException e) {
-        LOG.error("node is checked in, can't remove favourite of node:" + node.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("node is checked in, can't remove favourite of node:" + node.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
-        LOG.error("access denied, can't remove favourite of node:" + node.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("access denied, can't remove favourite of node:" + node.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
         uiExplorer.updateAjax(event);
       } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
           LOG.error("an unexpected error occurs", e);
-          JCRExceptionManager.process(uiApp, e);
+        }
+        JCRExceptionManager.process(uiApp, e);
           
-          uiExplorer.updateAjax(event);
+        uiExplorer.updateAjax(event);
       }
   }
 

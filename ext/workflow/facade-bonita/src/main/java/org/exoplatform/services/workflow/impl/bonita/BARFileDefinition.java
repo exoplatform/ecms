@@ -544,7 +544,9 @@ public class BARFileDefinition implements FileDefinition {
       }
     }
     catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
   }
 }

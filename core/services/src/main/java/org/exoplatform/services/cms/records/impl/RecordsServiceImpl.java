@@ -370,7 +370,9 @@ public class RecordsServiceImpl implements RecordsService {
       record.save() ;
       filePlan.save() ;
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -395,7 +397,9 @@ public class RecordsServiceImpl implements RecordsService {
       record.save() ;
       filePlan.save() ;
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -645,7 +649,9 @@ public class RecordsServiceImpl implements RecordsService {
       record.save() ;
       filePlan.save() ;
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -737,7 +743,9 @@ public class RecordsServiceImpl implements RecordsService {
         filePlan.save() ;
       }
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

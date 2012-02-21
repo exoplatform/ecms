@@ -282,7 +282,9 @@ public class UISEOForm extends UIForm{
           if(uiSEOToolbar != null)
             uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
         } catch (Exception ex) {
-          LOG.error("Unexpected error ", ex);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected error ", ex);
+          }
           uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception",
                                                   null,
                                                   ApplicationMessage.ERROR));
@@ -312,7 +314,9 @@ public class UISEOForm extends UIForm{
           if(uiSEOToolbar != null)
             uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
         } catch (Exception ex) {
-          LOG.error("Unexpected error ", ex);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected error ", ex);
+          }
           uiApp.addMessage(new ApplicationMessage("UISEOForm.msg.repository-exception",
                                                   null,
                                                   ApplicationMessage.ERROR));

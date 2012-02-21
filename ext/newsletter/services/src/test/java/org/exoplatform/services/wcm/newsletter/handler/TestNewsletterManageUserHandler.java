@@ -179,7 +179,9 @@ public class TestNewsletterManageUserHandler extends BaseWCMTestCase {
     try{
       newsletterManageUserHandler.add(sessionProvider, classicPortal + "Wrong", "test" + userEmail);
     }catch(Exception ex){
-      log.warn("Can't add user because portal's name is not exist");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't add user because portal's name is not exist");
+      }
     }
     isCorrectUser = newsletterPublicUserHandler.confirmPublicUser(sessionProvider, "test" + userEmail, userNode.getProperty(NewsletterConstant.USER_PROPERTY_VALIDATION_CODE).getString(), classicPortal);
     assertEquals(false, isCorrectUser);

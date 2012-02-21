@@ -73,7 +73,9 @@ public class CmisSchemaTableResolver extends SchemaTableResolver
       }
       catch (TypeNotFoundException tnf)
       {
-         LOG.error(tnf.getMessage(), tnf);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(tnf.getMessage(), tnf);
+        }
       }
       return subTypes;
    }

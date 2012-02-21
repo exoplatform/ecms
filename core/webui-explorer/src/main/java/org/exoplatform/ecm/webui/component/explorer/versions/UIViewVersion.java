@@ -233,7 +233,9 @@ public class UIViewVersion extends UIBaseNodePresentation {
       String value = node.getProperty(property).getString() ;
       if(value.length() > 0) return true ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return false ;
   }
@@ -257,7 +259,9 @@ public class UIViewVersion extends UIBaseNodePresentation {
       Class object = loader.loadClass(className);
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
-      LOG.error("Unexpected error", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", ex);
+      }
     }
     return service;
   }

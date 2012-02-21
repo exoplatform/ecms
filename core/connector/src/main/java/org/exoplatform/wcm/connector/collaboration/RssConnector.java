@@ -35,7 +35,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -273,7 +272,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       SyndFeedOutput output = new SyndFeedOutput();
       return output.outputString(feed);
     } catch (Exception e) {
-      log.error("Error when perform generateRSS: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform generateRSS: ", e);
+      }
     }
     return null;
   }

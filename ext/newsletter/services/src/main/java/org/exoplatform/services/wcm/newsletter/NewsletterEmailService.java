@@ -34,6 +34,8 @@ public class NewsletterEmailService {
    * Instantiates a new newsletter email service.
    */
   public NewsletterEmailService() {
-    log.info("Starting NewsletterEmailService ... ");
+    if (log.isInfoEnabled()) {
+      log.info("Starting NewsletterEmailService ... ");
+    }
   }
 }

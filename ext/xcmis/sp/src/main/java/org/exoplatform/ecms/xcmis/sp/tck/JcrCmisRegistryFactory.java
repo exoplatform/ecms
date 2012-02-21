@@ -50,11 +50,15 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
       }
       catch (MalformedURLException e)
       {
-        LOG.warn(e.getMessage(), e);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage(), e);
+        }
       }
       catch (Exception e)
       {
-        LOG.warn(e.getMessage(), e);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage(), e);
+        }
       }
    }
 

@@ -86,7 +86,9 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
       
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
-      LOG.error("an unexpected error occurs while calling custom action on the node", e);;
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs while calling custom action on the node", e);
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);

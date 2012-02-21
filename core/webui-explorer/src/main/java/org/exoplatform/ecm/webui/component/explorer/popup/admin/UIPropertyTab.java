@@ -224,7 +224,9 @@ public class UIPropertyTab extends UIContainer {
 
         return;
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         return;
       }
     }

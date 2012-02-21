@@ -151,7 +151,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     try {
       results = executeQuery(session, buildQueryByMimeTypes(mimeTypes, userName), SQL);
     } catch (Exception e) {
-      LOG.error(e.getMessage());
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e.getMessage());
+      }
     }
     NodeIterator iterator = results.getNodes();
     Node documentNode = null;
@@ -229,7 +231,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         // Execute sql query and return a results
         results = executeQuery(session, buildQueryByContentsType(userName), SQL);
       } catch (Exception e) {
-        LOG.error("An unexpected exception appear", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("An unexpected exception appear", e);
+        }
       }
       NodeIterator iterator = results.getNodes();
       while (iterator.hasNext()) {
@@ -246,7 +250,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
       Query query = queryManager.createQuery(statement, language);
       return query.execute();
     } catch (Exception e) {
-      LOG.error("SQL query fail", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("SQL query fail", e);
+      }
       return null;
     }
   }

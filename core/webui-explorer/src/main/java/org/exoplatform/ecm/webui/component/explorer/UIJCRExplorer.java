@@ -402,7 +402,9 @@ public class UIJCRExplorer extends UIContainer {
       String workspace =  dmsRepoConfig.getSystemWorkspace();
       jcrTemplateResourceResolver_ = new JCRResourceResolver(workspace) ;
     } catch(Exception e) {
-      LOG.error("Cannot instantiate the JCRResourceResolver", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot instantiate the JCRResourceResolver", e);
+      }
     }
   }
 
@@ -450,7 +452,9 @@ public class UIJCRExplorer extends UIContainer {
     try {
       return getCurrentNode().getSession().getWorkspace().getName();
     } catch (Exception e) {
-      LOG.warn("The workspace of the current node cannot be found, the workspace of the drive will be used", e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("The workspace of the current node cannot be found, the workspace of the drive will be used", e);
+      }
     }
     return getCurrentDriveWorkspace();
   }
@@ -498,7 +502,9 @@ public class UIJCRExplorer extends UIContainer {
         setLanguage(nodeGet.getProperty(Utils.EXO_LANGUAGE).getValue().getString());
       }
     } catch(PathNotFoundException path) {
-      LOG.error("The node cannot be found ", path);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("The node cannot be found ", path);
+      }
       setCurrentPath(currentRootPath_);
     }
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(UIAddressBar.FIELD_ADDRESS).
@@ -615,10 +621,14 @@ public class UIJCRExplorer extends UIContainer {
         if(primaryNode.isNodeType(nodeType)) return primaryNode ;
       }
     } catch(ItemNotFoundException item) {
-      LOG.error("Primary item not found for " + getCurrentNode().getPath());
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Primary item not found for " + getCurrentNode().getPath());
+      }
       return getCurrentNode() ;
     } catch(Exception e) {
-      LOG.error("The node cannot be seen", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("The node cannot be seen", e);
+      }
       return getCurrentNode() ;
     }
     return getCurrentNode() ;
@@ -633,7 +643,9 @@ public class UIJCRExplorer extends UIContainer {
           list.add(node.getProperty(name).getString());
         }
       } catch(Exception e) {
-        LOG.error("The property '" + name + "' cannot be found ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("The property '" + name + "' cannot be found ", e);
+        }
         list.add("") ;
       }
       return list;
@@ -778,12 +790,14 @@ public class UIJCRExplorer extends UIContainer {
     try {
       testedNode = (Node) nodeFinder.getItem(this.getSession(), uri, true);
     } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
         LOG.warn("Cannot find the node at " + uri);
-        UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
+      }
+      UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
+      uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
             null,
             ApplicationMessage.WARNING));
-        return false;
+      return false;
     }
     if (testedNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
       UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
@@ -804,7 +818,9 @@ public class UIJCRExplorer extends UIContainer {
         setCurrentPath(uri);
         currentNode = getCurrentNode();
       } catch (Exception e) {
-        LOG.error("Cannot find the node at " + uri, e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot find the node at " + uri, e);
+        }
         setCurrentPath(LinkUtils.getParentPath(currentPath_));
         currentNode = getCurrentNode();
       }
@@ -960,8 +976,10 @@ public class UIJCRExplorer extends UIContainer {
         } catch (Exception e2) {
           // do nothing
         }
-        LOG.warn("The node cannot be found at " + nodePath
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("The node cannot be found at " + nodePath
             + (workspace == null ? "" : " into the workspace " + workspace));
+        }
       }
       throw e;
     }

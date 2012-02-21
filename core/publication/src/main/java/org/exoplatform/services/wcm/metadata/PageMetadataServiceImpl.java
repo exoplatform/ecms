@@ -276,7 +276,9 @@ public class PageMetadataServiceImpl implements PageMetadataService {
     try {
       return livePortalManagerService.getLivePortalByChild(child);
     } catch (Exception e) {
-      log.error("Error when findPortal: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when findPortal: ", e);
+      }
     }
     return null;
   }

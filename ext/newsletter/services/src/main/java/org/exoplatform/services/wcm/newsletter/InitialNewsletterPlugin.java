@@ -104,7 +104,9 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
         userFolderNode.addMixin("exo:privilegeable");
       userFolderNode.setPermission("any", PermissionType.ALL) ;
     } catch (Exception e) {
-      log.info("InitialNewsletterPlugin fail because of ", e);
+      if (log.isInfoEnabled()) {
+        log.info("InitialNewsletterPlugin fail because of ", e);
+      }
     }
   }
 }

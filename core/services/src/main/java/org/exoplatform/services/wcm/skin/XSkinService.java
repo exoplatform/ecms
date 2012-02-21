@@ -180,7 +180,9 @@ public class XSkinService implements Startable {
       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
       addSharedPortalSkin(sharedPortal);
     } catch (Exception e) {
-      log.error("Exception when start XSkinService", e);
+      if (log.isErrorEnabled()) {
+        log.error("Exception when start XSkinService", e);
+      }
     } finally {
       sessionProvider.close();
     }

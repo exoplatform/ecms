@@ -641,7 +641,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       Class clazz = loader.loadClass(className);
       service = getApplicationComponent(clazz);
     } catch (ClassNotFoundException ex) {
-      LOG.error("Unexpected error", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", ex);
+      }
     }
     return service;
   }
@@ -1113,7 +1115,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.updateAjax(event) ;
         event.broadcast();
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1177,7 +1181,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
         return ;
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1212,7 +1218,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1234,7 +1242,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.setLanguage(selectedLanguage) ;
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1256,7 +1266,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         VotingService votingService = uiComp.getApplicationComponent(VotingService.class) ;
         votingService.vote(uiComp.getCurrentNode(), objId, userName, uiComp.getLanguage()) ;
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1276,7 +1288,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
         event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1323,7 +1337,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
         return;
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1358,8 +1374,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         //uiStar.changeFavourite();
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
-        LOG.error("Access denied! No permission for modifying property " +
-        Utils.EXO_FAVOURITER + " of node: " + node.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Access denied! No permission for modifying property " +
+                    Utils.EXO_FAVOURITER + " of node: " + node.getPath());
+        }
         uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.accessDenied", null, ApplicationMessage.WARNING));
 
       } catch (VersionException ve) {
@@ -1393,7 +1411,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.updateAjax(event);
         return;
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs while removing the node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs while removing the node", e);
+        }
         JCRExceptionManager.process(uiApp, e);
 
         return;
@@ -1491,7 +1511,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         extendedPageIterator.setCurrentPage(page);
         event.getRequestContext().addUIComponentToUpdateByAjax(treeExplorer);
       } catch(RepositoryException e) {
-         LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
 
@@ -1527,7 +1549,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
           return factor * s1.compareTo(s2);
         }
       } catch (Exception e) {
-        LOG.error("Cannot compare nodes", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot compare nodes", e);
+        }
       }
       return 0;
     }

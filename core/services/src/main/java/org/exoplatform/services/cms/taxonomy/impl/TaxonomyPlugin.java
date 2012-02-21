@@ -230,7 +230,9 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     try {
       taxonomyService_.addTaxonomyTree(taxonomyStorageNodeSystem);
     } catch (TaxonomyAlreadyExistsException e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     session.save();
     session.logout();

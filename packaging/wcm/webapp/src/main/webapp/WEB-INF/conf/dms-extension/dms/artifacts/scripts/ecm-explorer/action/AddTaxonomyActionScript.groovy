@@ -85,14 +85,18 @@ public class AddTaxonomyActionScript implements CmsScript {
       sessionHomeNode = seProviderService_.getSessionProvider(null).getSession(storeWorkspace, manageableRepository);
       storeNode = (Node)sessionHomeNode.getItem(storeHomePath);
     } catch(Exception e) {
-      LOG.error("Exception when try to get node of root taxonomy tree", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when try to get node of root taxonomy tree", e);
+      }
       throw e;
     }
     try{
       sessionTargetNode = seProviderService_.getSessionProvider(null).getSession(targetWorkspace, manageableRepository);
       targetNode = (Node)sessionTargetNode.getItem(targetPath);
     } catch(Exception e) {
-      LOG.error("Exception when try to get node of target", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when try to get node of target", e);
+      }
       throw e;
     }
     try {
@@ -163,7 +167,9 @@ public class AddTaxonomyActionScript implements CmsScript {
         }         
 	    }
     } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
     	LOG.error("Exception when try move node and create link", e);
+      }	
       throw e;
     }
   }

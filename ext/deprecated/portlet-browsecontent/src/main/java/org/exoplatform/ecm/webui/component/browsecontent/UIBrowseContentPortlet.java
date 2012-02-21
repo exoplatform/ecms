@@ -70,7 +70,9 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     try {
       uiBrowseContainer.loadPortletConfig(getPortletPreferences());
     } catch (Exception e) {
-      LOG.error("Cannot initialize the UIBrowseContentPortlet", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot initialize the UIBrowseContentPortlet", e);
+      }
     }
   }
 
@@ -111,7 +113,9 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     try {
       super.processRender(app, context);
     } catch (Exception e) {
-      LOG.error("Cannot display the content of the UIBrowseContentPortlet", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot display the content of the UIBrowseContentPortlet", e);
+      }
     }
   }
   protected void reload() throws Exception {
@@ -130,7 +134,9 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
       rService.getRepository(repoName);
       return true;
     } catch (Exception e) {
-      LOG.error("The repository " + repoName + " cannot be found", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("The repository " + repoName + " cannot be found", e);
+      }
       return false;
     }
   }

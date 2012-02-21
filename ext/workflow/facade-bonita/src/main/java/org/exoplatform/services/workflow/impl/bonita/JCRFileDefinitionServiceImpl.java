@@ -146,7 +146,9 @@ public class JCRFileDefinitionServiceImpl
         return  bpNode.getNode(processName);
       }
   } catch (Exception e) {
-    LOG.warn(e.getMessage(), e);
+    if (LOG.isWarnEnabled()) {
+      LOG.warn(e.getMessage(), e);
+    }
   }
 
     QueryManager qm = session.getWorkspace().getQueryManager();
@@ -197,7 +199,9 @@ public class JCRFileDefinitionServiceImpl
       return repositoryService.getCurrentRepository().getSystemSession(wsName);
     }
     catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
     finally {
       if (checkpoint) {
@@ -268,7 +272,9 @@ public class JCRFileDefinitionServiceImpl
       session.save();
     }
     catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
   }
 
@@ -302,7 +308,9 @@ public class JCRFileDefinitionServiceImpl
      return fd;
     }
     catch (RepositoryException e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
 
     return null;
@@ -351,7 +359,9 @@ public class JCRFileDefinitionServiceImpl
 
     }
     catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
   }
 }

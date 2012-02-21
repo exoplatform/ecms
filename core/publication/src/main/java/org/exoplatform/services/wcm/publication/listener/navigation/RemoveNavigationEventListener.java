@@ -51,7 +51,9 @@ public class RemoveNavigationEventListener extends Listener<NavigationServiceWra
     try {
       publicationService.updateLifecyleOnRemoveNavigation(navigationContext);
     } catch (Exception e) {
-      log.error("Exception when update publication lifecyle", e);
+      if (log.isErrorEnabled()) {
+        log.error("Exception when update publication lifecyle", e);
+      }
     }
   }
 }

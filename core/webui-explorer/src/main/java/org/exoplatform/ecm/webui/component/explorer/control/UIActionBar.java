@@ -217,7 +217,9 @@ public class UIActionBar extends UIForm {
       context.put(Node.class.getName(), currentNode);
       return manager.addUIExtension(ManageViewService.EXTENSION_TYPE, action, context, this);
     } catch (Exception e) {
-      LOG.error("An error occurs while checking the action", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occurs while checking the action", e);
+      }
     }
     return null;
   }

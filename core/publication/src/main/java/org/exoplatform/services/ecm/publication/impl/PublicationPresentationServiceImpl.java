@@ -45,7 +45,9 @@ public class PublicationPresentationServiceImpl implements PublicationPresentati
 
   public PublicationPresentationServiceImpl () {
     log = ExoLogger.getLogger("portal:PublicationPresentationServiceImpl");
-    log.info("# PublicationPresentationService initialization #");
+    if (log.isInfoEnabled()) {
+      log.info("# PublicationPresentationService initialization #");
+    }
     this.publicationPlugins_ = new HashMap<String, PublicationPlugin>();
   }
 

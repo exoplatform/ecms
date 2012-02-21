@@ -173,7 +173,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     } catch (AccessDeniedException accessDeniedException) {
       return null;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
@@ -212,12 +214,16 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }
       return null;
     } catch (AccessControlException e) {
-      LOG.error("AccessControlException: user [" + userName
+      if (LOG.isErrorEnabled()) {
+        LOG.error("AccessControlException: user [" + userName
           + "] does not have access to the template for content type [" + contentType
           + "] in repository + [" + repositoryName + "]");
+      }
       return null;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
@@ -501,14 +507,18 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
       return null;
     } catch(ConstraintViolationException constraintViolationException) {
-    LOG.error("Unexpected error occurrs", constraintViolationException);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error occurrs", constraintViolationException);
+      }
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                               null,
                                               ApplicationMessage.WARNING));
 
       return null;
     } catch(RepositoryException repo) {
-      LOG.error("Unexpected error occurrs", repo);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error occurrs", repo);
+      }
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
 
       return null;
@@ -518,7 +528,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
       return null;
     } catch(Exception e) {
-      LOG.error("Unexpected error occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error occurs", e);
+      }
       String key = "UIDocumentForm.msg.cannot-save";
       uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
 

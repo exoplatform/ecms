@@ -196,8 +196,10 @@ public class UISideBar extends UIContainer {
       return component;
     } else if (component != null) {
       // You can access to the given extension but the extension is not valid
-      LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
           + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
+      }
       removeChild(component.getClass());
     }
     return null;

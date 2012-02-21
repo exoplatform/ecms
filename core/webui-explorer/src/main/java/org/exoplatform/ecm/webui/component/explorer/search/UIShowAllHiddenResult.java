@@ -258,19 +258,25 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
           throw new AccessDeniedException();
         }
       } catch (LockException e) {
-        LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
+        if (LOG.isErrorEnabled()) {
+          LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
+        }
         JCRExceptionManager.process(uiApp, e);
         
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
-        LOG.error("Access denied! No permission for modifying property " + Utils.EXO_HIDDENABLE
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Access denied! No permission for modifying property " + Utils.EXO_HIDDENABLE
             + " of node: " + node.getPath());
+        }
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.accessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
         
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs while removing the node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs while removing the node", e);
+        }
         JCRExceptionManager.process(uiApp, e);
         
         return;
@@ -340,7 +346,9 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
           return name1.compareTo(name2);
         }
       } catch (Exception e) {
-        LOG.error("Cannot compare nodes", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot compare nodes", e);
+        }
       }
       return 0;
     }

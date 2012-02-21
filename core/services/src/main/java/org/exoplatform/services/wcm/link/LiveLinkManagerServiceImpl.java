@@ -161,7 +161,9 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
         updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");
       }
     } catch (Exception e) {
-      LOG.error("Error when perform updateLinks: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform updateLinks: ", e);
+      }
     }
   }
 
@@ -176,7 +178,9 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       Session session = portal.getSession();
       updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");
     } catch (Exception e) {
-      LOG.error("Error when perform updateLinks: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform updateLinks: ", e);
+      }
     }
   }
 
@@ -211,7 +215,9 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
           String oldUrl = linkBean.getUrl();
           String oldStatus = getLinkStatus(oldUrl);
           String updatedLink = new LinkBean(oldUrl, oldStatus).toString();
-          LOG.info(updatedLink);
+          if (LOG.isInfoEnabled()) {
+            LOG.info(updatedLink);
+          }
           newValues[iValues] = valueFactory.createValue(updatedLink);
           if (oldStatus.equals(LinkBean.STATUS_BROKEN)) {
             listBrokenLinks.add(oldUrl);
@@ -245,7 +251,9 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       }
       return LinkBean.STATUS_BROKEN;
     } catch (Exception e) {
-      LOG.info("URL Link: \"" + strUrl + "\" is broken");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("URL Link: \"" + strUrl + "\" is broken");
+      }
       return LinkBean.STATUS_BROKEN;
     }
   }

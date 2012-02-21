@@ -67,7 +67,9 @@ class FolderDataImpl extends BaseObjectData implements FolderData
             }
             catch (Exception re)
             {
-               LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+              if (LOG.isWarnEnabled()) {
+                LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+              }
             }
          }
       }

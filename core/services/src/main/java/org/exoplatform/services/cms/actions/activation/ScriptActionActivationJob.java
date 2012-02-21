@@ -89,7 +89,9 @@ public class ScriptActionActivationJob implements Job {
       actionNode.save() ;
       jcrSession.save() ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       if(jcrSession != null) jcrSession.logout();
     }

@@ -222,7 +222,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                          Text.escapeIllegalJcrChars(driverName));
 
     } catch (Exception e) {
-      log.error("Error when perform getFoldersAndFiles: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform getFoldersAndFiles: ", e);
+      }
     }
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -308,7 +310,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                            uploadId);
       }
     } catch (Exception e) {
-      log.error("Error when perform processUpload: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform processUpload: ", e);
+      }
     }
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);

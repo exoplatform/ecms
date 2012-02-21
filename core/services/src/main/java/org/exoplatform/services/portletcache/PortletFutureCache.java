@@ -195,7 +195,9 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
   {
     if (scheduled == null)
     {
-      log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
+      if (log.isDebugEnabled()) {
+        log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
+      }
       if(scheduler.isShutdown()) scheduler = Executors.newScheduledThreadPool(1);
       scheduled = scheduler.scheduleWithFixedDelay(new Runnable()
       {
@@ -224,7 +226,9 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
   {
     if (scheduled != null)
     {
-      log.debug("Stopping cache cleaner");
+      if (log.isDebugEnabled()) {
+        log.debug("Stopping cache cleaner");
+      }
       scheduled.cancel(false);
       scheduled = null;
     }

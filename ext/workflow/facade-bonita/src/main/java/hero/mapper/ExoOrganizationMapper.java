@@ -59,11 +59,17 @@ public class ExoOrganizationMapper implements RoleMapper {
       participantDef = definitionAPI.getProcessParticipant(processId, roleId);
       return ExoOrganizationMapper.GetUsersFromMembershipAndGroup(participantDef.getName());
     } catch (InstanceNotFoundException e) {
-      log.warn(e.getMessage(), e);
+      if (log.isWarnEnabled()) {
+        log.warn(e.getMessage(), e);
+      }
     } catch (ProcessNotFoundException e) {
-      log.warn(e.getMessage(), e);
+      if (log.isWarnEnabled()) {
+        log.warn(e.getMessage(), e);
+      }
     } catch (ParticipantNotFoundException e) {
-      log.warn(e.getMessage(), e);
+      if (log.isWarnEnabled()) {
+        log.warn(e.getMessage(), e);
+      }
     }
     return null;
   }
@@ -97,8 +103,10 @@ public class ExoOrganizationMapper implements RoleMapper {
         membership = "*";
         group = membershipAndGroup;
 
-        log.error("Warning : The specified Bonita role does not "
+        if (log.isErrorEnabled()) {
+          log.error("Warning : The specified Bonita role does not "
             + "conform to the syntax membership:group.");
+        }
       }
       if (log.isInfoEnabled()) {
         log.info("Starting role mapping for [group,membership] : [" + group + "," + membership
@@ -128,7 +136,9 @@ public class ExoOrganizationMapper implements RoleMapper {
         }
       }
     } catch (Exception e) {
-      log.warn(e.getMessage(), e);
+      if (log.isWarnEnabled()) {
+        log.warn(e.getMessage(), e);
+      }
     }
 
     return users;

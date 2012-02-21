@@ -267,7 +267,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
       if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
-        log.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
+        if (log.isErrorEnabled()) {
+          log.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
+        }
         continue;
       }
       Node nodeTypeHome = null;

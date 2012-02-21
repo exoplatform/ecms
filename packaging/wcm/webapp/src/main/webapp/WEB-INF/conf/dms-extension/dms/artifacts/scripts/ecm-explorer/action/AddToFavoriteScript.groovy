@@ -60,7 +60,9 @@ public class AddToFavoriteScript implements CmsScript {
       // Add new node to favorite
       favoriteService_.addFavorite(addedNode, userID);
     } catch (Exception e) {
-      LOG.error("Add Favorite failed", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Add Favorite failed", e);
+      }
     }
   }
 

@@ -65,7 +65,9 @@ public class PublicationServiceImpl implements PublicationService {
 
   public PublicationServiceImpl (PublicationPresentationService presentationService) {
     log = ExoLogger.getLogger("portal:PublicationServiceImpl");
-    log.info("# PublicationService initialization #");
+    if (log.isInfoEnabled()) {
+      log.info("# PublicationService initialization #");
+    }
     this.publicationPresentationService = presentationService;
     publicationPlugins_ = new HashMap<String, PublicationPlugin>();
   }
@@ -146,7 +148,9 @@ public class PublicationServiceImpl implements PublicationService {
     if(!isNodeEnrolledInLifecycle(node)) throw new NotInPublicationLifecycleException();
     //remove all extended publication mixin nodetype for this node
     String lifecycleName = getNodeLifecycleName(node);
-    log.info("The document: " + node.getName() + " unsubcribe publication lifecycle: " + lifecycleName);
+    if (log.isInfoEnabled()) {
+      log.info("The document: " + node.getName() + " unsubcribe publication lifecycle: " + lifecycleName);
+    }
     for(NodeType nodeType: node.getMixinNodeTypes()) {
       if(!nodeType.isNodeType(PUBLICATION)) continue;
       node.removeMixin(nodeType.getName());
@@ -259,7 +263,9 @@ public class PublicationServiceImpl implements PublicationService {
     try {
       return publicationPlugin.getLocalizedAndSubstituteMessage(locale, key, values);
     } catch (Exception e) {
-      log.warn("Exception when get log message", e);
+      if (log.isWarnEnabled()) {
+        log.warn("Exception when get log message", e);
+      }
       return key;
     }
   }

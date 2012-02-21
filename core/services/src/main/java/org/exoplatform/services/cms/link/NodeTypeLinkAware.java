@@ -71,7 +71,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().canAddChildNode(childNodeName);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -83,7 +85,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().canAddChildNode(childNodeName, nodeTypeName);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -95,7 +99,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().canRemoveItem(itemName);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -107,7 +113,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().canSetProperty(propertyName, value);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -119,7 +127,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().canSetProperty(propertyName, values);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -131,7 +141,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getChildNodeDefinitions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -143,7 +155,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getDeclaredChildNodeDefinitions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -155,7 +169,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getDeclaredPropertyDefinitions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -167,7 +183,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getDeclaredSupertypes();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -186,7 +204,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getPrimaryItemName();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -198,7 +218,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getPropertyDefinitions();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -210,7 +232,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().getSupertypes();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -222,7 +246,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().hasOrderableChildNodes();
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }
@@ -241,7 +267,9 @@ public class NodeTypeLinkAware implements NodeType {
     try {
       return getTargetNodeType().isNodeType(nodeTypeName);
     } catch (RepositoryException e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false;
   }

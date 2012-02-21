@@ -258,7 +258,9 @@ public class StorageProviderImpl implements StorageProvider, Startable
       }
       catch (Throwable e)
       {
-         LOG.error("Unable to initialize storage. ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unable to initialize storage. ", e);
+        }
       }
    }
 
@@ -358,7 +360,9 @@ public class StorageProviderImpl implements StorageProvider, Startable
          }
          catch (RepositoryException e)
          {
-            LOG.error("Unable to create event listener. " + e.getMessage(), e);
+           if (LOG.isErrorEnabled()) {
+             LOG.error("Unable to create event listener. " + e.getMessage(), e);
+           }
          }
       }
    }

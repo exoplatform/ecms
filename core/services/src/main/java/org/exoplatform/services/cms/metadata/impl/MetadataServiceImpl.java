@@ -137,7 +137,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     try {
       init();
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -166,7 +168,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
         plugin.setBasePath(baseMetadataPath_);
         plugin.init();
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }

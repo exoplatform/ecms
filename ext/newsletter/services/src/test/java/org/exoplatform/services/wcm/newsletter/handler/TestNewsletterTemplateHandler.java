@@ -146,10 +146,14 @@ public class TestNewsletterTemplateHandler extends BaseWCMTestCase {
     assertEquals(5, listTemplates.size());
 
     try{
-      log.info("Convert a webcontent to template which is already exist in system");
+      if (log.isInfoEnabled()) {
+        log.info("Convert a webcontent to template which is already exist in system");
+      }
       newsletterTemplateHandler.convertAsTemplate(sessionProvider, nodesTemp.getPath(), classicPortal, newsletterCategoryConfig1.getName());
     }catch(Exception ex){
-      log.warn("Can't convert");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't convert");
+      }
     }
     listTemplates = newsletterTemplateHandler.getTemplates(sessionProvider, classicPortal, newsletterCategoryConfig1);
     assertEquals(5, listTemplates.size());

@@ -201,7 +201,9 @@ public class WCMCoreUtils {
       }
       endRequest(organizationService);
     } catch (Exception e) {
-      log.error("hasPermission() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("hasPermission() failed because of ", e);
+      }
     }
     return false;
   }
@@ -210,7 +212,9 @@ public class WCMCoreUtils {
     try {
       return Arrays.asList(listAccess.load(0, listAccess.getSize()));
     } catch (Exception e) {
-      log.error("getAllElementsOfListAccess() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("getAllElementsOfListAccess() failed because of ", e);
+      }
     }
     return null;
   }
@@ -237,7 +241,9 @@ public class WCMCoreUtils {
       RepositoryService repositoryService = getService(RepositoryService.class);
       return repositoryService.getCurrentRepository();
     } catch (Exception e) {
-      log.error("getRepository() failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("getRepository() failed because of ", e);
+      }
     }
     return null;
   }  
@@ -261,7 +267,9 @@ public class WCMCoreUtils {
     Properties productInformationProperties = new Properties();
     try {
       ConfigurationManager configManager = WCMCoreUtils.getService(ConfigurationManager.class);
-      log.info("Read products versions from " + filePath);
+      if (log.isInfoEnabled()) {
+        log.info("Read products versions from " + filePath);
+      }
       InputStream inputStream = configManager.getInputStream(filePath);
       
       productInformationProperties.load(inputStream);
@@ -304,7 +312,9 @@ public class WCMCoreUtils {
                                        .getString());
       }
     } catch(Exception e) {
-      log.error("Unexpected problem happen when active stylesheet", e);
+      if (log.isErrorEnabled()) {
+        log.error("Unexpected problem happen when active stylesheet", e);
+      }
     } 
     return buffer.toString();
   }
@@ -331,7 +341,9 @@ public class WCMCoreUtils {
         }
       }
     } catch(Exception e) {
-      log.error("Unexpected problem happen when active stylesheet", e);
+      if (log.isErrorEnabled()) {
+        log.error("Unexpected problem happen when active stylesheet", e);
+      }
     } 
     return buffer.toString();
   }
@@ -358,7 +370,9 @@ public class WCMCoreUtils {
         }
       }
     } catch(Exception e) {
-      log.error("Unexpected problem happen when active javascript", e);
+      if (log.isErrorEnabled()) {
+        log.error("Unexpected problem happen when active javascript", e);
+      }
     } 
     return buffer.toString();
   }

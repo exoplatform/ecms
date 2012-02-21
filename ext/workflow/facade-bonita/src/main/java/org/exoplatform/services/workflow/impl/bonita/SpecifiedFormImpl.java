@@ -258,7 +258,9 @@ public class SpecifiedFormImpl implements Form {
           this.submitButtons.add(attributes);
       }
   } catch (XPathExpressionException e) {
-    LOG.warn(e.getMessage(), e);
+    if (LOG.isWarnEnabled()) {
+      LOG.warn(e.getMessage(), e);
+    }
   }
     }
   }
@@ -304,7 +306,9 @@ public class SpecifiedFormImpl implements Form {
         throw new RuntimeException("Error while parsing the XPDL Definition", e);
       }
     } catch (Exception e1) {
-      LOG.warn(e1.getMessage(), e1);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e1.getMessage(), e1);
+      }
     }
     return ret;
   }

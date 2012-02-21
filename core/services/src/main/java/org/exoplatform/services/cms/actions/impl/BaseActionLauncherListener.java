@@ -121,7 +121,9 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
         jcrSession.logout();
       } catch (Exception e) {
         jcrSession.logout();
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }

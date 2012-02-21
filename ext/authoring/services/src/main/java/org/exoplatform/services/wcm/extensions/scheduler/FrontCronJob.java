@@ -24,22 +24,22 @@ public class FrontCronJob extends CronJob {
      * @throws Exception
      */
     public FrontCronJob(InitParams params) throws Exception {
-  super(params);
-  if (log.isInfoEnabled()) {
-      log.info("Start Init CronJob");
-  }
-
-  jobDataMap = new JobDataMap();
-
-  ExoProperties props = params.getPropertiesParam("importContentJob.generalParams").getProperties();
-  String stagingStorage = props.getProperty("stagingStorage");
-  String temporaryStorge = props.getProperty("temporaryStorge");
-  jobDataMap.put("stagingStorage", stagingStorage);
-  jobDataMap.put("temporaryStorge", temporaryStorge);
-  log.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
-  if (log.isInfoEnabled()) {
-      log.info("End Init CronJob");
-  }
+      super(params);
+      if (log.isInfoEnabled()) {
+          log.info("Start Init CronJob");
+      }
+    
+      jobDataMap = new JobDataMap();
+    
+      ExoProperties props = params.getPropertiesParam("importContentJob.generalParams").getProperties();
+      String stagingStorage = props.getProperty("stagingStorage");
+      String temporaryStorge = props.getProperty("temporaryStorge");
+      jobDataMap.put("stagingStorage", stagingStorage);
+      jobDataMap.put("temporaryStorge", temporaryStorge);
+      if (log.isInfoEnabled()) {
+        log.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
+        log.info("End Init CronJob");
+      }
     }
 
     /**

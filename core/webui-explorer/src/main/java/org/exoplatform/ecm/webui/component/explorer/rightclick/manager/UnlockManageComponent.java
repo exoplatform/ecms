@@ -154,7 +154,9 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
-      LOG.error("an unexpected error occurs while unloking the node", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs while unloking the node", e);
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);

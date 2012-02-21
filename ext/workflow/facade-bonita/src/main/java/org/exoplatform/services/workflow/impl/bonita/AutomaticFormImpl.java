@@ -131,7 +131,9 @@ public class AutomaticFormImpl implements Form {
     }
     catch(Exception e)
     {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
   }
 
@@ -204,9 +206,13 @@ public class AutomaticFormImpl implements Form {
 
             initializeVariables(vList);
         } catch (ProcessNotFoundException e) {
+          if (LOG.isWarnEnabled()) {
             LOG.warn(e.getMessage(), e);
+          }
         } catch (ActivityDefNotFoundException e) {
+          if (LOG.isWarnEnabled()) {
             LOG.warn(e.getMessage(), e);
+          }
         }
   }
 
@@ -219,7 +225,9 @@ public class AutomaticFormImpl implements Form {
 
         initializeVariables(vList);
         } catch (ProcessNotFoundException e) {
+          if (LOG.isWarnEnabled()) {
             LOG.warn(e.getMessage(), e);
+          }
         }
 
   }
@@ -288,7 +296,9 @@ public class AutomaticFormImpl implements Form {
           try {
             lc = new LoginContext("Bonita", s);
           } catch (LoginException le) {
-            LOG.warn(le.getMessage(), le);
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(le.getMessage(), le);
+            }
           }
         } else {
           UserHandler userHandler = organizationService.getUserHandler();
@@ -299,7 +309,9 @@ public class AutomaticFormImpl implements Form {
         }
         lc.login();
     } catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
-    }
+  }
 }

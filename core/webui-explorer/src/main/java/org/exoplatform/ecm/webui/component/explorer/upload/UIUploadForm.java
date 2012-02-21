@@ -486,7 +486,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
                 return;
               } catch(Exception e) {
-                LOG.error("An unexpected error occurs", e);
+                if (LOG.isErrorEnabled()) {
+                  LOG.error("An unexpected error occurs", e);
+                }
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
 
@@ -554,7 +556,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                           null, ApplicationMessage.WARNING));
                       return;
                     } catch (RepositoryException e) {
-                      LOG.error("Unexpected error", e);
+                      if (LOG.isErrorEnabled()) {
+                        LOG.error("Unexpected error", e);
+                      }
                       JCRExceptionManager.process(uiApp, e);
                       return;
                     }
@@ -608,7 +612,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                         null, ApplicationMessage.WARNING));
                     return;
                   } catch (RepositoryException e) {
-                    LOG.error("Unexpected error", e);
+                    if (LOG.isErrorEnabled()) {
+                      LOG.error("Unexpected error", e);
+                    }
                     JCRExceptionManager.process(uiApp, e);
                     return;
                   }
@@ -679,7 +685,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     } catch (ItemExistsException iee) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.item-existed", null, ApplicationMessage.WARNING));
     } catch(Exception e) {
-      LOG.error("An unexpected error occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs", e);
+      }
       JCRExceptionManager.process(uiApp, e);
       return ;
     }

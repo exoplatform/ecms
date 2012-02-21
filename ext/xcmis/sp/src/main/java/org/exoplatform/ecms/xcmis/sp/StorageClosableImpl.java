@@ -660,15 +660,21 @@ public class StorageClosableImpl implements Storage
    private static void processException(Exception e) {
      if(e instanceof LoginException) 
      {
-       LOG.error(e.getLocalizedMessage(), e);
+       if (LOG.isErrorEnabled()) {
+         LOG.error(e.getLocalizedMessage(), e);
+       }
      }
      else if(e instanceof NoSuchWorkspaceException) 
      {
-       LOG.error(e.getLocalizedMessage(), e);
+       if (LOG.isErrorEnabled()) {
+         LOG.error(e.getLocalizedMessage(), e);
+       }
      }
      else if(e instanceof RepositoryException) 
      {
-       LOG.error(e.getLocalizedMessage(), e);
+       if (LOG.isErrorEnabled()) {
+         LOG.error(e.getLocalizedMessage(), e);
+       }
      }
    }
 

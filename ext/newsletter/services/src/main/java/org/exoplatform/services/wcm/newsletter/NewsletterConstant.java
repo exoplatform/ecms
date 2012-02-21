@@ -514,7 +514,9 @@ public class NewsletterConstant {
       }
       return WCMCoreUtils.hasPermission(userId, permissions, true);
     } catch (Exception e) {
-      log.error("Exception when call NewsletterConstant.hasPermission()", e);
+      if (log.isErrorEnabled()) {
+        log.error("Exception when call NewsletterConstant.hasPermission()", e);
+      }
     }
     return false;
   }

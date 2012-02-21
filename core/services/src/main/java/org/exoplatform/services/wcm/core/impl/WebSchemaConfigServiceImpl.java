@@ -159,7 +159,9 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
             session.save();
           }
         } catch (Exception e) {
-          log.error("Error when try to create share portal folder for repository: "+ repoName, e);
+          if (log.isErrorEnabled()) {
+            log.error("Error when try to create share portal folder for repository: "+ repoName, e);
+          }
         }
       }
     } finally {
@@ -171,7 +173,9 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    log.info("Start WebSchemaConfigServiceImpl...");
+    if (log.isInfoEnabled()) {
+      log.info("Start WebSchemaConfigServiceImpl...");
+    }
     createLiveSharePortalFolders();
   }
 

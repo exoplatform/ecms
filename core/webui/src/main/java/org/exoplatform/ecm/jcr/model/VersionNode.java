@@ -72,7 +72,9 @@ public class VersionNode {
         children_.add(new VersionNode(version1, session));
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
   

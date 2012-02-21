@@ -72,7 +72,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           title = targetNode.getProperty("exo:title").getString();
         } catch (PathNotFoundException e) {
-          log.info("No such of property exo:title for this node:");
+          if (log.isInfoEnabled()) {
+            log.info("No such of property exo:title for this node:");
+          }
         }
       }
 
@@ -80,7 +82,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           liveDate = targetNode.getProperty("publication:liveDate").getDate();
         } catch (PathNotFoundException e) {
-          log.info("No such of property publication:liveDate for this node:");
+          if (log.isInfoEnabled()) {
+            log.info("No such of property publication:liveDate for this node:");
+          }
         }
       }
 
@@ -104,7 +108,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           index = targetNode.getProperty("exo:index").getLong();
         } catch (PathNotFoundException e) {
-          log.info("No such of property exo:index for this node:");
+          if (log.isInfoEnabled()) {
+            log.info("No such of property exo:index for this node:");
+          }
         }
       }
 
@@ -223,7 +229,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
           }
           if (needSessionSave) session.save();
         } catch(Exception e) {
-          log.error("Unexpected problem occur. Update state process is not completed", e);
+          if (log.isErrorEnabled()) {
+            log.error("Unexpected problem occur. Update state process is not completed", e);
+          }
         } finally {
           if(session != null) session.logout();
         }

@@ -147,10 +147,14 @@ public class Utils {
             currentNode.getSession().save();
           } catch (ItemNotFoundException item) {
             currentNode.getSession().refresh(false);
-            LOG.error("Can not found versionable node" + item, item);
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not found versionable node" + item, item);
+            }
           } catch (Exception e) {
             currentNode.getSession().refresh(false);
-            LOG.error("Import version history failed " + e, e);
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Import version history failed " + e, e);
+            }
           }
           zipInputStream.closeEntry();
           entry = zipInputStream.getNextEntry();

@@ -196,7 +196,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       try {
         dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName);
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
     return dialogPath;
@@ -466,7 +468,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           
           return;
         } catch (Exception e) {
-          LOG.error("Unexpected error", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected error", e);
+          }
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add", null));
           return;
         }

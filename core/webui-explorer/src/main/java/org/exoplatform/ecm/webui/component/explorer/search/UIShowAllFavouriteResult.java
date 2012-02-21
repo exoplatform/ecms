@@ -246,7 +246,9 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
           
           return;
       } catch(Exception e) {
-        LOG.error("Cannot access the node at " + folderPath, e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot access the node at " + folderPath, e);
+        }
       }
       uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
       uiExplorer.updateAjax(event);
@@ -329,18 +331,24 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
           //uiStar.changeFavourite();
             event.getRequestContext().addUIComponentToUpdateByAjax(uiShow);
         } catch (LockException e) {
-          LOG.error("node is locked, can't remove change favourite property of node :" + node.getPath());
+          if (LOG.isErrorEnabled()) {
+            LOG.error("node is locked, can't remove change favourite property of node :" + node.getPath());
+          }
           JCRExceptionManager.process(uiApp, e);
           
           uiExplorer.updateAjax(event);
         } catch (AccessDeniedException e) {
-          LOG.error("Access denied! No permission for modifying property " +
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Access denied! No permission for modifying property " +
                 Utils.EXO_FAVOURITER + " of node: " + node.getPath());
+          }
           uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.accessDenied", null, ApplicationMessage.WARNING));
           
         } catch (Exception e) {
-          LOG.error("An unexpected error occurs!");
-            JCRExceptionManager.process(uiApp, e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs!");
+          }
+          JCRExceptionManager.process(uiApp, e);
             
         }
       }
@@ -362,7 +370,9 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
             return name1.compareTo(name2);
           }
         } catch (Exception e) {
-          LOG.error("Cannot compare nodes", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Cannot compare nodes", e);
+          }
         }
         return 0;
       }

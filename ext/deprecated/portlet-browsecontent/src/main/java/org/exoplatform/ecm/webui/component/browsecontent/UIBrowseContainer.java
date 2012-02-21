@@ -339,13 +339,19 @@ public class UIBrowseContainer extends UIContainer {
         }
         if (targetNode != null) return targetNode;
       }
-      LOG.error("PathNotFoundException when get node by path = " + nodePath, path);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("PathNotFoundException when get node by path = " + nodePath, path);
+      }
       return null;
     } catch(AccessDeniedException ace) {
-      LOG.error("AccessDeniedException when get node by path = " + nodePath, ace);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("AccessDeniedException when get node by path = " + nodePath, ace);
+      }
       return null;
     } catch(Exception e){
-      LOG.error("Exception when get node by path = " + nodePath, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when get node by path = " + nodePath, e);
+      }
       return null;
     }
   }
@@ -359,7 +365,9 @@ public class UIBrowseContainer extends UIContainer {
     } catch(AccessDeniedException ace) {
       return null;
     } catch(Exception e){
-      LOG.error("Exception when get node by path = " + nodePath + " in workspace " + workspace, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when get node by path = " + nodePath + " in workspace " + workspace, e);
+      }
       return null;
     }
   }
@@ -430,7 +438,9 @@ public class UIBrowseContainer extends UIContainer {
       }
     } catch(Exception e) {
       // Display the stack trace
-      LOG.error("An error occured while loading the result", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occured while loading the result", e);
+      }
     }
 
     return queryDocuments;
@@ -510,7 +520,9 @@ public class UIBrowseContainer extends UIContainer {
     try{
       queryManager = session.getWorkspace().getQueryManager();
     }catch (Exception e) {
-      LOG.error("An error occured while retrieving the query manager", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occured while retrieving the query manager", e);
+      }
       return queryDocuments;
     }
     String queryStatiement = getQueryStatement();
@@ -546,7 +558,9 @@ public class UIBrowseContainer extends UIContainer {
         addNodePublish(queryDocuments, node);
       }
     } catch(Exception e) {
-      LOG.error("Exception when execute query: " + queryString, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when execute query: " + queryString, e);
+      }
     }
     totalRecord_ = queryDocuments.size();
     return queryDocuments;
@@ -868,7 +882,9 @@ public class UIBrowseContainer extends UIContainer {
         }
       }
     } catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return new ArrayList<Node>();
     }
     if(isEnableRefDocument()) subDocumentList.addAll(getReferences(getRepositoryService(),
@@ -1236,7 +1252,9 @@ public class UIBrowseContainer extends UIContainer {
     try{
       jcrTemplateResourceResolver_ = new JCRResourceResolver(Utils.EXO_TEMPLATEFILE);
     } catch (Exception e) {
-      LOG.error("An error occured while creating a new JCR Resource resolver", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occured while creating a new JCR Resource resolver", e);
+      }
     }
   }
 
@@ -1245,7 +1263,9 @@ public class UIBrowseContainer extends UIContainer {
       getApplicationComponent(RepositoryService.class).getCurrentRepository();
       if (getCurrentNode() != null) super.processRender(context);
     } catch (Exception e) {
-      LOG.error("An error occured while displaying the content", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occured while displaying the content", e);
+      }
       getAncestorOfType(UIBrowseContentPortlet.class).setPorletMode(PortletMode.HELP);
       return;
     }
@@ -1524,7 +1544,9 @@ public class UIBrowseContainer extends UIContainer {
       CmsScript cmsScript = scriptService.getScript(scripts.getName()+ "/" + scriptName );
       cmsScript.execute(data);
     } catch (Exception e) {
-      LOG.error("An error occured while executing the script", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occured while executing the script", e);
+      }
       return new ArrayList<Node>();
     }
     List<Node> listNode = data.getContentList();
@@ -1899,7 +1921,9 @@ public class UIBrowseContainer extends UIContainer {
           event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
           return;
         } catch (Exception e) {
-          LOG.error("Unexpected error", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected error", e);
+          }
         }
       }
       TemplateService templateService = uiContainer.getApplicationComponent(TemplateService.class);

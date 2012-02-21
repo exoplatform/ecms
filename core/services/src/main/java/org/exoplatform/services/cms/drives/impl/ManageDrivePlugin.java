@@ -75,9 +75,13 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
         addDrive(data, session) ;
         session.logout();
       }catch(Exception e) {
-        LOG.error("Unexpected error", e);
-        LOG.warn(" ==> Can not init drive '"+ data.getName()
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(" ==> Can not init drive '"+ data.getName()
             +"' in repository '" + repositoryService_.getCurrentRepository().getConfiguration().getName() + "'");
+        }
       }
 
     }

@@ -234,7 +234,9 @@ public class UISearchResult extends UIContainer {
           return l1.compareTo(l2);
         }
       } catch (Exception e) {
-        LOG.error("Cannot compare rows", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot compare rows", e);
+        }
       }
       return 0;
     }
@@ -277,7 +279,9 @@ public class UISearchResult extends UIContainer {
         
         return ;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
         
@@ -321,7 +325,9 @@ public class UISearchResult extends UIContainer {
         
         return;
       } catch(Exception e) {
-        LOG.error("Cannot access the node at " + folderPath, e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Cannot access the node at " + folderPath, e);
+        }
       }
 
       uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);

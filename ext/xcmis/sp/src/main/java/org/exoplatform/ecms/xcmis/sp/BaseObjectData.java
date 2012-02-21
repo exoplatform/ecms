@@ -433,7 +433,9 @@ abstract class BaseObjectData implements ObjectData
          {
             // Should never happen. We have checked it is a folder and is not
             // root folder so has exactly one parent.
-            LOG.error("Unable get parent id. " + never.getMessage(), never);
+           if (LOG.isErrorEnabled()) {
+             LOG.error("Unable get parent id. " + never.getMessage(), never);
+           }
          }
       }
       else if (definition.getId().equals(CmisConstants.CONTENT_STREAM_ID))

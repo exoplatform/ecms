@@ -206,7 +206,9 @@ public class UINodeTypeImport extends UIForm {
             extManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS) ;
             counter += 1 ;
           } catch(RepositoryException re) {
-            LOG.error("Cannot register nodetype " + nodeTypeValue + " cause by: " + re.getMessage());
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Cannot register nodetype " + nodeTypeValue + " cause by: " + re.getMessage());
+            }
           }
         }
       }

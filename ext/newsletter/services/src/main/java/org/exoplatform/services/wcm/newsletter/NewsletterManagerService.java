@@ -94,7 +94,9 @@ public class NewsletterManagerService {
                                   DMSConfiguration dmsConfiguration,
                                   RepositoryService repositoryService,
                                   MailService mailService) {
-    log.info("Starting NewsletterManagerService ... ");
+    if (log.isInfoEnabled()) {
+      log.info("Starting NewsletterManagerService ... ");
+    }
     workspaceName = initParams.getValueParam("workspace").getValue();
     categoryHandler = new NewsletterCategoryHandler(workspaceName);
     subscriptionHandler = new NewsletterSubscriptionHandler(workspaceName);
@@ -161,9 +163,13 @@ public class NewsletterManagerService {
                                    .getString());
       }
     } catch (RepositoryException repositoryException) {
-      log.info("User node is not created!");
+      if (log.isInfoEnabled()) {
+        log.info("User node is not created!");
+      }
     } catch (Exception ex) {
-      log.error("Error when get all users who can't get newsletter: ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error when get all users who can't get newsletter: ", ex);
+      }
     } finally {
       if (session != null)
         session.logout();
@@ -240,7 +246,9 @@ public class NewsletterManagerService {
         try {
           mailService_.sendMessage(message);
         } catch (Exception e) {
-          log.error("Error when send newsletter: ", e);
+          if (log.isErrorEnabled()) {
+            log.error("Error when send newsletter: ", e);
+          }
         }
       }
       newsletterEntry.setProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS, NewsletterConstant.STATUS_SENT);
@@ -275,7 +283,9 @@ public class NewsletterManagerService {
         email = value.getString();
         if(!listBannedUser.contains(email)) listString.add(email);
       } catch(Exception e) {
-        log.error("Error when convert values to array: ", e);
+        if (log.isErrorEnabled()) {
+          log.error("Error when convert values to array: ", e);
+        }
       }
     }
     return listString;

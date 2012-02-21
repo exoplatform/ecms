@@ -125,7 +125,9 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
-        LOG.error("Error when create category node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when create category node", e);
+        }
         return;
       }
     }

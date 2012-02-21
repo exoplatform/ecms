@@ -595,9 +595,13 @@ public class UICLVPresentation extends UIContainer {
         header = folderNode.getName();
       }
     } catch (RepositoryException repositoryException) {
-      LOG.warn(repositoryException.getMessage(), repositoryException);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(repositoryException.getMessage(), repositoryException);
+      }
     } catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
     return header;
   }
@@ -653,7 +657,9 @@ public class UICLVPresentation extends UIContainer {
       // We don't do anything here because so many documents doesn't have
       // illustration image
     } catch (Exception e) {
-      LOG.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
+      }
     }
     return uri;
   }

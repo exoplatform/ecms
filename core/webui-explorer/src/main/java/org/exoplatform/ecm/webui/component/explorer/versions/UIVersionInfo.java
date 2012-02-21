@@ -218,11 +218,15 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         uiExplorer.getSession().save() ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo.getAncestorOfType(UIPopupContainer.class)) ;
       } catch (ReferentialIntegrityException rie) {
-        LOG.error("Unexpected error", rie);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", rie);
+        }
         app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
         return;
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
         return;
       }

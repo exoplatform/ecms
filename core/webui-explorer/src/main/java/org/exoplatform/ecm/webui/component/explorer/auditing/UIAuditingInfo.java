@@ -76,7 +76,9 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
         }
       }
     } catch(Exception e){
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return listRec;
   }

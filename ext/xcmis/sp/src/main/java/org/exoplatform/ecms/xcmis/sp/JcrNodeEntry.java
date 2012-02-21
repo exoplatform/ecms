@@ -151,13 +151,15 @@ class JcrNodeEntry
             }
           }
         } catch (NotSupportedNodeTypeException iae) {
-          if (LOG.isDebugEnabled()) {
+          if (LOG.isWarnEnabled()) {
             // Show only in debug mode. It may cause a lot of warn when
             // unsupported by xCMIS nodes met.
             LOG.warn("Unable get next object . " + iae.getMessage());
           }
         } catch (javax.jcr.RepositoryException re) {
-          LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+          if (LOG.isWarnEnabled()) {
+            LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
+          }
         }
       }
     }
@@ -691,7 +693,7 @@ class JcrNodeEntry
             }
             catch (PathNotFoundException pnfe)
             {
-               if (LOG.isDebugEnabled())
+               if (LOG.isWarnEnabled())
                   LOG.warn(pnfe.getMessage(), pnfe);
                return null;
             }
@@ -886,7 +888,9 @@ class JcrNodeEntry
                }
                catch (URISyntaxException ue)
                {
-                  LOG.error(ue.getMessage(), ue);
+                 if (LOG.isErrorEnabled()) {
+                   LOG.error(ue.getMessage(), ue);
+                 }
                }
             }
             return new UriProperty(def.getId(), def.getQueryName(), def.getLocalName(), def.getDisplayName(), v);

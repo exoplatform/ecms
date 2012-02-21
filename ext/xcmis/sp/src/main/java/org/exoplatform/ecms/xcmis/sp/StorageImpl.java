@@ -555,7 +555,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
          catch (StorageException e)
          {
-            if (LOG.isDebugEnabled())
+            if (LOG.isWarnEnabled())
             {
                LOG.warn("Unable delete object " + o.getObjectId());
             }
@@ -650,8 +650,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             if (!wc.hasNodes())
             {
                // Must not happen.
-               LOG.error("PWC node not fould.");
-               continue;
+              if (LOG.isErrorEnabled()) {
+                LOG.error("PWC node not fould.");
+              }
+              continue;
             }
             Node node = wc.getNodes().nextNode();
             PWC pwc = new PWC(fromNode(node));
@@ -969,7 +971,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                // Has not required mixin 'cmis:document'. Some operation for
                // this type of document will be different from default.
-               if (LOG.isDebugEnabled())
+               if (LOG.isWarnEnabled())
                {
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
@@ -984,7 +986,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                // Has not required mixin 'cmis:folder'. Some operation for this
                // type of document will be different from default.
-               if (LOG.isDebugEnabled())
+               if (LOG.isWarnEnabled())
                {
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operation may be disabled.");

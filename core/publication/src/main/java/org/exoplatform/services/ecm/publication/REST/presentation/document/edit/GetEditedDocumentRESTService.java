@@ -167,7 +167,9 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
         session.logout();
       }
     } catch (RepositoryException e) {
-      LOG.error("Exception when execute SQL " + queryStatement, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when execute SQL " + queryStatement, e);
+      }
     }
     return lstNode;
   }

@@ -104,7 +104,9 @@ public class RssServlet extends HttpServlet {
         }
       } else throw new Exception("Invalid node type, expected nt:file or exo:rss-enable type");
     }catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       throw new ServletException(e) ;
     }finally{
       if(session != null) {

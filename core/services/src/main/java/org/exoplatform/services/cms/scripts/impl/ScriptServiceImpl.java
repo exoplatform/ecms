@@ -93,7 +93,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     try {
       initPlugins();
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 
@@ -494,7 +496,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
           continue ;
         }
       } catch (Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }

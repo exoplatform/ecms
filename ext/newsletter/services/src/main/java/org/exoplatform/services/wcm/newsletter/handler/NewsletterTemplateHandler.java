@@ -89,7 +89,9 @@ public class NewsletterTemplateHandler {
                                  SessionProvider sessionProvider,
                                  String portalName,
                                  NewsletterCategoryConfig categoryConfig) {
-    log.info("Trying to get templates of category " + categoryConfig);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to get templates of category " + categoryConfig);
+    }
     try {
       List<Node> templates = new ArrayList<Node>();
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -112,7 +114,9 @@ public class NewsletterTemplateHandler {
       this.templates = NodeLocation.getLocationsByNodeList(templates);
       return templates;
     } catch (Exception e) {
-      log.error("Get templates of category " + categoryConfig + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Get templates of category " + categoryConfig + " failed because of ", e);
+      }
     }
     return null;
   }
@@ -131,7 +135,9 @@ public class NewsletterTemplateHandler {
                           String portalName,
                           NewsletterCategoryConfig categoryConfig,
                           String templateName) {
-    log.info("Trying to get template " + templateName);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to get template " + templateName);
+    }
     try {
       if (templates == null || templates.size() == 0) 
         templates = NodeLocation.getLocationsByNodeList(getTemplates(sessionProvider, portalName, categoryConfig));
@@ -143,7 +149,9 @@ public class NewsletterTemplateHandler {
         }
       }
     } catch (Exception e) {
-      log.error("Get dialog " + templateName + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Get dialog " + templateName + " failed because of ", e);
+      }
     }
     return null;
   }
@@ -163,7 +171,9 @@ public class NewsletterTemplateHandler {
                                 String webcontentPath,
                                 String portalName,
                                 String categoryName) throws Exception {
-    log.info("Trying to convert node " + webcontentPath + " to template at category " + categoryName);
+    if (log.isInfoEnabled()) {
+      log.info("Trying to convert node " + webcontentPath + " to template at category " + categoryName);
+    }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -177,7 +187,9 @@ public class NewsletterTemplateHandler {
         throw new Exception("Same name");
       }
     } catch (Exception e) {
-      log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
+      }
       throw e;
     }
   }

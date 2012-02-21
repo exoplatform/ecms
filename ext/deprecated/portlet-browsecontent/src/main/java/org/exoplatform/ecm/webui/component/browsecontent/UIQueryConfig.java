@@ -371,7 +371,9 @@ public class UIQueryConfig extends UIForm {
           
           return;
         }catch(Exception e){
-          LOG.error("Unexpected error", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected error", e);
+          }
         }
       }
       try{

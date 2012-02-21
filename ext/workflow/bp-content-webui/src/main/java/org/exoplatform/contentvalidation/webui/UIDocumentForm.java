@@ -134,7 +134,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     try {
       return templateService.getTemplatePathByUser(true, documentType_, userName) ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return null ;
     }
   }
@@ -145,7 +147,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String wsName = dmsConfiguration.getConfig().getSystemWorkspace();
       return new JCRResourceResolver(wsName);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return super.getTemplateResourceResolver(context, template);
   }
@@ -170,7 +174,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     } catch (AccessDeniedException accessDeniedException) {
       return null;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
@@ -293,7 +299,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                 }
               }
             } catch (Exception e) {
-              LOG.error("Unexpected error occurs", e);
+              if (LOG.isErrorEnabled()) {
+                LOG.error("Unexpected error occurs", e);
+              }
               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
                                                       null,
                                                       ApplicationMessage.WARNING));
@@ -365,23 +373,31 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         uiTaskManager.setRenderedChild(UITask.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
       } catch (AccessControlException ace) {
-        LOG.error("Unexpected error", ace);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ace);
+        }
         throw new AccessDeniedException(ace.getMessage());
       } catch(VersionException ve) {
-        LOG.error("Unexpected error", ve);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ve);
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
                                                 ApplicationMessage.WARNING)) ;
 
         return;
       } catch (ConstraintViolationException constraintViolationException) {
-        LOG.error("Unexpected error occurrs", constraintViolationException);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error occurrs", constraintViolationException);
+        }
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
 
         return;
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         String key = "UIDocumentForm.msg.cannot-save" ;
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
 

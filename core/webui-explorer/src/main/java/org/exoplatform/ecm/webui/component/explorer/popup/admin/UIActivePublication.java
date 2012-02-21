@@ -157,7 +157,9 @@ import org.exoplatform.webui.form.UIForm;
           ApplicationMessage.ERROR));      
       return;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.unknow-error",
           new String[] { e.getMessage() }, ApplicationMessage.ERROR));      
       return;

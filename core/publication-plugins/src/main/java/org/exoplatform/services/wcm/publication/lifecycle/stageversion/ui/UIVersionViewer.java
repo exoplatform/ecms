@@ -177,7 +177,9 @@ public class UIVersionViewer extends UIBaseNodePresentation {
         String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
         event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
-         log.error("Repository cannot be found", e);
+        if (log.isErrorEnabled()) {
+          log.error("Repository cannot be found", e);
+        }
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);

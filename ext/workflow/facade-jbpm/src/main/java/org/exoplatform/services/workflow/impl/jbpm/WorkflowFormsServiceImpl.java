@@ -95,7 +95,9 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
         }
         allForms.put(new Long(definitionId), stateNameToForms);
       } catch (DocumentException e) {
-        LOG.warn(e.getMessage(), e);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage(), e);
+        }
       }
     }
   }

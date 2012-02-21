@@ -105,7 +105,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
     try{
       newsletterPublicUserHandler.subscribe(sessionProvider, "classic", userEmail, listSubs, "http://test.com", new String[]{"test", "adjasd", "asdasd"});
     }catch(Exception ex){
-      log.warn("Can't send mail ");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail ");
+      }
     }
     List<NewsletterSubscriptionConfig> listSubscriptions = newsletterSubscriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, "classic", userEmail);
     assertEquals(5, listSubscriptions.size());
@@ -114,7 +116,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
     try{
       newsletterPublicUserHandler.subscribe(sessionProvider, "classicWrong", userEmail, listSubs, "http://test.com", new String[]{"test", "adjasd", "asdasd"});
     }catch(Exception ex){
-      log.warn("Portal's name is wrong");
+      if (log.isWarnEnabled()) {
+        log.warn("Portal's name is wrong");
+      }
     }
     listSubscriptions = newsletterSubscriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, "classic", userEmail);
     assertEquals(5, listSubscriptions.size());
@@ -129,7 +133,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
                                             listSubs, "http://test2.com",
                                             new String[]{"test", "adjasd", "asdasd"});
     }catch(Exception ex){
-      log.warn("Can't send mail ");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail ");
+      }
     }
     List<NewsletterSubscriptionConfig> listSubscriptions = newsletterSubscriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, "classic", userEmail);
     assertEquals(5, listSubscriptions.size());
@@ -145,7 +151,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
       newsletterPublicUserHandler.subscribe(sessionProvider, classicPortal, userEmail, listSubs, "http://test.com",
                           new String[]{"as","dsd", "asdasd"});
     }catch(Exception ex){
-      log.warn("Can't send mail");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail");
+      }
     }
     List<NewsletterSubscriptionConfig> listSubscriptions = newsletterSubscriptionHandler.
                                   getSubscriptionIdsByPublicUser(sessionProvider, classicPortal, userEmail);
@@ -169,7 +177,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
     try{
       newsletterPublicUserHandler.subscribe(sessionProvider, "classic", userEmail, listSubs, "http://test.com", new String[]{"test", "sdasd", "asdasd"});
     }catch(Exception ex){
-      log.warn("Can't send mail");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail");
+      }
     }
     newsletterPublicUserHandler.clearEmailInSubscription(sessionProvider, userEmail);
     List<NewsletterSubscriptionConfig> listSubscriptions =  newsletterSubscriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, "classic", userEmail);
@@ -185,7 +195,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
     try{
       newsletterPublicUserHandler.subscribe(sessionProvider, "classic", userEmail, listSubs, "http://test.com", new String[]{"test", "asdas", "ssss"});
     }catch(Exception ex){
-      log.warn("Can't send mail");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail");
+      }
     }
     String userPath = NewsletterConstant.generateUserPath("classic");
     Node userFolderNode = (Node)session.getItem(userPath);
@@ -206,7 +218,9 @@ public class TestNewsletterPublicUserHandler extends BaseWCMTestCase {
       newsletterPublicUserHandler.subscribe(sessionProvider, "classic", userEmail, listSubs, "http://test.com", new String[]{"test","fgfg", "wesad"});
       newsletterPublicUserHandler.subscribe(sessionProvider, "classic", userEmail2, listSubs, "http://test.com", new String[]{"test","fgfg", "wesad"});
     }catch(Exception ex){
-      log.warn("Can't send mail ");
+      if (log.isWarnEnabled()) {
+        log.warn("Can't send mail ");
+      }
     }
     newsletterPublicUserHandler.forgetEmail(sessionProvider, "classic", userEmail);
     List<NewsletterSubscriptionConfig> listSubcriptions = newsletterSubscriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, "classic", userEmail);

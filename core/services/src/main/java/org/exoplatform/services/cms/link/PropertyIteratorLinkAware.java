@@ -51,7 +51,9 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
     try {
       return new PropertyLinkAware(originalWorkspace, LinkUtils.createPath(virtualPath, property.getName()), property);
     } catch (RepositoryException e) {
-      LOG.error("Cannot create an instance of PropertyLinkAware", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot create an instance of PropertyLinkAware", e);
+      }
     }
     return property;
   }

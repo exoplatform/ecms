@@ -189,7 +189,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       }
       initiateActionConfiguration();
     } catch (Exception e) {
-      LOG.error("Cannot start ActionServiceContainerImpl", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot start ActionServiceContainerImpl", e);
+      }
     }
   }
 
@@ -222,7 +224,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       }
       reInitiateActionConfiguration();
     } catch (Exception e) {
-      LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
+      }
     }
   }  
 
@@ -489,7 +493,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     try {
       actionService.addAction(actionType, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
     } catch (Exception e) {
-      if (LOG.isDebugEnabled()) LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
       Session session = getSystemSession(storeActionNode.getSession().getWorkspace().getName());
       Node actionNode = (Node) session.getItem(newActionPath);
       actionNode.remove();
@@ -643,8 +649,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         try {
           queryManager = session.getWorkspace().getQueryManager();
         } catch (RepositoryException e) {
-          LOG.warn("ActionServiceContainer - Query Manager Factory of workspace "
+          if (LOG.isWarnEnabled()) {
+            LOG.warn("ActionServiceContainer - Query Manager Factory of workspace "
               + workspace + " not found. Check configuration.", e);
+          }
         }
         if (queryManager == null) {
           session.logout();
@@ -670,8 +678,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       try {
         queryManager = session.getWorkspace().getQueryManager();
       } catch (RepositoryException e) {
-        LOG.warn("ActionServiceContainer - Query Manager Factory of workspace "
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("ActionServiceContainer - Query Manager Factory of workspace "
             + workspace + " not found. Check configuration.", e);
+        }
       }
       if (queryManager == null)  {
         session.logout();
@@ -715,8 +725,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         }
       }
     } catch (Exception e) {
-      LOG.error(">>>> Can not launch action listeners for workspace: "
+      if (LOG.isErrorEnabled()) {
+        LOG.error(">>>> Can not launch action listeners for workspace: "
           + workspace + " in current repository", e);
+      }
     }
   }
 
@@ -756,11 +768,15 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
             }
           }
         } catch (Exception e) {
-          LOG.error("Can not launch action listeners named is " + actionNode.getPath(), e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not launch action listeners named is " + actionNode.getPath(), e);
+          }
         }
       }
     } catch (Exception ex) {
-      LOG.error("Can not launch action listeners inside " + node.getPath() + " node.", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Can not launch action listeners inside " + node.getPath() + " node.", ex);
+      }
     }
   }
 

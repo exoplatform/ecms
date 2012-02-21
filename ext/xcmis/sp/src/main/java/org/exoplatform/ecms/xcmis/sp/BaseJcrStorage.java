@@ -1292,11 +1292,15 @@ abstract class BaseJcrStorage implements TypeManager
       }
       catch (NoSuchNodeTypeException e)
       {
-         LOG.error(e.getMessage(), e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e.getMessage(), e);
+        }
       }
       catch (RepositoryException e)
       {
-         LOG.error(e.getMessage(), e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e.getMessage(), e);
+        }
       }
       return false;
    }

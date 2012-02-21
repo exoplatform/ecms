@@ -139,25 +139,32 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
       favoriteService.addFavorite(node, session.getUserID());
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
-      LOG.error("node is locked, can't add favourite to node:" + node.getPath());
+      if (LOG.isErrorEnabled()) {
+        LOG.error("node is locked, can't add favourite to node:" + node.getPath());
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);
     } catch (VersionException e) {
-      LOG.error("node is checked in, can't add favourite to node:" + node.getPath());
+      if (LOG.isErrorEnabled()) {
+        LOG.error("node is checked in, can't add favourite to node:" + node.getPath());
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
-      LOG.error("access denied, can't add favourite to node:" + node.getPath());
+      if (LOG.isErrorEnabled()) {
+        LOG.error("access denied, can't add favourite to node:" + node.getPath());
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
-        JCRExceptionManager.process(uiApp, e);
-        
-        uiExplorer.updateAjax(event);
+      }
+      JCRExceptionManager.process(uiApp, e);        
+      uiExplorer.updateAjax(event);
     }
   }
 

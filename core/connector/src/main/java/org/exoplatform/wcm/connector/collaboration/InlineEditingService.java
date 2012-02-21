@@ -184,12 +184,16 @@ public class InlineEditingService implements ResourceContainer{
       ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
       resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale);
     } catch(Exception ex) {
-      log.error("Error when perform create ResourceBundle: ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform create ResourceBundle: ", ex);
+      }
     }
     try {
       document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     } catch(Exception ex) {
-      log.error("Error when perform create Document object: ", ex);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform create Document object: ", ex);
+      }
     }
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -254,21 +258,27 @@ public class InlineEditingService implements ResourceContainer{
           return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
         }
       } catch (AccessDeniedException ace) {
-        log.error("AccessDeniedException: ", ace);
+        if (log.isErrorEnabled()) {
+          log.error("AccessDeniedException: ", ace);
+        }
         messageKey = "AccessDeniedException.msg";
         message = resourceBundle.getString(messageKey);
         localeMsg.setAttribute("message", message);
         document.appendChild(localeMsg);
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       } catch (FileNotFoundException fie) {
-        log.error("FileNotFoundException: ", fie);
+        if (log.isErrorEnabled()) {
+          log.error("FileNotFoundException: ", fie);
+        }
         messageKey = "ItemNotFoundException.msg";
         message = resourceBundle.getString(messageKey);
         localeMsg.setAttribute("message", message);
         document.appendChild(localeMsg);
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       }  catch (LockException lockex) {
-        log.error("LockException", lockex);
+        if (log.isErrorEnabled()) {
+          log.error("LockException", lockex);
+        }
         messageKey = "LockException.msg";
         message = resourceBundle.getString(messageKey);
         localeMsg.setAttribute("message", message);
@@ -276,7 +286,9 @@ public class InlineEditingService implements ResourceContainer{
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       }
     } catch (Exception e) {
-      log.error("Error when perform edit title: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform edit title: ", e);
+      }
       messageKey = "UIPresentation.label.Exception";
       message = resourceBundle.getString(messageKey);
       localeMsg.setAttribute("message", message);

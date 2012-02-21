@@ -85,6 +85,8 @@ public class CanPublishFilter implements UIExtensionFilter {
    * This is called when the filter has failed
    */
   public void onDeny(Map<String, Object> context) throws Exception {
-    LOG.warn("You can add a category in a exo:taxonomy node only.");
+    if (LOG.isWarnEnabled()) {
+      LOG.warn("You can add a category in a exo:taxonomy node only.");
+    }
   }
 }

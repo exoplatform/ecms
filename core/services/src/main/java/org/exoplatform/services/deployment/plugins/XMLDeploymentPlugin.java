@@ -121,7 +121,9 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
             Node node = iter.nextNode();
             if (node.hasProperty("publication:liveRevision")
                 && node.hasProperty("publication:currentState")) {
-              log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+              if (log.isInfoEnabled()) {
+                log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+              }
               node.setProperty("publication:liveRevision", "");
               node.setProperty("publication:currentState", "published");
             }
@@ -148,10 +150,12 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
         }
       }
     } catch (Exception ex) {
-      log.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
+      if (log.isErrorEnabled()) {
+        log.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
                     + deploymentDescriptor.getTarget().getNodePath() + " is FAILURE at "
                     + new Date().toString() + "\n",
                 ex);
+      }
       throw ex;
     }
   }

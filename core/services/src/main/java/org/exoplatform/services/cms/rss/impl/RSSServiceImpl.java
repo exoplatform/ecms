@@ -206,7 +206,9 @@ public class RSSServiceImpl implements RSSService{
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
       storeXML(feedXML, storePath, feedName);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       if(session != null) session.logout();
     }
@@ -393,7 +395,9 @@ public class RSSServiceImpl implements RSSService{
       String feedXML = output.outputString(feed);
       storeXML(feedXML, storePath, feedName);
     }catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       if(session != null) session.logout();
     }
@@ -455,7 +459,9 @@ public class RSSServiceImpl implements RSSService{
         rss.checkin() ;
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       if(session != null) session.logout();
     }

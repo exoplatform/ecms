@@ -43,7 +43,9 @@ public class TrashMovementActionHandler implements ActionHandler {
       executed = true;
       moveTrash(context);
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     } finally {
       context.getToken().signal("move-done");
     }

@@ -378,7 +378,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     try {
       taxonomyService.addTaxonomyTree(taxonomyStorageNodeSystem);
     } catch (TaxonomyAlreadyExistsException e) {
-      if (log.isInfoEnabled()) log.error("Cannot add taxonomy tree", e);
+      if (log.isErrorEnabled()) log.error("Cannot add taxonomy tree", e);
     }
     session.save();
     session.logout();

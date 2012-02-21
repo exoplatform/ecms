@@ -203,18 +203,26 @@ public class ManageDocumentService implements ResourceContainer {
       Node node = getNode(driveName, workspaceName, currentFolder);
       return buildXMLResponseForChildren(node, driveName, currentFolder, Boolean.valueOf(showHidden));
     } catch (AccessDeniedException e) {
-      log.debug("Access is denied when perform get Folders and files: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Access is denied when perform get Folders and files: ", e);
+      }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     }
     catch (PathNotFoundException e) {
-      log.debug("Item is not found: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Item is not found: ", e);
+      }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      log.error("Repository is error: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Repository is error: ", e);
+      }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
       
     } catch (Exception e) {
-      log.error("Error when perform get Folders and files: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform get Folders and files: ", e);
+      }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
@@ -243,18 +251,26 @@ public class ManageDocumentService implements ResourceContainer {
       parent.save();
       return Response.ok().cacheControl(cc).build();
     } catch (AccessDeniedException e) {
-      log.debug("Access is denied when perform delete folder or file: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Access is denied when perform delete folder or file: ", e);
+      }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     }
     catch (PathNotFoundException e) {
-      log.debug("Item is not found: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Item is not found: ", e);
+      }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      log.error("Repository is error: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Repository is error: ", e);
+      }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
       
     } catch (Exception e) {
-      log.error("Error when perform delete Folder or file: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform delete Folder or file: ", e);
+      }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
@@ -290,20 +306,28 @@ public class ManageDocumentService implements ResourceContainer {
       document.appendChild(folderNode);
       return getResponse(document);
     } catch (AccessDeniedException e) {
-      log.debug("Access is denied when perform create folder: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Access is denied when perform create folder: ", e);
+      }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     } catch (PathNotFoundException e) {
-      log.debug("Item is not found: ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Item is not found: ", e);
+      }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      log.error("Repository is error: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Repository is error: ", e);
+      }
       return Response.status(Status.SERVICE_UNAVAILABLE)
                      .entity(e.getMessage())
                      .cacheControl(cc)
                      .build();
 
     } catch (Exception e) {
-      log.error("Error when perform create folder: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform create folder: ", e);
+      }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
@@ -373,7 +397,9 @@ public class ManageDocumentService implements ResourceContainer {
                                            uploadId);
       }
     } catch (Exception e) {
-      log.error("Error when perform processUpload: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when perform processUpload: ", e);
+      }
     }
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);

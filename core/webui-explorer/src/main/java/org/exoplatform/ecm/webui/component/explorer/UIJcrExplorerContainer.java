@@ -186,7 +186,9 @@ public class UIJcrExplorerContainer extends UIContainer {
        uiSideBar.updateSideBarView();
       }
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
   }
 

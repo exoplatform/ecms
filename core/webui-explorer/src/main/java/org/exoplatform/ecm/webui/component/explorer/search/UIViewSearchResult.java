@@ -101,7 +101,9 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName() ;
       return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch(Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return null;
   }
@@ -235,7 +237,9 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
       context.put(Node.class.getName(), node_);
       uicomponent = manager.addUIExtension(ManageViewService.EXTENSION_TYPE, COMMENT_COMPONENT, context, this);
     } catch (Exception e) {
-      LOG.error("An error occurs while checking the action", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An error occurs while checking the action", e);
+      }
     }
     return (uicomponent != null ? uicomponent : this);
   }
@@ -245,7 +249,9 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
       String value = node.getProperty(property).getString() ;
       if(value.length() > 0) return true ;
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return false ;
   }
@@ -294,7 +300,9 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
       Class clazz = loader.loadClass(className);
       service = getApplicationComponent(clazz);
     } catch (ClassNotFoundException ex) {
-      LOG.error(ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(ex);
+      }
     }
     return service;
   }

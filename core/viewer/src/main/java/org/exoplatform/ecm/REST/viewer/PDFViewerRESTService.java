@@ -142,7 +142,9 @@ public class PDFViewerRESTService implements ResourceContainer {
           .toString()));
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
     } catch (Exception e) {
-      LOG.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
+      }
     }
     return Response.ok().build();
   }
@@ -174,13 +176,21 @@ public class PDFViewerRESTService implements ResourceContainer {
     try {
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
-      LOG.error("Error parsing PDF document " + ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error parsing PDF document " + ex);
+      }
     } catch (PDFSecurityException ex) {
-      LOG.error("Error encryption not supported " + ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error encryption not supported " + ex);
+      }
     } catch (FileNotFoundException ex) {
-      LOG.error("Error file not found " + ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error file not found " + ex);
+      }
     } catch (IOException ex) {
-      LOG.error("Error handling PDF document " + ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error handling PDF document " + ex);
+      }
     }
     return document;
   }
@@ -227,7 +237,9 @@ public class PDFViewerRESTService implements ResourceContainer {
        */
        ImageIO.write(rendImage, "png", file);
      } catch (IOException e) {
-       LOG.error(e);
+       if (LOG.isErrorEnabled()) {
+         LOG.error(e);
+       }
      } finally {
        image.flush();
        // clean up resources
@@ -285,10 +297,14 @@ public class PDFViewerRESTService implements ResourceContainer {
           jodConverter_.convert(input, extension, out, "pdf");
         } catch(ConnectException connection) {
           content.delete();
-          LOG.error("Cannot open connection to OpenOffice Service");
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Cannot open connection to OpenOffice Service");
+          }
         } catch(OpenOfficeException connection) {
           content.delete();
-          LOG.error("Exception when using OpenOffice Service");
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Exception when using OpenOffice Service");
+          }
         } finally {
           out.flush();
           out.close();

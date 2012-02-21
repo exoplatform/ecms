@@ -64,7 +64,9 @@ class PortletRenderer implements Loader<WindowKey, MarkupFragment, PortletRender
       }
       catch (NumberFormatException e)
       {
-        log.warn("Incorrect expiration cache value " + expirationCache);
+        if (log.isWarnEnabled()) {
+          log.warn("Incorrect expiration cache value " + expirationCache);
+        }
       }
     }
 

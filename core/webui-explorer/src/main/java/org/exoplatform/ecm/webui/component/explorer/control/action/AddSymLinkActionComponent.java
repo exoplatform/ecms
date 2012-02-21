@@ -212,7 +212,9 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
         
         return;
       } catch (Exception e) {
-        LOG.error("an unexpected error occurs while adding a symlink to the node", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("an unexpected error occurs while adding a symlink to the node", e);
+        }
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null,
             ApplicationMessage.WARNING));
         

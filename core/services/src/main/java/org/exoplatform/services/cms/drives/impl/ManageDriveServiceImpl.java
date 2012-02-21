@@ -420,7 +420,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         driveByPermission.add(getDriveByName("Private")) ;
       }
     } catch(Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     return driveByPermission ;
   }
@@ -475,7 +477,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         String repositoryName = System.getProperty("gatein.tenant.repository.name");
         return repositoryName;
       }
-      LOG.error("Repository exception occurs:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository exception occurs:", e);
+      }
       return null;
     }
   }

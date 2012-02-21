@@ -112,7 +112,9 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
         }
       }
     } catch (RepositoryException e) {
-      LOG.error("Unexpected error when ");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error when ");
+      }
     }
     return "";
   }
@@ -176,7 +178,9 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
                                                         null,
                                                         ApplicationMessage.WARNING));
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       JCRExceptionManager.process(getAncestorOfType(UIApplication.class), e);
     }
   }
@@ -213,7 +217,9 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
         throw new MessageException(new ApplicationMessage("UICategoriesAddedList.msg.access-denied",
                                    null, ApplicationMessage.WARNING)) ;
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         JCRExceptionManager.process(uiApp, e);
       }
       uiManager.setRenderedChild("UICategoriesAddedList");

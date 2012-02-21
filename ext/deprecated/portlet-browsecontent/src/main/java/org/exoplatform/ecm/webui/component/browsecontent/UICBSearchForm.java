@@ -167,7 +167,9 @@ public class UICBSearchForm extends UIForm {
     try{
       queryManager = session.getWorkspace().getQueryManager();
     }catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return resultList;
     }
     ResultData result;
@@ -209,7 +211,9 @@ public class UICBSearchForm extends UIForm {
           }
         }
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         return resultList;
       }
     }

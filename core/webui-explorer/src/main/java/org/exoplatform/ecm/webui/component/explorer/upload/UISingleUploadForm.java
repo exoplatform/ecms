@@ -311,7 +311,9 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
           
           return;
         } catch(Exception e) {
-          LOG.error("An unexpected error occurs", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs", e);
+          }
           uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
               ApplicationMessage.WARNING)) ;
           
@@ -402,7 +404,9 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
                         null, ApplicationMessage.WARNING));                    
                     return;
                   } catch (RepositoryException e) {
-                    LOG.error("Unexpected error", e);
+                    if (LOG.isErrorEnabled()) {
+                      LOG.error("Unexpected error", e);
+                    }
                     JCRExceptionManager.process(uiApp, e);
                     return;
                   }
@@ -488,7 +492,9 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
         throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied",
             null, ApplicationMessage.WARNING));
       } catch(Exception e) {
-        LOG.error("An unexpected error occurs", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("An unexpected error occurs", e);
+        }
         JCRExceptionManager.process(uiApp, e);
         return ;
       }

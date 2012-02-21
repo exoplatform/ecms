@@ -321,7 +321,9 @@ public class UISimpleSearch extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
         return;
       } catch(Exception e) {
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);

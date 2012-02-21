@@ -114,7 +114,9 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       
       return;
     } catch (Exception e) {
-      LOG.error("an unexpected error occurs while cuting the node", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs while cuting the node", e);
+      }
       JCRExceptionManager.process(uiApp, e);
       return;
     }

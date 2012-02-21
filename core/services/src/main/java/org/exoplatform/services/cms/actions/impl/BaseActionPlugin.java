@@ -245,7 +245,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     try {
       activationJobClass = Class.forName(jobClassName) ;
     }catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
       return ;
     }
     String actionName = storedActionNode.getProperty(NODE_NAME_PROP).getString() ;
@@ -354,7 +356,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     try {
       activationJob = Class.forName(jobClass) ;
     }catch (Exception e) {
-      LOG.error("Unexpected error", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
     }
     if(activationJob == null) return  ;
     JobInfo jinfo = new JobInfo(jobName,jobGroup,activationJob) ;
@@ -400,8 +404,10 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         session.logout();
       } catch (Exception e) {
         if(session != null) session.logout();
-        LOG.warn(" ==> Can not init action '" + action.getName()
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(" ==> Can not init action '" + action.getName()
             +"' and workspace '"+action.getSrcWorkspace()+"'") ;
+        }
       }
     }
   }
@@ -417,8 +423,10 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         importAction(action,session) ;
       } catch (Exception e) {
         if(session != null) session.logout();
-        LOG.warn(" ==> Can not init action '" + action.getName()
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(" ==> Can not init action '" + action.getName()
             + "' in current repository and workspace '"+action.getSrcWorkspace()+"'") ;
+        }
       }
     }
   }

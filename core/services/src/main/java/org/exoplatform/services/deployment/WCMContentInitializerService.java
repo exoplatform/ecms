@@ -94,8 +94,10 @@ public class WCMContentInitializerService implements Startable{
             logData.append("deploy " + deploymentPlugin.getName()
                 + " deployment plugin succesfully at " + date.toString() + "\n");
           } catch (Exception e) {
-            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+            if (log.isErrorEnabled()) {
+              log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
                 + date.toString() + " by " + e + "\n");
+            }
             logData.append("deploy " + deploymentPlugin.getName()
                 + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
           }
@@ -115,7 +117,9 @@ public class WCMContentInitializerService implements Startable{
         jsService.start();
       }
     } catch (Exception e) {
-      log.error("Error when start WCMContentInitializerService: ", e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when start WCMContentInitializerService: ", e);
+      }
     } finally {
       sessionProvider.close();
     }

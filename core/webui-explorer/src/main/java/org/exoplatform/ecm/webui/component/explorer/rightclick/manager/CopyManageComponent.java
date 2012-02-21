@@ -131,7 +131,9 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch(Exception e) {
-      LOG.error("an unexpected error occurs", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("an unexpected error occurs", e);
+      }
       JCRExceptionManager.process(uiApp, e);
       
       uiExplorer.updateAjax(event);

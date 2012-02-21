@@ -148,7 +148,9 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       Class object = loader.loadClass(className);
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
-      LOG.error("Unexpected error", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", ex);
+      }
     }
     return service;
   }

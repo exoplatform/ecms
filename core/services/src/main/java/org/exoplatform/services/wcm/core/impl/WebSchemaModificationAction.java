@@ -72,7 +72,9 @@ public class WebSchemaModificationAction implements Action{
         schemaConfigService.updateSchemaOnModify(sessionProvider, node);
       }      
     } catch (Exception e) {
-      log.error("Error when update schema when modify node: "+node.getPath(), e);
+      if (log.isErrorEnabled()) {
+        log.error("Error when update schema when modify node: "+node.getPath(), e);
+      }
     }
     return true;
   }

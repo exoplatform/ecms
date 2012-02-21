@@ -65,7 +65,9 @@ public class WCMJavascriptResourceResolver  implements ResourceResolver {
         }
       };
     } catch(Exception e) {
-      log.error("Unexpected error happens", e);
+      if (log.isErrorEnabled()) {
+        log.error("Unexpected error happens", e);
+      }
     }
     return null;
   }

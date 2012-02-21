@@ -147,7 +147,9 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
         node.getSession().save();
       } catch (Exception e) {
         if(jcrSession != null) jcrSession.logout();
-        LOG.error("Unexpected error", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", e);
+        }
       }
     }
   }

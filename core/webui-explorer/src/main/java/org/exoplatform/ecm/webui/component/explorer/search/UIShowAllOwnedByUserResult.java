@@ -256,7 +256,9 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
             return name1.compareTo(name2);
           }
         } catch (Exception e) {
-          LOG.error("Cannot compare nodes", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Cannot compare nodes", e);
+          }
         }
         return 0;
       }
