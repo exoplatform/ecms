@@ -255,7 +255,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
-      content = File.createTempFile(name, ".pdf");
+      content = File.createTempFile(name + "_tmp", ".pdf");      
       /*
       file.deleteOnExit();
         PM Comment : I removed this line because each deleteOnExit creates a reference in the JVM for future removal
