@@ -2,6 +2,7 @@ h1. Introduction {anchor:id=Adm_CMIS.Introduction}
 {include:document="xCMIS/Introduction.wiki" /}
 
 h1. Configuration {anchor:id=Adm_CMIS.Configuration}
+{include:document="xCMIS/Configuration_introduction.wiki" /}
 {include:document="xCMIS/Configure.wiki" /}
 {include:document="xCMIS/Authentication.wiki" /}
 {include:document="xCMIS/Index.wiki" /}

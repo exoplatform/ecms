@@ -1,0 +1,4 @@
+This chapter presents you all the information related to configuration of CMIS via the following topics:
+* [CMIS Configuration|#Adm_CMIS.Configuration.CMIS_configuration]
+* [Authenticator and organization service configuration|#Adm_CMIS.Configuration.Authentication_organization_service_configuration]
+* [CMIS search and index|#Adm_CMIS.Configuration.CMIS_search_index]
