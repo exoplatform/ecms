@@ -56,6 +56,9 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -141,7 +144,14 @@ public class UITreeExplorer extends UIContainer {
     try {
       return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
     } catch (MissingResourceException ex) {
-      return id.replace(".", " / ");
+      try {
+        OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
+        Group group = orgService.getGroupHandler().findGroupById(id.replace(".", "/"));
+        if(group != null && group.getLabel().length() > 0) return group.getLabel();  
+        return id.replace(".", " / ");
+      } catch(Exception e) {
+        return id.replace(".", " / ");
+      }
     }
   }
 

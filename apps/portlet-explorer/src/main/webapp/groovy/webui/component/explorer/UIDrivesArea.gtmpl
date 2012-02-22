@@ -60,9 +60,9 @@
 			        	<img alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
 			        </div>
 	        <%  } else {  %>
-				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName(), true)%>"><span></span></div>
-	  			      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName(), true)%>">
-	  			        <%=uicomponent.getGroupLabel(groupDrive.getName(), false)%>
+				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName())%>"><span></span></div>
+	  			      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName())%>">
+	  			        <%=uicomponent.getGroupLabel(groupDrive.getName())%>
   			        </a>
 		      <%
 		          }

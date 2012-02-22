@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -48,8 +47,9 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -71,14 +71,12 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig (
     template =  "app:/groovy/webui/component/explorer/UIDrivesArea.gtmpl",
     events = {
-        @EventConfig(listeners = UIDrivesArea.SelectRepoActionListener.class),
         @EventConfig(listeners = UIDrivesArea.SelectDriveActionListener.class)
     }
 )
 public class UIDrivesArea extends UIContainer {
 
   final public static String FIELD_SELECTREPO = "selectRepo" ;
-  private String repoName_;
   private boolean firstVisit = true;
   private List<String> userRoles_ = null;
 
@@ -103,6 +101,17 @@ public class UIDrivesArea extends UIContainer {
     }
   }
 
+  public String getGroupLabel(String groupId) throws Exception{
+    try {
+      OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
+      Group group = orgService.getGroupHandler().findGroupById(groupId.replace(".", "/"));
+      if(group != null && group.getLabel().length() > 0) return group.getLabel();  
+      return groupId.replace(".", " / ");
+    } catch(Exception e) {
+      return groupId.replace(".", " / "); 
+    }
+  }
+  
   public String getGroupLabel(String groupId, boolean isFull) {
     String ret = groupId.replace(".", " / ");
     if (!isFull) {
@@ -128,18 +137,6 @@ public class UIDrivesArea extends UIContainer {
     return ret;
   }
 
-  public List<String> getRepositoryList() {
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    List<String> repositories = new ArrayList<String>();
-    RepositoryEntry re = null;
-    try {
-      re = repositoryService.getCurrentRepository().getConfiguration();
-    } catch (RepositoryException e) {
-    }
-    repositories.add(re.getName());
-    return repositories;
-  }
-
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container
@@ -151,16 +148,6 @@ public class UIDrivesArea extends UIContainer {
     PortalContainerConfig portalContainerConfig = this.getApplicationComponent(PortalContainerConfig.class);
     return portalContainerConfig.getRestContextName(this.getPortalName());
   }
-
-  public String getRepository() throws Exception {
-    if(repoName_ == null || repoName_.length() == 0) {
-      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      repoName_ = repositoryService.getCurrentRepository().getConfiguration().getName();
-    }
-    return repoName_;
-  }
-
-  public void setRepository(String repoName) {repoName_ = repoName; }
 
   private List<String> getUserRoles(boolean newRoleUpdated) throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
@@ -193,21 +180,11 @@ public class UIDrivesArea extends UIContainer {
     return driveService.getPersonalDrives(userId, userRoles);
   }
 
-  static  public class SelectRepoActionListener extends EventListener<UIDrivesArea> {
-    public void execute(Event<UIDrivesArea> event) throws Exception {
-      String repoName = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIDrivesArea uiDrivesArea = event.getSource();
-      uiDrivesArea.setRepository(repoName);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiDrivesArea);
-    }
-  }
-
   static  public class SelectDriveActionListener extends EventListener<UIDrivesArea> {
     public void execute(Event<UIDrivesArea> event) throws Exception {
       UIDrivesArea uiDrivesArea = event.getSource();
       String driveName = event.getRequestContext().getRequestParameter(OBJECTID);
       RepositoryService rservice = uiDrivesArea.getApplicationComponent(RepositoryService.class);
-      String repoName = uiDrivesArea.getRepository();
       ManageDriveService dservice = uiDrivesArea.getApplicationComponent(ManageDriveService.class);
       DriveData drive = dservice.getDriveByName(driveName);
       String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -290,7 +267,7 @@ public class UIDrivesArea extends UIContainer {
         return;
       }
       uiJCRExplorer.clearNodeHistory(homePath);
-      uiJCRExplorer.setRepositoryName(repoName);
+      uiJCRExplorer.setRepositoryName(repository.getConfiguration().getName());
       uiJCRExplorer.setWorkspaceName(drive.getWorkspace());
       uiJCRExplorer.setRootPath(homePath);
       uiJCRExplorer.setSelectNode(drive.getWorkspace(), homePath);
