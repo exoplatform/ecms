@@ -235,12 +235,12 @@
     <title>
       <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>Add Folder</UIFolderForm>
+      <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
       <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export Node</UIExportNode>
-      <UINodeTypeInfo>NodeType Infomation</UINodeTypeInfo>
+      <UIExportNode>Export</UIExportNode>
+      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
       <UIActivateVersion>Activate Version</UIActivateVersion>
       <UIAuditingInfo>Auditing Information</UIAuditingInfo>
@@ -256,7 +256,7 @@
       <EditFormController>Edit Document</EditFormController>
       <UIRelationManager>Add Relation</UIRelationManager>
       <UICategoryManager>Add Category</UICategoryManager>
-      <UIImportNode>Import Node</UIImportNode>
+      <UIImportNode>Import</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
       <UICommentForm>Comment</UICommentForm>
@@ -562,8 +562,8 @@
       <getmail>Get Mail</getmail>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>Add Folder</AddFolder>
-      <AddDocument>Add Content</AddDocument>
+      <AddFolder>New Folder</AddFolder>
+      <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>

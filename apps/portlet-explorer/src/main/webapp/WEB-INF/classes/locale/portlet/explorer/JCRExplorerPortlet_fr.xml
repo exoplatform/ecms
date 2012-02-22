@@ -234,11 +234,11 @@
     <title>
       <UIRenameForm>Renommer</UIRenameForm>
       <UIActionContainer>Editer</UIActionContainer>
-      <UIFolderForm>Ajouter un répertoire</UIFolderForm>
+      <UIFolderForm>Nouveau répertoire</UIFolderForm>
       <UIUploadManager>Uploader un fichier</UIUploadManager>
       <UITicketForm>Créer un ticket</UITicketForm>
       <UIReferencesList>Liste des références</UIReferencesList>
-      <UIExportNode>Exporter un noeud</UIExportNode>
+      <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
       <UIVersionInfo>Info version</UIVersionInfo>
       <UIActivateVersion>Activer les versions</UIActivateVersion>
@@ -251,11 +251,11 @@
       <UIWatchDocumentForm>Abonnement à un document</UIWatchDocumentForm>
       <UIActionManager>Gestion des actions</UIActionManager>
       <UIDocumentForm>Edition d'un document</UIDocumentForm>
-      <UIDocumentFormController>Ajout d'un document</UIDocumentFormController>
+      <UIDocumentFormController>Nouveau document</UIDocumentFormController>
       <EditFormController>Editer le document</EditFormController>
       <UIRelationManager>Ajout d'une relation</UIRelationManager>
       <UICategoryManager>Ajout d'une catégorie</UICategoryManager>
-      <UIImportNode>Importation de noeud</UIImportNode>
+      <UIImportNode>Importer</UIImportNode>
       <UIViewMetadataManager>Visualisation des métadonnées</UIViewMetadataManager>
       <UIVoteForm>Vote d'un document</UIVoteForm>
       <UICommentForm>Ecrire un commentaire</UICommentForm>
@@ -561,8 +561,8 @@
       <getmail>Vérifier les emails</getmail>
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
-      <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un contenu</AddDocument>
+      <AddFolder>Nouveau répertoire</AddFolder>
+      <AddDocument>Nouveau contenu</AddDocument>
       <Upload>Uploader des fichiers</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
