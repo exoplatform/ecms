@@ -94,7 +94,7 @@
     <openoffice.version>3.0.1</openoffice.version>
     <itunes.podcast.version>0.2</itunes.podcast.version>
     <org.hsqldb.version>2.0.0</org.hsqldb.version>
-    <org.apache.pdfbox.version>1.4.0</org.apache.pdfbox.version>
+    <org.apache.pdfbox.version>1.6.0</org.apache.pdfbox.version>
     <caja.version>r1</caja.version>
     <javax.resource.version>1.5</javax.resource.version>
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>

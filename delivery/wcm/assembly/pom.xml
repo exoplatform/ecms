@@ -332,7 +332,8 @@
     <dependency><groupId>javax.resource</groupId><artifactId>connector-api</artifactId><version>${javax.resource.version}</version><type>jar</type></dependency><!-- 1.5-->
     <dependency><groupId>org.jboss</groupId><artifactId>jbossxb</artifactId><version>${org.jbossxb.version}</version><type>jar</type></dependency><!-- 2.0.1.GA-->
     <dependency><groupId>org.jboss</groupId><artifactId>jboss-common-core</artifactId><version>${org.jbosscore.version}</version><type>jar</type></dependency><!-- 2.2.9.GA-->
-    
+    <dependency><groupId>org.apache.pdfbox</groupId><artifactId>fontbox</artifactId><version>${org.apache.pdfbox.version}</version><type>jar</type></dependency>    
+    <dependency><groupId>org.apache.pdfbox</groupId><artifactId>pdfbox</artifactId><version>${org.apache.pdfbox.version}</version><type>jar</type></dependency>
   </dependencies>
   <build>
     <plugins>
