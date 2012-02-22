@@ -1,13 +1,14 @@
 	<%
 		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
 
-	  import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
+		import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 		import org.exoplatform.wcm.webui.Utils;
 		
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
 		def rcontext = _ctx.getRequestContext() ;
+		def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
-<div class="$uicomponent.id " id="$uicomponent.id" 
+<div class="$uicomponent.id " id="$wid" 
 	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'"
 	onfocus="this.className = '$uicomponent.id $hoverClass'" onblur="this.className = '$uicomponent.id'"
 	>

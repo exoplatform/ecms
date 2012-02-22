@@ -23,12 +23,12 @@
         def multiLangMsg = uicomponent.getInlineEditingMsg();
         jsManager.addOnLoadJavascript("InlineEditor.loadLanguage(" + multiLangMsg + ")");
       }
-      
+			def wid = "scv_" + uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
 			def edittingStyle = "z-index: 5";
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 5; top:20px";
 			%>
-			<div class="$uicomponent.id" id="$uicomponent.id" 
+			<div class="$uicomponent.id" id="$wid" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' "
 				onfocus="this.className = '$uicomponent.id $hoverClass' " onblur="this.className = '$uicomponent.id' ">
 			<%     
@@ -129,7 +129,7 @@
         %>
           <div class="ActionContainer">
             <a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UISCVPreferences.action.Print") %></a>
-            <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UISCVPreferences.action.Close") %></a>
+            <a class="PrintFrameIcon CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UISCVPreferences.action.Close") %></a>
           </div>
         <%
       } 
@@ -173,7 +173,7 @@ if (uicomponent.isPrinting()) {
    if (allElements[i].style) allElements[i].style.overflow = 'visible';
    allElements[i].overflow = 'visible';
   }
-  var pdfViewer = document.getElementById("pdf_viewer_image");
+  var pdfViewer = document.getElementById("<%="pdf_viewer_image_"+_ctx.getRequestContext().getWindowId()%>");
   if (pdfViewer != null) pdfViewer.style.height="";
    </script>
  <style type="text/css">

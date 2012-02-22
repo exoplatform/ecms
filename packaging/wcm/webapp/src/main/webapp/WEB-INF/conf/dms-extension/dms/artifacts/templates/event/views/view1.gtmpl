@@ -14,11 +14,12 @@
   
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();  
+  def wid = "Events_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:event", "Stylesheet")); %>
 </style>
-<div id="$uicomponent.id" $resizeBlock>
+<div id="$wid" $resizeBlock>
 	<%
 	 def node = uicomponent.getNode() ;		
 	 def relations = uicomponent.getRelations() ;

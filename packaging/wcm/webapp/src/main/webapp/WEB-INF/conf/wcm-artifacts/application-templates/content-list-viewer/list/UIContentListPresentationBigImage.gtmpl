@@ -4,9 +4,10 @@
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
 	import org.exoplatform.services.wcm.core.NodeLocation;
+	def wid = "CLVBig_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
-<div class="UICLVPresentation" id="$uicomponent.id"> 
+<div class="UICLVPresentation" id="$wid"> 
 
 	<%	
 		String header = uicomponent.getHeader();

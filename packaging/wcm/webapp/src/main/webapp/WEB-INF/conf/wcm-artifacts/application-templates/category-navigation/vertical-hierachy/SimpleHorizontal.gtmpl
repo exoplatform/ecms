@@ -24,6 +24,7 @@
         renderChild(categoryUri, categories, level + 1);
     }
   }
+  def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 <style>
 #ACMEBody {
@@ -31,7 +32,7 @@
 }
 </style>
 
-<div id="$uicomponent.id" class="SimpleHorizontal">
+<div id="$wid" class="SimpleHorizontal">
   <div class="CategoriesContainer">
     <div class="TitleBarL">
       <div class="TitleBarR">

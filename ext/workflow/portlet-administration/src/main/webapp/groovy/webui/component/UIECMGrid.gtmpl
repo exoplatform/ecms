@@ -7,8 +7,9 @@
   UIComponent uiParent = uicomponent.getParent() ;
   String name = uicomponent.getLabel() ;
   UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class); 
+  String wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
-<div id="$uicomponent.id">
+<div id="$wid">
 	<table class="UIGrid" cellspacing="0" borderspacing="0">
 	  <thead>
 	  	<tr>

@@ -10,8 +10,9 @@
 <%
   def rcontext = _ctx.getRequestContext() ;
 	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
+	def wid = "tab_"+ uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
 %>
-<div class="$uicomponent.id" id="$uicomponent.id">
+<div class="$uicomponent.id" id="$wid">
 	<div class="UITabPane">
 	  <div class="TabPaneContent"> 
 	    <div class="WorkingAreaWithHelp">

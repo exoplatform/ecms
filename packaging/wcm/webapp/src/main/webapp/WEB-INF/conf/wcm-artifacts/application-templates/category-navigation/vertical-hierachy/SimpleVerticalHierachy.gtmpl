@@ -14,6 +14,7 @@
   	def subcategories = uicomponent.getSubcategories(categoryPath);
   	for (subcategory in subcategories) {
       def subcategoryName = subcategory.getName();
+      
       def subcategoryTitle = uicomponent.getTitle(subcategory);
       def margin = 16 * (level - 1) + "px";
       def selectedClass = "";
@@ -24,9 +25,10 @@
         renderChild(categoryUri, categories, level + 1);
     }
 	}
+	def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
-<div id="$uicomponent.id" class="SimpleVerticalHierachy">
+<div id="$wid" class="SimpleVerticalHierachy">
 	<div class="CategoriesContainer">
 		<div class="TitleBarL">
 			<div class="TitleBarR">

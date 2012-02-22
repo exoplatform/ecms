@@ -2,7 +2,7 @@
 	String currentPortal = uiform.getCurrentPortal();
 	currentPortal = currentPortal == null ? _ctx.appRes("UIPublishingPanel.currentPortal.none") : currentPortal;
 	String currentTreeNode = uiform.getCurrentTreeNode();
-	currentTreeNode = currentTreeNode == null ? _ctx.appRes("UIPublishingPanel.currentNode.none") : currentTreeNode;
+	currentTreeNode = currentTreeNode == null ? _ctx.appRes("UIPublishingPanel.currentNode.none") : currentTreeNode;	
 %>
 <div class="WCMPublication">
 	<div class="PanelContainer ClearFix">

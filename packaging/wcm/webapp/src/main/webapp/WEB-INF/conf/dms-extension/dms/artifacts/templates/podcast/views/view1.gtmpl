@@ -14,11 +14,12 @@
 	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
   dateFormat.applyPattern(pattern) ;
   def originalNode = uicomponent.getOriginalNode();
+  def wid = "Podcast_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:podcast", "Stylesheet")); %>
 </style>
-<div $resizeBlock id="$uicomponent.id">
+<div $resizeBlock id="$wid">
 	<div style="padding: 8px">
 		<div class="ContentPodcast">
 		  <table><tr>

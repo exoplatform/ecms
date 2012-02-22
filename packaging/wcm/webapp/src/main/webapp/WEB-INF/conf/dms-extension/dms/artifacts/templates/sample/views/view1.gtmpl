@@ -18,11 +18,12 @@
 	Parameter[] params;
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
+  def wid = "sample_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:sample", "Stylesheet")); %>
 </style>
-<div $resizeBlock id="$uicomponent.id">
+<div $resizeBlock id="$wid">
 	<div class="WorkSample">
 		<div class="SampleBG">
 		  <table><tr>

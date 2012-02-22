@@ -26,6 +26,7 @@ public void renderCategories(def categories) {
       }
     }
 }
+def wid = "CategoryList_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
 <style>
@@ -43,7 +44,7 @@ public void renderCategories(def categories) {
 
 </style>
 
-<div id="$uicomponent.id" class="SimpleHorizontal">
+<div id="$wid" class="SimpleHorizontal">
   <div class="CategoriesContainer">
     <div class="TitleBarL">
       <div class="TitleBarR">

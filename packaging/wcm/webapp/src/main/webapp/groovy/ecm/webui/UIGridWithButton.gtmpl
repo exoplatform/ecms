@@ -4,9 +4,10 @@
   String[] beanActions =  uicomponent.getBeanActions() ;
   UIComponent uiParent = uicomponent.getParent() ;
   String name = uicomponent.getId() ;
+  String wid = "ugb_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
-<div id="$uicomponent.id">
+<div id="$wid">
   <%
     if (uicomponent.getUIPageIterator().getTotalItems() > 5) {
       uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);

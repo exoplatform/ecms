@@ -5,9 +5,10 @@
 	 *          chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
 	 * Oct 29, 2009  
 	 */
+	 String wid ="wtp_"+ uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
-<div class="UITabPane" id="$uicomponent.id">
+<div class="UITabPane" id="$wid">
 	<div class="TabPaneContent">
 		<div class="WorkingAreaWithHelp">
 			<div class="UIHorizontalTabs">

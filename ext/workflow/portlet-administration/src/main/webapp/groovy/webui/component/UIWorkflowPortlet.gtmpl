@@ -1,4 +1,7 @@
-<div class="UIApplication UIWorkflowPortlet" id="$uicomponent.id">
+<%
+  def wid = "uiwfl_"+ uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
+%>
+<div class="UIApplication UIWorkflowPortlet" id="$wid">
   <div class="ApplicationMinWidth">
 	  <div class="Toolbar">
 	  	<div class="Separator"><span></span></div>

@@ -3,8 +3,10 @@ import org.exoplatform.wcm.webui.search.UISearchPageLayout;
 import org.exoplatform.wcm.webui.search.UISearchForm;
 import org.exoplatform.wcm.webui.search.UISearchResult;
 import org.exoplatform.wcm.webui.Utils;
+
+def wid = uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
 %>
-<div id="$uicomponent.id">
+<div id="$wid">
 	<%
 		def rcontext = _ctx.getRequestContext() ;
 		String portletId = Utils.getRealPortletId(rcontext);

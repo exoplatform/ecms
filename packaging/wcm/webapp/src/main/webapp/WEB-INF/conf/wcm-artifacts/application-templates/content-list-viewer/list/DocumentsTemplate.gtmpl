@@ -12,10 +12,11 @@
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
 		import org.exoplatform.services.wcm.core.NodeLocation;
+		def wid = "DocumentsCLVTemplate_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 
 %>
 
-<div class="DocumentsCLVTemplate" id="$uicomponent.id"> 
+<div class="DocumentsCLVTemplate" id="$wid"> 
 
 	<div class="CLV">
 		<%

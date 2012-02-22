@@ -9,9 +9,10 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
-	import org.exoplatform.services.wcm.core.NodeLocation;	
+	import org.exoplatform.services.wcm.core.NodeLocation;
+	def wid = "UICLVEvents_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
-<div class="UICLVEvents" id="$uicomponent.id"> 
+<div class="UICLVEvents" id="$wid"> 
 
  	<%
 		def header = uicomponent.getHeader();

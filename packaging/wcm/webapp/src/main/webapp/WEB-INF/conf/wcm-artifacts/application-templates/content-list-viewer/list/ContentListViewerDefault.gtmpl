@@ -4,8 +4,9 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
+	def wid = "UIContentListPresentationDefault_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
-<div class="UIContentListPresentationDefault" id="$uicomponent.id"> 
+<div class="UIContentListPresentationDefault" id="$wid"> 
 
  	<%
 		def header = uicomponent.getHeader();
