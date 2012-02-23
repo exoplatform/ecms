@@ -62,7 +62,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class Utils {
   private final static Log   LOG          = ExoLogger.getLogger(Utils.class);
 
-  private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"";
+  private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"-";
 
   public static final String MAPPING_FILE = "mapping.properties";
 
