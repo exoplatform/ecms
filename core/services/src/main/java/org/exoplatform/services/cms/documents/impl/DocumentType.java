@@ -29,6 +29,7 @@ public class DocumentType {
 
   private List<String> mimeTypes;
   private String contentsType;
+  private String displayInFilter;
 
   public void setMimeTypes(List<String> mimeTypes) { this.mimeTypes = mimeTypes; }
 
@@ -37,5 +38,8 @@ public class DocumentType {
   public void setContentsType(String contentTypes) { this.contentsType = contentTypes; }
 
   public String getContentsType() { return this.contentsType; }
-
+  
+  public String getDisplayInFilter() { return displayInFilter; }
+  
+  public void setDisplayInFilter(String displayInFilter) { this.displayInFilter = displayInFilter; }
 }

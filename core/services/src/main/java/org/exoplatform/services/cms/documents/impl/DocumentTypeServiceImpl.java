@@ -90,7 +90,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     ObjectParameter objectParam = null;
     while (iter.hasNext()) {
       objectParam = (ObjectParameter) iter.next();
-      supportedType.add(objectParam.getName());
+      if (Boolean.parseBoolean(((DocumentType)objectParam.getObject()).getDisplayInFilter())) {
+        supportedType.add(objectParam.getName());
+      }
     }
     Collections.sort(supportedType);
     return supportedType;
