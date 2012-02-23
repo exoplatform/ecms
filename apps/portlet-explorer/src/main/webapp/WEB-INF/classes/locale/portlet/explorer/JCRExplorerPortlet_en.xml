@@ -1213,7 +1213,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator:</operator>
+      <operator>Operator</operator>
       <exactlyPro-properties>Property</exactlyPro-properties>
       <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
       <containPro-properties>Property</containPro-properties>
@@ -2094,7 +2094,12 @@
     <msg>
       <empty-input>Please fill out the field '{0}'.</empty-input>
     </msg>
-  </EmptyFieldValidator>
+  </EmptyFieldValidator>	
+  <CategoryValidator>
+    <msg>
+      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+    </msg>
+  </CategoryValidator>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

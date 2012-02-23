@@ -1201,7 +1201,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>オペレーター :</operator>
+      <operator>オペレーター </operator>
       <exactlyPro-properties>プロパティ</exactlyPro-properties>
       <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
       <containPro-properties>プロパティ</containPro-properties>
@@ -2070,6 +2070,11 @@
       <empty-input>フィールド '{0}' を記入してください。</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>カテゴリが間違っています。正しいカテゴリを選んでください。</non-categories>
+    </msg>
+  </CategoryValidator>
   <!--
   ###################################################################################
   # JCR Exceptions manager                                                              #

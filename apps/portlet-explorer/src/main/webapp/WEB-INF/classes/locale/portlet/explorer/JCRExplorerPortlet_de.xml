@@ -1035,7 +1035,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator :</operator>
+      <operator>Operator</operator>
       <exactlyPro-properties>Eigenschaft</exactlyPro-properties>
       <exactlyPro-ContainExactly><![CDATA[Enth&auml;lt genau]]></exactlyPro-ContainExactly>
       <containPro-properties>Eigenschaft</containPro-properties>
@@ -1909,6 +1909,11 @@
       <empty-input>Bitte füllen Sie das Feld</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+    </msg>
+  </CategoryValidator>
   <!--
   ###################################################################################
   # JCR Exceptions manager																														  #

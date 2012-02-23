@@ -7,12 +7,12 @@
   #variable title and label
   -->
   <start>
-    <title>Start of vacations :</title>
-    <label>Start (dd/mm/yyyy) :</label>
+    <title>Start of vacations:</title>
+    <label>Start (dd/mm/yyyy):</label>
   </start>
   <end>
-    <title>End of vacations :</title>
-    <label>End (dd/mm/yyyy) :</label>
+    <title>End of vacations:</title>
+    <label>End (dd/mm/yyyy):</label>
   </end>
   
   <cancel>Cancel</cancel>

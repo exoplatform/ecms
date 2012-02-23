@@ -1029,7 +1029,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator> عامل رياضيات :</operator>
+      <operator>عامل رياضيات</operator>
       <exactlyPro-properties>صفة</exactlyPro-properties>
       <exactlyPro-ContainExactly>تحتوي بالضبط</exactlyPro-ContainExactly>
       <containPro-properties>صفة</containPro-properties>
@@ -1902,6 +1902,11 @@
       <empty-input>أدخل قيمة في المحتوى '{0}' ، من فضلك.</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>.فئات خاطئة. الرجاء اختيار فئات جيدة</non-categories>
+    </msg>
+  </CategoryValidator>
   <!--
   ###################################################################################
   # JCR Exceptions manager																														  #

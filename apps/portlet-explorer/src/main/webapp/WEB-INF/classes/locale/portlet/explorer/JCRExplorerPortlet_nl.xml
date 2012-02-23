@@ -1179,7 +1179,7 @@
 		</tooltip>
 		<label>
 			<colon>:</colon>
-			<operator>Operator :</operator>
+			<operator>Operator</operator>
 			<exactlyPro-properties>Eigenschappen</exactlyPro-properties>
 			<exactlyPro-ContainExactly>Bevat precies</exactlyPro-ContainExactly>
 			<containPro-properties>Eigenschappen</containPro-properties>
@@ -2133,6 +2133,11 @@
 			<empty-input>geef waarde in veld '{0}'</empty-input>
 		</msg>
 	</EmptyFieldValidator>
+	<CategoryValidator>
+      <msg>
+	    <non-categories>Categories are wrong. Please select good categories.</non-categories>
+	  </msg>
+    </CategoryValidator>
 	<!--
 		###################################################################################
 		# JCR Exceptions manager #

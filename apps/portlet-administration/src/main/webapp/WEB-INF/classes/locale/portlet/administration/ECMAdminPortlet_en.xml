@@ -1813,7 +1813,7 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Root Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>

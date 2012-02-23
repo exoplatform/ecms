@@ -1216,7 +1216,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Thao tác:</operator>
+      <operator>Thao tác</operator>
       <exactlyPro-properties>Thuộc tính</exactlyPro-properties>
       <exactlyPro-ContainExactly>Chưa chính xác</exactlyPro-ContainExactly>
       <containPro-properties>Thuộc tính</containPro-properties>
@@ -2093,6 +2093,11 @@
       <empty-input>Vui lòng điền giá trị vào trường '{0}'</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Tên hạng mục sai. Xin vui lòng chọn hạng mục khác.</non-categories>
+    </msg>
+  </CategoryValidator>
   <!--
   ###################################################################################
   # JCR Exceptions manager																														  #
