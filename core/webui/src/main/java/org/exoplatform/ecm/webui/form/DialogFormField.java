@@ -235,7 +235,9 @@ public abstract class DialogFormField {
   public boolean isEditable() { return !"false".equalsIgnoreCase(editable); }
   public boolean isEditableIfNull() { return "if-null".equalsIgnoreCase(editable); }
   public boolean isVisibleIfNotNull() { return "if-not-null".equals(visible); }
-  public boolean isFillJcrDataFile() { return "true".equals(fillJcrDataOfFile); }
+  public boolean isFillJcrDataFile() { 
+    return "true".equals(fillJcrDataOfFile) || fillJcrDataOfFile == null; 
+  }
 
   private HashMap<String,String> parseArguments(String[] arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
