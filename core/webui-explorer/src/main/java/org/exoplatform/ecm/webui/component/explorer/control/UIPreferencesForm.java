@@ -303,12 +303,12 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   static public class AdvanceActionListener extends EventListener<UIPreferencesForm> {
     public void execute(Event<UIPreferencesForm> event) throws Exception {
       UIPreferencesForm uiPreferencesForm = event.getSource();
-      if (uiPreferencesForm.isAdvancePreferences()) uiPreferencesForm.setAdvancePreferences(false);
-      else uiPreferencesForm.setAdvancePreferences(true);
-      UIJCRExplorerPortlet explorerPorltet = uiPreferencesForm.getAncestorOfType(UIJCRExplorerPortlet.class);
-      UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
-      Preference pref = uiExplorer.getPreference();
-      uiPreferencesForm.update(pref);
+      if (uiPreferencesForm.isAdvancePreferences()) { 
+        uiPreferencesForm.setAdvancePreferences(false);
+      }
+      else {
+        uiPreferencesForm.setAdvancePreferences(true);
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPreferencesForm.getParent());
     }
   }
