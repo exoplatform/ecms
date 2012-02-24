@@ -19,43 +19,20 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-
-
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
   <component>
-    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
-    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
+    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
   </component>
-
   <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
-      <name>Add ignored portals</name>
-      <set-method>addIgnorePortalPlugin</set-method>
-      <type>org.exoplatform.services.wcm.portal.artifacts.IgnorePortalPlugin</type>
-      <description>ignored portals. the service will not deploy data to the ignored portals</description>
-      <init-params>
-        <values-param>
-          <name>ignored.portals</name>
-          <description>ignored portal list</description>
-          <value>classic</value>
-          <value>acme</value>
-          <value>WAIPortal</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-    <component-plugin>
-      <name>Initial webcontent artifact for each site</name>
+      <name>Content Initializer Service</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin</type>
-      <description>This plugin deploy some initial webcontent as site artifact to site artifact folder of portal when a portal is created</description>
+      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
+      <description>XML Deployment Plugin</description>
       <init-params>
         <object-param>
-          <name>Portal logo data</name>
+          <name>WAIPortal Stylesheet Blue data</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -64,17 +41,17 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/css</string>
                 </field>
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Logo.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/StylesheetGreen.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Portal signin data</name>
+          <name>Home content</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -83,17 +60,36 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
                 </field>
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Signin.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/home.xml</string>
+            </field>
+          </object>
+        </object-param>        
+        <object-param>
+          <name>Banner Logo</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalLogo.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Portal searchbox data</name>
+          <name>Signin</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -102,17 +98,17 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
                 </field>
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Searchbox.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalSignin.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Portal navigation data</name>
+          <name>Portal Footer</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -121,17 +117,17 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
                 </field>
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Navigation.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalFooter.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Portal footer data</name>
+          <name>Portal Toolbar</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -140,74 +136,39 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
                 </field>
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Footer.xml</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Portal introduce data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Introduce.xml</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Portal stylesheet data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/css</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/StylesheetGreen.xml</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Portal images data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/medias/images</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Images.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalToolBar.xml</string>
             </field>
           </object>
         </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+    <component-plugin>
+      <name>Content Initializer Service</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.deployment.plugins.LinkDeploymentPlugin</type>
+      <description>Link Deployment Plugin</description>
+      <init-params>
+        <object-param>
+          <name>link01</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/home</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>
