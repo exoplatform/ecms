@@ -29,7 +29,8 @@ function getModule(params) {
     addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "${itunes.podcast.version}")) .
     addDependency(new Project("org.icepdf", "icepdf-core", "jar", "${icepdf.version}")).
     addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "${icepdf.version}")).
-    addDependency(new Project("org.artofsolving.jodconverter", "jodconverter-core", "jar", "${jodconverter-core.version}")).
+    addDependency(new Project("com.artofsolving", "jodconverter", "jar", "${jodconverter.version}")).
+    addDependency(new Project("com.artofsolving", "jodconverter-cli", "jar", "${jodconverter.version}")).
     addDependency(new Project("org.openoffice", "ridl", "jar", "${openoffice.version}")).
     addDependency(new Project("org.openoffice", "unoil", "jar", "${openoffice.version}")).
     addDependency(new Project("org.openoffice", "jurt", "jar", "${openoffice.version}")).

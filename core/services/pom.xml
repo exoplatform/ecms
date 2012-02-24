@@ -96,13 +96,13 @@
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
       <version>${xml.parser.version}</version>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>com.totsp.feedpod</groupId>
       <artifactId>itunes-com-podcast</artifactId>
       <version>${itunes.podcast.version}</version>
       <scope>compile</scope>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>org.icepdf</groupId>
       <artifactId>icepdf-viewer</artifactId>
@@ -116,9 +116,14 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.artofsolving.jodconverter</groupId>
-      <artifactId>jodconverter-core</artifactId>
-      <version>${jodconverter-core.version}</version>
+	     <groupId>com.artofsolving</groupId>
+	     <artifactId>jodconverter</artifactId>
+	     <version>${jodconverter.version}</version>
+    </dependency>
+    <dependency>
+	     <groupId>com.artofsolving</groupId>
+	     <artifactId>jodconverter-cli</artifactId>
+	     <version>${jodconverter.version}</version>
     </dependency>
 	   <dependency>
 	     <groupId>org.openoffice</groupId>

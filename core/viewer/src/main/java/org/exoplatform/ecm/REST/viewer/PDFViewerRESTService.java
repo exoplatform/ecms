@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.ConnectException;
 
 import javax.imageio.ImageIO;
 import javax.jcr.Node;
@@ -37,7 +38,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
@@ -56,6 +56,8 @@ import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.Page;
 import org.icepdf.core.util.GraphicsRenderingHints;
+
+import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
 
 /**
  * Created by The eXo Platform SARL
@@ -277,7 +279,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       Node contentNode = currentNode.getNode("jcr:content");
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
-      // Create temp file to store converted data of nt:file node
+      // Create temp file to store data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
       content = File.createTempFile(name + "_tmp", ".pdf");
       /*
@@ -291,22 +293,19 @@ public class PDFViewerRESTService implements ResourceContainer {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
       } else {
         OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
-        // create temp file to store original data of nt:file node
-        File in = File.createTempFile(name + "_tmp", null);
-        read(input, new BufferedOutputStream(new FileOutputStream(in)));
         try {
-          boolean success = jodConverter_.convert(in, content, "pdf");
-          // If the converting was failure then delete the content temporary file
-          if (!success) {
-            content.delete();
-          }
-        } catch (OfficeException connection) {
+          jodConverter_.convert(input, extension, out, "pdf");
+        } catch(ConnectException connection) {
           content.delete();
           if (LOG.isErrorEnabled()) {
-            LOG.error("Exception when using Office Service");
+            LOG.error("Cannot open connection to OpenOffice Service");
+          }
+        } catch(OpenOfficeException connection) {
+          content.delete();
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Exception when using OpenOffice Service");
           }
         } finally {
-          in.delete();
           out.flush();
           out.close();
         }
