@@ -91,6 +91,7 @@
     <icu4j.version>3.8</icu4j.version>
     <icepdf.version>4.0.1</icepdf.version>
     <jodconverter.version>2.2.2</jodconverter.version>
+    <jodconverter-core.version>3.0-SNAP-rev-220</jodconverter-core.version>
     <openoffice.version>3.0.1</openoffice.version>
     <itunes.podcast.version>0.2</itunes.podcast.version>
     <org.hsqldb.version>2.0.0</org.hsqldb.version>

@@ -241,17 +241,7 @@
   
     <component>
 	  <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>  
-	  <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
-	  <init-params>
-      <value-param>
-        <name>host</name>
-        <value>127.0.0.1</value>
-      </value-param>
-      <value-param>
-        <name>port</name>
-        <value>8100</value>
-      </value-param>            
-    </init-params>    
+	  <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>   
   </component> 
 	
   <component>
