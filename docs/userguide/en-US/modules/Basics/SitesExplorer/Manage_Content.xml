@@ -62,16 +62,9 @@
               <phrase>[ Add Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open a list of content templates.
+          on the <emphasis role="bold">Action</emphasis> bar to open <link linkend="content_templates">a list of content templates</link>, including
+          <emphasis role="bold">Free layout web content</emphasis>, and <emphasis role="bold">Picture on head layout web content</emphasis>.
         </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center" fileref="images/template_list.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata align="center" fileref="images/template_list.png" format="PNG" width="150mm"/>
-          </imageobject>
-        </mediaobject>
       </step>
       <step>
         <para>

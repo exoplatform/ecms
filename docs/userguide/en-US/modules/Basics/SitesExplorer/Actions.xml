@@ -568,6 +568,14 @@
           <emphasis role="bold">Action</emphasis>
           bar to open a list of content templates.
         </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/template_list.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" scalefit="1" align="center" fileref="images/template_list.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
       </step>
       <step>
         <para>

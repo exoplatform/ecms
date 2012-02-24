@@ -97,7 +97,7 @@
                         </inlinemediaobject>
                         on the CLV.
                     </para>
-                    <para>
+                    <para xml:id="content_templates">
                         You will be directed to the
                         <emphasis role="bold">Sites Explorer</emphasis>
                         with a list of content templates for you to select.
@@ -110,6 +110,70 @@
                             <imagedata width="70mm" scalefit="1" align="center" fileref="images/documentform.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
+                  <para><emphasis role="bold">Details:</emphasis></para>
+                  <table>
+                        <tgroup cols="2">
+                            <thead>
+                                <row>
+                                    <entry>Field</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Free layout web content</emphasis>
+                                  </entry>
+                                    <entry>This template is a free layout.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <emphasis role="bold">Picture on head layout web content</emphasis>
+                                    </entry>
+                                  <entry>The site's content is
+                                    presented in two spaces. One is for inserting an image and the other for editing the
+                                    site's content.
+                                    The image will be put at the head of a site.
+                                  </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <inlinemediaobject>
+                                            <imageobject>
+                                                <imagedata width="4mm" scalefit="1" fileref="images/listview_icon.png"
+                                                           format="PNG"/>
+                                            </imageobject>
+                                        </inlinemediaobject>
+                                    </entry>
+                                    <entry>Display the list of the content templates in the List view.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <inlinemediaobject>
+                                            <imageobject>
+                                                <imagedata width="4mm" scalefit="1" fileref="images/thumbnailview_icon.png"
+                                                           format="PNG"/>
+                                            </imageobject>
+                                        </inlinemediaobject>
+                                    </entry>
+                                    <entry>Display the list of the content templates in the Thumbnail view.</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <inlinemediaobject>
+                                            <imageobject>
+                                                <imagedata width="4mm" scalefit="1" fileref="images/close_template_selector_icon.png"
+                                                           format="PNG"/>
+                                            </imageobject>
+                                        </inlinemediaobject>
+                                    </entry>
+                                    <entry>Cancel selecting the content template and back to the previous page.</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
                 </step>
                 <step>
                     <para xml:id="proc-User_Guide-Add_Content-Add_a_new_content-step3">
