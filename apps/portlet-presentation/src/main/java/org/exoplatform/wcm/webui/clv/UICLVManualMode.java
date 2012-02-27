@@ -37,6 +37,8 @@ import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -95,7 +97,8 @@ public class UICLVManualMode extends UICLVContainer {
       PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(rNodes, itemsPerPage);
       getChildren().clear();
       ResourceResolver resourceResolver = getTemplateResourceResolver();
-      UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
+      PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+      UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId());
       clvPresentation.init(resourceResolver, paginatedResultIterator);
       
       return;
@@ -121,7 +124,8 @@ public class UICLVManualMode extends UICLVContainer {
       PageListFactory.createPageList(nodes, itemsPerPage, null, 
                                      new CLVNodeCreator());
     ResourceResolver resourceResolver = getTemplateResourceResolver();
-    UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+    UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId());
     clvPresentation.init(resourceResolver, pageList);
   }
   /**

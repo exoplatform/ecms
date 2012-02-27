@@ -10,11 +10,10 @@
 		import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
-		import org.exoplatform.services.wcm.core.NodeLocation;
-		def wid = "TwoColumnsCLVTemplate_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+		import org.exoplatform.services.wcm.core.NodeLocation;		
 %>
 
-<div id="$wid" class="TwoColumnsCLVTemplate">
+<div id="$uicomponent.id" class="TwoColumnsCLVTemplate">
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();

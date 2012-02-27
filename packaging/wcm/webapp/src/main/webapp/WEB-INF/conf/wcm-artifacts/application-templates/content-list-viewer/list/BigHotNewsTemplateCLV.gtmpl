@@ -10,10 +10,9 @@
 
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
-	import org.exoplatform.wcm.webui.Utils;
-	def wid = "UICLVHotNews_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+	import org.exoplatform.wcm.webui.Utils;	
 %>
-<div class="UICLVHotNews" id="$wid"> 
+<div class="UICLVHotNews" id="$uicomponent.id"> 
  	<%
 		def header = uicomponent.getHeader();
 		def rssLink = uicomponent.getRssLink();

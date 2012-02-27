@@ -3,10 +3,9 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
-	import org.exoplatform.services.wcm.core.NodeLocation;
-	def wid = "UICLVDefault_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+	import org.exoplatform.services.wcm.core.NodeLocation;	
 %>
-<div class="UICLVPresentation" id="$wid"> 
+<div class="UICLVPresentation" id="$uicomponent.id"> 
 
 	<%	
 		String header = uicomponent.getHeader();
