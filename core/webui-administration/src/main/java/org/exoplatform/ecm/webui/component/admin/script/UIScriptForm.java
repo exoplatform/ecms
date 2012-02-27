@@ -28,6 +28,8 @@ import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -66,6 +68,8 @@ import org.exoplatform.webui.form.validator.NameValidator;
 )
 public class UIScriptForm extends UIForm implements UIPopupComponent {
 
+  private static final Log LOG = ExoLogger.getLogger(UIScriptForm.class);
+  
   final static public String FIELD_SELECT_VERSION = "selectVersion" ;
   final static public String FIELD_SCRIPT_CONTENT = "scriptContent" ;
   final static public String FIELD_SCRIPT_NAME = "scriptName" ;
@@ -286,8 +290,10 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
           uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-      } catch (PathNotFoundException pathNotFoundException) {
-
+      } catch (PathNotFoundException pne) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(pne.getMessage());
+        }
       }
     }
   }
