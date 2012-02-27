@@ -34,6 +34,7 @@ import javax.jcr.PropertyType;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.UIFormUploadInputNoUploadButton;
+import org.exoplatform.ecm.webui.form.validator.CategoryValidator;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.DateValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -402,6 +403,8 @@ public class DialogFormUtil {
       return RepeatIntervalValidator.class;
     }else if (validatorType.equals("length")){
       return StringLengthValidator.class;
+    }else if (validatorType.equals("category")){
+      return CategoryValidator.class;
     }else {
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       return cl.loadClass(validatorType);
