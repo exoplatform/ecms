@@ -29,6 +29,8 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -45,7 +47,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UIDriveManager extends UIAbstractManager {
 
   public UIDriveManager() throws Exception {
-    addChild(UIDriveList.class, null, null) ;
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();  	
+    addChild(UIDriveList.class, null, "ugb_" + UIDriveList.class.getSimpleName() + pContext.getWindowId()) ;
   }
 
   public void refresh() throws Exception  {
