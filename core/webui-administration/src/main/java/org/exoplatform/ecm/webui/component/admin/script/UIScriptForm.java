@@ -217,7 +217,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       for(ScriptData data : scriptDatas) {
         listScript.add(data.getName()) ;
       }
-      if(listScript.contains(name) && uiForm.isAddNew_) {
+      if(listScript.contains(name.toString()) && uiForm.isAddNew_) {
         Object[] args = { name } ;
         uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-exist", args,
                                                 ApplicationMessage.WARNING)) ;
