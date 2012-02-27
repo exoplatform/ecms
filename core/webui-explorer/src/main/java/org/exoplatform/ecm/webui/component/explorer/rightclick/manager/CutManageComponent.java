@@ -30,6 +30,7 @@ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
@@ -68,7 +69,8 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
                                                 new CanCutNodeFilter(),
                                                 new IsNotLockedFilter(),
-                                                new IsNotTrashHomeNodeFilter() });
+                                                new IsNotTrashHomeNodeFilter(),
+                                                new IsNotEditingDocumentFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

@@ -2578,6 +2578,7 @@
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Impossible de déplacer: La destination et la source sont identiques</can-not-move-to-itself>
+      <is-editing>Vous ne pouvez pas déplacer un document en cours d'édition.</is-editing>
     </msg>
   </UIWorkingArea>
 

@@ -2954,5 +2954,10 @@
   	<msg>
 	  <unknown-error>There are some error occurs, you can not edit this property</unknown-error>
     </msg>
-  </UIPropertyForm>  
+  </UIPropertyForm> 
+  <UIWorkingArea>
+    <msg>
+      <is-editing>You cannot move an editing document. Please close it first.</is-editing>
+    </msg>
+  </UIWorkingArea>   
 </bundle>

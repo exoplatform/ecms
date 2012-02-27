@@ -3442,4 +3442,9 @@
 	  <unknown-error>Đã có lỗi xảy ra trong quá trình xử lý, bạn không thể sửa property này</unknown-error>
     </msg>
   </UIPropertyForm>
+  <UIWorkingArea>
+    <msg>
+      <is-editing>Tài liệu này đang được chỉnh sửa nên không thể di chuyển được. Bạn hãy đóng nó lại trước khi dịch chuyển.</is-editing>
+    </msg>
+  </UIWorkingArea>   
 </bundle>

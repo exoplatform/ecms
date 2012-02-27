@@ -36,6 +36,7 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -73,7 +74,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 public class MoveNodeManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[]{ new IsNotTrashHomeNodeFilter() } );
+      = Arrays.asList(new UIExtensionFilter[]{ new IsNotTrashHomeNodeFilter()} );
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -199,6 +200,11 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         
         return;
       }
+    }
+    if(uiExplorer.isEditingDocument()) {
+      uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.is-editing", null,
+          ApplicationMessage.WARNING));
+      return;
     }
     String messagePath = "";
     try {

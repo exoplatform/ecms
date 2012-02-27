@@ -2581,6 +2581,7 @@
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Cannot move because the destination folder is the source one.</can-not-move-to-itself>
+      <is-editing>You cannot move an editing document. Please close it first.</is-editing>
     </msg>
   </UIWorkingArea>
 
