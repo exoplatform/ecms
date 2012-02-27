@@ -1,0 +1,52 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(revision 79454)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(working copy)
+@@ -103,14 +103,17 @@
+             node = node.getParent();
+             nodePath = node.getPath();
+           }
++	  
++          if (node.getPrimaryNodeType().getName().equals("exo:comments")) {
++            node = node.getParent().getParent();
++            nodePath = node.getPath();
++          }
+          
+           String excerpt = row.getValue("rep:excerpt(.)")== null ? "" : row.getValue("rep:excerpt(.)").getString();
+           excerpt = StringEscapeUtils.unescapeHtml(excerpt);
+-//          excerpt += row.getValue("rep:spellcheck()") == null ? "NNUULLLL" : 
+-//          row.getValue("rep:spellcheck()").getString();
+           String score = row.getValue("jcr:score")== null ? "" : row.getValue("jcr:score").getString();
+           String s = ""; 
+-          if (node != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {
++          if (node != null) {
+             count++;		  
+       %>
+           <tr class="$rowClass">
+@@ -149,4 +152,4 @@
+     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+   </div>
+   <% } %>
+-</div>
+\ No newline at end of file
++</div>
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(revision 79454)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/search/UISearchResult.java	(working copy)
+@@ -125,7 +125,7 @@
+   protected Session checkSymlinkSession = null;
+   protected String linkWorkspace  = null;
+   final static private  String GET_ALL_LINK  = "select * from exo:symlink where jcr:path like '$0/%'";
+-  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
++  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
+   
+   
+   public List<String> getCategoryPathList() { return categoryPathList; }
+@@ -540,4 +540,4 @@
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());      
+     }
+   } 
+-}
+\ No newline at end of file
++}

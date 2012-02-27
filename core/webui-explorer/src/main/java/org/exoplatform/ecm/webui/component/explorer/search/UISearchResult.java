@@ -125,7 +125,7 @@ public class UISearchResult extends UIContainer {
   protected Session checkSymlinkSession = null;
   protected String linkWorkspace  = null;
   final static private  String GET_ALL_LINK  = "select * from exo:symlink where jcr:path like '$0/%'";
-  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
+  final static private String  CHECK_LINK_MATCH_QUERY= "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' )";
   
   
   public List<String> getCategoryPathList() { return categoryPathList; }
