@@ -6,7 +6,7 @@
  * Apr 17, 2007 3:37:43 PM
  */
 %>
-<% 
+<%
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.impl.core.JCRPath;
   import org.exoplatform.services.jcr.impl.core.SessionImpl;
@@ -16,12 +16,12 @@
   import java.util.ArrayList;
   import org.exoplatform.services.jcr.util.Text;
 %>
-<% 
-  def resultList = uicomponent.getCurrentList(); 
+<%
+  def resultList = uicomponent.getCurrentList();
   if(resultList == null) return;
   long searchTime = uicomponent.getSearchTime()/1000;
-  int resultSize = uicomponent.getUIPageIterator().getAvailable();  
-  def rcontext = _ctx.getRequestContext();  
+  int resultSize = uicomponent.getUIPageIterator().getAvailable();
+  def rcontext = _ctx.getRequestContext();
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
@@ -49,11 +49,11 @@
             } else {
           %>
             <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>">
-              <%=_ctx.appRes("UISearchResult.header.type")%>                
+              <%=_ctx.appRes("UISearchResult.header.type")%>
             </div>
           <% } %>
         </th>
-        <th><%=_ctx.appRes("UISearchResult.header.name")%></th>   
+        <th><%=_ctx.appRes("UISearchResult.header.name")%></th>
         <th style="width:80px;">
           <%
             if (uicomponent.iconScore.equals("BlueUpArrow")) {
@@ -73,7 +73,7 @@
             } else {
           %>
             <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
-              <%=_ctx.appRes("UISearchResult.header.score")%>         
+              <%=_ctx.appRes("UISearchResult.header.score")%>
             </a>
           <% } %>
         <th style="width:80px;"><%=_ctx.appRes("UISearchResult.header.action")%></th>
@@ -81,16 +81,16 @@
     </thead>
     <tbody>
     <%
-    
+
     def rowClass = null ;
       boolean even = true ;
       boolean found = false ;
-      Node node = null; 
+      Node node = null;
 	  def listAddedResult = new ArrayList<Node>();
       if (resultList != null && resultList.size() > 0) {
 	    def count = 0;
-        for (row in resultList) {          
-          
+        for (row in resultList) {
+
           String nodePath = row.getJcrPath();
           try {
             node = uicomponent.getNodeByPath(nodePath);
@@ -104,16 +104,20 @@
             node = node.getParent();
             nodePath = node.getPath();
           }
+
+          if (node.getPrimaryNodeType().getName().equals("exo:comments")) {
+            node = node.getParent().getParent();
+            nodePath = node.getPath();
+          }
+
         found = true;
-        if (even) rowClass = "EvenRow";  
-        else rowClass =  "OddRow"; 
+        if (even) rowClass = "EvenRow";
+        else rowClass =  "OddRow";
         even = !even;
         String excerpt = row.getRepExcerpt();
         excerpt = StringEscapeUtils.unescapeHtml(excerpt);
-//          excerpt += row.getValue("rep:spellcheck()") == null ? "NNUULLLL" : 
-//          	row.getValue("rep:spellcheck()").getString();
         String score = row.getJcrScore();
-			if (node != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {		  
+			if (node != null) {
       %>
           <tr class="$rowClass">
             <td>
@@ -133,9 +137,9 @@
                 <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
                 <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" class="OpenFolder16x16Icon"/>
               </div>
-            </td>                   
+            </td>
           </tr>
-    <%        
+    <%
 		  }
         }
       } else {
