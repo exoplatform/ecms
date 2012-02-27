@@ -39,6 +39,7 @@ import javax.jcr.query.Row;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -299,8 +300,11 @@ public class UISearchResult extends UIContainer {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
+
       uiExplorer.setSelectNode(workspaceName, path) ;
       
+      uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(true);
+      uiSearchResult.setRendered(false);
       uiExplorer.refreshExplorer((Node)item, true);
     }
 
