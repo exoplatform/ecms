@@ -485,8 +485,14 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         throw new MessageException(new ApplicationMessage("UIDocumentInfo.msg.access-denied", args,
             ApplicationMessage.WARNING)) ;
       } catch(Exception exc) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(exc.getMessage());
+        }
       }
     } catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     return uiExplorer.getDocumentInfoTemplate();
   }
@@ -1041,6 +1047,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         if (filterOk(node))
           ret.add(node);
       } catch (Exception ex) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ex.getMessage());
+        }
       }
     }
 

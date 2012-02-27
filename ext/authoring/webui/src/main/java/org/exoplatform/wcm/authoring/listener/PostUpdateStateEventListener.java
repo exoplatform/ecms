@@ -50,7 +50,7 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
  */
 public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
-  private static final Log   log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
+  private static final Log   LOG = ExoLogger.getLogger(PostUpdateStateEventListener.class);
 
   /** The pservice. */
   private PublicationManager publicationManager;
@@ -85,8 +85,8 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       String nodeLifecycle = node.getProperty("publication:lifecycle").getString();
       // if (log.isInfoEnabled())
       // log.info(userId+"::"+currentState+"::"+nodeLifecycle);
-      if (log.isInfoEnabled())
-        log.info("@@@ " + currentState + " @@@@@@@@@@@@@@@@@@@ " + node.getPath());
+      if (LOG.isInfoEnabled())
+        LOG.info("@@@ " + currentState + " @@@@@@@@@@@@@@@@@@@ " + node.getPath());
 
       Lifecycle lifecycle = publicationManager.getLifecycle(nodeLifecycle);
       Iterator<State> states = lifecycle.getStates().iterator();
@@ -114,7 +114,9 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
         portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
         portalRequestContext.setFullRender(true);
       } catch (Exception e) {
-
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
 
     }
@@ -148,6 +150,9 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       try {
         currentUser = userh.findUserByName(userId);
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
       String username = userId;
       if (currentUser != null)
@@ -173,8 +178,8 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
             body = "[ <a href=\"" + editUrl + "\">" + editUrl + "</a> ]<br/>" + "updated by "
                 + username;
             // mailService.sendMessage(from, to, subject, body);
-            if (log.isInfoEnabled()) {
-              log.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
+            if (LOG.isInfoEnabled()) {
+              LOG.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
                   + from + "\nto: " + to + "\nsubject: " + subject + "\nbody: " + body
                   + "\n######################################################");
             }

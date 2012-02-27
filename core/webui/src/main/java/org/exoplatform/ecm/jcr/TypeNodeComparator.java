@@ -81,7 +81,7 @@ public class TypeNodeComparator implements Comparator<javax.jcr.Node> {
       }
       return nodeType2.compareToIgnoreCase(nodeType1) ;
     }catch (Exception e) {
+      return 0;
     }
-    return 0;
   }
 }

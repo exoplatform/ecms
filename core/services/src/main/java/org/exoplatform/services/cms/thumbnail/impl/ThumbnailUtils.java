@@ -21,6 +21,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SAS
@@ -30,6 +32,8 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
  */
 public final class ThumbnailUtils {
 
+  private static final Log LOG = ExoLogger.getLogger(ThumbnailUtils.class);
+  
   static Node getThumbnailFolder(Node parentNode) throws RepositoryException {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       try {
@@ -43,6 +47,9 @@ public final class ThumbnailUtils {
         return thumbnailFolder;
       } catch (ItemExistsException e) {
         // The folder could already be created due to potential concurrent access
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
     return parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
@@ -56,6 +63,9 @@ public final class ThumbnailUtils {
         return thumbnailNode;
       } catch (ItemExistsException e) {
         // The folder could already be created due to potential concurrent access
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
     return thumbnailFolder.getNode(identifier);

@@ -11,6 +11,8 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -37,6 +39,9 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 
 public class UIRepositoryList extends UIForm {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UIRepositoryList.class);
+  
   public static String      FIELD_SELECTREPO = "selectRepo";
 
   private String            repoName_;
@@ -97,6 +102,9 @@ public class UIRepositoryList extends UIForm {
     try {
       repo = rService.getCurrentRepository().getConfiguration();
     } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     return options;

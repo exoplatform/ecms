@@ -41,7 +41,7 @@ public class MigrationUtil {
   static String OLD_TEMPLATE_PORLET_NAME   = "Content List Viewer";
   static String NEW_TEMPLATE_PORTLET_NAME  = "content-list-viewer";
 
-  private static Log log = ExoLogger.getLogger(MigrationUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(MigrationUtil.class);
 
   static public String checkAndUpdateViewerTemplate(String strTemplatePath) {
 
@@ -60,18 +60,23 @@ public class MigrationUtil {
         } else if (root.hasNode("exo:ecm/views/templates/content-list-viewer/paginators/"+templateName)) {
           strTemplatePath = "/exo:ecm/views/templates/content-list-viewer/paginators/"+templateName;
         } else {
-          if (log.isInfoEnabled()) log.info("Cannot locate in new location : "+strTemplatePath);
+          if (LOG.isInfoEnabled()) LOG.info("Cannot locate in new location : "+strTemplatePath);
         }
       } catch (LoginException le) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(le.getMessage());
+        }
       } catch (NoSuchWorkspaceException nswe) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(nswe.getMessage());
+        }
       } catch (RepositoryException re) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(re.getMessage());
+        }
       }
-
     }
 
     return strTemplatePath;
   }
-
-
-
 }

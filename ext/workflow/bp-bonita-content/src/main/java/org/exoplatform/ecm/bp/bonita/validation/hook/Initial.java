@@ -12,6 +12,8 @@ import org.exoplatform.ecm.bp.bonita.validation.ProcessUtil;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.ow2.bonita.definition.TxHook;
 import org.ow2.bonita.facade.APIAccessor;
 import org.ow2.bonita.facade.exception.ActivityNotFoundException;
@@ -21,6 +23,8 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class Initial implements TxHook {
 
+  private static final Log LOG  = ExoLogger.getLogger(Initial.class);
+  
   public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity) throws Exception {
     initialVariables(api, activity);
     ProcessUtil.requestForValidation(api, activity);
@@ -76,6 +80,9 @@ public class Initial implements TxHook {
         String value = node.getProperty(propName).getString();
         api.getRuntimeAPI().setVariable(activity.getUUID(), propName, value);
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
   }

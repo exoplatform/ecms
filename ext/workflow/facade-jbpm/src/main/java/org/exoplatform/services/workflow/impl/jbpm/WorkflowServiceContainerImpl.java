@@ -205,7 +205,7 @@ public class WorkflowServiceContainerImpl implements
     try {
       jbpmContext.close();
       jbpmContext = null;
-    } catch (Throwable t) {
+    } catch (Exception t) {
       jbpmContext.setRollbackOnly();
       if (LOG.isErrorEnabled()) {
         LOG.error(t);

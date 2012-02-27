@@ -353,7 +353,11 @@ public class Utils {
               trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
             }
           }
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       try {
         List<Node> childNodes = new ArrayList<Node>();
         for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
@@ -362,7 +366,11 @@ public class Utils {
         for (Node child : childNodes) {
           removeDeadSymlinksRecursively(child);
         }
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
   }
   

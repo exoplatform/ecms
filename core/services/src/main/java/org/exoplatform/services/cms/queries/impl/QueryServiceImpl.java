@@ -183,7 +183,11 @@ public class QueryServiceImpl implements QueryService, Startable{
     Node userHome = null;
     try {
       userHome = nodeHierarchyCreator_.getUserNode(provider, userName);
-    }catch(Exception e) {}
+    } catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     if (userHome == null) {
       if(usersHome.hasNode(userName)) {
         userHome = usersHome.getNode(userName);
@@ -682,8 +686,8 @@ public class QueryServiceImpl implements QueryService, Startable{
       return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;
     }
     catch(Exception e) {
+      return false;
     }
-    return false;
   }
 
   /**

@@ -34,6 +34,8 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -57,6 +59,8 @@ import org.exoplatform.webui.core.UITree;
 )
 public class UICategoryNavigationTreeBase extends UITree {
 
+  private static final Log         LOG            = ExoLogger.getLogger(UICategoryNavigationTreeBase.class);
+  
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UITree#renderNode(java.lang.Object)
    */
@@ -246,6 +250,9 @@ public class UICategoryNavigationTreeBase extends UITree {
                                                                     .getSelectedUserNode()
                                                                     .getURI()), "UTF-8");
     } catch (UnsupportedEncodingException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
 
     // categoryPath: /News/France/Blah/Bom

@@ -111,7 +111,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(DriverConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(DriverConnector.class);
 
   /** The limit. */
   private int limit;
@@ -222,8 +222,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                          Text.escapeIllegalJcrChars(driverName));
 
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getFoldersAndFiles: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getFoldersAndFiles: ", e);
       }
     }
 
@@ -310,8 +310,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                            uploadId);
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform processUpload: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform processUpload: ", e);
       }
     }
 
@@ -385,7 +385,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
       }
       return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
-    } catch (MissingResourceException e) {}
+    } catch (MissingResourceException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return name;
   }
 
@@ -592,7 +596,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private boolean isFolder(Node checkNode) throws RepositoryException {
     try {
       if ( isDMSDocument(checkNode) ) return false;
-    }catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return
         checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)
         || checkNode.isNodeType(NodetypeConstant.NT_FOLDER)

@@ -56,7 +56,7 @@ public class RecordsServiceImpl implements RecordsService {
   /**
    * Construct log object
    */
-  private static Log log_ = ExoLogger.getLogger("services.cms.records");
+  private static final Log LOG = ExoLogger.getLogger("services.cms.records");
 
   /**
    * ActionServiceContainer object: process for action with node
@@ -72,8 +72,6 @@ public class RecordsServiceImpl implements RecordsService {
    * Manage audit history;
    */
   private AuditService auditService_;
-
-  private static final Log LOG  = ExoLogger.getLogger(RecordsServiceImpl.class);
 
   /**
    * Constructor method
@@ -145,7 +143,9 @@ public class RecordsServiceImpl implements RecordsService {
    * {@inheritDoc}
    */
   public void computeAccessions(Node filePlan) throws RepositoryException {
-    log_.info("Compute records accession");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Compute records accession");
+    }
     for(Node record:getAccessionableRecords(filePlan)){
       Calendar accessionDate = record.getProperty("rma:accessionDate").getDate();
       Calendar currentDate = new GregorianCalendar();
@@ -158,7 +158,9 @@ public class RecordsServiceImpl implements RecordsService {
             session.getWorkspace().copy(record.getPath(),
                 accessionLocation + "/" + record.getName());
           } catch (ItemNotFoundException ex) {
-            log_.warn(ex);
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(ex.getMessage());
+            }
           }
         }
         record.setProperty("rma:accessionExecuted", true);
@@ -166,7 +168,9 @@ public class RecordsServiceImpl implements RecordsService {
         filePlan.save() ;
       }
     }
-    log_.info("Compute records accession over");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Compute records accession over");
+    }
   }
 
   /**
@@ -242,8 +246,11 @@ public class RecordsServiceImpl implements RecordsService {
             record.setProperty("rma:holdExecuted", true);
             record.save();
             filePlan.save() ;
-          } else
-            log_.info("Record still in holding");
+          } else {
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Record still in holding");
+            }
+          }
         }
       }
     }
@@ -254,7 +261,9 @@ public class RecordsServiceImpl implements RecordsService {
    * {@inheritDoc}
    */
   public void computeTransfers(Node filePlan) throws RepositoryException {
-    log_.info("Compute records transfer");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Compute records transfer");
+    }
     List<Node> toTransfer = getTransferableRecords(filePlan) ;
     for (Node record:toTransfer) {
       Calendar transferDate = record.getProperty("rma:transferDate").getDate();
@@ -262,12 +271,16 @@ public class RecordsServiceImpl implements RecordsService {
       if (transferDate.before(currentDate)) {
         Session session = record.getSession();
         String transferLocation = record.getProperty("rma:transferLocation").getString();
-        log_.info("Transfer record to: " + transferLocation);
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Transfer record to: " + transferLocation);
+        }
         if (transferLocation != null && !"".equals(transferLocation)) {
           try {
             session.getWorkspace().copy(record.getPath(),transferLocation + "/" + record.getName());
           } catch (ItemNotFoundException ex) {
-            log_.error(ex.getMessage(), ex);
+            if (LOG.isErrorEnabled()) {
+              LOG.error(ex.getMessage(), ex);
+            }
           }
         }
         record.setProperty("rma:transferExecuted", true);
@@ -275,7 +288,9 @@ public class RecordsServiceImpl implements RecordsService {
         filePlan.save() ;
       }
     }
-    log_.info("Transfer records over");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Transfer records over");
+    }
   }
 
   /**
@@ -489,7 +504,9 @@ public class RecordsServiceImpl implements RecordsService {
     Calendar cutoffDateTime = record.getProperty("rma:cutoffDateTime").getDate();
     Calendar currentDate = new GregorianCalendar();
     if (currentDate.after(cutoffDateTime)) {
-      log_.info("Cutoff has expired");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Cutoff has expired");
+      }
       computeNextRecordPhaseAfterCutoff(filePlan, record);
       return true;
     }
@@ -508,7 +525,9 @@ public class RecordsServiceImpl implements RecordsService {
   throws RepositoryException {
     boolean cutoffNow = record.getProperty("rma:cutoffNow").getBoolean();
     if (cutoffNow) {
-      log_.info("Cutoff record now");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Cutoff record now");
+      }
       computeNextRecordPhaseAfterCutoff(filePlan, record);
       return true;
     }
@@ -527,7 +546,9 @@ public class RecordsServiceImpl implements RecordsService {
   throws RepositoryException {
     boolean cutoffIsObsolete = record.getProperty("rma:isObsolete").getBoolean();
     if (cutoffIsObsolete) {
-      log_.info("Cutoff is obsolete");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Cutoff is obsolete");
+      }
       computeNextRecordPhaseAfterCutoff(filePlan, record);
       return true;
     }
@@ -545,7 +566,9 @@ public class RecordsServiceImpl implements RecordsService {
   private boolean cutoffSuperseded(Node filePlan, Node record) throws RepositoryException {
     boolean cutoffIsSuperseded = record.getProperty("rma:superseded").getBoolean();
     if(cutoffIsSuperseded) {
-      log_.info("Cutoff is superseded");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Cutoff is superseded");
+      }
       computeNextRecordPhaseAfterCutoff(filePlan, record);
       return true;
     }
@@ -644,7 +667,11 @@ public class RecordsServiceImpl implements RecordsService {
           if (eventTrigger != null) {
             record.setProperty("rma:cutoffEvent", eventTrigger);
           }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
       }
       record.save() ;
       filePlan.save() ;
@@ -748,5 +775,4 @@ public class RecordsServiceImpl implements RecordsService {
       }
     }
   }
-
 }

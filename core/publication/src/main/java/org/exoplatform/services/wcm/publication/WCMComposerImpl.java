@@ -90,7 +90,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private boolean useDefaultLanguage = true;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(WCMComposerImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(WCMComposerImpl.class);
 
   /** The template filter query */
   private String templatesFilter;
@@ -175,14 +175,15 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
     } else {
-      try {
-        remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      } catch (Exception e) {}
+      remoteUser = getRemoteUser();
     }
     try {
       repository = ((ManageableRepository)repositoryService.getCurrentRepository()).getConfiguration().getName();
-    } catch (Exception e) {}
-
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
 
     if (workspace==null) {
       if (nodeIdentifier.lastIndexOf("/") == 0) nodeIdentifier = nodeIdentifier.substring(1);
@@ -190,7 +191,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       workspace = params[1];
       try {
         nodeIdentifier = nodeIdentifier.substring(repository.length()+workspace.length()+1);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
     if (MODE_LIVE.equals(mode) && isCached) {
       String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null, null);
@@ -242,9 +247,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
     } else {
-      try {
-        remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      } catch (Exception e) {}
+      remoteUser = getRemoteUser();
     }
 
     if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
@@ -266,7 +269,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
         sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
       }
-      if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+      if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
       NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
     
       Node node = null, viewNode = null;
@@ -277,7 +280,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
           nodes.add(viewNode);
         }
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     if (MODE_LIVE.equals(mode) && isCached) {
       String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
       cache.put(hash, nodes);
@@ -306,9 +313,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
     } else {
-      try {
-        remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      } catch (Exception e) {}
+      remoteUser = getRemoteUser();
     }
 
     if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
@@ -325,7 +330,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       Result cachedNodes = (Result)cache.get(hash);
       if (cachedNodes != null) return cachedNodes;
     }
-    if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+    if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
 
     NodeIterator nodeIterator ;
     if (totalSize==0) {
@@ -463,7 +468,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       try {
         lnode = multiLanguageService.getLanguage(node, languageFilter);
       } catch (AccessDeniedException e) {
-        if (log.isTraceEnabled()) log.trace("AccessDenied on "+languageFilter+" translation for "+node.getPath());
+        if (LOG.isTraceEnabled()) LOG.trace("AccessDenied on "+languageFilter+" translation for "+node.getPath());
       }
       if (lnode!=null) {
 
@@ -537,12 +542,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   public boolean updateContent(String workspace, String path, HashMap<String, String> filters) throws Exception {
     if (isCached) {
       String[] orderTypes = {null, "ASC", "DESC"};
-      if (log.isDebugEnabled()) log.debug("updateContent : "+path);
+      if (LOG.isDebugEnabled()) LOG.debug("updateContent : "+path);
       String part = (path.lastIndexOf("/") >= 0) ? path.substring(0, path.lastIndexOf("/")) : path;
-      String remoteUser = null;
-      try {
-        remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      } catch (Exception e) {}
+      String remoteUser = getRemoteUser();
 
       String oid = null;
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
@@ -566,7 +568,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
         }
       } catch (RepositoryException e) {
-        if (log.isErrorEnabled()) log.error("Can't find UUID for path : "+workspace+":"+path);
+        if (LOG.isErrorEnabled()) LOG.error("Can't find UUID for path : "+workspace+":"+path);
       }
 
       for (String lang:usedLanguages) {
@@ -669,7 +671,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         }
       }
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled())log.error("Unexpected error when getting node taxonomies");
+      if (LOG.isErrorEnabled())LOG.error("Unexpected error when getting node taxonomies");
     }
     return "";
   }
@@ -697,12 +699,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception {
     if (isCached) {
       String[] orderTypes = {null, "ASC", "DESC"};
-      String remoteUser = null;
-      try {
-        remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      } catch (Exception e) {}
+      String remoteUser = getRemoteUser();
 
-      if (log.isDebugEnabled()) log.debug("updateContents : "+path);
+      if (LOG.isDebugEnabled()) LOG.debug("updateContents : "+path);
 
       for (String lang:usedLanguages) {
         for (String recursive:new String[]{"true", "false"}) {
@@ -757,7 +756,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     public void cleanTemplates() throws Exception {
       this.templatesFilter = null;
       getTemplatesSQLFilter();
-      if (log.isDebugEnabled()) log.debug("WCMComposer templates have been cleaned !");
+      if (LOG.isDebugEnabled()) LOG.debug("WCMComposer templates have been cleaned !");
     }
 
   @Managed
@@ -866,8 +865,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
       return templatesFilter;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getTemlatesSQLFilter: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getTemlatesSQLFilter: ", e);
       }
       return null;
     }
@@ -925,5 +924,21 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     List<AccessControlEntry> ret = new ArrayList<AccessControlEntry>(); 
     ret.add(new AccessControlEntry(sharedGroup, PermissionType.READ));
     return ret;
+  }
+  
+  /**
+   * Get login User
+   * @return user name
+   */
+  private String getRemoteUser() {
+    String remoteUser = null;
+    try {
+      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+    return remoteUser;
   }
 }

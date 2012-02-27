@@ -117,7 +117,13 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
           templates.put(label, contentType);
         }
       } catch (AccessControlException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
     if(templates.size()>0) {

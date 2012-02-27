@@ -28,13 +28,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import org.exoplatform.services.log.Log;
 import org.dom4j.Element;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ExoResourceBundle;
 import org.exoplatform.services.resources.XMLResourceBundleParser;
 import org.exoplatform.services.workflow.Form;
@@ -57,7 +57,7 @@ public class FormImpl implements Form{
   private byte[] iconBytes;
   private byte[] stateImageBytes;
 
-  private static Log log = ExoLogger.getLogger(FormImpl.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(FormImpl.class.getName());
 
   public FormImpl(FileDefinition fileDefinition, Element element, Locale locale) {
     Element childElement = element.element("resource-bundle");
@@ -83,8 +83,8 @@ public class FormImpl implements Form{
         }
         content = sb.toString();
       } catch (Exception e) {
-        if (log.isDebugEnabled()) {
-          log.debug("resource bundle not found");
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("resource bundle not found");
         }
       }
     }
@@ -101,24 +101,24 @@ public class FormImpl implements Form{
           content = new String(buf, "UTF-8");
           is.close();
         } catch (Exception e) {
-          if (log.isDebugEnabled()) {
-            log.debug("resource bundle not found");
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("resource bundle not found");
           }
         }
       }
     }
 
-    if (log.isDebugEnabled()) {
-      log.debug("Try to find localised resource : " + localisedFileName);
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Try to find localised resource : " + localisedFileName);
     }
     if (content.length() > 0) {
-      if (log.isDebugEnabled()) {
-        log.debug("resource bundle found true");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("resource bundle found true");
       }
       resourceBundle = new ExoResourceBundle(content);
     } else{
-      if (log.isDebugEnabled()) {
-        log.debug("resource bundle not found");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("resource bundle not found");
       }
     }
 
@@ -231,7 +231,7 @@ public class FormImpl implements Form{
   public byte[] getBytes(FileDefinition fileDefinition, String file) {
     try {
       return fileDefinition.getBytes(file);
-    } catch (Throwable t) {
+    } catch (Exception t) {
       return null;
     }
   }

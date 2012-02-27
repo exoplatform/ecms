@@ -36,11 +36,11 @@ import org.quartz.JobExecutionException;
  * 10:48:40 AM
  */
 public class ClearOrphanSymlinksCronJobImpl implements Job {
-  private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksCronJobImpl.class);
+  private static final Log    LOG                 = ExoLogger.getLogger(ClearOrphanSymlinksCronJobImpl.class);
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    if (log.isDebugEnabled()) {
-      log.debug("Start Executing ClearOrphanSymlinksCronJobImpl");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Start Executing ClearOrphanSymlinksCronJobImpl");
     }
 
     String queryString = "SELECT * FROM exo:symlink order by exo:dateCreated DESC";
@@ -78,6 +78,9 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
             } catch (ItemNotFoundException e) {
               deleteNodeList.add(symlinkNode);
             } catch (RepositoryException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
             } finally {
               sessionSet.add(targetNode.getSession());
             }
@@ -87,18 +90,18 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
             try {
               String nodePath = node.getPath();
               trashService.moveToTrash(node, sessionProvider);
-              if (log.isInfoEnabled()) {
-                log.info("ClearOrphanSymlinksCronJobImpl: move orphan symlink " + nodePath + " to Trash");
+              if (LOG.isInfoEnabled()) {
+                LOG.info("ClearOrphanSymlinksCronJobImpl: move orphan symlink " + nodePath + " to Trash");
               }
             } catch (Exception e) {
-              if (log.isErrorEnabled()) {
-                log.error("ClearOrphanSymlinksCronJobImpl: Can not move to trash node :" + node.getPath(), e);
+              if (LOG.isErrorEnabled()) {
+                LOG.error("ClearOrphanSymlinksCronJobImpl: Can not move to trash node :" + node.getPath(), e);
               }
             }
           }
         } catch (RepositoryException e) {
-          if (log.isErrorEnabled()) {
-            log.error("ClearOrphanSymlinksCronJobImpl: Error when deleting orphan symlinks in workspace: " + workspace, e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("ClearOrphanSymlinksCronJobImpl: Error when deleting orphan symlinks in workspace: " + workspace, e);
           }
         } finally {
           if (session != null && session.isLive())
@@ -110,8 +113,8 @@ public class ClearOrphanSymlinksCronJobImpl implements Job {
           targetSession.logout();
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error occurs in ClearOrphanSymlinksCronJobImpl", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error occurs in ClearOrphanSymlinksCronJobImpl", e);
       }
       sessionProvider.close();
     }

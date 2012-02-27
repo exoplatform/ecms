@@ -41,6 +41,8 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
@@ -69,6 +71,9 @@ public class TrashServiceImpl implements TrashService {
   private String trashWorkspace_;
   private String trashHome_;
   private ExoCache<String, Object> cache;
+  
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(TrashServiceImpl.class);
 
   public TrashServiceImpl(RepositoryService repositoryService,
                           LinkManager linkManager,
@@ -165,7 +170,11 @@ public class TrashServiceImpl implements TrashService {
     if (deep == 0 && !node.isNodeType(SYMLINK)) {
       try {
         Utils.removeDeadSymlinks(node);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
@@ -228,7 +237,11 @@ public class TrashServiceImpl implements TrashService {
         Node targetNode = null;
         try {
           targetNode = targetNodeSession.getNodeByUUID(taxonomyLinkUUID);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
         if (targetNode != null && isInTaxonomyTree(node, targetNode)) {
           List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK);
           boolean found = false;
@@ -367,7 +380,11 @@ public class TrashServiceImpl implements TrashService {
                 restoreFromTrash(trashChild.getPath(), sessionProvider, deep + 1);
                 found = true;
                 break;
-            } catch (Exception e) {}
+            } catch (Exception e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
           }
         }
         if (!found) break;
@@ -393,6 +410,9 @@ public class TrashServiceImpl implements TrashService {
               found = true;
               break;
             } catch (Exception e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
             }
           }
         }

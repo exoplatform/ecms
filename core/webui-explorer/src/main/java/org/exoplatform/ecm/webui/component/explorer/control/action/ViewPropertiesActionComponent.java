@@ -24,6 +24,8 @@ import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIPropertiesMana
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIPropertyForm;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -43,6 +45,8 @@ import org.exoplatform.webui.event.Event;
  )
 public class ViewPropertiesActionComponent extends UIComponent {
 
+  private static final Log         LOG            = ExoLogger.getLogger(ViewPropertiesActionComponent.class);
+  
   public static class ViewPropertiesActionListener extends UIActionBarActionListener<ViewPropertiesActionComponent> {
     public void processEvent(Event<ViewPropertiesActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -71,6 +75,9 @@ public class ViewPropertiesActionComponent extends UIComponent {
           }
         }
       } catch (NullPointerException npe) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(npe.getMessage());
+        }
       } 
       
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);

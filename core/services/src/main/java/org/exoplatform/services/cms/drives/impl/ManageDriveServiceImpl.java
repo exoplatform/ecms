@@ -176,6 +176,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       }
       getAllDrives(true);
     }catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
   }
 

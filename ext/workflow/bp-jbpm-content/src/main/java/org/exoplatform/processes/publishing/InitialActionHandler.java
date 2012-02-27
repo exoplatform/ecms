@@ -28,6 +28,8 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.exe.ExecutionContext;
@@ -41,6 +43,8 @@ import org.jbpm.graph.exe.ExecutionContext;
 public class InitialActionHandler implements ActionHandler {
 
   private static final long serialVersionUID = 1L;
+  
+  private static final Log LOG = ExoLogger.getLogger(InitialActionHandler.class);
 
   public void execute(ExecutionContext context) throws Exception {
     initialVariables(context);
@@ -83,6 +87,9 @@ public class InitialActionHandler implements ActionHandler {
         String value = node.getProperty(propName).getString();
         context.setVariable(propName,value);
       }catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
   }

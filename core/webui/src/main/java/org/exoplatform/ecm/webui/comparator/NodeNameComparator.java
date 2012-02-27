@@ -40,7 +40,7 @@ public class NodeNameComparator implements Comparator<Node> {
       }
       return nodeName2.compareToIgnoreCase(nodeName1) ;
     }catch (Exception e) {
+      return 0;
     }
-    return 0;
   }
 }

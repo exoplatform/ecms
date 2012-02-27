@@ -31,6 +31,8 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
@@ -77,6 +79,9 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIManagerUsers extends UITabPane {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UIManagerUsers.class);
+  
   /** The TITL e_. */
   private String[] TITLE_  = {"Mail", "isBanned"};
 
@@ -152,7 +157,11 @@ public class UIManagerUsers extends UITabPane {
         userInfor.setUserName(user.getUserName());
         userInfor.setRole(role);
         listUserInfor.add(userInfor);
-      }catch(Exception ex){}
+      }catch(Exception ex){
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ex.getMessage());
+        }
+      }
     }
   }
 

@@ -491,8 +491,9 @@ public class UIBrowseContainer extends UIContainer {
     try{
       eNode.checkPermission(PermissionType.ADD_NODE);
       return true;
-    } catch(Exception ac){}
-    return false;
+    } catch(Exception ac){
+      return false;
+    }
   }
 
   public void setKeyValue(String keyValue) { keyValue_ = keyValue; };
@@ -1609,8 +1610,9 @@ public class UIBrowseContainer extends UIContainer {
     try{
       eNode.checkPermission(PermissionType.READ);
       return true;
-    } catch(Exception ac){}
-    return false;
+    } catch(Exception ac){
+      return false;
+    }
   }
 
   private Map<String, List<? extends Object>> getChildOfSubCategory(RepositoryService repositoryService, Node subCat,
@@ -1707,7 +1709,11 @@ public class UIBrowseContainer extends UIContainer {
               }
             }
           }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
       }
     }
     return refDocuments;
@@ -1755,7 +1761,11 @@ public class UIBrowseContainer extends UIContainer {
             Node nodeTemp2Parent = nodeTemp2.getParent();
             if (!historyNode.getPath().equals(nodeTemp2.getPath()) && historyNode.getPath().equals(nodeTemp2Parent.getPath()))
               uiContainer.listHistoryNode.remove(nodeTemp2);
-          } catch (ItemNotFoundException ex) {}
+          } catch (ItemNotFoundException ex) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(ex.getMessage());
+            }
+          }
         }
         uiContainer.listHistoryNode.remove(nodeTemp1);
       }

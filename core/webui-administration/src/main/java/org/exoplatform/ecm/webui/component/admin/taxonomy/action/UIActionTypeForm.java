@@ -33,6 +33,8 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -60,6 +62,8 @@ public class UIActionTypeForm extends UIForm {
   final static public String             ACTION_TYPE   = "actionType";
 
   final static public String             CHANGE_ACTION = "ChangeActionType";
+  
+  private static final Log LOG  = ExoLogger.getLogger(UIActionTypeForm.class);
 
   private List<SelectItemOption<String>> typeList_;
 
@@ -141,6 +145,9 @@ public class UIActionTypeForm extends UIForm {
         taxoTreeNode = taxonomyService.getTaxonomyTree(taxoTreeData.getTaxoTreeName(),
             true);
       } catch (RepositoryException re) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(re.getMessage());
+        }
       }
       uiActionForm.createNewAction(taxoTreeNode, actionType, true);
       uiActionTaxonomyManager.setRendered(true);

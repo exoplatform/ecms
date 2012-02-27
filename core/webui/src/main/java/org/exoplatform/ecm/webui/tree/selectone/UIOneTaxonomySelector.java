@@ -221,8 +221,8 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
       display = rootTaxonomyName.concat(node.getPath().replace(rootTreePath, "")).replaceAll("/", ".");
       return Utils.getResourceBundle(("eXoTaxonomies.").concat(display).concat(".label"));
     } catch (MissingResourceException me) {
+      return node.getName();
     }
-    return node.getName();
   }
 
   public void onChange(final Node currentNode, Object context) throws Exception {

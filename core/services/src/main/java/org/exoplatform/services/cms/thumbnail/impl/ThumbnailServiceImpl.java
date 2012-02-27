@@ -36,6 +36,8 @@ import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SARL
@@ -45,6 +47,8 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
  */
 public class ThumbnailServiceImpl implements ThumbnailService {
 
+  private static final Log LOG  = ExoLogger.getLogger(ThumbnailServiceImpl.class);
+  
   final private static String JCR_CONTENT = "jcr:content";
   final private static String JCR_MIMETYPE = "jcr:mimeType";
   final private static String JCR_DATA = "jcr:data";
@@ -275,6 +279,9 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       thumbnailNode.getSession().save();
     } catch (ItemExistsException e) {
       // The folder could already be created due to potential concurrent access
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     } finally {
       thumbnailStream.close();
     }

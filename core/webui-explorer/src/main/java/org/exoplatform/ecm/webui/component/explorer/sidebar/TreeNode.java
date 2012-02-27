@@ -24,6 +24,8 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.util.Text;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
@@ -34,6 +36,8 @@ import org.exoplatform.services.wcm.core.NodeLocation;
  * 5:37:31 PM
  */
 public class TreeNode {
+  private static final Log LOG  = ExoLogger.getLogger(TreeNode.class);
+  
   //TODO Need use this class for BC TreeNode
   private boolean isExpanded_ ;
   private String path_;
@@ -74,7 +78,11 @@ public class TreeNode {
         buffer.append(index);
         buffer.append(']');
       }
-    } catch (RepositoryException e) {}
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return buffer.toString();
   }
 

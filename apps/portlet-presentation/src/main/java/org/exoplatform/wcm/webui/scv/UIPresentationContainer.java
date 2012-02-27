@@ -40,6 +40,8 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.Text;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -68,6 +70,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIPresentationContainer extends UIContainer{
   public final static String PARAMETER_REGX       = "(.*)/(.*)";
+  private static final Log         LOG            = ExoLogger.getLogger(UIPresentationContainer.class);
 
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;
@@ -117,6 +120,7 @@ public class UIPresentationContainer extends UIContainer{
           try {
             title = content.getProperty("dc:title").getValues()[0].getString().trim();
           } catch (Exception e) {
+            // Do nothing
           }
         }
       }
@@ -154,7 +158,11 @@ public class UIPresentationContainer extends UIContainer{
         String state = node.getProperty("publication:currentState").getValue().getString();
         try {
           state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
-        } catch (MissingResourceException e) { }
+        } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
         return state;
       }
     }

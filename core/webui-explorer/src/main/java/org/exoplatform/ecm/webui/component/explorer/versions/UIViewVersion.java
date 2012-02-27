@@ -100,6 +100,9 @@ public class UIViewVersion extends UIBaseNodePresentation {
       String nodeType = node.getPrimaryNodeType().getName();
       if(isNodeTypeSupported(node)) return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     return null ;
   }

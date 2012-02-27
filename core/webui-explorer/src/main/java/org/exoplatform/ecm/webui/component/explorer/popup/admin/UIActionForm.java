@@ -43,6 +43,8 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
@@ -95,6 +97,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
 
 
   private static final String EXO_ACTIONS = "exo:actions";
+  private static final Log LOG  = ExoLogger.getLogger(UIActionForm.class);
 
   public String getDriverName() {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -168,6 +171,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       try {
         dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName);
       } catch (Exception e){
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
     return dialogPath;

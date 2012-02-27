@@ -489,6 +489,7 @@ public class Utils {
         return node.getProperty(EXO_OWNER).getString();
       }
     } catch (Exception e) {
+      return null;
     }
     return null;
   }
@@ -695,7 +696,11 @@ public class Utils {
     if (orgNode.hasProperty(propertyName)) {
       try {
         currentValue =  orgNode.getProperty(propertyName).getString() ;
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
@@ -723,7 +728,11 @@ public class Utils {
       strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
       acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
       cancelButton = resourceBundle.getString("UIPresentation.title.CancelButton");
-    }catch (Exception E){}
+    } catch (Exception e){
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     actionsb.append(" return InlineEditor.presentationRequestChange");
 
     if (isGenericProperty) {
@@ -913,7 +922,9 @@ public class Utils {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {}
+        } catch(Exception ex) {
+          // Do nothing
+        }
       }
     } 
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {

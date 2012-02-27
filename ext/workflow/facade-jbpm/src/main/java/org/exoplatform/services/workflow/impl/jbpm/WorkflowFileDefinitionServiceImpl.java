@@ -53,8 +53,8 @@ public class WorkflowFileDefinitionServiceImpl implements WorkflowFileDefinition
       FileDefinitionWapper fileDefinitionWapper = new FileDefinitionWapper(processDefinition.getFileDefinition());
       return fileDefinitionWapper;
     } catch (Exception e) {
+      return null;
     }
-    return null;
   }
 
   public void store(FileDefinition fileDefinition, String processId) {

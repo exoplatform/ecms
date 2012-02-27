@@ -268,7 +268,7 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
       try{
         return sessionProvider.getSession(ws,manageRepo).getNodeByUUID(uuid);
       }catch(Exception e) {
-
+        // Do nothing
       }
     }
     return null;

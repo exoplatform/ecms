@@ -67,7 +67,7 @@ import org.quartz.JobExecutionContext;
  */
 public class WCMCoreUtils {
 
-  private static Log log = ExoLogger.getLogger("wcm.WCMCoreUtils");
+  private static final Log LOG = ExoLogger.getLogger("wcm.WCMCoreUtils");
   
   private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
                                                 + "and exo:active='true' "
@@ -201,8 +201,8 @@ public class WCMCoreUtils {
       }
       endRequest(organizationService);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("hasPermission() failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("hasPermission() failed because of ", e);
       }
     }
     return false;
@@ -212,8 +212,8 @@ public class WCMCoreUtils {
     try {
       return Arrays.asList(listAccess.load(0, listAccess.getSize()));
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("getAllElementsOfListAccess() failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("getAllElementsOfListAccess() failed because of ", e);
       }
     }
     return null;
@@ -241,8 +241,8 @@ public class WCMCoreUtils {
       RepositoryService repositoryService = getService(RepositoryService.class);
       return repositoryService.getCurrentRepository();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("getRepository() failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("getRepository() failed because of ", e);
       }
     }
     return null;
@@ -267,8 +267,8 @@ public class WCMCoreUtils {
     Properties productInformationProperties = new Properties();
     try {
       ConfigurationManager configManager = WCMCoreUtils.getService(ConfigurationManager.class);
-      if (log.isInfoEnabled()) {
-        log.info("Read products versions from " + filePath);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Read products versions from " + filePath);
       }
       InputStream inputStream = configManager.getInputStream(filePath);
       
@@ -312,8 +312,8 @@ public class WCMCoreUtils {
                                        .getString());
       }
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Unexpected problem happen when active stylesheet", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when active stylesheet", e);
       }
     } 
     return buffer.toString();
@@ -341,8 +341,8 @@ public class WCMCoreUtils {
         }
       }
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Unexpected problem happen when active stylesheet", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when active stylesheet", e);
       }
     } 
     return buffer.toString();
@@ -370,8 +370,8 @@ public class WCMCoreUtils {
         }
       }
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Unexpected problem happen when active javascript", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected problem happen when active javascript", e);
       }
     } 
     return buffer.toString();
@@ -392,6 +392,9 @@ public class WCMCoreUtils {
     try {
       primaryItem = node.getPrimaryItem();
     } catch (ItemNotFoundException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     if (primaryItem != null && primaryItem.isNode()) {
       Node primaryNode = (Node) node.getPrimaryItem();

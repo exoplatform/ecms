@@ -20,6 +20,8 @@ import javax.jcr.Item;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -41,6 +43,8 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UISymLinkContainer extends UIContainer {
 
+  private static final Log LOG = ExoLogger.getLogger(UISymLinkContainer.class);
+  
   private NodeLocation uploadedNode_ ;
 
   public UISymLinkContainer() throws Exception {
@@ -57,7 +61,11 @@ public class UISymLinkContainer extends UIContainer {
         Node primaryNode = (Node) primaryItem ;
         if(primaryNode.isNodeType(nodeType)) return primaryNode ;
       }
-    } catch(Exception e) { }
+    } catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return uploadedNode;
   }
 

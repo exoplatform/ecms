@@ -23,6 +23,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UILanguageTypeForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageManager;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -44,6 +46,9 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UISingleUploadContainer extends UIContainer {
+  
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UISingleUploadContainer.class);
 
   private NodeLocation uploadedNode_ ;
 
@@ -62,7 +67,11 @@ public class UISingleUploadContainer extends UIContainer {
         Node primaryNode = (Node) primaryItem ;
         if (primaryNode.isNodeType(nodeType)) return primaryNode ;
       }
-    } catch(Exception e) { }
+    } catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return uploadNode ;
   }
 

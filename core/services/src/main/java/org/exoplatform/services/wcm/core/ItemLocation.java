@@ -210,7 +210,9 @@ public class ItemLocation {
       try {
         if (item instanceof Node)
           uuid = ((Node)item).getUUID();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        // Do nothing}
+      }
       boolean isSystemSession = IdentityConstants.SYSTEM.equals(session.getUserID());
       return new ItemLocation(repository, workspace, path, uuid, isSystemSession);
     } catch (Exception e) {

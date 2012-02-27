@@ -103,8 +103,9 @@ public class FCKUtils {
     try {
       ((ExtendedNode)node).checkPermission(PermissionType.ADD_NODE) ;
       return true ;
-    } catch (AccessControlException e) { }
-    return false ;
+    } catch (AccessControlException e) {
+      return false ;
+    }
   }
 
   public static String getPortalName() {

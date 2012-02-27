@@ -348,6 +348,7 @@ public class UICLVPresentation extends UIContainer {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
         } catch (Exception ex) {
+          // Do nothing
         }
       }
     }
@@ -741,6 +742,9 @@ public class UICLVPresentation extends UIContainer {
           strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
                                                  .getString("UICLVPresentation.action.delete");
         } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         sb.append("          <div style=\"float: right\">");
         sb.append("            <a href=\"" + contentDeleteLink + "\" title=\""
@@ -756,6 +760,9 @@ public class UICLVPresentation extends UIContainer {
           strEditBundle = portletRequestContext.getApplicationResourceBundle()
                                                .getString("UICLVPresentation.action.edit");
         } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         sb.append("          <div style=\"float: right\">");
         sb.append("            <a onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink
@@ -769,6 +776,9 @@ public class UICLVPresentation extends UIContainer {
             strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
                                                  .getString("UICLVPresentation.action.publish");
           } catch (MissingResourceException e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
           }
           sb.append("          <div style=\"float: right\">");
           sb.append("            <a href=\"" + fastPublishLink + "\" title=\""
@@ -790,6 +800,9 @@ public class UICLVPresentation extends UIContainer {
           state = portletRequestContext.getApplicationResourceBundle()
                                        .getString("PublicationStates." + state);
         } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         sb.append("          <div class=\"EdittingCurrentState\" style=\"float: right\">");
         sb.append("" + state);

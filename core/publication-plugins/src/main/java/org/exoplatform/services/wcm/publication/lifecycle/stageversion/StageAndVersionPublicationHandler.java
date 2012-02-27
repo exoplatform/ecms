@@ -23,6 +23,8 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -36,6 +38,9 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  */
 public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
 
+  /** The Logger **/
+  private static final Log LOG = ExoLogger.getLogger(StageAndVersionPublicationHandler.class);
+  
   /** The template service. */
   private TemplateService templateService;
 
@@ -114,7 +119,11 @@ public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
     try {
       siteName = Util.getPortalRequestContext().getPortalOwner();
       remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     publicationService.updateLifecyleOnChangeContent(checkNode, siteName, remoteUser);
   }
 

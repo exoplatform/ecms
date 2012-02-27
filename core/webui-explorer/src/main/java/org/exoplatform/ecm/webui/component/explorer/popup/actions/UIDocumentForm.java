@@ -754,7 +754,13 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         uiDocumentForm.getlistTaxonomyName().remove(idxInput);
         uiDocumentForm.setIsUpdateSelect(true);
       } catch (NumberFormatException ne) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ne.getMessage());
+        }
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);
     }

@@ -32,6 +32,8 @@ import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -43,6 +45,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @SuppressWarnings("unchecked")
 public class QueryResultPageList<E> extends AbstractPageList<E> {
 
+  private static final Log LOG  = ExoLogger.getLogger(QueryResultPageList.class);
+  
   private static final String ORDER_BY = "ORDER BY";
   
   /** The query data */
@@ -195,7 +199,11 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
       try {
         buffer.clear();
         populateCurrentPage(currentPage_);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
   }
   

@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -48,6 +50,9 @@ import javax.xml.transform.dom.DOMSource;
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(ResourceBundleConnector.class);
+  
   @GET
   @Path("/getBundle/")
   public Response getBundle (
@@ -84,7 +89,11 @@ public class ResourceBundleConnector implements ResourceContainer {
             if (remainingKeys.isEmpty()) {
               break loop;
             }
-          } catch (MissingResourceException e) {}
+          } catch (MissingResourceException e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
         }
       }
       document.appendChild(bundles);

@@ -38,6 +38,8 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -70,6 +72,8 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIPermissionInfo extends UIContainer {
 
+  private static final Log LOG = ExoLogger.getLogger(UIPermissionInfo.class);
+  
   public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode",
     "setProperty", "remove"} ;
 
@@ -249,7 +253,11 @@ public class UIPermissionInfo extends UIContainer {
         for (Node symlink : symlinks) {
           try {
             linkManager.updateLink(symlink, currentNode);
-          } catch (Exception e) {}
+          } catch (Exception e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
         }
       }
       currentNode.getSession().save();

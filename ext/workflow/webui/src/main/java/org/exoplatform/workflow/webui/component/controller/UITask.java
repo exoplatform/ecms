@@ -247,6 +247,9 @@ public class UITask extends UIForm implements UISelectable {
           uiTaskManager.addChild(uiComponent);
           uiComponent.setRendered(false);
         } catch (ClassNotFoundException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
 
       } else if (NODE_VIEW.equals(component)) {
@@ -265,6 +268,9 @@ public class UITask extends UIForm implements UISelectable {
           uiTaskManager.addChild(uiComponent);
           uiComponent.setRendered(false);
         } catch (ClassNotFoundException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
       } else {
         if (component == null || TEXT.equals(component)) {
@@ -312,7 +318,11 @@ public class UITask extends UIForm implements UISelectable {
                 try {
                   property = bundle.getString(baseKey + j);
                   propertyValue = bundle.getString(baseKeyValue + j);
-                } catch (MissingResourceException e) {}
+                } catch (MissingResourceException e) {
+                  if (LOG.isWarnEnabled()) {
+                    LOG.warn(e.getMessage());
+                  }
+                }
                   if (property == null) break;
                   if (propertyValue != null && propertyValue.length() != 0)
                     options.add(new SelectItemOption<String>(property, propertyValue));
@@ -360,7 +370,11 @@ public class UITask extends UIForm implements UISelectable {
                 options.add(new SelectItemOption<String>(property, property));
                 j++;
               }
-            } catch (MissingResourceException e) {}
+            } catch (MissingResourceException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
           } else {
             while (true) {
               String property = (String) variablesForService.get(baseKey + j);
@@ -376,6 +390,9 @@ public class UITask extends UIForm implements UISelectable {
         try {
           inputName = res.getString(name + LABEL_ENCODING);
         } catch(Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         inputInfo_.add(new InputInfo("", "", inputName, input, mandatory));
         if (mandatory) {
@@ -457,6 +474,9 @@ public class UITask extends UIForm implements UISelectable {
       uiTaskManager.removeChild(clazz2);
       uiTaskManager.removeChild(clazz1);
     } catch (ClassNotFoundException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     inputInfo_.clear();
   }

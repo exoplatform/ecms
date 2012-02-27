@@ -53,7 +53,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class PageMetadataRequestFilter implements Filter {
 
   /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(PageMetadataRequestFilter.class);
+  
   /** The Constant PCV_PARAMETER_REGX. */
   public final static String PCV_PARAMETER_REGX           = "(.*)/(.*)/(.*)";
 
@@ -84,8 +85,8 @@ public class PageMetadataRequestFilter implements Filter {
       if(!check)
         setPortalMetadata(req);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when doFilter: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when doFilter: ", e);
       }
     }
     chain.doFilter(servletRequest,servletResponse);
@@ -150,6 +151,9 @@ public class PageMetadataRequestFilter implements Filter {
         node = (Node)session.getItem("/" + nodeIdentifier);
       }
     } catch (ItemNotFoundException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }catch (PathNotFoundException e) {
       req.setAttribute("ParameterizedContentViewerPortlet.data.object",new ItemNotFoundException());
     }catch (AccessControlException e) {

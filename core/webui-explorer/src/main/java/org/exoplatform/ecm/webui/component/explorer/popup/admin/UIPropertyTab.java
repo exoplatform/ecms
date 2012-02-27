@@ -160,6 +160,9 @@ public class UIPropertyTab extends UIContainer {
       Session session = uiExplorer.getSession();
       node = session.getNodeByUUID(uuid);
     } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     return node;
 

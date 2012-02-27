@@ -29,6 +29,8 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIGrid;
@@ -53,6 +55,9 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIReferencesList extends UIGrid implements UIPopupComponent{
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UIReferencesList.class);
+  
   private static String[] REFERENCES_BEAN_FIELD = {"workspace", "path"} ;
 
   public UIReferencesList() throws Exception {}
@@ -90,7 +95,11 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
             referBeans.add(new ReferenceBean(workspace, refNode.getPath())) ;
           }
         }
-      } catch(Exception e) { }
+      } catch(Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
      session.logout() ;
     }
     return referBeans ;

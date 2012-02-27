@@ -18,11 +18,13 @@ package org.exoplatform.wcm.webui.selector.content.multi;
 
 import javax.jcr.Node;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -50,6 +52,8 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
 
+  private static final Log LOG = ExoLogger.getLogger(UIContentBrowsePanelMulti.class);
+  
   /** The item paths. */
   private String itemPaths;
   private String itemTarget;
@@ -117,7 +121,11 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
            node = linkManager.getTarget(node);
            savedItem = node.getPath();
          }
-        }catch (Exception e){}
+        }catch (Exception e){
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
       }
       result.append(savedItem).append(";");
    }

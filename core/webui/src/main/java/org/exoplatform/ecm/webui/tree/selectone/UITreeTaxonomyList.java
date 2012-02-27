@@ -106,8 +106,8 @@ public class UITreeTaxonomyList extends UIForm {
     try {
       return res.getString(("eXoTaxonomies.").concat(taxonomyTree).concat(".label"));
     } catch (MissingResourceException me) {
+      return display;
     }
-    return display;
   }
 
   @Deprecated

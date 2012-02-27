@@ -283,7 +283,9 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     for(String ws : workspaces) {
       try{
         return provider.getSession(ws, manageRepo).getNodeByUUID(uuid) ;
-      }catch(Exception e) { }
+      } catch(Exception e) {
+        // Do nothing
+      }
     }
     return null;
   }
@@ -351,8 +353,8 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       DownloadService dservice = getApplicationComponent(DownloadService.class) ;
       return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
     } catch (Exception e) {
+      return null;
     }
-    return null;
   }
 
   /**

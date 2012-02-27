@@ -34,6 +34,7 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
+
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -651,8 +652,9 @@ public class UIPublicationPanel extends UIForm {
           int name0Int = Integer.parseInt(name0);
           int name1Int = Integer.parseInt(name1);
           return name0Int - name1Int;
-        } catch (NumberFormatException e) {}
-        return  name0.compareTo(name1);
+        } catch (NumberFormatException e) {
+          return  name0.compareTo(name1);
+        }
       } catch (RepositoryException e) {
         return 0;
       }

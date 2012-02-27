@@ -34,6 +34,8 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -66,6 +68,8 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
   public static final String   ACCESS_PERMISSION = "exo:accessPermissions";
 
   private boolean              isTargetInTrash_  = false;
+  
+  private static final Log LOG = ExoLogger.getLogger(UITaxonomyTreeList.class);
 
   public UITaxonomyTreeList() throws Exception {
     getUIPageIterator().setId("UITaxonomyTreeListIterator");
@@ -132,13 +136,22 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
             buffer.append(permission.getString()).append(';');
           }
         } catch (ValueFormatException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         catch (RepositoryException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         String permission = buffer.toString();
         taxonomyTreeData.setTaxoTreePermissions(permission.substring(0, permission.length() - 1));
       }
     } catch (RepositoryException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e.getMessage(), e);
+      }
       // TODO: handle exception
     }
     return taxonomyTreeData;

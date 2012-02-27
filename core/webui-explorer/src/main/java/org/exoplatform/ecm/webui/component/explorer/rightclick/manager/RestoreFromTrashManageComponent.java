@@ -197,7 +197,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
 
         wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
 
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     } catch (PathNotFoundException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + node.getPath());

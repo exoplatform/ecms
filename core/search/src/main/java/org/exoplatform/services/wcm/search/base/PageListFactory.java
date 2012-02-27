@@ -32,6 +32,8 @@ import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -42,6 +44,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PageListFactory {
 
+  private static final Log LOG = ExoLogger.getLogger(PageListFactory.class);
+  
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
                                                        String workspace,
                                                        String language,
@@ -133,7 +137,11 @@ public class PageListFactory {
           }
         }
       }
-    } catch (RepositoryException e) {}
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return dataList;
   }
 }

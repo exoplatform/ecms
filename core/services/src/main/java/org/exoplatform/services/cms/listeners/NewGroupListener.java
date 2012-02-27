@@ -36,6 +36,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig;
 import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.JcrPath;
 import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.GroupEventListener;
 
@@ -46,6 +48,9 @@ import org.exoplatform.services.organization.GroupEventListener;
 public class NewGroupListener extends GroupEventListener
 {
 
+   /** The log. */
+   private static final Log LOG = ExoLogger.getLogger(NewGroupListener.class);
+  
    private HierarchyConfig config_;
 
    private RepositoryService jcrService_;
@@ -77,6 +82,9 @@ public class NewGroupListener extends GroupEventListener
      }
      catch (Exception e)
      {
+       if (LOG.isWarnEnabled()) {
+         LOG.warn(e.getMessage());
+       }
      }
    }
 

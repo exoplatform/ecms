@@ -278,10 +278,14 @@ public class RSSServiceImpl implements RSSService{
         infor.setCategory(cat) ;
       }
       if(imageURL != null){
-        try{
+        try {
           URL url = new URL(imageURL) ;
           infor.setImage(url) ;
-        }catch(Exception e) {}
+        } catch(Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
       }
       if(keywords != null) {
         String[] arrKeywords = keywords.split(" ");

@@ -43,6 +43,8 @@ import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -61,6 +63,9 @@ public class PublicationUtil {
 
   /** The Constant URI_SEPARATOR. */
   public static final String URI_SEPARATOR = "/";
+  
+  /** The Loger **/
+  private static final Log LOG = ExoLogger.getLogger(PublicationUtil.class);
  
   /**
    * Find user node by page id.
@@ -259,7 +264,11 @@ public class PublicationUtil {
       } catch (ItemNotFoundException e) {
         try {
           content = (Node)session.getItem(nodeIdentifier);
-        } catch (RepositoryException re) {}
+        } catch (RepositoryException re) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(re.getMessage());
+          }
+        }
       }
       return content;
     }

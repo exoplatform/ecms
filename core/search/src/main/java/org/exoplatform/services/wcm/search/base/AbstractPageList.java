@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SAS
@@ -36,6 +38,8 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   public static final int DEAFAULT_BUFFER_SIZE = 100;
   
   public static final int RESULT_SIZE_SEPARATOR = 100;
+  
+  private static final Log LOG  = ExoLogger.getLogger(AbstractPageList.class);
 
   /** The spell suggestion. */
   protected String spellSuggestion;
@@ -163,7 +167,11 @@ public abstract class AbstractPageList<E> extends PageList<E> {
           this.setAvailablePage(i*this.getPageSize());
           break;
         }
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
   }
   

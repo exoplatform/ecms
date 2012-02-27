@@ -369,7 +369,11 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
         resourceCache_.put(scriptName,scriptObject) ;
         return scriptObject;
       }
-    } catch (NoClassDefFoundError e) {}
+    } catch (NoClassDefFoundError e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
 
     groovyClassLoader_ = createGroovyClassLoader();
     Class scriptClass = groovyClassLoader_.loadClass(scriptName) ;
@@ -461,7 +465,10 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
 //        Class scriptClass = (Class)cachedobject ;
 //        groovyClassLoader_.removeFromCache(scriptClass) ;
       }
-    }catch (Exception e) {
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
   }
 

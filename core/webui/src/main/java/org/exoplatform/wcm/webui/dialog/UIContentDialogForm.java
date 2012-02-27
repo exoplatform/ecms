@@ -56,6 +56,8 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -108,6 +110,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 
   /** The Constant TAXONOMY_CONTENT_POPUP_WINDOW. */
   public static final String TAXONOMY_CONTENT_POPUP_WINDOW = "UIContentPopupWindow";
+  
+  /** The Log **/
+  private static final Log LOG  = ExoLogger.getLogger(UIContentDialogForm.class);
 
   /** The webcontent node location. */
   private NodeLocation webcontentNodeLocation;
@@ -420,6 +425,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
         Object[] args = {contentDialogForm.getNode().getPath()};
         Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.node-locked", args, ApplicationMessage.WARNING);
       } catch(AccessControlException ace) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ace.getMessage());
+        }
       } catch (AccessDeniedException ade) {
         Utils.createPopupMessage(contentDialogForm,
                                  "UIDocumentInfo.msg.access-denied-exception",
@@ -567,6 +575,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
                                  args,
                                  ApplicationMessage.WARNING);
       } catch (AccessControlException ace) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(ace.getMessage());
+        }
       } catch (AccessDeniedException ade) {
         Utils.createPopupMessage(contentDialogForm,
                                  "UIDocumentInfo.msg.access-denied-exception",

@@ -84,7 +84,7 @@ public class ProcessUtil {
   public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository";
   public final static String CURRENT_PATH_PROP = "exo:currentPath";
 
-  private static Log log = ExoLogger.getLogger(ProcessUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(ProcessUtil.class);
 
   public static void createTimer(ExecutionContext context, Timer timer) {
     SchedulerService schedulerService = (SchedulerService) Services.getCurrentService(Services.SERVICENAME_SCHEDULER);
@@ -120,8 +120,8 @@ public class ProcessUtil {
       }
       requestNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
   }
@@ -148,8 +148,8 @@ public class ProcessUtil {
       validatedNode.setProperty(CURRENT_STATE_PROP,"Approved");
       validatedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
   }
@@ -176,8 +176,8 @@ public class ProcessUtil {
       }
       disapprovedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
   }
@@ -209,8 +209,8 @@ public class ProcessUtil {
       publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);
       publishedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } finally {
       provider.close();  
@@ -240,8 +240,8 @@ public class ProcessUtil {
       }
       pendingNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } finally {
       provider.close();  
@@ -272,8 +272,8 @@ public class ProcessUtil {
       delegateNode.setProperty(CURRENT_STATE_PROP,DELEGATED);
       delegateNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
   }
@@ -297,8 +297,8 @@ public class ProcessUtil {
       backupNode.setProperty(CURRENT_STATE_PROP,BACKUP);
       backupNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } finally {
       provider.close();   
@@ -325,8 +325,8 @@ public class ProcessUtil {
       trashNode.setProperty(CURRENT_STATE_PROP,IN_TRASH);
       trashNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } finally {
       provider.close();  
@@ -385,10 +385,10 @@ public class ProcessUtil {
       Node node = getNode(context, location[0],location[1],location[2],provider);
       return node.getProperty("exo:owner").getString();
     }catch (Exception e) {
+      return getActorId(context);
     }finally {
       provider.close();
     }
-    return getActorId(context);
   }
 
   public static String computeDestinationPath(ExecutionContext context, String srcPath,String destPath) {

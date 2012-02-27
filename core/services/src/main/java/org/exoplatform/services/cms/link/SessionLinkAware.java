@@ -609,7 +609,9 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
   public void setTimeout(long timeout) {
     try {
       getTargetSession().setTimeout(timeout);
-    } catch (RepositoryException e) {}
+    } catch (RepositoryException e) {
+      LOG.warn(e.getMessage());
+    }
   }
   
   @Override

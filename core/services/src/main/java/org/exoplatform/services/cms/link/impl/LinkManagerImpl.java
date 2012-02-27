@@ -353,7 +353,9 @@ public class LinkManagerImpl implements LinkManager {
           result.add(iter.nextNode());
         }
   }
-    } catch (Exception e) {}      
+    } catch (Exception e) {
+      // return empty node list if there are errors in execution or user has no right to access nodes
+    }
     return result;
   }
 

@@ -1766,7 +1766,11 @@ public class UIDialogForm extends UIForm {
         Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
         d = dateFormater.format(calendar.getTime());
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return d;
   }
   

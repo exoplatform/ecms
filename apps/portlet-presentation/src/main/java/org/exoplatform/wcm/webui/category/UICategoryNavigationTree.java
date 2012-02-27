@@ -34,6 +34,8 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.category.config.UICategoryNavigationConfig;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -61,6 +63,8 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICategoryNavigationTree extends UIContainer {
 
+  private static final Log         LOG             = ExoLogger.getLogger(UICategoryNavigationTree.class);
+  
   /** The allow publish. */
   private boolean            allowPublish        = false;
 
@@ -117,7 +121,9 @@ public class UICategoryNavigationTree extends UIContainer {
     try {
       rootTreeNode = taxonomyService.getTaxonomyTree(preferenceTreeName);
     } catch (RepositoryException e) {
-      //return;
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     setRootTreeNode(rootTreeNode);
     setAcceptedNodeTypes(new String[] {"nt:folder", "nt:unstructured", "nt:file", "exo:taxonomy"});
@@ -219,7 +225,11 @@ public class UICategoryNavigationTree extends UIContainer {
     if (preferenceTreeName.equals(categoryPath)) categoryPath = "";
     try {
       currentNode = NodeLocation.getNodeLocationByNode(treeNode.getNode(categoryPath));
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     super.processRender(context);
   }
 

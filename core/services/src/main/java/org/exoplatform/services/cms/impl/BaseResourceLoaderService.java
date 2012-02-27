@@ -127,19 +127,18 @@ public abstract class BaseResourceLoaderService implements Startable{
       session.getItem(resourcesPath + "/" + firstResourceName);
       return;
     } catch (PathNotFoundException e) {
+      Node root = session.getRootNode();
+      Node resourcesHome = (Node) session.getItem(resourcesPath);
+      String warPath = location + resourcesPath.substring(resourcesPath.lastIndexOf("/")) ;
+      for (Iterator iter = resources.iterator(); iter.hasNext();) {
+        ResourceConfig.Resource resource = (ResourceConfig.Resource) iter.next();
+        String name = resource.getName();
+        String path = warPath + "/" + name;
+        InputStream in = cservice_.getInputStream(path);
+        addResource(resourcesHome, name, in);
+      }
+      root.save();
     }
-
-    Node root = session.getRootNode();
-    Node resourcesHome = (Node) session.getItem(resourcesPath);
-    String warPath = location + resourcesPath.substring(resourcesPath.lastIndexOf("/")) ;
-    for (Iterator iter = resources.iterator(); iter.hasNext();) {
-      ResourceConfig.Resource resource = (ResourceConfig.Resource) iter.next();
-      String name = resource.getName();
-      String path = warPath + "/" + name;
-      InputStream in = cservice_.getInputStream(path);
-      addResource(resourcesHome, name, in);
-    }
-    root.save();
   }
 
   /**

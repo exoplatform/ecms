@@ -461,7 +461,11 @@ public class UISearchResult extends UIContainer {
             }
           }
         }
-      } catch (RepositoryException e) {}
+      } catch (RepositoryException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       return null;
     }
     /**
@@ -533,16 +537,32 @@ public class UISearchResult extends UIContainer {
     public RowData(Row row) {
       try {
         jcrPath = row.getValue("jcr:path").getString();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       try {
         repExcerpt = row.getValue("rep:excerpt(.)").getString();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       try {
         jcrScore = row.getValue("jcr:score").getLong();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       try {
         jcrPrimaryType = row.getValue("jcr:primaryType").getString();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
 
     public String getJcrPath() {

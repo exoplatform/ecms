@@ -33,6 +33,8 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SARL
@@ -51,6 +53,9 @@ public class FavoriteServiceImpl implements FavoriteService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private SessionProviderService sessionProviderService;
+  
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class);
 
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService) {
@@ -78,10 +83,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     while (nodeIter.hasNext()) {
       Node childNode = nodeIter.nextNode();
       if (linkManager.isLink(childNode)) {
-        Node targetNode = null;
-        try {
-          targetNode = linkManager.getTarget(childNode);
-        } catch (Exception e) {}
+        Node targetNode = getTargetNode(childNode);
         if (node.isSame(targetNode)) return;
       }
     }
@@ -100,10 +102,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     while (nodeIter.hasNext()) {
       Node childNode = nodeIter.nextNode();
       if (linkManager.isLink(childNode)) {
-        Node targetNode = null;
-        try {
-          targetNode = linkManager.getTarget(childNode);
-        } catch (Exception ex) {}
+        Node targetNode = getTargetNode(childNode);
         if (targetNode != null) ret.add(targetNode);
       }
     }
@@ -118,9 +117,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     // check if node is symlink
     if (linkManager.isLink(node)) {
-      try {
-        targetNode = linkManager.getTarget(node);
-      } catch (Exception e) { }
+      targetNode = getTargetNode(node);
       if (targetNode != null) removeFavorite(targetNode, userName);
     } else {
       // remove favorite
@@ -129,9 +126,7 @@ public class FavoriteServiceImpl implements FavoriteService {
       while (nodeIter.hasNext()) {
         Node childNode = nodeIter.nextNode();
         if (linkManager.isLink(childNode)) {
-          try {
-            targetNode = linkManager.getTarget(childNode);
-          } catch (Exception e) { }
+          targetNode = getTargetNode(childNode);
           if (node.isSame(targetNode)) {
             childNode.remove();
             userFavoriteNode.getSession().save();
@@ -161,10 +156,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     while (nodeIter.hasNext()) {
       Node childNode = nodeIter.nextNode();
       if (linkManager.isLink(childNode)) {
-        Node targetNode = null;
-        try {
-          targetNode = linkManager.getTarget(childNode);
-        } catch (Exception e) { }
+        Node targetNode = getTargetNode(childNode);
         if (node.isSame(targetNode)) {
           return true;
         }
@@ -201,4 +193,20 @@ public class FavoriteServiceImpl implements FavoriteService {
     return userFavoriteNode;
   }
 
+  /**
+   * Get Target Node
+   * @param linkNode Link Node
+   * @return Real Node
+   */
+  private Node getTargetNode(Node linkNode) {
+    Node targetNode = null;
+    try {
+      targetNode = linkManager.getTarget(linkNode);
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+    return targetNode;
+  }
 }

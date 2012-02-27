@@ -46,7 +46,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class CommentsServiceImpl implements CommentsService {
 
-  private static Log LOG = ExoLogger.getLogger("ecm:CommentsService");
+  private static final Log LOG = ExoLogger.getLogger("ecm:CommentsService");
 
   private final static String COMMENTS = "comments" ;
   private final static String COMMENTABLE = "mix:commentable" ;
@@ -222,9 +222,8 @@ public class CommentsServiceImpl implements CommentsService {
         Date date2 = node2.getProperty(CREATED_DATE).getDate().getTime() ;
         return date2.compareTo(date1) ;
       }catch (Exception e) {
+        return 0;
       }
-
-      return 0;
     }
   }
 

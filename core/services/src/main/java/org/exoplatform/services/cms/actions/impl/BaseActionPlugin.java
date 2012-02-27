@@ -331,6 +331,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         }
       }
     } catch (Exception re) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(re.getMessage());
+      }
     }
     return false ;
   }
@@ -445,7 +448,11 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Node actionNodeName = null;
     try {
       actionNodeName = actionContainer.getAction(srcNode, action.getName()) ;
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
 
     Node actionsNode = null;
     if (actionNodeName == null) {

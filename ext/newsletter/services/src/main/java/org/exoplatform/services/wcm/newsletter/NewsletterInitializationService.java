@@ -66,8 +66,8 @@ public class NewsletterInitializationService implements Startable {
   /** The live portal manager service. */
   private LivePortalManagerService livePortalManagerService;
 
-  /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterInitializationService.class);
+  /** The LOG. */
+  private static final Log LOG = ExoLogger.getLogger(NewsletterInitializationService.class);
 
   /**
    * Instantiates a new newsletter initialization service.
@@ -92,8 +92,8 @@ public class NewsletterInitializationService implements Startable {
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    if (log.isInfoEnabled()) {
-      log.info("Starting NewsletterInitializationService ... ");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Starting NewsletterInitializationService ... ");
     }
     SessionProvider sessionProvider = null;
     try {
@@ -148,8 +148,8 @@ public class NewsletterInitializationService implements Startable {
         }
       }
     } catch (Throwable e) {
-      if (log.isInfoEnabled()) {
-        log.info("Starting NewsletterInitializationService fail because of ", e);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Starting NewsletterInitializationService fail because of ", e);
       }
     } finally {
       sessionProvider.close(); 
@@ -160,8 +160,8 @@ public class NewsletterInitializationService implements Startable {
    * @see org.picocontainer.Startable#stop()
    */
   public void stop() {
-    if (log.isInfoEnabled()) {
-      log.info("Stopping NewsletterInitializationService ... ");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Stopping NewsletterInitializationService ... ");
     }
   }
 }

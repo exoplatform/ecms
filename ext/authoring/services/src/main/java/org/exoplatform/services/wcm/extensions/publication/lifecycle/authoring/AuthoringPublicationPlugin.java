@@ -21,6 +21,8 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationContainer;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
@@ -43,6 +45,9 @@ import org.exoplatform.webui.form.UIForm;
  */
 public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class);
+  
   /** The page event listener delegate. */
   private PageEventListenerDelegate       pageEventListenerDelegate;
 
@@ -89,7 +94,11 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     String containerName = context.get("containerName");
     try {
       if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     if (PublicationDefaultStates.PENDING.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
@@ -575,9 +584,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
   public Node getNodeView(Node node, Map<String, Object> context) throws Exception {
     // don't display content if state is enrolled or obsolete
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-    String name = node.getName();
-    String uuid = node.getProperty("jcr:uuid").getString();
-    String state = node.getProperty("publication:currentState").getString();
     String currentState = wcmPublicationService.getContentState(node);
     if (PublicationDefaultStates.ENROLLED.equals(currentState)
         || PublicationDefaultStates.OBSOLETE.equals(currentState))

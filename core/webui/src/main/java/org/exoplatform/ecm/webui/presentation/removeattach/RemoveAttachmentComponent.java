@@ -66,8 +66,8 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
                                                getClass().getClassLoader());
       return confirm.replaceAll("\\{0\\}", beanId);
     } catch (Exception e) {
+      return confirmKey;
     }
-    return confirmKey;
   }
 
   public static void doDelete(Map<String, Object> variables) throws Exception {

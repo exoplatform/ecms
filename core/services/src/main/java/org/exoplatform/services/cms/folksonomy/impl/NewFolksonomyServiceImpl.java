@@ -341,6 +341,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         try {
           targetNode = linkManager.getTarget(node);
         } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         if (targetNode != null && !((Node) targetNode.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
           ret.add(targetNode);
@@ -618,6 +621,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         try {
           targetNode = linkManager.getTarget(link);
         } catch (RepositoryException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
         if (document.isSame(targetNode)) {
           link.remove();
@@ -783,6 +789,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         if (linkManager.isLink(link))
           pointTo = linkManager.getTarget(link);
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
       if (targetNode != null && targetNode.isSame(pointTo))
         return true;

@@ -43,7 +43,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
 
-  private static Log log = ExoLogger.getLogger("wcm:PublicationUpdateStateListener");
+  private static final Log LOG = ExoLogger.getLogger("wcm:PublicationUpdateStateListener");
 
   private RepositoryService repositoryService;
 
@@ -72,8 +72,8 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           title = targetNode.getProperty("exo:title").getString();
         } catch (PathNotFoundException e) {
-          if (log.isInfoEnabled()) {
-            log.info("No such of property exo:title for this node:");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("No such of property exo:title for this node:");
           }
         }
       }
@@ -82,8 +82,8 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           liveDate = targetNode.getProperty("publication:liveDate").getDate();
         } catch (PathNotFoundException e) {
-          if (log.isInfoEnabled()) {
-            log.info("No such of property publication:liveDate for this node:");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("No such of property publication:liveDate for this node:");
           }
         }
       }
@@ -93,13 +93,21 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         Node revNode = targetNode.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
         if (revNode!=null)
           liveNode = revNode.getNode("jcr:frozenNode");
-      } catch (Exception e) { }
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
 
       try {
         if (!targetNode.isNodeType("exo:sortable") && targetNode.canAddMixin("exo:sortable")) {
           targetNode.addMixin("exo:sortable");
         }
-      } catch (PathNotFoundException e) {}
+      } catch (PathNotFoundException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
 
       if (!targetNode.hasProperty("exo:index")) {
         targetNode.setProperty("exo:index", new Long(1000));
@@ -108,8 +116,8 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         try {
           index = targetNode.getProperty("exo:index").getLong();
         } catch (PathNotFoundException e) {
-          if (log.isInfoEnabled()) {
-            log.info("No such of property exo:index for this node:");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("No such of property exo:index for this node:");
           }
         }
       }
@@ -148,7 +156,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("exo:name", name);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
 
             try {
               Long currentIndex = linkNode.hasProperty("exo:index")?linkNode.getProperty("exo:index").getLong():null;
@@ -156,7 +168,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("exo:index", index);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
 
             try {
               String currentTitle = linkNode.hasProperty("exo:title")?linkNode.getProperty("exo:title").getString():null;
@@ -164,7 +180,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("exo:title", title);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
 
             try {
               String currTitlePublished = linkNode.hasProperty("exo:titlePublished") ? linkNode.getProperty("exo:titlePublished")
@@ -174,7 +194,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("exo:titlePublished", titlePublished);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
             try {
               Calendar currLiveDate = linkNode.hasProperty("publication:liveDate") ? linkNode.getProperty("publication:liveDate")
                                                                                              .getDate()
@@ -183,7 +207,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("publication:liveDate", liveDate);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
 
             try {
               Calendar currentDateModified = linkNode.getProperty("exo:dateModified").getDate();
@@ -191,9 +219,13 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 linkNode.setProperty("exo:dateModified", dateModified);
                 needSessionSave = true;
               }
-            } catch (PathNotFoundException e) {}
+            } catch (PathNotFoundException e) {
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }
 
-            if (log.isInfoEnabled()) {
+            if (LOG.isInfoEnabled()) {
               String currentState = targetNode.hasProperty("publication:currentState") ? targetNode.
                                                                                        getProperty("publication:currentState")
                                                                                        .getString()
@@ -221,7 +253,7 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                                                                                               .toString()
                                                                                    : "";
 
-              log.info("@@@@ " + needSessionSave + " @state@" + currentState + " @Name@"
+              LOG.info("@@@@ " + needSessionSave + " @state@" + currentState + " @Name@"
                   + currentName + " @Index@" + currentIndex + " @Title@" + currentTitle
                   + " @TitlePub@" + currentTitlePub + " @DateLive@" + currLiveDate + " @DateMod@"
                   + currentDateModified);
@@ -229,8 +261,8 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
           }
           if (needSessionSave) session.save();
         } catch(Exception e) {
-          if (log.isErrorEnabled()) {
-            log.error("Unexpected problem occur. Update state process is not completed", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected problem occur. Update state process is not completed", e);
           }
         } finally {
           if(session != null) session.logout();

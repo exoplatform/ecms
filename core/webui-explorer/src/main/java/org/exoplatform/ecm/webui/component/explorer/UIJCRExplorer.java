@@ -966,6 +966,9 @@ public class UIJCRExplorer extends UIContainer {
         node = (Node) nodeFinder.getItem(session, nodePath, !giveTarget);
         return node;
       } catch (Exception e3) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e3.getMessage());
+        }
       }
       if (firstTime) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;

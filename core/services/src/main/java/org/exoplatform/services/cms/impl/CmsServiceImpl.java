@@ -56,6 +56,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 
@@ -67,6 +69,7 @@ public class CmsServiceImpl implements CmsService {
   private RepositoryService jcrService;
   private IDGeneratorService idGeneratorService;
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
+  private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class);
   private ListenerService listenerService;
 
   /**
@@ -1212,6 +1215,9 @@ public class CmsServiceImpl implements CmsService {
         srcSession.logout();
         destSession.logout();
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       } finally {
         if(srcSession != null) srcSession.logout();
         if(destSession !=null) destSession.logout();
@@ -1230,6 +1236,9 @@ public class CmsServiceImpl implements CmsService {
         workspace.move(nodePath, destPath);
         session.logout();
       } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       } finally {
         if (session != null && session.isLive())
           session.logout();

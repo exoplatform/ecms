@@ -99,9 +99,7 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
     
     public AuditRecordData(AuditRecord auditRecord) {
       versionName_ = null;
-      try {
-        versionName_ = auditRecord.getVersionName();
-      } catch (Exception e) {}
+      versionName_ = auditRecord.getVersionName();
       eventType_ = String.valueOf(auditRecord.getEventType());
       userId_ = auditRecord.getUserId();
       date_ = auditRecord.getDate();
@@ -138,7 +136,5 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
     public void setDate(Calendar date) {
       date_ = date;
     }
-    
-    
   }
 }

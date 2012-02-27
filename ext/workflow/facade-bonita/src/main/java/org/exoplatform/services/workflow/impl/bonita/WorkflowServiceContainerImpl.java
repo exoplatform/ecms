@@ -329,7 +329,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
               if (v != null)
                 instanceVariables.put(key, v);
             } catch (org.ow2.bonita.facade.exception.DataFieldNotFoundException e1) {
-
+              if (LOG.isWarnEnabled()) {
+                LOG.warn(e1.getMessage());
+              }
             }
           }
         }
@@ -798,6 +800,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         lc.logout();
         RequestLifeCycle.end();
       } catch (Exception ignore) {
+        // Do nothing
       }
     }
   }
@@ -960,6 +963,9 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       }
       lc.login();
     } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
   }
 }

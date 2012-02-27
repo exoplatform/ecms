@@ -137,6 +137,9 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
         }
         setNodeList(listNodes);
       } catch (PathNotFoundException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
     }
     updateGrid();

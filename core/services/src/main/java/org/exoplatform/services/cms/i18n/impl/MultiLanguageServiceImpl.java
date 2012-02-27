@@ -48,6 +48,8 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
 import org.exoplatform.services.jcr.impl.core.value.StringValue;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 
 /**
@@ -137,6 +139,9 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
   private static final String MIX_COMMENTABLE ="mix:commentable";
 
   private static final String COUNTRY_VARIANT      = "_";
+  
+  private static final Log       LOG             = ExoLogger.getLogger(MultiLanguageServiceImpl.class);
+  
   /**
    * CmsService
    */
@@ -495,19 +500,35 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         try {
           addLinkedLanguage(node, newTranslationNode);
         }
-        catch(ItemExistsException ex) {}
+        catch(ItemExistsException ex) {
+          if (LOG.isInfoEnabled()) {
+            LOG.info(String.format("Language %s already existed for %s", newLang, node.getPath()));
+          }
+        }
         
         // Update translations for new translation Node
         try {
           addLinkedLanguage(newTranslationNode, node);
         }
-        catch(ItemExistsException ex) {}
+        catch(ItemExistsException ex) {
+          if (LOG.isInfoEnabled()) {
+            LOG.info(String.format("Language %s already existed for %s", 
+                   node.getProperty("exo:language").getString(),
+                   newTranslationNode.getPath()));
+          }
+        }
       }
       
       try {
         addLinkedLanguage(newTranslationNode, selectedNode);
       }
-      catch(ItemExistsException ex) {}
+      catch(ItemExistsException ex) {
+        if (LOG.isInfoEnabled()) {
+          LOG.info(String.format("Language %s already existed for %s",
+                 selectedNode.getProperty("exo:language").getString(),
+                 newTranslationNode.getPath()));
+        }
+      }
       
       // Add new translation to selected Node
       addLinkedLanguage(selectedNode, newTranslationNode);

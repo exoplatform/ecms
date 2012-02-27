@@ -169,6 +169,9 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
               try {
                 versionInt = Integer.parseInt(v);
               } catch (NumberFormatException e) {
+                if (LOG.isWarnEnabled()) {
+                  LOG.warn(e.getMessage());
+                }
               }
               if (versionInt != null) {
                 String versionId = nodeData.getParentIdentifier() + JcrCMIS.ID_SEPARATOR + v;

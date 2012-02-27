@@ -105,7 +105,7 @@ public class Utils {
   private static final String NT_FILE = "nt:file";
 
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
-
+  
   private static ConfigurationManager cservice_ ;
   @Deprecated
   /**
@@ -424,8 +424,8 @@ public class Utils {
       String itemPath = node.getSession().getWorkspace().getName() + node.getPath();
       return getEditLink(itemPath, isEditable, isNew);
     } catch (RepositoryException e) {
+      return null;
     }
-    return null;
   }
 
   /**

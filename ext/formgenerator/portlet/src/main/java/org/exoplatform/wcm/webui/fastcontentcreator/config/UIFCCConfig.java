@@ -35,6 +35,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.container.UIFormFieldSet;
@@ -77,6 +79,9 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 )
 public class UIFCCConfig extends UIForm implements UISelectable {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UIFCCConfig.class);
+  
   /** The saved location node. */
   private NodeLocation savedLocationNode;
 
@@ -340,8 +345,17 @@ public class UIFCCConfig extends UIForm implements UISelectable {
                                                 .getUIPageIterator()
                                                 .getCurrentPage());
     } catch (RepositoryConfigurationException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
 
     Utils.closePopupWindow(this, UIFCCConstant.SELECTOR_POPUP_WINDOW);

@@ -64,7 +64,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
   private JCRResourceResolver resourceResolver ;
 
   /** The Constant log. */
-  public static final Log log = ExoLogger.getLogger("wcm:StageAndVersionPubliciation");
+  private static final Log LOG = ExoLogger.getLogger("wcm:StageAndVersionPubliciation");
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
@@ -109,12 +109,15 @@ public class UIVersionViewer extends UIBaseNodePresentation {
   public String getTemplate() {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
+    String templatePath = null;
     try {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName();
       if(templateService.isManagedNodeType(nodeType))
-        return templateService.getTemplatePathByUser(false, nodeType, userName) ;
-    } catch (Exception e) {}
-    return null ;
+        templatePath = templateService.getTemplatePathByUser(false, nodeType, userName) ;
+    } catch (Exception e) {
+      templatePath = null;
+    }
+    return templatePath ;
   }
 
   /* (non-Javadoc)
@@ -135,7 +138,11 @@ public class UIVersionViewer extends UIBaseNodePresentation {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(workspace);
-    }catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return resourceResolver ;
   }
 
@@ -177,8 +184,8 @@ public class UIVersionViewer extends UIBaseNodePresentation {
         String downloadLink = uiComp.getDownloadLink(org.exoplatform.wcm.webui.Utils.getFileLangNode(uiComp.getNode()));
         event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
-        if (log.isErrorEnabled()) {
-          log.error("Repository cannot be found", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found", e);
         }
         return ;
       } catch (Exception e) {

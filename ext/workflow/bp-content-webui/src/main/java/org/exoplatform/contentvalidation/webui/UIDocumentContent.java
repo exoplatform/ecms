@@ -178,7 +178,11 @@ public class UIDocumentContent extends UIBaseNodePresentation {
         Node relationNode = getNodeByUUID(uuid);
         relations.add(relationNode);
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     return relations;
   }
 
@@ -279,7 +283,11 @@ public class UIDocumentContent extends UIBaseNodePresentation {
         nodeType = childNode.getPrimaryNodeType().getName();
         List<String> listCanCreateNodeType = getListAllowedFileType(node) ;
         if(listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }
     return attachments;
   }

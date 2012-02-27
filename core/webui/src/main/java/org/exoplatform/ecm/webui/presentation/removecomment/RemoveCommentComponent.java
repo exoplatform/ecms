@@ -62,8 +62,9 @@ public class RemoveCommentComponent extends AbstractActionComponent {
     try {
       String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
       return confirm.replaceAll("\\{0\\}", beanId);
-    }catch (Exception e) {}
-    return confirmKey;
+    } catch (Exception e) {
+      return confirmKey;
+    }
   }
 
   public static void doDelete(Map<String, Object> variables) throws Exception {
@@ -99,6 +100,4 @@ public class RemoveCommentComponent extends AbstractActionComponent {
       RemoveCommentComponent.doDelete(variables);
     }
   }
-
-
 }

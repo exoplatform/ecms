@@ -22,6 +22,8 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.util.Text;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
@@ -45,6 +47,9 @@ import org.exoplatform.webui.core.UITree;
    * */
 public class UINodeTree extends UITree {
 
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UINodeTree.class);
+  
   private String rootPath = "";
 
   private boolean isTaxonomyLocalize;
@@ -151,6 +156,9 @@ public class UINodeTree extends UITree {
         String display = taxonomyTreeName.concat(path.replace(rootPath, "")).replaceAll("/", ".");
         return Utils.getResourceBundle(("eXoTaxonomies.").concat(display).concat(".label"));
       } catch (MissingResourceException me) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(me.getMessage());
+        }
       }
     }
     return String.valueOf(getFieldValue(bean, getBeanLabelField()));

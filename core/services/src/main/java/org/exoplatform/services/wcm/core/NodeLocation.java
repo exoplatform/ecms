@@ -42,7 +42,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NodeLocation extends ItemLocation {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger("wcm:NodeLocation");
+  private static final Log LOG = ExoLogger.getLogger("wcm:NodeLocation");
 
   /**
    * Instantiates a new node location.
@@ -141,8 +141,8 @@ public class NodeLocation extends ItemLocation {
       String path = node.getPath();
       return new NodeLocation(repository, workspace, path);
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled()) {
-        log.error("make() failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("make() failed because of ", e);
       }
     }
     return null;
@@ -226,7 +226,11 @@ public class NodeLocation extends ItemLocation {
            node = location.getUUID() != null ? session.getNodeByUUID(location.getUUID()) :
                                           (Node)session.getItem(location.getPath());
            ret.add(node);
-          } catch (Exception e) {}
+          } catch (Exception e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
         } else {
           ret.add(obj);
         }

@@ -99,13 +99,15 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
     Session session = null ;
     while(it.hasNext()){
       data = (DriveData)it.next().getObject() ;
-      try{
+      try {
         session = getSession() ;
         addDrive(data, session) ;
         session.logout();
-      }catch(Exception e) {
+      } catch(Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
       }
-
     }
   }
 

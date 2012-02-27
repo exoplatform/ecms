@@ -60,7 +60,11 @@ public class VersionNode {
         ws_ = version.getSession().getWorkspace().getName();
         uuid_ = version.getUUID();
         versionLabels_ = version.getVersionHistory().getVersionLabels(version);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       
       String uuid = version.getUUID();
       QueryManager queryManager = version.getSession().getWorkspace().getQueryManager();
@@ -86,7 +90,11 @@ public class VersionNode {
       ws_ = version.getSession().getWorkspace().getName();
       uuid_ = version.getUUID();
       versionLabels_ = version.getVersionHistory().getVersionLabels(version);
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     
     try {
       Version[] versions = version.getSuccessors() ;
@@ -95,6 +103,9 @@ public class VersionNode {
         children_.add(new VersionNode(versionChild)) ;
       }
     } catch (PathNotFoundException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
   }
 

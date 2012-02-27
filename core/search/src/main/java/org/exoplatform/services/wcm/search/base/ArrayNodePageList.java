@@ -27,6 +27,9 @@ import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
@@ -35,6 +38,8 @@ import javax.jcr.query.RowIterator;
  */
 public class ArrayNodePageList<E> extends AbstractPageList<E> {
   
+  private static final Log LOG = ExoLogger.getLogger(ArrayNodePageList.class);
+
   /** The nodes. */
   protected List<E> dataList;
   
@@ -62,7 +67,11 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
           }
         }
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     setAvailablePage(dataList.size());
     removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
@@ -90,7 +99,11 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
           }
         }
       }
-    } catch (RepositoryException e) {}
+    } catch (RepositoryException e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
     setAvailablePage(dataList.size());
     removeRedundantPages(dataList.size() / pageSize);
     currentListPage_ = null;
@@ -129,8 +142,11 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
       Collections.sort(dataList, comparator);
       try {
         populateCurrentPage(currentPage_);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
     }  
   }
-  
 }

@@ -106,6 +106,9 @@ public class RelationsServiceImpl implements RelationsService, Startable {
         }
       }
     } catch(Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
     }
     return rels ;
   }  

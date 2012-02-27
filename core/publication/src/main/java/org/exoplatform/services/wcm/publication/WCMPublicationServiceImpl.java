@@ -28,6 +28,8 @@ import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleExcepti
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -39,6 +41,8 @@ import org.picocontainer.Startable;
  */
 public class WCMPublicationServiceImpl implements WCMPublicationService, Startable {
 
+  private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class);
+  
   /** The Constant SIMPLE_LIFECYCLE_NAME. */
   private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication";
 
@@ -344,7 +348,9 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
         currentState = node.getProperty("publication:currentState").getString();
       }
     } catch (Exception e) {
-      //log.info("Error when perform getContentState: " + e.getMessage());
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error when perform getContentState: " + e.getMessage());
+      }
     }
     return currentState;
   }

@@ -83,18 +83,18 @@ public class ProcessUtil {
   public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository";
   public final static String CURRENT_PATH_PROP = "exo:currentPath";
 
-  private static Log log = ExoLogger.getLogger(ProcessUtil.class);
+  private static Log LOG = ExoLogger.getLogger(ProcessUtil.class);
 
   public static void requestForValidation(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(), CURRENT_STATE,REQUEST_FOR_VALIDATION);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -116,8 +116,8 @@ public class ProcessUtil {
       requestNode.setProperty("exo:requestDate",new GregorianCalendar());
       requestNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -127,12 +127,12 @@ public class ProcessUtil {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,VALIDATED);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -156,8 +156,8 @@ public class ProcessUtil {
       validatedNode.setProperty(CURRENT_STATE_PROP,"Approved");
       validatedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -167,12 +167,12 @@ public class ProcessUtil {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DISAPPROVED);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -196,8 +196,8 @@ public class ProcessUtil {
       disapprovedNode.setProperty(CURRENT_STATE_PROP,"Disapproved");
       disapprovedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -207,12 +207,12 @@ public class ProcessUtil {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PUBLISHED);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -237,8 +237,8 @@ public class ProcessUtil {
       publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);
       publishedNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -248,12 +248,12 @@ public class ProcessUtil {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PENDING);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -276,8 +276,8 @@ public class ProcessUtil {
       pendingNode.setProperty(CURRENT_STATE_PROP,PENDING);
       pendingNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -288,12 +288,12 @@ public class ProcessUtil {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DELEGATED);
     api.getRuntimeAPI().setVariable(activity.getUUID(),"delegate",new Boolean(true));
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -321,8 +321,8 @@ public class ProcessUtil {
       delegateNode.setProperty(CURRENT_STATE_PROP,DELEGATED);
       delegateNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -332,12 +332,12 @@ public class ProcessUtil {
     try {
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,BACKUP);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     }
     String[] location = getCurrentLocation(api,activity);
@@ -355,8 +355,8 @@ public class ProcessUtil {
       backupNode.setProperty(CURRENT_STATE_PROP,BACKUP);
       backupNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
    provider.close();
@@ -370,16 +370,16 @@ public class ProcessUtil {
                                                                  CURRENT_STATE);
     api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,IN_TRASH);
     } catch (ActivityNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (VariableNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
     } catch (InstanceNotFoundException e1) {
-      if (log.isErrorEnabled()) {
-        log.error(e1);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e1);
       }
   }
     String[] location = getCurrentLocation(api,activity);
@@ -398,8 +398,8 @@ public class ProcessUtil {
       trashNode.setProperty(CURRENT_STATE_PROP,IN_TRASH);
       trashNode.getSession().save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
     provider.close();
@@ -424,12 +424,12 @@ public class ProcessUtil {
     try {
     return (String)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"initiator");
   } catch (InstanceNotFoundException e) {
-    if (log.isErrorEnabled()) {
-      log.error(e);
+    if (LOG.isErrorEnabled()) {
+      LOG.error(e);
     }
   } catch (VariableNotFoundException e) {
-    if (log.isErrorEnabled()) {
-      log.error(e);
+    if (LOG.isErrorEnabled()) {
+      LOG.error(e);
     }
   }
   return "";
@@ -453,16 +453,16 @@ public class ProcessUtil {
                                       CURRENT_LOCATION,
                                       locationBuilder.toString());
     } catch (ActivityNotFoundException e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } catch (VariableNotFoundException e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     } catch (InstanceNotFoundException e) {
-      if (log.isErrorEnabled()) {
-        log.error(e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e);
       }
     }
   }
@@ -474,12 +474,12 @@ public class ProcessUtil {
                                                                        CURRENT_LOCATION);
     return currentLocation.split("::");
   } catch (InstanceNotFoundException e) {
-    if (log.isErrorEnabled()) {
-      log.error(e);
+    if (LOG.isErrorEnabled()) {
+      LOG.error(e);
     }
   } catch (VariableNotFoundException e) {
-    if (log.isErrorEnabled()) {
-      log.error(e);
+    if (LOG.isErrorEnabled()) {
+      LOG.error(e);
     }
   }
     return new String[3];
@@ -498,10 +498,10 @@ public class ProcessUtil {
       Node node = getNode(location[1],location[2],provider);
       return node.getProperty("exo:owner").getString();
     }catch (Exception e) {
+      return getActorId(api,activity);
     }finally {
       provider.close();
     }
-    return getActorId(api,activity);
   }
 
   public static String computeDestinationPath(String srcPath,String destPath) {

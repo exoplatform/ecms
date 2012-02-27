@@ -161,6 +161,9 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
               NodeLocation.getNodeByLocation(uiForm.document_).getSession());
           commentsService.updateComment(commentNode, comment);
         } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
       } else {
         String userName = event.getRequestContext().getRemoteUser() ;

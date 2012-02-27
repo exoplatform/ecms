@@ -1220,6 +1220,7 @@ class JcrNodeEntry
             }
             catch (ObjectNotFoundException onfe)
             {
+              // Ignore nodes with object not found.
             }
          }
          return parents;

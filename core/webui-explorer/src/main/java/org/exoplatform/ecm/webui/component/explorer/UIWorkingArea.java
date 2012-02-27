@@ -376,7 +376,9 @@ public class UIWorkingArea extends UIContainer {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {}
+        } catch(Exception ex) {
+          // Do nothing
+        }
       }
     } 
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {

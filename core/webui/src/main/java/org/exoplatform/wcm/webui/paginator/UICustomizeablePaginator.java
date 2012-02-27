@@ -20,6 +20,8 @@ import javax.faces.lifecycle.Lifecycle;
 
 import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -40,6 +42,8 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICustomizeablePaginator extends UIPageIterator {
 
+  private static final Log LOG = ExoLogger.getLogger(UICustomizeablePaginator.class);
+  
   /** The template path. */
   private String templatePath;
 
@@ -159,7 +163,11 @@ public class UICustomizeablePaginator extends UIPageIterator {
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
       try {
         uiPaginator.setCurrentPage(page) ;
-      } catch (ExoMessageException e) { }
+      } catch (ExoMessageException e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
       UIComponent parent = uiPaginator.getParent();
       if(parent == null) return ;
       event.getRequestContext().addUIComponentToUpdateByAjax(parent);

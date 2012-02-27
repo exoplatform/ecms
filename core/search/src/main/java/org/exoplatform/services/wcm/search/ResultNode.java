@@ -49,6 +49,8 @@ import javax.jcr.version.Version;
 import javax.jcr.version.VersionException;
 import javax.jcr.version.VersionHistory;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
@@ -152,12 +154,15 @@ public class ResultNode implements Node{
   }
 
   public String getEditor() {
+    String editor = null;
     try {
-      if (getNode().hasProperty("exo:owner"))
-        return getNode().getProperty("exo:owner").getString();
+      if (getNode().hasProperty("exo:owner")) {
+        editor = getNode().getProperty("exo:owner").getString();
+      }
     } catch (Exception ex) {
+      editor = null;
     }
-    return null;
+    return editor;
   }
 
   /**
