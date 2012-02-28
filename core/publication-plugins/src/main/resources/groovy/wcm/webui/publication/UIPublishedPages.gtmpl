@@ -1,7 +1,4 @@
-<%
-  def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
-%>
-<div class="UISelectedPages" id="$wid">
+<div class="UISelectedPages" id="$uicomponent.id">
 	  <div class="ListPage">
       <div class="OverflowContainer">
 	      <%

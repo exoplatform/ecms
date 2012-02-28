@@ -5,11 +5,10 @@
 	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
 	 * Jun 29, 2009  
 	 */
-  import org.exoplatform.wcm.webui.Utils;
-  def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();  
+  import org.exoplatform.wcm.webui.Utils;  
 %>
 
-<div id="$wid" class="$uicomponent.id">
+<div id="$uicomponent.id" class="$uicomponent.id">
 <% 
 	def rcontext = _ctx.getRequestContext() ;
     String portletId = Utils.getRealPortletId(rcontext);

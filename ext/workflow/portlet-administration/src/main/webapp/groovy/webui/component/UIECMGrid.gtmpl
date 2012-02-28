@@ -6,10 +6,9 @@
   String[] beanActions =  uicomponent.getBeanActions() ;
   UIComponent uiParent = uicomponent.getParent() ;
   String name = uicomponent.getLabel() ;
-  UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class); 
-  String wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+  UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);   
 %>
-<div id="$wid">
+<div id="$uicomponent.id">
 	<table class="UIGrid" cellspacing="0" borderspacing="0">
 	  <thead>
 	  	<tr>

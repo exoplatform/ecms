@@ -46,7 +46,6 @@ public void renderCategories(def categories) {
 }
 def header = uicomponent.getHeader();
 if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
-def wid = "CategoryTree_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
 <style>
@@ -60,7 +59,7 @@ def wid = "CategoryTree_" + uicomponent.getId() + _ctx.getRequestContext().getWi
 
 </style>
 
-<div id="$wid" class="SimpleVerticalHierachy">
+<div id="$uicomponent.id" class="SimpleVerticalHierachy">
   <div class="CategoriesContainer">
     <div class="TitleBarL">
       <div class="TitleBarR">

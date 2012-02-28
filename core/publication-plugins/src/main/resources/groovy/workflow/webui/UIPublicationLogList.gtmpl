@@ -6,10 +6,9 @@
  * Dec 26, 2008
  * 9:36:26 AM 
  */
- def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
-<div class="$uicomponent.id" id="$wid">
+<div class="$uicomponent.id" id="$uicomponent.id">
   <table class="UIGrid">
     <thead>
       <tr>

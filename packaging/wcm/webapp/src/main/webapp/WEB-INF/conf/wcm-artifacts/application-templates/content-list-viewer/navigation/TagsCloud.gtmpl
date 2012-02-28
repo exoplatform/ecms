@@ -30,7 +30,6 @@ public void renderCategories(def categories) {
       }
     }
 }
-def wid = "TagsCloud_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
 %>
 
 <style>
@@ -48,7 +47,7 @@ def wid = "TagsCloud_" + uicomponent.getId() + _ctx.getRequestContext().getWindo
 
 </style>
 
-<div id="$wid" class="SimpleVerticalHierachy">
+<div id="$uicomponent.id" class="SimpleVerticalHierachy">
   <div class="CategoriesContainer">
     <div class="TitleBarL">
       <div class="TitleBarR">

@@ -13,13 +13,12 @@
   Parameter[] params;
   
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
-  String repository = rService.getCurrentRepository().getConfiguration().getName();  
-  def wid = "Events_" + uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+  String repository = rService.getCurrentRepository().getConfiguration().getName();    
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:event", "Stylesheet")); %>
 </style>
-<div id="$wid" $resizeBlock>
+<div id="$uicomponent.id" $resizeBlock>
 	<%
 	 def node = uicomponent.getNode() ;		
 	 def relations = uicomponent.getRelations() ;

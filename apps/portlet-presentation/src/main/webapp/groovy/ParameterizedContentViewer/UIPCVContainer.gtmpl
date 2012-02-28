@@ -13,9 +13,8 @@
 	def wcmConfigurationService = uicomponent.getApplicationComponent(WCMConfigurationService.class);
 	def parameterizedPageURI = wcmConfigurationService.getRuntimeContextParam("parameterizedPageURI");
 	def printPreviewPageURI = wcmConfigurationService.getRuntimeContextParam("printPageURI");
-	def wid = "pcv_" + uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
 %>
-<div id="$wid" class="$uicomponent.id">
+<div id="$uicomponent.id" class="$uicomponent.id">
 	<div class="PCV">
 	<%
 		if (node != null) {

@@ -25,10 +25,10 @@
         renderChild(categoryUri, categories, level + 1);
     }
 	}
-	def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+
 %>
 
-<div id="$wid" class="SimpleVerticalHierachy">
+<div id="$uicomponent.id" class="SimpleVerticalHierachy">
 	<div class="CategoriesContainer">
 		<div class="TitleBarL">
 			<div class="TitleBarR">

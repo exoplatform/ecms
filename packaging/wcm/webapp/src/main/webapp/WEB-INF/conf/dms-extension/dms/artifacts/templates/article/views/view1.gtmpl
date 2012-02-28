@@ -9,15 +9,14 @@
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
   if(uiPopupWindow != null) resizeBlock = ""; 
-  Parameter[] params;
-  def wid = "view_" + uicomponent.id + "_" + _ctx.getRequestContext().getWindowId();
+  Parameter[] params;  
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();  
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:article", "Stylesheet")); %>
 </style>
-<div id="$wid" $resizeBlock>
+<div id="$uicomponent.id" $resizeBlock>
 	<%
 	 def node = uicomponent.getNode() ;		
 	 def relations = uicomponent.getRelations() ;

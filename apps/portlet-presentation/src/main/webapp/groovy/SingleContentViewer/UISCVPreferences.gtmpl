@@ -2,8 +2,7 @@
   import org.exoplatform.wcm.webui.Utils;
   
   def rcontext = _ctx.getRequestContext();
-  String portletId = Utils.getRealPortletId(rcontext);
-  def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+  String portletId = Utils.getRealPortletId(rcontext);  
 %>
 
 <div class="UIForm $uicomponent.id" >
@@ -18,13 +17,13 @@
                   <td class="FieldLabel"><label for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></label></td>
                   <td class="FieldComponent" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> ><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
-                    <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp$portletId" 
-                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp$portletId', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp$portletId', 'false')"
-                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp$portletId', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp$portletId', 'false')">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" 
+                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')"
+                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
 						<div style="position: relative;">
 	                        <div class="InContextHelpContent" >                    
 	                          <div class="InContextHelpPopup">
-	                         	 <div id="ContentPathHelp{$portletId}ID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>
+	                         	 <div id="ContentPathHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>
 	                            </div>
 	                          </div>                      
 	                        </div>
@@ -50,13 +49,13 @@
                   <td  class="FieldComponent AlignRight" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td class ="tdShowHelp">
-                    <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp$portletId" 
-                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp$portletId', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp$portletId', 'false')"
-                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp$portletId', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp$portletId', 'false')">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" 
+                    onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')"
+                    onfocus="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
 						<div style="position: relative;">
 							<div class="InContextHelpContent" >                    
 							  <div class="InContextHelpPopup">
-								<div id="ShowOptionHelp{$portletId}ID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> 
+								<div id="ShowOptionHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> 
 								</div>
 							  </div>                      
 							</div>
@@ -84,13 +83,13 @@
             </fieldset>             
           </div>
           
-          <a href="#" id="UISCVShowAdvanceOption$portletId" class="AdvancePreferences" style="margin:10px" onClick="document.getElementById('UISCVShowAdvanceOption$portletId').style.display='none';document.getElementById('UISCVContextualSelectionAdvance$portletId').style.display='block';">
+          <a href="#" id="UISCVShowAdvanceOption" class="AdvancePreferences" style="margin:10px" onClick="document.getElementById('UISCVShowAdvanceOption').style.display='none';document.getElementById('UISCVContextualSelectionAdvance').style.display='block';">
              <%= _ctx.appRes("UISCVPreferences.label.Advance") %></a>
              
-          <div class="FormContainer" id="UISCVContextualSelectionAdvance$portletId">
+          <div class="FormContainer" id="UISCVContextualSelectionAdvance">
           <fieldset class="fieldsetPreferences" >
             <legend class="StyleLegend">
-              <a href="#" class="AdvancePreferences" onClick="document.getElementById('UISCVContextualSelectionAdvance$portletId').style.display='none';document.getElementById('UISCVShowAdvanceOption$portletId').style.display='block';"><%=_ctx.appRes("UISCVPreferences.label.Advance")%></a>
+              <a href="#" class="AdvancePreferences" onClick="document.getElementById('UISCVContextualSelectionAdvance').style.display='none';document.getElementById('UISCVShowAdvanceOption').style.display='block';"><%=_ctx.appRes("UISCVPreferences.label.Advance")%></a>
              </legend>
               <div><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %></div>
               <table class="UIFormGrid" >
@@ -102,13 +101,13 @@
                     </div>
                   </td>
                   <td class ="tdShowHelp">
-	                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp$portletId" 
-	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp$portletId', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp$portletId', 'false')"
-	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp$portletId', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp$portletId', 'false')">
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" 
+	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')"
+	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
 						<div style="position: relative;">
 	                      <div class="InContextHelpContent" >                    
 	                        <div class="InContextHelpPopup">
-	                          <div id="ContextualHelp{$portletId}ID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>
+	                          <div id="ContextualHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>
 	                          </div>
 	                        </div>                      
 	                      </div>
@@ -120,13 +119,13 @@
                   <td class="FieldLabel"><label for="<%=uicomponent.PARAMETER_INPUT_BOX%>"><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></label></td>
                   <td class="FieldComponent" ><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class ="tdShowHelp">
-	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp$portletId" 
-	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp$portletId', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp$portletId', 'false')"
-	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp$portletId', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp$portletId', 'false')">
+	                  <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" 
+	                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')"
+	                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
 						<div style="position: relative;">
 	                      <div class="InContextHelpContent" >                    
 	                        <div class="InContextHelpPopup">
-	                          <div id="ParameterHelp{$portletId}ID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %>
+	                          <div id="ParameterHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %>
 	                          </div>
 	                        </div>                      
 	                      </div>
@@ -148,10 +147,10 @@
           <script type="text/javascript">
             if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) {
               document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0);
-              document.getElementById('UISCVShowAdvanceOption$portletId').style.display='none';
+              document.getElementById('UISCVShowAdvanceOption').style.display='none';
             }else {
               document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);
-              document.getElementById('UISCVContextualSelectionAdvance$portletId').style.display='none';
+              document.getElementById('UISCVContextualSelectionAdvance').style.display='none';
             }            
           </script>
         <div class="UIAction"> 

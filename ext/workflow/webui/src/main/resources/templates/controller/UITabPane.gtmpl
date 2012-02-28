@@ -6,8 +6,7 @@
   def children = uicomponent.getChildren();
 
   def messageClose = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-close") ;
-  def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
-  def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+  def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;  
   private String getDisplayTab(String selectedTab) {
     if ((uicomponent.getSelectedTab() == null && 
          selectedTab.equals(uicomponent.getChildren().get(uicomponent.getChildren().size() - 1).getId())) ||
@@ -26,7 +25,7 @@
 	
 %>
 
-<div class="UITabPane" id="$wid">
+<div class="UITabPane" id="$uicomponent.id">
   <div class="TabPaneContent">
     <div class="WorkingAreaWithHelp">
       <div class="UIHorizontalTabs">

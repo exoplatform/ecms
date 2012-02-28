@@ -56,8 +56,9 @@ public class UISearchPageLayout extends UIContainer {
    */
   public UISearchPageLayout() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-    UISearchForm uiSearchForm = addChild(UISearchForm.class, null, null);
-    UISearchResult uiSearchResult = addChild(UISearchResult.class, null, null);
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+    UISearchForm uiSearchForm = addChild(UISearchForm.class, null, UISearchForm.class.getSimpleName() + "_" + pContext.getWindowId());
+    UISearchResult uiSearchResult = addChild(UISearchResult.class, null, UISearchResult.class.getSimpleName() + "_" + pContext.getWindowId());
     String searchFormTemplatePath = getTemplatePath(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH);
     uiSearchForm.init(searchFormTemplatePath, getTemplateResourceResolver(context,
                                                                           searchFormTemplatePath));
