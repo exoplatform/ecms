@@ -16,14 +16,6 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -41,6 +33,12 @@ import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
@@ -50,9 +48,6 @@ import javax.xml.transform.dom.DOMSource;
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {
 
-  /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(ResourceBundleConnector.class);
-  
   @GET
   @Path("/getBundle/")
   public Response getBundle (
@@ -90,9 +85,7 @@ public class ResourceBundleConnector implements ResourceContainer {
               break loop;
             }
           } catch (MissingResourceException e) {
-            if (LOG.isWarnEnabled()) {
-              LOG.warn(e.getMessage());
-            }
+            continue;
           }
         }
       }
