@@ -16,7 +16,8 @@
 	
 	def categorySpan   = "";
 	def contentSpan    = "";
-	def homeSpan       = "<span class=\"SubNavigationBranch\">Home </span>";
+  def lblHome = _ctx.appRes("Breadcrumb.label.home");
+	def homeSpan       = "<span class=\"SubNavigationBranch\">" + lblHome + " </span>";
 	def categorySep    = "";
 	def contentSep     = "";
 	def clsName        = "SubNavigationBranch";
@@ -26,7 +27,7 @@
   def contentTitle   = Util.getPortalRequestContext().getRequestParameter("content-title");
   def contentpath = Util.getPortalRequestContext().getRequestParameter("content-id");
   if (category!=null) {
-    homeSpan       = "<span class=\"SubNavigationBranch\">Home > </span>";
+    homeSpan       = "<span class=\"SubNavigationBranch\">" + lblHome + " > </span>";
     if (contentTitle==null) cls = "SubNavigationLeaf";
     categorySpan = "<span class=\"" + clsName + "\"> " + category + " > </span>";
     if (contentTitle!=null) {

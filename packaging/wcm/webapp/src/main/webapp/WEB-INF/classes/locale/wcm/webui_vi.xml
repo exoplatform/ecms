@@ -425,4 +425,16 @@
       <abort>Abort</abort>
     </title>
   </UIPortalApplication>
+  
+  <CategoryNavigationTemplate>
+  	<label>
+  		<home>Trang chủ</home>
+  	</label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  	<label>
+  		<home>Trang chủ</home>
+  	</label>  
+  </Breadcrumb>
 </bundle>

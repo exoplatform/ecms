@@ -433,5 +433,17 @@
     <title>
       <abort>Abandonner</abort>
     </title>
-  </UIPortalApplication>  
+  </UIPortalApplication>
+  
+  <CategoryNavigationTemplate>
+  	<label>
+  		<home>Accueil</home>
+  	</label>
+  </CategoryNavigationTemplate>  
+  
+  <Breadcrumb>
+  	<label>
+  		<home>Accueil</home>
+  	</label>  
+  </Breadcrumb>
 </bundle>
