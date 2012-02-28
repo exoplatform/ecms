@@ -55,7 +55,7 @@ public void renderHomeMenu() {
   def homeURL = nodeURL.toString();
   
   %>
-    <li><a href="$homeURL" class="TabLeft IconExplain" title="$lblHome">$lblHome</a>
+    <li><a href="$homeURL" class="TabLeft IconExplain" title="$lblHome">$lblHome</a></li>
   <%
 }
     
