@@ -286,7 +286,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       try {
         return session.getNodeByUUID(uuid);
       } catch (ItemNotFoundException e) {
-        // do nothing
+        continue;
       }
     }
     throw new ItemNotFoundException("No node with uuid ='" + uuid + "' can be found");

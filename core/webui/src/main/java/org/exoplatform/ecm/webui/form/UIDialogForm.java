@@ -1840,7 +1840,7 @@ public class UIDialogForm extends UIForm {
         node = WCMCoreUtils.getSystemSessionProvider().getSession(ws, getRepository()).getNodeByUUID(uuid);
         return ws + ":" + node.getPath();
       } catch(ItemNotFoundException e) {
-        // do nothing
+        continue;
       }
     }
     if (LOG.isErrorEnabled()) {

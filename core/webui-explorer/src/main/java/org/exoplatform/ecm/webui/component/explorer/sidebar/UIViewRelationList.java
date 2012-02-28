@@ -104,8 +104,12 @@ public class UIViewRelationList extends UIContainer{
                   refNodes.add(refNode) ;
               }
             }
-          } catch(Exception e) { }
-         session.logout() ;
+          } catch(Exception e) {
+            continue;
+          }
+          finally {
+            session.logout() ;
+          }
         }
       } catch (UnsupportedRepositoryOperationException e) {
         // currentNode is not referenceable

@@ -867,7 +867,7 @@ public class UIJCRExplorer extends UIContainer {
             childrenList.add(refNode) ;
           }
         } catch(Exception e) {
-          // do nothing
+          continue;
         }
       }
     }

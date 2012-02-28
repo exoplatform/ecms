@@ -231,6 +231,7 @@ public class UINewsletterViewerForm extends UIForm {
         if(((UIFormCheckBoxInput<Boolean>) component).isChecked())
           listSubscription.add(component.getName());
       }catch(ClassCastException ex){
+        continue;
         // You shouldn't throw popup message, because some exception often rise here.
       };
     }
@@ -310,6 +311,7 @@ public class UINewsletterViewerForm extends UIForm {
           if (uiFormCheckBoxInput.isChecked())
             uiFormCheckBoxInput.setChecked(false);
         } catch (ClassCastException ex) {
+          continue;
           // You shouldn't throw popup message, because some exception often
           // rise here.
         }

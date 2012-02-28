@@ -284,7 +284,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       try{
         return provider.getSession(ws, manageRepo).getNodeByUUID(uuid) ;
       } catch(Exception e) {
-        // Do nothing
+        continue;
       }
     }
     return null;

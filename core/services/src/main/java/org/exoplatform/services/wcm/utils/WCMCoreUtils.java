@@ -335,7 +335,9 @@ public class WCMCoreUtils {
                 buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
                                                .getProperty(NodetypeConstant.JCR_DATA)
                                                .getString());
-              } catch (Exception e) {}
+              } catch (Exception e) {
+                continue;
+              }
             }
           }
         }
@@ -364,7 +366,9 @@ public class WCMCoreUtils {
                 buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
                                                .getProperty(NodetypeConstant.JCR_DATA)
                                                .getString());
-              } catch (Exception e) {}
+              } catch (Exception e) {
+                continue;
+              }
             }
           }
         }
