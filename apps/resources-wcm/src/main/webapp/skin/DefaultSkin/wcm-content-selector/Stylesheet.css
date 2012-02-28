@@ -573,10 +573,6 @@
 	padding-left:20px;
 }
 
-#UIContentSelectorMulti .UIHorizontalTabs .TabsContainer, #UIContentSelectorFolder .UIHorizontalTabs .TabsContainer {
- height: 24px;
- border-bottom: 1px solid #aeaeae;
-}
 
 #UIContentSelectorMulti, #UIContentSelectorOne {
 	padding: 8px;
