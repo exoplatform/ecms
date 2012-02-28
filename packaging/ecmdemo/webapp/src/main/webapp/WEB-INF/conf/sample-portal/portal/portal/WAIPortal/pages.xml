@@ -195,6 +195,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>ShowCategories</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>ShowTags</name>
                 <value>false</value>
                 <read-only>false</read-only>

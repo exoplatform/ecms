@@ -68,7 +68,90 @@
               <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/home.xml</string>
             </field>
           </object>
+        </object-param>
+<!--
+  Deployment of Folder Content
+-->        
+        <object-param>
+          <name>Features Folder</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/Features.xml</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Technology Folder</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/Technology.xml</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Competence Folder</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/Competence.xml</string>
+            </field>
+          </object>
         </object-param>        
+        <object-param>
+          <name>Customers Folder</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/Customers.xml</string>
+            </field>
+          </object>
+        </object-param>
+        
+<!--
+  Deployment of Site Artifacts
+-->
         <object-param>
           <name>Banner Logo</name>
           <description>Deployment Descriptor</description>
@@ -148,6 +231,8 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
@@ -168,7 +253,147 @@
             </field>
           </object>
         </object-param>
+        <object-param>
+          <name>link02</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/prepare-your-team</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Competence</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link03</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/work-with-a-partner</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Competence</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link04</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/customer-success-stories</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Customers</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link05</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/subscription-support</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Customers</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link06</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/portal-content</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link07</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/social-collaboration</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link08</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/the-platform-difference</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link09</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/integration</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Technology</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link10</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/technical-specifications</string>
+            </field>
+            <field name="targetPath">
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Technology</string>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+    <component-plugin>
+      <name>Content Initializer Service</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.wcm.extensions.deployment.PublicationDeploymentPlugin</type>
+      <description>Publication Deployment Plugin</description>
+      <init-params>
+        <object-param>
+          <name>pub01</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.wcm.extensions.deployment.PublicationDeploymentDescriptor">
+            <field name="contents">
+              <collection type="java.util.ArrayList">
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/integration</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/technical-specifications</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/portal-content</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/social-collaboration</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/the-platform-difference</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/customer-success-stories</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/subscription-support</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/prepare-your-team</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/work-with-a-partner</string></value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
 </configuration>
