@@ -11,4 +11,7 @@
   <acme>
     <label>Mẫu website ACME</label>
   </acme>
+  <WAIPortal>
+    <label>Mẫu website WAI Portal</label>
+  </WAIPortal>
 </bundle>

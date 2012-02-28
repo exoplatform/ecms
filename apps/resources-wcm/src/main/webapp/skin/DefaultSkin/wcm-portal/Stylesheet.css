@@ -91,6 +91,13 @@ td {
   margin: 3px auto;
 }
 
+.UIItemSelector .ItemDetailList .TemplateContainer .WAIPortalImage {
+  background: transparent url(background/WAIPortal.png) no-repeat center;
+  height: 134px;
+  width: 296px;
+  margin: 3px auto;
+}
+
 .ACMECategoriesTDContainer {
   padding: 10px;
 }

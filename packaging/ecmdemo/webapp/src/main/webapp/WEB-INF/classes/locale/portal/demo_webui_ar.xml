@@ -11,4 +11,7 @@
   <acme>
     <label>ACME نموذج </label>
   </acme>
+  <WAIPortal>
+    <label>WAI Portal Template</label>
+  </WAIPortal>
 </bundle>

@@ -54,6 +54,9 @@
                 <value>
                   <string>acme</string>
                 </value>
+                <value>
+                  <string>WAIPortal</string>
+                </value>
               </collection>
             </field>
           </object>
