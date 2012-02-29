@@ -19,11 +19,7 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-
-<portal-config
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_2 http://www.gatein.org/xml/ns/gatein_objects_1_2"
-    xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_2">
+<portal-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_2" xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_2 http://www.gatein.org/xml/ns/gatein_objects_1_2">
   <portal-name>Sample Accessible Website</portal-name>
   <locale>en</locale>
   <access-permissions>Everyone</access-permissions>
@@ -32,67 +28,10 @@
     <entry key="sessionAlive">onDemand</entry>
     <entry key="showPortletInfo">0</entry>
   </properties>
-
   <portal-layout>
-    <container id="WAIPortalBanner" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+    <container id="WAIPortalLayout" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
       <access-permissions>Everyone</access-permissions>
-      <container id="WAIPortalLogo" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-        <access-permissions>Everyone</access-permissions>
-        <portlet-application>
-          <portlet>
-            <application-ref>presentation</application-ref>
-            <portlet-ref>SingleContentViewer</portlet-ref>
-            <preferences>
-              <preference>
-                <name>workspace</name>
-                <value>collaboration</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>nodeIdentifier</name>
-                <value>/sites content/live/WAIPortal/web contents/site artifacts/Logo</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowQuickEdit</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowPrintAction</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTOC</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTags</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowCategories</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTitle</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>Banner</title>
-          <access-permissions>Everyone</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
-      </container>
-      <container id="WAIPortalRightSite" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+      <container id="WAIPortalToolbar" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
         <access-permissions>Everyone</access-permissions>
         <portlet-application>
           <portlet>
@@ -147,64 +86,125 @@
           <show-application-state>false</show-application-state>
           <show-application-mode>false</show-application-mode>
         </portlet-application>
-        <portlet-application>
-          <portlet>
-            <application-ref>presentation</application-ref>
-            <portlet-ref>SingleContentViewer</portlet-ref>
-            <preferences>
-              <preference>
-                <name>workspace</name>
-                <value>collaboration</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>nodeIdentifier</name>
-                <value>/sites content/live/WAIPortal/web contents/site artifacts/Signin</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowQuickEdit</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowPrintAction</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTOC</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTags</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowCategories</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTitle</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>Signin</title>
+      </container>
+      <container id="WAIPortalBottom" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        <container id="WAIPortalLogo" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
           <access-permissions>Everyone</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
-      </container>      
+          <portlet-application>
+            <portlet>
+              <application-ref>presentation</application-ref>
+              <portlet-ref>SingleContentViewer</portlet-ref>
+              <preferences>
+                <preference>
+                  <name>workspace</name>
+                  <value>collaboration</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>nodeIdentifier</name>
+                  <value>/sites content/live/WAIPortal/web contents/site artifacts/Logo</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowQuickEdit</name>
+                  <value>true</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowPrintAction</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTOC</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTags</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowCategories</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTitle</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+              </preferences>
+            </portlet>
+            <title>Banner</title>
+            <access-permissions>Everyone</access-permissions>
+            <show-info-bar>false</show-info-bar>
+            <show-application-state>false</show-application-state>
+            <show-application-mode>false</show-application-mode>
+          </portlet-application>
+        </container>
+        <container id="WAIPortalSignin" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+          <access-permissions>Everyone</access-permissions>
+          <portlet-application>
+            <portlet>
+              <application-ref>presentation</application-ref>
+              <portlet-ref>SingleContentViewer</portlet-ref>
+              <preferences>
+                <preference>
+                  <name>workspace</name>
+                  <value>collaboration</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>nodeIdentifier</name>
+                  <value>/sites content/live/WAIPortal/web contents/site artifacts/Signin</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowQuickEdit</name>
+                  <value>true</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowPrintAction</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTOC</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTags</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowCategories</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>ShowTitle</name>
+                  <value>false</value>
+                  <read-only>false</read-only>
+                </preference>
+              </preferences>
+            </portlet>
+            <title>Signin</title>
+            <access-permissions>Everyone</access-permissions>
+            <show-info-bar>false</show-info-bar>
+            <show-application-state>false</show-application-state>
+            <show-application-mode>false</show-application-mode>
+          </portlet-application>
+        </container>
+      </container>
     </container>
     <page-body>
     </page-body>
-
     <portlet-application>
       <portlet>
         <application-ref>presentation</application-ref>
@@ -259,5 +259,4 @@
       <show-application-mode>false</show-application-mode>
     </portlet-application>
   </portal-layout>
-
 </portal-config>
