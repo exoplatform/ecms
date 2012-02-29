@@ -26,10 +26,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-
-def rcontext = _ctx.getRequestContext() ;
-rcontext.getJavascriptManager().importJavascript('eXo.ecm.CategoryNavigation','/ecm-wcm-extension/javascript/');
-
 public void renderCategories() {
   renderHomeMenu();  
   renderCategoryMenu();
