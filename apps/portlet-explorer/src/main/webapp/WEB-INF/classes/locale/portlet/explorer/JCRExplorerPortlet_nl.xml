@@ -3233,7 +3233,7 @@
   </UITreeTaxonomyList>
   <UIJCRExplorer>
     <msg>
-        <target-path-not-found>Target node not found!</target-path-not-found>
+        <target-path-not-found>You cannot access this node because it doesn't exist anymore or you have no right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <UICategoryManagerSearch>

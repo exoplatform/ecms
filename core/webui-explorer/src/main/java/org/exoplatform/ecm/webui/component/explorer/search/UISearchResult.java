@@ -318,11 +318,17 @@ public class UISearchResult extends UIContainer {
       UISearchResult uiSearchResult = event.getSource();
       UIJCRExplorer uiExplorer = uiSearchResult.getAncestorOfType(UIJCRExplorer.class);
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
-      String folderPath = LinkUtils.getParentPath(path);
+      String folderPath = LinkUtils.getParentPath(path);      
       Node node = null;
       try {
         node = uiExplorer.getNodeByPath(folderPath, uiExplorer.getTargetSession());
       } catch(AccessDeniedException ace) {
+        UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null,
+            ApplicationMessage.WARNING));
+        
+        return;
+      } catch(PathNotFoundException ace) {
         UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null,
             ApplicationMessage.WARNING));

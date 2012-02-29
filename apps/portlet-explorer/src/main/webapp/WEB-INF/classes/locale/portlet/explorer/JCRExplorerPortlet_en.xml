@@ -85,7 +85,7 @@
       <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
       <no-node-history>You are in the root node.</no-node-history>
       <save-session-success>All changes have been saved.</save-session-success>
-      <target-path-not-found>The target node was not found.</target-path-not-found>
+      <target-path-not-found>You cannot access this node because it doesn't exist anymore or you have no right to access it.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -1021,7 +1021,7 @@
     <msg>
       <not-support>There is no View template for this node.</not-support>
       <empty>No results found.</empty>
-      <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
+      <access-denied>You cannot open this folder because it doesn’t exist anymore or you have no right to access it.</access-denied>
       <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>

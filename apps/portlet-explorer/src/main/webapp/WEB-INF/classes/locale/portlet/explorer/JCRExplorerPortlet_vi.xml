@@ -1023,7 +1023,7 @@
     <msg>
       <not-support>Không có mẫu nào cho node này.</not-support>
       <empty>Không có kết quả nào được tìm thấy!</empty>
-      <access-denied>Bạn không thể xem node này bởi vì mẫu này không được hỗ trợ hoặc truy nhập bị hủy bỏ!</access-denied>
+      <access-denied>Bạn không thể mở được thư mục này bởi vì nó không tồn tại hoặc bạn không có quyền truy cập.</access-denied>
       <query-invalid>Truy vấn không hợp lệ</query-invalid>
     </msg>
     <header>
@@ -3345,7 +3345,7 @@
   </UITreeTaxonomyList>
   <UIJCRExplorer>
     <msg>
-        <target-path-not-found>Không tìm thấy node đích!</target-path-not-found>
+        <target-path-not-found>Bạn không thể truy cập được node này bởi vì nó không tồn tại hoặc bạn không có quyền truy cập.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <UICategoryManagerSearch>
