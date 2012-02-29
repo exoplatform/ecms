@@ -17,8 +17,10 @@
 package org.exoplatform.services.cms.queries.impl;
 
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -45,6 +47,7 @@ public class QueryPlugin extends BaseComponentPlugin {
   private boolean autoCreateInNewRepository_ = false;
   private RepositoryService repositoryService_ ;
   private DMSConfiguration dmsConfiguration_;
+  private Set<String> configuredQueries_;
 
   public QueryPlugin(RepositoryService repositoryService, InitParams params,
       DMSConfiguration dmsConfiguration) throws Exception {
@@ -58,6 +61,7 @@ public class QueryPlugin extends BaseComponentPlugin {
   }
 
   public void init(String basedQueriesPath) throws Exception {
+    configuredQueries_ = new HashSet<String>();
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     Session session = null ;
     if(autoCreateInNewRepository_) {
@@ -96,6 +100,7 @@ public class QueryPlugin extends BaseComponentPlugin {
   }
 
   private void addQuery(Node queryHome, QueryData data) throws Exception {
+    configuredQueries_.add(data.getName());
     if(queryHome.hasNode(data.getName())) return ;
     ValueFactory vt = queryHome.getSession().getValueFactory() ;
     Node queryNode = queryHome.addNode(data.getName(), "nt:query");
@@ -118,5 +123,9 @@ public class QueryPlugin extends BaseComponentPlugin {
     }
     queryNode.setProperty(PERMISSIONS, vls) ;
     queryNode.setProperty(CACHED_RESULT, data.getCacheResult()) ;
+  }
+  
+  public Set<String> getAllConfiguredQueries() {
+    return configuredQueries_;
   }
 }

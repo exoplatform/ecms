@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.queries;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.query.Query;
@@ -405,5 +406,11 @@ public interface QueryService {
                          String workspace,
                          SessionProvider provider,
                          String userId) throws Exception;
+  
+  /**
+   * gets all configured queries
+   * @return
+   */
+  public Set<String> getAllConfiguredQueries();
 
 }

@@ -19,8 +19,10 @@ package org.exoplatform.services.cms.queries.impl;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -67,6 +69,7 @@ public class QueryServiceImpl implements QueryService, Startable{
   private String baseQueriesPath_;
   private String group_;
   private DMSConfiguration dmsConfiguration_;
+  private Set<String> configuredQueries_;
   
   private NodeHierarchyCreator nodeHierarchyCreator_;
 
@@ -104,9 +107,11 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @see QueryPlugin
    */
   public void start() {
+    configuredQueries_ = new HashSet<String>();
     for(QueryPlugin queryPlugin : queryPlugins_){
       try{
         queryPlugin.init(baseQueriesPath_);
+        configuredQueries_.addAll(queryPlugin.getAllConfiguredQueries());
       }catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Can not start query plugin '" + queryPlugin.getName() + "'", e);
@@ -133,9 +138,11 @@ public class QueryServiceImpl implements QueryService, Startable{
    * Init query node with current repository
    */
   public void init() throws Exception {
+    configuredQueries_ = new HashSet<String>();
     for(QueryPlugin queryPlugin : queryPlugins_){
       try{
         queryPlugin.init(baseQueriesPath_);
+        configuredQueries_.addAll(queryPlugin.getAllConfiguredQueries());
       }catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Can not init query plugin '" + queryPlugin.getName() + "'", e);
@@ -721,6 +728,11 @@ public class QueryServiceImpl implements QueryService, Startable{
     String language = queryNode.getProperty("jcr:language").getString();
     Query query = session.getWorkspace().getQueryManager().createQuery(statement,language);
     return query;
+  }
+
+  @Override
+  public Set<String> getAllConfiguredQueries() {
+    return configuredQueries_;
   }
   
 }

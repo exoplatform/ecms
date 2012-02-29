@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.views;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 
@@ -228,5 +229,23 @@ public interface ApplicationTemplateManagerService {
                              String catgory,
                              String templateName,
                              SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Gets the application template home.
+   * @param portletName       String
+   *                          The name of portlet
+   * @param provider          SessionProvider
+   * @see SessionProvider
+   * @return the application template home
+   * @throws Exception the exception
+   */
+  public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception;
+  
+  /**
+   * gets all configured templates of the portlet
+   * @param portletName name of the portlet
+   * @return
+   */
+  public Set<String> getConfiguredAppTemplateMap(String portletName);
 
 }

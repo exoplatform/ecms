@@ -17,7 +17,9 @@
 package org.exoplatform.services.cms.views.impl;
 
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -54,6 +56,8 @@ public class ManageViewPlugin extends BaseComponentPlugin {
   private String predefinedViewsLocation_ = "war:/conf/dms/artifacts";
   private DMSConfiguration dmsConfiguration_;
   private TemplateService templateService;
+  private Set<String> configuredTemplate_;
+  private Set<String> configuredViews_;
 
   public ManageViewPlugin(RepositoryService repositoryService, InitParams params, ConfigurationManager cservice,
       NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration) throws Exception {
@@ -90,6 +94,8 @@ public class ManageViewPlugin extends BaseComponentPlugin {
 
   @SuppressWarnings("unchecked")
   private void importPredefineViews() throws Exception {
+    configuredTemplate_ = new HashSet<String>();
+    configuredViews_ = new HashSet<String>();
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
     String templatesPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
@@ -105,6 +111,7 @@ public class ManageViewPlugin extends BaseComponentPlugin {
       if(object instanceof ViewConfig) {
         viewObject = (ViewConfig)object ;
         String viewNodeName = viewObject.getName();
+        configuredViews_.add(viewNodeName);
         if(viewHomeNode.hasNode(viewNodeName)) continue ;
         Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),viewObject.getTemplate()) ;
         for(Tab tab:viewObject.getTabList()) {
@@ -113,6 +120,7 @@ public class ManageViewPlugin extends BaseComponentPlugin {
       }else if(object instanceof TemplateConfig) {
         templateObject = (TemplateConfig) object;
         addTemplate(templateObject,session,warViewPath) ;
+        configuredTemplate_.add(templateObject.getName());
       }
     }
     session.save();
@@ -160,4 +168,13 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     InputStream in = cservice_.getInputStream(warPath) ;
     templateService.createTemplate(templateHomeNode, templateName, in, new String[] {"*"});
   }
+  
+  public Set<String> getConfiguredTemplates() {
+    return configuredTemplate_;
+  }
+  
+  public Set<String> getConfiguredViews() {
+    return configuredViews_;
+  }
+  
 }

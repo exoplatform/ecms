@@ -22,6 +22,7 @@ import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,8 +43,8 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
-import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.DynamicIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -71,6 +72,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   private IdentityRegistry     identityRegistry_;
   private String               cmsTemplatesBasePath_;
   private List<TemplatePlugin> plugins_ = new ArrayList<TemplatePlugin>();
+  private Set<String> configuredNodeTypes;
 
   /**
    * The key is a folder type, the value is the List of content types.
@@ -126,11 +128,12 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public void start() {
+    configuredNodeTypes = new HashSet<String>();
     try {
       for (TemplatePlugin plugin : plugins_) {
         plugin.init();
+        configuredNodeTypes.addAll(plugin.getAllConfiguredNodeTypes());
       }
-
       // Cached all nodetypes that is document type in the map
       getDocumentTemplates();
     } catch (Exception e) {
@@ -1134,6 +1137,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
 
   private void setManagedDocumentTypesMap(List<String> types) {
     managedDocumentTypesMap.put(getRepoName(), types);
+  }
+
+  @Override
+  public Set<String> getAllConfiguredNodeTypes() {
+    return configuredNodeTypes;
   }
 
 }

@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.views;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 
@@ -366,6 +367,18 @@ public interface ManageViewService {
    * @see                   ManageViewPlugin
    * @throws Exception
    */
-  public void init() throws Exception ;  
+  public void init() throws Exception ;
+  
+  /**
+   * gets all configured templates
+   * @return
+   */
+  public Set<String> getConfiguredTemplates();
+  
+  /**
+   * gets all configured views
+   * @return
+   */
+  public Set<String> getConfiguredViews();
 
 }

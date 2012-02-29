@@ -18,8 +18,10 @@ package org.exoplatform.services.cms.templates.impl;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -127,6 +129,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
   private String storedLocation_ ;
   private boolean autoCreateInNewRepository_=false;
   private Log log = ExoLogger.getLogger("Templateplugin") ;
+  private Set<String> configuredNodeTypes;
 
   private TemplateService templateService;
 
@@ -237,6 +240,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
   }
 
   public void init() throws Exception {
+    configuredNodeTypes = new HashSet<String>();    
     importPredefineTemplates() ;
   }
 
@@ -291,6 +295,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
       if(skins != null) {
         addNode(storedLocation, nodeType, skins, SKINS, templatesHome);
       }
+      configuredNodeTypes.add(nodeType.getNodetypeName());
     }
   }
 
@@ -601,5 +606,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     return buildViewNodeType.toString();
   }
 
-
+  public Set<String> getAllConfiguredNodeTypes() {
+    return configuredNodeTypes;
+  }
 }

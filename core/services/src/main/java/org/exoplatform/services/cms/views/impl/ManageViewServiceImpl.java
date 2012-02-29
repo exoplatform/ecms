@@ -19,7 +19,9 @@ package org.exoplatform.services.cms.views.impl;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -70,6 +72,8 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   private final DMSConfiguration dmsConfiguration_;
   private final UIExtensionManager extensionManager_;
   private TemplateService templateService;
+  private Set<String> configuredTemplates_;
+  private Set<String> configuredViews_;
 
   /**
    * Constructor
@@ -107,10 +111,14 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
 
   //Start initiating from configuration file
   public void start() {
+    configuredTemplates_ = new HashSet<String>();
+    configuredViews_ = new HashSet<String>();
     try {
       initButtons();
       for(ManageViewPlugin plugin : plugins_) {
-        plugin.init() ;
+        plugin.init();
+        configuredTemplates_.addAll(plugin.getConfiguredTemplates());
+        configuredViews_.addAll(plugin.getConfiguredViews());
       }
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -129,8 +137,12 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    */
   @Deprecated
   public void init(String repository) throws Exception  {
+    configuredTemplates_ = new HashSet<String>();
+    configuredViews_ = new HashSet<String>();
     for(ManageViewPlugin plugin : plugins_) {
       plugin.init(repository) ;
+      configuredTemplates_.addAll(plugin.getConfiguredTemplates());
+      configuredViews_.addAll(plugin.getConfiguredViews());
     }
   }
   
@@ -138,8 +150,12 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * {@inheritDoc}
    */
   public void init() throws Exception  {
+    configuredTemplates_ = new HashSet<String>();
+    configuredViews_ = new HashSet<String>();
     for(ManageViewPlugin plugin : plugins_) {
       plugin.init() ;
+      configuredTemplates_.addAll(plugin.getConfiguredTemplates());
+      configuredViews_.addAll(plugin.getConfiguredViews());
     }
   }  
 
@@ -510,6 +526,16 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     contentNode.setProperty("exo:template", template);
     viewManager.save();
     return contentNode;
+  }
+
+  @Override
+  public Set<String> getConfiguredTemplates() {
+    return configuredTemplates_;
+  }
+
+  @Override
+  public Set<String> getConfiguredViews() {
+    return configuredViews_;
   }
 
 }

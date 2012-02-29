@@ -18,13 +18,10 @@
 package org.exoplatform.services.portletcache;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.test.BasicTestCase;
 
 public class TestFragmentCacheService extends BasicTestCase
 {
-  private static final Log log = ExoLogger.getLogger(TestFragmentCacheService.class);
 
   /*
    * (non-Javadoc)

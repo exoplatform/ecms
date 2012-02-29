@@ -19,9 +19,11 @@ package org.exoplatform.services.cms.views.impl;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -67,6 +69,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   private NodeHierarchyCreator hierarchyCreator;
 
   private TemplateService templateService;
+  
+  private Map<String,Set<String>> configuredTemplates_;
 
   /**
    * Instantiates a new application template manager service impl.
@@ -124,10 +128,18 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       category = portletTemplateHome.addNode(config.getCategory(),"nt:unstructured");
       portletTemplateHome.save();
     }
-    templateService.createTemplate(category,
-                                   config.getTemplateName(),
-                                   new ByteArrayInputStream(config.getTemplateData().getBytes()),
-                                   new String[] { "*" });
+    if (!category.hasNode(config.getTemplateName())) {
+      templateService.createTemplate(category,
+                                     config.getTemplateName(),
+                                     new ByteArrayInputStream(config.getTemplateData().getBytes()),
+                                     new String[] { "*" });
+    }
+    Set<String> templateSet = configuredTemplates_.get(portletTemplateHome.getName());
+    if (templateSet == null) {
+      templateSet = new HashSet<String>();
+    }
+    templateSet.add(category.getName() + "/" + config.getTemplateName());
+    configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
   /**
@@ -149,13 +161,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   }
   
   /**
-   * Gets the application template home.
-   * @param portletName       String
-   *                          The name of portlet
-   * @param provider          SessionProvider
-   * @see SessionProvider
-   * @return the application template home
-   * @throws Exception the exception
+   * {@inheritDoc}
    */
   public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
@@ -276,7 +282,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @see   Node
    * @throws Exception the exception
    */
-  private void importPredefinedTemplateToDB(Node storedTemplateHomeNode) throws Exception{
+  private void importPredefinedTemplateToDB(Node storedTemplateHomeNode) throws Exception {
     HashMap<String, List<PortletTemplateConfig>>  map = new HashMap<String,List<PortletTemplateConfig>>();
     String repository = ((ManageableRepository) storedTemplateHomeNode.getSession().getRepository()).getConfiguration()
                                                                                                     .getName();
@@ -297,9 +303,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       map.put(portletName,list);
     }
     for(String portletName: managedApplicationsPerRepo) {
-      if(storedTemplateHomeNode.hasNode(portletName))
-        continue;
-      Node templateNode = storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
+      Node templateNode = storedTemplateHomeNode.hasNode(portletName) ? 
+                          storedTemplateHomeNode.getNode(portletName) : 
+                          storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
         addTemplate(templateNode,config);
@@ -313,6 +319,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * {@inheritDoc}
    */
   public void start() {
+    configuredTemplates_ = new HashMap<String, Set<String>>();
     RepositoryEntry repositoryEntry = null;
     try {
       repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
@@ -340,14 +347,19 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       }
     }
     sessionProvider.close();
-    //clear all template plugin to optimize memomry
-    portletTemplatePlugins.clear();
-    portletTemplatePlugins = null;
+//    //clear all template plugin to optimize memomry
+//    portletTemplatePlugins.clear();
+//    portletTemplatePlugins = null;
   }
 
   /**
    * {@inheritDoc}
    */
   public void stop() {
+  }
+
+  @Override
+  public Set<String> getConfiguredAppTemplateMap(String portletName) {
+    return configuredTemplates_ == null ? null : configuredTemplates_.get(portletName);
   }
 }

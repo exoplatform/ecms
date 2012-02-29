@@ -17,6 +17,7 @@
 package org.exoplatform.services.cms.scripts;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 
@@ -315,5 +316,11 @@ public interface ScriptService {
    * @see                 Session
    * @throws Exception
    */
-  public void initRepo() throws Exception;  
+  public void initRepo() throws Exception;
+  
+  /**
+   * gets all configured scripts
+   * @return
+   */
+  public Set<String> getAllConfiguredScripts();
 }

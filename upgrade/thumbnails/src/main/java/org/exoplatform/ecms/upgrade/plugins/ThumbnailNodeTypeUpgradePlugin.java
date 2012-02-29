@@ -67,8 +67,9 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    SessionProvider sessionProvider = null;
     try {
+      sessionProvider = SessionProvider.createSystemProvider();
       if (log.isInfoEnabled()) {
         log.info("Start " + this.getClass().getName() + ".............");
       }
@@ -92,7 +93,11 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
       if (log.isErrorEnabled()) {
         log.error(this.getClass().getName() + " failed:", e);
       }
-    } 
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
+    }
   }
 
   /**

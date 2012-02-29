@@ -793,5 +793,11 @@ public interface TemplateService {
    * @param template The template node
    */
   public String getTemplateRoles(Node template);
+  
+  /**
+   * gets all node types configured
+   * @return
+   */
+  public Set<String> getAllConfiguredNodeTypes();
 
 }

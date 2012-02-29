@@ -21,8 +21,10 @@ import groovy.lang.GroovyClassLoader;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -65,6 +67,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   List<ScriptPlugin> plugins_ = new ArrayList<ScriptPlugin>() ;
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(ScriptServiceImpl.class);
+  private Set<String> configuredScripts_;
 
   /**
    * Constructor method
@@ -121,6 +124,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * @throws Exception
    */
   private void initPlugins() throws Exception{
+    configuredScripts_ = new HashSet<String>();
     Session session = null ;
     String scriptsPath = getBasePath();
     for(ScriptPlugin plugin : plugins_) {
@@ -131,7 +135,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
         session = repositoryService_.getCurrentRepository().getSystemSession(dmsRepoConfig.getSystemWorkspace());
         Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
         while(iter.hasNext()) {
-          init(session,(ResourceConfig) iter.next().getObject(),scriptsLocation) ;
+          ResourceConfig resourceConfig = (ResourceConfig) iter.next().getObject();
+          init(session,resourceConfig,scriptsLocation);
+          addConfigScripts(resourceConfig);
         }
         ObservationManager obsManager = session.getWorkspace().getObservationManager();
         obsManager.addEventListener(this, Event.PROPERTY_CHANGED, scriptsPath, true, null, null, true);
@@ -171,6 +177,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * {@inheritDoc}
    */
   public void initRepo() throws Exception {
+    configuredScripts_ = new HashSet<String>();
     ManageableRepository mRepository = repositoryService_.getCurrentRepository();
     String scriptsPath = getBasePath();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
@@ -180,7 +187,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
       String scriptsLocation = plugin.getPredefineScriptsLocation();
       Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
       while(iter.hasNext()) {
-        init(session,(ResourceConfig) iter.next().getObject(),scriptsLocation) ;
+        ResourceConfig resourceConfig = (ResourceConfig) iter.next().getObject();
+        init(session, resourceConfig,scriptsLocation);
+        addConfigScripts(resourceConfig);
       }
       ObservationManager obsManager = session.getWorkspace().getObservationManager();
       obsManager.addEventListener(this, Event.PROPERTY_CHANGED, scriptsPath, true, null, null, true);
@@ -598,6 +607,24 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   private Node getNodeByAlias(String alias,Session session) throws Exception {
     String path = nodeHierarchyCreator_.getJcrPath(alias) ;
     return (Node)session.getItem(path);
+  }
+
+  @Override
+  public Set<String> getAllConfiguredScripts() {
+    return configuredScripts_;
+  }
+  
+  private void addConfigScripts(ResourceConfig resourceConfig) {
+    for (Object obj :  resourceConfig.getRessources()) {
+      if (obj instanceof ResourceConfig.Resource) {
+        ResourceConfig.Resource resource = (ResourceConfig.Resource)obj;
+        String name = resource.getName();
+        if (name.indexOf("/") >=0 ) {
+          name = name.substring(name.lastIndexOf("/") + 1);
+        }
+        configuredScripts_.add(name);
+      }
+    }
   }
 
 }
