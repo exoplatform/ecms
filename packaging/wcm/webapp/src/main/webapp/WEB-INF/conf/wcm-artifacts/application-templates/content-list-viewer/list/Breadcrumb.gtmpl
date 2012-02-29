@@ -20,8 +20,7 @@
 	def homeSpan       = "<span class=\"SubNavigationBranch\">" + lblHome + " </span>";
 	def categorySep    = "";
 	def contentSep     = "";
-	def clsName        = "SubNavigationBranch";
-	def wid = uicomponent.getId() + _ctx.getRequestContext().getWindowId();
+	def clsName        = "SubNavigationBranch";	
 	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
 	def category    = Util.getPortalRequestContext().getRequestParameter("category");
   def contentTitle   = Util.getPortalRequestContext().getRequestParameter("content-title");
@@ -35,6 +34,6 @@
     }
   }
 %>
-<div id="Breadcrumb$wid" class ="BreadcrumbNavigation">
+<div id="Breadcrumb" class ="BreadcrumbNavigation">
   <div class="SubNavigation"><%=homeSpan%><%=categorySpan%><%=contentSpan%></div>
 </div>
