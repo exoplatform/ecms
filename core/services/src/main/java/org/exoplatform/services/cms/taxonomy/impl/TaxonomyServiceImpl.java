@@ -197,21 +197,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
             if (target != null)
               listNode.add(target);
           } catch (ItemNotFoundException ex) {
-            if (LOG.isWarnEnabled()) {
-              LOG.warn(ex.getMessage());
-            }
+            //ignore this exception
           }
           catch (AccessDeniedException adex) {
-            if (LOG.isWarnEnabled()) {
-              LOG.warn(adex.getMessage());
-            }
+            //ignore this exception
           }
         }
       }
     } catch (RepositoryConfigurationException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
     return listNode;
@@ -253,20 +246,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
           return linkManager_.getTarget(taxonomyTree, system);
       }catch (PathNotFoundException pne) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error(pne.getMessage(), pne);
-        }
       	throw new RepositoryException(pne);
       }
     } catch (RepositoryConfigurationException e1) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e1.getMessage(), e1);
-      }
       throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e2.getMessage(), e2);
-      }
       throw new RepositoryException(e2);
     }
     return null;
@@ -280,14 +264,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       Node taxonomyTree = getRootTaxonomyDef().getNode(taxonomyName);
       return taxonomyTree.isNodeType(EXOSYMLINK_LINK);
     } catch (RepositoryConfigurationException e1) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e1.getMessage(), e1);
-      }
       throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e2.getMessage());
-      }
+      //ignore this exception
     }
     return false;
   }
@@ -312,9 +291,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       Node taxonomyDef = getRootTaxonomyDef();
       linkManager_.createLink(taxonomyDef, EXOSYMLINK_LINK, taxonomyTree, taxonomyTree.getName());
     } catch (RepositoryConfigurationException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
   }
@@ -329,9 +305,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         linkManager_.updateLink(taxonomyTreeLink, taxonomyTree);
       }
     } catch (RepositoryConfigurationException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
   }
@@ -353,9 +326,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         taxonomyDef.getSession().save();
       }
     } catch (RepositoryConfigurationException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
   }
@@ -392,9 +362,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       }
       systemSession.save();
     } catch (PathNotFoundException e2) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e2.getMessage(), e2);
-      }
       throw new RepositoryException(e2);
     }
   }
@@ -437,9 +404,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       taxonomyNode.remove();
       systemSession.save();
     } catch (PathNotFoundException e2) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e2.getMessage(), e2);
-      }
       throw new RepositoryException(e2);
     }
   }
@@ -483,9 +447,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         }
       }
     } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     } finally {
       if(session != null) session.logout();
@@ -589,9 +550,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         
       }
     } catch (PathNotFoundException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
 
@@ -689,9 +647,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       categoryNode.save();
       node.getSession().save();
     } catch (PathNotFoundException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage(), e);
-      }
       throw new RepositoryException(e);
     }
   }
