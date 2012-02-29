@@ -37,6 +37,7 @@
   <import>war:/conf/sample-portal/wcm/deployment/classic-deployment-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/deployment/template-deployment-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/deployment/WAIPortal-deployment-configuration.xml</import>
+  <import>war:/conf/sample-portal/wcm/deployment/WAIPortal-template-deployment-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/taxonomy/acme-taxonomies-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/taxonomy/waiportal-taxonomies-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/taxonomy/classic-taxonomies-configuration.xml</import>

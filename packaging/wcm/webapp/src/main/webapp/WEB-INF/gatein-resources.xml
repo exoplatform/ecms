@@ -31,11 +31,6 @@
       <js-path>/fckeditor/fckeditor.js</js-path>
       <js-priority>50</js-priority>
     </param>
-    <param>
-      <js-module>eXo.ecm.CategoryNavigation</js-module>
-      <js-path>/javascript/eXo/ecm/CategoryNavigation.js</js-path>
-      <js-priority>60</js-priority>
-    </param>
   </javascript>
 </gatein-resources>
 

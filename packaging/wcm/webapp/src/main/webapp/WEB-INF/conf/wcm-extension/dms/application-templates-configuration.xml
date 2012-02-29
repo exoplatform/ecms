@@ -80,30 +80,6 @@
           </object>
         </object-param>
         <object-param>
-          <name>big.folder.list.viewer</name>
-          <description>Default folder list viewer groovy template with Big Image</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>CategoryNavigationTemplate.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Breadcrumb Navigation</name>
-          <description>Two columns CLV template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>Breadcrumb.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>small.folder.list.viewer</name>
           <description>Default folder list viewer groovy template with Small Image</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
