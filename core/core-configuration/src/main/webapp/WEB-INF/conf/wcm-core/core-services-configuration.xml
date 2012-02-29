@@ -291,6 +291,31 @@
       </value-param>
     </init-params>
   </component>
+		
+	  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.watch.WatchDocumentService</target-component>
+    <component-plugin>
+      <name>watching document notification email contents setting</name>
+      <set-method>initializeMessageConfig</set-method>
+      <type>org.exoplatform.services.cms.watch.impl.MessageConfigPlugin</type>
+      <description>Initialize the settings for watching document notification email contents</description>
+      <init-params>
+        <object-param>
+          <name>messageConfig</name>
+          <description>Message Configuration</description>
+          <object type="org.exoplatform.services.cms.watch.impl.MessageConfig">
+            <field name="sender"><string>${gatein.ecms.watchdocument.sender:support@exoplatform.com}</string></field>
+            <field name="subject"><string>${gatein.ecms.watchdocument.subject:Your watching document is changed}</string></field>
+            <field name="mimeType"><string>${gatein.ecms.watchdocument.mimetype:text/html}</string></field>
+            <field name="content">
+              <string>${gatein.ecms.watchdocument.content:<![CDATA[Dear $user_name,<br><br>The document $doc_name ($doc_title) has changed.<br><br>Please go to <a href="$doc_url">$doc_title</a> to see this change.<br><br>]]>}
+              </string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>	
 
   <external-component-plugins>
   	<target-component>org.exoplatform.services.organization.OrganizationService</target-component>
