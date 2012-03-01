@@ -96,7 +96,7 @@
                 <tr>
                   <td class="FieldComponent AlignRight" ><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %></td>
                   <td>
-                    <div onclick="if (document.getElementById('<%=wid%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) document.getElementById('<%=wid%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0); else document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);">
+                    <div onclick="if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0); else document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);">
                       <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %>                      
                     </div>
                   </td>
