@@ -1,0 +1,21 @@
+<%
+import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.ecm.webui.tree.selectone.UITreeTaxonomyList;
+import org.exoplatform.ecm.webui.tree.UITreeTaxonomyBuilder;
+import org.exoplatform.ecm.webui.tree.selectone.UISelectTaxonomyPanel;
+%>
+
+<div class="$uicomponent.id" id="$uicomponent.id">
+  <div>
+    <%
+      uicomponent.renderChild(UIBreadcumbs.class);
+      uicomponent.renderChild(UITreeTaxonomyList.class);
+    %>
+    <div class="ClearFix">
+    <%
+      uicomponent.renderChild(UITreeTaxonomyBuilder.class);
+      uicomponent.renderChild(UISelectTaxonomyPanel.class);
+    %>
+    </div>
+  </div>
+</div>

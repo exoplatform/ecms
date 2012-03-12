@@ -1,0 +1,21 @@
+<%
+import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.ecm.webui.tree.selectone.UIWorkspaceList;
+import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
+import org.exoplatform.ecm.webui.tree.selectone.UISelectPathPanel;
+%>
+
+<div class="$uicomponent.id" id="$uicomponent.id">
+  <div>
+    <%
+      uicomponent.renderChild(UIBreadcumbs.class);
+      uicomponent.renderChild(UIWorkspaceList.class);
+    %>
+    <div class="ClearFix">
+    <%
+      uicomponent.renderChild(UINodeTreeBuilder.class);
+      uicomponent.renderChild(UISelectPathPanel.class);
+    %>
+    </div>
+  </div>
+</div>

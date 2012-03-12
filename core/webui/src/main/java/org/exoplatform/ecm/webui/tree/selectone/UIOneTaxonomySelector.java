@@ -53,7 +53,7 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfigs(
     {
       @ComponentConfig(
-          template = "classpath:groovy/ecm/webui/UIContainerWithAction.gtmpl"
+          template = "classpath:groovy/ecm/webui/UIOneTaxonomySelector.gtmpl"
       ),
       @ComponentConfig(
           type = UIBreadcumbs.class, id = "BreadcumbOneTaxonomy",
