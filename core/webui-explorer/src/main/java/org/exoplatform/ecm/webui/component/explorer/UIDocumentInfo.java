@@ -222,7 +222,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   
   private HashMap<String, String> isExpanded_;
   
-  private boolean updateTimeLineData = false;
+  //flag indicating if we need to update data for Timeline
+  private boolean updateTimeLineData_ = false;
 
   public UIDocumentInfo() throws Exception {    
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
@@ -238,12 +239,17 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     isExpanded_ = new HashMap<String, String>();
   }
 
-  public boolean isUpdateTimeLineData() { return updateTimeLineData; }
-
-  public void setUpdateTimeLineData(boolean updateTimeLineData) {
-    this.updateTimeLineData = updateTimeLineData;
-  }
-
+  /**
+   * checks if the data for Timeline view is needed to update
+   * @throws Exception
+   */
+  public void checkTimelineUpdate() throws Exception {
+    if (this.updateTimeLineData_) {
+       updateNodeLists();
+       this.updateTimeLineData_ = false;
+     }
+   }
+  
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
   public void setTimeLineSortByFavourite(String timeLineSortByFavourite) {
     this.timeLineSortByFavourite = timeLineSortByFavourite;
@@ -910,7 +916,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
     pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
     
-    updateTimeLineData = true;
+    updateTimeLineData_ = true;
   }
 
   @SuppressWarnings("unchecked")
