@@ -81,5 +81,6 @@
     <module>publication-publication-nodetype</module>
     <module>users-folder-permission</module>
     <module>templates</module>
+    <module>portlet-preferences</module>
    </modules>
 </project>

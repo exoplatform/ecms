@@ -16,10 +16,8 @@
  */
 package org.exoplatform.ecms.upgrade.plugins;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.jcr.PropertyType;
 import javax.jcr.Session;
 import javax.jcr.version.OnParentVersionAction;
 
