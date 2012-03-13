@@ -221,6 +221,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private TemplateService       templateService;
   
   private HashMap<String, String> isExpanded_;
+  
+  private boolean updateTimeLineData = false;
 
   public UIDocumentInfo() throws Exception {    
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
@@ -234,6 +236,12 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     templateService = getApplicationComponent(TemplateService.class) ;
     displayCategory_ = UIDocumentInfo.CATEGORY_ALL;
     isExpanded_ = new HashMap<String, String>();
+  }
+
+  public boolean isUpdateTimeLineData() { return updateTimeLineData; }
+
+  public void setUpdateTimeLineData(boolean updateTimeLineData) {
+    this.updateTimeLineData = updateTimeLineData;
   }
 
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
@@ -902,7 +910,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
     pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
     
-    updateNodeLists();    
+    updateTimeLineData = true;
   }
 
   @SuppressWarnings("unchecked")

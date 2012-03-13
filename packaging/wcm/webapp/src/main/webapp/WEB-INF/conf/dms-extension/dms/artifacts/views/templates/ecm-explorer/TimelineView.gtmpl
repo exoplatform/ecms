@@ -49,6 +49,11 @@
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
+
+  if (uicomponent.isUpdateTimeLineData()) {
+    uicomponent.updateNodeLists();
+    uicomponent.setUpdateTimeLineData(false);
+  }
   List<String> labels = new ArrayList<String>();
   labels.add(uicomponent.CATEGORY_TODAY);
   labels.add(uicomponent.CATEGORY_YESTERDAY);
