@@ -43,5 +43,16 @@ public interface CreatePortalArtifactsService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName) throws Exception;
+  
+  /**
+   * Deploy artifacts to portal.
+   * 
+   * @param sessionProvider
+   * @param portalName
+   * @param portalTemplateName
+   * @throws Exception
+   */
+  public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception;
 }

@@ -78,11 +78,20 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     LivePortalManagerService livePortalManagerService = (LivePortalManagerService) container
     .getComponentInstanceOfType(LivePortalManagerService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    try {
+      livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
+      return;//portal already exists
+    } catch (Exception e) {
+      //portal did not exists, process to create
+      if (log.isInfoEnabled()) {
+        log.info("Creating new resource storage for portal: " + portalConfig.getName());
+      }
+    }
     // Create site content storage for the portal
     try {
       livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
       if (log.isInfoEnabled()) {
-        log.info("Create new resource storage for portal: " + portalConfig.getName());
+        log.info("Created new resource storage for portal: " + portalConfig.getName());
       }
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
@@ -108,7 +117,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
     container.getComponentInstanceOfType(CreatePortalArtifactsService.class);
     try {
-      artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName());
+      artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(), 
+                                                          portalConfig.getPortalLayout().getId());
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("Error when create drive for portal: " + portalConfig.getName(), e);

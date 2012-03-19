@@ -47,18 +47,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class LinkDeploymentPlugin extends DeploymentPlugin {
 
-  /** The init params. */
-  private InitParams initParams;
-
   /** The repository service. */
   private RepositoryService repositoryService;
 
   /** The link manager service. */
   private LinkManager linkManager;
-
-  /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
-  public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
 
   /**
    * Instantiates a new xML deployment plugin.
@@ -72,7 +65,7 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
                               RepositoryService repositoryService,
                               LinkManager linkManager,
                               TaxonomyService taxonomyService) {
-    this.initParams = initParams;
+    super(initParams);
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
   }
@@ -81,49 +74,6 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void deploy(SessionProvider sessionProvider) throws Exception {
-    Iterator iterator = initParams.getObjectParamIterator();
-    LinkDeploymentDescriptor deploymentDescriptor = null;
-    try {
-      while (iterator.hasNext()) {
-        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
-        deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
-        String sourcePath = deploymentDescriptor.getSourcePath();
-        String targetPath = deploymentDescriptor.getTargetPath();
-        // sourcePath should looks like : repository:collaboration:/sites
-        // content/live/acme
-
-        String[] src = sourcePath.split(":");
-        String[] tgt = targetPath.split(":");
-
-        if (src.length == 3 && tgt.length == 3) {
-          ManageableRepository repository = repositoryService.getCurrentRepository();
-          Session session = sessionProvider.getSession(src[1], repository);
-          ManageableRepository repository2 = repositoryService.getCurrentRepository();
-          Session session2 = sessionProvider.getSession(tgt[1], repository2);
-          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
-          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
-          ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo = 
-            (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-          String containerName = containerInfo.getContainerName();
-          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
-                                                                    containerName);
-          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
-          listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
-        }
-        if (log.isInfoEnabled()) {
-          log.info(sourcePath + " has a link into " + targetPath);
-        }
-      }
-    } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
-                    + deploymentDescriptor.getTargetPath() + " is FAILURE at "
-                    + new Date().toString() + "\n",
-                ex);
-      }
-      throw ex;
-    }
+    WCMCoreUtils.deployLinkToPortal(initParams, repositoryService, linkManager, sessionProvider, null);
   }
 }

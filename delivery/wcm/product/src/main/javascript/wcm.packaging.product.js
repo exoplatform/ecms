@@ -47,6 +47,7 @@ function getProduct(version) {
   product.addDependencies(wcm.authoring.war);
   product.addDependencies(wcm.core.war);
   product.addDependencies(wcm.extension.war);
+  product.addDependencies(wcm.waiextension.war);
   product.addDependencies(wcm.portlet.webpresentation);
   product.addDependencies(wcm.portlet.websearches); 
   product.addDependencies(wcm.portlet.newsletter); 

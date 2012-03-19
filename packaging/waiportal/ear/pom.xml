@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo-ecms-packaging-waiportal</artifactId>
+    <version>2.3.7-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-packaging-waiportal-ear</artifactId>
+  <packaging>ear</packaging>
+  <name>eXo WAI Portal Extension EAR</name>
+  <description>eXo WAI Portal Extension EAR</description>
+  <dependencies>
+      <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-packaging-waiportal-config</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-packaging-waiportal-webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    
+  </dependencies>
+
+<!-- 
+exo-ecms-ext-deprecated-portlet-browsecontent
+exo-ecms-ext-deprecated-portlet-jcrconsole
+exo-ecms-delivery-wcm-server-jonas
+exo-ecms-delivery-wcm-server-tomcat
+exo-ecms-packaging-ecmdemo-config
+exo-ecms-packaging-wcm-ear
+exo-ecms-packaging-ecmdemo-ear
+exo-ecms-packaging-ecmdemo-rest-webapp
+exo-ecms-packaging-ecmdemo-webapp
+-->
+  
+  <build>
+    <finalName>gatein-waiportal-extension-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <configuration>
+          <displayName>ecm-waiportal-extension</displayName>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <modules>
+            <webModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-packaging-waiportal-webapp</artifactId>
+              <contextRoot>ecm-waiportal-extension</contextRoot>
+              <bundleFileName>ecm-waiportal-extension.war</bundleFileName>
+            </webModule>
+          </modules>
+        </configuration>
+      </plugin>
+      <!-- ########################################### -->
+      <!-- HORRIBLE AND DIRTY STEP TO CLEANUP EAR LIBS --> 
+      <!-- ########################################### -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>cleanup-deps</id>
+            <phase>verify</phase>
+            <configuration>
+              <tasks>
+                <echo>HORRIBLE CLEANUP IN EAR LIBS BECAUSE WE DON'T MANAGE CORRECTLY OUR DEPENDENCIES</echo>
+                <echo> 1. We extract the generated EAR because Maven adds some metadata without putting them in the working dir (and we want to keep them).</echo>
+                <unjar src="${project.build.directory}/${project.build.finalName}.ear" dest="${project.build.directory}/${project.build.finalName}" />
+                <echo> 2. We delete jar files we don't want </echo>
+                <delete verbose="true">
+                  <fileset dir="${project.build.directory}/${project.build.finalName}/lib/">
+										<exclude name="antlr-runtime-*.jar" />
+										<!--
+										DOING IT BY EXCLUDES
+										<exclude name="exo-ecms-*.jar" />
+										<exclude name="exo-jcr-services-*.jar" />
+										<exclude name="fontbox-*.jar" />
+										<exclude name="htmlparser-*.jar" />
+										<exclude name="ical4j-*.jar" />
+										<exclude name="icepdf-core-*.jar" />
+										<exclude name="icepdf-viewer-*.jar" />
+										<exclude name="itunes-com-podcast-*.jar" />
+										<exclude name="jdom-*.jar" />
+										<exclude name="jodconverter-*.jar" />
+										<exclude name="jodconverter-cli-*.jar" />
+										<exclude name="jurt-*.jar" />
+										<exclude name="juh-*.jar" />
+										<exclude name="quartz-*.jar" />
+										<exclude name="ridl-*.jar" />
+										<exclude name="rome-*.jar" />
+										<exclude name="stax-api-*.jar" />
+										<exclude name="sjsxp-*.jar" />
+										<exclude name="unoil-*.jar" />
+										<exclude name="xpp3-*.jar" />
+										<exclude name="icu4j-*.jar" />
+										<exclude name="ws-commons-util-*.jar" />
+										-->
+
+										<!--
+										EXCLUDES FROM REMOVAL WE COULD REMOVE
+										<exclude name="bcel-*.jar" />
+										<exclude name="carol-*.jar" />
+										<exclude name="dtdparser121-*.jar" />
+										<exclude name="ezmorph-*.jar" />
+										<exclude name="groovy-all-minimal-*.jar" />
+										<exclude name="hibernate-annotations-*.jar" />
+										<exclude name="hibernate-cglib-repack-*.jar" />
+										<exclude name="hibernate-commons-annotations-*.jar" />
+										<exclude name="hibernate-core-*.jar" />
+										<exclude name="hsqldb-*.jar" />
+										<exclude name="jaxb-api-*.jar" />
+										<exclude name="jaxb-impl-*.jar" />
+										<exclude name="jaxen-*.jar" />
+										<exclude name="jaxme-api-*.jar" />
+										<exclude name="jboss-common-core-*.jar" />
+										<exclude name="jboss-logging-spi-*.jar" />
+										<exclude name="jboss-reflect-*.jar" />
+										<exclude name="jboss-transaction-api-*.jar" />
+										<exclude name="jboss-unit-*.jar" />
+										<exclude name="jboss-vfs-*.jar" />
+										<exclude name="jbossjts-*.jar" />
+										<exclude name="jbossts-common-*.jar" />
+										<exclude name="jbossxb-*.jar" />
+										<exclude name="jempbox-*.jar" />
+										<exclude name="jibx-extras-*.jar" />
+										<exclude name="jline-*.jar" />
+										<exclude name="jmock-*.jar" />
+										<exclude name="jotm_jrmp_stubs-*.jar" />
+										<exclude name="jotm-*.jar" />
+										<exclude name="nekohtml-*.jar" />
+										<exclude name="oauth-*.jar" />
+										<exclude name="oauth-consumer-*.jar" />
+										<exclude name="oauth-httpclient3-*.jar" />
+										<exclude name="reflext.apt-*.jar" />
+										<exclude name="relaxngDatatype-*.jar" />
+										<exclude name="xsdlib-*.jar" />
+										-->
+										<!--
+										OLD WAY TO CLEAN JARS-->
+                    <include name="activation-*.jar" />
+                    <include name="aopalliance-*.jar" />
+                    <include name="asm-*.jar" />
+                    <include name="bcmail-*.jar" />
+                    <include name="bcprov-*.jar" />
+                    <include name="caja-*.jar" />
+                    <include name="ccpp-*.jar" />
+                    <include name="chromattic.*.jar" />
+                    <include name="common-common-*.jar" />
+                    <include name="common-logging-*.jar" />
+                    <include name="commons-beanutils-*.jar" />
+                    <include name="commons-chain-*.jar" />
+                    <include name="commons-codec-*.jar" />
+                    <include name="commons-dbcp-*.jar" />
+                    <include name="commons-digester-*.jar" />
+                    <include name="commons-fileupload-*.jar" />
+                    <include name="commons-httpclient-*.jar" />
+                    <include name="commons-io-*.jar" />
+                    <include name="commons-lang-*.jar" />
+                    <include name="commons-pool-*.jar" />
+                    <include name="concurrent-*.jar" />
+                    <include name="connector-api-*.jar" />
+                    <include name="core-*.jar" />
+                    <include name="dom4j-*.jar" />
+                    <include name="ehcache-*.jar" />
+                    <include name="exo.core.component.*.jar" />
+                    <include name="exo.jcr.component.core-*.jar" />
+                    <include name="exo.jcr.component.ext-*.jar" />
+                    <include name="exo.jcr.component.ftp-*.jar" />
+                    <include name="exo.jcr.framework.command-*.jar" />
+                    <include name="exo.jcr.framework.web-*.jar" />
+                    <!--include name="exo-jcr-services-*.jar" /-->
+                    <include name="exo.kernel.commons-*.jar" />
+                    <include name="exo.kernel.component.*.jar" />
+                    <include name="exo.kernel.container-*.jar" />
+                    <include name="exo.kernel.mc-int-*.jar" />
+                    <include name="exo.kernel.mc-kernel-extras-*.jar" />
+                    <include name="exo.portal.component.*.jar" />
+                    <include name="exo.portal.webui.*.jar" />
+                    <include name="slf4j-*.jar" />
+	                <include name="exo.jcr.component.webdav-*.jar" />
+                    <!--include name="exo.portal.component.scripting-*.jar"/-->
+                    <include name="exo.portal.component.web-*.jar" />
+                    <include name="exo.portal.gadgets-core-*.jar" />
+                    <include name="exo.portal.server.jboss.plugin-*.jar" />
+                    <include name="exo.portal.webui.core-*.jar" />
+                    <include name="exo.portal.webui.eXo-*.jar" />
+                    <include name="exo.portal.webui.portal-*.jar" />
+                    <include name="exo.ws.commons-*.jar" />
+                    <include name="exo.ws.frameworks.json-*.jar" />
+                    <include name="exo.ws.frameworks.servlet-*.jar" />
+                    <include name="exo.ws.rest.core-*.jar" />
+                    <include name="exo.ws.rest.ext-*.jar" />
+                    <include name="filters-*.jar" />
+                    <include name="gatein.portal.component.wsrp-*.jar" />
+                    <include name="google-collections-*.jar" />
+                    <include name="groovy-all-*.jar" />
+                    <include name="guice-*.jar" />
+                    <include name="guice-jmx-*.jar" />
+                    <include name="hibernate-jbosscache2-*.jar" />
+                    <include name="howl-logger-*.jar" />
+                    <include name="html-parser-*.jar" />
+                    <include name="icu4j-*.jar" />
+                    <include name="itext-*.jar" />
+                    <include name="jbosscache-core-*.jar" />
+                    <include name="jcr-*.jar" />
+                    <include name="jdom-*.jar" />
+                    <include name="jgroups-*.jar" />
+                    <include name="jibx-bind-*.jar" />
+                    <include name="jibx-run-*.jar" />
+                    <include name="joda-time-*.jar" />
+                    <include name="js-*.jar" />
+                    <include name="jsecurity*-.jar" />
+                    <include name="json_simple-*.jar" />
+                    <include name="json-*.jar" />
+                    <include name="jsr250-api-*.jar" />
+                    <include name="jsr311-api-*.jar" />
+                    <include name="juel-api-*.jar" />
+                    <include name="juel-impl-*.jar" />
+                    <include name="lucene-core-*.jar" />
+                    <include name="lucene-memory-*.jar" />
+                    <include name="lucene-spellchecker-*.jar" />
+                    <include name="mop-api-*.jar" />
+                    <include name="mop-core-*.jar" />
+                    <include name="mop-spi-*.jar" />
+                    <include name="nekohtml-*.jar" />
+                    <include name="pc-api-*.jar" />
+                    <include name="pc-bridge-*.jar" />
+                    <include name="pc-controller-*.jar" />
+                    <include name="pc-federation-*.jar" />
+                    <include name="pc-mc-*.jar" />
+                    <include name="pc-portlet-*.jar" />
+                    <include name="pdfbox-*.jar" />
+                    <include name="picketlink-idm-api-*.jar" />
+                    <include name="picketlink-idm-cache-*.jar" />
+                    <include name="picketlink-idm-common-*.jar" />
+                    <include name="picketlink-idm-core-*.jar" />
+                    <include name="picketlink-idm-hibernate-*.jar" />
+                    <include name="picketlink-idm-ldap-*.jar" />
+                    <include name="picketlink-idm-spi-*.jar" />
+                    <include name="picocontainer-*.jar" />
+                    <include name="poi-*.jar" />
+                    <include name="poi-scratchpad-*.jar" />
+                    <include name="portals-bridges-common-*.jar" />
+                    <include name="portlet-api-*.jar" />
+                    <include name="reflext.api-*.jar" />
+                    <include name="reflext.core-*.jar" />
+                    <include name="reflext.jlr-*.jar" />
+                    <include name="reflext.spi-*.jar" />
+                    <include name="rome-*.jar" />
+                    <include name="sanselan-*.jar" />
+                    <include name="shindig-common-*.jar" />
+                    <include name="shindig-features-*.jar" />
+                    <include name="shindig-gadgets-*.jar" />
+                    <include name="shindig-social-api-*.jar" />
+                    <include name="sjsxp-*.jar" />
+                    <include name="wci-wci-*.jar" />
+                    <include name="ws-commons-util-*.jar" />
+                    <include name="xapool-*.jar" />
+                    <include name="xdoclet-*.jar" />
+                    <include name="xdoclet-hibernate-module-*.jar" />
+                    <include name="xdoclet-xdoclet-module-*.jar" />
+                    <include name="xjavadoc-*.jar" />
+                    <include name="xpp3-*.jar" />
+                    <include name="xstream-*.jar" />           
+                    <include name="exo.tool.framework.junit-*.jar" />
+                    <include name="jmock-*.jar" />
+                    <include name="junit-*.jar" />
+					<include name="ant-*.jar" />
+					<include name="ejb3-persistence-*.jar" />
+					<include name="hibernate-*.jar" />
+					<include name="hsqldb-*.jar" />
+					<include name="jboss*.jar" />
+					<include name="jsf-*.jar" />
+					<include name="wikbook*.jar" />
+					<include name="pull-parser-*.jar" />
+                    <include name="antlr-*.jar" />	
+					<include name="avalon-framework-*.jar" />	
+					<include name="bcel-*.jar" />	
+					<include name="carol-*.jar" />	
+					<include name="commons-betwixt-*.jar" />	
+					<include name="commons-collections-*.jar" />	
+					<include name="commons-logging-*.jar" />	
+					<include name="dtdparser121-*.jar" />	
+					<include name="ezmorph-*.jar" />	
+					<include name="geronimo-stax-api_1.0_spec-*.jar" />	
+					<include name="htmlparser-*.jar" />	
+					<include name="javassist-*.jar" />	
+					<include name="jaxb-api-*.jar" />	
+					<include name="jaxb-impl-*.jar" />	
+					<include name="jempbox-*.jar" />	
+					<include name="jibx-extras-*.jar" />	
+					<include name="jotm-*.jar" />	
+					<include name="jotm_jrmp_stubs-*.jar" />	
+					<include name="jsp-api-*.jar" />	
+					<include name="jta-*.jar" />	
+					<include name="jtidy-*.jar" />	
+					<include name="log4j-*.jar" />	
+					<include name="logkit-*.jar" />	
+					<include name="mail-*.jar" />	
+					<include name="quartz-*.jar" />	
+					<include name="servlet-api-*.jar" />	
+					<include name="simplecaptcha-*.jar" />	
+					<include name="stax-api-*.jar" />	
+					<include name="xercesImpl-*.jar" />	
+					<include name="xml-apis-*.jar" />	
+					<include name="xmlbeans-*.jar" />	
+					<include name="commons-compress-*.jar" />	
+					<include name="el-api-*.jar" />	
+					<include name="guava-*.jar" />	
+					<include name="howl-*.jar" />	
+					<include name="httpclient-*.jar" />	
+					<include name="httpcore-*.jar" />	
+					<include name="irmi-*.jar" />	
+					<include name="jacorb-*.jar" />	
+					<include name="jasper-el-*.jar" />
+					<include name="javax.inject-*.jar" />
+					<include name="metadata-extractor-*.jar" />
+					<include name="mime-util-*.jar" />
+					<include name="modules-*.jar" />
+					<include name="oauth-*.jar" />
+					<include name="ow2-jta-*.jar" />
+					<include name="tagsoup-*.jar" />
+					<include name="tika-*.jar" />
+					<include name="xmlParserAPIs-*.jar" />
+					<include name="staxnav.core-*.jar" />
+                  </fileset>
+                </delete>
+                <echo> 3. We override the EAR generated by maven </echo>
+                <ear destfile="${project.build.directory}/${project.build.finalName}.ear" basedir="${project.build.directory}/${project.build.finalName}" appxml="${project.build.directory}/application.xml" excludes="META-INF/application.xml" />
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

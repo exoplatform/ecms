@@ -179,9 +179,8 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
     if (treeName.contains("{treeName}")) {
       treeName = StringUtils.replace(treeName, "{treeName}", portalName);
-    } else {
-      treeName = treeName + "-" + portalName;
-    }
+    } 
+    
     path = StringUtils.replace(path, "{portalName}", portalName);
 
     Session session = null;

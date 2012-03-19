@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo-ecms-packaging</artifactId>
+    <version>2.3.7-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-packaging-waiportal</artifactId>
+  <packaging>pom</packaging>
+  <name>eXo ECM Suite :: Packaging :: WAI Portal</name>
+  <description>eXo Entreprise Content Management Suite :: Packaging :: WAI Portal</description>
+  <modules>
+    <module>config</module>
+    <module>ear</module>
+    <module>webapp</module>
+  </modules>
+</project>

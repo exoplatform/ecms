@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -44,13 +46,19 @@ import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
@@ -419,5 +427,62 @@ public class WCMCoreUtils {
     PortalContainerInfo containerInfo =
       (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
     return portalContainerConfig.getRestContextName(containerInfo.getContainerName());
+  }
+  
+  public static void deployLinkToPortal(InitParams initParams,
+                             RepositoryService repositoryService,
+                             LinkManager linkManager,
+                             SessionProvider sessionProvider, 
+                             String portalName) throws Exception {
+    Iterator iterator = initParams.getObjectParamIterator();
+    LinkDeploymentDescriptor deploymentDescriptor = null;
+    try {
+      while (iterator.hasNext()) {
+        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+        deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
+        String sourcePath = deploymentDescriptor.getSourcePath();
+        String targetPath = deploymentDescriptor.getTargetPath();
+        
+        //in case: create portal from template
+        if (portalName != null && portalName.length() > 0) {
+          sourcePath = StringUtils.replace(sourcePath, "{portalName}", portalName);
+          targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
+        }
+        
+        // sourcePath should looks like : repository:collaboration:/sites
+        // content/live/acme
+        String[] src = sourcePath.split(":");
+        String[] tgt = targetPath.split(":");
+
+        if (src.length == 3 && tgt.length == 3) {
+          ManageableRepository repository = repositoryService.getCurrentRepository();
+          Session session = sessionProvider.getSession(src[1], repository);
+          ManageableRepository repository2 = repositoryService.getCurrentRepository();
+          Session session2 = sessionProvider.getSession(tgt[1], repository2);
+          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
+          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+          ExoContainer container = ExoContainerContext.getCurrentContainer();
+          PortalContainerInfo containerInfo = 
+            (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+          String containerName = containerInfo.getContainerName();
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
+                                                                    containerName);
+          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
+          listenerService.broadcast("WCMPublicationService.event.updateState", cmsService, nodeSrc);
+        }
+        if (LOG.isInfoEnabled()) {
+          LOG.info(sourcePath + " has a link into " + targetPath);
+        }
+      }
+    } catch (Exception ex) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
+                    + deploymentDescriptor.getTargetPath() + " is FAILURE at "
+                    + new Date().toString() + "\n",
+                ex);
+      }
+      throw ex;
+    }
   }
 }
