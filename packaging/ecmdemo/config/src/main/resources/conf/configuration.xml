@@ -79,6 +79,9 @@
                   <string>ecm-wcm-extension</string>
                 </value>
                 <value>
+                  <string>ecm-waiportal-extension</string>
+                </value>
+                <value>
                   <string>presentation</string>
                 </value>
                 <value>

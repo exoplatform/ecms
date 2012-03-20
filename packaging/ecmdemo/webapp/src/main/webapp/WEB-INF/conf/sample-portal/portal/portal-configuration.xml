@@ -54,9 +54,9 @@
                 <value>
                   <string>acme</string>
                 </value>
-                <value>
+                <!--value>
                   <string>WAIPortal</string>
-                </value>
+                </value-->
               </collection>
             </field>
           </object>
@@ -73,9 +73,9 @@
                 <value>
                   <string>acme</string>
                 </value>
-                <value>
+                <!--value>
                   <string>WAIPortal</string>
-                </value>
+                </value-->
               </collection>
             </field>
             <field name="ownerType">
@@ -84,7 +84,6 @@
             <field name="templateLocation">
               <string>war:/conf/sample-portal/portal</string>
             </field>
-            <field name="importMode"><string>merge</string></field>
           </object>
         </object-param>
         <object-param>

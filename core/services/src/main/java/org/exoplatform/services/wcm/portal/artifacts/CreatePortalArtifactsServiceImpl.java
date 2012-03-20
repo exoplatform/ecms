@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.portal.artifacts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
@@ -31,7 +32,7 @@ import org.exoplatform.services.listener.ListenerService;
 public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsService {
 
   public static final String CREATE_PORTAL_EVENT = "PortalArtifactsInitializerServiceImpl.portal.onCreate";
-  private HashMap<String,CreatePortalPlugin> artifactPlugins = new HashMap<String,CreatePortalPlugin>();
+  private HashMap<String,CreatePortalPlugin> artifactPlugins = new LinkedHashMap<String,CreatePortalPlugin>();
   private ArrayList<String> initialPortals = new ArrayList<String>();
   private ListenerService listenerService;
 
@@ -50,6 +51,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
     }
   }
 
+  @Deprecated
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName)
   throws Exception {
     //Do not initalize portal artifact for predefined portal
@@ -59,6 +61,19 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
       plugin.deployToPortal(sessionProvider, portalName);
     }
 
+    listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
+  }
+  
+  public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception {
+    //Do not initalize portal artifact for predefined portal
+    if(initialPortals.contains(portalName)) return;
+
+    for (CreatePortalPlugin plugin : artifactPlugins.values()) {
+      if (!plugin.getName().startsWith("template") || (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName))) {
+        plugin.deployToPortal(sessionProvider, portalName);
+      }
+    }
+    
     listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
   }
 

@@ -14,5 +14,6 @@
     <module>ecmdemo</module>
     <module>wcm</module>
     <module>workflow</module>
+    <module>waiportal</module>
   </modules>
 </project>

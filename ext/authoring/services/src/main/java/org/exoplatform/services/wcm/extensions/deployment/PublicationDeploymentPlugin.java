@@ -28,6 +28,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.extensions.utils.PublicationUtils;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 
 import javax.jcr.Node;
@@ -44,9 +45,6 @@ import java.util.List;
  * Sep 6, 2008
  */
 public class PublicationDeploymentPlugin extends DeploymentPlugin {
-
-  /** The init params. */
-  private InitParams initParams;
 
   /** The repository service. */
   private RepositoryService repositoryService;
@@ -72,7 +70,7 @@ public class PublicationDeploymentPlugin extends DeploymentPlugin {
                                      RepositoryService repositoryService,
                                      PublicationService publicationService,
                                      WCMPublicationService wcmPublicationService) {
-    this.initParams = initParams;
+    super(initParams);
     this.repositoryService = repositoryService;
     this.publicationService = publicationService;
     this.wcmPublicationService = wcmPublicationService;
@@ -82,57 +80,6 @@ public class PublicationDeploymentPlugin extends DeploymentPlugin {
    * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void deploy(SessionProvider sessionProvider) throws Exception {
-    Iterator iterator = initParams.getObjectParamIterator();
-    PublicationDeploymentDescriptor deploymentDescriptor = null;
-    try {
-      while (iterator.hasNext()) {
-        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
-        deploymentDescriptor = (PublicationDeploymentDescriptor) objectParameter.getObject();
-        List<String> contents = deploymentDescriptor.getContents();
-        // sourcePath should looks like : collaboration:/sites
-        // content/live/acme
-
-        HashMap<String, String> context_ = new HashMap<String, String>();
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-        String containerName = containerInfo.getContainerName();
-        context_.put("containerName", containerName);
-
-
-        for (String sourcePath:contents) {
-          try {
-            String[] src = sourcePath.split(":");
-
-            if (src.length == 2) {
-              ManageableRepository repository = repositoryService.getCurrentRepository();
-              Session session = sessionProvider.getSession(src[0], repository);
-              Node nodeSrc = session.getRootNode().getNode(src[1].substring(1));
-
-              wcmPublicationService.updateLifecyleOnChangeContent(nodeSrc, "default", "__system", "published");
-              nodeSrc.save();
-
-            }
-            if (log.isInfoEnabled()) {
-              log.info(sourcePath + " has been published.");
-            }
-          } catch (Exception ex) {
-            if (log.isErrorEnabled()) {
-              log.error("publication for " + sourcePath + " FAILED at "
-                          + new Date().toString() + "\n",
-                      ex);
-            }
-          }
-        }
-
-
-      }
-    } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("publication plugin FAILED at "
-                    + new Date().toString() + "\n",
-                ex);
-      }
-      throw ex;
-    }
+    PublicationUtils.deployPublicationToPortal(initParams, repositoryService, wcmPublicationService, sessionProvider, null);
   }
 }

@@ -38,6 +38,11 @@
       <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
       <description>XML Deployment Plugin</description>
       <init-params>
+        <value-param>
+          <name>override</name>
+          <description>indicates if this plugin will override data over legacy data, default value:false</description>
+          <value>false</value>
+        </value-param>
         <object-param>
           <name>Classic Logo Data</name>
           <description>Deployment Descriptor</description>
@@ -344,6 +349,27 @@
             </field>
           </object>
         </object-param>
+        
+        <object-param>
+          <name>Demo newsletter for classic site</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/classic/ApplicationData/NewsletterApplication/DefaultTemplates</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/newsletter/newsletterBasicTemplate.xml</string>
+            </field>
+          </object>
+        </object-param>
+        
       </init-params>
     </component-plugin>
   </external-component-plugins>

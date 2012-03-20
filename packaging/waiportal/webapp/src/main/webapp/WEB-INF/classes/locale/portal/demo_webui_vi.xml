@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <Signin>
+    <welcome>Chào mừng</welcome>
+    <login>Đăng nhập</login>
+    <logout>Thoát</logout>
+    <language>Thay đổi ngôn ngữ</language>
+    <register>Đăng ký</register>
+  </Signin>
+  <Toolbar>
+    <SkipToContent>Chuyển tới nội dung</SkipToContent>
+    <SiteMap>Sơ đồ site</SiteMap>
+    <Accessibility>Accessibility</Accessibility >
+    <NormalSize>Cỡ chữ thường</NormalSize>
+    <MediumSize>Cỡ chữ trung bình</MediumSize>
+    <LargeSize>Cỡ chữ lớn</LargeSize>
+    <NormalContrast>Tương phản thường</NormalContrast>
+    <HighContrast>Tương phản cao</HighContrast>
+  </Toolbar>
+  <Logo>
+    <GoHome>Về trang chủ</GoHome>
+  </Logo>
+  <acme>
+    <label>Mẫu website ACME</label>
+  </acme>
+  <WAIPortal>
+    <label>Sample Accessible Website</label>
+  </WAIPortal>
+</bundle>

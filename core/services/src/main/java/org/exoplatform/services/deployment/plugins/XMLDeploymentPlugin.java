@@ -48,9 +48,6 @@ import org.exoplatform.services.log.Log;
  */
 public class XMLDeploymentPlugin extends DeploymentPlugin {
 
-  /** The init params. */
-  private InitParams initParams;
-
   /** The configuration manager. */
   private ConfigurationManager configurationManager;
 
@@ -71,7 +68,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
   public XMLDeploymentPlugin(InitParams initParams,
                              ConfigurationManager configurationManager,
                              RepositoryService repositoryService) {
-    this.initParams = initParams;
+    super(initParams);
     this.configurationManager = configurationManager;
     this.repositoryService = repositoryService;
   }
@@ -84,6 +81,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
    */
   @SuppressWarnings("unchecked")
   public void deploy(SessionProvider sessionProvider) throws Exception {
+    ManageableRepository repository = repositoryService.getCurrentRepository();
     Iterator iterator = initParams.getObjectParamIterator();
     DeploymentDescriptor deploymentDescriptor = null;
     try {
@@ -96,14 +94,12 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
         Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
 
         InputStream inputStream = configurationManager.getInputStream(sourcePath);
-        ManageableRepository repository = repositoryService.getCurrentRepository();
         Session session = sessionProvider.getSession(deploymentDescriptor.getTarget()
                                                                          .getWorkspace(),
                                                      repository);
         session.importXML(deploymentDescriptor.getTarget().getNodePath(),
                           inputStream,
                           ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
-
         if (cleanupPublication) {
           /**
            * This code allows to cleanup the publication lifecycle in the target
@@ -159,4 +155,5 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       throw ex;
     }
   }
+  
 }

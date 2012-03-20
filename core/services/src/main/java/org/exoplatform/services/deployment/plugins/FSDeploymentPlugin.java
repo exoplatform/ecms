@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.deployment.plugins;
 
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
@@ -26,6 +27,10 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Sep 6, 2008
  */
 public class FSDeploymentPlugin extends DeploymentPlugin {
+
+  public FSDeploymentPlugin(InitParams initParams) {
+    super(initParams);
+  }
 
   public void deploy(SessionProvider sessionProvider) throws Exception {
   }

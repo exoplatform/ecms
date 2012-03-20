@@ -18,7 +18,9 @@ package org.exoplatform.services.deployment;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -85,37 +87,53 @@ public class WCMContentInitializerService implements Startable{
       } else {
         contentInitializerService = serviceFolder.addNode("WCMContentInitializerService", "nt:unstructured");
       }
-      if (!contentInitializerService.hasNode("WCMContentInitializerServiceLog")) {
-        Date date = new Date();
-        StringBuffer logData = new StringBuffer();
-        for (DeploymentPlugin deploymentPlugin : listDeploymentPlugin) {
-          try {
+      Set<String> newSiteNames = new HashSet<String>();
+      //use DeploymentPlugin list to deploy data
+      boolean firstTimeDeploy = !contentInitializerService.hasNode("WCMContentInitializerServiceLog");
+      Date date = new Date();
+      StringBuffer logData = new StringBuffer();
+      for (DeploymentPlugin deploymentPlugin : listDeploymentPlugin) {
+        try {
+          if (firstTimeDeploy || deploymentPlugin.isOverride() || !deploymentPlugin.deployed()) {
             deploymentPlugin.deploy(sessionProvider);
-            logData.append("deploy " + deploymentPlugin.getName()
-                + " deployment plugin succesfully at " + date.toString() + "\n");
-          } catch (Exception e) {
-            if (log.isErrorEnabled()) {
-              log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
-                + date.toString() + " by " + e + "\n");
+            if (deploymentPlugin.getSiteName() != null) {
+              newSiteNames.add(deploymentPlugin.getSiteName());
             }
             logData.append("deploy " + deploymentPlugin.getName()
-                + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
+                + " deployment plugin succesfully at " + date.toString() + "\n");
           }
+        } catch (Exception e) {
+          if (log.isErrorEnabled()) {
+            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+              + date.toString() + " by " + e + "\n");
+          }
+          logData.append("deploy " + deploymentPlugin.getName()
+              + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
         }
-
-        Node contentInitializerServiceLog = contentInitializerService.addNode("WCMContentInitializerServiceLog", "nt:file");
-        Node contentInitializerServiceLogContent = contentInitializerServiceLog.addNode("jcr:content", "nt:resource");
-        contentInitializerServiceLogContent.setProperty("jcr:encoding", "UTF-8");
-        contentInitializerServiceLogContent.setProperty("jcr:mimeType", "text/plain");
-        contentInitializerServiceLogContent.setProperty("jcr:data", logData.toString());
-        contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
-        session.save();
-
-        XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
-        XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
-        xSkinService.start();
-        jsService.start();
       }
+
+      //marks sites with deployed data
+      for (String newSiteName : newSiteNames)
+      if (!contentInitializerService.hasNode(newSiteName)) {
+        contentInitializerService.addNode(newSiteName, "nt:base");
+      }
+      //add log data 
+      Node contentInitializerServiceLog = contentInitializerService.hasNode("WCMContentInitializerServiceLog") ?
+                                          contentInitializerService.getNode("WCMContentInitializerServiceLog") : 
+                                          contentInitializerService.addNode("WCMContentInitializerServiceLog", "nt:file");
+      Node contentInitializerServiceLogContent = contentInitializerServiceLog.hasNode("jcr:content") ?
+                                                 contentInitializerServiceLog.getNode("jcr:content") : 
+                                                 contentInitializerServiceLog.addNode("jcr:content", "nt:resource");
+      contentInitializerServiceLogContent.setProperty("jcr:encoding", "UTF-8");
+      contentInitializerServiceLogContent.setProperty("jcr:mimeType", "text/plain");
+      contentInitializerServiceLogContent.setProperty("jcr:data", logData.toString());
+      contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
+      session.save();
+
+      XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
+      XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
+      xSkinService.start();
+      jsService.start();
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("Error when start WCMContentInitializerService: ", e);
@@ -124,7 +142,7 @@ public class WCMContentInitializerService implements Startable{
       sessionProvider.close();
     }
   }
-
+  
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */
