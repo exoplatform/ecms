@@ -7,14 +7,13 @@
 <section id="sect-User_Guide-Search_portlet">
     <title>Search content in a site</title>
     <para>The
-        <guilabel>Search</guilabel>
+        <emphasis role="bold">Search</emphasis>
         function allows you to quickly search for any content in the system with a keyword from the front page, even if you
         do not log in. However, the number of the search results displayed depends on your role.
     </para>
     <para>For example, if you do not log in, you only see the search results that are published.</para>
     <section id="sect-User_Guide-Search_portlet-Search_content">
         <title>How to search for content?</title>
-        <para>To search for content, do the followings:</para>
         <procedure>
             <step>
                 <para>
@@ -60,37 +59,22 @@
                         <tbody>
                             <row>
                                 <entry>
-                                    <guilabel>Keyword</guilabel>
+                                    <emphasis role="bold">in Content</emphasis>
                                 </entry>
                                 <entry>
                                     <para>
-                                        The keyword used to search.
+                                        Search in all content containing the keyword.
                                     </para>
                                 </entry>
                             </row>
                             <row>
                                 <entry>
-                                    <guilabel>Portal</guilabel>
+                                    <emphasis role="bold">in Pages</emphasis>
                                 </entry>
                                 <entry>
-                                    The scale where you want to search. You can search in all portals or in a specific
-                                    portal.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>
-                                    <guilabel>Page</guilabel>
-                                </entry>
-                                <entry>
-                                    Search in all pages containing the keyword.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>
-                                    <guilabel>Document</guilabel>
-                                </entry>
-                                <entry>
-                                    Search in all documents containing the keyword.
+                                    You can search in all portals or in a specific
+                                    portal. The returned results are the pages which contain the keyword in their name, title
+                                  or their <link linkend="SEO_data_page">SEO data</link> (description, and keyword).
                                 </entry>
                             </row>
                         </tbody>
@@ -98,15 +82,13 @@
                 </table>
             </step>
             <step>
-                <para>In the Search form, you can enter another keyword in the
-                    <guilabel>Keyword</guilabel>
-                    field and set the
+                <para>In the Search form, you can enter another keyword and set the
                     the search scale.
                 </para>
             </step>
             <step>
-                <para>Click
-                    <guibutton>Search</guibutton>
+                <para>Press <emphasis role="bold">Enter</emphasis>, or click
+                    <emphasis role="bold">Search</emphasis>
                    to start searching.
                 </para>
             </step>
@@ -115,22 +97,19 @@
     <section id="sect-User_Guide-Search_portlet_Edit-search-portlet">
         <title>Edit the Search portlet</title>
         <para>Editing the Search portlet allows you to change the display of search results.</para>
-        <para>Do the followings:</para>
         <procedure>
-            <title>Edit the Search portlet</title>
             <step>
                 <para>Open the Search page as <xref linkend="sect-User_Guide-Search_portlet-Search_content"/>.</para>
             </step>
             <step>
-                <title>Open the form to edit the Search portlet</title>
-                <para>There are two way:</para>
+                <para>Open the <emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Search</emphasis> portlet by following one of two ways:</para>
                 <itemizedlist>
                     <listitem>
                         <para><emphasis role="bold">The first way</emphasis></para>
-							<para>Turn on the Edit mode, and then click the
+							<para>Hover your cursor over <emphasis role="bold">Edit --> Content</emphasis> on the <emphasis role="bold">Administration</emphasis> bar, and then click the
                             <inlinemediaobject>
                                 <imageobject>
-                                    <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                                    <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
                                 </imageobject>
                                 <textobject>
                                     <phrase>pencil</phrase>
@@ -150,17 +129,26 @@
                     </listitem>
                     <listitem>
                         <para><emphasis role="bold">The second way</emphasis></para>
-							<para>Click
-                            <emphasis role="bold">Site Editor --> Edit Page</emphasis>
+							<para>Hover your cursor over
+                            <emphasis role="bold">Edit --> Page --> Layout</emphasis>
                             on the <emphasis role="bold">Administration</emphasis> bar. The
-                            <guilabel>Page Editor</guilabel>
+                            <emphasis role="bold">Page Editor</emphasis>
                             will be displayed.
                         </para>
                         <itemizedlist>
                             <listitem>
                                 <para>Hover the mouse pointer over the
-                                    <guilabel>SearchResult</guilabel>
-                                    portlet and the toolbar appears.
+                                    <emphasis role="bold">SearchResult</emphasis>
+                                    portlet and click
+                                    <inlinemediaobject>
+                                        <imageobject>
+                                            <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
+                                        </imageobject>
+                                        <textobject>
+                                            <phrase>pencil</phrase>
+                                        </textobject>
+                                    </inlinemediaobject>
+                                    to edit the portlet.
                                 </para>
                                 <mediaobject>
                                     <imageobject role="html">
@@ -172,24 +160,11 @@
                                     </imageobject>
                                 </mediaobject>
                             </listitem>
-                            <listitem>
-                                <para>Click 
-                                    <inlinemediaobject>
-                                        <imageobject>
-                                            <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
-                                        </imageobject>
-                                        <textobject>
-                                            <phrase>pencil</phrase>
-                                        </textobject>
-                                    </inlinemediaobject>
-                                    to edit the portlet.
-                                </para>
-                            </listitem>
                         </itemizedlist>
                     </listitem>
                 </itemizedlist>
 
-                <para>The form to edit the Search portlet appears.</para>
+                <para>The <emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Search</emphasis> portlet appears.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG"/>
@@ -216,7 +191,7 @@
                             <tbody>
                                 <row>
                                     <entry>
-                                        <guilabel>Items per page</guilabel>
+                                        <emphasis role="bold">Items per Page</emphasis>
                                     </entry>
                                     <entry>
                                         <para>
@@ -226,36 +201,36 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <guilabel>Page Mode</guilabel>
+                                        <emphasis role="bold">Page Mode</emphasis>
                                     </entry>
                                     <entry>
                                         The way to display the search results. There are 3 options:
                                         <itemizedlist>
                                             <listitem>
-                                                <para><guilabel>None</guilabel>: Only the first page of search results is
+                                                <para><emphasis role="bold">None</emphasis>: Only the first page of search results is
                                                     displayed in the search page.</para>
                                             </listitem>
                                             <listitem>
-                                                <para><guilabel>More</guilabel>: When you click the
-                                                    <guibutton>Search</guibutton>
+                                                <para><emphasis role="bold">More</emphasis>: When you click the
+                                                    <emphasis role="bold">Search</emphasis>
                                                     button, the
-                                                    first page of search result is displayed. The difference from the <guilabel>None</guilabel>
+                                                    first page of search result is displayed. The difference from the <emphasis role="bold">None</emphasis>
                                                     mode
-                                                    is that, there is a <guibutton>More</guibutton> button allowing you to see more search results.
+                                                    is that, there is a <emphasis role="bold">More</emphasis> button allowing you to see more search results.
                                                     When clicking this button, new search results are appended to
                                                     the
                                                     current search result page like Twitter or Facebook behavior.
                                                 </para>
                                             </listitem>
                                             <listitem>
-                                                <para><guilabel>Pagination</guilabel>: In this mode, the search results are divided into many pages (for example, 1, 2, 3 and Next). You can navigate to another page by clicking the page number or <guibutton>Next</guibutton> in the bottom of the Search portlet to view more results.</para>
+                                                <para><emphasis role="bold">Pagination</emphasis>: In this mode, the search results are divided into many pages (for example, 1, 2, 3 and Next). You can navigate to another page by clicking the page number or <emphasis role="bold">Next</emphasis> in the bottom of the Search portlet to view more results.</para>
                                             </listitem>
                                         </itemizedlist>
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <guilabel>Search form template</guilabel>
+                                        <emphasis role="bold">Search Form Template</emphasis>
                                     </entry>
                                     <entry>
                                         The template of the Search form.
@@ -263,7 +238,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <guilabel>Search result template</guilabel>
+                                        <emphasis role="bold">Search Result Template</emphasis>
                                     </entry>
                                     <entry>
                                         The template for displaying the search results.
@@ -271,7 +246,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <guilabel>Search page layout template</guilabel>
+                                        <emphasis role="bold">Search Page Layout Template</emphasis>
                                     </entry>
                                     <entry>
                                         The layout of the Search portlet.
@@ -279,7 +254,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <guilabel>Base path</guilabel>
+                                        <emphasis role="bold">Base Path</emphasis>
                                     </entry>
                                     <entry>
                                         The page where you can see the content of a search result.
@@ -290,7 +265,7 @@
                     </table>
             </step>
             <step>
-                <para>Edit your desired portlet and click <guibutton>Save</guibutton> to accept your changes.</para>
+                <para>Edit your desired portlet and click <emphasis role="bold">Save</emphasis> to accept your changes.</para>
             </step>
         </procedure>
     </section>
