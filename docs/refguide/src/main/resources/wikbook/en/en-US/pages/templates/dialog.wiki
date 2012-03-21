@@ -134,7 +134,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.Example}
 
 {code:java}
-String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"];  
+String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"];
   uicomponent.addCalendarField("hiddenInput5", hiddenField5);
 {code}
 h1. Text Area Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField}
@@ -152,7 +152,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 {code:groovy}
 <%
   String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ;
-  uicomponent.addTextAreaField("description", fieldDescription) ; 
+  uicomponent.addTextAreaField("description", fieldDescription) ;
 %>
 {code}
 
@@ -208,7 +208,7 @@ When you create an upload form, you can store an image by two main ways:
 {code:groovy}
 <%
   String[] fieldMedia = ["jcrPath=/node/exo:image"] ;
-  uicomponent.addUploadField("media", fieldMedia) ;		
+  uicomponent.addUploadField("media", fieldMedia) ;
 %>
 {code}
 
@@ -216,7 +216,7 @@ When you create an upload form, you can store an image by two main ways:
 
 {code:groovy}
 <%
-  String[] hiddenField1 = ["jcrPath=/node/exo:image", "nodetype=nt:resource", "visible=false"] ; 
+  String[] hiddenField1 = ["jcrPath=/node/exo:image", "nodetype=nt:resource", "visible=false"] ;
   String[] hiddenField2 = ["jcrPath=/node/exo:image/jcr:encoding", "visible=false", "UTF-8"] ;
   String[] hiddenField3 = ["jcrPath=/node/exo:image/jcr:lastModified", "visible=false"] ;
   uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
@@ -224,7 +224,7 @@ When you create an upload form, you can store an image by two main ways:
   uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
 
   String[] fieldMedia = ["jcrPath=/node/exo:image"] ;
-  uicomponent.addUploadField("media", fieldMedia) ;		
+  uicomponent.addUploadField("media", fieldMedia) ;
 %>
 {code}
 
@@ -234,7 +234,7 @@ When you create an upload form, you can store an image by two main ways:
 <%
 	def image = "image";
 	// If you're trying to edit the document
-	if(uicomponent.isEditing()) { 
+	if(uicomponent.isEditing()) {
 		def curNode = uicomponent.getNode();
 		// If the image existed
 		if (curNode.hasNode("exo:image")) {
@@ -243,7 +243,7 @@ When you create an upload form, you can store an image by two main ways:
 			if (imageNode.getProperty("jcr:data").getStream().available() > 0 && (uicomponent.findComponentById(image) == null)) {
 				def imgSrc = uicomponent.getImage(curNode, "exo:image");
 				def actionLink = uicomponent.event("RemoveData", "/exo:image");
-				%>		
+				%>
 					<div>
 						<img src="$imgSrc" width="100px" height="80px"/>
 						<a href="$actionLink">
@@ -253,11 +253,11 @@ When you create an upload form, you can store an image by two main ways:
 				<%
 			} else {
 				String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-				uicomponent.addUploadField(image, fieldImage) ;								
+				uicomponent.addUploadField(image, fieldImage) ;
 			}
 		} else {
 				String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-				uicomponent.addUploadField(image, fieldImage) ;								
+				uicomponent.addUploadField(image, fieldImage) ;
 		}
 	}  else if(uicomponent.dataRemoved()) {
 		String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
@@ -268,6 +268,18 @@ When you create an upload form, you can store an image by two main ways:
 	}
 %>
 {code}
+
+* To have multiple upload fields, you just add the *multiValues=true* parameter to *fieldProperty* in _dialog1.gtmpl_:
+{code:java}
+# Multi upload
+fieldProperty = ["jcrPath=/node/exo:value", "multiValues=true"];
+uicomponent.addUploadField("/node/exo_value", fieldProperty);
+{code}
+{note}
+In this case, you must be sure that the node type definition of the document you are currently editing should allow the document
+to have a child node named '_exo\:value_' whose node type is '_nt\:unstructured_'. All uploaded files of this upload component are stored
+ in this '_exo\:value_' child node.
+{note}
 
 h1. Radio Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField}
 
@@ -280,7 +292,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 {code:groovy}
 <%
-  String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=radio1,radio2,radio3"];		 
+  String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=radio1,radio2,radio3"];
   uicomponent.addRadioBoxField("isDeep", fieldDeep);
 %>
 {code}
@@ -314,7 +326,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
   uicomponent.addCheckBoxField("isDeep", fieldDeep);
 %>
 {code}
-  
+
 h1. Mixin Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField}
 
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.AdditionParameters}
@@ -326,7 +338,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 {code:groovy}
 <%
   String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
-  uicomponent.addMixinField("id", fieldId) ; 
+  uicomponent.addMixinField("id", fieldId) ;
 %>
 {code}
 
@@ -352,7 +364,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.Example}
 
 {code:groovy}
-<% 
+<%
   String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon"] ;
   uicomponent.addActionField("targetPath", fieldPath)  ;
 %>
@@ -397,7 +409,7 @@ private String getSelectedTab(String selectedTab) {
 
 Changing in every event of *onClick* must be done like the following:
 
-{code:html}        
+{code:html}
 <div class="UITab NormalTabStyle">
   <div class="<%=getSelectedTab("mainWebcontent")%>
     ">
