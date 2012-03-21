@@ -29,7 +29,7 @@
           Select
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="15mm" fileref="images/addcategorybutton.png" format="PNG" scalefit="1"/>
+              <imagedata width="15mm" fileref="images/addcategorybutton1.png" format="PNG" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Add category ]</phrase>
@@ -775,7 +775,7 @@ After being created successfully, a file document with the <emphasis>text/html</
  </step>
 </procedure>
 <citetitle><para xml:id="proc-User_Guide-Add_a_document-Create_a_new_Article"><emphasis role="bold">Create a new article</emphasis></para></citetitle>
-    <procedure>    
+    <procedure>
       <step>
         <para>
           Follow the steps in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
@@ -784,7 +784,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Input name and title of the Article in the 
+          Input name and title of the Article in the
           <emphasis role="bold">Name</emphasis>
           and
           <emphasis role="bold">Title</emphasis>
@@ -793,7 +793,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Input values for both fields: 
+          Input values for both fields:
           <emphasis role="bold">Summary</emphasis>
           and
           <emphasis role="bold">Content.</emphasis>
@@ -1332,7 +1332,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
       </step>
       <step>
-        <para>Click 
+        <para>Click
           <emphasis role="bold">Save</emphasis>
           or
           <emphasis role="bold">Save &amp; Close</emphasis>
@@ -1379,7 +1379,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Input the location where the event will take place in the 
+          Input the location where the event will take place in the
           <emphasis role="bold">Location</emphasis>
           field. Select the <emphasis role="bold">Google Maps</emphasis> checkbox if you want the location of the event to be shown on Google Maps.
         </para>
@@ -1423,7 +1423,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </imageobject>
     </mediaobject>
 	</para>
-	
+
   </section>
   <section id="sect-User_Guide-Actions-Add_Folder">
     <title>Add a folder</title>
@@ -1554,8 +1554,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Folder ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the 
-          <emphasis role="bold">Add Folder</emphasis>
+          on the <emphasis role="bold">Action</emphasis> bar to open the
+          <emphasis role="bold">New Folder</emphasis>
           form.
         </para>
         <mediaobject>
@@ -1630,7 +1630,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject> on the
           <emphasis role="bold">Action</emphasis>
-          bar to open the 
+          bar to open the
           <emphasis role="bold">Symlink Manager</emphasis>
           form.
         </para>
@@ -1993,8 +1993,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
         <para>
           The
-          <emphasis role="bold">Edit Document</emphasis>
-          form will appear. All information of the selected document will be displayed in this form and ready for you to
+          form to edit the document will appear. All information of the selected document will be displayed in this form and ready for you to
           change except the
           <emphasis role="bold">Name</emphasis>
           field.
@@ -2029,14 +2028,14 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" scalefit="1" fileref="images/exportnode.png" format="PNG"/>
+              <imagedata width="15mm" scalefit="1" fileref="images/exportnode.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Export Node ]</phrase>
             </textobject>
           </inlinemediaobject>
           on the <emphasis role="bold">Action</emphasis> bar to show the
-          <emphasis role="bold">Export Node</emphasis>
+          <emphasis role="bold">Export</emphasis>
           form.
         </para>
         <mediaobject>
@@ -2095,7 +2094,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <note>
           <para>
             The
-            <emphasis role="bold">Export Node</emphasis>
+            <emphasis role="bold">Export</emphasis>
             form can contain
             <emphasis role="bold">Export Version History</emphasis>
             if the exported node or any of its child nodes is versioned.
@@ -2125,14 +2124,14 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" scalefit="1" fileref="images/importnodebutton.png" format="PNG"/>
+              <imagedata width="15mm" scalefit="1" fileref="images/importnodebutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Import Node ]</phrase>
             </textobject>
           </inlinemediaobject>
           on the <emphasis role="bold">Action</emphasis> bar. The
-          <emphasis role="bold">Import Node</emphasis>
+          <emphasis role="bold">Import</emphasis>
           form appears.
         </para>
         <mediaobject>
@@ -2243,7 +2242,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="22mm" scalefit="1" fileref="images/manageactionsbutton.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/manageactionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Actions ]</phrase>
@@ -2418,7 +2417,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 </row>
                 <row>
                   <entry><emphasis role="bold">exo:transformBinaryTo TextAction</emphasis></entry>
-                  <entry>Convert 
+                  <entry>Convert
                     <emphasis>.pdf</emphasis>
                     or
                     <emphasis>.doc</emphasis>
@@ -2475,7 +2474,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/previewicon.png" format="PNG"/>
@@ -2580,7 +2579,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -2618,7 +2617,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="15mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2646,10 +2645,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="18mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2699,7 +2698,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="17mm" scalefit="1" fileref="images/managecategoriesicon.png" format="PNG"/>
@@ -2733,7 +2732,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
@@ -2799,7 +2798,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="17mm" scalefit="1" fileref="images/managecategoriesicon.png" format="PNG"/>
@@ -2819,7 +2818,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -2870,7 +2869,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <para xml:id="step-User_Guide-Hide_a_Node-Show_a_Node"><emphasis role="bold">Show a node</emphasis></para>
        </citetitle>
       <para>
-          To show a hidden node, click 
+          To show a hidden node, click
           <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/hideshowcontentbutton.png" format="PNG" scalefit="1" width="25mm"/>
@@ -2894,10 +2893,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="25mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
+              <imagedata width="20mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Publications ]</phrase>
@@ -2926,7 +2925,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
@@ -2935,7 +2934,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject>
-          to view the content of the node or click 
+          to view the content of the node or click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/restoreversionicon.png" format="PNG"/>
@@ -2988,10 +2987,10 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3014,7 +3013,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="4mm" scalefit="1" fileref="images/greentick.png" format="PNG"/>
@@ -3055,7 +3054,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             Click the
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="22mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
+                <imagedata width="20mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3107,7 +3106,14 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click the relation button on the <emphasis role="bold">Filter</emphasis> bar.
+            Click <inlinemediaobject>
+              <imageobject>
+                <imagedata width="4mm" scalefit="1" fileref="images/relationbutton1.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase>[Relation button]</phrase>
+              </textobject>
+            </inlinemediaobject> on the <emphasis role="bold">Filter</emphasis> bar.
           </para>
           <mediaobject>
             <imageobject role="html">
@@ -3118,16 +3124,8 @@ After being created successfully, a file document with the <emphasis>text/html</
             </imageobject>
           </mediaobject>
           <para>
-            All nodes related to the selected node will be displayed in the left pane.
+            All nodes related to the selected node will be displayed in the <emphasis role="bold">Relations List</emphasis> in the left pane.
           </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/relationslist.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="67mm" scalefit="1" align="center" fileref="images/relationslist.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
         </step>
         <step>
           <para>
@@ -3149,7 +3147,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3196,7 +3194,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3255,7 +3253,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3269,7 +3267,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="4mm" scalefit="1" fileref="images/versionplusicon.png" format="PNG"/>
@@ -3322,7 +3320,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3336,7 +3334,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="4mm" scalefit="1" fileref="images/versionminusicon.png" format="PNG"/>
@@ -3367,7 +3365,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click the 
+            Click the
             <emphasis role="bold">Remove</emphasis>
             button to remove the selected label.
           </para>
@@ -3384,7 +3382,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3397,7 +3395,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
@@ -3423,7 +3421,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Version viewing is not supported on folder nodes.
         </para>
         <para>
-          If you click 
+          If you click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="3mm" scalefit="1" fileref="images/previewicon2.png" format="PNG"/>
@@ -3446,7 +3444,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3464,7 +3462,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/restoreversionicon.png" format="PNG"/>
@@ -3488,7 +3486,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
@@ -3501,7 +3499,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -3543,7 +3541,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="30mm" scalefit="1" fileref="images/localisedcontents.png" format="PNG"/>
@@ -3552,7 +3550,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add/Edit localized content ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the 
+          on the
           <emphasis role="bold">Action</emphasis>
           bar.
         </para>
@@ -3611,7 +3609,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click <emphasis role="bold">Save</emphasis> to be returned to the <emphasis role="bold">View Language</emphasis> tab. Your selected language is now added to the 
+          Click <emphasis role="bold">Save</emphasis> to be returned to the <emphasis role="bold">View Language</emphasis> tab. Your selected language is now added to the
           <emphasis role="bold">Language</emphasis> field.
         </para>
         <para>
@@ -3691,7 +3689,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="34mm" fileref="images/overloadthumbnail.png" format="PNG"/>
@@ -3718,7 +3716,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click the 
+          Click the
           <emphasis role="bold">Browse...</emphasis>
           button to select the image which will be used as the display icon for the selected folder.
         </para>
@@ -3747,9 +3745,14 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click the
-          <emphasis role="bold">Request Approval</emphasis>
-          button on the <emphasis role="bold">Action</emphasis> bar.
+          Click <inlinemediaobject>
+            <imageobject>
+              <imagedata width="30mm" fileref="images/Request_approval_button.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>[Request approval ]</phrase>
+            </textobject>
+          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar.
         </para>
         <para>
           The content is displayed at the bottom of the <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis></emphasis> of the people who have the right to approve
@@ -3772,9 +3775,14 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click the
-          <emphasis role="bold">Approve Content</emphasis>
-          button on the <emphasis role="bold">Action</emphasis> bar and the content is ready to be published.
+          Click <inlinemediaobject>
+            <imageobject>
+              <imagedata width="30mm" fileref="images/Approve_content.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>[Approve Content ]</phrase>
+            </textobject>
+          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar and the content is ready to be published.
         </para>
         <note>
           <para>
@@ -3821,19 +3829,24 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click the
-          <emphasis role="bold">Publish Content</emphasis>
-          button on the <emphasis role="bold">Action</emphasis> bar. The content will be published as the schedule that you set up.
+          Click <inlinemediaobject>
+            <imageobject>
+              <imagedata width="20mm" fileref="images/Publish_button.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>[Publish]</phrase>
+            </textobject>
+          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar. The content will be published as the schedule that you set up.
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Publish Content</emphasis> button is only visible for users who have the "Publish" right.
+            The <emphasis role="bold">Publish</emphasis> button is only visible for users who have the "Publish" right.
           </para>
           <para>
             By default, the button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
           </para>
           <para>
-            Enable this function by selecting 
+            Enable this function by selecting
             <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
@@ -3852,7 +3865,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       This function enables you to show or hide all the drives in <emphasis role="bold">Sites Explorer.</emphasis>
     </para>
     <para>
-      To show drives, click 
+      To show drives, click
       <inlinemediaobject>
         <imageobject>
           <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
@@ -3864,7 +3877,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       on the <emphasis role="bold">Action</emphasis> bar.
     </para>
     <para>
-      To hide drives, click 
+      To hide drives, click
       <inlinemediaobject>
         <imageobject>
           <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
@@ -3877,7 +3890,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </para>
   </section>
   <section id="sect-User_Guide-Actions-Show_JCR_Structure">
-    <title>Show JCR Structure</title>
+    <title>Show/Hide content structure</title>
     <para>
       This function allows you to view document nodes in a tree structure.
     </para>
@@ -3892,7 +3905,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="30mm" fileref="images/jcrstructure.png" format="PNG"/>
@@ -3905,7 +3918,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
     <!--  <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="8mm" fileref="images/discsave.png" format="PNG"/>
@@ -3940,7 +3953,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="30mm" fileref="images/jcrstructure.png" format="PNG"/>
@@ -3972,10 +3985,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="22mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
+              <imagedata width="12mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Tagging this document ]</phrase>
@@ -4050,7 +4063,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -4074,10 +4087,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="22mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
+              <imagedata width="14mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Tagging this document ]</phrase>
@@ -4088,7 +4101,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -4122,7 +4135,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="17mm" scalefit="1" fileref="images/uploadicon2.png" format="PNG"/>
@@ -4150,7 +4163,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           field.
         </para>
         <para>
-          If you want to upload multiple files at the same time, click 
+          If you want to upload multiple files at the same time, click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -4158,7 +4171,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>plus</phrase>
             </textobject>
-          </inlinemediaobject> 
+          </inlinemediaobject>
           to open more <emphasis role="bold">Upload File</emphasis> forms.
         </para>
         <mediaobject>
@@ -4204,7 +4217,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -4258,7 +4271,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             again to open the <emphasis role="bold">Add Categories</emphasis> form.
           </para>
           <para>
-            Click 
+            Click
             <inlinemediaobject>
               <imageobject>
                 <imagedata width="3mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -4390,7 +4403,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="22mm" scalefit="1" fileref="images/viewmetadatasbutton.png" format="PNG"/>
@@ -4424,7 +4437,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
           Complete the desired fields in the
           <emphasis role="bold">Add/Edit Properties</emphasis>
-          form. Click 
+          form. Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -4464,10 +4477,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="22mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
+              <imagedata width="18mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Node Types ]</phrase>
@@ -4504,7 +4517,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="20mm" scalefit="1" fileref="images/viewpermissionsbutton.png" format="PNG"/>
@@ -4512,7 +4525,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[ View Permissions ]</phrase>
             </textobject>
-          </inlinemediaobject>. The 
+          </inlinemediaobject>. The
           <emphasis role="bold">Permission Management</emphasis>
           form appears.
         </para>
@@ -4711,7 +4724,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/edit_icon1.png" format="PNG"/>
@@ -4746,7 +4759,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/trashicon.png" format="PNG"/>
@@ -4779,10 +4792,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="28mm" scalefit="1" fileref="images/viewnodepropertiesbutton.png" format="PNG"/>
+              <imagedata width="22mm" scalefit="1" fileref="images/viewnodepropertiesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Node Properties ]</phrase>
@@ -4857,7 +4870,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           Enter a value for the property in the <emphasis role="bold">Value</emphasis> field.
         </para>
         <para>
-          To add multiple new values, click 
+          To add multiple new values, click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/addplusicon.png" format="PNG"/>
@@ -4894,9 +4907,9 @@ After being created successfully, a file document with the <emphasis>text/html</
       After you have made changes on new properties, you will be returned to the
       <emphasis role="bold">Properties</emphasis>
       tab. The newly added values will be displayed.
-    </para>    
+    </para>
     <para>
-      In this form, you can edit a property by clicking 
+      In this form, you can edit a property by clicking
       <inlinemediaobject>
         <imageobject>
           <imagedata width="4mm" scalefit="1" fileref="images/edit_icon1.png" format="PNG"/>
@@ -4925,7 +4938,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis></para>
           </citetitle>
         <para>
-          Select a node, then click 
+          Select a node, then click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="28mm" scalefit="1" fileref="images/showhiderelations.png" format="PNG"/>
@@ -4961,7 +4974,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para xml:id="step-User_Guide-View_Relations-To_Hide_Relations"><emphasis role="bold">Hide relations</emphasis></para>
         </citetitle>
           <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
               <imagedata width="34mm" fileref="images/showhiderelations.png" format="PNG"/>
@@ -4992,10 +5005,10 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Click 
+          Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" scalefit="1" fileref="images/votefordocument.png" format="PNG"/>
+              <imagedata width="15mm" scalefit="1" fileref="images/votefordocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Vote for document ]</phrase>
@@ -5044,7 +5057,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Actions-Watch_Documents">
-    <title>Watch documents</title>
+    <title>Watch/Unwatch documents</title>
     <para>
       By using this function, whenever any change is made on the document, a notification message will be sent to
       your email address. To receive that email, you must configure in your mail server.

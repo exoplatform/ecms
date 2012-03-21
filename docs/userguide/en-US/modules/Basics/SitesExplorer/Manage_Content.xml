@@ -324,7 +324,14 @@
     </procedure>
     <note>
       <para>
-        When you click <emphasis role="bold">Edit Document,</emphasis> the web content will be auto-locked for your
+        When you click <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="25mm" scalefit="1"/>
+            </imageobject>
+            <textobject>
+              <phrase>[ Edit Document ]</phrase>
+            </textobject>
+          </inlinemediaobject>, the web content will be auto-locked for your
         editing. After finishing, the content is back to the unlock status. You can manage "Locks" in the <link linkend="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">Unlock a node</link> section.
       </para>
     </note>

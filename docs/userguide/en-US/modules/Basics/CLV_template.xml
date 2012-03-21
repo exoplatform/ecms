@@ -39,8 +39,8 @@
                 <para>Click <emphasis role="bold">exo:ecms --> views --> templates --> content-list-viewer --> list</emphasis>.</para>
             </step>
             <step>
-                <para>Right-click in the white space, then select <emphasis role="bold">Add Content</emphasis> in the menu;
-                    or select <emphasis role="bold">Add Content</emphasis> on the <emphasis role="bold">Action</emphasis> bar.</para>
+                <para>Right-click in the white space, then select <emphasis role="bold">New Content</emphasis> in the menu;
+                    or select <emphasis role="bold">New Content</emphasis> on the <emphasis role="bold">Action</emphasis> bar.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/DMS_Drive_Add_Content.png" format="PNG"/>

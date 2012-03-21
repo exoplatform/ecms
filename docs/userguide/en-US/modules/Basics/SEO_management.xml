@@ -53,7 +53,7 @@
       </mediaobject>
       </listitem>
       <listitem>
-      <para>The <emphasis role="bold">SEO Management</emphasis> form for a page is as follows.</para>
+      <para xml:id="SEO_data_page">The <emphasis role="bold">SEO Management</emphasis> form for a page is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>

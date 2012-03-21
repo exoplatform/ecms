@@ -409,10 +409,19 @@
                     </mediaobject>
                 </step>
                 <step>
-                    <para>
-                        Click
-                        <emphasis role="bold">Add Content</emphasis>
-                        on the <emphasis role="bold">Action</emphasis> bar.
+                  <para>
+                    Click
+                    <inlinemediaobject>
+                      <imageobject>
+                        <imagedata width="20mm" scalefit="1" fileref="images/adddocumenticon.png" format="PNG"/>
+                      </imageobject>
+                      <textobject>
+                        <phrase>[ Add Document ]</phrase>
+                      </textobject>
+                    </inlinemediaobject>
+                    on the
+                    <emphasis role="bold">Action</emphasis>
+                    bar.
 				    </para>
 				</step>
 				<step>

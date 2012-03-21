@@ -52,7 +52,7 @@
 			</step>
 			 <step>
 				<para>
-					Click the <emphasis role="bold">Add Content</emphasis> button to create new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add new content. The new content is a Symlink.
+					Click the <emphasis role="bold">New Content</emphasis> button to create new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add new content. The new content is a Symlink.
 					To view the content, simply click the Symlink.
         </para>
              <mediaobject>

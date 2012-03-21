@@ -24,7 +24,7 @@
 	 <section id="sect-User_Guide-Views-Admin_view">
 		<title>Admin view</title>
 		 <para>
-			In this view, each item in the list includes following information: <emphasis role="bold">Name, Date Created, Date Modified, Owner, Versionable</emphasis> and <emphasis role="bold">Auditing</emphasis>. These information will help you manage nodes easily.
+			In this view, each item in the list includes following information: <emphasis role="bold">Name, Versionable, Owner, Date Modified </emphasis>, and <emphasis role="bold">Date Created</emphasis>. These information will help you manage nodes easily.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -345,7 +345,7 @@
 	 <section id="sect-User_Guide-Views-Timeline_View">
 		<title>Timeline view</title>
 		 <para>
-			This view enables users to view all nodes created and uploaded by simply clicking
+			This view enables users to view all document nodes created and uploaded by simply clicking
 			<inlinemediaobject>
 				<imageobject>
                <imagedata fileref="images/timeline.png" format="PNG" width="4mm" scalefit="1"/>
@@ -364,7 +364,7 @@
 			</imageobject>
 		</mediaobject>
 		 <para>
-			All the nodes, which have been created and uploaded, will be displayed.
+			All the document nodes, which have been created and uploaded, will be displayed.
 		</para>
          <mediaobject>
 			<imageobject role="html">
