@@ -98,9 +98,9 @@ In which:
 
 || *Field* || *Type* || *Value*|| *Description* ||
 | *name* | {{string}} |{{system-view}}| The name of view which must be unique inside WCM. |
-| *permissions* | {{string}} |_{noformat}*:/platform/administrators{noformat}_| Visibility of the view based on eXo rights.|
+| *permissions* | {{string}} |_\*:/platform/administrators_| Visibility of the view based on eXo rights.|
 | *template* | {{string}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify path to the template location. |
-| *tabList* | {{ArrayList}}| _{noformat}{java.util.ArrayList}{noformat}_ | Include a set of view names. |
+| *tabList* | {{ArrayList}}| _{{{{java.util.ArrayList}}}}_ | Include a set of view names. |
 
 * *Object type*: _org.exoplatform.services.cms.views.ViewConfig$Tab_
 

@@ -1,1 +1,1 @@
-This is an abstract class and the parent of _[ScriptActionPlugin|#CONTref.Configuration.Plugins.ScriptActionPlugin]_ and +[BPActionPlugin|#CONTref.Configuration.Plugins.BPActionPlugin]_. You can create a link from this plugin to its children.
+This is an abstract class and the parent of _[ScriptActionPlugin|#CONTref.Configuration.Plugins.ScriptActionPlugin]_ and _[BPActionPlugin|#CONTref.Configuration.Plugins.BPActionPlugin]_. You can create a link from this plugin to its children.

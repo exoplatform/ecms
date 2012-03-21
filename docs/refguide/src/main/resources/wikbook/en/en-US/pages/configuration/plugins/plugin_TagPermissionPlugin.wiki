@@ -43,4 +43,4 @@ In which:
 
 * *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig_
 ||  *Name*  ||  *Type*  ||  *Value*   ||  *Description*  ||
-| *tagPermissionList* | {{ArrayList}} | {noformat}{java.util.ArrayList}{noformat} | The users/groups that have the permission. |
+| *tagPermissionList* | {{ArrayList}} | {{{{java.util.ArrayList}}}} | The users/groups that have the permission. |

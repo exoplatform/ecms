@@ -4,7 +4,7 @@ This is an example of the *Authoring* portlet used in eXo Content:
 
 !images/authoring-porlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
-* *Packaging*: This porlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file.
+* *Packaging*: This porlet is packaged in the _authoring\-apps.war_ file.
 
 * *The portlet class name*: _org.exoplatform.wcm.webui.authoring.UIWCMDashboardPortlet_
 

@@ -135,7 +135,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 ||*Name*||*Type*||*Value*||*Description*||
 |*autoCreatedInNewRepository*|{{boolean}}|{{true}}|Specify whether the tag style is added automatically in a new reposistory or not.|
 |*repository*|{{string}}|{{repository}}|Name of the repository where the tag style is added.|
-|*tagStyleList*|{{ArrayList}}|{{ {noformat}{java.util.ArrayList}{noformat} }}|The list of tag styles.|
+|*tagStyleList*|{{ArrayList}}|{{{{java.util.ArrayList}}}}|The list of tag styles.|
 
 * *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle_
 ||*Name*||*Type*||*Description*||

@@ -28,4 +28,4 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 ||*Name*||*Type*||*Value*||*Description*||
 |*workspace*|{{string}}|{{system}}|The workspace name.|
 |*relativePath*|{{Private/Queries}}|{{Private/Queries}}|The path to the query location.|
-|*group*|{{string}}| {noformat}*:/admin{noformat}|The group is allowed to access the query folder.|
+|*group*|{{string}}| \*:/admin|The group is allowed to access the query folder.|

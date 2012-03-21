@@ -13,7 +13,7 @@ The following is an sample code of the *View* template of a content node:
 <%=node.getName()%>
 {code}
 
-* Display the _{noformat}exo:title{noformat}_ property of the content node:
+* Display the _exo\:title_ property of the content node:
 {code:groovy}
 <%
   if(node.hasProperty("exo:title")) {
@@ -24,7 +24,7 @@ The following is an sample code of the *View* template of a content node:
 %>
 {code}
 
-* Display the _{noformat}exo:date{noformat}_ property of the content node in a desired format. For example: "MM DD YYYY" or "YYYY MM DD".
+* Display the _exo\:date_ property of the content node in a desired format. For example: "MM DD YYYY" or "YYYY MM DD".
 {code:groovy}
 <%
   import java.text.SimpleDateFormat ;

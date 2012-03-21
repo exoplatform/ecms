@@ -60,7 +60,7 @@ The tree of taxonomies can be managed simply, such as copying/cutting/pasting no
 *Details*:
 * *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission_
 || *Field* || *Type* || *Value*|| *Description* ||
-| *permissions* | {{ArrayList}}| _{noformat}{java.util.ArrayList}{noformat}_ | The list of the default user permissions to access the taxonomy tree. |
+| *permissions* | {{ArrayList}}| _{{{{java.util.ArrayList}}}}_ | The list of the default user permissions to access the taxonomy tree. |
 * *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission_
 
 ||*Field *||*Type*||*Description*||

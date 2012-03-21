@@ -12,10 +12,10 @@ The users can find this porlet in the front page. This is an example of the *Sea
 || *Preference* || *Type*|| *Value* || *Description* ||
 | *repository* | {{string}} | {{repository}} | The place where data are stored and maintained. |
 | *workspace* | {{string}} | {{collaboration}} | The workspace where the content is stored. |
-| *searchFormTemplatePath* | {{string}} | _{noformat}/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl{noformat}_ | The path to the search form template. |
-| *searchResultTemplatePath* | {{string}} | _{noformat}/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl{noformat}_ | The path to the search result template. |
-| *searchPaginatorTemplatePath* | {{string}} | _{noformat}/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl{noformat}_ | The path to the search paginator template. |
-| *searchPageLayoutTemplatePath* | {{string}} | _{noformat}/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl{noformat}_ | The path to the search page template. |
+| *searchFormTemplatePath* | {{string}} | _{{{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}}}_ | The path to the search form template. |
+| *searchResultTemplatePath* | {{string}} | _{{{/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl}}}_ | The path to the search result template. |
+| *searchPaginatorTemplatePath* | {{string}} | _{{{/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl}}}_ | The path to the search paginator template. |
+| *searchPageLayoutTemplatePath* | {{string}} | _{{{/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl}}}_ | The path to the search page template. |
 | *itemsPerPage* | {{Integer}} | 5 | The number of items for each page. |
 | *showQuickEditButton* | {{boolean}} | {{true}} | Show or hide the quick edit icon.|
 | *basePath* | {{string}} | {{parameterizedviewer}} | The page which is used to display the search result. |

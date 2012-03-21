@@ -156,7 +156,7 @@ In which:
 |*repository*|{{String}}|{{repository}}|Content Repository where to find the root path.|
 |*workspace*|{{String}}|{{collaboration}}|Workspace in the Content Repository.|
 |*homePath*|{{String}}|{{/sites content/live}}|Root path in the Content Repository. *{{userId}}* can be used to use the userId at runtime in the path.|
-|*permissions*|{{String}}|_{noformat}*:/platform/administrators{noformat}_|Visibility of the drive based on eXo rights. For example: {{ {{{*:/platform/users}}} }}|
+|*permissions*|{{String}}|_\*:/platform/administrators_|Visibility of the drive based on eXo rights. For example: {{ {{{*:/platform/users}}} }}|
 |*icon*|{{String}}|N/A| The Url to the icon.|
 |*views*|{{String}}|{{wcm-view}}|The list of views you want to use, separated by commas. For example: {{simple-view,admin-view}}|
 |*viewPreferences*|{{Boolean}}|{{false}}|The *User Preference* icon will be visible if true.|
@@ -164,4 +164,4 @@ In which:
 |*viewSideBar*|{{Boolean}}|{{true}}|Show/Hide the left bar (with navigation and filters).|
 |*showHiddenNode*|{{Boolean}}|{{false}}| Hidden nodes will be visible if true.|
 |*allowCreateFolders*|{{String}}|{{nt:folder,nt:unstructured}} |List of node types that you can create as folders. For example: {{nt:folder,nt:unstructured}}.|
-|*allowNodeTypesOnTree*|{{String}}| {noformat}*{noformat}|Allow you to filter node types in the navigation tree. For example, the default value is "{{{*}}}" to show all content types.|
+|*allowNodeTypesOnTree*|{{String}}| \*|Allow you to filter node types in the navigation tree. For example, the default value is "{{{*}}}" to show all content types.|

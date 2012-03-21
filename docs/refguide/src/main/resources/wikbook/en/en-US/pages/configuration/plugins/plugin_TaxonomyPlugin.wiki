@@ -93,15 +93,15 @@ In which:
 
 * *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig_
 ||*Name*||*Type*||*Value*||*Description*||
-|*taxonomies*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}| The list of taxonomies to be configured with permission.|
+|*taxonomies*|{{ArrayList}}| {{{{java.util.ArrayList}}}}| The list of taxonomies to be configured with permission.|
 
 * *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy_
 ||*Name*||*Type*||*Value*||*Description*||
-|*permissions*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}|The list of permissions for users or groups to access the taxonomy.|
+|*permissions*|{{ArrayList}}| {{{{java.util.ArrayList}}}}|The list of permissions for users or groups to access the taxonomy.|
 
 * *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission}}
 ||*Name*||*Type*||*Value*||*Description*||
-|*identity*|{{string}}|{noformat}*:/platform/users{noformat}|The name of the user, group or membership.|
+|*identity*|{{string}}|\*:/platform/users|The name of the user, group or membership.|
 |*read*|{{boolean}}|{{true}}|The permission to read the taxonomy tree.|
 |*addNode*| {{boolean}}|{{true}}|The permission to add a node to the taxonomy tree.|
 |*setProperty*|{{boolean}}|{{true}}|The permission to set properties for a node in the taxonomy tree. |

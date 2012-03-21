@@ -129,7 +129,7 @@ In which:
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
 | *repository* | {{string}} | {{repository}} | The name of the repository. |
 | *workspace* | {{string}} | {{collaboration}} | The name of the workspace. |
-| *actions* | {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The list of the actions. |
+| *actions* | {{ArrayList}} | _{{{{java.util.ArrayList}}}}_ | The list of the actions. |
 
 * *Object type*: {{org.exoplatform.services.cms.actions.impl.ActionConfig$Action}}
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
@@ -139,4 +139,4 @@ In which:
 | *srcWorkspace* | {{string}} | {{collaboration}} | The source workspace of the action.|
 | *isDeep* | {{boolean}} | {{false}} | Specify the depth of node that the action script will affect.|
 | *srcPath* | {{string}} | {{trash}} | The path to the source. |
-| *lifecyclePhase* | {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | Specify the lifecycle phase that the action will take place.|
+| *lifecyclePhase* | {{ArrayList}} | _{{{{java.util.ArrayList}}}}_ | Specify the lifecycle phase that the action will take place.|

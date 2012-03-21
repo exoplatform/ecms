@@ -18,8 +18,8 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 *Sample configuration*:
 
-This below example is configuration for the _{noformat}nt:file{noformat}_ template, any other template will be put in the same level with this template starting from the line
-_{noformat}<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType>{noformat}_ as the another node type.
+This below example is configuration for the _nt\:file_ template, any other template will be put in the same level with this template starting from the line
+_{{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType>}}}_ as the another node type.
 
 {code:xml}
 <external-component-plugins>
@@ -152,23 +152,23 @@ In which:
 
 ||*Value-param*||*Type*||*Value*||*Description*||
 |autoCreateInNewRepository|{{boolean}}|{{true}}|Enable the application to import predefined templates at the start-up of template service automatically.|
-|storedLocation|{{string}}|{{war:/conf/dms-extension/dms/artifacts/templates}}|The location of stored templates.|
+|storedLocation|{{string}}|{{war\:/conf/dms-extension/dms/artifacts/templates}}|The location of stored templates.|
 |repository|{{string}}|{{repository}}|Location of stored templates.|
 
 * *Object-type*: _org.exoplatform.services.cms.templates.impl.TemplateConfig_ that defines all available template files, using the "collection type" configuration.
 
 * *type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
 ||*Field* || *Type*||*Value* ||*Description*||
-|*nodeTypes*|{{ArrayList}}| {{ {noformat}{java.util.ArrayList}{noformat} }}| The node type of the template.|
+|*nodeTypes*|{{ArrayList}}| {{{ {java.util.ArrayList} }}}| The node type of the template.|
 
 * *Object-type*: {{org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType}}
 ||*Field*||*Type*||*Value* ||*Description*||
 |*nodetypeName*|{{string}}|nt:file |The name of template that is saved as a node in system.|
 |*documentTemplate*|{{boolean}}| {{true}}|Determine if the node type is a document type.|
 |*label*|{{string}}| {{file}}| Visual display of the title for this node.|
-|*referencedView*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }} |Determine how to display a view. |
-|*referencedDialog*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }}|Determine how to display a dialog to input information. |
-|*referencedSkin*|{{ArrayList}} |{{ {noformat}{java.util.ArrayList}{noformat} }}|Determine the stylesheet for display. |
+|*referencedView*|{{ArrayList}} |{{{ {java.util.ArrayList} }}} |Determine how to display a view. |
+|*referencedDialog*|{{ArrayList}} |{{{ {java.util.ArrayList} }}}|Determine how to display a dialog to input information. |
+|*referencedSkin*|{{ArrayList}} |{{{ {java.util.ArrayList} }}}|Determine the stylesheet for display. |
 
 * *Object type:* {{org.exoplatform.services.cms.templates.impl.TemplateConfig$Template}}
 

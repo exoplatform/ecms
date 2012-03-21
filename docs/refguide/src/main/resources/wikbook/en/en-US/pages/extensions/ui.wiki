@@ -78,7 +78,7 @@ To add your own UIAction, do as follows:
 </project>
 {code}
 
-*2.* Create the _src/main/java_ directory and start launching _{noformat}mvn eclipse:eclipse{noformat}_.  Then, you can launch your eclipse and import this new project.
+*2.* Create the _src/main/java_ directory and start launching _{{{mvn eclipse:eclipse}}}_.  Then, you can launch your eclipse and import this new project.
 
 *3.* Create a new class called _org.exoplatform.wcm.component.cache.UIWCMCacheComponent_ that extends _org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent_.
 
@@ -107,7 +107,7 @@ public class CacheViewComponent extends UIAbstractManagerComponent {
         }
 {code}
 
-*3.* Create the _src/main/java_ directory and launch _{noformat}mvn eclipse:eclipse{noformat}_. You can then launch your eclipse and import this new project.
+*3.* Create the _src/main/java_ directory and launch _mvn eclipse\:eclipse_. You can then launch your eclipse and import this new project.
 
 *4.* Create a new configuration file called _conf/portal/configuration.xml_ to register your action (see [Register your UI Action|#CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction]) with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
 
@@ -186,7 +186,7 @@ To register your UI Action, do as follows:
 {code}
 
 {note}
-With this configuration, only the users with the _{noformat}*:/platform/administrators{noformat}_ membership have the right to access the CacheView item.{note}
+With this configuration, only the users with the _\*:/platform/administrators_ membership have the right to access the CacheView item.{note}
 
 *2.* Launch *mvn clean install*.
 
@@ -196,7 +196,7 @@ With this configuration, only the users with the _{noformat}*:/platform/administ
 All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure. 
 {note}
 
-Create _{noformat}ExamplePortlet_en.xml{noformat}_ with the following content and add it to the _src/main/resource_ package:
+Create _ExamplePortlet\_en.xml_ with the following content and add it to the _src/main/resource_ package:
 
 
 {code:xml}

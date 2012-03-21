@@ -199,6 +199,6 @@ In which:
 * *Object type*: {{org.exoplatform.services.cms.impl.ResourceConfig}}
 
 ||*Field* || *Type* ||*Value* || Description ||
-| *resource* | {{ArrayList}} |_{noformat}{java.util.ArrayList}{noformat}_ | The resource name. |
+| *resource* | {{ArrayList}} |_{{{{java.util.ArrayList}}}}_ | The resource name. |
 
 

@@ -470,16 +470,16 @@ For example, *Different Contexts*:
 
 The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecyle priority:
 * _context4_ is the most important (priority=50): you will enroll the content in the lifecycle "lifecycle4" if:
-** The content creator has the _{noformat}manager:/company/finances{noformat}_ membership.
-** The content is stored in _{noformat}repository:collaboration:/documents/company/finances{noformat}_ or any subfolders.
-** The content is a '{{exo:article}}'.
+** The content creator has the _manager\:/company/finances_ membership.
+** The content is stored in _repository\:collaboration\:/documents/company/finances_ or any subfolders.
+** The content is a '{{exo\:article}}'.
 * If not, you will continue with _context3_.
 
 The logic is very simple. When you create a content, go lifecycle by lifecycle starting with the better priority:
 * _context4_ is the most important (priority=50): you will enroll the content in the lifecycle "lifecycle4" if:
-** The content creator has the _{noformat}manager:/company/finances{noformat}_ membership.
-** The content is stored in '_{noformat}repository:collaboration:/documents/company/finances{noformat}_ or any subfolders.
-** The content is a _exo:article_.
+** The content creator has the _manager\:/company/finances_ membership.
+** The content is stored in '_repository\:collaboration\:/documents/company/finances_ or any subfolders.
+** The content is a _exo\:article_.
 * If not, you will continue with _context3_.
 
 {note}
@@ -508,16 +508,16 @@ When adding the content in a lifecycle, set the _publication:lifecycle_ property
 {note}
 A content can be in one lifecycle only.
 {note}
-Each time you change from one state to another, set the user who changed the state in _{noformat}publication:lastUser{noformat}_.
+Each time you change from one state to another, set the user who changed the state in _publication\:lastUser_.
 
 *Querying based on publication status*: {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.QueryBaseOnPublicationStatus}
 
 By adding this mixin to contents, you can access contents by simple queries based on the current user profile.
 For example:
 * All your draft contents:
-** query: select {noformat}*{noformat} from _nt:base_ where {{publication:currentState}}"draft" and {{publication:lastUser}}="benjamin".
+** query: select \* from _nt\:base_ where {{publication:currentState}}"draft" and {{publication:lastUser}}="benjamin".
 * All the contents you have to approve.
 ** call: _PublicationManager.getLifecycles('benjamin','approved')_ => returns lifecycles where you can go to the 'approved' state.
-** query: select {noformat}*{noformat} from _nt:base_ where _publication:currentState="pending"_ and _publication:lifecycle="lifecycle1"_ or _publication:lifecycle="lifecycle3"_.
+** query: select \* from _nt\:base_ where _{{{publication:currentState="pending"_ and _publication:lifecycle="lifecycle1"}}}_ or _publication\:lifecycle="lifecycle3"_.
 * All the content that will be published tomorrow.
-** query: select {noformat}*{noformat} from _nt:base_ where _publication:currentState="staged"_ and _publication:startPublishedDate_="xxxx".
+** query: select \* from _nt\:base_ where _publication\:currentState="staged"_ and _publication\:startPublishedDate_="xxxx".

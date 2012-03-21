@@ -41,4 +41,4 @@ In which:
 
 * *Object type*: {{org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig}}
 ||  *Field*  ||  *Type*  ||  *Value*   ||  *Description*  ||
-| *settingLockList* | {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The list of the groups or user to be locked. |
+| *settingLockList* | {{ArrayList}} | _{{{{java.util.ArrayList}}}}_ | The list of the groups or user to be locked. |

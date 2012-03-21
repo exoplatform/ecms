@@ -49,5 +49,5 @@ In which:
 * *Object type*: _org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig_
 ||*Field*||*Type*||*Value*||*Description*||
 |*folderType*| {{string}} | {{exo:cssFolder}}|The folder type. |
-|*contentTypes*| {{ArrayList}} | _{noformat}{java.util.ArrayList}{noformat}_ | The content type. |
+|*contentTypes*| {{ArrayList}} | _{{{{java.util.ArrayList}}}}_ | The content type. |
 

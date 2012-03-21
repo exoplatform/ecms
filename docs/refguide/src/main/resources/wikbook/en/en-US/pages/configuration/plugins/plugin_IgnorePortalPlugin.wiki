@@ -1,0 +1,40 @@
+When a new portal is created, the configuration of _IgnorePortalPlugin_ is used to avoid deploying data to the existing ones which are listed in the init-parameters.
+
+To use the plugin in the component configuration, you must use the following target-component:
+{code:xml}
+<target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
+{code}
+
+The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-extension/wcm/deployment/template-deployment-configuration.xml_.
+
+*Sample configuration*:
+{code:xml}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
+    <component-plugin>
+      <name>Add ignored portals</name>
+      <set-method>addIgnorePortalPlugin</set-method>
+      <type>org.exoplatform.services.wcm.portal.artifacts.IgnorePortalPlugin</type>
+      <description>ignored portals. the service will not deploy data to the ignored portals</description>
+      <init-params>
+        <values-param>
+          <name>ignored.portals</name>
+          <description>ignored portal list</description>
+          <value>classic</value>
+          <value>acme</value>
+          <value>WAIPortal</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+</external-component-plugins>
+{code}
+
+In which:
+
+* *Name*: {{Add ignored portals}}
+* *Set-method*: {{addIgnorePortalPlugin}}
+* *Type*: {{org.exoplatform.services.wcm.portal.artifacts.IgnorePortalPlugin}}
+
+*Init-params*
+||  *Name*  ||  *Type*  ||  *Value*   ||  *Description*  ||
+| *ignored.portals*|{{string}}|{{classic, acme, WAIPortal}}|The list of ignored existing portals. |
