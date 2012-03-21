@@ -326,7 +326,7 @@
           </preference>
           <preference>
             <name>nodeIdentifier</name>
-            <value>/sites content/live/WAIPortal/web contents/site artifacts/accessibility</value>
+            <value>/sites content/live/WAIPortal/web contents/accessibility</value>
             <read-only>false</read-only>
           </preference>
           <preference>

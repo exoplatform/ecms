@@ -70,7 +70,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -168,7 +168,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -187,7 +187,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -206,7 +206,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -225,7 +225,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -325,7 +325,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/WAIPortal/web contents/site artifacts</string>
+                  <string>/sites content/live/WAIPortal/web contents</string>
                 </field>
               </object>
             </field>
@@ -363,7 +363,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/home</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/home</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal</string>
@@ -375,7 +375,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/prepare-your-team</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/competence/prepare-your-team</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Competence</string>
@@ -387,7 +387,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/work-with-a-partner</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/competence/work-with-a-partner</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Competence</string>
@@ -399,7 +399,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/customer-success-stories</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/customers/customer-success-stories</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Customers</string>
@@ -411,7 +411,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/subscription-support</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/customers/subscription-support</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Customers</string>
@@ -423,7 +423,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/portal-content</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/features/portal-content</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
@@ -435,7 +435,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/social-collaboration</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/features/social-collaboration</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
@@ -447,7 +447,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/the-platform-difference</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/features/the-platform-difference</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Features</string>
@@ -459,7 +459,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/integration</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/technology/integration</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Technology</string>
@@ -471,7 +471,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/technical-specifications</string>
+              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/web contents/technology/technical-specifications</string>
             </field>
             <field name="targetPath">
               <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/WAIPortal/categories/WAIPortal/Technology</string>
@@ -506,15 +506,15 @@
           <object type="org.exoplatform.services.wcm.extensions.deployment.PublicationDeploymentDescriptor">
             <field name="contents">
               <collection type="java.util.ArrayList">
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/integration</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/technology/technical-specifications</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/portal-content</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/social-collaboration</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/features/the-platform-difference</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/customer-success-stories</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/customers/subscription-support</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/prepare-your-team</string></value>
-                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/competence/work-with-a-partner</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/technology/integration</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/technology/technical-specifications</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/features/portal-content</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/features/social-collaboration</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/features/the-platform-difference</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/customers/customer-success-stories</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/customers/subscription-support</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/competence/prepare-your-team</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/competence/work-with-a-partner</string></value>
               </collection>
             </field>
           </object>
