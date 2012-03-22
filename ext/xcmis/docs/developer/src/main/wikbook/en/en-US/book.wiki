@@ -8,8 +8,8 @@ h1. xCMIS project {anchor:id=Dev_CMIS.xCMIS_project}
 {include:document="xCMIS/xCMISproject.wiki" /}
 
 h1. CMIS features {anchor:id=Dev_CMIS.features}
-{include:document="xCMIS/CMISfeatures.wiki" /}
 {include:document="xCMIS/WCMfeatures.wiki" /}
+{include:document="xCMIS/CMISfeatures.wiki" /}
 
 h1. CMIS Usage code examples {anchor:id=Dev_CMIS.Usage_code_examples}
 {include:document="xCMIS/CodeExamples.wiki" /}
