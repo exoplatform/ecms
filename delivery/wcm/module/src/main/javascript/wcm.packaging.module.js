@@ -120,6 +120,11 @@ function getModule(params) {
     new Project("org.exoplatform.ecms", "exo-ecms-packaging-waiportal-webapp", "war", module.version);
   module.waiextension.war.deployName = "ecm-waiportal-extension";
 
+  module.waitemplate = {};
+  module.waitemplate.war = 
+    new Project("org.exoplatform.ecms", "exo-ecms-apps-wai-template", "war", module.version);
+  module.waitemplate.war.deployName = "ecm-template-waiportal";
+
   module.demo = {};
   
   module.demo.portal = new Project("org.exoplatform.ecms", "exo-ecms-packaging-ecmdemo-webapp", "war", module.version).

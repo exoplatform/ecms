@@ -21,5 +21,6 @@
     <module>resources-wcm</module>
     <module>resources-static</module>
     <module>portlet-seo</module>
+    <module>wai-template</module>
   </modules>
 </project>

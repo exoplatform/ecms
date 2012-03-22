@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--
 
     Copyright (C) 2009 eXo Platform SAS.
@@ -20,14 +20,16 @@
 
 -->
 
-<configuration
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
-	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-  <import>war:/conf/sample-portal/waiportal/waiportal-configuration.xml</import>
-  <import>war:/conf/sample-portal/waiportal/resource-bundle-configuration.xml</import>
-  <import>war:/conf/sample-portal/wcm/content-configuration.xml</import>
-  <import>war:/conf/sample-portal/wcm/deployment/WAIPortal-deployment-configuration.xml</import>
-  <import>war:/conf/sample-portal/wcm/taxonomy/waiportal-taxonomies-configuration.xml</import>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                 "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <display-name>ecm-wcm-wai-template</display-name>
+
+  <!-- ================================================================== -->
+  <!--           LISTENER                                                 -->
+  <!-- ================================================================== -->
+  <listener>
+    <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
+  </listener>
   
-</configuration>
+</web-app>
