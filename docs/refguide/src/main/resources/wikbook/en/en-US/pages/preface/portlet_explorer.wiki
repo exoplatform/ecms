@@ -1,7 +1,7 @@
-The *Content Explorer* portlet is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
+The *Sites Explorer* portlet is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
 managing publication, and more.
 
-This is an example of the *Content Explorer* portlet used in eXo Content:
+This is an example of the *Sites Explorer* portlet used in eXo Content:
 
 !images/content-explorer-porltet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
@@ -11,7 +11,7 @@ This is an example of the *Content Explorer* portlet used in eXo Content:
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||
-| *repository* | {{string}} | {{repository}} | The repository name which is used in an instance of Content Explorer. |
+| *repository* | {{string}} | {{repository}} | The repository name which is used in an instance of Sites Explorer. |
 | *workspace* | {{string}} | {{N/A}} | Not in use. The workspace name was included in the Drive.|
 | *path* | {{string}} | {{N/A}} | The path of the node. This preference will be used when the selected usecase is *Parameterize*. |
 | *drive* | {{string}} | {{N/A}} | Not in use. Replaced by the driveName preference. |
@@ -19,7 +19,7 @@ This is an example of the *Content Explorer* portlet used in eXo Content:
 | *allowCreateFolders* | {{string}} | {{N/A}} | Allow creating a folder by type. When you do not specify the value, the default value will be nt:unstructured, nt:folder. |
 | *categoryMandatoryWhenFileUpload* | {{boolean}} | false | Force a user to add a category when uploading or creating a document. |
 | *uploadFileSizeLimitMB* | {{float}} | 150 | The maximum size of a file that is uploaded to the system (MB). |
-| *usecase* | {{string}} | {{selection}} | The behavior to access Content Explorer. By default, the "selection" option is configured. Besides "selection", there are four other ways to configure the Content Explorer: *Jailed*, *Personal*, *Social*, *Parameterize*. |
+| *usecase* | {{string}} | {{selection}} | The behavior to access Sites Explorer. By default, the "selection" option is configured. Besides "selection", there are four other ways to configure the Sites Explorer: *Jailed*, *Personal*, *Social*, *Parameterize*. |
 | *driveName* | {{string}} | {{private}} | The name of drive which the user wants to access. |
 | *trashHomeNodePath* | {{string}} | {{/Trash}} | The location to store the deleted nodes. |
 | *trashRepository* | {{string}} | {{repository}} | The name of the repository where stores the deleted nodes. |

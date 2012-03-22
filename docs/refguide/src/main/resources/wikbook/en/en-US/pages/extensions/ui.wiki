@@ -2,7 +2,7 @@ This part describes how to create a sample UI extension.
 
 h1. Overview {anchor:id=CONTref.Extensions.UIExtensions.Overview}
 
-In eXo Content, it is possible to extend the *Content Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Content Explorer* and/or add your own managers to the *ECM Administration*.
+In eXo Content, it is possible to extend the *Sites Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Sites Explorer* and/or add your own managers to the *ECM Administration*.
 
 h1. How to add your own tab in ECM Administration {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration}
 

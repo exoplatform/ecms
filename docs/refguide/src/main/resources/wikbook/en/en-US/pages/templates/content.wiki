@@ -9,7 +9,7 @@ From the ECM admin portlet, the _Manage Template_ lists existing node types asso
 
 *Document Type*
 
-The checkbox defines if the node type should be considered as the *Document type* or not. Content Explorer considers such nodes as user content and applies the following behavior:
+The checkbox defines if the node type should be considered as the *Document type* or not. *Sites Explorer* considers such nodes as user content and applies the following behavior:
 
 * View template will be used to display the document type nodes.
 * Document types nodes can be created by the '_Add Document_' action.
