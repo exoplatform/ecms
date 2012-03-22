@@ -37,7 +37,7 @@ set LOG_OPTS=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Si
 
 set SECURITY_OPTS=-Djava.security.auth.login.config=..\conf\jaas.conf
 
-set EXO_OPTS=-Dexo.product.developing=true -Dexo.conf.dir.name=gatein\conf
+set EXO_OPTS=-Dexo.product.developing=true -Dexo.conf.dir.name=gatein\conf -Dexo.profiles=waiportal
 
 set EXO_CONFIG_OPTS=-Dorg.exoplatform.container.configuration.debug
 set REMOTE_DEBUG=-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n

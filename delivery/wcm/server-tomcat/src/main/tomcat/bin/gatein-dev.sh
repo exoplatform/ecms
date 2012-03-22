@@ -24,7 +24,7 @@ cd `dirname "$0"`
 # Sets some variables
 LOG_OPTS="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"
 SECURITY_OPTS="-Djava.security.auth.login.config=../conf/jaas.conf"
-EXO_OPTS="-Dexo.product.developing=true -Dexo.conf.dir.name=gatein/conf"
+EXO_OPTS="-Dexo.product.developing=true -Dexo.conf.dir.name=gatein/conf -Dexo.profiles=waiportal"
 EXO_CONFIG_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=512m -Dorg.exoplatform.container.configuration.debug"
 
 JPDA_TRANSPORT=dt_socket

@@ -37,7 +37,7 @@ set LOG_OPTS=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Si
 
 set SECURITY_OPTS=-Djava.security.auth.login.config=..\conf\jaas.conf
 
-set EXO_OPTS=-Dexo.product.developing=false -Dexo.conf.dir.name=gatein\conf
+set EXO_OPTS=-Dexo.product.developing=false -Dexo.conf.dir.name=gatein\conf -Dexo.profiles=waiportal
 
 set JAVA_OPTS=-Xms256m -Xmx1024m -XX:MaxPermSize=512m %LOG_OPTS% %SECURITY_OPTS% %EXO_OPTS%
 
