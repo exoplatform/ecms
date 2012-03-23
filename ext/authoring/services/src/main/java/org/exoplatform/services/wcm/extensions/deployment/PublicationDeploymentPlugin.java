@@ -16,27 +16,15 @@
  */
 package org.exoplatform.services.wcm.extensions.deployment;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.utils.PublicationUtils;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
