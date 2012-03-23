@@ -3,24 +3,44 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 {code:xml}
 <component>
-    <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
-    <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
-    <init-params>
-        <value-param>
-            <name>host</name>
-            <value>127.0.0.1</value>
-        </value-param>
-        <value-param>
-            <name>port</name>
-            <value>8100</value>
-        </value-param>
-    </init-params>
-</component>
+   <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
+   <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
+   <init-params>
+     <value-param>
+       <name>port</name>
+       <value>${jodconverter.portNumbers}</value>
+     </value-param>
+     <value-param>
+       <name>officeHome</name>
+       <value>${jodconverter.officeHome}</value>
+     </value-param>
+     <value-param>
+       <name>taskQueueTimeout</name>
+       <value>${jodconverter.taskQueueTimeout}</value>
+     </value-param>
+     <value-param>
+       <name>taskExecutionTimeout</name>
+       <value>${jodconverter.taskExecutionTimeout}</value>
+     </value-param>
+     <value-param>
+       <name>maxTasksPerProcess</name>
+       <value>${jodconverter.maxTasksPerProcess}</value>
+     </value-param>
+     <value-param>
+       <name>retryTimeout</name>
+       <value>${jodconverter.retryTimeout}</value>
+     </value-param>
+   </init-params>
+ </component>
 {code}
 
 *Details*:
 
 * *Value-param*:
 ||Name||*Type*||*Value*||*Description*||
-|*host*| {{The host IP}} | {{127.0.0.1}} | The host from which a document is converted into different office formats.|
-|*port*| {{The port number}}| {{8100}} | The port number is open to accept converting a document into different office formats.|
+|*port*| {{Integer}} | {{{${jodconverter.portNumbers}}}} |The number of ports to connect with the office server.|
+|*officeHome*| {{String}}| {{{${jodconverter.officeHome}}}} |The absolute path to the office home on the current local computer.|
+|*taskQueueTimeout* | {{Long}}|{{{${jodconverter.taskExecutionTimeout}}}} |The maximum living time of a task in the conversation queue. |
+|*taskExecutionTimeout*|{{Long}} |{{{${jodconverter.taskExecutionTimeout}}}} ||The maximum time to process a task. |
+|*maxTasksPerProcess* |{{Integer}} |{{{${jodconverter.maxTasksPerProcess}}}} |The maximum number of tasks are processed. |
+|*retryTimeout* |{{Long}} |{{{${jodconverter.retryTimeout}}}} |The interval time to try to restart the office services in case they unexpectedly stop.|
