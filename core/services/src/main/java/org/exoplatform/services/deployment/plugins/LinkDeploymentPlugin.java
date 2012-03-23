@@ -16,27 +16,12 @@
  */
 package org.exoplatform.services.deployment.plugins;
 
-import java.util.Date;
-import java.util.Iterator;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.container.xml.PortalContainerInfo;
-import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**

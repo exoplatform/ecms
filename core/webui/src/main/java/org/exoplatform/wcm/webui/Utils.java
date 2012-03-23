@@ -848,6 +848,7 @@ public class Utils {
 
   public static boolean hasEditPermissionOnNavigation() throws Exception {
     UserNavigation selectedNavigation = getSelectedNavigation();
+    if(selectedNavigation == null) return false;
     return selectedNavigation.isModifiable();
   }
 

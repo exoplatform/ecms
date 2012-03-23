@@ -30,7 +30,7 @@
       <uri>home</uri>
       <name>home</name>
       <label xml:lang="en">Home</label>
-      <label xml:lang="fr">Home</label>
+      <label xml:lang="fr">Accueil</label>
       <label xml:lang="vi">Trang chủ</label>
       <label xml:lang="pt-BR">Home</label>
       <visibility>DISPLAYED</visibility>
@@ -39,20 +39,20 @@
     <node>
       <uri>siteMap</uri>
       <name>siteMap</name>
-      <label xml:lang="en">siteMap</label>
-      <label xml:lang="fr">siteMap</label>
-      <label xml:lang="vi">siteMap</label>
-      <label xml:lang="pt-BR">siteMap</label>
+      <label xml:lang="en">Site map</label>
+      <label xml:lang="fr">Carte du site</label>
+      <label xml:lang="vi">Bản đồ</label>
+      <label xml:lang="pt-BR">Site map</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::WAIPortal::siteMap</page-reference>
     </node>
     <node>
       <uri>Accessibility</uri>
       <name>Accessibility</name>
-      <label xml:lang="en">accessibility</label>
-      <label xml:lang="fr">accessibility</label>
-      <label xml:lang="vi">accessibility</label>
-      <label xml:lang="pt-BR">accessibility</label>
+      <label xml:lang="en">Accessibility</label>
+      <label xml:lang="fr">Accessibilité</label>
+      <label xml:lang="vi">Accessibility</label>
+      <label xml:lang="pt-BR">Accessibility</label>
       <visibility>DISPLAYED</visibility>
       <page-reference>portal::WAIPortal::Accessibility</page-reference>
     </node>
