@@ -1,0 +1,14 @@
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java	(revision 80210)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/utils/Utils.java	(working copy)
+@@ -626,8 +626,7 @@
+    */
+   public static String getResourceBundle(String name, String key, ClassLoader cl) {
+     ExoContainer container = ExoContainerContext.getCurrentContainer();
+-    Locale locale = Util.getUIPortal().getAncestorOfType(
+-        UIPortalApplication.class).getLocale();
++    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+     ResourceBundleService resourceBundleService = (ResourceBundleService) container
+         .getComponentInstanceOfType(ResourceBundleService.class);
+     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(

@@ -626,8 +626,7 @@ public class Utils {
    */
   public static String getResourceBundle(String name, String key, ClassLoader cl) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    Locale locale = Util.getUIPortal().getAncestorOfType(
-        UIPortalApplication.class).getLocale();
+    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     ResourceBundleService resourceBundleService = (ResourceBundleService) container
         .getComponentInstanceOfType(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
