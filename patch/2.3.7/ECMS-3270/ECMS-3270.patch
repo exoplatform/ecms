@@ -1,0 +1,16 @@
+Index: apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVContainer.gtmpl
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVContainer.gtmpl	(revision 80106)
++++ apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVContainer.gtmpl	(working copy)
+@@ -21,9 +21,9 @@
+     def addContentLink = uicomponent.getEditLink(false, true);
+     def manageContentsLink = uicomponent.getEditLink(false, false);
+     boolean isShowInfoBar = uicomponent.isShowInfoBar();    
+-    def edittingStyle = "z-index: 1";
++    def edittingStyle = "z-index: 10";
+       if (isShowInfoBar)
+-        edittingStyle = "z-index: 1; top:20px";
++        edittingStyle = "z-index: 10; top:20px";
+     if (Utils.isShowQuickEdit()) {
+     %>
+ 	 <div class="EdittingToolBarContainer" style="$edittingStyle">
