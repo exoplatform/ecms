@@ -1,0 +1,14 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(revision 80136)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(working copy)
+@@ -188,6 +188,9 @@
+       try {
+         String prefix = uiExplorer.getRootPath();
+         String nodePath = LinkUtils.evaluatePath(LinkUtils.createPath(prefix, path));
++        if (!nodePath.startsWith(prefix)) {
++          nodePath = prefix;
++        }
+         uiExplorer.setSelectNode(nodePath) ;
+         uiExplorer.setCurrentStatePath(nodePath) ;
+         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
