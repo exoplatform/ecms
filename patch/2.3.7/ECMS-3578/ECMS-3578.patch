@@ -1,0 +1,28 @@
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/form/validator/NodeTypeNameValidator.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/form/validator/NodeTypeNameValidator.java	(revision 80358)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/form/validator/NodeTypeNameValidator.java	(working copy)
+@@ -30,7 +30,7 @@
+  */
+ public class NodeTypeNameValidator implements Validator {
+ 
+-  private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")"};
++  private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")", "?", "+", "\\", "^"};
+ 
+   public void validate(UIFormInput uiInput) throws Exception {
+     String inputValue = (String) uiInput.getValue();
+Index: apps/portlet-administration/src/main/webapp/skin/webui/component/admin/DefaultStylesheet.css
+===================================================================
+--- apps/portlet-administration/src/main/webapp/skin/webui/component/admin/DefaultStylesheet.css	(revision 80358)
++++ apps/portlet-administration/src/main/webapp/skin/webui/component/admin/DefaultStylesheet.css	(working copy)
+@@ -683,6 +683,10 @@
+   padding: 0 0 10px;
+ }
+ 
++.UINodeTypeSearh td {
++  vertical-align: middle;
++}
++
+ .UINodeTypeSearh .UIBarStyle .FieldLabel {
+   padding: 0px 0px 0px 25px;
+ }

@@ -30,7 +30,7 @@ import org.exoplatform.webui.form.validator.Validator;
  */
 public class NodeTypeNameValidator implements Validator {
 
-  private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")"};
+  private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")", "?", "+", "\\", "^"};
 
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = (String) uiInput.getValue();
