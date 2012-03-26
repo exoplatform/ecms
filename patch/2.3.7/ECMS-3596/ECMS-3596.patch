@@ -1,0 +1,40 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(revision 80380)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDocumentInfo.java	(working copy)
+@@ -152,25 +152,25 @@
+ )
+ public class UIDocumentInfo extends UIBaseNodePresentation {
+ 
+-  private static final String   NO                                 = "NO";
++  final protected static String   NO                                 = "NO";
+ 
+-  private static final String   YES                                = "YES";
++  final protected static String   YES                                = "YES";
+ 
+-  final private static String   COMMENT_COMPONENT                  = "Comment";
++  final protected static String   COMMENT_COMPONENT                  = "Comment";
+   
+-  final private static String   Contents_Document_Type             = "Content";
++  final protected static String   Contents_Document_Type             = "Content";
+ 
+-  final private static String   CATEGORY_ALL                       = "All";
++  final protected static String CATEGORY_ALL                       = "All";
+ 
+-  final private static String   CATEGORY_TODAY                     = "UIDocumentInfo.label.Today";
++  final protected static String CATEGORY_TODAY                     = "UIDocumentInfo.label.Today";
+ 
+-  final private static String   CATEGORY_YESTERDAY                 = "UIDocumentInfo.label.Yesterday";
++  final protected static String CATEGORY_YESTERDAY                 = "UIDocumentInfo.label.Yesterday";
+ 
+-  final private static String   CATEGORY_WEEK                      = "UIDocumentInfo.label.EarlierThisWeek";
++  final protected static String CATEGORY_WEEK                      = "UIDocumentInfo.label.EarlierThisWeek";
+ 
+-  final private static String   CATEGORY_MONTH                     = "UIDocumentInfo.label.EarlierThisMonth";
++  final protected static String CATEGORY_MONTH                     = "UIDocumentInfo.label.EarlierThisMonth";
+ 
+-  final private static String   CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
++  final protected static String CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
+ 
+   final protected static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
+   
