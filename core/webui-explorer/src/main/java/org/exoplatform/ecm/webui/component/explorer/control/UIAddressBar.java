@@ -188,6 +188,9 @@ public class UIAddressBar extends UIForm {
       try {
         String prefix = uiExplorer.getRootPath();
         String nodePath = LinkUtils.evaluatePath(LinkUtils.createPath(prefix, path));
+        if (!nodePath.startsWith(prefix)) {
+          nodePath = prefix;
+        }
         uiExplorer.setSelectNode(nodePath) ;
         uiExplorer.setCurrentStatePath(nodePath) ;
         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
