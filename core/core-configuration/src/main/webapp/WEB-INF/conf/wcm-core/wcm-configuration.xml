@@ -84,7 +84,7 @@
       <properties-param>
         <name>server.config</name>
         <description>server.config</description>
-        <property name="expirationCache" value="30" />
+        <property name="expirationCache" value="${wcm.cache.wcmservice.expirationcache:30}" />
       </properties-param>
     </init-params>
   </component>
@@ -96,7 +96,7 @@
       <value-param>
         <name>cleanup-cache</name>
         <description>The cleanup cache period in seconds</description>
-        <value>300</value>
+        <value>${wcm.cache.fragmentcacheservice.cleanupcache:300}</value>
       </value-param>
     </init-params>
   </component>

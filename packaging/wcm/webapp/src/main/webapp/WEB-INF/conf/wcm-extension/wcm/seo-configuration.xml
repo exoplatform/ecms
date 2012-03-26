@@ -54,10 +54,10 @@
               <string>wcm.seo</string>
             </field>
             <field name="maxSize">
-              <int>300</int>
+              <int>${wcm.cache.seoservice.capacity:300}</int>
             </field>
             <field name="liveTime">
-              <long>600</long>
+              <long>${wcm.cache.seoservice.timetolive:600}</long>
             </field>
             <field name="distributed">
               <boolean>false</boolean>
