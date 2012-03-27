@@ -19,7 +19,7 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
@@ -92,6 +92,17 @@
   <component>
     <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
     <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+    <init-params>
+      <value-param>
+        <name>old-user-distribution</name>
+        <value>true</value>
+      </value-param>
+    </init-params>           
+  </component>
+		
+  <component>
+    <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
+    <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>     
   </component>
 
   <component>
@@ -298,6 +309,23 @@
           <property name="username" value="sa" />
           <property name="password" value="" />
         </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <priority>99</priority>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>jar:/conf/jcr/mock-nodetypes-config.xml</value>
+        </values-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

@@ -1,0 +1,2101 @@
+Index: core/publication/src/test/java/conf/portal/test-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/portal/test-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/portal/test-configuration.xml	(working copy)
+@@ -1,231 +1,246 @@
+-<?xml version="1.0" encoding="ISO-8859-1"?>
+-  <!--
+-
+-    Copyright (C) 2009 eXo Platform SAS.
+-    
+-    This is free software; you can redistribute it and/or modify it
+-    under the terms of the GNU Lesser General Public License as
+-    published by the Free Software Foundation; either version 2.1 of
+-    the License, or (at your option) any later version.
+-    
+-    This software is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+-    Lesser General Public License for more details.
+-    
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this software; if not, write to the Free
+-    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+-    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-
+--->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+-	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+-
+-
+-  <component>
+-    <key>org.exoplatform.services.resources.LocaleConfigService</key>
+-    <type>org.exoplatform.services.resources.impl.LocaleConfigServiceImpl</type>
+-    <init-params>
+-      <value-param>
+-        <name>locale.config.file</name>
+-        <value>classpath:/conf/portal/test-locales-configuration.xml</value>
+-      </value-param>
+-    </init-params>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
+-    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.config.UserPortalConfigService</key>
+-    <type>org.exoplatform.portal.config.UserPortalConfigService</type>
+-    <component-plugins>
+-      <component-plugin>
+-        <name>new.portal.config.user.listener</name>
+-        <set-method>initListener</set-method>
+-        <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
+-        <description>this listener init the portal configuration</description>
+-        <init-params>
+-          <value-param>
+-            <name>default.portal</name>
+-            <description>The default portal for checking db is empty or not</description>
+-            <value>classic</value>
+-          </value-param>
+-          <value-param>
+-            <name>initializing.failure.ignore</name>
+-            <description>In the run method, use try catch or not (value is true/false)</description>
+-            <value>true</value>
+-          </value-param>
+-          <object-param>
+-            <name>portal.configuration</name>
+-            <description>description</description>
+-            <object type="org.exoplatform.portal.config.NewPortalConfig">
+-              <field name="predefinedOwner">
+-                <collection type="java.util.HashSet">
+-                  <value>
+-                    <string>classic</string>
+-                  </value>
+-                </collection>
+-              </field>
+-              <field name="ownerType">
+-                <string>portal</string>
+-              </field>
+-              <field name="templateLocation">
+-                <string>classpath:/conf/portal</string>
+-              </field>
+-            </object>
+-          </object-param>
+-        </init-params>
+-      </component-plugin>
+-    </component-plugins>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.config.UserACL</key>
+-    <type>org.exoplatform.portal.config.UserACL</type>
+-    <init-params>
+-      <value-param>
+-        <name>super.user</name>
+-        <description>administrator</description>
+-        <value>root</value>
+-      </value-param>
+-      <value-param>
+-        <name>navigation.creator.membership.type</name>
+-        <description>specific membership type have full permission with group navigation</description>
+-        <value>editor</value>
+-      </value-param>
+-      <value-param>
+-        <name>guests.group</name>
+-        <description>public group for portal</description>
+-        <value>/platform/guests</value>
+-      </value-param>
+-    </init-params>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.config.DataStorage</key>
+-    <type>org.exoplatform.portal.config.DataStorageImpl</type>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
+-    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
+-    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
+-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
+-  </component>
+-
+-  <component>
+-    <type>org.exoplatform.groovyscript.text.TemplateService</type>
+-  </component>
+- 
+-  <component>
+-    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>
+-    <type>org.exoplatform.services.organization.idm.PicketLinkIDMServiceImpl</type>
+-    <init-params>
+-      <value-param>
+-        <name>config</name>
+-        <value>classpath:/conf/portal/test-picketlink-configuration.xml</value>
+-      </value-param>
+-      <value-param>
+-        <name>portalRealm</name>
+-        <value>realm_portal</value>
+-      </value-param>
+-    </init-params>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</key>
+-    <type>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</type>
+-  </component>
+-
+-  <component>
+-    <type>org.exoplatform.portal.resource.SkinService</type>
+-  </component>
+-
+-  <external-component-plugins>
+-    <target-component>org.exoplatform.commons.chromattic.ChromatticManager</target-component>
+-    <component-plugin>
+-      <name>chromattic</name>
+-      <set-method>addLifeCycle</set-method>
+-      <type>org.exoplatform.portal.pom.config.MOPChromatticLifeCycle</type>
+-      <init-params>
+-        <value-param>
+-          <name>domain-name</name>
+-          <value>mop</value>
+-        </value-param>
+-        <value-param>
+-          <name>workspace-name</name>
+-          <value>portal-system</value>
+-        </value-param>
+-        <values-param>
+-          <name>entities</name>
+-          <value>org.gatein.mop.core.api.workspace.WorkspaceImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.UIContainerImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.UIWindowImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.UIBodyImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.PageImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.PageContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.NavigationImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.NavigationContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.PageLinkImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.URLLinkImpl</value>
+-          <value>org.gatein.mop.core.api.workspace.PortalSiteContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.PortalSite</value>
+-          <value>org.gatein.mop.core.api.workspace.GroupSiteContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.GroupSite</value>
+-          <value>org.gatein.mop.core.api.workspace.UserSiteContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.UserSite</value>
+-          <value>org.gatein.mop.core.api.workspace.TemplatizedImpl</value>
+-          <value>org.gatein.mop.core.api.AttributesImpl</value>
+-          <value>org.gatein.mop.core.api.Attribute</value>
+-          <value>org.gatein.mop.core.api.PathAttribute</value>
+-          <value>org.gatein.mop.core.api.StringAttribute</value>
+-          <value>org.gatein.mop.core.api.BooleanAttribute</value>
+-          <value>org.gatein.mop.core.api.IntegerAttribute</value>
+-          <value>org.gatein.mop.core.api.DateAttribute</value>
+-          <value>org.gatein.mop.core.api.workspace.content.CustomizationContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.content.ContextTypeContainer</value>
+-          <value>org.gatein.mop.core.api.workspace.content.ContextType</value>
+-          <value>org.gatein.mop.core.api.workspace.content.ContextSpecialization</value>
+-          <value>org.gatein.mop.core.api.workspace.content.WorkspaceClone</value>
+-          <value>org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization</value>
+-          <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
+-          <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
+-          <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>
+-          <value>org.exoplatform.portal.pom.spi.wsrp.WSRPState</value>
+-          <value>org.exoplatform.portal.mop.ProtectedResource</value>
+-          <value>org.exoplatform.portal.mop.Described</value>
+-          <value>org.exoplatform.portal.mop.Visible</value>
+-										<value>org.exoplatform.portal.mop.i18n.I18Nized</value>
+-          <value>org.exoplatform.portal.mop.i18n.LanguageSpace</value>
+-          <value>org.exoplatform.portal.mop.i18n.Language</value>
+-          <value>org.exoplatform.portal.mop.importer.Imported</value>
+-        </values-param>
+-      </init-params>
+-    </component-plugin>
+-  </external-component-plugins>
+-
+-  <import>classpath:/conf/core/test-configuration.xml</import>
+-  <import>classpath:/conf/jcr/test-configuration.xml</import>
+-  <import>classpath:/conf/dms/test-configuration.xml</import>
+-  <import>classpath:/conf/dms/test-system-configuration.xml</import>
+-  <import>classpath:/conf/dms/test-collaboration-configuration.xml</import>
+-  <import>classpath:/conf/wcm/test-configuration.xml</import>
+-
+-</configuration>
++<?xml version="1.0" encoding="ISO-8859-1"?>
++  <!--
++
++    Copyright (C) 2009 eXo Platform SAS.
++    
++    This is free software; you can redistribute it and/or modify it
++    under the terms of the GNU Lesser General Public License as
++    published by the Free Software Foundation; either version 2.1 of
++    the License, or (at your option) any later version.
++    
++    This software is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++    Lesser General Public License for more details.
++    
++    You should have received a copy of the GNU Lesser General Public
++    License along with this software; if not, write to the Free
++    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
++    02110-1301 USA, or see the FSF site: http://www.fsf.org.
++
++-->
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
++	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
++
++  <component>
++    <key>org.exoplatform.services.resources.LocaleConfigService</key>
++    <type>org.exoplatform.services.resources.impl.LocaleConfigServiceImpl</type>
++    <init-params>
++      <value-param>
++        <name>locale.config.file</name>
++        <value>classpath:/conf/portal/test-locales-configuration.xml</value>
++      </value-param>
++    </init-params>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
++    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.config.UserPortalConfigService</key>
++    <type>org.exoplatform.portal.config.UserPortalConfigService</type>
++    <component-plugins>
++      <component-plugin>
++        <name>new.portal.config.user.listener</name>
++        <set-method>initListener</set-method>
++        <type>org.exoplatform.portal.config.NewPortalConfigListener</type>
++        <description>this listener init the portal configuration</description>
++        <init-params>
++          <value-param>
++            <name>default.portal</name>
++            <description>The default portal for checking db is empty or not</description>
++            <value>classic</value>
++          </value-param>
++          <value-param>
++            <name>initializing.failure.ignore</name>
++            <description>In the run method, use try catch or not (value is true/false)</description>
++            <value>true</value>
++          </value-param>
++          <object-param>
++            <name>portal.configuration</name>
++            <description>description</description>
++            <object type="org.exoplatform.portal.config.NewPortalConfig">
++              <field name="predefinedOwner">
++                <collection type="java.util.HashSet">
++                  <value>
++                    <string>classic</string>
++                  </value>
++                </collection>
++              </field>
++              <field name="ownerType">
++                <string>portal</string>
++              </field>
++              <field name="templateLocation">
++                <string>classpath:/conf/portal</string>
++              </field>
++            </object>
++          </object-param>
++        </init-params>
++      </component-plugin>
++    </component-plugins>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.config.UserACL</key>
++    <type>org.exoplatform.portal.config.UserACL</type>
++    <init-params>
++      <value-param>
++        <name>super.user</name>
++        <description>administrator</description>
++        <value>root</value>
++      </value-param>
++      <value-param>
++        <name>navigation.creator.membership.type</name>
++        <description>specific membership type have full permission with group navigation</description>
++        <value>editor</value>
++      </value-param>
++      <value-param>
++        <name>guests.group</name>
++        <description>public group for portal</description>
++        <value>/platform/guests</value>
++      </value-param>
++    </init-params>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.config.DataStorage</key>
++    <type>org.exoplatform.portal.config.DataStorageImpl</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
++    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
++    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
++  </component>
++		
++  <component>
++      <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
++      <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
++		</component>		
++
++  <component>
++    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
++    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>
++    <type>org.exoplatform.services.organization.idm.PicketLinkIDMServiceImpl</type>
++    <init-params>
++      <value-param>
++        <name>config</name>
++        <value>classpath:/conf/portal/test-picketlink-configuration.xml</value>
++      </value-param>
++      <value-param>
++        <name>portalRealm</name>
++        <value>realm_portal</value>
++      </value-param>
++    </init-params>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</key>
++    <type>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</type>
++  </component>
++	
++  <component>
++    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
++    <type>org.exoplatform.portal.mop.navigation.NavigationServiceImpl</type>
++  </component>
++  
++  <component>
++    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
++    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
++  </component>
++
++  <component>
++    <type>org.exoplatform.portal.resource.SkinService</type>
++  </component>
++
++  <component>
++    <type>org.exoplatform.groovyscript.text.TemplateService</type>
++  </component>
++ 
++  <component>
++    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
++  </component>
++
++  <external-component-plugins>
++    <target-component>org.exoplatform.commons.chromattic.ChromatticManager</target-component>
++    <component-plugin>
++      <name>chromattic</name>
++      <set-method>addLifeCycle</set-method>
++      <type>org.exoplatform.portal.pom.config.MOPChromatticLifeCycle</type>
++      <init-params>
++        <value-param>
++          <name>domain-name</name>
++          <value>mop</value>
++        </value-param>
++        <value-param>
++          <name>workspace-name</name>
++          <value>portal-system</value>
++        </value-param>
++        <values-param>
++          <name>entities</name>
++          <value>org.gatein.mop.core.api.workspace.WorkspaceImpl</value>
++          <value>org.gatein.mop.core.api.workspace.UIContainerImpl</value>
++          <value>org.gatein.mop.core.api.workspace.UIWindowImpl</value>
++          <value>org.gatein.mop.core.api.workspace.UIBodyImpl</value>
++          <value>org.gatein.mop.core.api.workspace.PageImpl</value>
++          <value>org.gatein.mop.core.api.workspace.PageContainer</value>
++          <value>org.gatein.mop.core.api.workspace.NavigationImpl</value>
++          <value>org.gatein.mop.core.api.workspace.NavigationContainer</value>
++          <value>org.gatein.mop.core.api.workspace.PageLinkImpl</value>
++          <value>org.gatein.mop.core.api.workspace.URLLinkImpl</value>
++          <value>org.gatein.mop.core.api.workspace.PortalSiteContainer</value>
++          <value>org.gatein.mop.core.api.workspace.PortalSite</value>
++          <value>org.gatein.mop.core.api.workspace.GroupSiteContainer</value>
++          <value>org.gatein.mop.core.api.workspace.GroupSite</value>
++          <value>org.gatein.mop.core.api.workspace.UserSiteContainer</value>
++          <value>org.gatein.mop.core.api.workspace.UserSite</value>
++          <value>org.gatein.mop.core.api.workspace.TemplatizedImpl</value>
++          <value>org.gatein.mop.core.api.AttributesImpl</value>
++          <value>org.gatein.mop.core.api.Attribute</value>
++          <value>org.gatein.mop.core.api.PathAttribute</value>
++          <value>org.gatein.mop.core.api.StringAttribute</value>
++          <value>org.gatein.mop.core.api.BooleanAttribute</value>
++          <value>org.gatein.mop.core.api.IntegerAttribute</value>
++          <value>org.gatein.mop.core.api.DateAttribute</value>
++          <value>org.gatein.mop.core.api.workspace.content.CustomizationContainer</value>
++          <value>org.gatein.mop.core.api.workspace.content.ContextTypeContainer</value>
++          <value>org.gatein.mop.core.api.workspace.content.ContextType</value>
++          <value>org.gatein.mop.core.api.workspace.content.ContextSpecialization</value>
++          <value>org.gatein.mop.core.api.workspace.content.WorkspaceClone</value>
++          <value>org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization</value>
++          <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
++          <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
++          <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>
++          <value>org.exoplatform.portal.pom.spi.wsrp.WSRPState</value>
++          <value>org.exoplatform.portal.mop.ProtectedResource</value>
++          <value>org.exoplatform.portal.mop.Described</value>
++          <value>org.exoplatform.portal.mop.Visible</value>
++										<value>org.exoplatform.portal.mop.i18n.I18Nized</value>
++          <value>org.exoplatform.portal.mop.i18n.LanguageSpace</value>
++          <value>org.exoplatform.portal.mop.i18n.Language</value>
++          <value>org.exoplatform.portal.mop.importer.Imported</value>
++        </values-param>
++      </init-params>
++    </component-plugin>
++  </external-component-plugins>
++
++  <import>classpath:/conf/core/test-configuration.xml</import>
++  <import>classpath:/conf/jcr/test-configuration.xml</import>
++  <import>classpath:/conf/dms/test-configuration.xml</import>
++  <import>classpath:/conf/dms/test-system-configuration.xml</import>
++  <import>classpath:/conf/dms/test-collaboration-configuration.xml</import>
++  <import>classpath:/conf/wcm/test-configuration.xml</import>
++	<import>classpath:/conf/wcm/test-publication-configuration.xml</import>
++
++</configuration>
+Index: core/publication/src/test/java/conf/dms/test-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/dms/test-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/dms/test-configuration.xml	(working copy)
+@@ -19,11 +19,20 @@
+     02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ 
+ -->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+ 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+ 
+   <component>
++    <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.cms.link.LinkManager</key>
++    <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
++  </component>
++
++  <component>
+     <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
+     <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
+     <init-params>
+@@ -106,16 +115,16 @@
+       <init-params>
+         <properties-param>
+           <name>namespaces</name>
+-	          <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+-	          <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
+-	          <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
+-	          <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/"/>
+-	          <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
+-	          <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
+-	          <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
++          <property name="dc" value="http://purl.org/dc/elements/1.1/" />
++          <property name="rma" value="http://www.rma.com/jcr/" />
++          <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/" />
++          <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/" />
++          <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/" />
++          <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/" />
+         </properties-param>
+       </init-params>
+     </component-plugin>
+   </external-component-plugins>
++	
+ 
+ </configuration>
+Index: core/publication/src/test/java/conf/dms/test-system-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/dms/test-system-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/dms/test-system-configuration.xml	(working copy)
+@@ -19,7 +19,7 @@
+     02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ 
+ -->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+ 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+ 
+Index: core/publication/src/test/java/conf/dms/test-collaboration-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/dms/test-collaboration-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/dms/test-collaboration-configuration.xml	(working copy)
+@@ -19,10 +19,11 @@
+     02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ 
+ -->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+ 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+ 
++
+   <external-component-plugins>
+     <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+     <component-plugin>
+Index: core/publication/src/test/java/conf/wcm/test-wcm-nodetypes-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/wcm/test-wcm-nodetypes-configuration.xml	(revision 0)
++++ core/publication/src/test/java/conf/wcm/test-wcm-nodetypes-configuration.xml	(revision 0)
+@@ -0,0 +1,262 @@
++<nodeTypes
++   xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
++   xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
++   xmlns:jcr="http://www.jcp.org/jcr/1.0"
++   xmlns:exo="http://www.exoplatform.com/jcr/exo/1.0">
++
++  <!-- Duplicating this definition in case the ECM node type definitions
++       have not been processed by the Repository Service yet. -->
++  <!-- DO NOT REMOVE THIS DEFINITION -->
++  <nodeType name="exo:presentationable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:presentationType" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++  <!-- DO NOT REMOVE THIS DEFINITION -->
++
++  <nodeType name="exo:portalFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:webFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:themeFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:linkFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:multimediaFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="images" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="videos" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="audio" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:jsFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:folder</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:cssFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:folder</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="*" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:webContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>mix:referenceable</supertype>
++      <supertype>nt:unstructured</supertype>
++      <supertype>nt:hierarchyNode</supertype>
++      <supertype>exo:rss-enable</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="js" defaultPrimaryType="exo:jsFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="medias" defaultPrimaryType="exo:multimediaFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:htmlFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:presentationable</supertype>
++      <supertype>mix:referenceable</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="exo:htmlTOC" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:jsFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:presentationable</supertype>
++      <supertype>mix:referenceable</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="exo:active" requiredType="Boolean" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++        <defaultValues>
++          <defaultValue>true</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++      <propertyDefinition name="exo:priority" requiredType="Long" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++        <defaultValues>
++          <defaultValue>0</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++      <propertyDefinition name="exo:sharedJS" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:cssFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:presentationable</supertype>
++      <supertype>mix:referenceable</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="exo:active" requiredType="Boolean" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++        <defaultValues>
++          <defaultValue>true</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++      <propertyDefinition name="exo:priority" requiredType="Long" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++        <defaultValues>
++          <defaultValue>0</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++      <propertyDefinition name="exo:sharedCSS" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:multimediaFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:presentationable</supertype>
++    </supertypes>
++  </nodeType>
++
++  <nodeType name="exo:linkable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:links" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:link" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>mix:referenceable</supertype>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="exo:linkURL" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="exo:linkDescription" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="exo:linkActive" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:webLinks" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:externalSiteLinks" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="exo:portalPageLinks" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="exo:insideDocumentLinks" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="exo:multimediaLinks" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:multiPageContent" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:presentationable</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="exo:presentationType" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++        <defaultValues>
++          <defaultValue>exo:multiPageContent</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++  
++  <nodeType name="exo:sortable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:index" requiredType="Long" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>       
++        <defaultValues>
++          <defaultValue>1000</defaultValue>
++        </defaultValues>
++      </propertyDefinition>
++      <propertyDefinition name="exo:title" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>       
++      </propertyDefinition>
++      <propertyDefinition name="exo:titlePublished" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>       
++      </propertyDefinition>
++      <propertyDefinition name="exo:name" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>       
++      </propertyDefinition>
++      <propertyDefinition name="publication:liveDate" requiredType="Date" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>       
++      </propertyDefinition>      
++    </propertyDefinitions>
++  </nodeType>
++
++</nodeTypes>
+Index: core/publication/src/test/java/conf/wcm/test-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/wcm/test-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/wcm/test-configuration.xml	(working copy)
+@@ -19,11 +19,10 @@
+     02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ 
+ -->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+ 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+ 
+-
+   <component>
+     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
+     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
+@@ -103,32 +102,141 @@
+             <boolean>false</boolean>
+           </field>
+           <field name="allowCreateFolders">
+-            <string>nt:folder,nt:unstructured</string>
++            <string>Both</string>
+           </field>
+-          <field name="allowNodeTypesOnTree"><string>*</string></field>          
++          <field name="allowNodeTypesOnTree"><string>*</string></field>
+         </object>
+       </object-param>
+     </init-params>
+   </component>
+ 
++  <component>
++    <key>org.exoplatform.services.wcm.core.WebSchemaConfigService</key>
++    <type>org.exoplatform.services.wcm.core.impl.WebSchemaConfigServiceImpl</type>
++    <component-plugins>
++      <component-plugin>
++        <name>CSSFileHandler</name>
++        <set-method>addWebSchemaHandler</set-method>
++        <type>org.exoplatform.services.wcm.skin.CSSFileHandler</type>
++      </component-plugin>
++      <component-plugin>
++        <name>JSFileHandler</name>
++        <set-method>addWebSchemaHandler</set-method>
++        <type>org.exoplatform.services.wcm.javascript.JSFileHandler</type>
++      </component-plugin>
++      <component-plugin>
++        <name>WebContentSchemaHandler</name>
++        <set-method>addWebSchemaHandler</set-method>
++        <type>org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler</type>
++      </component-plugin>
++      <component-plugin>
++        <name>HTMLFileSchemaHandler</name>
++        <set-method>addWebSchemaHandler</set-method>
++        <type>org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler</type>
++      </component-plugin>
++      <component-plugin>
++        <name>PortalFolderSchemaHandler</name>
++        <set-method>addWebSchemaHandler</set-method>
++        <type>org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler</type>
++      </component-plugin>
++    </component-plugins>
++  </component>
++	
++  <component>
++    <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
++    <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
++  </component>
++	
++	<component>
++    <key>org.exoplatform.services.cms.templates.TemplateService</key>
++    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>    
++  </component>
++	
++  <component>
++    <key>org.exoplatform.services.wcm.core.WCMService</key>
++    <type>org.exoplatform.services.wcm.core.impl.WCMServiceImpl</type>
++    <init-params>
++      <properties-param>
++        <name>server.config</name>
++        <description>server.config</description>
++        <property name="expirationCache" value="30" />
++      </properties-param>
++    </init-params>
++  </component>		
++	
++  <component>
++    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
++    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
++    <component-plugins>
++      <component-plugin>
++        <name>ExcludeMimeTypes</name>
++        <set-method>addExcludeIncludeDataTypePlugin</set-method>
++        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
++        <init-params>
++          <properties-param>
++            <name>search.exclude.datatypes</name>
++            <description>exclude some data type when search</description>
++            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
++          </properties-param>
++        </init-params>
++      </component-plugin>
++    </component-plugins>
++  </component>
++	
++  <component>
++    <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
++    <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
++    <init-params>
++      <properties-param>
++        <name>server.config</name>
++        <description>server.address</description>
++        <property name="scheme" value="http" />
++        <property name="hostName" value="localhost" />
++        <property name="port" value="8080" />
++      </properties-param>
++    </init-params>
++  </component>	
++	
+   <external-component-plugins>
+     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+     <component-plugin>
+       <name>add.nodeType</name>
+       <set-method>addPlugin</set-method>
+       <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+-      <priority>100</priority>
++      <priority>101</priority>
+       <init-params>
+         <values-param>
+           <name>autoCreatedInNewRepository</name>
+           <description>Node types configuration file</description>
+-          <value>classpath:/conf/wcm/test-nodetypes-configuration.xml</value>
++          <value>jar:/conf/wcm/test-wcm-nodetypes-configuration.xml</value>
+         </values-param>
+       </init-params>
+     </component-plugin>
+-  </external-component-plugins>
+-
++  </external-component-plugins>	
++	
+   <external-component-plugins>
++    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
++    <component-plugin>
++      <name>org.exoplatform.portal.config.DataStorage.portalConfigCreated</name>
++      <set-method>addListener</set-method>
++      <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>
++      <description>this listener create new live portal content storage</description>
++    </component-plugin>
++    <component-plugin>
++      <name>org.exoplatform.portal.config.DataStorage.portalConfigRemoved</name>
++      <set-method>addListener</set-method>
++      <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
++      <description>this listener new live portal content storage</description>
++    </component-plugin>
++    <component-plugin>
++      <name>org.exoplatform.portal.config.DataStorage.portalConfigUpdated</name>
++      <set-method>addListener</set-method>
++      <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
++      <description>this listener new live portal content storage</description>
++    </component-plugin>
++  </external-component-plugins>	
++  
++  <external-component-plugins>
+     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
+     <component-plugin>
+       <name>addActions</name>
+Index: core/publication/src/test/java/conf/wcm/test-publication-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/wcm/test-publication-configuration.xml	(revision 0)
++++ core/publication/src/test/java/conf/wcm/test-publication-configuration.xml	(revision 0)
+@@ -0,0 +1,78 @@
++<?xml version="1.0" encoding="ISO-8859-1"?>
++
++<configuration
++   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
++   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
++
++  
++  <component>
++    <key>org.exoplatform.services.ecm.publication.PublicationService</key>
++    <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>    
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.ecm.publication.PublicationPresentationService</key>
++    <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
++  </component> 
++	
++ <component>
++    <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
++    <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.cms.documents.TrashService</key>  
++    <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
++    <init-params>
++      <value-param>
++        <name>trashWorkspace</name>
++        <value>collaboration</value>
++      </value-param>
++      <value-param>
++        <name>trashHomeNodePath</name>
++        <value>/Trash</value>
++      </value-param>
++    </init-params>    
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
++    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.wcm.metadata.PageMetadataService</key>
++    <type>org.exoplatform.services.wcm.metadata.PageMetadataServiceImpl</type>
++  </component>
++	
++
++  <external-component-plugins>
++  	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
++		<component-plugin>
++	    <name>add.namespaces</name>
++	    <set-method>addPlugin</set-method>
++	    <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
++	    <init-params>
++	      <properties-param>
++	        <name>namespaces</name>
++	        <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/"/>
++	      </properties-param>
++	    </init-params>
++	  </component-plugin>
++	  <component-plugin>
++	    <name>add.nodeType</name>
++	    <set-method>addPlugin</set-method>
++	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
++			<priority>99</priority>
++	    <init-params>
++	      <values-param>
++	        <name>autoCreatedInNewRepository</name>
++	        <description>Node types configuration file</description>
++	        <value>jar:/conf/wcm/test-nodetypes-publication.xml</value>
++	      </values-param>
++	    </init-params>
++	  </component-plugin>
++	</external-component-plugins>
++
++</configuration>
+Index: core/publication/src/test/java/conf/wcm/test-nodetypes-publication.xml
+===================================================================
+--- core/publication/src/test/java/conf/wcm/test-nodetypes-publication.xml	(revision 0)
++++ core/publication/src/test/java/conf/wcm/test-nodetypes-publication.xml	(revision 0)
+@@ -0,0 +1,64 @@
++<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
++  xmlns:jcr="http://www.jcp.org/jcr/1.0">
++  
++  <nodeType name="publication:publication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++    	<propertyDefinition name="publication:lifecycleName" requiredType="String" autoCreated="false" mandatory="true"
++        onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>
++      <propertyDefinition name="publication:currentState" requiredType="String" autoCreated="false" mandatory="true"
++        onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>
++      <propertyDefinition name="publication:history" requiredType="String" autoCreated="false" mandatory="true"
++        onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints/>
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++  
++	<nodeType name="publication:webpagesPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>publication:publication</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="publication:navigationNodeURIs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="publication:webPageIDs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="publication:applicationIDs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++	
++  <nodeType name="publication:simplePublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++		<supertypes>      
++      <supertype>publication:webpagesPublication</supertype>
++    </supertypes>    
++  </nodeType>
++  
++  <nodeType name="publication:stateAndVersionBasedPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++		<supertypes>      
++      <supertype>publication:publication</supertype>
++    </supertypes>
++    <propertyDefinitions>
++    	<propertyDefinition name="publication:revisionData" requiredType="String" autoCreated="false" mandatory="false"
++        onParentVersion="IGNORE" protected="false" multiple="true">
++        <valueConstraints/>
++      </propertyDefinition>            
++      <propertyDefinition name="publication:liveRevision" requiredType="Reference" autoCreated="false" mandatory="false"
++        onParentVersion="IGNORE" protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>
++      <propertyDefinition name="publication:liveDate" requiredType="Date" autoCreated="false" mandatory="false"
++        onParentVersion="IGNORE" protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>      
++    </propertyDefinitions>    
++  </nodeType>
++
++</nodeTypes>
+Index: core/publication/src/test/java/conf/core/test-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/core/test-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/core/test-configuration.xml	(working copy)
+@@ -19,7 +19,7 @@
+     02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ 
+ -->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+ 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+ 
+Index: core/publication/src/test/java/conf/jcr/test-configuration.xml
+===================================================================
+--- core/publication/src/test/java/conf/jcr/test-configuration.xml	(revision 80377)
++++ core/publication/src/test/java/conf/jcr/test-configuration.xml	(working copy)
+@@ -1,304 +1,332 @@
+-<?xml version="1.0" encoding="ISO-8859-1"?>
+-  <!--
+-
+-    Copyright (C) 2009 eXo Platform SAS.
+-    
+-    This is free software; you can redistribute it and/or modify it
+-    under the terms of the GNU Lesser General Public License as
+-    published by the Free Software Foundation; either version 2.1 of
+-    the License, or (at your option) any later version.
+-    
+-    This software is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+-    Lesser General Public License for more details.
+-    
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this software; if not, write to the Free
+-    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+-    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-
+--->
+-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+-	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+-	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+-
+-
+-  <component>
+-    <key>org.exoplatform.services.jcr.RepositoryService</key>
+-    <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
+-    <component-plugins>
+-      <component-plugin>
+-        <name>add.namespaces</name>
+-        <set-method>addPlugin</set-method>
+-        <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+-        <init-params>
+-          <properties-param>
+-            <name>namespaces</name>
+-            <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+-            <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
+-            <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
+-            <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/"/>
+-            <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
+-            <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
+-            <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
+-          </properties-param>
+-        </init-params>
+-      </component-plugin>
+-      <component-plugin>
+-        <name>add.nodeType</name>
+-        <set-method>addPlugin</set-method>
+-        <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+-        <init-params>
+-          <values-param>
+-            <name>autoCreatedInNewRepository</name>
+-            <description>Node types configuration file</description>
+-            <value>jar:/conf/mop-nodetypes.xml</value>
+-            <value>jar:/conf/ext-nodetypes-config.xml</value>
+-            <value>jar:/conf/content-nodetypes.xml</value>
+-            <value>jar:/conf/gatein-nodetypes.xml</value>
+-            <!-- <value>jar:/conf/organization-nodetypes.xml</value>
+-            <value>jar:/conf/application-nodetypes.xml</value>
+-            <value>jar:/conf/autologin-nodetypes.xml</value>
+-            <value>war:/conf/wsrp/consumers-configuration-nodetypes.xml</value>
+-            <value>war:/conf/wsrp/producer-configuration-nodetypes.xml</value>
+-            <value>war:/conf/wsrp/producer-registrations-nodetypes.xml</value>-->
+-          </values-param>
+-        </init-params>
+-      </component-plugin>
+-    </component-plugins>
+-  </component>
+-
+-
+-  <component>
+-    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
+-    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
+-    <init-params>
+-      <value-param>
+-        <name>conf-path</name>
+-        <description>JCR configuration file</description>
+-        <value>classpath:/conf/jcr/test-repository-configuration.xml</value>
+-      </value-param>
+-      <properties-param>
+-        <name>working-conf</name>
+-        <description>working-conf</description>
+-        <property name="source-name" value="jdbcexo" />
+-        <property name="dialect" value="hsqldb" />
+-        <property name="persister-class-name" value="org.exoplatform.services.jcr.impl.config.JDBCConfigurationPersister" />
+-      </properties-param>
+-    </init-params>
+-  </component>
+-
+-  <component>
+-    <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+-    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+-  </component>
+-
+-  <component>
+-    <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
+-  </component>
+-
+-  <external-component-plugins>
+-    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+-    <component-plugin>
+-      <name>addPaths</name>
+-      <set-method>addPlugin</set-method>
+-      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+-      <init-params>
+-        <object-param>
+-          <name>sites.content.storage.configuration</name>
+-          <description>config for storage to store running sites content</description>
+-          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+-            <field name="repository">
+-              <string>repository</string>
+-            </field>
+-            <field name="workspaces">
+-              <collection type="java.util.ArrayList">
+-                <value>
+-                  <string>collaboration</string>
+-                </value>
+-              </collection>
+-            </field>
+-            <field name="jcrPaths">
+-              <collection type="java.util.ArrayList">
+-                <value>
+-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+-                    <field name="alias">
+-                      <string>siteContent</string>
+-                    </field>
+-                    <field name="path">
+-                      <string>/sites content</string>
+-                    </field>
+-                    <field name="permissions">
+-                      <collection type="java.util.ArrayList">
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>*:/platform/administrators</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>true</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>*:/platform/web-contributors</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>true</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>any</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>false</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>false</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>false</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                      </collection>
+-                    </field>
+-                  </object>
+-                </value>
+-                <value>
+-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+-                    <field name="alias">
+-                      <string>liveSiteContent</string>
+-                    </field>
+-                    <field name="path">
+-                      <string>/sites content/live</string>
+-                    </field>
+-                    <field name="permissions">
+-                      <collection type="java.util.ArrayList">
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>*:/platform/administrators</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>true</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>*:/platform/web-contributors</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>true</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                        <value>
+-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+-                            <field name="identity">
+-                              <string>any</string>
+-                            </field>
+-                            <field name="read">
+-                              <string>true</string>
+-                            </field>
+-                            <field name="addNode">
+-                              <string>false</string>
+-                            </field>
+-                            <field name="setProperty">
+-                              <string>false</string>
+-                            </field>
+-                            <field name="remove">
+-                              <string>false</string>
+-                            </field>
+-                          </object>
+-                        </value>
+-                      </collection>
+-                    </field>
+-                  </object>
+-                </value>
+-              </collection>
+-            </field>
+-          </object>
+-        </object-param>
+-      </init-params>
+-    </component-plugin>
+-  </external-component-plugins>
+-
+-  <external-component-plugins>
+-    <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
+-    <component-plugin>
+-      <name>bind.datasource</name>
+-      <set-method>addPlugin</set-method>
+-      <type>org.exoplatform.services.naming.BindReferencePlugin</type>
+-      <init-params>
+-        <value-param>
+-          <name>bind-name</name>
+-          <value>jdbcexo</value>
+-        </value-param>
+-        <value-param>
+-          <name>class-name</name>
+-          <value>javax.sql.DataSource</value>
+-        </value-param>
+-        <value-param>
+-          <name>factory</name>
+-          <value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+-        </value-param>
+-        <properties-param>
+-          <name>ref-addresses</name>
+-          <description>ref-addresses</description>
+-          <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+-          <property name='url' value='jdbc:hsqldb:mem:db/jdbcexo' />
+-          <property name="username" value="sa" />
+-          <property name="password" value="" />
+-        </properties-param>
+-      </init-params>
+-    </component-plugin>
+-  </external-component-plugins>
+-</configuration>
++<?xml version="1.0" encoding="ISO-8859-1"?>
++  <!--
++
++    Copyright (C) 2009 eXo Platform SAS.
++    
++    This is free software; you can redistribute it and/or modify it
++    under the terms of the GNU Lesser General Public License as
++    published by the Free Software Foundation; either version 2.1 of
++    the License, or (at your option) any later version.
++    
++    This software is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++    Lesser General Public License for more details.
++    
++    You should have received a copy of the GNU Lesser General Public
++    License along with this software; if not, write to the Free
++    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
++    02110-1301 USA, or see the FSF site: http://www.fsf.org.
++
++-->
++<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
++	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
++
++
++  <component>
++    <key>org.exoplatform.services.jcr.RepositoryService</key>
++    <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
++    <component-plugins>
++      <component-plugin>
++        <name>add.namespaces</name>
++        <set-method>addPlugin</set-method>
++        <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
++        <init-params>
++          <properties-param>
++            <name>namespaces</name>
++            <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
++            <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
++            <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
++            <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/"/>
++            <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
++            <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
++            <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
++          </properties-param>
++        </init-params>
++      </component-plugin>
++      <component-plugin>
++        <name>add.nodeType</name>
++        <set-method>addPlugin</set-method>
++        <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
++        <init-params>
++          <values-param>
++            <name>autoCreatedInNewRepository</name>
++            <description>Node types configuration file</description>
++            <value>jar:/conf/mop-nodetypes.xml</value>
++            <value>jar:/conf/ext-nodetypes-config.xml</value>
++            <value>jar:/conf/content-nodetypes.xml</value>
++            <value>jar:/conf/gatein-nodetypes.xml</value>
++            <!-- <value>jar:/conf/organization-nodetypes.xml</value>
++            <value>jar:/conf/application-nodetypes.xml</value>
++            <value>jar:/conf/autologin-nodetypes.xml</value>
++            <value>war:/conf/wsrp/consumers-configuration-nodetypes.xml</value>
++            <value>war:/conf/wsrp/producer-configuration-nodetypes.xml</value>
++            <value>war:/conf/wsrp/producer-registrations-nodetypes.xml</value>-->
++          </values-param>
++        </init-params>
++      </component-plugin>
++    </component-plugins>
++  </component>
++
++
++  <component>
++    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
++    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
++    <init-params>
++      <value-param>
++        <name>conf-path</name>
++        <description>JCR configuration file</description>
++        <value>classpath:/conf/jcr/test-repository-configuration.xml</value>
++      </value-param>
++      <properties-param>
++        <name>working-conf</name>
++        <description>working-conf</description>
++        <property name="source-name" value="jdbcexo" />
++        <property name="dialect" value="hsqldb" />
++        <property name="persister-class-name" value="org.exoplatform.services.jcr.impl.config.JDBCConfigurationPersister" />
++      </properties-param>
++    </init-params>
++  </component>
++
++  <component>
++    <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
++    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
++    <init-params>
++      <value-param>
++        <name>old-user-distribution</name>
++        <value>true</value>
++      </value-param>
++    </init-params>           
++  </component>
++		
++  <component>
++    <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
++    <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>     
++  </component>
++
++  <component>
++    <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
++  </component>
++
++  <external-component-plugins>
++    <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
++    <component-plugin>
++      <name>addPaths</name>
++      <set-method>addPlugin</set-method>
++      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
++      <init-params>
++        <object-param>
++          <name>sites.content.storage.configuration</name>
++          <description>config for storage to store running sites content</description>
++          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
++            <field name="repository">
++              <string>repository</string>
++            </field>
++            <field name="workspaces">
++              <collection type="java.util.ArrayList">
++                <value>
++                  <string>collaboration</string>
++                </value>
++              </collection>
++            </field>
++            <field name="jcrPaths">
++              <collection type="java.util.ArrayList">
++                <value>
++                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
++                    <field name="alias">
++                      <string>siteContent</string>
++                    </field>
++                    <field name="path">
++                      <string>/sites content</string>
++                    </field>
++                    <field name="permissions">
++                      <collection type="java.util.ArrayList">
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>*:/platform/administrators</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>true</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>true</string>
++                            </field>
++                            <field name="remove">
++                              <string>true</string>
++                            </field>
++                          </object>
++                        </value>
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>*:/platform/web-contributors</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>true</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>true</string>
++                            </field>
++                            <field name="remove">
++                              <string>true</string>
++                            </field>
++                          </object>
++                        </value>
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>any</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>false</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>false</string>
++                            </field>
++                            <field name="remove">
++                              <string>false</string>
++                            </field>
++                          </object>
++                        </value>
++                      </collection>
++                    </field>
++                  </object>
++                </value>
++                <value>
++                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
++                    <field name="alias">
++                      <string>liveSiteContent</string>
++                    </field>
++                    <field name="path">
++                      <string>/sites content/live</string>
++                    </field>
++                    <field name="permissions">
++                      <collection type="java.util.ArrayList">
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>*:/platform/administrators</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>true</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>true</string>
++                            </field>
++                            <field name="remove">
++                              <string>true</string>
++                            </field>
++                          </object>
++                        </value>
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>*:/platform/web-contributors</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>true</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>true</string>
++                            </field>
++                            <field name="remove">
++                              <string>true</string>
++                            </field>
++                          </object>
++                        </value>
++                        <value>
++                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
++                            <field name="identity">
++                              <string>any</string>
++                            </field>
++                            <field name="read">
++                              <string>true</string>
++                            </field>
++                            <field name="addNode">
++                              <string>false</string>
++                            </field>
++                            <field name="setProperty">
++                              <string>false</string>
++                            </field>
++                            <field name="remove">
++                              <string>false</string>
++                            </field>
++                          </object>
++                        </value>
++                      </collection>
++                    </field>
++                  </object>
++                </value>
++              </collection>
++            </field>
++          </object>
++        </object-param>
++      </init-params>
++    </component-plugin>
++  </external-component-plugins>
++
++  <external-component-plugins>
++    <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
++    <component-plugin>
++      <name>bind.datasource</name>
++      <set-method>addPlugin</set-method>
++      <type>org.exoplatform.services.naming.BindReferencePlugin</type>
++      <init-params>
++        <value-param>
++          <name>bind-name</name>
++          <value>jdbcexo</value>
++        </value-param>
++        <value-param>
++          <name>class-name</name>
++          <value>javax.sql.DataSource</value>
++        </value-param>
++        <value-param>
++          <name>factory</name>
++          <value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
++        </value-param>
++        <properties-param>
++          <name>ref-addresses</name>
++          <description>ref-addresses</description>
++          <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
++          <property name='url' value='jdbc:hsqldb:mem:db/jdbcexo' />
++          <property name="username" value="sa" />
++          <property name="password" value="" />
++        </properties-param>
++      </init-params>
++    </component-plugin>
++  </external-component-plugins>
++  
++  <external-component-plugins>
++    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
++    <component-plugin>
++      <name>add.nodeType</name>
++      <set-method>addPlugin</set-method>
++      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
++      <priority>99</priority>
++      <init-params>
++        <values-param>
++          <name>autoCreatedInNewRepository</name>
++          <description>Node types configuration file</description>
++          <value>jar:/conf/jcr/mock-nodetypes-config.xml</value>
++        </values-param>
++      </init-params>
++    </component-plugin>
++  </external-component-plugins>
++</configuration>
+Index: core/publication/src/test/java/conf/jcr/mock-nodetypes-config.xml
+===================================================================
+--- core/publication/src/test/java/conf/jcr/mock-nodetypes-config.xml	(revision 0)
++++ core/publication/src/test/java/conf/jcr/mock-nodetypes-config.xml	(revision 0)
+@@ -0,0 +1,185 @@
++<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
++  xmlns:jcr="http://www.jcp.org/jcr/1.0">
++  
++	<nodeType name="exo:hiddenable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++    </propertyDefinitions>			
++  </nodeType>
++
++  <nodeType name="exo:musicFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName=""> 		
++  </nodeType>
++  
++  <nodeType name="exo:documentFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++ 	</nodeType>
++  
++  <nodeType name="exo:pictureFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++  
++  <nodeType name="exo:searchFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++  
++  <nodeType name="exo:videoFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++  
++  <nodeType name="exo:favoriteFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>  	
++	  <nodeType name="exo:trashFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++  
++  <nodeType name="exo:folksonomyFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++
++  <nodeType name="exo:tagged" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++  </nodeType>
++	
++	<nodeType name="exo:portalFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++	
++  <nodeType name="exo:jsFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:folder</supertype>
++    </supertypes>
++  </nodeType>
++	
++  <nodeType name="exo:datetime" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:dateCreated" requiredType="Date" autoCreated="true" mandatory="false"
++        onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>	      
++      </propertyDefinition>
++      <propertyDefinition name="exo:dateModified" requiredType="Date" autoCreated="true" mandatory="false"
++        onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>	      
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>
++	
++  <nodeType name="exo:cssFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:folder</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="*" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>			
++	
++  <nodeType name="exo:multimediaFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="images" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="videos" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="audio" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>
++
++  <nodeType name="exo:webFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++	
++  <nodeType name="exo:themeFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>
++	
++  <nodeType name="exo:linkFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
++    <supertypes>
++      <supertype>nt:unstructured</supertype>
++    </supertypes>
++  </nodeType>		
++	
++  <nodeType name="metadata:siteMetadata" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>exo:metadata</supertype>
++    </supertypes>
++    <propertyDefinitions>
++      <propertyDefinition name="siteTitle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="description" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="keywords" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++      <propertyDefinition name="robots" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints />
++      </propertyDefinition>
++    </propertyDefinitions>
++  </nodeType>			
++	
++  <nodeType name="exo:webContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>mix:referenceable</supertype>
++      <supertype>nt:unstructured</supertype>
++      <supertype>nt:hierarchyNode</supertype>
++      <supertype>exo:rss-enable</supertype>
++    </supertypes>
++    <childNodeDefinitions>
++      <childNodeDefinition name="js" defaultPrimaryType="exo:jsFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++      <childNodeDefinition name="medias" defaultPrimaryType="exo:multimediaFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
++        <requiredPrimaryTypes>
++          <requiredPrimaryType>nt:base</requiredPrimaryType>
++        </requiredPrimaryTypes>
++      </childNodeDefinition>
++    </childNodeDefinitions>
++  </nodeType>	
++	
++  <nodeType name="exo:rss-enable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <propertyDefinitions>
++      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
++        protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>
++      <propertyDefinition name="exo:summary" requiredType="String" autoCreated="false" mandatory="false"
++        onParentVersion="COPY" protected="false" multiple="false">
++        <valueConstraints/>
++      </propertyDefinition>        
++    </propertyDefinitions>
++  </nodeType>	
++ <!--
++  <nodeType name="publication:simplePublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
++    <supertypes>
++      <supertype>publication:webpagesPublication</supertype>
++    </supertypes>
++  </nodeType>
++		-->
++
++</nodeTypes>
+\ No newline at end of file
+Index: core/publication/src/test/java/org/exoplatform/services/wcm/publication/TestWCMComposer.java
+===================================================================
+--- core/publication/src/test/java/org/exoplatform/services/wcm/publication/TestWCMComposer.java	(revision 0)
++++ core/publication/src/test/java/org/exoplatform/services/wcm/publication/TestWCMComposer.java	(revision 0)
+@@ -0,0 +1,72 @@
++package org.exoplatform.services.wcm.publication;
++
++import java.util.HashMap;
++
++import javax.jcr.Node;
++import javax.jcr.Session;
++
++import junit.framework.TestCase;
++
++import org.exoplatform.container.PortalContainer;
++import org.exoplatform.services.jcr.RepositoryService;
++import org.exoplatform.services.jcr.ext.app.SessionProviderService;
++import org.exoplatform.services.jcr.ext.common.SessionProvider;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
++
++public class TestWCMComposer extends TestCase {
++  protected PortalContainer container;
++
++  protected Session         session;
++
++  SessionProvider           sessionProvider         = null;
++
++  SessionProviderService    sessionProviderService_ = null;
++
++  WCMComposer               wcmComposer             = null;
++
++  String                    repository              = "repository";
++
++  String                    workspace               = "collaboration";
++
++	@Override
++  public void setUp() throws Exception {
++    super.setUp();
++    container = PortalContainer.getInstance();
++    sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
++    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
++    session = repositoryService.getRepository(repository).getSystemSession(workspace);
++    
++    wcmComposer = (WCMComposer) container.getComponentInstanceOfType(WCMComposer.class);
++  }
++
++	/**
++	 * test getContent for an authorized node
++	 * @throws Exception
++	 */
++	public void testGetContentAuthorized() throws Exception {
++	  
++	  sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
++		
++		HashMap<String, String> filters = new HashMap<String, String>();
++
++		String nodeIdentifier = "/sites content";
++		Node node = wcmComposer.getContent(repository, workspace, nodeIdentifier, filters, sessionProvider);
++		
++		assertNotNull(node);
++	}
++	
++	/**
++	 * test getContent for an non authorized node
++	 * @throws Exception
++	 */
++	public void testGetContentNotAuthorized() throws Exception {
++    sessionProvider = sessionProviderService_.getSystemSessionProvider(null);	  
++		
++		HashMap<String, String> filters = new HashMap<String, String>();
++
++		String nodeIdentifier = "/exo:application";
++		Node node = wcmComposer.getContent(repository, workspace, nodeIdentifier, filters, sessionProvider);
++		
++		assertNull(node);
++	}
++}
+\ No newline at end of file
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(revision 80377)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(working copy)
+@@ -481,7 +481,9 @@
+       }
+     }
+ 
+-    viewNode = getPublishedContent(node, filters);
++    if (node != null) {
++      viewNode = getPublishedContent(node, filters);
++    }
+ 
+     return viewNode;
+   }
+Index: core/publication/pom.xml
+===================================================================
+--- core/publication/pom.xml	(revision 80377)
++++ core/publication/pom.xml	(working copy)
+@@ -87,6 +87,12 @@
+ 		  <version>${org.exoplatform.commons.version}</version>
+ 			<scope>provided</scope>
+ 		</dependency>
++    <dependency>
++      <groupId>org.slf4j</groupId>
++      <artifactId>slf4j-simple</artifactId>
++      <version>${org.slf4j.slf4j-simple.version}</version>
++      <scope>test</scope>
++    </dependency>		
+   </dependencies>
+   <build>
+     <resources>

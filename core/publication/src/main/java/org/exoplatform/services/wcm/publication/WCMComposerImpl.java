@@ -481,7 +481,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       }
     }
 
-    viewNode = getPublishedContent(node, filters);
+    if (node != null) {
+      viewNode = getPublishedContent(node, filters);
+    }
 
     return viewNode;
   }

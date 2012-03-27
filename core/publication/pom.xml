@@ -87,6 +87,12 @@
 		  <version>${org.exoplatform.commons.version}</version>
 			<scope>provided</scope>
 		</dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${org.slf4j.slf4j-simple.version}</version>
+      <scope>test</scope>
+    </dependency>		
   </dependencies>
   <build>
     <resources>

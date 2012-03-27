@@ -19,10 +19,9 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-
 
   <component>
     <key>org.exoplatform.services.resources.LocaleConfigService</key>
@@ -120,18 +119,15 @@
     <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
     <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
   </component>
+		
+  <component>
+      <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
+      <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
+		</component>		
 
   <component>
     <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
     <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-
-  <component>
-    <type>org.exoplatform.groovyscript.text.TemplateService</type>
-  </component>
- 
-  <component>
-    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
   </component>
 
   <component>
@@ -153,9 +149,27 @@
     <key>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</key>
     <type>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</type>
   </component>
+	
+  <component>
+    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
+    <type>org.exoplatform.portal.mop.navigation.NavigationServiceImpl</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
+    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
+  </component>
 
   <component>
     <type>org.exoplatform.portal.resource.SkinService</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.groovyscript.text.TemplateService</type>
+  </component>
+ 
+  <component>
+    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
   </component>
 
   <external-component-plugins>
@@ -227,5 +241,6 @@
   <import>classpath:/conf/dms/test-system-configuration.xml</import>
   <import>classpath:/conf/dms/test-collaboration-configuration.xml</import>
   <import>classpath:/conf/wcm/test-configuration.xml</import>
+	<import>classpath:/conf/wcm/test-publication-configuration.xml</import>
 
 </configuration>
