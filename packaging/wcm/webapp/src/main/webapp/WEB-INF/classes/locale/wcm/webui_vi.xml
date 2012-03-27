@@ -184,6 +184,10 @@
       <ToDate>đến ngày</ToDate>
       <DocumentType>Kiểu tài liệu</DocumentType>
     </title>
+    <tooltip>
+      <AddMetadataType>Thêm thuộc tính</AddMetadataType>
+      <AddNodeType>Têm kiểu node</AddNodeType>
+    </tooltip>    
     <label>
       <option>
         <CREATED>Ngày tạo</CREATED>

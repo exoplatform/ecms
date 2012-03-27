@@ -194,6 +194,10 @@
       <ToDate>To Date</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
+    <tooltip>
+      <AddMetadataType>Add property</AddMetadataType>
+      <AddNodeType>Add node type</AddNodeType>
+    </tooltip>    
     <label>
       <option>
         <CREATED>Created</CREATED>

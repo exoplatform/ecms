@@ -184,6 +184,10 @@
       <ToDate>終了日</ToDate>
       <DocumentType>ドキュメントタイプ</DocumentType>
     </title>
+    <tooltip>
+      <AddMetadataType>プロパティの追加</AddMetadataType>
+      <AddNodeType>ノードタイプの追加</AddNodeType>
+    </tooltip>    
     <label>
       <option>
         <CREATED>作成</CREATED>

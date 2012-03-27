@@ -102,9 +102,9 @@ public class UIContentNodeTypeSelector extends UIForm {
    * @param uiWCSearchForm the ui wc search form
    */
   private void setNodeTypes(List<String> selectedNodeTypes, UIContentSearchForm uiWCSearchForm) {
-    StringBuffer strNodeTypes = null;
+    StringBuffer strNodeTypes = new StringBuffer();
     for (int i = 0; i < selectedNodeTypes.size(); i++) {
-      if (strNodeTypes == null)
+      if (strNodeTypes.length() == 0)
         strNodeTypes = new StringBuffer(selectedNodeTypes.get(i));
       else
         strNodeTypes.append(",").append(selectedNodeTypes.get(i));

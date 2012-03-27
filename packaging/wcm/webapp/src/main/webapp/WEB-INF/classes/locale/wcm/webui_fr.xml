@@ -194,6 +194,10 @@
       <ToDate>à</ToDate>
       <DocumentType>Type de document</DocumentType>
     </title>
+    <tooltip>
+      <AddMetadataType>Ajouter une propriété</AddMetadataType>
+      <AddNodeType>Ajouter un type de noeud</AddNodeType>
+    </tooltip>    
     <label>
       <option>
         <CREATED>Créé</CREATED>

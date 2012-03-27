@@ -1,0 +1,112 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_ja.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_ja.xml	(revision 80473)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_ja.xml	(working copy)
+@@ -184,6 +184,10 @@
+       <ToDate>終了日</ToDate>
+       <DocumentType>ドキュメントタイプ</DocumentType>
+     </title>
++    <tooltip>
++      <AddMetadataType>プロパティの追加</AddMetadataType>
++      <AddNodeType>ノードタイプの追加</AddNodeType>
++    </tooltip>    
+     <label>
+       <option>
+         <CREATED>作成</CREATED>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml	(revision 80473)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml	(working copy)
+@@ -194,6 +194,10 @@
+       <ToDate>To Date</ToDate>
+       <DocumentType>Document Type</DocumentType>
+     </title>
++    <tooltip>
++      <AddMetadataType>Add property</AddMetadataType>
++      <AddNodeType>Add node type</AddNodeType>
++    </tooltip>    
+     <label>
+       <option>
+         <CREATED>Created</CREATED>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_pt_BR.properties
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_pt_BR.properties	(revision 80473)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_pt_BR.properties	(working copy)
+@@ -167,4 +167,6 @@
+ UIPermissionInputSetWithAction.title.SelectMember=Selecionar membro
+ UIPortalApplication.title.abort=Abort
+ CategoryNavigationTemplate.label.home=Home
+-Breadcrumb.label.home=Home
+\ No newline at end of file
++Breadcrumb.label.home=Home
++UIContentSearchForm.tooltip.AddNodeType=Adicionar tipo de node
++UIContentSearchForm.tooltip.AddMetadataType=Adicionar propriedade
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml	(revision 80473)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml	(working copy)
+@@ -194,6 +194,10 @@
+       <ToDate>à</ToDate>
+       <DocumentType>Type de document</DocumentType>
+     </title>
++    <tooltip>
++      <AddMetadataType>Ajouter une propriété</AddMetadataType>
++      <AddNodeType>Ajouter un type de noeud</AddNodeType>
++    </tooltip>    
+     <label>
+       <option>
+         <CREATED>Créé</CREATED>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml	(revision 80473)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml	(working copy)
+@@ -184,6 +184,10 @@
+       <ToDate>đến ngày</ToDate>
+       <DocumentType>Kiểu tài liệu</DocumentType>
+     </title>
++    <tooltip>
++      <AddMetadataType>Thêm thuộc tính</AddMetadataType>
++      <AddNodeType>Têm kiểu node</AddNodeType>
++    </tooltip>    
+     <label>
+       <option>
+         <CREATED>Ngày tạo</CREATED>
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentNodeTypeSelector.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentNodeTypeSelector.java	(revision 80473)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentNodeTypeSelector.java	(working copy)
+@@ -102,9 +102,9 @@
+    * @param uiWCSearchForm the ui wc search form
+    */
+   private void setNodeTypes(List<String> selectedNodeTypes, UIContentSearchForm uiWCSearchForm) {
+-    StringBuffer strNodeTypes = null;
++    StringBuffer strNodeTypes = new StringBuffer();
+     for (int i = 0; i < selectedNodeTypes.size(); i++) {
+-      if (strNodeTypes == null)
++      if (strNodeTypes.length() == 0)
+         strNodeTypes = new StringBuffer(selectedNodeTypes.get(i));
+       else
+         strNodeTypes.append(",").append(selectedNodeTypes.get(i));
+Index: core/webui/src/main/resources/groovy/wcm/webui/selector/content/UIContentSearchForm.gtmpl
+===================================================================
+--- core/webui/src/main/resources/groovy/wcm/webui/selector/content/UIContentSearchForm.gtmpl	(revision 80473)
++++ core/webui/src/main/resources/groovy/wcm/webui/selector/content/UIContentSearchForm.gtmpl	(working copy)
+@@ -31,7 +31,7 @@
+     <div class="ContentSearchForm">
+       <input type="radio" class="radioboxes" id="<%=uicomponent.PROPERTY%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.PROPERTY%>"/>
+       <label class="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Property")%>:</span></label> <%uiform.renderField(uiform.getChildById(uicomponent.PROPERTY));%>
+-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddMetadataType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>" title="<%= _ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>" />
++      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddMetadataType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" />
+       <label calss="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Contain")%> :</span> </label> <%uiform.renderField(uiform.getChildById(uicomponent.CONTAIN));%>
+     </div>
+  
+@@ -49,7 +49,7 @@
+       <input type="radio" class="radioboxes" id="<%=uicomponent.DOC_TYPE%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.DOC_TYPE%>"/>
+       <span><%= _ctx.appRes("UIContentSearchForm.title.DocumentType")%>:</span>
+       <%uiform.renderField(uiform.getChildById(uicomponent.DOC_TYPE));%>
+-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddNodeType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIConstraintForm.tooltip.AddNodeType")%>" title="<%= _ctx.appRes("UIConstraintForm.tooltip.AddNodeType")%>" />
++      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddNodeType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" />
+     </div>
+      
+       <div class="UIAction">
