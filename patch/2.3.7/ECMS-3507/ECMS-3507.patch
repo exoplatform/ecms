@@ -1,0 +1,12 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl	(revision 80178)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-form/UIDefaultSearchForm.gtmpl	(working copy)
+@@ -66,7 +66,6 @@
+           searchOption[0].form.elements["portalSelector"].value = eXo.env.portal.portalName;
+           searchOption[0].form.elements["portalSelector"].disabled = true;
+         } else {
+-          searchOption[0].form.elements["portalSelector"].value = 'all';
+           searchOption[0].form.elements["portalSelector"].disabled = false;
+         }
+         searchOption[0].onchange = function() { toggleSet(); };
