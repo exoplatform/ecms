@@ -170,6 +170,27 @@
     <% }
      }     
     %>
+          
+    <script type="text/javascript">
+      function initLoading(lblLoading, lblAbort) {
+        var ajaxLoading = document.getElementById("AjaxLoadingMask");
+        var loadingText = document.createElement("span");
+        loadingText.className = "LoadingText";
+        loadingText.innerHTML = lblLoading;
+        ajaxLoading.appendChild(loadingText);
+        
+        var loadingBar = document.createElement("span");
+        loadingBar.className = "LoadingProgressBar";
+        ajaxLoading.appendChild(loadingBar);
+        
+        var closeIcon = document.createElement("a");
+        closeIcon.className = "CloseLoadIcon";
+        closeIcon.setAttribute("href", "javascript:ajaxAbort();");
+        closeIcon.setAttribute("title", lblAbort);
+        closeIcon.innerHTML = "&nbsp;";
+        ajaxLoading.appendChild(closeIcon);
+      }
+    </script>
   </head>
 
   <body style="height: 100%;">
@@ -180,11 +201,9 @@
     %>
  
 	<div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
-    	
 		<div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
-          <span class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></span>
-          <span class="LoadingProgressBar"></span>
-          
-          <a href="javascript:ajaxAbort();" class="CloseLoadIcon" title="<%=_ctx.appRes("UIPortalApplication.title.abort")%>">&nbsp;</a>
-          
 	  </div>
+    
+    <script type="text/javascript">
+      initLoading('<%=_ctx.appRes("UIPortalApplication.label.Loading")%>', '<%=_ctx.appRes("UIPortalApplication.title.abort")%>');
+    </script>
