@@ -25,8 +25,10 @@
 <%@ page import="org.exoplatform.services.resources.ResourceBundleService"%>
 <%@ page import="java.util.ResourceBundle"%>
 <%@ page import="org.exoplatform.web.login.InitiateLoginServlet"%>
+<%@ page import="org.gatein.common.text.EntityEncoder"%>
 <%@ page language="java" %>
 <%
+ 
   String contextPath = request.getContextPath() ;
 
   String username = request.getParameter("j_username");
@@ -37,6 +39,8 @@
   ResourceBundleService service = (ResourceBundleService) PortalContainer.getCurrentInstance(session.getServletContext())
   														.getComponentInstanceOfType(ResourceBundleService.class);
   ResourceBundle res = service.getResourceBundle(service.getSharedResourceBundleNames(), request.getLocale()) ;
+  
+  String lang = request.getLocale().getLanguage();
   
   Cookie cookie = new Cookie(InitiateLoginServlet.COOKIE_NAME, "");
 	cookie.setPath(request.getContextPath());
@@ -51,9 +55,8 @@
 <!DOCTYPE html 
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-           
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=lang%>" lang="<%=lang%>">
   <head>
     <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>   
@@ -62,60 +65,60 @@
     <script type="text/javascript" src="/eXoResources/javascript/eXo.js"></script>
     <script type="text/javascript" src="/eXoResources/javascript/eXo/portal/UIPortalControl.js"></script>
   </head>
-  <body style="text-align: center; background: #b5b6b6; font-family: arial, tahoma, verdana">
+  <body>
     <div class="UILogin">
       <div class="LoginHeader"></div>
       <div class="LoginContent">
-        <div class="CenterLoginContent">
-          <%/*Begin form*/%>
+				<div style="line-height: 12px; padding: 6px 3px 0 0; height: 27px; font-size: 11px;">
+					<%/*Begin form*/%>
           <%
             if(username.length() > 0 || password.length() > 0) {
+               EntityEncoder encoder = EntityEncoder.FULL;
+               username = encoder.encode(username);
+
           %>
           <font color="red"><%=res.getString("UILoginForm.label.SigninFail")%></font><%}%>
+				</div>
+        <div class="CenterLoginContent">
           <form name="loginForm" action="<%= contextPath + "/login"%>" method="post" style="margin: 0px;">
                 <% if (uri != null) { %>
           		<input type="hidden" name="initialURI" value="<%=uri%>"/>
                 <% } %>
-          		<table> 
-	              <tr class="FieldContainer">
-		              <td class="FieldLabel"><%=res.getString("UILoginForm.label.UserName")%></td>
-		              <td><input class="UserName" name="username" value="<%=username%>"/></td>
-			          </tr>
-		            <tr class="FieldContainer" id="UIPortalLoginFormControl" onkeypress="eXo.portal.UIPortalControl.onEnterPress(event);">
-		              <td class="FieldLabel"><%=res.getString("UILoginForm.label.password")%></td>
-		              <td><input class="Password" type="password" name="password" value=""/></td>
-		            </tr>
-		            <tr class="FieldContainer" onkeypress="eXo.portal.UIPortalControl.onEnterPress(event);">
-		              <td class="FieldLabel"><input type="checkbox" name="rememberme" value="true"/></td>
-		              <td><%=res.getString("UILoginForm.label.RememberOnComputer")%></td>
-		            </tr>
-		          </table>
-		          <div id="UIPortalLoginFormAction" class="LoginButton" onclick="login();">
-		            <table class="LoginButtonContainer">
-		            	<tr>
-			              <td class="Button">
-			                <div class="LeftButton">
-			                  <div class="RightButton">
-			                    <div class="MiddleButton">
-			                    	<a href="#"><%=res.getString("UILoginForm.label.Signin")%></a>
-			                    </div>
-			                  </div>
-			                </div>
-			              </td>
-			             </tr>
-		            </table>
-		          </div>
-		          <div class="ClearLeft"><span></span></div>
-		          <script type='text/javascript'>			            
-              function login() {
-                document.loginForm.submit();                   
-              }
-            </script>
-		        </form>
-		        <%/*End form*/%>
+								
+					<div class="FieldLabel"><label for="username"><%=res.getString("UILoginForm.label.UserName")%></label></div>
+					<div>
+            <input class="UserName" id="username" name="username" type="text" value="<%=username%>"/>
+          </div>
+				
+					<div class="FieldLabel"><label for="password"><%=res.getString("UILoginForm.label.password")%></label></div>
+					<div id="UIPortalLoginFormControl" onkeypress="eXo.portal.UIPortalControl.onEnterPress(event);">
+            <input class="Password" type="password" id="password" name="password" value=""/>
+          </div>  
+					
+					<div class="FieldLabel" onkeypress="eXo.portal.UIPortalControl.onEnterPress(event);">
+						<input type="checkbox" class="checkbox" id="rememberme" name="rememberme" value="true"/>
+						<label for="rememberme"><%=res.getString("UILoginForm.label.RememberOnComputer")%></label>
+					</div>
+		         
+					<div id="UIPortalLoginFormAction" class="LoginButton" onclick="login();">
+						<div class="LeftButton">
+							<div class="RightButton">
+								<div class="MiddleButton">
+									<a href="#"><%=res.getString("UILoginForm.label.Signin")%></a>
+								</div>
+							</div>
+						</div>  
+					</div>
+					<script type='text/javascript'>			            
+					function login() {
+						document.loginForm.submit();                   
+					}
+				</script>
+				</form>
+				<%/*End form*/%>
         </div>
       </div>
     </div>
-    <span style="font-size: 11px; color: #3f3f3f; text-align: center"><%=res.getString("UILoginForm.label.Copyright")%></span>
+    <div style="font-size: 11px; color: #3f3f3f; text-align: center">Copyright &copy; 2010 eXo Platform SAS, all rights reserved.</div>
   </body>
 </html>
