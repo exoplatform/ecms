@@ -15,7 +15,7 @@
 							def actionLink = uicomponent.event("RemoveThumbnail");
 						%>		
 							<div>
-								<img src="$thumbnailImage" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%> />
+								<img src="$thumbnailImage" alt="$thumbnailImage" />
 								<img onclick="$actionLink" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>" class="ActionIcon Remove16x16Icon" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"/>
 							</div>
 						<%

@@ -1,0 +1,13 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/thumbnail/UIThumbnailForm.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/thumbnail/UIThumbnailForm.gtmpl	(revision 80177)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/thumbnail/UIThumbnailForm.gtmpl	(working copy)
+@@ -15,7 +15,7 @@
+ 							def actionLink = uicomponent.event("RemoveThumbnail");
+ 						%>		
+ 							<div>
+-								<img src="$thumbnailImage" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%> />
++								<img src="$thumbnailImage" alt="$thumbnailImage" />
+ 								<img onclick="$actionLink" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>" class="ActionIcon Remove16x16Icon" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"/>
+ 							</div>
+ 						<%
