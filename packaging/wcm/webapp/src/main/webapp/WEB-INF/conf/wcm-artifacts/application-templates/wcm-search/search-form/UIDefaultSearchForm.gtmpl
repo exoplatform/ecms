@@ -25,10 +25,13 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
       <div class="FormContainer">
         <table class="UIFormGrid">
           <tr>
+            <td class="FieldLabel">
+              <label for="<%=uiKeywordInput.getId()%>">
+                <%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
+              </label>
+            </td>
             <td>
-              <%
-                uiform.renderField(uiKeywordInput)
-              %>
+              <% uiform.renderField(uiKeywordInput) %>
             </td>
             <td>
               <div class="UIAction">
@@ -37,11 +40,11 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
             </td>
           </tr>
           <tr>
+            <td></td>
             <td>
-                  <%
-                    uiform.renderField(searchOptionRadioBox)
-                    uiform.renderField(uiPortalSelectBox)
-                  %>
+               <fieldset style="border:none;"><legend> </legend><%uiform.renderField(searchOptionRadioBox)%>
+                 <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
+               </fieldset>
             </td>
             <td>
             </td>
