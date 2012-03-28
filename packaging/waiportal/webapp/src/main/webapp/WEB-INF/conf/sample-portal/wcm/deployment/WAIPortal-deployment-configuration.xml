@@ -430,6 +430,9 @@
           <object type="org.exoplatform.services.wcm.extensions.deployment.PublicationDeploymentDescriptor">
             <field name="contents">
               <collection type="java.util.ArrayList">
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/home</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/accessibility</string></value>
+                                
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/technology/integration</string></value>
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/technology/technical-specifications</string></value>
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/features/portal-content</string></value>
@@ -439,6 +442,11 @@
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/customers/subscription-support</string></value>
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/competence/prepare-your-team</string></value>
                 <value><string>collaboration:/sites content/live/WAIPortal/web contents/competence/work-with-a-partner</string></value>
+                
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/Footer</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/Logo</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/PortalToolBar</string></value>
+                <value><string>collaboration:/sites content/live/WAIPortal/web contents/site artifacts/Signin</string></value>
               </collection>
             </field>
           </object>
