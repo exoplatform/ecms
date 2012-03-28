@@ -1424,6 +1424,231 @@ After being created successfully, a file document with the <emphasis>text/html</
     </mediaobject>
 	</para>
 
+	<citetitle>
+	<para xml:id="proc-User_Guide-Add_a_document-Create_new_accessible_media"><emphasis role="bold">Create an accessible media</emphasis></para>
+  </citetitle>
+  <procedure>
+      <step>
+        <para>
+          Follow the instructions
+          in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
+          to open the content template list, and select the <emphasis role="bold">Accessible Media</emphasis> template.
+        </para>
+        <mediaobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/accessible_media.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata width="150mm" scalefit="1" align="center" fileref="images/accessible_media.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+      <para>
+          <emphasis role="bold">Details:</emphasis>
+        </para>
+        <table>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Field</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><emphasis role="bold">Name</emphasis></entry>
+                <entry>The document name which is required. Special characters (@ # % &amp; * ( ) “
+                  &apos; : ; [ ] {} / !) are not allowed in the <emphasis role="bold">Name</emphasis> field.
+                </entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Categories</emphasis></entry>
+                <entry>The name of the selected categories.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Language</emphasis></entry>
+                <entry>The language of the media.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Content</emphasis></entry>
+                <entry>The content of the media which is required.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Title</emphasis></entry>
+                <entry>The display name of the media.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Creator</emphasis></entry>
+                <entry>The creator of the media.</entry>
+              </row>
+
+              <row>
+                <entry><emphasis role="bold">Source</emphasis></entry>
+                <entry>The source of the media.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Captions</emphasis></entry>
+                <entry>Provide the text of the dialogue and important sounds.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Audio description</emphasis></entry>
+                <entry>Provide the narrate track of the media. You can browse and upload another media file from your local device to set it as the audio description.</entry>
+              </row>
+              <row>
+                <entry><emphasis role="bold">Alternative text</emphasis></entry>
+                <entry>Provide the descriptive information about the media.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </step>
+    <step>
+      <para>Input the information in the fields, and attach existing files from your local device to the following fields:</para>
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Content</emphasis>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Captions</emphasis>: It must be a <emphasis>.srt</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Audio description</emphasis>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+        </listitem>
+      </itemizedlist>
+    </step>
+    <step>
+      <para>
+          Click
+          <emphasis role="bold">Save</emphasis>
+          or
+          <emphasis role="bold">Save &amp; Close</emphasis>
+          to finish.
+        </para>
+    </step>
+  </procedure>
+   <para>The accessible media can be played right after being created.</para>
+    <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/play-media.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="120mm" align="center" fileref="images/play-media.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+    <para><emphasis role="bold">Details</emphasis>:</para>
+    <table>
+			 <tgroup cols="2">
+				<thead>
+					<row>
+						<entry>
+							Button
+						</entry>
+						 <entry>
+							Function
+						</entry>
+					</row>
+				</thead>
+				 <tbody>
+					<row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/stop-button.png" format="PNG" width="4mm" scalefit="1"/>
+								</imageobject>
+							</mediaobject>
+						</entry>
+						 <entry>
+							Stop the media.
+						</entry>
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/play-button.png" format="PNG" width="4mm" scalefit="1" />
+								</imageobject>
+                <para>/</para>
+							</mediaobject>
+                            <mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/play-button1.png" format="PNG" width="4mm" scalefit="1" />
+								</imageobject>
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							Play the media. After clicking this button, <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/play-button.png" format="PNG" scalefit="1" width="4mm"/>
+            </imageobject>
+          </inlinemediaobject> will become
+           <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/pause-button.png" format="PNG" scalefit="1" width="4mm"/>
+            </imageobject>
+          </inlinemediaobject> and vice versa.
+						</entry>
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/previous-button.png" format="PNG" width="4mm" scalefit="1" />
+								</imageobject>
+							</mediaobject>
+						</entry>
+						 <entry>
+               Play the previous media.
+          </entry>
+				</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/next-button.png" format="PNG" width="4mm" scalefit="1"/>
+								</imageobject>
+							</mediaobject>
+						</entry>
+						 <entry>
+							Play the next media.
+						</entry>
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/audio-description-button.png" format="PNG" width="4mm" scalefit="1"/>
+								</imageobject>
+							</mediaobject>
+						</entry>
+						 <entry>
+							Listen to the audio description. This icon only appears if you attach another media with the audio description to the
+               <emphasis role="bold">Audio description</emphasis> field. After opening the audio description, to back to the original media, click
+               <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/back-the-original-video.png" format="PNG" scalefit="1" width="4mm"/>
+            </imageobject>
+          </inlinemediaobject>.
+						</entry>
+					</row>
+           <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+                           <imagedata align="center" fileref="images/caption-button.png" format="PNG" width="4mm" scalefit="1"/>
+								</imageobject>
+							</mediaobject>
+						</entry>
+						 <entry>
+							Activate/Deactivate the media caption. If you attach an <emphasis>.srt</emphasis> or <emphasis>.xml</emphasis> file to the <emphasis role="bold">Captions</emphasis> field, the caption will appear when you clicking this button.
+						</entry>
+					</row>
+        </tbody>
+			</tgroup>
+		</table>
+    <note>
+      You can also attach <emphasis role="bold">Captions</emphasis> and <emphasis role="bold">Audio description</emphasis> to the uploaded
+      media when <link linkend="sect-User_Guide-Actions-Edit_documents">editing this document</link>. To know how to upload a file, see the <link linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document">Attach files to a document</link> section.
+    </note>
   </section>
   <section id="sect-User_Guide-Actions-Add_Folder">
     <title>Add a folder</title>
