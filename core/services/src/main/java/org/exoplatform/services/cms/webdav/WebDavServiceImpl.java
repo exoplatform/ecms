@@ -407,6 +407,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
                       @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypes,
                       @HeaderParam(ExtHttpHeaders.CONTENTTYPE) MediaType mediaType,
+                      @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
 
@@ -446,6 +447,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              nodeTypeHeader,
                              mixinTypes,
                              mediaType,
+                             userAgent,
                              inputStream,
                              uriInfo);
     try {
