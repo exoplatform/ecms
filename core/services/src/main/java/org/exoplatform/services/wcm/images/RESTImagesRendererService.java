@@ -224,7 +224,7 @@ public class RESTImagesRendererService implements ResourceContainer{
     String restContextName = PortalContainer.getCurrentRestContextName();
 
     if (propertyName == null) {
-      if(!file.isNodeType("nt:file")) throw new UnsupportedOperationException("The node isn't nt:file");
+      if(!file.isNodeType("nt:file")) return null;
       InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
       if (stream.available() == 0) return null;
       stream.close();

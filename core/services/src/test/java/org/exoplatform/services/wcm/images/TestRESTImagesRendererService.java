@@ -76,13 +76,8 @@ public class TestRESTImagesRendererService extends BaseWCMTestCase {
       File file = new File("src/test/resources/test.html");
       Node imageNode = this.createdNodeImages(documentNode, file.getName(), getFileImages(file));
       restImagesRendererService.generateImageURI(imageNode.getParent(), null);
-      fail();
     } catch (Exception e) {
-      if(e instanceof UnsupportedOperationException) {
-        assertEquals("The node isn't nt:file", e.getMessage());
-      } else {
-        fail();
-      }
+      fail();
     }
   }
 

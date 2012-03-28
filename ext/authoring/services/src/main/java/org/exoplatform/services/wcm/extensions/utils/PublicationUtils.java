@@ -39,6 +39,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.deployment.PublicationDeploymentDescriptor;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -66,6 +67,7 @@ public class PublicationUtils {
 
         HashMap<String, String> context_ = new HashMap<String, String>();
         ExoContainer container = ExoContainerContext.getCurrentContainer();
+        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
         PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
         String containerName = containerInfo.getContainerName();
         context_.put("containerName", containerName);
@@ -82,7 +84,7 @@ public class PublicationUtils {
               ManageableRepository repository = repositoryService.getCurrentRepository();
               Session session = sessionProvider.getSession(src[0], repository);
               Node nodeSrc = session.getRootNode().getNode(src[1].substring(1));
-
+              if(publicationService.isNodeEnrolledInLifecycle(nodeSrc)) publicationService.unsubcribeLifecycle(nodeSrc);
               wcmPublicationService.updateLifecyleOnChangeContent(nodeSrc, "default", "__system", "published");
               nodeSrc.save();
 
