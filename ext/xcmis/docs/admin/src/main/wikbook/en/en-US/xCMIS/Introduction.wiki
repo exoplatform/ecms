@@ -1,5 +1,25 @@
-It is to introduce about basic knowledge of eXo CMIS, working principles and how to configure it.
-
+This chapter provides you the basic knowledge of eXo CMIS, working principles and how to configure it via the following topics:
+{docbook}
+<abstract>
+<itemizedlist>
+<listitem>
+<para>
+<link linkend="Adm_CMIS.Introduction.CMIS_specification">CMIS Specification</link>
+</para>
+</listitem>
+<listitem>
+<para>
+<link linkend="Adm_CMIS.Introduction.xCMIS_project">xCMIS project</link>
+</para>
+</listitem>
+<listitem>
+<para>
+<link linkend="Adm_CMIS.Introduction.eXo_CMIS">eXo CMIS</link>
+</para>
+</listitem>
+</itemizedlist>
+</abstract>
+{docbook}
 h1. CMIS Specification {anchor:id=Adm_CMIS.Introduction.CMIS_specification}
 
 {info}
@@ -11,14 +31,14 @@ OASIS Standard
 {info}
 
 The Content Management Interoperability Services (CMIS) standard defines a domain model and Web Services and Restful AtomPub bindings that can be used by applications to work with one or more Content Management repositories/systems.
-The CMIS interface is designed to be layered on top of existing Content Management systems and their existing programmatic interfaces. 
-It is not intended to prescribe how specific features should be implemented within those CM systems, nor to exhaustively expose all of the CM systems capabilities through the CMIS interfaces. Rather, it is intended to define a generic/universal set of capabilities provided by a CM system and a set of services for working with those capabilities.
+The CMIS interface is designed to be layered on the top of existing Content Management systems and their existing programmatic interfaces.
+It is not intended to prescribe how specific features should be implemented within those CM systems, nor to exhaustively expose all of the CM systems capabilities through the CMIS interfaces. It is intended to define a generic/universal set of capabilities provided by a CM system and a set of services for working with those capabilities.
 
-The CMIS specification provides a Web services interface that:
+The CMIS specification provides a Web service interface that:
 * Is designed to work over existing repositories, enabling customers to build and leverage applications against multiple repositories.
 * Decouples Web services and content from the content management repository, enabling customers to manage content independently.
-* Provides common Web services and Web 2.0 interfaces to dramatically simplify application development.
-* Is development platform and language agnostic.
+* Provides common Web services and Web 2.0 interfaces to dramatically simplify the application development.
+* Is a development platform and language agnostic.
 * Supports the composite application development and mash-up by the business or IT analysts.
 
 
@@ -37,14 +57,14 @@ eXo CMIS is one eXo Platform service exposing eXo Content via CMIS.
 eXo CMIS offers the way to access the eXo ECMS content from the CMIS 1.0 compatible Web client using the REST Atom protocol.
 
 {note}
-WS-SOAP/WSDL binding is also supported, but it is not delivered in the standard eXo Platform 3.0 bundle.
+WS-SOAP/WSDL binding is also supported, but it is not delivered in the standard eXo Platform 3.5 bundle.
 {note}
 
-eXo CMIS is built on the top of xCMIS embedded in Platform to expose the WCM drives as the CMIS repositories. 
+eXo CMIS is built on the top of xCMIS embedded in eXo Platform to expose the WCM drives as the CMIS repositories.
 The CMIS features are implemented as a set of components deployed on the eXo Container using XML files to describe the service configuration.
 
-!exo-cmis-wcm.png!
-Figure: how eXo CMIS works
+!images/exo-cmis-wcm.png|align="center", width="70mm", fo:scalefit="1",html:scalefit="0"!
+
 
 WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
-Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standard API.
+The storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes, and the _AtomPub_ bindings makes WCM structure available via CMIS standard API.

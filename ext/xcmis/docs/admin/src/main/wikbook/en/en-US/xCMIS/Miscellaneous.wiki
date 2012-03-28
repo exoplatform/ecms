@@ -1,13 +1,15 @@
 Clients can be useful for CMIS repositories access:
-* CMIS Expert, available at [http://www.xcmis.org|xCMIS.org] as a Google gadget.
-!cmis-expert.png!
+* CMIS Expert is available at [xCMIS.org|http://www.xcmis.org] as a Google gadget.
+
+!images/cmis-expert.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
 * IBM [CMIS Firefox Connector|http://www.ibm.com/developerworks/lotus/library/quickr-cmis/index.html#N101CC]
 {warning}
 The IBM CMIS Firefox plugin is not compatible with Firefox 3.6.
 {warning}
-!ibm-ff-cmis.png!
 
-* Flex+AIR and Flex+Browser CMIS clients, based on FlexSpaces framework. [http://code.google.com/p/cmisspaces]
-!cmis-air2.png!
+!images/ibm-ff-cmis.png|align="center" width="80mm" fo:scalefit="1" html:scalefit="0"!
 
+* Flex+AIR and Flex+Browser CMIS clients, based on FlexSpaces framework. See more details at [http://code.google.com/p/cmisspaces].
+
+!images/cmis-air2.png|align="center" width="80mm" fo:scalefit="1" html:scalefit="0"!
