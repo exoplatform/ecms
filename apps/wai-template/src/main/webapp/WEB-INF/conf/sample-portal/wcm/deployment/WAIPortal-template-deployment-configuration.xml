@@ -44,6 +44,30 @@
           <value>war:/conf/sample-portal/wcm/artifacts/application-templates/waiportal/content-list-viewer</value>
         </value-param>
         <object-param>
+          <name>Authentication Area</name>
+          <description>Authentication Area Template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>AuthenticationArea.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>WAI Portal ToolBar</name>
+          <description>WAI Portal ToolBar Template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>WAIPortalToolBar.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>category.folder.list.viewer</name>
           <description>Category navigation template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">

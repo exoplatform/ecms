@@ -4,7 +4,10 @@
     <welcome>ترحيب</welcome>
     <login>دخول</login>
     <logout>خروج</logout>
-    <language>تغيير اللغة</language>
+    <language>
+      <en>Switch to English</en>
+      <fr>Switch to French</fr>
+    </language>
     <register>تسجل</register>
   </Signin>
   <Toolbar>
@@ -16,6 +19,7 @@
     <LargeSize>Large Size</LargeSize>
     <NormalContrast>Normal Contrast</NormalContrast>
     <HighContrast>High Contrast</HighContrast>
+    <Search>Search</Search>
   </Toolbar>
   <Logo>
     <GoHome>Go to Home</GoHome>

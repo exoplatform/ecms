@@ -4,7 +4,10 @@
     <welcome>Chào mừng</welcome>
     <login>Đăng nhập</login>
     <logout>Thoát</logout>
-    <language>Thay đổi ngôn ngữ</language>
+    <language>
+      <en>Switch to English</en>
+      <fr>Switch to French</fr>
+    </language>
     <register>Đăng ký</register>
   </Signin>
   <Toolbar>
@@ -16,6 +19,7 @@
     <LargeSize>Cỡ chữ lớn</LargeSize>
     <NormalContrast>Tương phản thường</NormalContrast>
     <HighContrast>Tương phản cao</HighContrast>
+    <Search>Search</Search>
   </Toolbar>
   <Logo>
     <GoHome>Về trang chủ</GoHome>

@@ -31,6 +31,11 @@
       <js-path>/javascript/eXo/ecm/CategoryNavigation.js</js-path>
       <js-priority>50</js-priority>
     </param>
+    <param>
+      <js-module>eXo.ecm.WAIPortalToolbar</js-module>
+      <js-path>/javascript/eXo/ecm/WAIPortalToolbar.js</js-path>
+      <js-priority>50</js-priority>
+    </param>
   </javascript>
 </gatein-resources>
 

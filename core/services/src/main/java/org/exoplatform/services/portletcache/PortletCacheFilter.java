@@ -95,8 +95,8 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
     Boolean sharedCache = TRUE.equals(req.getPreferences().getValue(SHARED_CACHE, FALSE));
     PortletMode portletMode = req.getPortletMode();
     
-    if (!NO_CACHE.equals(exoCacheUsageRequestParam) && 
-        (req.getRemoteUser() == null || (!quickEdit && sharedCache && !isPortalEditMode())) &&
+    if (!NO_CACHE.equals(exoCacheUsageRequestParam) && sharedCache &&
+        (req.getRemoteUser() == null || (!quickEdit && !isPortalEditMode())) &&
         !PortletMode.EDIT.equals(portletMode)) {
       Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
       //
