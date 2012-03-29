@@ -37,4 +37,8 @@ public class SitemapHandler extends WebRequestHandler {
       out.println(sitemapContent);
     }
   }
+  
+  public boolean getRequiresLifeCycle() {
+  	return true;
+  }
 }

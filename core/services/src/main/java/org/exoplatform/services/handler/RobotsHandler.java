@@ -38,5 +38,9 @@ public class RobotsHandler extends WebRequestHandler {
         out.println(robotsContent);
       }
     }
+    
+    public boolean getRequiresLifeCycle() {
+    	return true;
+    }
 
 }
