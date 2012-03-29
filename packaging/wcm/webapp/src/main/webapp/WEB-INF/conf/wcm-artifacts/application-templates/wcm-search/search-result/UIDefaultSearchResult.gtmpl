@@ -129,7 +129,7 @@
            <%
           }
           %>
-           <div class="ItemDetails" id="ItemDetails">
+           <div class="ItemDetails">
             <%
              for (int i = 1; i < listNavigationNodeUris.size(); i ++) {
               itemUrl = uicomponent.getPublishedNodeURI(listNavigationNodeUris.get(i));

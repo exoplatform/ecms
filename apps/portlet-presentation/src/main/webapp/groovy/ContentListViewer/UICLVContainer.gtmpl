@@ -5,11 +5,12 @@
 		import org.exoplatform.wcm.webui.Utils;
 		
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
-		def rcontext = _ctx.getRequestContext() ;		
+		def rcontext = _ctx.getRequestContext() ;	
+		def className = uicomponent.getPortletName();
 %>
-<div class="$uicomponent.id " id="$uicomponent.id" 
-	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'"
-	onfocus="this.className = '$uicomponent.id $hoverClass'" onblur="this.className = '$uicomponent.id'"
+<div class="$className" id="$uicomponent.id" 
+	onmouseover="this.className = '$className $hoverClass'" onmouseout="this.className = '$className'"
+	onfocus="this.className = '$className $hoverClass'" onblur="this.className = '$className'"
 	>
 	<%
 	

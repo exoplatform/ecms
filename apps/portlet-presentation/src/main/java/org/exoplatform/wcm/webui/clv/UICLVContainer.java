@@ -51,6 +51,13 @@ public abstract class UICLVContainer extends UIContainer {
    * @throws Exception the exception
    */
   public abstract void init() throws Exception;
+  
+  /**
+   * Get portlet name.
+   *
+   * @throws Exception the exception
+   */
+  public abstract String getPortletName() throws Exception;
 
   /**
    * Gets the message.

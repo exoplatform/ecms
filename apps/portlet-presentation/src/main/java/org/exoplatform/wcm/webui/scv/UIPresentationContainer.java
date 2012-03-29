@@ -81,8 +81,9 @@ public class UIPresentationContainer extends UIContainer{
    * @throws Exception the exception
    */
   public UIPresentationContainer() throws Exception{
-    addChild(UIPresentation.class, null, null);
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+  	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    addChild(UIPresentation.class, null, UIPresentation.class.getSimpleName() + portletRequestContext.getWindowId());
+    
     portletPreferences = portletRequestContext.getRequest().getPreferences();
   }
 

@@ -13,6 +13,6 @@
     </script>
     <% 
   } %>
-<div id="UISingleContentViewerPortlet_<%=_ctx.getRequestContext().getWindowId()%>" class="UISingleContentViewerPortlet">
+<div id="$uicomponent.id" class="UISingleContentViewerPortlet">
 	<% uicomponent.renderChildren(); %>	  
 </div>     

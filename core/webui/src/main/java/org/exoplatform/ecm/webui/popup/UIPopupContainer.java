@@ -49,7 +49,7 @@ public class UIPopupContainer extends UIContainer {
    * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getWriter().append("<span class=\"").append(getId()).append("\" id=\"").append(getId()).append("\">");
+    context.getWriter().append("<span class=\"UIPopupContainer ").append(getId()).append("\" id=\"").append(getId()).append("\">");
     renderChildren(context) ;
     context.getWriter().append("</span>");
   }

@@ -140,4 +140,12 @@ public class UICLVManualMode extends UICLVContainer {
       return true;
     return false;
   }
+  /**
+   * Get portlet name.
+   *
+   * @throws Exception the exception
+   */
+  public String getPortletName() throws Exception {
+  	return UICLVManualMode.class.getSimpleName();
+  }
 }

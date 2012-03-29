@@ -118,10 +118,10 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
    *
    * @throws Exception the exception
    */
-  public UISingleContentViewerPortlet() throws Exception {
+  public UISingleContentViewerPortlet() throws Exception {  
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    preferences = portletRequestContext.getRequest().getPreferences();
+    preferences = portletRequestContext.getRequest().getPreferences();    
   }
 
   /**
@@ -139,7 +139,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       removeChild(UISCVPreferences.class);
     }
     if(PortletMode.VIEW.equals(newMode)) {
-      uiPresentation = addChild(UIPresentationContainer.class, null, null);
+    	PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance(); 
+      uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() + pContext.getWindowId());
     } else if (PortletMode.EDIT.equals(newMode)) {
       popPreferences = addChild(UISCVPreferences.class, null, null);
       popPreferences.setInternalPreferencesMode(true);
@@ -192,7 +193,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       title.setTextContent(uiPresentation.getTitle(nodeView));
       response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
     }
-
+    setId(UISingleContentViewerPortlet.class.getSimpleName() + pContext.getWindowId());
     super.processRender(app, context) ;
   }
 

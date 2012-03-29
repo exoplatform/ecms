@@ -301,7 +301,10 @@ public class UICLVPortlet extends UIPortletApplication {
         activateMode(npMode, nDisplayMode);
       }
     }
-    super.processRender(app, context);
+    setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());
+    context.getWriter().append("<div id=\"").append(getId()).append("\"").append("class=\"").append("UICLVPortlet").append("\">");    
+    this.renderChildren();
+    context.getWriter().append("</div>");
   }
 
   /**
@@ -314,6 +317,7 @@ public class UICLVPortlet extends UIPortletApplication {
    * @Author Nguyen The Vinh from ExoPlatform
    */
   private void activateMode(PortletMode npMode, String nDisplayMode) throws Exception {
+  	PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     if (npMode.equals(cpMode)) {
       // Switch manual/auto
       // Not reach in the case of queryMode.
@@ -322,12 +326,14 @@ public class UICLVPortlet extends UIPortletApplication {
         clvConfig = addChild(UICLVConfig.class, null, null);
         clvConfig.setModeInternal(false);
       }else {
-        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-          folderMode = addChild(UICLVFolderMode.class, null, null);
+        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {          
+          folderMode = addChild(UICLVFolderMode.class, null, UICLVFolderMode.class.getSimpleName() +
+          		"_" + pContext.getWindowId());          
           folderMode.init();
           folderMode.setRendered(true);
         } else {
-          manualMode = addChild(UICLVManualMode.class, null, null);
+        	manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() + 
+        			"_" + pContext.getWindowId());
           manualMode.init();
           manualMode.setRendered(true);
         }
@@ -336,11 +342,13 @@ public class UICLVPortlet extends UIPortletApplication {
       if (npMode.equals(PortletMode.VIEW)) { //Change from edit to iew
         removeChildren();
         if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-          folderMode = addChild(UICLVFolderMode.class, null, null);
+        	folderMode = addChild(UICLVFolderMode.class, null, UICLVFolderMode.class.getSimpleName() + 
+        			"_" + pContext.getWindowId());
           folderMode.init();
           folderMode.setRendered(true);
         } else {
-          manualMode = addChild(UICLVManualMode.class, null, null);
+        	manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() + 
+        			"_" + pContext.getWindowId());
           manualMode.init();
           manualMode.setRendered(true);
         }
