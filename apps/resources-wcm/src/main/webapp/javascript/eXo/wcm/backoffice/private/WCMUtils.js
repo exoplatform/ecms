@@ -198,4 +198,21 @@ WCMUtils.prototype.searchNodeTypeOnKeyPress = function() {
   }	
 }
 
+WCMUtils.prototype.addEvent = function(element, eventName, handler) {
+    var elementId = typeof element != 'object' ? element : element.id;
+    var objElement = document.getElementById(elementId);
+    if (eventName.toLowerCase().indexOf("focus") != -1 || eventName.toLowerCase().indexOf("blur") != -1) {
+        if (objElement.tabIndex == undefined) {
+            objElement.tabIndex = "0";
+        }
+    }
+    objElement.addEventListener(eventName, handler, false);
+};
+
+WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
+    var elementId = typeof element != 'object' ? element : element.id;
+    var objElement = document.getElementById(elementId);
+    objElement.className = newStyleClass;
+};
+
 eXo.ecm.WCMUtils = new WCMUtils();

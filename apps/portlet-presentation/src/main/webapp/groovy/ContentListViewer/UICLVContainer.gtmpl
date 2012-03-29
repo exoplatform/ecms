@@ -5,15 +5,14 @@
 		import org.exoplatform.wcm.webui.Utils;
 		
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
-		def rcontext = _ctx.getRequestContext() ;	
+		def rcontext = _ctx.getRequestContext() ;
+    def jsManager = rcontext.getJavascriptManager();
 		def className = uicomponent.getPortletName();
 %>
-<div class="$className" id="$uicomponent.id" 
-	onmouseover="this.className = '$className $hoverClass'" onmouseout="this.className = '$className'"
-	onfocus="this.className = '$className $hoverClass'" onblur="this.className = '$className'"
-	>
+<div class="$className" id="$uicomponent.id">
 	<%
-	
+    jsManager.addJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass')})");
+    jsManager.addJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className')})");
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def addContentBlockId = portletId + "-AddContentBlock";
@@ -75,3 +74,4 @@
 	}
 	%>
 </div>
+

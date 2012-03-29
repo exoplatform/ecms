@@ -27,10 +27,10 @@
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 5; top:20px";
 			%>
-			<div class="UIPresentationContainer" id="$uicomponent.id" 
-				onmouseover="this.className = 'UIPresentationContainer $hoverClass' " onmouseout="this.className = 'UIPresentationContainer' "
-				onfocus="this.className = 'UIPresentationContainer $hoverClass' " onblur="this.className = 'UIPresentationContainer' ">
-			<%     
+			<div class="UIPresentationContainer" id="$uicomponent.id">
+			<%
+        jsManager.addJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')})");
+        jsManager.addJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')})");
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="EdittingToolBarContainer" style="$edittingStyle">
 					 <div class="EdittingToolBar " >
