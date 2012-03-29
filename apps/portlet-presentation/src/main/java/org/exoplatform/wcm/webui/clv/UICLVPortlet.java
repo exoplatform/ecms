@@ -302,7 +302,7 @@ public class UICLVPortlet extends UIPortletApplication {
       }
     }
     setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());
-    context.getWriter().append("<div id=\"").append(getId()).append("\"").append("class=\"").append("UICLVPortlet").append("\">");    
+    context.getWriter().append("<div id=\"").append(getId()).append("\"").append(" class=\"").append("UICLVPortlet").append("\">");    
     this.renderChildren();
     context.getWriter().append("</div>");
   }
