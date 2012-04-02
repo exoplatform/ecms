@@ -1,0 +1,254 @@
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(revision 80308)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(working copy)
+@@ -241,7 +241,7 @@
+       allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
+     }
+     if ((allDrives != null) && (allDrives.size() > 0) && (groupDriveTemplate_ != null)) {
+-      return allDrives;
++      return new ArrayList<DriveData>(allDrives);
+     }
+ 
+     // Get from jcr
+@@ -284,7 +284,7 @@
+       drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
+     }
+     session.logout();
+-    return driveList ;
++    return new ArrayList<DriveData>(driveList);
+   }
+ 
+   /**
+@@ -527,7 +527,7 @@
+   @SuppressWarnings("unchecked")
+   public List<DriveData> getDriveByUserRoles(String userId, List<String> userRoles) throws Exception {
+     Object drivesByRoles = drivesCache_.get(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
+-    if(drivesByRoles != null) return (List<DriveData>) drivesByRoles;
++    if(drivesByRoles != null) return new ArrayList<DriveData>((List<DriveData>) drivesByRoles);
+     List<DriveData> driveList = new ArrayList<DriveData>();
+     if (userId != null) {
+       // We will improve ManageDrive service to allow getAllDriveByUser
+@@ -571,7 +571,7 @@
+     }
+     Collections.sort(driveList);
+     drivesCache_.put(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES, driveList);
+-    return driveList;
++    return new ArrayList<DriveData>(driveList);
+   }
+ 
+   @Deprecated
+@@ -587,7 +587,7 @@
+   public List<DriveData> getGroupDrives(String userId, List<String> userRoles, List<String> groups) throws Exception {
+     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
+     if (drives != null)
+-      return (List<DriveData>) drives;
++      return new ArrayList<DriveData>((List<DriveData>) drives);
+     List<DriveData> groupDrives = new ArrayList<DriveData>();
+     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
+     for (String role : userRoles) {
+@@ -604,7 +604,7 @@
+ 
+     Collections.sort(groupDrives);
+     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
+-    return groupDrives;
++    return new ArrayList<DriveData>(groupDrives);
+   }
+ 
+   @Deprecated
+@@ -619,7 +619,7 @@
+   @SuppressWarnings("unchecked")
+   public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception {
+     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
+-    if(drives != null) return (List<DriveData>) drives;
++    if(drives != null) return new ArrayList<DriveData>((List<DriveData>) drives);
+     List<DriveData> generalDrives = new ArrayList<DriveData>();
+     String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
+     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
+@@ -631,7 +631,7 @@
+     }
+     Collections.sort(generalDrives);
+     drivesCache_.put(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE, generalDrives);
+-    return generalDrives;
++    return new ArrayList<DriveData>(generalDrives);
+   }
+ 
+   @Deprecated
+@@ -648,7 +648,7 @@
+     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
+     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
+-    if(drives != null) return (List<DriveData>) drives;
++    if(drives != null) return new ArrayList<DriveData>((List<DriveData>) drives);
+ 
+     List<DriveData> personalDrives = new ArrayList<DriveData>();
+     String userPath = userNode.getPath();
+@@ -661,7 +661,7 @@
+     }
+     Collections.sort(personalDrives);
+     drivesCache_.put(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE, personalDrives);
+-    return personalDrives;
++    return new ArrayList<DriveData>(personalDrives);
+   }
+ 
+   /**
+Index: core/connector/src/main/java/org/exoplatform/ecm/connector/platform/ManageDocumentService.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/ecm/connector/platform/ManageDocumentService.java	(revision 80308)
++++ core/connector/src/main/java/org/exoplatform/ecm/connector/platform/ManageDocumentService.java	(working copy)
+@@ -59,6 +59,7 @@
+ import org.exoplatform.services.jcr.access.PermissionType;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
++import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+ import org.exoplatform.services.rest.resource.ResourceContainer;
+@@ -94,6 +95,10 @@
+   
+   private ManageDriveService    manageDriveService;
+   
++  private LinkManager linkManager;
++  
++  private NodeHierarchyCreator nodeHierarchyCreator;
++  
+   /** The file upload handler. */
+   protected FileUploadHandler   fileUploadHandler;
+   
+@@ -132,8 +137,11 @@
+    *
+    * @param manageDriveService 
+    */
+-  public ManageDocumentService(ManageDriveService manageDriveService) {
++  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager,
++                               NodeHierarchyCreator nodeHierarchyCreator) {
+     this.manageDriveService = manageDriveService;
++    this.linkManager = linkManager;
++    this.nodeHierarchyCreator = nodeHierarchyCreator;
+     fileUploadHandler = new FileUploadHandler();
+     cc = new CacheControl();
+     cc.setNoCache(true);
+@@ -151,7 +159,8 @@
+   @Path("/getDrives/")
+   @RolesAllowed("users")
+   public Response getDrives(@QueryParam("driveType") String driveType,
+-                            @DefaultValue("false") @QueryParam("showPrivate") String showPrivate) throws Exception {
++                            @DefaultValue("false") @QueryParam("showPrivate") String showPrivate,
++                            @DefaultValue("false") @QueryParam("showPrivate") String showPersonal) throws Exception {
+     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+     List<String> userRoles = getMemberships();
+     DocumentBuilder builder = factory.newDocumentBuilder();
+@@ -168,14 +177,26 @@
+       driveList = manageDriveService.getGroupDrives(userId, userRoles, new ArrayList<String>(groups));
+     } else if (DriveType.PERSONAL.toString().equalsIgnoreCase(driveType)) {
+       driveList = manageDriveService.getPersonalDrives(userId, userRoles);
+-      if (!Boolean.valueOf(showPrivate)) {
++    //remove Private drive
++      String privateDrivePath = "";
++      for (DriveData driveData : driveList) {
++        if (PRIVATE.equals(driveData.getName())) {
++          privateDrivePath = driveData.getHomePath();
++          if (!Boolean.valueOf(showPrivate)) {
++            driveList.remove(driveData);
++            break;
++          }
++        }
++      }
++      //remove Personal Documents drive
++      if (!Boolean.valueOf(showPersonal)) {
+         for (DriveData driveData : driveList) {
+-          if (PRIVATE.equals(driveData.getName())) {
++          if (privateDrivePath.equals(driveData.getHomePath())) {
+             driveList.remove(driveData);
+             break;
+           }
+         }
+-      }
++      }      
+     }
+     rootElement.appendChild(buildXMLDriveNodes(document, driveList, driveType));
+     return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cc).build();
+@@ -414,23 +435,25 @@
+                                               driveName,
+                                               currentFolder);
+     Element folders = document.createElement("Folders");
+-    Element files = document.createElement("Files");   
+-    for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
++    Element files = document.createElement("Files");
++    Node referParentNode = node;
++    if (node.isNodeType("exo:symlink") && node.hasProperty("exo:uuid") && node.hasProperty("exo:workspace")) {
++      referParentNode = linkManager.getTarget(node);
++    }
++    for (NodeIterator iterator = referParentNode.getNodes(); iterator.hasNext();) {
+       Node sourceNode = null;
+       Node referNode = null;
+       Node child = iterator.nextNode();
+       if (child.isNodeType(FCKUtils.EXO_HIDDENABLE) && !showHidden)
+         continue;
+       if (child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid") && child.hasProperty("exo:workspace")) {
+-        String sourceWs = child.getProperty("exo:workspace").getString();
+-        Session sourceSession = getSession(sourceWs);
+-        sourceNode = sourceSession.getNodeByUUID(child.getProperty("exo:uuid").getString());
++        sourceNode = linkManager.getTarget(child);
+       }
+       referNode = sourceNode != null ? sourceNode : child;
+ 
+       if (isFolder(referNode)) {
+-        String childFolder = StringUtils.isEmpty(currentFolder) ? referNode.getName() : currentFolder.concat("/")
+-                                                                                                     .concat(referNode.getName());
++        String childFolder = StringUtils.isEmpty(currentFolder) ? child.getName() : currentFolder.concat("/")
++                                                                                                     .concat(child.getName());
+         Element folder = createFolderElement(document,
+                                              referNode,
+                                              referNode.getSession().getWorkspace().getName(),
+@@ -546,12 +569,19 @@
+   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
+     Session session = getSession(workspaceName);
+     String driveHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driveName)).getHomePath();
+-    String itemPath = driveHomePath
+-        + ((currentFolder != null && !StringUtils.EMPTY.equals(currentFolder) && !driveHomePath.endsWith("/")) ? "/" : "")
+-        + currentFolder;
+     String userId = ConversationState.getCurrent().getIdentity().getUserId();
+-    itemPath = Utils.getPersonalDrivePath(itemPath, userId);
+-    return (Node) session.getItem(Text.escapeIllegalJcrChars(itemPath));
++    String drivePath = Utils.getPersonalDrivePath(driveHomePath, userId);
++    Node node = (Node) session.getItem(Text.escapeIllegalJcrChars(drivePath));
++    if (StringUtils.isEmpty(currentFolder)) {
++      return node;
++    }
++    for (String folder : currentFolder.split("/")) {
++      node = node.getNode(folder);
++      if (node.isNodeType("exo:symlink")) {
++        node = linkManager.getTarget(node);
++      }
++    }
++    return node;
+   }
+   
+   private Session getSession(String workspaceName) throws Exception {
+@@ -697,14 +727,24 @@
+     String[] folders = currentFolder.split("/");
+     StringBuilder sb = new StringBuilder();
+     StringBuilder tempFolder = new StringBuilder();
++    Node parentNode = getNode(driveName, workspaceName, "");
++    if (StringUtils.isEmpty(currentFolder)) {
++      return "";
++    }
+     for (int i = 0; i < folders.length; i++) {
+       tempFolder = tempFolder.append(folders[i]);
+-      Node node = getNode(driveName, workspaceName, tempFolder.toString());
++      Node node = null;
++      try {
++        node = getNode(driveName, workspaceName, tempFolder.toString());
++      } catch (PathNotFoundException e) {
++        node = parentNode.getNode(folders[i]);
++      }
+       tempFolder = tempFolder.append("/");
+       sb.append(Utils.getTitle(node));
+       if (i != folders.length - 1) {
+         sb.append("/");
+       }
++      parentNode = (node.isNodeType("exo:symlink")? linkManager.getTarget(node) : node);
+     }
+     return sb.toString();
+   }
