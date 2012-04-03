@@ -193,25 +193,6 @@
           </object>
         </object-param>
         <object-param>
-          <name>Signin</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalSignin.xml</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>Portal Footer</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
@@ -230,26 +211,6 @@
             </field>
           </object>
         </object-param>
-        <object-param>
-          <name>Portal Toolbar</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalToolBar.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
         <object-param>
           <name>Accessibility content</name>
           <description>Deployment Descriptor</description>
@@ -875,9 +836,6 @@
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/Footer</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/home</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/Logo</string></value>
-                <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/PortalToolBar</string></value>
-                <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/Signin</string></value>
-              
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/technology/integration</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/technology/technical-specifications</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/features/portal-content</string></value>

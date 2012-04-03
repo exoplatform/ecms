@@ -96,10 +96,6 @@ WAIPortalToolbar.prototype.initToolbar = function() {
   var savedTextSize = eXo.ecm.WAIPortalToolbar.getCookie("ntTextSize");
   eXo.ecm.WAIPortalToolbar.changeOveralTheme(savedTheme, "IconOnly");
   eXo.ecm.WAIPortalToolbar.changeOveralFontSize(savedTextSize, "IconOnly");
-  var tLink = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context +"/" + eXo.env.portal.portalName+ "/siteMap";
-  document.getElementById("WAIPortalToolbarSiteMap").setAttribute("href", tLink);
-  var tLink = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context +"/" + eXo.env.portal.portalName+ "/Accessibility";
-  document.getElementById("WAIPortalToolbarAccessibility").setAttribute("href", tLink);
 }
 WAIPortalToolbar.prototype.addLoadEvent = function(func) { 
   var oldonload = window.onload; 
