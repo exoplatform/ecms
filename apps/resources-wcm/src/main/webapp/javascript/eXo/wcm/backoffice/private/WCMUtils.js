@@ -206,7 +206,11 @@ WCMUtils.prototype.addEvent = function(element, eventName, handler) {
             objElement.tabIndex = "0";
         }
     }
-    objElement.addEventListener(eventName, handler, false);
+    if (navigator.userAgent.indexOf("MSIE") >= 0) {
+      objElement.attachEvent("on" + eventName, handler);
+    } else {
+      objElement.addEventListener(eventName, handler, false);
+    }
 };
 
 WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
