@@ -124,7 +124,7 @@ private void renderCategoryMenu() {
         
         if (selectedContent != null && selectedContent.equals(contentId)) {
           %>
-            <li class="SelectedContent"><a href="$contentURL">$nodeTitle</a></li>
+            <li class="SelectedContent"><a href="$contentURL" title="$nodeTitle">$nodeTitle</a></li>
           <%
         } else {
           %>

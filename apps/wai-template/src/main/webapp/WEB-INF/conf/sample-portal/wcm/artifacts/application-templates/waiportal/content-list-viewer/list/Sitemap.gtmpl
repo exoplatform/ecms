@@ -112,7 +112,7 @@ private void renderCategoryMenu() {
         def contentURL = nodeURL.toString();
         
         %>
-          <li><a href="$contentURL">$nodeTitle</a></li>
+          <li><a href="$contentURL" title="$nodeTitle">$nodeTitle</a></li>
         <%
       }
       
