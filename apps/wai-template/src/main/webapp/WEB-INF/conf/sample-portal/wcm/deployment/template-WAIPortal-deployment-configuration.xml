@@ -816,7 +816,6 @@
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/accessibility</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/Footer</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/home</string></value>
-                <value><string>collaboration:/sites content/live/{portalName}/web contents/site artifacts/Logo</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/technology/integration</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/technology/technical-specifications</string></value>
                 <value><string>collaboration:/sites content/live/{portalName}/web contents/features/portal-content</string></value>
