@@ -30,7 +30,7 @@
   <CategoryNavigationTemplate>
   	<label>
   		<home>Accueil</home>
-		<Accessibility>Accessibility</Accessibility>
+		  <Accessibility>Accessibility</Accessibility>
   	</label>
   </CategoryNavigationTemplate>  
   

@@ -103,6 +103,18 @@
             </field>
           </object>
         </object-param>
+        <object-param>
+          <name>WAI Portal Banner</name>
+          <description>WAI Portal Banner Template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>WAIPortalBanner.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

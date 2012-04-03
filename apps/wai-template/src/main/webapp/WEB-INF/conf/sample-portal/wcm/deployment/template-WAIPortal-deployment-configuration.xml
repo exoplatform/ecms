@@ -174,25 +174,6 @@
   Deployment of Site Artifacts
 -->
         <object-param>
-          <name>Banner Logo</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/{portalName}/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/WAIPortal/WAIPortalLogo.xml</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>Portal Footer</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">

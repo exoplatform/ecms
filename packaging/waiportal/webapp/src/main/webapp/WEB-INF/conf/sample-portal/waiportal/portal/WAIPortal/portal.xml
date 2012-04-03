@@ -109,45 +109,60 @@
           <portlet-application>
             <portlet>
               <application-ref>presentation</application-ref>
-              <portlet-ref>SingleContentViewer</portlet-ref>
+              <portlet-ref>ContentListViewerPortlet</portlet-ref>
               <preferences>
                 <preference>
-                  <name>workspace</name>
-                  <value>collaboration</value>
+                  <name>folderPath</name>
+                  <value>repository:collaboration:/sites content/live/WAIPortal/categories/WAIPortal</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>nodeIdentifier</name>
-                  <value>/sites content/live/WAIPortal/web contents/site artifacts/Logo</value>
+                  <name>nodeDrive</name>
+                  <value>Managed Sites</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>ShowQuickEdit</name>
-                  <value>true</value>
+                  <name>orderType</name>
+                  <value>ASC</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>ShowPrintAction</name>
+                  <name>formViewTemplatePath</name>
+                  <value>/exo:ecm/views/templates/content-list-viewer/list/WAIPortalBanner.gtmpl</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>basePath</name>
+                  <value>detail</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>itemsPerPage</name>
+                  <value>5</value>
+                  <read-only>false</read-only>
+                </preference>
+                <preference>
+                  <name>showTitle</name>
                   <value>false</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>ShowTOC</name>
+                  <name>showDateCreated</name>
                   <value>false</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>ShowTags</name>
+              <name>sharedCache</name>
+              <value>false</value>
+              <read-only>false</read-only>
+              </preference>
+                <preference>
+                  <name>showHeader</name>
                   <value>false</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
-                  <name>ShowCategories</name>
-                  <value>false</value>
-                  <read-only>false</read-only>
-                </preference>
-                <preference>
-                  <name>ShowTitle</name>
+                  <name>showLink</name>
                   <value>false</value>
                   <read-only>false</read-only>
                 </preference>
