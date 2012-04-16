@@ -16,7 +16,7 @@
 ================================================================================
 
 TABLE OF CONTENTS
----------------------------------------------------
+----------------------------------------------------
 1. What is eXo Content
 2. What's new?
 3. How to set up eXo Content
@@ -26,7 +26,7 @@ TABLE OF CONTENTS
 
 
 1. WHAT IS EXO CONTENT
----------------------------------------------------
+----------------------------------------------------
 	Enterprise Content Management is the strategies, methods and tools used to capture, manage, store, preserve and deliver 
 contents and documents related to organizational processes with the purpose of improving operational productivity and efficiency. 
 eXo Content tools and strategies allow the management of an organization's unstructured information, whether that information exists. 
