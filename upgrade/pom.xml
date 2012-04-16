@@ -49,11 +49,12 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
-    <build>
+  <build>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>${version.buildnumber.plugin}</version>
         <executions>
           <execution>
             <phase>initialize</phase>
@@ -74,7 +75,7 @@
       </resource>
     </resources>
   </build>
-   <modules>
+  <modules>
     <module>favorite</module>
     <module>voting-nodetype</module>
     <module>thumbnails</module>
@@ -82,5 +83,5 @@
     <module>users-folder-permission</module>
     <module>templates</module>
     <module>portlet-preferences</module>
-   </modules>
+  </modules>
 </project>
