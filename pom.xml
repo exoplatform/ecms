@@ -13,9 +13,9 @@
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
   <scm>
-    <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/branches/2.1.x</connection>
-    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/branches/2.1.x</developerConnection>
-    <url>http://fisheye.exoplatform.org/browse/ecms/branches/2.1.x</url>
+    <connection>scm:git:ssh://github.com/exoplatform/ecms.git</connection>
+    <developerConnection>scm:git:ssh://github.com/exoplatform/ecms.git</developerConnection>
+    <url>https://fisheye.exoplatform.com/browse/ecms.git</url>
   </scm>
   <issueManagement>
     <system>jira</system>
@@ -103,6 +103,7 @@
     <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,wcm,wkf,docs</releaseProfiles>    
     <!-- Required to add generate sources bundle -->
     <version.assembly.plugin>2.2</version.assembly.plugin>
+    <version.release.plugin>2.2.1</version.release.plugin>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
