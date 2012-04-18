@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Modifica Veloce</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Configurazione Lista Categorie</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Albero Categoria</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>Nome Albero</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Template Visualizzazione Albero</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>Mostra in Pagina</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Selezione Albero</TreeSelectionBlock>
+      <DisplaySettingBlock>Impostazioni di visualizzazione</DisplaySettingBlock>
+      <AdvancedBlock>Avanzate</AdvancedBlock>
+  
+	  <UICategoryNavigationTreePathFormInputSet>Percorso Albero</UICategoryNavigationTreePathFormInputSet>
+	  <UICategoryNavigationTreePathFormStringInput>Percorso Albero</UICategoryNavigationTreePathFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatico</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>Navigazione Dinamica</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>con</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationTreepathPopupWindow>Percorso Albero</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>Encoding non supportato.</not-support-encoding>
+      <render>Errore mentre renderizzi.</render>
+      <saving-success>Portlet aggiornata con successo.</saving-success>
+    </msg>
+    <action>
+      <Save>Salva</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Questa categoria non esiste.</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

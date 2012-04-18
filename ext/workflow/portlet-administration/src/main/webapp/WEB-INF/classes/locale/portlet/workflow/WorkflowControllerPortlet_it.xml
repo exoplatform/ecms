@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.controller               #
+  #############################################################################
+-->
+    <UIWorkflowControllerPortlet>
+        <tab>
+            <label>Controller</label>
+            <text>Gestione Amministrativa Workflow</text>
+        </tab>
+        <msg>
+            <refresh-session-success>Sessione rinnovata con successo.</refresh-session-success>
+        </msg>
+        <label>
+            <refresh>Rinnova</refresh>
+        </label>
+    </UIWorkflowControllerPortlet>
+    <ControllerPopup>
+        <title>
+            <UITaskManager>Gestione Compiti(Task)</UITaskManager>
+        </title>
+    </ControllerPopup>
+    <UITabPane>
+        <title>
+            <UITaskList>Controller Compiti</UITaskList>
+            <UIBPDefinition>Controller Definizioni BP</UIBPDefinition>
+            <UIDocumentContent>Mostra Contenuto</UIDocumentContent>
+            <UIDocumentForm>Modifica Contenuto</UIDocumentForm>
+            <UITask>Compito</UITask>
+        </title>
+    </UITabPane>
+    <UITaskList>
+        <header>
+            <id>Id Compito</id>
+            <processName>Nome Processo</processName>
+            <taskName>Nome Compito</taskName>
+            <actor>Attore</actor>
+            <description>Descrizione</description>
+            <actorId>Id Attore</actorId>
+            <taskVariables>Variabili Compito</taskVariables>
+            <processDateStart>Data Inizio Processo</processDateStart>
+            <action>Azione</action>
+        </header>
+        <label>
+            <managerState>Gestisci</managerState>
+        </label>
+        <msg>
+            <task-not-found>Non può gestire il compito. Forse è stato già gestito da un'altro utente.</task-not-found>
+            <task-change>Il compito è stato cambiato è rimosso.</task-change>
+        </msg>
+    </UITaskList>
+    <UITaksList>
+        <msg>
+            <no-task>Nessun compito assegnato</no-task>
+        </msg>
+    </UITaksList>
+    <UITask>
+        <label>
+            <hide-process-link>Nascondi Diagramma Processi</hide-process-link>
+            <show-process-link>Mostra Diagramma Processi</show-process-link>
+            <process-diagram-not-available>Diagramma Processi non è disponibile</process-diagram-not-available>
+        </label>
+        <title>
+            <Delegate>Seleziona Utente</Delegate>
+        </title>
+        <msg>
+            <has-not-got-delegate>Devi selezionare qualunque utente da delegare.</has-not-got-delegate>
+            <user-not-exist>Utente delegato non esiste.</user-not-exist>
+        </msg>
+    </UITask>
+    <PopupDelegatedSelectorId>
+        <title>
+            <UIUserSelectContainer>Seleziona Utente</UIUserSelectContainer>
+        </title>
+    </PopupDelegatedSelectorId>
+    <UIBPDefinition>
+        <header>
+            <id>Id</id>
+            <name>Nome</name>
+            <version>Versione</version>
+            <action>Azione</action>
+        </header>
+        <msg>
+            <empty>Nessun processo business da iniziare</empty>
+        </msg>
+    </UIBPDefinition>
+    <UIControllerManager>
+        <action>
+            <title>
+                <ManageStart>Gestisci Inizio</ManageStart>
+            </title>
+        </action>
+    </UIControllerManager>
+    <UIDocumentForm>
+        <msg>
+            <cannot-save>Errore riscontrato durante salvataggio del documento.</cannot-save>
+            <in-versioning>Prego faccia il checkout del nodo corrente, prima di poter aggiungerne di nuovi.</in-versioning>
+            <not-support>Impossibile caricare template di '{0}'.</not-support>
+            <value-invalid>'{0}' è richiesto.</value-invalid>
+        </msg>
+    </UIDocumentForm>
+    <PopupComponent>
+        <title>
+            <UIOneTaxonomySelector>Aggiungi Categorie</UIOneTaxonomySelector>
+        </title>
+    </PopupComponent>
+    <UITreeTaxonomyList>
+        <label>
+            <taxonomyTree>Albero Categorie</taxonomyTree>
+            <rootNodePath>Albero Root</rootNodePath>
+            <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+        </label>
+    </UITreeTaxonomyList>
+    <UIWorkspaceList>
+        <label>
+            <workspaceName>Workspace</workspaceName>
+            <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+            <rootNodePath>Root Path</rootNodePath>
+        </label>
+    </UIWorkspaceList>
+    <rootNodeInfo>
+        <title>
+            <AddRootNode>Aggiungi Nodo Root</AddRootNode>
+        </title>
+    </rootNodeInfo>
+    <PopupComponent>
+        <title>
+            <UIOneNodePathSelector>Seleziona Path</UIOneNodePathSelector>
+        </title>
+    </PopupComponent>
+    <UIDocumentForm>
+        <msg>
+            <confirm-close>Le modifiche apportate saranno perse se chiudi questo form.</confirm-close>
+            <confirm-navigate>Le modifiche apportate saranno perse se navighi da questa pagina ad un'altra.</confirm-navigate>
+        </msg>
+    </UIDocumentForm>
+</bundle>

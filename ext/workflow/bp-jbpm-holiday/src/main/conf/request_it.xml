@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Chiedi un po' di ferie</task-name>
+  <title>Chiedi un po' di ferie</title>
+  <submit>Invia</submit>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <title>Inizio delle ferie:</title>
+    <label>Inizio (gg/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Fine delle ferie:</title>
+    <label>Fine (gg/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Annulla</cancel>
+</bundle>
+
