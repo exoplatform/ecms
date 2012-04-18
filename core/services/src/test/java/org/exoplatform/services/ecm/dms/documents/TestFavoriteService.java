@@ -40,6 +40,7 @@ public class TestFavoriteService extends BaseDMSTestCase {
 
   public void setUp() throws Exception {
     super.setUp();
+    super.applyUserSession("john", "exo");
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
 
@@ -63,84 +64,67 @@ public class TestFavoriteService extends BaseDMSTestCase {
   }
 
   /**
-   * test method addFavourite. Input: /testAddFavourite node tested action: add
-   * favorite for 3 users 'root', 'demo', 'james' to the node
-   * above. Expected value : 1 for favorite node list size of each user
-   * /testAddFavourite node)
+   * test method addFavourite. Input: /testAddFavourite1, /testAddFavorite2 nodes 
+   * tested action: add favorite for users 'john' to the nodes
+   * above. Expected value : 2 for favorite node list size
    *
    * @throws Exception
    */
   public void testAddFavorite() throws Exception {
     Node rootNode = session.getRootNode();
-    Node testAddFavouriteNode = rootNode.addNode("testAddFavorite");
+    Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
+    Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");
     session.save();
-    favoriteService.addFavorite(testAddFavouriteNode, "root");
-    favoriteService.addFavorite(testAddFavouriteNode, "demo");
-    favoriteService.addFavorite(testAddFavouriteNode, "james");
+    favoriteService.addFavorite(testAddFavouriteNode1, "john");
+    favoriteService.addFavorite(testAddFavouriteNode2, "john");
 
-    int rootFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "root").size();
-    int demoFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "demo").size();
-    int jamesFav = favoriteService.
-    getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "james").size();
+    int johnFav = favoriteService.
+    getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john").size();
 
-    assertEquals("testAddFavorite failed!", 1, rootFav);
-    assertEquals("testAddFavorite failed!", 1, demoFav);
-    assertEquals("testAddFavorite failed!", 1, jamesFav);
+    assertEquals("testAddFavorite failed!", 2, johnFav);
 
-    testAddFavouriteNode.remove();
+    testAddFavouriteNode1.remove();
+    testAddFavouriteNode2.remove();
     session.save();
   }
 
   /**
-   * test method removeFavourite. Input: /testAddFavourite node tested action:
-   * add favorite for 4 users 'root', 'james', 'john' and marry to the node above,
-   * remove favorite from 2 users 'root' and 'james'. Expected value :
-   * 0 for favorite node list size of 'root
-   * 0 for favorite node list size of 'james'
-   * 1 for favorite node list size of 'john'
-   * 1 for favorite node list size of 'marry'
-   * /testAddFavourite node)
+   * test method removeFavourite. Input: /test1, /test2, /test3 nodes  .Tested action:
+   * add favorite for 'john' to the nodes above,
+   * remove favorite for node /test2. Expected value :
+   * 2 for favorite node list size of 'john'
    *
    * @throws Exception
    */
   public void testRemoveFavorite() throws Exception {
     Node rootNode = session.getRootNode();
-    Node testRemove = rootNode.addNode("testRemoveFavourite");
+    Node test1Remove = rootNode.addNode("test1");
+    Node test2Remove = rootNode.addNode("test2");
+    Node test3Remove = rootNode.addNode("test3");
     session.save();
-    favoriteService.addFavorite(testRemove, "root");
-    favoriteService.addFavorite(testRemove, "james");
-    favoriteService.addFavorite(testRemove, "john");
-    favoriteService.addFavorite(testRemove, "marry");
+    favoriteService.addFavorite(test1Remove, "john");
+    favoriteService.addFavorite(test2Remove, "john");
+    favoriteService.addFavorite(test3Remove, "john");
 
-    favoriteService.removeFavorite(testRemove, "root");
-    favoriteService.removeFavorite(testRemove, "james");
+    favoriteService.removeFavorite(test2Remove, "john");
 
-    int rootFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "root").size();
-    int jamesFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "james").size();
     int johnFav = favoriteService.
         getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john").size();
-    int marryFav = favoriteService.
-        getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "marry").size();
 
-    assertEquals("testRemoveFavorite failed!", 0, rootFav);
-    assertEquals("testRemoveFavorite failed!", 1, johnFav);
-    assertEquals("testRemoveFavorite failed!", 0, jamesFav);
-    assertEquals("testRemoveFavorite failed!", 1, marryFav);
+    assertEquals("testRemoveFavorite failed!", 2, johnFav);
 
-    testRemove.remove();
+    test1Remove.remove();
+    test2Remove.remove();
+    test3Remove.remove();
+
     session.save();
   }
 
   /**
    * test method getAllFavouriteNodesByUser. Input: /node0 /node1 /node2 /node3
-   * /node3/node4. Tested action: add favorite for 'root' to node0, node2, node4;
-   * add favorite for  'demo' to property of node1,
+   * /node4. Tested action: add favorite for 'john' to node0, node2, node3, node4;
    *
-   * expectedValue : 4 ( number of favorite nodes by 'root')
+   * expectedValue : 4 ( number of favorite nodes by 'john')
    *
    * @throws Exception
    */
@@ -155,16 +139,15 @@ public class TestFavoriteService extends BaseDMSTestCase {
     Node node3 = testNode.addNode("node3");
     Node node4 = node3.addNode("node4");
 
-    favoriteService.addFavorite(node0, "root");
-    favoriteService.addFavorite(node1, "demo");
-    favoriteService.addFavorite(node2, "root");
-    favoriteService.addFavorite(node3, "root");
-    favoriteService.addFavorite(node4, "root");
+    favoriteService.addFavorite(node0, "john");
+    favoriteService.addFavorite(node2, "john");
+    favoriteService.addFavorite(node3, "john");
+    favoriteService.addFavorite(node4, "john");
 
     assertEquals("testGetAllFavouriteNodesByUser failed!", 4, favoriteService
         .getAllFavoriteNodesByUser(
             rootNode.getSession().getWorkspace().getName(), "repository",
-            "root").size());
+            "john").size());
     testNode.remove();
     session.save();
   }
