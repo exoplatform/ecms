@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Rimpiazza assegnazione</task-name>
+  <title>Rimpiazza assegnazione</title>
+  <submit>Assegnato</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Chi ha chiesto ferie</title>
+    <label>Iniziatore:</label>
+  </initiator>
+  <start>
+    <title>Inizio delle ferie:</title>
+    <label>Inizio (gg/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Fine delle ferie:</title>
+    <label>Fine (gg/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Annulla</cancel>
+</bundle>
+

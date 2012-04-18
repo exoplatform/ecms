@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Inizia Aumento</task-name>
+  <title>Richiedi Aumento</title>
+  <submit>Comincia a Pregare</submit>
+  <!--
+  #variable title and label
+  -->
+  <amount-asked>
+    <label>Ammontare:</label>
+  </amount-asked>
+  <priority>
+    <label>Priorità:</label>
+    <select-0>non importa</select-0>
+    <valueselect-0>non importa</valueselect-0>
+    <select-1>importante</select-1>
+    <valueselect-1>importante</valueselect-1>
+    <select-2>critico</select-2>
+    <valueselect-2>critico</valueselect-2>
+  </priority>
+  <rewarded>
+    <label>Premiato:</label>
+    <checkbox>Si, sono stato premiato.</checkbox>
+  </rewarded>
+  <reason>
+    <label>Ragione:</label>
+  </reason>
+  
+  <cancel>Annulla</cancel>
+</bundle>
+

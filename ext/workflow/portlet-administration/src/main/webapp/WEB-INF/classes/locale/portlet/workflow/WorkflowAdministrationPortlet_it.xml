@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.monitor				  #
+  #############################################################################
+-->
+    <UIWorkflowAdministrationPortlet>
+        <tab>
+            <label>Amministrazione</label>
+            <text>Gestione Amministrativa di Workflow</text>
+        </tab>
+        <msg>
+            <refresh-session-success>Sessione è stata rinnovata con successo.</refresh-session-success>
+        </msg>
+        <label>
+            <refresh>Rinnova</refresh>
+        </label>
+    </UIWorkflowAdministrationPortlet>
+    <UITabPane>
+        <title>
+            <UIMonitor>Monitor Processi</UIMonitor>
+            <UICompletedProcesses>Completato</UICompletedProcesses>
+            <UIRunningProcesses>In elaborazione</UIRunningProcesses>
+        </title>
+    </UITabPane>
+    <UIMonitor>
+        <header>
+            <id>Id Processo</id>
+            <name>Nome Processo</name>
+            <version>Versione Processo</version>
+            <action>Azione</action>
+        </header>
+        <msg>
+            <empty>Nessun processo di business da monitorare</empty>
+        </msg>
+    </UIMonitor>
+    <UIAdministrationManager>
+        <tab>
+            <label>
+                <UITimers>i timer</UITimers>
+                <UIMonitor>Monitor</UIMonitor>
+            </label>
+        </tab>
+        <msg>
+            <confirm-delete-process>È sicuro di voler cancellare questo modello di processo?</confirm-delete-process>
+        </msg>
+        <action>
+            <UploadProcess>Carica Processo</UploadProcess>
+            <title>
+                <View>Mostra</View>
+                <Delete>Elimina</Delete>
+            </title>
+        </action>
+    </UIAdministrationManager>
+    <UITimers>
+        <header>
+            <id>Id</id>
+            <name>Nome</name>
+            <dueDate>Data adatta</dueDate>
+        </header>
+        <msg>
+            <empty>Nessun timer impostato</empty>
+        </msg>
+    </UITimers>
+    <AdministrationPopup>
+        <title>
+            <UIProcessDetail>Dettaglio Processo</UIProcessDetail>
+        </title>
+    </AdministrationPopup>
+    <UploadProcessPopup>
+        <title>
+            <UIUploadProcess>Carica Processo</UIUploadProcess>
+        </title>
+    </UploadProcessPopup>
+    <UIUploadProcess>
+        <label>
+            <name>Nome</name>
+            <upload>Seleziona File</upload>
+        </label>
+        <action>
+            <Save>#{word.save}</Save>
+            <Cancel>#{word.cancel}</Cancel>
+        </action>
+        <msg>
+            <fileName-error>Il file non è stato trovato.</fileName-error>
+            <fileName-invalid>Il nome file contiene alcuni caratteri non validi. Prego re-inserisca il nome di nuovo oppure carichi un altro file.</fileName-invalid>
+            <process-successful>Caricamento eseguito con successo!</process-successful>
+            <data-invalid>Caricamento fallito. Potrebbe essere che il file con definizione processo non è stato trovato o i dati al suo interno non sono validi.</data-invalid>
+        </msg>
+    </UIUploadProcess>
+    <UIProcessDetailGrid>
+        <header>
+            <processInstanceId>Id Istanza Processo</processInstanceId>
+            <processId>Id Processo</processId>
+            <processName>Nome Processo</processName>
+            <startDate>Data Inizio</startDate>
+            <endDate>Data Fine</endDate>
+            <action>Azione</action>
+        </header>
+        <msg>
+            <empty>Prego scelga processo del quale desidera visualizzare i dettagli.</empty>
+        </msg>
+    </UIProcessDetailGrid>
+    <UIProcessDetail>
+        <msg>
+            <confirm-delete-process>È sicuro di voler eliminare l'istanza di questo processo?</confirm-delete-process>
+        </msg>
+    </UIProcessDetail>
+    <UITasksGrid>
+        <header>
+            <id>Id</id>
+            <taskName>Nome Compito(Task)</taskName>
+            <actorId>Id Attore</actorId>
+            <end>Fine</end>
+        </header>
+    </UITasksGrid>
+    <UIProcessDetail>
+        <msg>
+            <confirm-delete-completed-process>È sicuro di voler eliminare questi processi completati?</confirm-delete-completed-process>
+            <result-delete-completed-process>Non c'è alcun processo completato da eliminare.</result-delete-completed-process>
+        </msg>
+        <action>
+            <FlushAll>Pulisci Tutto</FlushAll>
+            <Cancel>Annulla</Cancel>
+        </action>
+    </UIProcessDetail>
+    <TaskListOfProcessPopup>
+        <title>
+            <UITaskListOfProcess>Elenca Compiti dell'istanza</UITaskListOfProcess>
+        </title>
+        <tab>
+            <label>
+                <UITasksGrid>Compito</UITasksGrid>
+            </label>
+        </tab>
+    </TaskListOfProcessPopup>
+    <UIRunningProcesses>
+        <header>
+            <processInstanceId>Id Istanza Processo</processInstanceId>
+            <processId>Id Processo</processId>
+            <processName>Nome Processo</processName>
+            <startDate>Data Inizio</startDate>
+            <endDate>Data Fine</endDate>
+            <action>Azione</action>
+        </header>
+        <msg>
+            <empty>Non ci sono processi per poter visualizzare dettagli.</empty>
+        </msg>
+        <action>
+            <Cancel>Annulla</Cancel>
+        </action>
+    </UIRunningProcesses>
+    <UICompletedProcesses>
+        <header>
+            <processInstanceId>Id Istanza Processo</processInstanceId>
+            <processId>Id Processo</processId>
+            <processName>Nome Processo</processName>
+            <startDate>Data Inizio</startDate>
+            <endDate>Data Fine</endDate>
+            <action>Azione</action>
+        </header>
+        <msg>
+            <empty>Non ci sono processi per poter visualizzare dettagli.</empty>
+        </msg>
+        <action>
+            <FlushAll>Pulisci Tutto</FlushAll>
+            <Cancel>Annulla</Cancel>
+        </action>
+    </UICompletedProcesses>
+    <UITaskListOfProcess>
+        <tab>
+            <label>
+                <UITasksGrid>Elenca Compiti</UITasksGrid>
+            </label>
+        </tab>
+        <action>
+            <Cancel>Annulla</Cancel>
+        </action>
+    </UITaskListOfProcess>
+    <UIProcessDetail>
+        <action>
+            <title>
+                <View>Mostra</View>
+                <Delete>Elimina</Delete>
+            </title>
+        </action>
+    </UIProcessDetail>
+</bundle>

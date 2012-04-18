@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIWorkflowPublicationActionForm>
+    <label>
+      <workflow_validator>Validatore</workflow_validator>
+      <workflow_destpath>Con Path</workflow_destpath>
+      <fieldWorkspace>Al Workspace</fieldWorkspace>
+      <workflow_backuppath>Path Backup</workflow_backuppath>
+      <fieldBackupWorkspaceEdit>Workspace Backup</fieldBackupWorkspaceEdit>
+      <fieldValidatorEdit>Validatore</fieldValidatorEdit>
+      <fieldDestPathEdit>Con Path</fieldDestPathEdit>
+      <fieldBackupEdit>Path Backup</fieldBackupEdit>
+      <hide-process-link>Nascondi Link Processo</hide-process-link>
+      <show-process-link>Mostra Link Processo</show-process-link>
+    </label>
+    <action>
+      <Save>Salva</Save>
+      <Back>Annulla</Back>
+      <UnsubcriberLifeCycle>Disisscrivi</UnsubcriberLifeCycle>
+    </action>
+    <msg>
+      <node-checkedin>Devi fare il check out prima.</node-checkedin>
+      <unsubcriber-lifecycle>Il nodo è stato disisscritto dal ciclo di vita.</unsubcriber-lifecycle>
+      <unsubcriber-lifecycle-finish>Il nodo è stato disisscritto con successo.</unsubcriber-lifecycle-finish>
+      <fillfield>Il campo è richiesto.</fillfield>
+    </msg>
+  </UIWorkflowPublicationActionForm>
+  <workflow_validator>
+    <title>
+      <AddPermission>Aggiungi Permesso</AddPermission>
+    </title>
+  </workflow_validator>
+  <workflow_destpath>
+    <title>
+      <AddDestPath>Aggiungi Path</AddDestPath>
+    </title>
+  </workflow_destpath>
+  <UIWorkflowPublicationViewForm>
+    <label>
+      <name>Nome</name>
+      <lifecycle>Ciclo di vita</lifecycle>
+      <validator>Validatore</validator>
+      <to-workspace>Nel Workspace</to-workspace>
+      <at-location>Alla Posizione</at-location>
+      <state>Stato</state>
+      <by>Da</by>
+      <backupWorkspace>Workspace Backup</backupWorkspace>
+      <backupPath>Path Backup</backupPath>
+      <hide-process-link>Nascondi Link Processo</hide-process-link>
+      <show-process-link>Mostra Link Processo</show-process-link>
+    </label>
+    <msg>
+      <unpublish-success>Il documento è stato tolto dalla pubblicazione.</unpublish-success>
+    </msg>
+    <action>
+      <Cancel>Annulla</Cancel>
+      <Unpublish>Annulla pubblicazione</Unpublish>
+      <UnsubcriberLifeCycle>Ciclo di vita Annullamento pubblicazione</UnsubcriberLifeCycle>
+    </action>
+  </UIWorkflowPublicationViewForm>
+  <PublicationService>
+    <WorkflowPublicationPlugin>
+      <nodeCreated>Il nodo è stato creato.</nodeCreated>
+      <nodeValidationRequest>Il nodo è sottoposto alla validazione.</nodeValidationRequest>
+      <nodePublished>Il nodo è stato pubblicato.</nodePublished>
+      <nodeBackup>Il nodo è stato backuppato.</nodeBackup>
+    </WorkflowPublicationPlugin>
+  </PublicationService>
+</bundle>
+

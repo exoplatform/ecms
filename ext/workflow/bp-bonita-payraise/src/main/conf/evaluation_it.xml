@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Valuta Aumento</task-name>
+  <title>Valuta Aumento</title>
+  <grant>
+    <submit>Consenti</submit>
+    <value>Consenti Aumento</value>
+  </grant>
+  <deny>
+    <submit>Nega</submit>
+    <value>Nega Aumento</value>
+  </deny>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Chi ha chiesto aumento?</title>
+    <label>Iniziatore:</label>
+  </initiator>
+  <reason>
+    <title>Ragione data da iniziatore</title>
+    <label>Ragione:</label>
+  </reason>
+  <amount-asked>
+    <title>Aumento chiesto:</title>
+    <label>Aumento:</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Aumento consentito:</title>
+    <label>Consentito:</label>
+  </amount-granted>
+  <priority>
+    <title>Imposta Priorità</title>
+    <label>Priorità:</label>
+  </priority>
+  <rewarded>
+    <title>Iniziatore premiato</title>
+    <label>Premiato:</label>
+    <checkbox>Si, iniziatore è stato premiato.</checkbox>
+  </rewarded>
+  
+  <cancel>Annulla</cancel>
+</bundle>

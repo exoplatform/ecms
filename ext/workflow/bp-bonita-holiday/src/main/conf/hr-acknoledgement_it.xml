@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>HR Riconoscimento</task-name>
+  <title>HR Riconoscimento</title>
+  <submit>Invia</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <label>Iniziatore:</label>
+  </initiator>
+  <start>
+    <label>Inizio (gg/mm/yyyy):</label>
+  </start>
+  <end>
+    <label>Fine (gg/mm/yyyy):</label>
+  </end>
+  
+  <cancel>Anulla</cancel>
+</bundle>
