@@ -15,7 +15,8 @@
  import org.exoplatform.wcm.webui.search.UISearchForm;
  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
  import org.exoplatform.services.wcm.search.SiteSearchService;
- import org.exoplatform.wcm.webui.Utils;
+ import org.apache.commons.lang.StringEscapeUtils;
+ 
 %>
 
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
@@ -23,9 +24,9 @@
   def showPaginator = false;
   def pageMode = uicomponent.getPageMode();
   def currentPageData = uicomponent.getCurrentPageData();
-  def keyword = uicomponent.getKeyword();
-  if (keyword != null)
-    keyword = Utils.sanitizeSearch(keyword);
+  def keyword = uicomponent.getKeyword(); 
+  if(keyword != null)
+    keyword = StringEscapeUtils.escapeHtml(keyword);  
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
