@@ -167,7 +167,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
   private Node getUserFavoriteFolder(String userName) throws Exception {
     Node userNode =
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+      nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
   }
@@ -175,7 +175,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   private Node createFavoriteFolder(String userName) throws Exception {
     // Get default favorite path
     Node userNode =
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+      nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
 
     // Create favorite path

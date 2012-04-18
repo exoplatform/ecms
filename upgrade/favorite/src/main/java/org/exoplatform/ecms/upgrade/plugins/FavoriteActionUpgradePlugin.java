@@ -31,6 +31,8 @@ import javax.jcr.nodetype.NodeType;
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
@@ -38,8 +40,8 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -47,6 +49,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -82,13 +85,11 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private RepositoryService repoService;
   private ScriptService scriptService;
   private ConfigurationManager configurationManager;
-  private FavoriteService favoriteService;
 
   public FavoriteActionUpgradePlugin(RepositoryService repoService,
                                      DMSConfiguration dmsConfiguration,
                                      ScriptService scriptService,
                                      ConfigurationManager configurationManager,
-                                     FavoriteService favoriteService,
                                      ActionServiceContainer actionServiceContainer,
                                      TemplateService templateService,
                                      NodeHierarchyCreator nodeHierarchyCreator,
@@ -105,7 +106,6 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     this.dmsConfiguration = dmsConfiguration;
     this.scriptService = scriptService;
     this.configurationManager = configurationManager;
-    this.favoriteService = favoriteService;
   }
 
   @Override
@@ -197,8 +197,8 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     NodeIterator iterrator = node.getNodes();
     while (iterrator.hasNext()) {
       Node child = (Node) iterrator.next();
-      if (isDocument(child) && !favoriteService.isFavoriter(userName, child)) {
-        favoriteService.addFavorite(child, userName);
+      if (isDocument(child) && !isFavoriter(userName, child)) {
+        addFavorite(child, userName);
       }
       setFavoritesForOldItems(child, userName);
     }
@@ -303,4 +303,70 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
     return userFavoriteNode;
   }
+  
+  public boolean isFavoriter(String userName, Node node) throws Exception {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+
+    if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
+      node = lnkManager.getTarget(node);
+    }
+
+    Node userFavoriteNode = null;
+    try {
+      userFavoriteNode = getUserFavoriteFolder(userName);
+    }catch (PathNotFoundException e) {
+      return false;
+    }
+
+    NodeIterator nodeIter = userFavoriteNode.getNodes();
+    while (nodeIter.hasNext()) {
+      Node childNode = nodeIter.nextNode();
+      if (lnkManager.isLink(childNode)) {
+        Node targetNode = lnkManager.getTarget(childNode);
+        if (node.isSame(targetNode)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private Node getUserFavoriteFolder(String userName) throws Exception {
+    SessionProviderService sessionProviderService = WCMCoreUtils.getService(SessionProviderService.class);
+    Node userNode =
+      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+    String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
+    return userNode.getNode(favoritePath);
+  }
+  
+  public void addFavorite(Node node, String userName) throws Exception {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+    
+    // check if node is symlink
+    if (lnkManager.isLink(node)) return;
+
+    // check if node has already been favorite node of current user
+    Node userFavoriteNode = null;
+    try {
+      userFavoriteNode = getUserFavoriteFolder(userName);
+    } catch (PathNotFoundException e) {
+      userFavoriteNode = createFavoriteFolder(userName);
+    }
+
+    NodeIterator nodeIter = userFavoriteNode.getNodes();
+    while (nodeIter.hasNext()) {
+      Node childNode = nodeIter.nextNode();
+      if (lnkManager.isLink(childNode)) {
+        Node targetNode = lnkManager.getTarget(childNode);
+        if (node.isSame(targetNode)) return;
+      }
+    }
+    // add favorite symlink
+    lnkManager.createLink(userFavoriteNode, node);
+    userFavoriteNode.getSession().save();
+  }
+
+
 }
