@@ -115,26 +115,35 @@
      // we cannot be sure that they will be initialized before initializing your script
       var currentContext = '<%=docBase%>' ;
     </script>   
-    <%if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) {
-        for(path in scriptsPaths) { %>
-          <script type="text/javascript" src="<%=path%>"></script>
-    <%  }
-      } else {
-    %>
-        <script type="text/javascript" src="<%=docBase%>/javascript/merged.js"></script>
-    <%}%>
+	<%if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) {
+		for(path in scriptsPaths) { %>
+		  <script type="text/javascript" src="<%=path%>"></script>
+		<%}%>
+		<script type="text/javascript">
+		  eXo.developing = true ;
+		</script>
+			
+	<%} else {%>
+		<script type="text/javascript" src="<%=docBase%>/javascript/merged.js"></script>
+	<%
+		for(path in scriptsPaths) {
+			if(path.startsWith("http") || path.startsWith("https")) {%>
+			  <script type="text/javascript" src="<%=path%>"></script>
+			<%}
+		}
+	}%>
     <script type="text/javascript">
-      eXo.env.portal.context = '<%=docBase%>' ;
+      eXo.env.portal.context = "<%=docBase%>" ;
       <%if(rcontext.getAccessPath() == 0) {%>
-          eXo.env.portal.accessMode = 'public' ;
+          eXo.env.portal.accessMode = "public" ;
       <%} else {%>
-          eXo.env.portal.accessMode = 'private' ;
+          eXo.env.portal.accessMode = "private" ;
       <%}%>
-      eXo.env.portal.portalName = '<%=rcontext.getPortalOwner()%>' ;
-      eXo.env.server.context = '<%=docBase%>' ;
-      eXo.env.server.portalBaseURL = '<%=rcontext.getRequest().getRequestURI()%>' ;
+      eXo.env.portal.portalName = "<%=rcontext.getPortalOwner()%>" ;
+      eXo.env.server.context = "<%=docBase%>" ;
+      eXo.env.server.portalBaseURL = "<%=rcontext.getRequest().getRequestURI()%>" ;
       eXo.env.server.portalURLTemplate = "<%=uicomponent.getPortalURLTemplate()%>" ;
-      eXo.env.client.skin = '$skin' ;
+      eXo.env.client.skin = "$skin" ;
       <% 
         UIPortal portal = uicomponent.findFirstComponentOfType(UIPortal.class);
         String sessionAliveLevel = (portal == null ? null : portal.sessionAlive) ;
@@ -143,7 +152,7 @@
       
       eXo.portal.portalMode = <%= uicomponent.getModeState() %>;
       
-      eXo.session.level = '$sessionAliveLevel';
+      eXo.session.level = "$sessionAliveLevel";
       eXo.session.canKeepState = $canKeepState;
       eXo.session.isOpen = $uicomponent.isSessionOpen ;
       eXo.session.itvTime = ${((PortalRequestContext)rcontext).getRequest().getSession().getMaxInactiveInterval()} ;
