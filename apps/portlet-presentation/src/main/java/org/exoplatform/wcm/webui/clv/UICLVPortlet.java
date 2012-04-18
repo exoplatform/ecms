@@ -47,7 +47,7 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 /**
  * The Class UICLVPortlet.
  */
-@ComponentConfig(lifecycle = UIApplicationLifecycle.class)
+@ComponentConfig(lifecycle = UIApplicationLifecycle.class, template = "app:/groovy/ContentListViewer/UICLVPortlet.gtmpl")
 public class UICLVPortlet extends UIPortletApplication {
 
   /** The Constant PREFERENCE_DISPLAY_MODE. */
@@ -301,10 +301,8 @@ public class UICLVPortlet extends UIPortletApplication {
         activateMode(npMode, nDisplayMode);
       }
     }
-    setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());
-    context.getWriter().append("<div id=\"").append(getId()).append("\"").append(" class=\"").append("UICLVPortlet").append("\">");    
-    this.renderChildren();
-    context.getWriter().append("</div>");
+    setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());   
+    super.processRender(app, context);
   }
 
   /**

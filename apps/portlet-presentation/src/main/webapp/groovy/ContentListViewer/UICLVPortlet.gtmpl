@@ -1,0 +1,3 @@
+<div class="UICLVPortlet" id="$uicomponent.id">
+  <% uicomponent.renderChildren(); %>
+</div>
