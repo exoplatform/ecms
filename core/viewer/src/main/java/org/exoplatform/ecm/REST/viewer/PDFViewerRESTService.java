@@ -58,14 +58,10 @@ import org.icepdf.core.pobjects.Page;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Sep 3, 2009
- * 7:33:30 AM
- */
-/**
- * Provide the request which will be used to display PDF file on web browser
+ * PDFViewerRESTService.java <br />
+ *
+ * Return the pdf content to display on the web page.
+ * 
  * {repoName} Repository name
  * {workspaceName} Workspace name
  * {nodePath} Node path
@@ -73,6 +69,15 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  * {rotation} Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
  * {scale} Zoom factor to be applied to the rendered page
  * Example: <img src="/portal/rest/pdfviewer/repository/collaboration/test.pdf/1/0.0f/1.0f">
+ *
+ * See methods for more api details.
+ * GET: /pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/ <br />
+ *     
+ * @author Dang Van Minh <minh.dang@exoplatform.com>
+ * @since Sep 3, 2009 7:33:30 AM
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
@@ -91,6 +96,20 @@ public class PDFViewerRESTService implements ResourceContainer {
     pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
   }
 
+  /**
+   * Return a thumbnail image for a pdf document.
+   * 
+   * @param repoName Repository name
+   * @param wsName Workspace name
+   * @param uuid
+   * @param pageNumber Page number
+   * @param rotation Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
+   * @param scale Zoom factor to be applied to the rendered page
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService.getCoverImage
+   */
   @GET
   public Response getCoverImage(@PathParam("repoName") String repoName,
       @PathParam("workspaceName") String wsName,

@@ -21,18 +21,33 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
+/**
+ * DownloadConnector.java <br />
+ *
+ * Enable downloading the content of nt:file.  <br />
+ * 
+ * See methods for more api details.
+ * GET: /contents//download/{workspace}/{path:.*}/ <br />
+ * 
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector
+ */
 @Path("/contents/")
 public class DownloadConnector implements ResourceContainer{
   
   /**
+   * Return to browser a stream got from jcr:content/jcr:data for downloading the content of the node.
    * 
-   * @param workspace : node's work space 
-   * @param path      : node's full path from root
+   * @param workspace : the workspace where stores the document node  
+   * @param path      : the path of the document node 
    * @return
    * @throws Exception
    * @Objective : Return to browser a stream for download content of a node. Stream got from jcr:content/jcr:data
    * @Author    : Nguyen The Vinh from ECM of eXoPlatform
    *              nguyenthevinhbk@gmail.com
+   *              
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector.download
    */
   @GET
   @Path("/download/{workspace}/{path:.*}/")

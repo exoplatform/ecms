@@ -40,11 +40,24 @@ import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/*
- * Created by The eXo Platform SAS
- * Author : Benjamin Paillereau
- * benjamin.paillereau@exoplatform.com
- * July 10, 2009
+/**
+ * VoteConnector.java <br />
+ *
+ * Return and set a vote value of a given node in the sent parameter.  <br />
+ * 
+ * See methods for more api details.
+ * GET: /{portalname}/{restcontextname}/contents/vote/star/ <br />
+ * GET: /{portalname}/{restcontextname}/contents/vote/postVote/ <br />
+ * GET: /{portalname}/{restcontextname}/contents/vote/getVote/ <br />
+ *     
+ * {portalname}: The name of the portal.
+ * {restcontextname}: The context name of rest webapplication which is deployed to the "{portalname}" portal.
+ * 
+ * @author Benjamin Paillereau <benjamin.paillereau@exoplatform.com>
+ * @since      July 10, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector
  */
 @Path("/contents/vote/")
 public class VoteConnector extends BaseConnector implements ResourceContainer {
@@ -56,13 +69,15 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 
 
   /**
-   * post a Vote for a content
+   * Set a vote value for a given content.
    *
    * @param jcrPath the jcr path
    *
    * @return http code
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector.postStarVote
    */
   @POST
   @Path("/star/")
@@ -77,8 +92,8 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
     return postVote(null, null,  jcrPath,  vote,  "en" );
   }
 
-    /**
-   * get a Vote for a content
+ /**
+   * Return a vote value for a given content.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -87,6 +102,8 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http code
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector.getStarVote
    */
   @GET
   @Path("/star/")
@@ -101,7 +118,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 
 
   /**
-   * post a Vote for a content
+   * Set a vote value for a given content.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -110,6 +127,8 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http code
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector.postVote
    */
   @GET
   @Path("/postVote/")
@@ -144,7 +163,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * get a Vote for a content
+   * Return a vote value for a given content.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -153,6 +172,8 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http code
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector.getVote
    */
   @GET
   @Path("/getVote/")

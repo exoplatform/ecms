@@ -72,12 +72,25 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Lai Trung Hieu
- *          hieu.lai@exoplatform.com
- * 6 Apr 2011  
+ * ManageDocumentService.java <br />
+ *
+ * The service which is used to perform some actions on a folder or a file, 
+ * such as creating, deleting a folder/file, or uploading a file.
+ * 
+ * See methods for more api details.
+ * GET: {portalname}/{restcontextname}/managedocument/getDrives/ <br /> 	
+ * GET: {portalname}/{restcontextname}/managedocument/getFoldersAndFiles/ <br /> 	
+ * GET: {portalname}/{restcontextname}/managedocument/createFolder/ <br /> 	
+ * GET: {portalname}/{restcontextname}/managedocument/deleteFolderOrFile/ <br />} 	
+ * GET: {portalname}/{restcontextname}/managedocument/uploadFile/upload/ <br /> 	
+ * GET: {portalname}/{restcontextname}/managedocument/uploadFile/control/ <br />
+ *     
+ * @author Lai Trung Hieu <hieu.lai@exoplatform.com>
+ * @since      6 Apr 2011
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService
  */
-
 @Path("/managedocument/")
 public class ManageDocumentService implements ResourceContainer {
   
@@ -149,11 +162,15 @@ public class ManageDocumentService implements ResourceContainer {
   }
   
   /**
+   * Get all drives by type (General, Group or Personal drive). 
    * 
-   * @param driveType type of drives to get: general, group or personal
+   * @param driveType types of drive (General, Group, or Personal)
+   * @param showPrivate show the Private drive or not. The default value is false
    * @return {@link Document} contains the drives
    * 
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.getDrives
    */
   @GET
   @Path("/getDrives/")
@@ -203,15 +220,18 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Gets the folders and files of node, node can be user root node or children node
+   * Get all folders and files which the current user can view.
    *
-   * @param driveName the workspace name
+   * @param driveName the drive name 
    * @param workspaceName the workspace name
-   * @param currentFolder path to current folder
+   * @param currentFolder the path to the folder to achieve its folders and file
+   * @param showHidden show hidden items or not. The default value is false 
    *
    * @return {@link Document} contains the folders and files
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -253,11 +273,13 @@ public class ManageDocumentService implements ResourceContainer {
    * 
    * @param driveName the drive name
    * @param workspaceName the workspace name
-   * @param itemPath path to item to delete
+   * @param itemPath the path to the folder/file. 
    *
    * @return {@link Response} ok if item is deleted
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.deleteFolderOrFile
    */
   @GET
   @Path("/deleteFolderOrFile/")
@@ -297,16 +319,18 @@ public class ManageDocumentService implements ResourceContainer {
   }
   
   /**
-   * Create new folder.
+   * Create a new folder and return its information.
    *  
    * @param driveName the drive name
    * @param workspaceName the workspace name
-   * @param currentFolder path to current folder
-   * @param folderName the name of folder to create
+   * @param currentFolder the path to the folder to which a child folder is add 
+   * @param folderName the folder name show the Private drive or not.
    *
    * @return {@link Document} contains created folder
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -354,14 +378,16 @@ public class ManageDocumentService implements ResourceContainer {
   }
   
   /**
-   * Upload file.
+   * Upload a file to the server
    *
-   * @param uploadId the upload id
-   * @param servletRequest the content of servlet request
+   * @param uploadId the Id of the upload resource 
+   * @param servletRequest the servlet request
    *
    * @return the response
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -374,21 +400,22 @@ public class ManageDocumentService implements ResourceContainer {
   }
   
   /**
-   * Process upload.
+   * Return the information about the upload status of a file (upload percentage, file name, and more).
    *
    * @param workspaceName the workspace name 
    * @param driveName the drive name
-   * @param currentFolder the current folder 
-   * @param siteName the current portal
-   * @param jcrPath the jcr path
-   * @param action the action
-   * @param language the language
+   * @param currentFolder the path to the current folder  
+   * @param currentPortal the current site
+   * @param action the action to perform (save, process and more)
+   * @param language the language of the user
    * @param fileName the file name
-   * @param uploadId the upload id
+   * @param uploadId the Id of the upload resource 
    *
    * @return the response
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.uploadFile
    */
   @GET
   @Path("/uploadFile/control/")

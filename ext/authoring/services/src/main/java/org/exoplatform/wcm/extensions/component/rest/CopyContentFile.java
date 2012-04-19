@@ -18,7 +18,17 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 
 /**
- * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
+ * CopyContentFile.java <br />
+ *
+ * Copy a file.  <br />
+ * 
+ * See methods for more api details.
+ * GET: {portalname}/{restcontextname}/copyfile/copy/ <br />
+ * 
+ * @author haikel.thamri@exoplatform.com
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.CopyContentFile
  */
 @Path("/copyfile/")
 public class CopyContentFile implements ResourceContainer {
@@ -44,6 +54,15 @@ public class CopyContentFile implements ResourceContainer {
     targetKey = params.getValueParam("targetKey").getValue();
   }
 
+  /**
+  * Copy a file.
+  * 
+  * @param param the file information
+  * @return Response inputstream
+  * @throws Exception
+  * 
+  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.CopyContentFile.copyFile
+  */
   @POST
   @Path("/copy/")
   public Response copyFile(String param) throws Exception {

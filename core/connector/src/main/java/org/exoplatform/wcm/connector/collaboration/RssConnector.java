@@ -54,12 +54,19 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- * chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * 29-08-2009
+ * RssConnector.java <br />
+ *
+ * Generate an RSS feed. <br />
+ * 
+ * See methods for more api details.
+ * GET: /rss/ <br />
+ * 
+ * @author chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+ * @since      29-08-2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector
  */
-
 @Path("/feed/")
 public class RssConnector extends BaseConnector implements ResourceContainer {
 
@@ -112,7 +119,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * Generate.
+   * Generate an RSS feed.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -123,6 +130,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @return the response
    *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector.generate
    */
   @GET
   @Path("/rss/")

@@ -60,10 +60,18 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- * chuong_phan@exoplatform.com
- * Jan 21, 2009
+ * GadgetConnector.java <br />
+ *
+ * Instantiate a new gadget connector.  <br />
+ * 
+ * See methods for more api details.
+ * GET: /wcmGadget/getFoldersAndFiles/ <br />
+ * 
+ * @author <chuong_phan@exoplatform.com>
+ * @since      Jan 21, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector
  */
 @Path("/wcmGadget/")
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
@@ -98,14 +106,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Gets the folders and files.
+   * Get the folders and files.
    *
    * @param currentFolder the current folder
    * @param language the language
-   *
    * @return the folders and files
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

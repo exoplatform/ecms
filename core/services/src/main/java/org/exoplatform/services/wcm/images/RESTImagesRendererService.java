@@ -47,10 +47,18 @@ import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Hoa Pham
- * hoa.phamvu@exoplatform.com
- * Mar 31, 2009
+ * RESTImagesRendererService.java <br />
+ *
+ * Get the image binary data of a given image node.  <br />
+ * 
+ * See methods for more api details.
+ * GET: /images/{repositoryName}/{workspaceName}/{nodeIdentifier}/ <br />
+ * 
+ * @author Hoa Pham <hoa.phamvu@exoplatform.com>
+ * @since      Mar 31, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -88,13 +96,15 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Serve image.
+   * Get the image binary data of a given image node.
    *
    * @param repository the repository
    * @param workspace the workspace
    * @param nodeIdentifier the node identifier
    *
    * @return the response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
@@ -160,10 +170,10 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /**
    * get the last modified date of node
-  + * @param node
-  + * @return the last modified date
-  + * @throws Exception
-  + */
+   * @param node
+   * @return the last modified date
+   * @throws Exception
+   */
   private Date getLastModifiedDate(Node node) throws Exception {
      Date lastModifiedDate = null;
      if (node.hasNode("jcr:content") && node.getNode("jcr:content").hasProperty("jcr:lastModified")) {

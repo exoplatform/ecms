@@ -81,10 +81,24 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * Created by The eXo Platform SEA
- * Author : Do Dang Thang
- * thang.do@exoplatform.com
- * Sep 7, 2009
+ * DriverConnector.java <br />
+ *
+ * Return a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action.   <br />
+ * 
+ * See methods for more api details.
+ * GET: {portalname}/{restcontextname}/wcmDriver/getDrivers/ <br />
+ * GET: {portalname}/{restcontextname}/wcmDriver/getFoldersAndFiles/ <br />
+ * GET: {portalname}/{restcontextname}/wcmDriver/uploadFile/upload/ <br />
+ * GET: {portalname}/{restcontextname}/wcmDriver/uploadFile/control/ <br />
+ *     
+ * {portalname}: The name of the portal.
+ * {restcontextname}: The context name of rest webapplication which is deployed to the "{portalname}" portal.
+ * 
+ * @author Do Dang Thang <thang.do@exoplatform.com>
+ * @since      Sep 7, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector
  */
 @Path("/wcmDriver/")
 public class DriverConnector extends BaseConnector implements ResourceContainer {
@@ -133,15 +147,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the drivers.
+   * Return a list of drives for the current user.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param userId the user id
-   *
    * @return the drivers
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getDrivers
    */
   @GET
   @Path("/getDrivers/")
@@ -173,7 +187,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the folders and files.
+   * Return all folders and files in a given location.
    *
    * @param driverName the driver name
    * @param currentFolder the current folder
@@ -181,10 +195,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param workspaceName the workspace name
    * @param filterBy the filter by
    * @param userId the user id
-   *
    * @return the folders and files
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -233,7 +247,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 
   /**
-   * Upload file.
+   * Upload a file.
    *
    * @param inputStream the input stream
    * @param repositoryName the repository name
@@ -246,10 +260,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param contentLength the content length
    * @param currentPortal the current portal
    * @param driverName the driver name
-   *
    * @return the response
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -261,7 +275,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Process upload.
+   * Control the process of uploading a file, such as aborting, deleting or processing the file.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -273,10 +287,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param uploadId the upload id
    * @param siteName the current portal
    * @param driverName the driver name
-   *
    * @return the response
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")
@@ -373,6 +387,14 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return folders;
   }
 
+  /**
+   * Resolve Drive label.
+   *
+   * @param name
+   * @param lang
+   *
+   * @return the name 
+   */
   private String resolveDriveLabel(String name, String lang) {
     if (resourceBundleService ==null) {
       resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -513,6 +535,20 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return currentUserIdentity.getMemberships();
   }
 
+  /**
+   * Build an XML responsoe for children
+   *
+   * @param node
+   * @param command
+   * @param filterBy
+   * @param session
+   * @param currentPortal
+   * @param nodeDriveName
+   * 
+   * @throws Exception
+   * 
+   * @return response
+   */
   private Response buildXMLResponseForChildren(Node node,
                                                String command,
                                                String filterBy,
@@ -814,6 +850,17 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
   }
 
+  /**
+   * Createn a folder element
+   *
+   * @param document 
+   * @param child
+   * @param folderType
+   * @param childName
+   * @param nodeDriveName
+   *
+   * @return folder
+   */
   private Element createFolderElement(Document document,
                                       Node child,
                                       String folderType,
