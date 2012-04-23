@@ -558,7 +558,7 @@ public class Utils {
 	  String currentProtal = PortalContainer.getCurrentRestContextName();
 	  String portalName = PortalContainer.getCurrentPortalContainerName();
 	  
-	  String originalNodePath = getRealNodePath(node);
+	  String originalNodePath = Text.escape(getRealNodePath(node),'%',true);
 	  String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/" + workspace + originalNodePath;
 	  if (imagePath.contains("?")) {
 	  	imagePath += "&time=";
