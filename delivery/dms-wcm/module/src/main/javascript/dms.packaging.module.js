@@ -31,8 +31,8 @@ function getModule(params) {
     addDependency(new Project("jdom", "jdom", "jar", "1.0")).
     addDependency(new Project("org.apache.ws.commons", "ws-commons-util", "jar", "1.0.1")).
   //addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
-    addDependency(new Project("org.icepdf", "icepdf-core", "jar", "4.0.1")).
-    addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "4.0.1")).
+    addDependency(new Project("org.icepdf", "icepdf-core", "jar", "4.3.2")).
+    addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "4.3.2")).
     addDependency(new Project("org.apache.pdfbox", "fontbox", "jar", "1.1.0")).
     addDependency(new Project("com.artofsolving", "jodconverter", "jar", "2.2.2")).
     addDependency(new Project("com.artofsolving", "jodconverter-cli", "jar", "2.2.2")).
