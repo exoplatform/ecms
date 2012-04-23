@@ -237,7 +237,7 @@ UploadForm.prototype.uploadFileSave = function() {
 		strParam += "&currentPortal="+eXo.ecm.ECS.portalName;
 		strParam += "&userId="+eXo.ecm.ECS.userId;
 		var uploadId = eXo.ecm.UploadForm.uploadId;
-		strParam +="&action=save&uploadId="+uploadId+"&filename="+nodeName;
+		strParam +="&action=save&uploadId="+uploadId+"&fileName="+nodeName;
 		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 //		var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 		var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language="+eXo.ecm.ECS.userLanguage;
