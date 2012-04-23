@@ -278,11 +278,14 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public UIComponent getUIComponent(String mimeType) throws Exception {
     //check for correct mimeType first
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
-    String realMimeType = DMSMimeTypeResolver.getInstance().getMimeType(currentNode.getName());
-    if ( ((mimeType == null || "".equals(mimeType)) != (realMimeType == null || "".equals(realMimeType))) ||
-         !mimeType.equals(realMimeType) ) {
-      return null;
+    if (!isTextType(currentNode)) {
+      String realMimeType = DMSMimeTypeResolver.getInstance().getMimeType(currentNode.getName());
+      if (((mimeType == null || "".equals(mimeType)) != (realMimeType == null || "".equals(realMimeType)))
+         || !mimeType.equals(realMimeType) ) {
+        return null;
+      }
     }
+    
     //get the UIComponent used to display file
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
@@ -809,6 +812,19 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     Map<String, Object> context = new HashMap<String, Object>();
     context.put(Utils.MIME_TYPE, mimeType);
     if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, "VideoAudio", context)) {
+        return true;
+    }
+    return false;
+  }
+  
+  public boolean isTextType(Node data) throws Exception {
+    if (!data.isNodeType(Utils.NT_FILE)) return false;
+    
+    String mimeType = data.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString();
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+    Map<String, Object> context = new HashMap<String, Object>();
+    context.put(Utils.MIME_TYPE, mimeType);
+    if (manager.accept(Utils.FILE_VIEWER_EXTENSION_TYPE, "Text", context)) {
         return true;
     }
     return false;
