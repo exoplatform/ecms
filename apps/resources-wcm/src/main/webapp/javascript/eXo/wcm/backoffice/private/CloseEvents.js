@@ -170,25 +170,40 @@ window.onbeforeunload = closeIt;
 /**
  * Catch when some content has changed in the form
  **/
-  var UIDocForm = document.getElementById("UIDocumentForm");
-
+if (navigator.userAgent.indexOf("MSIE") >= 0) {
+  changeElements("UIDocumentForm");
+  changeElements("UITask");
+} else {
+  if (document.getElementById("UIDocumentForm")) {
+    document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
+  }
+	 
+  if (document.getElementById("UITask")) {
+    document.getElementById("UITask").setAttribute("onchange", "changed()");
+  }
+}
+ 
+function changeElements(divId) {
+  var UIDocForm = document.getElementById(divId);
+  if (!UIDocForm) return;
   //add onchange event into <input> tags
   var inputTags = UIDocForm.getElementsByTagName("input");
   for (var i = 0; i < inputTags.length; i++) {
-    inputTags[i].onchange = new Function ("changed();");
+    inputTags[i].attachEvent("onchange", new Function ("changed();"));
   }
 
   //add onchange event into <select> tags
   var selectTags = UIDocForm.getElementsByTagName("select");
   for (var i = 0; i < selectTags.length; i++) {
-    selectTags[i].onchange = new Function ("changed();");
+    selectTags[i].attachEvent("onchange", new Function ("changed();"));
   }
 
   //add onchange event into <textarea> tags
   var textareaTags = UIDocForm.getElementsByTagName("textarea");
   for (var i = 0; i < textareaTags.length; i++) {
-    textareaTags[i].onchange = new Function ("changed();");
+    textareaTags[i].attachEvent("onchange", new Function ("changed();"));
   }
+}
   
 /**
  * Update each textarea when you type inside CKEditor
