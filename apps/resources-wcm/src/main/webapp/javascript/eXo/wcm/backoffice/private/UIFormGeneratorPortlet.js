@@ -119,9 +119,13 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	formGenerator  +=								"<td class='FieldLabel'>Width</td>";	
 	formGenerator  +=								"<td class='FieldComponent'>";
 	formGenerator  +=									"<input type='number' value='' class='InputText' style='width: 50%; float:left;' onkeyup='eXo.ecm.UIFormGeneratorPortlet.updateWidth(this);' />";
-	formGenerator  +=									"<div class='BoxRules'>";
-	formGenerator  +=										"Rules: <input class='Requied' type='checkbox' onchange='eXo.ecm.UIFormGeneratorPortlet.updateRequired(this);'>Required</input>";
-	formGenerator  +=									"</div>";
+	
+	if (typeComp != 'checkbox') {
+	  formGenerator  +=									"<div class='BoxRules'>";
+	  formGenerator  +=										"Rules: <input class='Requied' type='checkbox' onchange='eXo.ecm.UIFormGeneratorPortlet.updateRequired(this);'>Required</input>";
+	  formGenerator  +=									"</div>";
+	}
+	
 	formGenerator  +=								"</td>";
 	formGenerator  +=								"<td class='FieldIcon'><span></span></td>";
 	formGenerator  +=							"</tr>";
