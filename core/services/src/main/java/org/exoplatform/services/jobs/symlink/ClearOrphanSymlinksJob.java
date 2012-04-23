@@ -16,7 +16,6 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -97,7 +96,9 @@ public class ClearOrphanSymlinksJob implements Job {
             } catch (RepositoryException e) {
               
             } finally {
-              targetSession.add(targetNode.getSession());
+              if (targetNode != null) {
+                targetSession.add(targetNode.getSession());
+              }
             }
             
             //move the nodes in list to trash
@@ -124,7 +125,9 @@ public class ClearOrphanSymlinksJob implements Job {
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
     } finally {
-      sessionProvider.close();
+    	if (sessionProvider != null) {
+    	  sessionProvider.close();
+    	}
     }
     log.info("ClearOrphanSymlinksJob: Done!");
   }
