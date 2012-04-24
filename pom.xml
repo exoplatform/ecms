@@ -13,8 +13,8 @@
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
   <scm>
-    <connection>scm:git:ssh://github.com/exoplatform/ecms.git</connection>
-    <developerConnection>scm:git:ssh://github.com/exoplatform/ecms.git</developerConnection>
+    <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
+    <developerConnection>scm:git:git@github.com:exoplatform/ecms.git</developerConnection>
     <url>https://fisheye.exoplatform.com/browse/ecms.git</url>
   </scm>
   <issueManagement>
