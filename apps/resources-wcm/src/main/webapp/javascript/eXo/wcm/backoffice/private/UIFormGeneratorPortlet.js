@@ -24,7 +24,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	switch(typeComp){
 		case "label"		:
 			fieldComponent  +=		"<td class='FieldLabel' value='Label'>Label</td>";
-			fieldComponent  +=		"<td class='FieldComponent'></td>";
+			fieldComponent  +=		"<td class='FieldComponent'><label class='InputText'></label></td>";
 			break;
 		case "input"		: 
 			fieldComponent  +=		"<td class='FieldLabel' value='Input Text'>Input field</td>";
@@ -315,7 +315,7 @@ UIFormGeneratorPortlet.prototype.updateValue = function(evt) {
 	if(!eltName) return;
 	switch(eltName) {
 		case "Label" :
-			var labelNode = DOMUtil.findFirstDescendantByClass(componentNode, 'td', 'FieldComponent');
+			var labelNode = DOMUtil.findFirstDescendantByClass(componentNode, 'label', 'InputText');
 			labelNode.innerHTML = srcEle.value;
 			break;
 		case "Input Text" :
@@ -593,7 +593,8 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 			strObject +=  '"value":"'+inputNode.value+'","width":'+width+',"mandatory":'+mandatory+',"height":'+height+',';
 			break;
 		case "label" :
-			var labelNode = DOMUtil.findFirstDescendantByClass(topContent, 'td', 'FieldComponent');
+			var labelNode = DOMUtil.findFirstDescendantByClass(topContent, 'label', 'InputText');
+			var mandatory = fieldLabel.getAttribute('mandatory');
 			strObject +=  '"value":"' + labelNode.innerHTML + '","width":0,"mandatory":'+mandatory+',"height":0,';
 			break;
 		case "textarea" :
