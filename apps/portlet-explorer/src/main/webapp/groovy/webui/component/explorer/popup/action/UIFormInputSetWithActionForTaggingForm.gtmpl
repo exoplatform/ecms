@@ -48,10 +48,8 @@
               <tr >
                <%
                 String label = _ctx.appRes(formName + ".label." + inputEntry.getId()) ;
-                if(!label.equals(inputEntry.getId())) {
-              %>
-                  <td class="FieldLabel"><%=label%></td>
-               <%}%>
+               %>
+                <td class="FieldLabel"><%=label%></td>
                 <td class="FieldComponent">
                 <% 
               if(inputEntry instanceof UIFormRadioBoxInput) {

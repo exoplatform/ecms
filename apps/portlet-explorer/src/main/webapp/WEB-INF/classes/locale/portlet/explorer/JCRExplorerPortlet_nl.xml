@@ -1989,7 +1989,7 @@
 	<UITaggingForm>
 		<label>
 			<names>Tag namen</names>
-			<linked>gelinkte tags</linked>
+			<linked>Gelinkte tags</linked>
 			<tagSet>UITaggingForm</tagSet>
 		</label>
 		<action>
@@ -3043,9 +3043,69 @@
     <tooltip>
       <AddCategory>Add category</AddCategory>
     </tooltip>
-	 </UIActionBar>
-		
-		<UIPopupMenu>
+  </UIActionBar>
+
+  <UITaggingForm>
+    <label>
+      <Public>Publiek</Public>
+      <Group>Groep</Group>
+      <Site>Plaats</Site>
+      <Private>Privaat</Private>
+      <tagScopes>Tag Scopes</tagScopes>
+    </label>
+  </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <EditPrivateTags>Bewerken private tags</EditPrivateTags>
+      <PublicTags>Openbare tags</PublicTags>
+      <EditPublicTags>Bewerken openbare tags</EditPublicTags>
+      <PrivateTags>Private tags</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Naam</name>
+      <relatedDocuments>Gerelateerde documenten</relatedDocuments>
+      <action>Actie</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Bewerken tag</EditTag>
+        <RemoveTag>Verwijder deze tag</RemoveTag>
+        <AddTag>Tag toevoegen</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Wilt u verwijderen?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Bewerken tag vorm</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <tagName>Tag naam</tagName>
+      <relatedDocuments>Gerelateerde documenten</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Tag vorm</UITagForm>
+    </title>
+  </TagPopup>
+	
+  <UIPopupMenu>
   	<msg>
   		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>	
     </msg>

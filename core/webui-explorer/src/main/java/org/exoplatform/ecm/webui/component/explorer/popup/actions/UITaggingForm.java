@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -95,13 +96,11 @@ public class UITaggingForm extends UIForm {
   public UITaggingForm() throws Exception {
     UIFormInputSetWithActionForTaggingForm uiInputSet = new UIFormInputSetWithActionForTaggingForm(LINKED_TAGS_SET);
     uiInputSet.addUIFormInput(new UIFormStringInput(TAG_NAMES, TAG_NAMES, null));
-		uiInputSet.addUIFormInput(new UIFormTextAreaInput(TAG_NAME_LIST, TAG_NAME_LIST, null));
+    uiInputSet.addUIFormInput(new UIFormTextAreaInput(TAG_NAME_LIST, TAG_NAME_LIST, null));
     
-    RequestContext context = RequestContext.getCurrentInstance();
-    ResourceBundle res = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> tagScopes = new ArrayList<SelectItemOption<String>>();
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PRIVATE), Utils.PRIVATE));    
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC), Utils.PUBLIC));
+    tagScopes.add(new SelectItemOption<String>(getLabel(Utils.PRIVATE), Utils.PRIVATE));    
+    tagScopes.add(new SelectItemOption<String>(getLabel(Utils.PUBLIC), Utils.PUBLIC));
     /* Disable Group and Site tag
     tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.GROUP), Utils.GROUP));
     tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.SITE), Utils.SITE));
