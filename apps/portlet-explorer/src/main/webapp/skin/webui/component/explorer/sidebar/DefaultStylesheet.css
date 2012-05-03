@@ -80,6 +80,7 @@
 .UIJCRExplorerPortlet .UISideBar .SideContent{
 	 background: #f5f5f5;
 	 overflow: auto;
+   height : 100%;
 }
 
 .UIJCRExplorerPortlet .UISideBar .BarContent .Title{
