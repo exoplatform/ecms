@@ -379,6 +379,9 @@ public class UIDialogForm extends UIForm {
       if (calendarField.validateType != null) {
         DialogFormUtil.addValidators(uiDateTime, calendarField.validateType);
       }
+      if (isAddNew && uiDateTime.getCalendar() == null) {
+        uiDateTime.setCalendar(new GregorianCalendar());
+      }
     }
     uiDateTime.setDisplayTime(calendarField.isDisplayTime());
     String propertyName = getPropertyName(jcrPath);

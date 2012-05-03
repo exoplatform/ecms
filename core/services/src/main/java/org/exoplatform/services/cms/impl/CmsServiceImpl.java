@@ -561,13 +561,11 @@ public class CmsServiceImpl implements CmsService {
     switch (requiredtype) {
     case PropertyType.STRING:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          if(isMultiple) {
-            node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
-          } else {
-            node.setProperty(propertyName, StringUtils.EMPTY);
-          }
-        }        
+        if(isMultiple) {
+          node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
+        } else {
+          node.setProperty(propertyName, StringUtils.EMPTY);
+        }
       } else {
         if(isMultiple) {
           if (value instanceof String) {
@@ -582,9 +580,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.BINARY:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, "");
-        }
+        node.setProperty(propertyName, "");
       } else if(value instanceof InputStream) {
         node.setProperty(propertyName, (InputStream)value);
       } else if (value instanceof byte[]) {
@@ -598,9 +594,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.BOOLEAN:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, false);
-        }
+        node.setProperty(propertyName, false);
       } else if (value instanceof String) {
         node.setProperty(propertyName, 
             new Boolean((String) value).booleanValue());
@@ -612,9 +606,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.LONG:
       if (value == null || "".equals(value)) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, 0);
-        }
+        node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         node.setProperty(propertyName, new Long((String) value).longValue());
       } else if (value instanceof String[]) {
@@ -625,9 +617,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.DOUBLE:
       if (value == null || "".equals(value)) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, 0);
-        }
+        node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         node.setProperty(propertyName, new Double((String) value).doubleValue());
       } else if (value instanceof String[]) {
@@ -635,30 +625,27 @@ public class CmsServiceImpl implements CmsService {
       } else if (value instanceof Double) {
         node.setProperty(propertyName, ((Double) value).doubleValue());
       }
-      
       break;
     case PropertyType.DATE:      
       if (value == null){
-        if (!node.hasProperty(propertyName)) {
-          boolean mandatory = false;
-          for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+        boolean mandatory = false;
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+          if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+            mandatory = true;
+            break;
+          }
+        for (NodeType mixin : node.getMixinNodeTypes()) {
+          for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
             if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
               mandatory = true;
               break;
             }
-          for (NodeType mixin : node.getMixinNodeTypes()) {
-            for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
-              if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
-                mandatory = true;
-                break;
-              }
-            }
           }
-          if (mandatory) {
-            node.setProperty(propertyName, new GregorianCalendar());
-          } else {
-            node.setProperty(propertyName, (Value)null);
-          }
+        }
+        if (mandatory) {
+          node.setProperty(propertyName, new GregorianCalendar());
+        } else {
+          node.setProperty(propertyName, (Value)null);
         }
       } else {
         if (isMultiple) {
@@ -689,16 +676,14 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.REFERENCE:      
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          if (isMultiple) {
-            if (value instanceof String) {
-              node.setProperty(propertyName, "");
-            } else if (value instanceof String[]) {
-              node.setProperty(propertyName, new String[] {});          
-            }
-          } else {
+        if (isMultiple) {
+          if (value instanceof String) {
             node.setProperty(propertyName, "");
+          } else if (value instanceof String[]) {
+            node.setProperty(propertyName, new String[] {});          
           }
+        } else {
+          node.setProperty(propertyName, "");
         }
       }
       if (value instanceof Value[]) {
@@ -800,13 +785,11 @@ public class CmsServiceImpl implements CmsService {
     switch (requiredtype) {
     case PropertyType.STRING:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          if(isMultiple) {
-            node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
-          } else {
-            node.setProperty(propertyName, StringUtils.EMPTY);
-          }
-        }        
+        if(isMultiple) {
+          node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
+        } else {
+          node.setProperty(propertyName, StringUtils.EMPTY);
+        }
       } else {
         if(isMultiple) {
           if (value instanceof String) {
@@ -825,9 +808,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.BINARY:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, "");
-        }
+        node.setProperty(propertyName, "");
       } else if(value instanceof InputStream) {
         if(!property.getValue().getStream().equals(value)) {
           node.setProperty(propertyName, (InputStream)value);
@@ -848,9 +829,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.BOOLEAN:
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, false);
-        }
+        node.setProperty(propertyName, false);
       } else if (value instanceof Boolean) {
         node.setProperty(propertyName, ((Boolean) value).booleanValue());
       }else if (value instanceof String) {
@@ -865,9 +844,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.LONG:
       if (value == null || "".equals(value)) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, 0);
-        }
+        node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         if(property.getValue().getLong() != new Long((String) value).longValue()) {
           node.setProperty(propertyName, new Long((String) value).longValue());
@@ -882,9 +859,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.DOUBLE:
       if (value == null || "".equals(value)) {
-        if (!node.hasProperty(propertyName)) {
-          node.setProperty(propertyName, 0);
-        }
+        node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         if(property.getValue().getDouble() != new Double((String) value).doubleValue()) {
           node.setProperty(propertyName, new Double((String) value).doubleValue());
@@ -899,29 +874,27 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.DATE:      
       if (value == null){
-        if (!node.hasProperty(propertyName)) {
-          boolean mandatory = false;
-          for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+        boolean mandatory = false;
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+          if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+            mandatory = true;
+            break;
+          }
+        for (NodeType mixin : node.getMixinNodeTypes()) {
+          for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
             if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
               mandatory = true;
               break;
             }
-          for (NodeType mixin : node.getMixinNodeTypes()) {
-            for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
-              if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
-                mandatory = true;
-                break;
-              }
-            }
           }
-          if (mandatory) {
-            node.setProperty(propertyName, new GregorianCalendar());
-          } else {
-            if(isMultiple)
-              node.setProperty(propertyName, (Value[])null);
-            else
-              node.setProperty(propertyName, (Value)null);
-          }
+        }
+        if (mandatory) {
+          node.setProperty(propertyName, new GregorianCalendar());
+        } else {
+          if(isMultiple)
+            node.setProperty(propertyName, (Value[])null);
+          else
+            node.setProperty(propertyName, (Value)null);
         }
       } else {
         if(isMultiple) {
@@ -959,16 +932,14 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.REFERENCE:      
       if (value == null) {
-        if (!node.hasProperty(propertyName)) {
-          if (isMultiple) {
-            if (value instanceof String) {
-              node.setProperty(propertyName, "");
-            } else if (value instanceof String[]) {
-              node.setProperty(propertyName, new String[] {});
-            }
-          } else {
+        if (isMultiple) {
+          if (value instanceof String) {
             node.setProperty(propertyName, "");
+          } else if (value instanceof String[]) {
+            node.setProperty(propertyName, new String[] {});
           }
+        } else {
+          node.setProperty(propertyName, "");
         }
       }
       if (value instanceof Value[]) {
