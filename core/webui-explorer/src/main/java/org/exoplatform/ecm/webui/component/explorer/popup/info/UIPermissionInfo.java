@@ -25,6 +25,7 @@ import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -206,6 +207,12 @@ public class UIPermissionInfo extends UIContainer {
         } catch(AccessDeniedException ace) {
           node.getSession().refresh(false) ;
           uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.access-denied", null, 
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+          return ;          
+        } catch(RepositoryException e) {
+          node.getSession().refresh(false) ;
+          uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission", null, 
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;          

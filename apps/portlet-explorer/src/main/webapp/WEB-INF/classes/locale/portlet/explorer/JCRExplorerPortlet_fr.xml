@@ -3355,4 +3355,9 @@
 		  <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
+  <UIPermissionInfo>
+    <msg>
+      <no-permission>Vous ne pouvez pas supprimer tous les droits de ce noeud. Chaque noeud doit avoir au moins une permission sauf pour les 'system'</no-permission>
+    </msg>
+  </UIPermissionInfo>	  	
 </bundle>

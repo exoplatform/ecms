@@ -3360,4 +3360,9 @@
 		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
+  <UIPermissionInfo>
+    <msg>
+      <no-permission>Bạn không có thể loại bỏ tất cả quyền truy cập của node này. Node cần có ít nhất một quyền truy cập ngoại trừ 'system'</no-permission>
+    </msg>
+  </UIPermissionInfo>	  	
 </bundle>

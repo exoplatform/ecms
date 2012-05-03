@@ -3321,6 +3321,11 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm>	  	
+  </UIDocumentForm>
+  <UIPermissionInfo>
+    <msg>
+      <no-permission>You can not remove all permissions of this node. Node should have at least one permission except for the 'system'</no-permission>
+    </msg>
+  </UIPermissionInfo>	  	
 </bundle>
 
