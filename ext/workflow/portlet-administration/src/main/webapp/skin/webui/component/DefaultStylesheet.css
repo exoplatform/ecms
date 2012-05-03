@@ -383,3 +383,7 @@
   width: 16px; height: 16px;
   background: url('DefaultSkin/icons/BlueCirclePlus.gif') no-repeat;  
 }
+
+.UIWorkflowPortlet .UITabContentContainer .UITask .UIFormGrid td.FieldLabel {
+  width : 25%;
+}
