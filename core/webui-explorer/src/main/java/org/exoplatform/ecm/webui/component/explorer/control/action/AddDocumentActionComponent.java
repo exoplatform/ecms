@@ -30,6 +30,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
@@ -62,7 +63,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 public class AddDocumentActionComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS 
-      = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotNtFileFilter(),
+                                              new CanAddNodeFilter(),
                                               new IsNotLockedFilter(), 
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter(),
