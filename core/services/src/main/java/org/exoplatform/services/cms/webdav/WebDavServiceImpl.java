@@ -376,7 +376,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     Response res =  super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, userAgent, inputStream);
     try {
       Node currentNode = (Node) session.getItem(path(repoPath));
-      listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);      
+      if (currentNode.isCheckedOut()) 
+         listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);      
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
     } catch (RepositoryException re) {
