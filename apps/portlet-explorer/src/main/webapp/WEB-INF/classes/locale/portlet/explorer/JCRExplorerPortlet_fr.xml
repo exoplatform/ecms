@@ -3335,6 +3335,7 @@
   <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>Accès au fichier est interdit.</file-access-denied>
+	   <anonymous-access-denied>Utilisateur anonyme n'a pas la permission d'utiliser cette fonction.</anonymous-access-denied>
 	</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
