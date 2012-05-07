@@ -70,7 +70,7 @@
 		  		
 		  		<%
 		  		String commentor=null;
-		  		String path = comment.getPath();
+		  		String path = URLEncoder.encode(comment.getPath(),"utf-8");
 		  		String parentPath = comment.getSession().getWorkspace().getName().concat(":").concat(uicomponent.getNode().getPath());
 		  		if(comment.hasProperty("exo:commentor")){
 		  		  commentor=comment.getProperty("exo:commentor").getString();
@@ -80,8 +80,8 @@
 	  		 <% if (uicomment != null) {
 	  		   Parameter[] paramsComment = [new Parameter("nodePath", URLEncoder.encode(org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path), "utf-8"))];
 	  		 %>
-			  		<a href="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), paramsComment)%>">
-							<image class="EditComment" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>"/>
+			  		<a href="<%=uicomment.event("Comment", URLEncoder.encode(org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath),"utf-8"), paramsComment)%>">
+			  			<image class="EditComment" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>"/>
 						</a>
 				<%
 	  		 Parameter[] params = [new Parameter("workspaceName", comment.getSession().getWorkspace().getName()), new Parameter("repository", uicomponent.getRepository())];

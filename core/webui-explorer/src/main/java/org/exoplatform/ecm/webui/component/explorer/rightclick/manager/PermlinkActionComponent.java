@@ -22,13 +22,12 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -69,6 +68,7 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if (drivePath.contains("${userId}")) drivePath = drivePath.replace("${userId}", userId);
     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
+    nodePath = Text.escape(nodePath,'%',true);
     String repository = uiExplorer.getRepositoryName();
     StringBuffer bf = new StringBuffer(1024);
     return bf.append(portalUrl).append(portletId).append("?path=").append(repository).append("/").append(drivename).append(nodePath).toString();
