@@ -196,12 +196,6 @@
   </servlet>
 
   <servlet>
-    <servlet-name>Controller</servlet-name>
-    <servlet-class>org.exoplatform.frameworks.jcr.web.CommandControllerServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-
-  <servlet>
     <servlet-name>PortalLoginController</servlet-name>
     <servlet-class>org.exoplatform.web.security.PortalLoginController</servlet-class>
   </servlet>
@@ -282,12 +276,7 @@
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
   </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>Controller</servlet-name>
-    <url-pattern>/connector</url-pattern>
-  </servlet-mapping>
-
+  
   <servlet-mapping>
     <servlet-name>GateInServlet</servlet-name>
     <url-pattern>/gateinservlet</url-pattern>
