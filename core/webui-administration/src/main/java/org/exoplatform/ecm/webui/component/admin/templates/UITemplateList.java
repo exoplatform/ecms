@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -110,19 +111,25 @@ public class UITemplateList extends UIPagingGrid {
 
   static public class DeleteActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
-      UITemplateList nodeTypeList = event.getSource() ;
-      UITemplatesManager uiTemplatesManager = nodeTypeList.getParent() ;
+      UITemplateList nodeTypeList = event.getSource();
+      UITemplatesManager uiTemplatesManager = nodeTypeList.getParent();
       if (uiTemplatesManager.isEditingTemplate()) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.editing-template", null, ApplicationMessage.WARNING)) ;
-        
-        return ;
+        return;
       }
-      String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      TemplateService templateService = nodeTypeList.getApplicationComponent(TemplateService.class) ;
-      templateService.removeManagedNodeType(nodeType) ;
-      nodeTypeList.refresh(nodeTypeList.getUIPageIterator().getCurrentPage()) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent()) ;
+      
+      String nodeType = event.getRequestContext().getRequestParameter(OBJECTID);
+      TemplateService templateService = nodeTypeList.getApplicationComponent(TemplateService.class);
+      try {
+        templateService.removeManagedNodeType(nodeType);
+      } catch (PathNotFoundException ex) {
+        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
+        uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.template-not-exist", null, ApplicationMessage.WARNING)) ;
+        return;
+      }
+      nodeTypeList.refresh(nodeTypeList.getUIPageIterator().getCurrentPage());
+      event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent());
     }
   }
 

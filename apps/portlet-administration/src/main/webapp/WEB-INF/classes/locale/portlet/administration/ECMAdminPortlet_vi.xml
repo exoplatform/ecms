@@ -2444,8 +2444,9 @@
 		</label>
 	</UINodeTypeSelector>
   <UITemplateList>
-		<msg>	
-	      <editing-template>Lỗi truy cập! Bạn không thể sửa và xóa mẫu đồng thời!</editing-template>
+    <msg>	
+      <editing-template>Lỗi truy cập! Bạn không thể sửa và xóa mẫu đồng thời!</editing-template>
+      <template-not-exist>Bản mẫu mà bạn xóa không tồn tại.</template-not-exist>
     </msg>
   </UITemplateList>
 	<UIChildNodeDefinitionForm>

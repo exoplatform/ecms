@@ -2438,8 +2438,9 @@
 		</label>
 	</UINodeTypeSelector>
   <UITemplateList>
-		<msg>	
-	      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+    <msg>	
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
   <UIPermissionInfo>  

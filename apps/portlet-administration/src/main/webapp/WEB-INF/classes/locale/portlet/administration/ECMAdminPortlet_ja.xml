@@ -2459,5 +2459,11 @@
     <maxPageSize>最大ページサイズ</maxPageSize>
   </label>
  </UIPageIterator> 
+ 
+  <UITemplateList>
+    <msg>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UITemplateList>
 </bundle>
 

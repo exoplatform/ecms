@@ -2370,9 +2370,9 @@
     </msg>
   </UIPermissionInfo>
 	  <UITemplateList>
-			<msg>	
-		      <editing-template>رفض الوصول! لا يمكنك حذف وتعديل قالب واحد.</editing-template>
-	    </msg>
+        <msg>	
+          <editing-template>رفض الوصول! لا يمكنك حذف وتعديل قالب واحد.</editing-template>
+        </msg>
 	  </UITemplateList>
 	<UIChildNodeDefinitionForm>
 	  <msg>	
@@ -2392,6 +2392,11 @@
   <label>
     <maxPageSize>Maximum page size</maxPageSize>
   </label>
- </UIPageIterator>	 
+ </UIPageIterator>
+  <UITemplateList>
+    <msg>	
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UITemplateList>
 </bundle>
   

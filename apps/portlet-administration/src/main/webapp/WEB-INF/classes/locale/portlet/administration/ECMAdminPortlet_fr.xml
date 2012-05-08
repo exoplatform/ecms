@@ -1646,6 +1646,7 @@
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
       <editing-template>Accès interdit! Vous ne pouvez pas supprimer et modifier le template en même temps.</editing-template>
+      <template-not-exist>Le template que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UITemplateList>
   <!--

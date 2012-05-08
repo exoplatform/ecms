@@ -2374,9 +2374,10 @@
     </msg>
   </UIPermissionInfo>		
 	<UITemplateList>
-		<msg>	
-	      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-	    </msg>
+	  <msg>	
+        <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+        <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      </msg>
 	</UITemplateList>
 	<UIChildNodeDefinitionForm>
 	  <msg>	
