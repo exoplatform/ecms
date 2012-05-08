@@ -166,20 +166,34 @@ public class UIViewList extends UIPagingGrid {
 
   static  public class DeleteActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
-      UIViewList viewList = event.getSource() ;
-      viewList.setRenderSibling(UIViewList.class) ;
+      UIViewList viewList = event.getSource();
+      viewList.setRenderSibling(UIViewList.class);
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID)  ;
-      ManageDriveService manageDrive = viewList.getApplicationComponent(ManageDriveService.class) ;
+      ManageDriveService manageDrive = viewList.getApplicationComponent(ManageDriveService.class);
+      ManageViewService manageViewService = viewList.getApplicationComponent(ManageViewService.class);
+      
       if(!viewList.canDelete(manageDrive.getAllDrives(), viewName)) {
-        UIApplication app = viewList.getAncestorOfType(UIApplication.class) ;
-        Object[] args = {viewName} ;
-        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
-        return ;
+        
+        // Get view display name
+        ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();
+        String viewDisplayName = null;
+        try {
+          viewDisplayName = res.getString("Views.label." + viewName);
+        } catch (MissingResourceException e) {
+          viewDisplayName = viewName;
+        }
+        
+        // Dis play error message
+        UIApplication app = viewList.getAncestorOfType(UIApplication.class);
+        Object[] args = {viewDisplayName};
+        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args));
+        event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent());
+        return;
       }
-      viewList.getApplicationComponent(ManageViewService.class).removeView(viewName) ;
-      viewList.refresh(viewList.getUIPageIterator().getCurrentPage()) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
+      
+      manageViewService.removeView(viewName);
+      viewList.refresh(viewList.getUIPageIterator().getCurrentPage());
+      event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent());
     }
   }
 
