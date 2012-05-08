@@ -36,7 +36,7 @@
         		<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 				<td class="FieldComponent">
 				<%
-				  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+				  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
 				  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
 				  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
 				%>
