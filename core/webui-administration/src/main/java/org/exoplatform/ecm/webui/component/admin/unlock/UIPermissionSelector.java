@@ -46,8 +46,7 @@ import org.exoplatform.webui.organization.UIGroupMembershipSelector;
         events = {
           @EventConfig(listeners = UIPermissionSelector.ChangeNodeActionListener.class),
           @EventConfig(listeners = UIPermissionSelector.SelectMembershipActionListener.class),
-          @EventConfig(listeners = UIPermissionSelector.SelectPathActionListener.class),
-          @EventConfig(listeners = UIPermissionSelector.AddAnyPermissionActionListener.class)
+          @EventConfig(listeners = UIPermissionSelector.SelectPathActionListener.class)
         }),
     @ComponentConfig(
         type = UITree.class,
@@ -81,9 +80,6 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /** The is use popup. */
   private boolean             isUsePopup      = true;
-
-  /** Show/hide Add AnyPermission form   */
-  private boolean             isShowAnyPermission = true;
 
   /**
    * Instantiates a new uI permission selector.
@@ -237,20 +233,6 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
     }
   }
 
-  static public class AddAnyPermissionActionListener extends EventListener<UIAnyPermission> {
-    public void execute(Event<UIAnyPermission> event) throws Exception {
-      UIAnyPermission uiAnyPermission = event.getSource();
-      UIPermissionSelector uiPermissionSelector = uiAnyPermission.getParent();
-      String value = "*";
-      LockService lockService = uiPermissionSelector.getApplicationComponent(LockService.class);
-      lockService.addGroupsOrUsersForLock(value);
-      UIUnLockManager uiUnLockManager = uiPermissionSelector.getAncestorOfType(UIUnLockManager.class);
-      uiUnLockManager.refresh();
-      uiUnLockManager.getChild(UILockNodeList.class).setRendered(false);
-      uiUnLockManager.getChild(UILockHolderContainer.class).setRendered(true);
-    }
-  }
-
   /**
    * Sets the selected user.
    *
@@ -310,17 +292,6 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
   * @return
   */
  public boolean isShowAnyPermission() {
-   return isShowAnyPermission;
+   return false;
  }
-
- /**
-  * Set show/hide any permission form
-  * @param isShowAnyPermission
-  * isShowAnyPermission =  true: Show form  <br>
-  * isShowAnyPermission =  false: Hide form
-  */
- public void setShowAnyPermission(boolean isShowAnyPermission) {
-   this.isShowAnyPermission = isShowAnyPermission;
- }
-
 }
