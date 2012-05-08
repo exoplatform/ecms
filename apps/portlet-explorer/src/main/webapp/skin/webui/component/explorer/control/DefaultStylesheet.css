@@ -828,6 +828,7 @@
 .UIJCRExplorerPortlet .UIActionBar .SubTabItem {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
+	cursor: pointer;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .SubTabItem a:hover{
