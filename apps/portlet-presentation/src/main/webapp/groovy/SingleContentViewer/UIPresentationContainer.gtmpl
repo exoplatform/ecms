@@ -29,8 +29,8 @@
 			%>
 			<div class="UIPresentationContainer" id="$uicomponent.id">
 			<%
-        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass');})");
-        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer');})");
+        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')})");
+        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')})");
         
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="EdittingToolBarContainer" style="$edittingStyle">
