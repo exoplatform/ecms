@@ -518,31 +518,44 @@ public class CmsServiceImpl implements CmsService {
       }
     }
     
-    //process child node
+    //process child nodes
     int itemLevel = StringUtils.countMatches(itemPath, "/") ;
     List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;
     NodeTypeManager nodeTypeManger = currentNode.getSession().getWorkspace().getNodeTypeManager();
     List<Object> childs = new ArrayList<Object>();
-    Set<String> childNames = new HashSet<String>();
     
-    for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) { 
-      childs.add(childNodeDef);
-      NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
-      NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
-      childNames.add(childNodeDef.getName() + 
-                     (declaringNodeType == null ? null : declaringNodeType.getName()) + 
-                     (defaultPrimaryType == null? null : defaultPrimaryType.getName()) );
-    }
-    if (currentNode != null) {
-      for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
-        NodeDefinition childNodeDef = iterator.nextNode().getDefinition();
+    if (currentNodeType.isMixin()) {
+      if (create) {
+        for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) {
+          childs.add(childNodeDef);
+        }
+      } else {
+        for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
+          childs.add(iterator.nextNode());
+        }
+      }
+    } else {
+      Set<String> childNames = new HashSet<String>();
+      
+      for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) { 
+        childs.add(childNodeDef);
         NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
         NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
-        
-        if (!childNames.contains(childNodeDef.getName() + 
-                                 (declaringNodeType == null ? null : declaringNodeType.getName()) + 
-                                 (defaultPrimaryType == null? null : defaultPrimaryType.getName()))) {
-          childs.add(childNodeDef);
+        childNames.add(childNodeDef.getName() + 
+                       (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+                       (defaultPrimaryType == null? null : defaultPrimaryType.getName()) );
+      }
+      if (currentNode != null) {
+        for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
+          NodeDefinition childNodeDef = iterator.nextNode().getDefinition();
+          NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
+          NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
+          
+          if (!childNames.contains(childNodeDef.getName() + 
+                                   (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+                                   (defaultPrimaryType == null? null : defaultPrimaryType.getName()))) {
+            childs.add(childNodeDef);
+          }
         }
       }
     }
