@@ -807,10 +807,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       .getComponentInstanceOfType(ManageDriveService.class);
 
     try {
-      return (Node)session.getItem(
-          manageDriveService.getDriveByName(driverName).getHomePath()
-          + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
-          + currentFolder);
+      String parentPath = 
+              manageDriveService.getDriveByName(driverName).getHomePath()
+              + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
+              + currentFolder;
+      parentPath = parentPath.replace("//", "/");
+      return (Node)session.getItem(parentPath);
     } catch (Exception e) {
       return null;
     }
