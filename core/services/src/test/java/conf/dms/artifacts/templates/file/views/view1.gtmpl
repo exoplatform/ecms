@@ -154,11 +154,14 @@
 				        <%
 				        	if(contentNode.hasProperty("jcr:data")){
 				        	  String iframeId = uicomponent.getId() + "ifame" ;
-				        	  rcontext.getJavascriptManager().addCustomizedOnLoadScript("eXo.ecm.ECMUtils.replaceToIframe('$iframeId');");
 				        %>
 				        	<div style="text-align: center">
 				        	  <textarea id="<%=iframeId%>"><%=contentNode.getProperty("jcr:data").getString()%></textarea> 
 				        	</div>
+				        	
+				        	<script type="text/javascript">
+				        	  eXo.ecm.WCMUtils.replaceToIframe('$iframeId');
+				        	</script> 
 				        <%}%>
 					    </div>   
 		        </div>
