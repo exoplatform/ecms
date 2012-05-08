@@ -17,8 +17,6 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -40,8 +38,7 @@ public class UITemplatesManager extends UIAbstractManager {
   final static public String NEW_TEMPLATE = "TemplatePopup" ;
 
   public UITemplatesManager() throws Exception {
-    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();  	
-    addChild(UITemplateList.class, null, "ugb_" + UITemplateList.class.getSimpleName() + pContext.getWindowId()) ;
+    addChild(UITemplateList.class, null, null) ;
   }
 
   public boolean isEditingTemplate() {
