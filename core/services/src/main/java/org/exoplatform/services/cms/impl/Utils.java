@@ -27,8 +27,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -68,18 +70,6 @@ public class Utils {
 
   public static final String EXO_SYMLINK = "exo:symlink";
   
-  private static LinkManager linkManager;
-  private static TrashService trashService;
-  private static NodeHierarchyCreator nodeHierarchyCreator;
-  private static SessionProviderService sessionProviderService;
-  
-  static {
-    linkManager = WCMCoreUtils.getService(LinkManager.class);
-    trashService = WCMCoreUtils.getService(TrashService.class);
-    nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    sessionProviderService = WCMCoreUtils.getService(SessionProviderService.class);
-  }
-    
   public static Node makePath(Node rootNode, String path, String nodetype)
   throws PathNotFoundException, RepositoryException {
     return makePath(rootNode, path, nodetype, null);
@@ -328,49 +318,49 @@ public class Utils {
     return ret;
   }
 
-  private static String trashPath;
-  private static String trashWorkspace;
-  private static SessionProvider sessionProvider;
   
   public static void removeDeadSymlinks(Node node) throws Exception {
     if (isInTrash(node)) {
       return; 
     }
-    trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
-    trashWorkspace = WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository().
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+
+    String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
+    String trashWorkspace = WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository().
                                   getConfiguration().getDefaultWorkspaceName();
-    sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-  
-    removeDeadSymlinksRecursively(node);
-  }
-  
-  private static void removeDeadSymlinksRecursively(Node node) throws Exception {
-    if (!node.isNodeType(EXO_SYMLINK)) {
-      try {
-          List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
-          for (Node symlink : symlinks) {
-            synchronized (symlink) {
-              trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    Queue<Node> queue = new LinkedList<Node>();
+    queue.add(node);
+    
+    try {
+      while (!queue.isEmpty()) {
+        node = queue.poll();
+        if (!node.isNodeType(EXO_SYMLINK)) {
+          try {
+            List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+            for (Node symlink : symlinks) {
+              synchronized (symlink) {
+                trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
+              }
+            }
+          } catch (Exception e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
             }
           }
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+            for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
+              queue.add(iter.nextNode());
+            }
         }
       }
-      try {
-        List<Node> childNodes = new ArrayList<Node>();
-        for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
-          childNodes.add(iter.nextNode());
-        }
-        for (Node child : childNodes) {
-          removeDeadSymlinksRecursively(child);
-        }
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
       }
+    } finally {
+      sessionProvider.close();
     }
   }
   
