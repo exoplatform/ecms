@@ -8,7 +8,7 @@
   
   .FileContent .NavigationContainer {  
     padding-bottom: 5px;
-    background: url('/ecmexplorer/skin/images/file/TitleBG1x21.gif') repeat-x top;
+    background: url('/eXoDMSResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
     border: 1px solid #cbcbcb;
   }
   
