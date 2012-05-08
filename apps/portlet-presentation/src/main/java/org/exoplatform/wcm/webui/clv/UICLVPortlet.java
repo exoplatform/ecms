@@ -39,6 +39,10 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -187,6 +191,8 @@ public class UICLVPortlet extends UIPortletApplication {
   private UICLVConfig        clvConfig;
 
   private String             currentFolderPath;
+  
+  private String             header;
 
   private String             currentDisplayMode;
   
@@ -203,6 +209,10 @@ public class UICLVPortlet extends UIPortletApplication {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     currentFolderPath = getFolderPath();
   }
+  
+  public String getHeader() {
+  	return header;
+  }
 
   public void setCurrentFolderPath(String value) {
     currentFolderPath = value;
@@ -214,6 +224,30 @@ public class UICLVPortlet extends UIPortletApplication {
     if (!preq.useAjax()) {
       currentFolderPath = getFolderPathParamValue();
     }
+    try {
+    	if (currentFolderPath != null && currentFolderPath.length() > 0) {
+    		Node folderNode = null;
+    		NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(currentFolderPath);
+    		folderNode = NodeLocation.getNodeByLocation(folderLocation);
+    		if (folderNode == null) {
+    			header = null;
+    		} else {
+    			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE))
+    				header = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
+    			else header = folderNode.getName();
+    		}
+    	} else header = null;
+    } catch(IllegalArgumentException ex) {
+    	header = null;
+    } catch(ItemNotFoundException ex) {
+    	header = null;
+    } catch(PathNotFoundException ex) {
+    	header = null;
+    } catch(NoSuchWorkspaceException ex) {
+    	header = null;
+    } catch(RepositoryException ex) {
+    	header = null;
+    } 
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     currentDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     currentApplicationMode = preferences.getValue(PREFERENCE_APPLICATION_TYPE, null);
