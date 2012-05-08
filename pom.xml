@@ -23,7 +23,7 @@
   </issueManagement>
   <ciManagement>
     <system>hudson</system>
-    <url>https://ci.exoplatform.org/hudson/job/ecms-master-ci/</url>
+    <url>https://ci.exoplatform.org/job/ecms-master-ci/</url>
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
