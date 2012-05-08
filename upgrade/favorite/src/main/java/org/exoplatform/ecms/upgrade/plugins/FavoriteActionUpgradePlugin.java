@@ -56,6 +56,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -67,12 +68,14 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 4, 2011
  */
 public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(FavoriteActionUpgradePlugin.class);
 
-  private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
+  private static final String FAVORITE_ALIAS = "userPrivateFavorites";
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
   private static final String NODE_TYPE_ADD_TO_FAVORITE_ACTION = "exo:addToFavoriteAction";
   private static final String FILE_NAME_ADD_TO_FAVORITE_ACTION = "AddToFavoriteScript.groovy";
+  private static final String SCRIPT_PATH_ADD_TO_FAVORITE_ACTION 
+    = "war:/conf/dms-extension/dms/artifacts/scripts/ecm-explorer/action/AddToFavoriteScript.groovy";
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
   private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
   private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
@@ -116,8 +119,8 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
     try {
-      if (log.isInfoEnabled()) {
-        log.info("Start " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start " + this.getClass().getName() + ".............");
       }
       RequestLifeCycle.begin(PortalContainer.getInstance());
       
@@ -125,17 +128,27 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
                                                    repoService.getCurrentRepository());
       
-      // Register Script if necessary
+      // Register Favorite Script if necessary
       String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + 
                           "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
+      Node currScriptNode = null;
+      String lastestScriptContent = getLastestFavoriteScriptContent();
       try {
-        session.getItem(scriptPath);
+        currScriptNode = (Node)session.getItem(scriptPath);
       }
       catch (PathNotFoundException pne) {
-        StringWriter writer = new StringWriter();
-        IOUtils.copy(configurationManager.getURL("classpath:/script/AddToFavoriteScript.groovy").openStream(), writer);
-        String scriptContent = writer.toString();
-        scriptService.addScript("ecm-explorer/action/" + FILE_NAME_ADD_TO_FAVORITE_ACTION, scriptContent, sessionProvider);
+        registerFavoriteScript(sessionProvider, lastestScriptContent);
+      }
+      
+      // Update Favorite script to lastest version if it has a new version
+      if (currScriptNode != null) {
+        String currScriptContent =
+            currScriptNode.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
+        if (!currScriptContent.equals(lastestScriptContent)) {
+          currScriptNode.remove();
+          session.save();
+          registerFavoriteScript(sessionProvider, lastestScriptContent);
+        }
       }
       
       // Register Node Type exo:addToFavoriteAction if neccessary
@@ -172,13 +185,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           setFavoritesForOldItems(favoriteNode, userName);
         }
       }
-      if (log.isInfoEnabled()) {
-        log.info("End " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("End " + this.getClass().getName() + ".............");
       }
     }
     catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(this.getClass().getName() + " failed:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(this.getClass().getName() + " failed:", e);
       }
     }
     finally {
@@ -186,6 +199,28 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
   }
 
+  /**
+   * Register Favorite Script.
+   * 
+   * @param sessionProvider
+   * @param scriptContent
+   * @throws Exception
+   */
+  private void registerFavoriteScript(SessionProvider sessionProvider, String scriptContent) throws Exception {
+    scriptService.addScript("ecm-explorer/action/" + FILE_NAME_ADD_TO_FAVORITE_ACTION, scriptContent, sessionProvider);
+  }
+  
+  /**
+   * Get lastest addtofavorite.groovy script
+   * 
+   * @return lastest content
+   * @throws Exception
+   */
+  private String getLastestFavoriteScriptContent() throws Exception {
+    StringWriter writer = new StringWriter();
+    IOUtils.copy(configurationManager.getURL(SCRIPT_PATH_ADD_TO_FAVORITE_ACTION).openStream(), writer);
+    return writer.toString();
+  }
   /**
    * Set favorites for all document nodes which stay in specified folder.
    * 
@@ -297,8 +332,8 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       userNode.getSession().save();
       
     } catch (PathNotFoundException pne) {
-      if (log.isWarnEnabled()) {
-        log.warn("Private Folder of User " + userName + " not found");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Private Folder of User " + userName + " not found");
       }
     }
     return userFavoriteNode;
