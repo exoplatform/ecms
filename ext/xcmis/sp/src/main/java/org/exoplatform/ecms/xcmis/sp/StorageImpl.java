@@ -969,13 +969,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             }
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
-               // Has not required mixin 'cmis:document'. Some operation for
-               // this type of document will be different from default.
-               if (LOG.isWarnEnabled())
-               {
-                  LOG.warn("Node " + node.getPath()
-                     + " has not 'cmis:document' mixin type. Some operations may be disabled.");
-               }
                return new JcrFile(entry);
             }
             return new DocumentDataImpl(entry);
@@ -984,13 +977,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_FOLDER))
             {
-               // Has not required mixin 'cmis:folder'. Some operation for this
-               // type of document will be different from default.
-               if (LOG.isWarnEnabled())
-               {
-                  LOG.warn("Node " + node.getPath()
-                     + " has not 'cmis:document' mixin type. Some operation may be disabled.");
-               }
                return new JcrFolder(entry);
             }
             return new FolderDataImpl(entry);
