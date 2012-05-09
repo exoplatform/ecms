@@ -255,7 +255,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     writer.append("<tr>");
     writer.append("<td>");
     String[] listAction = getActions();
-
+    String contextID = "UIDocumentForm_" + System.currentTimeMillis();
     String actionLabel;
     String link;
     for (String action : listAction) {
@@ -277,11 +277,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px; text-align: left;\">");
     writer.append("<a href=\"javascript:void(0);\"")
           .append(fullscreen)
+          .append("\" id=\"")
+          .append(contextID)
           .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this)'></a>");
     writer.append("</td>");
     writer.append("</tr>");
     writer.append("</table>");
     writer.append("</div>");
+    context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\")");
   }
 
   @SuppressWarnings("unused")

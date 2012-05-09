@@ -39,14 +39,16 @@ function ajaxGet(url, callback) {
  **/
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   if(action.toLowerCase() == "changetype" || action.toLowerCase() == "close" || action.toLowerCase() == "back") {
+  	if (eXo.ecm.ECMUtils) {
+      eXo.ecm.ECMUtils.editFullScreen = false;
+    }
     if (b_changed) {      
-	  var answer = null;
-	  if (action.toLowerCase() == "changetype") {
-	  	answer = confirm(document.getElementById("ChangeTypeConfirmationMsg").innerHTML);
-	  } else {
-	  	answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
-	  }  
-	  
+		  var answer = null;
+		  if (action.toLowerCase() == "changetype") {
+		  	answer = confirm(document.getElementById("ChangeTypeConfirmationMsg").innerHTML);
+		  } else {
+		  	answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
+		  }  
       if (answer) {
       	b_changed = false;
       }	else {
@@ -91,7 +93,6 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
     }
   }
  } catch(e) {}
-
   form.elements['formOp'].value = action ;
   if(useAjax) {
     b_changed = false;

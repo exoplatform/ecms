@@ -1,6 +1,7 @@
  function ECMUtils() {
 	var Self = this;
 	var showSideBar = true;
+	var editFullScreen = false;
 	//set private property;
 	var DOM = eXo.core.DOMUtil;
 	var Browser = eXo.core.Browser;

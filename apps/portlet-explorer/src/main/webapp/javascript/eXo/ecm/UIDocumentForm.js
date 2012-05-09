@@ -72,8 +72,10 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 
 	if (element.className == "MaximizeScreen20x20Icon") {
 		element.className = "MinimizeScreen20x20Icon";
+		eXo.ecm.ECMUtils.editFullScreen = true;
 	} else {
 		element.className = "MaximizeScreen20x20Icon";
+		eXo.ecm.ECMUtils.editFullScreen = false;
 	}
 	
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
@@ -175,5 +177,11 @@ UIDocumentForm.prototype.AutoFocus = function() {
     } catch(err){}
   }, 200);
 };
-
+UIDocumentForm.prototype.initFullScreenStatus = function(elementId) {
+	var aElement = document.getElementById(elementId);
+	if (!aElement ) return;
+	if (eXo.ecm.ECMUtils.editFullScreen) {
+		this.FullScreenToggle(aElement);
+	}
+}
 eXo.webui.UIDocForm = new UIDocumentForm();
