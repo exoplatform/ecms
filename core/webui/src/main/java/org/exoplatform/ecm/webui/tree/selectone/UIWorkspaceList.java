@@ -102,11 +102,20 @@ public class UIWorkspaceList extends UIForm {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
+   
     String systemWsName = repositoryService.getCurrentRepository()
                                            .getConfiguration()
                                            .getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for (String wsName : wsNames) {
+    	Node rootNode = null;
+    	try {
+        rootNode = getRootNode(wsName);
+    	} catch(AccessDeniedException ex) {
+        continue;
+    	} catch(RepositoryException ex) {
+        continue;
+    	}    		
       if (!isShowSystem_) {
         if (!wsName.equals(systemWsName)) {
           workspace.add(new SelectItemOption<String>(wsName, wsName));
@@ -115,7 +124,7 @@ public class UIWorkspaceList extends UIForm {
       } else {
         workspace.add(new SelectItemOption<String>(wsName, wsName));
         wsList_.add(wsName);
-      }
+      }      
     }
     UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(WORKSPACE_NAME);
     uiWorkspaceList.setOptions(workspace);
@@ -149,13 +158,7 @@ public class UIWorkspaceList extends UIForm {
       if (uiBreadcumbs != null) uiBreadcumbs.getPath().clear();
       UIApplication uiApp = uiWorkspaceList.getAncestorOfType(UIApplication.class);
       try {
-        uiTreeBuilder.setRootTreeNode(uiWorkspaceList.getRootNode(wsName));
-      } catch (AccessDeniedException ade) {
-        uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
-        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException",
-                                                null,
-                                                ApplicationMessage.WARNING));
-        return;
+        uiTreeBuilder.setRootTreeNode(uiWorkspaceList.getRootNode(wsName));      
       } catch(Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("An unexpected error occurs", e);
