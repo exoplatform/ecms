@@ -121,7 +121,7 @@ public class NodeTypeNameValidator implements Validator {
       String s3 = s.substring(1, s.length() - 1);
       for(String filterChar : FILTER_CHARS) {
         if(s3.indexOf(filterChar) > -1) {
-          throwException("ECMNameValidator.msg.Invalid-char", uiInput);
+          throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
         }
           }
     }
