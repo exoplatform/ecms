@@ -545,8 +545,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         checkNode = sourceNode != null ? sourceNode : child;
 
         if (isFolder(checkNode)) {
-          Element folder = createFolderElement(
-              document, checkNode, checkNode.getPrimaryNodeType().getName(), child.getName(), nodeDriveName);
+          // Get node name from node path to fix same name problem (ECMS-3586)
+          String nodePath = child.getPath();        	
+          Element folder = createFolderElement(document, checkNode, checkNode.getPrimaryNodeType().getName(), 
+                        nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()), nodeDriveName);
           folders.appendChild(folder);
         }
 
