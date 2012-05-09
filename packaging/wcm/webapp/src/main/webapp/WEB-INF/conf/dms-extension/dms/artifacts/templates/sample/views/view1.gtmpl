@@ -35,7 +35,8 @@
   			<td class="text"><%=_ctx.appRes("Sample.view.label.title")%></td>
   			<td class="TextDetail">  
           <% 
-            print uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "TdGtmplTitle", "TdGtmplTitle", true); 
+            String title = uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "TdGtmplTitle", "TdGtmplTitle", true); 
+            print title;
           %>
   			</td>
 			</tr></table>
@@ -75,14 +76,18 @@
 				</div>
 			</div>
 			<% if(node.hasNode("exo:image")) {
-				 imgSrc = uicomponent.getImage(node) ;
+         def imageNode = node.getNode("exo:image");
 			%>
 					<div class="LableRightDescription">
 						<div class="TitleBG" >
 							<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.image")%></label>
 						</div>
 						<div style= "width: 95%; height: 160px ; text-align: center; padding: 5px;">
-			      	<img src="$imgSrc" alt="$imgSrc" width="250" height="150"/> 
+            <% if (imageNode.getProperty("jcr:data").getStream().available() > 0) {
+               imgSrc = uicomponent.getImage(node) ; 
+            %>
+			      	<img src="$imgSrc" alt="$title" width="250" height="150"/> 
+            <% } %>
 						</div>
 					</div>
 			<% } %>
@@ -188,4 +193,3 @@
 	<div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
   <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
 </div>
-wqewqe
