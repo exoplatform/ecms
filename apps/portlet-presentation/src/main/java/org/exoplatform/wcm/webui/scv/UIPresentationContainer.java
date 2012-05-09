@@ -405,15 +405,22 @@ public class UIPresentationContainer extends UIContainer{
   public String getInlineEditingMsg() {
     StringBuffer sb = new StringBuffer();
     sb.append("new Array(");
-    ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance()
-                                                       .getApplicationResourceBundle();
     sb.append("'")
-      .append(Text.escapeIllegalJcrChars(resourceBundle.getString("UIPresentationContainer.msg.internal-server-error")))
+      .append(Text.escapeIllegalJcrChars(getResourceBundle("UIPresentationContainer.msg.internal-server-error")))
       .append("', '")
-      .append(Text.escapeIllegalJcrChars(resourceBundle.getString("UIPresentationContainer.msg.empty-title-error")))
+      .append(Text.escapeIllegalJcrChars(getResourceBundle("UIPresentationContainer.msg.empty-title-error")))
       .append("')");
     return sb.toString();
   }
+  
+  private String getResourceBundle(String key) {
+    try {
+      ResourceBundle rs = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
+      return rs.getString(key);
+    } catch(MissingResourceException e) {
+      return key;
+    }
+  } 
 
 
   /**
