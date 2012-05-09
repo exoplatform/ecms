@@ -3446,5 +3446,11 @@
     <msg>
       <is-editing>Tài liệu này đang được chỉnh sửa nên không thể di chuyển được. Bạn hãy đóng nó lại trước khi dịch chuyển.</is-editing>
     </msg>
-  </UIWorkingArea>   
+  </UIWorkingArea>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Node này bị khóa, bạn không thể theo dõi nó!</node-is-locked>
+      <unknown-error>Có một số lỗi xảy ra, bạn không thể theo dõi node này!</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
 </bundle>

@@ -3414,4 +3414,10 @@
 	  <unknown-error>There are some error occurs, you can not edit this property</unknown-error>
     </msg>
   </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>This node is locked, you can not watch it!</node-is-locked>
+      <unknown-error>There are some error occurs, you can not watch this node!</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
 </bundle>

@@ -2959,5 +2959,11 @@
     <msg>
       <is-editing>You cannot move an editing document. Please close it first.</is-editing>
     </msg>
-  </UIWorkingArea>   
+  </UIWorkingArea>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>This node is locked, you can not watch it!</node-is-locked>
+      <unknown-error>There are some error occurs, you can not watch this node!</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
 </bundle>
