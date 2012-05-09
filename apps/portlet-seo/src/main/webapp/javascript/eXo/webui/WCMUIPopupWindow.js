@@ -199,10 +199,29 @@ WCMUIPopupWindow.prototype.closePopupEvt = function(evt) {
  * associates these events with WCMUIPopupWindow.resize and WCMUIPopupWindow.endResizeEvt respectively
  */
 WCMUIPopupWindow.prototype.startResizeEvt = function(evt) {
-//	var portalApp = document.getElementById("UIPortalApplication") ;
-	eXo.webui.WCMUIPopupWindow.popupId = eXo.core.DOMUtil.findAncestorByClass(this, "WCMUIPopupWindow").id ;
-	document.onmousemove = eXo.webui.WCMUIPopupWindow.resize;
-	document.onmouseup = eXo.webui.WCMUIPopupWindow.endResizeEvt;
+  //disable select text
+  eXo.webui.WCMUIPopupWindow.backupEvent = null;
+  if (navigator.userAgent.indexOf("MSIE") >= 0) {
+    //Need to check if we have remove resizedPopup after last mouseUp
+    //IE bug: not call endResizeEvt when mouse moved out of page
+    if (!eXo.webui.WCMUIPopupWindow.resizedPopup && document.onselectstart) {
+      eXo.webui.WCMUIPopupWindow.backupEvent = document.onselectstart;
+    }
+    document.onselectstart = function() {return false};   
+  } else {    
+    if (document.onmousedown) {
+      eXo.webui.WCMUIPopupWindow.backupEvent = document.onmousedown;
+    }
+    document.onmousedown = function() {return false};   
+  } 
+
+
+  var targetPopup = eXo.core.DOMUtil.findAncestorByClass(this, "UIPopupWindow");
+  eXo.webui.WCMUIPopupWindow.resizedPopup = targetPopup;
+  eXo.webui.WCMUIPopupWindow.backupPointerY = eXo.core.Browser.findMouseRelativeY(targetPopup, evt) ;     
+  
+  document.onmousemove = eXo.webui.WCMUIPopupWindow.resize;
+  document.onmouseup = eXo.webui.WCMUIPopupWindow.endResizeEvt ;
 }
 
 /**
@@ -223,23 +242,23 @@ var POPUP_WINDOW_BOTTOM_HEIGHT=50;
  *  . sets these values to the window
  */
 WCMUIPopupWindow.prototype.resize = function(evt) {
-	var targetPopup = document.getElementById(eXo.webui.WCMUIPopupWindow.popupId) ;
-	var content = eXo.core.DOMUtil.findFirstDescendantByClass(targetPopup, "div", "PopupContent") ;
-	var isRTL = eXo.core.I18n.isRT();
-	var pointerX = eXo.core.Browser.findMouseRelativeX(targetPopup, evt, isRTL) ;
-	var pointerY = eXo.core.Browser.findMouseRelativeY(targetPopup, evt) ;
-	var delta = eXo.core.Browser.findPosYInContainer(content,targetPopup) +
-							content.style.borderWidth + content.style.padding + content.style.margin;
-	//var bottomLevel=eXo.core.DOMUtil.findDescendantsByClass(targetPopup,"div","BCPortalComposer");
-	//TODO: Check if the bottom is not null before assign new value to 'content.style.height'
-	if((pointerY-delta) > 0) content.style.height = (pointerY-delta-POPUP_WINDOW_BOTTOM_HEIGHT)+"px" ;
-	targetPopup.style.height = "auto";
-	
-	if(isRTL){
-	 pointerX = (-1) * pointerX
-	}
-	
-	if(pointerX > 200) targetPopup.style.width = (pointerX+5) + "px" ;
+  var targetPopup = eXo.webui.WCMUIPopupWindow.resizedPopup ;
+  var content = eXo.core.DOMUtil.findFirstDescendantByClass(targetPopup, "div", "PopupContent") ;
+  var isRTL = eXo.core.I18n.isRT();
+  var pointerX = eXo.core.Browser.findMouseRelativeX(targetPopup, evt, isRTL) ;
+  var pointerY = eXo.core.Browser.findMouseRelativeY(targetPopup, evt) ;
+  
+  var delta = pointerY - eXo.webui.WCMUIPopupWindow.backupPointerY; 
+  if ((content.offsetHeight + delta) > 0) {
+    eXo.webui.WCMUIPopupWindow.backupPointerY = pointerY;   
+    content.style.height = content.offsetHeight + delta +"px" ; 
+  }
+  targetPopup.style.height = "auto";
+  
+  if(isRTL){
+   pointerX = (-1) * pointerX;
+  } 
+  if(pointerX > 200) targetPopup.style.width = (pointerX+10) + "px" ; 
 } ;
 
 /**
@@ -248,15 +267,23 @@ WCMUIPopupWindow.prototype.resize = function(evt) {
  * inits the scroll managers active on this page (in case there is one in the popup)
  */
 WCMUIPopupWindow.prototype.endResizeEvt = function(evt) {
-	delete eXo.webui.WCMUIPopupWindow.popupId ;
-	this.onmousemove = null;
-	this.onmouseup = null;
-	// Added by Philippe
-	// inits all the scroll managers, in case there is one in the popup that needs to be recalculated
-	eXo.portal.UIPortalControl.initAllManagers();
-	// other solutions :
-	// - add a callback property that points to the init function of the concerned scroll manager. call it here
-	// - add a boolean to each scroll manager that specifies if it's in a popup. re init only those that have this property true
+  eXo.webui.WCMUIPopupWindow.popupId = null;
+  this.onmousemove = null;
+  this.onmouseup = null;
+  
+  //enable select text
+  if (navigator.userAgent.indexOf("MSIE") >= 0) {
+    document.onselectstart = eXo.webui.WCMUIPopupWindow.backupEvent;
+  } else {    
+    document.onmousedown = eXo.webui.WCMUIPopupWindow.backupEvent;
+  }
+  eXo.webui.WCMUIPopupWindow.backupEvent = null;  
+  // Added by Philippe
+  // inits all the scroll managers, in case there is one in the popup that needs to be recalculated
+  eXo.portal.UIPortalControl.initAllManagers();
+  // other solutions :
+  // - add a callback property that points to the init function of the concerned scroll manager. call it here
+  // - add a boolean to each scroll manager that specifies if it's in a popup. re init only those that have this property true
 }
 /**
  * Inits the drag and drop
