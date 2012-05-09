@@ -321,9 +321,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         targetNode.remove();
         session.save();
         Node taxonomyDef = getRootTaxonomyDef();
-        Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
-        taxonomyTree.remove();
-        taxonomyDef.getSession().save();
+        if (taxonomyDef.hasNode(taxonomyName)) {
+          Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
+          taxonomyTree.remove();
+          taxonomyDef.getSession().save();
+        }
       }
     } catch (RepositoryConfigurationException e) {
       throw new RepositoryException(e);
