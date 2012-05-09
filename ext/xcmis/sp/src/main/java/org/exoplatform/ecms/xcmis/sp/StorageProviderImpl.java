@@ -285,85 +285,89 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
       ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = repository.getSystemSession(storageConfiguration.getWorkspace());
-      Node root = session.getRootNode();
-
-      Node xCmisSystem = session.itemExists(StorageImpl.XCMIS_SYSTEM_PATH) //
-         ? (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH) //
-         : root.addNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1), "xcmis:system");
-      if (!xCmisSystem.isNodeType("exo:hiddenable")) xCmisSystem.addMixin("exo:hiddenable");
-
-      if (!xCmisSystem.hasNode(StorageImpl.XCMIS_WORKING_COPIES))
-      {
-         xCmisSystem.addNode(StorageImpl.XCMIS_WORKING_COPIES, "xcmis:workingCopies");
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug("CMIS Working Copies store " + StorageImpl.XCMIS_SYSTEM_PATH + "/"
-               + StorageImpl.XCMIS_WORKING_COPIES + " created.");
-         }
-      }
-
-      if (!xCmisSystem.hasNode(StorageImpl.XCMIS_RELATIONSHIPS))
-      {
-         xCmisSystem.addNode(StorageImpl.XCMIS_RELATIONSHIPS, "xcmis:relationships");
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug("CMIS relationship store " + StorageImpl.XCMIS_SYSTEM_PATH + "/"
-               + StorageImpl.XCMIS_RELATIONSHIPS + " created.");
-         }
-      }
-
-      if (!xCmisSystem.hasNode(StorageImpl.XCMIS_POLICIES))
-      {
-         xCmisSystem.addNode(StorageImpl.XCMIS_POLICIES, "xcmis:policies");
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug("CMIS policies store " + StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_POLICIES
-               + " created.");
-         }
-      }
-
-      session.save();
-
-      Boolean persistRenditions = (Boolean)storageConfiguration.getProperties().get("exo.cmis.renditions.persistent");
-      if (persistRenditions == null)
-      {
-         persistRenditions = false;
-      }
-      if (persistRenditions)
-      {
-         Workspace workspace = session.getWorkspace();
-         try
-         {
-            boolean exist = false;
-
-            // TODO can do this simpler ?
-            WorkspaceContainerFacade workspaceContainer =
-               ((RepositoryImpl)repository).getWorkspaceContainer(workspace.getName());
-            ObservationManagerRegistry observationManagerRegistry =
-               (ObservationManagerRegistry)workspaceContainer.getComponent(ObservationManagerRegistry.class);
-
-            for (EventListenerIterator iter = observationManagerRegistry.getEventListeners(); iter.hasNext();)
-            {
-               if (iter.nextEventListener().getClass() == RenditionsUpdateListener.class)
-               {
-                  exist = true;
-                  break;
-               }
-            }
-            if (!exist)
-            {
-               workspace.getObservationManager().addEventListener(
-                  new RenditionsUpdateListener(repository, storageConfiguration.getWorkspace()),
-                  Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED, "/", true, null, new String[]{JcrCMIS.NT_RESOURCE},
-                  false);
-            }
-         }
-         catch (RepositoryException e)
-         {
-           if (LOG.isErrorEnabled()) {
-             LOG.error("Unable to create event listener. " + e.getMessage(), e);
+      try {
+        Node root = session.getRootNode();
+  
+        Node xCmisSystem = session.itemExists(StorageImpl.XCMIS_SYSTEM_PATH) //
+           ? (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH) //
+           : root.addNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1), "xcmis:system");
+        if (!xCmisSystem.isNodeType("exo:hiddenable")) xCmisSystem.addMixin("exo:hiddenable");
+  
+        if (!xCmisSystem.hasNode(StorageImpl.XCMIS_WORKING_COPIES))
+        {
+           xCmisSystem.addNode(StorageImpl.XCMIS_WORKING_COPIES, "xcmis:workingCopies");
+           if (LOG.isDebugEnabled())
+           {
+              LOG.debug("CMIS Working Copies store " + StorageImpl.XCMIS_SYSTEM_PATH + "/"
+                 + StorageImpl.XCMIS_WORKING_COPIES + " created.");
            }
-         }
+        }
+  
+        if (!xCmisSystem.hasNode(StorageImpl.XCMIS_RELATIONSHIPS))
+        {
+           xCmisSystem.addNode(StorageImpl.XCMIS_RELATIONSHIPS, "xcmis:relationships");
+           if (LOG.isDebugEnabled())
+           {
+              LOG.debug("CMIS relationship store " + StorageImpl.XCMIS_SYSTEM_PATH + "/"
+                 + StorageImpl.XCMIS_RELATIONSHIPS + " created.");
+           }
+        }
+  
+        if (!xCmisSystem.hasNode(StorageImpl.XCMIS_POLICIES))
+        {
+           xCmisSystem.addNode(StorageImpl.XCMIS_POLICIES, "xcmis:policies");
+           if (LOG.isDebugEnabled())
+           {
+              LOG.debug("CMIS policies store " + StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_POLICIES
+                 + " created.");
+           }
+        }
+  
+        session.save();
+  
+        Boolean persistRenditions = (Boolean)storageConfiguration.getProperties().get("exo.cmis.renditions.persistent");
+        if (persistRenditions == null)
+        {
+           persistRenditions = false;
+        }
+        if (persistRenditions)
+        {
+           Workspace workspace = session.getWorkspace();
+           try
+           {
+              boolean exist = false;
+  
+              // TODO can do this simpler ?
+              WorkspaceContainerFacade workspaceContainer =
+                 ((RepositoryImpl)repository).getWorkspaceContainer(workspace.getName());
+              ObservationManagerRegistry observationManagerRegistry =
+                 (ObservationManagerRegistry)workspaceContainer.getComponent(ObservationManagerRegistry.class);
+  
+              for (EventListenerIterator iter = observationManagerRegistry.getEventListeners(); iter.hasNext();)
+              {
+                 if (iter.nextEventListener().getClass() == RenditionsUpdateListener.class)
+                 {
+                    exist = true;
+                    break;
+                 }
+              }
+              if (!exist)
+              {
+                 workspace.getObservationManager().addEventListener(
+                    new RenditionsUpdateListener(repository, storageConfiguration.getWorkspace()),
+                    Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED, "/", true, null, new String[]{JcrCMIS.NT_RESOURCE},
+                    false);
+              }
+           }
+           catch (RepositoryException e)
+           {
+             if (LOG.isErrorEnabled()) {
+               LOG.error("Unable to create event listener. " + e.getMessage(), e);
+             }
+           }
+        }
+      } finally {
+        session.logout();
       }
    }
 
