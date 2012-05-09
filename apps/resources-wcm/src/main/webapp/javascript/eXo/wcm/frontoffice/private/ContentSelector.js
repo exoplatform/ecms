@@ -1062,6 +1062,7 @@ EcmContentSelector.prototype.generateIdNodes = function(objNode, idNode) {
 
 EcmContentSelector.prototype.fixHeightTrees = function() {
 	var leftWS = document.getElementById('LeftWorkspace');
+	var rightWS = document.getElementById('RightWorkspace'); 
 	var windowHeight = eXo.core.Browser.getBrowserHeight();
 	var root = eXo.core.DOMUtil.findAncestorByClass(leftWS, "UIHomePageDT");
 	var titleBar = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleBar");
@@ -1072,6 +1073,8 @@ EcmContentSelector.prototype.fixHeightTrees = function() {
 	  actionBaroffsetHeight = actionBar.offsetHeight;
 	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
 	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
+	if(rightWS)
+	  rightWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 };
 
 EcmContentSelector.prototype.isShowFilter = function() {
@@ -1196,3 +1199,4 @@ String.prototype.trunc =
 };
 
 eXo.ecm.ECS = new EcmContentSelector();
+window.onresize = eXo.ecm.ECS.fixHeightTrees;

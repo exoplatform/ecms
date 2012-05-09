@@ -464,6 +464,7 @@ body {
 
 .UIHomePagePortlet  .UIWorkingWorkspace .ListContainer .RightWorkspace{
 	 margin-left: 218px;
+	 overflow: auto;
 }
 
 .UIHomePagePortlet  .UIWorkingWorkspace .ActionBar {
