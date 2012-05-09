@@ -18,8 +18,11 @@ package org.exoplatform.services.wcm.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -326,29 +329,48 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
   
+  /**
+   * gets the global css of given site node. For example, if the site is acme<br/>
+   * we then return all css code only inside acme/css 
+   * @param siteNode the root node of the site
+   * @return global css code inside this site 
+   * @throws Exception
+   */
   public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
     StringBuffer buffer = new StringBuffer();
     try {
+      List<Node> cssNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
+    //get all cssFolder child nodes of siteNode
       while (iterator.hasNext()) {
         Node cssFolder = iterator.nextNode();
         if (cssFolder.isNodeType(NodetypeConstant.EXO_CSS_FOLDER)) {
           NodeIterator iter = cssFolder.getNodes();
+          //get all cssFile child nodes of cssFolder node
           while (iter.hasNext()) {
             Node registeredCSSFile = iter.nextNode();
             if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) && 
                 registeredCSSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
-              try {
-                buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                               .getProperty(NodetypeConstant.JCR_DATA)
-                                               .getString());
-              } catch (Exception e) {
-                continue;
-              }
+              cssNodeList.add(registeredCSSFile);
             }
           }
         }
       }
+      //sort cssFile by priority and merge them
+      Collections.sort(cssNodeList, new FileComparatorByPriority());
+      for (Node registeredCSSFile : cssNodeList) {
+        try {
+          buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                         .getProperty(NodetypeConstant.JCR_DATA)
+                                         .getString());
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected problem happens when get css " + registeredCSSFile.getPath() +
+                      " for site '" + siteNode.getName() + "':", e);
+          }
+          continue;
+        }
+      }      
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active stylesheet", e);
@@ -357,27 +379,46 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
   
+  /**
+   * gets the global javascript of given site node. For example, if the site is acme<br/>
+   * we then return all javascript code only inside acme/js 
+   * @param siteNode the root node of the site
+   * @return global javascript code inside this site 
+   * @throws Exception
+   */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
     StringBuffer buffer = new StringBuffer();
     try {
+      List<Node> jsNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
+      //get all jsFolder child nodes of siteNode
       while (iterator.hasNext()) {
         Node jsFolder = iterator.nextNode();
         if (jsFolder.isNodeType(NodetypeConstant.EXO_JS_FOLDER)) {
           NodeIterator iter = jsFolder.getNodes();
+          //get all jsFile child nodes of jsFolder node
           while (iter.hasNext()) {
             Node registeredJSFile = iter.nextNode();
             if (registeredJSFile.isNodeType(NodetypeConstant.EXO_JS_FILE) && 
                 registeredJSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
-              try {
-                buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                               .getProperty(NodetypeConstant.JCR_DATA)
-                                               .getString());
-              } catch (Exception e) {
-                continue;
-              }
+              jsNodeList.add(registeredJSFile);
             }
           }
+        }
+      }
+      //sort jsFile by priority and merge them
+      Collections.sort(jsNodeList, new FileComparatorByPriority());
+      for (Node registeredJSFile : jsNodeList) {
+        try {
+          buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
+                                         .getProperty(NodetypeConstant.JCR_DATA)
+                                         .getString());
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Unexpected problem happens when get javascript " + registeredJSFile.getPath() +
+                      " for site '" + siteNode.getName() + "':", e);
+          }
+          continue;
         }
       }
     } catch(Exception e) {
@@ -482,6 +523,30 @@ public class WCMCoreUtils {
                 ex);
       }
       throw ex;
+    }
+  }
+  
+  /**
+   * compares two JsFile node by exo:priority value, tending to sort in DESC order 
+   * because Js file with higher priority is loaded first 
+   * @author vu_nguyen
+   *
+   */
+  private static class FileComparatorByPriority implements Comparator<Node> {
+    @Override
+    public int compare(Node o1, Node o2) {
+      try {
+        if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+          return 1;
+        } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+          return -1;
+        } else {
+          return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -  
+                       o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
+        }
+      } catch (Exception e) {
+        return 0;
+      }
     }
   }
 }
