@@ -454,6 +454,11 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
                                 + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("           }\n");
+        } else if (UIFormGeneratorConstant.WYSIWYG.equals(inputType)) {
+          dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/"
+                                + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate
+                                + "\", \"options=" + form.getAdvanced() + "\"];\n");
+          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + inputName + "\", " + inputFieldName + ");\n");   
         } else {
           dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/"
                                 + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate
