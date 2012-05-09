@@ -998,13 +998,13 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     String templatePath = null;
     try {
       templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
-      Node templateNode = (Node)getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(templatePath);
+      Node templateNode = (Node)templatesHome.getSession().getItem(templatePath);
       updateTemplate(templateNode,templateFile, roles);
       templateNode.save();
     } catch(PathNotFoundException e) {
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
           isDocumentTemplate, templateName, roles, templateFile);
-    } 
+    }
     // Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
@@ -1047,7 +1047,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
-      getSession(WCMCoreUtils.getSystemSessionProvider()).save();
+      resourceNode.getSession().save();
       return contentNode.getPath();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -1066,7 +1066,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
-      getSession(WCMCoreUtils.getSystemSessionProvider()).save();
+      resourceNode.getSession().save();
       return template.getPath();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
