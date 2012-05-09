@@ -54,9 +54,13 @@ public class UpgradePortletPreferencesPlugin extends UpgradeProductPlugin {
     if (log.isInfoEnabled()) {
       log.info("Start " + this.getClass().getName() + ".............");
     }
+    upgradePortlet("searches/WCMAdvanceSearchPortlet,detailParameterName,content-id");
+    upgradePortlet("searches/WCMAdvanceSearchPortlet,basePath,detail");
+  }  
+  
+  private void upgradePortlet(String unchangedViews) {
     //get portlet name, preference name and value to change
     //String unchangedViews = PrivilegedSystemHelper.getProperty("portletPreferencesChanged");
-    String unchangedViews = "searches/WCMAdvanceSearchPortlet,detailParameterName,content-id";
     if (unchangedViews == null) return;
     String[] params = unchangedViews.split(",");
     if (!(params.length == 3)) {
@@ -106,13 +110,12 @@ public class UpgradePortletPreferencesPlugin extends UpgradeProductPlugin {
   
   private void addNode(Node stateNode, String nodeName, String value) {
     try {
-      if (!stateNode.hasNode(nodeName)) {
-        Node prefNode = stateNode.addNode(nodeName, MOP_PORTLET_PREFERENCE);
-        prefNode.setProperty("mop:value", new String[]{value});
-        prefNode.setProperty("mop:readonly", false);
-        stateNode.save();
-        if (log.isInfoEnabled()) log.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
-      }
+      Node prefNode = stateNode.hasNode(nodeName) ? stateNode.getNode(nodeName) : 
+                                                    stateNode.addNode(nodeName, MOP_PORTLET_PREFERENCE);
+      prefNode.setProperty("mop:value", new String[]{value});
+      prefNode.setProperty("mop:readonly", false);
+      stateNode.save();
+      if (log.isInfoEnabled()) log.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
     } catch (Exception e) {
       if (log.isWarnEnabled()) {
         log.warn(e.getMessage(), e);
