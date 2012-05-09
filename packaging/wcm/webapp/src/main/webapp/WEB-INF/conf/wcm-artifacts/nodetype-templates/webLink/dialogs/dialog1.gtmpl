@@ -22,7 +22,7 @@
           <td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebLink.dialog.label.name")%></label></td>
           <td class="FieldComponent">
             <%
-              String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "mixintype=mix:i18n", "editable=if-null", "validate=name,empty"] ;
+              String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "mixintype=mix:i18n", "editable=if-null", "options=noSanitization", "validate=name,empty"] ;
               uicomponent.addTextField("name", fieldName) ; 
             %>
           </td>
@@ -32,7 +32,7 @@
         	<td class="FieldLabel"><label for="LinkURL"><%=_ctx.appRes("WebLink.dialog.label.url")%></label></td>
         	<td class="FieldComponent">
             <%
-              String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "validate=empty"] ;
+              String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "options=noSanitization", "validate=empty"] ;
               uicomponent.addTextField("LinkURL", fieldUrl) ; 
             %>
         	</td>
@@ -56,11 +56,11 @@
                 def curNode = uicomponent.getNode() ;
                 if(curNode.hasProperty("exo:linkDescription")) {
                   def content = curNode.getProperty("exo:linkDescription") ;                                      
-                  String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+                  String[] fieldDescription = ["jcrPath=/node/exo:linkDescription", "options=noSanitization"] ;
                   uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                                                       
                 } 
               } else {                           
-                String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+                String[] fieldDescription = ["jcrPath=/node/exo:linkDescription", "options=noSanitization"] ;
                 uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                
               }
             %>      

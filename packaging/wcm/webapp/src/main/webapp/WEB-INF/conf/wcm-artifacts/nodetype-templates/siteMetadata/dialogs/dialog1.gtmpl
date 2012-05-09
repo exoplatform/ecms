@@ -6,7 +6,7 @@
 	      <td class="FieldLabel"><label for="siteTitle"><%=_ctx.appRes("SiteMetadata.dialog.label.title")%></label></td>
 	      <td class="FieldComponent">
 		      <%                                                            
-		        String[] fieldTitle = ["jcrPath=/node/metadata:siteMetadata/siteTitle"] ;
+		        String[] fieldTitle = ["jcrPath=/node/metadata:siteMetadata/siteTitle", "options=noSanitization"] ;
 		        uicomponent.addTextField("siteTitle", fieldTitle) ;
 		      %>
 		    </td>
@@ -15,7 +15,7 @@
 	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("SiteMetadata.dialog.label.description")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldDescription = ["jcrPath=/node/metadata:siteMetadata/description"] ;
+		        String[] fieldDescription = ["jcrPath=/node/metadata:siteMetadata/description", "options=noSanitization"] ;
 		        uicomponent.addTextField("description", fieldDescription) ;
 		      %>
 		    </td>
@@ -24,7 +24,7 @@
 	      <td class="FieldLabel"><label for="keywords"><%=_ctx.appRes("SiteMetadata.dialog.label.keywords")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldKeywords = ["jcrPath=/node/metadata:siteMetadata/keywords"] ;
+		        String[] fieldKeywords = ["jcrPath=/node/metadata:siteMetadata/keywords", "options=noSanitization"] ;
 		        uicomponent.addTextField("keywords", fieldKeywords) ;
 		      %>
 		    </td>
@@ -33,7 +33,7 @@
 	      <td class="FieldLabel"><label for="robots"><%=_ctx.appRes("SiteMetadata.dialog.label.robots")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldRobots = ["jcrPath=/node/metadata:siteMetadata/robots", "defaultValues=index,follow"] ;
+		        String[] fieldRobots = ["jcrPath=/node/metadata:siteMetadata/robots", "defaultValues=index,follow", "options=noSanitization"] ;
 		        uicomponent.addTextField("robots", fieldRobots) ;
 		      %>
 		    </td>

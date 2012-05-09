@@ -72,7 +72,7 @@
 									  <td class="FieldLabel"><label for="name"><%=_ctx.appRes("FilePlan.dialog.label.name")%></label></td>
 									  <td class="FieldComponent">
 							      <%
-							        String[] fieldName = ["jcrPath=/node", "editable=if-null", "mixintype=mix:i18n", "validate=empty,name"] ;
+							        String[] fieldName = ["jcrPath=/node", "editable=if-null", "mixintype=mix:i18n", "options=noSanitization", "validate=empty,name"] ;
 							        uicomponent.addTextField("name", fieldName) ; 
 							      %>									  							      
 									  </td>
