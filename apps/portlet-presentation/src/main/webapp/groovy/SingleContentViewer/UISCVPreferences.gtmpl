@@ -4,7 +4,6 @@
   def rcontext = _ctx.getRequestContext();
   String portletId = Utils.getRealPortletId(rcontext);  
 %>
-
 <div class="UIForm $uicomponent.id" >
    <%
     uiform.begin()
@@ -20,14 +19,14 @@
                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" 
                     onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')"
                     onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
-						<div style="position: relative;">
+                      <div style="position: relative;">
 	                        <div class="InContextHelpContent" >                    
 	                          <div class="InContextHelpPopup">
 	                         	 <div id="ContentPathHelpID" class="LeftInContextHelpPopup"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>
 	                            </div>
 	                          </div>                      
 	                        </div>
-						</div>
+	                    </div>
                     </div>
                   </td>
                 </tr>
@@ -96,7 +95,7 @@
                 <tr>
                   <td class="FieldComponent AlignRight" ><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %></td>
                   <td>
-                    <div onclick="if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0); else document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);">
+                    <div onclick="contextualProcessing(this);" id="ContexttualContainer$portletId">
                       <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %>                      
                     </div>
                   </td>
@@ -145,13 +144,33 @@
             </fieldset>  
           </div>
           <script type="text/javascript">
+            function contextualProcessing(element) {
+              var rdoContexttual = eXo.core.DOMUtil.findFirstDescendantByClass(element, "input", "radio");
+              var isChecked = rdoContexttual.getAttribute("checked");
+              var scvPreferences = eXo.core.DOMUtil.findAncestorByClass(element, "UIForm");
+              var inputSet = eXo.core.DOMUtil.findFirstDescendantByClass(scvPreferences, "div", "UIFormInputSetWithAction");
+              var savedInnerHTML = inputSet.innerHTML;
+              var imgStartIndex = savedInnerHTML.indexOf("<img");
+              var strFirstInput  = savedInnerHTML.substr(0,imgStartIndex);
+              var strLastImgInput = savedInnerHTML.substr(imgStartIndex);
+              strFirstInput = strFirstInput.substr(0, strFirstInput.lastIndexOf(">") + 1);
+              strFirstInput = strFirstInput.trim();
+              if (rdoContexttual.checked) {
+                document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('readonly',0);
+                inputSet.innerHTML =  strFirstInput + strLastImgInput;
+              }else  {
+                document.getElementById('UISCVParameterInputBox').setAttribute('readonly',true);
+                inputSet.innerHTML =  strFirstInput + "*"  + strLastImgInput;
+              }
+            }
             if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) {
               document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0);
               document.getElementById('UISCVShowAdvanceOption').style.display='none';
             }else {
               document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);
               document.getElementById('UISCVContextualSelectionAdvance').style.display='none';
-            }            
+            }
+            contextualProcessing(document.getElementById('ContexttualContainer$portletId'));
           </script>
         <div class="UIAction"> 
 				  <% for(action in uicomponent.getActions()) { 

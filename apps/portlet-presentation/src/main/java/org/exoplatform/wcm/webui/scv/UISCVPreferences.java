@@ -36,7 +36,6 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -116,9 +115,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     /** Content name **/
     String strNodeName = getNodeNameByPreferences();
     txtContentPath = new UIFormStringInput(CONTENT_PATH_INPUT, CONTENT_PATH_INPUT, strNodeName);
-    txtContentPath.addValidator(MandatoryValidator.class);
-    txtContentPath.setEditable(false);
-    txtContentPath.addValidator(MandatoryValidator.class);
+    txtContentPath.setReadOnly(true);
 
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
     itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
@@ -177,7 +174,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     UIFormInputSetWithAction targetPageInputSet = new UIFormInputSetWithAction(PRINT_PAGE_FORM_INPUT_SET);
     txtPrintPage = new UIFormStringInput(PRINT_VIEW_PAGE_INPUT, PRINT_VIEW_PAGE_INPUT, strPrintPageName);
     txtPrintPage.setValue(strPrintPageName);
-    txtPrintPage.setEditable(false);
+    txtPrintPage.setReadOnly(true);
     targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(txtPrintPage);
 
