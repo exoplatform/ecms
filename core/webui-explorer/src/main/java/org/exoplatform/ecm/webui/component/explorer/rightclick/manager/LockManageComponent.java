@@ -77,7 +77,6 @@ public class LockManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-                                              new IsNotSameNameSiblingFilter(),
                                               new IsNotHoldsLockFilter(),
                                               new IsNotSimpleLockedFilter(),
                                               new CanSetPropertyFilter(),
