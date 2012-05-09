@@ -161,6 +161,8 @@ public class UISearchResult extends UIContainer {
         keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();
       }
       setKeyword(keyword);
+      keyword = keyword.replace('-', ' ').toLowerCase(porletRequestContext.getLocale());
+      keyword = keyword.replaceAll("'","''");
 
       SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
       QueryCriteria queryCriteria = new QueryCriteria();
