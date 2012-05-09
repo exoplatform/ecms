@@ -643,14 +643,19 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       return nodeTypeList;
 
     List<String> contentTypes = new ArrayList<String>();
-    Node templatesHome = 
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
-    for (NodeIterator templateIter = templatesHome.getNodes(); templateIter.hasNext();) {
-      Node template = templateIter.nextNode();
-      if (template.getProperty(DOCUMENT_TEMPLATE_PROP).getBoolean())
-        contentTypes.add(template.getName());
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    try {
+      Node templatesHome = 
+        (Node) getSession(sessionProvider).getItem(cmsTemplatesBasePath_);
+      for (NodeIterator templateIter = templatesHome.getNodes(); templateIter.hasNext();) {
+        Node template = templateIter.nextNode();
+        if (template.getProperty(DOCUMENT_TEMPLATE_PROP).getBoolean())
+          contentTypes.add(template.getName());
+      }
+      nodeTypeListCached.put(NODETYPE_LIST, contentTypes);
+    } finally {
+      sessionProvider.close();
     }
-    nodeTypeListCached.put(NODETYPE_LIST, contentTypes);
     return contentTypes;
   }
 
