@@ -40,5 +40,16 @@ public class RemovePortalArtifactsServiceImpl implements RemovePortalArtifactsSe
       plugin.invalidateFromPortal(sessionProvider, portalName);
     }
   }
-
+  
+  @Override
+  public void invalidateArtifactsFromPortal(SessionProvider sessionProvider,
+      String portalName, String portalTemplateName) throws Exception {
+    for (RemovePortalPlugin plugin : artifactPlugins.values()) {
+      if (!plugin.getName().startsWith("template")
+          || (portalTemplateName != null && plugin.getName()
+              .startsWith(portalTemplateName))) {
+        plugin.invalidateFromPortal(sessionProvider, portalName);
+      }
+    }
+  }
 }
