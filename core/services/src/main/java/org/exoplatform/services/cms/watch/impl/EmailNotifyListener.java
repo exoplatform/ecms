@@ -43,6 +43,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.mail.MailService;
@@ -50,6 +51,7 @@ import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.Query;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
@@ -75,6 +77,7 @@ public class EmailNotifyListener implements EventListener {
   private static final String SITE_EXPLORER       = "siteExplorer";
 
   private static final String PATH_PARAM          = "path";
+  private static final String USER_ID             = "${userId}";
 
   private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class);
 
@@ -178,26 +181,26 @@ public class EmailNotifyListener implements EventListener {
    * @throws RepositoryException
    */
   private DriveData getDrive(List<DriveData> lstDrive, String workspace, String nodePath) throws RepositoryException {
-
+    NodeHierarchyCreator nhc = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    String userName = ConversationState.getCurrent().getIdentity().getUserId();
+    int idx;
+    String userNodePath = null;
+    try {
+      userNodePath = nhc.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userName).getPath();
+    }catch (Exception e) {
+      //Exception while finding the user home node
+      userNodePath = null;
+    }
     DriveData driveData = null;
-    String[] elements = nodePath.split("/");
-    String driveMapper = "";
-    for (int i = 0; i < elements.length; i++) {
-      /**
-       * append elements in node path one by one to compare with driver example:
-       * node path = /a/b/c/d i == 0 => driveMapper = "/" (root node) i == 1 =>
-       * driveMapper = "/a" i == 2 => driveMapper = "/a/b" ...
-       */
-      if (i == 1) {
-        driveMapper = elements[i];
-      } else {
-        driveMapper = "/" + elements[i];
+    for (DriveData drive : lstDrive) {
+      String driveHomePath = drive.getHomePath();
+      idx = driveHomePath.indexOf(USER_ID) ;
+      if (idx >=0 && userNodePath!=null) {
+        driveHomePath = userNodePath + driveHomePath.substring(idx + USER_ID.length());
       }
-      for (DriveData drive : lstDrive) {
-        if (workspace.equals(drive.getWorkspace()) && driveMapper.equals(drive.getHomePath())) {
-          driveData = drive;
-          break;
-        }
+      if (workspace.equals(drive.getWorkspace()) && nodePath.startsWith(driveHomePath)) {
+        driveData = drive;
+        break;
       }
     }
     return driveData;
