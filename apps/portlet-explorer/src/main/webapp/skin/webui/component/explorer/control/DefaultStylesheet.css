@@ -624,8 +624,6 @@
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .admin-view{
 	background: url(DefaultSkin/background/DetailView.png) no-repeat center;
-	width: 23px;
-	height: 24px;
 	display: block;
 }
 
