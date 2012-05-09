@@ -6,7 +6,7 @@
 			  <td class="FieldLabel"><label for="name">Name</label></td>
 			  <td class="FieldComponent">
 			  <%
-	        String[] fieldName = ["jcrPath=/node", "mixintype=exo:datetime,exo:owneable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+	        String[] fieldName = ["jcrPath=/node", "mixintype=exo:datetime,exo:owneable,mix:i18n", "editable=if-null", "options=noSanitization", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ; 
       	%>	      
         </td>
@@ -31,7 +31,7 @@
 			  	}
 			  </style>
 				<%
-	        String[] fieldTitle = ["jcrPath=/node/exo:templateFile", "validate=empty"] ;
+	        String[] fieldTitle = ["jcrPath=/node/exo:templateFile", "options=noSanitization", "validate=empty"] ;
 	        uicomponent.addTextAreaField("templateFile", fieldTitle) ;
 	      %>
 				</td>
