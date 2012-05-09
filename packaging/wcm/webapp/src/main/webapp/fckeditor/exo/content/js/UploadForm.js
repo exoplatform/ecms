@@ -243,7 +243,7 @@ UploadForm.prototype.uploadFileSave = function() {
 		strParam += "&userId="+eXoPlugin.userId;
 		if(jcrPath) strParam += "&jcrPath="+jcrPath; 				
 		var uploadId = eXoWCM.UploadForm.uploadId;
-		strParam +="&action=save&uploadId="+uploadId+"&filename="+nodeName;
+		strParam +="&action=save&uploadId="+uploadId+"&fileName="+nodeName;
 		var strConnector = eXp.connector.replace("/getDrivers?repositoryName=repository", "/");
 		var connector = strConnector + eXp.command.controlUpload + "?"+ strParam + "&language=en";
 //		eXp.sendRequest(connector);
