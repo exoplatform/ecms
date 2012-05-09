@@ -3444,4 +3444,10 @@
 	  <unknown-error>Erreur iconnue, vous ne pouvez pas modifier cette propriété</unknown-error>
     </msg>
   </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Ce noeud est bloqué, vous ne pouvez pas le suivre!</node-is-locked>
+      <unknown-error>Des erreurs sont survenus, vous ne pouvez pas suivre ce noeud!</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
 </bundle>

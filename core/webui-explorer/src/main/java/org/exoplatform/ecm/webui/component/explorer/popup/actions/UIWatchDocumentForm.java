@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.lock.LockException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -122,11 +123,19 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
       Node currentNode = uiExplorer.getCurrentNode();
       uiExplorer.addLockToken(currentNode);
       if(notifyType.equalsIgnoreCase(NOTIFICATION_BY_EMAIL)) {
-        watchService.watchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
-        uiForm.isWatching() ;
+        try {
+          watchService.watchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
+          uiForm.isWatching() ;
+        } catch (LockException e) {
+          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.node-is-locked", null,
+                                                  ApplicationMessage.WARNING));
+        } catch (Exception e) {
+          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unknown-error", null,
+                                                  ApplicationMessage.ERROR));
+        }
       } else {
         uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
-                                                ApplicationMessage.WARNING)) ;
+                                                ApplicationMessage.WARNING));
         
         return ;
       }
@@ -146,7 +155,15 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
       Node currentNode = uiExplorer.getCurrentNode();
       uiExplorer.addLockToken(currentNode);
       if(notifyType.equalsIgnoreCase(NOTIFICATION_BY_EMAIL)) {
-        watchService.unwatchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
+        try {
+          watchService.unwatchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
+        } catch (LockException e) {
+          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.node-is-locked", null,
+                                                  ApplicationMessage.WARNING));
+        } catch (Exception e) {
+          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unknown-error", null,
+                                                  ApplicationMessage.ERROR));
+        }
       } else {
         uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
                                                 ApplicationMessage.WARNING)) ;
