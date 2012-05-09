@@ -36,8 +36,9 @@ public class IgnoreAccentAnalyzer extends Analyzer {
 
   public TokenStream tokenStream(String fieldName, Reader reader) {
     TokenStream result = new WhitespaceTokenizer(reader);
-    result = new UnescapeHTMLFilter(result);
     result = new StandardFilter(result);
+    result = new UnescapeHTMLFilter(result);
+    result = new IgnoreSentencesEndFilter(result);
     result = new LowerCaseFilter(result);
     result = new ISOLatin1AccentFilter(result);
     return result;
