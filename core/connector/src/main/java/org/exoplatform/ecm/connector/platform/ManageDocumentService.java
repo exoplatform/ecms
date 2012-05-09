@@ -452,8 +452,11 @@ public class ManageDocumentService implements ResourceContainer {
       referNode = sourceNode != null ? sourceNode : child;
 
       if (isFolder(referNode)) {
-        String childFolder = StringUtils.isEmpty(currentFolder) ? child.getName() : currentFolder.concat("/")
-                                                                                                     .concat(child.getName());
+        // Get current folder from folder path to fix same name problem (ECMS-3586) 
+        String folderPath = referNode.getPath();
+        folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
+        String childFolder = StringUtils.isEmpty(currentFolder) ? folderPath : currentFolder.concat("/")
+                                                                                    .concat(folderPath);
         Element folder = createFolderElement(document,
                                              referNode,
                                              referNode.getSession().getWorkspace().getName(),
