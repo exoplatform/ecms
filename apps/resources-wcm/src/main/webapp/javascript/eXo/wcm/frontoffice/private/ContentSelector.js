@@ -995,22 +995,8 @@ EcmContentSelector.prototype.changeFilter = function() {
 			container.innerHTML = "";
 	}
 	
-	/*if(eXo.ecm.ECS.typeObj == "folder") {
-		eXo.ecm.ECS.listFolders();
-	} else if(eXo.ecm.ECS.typeObj == "multi") {
-		eXo.ecm.ECS.listMutilFiles();
-	} else {
-		eXo.ecm.ECS.listFiles();
-	}*/	
-	if(eXo.ecm.ECS.currentNode)	 eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 	
-	var filter = document.getElementById('Filter');
-	var action = filter.getAttribute("action");
-	if(action) {
-		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';
-		eval(action);
-	}	
+	if(eXo.ecm.ECS.currentNode)	 eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 };
 
 EcmContentSelector.prototype.changeViewType = function(viewType) {  
