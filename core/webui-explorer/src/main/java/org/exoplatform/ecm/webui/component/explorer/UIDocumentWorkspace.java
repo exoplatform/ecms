@@ -17,10 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer ;
 
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
-import org.exoplatform.ecm.webui.component.explorer.search.UIShowAllFavouriteResult;
-import org.exoplatform.ecm.webui.component.explorer.search.UIShowAllHiddenResult;
-import org.exoplatform.ecm.webui.component.explorer.search.UIShowAllOwnedByUserResult;
-import org.exoplatform.ecm.webui.component.explorer.search.UIShowAllTrashResult;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -36,16 +32,8 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 public class UIDocumentWorkspace extends UIContainer {
 
   static public String SIMPLE_SEARCH_RESULT = "SimpleSearchResult" ;
-  static public String SHOW_ALL_FAVOURITE_RESULT = "ShowAllFavouriteResult";
-  static public String SHOW_ALL_TRASH_RESULT = "ShowAllTrashResult";
-  static public String SHOW_ALL_HIDDEN_RESULT = "ShowAllHiddenResult";
-  static public String SHOW_ALL_OWNED_BY_USER_RESULT = "ShowAllOwnedByUserResult";
   public UIDocumentWorkspace() throws Exception {
     addChild(UIDocumentContainer.class, null, null) ;
-    addChild(UISearchResult.class, null, SIMPLE_SEARCH_RESULT).setRendered(false) ;
-    addChild(UIShowAllFavouriteResult.class, null, SHOW_ALL_FAVOURITE_RESULT).setRendered(false);
-    addChild(UIShowAllTrashResult.class, null, SHOW_ALL_TRASH_RESULT).setRendered(false);
-    addChild(UIShowAllHiddenResult.class, null, SHOW_ALL_HIDDEN_RESULT).setRendered(false);
-    addChild(UIShowAllOwnedByUserResult.class, null, SHOW_ALL_OWNED_BY_USER_RESULT).setRendered(false);
+    addChild(UISearchResult.class, null, SIMPLE_SEARCH_RESULT).setRendered(false);
   }
 }
