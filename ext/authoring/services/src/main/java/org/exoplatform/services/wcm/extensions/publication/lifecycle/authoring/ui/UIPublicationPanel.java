@@ -24,6 +24,7 @@ import java.util.List;
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -154,14 +155,14 @@ public class UIPublicationPanel
         if(currentNode.isLocked()) {
           currentNode.getSession().addLockToken(LockUtil.getLockToken(currentNode));
         }
-        
+
         publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        
+
         String nodeVersionUUID = null;
         if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP))
           nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
-        if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {          
+        if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {
           publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
         }
         String siteName = Util.getPortalRequestContext().getPortalOwner();
@@ -173,7 +174,7 @@ public class UIPublicationPanel
         JCRExceptionManager.process(uiApp, e);
       }
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());      
+      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
     }
   }
 
@@ -183,32 +184,35 @@ public class UIPublicationPanel
       UIPublicationPanel publicationPanel = event.getSource();
       UIFormDateTimeInput startPublication = publicationPanel.getChildById(START_PUBLICATION);
       UIFormDateTimeInput endPublication = publicationPanel.getChildById(END_PUBLICATION);
+      String startValue = startPublication.getValue();
+      String endValue = endPublication.getValue();
       Calendar startDate = startPublication.getCalendar();
       Calendar endDate = endPublication.getCalendar();
       Node node = publicationPanel.getCurrentNode();
       try {
+        if ((startDate == null && StringUtils.isNotEmpty(startValue))
+          || (endDate == null && StringUtils.isNotEmpty(endValue))) {
+          UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
+          return;
+        }
         if (startDate != null && endDate != null && startDate.after(endDate)) {
           UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null));
           return;
         }
-        
+
         if(node.isLocked()) {
           node.getSession().addLockToken(LockUtil.getLockToken(node));
         }
-        
-        if ((!"".equals(startPublication.getValue())) || (!"".equals(endPublication.getValue()))) {
-          if (!"".equals(startPublication.getValue()))
+
+        if (StringUtils.isNotEmpty(startValue) || StringUtils.isNotEmpty(endValue)) {
+          if (StringUtils.isNotEmpty(startValue))
             node.setProperty(AuthoringPublicationConstant.START_TIME_PROPERTY, startDate);
-          if (!"".equals(endPublication.getValue()))
+          if (StringUtils.isNotEmpty(endValue))
             node.setProperty(AuthoringPublicationConstant.END_TIME_PROPERTY, endDate);
           node.getSession().save();
-        }   
-      } catch (NullPointerException e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
-        
-        return;
+        }
       } catch (ItemExistsException iee) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Error when adding properties to node");
@@ -219,7 +223,7 @@ public class UIPublicationPanel
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
   }
-  
+
   public static class ResetActionListener extends EventListener<UIPublicationPanel> {
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
