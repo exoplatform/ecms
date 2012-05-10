@@ -26,6 +26,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -370,6 +372,30 @@ public class Utils {
     if (!node.isNodeType(EXO_SYMLINK)) {
       try {
           List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+          
+          // Before removing symlinks, We order symlinks by name descending, index descending.
+          // Example: symlink[3],symlink[2], symlink[1] to avoid the case that
+          // the index of same name symlink automatically changed to increasing one by one 
+          Collections.sort(symlinks, new Comparator<Node>()
+            {
+              @Override
+              public int compare(Node node1, Node node2) {
+                try {
+                  String name1 = node1.getName();
+                  String name2 = node2.getName();
+                  if (name1.equals(name2)) {
+                    int index1 = node1.getIndex();
+                    int index2 = node2.getIndex();
+                    return -1 * ((Integer)index1).compareTo((Integer)index2);
+                  } else {
+                    return -1 * name1.compareTo(name2);
+                  }
+                } catch (RepositoryException e) {
+                  return 0;
+                }
+              }
+            });
+          
           for (Node symlink : symlinks) {
             synchronized (symlink) {
               trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
@@ -413,5 +439,4 @@ public class Utils {
   public static boolean hasChild(Node node, String childType) throws Exception {
     return (getChildOfType(node, childType) != null);
   }
-  
 }
