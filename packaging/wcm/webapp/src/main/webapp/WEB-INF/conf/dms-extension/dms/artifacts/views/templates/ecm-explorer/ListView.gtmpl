@@ -21,10 +21,10 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
-  
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.jcr.RepositoryService;
   
-  def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
+  def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();

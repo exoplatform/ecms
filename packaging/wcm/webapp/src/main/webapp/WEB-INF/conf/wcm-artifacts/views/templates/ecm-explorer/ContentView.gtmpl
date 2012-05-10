@@ -20,6 +20,8 @@
   import org.apache.commons.lang.StringEscapeUtils;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
+  import org.exoplatform.services.cms.link.LinkManager;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   
   // Content view
   import java.util.Date;
@@ -48,7 +50,7 @@
      }
      return date;
    }
-  
+  def linkManager = WCMCoreUtils.getService(LinkManager.class);  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
@@ -226,10 +228,17 @@
           def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
           def preferenceWS = data.getSession().getWorkspace().getName() ;
           String nodePath = data.getPath() ;
-          
+          def isSymLink = false;
+          isSymLink = uicomponent.isSymLink(data);
           // Content view
           //   Status
-          def status = wcmPublicationService.getContentState(data);
+          def status = "";
+          if(isSymLink) {
+            def targetNode = linkManager.getTarget(data);            
+            status = wcmPublicationService.getContentState(targetNode);
+          } else {
+            status = wcmPublicationService.getContentState(data);
+          }
           if (status == null) status = "";
           
           //   Title
@@ -339,7 +348,7 @@
                     <div class="IconLocked"></div>
                   <%}%>
                   <%
-                    if(uicomponent.isSymLink(data)) {
+                    if(isSymLink) {
                       %><div class="LinkSmall"></div><%
                     }
                   %>
