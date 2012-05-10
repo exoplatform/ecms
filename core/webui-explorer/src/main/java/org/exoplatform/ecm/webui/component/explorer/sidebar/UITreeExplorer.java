@@ -530,6 +530,8 @@ public class UITreeExplorer extends UIContainer {
     if(!node.hasNodes()) return false;
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
     Preference preferences = uiExplorer.getPreference();
+    if(!isFolderType(node) && !preferences.isJcrEnable())
+      return false;
     NodeIterator iterator = node.getNodes();
     while(iterator.hasNext()) {
       Node tmpNode = iterator.nextNode();
@@ -571,5 +573,10 @@ public class UITreeExplorer extends UIContainer {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     NodeType nodeType = node.getPrimaryNodeType();
     return templateService.getDocumentTemplates().contains(nodeType.getName());
+  }
+  private boolean isFolderType(Node node) throws Exception {
+   	if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
+      node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
+    return false;
   }
 }
