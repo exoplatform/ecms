@@ -165,23 +165,23 @@ public class FavoriteServiceImpl implements FavoriteService {
   
   private Node getUserFavoriteFolder(String userName) throws Exception {
     Node userNode = 
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+      nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
   }
 
   private Node createFavoriteFolder(String userName) throws Exception {
-	// Get default favorite path
+    // Get default favorite path
   	Node userNode = 
-        nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
+        nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
 
     // Create favorite path
-	Node userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
-	
-	// Add Mixin types
-	userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
-	userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
+  	Node userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
+  	
+  	// Add Mixin types
+  	userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
+  	userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
 	
 	// Add permission
     Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
