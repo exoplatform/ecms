@@ -1532,7 +1532,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         if(extendedPageIterator == null) return;
         int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
         extendedPageIterator.setCurrentPage(page);
-        event.getRequestContext().addUIComponentToUpdateByAjax(treeExplorer);
+        event.getRequestContext().addUIComponentToUpdateByAjax(explorer);
       } catch(RepositoryException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Repository cannot be found");
