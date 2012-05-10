@@ -223,9 +223,10 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       }
       if(listScript.contains(name.toString()) && uiForm.isAddNew_) {
         Object[] args = { name } ;
-        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-exist", args,
-                                                ApplicationMessage.WARNING)) ;
-        
+        ApplicationMessage appMessage = 
+          new ApplicationMessage("UIScriptForm.msg.name-exist", args, ApplicationMessage.WARNING);
+        appMessage.setArgsLocalized(false);
+        uiApp.addMessage(appMessage) ;        
         return ;
       }
       boolean isEnableVersioning =
