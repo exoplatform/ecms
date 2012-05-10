@@ -82,6 +82,7 @@
 
 .UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldComponent {
   padding-left: 0px;
+  width: 404px;
 }
 
 .UIAnyPermission .UIForm .HorizontalLayout .UIFormGrid {
