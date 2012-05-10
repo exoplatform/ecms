@@ -58,6 +58,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
@@ -87,6 +88,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -113,6 +115,7 @@ public class UIJCRExplorer extends UIContainer {
   private LinkedList<String> wsHistory_ = new LinkedList<String>();
   private PortletPreferences pref_ ;
   private Preference preferences_;
+  private Map<String, Integer> pageIndexHistory_ = new HashMap<String, Integer>();
   private Map<String, HistoryEntry> addressPath_ = new HashMap<String, HistoryEntry>() ;
   private JCRResourceResolver jcrTemplateResourceResolver_ ;
 
@@ -322,6 +325,41 @@ public class UIJCRExplorer extends UIContainer {
   public void setBackNodePath(String previousWorkspaceName, String previousPath) throws Exception {
     setBackSelectNode(previousWorkspaceName, previousPath);
     refreshExplorer();
+
+    // Back to last pageIndex if previous path has paginator
+    if (pageIndexHistory_.containsKey(previousPath) && hasPaginator(previousPath, previousWorkspaceName)) {
+      UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+      if (contentPageIterator != null ) {
+        // Get last pageIndex
+        int previousPageIndex = pageIndexHistory_.get(previousPath);
+        int avaiablePage = contentPageIterator.getAvailablePage();
+        previousPageIndex = (avaiablePage >= previousPageIndex)? previousPageIndex : avaiablePage;
+  
+        // Set last pageIndex for paginator of UIDocumentInfo
+        contentPageIterator.setCurrentPage(previousPageIndex);
+  
+        // Set last pageIndex for UITreeNodePageIterator
+        UITreeExplorer uiTreeExplorer = this.findFirstComponentOfType(UITreeExplorer.class);
+        if (uiTreeExplorer != null) {
+          UITreeNodePageIterator extendedPageIterator =
+              uiTreeExplorer.getUIPageIterator(previousPath);
+          extendedPageIterator.setCurrentPage(previousPageIndex);
+        }
+      }
+    }
+  }
+
+  /**
+   * Check if node has paginator when viewing it's children.
+   *
+   * @param nodePath
+   * @param workspaceName
+   * @return
+   * @throws Exception
+   */
+  public boolean hasPaginator(String nodePath, String workspaceName) throws Exception {
+    int nodePerPages = this.getPreference().getNodesPerPage();
+    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName)).getNodes().getSize() > nodePerPages;
   }
 
   public void setDriveData(DriveData driveData) { driveData_ = driveData ; }
@@ -515,13 +553,13 @@ public class UIJCRExplorer extends UIContainer {
     setValue(filterPath(currentPath_)) ;
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    
+
     UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
     UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
     UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
     uiDocumentWithTree.updatePageListData();
     uiDocumentInfo.updatePageListData();
-    
+
     if(uiDocumentWorkspace.isRendered()) {
       if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) == null ||
           !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
@@ -754,9 +792,15 @@ public class UIJCRExplorer extends UIContainer {
     addressPath_.put(str, new HistoryEntry(ws, str));
   }
 
+  public void record(String str, String ws, int pageIndex) {
+    record(str, ws);
+    pageIndexHistory_.put(str, pageIndex);
+  }
+
   public void clearNodeHistory(String currentPath) {
     nodesHistory_.clear();
     wsHistory_.clear();
+    pageIndexHistory_.clear();
     addressPath_.clear();
     currentPath_ = currentPath;
   }
@@ -836,8 +880,19 @@ public class UIJCRExplorer extends UIContainer {
     if(currentNode.hasProperty(Utils.EXO_LANGUAGE)) {
       setLanguage(currentNode.getProperty(Utils.EXO_LANGUAGE).getValue().getString());
     }
+
+    // Store previous node path to history for backing
     if(previousPath != null && !currentPath_.equals(previousPath) && !back) {
-      record(previousPath, lastWorkspaceName_);
+      // If previous node path has paginator, store last page index to history
+      if (this.hasPaginator(previousPath, lastWorkspaceName_)) {
+        UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+        if (pageIterator != null) {
+          record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+        }
+      }
+      else {
+        record(previousPath, lastWorkspaceName_);
+      }
     }
   }
 

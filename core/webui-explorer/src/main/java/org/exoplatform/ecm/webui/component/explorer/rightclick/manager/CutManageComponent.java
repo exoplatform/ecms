@@ -139,11 +139,9 @@ public class CutManageComponent extends UIAbstractManagerComponent {
         uiWorkingArea.getVirtualClipboards().add(clipboard);
       } else {
         session.save();
-        uiExplorer.updateAjax(event);
       }
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      
     }
   }
 
@@ -154,7 +152,6 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       processCut(nodePaths[i], event, uiExplorer, true);
     }
     uiExplorer.getSession().save();
-    uiExplorer.updateAjax(event);
   }
 
   public static void cutManage(Event<CutManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
