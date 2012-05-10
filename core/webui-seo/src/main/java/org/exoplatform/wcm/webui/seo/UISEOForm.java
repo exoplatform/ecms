@@ -248,12 +248,16 @@ public class UISEOForm extends UIForm{
         boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
-          priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
-          if(priority < 0.0 || priority > 1.0) {
-            uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null,
-            ApplicationMessage.WARNING));
-            return;
-          }
+        	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+        	if(!uiForm.getUIStringInput(PRIORITY).getValue().equalsIgnoreCase(rc.getApplicationResourceBundle().
+        			getString("UISEOForm.tip.priority"))) {  		
+            priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
+            if(priority < 0.0 || priority > 1.0) {
+              uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null,
+              ApplicationMessage.WARNING));
+              return;
+            }
+        	}
         }
         String frequency = uiForm.getUIFormSelectBox(FREQUENCY).getValue() ;
         try {
