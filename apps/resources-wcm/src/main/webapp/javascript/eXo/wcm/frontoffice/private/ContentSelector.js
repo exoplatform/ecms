@@ -838,7 +838,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
    temp = temp.replace("%27","%2527");
  		index = temp.indexOf("%27");
   }
-  url = encodeURIComponent(eXo.ecm.ECS.hostName+temp);
+  url = encodeURIComponent(temp);
   url = decodeURIComponent(url);    
  	var name 	= encodeURIComponent(objNode.title);
  	name = decodeURIComponent(name);
