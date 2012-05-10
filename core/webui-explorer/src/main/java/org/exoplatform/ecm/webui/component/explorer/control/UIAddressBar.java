@@ -166,6 +166,10 @@ public class UIAddressBar extends UIForm {
           String previousNodePath = uiExplorer.rewind() ;
           String previousWs = uiExplorer.previousWsName();
           uiExplorer.setBackNodePath(previousWs, previousNodePath);
+          if (uiExplorer.hasPaginator(previousNodePath, previousWs)) {
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+            return;
+          }
         }
         uiExplorer.updateAjax(event) ;
       } catch (AccessDeniedException ade) {
