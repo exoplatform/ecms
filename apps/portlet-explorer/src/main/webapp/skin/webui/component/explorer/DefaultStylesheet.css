@@ -24,8 +24,9 @@
 
 .UIJCRExplorerPortlet {
 	overflow: hidden; /* orientation=rt */
+	overflow: auto;
 	background: white;
-    padding: 9px;
+  padding: 9px;
 }
 
 .UIJCRExplorerPortlet .LeftCotainer {
