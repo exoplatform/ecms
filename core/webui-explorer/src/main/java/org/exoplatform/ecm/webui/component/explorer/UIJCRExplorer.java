@@ -323,17 +323,16 @@ public class UIJCRExplorer extends UIContainer {
 
     // Back to last pageIndex if previous path has paginator
     if (pageIndexHistory_.containsKey(previousPath) && hasPaginator(previousPath, previousWorkspaceName)) {
-      UIDocumentInfo uiDocumentInfo = this.findFirstComponentOfType(UIDocumentInfo.class);
-      if (uiDocumentInfo !=null ) {
+      UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+      if (contentPageIterator != null ) {
         // Get last pageIndex
-        UIPageIterator contentPageIterator = uiDocumentInfo.getContentPageIterator();
         int previousPageIndex = pageIndexHistory_.get(previousPath);
         int avaiablePage = contentPageIterator.getAvailablePage();
         previousPageIndex = (avaiablePage >= previousPageIndex)? previousPageIndex : avaiablePage;
-  
+
         // Set last pageIndex for paginator of UIDocumentInfo
         contentPageIterator.setCurrentPage(previousPageIndex);
-  
+
         // Set last pageIndex for UITreeNodePageIterator
         UITreeExplorer uiTreeExplorer = this.findFirstComponentOfType(UITreeExplorer.class);
         if (uiTreeExplorer != null) {
