@@ -26,6 +26,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +50,6 @@ import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -69,7 +70,7 @@ public class Utils {
   public static final String MAPPING_FILE = "mapping.properties";
 
   public static final String EXO_SYMLINK = "exo:symlink";
-  
+
   public static Node makePath(Node rootNode, String path, String nodetype)
   throws PathNotFoundException, RepositoryException {
     return makePath(rootNode, path, nodetype, null);
@@ -318,10 +319,10 @@ public class Utils {
     return ret;
   }
 
-  
+
   public static void removeDeadSymlinks(Node node) throws Exception {
     if (isInTrash(node)) {
-      return; 
+      return;
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
@@ -333,13 +334,37 @@ public class Utils {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Queue<Node> queue = new LinkedList<Node>();
     queue.add(node);
-    
+
     try {
       while (!queue.isEmpty()) {
         node = queue.poll();
         if (!node.isNodeType(EXO_SYMLINK)) {
           try {
             List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+
+            // Before removing symlinks, We order symlinks by name descending, index descending.
+            // Example: symlink[3],symlink[2], symlink[1] to avoid the case that
+            // the index of same name symlink automatically changed to increasing one by one
+            Collections.sort(symlinks, new Comparator<Node>()
+              {
+                @Override
+                public int compare(Node node1, Node node2) {
+                  try {
+                    String name1 = node1.getName();
+                    String name2 = node2.getName();
+                    if (name1.equals(name2)) {
+                      int index1 = node1.getIndex();
+                      int index2 = node2.getIndex();
+                      return -1 * ((Integer)index1).compareTo((Integer)index2);
+                    } else {
+                      return -1 * name1.compareTo(name2);
+                    }
+                  } catch (RepositoryException e) {
+                    return 0;
+                  }
+                }
+              });
+
             for (Node symlink : symlinks) {
               synchronized (symlink) {
                 trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
@@ -363,7 +388,7 @@ public class Utils {
       sessionProvider.close();
     }
   }
-  
+
   public static Node getChildOfType(Node node, String childType) throws Exception {
     if (node == null) {
       return null;
@@ -377,9 +402,9 @@ public class Utils {
     }
     return null;
   }
-  
+
   public static boolean hasChild(Node node, String childType) throws Exception {
     return (getChildOfType(node, childType) != null);
   }
-  
+
 }
