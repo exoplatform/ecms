@@ -17,19 +17,11 @@
 <%
    uicomponent.renderChild("SearchNodeType");
 %>
- <div class="UINodTypeList AllDocument">
-   <table style="margin: auto; width: auto;">
-     <tr>
-       <td style="line-height:32px">
-          <label for="ALL_DOCUMENT_TYPES"><%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%></label>
-       </td>
-       <td class="FieldLabel">
-        <%
-         uicomponent.renderChild("ALL_DOCUMENT_TYPES");
-        %>
-       </td>
-     </tr>
-  </table>
+ <div class="UINodeTypeList AllDocument">
+    <label for="ALL_DOCUMENT_TYPES"><%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%></label>
+    <%
+      uicomponent.renderChild("ALL_DOCUMENT_TYPES");
+    %>
  </div>
  <div>
     <table class="UIGrid">
@@ -75,8 +67,7 @@
                     }
                   %>
                   <div class="TrueFalseContainer">
-                    <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span></span></div>
-                    <div>$booleanText</div>
+                    <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span>$booleanText</span></div>
                   </div>
               </td>
               <td align="center">

@@ -678,6 +678,14 @@ float: left;
   width: 140px;
 }
 
+.UINodeTypeSelector .AllDocument {
+    text-align: center;
+}
+
+.UINodeTypeSelector .AllDocument .checkbox {
+  margin-left: 5px;
+}
+
 .UINodeTypeSearh {
   padding: 0 0 10px;
 }
