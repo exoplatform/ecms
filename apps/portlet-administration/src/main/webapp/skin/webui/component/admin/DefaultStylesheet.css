@@ -682,7 +682,12 @@ float: left;
 .UINodeTypeSearh {
   padding: 0 0 10px;
 }
-
+.UINodeTypeSelector .AllDocument {
+    text-align: center;
+}
+.UINodeTypeSelector .AllDocument .checkbox {
+  margin-left: 5px;
+}
 .UINodeTypeSearh td {
   vertical-align: middle;
 }
