@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.jcr.Node;
@@ -170,7 +172,13 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   private Document buildDocumentImage(File input, String name) {
      Document document = new Document();
-     // capture the page image to file
+
+     // Turn off Log of org.icepdf.core.pobjects.Document to avoid printing error stack trace in case viewing
+     // a PDF file which use new Public Key Security Handler.
+     // TODO: Remove this statement after IcePDF fix this
+     Logger.getLogger(Document.class.toString()).setLevel(Level.OFF);
+
+    // Capture the page image to file
     try {
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
@@ -186,10 +194,11 @@ public class PDFViewerRESTService implements ResourceContainer {
         LOG.error("Error file not found " + ex);
       }
     } catch (IOException ex) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error handling PDF document " + ex);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Error handling PDF document: {} {}", name, ex.toString());
       }
     }
+
     return document;
   }
 
