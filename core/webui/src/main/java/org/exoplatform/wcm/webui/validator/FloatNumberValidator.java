@@ -22,6 +22,7 @@ import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
+import org.exoplatform.webui.application.WebuiRequestContext;
 
 
 /**
@@ -34,6 +35,8 @@ public class FloatNumberValidator implements Validator{
   @SuppressWarnings("unchecked")
   public void validate(UIFormInput uiInput) throws Exception {
     if (uiInput.getValue()==null || ((String)uiInput.getValue()).length()==0) return;
+    WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+    String priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");
     UIComponent uiComponent = (UIComponent) uiInput ;
     UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;
     String label;
@@ -44,6 +47,7 @@ public class FloatNumberValidator implements Validator{
     }
     label = label.trim();
     String s = (String)uiInput.getValue();
+    if(s.equalsIgnoreCase(priority)) return;
     try {
       Float.parseFloat(s);
     } catch (NumberFormatException ex) {
