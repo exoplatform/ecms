@@ -71,9 +71,9 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-                                              new CanSetPropertyFilter(),                                              
                                               new IsHoldsLockFilter(),
                                               new IsNotLockedFilter(true, true),
+                                              new CanSetPropertyFilter(),                                              
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter() });
 

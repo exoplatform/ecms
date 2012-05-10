@@ -18,11 +18,16 @@ package org.exoplatform.ecm.webui.utils;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.jcr.lock.Lock;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -31,8 +36,10 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
+import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -216,4 +223,41 @@ public class LockUtil {
     }
     return true;
   }
+  
+  /**
+   * update the lockCache by adding lockToken of all locked nodes for the given membership
+   * @param membership
+   * @throws Exception
+   */
+  @SuppressWarnings("unchecked")
+  public static void updateLockCache(String membership) throws Exception {
+    ExoCache lockcache = getLockCache();
+    ManageableRepository repo = WCMCoreUtils.getRepository();
+    Session session = null;
+    //get all locked nodes
+    for (String ws : repo.getWorkspaceNames()) {
+      session = WCMCoreUtils.getSystemSessionProvider().getSession(ws, repo);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery("SELECT * FROM mix:lockable order by exo:dateCreated DESC", Query.SQL);
+      QueryResult queryResult = query.execute();
+      for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
+        Node itemNode = iter.nextNode();
+        //add lockToken of this locked node to the given membership
+        if (!Utils.isInTrash(itemNode)) {
+          String lockToken = getLockToken(itemNode);
+          keepLock(itemNode.getLock(), membership, lockToken);
+          if (membership.startsWith("*")) {
+            String lockTokenString = membership;
+            ExoContainer container = ExoContainerContext.getCurrentContainer();
+            OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+            List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
+            for (MembershipType m : memberships) {
+              lockTokenString = membership.replace("*", m.getName());
+              LockUtil.keepLock(itemNode.getLock(), lockTokenString, lockToken);
+            }
+          }
+        }
+      }
+    }
+  }  
 }
