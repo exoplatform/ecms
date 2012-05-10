@@ -15,9 +15,10 @@
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.jcr.RepositoryService;
   import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 %>
 <%
-  def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
+  def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def childList = uicomponent.getChildrenList();
   if(childList.size() > 0) {
     String portalName = uicomponent.getPortalName();
