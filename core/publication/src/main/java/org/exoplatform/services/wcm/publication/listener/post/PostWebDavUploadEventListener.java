@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.publication.listener.post;
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.webdav.WebDavService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
@@ -62,7 +63,30 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
           || currentNode.isNodeType("exo:action")) {
         return;
       }
+      
+      // Add Mixin mix:i18n
+      if(currentNode.canAddMixin("mix:i18n")) {
+        currentNode.addMixin("mix:i18n");
+      }
+      
+      // Add Mixin mix:votable
+      if(currentNode.canAddMixin("mix:votable")) {
+        currentNode.addMixin("mix:votable");
+      }
+      
+      // Add Mixin mix:commentable
+      if(currentNode.canAddMixin("mix:commentable")) {
+        currentNode.addMixin("mix:commentable");
+      }
 
+      // Add Mixin exo:rss-enable
+      if(currentNode.canAddMixin("exo:rss-enable")) {
+        currentNode.addMixin("exo:rss-enable");
+        if(!currentNode.hasProperty("exo:title")) {
+          currentNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(currentNode.getName())); 
+        }
+      }
+    
       publicationService.updateLifecyleOnChangeContent(currentNode, "", currentNode.getSession()
                                                                                    .getUserID());
     } catch (Exception ex) {
