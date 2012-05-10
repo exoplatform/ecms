@@ -182,6 +182,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * Add mixin exo:actionable for node
    */
   public void start() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getSimpleName()+ "...");
+    }
     try {
       for (ComponentPlugin cPlungin : actionPlugins) {
         BaseActionPlugin plugin = (BaseActionPlugin) cPlungin;

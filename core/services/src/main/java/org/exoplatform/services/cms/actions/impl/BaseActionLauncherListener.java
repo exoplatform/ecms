@@ -37,6 +37,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public abstract class BaseActionLauncherListener implements ECMEventListener {
 
@@ -64,12 +65,11 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
 
   @SuppressWarnings("unchecked")
   public void onEvent(EventIterator events) {
-    ExoContainer exoContainer = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService =
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
+      WCMCoreUtils.getService(RepositoryService.class);
     ActionServiceContainer actionServiceContainer =
-      (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
-    IdentityRegistry identityRegistry = (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
+      WCMCoreUtils.getService(ActionServiceContainer.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     while (events.hasNext()) {
       Event event = events.nextEvent();
       Node node = null;
