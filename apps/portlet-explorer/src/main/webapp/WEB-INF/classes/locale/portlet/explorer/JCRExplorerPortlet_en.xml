@@ -875,7 +875,7 @@
       <name-is-exist>The name '{0}' already exists.</name-is-exist>
       <contraint-violation>Cannot add the node '{0}' as the child node to this node.</contraint-violation>
       <lock-exception>You cannot upload the file. This node is locked.</lock-exception>
-      <confirm-behavior>The file name'{0}' already exists in this location. Please select a behavior below:</confirm-behavior>
+      <confirm-behavior>The file name '{0}' already exists in this location. Please select a behavior below:</confirm-behavior>
     </msg>
   </UIUploadForm>
   <UIUploadContent>

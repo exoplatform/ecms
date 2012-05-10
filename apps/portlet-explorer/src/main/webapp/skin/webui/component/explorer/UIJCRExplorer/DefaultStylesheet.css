@@ -1153,7 +1153,7 @@
 
 .UIJCRExplorer .UIUploadBehaviorWithSameName .Text {
 	padding: 10px;
-	width: 90%;
+  margin-left: 50px;
 }
 
 /*############################## -- End UIDocumentWorkspace -- ##############################*/
