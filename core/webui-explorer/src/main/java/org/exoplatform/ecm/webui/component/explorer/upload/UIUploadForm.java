@@ -578,8 +578,13 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
                 return ;
               }
-              if(!node.isNodeType(Utils.MIX_VERSIONABLE) && node.canAddMixin(Utils.MIX_VERSIONABLE)) {
-                node.addMixin(Utils.MIX_VERSIONABLE);
+              String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
+              if(nodetypes == null || nodetypes.length() == 0)
+             	  nodetypes = "exo:webContent";
+              if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
+              	if(!node.isNodeType(Utils.MIX_VERSIONABLE) && node.canAddMixin(Utils.MIX_VERSIONABLE)) {
+                  node.addMixin(Utils.MIX_VERSIONABLE);
+                }
               }
               Node contentNode = node.getNode(Utils.JCR_CONTENT);
               if(!node.isCheckedOut()) node.checkout() ;

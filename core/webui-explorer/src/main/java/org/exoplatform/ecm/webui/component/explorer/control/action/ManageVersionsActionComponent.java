@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFolderFi
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
@@ -56,7 +57,7 @@ public class ManageVersionsActionComponent extends UIComponent {
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
       new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-version-rootnode"),
       new CanSetPropertyFilter(), new IsNotLockedFilter(), new CanEnableVersionFilter(),
-      new IsNotEditingDocumentFilter(), new IsNotFolderFilter()
+      new IsNotEditingDocumentFilter(), new IsNotFolderFilter(), new IsNotIgnoreVersionNodeFilter()
       }
   );
 

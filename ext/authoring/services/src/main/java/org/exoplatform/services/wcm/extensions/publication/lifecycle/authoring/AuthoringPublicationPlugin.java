@@ -18,6 +18,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
@@ -402,10 +403,15 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * org.exoplatform.services.ecm.publication.PublicationPlugin#addMixin(javax
    * .jcr.Node)
    */
-  public void addMixin(Node node) throws Exception {
-    node.addMixin(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);
-    if (!node.isNodeType(AuthoringPublicationConstant.MIX_VERSIONABLE)) {
-      node.addMixin(AuthoringPublicationConstant.MIX_VERSIONABLE);
+  public void addMixin(Node node) throws Exception {  	
+    node.addMixin(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);    
+    String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
+    if(nodetypes == null || nodetypes.length() == 0)
+   	  nodetypes = "exo:webContent";
+    if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
+	    if (!node.isNodeType(AuthoringPublicationConstant.MIX_VERSIONABLE)) {
+	      node.addMixin(AuthoringPublicationConstant.MIX_VERSIONABLE);
+	    }
     }
   }
 

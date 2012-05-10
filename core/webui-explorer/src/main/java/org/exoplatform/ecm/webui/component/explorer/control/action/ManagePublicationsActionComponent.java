@@ -29,6 +29,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.HasPublicatio
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActivePublication;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIPublicationManager;
@@ -64,7 +65,7 @@ public class ManagePublicationsActionComponent extends UIComponent {
       new IsDocumentFilter("UIActionBar.msg.manage-publication.not-supported-nodetype"),
       new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-publication-rootnode"),
       new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanRemoveNodeFilter(),
-      new IsNotLockedFilter()                         });
+      new IsNotLockedFilter(), new IsNotIgnoreVersionNodeFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
