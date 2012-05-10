@@ -73,6 +73,31 @@
                     </object>  
                   </value>                                  
                                                     
+                  <value>
+                    <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+                      <field  name="type"><string>exo:addToFavoriteAction</string></field>
+                      <field  name="name"><string>addToFavorite</string></field>                  
+                      <field  name="description"><string>auto Add favorite when new document node created at favorite</string></field>
+                      <field  name="srcWorkspace"><string>collaboration</string></field>
+                      <field  name="srcPath"><string>/Users</string></field>
+                      <field  name="isDeep"><boolean>true</boolean></field>
+                      <field  name="lifecyclePhase">
+                        <collection type="java.util.ArrayList">
+                         <value><string>node_added</string></value>
+                        </collection>
+                      </field>
+                      <field  name="mixins">
+                        <collection type="java.util.ArrayList">
+                          <value>
+                           <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                            <field  name="name"><string>exo:hiddenable</string></field>
+                      		 </object>
+                     		 	</value>
+                    		</collection>
+                   		</field>
+                    </object>  
+                  </value>                                  
+
                 </collection>   
               </field>  
             </object>

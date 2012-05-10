@@ -149,7 +149,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           NodeTypeDataManager.TEXT_XML);
       }
 
-      // Get all users and apply exo:addToFavoriteAction action for favorite folder
+      // Get all users and remove exo:addToFavoriteAction action for favorite folder
       ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
       List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
       Node favoriteNode = null;
@@ -166,10 +166,10 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
         }
 
         if (favoriteNode != null) {
-          if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) == null) {
-            applyAddToFavoriteAction(favoriteNode);
+          if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) != null) {
+            actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION, 
+                                                repoService.getCurrentRepository().getConfiguration().getName());
           }
-          setFavoritesForOldItems(favoriteNode, userName);
         }
       }
       if (LOG.isInfoEnabled()) {
@@ -184,87 +184,6 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     finally {
       RequestLifeCycle.end();
     }
-  }
-
-  /**
-   * Set favorites for all document nodes which stay in specified folder.
-   *
-   * @param node Specified Node
-   * @param userName UserName
-   * @throws Exception
-   */
-  private void setFavoritesForOldItems(Node node, String userName) throws Exception {
-    NodeIterator iterrator = node.getNodes();
-    while (iterrator.hasNext()) {
-      Node child = (Node) iterrator.next();
-      if (isDocument(child) && !isFavoriter(userName, child)) {
-        addFavorite(child, userName);
-      }
-      setFavoritesForOldItems(child, userName);
-    }
-  }
-
-  /**
-   * Check if node is document.
-   *
-   * @param node a Node
-   * @return true: is document; false: is not document
-   * @throws Exception
-   */
-  private boolean isDocument(Node node) throws Exception {
-    NodeType nodeType = node.getPrimaryNodeType();
-    return templateService.getDocumentTemplates().contains(nodeType.getName());
-  }
-
-  /**
-   * Apply AddToFavoriteAction action to favorite Node.
-   * When user create new document node in favorite Node, it will be add favorite too.
-   *
-   * @param favoriteNode Favorite Node
-   * @throws Exception
-   */
-  private void applyAddToFavoriteAction(Node favoriteNode) throws Exception {
-    Map<String,JcrInputProperty> mappings = new HashMap<String,JcrInputProperty>();
-
-    JcrInputProperty nodeTypeInputProperty = new JcrInputProperty();
-    nodeTypeInputProperty.setJcrPath("/node");
-    nodeTypeInputProperty.setValue(ADD_TO_FAVORITE_ACTION);
-    mappings.put("/node", nodeTypeInputProperty);
-
-    // Define name of action
-    JcrInputProperty nameInputProperty = new JcrInputProperty();
-    nameInputProperty.setJcrPath("/node/exo:name");
-    nameInputProperty.setValue(ADD_TO_FAVORITE_ACTION);
-    mappings.put("/node/exo:name", nameInputProperty);
-
-    // Define lifecylePhase of action
-    JcrInputProperty lifeCycleInputProperty = new JcrInputProperty();
-    lifeCycleInputProperty.setJcrPath("/node/exo:lifecyclePhase");
-    lifeCycleInputProperty.setValue(new String[]{"node_added"});
-    mappings.put("/node/exo:lifecyclePhase", lifeCycleInputProperty);
-
-    // Define isDeep property
-    JcrInputProperty deepInputProperty = new JcrInputProperty();
-    deepInputProperty.setJcrPath("/node/exo:isDeep");
-    deepInputProperty.setValue(true);
-    mappings.put("/node/exo:isDeep", deepInputProperty);
-
-    // Define description of action
-    JcrInputProperty descriptionInputProperty = new JcrInputProperty();
-    descriptionInputProperty.setJcrPath("/node/exo:description");
-    descriptionInputProperty.setValue("auto Add favorite when new document node created at favorite");
-    mappings.put("/node/exo:description", descriptionInputProperty);
-
-    // Add action
-    actionServiceContainer.addAction(favoriteNode, "exo:addToFavoriteAction", mappings);
-
-    // Specify affected Node Type Names
-    Node actionNode = actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION);
-    actionNode.addMixin("mix:affectedNodeTypes");
-    actionNode.setProperty("exo:affectedNodeTypeNames",
-                           templateService.getAllDocumentNodeTypes().toArray(new String[0])
-                           );
-    actionNode.save();
   }
 
   /**
@@ -303,70 +222,4 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
     return userFavoriteNode;
   }
-
-  public boolean isFavoriter(String userName, Node node) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
-
-    if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
-      node = lnkManager.getTarget(node);
-    }
-
-    Node userFavoriteNode = null;
-    try {
-      userFavoriteNode = getUserFavoriteFolder(userName);
-    }catch (PathNotFoundException e) {
-      return false;
-    }
-
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (lnkManager.isLink(childNode)) {
-        Node targetNode = lnkManager.getTarget(childNode);
-        if (node.isSame(targetNode)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  private Node getUserFavoriteFolder(String userName) throws Exception {
-    SessionProviderService sessionProviderService = WCMCoreUtils.getService(SessionProviderService.class);
-    Node userNode =
-      nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
-    String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-    return userNode.getNode(favoritePath);
-  }
-
-  public void addFavorite(Node node, String userName) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
-
-    // check if node is symlink
-    if (lnkManager.isLink(node)) return;
-
-    // check if node has already been favorite node of current user
-    Node userFavoriteNode = null;
-    try {
-      userFavoriteNode = getUserFavoriteFolder(userName);
-    } catch (PathNotFoundException e) {
-      userFavoriteNode = createFavoriteFolder(userName);
-    }
-
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (lnkManager.isLink(childNode)) {
-        Node targetNode = lnkManager.getTarget(childNode);
-        if (node.isSame(targetNode)) return;
-      }
-    }
-    // add favorite symlink
-    lnkManager.createLink(userFavoriteNode, node);
-    userFavoriteNode.getSession().save();
-  }
-
-
 }

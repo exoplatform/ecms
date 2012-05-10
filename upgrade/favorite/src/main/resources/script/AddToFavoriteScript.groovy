@@ -25,9 +25,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.portal.webui.util.Util;
-
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 /**
  * Created by The eXo Platform SAS
  * Author : dongpd@exoplatform.com
@@ -37,14 +39,23 @@ import org.exoplatform.portal.webui.util.Util;
 public class AddToFavoriteScript implements CmsScript {
 
   private static Log        LOG = ExoLogger.getLogger("AddToFavoriteScript");
+  
+  private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
 
   private RepositoryService repositoryService_;
 
   private FavoriteService   favoriteService_;
+  
+  private NodeHierarchyCreator nodeHierarchyCreator_;
+  
+  private TemplateService templateService_;
 
-  public AddToFavoriteScript(RepositoryService repositoryService, FavoriteService favoriteService) {
+  public AddToFavoriteScript(RepositoryService repositoryService, FavoriteService favoriteService,
+                             NodeHierarchyCreator nodeHierarchyCreator, TemplateService templateService) {
     repositoryService_ = repositoryService;
     favoriteService_ = favoriteService;
+    nodeHierarchyCreator_ = nodeHierarchyCreator;
+    templateService_ = templateService;
   }
 
   public void execute(Object context) {
@@ -56,9 +67,15 @@ public class AddToFavoriteScript implements CmsScript {
       // Get new added node
       session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService_.getCurrentRepository());
       Node addedNode = (Node) session.getItem(nodePath);
-
-      // Add new node to favorite
-      favoriteService_.addFavorite(addedNode, Util.getPortalRequestContext().getRemoteUser());
+      String userID = ConversationState.getCurrent().getIdentity().getUserId();
+      Node userNode = nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
+      String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
+      Node favoriteNode = userNode.getNode(favoritePath);
+      if (nodePath.startsWith(favoriteNode.getPath()) && 
+          templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
+        // Add new node to favorite
+        favoriteService_.addFavorite(addedNode, userID);
+      }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Add Favorite failed", e);

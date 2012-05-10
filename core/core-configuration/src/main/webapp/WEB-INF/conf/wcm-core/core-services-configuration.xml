@@ -325,12 +325,6 @@
       <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
       <description>New Group Event Listener</description>
     </component-plugin>
-    <component-plugin>
-		  <name>favorite.new.user.event.listener</name>
-		  <set-method>addListenerPlugin</set-method>
-		  <type>org.exoplatform.services.cms.documents.impl.FavoriteNewUserListener</type>
-		  <description>Favorite New User Event Listener</description>
-		</component-plugin>
 		<component-plugin>
       <name>WCMMembershipUpdateListener</name>
       <set-method>addListenerPlugin</set-method>
