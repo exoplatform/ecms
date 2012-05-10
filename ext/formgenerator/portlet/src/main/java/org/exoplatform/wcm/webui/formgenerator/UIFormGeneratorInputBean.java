@@ -49,6 +49,9 @@ public class UIFormGeneratorInputBean {
 
   /** The height. */
   private int height;
+  
+  /** The label. */
+  private String label;
 
   /**
    * Gets the width.
@@ -132,6 +135,24 @@ public class UIFormGeneratorInputBean {
    */
   public String getValue() {
     return value;
+  }
+  
+  /**
+   * Sets the label.
+   *
+   * @param label the new label
+   */
+  public void setLabel(String label) {
+    this.label = label;
+  }
+  
+  /**
+   * Gets the label.
+   *
+   * @return the label
+   */
+  public String getLabel() {
+    return label;
   }
 
   /**

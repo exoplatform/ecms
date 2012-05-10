@@ -382,7 +382,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else {
         dialogTemplate.append("      <tr>\n");
         dialogTemplate.append("        <td class=\"FieldLabel\"><pre>"
-            + Text.unescape(form.getName()).replaceAll("\\$", "&#036;").replaceAll("\\\\", "&#92;")
+        		+ Text.unescape(form.getLabel()).replaceAll("\\$", "&#036;").replaceAll("\\\\", "&#92;")
             + "</pre></td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
@@ -516,11 +516,9 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       viewTemplate.append("   <tr>\n");
       viewTemplate.append("     <%\n");
       viewTemplate.append("       if (currentNode.hasProperty(\"" + propertyName + "\")) {\n");
-      viewTemplate.append("           String cleanName = currentNode.getProperty(\"" + propertyName + "\").getName();\n");
-      viewTemplate.append("           if (cleanName.startsWith(\""+NODE_PREFIX+"\")) cleanName = cleanName.substring(9);\n");
-      viewTemplate.append("           cleanName = cleanName.replaceAll(\"_\", \" \");\n");
+      viewTemplate.append("           String label = \""+StringEscapeUtils.unescapeHtml(Text.unescape(form.getLabel()))+"\";\n");
       viewTemplate.append("         %>\n");
-      viewTemplate.append("           <td style=\"padding:5px\"><%= cleanName %></td>\n");
+      viewTemplate.append("           <td style=\"padding:5px\"><%= label %></td>\n");
       if (UIFormGeneratorConstant.UPLOAD.equals(form.getType())) {
         String inputName  = form.getName();
         String inputFieldName = cleanString(inputName) + "FieldName";

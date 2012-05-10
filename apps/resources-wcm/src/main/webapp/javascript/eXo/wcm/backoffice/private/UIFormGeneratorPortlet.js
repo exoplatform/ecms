@@ -18,25 +18,29 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	var fieldComponent 	= "";
 	var advancedOption 	= "";
 	var multivalue 		= false;
+	var id = typeComp + " " + UIFormGeneratorPortlet.prototype.getRandomInt(1,100);
+	while(document.getElementsByName(id) > 0) {
+	  id = typeComp + " " + UIFormGeneratorPortlet.prototype.getRandomInt(1,100);
+	}
 
 //============================================ Begin of render component ===============================================	
 
 	switch(typeComp){
 		case "label"		:
-			fieldComponent  +=		"<td class='FieldLabel' value='Label'>Label</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Label</td>";
 			fieldComponent  +=		"<td class='FieldComponent'></td>";
 			break;
 		case "input"		: 
-			fieldComponent  +=		"<td class='FieldLabel' value='Input Text'>Input field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Input field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><input type='text' class='InputText' value=''/></td>";
 			break;
 		case "textarea"	:
-			fieldComponent  +=		"<td class='FieldLabel' value='Textarea'>Textarea field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Textarea field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><textarea class='Textarea'>Textarea value</textarea></td>";
 			break;			
 		case "wysiwyg"		:
 			if(!eXo.ecm.UIFormGeneratorPortlet.countFCK) eXo.ecm.UIFormGeneratorPortlet.countFCK = 1;
-			fieldComponent  +=		"<td class='FieldLabel' value='WYSIWYG'>WYSIWYG field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>WYSIWYG field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><textarea class='Textarea' id='RichTextEditorContent_"+eXo.ecm.UIFormGeneratorPortlet.countFCK+"'>WYSIWYG value</textarea></td>";
 
 			advancedOption  +=	"<tr>";
@@ -47,12 +51,12 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			advancedOption  +=	"</tr>";
 			break;			
 		case "select"		: 
-			fieldComponent  +=		"<td class='FieldLabel' value='Select'>Select field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Select field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><select class='SelectBox'><option idx='1' value='option1'>Option 1</option></select></td>";
 			multivalue		= true;
 			break;			
 		case "checkbox"	: 
-			fieldComponent  +=		"<td class='FieldLabel' value='Checkbox'>Checkbox field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Checkbox field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><div class='CheckboxButton'><input type='checkbox' class='CheckBox' value='checkbox1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Checkbox 1</span><div style='clear:left'></div></div></td>";
 			break;						
 		case "radio"		: 
@@ -60,12 +64,12 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 		  while(document.getElementsByName(groupId) > 0) {
 		    groupId = "radiogroup" + UIFormGeneratorPortlet.prototype.getRandomInt(1,100);
 		  }
-			fieldComponent  +=		"<td class='FieldLabel' value='Radio'>Radio field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Radio field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><div class='RadioButton' idx='1'><input type='radio' name='"+groupId+"' class='Radio' value='radio1'/><span style='padding : 0 5px 0 19px; display:block; line-height:12px'>Radio 1</span><div style='clear:left'></div></div></td>";
 			multivalue		= true;
 			break;			
 		case "datetime"	: 
-			fieldComponent  +=		"<td class='FieldLabel' value='DateTime'>Datetime field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Datetime field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><input type='text' class='InputText' value='Datetime value'/></td>";
 			
 			advancedOption  +=	"<tr>";
@@ -77,7 +81,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 
 			break;
 		case "upload"		: 
-			fieldComponent  +=		"<td class='FieldLabel' value='Upload'>Upload field</td>";
+			fieldComponent  +=		"<td class='FieldLabel' value='"+id+"'>Upload field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><input type='file' class='Upload' disabled='disabled'/><img src='/eXoResources/skin/sharedImages/Blank.gif' alt='Upload' class='UploadButton'/></td>";
 			break;
 	}
@@ -545,16 +549,23 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 	var strObject = '{';
 	strObject += '"type":"'+comp.getAttribute("typeComponent")+'",';
 	var topContent = DOMUtil.findFirstDescendantByClass(comp, 'div', 'TopContentBoxStyle');
-	var fieldLabel = DOMUtil.findFirstDescendantByClass(topContent, 'td', 'FieldLabel');
-	var defaultValue = fieldLabel.getAttribute('value'); 
+	var fieldLabel = DOMUtil.findFirstDescendantByClass(topContent, 'td', 'FieldLabel');	
+	var fieldValue = fieldLabel.getAttribute('value'); 
+	var defaultValue = fieldLabel.innerHTML;
 	var nameComp = '';		
-	if(fieldLabel && fieldLabel.innerHTML != '') {
-		nameComp = fieldLabel.innerHTML;
+	if(fieldLabel && fieldValue != '') {
+		nameComp = fieldValue;
 	} else {
 		nameComp = defaultValue;
 	}
-	
+	var labelComp = '';
+	if(fieldLabel && defaultValue != '') {
+	  labelComp = defaultValue;
+	} else {
+	  labelComp = fieldValue;
+	}
 	strObject += '"name":"'+ encodeURIComponent(nameComp)+'",';
+	strObject += '"label":"'+ encodeURIComponent(labelComp)+'",';
 	switch(comp.getAttribute("typeComponent")) {
 		case "input" :
 			inputNode = DOMUtil.findFirstDescendantByClass(topContent, 'input', "InputText");
