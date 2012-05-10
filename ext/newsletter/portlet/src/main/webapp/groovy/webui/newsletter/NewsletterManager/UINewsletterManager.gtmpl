@@ -49,7 +49,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 							</div>
 							<!-- ----------------------------------- Menu popup -------------------------------------- -->
 							<div style="position:relative;float:left;">
-								<div class="UIPopupCategory" style="display:none;left:-40px;top:-2px; ">
+								<div class="UIPopupCategory" style="display:none;text-align:left;top:-2px; ">
 									<div class="UIRightClickPopupMenu" style="display:block;">
 										<div class="UIContextMenuContainer">											
 											<div class="TopLeftRightClickPopupMenu">
