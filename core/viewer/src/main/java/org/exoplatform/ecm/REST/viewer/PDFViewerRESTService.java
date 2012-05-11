@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.REST.viewer;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -28,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.net.ConnectException;
 
 import javax.imageio.ImageIO;
 import javax.jcr.Node;
@@ -38,6 +36,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
@@ -56,8 +55,6 @@ import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.Page;
 import org.icepdf.core.util.GraphicsRenderingHints;
-
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
 
 /**
  * Created by The eXo Platform SARL
@@ -186,12 +183,10 @@ public class PDFViewerRESTService implements ResourceContainer {
      // Paint each pages content to an image and write the image to file
      BufferedImage image = (BufferedImage) document.getPageImage(pageNum - 1, GraphicsRenderingHints.SCREEN,
          Page.BOUNDARY_CROPBOX, rotation, scale);
-     RenderedImage rendImage = image;
      File file = null;
      try {
        file= File.createTempFile("imageCapture1_" + pageNum,".png");
-       file.deleteOnExit();
-       ImageIO.write(rendImage, "png", file);
+       ImageIO.write(image, "png", file);
      } catch (IOException e) {
     	 LOG.error(e);
      } finally {
@@ -243,15 +238,20 @@ public class PDFViewerRESTService implements ResourceContainer {
   			read(input, new BufferedOutputStream(new FileOutputStream(content)));
   		} else {
   			OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
+        // create temp file to store original data of nt:file node
+        File in = File.createTempFile(name + "_tmp", extension);
+        read(input, new BufferedOutputStream(new FileOutputStream(in)));  			
   			try {
-	  			jodConverter_.convert(input, extension, out, "pdf");
-  			} catch(ConnectException connection) {
+          boolean success = jodConverter_.convert(in, content, "pdf");
+          // If the converting was failure then delete the content temporary file
+          if (!success) {
+            content.delete();
+          }
+  			} catch(OfficeException connection) {
   				content.delete();
-  				LOG.error("Cannot open connection to OpenOffice Service");
-  			} catch(OpenOfficeException connection) {
-  				content.delete();
-  				LOG.error("Exception when using OpenOffice Service");
+  				LOG.error("Exception when using Office Service");
   			} finally {
+  			  in.delete();
   				out.flush();
 	  			out.close();
   			}

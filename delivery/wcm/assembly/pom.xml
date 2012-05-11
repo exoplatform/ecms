@@ -236,11 +236,15 @@
 	<dependency><groupId>commons-collections</groupId><artifactId>commons-collections</artifactId><version>${commons-collections.version}</version><type>jar</type></dependency><!-- 3.2.1-->
 	<dependency><groupId>org.jsecurity</groupId><artifactId>jsecurity</artifactId><version>${org.jsecurity.version}</version><type>jar</type></dependency><!-- 0.9.0-->
 	<dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><version>${xml-apis.version}</version><type>jar</type></dependency><!-- 1.3.04-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>unoil</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>juh</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>jurt</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
 	<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
 	<dependency><groupId>org.gatein.shindig</groupId><artifactId>shindig-social-api</artifactId><version>${org.gatein.shindig.version}</version><type>jar</type></dependency><!-- 1.0-r790473-Patch02-->
 	<dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.webui.ext</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.0.2-SNAPSHOT-->
 	<dependency><groupId>org.chromattic</groupId><artifactId>chromattic.core</artifactId><version>${chromattic.version}</version><type>jar</type></dependency><!-- 1.0.4-->
     <dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency>
+<dependency><groupId>org.exoplatform.kernel</groupId><artifactId>exo.kernel.component.ext.cache.impl.jboss.v3</artifactId><version>${org.exoplatform.kernel.version}</version><type>jar</type></dependency><!-- 2.2.13-GA-SNAPSHOT-->
   </dependencies>
   <build>
     <plugins>

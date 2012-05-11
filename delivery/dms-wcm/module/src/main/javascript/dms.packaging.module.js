@@ -33,8 +33,7 @@ function getModule(params) {
   //addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
     addDependency(new Project("org.icepdf", "icepdf-core", "jar", "4.3.2")).
     addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "4.3.2")).
-    addDependency(new Project("com.artofsolving", "jodconverter", "jar", "2.2.2")).
-    addDependency(new Project("com.artofsolving", "jodconverter-cli", "jar", "2.2.2")).
+    addDependency(new Project("org.artofsolving.jodconverter", "jodconverter-core", "jar", "${jodconverter-core.version}")).
     addDependency(new Project("org.openoffice", "ridl", "jar", "3.0.1")).
     addDependency(new Project("org.openoffice", "unoil", "jar", "3.0.1")).
     addDependency(new Project("org.openoffice", "jurt", "jar", "3.0.1")).

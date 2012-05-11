@@ -130,6 +130,9 @@
 	<dependency><groupId>antlr</groupId><artifactId>antlr</artifactId><version>${antlr.version}</version><type>jar</type></dependency><!-- 2.7.6rc1-->
 	<dependency><groupId>commons-dbcp</groupId><artifactId>commons-dbcp</artifactId><version>${commons-dbcp.version}</version><type>jar</type></dependency><!-- 1.2.1-->
 	<dependency><groupId>org.gatein.shindig</groupId><artifactId>shindig-social-api</artifactId><version>${org.gatein.shindig.version}</version><type>jar</type></dependency><!-- 1.0-r790473-Patch04-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>unoil</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>juh</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
+        <dependency><groupId>org.openoffice</groupId><artifactId>jurt</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.web.rest</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>jcr</groupId><artifactId>jcr</artifactId><version>${jcr.version}</version><type>jar</type></dependency><!-- 1.0-->
 	<dependency><groupId>org.exoplatform.ws</groupId><artifactId>exo.ws.frameworks.servlet</artifactId><version>${org.exoplatform.ws.version}</version><type>jar</type></dependency><!-- 2.1.6-GA-SNAPSHOT-->
