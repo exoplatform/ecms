@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
@@ -333,6 +334,54 @@ public class TestManageViewService extends BaseDMSTestCase {
 
     manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
   }
+  
+  /**
+   * Test add template with system session provider
+   * @throws Exception
+   */
+  public void testAddTemplate2() throws Exception {
+    String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+        + "import org.exoplatform.web.application.Parameter;"
+        + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+        + "<div id=$componentId></div>";
+
+    manageViewService.addTemplate("SimpleView",
+                                  templateFile,
+                                  templatesPathEx,
+                                  WCMCoreUtils.getSystemSessionProvider());
+    Node simpleViewNode = (Node) sessionDMS.getItem(templatesPathEx + "/SimpleView");
+    assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
+    assertEquals(templateFile, simpleViewNode.getNode("jcr:content")
+                                             .getProperty("jcr:data")
+                                             .getString());
+
+    manageViewService.removeTemplate(templatesPathEx + "/SimpleView",
+                                     WCMCoreUtils.getSystemSessionProvider());
+  }
+  
+  /**
+   * Test add template with user session provider
+   * expected result: AccessDeniedException
+   * @throws Exception
+   */
+  public void testAddTemplate3() throws Exception {
+    
+    applyUserSessionDMS("marry", "exo");
+    String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+        + "import org.exoplatform.web.application.Parameter;"
+        + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+        + "<div id=$componentId></div>";
+    
+    try {
+    manageViewService.addTemplate("SimpleView",
+                                  templateFile,
+                                  templatesPathEx,
+                                  sessionProviderService_.getSessionProvider(null));
+    fail();
+    } catch (AccessDeniedException ade) {
+      assertTrue(true);
+    }
+  }  
 
   /**
    * Test ManageViewServiceImpl.removeTemplate()
@@ -349,6 +398,109 @@ public class TestManageViewService extends BaseDMSTestCase {
 
     manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
     assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
+  }
+  
+  /**
+   * Test ManageViewServiceImpl.removeTemplate() Input: Remove template with
+   * name = /PathList in path templatesPathCb Expect: Node with above path does
+   * not exist
+   * 
+   * @throws Exception
+   */
+  public void testRemoveTemplate2() throws Exception {
+    String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+        + "import org.exoplatform.web.application.Parameter;"
+        + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+        + "<div id=$componentId></div>";
+    manageViewService.addTemplate("SimpleView",
+                                  templateFile,
+                                  templatesPathEx,
+                                  WCMCoreUtils.getSystemSessionProvider());
+
+    manageViewService.removeTemplate(templatesPathEx + "/SimpleView",
+                                     WCMCoreUtils.getSystemSessionProvider());
+    assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
+  }
+  
+  public void testRemoveTemplate3() throws Exception {
+
+    applyUserSessionDMS("marry", "exo");
+
+    try {
+      manageViewService.removeTemplate(templatesPathEx + "/SystemView",
+                                       sessionProviderService_.getSessionProvider(null));
+      fail();
+    } catch (AccessDeniedException ade) {
+      assertTrue(true);
+    }
+  } 
+  
+  /**
+   * test updateTemplate() method with system session provider
+   * 
+   * @throws Exception
+   */
+  public void testUpdateTemplate() throws Exception {
+    String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+        + "import org.exoplatform.web.application.Parameter;"
+        + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+        + "<div id=$componentId></div>";
+    
+    String updateTemplateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+      + "import org.exoplatform.web.application.Parameter;"
+      + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+      + "<div id=$componentId></div>";
+    
+    
+    manageViewService.addTemplate("SimpleView",
+                                  templateFile,
+                                  templatesPathEx,
+                                  WCMCoreUtils.getSystemSessionProvider());
+    
+    Node simpleViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SimpleView");
+    assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
+    assertEquals(templateFile, simpleViewNode.getNode("jcr:content")
+                                             .getProperty("jcr:data")
+                                             .getString());
+    
+
+    manageViewService.updateTemplate("SimpleView",
+                                     updateTemplateFile,
+                                     templatesPathEx,
+                                     WCMCoreUtils.getSystemSessionProvider());
+    
+    simpleViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SimpleView");
+    assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
+    assertEquals(updateTemplateFile, simpleViewNode.getNode("jcr:content")
+                                             .getProperty("jcr:data")
+                                             .getString());    
+    
+    manageViewService.removeTemplate(templatesPathEx + "/SimpleView",
+                                     WCMCoreUtils.getSystemSessionProvider());
+    assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
+  }
+  
+  /**
+   * test updateTemplate() method with user session provider
+   * 
+   * @throws Exception
+   */
+  public void testUpdateTemplate2() throws Exception {
+    applyUserSessionDMS("marry", "exo");
+    String updateTemplateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
+        + "import org.exoplatform.web.application.Parameter;"
+        + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
+        + "<div id=$componentId></div>";
+
+    try {
+      manageViewService.updateTemplate("SystemView",
+                                       updateTemplateFile,
+                                       templatesPathEx,
+                                       sessionProviderService_.getSessionProvider(null));
+      fail();
+    } catch (AccessDeniedException ade) {
+      assertTrue(true);
+    }
   }
 
   /**

@@ -474,6 +474,23 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
+  public String addTemplate(String name,
+                            String content,
+                            String homeTemplate,
+                            SessionProvider provider) throws Exception {
+    Session session = getSession(provider);
+    Node templateHome = (Node) session.getItem(homeTemplate);
+    String templatePath = templateService.createTemplate(templateHome,
+                                                         name,
+                                                         new ByteArrayInputStream(content.getBytes()),
+                                                         new String[] { "*" });
+    session.save();
+    return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   @Deprecated
   public String updateTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
     return updateTemplate(name, content, homeTemplate);
@@ -485,6 +502,22 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   public String updateTemplate(String name, String content, String homeTemplate) throws Exception {
     Session session = getSession() ;
     Node templateHome = (Node)session.getItem(homeTemplate) ;
+    String templatePath = templateService.updateTemplate(templateHome.getNode(name),
+                                                         new ByteArrayInputStream(content.getBytes()),
+                                                         new String[] { "*" });
+    session.save();
+    return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String updateTemplate(String name,
+                               String content,
+                               String homeTemplate,
+                               SessionProvider provider) throws Exception {
+    Session session = getSession(provider);
+    Node templateHome = (Node) session.getItem(homeTemplate);
     String templatePath = templateService.updateTemplate(templateHome.getNode(name),
                                                          new ByteArrayInputStream(content.getBytes()),
                                                          new String[] { "*" });
@@ -509,7 +542,18 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     selectedTemplate.remove();
     parent.save();
     parent.getSession().save();
-  }  
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeTemplate(String templatePath, SessionProvider provider) throws Exception {
+    Node selectedTemplate = (Node) getSession(provider).getItem(templatePath);
+    Node parent = selectedTemplate.getParent();
+    selectedTemplate.remove();
+    parent.save();
+    parent.getSession().save();
+  }
 
   /**
    * Add view node into one node with given name, permssion and template

@@ -69,7 +69,7 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
   }
   
   /**
-   * used to change to setup environment to use User Session
+   * used to change to setup environment to use User Session and using collaboration workspace
    * @throws Exception
    */
   public void applyUserSession(String username, String password) throws Exception {
@@ -92,6 +92,31 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
     sessionProviderService_ = WCMCoreUtils.getService(DumpThreadLocalSessionProviderService.class);
     ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(session);
   }
+  
+  /**
+   * used to change to setup environment to use User Session and using dms-system workspace
+   * @throws Exception
+   */
+  public void applyUserSessionDMS(String username, String password) throws Exception {
+
+    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/system-configuration.xml").toString();
+    StandaloneContainer.addConfigurationURL(containerConf);
+
+    container = PortalContainer.getInstance();
+    repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    repositoryService.setCurrentRepositoryName(REPO_NAME);
+    repository = repositoryService.getCurrentRepository();
+    
+    String loginConf = BaseDMSTestCase.class.getResource("/conf/standalone/login.conf").toString();
+    System.setProperty("java.security.auth.login.config", loginConf);
+    credentials = new CredentialsImpl(username, password.toCharArray());
+    
+    closeOldSession();
+    session = (SessionImpl) repository.login(credentials, DMSSYSTEM_WS);
+    
+    sessionProviderService_ = WCMCoreUtils.getService(DumpThreadLocalSessionProviderService.class);
+    ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(session);
+  }  
   
   /**
    * used to change to setup environment to use System Session

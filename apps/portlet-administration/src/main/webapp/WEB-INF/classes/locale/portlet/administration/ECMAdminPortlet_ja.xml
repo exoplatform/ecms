@@ -1144,6 +1144,7 @@
       <template-in-use>{0} を削除できません: テンプレートは利用されています。</template-in-use>
       <confirm-delete>本当に削除したいですか?</confirm-delete>
       <access-denied>アクセスできません！権限がありません</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1163,6 +1164,8 @@
       <version-restored>バージョン {0} はリストアされました。</version-restored>
       <role-require>権限を選択する必要があります</role-require>
       <template-name-exist>テンプレート名 '{0}' は存在します。</template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>

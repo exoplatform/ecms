@@ -1145,6 +1145,7 @@
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
       <confirm-delete>Are you sure to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1164,6 +1165,8 @@
       <version-restored>The version {0} was restored successfully.</version-restored>
       <role-require>Please select a permission.</role-require>
       <template-name-exist>The template name '{0}' already exists.</template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>
