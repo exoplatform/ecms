@@ -278,10 +278,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       thumbnailNode.setProperty(THUMBNAIL_LAST_MODIFIED, new GregorianCalendar());
       thumbnailNode.getSession().save();
     } catch (ItemExistsException e) {
-      // The folder could already be created due to potential concurrent access
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      return;
     } finally {
       thumbnailStream.close();
     }

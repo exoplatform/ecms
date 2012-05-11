@@ -34,7 +34,7 @@ public final class ThumbnailUtils {
 
   private static final Log LOG = ExoLogger.getLogger(ThumbnailUtils.class.getName());
   
-  static Node getThumbnailFolder(Node parentNode) throws RepositoryException {
+  static synchronized Node getThumbnailFolder(Node parentNode) throws RepositoryException {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       try {
         Node thumbnailFolder = parentNode.addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER,
@@ -46,26 +46,20 @@ public final class ThumbnailUtils {
         parentNode.getSession().save();
         return thumbnailFolder;
       } catch (ItemExistsException e) {
-        // The folder could already be created due to potential concurrent access
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
+        return parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
       }
     }
     return parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
   }
 
-  static Node getThumbnailNode(Node thumbnailFolder, String identifier) throws RepositoryException {
+  static synchronized Node getThumbnailNode(Node thumbnailFolder, String identifier) throws RepositoryException {
     if (!thumbnailFolder.hasNode(identifier)) {
       try {
         Node thumbnailNode = thumbnailFolder.addNode(identifier, ThumbnailService.EXO_THUMBNAIL);
         thumbnailFolder.getSession().save();
         return thumbnailNode;
       } catch (ItemExistsException e) {
-        // The folder could already be created due to potential concurrent access
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
+        return thumbnailFolder.getNode(identifier);
       }
     }
     return thumbnailFolder.getNode(identifier);
