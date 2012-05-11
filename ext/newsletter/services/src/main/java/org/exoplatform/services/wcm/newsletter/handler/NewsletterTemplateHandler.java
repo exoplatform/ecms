@@ -187,8 +187,8 @@ public class NewsletterTemplateHandler {
         throw new Exception("Same name");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
+      if (log.isDebugEnabled()) {
+        log.debug("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
       }
       throw e;
     }
