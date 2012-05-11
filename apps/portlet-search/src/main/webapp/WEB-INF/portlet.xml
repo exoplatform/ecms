@@ -78,7 +78,7 @@
       </preference>
       <preference>
         <name>basePath</name>
-        <value>parameterizedviewer</value>
+        <value>detail</value>
         <read-only>false</read-only>
       </preference>
     </portlet-preferences>
