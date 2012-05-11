@@ -238,6 +238,39 @@ public class NewsletterPublicUserHandler {
       throw e;
     }
   }
+  
+  /**
+   * Subscribe without sending email
+   *
+   * @param portalName the portal name
+   * @param userMail the user mail
+   * @param listCategorySubscription the list category subscription   
+   * @param sessionProvider the session provider
+   * @throws Exception
+   */
+  public String subscribeEmail(SessionProvider sessionProvider,
+                        String portalName,
+                        String userMail,
+                        List<String> listCategorySubscription) throws Exception {
+    if (log.isInfoEnabled()) {
+      log.info("Trying to subscribe email " + userMail);
+    }
+    try {
+      // add new user email into users node
+      NewsletterManagerService newsletterManagerService = WCMCoreUtils.getService(NewsletterManagerService.class);
+      NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
+      Node userNode = manageUserHandler.add(sessionProvider, portalName, userMail);
+      // update email into subscription
+      updateSubscriptions(sessionProvider, listCategorySubscription, portalName, userMail);
+      return userNode.getProperty(NewsletterConstant.USER_PROPERTY_VALIDATION_CODE).getString();
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("Subscribe email " + userMail + " failed because of ", e);
+      }
+      return null;
+    } 
+  }
+
 
   /**
    * Confirm public user.
