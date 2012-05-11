@@ -41,9 +41,7 @@ public class NewsLetterUtil {
    * @return the string
    */
   public static String generateLink(String url) throws Exception {
-    String link = url.replaceFirst("Subcribe", "ConfirmUserCode")
-                      .replaceFirst("UINewsletterViewerForm", "UINewsletterViewerPortlet")
-                      .replaceAll("&amp;", "&");
+    String link = url.replaceAll("&amp;", "&");
     String selectedNode = Util.getUIPortal().getSelectedUserNode().getURI();
     String portalName = "/" + getPortalName() ;
     if(link.indexOf(portalName) > 0) {
