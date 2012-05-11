@@ -74,19 +74,16 @@ WCMUtils.prototype.showInContextHelp = function(id, isIn){
     if(isIn == "true"){
       inContextContentHelp.style.display = "block";
       var inContextHelpPopup = eXo.core.DOMUtil.findFirstDescendantByClass(inContextContentHelp,"div","InContextHelpPopup");
-      var contentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(popupHelp,"div","InContextHelpContentData");
-      var contentPosition = eXo.core.DOMUtil.findFirstDescendantByClass(inContextContentHelp,"div","ContentPosition");
+      var contentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(inContextHelpPopup,"div","LeftInContextHelpPopup");
       var l = String(contentHelp.innerHTML).length;
       if(l < 100){
         contentHelp.style.width = (20 + l*4) + "px"
-        inContextContentHelp.style.width = (20 + l*4 + 54) + "px"
-        wTmp = (20 + l*4 + 54);
-        contentPosition.style.height = "auto";
+        inContextContentHelp.style.width = (20 + l*4 + 36) + "px"
+        wTmp = (20 + l*4 + 36);
       } else {
         contentHelp.style.width = "400px"
-        inContextContentHelp.style.width = "454px"
-        wTmp = 454;
-        contentPosition.style.height = (contentHelp.offsetHeight - 26) + "px";
+        inContextContentHelp.style.width = "436px"
+        wTmp = 436;
       }
       //Firt, set the style is left shown
       inContextContentHelp.style.left = "-"  + (wTmp) + "px";
