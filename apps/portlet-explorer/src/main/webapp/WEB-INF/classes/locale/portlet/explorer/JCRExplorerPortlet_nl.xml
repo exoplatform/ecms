@@ -2504,6 +2504,7 @@
 			</cannot-save>
 			<item-exists-exception>The node with the same name already exists
 			</item-exists-exception>
+            <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>This target node is not
 				referenceable</UnsupportedRepositoryOperationException>
 		</msg>

@@ -36,6 +36,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.exceptions.SameAsDefaultLangException;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -243,7 +244,13 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
             ApplicationMessage.WARNING));
 
         return;
-      } catch(Exception e) {
+      } catch (SameAsDefaultLangException unOperationException) {
+        uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.translation-node-same-language-default",
+                                                null,
+                                                ApplicationMessage.WARNING));
+
+        return;
+      } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", e);
         }

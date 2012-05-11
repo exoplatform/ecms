@@ -44,6 +44,7 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.exceptions.SameAsDefaultLangException;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
@@ -475,6 +476,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     String lang = translationNode.getProperty("exo:language").getString();
     if (languagesNode.hasNode(lang)) {
       throw new ItemExistsException();
+    } else if (getDefault(node).equals(lang)) {
+      throw new SameAsDefaultLangException();
     }
     LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
                                                                .getComponentInstanceOfType(LinkManager.class);

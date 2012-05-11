@@ -2249,6 +2249,7 @@
 			<non-node>الرجاء اختيار الثقة عقدة الهدف أو لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة</non-node>
 			<cannot-save>قد انتهكت بعض القيود خلال هذا الإجراء.</cannot-save>
 			<item-exists-exception>العقدة مع نفس الاسم موجود مسبقا</item-exists-exception>
+            <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>

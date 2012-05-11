@@ -32,6 +32,7 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.exceptions.SameAsDefaultLangException;
 
 /**
  * Created by The eXo Platform SARL
@@ -463,6 +464,43 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       assertNull(multiLanguageService.getLanguage(test, "fr"));
     } catch (ConstraintViolationException e) {
       // TODO: handle exception
+    }
+  }
+  /** Add synchronized linked language node to another node MultiLanguageService.addSynchronizedLinkedLanguage()
+   * Input create a node then link a French translation node to it, then try to link a English(default language) translation node to it
+   * Expect: linking successfully if the source node has different language from the default one of target node and vice versa    
+   * @throws Exception
+   */
+  public void testAddSynchronizedLinkedLanguage() throws Exception{
+    Node test = session.getRootNode().addNode("article1", ARTICLE);
+    test.addMixin(I18NMixin);
+    test.setProperty(TITLE, "sport");
+    test.setProperty(SUMMARY, "report of season");
+    test.setProperty(TEXT, "sport is exciting");
+    
+    Node test2 = session.getRootNode().addNode("article2", ARTICLE);
+    test2.addMixin(I18NMixin);
+    test2.setProperty(TITLE, "sport");
+    test2.setProperty(SUMMARY, "french version");
+    test2.setProperty(TEXT, "le sport est passionnant");
+    test2.setProperty(MultiLanguageService.EXO_LANGUAGE, "fr");
+    session.save();    
+    multiLanguageService.addSynchronizedLinkedLanguage(test, test2);
+    List<String> lstLanguages = multiLanguageService.getSupportedLanguages(test);
+    assertTrue(lstLanguages.contains("en"));
+    assertTrue(lstLanguages.contains("fr"));
+    
+    Node test3 = session.getRootNode().addNode("article3", ARTICLE);
+    test3.addMixin(I18NMixin);
+    test3.setProperty(TITLE, "sport");
+    test3.setProperty(SUMMARY, "english version");
+    test3.setProperty(TEXT, "sport is exciting");
+    session.save();
+    try {
+      multiLanguageService.addSynchronizedLinkedLanguage(test, test3);
+      fail();
+    } catch (SameAsDefaultLangException ex) {
+      assertTrue(true);
     }
   }
 
