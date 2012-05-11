@@ -6,6 +6,19 @@
         ]>
 <section id="sect-User_Guide-Categories_and_Tags">
     <title>Categories and Tags</title>
+<para>This section is divided into 2 sub-topics:</para>
+<itemizedlist>
+<listitem>
+<para>
+<link linkend='sect-User_Guide-Categories_and_Tags-Manage_Tags'>Manage tags</link>
+</para>
+</listitem>
+<listitem>
+<para>
+<link linkend='sect-User_Guide-Categories_and_Tags-Manage_Taxonomy'>Manage categories</link>
+</para>
+</listitem>
+</itemizedlist>
     <section id="sect-User_Guide-Categories_and_Tags-Manage_Tags">
         <title>Manage tags</title>
         <para>
@@ -15,8 +28,7 @@
             in a tag.
         </para>
         <para>
-            Go to
-            <emphasis role="bold">Categories &amp; Tags --> Manage Tags.</emphasis>
+            By selecting <emphasis role="bold">Categories &amp; Tags --> Manage Tags</emphasis>, you will be directed to the <emphasis role="bold">Manage Tags</emphasis> page as below:
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -26,11 +38,31 @@
                 <imagedata fileref="images/ManageTag.png" format="PNG" align="center" width="150mm" scalefit="1"/>
             </imageobject>
         </mediaobject>
+		<para>Here, you can perform the following actions:</para>
+        <itemizedlist>
+        <listitem>
+        <para>
+        <link linkend='sect-User_Guide-Manage_Tags-Add_a_tag_style'>Add a tag style</link>
+        </para>
+		</listitem>
+		<listitem>
+        <para>
+        <link linkend='sect-User_Guide-Manage_Tags-Edit'>Edit a tag style</link>
+        </para>
+		</listitem>
+		<listitem>
+        <para>
+        <link linkend='sect-User_Guide-Manage_Tags-Delete_a_tag_style'>Delete a tag style</link>
+        </para>
+		</listitem>
+		<listitem>
+        <para>
+        <link linkend='sect-User_Guide-Manage_Tags-Tag_Permission_Manager'>Set permissions on public tags</link>
+        </para>
+		</listitem>
+		</itemizedlist>
         <section id="sect-User_Guide-Manage_Tags-Add_a_tag_style">
-         <citetitle> <para xml:id="proc-User_Guide-Add_a_tag_style-Add_a_Tag_Style">
-                <emphasis role="bold">Add a tag style</emphasis>
-            </para>
-         </citetitle>
+         <title>Add a tag style</title>
             <procedure>
                 <step>
                     <para>
@@ -173,7 +205,7 @@
             </para>
         </section>
         <section id="sect-User_Guide-Manage_Tags-Tag_Permission_Manager">
-            <title>Tag Permission Manager</title>
+            <title>Set permissions on public tags</title>
             <para>
                 The
                 <emphasis role="bold">Tag Permission Manager</emphasis>
@@ -265,8 +297,7 @@
             at facilitating searches. The category management includes adding, editing and deleting a category tree.
         </para>
         <para>
-            Go to
-            <emphasis role="bold">Categories &amp; Tags --> Manage Categories.</emphasis>
+            By selecting <emphasis role="bold">Categories &amp; Tags --> Manage Categories</emphasis>, you will be directed to the <emphasis role="bold">Manage Categories</emphasis> page as below:
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -276,8 +307,20 @@
                 <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center" width="150mm"/>
             </imageobject>
         </mediaobject>
-    </section>
-    <section id="sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree">
+        <para>Here, you can do the following actions:</para>
+		<itemizedlist>
+			<listitem>
+			<para>
+			<link linkend='sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree'>Add a category tree</link>
+			</para>
+			</listitem>
+			<listitem>
+			<para>
+			<link linkend='sect-User_Guide-Categories_and_Tags-Edit_a_Taxonomy_Tree'>Edit a category tree</link>
+			</para>
+			</listitem>
+		</itemizedlist>
+<section id="sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree">
         <title>Add a category tree</title>
 
         <procedure>
@@ -617,5 +660,6 @@
                 You cannot delete categories that have been referenced.
             </para>
         </note>
+    </section>
     </section>
 </section>

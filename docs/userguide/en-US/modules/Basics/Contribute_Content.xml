@@ -69,8 +69,23 @@
             one.
         </para>
         <para>
-            To use <emphasis role="bold">InContext Editing</emphasis>, turn on the <emphasis role="bold">Edit Mode</emphasis>.
+            To use <emphasis role="bold">InContext Editing</emphasis>, you first need to turn on the <emphasis role="bold">Edit Mode</emphasis>.
         </para>
+        <para>Here, you can do the following specific actions:</para>
+        <itemizedlist>
+		<listitem>
+		<para><link linkend='sect-User_Guide-InContext_Editing-Add_Content'>Add content</link></para>
+		</listitem>
+		<listitem>
+		<para><link linkend='sect-User_Guide-InContext_Editing-Edit_Content'>Edit content</link></para>
+		</listitem>
+		<listitem>
+		<para><link linkend='sect-User_Guide-InContext_Editing-Manage_Content'>Manage content</link></para>
+		</listitem>
+		<listitem>
+		<para><link linkend='sect-User_Guide-InContext_Editing-Preferences'>Manage preferences</link></para>
+		</listitem>
+		</itemizedlist>
         <section id="sect-User_Guide-InContext_Editing-Add_Content">
             <title>Add content</title>
             <para>
@@ -260,7 +275,7 @@
             </procedure>
             <note>
                 <para>The folder, where a document is saved, is the path you have selected in the
-                <link linkend="sect-User_Guide-InContext_Editing-Preferences">Preferences</link>
+                <link linkend="sect-User_Guide-InContext_Editing-Preferences">Manage preferences</link>
                 section.</para>
             </note>
         </section>
@@ -446,7 +461,7 @@
                     </para>
         </section>
         <section id="sect-User_Guide-InContext_Editing-Preferences">
-            <title>Preferences</title>
+            <title>Manage preferences</title>
             <para>
                 Preferences enable you to edit content in the Single Content Viewer (SCV) and the Content List Viewer
                 (CLV), reset the display of the content in SCV and CLV and publish content.

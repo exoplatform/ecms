@@ -6,13 +6,25 @@
 ]>
 <section id="sect-User_Guide-Advanced_Configuration">
   <title>Advanced Configuration</title>
+<para>This section is divided into 4 sub-topics:</para>
+<itemizedlist>
+<listitem>
+<para><link linkend='sect-User_Guide-Advanced_Configuration-Manage_Queries'>Manage queries</link></para>
+</listitem>
+<listitem>
+<para><link linkend='sect-User_Guide-Advanced_Configuration-Manage_Scripts'>Manage Scripts</link></para>
+</listitem>
+<listitem>
+<para><link linkend='sect-User_Guide-Advanced_Configuration-Create_Action_Types'>Create an action type</link></para>
+</listitem>
+<listitem>
+<para><link linkend='sect-User_Guide-Advanced_Configuration-Manage_Unlocks'>Manage locks</link></para>
+</listitem>
+</itemizedlist>
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Queries">
     <title>Manage queries</title>
     <para>
-   The function enables you to manage queries. It allows adding, editing and deleting queries.
-  </para>
-    <para>
-   Go to <emphasis role="bold"> Advanced Configuration --> Manage Queries.</emphasis>
+   The function enables you to add, edit and delete queries by going to <emphasis role="bold"> Advanced Configuration --> Manage Queries.</emphasis>
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -150,10 +162,7 @@
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Scripts">
     <title>Manage Scripts</title>
     <para>
-   The function enables users to manage all script codes in the <emphasis role="bold">&PRODUCT;</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system.
-  </para>
-    <para>
-   Go to <emphasis role="bold">Advanced Configuration --> Manage Scripts.</emphasis>
+   The function enables you to manage all script codes in the <emphasis role="bold">&PRODUCT;</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system by going to <emphasis role="bold">Advanced Configuration --> Manage Scripts.</emphasis>
   </para>
     <mediaobject>
        <imageobject role="html">

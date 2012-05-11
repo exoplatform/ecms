@@ -6,26 +6,18 @@
         ]>
 <section id="sect-User_Guide-Search_in_Content_Explorer">
   <title>Search in Sites Explorer</title>
-  <para>
-    There are three ways to search for an existing node:
-  </para>
-  <itemizedlist>
-    <listitem>
-      <para>
-        <link linkend="sect-User_Guide-Search_in_Content_Explorer-Simple_Search">Quick search</link>.
-      </para>
-    </listitem>
-    <listitem>
-      <para>
-        <link linkend="sect-User_Guide-Search_in_Content_Explorer-Advanced_Search">Advanced search</link>.
-      </para>
-    </listitem>
-    <listitem>
-      <para>
-        <link linkend="sect-User_Guide-Search_in_Content_Explorer-Quick_Search">Search with saved queries</link>
-      </para>
-    </listitem>
-  </itemizedlist>
+	<para>There are 3 search types in <emphasis role="bold">Sites Explorer</emphasis>:</para>
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Simple_Search'>Quick search</link></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Advanced_Search'>Advanced search</link></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Quick_Search'>Search with saved queries</link></para>
+	  </listitem>
+	</itemizedlist>
   <section id="sect-User_Guide-Search_in_Content_Explorer-Simple_Search">
     <title>Quick search</title>
     <para>With the quick search, you can directly type a search term in the search field. All documents, whose keywords
@@ -475,8 +467,9 @@
           </para>
         </step>
       </procedure>
-        <section id="sect-User_Guide-Advanced_Search-Search_with_constraints-Methods_add_required_constraints">
-          <title>Methods to add the required constraints</title>
+        <para xml:id="sect-User_Guide-Advanced_Search-Search_with_constraints-Methods_add_required_constraints">
+          <emphasis role="bold">There are some methods to add the required constraints as follows:</emphasis>
+        </para>
             <citetitle>
           <para xml:id="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values"><emphasis role="bold">Add a constraint for exact values</emphasis></para>
           </citetitle>
@@ -802,7 +795,6 @@
               </para>
             </step>
           </procedure>
-      </section>
     </section>
 
     <section id="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query">

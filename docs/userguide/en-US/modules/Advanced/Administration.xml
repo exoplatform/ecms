@@ -9,10 +9,8 @@
   <para>
   This page is used to manage all workspaces, drives, node types, metadata, templates, queries, and more. Only administrators can access the <emphasis role="bold">Content Administration</emphasis> page.
  </para>
-  <procedure>
-    <step>
-      <para>
-				Hover your cursor over <inlinemediaobject>
+  
+ <para>To access the <emphasis role="bold">Content Administration</emphasis> page, hover your cursor over <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
@@ -37,10 +35,9 @@
           <imagedata   align="center" fileref="images/sites_admin.png" format="PNG" width="150mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
-    </step>
-  </procedure>
+
   <para>
-  This page enables you to access:
+  From this page, you can access:
  </para>
   <itemizedlist>
     <listitem>

@@ -3,19 +3,21 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Content_Inside_Categories">
-  <title>Content inside categories</title>
-    <para>
+<section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
+		<title>Create content inside a category</title>
+  <para>
 		In eXo Platform, you can create new content in any folders or directly in a CLV with <emphasis role="bold">Incontext Editing.</emphasis>
     However, to facilitate the content management, categories are usually used to sort and organize documents that makes your desired searches more quickly. Also, creating content inside a category helps you manage and publish them effectively.
 	</para>
   <para>
  After creating a document, you should categorize it by adding it to a category. Otherwise, documents should be created right in a category and links to those documents will be automatically created in the category. In eXo Platform, categories are stored in JCR.
 	 </para>
-	 <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
-		<title>Create content inside a category</title>
 		 <para>
-			This section will show you how to create content in a category.
+         <citetitle>
+			<emphasis role="bold">
+			Create content in a category
+            </emphasis>
+		 </citetitle>
 		</para>
 		 <procedure>
 			 <step>
@@ -66,20 +68,3 @@
 			</step>
 		</procedure>
 	</section>
-</section>
-
-	<!--  Remove
-  <section id="sect-User_Guide-Content_Inside_Categories-Organize_Content">
-    <title>Organize Content</title>
-    <para>  After content is created in a category, it will be stored in Category Navigation. ( See more about Category Navigation at <xref linkend="sect-User_Guide-Category_Navigation"/> .) </para>
-    <para>If the content is not published, you cannot see it in the Published Mode. To see it in Category Navigation, turn on the Edit Mode.</para>
-    <mediaobject>
-      <imageobject>
-        <imagedata  align="center" fileref="images/organizecontent.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-    <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish content.</para>
-  </section>
- -->
-
-

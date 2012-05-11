@@ -6,6 +6,19 @@
 ]>
 <section id="sect-User_Guide-Content_Types">
   <title>Content Types</title>
+  <para>This section is divided into 2 sub-topics:</para>
+	<itemizedlist>
+	<listitem>
+	<para>
+	<link linkend='sect-User_Guide-Content_Types-The_Namespace_Registry'>Namespace registry</link>
+	</para>
+	</listitem>
+	<listitem>
+	<para>
+	<link linkend='sect-User_Guide-Content_Types-Manage_Node_Types'>Manage node types</link>
+	</para>
+	</listitem>
+	</itemizedlist>
   <section id="sect-User_Guide-Content_Types-The_Namespace_Registry">
     <title>Namespace registry</title>
     <para>The namespace is a prefix in the node type name. It enables you to create node types without fearing any conflict with existing node types.
