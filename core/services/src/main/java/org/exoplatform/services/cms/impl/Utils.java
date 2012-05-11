@@ -123,20 +123,16 @@ public class Utils {
   public static void processImportHistory(Node currentNode,
                                           InputStream versionHistorySourceStream,
                                           Map<String, String> mapHistoryValue) throws Exception {
-
+    //read stream, get the version history data & keep it inside a map 
+    Map<String, byte[]> mapVersionHistoryData = getVersionHistoryData (versionHistorySourceStream);
+    
+    //import one by one
     for (String uuid : mapHistoryValue.keySet()) {
-      ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(versionHistorySourceStream));
-      byte[] data = new byte[1024];
-      ByteArrayOutputStream out = new ByteArrayOutputStream();
-      ZipEntry entry = zipInputStream.getNextEntry();
-      while (entry != null) {
-        int available = -1;
-        if (entry.getName().equals(uuid + ".xml")) {
-          while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-            out.write(data, 0, available);
-          }
+      for (String name : mapVersionHistoryData.keySet()) {
+        if (name.equals(uuid + ".xml")) {
           try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(out.toByteArray());
+            byte[] versionHistoryData = mapVersionHistoryData.get(name);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(versionHistoryData);
             String value = mapHistoryValue.get(uuid);
             Node versionableNode = currentNode.getSession().getNodeByUUID(uuid);
             importHistory((NodeImpl) versionableNode,
@@ -145,6 +141,7 @@ public class Utils {
                           getPredecessors(value),
                           getVersionHistory(value));
             currentNode.getSession().save();
+            break;
           } catch (ItemNotFoundException item) {
             currentNode.getSession().refresh(false);
             if (LOG.isErrorEnabled()) {
@@ -156,16 +153,41 @@ public class Utils {
               LOG.error("Import version history failed " + e, e);
             }
           }
-          zipInputStream.closeEntry();
-          entry = zipInputStream.getNextEntry();
-        } else {
-          zipInputStream.closeEntry();
-          entry = zipInputStream.getNextEntry();
         }
       }
-      out.close();
-      zipInputStream.close();
     }
+  }
+  
+  /**
+   * This function is used to get the version history data which is kept inside the xml files
+   * @param versionHistorySourceStream
+   * @return a map saving version history data with format: [file name, version history data]
+   * @throws IOException 
+   */
+  private static Map<String, byte[]> getVersionHistoryData (InputStream versionHistorySourceStream) throws IOException {
+    Map<String, byte[]> mapVersionHistoryData = new HashMap<String, byte[]>();    
+    ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(versionHistorySourceStream));
+    byte[] data = new byte[1024];    
+    ZipEntry entry = zipInputStream.getNextEntry();
+    while (entry != null) {      
+      //get binary data inside the zip entry
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      int available = -1;
+      while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
+        out.write(data, 0, available);
+      }
+      
+      //save data into map
+      mapVersionHistoryData.put(entry.getName(), out.toByteArray());
+      
+      //go to next entry
+      out.close();
+      zipInputStream.closeEntry();
+      entry = zipInputStream.getNextEntry();
+    }
+    
+    zipInputStream.close();    
+    return mapVersionHistoryData;
   }
 
   /**
