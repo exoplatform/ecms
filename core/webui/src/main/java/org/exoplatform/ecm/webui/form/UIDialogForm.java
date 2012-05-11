@@ -435,9 +435,9 @@ public class UIDialogForm extends UIForm {
 
   public void addInterceptor(String scriptPath, String type) {
     if(scriptPath.length() > 0 && type.length() > 0){
-      if(type.equals("prev")){
+      if(type.equals("prev") && !prevScriptInterceptor.contains(scriptPath)){
         prevScriptInterceptor.add(scriptPath);
-      } else if(type.equals("post")){
+      } else if(type.equals("post") && !postScriptInterceptor.contains(scriptPath)){
         postScriptInterceptor.add(scriptPath);
       }
     } 
