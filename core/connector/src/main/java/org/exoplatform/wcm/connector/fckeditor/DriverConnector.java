@@ -386,8 +386,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       }
       return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
     } catch (MissingResourceException e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(e.getMessage());
       }
     }
     return name;
