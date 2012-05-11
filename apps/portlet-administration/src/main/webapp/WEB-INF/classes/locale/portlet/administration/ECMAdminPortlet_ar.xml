@@ -1144,6 +1144,7 @@
       <template-in-use> .لا يمكن الحذف {0} : القالب في حالة إستعمال</template-in-use>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
       <access-denied>.غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة.</access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1163,6 +1164,8 @@
       <version-restored>إستعادة الإصدار {0} بنجاح.</version-restored>
       <role-require>يجب إختيار الصلاحية</role-require>
       <template-name-exist> إسم القالب موجود! </template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>

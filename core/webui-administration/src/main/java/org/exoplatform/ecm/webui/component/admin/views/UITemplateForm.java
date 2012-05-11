@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -273,32 +274,55 @@ public class UITemplateForm extends UIForm {
         }
       }
       if (uiForm.isAddNew_) {
-        if (uiForm.templatePath_ != null) {
-          String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_
-              .lastIndexOf("/"));
-          if (!oldHomeTemplate.equals(homeTemplate)) {
-            Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, WCMCoreUtils.getUserSessionProvider());
-            oldNode.remove();
-            manageViewService.getTemplate(oldHomeTemplate, WCMCoreUtils.getUserSessionProvider()).save();
+        try {
+          if (uiForm.templatePath_ != null) {
+            String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_.lastIndexOf("/"));
+            if (!oldHomeTemplate.equals(homeTemplate)) {
+              Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, WCMCoreUtils.getUserSessionProvider());
+              oldNode.remove();
+              manageViewService.getTemplate(oldHomeTemplate, WCMCoreUtils.getUserSessionProvider()).save();
+            }
           }
+
+          path = manageViewService.addTemplate(templateName,
+                                               content,
+                                               homeTemplate,
+                                               WCMCoreUtils.getUserSessionProvider());
+          uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.getTemplate(path, 
+              WCMCoreUtils.getUserSessionProvider()));
+        } catch (AccessDeniedException ex) {
+          uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.add-permission-denied",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+
+          return;
         }
-        path = manageViewService.addTemplate(templateName, content, homeTemplate);
-        uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.
-                            getTemplate(path, WCMCoreUtils.getUserSessionProvider()));
       } else {
-        Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
-        if (isEnableVersioning) {
-          if (!templateNode.isNodeType(Utils.MIX_VERSIONABLE)) {
-            templateNode.addMixin(Utils.MIX_VERSIONABLE);
-            templateNode.save();
-          } else {
-            templateNode.checkout();
+        try {
+          Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
+          if (isEnableVersioning) {
+            if (!templateNode.isNodeType(Utils.MIX_VERSIONABLE)) {
+              templateNode.addMixin(Utils.MIX_VERSIONABLE);
+              templateNode.save();
+            } else {
+              templateNode.checkout();
+            }
           }
-        }
-        path = manageViewService.updateTemplate(templateName, content, homeTemplate);
-        templateNode.save();
-        if (isEnableVersioning) {
-          templateNode.checkin();
+          path = manageViewService.updateTemplate(templateName,
+                                                  content,
+                                                  homeTemplate,
+                                                  WCMCoreUtils.getUserSessionProvider());
+          templateNode.save();
+          if (isEnableVersioning) {
+            templateNode.checkin();
+          }
+        } catch (AccessDeniedException ex) {
+          Object[] args = { "UIViewFormTabPane.label.option." + templateName };
+          uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.edit-permission-denied",
+                                                  args,
+                                                  ApplicationMessage.WARNING));
+
+          return;
         }
       }
       String workspaceName = NodeLocation.getNodeByLocation(uiForm.template_).getSession().getWorkspace().getName();

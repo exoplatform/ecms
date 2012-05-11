@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.LazyPageList;
@@ -144,7 +145,16 @@ public class UIECMTemplateList extends UIPagingGrid {
         app.addMessage(new ApplicationMessage("UIECMTemplateList.msg.template-in-use", args));
         return;
       }
-      vservice.removeTemplate(templatePath) ;
+      try {
+        vservice.removeTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
+      } catch (AccessDeniedException ex) {
+        UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class);
+        Object[] args = { "UIViewFormTabPane.label.option." + templateName };
+        app.addMessage(new ApplicationMessage("UIECMTemplateList.msg.delete-permission-denied",
+                                              args,
+                                              ApplicationMessage.WARNING));
+        return;
+      }
       uiECMTemp.refresh(uiECMTemp.getUIPageIterator().getCurrentPage()) ;
       UITemplateContainer uiTempContainer = uiECMTemp.getParent() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer) ;

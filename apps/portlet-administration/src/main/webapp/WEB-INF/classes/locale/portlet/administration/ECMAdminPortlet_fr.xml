@@ -1150,6 +1150,7 @@
       <template-in-use>Suppresion impossible du formulaire '{0}' (probablement en cours d'utilisation)</template-in-use>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <delete-permission-denied>Vous n'avez pas les droits pour supprimer le template '{0}'.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1169,6 +1170,8 @@
       <version-restored>La version '{0}' a été restauré avec succès.</version-restored>
       <role-require>Veuillez sélectionner une permission</role-require>
       <template-name-exist>Le formulaire '{0}' existe déjà</template-name-exist>
+      <add-permission-denied>Vous n'avez pas les droits pour ajouter un nouveau template.</add-permission-denied>
+      <edit-permission-denied>Vous n'avez pas les droits pour modifier le template '{0}'.</edit-permission-denied>
     </msg>
     <tab>
       <label>

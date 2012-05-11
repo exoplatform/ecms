@@ -1144,6 +1144,7 @@
       <template-in-use><![CDATA[Kann {0} nicht l&ouml;schen : Vorlage momentan in Gebrauch]]></template-in-use>
       <confirm-delete><![CDATA[Wollen Sie wirklich l&ouml;schen ?]]></confirm-delete>
       <access-denied><![CDATA[Zugang verweigert! Sie haben keine Genehmigung f&uuml;r diese Funktion.]]></access-denied>
+      <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1163,6 +1164,8 @@
       <version-restored>Die Version {0} wurde erfolgreich wiederhergestellt.</version-restored>
       <role-require><![CDATA[Sie m&uuml;ssen eine Genehmigung ausw&auml;hlen]]></role-require>
       <template-name-exist>Vorlagenname '{0}' existiert schon</template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
       <label>

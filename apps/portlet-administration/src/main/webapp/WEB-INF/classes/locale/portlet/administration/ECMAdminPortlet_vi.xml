@@ -1147,6 +1147,7 @@
       <template-in-use>Không thể xóa {0} : Mẫu đang được sử dụng</template-in-use>
       <confirm-delete>Bạn có thực sự muốn xóa không</confirm-delete>
       <access-denied>Bạn không có quyền truy cập vào chức năng này</access-denied>
+      <delete-permission-denied>Bạn không có quyền để xóa mẫu '{0}'.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
   <!--
@@ -1166,6 +1167,8 @@
       <version-restored>Phiên bản {0} đã được khôi phục.</version-restored>
       <role-require>Bạn phải chọn quyền truy nhập</role-require>
       <template-name-exist>Tên của mẫu'{0}' đã tồn tại</template-name-exist>
+      <add-permission-denied>Bạn không có quyền để thêm mẫu mới.</add-permission-denied>
+      <edit-permission-denied>Bạn không có quyền để sửa mẫu '{0}'.</edit-permission-denied>
     </msg>
     <tab>
       <label>
