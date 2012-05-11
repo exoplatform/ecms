@@ -1088,6 +1088,12 @@
 	}
 	
 	ECMUtils.prototype.adjustItemsInSideBar = function() {
+	  //if LeftContainer doesn't exist, do nothing
+	  var container = document.getElementById("LeftContainer");
+	  if (!container) {
+	  	return;
+	  }
+	  
 	  var treeExplorer = document.getElementById("UITreeExplorer");
 	  var itemArea = document.getElementById("SelectItemArea");	
 	  
