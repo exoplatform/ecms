@@ -9,10 +9,12 @@
   This section represents actions on folders and documents through the right-click menu (Adding to favorites, copying, cutting, pasting, adding Symlink, locking/unlocking, viewing/renaming/downloading document, and allowing edition and copying URL to clipboard) and other actions (dragging and dropping folders or documents).
  </para>
   <para>
-  Depending on the actions on folders or documents, the right-click menu (drop-down menu) is different.
+  Depending on the actions on folders or documents, the right-click menu (drop-down menu) will be different.
  </para>
+<itemizedlist>
+<listitem>
   <para>
-  The actions in the right-click menu for documents:
+  <citetitle><emphasis role="bold">Actions in the right-click menu for documents:</emphasis></citetitle>
  </para>
   <mediaobject>
     <imageobject role="html">
@@ -22,8 +24,10 @@
       <imagedata width="40mm" align="center" fileref="images/documentactions.png" format="PNG" scalefit="1"/>
     </imageobject>
   </mediaobject>
+</listitem>
+<listitem>
   <para>
-  The actions in the right-click menu for folders:
+  <citetitle><emphasis role="bold">Actions in the right-click menu for folders:</emphasis></citetitle>
  </para>
   <mediaobject>
     <imageobject role="html">
@@ -33,6 +37,8 @@
       <imagedata width="40mm" align="center" fileref="images/folderactions.png" format="PNG" scalefit="1"/>
     </imageobject>
   </mediaobject>
+</listitem>
+</itemizedlist>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_to_favorites">
     <title>Add to favorites</title>
     <para>
@@ -328,16 +334,10 @@
     <para>
     A symlink embedded into a node allows you to quickly access the node even if you are in other nodes.
   </para>
-  <itemizedlist>
-    <listitem>
     <para>
-     Right-click a document that you want to add a Symlink, and select <emphasis role="bold">Add Symlink</emphasis> from the drop-down menu.
-    </para>
-    <para>
+     To add a symlink, simply right-click a document that you want to add a Symlink, and select <emphasis role="bold">Add Symlink</emphasis> from the drop-down menu.
      The symlink will be added to the selected document immediately. To view its content, simply click the symlink.
     </para>
-    </listitem>
-    </itemizedlist>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_WebDAV">
     <title>View WebDAV</title>
@@ -400,9 +400,7 @@
   <section>
     <title>View information</title>
     <para>eXo Platform supports you to view all information of a document, such as name, title, creator, and publication state of the document.</para>
-    <itemizedlist>
-    <listitem>
-      <para>To view information of a document, right-click the document, and select <emphasis role="bold">View Information</emphasis> from the drop-down menu.
+     <para>To view information of a document, simply right-click the document, and select <emphasis role="bold">View Information</emphasis> from the drop-down menu.
         <para>The <emphasis role="bold">View Information</emphasis> form appears as below.</para>
         <mediaobject>
           <imageobject role="html">
@@ -413,23 +411,15 @@
           </imageobject>
         </mediaobject>
        </para>
-  </listitem>
-  </itemizedlist>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
     <title>View document</title>
     <para>
    The <emphasis role="bold">View Document</emphasis> item is visible in the drop-down menu when you right-click a document. This function allows you to view the document on another tab with the link containing the document path.
-  </para>
-  <itemizedlist>
-    <listitem>
-    <para>To view a document, right-click a document that you want to view, and select <emphasis role="bold"> View Document</emphasis> from the drop-down menu.
-    </para>
-    <para>
-     The document is opened in another tab.
-    </para>        
-      </listitem>
-    </itemizedlist>
+   </para>
+	<para>To view a document, simply right-click it, and select <emphasis role="bold"> View Document</emphasis> from the drop-down menu.
+	 The document is opened in another tab.
+	</para>        
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
     <title>Copy a URL to the clipboard</title>

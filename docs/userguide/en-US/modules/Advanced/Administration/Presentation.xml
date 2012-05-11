@@ -7,6 +7,29 @@
 <section id="sect-User_Guide-Content_Presentation_Manager">
     <!--    This document was created with Syntext Serna Free.    -->
     <title>Content Presentation</title>
+	<para>This section is divided into 4 sub-topics:</para>
+    <itemizedlist>
+	<listitem>
+    <para>
+	<link linkend='sect-User_Guide-Content_Presentation_Manager-Manage_a_Template'>Manage a template</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+	<link linkend='sect-User_Guide-Content_Presentation_Manager-Metadata_Management'>Manage metadata</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+	<link linkend='sect-User_Guide-Content_Presentation_Manager-Manage_Views'>Manage views</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+	<link linkend='sect-User_Guide-Content_Presentation_Manager-Drives_Management'>Manage drives</link>
+    </para>
+	</listitem>
+	</itemizedlist>
     <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
         <title>Manage a template</title>
         <para>
@@ -561,6 +584,15 @@
                 <imagedata width="150mm" scalefit="1" align="center" fileref="images/img-Manage_Views_Form.png" format="PNG"/>
             </imageobject>
         </mediaobject>
+        <para>Here, you can do many actions through 2 tabs:</para>
+        <itemizedlist>
+		<listitem>
+			<para><link linkend='sect-User_Guide-Manage_Views-Views_Tab'>Views tab</link></para>
+		</listitem>
+		<listitem>
+			<para><link linkend='sect-User_Guide-Manage_Views-ECM_Templates'>ECMS Templates tab</link></para>
+		</listitem>
+        </itemizedlist>
         <section id="sect-User_Guide-Manage_Views-Views_Tab">
             <title>Views tab</title>
             <para>
@@ -1144,6 +1176,24 @@
                 <imagedata width="150mm" align="center" fileref="images/manage_drives.png" format="PNG"/>
             </imageobject>
         </mediaobject>
+        <para>Here, you can do certain actions on the drives as follows:</para>
+		<itemizedlist>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Drives_Management-Add_a_new_drive'>Add a new drive</link>
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Drives_Management-Edit_drive'>Edit a drive</link>
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Drives_Management-Delete_drive'>Delete a drive</link>
+		</para>
+		</listitem>
+		</itemizedlist>
         <section id="sect-User_Guide-Drives_Management-Add_a_new_drive">
             <title>Add a new drive</title>
             <procedure>

@@ -13,7 +13,7 @@
     </para>
     <para>For example, if you do not log in, you only see the search results that are published.</para>
     <section id="sect-User_Guide-Search_portlet-Search_content">
-        <title>How to search for content?</title>
+        <title>Search for content</title>
         <procedure>
             <step>
                 <para>
@@ -41,7 +41,7 @@
                         <imagedata align="center" fileref="images/nosearchresult.png" format="PNG" width="150mm"/>
                     </imageobject>
                 </mediaobject>
-                <para><emphasis role="bold">Details of the Search form</emphasis></para>
+                <para><emphasis role="bold">Details:</emphasis></para>
                 <table frame="all">
                     <tgroup cols="2">
                         <colspec colname="c1"/>
@@ -99,14 +99,14 @@
         <para>Editing the Search portlet allows you to change the display of search results.</para>
         <procedure>
             <step>
-                <para>Open the Search page as <xref linkend="sect-User_Guide-Search_portlet-Search_content"/>.</para>
+                <para>Open the Search page as in <xref linkend="sect-User_Guide-Search_portlet-Search_content"/>.</para>
             </step>
             <step>
                 <para>Open the <emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Search</emphasis> portlet by following one of two ways:</para>
                 <itemizedlist>
                     <listitem>
                         <para><emphasis role="bold">The first way</emphasis></para>
-							<para>Hover your cursor over <emphasis role="bold">Edit --> Content</emphasis> on the <emphasis role="bold">Administration</emphasis> bar, and then click the
+							<para>Hover your cursor over <emphasis role="bold">Edit --> Content</emphasis> on the <emphasis role="bold">Administration</emphasis> bar, and then click
                             <inlinemediaobject>
                                 <imageobject>
                                     <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
@@ -114,8 +114,7 @@
                                 <textobject>
                                     <phrase>pencil</phrase>
                                 </textobject>
-                            </inlinemediaobject>
-                            icon:
+                            </inlinemediaobject>.
                         </para>
                         <mediaobject>
                             <imageobject role="html">
@@ -137,7 +136,7 @@
                         </para>
                         <itemizedlist>
                             <listitem>
-                                <para>Hover the mouse pointer over the
+                                <para>Hover your cursor over the
                                     <emphasis role="bold">SearchResult</emphasis>
                                     portlet and click
                                     <inlinemediaobject>

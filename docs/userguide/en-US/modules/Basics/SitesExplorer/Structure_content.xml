@@ -3,7 +3,8 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Introduction_Content_Structure">
+<section id="sect-User_Guide-Structure_content">
+<title>Structure content</title>
     <para>
         <emphasis role="bold">Content</emphasis> is a main part of a website that may consist of various elements, such as texts, images, sounds, videos,
         animations, and more. In eXo Platform, you can manage both structured and unstructured content.
@@ -30,4 +31,11 @@
     <para><emphasis role="bold">default.js</emphasis> contains JS data which are used to make web content more animating and dynamic.</para>
 	</listitem>
 	</itemizedlist>
+
+<xi:include href="Access_Sites_Explorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="Drives.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="Views.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="Actions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="Folders_and_Documents.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="../../Advanced/Administration.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </section>

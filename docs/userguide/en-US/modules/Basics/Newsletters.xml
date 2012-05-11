@@ -4,6 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Newsletters">
+<title>Manage newsletters</title>
   <para>
   &PRODUCT; provides the <emphasis role="bold">Newsletters</emphasis> service, aiming at helping users quickly get the updated newsletters from a website.
  </para>
@@ -17,7 +18,7 @@
     <para>With <emphasis role="bold">Newsletters,</emphasis> you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
     <citetitle>
 	<para><emphasis role="bold">
-   Subscribe your email to get newsletters from eXo Service.
+   Subscribe your email to get newsletters from eXo Service
    </emphasis>
   </para>
   </citetitle>
@@ -107,24 +108,30 @@
     </mediaobject>
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
       <title>Manage categories in Newsletter</title>
-      <para>
-    This section shows you how to manage categories in a <emphasis role="bold">Newsletter</emphasis> page, including:
-   </para>
-    <itemizedlist>
-	<listitem>
-	<link linkend="sect-User_Guide-Category_Management-Add_a_new_category">Add a new category</link>
-	</listitem>
-	<listitem>
-	<link linkend="sect-User_Guide-Category_Management-Edit_a_category">Edit a category</link>
-	</listitem>
-	<listitem>
-	<link linkend="sect-User_Guide-Category_Management-Delete_a_category">Delete a category</link>
-	</listitem>
-	<listitem>
-	<link linkend="sect-User_Guide-Category_Management-Manage_Users">Manage users</link>
-	</listitem>
-	</itemizedlist>
-      <section id="sect-User_Guide-Category_Management-Add_a_new_category">
+		<para>Managing categories in <emphasis role="bold">Newsletter</emphasis> includes the following actions:</para>
+		<itemizedlist>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Category_Management-Add_a_new_category'>Add a new category</link>
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Category_Management-Edit_a_category'>Edit a category</link>
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Category_Management-Delete_a_category'>Delete a category</link>
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+		<link linkend='sect-User_Guide-Category_Management-Manage_Users'>Manage users</link>
+		</para>
+		</listitem>
+		</itemizedlist>
+	<section id="sect-User_Guide-Category_Management-Add_a_new_category">
         <title>Add a new category</title>
         <procedure>
           <step>

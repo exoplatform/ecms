@@ -6,13 +6,12 @@
         ]>
 <section id="sect-User_Guide-Actions">
   <title>Functions on action tabs</title>
+  <note>
   <para>
     Functions are added to tabs in <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis></emphasis> by administrators. The number of displayed actions depends on each tab and each drive you are
     browsing and your role.
   </para>
-  <para>
-    This section shows you how to take all actions in <emphasis role="bold"><emphasis role="bold">Sites Explorer.</emphasis></emphasis>
-  </para>
+  </note>
   <section id="sect-User_Guide-Actions-Add_Category">
     <title>Add a category</title>
     <para>
@@ -1023,7 +1022,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <emphasis role="bold">Relations</emphasis>
       area is used to list all its related documents. See the
         <link
-                linkend="sect-User_Guide-Manage_Relations-View_Relations">View relations
+                linkend="sect-User_Guide-Manage_Relations-View_Relations">View a relation
         </link>
         section.
     </para>
@@ -2454,6 +2453,29 @@ After being created successfully, a file document with the <emphasis>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Actions">
     <title>Manage actions</title>
+    <para>There are some actions you can perform as follows:</para>
+    <itemizedlist>
+    <listitem>
+    <para>
+   <link linkend='sect-User_Guide-Manage_Actions-Add_an_action'>Add an action</link>
+    </para>
+    </listitem>
+   <listitem>
+    <para>
+   <link linkend='sect-User_Guide-Manage_Actions-View_Actions'>View an action</link>
+    </para>
+    </listitem>
+	<listitem>
+    <para>
+   <link linkend='sect-User_Guide-Manage_Actions-Edit_an_action'>Edit an action</link>
+    </para>
+    </listitem>
+	<listitem>
+    <para>
+	<link linkend='sect-User_Guide-Manage_Actions-Delete_an_action'>Delete an action</link>
+    </para>
+    </listitem>
+    </itemizedlist>
     <section id="sect-User_Guide-Manage_Actions-Add_an_action">
       <title>Add an action</title>
       <procedure>
@@ -2686,7 +2708,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </note>
     </section>
     <section id="sect-User_Guide-Manage_Actions-View_Actions">
-      <title>View actions</title>
+      <title>View an action</title>
       <procedure>
         <step>
           <para>
@@ -2910,8 +2932,9 @@ After being created successfully, a file document with the <emphasis>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Categories">
     <title>Manage categories</title>
-    <section id="sect-User_Guide-Manage_Categories-Add_a_category_for_a_node">
-      <title>Assign a category to a node</title>
+      <para xml:id="sect-User_Guide-Manage_Categories-Add_a_category_for_a_node">
+      <citetitle><emphasis role="bold">Assign a category to a node</emphasis></citetitle>
+      </para>
       <para>
         You can add categories to the document type nodes only.
       </para>
@@ -3012,9 +3035,10 @@ After being created successfully, a file document with the <emphasis>text/html</
           reference is a link rather than a copy. This feature is used to preserve the disk space.
 		</para>
       </note>
-    </section>
-    <section id="sect-User_Guide-Manage_Categories-Delete_a_Category">
-      <title>Delete a category</title>
+    
+    <para xml:id="sect-User_Guide-Manage_Categories-Delete_a_Category">
+      <citetitle><emphasis role="bold">Delete a category</emphasis></citetitle>
+    </para>
       <procedure>
         <step>
           <para>
@@ -3055,8 +3079,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             that corresponds to the category you want to delete.
           </para>
         </step>
-      </procedure>
-    </section>
+      </procedure> 
   </section>
   <section id="sect-User_Guide-Actions-ShowHide_Content">
     <title>Show/Hide content</title>
@@ -3199,11 +3222,29 @@ After being created successfully, a file document with the <emphasis>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Relations">
     <title>Manage relations</title>
-    <para>
-      You can use this function to create relations between nodes.
+    <para>There are some actions you can perform on relations as follows:</para>
+    <itemizedlist>
+	<listitem>
+	<para>
+    <link linkend='sect-User_Guide-Manage_Relations-Add_a_relation'>Add a relation</link>
     </para>
+	</listitem>
+	<listitem>
+	<para>
+    <link linkend='sect-User_Guide-Manage_Relations-Delete_a_relation'>Delete a relation</link>
+    </para>
+	</listitem>
+	<listitem>
+	<para>
+    <link linkend='sect-User_Guide-Manage_Relations-View_Relations'>View a relation</link>
+    </para>
+	</listitem>
+    </itemizedlist>
     <section id="sect-User_Guide-Manage_Relations-Add_a_relation">
       <title>Add a relation</title>
+	<para>
+      You can use this function to create relations between nodes.
+    </para>
       <procedure>
           <step>
           <para>
@@ -3322,7 +3363,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </procedure>
     </section>
     <section id="sect-User_Guide-Manage_Relations-View_Relations">
-      <title>View relations</title>
+      <title>View a relation</title>
       <procedure>
         <step>
           <para>
@@ -3362,6 +3403,34 @@ After being created successfully, a file document with the <emphasis>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Versions">
     <title>Manage versions</title>
+    <para>There are some actions you can perform on versions as follows:</para>
+    <itemizedlist>
+    <listitem>
+    <para>
+    <link linkend='sect-User_Guide-Manage_Versions-Add_versions_for_nodes'>Add versions to a node</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+    <link linkend='sect-User_Guide-Manage_Versions-Add_and_Remov_labels_for_Versions'>Add/Remove labels for versions</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+    <link linkend='sect-User_Guide-Manage_Versions-View_versions'>View versions</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+    <link linkend='sect-User_Guide-Manage_Versions-Restore_versions'>Restore a version</link>
+    </para>
+	</listitem>
+	<listitem>
+    <para>
+    <link linkend='sect-User_Guide-Manage_Versions-Delete_versions'>Delete a version</link>
+    </para>
+	</listitem>
+    </itemizedlist>
     <section id="sect-User_Guide-Manage_Versions-Add_versions_for_nodes">
       <title>Add versions to a node</title>
       <procedure>
@@ -3501,7 +3570,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>plus</phrase>
               </textobject>
             </inlinemediaobject>
-            icon on the
+            on the
             <emphasis role="bold">Version Info</emphasis>
             window to show the
             <emphasis role="bold">Add Label</emphasis>
@@ -5154,13 +5223,13 @@ After being created successfully, a file document with the <emphasis>text/html</
     </para>
   </section>
   <section id="sect-User_Guide-Actions-View_Relations">
-    <title>View relations</title>
+    <title>View a relation</title>
     <para>
       This function shows/hides documents related to a selected node.
     </para>
     <itemizedlist>
       <listitem><citetitle>
-        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View relations</emphasis></para>
+        <para xml:id="step-User_Guide-View_Relations-To_View_Relations"><emphasis role="bold">View a relation</emphasis></para>
           </citetitle>
         <para>
           Select a node, then click
