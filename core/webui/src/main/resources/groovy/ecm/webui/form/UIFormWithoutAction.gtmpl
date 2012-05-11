@@ -6,6 +6,8 @@
  * Nov 08, 2006
  * 
  */
+
+import org.apache.commons.lang.StringUtils;
 %>
   <div class="UIFormWithoutAction $uicomponent.id">
     <% uiform.begin() %>
@@ -14,11 +16,13 @@
       <% 
         for(field in uiform.getChildren()) { 
           if(field.isRendered()) {
+            String fieldLabel = uicomponent.getLabel(field.getName());
       %>
 						<tr>
-              <%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { 
-            	  if(uicomponent.getLabel(field.getName())!=null && !uicomponent.getLabel(field.getName()).equals(""))%>                        
-								<td class="FieldLabel" style="vertical-align: middle;"><label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())%></label></td>
+              <%if(!uicomponent.getId().equals(fieldLabel)) { 
+                  if(StringUtils.isNotEmpty(fieldLabel)) {%>
+                    <td class="FieldLabel" style="vertical-align: middle;"><label for="<%=field.getId()%>"><%=fieldLabel%></label></td>
+                <% }%>
   						  <td class="FieldComponent"><% uiform.renderField(field) %></td>
               <%} else {%>
                 <td colspan="2" class="FieldComponent"><% uiform.renderField(field) %></td>
