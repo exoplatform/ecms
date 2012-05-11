@@ -118,7 +118,7 @@
 <!-- Date created -->
         <div class="ColumnDatetime Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
-            if (selectedSortType.equals("Datetime")) {
+            if (selectedSortType.equals("exo:dateCreated")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.date")%></div>
               <%
@@ -132,7 +132,7 @@
 <!-- Author --> 
         <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
-            if (selectedSortType.equals("Author")) {
+            if (selectedSortType.equals("exo:owner")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.author")%></div>
               <%
@@ -146,7 +146,7 @@
 <!-- Last User --> 
         <div class="ColumnLastUser Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
-            if (selectedSortType.equals("LastUser")) {
+            if (selectedSortType.equals("publication:lastUser")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.lastUser")%></div>
               <%
@@ -160,7 +160,7 @@
 <!-- Status -->
         <div class="ColumnStatus Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
-            if (selectedSortType.equals("Status")) {
+            if (selectedSortType.equals("publication:currentState")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.status")%></div>
               <%
