@@ -15,7 +15,6 @@
  import org.exoplatform.wcm.webui.search.UISearchForm;
  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
  import org.exoplatform.services.wcm.search.SiteSearchService;
- import org.exoplatform.wcm.webui.Utils;
  import org.apache.commons.lang.StringEscapeUtils;
 %>
 
@@ -26,7 +25,7 @@
   def currentPageData = uicomponent.getCurrentPageData();
   def keyword = uicomponent.getKeyword();
   if (keyword != null)
-    keyword = Utils.sanitize(keyword);
+    keyword = StringEscapeUtils.escapeHtml(keyword)
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
@@ -52,7 +51,7 @@
         <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b>
         <% if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) { %>
           <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b>
-          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= StringEscapeUtils.escapeHtml(keyword) %></strong>
+          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
         <% } %>
         (<b><%= searchTime %></b> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
        </div>
@@ -75,7 +74,7 @@
    if (uicomponent.getRealCurrentPageData().isEmpty()) {
     %>
      <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= StringEscapeUtils.escapeHtml(keyword) %> </strong> - 
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= keyword %> </strong> - 
       <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= _ctx.appRes("UIDefaultSearchResult.label." + resultType.toLowerCase()) %>
      </p>
     <%
