@@ -193,8 +193,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
 
-    try {
-      repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    try {      
       repoPath = convertRepoPath(repoPath, false);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -230,8 +229,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @QueryParam("version") String version,
                       @Context UriInfo uriInfo) {
 
-    try {
-      repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    try {      
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -366,8 +364,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @Context UriInfo uriInfo,
                            HierarchicalProperty body) {
 
-    try {
-      repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    try {      
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -391,8 +388,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                             @Context UriInfo uriInfo,
                             HierarchicalProperty body) {
 
-    try {
-      repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    try {      
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -612,8 +608,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
-    try {
-      repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    try {      
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
