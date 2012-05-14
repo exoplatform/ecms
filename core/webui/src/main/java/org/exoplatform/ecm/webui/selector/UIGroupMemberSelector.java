@@ -6,6 +6,7 @@ package org.exoplatform.ecm.webui.selector;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.exoplatform.services.organization.Group;
@@ -94,7 +95,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       listMemberhip.add(((MembershipType)obj).getName());
     }
     if (!listMemberhip.contains("*")) listMemberhip.add("*");
-
+    Collections.sort(listMemberhip);
     tree.setSibbling((List)sibblingsGroup);
     tree.setIcon("GroupAdminIcon");
     tree.setSelectedIcon("PortalIcon");
