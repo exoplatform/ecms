@@ -173,6 +173,13 @@ public abstract class AbstractPageList<E> extends PageList<E> {
         }
       }
     }
+    try {
+      getPage(1);
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
   }
   
 //  @SuppressWarnings("unchecked")
