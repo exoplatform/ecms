@@ -463,8 +463,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/"
                                 + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate
                                 + "\", \"options=" + form.getAdvanced() + "\"];\n");
-          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + "/node/"
-                                + inputName + "\", " + inputFieldName + ");\n");
+          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + inputName
+              + "\", " + inputFieldName + ");\n");
         }
         dialogTemplate.append("          %>\n");
         dialogTemplate.append("        </td>\n");
