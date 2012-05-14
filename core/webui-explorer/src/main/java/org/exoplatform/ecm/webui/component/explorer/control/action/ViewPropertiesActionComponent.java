@@ -66,13 +66,12 @@ public class ViewPropertiesActionComponent extends UIComponent {
             uiForm.init(node);
             uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT)
                   .setOptions(uiForm.renderProperties(node));
-
-            if (uiJCRExplorer.nodeIsLocked(node)) {
-              uiPropertiesManager.setLockForm(true);
-            } else {
-              uiPropertiesManager.setLockForm(!PermissionUtil.canSetProperty(node));
-            }
           }
+        }
+        if (uiJCRExplorer.nodeIsLocked(node)) {
+          uiPropertiesManager.setLockForm(true);
+        } else {
+          uiPropertiesManager.setLockForm(!PermissionUtil.canSetProperty(node));
         }
       } catch (NullPointerException npe) {
         if (LOG.isWarnEnabled()) {
