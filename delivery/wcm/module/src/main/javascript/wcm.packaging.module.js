@@ -71,7 +71,7 @@ function getModule(params) {
   
   module.extension.war = 
   new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
-  addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
+  addDependency(new Project("org.owasp.antisamy", "antisamy", "jar", antisamyVersion)).
 	addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
   addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
   addDependency(new Project("org.w3c", "sac", "jar", sacVersion));
