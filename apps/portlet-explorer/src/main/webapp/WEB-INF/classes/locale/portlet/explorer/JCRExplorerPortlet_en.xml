@@ -3413,7 +3413,7 @@
   </UIPopupMenu>
   <UIPropertyForm>
   	<msg>
-	  <unknown-error>There are some error occurs, you can not edit this property</unknown-error>
+	  <unknown-error>An error occurred while editing this property.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
