@@ -106,7 +106,7 @@ function getModule(params) {
     addDependency(new Project("org.apache.ws.commons.axiom", "axiom-impl", "jar", axiomVersion)).
     addDependency(new Project("jaxen", "jaxen", "jar", jaxenVersion)).
     addDependency(new Project("org.antlr", "antlr-runtime", "jar", antlrVersion)).
-		addDependency(new Project("org.owasp", "antisamy", "jar", antisamyVersion)).
+		addDependency(new Project("org.owasp.antisamy", "antisamy", "jar", antisamyVersion)).
 		addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
 		addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
 		addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).
