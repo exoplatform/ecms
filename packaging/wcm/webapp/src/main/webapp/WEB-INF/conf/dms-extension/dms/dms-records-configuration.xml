@@ -24,7 +24,7 @@
           <property name="groupName" value="RecordsManagement"/>
           <property name="job" value="org.exoplatform.services.cms.records.impl.RecordsJob"/>
           <property name="repeatCount" value="0"/>
-          <property name="period" value="120000"/>     
+          <property name="period" value="${job.ecms.records.RecordsJob.period:120000}"/>     
           <property name="startTime" value="+0"/>
           <property name="endTime" value=""/>               
         </properties-param>

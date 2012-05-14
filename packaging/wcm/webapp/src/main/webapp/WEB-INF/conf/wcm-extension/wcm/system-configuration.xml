@@ -290,7 +290,7 @@
           <property name="jobName" value="job" />
           <property name="groupName" value="group" />
           <property name="job" value="org.exoplatform.services.wcm.newsletter.NewsletterEmailJob" />
-          <property name="expression" value="0 0/60 * * * ?" />
+          <property name="expression" value="${job.ecms.newsletter.NewsletterEmailJob.expression:0 0/60 * * * ?}" />
         </properties-param>
       </init-params>
     </component-plugin>
