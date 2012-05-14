@@ -493,11 +493,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Object drives = drivesCache_.get(userId + ALL_MAIN_CACHED_DRIVE);
     if(drives != null) return (List<DriveData>) drives;
     List<DriveData> generalDrives = new ArrayList<DriveData>();
-    String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
-    String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
+    List<DriveData> groupDrives = this.getGroupDrives(repository, userId, userRoles, null);
+    List<DriveData> personalDrives = this.getPersonalDrives(repository, userId, userRoles);
     for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
-      if((!drive.getHomePath().startsWith(userPath) && !drive.getHomePath().startsWith(groupPath)) 
-          || drive.getHomePath().equals(userPath) || drive.getHomePath().equals(groupPath) ) {
+      if (!groupDrives.contains(drive) && !personalDrives.contains(drive)) {
         generalDrives.add(drive);
       }
     }
