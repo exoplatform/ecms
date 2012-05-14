@@ -37,6 +37,8 @@ h3. Nodetype template {anchor:id=CONTref.Configuration.Templates.Nodetype_templa
   {include:document="pages/configuration/template_nodetype.wiki" /}
 h2. SiteSearchService {anchor:id=CONTref.Configuration.Search_Service}
   {include:document="pages/configuration/Search_Service.wiki" /}
+h2. JODConverterService   {anchor:id=CONTref.Configuration.JodConverterService}
+{include:document="pages/configuration/Config_jodConverterService.wiki" /}
 
 h1. Inside WCM Templates {anchor:id=CONTref.InsideWCM_templates}
 h2. Content types {anchor:id=CONTref.CONTref.InsideWCMTemplates.ContentTypes}

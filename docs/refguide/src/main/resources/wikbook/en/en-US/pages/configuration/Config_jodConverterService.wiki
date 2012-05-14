@@ -1,0 +1,46 @@
+The _JodConverterService_ component is used to convert documents into different office formats.
+The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
+
+{code:xml}
+<component>
+   <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
+   <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
+   <init-params>
+     <value-param>
+       <name>port</name>
+       <value>${wcm.jodconverter.portnumbers}</value>
+     </value-param>
+     <value-param>
+       <name>officeHome</name>
+       <value>${wcm.jodconverter.officehome}</value>
+     </value-param>
+     <value-param>
+       <name>taskQueueTimeout</name>
+       <value>${wcm.jodconverter.taskqueuetimeout}</value>
+     </value-param>
+     <value-param>
+       <name>taskExecutionTimeout</name>
+       <value>${wcm.jodconverter.taskexecutiontimeout}</value>
+     </value-param>
+     <value-param>
+       <name>maxTasksPerProcess</name>
+       <value>${wcm.jodconverter.maxtasksperprocess}</value>
+     </value-param>
+     <value-param>
+       <name>retryTimeout</name>
+       <value>${wcm.jodconverter.retrytimeout}</value>
+     </value-param>
+   </init-params>
+ </component>
+{code}
+
+*Details*:
+
+* *Value-param*:
+||Name||*Type*||*Value*||*Description*||
+|*port*| {{Integer}} | {{{${wcm.jodconverter.portnumbers}}}} |List of ports, separated by commas, those used by each JODConverter processing thread. Number of office instances is equal to number of ports.|
+|*officeHome*| {{String}}| {{{${wcm.jodconverter.officeHome}}}} |Absolute path of office home on the current local device. It means that office needs to be installed in the local device before using it.|
+|*taskQueueTimeout* | {{Long}}|{{{${wcm.jodconverter.taskqueuetimeout}}}} |Maximum living time of tasks in the conversation queue. Task will be removed from this queue if waiting time is longer than _taskQueueTimeout_. |
+|*taskExecutionTimeout*|{{Long}} |{{{${wcm.jodconverter.taskexecutiontimeout}}}} |If a task has been executing within an soffice process for longer than this period, soffice process will be terminated and restarted. |
+|*maxTasksPerProcess* |{{Integer}} |{{{${wcm.jodconverter.maxtasksperprocess}}}} |To ensure that potential memory leaks do not accumulate and affect performance, the JodConverter will restart an soffice process after a given number of tasks have been performed. |
+|*retryTimeout* |{{Long}} |{{{${wcm.jodconverter.retrytimeout}}}} |Interval time to try to restart the office services after an unexpected crash.|
