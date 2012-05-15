@@ -17,6 +17,8 @@
 package org.exoplatform.services.cms.webdav;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.List;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
@@ -45,6 +47,10 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
+import org.exoplatform.services.jcr.webdav.Depth;
+import org.exoplatform.services.jcr.webdav.command.LockCommand;
+import org.exoplatform.services.jcr.webdav.command.UnLockCommand;
+import org.exoplatform.services.jcr.webdav.lock.NullResourceLocksHolder;
 import org.exoplatform.services.jcr.webdav.util.TextUtil;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -91,6 +97,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private final RepositoryService repositoryService;
 
   private ListenerService listenerService;
+  
+  private final NullResourceLocksHolder           nullResourceLocks;
 
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
@@ -100,6 +108,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     this.repositoryService = repositoryService;
     this.nodeFinder = nodeFinder;
     this.listenerService = WCMCoreUtils.getService(ListenerService.class);
+    this.nullResourceLocks = new NullResourceLocksHolder();
   }
 
   private String getRealDestinationHeader(String baseURI, String repoName, String destinationHeader) {
@@ -272,7 +281,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
-      return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      try {
+        Session session = session(repoName, workspaceName(repoPath), lockTokens(lockTokenHeader, ifHeader));
+        return new LockCommand(nullResourceLocks).lock(session, path(repoPath), body, new Depth(depthHeader), "86400");
+      } catch (Exception ex) {
+        return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      }
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
@@ -295,7 +309,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
-      return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      try {
+        List<String> tokens = lockTokens(lockTokenHeader, ifHeader);
+        Session session = session(repoName, workspaceName(repoPath), lockTokens(lockTokenHeader, ifHeader));
+        return new UnLockCommand(nullResourceLocks).unLock(session, path(repoPath), tokens);
+      } catch (Exception ex) {
+        return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      }      
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
@@ -693,6 +713,40 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       Item item = nodeFinder.getItem(workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), giveTarget);
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
+  }
+  
+  /**
+   * Normalizes path.
+   * 
+   * @param repoPath repository path
+   * @return normalized path.
+   */
+  protected String normalizePath(String repoPath)
+  {
+     if (repoPath.length() > 0 && repoPath.endsWith("/"))
+     {
+        return repoPath.substring(0, repoPath.length() - 1);
+     }
+
+     String[] pathElements = repoPath.split("/");
+     StringBuffer escapedPath = new StringBuffer();
+     for (String element : pathElements)
+     {
+        try
+        {
+           if (element.contains("'"))
+           {
+              element = element.replaceAll("'", URLEncoder.encode("'", "UTF-8"));
+           }
+           escapedPath.append(element + "/");
+        }
+        catch (Exception e)
+        {
+           log.warn(e.getMessage());
+        }
+     }
+
+     return escapedPath.toString().substring(0, escapedPath.length() - 1);
   }
 
 }
