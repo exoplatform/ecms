@@ -48,7 +48,7 @@ public class UIECMAdminWorkingArea extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminWorkingArea.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminWorkingArea.class.getName());
   private String renderedCompId_ ;
 
   public String getRenderedCompId() { return renderedCompId_ ; }

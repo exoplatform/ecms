@@ -45,15 +45,15 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Mar 16, 2012  
+ * Mar 16, 2012
  */
 public class PublicationUtils {
-  private static final Log LOG = ExoLogger.getLogger("org.exoplatform.services.wcm.extensions.utils.PublicationUtil");
-  
+  private static final Log LOG = ExoLogger.getLogger(PublicationUtils.class.getName());
+
   public static void deployPublicationToPortal(InitParams initParams,
                              RepositoryService repositoryService,
                              WCMPublicationService wcmPublicationService,
-                             SessionProvider sessionProvider, 
+                             SessionProvider sessionProvider,
                              String portalName) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
     PublicationDeploymentDescriptor deploymentDescriptor = null;

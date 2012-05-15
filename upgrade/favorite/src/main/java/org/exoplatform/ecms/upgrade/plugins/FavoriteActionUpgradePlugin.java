@@ -60,7 +60,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 4, 2011
  */
 public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
-  private static final Log LOG = ExoLogger.getLogger(FavoriteActionUpgradePlugin.class);
+  private static final Log LOG = ExoLogger.getLogger(FavoriteActionUpgradePlugin.class.getName());
 
   private static final String FAVORITE_ALIAS = "userPrivateFavorites";
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";

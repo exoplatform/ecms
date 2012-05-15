@@ -49,7 +49,7 @@ import org.quartz.JobExecutionException;
 public class ScriptActionActivationJob implements Job {
 
   final private static String COUNTER_PROP = "exo:counter" ;
-  private static final Log LOG  = ExoLogger.getLogger(ScriptActionActivationJob.class);
+  private static final Log LOG  = ExoLogger.getLogger(ScriptActionActivationJob.class.getName());
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;

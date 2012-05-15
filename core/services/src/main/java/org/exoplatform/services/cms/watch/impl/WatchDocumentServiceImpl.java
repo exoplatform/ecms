@@ -58,7 +58,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
   private RepositoryService repoService_ ;
   private MessageConfig messageConfig_ ;
   private TemplateService templateService_ ;
-  private static final Log LOG  = ExoLogger.getLogger(WatchDocumentServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(WatchDocumentServiceImpl.class.getName());
 
   /**
    * Constructor Method

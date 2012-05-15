@@ -47,7 +47,7 @@ public class TemplateMigrationService implements Startable {
 
   RepositoryService repositoryService = null;
   ApplicationTemplateManagerService appTemplateService;
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(TemplateMigrationService.class.getName());
 
   public TemplateMigrationService(RepositoryService repositoryService,
                                   ApplicationTemplateManagerService appTemplateService) {
@@ -73,22 +73,22 @@ public class TemplateMigrationService implements Startable {
            */
           if (!rootNode.hasNode("exo:ecm/views/templates/content-list-viewer")) {
             rootNode.addNode("exo:ecm/views/templates/content-list-viewer", "nt:unstructured");
-            if (log.isInfoEnabled()) log.info("CREATE :: content-list-viewer");
+            if (LOG.isInfoEnabled()) LOG.info("CREATE :: content-list-viewer");
             rootNode.save();
           }
           if (!rootNode.hasNode("exo:ecm/views/templates/content-list-viewer/paginators")) {
             rootNode.addNode("exo:ecm/views/templates/content-list-viewer/paginators", "nt:unstructured");
-            if (log.isInfoEnabled()) log.info("CREATE :: paginators");
+            if (LOG.isInfoEnabled()) LOG.info("CREATE :: paginators");
             rootNode.save();
           }
           if (!rootNode.hasNode("exo:ecm/views/templates/content-list-viewer/list")) {
             rootNode.addNode("exo:ecm/views/templates/content-list-viewer/list", "nt:unstructured");
-            if (log.isInfoEnabled()) log.info("CREATE :: list");
+            if (LOG.isInfoEnabled()) LOG.info("CREATE :: list");
             rootNode.save();
           }
           if (!rootNode.hasNode("exo:ecm/views/templates/content-list-viewer/navigation")) {
             rootNode.addNode("exo:ecm/views/templates/content-list-viewer/navigation", "nt:unstructured");
-            if (log.isInfoEnabled()) log.info("CREATE :: navigation");
+            if (LOG.isInfoEnabled()) LOG.info("CREATE :: navigation");
             rootNode.save();
           }
 
@@ -110,8 +110,8 @@ public class TemplateMigrationService implements Startable {
                                + paginatorNode.getName(),
                            "/exo:ecm/views/templates/content-list-viewer/paginators/"
                                + paginatorNode.getName());
-              if (log.isInfoEnabled())
-                log.info("CLONE :: " + paginatorNode.getName());
+              if (LOG.isInfoEnabled())
+                LOG.info("CLONE :: " + paginatorNode.getName());
             }
           }
           session.save();
@@ -142,8 +142,8 @@ public class TemplateMigrationService implements Startable {
                                + viewNode.getName(),
                            "/exo:ecm/views/templates/content-list-viewer/" + targetFolder + "/"
                                + viewNode.getName());
-              if (log.isInfoEnabled())
-                log.info("CLONE :: " + targetFolder + " :: " + viewNode.getName());
+              if (LOG.isInfoEnabled())
+                LOG.info("CLONE :: " + targetFolder + " :: " + viewNode.getName());
             }
           }
           session.save();
@@ -167,8 +167,8 @@ public class TemplateMigrationService implements Startable {
             String value = node.getProperty("mop:value").getValues()[0].getString();
             String newValue = MigrationUtil.checkAndUpdateViewerTemplate(value);
             if (!value.equals(newValue)) {
-              if (log.isInfoEnabled())
-                log.info("CONVERT :: mop:portletpreference :: " + value + " :: " + newValue
+              if (LOG.isInfoEnabled())
+                LOG.info("CONVERT :: mop:portletpreference :: " + value + " :: " + newValue
                     + " :: " + node.getPath());
               node.setProperty("mop:value", new String[] { newValue });
               node.save();
@@ -176,8 +176,8 @@ public class TemplateMigrationService implements Startable {
 
           }
 
-          if (log.isWarnEnabled()) {
-            log.warn("IMPORTANT NOTE ABOUT WCM 2.1.2 :\n"
+          if (LOG.isWarnEnabled()) {
+            LOG.warn("IMPORTANT NOTE ABOUT WCM 2.1.2 :\n"
                 + "All CLV templates have been copied to a new storage place. "
                 + "We keep your old templates in the old structure but they won't be used anymore.\n"
                 + "Storage place goes from dms-system:/exo:ecm/views/templates/Content List Viewer to "
@@ -192,8 +192,8 @@ public class TemplateMigrationService implements Startable {
 
 
       } catch (Exception e) {
-        if (log.isErrorEnabled())
-          log.error("An unexpected problem occurs when migrating templates to new structure", e);
+        if (LOG.isErrorEnabled())
+          LOG.error("An unexpected problem occurs when migrating templates to new structure", e);
       } finally {
         sessionProvider.close();
       }

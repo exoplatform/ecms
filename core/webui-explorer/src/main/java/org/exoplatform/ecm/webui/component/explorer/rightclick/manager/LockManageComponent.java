@@ -83,7 +83,7 @@ public class LockManageComponent extends UIAbstractManagerComponent {
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter() });
 
-  private static final Log LOG  = ExoLogger.getLogger(LockManageComponent.class);
+  private static final Log LOG  = ExoLogger.getLogger(LockManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

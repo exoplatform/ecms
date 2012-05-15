@@ -68,7 +68,7 @@ public class CreateLinkManageComponent extends UIAbstractManagerComponent {
           = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                                   new IsNotTrashHomeNodeFilter()});
 
-  private static final Log LOG = ExoLogger.getLogger(CreateLinkManageComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(CreateLinkManageComponent.class.getName());
   private static final String EXO_TRASH_FOLDER = "exo:trashFolder";
 
   @UIExtensionFilters

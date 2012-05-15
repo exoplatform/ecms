@@ -38,27 +38,27 @@ import org.exoplatform.services.log.Log;
  *          exo@exoplatform.com
  * Feb 24, 2012
  *
- * This class will be used to upgrade pre-defined views of Site Explorer. Views with desire of manual upgration 
+ * This class will be used to upgrade pre-defined views of Site Explorer. Views with desire of manual upgration
  * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
+ * Syntax :<br/>
  * unchanged-site-explorer-views=<view name list>
  * For examples :<br/>
  * unchanged-site-explorer-views=anonymous-view
- *    
+ *
  */
 public class UserViewUpgradePlugin extends UpgradeProductPlugin {
-  
-  private Log log = ExoLogger.getLogger(this.getClass());
+
+  private static final Log LOG = ExoLogger.getLogger(UserViewUpgradePlugin.class.getName());
   private ManageViewService manageViewService_;
 
   public UserViewUpgradePlugin(ManageViewService manageViewService, InitParams initParams) {
     super(initParams);
     this.manageViewService_  = manageViewService;
   }
-  
+
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     String unchangedViews = PrivilegedSystemHelper.getProperty("unchanged-site-explorer-views");
     SessionProvider sessionProvider = null;
@@ -88,16 +88,16 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
           removedNode.remove();
           parentNode.save();
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
-            log.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
+          if (LOG.isInfoEnabled()) {
+            LOG.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
           }
         }
       }
       //re-initialize new views
       manageViewService_.init();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating Site Explorer views:", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating Site Explorer views:", e);
       }
     } finally {
       if (sessionProvider != null) {
@@ -105,7 +105,7 @@ public class UserViewUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
-  
+
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
     return true;

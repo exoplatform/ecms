@@ -94,7 +94,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class DeleteManageComponent extends UIAbstractManagerComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(DeleteManageComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(DeleteManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),

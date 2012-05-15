@@ -47,7 +47,7 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
   protected String srcPath_;
   protected String executable_;
   protected Map actionVariables_;
-  private static final Log LOG  = ExoLogger.getLogger(BaseActionLauncherListener.class);
+  private static final Log LOG  = ExoLogger.getLogger(BaseActionLauncherListener.class.getName());
 
   public BaseActionLauncherListener(String actionName, String executable,
       String repository, String srcWorkspace, String srcPath, Map actionVariables)

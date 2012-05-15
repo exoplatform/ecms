@@ -79,7 +79,7 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
                                                  new HasRemovePermissionFilter(),
                                                  new IsNotTrashHomeNodeFilter() });
 
-  private final static Log       LOG  = ExoLogger.getLogger(RemoveFavouriteManageComponent.class);
+  private final static Log       LOG  = ExoLogger.getLogger(RemoveFavouriteManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

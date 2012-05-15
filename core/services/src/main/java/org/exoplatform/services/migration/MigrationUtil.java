@@ -41,7 +41,7 @@ public class MigrationUtil {
   static String OLD_TEMPLATE_PORLET_NAME   = "Content List Viewer";
   static String NEW_TEMPLATE_PORTLET_NAME  = "content-list-viewer";
 
-  private static final Log LOG = ExoLogger.getLogger(MigrationUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(MigrationUtil.class.getName());
 
   static public String checkAndUpdateViewerTemplate(String strTemplatePath) {
 

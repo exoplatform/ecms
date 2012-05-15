@@ -51,7 +51,7 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private InitParams params_ ;
   private DMSConfiguration dmsConfiguration_;
-  private static final Log LOG  = ExoLogger.getLogger(ManageDrivePlugin.class);
+  private static final Log LOG  = ExoLogger.getLogger(ManageDrivePlugin.class.getName());
 
   public ManageDrivePlugin(RepositoryService repositoryService, InitParams params,
       NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration) throws Exception {

@@ -79,7 +79,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("explorer.symlink.UISymLinkForm");
+  private static final Log LOG  = ExoLogger.getLogger(UISymLinkForm.class.getName());
 
   final static public String FIELD_NAME = "symLinkName";
   final static public String FIELD_PATH = "pathNode";

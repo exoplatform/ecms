@@ -111,7 +111,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(DriverConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(DriverConnector.class.getName());
 
   /** The limit. */
   private int limit;

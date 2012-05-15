@@ -77,7 +77,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter() });
 
-  private static final Log LOG  = ExoLogger.getLogger(UnlockManageComponent.class);
+  private static final Log LOG  = ExoLogger.getLogger(UnlockManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

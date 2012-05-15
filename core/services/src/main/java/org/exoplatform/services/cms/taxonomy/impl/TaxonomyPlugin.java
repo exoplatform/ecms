@@ -86,7 +86,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
   final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES";
 
   private DMSConfiguration dmsConfiguration_;
-  private static final Log LOG  = ExoLogger.getLogger(TaxonomyPlugin.class);
+  private static final Log LOG  = ExoLogger.getLogger(TaxonomyPlugin.class.getName());
 
   public TaxonomyPlugin(InitParams params, RepositoryService repositoryService,
       NodeHierarchyCreator nodeHierarchyCreator, TaxonomyService taxonomyService,

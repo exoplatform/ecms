@@ -89,7 +89,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
    }
 
    /** Logger. */
-   private static final Log LOG = ExoLogger.getLogger(StorageProviderImpl.class);
+   private static final Log LOG = ExoLogger.getLogger(StorageProviderImpl.class.getName());
 
    /** JCR repository service. */
    private final RepositoryService repositoryService;

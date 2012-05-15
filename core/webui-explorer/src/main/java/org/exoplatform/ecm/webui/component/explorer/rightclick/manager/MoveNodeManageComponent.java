@@ -80,7 +80,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     return FILTERS;
   }
 
-  private static final Log LOG = ExoLogger.getLogger(MoveNodeManageComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(MoveNodeManageComponent.class.getName());
 
   private static void processMultipleSelection(String nodePath, String destPath,
       Event<? extends UIComponent> event) throws Exception {

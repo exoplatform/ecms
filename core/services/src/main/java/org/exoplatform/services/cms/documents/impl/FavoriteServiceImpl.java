@@ -60,7 +60,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   private OrganizationService    organizationService;
   
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class.getName());
 
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService, OrganizationService organizationService) {

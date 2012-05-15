@@ -55,7 +55,7 @@ import org.picocontainer.Startable;
  */
 public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplateManagerService, Startable {
 
-  private static Log log = ExoLogger.getLogger(ApplicationTemplateManagerService.class);
+  private static final Log LOG = ExoLogger.getLogger(ApplicationTemplateManagerService.class.getName());
   private RepositoryService repositoryService;
 
   private List<PortletTemplatePlugin> portletTemplatePlugins = new ArrayList<PortletTemplatePlugin>();
@@ -69,7 +69,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   private NodeHierarchyCreator hierarchyCreator;
 
   private TemplateService templateService;
-  
+
   private Map<String,Set<String>> configuredTemplates_;
 
   /**
@@ -108,14 +108,14 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       SessionProvider provider) throws Exception {
     return null;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public List<Node> getTemplatesByApplication(String portletName,
       SessionProvider provider) throws Exception {
     return null;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -159,7 +159,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
                                          SessionProvider provider) throws Exception {
     return getApplicationTemplateHome(portletName, provider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -174,7 +174,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   public List<String> getAllManagedPortletName(String repository) throws Exception {
     return managedApplicationNames.get(repository);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -183,7 +183,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       String templateName, SessionProvider sessionProvider) throws Exception {
     return getTemplateByName(portletName, category, templateName, sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -191,7 +191,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       String templateName, SessionProvider sessionProvider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
     return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -201,7 +201,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       SessionProvider sessionProvider) throws Exception {
     return getTemplatesByCategory(portletName, category, sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -215,7 +215,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       templateNodes.add(iterator.nextNode());
     }
     return templateNodes;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -226,7 +226,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
                                 SessionProvider sessionProvider) throws Exception {
     return getTemplateByPath(templatePath, sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -243,7 +243,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       String templateName, SessionProvider sessionProvider) throws Exception {
     removeTemplate(portletName, category, templateName, sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -253,7 +253,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();
-  }  
+  }
 
   /**
    * Gets the based application templates home.
@@ -303,8 +303,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       map.put(portletName,list);
     }
     for(String portletName: managedApplicationsPerRepo) {
-      Node templateNode = storedTemplateHomeNode.hasNode(portletName) ? 
-                          storedTemplateHomeNode.getNode(portletName) : 
+      Node templateNode = storedTemplateHomeNode.hasNode(portletName) ?
+                          storedTemplateHomeNode.getNode(portletName) :
                           storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
@@ -324,8 +324,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     try {
       repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled()) {
-        log.error(e.getMessage(), e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(e.getMessage(), e);
       }
     }
 
@@ -341,8 +341,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
         Node storedTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
         importPredefinedTemplateToDB(storedTemplateHome);
       } catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error("Exception when import predefine application template into repository: " + repository, e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Exception when import predefine application template into repository: " + repository, e);
         }
       }
     }

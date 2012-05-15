@@ -48,7 +48,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UISingleUploadContainer extends UIContainer {
   
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UISingleUploadContainer.class);
+  private static final Log LOG = ExoLogger.getLogger(UISingleUploadContainer.class.getName());
 
   private NodeLocation uploadedNode_ ;
 

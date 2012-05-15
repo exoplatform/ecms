@@ -67,7 +67,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
-  protected static final Log log = ExoLogger.getLogger("wcm:CreateTaxonomyPlugin");
+  private static final Log LOG = ExoLogger.getLogger(CreateTaxonomyPlugin.class.getName());
 
   public static final String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes";
 
@@ -179,8 +179,8 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
     if (treeName.contains("{treeName}")) {
       treeName = StringUtils.replace(treeName, "{treeName}", portalName);
-    } 
-    
+    }
+
     path = StringUtils.replace(path, "{portalName}", portalName);
 
     Session session = null;
@@ -377,7 +377,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     try {
       taxonomyService.addTaxonomyTree(taxonomyStorageNodeSystem);
     } catch (TaxonomyAlreadyExistsException e) {
-      if (log.isErrorEnabled()) log.error("Cannot add taxonomy tree", e);
+      if (LOG.isErrorEnabled()) LOG.error("Cannot add taxonomy tree", e);
     }
     session.save();
     session.logout();

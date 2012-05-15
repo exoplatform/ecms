@@ -46,7 +46,7 @@ import javax.jcr.Session;
 public class StorageClosableImpl implements Storage
 {
 
-   private static final Log LOG = ExoLogger.getExoLogger(StorageClosableImpl.class);
+   private static final Log LOG = ExoLogger.getExoLogger(StorageClosableImpl.class.getName());
 
    private final PermissionService permissionService;
 
@@ -118,7 +118,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public DocumentData createDocument(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, ContentStream content, List<AccessControlEntry> acl,
       Collection<PolicyData> policies, VersioningState versioningState) throws ConstraintException,
@@ -144,7 +144,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public FolderData createFolder(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws ConstraintException, NameConstraintViolationException, StorageException
@@ -169,7 +169,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public PolicyData createPolicy(FolderData parent, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws ConstraintException, NameConstraintViolationException, StorageException
@@ -194,7 +194,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public RelationshipData createRelationship(ObjectData source, ObjectData target, TypeDefinition typeDefinition,
       Map<String, Property<?>> properties, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws NameConstraintViolationException, StorageException
@@ -219,7 +219,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public void deleteObject(ObjectData object, boolean deleteAllVersions) throws VersioningException,
       UpdateConflictException, StorageException
    {
@@ -242,7 +242,7 @@ public class StorageClosableImpl implements Storage
       }
    }
 
-   
+
    public Collection<String> deleteTree(FolderData folder, boolean deleteAllVersions, UnfileObject unfileObject,
       boolean continueOnFailure) throws UpdateConflictException
    {
@@ -266,7 +266,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public Collection<DocumentData> getAllVersions(String versionSeriesId) throws ObjectNotFoundException
    {
       Session session = null;
@@ -289,7 +289,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ItemsIterator<ChangeEvent> getChangeLog(String changeLogToken) throws ConstraintException
    {
       Session session = null;
@@ -312,7 +312,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ItemsIterator<DocumentData> getCheckedOutDocuments(FolderData folder, String orderBy)
    {
       Session session = null;
@@ -335,7 +335,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public String getId()
    {
       Session session = null;
@@ -358,7 +358,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ObjectData getObjectById(String objectId) throws ObjectNotFoundException
    {
       Session session = null;
@@ -381,7 +381,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ObjectData getObjectByPath(String path) throws ObjectNotFoundException
    {
       Session session = null;
@@ -404,7 +404,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ItemsIterator<Rendition> getRenditions(ObjectData object)
    {
       Session session = null;
@@ -427,7 +427,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public RepositoryInfo getRepositoryInfo()
    {
       Session session = null;
@@ -450,7 +450,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public Iterator<String> getUnfiledObjectsId() throws StorageException
    {
       Session session = null;
@@ -473,7 +473,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ObjectData moveObject(ObjectData object, FolderData target, FolderData source)
       throws UpdateConflictException, VersioningException, NameConstraintViolationException, StorageException
    {
@@ -497,7 +497,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ItemsIterator<Result> query(Query query)
    {
       Session session = null;
@@ -520,7 +520,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public void unfileObject(ObjectData object)
    {
       Session session = null;
@@ -542,7 +542,7 @@ public class StorageClosableImpl implements Storage
       }
    }
 
-   
+
    public String addType(TypeDefinition type) throws ConstraintException, StorageException
    {
       Session session = null;
@@ -565,7 +565,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public ItemsIterator<TypeDefinition> getTypeChildren(String typeId, boolean includePropertyDefinitions)
       throws TypeNotFoundException
    {
@@ -589,7 +589,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public TypeDefinition getTypeDefinition(String typeId, boolean includePropertyDefinition)
       throws TypeNotFoundException
    {
@@ -613,7 +613,7 @@ public class StorageClosableImpl implements Storage
       return null;
    }
 
-   
+
    public void removeType(String typeId) throws ConstraintException, TypeNotFoundException, StorageException
    {
       Session session = null;
@@ -656,21 +656,21 @@ public class StorageClosableImpl implements Storage
       }
       return false;
    }
-   
+
    private static void processException(Exception e) {
-     if(e instanceof LoginException) 
+     if(e instanceof LoginException)
      {
        if (LOG.isErrorEnabled()) {
          LOG.error(e.getLocalizedMessage(), e);
        }
      }
-     else if(e instanceof NoSuchWorkspaceException) 
+     else if(e instanceof NoSuchWorkspaceException)
      {
        if (LOG.isErrorEnabled()) {
          LOG.error(e.getLocalizedMessage(), e);
        }
      }
-     else if(e instanceof RepositoryException) 
+     else if(e instanceof RepositoryException)
      {
        if (LOG.isErrorEnabled()) {
          LOG.error(e.getLocalizedMessage(), e);

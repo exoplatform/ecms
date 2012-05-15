@@ -43,7 +43,7 @@ public class UIECMAdminControlPanel extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminControlPanel.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminControlPanel.class.getName());
 
   public static final String EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIECMAdminControlPanel";
 

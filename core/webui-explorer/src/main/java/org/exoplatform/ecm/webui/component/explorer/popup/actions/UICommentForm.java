@@ -72,7 +72,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
   final public static String FIELD_WEBSITE = "website" ;
   final public static String FIELD_COMMENT = "comment" ;
 
-  private static final Log LOG = ExoLogger.getLogger(UICommentForm.class);
+  private static final Log LOG = ExoLogger.getLogger(UICommentForm.class.getName());
 
   private boolean edit;
 

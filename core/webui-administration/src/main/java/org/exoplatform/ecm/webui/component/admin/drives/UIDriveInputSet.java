@@ -70,7 +70,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   final static public String FIELD_ALLOW_CREATE_FOLDERS = "allowCreateFolders";
   final static public String SHOW_HIDDEN_NODE = "showHiddenNode";
 
-  private final static Log  LOG  = ExoLogger.getLogger(UIDriveInputSet.class);
+  private final static Log  LOG  = ExoLogger.getLogger(UIDriveInputSet.class.getName());
 
   public String bothLabel_;
   public String folderOnlyLabel_;

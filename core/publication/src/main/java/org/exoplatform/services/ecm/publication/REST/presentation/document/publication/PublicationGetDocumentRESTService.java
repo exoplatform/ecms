@@ -75,7 +75,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
-  private static final Log LOG  = ExoLogger.getLogger(PublicationGetDocumentRESTService.class);
+  private static final Log LOG  = ExoLogger.getLogger(PublicationGetDocumentRESTService.class.getName());
 
   public PublicationGetDocumentRESTService(RepositoryService repositoryService,
       PublicationService publicationService, ManageDriveService manageDriveService) {

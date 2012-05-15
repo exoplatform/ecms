@@ -91,7 +91,7 @@ public class UITreeExplorer extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("dms.UIJCRExplorer");
+  private static final Log LOG  = ExoLogger.getLogger(UITreeExplorer.class.getName());
   private TreeNode treeRoot_ ;
   private String expandPath = null;
   private boolean isExpand = false;
@@ -147,7 +147,7 @@ public class UITreeExplorer extends UIContainer {
       try {
         OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
         Group group = orgService.getGroupHandler().findGroupById(id.replace(".", "/"));
-        if(group != null && group.getLabel().length() > 0) return group.getLabel();  
+        if(group != null && group.getLabel().length() > 0) return group.getLabel();
         return id.replace(".", " / ");
       } catch(Exception e) {
         return id.replace(".", " / ");

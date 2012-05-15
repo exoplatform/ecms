@@ -50,7 +50,7 @@ import org.exoplatform.services.log.Log;
  */
 public class TimelineServiceImpl implements TimelineService {
 
-  private static final Log LOG = ExoLogger.getLogger("cms.timeline.TimelineServiceImpl");
+  private static final Log LOG = ExoLogger.getLogger(TimelineServiceImpl.class.getName());
   private static final String EXO_DATETIME = "exo:datetime";
   private static final String EXO_MODIFIED_DATE = "exo:dateModified";
   private static final String EXO_OWNER = "exo:owner";
@@ -91,7 +91,7 @@ public class TimelineServiceImpl implements TimelineService {
                                                   boolean byUser) throws Exception {
     return getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, byUser, true);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -280,7 +280,7 @@ public class TimelineServiceImpl implements TimelineService {
                                             boolean byUser) throws Exception {
     return getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, byUser, true);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -345,7 +345,7 @@ public class TimelineServiceImpl implements TimelineService {
                                         boolean byUser) throws Exception {
     return getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, byUser, true);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -472,7 +472,7 @@ public class TimelineServiceImpl implements TimelineService {
    * Get the number of items per category displayed in Timeline view. this is
    * get from initialize parameter of Timeline Service class If less than or
    * equal zero then use default value 5 items per category.
-   * 
+   *
    * @return
    */
   public int getItemPerTimeline() {

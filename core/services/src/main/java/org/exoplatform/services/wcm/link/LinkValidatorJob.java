@@ -31,7 +31,7 @@ import org.exoplatform.services.scheduler.JobContext;
  */
 public class LinkValidatorJob extends BaseJob {
 
-  private Log log = ExoLogger.getLogger("wcm:LinkValidatorJob");
+  private static final Log LOG = ExoLogger.getLogger(LinkValidatorJob.class.getName());
 
   public void execute(JobContext arg0) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -41,8 +41,8 @@ public class LinkValidatorJob extends BaseJob {
     try {
       linkManagerService.updateLinks();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when execute link validator job by scheduler", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when execute link validator job by scheduler", e);
       }
     }
   }

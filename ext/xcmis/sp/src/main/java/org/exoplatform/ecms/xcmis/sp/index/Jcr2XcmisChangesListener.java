@@ -73,7 +73,7 @@ import org.xcmis.spi.Storage;
  */
 public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
 
-  private static final Log             LOG = ExoLogger.getExoLogger(Jcr2XcmisChangesListener.class);
+  private static final Log             LOG = ExoLogger.getExoLogger(Jcr2XcmisChangesListener.class.getName());
 
   private final String                 currentRepositoryName;
 
@@ -280,7 +280,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
   /**
    * Process the uuid from addedNodes to addedEntries. Can be updated
    * removedNodes.
-   * 
+   *
    * @param uuid to be add.
    * @param addedEntries will be added in index.
    * @param removedNodes
@@ -404,7 +404,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
 
   /**
    * Called on CmisRegistry start. It will initialize search service.
-   * 
+   *
    * @param cmisRegistry
    * @param readOnlyIndexConfiguration
    * @throws RepositoryException

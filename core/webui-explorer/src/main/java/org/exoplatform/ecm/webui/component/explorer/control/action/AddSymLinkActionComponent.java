@@ -77,7 +77,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
                                           new IsNotInTrashFilter(),
                                           new IsNotEditingDocumentFilter()});
 
-  private static final Log LOG = ExoLogger.getLogger(AddSymLinkActionComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(AddSymLinkActionComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

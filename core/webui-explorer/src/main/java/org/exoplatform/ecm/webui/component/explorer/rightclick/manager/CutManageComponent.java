@@ -63,7 +63,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class CutManageComponent extends UIAbstractManagerComponent {
 
-  private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class);
+  private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),

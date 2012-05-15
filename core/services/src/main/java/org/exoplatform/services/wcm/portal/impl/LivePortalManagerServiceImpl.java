@@ -55,7 +55,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   private final String                      PORTAL_FOLDER   = "exo:portalFolder";
 
-  private static Log                        log             = ExoLogger.getLogger(LivePortalManagerServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(LivePortalManagerServiceImpl.class.getName());
 
   private ConcurrentHashMap<String, String> livePortalPaths = new ConcurrentHashMap<String, String>();
 
@@ -246,8 +246,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   }
 
   public void start() {
-    if (log.isInfoEnabled()) {
-      log.info("Start LivePortalManagementService....");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start LivePortalManagementService....");
     }
     SessionProvider sessionProvider = null;
     Session session = null;
@@ -264,8 +264,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
         livePortalPaths.putIfAbsent(portalNode.getName(),portalNode.getPath());
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when starting LivePortalManagerService: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when starting LivePortalManagerService: ", e);
       }
     } finally {
       sessionProvider.close();

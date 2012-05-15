@@ -50,7 +50,7 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
  */
 public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
-  private static final Log   LOG = ExoLogger.getLogger(PostUpdateStateEventListener.class);
+  private static final Log   LOG = ExoLogger.getLogger(PostUpdateStateEventListener.class.getName());
 
   /** The pservice. */
   private PublicationManager publicationManager;

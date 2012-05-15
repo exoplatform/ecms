@@ -42,7 +42,7 @@ public class ContentInitializerService implements Startable{
   private List<DeploymentPlugin> listDeploymentPlugin = new ArrayList<DeploymentPlugin>();
   private RepositoryService repositoryService;
   private NodeHierarchyCreator nodeHierarchyCreator;
-  private Log LOG = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(ContentInitializerService.class.getName());
 
   private static String CONTENT_INIT = "ContentInitializerService";
   private static String EXO_SERVICES = "eXoServices";

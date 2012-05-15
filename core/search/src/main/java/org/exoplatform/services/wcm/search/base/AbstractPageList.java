@@ -39,7 +39,7 @@ public abstract class AbstractPageList<E> extends PageList<E> {
   
   public static final int RESULT_SIZE_SEPARATOR = 100;
   
-  private static final Log LOG  = ExoLogger.getLogger(AbstractPageList.class);
+  private static final Log LOG  = ExoLogger.getLogger(AbstractPageList.class.getName());
 
   /** The spell suggestion. */
   protected String spellSuggestion;

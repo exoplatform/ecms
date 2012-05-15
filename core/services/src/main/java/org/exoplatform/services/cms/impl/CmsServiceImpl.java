@@ -69,7 +69,7 @@ public class CmsServiceImpl implements CmsService {
   private RepositoryService jcrService;
   private IDGeneratorService idGeneratorService;
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
-  private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class.getName());
   private ListenerService listenerService;
 
   /**

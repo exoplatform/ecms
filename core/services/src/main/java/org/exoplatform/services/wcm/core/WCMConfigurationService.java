@@ -47,7 +47,7 @@ public class WCMConfigurationService {
   public static final String PRINT_VIEWER_PAGE              = "printViewerPage";
 
   public static final String EDITOR_PAGE_URI                = "editorPageURI";
-  
+
   public static final String SITE_EXPLORER_URI              = "siteExplorerURI";
 
   public static final String CREATE_WIKI_PAGE_URI           = "createWikiPageURI";
@@ -59,14 +59,15 @@ public class WCMConfigurationService {
   public static final String FORM_VIEW_TEMPLATE_PATH        = "formViewTemplatePath";
 
   public static final String PAGINATOR_TEMPLAET_PATH        = "paginatorTemplatePath";
-  
-  private static Log log = ExoLogger.getLogger("wcm:WCMConfiguarationService");
+
+  private static final Log LOG = ExoLogger.getLogger(WCMConfigurationService.class.getName());
+
   private NodeLocation livePortalsLocation = null;
   private ExoProperties runtimeContextParams;
   private DriveData siteDriveConfig;
 
   private String sharedPortal = null;
-  
+
   @SuppressWarnings("unchecked")
   public WCMConfigurationService(InitParams initParams, RepositoryService repoService) throws Exception {
     Iterator<PropertiesParam> iterator = initParams.getPropertiesParamIterator();
@@ -75,8 +76,8 @@ public class WCMConfigurationService {
       if ("share.portal.config".endsWith(param.getName())) {
         String portalName = param.getProperty("portalName");
         sharedPortal = portalName;
-        if (log.isInfoEnabled()) {
-          log.info("Name of shared portal to share resources for all portals in repository is: "+ portalName);
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Name of shared portal to share resources for all portals in repository is: "+ portalName);
         }
       } else if("RuntimeContextParams".equalsIgnoreCase(param.getName())) {
         runtimeContextParams = param.getProperties();
@@ -88,8 +89,8 @@ public class WCMConfigurationService {
       if ("live.portals.location.config".equals(objectParameter.getName())) {
         NodeLocation objectParam = (NodeLocation)objectParameter.getObject();
         livePortalsLocation  = objectParam;
-        if (log.isInfoEnabled()) {
-          log.info("Location that resources for all live portal is stored in repository"
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Location that resources for all live portal is stored in repository"
             + " is in workspace: "+ objectParam.getWorkspace() + " and with path: "+objectParam.getPath());
         }
       }
@@ -100,11 +101,11 @@ public class WCMConfigurationService {
   }
 
   public DriveData getSiteDriveConfig() {return this.siteDriveConfig; }
-  
+
   public NodeLocation getLivePortalsLocation() {
     return livePortalsLocation;
   }
-  
+
   public String getRuntimeContextParam(String paramName) {
     if(runtimeContextParams != null)
       return runtimeContextParams.get(paramName);
@@ -124,5 +125,5 @@ public class WCMConfigurationService {
   public Collection<NodeLocation> getAllLivePortalsLocation() {
     return Arrays.asList(new NodeLocation[]{livePortalsLocation});
   }
-  
+
 }

@@ -28,8 +28,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.test.BasicTestCase;
 
@@ -41,8 +39,6 @@ import org.exoplatform.test.BasicTestCase;
  * 4:08:30 PM
  */
 public abstract class BaseDMSTestCase extends BasicTestCase {
-
-  protected static Log          log = ExoLogger.getLogger("dms.services.test");
 
   protected CredentialsImpl     credentials;
 
@@ -67,7 +63,7 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
   public void setUp() throws Exception {
     applySystemSession();
   }
-  
+
   /**
    * used to change to setup environment to use User Session and using collaboration workspace
    * @throws Exception
@@ -81,18 +77,18 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
     repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
     repositoryService.setCurrentRepositoryName(REPO_NAME);
     repository = repositoryService.getCurrentRepository();
-    
+
     String loginConf = BaseDMSTestCase.class.getResource("/conf/standalone/login.conf").toString();
     System.setProperty("java.security.auth.login.config", loginConf);
     credentials = new CredentialsImpl(username, password.toCharArray());
-    
+
     closeOldSession();
-    session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);    
-    
+    session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);
+
     sessionProviderService_ = WCMCoreUtils.getService(DumpThreadLocalSessionProviderService.class);
     ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(session);
   }
-  
+
   /**
    * used to change to setup environment to use User Session and using dms-system workspace
    * @throws Exception
@@ -131,11 +127,11 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
     sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     repositoryService.setCurrentRepositoryName(REPO_NAME);
     repository = repositoryService.getCurrentRepository();
-    
+
     closeOldSession();
     session = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
   }
-  
+
   /**
    * close old session if it exists, prepare for switching to another session
    * @throws Exception
@@ -143,7 +139,7 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
   private void closeOldSession() throws Exception {
     if (session != null && session.isLive()) {
       session.logout();
-      
+
       //remove user session
       ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(null);
     }

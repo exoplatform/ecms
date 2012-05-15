@@ -65,7 +65,7 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
   private UIPageIterator uiPageIterator_;
 
-  private static final Log LOG = ExoLogger.getLogger(UICategoriesAddedList.class);
+  private static final Log LOG = ExoLogger.getLogger(UICategoriesAddedList.class.getName());
 
   public UICategoriesAddedList() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "CategoriesAddedList");

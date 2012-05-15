@@ -50,7 +50,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIUploadContainer extends UIContainer {
 
-  private static final Log LOG = ExoLogger.getLogger(UIUploadContainer.class);
+  private static final Log LOG = ExoLogger.getLogger(UIUploadContainer.class.getName());
   
   private NodeLocation uploadedNode_;
   private List<NodeLocation> listUploadedNode_ = new ArrayList<NodeLocation>();

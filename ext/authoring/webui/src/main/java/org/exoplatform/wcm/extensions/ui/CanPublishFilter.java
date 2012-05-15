@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  */
 public class CanPublishFilter implements UIExtensionFilter {
 
-  private static final Log LOG = ExoLogger.getLogger(CanPublishFilter.class);
+  private static final Log LOG = ExoLogger.getLogger(CanPublishFilter.class.getName());
   /**
    * This method checks if the current node is of the right type
    */

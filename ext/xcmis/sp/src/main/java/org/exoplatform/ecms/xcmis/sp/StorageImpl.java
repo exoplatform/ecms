@@ -150,7 +150,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    };
 
    /** Logger. */
-   private static final Log LOG = ExoLogger.getLogger(StorageImpl.class);
+   private static final Log LOG = ExoLogger.getLogger(StorageImpl.class.getName());
 
    private RepositoryInfo repositoryInfo;
 

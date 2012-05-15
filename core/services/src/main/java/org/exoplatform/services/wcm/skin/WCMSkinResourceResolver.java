@@ -39,10 +39,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class WCMSkinResourceResolver implements ResourceResolver {
   private SkinService skinService;
   private LivePortalManagerService livePortalService;
-  
+
   /** The log. */
-  private static Log              log                  = ExoLogger.getLogger("wcm:WCMSkinResourceResolver");
-  
+  private static final Log LOG = ExoLogger.getLogger(WCMSkinResourceResolver.class.getName());
+
   public WCMSkinResourceResolver(SkinService skinService, LivePortalManagerService livePortalService) {
     this.skinService = skinService;
     this.livePortalService = livePortalService;
@@ -69,7 +69,7 @@ public class WCMSkinResourceResolver implements ResourceResolver {
       }
     }
     try {
-      Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);  
+      Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
       final String cssData = WCMCoreUtils.getSiteGlobalActiveStylesheet(portalNode);
       if(cssData == null)
         return null;
@@ -79,8 +79,8 @@ public class WCMSkinResourceResolver implements ResourceResolver {
         }
       };
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Unexpected error happens", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error happens", e);
       }
     }
     return null;

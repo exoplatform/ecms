@@ -38,7 +38,7 @@ import org.exoplatform.services.log.Log;
  */
 public class ArrayNodePageList<E> extends AbstractPageList<E> {
   
-  private static final Log LOG = ExoLogger.getLogger(ArrayNodePageList.class);
+  private static final Log LOG = ExoLogger.getLogger(ArrayNodePageList.class.getName());
 
   /** The nodes. */
   protected List<E> dataList;

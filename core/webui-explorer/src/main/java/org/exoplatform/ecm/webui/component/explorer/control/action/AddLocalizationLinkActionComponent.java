@@ -61,7 +61,7 @@ public class AddLocalizationLinkActionComponent extends UIAbstractManagerCompone
                                           new IsNotTrashHomeNodeFilter(),
                                           new IsNotInTrashFilter()});
 
-  private static final Log LOG = ExoLogger.getLogger(AddLocalizationLinkActionComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(AddLocalizationLinkActionComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

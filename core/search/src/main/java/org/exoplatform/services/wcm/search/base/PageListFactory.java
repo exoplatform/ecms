@@ -44,7 +44,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PageListFactory {
 
-  private static final Log LOG = ExoLogger.getLogger(PageListFactory.class);
+  private static final Log LOG = ExoLogger.getLogger(PageListFactory.class.getName());
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
                                                        String workspace,

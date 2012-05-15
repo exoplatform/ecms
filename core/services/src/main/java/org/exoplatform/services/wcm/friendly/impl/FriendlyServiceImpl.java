@@ -47,7 +47,7 @@ public class FriendlyServiceImpl implements FriendlyService {
   private Map<String, String> friendlies;
   private Map<String, String> unfriendlies;
 
-    private static final Log log  = ExoLogger.getLogger(FriendlyServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(FriendlyServiceImpl.class.getName());
 
   public FriendlyServiceImpl(InitParams initParams) {
     friendlies = new LinkedHashMap<String, String>(5);
@@ -65,11 +65,11 @@ public class FriendlyServiceImpl implements FriendlyService {
           isEnabled = true;
         }
       }
-      if (log.isInfoEnabled()) log.info("isEnabled:"+isEnabled);
+      if (LOG.isInfoEnabled()) LOG.info("isEnabled:"+isEnabled);
       if (servletName!=null) {
         this.servletName = servletName.getValue();
       }
-      if (log.isInfoEnabled()) log.info("servletName:"+this.servletName);
+      if (LOG.isInfoEnabled()) LOG.info("servletName:"+this.servletName);
 
       ObjectParameter objectParam = initParams.getObjectParam("friendlies.configuration");
       if (objectParam != null) {
@@ -112,7 +112,7 @@ public class FriendlyServiceImpl implements FriendlyService {
   public void addFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri,
       @ManagedDescription("The unfriendly Uri") @ManagedName("unfriendlyUri") String unfriendlyUri) {
     if (!friendlies.containsKey(friendlyUri)) {
-      if (log.isInfoEnabled()) log.info("addFriendly::"+friendlyUri+"::"+unfriendlyUri+ "::");
+      if (LOG.isInfoEnabled()) LOG.info("addFriendly::"+friendlyUri+"::"+unfriendlyUri+ "::");
       this.friendlies.put(friendlyUri, unfriendlyUri);
       this.unfriendlies.put(unfriendlyUri, friendlyUri);
     }

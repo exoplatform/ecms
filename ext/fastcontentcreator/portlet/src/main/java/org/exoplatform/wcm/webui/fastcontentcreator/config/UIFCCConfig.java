@@ -51,8 +51,8 @@ import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -80,8 +80,8 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 public class UIFCCConfig extends UIForm implements UISelectable {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UIFCCConfig.class);
-  
+  private static final Log LOG = ExoLogger.getLogger(UIFCCConfig.class.getName());
+
   /** The saved location node. */
   private NodeLocation savedLocationNode;
 
@@ -535,7 +535,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.ws-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       String repositoryName = null;
@@ -548,7 +548,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.fileType-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_REPOSITORY, repositoryName);
@@ -562,7 +562,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, redirectPath);
       portletPreferences.store();
       uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.save-successfully", null));
-      
+
     }
   }
 

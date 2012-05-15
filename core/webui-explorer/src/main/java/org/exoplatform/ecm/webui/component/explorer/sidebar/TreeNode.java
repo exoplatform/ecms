@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.core.NodeLocation;
  * 5:37:31 PM
  */
 public class TreeNode {
-  private static final Log LOG  = ExoLogger.getLogger(TreeNode.class);
+  private static final Log LOG  = ExoLogger.getLogger(TreeNode.class.getName());
   
   //TODO Need use this class for BC TreeNode
   private boolean isExpanded_ ;

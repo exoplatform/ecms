@@ -32,7 +32,7 @@ import org.exoplatform.services.log.Log;
  */
 public final class ThumbnailUtils {
 
-  private static final Log LOG = ExoLogger.getLogger(ThumbnailUtils.class);
+  private static final Log LOG = ExoLogger.getLogger(ThumbnailUtils.class.getName());
   
   static synchronized Node getThumbnailFolder(Node parentNode) throws RepositoryException {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {

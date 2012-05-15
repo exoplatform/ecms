@@ -34,7 +34,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
-  private Log log = ExoLogger.getLogger(RemoveLivePortalEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(RemoveLivePortalEventListener.class.getName());
 
   /*
    * (non-Javadoc)
@@ -52,12 +52,12 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
     try {
       manageDriveService.removeDrive(String.format("%s-category", portalName));
-      if (log.isInfoEnabled()) {
-        log.info("Removed drive for portal: " + portalName);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Removed drive for portal: " + portalName);
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when remove drive for portal: " + portalName, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when remove drive for portal: " + portalName, e);
       }
     }
 
@@ -68,12 +68,12 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     // Remove site content storage for the portal
     try {
       livePortalManagerService.removeLivePortal(sessionProvider, portalConfig);
-      if (log.isInfoEnabled()) {
-        log.info("Removed resource storage for portal: " + portalName);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Removed resource storage for portal: " + portalName);
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when remove resource storage: " + portalName, e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when remove resource storage: " + portalName, e);
       }
     }
   }

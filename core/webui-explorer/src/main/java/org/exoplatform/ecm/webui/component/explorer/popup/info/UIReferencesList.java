@@ -56,7 +56,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIReferencesList extends UIGrid implements UIPopupComponent{
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UIReferencesList.class);
+  private static final Log LOG = ExoLogger.getLogger(UIReferencesList.class.getName());
   
   private static String[] REFERENCES_BEAN_FIELD = {"workspace", "path"} ;
 

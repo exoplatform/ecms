@@ -39,7 +39,7 @@ public class CmisSchemaTableResolver extends SchemaTableResolver
 
    private final TypeManager typeManager;
 
-   private static final Log LOG = ExoLogger.getLogger(CmisSchemaTableResolver.class);
+   private static final Log LOG = ExoLogger.getLogger(CmisSchemaTableResolver.class.getName());
 
    /**
     * Instantiates new instance of CmisSchemaTableResolver.

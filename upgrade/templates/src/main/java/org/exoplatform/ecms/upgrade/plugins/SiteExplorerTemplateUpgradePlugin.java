@@ -43,25 +43,25 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          vuna@exoplatform.com
- * Feb 24, 2012  
+ * Feb 24, 2012
  *
- * This class will be used to upgrade pre-defined templates of Site Explorer. Templates with desire of manual upgration 
+ * This class will be used to upgrade pre-defined templates of Site Explorer. Templates with desire of manual upgration
  * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
+ * Syntax :<br/>
  * unchanged-site-explorer-templates=<templates name list>
  * For examples :<br/>
  * unchanged-site-explorer-templates=ThumbnailsView, ContentView
- * 
+ *
  */
 public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(SiteExplorerTemplateUpgradePlugin.class.getName());
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repositoryService_;
   private ManageViewService manageViewService_;
 
-  public SiteExplorerTemplateUpgradePlugin(NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService, 
+  public SiteExplorerTemplateUpgradePlugin(NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
                                        DMSConfiguration dmsConfiguration, ManageViewService manageViewService,
                                        InitParams initParams) {
     super(initParams);
@@ -70,10 +70,10 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
     this.dmsConfiguration_ = dmsConfiguration;
     this.manageViewService_ = manageViewService;
   }
-  
+
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     String unchangedViews = PrivilegedSystemHelper.getProperty("unchanged-site-explorer-templates");
     SessionProvider sessionProvider = null;
@@ -90,9 +90,9 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
       //get all old query nodes that need to be removed.
       sessionProvider = SessionProvider.createSystemProvider();
       DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-      Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), 
+      Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),
                                                    repositoryService_.getCurrentRepository());
-      
+
       String ecmExplorerViewNodePath = nodeHierarchyCreator_.getJcrPath(BasePath.ECM_EXPLORER_TEMPLATES);
       Node ecmExplorerViewNode = (Node)session.getItem(ecmExplorerViewNodePath);
       NodeIterator iter = ecmExplorerViewNode.getNodes();
@@ -109,16 +109,16 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
           removedNode.remove();
           ecmExplorerViewNode.save();
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
-            log.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
+          if (LOG.isInfoEnabled()) {
+            LOG.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
           }
         }
       }
       //re-initialize new views
       manageViewService_.init();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating Site Explorer views:", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating Site Explorer views:", e);
       }
     } finally {
       if (sessionProvider != null) {
@@ -126,7 +126,7 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
-  
+
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
     return true;

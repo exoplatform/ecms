@@ -21,8 +21,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.utils.PublicationUtils;
 import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -47,8 +45,6 @@ public class CreatePortalPublicationPlugin extends CreatePortalPlugin {
   /** The publication service */
   private PublicationService publicationService;
 
-  /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
 
   /**

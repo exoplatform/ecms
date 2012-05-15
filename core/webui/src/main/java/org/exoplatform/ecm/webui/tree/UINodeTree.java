@@ -48,7 +48,7 @@ import org.exoplatform.webui.core.UITree;
 public class UINodeTree extends UITree {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UINodeTree.class);
+  private static final Log LOG = ExoLogger.getLogger(UINodeTree.class.getName());
   
   private String rootPath = "";
 

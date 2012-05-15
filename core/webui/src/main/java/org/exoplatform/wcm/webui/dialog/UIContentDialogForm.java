@@ -112,7 +112,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   public static final String TAXONOMY_CONTENT_POPUP_WINDOW = "UIContentPopupWindow";
   
   /** The Log **/
-  private static final Log LOG  = ExoLogger.getLogger(UIContentDialogForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIContentDialogForm.class.getName());
 
   /** The webcontent node location. */
   private NodeLocation webcontentNodeLocation;

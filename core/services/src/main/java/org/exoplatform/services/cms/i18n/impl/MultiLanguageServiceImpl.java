@@ -141,7 +141,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
 
   private static final String COUNTRY_VARIANT      = "_";
   
-  private static final Log       LOG             = ExoLogger.getLogger(MultiLanguageServiceImpl.class);
+  private static final Log       LOG             = ExoLogger.getLogger(MultiLanguageServiceImpl.class.getName());
   
   /**
    * CmsService

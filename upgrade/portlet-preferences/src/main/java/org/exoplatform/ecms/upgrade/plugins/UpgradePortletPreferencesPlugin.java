@@ -23,7 +23,6 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
-import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -35,37 +34,36 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          vuna@exoplatform.com
- * Mar 9, 2012  
+ * Mar 9, 2012
  */
 public class UpgradePortletPreferencesPlugin extends UpgradeProductPlugin {
 
   private static final String MOP_PORTLET_PREFERENCE = "mop:portletpreference";
-  
+  private static final Log LOG = ExoLogger.getLogger(UpgradePortletPreferencesPlugin.class.getName());
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());
 
   public UpgradePortletPreferencesPlugin(RepositoryService repoService, InitParams initParams) {
     super(initParams);
     this.repoService_ = repoService;
   }
-  
+
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     upgradePortlet("searches/WCMAdvanceSearchPortlet,detailParameterName,content-id");
     upgradePortlet("searches/WCMAdvanceSearchPortlet,basePath,detail");
-  }  
-  
+  }
+
   private void upgradePortlet(String unchangedViews) {
     //get portlet name, preference name and value to change
     //String unchangedViews = PrivilegedSystemHelper.getProperty("portletPreferencesChanged");
     if (unchangedViews == null) return;
     String[] params = unchangedViews.split(",");
     if (!(params.length == 3)) {
-      if (log.isErrorEnabled()) {
-        log.error("Wrong format for '" + this.getClass().getName() + "', correct pattern is: " +
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Wrong format for '" + this.getClass().getName() + "', correct pattern is: " +
                   "portletPreferencesChanged=PortletName,PreferenceName,PreferenceValue");
       }
       return;
@@ -78,7 +76,7 @@ public class UpgradePortletPreferencesPlugin extends UpgradeProductPlugin {
     try {
       ManageableRepository repository = repoService_.getCurrentRepository();
       /**
-       * add "detailParameterName=content-id" preferences into preference list of all WCMAdvanceSearchPortlet 
+       * add "detailParameterName=content-id" preferences into preference list of all WCMAdvanceSearchPortlet
        */
       Session session = sessionProvider.getSession("portal-system", repository);
       QueryManager manager = session.getWorkspace().getQueryManager();
@@ -97,32 +95,32 @@ public class UpgradePortletPreferencesPlugin extends UpgradeProductPlugin {
           }
         }
       }
-  
+
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when add preference '" + preferenceName
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when add preference '" + preferenceName
             + "' for portlet " + portletName, e);
       }
     } finally {
       sessionProvider.close();
     }
   }
-  
+
   private void addNode(Node stateNode, String nodeName, String value) {
     try {
-      Node prefNode = stateNode.hasNode(nodeName) ? stateNode.getNode(nodeName) : 
+      Node prefNode = stateNode.hasNode(nodeName) ? stateNode.getNode(nodeName) :
                                                     stateNode.addNode(nodeName, MOP_PORTLET_PREFERENCE);
       prefNode.setProperty("mop:value", new String[]{value});
       prefNode.setProperty("mop:readonly", false);
       stateNode.save();
-      if (log.isInfoEnabled()) log.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
+      if (LOG.isInfoEnabled()) LOG.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     }
   }
-  
+
 
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {

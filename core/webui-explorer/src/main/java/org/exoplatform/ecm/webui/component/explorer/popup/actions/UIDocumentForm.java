@@ -112,7 +112,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   final static public String POPUP_TAXONOMY = "PopupComponent";
   private List<String> listTaxonomyName = new ArrayList<String>();
   private boolean canChangeType = true;
-  private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class.getName());
 
   public boolean isCanChangeType() {
     return canChangeType;

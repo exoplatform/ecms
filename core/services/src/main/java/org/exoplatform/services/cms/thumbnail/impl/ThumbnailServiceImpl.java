@@ -47,7 +47,7 @@ import org.exoplatform.services.log.Log;
  */
 public class ThumbnailServiceImpl implements ThumbnailService {
 
-  private static final Log LOG  = ExoLogger.getLogger(ThumbnailServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(ThumbnailServiceImpl.class.getName());
   
   final private static String JCR_CONTENT = "jcr:content";
   final private static String JCR_MIMETYPE = "jcr:mimeType";

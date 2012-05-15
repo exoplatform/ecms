@@ -65,7 +65,7 @@ public class PublicationUtil {
   public static final String URI_SEPARATOR = "/";
   
   /** The Loger **/
-  private static final Log LOG = ExoLogger.getLogger(PublicationUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(PublicationUtil.class.getName());
  
   /**
    * Find user node by page id.

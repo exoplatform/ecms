@@ -60,7 +60,7 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                               new IsNotTrashHomeNodeFilter() });
-  private final static Log       LOG  = ExoLogger.getLogger(CustomManageComponent.class);
+  private final static Log       LOG  = ExoLogger.getLogger(CustomManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

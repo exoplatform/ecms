@@ -40,7 +40,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 public class UIRepositoryList extends UIForm {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UIRepositoryList.class);
+  private static final Log LOG = ExoLogger.getLogger(UIRepositoryList.class.getName());
   
   public static String      FIELD_SELECTREPO = "selectRepo";
 

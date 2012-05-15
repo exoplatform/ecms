@@ -36,44 +36,44 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Sep 17, 2008
  */
 public class WebSchemaModificationAction implements Action{
-  private Log log = ExoLogger.getLogger("wcm:WebSchemaModificationAction");
+  private static final Log LOG = ExoLogger.getLogger(WebSchemaModificationAction.class.getName());
   public boolean execute(Context context) throws Exception {
     Property property = (Property)context.get("currentItem");
-    String propertyName = property.getName();    
-    
-    if (!propertyName.equals("jcr:data") 
+    String propertyName = property.getName();
+
+    if (!propertyName.equals("jcr:data")
         && !propertyName.equals(NodetypeConstant.EXO_PRIORITY)
         && !propertyName.equals(NodetypeConstant.EXO_ACTIVE)
         && !propertyName.equals("exo:restorePath")) {
-      
+
       // use exo:active in case of exo:cssFile or exo:jsFile
       return propertyName.equalsIgnoreCase("exo:active");
     }
     Node grandParent = property.getParent().getParent();
     if(propertyName.equals("jcr:data") && !grandParent.getPrimaryNodeType().getName().equals("nt:file"))
-      return false;    
-    
+      return false;
+
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     WebSchemaConfigService schemaConfigService =
       (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    
+
     Node node = null;
     if (propertyName.equals("jcr:data")) {
       node = grandParent;
     } else {
       node = property.getParent();
     }
-        
-    try {      
+
+    try {
       if (propertyName.equals("exo:restorePath")) {
         schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
       } else {
         schemaConfigService.updateSchemaOnModify(sessionProvider, node);
-      }      
+      }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when update schema when modify node: "+node.getPath(), e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when update schema when modify node: "+node.getPath(), e);
       }
     }
     return true;

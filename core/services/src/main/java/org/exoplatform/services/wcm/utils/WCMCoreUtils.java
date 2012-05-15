@@ -77,14 +77,14 @@ import org.quartz.JobExecutionContext;
  */
 public class WCMCoreUtils {
 
-  private static final Log LOG = ExoLogger.getLogger("wcm.WCMCoreUtils");
-  
+  private static final Log LOG = ExoLogger.getLogger(WCMCoreUtils.class.getName());
+
   private static String WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
                                                 + "and exo:active='true' "
                                                 + "and jcr:mixinTypes <> 'exo:restoreLocation' "
                                                 + "order by exo:priority ASC";
 
-  
+
   /**
    * Gets the service.
    *
@@ -117,7 +117,7 @@ public class WCMCoreUtils {
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     return sessionProvider;
   }
-  
+
   public static boolean isAnonim()
   {
     String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -129,7 +129,7 @@ public class WCMCoreUtils {
   public static SessionProvider createAnonimProvider()
   {
     return SessionProvider.createAnonimProvider();
-  }  
+  }
 
   /**
    * Gets the service.
@@ -240,7 +240,7 @@ public class WCMCoreUtils {
   public static ManageableRepository getRepository(String repository) {
     return getRepository();
   }
-  
+
   /**
    * Get the current repository
    *
@@ -256,8 +256,8 @@ public class WCMCoreUtils {
       }
     }
     return null;
-  }  
-  
+  }
+
   public static void startRequest(OrganizationService orgService) throws Exception
   {
     if(orgService instanceof ComponentRequestLifecycle) {
@@ -271,7 +271,7 @@ public class WCMCoreUtils {
       ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
     }
   }
-  
+
   public static String getProjectVersion() throws Exception {
     String filePath = "jar:/conf/projectInfo.properties";
     Properties productInformationProperties = new Properties();
@@ -281,20 +281,20 @@ public class WCMCoreUtils {
         LOG.info("Read products versions from " + filePath);
       }
       InputStream inputStream = configManager.getInputStream(filePath);
-      
+
       productInformationProperties.load(inputStream);
     } catch (IOException exception) {
       throw new RuntimeException("Couldn't parse the file " + filePath, exception);
     } catch (Exception exception) {
       throw new RuntimeException("Error occured while reading the file " + filePath, exception);
     }
-    
+
     if (!productInformationProperties.containsKey("project.current.version")) {
       throw new RuntimeException("Missing product information.");
     }
     return productInformationProperties.getProperty("project.current.version");
   }
-  
+
   public static String getActiveStylesheet(Node webcontent) throws Exception {
     StringBuffer buffer = new StringBuffer();
     String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
@@ -305,7 +305,7 @@ public class WCMCoreUtils {
     Session session = null;
     try {
       if (webcontentLocation.getPath().startsWith("/jcr:system"))
-        session = 
+        session =
           WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getSystemWorkspaceName(), repository);
       else {
         session = WCMCoreUtils.getSystemSessionProvider().getSession(webcontentLocation.getWorkspace(), repository);
@@ -349,7 +349,7 @@ public class WCMCoreUtils {
           //get all cssFile child nodes of cssFolder node
           while (iter.hasNext()) {
             Node registeredCSSFile = iter.nextNode();
-            if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) && 
+            if (registeredCSSFile.isNodeType(NodetypeConstant.EXO_CSS_FILE) &&
                 registeredCSSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
               cssNodeList.add(registeredCSSFile);
             }
@@ -399,7 +399,7 @@ public class WCMCoreUtils {
           //get all jsFile child nodes of jsFolder node
           while (iter.hasNext()) {
             Node registeredJSFile = iter.nextNode();
-            if (registeredJSFile.isNodeType(NodetypeConstant.EXO_JS_FILE) && 
+            if (registeredJSFile.isNodeType(NodetypeConstant.EXO_JS_FILE) &&
                 registeredJSFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean()) {
               jsNodeList.add(registeredJSFile);
             }
@@ -425,12 +425,12 @@ public class WCMCoreUtils {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active javascript", e);
       }
-    } 
+    }
     return buffer.toString();
   }
 
   public static Hashtable<String, String> getMetadataTemplates(Node node) throws Exception {
-    MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);    
+    MetadataService metadataService = WCMCoreUtils.getService(MetadataService.class);
     Hashtable<String, String> templates = new Hashtable<String, String>();
     List<String> metaDataList = metadataService.getMetadataList();
 
@@ -457,7 +457,7 @@ public class WCMCoreUtils {
     }
     return templates;
   }
-  
+
   public static String getRestContextName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
@@ -466,11 +466,11 @@ public class WCMCoreUtils {
       (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
     return portalContainerConfig.getRestContextName(containerInfo.getContainerName());
   }
-  
+
   public static void deployLinkToPortal(InitParams initParams,
                              RepositoryService repositoryService,
                              LinkManager linkManager,
-                             SessionProvider sessionProvider, 
+                             SessionProvider sessionProvider,
                              String portalName) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
     LinkDeploymentDescriptor deploymentDescriptor = null;
@@ -480,13 +480,13 @@ public class WCMCoreUtils {
         deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
         String sourcePath = deploymentDescriptor.getSourcePath();
         String targetPath = deploymentDescriptor.getTargetPath();
-        
+
         //in case: create portal from template
         if (portalName != null && portalName.length() > 0) {
           sourcePath = StringUtils.replace(sourcePath, "{portalName}", portalName);
           targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
         }
-        
+
         // sourcePath should looks like : repository:collaboration:/sites
         // content/live/acme
         String[] src = sourcePath.split(":");
@@ -501,7 +501,7 @@ public class WCMCoreUtils {
           Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
           linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
           ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo = 
+          PortalContainerInfo containerInfo =
             (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
           String containerName = containerInfo.getContainerName();
           ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,

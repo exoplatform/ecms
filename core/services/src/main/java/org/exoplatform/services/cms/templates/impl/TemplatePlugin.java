@@ -116,11 +116,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
   private static final String  END_JAVA;
 
   private static final String  DEFAULT_CSS;
-  
+
   private static final String  JCR_PRIMARY_TYPE = "jcr:primaryType";
-  
+
   private static final String  JCR_MIXIN_TYPES = "jcr:mixinTypes";
-  
+
   private RepositoryService repositoryService_;
   private ConfigurationManager  configManager_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
@@ -128,7 +128,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
   private InitParams params_ ;
   private String storedLocation_ ;
   private boolean autoCreateInNewRepository_=false;
-  private Log log = ExoLogger.getLogger("Templateplugin") ;
+  private static final Log LOG = ExoLogger.getLogger(TemplatePlugin.class.getName());
   private Set<String> configuredNodeTypes;
 
   private TemplateService templateService;
@@ -240,7 +240,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
   }
 
   public void init() throws Exception {
-    configuredNodeTypes = new HashSet<String>();    
+    configuredNodeTypes = new HashSet<String>();
     importPredefineTemplates() ;
   }
 
@@ -271,8 +271,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
       if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
-        if (log.isErrorEnabled()) {
-          log.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
+        if (LOG.isErrorEnabled()) {
+          LOG.error("The nodetype: " + nodeType.getNodetypeName() + " doesn't exist!");
         }
         continue;
       }
@@ -572,7 +572,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
           buildViewNodeType.append("\t\t\t\t\t}\n" );
           buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) "
               + "valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
-          
+
         } else {
           buildViewNodeType.append("\t\t\t\t\t// Render for single value;\n");
           buildViewNodeType.append("\t\t\t\t\tvalueDisplay = \"BINARY DATA\"");
@@ -590,7 +590,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
           buildViewNodeType.append("\t\t\t\t\t}\n" );
           buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) "
               + "valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
-          
+
         } else {
           buildViewNodeType.append("\t\t\t\t\t// Render for single value;\n");
           buildViewNodeType.append("\t\t\t\t\tvalueDisplay = ")

@@ -42,7 +42,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICustomizeablePaginator extends UIPageIterator {
 
-  private static final Log LOG = ExoLogger.getLogger(UICustomizeablePaginator.class);
+  private static final Log LOG = ExoLogger.getLogger(UICustomizeablePaginator.class.getName());
   
   /** The template path. */
   private String templatePath;

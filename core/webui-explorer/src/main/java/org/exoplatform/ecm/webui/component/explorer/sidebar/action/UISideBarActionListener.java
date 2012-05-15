@@ -46,7 +46,7 @@ import org.exoplatform.webui.ext.UIExtensionEventListener;
 public abstract class UISideBarActionListener<T extends UIComponent> extends
                                                                      UIExtensionEventListener<T> {
 
-  private static final Log LOG = ExoLogger.getLogger(UISideBarActionListener.class);
+  private static final Log LOG = ExoLogger.getLogger(UISideBarActionListener.class.getName());
 
   /**
    *

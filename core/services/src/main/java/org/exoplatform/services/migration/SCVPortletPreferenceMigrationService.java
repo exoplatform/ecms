@@ -49,7 +49,7 @@ public class SCVPortletPreferenceMigrationService implements Startable {
   private static final String MOP_PORTLET_PREFERENCE = "mop:portletpreference";
 
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(SCVPortletPreferenceMigrationService.class.getName());
 
   public SCVPortletPreferenceMigrationService(RepositoryService repoService) {
     this.repoService_ = repoService;
@@ -85,7 +85,7 @@ public class SCVPortletPreferenceMigrationService implements Startable {
         }
 
       } catch (Exception e) {
-        if (log.isErrorEnabled()) log.error("An unexpected problem occurs when adding new preferences for old SCV portlets", e);
+        if (LOG.isErrorEnabled()) LOG.error("An unexpected problem occurs when adding new preferences for old SCV portlets", e);
       } finally {
         sessionProvider.close();
       }
@@ -100,11 +100,11 @@ public class SCVPortletPreferenceMigrationService implements Startable {
         prefNode.setProperty("mop:value", new String[]{value});
         prefNode.setProperty("mop:readonly", false);
         stateNode.save();
-        if (log.isInfoEnabled()) log.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
+        if (LOG.isInfoEnabled()) LOG.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
       }
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     }
   }

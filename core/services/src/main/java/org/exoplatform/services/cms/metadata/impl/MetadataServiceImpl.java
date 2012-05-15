@@ -110,7 +110,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   * DMS configuration which used to store informations
   */
   private DMSConfiguration dmsConfiguration_;
-  private static final Log LOG  = ExoLogger.getLogger(MetadataServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(MetadataServiceImpl.class.getName());
 
   private TemplateService templateService;
 

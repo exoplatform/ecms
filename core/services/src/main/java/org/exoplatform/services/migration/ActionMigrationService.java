@@ -40,7 +40,7 @@ import org.picocontainer.Startable;
 public class ActionMigrationService implements Startable {
 
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(ActionMigrationService.class.getName());
 
   public ActionMigrationService(RepositoryService repositoryService) {
     repoService_ = repositoryService;
@@ -71,18 +71,18 @@ public class ActionMigrationService implements Startable {
         } catch (Exception e) {
           if (session != null && session.isLive())
             session.logout();
-          if (log.isErrorEnabled())
-            log.error("An unexpected problem occurs when migrating data for action nodes in workspace "
+          if (LOG.isErrorEnabled())
+            LOG.error("An unexpected problem occurs when migrating data for action nodes in workspace "
                           + wsName,
                       e);
         }
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) log.error("An unexpected problem occurs when migrating data for action nodes", e);
+      if (LOG.isErrorEnabled()) LOG.error("An unexpected problem occurs when migrating data for action nodes", e);
     } finally {
       sessionProvider.close();
     }
-    if (log.isInfoEnabled()) log.info("Action nodes data migrated successfully!...");
+    if (LOG.isInfoEnabled()) LOG.info("Action nodes data migrated successfully!...");
   }
 
   @Override

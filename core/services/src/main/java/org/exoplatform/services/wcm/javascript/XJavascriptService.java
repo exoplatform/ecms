@@ -63,7 +63,7 @@ public class XJavascriptService implements Startable {
   final private String MODULE_NAME = "eXo.WCM.Live";
 
   public final static String JS_PATH_REGEXP = "/(.*)/javascript/eXo/(.*)/live";
-  
+
   /** The PATH. */
   final private String PATH = "/javascript/eXo/{portalName}/live";
 
@@ -72,15 +72,15 @@ public class XJavascriptService implements Startable {
 
   /** The configuration service. */
   private WCMConfigurationService configurationService;
-  
+
   private LivePortalManagerService livePortalManagerService_;
-  
+
   /** The servlet context. */
   private ServletContext servletContext;
 
   /** The log. */
-  private Log log = ExoLogger.getLogger("wcm:XJavascriptService");
-  
+  private static final Log LOG = ExoLogger.getLogger(XJavascriptService.class.getName());
+
   private Set<String> loadedJSModule = new HashSet<String>();
   private Set<String> loadedSharedJSModule = new HashSet<String>();
 
@@ -179,14 +179,14 @@ public class XJavascriptService implements Startable {
    */
   private void addPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-                                                     
+
     String moduleName = MODULE_NAME + '.' + portalNode.getName();
-    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() + 
+    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
                                             javascriptPath);
     if (!loadedJSModule.contains(moduleName)) {
       loadedJSModule.add(moduleName);
       jsConfigService.addPortalJScript(
-        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 
+        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(),
                           10, portalNode.getName()));
     }
   }
@@ -200,7 +200,7 @@ public class XJavascriptService implements Startable {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
     String moduleName = MODULE_NAME + '.' + portalNode.getName();
     jsConfigService.invalidateMergedCommonJScripts();
-    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() + 
+    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
                                             javascriptPath);
     if (!loadedSharedJSModule.contains(moduleName)) {
       loadedSharedJSModule.add(moduleName);
@@ -214,13 +214,13 @@ public class XJavascriptService implements Startable {
                                           PathNotFoundException {
     if (jsFile != null && !jsFile.isNodeType("exo:restoreLocation")
         && jsFile.hasNode(NodetypeConstant.JCR_CONTENT)
-        && jsFile.getNode(NodetypeConstant.JCR_CONTENT).hasProperty(NodetypeConstant.JCR_DATA) 
+        && jsFile.getNode(NodetypeConstant.JCR_CONTENT).hasProperty(NodetypeConstant.JCR_DATA)
         && jsFile.hasProperty(NodetypeConstant.EXO_ACTIVE)
         && jsFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean() == true) {
-      
+
       return jsFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
     }
-    return "";    
+    return "";
   }
 
   /* (non-Javadoc)
@@ -233,16 +233,16 @@ public class XJavascriptService implements Startable {
       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
       for(Node portal: livePortals) {
         addPortalJavascript(portal, null, true);
-      }      
+      }
       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
       addSharedPortalJavascript(sharedPortal, null, true);
     } catch (PathNotFoundException e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Exception when merging inside Portal : WCM init is not completed.");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Exception when merging inside Portal : WCM init is not completed.");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when start XJavascriptService");
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when start XJavascriptService");
       }
     } finally {
       sessionProvider.close();

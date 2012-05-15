@@ -36,8 +36,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.impl.storage.JCRItemExistsException;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -63,8 +61,6 @@ import org.exoplatform.webui.form.UIFormUploadInput;
     @EventConfig(listeners = UIImportNode.ImportActionListener.class),
     @EventConfig(listeners = UIImportNode.CancelActionListener.class, phase = Phase.DECODE) })
 public class UIImportNode extends UIForm implements UIPopupComponent {
-
-  private final static Log   log                         = ExoLogger.getLogger("ecm.UIImportNode");
 
   public static final String FORMAT                      = "format";
 
@@ -132,7 +128,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     zipInputStream.close();
     uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-content", null,
         ApplicationMessage.WARNING));
-    
+
     return false;
   }
 
@@ -140,7 +136,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     return resolver.getMimeType(fileName);
   }
-  
+
   static public class ImportActionListener extends EventListener<UIImportNode> {
     public void execute(Event<UIImportNode> event) throws Exception {
       UIImportNode uiImport = event.getSource();
@@ -156,7 +152,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       if (input.getUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filename-invalid", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       if(inputHistory.getUploadResource() != null) {
@@ -164,7 +160,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         if(!mimeTypeHistory.equals("application/zip")) {
           uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-type", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         }
         if(!uiImport.validHistoryUploadFile(event)) return;
@@ -179,7 +175,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       } else {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.mimetype-invalid", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       try {
@@ -195,13 +191,13 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
           uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.constraint-violation-exception",
                                                   args,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
 
         //Process import version history
         if(inputHistory.getUploadResource() != null) {
-          Map<String, String> mapHistoryValue = 
+          Map<String, String> mapHistoryValue =
             org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream());
           org.exoplatform.services.cms.impl.Utils.processImportHistory(
               currentNode, inputHistory.getUploadDataAsStream(), mapHistoryValue);
@@ -215,12 +211,12 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
           // otherwise ECM FileExplolrer crashes as it assume all items were imported correct.
 
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.import-successful", null));
-        
+
       } catch (AccessDeniedException ace) {
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch (ConstraintViolationException con) {
         session.refresh(false);
@@ -228,20 +224,20 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.constraint-violation-exception",
                                                 args,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       } catch (JCRItemExistsException iee) {
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
                                                 new Object[] { iee.getIdentifier() },
                                                 ApplicationMessage.WARNING));
-        
-        return;      
+
+        return;
       } catch (Exception ise) {
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } finally {
         UploadService uploadService = uiImport.getApplicationComponent(UploadService.class) ;

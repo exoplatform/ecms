@@ -99,7 +99,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   private Map<String, String[]>  taxonomyTreeDefaultUserPermissions_;
 
-  private static final Log       LOG             = ExoLogger.getLogger(TaxonomyServiceImpl.class);
+  private static final Log       LOG             = ExoLogger.getLogger(TaxonomyServiceImpl.class.getName());
   private static String categoryNameLength_ = null;
 
   /**

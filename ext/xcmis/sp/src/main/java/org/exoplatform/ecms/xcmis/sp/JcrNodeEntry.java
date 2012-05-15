@@ -181,7 +181,7 @@ class JcrNodeEntry
       SKIP_CHILD_ITEMS.add("xcmis:system");
    }
 
-   private static final Log LOG = ExoLogger.getLogger(JcrNodeEntry.class);
+   private static final Log LOG = ExoLogger.getLogger(JcrNodeEntry.class.getName());
 
    protected Node node;
 

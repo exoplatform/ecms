@@ -39,7 +39,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class NodetypeUtils {
 
-  private static final Log LOG = ExoLogger.getLogger(NodetypeUtils.class);
+  private static final Log LOG = ExoLogger.getLogger(NodetypeUtils.class.getName());
 
   /**
    * Display all nodes and their properties inside a workspace.

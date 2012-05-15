@@ -88,7 +88,7 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("cms.UIViewSearchResult");
+  private static final Log LOG  = ExoLogger.getLogger(UIViewSearchResult.class.getName());
 
   public UIViewSearchResult() throws Exception {
   }

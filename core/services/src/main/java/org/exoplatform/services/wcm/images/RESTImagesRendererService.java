@@ -62,17 +62,17 @@ public class RESTImagesRendererService implements ResourceContainer{
   private RepositoryService repositoryService;
 
   /** The log. */
-  static Log log = ExoLogger.getLogger(RESTImagesRendererService.class);
+  private static final Log LOG = ExoLogger.getLogger(RESTImagesRendererService.class.getName());
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   /** Default mime type **/
   private static String DEFAULT_MIME_TYPE = "image/jpg";
-  
+
   /** Mime type property **/
   private static String PROPERTY_MIME_TYPE = "jcr:mimeType";
 
@@ -134,7 +134,7 @@ public class RESTImagesRendererService implements ResourceContainer{
         if (jcrContentNode.hasProperty(PROPERTY_MIME_TYPE)) {
           mimeType = jcrContentNode.getProperty(PROPERTY_MIME_TYPE).getString();
         }
-        InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream(); 
+        InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream();
         return Response.ok(jcrData, mimeType).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
 
@@ -151,8 +151,8 @@ public class RESTImagesRendererService implements ResourceContainer{
     }catch (ItemNotFoundException e) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
     }catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when serveImage: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when serveImage: ", e);
       }
       return Response.serverError().build();
     }
@@ -197,11 +197,11 @@ public class RESTImagesRendererService implements ResourceContainer{
            ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
          return false;
        }
-       return true;  
+       return true;
      } catch(ParseException pe) {
        return false;
      }
-     
+
   }
 
   /**
@@ -236,7 +236,7 @@ public class RESTImagesRendererService implements ResourceContainer{
              .append(nodeIdentifiler)
              .append("?param=file");
       return builder.toString();
-    } 
+    }
     builder.append("/").append(portalName).append("/")
            .append(restContextName).append("/")
            .append("images/")

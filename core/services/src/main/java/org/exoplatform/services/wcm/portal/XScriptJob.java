@@ -33,7 +33,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class XScriptJob extends BaseJob {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(XScriptJob.class);
+  private static final Log LOG = ExoLogger.getLogger(XScriptJob.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.scheduler.BaseJob#execute(org.exoplatform.services.scheduler.JobContext)
@@ -46,8 +46,8 @@ public class XScriptJob extends BaseJob {
       jsService.start();
       skinService.start();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when execute Javascript service updater", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when execute Javascript service updater", e);
       }
     }
   }

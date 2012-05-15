@@ -66,7 +66,7 @@ public class UINodeTypeImport extends UIForm {
   private List<NodeTypeValue> nodeTypeList_ = new ArrayList<NodeTypeValue>() ;
   final static String TABLE_NAME =  "UINodeTypeImport";
   final static String [] TABLE_COLUMNS = {"label", "input"};
-  private static final Log LOG  = ExoLogger.getLogger(UINodeTypeImport.class);
+  private static final Log LOG  = ExoLogger.getLogger(UINodeTypeImport.class.getName());
 
   private List<String> undefinedNodeType = new ArrayList<String>();
 

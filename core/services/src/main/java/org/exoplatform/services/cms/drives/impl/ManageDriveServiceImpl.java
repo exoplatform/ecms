@@ -134,7 +134,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
 
   private DMSConfiguration dmsConfiguration_;
-  private static final Log LOG  = ExoLogger.getLogger(ManageDriveServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(ManageDriveServiceImpl.class.getName());
 
   /**
    * Keep the drives of repository

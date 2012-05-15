@@ -46,7 +46,7 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
 
   private static final String EXO_THUMBNAILS               = "exo:thumbnails";
 
-  private Log                 log                          = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG                             = ExoLogger.getLogger(ThumbnailNodeTypeUpgradePlugin.class.getName());
 
   private DMSConfiguration    dmsConfiguration_;
 
@@ -70,8 +70,8 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
     SessionProvider sessionProvider = null;
     try {
       sessionProvider = SessionProvider.createSystemProvider();
-      if (log.isInfoEnabled()) {
-        log.info("Start " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start " + this.getClass().getName() + ".............");
       }
       Session session = sessionProvider.getSession(dmsConfiguration_.getConfig()
                                                                     .getSystemWorkspace(),
@@ -86,12 +86,12 @@ public class ThumbnailNodeTypeUpgradePlugin extends UpgradeProductPlugin {
       NodeTypeValue exoThumbnailNodeTypeValue = nodeTypeManager.getNodeTypeValue(EXO_THUMBNAIL);
       updateSuperType(nodeTypeManager, exoThumbnailNodeTypeValue);
 
-      if (log.isInfoEnabled()) {
-        log.info("End " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("End " + this.getClass().getName() + ".............");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(this.getClass().getName() + " failed:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(this.getClass().getName() + " failed:", e);
       }
     } finally {
       if (sessionProvider != null) {

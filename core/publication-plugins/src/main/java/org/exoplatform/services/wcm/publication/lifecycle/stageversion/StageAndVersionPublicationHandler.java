@@ -39,7 +39,7 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
 
   /** The Logger **/
-  private static final Log LOG = ExoLogger.getLogger(StageAndVersionPublicationHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(StageAndVersionPublicationHandler.class.getName());
   
   /** The template service. */
   private TemplateService templateService;

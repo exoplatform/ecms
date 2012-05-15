@@ -68,7 +68,7 @@ public class UIWorkspaceList extends UIForm {
   private List<String> wsList_;
   private boolean isShowSystem_ = true;
 
-  private static final Log LOG = ExoLogger.getLogger(UIWorkspaceList.class);
+  private static final Log LOG = ExoLogger.getLogger(UIWorkspaceList.class.getName());
 
   public UIWorkspaceList() throws Exception {
     List<SelectItemOption<String>> wsList = new ArrayList<SelectItemOption<String>>();

@@ -62,7 +62,7 @@ import javax.jcr.Session;
 public abstract class BaseTest extends TestCase
 {
 
-   private static final Log LOG = ExoLogger.getLogger(BaseTest.class);
+   private static final Log LOG = ExoLogger.getLogger(BaseTest.class.getName());
 
    protected StandaloneContainer container;
 
