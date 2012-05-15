@@ -1,0 +1,52 @@
+eXo Platform provides CMIS support using the xCMIS project and the WCM Storage provider.
+
+{docbook}
+<para xml:id="Dev_CMIS.Overview.About_CMIS">
+<citetitle>
+<emphasis role="bold">About CMIS</emphasis>
+</citetitle>
+</para>
+{docbook}
+
+The CMIS standard aims at defining a common content management web services interface that can be applied in content repositories and bring about the interoperability across repositories. The formal specification of CMIS standard is approved by the Organization for the Advancement of Structured Information Standards (OASIS) technical committee, who drives the development, convergence and adoption of global information society. With CMIS, enterprises now can deploy systems independently, and create specialized applications running over a variety of content management systems.
+
+To see the advantages of content interoperability and the significance of CMIS as a whole, it is necessary to learn about mutual targets which caused the appearance of specification first. 
+* Content integration: With CMIS, integrating content among various repositories, even those created by different vendors in a single application, becomes faster, simpler and more effective. CMIS makes it possible for customers to integrate content management systems into their key business processes across business departments and vendor implementations.
+* Access unification: CMIS enables different applications and manufacturers to be connected to a CMIS-enabled content repository simply. With CMIS, a business application's developer can focus on the application's business logic, rather than issues related to the compatibility or content migration. 
+
+{docbook}
+<para xml:id="Dev_CMIS.Overview.About_xCMIS">
+<citetitle>
+<emphasis role="bold">About xCMIS</emphasis>
+</citetitle>
+</para>
+{docbook}
+
+The xCMIS project, which is initially contributed to the Open Source community by eXo Platform, is an Open Source implementation of the Content Management Interoperability Services (CMIS) specification. xCMIS supports all the features stated in the CMIS core definition and both REST AtomPub and Web Services (SOAP/WSDL) protocol bindings. 
+
+{tip:title=Intro in xCMIS basis}  
+To learn more about xCMIS, visit: 
+* [http://gazarenkov.blogspot.com/2010/01/xcmis1-cmis-in-nutshell.html] 
+* [http://code.google.com/p/xcmis/]
+{tip}
+
+{docbook}
+<para xml:id="Dev_CMIS.Overview.About_eXo_CMIS">
+<citetitle>
+<emphasis role="bold">About eXo CMIS</emphasis>
+</citetitle>
+</para>
+{docbook}
+
+eXo CMIS is built on the top of xCMIS embedded in eXo Platform to expose the WCM drives as the CMIS repositories.
+The CMIS features are implemented as a set of components deployed on the eXo Container using XML files to describe the service configuration.
+
+{note}
+SOAP protocol binding is not implemented in eXo CMIS.
+{note}
+
+!images/exo-cmis-wcm.png|width="120mm" fo:scalefit="1" html:scalefit="0"!
+*Figure: How eXo CMIS works*
+
+WCM drives exposure is implemented as a WCM storage provider to the xCMIS SPI.
+The storage provider uses mappings from the WCM's _ManageDriveService_ to actual JCR nodes. _AtomPub_ bindings makes WCM structure available via CMIS standard API.

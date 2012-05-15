@@ -1,0 +1,24 @@
+
+{note}
+This is related to Content Management Interoperability Services (CMIS) Version 1.0
+OASIS Standard 
+1 May 2010
+
+[http://en.wikipedia.org/wiki/Content_Management_Interoperability_Services]
+{note}
+
+The CMIS interface is designed to be layered on top of existing Content Management systems and their existing programmatic interfaces. It is intended to expose all of the CM systems capabilities through the CMIS interfaces exhaustively. The CMIS specification defines the followings:
+* A standard "domain model" for an ECM system - a set of core concepts included in all modern ECM systems, such as Object Types, properties, folders, documents, versions, and relationships; and a set of operations performed on those concepts, such as updating documents, or navigating via a folder hierarchy. 
+* The way to bind the CMIS domain model to two different web service protocols, including the Simple Object Access Protocol (SOAP) used in many ECM systems, and the Atom used in many Web 2.0 applications.
+
+{note}
+The SOAP protocol is not implemented in eXo CMIS.
+{note}
+
+The CMIS specification provides a Web services interface which can:
+* Work over existing repositories, enabling customers to build and leverage applications against multiple repositories.
+* Decouple Web services and content from the content management repository, enabling customers to manage content independently.
+* Provide common Web services and Web 2.0 interfaces to dramatically simplify the application development.
+* Build the development platform and language agnostic.
+* Support the composite application development and mashups by the business or IT analysts.
+

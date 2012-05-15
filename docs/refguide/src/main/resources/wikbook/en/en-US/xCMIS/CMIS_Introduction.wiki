@@ -1,0 +1,6 @@
+This chapter will understand what CMIS is, how it is extended in WCM, its features, and more via the following topics:
+* [Overview|#Dev_CMIS.Overview]
+* [CMIS specification|#Dev_CMIS.Specification]
+* [xCMIS project|#Dev_CMIS.xCMIS_project]
+* [CMIS features|#Dev_CMIS.features]
+* [Service JARs|#Adm_CMIS.ServiceJARs]

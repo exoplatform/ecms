@@ -1,6 +1,10 @@
 Publication add-ons for eXo Content.
 
 h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin}
+This section covers the following topics:
+* [States|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States]
+* [Start/End publication dates|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates]
+* [New Publication Mixin|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin]
 
 h2. States {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States}
 

@@ -1,0 +1,47 @@
+
+The CMIS specification prescribes:
+* Domain model
+* Services
+
+h1. CMIS Domain Model {anchor:id=Dev_CMIS.features.CMIS_domain_model}
+The CMIS Domain Model defines a repository as a container and an entry point to the objects that is quite simple and non-restrictive. The followings are some of the common entities of the domain model. 
+
+* Repository is a container of objects with a set of "capabilities" which may be different depending on the implementation.
+* Object is the entity managed by a CMIS repository.
+* Object Type is a classification related to an object. It specifies a fixed and non-hierarchical set of properties ("schema") that all objects of that type have.  
+* Document Object is an elementary information entity.
+* Folder Object is a collection of fileable objects.
+* Relationship Object is used to describe a dependent object semantically.
+* Policy Object represents an administrative policy applied to an object.
+* Access Object defines permissions. 
+* Versioning is to support versioning for Document objects.
+* Query is type-based in a simplified SQL SELECT statement. 
+* Change Log is a mechanism which enables applications to discover changes to the objects stored.
+
+{note}
+CMIS specifies a query language based on the SQL-92 standard, plus the extensions, in conjunction with the model mapping defined by the CMIS's relational view.
+{note}
+
+All objects are classified by an Object Type which declares that all objects of the given type have some sets of properties in common. Each property consists of a set of attributes, such as the TypeID, the property ID, its display name, its query name, and more. There are only four base types, including Document, Folder, Relationship, and Policy. Also, you can extend those basic types by modifying a set of their properties.
+
+Document Object and Folder Object are self-explanatory. Document Object has properties to hold document metadata, such as the document author, modification date and custom properties. It can also contain a content stream whether it is required, and renditions, such as a thumbnail view of document. Folder is used to contain objects. Apart from the default hierarchical structure, CMIS can optionally store objects in multiple folders or in no folders at all (so-called multifiling and unfiling capabilities).
+Relationship Object denotes the connection between two objects (target and source). An object can have multiple relationships with other objects.
+Policy Object is a way to define administrative policies in managing objects. For example, you can use a CMIS policy to define which documents are subject to retention policies.
+
+h1. CMIS Services {anchor:id=Dev_CMIS.features.CMIS_services}
+CMIS provides a set of services to access and manage the content or repository. These services include:
+
+|| Name || Description ||
+|*Repository Services*| Discover information about the repository and the object types defined for the repository.|
+|*Navigation Services*| Traverse the folder hierarchy in a CMIS repository, and to locate documents which are checked out.|
+|*Object Services*| Execute ID-based CRUD functions (Create, Retrieve, Update, Delete) on objects in a repository.|
+|*Multi-filing Services (optional)*| Put an object in more than one folder (multi-filing), or outside the folder hierarchy (unfiling).|
+|*Discovery Services*| Search for queryable objects in a repository.|
+|*Versioning Services*| Check out, navigate to documents, or update a Document Version Series (checkOut, cancelCheckOut, getPropertiesOfLatestVersion, getAllVersions, deleteAllVersions).|
+|*Relationship Services (optional)*| Retrieve an object for its relationships.|
+|*Policy Services (optional)*| Apply, remove, or query for policies.|
+|*ACL Services*| Return and manage the Access Control List (ACL) of an object. ACL Services are not supported by all repositories.|
+
+Some repositories might not implement certain optional capabilities, but they are still considered as CMIS-compliant.
+Each service has binding which defines the way messages will be serialized and wired.
+Binding is based on HTTP and uses the Atom Publishing Protocol.

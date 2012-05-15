@@ -1,4 +1,4 @@
-The following is an sample code of the *View* template of a content node:
+The following is a sample code of the *View* template of a content node:
 
 * Get a content node to display: 	
 {code:groovy}

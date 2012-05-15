@@ -1,0 +1,19 @@
+xCMIS includes the client side frameworks for integrating content from different enterprise repositories, according to [CMIS standard|http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis].
+
+The project is to make joining Enterprise Content repositories simpler by offering CMIS abilities and exposing them to language-independent CMIS clients via the most convenient protocol.
+
+*xCMIS project*:
+* Is embedded, packaged as the J2EE Web archive (WAR) and prepared "download and go" Tomcat bundle.
+* Has a live demo with the full-featured CMIS Expert client, which is accessible via xcmis.org site and with prepared "download and go" Tomcat bundle (the client is accessible as the remote gadget).
+* Is embedded in eXo Platform to create the special xCMIS jcr repository and access it with any CMIS client.
+* Tested with third-party CMIS clients, such as IBM CMIS Firefox Connector and CMIS Spaces Flex+AIR client. Either local repository (as described [here|http://xcmis.org/xcmis1/rest/cmisatom]), or can be used as a CMIS repository's endpoint URL for these, or other types of clients.
+
+*Benefits of xCMIS*:
+* xCMIS is an open source, server side Java CMIS implementation, enabling to expose content in the existing content repositories according to the protocols defined in the CMIS specification.
+* xCMIS will give developers a way to make their content repositories "pluggable" on the server side based on the internal Storage Provider Interface and additional protocol on-demand bindings.
+* xCMIS will provide (several) CMIS client frameworks for repository-application and repository-repository interactions. The programming language and supported protocol can be selected by users. For example, the reasonable choice for using web applications, gadgets, and/or mashups is JavaScript, or GWT over REST AtomPub, while for inter-repository exchange, it may be Java over Web Services like WSDL/SOAP.
+* Both the server and client sides of xCMIS are easily integrated in eXo Platform 3.0 infrastructure. In particular, xCMIS exposes the eXo JCR content repository and provides a framework for building web applications and gadgets for the GateIn portal.
+
+The xCMIS project is distributed under the LGPL license. You can download sources on [Google code|http://code.google.com/p/xcmis/source/checkout],
+or visit [Community Wiki|http://code.google.com/p/xcmis/w/list] for more information.
+

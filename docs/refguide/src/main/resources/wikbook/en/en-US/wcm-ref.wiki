@@ -29,6 +29,20 @@ h3. Newsletter {anchor:id=CONTref.Portlets.Newsletter}
 h3. SEO portlet  {anchor:id=CONTref.Portlets.SEO}
  {include:document="pages/preface/portlet_seo.wiki" /}
 
+h1. CMIS {anchor:id=CONTref.CMIS}
+{include:document="xCMIS/CMIS_Introduction.wiki" /}
+h2. Overview {anchor:id=Dev_CMIS.Overview}
+{include:document="xCMIS/Overview.wiki" /}
+h2. CMIS specification {anchor:id=Dev_CMIS.Specification}
+{include:document="xCMIS/CMISspecification.wiki" /}
+h2. xCMIS project {anchor:id=Dev_CMIS.xCMIS_project}
+{include:document="xCMIS/xCMISproject.wiki" /}
+h2. CMIS features {anchor:id=Dev_CMIS.features}
+{include:document="xCMIS/WCMfeatures.wiki" /}
+{include:document="xCMIS/CMISfeatures.wiki" /}
+h2. Service JARs {anchor:id=Adm_CMIS.ServiceJARs}
+{include:document="xCMIS/xCMISfiles.wiki" /}
+ 
 h1. Configuration   {anchor:id=CONTref.Configuration}
 {include:document="pages/configuration/configuration.wiki"/}
 h2. Components   {anchor:id=CONTref.Configuration.Components}
@@ -65,7 +79,6 @@ h3. WatchDocumentService   {anchor:id=CONTref.Configuration.Components.WatchDocu
 {include:document="pages/configuration/components/config_WatchDocumentService.wiki"/}
 h3. WCMService    {anchor:id=CONTref.Configuration.Components.WCMService}
 {include:document="pages/configuration/components/config_WCMService.wiki"/}
-
 
 h2. External Component Plugins   {anchor:id=CONTref.Configuration.Plugins}
 {include:document="pages/configuration/plugins/plugin.wiki"}
@@ -132,7 +145,10 @@ h3. TemplatePlugin   {anchor:id=CONTref.Configuration.Plugins.TemplatePlugin}
 h3. XMLdeploymentPlugin{anchor:id=CONTref.Configuration.Plugins.XMLdeploymentPlugin}
 {include:document="pages/configuration/plugins/plugin_XMLdeploymentPlugin.wiki" /}
 
-
+h2. CMIS configuration {anchor:id=Adm_CMIS.Configuration}
+{include:document="xCMIS/Configure.wiki" /}
+{include:document="xCMIS/Authentication.wiki" /}
+{include:document="xCMIS/Index.wiki" /}
 
 h1. Developer references {anchor:id=CONTref.DeveloperReferences}
 {include:document="pages/developer-ref.wiki" /}
@@ -162,7 +178,8 @@ h3. UI Extensions {anchor:id=CONTref.Extensions.UIExtensions}
   {include:document="pages/extensions/ui.wiki" /}
 h3. Authoring Extension {anchor:id=CONTref.Extensions.AuthoringExtension}
   {include:document="pages/extensions/authoring.wiki" /}
-
+h2. CMIS Usage code examples {anchor:id=Dev_CMIS.Usage_code_examples}
+{include:document="xCMIS/CodeExamples.wiki" /}    
 h2. Public REST APIs {anchor:id=CONTref.Devref.PublicRestAPIs}
 {include:document="pages/Rest-api.wiki" /}
 h2. Public Java APIs {anchor:id=CONTref.JavaServices}
@@ -188,10 +205,9 @@ h3. SiteSearchService {anchor:id=CONTref.JavaServices.SiteSearchService}
   {include:document="pages/services/SiteSearchService.wiki" /}
 h3. SEOService  {anchor:id=CONTref.JavaServices.SEOService}
  {include:document="pages/services/SEO.wiki" /}
-
 h2. Deprecated portlets {anchor:id=CONTref.Deprecated_portlets}
 {include:document="pages/deprecatedPortlets.wiki" /}
-
+h2. Miscellaneous and Tips {anchor:id=Adm_CMIS.Miscellaneous_tips}
+{include:document="xCMIS/Links.wiki" /}
 h2. FAQ {anchor:id=CONTref.FAQ}
-  {include:document="pages/faq/faq.wiki" /}
-
+{include:document="pages/faq/faq.wiki" /}

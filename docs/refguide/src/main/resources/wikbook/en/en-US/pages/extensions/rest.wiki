@@ -9,6 +9,13 @@ The client begins sending requests when it is ready to make the transition to a 
 REST is initially described in the context of HTTP, but is not limited to that protocol. RESTful architectures can be based on other Application Layer protocols if they already provide a rich and uniform vocabulary for applications based on the transfer of meaningful representational state. RESTful applications maximize the use of the pre-existing, well-defined interface and other built-in capabilities provided by the chosen network protocol, and minimize the addition of new application-specific features on its top.
 
 h1. Restful Web Service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService}
+This section provides you the following topics:
+* [HTTP Methods|#CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods]
+* [Formats|#CONTref.Extensions.RESTServices.RestfulWebService.Formats]
+* [Data Format|#CONTref.Extensions.RESTServices.RestfulWebService.DataFormat]
+* [REST configuration|#CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration]
+* [Create a REST service|#CONTref.Extensions.RESTServices.RestfulWebService.CreateRESTService]
+
 h2. HTTP Methods {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods}
 Here is the convention you should follow:
 
