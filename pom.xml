@@ -50,7 +50,7 @@
     <workflowEngine>jbpm</workflowEngine>
     <!-- 3rd parties -->
     <c3p0.version>0.9.1.2</c3p0.version>
-    <org.gatein.wci.version>2.0.2-GA</org.gatein.wci.version>
+    <org.gatein.wci.version>2.1.0-GA</org.gatein.wci.version>
     <javassist.version>3.4.GA</javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
     <commons-pool.version>1.2</commons-pool.version>

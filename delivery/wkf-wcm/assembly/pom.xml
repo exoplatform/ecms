@@ -115,9 +115,9 @@
 	<dependency><groupId>org.exoplatform.ecms</groupId><artifactId>exo-ecms-packaging-workflow-config</artifactId><version>${project.version}</version><type>jar</type></dependency>
 	<dependency><groupId>org.exoplatform.ecms</groupId><artifactId>exo-ecms-packaging-workflow-webapp</artifactId><version>${project.version}</version><type>war</type></dependency>
     <dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>${c3p0.version}</version><type>jar</type></dependency><!-- 0.9.1.2-->
-	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.1.0-GA-->
 	<dependency><groupId>org.exoplatform.jcr</groupId><artifactId>exo.jcr.framework.web</artifactId><version>${org.exoplatform.jcr.version}</version><type>jar</type></dependency><!-- 1.12.6-GA-SNAPSHOT-->
-	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat6</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.1.0-GA-->
 	<dependency><groupId>net.sourceforge.nekohtml</groupId><artifactId>nekohtml</artifactId><version>${net.sourceforge.nekohtml.version}</version><type>jar</type></dependency><!-- 1.9.9-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.portlet.dashboard</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.web.portal</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->

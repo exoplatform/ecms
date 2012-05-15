@@ -217,8 +217,8 @@
   <dependency><groupId>org.w3c</groupId><artifactId>sac</artifactId><version>${org.w3c.sac.version}</version><type>jar</type></dependency>
   <dependency><groupId>batik</groupId><artifactId>batik-util</artifactId><version>${org.apache.batik-util.version}</version><type>jar</type></dependency>
 	<dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>${c3p0.version}</version><type>jar</type></dependency><!-- 0.9.1.2-->
-	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
-	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
+	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.1.0-GA-->
+	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat6</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.1.0-GA-->
 	<dependency><groupId>net.sourceforge.nekohtml</groupId><artifactId>nekohtml</artifactId><version>${net.sourceforge.nekohtml.version}</version><type>jar</type></dependency><!-- 1.9.9-->
 	<dependency><groupId>net.oauth</groupId><artifactId>core</artifactId><version>${net.oauth.version}</version><type>jar</type></dependency><!-- 20080621-->
 	<dependency><groupId>cglib</groupId><artifactId>cglib</artifactId><version>${cglib.version}</version><type>jar</type></dependency><!-- 2.2-->
