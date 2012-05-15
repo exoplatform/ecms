@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 public class CreatePageEventListener extends Listener<DataStorageImpl, Page>{
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(CreatePageEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(CreatePageEventListener.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
@@ -51,8 +51,8 @@ public class CreatePageEventListener extends Listener<DataStorageImpl, Page>{
       else
         publicationService.updateLifecyleOnCreatePage(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when update publication lifecyle", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when update publication lifecyle", e);
       }
     }
   }

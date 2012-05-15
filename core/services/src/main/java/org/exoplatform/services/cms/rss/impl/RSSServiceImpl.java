@@ -100,7 +100,7 @@ public class RSSServiceImpl implements RSSService{
   static private String MIX_VERSIONABLE = "mix:versionable" ;
 
   private RepositoryService repositoryService_;
-  private static final Log LOG  = ExoLogger.getLogger(RSSServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(RSSServiceImpl.class.getName());
   /**
    * Constructor method
    * Init repositoryService, nodeHierarchyCreator

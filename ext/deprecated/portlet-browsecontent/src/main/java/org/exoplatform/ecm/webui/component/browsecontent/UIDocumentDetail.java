@@ -89,7 +89,7 @@ public class UIDocumentDetail extends UIBaseNodePresentation implements UIPopupC
   private String language_ ;
   private JCRResourceResolver jcrTemplateResourceResolver_ ;
 
-  private static final Log             LOG                   = ExoLogger.getLogger("portlet.DocumentDetail");
+  private static final Log             LOG                   = ExoLogger.getLogger(UIDocumentDetail.class.getName());
 
   public UIDocumentDetail() {}
 

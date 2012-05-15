@@ -28,7 +28,7 @@ import org.exoplatform.services.log.Log;
  */
 public class TaxonomyNodeAlreadyExistsException extends Throwable {
 
-  private static final Log LOG = ExoLogger.getLogger(TaxonomyNodeAlreadyExistsException.class);
+  private static final Log LOG = ExoLogger.getLogger(TaxonomyNodeAlreadyExistsException.class.getName());
 
   TaxonomyNodeAlreadyExistsException() {
     if (LOG.isInfoEnabled()) {

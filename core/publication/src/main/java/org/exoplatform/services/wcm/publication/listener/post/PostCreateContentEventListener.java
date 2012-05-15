@@ -45,8 +45,8 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  */
 public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
-  private static final Log log = ExoLogger.getLogger(PostCreateContentEventListener.class);
-  
+  private static final Log LOG = ExoLogger.getLogger(PostCreateContentEventListener.class.getName());
+
   public static final String POST_INIT_STATE_EVENT      = "PublicationService.event.postInitState";
 
   /** The publication service. */
@@ -117,9 +117,9 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
      siteName = Util.getPortalRequestContext().getPortalOwner();
      remoteUser = Util.getPortalRequestContext().getRemoteUser();
     } catch (NullPointerException npe) {
-      if (log.isDebugEnabled()) log.debug("No portal context available");
+      if (LOG.isDebugEnabled()) LOG.debug("No portal context available");
     }
-    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
+    if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }
 }

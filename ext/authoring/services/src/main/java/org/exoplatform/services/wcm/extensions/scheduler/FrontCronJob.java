@@ -13,7 +13,7 @@ import org.quartz.JobDataMap;
  */
 public class FrontCronJob extends CronJob {
 
-    private static final Log log = ExoLogger.getLogger(FrontCronJob.class);
+    private static final Log LOG = ExoLogger.getLogger(FrontCronJob.class.getName());
 
     private JobDataMap jobDataMap;
 
@@ -25,8 +25,8 @@ public class FrontCronJob extends CronJob {
      */
     public FrontCronJob(InitParams params) throws Exception {
       super(params);
-      if (log.isInfoEnabled()) {
-          log.info("Start Init CronJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start Init CronJob");
       }
     
       jobDataMap = new JobDataMap();
@@ -36,9 +36,9 @@ public class FrontCronJob extends CronJob {
       String temporaryStorge = props.getProperty("temporaryStorge");
       jobDataMap.put("stagingStorage", stagingStorage);
       jobDataMap.put("temporaryStorge", temporaryStorge);
-      if (log.isInfoEnabled()) {
-        log.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
-        log.info("End Init CronJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
+        LOG.info("End Init CronJob");
       }
     }
 
@@ -47,7 +47,6 @@ public class FrontCronJob extends CronJob {
      * @return JobDataMap
      */
     public JobDataMap getJobDataMap() {
-  return jobDataMap;
+      return jobDataMap;
     }
-
 }

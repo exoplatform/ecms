@@ -37,7 +37,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 public class UpdateNavigationEventListener extends Listener<NavigationServiceWrapper, SiteKey>{
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(UpdateNavigationEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(UpdateNavigationEventListener.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
@@ -58,8 +58,8 @@ public class UpdateNavigationEventListener extends Listener<NavigationServiceWra
                                                                               .getIdentity()
                                                                               .getUserId());
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when update publication lifecyle", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when update publication lifecyle", e);
       }
     }
   }

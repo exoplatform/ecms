@@ -79,7 +79,7 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 
   final static public String CHOOSE_PATH_TO_RESTORE_NODE = "ChooseTagToRestoreNode";
 
-  private final static Log   LOG                         = ExoLogger.getLogger(UISelectRestorePath.class);
+  private final static Log   LOG                         = ExoLogger.getLogger(UISelectRestorePath.class.getName());
 
   private NodeLocation               trashHomeNode;
 

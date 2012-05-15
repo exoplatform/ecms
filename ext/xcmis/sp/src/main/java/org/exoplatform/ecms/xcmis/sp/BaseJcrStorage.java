@@ -83,7 +83,7 @@ import javax.jcr.version.VersionHistory;
 abstract class BaseJcrStorage implements TypeManager
 {
 
-   private static final Log LOG = ExoLogger.getExoLogger(BaseJcrStorage.class);
+   private static final Log LOG = ExoLogger.getExoLogger(BaseJcrStorage.class.getName());
 
    public static final String XCMIS_PROPERTY_TYPE = "_xcmis_property_type";
 

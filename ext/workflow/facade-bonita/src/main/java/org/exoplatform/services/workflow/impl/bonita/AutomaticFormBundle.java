@@ -21,7 +21,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 /**
  * When forms are automatically generated, it is also needed to provide a
@@ -35,7 +34,6 @@ import java.util.logging.Logger;
  */
 public class AutomaticFormBundle extends ResourceBundle {
 
-  private static Logger log = Logger.getLogger(AutomaticFormBundle.class.getName());
   /** Contains resource bundle information */
   private Hashtable<String, Object> objects;
 

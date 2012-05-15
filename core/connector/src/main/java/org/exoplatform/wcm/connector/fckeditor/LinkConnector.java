@@ -49,7 +49,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   private LinkFileHandler linkFileHandler;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(LinkFileHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(LinkConnector.class.getName());
 
   /**
    * Instantiates a new link connector.
@@ -91,8 +91,8 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
       if (response != null)
         return response;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getFoldersAndFiles: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getFoldersAndFiles: ", e);
       }
     }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -184,8 +184,8 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
           getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
       return folderSchemaHandler.getLinkFolder(parentNode);
     } catch (Exception e) {
-      if (log.isDebugEnabled()) {
-        log.debug(e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(e);
       }
       return null;
     }

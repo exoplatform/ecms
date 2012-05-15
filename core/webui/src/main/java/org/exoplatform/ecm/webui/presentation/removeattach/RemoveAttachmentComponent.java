@@ -49,7 +49,7 @@ import org.exoplatform.webui.core.UIApplication;
 
 public class RemoveAttachmentComponent extends AbstractActionComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(RemoveAttachmentComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(RemoveAttachmentComponent.class.getName());
 
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file

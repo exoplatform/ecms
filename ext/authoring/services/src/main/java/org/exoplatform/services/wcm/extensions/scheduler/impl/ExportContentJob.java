@@ -48,7 +48,7 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
 public class ExportContentJob implements Job {
-  private static final Log log                  = ExoLogger.getLogger(ExportContentJob.class);
+  private static final Log LOG                  = ExoLogger.getLogger(ExportContentJob.class.getName());
 
   private static final String MIX_TARGET_PATH      = "mix:targetPath";
 
@@ -80,8 +80,8 @@ public class ExportContentJob implements Job {
     Session session = null;
     try {
 
-      if (log.isInfoEnabled()) {
-        log.info("Start Execute ExportContentJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start Execute ExportContentJob");
       }
       if (fromState == null) {
 
@@ -98,12 +98,12 @@ public class ExportContentJob implements Job {
         workspace = pathTab[1];
         contentPath = pathTab[2];
 
-        if (log.isDebugEnabled()) {
-          log.debug("Init parameters first time :");
-          log.debug("\tFromState = " + fromState);
-          log.debug("\tToState = " + toState);
-          log.debug("\tLocalTempDir = " + localTempDir);
-          log.debug("\tTargetServerUrl = " + targetServerUrl);
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Init parameters first time :");
+          LOG.debug("\tFromState = " + fromState);
+          LOG.debug("\tToState = " + toState);
+          LOG.debug("\tLocalTempDir = " + localTempDir);
+          LOG.debug("\tTargetServerUrl = " + targetServerUrl);
         }
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
@@ -162,8 +162,8 @@ public class ExportContentJob implements Job {
             HashMap<String, String> context_ = new HashMap<String, String>();
             context_.put("containerName", containerName);
             publicationPlugin.changeState(node_, toState, context_);
-            if (log.isInfoEnabled()) {
-              log.info("change the status of the node " + node_.getPath() + " to " + toState);
+            if (LOG.isInfoEnabled()) {
+              LOG.info("change the status of the node " + node_.getPath() + " to " + toState);
             }
             bos = new ByteArrayOutputStream();
 
@@ -296,8 +296,8 @@ public class ExportContentJob implements Job {
           out.close();
           String string = null;
           while ((string = inStream.readLine()) != null) {
-            if (log.isDebugEnabled()) {
-              log.debug("The response of the production server:" + string);
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("The response of the production server:" + string);
             }
           }
           connection.disconnect();
@@ -305,20 +305,20 @@ public class ExportContentJob implements Job {
         }
       }
 
-      if (log.isInfoEnabled()) {
-        log.info("End Execute ExportContentJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("End Execute ExportContentJob");
       }
     } catch (RepositoryException ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Repository 'repository ' not found.", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository 'repository ' not found.", ex);
       }
     } catch (ConnectException ex) {
-      if (log.isErrorEnabled()) {
-        log.error("The front server is down.", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("The front server is down.", ex);
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when exporting content : ", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when exporting content : ", ex);
       }
     } finally {
       if (session != null)

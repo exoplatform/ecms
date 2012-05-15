@@ -55,7 +55,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 
 public class UIDocumentFormController extends UIContainer implements UIPopupComponent {
 
-  private static final Log LOG  = ExoLogger.getLogger("UIDocumentFormController");
+  private static final Log LOG  = ExoLogger.getLogger(UIDocumentFormController.class.getName());
 
   private NodeLocation currentNode_ ;
   private String repository_ ;

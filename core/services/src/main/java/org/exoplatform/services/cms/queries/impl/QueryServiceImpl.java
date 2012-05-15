@@ -73,7 +73,7 @@ public class QueryServiceImpl implements QueryService, Startable{
   
   private NodeHierarchyCreator nodeHierarchyCreator_;
 
-  private static final Log LOG = ExoLogger.getLogger(QueryServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(QueryServiceImpl.class.getName());
 
   /**
    * Constructor method

@@ -69,7 +69,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
   private String internalServerPath;
 
   /** The log. */
-  final private static Log LOG = ExoLogger.getLogger(LiveLinkManagerServiceImpl.class);
+  final private static Log LOG = ExoLogger.getLogger(LiveLinkManagerServiceImpl.class.getName());
 
   /**
    * Instantiates a new live link manager service impl.

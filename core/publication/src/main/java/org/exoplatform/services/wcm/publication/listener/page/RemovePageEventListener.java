@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 public class RemovePageEventListener extends Listener<DataStorageImpl, Page>{
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(RemovePageEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(RemovePageEventListener.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
@@ -54,8 +54,8 @@ public class RemovePageEventListener extends Listener<DataStorageImpl, Page>{
                                                                         .getIdentity()
                                                                         .getUserId());
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when update publication lifecyle", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when update publication lifecyle", e);
       }
     }
   }

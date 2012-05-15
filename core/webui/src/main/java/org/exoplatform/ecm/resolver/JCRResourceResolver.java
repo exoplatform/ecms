@@ -42,7 +42,7 @@ public class JCRResourceResolver extends ResourceResolver {
   protected String workspace ;
   protected String propertyName ;
   /** The log. */
-  private static Log LOG = ExoLogger.getLogger("ecm:JCRResourceResolver");
+  private static final Log LOG = ExoLogger.getLogger(JCRResourceResolver.class.getName());
   private TemplateService templateService;
 
   /**

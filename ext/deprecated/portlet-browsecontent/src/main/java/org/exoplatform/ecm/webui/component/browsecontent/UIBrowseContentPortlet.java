@@ -50,7 +50,7 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UIBrowseContentPortlet.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIBrowseContentPortlet.class.getName());
 
   private boolean isViewModing_ = true;
   @SuppressWarnings("unused")

@@ -46,7 +46,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
-  private static Log log = ExoLogger.getLogger(CreateLivePortalEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(CreateLivePortalEventListener.class.getName());
   private boolean autoCreatedDrive = true;
   private ArrayList<String> targetDrives = null;
   public static String AUTO_CREATE_DRIVE = "autoCreatedDrive";
@@ -83,19 +83,19 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       return;//portal already exists
     } catch (Exception e) {
       //portal did not exists, process to create
-      if (log.isInfoEnabled()) {
-        log.info("Creating new resource storage for portal: " + portalConfig.getName());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Creating new resource storage for portal: " + portalConfig.getName());
       }
     }
     // Create site content storage for the portal
     try {
       livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
-      if (log.isInfoEnabled()) {
-        log.info("Created new resource storage for portal: " + portalConfig.getName());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Created new resource storage for portal: " + portalConfig.getName());
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when create new resource storage: " + portalConfig.getName(), e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when create new resource storage: " + portalConfig.getName(), e);
       }
     }
     // create drive for the site content storage
@@ -108,8 +108,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
         Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
         createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
       } catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
         }
       }
     }
@@ -117,11 +117,11 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
     container.getComponentInstanceOfType(CreatePortalArtifactsService.class);
     try {
-      artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(), 
+      artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(),
                                                           portalConfig.getPortalLayout().getId());
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when create drive for portal: " + portalConfig.getName(), e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
       }
     }
   }
@@ -161,8 +161,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
                           showHiddenNode,
                           allowCreateFolder,
                           allowNodeTypesOnTree);
-    if (log.isInfoEnabled()) {
-      log.info("Create new drive for portal: " + portalConfig.getName());
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Create new drive for portal: " + portalConfig.getName());
     }
   }
 }

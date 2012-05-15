@@ -72,7 +72,7 @@ public class UISimpleSearch extends UIForm {
   final static public String FIRST_OPERATOR = "firstOperator";
   final static public String OR = "or";
   final static public String AND = "and";
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UISimpleSearch");
+  private static final Log LOG  = ExoLogger.getLogger(UISimpleSearch.class.getName());
   private List<String> constraints_ = new ArrayList<String>();
   private List<String> virtualConstraints_ = new ArrayList<String>();
   private List<String> categoryPathList = new ArrayList<String>();

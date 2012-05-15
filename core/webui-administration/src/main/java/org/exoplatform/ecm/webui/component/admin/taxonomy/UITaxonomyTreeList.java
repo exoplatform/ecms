@@ -69,7 +69,7 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
 
   private boolean              isTargetInTrash_  = false;
   
-  private static final Log LOG = ExoLogger.getLogger(UITaxonomyTreeList.class);
+  private static final Log LOG = ExoLogger.getLogger(UITaxonomyTreeList.class.getName());
 
   public UITaxonomyTreeList() throws Exception {
     getUIPageIterator().setId("UITaxonomyTreeListIterator");

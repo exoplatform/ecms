@@ -80,8 +80,8 @@ import org.exoplatform.webui.event.EventListener;
 public class UIManagerUsers extends UITabPane {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(UIManagerUsers.class);
-  
+  private static final Log LOG = ExoLogger.getLogger(UIManagerUsers.class.getName());
+
   /** The TITL e_. */
   private String[] TITLE_  = {"Mail", "isBanned"};
 

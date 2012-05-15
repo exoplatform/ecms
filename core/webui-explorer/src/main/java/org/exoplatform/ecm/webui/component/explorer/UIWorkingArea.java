@@ -76,7 +76,7 @@ public class UIWorkingArea extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log                 LOG                      = ExoLogger.getLogger("dms.UIWorkingArea");
+  private static final Log                 LOG                      = ExoLogger.getLogger(UIWorkingArea.class.getName());
 
   public static final Pattern              FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(/.*)");
 

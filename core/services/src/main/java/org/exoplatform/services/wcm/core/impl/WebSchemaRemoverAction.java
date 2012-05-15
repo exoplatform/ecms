@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class WebSchemaRemoverAction implements Action{
 
-  private Log log = ExoLogger.getLogger("wcm:WebSchemaRemoverAction");
+  private static final Log LOG = ExoLogger.getLogger(WebSchemaRemoverAction.class.getName());
   public boolean execute(Context context) throws Exception {
    Node node = (Node)context.get("currentItem");
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -46,8 +46,8 @@ public class WebSchemaRemoverAction implements Action{
     try {
       schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when update web schema before remove node: " + node.getPath() , e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when update web schema before remove node: " + node.getPath() , e);
       }
     }
     return false;

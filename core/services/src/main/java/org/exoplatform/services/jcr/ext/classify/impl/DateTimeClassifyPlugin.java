@@ -69,7 +69,7 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
   private char incrementType;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(DateTimeClassifyPlugin.class);
+  private static final Log LOG = ExoLogger.getLogger(DateTimeClassifyPlugin.class.getName());
 
   /**
    * Instantiates a new date time classify plugin.
@@ -89,8 +89,8 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
       endDateTime = getCalendar(endDateTimeParam);
       setIncrement();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform DateTimeClassifyPlugin: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform DateTimeClassifyPlugin: ", e);
       }
     }
   }
@@ -260,8 +260,8 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
       calendar = ISO8601.parse(datetime);
       return calendar;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getCalendar: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getCalendar: ", e);
       }
     }
     return null;

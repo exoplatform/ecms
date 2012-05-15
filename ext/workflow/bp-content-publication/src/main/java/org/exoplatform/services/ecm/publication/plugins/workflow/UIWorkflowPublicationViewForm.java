@@ -58,7 +58,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
   private NodeLocation currentNode = null;
   private final String EXO_PUBLISH = "exo:published";
   private IdentityRegistry identityRegistry;
-  private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationViewForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationViewForm.class.getName());
 
   public UIWorkflowPublicationViewForm() throws Exception {
     identityRegistry = getApplicationComponent(IdentityRegistry.class);
@@ -214,7 +214,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                            "UIWorkflowPublicationViewForm.msg.unpublish-success",
                                                            null);
       uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.INFO));
-      
+
 
       UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
       popupWindow.setRendered(false);
@@ -242,7 +242,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                              "UIWorkflowPublicationActionForm.msg.node-checkedin",
                                                              null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -251,7 +251,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                              "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle",
                                                              null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -268,7 +268,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
                                                            "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle-finish",
                                                            null);
       uiApp.addMessage(new ApplicationMessage(msg, null));
-      
+
       return;
     }
   }

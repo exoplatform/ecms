@@ -43,7 +43,7 @@ public class VersionNode {
   private boolean isExpanded = true ;
 //  protected Version version_ ;
   private List<VersionNode> children_ = new ArrayList<VersionNode>() ;
-  private static final Log LOG  = ExoLogger.getLogger("model.VersionNode");
+  private static final Log LOG  = ExoLogger.getLogger(VersionNode.class.getName());
   private Calendar createdTime_;
   private String name_ = "";
   private String path_ = "";

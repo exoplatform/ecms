@@ -106,7 +106,7 @@ public class UIJCRExplorer extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIJCRExplorer");
+  private static final Log LOG  = ExoLogger.getLogger(UIJCRExplorer.class.getName());
 
   private LinkedList<ClipboardCommand> clipboards_ = new LinkedList<ClipboardCommand>() ;
   private LinkedList<String> nodesHistory_ = new LinkedList<String>() ;

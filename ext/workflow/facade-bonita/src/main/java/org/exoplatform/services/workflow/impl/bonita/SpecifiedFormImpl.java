@@ -79,7 +79,7 @@ public class SpecifiedFormImpl implements Form {
   /** Validation Message print after submit form */
   private String message;
 
-  private static final Log LOG = ExoLogger.getLogger(SpecifiedFormImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(SpecifiedFormImpl.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.Form#getCustomizedView()

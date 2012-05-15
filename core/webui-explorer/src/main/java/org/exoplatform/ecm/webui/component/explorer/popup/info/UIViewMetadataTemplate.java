@@ -52,7 +52,7 @@ import org.exoplatform.webui.exception.MessageException;
 public class UIViewMetadataTemplate extends UIContainer {
 
   private String documentType_ ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIViewMetadataTemplate");
+  private static final Log LOG  = ExoLogger.getLogger(UIViewMetadataTemplate.class.getName());
   public UIViewMetadataTemplate() throws Exception {
   }
 
@@ -101,7 +101,7 @@ public class UIViewMetadataTemplate extends UIContainer {
       }
       if (!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-        
+
         return;
       }
       uiMetaManager.initMetadataFormPopup(nodeType) ;

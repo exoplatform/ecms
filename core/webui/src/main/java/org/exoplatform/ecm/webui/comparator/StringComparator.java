@@ -41,7 +41,7 @@ public class StringComparator implements Comparator<Node> {
   public static final String DESCENDING_ORDER = "Descending" ;
   private String order_;
   private String type_ ;
-  private static final Log LOG  = ExoLogger.getLogger("admin.StringComparator");
+  private static final Log LOG  = ExoLogger.getLogger(StringComparator.class.getName());
   public StringComparator(String order, String type) {
     this.order_ = order ;
     this.type_ = type;

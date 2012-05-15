@@ -53,7 +53,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
   private WCMConfigurationService wcmConfigService;
 
   /** The log. */
-  private Log log = ExoLogger.getLogger("wcm:WebSchemaConfigService");
+  private static final Log LOG = ExoLogger.getLogger(WebSchemaConfigServiceImpl.class.getName());
 
   /**
    * Instantiates a new web schema config service impl.
@@ -159,8 +159,8 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
             session.save();
           }
         } catch (Exception e) {
-          if (log.isErrorEnabled()) {
-            log.error("Error when try to create share portal folder for repository: "+ repoName, e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Error when try to create share portal folder for repository: "+ repoName, e);
           }
         }
       }
@@ -173,8 +173,8 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    if (log.isInfoEnabled()) {
-      log.info("Start WebSchemaConfigServiceImpl...");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start WebSchemaConfigServiceImpl...");
     }
     createLiveSharePortalFolders();
   }

@@ -34,7 +34,7 @@ public class TrashMovementActionHandler implements ActionHandler {
   private static final long serialVersionUID = 1L;
 
   private boolean executed = false;
-  private static final Log LOG  = ExoLogger.getLogger(TrashMovementActionHandler.class);
+  private static final Log LOG  = ExoLogger.getLogger(TrashMovementActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     try {

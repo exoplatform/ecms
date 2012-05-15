@@ -83,7 +83,7 @@ public class ProcessUtil {
   public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository";
   public final static String CURRENT_PATH_PROP = "exo:currentPath";
 
-  private static Log LOG = ExoLogger.getLogger(ProcessUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(ProcessUtil.class.getName());
 
   public static void requestForValidation(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {

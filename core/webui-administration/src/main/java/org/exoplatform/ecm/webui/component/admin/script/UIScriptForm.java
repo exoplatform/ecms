@@ -68,7 +68,7 @@ import org.exoplatform.webui.form.validator.NameValidator;
 )
 public class UIScriptForm extends UIForm implements UIPopupComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(UIScriptForm.class);
+  private static final Log LOG = ExoLogger.getLogger(UIScriptForm.class.getName());
   
   final static public String FIELD_SELECT_VERSION = "selectVersion" ;
   final static public String FIELD_SCRIPT_CONTENT = "scriptContent" ;

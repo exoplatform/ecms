@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  */
 public class FormCache {
 
-  private static Logger log = Logger.getLogger(FormCache.class.getName());
+  private static final Logger LOG = Logger.getLogger(FormCache.class.getName());
 
   /**
    * Contains the Forms currently stored. The indexation is the following one :
@@ -91,8 +91,8 @@ public class FormCache {
                       String activity,
                       Locale locale,
                       Form   form) {
-    if (log.isLoggable(Level.INFO)) {
-          log.info("Form will be cached for [process,activity]: [" + processId + "," +activity + "]");
+    if (LOG.isLoggable(Level.INFO)) {
+          LOG.info("Form will be cached for [process,activity]: [" + processId + "," +activity + "]");
         }
     // Retrieve or create the states hashtable
     Hashtable<String, Hashtable<Locale, Form>> states = forms.get(processId);

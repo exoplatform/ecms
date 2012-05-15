@@ -59,7 +59,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     }
 )
 public class UISingleAddMetadataForm extends UIDialogForm {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UISingleAddMetadataForm");
+  private static final Log LOG  = ExoLogger.getLogger(UISingleAddMetadataForm.class.getName());
   private String nodeType_ ;
   public UISingleAddMetadataForm() throws Exception {
     setActions(ACTIONS) ;

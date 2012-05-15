@@ -53,7 +53,7 @@ import javax.jcr.RepositoryException;
 public class DriveCmisRegistry extends JcrCmisRegistry
 {
 
-   private static final Log LOG = ExoLogger.getLogger(DriveCmisRegistry.class);
+   private static final Log LOG = ExoLogger.getLogger(DriveCmisRegistry.class.getName());
 
    private final RepositoryService repositoryService;
 

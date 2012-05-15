@@ -89,7 +89,7 @@ public class UICLVPresentation extends UIContainer {
 
   public static final String       defaultScvParam = "content-id";
 
-  private static final Log         LOG             = ExoLogger.getLogger(UICLVPresentation.class);
+  private static final Log         LOG             = ExoLogger.getLogger(UICLVPresentation.class.getName());
 
   /** The template path. */
   private String                   templatePath;

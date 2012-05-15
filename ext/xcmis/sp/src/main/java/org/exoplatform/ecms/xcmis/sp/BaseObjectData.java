@@ -100,7 +100,7 @@ abstract class BaseObjectData implements ObjectData
       }
    }
 
-   private static final Log LOG = ExoLogger.getLogger(BaseObjectData.class);
+   private static final Log LOG = ExoLogger.getLogger(BaseObjectData.class.getName());
 
    protected JcrNodeEntry entry;
 

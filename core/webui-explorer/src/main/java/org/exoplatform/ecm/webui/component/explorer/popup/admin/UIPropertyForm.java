@@ -88,7 +88,7 @@ public class UIPropertyForm extends UIForm {
   final static private String FALSE = "false";
   final static private String TRUE = "true";
   final static public String PROPERTY_SELECT = "property_select" ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIPropertyForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIPropertyForm.class.getName());
   private String propertyName_;
   private boolean isAddNew_ = true;
   private boolean isMultiple_ = false;

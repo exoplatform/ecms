@@ -39,7 +39,7 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
 public class ImportContentsJob implements Job {
-  private static final Log log                  = ExoLogger.getLogger(ImportContentsJob.class);
+  private static final Log LOG                  = ExoLogger.getLogger(ImportContentsJob.class.getName());
 
   private static final String MIX_TARGET_PATH      = "mix:targetPath";
 
@@ -54,16 +54,16 @@ public class ImportContentsJob implements Job {
   public void execute(JobExecutionContext context) throws JobExecutionException {
     Session session = null;
     try {
-      if (log.isInfoEnabled()) {
-        log.info("Start Execute ImportXMLJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start Execute ImportXMLJob");
       }
       if (stagingStorage == null) {
 
         JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
         stagingStorage = jdatamap.getString("stagingStorage");
         temporaryStorge = jdatamap.getString("temporaryStorge");
-        if (log.isDebugEnabled()) {
-          log.debug("Init parameters first time :");
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Init parameters first time :");
         }
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
@@ -176,23 +176,23 @@ public class ImportContentsJob implements Job {
                           publicationPlugin.changeState(currentContent,
                                                         PublicationDefaultStates.UNPUBLISHED,
                                                         variables);
-                          if (log.isInfoEnabled()) {
-                            log.info("Change the status of the node " + currentContent.getPath()
+                          if (LOG.isInfoEnabled()) {
+                            LOG.info("Change the status of the node " + currentContent.getPath()
                               + " from " + PublicationDefaultStates.PUBLISHED + " to "
                               + PublicationDefaultStates.UNPUBLISHED);
                           }
                         }
                       } else {
-                        if (log.isWarnEnabled()) {
-                          log.warn("The node " + contentPath + " does not exist");
+                        if (LOG.isWarnEnabled()) {
+                          LOG.warn("The node " + contentPath + " does not exist");
                         }
                       }
 
                     }
 
                   } catch (Exception ie) {
-                    if (log.isWarnEnabled()) {
-                      log.warn("Error in ImportContentsJob: " + ie.getMessage());
+                    if (LOG.isWarnEnabled()) {
+                      LOG.warn("Error in ImportContentsJob: " + ie.getMessage());
                     }
                   }
                 }
@@ -301,16 +301,16 @@ public class ImportContentsJob implements Job {
           }
         }
       }
-      if (log.isInfoEnabled()) {
-        log.info("End Execute ImportXMLJob");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("End Execute ImportXMLJob");
       }
     } catch (RepositoryException ex) {
-      if (log.isDebugEnabled()) {
-        log.debug("Repository 'repository ' not found.");
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Repository 'repository ' not found.");
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when importing Contents : " + ex.getMessage(), ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when importing Contents : " + ex.getMessage(), ex);
       }
     } finally {
       if (session != null)

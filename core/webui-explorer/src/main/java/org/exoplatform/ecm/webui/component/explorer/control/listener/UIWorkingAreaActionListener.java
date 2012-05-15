@@ -49,7 +49,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  */
 public abstract class UIWorkingAreaActionListener <T extends UIComponent> extends UIExtensionEventListener<T> {
 
-  private static final Log LOG  = ExoLogger.getLogger(UIWorkingAreaActionListener.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIWorkingAreaActionListener.class.getName());
 
   private Node getNodeByPath(String nodePath, UIJCRExplorer uiExplorer, boolean giveTarget) throws Exception {
     nodePath = uiExplorer.getCurrentWorkspace() + ":" + nodePath;

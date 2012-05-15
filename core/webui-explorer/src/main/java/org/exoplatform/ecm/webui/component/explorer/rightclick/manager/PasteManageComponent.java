@@ -88,7 +88,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   private static final String RELATION_PROP = "exo:relation";
 
-  private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class);
+  private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

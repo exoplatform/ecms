@@ -44,7 +44,8 @@ public class PublicationDeploymentPlugin extends DeploymentPlugin {
   private PublicationService publicationService;
 
   /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(PublicationDeploymentPlugin.class.getName());
+  
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
 
   /**

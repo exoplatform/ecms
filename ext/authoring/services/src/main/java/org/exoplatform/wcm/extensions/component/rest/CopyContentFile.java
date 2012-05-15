@@ -23,8 +23,7 @@ import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 @Path("/copyfile/")
 public class CopyContentFile implements ResourceContainer {
 
-  private static final Log    log                           = ExoLogger.getLogger(CopyContentFile.class);
-
+  private static final Log    LOG                           = ExoLogger.getLogger(CopyContentFile.class.getName());
   private static final String OK_RESPONSE                   = "OK";
 
   private static final String KO_RESPONSE                   = "KO";
@@ -47,8 +46,8 @@ public class CopyContentFile implements ResourceContainer {
   @POST
   @Path("/copy/")
   public Response copyFile(String param) throws Exception {
-    if (log.isDebugEnabled()) {
-      log.debug("Start Execute CopyContentFile Web Service");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Start Execute CopyContentFile Web Service");
     }
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -78,22 +77,22 @@ public class CopyContentFile implements ResourceContainer {
         ops.write(contents.getBytes());
         ops.close();
       } else {
-        if (log.isWarnEnabled()) {
-          log.warn("Anthentification failed...");
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Anthentification failed...");
         }
         return Response.ok(KO_RESPONSE + "...Anthentification failed", "text/plain")
                                .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("error when copying content file" + ex.getMessage());
+      if (LOG.isErrorEnabled()) {
+        LOG.error("error when copying content file" + ex.getMessage());
       }
       return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain")
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
     }
-    if (log.isDebugEnabled()) {
-      log.debug("Start Execute CopyContentFile Web Service");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Start Execute CopyContentFile Web Service");
     }
     return Response.ok(OK_RESPONSE
                            + "...content has been successfully copied in the production server",

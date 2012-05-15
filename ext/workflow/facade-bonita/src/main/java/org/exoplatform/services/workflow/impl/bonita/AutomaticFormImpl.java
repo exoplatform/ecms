@@ -73,7 +73,7 @@ public class AutomaticFormImpl implements Form {
   /** Variables corresponding to this Form */
   private Hashtable<String, Map<String, Object>> variables;
 
-  private static final Log LOG = ExoLogger.getExoLogger(AutomaticFormImpl.class);
+  private static final Log LOG = ExoLogger.getExoLogger(AutomaticFormImpl.class.getName());
 
   /**
    * This constructor is invoked to create a new Automatic Form.

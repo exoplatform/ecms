@@ -23,8 +23,8 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class Initial implements TxHook {
 
-  private static final Log LOG  = ExoLogger.getLogger(Initial.class);
-  
+  private static final Log LOG  = ExoLogger.getLogger(Initial.class.getName());
+
   public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity) throws Exception {
     initialVariables(api, activity);
     ProcessUtil.requestForValidation(api, activity);

@@ -42,7 +42,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NodeLocation extends ItemLocation {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger("wcm:NodeLocation");
+  private static final Log LOG = ExoLogger.getLogger(NodeLocation.class.getName());
 
   /**
    * Instantiates a new node location.

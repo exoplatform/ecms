@@ -37,7 +37,7 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
 
    private CmisRegistry reg;
 
-   private static final Log LOG = ExoLogger.getLogger(JcrCmisRegistryFactory.class);
+   private static final Log LOG = ExoLogger.getLogger(JcrCmisRegistryFactory.class.getName());
 
    public JcrCmisRegistryFactory()
    {

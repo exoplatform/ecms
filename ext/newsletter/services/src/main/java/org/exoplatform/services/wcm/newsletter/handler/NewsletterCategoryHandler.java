@@ -46,7 +46,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NewsletterCategoryHandler {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterCategoryHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterCategoryHandler.class.getName());
 
   /** The repository service. */
   private RepositoryService repositoryService;
@@ -199,8 +199,8 @@ public class NewsletterCategoryHandler {
         }
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Update permission for category " + categoryConfig.getName() + " failed because of: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Update permission for category " + categoryConfig.getName() + " failed because of: ", e);
       }
     }
     return afterRemovePermisions;
@@ -216,8 +216,8 @@ public class NewsletterCategoryHandler {
   public void add(SessionProvider sessionProvider,
                   String portalName,
                   NewsletterCategoryConfig categoryConfig) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to add category " + categoryConfig.getName());
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to add category " + categoryConfig.getName());
     }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -242,8 +242,8 @@ public class NewsletterCategoryHandler {
       this.updatePermissionForCategoryNode(categoryNode, categoryConfig, true);
       session.save();
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Add category " + categoryConfig.getName() + " failed because of: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Add category " + categoryConfig.getName() + " failed because of: ", e);
       }
     }
   }
@@ -256,8 +256,8 @@ public class NewsletterCategoryHandler {
    * @param sessionProvider the session provider
    */
   public void edit(SessionProvider sessionProvider, String portalName, NewsletterCategoryConfig categoryConfig) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to edit category " + categoryConfig.getName());
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to edit category " + categoryConfig.getName());
     }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -279,12 +279,12 @@ public class NewsletterCategoryHandler {
       }
       session.save();
     } catch(ItemNotFoundException ie) {
-      if (log.isInfoEnabled()) {
-        log.info("Edit category " + categoryConfig.getName() + " failed because of ", ie);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Edit category " + categoryConfig.getName() + " failed because of ", ie);
       }
     } catch (Exception e) {
-      if (log.isInfoEnabled()) {
-        log.info("Edit category " + categoryConfig.getName() + " failed because of ", e);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Edit category " + categoryConfig.getName() + " failed because of ", e);
       }
     }
   }
@@ -297,8 +297,8 @@ public class NewsletterCategoryHandler {
    * @param sessionProvider the session provider
    */
   public void delete(SessionProvider sessionProvider, String portalName, String categoryName) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to delete category " + categoryName);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to delete category " + categoryName);
     }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -319,8 +319,8 @@ public class NewsletterCategoryHandler {
       categoryNode.remove();
       session.save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Delete category " + categoryName + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Delete category " + categoryName + " failed because of ", e);
       }
     }
   }
@@ -346,8 +346,8 @@ public class NewsletterCategoryHandler {
       Node categoriesNode = (Node) session.getItem(categoryPath);
       return getCategoryFromNode(categoriesNode.getNode(categoryName));
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when getCategoryByName: " + ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when getCategoryByName: " + ex);
       }
     }
     return null;
@@ -377,8 +377,8 @@ public class NewsletterCategoryHandler {
         listCategories.add(getCategoryFromNode(nodeIterator.nextNode()));
       }
     }catch(Exception ex){
-      if (log.isErrorEnabled()) {
-        log.error("Get category " + nodeIterator.nextNode().getName() + " failed because of ", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Get category " + nodeIterator.nextNode().getName() + " failed because of ", ex);
       }
     }
     return listCategories;

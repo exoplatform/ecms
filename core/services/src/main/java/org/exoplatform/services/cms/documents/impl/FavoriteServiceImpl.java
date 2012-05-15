@@ -21,9 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -58,7 +60,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   private OrganizationService    organizationService;
   
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class.getName());
 
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService, OrganizationService organizationService) {
@@ -214,10 +216,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     Node targetNode = null;
     try {
       targetNode = linkManager.getTarget(linkNode);
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+    } catch (ItemNotFoundException e) {
+      targetNode = null;
+    } catch (RepositoryException e) {
+      targetNode = null;
     }
     return targetNode;
   }

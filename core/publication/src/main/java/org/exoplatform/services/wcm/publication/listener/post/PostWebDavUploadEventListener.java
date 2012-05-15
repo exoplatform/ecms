@@ -38,7 +38,7 @@ public class PostWebDavUploadEventListener extends Listener<WebDavService, Node>
   /** The pservice. */
   private WCMPublicationService publicationService;
 
-  private final static Log      LOG = ExoLogger.getLogger(PostWebDavUploadEventListener.class);
+  private final static Log      LOG = ExoLogger.getLogger(PostWebDavUploadEventListener.class.getName());
 
   public PostWebDavUploadEventListener(WCMPublicationService publicationService) {
     this.publicationService = publicationService;

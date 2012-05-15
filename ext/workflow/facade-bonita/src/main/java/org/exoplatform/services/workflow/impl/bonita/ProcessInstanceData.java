@@ -38,7 +38,7 @@ public class ProcessInstanceData implements ProcessInstance {
 
   private Date          endDate           = null;
 
-  private static Logger log = Logger.getLogger(ProcessInstanceData.class.getName());
+  private static final Logger LOG = Logger.getLogger(ProcessInstanceData.class.getName());
 
   public ProcessInstanceData(org.ow2.bonita.facade.runtime.ProcessInstance processInstance) {
     try {
@@ -53,7 +53,7 @@ public class ProcessInstanceData implements ProcessInstance {
     } catch (IllegalStateException e) {
       this.endDate = null;
     } catch(Exception e) {
-      log.log(Level.WARNING, e.getMessage(), e);
+      LOG.log(Level.WARNING, e.getMessage(), e);
     }
   }
 

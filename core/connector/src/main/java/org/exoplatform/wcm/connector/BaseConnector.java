@@ -70,7 +70,7 @@ public abstract class BaseConnector {
   protected RepositoryService                 repositoryService;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(BaseConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(BaseConnector.class.getName());
 
   /** The voting service. */
   protected VotingService votingService;
@@ -401,8 +401,8 @@ public abstract class BaseConnector {
       if (NodeTypeFilter==null || (NodeTypeFilter!=null && content.isNodeType(NodeTypeFilter)) )
         return content;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getContent: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getContent: ", e);
       }
     }
     return null;

@@ -62,7 +62,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @author benjaminmestrallet
  */
 public class Utils {
-  private final static Log   LOG          = ExoLogger.getLogger(Utils.class);
+  private final static Log   LOG          = ExoLogger.getLogger(Utils.class.getName());
 
   private static final String ILLEGAL_SEARCH_CHARACTERS= "\\!^()+{}[]:\"-";
 

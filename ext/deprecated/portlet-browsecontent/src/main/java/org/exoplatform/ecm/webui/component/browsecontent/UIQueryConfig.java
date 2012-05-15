@@ -86,7 +86,7 @@ public class UIQueryConfig extends UIForm {
   final private static String SHARED_QUERY = "Shared Query";
   final private static String EMPTYQUERY = "Query not found";
   protected boolean isEdit_ = false;
-  private static final Log LOG  = ExoLogger.getLogger("browsecontent.UIQueryConfig");
+  private static final Log LOG  = ExoLogger.getLogger(UIQueryConfig.class.getName());
   public UIQueryConfig() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     addChild(new UIFormStringInput(UINewConfigForm.FIELD_REPOSITORY, UINewConfigForm.FIELD_REPOSITORY, null));
@@ -340,7 +340,7 @@ public class UIQueryConfig extends UIForm {
         if(queryPath.equals(UIQueryConfig.EMPTYQUERY)){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-name", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         }
       }
@@ -348,7 +348,7 @@ public class UIQueryConfig extends UIForm {
         if(Utils.isNameEmpty(query)) {
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-query", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         }
         try {
@@ -358,17 +358,17 @@ public class UIQueryConfig extends UIForm {
         } catch(InvalidQueryException iqe) {
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-query", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch(NoSuchNodeTypeException nt){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.noSuchNodeTypeException", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch(RepositoryException rp){
           app.addMessage(new ApplicationMessage("UIQueryConfig.msg.repostoryException", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         }catch(Exception e){
           if (LOG.isErrorEnabled()) {
@@ -381,13 +381,13 @@ public class UIQueryConfig extends UIForm {
       } catch(Exception e){
         app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-value", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       if(Integer.parseInt(itemPerPage) == 0) {
         app.addMessage(new ApplicationMessage("UIQueryConfig.msg.invalid-value", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       String  queryType = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_QUERYTYPE).getValue();

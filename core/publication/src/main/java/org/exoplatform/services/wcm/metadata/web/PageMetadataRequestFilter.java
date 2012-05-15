@@ -53,7 +53,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class PageMetadataRequestFilter implements Filter {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(PageMetadataRequestFilter.class);
+  private static final Log LOG = ExoLogger.getLogger(PageMetadataRequestFilter.class.getName());
   
   /** The Constant PCV_PARAMETER_REGX. */
   public final static String PCV_PARAMETER_REGX           = "(.*)/(.*)/(.*)";

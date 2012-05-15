@@ -76,7 +76,7 @@ public class EmailNotifyListener implements EventListener {
 
   private static final String PATH_PARAM          = "path";
 
-  private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class);
+  private static final Log    LOG                 = ExoLogger.getLogger(EmailNotifyListener.class.getName());
 
   public EmailNotifyListener(Node oNode) {
     observedNode_ = NodeLocation.getNodeLocationByNode(oNode);

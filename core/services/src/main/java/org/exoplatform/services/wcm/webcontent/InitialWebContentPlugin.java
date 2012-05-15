@@ -52,7 +52,7 @@ import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
 public class InitialWebContentPlugin extends CreatePortalPlugin {
 
   @SuppressWarnings("unused")
-  private static Log log = ExoLogger.getLogger(CreatePortalPlugin.class);
+  private static final Log LOG = ExoLogger.getLogger(InitialWebContentPlugin.class.getName());
   private InitParams initParams;
   private ConfigurationManager configurationManager;
   private RepositoryService repositoryService;
@@ -115,8 +115,8 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
       configure(portalNode, portalName);
       portalNode.getSession().save();
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-      log.error("deploy the portal "
+      if (LOG.isErrorEnabled()) {
+        LOG.error("deploy the portal "
                     + portalName
                     + " from "
                     + deploymentDescriptor.getSourcePath()

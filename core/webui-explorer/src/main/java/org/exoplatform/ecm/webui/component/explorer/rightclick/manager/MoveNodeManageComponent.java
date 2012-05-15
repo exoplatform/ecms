@@ -36,7 +36,6 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -81,7 +80,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     return FILTERS;
   }
 
-  private static final Log LOG = ExoLogger.getLogger(MoveNodeManageComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(MoveNodeManageComponent.class.getName());
 
   private static void processMultipleSelection(String nodePath, String destPath,
       Event<? extends UIComponent> event) throws Exception {

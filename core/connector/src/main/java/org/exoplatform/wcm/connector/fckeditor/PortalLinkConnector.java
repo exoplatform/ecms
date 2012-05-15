@@ -70,15 +70,6 @@ import org.w3c.dom.Element;
 @Path("/portalLinks/")
 public class PortalLinkConnector implements ResourceContainer {
 
-  /** The PUBLI c_ access. */
-  final private String PUBLIC_ACCESS       = "public";
-
-  /** The PRIVAT e_ access. */
-  final private String PRIVATE_ACCESS      = "private";
-
-  /** The EVERYON e_ permission. */
-  final private String EVERYONE_PERMISSION = "Everyone";
-
   /** The RESOURC e_ type. */
   final private String RESOURCE_TYPE       = "PortalPageURI";
 
@@ -92,7 +83,7 @@ public class PortalLinkConnector implements ResourceContainer {
   private ServletContext servletContext;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(PortalLinkConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(PortalLinkConnector.class.getName());
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
@@ -140,8 +131,8 @@ public class PortalLinkConnector implements ResourceContainer {
       String userId = getCurrentUser();
       return buildReponse(currentFolder, command, userId);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getPageURI: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getPageURI: ", e);
       }
     }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -158,8 +149,8 @@ public class PortalLinkConnector implements ResourceContainer {
       ConversationState conversationState = ConversationState.getCurrent();
       return conversationState.getIdentity().getUserId();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getCurrentUser: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getCurrentUser: ", e);
       }
     }
     return null;

@@ -58,7 +58,7 @@ import org.exoplatform.webui.core.model.SelectItemOption;
   template = "app:/groovy/webui/component/explorer/UIJCRExplorerContainer.gtmpl"
 )
 public class UIJcrExplorerContainer extends UIContainer {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIJcrExplorerContainer");
+  private static final Log LOG  = ExoLogger.getLogger(UIJcrExplorerContainer.class.getName());
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
   }

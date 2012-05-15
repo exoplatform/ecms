@@ -44,7 +44,7 @@ import org.exoplatform.services.log.ExoLogger;
  */
 @SuppressWarnings({"serial","unused"})
 public class RssServlet extends HttpServlet {
-  private static final Log LOG  = ExoLogger.getLogger(RssServlet.class);
+  private static final Log LOG  = ExoLogger.getLogger(RssServlet.class.getName());
   public void init(ServletConfig config) throws ServletException {}
   public void service(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {

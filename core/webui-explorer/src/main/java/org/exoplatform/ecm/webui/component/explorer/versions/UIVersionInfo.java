@@ -66,7 +66,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   protected VersionNode rootVersion_ ;
   protected VersionNode curentVersion_;
   protected NodeLocation node_ ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIVersionInfo");
+  private static final Log LOG  = ExoLogger.getLogger(UIVersionInfo.class.getName());
   public UIVersionInfo() throws Exception {
     addChild(UILabelForm.class, null, null).setRendered(false);
     addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
@@ -100,7 +100,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   public void deActivate() throws Exception {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
-  public Node getCurrentNode() { 
+  public Node getCurrentNode() {
     return NodeLocation.getNodeByLocation(node_);
   }
 
@@ -124,7 +124,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
         UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
-        
+
         return ;
       }
       uiViewVersion.setRendered(true) ;
@@ -174,18 +174,18 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       } catch(JCRInvalidItemStateException invalid) {
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(NullPointerException nuException){
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch(Exception e) {
         //JCRExceptionManager.process(uiApp, e);
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return;
       }
       Node node = uiVersionInfo.getCurrentNode() ;
@@ -221,13 +221,13 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", rie);
         }
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
         return;
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", e);
         }
-        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;        
+        app.addMessage(new ApplicationMessage("UIVersionInfo.msg.cannot-remove-version",null)) ;
         return;
       }
     }
@@ -242,7 +242,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       VersionNode node = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
-      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(), 
+      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(),
                          node.getName(), node.getCreatedTime(), node.getWs(), node.getPath());
       uiDiff.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;

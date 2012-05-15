@@ -51,7 +51,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * May 25, 2007 8:58:25 AM
  */
 @ComponentConfigs( {
-    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", 
+    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset",
                      events = {
         @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }),
@@ -61,7 +61,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
         @EventConfig(listeners = UIAddMetadataForm.AddActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIAddMetadataForm.RemoveActionListener.class, phase = Phase.DECODE) }) })
 public class UIAddMetadataForm extends UIDialogForm {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIAddMetadataForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIAddMetadataForm.class.getName());
   private String nodeType_ ;
   public UIAddMetadataForm() throws Exception {
     setActions(ACTIONS) ;

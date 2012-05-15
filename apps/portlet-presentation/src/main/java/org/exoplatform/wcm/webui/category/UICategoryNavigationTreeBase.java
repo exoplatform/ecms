@@ -59,7 +59,7 @@ import org.exoplatform.webui.core.UITree;
 )
 public class UICategoryNavigationTreeBase extends UITree {
 
-  private static final Log         LOG            = ExoLogger.getLogger(UICategoryNavigationTreeBase.class);
+  private static final Log         LOG            = ExoLogger.getLogger(UICategoryNavigationTreeBase.class.getName());
   
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UITree#renderNode(java.lang.Object)

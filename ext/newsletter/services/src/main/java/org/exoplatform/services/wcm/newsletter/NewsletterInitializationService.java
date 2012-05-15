@@ -47,7 +47,7 @@ public class NewsletterInitializationService implements Startable {
 
   /** The portal names. */
   private List<String> portalNames;
-  
+
   /** administrators */
   private List<String> administrators;
 
@@ -67,7 +67,7 @@ public class NewsletterInitializationService implements Startable {
   private LivePortalManagerService livePortalManagerService;
 
   /** The LOG. */
-  private static final Log LOG = ExoLogger.getLogger(NewsletterInitializationService.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterInitializationService.class.getName());
 
   /**
    * Instantiates a new newsletter initialization service.
@@ -124,7 +124,7 @@ public class NewsletterInitializationService implements Startable {
           for (NewsletterUserConfig userConfig : userConfigs) {
             manageUserHandler.add(sessionProvider, portalName, userConfig.getMail());
           }
-          
+
           for (String admin : administrators) {
             if (admin != null && admin.length() > 0) {
               manageUserHandler.addAdministrator(sessionProvider, portalName, admin);
@@ -147,12 +147,12 @@ public class NewsletterInitializationService implements Startable {
           session.save();
         }
       }
-    } catch (Throwable e) {
+    } catch (Exception e) {
       if (LOG.isInfoEnabled()) {
         LOG.info("Starting NewsletterInitializationService fail because of ", e);
       }
     } finally {
-      sessionProvider.close(); 
+      sessionProvider.close();
     }
   }
 

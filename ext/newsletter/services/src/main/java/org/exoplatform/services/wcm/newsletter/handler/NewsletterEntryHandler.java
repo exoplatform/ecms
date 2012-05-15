@@ -45,7 +45,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NewsletterEntryHandler {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterEntryHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterEntryHandler.class.getName());
 
   /** The repository service. */
   private RepositoryService repositoryService;
@@ -127,8 +127,8 @@ public class NewsletterEntryHandler {
       }
       session.save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Delete newsletter entry failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Delete newsletter entry failed because of ", e);
       }
     }
   }
@@ -163,8 +163,8 @@ public class NewsletterEntryHandler {
       try{
         listNewsletterEntry.add(getEntryFromNode(nodeIterator.nextNode()));
       }catch(Exception ex){
-        if (log.isErrorEnabled()) {
-          log.error("Get getNewsletterEntriesBySubscription() failed because of ", ex);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Get getNewsletterEntriesBySubscription() failed because of ", ex);
         }
         continue;
       }
@@ -247,8 +247,8 @@ public class NewsletterEntryHandler {
                               .getString());
       return sb.toString();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when get content: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when get content: ", e);
       }
     }
     return null;
@@ -285,8 +285,8 @@ public class NewsletterEntryHandler {
 
       return sb.toString();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when get content: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when get content: ", e);
       }
     }
     return null;

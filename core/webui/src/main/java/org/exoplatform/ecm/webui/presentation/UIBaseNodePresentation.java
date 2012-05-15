@@ -64,7 +64,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   private boolean enableVote;
   private boolean enableComment;
   private String mediaState = MEDIA_STATE_NONE;
-  private static final Log LOG  = ExoLogger.getLogger("admin.UIBaseNodePresentation");
+  private static final Log LOG  = ExoLogger.getLogger(UIBaseNodePresentation.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNode()

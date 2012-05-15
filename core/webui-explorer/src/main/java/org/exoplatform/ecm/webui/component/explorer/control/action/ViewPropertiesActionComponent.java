@@ -45,7 +45,7 @@ import org.exoplatform.webui.event.Event;
  )
 public class ViewPropertiesActionComponent extends UIComponent {
 
-  private static final Log         LOG            = ExoLogger.getLogger(ViewPropertiesActionComponent.class);
+  private static final Log         LOG            = ExoLogger.getLogger(ViewPropertiesActionComponent.class.getName());
   
   public static class ViewPropertiesActionListener extends UIActionBarActionListener<ViewPropertiesActionComponent> {
     public void processEvent(Event<ViewPropertiesActionComponent> event) throws Exception {

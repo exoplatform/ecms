@@ -69,7 +69,7 @@ public class UICBSearchForm extends UIForm {
   final static public String FIELD_OPTION = "option";
   final static public String FIELD_CB_REF = "referencesDoc";
   final static public String FIELD_CB_CHILD = "childDoc";
-  private static final Log LOG  = ExoLogger.getLogger("browsecontent.UICBSearchForm");
+  private static final Log LOG  = ExoLogger.getLogger(UICBSearchForm.class.getName());
   public static final String CATEGORY_SEARCH = "Category";
   public static final String DOCUMENT_SEARCH = "Content";
   public static final String CATEGORY_QUERY = "select * from $0 where jcr:path like '%/$1[%]' " ;
@@ -256,7 +256,7 @@ public class UICBSearchForm extends UIForm {
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
       if(Utils.isNameEmpty(keyword)) {
         app.addMessage(new ApplicationMessage("UICBSearchForm.msg.not-empty", null));
-        
+
         return;
       }
       if(type.equals(CATEGORY_SEARCH)) {
@@ -270,7 +270,7 @@ public class UICBSearchForm extends UIForm {
       if(queryResult == null || queryResult.size() == 0){
         Object[] args = new Object[]{keyword};
         app.addMessage(new ApplicationMessage("UICBSearchForm.msg.suggestion-keyword", args));
-        
+
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISearchController.class));
     }

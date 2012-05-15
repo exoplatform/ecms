@@ -78,7 +78,7 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
                                                  new CanSetPropertyFilter(),
                                                  new IsNotTrashHomeNodeFilter() });
 
-  private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class);
+  private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

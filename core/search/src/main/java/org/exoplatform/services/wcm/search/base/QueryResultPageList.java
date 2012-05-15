@@ -45,7 +45,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @SuppressWarnings("unchecked")
 public class QueryResultPageList<E> extends AbstractPageList<E> {
 
-  private static final Log LOG  = ExoLogger.getLogger(QueryResultPageList.class);
+  private static final Log LOG  = ExoLogger.getLogger(QueryResultPageList.class.getName());
   
   private static final String ORDER_BY = "ORDER BY";
   

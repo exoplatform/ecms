@@ -42,7 +42,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class ManagePersonalFolderServiceImpl {
 
-  private static final Log LOG = ExoLogger.getLogger(ManagePersonalFolderServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(ManagePersonalFolderServiceImpl.class.getName());
 
   private final HierarchyConfig config_;
 

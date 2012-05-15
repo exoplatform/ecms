@@ -35,7 +35,7 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
 
   private static final long serialVersionUID = 1L;
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(SchedulePublicationTimerActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     ProcessUtil.approve(context);
@@ -45,8 +45,8 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
       try {
         publishContent(context);
       } catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error(e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e);
         }
       }
       //context.getToken().signal("publication-done");
@@ -55,8 +55,8 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
       try{
         moveToPending(context);
       }catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error(e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error(e);
         }
       }
       //Create and save the Action object

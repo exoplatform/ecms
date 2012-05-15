@@ -63,7 +63,7 @@ public class TestNewsletterManageUserHandler extends BaseWCMTestCase {
   /** The session provider. */
   private SessionProvider sessionProvider;
 
-  private static Log log = ExoLogger.getLogger(TestNewsletterManageUserHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(TestNewsletterManageUserHandler.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
@@ -142,7 +142,7 @@ public class TestNewsletterManageUserHandler extends BaseWCMTestCase {
     newsletterManageUserHandler.addAdministrator(sessionProvider, classicPortal, "userId01");
     newsletterManageUserHandler.addAdministrator(sessionProvider, classicPortal, "userId02");
     List<String> listUserAdd = newsletterManageUserHandler.getAllAdministrator(sessionProvider, classicPortal);
-    assertEquals(2,	listUserAdd.size());
+    assertEquals(2,  listUserAdd.size());
     newsletterManageUserHandler.deleteUserAddministrator(sessionProvider, classicPortal, "userId02");
     List<String> listUserDelete = newsletterManageUserHandler.getAllAdministrator(sessionProvider, classicPortal);
     assertEquals(1, listUserDelete.size());
@@ -179,8 +179,8 @@ public class TestNewsletterManageUserHandler extends BaseWCMTestCase {
     try{
       newsletterManageUserHandler.add(sessionProvider, classicPortal + "Wrong", "test" + userEmail);
     }catch(Exception ex){
-      if (log.isWarnEnabled()) {
-        log.warn("Can't add user because portal's name is not exist");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can't add user because portal's name is not exist");
       }
     }
     isCorrectUser = newsletterPublicUserHandler.confirmPublicUser(sessionProvider, "test" + userEmail, userNode.getProperty(NewsletterConstant.USER_PROPERTY_VALIDATION_CODE).getString(), classicPortal);

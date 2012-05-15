@@ -58,7 +58,7 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminPortlet.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIECMAdminPortlet.class.getName());
 
   private boolean isShowSideBar = true ;
   private boolean isSelectedRepo_ = true ;

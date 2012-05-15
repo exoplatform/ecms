@@ -42,7 +42,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NewsletterTemplateHandler {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterTemplateHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterTemplateHandler.class.getName());
 
   /** The repository service. */
   private RepositoryService repositoryService;
@@ -64,7 +64,7 @@ public class NewsletterTemplateHandler {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     this.workspace = workspace;
   }
-  
+
   /**
    * Instantiates a new newsletter template handler.
    *
@@ -74,8 +74,8 @@ public class NewsletterTemplateHandler {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     this.workspace = workspace;
   }
-  
-  
+
+
 
   /**
    * Gets the templates.
@@ -89,8 +89,8 @@ public class NewsletterTemplateHandler {
                                  SessionProvider sessionProvider,
                                  String portalName,
                                  NewsletterCategoryConfig categoryConfig) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to get templates of category " + categoryConfig);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to get templates of category " + categoryConfig);
     }
     try {
       List<Node> templates = new ArrayList<Node>();
@@ -114,8 +114,8 @@ public class NewsletterTemplateHandler {
       this.templates = NodeLocation.getLocationsByNodeList(templates);
       return templates;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Get templates of category " + categoryConfig + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Get templates of category " + categoryConfig + " failed because of ", e);
       }
     }
     return null;
@@ -135,13 +135,13 @@ public class NewsletterTemplateHandler {
                           String portalName,
                           NewsletterCategoryConfig categoryConfig,
                           String templateName) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to get template " + templateName);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to get template " + templateName);
     }
     try {
-      if (templates == null || templates.size() == 0) 
+      if (templates == null || templates.size() == 0)
         templates = NodeLocation.getLocationsByNodeList(getTemplates(sessionProvider, portalName, categoryConfig));
-      if (templateName == null && templates.size() > 0) 
+      if (templateName == null && templates.size() > 0)
         return NodeLocation.getNodeByLocation(templates.get(0));
       for (NodeLocation template : templates) {
         if (templateName.equals(NodeLocation.getNodeByLocation(template).getName())) {
@@ -149,8 +149,8 @@ public class NewsletterTemplateHandler {
         }
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Get dialog " + templateName + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Get dialog " + templateName + " failed because of ", e);
       }
     }
     return null;
@@ -171,8 +171,8 @@ public class NewsletterTemplateHandler {
                                 String webcontentPath,
                                 String portalName,
                                 String categoryName) throws Exception {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to convert node " + webcontentPath + " to template at category " + categoryName);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to convert node " + webcontentPath + " to template at category " + categoryName);
     }
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -187,8 +187,8 @@ public class NewsletterTemplateHandler {
         throw new Exception("Same name");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
       }
       throw e;
     }

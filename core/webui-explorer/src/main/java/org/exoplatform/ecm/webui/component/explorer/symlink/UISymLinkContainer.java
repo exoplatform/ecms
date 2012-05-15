@@ -43,7 +43,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UISymLinkContainer extends UIContainer {
 
-  private static final Log LOG = ExoLogger.getLogger(UISymLinkContainer.class);
+  private static final Log LOG = ExoLogger.getLogger(UISymLinkContainer.class.getName());
   
   private NodeLocation uploadedNode_ ;
 

@@ -43,7 +43,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
 
-  private static final Log LOG = ExoLogger.getLogger("wcm:PublicationUpdateStateListener");
+  private static final Log LOG = ExoLogger.getLogger(PublicationUpdateStateListener.class.getName());
 
   private RepositoryService repositoryService;
 
@@ -88,17 +88,19 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         }
       }
 
-      try {
-        String nodeVersionUUID = targetNode.getProperty("publication:liveRevision").getString();
-        Node revNode = targetNode.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
-        if (revNode!=null)
-          liveNode = revNode.getNode("jcr:frozenNode");
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
+      if (targetNode.hasProperty("publication:liveRevision")) {
+        try {
+          String nodeVersionUUID = targetNode.getProperty("publication:liveRevision").getString();
+          Node revNode = targetNode.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
+          if (revNode!=null)
+            liveNode = revNode.getNode("jcr:frozenNode");
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
         }
       }
-
+      
       try {
         if (!targetNode.isNodeType("exo:sortable") && targetNode.canAddMixin("exo:sortable")) {
           targetNode.addMixin("exo:sortable");
@@ -213,15 +215,11 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
               }
             }
 
-            try {
+            if (linkNode.hasProperty("exo:dateModified")) {
               Calendar currentDateModified = linkNode.getProperty("exo:dateModified").getDate();
               if (dateModified != null && !dateModified.equals(currentDateModified)) {
                 linkNode.setProperty("exo:dateModified", dateModified);
                 needSessionSave = true;
-              }
-            } catch (PathNotFoundException e) {
-              if (LOG.isWarnEnabled()) {
-                LOG.warn(e.getMessage());
               }
             }
 

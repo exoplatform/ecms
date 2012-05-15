@@ -43,11 +43,11 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          vuna@exoplatform.com
- * Feb 24, 2012  
- * 
- * This class will be used to upgrade pre-defined queries. Queries with desire of manual upgration 
+ * Feb 24, 2012
+ *
+ * This class will be used to upgrade pre-defined queries. Queries with desire of manual upgration
  * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
+ * Syntax :<br/>
  * unchanged-queries=<query name list>
  * For examples :<br/>
  * unchanged-queries=Created Documents
@@ -55,14 +55,14 @@ import org.exoplatform.services.log.Log;
  */
 public class QueryUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
-  
+  private static final Log LOG = ExoLogger.getLogger(QueryUpgradePlugin.class.getName());
+
   private QueryService queryService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repositoryService_;
 
-  public QueryUpgradePlugin(QueryService queryService, NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService, 
+  public QueryUpgradePlugin(QueryService queryService, NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
                             DMSConfiguration dmsConfiguration, InitParams initParams) {
     super(initParams);
     this.queryService_ = queryService;
@@ -70,10 +70,10 @@ public class QueryUpgradePlugin extends UpgradeProductPlugin {
     this.repositoryService_ = repoService;
     this.dmsConfiguration_ = dmsConfiguration;
   }
-  
+
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     String unchangedQueries = PrivilegedSystemHelper.getProperty("unchanged-queries");
     SessionProvider sessionProvider = null;
@@ -90,7 +90,7 @@ public class QueryUpgradePlugin extends UpgradeProductPlugin {
       //get all old query nodes that need to be removed
       sessionProvider = SessionProvider.createSystemProvider();
       DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-      Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), 
+      Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),
                                                    repositoryService_.getCurrentRepository());
       String queriesNodePath = nodeHierarchyCreator_.getJcrPath(BasePath.QUERIES_PATH);
       Node queriesNode = (Node)session.getItem(queriesNodePath);
@@ -108,27 +108,27 @@ public class QueryUpgradePlugin extends UpgradeProductPlugin {
           removedNode.remove();
           queriesNode.save();
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
-            log.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
+          if (LOG.isInfoEnabled()) {
+            LOG.error("Error in " + this.getName() + ": Can not remove old query node: " + removedNode.getPath());
           }
         }
       }
       //re-initialize new queries
       queryService_.init();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating scripts", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating scripts", e);
       }
     } finally {
       if (sessionProvider != null) {
         sessionProvider.close();
       }
     }
-  }  
-  
+  }
+
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
     return true;
   }
- 
+
 }

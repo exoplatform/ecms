@@ -76,7 +76,7 @@ import org.exoplatform.webui.form.UIForm;
 
   /** The Constant LIFECYCLE_SELECTED. */
   public final static String LIFECYCLE_SELECTED = "LifecycleSelected";
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIActivePublication");
+  private static final Log LOG  = ExoLogger.getLogger(UIActivePublication.class.getName());
   /**
    * Instantiates a new uI active publication.
    *
@@ -117,14 +117,14 @@ import org.exoplatform.webui.form.UIForm;
 
     ListAccess<PublicationLifecycleBean> beanList = new ListAccessImpl<PublicationLifecycleBean>(PublicationLifecycleBean.class,
                                                                                                  publicationLifecycleBeans);
-    LazyPageList<PublicationLifecycleBean> dataPageList = 
+    LazyPageList<PublicationLifecycleBean> dataPageList =
       new LazyPageList<PublicationLifecycleBean>(beanList, getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setPageList(dataPageList);
     getUIPageIterator().setTotalItems(publicationLifecycleBeans.size());
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      getUIPageIterator().setCurrentPage(currentPage);    
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
   public void enrolNodeInLifecycle(Node currentNode,
@@ -142,7 +142,7 @@ import org.exoplatform.webui.form.UIForm;
     try {
       if(!currentNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
-            ApplicationMessage.WARNING));        
+            ApplicationMessage.WARNING));
         return;
       }
       String siteName = Util.getPortalRequestContext().getPortalOwner();
@@ -154,14 +154,14 @@ import org.exoplatform.webui.form.UIForm;
       }
     } catch (AlreadyInPublicationLifecycleException e) {
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.already-enroled", null,
-          ApplicationMessage.ERROR));      
+          ApplicationMessage.ERROR));
       return;
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);
       }
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.unknow-error",
-          new String[] { e.getMessage() }, ApplicationMessage.ERROR));      
+          new String[] { e.getMessage() }, ApplicationMessage.ERROR));
       return;
     }
     // refresh node prevent the situation node is changed in other session

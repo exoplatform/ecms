@@ -56,7 +56,7 @@ public class FragmentCacheService implements Startable {
                                                                                                     // thread
 
   /** . */
-  private static final Log log                   = ExoLogger.getLogger(FragmentCacheService.class);
+  private static final Log LOG                   = ExoLogger.getLogger(FragmentCacheService.class.getName());
 
   /** . */
   final PortletFutureCache cache;
@@ -70,8 +70,8 @@ public class FragmentCacheService implements Startable {
       try {
         cleanupCache = Integer.parseInt(cleanupCacheConfig);
       } catch (NumberFormatException e) {
-        if (log.isWarnEnabled()) {
-          log.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
         }
       }
     }
@@ -81,13 +81,13 @@ public class FragmentCacheService implements Startable {
       try {
         cacheSize = Integer.parseInt(cacheSizeConfig);
       } catch (NumberFormatException e) {
-        if (log.isWarnEnabled()) {
-          log.warn("Invalid cache-size setting " + cacheSizeConfig);
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("Invalid cache-size setting " + cacheSizeConfig);
         }
       }
     }
 
-    this.cache = new PortletFutureCache(log, cleanupCache, cacheSize);
+    this.cache = new PortletFutureCache(LOG, cleanupCache, cacheSize);
 
   }
 

@@ -84,7 +84,7 @@ class FolderDataImpl extends BaseObjectData implements FolderData
 
    }
 
-   private static final Log LOG = ExoLogger.getLogger(FolderDataImpl.class);
+   private static final Log LOG = ExoLogger.getLogger(FolderDataImpl.class.getName());
 
    public FolderDataImpl(JcrNodeEntry jcrEntry)
    {

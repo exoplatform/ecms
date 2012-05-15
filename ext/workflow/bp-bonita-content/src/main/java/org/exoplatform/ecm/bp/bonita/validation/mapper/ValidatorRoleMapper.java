@@ -47,7 +47,7 @@ public class ValidatorRoleMapper implements RoleMapper {
 
   public static final String DELEGATOR_NAME = "delegator";
   public static final String DELEGATE_NAME = "delegate";
-  private static final Log LOG  = ExoLogger.getLogger(ValidatorRoleMapper.class);
+  private static final Log LOG  = ExoLogger.getLogger(ValidatorRoleMapper.class.getName());
 
   public Set<String> searchMembers(QueryAPIAccessor readonlyapiaccessor, ProcessInstanceUUID instanceId, String roleId) {
 

@@ -85,7 +85,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
 
   /** The Constant NODE_SUFFIX. */
   public static final String NODE_SUFFIX = "_fg_n";
-  
+
   /** The Constant INPUT_NAME_PREFIX_NUM. */
   public static final String INPUT_NAME_PREFIX = "num";
 
@@ -152,15 +152,15 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
           cleanedStr.deleteCharAt(i--);
       }
-      
+
       if (!Character.isLetterOrDigit(cleanedStr.charAt(0))) {
         cleanedStr.deleteCharAt(0);
       }
-      
+
       if (cleanedStr.length() > 0 && !Character.isLetterOrDigit(cleanedStr.charAt(cleanedStr.length()-1))) {
         cleanedStr.deleteCharAt(cleanedStr.length()-1);
       }
-      
+
       return cleanedStr.toString().toLowerCase().replaceAll("-","_");
   }
 
@@ -323,7 +323,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      */
     dialogTemplate.append("        <tr style=\"display:none;\">\n");
     dialogTemplate.append("          <td class=\"FieldLabel\">" +
-    		"<label for=\"name\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></label></td>\n");
+        "<label for=\"name\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></label></td>\n");
     dialogTemplate.append("          <td class=\"FieldComponent\">\n");
     dialogTemplate.append("            $timestampName \n               <div style=\"display:none;\"><%\n");
     dialogTemplate.append("              String[] fieldName = [\"jcrPath=/node\", \"mixintype=mix:i18n\", ");
@@ -419,7 +419,9 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
                                 + realDataNodeName + "\");\n");
           dialogTemplate.append("                 %>\n");
           dialogTemplate.append("                   <div>\n");
-          dialogTemplate.append("                     <img src=\"$imgSrc\" alt=\"<%=_ctx.appRes(\"FormGeneratorDialog.label.remove\")%>\" width=\"100px\" height=\"80px\"/>\n");
+          dialogTemplate.append(
+              "                     <img src=\"$imgSrc\" alt=\"<%=_ctx.appRes(\"FormGeneratorDialog.label.remove\")%>\" ");
+          dialogTemplate.append("width=\"100px\" height=\"80px\"/>\n");
           dialogTemplate.append("                     <a href=\"$actionLink\">\n");
           dialogTemplate.append("                       <img src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" ");
           dialogTemplate.append(
@@ -478,7 +480,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       dialogTemplate.append("        </td>\n");
       dialogTemplate.append("      </tr>\n");
     }
-    dialogTemplate.append("      </table>\n");    
+    dialogTemplate.append("      </table>\n");
     dialogTemplate.append("    </div>\n");
     dialogTemplate.append("  <% /* start render action*/\n");
     dialogTemplate.append("     if (!uiform.isShowActionsOnTop()) uiform.processRenderAction();\n");
@@ -552,10 +554,10 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     viewTemplate.append("<!--VIEW_END-->\n");
     return viewTemplate.toString();
   }
-  
+
   private String formatInputName(String name) {
     name = cleanString(StringEscapeUtils.unescapeHtml(Text.unescape(name)));
-    
+
     char firstChar = name.substring(0, 1).toCharArray()[0];
     if (!Character.isLetter(firstChar))
       return String.format("%s%s", INPUT_NAME_PREFIX, name);
@@ -587,7 +589,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           getChildById(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR);
       String jsonObjectGenerated = hiddenInputJSonObject.getValue();
       jsonObjectGenerated = jsonObjectGenerated.replaceAll("\n", "<br/>");
-      
+
       JsonHandler jsonHandler = new JsonDefaultHandler();
       Charset cs = Charset.forName("utf-8");
       new JsonParserImpl().parse(new InputStreamReader(new ByteArrayInputStream(jsonObjectGenerated.getBytes("utf-8")),
@@ -608,7 +610,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
             return;
           }
         }
-        
+
         // If there are only special characters, warning message
         String strCheckSpecialChars = StringEscapeUtils.unescapeHtml(Text.unescape(forms.get(i)
                                                                                         .getName()))
@@ -622,7 +624,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
           return;
         }
-        
+
         if(forms.get(i).getType().equals(UIFormGeneratorConstant.SELECT)) {
           String[] advance = null;
           boolean isEmptyValue = false;

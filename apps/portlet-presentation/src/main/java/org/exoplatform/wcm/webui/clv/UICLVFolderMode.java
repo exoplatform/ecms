@@ -84,7 +84,11 @@ public class UICLVFolderMode extends UICLVContainer {
     PaginatedResultIterator paginatedResultIterator = new NodeLocationPaginatedResultIterator(result, itemsPerPage); 
     getChildren().clear();
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-    clvPresentation = addChild(UICLVPresentation.class, null, UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId());
+    clvPresentation =
+        addChild(UICLVPresentation.class,
+                 null,
+                 UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
+                 );
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     clvPresentation.init(resourceResolver, paginatedResultIterator);
   }

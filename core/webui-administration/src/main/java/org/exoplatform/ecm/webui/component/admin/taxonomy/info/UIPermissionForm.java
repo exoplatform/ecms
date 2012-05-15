@@ -72,7 +72,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   public static final String POPUP_SELECT = "SelectUserOrGroup";
 
   public static final String SELECT_GROUP_ID = "TaxoSelectUserOrGroup";
-  private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIPermissionForm.class.getName());
   private NodeLocation  currentNode;
 
   public UIPermissionForm() throws Exception {

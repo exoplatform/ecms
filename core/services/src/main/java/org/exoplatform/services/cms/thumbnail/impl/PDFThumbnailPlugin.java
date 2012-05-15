@@ -50,7 +50,7 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
   private ThumbnailType config;
   private String description;
   private String name;
-  private static final Log LOG = ExoLogger.getExoLogger(PDFThumbnailPlugin.class);
+  private static final Log LOG = ExoLogger.getExoLogger(PDFThumbnailPlugin.class.getName());
 
   public PDFThumbnailPlugin(InitParams initParams) throws Exception {
     config = initParams.getObjectParamValues(ThumbnailType.class).get(0);

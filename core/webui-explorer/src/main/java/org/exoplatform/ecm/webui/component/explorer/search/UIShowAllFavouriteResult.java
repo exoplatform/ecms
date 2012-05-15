@@ -75,7 +75,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
   public static final int SHOW_ALL_FAVOURITE = 0;
   public static final int SHOW_ALL_FAVOURITE_BY_USER = 1;
 
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllFavouriteResult");
+  private static final Log LOG  = ExoLogger.getLogger(UIShowAllFavouriteResult.class.getName());
   private static final int FILE_PER_PAGE = 10;
   private static String iconType = "BlueDownArrow";
   private static String iconName = "";
@@ -243,7 +243,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
           UIApplication uiApp = uiShowAllFavouriteResult.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.access-denied", null,
                               ApplicationMessage.WARNING));
-          
+
           return;
       } catch(Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -267,14 +267,14 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.access-denied", null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         TemplateService templateService = uiShowAllFavouriteResult.getApplicationComponent(TemplateService.class);
         if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.not-support", null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");
@@ -335,7 +335,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
             LOG.error("node is locked, can't remove change favourite property of node :" + node.getPath());
           }
           JCRExceptionManager.process(uiApp, e);
-          
+
           uiExplorer.updateAjax(event);
         } catch (AccessDeniedException e) {
           if (LOG.isErrorEnabled()) {
@@ -343,13 +343,13 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
                 Utils.EXO_FAVOURITER + " of node: " + node.getPath());
           }
           uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-          
+
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
             LOG.error("An unexpected error occurs!");
           }
           JCRExceptionManager.process(uiApp, e);
-            
+
         }
       }
   }

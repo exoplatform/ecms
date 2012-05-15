@@ -34,7 +34,7 @@ import org.quartz.JobExecutionException;
 public class NewsletterEmailJob extends BaseJob {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterEmailJob.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterEmailJob.class.getName());
 
   private ExoContainer container;
 
@@ -55,8 +55,8 @@ public class NewsletterEmailJob extends BaseJob {
     try {
       newsletterManagerService.sendNewsletter();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when execute send email by scheduler", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when execute send email by scheduler", e);
       }
     }
   }

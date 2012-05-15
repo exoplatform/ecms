@@ -92,7 +92,7 @@ public class UIActionBar extends UIForm {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger(UIActionBar.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIActionBar.class.getName());
 
   private NodeLocation view_ ;
   private String templateName_ ;

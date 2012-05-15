@@ -70,7 +70,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIPresentationContainer extends UIContainer{
   public final static String PARAMETER_REGX       = "(.*)/(.*)";
-  private static final Log         LOG            = ExoLogger.getLogger(UIPresentationContainer.class);
+  private static final Log         LOG            = ExoLogger.getLogger(UIPresentationContainer.class.getName());
 
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;

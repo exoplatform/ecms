@@ -46,7 +46,7 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 public class UIPublicationComponent extends UIComponent {
 
   private NodeLocation node_;
-  private static final Log LOG  = ExoLogger.getLogger("component.UIPublicationComponent");
+  private static final Log LOG  = ExoLogger.getLogger(UIPublicationComponent.class.getName());
   public UIPublicationComponent() throws Exception {
   }
 

@@ -58,7 +58,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
 
   final static public String FIELD_TYPE = "type";
 
-  final static public Log LOG = ExoLogger.getLogger(UICategoryForm.class);
+  final static private Log LOG = ExoLogger.getLogger(UICategoryForm.class.getName());
 
   public void activate() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));

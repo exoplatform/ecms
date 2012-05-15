@@ -90,7 +90,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private boolean useDefaultLanguage = true;
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(WCMComposerImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(WCMComposerImpl.class.getName());
 
   /** The template filter query */
   private String templatesFilter;
@@ -937,9 +937,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     try {
       remoteUser = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      remoteUser = null;
     }
     return remoteUser;
   }

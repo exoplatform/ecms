@@ -101,7 +101,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   final static public String POPUP_TAXONOMY = "PopupComponent";
   private List<String> listTaxonomyName = new ArrayList<String>();
   private String documentType_ ;
-  private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class.getName());
 
   public UIDocumentForm() throws Exception {
     setActions(new String[]{"Save", "Cancel"}) ;

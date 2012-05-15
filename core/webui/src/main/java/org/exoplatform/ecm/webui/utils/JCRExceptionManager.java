@@ -50,7 +50,7 @@ public class JCRExceptionManager {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("ecm.webui.utils.JCRExceptionManager");
+  private static final Log LOG  = ExoLogger.getLogger(JCRExceptionManager.class.getName());
 
   /**
    * Process.

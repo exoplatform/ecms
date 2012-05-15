@@ -67,7 +67,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 4, 2011
  */
 public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(FavoriteActionUpgradePlugin.class.getName());
 
   private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
@@ -116,17 +116,17 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
     try {
-      if (log.isInfoEnabled()) {
-        log.info("Start " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Start " + this.getClass().getName() + ".............");
       }
       RequestLifeCycle.begin(PortalContainer.getInstance());
-      
+
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
                                                    repoService.getCurrentRepository());
-      
+
       // Register Script if necessary
-      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + 
+      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) +
                           "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
       try {
         session.getItem(scriptPath);
@@ -137,7 +137,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
         String scriptContent = writer.toString();
         scriptService.addScript("ecm-explorer/action/" + FILE_NAME_ADD_TO_FAVORITE_ACTION, scriptContent, sessionProvider);
       }
-      
+
       // Register Node Type exo:addToFavoriteAction if neccessary
       ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
       try {
@@ -157,14 +157,14 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
         String userName = user.getUserName();
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
         String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-        
+
         try {
           favoriteNode = userNode.getNode(favoritePath);
         }
         catch (PathNotFoundException pne) {
           favoriteNode = createFavoriteFolder(userName);
         }
-        
+
         if (favoriteNode != null) {
           if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) == null) {
             applyAddToFavoriteAction(favoriteNode);
@@ -172,13 +172,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           setFavoritesForOldItems(favoriteNode, userName);
         }
       }
-      if (log.isInfoEnabled()) {
-        log.info("End " + this.getClass().getName() + ".............");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("End " + this.getClass().getName() + ".............");
       }
     }
     catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error(this.getClass().getName() + " failed:", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error(this.getClass().getName() + " failed:", e);
       }
     }
     finally {
@@ -188,7 +188,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
   /**
    * Set favorites for all document nodes which stay in specified folder.
-   * 
+   *
    * @param node Specified Node
    * @param userName UserName
    * @throws Exception
@@ -203,23 +203,23 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       setFavoritesForOldItems(child, userName);
     }
   }
-  
+
   /**
    * Check if node is document.
-   * 
+   *
    * @param node a Node
-   * @return true: is document; false: is not document 
-   * @throws Exception 
+   * @return true: is document; false: is not document
+   * @throws Exception
    */
   private boolean isDocument(Node node) throws Exception {
     NodeType nodeType = node.getPrimaryNodeType();
     return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
-  
+
   /**
    * Apply AddToFavoriteAction action to favorite Node.
    * When user create new document node in favorite Node, it will be add favorite too.
-   * 
+   *
    * @param favoriteNode Favorite Node
    * @throws Exception
    */
@@ -266,10 +266,10 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
                            );
     actionNode.save();
   }
-  
+
   /**
    * Create Favorite Folder.
-   * 
+   *
    * @param userName UserName
    * @return Favorite Node
    * @throws Exception
@@ -281,29 +281,29 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       Node userNode =
         nodeHierarchyCreator.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userName);
       String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-  
+
       // Create favorite path
       userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
-  
+
       // Add Mixin types
       userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
       userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
-  
+
       // Add permission
       Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
       permissionsMap.put(userName, PermissionType.ALL);
       ((ExtendedNode)userFavoriteNode).setPermissions(permissionsMap);
-      
+
       userNode.getSession().save();
-      
+
     } catch (PathNotFoundException pne) {
-      if (log.isWarnEnabled()) {
-        log.warn("Private Folder of User " + userName + " not found");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Private Folder of User " + userName + " not found");
       }
     }
     return userFavoriteNode;
   }
-  
+
   public boolean isFavoriter(String userName, Node node) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
@@ -339,11 +339,11 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
   }
-  
+
   public void addFavorite(Node node, String userName) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
-    
+
     // check if node is symlink
     if (lnkManager.isLink(node)) return;
 

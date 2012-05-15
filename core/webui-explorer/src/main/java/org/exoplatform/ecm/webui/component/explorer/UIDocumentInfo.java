@@ -184,7 +184,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
   
-  private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class);
+  private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
 
@@ -504,9 +504,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
       }
     } catch(Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      return uiExplorer.getDocumentInfoTemplate();
     }
     return uiExplorer.getDocumentInfoTemplate();
   }

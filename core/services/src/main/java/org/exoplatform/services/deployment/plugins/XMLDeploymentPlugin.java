@@ -55,7 +55,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
   private RepositoryService repositoryService;
 
   /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(XMLDeploymentPlugin.class.getName());
 
   /**
    * Instantiates a new xML deployment plugin.
@@ -117,8 +117,8 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
             Node node = iter.nextNode();
             if (node.hasProperty("publication:liveRevision")
                 && node.hasProperty("publication:currentState")) {
-              if (log.isInfoEnabled()) {
-                log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+              if (LOG.isInfoEnabled()) {
+                LOG.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
               }
               node.setProperty("publication:liveRevision", "");
               node.setProperty("publication:currentState", "published");
@@ -132,7 +132,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
           // process import version history
           Node currentNode = (Node) session.getItem(deploymentDescriptor.getTarget().getNodePath());
 
-          Map<String, String> mapHistoryValue = 
+          Map<String, String> mapHistoryValue =
             Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
           Utils.processImportHistory(currentNode,
                                      configurationManager.getInputStream(versionHistoryPath),
@@ -140,14 +140,14 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
         }
 
         session.save();
-        if (log.isInfoEnabled()) {
-          log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
+        if (LOG.isInfoEnabled()) {
+          LOG.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
               + deploymentDescriptor.getTarget().getNodePath());
         }
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
+      if (LOG.isErrorEnabled()) {
+        LOG.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
                     + deploymentDescriptor.getTarget().getNodePath() + " is FAILURE at "
                     + new Date().toString() + "\n",
                 ex);
@@ -155,5 +155,5 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       throw ex;
     }
   }
-  
+
 }

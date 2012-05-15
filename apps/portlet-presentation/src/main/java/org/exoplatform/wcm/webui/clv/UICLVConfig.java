@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
@@ -85,7 +86,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
 )
 public class UICLVConfig extends UIForm  implements UISelectable {
 
-  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.wcm.webui.pclv.config.UIPCLVConfig");
+  private static final Log LOG  = ExoLogger.getLogger(UICLVConfig.class.getName());
 
   /** The Constant DISPLAY_MODE_FORM_RADIO_BOX_INPUT. */
   public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT       = "UICLVConfigDisplayModeFormRadioBoxInput";
@@ -695,7 +696,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch (Exception e) {
+        }
+        catch (PathNotFoundException e) {
+          title = null;
+        }
+        catch (RepositoryException e) {
           title = null;
         }
       }

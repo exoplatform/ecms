@@ -107,7 +107,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   private double fuzzySearchIndex = 0.8;
   
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(SiteSearchServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(SiteSearchServiceImpl.class.getName());
 
   /**
    * Instantiates a new site search service impl.

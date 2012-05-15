@@ -38,7 +38,7 @@ public class LockServiceImpl implements LockService, Startable {
   private List<String> settingLockList = new ArrayList<String>();
   private List<String> preSettingLockList = new ArrayList<String>();
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
-  private static final Log LOG = ExoLogger.getLogger(LockService.class);
+  private static final Log LOG = ExoLogger.getLogger(LockServiceImpl.class.getName());
 
   /**
    * Constructor method

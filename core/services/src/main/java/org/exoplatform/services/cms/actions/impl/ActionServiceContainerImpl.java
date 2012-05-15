@@ -66,7 +66,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("cms.action.ActionServiceContainerImpl");
+  private static final Log LOG  = ExoLogger.getLogger(ActionServiceContainerImpl.class.getName());
 
   /**
    * Define nodetype ACTIONABLE

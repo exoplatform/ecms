@@ -75,7 +75,7 @@ import org.exoplatform.webui.event.EventListener;
     @EventConfig(listeners = UIShowAllHiddenResult.SortDESCActionListener.class) })
 public class UIShowAllHiddenResult extends UIComponentDecorator {
 
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllHiddenResult");
+  private static final Log LOG  = ExoLogger.getLogger(UIShowAllHiddenResult.class.getName());
   private static final int FILE_PER_PAGE = 10;
   private static String iconType = "BlueDownArrow";
   private static String iconName = "";
@@ -237,7 +237,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -262,7 +262,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
           LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
         uiExplorer.updateAjax(event);
       } catch (AccessDeniedException e) {
         if (LOG.isErrorEnabled()) {
@@ -272,13 +272,13 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.accessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("an unexpected error occurs while removing the node", e);
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
         return;
       }
     }
@@ -297,7 +297,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.access-denied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       TemplateService templateService = uiShowAllHiddenResult.getApplicationComponent(TemplateService.class);
@@ -305,7 +305,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.not-support",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");

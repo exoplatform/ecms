@@ -32,7 +32,7 @@ public class ManagePublicationActionHandler implements ActionHandler {
 
   private static final long serialVersionUID = 1L;
   private boolean executed = false;
-  private static final Log LOG  = ExoLogger.getLogger(ManagePublicationActionHandler.class);
+  private static final Log LOG  = ExoLogger.getLogger(ManagePublicationActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     try {
@@ -45,7 +45,6 @@ public class ManagePublicationActionHandler implements ActionHandler {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);
       }
-      ExoLogger.getLogger(this.getClass()).error(e);
     } finally {
       ProcessUtil.deleteTimer(context, "publicationTimer", context.getToken());
       context.getToken().signal("publication-done");

@@ -49,7 +49,7 @@ public class NewGroupListener extends GroupEventListener
 {
 
    /** The log. */
-   private static final Log LOG = ExoLogger.getLogger(NewGroupListener.class);
+   private static final Log LOG = ExoLogger.getLogger(NewGroupListener.class.getName());
   
    private HierarchyConfig config_;
 

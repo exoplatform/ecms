@@ -131,7 +131,7 @@ public class UITask extends UIForm implements UISelectable {
   private RepositoryService jcrService;
   private List<InputInfo> inputInfo_;
 
-  private static final Log LOG = ExoLogger.getExoLogger(UITask.class);
+  private static final Log LOG = ExoLogger.getExoLogger(UITask.class.getName());
 
   public UITask() {
     serviceContainer = getApplicationComponent(WorkflowServiceContainer.class);

@@ -18,7 +18,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * The Class TestNewsletterTemplateHandler.
  */
 public class TestNewsletterTemplateHandler extends BaseWCMTestCase {
-  private static Log log = ExoLogger.getLogger(TestNewsletterTemplateHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(TestNewsletterTemplateHandler.class.getName());
 
   /** The session provider. */
   private SessionProvider sessionProvider;
@@ -91,7 +91,7 @@ public class TestNewsletterTemplateHandler extends BaseWCMTestCase {
     newsletterSubscriptionHandler.add(sessionProvider, classicPortal, newsletterSubscriptionConfig);
 
     subscriptionNode = categoriesNode.getNode("CategoryName/SubscriptionName");
-    nodesTemp 	= createWebcontentNode(subscriptionNode, "testTemplate", null, null, null);
+    nodesTemp   = createWebcontentNode(subscriptionNode, "testTemplate", null, null, null);
     newsletterTemplateHandler.convertAsTemplate(sessionProvider, nodesTemp.getPath(), classicPortal, newsletterCategoryConfig.getName());
     session.save();
     // Get a template is exist in system
@@ -146,13 +146,13 @@ public class TestNewsletterTemplateHandler extends BaseWCMTestCase {
     assertEquals(5, listTemplates.size());
 
     try{
-      if (log.isInfoEnabled()) {
-        log.info("Convert a webcontent to template which is already exist in system");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Convert a webcontent to template which is already exist in system");
       }
       newsletterTemplateHandler.convertAsTemplate(sessionProvider, nodesTemp.getPath(), classicPortal, newsletterCategoryConfig1.getName());
     }catch(Exception ex){
-      if (log.isWarnEnabled()) {
-        log.warn("Can't convert");
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can't convert");
       }
     }
     listTemplates = newsletterTemplateHandler.getTemplates(sessionProvider, classicPortal, newsletterCategoryConfig1);

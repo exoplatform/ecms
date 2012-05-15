@@ -56,7 +56,7 @@ import org.exoplatform.webui.exception.MessageException;
     }
 )
 public class UIRelationsAddedList extends UIContainer implements UISelectable {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIRelationsAddedList");
+  private static final Log LOG  = ExoLogger.getLogger(UIRelationsAddedList.class.getName());
   private static String[] RELATE_BEAN_FIELD = {"path"} ;
   private static String[] ACTION = {"Delete"} ;
 

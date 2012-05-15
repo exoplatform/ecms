@@ -49,7 +49,7 @@ public class WCMPublicationServiceImpl
                                       extends
                                       org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl {
 
-  private static final Log log = ExoLogger.getLogger(WCMPublicationServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class.getName());
 
   /** The publication service. */
   private PublicationService publicationService;
@@ -74,7 +74,7 @@ public class WCMPublicationServiceImpl
    */
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) {
     try {
-      if (log.isInfoEnabled()) log.info(node.getPath() + "::" + siteName + "::"+remoteUser);
+      if (LOG.isInfoEnabled()) LOG.info(node.getPath() + "::" + siteName + "::"+remoteUser);
 
       PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);
 
@@ -137,8 +137,8 @@ public class WCMPublicationServiceImpl
         }
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Couldn't complete the enrollement : ", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Couldn't complete the enrollement : ", ex);
       }
     }
   }
@@ -153,8 +153,8 @@ public class WCMPublicationServiceImpl
   private void setInitialState(Node node, Lifecycle lifecycle, String remoteUser) throws Exception {
     List<State> states = lifecycle.getStates();
     if (states == null || states.size() <= 0) {
-      if (log.isWarnEnabled()) {
-        log.warn("could not find an initial state in lifecycle " + lifecycle.getName());
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("could not find an initial state in lifecycle " + lifecycle.getName());
       }
     } else {
       String initialState = states.get(0).getState();
@@ -173,8 +173,8 @@ public class WCMPublicationServiceImpl
         if (node.isLocked()) {
           Lock lock = node.getLock();
           String owner = lock.getLockOwner();
-          if (log.isInfoEnabled())
-            log.info("node is locked by owner, unlocking it for enrollement");
+          if (LOG.isInfoEnabled())
+            LOG.info("node is locked by owner, unlocking it for enrollement");
           if (node.holdsLock() && remoteUser.equals(owner)) {
             String lockToken = LockUtil.getLockToken(node);
             if (lockToken != null) {
@@ -193,8 +193,8 @@ public class WCMPublicationServiceImpl
         node.setProperty("publication:lastUser", remoteUser);
         node.getSession().save();
       } catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error("Error setting staged state : ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error setting staged state : ", e);
         }
       }
     }

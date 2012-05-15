@@ -83,7 +83,7 @@ public class UIViewVersion extends UIBaseNodePresentation {
   private NodeLocation node_ ;
   protected NodeLocation originalNode_ ;
   private String language_ ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIViewVersion");
+  private static final Log LOG  = ExoLogger.getLogger(UIViewVersion.class.getName());
   final private static String COMMENT_COMPONENT = "Comment";
 
   public UIViewVersion() throws Exception {

@@ -47,7 +47,7 @@ import org.exoplatform.webui.form.UIForm;
 public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class);
+  private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
   
   /** The page event listener delegate. */
   private PageEventListenerDelegate       pageEventListenerDelegate;

@@ -27,8 +27,6 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
@@ -192,8 +190,6 @@ public class UICLVPortlet extends UIPortletApplication {
   
   private String             currentApplicationMode;
   
-  private static final Log   log                                  = ExoLogger.getLogger(UICLVPortlet.class);
-
   /**
    * Instantiates a new uICLV portlet.
    * 

@@ -42,45 +42,45 @@ import org.exoplatform.services.log.Log;
  *          vuna@exoplatform.com
  * Feb 24, 2012
  *
- * This class will be used to upgrade pre-defined templates of Content-list-viewer and Search portlets. 
+ * This class will be used to upgrade pre-defined templates of Content-list-viewer and Search portlets.
  * Views with desire of manual upgration can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
+ * Syntax :<br/>
  * unchanged-clv-templates=<template name list>
  * unchanged-wcm-search-templates=<template name list>
  * For examples :<br/>
  * unchanged-clv-templates=list/BigHotNewsTemplateCLV.gtmpl,navigation/CategoryList.gtmpl
  * unchanged-wcm-search-templates=search-form/UIDefaultSearchForm.gtmpl
- *       
+ *
  */
 public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(WCMTemplateUpgradePlugin.class.getName());
   private ApplicationTemplateManagerService appTemplateService_;
-  
+
   public WCMTemplateUpgradePlugin(ApplicationTemplateManagerService appTemplateService, InitParams initParams) {
     super(initParams);
     this.appTemplateService_ = appTemplateService;
   }
 
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     String unchangedClvTemplates = PrivilegedSystemHelper.getProperty("unchanged-clv-templates");
     String unchangedSearchTemplates = PrivilegedSystemHelper.getProperty("unchanged-wcm-search-templates");
     upgrade(unchangedClvTemplates, "content-list-viewer");
     upgrade(unchangedSearchTemplates, "WCM Advance Search");
-    
+
     try {
       // re-initialize new scripts
       ((ApplicationTemplateManagerServiceImpl)appTemplateService_).start();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating templates for portlet CLV and WCMSearch: ", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating templates for portlet CLV and WCMSearch: ", e);
       }
     }
   }
-  
+
   private void upgrade(String unchangedTemplates, String portletName) {
     SessionProvider sessionProvider = null;
     if (StringUtils.isEmpty(unchangedTemplates)) {
@@ -102,7 +102,7 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
           execute().getNodes();
       while (iter.hasNext()) {
         Node templateNode = iter.nextNode();
-        if (!unchangedTemplateSet.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1)) && 
+        if (!unchangedTemplateSet.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1)) &&
             configuredTemplates.contains(templateNode.getPath().substring(templateHomeNode.getPath().length() + 1))) {
           removedNodes.add(templateNode);
         }
@@ -113,14 +113,14 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
           removedNode.remove();
           templateHomeNode.save();
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
-            log.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath());
+          if (LOG.isInfoEnabled()) {
+            LOG.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath());
           }
         }
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating templates for portlet: " + portletName + ": ", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating templates for portlet: " + portletName + ": ", e);
       }
     } finally {
       if (sessionProvider != null) {
@@ -128,10 +128,10 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
-  
+
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
     return true;
   }
-  
+
 }

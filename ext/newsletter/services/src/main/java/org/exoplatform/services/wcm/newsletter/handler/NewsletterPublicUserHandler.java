@@ -47,7 +47,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NewsletterPublicUserHandler {
 
   /** The log. */
-  private static Log        log = ExoLogger.getLogger(NewsletterPublicUserHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterPublicUserHandler.class.getName());
 
   /** The repository service. */
   private RepositoryService repositoryService;
@@ -93,8 +93,8 @@ public class NewsletterPublicUserHandler {
       try {
         listString.add(value.getString());
       } catch (Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error("Error when convert values to array: ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when convert values to array: ", e);
         }
       }
     }
@@ -139,8 +139,8 @@ public class NewsletterPublicUserHandler {
                                        new String[] { userMail });
         }
       } catch (Exception ex) {
-        if (log.isErrorEnabled()) {
-          log.error("updateSubscriptions() failed because of ", ex);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("updateSubscriptions() failed because of ", ex);
         }
       }
     }
@@ -182,8 +182,8 @@ public class NewsletterPublicUserHandler {
       }
       session.save();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Update user's subscription for user " + email + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Update user's subscription for user " + email + " failed because of ", e);
       }
     }
   }
@@ -205,8 +205,8 @@ public class NewsletterPublicUserHandler {
                         List<String> listCategorySubscription,
                         String link,
                         String[] emailContent) throws Exception {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to subscribe user " + userMail);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to subscribe user " + userMail);
     }
     try {
       // add new user email into users node
@@ -232,8 +232,8 @@ public class NewsletterPublicUserHandler {
         mailService.sendMessage(message);
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Subscribe user " + userMail + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Subscribe user " + userMail + " failed because of ", e);
       }
       throw e;
     }
@@ -278,8 +278,8 @@ public class NewsletterPublicUserHandler {
    * @param sessionProvider the session provider
    */
   public void forgetEmail(SessionProvider sessionProvider, String portalName, String email) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to update user's subscriptions for user " + email);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to update user's subscriptions for user " + email);
     }
     try {
       clearEmailInSubscription(sessionProvider, email);
@@ -288,8 +288,8 @@ public class NewsletterPublicUserHandler {
       NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
       manageUserHandler.delete(sessionProvider, portalName, email);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Update user's subscription for user " + email + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Update user's subscription for user " + email + " failed because of ", e);
       }
     }
   }
@@ -307,8 +307,8 @@ public class NewsletterPublicUserHandler {
                                   String portalName,
                                   String email,
                                   List<String> categoryAndSubscriptions) {
-    if (log.isInfoEnabled()) {
-      log.info("Trying to update user's subscriptions for user " + email);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Trying to update user's subscriptions for user " + email);
     }
     try {
       clearEmailInSubscription(sessionProvider, email);
@@ -321,8 +321,8 @@ public class NewsletterPublicUserHandler {
       // to get which subscription user remove, which subscription user add,
       // then update reference
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Update user's subscription for user " + email + " failed because of ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Update user's subscription for user " + email + " failed because of ", e);
       }
     }
   }

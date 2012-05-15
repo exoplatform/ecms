@@ -46,7 +46,7 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
 
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(UpgradeVotingNodeTypePlugin.class.getName());
   
 
   public UpgradeVotingNodeTypePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
@@ -58,8 +58,8 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
@@ -84,12 +84,12 @@ public class UpgradeVotingNodeTypePlugin extends UpgradeProductPlugin {
         mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
-      if (log.isInfoEnabled()) {
-        log.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP
             + "' for node type 'mix:votable'!", e);
       }
     } finally {

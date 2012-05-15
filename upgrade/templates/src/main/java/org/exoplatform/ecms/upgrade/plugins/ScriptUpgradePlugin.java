@@ -35,36 +35,35 @@ import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          vuna@exoplatform.com
  * Feb 23, 2012
- * 
- * This class will be used to upgrade pre-defined scripts. Scripts with desire of manual upgration 
+ *
+ * This class will be used to upgrade pre-defined scripts. Scripts with desire of manual upgration
  * can be specified in file configuration.properties.<br/>
- * Syntax :<br/> 
+ * Syntax :<br/>
  * unchanged-scripts=<script name list>
  * For examples :<br/>
  * unchanged-scripts=action/AddMetadataScript.groovy, action/AddTaxonomyActionScript.groovy
- * 
+ *
  */
 public class ScriptUpgradePlugin extends UpgradeProductPlugin {
-  
-  private Log log = ExoLogger.getLogger(this.getClass());
+
+  private static final Log LOG = ExoLogger.getLogger(ScriptUpgradePlugin.class.getName());
   private ScriptService scriptService_;
-  
+
   public ScriptUpgradePlugin(ScriptService scriptService, InitParams initParams) {
     super(initParams);
     this.scriptService_ = scriptService;
   }
-  
+
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     String unchangedTemplates = PrivilegedSystemHelper.getProperty("unchanged-scripts");
     SessionProvider sessionProvider = null;
@@ -98,16 +97,16 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
           removedNode.remove();
           ecmExplorer.save();
         } catch (Exception e) {
-          if (log.isInfoEnabled()) {
-            log.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath());
+          if (LOG.isInfoEnabled()) {
+            LOG.error("Error in " + this.getName() + ": Can not remove old template: " + removedNode.getPath());
           }
         }
       }
       // re-initialize new scripts
       ((ScriptServiceImpl)scriptService_).start();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when migrating scripts", e);        
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating scripts", e);
       }
     } finally {
       if (sessionProvider != null) {
@@ -115,10 +114,10 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
-  
+
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
     return true;
   }
-  
+
 }

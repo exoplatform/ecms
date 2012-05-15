@@ -53,10 +53,10 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 public class UISideBar extends UIContainer {
   private String                           currentComp;
 
-  private static final Log                 LOG            = ExoLogger.getLogger("dms.UISideBar");
+  private static final Log                 LOG            = ExoLogger.getLogger(UISideBar.class.getName());
 
   public static final String               EXTENSION_TYPE = "org.exoplatform.ecm.dms.UISideBar";
-  
+
   public static final int VISIBLE_COMPONENT_SIZE = 5;
 
 
@@ -64,9 +64,9 @@ public class UISideBar extends UIContainer {
       = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
   private String selectedComp;
-    
+
   private List<UIAbstractManagerComponent> lstVisibleComp;
-    
+
   private List<UIAbstractManagerComponent> lstHiddenComp;
 
 
@@ -79,27 +79,27 @@ public class UISideBar extends UIContainer {
     addChild(UIAllItems.class, null, null);
     addChild(UIAllItemsByType.class, null, null);
   }
-  
+
   public List<UIAbstractManagerComponent> getLstVisibleComp() {
     return lstVisibleComp;
   }
-   
+
   public void setLstVisibleComp(List<UIAbstractManagerComponent> lstVisibleComp) {
     this.lstVisibleComp = lstVisibleComp;
   }
-   
+
   public List<UIAbstractManagerComponent> getLstHiddenComp() {
     return lstHiddenComp;
   }
-  
+
   public void setLstHiddenComp(List<UIAbstractManagerComponent> lstHiddenComp) {
     this.lstHiddenComp = lstHiddenComp;
   }
-  
+
   public void setSelectedComp(String componentName) {
     selectedComp = componentName;
   }
-  
+
   private void initComponents() {
     lstVisibleComp = new ArrayList<UIAbstractManagerComponent>(VISIBLE_COMPONENT_SIZE);
     lstHiddenComp = new ArrayList<UIAbstractManagerComponent>();

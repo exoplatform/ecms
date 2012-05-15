@@ -48,8 +48,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Feb 3, 2012
- * 3:03:41 PM  
- * 
+ * 3:03:41 PM
+ *
  * This class will be used to do 2 operations
  * 1. Allow super user has full permission on Users folder
  * 2. Remove "Remove" right permission of folder Private & Public under user folder
@@ -57,13 +57,13 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
 
   private RepositoryService repoService_;
-  private Log LOG = ExoLogger.getLogger(this.getClass());  
+  private static final Log LOG = ExoLogger.getLogger(UpgradeUsersFolderPlugin.class.getName());
   private NodeHierarchyCreator nodeHCreator_;
   private OrganizationService orgService_;
 
-  public UpgradeUsersFolderPlugin(OrganizationService orgService, NodeHierarchyCreator nodeHCreator, 
+  public UpgradeUsersFolderPlugin(OrganizationService orgService, NodeHierarchyCreator nodeHCreator,
       RepositoryService repoService, InitParams initParams) {
-    super(initParams); 
+    super(initParams);
     repoService_ = repoService;
     nodeHCreator_ = nodeHCreator;
     orgService_ = orgService;
@@ -127,8 +127,8 @@ public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
   }
 
   /**
-   * Remove "Remove" right permission of children folder of User folder (Private & Public) 
-   * @throws Exception 
+   * Remove "Remove" right permission of children folder of User folder (Private & Public)
+   * @throws Exception
    */
   private void upgradePermissionForChildren() throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();

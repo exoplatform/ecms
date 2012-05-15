@@ -52,7 +52,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
 
-  private static final Log LOG = ExoLogger.getLogger(UIContentBrowsePanelMulti.class);
+  private static final Log LOG = ExoLogger.getLogger(UIContentBrowsePanelMulti.class.getName());
   
   /** The item paths. */
   private String itemPaths;

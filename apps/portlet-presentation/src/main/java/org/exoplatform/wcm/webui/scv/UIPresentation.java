@@ -76,7 +76,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIPresentation extends UIBaseNodePresentation {
 
-  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.wcm.webui.scv.UIPresentation");
+  private static final Log LOG  = ExoLogger.getLogger(UIPresentation.class.getName());
 
   private NodeLocation originalNodeLocation;
 

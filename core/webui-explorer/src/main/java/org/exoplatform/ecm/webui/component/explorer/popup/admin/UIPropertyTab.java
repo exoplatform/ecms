@@ -67,7 +67,7 @@ public class UIPropertyTab extends UIContainer {
   private static String[] PRO_BEAN_FIELD = {"icon", "name", "multiValue", "value", "action"} ;
   private final static String PRO_KEY_BINARYTYPE = "binary" ;
   private final static String PRO_KEY_CANNOTGET = "cannotget" ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIPropertyTab");
+  private static final Log LOG  = ExoLogger.getLogger(UIPropertyTab.class.getName());
   private Set<String> propertiesName_ = new HashSet<String>();
 
   public String[] getBeanFields() { return PRO_BEAN_FIELD ;}

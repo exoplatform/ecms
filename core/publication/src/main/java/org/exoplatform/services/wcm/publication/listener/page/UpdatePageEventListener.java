@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 public class UpdatePageEventListener extends Listener<DataStorageImpl, Page> {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(UpdatePageEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(UpdatePageEventListener.class.getName());
   WCMPublicationService publicationService = null;
   public UpdatePageEventListener(WCMPublicationService publicationService){
     this.publicationService = publicationService;
@@ -55,8 +55,8 @@ public class UpdatePageEventListener extends Listener<DataStorageImpl, Page> {
       else
         publicationService.updateLifecyleOnChangePage(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when update publication lifecyle", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when update publication lifecyle", e);
       }
     }
   }

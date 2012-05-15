@@ -47,8 +47,7 @@ public class FavoriteRESTService implements ResourceContainer {
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
-  private static final Log LOG = ExoLogger.getLogger(FavoriteRESTService.class
-      .getName());
+  private static final Log LOG = ExoLogger.getLogger(FavoriteRESTService.class.getName());
 
   public FavoriteRESTService(FavoriteService favoriteService, ManageDriveService manageDriveService) {
     this.favoriteService = favoriteService;

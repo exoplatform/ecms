@@ -50,7 +50,6 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -63,13 +62,13 @@ import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIComponent;
@@ -228,7 +227,7 @@ public class Utils {
   final static public String SITE = "Site";
   final static public String PRIVATE = "Private";
   final static public String URL_BACKTO ="backto";
-  private static final Log LOG = ExoLogger.getLogger("webui.Utils");
+  private static final Log LOG = ExoLogger.getLogger(Utils.class.getName());
   public Map<String, Object> maps_ = new HashMap<String, Object>();
 
   public static final String INPUT_TEXT_AREA = "TEXTAREA";
@@ -681,9 +680,9 @@ public class Utils {
     if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
       if (orgNode.hasProperty(propertyName)) {
         try {
-        	if(propertyName.equals(EXO_TITLE))
-        		return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString())) ;  
-        	return orgNode.getProperty(propertyName).getString() ;
+          if(propertyName.equals(EXO_TITLE))
+            return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString()));
+          return orgNode.getProperty(propertyName).getString();
         } catch (Exception e) {
           return defaultValue;
         }
@@ -902,7 +901,7 @@ public class Utils {
     }
     return map;
   }
-  
+
   /**
    * Gets the title.
    *
@@ -925,13 +924,13 @@ public class Utils {
           // Do nothing
         }
       }
-    } 
+    }
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       title = node.getName();
     }
     return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
-  
+
   /**
    *
    * @param node

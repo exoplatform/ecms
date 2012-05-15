@@ -35,7 +35,7 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
 public class ChangeStateCronJobImpl implements Job {
-  private static final Log log                 = ExoLogger.getLogger(ChangeStateCronJobImpl.class);
+  private static final Log LOG                 = ExoLogger.getLogger(ChangeStateCronJobImpl.class.getName());
 
   private static final String START_TIME_PROPERTY = "publication:startPublishedDate";
 
@@ -56,7 +56,7 @@ public class ChangeStateCronJobImpl implements Job {
     try {
       RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
       if (mx.getUptime()>120000) {
-        if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob");
+        if (LOG.isDebugEnabled()) LOG.debug("Start Execute ChangeStateCronJob");
         if (fromState == null) {
 
           JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
@@ -68,7 +68,7 @@ public class ChangeStateCronJobImpl implements Job {
           workspace = pathTab[0];
           contentPath = pathTab[1];
         }
-        if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
+        if (LOG.isDebugEnabled()) LOG.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
             + toState);
         SessionProvider sessionProvider = SessionProvider.createSystemProvider();
         String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
@@ -76,7 +76,7 @@ public class ChangeStateCronJobImpl implements Job {
         PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
         ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
         if (manageableRepository == null) {
-          if (log.isDebugEnabled()) log.debug("Repository not found. Ignoring");
+          if (LOG.isDebugEnabled()) LOG.debug("Repository not found. Ignoring");
           return;
         }
         session = sessionProvider.getSession(workspace, manageableRepository);
@@ -106,7 +106,7 @@ public class ChangeStateCronJobImpl implements Job {
 
           if (numberOfItemsToChange > 0) {
 
-            if (log.isDebugEnabled()) log.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
+            if (LOG.isDebugEnabled()) LOG.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
                 + "' found in " + predefinedPath);
             PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
             .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
@@ -122,7 +122,7 @@ public class ChangeStateCronJobImpl implements Job {
                   Date now = Calendar.getInstance().getTime();
                   Date nodeDate = node_.getProperty(property).getDate().getTime();
                   if (now.compareTo(nodeDate) >= 0) {
-                    if (log.isInfoEnabled()) log.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
+                    if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
                         + format.format(nodeDate) + ")");
 
                     if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
@@ -142,22 +142,22 @@ public class ChangeStateCronJobImpl implements Job {
                     publicationPlugin.changeState(node_, toState, context_);
                   }
                 } else if (START_TIME_PROPERTY.equals(property)) {
-                  if (log.isInfoEnabled()) log.info("'" + toState + "' " + node_.getPath());
+                  if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
                   publicationPlugin.changeState(node_, toState, context_);
                 }
               }
             }
           } else {
-            if (log.isDebugEnabled()) log.debug("no '" + fromState + "' content found in " + predefinedPath);
+            if (LOG.isDebugEnabled()) LOG.debug("no '" + fromState + "' content found in " + predefinedPath);
           }
         }
-        if (log.isDebugEnabled()) log.debug("End Execute ChangeStateCronJob");
+        if (LOG.isDebugEnabled()) LOG.debug("End Execute ChangeStateCronJob");
       }
 
     } catch (RepositoryException ex) {
-      if (log.isErrorEnabled()) log.error("Repository not found. Ignoring");
+      if (LOG.isErrorEnabled()) LOG.error("Repository not found. Ignoring");
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) log.error("error when changing the state of the content : " + ex.getMessage(), ex);
+      if (LOG.isErrorEnabled()) LOG.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {
       if (session != null)
         session.logout();

@@ -32,7 +32,7 @@ public class DelegateActionHandler implements ActionHandler {
 
   private static final long serialVersionUID = 1L;
 
-  private static final Log LOG = ExoLogger.getLogger(DelegateActionHandler.class);
+  private static final Log LOG = ExoLogger.getLogger(DelegateActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     try {

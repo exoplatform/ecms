@@ -93,7 +93,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES";
 
   protected Map<String, ECMEventListener> listeners_ = new HashMap<String, ECMEventListener>();
-  private static final Log LOG  = ExoLogger.getLogger(BaseActionPlugin.class);
+  private static final Log LOG  = ExoLogger.getLogger(BaseActionPlugin.class.getName());
 
   abstract protected List<RepositoryEntry> getRepositories();
   abstract protected String getWorkspaceName();

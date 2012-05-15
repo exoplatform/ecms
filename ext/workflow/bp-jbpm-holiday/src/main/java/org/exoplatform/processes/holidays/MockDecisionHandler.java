@@ -29,11 +29,11 @@ import org.jbpm.graph.node.DecisionHandler;
  */
 public class MockDecisionHandler implements DecisionHandler {
 
-  private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
+  private static final Logger LOG = Logger.getLogger(MockDecisionHandler.class.getName());
 
   public String decide(ExecutionContext executionContext) {
-    log.info("Start Date : " + executionContext.getVariable("start"));
-    log.info("decide in MockDecisionHandler : " + executionContext.getNode().getName());
+    LOG.info("Start Date : " + executionContext.getVariable("start"));
+    LOG.info("decide in MockDecisionHandler : " + executionContext.getNode().getName());
     return "enough holidays";
   }
 

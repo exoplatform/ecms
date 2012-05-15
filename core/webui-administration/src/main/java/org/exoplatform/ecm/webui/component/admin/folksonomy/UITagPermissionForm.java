@@ -53,7 +53,7 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
   final static public String PERMISSION   = "permission";
 
   final static public String POPUP_SELECT = "SelectUserOrGroup";
-  private static final Log LOG  = ExoLogger.getLogger(UITagPermissionForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UITagPermissionForm.class.getName());
 
   public UITagPermissionForm() throws Exception {
     addChild(new UITagPermissionInputSet(PERMISSION));

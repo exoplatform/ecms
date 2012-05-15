@@ -60,7 +60,7 @@ public class UITagStyleForm extends UIForm {
   final static public String STYLE_NAME = "styleName" ;
   final static public String DOCUMENT_RANGE = "documentRange" ;
   final static public String STYLE_HTML = "styleHTML" ;
-  private static final Log LOG  = ExoLogger.getLogger("admin.UITagStyleForm");
+  private static final Log LOG  = ExoLogger.getLogger(UITagStyleForm.class.getName());
   private NodeLocation selectedTagStyle_ ;
 
   public UITagStyleForm() throws Exception {

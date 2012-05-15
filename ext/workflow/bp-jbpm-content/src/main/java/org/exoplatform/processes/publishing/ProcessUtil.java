@@ -84,7 +84,7 @@ public class ProcessUtil {
   public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository";
   public final static String CURRENT_PATH_PROP = "exo:currentPath";
 
-  private static final Log LOG = ExoLogger.getLogger(ProcessUtil.class);
+  private static final Log LOG = ExoLogger.getLogger(ProcessUtil.class.getName());
 
   public static void createTimer(ExecutionContext context, Timer timer) {
     SchedulerService schedulerService = (SchedulerService) Services.getCurrentService(Services.SERVICENAME_SCHEDULER);
@@ -213,7 +213,7 @@ public class ProcessUtil {
         LOG.error(e);
       }
     } finally {
-      provider.close();  
+      provider.close();
     }
   }
 
@@ -244,7 +244,7 @@ public class ProcessUtil {
         LOG.error(e);
       }
     } finally {
-      provider.close();  
+      provider.close();
     }
   }
 
@@ -301,7 +301,7 @@ public class ProcessUtil {
         LOG.error(e);
       }
     } finally {
-      provider.close();   
+      provider.close();
     }
   }
 
@@ -329,7 +329,7 @@ public class ProcessUtil {
         LOG.error(e);
       }
     } finally {
-      provider.close();  
+      provider.close();
     }
   }
 
@@ -344,7 +344,7 @@ public class ProcessUtil {
     Session session = provider.getSession(workspace,repository);
     return (Node)session.getItem(path);
   }
-  
+
   public static Node getNode(ExecutionContext context,
                              String workspace,
                              String path,

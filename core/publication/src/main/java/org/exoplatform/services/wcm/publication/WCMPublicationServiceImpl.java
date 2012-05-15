@@ -41,7 +41,7 @@ import org.picocontainer.Startable;
  */
 public class WCMPublicationServiceImpl implements WCMPublicationService, Startable {
 
-  private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class.getName());
   
   /** The Constant SIMPLE_LIFECYCLE_NAME. */
   private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication";

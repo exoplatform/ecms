@@ -46,7 +46,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class CommentsServiceImpl implements CommentsService {
 
-  private static final Log LOG = ExoLogger.getLogger("ecm:CommentsService");
+  private static final Log LOG = ExoLogger.getLogger(CommentsServiceImpl.class.getName());
 
   private final static String COMMENTS = "comments" ;
   private final static String COMMENTABLE = "mix:commentable" ;

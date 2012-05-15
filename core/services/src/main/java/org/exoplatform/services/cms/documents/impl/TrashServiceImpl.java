@@ -73,7 +73,7 @@ public class TrashServiceImpl implements TrashService {
   private ExoCache<String, Object> cache;
   
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(TrashServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(TrashServiceImpl.class.getName());
 
   public TrashServiceImpl(RepositoryService repositoryService,
                           LinkManager linkManager,

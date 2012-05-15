@@ -130,7 +130,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("explorer.upload.UIUploadForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIUploadForm.class.getName());
 
   final static public String FIELD_NAME =  "name" ;
   final static public String FIELD_UPLOAD = "upload" ;

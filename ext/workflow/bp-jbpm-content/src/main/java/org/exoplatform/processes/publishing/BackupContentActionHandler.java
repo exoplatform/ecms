@@ -33,7 +33,7 @@ public class BackupContentActionHandler implements ActionHandler {
   private static final long serialVersionUID = 1L;
 
   private boolean executed = false;
-  private static final Log LOG  = ExoLogger.getLogger(BackupContentActionHandler.class);
+  private static final Log LOG  = ExoLogger.getLogger(BackupContentActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     try {

@@ -65,7 +65,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
                                          confirm = "EmptyTrashManageComponent.msg.confirm-delete") })
 public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(EmptyTrashManageComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(EmptyTrashManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),

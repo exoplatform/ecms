@@ -83,7 +83,7 @@ public class UIDocumentContent extends UIBaseNodePresentation {
   private NodeLocation node_ ;
   public static final String DEFAULT_LANGUAGE = "default" ;
   private String language_ = DEFAULT_LANGUAGE ;
-  private static final Log LOG  = ExoLogger.getLogger(UIDocumentContent.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIDocumentContent.class.getName());
   public UIDocumentContent() throws Exception {}
 
   public void setNode(Node node)  {

@@ -38,14 +38,14 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
 
   private Map<String, Context>   contexts   = new HashMap<String, Context>();
 
-  private static final Log       log        = ExoLogger.getLogger(PublicationManagerImpl.class);
+  private static final Log       LOG        = ExoLogger.getLogger(PublicationManagerImpl.class.getName());
 
   public void addLifecycle(ComponentPlugin plugin) {
     if (plugin instanceof StatesLifecyclePlugin) {
       if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
         for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
-          if (log.isInfoEnabled()) {
-            log.info("Adding Lifecyle : "+l.getName());
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Adding Lifecyle : "+l.getName());
           }
           lifecycles.put(l.getName(), l);
         }
@@ -58,8 +58,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
       for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
         if (lifecycles.get(l.getName())!=null) {
-          if (log.isInfoEnabled()) {
-            log.info("Removing Lifecyle : "+l.getName());
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Removing Lifecyle : "+l.getName());
           }
           lifecycles.remove(l.getName());
         }
@@ -72,8 +72,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     if (plugin instanceof ContextPlugin) {
       if (((ContextPlugin) plugin).getContextConfig() != null) {
         for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
-          if (log.isInfoEnabled()) {
-            log.info("Adding Context : "+c.getName());
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Adding Context : "+c.getName());
           }
           contexts.put(c.getName(), c);
         }
@@ -86,8 +86,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
       if (((ContextPlugin) plugin).getContextConfig() != null) {
         for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
           if (contexts.get(c.getName())!=null) {
-            if (log.isInfoEnabled()) {
-              log.info("Removing Context : "+c.getName());
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Removing Context : "+c.getName());
             }
             contexts.remove(c.getName());
           }
@@ -199,7 +199,7 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
       query.append(" order by exo:dateModified desc");
     }
     filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
-    if (log.isDebugEnabled()) log.debug("query="+query.toString());
+    if (LOG.isDebugEnabled()) LOG.debug("query="+query.toString());
     List<Node> nodes = wcmComposer.getContents(workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
 
     return nodes;

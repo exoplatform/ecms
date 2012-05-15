@@ -168,7 +168,7 @@ public class UIBrowseContainer extends UIContainer {
 
   final public static String           USECASE               = "usecase";
 
-  private static final Log             LOG                   = ExoLogger.getLogger(UIBrowseContainer.class);
+  private static final Log             LOG                   = ExoLogger.getLogger(UIBrowseContainer.class.getName());
 
   private String categoryPath_;
   private String currentPath_;
@@ -823,7 +823,7 @@ public class UIBrowseContainer extends UIContainer {
   public Session getSession(String repository, String workspace) throws Exception{
     return getSession(workspace);
   }
-  
+
   public Session getSession(String workspace) throws Exception{
     Session session = null;
     ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
@@ -841,7 +841,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
     return session;
-  }  
+  }
 
   public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }
 
@@ -1097,7 +1097,7 @@ public class UIBrowseContainer extends UIContainer {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
-  
+
   public String getDMSSystemWorkspace() throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     DMSConfiguration dmsConfiguration = (DMSConfiguration)
@@ -1105,7 +1105,7 @@ public class UIBrowseContainer extends UIContainer {
 
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
-  }  
+  }
 
   public void initToolBar(boolean showTree, boolean showPath,boolean showSearch) throws Exception {
     UIToolBar toolBar = getChild(UIToolBar.class);
@@ -1962,7 +1962,7 @@ public class UIBrowseContainer extends UIContainer {
           app
               .addMessage(new ApplicationMessage("UIBrowseContainer.msg.template-notsupported",
                   null));
-          
+
         } else {
           uiContainer.changeNode(selectNode);
           uiContainer.setPageIterator(uiContainer.getSubDocumentList(selectNode));
@@ -1984,7 +1984,7 @@ public class UIBrowseContainer extends UIContainer {
       if(node == null) {
         UIApplication app = uiContainer.getAncestorOfType(UIApplication.class);
         app.addMessage(new ApplicationMessage("UIBrowseContainer.msg.invalid-node", null));
-        
+
         return;
       }
       uiContainer.setShowDocumentDetail(false);
@@ -2002,13 +2002,13 @@ public class UIBrowseContainer extends UIContainer {
     public void execute(Event<UIBrowseContainer> event) throws Exception {
       UIPortal uiPortal = Util.getUIPortal();
       String uri  = event.getRequestContext().getRequestParameter(OBJECTID);
-      
+
       /**
-      * TODO: the API for loading navigations was changed 
+      * TODO: the API for loading navigations was changed
       * (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
       * it's required to use setName() for nodes instead of setUri()
-      * 
-      * UIBrowseContainer class is useless in ECMS project now, 
+      *
+      * UIBrowseContainer class is useless in ECMS project now,
       * so we've temporarily commented this method and we will refactor it later
       */
 //      PageNodeEvent<UIPortal> pnevent;

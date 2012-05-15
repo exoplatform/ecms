@@ -85,7 +85,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
   private final String FIELD_DESTPATH_EDIT = "fieldDestPathEdit";
   private final String FIELD_BACKUPWORKSPACE_EDIT = "fieldBackupWorkspaceEdit";
   private final String FIELD_BACKUP_EDIT = "fieldBackupEdit";
-  private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationActionForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationActionForm.class.getName());
 
   public UIWorkflowPublicationActionForm() throws Exception {
     repositoryService = getApplicationComponent(RepositoryService.class);
@@ -339,7 +339,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
                                                                null);
           UIApplication uiApp = workflowForm.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-          
+
           return;
         }
       } else {

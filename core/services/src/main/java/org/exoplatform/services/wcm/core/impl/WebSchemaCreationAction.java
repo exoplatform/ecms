@@ -36,7 +36,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Mar 11, 2008
  */
 public class WebSchemaCreationAction implements Action {
-  private static final Log log = ExoLogger.getLogger("wcm:WebSchemaCreationAction");
+  private static final Log LOG = ExoLogger.getLogger(WebSchemaCreationAction.class.getName());
 
   public boolean execute(Context context) throws Exception {
     Node node = (Node)context.get("currentItem");
@@ -47,8 +47,8 @@ public class WebSchemaCreationAction implements Action {
     try {
       schemaConfigService.createSchema(sessionProvider, node);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when creat web schema for node"+node.getPath() , e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when creat web schema for node"+node.getPath() , e);
       }
     }
     return false;

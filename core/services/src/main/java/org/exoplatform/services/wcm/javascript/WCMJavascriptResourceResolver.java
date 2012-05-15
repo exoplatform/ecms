@@ -34,15 +34,15 @@ import org.exoplatform.web.application.javascript.JavascriptConfigService;
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
  *          vuna@exoplatform.com
- * Nov 15, 2011  
+ * Nov 15, 2011
  */
 public class WCMJavascriptResourceResolver  implements ResourceResolver {
-  
-  private static Log              log                  = ExoLogger.getLogger("wcm:WCMJavascriptResourceResolver");  
-  
+
+  private static final Log LOG = ExoLogger.getLogger(WCMJavascriptResourceResolver.class.getName());
+
   private LivePortalManagerService livePortalManagerService_;
   private JavascriptConfigService javascriptConfigService_;
-  
+
   public WCMJavascriptResourceResolver(LivePortalManagerService livePortalManagerService,
                                        JavascriptConfigService javascriptConfigService) {
     this.livePortalManagerService_ = livePortalManagerService;
@@ -55,7 +55,7 @@ public class WCMJavascriptResourceResolver  implements ResourceResolver {
     String[] elements = path.split("/");
     String portalName = elements[4];
     try {
-      Node portalNode = livePortalManagerService_.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);  
+      Node portalNode = livePortalManagerService_.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
       final String jsData = WCMCoreUtils.getSiteGlobalActiveJs(portalNode);
       if(jsData == null)
         return null;
@@ -65,8 +65,8 @@ public class WCMJavascriptResourceResolver  implements ResourceResolver {
         }
       };
     } catch(Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Unexpected error happens", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error happens", e);
       }
     }
     return null;

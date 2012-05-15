@@ -64,7 +64,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
   private JCRResourceResolver resourceResolver ;
 
   /** The Constant log. */
-  private static final Log LOG = ExoLogger.getLogger("wcm:StageAndVersionPubliciation");
+  private static final Log LOG = ExoLogger.getLogger(UIVersionViewer.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()

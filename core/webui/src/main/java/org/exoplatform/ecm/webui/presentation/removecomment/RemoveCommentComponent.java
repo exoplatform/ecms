@@ -49,7 +49,7 @@ import org.exoplatform.webui.core.UIApplication;
                  confirm = "RemoveCommentComponent.msg.confirm-deletecomment") })
 public class RemoveCommentComponent extends AbstractActionComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(RemoveCommentComponent.class);
+  private static final Log LOG = ExoLogger.getLogger(RemoveCommentComponent.class.getName());
 
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file

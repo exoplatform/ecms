@@ -83,19 +83,15 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
   public static final String IMG_PATH = "resources/images/";
 
-  protected static Log log;
+  private static final Log LOG = ExoLogger.getLogger(StaticAndDirectPublicationPlugin.class.getName());
 
   private final String localeFile = "locale.portlet.publication.PublicationService";
-
-  public StaticAndDirectPublicationPlugin() {
-    log = ExoLogger.getLogger("portal:StaticAndDirectPublicationPlugin");
-  }
 
   //@Override
   public void changeState(Node node, String newState, HashMap<String, String> context)
   throws IncorrectStateUpdateLifecycleException, Exception {
-    if (log.isInfoEnabled()) {
-      log.info("Change node state to " + newState);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Change node state to " + newState);
     }
     Session session = node.getSession();
     ManageableRepository managerepository = (ManageableRepository)session.getRepository();
@@ -106,8 +102,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
     String userid = session.getUserID();
     try {
       if (newState.equals(ENROLLED)) {
-        if (log.isInfoEnabled()) {
-          log.info("Set node to " + PUBLISHED);
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Set node to " + PUBLISHED);
         }
         // add mixin versionable
         if (node.canAddMixin("mix:versionable")) node.addMixin("mix:versionable");
@@ -130,8 +126,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
         setVisibility(node, visibility);
 
         //add log
-        if (log.isInfoEnabled()) {
-          log.info("Add log");
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Add log");
         }
         ExoContainer container = ExoContainerContext.getCurrentContainer();
         PublicationService publicationService = (PublicationService) container.
@@ -147,20 +143,20 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
       } else if (newState.equals(PUBLISHED)) {
         String currentState = node.getProperty(CURRENT_STATE).getString();
         if (currentState.equals(NON_PUBLISHED)) {
-          if (log.isInfoEnabled()) {
-            log.info("Node is non published");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Node is non published");
           }
           String nodeVersionUUID = context.get("nodeVersionUUID");
           String visibility = context.get("visibility");
           if (nodeVersionUUID == null || visibility == null) {
-            if (log.isErrorEnabled()) {
-              log.error("nodeVersionUUID or visibility is null");
+            if (LOG.isErrorEnabled()) {
+              LOG.error("nodeVersionUUID or visibility is null");
             }
             throw new IncorrectStateUpdateLifecycleException("StaticAndDirectPublicationPlugin.changeState :"
                 + " nodeVersionUUID or visibility is not present in context.");
           }
-          if (log.isInfoEnabled()) {
-            log.info("nodeVersionUUID and visibility is not null");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("nodeVersionUUID and visibility is not null");
           }
           Value[] values = node.getProperty(VERSIONS_PUBLICATION_STATES).getValues();
           int i=0;
@@ -168,13 +164,13 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             i++;
           }
           if (i == values.length || (values[i].getString().split(","))[1].equals(NON_PUBLISHED)) {
-            if (log.isInfoEnabled()) {
-              log.info("Specified version not already published");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Specified version not already published");
             }
             //specified version to publish is not present in the tab publication:versionsPublicationStates
             //or is in NON_PUBLISHED state
-            if (log.isInfoEnabled()) {
-              log.info("Set this version published");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set this version published");
             }
 
             String newStringValue= nodeVersionUUID+","+PUBLISHED;
@@ -187,15 +183,15 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             node.setProperty(VERSIONS_PUBLICATION_STATES,values) ;
 
             //set visibility
-            if (log.isInfoEnabled()) {
-              log.info("Set the visibility");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set the visibility");
             }
             Value newValueVisibility = session.getValueFactory().createValue(visibility);
             node.setProperty(VISIBILITY,newValueVisibility) ;
 
             //set permissions
-            if (log.isInfoEnabled()) {
-              log.info("Set permissions in function of visibility");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set permissions in function of visibility");
             }
             setVisibility(node, visibility);
 
@@ -203,8 +199,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             node.setProperty(CURRENT_STATE,PUBLISHED);
 
             //add log
-            if (log.isInfoEnabled()) {
-              log.info("Add log");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Add log");
             }
             ExoContainer container = ExoContainerContext.getCurrentContainer();
             PublicationService publicationService = (PublicationService) container.
@@ -229,20 +225,20 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
           //TODO check if new published version is not the current published version
           //in this case, do nothing
 
-          if (log.isInfoEnabled()) {
-            log.info("Node is already published, user want to published another version.");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Node is already published, user want to published another version.");
           }
           String nodeVersionUUID = context.get("nodeVersionUUID");
           String visibility = context.get("visibility");
           if (nodeVersionUUID == null || visibility == null) {
-            if (log.isErrorEnabled()) {
-              log.error("nodeVersionUUID or visibility is null");
+            if (LOG.isErrorEnabled()) {
+              LOG.error("nodeVersionUUID or visibility is null");
             }
             throw new IncorrectStateUpdateLifecycleException("StaticAndDirectPublicationPlugin.changeState :"
                 + " nodeVersionUUID or visibility is not present in context.");
           }
-          if (log.isInfoEnabled()) {
-            log.info("nodeVersionUUID and visibility is not null");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("nodeVersionUUID and visibility is not null");
           }
           Value[] values = node.getProperty(VERSIONS_PUBLICATION_STATES).getValues();
 
@@ -254,8 +250,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
           if (i != values.length) {
             // and unpublished it
             String publishedVersionUUID = values[i].getString().split(",")[0];
-            if (log.isInfoEnabled()) {
-              log.info("Unpublished current published version");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Unpublished current published version");
             }
             String newStringValue = publishedVersionUUID + "," + NON_PUBLISHED;
             Value value2add = session.getValueFactory().createValue(newStringValue);
@@ -274,14 +270,14 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             i++;
           }
           if (i==values.length || (values[i].getString().split(","))[1].equals(NON_PUBLISHED)) {
-            if (log.isInfoEnabled()) {
-              log.info("Specified version not already published");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Specified version not already published");
             }
             //specified version to publish is not present in the tab publication:versionsPublicationStates
             //or is in NON_PUBLISHED state
 
-            if (log.isInfoEnabled()) {
-              log.info("Set this version published");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set this version published");
             }
 
             String newStringValue= nodeVersionUUID+","+PUBLISHED;
@@ -294,15 +290,15 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             node.setProperty(VERSIONS_PUBLICATION_STATES,values) ;
 
             //set visibility
-            if (log.isInfoEnabled()) {
-              log.info("Set the visibility");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set the visibility");
             }
             Value newValueVisibility = session.getValueFactory().createValue(visibility);
             node.setProperty(VISIBILITY,newValueVisibility) ;
 
             //set permissions
-            if (log.isInfoEnabled()) {
-              log.info("Set permissions in function of visibility");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Set permissions in function of visibility");
             }
             setVisibility(node, visibility);
 
@@ -310,8 +306,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             node.setProperty(CURRENT_STATE,PUBLISHED);
 
             //add log
-            if (log.isInfoEnabled()) {
-              log.info("Add log");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Add log");
             }
             ExoContainer container = ExoContainerContext.getCurrentContainer();
             PublicationService publicationService = (PublicationService) container.
@@ -334,8 +330,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
       } else if (newState.equals(NON_PUBLISHED)) {
         String currentState = node.getProperty(CURRENT_STATE).getString();
         if (currentState.equals(NON_PUBLISHED)) {
-          if (log.isInfoEnabled()) {
-            log.info("node already unpublished");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("node already unpublished");
           }
 
           //state do not changed
@@ -367,8 +363,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             publicationService.addLog(node, log);
           }
         } else if (currentState.equals(PUBLISHED)) {
-          if (log.isInfoEnabled()) {
-            log.info("Node published, unpublish it");
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Node published, unpublish it");
           }
           Value[] values = node.getProperty(VERSIONS_PUBLICATION_STATES).getValues();
 
@@ -380,8 +376,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
           if (i != values.length) {
             //and unpublished it
             String publishedVersionUUID=values[i].getString().split(",")[0];
-            if (log.isInfoEnabled()) {
-              log.info("Unpublished current published version");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Unpublished current published version");
             }
             String newStringValue= publishedVersionUUID+","+NON_PUBLISHED;
             Value value2add = session.getValueFactory().createValue(newStringValue);
@@ -399,8 +395,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             setVisibility(node, newVisibility);
 
             //add log
-            if (log.isInfoEnabled()) {
-              log.info("Add log");
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Add log");
             }
             ExoContainer container = ExoContainerContext.getCurrentContainer();
             PublicationService publicationService = (PublicationService) container.
@@ -455,8 +451,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
     //add language
     String fileNameLocalized =fileName+"_"+locale.getLanguage();
     String completeFileName=IMG_PATH+fileNameLocalized+".gif";
-    if (log.isTraceEnabled()) {
-      log.trace("loading file '" + name + "' from file system '" + completeFileName + "'");
+    if (LOG.isTraceEnabled()) {
+      LOG.trace("loading file '" + name + "' from file system '" + completeFileName + "'");
     }
 
     InputStream in = this.getClass().getClassLoader().getResourceAsStream(completeFileName);

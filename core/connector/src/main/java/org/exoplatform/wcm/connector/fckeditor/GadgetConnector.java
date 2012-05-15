@@ -84,7 +84,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(GadgetConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(GadgetConnector.class.getName());
 
   /**
    * Instantiates a new gadget connector.
@@ -117,8 +117,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       if (response != null)
         return response;
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform getFoldersAndFiles: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform getFoldersAndFiles: ", e);
       }
     }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);

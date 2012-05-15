@@ -88,7 +88,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   /**
    * Logger.
    */
-  private static Log log = ExoLogger.getLogger("cms.webdav.WebDavServiceImpl");
+  private static final Log LOG = ExoLogger.getLogger(WebDavServiceImpl.class.getName());
 
   private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
 
@@ -97,7 +97,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private final RepositoryService repositoryService;
 
   private ListenerService listenerService;
-  
+
   private final NullResourceLocksHolder           nullResourceLocks;
 
   public WebDavServiceImpl(InitParams params,
@@ -129,8 +129,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return item.getSession().getWorkspace().getName()
           + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(destPath)));
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + destPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + destPath, e);
       }
       return null;
     }
@@ -151,8 +151,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -173,8 +173,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -201,8 +201,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -238,8 +238,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -260,8 +260,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -290,8 +290,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -315,12 +315,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         return new UnLockCommand(nullResourceLocks).unLock(session, path(repoPath), tokens);
       } catch (Exception ex) {
         return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
-      }      
+      }
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -350,8 +350,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -374,8 +374,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -399,8 +399,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -454,8 +454,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -501,8 +501,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -524,8 +524,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -547,8 +547,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -570,8 +570,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -593,8 +593,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -620,8 +620,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -669,8 +669,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -697,8 +697,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     } catch (NoSuchWorkspaceException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       }
       return Response.serverError().build();
     }
@@ -714,10 +714,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return item.getSession().getWorkspace().getName() + item.getPath();
     }
   }
-  
+
   /**
    * Normalizes path.
-   * 
+   *
    * @param repoPath repository path
    * @return normalized path.
    */
@@ -742,7 +742,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         }
         catch (Exception e)
         {
-           log.warn(e.getMessage());
+           LOG.warn(e.getMessage());
         }
      }
 

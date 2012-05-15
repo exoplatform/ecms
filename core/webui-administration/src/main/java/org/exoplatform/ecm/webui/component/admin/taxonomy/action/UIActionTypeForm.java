@@ -63,7 +63,7 @@ public class UIActionTypeForm extends UIForm {
 
   final static public String             CHANGE_ACTION = "ChangeActionType";
   
-  private static final Log LOG  = ExoLogger.getLogger(UIActionTypeForm.class);
+  private static final Log LOG  = ExoLogger.getLogger(UIActionTypeForm.class.getName());
 
   private List<SelectItemOption<String>> typeList_;
 

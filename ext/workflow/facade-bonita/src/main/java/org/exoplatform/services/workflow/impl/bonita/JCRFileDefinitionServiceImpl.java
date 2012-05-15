@@ -77,7 +77,7 @@ public class JCRFileDefinitionServiceImpl
   private Hashtable<String, FileDefinition> fileDefinitions =
     new Hashtable<String, FileDefinition>();
 
-  private static final Log LOG = ExoLogger.getExoLogger(JCRFileDefinitionServiceImpl.class);
+  private static final Log LOG = ExoLogger.getExoLogger(JCRFileDefinitionServiceImpl.class.getName());
 
   /**
    * Adds files to the business process model node.

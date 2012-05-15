@@ -63,7 +63,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICategoryNavigationTree extends UIContainer {
 
-  private static final Log         LOG             = ExoLogger.getLogger(UICategoryNavigationTree.class);
+  private static final Log         LOG             = ExoLogger.getLogger(UICategoryNavigationTree.class.getName());
   
   /** The allow publish. */
   private boolean            allowPublish        = false;

@@ -48,7 +48,7 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
 
   private WorkflowServiceContainerImpl container;
 
-  private static final Log LOG = ExoLogger.getLogger(WorkflowFormsServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(WorkflowFormsServiceImpl.class.getName());
 
   public WorkflowFormsServiceImpl(WorkflowServiceContainer workflowServiceContainer) {
     this.container = (WorkflowServiceContainerImpl) workflowServiceContainer;
@@ -57,8 +57,9 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
   public Form getForm(String definitionStringId, String stateName, Locale locale) {
     long definitionId = Long.parseLong(definitionStringId);
     Form formConfiguration = null;
-    if (stateName == null)
-      throw new NullPointerException("stateName is null in Form.getForm");
+    if (stateName == null) {
+      throw new IllegalArgumentException("stateName is null in Form.getForm");
+    }
     Map stateNameToForms = (Map) allForms.get(new Long(definitionId));
     if (stateNameToForms == null) {
       addForms(definitionId, locale);

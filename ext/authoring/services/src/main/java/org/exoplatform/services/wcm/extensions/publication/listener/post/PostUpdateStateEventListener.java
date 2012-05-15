@@ -8,14 +8,13 @@ import org.exoplatform.services.log.Log;
 
 public class PostUpdateStateEventListener extends Listener {
 
-  private static final Log log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(PostUpdateStateEventListener.class.getName());
 
   @Override
   public void onEvent(Event event) throws Exception {
-    if (log.isDebugEnabled()) {
-      log.debug("this listener will be called every time a content changes its current state");
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("this listener will be called every time a content changes its current state");
     }
-
   }
 
 }

@@ -43,8 +43,8 @@ import org.jbpm.graph.exe.ExecutionContext;
 public class InitialActionHandler implements ActionHandler {
 
   private static final long serialVersionUID = 1L;
-  
-  private static final Log LOG = ExoLogger.getLogger(InitialActionHandler.class);
+
+  private static final Log LOG = ExoLogger.getLogger(InitialActionHandler.class.getName());
 
   public void execute(ExecutionContext context) throws Exception {
     initialVariables(context);

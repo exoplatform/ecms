@@ -101,7 +101,7 @@ public class UISearchResult extends UIContainer {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UISearchResult");
+  private static final Log LOG  = ExoLogger.getLogger(UISearchResult.class.getName());
 
   private QueryData queryData_;
   private long searchTime_ = 0;
@@ -117,7 +117,7 @@ public class UISearchResult extends UIContainer {
   private String currentPath = null;
   private String keyword ="";
   private AbstractPageList<RowData> pageList;
-  
+
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
     categoryPathList = categoryPathListItem;
@@ -136,7 +136,7 @@ public class UISearchResult extends UIContainer {
     queryData_ = new QueryData(queryStatement, workspaceName, language, isSystemSession);
     this.keyword = keyword;
   }
-  
+
   public long getSearchTime() { return searchTime_; }
   public void setSearchTime(long time) { this.searchTime_ = time; }
 
@@ -196,12 +196,12 @@ public class UISearchResult extends UIContainer {
     TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
     .getComponentInstanceOfType(TemplateService.class);
     List<String> documentList = templateService.getDocumentTemplates();
-     pageList = 
-      PageListFactory.createPageList(queryData_.getQueryStatement(), 
+     pageList =
+      PageListFactory.createPageList(queryData_.getQueryStatement(),
                              queryData_.getWorkSpace(),
-                             queryData_.getLanguage_(), 
-                             queryData_.isSystemSession(), 
-                             new NodeFilter(categoryPathList, keyword, documentList), 
+                             queryData_.getLanguage_(),
+                             queryData_.isSystemSession(),
+                             new NodeFilter(categoryPathList, keyword, documentList),
                              new RowDataCreator(),
                              PAGE_SIZE,
                              0);
@@ -209,18 +209,18 @@ public class UISearchResult extends UIContainer {
   }
 
   private static class SearchComparator implements Comparator<RowData> {
-    
+
     public static final String SORT_TYPE = "NODE_TYPE";
     public static final String SORT_SCORE = "JCR_SCORE";
     public static final String ASC = "ASC";
     public static final String DESC = "DECS";
-    
+
     private String sortType;
     private String orderType;
-    
+
     public void setSortType(String value) { sortType = value; }
     public void setOrderType(String value) { orderType = value; }
-    
+
     public int compare(RowData row1, RowData row2) {
       try {
         if (SORT_TYPE.equals(sortType.trim())) {
@@ -267,17 +267,17 @@ public class UISearchResult extends UIContainer {
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(ItemNotFoundException inf) {
           uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
               ApplicationMessage.WARNING)) ;
-          
+
           return ;
       } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch(RepositoryException e) {
         if (LOG.isErrorEnabled()) {
@@ -285,7 +285,7 @@ public class UISearchResult extends UIContainer {
         }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
@@ -302,7 +302,7 @@ public class UISearchResult extends UIContainer {
       }
 
       uiExplorer.setSelectNode(workspaceName, path) ;
-      
+
       uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(true);
       uiSearchResult.setRendered(false);
       uiExplorer.refreshExplorer((Node)item, true);
@@ -318,7 +318,7 @@ public class UISearchResult extends UIContainer {
       UISearchResult uiSearchResult = event.getSource();
       UIJCRExplorer uiExplorer = uiSearchResult.getAncestorOfType(UIJCRExplorer.class);
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
-      String folderPath = LinkUtils.getParentPath(path);      
+      String folderPath = LinkUtils.getParentPath(path);
       Node node = null;
       try {
         node = uiExplorer.getNodeByPath(folderPath, uiExplorer.getTargetSession());
@@ -326,13 +326,13 @@ public class UISearchResult extends UIContainer {
         UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(PathNotFoundException ace) {
         UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -380,7 +380,7 @@ public class UISearchResult extends UIContainer {
         iconType = "BlueUpArrow";
         iconScore = "";
       } else if (objectId.equals("score")) {
-        uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);        
+        uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
         comparator.setSortType(SearchComparator.SORT_SCORE);
         iconScore = "BlueUpArrow";
         iconType = "";
@@ -398,10 +398,10 @@ public class UISearchResult extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
   }
-  
+
   public static class NodeFilter implements NodeSearchFilter {
 
-    private List<String> categoryPathList; 
+    private List<String> categoryPathList;
     private TaxonomyService taxonomyService;
     private NodeHierarchyCreator nodeHierarchyCreator;
     private String rootTreePath;
@@ -417,7 +417,7 @@ public class UISearchResult extends UIContainer {
     final static private String  CHECK_LINK_MATCH_QUERY2 = "select * from nt:base where jcr:path like '$0/%' "
                                                              + "and ( contains(*, '$1') or lower(exo:name) like '%$2%' "
                                                              + "or lower(exo:title) like '%$2%')";
-    
+
     public NodeFilter(List<String> categories, String keyword, List<String> documentTypes) {
       taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
       nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
@@ -439,17 +439,17 @@ public class UISearchResult extends UIContainer {
                 taxonomyName = categoryPath.substring(0, index);
                 postFixTaxonomy = categoryPath.substring(index + 1);
               }
-              
+
               List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = taxonomyService.getTaxonomyTree(taxonomyName).getPath() + 
+              String searchCategory = taxonomyService.getTaxonomyTree(taxonomyName).getPath() +
                                       ("".equals(postFixTaxonomy) ? "" : "/" + postFixTaxonomy);
-              Node targetNode = node.isNodeType(Utils.EXO_SYMLINK) ? 
+              Node targetNode = node.isNodeType(Utils.EXO_SYMLINK) ?
                                         linkManager.getTarget(node) : node;
               List<Node> listCategories = taxonomyService.getCategories(targetNode, taxonomyName);
               for (Node category : listCategories) {
                 pathCategoriesList.add(category.getPath());
               }
-              if (pathCategoriesList.contains(searchCategory)) 
+              if (pathCategoriesList.contains(searchCategory))
               {
                 if (node.isNodeType(Utils.EXO_SYMLINK)) {
                   if (checkTargetMatch(node, keyword)) return node;
@@ -459,7 +459,7 @@ public class UISearchResult extends UIContainer {
               }
             }
             return null;
-          } else {            
+          } else {
             if (node.isNodeType(Utils.EXO_SYMLINK)) {
               if (checkTargetMatch(node, keyword)) return node;
             }else {
@@ -493,7 +493,7 @@ public class UISearchResult extends UIContainer {
         if (!linkManager.isLink(symlinkNode)) return true;
         target = linkManager.getTarget(symlinkNode);
         if (target == null) return false;
-        targetSession = target.getSession();      
+        targetSession = target.getSession();
         queryStatement = StringUtils.replace(queryStatement,"$0", target.getPath());
         queryStatement = StringUtils.replace(queryStatement,"$1", keyword.replaceAll("'", "''"));
         queryStatement = StringUtils.replace(queryStatement,"$2", keyword.replaceAll("'", "''").toLowerCase());
@@ -503,7 +503,7 @@ public class UISearchResult extends UIContainer {
         if ( queryResult.getNodes().getSize()>0 ) return true;
         if (isFodlderDocument(target)||target.hasNode("jcr:content") ) {
           queryStatement = CHECK_LINK_MATCH_QUERY2;
-          queryStatement = StringUtils.replace(queryStatement,"$0", target.getPath());      
+          queryStatement = StringUtils.replace(queryStatement,"$0", target.getPath());
           queryStatement = StringUtils.replace(queryStatement,"$1", keyword.replaceAll("'", "''"));
           queryStatement = StringUtils.replace(queryStatement,"$2", keyword.replaceAll("'", "''").toLowerCase());
           query = queryManager.createQuery(queryStatement, Query.SQL);
@@ -517,29 +517,29 @@ public class UISearchResult extends UIContainer {
       }
     }
     private boolean isFodlderDocument(Node node) throws RepositoryException{
-      if (!node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) return false; 
+      if (!node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) return false;
       for (String documentType : documentTypes) {
-        if (node.getPrimaryNodeType().isNodeType(documentType))  
+        if (node.getPrimaryNodeType().isNodeType(documentType))
           return true;
       }
       return false;
     }
   }
-  
+
   public static class RowDataCreator implements SearchDataCreator<RowData> {
 
     public RowData createData(Node node, Row row) {
       return new RowData(row);
     }
-    
+
   }
-  
+
   public static class RowData {
     private String jcrPath = "";
     private String repExcerpt = "";
     private long jcrScore = 0;
     private String jcrPrimaryType = "";
-    
+
     public RowData(Row row) {
       try {
         jcrPath = row.getValue("jcr:path").getString();
@@ -594,22 +594,22 @@ public class UISearchResult extends UIContainer {
     public void setJcrScore(long jcrScore) {
       this.jcrScore = jcrScore;
     }
-    
+
     public String getJcrPrimaryType() {
       return jcrPrimaryType;
     }
-    
+
     public void setJcrPrimaryType(String value) {
       jcrPrimaryType = value;
     }
-    
+
     public int hashCode() {
-      return (jcrPath == null ? 0 : jcrPath.hashCode()) + 
-             (repExcerpt == null ? 0 : repExcerpt.hashCode()) + 
-             (int)jcrScore + 
+      return (jcrPath == null ? 0 : jcrPath.hashCode()) +
+             (repExcerpt == null ? 0 : repExcerpt.hashCode()) +
+             (int)jcrScore +
              (jcrPrimaryType == null ? 0 : jcrPrimaryType.hashCode());
     }
-    
+
     public boolean equals(Object o) {
       if (o == null) return false;
       if (! (o instanceof RowData)) return false;

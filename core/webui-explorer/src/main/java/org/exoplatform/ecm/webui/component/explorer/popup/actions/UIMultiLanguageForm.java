@@ -63,7 +63,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
     }
 )
 public class UIMultiLanguageForm extends UIForm {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIMultiLanguageForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIMultiLanguageForm.class.getName());
   public UIMultiLanguageForm() throws Exception {
     List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
     addUIFormInput(new UIFormSelectBox(Utils.LANGUAGES, Utils.LANGUAGES, languages)) ;

@@ -35,7 +35,7 @@ import org.jbpm.instantiation.Delegation;
 public class ScheduleBackupTimerActionHandler extends BackupContentActionHandler {
 
   private static final long serialVersionUID = 1L;
-  private static final Log LOG  = ExoLogger.getLogger(ScheduleBackupTimerActionHandler.class);
+  private static final Log LOG  = ExoLogger.getLogger(ScheduleBackupTimerActionHandler.class.getName());
 
   public void execute(ExecutionContext context) {
     try {
@@ -76,7 +76,6 @@ public class ScheduleBackupTimerActionHandler extends BackupContentActionHandler
         }
       }
     } catch (Exception ex) {
-      ExoLogger.getLogger(this.getClass()).equals(ex);
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", ex);
       }

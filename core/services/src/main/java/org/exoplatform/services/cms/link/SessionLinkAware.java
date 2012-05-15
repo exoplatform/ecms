@@ -68,7 +68,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("services.cms.link.SessionLinkAware");
+  private static final Log LOG  = ExoLogger.getLogger(SessionLinkAware.class.getName());
 
   private ItemLinkAware itemLA;
   

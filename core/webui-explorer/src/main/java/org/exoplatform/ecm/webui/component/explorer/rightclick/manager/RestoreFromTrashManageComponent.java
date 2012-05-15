@@ -85,7 +85,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new HasRemovePermissionFilter(),
                                                    new IsNotTrashHomeNodeFilter() });
 
-  private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class);
+  private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

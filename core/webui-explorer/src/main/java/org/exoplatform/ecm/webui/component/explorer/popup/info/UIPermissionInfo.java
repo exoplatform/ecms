@@ -72,7 +72,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIPermissionInfo extends UIContainer {
 
-  private static final Log LOG = ExoLogger.getLogger(UIPermissionInfo.class);
+  private static final Log LOG = ExoLogger.getLogger(UIPermissionInfo.class.getName());
   
   public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode",
     "setProperty", "remove"} ;

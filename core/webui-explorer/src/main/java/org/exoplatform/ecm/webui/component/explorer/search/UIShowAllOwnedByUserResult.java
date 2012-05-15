@@ -71,7 +71,7 @@ import org.exoplatform.webui.event.EventListener;
     @EventConfig(listeners = UIShowAllOwnedByUserResult.SortDESCActionListener.class) })
 public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
 
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllOwnedByUserResult");
+  private static final Log LOG  = ExoLogger.getLogger(UIShowAllOwnedByUserResult.class.getName());
   private static final int FILE_PER_PAGE = 10;
   private static String iconType = "BlueDownArrow";
   private static String iconName = "";
@@ -214,14 +214,14 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllOwnedByUserResult.msg.access-denied", null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         TemplateService templateService = uiShowAllOwnedByUserResult.getApplicationComponent(TemplateService.class);
         if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
           uiApp.addMessage(new ApplicationMessage("UIShowAllOwnedByUserResult.msg.not-support", null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");

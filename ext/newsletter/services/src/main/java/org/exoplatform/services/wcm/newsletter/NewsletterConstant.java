@@ -60,7 +60,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 @SuppressWarnings("deprecation")
 public class NewsletterConstant {
 
-  private static Log log = ExoLogger.getLogger("wcm.NewsletterConstant");
+  private static final Log LOG = ExoLogger.getLogger(NewsletterConstant.class.getName());
 
   // Categories property
   /** The Constant CATEGORIES_PROPERTY_ADDMINISTRATOR. */
@@ -514,8 +514,8 @@ public class NewsletterConstant {
       }
       return WCMCoreUtils.hasPermission(userId, permissions, true);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when call NewsletterConstant.hasPermission()", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when call NewsletterConstant.hasPermission()", e);
       }
     }
     return false;

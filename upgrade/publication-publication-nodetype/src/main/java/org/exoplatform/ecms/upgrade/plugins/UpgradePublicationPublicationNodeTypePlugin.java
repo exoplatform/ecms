@@ -36,19 +36,19 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          vuna@exoplatform.com
- * Jan 5, 2012  
+ * Jan 5, 2012
  */
 public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductPlugin {
-  
+
   private static final String PUBLICATION_HISTORY = "publication:history";
   private static final String PUBLICATION_PUBLICATION = "publication:publication";
 
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());
-  
+  private static final Log LOG = ExoLogger.getLogger(UpgradePublicationPublicationNodeTypePlugin.class.getName());
 
-  public UpgradePublicationPublicationNodeTypePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
+
+  public UpgradePublicationPublicationNodeTypePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration,
                                InitParams initParams) {
     super(initParams);
     this.repoService_ = repoService;
@@ -57,8 +57,8 @@ public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductP
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
-    if (log.isInfoEnabled()) {
-      log.info("Start " + this.getClass().getName() + ".............");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
     }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
@@ -78,7 +78,7 @@ public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductP
           } else if (propertyDefinition.getOnVersion() == OnParentVersionAction.COPY) {
             propertyDefinition.setOnVersion(OnParentVersionAction.IGNORE);
             break;
-          } 
+          }
         }
       }
       //change definition of publication:history 's onParentVersion
@@ -86,12 +86,12 @@ public class UpgradePublicationPublicationNodeTypePlugin extends UpgradeProductP
         mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
-      if (log.isInfoEnabled()) {
-        log.info("Change property '" + PUBLICATION_HISTORY + "' for node type 'publication:publication' successfully!");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Change property '" + PUBLICATION_HISTORY + "' for node type 'publication:publication' successfully!");
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("An unexpected error occurs when change property '" + PUBLICATION_HISTORY
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when change property '" + PUBLICATION_HISTORY
             + "' for node type 'publication:publication'!", e);
       }
     } finally {

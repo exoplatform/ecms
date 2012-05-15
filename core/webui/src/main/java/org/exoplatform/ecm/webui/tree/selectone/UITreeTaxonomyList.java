@@ -72,7 +72,7 @@ public class UITreeTaxonomyList extends UIForm {
   static private String ROOT_NODE_INFO = "rootNodeInfo";
   static private String ROOT_NODE_PATH = "rootNodePath";
   public static String TAXONOMY_TREE = "taxonomyTree";
-  private static final Log LOG  = ExoLogger.getLogger("admin.UITreeTaxonomyList");
+  private static final Log LOG  = ExoLogger.getLogger(UITreeTaxonomyList.class.getName());
   private boolean isShowSystem_ = true;
 
   public UITreeTaxonomyList() throws Exception {

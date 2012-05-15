@@ -65,7 +65,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                               new IsNotTrashHomeNodeFilter()});
 
-  private final static Log       LOG  = ExoLogger.getLogger(CopyManageComponent.class);
+  private final static Log       LOG  = ExoLogger.getLogger(CopyManageComponent.class.getName());
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

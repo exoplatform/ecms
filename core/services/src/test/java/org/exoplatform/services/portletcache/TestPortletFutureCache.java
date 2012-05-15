@@ -33,7 +33,7 @@ import org.exoplatform.test.BasicTestCase;
  */
 public class TestPortletFutureCache extends BasicTestCase {
 
-  private static final Log log = ExoLogger.getLogger(TestPortletFutureCache.class);
+  private static final Log LOG = ExoLogger.getLogger(TestPortletFutureCache.class.getName());
 
   /** The Portlet Future Cache */
   private PortletFutureCache portletFutureCache;
@@ -120,7 +120,7 @@ public class TestPortletFutureCache extends BasicTestCase {
 
     MarkupFragment nfragment;
 
-    portletFutureCache = new PortletFutureCache(log, 1, 2);
+    portletFutureCache = new PortletFutureCache(LOG, 1, 2);
     portletFutureCache.start();
 
     // 900ms, 1100ms, 2100ms retentions for objects
@@ -154,7 +154,7 @@ public class TestPortletFutureCache extends BasicTestCase {
 
     MarkupFragment nfragment;
 
-    portletFutureCache = new PortletFutureCache(log, 1);
+    portletFutureCache = new PortletFutureCache(LOG, 1);
     portletFutureCache.start();
 
     // 900ms, 1100ms, 2100ms retentions for objects
@@ -206,7 +206,7 @@ public class TestPortletFutureCache extends BasicTestCase {
     MarkupFragment nfragment;
     int cacheSize;
 
-    portletFutureCache = new PortletFutureCache(log, 1);
+    portletFutureCache = new PortletFutureCache(LOG, 1);
     portletFutureCache.start();
 
     // 750ms, 1250ms, 2500ms retentions for objects

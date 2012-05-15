@@ -45,7 +45,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
 
   private RepositoryService repositoryService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
-  private static final Log LOG  = ExoLogger.getLogger(RelationsServiceImpl.class);
+  private static final Log LOG  = ExoLogger.getLogger(RelationsServiceImpl.class.getName());
   public RelationsServiceImpl(RepositoryService repositoryService,
       NodeHierarchyCreator nodeHierarchyCreator, InitParams params) {
     repositoryService_ = repositoryService;

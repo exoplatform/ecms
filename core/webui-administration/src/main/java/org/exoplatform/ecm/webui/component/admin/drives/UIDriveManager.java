@@ -47,7 +47,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UIDriveManager extends UIAbstractManager {
 
   public UIDriveManager() throws Exception {
-    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();  	
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     addChild(UIDriveList.class, null, "ugb_" + UIDriveList.class.getSimpleName() + pContext.getWindowId()) ;
   }
 

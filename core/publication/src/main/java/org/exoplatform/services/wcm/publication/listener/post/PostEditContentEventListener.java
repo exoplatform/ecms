@@ -37,13 +37,13 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class PostEditContentEventListener extends Listener<CmsService,Node> {
 
-    private static final Log log = ExoLogger.getLogger(PostEditContentEventListener.class);
+  private static final Log LOG = ExoLogger.getLogger(PostEditContentEventListener.class.getName());
 
     /** The pservice. */
   private WCMPublicationService publicationService;
-  
+
   public static final String POST_EDIT_CONTENT_EVENT = "PostEditContentEventListener.event.postEditContent";
-  
+
   /**
    * Instantiates a new post edit content event listener.
    *
@@ -57,7 +57,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
-    Node currentNode = event.getData();    
+    Node currentNode = event.getData();
     if( currentNode.isNodeType("exo:cssFile") ||
         currentNode.isNodeType("exo:template") ||
         currentNode.isNodeType("exo:jsFile") ||
@@ -68,7 +68,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
         listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
       }
       return;
-    }    
+    }
     String siteName = "";
     String remoteUser = "";
     try {
@@ -78,21 +78,21 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
       ConversationState conversationState = ConversationState.getCurrent();
       if(conversationState == null) return;
       siteName = conversationState.getAttribute("siteName").toString();
-      remoteUser = currentNode.getSession().getUserID(); 
+      remoteUser = currentNode.getSession().getUserID();
     }
-    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);    
-    
+    if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
+
     String currentState = "";
     String newState = "";
     if (currentNode.hasProperty("publication:currentState")) {
       currentState = currentNode.getProperty("publication:currentState").getString();
     }
-    
+
     publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
     if (currentNode.hasProperty("publication:currentState")) {
       newState = currentNode.getProperty("publication:currentState").getString();
     }
-    
+
     if (currentState.equalsIgnoreCase(newState)) {
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);

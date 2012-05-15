@@ -46,13 +46,13 @@ import org.exoplatform.services.security.ConversationState;
  */
 public class LockManagerListener extends Listener<ConversationRegistry, ConversationState > {
 
-  protected static Log log  = ExoLogger.getLogger(LockManagerListener.class);
+  private static final Log LOG  = ExoLogger.getLogger(LockManagerListener.class.getName());
 
   @Override
   @SuppressWarnings("unchecked")
   public void onEvent(Event<ConversationRegistry, ConversationState> event) throws Exception {
-    if (log.isInfoEnabled()) {
-      log.info("Removing the locks of all locked nodes");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Removing the locks of all locked nodes");
     }
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     ConversationState conversationState = event.getData();
@@ -87,8 +87,8 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
           node.removeMixin("mix:lockable");
           node.save();
         } catch (Exception e) {
-          if (log.isErrorEnabled()) {
-            log.error("Error while unlocking the locked nodes",e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Error while unlocking the locked nodes",e);
           }
         } finally {
           if(session != null) session.logout();
@@ -96,8 +96,8 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
       }
       lockedNodes.clear();
     } catch(Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Error during the time unlocking the locked nodes",ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error during the time unlocking the locked nodes",ex);
       }
     } finally {
       sessionProvider.close();

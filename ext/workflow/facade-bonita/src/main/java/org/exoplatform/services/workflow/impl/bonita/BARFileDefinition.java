@@ -83,7 +83,7 @@ public class BARFileDefinition implements FileDefinition {
   private static final String XPDL_NAMESPACE_URI =
     "http://www.wfmc.org/2002/XPDL1.0";
 
-  private static final Log LOG = ExoLogger.getLogger(BARFileDefinition.class);
+  private static final Log LOG = ExoLogger.getLogger(BARFileDefinition.class.getName());
 
 
   /* (non-Javadoc)

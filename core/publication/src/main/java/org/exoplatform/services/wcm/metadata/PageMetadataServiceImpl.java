@@ -45,7 +45,7 @@ import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 public class PageMetadataServiceImpl implements PageMetadataService {
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger("wcm:PageMetadataService");
+  private static final Log LOG = ExoLogger.getLogger(PageMetadataServiceImpl.class.getName());
 
   /** The live portal manager service. */
   private LivePortalManagerService livePortalManagerService;
@@ -85,8 +85,8 @@ public class PageMetadataServiceImpl implements PageMetadataService {
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
       return extractPortalMetadata(portal);
     } catch (Exception e) {
-      if (log.isDebugEnabled())
-        log.debug(e);
+      if (LOG.isDebugEnabled())
+        LOG.debug(e);
     }
     return null;
   }
@@ -276,8 +276,8 @@ public class PageMetadataServiceImpl implements PageMetadataService {
     try {
       return livePortalManagerService.getLivePortalByChild(child);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when findPortal: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when findPortal: ", e);
       }
     }
     return null;
