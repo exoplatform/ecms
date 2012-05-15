@@ -75,9 +75,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
 
-  private static final String  LOCK_QUERY = "select * from nt:base "
-                                              + "where jcr:mixinTypes = 'mix:lockable' "
-                                              + "order by exo:dateCreated DESC";
+  private static final String LOCK_QUERY = "select * from mix:lockable order by exo:dateCreated DESC";
 
   public UILockNodeList() throws Exception {
     getUIPageIterator().setId("LockNodeListIterator");
