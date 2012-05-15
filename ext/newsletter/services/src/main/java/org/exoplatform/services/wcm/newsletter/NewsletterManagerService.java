@@ -82,7 +82,7 @@ public class NewsletterManagerService {
   private String workspaceName;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(NewsletterManagerService.class);
+  private static final Log LOG = ExoLogger.getLogger(NewsletterManagerService.class);
 
   /**
    * Instantiates a new newsletter manager service.
@@ -94,8 +94,8 @@ public class NewsletterManagerService {
                                   DMSConfiguration dmsConfiguration,
                                   RepositoryService repositoryService,
                                   MailService mailService) {
-    if (log.isInfoEnabled()) {
-      log.info("Starting NewsletterManagerService ... ");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Starting NewsletterManagerService ... ");
     }
     workspaceName = initParams.getValueParam("workspace").getValue();
     categoryHandler = new NewsletterCategoryHandler(workspaceName);
@@ -163,12 +163,12 @@ public class NewsletterManagerService {
                                    .getString());
       }
     } catch (RepositoryException repositoryException) {
-      if (log.isInfoEnabled()) {
-        log.info("User node is not created!");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("User node is not created!");
       }
     } catch (Exception ex) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when get all users who can't get newsletter: ", ex);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when get all users who can't get newsletter: ", ex);
       }
     } finally {
       if (session != null)
@@ -246,8 +246,8 @@ public class NewsletterManagerService {
         try {
           mailService_.sendMessage(message);
         } catch (Exception e) {
-          if (log.isErrorEnabled()) {
-            log.error("Error when send newsletter: ", e);
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Error when send newsletter: ", e);
           }
         }
       }
@@ -283,8 +283,8 @@ public class NewsletterManagerService {
         email = value.getString();
         if(!listBannedUser.contains(email)) listString.add(email);
       } catch(Exception e) {
-        if (log.isErrorEnabled()) {
-          log.error("Error when convert values to array: ", e);
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when convert values to array: ", e);
         }
       }
     }

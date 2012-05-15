@@ -16,14 +16,14 @@ public class BackCronJob extends CronJob {
      * @param args
      */
 
-    private static final Log log = ExoLogger.getLogger(BackCronJob.class);
+    private static final Log LOG = ExoLogger.getLogger(BackCronJob.class.getName());
 
     private JobDataMap jobDataMap;
 
     public BackCronJob(InitParams params) throws Exception {
   super(params);
-  if (log.isInfoEnabled()) {
-      log.info("Start Init BackCronJob");
+  if (LOG.isInfoEnabled()) {
+    LOG.info("Start Init BackCronJob");
   }
   ExoProperties props = params.getPropertiesParam("exportContentJob.generalParams").getProperties();
   jobDataMap = new JobDataMap();
@@ -39,11 +39,11 @@ public class BackCronJob extends CronJob {
   jobDataMap.put("targetKey", targetKey);
   String predefinedPath = props.getProperty("predefinedPath");
   jobDataMap.put("predefinedPath", predefinedPath);
-  if (log.isInfoEnabled()) {
-      log.info("CronJob Param...fromState : " + fromState + ", toState : " + toState + ", localTempDir : " + localTempDir
+  if (LOG.isInfoEnabled()) {
+    LOG.info("CronJob Param...fromState : " + fromState + ", toState : " + toState + ", localTempDir : " + localTempDir
         + ", targetServerUrl : " + targetServerUrl);
 
-      log.info("End Init BackCronJob");
+    LOG.info("End Init BackCronJob");
   }
     }
 

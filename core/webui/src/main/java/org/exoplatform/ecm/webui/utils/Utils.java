@@ -228,7 +228,7 @@ public class Utils {
   final static public String SITE = "Site";
   final static public String PRIVATE = "Private";
   final static public String URL_BACKTO ="backto";
-  private static final Log LOG = ExoLogger.getLogger("webui.Utils");
+  private static final Log LOG = ExoLogger.getLogger(Utils.class.getName());
   public Map<String, Object> maps_ = new HashMap<String, Object>();
 
   public static final String INPUT_TEXT_AREA = "TEXTAREA";
@@ -681,9 +681,9 @@ public class Utils {
     if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
       if (orgNode.hasProperty(propertyName)) {
         try {
-        	if(propertyName.equals(EXO_TITLE))
-        		return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString())) ;  
-        	return orgNode.getProperty(propertyName).getString() ;
+          if(propertyName.equals(EXO_TITLE))
+            return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString()));
+          return orgNode.getProperty(propertyName).getString();
         } catch (Exception e) {
           return defaultValue;
         }
@@ -902,7 +902,7 @@ public class Utils {
     }
     return map;
   }
-  
+
   /**
    * Gets the title.
    *
@@ -925,13 +925,13 @@ public class Utils {
           // Do nothing
         }
       }
-    } 
+    }
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       title = node.getName();
     }
     return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
-  
+
   /**
    *
    * @param node
@@ -1006,25 +1006,25 @@ public class Utils {
     }
     return null;
   }
-  
+
   /* Check the current node is eligible to add mix:versionable or not
-   * 
+   *
    * @param node the current node
    * @param nodetypes The list of node types have child nodes which are not add mix:versionaboe while enrolling.
-   * @throws Exception the exception 
+   * @throws Exception the exception
    */
   public static boolean isMakeVersionable(Node node, String[] nodetypes) throws Exception {
-  	boolean isMakeVersionable = true;  	
-  	int deep = node.getDepth();  	
-  	for(int i = 0; i< deep; i++) {
-  		Node parent = node.getParent();
-  		for (String nodetype: nodetypes) {
-  			if(nodetype != null && nodetype.length() > 0 && parent.isNodeType(nodetype))
-  				return false;
-  		}  		
-  	  node = parent;
-  	}    	
-  	return isMakeVersionable;
+    boolean isMakeVersionable = true;
+    int deep = node.getDepth();
+    for(int i = 0; i< deep; i++) {
+      Node parent = node.getParent();
+      for (String nodetype: nodetypes) {
+        if(nodetype != null && nodetype.length() > 0 && parent.isNodeType(nodetype))
+          return false;
+      }
+      node = parent;
+    }
+    return isMakeVersionable;
   }
 
 }

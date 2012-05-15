@@ -30,9 +30,9 @@ import org.jbpm.graph.exe.ExecutionContext;
  */
 public class MockActionHandler implements ActionHandler {
 
-  private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
+  private static final Logger LOG = Logger.getLogger(MockDecisionHandler.class.getName());
 
   public void execute(ExecutionContext executionContext) {
-    log.info("MockActionHandlerCalled");
+    LOG.info("MockActionHandlerCalled");
   }
 }

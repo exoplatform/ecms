@@ -75,7 +75,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private static final String       EXO_HIDDENABLE         = "exo:hiddenable";
 
-  private static final Log          LOG                    = ExoLogger.getLogger(NewFolksonomyService.class);
+  private static final Log          LOG                    = ExoLogger.getLogger(NewFolksonomyServiceImpl.class.getName());
 
   private NodeHierarchyCreator      nodeHierarchyCreator;
 

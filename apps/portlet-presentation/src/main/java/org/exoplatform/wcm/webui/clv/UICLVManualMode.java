@@ -98,7 +98,11 @@ public class UICLVManualMode extends UICLVContainer {
       getChildren().clear();
       ResourceResolver resourceResolver = getTemplateResourceResolver();
       PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-      UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId());
+      UICLVPresentation clvPresentation =
+          addChild(UICLVPresentation.class,
+                   null,
+                   UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
+                   );
       clvPresentation.init(resourceResolver, paginatedResultIterator);
       
       return;
@@ -125,7 +129,11 @@ public class UICLVManualMode extends UICLVContainer {
                                      new CLVNodeCreator());
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-    UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId());
+    UICLVPresentation clvPresentation =
+      addChild(UICLVPresentation.class,
+               null,
+               UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
+              );
     clvPresentation.init(resourceResolver, pageList);
   }
   /**

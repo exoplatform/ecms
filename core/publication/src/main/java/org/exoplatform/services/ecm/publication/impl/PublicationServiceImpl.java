@@ -56,7 +56,7 @@ public class PublicationServiceImpl implements PublicationService {
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String HISTORY = "publication:history";
 
-  protected static Log log;
+  private static final Log LOG = ExoLogger.getLogger(PublicationServiceImpl.class.getName());
   private PublicationPresentationService publicationPresentationService;
 
   private final String localeFile = "locale.portlet.publication.PublicationService";
@@ -64,9 +64,8 @@ public class PublicationServiceImpl implements PublicationService {
   Map<String, PublicationPlugin> publicationPlugins_;
 
   public PublicationServiceImpl (PublicationPresentationService presentationService) {
-    log = ExoLogger.getLogger("portal:PublicationServiceImpl");
-    if (log.isInfoEnabled()) {
-      log.info("# PublicationService initialization #");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("# PublicationService initialization #");
     }
     this.publicationPresentationService = presentationService;
     publicationPlugins_ = new HashMap<String, PublicationPlugin>();
@@ -148,8 +147,8 @@ public class PublicationServiceImpl implements PublicationService {
     if(!isNodeEnrolledInLifecycle(node)) throw new NotInPublicationLifecycleException();
     //remove all extended publication mixin nodetype for this node
     String lifecycleName = getNodeLifecycleName(node);
-    if (log.isInfoEnabled()) {
-      log.info("The document: " + node.getName() + " unsubcribe publication lifecycle: " + lifecycleName);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("The document: " + node.getName() + " unsubcribe publication lifecycle: " + lifecycleName);
     }
     for(NodeType nodeType: node.getMixinNodeTypes()) {
       if(!nodeType.isNodeType(PUBLICATION)) continue;
@@ -263,8 +262,8 @@ public class PublicationServiceImpl implements PublicationService {
     try {
       return publicationPlugin.getLocalizedAndSubstituteMessage(locale, key, values);
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn("Exception when get log message", e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Exception when get log message", e);
       }
       return key;
     }

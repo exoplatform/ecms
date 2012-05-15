@@ -96,7 +96,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 
   private boolean             show_gadget     = false;
 
-  private Log LOG = ExoLogger.getLogger("cms.GetEditedDocumentRESTService");
+  private static final Log LOG = ExoLogger.getLogger(GetEditedDocumentRESTService.class.getName());
 
 
   public GetEditedDocumentRESTService(RepositoryService repositoryService,

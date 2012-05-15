@@ -937,9 +937,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     try {
       remoteUser = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      remoteUser = null;
     }
     return remoteUser;
   }

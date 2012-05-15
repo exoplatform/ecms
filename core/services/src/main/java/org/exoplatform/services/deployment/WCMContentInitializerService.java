@@ -51,7 +51,7 @@ public class WCMContentInitializerService implements Startable{
   private RepositoryService repositoryService;
 
   /** The log. */
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log LOG = ExoLogger.getLogger(WCMContentInitializerService.class.getName());
 
   /**
    * Instantiates a new wCM content initializer service.
@@ -103,8 +103,8 @@ public class WCMContentInitializerService implements Startable{
                 + " deployment plugin succesfully at " + date.toString() + "\n");
           }
         } catch (Exception e) {
-          if (log.isErrorEnabled()) {
-            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+          if (LOG.isErrorEnabled()) {
+            LOG.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
               + date.toString() + " by " + e + "\n");
           }
           logData.append("deploy " + deploymentPlugin.getName()
@@ -117,12 +117,12 @@ public class WCMContentInitializerService implements Startable{
       if (!contentInitializerService.hasNode(newSiteName)) {
         contentInitializerService.addNode(newSiteName, "nt:base");
       }
-      //add log data 
+      //add log data
       Node contentInitializerServiceLog = contentInitializerService.hasNode("WCMContentInitializerServiceLog") ?
-                                          contentInitializerService.getNode("WCMContentInitializerServiceLog") : 
+                                          contentInitializerService.getNode("WCMContentInitializerServiceLog") :
                                           contentInitializerService.addNode("WCMContentInitializerServiceLog", "nt:file");
       Node contentInitializerServiceLogContent = contentInitializerServiceLog.hasNode("jcr:content") ?
-                                                 contentInitializerServiceLog.getNode("jcr:content") : 
+                                                 contentInitializerServiceLog.getNode("jcr:content") :
                                                  contentInitializerServiceLog.addNode("jcr:content", "nt:resource");
       contentInitializerServiceLogContent.setProperty("jcr:encoding", "UTF-8");
       contentInitializerServiceLogContent.setProperty("jcr:mimeType", "text/plain");
@@ -135,14 +135,14 @@ public class WCMContentInitializerService implements Startable{
       xSkinService.start();
       jsService.start();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when start WCMContentInitializerService: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when start WCMContentInitializerService: ", e);
       }
     } finally {
       sessionProvider.close();
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */

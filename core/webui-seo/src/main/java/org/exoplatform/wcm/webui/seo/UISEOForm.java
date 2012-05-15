@@ -87,9 +87,8 @@ public class UISEOForm extends UIForm{
   private boolean onContent = false;
   private boolean isInherited = false;
   private ArrayList<String> paramsArray = null;
-  //private String pageParent = null;
 
-  private static final Log LOG  = ExoLogger.getLogger("seo.UISEOForm");
+  private static final Log LOG  = ExoLogger.getLogger(UISEOForm.class.getName());
 
   public String getContentPath() {
     return this.contentPath;

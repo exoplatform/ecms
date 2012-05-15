@@ -504,9 +504,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
       }
     } catch(Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      return uiExplorer.getDocumentInfoTemplate();
     }
     return uiExplorer.getDocumentInfoTemplate();
   }

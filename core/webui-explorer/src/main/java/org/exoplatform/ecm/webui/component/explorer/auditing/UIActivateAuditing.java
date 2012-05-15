@@ -36,7 +36,7 @@ import org.exoplatform.webui.event.EventListener;
   )
 
 public class UIActivateAuditing extends UIContainer implements UIPopupComponent {
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIActivateAuditing");
+  private static final Log LOG  = ExoLogger.getLogger(UIActivateAuditing.class.getName());
   public UIActivateAuditing() throws Exception {}
 
   public void activate() throws Exception {}

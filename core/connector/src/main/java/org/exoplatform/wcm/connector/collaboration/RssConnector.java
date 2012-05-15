@@ -99,7 +99,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /** The wcm configuration service. */
   private WCMConfigurationService wcmConfigurationService;
   /** The log. */
-  private static Log log = ExoLogger.getLogger(RssConnector.class);
+  private static final Log LOG = ExoLogger.getLogger(RssConnector.class.getName());
 
   /**
    * Instantiates a new rss connector.
@@ -233,13 +233,16 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       while (iter.hasNext()) {
         Node node = iter.next();
         
-        String url = contentUrl;
+        StringBuilder url= new StringBuilder();
+        url.append(contentUrl);
         if (node.isNodeType("nt:frozenNode")) {
           String uuid = node.getProperty("jcr:frozenUuid").getString();
           Node originalNode = node.getSession().getNodeByUUID(uuid);
-          url += originalNode.getPath() + "&version=" + node.getParent().getName();
+          url.append(originalNode.getPath());
+          url.append("&version=");
+          url.append(node.getParent().getName());
         } else {
-          url += node.getPath();
+          url.append(node.getPath());
         }
         
         SyndEntry entry = new SyndEntryImpl();
@@ -252,7 +255,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
         }
         else entry.setTitle("") ;
 
-        entry.setLink(url);
+        entry.setLink(url.toString());
         SyndContent description = new SyndContentImpl();
         description.setType("text/plain");
 
@@ -272,8 +275,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       SyndFeedOutput output = new SyndFeedOutput();
       return output.outputString(feed);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform generateRSS: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform generateRSS: ", e);
       }
     }
     return null;

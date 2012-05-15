@@ -92,7 +92,7 @@ public class ManageDocumentService implements ResourceContainer {
   private final CacheControl    cc;
 
   /** The log. */
-  private static Log            log                  = ExoLogger.getLogger(ManageDocumentService.class);
+  private static final Log LOG = ExoLogger.getLogger(ManageDocumentService.class.getName());
   
   private ManageDriveService    manageDriveService;
   
@@ -225,25 +225,25 @@ public class ManageDocumentService implements ResourceContainer {
       Node node = getNode(driveName, workspaceName, currentFolder);
       return buildXMLResponseForChildren(node, driveName, currentFolder, Boolean.valueOf(showHidden));
     } catch (AccessDeniedException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Access is denied when perform get Folders and files: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Access is denied when perform get Folders and files: ", e);
       }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     }
     catch (PathNotFoundException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Item is not found: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Item is not found: ", e);
       }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled()) {
-        log.error("Repository is error: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
       
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform get Folders and files: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform get Folders and files: ", e);
       }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
@@ -273,25 +273,25 @@ public class ManageDocumentService implements ResourceContainer {
       parent.save();
       return Response.ok().cacheControl(cc).build();
     } catch (AccessDeniedException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Access is denied when perform delete folder or file: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Access is denied when perform delete folder or file: ", e);
       }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     }
     catch (PathNotFoundException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Item is not found: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Item is not found: ", e);
       }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled()) {
-        log.error("Repository is error: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
       
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform delete Folder or file: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform delete Folder or file: ", e);
       }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
@@ -328,18 +328,18 @@ public class ManageDocumentService implements ResourceContainer {
       document.appendChild(folderNode);
       return getResponse(document);
     } catch (AccessDeniedException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Access is denied when perform create folder: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Access is denied when perform create folder: ", e);
       }
       return Response.status(Status.UNAUTHORIZED).entity(e.getMessage()).cacheControl(cc).build();
     } catch (PathNotFoundException e) {
-      if (log.isDebugEnabled()) {
-        log.debug("Item is not found: ", e);
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Item is not found: ", e);
       }
       return Response.status(Status.NOT_FOUND).entity(e.getMessage()).cacheControl(cc).build();
     } catch (RepositoryException e) {
-      if (log.isErrorEnabled()) {
-        log.error("Repository is error: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE)
                      .entity(e.getMessage())
@@ -347,8 +347,8 @@ public class ManageDocumentService implements ResourceContainer {
                      .build();
 
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform create folder: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform create folder: ", e);
       }
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
@@ -419,8 +419,8 @@ public class ManageDocumentService implements ResourceContainer {
                                            uploadId);
       }
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when perform processUpload: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform processUpload: ", e);
       }
     }
 
@@ -428,7 +428,11 @@ public class ManageDocumentService implements ResourceContainer {
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
-  private Response buildXMLResponseForChildren(Node node, String driveName, String currentFolder, boolean showHidden) throws Exception {
+  private Response buildXMLResponseForChildren(Node node,
+                                               String driveName,
+                                               String currentFolder,
+                                               boolean showHidden
+                                               ) throws Exception {
     Document document = createNewDocument();
     Element rootElement = createFolderElement(document,
                                               node,

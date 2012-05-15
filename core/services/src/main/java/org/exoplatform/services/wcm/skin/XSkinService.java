@@ -46,7 +46,7 @@ public class XSkinService implements Startable {
   private final static String     SKIN_PATH_PATTERN    = "/{docBase}/css/jcr/(.*)/(.*)/Stylesheet.css";
 
   /** The log. */
-  private static Log              log                  = ExoLogger.getLogger("wcm:XSkinService");
+  private static final Log LOG = ExoLogger.getLogger(XSkinService.class.getName());
 
   /** The configuration service. */
   private WCMConfigurationService configurationService;
@@ -180,8 +180,8 @@ public class XSkinService implements Startable {
       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
       addSharedPortalSkin(sharedPortal);
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Exception when start XSkinService", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Exception when start XSkinService", e);
       }
     } finally {
       sessionProvider.close();

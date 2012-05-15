@@ -147,7 +147,7 @@ public class NewsletterInitializationService implements Startable {
           session.save();
         }
       }
-    } catch (Throwable e) {
+    } catch (Exception e) {
       if (LOG.isInfoEnabled()) {
         LOG.info("Starting NewsletterInitializationService fail because of ", e);
       }

@@ -22,34 +22,26 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
-import javax.jcr.nodetype.NodeType;
 
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.scripts.ScriptService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -74,14 +66,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
   private static final String NODE_TYPE_ADD_TO_FAVORITE_ACTION = "exo:addToFavoriteAction";
   private static final String FILE_NAME_ADD_TO_FAVORITE_ACTION = "AddToFavoriteScript.groovy";
-  private static final String SCRIPT_PATH_ADD_TO_FAVORITE_ACTION 
+  private static final String SCRIPT_PATH_ADD_TO_FAVORITE_ACTION
     = "war:/conf/dms-extension/dms/artifacts/scripts/ecm-explorer/action/AddToFavoriteScript.groovy";
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
   private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
   private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
 
   private ActionServiceContainer actionServiceContainer;
-  private TemplateService templateService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private OrganizationService organizationService;
   private DMSConfiguration dmsConfiguration;
@@ -94,7 +85,6 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
                                      ScriptService scriptService,
                                      ConfigurationManager configurationManager,
                                      ActionServiceContainer actionServiceContainer,
-                                     TemplateService templateService,
                                      NodeHierarchyCreator nodeHierarchyCreator,
                                      OrganizationService organizationService,
                                      InitParams initParams) {
@@ -104,7 +94,6 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     this.nodeHierarchyCreator =  nodeHierarchyCreator;
     this.organizationService = organizationService;
     this.actionServiceContainer = actionServiceContainer;
-    this.templateService = templateService;
     this.repoService = repoService;
     this.dmsConfiguration = dmsConfiguration;
     this.scriptService = scriptService;
@@ -123,13 +112,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
         LOG.info("Start " + this.getClass().getName() + ".............");
       }
       RequestLifeCycle.begin(PortalContainer.getInstance());
-      
+
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
                                                    repoService.getCurrentRepository());
-      
+
       // Register Favorite Script if necessary
-      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) + 
+      String scriptPath = nodeHierarchyCreator.getJcrPath(BasePath.ECM_ACTION_SCRIPTS) +
                           "/" + FILE_NAME_ADD_TO_FAVORITE_ACTION;
       Node currScriptNode = null;
       String lastestScriptContent = getLastestFavoriteScriptContent();
@@ -139,7 +128,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       catch (PathNotFoundException pne) {
         registerFavoriteScript(sessionProvider, lastestScriptContent);
       }
-      
+
       // Update Favorite script to lastest version if it has a new version
       if (currScriptNode != null) {
         String currScriptContent =
@@ -150,7 +139,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           registerFavoriteScript(sessionProvider, lastestScriptContent);
         }
       }
-      
+
       // Register Node Type exo:addToFavoriteAction if neccessary
       ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
       try {
@@ -170,17 +159,17 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
         String userName = user.getUserName();
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
         String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-        
+
         try {
           favoriteNode = userNode.getNode(favoritePath);
         }
         catch (PathNotFoundException pne) {
           favoriteNode = createFavoriteFolder(userName);
         }
-        
+
         if (favoriteNode != null) {
           if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) != null) {
-            actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION, 
+            actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION,
                                                 repoService.getCurrentRepository().getConfiguration().getName());
           }
         }
@@ -201,7 +190,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
   /**
    * Register Favorite Script.
-   * 
+   *
    * @param sessionProvider
    * @param scriptContent
    * @throws Exception
@@ -209,10 +198,10 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private void registerFavoriteScript(SessionProvider sessionProvider, String scriptContent) throws Exception {
     scriptService.addScript("ecm-explorer/action/" + FILE_NAME_ADD_TO_FAVORITE_ACTION, scriptContent, sessionProvider);
   }
-  
+
   /**
    * Get lastest addtofavorite.groovy script
-   * 
+   *
    * @return lastest content
    * @throws Exception
    */
@@ -223,7 +212,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   }
   /**
    * Create Favorite Folder.
-   * 
+   *
    * @param userName UserName
    * @return Favorite Node
    * @throws Exception
@@ -235,21 +224,21 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       Node userNode =
         nodeHierarchyCreator.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userName);
       String userFavoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
-  
+
       // Create favorite path
       userFavoriteNode = userNode.addNode(userFavoritePath, NT_UNSTRUCTURED);
-  
+
       // Add Mixin types
       userFavoriteNode.addMixin(EXO_PRIVILEGEABLE);
       userFavoriteNode.addMixin(EXO_FAVORITEFOLDER);
-  
+
       // Add permission
       Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
       permissionsMap.put(userName, PermissionType.ALL);
       ((ExtendedNode)userFavoriteNode).setPermissions(permissionsMap);
-      
+
       userNode.getSession().save();
-      
+
     } catch (PathNotFoundException pne) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Private Folder of User " + userName + " not found");
@@ -257,5 +246,5 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
     return userFavoriteNode;
   }
-  
+
 }

@@ -74,7 +74,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
   private UIPageIterator   uiPageIterator_;
 
   private List<NodeLocation>       taxonomyNodes_;
-  private static final Log LOG  = ExoLogger.getLogger("admin.UITaxonomyTreeWorkingArea");
+  private static final Log LOG  = ExoLogger.getLogger(UITaxonomyTreeWorkingArea.class.getName());
   private ClipboardCommand clipboard_ = new ClipboardCommand();
 
   private String           selectedPath_;

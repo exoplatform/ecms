@@ -40,13 +40,12 @@ import org.exoplatform.webui.form.UIForm;
  */
 public class PublicationPresentationServiceImpl implements PublicationPresentationService {
 
-  protected static Log log;
+  private static final Log LOG  = ExoLogger.getLogger(PublicationPresentationServiceImpl.class.getName());
   private Map<String, PublicationPlugin> publicationPlugins_ = new HashMap<String,PublicationPlugin>();
 
   public PublicationPresentationServiceImpl () {
-    log = ExoLogger.getLogger("portal:PublicationPresentationServiceImpl");
-    if (log.isInfoEnabled()) {
-      log.info("# PublicationPresentationService initialization #");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("# PublicationPresentationService initialization #");
     }
     this.publicationPlugins_ = new HashMap<String, PublicationPlugin>();
   }

@@ -41,7 +41,7 @@ public class RecordsJob extends BaseJob {
   /**
    * Logger.
    */
-  private static final Log          LOG  = ExoLogger.getLogger("job.RecordsJob");
+  private static final Log LOG  = ExoLogger.getLogger(RecordsJob.class.getName());
 
   private RepositoryService   repositoryService_;
 

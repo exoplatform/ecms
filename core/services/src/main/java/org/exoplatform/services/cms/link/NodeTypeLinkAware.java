@@ -37,7 +37,7 @@ public class NodeTypeLinkAware implements NodeType {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("services.cms.link.NodeTypeLinkAware");
+  private static final Log LOG  = ExoLogger.getLogger(NodeTypeLinkAware.class.getName());
 
   private final String name;
 

@@ -36,7 +36,6 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;

@@ -12,14 +12,14 @@ import org.quartz.JobDataMap;
  */
 public class ChangeStateCronJob extends CronJob {
 
-  private static final Log log = ExoLogger.getLogger(ChangeStateCronJob.class);
+  private static final Log LOG = ExoLogger.getLogger(ChangeStateCronJob.class.getName());
 
   private JobDataMap       jobDataMap;
 
   public ChangeStateCronJob(InitParams params) throws Exception {
     super(params);
-    if (log.isInfoEnabled()) {
-      log.info("Start Init ChangeStateCronJob");
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start Init ChangeStateCronJob");
     }
     ExoProperties props = params.getPropertiesParam("changeStateCronJob.generalParams")
                                 .getProperties();
@@ -30,11 +30,11 @@ public class ChangeStateCronJob extends CronJob {
     jobDataMap.put("toState", toState);
     String predefinedPath = props.getProperty("predefinedPath");
     jobDataMap.put("predefinedPath", predefinedPath);
-    if (log.isInfoEnabled()) {
-      log.info("CronJob Param...fromState : " + fromState + ", toState : " + toState
+    if (LOG.isInfoEnabled()) {
+      LOG.info("CronJob Param...fromState : " + fromState + ", toState : " + toState
           + ", predefinedPath : " + predefinedPath);
 
-      log.info("End Init ChangeStateCronJob");
+      LOG.info("End Init ChangeStateCronJob");
     }
   }
 

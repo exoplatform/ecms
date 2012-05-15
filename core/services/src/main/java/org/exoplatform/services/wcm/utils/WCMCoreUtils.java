@@ -444,9 +444,7 @@ public class WCMCoreUtils {
     try {
       primaryItem = node.getPrimaryItem();
     } catch (ItemNotFoundException e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
+      primaryItem = null;
     }
     if (primaryItem != null && primaryItem.isNode()) {
       Node primaryNode = (Node) node.getPrimaryItem();

@@ -86,7 +86,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   public static final String POPUP_SELECT    = "TaxoTreeSelectUserOrGroupPopup";
 
   public static final String SELECT_GROUP_ID = "TaxoTreeSelectUserOrGroup";
-  private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionTreeForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIPermissionTreeForm.class.getName());
   private NodeLocation  currentNode;
 
   private PermissionBean     permBean;

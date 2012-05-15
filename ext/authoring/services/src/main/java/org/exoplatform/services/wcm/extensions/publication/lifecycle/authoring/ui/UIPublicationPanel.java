@@ -79,7 +79,7 @@ public class UIPublicationPanel
 
   public static final String END_PUBLICATION   = "UIPublicationPanelEndDateInput";
 
-  public static final Log    LOG               = LogFactory.getLog(UIPublicationPanel.class);
+  private static final Log    LOG               = LogFactory.getLog(UIPublicationPanel.class.getName());
 
   /**
    * Instantiates a new uI publication panel.

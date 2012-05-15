@@ -114,7 +114,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   public static final String POPUP_COMPONENT = "PopupComponent";
 
   public static final String EXO_ACTIONS   = "exo:actions";
-  private static final Log LOG  = ExoLogger.getLogger("admin.UIActionForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIActionForm.class.getName());
   public UIActionForm() throws Exception {
     setActions(new String[] {  "PreviousViewPermission", "Save", "NextViewTree"});
   }

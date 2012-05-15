@@ -42,7 +42,7 @@ import org.ow2.bonita.facade.uuid.ProcessInstanceUUID;
  */
 public class ExoOrganizationMapper implements RoleMapper {
 
-  private static Log log = ExoLogger.getLogger(ExoOrganizationMapper.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(ExoOrganizationMapper.class.getName());
 
   public Set<String> searchMembers(QueryAPIAccessor readonlyapiaccessor,
                                    ProcessInstanceUUID instanceId,
@@ -59,16 +59,16 @@ public class ExoOrganizationMapper implements RoleMapper {
       participantDef = definitionAPI.getProcessParticipant(processId, roleId);
       return ExoOrganizationMapper.GetUsersFromMembershipAndGroup(participantDef.getName());
     } catch (InstanceNotFoundException e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     } catch (ProcessNotFoundException e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     } catch (ParticipantNotFoundException e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     }
     return null;
@@ -103,13 +103,13 @@ public class ExoOrganizationMapper implements RoleMapper {
         membership = "*";
         group = membershipAndGroup;
 
-        if (log.isErrorEnabled()) {
-          log.error("Warning : The specified Bonita role does not "
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Warning : The specified Bonita role does not "
             + "conform to the syntax membership:group.");
         }
       }
-      if (log.isInfoEnabled()) {
-        log.info("Starting role mapping for [group,membership] : [" + group + "," + membership
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Starting role mapping for [group,membership] : [" + group + "," + membership
             + "]");
       }
 
@@ -129,15 +129,15 @@ public class ExoOrganizationMapper implements RoleMapper {
                                                                                     membership) != null) {
           // The user has the specified membership
           users.add(userName);
-          if (log.isInfoEnabled()) {
-            log.info("Add user : " + userName);
+          if (LOG.isInfoEnabled()) {
+            LOG.info("Add user : " + userName);
           }
 
         }
       }
     } catch (Exception e) {
-      if (log.isWarnEnabled()) {
-        log.warn(e.getMessage(), e);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage(), e);
       }
     }
 

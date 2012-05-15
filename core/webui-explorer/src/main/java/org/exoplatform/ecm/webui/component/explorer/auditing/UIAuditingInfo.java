@@ -38,7 +38,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
   private UIPageIterator uiPageIterator_ ;
-  private static final Log LOG  = ExoLogger.getLogger("explorer.UIAuditingInfo");
+  private static final Log LOG  = ExoLogger.getLogger(UIAuditingInfo.class.getName());
   public UIAuditingInfo() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "AuditingInfoIterator");
   }

@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.presentation;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 import org.exoplatform.web.application.Parameter;
 

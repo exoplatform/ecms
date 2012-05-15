@@ -56,8 +56,6 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String PUBLISHED = "published";
   public static final String CONTENT_VALIDATION = "content publishing";
   public static final String BACKUP = "backup";
-  private static final Log LOG  = ExoLogger.getLogger(WorkflowPublicationPlugin.class);
-
   public static final String PUBLICATION = "publication:publication";
   public static final String LIFECYCLE_NAME = "publication:lifecycleName";
   public static final String CURRENT_STATE = "publication:currentState";
@@ -93,7 +91,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String MIXIN_MOVE = "exo:move";
   public static final String IMG_PATH = "resources/images/";
   public static final String WORKFLOW = "Workflow";
-  protected static Log log;
+  private static final Log LOG = ExoLogger.getLogger(WorkflowPublicationPlugin.class.getName());
 
   private final String localeFile = "locale.portlet.workflowPublication.WorkflowPublication";
   public static final String DOCUMENT_BACUPUP = "documentsBackupPath";
@@ -112,7 +110,6 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator) container.
         getComponentInstanceOfType(NodeHierarchyCreator.class);
     String documentBackup = hierarchyCreator.getJcrPath(DOCUMENT_BACUPUP);
-    log = ExoLogger.getLogger("portal:WorkflowPublicationPlugin");
     insertDefaultValue(initParams, documentBackup);
   }
 
@@ -158,15 +155,15 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   @Override
   public void changeState(Node node, String newState, HashMap<String, String> context)
   throws IncorrectStateUpdateLifecycleException, Exception {
-    if (log.isInfoEnabled()) {
-      log.info("Change node state to " + newState);
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Change node state to " + newState);
     }
     if (newState.equals(ENROLLED)) {
       node.save();
-      if (log.isInfoEnabled()) {
-        log.info("###########################");
-        log.info("#  Add log                #");
-        log.info("###########################\n");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("###########################");
+        LOG.info("#  Add log                #");
+        LOG.info("###########################\n");
       }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
@@ -208,10 +205,10 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         node.setProperty(CURRENT_STATE, CONTENT_VALIDATION);
         node.setProperty(BACUP_PATH, backupPath);
         node.setProperty(BACUP_WORKSPACE, backupWorkspace);
-        if (log.isInfoEnabled()) {
-          log.info("###########################");
-          log.info("#  Add log                #");
-          log.info("###########################\n");
+        if (LOG.isInfoEnabled()) {
+          LOG.info("###########################");
+          LOG.info("#  Add log                #");
+          LOG.info("###########################\n");
         }
         PublicationService publicationService = (PublicationService) container.
             getComponentInstanceOfType(PublicationService.class);
@@ -258,10 +255,10 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.BACKUP);
       node.getSession().save();
 
-      if (log.isInfoEnabled()) {
-        log.info("###########################");
-        log.info("#  Add log                #");
-        log.info("###########################\n");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("###########################");
+        LOG.info("#  Add log                #");
+        LOG.info("###########################\n");
       }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
@@ -274,10 +271,10 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     } else if (newState.equals(PUBLISHED)) {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.PUBLISHED);
 
-      if (log.isInfoEnabled()) {
-        log.info("###########################");
-        log.info("#  Add log                #");
-        log.info("###########################\n");
+      if (LOG.isInfoEnabled()) {
+        LOG.info("###########################");
+        LOG.info("#  Add log                #");
+        LOG.info("###########################\n");
       }
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationService publicationService = (PublicationService) container.
@@ -361,8 +358,8 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     String fileName= "workflowPublication.gif";
 
     String completeFileName=IMG_PATH + fileName;
-    if (log.isTraceEnabled()) {
-      log.trace("\nLoading file '" + name + "' from file system '" + completeFileName + "'");
+    if (LOG.isTraceEnabled()) {
+      LOG.trace("\nLoading file '" + name + "' from file system '" + completeFileName + "'");
     }
 
     InputStream in = this.getClass().getClassLoader().getResourceAsStream(completeFileName);

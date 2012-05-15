@@ -126,7 +126,7 @@ public class UIDialogForm extends UIForm {
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("webui.form.UIDialogForm");
+  private static final Log LOG  = ExoLogger.getLogger(UIDialogForm.class.getName());
 
   private final String REPOSITORY = "repository";
   protected final static String CANCEL_ACTION = "Cancel";
@@ -197,9 +197,9 @@ public class UIDialogForm extends UIForm {
   public void setIsKeepinglock(boolean isKeepinglock) {
     this.isKeepinglock = isKeepinglock;
   }
-  
+
   public boolean isShowActionsOnTop() { return isShowActionsOnTop_; }
-  
+
   public void setShowActionsOnTop(boolean isShowActionsOnTop) {
     this.isShowActionsOnTop_ = isShowActionsOnTop;
   }
@@ -243,7 +243,7 @@ public class UIDialogForm extends UIForm {
   public void setStoredLocation(String repository, String workspace, String storedPath) {
     setStoredLocation(workspace, storedPath);
   }
-  
+
   public void setStoredLocation(String workspace, String storedPath) {
     try {
     this.repositoryName = getApplicationComponent(RepositoryService.class).getCurrentRepository()
@@ -1295,7 +1295,7 @@ public class UIDialogForm extends UIForm {
             ((UIFormUploadInputNoUploadButton)uiInput).setFileName(childNode.getName());
             Value value = childNode.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getValue();
             ((UIFormUploadInputNoUploadButton)uiInput).setByteValue(
-                                                                    IOUtil.getStreamContentAsBytes(value.getStream()));    
+                                                                    IOUtil.getStreamContentAsBytes(value.getStream()));
           }
           if(label != null) multiValueField.setLabel(label);
           multiValueField.setType(UIFormUploadInputNoRemoveButton.class);
@@ -1528,7 +1528,7 @@ public class UIDialogForm extends UIForm {
   public String getContentType() { return contentType; };
 
   public Map<String, JcrInputProperty> getInputProperties() { return properties; }
-  
+
   public Map<String, String> getInputOptions() { return options; }
 
   public JcrInputProperty getInputProperty(String name) { return properties.get(name); }
@@ -1632,7 +1632,7 @@ public class UIDialogForm extends UIForm {
       return key;
     }
   }
-  
+
   public void renderField(String name) throws Exception {
     UIComponent uiInput = findComponentById(name);
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
@@ -1660,7 +1660,7 @@ public class UIDialogForm extends UIForm {
         w.write("<td class=\"MultiValueContainerShow\">");
         w.write("<a style=\"cursor:pointer;\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
-            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img alt='" + rs.getString("Ecm.dialog.label.add") 
+            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img alt='" + rs.getString("Ecm.dialog.label.add")
             + "' class='ActionIcon "
             + iconClass + "' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
@@ -1673,7 +1673,7 @@ public class UIDialogForm extends UIForm {
               + getId()
               + "','RemoveReference','&objectId="
               + fieldName
-              + "' )\"><img alt='"+ rs.getString("Ecm.dialog.label.remove") 
+              + "' )\"><img alt='"+ rs.getString("Ecm.dialog.label.remove")
               +"' class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
               + "</a>");
         w.write("</td>");
@@ -1693,7 +1693,7 @@ public class UIDialogForm extends UIForm {
   }
 
   public String getImage(InputStream input, String nodeName) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class);    
+    DownloadService dservice = getApplicationComponent(DownloadService.class);
     InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image");
     dresource.setDownloadName(nodeName);
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
@@ -1723,7 +1723,7 @@ public class UIDialogForm extends UIForm {
   public void setContentType(String type) { this.contentType = type; }
 
   public void setInputProperty(String name, JcrInputProperty value) { properties.put(name, value); }
-  
+
   public void setInputOption(String name, String value) { options.put(name, value); }
 
   public void setIsNotEditNode(boolean isNotEditNode) { this.isNotEditNode = isNotEditNode; }
@@ -1776,11 +1776,11 @@ public class UIDialogForm extends UIForm {
     }
     return d;
   }
-  
+
   protected List<String> getRemovedNodes() { return removedNodes; }
-  
+
   public void addRemovedNode(String path) { removedNodes.add(path); }
-  
+
   public void clearRemovedNode() { removedNodes = new ArrayList<String>(); }
 
   private void executePostSaveEventInterceptor(String nodePath_) throws Exception {
@@ -1893,7 +1893,7 @@ public class UIDialogForm extends UIForm {
   public void processRenderAction() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction\">");   
+    writer.append("<div class=\"UIAction\">");
     String[] listAction = getActions();
     ResourceBundle res = context.getApplicationResourceBundle();
     String actionLabel;
@@ -1913,7 +1913,7 @@ public class UIDialogForm extends UIForm {
     }
     writer.append("</div>");
   }
-  
+
   public Node getNodeByType(String nodeType) throws Exception {
     if (this.getNode() == null) return null;
     NodeIterator nodeIter = this.getNode().getNodes();

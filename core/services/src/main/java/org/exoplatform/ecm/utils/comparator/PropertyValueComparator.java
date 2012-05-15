@@ -42,7 +42,7 @@ public class PropertyValueComparator implements Comparator<Node> {
   private String             propertyName;
 
   private String             orderType;
-  private static final Log LOG  = ExoLogger.getLogger("component.PropertyValueComparator");
+  private static final Log LOG  = ExoLogger.getLogger(PropertyValueComparator.class.getName());
   public PropertyValueComparator(String propertyName, String orderType) {
     this.propertyName = propertyName;
     this.orderType = orderType;

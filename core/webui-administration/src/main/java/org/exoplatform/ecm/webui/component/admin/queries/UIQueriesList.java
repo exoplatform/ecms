@@ -61,7 +61,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIQueriesList extends UIPagingGridDecorator {
   
-  private static final Log LOG  = ExoLogger.getLogger("org.exoplatform.ecm.webui.component.admin.queries.UIQueriesList");
+  private static final Log LOG  = ExoLogger.getLogger(UIQueriesList.class.getName());
 
   final static public String[] ACTIONS = {"AddQuery"} ;
   final static public String ST_ADD = "AddQueryForm" ;

@@ -116,7 +116,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
   /**
    * Logger.
    */
-  private static final Log LOG  = ExoLogger.getLogger("explorer.upload.UISingleUploadForm");
+  private static final Log LOG  = ExoLogger.getLogger(UISingleUploadForm.class.getName());
 
   final static public String FIELD_NAME =  "name" ;
   final static public String FIELD_UPLOAD = "upload" ;

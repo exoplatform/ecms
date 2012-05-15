@@ -70,7 +70,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private NodeHierarchyCreator   nodeHierarchyCreator_;
 
   private RepositoryService      repositoryService_;
-  
+
   private static final String    TAXONOMY_LINK   = "exo:taxonomyLink";
 
   private static final String    EXOSYMLINK_LINK = "exo:symlink";
@@ -246,7 +246,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
           return linkManager_.getTarget(taxonomyTree, system);
       }catch (PathNotFoundException pne) {
-      	throw new RepositoryException(pne);
+        throw new RepositoryException(pne);
       }
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);
@@ -437,10 +437,10 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();
           NodeIterator iterate = result.getNodes();
-          Set<String> addedNode = new HashSet<String>();          
-          while (iterate.hasNext()) {          	
+          Set<String> addedNode = new HashSet<String>();
+          while (iterate.hasNext()) {
             Node parentCate = iterate.nextNode().getParent();
-            // We need filtering duplicated result to fix the problem of ECMS-3282.            
+            // We need filtering duplicated result to fix the problem of ECMS-3282.
             if (!addedNode.contains(parentCate.getSession().getWorkspace().getName() + ":/" + parentCate.getPath())) {
               listCate.add(parentCate);
               addedNode.add(parentCate.getSession().getWorkspace().getName() + ":/" + parentCate.getPath());
@@ -546,10 +546,10 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           }
           linkName = node.getName() + index++;
         }
-        
+
         //create link
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
-        
+
       }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);

@@ -45,7 +45,7 @@ public class StageAndVersionPublicationState {
   public static final String OBSOLETE = "obsolete";
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(StageAndVersionPublicationState.class);
+  private static final Log LOG = ExoLogger.getLogger(StageAndVersionPublicationState.class.getName());
 
   /**
    * Gets the revision state.
@@ -59,8 +59,8 @@ public class StageAndVersionPublicationState {
     try {
       currentState = currentNode.getProperty("publication:currentState").getString();
     } catch (Exception e) {
-      if (log.isErrorEnabled()) {
-        log.error("Error when getRevisionState: ", e);
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when getRevisionState: ", e);
       }
     }
     return currentState;

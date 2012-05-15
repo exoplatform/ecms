@@ -20,7 +20,7 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
   private OfficeManager officeManager = null;
   private OfficeDocumentConverter documentConverter = null;
 
-  private static Log LOG = ExoLogger.getLogger(JodConverterServiceImpl.class);
+  private static final Log LOG = ExoLogger.getLogger(JodConverterServiceImpl.class.getName());
 
   public JodConverterServiceImpl(InitParams initParams) throws Exception {
     int ports[];

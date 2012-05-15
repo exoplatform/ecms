@@ -54,7 +54,7 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
   private LivePortalManagerService livePortalManagerService;
 
   /** The log. */
-  private static Log log = ExoLogger.getLogger(InitialNewsletterPlugin.class);
+  private static final Log LOG = ExoLogger.getLogger(InitialNewsletterPlugin.class);
 
   /**
    * Instantiates a new initial newsletter plugin.
@@ -104,8 +104,8 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
         userFolderNode.addMixin("exo:privilegeable");
       userFolderNode.setPermission("any", PermissionType.ALL) ;
     } catch (Exception e) {
-      if (log.isInfoEnabled()) {
-        log.info("InitialNewsletterPlugin fail because of ", e);
+      if (LOG.isInfoEnabled()) {
+        LOG.info("InitialNewsletterPlugin fail because of ", e);
       }
     }
   }

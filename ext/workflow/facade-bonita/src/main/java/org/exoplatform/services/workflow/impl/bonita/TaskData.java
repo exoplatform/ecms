@@ -40,7 +40,7 @@ public class TaskData implements Task {
   private String taskName          = null;
   private Date   end               = null;
 
-  private static Logger log = Logger.getLogger(TaskData.class.getName());
+  private static final Logger LOG = Logger.getLogger(TaskData.class.getName());
 
   public TaskData(ActivityInstance<TaskInstance> task) {
     if(task.getBody().isTaskAssigned()){
@@ -68,10 +68,10 @@ public class TaskData implements Task {
 
       this.end = task.getBody().getEndedDate();
   } catch (BonitaException e) {
-    log.log(Level.WARNING, e.getMessage(), e);
+    LOG.log(Level.WARNING, e.getMessage(), e);
   }
-  if(log.isLoggable(Level.INFO)){
-      log.info("New task created [taskId,taskName,actorId,processId,instanceId,description,end]:"
+  if(LOG.isLoggable(Level.INFO)){
+      LOG.info("New task created [taskId,taskName,actorId,processId,instanceId,description,end]:"
           + "[" + this.id + "," + this.taskName + "," + this.actorId + "," + this.processId + ","
           + this.processInstanceId + "," + this.description + "," + this.end);
   }
