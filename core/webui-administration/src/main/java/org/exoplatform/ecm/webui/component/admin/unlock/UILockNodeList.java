@@ -79,7 +79,7 @@ public class UILockNodeList extends UIComponentDecorator {
   final static public String ST_EDIT = "EditUnLockForm";
   private UIPageIterator uiPageIterator_;
   
-  private static final String LOCK_QUERY = "select * from nt:base where jcr:mixinTypes = 'mix:lockable' order by exo:dateCreated DESC";
+  private static final String LOCK_QUERY = "select * from mix:lockable order by exo:dateCreated DESC";
   
   public UILockNodeList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockNodeListIterator");
