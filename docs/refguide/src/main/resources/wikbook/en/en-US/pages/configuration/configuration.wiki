@@ -1,5 +1,5 @@
-This chapter describes about configurations used in eXo Content. It consists of two main sections:
+This chapter describes configurations used in eXo Content. It consists of two main sections:
 
 * [Component|#CONTref.Configuration.Components]
-
 * [External Component Plugins|#CONTref.Configuration.Plugins]
+* [CMIS configuration|#Adm_CMIS.Configuration]

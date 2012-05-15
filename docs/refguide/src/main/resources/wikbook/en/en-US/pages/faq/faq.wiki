@@ -1,10 +1,19 @@
-h1. How to deploy a workflow? {anchor:id=CONTref.FAQ.HowToDeployWorkflow}
- 
+This section provides FAQs related to the product.
+{docbook}
+<para xml:id="CONTref.FAQ.HowToDeployWorkflow">
+<citetitle>
+<emphasis role="bold">
+Q1. How to deploy a workflow?
+</emphasis>
+</citetitle>
+</para>
+{docbook}
+
 The _addPlugin()_ function of _WorkflowServiceContainer_ service is used to register a Business Process when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure the workflow service to invoke the _addPlugin()_ function by adding the _external-component-plugins_ element to the configuration file.
 
 You have to set values for the name and location of the workflow which you want to use. There are two ways to configure the location of the workflow.
 
-h2. Deploy a workflow inside a _.war_ file {anchor:id=CONTref.FAQ.DeployWorkflowWarFile}
+* *Deploy a workflow inside a _.war_ file* {anchor:id=CONTref.FAQ.DeployWorkflowWarFile}
 
 You can use "war:(FOLDER_PATH)" to configure which _.jar_ files contain your workflow processes inside the _.war_ file.
 	
@@ -43,7 +52,7 @@ You can use "war:(FOLDER_PATH)" to configure which _.jar_ files contain your wor
 </external-component-plugins>
 {code}
 
-h2. Deploy a workflow inside a .jar file {anchor:id=CONTref.FAQ.DeployWorkflowJarFile}
+* *Deploy a workflow inside a .jar file* {anchor:id=CONTref.FAQ.DeployWorkflowJarFile}
 
 
 You can use _classpath\:_ to configure which _.jar_ files contain your workflow processes inside the _.jar_ file.

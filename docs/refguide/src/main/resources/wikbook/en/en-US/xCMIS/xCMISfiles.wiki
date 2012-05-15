@@ -1,0 +1,56 @@
+
+{info}
+JCRs are listed below for the informational purpose only. For example, if the customer application needs to use the same third-parties used by eXo CMIS but with another version.
+All files are delivered in eXo Platform 3.5 distribution.
+{info}
+
+eXo CMIS consists of JAR files below:
+
+{docbook}
+<para>
+
+<citetitle>
+xCMIS project files (for xCMIS 1.2.x)
+</citetitle>
+</para>
+{docbook}
+
+* xcmis-renditions-X.X.X.jar
+* xcmis-restatom-X.X.X.jar
+* xcmis-search-model-X.X.X.jar
+* xcmis-search-parser-cmis-X.X.X.jar
+* xcmis-search-service-X.X.X.jar
+* xcmis-spi-X.X.X.jar
+
+{docbook}
+<para>
+<citetitle>
+eXo WCM Storage Provider for xCMIS SPI (uses the same version as the WCM/ECMS system)
+</citetitle>
+</para>
+{docbook}
+
+
+* exo-ecms-ext-xcmis-sp-Y.Y.Y.jar 
+
+{docbook}
+<para>
+<citetitle>
+Third-party dependencies (for xCMIS 1.2.x)
+</citetitle>
+</para>
+{docbook}
+
+* _abdera-client-0.4.0-incubating.jar_
+* _abdera-core-0.4.0-incubating.jar_
+* _abdera-i18n-0.4.0-incubating.jar_
+* _abdera-parser-0.4.0-incubating.jar_
+* _abdera-server-0.4.0-incubating.jar_
+* _antlr-runtime-3.1.3.jar_
+* _axiom-api-1.2.5.jar_
+* _axiom-impl-1.2.5.jar_
+* _jaxen-1.1.1.jar_
+* _lucene-regex-2.4.1.jar_
+
+
+
