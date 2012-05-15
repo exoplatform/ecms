@@ -144,7 +144,9 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     UIECMAdminWorkingArea uiecmAdminWorkingArea = getChild(UIECMAdminWorkingArea.class);
     UIUnLockManager uiUnLockManager = uiecmAdminWorkingArea.getChild(UIUnLockManager.class);
-    if (uiUnLockManager != null) uiUnLockManager.update();
+    if (uiUnLockManager != null && uiUnLockManager.isRendered()) {
+      uiUnLockManager.update();
+    }
     super.processRender(app, context);
   }
 
