@@ -239,7 +239,8 @@
 
 .UIJCRExplorerPortlet .UIListView .UIListGrid {
 	-moz-user-select: none;
-	overflow: auto;
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 
 .UIJCRExplorerPortlet .UIListView .TitleTable {
