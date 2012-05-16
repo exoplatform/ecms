@@ -487,7 +487,7 @@
 				  split.className = 'Split';
 				}
 				elementSpace += uiTabs[i].offsetWidth + 10;
-				var subItem = DOM.findFirstDescendantByClass(uiTabs[i], "a", "SubTabIcon");
+				var subItem = DOM.findFirstDescendantByClass(uiTabs[i], "div", "SubTabIcon");
 				eXo.ecm.ECMUtils.removeElementListHide(subItem);
 				lastIndex = i;
 			}
@@ -501,13 +501,13 @@
 
 	ECMUtils.prototype.addElementListHide = function(obj) {
 		var tmpNode = obj.cloneNode(true);
-		var subItem = DOM.findFirstDescendantByClass(tmpNode, "a", "SubTabIcon");
+		var subItem = DOM.findFirstDescendantByClass(tmpNode, "div", "SubTabIcon");
 		var split = DOM.findFirstDescendantByClass(tmpNode, "div", "Split");
 		var listHideIcon = document.getElementById('IconListHideElement');
 		var listHideContainer = DOM.findFirstDescendantByClass(listHideIcon, "div", "ListHideContainer");
 		var uiTabs = DOM.findDescendantsByClass(listHideContainer, "div", "SubTabItem");
 		for(var i = 0; i < uiTabs.length; i++) {
-			var hideSubItem = DOM.findFirstDescendantByClass(uiTabs[i], "a", "SubTabIcon");
+			var hideSubItem = DOM.findFirstDescendantByClass(uiTabs[i], "div", "SubTabIcon");
 			if(hideSubItem.className == subItem.className) {
 				return;
 			}
@@ -533,7 +533,7 @@
 		var uiTabs = DOM.findDescendantsByClass(listHideContainer, "div", "SubTabItem");
 		var tmpNode = false;
 		for(var i = 0; i < uiTabs.length; i++) {
-			tmpNode = DOM.findFirstDescendantByClass(uiTabs[i], "a", "SubTabIcon");
+			tmpNode = DOM.findFirstDescendantByClass(uiTabs[i], "div", "SubTabIcon");
 			if(tmpNode.className == obj.className) {
 				listHideContainer.removeChild(uiTabs[i]);
 			}
