@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete element from project &apos;exo-ecms-core-webui&apos;&#x0A;- Original project: &apos;exo-ecms-core-webui&apos;&#x0A;- Original element: &apos;org.exoplatform.wcm.webui.validator.Test.java&apos;" description="Delete element" element1="/src\/main\/java&lt;org.exoplatform.wcm.webui.validator{Test.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1336460340579" subPackages="false" version="1.0"/>
-</session>
