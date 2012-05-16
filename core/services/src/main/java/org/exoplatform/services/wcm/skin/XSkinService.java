@@ -24,7 +24,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.resource.SkinService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -97,9 +96,7 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   public void updatePortalSkinOnModify(Node portal, Node cssFile) throws Exception {
-    String repository = ((ManageableRepository) portal.getSession().getRepository()).getConfiguration()
-                                                                                    .getName();
-    String sharedPortalName = configurationService.getSharedPortalName(repository);
+    String sharedPortalName = configurationService.getSharedPortalName();
     if (sharedPortalName.equals(portal.getName())) {
       addSharedPortalSkin(portal);
     } else {

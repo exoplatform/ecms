@@ -71,7 +71,6 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
    * Test get runtime context param.
    */
   public void testGetRuntimeContextParam() {
-    assertEquals("redactor:/platform/web-contributors", configurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP));
     assertEquals("/detail", configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI));
     assertEquals("/printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_PAGE_URI));
     assertEquals("printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_VIEWER_PAGE));
@@ -86,7 +85,6 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
    */
   public void testGetRuntimeContextParams() {
     Collection<String> runtimeContextParams = configurationService.getRuntimeContextParams();
-    assertTrue(runtimeContextParams.contains("redactor:/platform/web-contributors"));
     assertTrue(runtimeContextParams.contains("/detail"));
     assertTrue(runtimeContextParams.contains("/printviewer"));
     assertTrue(runtimeContextParams.contains("printviewer"));
@@ -94,14 +92,14 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertTrue(runtimeContextParams.contains("/presentation/SingleContentViewer"));
     assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl"));
     assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl"));
-    assertEquals(8, runtimeContextParams.size());
+    assertEquals(7, runtimeContextParams.size());
   }
 
   /**
    * Test get shared portal name.
    */
   public void testGetSharedPortalName() {
-    assertEquals("shared", configurationService.getSharedPortalName("repository"));
+    assertEquals("shared", configurationService.getSharedPortalName());
   }
 
   /**

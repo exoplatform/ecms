@@ -31,8 +31,6 @@
         <name>RuntimeContextParams</name>
         <description>some params for runtime</description>
 
-        <property name="newsletterManageMembership" value="redactor:/platform/web-contributors" />
-
         <property name="parameterizedPageURI" value="/detail" />
         <property name="printPageURI" value="/printviewer" />
         <property name="printViewerPage" value="printviewer" />
@@ -165,6 +163,23 @@
   </component>		
 	
   <component>
+    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
+    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
+    <init-params>
+      <values-param>
+        <name>ignored.portals</name>
+        <description>initial portals. the service will not deploy data to the initial portal</description>
+        <value>classic</value>
+      </values-param>
+    </init-params>
+  </component>	
+		
+		  <component>
+    <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
+    <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
+  </component>
+	
+  <component>
     <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
     <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
     <component-plugins>
@@ -181,6 +196,16 @@
         </init-params>
       </component-plugin>
     </component-plugins>
+    <init-params>
+      <value-param>
+        <name>isEnabledFuzzySearch</name>
+        <value>true</value>
+      </value-param>
+      <value-param>
+        <name>fuzzySearchIndex</name>
+        <value></value>
+      </value-param>
+    </init-params>
   </component>
 	
   <component>

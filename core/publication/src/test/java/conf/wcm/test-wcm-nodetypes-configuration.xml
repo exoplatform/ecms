@@ -258,5 +258,67 @@
       </propertyDefinition>      
     </propertyDefinitions>
   </nodeType>
+		
+				  <nodeType name="exo:drive" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+    	<supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:accessPermissions" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:path" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:views" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:icon" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewPreferences" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewNonDocument" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewSideBar" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:showHiddenNode" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowCreateFolders" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowNodeTypesOnTree" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+            <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
 
 </nodeTypes>

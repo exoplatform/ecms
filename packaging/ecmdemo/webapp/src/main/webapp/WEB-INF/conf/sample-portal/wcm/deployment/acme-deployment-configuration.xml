@@ -328,25 +328,7 @@
             </field>
           </object>
         </object-param>
-        <object-param>
-          <name>ACME Newsletter header</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/acme/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/NewsletterHeader.xml</string>
-            </field>
-          </object>
-        </object-param>
+        
         <object-param>
           <name>ACME Form Confirmation</name>
           <description>Deployment Descriptor</description>
@@ -363,26 +345,6 @@
             </field>
             <field name="sourcePath">
               <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Confirmation.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
-        <object-param>
-          <name>Demo newsletter for acme site</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/acme/ApplicationData/NewsletterApplication/DefaultTemplates</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/newsletter/newsletterBasicTemplate.xml</string>
             </field>
           </object>
         </object-param>

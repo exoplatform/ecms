@@ -150,42 +150,4 @@
     </portlet-application>
   </page>
 
-  <page>
-    <name>newslettermanager</name>
-    <title>Newsletter Manager Portlet</title>
-    <access-permissions>*:/platform/web-contributors</access-permissions>
-    <edit-permission>manager:/platform/web-contributors</edit-permission>
-    <portlet-application>
-      <portlet>
-        <application-ref>newsletter</application-ref>
-        <portlet-ref>NewsletterManagerPortlet</portlet-ref>
-        <preferences></preferences>
-      </portlet>
-      <title>Newsletter manager</title>
-      <access-permissions>*:/platform/web-contributors</access-permissions>
-      <show-info-bar>false</show-info-bar>
-      <show-application-state>false</show-application-state>
-      <show-application-mode>false</show-application-mode>
-    </portlet-application>
-  </page>
-
-  <page>
-    <name>formgenerator</name>
-    <title>Form Generator Portlet</title>
-    <access-permissions>*:/platform/web-contributors</access-permissions>
-    <edit-permission>manager:/platform/web-contributors</edit-permission>
-    <portlet-application>
-      <portlet>
-        <application-ref>formgenerator</application-ref>
-        <portlet-ref>FormGeneratorPortlet</portlet-ref>
-        <preferences></preferences>
-      </portlet>
-      <title>Form generator</title>
-      <access-permissions>*:/platform/web-contributors</access-permissions>
-      <show-info-bar>false</show-info-bar>
-      <show-application-state>false</show-application-state>
-      <show-application-mode>false</show-application-mode>
-    </portlet-application>
-  </page>
-
 </page-set>

@@ -60,17 +60,6 @@
     </node>
 
     <node>
-      <uri>newsletters</uri>
-      <name>newsletters</name>
-      <label xml:lang="en">Newsletters</label>
-      <label xml:lang="fr">Lettres d'information</label>
-      <label xml:lang="vi">Thư giới thiệu</label>
-      <label xml:lang="pt-BR">Newsletters</label>
-      <visibility>DISPLAYED</visibility>
-      <page-reference>portal::@owner@::newsletters</page-reference>
-    </node>
-
-    <node>
       <uri>contactus</uri>
       <name>contactus</name>
       <label xml:lang="en">Contact Us</label>

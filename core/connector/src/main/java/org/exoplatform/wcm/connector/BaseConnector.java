@@ -140,30 +140,27 @@ public abstract class BaseConnector {
   protected Response buildXMLResponseOnExpand(String currentFolder,
                                               String runningPortal,
                                               String workspaceName,
-                                              String repositoryName,
                                               String jcrPath,
                                               String command) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node sharedPortalNode = livePortalManagerService.getLiveSharedPortal(sessionProvider, repositoryName);
-    Node activePortalNode = getCurrentPortalNode(repositoryName,
-                                                 jcrPath,
+    Node sharedPortalNode = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+    Node activePortalNode = getCurrentPortalNode(jcrPath,
                                                  runningPortal,
                                                  sharedPortalNode);
     if (currentFolder.length() == 0 || "/".equals(currentFolder))
       return buildXMLResponseForRoot(activePortalNode, sharedPortalNode, command);
     String currentPortalRelPath = "/" + activePortalNode.getName() + "/";
     String sharePortalRelPath = "/" + sharedPortalNode.getName() + "/";
-    Node webContent = getWebContent(repositoryName, workspaceName, jcrPath);
+    Node webContent = getWebContent(workspaceName, jcrPath);
     if (!activePortalNode.getPath().equals(sharedPortalNode.getPath())
         && currentFolder.startsWith(sharePortalRelPath)) {
       if (currentFolder.equals(sharePortalRelPath)) {
         return buildXMLResponseForPortal(sharedPortalNode, null, command);
-      } else {
-        Node currentContentStorageNode = getCorrectContentStorage(sharedPortalNode,
-                                                                  null,
-                                                                  currentFolder);
-        return buildXMLResponseForContentStorage(currentContentStorageNode, command);
       }
+      Node currentContentStorageNode = getCorrectContentStorage(sharedPortalNode,
+          null,
+          currentFolder);
+      return buildXMLResponseForContentStorage(currentContentStorageNode, command);
     } else if (!activePortalNode.getPath().equals(sharedPortalNode.getPath())
         && currentFolder.startsWith(currentPortalRelPath)) {
       return buildXMLResponseCommon(activePortalNode, webContent, currentFolder, command);
@@ -443,12 +440,11 @@ public abstract class BaseConnector {
    * @return the web content
    * @throws Exception the exception
    */
-  protected Node getWebContent(String repositoryName, String workspaceName, String jcrPath) throws Exception {
-    return getContent(repositoryName, workspaceName, jcrPath, "exo:webContent", true);
+  protected Node getWebContent(String workspaceName, String jcrPath) throws Exception {
+    return getContent(workspaceName, jcrPath, "exo:webContent", true);
   }
 
-  protected Node getCurrentPortalNode(String repositoryName,
-                                      String jcrPath,
+  protected Node getCurrentPortalNode(String jcrPath,
                                       String runningPortal,
                                       Node sharedPortal) throws Exception {
     if (jcrPath == null || jcrPath.length() == 0)
@@ -457,7 +453,7 @@ public abstract class BaseConnector {
     List<Node> livePortaNodes = new ArrayList<Node>();
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
-      livePortaNodes = livePortalManagerService.getLivePortals(sessionProvider, repositoryName);
+      livePortaNodes = livePortalManagerService.getLivePortals(sessionProvider);
       if (sharedPortal != null)
         livePortaNodes.add(sharedPortal);
       for (Node portalNode : livePortaNodes) {
@@ -466,7 +462,7 @@ public abstract class BaseConnector {
           currentPortal = portalNode;
       }
       if (currentPortal == null)
-        currentPortal = livePortalManagerService.getLivePortal(sessionProvider, repositoryName, runningPortal);
+        currentPortal = livePortalManagerService.getLivePortal(sessionProvider, runningPortal);
       return currentPortal;
     } catch (Exception e) {
       return null;

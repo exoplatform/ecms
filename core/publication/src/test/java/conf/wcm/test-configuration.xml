@@ -30,9 +30,6 @@
       <properties-param>
         <name>RuntimeContextParams</name>
         <description>some params for runtime</description>
-
-        <property name="newsletterManageMembership" value="redactor:/platform/web-contributors" />
-
         <property name="parameterizedPageURI" value="/detail" />
         <property name="printPageURI" value="/printviewer" />
         <property name="printViewerPage" value="printviewer" />
@@ -146,6 +143,23 @@
     <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
     <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
   </component>
+		
+		  <component>
+    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
+    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
+    <init-params>
+      <values-param>
+        <name>ignored.portals</name>
+        <description>initial portals. the service will not deploy data to the initial portal</description>
+        <value>classic</value>
+      </values-param>
+    </init-params>
+  </component>	
+		
+		  <component>
+    <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
+    <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
+  </component>
 	
 	<component>
     <key>org.exoplatform.services.cms.templates.TemplateService</key>
@@ -163,25 +177,6 @@
       </properties-param>
     </init-params>
   </component>		
-	
-  <component>
-    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
-    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>ExcludeMimeTypes</name>
-        <set-method>addExcludeIncludeDataTypePlugin</set-method>
-        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
-        <init-params>
-          <properties-param>
-            <name>search.exclude.datatypes</name>
-            <description>exclude some data type when search</description>
-            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
-          </properties-param>
-        </init-params>
-      </component-plugin>
-    </component-plugins>
-  </component>
 	
   <component>
     <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>

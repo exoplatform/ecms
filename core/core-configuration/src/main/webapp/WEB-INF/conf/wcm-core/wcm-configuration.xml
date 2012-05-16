@@ -148,6 +148,26 @@
     <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>     
   </component>	
 		
+  <component>
+    <key>org.exoplatform.services.mail.MailService</key>
+    <type>org.exoplatform.services.mail.impl.MailServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>config</name>
+        <property name="mail.smtp.auth.username" value="${gatein.email.smtp.username}" />
+        <property name="mail.smtp.auth.password" value="${gatein.email.smtp.password}" />
+        <property name="mail.smtp.host" value="${gatein.email.smtp.host}" />
+        <property name="mail.smtp.port" value="${gatein.email.smtp.port}" />
+        <property name="mail.smtp.starttls.enable" value="${gatein.email.smtp.starttls.enable}" />
+        <property name="mail.smtp.auth" value="${gatein.email.smtp.auth}" />
+        <property name="mail.smtp.debug" value="false" />
+        <property name="mail.smtp.socketFactory.port" value="${gatein.email.smtp.socketFactory.port}" />
+        <property name="mail.smtp.socketFactory.class" value="${gatein.email.smtp.socketFactory.class}" />
+        <property name="mail.smtp.socketFactory.fallback" value="false" />
+      </properties-param>
+    </init-params>
+  </component>		
+		
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>

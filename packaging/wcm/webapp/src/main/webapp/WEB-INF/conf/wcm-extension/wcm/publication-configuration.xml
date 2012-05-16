@@ -70,11 +70,11 @@
       <name>addExoCacheConfig</name>
       <set-method>addExoCacheConfig</set-method>
       <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for query service</description>
+      <description>Configures the cache for wcm composer</description>
       <init-params>
         <object-param>
           <name>cache.config.wcm.composer</name>
-          <description>The default cache configuration</description>
+          <description>The cache configuration for wcm composer</description>
           <object type="org.exoplatform.services.cache.ExoCacheConfig">
             <field name="name">
               <string>wcm.composer</string>
@@ -159,12 +159,6 @@
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener</type>
       <description>this listener will change state of document to draft after editing</description>
-    </component-plugin>
-    <component-plugin>
-      <name>FormGenerator.event.postCreate</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.post.PostCreateNodeTypeEventListener</type>
-      <description>this listener will reinit the composer templates list when creating a new nodetype</description>
     </component-plugin>
   </external-component-plugins>
   

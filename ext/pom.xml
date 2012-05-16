@@ -12,9 +12,6 @@
   <description>eXo Entreprise Content Management Suite :: Extensions</description>
   <modules>
     <module>authoring</module>
-    <module>deprecated</module>
-    <module>workflow</module>
-    <module>newsletter</module>
     <module>formgenerator</module>
     <module>xcmis</module>
     <module>webui</module>

@@ -173,14 +173,13 @@ public class UIContentSearchResult extends UIGrid {
   public Session getSession() throws Exception {
     RepositoryService repoService = getApplicationComponent(RepositoryService.class);
     ManageableRepository maRepository = repoService.getCurrentRepository();
-    String repository = maRepository.getConfiguration().getName();
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences prefs = pContext.getRequest().getPreferences();
     String workspace = prefs.getValue("workspace", null);
     if(workspace == null) {
       WCMConfigurationService wcmConfService =
         getApplicationComponent(WCMConfigurationService.class);
-      NodeLocation nodeLocation = wcmConfService.getLivePortalsLocation(repository);
+      NodeLocation nodeLocation = wcmConfService.getLivePortalsLocation();
       workspace = nodeLocation.getWorkspace();
     }
     Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, maRepository);

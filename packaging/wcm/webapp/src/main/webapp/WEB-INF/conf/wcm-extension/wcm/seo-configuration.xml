@@ -48,7 +48,7 @@
       <init-params>
         <object-param>
           <name>cache.config.wcm.seo</name>
-          <description>The default cache configuration</description>
+          <description>The cache configuration for SEO</description>
           <object type="org.exoplatform.services.cache.ExoCacheConfig">
             <field name="name">
               <string>wcm.seo</string>

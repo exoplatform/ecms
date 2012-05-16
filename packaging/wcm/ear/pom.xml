@@ -74,11 +74,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-newsletter-services</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-search</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -117,13 +112,7 @@
       <artifactId>exo-ecms-ext-formgenerator-portlet</artifactId>
       <version>${project.version}</version>
       <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-newsletter-portlet</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-apps-portlet-presentation</artifactId>
@@ -292,19 +281,7 @@
     </dependency>
 
   </dependencies>
-
-<!-- 
-exo-ecms-ext-deprecated-portlet-browsecontent
-exo-ecms-ext-deprecated-portlet-jcrconsole
-exo-ecms-delivery-wcm-server-jonas
-exo-ecms-delivery-wcm-server-tomcat
-exo-ecms-packaging-ecmdemo-config
-exo-ecms-packaging-wcm-ear
-exo-ecms-packaging-ecmdemo-ear
-exo-ecms-packaging-ecmdemo-rest-webapp
-exo-ecms-packaging-ecmdemo-webapp
--->
-  
+ 
   <build>
     <finalName>gatein-wcm-extension-${project.version}</finalName>
     <plugins>
@@ -378,11 +355,6 @@ exo-ecms-packaging-ecmdemo-webapp
             <jarModule>
 			  <groupId>org.exoplatform.commons</groupId>
 			  <artifactId>exo.platform.commons.component.upgrade</artifactId>
-              <includeInApplicationXml>true</includeInApplicationXml>
-            </jarModule>
-            <jarModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-newsletter-services</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
@@ -546,13 +518,7 @@ exo-ecms-packaging-ecmdemo-webapp
               <artifactId>exo-ecms-ext-formgenerator-portlet</artifactId>
               <contextRoot>formgenerator</contextRoot>
               <bundleFileName>formgenerator.war</bundleFileName>
-            </webModule>
-            <webModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-newsletter-portlet</artifactId>
-              <contextRoot>newsletter</contextRoot>
-              <bundleFileName>newsletter.war</bundleFileName>
-            </webModule>
+            </webModule>            
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-apps-portlet-search</artifactId>

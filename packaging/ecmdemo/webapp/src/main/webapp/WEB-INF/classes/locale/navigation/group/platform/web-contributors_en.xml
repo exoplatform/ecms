@@ -3,10 +3,6 @@
   <administration>
     <siteExplorer>Content Explorer</siteExplorer>
     <wcmAdmin>Administration</wcmAdmin>
-    <newslettermanager>Newsletters</newslettermanager>
-    <formgenerator>Form Builder</formgenerator>
-		<workflowcontroller>Business Process Controller</workflowcontroller>
-		<workflowAdministration>Business Process Admin</workflowAdministration>
   </administration>
 </bundle>
 

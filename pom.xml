@@ -43,11 +43,6 @@
     <axiom.version>1.2.5</axiom.version>
     <jaxen.version>1.1.1</jaxen.version>
     <xml.parser.version>3.1</xml.parser.version>
-    <!-- workflow implementations -->
-    <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
-    <bonita.version>4.1</bonita.version>
-    <!-- Default wkf impl to use -->
-    <workflowEngine>jbpm</workflowEngine>
     <!-- 3rd parties -->
     <c3p0.version>0.9.1.2</c3p0.version>
     <org.gatein.wci.version>2.1.0-GA</org.gatein.wci.version>
@@ -106,7 +101,7 @@
     <exo.product.name>exo-wcm</exo.product.name>
     <exo.product.specification>2.0</exo.product.specification>
     <org.owasp.antisamy.version>1.4.5</org.owasp.antisamy.version>
-		<org.apache.batik.version>1.7</org.apache.batik.version>
+    <org.apache.batik.version>1.7</org.apache.batik.version>
     <org.apache.batik-util.version>1.6</org.apache.batik-util.version>
     <org.w3c.sac.version>1.3</org.w3c.sac.version>
     <!-- exopackage -->
@@ -380,18 +375,6 @@
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>bonita</id>
-      <properties>
-        <workflowEngine>bonita</workflowEngine>
-      </properties>
-    </profile>
-    <profile>
-      <id>jbpm</id>
-      <properties>
-        <workflowEngine>jbpm</workflowEngine>
-      </properties>
-    </profile>
     <profile>
       <id>release</id>
       <build>

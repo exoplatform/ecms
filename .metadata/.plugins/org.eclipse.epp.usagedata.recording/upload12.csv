@@ -1,0 +1,251 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151449444
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151454603
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151456163
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151458942
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151459314
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151467818
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151471537
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151475613
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151477964
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151482182
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151488507
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151493572
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1337151493656
+closed,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151493914
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151495567
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151496521
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151506691
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151515787
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151517524
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151518070
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151524887
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151529105
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151549784
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151554414
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151555063
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151556760
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151557008
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151558520
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151558974
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151561825
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151563597
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151564002
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151565419
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151569900
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151570220
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151572240
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151573111
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151573492
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151573856
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151574267
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151575989
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151576262
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151578051
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151578821
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151579362
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151579691
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151580119
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151584054
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151584284
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151584351
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151586620
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151587029
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151587681
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151588449
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151590756
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151590988
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151591053
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151594033
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151594358
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151594436
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151596210
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151596515
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151598415
+opened,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.PropertiesFileEditor",1337151601307
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.PropertiesFileEditor",1337151601392
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151605651
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151606396
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151606877
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151608855
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151609275
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151610942
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151611192
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151611270
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151613754
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1337151616310
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151619633
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151620272
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151620806
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151621308
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151621941
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151625132
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151631918
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151653647
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151655999
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151659173
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1337151659262
+closed,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151659391
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151665113
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151665358
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151668712
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151669710
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151671180
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1337151671245
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151674211
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151675698
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151679076
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151684677
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151688552
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151690344
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151690602
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151704549
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151713590
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151715173
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151720913
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151724914
+closed,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151725155
+started,bundle,org.eclipse.ant.ui,3.5.100.v20110510,"org.eclipse.ant.ui",1337151725234
+opened,editor,org.eclipse.wst.xml.ui,1.1.201.v201108151912,"org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart",1337151725319
+error,log,,,"Core exception while retrieving the content description",1337151725560
+error,log,,,"Core exception while retrieving the content description",1337151725561
+error,log,,,"Core exception while retrieving the content description",1337151725619
+error,log,,,"Core exception while retrieving the content description",1337151725620
+error,log,,,"Core exception while retrieving the content description",1337151725622
+error,log,,,"Core exception while retrieving the content description",1337151725623
+error,log,,,"Core exception while retrieving the content description",1337151725624
+error,log,,,"Core exception while retrieving the content description",1337151725653
+error,log,,,"Core exception while retrieving the content description",1337151725709
+error,log,,,"Core exception while retrieving the content description",1337151725711
+error,log,,,"Core exception while retrieving the content description",1337151725713
+error,log,,,"Core exception while retrieving the content description",1337151725714
+error,log,,,"Core exception while retrieving the content description",1337151725716
+error,log,,,"Core exception while retrieving the content description",1337151725717
+error,log,,,"Core exception while retrieving the content description",1337151725765
+error,log,,,"Core exception while retrieving the content description",1337151725767
+error,log,,,"Core exception while retrieving the content description",1337151725810
+error,log,,,"Core exception while retrieving the content description",1337151725812
+error,log,,,"Core exception while retrieving the content description",1337151725984
+error,log,,,"Core exception while retrieving the content description",1337151725986
+error,log,,,"Core exception while retrieving the content description",1337151725987
+error,log,,,"Core exception while retrieving the content description",1337151726002
+error,log,,,"Core exception while retrieving the content description",1337151726004
+error,log,,,"Core exception while retrieving the content description",1337151726338
+error,log,,,"Core exception while retrieving the content description",1337151726339
+error,log,,,"Core exception while retrieving the content description",1337151726340
+error,log,,,"Core exception while retrieving the content description",1337151726372
+error,log,,,"Core exception while retrieving the content description",1337151726374
+closed,editor,org.eclipse.wst.xml.ui,1.1.201.v201108151912,"org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart",1337151726909
+opened,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151731609
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151731709
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1337151737239
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151738729
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151740915
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1337151741051
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151742592
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151750727
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151755227
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151757699
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151757925
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151767278
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151767767
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151771358
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151775071
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151788409
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151794590
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151794748
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151811007
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151811197
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151834956
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151835407
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151837694
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151839756
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151839992
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151844372
+no handler,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1337151846837
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151847329
+opened,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151847647
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151847951
+executed,command,org.eclipse.ui.ide,3.7.0.v20110809-1737,"org.eclipse.ui.navigate.openResource",1337151847965
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151859569
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151861441
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151861699
+executed,command,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace",1337151861935
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151862766
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151872206
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151875729
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151876691
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151877523
+started,bundle,org.eclipse.mylyn.java.tasks,3.7.0.v20120319-0200,"org.eclipse.mylyn.java.tasks",1337151878759
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151879996
+opened,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151880412
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151880745
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151892883
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151896432
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1337151898310
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151901377
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151905071
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151909058
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151909159
+executed,command,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.openSearchDialog",1337151909255
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151909788
+error,log,,,"Problems encountered during text search.",1337151913519
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151916416
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151916694
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151918165
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1337151918305
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151920757
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151921331
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151924283
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151924702
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151926364
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151928995
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151930522
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151931363
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151931994
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151933542
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151936282
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151937686
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151938179
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151939109
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151940638
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151957454
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151959001
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151959460
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151960282
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151963990
+activated,editor,com.aptana.ide.editor.xml,1.5.0.25354,"com.aptana.ide.editors.XMLEditor",1337151964214
+error,log,,,"Core exception while retrieving the content description",1337151964647
+error,log,,,"Core exception while retrieving the content description",1337151964649
+error,log,,,"Core exception while retrieving the content description",1337151964651
+error,log,,,"Core exception while retrieving the content description",1337151964652
+error,log,,,"Core exception while retrieving the content description",1337151964653
+error,log,,,"Core exception while retrieving the content description",1337151964654
+error,log,,,"Core exception while retrieving the content description",1337151964700
+error,log,,,"Core exception while retrieving the content description",1337151964701
+error,log,,,"Core exception while retrieving the content description",1337151964703
+error,log,,,"Core exception while retrieving the content description",1337151964704
+error,log,,,"Core exception while retrieving the content description",1337151964705
+error,log,,,"Core exception while retrieving the content description",1337151964706
+error,log,,,"Core exception while retrieving the content description",1337151964708
+error,log,,,"Core exception while retrieving the content description",1337151964709
+error,log,,,"Core exception while retrieving the content description",1337151964711
+error,log,,,"Core exception while retrieving the content description",1337151964712
+error,log,,,"Core exception while retrieving the content description",1337151964714
+error,log,,,"Core exception while retrieving the content description",1337151964715
+error,log,,,"Core exception while retrieving the content description",1337151964717
+error,log,,,"Core exception while retrieving the content description",1337151964718
+error,log,,,"Core exception while retrieving the content description",1337151964720
+error,log,,,"Core exception while retrieving the content description",1337151964721
+error,log,,,"Core exception while retrieving the content description",1337151964722
+error,log,,,"Core exception while retrieving the content description",1337151964723
+error,log,,,"Core exception while retrieving the content description",1337151964725
+error,log,,,"Core exception while retrieving the content description",1337151964726
+error,log,,,"Core exception while retrieving the content description",1337151964728
+error,log,,,"Core exception while retrieving the content description",1337151964729
+error,log,,,"Core exception while retrieving the content description",1337151964730
+error,log,,,"Core exception while retrieving the content description",1337151964731
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151966236
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.delete.line",1337151967071
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1337151967493
+activated,view,org.eclipse.search,3.7.0.v20110505-0800,"org.eclipse.search.ui.views.SearchView",1337151970227

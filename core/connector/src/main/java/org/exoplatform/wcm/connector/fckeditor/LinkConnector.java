@@ -87,7 +87,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
                                      @QueryParam("type") String type) throws Exception {
     try {
       Response response = buildXMLResponseOnExpand(currentFolder, currentPortal, workspaceName,
-                                                   repositoryName, jcrPath, command);
+                                                   jcrPath, command);
       if (response != null)
         return response;
     } catch (Exception e) {
@@ -109,13 +109,11 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   protected Response buildXMLResponseOnExpand(String currentFolder,
                                               String runningPortal,
                                               String workspaceName,
-                                              String repositoryName,
                                               String jcrPath,
                                               String command) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider, repositoryName);
-    Node currentPortalNode = getCurrentPortalNode(repositoryName,
-                                                  jcrPath,
+    Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
+    Node currentPortalNode = getCurrentPortalNode(jcrPath,
                                                   runningPortal,
                                                   sharedPortal);
     if (currentFolder.length() == 0 || "/".equals(currentFolder))
@@ -126,10 +124,9 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
         && currentFolder.startsWith(sharePortalRelPath)) {
       if (currentFolder.equals(sharePortalRelPath)) {
         return buildXMLResponseForPortal(sharedPortal, null, command);
-      } else {
-        Node currentContentStorageNode = getCorrectContentStorage(sharedPortal, null, currentFolder);
-        return buildXMLResponseForContentStorage(currentContentStorageNode, command);
       }
+      Node currentContentStorageNode = getCorrectContentStorage(sharedPortal, null, currentFolder);
+      return buildXMLResponseForContentStorage(currentContentStorageNode, command);
     } else if (!currentPortalNode.getPath().equals(sharedPortal.getPath())
         && currentFolder.startsWith(currentPortalRelPath)) {
       return buildXMLResponseCommon(currentPortalNode, null, currentFolder, command);

@@ -120,7 +120,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
   public final Node getLivePortal(final SessionProvider sessionProvider,
                                   final String repository,
                                   final String portalName) throws Exception {
-    Node portalsStorage = getLivePortalsStorage(sessionProvider, repository);
+    Node portalsStorage = getLivePortalsStorage(sessionProvider);
     return portalsStorage.getNode(portalName);
   }
 
@@ -132,7 +132,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
    */
   public final List<Node> getLivePortals(final SessionProvider sessionProvider, final String repository) throws Exception {
     List<Node> list = new ArrayList<Node>();
-    Node portalsStorage = getLivePortalsStorage(sessionProvider, repository);
+    Node portalsStorage = getLivePortalsStorage(sessionProvider);
     for (NodeIterator iterator = portalsStorage.getNodes(); iterator.hasNext(); ) {
       Node node = iterator.nextNode();
       if (PORTAL_FOLDER.equals(node.getPrimaryNodeType().getName())) {
@@ -150,19 +150,18 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
    */
   public final Node getLiveSharedPortal(final SessionProvider sessionProvider,
                                         final String repository) throws Exception {
-    Node portalsStorage = getLivePortalsStorage(sessionProvider, repository);
-    String sharePortalName = wcmConfigService.getSharedPortalName(repository);
+    Node portalsStorage = getLivePortalsStorage(sessionProvider);
+    String sharePortalName = wcmConfigService.getSharedPortalName();
     return portalsStorage.getNode(sharePortalName);
   }
 
-  private Node getLivePortalsStorage(final SessionProvider sessionProvider, final String repository) throws Exception {
-    NodeLocation locationEntry = wcmConfigService.getLivePortalsLocation(repository);
+  private Node getLivePortalsStorage(final SessionProvider sessionProvider) throws Exception {
+    NodeLocation locationEntry = wcmConfigService.getLivePortalsLocation();
     String workspace = locationEntry.getWorkspace();
     String portalsStoragePath = locationEntry.getPath();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace,manageableRepository);
-    Node livePortal = (Node)session.getItem(portalsStoragePath);
-    return livePortal;
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    return (Node)session.getItem(portalsStoragePath);
   }
 
   /*
@@ -174,8 +173,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
    */
   public final void addLivePortal(final SessionProvider sessionProvider, final PortalConfig portalConfig)
   throws Exception {
-    String currentRepository = repositoryService.getCurrentRepository().getConfiguration().getName();
-    Node livePortalsStorage = getLivePortalsStorage(sessionProvider,currentRepository) ;
+    Node livePortalsStorage = getLivePortalsStorage(sessionProvider) ;
     String portalName = portalConfig.getName();
     if(livePortalsStorage.hasNode(portalName)) {
       return;
@@ -196,8 +194,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     newPortal.getSession().save();
     //put sharedPortal path to the map at the first time when run this method
     if(livePortalPaths.size() == 0) {
-      String sharedPortalName = wcmConfigService.getSharedPortalName(currentRepository);
-      NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation(currentRepository);
+      String sharedPortalName = wcmConfigService.getSharedPortalName();
+      NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation();
       livePortalPaths.put(sharedPortalName,nodeLocation.getPath() + "/"+ sharedPortalName);
     }
     livePortalPaths.put(portalName,newPortal.getPath());
@@ -256,7 +254,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     try {
       sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = repositoryService.getCurrentRepository();
-      NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation(repository.getConfiguration().getName());
+      NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation();
       session = sessionProvider.getSession(nodeLocation.getWorkspace(),repository);
       String statement = "select * from exo:portalFolder where jcr:path like '" + nodeLocation.getPath() + "/%'";
       Query query = session.getWorkspace().getQueryManager().createQuery(statement,Query.SQL);

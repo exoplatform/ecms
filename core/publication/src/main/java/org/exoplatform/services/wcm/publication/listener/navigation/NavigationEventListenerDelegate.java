@@ -40,7 +40,6 @@ import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -171,8 +170,7 @@ public class NavigationEventListenerDelegate {
 
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
-    NodeLocation nodeLocation = wcmConfigurationService.getLivePortalsLocation(repository.getConfiguration().getName());
+    NodeLocation nodeLocation = wcmConfigurationService.getLivePortalsLocation();
     String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
 
     String workspaceName = nodeLocation.getWorkspace();

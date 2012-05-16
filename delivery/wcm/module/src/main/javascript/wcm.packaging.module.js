@@ -8,8 +8,7 @@ function getModule(params) {
   var ws = params.ws;
   var jcr = params.eXoJcr;
   var portal = params.portal;
-  var dms = params.dms;
-  
+    
   var module = new Module();
 
   module.version = "${project.version}" ;
@@ -42,24 +41,41 @@ function getModule(params) {
     addDependency(jcr.frameworks.command).
     addDependency(portal.webui.portal);
   module.portlet.webpresentation.deployName = "presentation";
+
+  module.portlet.ecmadmin = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-administration", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-viewer", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-connector", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.webui.ext", "jar", "${org.exoplatform.commons.version}")).
+    addDependency(new Project("org.exoplatform", "exo-jcr-services", "jar", "${org.exoplatform.jcr-services.version}")).
+    addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "${itunes.podcast.version}")) .
+    addDependency(new Project("org.icepdf", "icepdf-core", "jar", "${icepdf.version}")).
+    addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "${icepdf.version}")).
+    addDependency(new Project("org.artofsolving.jodconverter", "jodconverter-core", "jar", "${jodconverter-core.version}")).
+    addDependency(new Project("org.openoffice", "ridl", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "unoil", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "jurt", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "juh", "jar", "${openoffice.version}"));
+  module.portlet.ecmadmin.deployName = "ecmadmin";
+  
+  module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-explorer", "jar", module.version));
+  module.portlet.ecmexplorer.deployName = "ecmexplorer";
     
   module.portlet.websearches = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-search", "exo-portlet", module.version).    
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-search", "jar",  module.version));
   module.portlet.websearches.deployName = "searches";
 
-  module.portlet.newsletter = new Project("org.exoplatform.ecms", "exo-ecms-ext-newsletter-portlet", "exo-portlet", module.version).
-    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-newsletter-services", "jar",  module.version));
-  module.portlet.newsletter.deployName = "newsletter";
+  module.portlet.seo = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-seo", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-seo", "jar",  module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
+  module.portlet.seo.deployName = "seo";      
 
   module.portlet.formgenerator = new Project("org.exoplatform.ecms", "exo-ecms-ext-formgenerator-portlet", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
   module.portlet.formgenerator.deployName = "formgenerator";
-
-	module.portlet.seo = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-seo", "exo-portlet", module.version).
-    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-seo", "jar",  module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
-  module.portlet.seo.deployName = "seo";      
 
   module.gadget = {};
   module.gadget.favorites = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-favorites", "war", module.version);    
@@ -73,12 +89,14 @@ function getModule(params) {
     
   module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-static", "war", module.version);
   module.web.eXoStaticResources.deployName = "eXoStaticResources";
+  
+  module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-dms", "war", module.version) ;  
+  module.web.eXoDMSResources.deployName = "eXoDMSResources" ;
 
   module.authoring = {};
   module.authoring.war = new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-apps", "war", module.version).
   addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-webui", "jar", module.version));
   module.authoring.war.deployName = "authoring-apps";	      
-  
   
   module.core = {};
   module.core.war = new Project("org.exoplatform.ecms", "exo-ecms-core-webapp", "war", module.version);
@@ -137,12 +155,15 @@ function getModule(params) {
   module.server = {};
   module.server.tomcat = {};
   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-tomcat", "jar", module.version);
-	
-  module.server.jbossear = {};
-  module.server.jbossear.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss-ear", "jar", module.version);
 
-  module.server.jboss = {};
-  module.server.jboss.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss", "jar", module.version);	
-    
+  module.gadgets = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-publication", "war", module.version).
+    addDependency(ws.frameworks.json);  
+  module.gadgets.deployName = "eXoDMSGadgets";
+  
+  module.application = {}
+  
+  module.application.rest = new Project("org.exoplatform.ecms", "exo-ecms-core-publication","jar", module.version).
+    addDependency(ws.frameworks.json);
+     
   return module;
 }

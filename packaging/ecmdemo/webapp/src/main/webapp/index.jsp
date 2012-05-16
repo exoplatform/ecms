@@ -24,6 +24,6 @@
 <%
 	PortalContainer manager = PortalContainer.getCurrentInstance(session.getServletContext()) ;
   	UserPortalConfigService userPortalConfigService = (UserPortalConfigService) manager.getComponentInstanceOfType(UserPortalConfigService.class) ;
-	response.sendRedirect(request.getContextPath() + "/public/"+userPortalConfigService.getDefaultPortal()+"/");
+	response.sendRedirect(request.getContextPath() + "/" + userPortalConfigService.getDefaultPortal()+"/");
 %>
 

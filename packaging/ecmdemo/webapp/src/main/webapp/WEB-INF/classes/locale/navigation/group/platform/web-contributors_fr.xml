@@ -3,10 +3,6 @@
   <administration>
     <siteExplorer>Explorateur de contenu</siteExplorer>
     <wcmAdmin>Administration</wcmAdmin>
-    <newslettermanager>Newsletters</newslettermanager>
-    <formgenerator>Générateur de formulaires</formgenerator>
-		<workflowcontroller>Contrôle des processus métier</workflowcontroller>
-		<workflowAdministration>Contrôle des Workflows métier</workflowAdministration>
   </administration>
 </bundle>
 

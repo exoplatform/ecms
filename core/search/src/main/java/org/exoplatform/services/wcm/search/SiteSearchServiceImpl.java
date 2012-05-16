@@ -175,7 +175,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
-    NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());
+    NodeLocation location = configurationService.getLivePortalsLocation();
     Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
     if (queryCriteria.isSearchWebpage()) {
       session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
@@ -412,16 +412,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if (queryCriteria.isSearchWebpage()) {
       if ("all".equals(siteName) || siteName == null || siteName.trim().length() == 0) {
         return "/production/mop:workspace/mop:portalsites";
-      } else {
-        return "/production/mop:workspace/mop:portalsites/mop:" + siteName;
       }
+      return "/production/mop:workspace/mop:portalsites/mop:" + siteName;
     }
     String sitePath = null;
     if (siteName != null) {
       sitePath = livePortalManagerService.getPortalPathByName(siteName);
     } else {
-      String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
-      sitePath = configurationService.getLivePortalsLocation(repository).getPath();
+      sitePath = configurationService.getLivePortalsLocation().getPath();
     }
     return sitePath;
   }

@@ -40,8 +40,6 @@ public class WCMConfigurationService {
   public static final String SITE_PATH_EXP = "\\{sitePath\\}";
   public static final String SITE_NAME_EXP = "\\{siteName\\}";
 
-  public static final String NEWSLETTER_MANAGE_MEMBERSHIP   = "newsletterManageMembership";
-
   public static final String PARAMETERIZED_PAGE_URI         = "parameterizedPageURI";
 
   public static final String PRINT_PAGE_URI                 = "printPageURI";
@@ -69,8 +67,6 @@ public class WCMConfigurationService {
 
   private String sharedPortal = null;
   
-  private String defaultRepo = null;
-
   @SuppressWarnings("unchecked")
   public WCMConfigurationService(InitParams initParams, RepositoryService repoService) throws Exception {
     Iterator<PropertiesParam> iterator = initParams.getPropertiesParamIterator();
@@ -105,11 +101,6 @@ public class WCMConfigurationService {
 
   public DriveData getSiteDriveConfig() {return this.siteDriveConfig; }
   
-  @Deprecated
-  public NodeLocation getLivePortalsLocation(final String repository) {
-    return getLivePortalsLocation();
-  }
-
   public NodeLocation getLivePortalsLocation() {
     return livePortalsLocation;
   }
@@ -124,11 +115,6 @@ public class WCMConfigurationService {
     if(runtimeContextParams != null)
       return runtimeContextParams.values();
     return null;
-  }
-
-  @Deprecated
-  public String getSharedPortalName(final String repository) {
-    return sharedPortal;
   }
 
   public String getSharedPortalName() {

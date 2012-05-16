@@ -29,7 +29,6 @@ import javax.jcr.query.InvalidQueryException;
 
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
@@ -109,7 +108,7 @@ public class UIContentSearchForm extends UIForm {
     addUIFormInput(new UIFormStringInput(SEARCH_BY_NAME,SEARCH_BY_NAME,null));
     addUIFormInput(new UIFormStringInput(SEARCH_BY_CONTENT, SEARCH_BY_CONTENT, null));
 
-    addUIFormInput(new UIFormStringInput(PROPERTY, PROPERTY, null).setEditable(false));
+    addUIFormInput(new UIFormStringInput(PROPERTY, PROPERTY, null).setDisabled(true));
     addUIFormInput(new UIFormStringInput(CONTAIN, CONTAIN, null));
 
     List<SelectItemOption<String>> dateOptions = new ArrayList<SelectItemOption<String>>();
@@ -120,7 +119,7 @@ public class UIContentSearchForm extends UIForm {
     addUIFormInput(startTime);
     UIFormDateTimeInput endTime = new UIFormDateTimeInput(END_TIME, END_TIME, null, true);
     addUIFormInput(endTime);
-    addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null).setEditable(false));
+    addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null).setDisabled(true));
 
     setActions(new String[] {"SearchWebContent"} );
   }
@@ -128,10 +127,8 @@ public class UIContentSearchForm extends UIForm {
   private List<String> getPortalNames() throws Exception {
     List<String> portalNames = new ArrayList<String>();
     String currentPortalName = Util.getPortalRequestContext().getPortalOwner();
-    RepositoryService repoService = getApplicationComponent(RepositoryService.class);
-    String repository = repoService.getCurrentRepository().getConfiguration().getName();
     WCMConfigurationService configService = getApplicationComponent(WCMConfigurationService.class);
-    String sharedPortalName = configService.getSharedPortalName(repository);
+    String sharedPortalName = configService.getSharedPortalName();
     portalNames.add(currentPortalName);
     portalNames.add(sharedPortalName);
     return portalNames;

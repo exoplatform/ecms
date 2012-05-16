@@ -369,7 +369,7 @@ public class TestXSkinService extends BaseWCMTestCase {
     try {
       WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);;
       LivePortalManagerService livePortalManagerService = getService(LivePortalManagerService.class);
-      String sharedPortalName = configurationService.getSharedPortalName(REPO_NAME);
+      String sharedPortalName = configurationService.getSharedPortalName();
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, sharedPortalName);
       SkinService configService = getService(SkinService.class);
       Node sharedNode = (Node) session.getItem("/sites content/live/" + sharedPortalName + "/css");

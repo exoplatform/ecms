@@ -11,8 +11,6 @@
   <name>eXo ECM Suite :: Delivery</name>
   <description>eXo Entreprise Content Management Suite :: Delivery</description>
   <modules>
-    <module>dms-wcm</module>
     <module>wcm</module>
-    <module>wkf-wcm</module>
   </modules>
 </project>

@@ -33,7 +33,6 @@ import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -176,8 +175,7 @@ public class PageEventListenerDelegate {
   private List<Node> getListNodeByApplicationId(Page page, WebpagePublicationPlugin plugin) throws Exception {
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
-    NodeLocation nodeLocation = configurationService.getLivePortalsLocation(repository.getConfiguration().getName());
+    NodeLocation nodeLocation = configurationService.getLivePortalsLocation();
 
     String workspaceName = nodeLocation.getWorkspace();
     String path = nodeLocation.getPath();

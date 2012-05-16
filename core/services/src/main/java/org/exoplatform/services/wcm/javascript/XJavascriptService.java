@@ -43,8 +43,8 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.javascript.Javascript;
-import org.exoplatform.web.application.javascript.JavascriptConfigService;
 import org.exoplatform.web.application.javascript.Javascript.PortalJScript;
+import org.exoplatform.web.application.javascript.JavascriptConfigService;
 import org.picocontainer.Startable;
 
 /**
@@ -147,9 +147,7 @@ public class XJavascriptService implements Startable {
    * @throws Exception the exception
    */
   public void updatePortalJSOnModify(Node portalNode, Node jsFile) throws Exception {
-    String repository = ((ManageableRepository) portalNode.getSession().getRepository()).getConfiguration()
-                                                                                        .getName();
-    String sharedPortalName = configurationService.getSharedPortalName(repository);
+    String sharedPortalName = configurationService.getSharedPortalName();
     if(sharedPortalName.equals(portalNode.getName())) {
       addSharedPortalJavascript(portalNode, jsFile, false);
     }else {
@@ -166,9 +164,7 @@ public class XJavascriptService implements Startable {
    * @throws Exception the exception
    */
   public void updatePortalJSOnRemove(Node portalNode, Node jsFile) throws Exception {
-    String repository = ((ManageableRepository) portalNode.getSession().getRepository()).getConfiguration()
-                                                                                        .getName();
-    String sharedPortalName = configurationService.getSharedPortalName(repository);
+    String sharedPortalName = configurationService.getSharedPortalName();
     if(sharedPortalName.equals(portalNode.getName())) {
       addSharedPortalJavascript(portalNode, jsFile, false);
     }else {

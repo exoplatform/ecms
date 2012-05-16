@@ -33,8 +33,6 @@
         <name>RuntimeContextParams</name>
         <description>some params for runtime</description>
 
-        <property name="newsletterManageMembership" value="redactor:/platform/web-contributors" />
-
         <property name="parameterizedPageURI" value="/detail" />
         <property name="printPageURI" value="/printviewer" />
         <property name="printViewerPage" value="printviewer" />
@@ -274,27 +272,6 @@
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
-    <component-plugin>
-      <name>AddCronJob</name>
-      <set-method>addCronJob</set-method>
-      <type>org.exoplatform.services.scheduler.CronJob</type>
-      <description>add a cron job to the JobSchedulerService</description>
-      <init-params>
-        <properties-param>
-          <name>cronjob.info</name>
-          <description>Newsletter email job</description>
-          <property name="jobName" value="job" />
-          <property name="groupName" value="group" />
-          <property name="job" value="org.exoplatform.services.wcm.newsletter.NewsletterEmailJob" />
-          <property name="expression" value="${job.ecms.newsletter.NewsletterEmailJob.expression:0 0/60 * * * ?}" />
-        </properties-param>
-      </init-params>
-    </component-plugin>
-
   </external-component-plugins>
 
   <external-component-plugins>
