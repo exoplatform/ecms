@@ -509,7 +509,7 @@ public class TrashServiceImpl implements TrashService {
    * {@inheritDoc}
    */
   public boolean isInTrash(Node node) throws RepositoryException {
-    return node.getPath().startsWith(this.trashHome_);
+    return node.getPath().startsWith(this.trashHome_) && !node.getPath().equals(this.trashHome_);
   }
 
   /**
