@@ -141,8 +141,8 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
   public static void copyManage(Event<UIComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
-    if(srcPath.indexOf(";") > -1) {
-      uiWorkingArea.getVirtualClipboards().clear();
+    uiWorkingArea.getVirtualClipboards().clear();
+    if(srcPath.indexOf(";") > -1) {      
       multipleCopy(srcPath.split(";"), event);
     } else {
       processCopy(srcPath, event, false);
