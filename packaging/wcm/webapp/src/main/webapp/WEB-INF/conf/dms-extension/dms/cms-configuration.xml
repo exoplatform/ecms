@@ -50,10 +50,16 @@
 				
 			<value-param>
 				<name>update-policy</name>
-				<value>create-version</value>
+				<value>update</value>
 				<!--value>replace</value -->
 				<!-- value>add</value -->
 			</value-param>
+			
+			<value-param>
+				<name>auto-version</name>
+				<value>checkout</value>
+			</value-param>
+			
 		</init-params>
 </component>
     
