@@ -33,41 +33,4 @@
     <css-priority>1</css-priority>
   </portal-skin>
 
-  <!--
-  <portal-skin>
-    <skin-name>Mac</skin-name>
-    <css-path>/skin/MacSkin/Stylesheet.css</css-path>
-  </portal-skin>
-
-  <portal-skin>
-    <skin-name>Vista</skin-name>
-    <css-path>/skin/VistaSkin/Stylesheet.css</css-path>
-  </portal-skin>
-  -->
-
-  <!-- Lightbox libraries -->
-  <!--
-  <javascript>
-    <param>
-      <js-module>lightbox.prototype</js-module>
-      <js-path>/javascript/lightbox/prototype.js</js-path>
-			<js-priority>40</js-priority>
-    </param>
-    <param>
-      <js-module>lightbox.scriptaculous</js-module>
-      <js-path>/javascript/lightbox/scriptaculous.js</js-path>
-			<js-priority>50</js-priority>
-    </param>
-    <param>
-      <js-module>lightbox.effects</js-module>
-      <js-path>/javascript/lightbox/effects.js</js-path>
-			<js-priority>50</js-priority>
-    </param>
-    <param>
-      <js-module>lightbox.lightbox</js-module>
-      <js-path>/javascript/lightbox/lightbox.js</js-path>
-			<js-priority>50</js-priority>
-    </param>
-  </javascript>
-  -->
 </gatein-resources>
