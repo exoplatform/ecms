@@ -3,17 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
+    <artifactId>exo-ecms-ext</artifactId>
     <version>4.0-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext</artifactId>
+  <artifactId>exo-ecms-ext-fastcontentcreator</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext</name>
-  <description>eXo Entreprise Content Management Suite :: Extensions</description>
+  <name>eXo ECM Suite :: Ext :: Fast Content Creator</name>
+  <description>eXo Entreprise Content Management Suite :: Fast Content Creator</description>
   <modules>
-    <module>authoring</module>
-    <module>fastcontentcreator</module>
-    <module>xcmis</module>
-    <module>webui</module>
+    <module>portlet</module>
   </modules>
 </project>

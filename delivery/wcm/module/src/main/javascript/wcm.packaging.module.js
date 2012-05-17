@@ -73,9 +73,9 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
   module.portlet.seo.deployName = "seo";      
 
-  module.portlet.formgenerator = new Project("org.exoplatform.ecms", "exo-ecms-ext-formgenerator-portlet", "exo-portlet", module.version).
+  module.portlet.fastcontentcreator = new Project("org.exoplatform.ecms", "exo-ecms-ext-fastcontentcreator-portlet", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
-  module.portlet.formgenerator.deployName = "formgenerator";
+  module.portlet.fastcontentcreator.deployName = "fastcontentcreator";
 
   module.gadget = {};
   module.gadget.favorites = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-favorites", "war", module.version);    

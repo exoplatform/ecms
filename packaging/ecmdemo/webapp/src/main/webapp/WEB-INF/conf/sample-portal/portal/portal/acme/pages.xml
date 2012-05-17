@@ -1104,7 +1104,7 @@
     <edit-permission>*:/platform/web-contributors</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>formgenerator</application-ref>
+        <application-ref>fastcontentcreator</application-ref>
         <portlet-ref>FastContentCreatorBasicPortlet</portlet-ref>
         <preferences>
           <preference>

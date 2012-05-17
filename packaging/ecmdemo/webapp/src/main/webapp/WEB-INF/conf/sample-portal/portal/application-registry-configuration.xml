@@ -250,7 +250,7 @@
                       <string>portlet</string>
                     </field>
                     <field name="contentId">
-                      <string>formgenerator/FastContentCreatorBasicPortlet</string>
+                      <string>fastcontentcreator/FastContentCreatorBasicPortlet</string>
                     </field>
                     <field name="accessPermissions">
                       <collection type="java.util.ArrayList" item-type="java.lang.String">
@@ -277,7 +277,7 @@
                       <string>portlet</string>
                     </field>
                     <field name="contentId">
-                      <string>formgenerator/FastContentCreatorBasicPortletStandard</string>
+                      <string>fastcontentcreator/FastContentCreatorBasicPortletStandard</string>
                     </field>
                     <field name="accessPermissions">
                       <collection type="java.util.ArrayList" item-type="java.lang.String">

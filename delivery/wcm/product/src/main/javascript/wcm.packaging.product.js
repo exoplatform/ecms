@@ -44,7 +44,7 @@ function getProduct(version) {
   product.addDependencies(wcm.portlet.webpresentation);
   product.addDependencies(wcm.portlet.websearches); 
   product.addDependencies(wcm.portlet.seo);
-  product.addDependencies(wcm.portlet.formgenerator);
+  product.addDependencies(wcm.portlet.fastcontentcreator);
   product.addDependencies(wcm.gadget.favorites);
   product.addDependencies(wcm.web.eXoWCMResources) ;
   product.addDependencies(wcm.web.eXoStaticResources) ;
