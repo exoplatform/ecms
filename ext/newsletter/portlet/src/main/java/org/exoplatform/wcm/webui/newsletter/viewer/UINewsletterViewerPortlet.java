@@ -18,13 +18,21 @@ package org.exoplatform.wcm.webui.newsletter.viewer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.newsletter.manager.NewsLetterUtil;
+import org.exoplatform.webui.application.WebuiApplication;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.event.Event;
@@ -43,6 +51,11 @@ import org.exoplatform.webui.event.EventListener;
   }
 )
 public class UINewsletterViewerPortlet extends UIPortletApplication {
+	
+	public static String          CONFIRM_CODE_ACTION           = "ConfirmUserCode";
+	
+	public static String          EVENT_ACTION                  = "action";
+	
 
   /**
    * Instantiates a new uI newsletter viewer portlet.
@@ -51,6 +64,19 @@ public class UINewsletterViewerPortlet extends UIPortletApplication {
    */
   public UINewsletterViewerPortlet() throws Exception {
     this.addChild(UINewsletterViewerForm.class, null, null);
+  }
+  
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+  	PortalRequestContext portalContext = Util.getPortalRequestContext();
+  	HttpServletRequest request = portalContext.getRequest();
+    Map<String, String[]> paramsMap = request.getParameterMap();
+    if(paramsMap.get(EVENT_ACTION) != null && CONFIRM_CODE_ACTION.equals(paramsMap.get(EVENT_ACTION)[0].toString())) {
+    	Event<UIComponent> xEvent = this.createEvent(CONFIRM_CODE_ACTION, Event.Phase.PROCESS, context);
+      if (xEvent != null) {
+        xEvent.broadcast();
+      }    
+    }
+    super.processRender(app, context);
   }
 
   /**
@@ -71,26 +97,31 @@ public class UINewsletterViewerPortlet extends UIPortletApplication {
      */
     public void execute(Event<UINewsletterViewerPortlet> event) throws Exception {
       UINewsletterViewerPortlet newsletterViewerPortlet = event.getSource();
+      PortalRequestContext portalContext = Util.getPortalRequestContext();
+    	HttpServletRequest request = portalContext.getRequest();
+      Map<String, String[]> paramsMap = request.getParameterMap();
       UINewsletterViewerForm newsletterForm = newsletterViewerPortlet.getChild(UINewsletterViewerForm.class);
-      String[] confirms = event.getRequestContext().getRequestParameter(OBJECTID).split("/");
-      List<String> listIds = new ArrayList<String>();
-      SessionProvider sessionProvider = Utils.getSessionProvider();
-      boolean correctUser = newsletterForm.publicUserHandler.confirmPublicUser(sessionProvider,
-                                                                               confirms[0],
-                                                                               confirms[1],
-                                                                               NewsLetterUtil.getPortalName());
-      if(correctUser){
-        List<NewsletterSubscriptionConfig> listSubscriptions = newsletterForm.
+      if(paramsMap.get(OBJECTID) != null) {
+        String[] confirms = paramsMap.get(OBJECTID)[0].split("/");
+        List<String> listIds = new ArrayList<String>();
+        SessionProvider sessionProvider = Utils.getSessionProvider();
+        boolean correctUser = newsletterForm.publicUserHandler.confirmPublicUser(sessionProvider,
+                                                                         confirms[0],
+                                                                         confirms[1],
+                                                                         NewsLetterUtil.getPortalName());
+        if(correctUser){
+          List<NewsletterSubscriptionConfig> listSubscriptions = newsletterForm.
             subcriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, NewsLetterUtil.getPortalName(), confirms[0]);
-        for(NewsletterSubscriptionConfig subscriptionConfig : listSubscriptions){
-          listIds.add(subscriptionConfig.getCategoryName() + "#" + subscriptionConfig.getName());
+          for(NewsletterSubscriptionConfig subscriptionConfig : listSubscriptions){
+            listIds.add(subscriptionConfig.getCategoryName() + "#" + subscriptionConfig.getName());
+          }
+          newsletterForm.setListIds(listIds);
+          newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
+          newsletterForm.inputEmail.setRendered(false);
+          newsletterForm.isUpdated = true;
+          newsletterForm.setInforConfirm(confirms[0], confirms[1]);
+          event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
         }
-        newsletterForm.setListIds(listIds);
-        newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
-        newsletterForm.inputEmail.setRendered(false);
-        newsletterForm.isUpdated = true;
-        newsletterForm.setInforConfirm(confirms[0], confirms[1]);
-        event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
       }
     }
   }

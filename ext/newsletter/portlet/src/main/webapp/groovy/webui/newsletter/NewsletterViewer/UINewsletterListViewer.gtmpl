@@ -120,44 +120,6 @@ if(uicomponent.userCode != null){
           %>
           <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
       		<%}%>
-	  </div>	  
-	  <%uicomponent.renderChild(uicomponent.CONFIRM_URL);%> 
-	  <%uicomponent.renderChild(uicomponent.CONTENT_MESSAGE);%>
-	  <%uicomponent.userCode = null;%>
+	  </div>	  	  
 	<%uiform.end()%>
 </div>
-
-<%
-  String action = null;
-  if(rcontext.getAttribute("action") != null)
-    action = rcontext.getAttribute("action").toString();
-  if(action != null && action.equals("subscribe")) {
-    String confirmCode = null;
-    if(!StringUtils.isEmpty(rcontext.getAttribute("confirmCode")))
-      confirmCode = rcontext.getAttribute("confirmCode").toString();
-      
-    String userEmail = null;
-    if(!StringUtils.isEmpty(rcontext.getAttribute("userEmail")))
-      userEmail = rcontext.getAttribute("userEmail").toString();
-    
-    String contentOfMessage = null;
-    if(!StringUtils.isEmpty(rcontext.getAttribute(uicomponent.CONTENT_MESSAGE)))
-      contentOfMessage = rcontext.getAttribute(uicomponent.CONTENT_MESSAGE).toString();
-    
-    def newsletterPortlet = uicomponent.getAncestorOfType(UINewsletterViewerPortlet.class);     
-    String confirmUrl = newsletterPortlet.url("ConfirmUserCode", userEmail + "/" + confirmCode);
-    confirmUrl = NewsLetterUtil.generateLink(confirmUrl);    
-    String url = uicomponent.url("SendEmail");      
-    %>
-    <script type="text/javascript">
-      var confirm = document.getElementById("confirmUrl");
-      if(confirm)
-        confirm.value = "<%=confirmUrl%>";
-      var contentofMes = document.getElementById("contentOfMessage");
-      if(contentofMes)
-        contentofMes.value = "<%=contentOfMessage%>";
-      eval("<%=url%>");
-    </script>
-    <%    
-  } 
-%>

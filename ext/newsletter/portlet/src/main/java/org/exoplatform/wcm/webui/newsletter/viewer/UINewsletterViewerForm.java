@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -30,7 +31,6 @@ import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
-import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterCategoryHandler;
@@ -40,7 +40,6 @@ import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHan
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.newsletter.manager.NewsLetterUtil;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -51,9 +50,10 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
-import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.portal.application.PortalRequestContext;
+
 
 /**
  * Created by The eXo Platform SAS Author : Tran Nguyen Ngoc
@@ -63,7 +63,6 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
                  template = "app:/groovy/webui/newsletter/NewsletterViewer/UINewsletterListViewer.gtmpl",
                  events = {
     @EventConfig(listeners = UINewsletterViewerForm.SubcribeActionListener.class),
-    @EventConfig(listeners = UINewsletterViewerForm.SendEmailActionListener.class),
     @EventConfig(listeners = UINewsletterViewerForm.ForgetEmailActionListener.class),
     @EventConfig(listeners = UINewsletterViewerForm.ChangeSubcriptionsActionListener.class) })
 public class UINewsletterViewerForm extends UIForm {
@@ -72,11 +71,11 @@ public class UINewsletterViewerForm extends UIForm {
 
   public static String SUBJECT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Subject";
 
-  public static String CONTENT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Content";
+  public static String CONTENT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Content";  
   
-  public static String CONFIRM_URL = "confirmUrl";
+  public static String          CONFIRM_CODE_ACTION           = "ConfirmUserCode";
   
-  public static String CONTENT_MESSAGE = "contentOfMessage";
+	public static String					EVENT_ACTION									= "action";
 
   /** The user code. */
   public String userCode;
@@ -167,11 +166,7 @@ public class UINewsletterViewerForm extends UIForm {
     }
 
     inputEmail.addValidator(MandatoryValidator.class).addValidator(UINewsletterViewerEmailAddressValidator.class);
-    this.addChild(inputEmail);
-    UIFormHiddenInput hiddenInput = new UIFormHiddenInput(CONFIRM_URL, "");    
-    this.addChild(hiddenInput);
-    UIFormHiddenInput contentOfMessage = new UIFormHiddenInput(CONTENT_MESSAGE, "");
-    this.addChild(contentOfMessage);
+    this.addChild(inputEmail);   
   }
 
   /**
@@ -399,7 +394,7 @@ public class UINewsletterViewerForm extends UIForm {
       String userEmail = newsletterForm.inputEmail.getValue();
       List<String> listCategorySubscription = newsletterForm.listSubscriptionChecked();
       String contentOfMessage;      
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;       
+      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;         
       UIApplication uiApp = context.getUIApplication();
       boolean isExistedEmail = newsletterForm.managerUserHandler
         .checkExistedEmail(WCMCoreUtils.getUserSessionProvider(), portalName, userEmail);
@@ -414,11 +409,58 @@ public class UINewsletterViewerForm extends UIForm {
                                                        portalName,
                                                        userEmail,
                                                        listCategorySubscription);	
-            context.setAttribute("action", "subscribe");
-            context.setAttribute("confirmCode", confirmCode);
-            context.setAttribute("userEmail", userEmail);
+            PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+            String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
+            String portalURI = portalRequestContext.getPortalURI();
+            String domainURL = requestURL.substring(0, requestURL.indexOf(portalURI));
+            
+            UIPortal uiPortal = Util.getUIPortal();
+            String pageNodeSelected = uiPortal.getSelectedUserNode().getURI();
+            StringBuilder sb = new StringBuilder(domainURL);
+            sb.append(portalURI);
+            sb.append(pageNodeSelected);
+            sb.append("/?");            
+            sb.append(EVENT_ACTION+"="+CONFIRM_CODE_ACTION+"&");
+            sb.append(OBJECTID+"="+userEmail+"/"+confirmCode);  
+            
+            ResourceBundle resourceBundle = context.getApplicationResourceBundle() ;
+            String subject = "";
+            String content = "";
+            try {
+            	subject = resourceBundle.getString(SUBJECT_KEY);
+              content = resourceBundle.getString(CONTENT_KEY);
+            } catch (MissingResourceException e) {
+              subject = SUBJECT_KEY;
+              content = CONTENT_KEY;
+            }      
+            
+            String confirmUrl = sb.toString();      
+            String emailContent[] = new String[]{subject, content};
+            String openTag = "<a href=\"" + confirmUrl + "\">";
+            String mailContent = (emailContent[1].replaceFirst("#", openTag)).replace("#", "</a>");
+            
+            MailService mailService = WCMCoreUtils.getService(MailService.class);
+            Message message = new Message();
+            message.setMimeType("text/html");
+            message.setTo(userEmail);
+            message.setSubject(emailContent[0]);
+            message.setBody(mailContent);
+            
+            newsletterForm.setListIds(listCategorySubscription);
+            newsletterForm.inputEmail.setRendered(false);
+            newsletterForm.userMail = userEmail;
+            newsletterForm.isUpdated = true;
+            newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
             
             contentOfMessage = "UINewsletterViewerForm.msg.subcribed";
+            
+            try {
+              mailService.sendMessage(message);
+            } catch (Exception e) {
+            	if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage());
+              }
+            }  
           }catch(Exception ex){          	
             contentOfMessage = "UINewsletterViewerForm.msg.canNotSubcribed";
             uiApp.addMessage(new ApplicationMessage(contentOfMessage, null, ApplicationMessage.INFO));
@@ -431,73 +473,5 @@ public class UINewsletterViewerForm extends UIForm {
       context.setAttribute("contentOfMessage", contentOfMessage);
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
     }
-  }
- 
-  
-  /**
-   * The listener interface for receiving sendEmailAction events.
-   * The class that is interested in processing a sendEmailAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addSendEmailActionListener<code> method. When
-   * the subcribeAction event occurs, that object's appropriate
-   * method is invoked.
-   *
-   * @see SendEmailActionEvent
-   */
-  public static class SendEmailActionListener extends EventListener<UINewsletterViewerForm> {
-
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-     */
-    public void execute(Event<UINewsletterViewerForm> event) throws Exception {
-      UINewsletterViewerForm newsletterForm = event.getSource();      
-      String userEmail = newsletterForm.inputEmail.getValue();
-      String contentOfMessage = newsletterForm.getUIInput("contentOfMessage").getValue().toString(); 
-      List<String> listCategorySubscription = newsletterForm.listSubscriptionChecked();
-      
-      
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-      UIApplication uiApp = context.getUIApplication();
-      ResourceBundle resourceBundle = context.getApplicationResourceBundle() ;
-      String subject = "";
-      String content = "";
-      try {
-      	subject = resourceBundle.getString(SUBJECT_KEY);
-        content = resourceBundle.getString(CONTENT_KEY);
-      } catch (MissingResourceException e) {
-        subject = SUBJECT_KEY;
-        content = CONTENT_KEY;
-      }      
-      
-      String confirmUrl = newsletterForm.getUIInput("confirmUrl").getValue().toString();      
-      String emailContent[] = new String[]{subject, content};
-      String openTag = "<a href=\"" + confirmUrl + "\">";
-      String mailContent = (emailContent[1].replaceFirst("#", openTag)).replace("#", "</a>");
-      
-      MailService mailService = WCMCoreUtils.getService(MailService.class);
-      Message message = new Message();
-      message.setMimeType("text/html");
-      message.setTo(userEmail);
-      message.setSubject(emailContent[0]);
-      message.setBody(mailContent);
-      
-      newsletterForm.setListIds(listCategorySubscription);
-      newsletterForm.inputEmail.setRendered(false);
-      newsletterForm.userMail = userEmail;
-      newsletterForm.isUpdated = true;
-      newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
-      contentOfMessage = "UINewsletterViewerForm.msg.subcribed";
-      try {
-        mailService.sendMessage(message);
-      } catch (Exception e) {
-      	if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }   
-      uiApp.addMessage(new ApplicationMessage(contentOfMessage, null, ApplicationMessage.INFO));
-      event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
-    }
-  }
-  
+  }  
 }
