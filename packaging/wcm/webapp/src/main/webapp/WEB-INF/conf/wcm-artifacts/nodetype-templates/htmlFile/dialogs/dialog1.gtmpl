@@ -4,11 +4,13 @@
   String[] hiddenField4 = ["jcrPath=/node/jcr:content/jcr:lastModified", "visible=false"] ;
   String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"] ;
   String[] hiddenField6 = ["jcrPath=/node/jcr:content/jcr:mimeType", "visible=false", "text/html"] ;
+  String[] hiddenField7 = ["jcrPath=/node/exo:presentationType", "visible=false", "exo:htmlFile"] ;
   uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
   uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
   uicomponent.addCalendarField("hiddenInput4", hiddenField4) ;
   uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
   uicomponent.addHiddenField("hiddenInput6", hiddenField6) ;
+  uicomponent.addHiddenField("hiddenInput7", hiddenField7) ;
 %>
 <div class="UIForm FormScrollLayout">  
   <% uiform.begin() %>
