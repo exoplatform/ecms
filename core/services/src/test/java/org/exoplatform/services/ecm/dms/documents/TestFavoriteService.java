@@ -82,6 +82,10 @@ public class TestFavoriteService extends BaseDMSTestCase {
     getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john").size();
 
     assertEquals("testAddFavorite failed!", 2, johnFav);
+    
+    // Add favorite to an un-existed user
+    favoriteService.addFavorite(testAddFavouriteNode2, "unknown");
+    assertEquals(0, favoriteService.getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "unknown").size());
 
     testAddFavouriteNode1.remove();
     testAddFavouriteNode2.remove();

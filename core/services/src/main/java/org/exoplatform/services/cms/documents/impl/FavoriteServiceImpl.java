@@ -35,6 +35,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 
 /**
  * Created by The eXo Platform SARL
@@ -54,14 +55,17 @@ public class FavoriteServiceImpl implements FavoriteService {
   private LinkManager linkManager;
   private SessionProviderService sessionProviderService;
   
+  private OrganizationService    organizationService;
+  
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class);
 
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
-      SessionProviderService sessionProviderService) {
+      SessionProviderService sessionProviderService, OrganizationService organizationService) {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.sessionProviderService = sessionProviderService;
+    this.organizationService = organizationService;
   }
 
   /**
@@ -75,6 +79,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     Node userFavoriteNode = null;
     try {
       userFavoriteNode = getUserFavoriteFolder(userName);
+      if (userFavoriteNode == null)
+        return;
     } catch (PathNotFoundException e) {
       userFavoriteNode = createFavoriteFolder(userName);
     }
@@ -98,12 +104,15 @@ public class FavoriteServiceImpl implements FavoriteService {
   public List<Node> getAllFavoriteNodesByUser(String workspace, String repository, String userName) throws Exception {
     List<Node> ret = new ArrayList<Node>();
     Node userFavoriteNode = getUserFavoriteFolder(userName);
-    NodeIterator nodeIter = userFavoriteNode.getNodes();
-    while (nodeIter.hasNext()) {
-      Node childNode = nodeIter.nextNode();
-      if (linkManager.isLink(childNode)) {
-        Node targetNode = getTargetNode(childNode);
-        if (targetNode != null) ret.add(targetNode);
+    if (userFavoriteNode != null) {
+      NodeIterator nodeIter = userFavoriteNode.getNodes();
+      while (nodeIter.hasNext()) {
+        Node childNode = nodeIter.nextNode();
+        if (linkManager.isLink(childNode)) {
+          Node targetNode = getTargetNode(childNode);
+          if (targetNode != null)
+            ret.add(targetNode);
+        }
       }
     }
     return ret;
@@ -165,7 +174,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     return false;
   }
 
-  private Node getUserFavoriteFolder(String userName) throws Exception {
+  private Node getUserFavoriteFolder(String userName) throws Exception {   
+    if (organizationService.getUserHandler().findUserByName(userName) == null) {
+      return null;
+    }
     Node userNode =
       nodeHierarchyCreator.getUserNode(sessionProviderService.getSessionProvider(null), userName);
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);

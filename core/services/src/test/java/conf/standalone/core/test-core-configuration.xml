@@ -26,38 +26,7 @@
 
   <component>
     <key>org.exoplatform.services.organization.OrganizationService</key>
-    <type>org.exoplatform.services.organization.idm.PicketLinkIDMOrganizationServiceImpl</type>
-    <init-params>
-      <object-param>
-        <name>configuration</name>
-        <object type="org.exoplatform.services.organization.idm.Config">
-          <field name="useParentIdAsGroupType">
-            <boolean>true</boolean>
-          </field>
-          <field name="forceMembershipOfMappedTypes">
-            <boolean>false</boolean>
-          </field>
-          <field name="pathSeparator">
-            <string>.</string>
-          </field>
-          <field name="rootGroupName">
-            <string>GTN_ROOT_GROUP</string>
-          </field>
-          <field name="groupTypeMappings">
-            <map type="java.util.HashMap">
-              <entry>
-                <key>
-                  <string>/</string>
-                </key>
-                <value>
-                  <string>root_type</string>
-                </value>
-              </entry>
-            </map>
-          </field>
-        </object>
-      </object-param>
-    </init-params>
+    <type>org.exoplatform.services.organization.hibernate.OrganizationServiceImpl</type>    
   </component>
 
   <component>
@@ -106,6 +75,11 @@
           <value>conf/standalone/core/mappings/HibernateIdentityObjectRelationship.hbm.xml</value>
           <value>conf/standalone/core/mappings/HibernateIdentityObjectRelationshipType.hbm.xml</value>
           <value>conf/standalone/core/mappings/HibernateIdentityObjectRelationshipName.hbm.xml</value>
+          <value>org/exoplatform/services/organization/impl/UserImpl.hbm.xml</value>
+          <value>org/exoplatform/services/organization/impl/MembershipImpl.hbm.xml</value>
+          <value>org/exoplatform/services/organization/impl/GroupImpl.hbm.xml</value>
+          <value>org/exoplatform/services/organization/impl/MembershipTypeImpl.hbm.xml</value>
+          <value>org/exoplatform/services/organization/impl/UserProfileData.hbm.xml</value>
         </values-param>
       </init-params>
     </component-plugin>
