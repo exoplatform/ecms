@@ -142,7 +142,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private ExoCache<Serializable, Object> drivesCache_ ;
 
   private DriveData groupDriveTemplate_ = null ;
-  
+
   /**
    * Keep the state when a new role added
    */
@@ -621,11 +621,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
     if(drives != null) return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> generalDrives = new ArrayList<DriveData>();
-    String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
-    String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
+    List<DriveData> groupDrives = this.getGroupDrives(userId, userRoles, null);
+    List<DriveData> personalDrives = this.getPersonalDrives(userId, userRoles);
     for(DriveData drive : getDriveByUserRoles(userId, userRoles)) {
-      if((!drive.getHomePath().startsWith(userPath) && !drive.getHomePath().startsWith(groupPath))
-          || drive.getHomePath().equals(userPath) || drive.getHomePath().equals(groupPath) ) {
+      if (!groupDrives.contains(drive) && !personalDrives.contains(drive)) {
         generalDrives.add(drive);
       }
     }
@@ -672,14 +671,14 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       return true;
     return false;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void clearAllDrivesCache() {
     drivesCache_.clearCache();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -687,14 +686,14 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     drivesCache_.remove(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
     drivesCache_.remove(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public boolean newRoleUpdated() {
     return newRoleUpdated;
   }
-  
+
   /**
    * {@inheritDoc}
    */
