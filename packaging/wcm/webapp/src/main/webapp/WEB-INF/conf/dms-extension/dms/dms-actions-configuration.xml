@@ -91,6 +91,9 @@
                           <value>
                            <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
                             <field  name="name"><string>exo:hiddenable</string></field>
+                            <field  name="properties">
+                             <string></string>
+                            </field>
                       		 </object>
                      		 	</value>
                     		</collection>
