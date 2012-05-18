@@ -297,11 +297,10 @@ public interface ManageDriveService {
    * Get all group drives
    * @param userId Name of user
    * @param userRoles Roles of user
-   * @param groups Groups of user
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getGroupDrives(String userId, List<String> userRoles, List<String> groups) throws Exception;
+  public List<DriveData> getGroupDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
    * Check if a drive is vitual(Group Drive Template)
@@ -309,12 +308,12 @@ public interface ManageDriveService {
    * @return true: is Virtual Drive, false: not is Virtual Drive
    */
   public boolean isVitualDrive(String driveName);
-  
+
   /**
    * Clear all drives cache
    */
   public void clearAllDrivesCache();
-  
+
   /**
    * Clear group drives cache
    * @param userId User name of current user
@@ -326,7 +325,7 @@ public interface ManageDriveService {
    * @return Boolean
    */
   public boolean newRoleUpdated();
-  
+
   /**
    * Set the status of new added role
    * @param newRoleUpdated

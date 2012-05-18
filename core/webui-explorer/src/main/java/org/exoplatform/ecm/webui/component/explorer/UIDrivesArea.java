@@ -105,13 +105,13 @@ public class UIDrivesArea extends UIContainer {
     try {
       OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
       Group group = orgService.getGroupHandler().findGroupById(groupId.replace(".", "/"));
-      if(group != null && group.getLabel().length() > 0) return group.getLabel();  
+      if(group != null && group.getLabel().length() > 0) return group.getLabel();
       return groupId.replace(".", " / ");
     } catch(Exception e) {
-      return groupId.replace(".", " / "); 
+      return groupId.replace(".", " / ");
     }
   }
-  
+
   public String getGroupLabel(String groupId, boolean isFull) {
     String ret = groupId.replace(".", " / ");
     if (!isFull) {
@@ -167,10 +167,9 @@ public class UIDrivesArea extends UIContainer {
 
   public List<DriveData> groupDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
-    List<String> groups = Utils.getGroups();
     List<String> userRoles = getUserRoles(driveService.newRoleUpdated());
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getGroupDrives(userId, userRoles, groups);
+    return driveService.getGroupDrives(userId, userRoles);
   }
 
   public List<DriveData> personalDrives() throws Exception {
@@ -232,12 +231,12 @@ public class UIDrivesArea extends UIContainer {
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       HttpServletRequest request = Util.getPortalRequestContext().getRequest();
       Cookie[] cookies = request.getCookies();
-      Cookie getCookieForUser = UIJCRExplorer.getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);      
-      if (uiJCRExplorer.findFirstComponentOfType(UIAllItems.class) == null || getCookieForUser == null) {        
+      Cookie getCookieForUser = UIJCRExplorer.getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);
+      if (uiJCRExplorer.findFirstComponentOfType(UIAllItems.class) == null || getCookieForUser == null) {
         pref.setShowHiddenNode(drive.getShowHiddenNode());
       }
       if (getCookieForUser == null) {
-        pref.setShowNonDocumentType(drive.getViewNonDocument());        
+        pref.setShowNonDocumentType(drive.getViewNonDocument());
       }
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
@@ -254,13 +253,13 @@ public class UIDrivesArea extends UIContainer {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);

@@ -107,10 +107,9 @@ public class UIDrivesBrowser extends UIContainer {
 
   public List<DriveData> groupDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
-    List<String> groups = Utils.getGroups();
     List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getGroupDrives(userId, userRoles, groups);
+    return driveService.getGroupDrives(userId, userRoles);
   }
 
   public List<DriveData> personalDrives() throws Exception {
@@ -155,7 +154,7 @@ public class UIDrivesBrowser extends UIContainer {
       if(viewList.isEmpty()) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.no-view-found", args));
-        
+
         return;
       }
       StringBuffer viewListStr = new StringBuffer();
@@ -167,7 +166,7 @@ public class UIDrivesBrowser extends UIContainer {
       }
       drive.setViews(viewListStr.toString());
       String homePath = drive.getHomePath();
-      if(homePath.contains("${userId}")) 
+      if(homePath.contains("${userId}"))
         homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
       UIJCRExplorerPortlet uiParent = uiDrive.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);
@@ -194,13 +193,13 @@ public class UIDrivesBrowser extends UIContainer {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
         uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));
-        
+
         return;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);

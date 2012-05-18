@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
 import javax.jcr.AccessDeniedException;
@@ -60,7 +59,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -76,12 +74,12 @@ import org.w3c.dom.Element;
  * Created by The eXo Platform SAS
  * Author : Lai Trung Hieu
  *          hieu.lai@exoplatform.com
- * 6 Apr 2011  
+ * 6 Apr 2011
  */
 
 @Path("/managedocument/")
 public class ManageDocumentService implements ResourceContainer {
-  
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   protected static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
@@ -93,20 +91,18 @@ public class ManageDocumentService implements ResourceContainer {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(ManageDocumentService.class.getName());
-  
+
   private ManageDriveService    manageDriveService;
-  
+
   private LinkManager linkManager;
-  
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  
+
   /** The file upload handler. */
   protected FileUploadHandler   fileUploadHandler;
-  
+
   private enum DriveType {
     GENERAL, GROUP, PERSONAL
   }
-  
+
   final static public String   EXO_MUSICFOLDER      = "exo:musicFolder";
 
   final static public String   EXO_VIDEOFOLDER      = "exo:videoFolder";
@@ -128,7 +124,7 @@ public class ManageDocumentService implements ResourceContainer {
   final static public String   NT_UNSTRUCTURED      = "nt:unstructured";
 
   final static public String   NT_FOLDER            = "nt:folder";
-  
+
   final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
     EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
@@ -136,24 +132,22 @@ public class ManageDocumentService implements ResourceContainer {
   /**
    * Instantiates a new platform document selector.
    *
-   * @param manageDriveService 
+   * @param manageDriveService
    */
-  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager,
-                               NodeHierarchyCreator nodeHierarchyCreator) {
+  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager) {
     this.manageDriveService = manageDriveService;
     this.linkManager = linkManager;
-    this.nodeHierarchyCreator = nodeHierarchyCreator;
     fileUploadHandler = new FileUploadHandler();
     cc = new CacheControl();
     cc.setNoCache(true);
     cc.setNoStore(true);
   }
-  
+
   /**
-   * 
+   *
    * @param driveType type of drives to get: general, group or personal
    * @return {@link Document} contains the drives
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
@@ -170,12 +164,11 @@ public class ManageDocumentService implements ResourceContainer {
     Element rootElement = document.createElement("Folders");
     document.appendChild(rootElement);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
-    Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
     List<DriveData> driveList = new ArrayList<DriveData>();
     if (DriveType.GENERAL.toString().equalsIgnoreCase(driveType)) {
       driveList = manageDriveService.getMainDrives(userId, userRoles);
     } else if (DriveType.GROUP.toString().equalsIgnoreCase(driveType)) {
-      driveList = manageDriveService.getGroupDrives(userId, userRoles, new ArrayList<String>(groups));
+      driveList = manageDriveService.getGroupDrives(userId, userRoles);
     } else if (DriveType.PERSONAL.toString().equalsIgnoreCase(driveType)) {
       driveList = manageDriveService.getPersonalDrives(userId, userRoles);
     //remove Private drive
@@ -197,7 +190,7 @@ public class ManageDocumentService implements ResourceContainer {
             break;
           }
         }
-      }      
+      }
     }
     rootElement.appendChild(buildXMLDriveNodes(document, driveList, driveType));
     return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cc).build();
@@ -240,7 +233,7 @@ public class ManageDocumentService implements ResourceContainer {
         LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
-      
+
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error when perform get Folders and files: ", e);
@@ -248,10 +241,10 @@ public class ManageDocumentService implements ResourceContainer {
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
-  
+
   /**
    * Delete a folder or a file.
-   * 
+   *
    * @param driveName the drive name
    * @param workspaceName the workspace name
    * @param itemPath path to item to delete
@@ -266,7 +259,7 @@ public class ManageDocumentService implements ResourceContainer {
   public Response deleteFolderOrFile(@QueryParam("driveName") String driveName,
                                      @QueryParam("workspaceName") String workspaceName,
                                      @QueryParam("itemPath") String itemPath){
-    try {     
+    try {
       Node node = getNode(driveName, workspaceName, itemPath);
       Node parent = node.getParent();
       node.remove();
@@ -288,7 +281,7 @@ public class ManageDocumentService implements ResourceContainer {
         LOG.error("Repository is error: ", e);
       }
       return Response.status(Status.SERVICE_UNAVAILABLE).entity(e.getMessage()).cacheControl(cc).build();
-      
+
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Error when perform delete Folder or file: ", e);
@@ -296,10 +289,10 @@ public class ManageDocumentService implements ResourceContainer {
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
-  
+
   /**
    * Create new folder.
-   *  
+   *
    * @param driveName the drive name
    * @param workspaceName the workspace name
    * @param currentFolder path to current folder
@@ -353,7 +346,7 @@ public class ManageDocumentService implements ResourceContainer {
       return Response.serverError().entity(e.getMessage()).cacheControl(cc).build();
     }
   }
-  
+
   /**
    * Upload file.
    *
@@ -373,13 +366,13 @@ public class ManageDocumentService implements ResourceContainer {
       @QueryParam("uploadId") String uploadId) throws Exception {
     return fileUploadHandler.upload(servletRequest, uploadId, null);
   }
-  
+
   /**
    * Process upload.
    *
-   * @param workspaceName the workspace name 
+   * @param workspaceName the workspace name
    * @param driveName the drive name
-   * @param currentFolder the current folder 
+   * @param currentFolder the current folder
    * @param siteName the current portal
    * @param jcrPath the jcr path
    * @param action the action
@@ -457,7 +450,7 @@ public class ManageDocumentService implements ResourceContainer {
       referNode = sourceNode != null ? sourceNode : child;
 
       if (isFolder(referNode)) {
-        // Get current folder from folder path to fix same name problem (ECMS-3586) 
+        // Get current folder from folder path to fix same name problem (ECMS-3586)
         String folderPath = referNode.getPath();
         folderPath = folderPath.substring(folderPath.lastIndexOf("/") + 1, folderPath.length());
         String childFolder = StringUtils.isEmpty(currentFolder) ? folderPath : currentFolder.concat("/")
@@ -469,7 +462,7 @@ public class ManageDocumentService implements ResourceContainer {
                                              childFolder);
         folders.appendChild(folder);
       } else   if (isFile(referNode)) {
-        Element file = createFileElement(document, referNode, child, 
+        Element file = createFileElement(document, referNode, child,
                                          referNode.getSession().getWorkspace().getName());
         files.appendChild(file);
       } else {
@@ -486,7 +479,7 @@ public class ManageDocumentService implements ResourceContainer {
     return checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED);
   }
-  
+
   private boolean isFile(Node checkNode) throws RepositoryException {
     return checkNode.isNodeType(NodetypeConstant.NT_FILE);
   }
@@ -510,14 +503,14 @@ public class ManageDocumentService implements ResourceContainer {
       getSession(workspaceName).checkPermission(child.getPath(), PermissionType.REMOVE);
     } catch (Exception e) {
       canRemove = false;
-    } 
-    
+    }
+
     try {
       getSession(workspaceName).checkPermission(child.getPath(), PermissionType.ADD_NODE);
     } catch (Exception e) {
       canAddChild = false;
     }
-    
+
     folder.setAttribute("name", child.getName());
     folder.setAttribute("title", Utils.getTitle(child));
     folder.setAttribute("path", child.getPath());
@@ -529,7 +522,7 @@ public class ManageDocumentService implements ResourceContainer {
     folder.setAttribute("currentFolder", currentFolder);
     folder.setAttribute("hasChild", String.valueOf(hasChild));
     folder.setAttribute("titlePath", createTitlePath(driveName, workspaceName, currentFolder));
-      
+
     return folder;
   }
 
@@ -562,7 +555,7 @@ public class ManageDocumentService implements ResourceContainer {
     } else {
       file.setAttribute("nodeType", sourceNode.getPrimaryNodeType().getName());
     }
-    
+
     long size = sourceNode.getNode("jcr:content").getProperty("jcr:data").getLength();
     file.setAttribute("size", "" + size);
     try {
@@ -572,7 +565,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     file.setAttribute("canRemove", String.valueOf(canRemove));
     return file;
-  }  
+  }
 
   private Node getNode(String driveName, String workspaceName, String currentFolder) throws Exception {
     Session session = getSession(workspaceName);
@@ -591,24 +584,24 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return node;
   }
-  
+
   private Session getSession(String workspaceName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     ManageableRepository manageableRepository = getCurrentRepository();
     return sessionProvider.getSession(workspaceName, manageableRepository);
   }
-  
+
   private Document createNewDocument() throws ParserConfigurationException {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     return builder.newDocument();
   }
-  
+
   private ManageableRepository getCurrentRepository() throws RepositoryException {
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     return repositoryService.getCurrentRepository();
   }
-  
+
   private Response getResponse(Document document) {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok(new DOMSource(document), MediaType.TEXT_XML)
@@ -616,7 +609,7 @@ public class ManageDocumentService implements ResourceContainer {
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
   }
-  
+
   /**
    * Build drive node from drive list.
    *
@@ -639,7 +632,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return folders;
   }
-  
+
   /**
    * Gets the memberships.
    *
@@ -664,7 +657,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return userMemberships;
   }
-  
+
   public static String getNodeTypeIcon(Node node) throws RepositoryException {
     StringBuilder str = new StringBuilder();
     if (node == null)
@@ -698,7 +691,7 @@ public class ManageDocumentService implements ResourceContainer {
     str.append(nodeType);
     return str.toString();
   }
-  
+
   /**
    * Creates the process upload response.
    *
@@ -731,7 +724,7 @@ public class ManageDocumentService implements ResourceContainer {
     }
     return fileUploadHandler.control(uploadId, action);
   }
-  
+
   private String createTitlePath(String driveName, String workspaceName, String currentFolder) throws Exception {
     String[] folders = currentFolder.split("/");
     StringBuilder sb = new StringBuilder();
