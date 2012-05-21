@@ -63,7 +63,7 @@
                                 </entry>
                                 <entry>
                                     <para>
-                                        Search in all content containing the keyword.
+                                        Search all <emphasis role="bold">published content</emphasis> of search index areas that contain the keyword. 
                                     </para>
                                 </entry>
                             </row>
@@ -72,9 +72,7 @@
                                     <emphasis role="bold">in Pages</emphasis>
                                 </entry>
                                 <entry>
-                                    You can search in all portals or in a specific
-                                    portal. The returned results are the pages which contain the keyword in their name, title
-                                  or their <link linkend="SEO_data_page">SEO data</link> (description, and keyword).
+                                    Search all <link linkend="SEO_data_page">SEO data</link> (description, keyword) and pages that have <emphasis role="bold">titles</emphasis> or <emphasis role="bold">names</emphasis> matching the keyword. 
                                 </entry>
                             </row>
                         </tbody>
@@ -82,8 +80,7 @@
                 </table>
             </step>
             <step>
-                <para>In the Search form, you can enter another keyword and set the
-                    the search scale.
+                <para>In the Search form, you can enter another keyword and set the search scale.
                 </para>
             </step>
             <step>
