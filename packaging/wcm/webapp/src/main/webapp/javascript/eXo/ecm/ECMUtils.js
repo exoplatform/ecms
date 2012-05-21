@@ -1120,7 +1120,11 @@
 	  var itemArea = document.getElementById("SelectItemArea");	
 	  
 	  if(typeof(eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
-	    eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
+	    if (itemArea) {
+	      eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
+	    } else {
+	      eXo.ecm.ECMUtils.heightOfItemArea = 286;
+	    }
 	  }
 	  
 	  //adjust the height of items in side bar
@@ -1163,15 +1167,20 @@
 	  }
 	  
 	  //show or hide the SelectItemArea
-	  itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;	  	
-	  if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-	    resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
-	  } else {
-	    resizeTreeButton.className = "ResizeTreeButton";
+	  if (itemArea) {
+	    itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
+	    if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
+	      resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+	    } else {
+	      resizeTreeButton.className = "ResizeTreeButton";
+	    }
 	  }
 
 	  //adjust the height of tree explorer
-	  if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) {
+	  if (!itemArea) {
+		treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer + eXo.ecm.ECMUtils.heightOfItemArea - 20 + 'px'; 
+	  }
+	  else if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) {
 	    var treeExplorerHeight = rightContainer.offsetHeight;
 	  	
 		if (itemArea) {
