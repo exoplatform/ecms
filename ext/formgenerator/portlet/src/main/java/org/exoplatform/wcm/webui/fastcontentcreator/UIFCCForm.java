@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator;
 
+import java.net.URLEncoder;
 import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,9 @@ import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormUploadInput;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -409,6 +413,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         boolean preferenceIsRedirect = Boolean.parseBoolean(preferences.getValue(UIFCCConstant.PREFERENCE_IS_REDIRECT, "")) ;
         String preferenceRedirectPath = preferences.getValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, "") ;
         if (preferenceIsRedirect && preferenceRedirectPath != null) {
+          String confirmMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, null) ;
+          if(!StringUtils.isEmpty(confirmMessage)) {
+            confirmMessage = URLEncoder.encode(confirmMessage, "UTF-8"); 
+            Cookie cookie = new Cookie(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, confirmMessage);          	
+            HttpServletResponse response = Util.getPortalRequestContext().getResponse();
+            response.addCookie(cookie);
+          }
           event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + preferenceRedirectPath + "');");
         } else {
           String saveMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "") ;
