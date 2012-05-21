@@ -57,6 +57,7 @@ import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.Page;
+import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
@@ -204,6 +205,12 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   private File buildFileImage(File input, String path, String pageNumber, String strRotation, String strScale) {
      Document document = buildDocumentImage(input, path);
+
+     // Turn off Log of org.icepdf.core.pobjects.Stream to not print error stack trace in case
+     // viewing a PDF file including CCITT (Fax format) images
+     // TODO: Remove these statement and comments after IcePDF fix ECMS-3765
+     Logger.getLogger(Stream.class.toString()).setLevel(Level.OFF);
+
      // save page capture to file.
      float scale = 1.0f;
      try {
