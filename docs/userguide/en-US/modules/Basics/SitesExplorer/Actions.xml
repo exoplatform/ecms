@@ -1703,6 +1703,30 @@
                 <imagedata align="center" fileref="images/eventdisplayweb.png" format="PNG" width="150mm"/>
             </imageobject>
         </mediaobject>
+      <note>
+        <para>When viewing the
+          <emphasis>nt:file
+          </emphasis>
+          document nodes, such as File, CSS File, HTML file, JS file, Podcast, File Plan child nodes and uploaded file
+          nodes,
+          the following functions are disabled on the
+          Action bar:
+        </para>
+        <itemizedlist>
+          <listitem>
+            <para>Add Folder</para>
+          </listitem>
+          <listitem>
+            <para>Upload File</para>
+          </listitem>
+          <listitem>
+            <para>Add Content</para>
+          </listitem>
+          <listitem>
+            <para>Import Node</para>
+          </listitem>
+        </itemizedlist>
+      </note>
     </section>
     <section id="sect-User_Guide-Actions-Add_Folder">
         <title>Add a folder</title>
