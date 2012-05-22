@@ -243,7 +243,7 @@ public class LockUtil {
       for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
         Node itemNode = iter.nextNode();
         //add lockToken of this locked node to the given membership
-        if (!Utils.isInTrash(itemNode)) {
+        if (!Utils.isInTrash(itemNode) && itemNode.isLocked()) {
           String lockToken = getLockToken(itemNode);
           keepLock(itemNode.getLock(), membership, lockToken);
           if (membership.startsWith("*")) {
