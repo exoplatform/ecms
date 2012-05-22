@@ -545,9 +545,9 @@ public class Utils {
   public static String getRealNodePath(Node node) throws Exception {
 	  if (node.isNodeType("nt:frozenNode")) {
 	  	Node realNode = getRealNode(node);
-		  return realNode.getPath() + "?version=" + node.getParent().getName();
+		  return Text.escape(realNode.getPath(),'%',true) + "?version=" + node.getParent().getName();
 	  } else {
-		  return node.getPath();
+		  return Text.escape(node.getPath(),'%',true);
 	  }
   }
   
@@ -558,7 +558,7 @@ public class Utils {
 	  String currentProtal = PortalContainer.getCurrentRestContextName();
 	  String portalName = PortalContainer.getCurrentPortalContainerName();
 	  
-	  String originalNodePath = Text.escape(getRealNodePath(node),'%',true);
+	  String originalNodePath = getRealNodePath(node);
 	  String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/" + workspace + originalNodePath;
 	  if (imagePath.contains("?")) {
 	  	imagePath += "&time=";
