@@ -16,11 +16,11 @@
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/ZeroClipboard.js"></script>
 <div class="$uicomponent.id" id="$uicomponent.id" >
 	<div style="height: 0px;">
-		<div style="width: 880px;" >
+		<div style="width: 920px;" >
 			<span style="display: none;"></span>
 		</div>
 	</div>
-	<div style="!width: expression(this.previousSibling.offsetWidth - 2 + 'px'); margin: auto; !border: 1px solid white; min-width: 880px;">
+	<div style="!width: expression(this.previousSibling.offsetWidth - 2 + 'px'); margin: auto; !border: 1px solid white; min-width: 920px;">
  		<%  uicomponent.renderChildren(); %>
   </div>
 </div>
