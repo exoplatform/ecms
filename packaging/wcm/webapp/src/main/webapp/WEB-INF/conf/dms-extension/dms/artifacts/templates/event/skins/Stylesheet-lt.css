@@ -188,6 +188,10 @@ padding-bottom: 2px;
 	overflow: auto;
 	text-align: left;
 }
+*+html .UIArticle .FieldContent .LabelContent{
+  padding: 5px 0px 10px 5px;
+  overflow-y: hidden;
+}
 
 .UIArticle .LabelContent p a {
 	color: #058EE6;

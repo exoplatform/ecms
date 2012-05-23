@@ -163,6 +163,11 @@
 	text-align: right;
 }
 
+*+html .UIArticle .FieldContent .LabelContent{
+  padding: 5px 5px 10px 0px;
+  overflow-y: hidden;
+}
+
 .UIArticle .LabelContent p a {
 	color: #058EE6;
 	text-decoration: underline;
