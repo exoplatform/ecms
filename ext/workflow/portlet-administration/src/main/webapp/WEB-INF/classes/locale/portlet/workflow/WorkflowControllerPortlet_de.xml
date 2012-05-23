@@ -109,7 +109,7 @@
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
-    </title>    
+    </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
@@ -123,6 +123,11 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm> 					
+  </UIDocumentForm>
+  <PositiveNumberValidator>
+    <msg>
+      <invalid-input>The field '{0}' with the value '{1}' is invalid. This field require a positive number.</invalid-input>
+    </msg>
+  </PositiveNumberValidator>
 </bundle>
 

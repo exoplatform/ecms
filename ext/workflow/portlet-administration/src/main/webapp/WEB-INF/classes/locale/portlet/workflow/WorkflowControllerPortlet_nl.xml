@@ -2,7 +2,7 @@
 <bundle>
   <!--
   #############################################################################
-  #			org.exoplatform.workflow.webui.component.controller										#
+  #      org.exoplatform.workflow.webui.component.controller                    #
   #############################################################################
   -->
   <UIWorkflowControllerPortlet>
@@ -92,16 +92,16 @@
   ## Need to be translated Since version ECM 2.3                      #
   #####################################################################
   -->
-  
+
   <PopupDelegatedSelectorId>
     <title>
       <UIUserSelectContainer>Select User</UIUserSelectContainer>
     </title>
-  </PopupDelegatedSelectorId>  
-  
+  </PopupDelegatedSelectorId>
+
  <!--
   #############################################################################
-  #			     Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
+  #           Since 2.0.0-Alpha02-SNAPSHOT tobe translate                      #
   #############################################################################
   -->
   <UIWorkflowControllerPortlet>
@@ -115,7 +115,7 @@
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
-    </title>    
+    </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
@@ -125,10 +125,15 @@
     </label>
   </UITreeTaxonomyList>
   <UIDocumentForm>
-	  <msg>
-		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
-	  </msg>
+    <msg>
+      <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+      <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+    </msg>
   </UIDocumentForm>
+  <PositiveNumberValidator>
+    <msg>
+      <invalid-input>The field '{0}' with the value '{1}' is invalid. This field require a positive number.</invalid-input>
+    </msg>
+  </PositiveNumberValidator>
 </bundle>
 

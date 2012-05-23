@@ -172,6 +172,8 @@ public class FormImpl implements Form{
       attributes.put("mandatory", mandatory);
       String visiable = variableElement.attributeValue("visiable");
       attributes.put("visiable", visiable);
+      String isPositiveNumber = variableElement.attributeValue("isPositiveNumber");
+      attributes.put("isPositiveNumber", isPositiveNumber);
       this.variables.add(attributes);
     }
   }

@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ResourceResolver;
@@ -78,6 +79,7 @@ import org.exoplatform.workflow.webui.component.BJARResourceResolver;
 import org.exoplatform.workflow.webui.component.InputInfo;
 import org.exoplatform.workflow.webui.component.UISelectable;
 import org.exoplatform.workflow.webui.component.VariableMaps;
+import org.exoplatform.workflow.webui.component.validator.PositiveNumberValidator;
 import org.exoplatform.workflow.webui.utils.LockUtil;
 import org.exoplatform.workflow.webui.utils.Utils;
 /**
@@ -213,6 +215,12 @@ public class UITask extends UIForm implements UISelectable {
       if (visiableString != null && !"".equals(visiableString)) {
         visiable = new Boolean(visiableString).booleanValue();
       }
+      boolean isPositiveNumber = false;
+      String isPositiveNumberString = (String) attributes.get("isPositiveNumber");
+      if (StringUtils.isNotBlank(isPositiveNumberString)) {
+        isPositiveNumber = new Boolean(isPositiveNumberString).booleanValue();;
+      }
+
       Object value = variablesForService.get(name);
 
       if (NODE_EDIT.equals(component)) {
@@ -284,21 +292,21 @@ public class UITask extends UIForm implements UISelectable {
           ((UIFormWYSIWYGInput)input).setToolBarName(UIFormWYSIWYGInput.DEFAULT_TOOLBAR);
           ((UIFormWYSIWYGInput)input).setEditable(editable);
         } else if (DATE.equals(component) || DATE_TIME.equals(component)) {
-          if(value == null) 
+          if(value == null)
           {
             input = new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component));
           } else {
             if(value instanceof String) {
               if(value.toString().length() > 0) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-                input = new UIFormDateTimeInput(name, null, dateFormat.parse(value.toString()), DATE_TIME.equals(component));  
+                input = new UIFormDateTimeInput(name, null, dateFormat.parse(value.toString()), DATE_TIME.equals(component));
               } else {
                 input = new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component));
               }
             } else {
               input = new UIFormDateTimeInput(name, null, (Date)value, DATE_TIME.equals(component));
             }
-              
+
           }
           if (!visiable) {
             input.setValue("");
@@ -397,6 +405,9 @@ public class UITask extends UIForm implements UISelectable {
         inputInfo_.add(new InputInfo("", "", inputName, input, mandatory));
         if (mandatory) {
           input.addValidator(MandatoryValidator.class);
+        }
+        if (isPositiveNumber) {
+          input.addValidator(PositiveNumberValidator.class);
         }
         addUIFormInput(input);
       }
@@ -546,7 +557,7 @@ public class UITask extends UIForm implements UISelectable {
         if (delegate.length() == 0) {
             uiApp.addMessage(new ApplicationMessage("UITask.msg.has-not-got-delegate", null,
                 ApplicationMessage.WARNING));
-            
+
             return;
         }
         // Check existence of delegated user

@@ -2,7 +2,7 @@
 <bundle>
   <!--
   #############################################################################
-  #			org.exoplatform.workflow.webui.component.controller										#
+  #      org.exoplatform.workflow.webui.component.controller                    #
   #############################################################################
   -->
   <UIWorkflowControllerPortlet>
@@ -137,4 +137,9 @@
      <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
    </msg>
   </UIDocumentForm>
+  <PositiveNumberValidator>
+    <msg>
+      <invalid-input>Le champs {0} avec la valeur {1} est invalide. Vous devez saisir une valeur positive.</invalid-input>
+    </msg>
+  </PositiveNumberValidator>
 </bundle>
