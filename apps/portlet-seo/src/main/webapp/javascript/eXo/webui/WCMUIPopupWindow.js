@@ -32,6 +32,8 @@ function WCMUIPopupWindow() {} ;
 WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask, top, left) {
 	var DOMUtil = eXo.core.DOMUtil ;
 	this.superClass = eXo.webui.UIPopup ;
+	this.topDelta = 10;
+	this.leftDelta = 10;
 	var popup = document.getElementById(popupId) ;
 	if(popup == null) return;
 	popup.style.visibility = "hidden" ;
@@ -127,14 +129,16 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
     var pageWidth = 0;
     var wsElement = document.getElementById('UIWorkingWorkspace');
     if(wsElement) pageWidth = wsElement.clientWidth;
-    if(screen.width - pageWidth <= 325)
+    // The size of the SEO form have to plus 10 pixels (leftDelta) to avoid being covered by the scroll bar on the browser.
+    var formWidth = 335 + this.leftDelta;
+    if(screen.width - pageWidth <= formWidth)
     	left = left - (screen.width - pageWidth);  
     else
 			 left = left - (screen.width - pageWidth)/2;
-    popup.style.top = top + 10 + "px";
+    popup.style.top = top + this.topDelta + "px";
     var deltaX = screen.width-left;
-    if(deltaX < 325) {
-      left = left - (325 - deltaX) - 70;
+    if(deltaX < formWidth) {
+      left = left - (formWidth - deltaX) - 70;
 		}  
     popup.style.left = left + "px";
     popup.style.position = "fixed";
