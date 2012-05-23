@@ -1,3 +1,7 @@
+.UISEOForm .UIFormGrid {
+    margin: 0px;
+    width: 315px;
+}
 .UISEOForm .UIFormGrid td.FieldComponent {
 	padding: 4px;
 	text-align: left;
