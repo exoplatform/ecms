@@ -362,12 +362,7 @@ public class UITaggingForm extends UIForm {
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       String tagScope = uiForm.getUIFormSelectBox(TAG_SCOPES).getValue();
       List<String> memberships = Utils.getMemberships();
-      
-      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-      String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-      String tagName = event.getRequestContext().getRequestParameter(OBJECTID);
-      if (!newFolksonomyService.canEditTag(workspace, tagName, uiForm.getIntValue(tagScope), memberships)) {
+      if (!newFolksonomyService.canEditTag(uiForm.getIntValue(tagScope), memberships)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
@@ -377,6 +372,7 @@ public class UITaggingForm extends UIForm {
       }
 
       Node currentNode = uiExplorer.getCurrentNode();
+      String tagName = event.getRequestContext().getRequestParameter(OBJECTID);
       String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if (!Utils.isNameValid(tagName, arrFilterChar)) {
@@ -458,15 +454,9 @@ public class UITaggingForm extends UIForm {
     public void execute(Event<UITaggingForm> event) throws Exception {
       UITaggingForm uiForm = event.getSource();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
-      
-      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-      String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-      String tagName = event.getRequestContext().getRequestParameter(OBJECTID);
-      
       String tagScope = uiForm.getUIFormSelectBox(TAG_SCOPES).getValue();
       List<String> memberships = Utils.getMemberships();
-      if (!newFolksonomyService.canEditTag(workspace, tagName, uiForm.getIntValue(tagScope), memberships)) {
+      if (!newFolksonomyService.canEditTag(uiForm.getIntValue(tagScope), memberships)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
