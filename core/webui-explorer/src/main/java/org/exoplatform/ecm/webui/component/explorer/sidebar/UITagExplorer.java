@@ -32,8 +32,10 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
@@ -136,15 +138,26 @@ public class UITagExplorer extends UIContainer {
   static public class EditTagsActionListener extends EventListener<UITagExplorer> {
     public void execute(Event<UITagExplorer> event) throws Exception {
       UITagExplorer uiTagExplorer = event.getSource();
+      NewFolksonomyService newFolksonomyService = uiTagExplorer.getApplicationComponent(NewFolksonomyService.class);
       String scope = event.getRequestContext().getRequestParameter(OBJECTID);
       int intScope = Utils.PUBLIC.equals(scope) ? NewFolksonomyService.PUBLIC
                                                : NewFolksonomyService.PRIVATE;
       uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).setTagScope(intScope);
 
-      UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class);
-      UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      uiPopupContainer.activate(UIEditingTagsForm.class, 600);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+      List<String> memberships = Utils.getMemberships();
+      if (newFolksonomyService.canEditTag(intScope, memberships)) {
+        UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class);
+        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        uiPopupContainer.activate(UIEditingTagsForm.class, 600);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+      } else {
+        UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        
+        uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).updateAjax(event);
+      }
     }
   }
 }
