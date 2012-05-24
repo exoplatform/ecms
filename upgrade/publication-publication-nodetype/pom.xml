@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-upgrade</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-upgrade-publication-publication-nodetype</artifactId>
   <name>eXo ECMS Upgrade publication:publication nodetype</name>
