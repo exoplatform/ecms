@@ -3385,4 +3385,9 @@
 	  <property_changed>Modifica proprietÃ </property_changed>
 	</label>
   </lifecyclePhase>
+  <UIPropertyForm>
+    <msg>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
 </bundle>
