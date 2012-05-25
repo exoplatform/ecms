@@ -715,6 +715,7 @@
       <propertyName-exist>La propriété '{0}' existe déjà.</propertyName-exist>
       <propertyValu-null>Certaines valeurs sont probablement nulles ou vides</propertyValu-null>
       <number-format-exception>La valeur saisie ne respecte pas le format attendu</number-format-exception>
+      <property-not-exist>La propriété {0} n'existe pas.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--

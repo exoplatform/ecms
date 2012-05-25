@@ -722,6 +722,7 @@
       <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
       <propertyValu-null>Có thể có một số giá trị là null</propertyValu-null>
       <number-format-exception>Giá trị nhập vào của bạn sai định dạng</number-format-exception>
+      <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--

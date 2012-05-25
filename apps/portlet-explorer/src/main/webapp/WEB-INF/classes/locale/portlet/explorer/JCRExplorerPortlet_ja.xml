@@ -3312,5 +3312,10 @@
       <no-permission>You can not remove all permissions of this node. Node should have at least one permission except for the 'system'</no-permission>
     </msg>
   </UIPermissionInfo>	  	
+  <UIPropertyForm>
+    <msg>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
 </bundle>
 

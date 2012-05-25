@@ -23,6 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
 import javax.jcr.Value;
@@ -44,8 +45,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -429,9 +430,16 @@ public class UIPropertyForm extends UIForm {
         isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
       } else {
         name = uiForm.propertyName_;
-        type = currentNode.getProperty(name).getType();
+        Property property = null;
+        try {
+          property = currentNode.getProperty(name);
+        } catch (PathNotFoundException ex) {
+          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.property-not-exist", new String[] { name }));
+          return;
+        }
+        type = property.getType();
         if (type == 0) type = 1;
-        isMultiple = currentNode.getProperty(name).getDefinition().isMultiple();
+        isMultiple = property.getDefinition().isMultiple();
       }
       try {
         if(isMultiple) {
