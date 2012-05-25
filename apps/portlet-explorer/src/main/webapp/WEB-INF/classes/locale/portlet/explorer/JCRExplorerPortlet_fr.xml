@@ -725,6 +725,7 @@
       <propertyValu-null>Certaines valeurs sont probablement nulles ou vides</propertyValu-null>
       <valueFormatEx>Impossible d'attribuer une valeur de plusieurs valeurs à une propriété à valeur unique</valueFormatEx>
       <number-format-exception>La valeur saisie ne respecte pas le format attendu</number-format-exception>
+      <property-not-exist>La propriété {0} n'existe pas.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--

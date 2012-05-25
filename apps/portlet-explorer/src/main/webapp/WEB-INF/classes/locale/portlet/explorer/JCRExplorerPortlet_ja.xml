@@ -3379,5 +3379,10 @@
       <is-editing>You cannot move an editing document. Please close it first.</is-editing>
     </msg>
   </UIWorkingArea>   
+  <UIPropertyForm>
+    <msg>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
 </bundle>
 
