@@ -2401,5 +2401,10 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+    </msg>
+  </UILockNodeList>
 </bundle>
   

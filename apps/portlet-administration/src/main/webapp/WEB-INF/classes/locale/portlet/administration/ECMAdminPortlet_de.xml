@@ -2490,5 +2490,10 @@
     <maxPageSize>Maximum page size</maxPageSize>
   </label>
  </UIPageIterator> 
+ <UILockNodeList>
+    <msg>
+      <can-not-unlock-node><![CDATA[Sie haben keine Genegmigung diesen Knoten aufzusperren. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
 </bundle>
 

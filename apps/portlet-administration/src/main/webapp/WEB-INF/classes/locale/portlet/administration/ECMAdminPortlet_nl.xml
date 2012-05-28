@@ -2418,6 +2418,12 @@
   <label>
     <maxPageSize>Maximum page size</maxPageSize>
   </label>
- </UIPageIterator> 
+ </UIPageIterator>
+ <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>U hebt geen recht om deze node vrij te maken.
+				contacteer uw beheerder</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
 </bundle>
 

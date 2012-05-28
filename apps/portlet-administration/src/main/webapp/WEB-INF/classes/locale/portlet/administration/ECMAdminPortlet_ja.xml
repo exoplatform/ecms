@@ -2468,5 +2468,10 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
 </bundle>
 

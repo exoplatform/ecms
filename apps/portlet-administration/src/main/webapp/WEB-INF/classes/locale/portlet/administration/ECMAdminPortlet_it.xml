@@ -2470,4 +2470,9 @@
       <maxPageSize>Dimensione Massima Pagina</maxPageSize>
     </label>
   </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Non hai i permessi di sbloccare questo nodo. Contatta l'amministratore per avere i diritti corretti.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
 </bundle>
