@@ -111,11 +111,14 @@ public class UISEOToolbarForm extends UIForm {
           paramsArray = new ArrayList<String>();
           while(params.hasMoreElements()) {
             contentParam = params.nextElement().toString();
+            String contentValue = "";
             try {
-              paramsArray.add(Text.unescape(pcontext.getRequestParameter(contentParam)));
+              contentValue = Text.unescape(pcontext.getRequestParameter(contentParam));
             } catch(Exception ex) {
-              paramsArray.add(pcontext.getRequestParameter(contentParam));
+              contentValue = pcontext.getRequestParameter(contentParam);
             }
+            contentValue = org.exoplatform.ecm.utils.text.Text.escapeIllegalJcrChars(contentValue);
+            paramsArray.add(contentValue);
           }
         }
     }
