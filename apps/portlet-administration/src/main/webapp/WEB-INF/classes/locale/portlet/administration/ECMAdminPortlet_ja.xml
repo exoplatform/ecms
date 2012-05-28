@@ -2454,5 +2454,10 @@
  	 <UINodeTypeSelector>ノードタイプセレクター</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UILockNodeList>
+   <msg>
+     <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
+   </msg>
+ </UILockNodeList>
 </bundle>
 

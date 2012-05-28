@@ -2465,5 +2465,10 @@
       <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo> 
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
+    </msg>
+  </UILockNodeList>
 </bundle>
 

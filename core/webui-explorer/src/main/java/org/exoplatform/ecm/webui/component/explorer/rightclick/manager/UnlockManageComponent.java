@@ -135,9 +135,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
         LockUtil.removeLock(node);
       }
     } catch(LockException le) {
-      Object[] args = {node.getName()};
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args, 
-          ApplicationMessage.WARNING));
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", null, ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
       return;

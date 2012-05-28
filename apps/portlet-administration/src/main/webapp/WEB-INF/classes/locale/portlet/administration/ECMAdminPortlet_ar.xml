@@ -2381,5 +2381,10 @@
 		  <namespace-invalid> '{0}' : بيانات غير صالحة : مساحة الاسم غير معروف :</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+    </msg>
+  </UILockNodeList>
 </bundle>
   

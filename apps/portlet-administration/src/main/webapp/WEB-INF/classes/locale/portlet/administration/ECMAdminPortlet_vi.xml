@@ -2469,5 +2469,10 @@
  	 <UINodeTypeSelector>Chọn NodeType</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UILockNodeList>
+   <msg>
+     <can-not-unlock-node>Bạn không có quyền mở khóa node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-unlock-node>
+   </msg>
+ </UILockNodeList>
 </bundle>
 
