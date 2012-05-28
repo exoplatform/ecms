@@ -208,10 +208,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
           LockUtil.removeLock(lockedNode);
         }
       } catch(LockException le) {
-        Object[] args = {lockedNode.getName()};
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args,
-            ApplicationMessage.WARNING));
-        
+        uiApp.addMessage(new ApplicationMessage("UILockNodeList.msg.can-not-unlock-node", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       } catch(VersionException versionException) {

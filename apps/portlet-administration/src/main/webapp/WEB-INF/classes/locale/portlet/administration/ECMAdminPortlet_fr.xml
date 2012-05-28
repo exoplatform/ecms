@@ -2257,4 +2257,9 @@
     <maxPageSize>Taille maximale de la page</maxPageSize>
   </label>
  </UIPageIterator>  
+ <UILockNodeList>
+   <msg>
+     <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
+   </msg>
+ </UILockNodeList>
 </bundle>

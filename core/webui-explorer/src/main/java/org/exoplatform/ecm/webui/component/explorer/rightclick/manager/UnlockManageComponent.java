@@ -145,11 +145,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
       return;
     } catch(VersionException versionException) {
-      Object[] args = {node.getName()};
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in",
-                                              args,
-                                              ApplicationMessage.WARNING));
-      
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", null, ApplicationMessage.WARNING));
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
