@@ -2393,5 +2393,10 @@
     <maxPageSize>Maximum page size</maxPageSize>
   </label>
  </UIPageIterator>	 
+ <UILockNodeList>
+   <msg>
+     <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
+   </msg>
+ </UILockNodeList>
 </bundle>
   
