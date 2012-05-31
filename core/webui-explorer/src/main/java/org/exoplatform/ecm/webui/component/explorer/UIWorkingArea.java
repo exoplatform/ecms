@@ -386,5 +386,12 @@ public class UIWorkingArea extends UIContainer {
     }
     return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
+  
+  public void processRender(WebuiRequestContext context) throws Exception {
+    UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
+    UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
+    uiActionBar.setRendered(uiPortlet.isShowActionBar());
+    super.processRender(context);
+  }
 
 }
