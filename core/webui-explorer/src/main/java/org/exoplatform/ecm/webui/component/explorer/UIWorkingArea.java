@@ -368,23 +368,7 @@ public class UIWorkingArea extends UIContainer {
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-    String title = null;
-    if (node.hasProperty("exo:title")) {
-      title = node.getProperty("exo:title").getValue().getString();
-    } else if (node.hasNode("jcr:content")) {
-      Node content = node.getNode("jcr:content");
-      if (content.hasProperty("dc:title")) {
-        try {
-          title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {
-          // Do nothing
-        }
-      }
-    } 
-    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
-      title = node.getName();
-    }
-    return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
+    return Utils.getTitle(node);
   }
   
   public void processRender(WebuiRequestContext context) throws Exception {
