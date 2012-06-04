@@ -120,7 +120,7 @@
     <version.assembly.plugin>2.2</version.assembly.plugin>
     <!-- config-scm-maven-plugin -->
     <version.release.plugin>2.2.1</version.release.plugin>
-    <version.buildnumber.plugin>1.0</version.buildnumber.plugin>
+    <version.buildnumber.plugin>1.1</version.buildnumber.plugin>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
