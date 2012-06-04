@@ -178,6 +178,9 @@ h3. UI Extensions {anchor:id=CONTref.Extensions.UIExtensions}
   {include:document="pages/extensions/ui.wiki" /}
 h3. Authoring Extension {anchor:id=CONTref.Extensions.AuthoringExtension}
   {include:document="pages/extensions/authoring.wiki" /}
+h3. Auxiliary attributes for documents  {anchor:id=CONTref.Extensions.AuxiliaryAttributes}
+{include:document="pages/extensions/auxiliary_attributes.wiki" /}
+
 h2. CMIS Usage code examples {anchor:id=Dev_CMIS.Usage_code_examples}
 {include:document="xCMIS/CodeExamples.wiki" /}    
 h2. Public REST APIs {anchor:id=CONTref.Devref.PublicRestAPIs}
