@@ -84,7 +84,7 @@ public class UIControllerManager extends UIContainer {
         uiTaskManager.setTokenId(processId) ;
         uiTaskManager.setIsStart(true);
         uiTaskManager.checkBeforeActive();
-        uiPopup.activate(uiTaskManager, 600, 500) ;
+        uiPopup.activate(uiTaskManager, 730, 500, false);
       } else {
         uiControllerManager.service_.startProcess(processId);
       }
