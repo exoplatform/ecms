@@ -1,6 +1,6 @@
 {docbook}
 <abstract>
- <para>This chapter will understand what CMIS is, how it is extended in WCM, its features, and more via the following topics:</para>
+ <para>This chapter will help you understand what CMIS is, how it is extended in WCM, and its features via the following topics:</para>
     <itemizedlist>
       <listitem>
         <para>
