@@ -39,7 +39,8 @@
   def resizeBlock = "class=\"UIResizableBlock\"";
   if(uiPopupWindow != null) resizeBlock = ""; 
   
-  def currentNode = getFileLangNode(uicomponent.getNode()) ;
+  def originNode = uicomponent.getNode();
+  def currentNode = getFileLangNode(originNode) ;
   currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
@@ -77,6 +78,9 @@
           
           sb.append(serverUrl).append("/").append(restContextName).append("/contents/download/");
           sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+          if (originNode.isNodeType("nt:frozenNode")) {
+            sb.append("?version=" + originNode.getParent().getName());
+          }
           def downloadLink = sb.toString();
         %>
         <div style="text-align:right;margin-top:1px" class="ActionButton LightBlueStyle">
