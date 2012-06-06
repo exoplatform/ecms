@@ -1,10 +1,3 @@
-h1. Preface {anchor:id=CONTref.Preface}
-{include:document="pages/preface/preface.wiki" /}
-h2. Get Started with eXo Content  {anchor:id=CONTref.Preface.GetStarted}
-  {include:document="pages/preface/start.wiki" /}
-h2. Package {anchor:id=CONTref.Preface.Package}
-  {include:document="pages/preface/packaging.wiki" /}
-  
 h1. Applications {anchor:id=CONTref.Applications}
 {include:document="pages/preface/application.wiki" /}
 h2. Portlets {anchor:id=CONTref.Applications.Portlets}
@@ -145,7 +138,7 @@ h3. TemplatePlugin   {anchor:id=CONTref.Configuration.Plugins.TemplatePlugin}
 h3. XMLdeploymentPlugin{anchor:id=CONTref.Configuration.Plugins.XMLdeploymentPlugin}
 {include:document="pages/configuration/plugins/plugin_XMLdeploymentPlugin.wiki" /}
 
-h2. CMIS configuration {anchor:id=Adm_CMIS.Configuration}
+h2. CMIS configuration {anchor:id=CONTref.CMIS.Configuration}
 {include:document="xCMIS/Configure.wiki" /}
 {include:document="xCMIS/Authentication.wiki" /}
 {include:document="xCMIS/Index.wiki" /}
