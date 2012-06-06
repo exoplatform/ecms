@@ -397,7 +397,7 @@
       </step>
     </procedure>
   </section>
-  <section>
+  <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Information">
     <title>View information</title>
     <para>eXo Platform supports you to view all information of a document, such as name, title, creator, and publication state of the document.</para>
      <para>To view information of a document, simply right-click the document, and select <emphasis role="bold">View Information</emphasis> from the drop-down menu.
