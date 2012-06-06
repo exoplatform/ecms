@@ -43,6 +43,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -51,6 +52,7 @@ import org.exoplatform.services.jcr.impl.core.value.StringValue;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * @author Hung Nguyen Quang
@@ -487,6 +489,16 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
    * {@inheritDoc}
    */
   public void addSynchronizedLinkedLanguage(Node selectedNode, Node newTranslationNode) throws Exception {
+    
+    if (newTranslationNode != null && newTranslationNode.isNodeType(Utils.EXO_SYMLINK)) {
+      newTranslationNode = WCMCoreUtils.getService(LinkManager.class).getTarget(newTranslationNode);
+    }
+    
+    if (!newTranslationNode.isNodeType("mix:i18n")) {
+      newTranslationNode.addMixin("mix:i18n");
+      newTranslationNode.save();
+    }
+    
     String newLang = newTranslationNode.getProperty("exo:language").getString();
     
     // Only add new translation if lang of new translation
