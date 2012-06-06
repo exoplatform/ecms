@@ -320,7 +320,7 @@
                         <imagedata fileref="images/6.png" format="PNG" width="5mm" scalefit="1"/>
                       </imageobject>
                     </inlinemediaobject> </entry>
-                  <entry> This field allows you to add a constraint to search by a document type, including File, Article, Podcast, Sample node, File Plan, Kofax). </entry>
+                  <entry> This field allows you to add a constraint to search by a document type, including File, Article, Podcast, Sample node, File Plan, Kofax. </entry>
                 </row>
                 <row>
                   <entry> <inlinemediaobject>

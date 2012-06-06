@@ -1187,7 +1187,7 @@
         </para>
         <itemizedlist>
             <listitem>
-                <para><link linkend="sect-User_Guide-Contribute_Content-CKEditor-Insert_portal_link">Insert a portal link to the document.</link></para>
+                <para><link linkend="sect-User_Guide-Contribute_Content-CKEditor-Insert_portal_link">Insert a site link to the document.</link></para>
             </listitem>
             <listitem>
                 <para><link linkend="sect-User_Guide-Contribute_Content-CKEditor-Insert_content_link">Insert a content link to the document.</link></para>
@@ -1195,7 +1195,7 @@
         </itemizedlist>
             <citetitle>
         <para xml:id="sect-User_Guide-Contribute_Content-CKEditor-Insert_portal_link">
-            <emphasis role="bold">Insert a portal link</emphasis>
+            <emphasis role="bold">Insert a site link</emphasis>
         </para>
             </citetitle>
         <procedure>
@@ -1207,7 +1207,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     to open the
-                    <emphasis role="bold">Insert Portal Link</emphasis>
+                    <emphasis role="bold">Insert link to a site page</emphasis>
                     form.
                 </para>
                 <mediaobject>
@@ -1220,27 +1220,27 @@
                 </mediaobject>
             </step>
             <step>
-                <para>Enter the title of the portal in the
+                <para>Enter the title of the site in the
                     <emphasis role="bold">Title</emphasis>
                     field.
                 </para>
             </step>
             <step>
-                <para>Enter the portal URL manually, or you can also click
-                    <emphasis role="bold">Get portal link</emphasis>
-                    to open a page containing all the portals in the same server, then select one that you want.
+                <para>Enter the site URL manually, or you can also click
+                    <emphasis role="bold">Get site link</emphasis>
+                    to open a page containing all the sites in the same server, then select your desired one.
                 </para>
             </step>
             <step>
                 <para>Click
                     <emphasis role="bold">Preview</emphasis>
-                    to view the portal.
+                    to view the site.
                 </para>
             </step>
             <step>
                 <para>Click
                     <emphasis role="bold">Save</emphasis>
-                    to accept inserting the portal to the document.
+                    to accept inserting the site link to the document.
                 </para>
             </step>
         </procedure>
