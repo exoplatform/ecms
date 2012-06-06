@@ -1,6 +1,58 @@
 {docbook}
 <abstract>
- <para>This chapter provides you a comprehensive view about portlet applications included in eXo Content.</para>
+ <para>This chapter provides you a comprehensive view about <link linkend="CONTref.Applications.Portlets">portlet applications</link> of Content, including:</para>
+  <itemizedlist>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.ContentDetail">Content Detail</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.ContentList">Content List</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.Search">Search</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.Explorer">Sites Explorer</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.Administration">Administration</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.FastContentCreator">Fast Content Creator</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.FormBuilder">Form Builder</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.Authoring">Authoring</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.Newsletter">Newsletter</link></emphasis>
+	  </para>
+    </listitem>
+	<listitem>
+	  <para> 
+		<emphasis role="bold"><link linkend="CONTref.Portlets.SEO">SEO portlet</link></emphasis>
+	  </para>
+    </listitem>
+  </itemizedlist>
  <para>These portlet applications are packaged as Web application archives (WARs).</para>
  <para>Also, you can specify the package of each portlet and its available preferences that allow you to extend the configuration choices for standard preferences defined in <emphasis>portlet.xml</emphasis>.</para>
 </abstract>
