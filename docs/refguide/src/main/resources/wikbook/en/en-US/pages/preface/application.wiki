@@ -1,5 +1,13 @@
-This chapter provides you a comprehensive view about portlet applications included in eXo Content.
-These portlet applications are packaged as Web application archives (WARs).
+{docbook}
+<abstract>
+ <para>This chapter provides you a comprehensive view about portlet applications included in eXo Content.</para>
+ <para>These portlet applications are packaged as Web application archives (WARs).</para>
+ <para>Also, you can specify the package of each portlet and its available preferences that allow you to extend the configuration choices for standard preferences defined in <emphasis>portlet.xml</emphasis>.</para>
+</abstract>
+{docbook}
 
-Also, you can specify the package of each portlet and its available preferences that allow you to extend the configuration choices for standard preferences defined in _portlet.xml_.
+
+
+
+
 
