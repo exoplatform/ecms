@@ -397,28 +397,7 @@
 	 </para>
     <itemizedlist>
 	<listitem>
-	 <para>
-	  Click
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" width="4mm" scalefit="1"/>
-            </imageobject>
-            <textobject>
-               <phrase>plus</phrase>
-            </textobject>
-          </inlinemediaobject> to allow any users to unlock nodes.
-    </para>
-        <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" scalefit="1" />
-           </imageobject>
-        </mediaobject>
-    </listitem>
-	<listitem>
-        <para>
+	      <para>
      Click
      <inlinemediaobject>
             <imageobject>
@@ -429,8 +408,16 @@
             </textobject>
           </inlinemediaobject> corresponding to the group which you want to remove form the "Unlock" permission list, except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
     </para>
-	</listitem>
-	</itemizedlist>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" scalefit="1" />
+           </imageobject>
+        </mediaobject>
+    </listitem>
+    </itemizedlist>
       </step>
     </procedure>
   </section>
