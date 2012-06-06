@@ -224,7 +224,10 @@
 	<div class="PDFViewerContent">
   	<div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
-			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";			  
+			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + 
+			                        "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + 
+			                        "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" +
+			                        currentNode.getProperty("jcr:content/jcr:lastModified").getString();			  
 		%>
 			  <a href="$pdfPageImage" style="display:inline-block" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><img src="$pdfPageImage" /></a>
 		</div>
