@@ -1,0 +1,103 @@
+<preface xml:id="CONTref.Preface">
+  <title>Preface</title>
+  <abstract>
+    <para>eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform,
+      the extension mechanism is used to add content features. To have more information about the extension mechanism,
+      refer to the<ulink url="http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html">
+        GateIn reference guide</ulink>.
+    </para>
+    <para>This integrated solution provides users with a comprehensive platform about integrating applications, managing
+      and publishing content - all from a single, familiar console.
+    </para>
+    <para>When starting a new project, you can see eXo Content as a Java developer platform.</para>
+    <para>This document will give you guidelines related to building stable applications using eXo Content from the
+      inside. The document consists of the following main contents:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Applications">Application</link></emphasis>
+            describes portlet applications included in eXo Content.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Configuration">Configuration</link></emphasis>
+            provides you the comprehensive knowledge about the configuration with a large range of configuration
+            parameters declared in eXo Content.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.DeveloperReferences">Developer References</link></emphasis>
+            describes about extension, public APIs, Java APIs, FAQs and related others in eXo Content.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para xml:id="CONTref.Preface.Package">
+    <citetitle>
+      <emphasis role="bol">Package</emphasis>
+     </citetitle>
+     </para>
+      <para>All package actions in eXo Content are started from the _delivery_ folder, so you should go to this folder
+        first.
+      </para>
+      <programlisting>$ cd ecms/delivery
+      </programlisting>
+      <itemizedlist>
+        <listitem>
+          <para>
+              <emphasis role="bold">Package WCM standalone version - Tomcat bundle</emphasis>
+          </para>
+          <programlisting>$ cd wcm/assembly
+            $ mvn clean install
+          </programlisting>
+        </listitem>
+        <listitem>
+          <para>
+              <emphasis role="bold">Package WCM with workflow enabled - Tomcat bundle</emphasis>
+          </para>
+          <programlisting>$ cd wkf-wcm/assembly
+            $ mvn clean install
+          </programlisting>
+        </listitem>
+        <listitem>
+          <para>
+              <emphasis role="bold">Make WCM EAR packages to run with jBoss</emphasis>
+          </para>
+          <programlisting>$ cd wcm/assembly
+            $ mvn clean install
+          </programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Make WCM extension EAR
+              </para>
+              <programlisting>$ cd packaging/wcm/ear
+                $ mvn clean install
+              </programlisting>
+            </listitem>
+            <listitem>
+              <para>
+                Make WCM demo sites EAR
+              </para>
+              <programlisting>$ cd packaging/ecmdemo/ear
+                $ mvn clean install
+              </programlisting>
+            </listitem>
+            <listitem>
+              <para>
+                Make workflow EAR
+              </para>
+              <programlisting>$ cd packaging/workflow/ear
+                $ mvn clean install
+              </programlisting>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+  </abstract>
+</preface>
