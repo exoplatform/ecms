@@ -139,6 +139,15 @@ public class Utils {
       return false;
     return true;
   }
+  
+  /**
+   * Check if the portlet current mode is view mode or not
+   * 
+   * @return return true if current portlet mode is view mode; otherwise return false
+   */
+  public static boolean isPortletViewMode() {
+    return Utils.getCurrentMode().equals(PortletMode.VIEW);
+  }
 
   public static boolean isPortalEditMode() {
     return Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE;
@@ -331,6 +340,16 @@ public class Utils {
       return WCMComposer.MODE_LIVE;
     boolean turnOnQuickEdit = Boolean.parseBoolean(isQuickEditable.toString());
     return turnOnQuickEdit ? WCMComposer.MODE_EDIT : WCMComposer.MODE_LIVE;
+  }
+  
+  /**
+   * Check if the current mode is live mode or not
+   * 
+   * @return return true if current mode is WCMComposer.MODE_LIVE; otherwise
+   *         false.
+   */
+  public static boolean isLiveMode() {
+    return WCMComposer.MODE_LIVE.equals(getCurrentMode());
   }
 
   /**

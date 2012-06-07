@@ -284,8 +284,9 @@ public class UICLVPortlet extends UIPortletApplication {
     
     Boolean sharedCache = "true".equals(preferences.getValue(PREFERENCE_SHARED_CACHE, "true"));    
 
-    if ((context.getRemoteUser()==null ||
-          !"Edit".equals(Utils.getCurrentMode())) && sharedCache){
+    if (context.getRemoteUser() == null
+        || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode())
+        && Utils.isPortletViewMode()) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE,
                                          "" + wcmService.getPortletExpirationCache());

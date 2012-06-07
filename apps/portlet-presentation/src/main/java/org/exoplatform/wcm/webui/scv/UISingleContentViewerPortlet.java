@@ -146,11 +146,6 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       popPreferences.setInternalPreferencesMode(true);
     }
   }
-  public boolean isViewMode() {
-//    System.out.println(Utils.getCurrentMode());
-    return Utils.getCurrentMode().equals(PortletMode.VIEW);
-
-  }
 
   /*
    * (non-Javadoc)
@@ -165,8 +160,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     PortletPreferences preferences = pContext.getRequest().getPreferences();
     Boolean sharedCache = "true".equals(preferences.getValue(ENABLE_CACHE, "true"));
 
-    if (context.getRemoteUser()==null ||
-          (!"Edit".equals(Utils.getCurrentMode()) && sharedCache)) {
+    if (context.getRemoteUser() == null
+        || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode())
+        && Utils.isPortletViewMode()) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
       if (log.isTraceEnabled())
