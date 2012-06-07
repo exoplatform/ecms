@@ -406,7 +406,7 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> corresponding to the group which you want to remove form the "Unlock" permission list, except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
+          </inlinemediaobject> corresponding to the group which you want to remove from the "Unlock" permission list, except 2 groups: <filename>*:/platform/administrator</filename> and <literal>root</literal>.
     </para>
         <mediaobject>
            <imageobject role="html">
