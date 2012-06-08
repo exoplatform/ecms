@@ -37,6 +37,7 @@ import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import javax.jcr.Workspace;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
@@ -44,6 +45,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -95,7 +97,7 @@ public class CmsServiceImpl implements CmsService {
                           String repository) throws Exception {
     return storeNode(workspace, nodeTypeName, storePath, mappings);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -107,7 +109,7 @@ public class CmsServiceImpl implements CmsService {
     session.save();
     session.logout();
     return path;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -117,7 +119,7 @@ public class CmsServiceImpl implements CmsService {
       boolean isAddNew, String repository) throws Exception {
     return storeNode(nodeTypeName, storeHomeNode, mappings, isAddNew);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -207,7 +209,7 @@ public class CmsServiceImpl implements CmsService {
     session.save();
     return currentNode.getPath();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -215,7 +217,7 @@ public class CmsServiceImpl implements CmsService {
   public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
       boolean isAddNew, String repository) throws Exception {
     return storeEditedNode(nodeTypeName, storeNode, mappings, isAddNew);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -252,9 +254,9 @@ public class CmsServiceImpl implements CmsService {
   @Deprecated
   public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
       boolean isAddNew, String repository) throws Exception {
-    return storeNodeByUUID(nodeTypeName, storeHomeNode, mappings, isAddNew);  
+    return storeNodeByUUID(nodeTypeName, storeHomeNode, mappings, isAddNew);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -413,15 +415,15 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       }
-      
+
       //process multiple binary data
       for (Object key : jcrVariables.keySet()) {
         Object value = jcrVariables.get(key);
         if (((JcrInputProperty)value).getValue() instanceof Map) {
-          processProperty(key.toString().substring(path.length() + 1), currentNode, 
+          processProperty(key.toString().substring(path.length() + 1), currentNode,
                           PropertyType.BINARY, ((JcrInputProperty)value).getValue(), true);
         }
-      }      
+      }
     }
   }
 
@@ -507,30 +509,30 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       }
-      
+
       //process multiple binary data
       for (Object key : jcrVariables.keySet()) {
         Object value = jcrVariables.get(key);
         if (((JcrInputProperty)value).getValue() instanceof Map) {
-          processProperty(key.toString().substring(itemPath.length() + 1), currentNode, 
+          processProperty(key.toString().substring(itemPath.length() + 1), currentNode,
                           PropertyType.BINARY, ((JcrInputProperty)value).getValue(), true);
         }
       }
     }
-    
+
     //process child node
     int itemLevel = StringUtils.countMatches(itemPath, "/") ;
     List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;
     NodeTypeManager nodeTypeManger = currentNode.getSession().getWorkspace().getNodeTypeManager();
     List<Object> childs = new ArrayList<Object>();
     Set<String> childNames = new HashSet<String>();
-    
-    for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) { 
+
+    for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) {
       childs.add(childNodeDef);
       NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
       NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
-      childNames.add(childNodeDef.getName() + 
-                     (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+      childNames.add(childNodeDef.getName() +
+                     (declaringNodeType == null ? null : declaringNodeType.getName()) +
                      (defaultPrimaryType == null? null : defaultPrimaryType.getName()) );
     }
     if (currentNode != null) {
@@ -538,9 +540,9 @@ public class CmsServiceImpl implements CmsService {
         NodeDefinition childNodeDef = iterator.nextNode().getDefinition();
         NodeType declaringNodeType = childNodeDef.getDeclaringNodeType();
         NodeType defaultPrimaryType = childNodeDef.getDefaultPrimaryType();
-        
-        if (!childNames.contains(childNodeDef.getName() + 
-                                 (declaringNodeType == null ? null : declaringNodeType.getName()) + 
+
+        if (!childNames.contains(childNodeDef.getName() +
+                                 (declaringNodeType == null ? null : declaringNodeType.getName()) +
                                  (defaultPrimaryType == null? null : defaultPrimaryType.getName()))) {
           childs.add(childNodeDef);
         }
@@ -645,7 +647,7 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.BINARY:
       if (isMultiple) {
-        Node storedNode = node.hasNode(propertyName) ? node.getNode(propertyName) : 
+        Node storedNode = node.hasNode(propertyName) ? node.getNode(propertyName) :
                                                        node.addNode(propertyName, NodetypeConstant.NT_UNSTRUCTURED);
         if(value instanceof Map) {
           for (Map.Entry<String, List> entry : ((Map<String, List>)value).entrySet()) {
@@ -940,7 +942,7 @@ public class CmsServiceImpl implements CmsService {
           node.setProperty(propertyName, new Boolean((String) value).booleanValue());
         }
       } else if (value instanceof String[]) {
-        if(!property.getValue().getString().equals(value)) {
+        if(!checkEqual(property.getValues(), (String[])value)) {
           node.setProperty(propertyName, (String[]) value);
         }
       }
@@ -953,7 +955,7 @@ public class CmsServiceImpl implements CmsService {
           node.setProperty(propertyName, new Long((String) value).longValue());
         }
       } else if (value instanceof String[]) {
-        if(!property.getValue().getString().equals(value)) {
+        if(!checkEqual(property.getValues(), (String[])value)) {
           node.setProperty(propertyName, (String[]) value);
         }
       } else if (value instanceof Long) {
@@ -968,7 +970,7 @@ public class CmsServiceImpl implements CmsService {
           node.setProperty(propertyName, new Double((String) value).doubleValue());
         }
       } else if (value instanceof String[]) {
-        if(!property.getValue().getString().equals(value)) {
+        if(!checkEqual(property.getValues(), (String[])value)) {
           node.setProperty(propertyName, (String[]) value);
         }
       } else if (value instanceof Double) {
@@ -1161,7 +1163,7 @@ public class CmsServiceImpl implements CmsService {
                        String repository) {
     moveNode(nodePath, srcWorkspace, destWorkspace, destPath);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -1303,5 +1305,44 @@ public class CmsServiceImpl implements CmsService {
       }
     }
     return childNode ;
+  }
+
+
+  /**
+  * Compare if content of Value array equal to String array
+  *
+  * @param values Value array
+  * @param strings String array
+  * @return true: equal, false: not equal
+  * @throws ValueFormatException
+  * @throws IllegalStateException
+  * @throws RepositoryException
+  */
+  private boolean checkEqual(Value[] arrValues, String[] arrStrings)
+        throws ValueFormatException, IllegalStateException, RepositoryException
+  {
+    Validate.isTrue(arrValues != null, "arrValues must not null");
+    Validate.isTrue(arrStrings != null, "arrStrings must not null");
+
+    int arrValuesLenth = arrValues.length;
+    boolean isEqual = true;
+
+    if (arrValuesLenth != arrStrings.length)
+    {
+      isEqual = false;
+    }
+    else
+    {
+      for (int i = 0; i < arrValuesLenth; i++ )
+      {
+        if (!arrValues[i].getString().equals(arrStrings[i]))
+        {
+          isEqual = false;
+          break;
+        }
+      }
+    }
+
+    return isEqual;
   }
 }
