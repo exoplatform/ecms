@@ -1006,5 +1006,25 @@ public class Utils {
     }
     return null;
   }
+  
+  /* Check the current node is eligible to add mix:versionable or not
+   * 
+   * @param node the current node
+   * @param nodetypes The list of node types have child nodes which are not add mix:versionaboe while enrolling.
+   * @throws Exception the exception 
+   */
+  public static boolean isMakeVersionable(Node node, String[] nodetypes) throws Exception {
+  	boolean isMakeVersionable = true;  	
+  	int deep = node.getDepth();  	
+  	for(int i = 0; i< deep; i++) {
+  		Node parent = node.getParent();
+  		for (String nodetype: nodetypes) {
+  			if(nodetype != null && nodetype.length() > 0 && parent.isNodeType(nodetype))
+  				return false;
+  		}  		
+  	  node = parent;
+  	}    	
+  	return isMakeVersionable;
+  }
 
 }
