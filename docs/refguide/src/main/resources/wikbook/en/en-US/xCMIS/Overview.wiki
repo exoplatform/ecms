@@ -45,7 +45,7 @@ The CMIS features are implemented as a set of components deployed on the eXo Con
 SOAP protocol binding is not implemented in eXo CMIS.
 {note}
 
-!images/exo-cmis-wcm.png|width="120mm" fo:scalefit="1" html:scalefit="0"!
+!images/exo-cmis-wcm.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!
 *Figure: How eXo CMIS works*
 
 WCM drives exposure is implemented as a WCM storage provider to the xCMIS SPI.

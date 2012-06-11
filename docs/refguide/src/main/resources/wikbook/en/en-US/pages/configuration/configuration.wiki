@@ -1,6 +1,6 @@
 {docbook}
 <abstract>
- <para>This chapter describes configurations used in eXo Content. It consists of the following main sections:</para>
+ <para>This chapter describes configurations used in Content. It consists of the following main sections:</para>
     <itemizedlist>
       <listitem>
         <para>

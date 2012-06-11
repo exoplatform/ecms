@@ -1,1 +1,1 @@
-This is an abstract class and the parent of [_axonomyPlugin_|#CONTref.Configuration.Plugins.TaxonomyPlugin]. You can create a link from this plugin to its children.
+This is an abstract class and the parent of [_TaxonomyPlugin_|#CONTref.Configuration.Plugins.TaxonomyPlugin]. You can create a link from this plugin to its children.

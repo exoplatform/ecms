@@ -1,4 +1,4 @@
-This plugin is used to refine URLs in WCM.
+This plugin is used to refine URLs in Content.
 
 To use the plugin in the component configuration, you must use the following target-component:
 {code:xml}
