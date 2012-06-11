@@ -1,6 +1,6 @@
 The *Authoring* portlet allows users to manage contents in draft and ones which need to be approved or published.
 
-This is an example of the *Authoring* portlet used in eXo Content:
+This is an example of the *Authoring* portlet used in Content:
 
 !images/authoring-porlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 

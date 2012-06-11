@@ -1,4 +1,4 @@
-In eXo Content, it is possible to extend the *Sites Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Sites Explorer* and/or add your own managers to the *ECM Administration*.
+In Content, it is possible to extend the *Sites Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Sites Explorer* and/or add your own managers to the *ECM Administration*.
 This section shows you how to create a sample UI extension via adding your own tab to *ECM Administration*.
 {anchor:id=
 }
@@ -190,7 +190,7 @@ With this configuration, only the users with the _\*:/platform/administrators_ m
 *3.* Copy the resource bundle. {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.DefineLabelandRegisterResourceBundle}
 
 {note}
-All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure. 
+All resources can be located in the _src/main/resource_ package because the resources (\*.xml, images, conf file) and the code are separated. This is very useful in a hierarchical structure.
 {note}
 
 Create _ExamplePortlet\_en.xml_ with the following content and add it to the _src/main/resource_ package:

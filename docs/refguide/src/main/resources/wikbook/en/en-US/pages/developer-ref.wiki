@@ -1,6 +1,6 @@
 {docbook}
 <abstract>
- <para>This chapter supplies you with the basic knowledge about templates, UI extension, APIs in eXo Content. Through it, you can build your own content.  Also, with the step-by-step guides, you can create UI extension, deploy a workflow in eXo Content and do many different actions.</para>
+ <para>This chapter supplies you with the basic knowledge about templates, UI extension, APIs in Content. Through it, you can build your own content.  Also, with the step-by-step guides, you can create UI extension, deploy a workflow in Content and do many different actions.</para>
  <para>This chapter consists of the main following contents:</para>
     <itemizedlist>
       <listitem>
@@ -24,7 +24,31 @@
       <listitem>
         <para>
           <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples">CMIS Usage code examples</link>
+          </emphasis> </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs">Public REST APIs</link>
+          </emphasis> </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices">Public Java APIs</link>
+          </emphasis> </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Deprecated_portlets">Deprecated portlets</link>
+          </emphasis> </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Adm_CMIS.Miscellaneous_tips">Miscellaneous and Tips</link>
           </emphasis> </para>
       </listitem>
       <listitem>

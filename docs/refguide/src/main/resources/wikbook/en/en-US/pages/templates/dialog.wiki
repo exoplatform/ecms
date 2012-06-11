@@ -453,7 +453,7 @@ Finally, to display the selected tab, simply add it to the style of UITabContent
 h1. How to prevent XSS attacks {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HowToPreventXSS}
 In the content management sytem, its typical feature is enabling JavaScript in a content. This causes the XSS (Cross-site Scripting) attacks to the content displayed in the HTML format.
 
-However, there is no solution to keep JavaScript and to prevent the XSS attacks at the same time, so eXo Content allows you to decide whether
+However, there is no solution to keep JavaScript and to prevent the XSS attacks at the same time, so Content allows you to decide whether
 JavaScript is allowed to run on a field of the content template or not by using the {{option}} parameter.
 
 * To allow JavaScript to execute, add "{{options = noSanitization}}" to the dialog template file. Normally, this file is named {{dialog1.gtmpl}}.

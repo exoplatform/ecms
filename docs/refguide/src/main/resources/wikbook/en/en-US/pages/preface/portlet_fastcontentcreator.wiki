@@ -1,10 +1,10 @@
 The *Fast Content Creator* portlet consists of two modes: *Standard Content Creator* and *Basic Content Creator*. This portlet allows users to quickly create contents without accessing the Sites Explorer portlet.
 
-This is an example of the *Fast Content Creator* portlet used in eXo Content:
+This is an example of the *Fast Content Creator* portlet used in Content:
 
 !images/fast-content-creator.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!
 
-By default, this porlet is applied for the Contact Us portlet in eXo Content.
+By default, this porlet is applied for the Contact Us portlet in Content.
 * *Packaging*: This portlet is packaged in the _formgenerator.war_ file.
 
 * *The portlet class name*: _org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet_

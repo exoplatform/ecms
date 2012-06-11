@@ -1,6 +1,6 @@
 The *SEO* portlet allows users to manage SEO data of web content and web pages, so they can maximize their website position on search engines.
 
-This is an example of the *SEO* portlet used in eXo Content:
+This is an example of the *SEO* portlet used in Content:
 
 !images/Seo-portlet.png|align="center" width="70mm" fo:scalefit="1" html:scalefit="0"!
 

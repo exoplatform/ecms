@@ -1,6 +1,6 @@
 The *Administration* portlet is used to manage the main ECM functions, including categories and tags, content presentation, types of content and advanced configuration.
 
-This is an example of the *Administration* portlet used in eXo Content:
+This is an example of the *Administration* portlet used in Content:
 
 !images/admin-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 

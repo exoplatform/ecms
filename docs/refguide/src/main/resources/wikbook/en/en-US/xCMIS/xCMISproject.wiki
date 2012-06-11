@@ -6,7 +6,7 @@ The project is to make joining Enterprise Content repositories simpler by offeri
 * Is embedded, packaged as the J2EE Web archive (WAR) and prepared "download and go" Tomcat bundle.
 * Has a live demo with the full-featured CMIS Expert client, which is accessible via xcmis.org site and with prepared "download and go" Tomcat bundle (the client is accessible as the remote gadget).
 * Is embedded in eXo Platform to create the special xCMIS jcr repository and access it with any CMIS client.
-* Tested with third-party CMIS clients, such as IBM CMIS Firefox Connector and CMIS Spaces Flex+AIR client. Either local repository (as described [here|http://xcmis.org/xcmis1/rest/cmisatom]), or can be used as a CMIS repository's endpoint URL for these, or other types of clients.
+* Tested with third-party CMIS clients, such as IBM CMIS Firefox Connector and CMIS Spaces Flex+AIR client. Either local repository (as described [here|http://xcmis.org/xcmis/index.html]), or can be used as a CMIS repository's endpoint URL for these, or other types of clients.
 
 *Benefits of xCMIS*:
 * xCMIS is an open source, server side Java CMIS implementation, enabling to expose content in the existing content repositories according to the protocols defined in the CMIS specification.
