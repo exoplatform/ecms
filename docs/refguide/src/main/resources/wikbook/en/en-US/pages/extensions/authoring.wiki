@@ -1,4 +1,4 @@
-Publication add-ons for eXo Content.
+Publication add-ons for Content.
 
 h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin}
 This section covers the following topics:
@@ -8,7 +8,7 @@ This section covers the following topics:
 
 h2. States {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States}
 
-This extended publication has new states and new profiles that are enabled in eXo Content.
+This extended publication has new states and new profiles that are enabled in Content.
 
 * Profiles
 ** Author: This profile can edit a content and mark this content as redacted.
@@ -34,7 +34,7 @@ New properties are added to the new publication plugin, that allows you to manag
 * _publication:startPublishedDate_
 * _publication:endPublishedDate_
 
-The eXo Content rendering engine does not know anything about publication dates, so another service needs to manage that.
+The Content rendering engine does not know anything about publication dates, so another service needs to manage that.
 When the publisher sets start/end publication dates, he can "stage" the content. The content will go automatically to the "published" state when the start date arrives and to the "unpublished" state after end date.
 A cron job checks every hour (or less) all contents which need to be published (the start date in the past and the "staged" state) or unpublished (the end date in the past and the "published" state).
 
@@ -82,7 +82,7 @@ See the export section for more information about the CRON jobs.
 
 h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager}
 
-The Publication Manager manages lifecycles and contexts in the eXo Content platform. It allows to manages different lifecycles based on different publication plugin in the platform.
+The Publication Manager manages lifecycles and contexts in the Content platform. It allows to manages different lifecycles based on different publication plugin in the platform.
 
 {code:java}
 public interface PublicationManager {
@@ -272,7 +272,7 @@ For example: _Two lifecycles with/without states_
 In the last example, there are three lifecycles:
 
 * Lifecycle 1: Based on _[StatesAndVersionsPublicationPlugin|#CONTref.Configuration.Plugins.StageAndVersionPublicationPlugin]_.
-** This allows to be backward compliant with older eXo Content releases. If all your site contents are using an existing plugin, you can create a lifecycle for it and it will work.
+** This allows to be backward compliant with older Content releases. If all your site contents are using an existing plugin, you can create a lifecycle for it and it will work.
 ** For new instances, you should use the new plugin with dynamic states capabilities.
 
 * Lifecycle 2: Based on _[AuthoringPublicationPlugin|#CONTref.Configuration.Plugins.AuthoringPublicationPlugin]_.
@@ -336,7 +336,7 @@ For example, eXo provides a listener which automatically sends email notificatio
 
 h2. Context {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Context}
 
-A context is defined by simple rules. In eXo Content, you can select to enroll the content in a specific lifecycle (for example, publication plugin) based on context parameters.
+A context is defined by simple rules. In Content, you can select to enroll the content in a specific lifecycle (for example, publication plugin) based on context parameters.
 There are three parameters used to define contexts:
 * Remote User: The current user who can create/edit the content.
 * Current site name: The site from where the content is created (not the storage but the navigation).
@@ -522,6 +522,6 @@ For example:
 ** query: select \* from _nt\:base_ where {{publication:currentState}}"draft" and {{publication:lastUser}}="benjamin".
 * All the contents you have to approve.
 ** call: _PublicationManager.getLifecycles('benjamin','approved')_ => returns lifecycles where you can go to the 'approved' state.
-** query: select \* from _nt\:base_ where _{{{publication:currentState="pending"_ and _publication:lifecycle="lifecycle1"}}}_ or _publication\:lifecycle="lifecycle3"_.
+** query: select \* from _nt\:base_ where _publication\:currentState="pending"_ and _publication\:lifecycle="lifecycle1"_ or _publication\:lifecycle="lifecycle3"_.
 * All the content that will be published tomorrow.
 ** query: select \* from _nt\:base_ where _publication\:currentState="staged"_ and _publication\:startPublishedDate_="xxxx".

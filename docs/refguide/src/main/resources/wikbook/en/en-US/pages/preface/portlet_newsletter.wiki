@@ -6,7 +6,7 @@ The Newsletter portlet and its services are deprecated. It remains fully support
 
 The *Newsletter* portlet is used to help users quickly get the updated newsletter from a site.
 
-This is an example of the *Newsletter* portlet used in eXo Content:
+This is an example of the *Newsletter* portlet used in Content:
 
 !images/newsletter-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 

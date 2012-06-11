@@ -40,7 +40,7 @@ Additionally, nodetypes used in WCM are mapped as follow:
 In other words only nodetypes extending nt:file, nt:folder, nt:unstructured and exo:taxonomy will be exposed correctly via CMIS API.
 
 {warning}
-  WCM's nodetype exo:article is not supported by eXo CMIS due to uncompliant structure to nt:file.
+WCM's nodetype exo\:article is not supported by eXo CMIS due to uncompliant structure to nt\:file.
 {warning}
 
 h2. WCM drives as CMIS Repositories {anchor:id=Dev_CMIS.features.WCM_drives_as_CMIS_repositories}
@@ -146,7 +146,7 @@ h2. WCM Symlinks {anchor:id=Dev_CMIS.features.WCM_symlinks}
 
 Symlinks are used to organize the virtual access to documents in WCM, which is implemented like links in Unix/Linux/Mac OS (refer to ln command for more details).
 {note}
-JCR exo:symlink nodetype is used for such nodetypes.
+JCR exo\:symlink nodetype is used for such nodetypes.
 {note}
 
 {docbook}
@@ -161,7 +161,7 @@ Use Case: Follow Symlinks
 
 *1.* Login to the ACME website as a user with the developer role.
 
-*2.* Open *Group > Sites Explorer > Sites Management*, go to the folder _/acme/documents_.
+*2.* Open *Group --> Sites Explorer --> Sites Management*, go to the folder _/acme/documents_.
 
 *3.* Upload any file (for example _test.txt_) to _/acme/documents_.
 
@@ -270,7 +270,7 @@ To get the file which has been uploaded above, use the *children* service to get
 curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/f59a3539c0a80003625790bdadf566c5
 {code}
 
-In the requested file (_childs.xml_), find the entry related to _test.txt_ file uploaded via the *Sites Explorer*. Search for the "test.txt" name by title..
+In the requested file (_childs.xml_), find the entry related to _test.txt_ file uploaded via the *Sites Explorer*. Search for the "test.txt" name by title.
 {code:xml}
    <entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
       <id>f708e208c0a80003554babb97bd934ba</id>
@@ -422,7 +422,7 @@ As file's actual content referenced by id in CMIS, the path has no matter for co
 h2. Modify WCM via CMIS {anchor:id=Dev_CMIS.features.Modify_WCM_via_CMIS}
 
 {note}
-Upload the modified local file using the command with id of the file stored in WCM (it is jcr:uuid of the file in JCR Workspace). Note that you should run this command from the folder where the local file is stored.
+Upload the modified local file using the command with id of the file stored in WCM (it is jcr\:uuid of the file in JCR Workspace). Note that you should run this command from the folder where the local file is stored.
 {note}
 
 To update any file via CMIS, use the *file* service and the PUT request. Use the same file as in the previous use case (_/acme/documents/test.txt_, id:f708e208c0a80003554babb97bd934ba).
@@ -534,7 +534,7 @@ Initial data:
 * document3: content - "There must be check-word."
 
 {code}
-SELECT * FROM cmis:document WHERE CONTAINS(\"\\\"There must\\\" -\\\"check\\-word\\\"\")
+SELECT * FROM cmis:document WHERE CONTAINS("There must" - "check-word")
 {code}
 
 Query result:
@@ -709,7 +709,7 @@ Query result:
 
 h4. Test LIKE constraint with escape symbols {anchor:id=Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols}
 
-Query : Select all documents where apollo:someProperty like 'ad\%min%'.
+Query: Select all documents where apollo:someProperty like 'ad\%min%'.
 
 Initial data:
 * document1: Title - node1, apollo:someProperty - ad%min master
@@ -717,7 +717,7 @@ Initial data:
 * document3: Title - node2, apollo:someProperty - radmin
 
 {code}
-SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad\\%min%'
+SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad%min%'
 {code}
 
 Query result:
@@ -749,7 +749,7 @@ Initial data:
 * document4: {{{apollo:propertyCommander}}} - 
 
 {code}
-SELECT * FROM cmis:document WHERE apollo:propertyCommander IS NOT NULL
+SELECT * FROM cmis:document WHERE apollo:propertyCommander is NOT NULL
 {code}
 
 Query result:

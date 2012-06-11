@@ -1,6 +1,7 @@
 The *Content Detail* portlet allows users to view the detail of a specific content.
 
-This is an example of the *Content Detail* portlet used in eXo Content:
+This is an example of the *Content Detail* portlet used in Content:
+
 !images/content-detail-portlet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
 * *Packaging*: This portlet is packaged in the _presentation.war_ file.
@@ -84,5 +85,5 @@ This is an example of the *Content Detail* portlet used in eXo Content:
 {code}
 
 {note}
-In WCM 2.3.0, some preferences are no longer used, for example, the ShowPrintAction preference.
+In Content 2.3.0, some preferences are no longer used, for example, the *ShowPrintAction* preference.
 {note}

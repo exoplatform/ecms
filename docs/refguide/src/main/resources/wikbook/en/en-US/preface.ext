@@ -1,16 +1,15 @@
 <preface xml:id="CONTref.AboutThisGuide">
   <title>About this guide</title>
   <abstract>
-    <para>eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform,
+    <para>Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform,
       the extension mechanism is used to add content features. To have more information about the extension mechanism,
-      refer to the<ulink url="http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html">
-        GateIn Reference Guide</ulink>.
+      refer to the <ulink url="http://docs.exoplatform.org/PLF35/topic/org.exoplatform.doc.35/GateInReferenceGuide.html">GateIn Reference Guide</ulink>.
     </para>
     <para>This integrated solution provides users with a comprehensive platform about integrating applications, managing
       and publishing content - all from a single, familiar console.
     </para>
-    <para>When starting a new project, you can see eXo Content as a Java developer platform.</para>
-    <para>This document will give you guidelines related to building stable applications using eXo Content from the
+    <para>When starting a new project, you can see Content as a Java developer platform.</para>
+    <para>This document will give you guidelines related to building stable applications using Content from the
       inside. The document consists of the following main contents:
     </para>
     <itemizedlist>
@@ -18,7 +17,7 @@
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Applications">Applications</link></emphasis>
-            describes portlet applications included in eXo Content.
+            describes portlet applications included in Content.
         </para>
       </listitem>
       <listitem>
@@ -26,14 +25,14 @@
           <emphasis role="bold">
             <link linkend="CONTref.Configuration">Configuration</link></emphasis>
             provides you the comprehensive knowledge about the configuration with a large range of configuration
-            parameters declared in eXo Content.
+            parameters declared in Content.
         </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.DeveloperReferences">Developer References</link></emphasis>
-            describes about extension, public APIs, Java APIs, FAQs and related others in eXo Content.
+            describes about extension, public APIs, Java APIs, FAQs and related others in Content.
         </para>
       </listitem>
     </itemizedlist>

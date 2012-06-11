@@ -1,7 +1,7 @@
 The *Sites Explorer* portlet is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
 managing publication, and more.
 
-This is an example of the *Sites Explorer* portlet used in eXo Content:
+This is an example of the *Sites Explorer* portlet used in Content:
 
 !images/content-explorer-porltet.png|align="center" width="150mm" fo:scalefit="1" html:scalefit="0"!
 
