@@ -37,8 +37,7 @@ public class FCKFileHandler {
                                           Node displayNode,
                                           String currentPortal,
                                           LinkManager linkManager) throws Exception {
-    Element file = document.createElement("File");    
-    file.setAttribute("name", displayNode.getName());
+    Element file = document.createElement("File");        
     file.setAttribute("name", Utils.getTitle(displayNode));
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);

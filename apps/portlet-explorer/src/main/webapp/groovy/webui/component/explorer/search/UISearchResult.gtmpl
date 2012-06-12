@@ -15,6 +15,7 @@
   import org.apache.commons.lang.StringEscapeUtils;
   import java.util.ArrayList;
   import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 <%
   def resultList = uicomponent.getCurrentList();
@@ -115,7 +116,7 @@
         else rowClass =  "OddRow";
         even = !even;
         String excerpt = row.getRepExcerpt();
-        excerpt = StringEscapeUtils.unescapeHtml(excerpt);
+        excerpt = ContentReader.getXSSCompatibilityContent(excerpt);
         String score = row.getJcrScore();
 			if (node != null) {
       %>
@@ -128,7 +129,7 @@
                 <%=Utils.getTitleWithSymlink(node)%>
               </div>
               <div>$excerpt</div>
-              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=node.getPath()%></div>
+              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=ContentReader.getXSSCompatibilityContent(node.getPath())%></div>
               <div><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></div>
             </td>
             <td><div class="ActionContainer">$score</div></td>

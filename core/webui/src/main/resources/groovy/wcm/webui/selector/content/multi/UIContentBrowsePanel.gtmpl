@@ -1,5 +1,6 @@
 <%
 	import org.exoplatform.wcm.webui.selector.content.multi.UIContentBrowsePanelMulti;
+	
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
   def itemPaths = uicomponent.getItemPaths();
@@ -16,7 +17,7 @@
 	}else {
 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
 	}
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"', '" +itemTargetPath +"')");%>
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\")");%>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar ClearFix">
 		<div class="FilterTitle"><label for="Filter">Filter</label></div>
