@@ -92,6 +92,7 @@
   								<div class="InputContainer"  id="AddressBarControl">
   									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
   									<% uicomponent.renderChild(0); %>
+  									<% uicomponent.renderChild(2); %>
   								</div>
   								
   							 </div>

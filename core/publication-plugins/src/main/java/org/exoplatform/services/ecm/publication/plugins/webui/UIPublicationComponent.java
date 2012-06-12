@@ -28,6 +28,7 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -64,7 +65,7 @@ public class UIPublicationComponent extends UIComponent {
 
   public String getNodeName() {
     try {
-      return getNode().getName();
+      return ContentReader.getXSSCompatibilityContent(getNode().getName());
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);

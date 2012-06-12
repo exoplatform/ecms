@@ -7,6 +7,7 @@
   import org.exoplatform.services.jcr.util.Text;	
   import org.exoplatform.wcm.webui.Utils;
   import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 	
 	UIComponent uiParent = uicomponent.getParent();
 
@@ -72,7 +73,7 @@
 			        	  def rqcontext = _ctx.getRequestContext() ;
 			        	  rqcontext.getJavascriptManager().addCustomizedOnLoadScript("eXo.ecm.ECMUtils.replaceToIframe('$iframeId');");	
 			        	  def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			        	  strContent = StringEscapeUtils.escapeHtml(Utils.sanitize(strContent));	        	  
+			        	  strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));	        	  
 			        %>
 			        	<div style="text-align: center">
 			        	<textarea id="<%=iframeId%>"><%=strContent%></textarea> 
@@ -88,7 +89,7 @@
 					        <%
 					        	if(contentNode.hasProperty("jcr:data")) {
 					        	  def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			        	  		strContent = StringEscapeUtils.escapeHtml(Utils.sanitize(strContent));
+			        	  		strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
 					        		println "<pre>" + strContent + "</pre>"; 
 					        	}
 					        %>
@@ -104,7 +105,7 @@
   <%        
     if(!unsupportMimeTypeText.contains(mimeType) && contentNode.hasProperty("jcr:data")) {
       def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			strContent = StringEscapeUtils.escapeHtml(Utils.sanitize(strContent));
+			strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
       if(getFileSize(contentNode) < 1024) {
         println "<pre>" + strContent + "</pre>"; 
       } else {

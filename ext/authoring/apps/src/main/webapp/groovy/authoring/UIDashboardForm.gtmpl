@@ -1,7 +1,6 @@
 <%
 import org.exoplatform.ecm.utils.text.Text;
-import org.apache.commons.lang.StringEscapeUtils;
-
+import org.exoplatform.wcm.webui.reader.ContentReader;
 def escapeChar = '%' as char
 %>
 <style>
@@ -99,7 +98,7 @@ color: #888;
             def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();            
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = StringEscapeUtils.escapeHtml(name);
+						name = ContentReader.getEscapeHtmlContent(name);
           %>
             <div class="Element"><a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/></div>
           <%
@@ -128,7 +127,7 @@ color: #888;
             def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();            
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = StringEscapeUtils.escapeHtml(name);
+						name = ContentReader.getEscapeHtmlContent(name);
           %>
             <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
           <%
@@ -157,7 +156,7 @@ color: #888;
             def path = Text.escape(node.getPath(),escapeChar, true);
             def name = node.getName();            
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = StringEscapeUtils.escapeHtml(name);
+						name = ContentReader.getEscapeHtmlContent(name);
           %>
             <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
           <%

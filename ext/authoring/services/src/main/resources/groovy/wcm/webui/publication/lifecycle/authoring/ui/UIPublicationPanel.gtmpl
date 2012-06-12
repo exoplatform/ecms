@@ -1,6 +1,6 @@
 <%
 	import java.util.List;
-    import java.util.ArrayList;
+  import java.util.ArrayList;
 	import javax.jcr.Node;
 	import javax.jcr.version.Version;
 	import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationPanel;
@@ -12,7 +12,8 @@
 	import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
-	import org.exoplatform.ecm.utils.text.Text;
+	import org.exoplatform.ecm.webui.utils.Utils;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
 
 	Node currentRevision = uicomponent.getCurrentRevision();
 	def context = _ctx.getRequestContext() ;
@@ -40,7 +41,7 @@
 
   <fieldset class="StatusTable">
     <% String versionName = currentRevision.getName();
-       String verName = Text.unescapeIllegalJcrChars(versionName);
+       String verName = ContentReader.getXSSCompatibilityContent(versionName);
     %>
     <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
@@ -123,17 +124,18 @@
          
       for (Node revision : revisions) {
       	def state = uicomponent.getRevisionState(revision);
+      	def nodeName = Utils.getTitle(revision);
       	%>
           <tr>
             <td class="Name">
               <%
                 if (versionName.equals(revision.getName())) {
                   %>
-                    <div title="<%=Text.unescapeIllegalJcrChars(revision.getName())%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= Text.unescapeIllegalJcrChars(revision.getName()) %></div>
+                    <div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div>
                   <%
                 } else {
                   %>
-                    <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=revision.getName()%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= revision.getName() %></div></a>
+                    <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
                   <%
                 }
               %>

@@ -63,6 +63,7 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -707,7 +708,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return Text.unescapeIllegalJcrChars(title);
+    return ContentReader.getXSSCompatibilityContent(title);
   }
 
   /**

@@ -25,6 +25,8 @@ import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
+
 
 public void renderCategories() {
   renderHomeMenu();  
@@ -107,7 +109,7 @@ private void renderCategoryMenu() {
           nodePath = originalNode.getPath();
           nodeTitle = org.exoplatform.services.cms.impl.Utils.getTitle(originalNode);
         }
-        nodeTitle = StringEscapeUtils.escapeHtml(nodeTitle);
+        nodeTitle = ContentReader.getXSSCompatibilityContent(nodeTitle);
         
         //build the url        
         def portletId = portalRequestContext.getNodePath();
