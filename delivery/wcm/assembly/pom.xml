@@ -343,7 +343,7 @@
     <dependency><groupId>org.openoffice</groupId><artifactId>unoil</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
     <dependency><groupId>org.openoffice</groupId><artifactId>juh</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
     <dependency><groupId>org.openoffice</groupId><artifactId>jurt</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
-
+    <dependency><groupId>org.imgscalr</groupId><artifactId>imgscalr-lib</artifactId><version>${org.imgscalr.version}</version><type>jar</type></dependency>
   </dependencies>
   <build>
     <plugins>

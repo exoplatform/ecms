@@ -136,6 +136,13 @@
       <version>${org.slf4j.slf4j-simple.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.imgscalr</groupId>
+      <artifactId>imgscalr-lib</artifactId>
+      <version>${org.imgscalr.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>				
   </dependencies>
   <build>
     <resources>

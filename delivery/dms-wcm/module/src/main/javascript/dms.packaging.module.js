@@ -33,7 +33,8 @@ function getModule(params) {
     addDependency(new Project("org.openoffice", "ridl", "jar", "${openoffice.version}")).
     addDependency(new Project("org.openoffice", "unoil", "jar", "${openoffice.version}")).
     addDependency(new Project("org.openoffice", "jurt", "jar", "${openoffice.version}")).
-    addDependency(new Project("org.openoffice", "juh", "jar", "${openoffice.version}"));
+    addDependency(new Project("org.openoffice", "juh", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.imgscalr", "imgscalr-lib", "jar", "${org.imgscalr.version}"));
   module.portlet.ecmadmin.deployName = "ecmadmin";
   
   module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version).
