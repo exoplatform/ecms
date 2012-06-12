@@ -29,6 +29,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -44,6 +45,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -129,7 +131,7 @@ public class UIPresentationContainer extends UIContainer{
     if (title == null || title.equals("")) {
       title = Utils.getRealNode(node).getName();
     }
-    return Text.unescapeIllegalJcrChars(title);
+    return ContentReader.getXSSCompatibilityContent(title);
   }
 
   public boolean isPrinting() {

@@ -7,7 +7,6 @@
 */
 import java.util.HashMap;
 import java.util.List;
-import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
@@ -25,6 +24,7 @@ import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 public void renderCategories() {
   renderFixPageMenu("", "CategoryNavigationTemplate.label.home");  
@@ -100,7 +100,7 @@ private void renderCategoryMenu() {
           nodePath = originalNode.getPath();
           nodeTitle = org.exoplatform.services.cms.impl.Utils.getTitle(originalNode);
         }
-        nodeTitle = StringEscapeUtils.escapeHtml(nodeTitle);        
+        nodeTitle = ContentReader.getEscapeHtmlContent(nodeTitle);        
         //build the url
         NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
         NavigationResource resource = new NavigationResource(portalRequestContext.getSiteType(), portalRequestContext.getSiteName(), "");

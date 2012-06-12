@@ -31,7 +31,6 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -57,7 +56,8 @@ import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
+
 
 /**
  * Created by The eXo Platform SARL Author : Tran The Trong trongtt@gmail.com
@@ -384,7 +384,7 @@ public class UIWorkingArea extends UIContainer {
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       title = node.getName();
     }
-    return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
+    return ContentReader.getXSSCompatibilityContent(title);
   }
 
 }

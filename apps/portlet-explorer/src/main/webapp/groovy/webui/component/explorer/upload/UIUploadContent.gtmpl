@@ -1,7 +1,8 @@
 <%
   import org.exoplatform.ecm.webui.utils.Utils;
 	import java.net.URLEncoder;
-	import org.apache.commons.lang.StringEscapeUtils;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
+	
 %>
 <%
   List<String[]> listValues = uicomponent.listUploadValues();
@@ -41,7 +42,7 @@
 		              <div class="Icon16x16 Edit16x16Icon" style="margin-left: 30px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>"><span></span></div>
 	                </a>
 		            <%} else {%>
-		              <span title="$value"><%=StringEscapeUtils.escapeHtml(subValue)%></span>
+		              <span title="$value"><%=ContentReader.getEscapeHtmlContent(subValue)%></span>
 		            <% } %>
 	            </td>
 	      <%

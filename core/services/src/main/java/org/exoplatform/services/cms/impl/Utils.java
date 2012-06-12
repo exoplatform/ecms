@@ -42,6 +42,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -339,7 +340,7 @@ public class Utils {
       }
 
     }
-    return Text.unescapeIllegalJcrChars(title);
+    return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
 
   public static String escapeIllegalCharacterInQuery(String query) {

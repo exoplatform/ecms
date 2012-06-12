@@ -14,8 +14,8 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.apache.commons.lang.StringEscapeUtils;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 <%
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
@@ -262,7 +262,7 @@
                   wsName = image.getSession().getWorkspace().getName();
                   primaryType = image.getPrimaryNodeType().getName();
                   def title = uiWorkingArea.getTitle(image);
-                  title = StringEscapeUtils.escapeHtml(title);
+                  title = ContentReader.getEscapeHtmlContent(title);
                   def thumbnailNode = uicomponent.getThumbnailNode(image);
                   boolean isShowSlideShow = false;
                   if(thumbnailNode != null && thumbnailNode.hasProperty("exo:bigSize")) {

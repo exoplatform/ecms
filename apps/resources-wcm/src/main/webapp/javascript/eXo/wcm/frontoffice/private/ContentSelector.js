@@ -535,7 +535,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 				var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 				var newRow = tblRWS.insertRow(i+1);
 				newRow.className = clazz;					
-				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
+				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 				newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 				newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 			} else {				  
@@ -818,7 +818,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + encodeURIComponent(eXo.ecm.ECS.driverName) + ":" + encodeURIComponent(eXo.ecm.ECS.repositoryName) + ":" + encodeURIComponent(eXo.ecm.ECS.workspaceName) + ":" + objNode.getAttribute("path") + '\')';
+		action += '&objectId=' + encodeURIComponent(eXo.ecm.ECS.driverName) + ":" + encodeURIComponent(eXo.ecm.ECS.repositoryName) + ":" + encodeURIComponent(eXo.ecm.ECS.workspaceName) + ":" + encodeURIComponent(objNode.getAttribute("path")) + '\')';
 		var temp = action;
 		var index = temp.indexOf("%27");
 		while(index != -1) {
@@ -897,7 +897,7 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 		}
 	}
 	var action = rws.getAttribute("action");
-	
+	//strContent = escape(strContent);
 	if (operation) {
 		var actionSaveTemp = rws.getAttribute("actionSaveTemp");
 		if (actionSaveTemp) {
@@ -919,6 +919,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var url = objNode.getAttribute("url");  
 	var nodeType	= objNode.getAttribute("nodeType");
 	var path = objNode.getAttribute("path");
+	var title = objNode.getAttribute("title");	
 	var linkTarget = objNode.getAttribute("linkTarget");
 	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
 	for(var i = 0; i < selectedNodeList.length; i++) {
@@ -931,7 +932,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+'style = "overflow:hidden" title="'+decodeURIComponent(objNode)+'">'+decodeURIComponent(path)+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+' style = "overflow:hidden" title="'+decodeURIComponent(title)+'">'+eXo.ecm.ECS.safe_tags_regex(title)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };
@@ -962,7 +963,7 @@ EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray
 			newRow.className = clazz;
 			var strTmpArr = arrContent[i].split('/');
 			var nodeName = strTmpArr[strTmpArr.length-1];
-			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+decodeURIComponent(nodeName)+'</a>';
+			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+eXo.ecm.ECS.safe_tags_regex(decodeURIComponent(nodeName))+'</a>';
 			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 		}
 	}
@@ -1208,5 +1209,9 @@ String.prototype.trunc =
         s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
         return  toLong ? s_ +'...' : s_;
 };
+
+EcmContentSelector.prototype.safe_tags_regex = function(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+ }
 
 eXo.ecm.ECS = new EcmContentSelector();
