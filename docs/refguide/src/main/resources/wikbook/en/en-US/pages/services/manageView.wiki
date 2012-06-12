@@ -12,7 +12,7 @@ _ManageViewService_ is used to work with views. This service has many functions 
 |*getAllViews*() throws Exception;| {{N/A}}| {{List<ViewConfig>}} | Return all views of the repository configured in the XML file. |
 |*hasView*(String name, String repository) throws Exception;| {{name}}  {example}{example} {{repository}} | {{boolean}} | Return true if the given repository has a view. (Deprecated) |
 |*hasView*(String name) throws Exception;| {{N/A}}| {{boolean}} | Return true if the given repository has a view. |
-|*getTemplateHome*(String homeAlias, String repository, SessionProvider provider) throws Exception;| {{homeAlias}} {example}{example} {{repository}}  {example}{example} {{provider}}| {{Node}} |Get a template node that has the path. (Deprecate)|
+|*getTemplateHome*(String homeAlias, String repository, SessionProvider provider) throws Exception;| {{homeAlias}} {example}{example} {{repository}}  {example}{example} {{provider}}| {{Node}} |Get a template node that has the path. (Deprecated)|
 |*getTemplateHome*(String homeAlias, SessionProvider provider) throws Exception;| {{homeAlias}} {example}{example} {{provider}}| {{Node}} |Get a template node that has the path.|
 |*getAllTemplates*(String homeAlias, String repository, SessionProvider provider) throws Exception;| {{homeAlias}} {example}{example} {{repository}} {example}{example} {{provider}}| {{List<Node>}} |Get all template nodes that have the path. (Deprecated)|
 |*getAllTemplates*(String homeAlias, SessionProvider provider) throws Exception;| {{homeAlias}} {example}{example} {{provider}}| {{List<Node>}} |Get all template nodes that have the path.|
