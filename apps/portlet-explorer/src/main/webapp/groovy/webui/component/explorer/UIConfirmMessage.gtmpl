@@ -7,8 +7,8 @@
 	 * version: 2.2
 	 */
 
-	 import org.exoplatform.ecm.utils.text.Text;
-	 import org.apache.commons.lang.StringEscapeUtils;
+	 import org.exoplatform.wcm.webui.reader.ContentReader;
+
 %>
 <div class="UIForm $uicomponent.id">
   <%
@@ -19,7 +19,7 @@
 	  	  msgValue = msgValue.replaceAll("\\{" + i + "\\}", msgArguments[i]);
 		  }
     }
-    msgValue = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(msgValue));    
+    msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
   %>
   <div class="HorizontalLayout">
     <div class="ClearFix">

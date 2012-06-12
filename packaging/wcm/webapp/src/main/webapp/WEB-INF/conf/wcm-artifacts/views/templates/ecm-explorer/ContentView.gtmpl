@@ -12,16 +12,15 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-  import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.apache.commons.lang.StringEscapeUtils;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   import org.exoplatform.services.cms.link.LinkManager;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;  
   
   // Content view
   import java.util.Date;
@@ -245,7 +244,7 @@
           def title = uiWorkingArea.getTitle(data);          
           //   Name
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
-          name = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(name));         
+          name = ContentReader.getXSSCompatibilityContent(name);         
           //   Datetime
           def date = getDate(data, status);
           def datetime = dateFormat.format(date);

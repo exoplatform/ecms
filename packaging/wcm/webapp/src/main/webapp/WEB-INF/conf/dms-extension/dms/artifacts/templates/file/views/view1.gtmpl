@@ -7,9 +7,9 @@
   import org.exoplatform.web.application.Parameter;
   import org.exoplatform.ecm.webui.utils.Utils; 
   import org.exoplatform.services.wcm.core.NodeLocation;
-  import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.services.jcr.RepositoryService;
-  import org.apache.commons.lang.StringEscapeUtils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
   
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -44,7 +44,7 @@
   currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
-  def title = StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(currentNode.name));
+  def title = ContentReader.getXSSCompatibilityContent(currentNode.name);
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");

@@ -41,7 +41,6 @@ import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
@@ -58,7 +57,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -75,6 +73,7 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -681,7 +680,7 @@ public class Utils {
       if (orgNode.hasProperty(propertyName)) {
         try {
           if(propertyName.equals(EXO_TITLE))
-            return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(orgNode.getProperty(propertyName).getString()));
+            return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
           return orgNode.getProperty(propertyName).getString();
         } catch (Exception e) {
           return defaultValue;
@@ -689,17 +688,20 @@ public class Utils {
       }
       return defaultValue;
     }
-    String currentValue =defaultValue;
+    String currentValue = defaultValue;
     ResourceBundle resourceBundle;
     if (orgNode.hasProperty(propertyName)) {
       try {
-        currentValue =  orgNode.getProperty(propertyName).getString() ;
+      	if(propertyName.equals(EXO_TITLE))
+          currentValue =  ContentReader.getXSSCompatibilityContent(
+          		orgNode.getProperty(propertyName).getString());
+      	else currentValue =  orgNode.getProperty(propertyName).getString() ;
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
         }
       }
-    }
+    }    
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -928,7 +930,7 @@ public class Utils {
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       title = node.getName();
     }
-    return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
+    return ContentReader.getXSSCompatibilityContent(title);
   }
 
   /**
@@ -958,7 +960,7 @@ public class Utils {
       }
       if (title != null) title = title.trim();
     }
-    if (title !=null && title.length()>0) return Text.unescapeIllegalJcrChars(title);
+    if (title !=null && title.length()>0) return ContentReader.getXSSCompatibilityContent(title);
     if (isSymLink(node)) {
       nProcessNode = getNodeSymLink(nProcessNode);
       if (nProcessNode == null ) {
@@ -984,7 +986,7 @@ public class Utils {
     }
 
     if (title ==null) title = nProcessNode.getName();
-    return Text.unescapeIllegalJcrChars(title);
+    return ContentReader.getXSSCompatibilityContent(title);
   }
 
   /**
@@ -1025,5 +1027,6 @@ public class Utils {
     }
     return isMakeVersionable;
   }
+  
 
 }

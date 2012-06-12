@@ -54,6 +54,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -82,6 +83,8 @@ public class UIAddressBar extends UIForm {
   public final static String  WS_NAME                  = "workspaceName";
 
   public final static String  FIELD_ADDRESS            = "address";
+  
+  public final static String  FIELD_ADDRESS_HIDDEN     = "address_hidden";
 
   public final static String  ACTION_TAXONOMY          = "exo:taxonomyAction";
 
@@ -109,6 +112,7 @@ public class UIAddressBar extends UIForm {
     addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH,
                                          FIELD_SIMPLE_SEARCH,
                                          null).addValidator(SimpleSearchValidator.class));
+    addUIFormInput(new UIFormHiddenInput(FIELD_ADDRESS_HIDDEN, FIELD_ADDRESS_HIDDEN, null));
   }
 
   public void setViewList(List<String> viewList) {
@@ -185,7 +189,9 @@ public class UIAddressBar extends UIForm {
   static public class ChangeNodeActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddress = event.getSource() ;
-      String path = Text.escapeIllegalJcrChars(uiAddress.getUIStringInput(FIELD_ADDRESS).getValue());
+      String path = null;
+      if(uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue() != null)
+        path = uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue().toString();
       if (path == null || path.trim().length() == 0) path = "/";
       UIJCRExplorer uiExplorer = uiAddress.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setIsViewTag(false) ;
