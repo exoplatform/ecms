@@ -100,6 +100,7 @@
     <javax.resource.version>1.5</javax.resource.version>
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
+    <org.imgscalr.version>4.2</org.imgscalr.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
