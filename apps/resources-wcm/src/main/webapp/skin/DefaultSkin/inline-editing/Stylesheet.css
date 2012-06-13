@@ -4,7 +4,7 @@
   height:auto;
 }
 .InlineEditing .AcceptButton{
-  background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/accep_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 16px; height: 22px;
   float: right; 
@@ -12,7 +12,7 @@
 }
 
 .InlineEditing .CancelButton{
-  background: url(/eXoDMSResources/skin/background/cancel_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/cancel_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 14px; height: 22px;
   float: right;
@@ -195,7 +195,7 @@
     font-size: small;
 }
 .InlineEditing .EditCLV1ColumnPresent .AcceptButton{
-  background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/accep_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 16px; height: 22px;
   float: right; 
@@ -204,7 +204,7 @@
 }
 
 .InlineEditing .EditCLV1ColumnPresent .CancelButton{
-  background: url(/eXoDMSResources/skin/background/cancel_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/cancel_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 14px; height: 22px;
   float: right;
@@ -242,14 +242,14 @@
     border: 1px solid #BFD5ED;
 }
 .InlineEditing .EditGroovyCLVTitle .AcceptButton{
-  background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/accep_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 16px; height: 22px;
   margin-right: 5px;
 }
 
 .InlineEditing .EditGroovyCLVTitle .CancelButton{
-  background: url(/eXoDMSResources/skin/background/cancel_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/cancel_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 14px; height: 22px;
 }
@@ -282,7 +282,7 @@
 }
 
 .InlineEditing .EditCLV2ColSummary .AcceptButton{
-  background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/accep_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 16px; height: 22px;
   float: right; 
@@ -291,7 +291,7 @@
 }
 
 .InlineEditing .EditCLV2ColSummary .CancelButton{
-  background: url(/eXoDMSResources/skin/background/cancel_button.png) no-repeat scroll left center;
+  background: url(/eXoWCMResources/skin/background/cancel_button.png) no-repeat scroll left center;
   display: inline-block;
   width: 14px; height: 22px;
   float: right;

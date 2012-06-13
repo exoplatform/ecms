@@ -26,7 +26,7 @@
 }
 
 .FileContent .ActionButton a{
-    background: url("/eXoDMSResources/skin/images/file/DownloadFile.png") no-repeat scroll 4px center transparent;
+    background: url("/eXoWCMResources/skin/images/file/DownloadFile.png") no-repeat scroll 4px center transparent;
     border-left: 1px solid #E1E1E1;
     color: #058EE6;
     line-height: 20px;

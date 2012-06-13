@@ -443,11 +443,11 @@
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .TitleBG {
 	height: 18px;
-  background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;
+  background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .HeaderBG {
-  background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x; 
+  background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x; 
   margin-bottom: 1px;
   padding: 0px 5px; 
   height: 18px;

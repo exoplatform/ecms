@@ -13,13 +13,13 @@
 	}
 	
   .UIVote .LeftVoteBar {
-    background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left -32px;
+    background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left -32px;
     padding-left: 5px;
     height: 26px;
 	}
 	
 	.UIVote .RightVoteBar {
-	  background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat right -32px;
+	  background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat right -32px;
     padding-right: 5px;
     height: 26px;
 	}
@@ -27,7 +27,7 @@
 	.UIVote .CenterVoteBar {
 	  height: 26px; 
 	  line-height: 26px;
-	  background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') repeat-x left -58px;
+	  background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') repeat-x left -58px;
 	}
 
    .UIVote .VoteResultContainer .RatingInfoContainer {
@@ -47,8 +47,8 @@
 		float: right; /* orientation=rt */
 		width: 16px;
 		height: 16px;
-		background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left top; /* orientation=lt */
-		background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat right top; /* orientation=rt */
+		background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left top; /* orientation=lt */
+		background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat right top; /* orientation=rt */
 		margin: 5px 1px;
 	}
 	
@@ -57,8 +57,8 @@
 		float: right; /* orientation=rt */
 		width: 16px;
 		height: 16px;
-		background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left -16px; /* orientation=lt */
-		background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat right -16px; /* orientation=rt */
+		background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left -16px; /* orientation=lt */
+		background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat right -16px; /* orientation=rt */
 		margin: 5px 1px;
 	}
 	

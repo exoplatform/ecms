@@ -87,12 +87,6 @@ function getModule(params) {
   module.web.eXoWCMResources = new Project("org.exoplatform.ecms", "ecms-apps-resources-wcm", "war", module.version).
     addDependency(portal.web.eXoResources);
   module.web.eXoWCMResources.deployName = "eXoWCMResources";
-    
-  module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "ecms-apps-resources-static", "war", module.version);
-  module.web.eXoStaticResources.deployName = "eXoStaticResources";
-  
-  module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "ecms-apps-resources-dms", "war", module.version) ;  
-  module.web.eXoDMSResources.deployName = "eXoDMSResources" ;
 
   module.authoring = {};
   module.authoring.war = new Project("org.exoplatform.ecms", "ecms-ext-authoring-apps", "war", module.version).

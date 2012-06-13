@@ -60,17 +60,11 @@
                   <string>web</string>
                 </value>
                 <value>
-                  <string>eXoStaticResources</string>
-                </value>
-                <value>
-                  <string>eXoDMSResources</string>
+                  <string>eXoWCMResources</string>
                 </value>
                 <value>
                   <string>eXoDMSGadgets</string>
                 </value>																
-                <value>
-                  <string>eXoWCMResources</string>
-                </value>
                 <value>
                   <string>ecm-wcm-extension</string>
                 </value>

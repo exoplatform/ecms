@@ -121,7 +121,7 @@
                 }
 
                 .slideshow-controller {
-                  background: url('/eXoDMSResources/skin/images/slideshow/controller.png') no-repeat;
+                  background: url('/eXoWCMResources/skin/images/slideshow/controller.png') no-repeat;
                   height: 42px;
                   left: 50%;
                   margin: -21px 0 0 -119px;
@@ -156,22 +156,22 @@
                   list-style: none;
                 }
                 .slideshow-controller li.first a {
-                  background-image: url('/eXoDMSResources/skin/images/slideshow/controller-first.gif');
+                  background-image: url('/eXoWCMResources/skin/images/slideshow/controller-first.gif');
                   left: 33px;
                   width: 19px;
                 }
                 .slideshow-controller li.last a {
-                  background-image: url('/eXoDMSResources/skin/images/slideshow/controller-last.gif');
+                  background-image: url('/eXoWCMResources/skin/images/slideshow/controller-last.gif');
                   left: 186px;
                   width: 19px;
                 }
                 .slideshow-controller li.next a {
-                  background-image: url('/eXoDMSResources/skin/images/slideshow/controller-next.gif');
+                  background-image: url('/eXoWCMResources/skin/images/slideshow/controller-next.gif');
                   left: 145px;
                   width: 28px;
                 }
                 .slideshow-controller li.pause a {
-                  background-image: url('/eXoDMSResources/skin/images/slideshow/controller-pause.gif');
+                  background-image: url('/eXoWCMResources/skin/images/slideshow/controller-pause.gif');
                   left: 109px;
                   width: 20px;
                 }
@@ -182,7 +182,7 @@
                   background-position: 20px 18px;
                 }
                 .slideshow-controller li.prev a {
-                  background-image: url('/eXoDMSResources/skin/images/slideshow/controller-prev.gif');
+                  background-image: url('/eXoWCMResources/skin/images/slideshow/controller-prev.gif');
                   left: 65px;
                   width: 28px;
                 }

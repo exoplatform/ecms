@@ -47,7 +47,7 @@
 		}
 		
 		.HeaderSampleBG {
-			background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;  /* orientation=lt */
+			background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;  /* orientation=lt */
 						
 		  margin-bottom: 2px;
 		  padding: 0px 5px 0px 5px; 
@@ -63,8 +63,8 @@
 		  border-bottom: solid 1px #BDBDBD;
 	  }
 		.RemoveAttachments {
-		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;  /* orientation=lt */
-		  background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat right top;  /* orientation=rt */
+		  background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat left top;  /* orientation=lt */
+		  background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat right top;  /* orientation=rt */
 		  margin: 0px 5px 0px 3px; /* orientation=lt */
 		  margin: 0px 3px 0px 2px; /* orientation=rt */
 		  padding-left: 18px; /* orientation=lt */

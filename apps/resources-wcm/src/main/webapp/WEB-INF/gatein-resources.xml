@@ -26,11 +26,20 @@
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
 
 
+  <!-- WCMSkin -->
   <portal-skin>
     <skin-name>Default</skin-name>
     <skin-module>WCMSkin</skin-module>
-    <css-path>/skin/DefaultSkin/Stylesheet.css</css-path>
+    <css-path>/skin/DefaultSkin/WCMStylesheet.css</css-path>
     <css-priority>3</css-priority>
+  </portal-skin>
+
+  <!-- DMSSkin -->
+  <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>DMSSkin</skin-module>
+    <css-path>/skin/DefaultSkin/DMSStylesheet.css</css-path>
+    <css-priority>1</css-priority>
   </portal-skin>
 
   <javascript>

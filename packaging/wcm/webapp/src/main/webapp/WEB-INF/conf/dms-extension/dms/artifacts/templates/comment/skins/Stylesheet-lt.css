@@ -8,18 +8,18 @@
 .Comments .CommentBar .LeftCommentBar {
 	height: 54px;
 	padding-left: 5px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBar.gif') no-repeat left top ;
+	background: url('/eXoWCMResources/skin/images/article/CommentBar.gif') no-repeat left top ;
 }
 
 .Comments .CommentBar .RightCommentBar {
 	padding-right: 5px;
 	height: 54px;    	
-	background: url('/eXoDMSResources/skin/images/article/CommentBar.gif') no-repeat right top;
+	background: url('/eXoWCMResources/skin/images/article/CommentBar.gif') no-repeat right top;
 }
 
 .Comments .CommentBar .MiddleCommentBar {    	
 	height: 54px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBar.gif') repeat-x left -54px ;
+	background: url('/eXoWCMResources/skin/images/article/CommentBar.gif') repeat-x left -54px ;
 	padding: 0px 3px;
 }
 
@@ -71,28 +71,28 @@
 .Comments .CommentBox .CommentBoxTopLeft {
 	height: 12px;
 	padding-left:27px; /* orientation=lt */  
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') no-repeat left top;
 }
 
 .Comments .CommentBox .CommentBoxTopRight {
 	height: 12px;
 	padding-right: 3px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') no-repeat right -30px;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') no-repeat right -30px;
 }
 
 .Comments .CommentBox .CommentBoxTopCenter {
 	height: 12px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') repeat-x left -12px;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') repeat-x left -12px;
 }
 
 .Comments .CommentBox .CommentBoxMiddleLeft {
 	padding-left: 3px;
-	background: url('/eXoDMSResources/skin/images/article/MiddleCommentBox.gif') repeat-y left top;
+	background: url('/eXoWCMResources/skin/images/article/MiddleCommentBox.gif') repeat-y left top;
 }
 
 .Comments .CommentBox .CommentBoxMiddleRight {
 	padding-right:3px;
-	background: url('/eXoDMSResources/skin/images/article/MiddleCommentBox.gif') repeat-y right top;
+	background: url('/eXoWCMResources/skin/images/article/MiddleCommentBox.gif') repeat-y right top;
 }
 
 .Comments .CommentBox .CommentBoxCenterBG {
@@ -105,18 +105,18 @@
 .Comments .CommentBox .CommentBoxBottomLeft {
 	height: 3px;
 	padding-left: 3px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') no-repeat left -24px ;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') no-repeat left -24px ;
 }
 
 .Comments .CommentBox .CommentBoxBottomRight {
 	height: 3px;
 	padding-right: 3px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') no-repeat right -24px;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') no-repeat right -24px;
 }
 
 .Comments .CommentBox .CommentBoxBottomCenter {    	
 	height: 3px;
-	background: url('/eXoDMSResources/skin/images/article/CommentBox.gif') repeat-x left -27px;
+	background: url('/eXoWCMResources/skin/images/article/CommentBox.gif') repeat-x left -27px;
 }
 
 .Comments p a {
@@ -125,7 +125,7 @@
 }
 
 .CommentInfo .EditComment {
-	background: url('/eXoDMSResources/skin/images/article/EditDocument.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/EditDocument.gif') no-repeat left top;
 	margin: auto;
 	padding: 2px;
 	height: 16px;
@@ -133,7 +133,7 @@
 }
 
 .CommentInfo .RemoveAttachments {
-	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat left top;
 	margin: auto;
 	padding: 2px;
 	height: 16px;

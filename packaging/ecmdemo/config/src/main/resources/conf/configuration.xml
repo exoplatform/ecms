@@ -56,20 +56,14 @@
                 </value>
                 <value>
                   <string>eXoDMSGadgets</string>
-                </value>																									
-                <value>
-                  <string>eXoStaticResources</string>
-                </value>
-                <value>
-                  <string>eXoDMSResources</string>
                 </value>
                 <value>
                   <string>eXoWCMResources</string>
-                </value>  
+                </value>
                 <value>
                   <string>ecmexplorer</string>
                 </value>
-				<value>
+                <value>
                   <string>ecmadmin</string>
                 </value>
                 <value>

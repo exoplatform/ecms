@@ -123,7 +123,7 @@
 .UIViewMetadataManager .tabNormal {
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
-  background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left top;
+  background: url('/eXoWCMResources/skin/images/metadata/Metadata.gif') repeat-x left top;
   height: 20px; width: 120px; line-height: 20px; text-align: center;
   border: solid 1px #a3abb6;
   font-size: 12px; font-weight: bold;
@@ -132,7 +132,7 @@
 .UIViewMetadataManager .tabSelected {
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
-  background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left -20px;
+  background: url('/eXoWCMResources/skin/images/metadata/Metadata.gif') repeat-x left -20px;
   height: 20px; width: 120px; line-height: 20px; text-align: center;
   border: solid 1px #a3abb6;
   font-size: 12px; font-weight: bold;

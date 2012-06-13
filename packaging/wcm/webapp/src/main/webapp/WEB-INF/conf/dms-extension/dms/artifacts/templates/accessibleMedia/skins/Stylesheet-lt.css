@@ -26,7 +26,7 @@
 }
 
 .MediaContent .ActionButton a{
-    background: url("/eXoDMSResources/skin/images/media/DownloadFile.png") no-repeat scroll 4px center transparent;
+    background: url("/eXoWCMResources/skin/images/media/DownloadFile.png") no-repeat scroll 4px center transparent;
     border-left: 1px solid #E1E1E1;
     color: #058EE6;
     line-height: 20px;
@@ -34,14 +34,14 @@
 }
 
 .MediaContent .ActionSwitchButton a{
-    background: url("/eXoDMSResources/skin/images/media/Switch.png") no-repeat scroll 4px center transparent;
+    background: url("/eXoWCMResources/skin/images/media/Switch.png") no-repeat scroll 4px center transparent;
     color: #058EE6;
     line-height: 20px;
     padding: 3px 10px 3px 29px;
 }
 
 .MediaContent .ActionTextButton a{
-    background: url("/eXoDMSResources/skin/images/media/back.png") no-repeat scroll 4px center transparent;	
+    background: url("/eXoWCMResources/skin/images/media/back.png") no-repeat scroll 4px center transparent;	
     color: #058EE6;
     line-height: 20px;
     padding: 3px 10px 3px 29px;
@@ -103,17 +103,17 @@
 }
 	
 .MediaContent .MediaFrame .TopLeftMediaFrame {
-	background: url('/eXoDMSResources/skin/images/media/ImageMedia.gif') no-repeat left -16px;
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') no-repeat left -16px;
 	padding-left: 9px;
 }
 
 .MediaContent .MediaFrame .TopRightArtictleFrame {
-	background: url('/eXoDMSResources/skin/images/media/ImageMedia.gif') no-repeat right -16px;
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') no-repeat right -16px;
 	padding-right: 2px;
 }
 
 .MediaContent .MediaFrame .TopCenterMediaFrame {
-	background: url('/eXoDMSResources/skin/images/media/ImageMedia.gif') repeat-x right -32px;
+	background: url('/eXoWCMResources/skin/images/media/ImageMedia.gif') repeat-x right -32px;
 	height: 16px; 
 }
 
@@ -135,11 +135,11 @@
 }
 
 .MediaContent .ContentIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
 }
 
 .MediaContent .LinksIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
 }
 
 .MediaContent .FieldContent {
@@ -177,7 +177,7 @@
 }
 
 .MediaContent .ShowHelpIcon {
-  background: url("/eXoDMSResources/skin/background/ContextHelp/ShowHelpIcon.gif") no-repeat scroll right center transparent;
+  background: url("/eXoWCMResources/skin/background/ContextHelp/ShowHelpIcon.gif") no-repeat scroll right center transparent;
 }
 .MediaContent .InContextHelpContent {
   display: none;
@@ -189,7 +189,7 @@
 }
 
 .Media .InContextHelpPopup {
-  background: url("/eXoDMSResources/skin/background/ContextHelp/TopRightLeft15x14.png") no-repeat scroll right 17px transparent;
+  background: url("/eXoWCMResources/skin/background/ContextHelp/TopRightLeft15x14.png") no-repeat scroll right 17px transparent;
 }
 
 .Media .LeftInContextHelpPopup {

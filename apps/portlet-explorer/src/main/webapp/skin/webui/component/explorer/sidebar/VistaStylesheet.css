@@ -184,7 +184,7 @@
   padding: 2px 0px 0px 15px; /* orientation=lt */
   padding: 2px 15px 0px 0px; /* orientation=rt */
   font: normal bold 11px Verdana;
-  background: url('/eXoDMSResources/skin/images/article/EventFrameBG.gif') repeat-x;
+  background: url('/eXoWCMResources/skin/images/article/EventFrameBG.gif') repeat-x;
 }
 
 .UIJCRExplorerPortlet .UISideBar .UIViewRelationList .RelationFrame .FrameContent {

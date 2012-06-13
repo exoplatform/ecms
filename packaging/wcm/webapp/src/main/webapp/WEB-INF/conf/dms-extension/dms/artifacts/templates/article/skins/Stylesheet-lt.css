@@ -7,17 +7,17 @@
 }
 	
 .UIArticle .ArticleTLDecorator {
-	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/BackgroundArticle.gif') no-repeat left top;
 	padding-left: 51px;
 }
 
 .UIArticle .ArticleTRDecorator {
-	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') no-repeat right top;
+	background: url('/eXoWCMResources/skin/images/article/BackgroundArticle.gif') no-repeat right top;
 	padding-right:154px;
 }
 
 .UIArticle .ArticleTCDecorator {
-	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') repeat-x left -100px;
+	background: url('/eXoWCMResources/skin/images/article/BackgroundArticle.gif') repeat-x left -100px;
 	height: 100px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .UIArticle .ArticleMLDecorator {
-	background: url('/eXoDMSResources/skin/images/article/MiddleLeftArticle3x1.gif') repeat-y left;
+	background: url('/eXoWCMResources/skin/images/article/MiddleLeftArticle3x1.gif') repeat-y left;
 	padding-left: 3px ;
 }
 
@@ -39,23 +39,23 @@
 }
 
 .UIArticle .ArticleMRDecorator {
-	background: url('/eXoDMSResources/skin/images/article/MiddleRightArticle10x1.gif') repeat-y right;
+	background: url('/eXoWCMResources/skin/images/article/MiddleRightArticle10x1.gif') repeat-y right;
 	padding: 0px 10px 0px 3px;
 }
 
 .UIArticle .ArticleBLDecorator {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left top;
 	padding-left: 3px;
 }
 
 .UIArticle .ArticleBCDecorator {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x left -8px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') repeat-x left -8px;
 	height: 8px;
 	line-height: 8px;
 }
 
 .UIArticle .ArticleBRDecorator {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right top;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat right top;
 	padding-right: 10px ;
 }
 
@@ -65,17 +65,17 @@
 }
 	
 .UIArticle .ArticleFrame .TopLeftArticleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -16px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -16px;
 	padding-left: 9px;
 }
 
 .UIArticle .ArticleFrame .TopRightArtictleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -16px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat right -16px;
 	padding-right: 2px;
 }
 
 .UIArticle .ArticleFrame .TopCenterArticleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x right -32px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') repeat-x right -32px;
 	height: 16px; 
 }
 
@@ -109,19 +109,19 @@
 }
 
 .UIArticle .SummaryIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -48px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -48px;
 }
 
 .UIArticle .AttachmentsIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -64px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -64px;
 }
 
 .UIArticle .RatingIcon {
-	background: url('/eXoDMSResources/skin/images/article/Artitcle.gif') no-repeat left -64px;
+	background: url('/eXoWCMResources/skin/images/article/Artitcle.gif') no-repeat left -64px;
 }
 
 .UIArticle .AttachmentsContainer .AttachmentsContentIcon {
-	background: url('/eXoDMSResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top;
 	margin: 0px 5px 0px 3px;
 	padding-left: 18px;
 	height: 15px;
@@ -129,7 +129,7 @@
 }
 
 .UIArticle .AttachmentsContainer .RemoveAttachments {
-	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat left top;
 	margin: 0px 5px 0px 3px;
 	padding-left: 18px;
 	height: 16px;
@@ -138,11 +138,11 @@
 }
 
 .UIArticle .ContentIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
 }
 
 .UIArticle .LinksIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
 }
 
 .UIArticle .FieldContent {

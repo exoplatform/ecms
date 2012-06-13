@@ -49,7 +49,7 @@
 }
 
 .WorkSample .HeaderSampleBG {
-	background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;
+	background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;
 	margin-bottom: 2px;
 	padding: 0px 5px 0px 5px; 
 	height: 18px;
@@ -64,7 +64,7 @@
 	border-bottom: solid 1px #BDBDBD;
 }
 .WorkSample .RemoveAttachments {
-	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat left top;
 	margin: 0px 5px 0px 3px;
 	padding-left: 18px;
 	height: 16px;

@@ -39,7 +39,7 @@
 
 .ArrowDate {
   float: right;
-  background: url('/eXoDMSResources/skin/images/event/RightArrow.gif') no-repeat;
+  background: url('/eXoWCMResources/skin/images/event/RightArrow.gif') no-repeat;
   width:16px;
   height:16px;
   margin: 10px;
@@ -92,17 +92,17 @@ padding-bottom: 2px;
 }
 	
 .UIArticle .ArticleFrame .TopLeftArticleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -16px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -16px;
 	padding-left: 9px;
 }
 
 .UIArticle .ArticleFrame .TopRightArtictleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -16px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat right -16px;
 	padding-right: 2px;
 }
 
 .UIArticle .ArticleFrame .TopCenterArticleFrame {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x right -32px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') repeat-x right -32px;
 	height: 16px; 
 }
 
@@ -136,19 +136,19 @@ padding-bottom: 2px;
 }
 
 .UIArticle .SummaryIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -48px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -48px;
 }
 
 .UIArticle .AttachmentsIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -64px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -64px;
 }
 
 .UIArticle .RatingIcon {
-	background: url('/eXoDMSResources/skin/images/article/Artitcle.gif') no-repeat left -64px;
+	background: url('/eXoWCMResources/skin/images/article/Artitcle.gif') no-repeat left -64px;
 }
 
 .UIArticle .AttachmentsContainer .AttachmentsContentIcon {
-	background: url('/eXoDMSResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/AttachmentsIcon.gif') no-repeat left top;
 	margin: 0px 5px 0px 3px;
 	padding-left: 18px;
 	height: 15px;
@@ -156,7 +156,7 @@ padding-bottom: 2px;
 }
 
 .UIArticle .AttachmentsContainer .RemoveAttachments {
-	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/article/DustBin.gif') no-repeat left top;
 	margin: 0px 5px 0px 3px;
 	padding-left: 18px;
 	height: 16px;
@@ -165,11 +165,11 @@ padding-bottom: 2px;
 }
 
 .UIArticle .ContentIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -96px;
 }
 
 .UIArticle .LinksIcon {
-	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
+	background: url('/eXoWCMResources/skin/images/article/ImageArticle.gif') no-repeat left -80px;
 }
 
 .UIArticle .FieldContent {

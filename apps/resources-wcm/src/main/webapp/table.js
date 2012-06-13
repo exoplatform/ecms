@@ -143,7 +143,7 @@ UITable.prototype.getValue = function(col, row) {
 
 HOW TO USE IT IN WCM :
 1/ import it in your template :
-<script type="text/javascript" src="/eXoStaticResources/table.js"></script>
+<script type="text/javascript" src="/eXoWCMResources/table.js"></script>
 
 2/ add the following in your template (dialog or view)
 DIALOG EXAMPLE

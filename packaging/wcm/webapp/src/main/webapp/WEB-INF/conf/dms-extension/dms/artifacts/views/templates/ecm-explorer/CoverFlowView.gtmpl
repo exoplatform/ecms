@@ -85,21 +85,21 @@
 										cursor: pointer;
 									 }
 									 .LeftScrollBar {
-										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat left -32px;
+										background: url('/eXoWCMResources/skin/images/CoverFlow/Slice.png') no-repeat left -32px;
 										padding-left: 28px;
 										position: relative; 
 										z-index: 10001;
 									 }
 									 .RightScrollBar {
-										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat right -64px;
+										background: url('/eXoWCMResources/skin/images/CoverFlow/Slice.png') no-repeat right -64px;
 										padding-right: 28px;
 									 }
 									 .CenterScrollBar {
-										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') repeat-x center -96px;
+										background: url('/eXoWCMResources/skin/images/CoverFlow/Slice.png') repeat-x center -96px;
 										height: 32px;
 									 }
 									 .ScrollBar {
-										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat center top;
+										background: url('/eXoWCMResources/skin/images/CoverFlow/Slice.png') no-repeat center top;
 										position: absolute;
 										margin-left: -8px;
 										z-index: 10002;

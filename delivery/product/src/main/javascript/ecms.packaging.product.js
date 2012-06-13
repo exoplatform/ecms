@@ -31,11 +31,10 @@ function getProduct(version) {
   product.addDependencies(portal.web.rest);
   product.addDependencies(portal.web.portal);
   product.addDependencies(portal.webui.portal);
-  
+
   product.addDependencies(ecms.gadgets);
   product.addDependencies(ecms.portlet.ecmadmin);
   product.addDependencies(ecms.portlet.ecmexplorer);
-  product.addDependencies(ecms.web.eXoDMSResources) ;
   product.addDependencies(ecms.authoring.war);
   product.addDependencies(ecms.core.war);
   product.addDependencies(ecms.extension.war);
@@ -47,7 +46,6 @@ function getProduct(version) {
   product.addDependencies(ecms.portlet.fastcontentcreator);
   product.addDependencies(ecms.gadget.favorites);
   product.addDependencies(ecms.web.eXoWCMResources) ;
-  product.addDependencies(ecms.web.eXoStaticResources) ;
   product.addDependencies(ecms.demo.portal);
   product.addDependencies(ecms.demo.rest);
 

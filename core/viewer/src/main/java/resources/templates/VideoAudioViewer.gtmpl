@@ -151,7 +151,7 @@
 
         playlist: [ ${url} ],
         canvas: {
-          backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)'
+          backgroundImage: 'url(/eXoWCMResources/skin/images/file/MP3Player.jpg)'
         },
         clip: {
             autoPlay: false,
@@ -180,7 +180,7 @@
 .NavigationContainer {
   padding-bottom: 5px;
   color: #0e396c;
-  background: url('/eXoDMSResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
+  background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
   border: 1px solid #cbcbcb;
   margin: auto;
 }
@@ -217,7 +217,7 @@
 
 div.clips.petrol a.playing {
 	width: 242px;
-	background: url('/eXoDMSResources/skin/images/file/Selected.gif') no-repeat right center;
+	background: url('/eXoWCMResources/skin/images/file/Selected.gif') no-repeat right center;
 	color: black;
 	display: block;
 	font-family: verdana;
@@ -251,7 +251,7 @@ div.clips.petrol .first {
 }
 
 .BackPage{
-	background: url('/eXoDMSResources/skin/images/file/BackPage.gif') no-repeat center;
+	background: url('/eXoWCMResources/skin/images/file/BackPage.gif') no-repeat center;
 	width: 19px;
 	height: 7px;
 	cursor: pointer;
@@ -259,7 +259,7 @@ div.clips.petrol .first {
 }
 
 .NextPage{
-	background: url('/eXoDMSResources/skin/images/file/NextPage.gif') no-repeat center;
+	background: url('/eXoWCMResources/skin/images/file/NextPage.gif') no-repeat center;
 	width: 19px;
 	height: 7px;
 	cursor: pointer;
@@ -267,7 +267,7 @@ div.clips.petrol .first {
 }
 
 div.clips.petrol a:hover {
-	background: url('/eXoDMSResources/skin/images/file/Selected.gif') no-repeat right center;
+	background: url('/eXoWCMResources/skin/images/file/Selected.gif') no-repeat right center;
 	width: 242px;
 	margin: 0 0 0 4px;
 }

@@ -15,11 +15,9 @@
     <module>portlet-explorer</module>
     <module>gadget-favorites</module> 
     <module>gadget-publication</module>       
-    <module>resources-dms</module>
     <module>portlet-presentation</module>
     <module>portlet-search</module>
     <module>resources-wcm</module>
-    <module>resources-static</module>
     <module>portlet-seo</module>
     <module>wai-template</module>
   </modules>

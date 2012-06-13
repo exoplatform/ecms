@@ -103,12 +103,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-apps-resources-dms</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
       <version>${project.version}</version>
       <type>war</type>
@@ -128,12 +122,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-apps-resources-wcm</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-apps-resources-static</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
@@ -484,21 +472,9 @@
             </webModule>			
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>ecms-apps-resources-dms</artifactId>
-              <contextRoot>eXoDMSResources</contextRoot>
-              <bundleFileName>eXoDMSResources.war</bundleFileName>
-            </webModule>
-            <webModule>
-              <groupId>org.exoplatform.ecms</groupId>
               <artifactId>ecms-apps-resources-wcm</artifactId>
               <contextRoot>eXoWCMResources</contextRoot>
               <bundleFileName>eXoWCMResources.war</bundleFileName>
-            </webModule>
-            <webModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>ecms-apps-resources-static</artifactId>
-              <contextRoot>eXoStaticResources</contextRoot>
-              <bundleFileName>eXoStaticResources.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>

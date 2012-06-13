@@ -153,7 +153,7 @@
     </script>
     <script type="text/javascript" src="/eXoResources/javascript/eXo/i18n/I18NMessage.js"></script>
     <script type="text/javascript" src="/eXoResources/javascript/eXo/i18n/MessageResource_<%=lang%>.js"></script>
-    <script type="text/javascript" src="/eXoStaticResources/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/eXoWCMResources/ckeditor/ckeditor.js"></script>
 
     <% 
       if (portalJScripts != null)

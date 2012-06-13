@@ -40,7 +40,7 @@
 } 
 
 .UIPDFViewerContainer .PDFViewerBar {
-	background: url('/eXoDMSResources/skin/images/file/PDFViewerBar.gif') repeat-x ;
+	background: url('/eXoWCMResources/skin/images/file/PDFViewerBar.gif') repeat-x ;
 	height: 28px; 
 }
 
@@ -52,21 +52,21 @@
 
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonBack{
-	background: url('/eXoDMSResources/skin/images/file/ButtonBack.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/ButtonBack.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonNext{
-	background: url('/eXoDMSResources/skin/images/file/ButtonNext.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/ButtonNext.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomIn{
-	background: url('/eXoDMSResources/skin/images/file/ZoomIn.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/ZoomIn.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
@@ -74,35 +74,35 @@
 
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomOut{
-	background: url('/eXoDMSResources/skin/images/file/ZoomOut.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/ZoomOut.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateLeft{
-	background: url('/eXoDMSResources/skin/images/file/HeightToWidth.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/HeightToWidth.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateRight{
-	background: url('/eXoDMSResources/skin/images/file/WidthToHeight.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/WidthToHeight.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .ControlButton .InfoIcon{
-	background: url('/eXoDMSResources/skin/images/file/InfoIcon.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/InfoIcon.gif') no-repeat left center ;
 	height: 28px;
 	width: 18px;
 	cursor: pointer;
 }
 
 .UIPDFViewerContainer .PDFViewerBar .DownLoadIcon{
-	background: url('/eXoDMSResources/skin/images/file/DownLoadIcon.gif') no-repeat left center ;
+	background: url('/eXoWCMResources/skin/images/file/DownLoadIcon.gif') no-repeat left center ;
 	Line-height: 28px;
 	width: 110px;
 	cursor: pointer;

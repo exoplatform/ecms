@@ -31,7 +31,7 @@ Slideshow = new Class({
 		href: '',
 		hu: '',
 		linked: false,
-		loader: {'animate': ['../../../../eXoDMSResources/skin/images/slideshow/loader-#.png', 12]},
+		loader: {'animate': ['../../../../eXoWCMResources/skin/images/slideshow/loader-#.png', 12]},
 		loop: true,
 		match: /\?slide=(\d+)$/,
 		overlap: true,

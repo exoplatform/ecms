@@ -766,11 +766,11 @@
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .TitleBG {
 	height: 18px;
-  background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;
+  background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .HeaderBG {
-  background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;
+  background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;
   margin-bottom: 1px;
   padding: 0px 5px 0px 5px;
   height: 18px;
@@ -1147,7 +1147,7 @@
 
 .UIJCRExplorer .UIUploadBehaviorWithSameName .RecycleBinFull {
   width: 48px; height: 48px;
-  background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/exo-versionStorage.gif') no-repeat;
+  background: url('/eXoWCMResources/skin/DefaultSkin/skinIcons/48x48/icons/NodeTypes/exo-versionStorage.gif') no-repeat;
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
 }

@@ -23,7 +23,7 @@
 	float: left;
 	width: 16px;
 	height: 16px;
-	background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left top;
+	background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left top;
 	margin: 5px 1px;
 }
 
@@ -31,7 +31,7 @@
 	float: left;
 	width: 16px;
 	height: 16px;
-	background: url('/eXoDMSResources/skin/images/vote/ImageVote.gif') no-repeat left -16px;
+	background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left -16px;
 	margin: 5px 1px;
 }
 
