@@ -34,6 +34,7 @@ import javax.jcr.version.VersionException;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
@@ -86,15 +87,15 @@ public class UILockNodeList extends UIPagingGridDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void refresh(int currentPage) throws Exception {
-    ListAccess<Object> lockedNodeList = new ListAccessImpl<Object>(Object.class,
-                                                                   NodeLocation.getLocationsByNodeList(getAllLockedNodes()));
-    LazyPageList<Object> pageList = new LazyPageList<Object>(lockedNodeList,
-                                                             getUIPageIterator().getItemsPerPage());
-    getUIPageIterator().setPageList(pageList);
+    if (!getUIPageIterator().isJustPaginated()) {
+      PageList pageList = new UILockedNodePageList(LOCK_QUERY, getUIPageIterator().getItemsPerPage(), currentPage);
+      getUIPageIterator().setPageList(pageList);
+    }
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       getUIPageIterator().setCurrentPage(currentPage);
+    getUIPageIterator().setJustPaginated(false);
   }
 
   public List getLockedNodeList() throws Exception {
