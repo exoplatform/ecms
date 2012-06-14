@@ -243,7 +243,7 @@ public class TrashServiceImpl implements TrashService {
           }
         }
         if (targetNode != null && isInTaxonomyTree(node, targetNode)) {
-          List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK);
+          List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK, sessionProvider);
           boolean found = false;
           for (Node symlink : symlinks)
             if (!symlink.isNodeType(EXO_RESTORE_LOCATION)) {

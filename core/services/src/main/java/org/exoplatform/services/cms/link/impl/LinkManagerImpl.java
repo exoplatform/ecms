@@ -323,16 +323,17 @@ public class LinkManagerImpl implements LinkManager {
   public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception {
     return getAllLinks(targetNode, linkType);
   }
-  
-  public List<Node> getAllLinks(Node targetNode, String linkType) {
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) {
     List<Node> result = new ArrayList<Node>();
     try {
       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
       RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository repository  = repositoryService.getCurrentRepository();
       String[] workspaces = repository.getWorkspaceNames();
-      String systemWS =
-        repository.getConfiguration().getSystemWorkspaceName();
       String queryString = new StringBuilder().append("SELECT * FROM ").
                                                append(linkType).
                                                append(" WHERE exo:uuid='").
@@ -342,8 +343,6 @@ public class LinkManagerImpl implements LinkManager {
                                                append("'").toString();
   
       for (String workspace : workspaces) {
-        SessionProvider sessionProvider = workspace.equals(systemWS) ? WCMCoreUtils.getSystemSessionProvider()
-                                                                     : WCMCoreUtils.getUserSessionProvider();
         Session session = sessionProvider.getSession(workspace, repository);
         QueryManager queryManager = session.getWorkspace().getQueryManager();
         Query query = queryManager.createQuery(queryString, Query.SQL);
@@ -352,11 +351,18 @@ public class LinkManagerImpl implements LinkManager {
         while (iter.hasNext()) {
           result.add(iter.nextNode());
         }
-  }
+      }
     } catch (Exception e) {
       // return empty node list if there are errors in execution or user has no right to access nodes
     }
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllLinks(Node targetNode, String linkType) {
+    return getAllLinks(targetNode, linkType, WCMCoreUtils.getUserSessionProvider());
+  }
+  
 }

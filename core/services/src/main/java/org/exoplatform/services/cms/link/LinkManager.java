@@ -23,6 +23,8 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
  * quang.ly@exoplatform.com Mar 13, 2009
@@ -155,5 +157,17 @@ public interface LinkManager {
    * @return the list of link of the target node with given type
    * @throws Exception
    */
-  public List<Node> getAllLinks(Node targetNode, String linkType) throws Exception;  
+  public List<Node> getAllLinks(Node targetNode, String linkType) throws Exception;
+  
+  /**
+   * Gives all links of the given node
+   *
+   * @param targetNode The target node to get links
+   * @param linkType The type of link to get
+   * @param sessionProvider The session provider
+   * @return the list of link of the target node with given type
+   * @throws Exception
+   */
+  public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) throws Exception;
+  
 }
