@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
     <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
+    <artifactId>ecms</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-docs</artifactId>
+  <artifactId>ecms-docs</artifactId>
   <packaging>pom</packaging>
 
   <name>ECMS documentation</name>

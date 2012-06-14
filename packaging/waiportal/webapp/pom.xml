@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging-waiportal</artifactId>
+    <artifactId>ecms-packaging-waiportal</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-packaging-waiportal-webapp</artifactId>
+  <artifactId>ecms-packaging-waiportal-webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo WAI Portal Extension WAR</name>
   <description>eXo WAI Portal Extension WAR</description>

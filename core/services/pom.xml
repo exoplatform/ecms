@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-services</artifactId>
+  <artifactId>ecms-core-services</artifactId>
   <name>eXo CMS Service</name>
   <description>eXo CMS Service</description>
   <dependencies>

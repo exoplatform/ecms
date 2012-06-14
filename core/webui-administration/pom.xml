@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-webui-administration</artifactId>
+  <artifactId>ecms-core-webui-administration</artifactId>
   <packaging>jar</packaging>
   <name>eXo Site Administration Portlet</name>
   <description>eXo DMS Portlet Java Content: ECM Admin</description>
@@ -31,27 +31,21 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-		<dependency>
-		  <groupId>org.exoplatform.commons</groupId>
-		  <artifactId>exo.platform.commons.webui.ext</artifactId>
-		  <version>${org.exoplatform.commons.version}</version>
-			<scope>provided</scope>
-		</dependency>
+	<dependency>
+	  <groupId>org.exoplatform.commons</groupId>
+	  <artifactId>commons-webui-ext</artifactId>
+	  <version>${org.exoplatform.commons.version}</version>
+	  <scope>provided</scope>
+	</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-viewer</artifactId>
+      <artifactId>ecms-core-viewer</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>    
   </dependencies>
 </project>

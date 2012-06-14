@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.exoplatform.ecms</groupId>
-		<artifactId>exo-ecms-ext</artifactId>
+		<artifactId>ecms-ext</artifactId>
 		<version>4.0.0.Alpha1-SNAPSHOT</version>
 	</parent>
-	<artifactId>exo-ecms-ext-webui</artifactId>
+	<artifactId>ecms-ext-webui</artifactId>
 	<packaging>jar</packaging>
 	<name>eXo Contextmenu - View Informations</name>
 	<description>Action View Information on Right click popup menu</description>
@@ -25,13 +25,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.exoplatform.ecms</groupId>
-			<artifactId>exo-ecms-core-webui-explorer</artifactId>
+			<artifactId>ecms-core-webui-explorer</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.exoplatform.ecms</groupId>
-			<artifactId>exo-ecms-core-webui</artifactId>
+			<artifactId>ecms-core-webui</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>

@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-upgrade</artifactId>
+    <artifactId>ecms-upgrade</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-upgrade-thumbnails</artifactId>
+  <artifactId>ecms-upgrade-thumbnails</artifactId>
   <name>eXo ECMS Upgrade thumbnails</name>
   <description>eXo ECMS Upgrade the nodetype of exo:thumbnail, exo:thumnails</description>
   <packaging>jar</packaging>

@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-apps</artifactId>
+    <artifactId>ecms-apps</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-apps-portlet-administration</artifactId>
+  <artifactId>ecms-apps-portlet-administration</artifactId>
   <packaging>war</packaging>
   <name>eXo Site Administration Portlet</name>
   <description>eXo DMS Portlet Java Content: ECM Admin</description>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -43,7 +43,7 @@
 		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-viewer</artifactId>
+      <artifactId>ecms-core-viewer</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

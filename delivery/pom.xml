@@ -3,14 +3,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
+    <artifactId>ecms</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-delivery</artifactId>
+  <artifactId>ecms-delivery</artifactId>
   <packaging>pom</packaging>
   <name>eXo ECM Suite :: Delivery</name>
   <description>eXo Entreprise Content Management Suite :: Delivery</description>
   <modules>
-    <module>wcm</module>
+    <module>server-tomcat</module>
+    <module>module</module>
+    <module>product</module>
+    <module>jboss-package</module>
+    <module>assembly</module>
   </modules>
 </project>

@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
     <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-docs</artifactId>
+    <artifactId>ecms-docs</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-docs-userguide</artifactId>
+  <artifactId>ecms-docs-userguide</artifactId>
   <packaging>jdocbook</packaging>
 
   <name>ECMS documentation userguide (co-edited by RHT)</name>
@@ -18,39 +18,6 @@
     <docname>User_Guide</docname>
   </properties> 
 
-<!--
-Repositories are proxied in http://repository.exoplatform.org/public, should be declared in maven settings.
-<repositories>
-      <repository>
-          <id>jboss-public-repository-group</id>
-          <name>JBoss Public Maven Repository Group</name>
-          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </snapshots>
-      </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-          <id>jboss-public-repository-group</id>
-          <name>JBoss Public Maven Repository Group</name>
-          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-    </pluginRepository>
- </pluginRepositories>
--->
   <profiles>
     <!-- mvn compile -->
     <profile>
@@ -70,7 +37,7 @@ Repositories are proxied in http://repository.exoplatform.org/public, should be 
         				<format>
         				  <formatName>pdf</formatName>
         					<stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
-        					<finalName>${artifactId}.pdf</finalName>
+        					<finalName>${project.artifactId}.pdf</finalName>
         				</format>
     					  <format>
     					    <formatName>html</formatName>
@@ -161,7 +128,7 @@ Repositories are proxied in http://repository.exoplatform.org/public, should be 
         				<format>
         				  <formatName>pdf</formatName>
         					<stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
-        					<finalName>${artifactId}.pdf</finalName>
+        					<finalName>${project.artifactId}.pdf</finalName>
         				</format>
     					</formats>
   					</configuration>

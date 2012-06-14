@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-webapp</artifactId>
+  <artifactId>ecms-core-webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Core Services Configuration WAR</name>
   <description>eXo WCM Core Services Configuration WAR</description>

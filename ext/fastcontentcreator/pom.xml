@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-ext</artifactId>
+    <artifactId>ecms-ext</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-fastcontentcreator</artifactId>
+  <artifactId>ecms-ext-fastcontentcreator</artifactId>
   <packaging>pom</packaging>
   <name>eXo ECM Suite :: Ext :: Fast Content Creator</name>
   <description>eXo Entreprise Content Management Suite :: Fast Content Creator</description>

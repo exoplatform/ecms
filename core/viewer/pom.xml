@@ -3,16 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-viewer</artifactId>
+  <artifactId>ecms-core-viewer</artifactId>
   <name>eXo DMS Document Viewer</name>
   <description>eXo PDF Viewer</description>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-	 <artifactId>exo-ecms-core-services</artifactId>
+	 <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>

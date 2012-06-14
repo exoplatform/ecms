@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-publication-plugins</artifactId>
+  <artifactId>ecms-core-publication-plugins</artifactId>
   <packaging>jar</packaging>
   <name>eXo Publication Plugins</name>
   <description>eXo Publication Plugins</description>
@@ -19,13 +19,13 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication</artifactId>
+      <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

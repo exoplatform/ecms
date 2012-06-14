@@ -3,154 +3,154 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging-wcm</artifactId>
+    <artifactId>ecms-packaging-wcm</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-packaging-wcm-ear</artifactId>
+  <artifactId>ecms-packaging-wcm-ear</artifactId>
   <packaging>ear</packaging>
   <name>eXo WCM Extension EAR</name>
   <description>eXo WCM Extension EAR</description>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webapp</artifactId>
+      <artifactId>ecms-core-webapp</artifactId>
 	  <type>war</type>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-viewer</artifactId>
+      <artifactId>ecms-core-viewer</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication</artifactId>
+      <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication-plugins</artifactId>
+      <artifactId>ecms-core-publication-plugins</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-authoring-services</artifactId>
+      <artifactId>ecms-ext-authoring-services</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-authoring-webui</artifactId>
+      <artifactId>ecms-ext-authoring-webui</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-connector</artifactId>
+      <artifactId>ecms-core-connector</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
     </dependency>
 	<dependency>
 	  <groupId>org.exoplatform.commons</groupId>
-	  <artifactId>exo.platform.commons.webui.ext</artifactId>
+	  <artifactId>commons-webui-ext</artifactId>
 	  <version>${org.exoplatform.commons.version}</version>
 	</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-explorer</artifactId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-administration</artifactId>
+      <artifactId>ecms-core-webui-administration</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-search</artifactId>
+      <artifactId>ecms-core-search</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-portlet-administration</artifactId>
+      <artifactId>ecms-packaging-wcm-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-portlet-explorer</artifactId>
+      <artifactId>ecms-apps-portlet-administration</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-gadget-publication</artifactId>
+      <artifactId>ecms-apps-portlet-explorer</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-resources-dms</artifactId>
+      <artifactId>ecms-apps-gadget-publication</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-fastcontentcreator-portlet</artifactId>
+      <artifactId>ecms-apps-resources-dms</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>    
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-portlet-presentation</artifactId>
+      <artifactId>ecms-apps-portlet-presentation</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-portlet-search</artifactId>
+      <artifactId>ecms-apps-portlet-search</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-resources-wcm</artifactId>
+      <artifactId>ecms-apps-resources-wcm</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-resources-static</artifactId>
+      <artifactId>ecms-apps-resources-static</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-authoring-apps</artifactId>
+      <artifactId>ecms-ext-authoring-apps</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-webui</artifactId>
+      <artifactId>ecms-ext-webui</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+      <artifactId>ecms-ext-xcmis-sp</artifactId>
       <version>${project.version}</version>
     </dependency>
     <!-- xCMIS dependencies -->
@@ -258,24 +258,24 @@
     </dependency>    
 	<dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-apps-portlet-seo</artifactId>
+      <artifactId>ecms-apps-portlet-seo</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-seo</artifactId>
+      <artifactId>ecms-core-webui-seo</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
-      <artifactId>exo.platform.commons.component.product</artifactId>
+      <artifactId>commons-component-product</artifactId>
       <version>${org.exoplatform.commons.version}</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
-      <artifactId>exo.platform.commons.component.upgrade</artifactId>
+      <artifactId>commons-component-upgrade</artifactId>
       <version>${org.exoplatform.commons.version}</version>
       <type>jar</type>
     </dependency>
@@ -294,82 +294,82 @@
           <modules>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-services</artifactId>
+              <artifactId>ecms-core-services</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-viewer</artifactId>
+              <artifactId>ecms-core-viewer</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-publication</artifactId>
+              <artifactId>ecms-core-publication</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-publication-plugins</artifactId>
+              <artifactId>ecms-core-publication-plugins</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-authoring-services</artifactId>
+              <artifactId>ecms-ext-authoring-services</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-authoring-webui</artifactId>
+              <artifactId>ecms-ext-authoring-webui</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-connector</artifactId>
+              <artifactId>ecms-core-connector</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-webui</artifactId>
+              <artifactId>ecms-core-webui</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-webui-explorer</artifactId>
+              <artifactId>ecms-core-webui-explorer</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-webui-administration</artifactId>
+              <artifactId>ecms-core-webui-administration</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
 			  <groupId>org.exoplatform.commons</groupId>
-			  <artifactId>exo.platform.commons.webui.ext</artifactId>
+			  <artifactId>commons-webui-ext</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
 			  <groupId>org.exoplatform.commons</groupId>
-			  <artifactId>exo.platform.commons.component.product</artifactId>
+			  <artifactId>commons-component-product</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
 			  <groupId>org.exoplatform.commons</groupId>
-			  <artifactId>exo.platform.commons.component.upgrade</artifactId>
+			  <artifactId>commons-component-upgrade</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-search</artifactId>
+              <artifactId>ecms-core-search</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-webui</artifactId>
+              <artifactId>ecms-ext-webui</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+              <artifactId>ecms-ext-xcmis-sp</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
            <!--  xCMIS jar modules -->
@@ -461,79 +461,79 @@
             </jarModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
+              <artifactId>ecms-packaging-wcm-webapp</artifactId>
               <contextRoot>ecm-wcm-extension</contextRoot>
               <bundleFileName>ecm-wcm-extension.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-webapp</artifactId>
+              <artifactId>ecms-core-webapp</artifactId>
               <contextRoot>ecm-wcm-core</contextRoot>
               <bundleFileName>ecm-wcm-core.war</bundleFileName>
             </webModule>			
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-resources-dms</artifactId>
+              <artifactId>ecms-apps-resources-dms</artifactId>
               <contextRoot>eXoDMSResources</contextRoot>
               <bundleFileName>eXoDMSResources.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-resources-wcm</artifactId>
+              <artifactId>ecms-apps-resources-wcm</artifactId>
               <contextRoot>eXoWCMResources</contextRoot>
               <bundleFileName>eXoWCMResources.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-resources-static</artifactId>
+              <artifactId>ecms-apps-resources-static</artifactId>
               <contextRoot>eXoStaticResources</contextRoot>
               <bundleFileName>eXoStaticResources.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-portlet-administration</artifactId>
+              <artifactId>ecms-apps-portlet-administration</artifactId>
               <contextRoot>ecmadmin</contextRoot>
               <bundleFileName>ecmadmin.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-portlet-explorer</artifactId>
+              <artifactId>ecms-apps-portlet-explorer</artifactId>
               <contextRoot>ecmexplorer</contextRoot>
               <bundleFileName>ecmexplorer.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-portlet-presentation</artifactId>
+              <artifactId>ecms-apps-portlet-presentation</artifactId>
               <contextRoot>presentation</contextRoot>
               <bundleFileName>presentation.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-authoring-apps</artifactId>
+              <artifactId>ecms-ext-authoring-apps</artifactId>
               <contextRoot>authoring-apps</contextRoot>
               <bundleFileName>authoring-apps.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-ext-fastcontentcreator-portlet</artifactId>
+              <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
               <contextRoot>fastcontentcreator</contextRoot>
               <bundleFileName>fastcontentcreator.war</bundleFileName>
             </webModule>            
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-portlet-search</artifactId>
+              <artifactId>ecms-apps-portlet-search</artifactId>
               <contextRoot>searches</contextRoot>
               <bundleFileName>searches.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-apps-gadget-publication</artifactId>
+              <artifactId>ecms-apps-gadget-publication</artifactId>
               <contextRoot>eXoDMSGadgets</contextRoot>
               <bundleFileName>eXoDMSGadgets.war</bundleFileName>
             </webModule>
 			<webModule>
   			  <groupId>org.exoplatform.ecms</groupId>
-			  <artifactId>exo-ecms-apps-portlet-seo</artifactId>
+			  <artifactId>ecms-apps-portlet-seo</artifactId>
 			  <contextRoot>seo</contextRoot>
 			  <bundleFileName>seo.war</bundleFileName>
 		    </webModule>
@@ -558,74 +558,8 @@
                 <echo> 2. We delete jar files we don't want </echo>
                 <delete verbose="true">
                   <fileset dir="${project.build.directory}/${project.build.finalName}/lib/">
-										<exclude name="antlr-runtime-*.jar" />
-										<!--
-										DOING IT BY EXCLUDES
-										<exclude name="exo-ecms-*.jar" />
-										<exclude name="exo-jcr-services-*.jar" />
-										<exclude name="fontbox-*.jar" />
-										<exclude name="htmlparser-*.jar" />
-										<exclude name="ical4j-*.jar" />
-										<exclude name="icepdf-core-*.jar" />
-										<exclude name="icepdf-viewer-*.jar" />
-										<exclude name="itunes-com-podcast-*.jar" />
-										<exclude name="jdom-*.jar" />
-										<exclude name="jodconverter-*.jar" />
-										<exclude name="jodconverter-cli-*.jar" />
-										<exclude name="jurt-*.jar" />
-										<exclude name="juh-*.jar" />
-										<exclude name="quartz-*.jar" />
-										<exclude name="ridl-*.jar" />
-										<exclude name="rome-*.jar" />
-										<exclude name="stax-api-*.jar" />
-										<exclude name="sjsxp-*.jar" />
-										<exclude name="unoil-*.jar" />
-										<exclude name="xpp3-*.jar" />
-										<exclude name="icu4j-*.jar" />
-										<exclude name="ws-commons-util-*.jar" />
-										-->
+					<exclude name="antlr-runtime-*.jar" />
 
-										<!--
-										EXCLUDES FROM REMOVAL WE COULD REMOVE
-										<exclude name="bcel-*.jar" />
-										<exclude name="carol-*.jar" />
-										<exclude name="dtdparser121-*.jar" />
-										<exclude name="ezmorph-*.jar" />
-										<exclude name="groovy-all-minimal-*.jar" />
-										<exclude name="hibernate-annotations-*.jar" />
-										<exclude name="hibernate-cglib-repack-*.jar" />
-										<exclude name="hibernate-commons-annotations-*.jar" />
-										<exclude name="hibernate-core-*.jar" />
-										<exclude name="hsqldb-*.jar" />
-										<exclude name="jaxb-api-*.jar" />
-										<exclude name="jaxb-impl-*.jar" />
-										<exclude name="jaxen-*.jar" />
-										<exclude name="jaxme-api-*.jar" />
-										<exclude name="jboss-common-core-*.jar" />
-										<exclude name="jboss-logging-spi-*.jar" />
-										<exclude name="jboss-reflect-*.jar" />
-										<exclude name="jboss-transaction-api-*.jar" />
-										<exclude name="jboss-unit-*.jar" />
-										<exclude name="jboss-vfs-*.jar" />
-										<exclude name="jbossjts-*.jar" />
-										<exclude name="jbossts-common-*.jar" />
-										<exclude name="jbossxb-*.jar" />
-										<exclude name="jempbox-*.jar" />
-										<exclude name="jibx-extras-*.jar" />
-										<exclude name="jline-*.jar" />
-										<exclude name="jmock-*.jar" />
-										<exclude name="jotm_jrmp_stubs-*.jar" />
-										<exclude name="jotm-*.jar" />
-										<exclude name="nekohtml-*.jar" />
-										<exclude name="oauth-*.jar" />
-										<exclude name="oauth-consumer-*.jar" />
-										<exclude name="oauth-httpclient3-*.jar" />
-										<exclude name="reflext.apt-*.jar" />
-										<exclude name="relaxngDatatype-*.jar" />
-										<exclude name="xsdlib-*.jar" />
-										-->
-										<!--
-										OLD WAY TO CLEAN JARS-->
                     <include name="activation-*.jar" />
                     <include name="aopalliance-*.jar" />
                     <include name="asm-*.jar" />

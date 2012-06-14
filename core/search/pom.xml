@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-core</artifactId>
+    <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-search</artifactId>
+  <artifactId>ecms-core-search</artifactId>
   <name>eXo WCM Search Service</name>
   <dependencies>
     <dependency>
@@ -47,7 +47,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
@@ -59,7 +59,7 @@
 		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication</artifactId>
+      <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>

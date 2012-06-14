@@ -3,10 +3,10 @@
    <modelVersion>4.0.0</modelVersion>
    <parent>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-xcmis</artifactId>
+      <artifactId>ecms-ext-xcmis</artifactId>
       <version>4.0.0.Alpha1-SNAPSHOT</version>
    </parent>
-   <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+   <artifactId>ecms-ext-xcmis-sp</artifactId>
    <packaging>jar</packaging>
    <name>eXo ECMS Extensions xCMIS SP</name>
    <dependencies>
@@ -70,7 +70,7 @@
       </dependency>
       <dependency>
          <groupId>org.exoplatform.ecms</groupId>
-         <artifactId>exo-ecms-core-services</artifactId>
+         <artifactId>ecms-core-services</artifactId>
          <version>${project.version}</version>
          <exclusions>
             <exclusion>

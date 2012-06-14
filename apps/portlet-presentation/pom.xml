@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-apps</artifactId>
+    <artifactId>ecms-apps</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-apps-portlet-presentation</artifactId>
+  <artifactId>ecms-apps-portlet-presentation</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Presentation Portlet Suites</name>
   <dependencies>
@@ -30,7 +30,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -54,13 +54,13 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication</artifactId>
+      <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -72,13 +72,13 @@
 		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-viewer</artifactId>
+      <artifactId>ecms-core-viewer</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-authoring-services</artifactId>
+      <artifactId>ecms-ext-authoring-services</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

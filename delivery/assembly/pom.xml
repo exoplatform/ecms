@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-delivery-wcm</artifactId>
+    <artifactId>ecms-delivery</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-delivery-wcm-assembly</artifactId>
+  <artifactId>ecms-delivery-assembly</artifactId>
   <packaging>pom</packaging>
-  <name>eXo WCM Assemblies</name>
+  <name>eXo ECMS Assemblies</name>
   <properties>
     <gatein.working.dir>${basedir}/target</gatein.working.dir>
   </properties>
@@ -51,47 +51,47 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>wcm.packaging.module</artifactId>
+      <artifactId>ecms.packaging.module</artifactId>
       <version>${project.version}</version>
       <type>js</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>wcm.packaging.product</artifactId>
+      <artifactId>ecms.packaging.product</artifactId>
       <version>${project.version}</version>
       <type>js</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-delivery-wcm-server-tomcat</artifactId>
+      <artifactId>ecms-delivery-server-tomcat</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-ecmdemo-webapp</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webapp</artifactId>
-      <type>war</type>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-ecmdemo-config</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-ecmdemo-rest-webapp</artifactId>
+      <artifactId>ecms-packaging-ecmdemo-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
+      <artifactId>ecms-core-webapp</artifactId>
+      <type>war</type>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-packaging-ecmdemo-config</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-packaging-ecmdemo-rest-webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-packaging-wcm-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
@@ -199,7 +199,7 @@
 	<dependency><groupId>org.jsecurity</groupId><artifactId>jsecurity</artifactId><version>${org.jsecurity.version}</version><type>jar</type></dependency><!-- 0.9.0-->
 	<dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><version>${xml-apis.version}</version><type>jar</type></dependency><!-- 1.3.04-->
 	<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
-	<dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.webui.ext</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.0.2-SNAPSHOT-->
+	<dependency><groupId>org.exoplatform.commons</groupId><artifactId>commons-webui-ext</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.0.2-SNAPSHOT-->
     <dependency><groupId>org.chromattic</groupId><artifactId>chromattic.core</artifactId><version>${chromattic.version}</version><type>jar</type></dependency><!-- 1.0.4-->
     <dependency><groupId>org.exoplatform.kernel</groupId><artifactId>exo.kernel.component.ext.cache.impl.jboss.v3</artifactId><version>${org.exoplatform.kernel.version}</version><type>jar</type></dependency><!-- 2.3.0-CR1-->
     <dependency><groupId>org.hsqldb</groupId><artifactId>hsqldb</artifactId><version>${org.hsqldb.version}</version><type>jar</type></dependency>
@@ -250,7 +250,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+      <artifactId>ecms-ext-xcmis-sp</artifactId>
       <version>${project.version}</version>
       <type>jar</type>
     </dependency>
@@ -304,7 +304,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-waiportal-webapp</artifactId>
+      <artifactId>ecms-packaging-waiportal-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
@@ -320,8 +320,8 @@
       <version>${lucene-regex.version}</version>
       <type>jar</type>
     </dependency>
-    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.component.product</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
-    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.component.upgrade</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
+    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>commons-component-product</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
+    <dependency><groupId>org.exoplatform.commons</groupId><artifactId>commons-component-upgrade</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.1.2-GA-SNAPSHOT-->
     <dependency><groupId>caja</groupId><artifactId>json_simple</artifactId><version>${caja.version}</version><type>jar</type></dependency><!-- r1-->
     <dependency><groupId>javax.resource</groupId><artifactId>connector-api</artifactId><version>${javax.resource.version}</version><type>jar</type></dependency><!-- 1.5-->
     <dependency><groupId>org.jboss</groupId><artifactId>jbossxb</artifactId><version>${org.jbossxb.version}</version><type>jar</type></dependency><!-- 2.0.1.GA-->
@@ -379,7 +379,7 @@
       <id>pkg-tomcat</id>
       <activation>
         <property>
-          <name>!skip.wcm</name>
+          <name>!skip.ecms</name>
         </property>
       </activation>
       <build>
@@ -450,7 +450,7 @@
                     <argument>org.mozilla.javascript.tools.shell.Main</argument>
                     <argument>${basedir}/target/exopackage/javascript/eXo/eXo.js</argument>
                     <argument>exobuild</argument>
-                    <argument>--product=wcm</argument>
+                    <argument>--product=ecms</argument>
                     <argument>--deploy=tomcat</argument>
                   </arguments>
                 </configuration>

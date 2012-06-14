@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-upgrade</artifactId>
+    <artifactId>ecms-upgrade</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-upgrade-favorite</artifactId>
+  <artifactId>ecms-upgrade-favorite</artifactId>
   <name>eXo ECMS Upgrade favorite</name>
   <description>eXo ECMS Upgrade addToFavorite Action</description>
   <packaging>jar</packaging>

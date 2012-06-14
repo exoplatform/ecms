@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-upgrade</artifactId>
+    <artifactId>ecms-upgrade</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-upgrade-user-folder-permission</artifactId>
+  <artifactId>ecms-upgrade-user-folder-permission</artifactId>
   <name>eXo ECMS Upgrade Users Folder Permission</name>
   <description>eXo ECMS Upgrade Users Folder Permission</description>
   <packaging>jar</packaging>

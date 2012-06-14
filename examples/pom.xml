@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
+    <artifactId>ecms</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-examples</artifactId>
+  <artifactId>ecms-examples</artifactId>
   <packaging>pom</packaging>
   <name>eXo WCM Examples</name>
   <description>eXo WCM Examples</description>

@@ -4,7 +4,7 @@ eXo.require("eXo.projects.Product") ;
 function getProduct(version) {
   var product = new Product();
   
-  product.name = "eXoWCM" ;
+  product.name = "eXoECMS" ;
   product.portalwar = "portal.war" ;
   product.ecmdemowar = "ecmdemo.war";
   product.codeRepo = "https://github.com/exodev/ecms" ;
@@ -16,7 +16,7 @@ function getProduct(version) {
   var ws = Module.GetModule("ws");
   var eXoJcr = Module.GetModule("jcr", {kernel : kernel, core : core, ws : ws}) ;
   var portal = Module.GetModule("portal", {kernel : kernel, ws:ws, core : core, eXoJcr : eXoJcr});         
-  var wcm = Module.GetModule("wcm", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
+  var ecms = Module.GetModule("ecms", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
   	
   portal.starter = new Project("org.exoplatform.portal", "exo.portal.starter.war", "war", portal.version);
   portal.starter.deployName = "starter";
@@ -32,28 +32,28 @@ function getProduct(version) {
   product.addDependencies(portal.web.portal);
   product.addDependencies(portal.webui.portal);
   
-  product.addDependencies(wcm.gadgets);
-  product.addDependencies(wcm.portlet.ecmadmin);
-  product.addDependencies(wcm.portlet.ecmexplorer);
-  product.addDependencies(wcm.web.eXoDMSResources) ;
-  product.addDependencies(wcm.authoring.war);
-  product.addDependencies(wcm.core.war);
-  product.addDependencies(wcm.extension.war);
-  product.addDependencies(wcm.waiextension.war);
-  product.addDependencies(wcm.waitemplate.war);
-  product.addDependencies(wcm.portlet.webpresentation);
-  product.addDependencies(wcm.portlet.websearches); 
-  product.addDependencies(wcm.portlet.seo);
-  product.addDependencies(wcm.portlet.fastcontentcreator);
-  product.addDependencies(wcm.gadget.favorites);
-  product.addDependencies(wcm.web.eXoWCMResources) ;
-  product.addDependencies(wcm.web.eXoStaticResources) ;
-  product.addDependencies(wcm.demo.portal);
-  product.addDependencies(wcm.demo.rest);
+  product.addDependencies(ecms.gadgets);
+  product.addDependencies(ecms.portlet.ecmadmin);
+  product.addDependencies(ecms.portlet.ecmexplorer);
+  product.addDependencies(ecms.web.eXoDMSResources) ;
+  product.addDependencies(ecms.authoring.war);
+  product.addDependencies(ecms.core.war);
+  product.addDependencies(ecms.extension.war);
+  product.addDependencies(ecms.waiextension.war);
+  product.addDependencies(ecms.waitemplate.war);
+  product.addDependencies(ecms.portlet.webpresentation);
+  product.addDependencies(ecms.portlet.websearches); 
+  product.addDependencies(ecms.portlet.seo);
+  product.addDependencies(ecms.portlet.fastcontentcreator);
+  product.addDependencies(ecms.gadget.favorites);
+  product.addDependencies(ecms.web.eXoWCMResources) ;
+  product.addDependencies(ecms.web.eXoStaticResources) ;
+  product.addDependencies(ecms.demo.portal);
+  product.addDependencies(ecms.demo.rest);
 
-  product.addServerPatch("tomcat", wcm.server.tomcat.patch) ;	
+  product.addServerPatch("tomcat", ecms.server.tomcat.patch) ;	
 	
-  product.module = wcm ;
+  product.module = ecms ;
   product.dependencyModule = [kernel, core, ws, eXoJcr, portal];
 
   return product ;

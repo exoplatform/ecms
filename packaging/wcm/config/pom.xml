@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging-wcm</artifactId>
+    <artifactId>ecms-packaging-wcm</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-packaging-wcm-config</artifactId>
+  <artifactId>ecms-packaging-wcm-config</artifactId>
   <name>eXo WCM Extension JAR</name>
   <description>eXo WCM Extension JAR's configuration</description>
   <build>

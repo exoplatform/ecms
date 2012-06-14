@@ -4,11 +4,11 @@
 
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-	<artifactId>exo.platform.testsuite</artifactId>
+	<artifactId>ecms-testsuite</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>selenium</artifactId>
+  <artifactId>ecms-testsuite-selenium</artifactId>
   <packaging>jar</packaging>
   <name>Selenium Sniff Test for selenium</name>
   <description>Automated UI tests for selenium</description>

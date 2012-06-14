@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-ext-xcmis</artifactId>
+    <artifactId>ecms-ext-xcmis</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-xcmis-docs</artifactId>
+  <artifactId>ecms-ext-xcmis-docs</artifactId>
   <packaging>pom</packaging>
   <name>eXo CMIS documentation</name>
 

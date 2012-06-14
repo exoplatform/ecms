@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-ext-fastcontentcreator</artifactId>
+    <artifactId>ecms-ext-fastcontentcreator</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-fastcontentcreator-portlet</artifactId>
+  <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Fast Content Creator Portlet</name>
   <description>eXo WCM Fast Content Creator Portlet</description>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -43,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

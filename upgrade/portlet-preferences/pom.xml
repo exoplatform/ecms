@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-upgrade</artifactId>
+    <artifactId>ecms-upgrade</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-upgrade-portlet-preferences</artifactId>
+  <artifactId>ecms-upgrade-portlet-preferences</artifactId>
   <name>eXo ECMS Upgrade Portlet Preferences</name>
   <description>eXo ECMS Upgrade Portlet Preferences</description>
   <packaging>jar</packaging>

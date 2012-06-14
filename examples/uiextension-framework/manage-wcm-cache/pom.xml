@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-examples-uiextension-framework</artifactId>
+    <artifactId>ecms-examples-uiextension-framework</artifactId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-examples-uiextension-framework-manage-wcm-cache</artifactId>
+  <artifactId>ecms-examples-uiextension-framework-manage-wcm-cache</artifactId>
 	<packaging>jar</packaging>
   <name>eXo WCM Examples :: Manage WCM Cache</name>
   <description>eXo WCM Examples :: Manage WCM Cache</description>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
@@ -43,13 +43,13 @@
 		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-administration</artifactId>
+      <artifactId>ecms-core-webui-administration</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
