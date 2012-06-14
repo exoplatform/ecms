@@ -1,6 +1,7 @@
 <%  
   def rcontext = _ctx.getRequestContext();
 %>
+<div class="$uicomponent.id" id="$uicomponent.id">
 <div class="SideBarContent">
   <div class="BarContent">
   	<div class="BarContentL">
@@ -34,6 +35,11 @@
 		      %>
 		    </div>  
 		  </div>  
+		  <% if(uicomponent.getPrivatePageIterator().getAvailablePage() > 1){ %>
+		  <div style="margin:1px 0px 10px 0px;">
+		    <%_ctx.renderUIComponent(uicomponent.getPrivatePageIterator())%>
+		  </div>
+		  <% } %>
 		</div>
   </div>
   
@@ -73,7 +79,14 @@
 	      %>
 	    </div>  
 	  </div>  
+    <% if(uicomponent.getPublicPageIterator().getAvailablePage() > 1){ %>
+    <div style="margin:1px 0px 10px 0px;">
+      <%_ctx.renderUIComponent(uicomponent.getPublicPageIterator())%>
+    </div>
+    <% } %>
 	</div>
+</div>
+
 </div>
 
 </div>
