@@ -1013,7 +1013,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     // Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
-    updateDocumentsTemplate(isDocumentTemplate, nodeTypeName);
     return templatePath;
   }
 
