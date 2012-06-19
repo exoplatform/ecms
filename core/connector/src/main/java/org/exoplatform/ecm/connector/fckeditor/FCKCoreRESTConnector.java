@@ -42,8 +42,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * FCKCoreRESTConnector
@@ -63,7 +61,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector
  */
 @Path("/fckconnector/jcr/")
-@LevelAPI(LevelType.PLATFORM)
 public class FCKCoreRESTConnector implements ResourceContainer {
 
   private FCKFileHandler fileHandler;

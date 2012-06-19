@@ -46,8 +46,6 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * ThumbnailRESTService 
@@ -75,7 +73,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService
  */
 @Path("/thumbnailImage/")
-@LevelAPI(LevelType.PLATFORM)
 public class ThumbnailRESTService implements ResourceContainer {
 
   /** The Constant LAST_MODIFIED_PROPERTY. */

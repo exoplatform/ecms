@@ -59,8 +59,6 @@ import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.Page;
 import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * PDFViewerRESTService.java \n
@@ -84,7 +82,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
-@LevelAPI(LevelType.PLATFORM)
 public class PDFViewerRESTService implements ResourceContainer {
 
   private static final String LASTMODIFIED = "Last-Modified";

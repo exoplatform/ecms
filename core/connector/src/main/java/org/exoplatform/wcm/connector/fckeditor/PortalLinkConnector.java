@@ -61,8 +61,6 @@ import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * PortalLinkConnector
@@ -80,7 +78,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  */
 @SuppressWarnings("deprecation")
 @Path("/portalLinks/")
-@LevelAPI(LevelType.PLATFORM)
 public class PortalLinkConnector implements ResourceContainer {
 
   /** The RESOURC e_ type. */

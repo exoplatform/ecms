@@ -79,8 +79,6 @@ import org.exoplatform.wcm.connector.handler.FCKFileHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * DriverConnector
@@ -103,7 +101,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector
  */
 @Path("/wcmDriver/")
-@LevelAPI(LevelType.PLATFORM)
 public class DriverConnector extends BaseConnector implements ResourceContainer {
 
   /** The Constant FILE_TYPE_WEBCONTENT. */

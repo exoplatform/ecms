@@ -52,8 +52,6 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * RssConnector 
@@ -70,7 +68,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector
  */
 @Path("/feed/")
-@LevelAPI(LevelType.PLATFORM)
 public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /** The WORKSPACE. */

@@ -21,8 +21,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * LifecycleConnector
@@ -39,7 +37,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector
  */
 @Path("/authoring/")
-@LevelAPI(LevelType.PLATFORM)
 public class LifecycleConnector implements ResourceContainer {
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
