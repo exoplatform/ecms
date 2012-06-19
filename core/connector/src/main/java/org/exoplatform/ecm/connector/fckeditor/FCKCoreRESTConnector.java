@@ -42,15 +42,28 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform SAS.
+ * FCKCoreRESTConnector
+ * 
+ * Get a list of files and folders, and create a folder and upload files.
  *
- * @author : Hoa.Pham
- * @Email hoa.pham@exoplatform.com
- * Jun 23, 2008
+ * See methods for more api details.
+ * GET: /getFoldersAndFiles/ 
+ * GET: /createFolder/ 
+ * GET: /uploadFile/upload/ 
+ * GET: /uploadFile/control/ 
+ * 
+ * @author Hoa.Pham <hoa.pham@exoplatform.com>
+ * @since      Jun 23, 2008
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector
  */
 @Path("/fckconnector/jcr/")
+@LevelAPI(LevelType.PLATFORM)
 public class FCKCoreRESTConnector implements ResourceContainer {
 
   private FCKFileHandler fileHandler;
@@ -74,7 +87,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Gets the folders and files.
+   * Return the folders and the files in the current folder.
    *
    * @param repoName the repo name
    * @param workspaceName the workspace name
@@ -83,6 +96,8 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    * @param type the type
    * @return the folders and files
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -130,7 +145,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Creates the folder.
+   * Create a folder under the current folder.
    *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
@@ -139,6 +154,8 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    * @param language the language
    * @return the response
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -155,9 +172,11 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Upload file.
+   * Uploads a file with the HttpServletRequest.
    *
    * @return the response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -168,12 +187,14 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Control upload file
+   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
    * @param action the action
    * @param uploadId the upload id
    * @param language the language
    * @return the response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

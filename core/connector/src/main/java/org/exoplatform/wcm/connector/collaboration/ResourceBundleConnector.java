@@ -38,16 +38,34 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Phan Le Thanh Chuong
- *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Dec 21, 2009
+ * ResourceBundleConnector
+ *
+ * Get the bundle basing on the key and the locale.
+ * 
+ * See methods for more api details.
+ * GET: /bundle/getBundle/ 
+ *     
+ * @author Phan Le Thanh Chuong <chuong.phan@exoplatform.com>, <phan.le.thanh.chuong@gmail.com>
+ * @since      Dec 21, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector
  */
 @Path("/bundle/")
+@LevelAPI(LevelType.PLATFORM)
 public class ResourceBundleConnector implements ResourceContainer {
 
+  /**
+  * Get the bundle basing on the key and the locale.
+  * @param key 
+  * @param locale 
+  * 
+  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector.getBundle
+  */
   @GET
   @Path("/getBundle/")
   public Response getBundle (
