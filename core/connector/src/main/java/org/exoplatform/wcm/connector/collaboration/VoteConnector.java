@@ -39,8 +39,6 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * VoteConnector
@@ -62,7 +60,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.VoteConnector
  */
 @Path("/contents/vote/")
-@LevelAPI(LevelType.PLATFORM)
 public class VoteConnector extends BaseConnector implements ResourceContainer {
 
   /**

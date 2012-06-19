@@ -51,8 +51,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.doc.gen.annotation.LevelAPI;
-import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
  * PublicationGetDocumentRESTService
@@ -70,7 +68,6 @@ import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService
  */
 @Path("/publication/presentation/")
-@LevelAPI(LevelType.PLATFORM)
 public class PublicationGetDocumentRESTService implements ResourceContainer {
 
   private RepositoryService  repositoryService_;
