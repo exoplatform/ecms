@@ -54,16 +54,25 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Hoang Van Hung
- *          hunghvit@gmail.com
- * May 17, 2009
+ * GetEditedDocumentRESTService
+ *
+ * Return the latest edited documents. 
+ * 
+ * See methods for more api details.
+ * GET: /presentation/document/edit/{repository}/ 
+ * 
+ * @author Hoang Van Hung <hunghvit@gmail.com>
+ * @since      May 17, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService
  */
-
-
 @Path("/presentation/document/edit/")
+@LevelAPI(LevelType.PLATFORM)
 public class GetEditedDocumentRESTService implements ResourceContainer {
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
@@ -107,6 +116,17 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     this.manageDriveService = manageDriveService;
   }
 
+  /**
+   * Return the latest edited documents.
+   * 
+   * @param repository Repository name
+   * @param showItems 
+   * @param showGadgetWs 
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService.getLastEditedDoc
+   */
   @Path("/{repository}/")
   @GET
   public Response getLastEditedDoc(@PathParam("repository") String repository,

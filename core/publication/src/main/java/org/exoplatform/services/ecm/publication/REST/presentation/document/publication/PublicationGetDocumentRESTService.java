@@ -51,14 +51,26 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform SARL Author : Ly Dinh Quang
- * quang.ly@exoplatform.com xxx5669@gmail.com Feb 19, 2009
- * modified hunghvit@gmail.com
- * May 17, 2009
+ * PublicationGetDocumentRESTService
+ *
+ * Return a list of published documents.
+ * 
+ * See methods for more api details.
+ * GET: /publication/presentation/{repository}/{workspace}/{state}/
+ * GET: /publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}/
+ * 
+ * @author Ly Dinh Quang <quang.ly@exoplatform.com>
+ * @since      May 17, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService
  */
 @Path("/publication/presentation/")
+@LevelAPI(LevelType.PLATFORM)
 public class PublicationGetDocumentRESTService implements ResourceContainer {
 
   private RepositoryService  repositoryService_;
@@ -85,15 +97,16 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * <p>Get the document which is published</p>
-   * ex:
-   * /portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}
+   * <p>Return a list of published document by the default plugin.</p>
+   * ex: /portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}
    *
    * @param repoName      Repository name
    * @param wsName        Workspace name
    * @param state         The state is specified to classify the process
    * @return
    * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService.getPublishDocument
    */
   @Path("/{repository}/{workspace}/{state}/")
   @GET
@@ -105,7 +118,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * <p>Get the document which is published</p>
+   * <p>Return a list of published documents by a specific plugin.</p>
    * ex: /portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/
    * {state}?showItems={numberOfItem}
    *
@@ -115,6 +128,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * @param state                   The state is specified to classify the process
    * @return
    * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService.getPublishedListDocument
    */
   @Path("/{repository}/{workspace}/{publicationPluginName}/{state}/")
   @GET

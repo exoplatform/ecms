@@ -45,14 +45,25 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Hoa Pham
- * hoa.phamvu@exoplatform.com
- * Mar 31, 2009
+ * RESTImagesRendererService
+ *
+ * Get the image binary data of a given image node. 
+ * 
+ * See methods for more api details.
+ * GET: /images/{repositoryName}/{workspaceName}/{nodeIdentifier}/ 
+ * 
+ * @author Hoa Pham <hoa.phamvu@exoplatform.com>
+ * @since      Mar 31, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
  */
 @Path("/images/")
+@LevelAPI(LevelType.PLATFORM)
 public class RESTImagesRendererService implements ResourceContainer{
 
   /** The session provider service. */
@@ -88,13 +99,15 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Serve image.
+   * Get the image binary data of a given image node.
    *
    * @param repository the repository
    * @param workspace the workspace
    * @param nodeIdentifier the node identifier
    *
    * @return the response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
@@ -160,10 +173,10 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /**
    * get the last modified date of node
-  + * @param node
-  + * @return the last modified date
-  + * @throws Exception
-  + */
+   * @param node
+   * @return the last modified date
+   * @throws Exception
+   */
   private Date getLastModifiedDate(Node node) throws Exception {
      Date lastModifiedDate = null;
      if (node.hasNode("jcr:content") && node.getNode("jcr:content").hasProperty("jcr:lastModified")) {

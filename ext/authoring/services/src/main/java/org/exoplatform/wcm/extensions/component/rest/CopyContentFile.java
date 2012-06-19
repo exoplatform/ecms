@@ -16,11 +16,24 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
 /**
- * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
+ * CopyContentFile
+ *
+ * Copy a file. 
+ * 
+ * See methods for more api details.
+ * GET: {portalname}/{restcontextname}/copyfile/copy/
+ * 
+ * @author haikel.thamri@exoplatform.com
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.CopyContentFile
  */
 @Path("/copyfile/")
+@LevelAPI(LevelType.PLATFORM)
 public class CopyContentFile implements ResourceContainer {
 
   private static final Log    LOG                           = ExoLogger.getLogger(CopyContentFile.class.getName());
@@ -43,6 +56,15 @@ public class CopyContentFile implements ResourceContainer {
     targetKey = params.getValueParam("targetKey").getValue();
   }
 
+  /**
+  * Copy a file.
+  * 
+  * @param param the file information
+  * @return Response inputstream
+  * @throws Exception
+  * 
+  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.CopyContentFile.copyFile
+  */
   @POST
   @Path("/copy/")
   public Response copyFile(String param) throws Exception {

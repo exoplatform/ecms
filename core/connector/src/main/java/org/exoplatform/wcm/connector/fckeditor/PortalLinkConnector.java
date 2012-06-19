@@ -61,13 +61,26 @@ import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.exoplatform.doc.gen.annotation.LevelAPI;
+import org.exoplatform.doc.gen.annotation.LevelAPI.LevelType;
 
-/*
- * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
- * Jul 11, 2008
+/**
+ * PortalLinkConnector
+ *
+ * Return a page URI for a given location.
+ * 
+ * See methods for more api details.
+ * GET: /portalLinks/getFoldersAndFiles/ 
+ *     
+ * @author Anh Do Ngoc <anh.do@exoplatform.com>
+ * @since      Jul 11, 2008
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector
  */
 @SuppressWarnings("deprecation")
 @Path("/portalLinks/")
+@LevelAPI(LevelType.PLATFORM)
 public class PortalLinkConnector implements ResourceContainer {
 
   /** The RESOURC e_ type. */
@@ -111,15 +124,15 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Gets the page uri.
+   * Get the page URI.
    *
    * @param currentFolder the current folder
    * @param command the command
    * @param type the type
-   *
    * @return the page uri
-   *
    * @throws Exception the exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
