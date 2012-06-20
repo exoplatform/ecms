@@ -116,6 +116,7 @@
     <!-- config-scm-maven-plugin -->
     <version.release.plugin>2.2.1</version.release.plugin>
     <version.buildnumber.plugin>1.1</version.buildnumber.plugin>
+    <org.imgscalr.version>4.2</org.imgscalr.version>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->

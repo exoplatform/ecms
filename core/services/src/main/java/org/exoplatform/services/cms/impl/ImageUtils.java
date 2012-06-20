@@ -28,6 +28,7 @@ import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+import org.imgscalr.Scalr;
 
 /**
  * Created by The eXo Platform SARL
@@ -64,64 +65,14 @@ public class ImageUtils {
    */  
   public static InputStream scaleImage(BufferedImage image, int maxWidth, int maxHeight, boolean crop) throws Exception {
     // Make sure the aspect ratio is maintained, so the image is not skewed
-    int imageWidth = image.getWidth(null);
-    int imageHeight = image.getHeight(null);
-    double widthRatio = (double) maxWidth / imageWidth;
-    double heightRatio = (double) maxHeight / imageHeight;
-    int dx, dy, dw, dh;
-    dx = dy = 0;
-    if (!crop) {
-      if (maxWidth > 0 && imageWidth > maxWidth) {
-        // Determine the shrink ratio
-        imageHeight = (int) (imageHeight * widthRatio);
-        imageWidth = maxWidth;
-      }
-      if (maxHeight > 0 && imageHeight > maxHeight) {
-        // Determine the shrink ratio
-        imageWidth = (int) (imageWidth * heightRatio);
-        imageHeight = maxHeight;
-      }
-      dw = imageWidth;
-      dh = imageHeight;
+    BufferedImage thumbImage = null;
+    if(crop) {
+      thumbImage = Scalr.crop(image, maxWidth, maxHeight);
     } else {
-      if (maxHeight==0) {
-        imageHeight = (int) (imageHeight * widthRatio);
-        imageWidth = maxWidth;
-        dw = imageWidth;
-        dh = imageHeight;
-      } else if (maxWidth==0) {
-        imageWidth = (int) (imageWidth * heightRatio);
-        imageHeight = maxHeight;
-        dw = imageWidth;
-        dh = imageHeight;
-      } else {
-        double srcRatio = (double)imageWidth / imageHeight;
-        double tgtRatio = (double)maxWidth / maxHeight;
-        if (srcRatio<tgtRatio) {
-          dx = 0;
-          dw = maxWidth;
-          dh = (int) (imageHeight * widthRatio);
-          dy = (int) ((maxHeight/2) - (dh/2));
-        } else {
-          dy = 0;
-          dh = maxHeight;
-          dw = (int) (imageWidth * heightRatio);
-          dx = (int) ((maxWidth/2) - (dw/2));
-        }
-
-        imageWidth = maxWidth;
-        imageHeight = maxHeight;
-      }
+      //BALANCED: Used to indicate that the scaling implementation should use a scaling operation balanced 
+      //between SPEED and QUALITY
+      thumbImage = Scalr.resize(image, Scalr.Method.BALANCED, maxWidth, maxHeight);      
     }
-    // Draw the scaled image
-    BufferedImage thumbImage = new BufferedImage(imageWidth,
-        imageHeight, BufferedImage.TYPE_INT_RGB);
-    Graphics2D graphics2D = thumbImage.createGraphics();
-    graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-    graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    graphics2D.drawImage(image, dx, dy, dw, dh, null);
-    graphics2D.dispose();
-
     Iterator<ImageWriter> iter = ImageIO.getImageWritersByFormatName("jpeg");
     ImageWriter writer = iter.next();
     JPEGImageWriteParam iwp = (JPEGImageWriteParam)writer.getDefaultWriteParam();

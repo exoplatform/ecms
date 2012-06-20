@@ -279,7 +279,12 @@
       <version>${org.exoplatform.commons.version}</version>
       <type>jar</type>
     </dependency>
-
+    <dependency>
+      <groupId>org.imgscalr</groupId>
+      <artifactId>imgscalr-lib</artifactId>
+      <version>${org.imgscalr.version}</version>
+      <type>jar</type>
+    </dependency>  
   </dependencies>
  
   <build>
@@ -459,6 +464,12 @@
               <artifactId>sac</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
+            <!--Jar to scale images-->
+            <jarModule>
+              <groupId>org.imgscalr</groupId>
+              <artifactId>imgscalr-lib</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>            
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>ecms-packaging-wcm-webapp</artifactId>

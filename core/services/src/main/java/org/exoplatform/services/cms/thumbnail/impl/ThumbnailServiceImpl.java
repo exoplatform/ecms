@@ -151,7 +151,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     if(propertyName.equals(SMALL_SIZE)) parseImageSize(thumbnailNode, image, smallSize_, SMALL_SIZE);
     else if(propertyName.equals(MEDIUM_SIZE)) parseImageSize(thumbnailNode, image, mediumSize_, MEDIUM_SIZE);
     else if(propertyName.equals(BIG_SIZE)) parseImageSize(thumbnailNode, image, bigSize_, BIG_SIZE);
-    else parseImageSize(thumbnailNode, image, propertyName.substring(4), propertyName, true);
+    else parseImageSize(thumbnailNode, image, propertyName.substring(4), propertyName, false);
   }
 
   /**
