@@ -379,7 +379,7 @@
       <id>pkg-tomcat</id>
       <activation>
         <property>
-          <name>!skip.ecms</name>
+          <name>!skip.wcm</name>
         </property>
       </activation>
       <build>
