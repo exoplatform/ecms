@@ -53,13 +53,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * PublicationGetDocumentRESTService
- *
  * Return a list of published documents.
- * 
- * See methods for more api details.
- * GET: /publication/presentation/{repository}/{workspace}/{state}/
- * GET: /publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}/
  * 
  * @author Ly Dinh Quang <quang.ly@exoplatform.com>
  * @since      May 17, 2009
@@ -94,12 +88,12 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * <p>Return a list of published document by the default plugin.</p>
-   * ex: /portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}
+   * Return a list of published documents by the default plugin.
+   * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}}}
    *
-   * @param repoName      Repository name
-   * @param wsName        Workspace name
-   * @param state         The state is specified to classify the process
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param state The state is specified to classify the process
    * @return
    * @throws Exception
    * 
@@ -115,14 +109,13 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * <p>Return a list of published documents by a specific plugin.</p>
-   * ex: /portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/
-   * {state}?showItems={numberOfItem}
+   * Return a list of published documents by a specific plugin.
+   * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}?showItems={numberOfItem}}}}
    *
-   * @param repoName                Repository name
-   * @param wsName                  Workspace name
-   * @param publicationPluginName   Plugin name
-   * @param state                   The state is specified to classify the process
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param publicationPluginName The name of plugin
+   * @param state The state is specified to classify the process
    * @return
    * @throws Exception
    * 

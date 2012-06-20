@@ -44,16 +44,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * FCKCoreRESTConnector
- * 
  * Get a list of files and folders, and create a folder and upload files.
  *
- * See methods for more api details.
- * GET: /getFoldersAndFiles/ 
- * GET: /createFolder/ 
- * GET: /uploadFile/upload/ 
- * GET: /uploadFile/control/ 
- * 
  * @author Hoa.Pham <hoa.pham@exoplatform.com>
  * @since      Jun 23, 2008
  * @copyright  eXo Platform SEA
@@ -70,10 +62,10 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   private RepositoryService repositoryService;
 
   /**
-   * Instantiates a new fCK core rest connector.
+   * Instantiate a new FCK core rest connector.
    *
-   * @param repositoryService the repository service
-   * @param providerService the provider service
+   * @param repositoryService The repository service
+   * @param providerService The provider service
    */
   public FCKCoreRESTConnector(RepositoryService repositoryService, ThreadLocalSessionProviderService providerService) {
     this.repositoryService = repositoryService;
@@ -84,15 +76,15 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Return the folders and the files in the current folder.
+   * Return folders and files in the current folder.
    *
-   * @param repoName the repo name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param type the type
-   * @return the folders and files
-   * @throws Exception the exception
+   * @param repoName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param type The type
+   * @return The folders and files
+   * @throws Exception The exception
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.getFoldersAndFiles
    */
@@ -144,13 +136,13 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Create a folder under the current folder.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param newFolderName the new folder name
-   * @param language the language
-   * @return the response
-   * @throws Exception the exception
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param newFolderName The name of new folder
+   * @param language The language
+   * @return The response
+   * @throws Exception The exception
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.createFolder
    */
@@ -169,9 +161,9 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Uploads a file with the HttpServletRequest.
+   * Upload a file with the HttpServletRequest.
    *
-   * @return the response
+   * @return The response
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.uploadFile
    */
@@ -186,10 +178,10 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @param action the action
-   * @param uploadId the upload id
-   * @param language the language
-   * @return the response
+   * @param action The action
+   * @param uploadId The Id of upload
+   * @param language The language
+   * @return The response
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.processUpload
    */

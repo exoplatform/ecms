@@ -40,12 +40,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * ResourceBundleConnector
- *
- * Get the bundle basing on the key and the locale.
- * 
- * See methods for more api details.
- * GET: /bundle/getBundle/ 
+ * Get the bundle that is based on the key and the locale.
  *     
  * @author Phan Le Thanh Chuong <chuong.phan@exoplatform.com>, <phan.le.thanh.chuong@gmail.com>
  * @since      Dec 21, 2009
@@ -57,7 +52,7 @@ import org.w3c.dom.Element;
 public class ResourceBundleConnector implements ResourceContainer {
 
   /**
-  * Get the bundle basing on the key and the locale.
+  * Get the bundle that is based on the key and the locale.
   * @param key 
   * @param locale 
   * 
