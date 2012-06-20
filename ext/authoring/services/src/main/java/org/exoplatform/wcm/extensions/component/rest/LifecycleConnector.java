@@ -23,15 +23,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * LifecycleConnector
+ * Return a list of content during a given state range of the publication lifecycle.  
  *
- * Return a list of contents in a given state range of the publication lifecycle. 
- * 
- * See methods for more api details.
- * GET: /authoring/bystate/ 
- * GET: /authoring/tostate/ 
- * GET: /authoring/bydate/ 
- * 
  * @copyright  eXo Platform SEA
  * 
  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector
@@ -46,9 +39,9 @@ public class LifecycleConnector implements ResourceContainer {
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
-   * Return a list of contents from the given state to the last state.
+   * Return a list of content from a given to the last state.
    * 
-   * ex: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
+   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
    * =draft&user=root&lang=en&workspace=collaboration
    *
    * @param fromstate
@@ -72,9 +65,9 @@ public class LifecycleConnector implements ResourceContainer {
   }
 
   /**
-   * Return a list of contents from the beginning state to the last state.
+   * Return a list of content from the beginning to the last state.
    * 
-   * ex : http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
+   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
    * =draft&tostate=pending&user=root&lang=en&workspace=collaboration
    *
    * @param fromstate
@@ -99,9 +92,9 @@ public class LifecycleConnector implements ResourceContainer {
   }
 
   /**
-   * Return a list of contents from the given beginning state and published before the given date.
+   * Return a list of content from the given beginning to published state and before the given date.
    * 
-   * ex: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
+   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
    * =staged&date=2&lang=en&workspace=collaboration
    *
    * @param fromstate
@@ -125,6 +118,8 @@ public class LifecycleConnector implements ResourceContainer {
   }
 
   /**
+   * Return a list of content from the given beginning to a specified state and before the given date.
+   *
    * @param fromstate
    * @param tostate
    * @param user

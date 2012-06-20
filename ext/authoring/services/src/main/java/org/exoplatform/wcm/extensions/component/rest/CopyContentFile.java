@@ -18,13 +18,8 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 
 /**
- * CopyContentFile
- *
  * Copy a file. 
- * 
- * See methods for more api details.
- * GET: {portalname}/{restcontextname}/copyfile/copy/
- * 
+ *
  * @author haikel.thamri@exoplatform.com
  * @copyright  eXo Platform SEA
  * 
@@ -56,7 +51,7 @@ public class CopyContentFile implements ResourceContainer {
   /**
   * Copy a file.
   * 
-  * @param param the file information
+  * @param param The file path
   * @return Response inputstream
   * @throws Exception
   * 

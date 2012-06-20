@@ -48,23 +48,13 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
- * ThumbnailRESTService 
- *
  * Return a responding data as a thumbnail image. 
- * {repoName} Repository name
- * {workspaceName} Name of workspace
- * {nodePath} The node path 
- * 
- * See methods for more api details.
- * GET: /medium/{repoName}/{workspaceName}/{nodePath:.*}/ 
- * GET: /big/{repoName}/{workspaceName}/{nodePath:.*}/ 
- * GET: /large/{repoName}/{workspaceName}/{nodePath:.*}/ 
- * GET: /small/{repoName}/{workspaceName}/{nodePath:.*}/ 
- * GET: /custom/{size}/{repoName}/{workspaceName}/{nodePath:.*}/
- * GET: /origin/{repoName}/{workspaceName}/{nodePath:.*}/ 
- *     
- * {portalname}: The name of the portal.
- * {restcontextname}: The context name of rest webapplication which is deployed to the "{portalname}" portal.
+ * {{{{repoName}}}}: The name of repository.
+ * {{{{workspaceName}}}}: The name of workspace.
+ * {{{{{nodePath}}}}: The node path.
+ *
+ * {{{{portalname}}}}: The name of the portal.
+ * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
  * 
  * @author Dang Van Minh <minh.dang@exoplatform.com>
  * @since      Oct 23, 2008 11:09:39 AM
@@ -97,11 +87,12 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
   
 /**
- * Return an image with the medium size (64x64).
- * ex: /portal/rest/thumbnailImage/medium/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a medium size (64x64).
+ * For example: /portal/rest/thumbnailImage/medium/repository/collaboration/test.gif/
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
  * 
@@ -120,10 +111,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image with the big size
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a big size.
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
  * 
@@ -139,10 +131,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image with the large size (300x300).
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a large size (300x300).
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
  * 
@@ -158,10 +151,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image with the small size (32x32).
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a small size (32x32).
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
  * 
@@ -177,10 +171,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image with the custom size.
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a custom size.
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
  * 
@@ -197,10 +192,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
   /**
-   * Return an image with the original size.
-   * @param repoName Repository name
-   * @param wsName Workspace name
-   * @param nodePath Node path
+   * Return an image at an original size.
+   *
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param nodePath The node path
    * @return Response data stream
    * @throws Exception
    * 

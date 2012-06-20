@@ -27,13 +27,8 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
- * FavoriteRESTService
+ * Return a list of favorite documents of a given user. 
  *
- * Return a list of favourite documents of a given user. 
- * 
- * See methods for more api details.
- * GET: /favorite/all/{repoName}/{workspaceName}/{userName}/
- *     
  * @author lamphan
  * @since      AUG 01, 2010
  * @copyright  eXo Platform SEA
@@ -66,10 +61,10 @@ public class FavoriteRESTService implements ResourceContainer {
   }
   
   /**
-   * Return a list of favourite documents of a given user.
+   * Return a list of favorite documents of a given user.
    * 
-   * @param repoName Repository name
-   * @param wsName Workspace name
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
    * @param userName
    * @param showItems
    * @return Response inputstream

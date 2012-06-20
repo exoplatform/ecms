@@ -61,19 +61,15 @@ import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
- * PDFViewerRESTService.java \n
- *
- * Return the pdf content to display on the web page. \n
+ * Return a PDF content to be displayed on the webpage.
  * 
- * {repoName} Repository name
- * {workspaceName} Workspace name
- * {nodePath} Node path
- * {pageNumber} Page number
- * {rotation} Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
- * {scale} Zoom factor to be applied to the rendered page
+ * {{{{repoName}}}}: The name of repository
+ * {{{{workspaceName}}}}: The name of workspace
+ * {{{{nodePath}}}}: The node path
+ * {{{pageNumber}}}}: The page number
+ * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
+ * {{{{scale}}}}: The Zoom factor which is applied to the rendered page
  *
- * See methods for more api details.
- * GET: /pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/ 
  *     
  * @author Dang Van Minh <minh.dang@exoplatform.com>
  * @since Sep 3, 2009 7:33:30 AM
@@ -99,14 +95,14 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Return a thumbnail image for a pdf document.
+   * Return a thumbnail image for a PDF document.
    * 
-   * @param repoName Repository name
-   * @param wsName Workspace name
-   * @param uuid
-   * @param pageNumber Page number
-   * @param rotation Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
-   * @param scale Zoom factor to be applied to the rendered page
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param n
+   * @param pageNumber The page number
+   * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
+   * @param scale The Zoom factor which is applied to the rendered page
    * @return Response inputstream
    * @throws Exception
    * 
@@ -281,7 +277,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Init pdf document from InputStream in nt:file node
+   * Initiate a PDF document from InputStream in the _nt\:file_ node.
    * @param currentNode
    * @param repoName
    * @return
@@ -292,7 +288,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Write PDF data to file
+   * Write PDF data to a file.
    * @param currentNode
    * @param repoName
    * @return
@@ -371,7 +367,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
+   * Create a key for cache. When the key object is collected by Garbage Collector, the value (if the object is a file) will be deleted.
    * @param key
    * @return
    * @throws IOException

@@ -56,12 +56,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * GetEditedDocumentRESTService
- *
  * Return the latest edited documents. 
- * 
- * See methods for more api details.
- * GET: /presentation/document/edit/{repository}/ 
  * 
  * @author Hoang Van Hung <hunghvit@gmail.com>
  * @since      May 17, 2009
@@ -116,7 +111,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
   /**
    * Return the latest edited documents.
    * 
-   * @param repository Repository name
+   * @param repository The name of repository
    * @param showItems 
    * @param showGadgetWs 
    * @return Response inputstream

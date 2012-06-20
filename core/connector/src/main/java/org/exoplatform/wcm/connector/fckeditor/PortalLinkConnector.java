@@ -63,13 +63,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * PortalLinkConnector
- *
  * Return a page URI for a given location.
- * 
- * See methods for more api details.
- * GET: /portalLinks/getFoldersAndFiles/ 
- *     
+ *
  * @author Anh Do Ngoc <anh.do@exoplatform.com>
  * @since      Jul 11, 2008
  * @copyright  eXo Platform SEA
@@ -102,14 +97,14 @@ public class PortalLinkConnector implements ResourceContainer {
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
-   * Instantiates a new portal link connector.
+   * Instantiate a new portal link connector.
    *
-   * @param params the params
-   * @param dataStorage the data storage
-   * @param userACL the user acl
-   * @param servletContext the servlet context
+   * @param params The init params
+   * @param dataStorage The data storage
+   * @param userACL The ACL of user
+   * @param servletContext The servlet context
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   public PortalLinkConnector(InitParams params,
                              DataStorage dataStorage,
@@ -123,11 +118,11 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Get the page URI.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param type the type
-   * @return the page uri
-   * @throws Exception the exception
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param type The type
+   * @return The page URI
+   * @throws Exception The exception
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector.getFoldersAndFiles
    */
@@ -150,9 +145,9 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Gets the current user.
+   * Get the current user.
    *
-   * @return the current user
+   * @return The current user
    */
   private String getCurrentUser() {
     try {
@@ -167,15 +162,15 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Builds the reponse.
+   * Build the response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param userId The Id of user
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Response buildReponse(String currentFolder, String command, String userId) throws Exception {
     Document document = null;
@@ -195,15 +190,15 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Builds the portal xml response.
+   * Build the portal xml response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param userId The Id of user
    *
-   * @return the document
+   * @return The document
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   @SuppressWarnings("unchecked")
   private Document buildPortalXMLResponse(String currentFolder, String command, String userId) throws Exception {
@@ -233,15 +228,15 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Builds the navigation xml response.
+   * Build the navigation xml response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param userId The Id of user
    *
-   * @return the document
+   * @return The document
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Document buildNavigationXMLResponse(String currentFolder, String command, String userId) throws Exception {
     PortalContainer container = PortalContainer.getInstance();
@@ -305,14 +300,14 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Inits the root element.
+   * Initiate the root element.
    *
-   * @param commandStr the command str
-   * @param currentPath the current path
+   * @param commandStr The command string
+   * @param currentPath The current path
    *
-   * @return the element
+   * @return The element
    *
-   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParserConfigurationException The parser configuration exception
    */
   private Element initRootElement(String commandStr, String currentPath) throws ParserConfigurationException {
     Document doc = null;
@@ -331,16 +326,16 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Process page node.
+   * Process the page node.
    *
-   * @param portalName the portal name
-   * @param userNode the user node
-   * @param foldersElement the root element
+   * @param portalName The name of portal
+   * @param userNode The user node
+   * @param foldersElement The root element
    * @param filesElement
-   * @param userId the user id
-   * @param portalConfigService the portal config service
+   * @param userId The Id of user
+   * @param portalConfigService The portal configuration service
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private void processPageNode(String portalName,
                                UserNode userNode,
@@ -380,12 +375,12 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Gets the page node.
+   * Get the page node.
    *
-   * @param root the root
-   * @param uri the uri
+   * @param root The root
+   * @param uri The URI
    *
-   * @return the page node
+   * @return The page node
    */
   private UserNode getUserNode(UserNode root, String uri) {
     if (uri.equals("/" + root.getURI() + "/")) {

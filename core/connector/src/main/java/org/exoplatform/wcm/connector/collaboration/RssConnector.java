@@ -54,13 +54,8 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
- * RssConnector 
- *
  * Generate an RSS feed.
- * 
- * See methods for more api details.
- * GET: /rss/
- * 
+ *
  * @author chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * @since      29-08-2009
  * @copyright  eXo Platform SEA
@@ -109,9 +104,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   private static final Log LOG = ExoLogger.getLogger(RssConnector.class.getName());
 
   /**
-   * Instantiates a new rss connector.
+   * Instantiate a new RSS connector.
    *
-   * @param container the container
+   * @param container The container
    */
   public RssConnector() {
     this.wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);    
@@ -121,15 +116,15 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /**
    * Generate an RSS feed.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param server the server
-   * @param siteName the site name
-   * @param categoryPath the category path
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param server The server
+   * @param siteName The name of site
+   * @param categoryPath The path of category
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    * 
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector.generate
    */
@@ -204,11 +199,11 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   
 
   /**
-   * Generate rss.
+   * Generate an RSS feed.
    *
-   * @param context the context
+   * @param context The context
    *
-   * @return the string
+   * @return The string
    */
   private String generateRSS(List<Node> nodes , Map<String, String> context) {
     String rssVersion = context.get(RSS_VERSION) ;
