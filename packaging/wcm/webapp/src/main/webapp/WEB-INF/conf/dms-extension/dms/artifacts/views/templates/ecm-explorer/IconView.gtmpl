@@ -168,7 +168,7 @@
 		          if (uicomponent.isFavouriter(data)) isFavourite = "true";
 		          if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
 		          if (uicomponent.isMediaType(data)) isMediaType = "true";
-		          if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
+		          if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(data.getPath()), uicomponent.getActionsList(data)) ;
 
 		        %>
 		      <div class="ActionIconBox" locked="<%=isLocked%>"
