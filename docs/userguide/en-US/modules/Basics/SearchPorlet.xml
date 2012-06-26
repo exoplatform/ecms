@@ -59,7 +59,7 @@
                         <tbody>
                             <row>
                                 <entry>
-                                    <emphasis role="bold">in Content</emphasis>
+                                    <guilabel>in Content</guilabel>
                                 </entry>
                                 <entry>
                                     <para>
@@ -69,10 +69,10 @@
                             </row>
                             <row>
                                 <entry>
-                                    <emphasis role="bold">in Pages</emphasis>
+                                    <guilabel>in Pages</guilabel>
                                 </entry>
                                 <entry>
-                                    Search all <link linkend="SEO_data_page">SEO data</link> (description, keyword) and pages that have <emphasis role="bold">titles</emphasis> or <emphasis role="bold">names</emphasis> matching the keyword. 
+                                    Search all <link linkend="SEO_data_page">SEO data</link> (description, keyword) and pages that have <guilabel>titles</guilabel> or <guilabel>names</guilabel> matching the keyword.
                                 </entry>
                             </row>
                         </tbody>
@@ -85,7 +85,7 @@
             </step>
             <step>
                 <para>Press <emphasis role="bold">Enter</emphasis>, or click
-                    <emphasis role="bold">Search</emphasis>
+                    <guilabel>Search</guilabel>
                    to start searching.
                 </para>
             </step>
@@ -99,11 +99,11 @@
                 <para>Open the Search page as in <xref linkend="sect-User_Guide-Search_portlet-Search_content"/>.</para>
             </step>
             <step>
-                <para>Open the <emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Search</emphasis> portlet by following one of two ways:</para>
+                <para>Open the <guilabel>Edit Mode</guilabel> of the <emphasis role="bold">Search</emphasis> portlet by following one of two ways:</para>
                 <itemizedlist>
                     <listitem>
                         <para><emphasis role="bold">The first way</emphasis></para>
-							<para>Hover your cursor over <emphasis role="bold">Edit --> Content</emphasis> on the <emphasis role="bold">Administration</emphasis> bar, and then click
+							<para>Hover your cursor over <menuchoice><guimenu>Edit</guimenu><guimenuitem>Content</guimenuitem> </menuchoice> on the <guilabel>Administration</guilabel> bar, and then click
                             <inlinemediaobject>
                                 <imageobject>
                                     <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
@@ -125,10 +125,9 @@
                     </listitem>
                     <listitem>
                         <para><emphasis role="bold">The second way</emphasis></para>
-							<para>Hover your cursor over
-                            <emphasis role="bold">Edit --> Page --> Layout</emphasis>
-                            on the <emphasis role="bold">Administration</emphasis> bar. The
-                            <emphasis role="bold">Page Editor</emphasis>
+							<para>Hover your cursor over <menuchoice><guimenu>Edit</guimenu><guisubmenu>Page</guisubmenu> <guimenuitem>Layout</guimenuitem> </menuchoice>
+                            on the <guilabel>Administration</guilabel> bar. The
+                            <guilabel>Page Editor</guilabel>
                             will be displayed.
                         </para>
                         <itemizedlist>
@@ -160,7 +159,7 @@
                     </listitem>
                 </itemizedlist>
 
-                <para>The <emphasis role="bold">Edit Mode</emphasis> of the <emphasis role="bold">Search</emphasis> portlet appears.</para>
+                <para>The <guilabel>Edit Mode</guilabel> of the <emphasis role="bold">Search</emphasis> portlet appears.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG"/>
@@ -187,7 +186,7 @@
                             <tbody>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Items per Page</emphasis>
+                                        <guilabel>Items per Page</guilabel>
                                     </entry>
                                     <entry>
                                         <para>
@@ -197,36 +196,36 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Page Mode</emphasis>
+                                        <guilabel>Page Mode</guilabel>
                                     </entry>
                                     <entry>
                                         The way to display the search results. There are 3 options:
                                         <itemizedlist>
                                             <listitem>
-                                                <para><emphasis role="bold">None</emphasis>: Only the first page of search results is
+                                                <para><guilabel>None</guilabel>: Only the first page of search results is
                                                     displayed in the search page.</para>
                                             </listitem>
                                             <listitem>
-                                                <para><emphasis role="bold">More</emphasis>: When you click the
-                                                    <emphasis role="bold">Search</emphasis>
+                                                <para><guilabel>More</guilabel>: When you click the
+                                                    <guibutton>Search</guibutton>
                                                     button, the
-                                                    first page of search result is displayed. The difference from the <emphasis role="bold">None</emphasis>
+                                                    first page of search result is displayed. The difference from the <guilabel>None</guilabel>
                                                     mode
-                                                    is that, there is a <emphasis role="bold">More</emphasis> button allowing you to see more search results.
+                                                    is that, there is a <guilabel>More</guilabel> button allowing you to see more search results.
                                                     When clicking this button, new search results are appended to
                                                     the
                                                     current search result page like Twitter or Facebook behavior.
                                                 </para>
                                             </listitem>
                                             <listitem>
-                                                <para><emphasis role="bold">Pagination</emphasis>: In this mode, the search results are divided into many pages (for example, 1, 2, 3 and Next). You can navigate to another page by clicking the page number or <emphasis role="bold">Next</emphasis> in the bottom of the Search portlet to view more results.</para>
+                                                <para><guilabel>Pagination</guilabel>: In this mode, the search results are divided into many pages (for example, 1, 2, 3 and Next). You can navigate to another page by clicking the page number or <guilabel>Next</guilabel> in the bottom of the Search portlet to view more results.</para>
                                             </listitem>
                                         </itemizedlist>
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Search Form Template</emphasis>
+                                        <guilabel>Search Form Template</guilabel>
                                     </entry>
                                     <entry>
                                         The template of the Search form.
@@ -234,7 +233,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Search Result Template</emphasis>
+                                        <guilabel>Search Result Template</guilabel>
                                     </entry>
                                     <entry>
                                         The template for displaying the search results.
@@ -242,7 +241,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Search Page Layout Template</emphasis>
+                                        <guilabel>Search Page Layout Template</guilabel>
                                     </entry>
                                     <entry>
                                         The layout of the Search portlet.
@@ -250,7 +249,7 @@
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Base Path</emphasis>
+                                        <guilabel>Base Path</guilabel>
                                     </entry>
                                     <entry>
                                         The page where you can see the content of a search result.
@@ -261,7 +260,7 @@
                     </table>
             </step>
             <step>
-                <para>Edit your desired portlet and click <emphasis role="bold">Save</emphasis> to accept your changes.</para>
+                <para>Edit your desired portlet and click <guibutton>Save</guibutton> to accept your changes.</para>
             </step>
         </procedure>
     </section>

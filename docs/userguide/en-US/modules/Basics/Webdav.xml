@@ -87,7 +87,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Add a network place</emphasis> link on the left to open the <emphasis role="bold">Add Network Place Wizard.</emphasis>
+     Click the <guilabel>Add a network place</guilabel> link on the left to open the <emphasis role="bold">Add Network Place Wizard.</emphasis>
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -100,7 +100,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Next</emphasis> to select a network location:
+     Click <guilabel>Next</guilabel> to select a network location:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -113,18 +113,18 @@
       </step>
       <step>
         <para>
-     Select <emphasis role="bold">Choose another network location</emphasis> to create a shortcut.
+     Select <guilabel>Choose another network location</guilabel> to create a shortcut.
     </para>
       </step>
       <step>
         <para>
-     Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field.
+     Enter an address into the <guilabel>Internet or network address</guilabel> field.
     </para>
           <para>For example, the address of the <emphasis>Acme</emphasis> demonstration site is <code>http://mycompany.com:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme.</code></para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Next.</emphasis> After a few seconds,  a folder named <emphasis role="bold">acme on localhost</emphasis> appears in the <emphasis role="bold">My Network Places</emphasis> directory.
+     Click <guilabel>Next.</guilabel> After a few seconds,  a folder named <emphasis role="bold">acme on localhost</emphasis> appears in the <emphasis role="bold">My Network Places</emphasis> directory.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -154,12 +154,12 @@
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
-          </inlinemediaobject> on the <emphasis role="bold">Administration</emphasis> bar, then select <emphasis role="bold"> Content --> Sites Explorer </emphasis> from the drop-down menu.
+          </inlinemediaobject> on the <guilabel>Administration</guilabel> bar, then select <menuchoice><guimenu>Content</guimenu><guimenuitem>Sites Explorer</guimenuitem></menuchoice> from the drop-down menu.
 			</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Drives</emphasis> button, then select <emphasis role="bold">Sites Management.</emphasis>
+     Click the <guibutton>Drives</guibutton> button, then select <guilabel>Sites Management.</guilabel>
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -183,7 +183,7 @@
       </step>
       <step>
         <para>
-     Right-click your desired site to view with WebDAV, and select <emphasis role="bold">Download and Allow Edition</emphasis> from the menu.
+     Right-click your desired site to view with WebDAV, and select <guilabel>Download and Allow Edition</guilabel> from the menu.
     </para>
         <para>
      The selected site will be shown in WebDAV.
@@ -205,7 +205,7 @@
     <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
       <title>Add new content to a specific site</title>
       <para>
-    This function enables you to copy web content, such as an <emphasis role="bold">.html</emphasis> file, from your local device to a <emphasis>web content</emphasis> folder of a site.
+    This function enables you to copy web content, such as an <emphasis>.html</emphasis> file, from your local device to a <emphasis>web content</emphasis> folder of a site.
    </para>
       <procedure>
         <step>
@@ -239,7 +239,7 @@
         </step>
         <step>
           <para>
-      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once), and select <emphasis role="bold">Delete</emphasis> from the drop-down menu.
+      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once), and select <guilabel>Delete</guilabel> from the drop-down menu.
      </para>
           <mediaobject>
             <imageobject role="html">

@@ -15,7 +15,7 @@
   <procedure>
     <step>
       <para>
-    Go to <emphasis role="bold">News</emphasis> on the <emphasis role="bold">Navigation</emphasis> bar.
+    Go to <guilabel>News</guilabel> on the <guilabel>Navigation</guilabel> bar.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -61,10 +61,10 @@
     <step>
         <para>
             Open
-            <emphasis role="bold">News</emphasis> page on the <emphasis role="bold">Navigation</emphasis> bar.
+            <emphasis role="bold">News</emphasis> page on the <guilabel>Navigation</guilabel> bar.
         </para>
     </step>
-    <step><para>Hover your cursor over <emphasis role="bold">Edit --> Page --> Layout</emphasis>.</para>
+    <step><para>Hover your cursor over <menuchoice><guimenu>Edit</guimenu><guisubmenu>Page</guisubmenu><guisubitem>Layout</guisubitem></menuchoice>.</para>
         <para>The page which allows you to edit the <emphasis role="bold">Category Navigation</emphasis> portlet will appear.
         </para>
       <mediaobject>
@@ -86,7 +86,7 @@
             <textobject>
                <phrase>pencil</phrase>
             </textobject>
-          </inlinemediaobject> to open a form with the <emphasis role="bold">Edit Mode</emphasis> tab, allowing you to edit the portlet.
+          </inlinemediaobject> to open a form with the <guilabel>Edit Mode</guilabel> tab, allowing you to edit the portlet.
     </para>
       <mediaobject>
            <imageobject role="html">
@@ -113,7 +113,7 @@
     <step>
         <para>
             Edit some fields in the
-            <emphasis role="bold">Display Settings</emphasis>
+            <guilabel>Display Settings</guilabel>
             part as you want. See more details in the
             <link
                     linkend="form-User_Guide-Preferences-Content_List_Preferences.">Content List Preferences
@@ -124,17 +124,17 @@
     <step>
         <para>
             Click the
-            <emphasis role="bold">Advanced</emphasis>
+            <guilabel>Advanced</guilabel>
             link to set up some properties for the portlet. See more details <link
                 linkend="Dynamic-Navigation">here</link>.
         </para>
     </step>
     <step>
       <para>
-     Click <emphasis role="bold">Save</emphasis> to accept saving the configuration for the <emphasis role="bold">Category Navigation</emphasis> portlet.</para>
+     Click <guibutton>Save</guibutton> to accept saving the configuration for the <emphasis role="bold">Category Navigation</emphasis> portlet.</para>
     </step>
     <step>
-        <para>Click <emphasis role="bold">Close</emphasis> to quit the form.</para>
+        <para>Click <guibutton>Close</guibutton> to quit the form.</para>
     </step>
     <step>
         <para>Click
@@ -143,10 +143,10 @@
                     <imagedata fileref="images/finishbutton.png" format="PNG" width="3mm" scalefit="1"/>
                 </imageobject>
             </inlinemediaobject>
-        on the <emphasis role="bold">Page Editor</emphasis> form to finish editing the <emphasis role="bold">Category Navigation</emphasis> portlet. </para>
+        on the <guilabel>Page Editor</guilabel> form to finish editing the <emphasis role="bold">Category Navigation</emphasis> portlet. </para>
     </step>
   </procedure>
     <note>
-        <para>In the <emphasis role="bold">Edit Mode</emphasis> tab, some options are disabled.</para>
+        <para>In the <guilabel>Edit Mode</guilabel> tab, some options are disabled.</para>
     </note>
 </section>

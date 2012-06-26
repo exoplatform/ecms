@@ -21,9 +21,9 @@
         <para>To turn on the
             <emphasis role="bold">Edit</emphasis>
             mode, hover your cursor over
-            <emphasis role="bold">Edit</emphasis>
-            on the <emphasis role="bold">Administration</emphasis> bar, then select
-            <emphasis role="bold">Content</emphasis>
+            <guilabel>Edit</guilabel>
+            on the <guilabel>Administration</guilabel> bar, then select
+            <guilabel>Content</guilabel>
             from the drop-down menu.
             <mediaobject>
                 <imageobject role="html">
@@ -137,14 +137,14 @@
                             <tbody>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Free layout web content</emphasis>
+                                        <guilabel>Free layout web content</guilabel>
                                   </entry>
                                     <entry>This template is a free layout.
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Picture on head layout web content</emphasis>
+                                        <guilabel>Picture on head layout web content</guilabel>
                                     </entry>
                                   <entry>The site's content is
                                     presented in two spaces. One is for inserting an image and the other for editing the
@@ -216,28 +216,28 @@
                             <tbody>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Change Content Type</emphasis>
+                                        <guilabel>Change Content Type</guilabel>
                                     </entry>
                                     <entry>Select another content types.
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Save</emphasis>
+                                        <guibutton>Save</guibutton>
                                     </entry>
                                     <entry>Save the content without closing the content form.
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Save &amp; Close</emphasis>
+                                        <guibutton>Save &amp; Close</guibutton>
                                     </entry>
                                     <entry>Save the content and close the content form.
                                     </entry>
                                 </row>
                                 <row>
                                     <entry>
-                                        <emphasis role="bold">Close</emphasis>
+                                        <guibutton>Close</guibutton>
                                     </entry>
                                     <entry>Close the content form without saving the content.</entry>
                                 </row>
@@ -266,9 +266,9 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         or
-                        <emphasis role="bold">Save &amp; Close</emphasis>
+                        <guibutton>Save &amp; Close</guibutton>
                         to save the document.
                     </para>
                 </step>
@@ -292,9 +292,9 @@
                         Turn on the
                         <emphasis role="bold">Edit</emphasis>
                         mode by hovering your cursor over
-                        <emphasis role="bold">Edit</emphasis>
-                        on the <emphasis role="bold">Administration</emphasis> bar, then select 
-                        <emphasis role="bold">Content</emphasis>.
+                        <guilabel>Edit</guilabel>
+                        on the <guilabel>Administration</guilabel> bar, then select
+                        <guilabel>Content</guilabel>.
                     </para>
                 </step>
                 <step>
@@ -323,9 +323,9 @@
                 <step>
                     <para>
                         Make changes on the content, then click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         or
-                        <emphasis role="bold">Save &amp; Close</emphasis>
+                        <guibutton>Save &amp; Close</guibutton>
                         to accept your changes.
                     </para>
                 </step>
@@ -366,7 +366,7 @@
                                 <imagedata width="9mm" scalefit="1" fileref="images/publish_icon1.png" format="PNG"/>
                             </imageobject>
                         </inlinemediaobject>
-                        on the <emphasis role="bold">Action</emphasis> bar to publish your edited content. Your content is now in the "Published" state.
+                        on the <guilabel>Action</guilabel> bar to publish your edited content. Your content is now in the "Published" state.
                     </para>
                 </step>
             </procedure>
@@ -435,7 +435,7 @@
                       </textobject>
                     </inlinemediaobject>
                     on the
-                    <emphasis role="bold">Action</emphasis>
+                    <guilabel>Action</guilabel>
                     bar.
 				    </para>
 				</step>
@@ -499,7 +499,7 @@
                         </mediaobject>
                         <para>
                             The
-                            <emphasis role="bold">Content Detail Preferences</emphasis>
+                            <guilabel>Content Detail Preferences</guilabel>
                             dialog appears.
                         </para>
                         <mediaobject>
@@ -531,7 +531,7 @@
                                 <tbody>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Content Selection</emphasis>
+                                            <guilabel>Content Selection</guilabel>
                                         </entry>
                                         <entry>
                                             Select the path of the content that you want to show by clicking
@@ -550,29 +550,29 @@
                                     </row>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Display Settings</emphasis>
+                                            <guilabel>Display Settings</guilabel>
                                         </entry>
                                         <entry>
                                             Configure the visibility of Title, Date and Option bar.
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Title:</emphasis>
+                                                        <guilabel>Show Title</guilabel>:
                                                         Select this checkbox to display the title of the content.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Date:</emphasis>
+                                                        <guilabel>Show Date</guilabel>:
                                                         Select this checkbox to display the date of the content
                                                         publication.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Option Bar:</emphasis>
+                                                        <guilabel>Show Option Bar</guilabel>:
                                                         Select this checkbox to display the
-                                                        <emphasis role="bold">Option</emphasis>
+                                                        <guilabel>Option</guilabel>
                                                         bar which is used to show the print link.
                                                     </para>
                                                 </listitem>
@@ -582,19 +582,19 @@
                                     </row>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Print Settings</emphasis>
+                                            <guilabel>Print Settings</guilabel>
                                         </entry>
                                         <entry>
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show in Page:</emphasis>
+                                                        <guilabel>Show in Page</guilabel>:
                                                         The content is shown in the page.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">with:</emphasis>
+                                                        <guilabel>with</guilabel>:
                                                         Parameters contain the content path.
                                                     </para>
                                                 </listitem>
@@ -603,16 +603,16 @@
                                     </row>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Advanced</emphasis>
+                                            <guilabel>Advanced</guilabel>
                                             link:
                                         </entry>
                                         <entry>When clicking this link, the
-                                            <emphasis role="bold">Advanced</emphasis>
+                                            <guilabel>Advanced</guilabel>
                                             pane will be shown with two parts.
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Dynamic Navigation:</emphasis>
+                                                        <guilabel>Dynamic Navigation</guilabel>:
                                                         Allow you to get a parameter to configure the
                                                         portlet by URL. It means that the URL containing the content
                                                         path can be dynamically changed.
@@ -620,10 +620,10 @@
                                                     <itemizedlist>
                                                         <listitem>
                                                             <para>
-                                                                <emphasis role="bold">Disable:</emphasis>
+                                                                <guilabel>Disable</guilabel>:
                                                                 By default, if the property is set as &quot;Disable&quot;,
                                                                 the
-                                                                <emphasis role="bold">Advanced</emphasis>
+                                                                <guilabel>Advanced</guilabel>
                                                                 pane is closed by default. It means the single content
                                                                 will be opened by an URL
                                                                 containing the Content Path.
@@ -631,18 +631,18 @@
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                <emphasis role="bold">Enable:</emphasis>
+                                                                <guilabel>Enable</guilabel>:
                                                                 This portlet is configured with the provided parameter
                                                                 ("content-id" by default) and the content.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                <emphasis role="bold">By:</emphasis>
+                                                                <guilabel>By</guilabel>:
                                                                 This parameter is the key in the URL to let SCV know
                                                                 which really is the path in the current URL. It is
                                                                 editable when the
-                                                                <emphasis role="bold">Contextual Content</emphasis>
+                                                                <guilabel>Contextual Content</guilabel>
                                                                 is set to "Enable".
                                                             </para>
                                                         </listitem>
@@ -650,13 +650,13 @@
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Content Visibility:</emphasis>
+                                                        <guilabel>Content Visibility</guilabel>:
                                                         Allow you to use a cache shared between users to
                                                         get content. If you want to get content, which are displayed
                                                         in CLV or SCV, from one cache, select
-                                                        <emphasis role="bold">Restricted by Authentication.</emphasis>
+                                                        <guilabel>Restricted by Authentication.</guilabel>
                                                         If not, select
-                                                        <emphasis role="bold">Restricted by User Roles.</emphasis>
+                                                        <guilabel>Restricted by User Roles.</guilabel>
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -693,9 +693,9 @@
                                 </imageobject>
                             </inlinemediaobject>
                             next to the
-                            <emphasis role="bold">Content Path</emphasis>
+                            <guilabel>Content Path</guilabel>
                             to select another content. The
-                            <emphasis role="bold">Select Content</emphasis>
+                            <guilabel>Select Content</guilabel>
                             dialog appears.
                         </para>
                     </step>
@@ -703,16 +703,16 @@
                         <para>
                             Select a folder in the left pane, and its content in the right pane. The selected
                             content will be displayed in the
-                            <emphasis role="bold">Content Path</emphasis>
+                            <guilabel>Content Path</guilabel>
                             field.
                         </para>
                     </step>
                     <step>
                         <para>
                             Tick the checkboxes, including
-                            <emphasis role="bold">Show Title, Show Date</emphasis>
+                            <guilabel>Show Title, Show Date</guilabel>
                             and
-                            <emphasis role="bold">Show Option Bar,</emphasis>
+                            <guilabel>Show Option Bar,</guilabel>
                             if you want to display the content title, the publication date and the print button like the
                             illustration below.
                         </para>
@@ -727,7 +727,7 @@
                         <para>
                             <emphasis role="bold">i.</emphasis>
                             In the
-                            <emphasis role="bold">Print Setting</emphasis>
+                            <guilabel>Print Setting</guilabel>
                             part, click
                             <inlinemediaobject>
                                 <imageobject>
@@ -738,14 +738,14 @@
                                 </textobject>
                             </inlinemediaobject>
                             to open the
-                            <emphasis role="bold">UIPageselector</emphasis>
+                            <guilabel>UIPageselector</guilabel>
                             dialog. You will see
-                            <emphasis role="bold">Printviewer.</emphasis>
+                            <guilabel>Printviewer</guilabel>.
                         </para>
                         <para>
                             <emphasis role="bold">ii.</emphasis>
                             Click the
-                            <emphasis role="bold">Print</emphasis>
+                            <guilabel>Print</guilabel>
                             button. The content is opened in the print viewer page.
                         </para>
                         <!--    <para>
@@ -790,7 +790,7 @@
                     </step>
                     <step>
                         <para>Select the
-                            <emphasis role="bold">Preferences</emphasis>
+                            <guilabel>Preferences</guilabel>
                             icon of a Content List Viewer.
                         </para>
                         <mediaobject>
@@ -804,7 +804,7 @@
                         </mediaobject>
                         <para>
                             The
-                            <emphasis role="bold">Content List Preferences</emphasis>
+                            <guilabel>Content List Preferences</guilabel>
                             dialog appears.
                         </para>
                         <mediaobject>
@@ -834,64 +834,64 @@
                                 <tbody>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Content Selection</emphasis>
+                                            <guilabel>Content Selection</guilabel>
                                         </entry>
                                         <entry>
-                                            <para><emphasis role="bold">Mode:</emphasis> This mode is to select web
+                                            <para><guilabel>Mode:</guilabel> This mode is to select web
                                                 content for the list viewer. There are two modes:
                                             </para>
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">By Folder:</emphasis>
+                                                        <guilabel>By Folder:</guilabel>
                                                         This mode allows you to select a content folder in the
-                                                        <emphasis role="bold">Folder Path</emphasis>
+                                                        <guilabel>Folder Path</guilabel>
                                                         field.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">By Content:</emphasis>
+                                                        <guilabel>By Content:</guilabel>
                                                         This mode allows you to select by the content in a specific
                                                         folder in
-                                                        <emphasis role="bold">Folder Path</emphasis>
+                                                        <guilabel>Folder Path</guilabel>
                                                         field.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                             <para>
-                                                <emphasis role="bold">Folder Path:</emphasis>
+                                                <guilabel>Folder Path:</guilabel>
                                                 The path to a location of a folder that contains the content.
                                             </para>
                                             <para>
-                                                <emphasis role="bold">Order by:</emphasis>
+                                                <guilabel>Order by:</guilabel>
                                                 Sort content in the List Viewer by
-                                                <emphasis role="bold">Title, Date Created</emphasis>
+                                                <guilabel>Title, Date Created</guilabel>
                                                 or
-                                                <emphasis role="bold">Date Modified</emphasis>
+                                                <guilabel>Date Modified</guilabel>
                                                 in ascending or descending order.
                                             </para>
                                         </entry>
                                     </row>
                                     <row>
                                         <entry>
-                                            <emphasis role="bold">Display Settings</emphasis>
+                                            <guilabel>Display Settings</guilabel>
                                         </entry>
                                         <entry>
                                             <para>
-                                                <emphasis role="bold">Header:</emphasis>
+                                                <guilabel>Header:</guilabel>
                                                 The title of all content that is listed in the List Viewer.
                                             </para>
                                             <para>
-                                                <emphasis role="bold">Template:</emphasis>
+                                                <guilabel>Template:</guilabel>
                                                 The template which is used to view the content list.
                                             </para>
                                             <para>
-                                                <emphasis role="bold">Paginator:</emphasis>
+                                                <guilabel>Paginator:</guilabel>
                                                 The template which is used to view each content in the list.
                                             </para>
                                             <para>
-                                                <emphasis role="bold">Items per Page:</emphasis>
+                                                <guilabel>Items per Page:</guilabel>
                                                 The number of items which will be displayed per page.
                                             </para>
                                             <para>The following options which can be shown or hidden by ticking or
@@ -900,59 +900,59 @@
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Title:</emphasis>
+                                                        <guilabel>Show Title:</guilabel>
                                                         Title of each published web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Header:</emphasis>
+                                                        <guilabel>Show Header:</guilabel>
                                                         Header of each published web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Refresh:</emphasis>
+                                                        <guilabel>Show Refresh:</guilabel>
                                                         The
-                                                        <emphasis role="bold">Refresh</emphasis>
+                                                        <guilabel>Refresh</guilabel>
                                                         button at the left bottom of the page.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Image:</emphasis>
+                                                        <guilabel>Show Image:</guilabel>
                                                         The illustration of each published web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Date:</emphasis>
+                                                        <guilabel>Show Date:</guilabel>
                                                         The created date of each published web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show More Link:</emphasis>
+                                                        <guilabel>Show More Link:</guilabel>
                                                         The
-                                                        <emphasis role="bold">Read more</emphasis>
+                                                        <guilabel>Read more</guilabel>
                                                         link to read all the content of web content and/or document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Summary:</emphasis>
+                                                        <guilabel>Show Summary:</guilabel>
                                                         The summary of each web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show Link:</emphasis>
+                                                        <guilabel>Show Link:</guilabel>
                                                         The link of web content/document.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show RSS Link:</emphasis>
+                                                        <guilabel>Show RSS Link:</guilabel>
                                                         The RSS link of all content of web content/document.
                                                     </para>
                                                 </listitem>
@@ -961,38 +961,38 @@
                                     </row>
                                     <row>
                                         <entry xml:id="Dynamic-Navigation">
-                                            <emphasis role="bold">Advanced</emphasis>
+                                            <guilabel>Advanced</guilabel>
                                             link
                                         </entry>
                                         <entry>
                                             <para>
-                                                <emphasis role="bold">Dynamic Navigation</emphasis>
+                                                <guilabel>Dynamic Navigation</guilabel>
                                             </para>
                                             <itemizedlist>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Disable:</emphasis>
+                                                        <guilabel>Disable:</guilabel>
                                                         The single content will be opened by an URL containing the
                                                         Content Path.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Enable:</emphasis>
+                                                        <guilabel>Enable:</guilabel>
                                                         This portlet is configured with the provided parameter
                                                         (content-id by default).
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">By:</emphasis>
+                                                        <guilabel>By:</guilabel>
                                                         This parameter is the key in the URL to let CLV know which
                                                         really is the path in the current URL.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">Show in Page:</emphasis>
+                                                        <guilabel>Show in Page:</guilabel>
                                                         The single content in CLV will be shown in a selected page. You
                                                         can select any page but should take one with a Content Detail
                                                         Portlet. The "Dynamic Navigation" is enabled in the Content
@@ -1002,20 +1002,20 @@
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <emphasis role="bold">With:</emphasis>
+                                                        <guilabel>With:</guilabel>
                                                         This parameter is the key in the URL to let SCV know which
                                                         really is the path in the current URL.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                             <para>
-                                                <emphasis role="bold">Content Visibility:</emphasis>
+                                                <guilabel>Content Visibility:</guilabel>
                                                 Allow you to use a cache shared between users to
                                                 get content. If you want to get content, which are displayed in CLV or
                                                 SCV, from one cache, select
-                                                <emphasis role="bold">Restricted by Authentication.</emphasis>
+                                                <guilabel>Restricted by Authentication.</guilabel>
                                                 If not, select
-                                                <emphasis role="bold">Restricted by User Roles.</emphasis>
+                                                <guilabel>Restricted by User Roles.</guilabel>
                                             </para>
                                         </entry>
                                     </row>
@@ -1035,19 +1035,19 @@
                                 </textobject>
                             </inlinemediaobject>
                             next to the
-                            <emphasis role="bold">Folder Path</emphasis>
+                            <guilabel>Folder Path</guilabel>
                             field.
                         </para>
                     </step>
                     <step>
                         <para>
                             If you select the
-                            <emphasis role="bold">By Folder</emphasis>
+                            <guilabel>By Folder</guilabel>
                             mode, select an available site on the left, then select a folder that contains content
                             (documents and/or web content) on the right by clicking the folder.
                         </para>
                         <para>
-                            If you select the <emphasis role="bold">By Content</emphasis> mode, select an available
+                            If you select the <guilabel>By Content</guilabel> mode, select an available
                             folder from the left pane, all content in this folder will be listed in the right pane.
                             Click content on the right that you want to add to the content list. There will be a
                             message, informing that you have successfully added it to the Content List. The selected
@@ -1057,7 +1057,7 @@
                     <step>
                         <para>
                             Enter a header for the content list in the
-                            <emphasis role="bold">Header</emphasis>
+                            <guilabel>Header</guilabel>
                             field if you want.
                         </para>
                     </step>
@@ -1074,7 +1074,7 @@
                     <step>
                         <para>
                             Click
-                            <emphasis role="bold">Save</emphasis>
+                            <guibutton>Save</guibutton>
                             to accept your changes.
                         </para>
                     </step>
@@ -1099,7 +1099,7 @@
             <step>
                 <para>Turn on the
                     <emphasis role="bold">Edit</emphasis>
-                    mode on the <emphasis role="bold">Administration</emphasis> bar.
+                    mode on the <guilabel>Administration</guilabel> bar.
                 </para>
             </step>
             <step>
@@ -1207,7 +1207,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     to open the
-                    <emphasis role="bold">Insert Portal Link</emphasis>
+                    <guilabel>Insert Portal Link</guilabel>
                     form.
                 </para>
                 <mediaobject>
@@ -1221,25 +1221,25 @@
             </step>
             <step>
                 <para>Enter the title of the portal in the
-                    <emphasis role="bold">Title</emphasis>
+                    <guilabel>Title</guilabel>
                     field.
                 </para>
             </step>
             <step>
                 <para>Enter the portal URL manually, or you can also click
-                    <emphasis role="bold">Get portal link</emphasis>
+                    <guilabel>Get portal link</guilabel>
                     to open a page containing all the portals in the same server, then select one that you want.
                 </para>
             </step>
             <step>
                 <para>Click
-                    <emphasis role="bold">Preview</emphasis>
+                    <guilabel>Preview</guilabel>
                     to view the portal.
                 </para>
             </step>
             <step>
                 <para>Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to accept inserting the portal to the document.
                 </para>
             </step>
@@ -1304,13 +1304,13 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="bold">Request Approval:</emphasis>
+                    <guilabel>Request Approval:</guilabel>
                     When new content is created, it must be approved before publishing by clicking
-                    <emphasis role="bold">Request Approval</emphasis>
-                    on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer or clicking
-                    <emphasis role="bold">Pending</emphasis>
+                    <guilabel>Request Approval</guilabel>
+                    on the <guilabel>Action</guilabel> bar of the Sites Explorer or clicking
+                    <guilabel>Pending</guilabel>
                     in the
-                    <emphasis role="bold">Manage Publication</emphasis>
+                    <guilabel>Manage Publication</guilabel>
                     form.
                 </para>
                 <mediaobject>
@@ -1324,39 +1324,39 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="bold">Approve:</emphasis>
+                    <guilabel>Approve:</guilabel>
                     To approve content, click
-                    <emphasis role="bold">Approve</emphasis>
-                    on the <emphasis role="bold">Action</emphasis> bar of the Sites Explorer, or
-                    <emphasis role="bold">Approved</emphasis>
+                    <guilabel>Approve</guilabel>
+                    on the <guilabel>Action</guilabel> bar of the Sites Explorer, or
+                    <guilabel>Approved</guilabel>
                     in the
-                    <emphasis role="bold">Manage Publication.</emphasis>
+                    <guilabel>Manage Publication.</guilabel>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="bold">Stage:</emphasis>
+                    <guilabel>Stage:</guilabel>
                     This step allows you to publish content in a period. After selecting the publication schedule for
                     the content, it will be automatically published as the schedule.
                 </para>
                 <para>
                     To publish your content just in a stage, click
-                    <emphasis role="bold">Stage.</emphasis>
+                    <guilabel>Stage.</guilabel>
                     Then, click
-                    <emphasis role="bold">From/To</emphasis>
+                    <guilabel>From/To</guilabel>
                     to select the start and end dates for publication from a mini-calendar.
                 </para>
                 <para>
                     To publish your content forever, you should not set time in the
-                    <emphasis role="bold">To</emphasis>
+                    <guilabel>To</guilabel>
                     field.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="bold">Publish:</emphasis>
+                    <guilabel>Publish:</guilabel>
                     Content will be published when you have completed the
-                    <emphasis role="bold">Stage</emphasis>
+                    <guilabel>Stage</guilabel>
                     step.
                 </para>
                 <note>

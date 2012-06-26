@@ -57,17 +57,17 @@
         <procedure>
             <step>
                 <para>Click
-                    <emphasis role="bold">Content Presentation --> Manage Templates.</emphasis>
+                    <menuchoice><guimenu>Content Presentation</guimenu><guimenuitem>Manage Templates</guimenuitem></menuchoice>.
                 </para>
             </step>
             <step>
                 <para>
                     Click the
-                    <emphasis role="bold">Add</emphasis>
+                    <guibutton>Add</guibutton>
                     button in the
-                    <emphasis role="bold">Manage Templates</emphasis>
+                    <guilabel>Manage Templates</guilabel>
                     form to open the
-                    <emphasis role="bold">Template Form.</emphasis>
+                    <guilabel>Template Form</guilabel>.
                 </para>
                 <mediaobject>
                     <imageobject role="html">
@@ -82,21 +82,21 @@
             <step>
                 <para>
                     Select the template type from the
-                    <emphasis role="bold">Name</emphasis>
+                    <guilabel>Name</guilabel>
                     drop-down menu.
                 </para>
             </step>
             <step>
                 <para>
                     Specify a name for the template in the
-                    <emphasis role="bold">Label</emphasis>
+                    <guilabel>Label</guilabel>
                     field. It is required.
                 </para>
             </step>
             <step>
                 <para>
                     Select the
-                    <emphasis role="bold">is Document Template</emphasis>
+                    <guilabel>is Document Template</guilabel>
                     checkbox if you want your created template to become a template for a document.
                 </para>
             </step>
@@ -109,9 +109,9 @@
                         </imageobject>
                     </inlinemediaobject>
                     next to the
-                    <emphasis role="bold">Permission</emphasis>
+                    <guilabel>Permission</guilabel>
                     field to open the
-                    <emphasis role="bold">Select Permission</emphasis>
+                    <guilabel>Select Permission</guilabel>
                     dialog. It is required.
                 </para>
                 <itemizedlist>
@@ -129,7 +129,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     next to
-                    <emphasis role="bold">Any Permission.</emphasis>
+                    <guilabel>Any Permission.</guilabel>
                 </para>
                     </listitem>
                 </itemizedlist>
@@ -146,34 +146,34 @@
             <step>
                 <para>
                     Optionally, select the
-                    <emphasis role="bold">Dialog</emphasis>
+                    <guilabel>Dialog</guilabel>
                     tab and enter the value in the
-                    <emphasis role="bold">Dialog Content</emphasis>
+                    <guilabel>Dialog Content</guilabel>
                     field.
                 </para>
             </step>
             <step>
                 <para>
                     Optionally, select the
-                    <emphasis role="bold">View</emphasis>
+                    <guilabel>View</guilabel>
                     tab and enter the value in the
-                    <emphasis role="bold">View Content</emphasis>
+                    <guilabel>View Content</guilabel>
                     field.
                 </para>
             </step>
             <step>
                 <para>
                     Optionally, select the
-                    <emphasis role="bold">CSS</emphasis>
+                    <guilabel>CSS</guilabel>
                     tab and enter the value in the
-                    <emphasis role="bold">CSS Content</emphasis>
+                    <guilabel>CSS Content</guilabel>
                     field.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to create the template.
                 </para>
             </step>
@@ -187,7 +187,7 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Content Presentation --> Manage Templates.</emphasis>
+                    <menuchoice><guimenu>Content Presentation</guimenu><guimenuitem>Manage Templates</guimenuitem></menuchoice>.
                 </para>
             </step>
             <step>
@@ -199,7 +199,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Action</emphasis>
+                    <guilabel>Action</guilabel>
                     column, corresponding to the template you want to edit.
                 </para>
             </step>
@@ -211,14 +211,14 @@
                     <listitem>
                         <para>
                             In the
-                            <emphasis role="bold">Template</emphasis>
+                            <guilabel>Template</guilabel>
                             tab, you can edit the label of the template.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             In the
-                            <emphasis role="bold">Dialog</emphasis>
+                            <guilabel>Dialog</guilabel>
                             tab, you can do the followings:
                         </para>
                         <citetitle>
@@ -229,7 +229,7 @@
                         <para>
                             <emphasis role="bold">i.</emphasis>
                             Input content for this dialog in the
-                            <emphasis role="bold">Content</emphasis>
+                            <guilabel>Content</guilabel>
                             field.
                         </para>
                         <para>
@@ -262,9 +262,9 @@
                         <para>
                             <emphasis role="bold">iii.</emphasis>
                             Click
-                            <emphasis role="bold">Save</emphasis>
+                            <guibutton>Save</guibutton>
                             to accept all changes in the
-                            <emphasis role="bold">Dialog</emphasis>
+                            <guilabel>Dialog</guilabel>
                             tab.
                         </para>
                         <citetitle>
@@ -288,7 +288,7 @@
                         <para>
                             <emphasis role="bold">ii.</emphasis>
                             Click
-                            <emphasis role="bold">OK</emphasis>
+                            <guibutton>OK</guibutton>
                             to accept your deletion.
                         </para>
                         <note>
@@ -301,7 +301,7 @@
                     </listitem>
                     <listitem>
                         <para>In the
-                            <emphasis role="bold">View</emphasis>
+                            <guilabel>View</guilabel>
                             tab, you can do the followings:
                         </para>
                         <citetitle>
@@ -312,7 +312,7 @@
                         <para>
                             <emphasis role="bold">i.</emphasis>
                             Enter content into the
-                            <emphasis role="bold">Content</emphasis>
+                            <guilabel>Content</guilabel>
                             field.
                         </para>
                         <para>
@@ -337,7 +337,7 @@
                                 </imageobject>
                             </inlinemediaobject>
                             in the
-                            <emphasis role="bold">Actions</emphasis>
+                            <guilabel>Actions</guilabel>
                             column, corresponding to the view you want to edit.
                         </para>
                         <para>
@@ -347,9 +347,9 @@
                         <para>
                             <emphasis role="bold">iii.</emphasis>
                             Click
-                            <emphasis role="bold">Save</emphasis>
+                            <guibutton>Save</guibutton>
                             to accept all changes in the
-                            <emphasis role="bold">View</emphasis>
+                            <guilabel>View</guilabel>
                             tab.
                         </para>
                         <note>
@@ -358,19 +358,19 @@
                             </para>
                             <para>
                                 If you click
-                                <emphasis role="bold">is Enable Version</emphasis>
+                                <guilabel>is Enable Version</guilabel>
                                 checkbox, this view automatically increments one version after you have clicked <emphasis
-                                    role="bold">Save</emphasis>. It is displayed at <emphasis role="bold">Version</emphasis> column in the
-                                <emphasis role="bold">View</emphasis>
+                                    role="bold">Save</emphasis>. It is displayed at <guilabel>Version</guilabel> column in the
+                                <guilabel>View</guilabel>
                                 tab.
                             </para>
                             <para>
                                 If the dialog has at least two versions, in the
-                                <emphasis role="bold">View</emphasis>
+                                <guilabel>View</guilabel>
                                 tab, it displays the
-                                <emphasis role="bold">Restore</emphasis>
+                                <guibutton>Restore</guibutton>
                                 button. You can use
-                                <emphasis role="bold">Restore</emphasis>
+                                <guibutton>Restore</guibutton>
                                 to roll back to the previous View.
                             </para>
                         </note>
@@ -388,19 +388,19 @@
                                 </imageobject>
                             </inlinemediaobject>
                             in the
-                            <emphasis role="bold">Actions</emphasis>
+                            <guilabel>Actions</guilabel>
                             column, corresponding to the view you want to delete.
                         </para>
                         <para>
                             <emphasis role="bold">ii.</emphasis>
                             Click
-                            <emphasis role="bold">OK</emphasis>
+                            <guibutton>OK</guibutton>
                             to accept your deletion.
                         </para>
                         <para>
                             <emphasis role="bold">iii.</emphasis>
                             Click
-                            <emphasis role="bold">Save</emphasis>
+                            <guibutton>Save</guibutton>
                             to accept all changes.
                         </para>
                     </listitem>
@@ -424,14 +424,14 @@
                         </textobject>
                     </inlinemediaobject>
                     corresponding to the template you want to remove in the
-                    <emphasis role="bold">Manage Templates</emphasis>
+                    <guilabel>Manage Templates</guilabel>
                     page.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">OK</emphasis>
+                    <guibutton>OK</guibutton>
                     in the confirmation message to accept your deletion.
                 </para>
             </step>
@@ -442,7 +442,7 @@
         <para>
             Metadata is generally defined as "data about data". Metadata is information which describes, or supplements
             the central data. In the
-            <emphasis role="bold">Manage Metadata</emphasis>
+            <guilabel>Manage Metadata</guilabel>
             tab, you can manage nodes in the metadata format in the &PRODUCT; system. The metadata may be considered as
             information used to describe the data. When data are provided to end-users, the metadata allows users to
             understand about information in more details. All metadata nodes can combine with other nodes to create a
@@ -457,7 +457,7 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Content Presentation --> Manage Metadata.</emphasis>
+                    <menuchoice><guimenu>Content Presentation</guimenu><guimenuitem>Manage Metadata</guimenuitem></menuchoice>.
                 </para>
                 <mediaobject>
                     <imageobject role="html">
@@ -480,7 +480,7 @@
                 </para>
                 <para>
                     The
-                    <emphasis role="bold">Metadata Information</emphasis>
+                    <guilabel>Metadata Information</guilabel>
                     form will open.
                 </para>
                 <mediaobject>
@@ -508,12 +508,12 @@
                         </imageobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Template's Actions</emphasis>
+                    <guilabel>Template's Actions</guilabel>
                     column, corresponding to the metadata you want to edit.
                 </para>
                 <para>
                     The
-                    <emphasis role="bold">Edit Metadata&apos;s Template</emphasis>
+                    <guilabel>Edit Metadata&apos;s Template</guilabel>
                     form will open.
                 </para>
             </step>
@@ -529,7 +529,7 @@
             </step>
             <step>
                 <para>
-                    Click <emphasis role="bold">Apply</emphasis> to save all metadata changes.
+                    Click <guibutton>Apply</guibutton> to save all metadata changes.
                 </para>
             </step>
         </procedure>
@@ -553,7 +553,7 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">OK</emphasis>
+                    <guibutton>OK</guibutton>
                     in the confirmation message to accept your deletion.
                 </para>
             </step>
@@ -563,17 +563,17 @@
         <title>Manage views</title>
         <para>
             The
-            <emphasis role="bold">Manage View</emphasis>
+            <guilabel>Manage View</guilabel>
             function is used to control view ways of a user. It has two tabs:
-            <emphasis role="bold">View</emphasis> and <emphasis role="bold">ECM Templates</emphasis>
+            <guilabel>View</guilabel> and <guilabel>ECM Templates</guilabel>
         </para>
         <para>
             To open the
-            <emphasis role="bold">Manage View</emphasis>
+            <guilabel>Manage View</guilabel>
             function, click
-            <emphasis role="bold">Content Presentation --> Manage View.</emphasis>
+            <menuchoice><guimenu>Content Presentation</guimenu><guimenuitem>Manage View</guimenuitem></menuchoice>.
             The
-            <emphasis role="bold">Manage View</emphasis>
+            <guilabel>Manage View</guilabel>
             form displays.
         </para>
         <mediaobject>
@@ -607,14 +607,14 @@
             <step>
                 <para>
                     Click the
-                    <emphasis role="bold">Add View</emphasis>
+                    <guibutton>Add View</guibutton>
                     button located at the bottom of the
-                    <emphasis role="bold">Manage View</emphasis>
+                    <guilabel>Manage View</guilabel>
                     form.
                 </para>
                 <para>
                     The
-                    <emphasis role="bold">Add View</emphasis>
+                    <guilabel>Add View</guilabel>
                     form will open.
                 </para>
                 <mediaobject>
@@ -630,7 +630,7 @@
             <step>
                 <para>
                     Specify the view name in the
-                    <emphasis role="bold">Name</emphasis>
+                    <guilabel>Name</guilabel>
                     field that must be unique, and only contains standard alphanumeric characters. It is required.
                 </para>
             </step>
@@ -665,12 +665,12 @@
             <step>
                 <para>
                     Click the
-                    <emphasis role="bold">Templates</emphasis>
+                    <guilabel>Templates</guilabel>
                     field and select a template from the drop-down menu for this view.
                 </para>
             </step>
             <step>
-                <para>Click the <emphasis role="bold">Add Tab</emphasis> button to create a functional tab on this view. It is required.</para>
+                <para>Click the <guilabel>Add Tab</guilabel> button to create a functional tab on this view. It is required.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/tabform.png" format="PNG"/>
@@ -681,27 +681,27 @@
                     </imageobject>
                 </mediaobject>
 
-                        <para><emphasis role="bold">i.</emphasis> Enter the name for the tab in the <emphasis role="bold">Name</emphasis> field. </para>
+                        <para><emphasis role="bold">i.</emphasis> Enter the name for the tab in the <guilabel>Name</guilabel> field. </para>
 
                         <para><emphasis role="bold">ii.</emphasis> Specify functions to add to the tab.</para>
 
-                        <para><emphasis role="bold">iii.</emphasis> Click <emphasis role="bold">Save</emphasis> to finish creating a tab;</para>
+                        <para><emphasis role="bold">iii.</emphasis> Click <guibutton>Save</guibutton> to finish creating a tab;</para>
                         <para>Or, click
-                            <emphasis role="bold">Reset</emphasis>
+                            <guibutton>Reset</guibutton>
                             to clear the
-                            <emphasis role="bold">Tab</emphasis>
+                            <guilabel>Tab</guilabel>
                             form;
                         </para>
                         <para>
                             Or, click
-                            <emphasis role="bold">Back</emphasis>
+                            <guibutton>Back</guibutton>
                             to return to the
-                            <emphasis role="bold">View Form</emphasis>
+                            <guilabel>View Form</guilabel>
                             tab of the
-                            <emphasis role="bold">Add View</emphasis>
+                            <guilabel>Add View</guilabel>
                             form.
                         </para>
-                <para>The newly created tab is displayed on the <emphasis role="bold">Tabs</emphasis> field.</para>
+                <para>The newly created tab is displayed on the <guilabel>Tabs</guilabel> field.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/addviewform.png" format="PNG"/>
@@ -715,7 +715,7 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to apply all settings and close the form.
                 </para>
             </step>
@@ -735,7 +735,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Action</emphasis>
+                    <guilabel>Action</guilabel>
                     column, corresponding to the view you want to edit.
                 </para>
                 <mediaobject>
@@ -758,19 +758,19 @@
                     </para>
                     <para>
                         If you select the
-                        <emphasis role="bold">Enable Version</emphasis>
-                        checkbox, this view automatically increases to one version after you click <emphasis role="bold">
-                        Save</emphasis>. It is displayed at the <emphasis role="bold">Base Version</emphasis> column in the
-                        <emphasis role="bold">View</emphasis>
+                        <guilabel>Enable Version</guilabel>
+                        checkbox, this view automatically increases to one version after you click <guibutton>
+                        Save</guibutton>. It is displayed at the <guilabel>Base Version</guilabel> column in the
+                        <guilabel>View</guilabel>
                         tab.
                     </para>
                     <para>
                         If the dialog has at least two versions, in the
-                        <emphasis role="bold">View</emphasis>
+                        <guilabel>View</guilabel>
                         tab, it displays the
-                        <emphasis role="bold">Restore</emphasis>
+                        <guibutton>Restore</guibutton>
                         button. You can use
-                        <emphasis role="bold">Restore</emphasis>
+                        <guibutton>Restore</guibutton>
                         to roll back to the previous View.
                     </para>
                 </note>
@@ -778,9 +778,9 @@
             <step>
                 <para>
                     Optionally, click the
-                    <emphasis role="bold">Add Tab</emphasis>
+                    <guibutton>Add Tab</guibutton>
                     button to open the
-                    <emphasis role="bold">Tab Form</emphasis>
+                    <guilabel>Tab Form</guilabel>
                     tab that allows you to add more Tabs to the View.
                 </para>
             </step>
@@ -793,9 +793,9 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to apply all changes in the
-                    <emphasis role="bold">View</emphasis>
+                    <guilabel>View</guilabel>
                     tab.
                 </para>
             </step>
@@ -822,7 +822,7 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">OK</emphasis>
+                    <guibutton>OK</guibutton>
                     to delete the view in the confirmation message.
                 </para>
                 <note>
@@ -847,12 +847,12 @@
                         </imageobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Action</emphasis>
+                    <guilabel>Action</guilabel>
                     column of the view you want to preview.
                 </para>
                 <para>
                     The
-                    <emphasis role="bold">View</emphasis>
+                    <guilabel>View</guilabel>
                     form will open.
                 </para>
                 <mediaobject>
@@ -867,9 +867,9 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Close</emphasis>
+                    <guibutton>Close</guibutton>
                     to exit the
-                    <emphasis role="bold">View</emphasis>
+                    <guilabel>View</guilabel>
                     form.
                 </para>
             </step>
@@ -886,7 +886,7 @@
                 <step>
                     <para>
                         Select the
-                        <emphasis role="bold">ECM Templates</emphasis>
+                        <guilabel>ECM Templates</guilabel>
                         tab.
                     </para>
                     <mediaobject>
@@ -901,9 +901,9 @@
                 <step>
                     <para>
                         Click the
-                        <emphasis role="bold">Add</emphasis>
+                        <guibutton>Add</guibutton>
                         button to open the
-                        <emphasis role="bold">Add ECM Template</emphasis>
+                        <guilabel>Add ECM Template</guilabel>
                         form.
                     </para>
                     <mediaobject>
@@ -918,28 +918,28 @@
                 <step>
                     <para>
                         Input the content of the template in the
-                        <emphasis role="bold">Content</emphasis>
+                        <guilabel>Content</guilabel>
                         field.
                     </para>
                 </step>
                 <step>
                     <para>
                         Input a name for the template in the
-                        <emphasis role="bold">Name</emphasis>
+                        <guilabel>Name</guilabel>
                         field.
                     </para>
                 </step>
                 <step>
                     <para>
                         Select a type for the template in the
-                        <emphasis role="bold">Template Type</emphasis>
+                        <guilabel>Template Type</guilabel>
                         field.
                     </para>
                 </step>
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         to accept adding a new template.
                     </para>
                 </step>
@@ -969,7 +969,7 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         to accept all changes.
                     </para>
                     <note>
@@ -977,13 +977,13 @@
                             You cannot edit the template name.
                         </para>
                         <para>
-                            If you tick the <emphasis role="bold">Enable Version</emphasis> checkbox, this template will automatically
-                            increase to 1 version after you have clicked <emphasis role="bold">Save</emphasis>. It is
-                            displayed at the <emphasis role="bold">Base Version</emphasis> column in the <emphasis role="bold">ECMS Template</emphasis> tab.
+                            If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically
+                            increase to 1 version after you have clicked <guilabel>Save</guilabel>. It is
+                            displayed at the <guilabel>Base Version</guilabel> column in the <guilabel>ECMS Template</guilabel> tab.
                         </para>
                         <para>
-                            If the template has at least two versions, in the <emphasis role="bold">Edit ECM Template</emphasis> form, it
-                            displays the <emphasis role="bold">Restore</emphasis> button that allows restoring the template version.
+                            If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it
+                            displays the <guibutton>Restore</guibutton> button that allows restoring the template version.
                         </para>
                     </note>
                 </step>
@@ -1008,7 +1008,7 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">OK</emphasis>
+                        <guibutton>OK</guibutton>
                         in the confirmation message to accept your deletion.
                     </para>
                 </step>
@@ -1166,7 +1166,7 @@
         </para>
         <para>
             Go to
-            <emphasis role="bold">Content Presentation --> Manage Drives.</emphasis>
+            <menuchoice><guimenu>Content Presentation</guimenu><guimenuitem>Manage Drives</guimenuitem></menuchoice>.
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -1200,11 +1200,11 @@
                 <step>
                     <para>
                         Click the
-                        <emphasis role="bold">Add Drive</emphasis>
+                        <guibutton>Add Drive</guibutton>
                         button in the
                         <emphasis role="bold">Manage Drives</emphasis>
                         page to open the
-                        <emphasis role="bold">Add Drive</emphasis>
+                        <guilabel>Add Drive</guilabel>
                         form.
                     </para>
                     <mediaobject>
@@ -1219,13 +1219,13 @@
                 <step>
                     <para>
                         Input a name for the new drive in the
-                        <emphasis role="bold">Name</emphasis>
+                        <guilabel>Name</guilabel>
                         field that is required.
                     </para>
                 </step>
                 <step>
                     <para>
-                        Select a workspace for the drive from the drop-down menu by clicking the <emphasis role="bold">Workspace</emphasis> entry.
+                        Select a workspace for the drive from the drop-down menu by clicking the <guilabel>Workspace</guilabel> entry.
                     </para>
                     <mediaobject>
                         <imageobject role="html">
@@ -1248,7 +1248,7 @@
                             </textobject>
                         </inlinemediaobject>
                         beside the
-                        <emphasis role="bold">Home Path</emphasis>
+                        <guilabel>Home Path</guilabel>
                         entry.
                     </para>
                     <mediaobject>
@@ -1272,7 +1272,7 @@
                             </textobject>
                         </inlinemediaobject>
                         beside the
-                        <emphasis role="bold">Workspace Icon</emphasis>
+                        <guilabel>Workspace Icon</guilabel>
                         entry.
                     </para>
 
@@ -1309,7 +1309,7 @@
                             </textobject>
                         </inlinemediaobject>
                         beside the
-                        <emphasis role="bold">Permissions</emphasis>
+                        <guilabel>Permissions</guilabel>
                         entry.
                     </para>
                 </step>
@@ -1414,7 +1414,7 @@
                 <step>
                     <para>
                         Select the
-                        <emphasis role="bold">Apply Views</emphasis>
+                        <guilabel>Apply Views</guilabel>
                         tab and select the view types you want to be available in the drive.
                     </para>
                     <mediaobject>
@@ -1429,9 +1429,9 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         to complete creating the new drive, or
-                        <emphasis role="bold">Refresh</emphasis>
+                        <guibutton>Refresh</guibutton>
                         to clear the form.
                     </para>
                 </step>
@@ -1452,7 +1452,7 @@
                             </textobject>
                         </inlinemediaobject>
                         corresponding to the drive you want to edit. The
-                        <emphasis role="bold">Edit Drive</emphasis>
+                        <guilabel>Edit Drive</guilabel>
                         form will appear.
                     </para>
                     <mediaobject>
@@ -1472,7 +1472,7 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         to commit the changes.
                     </para>
                 </step>
@@ -1503,7 +1503,7 @@
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">OK</emphasis>
+                        <guibutton>OK</guibutton>
                         to delete the drive in the confirmation message.
                     </para>
                 </step>

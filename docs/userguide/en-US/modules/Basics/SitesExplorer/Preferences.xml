@@ -45,39 +45,39 @@
           </thead>
           <tbody>
             <row>
-              <entry><emphasis role="bold"> Sort by </emphasis></entry>
+              <entry><guilabel> Sort by </guilabel></entry>
               <entry> Sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date.</entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Show Sidebar</emphasis> </entry>
+              <entry><guilabel>Show Sidebar</guilabel> </entry>
               <entry> Display/Hide the sidebar. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Enable Drag &amp; Drop</emphasis> </entry>
+              <entry><guilabel>Enable Drag &amp; Drop</guilabel> </entry>
               <entry> Enable/Disable the &quot;drag and drop&quot; action. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Nodes Per Page</emphasis> </entry>
+              <entry><guilabel>Nodes Per Page</guilabel> </entry>
               <entry> This number of nodes displayed per page. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Show Non-document Nodes</emphasis> </entry>
+              <entry><guilabel>Show Non-document Nodes</guilabel> </entry>
               <entry> Display/Hide nodes that are non–documents. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Show Referenced Documents</emphasis> </entry>
+              <entry><guilabel>Show Referenced Documents</guilabel> </entry>
               <entry> Display/Hide referenced documents. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Show Hidden Nodes</emphasis> </entry>
+              <entry><guilabel>Show Hidden Nodes</guilabel> </entry>
               <entry>Display/Hide hidden nodes. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Query Type</emphasis> </entry>
+              <entry><guilabel>Query Type</guilabel> </entry>
               <entry> This query type. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Enable DMS Structure</emphasis> </entry>
+              <entry><guilabel>Enable DMS Structure</guilabel> </entry>
               <entry>Display/Hide document nodes in the tree structure. </entry>
             </row>
           </tbody>
@@ -86,10 +86,10 @@
     </step>
     <step>
       <para>
-    Configure the preferences as required and click <emphasis role="bold">Save</emphasis> to set them;
+    Configure the preferences as required and click <guibutton>Save</guibutton> to set them;
    </para>
       <para>
-    Or, click <emphasis role="bold">Close</emphasis> to quit without submitting changes.
+    Or, click <guibutton>Close</guibutton> to quit without submitting changes.
    </para>
     </step>
   </procedure>

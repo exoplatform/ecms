@@ -79,12 +79,12 @@
     <procedure>
       <step>
     <para>
-     Right-click the node, then select <emphasis role="bold">Copy</emphasis> or <emphasis role="bold">Cut</emphasis> from the drop-down menu.
+     Right-click the node, then select <guilabel>Copy</guilabel> or <guilabel>Cut</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
     <para>
-     Right-click a destination node that you want to be the parent node of the copied/cut node, then select <emphasis role="bold">Paste</emphasis> from the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy/Cut</emphasis> action.
+     Right-click a destination node that you want to be the parent node of the copied/cut node, then select <guilabel>Paste</guilabel> from the drop-down menu. Note that the <guilabel>Paste</guilabel> function is enabled in the menu only after selecting the <guilabel>Copy/Cut</guilabel> action.
     </para>
     <para>
      The copied/cut folder (and its sub-folders) will be pasted into the new selected path.
@@ -95,7 +95,7 @@
     <procedure>
       <step>
         <para>
-     Right-click the node and select <emphasis role="bold">Copy/Cut</emphasis> from the drop-down menu.
+     Right-click the node and select <guilabel>Copy/Cut</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -105,7 +105,7 @@
       </step>
       <step>
         <para>
-     Select the <emphasis>Clipboard</emphasis> icon on the <emphasis role="bold">Filter</emphasis> bar.
+     Select the <emphasis>Clipboard</emphasis> icon on the <guilabel>Filter</guilabel> bar.
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
@@ -116,7 +116,7 @@
         </mediaobject>
       </para>
       <para>
-     The <emphasis role="bold">Clipboard</emphasis> window will appear.
+     The <guilabel>Clipboard</guilabel> window will appear.
     
         <mediaobject>
           <imageobject role="html">
@@ -158,7 +158,7 @@
     </listitem>
     <listitem>
         <para>
-     You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
+     You can also click the <guilabel>Clear All</guilabel> link to delete all waiting statements in the list.
     </para>
     </listitem>
     <listitem>
@@ -170,12 +170,12 @@
       <note id="note-copy-paste-info">
           <para>
               You only can take the
-              <emphasis role="bold">Copy</emphasis>
+              <guilabel>Copy</guilabel>
               action if you have this right on the source node.
           </para>
           <para>
               You only can take the
-              <emphasis role="bold">Paste</emphasis>
+              <guilabel>Paste</guilabel>
               action if you have the right on the destination node.
           </para>
           <para>
@@ -189,11 +189,11 @@
           </para>
           <para>
               After taking the
-              <emphasis role="bold">Copy</emphasis>
+              <guilabel>Copy</guilabel>
               action, you can take the
-              <emphasis role="bold">Paste</emphasis>
+              <guilabel>Paste</guilabel>
               action on different nodes before taking another
-              <emphasis role="bold">Copy</emphasis>
+              <guilabel>Copy</guilabel>
               action.
           </para>
       </note>
@@ -212,7 +212,7 @@
       <note>
           <para>
               You can only take the
-              <emphasis role="bold">Delete</emphasis>
+              <guilabel>Delete</guilabel>
               action if you have the right on a node.
           </para>
           <para>
@@ -228,7 +228,7 @@
     <procedure>
       <step>
         <para>
-     Hover your cursor over folders/documents in the right pane, or hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders/documents at once until the cursor changes to 
+     Hover your cursor over folders/documents in the right pane, or hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders/documents at once until the cursor changes to
      <inlinemediaobject>
             <imageobject>
               <imagedata width="4mm" scalefit="1" fileref="images/handcursor.png" format="PNG"/>
@@ -269,7 +269,7 @@
    </citetitle>
 
     <para>
-    Just right-click a folder/document (on either the right or left window pane) and select <emphasis role="bold">Lock</emphasis> from the drop-down menu. The selected folder/document will be locked.
+    Just right-click a folder/document (on either the right or left window pane) and select <guilabel>Lock</guilabel> from the drop-down menu. The selected folder/document will be locked.
    </para>
     <note>
           <para>
@@ -282,7 +282,7 @@
       The lock will be kept as current for a session only. If the locking user signs out, the node will be unlocked.
      </para>
           <para>
-      Other users can copy the locked node (by using the <emphasis role="bold">Copy/Paste</emphasis> functions outlined above); however, the original node cannot be removed or altered.
+      Other users can copy the locked node (by using the <guilabel>Copy/Paste</guilabel> functions outlined above); however, the original node cannot be removed or altered.
      </para>
           <para>
       If no action is taken on a locked node within 30 minutes, the lock will be automatically removed.
@@ -292,7 +292,7 @@
     <para xml:id="form-User_Guide-LockUnlock_folders_and_Documents-Unlock_foldersdocuments"><emphasis role="bold">Unlock folders/documents</emphasis></para>
     </citetitle>
     <para>
-    To unlock the locked folder/document, right-click it and select <emphasis role="bold">Unlock</emphasis> from the drop-down menu. The folder/document will then be unlocked and other users can take actions on it.
+    To unlock the locked folder/document, right-click it and select <guilabel>Unlock</guilabel> from the drop-down menu. The folder/document will then be unlocked and other users can take actions on it.
    </para>
 
   </section>
@@ -304,9 +304,9 @@
     <procedure>
       <step>
         <para>
-     Right-click a folder/document that you want to rename, then select <emphasis role="bold">Rename</emphasis> from the drop-down menu.</para>
+     Right-click a folder/document that you want to rename, then select <guilabel>Rename</guilabel> from the drop-down menu.</para>
         <para>
-     The <emphasis role="bold">Rename</emphasis> form will appear.
+     The <guilabel>Rename</guilabel> form will appear.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -319,12 +319,12 @@
       </step>
       <step>
         <para>
-     Input a new name in the <emphasis role="bold">Name</emphasis> field. You can also change the its title by entering a new one in the <emphasis role="bold">Title</emphasis> field.
+     Input a new name in the <guilabel>Name</guilabel> field. You can also change the its title by entering a new one in the <guilabel>Title</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Save</emphasis> to accept your changes.
+     Click<guibutton> Save</guibutton> to accept your changes.
     </para>
       </step>
     </procedure>
@@ -335,7 +335,7 @@
     A symlink embedded into a node allows you to quickly access the node even if you are in other nodes.
   </para>
     <para>
-     To add a symlink, simply right-click a document that you want to add a Symlink, and select <emphasis role="bold">Add Symlink</emphasis> from the drop-down menu.
+     To add a symlink, simply right-click a document that you want to add a Symlink, and select <guilabel>Add Symlink</guilabel> from the drop-down menu.
      The symlink will be added to the selected document immediately. To view its content, simply click the symlink.
     </para>
   </section>
@@ -352,7 +352,7 @@
       </step>
       <step>
         <para>
-     Right-click the node and select <emphasis role="bold">Download And Allow Edition</emphasis> from the drop-down menu.
+     Right-click the node and select <guilabel>Download And Allow Edition</guilabel> from the drop-down menu.
     </para>
         <para>
      With each type of node, the form to view in WebDAV will be different:
@@ -360,37 +360,37 @@
         <itemizedlist>
           <listitem>
             <para>
-       <emphasis role="bold">Folder:</emphasis> The sub-nodes list of the current folder will be displayed in WebDAV.
+       <guilabel>Folder:</guilabel> The sub-nodes list of the current folder will be displayed in WebDAV.
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">nt:file:</emphasis> The content of the document will be shown.
+       <guilabel>nt:file:</guilabel> The content of the document will be shown.
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">Article:</emphasis> This node type does not, by default, list any folders. However, if the Article includes actions, added language or other data, all folders will be listed and named; <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
+       <guilabel>Article:</guilabel> This node type does not, by default, list any folders. However, if the Article includes actions, added language or other data, all folders will be listed and named; <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">Podcast:</emphasis> Being viewed in WebDAV, this node type will be attached a form which must be completed to download this document.
+       <guilabel>Podcast:</guilabel> Being viewed in WebDAV, this node type will be attached a form which must be completed to download this document.
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">Sample Node:</emphasis> This node lists folder names as <emphasis>exo:images.</emphasis> Like <emphasis role="bold">Article</emphasis>, if the <emphasis role="bold">Sample</emphasis> node contains actions or added languages, folders will be named as <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis>, and more.
+       <guilabel>Sample Node:</guilabel> This node lists folder names as <emphasis>exo:images.</emphasis> Like <emphasis role="bold">Article</emphasis>, if the <emphasis role="bold">Sample</emphasis> node contains actions or added languages, folders will be named as <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis>, and more.
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">File Plan:</emphasis> This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample Node.</emphasis>
+       <guilabel>File Plan:</guilabel> This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample Node.</emphasis>
       </para>
           </listitem>
           <listitem>
             <para>
-       <emphasis role="bold">Kofax:</emphasis> This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample Node.</emphasis>
+       <guilabel>Kofax:</guilabel> This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample Node.</emphasis>
       </para>
           </listitem>
         </itemizedlist>
@@ -400,8 +400,8 @@
   <section>
     <title>View information</title>
     <para>eXo Platform supports you to view all information of a document, such as name, title, creator, and publication state of the document.</para>
-     <para>To view information of a document, simply right-click the document, and select <emphasis role="bold">View Information</emphasis> from the drop-down menu.
-        <para>The <emphasis role="bold">View Information</emphasis> form appears as below.</para>
+     <para>To view information of a document, simply right-click the document, and select <guilabel>View Information</guilabel> from the drop-down menu.
+        <para>The <guilabel>View Information</guilabel> form appears as below.</para>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/view-information1.png" format="PNG"/>
@@ -415,21 +415,21 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
     <title>View document</title>
     <para>
-   The <emphasis role="bold">View Document</emphasis> item is visible in the drop-down menu when you right-click a document. This function allows you to view the document on another tab with the link containing the document path.
+   The <guilabel>View Document</guilabel> item is visible in the drop-down menu when you right-click a document. This function allows you to view the document on another tab with the link containing the document path.
    </para>
-	<para>To view a document, simply right-click it, and select <emphasis role="bold"> View Document</emphasis> from the drop-down menu.
+	<para>To view a document, simply right-click it, and select <guilabel> View Document</guilabel> from the drop-down menu.
 	 The document is opened in another tab.
 	</para>        
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
     <title>Copy a URL to the clipboard</title>
     <para>
-   The <emphasis role="bold">Copy URL To Clipboard</emphasis> enables you to copy the WebDAV URL of a selected folder or a document. You then can view it with the WebDAV view on a browser.
+   The <guilabel>Copy URL To Clipboard</guilabel> enables you to copy the WebDAV URL of a selected folder or a document. You then can view it with the WebDAV view on a browser.
   </para>
     <procedure>
       <step>
         <para>
-     Right-click a folder/document, and select <emphasis role="bold">Copy URL To Clipboard.</emphasis>
+     Right-click a folder/document, and select <guilabel>Copy URL To Clipboard.</guilabel>
     </para>
       </step>
       <step>
@@ -461,14 +461,14 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Manage_Tags">
     <title>Manage tags</title>
     <para>
-   Tags are easily managed by editing or deleting them with the <emphasis role="bold">Tag Manager.</emphasis>
+   Tags are easily managed by editing or deleting them with the <guilabel>Tag Manager.</guilabel>
   </para>
   <citetitle>
   <para xml:id="proc-User_Guide-Manage_Tags-Edit_a_tag"><emphasis role="bold">Edit a tag</emphasis></para></citetitle>
     <procedure>
       <step>
         <para xml:id="proc-User_Guide-Manage_Tags-Edit_a_tag-Step_1">
-     Click <emphasis role="bold">Tag Cloud </emphasis> on the <emphasis role="bold">Filter</emphasis> bar, then click
+     Click <guilabel>Tag Cloud </guilabel> on the <guilabel>Filter</guilabel> bar, then click
      <inlinemediaobject>
             <imageobject>
               <imagedata width="3mm" scalefit="1" fileref="images/cloudicon.png" format="PNG"/>
@@ -487,7 +487,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The <emphasis role="bold">Edit Tag</emphasis> form will appear.
+     The <guilabel>Edit Tag</guilabel> form will appear.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -526,7 +526,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept your changes.
+     Click <guibutton>Save</guibutton> to accept your changes.
     </para>
       </step>
     </procedure>
@@ -553,7 +553,7 @@
     </step>
     <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message to delete the tag.
+     Click <guibutton>OK</guibutton> in the confirmation message to delete the tag.
     </para>
       </step>
     </procedure>

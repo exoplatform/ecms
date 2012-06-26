@@ -25,7 +25,7 @@
 The registry helps you manage the namespaces used in the system.</para>
     <para>
    Select
-        <emphasis role="bold">Content Types --> Namespace Registry</emphasis> to open the <emphasis role="bold">Namespace Registry</emphasis> form.
+        <menuchoice><guimenu>Content Types</guimenu><guimenuitem>Namespace Registry</guimenuitem></menuchoice> to open the <guilabel>Namespace Registry</guilabel> form.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -41,7 +41,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
     <para>
-     Click the <emphasis role="bold">Register</emphasis> button on the <emphasis role="bold">Namespace Registry</emphasis> form to register a new namespace.
+     Click the <guibutton>Register</guibutton> button on the <guilabel>Namespace Registry</guilabel> form to register a new namespace.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -54,12 +54,12 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Enter the value for the <emphasis role="bold">Namespace Prefix</emphasis> field that is required.
+     Enter the value for the <guilabel>Namespace Prefix</guilabel> field that is required.
     </para>
       </step>
       <step>
         <para>
-     Enter the value for the <emphasis role="bold">URI</emphasis> field which must be unique and required.
+     Enter the value for the <guilabel>URI</guilabel> field which must be unique and required.
     </para>
         <note>
           <para>
@@ -96,7 +96,7 @@ The registry helps you manage the namespaces used in the system.</para>
             <textobject>
               <phrase>[ Glass icon ]</phrase>
             </textobject>
-          </inlinemediaobject> that corresponds to the node you want to view. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
+          </inlinemediaobject> that corresponds to the node you want to view. The <guilabel>View Node Type Information</guilabel> form will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -109,7 +109,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Close</emphasis> to exit this form.
+     Click <guibutton>Close</guibutton> to exit this form.
     </para>
       </step>
     </procedure>
@@ -119,7 +119,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
         <para xml:id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
-     Open the <emphasis role="bold">Add/Edit Node Type Definitions</emphasis> form by clicking the <emphasis role="bold">Add</emphasis> button on the <emphasis role="bold">Manage Node Type</emphasis> page.
+     Open the <guilabel>Add/Edit Node Type Definitions</guilabel> form by clicking the <guibutton>Add</guibutton> button on the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
           <mediaobject>
              <imageobject role="html">
@@ -136,7 +136,7 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
       </step>
       <step>
-        <para>Enter a name in the <emphasis role="bold">Node Type Name</emphasis> field. This field is mandatory and its value must be unique.</para>
+        <para>Enter a name in the <guilabel>Node Type Name</guilabel> field. This field is mandatory and its value must be unique.</para>
         <note>
           <para>
       The name must not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
@@ -145,7 +145,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Select a value for the <emphasis role="bold">Is Mixin Type</emphasis> field.
+     Select a value for the <guilabel>Is Mixin Type</guilabel> field.
     </para>
         <itemizedlist>
           <listitem>
@@ -162,7 +162,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Select a value for the <emphasis role="bold">Orderable Child Nodes</emphasis> field.
+     Select a value for the <guilabel>Orderable Child Nodes</guilabel> field.
     </para>
         <itemizedlist>
           <listitem>
@@ -179,7 +179,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Enter a value for the <emphasis role="bold">Primary Item Name</emphasis> field.
+     Enter a value for the <guilabel>Primary Item Name</guilabel> field.
     </para>
       </step>
       <step>
@@ -191,24 +191,24 @@ The registry helps you manage the namespaces used in the system.</para>
             <textobject>
               <phrase>[ Plus icon ]</phrase>
             </textobject>
-          </inlinemediaobject> to add more parent types in the <emphasis role="bold">Super Types</emphasis> field.
+          </inlinemediaobject> to add more parent types in the <guilabel>Super Types</guilabel> field.
     </para>
     <itemizedlist>
 	<listitem>
         <para>
-    <emphasis role="bold">Property Definitions</emphasis>: List all definition names of the <emphasis role="bold">Property</emphasis> tab.
+    <guilabel>Property Definitions</guilabel>: List all definition names of the <guilabel>Property</guilabel> tab.
     </para>
 	</listitem>
     <listitem>
     <para>
-    <emphasis role="bold">Child Node Definitions</emphasis>: List all definition names of the <emphasis role="bold">Child Node</emphasis> tab.
+    <guilabel>Child Node Definitions</guilabel>: List all definition names of the <guilabel>Child Node</guilabel> tab.
     </para>
 	</listitem>
 	</itemizedlist>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept adding a new node type, or <emphasis role="bold">Save as Draft</emphasis> to save this node type as draft.
+     Click <guibutton>Save</guibutton> to accept adding a new node type, or <guibutton>Save as Draft</guibutton> to save this node type as draft.
     </para>
       </step>
     </procedure>
@@ -218,7 +218,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
     <para>
-     Open the <emphasis role="bold">Export Node Types</emphasis> form by clicking the <emphasis role="bold">Export</emphasis> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
+     Open the <guilabel>Export Node Types</guilabel> form by clicking the <guibutton>Export</guibutton> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
       <mediaobject>
          <imageobject role="html">
@@ -231,7 +231,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Uncheck all</emphasis> if you do not want to export all node types. After clicking <emphasis role="bold">Uncheck all</emphasis>, this button becomes the <emphasis role="bold">Check all</emphasis> button.
+     Click <guilabel>Uncheck all</guilabel> if you do not want to export all node types. After clicking <guilabel>Uncheck all</guilabel>, this button becomes the <guilabel>Check all</guilabel> button.
     </para>
       </step>
       <step>
@@ -241,7 +241,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Export</emphasis> button in this form.
+     Click the <guibutton>Export</guibutton> button in this form.
     </para>
       </step>
       <step>
@@ -250,7 +250,7 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
         <note>
           <para>
-      You must select at least 1 node type to be exported. If you do not want to export the node, click <emphasis role="bold">Cancel</emphasis> to quit this pop-up.
+      You must select at least 1 node type to be exported. If you do not want to export the node, click <guibutton>Cancel</guibutton> to quit this pop-up.
      </para>
         </note>
       </step>
@@ -261,7 +261,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
         <para>
-     Open the <emphasis role="bold">Import Node Type From XML File</emphasis> form by clicking the <emphasis role="bold">Import</emphasis> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
+     Open the <guilabel>Import Node Type From XML File</guilabel> form by clicking the <guibutton>Import</guibutton> button at the bottom of the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -274,7 +274,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Browse...</emphasis> button to upload a file.
+     Click the <guilabel>Browse...</guilabel> button to upload a file.
     </para>
         <note>
           <para>
@@ -284,7 +284,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Upload</emphasis> button.
+     Click the <guibutton>Upload</guibutton> button.
     </para>
         <note>
           <para>
@@ -304,7 +304,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Import</emphasis> button to complete importing a node type.
+     Click the <guibutton>Import</guibutton> button to complete importing a node type.
     </para>
       </step>
     </procedure>
