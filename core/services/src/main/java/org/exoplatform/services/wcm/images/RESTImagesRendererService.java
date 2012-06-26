@@ -47,10 +47,13 @@ import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Hoa Pham
- * hoa.phamvu@exoplatform.com
- * Mar 31, 2009
+ * Get the image binary data of a given image node. 
+ *
+ * @author Hoa Pham <hoa.phamvu@exoplatform.com>
+ * @since      Mar 31, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -77,10 +80,10 @@ public class RESTImagesRendererService implements ResourceContainer{
   private static String PROPERTY_MIME_TYPE = "jcr:mimeType";
 
   /**
-   * Instantiates a new rEST images renderer service.
+   * Instantiate a new REST images renderer service.
    *
-   * @param repositoryService the repository service
-   * @param sessionProviderService the session provider service
+   * @param repositoryService The repository service
+   * @param sessionProviderService The session provider service
    */
   public RESTImagesRendererService(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
@@ -88,13 +91,15 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Serve image.
+   * Get the image binary data of a given image node.
    *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param nodeIdentifier the node identifier
+   * @param repository The repository
+   * @param workspace The workspace
+   * @param nodeIdentifier The node identifier
    *
-   * @return the response
+   * @return The response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
@@ -159,11 +164,11 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * get the last modified date of node
-  + * @param node
-  + * @return the last modified date
-  + * @throws Exception
-  + */
+   * Get the last modified date of a node
+   * @param node
+   * @return The last modified date
+   * @throws Exception
+   */
   private Date getLastModifiedDate(Node node) throws Exception {
      Date lastModifiedDate = null;
      if (node.hasNode("jcr:content") && node.getNode("jcr:content").hasProperty("jcr:lastModified")) {
@@ -177,7 +182,7 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * check resources were modified or not
+   * Check if resources were modified or not.
    * @param ifModifiedSince
    * @param node
    * @return
@@ -205,14 +210,14 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Generate uri.
+   * Generate URI.
    *
-   * @param file the node
-   * @param propertyName the image property name, null if file is an image node
+   * @param file The node
+   * @param propertyName The image property name. The value will be null if the file is an image node
    *
-   * @return the string
+   * @return The string
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   public String generateImageURI(Node file, String propertyName) throws Exception {
     StringBuilder builder = new StringBuilder();

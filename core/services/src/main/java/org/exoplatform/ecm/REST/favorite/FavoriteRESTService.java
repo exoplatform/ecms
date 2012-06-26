@@ -25,10 +25,16 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-/**
- * @author lamphan AUG 01, 2010
- */
 
+/**
+ * Return a list of favorite documents of a given user. 
+ *
+ * @author lamphan
+ * @since      AUG 01, 2010
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService
+ */
 @Path("/favorite/")
 public class FavoriteRESTService implements ResourceContainer {
   private final FavoriteService favoriteService;
@@ -53,7 +59,19 @@ public class FavoriteRESTService implements ResourceContainer {
     this.favoriteService = favoriteService;
     this.manageDriveService = manageDriveService;
   }
-
+  
+  /**
+   * Return a list of favorite documents of a given user.
+   * 
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param userName
+   * @param showItems
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService.getFavoriteByUser
+   */
   @GET
   @Path("/all/{repoName}/{workspaceName}/{userName}")
   public Response getFavoriteByUser(@PathParam("repoName") String repoName,
@@ -111,16 +129,6 @@ public class FavoriteRESTService implements ResourceContainer {
   private String getDateFormat(Calendar date) {
     return String.valueOf(date.getTimeInMillis());
   }
-
-  /*private String getDateFormatShow(java.util.Date date) {
-    java.text.DateFormat dateFormat = getSimpleDateFormat();
-    return dateFormat.format(date);
-  }*/
-
-  /*private DateFormat getSimpleDateFormat() {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-    return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
-  }*/
 
   private String getDriveName(List<DriveData> listDrive, Node node) throws RepositoryException{
     String driveName = "";

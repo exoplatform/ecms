@@ -60,10 +60,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- * chuong_phan@exoplatform.com
- * Jan 21, 2009
+ * Instantiate a new gadget connector.  
+ * 
+ * @author <chuong_phan@exoplatform.com>
+ * @since      Jan 21, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector
  */
 @Path("/wcmGadget/")
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
@@ -87,10 +90,10 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   private static final Log LOG = ExoLogger.getLogger(GadgetConnector.class.getName());
 
   /**
-   * Instantiates a new gadget connector.
+   * Instantiate a new gadget connector.
    *
-   * @param container the container
-   * @param initParams the init params
+   * @param container The container
+   * @param initParams The init params
    */
   public GadgetConnector(InitParams initParams) throws Exception {
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
@@ -98,14 +101,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Gets the folders and files.
+   * Get folders and files.
    *
-   * @param currentFolder the current folder
-   * @param language the language
-   *
-   * @return the folders and files
-   *
-   * @throws Exception the exception
+   * @param currentFolder The current folder
+   * @param language The language
+   * @return The folders and files
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -126,14 +129,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Builds the xml response.
+   * Build the xml response.
    *
-   * @param currentFolder the current folder
-   * @param language the language
+   * @param currentFolder The current folder
+   * @param language The language
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   public Response buildXMLResponse(String currentFolder, String language, String host) throws Exception {
     List<ApplicationCategory> applicationCategories = getGadgetCategories();
@@ -150,15 +153,15 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Creates the root element.
+   * Create the root element.
    *
-   * @param currentFolder the current folder
-   * @param applicationCategories the application categories
-   * @param language the language
+   * @param currentFolder The current folder
+   * @param applicationCategories The application categories
+   * @param language The language
    *
-   * @return the element
+   * @return The element
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Element createRootElement(String currentFolder,
                                     List<ApplicationCategory> applicationCategories,
@@ -215,14 +218,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Creates the folder element.
+   * Create the folder element.
    *
-   * @param document the document
-   * @param applicationCategories the application categories
+   * @param document The document
+   * @param applicationCategories The application categories
    *
-   * @return the element
+   * @return The element
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Element createFolderElement(Document document,
                                       List<ApplicationCategory> applicationCategories) throws Exception {
@@ -236,14 +239,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Creates the file element.
+   * Create the file element.
    *
-   * @param document the document
-   * @param applicationCategory the application category
+   * @param document The document
+   * @param applicationCategory The application category
    *
-   * @return the element
+   * @return The element
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Element createFileElement(Document document,
                                     ApplicationCategory applicationCategory,
@@ -293,11 +296,11 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Gets the gadget categories.
+   * Get the gadget categories.
    *
-   * @return the gadget categories
+   * @return The gadget categories
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
     List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();

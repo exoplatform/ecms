@@ -56,13 +56,14 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Hoang Van Hung
- *          hunghvit@gmail.com
- * May 17, 2009
+ * Return the latest edited documents. 
+ * 
+ * @author Hoang Van Hung <hunghvit@gmail.com>
+ * @since      May 17, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService
  */
-
-
 @Path("/presentation/document/edit/")
 public class GetEditedDocumentRESTService implements ResourceContainer {
 
@@ -107,6 +108,17 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     this.manageDriveService = manageDriveService;
   }
 
+  /**
+   * Return the latest edited documents.
+   * 
+   * @param repository The name of repository
+   * @param showItems 
+   * @param showGadgetWs 
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService.getLastEditedDoc
+   */
   @Path("/{repository}/")
   @GET
   public Response getLastEditedDoc(@PathParam("repository") String repository,

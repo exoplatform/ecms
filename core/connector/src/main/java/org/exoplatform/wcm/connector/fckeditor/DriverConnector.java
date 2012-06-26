@@ -81,10 +81,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * Created by The eXo Platform SEA
- * Author : Do Dang Thang
- * thang.do@exoplatform.com
- * Sep 7, 2009
+ * Return a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
+ *
+ * {{{{portalname}}}}: The name of portal.
+ * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
+ * 
+ * @author Do Dang Thang <thang.do@exoplatform.com>
+ * @since      Sep 7, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector
  */
 @Path("/wcmDriver/")
 public class DriverConnector extends BaseConnector implements ResourceContainer {
@@ -123,25 +129,25 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   private Locale lang = Locale.ENGLISH;
   /**
-   * Instantiates a new driver connector.
+   * Instantiate a new drive connector.
    *
-   * @param container the container
-   * @param params the params
+   * @param container The container
+   * @param params The init params
    */
   public DriverConnector(InitParams params) {
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
   }
 
   /**
-   * Gets the drivers.
+   * Return a list of drives for the current user.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param userId the user id
-   *
-   * @return the drivers
-   *
-   * @throws Exception the exception
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param userId The Id of user
+   * @return The drives
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getDrivers
    */
   @GET
   @Path("/getDrivers/")
@@ -173,18 +179,18 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the folders and files.
+   * Return all folders and files in a given location.
    *
-   * @param driverName the driver name
-   * @param currentFolder the current folder
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param filterBy the filter by
-   * @param userId the user id
-   *
-   * @return the folders and files
-   *
-   * @throws Exception the exception
+   * @param driverName The name of drive
+   * @param currentFolder The current folder
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param filterBy The type of filter
+   * @param userId The Id of user
+   * @return The folders and files
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -233,23 +239,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 
   /**
-   * Upload file.
+   * Upload a file.
    *
-   * @param inputStream the input stream
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param jcrPath the jcr path
-   * @param uploadId the upload id
-   * @param language the language
-   * @param contentType the content type
-   * @param contentLength the content length
-   * @param currentPortal the current portal
-   * @param driverName the driver name
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
+   * @param inputStream The input stream
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param jcrPath The jcr path
+   * @param uploadId The Id of upload
+   * @param language The language
+   * @param contentType The type of content
+   * @param contentLength The length of content
+   * @param currentPortal The current portal
+   * @param driverName The name of drive
+   * @return The response
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -261,22 +267,22 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Process upload.
+   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param jcrPath the jcr path
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param siteName the current portal
-   * @param driverName the driver name
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param jcrPath The jcr path
+   * @param action The action
+   * @param language The language
+   * @param fileName The name of file
+   * @param uploadId The Id of upload
+   * @param siteName The current portal
+   * @param driverName The name of drive
+   * @return The response
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")
@@ -320,13 +326,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the drivers by user id.
+   * Get the drives by user Id.
    *
-   * @param userId the user id
+   * @param userId The Id of user
    *
-   * @return the drivers by user id
+   * @return The drives by user Id
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private List<DriveData> getDriversByUserId(String userId) throws Exception {
     ManageDriveService driveService = 
@@ -336,13 +342,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Append drivers.
+   * Append drives.
    *
-   * @param document the document
-   * @param driversList the drivers list
-   * @param groupName the group name
+   * @param document The document
+   * @param driversList The list of drives
+   * @param groupName The name of group
    *
-   * @return the element
+   * @return The element
    */
   private Element appendDrivers(Document document,
                                 List<DriveData> driversList,
@@ -373,6 +379,14 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return folders;
   }
 
+  /**
+   * Resolve the drive label.
+   *
+   * @param name
+   * @param lang
+   *
+   * @return The name 
+   */
   private String resolveDriveLabel(String name, String lang) {
     if (resourceBundleService ==null) {
       resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -394,11 +408,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Personal drivers.
+   * Personal drives.
    *
-   * @param driveList the drive list
+   * @param driveList The list of drives
    *
-   * @return the list< drive data>
+   * @return The list of personal drives
    * @throws Exception
    */
   private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) throws Exception {
@@ -419,14 +433,14 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Group drivers.
+   * Group drives.
    *
-   * @param driverList the driver list
-   * @param userId the user id
+   * @param driverList The list of drives
+   * @param userId The Id of user
    *
-   * @return the list< drive data>
+   * @return The list of group drives
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private List<DriveData> groupDrivers(List<DriveData> driverList) throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
@@ -449,13 +463,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * General drivers.
+   * General drives.
    *
-   * @param driverList the driver list
+   * @param driverList The list of drives
    *
-   * @return the list< drive data>
+   * @return The list of general drives
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private List<DriveData> generalDrivers(List<DriveData> driverList) throws Exception {
     List<DriveData> generalDrivers = new ArrayList<DriveData>();
@@ -473,13 +487,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the memberships.
+   * Get the memberships.
    *
-   * @param userId the user id
+   * @param userId The Id of user
    *
-   * @return the memberships
+   * @return The memberships
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private List<String> getMemberships(String userId) throws Exception {
     List<String> userMemberships = new ArrayList<String> ();
@@ -499,12 +513,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * this method retrieves memberships of the user having the given id using the
-   * IdentityRegistry service instead of the Organization service to allow JAAS
-   * based authorization
+   * This method retrieves memberships of the user having the given Id using the IdentityRegistry service instead of the Organization service that allows the JAAS-based authorization.
    *
-   * @param authenticatedUser the authenticated user id
-   * @return a collection of MembershipEntry
+   * @param authenticatedUser The Id of authenticated user
+   * @return A collection of MembershipEntry
    */
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -513,6 +525,20 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return currentUserIdentity.getMemberships();
   }
 
+  /**
+   * Build an XML response for children nodes.
+   *
+   * @param node
+   * @param command
+   * @param filterBy
+   * @param session
+   * @param currentPortal
+   * @param nodeDriveName
+   * 
+   * @throws Exception
+   * 
+   * @return response
+   */
   private Response buildXMLResponseForChildren(Node node,
                                                String command,
                                                String filterBy,
@@ -587,13 +613,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       return getResponse(document);
     }
   /**
-   * Checks if is folder and is not web content.
+   * Check if a selected node is folder and is not web content.
    *
-   * @param checkNode the check node
+   * @param checkNode The check node
    *
-   * @return true, if is folder and is not web content
+   * @return true if the checked node is folder and is not web content
    *
-   * @throws RepositoryException the repository exception
+   * @throws RepositoryException The repository exception
    */
   private boolean isFolder(Node checkNode) throws RepositoryException {
     try {
@@ -610,13 +636,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Checks if is dMS document.
+   * Check if a selected node is a DMS document.
    *
-   * @param node the node
+   * @param node The node
    *
-   * @return true, if is dMS document
+   * @return true if the checked node is a DMS document
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private boolean isDMSDocument(Node node) throws Exception {
     TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
@@ -638,11 +664,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 
   /**
-   * Checks if is media type.
+   * Check if a selected node is of media type.
    *
-   * @param node the node
+   * @param node The node
    *
-   * @return true, if is media type
+   * @return true if the checked node is of media type
    */
   private boolean isMediaType(Node node){
     String mimeType = "";
@@ -663,11 +689,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Checks if is image type.
+   * Check if a selected node is of image type.
    *
-   * @param node the node
+   * @param node The node
    *
-   * @return true, if is image type
+   * @return true if the checked node is of image type
    */
   private boolean isImageType(Node node){
     String mimeType = "";
@@ -713,23 +739,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 
   /**
-   * Creates the upload file response.
+   * Create the upload file response.
    *
-   * @param inputStream the input stream
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param runningPortalName the running portal name
-   * @param jcrPath the jcr path
-   * @param uploadId the upload id
-   * @param language the language
-   * @param contentType the content type
-   * @param contentLength the content length
-   * @param currentFolderNode the current folder node
-   * @param limit the limit
+   * @param inputStream The input stream
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param runningPortalName The name of running portal
+   * @param jcrPath The jcr path
+   * @param uploadId The Id of upload
+   * @param language The language
+   * @param contentType The type of content
+   * @param contentLength The length of content
+   * @param currentFolderNode The current folder
+   * @param limit The limit
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   @Deprecated
   protected Response createUploadFileResponse(InputStream inputStream,
@@ -753,20 +779,20 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Creates the process upload response.
+   * Create the process of upload response.
    *
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param siteName the portal name
-   * @param currentFolderNode the current folder node
+   * @param workspaceName The name of workspace
+   * @param jcrPath The jcr path
+   * @param action The action
+   * @param language The language
+   * @param fileName The name of file
+   * @param uploadId The Id of upload
+   * @param siteName The name of portal
+   * @param currentFolderNode The current folder
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   protected Response createProcessUploadResponse(String workspaceName,
                                                  Node currentFolderNode,
@@ -786,16 +812,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the parent folder node.
+   * Get the parent folder node.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param driverName the driver name
-   * @param currentFolder the current folder
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param driverName The name of drive
+   * @param currentFolder The current folder
    *
-   * @return the parent folder node
+   * @return The parent folder node
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
    */
   private Node getParentFolderNode(String workspaceName, String driverName, String currentFolder) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -818,6 +844,17 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
   }
 
+  /**
+   * Create a folder element.
+   *
+   * @param document 
+   * @param child
+   * @param folderType
+   * @param childName
+   * @param nodeDriveName
+   *
+   * @return folder
+   */
   private Element createFolderElement(Document document,
                                       Node child,
                                       String folderType,

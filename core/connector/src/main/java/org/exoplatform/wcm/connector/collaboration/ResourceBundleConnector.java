@@ -40,14 +40,24 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Phan Le Thanh Chuong
- *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Dec 21, 2009
+ * Get the bundle that is based on the key and the locale.
+ *     
+ * @author Phan Le Thanh Chuong <chuong.phan@exoplatform.com>, <phan.le.thanh.chuong@gmail.com>
+ * @since      Dec 21, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector
  */
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {
 
+  /**
+  * Get the bundle that is based on the key and the locale.
+  * @param key 
+  * @param locale 
+  * 
+  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector.getBundle
+  */
   @GET
   @Path("/getBundle/")
   public Response getBundle (
