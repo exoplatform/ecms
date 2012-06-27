@@ -153,6 +153,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
       List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
       Node favoriteNode = null;
+      int count = 0;
       for (User user : userList) {
         String userName = user.getUserName();
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
@@ -169,6 +170,13 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
           if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) != null) {
             actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION, 
                                                 repoService.getCurrentRepository().getConfiguration().getName());
+            count++;
+            if ((count) % 100 == 0) {
+	          if (LOG.isInfoEnabled()) {
+	        	StringBuilder infor = new StringBuilder(this.getClass().getSimpleName()).append(": ").append(count).append(" users done!");
+	        	LOG.info(infor.toString());
+	          }
+            }
           }
         }
       }
