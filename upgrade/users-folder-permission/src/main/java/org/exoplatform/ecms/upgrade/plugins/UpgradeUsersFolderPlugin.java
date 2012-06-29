@@ -147,8 +147,8 @@ public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
           NodeImpl nodeImpl = (NodeImpl) nodeIter.next();
           nodeImpl.removePermission(userName, PermissionType.REMOVE);
         }
+        userNode.save();
       }
-      sessionProvider.getSession(defaultWSName, repoService_.getCurrentRepository()).save();
     } catch (Exception e) {
       //Rollback the change in the case exception occurs
       sessionProvider.getSession(defaultWSName, repoService_.getCurrentRepository()).refresh(false);
