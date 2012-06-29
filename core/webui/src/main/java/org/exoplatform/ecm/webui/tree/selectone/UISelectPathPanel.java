@@ -155,7 +155,7 @@ public class UISelectPathPanel extends UIContainer {
       Node child = iterator.nextNode();
       if(child.isNodeType("exo:hiddenable")) continue;
       if(Utils.isTrashHomeNode(child) && !_showTrashHomeNode) continue;
-      if(matchMimeType(Utils.getNodeSymLink(child)) && matchNodeType(Utils.getNodeSymLink(child))) {
+      if(matchMimeType(Utils.getNodeSymLink(child)) && matchNodeType(Utils.getNodeSymLink(child)) && !isExceptedNodeType(child)) {
         list.add(child);
       }
     }
