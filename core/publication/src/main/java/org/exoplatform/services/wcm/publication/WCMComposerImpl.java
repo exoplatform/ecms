@@ -380,6 +380,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager manager = session.getWorkspace().getQueryManager();
+    String mode = filters.get(FILTER_MODE);
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderFilter = getOrderSQLFilter(filters);
     String recursive = filters.get(FILTER_RECURSIVE);
@@ -417,6 +418,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       } else {
         statement.append(")");
       }
+      // If clv view mode is live, only get nodes which has published version
+      if (MODE_LIVE.equals(mode)) statement.append(" AND (publication:currentState IS NULL OR publication:currentState = 'published' OR exo:titlePublished IS NOT NULL)");
       if (filterTemplates) statement.append(" AND " + getTemplatesSQLFilter());
       if (queryFilter!=null) {
         statement.append(queryFilter);
