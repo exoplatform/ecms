@@ -15,7 +15,7 @@ public interface SEOService {
    * @param onContent Indicates whether current page is content page or portal page
    * @throws Exception
    */
-  public void storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception;
+  public void storeMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) throws Exception;
   /**
    * Returns metadata of a portal page or content page
    * 
@@ -23,7 +23,7 @@ public interface SEOService {
    * @return
    * @throws Exception
    */ 
-  public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference) throws Exception;
+  public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference, String language) throws Exception;
   /**
    * Returns metadata of a portal page 
    * 
@@ -31,7 +31,7 @@ public interface SEOService {
    * @return
    * @throws Exception
    */  
-  public PageMetadataModel getPageMetadata(String pageReference) throws Exception;
+  public PageMetadataModel getPageMetadata(String pageReference, String language) throws Exception;
   /**
    * Returns metadata of a content page 
    * 
@@ -39,14 +39,14 @@ public interface SEOService {
    * @return
    * @throws Exception
    */  
-  public PageMetadataModel getContentMetadata(ArrayList<String> params) throws Exception;
+  public PageMetadataModel getContentMetadata(ArrayList<String> params, String language) throws Exception;
   /**
    * Remove metadata of page
    * 
    * @param metaModel Object store metadata of page
    * @throws Exception
    */
-  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception;
+  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) throws Exception;
   /**
    * Return content node by content path
    * 
@@ -100,4 +100,8 @@ public interface SEOService {
    * @throws Exception
    */
   public List<String> getFrequencyOptions() throws Exception;
+  
+  public String getState(String path, String language, boolean onContent) throws Exception;
+  
+  public ArrayList<String> getSeoLanguages(String portalName, String seoPath, boolean onContent) throws Exception;
 }

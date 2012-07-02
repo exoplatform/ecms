@@ -10,7 +10,8 @@
       <sitemap>Sitemap: </sitemap>
       <sitemapvisible>Hiển thị trên sitemap</sitemapvisible>
       <priority>Độ ưu tiên: </priority>
-      <frequency>Tần suất: </frequency>  
+      <frequency>Tần suất: </frequency>
+      <select-language>Select a language</select-language>
       <option>
         <Always>Luôn luôn</Always>
         <Hourly>Hàng giờ</Hourly>
@@ -19,16 +20,6 @@
         <Monthly>Hàng tháng</Monthly>
         <Yearly>Hàng năm</Yearly>
         <Never>Không bao giờ</Never>        
-      </option>    
-      <option>
-      	<en>Tiếng Anh</en>
-        <fr>Tiếng Pháp</fr>
-        <ru>Tiếng Nga</ru>
-        <vi>Tiếng Việt Nam</vi>
-        <nl>Tiếng Hà Lan</nl>
-        <de>Tiếng Đức</de>
-        <uk>Tiếng Ucraina</uk>
-        <ar>Tiếng Ả Rập</ar>
       </option>
     </label>
 	<tip>
@@ -39,8 +30,17 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <repository-exception>Có lỗi xảy ra trên hệ thộng. Không thể cập nhật được dữ liệu.</repository-exception>	
+      <repository-exception>Có lỗi xảy ra trên hệ thộng. Không thể cập nhật được dữ liệu.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>	
     </msg>
+    <title>
+    	<seo-delete>Delete</seo-delete>
+    </title>
+	  <help> 
+		  <priority>Valid values range from 0.0 to 1.0.</priority>
+		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
+	  </help>	
   </UISEOForm>
   <UISEOPopupWindow>
   	<title>
@@ -57,4 +57,26 @@
       <Invalid-number>Trường {0} chỉ nhận giá trị số kiểu float.</Invalid-number>
     </msg>
   </FloatNumberValidator> 
+  <Locale>
+    <label>
+      <uk>Tiếng U-crai-na</uk>
+      <it>Tiếng Ý</it>
+      <vi>Tiếng Việt</vi>
+      <pt_BR>Tiếng Bồ Đào Nha - Bra-xin</pt_BR>
+      <ko>Tiếng Hàn Quốc</ko>
+      <ar>Tiếng A-rập</ar>
+      <zh_CN>Simplified Chinese</zh_CN>
+      <de>German</de>
+      <ma>Ma</ma>
+      <ne>Tiếng Nê-pan</ne>
+      <zh_TW>Traditional Chinese</zh_TW>
+      <fr>Tiếng Pháp</fr>
+      <en>Tiếng Anh</en>
+      <ru>Tiếng Nga</ru>
+      <es>Tiếng Tây Ban Nha</es>
+      <nl>Tiếng Hà Lan</nl>
+      <ja>Tiếng Nhật</ja>
+      <cs>Tiếng Séc</cs>
+    </label>
+  </Locale>
 </bundle>

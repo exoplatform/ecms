@@ -228,7 +228,7 @@
 	
   <component>
     <key>org.exoplatform.services.seo.SEOService</key>  
-    <type>org.exoplatform.services.seo.DumpSEOServiceImpl</type>
+    <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
     <init-params>
       <object-param>
 	    <name>seo.config</name>

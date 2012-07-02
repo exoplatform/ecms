@@ -42,13 +42,13 @@
     <route-param qname="gtn:handler">
       <value>download</value>
     </route-param>
-  </route>
+  </route>  
   
   <route path="/{gtn:sitename}/sitemaps.xml">
     <route-param qname="gtn:handler">
       <value>sitemap</value>
     </route-param>  	
-  </route>
+  </route>	  	
 
   <route path="/{gtn:sitename}/robots.txt">
     <route-param qname="gtn:handler">

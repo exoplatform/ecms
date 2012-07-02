@@ -633,12 +633,12 @@ function ECMUtils() {
 
 		var resizeDiv = document.getElementById("ResizeSideBarDiv");
 		if (resizeDiv == null) {
-			resizeDiv = document.createElement("div");
-			resizeDiv.className = "ResizeHandle";
-			resizeDiv.id = "ResizeSideBarDiv";
-			var workingArea = gj(container).parents(".UIWorkingArea:first")[0];
-			resizeDiv.style.height = container.offsetHeight + "px";
-			workingArea.appendChild(resizeDiv);
+		  resizeDiv = document.createElement("div");
+		  resizeDiv.className = "ResizeHandle";
+		  resizeDiv.id = "ResizeSideBarDiv";
+                  var workingArea = gj(container).parents(".UIWorkingArea:first")[0];
+		  resizeDiv.style.height = (container.offsetHeight-20) + "px";		
+                  workingArea.appendChild(resizeDiv);
 		}
 		var X_Resize = eXo.core.Browser.findMouseRelativeX(workingArea,event);
 		var Y_Resize = eXo.core.Browser.findPosYInContainer(container,workingArea);

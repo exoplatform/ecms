@@ -48,8 +48,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	}
 	var popupBar = gj(popup).find('span.PopupTitle:first')[0];
 
-	popupBar.onmousedown = this.initDND;
-	popupBar.onkeydown = this.initDND;
+	eXo.webui.WCMUIPopupWindow.initDND(popupBar, popup);
 	
 	if(isShow == false) {
 		this.superClass.hide(popup) ;
@@ -81,13 +80,7 @@ WCMUIPopupWindow.prototype.showMask = function(popup, isShowPopup) {
 		mask = null;
 	}
 	if(isShowPopup) {
-		//Modal if popup is portal component
-		if (gj(popup).parents(".PORTLET-FRAGMENT:first")[0] == null) {
-			if(!mask) eXo.core.UIMaskLayer.createMask(popup.parentNode, popup, 1) ;
-		} else {
-			//If popup is portlet's component, modal with just its parent
-			if(!mask) eXo.core.UIMaskLayer.createMaskForFrame(popup.parentNode, popup, 1) ;
-		}
+		if(!mask) eXo.core.UIMaskLayer.createMask(popup.parentNode, popup, 1) ;		
 	} else {
 		if(mask) eXo.core.UIMaskLayer.removeMask(mask) ;
 	}
@@ -124,19 +117,21 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
 	popup.style.visibility = "hidden" ;
 	this.superClass.show(popup) ;
   if(top > -1 && left > -1) {
+  	var seoPopup = document.getElementById('UISEOPopupWindow');
+  	var popupWidth = 390+90;
+  	if(eXo.ecm.WCMUtils.showRightContent)
+  		popupWidth = 630+90;
     var pageWidth = 0;
     var wsElement = document.getElementById('UIWorkingWorkspace');
     if(wsElement) pageWidth = wsElement.clientWidth;
-    // The size of the SEO form have to plus 10 pixels (leftDelta) to avoid being covered by the scroll bar on the browser.
-    var formWidth = 335 + this.leftDelta;
-    if(screen.width - pageWidth <= formWidth)
+    if(screen.width - pageWidth <= popupWidth)
     	left = left - (screen.width - pageWidth);  
     else
 			 left = left - (screen.width - pageWidth)/2;
     popup.style.top = top + this.topDelta + "px";
     var deltaX = screen.width-left;
-    if(deltaX < formWidth) {
-      left = left - (formWidth - deltaX) - 70;
+    if(deltaX < popupWidth) {
+      left = left - (popupWidth - deltaX) - 70;
 		}  
     popup.style.left = left + "px";
     popup.style.position = "fixed";
@@ -286,6 +281,8 @@ WCMUIPopupWindow.prototype.endResizeEvt = function(evt) {
   // - add a callback property that points to the init function of the concerned scroll manager. call it here
   // - add a boolean to each scroll manager that specifies if it's in a popup. re init only those that have this property true
 }
+
+
 /**
  * Inits the drag and drop
  * configures the DragDrop callback functions
@@ -293,46 +290,51 @@ WCMUIPopupWindow.prototype.endResizeEvt = function(evt) {
  *  . dragCallback : empty
  *  . dropCallback : sets overflow: auto to elements in the popup if browser is mozilla
  */
-WCMUIPopupWindow.prototype.initDND = function(evt) {
-  var DragDrop = eXo.core.DragDrop ;
+WCMUIPopupWindow.prototype.initDND = function(popupBar, popup) {
+  eXo.core.DragDrop.init(popupBar, popup);
 
-	DragDrop.initCallback = function (dndEvent) {
-		var dragObject = dndEvent.dragObject ;
-		dragObject.uiWindowContent = gj(dragObject).find("div.PopupContent:first")[0];
-		if(!dragObject.uiWindowContent) return;
-		if(eXo.core.Browser.browserType == "mozilla") {
-			dragObject.uiWindowContent.style.overflow = "hidden" ;
-			var elements = gj(dragObject.uiWindowContent).find("div.PopupMessageBox");
-  		for(var i = 0; i < elements.length; i++) {
-     	  elements[i].style.overflow  = "hidden" ;
-			}
-		}
-  }
-  
-  DragDrop.dragCallback = function (dndEvent) {
-  }
+  popup.onDragStart = function(x, y, last_x, last_y, e)
+  {
+    if (eXo.core.Browser.isFF() && popup.uiWindowContent)
+    {
+      popup.uiWindowContent.style.overflow = "auto";
+      gj(popup.uiWindowContent).find("ul.PopupMessageBox").css("overflow", "auto");
+    }
+  };
 
-  DragDrop.dropCallback = function (dndEvent) {
-  	var dragObject = dndEvent.dragObject ;
-		if(eXo.core.Browser.browserType == "mozilla" && dragObject.uiWindowContent) {
-			dragObject.uiWindowContent.style.overflow = "auto" ;
-   		var elements = gj(dragObject.uiWindowContent).find("div.PopupMessageBox");
-  		for(var i = 0; i < elements.length; i++) {
-     	  elements[i].style.overflow  = "auto" ;
-			}
-		}
-  	
-  	var offsetParent = dragObject.offsetParent ;
-  	if (offsetParent) {
-  		if (gj(dragObject).offset().top < 0)  dragObject.style.top = (0 - offsetParent.offsetTop) + "px" ;
-  	} else {
-  		dragObject.style.top = "0px" ;
-  	}
-  }
-  var clickBlock = this ;
-  var dragBlock = gj(this).parents(".UIDragObject:first")[0];
-  DragDrop.init(clickBlock, dragBlock) ;
+  popup.onDrag = function(nx, ny, ex, ey, e)
+  {
+  };
+
+  popup.onDragEnd = function(x, y, clientX, clientY)
+  {
+    if (eXo.core.Browser.isFF() && popup.uiWindowContent)
+    {
+      popup.uiWindowContent.style.overflow = "auto";
+      gj(popup.uiWindowContent).find("ul.PopupMessageBox").css("overflow", "auto");
+    }
+    var offsetParent = popup.offsetParent;
+    if(!offsetParent) offsetParent = document.getElementById('UIWorkingWorkspace');
+    if (offsetParent)
+    {
+      if (clientY < 0)
+      {
+        popup.style.top = (0 - offsetParent.offsetTop) + "px";
+      }
+    }
+    else
+    {
+      alert('aaa');
+      popup.style.top = "0px";
+    }
+  };
+
+  popup.onCancel = function(e)
+  {
+  };
+
 } ;
+
 
 eXo.webui.WCMUIPopupWindow = new WCMUIPopupWindow();
 _module.WCMUIPopupWindow = eXo.webui.WCMUIPopupWindow;
