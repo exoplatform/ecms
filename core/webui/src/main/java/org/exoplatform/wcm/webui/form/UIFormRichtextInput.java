@@ -104,10 +104,12 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     }
     
     buffer.append("<script type='text/javascript'>\n");
+    buffer.append("    eXo.loadJS('/eXoStaticResources/ckeditor/ckeditor.js', function() {");
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:"
         + height + ", contentsCss:" + contentsCss + "});\n");
+    buffer.append("       });");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
     buffer.append("</span>");

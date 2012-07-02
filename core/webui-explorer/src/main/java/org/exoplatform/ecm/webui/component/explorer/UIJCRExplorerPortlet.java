@@ -205,11 +205,11 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       getChild(UIJcrExplorerEditContainer.class).setRendered(true);
     }
 
-    RenderResponse response = context.getResponse();
-    Element elementS = response.createElement("script");
-    elementS.setAttribute("type", "text/javascript");
-    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
-    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
+//    RenderResponse response = context.getResponse();
+//    Element elementS = response.createElement("script");
+//    elementS.setAttribute("type", "text/javascript");
+//    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
+//    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
 
     super.processRender(app, context);
   }

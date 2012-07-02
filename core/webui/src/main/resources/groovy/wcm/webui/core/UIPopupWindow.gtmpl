@@ -19,11 +19,14 @@
 	int top = uicomponent.getWindowTop();
 	int left = uicomponent.getWindowLeft();
 	if(top > -1 && left > -1) {
-		rcontext.getJavascriptManager().importJavascript('eXo.webui.WCMUIPopupWindow');
 		rcontext.getJavascriptManager().addJavascript("eXo.webui.WCMUIPopupWindow.init('$popupId', $uicomponent.show, $uicomponent.resizable, true, $uicomponent.showMask, $top, $left);");
-	} else { 
-		rcontext.getJavascriptManager().importJavascript('eXo.webui.UIPopupWindow');
-		rcontext.getJavascriptManager().addJavascript("eXo.webui.UIPopupWindow.init('$popupId', $uicomponent.show, $uicomponent.resizable, true, $uicomponent.showMask);");
+	} else {
+	  rcontext.getJavascriptManager().loadScriptResource("webui");
+	  if(uicomponent.isShow()) {
+	    rcontext.getJavascriptManager().addJavascript("eXo.webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
+	  } else if (rcontext.useAjax()) {
+	    rcontext.getJavascriptManager().addJavascript("eXo.webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
+	  }	
 	}
 	String title = rsId;
 	if(component != null)	title = component.getId();
@@ -48,5 +51,7 @@
 	<div class="UIWindowContent">
 		<div class="PopupContent"><% uicomponent.renderChildren(); %></div>
 	</div>
-	<span class="ResizeButton"></span>
+	 <%if (uicomponent.isResizable()) {%>
+    <span class="ResizeButton"></span>
+  <%}%>
 </div>

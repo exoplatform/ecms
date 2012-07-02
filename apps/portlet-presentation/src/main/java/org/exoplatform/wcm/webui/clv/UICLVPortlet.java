@@ -26,9 +26,12 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.gatein.portal.controller.resource.ResourceScope;
+import org.gatein.portal.controller.resource.script.FetchMode;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -331,7 +334,12 @@ public class UICLVPortlet extends UIPortletApplication {
         activateMode(npMode, nDisplayMode);
       }
     }
-    setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());   
+    setId(UICLVPortlet.class.getSimpleName() + "_" + pContext.getWindowId());
+    
+    if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
+      pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "content-selector");
+      pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "quick-edit");
+    }
     super.processRender(app, context);
   }
 

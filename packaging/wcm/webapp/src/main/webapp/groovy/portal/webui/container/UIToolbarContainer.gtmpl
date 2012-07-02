@@ -13,7 +13,7 @@
 	/* END ADDED PART BY ECMS */
 
 	JavascriptManager jsmanager = rcontext.getJavascriptManager();
-	jsmanager.importJavascript('eXo.portal.PortalDragDrop');
+	jsmanager.loadScriptResource('portal');
 
 %>
 <div class="UIContainer UIToolbarContainer <%=uiPortalApp.isEditing()?"EdittingContainer":""%> <%=hasPermission?"": "ProtectedContainer"%>"

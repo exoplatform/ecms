@@ -32,11 +32,11 @@
     <org.exoplatform.ws.version>2.2.8-GA-SNAPSHOT</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.14.8-GA-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.8-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.2.5-PLF-SNAPSHOT</org.exoplatform.portal.version>
+    <org.exoplatform.portal.version>3.3.0-GA</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
-    <chromattic.version>1.1.2</chromattic.version>
+    <chromattic.version>1.1.4</chromattic.version>
     <org.xcmis.version>1.2.2</org.xcmis.version>
     <abdera.version>0.4.0-incubating</abdera.version>
     <lucene-regex.version>2.4.1</lucene-regex.version>
@@ -45,7 +45,7 @@
     <xml.parser.version>3.1</xml.parser.version>
     <!-- 3rd parties -->
     <c3p0.version>0.9.1.2</c3p0.version>
-    <org.gatein.wci.version>2.1.0-GA</org.gatein.wci.version>
+    <org.gatein.wci.version>2.2.0-Beta01</org.gatein.wci.version>
     <org.javassist.version>3.14.0-GA</org.javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
     <commons-pool.version>1.5.5</commons-pool.version>
@@ -60,9 +60,9 @@
     <org.jsecurity.version>0.9.0</org.jsecurity.version>
     <javax.transaction.version>1.0.1B</javax.transaction.version>
     <net.oauth.version>20080621</net.oauth.version>
-    <org.gatein.pc.version>2.3.0-GA</org.gatein.pc.version>
+    <org.gatein.pc.version>2.3.2-GA</org.gatein.pc.version>
     <commons-lang.version>2.6</commons-lang.version>
-    <org.gatein.shindig.version>1.0-r790473-Patch05</org.gatein.shindig.version>
+    <org.gatein.shindig.version>2.0.2-CP01</org.gatein.shindig.version>
     <javax.mail.version>1.4.4</javax.mail.version>
     <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
     <javax.portlet.portlet-api.version>2.0</javax.portlet.portlet-api.version>

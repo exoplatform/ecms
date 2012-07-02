@@ -1,12 +1,6 @@
 <% 
-  import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;
-  
-  def rcontext = _ctx.getRequestContext() ;
-  JavascriptManager jsmanager = rcontext.getJavascriptManager();
-  
-  jsmanager.importJavascript('eXo.webui.UIVerticalSlideTabs');
   
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;    

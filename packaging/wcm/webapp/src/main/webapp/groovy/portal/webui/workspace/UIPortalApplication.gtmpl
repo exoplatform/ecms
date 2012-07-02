@@ -2,8 +2,8 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
-  import org.exoplatform.portal.application.PortalRequestContext ;
   import org.exoplatform.webui.core.UIComponent;
+  import org.exoplatform.portal.application.PortalRequestContext ;
   import java.util.Iterator;
   import org.exoplatform.portal.config.model.PortalProperties ;
   import org.exoplatform.services.seo.SEOService;
@@ -11,8 +11,8 @@
   import org.exoplatform.container.ExoContainer;
   import org.exoplatform.container.ExoContainerContext;
   import java.util.Enumeration;
-  import java.util.Map; 
-   import java.util.ArrayList;  
+  import java.util.Map;
+  import java.util.ArrayList;  
   import org.exoplatform.portal.mop.user.UserNode;
   import org.exoplatform.portal.webui.portal.UIPortal;
   import org.exoplatform.portal.webui.util.Util;
@@ -24,8 +24,13 @@
   String skin = uicomponent.getSkin();
   def portalSkins = uicomponent.getPortalSkins() ;
   def portletSkins = uicomponent.getPortletSkins() ;
-  def portalJScripts = uicomponent.getPortalJScripts();
-  def scriptsPaths = uicomponent.getJavascriptURLs();
+  def scriptsURLs = rcontext.getAttribute("eXo.portal.scriptsURLs");
+  def headerScripts = new LinkedList();	
+  for (path in scriptsURLs.keySet()) {
+    if (!scriptsURLs.get(path)) {
+      headerScripts.add(path);
+    }
+  }
   def lang = uicomponent.getLocale().getLanguage();
   def title = rcontext.getTitle();
   def metaInformation = rcontext.getMetaInformation();
@@ -108,65 +113,39 @@
     %>
       <link id="${portletSkin.id}" rel="stylesheet" type="text/css" href= "$url" />
     <%}%>
-
-	<%if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) {
-		for(path in scriptsPaths) { %>
-		  <script type="text/javascript" src="<%=path%>"></script>
-		<%}%>
-		<script type="text/javascript">
-		  eXo.developing = true ;
-		</script>
-			
-	<%} else {%>
-		<script type="text/javascript" src="<%=docBase%>/javascript/merged.js"></script>
-	<%
-		for(path in scriptsPaths) {
-			if(path.startsWith("http") || path.startsWith("https")) {%>
-			  <script type="text/javascript" src="<%=path%>"></script>
-			<%}
-		}
-	}%>
-    <script type="text/javascript">
-      eXo.env.portal.context = "<%=docBase%>" ;
-      <%if(rcontext.getAccessPath() == 0) {%>
-          eXo.env.portal.accessMode = "public" ;
-      <%} else {%>
-          eXo.env.portal.accessMode = "private" ;
-      <%}%>
-      eXo.env.portal.portalName = "<%=rcontext.getPortalOwner()%>" ;
-      eXo.env.server.context = "<%=docBase%>" ;
-      eXo.env.server.portalBaseURL = "<%=rcontext.getRequest().getRequestURI()%>" ;
-      eXo.env.server.portalURLTemplate = "<%=uicomponent.getPortalURLTemplate()%>" ;
-      eXo.env.client.skin = "$skin" ;
-      <% 
-        UIPortal portal = uicomponent.findFirstComponentOfType(UIPortal.class);
-        String sessionAliveLevel = (portal == null ? null : portal.sessionAlive) ;
-        boolean canKeepState = sessionAliveLevel == null ? false : !sessionAliveLevel.equals(PortalProperties.SESSION_NEVER) ;
-      %>
-      
-      eXo.portal.portalMode = <%= uicomponent.getModeState() %>;
-      
-      eXo.session.level = "$sessionAliveLevel";
-      eXo.session.canKeepState = $canKeepState;
-      eXo.session.isOpen = $uicomponent.isSessionOpen ;
-      eXo.session.itvTime = ${((PortalRequestContext)rcontext).getRequest().getSession().getMaxInactiveInterval()} ;
-    </script>
-    <script type="text/javascript" src="/eXoResources/javascript/eXo/i18n/I18NMessage.js"></script>
-    <script type="text/javascript" src="/eXoResources/javascript/eXo/i18n/MessageResource_<%=lang%>.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/ckeditor/ckeditor.js"></script>
-
-    <% 
-      if (portalJScripts != null)
-      {
-        for (jScript in portalJScripts) {
-        %>
-          <script type="text/javascript" src="<%=jScript.getPath()%>"></script>
-        <%
-        }
-     }    
-     def headerElements = rcontext.getExtraMarkupHeadersAsStrings();
-     if (headerElements != null) 
-     {
+    <% for (url in headerScripts) { %>
+       <script type="text/javascript" src="<%= url %>"></script>
+    <% } %>
+   <script type="text/javascript">     
+   <% if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) { %>
+           eXo.developing = true ;
+   <% } %>
+   <% for (url in headerScripts) { %>
+         eXo.core.AsyncLoader.addLoadedJS('$url');
+   <% } %> 
+     eXo.env.portal.context = "<%=docBase%>" ;
+     <%
+      if(rcontext.getAccessPath() == 0) {%>eXo.env.portal.accessMode = "public" ;<%}
+     else {%>eXo.env.portal.accessMode = "private" ;<%}%>
+     eXo.env.portal.portalName = "<%=rcontext.getPortalOwner()%>" ;
+     eXo.env.server.context = "<%=docBase%>" ;
+     eXo.env.server.portalBaseURL = "<%=rcontext.getRequest().getRequestURI()%>" ;
+     eXo.env.server.portalURLTemplate = "<%=uicomponent.getPortalURLTemplate()%>" ;
+     eXo.env.client.skin = "$skin" ;
+     <% 
+        boolean canKeepState = uicomponent.canKeepState();
+        boolean isSessionOpen = uicomponent.isSessionOpen();
+     %>
+     eXo.portal.portalMode = <%= uicomponent.getModeState() %>;
+     eXo.session.canKeepState = $canKeepState;
+     eXo.session.isOpen = $isSessionOpen;
+     eXo.session.itvTime = ${((PortalRequestContext)rcontext).getRequest().getSession().getMaxInactiveInterval()} ;
+     <% if(canKeepState && isSessionOpen) { %> eXo.session.itvInit() ;<% } %>
+   </script>
+  <%
+    def headerElements = rcontext.getExtraMarkupHeadersAsStrings();
+    if (headerElements != null) 
+    {
        for (element in headerElements)
        { %>
         <%=element%>  

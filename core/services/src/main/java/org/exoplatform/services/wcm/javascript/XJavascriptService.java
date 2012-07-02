@@ -43,7 +43,7 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.javascript.Javascript;
-import org.exoplatform.web.application.javascript.Javascript.PortalJScript;
+//import org.exoplatform.web.application.javascript.Javascript.PortalJScript;
 import org.exoplatform.web.application.javascript.JavascriptConfigService;
 import org.picocontainer.Startable;
 
@@ -181,13 +181,13 @@ public class XJavascriptService implements Startable {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
 
     String moduleName = MODULE_NAME + '.' + portalNode.getName();
-    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
-                                            javascriptPath);
+//    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
+//                                            javascriptPath);
     if (!loadedJSModule.contains(moduleName)) {
       loadedJSModule.add(moduleName);
-      jsConfigService.addPortalJScript(
-        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(),
-                          10, portalNode.getName()));
+//      jsConfigService.addPortalJScript(
+//        new PortalJScript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(),
+//                          10, portalNode.getName()));
     }
   }
 
@@ -199,13 +199,13 @@ public class XJavascriptService implements Startable {
   private void addSharedPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
     String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
     String moduleName = MODULE_NAME + '.' + portalNode.getName();
-    jsConfigService.invalidateMergedCommonJScripts();
-    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
-                                            javascriptPath);
+//    jsConfigService.invalidateMergedCommonJScripts();
+//    jsConfigService.invalidateCachedJScript("/" + servletContext.getServletContextName() +
+//                                            javascriptPath);
     if (!loadedSharedJSModule.contains(moduleName)) {
       loadedSharedJSModule.add(moduleName);
-      jsConfigService.addCommonJScript(
-         new Javascript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 10));
+//      jsConfigService.addCommonJScript(
+//         new Javascript(moduleName, javascriptPath,"/" + servletContext.getServletContextName(), 10));
     }
   }
 

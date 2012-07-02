@@ -21,10 +21,7 @@
   def resultList = uicomponent.getCurrentList();
   if(resultList == null) return;
   long searchTime = uicomponent.getSearchTime()/1000;
-  int resultSize = uicomponent.getUIPageIterator().getAvailable();
-  def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
+  int resultSize = uicomponent.getUIPageIterator().getAvailable();  
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
 %>
 <div class="UISearchResult" id="$uicomponent.id">

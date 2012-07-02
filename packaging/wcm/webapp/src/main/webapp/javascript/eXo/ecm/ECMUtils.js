@@ -1,4 +1,4 @@
- function ECMUtils() {
+function ECMUtils() {
 	var Self = this;
 	var showSideBar = true;
 	var editFullScreen = false;
@@ -1380,7 +1380,7 @@ ECMUtils.prototype.onDbClickOnTreeExplorer = function(){
     }
   }
 };
-
+ 
 ECMUtils.prototype.displayFullAlternativeText = function(displayDiv) {
   if (displayDiv) {
     var parentDiv = eXo.core.DOMUtil.findAncestorByTagName(displayDiv, "div");

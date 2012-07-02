@@ -12,7 +12,6 @@
   def jsManager = rcontext.getJavascriptManager();
   def advancedBlockDisplay = "block";
   def advancedLinkDispplay = "none";
-  jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
   jsManager.addJavascript("eXo.ecm.CLV.checkModeViewer();");
   jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");
   def showFolderContexttual = "";

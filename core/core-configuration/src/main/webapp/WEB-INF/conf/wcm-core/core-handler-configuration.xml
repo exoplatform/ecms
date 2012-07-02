@@ -42,6 +42,14 @@
         <type>org.exoplatform.services.handler.RobotsHandler</type>
      </component-plugin>    
   </external-component-plugins>
-
+  
+  <external-component-plugins>
+     <target-component>org.exoplatform.web.WebAppController</target-component>
+     <component-plugin>
+        <name>SiteJavascriptHandler</name>
+        <set-method>register</set-method>
+        <type>org.exoplatform.services.handler.SiteJavascriptHandler</type>
+     </component-plugin>    
+  </external-component-plugins>
 
 </configuration>

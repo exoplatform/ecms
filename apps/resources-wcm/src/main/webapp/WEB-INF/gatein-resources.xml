@@ -22,8 +22,8 @@
 
 <gatein-resources
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2 http://www.gatein.org/xml/ns/gatein_resources_1_2"
-  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
+  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1"
+  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
 
 
   <!-- WCMSkin -->
@@ -41,34 +41,105 @@
     <css-path>/skin/DefaultSkin/DMSStylesheet.css</css-path>
     <css-priority>1</css-priority>
   </portal-skin>
+  
+   <!-- Bootstrap Javascripts -->
+   <module>
+      <name>ecm-bootstrap</name>
+      <script>
+         <name>ECM</name>
+         <path>/javascript/eXo/wcm/ECM.js</path>
+      </script>
+      <depends>
+        <scripts>bootstrap</scripts>
+      </depends>
+   </module>
+   
+   <module>
+      <name>content-selector</name>
+      <script>
+         <name>eXo.ecm.ContentSelector</name>
+         <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
+      </script>
+      <depends>
+        <module>wcm-utils</module>
+      </depends>      
+   </module>
+   
+   <module>
+      <name>wcm-utils</name>
+      <script>
+         <name>eXo.ecm.WCMUtils</name>
+         <path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</path>
+      </script>
+      <script>
+         <name>eXo.ecm.CKEditorUtil</name>
+         <path>/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js</path>
+      </script>
+      <script>
+         <name>eXo.ecm.SELocalization</name>
+         <path>/javascript/eXo/wcm/backoffice/public/Components.js</path>
+      </script>      
+      <depends>
+        <module>ecm-bootstrap</module>
+      </depends>
+      <depends>
+        <module>base</module>
+      </depends>
+   </module>
+   <module>
+      <name>wcm-webui-ext</name>
+      <script>
+         <name>eXo.ecm.CloseEvents</name>
+         <path>/javascript/eXo/wcm/backoffice/private/CloseEvents.js</path>
+      </script>
+      <depends>
+        <module>webui</module>
+      </depends>      
+   </module>
+   
+   <module>
+      <name>clv</name>
+      <script>
+         <name>eXo.ecm.CLV</name>
+         <path>/javascript/eXo/wcm/frontoffice/private/CLV.js</path>
+      </script>
+      <depends>
+        <module>ecm-bootstrap</module>
+      </depends>      
+   </module>
+   
+   <module>
+      <name>quick-edit</name>
+      <script>
+         <name>eXo.ecm.InlineEditing</name>
+         <path>/javascript/eXo/wcm/frontoffice/private/InlineEditing.js</path>
+      </script>
+      <depends>
+        <module>ecm-bootstrap</module>
+      </depends>
+   </module>
+   
+   <module>
+      <name>ui-vertical-slide-tab</name>
+      <script>
+         <name>eXo.webui.UIVerticalSlideTabs</name>
+         <path>/javascript/eXo/wcm/backoffice/private/UIVerticalSlideTabs.js</path>
+      </script>
+      <depends>
+        <module>base</module>
+      </depends>            
+   </module>
 
-  <javascript>
-    <param>
-      <js-module>eXo.ecm.WCMUtils</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</js-path>
-      <js-priority>50</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.webui.UIForm2</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/WCMPatch.js</js-path>
-    </param>
-    <param>
-      <js-module>eXo.ecm.FrontPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/CLV.js</js-path>
-      <js-priority>60</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.ecm.FrontPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/FCKEditor.js</js-path>
-      <js-priority>65</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.ecm.FrontPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js</js-path>
-      <js-priority>65</js-priority>
-    </param>
-
-  </javascript>
-
+   <module>
+      <name>ckeditor-loader</name>
+      <script>
+         <name>exo.load.ckeditor</name>
+         <path>/eXoLoader.js</path>
+      </script>
+      <depends>
+        <scripts>bootstrap</scripts>
+      </depends>
+   </module>
+   
 </gatein-resources>
 

@@ -22,8 +22,8 @@
 
 <gatein-resources 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2 http://www.gatein.org/xml/ns/gatein_resources_1_2" 
-  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
+  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1" 
+  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
 
   <!-- ECMAdminPortlet skin -->
   <portlet-skin>
@@ -32,4 +32,25 @@
     <skin-name>Default</skin-name>
     <css-path>/skin/webui/component/admin/DefaultStylesheet.css</css-path>
   </portlet-skin>
+  
+  <portlet>
+    <name>ECMAdminPortlet</name>
+    <module>
+      <depends>
+        <module>webui</module>
+      </depends>
+      <depends>
+        <module>webui-ext</module>
+      </depends>
+      <depends>
+        <module>ui-vertical-slide-tab</module>
+      </depends>       
+      <depends>
+        <module>ecm-utils</module>
+      </depends>
+      <depends>
+        <module>wcm-utils</module>
+      </depends>
+    </module>
+  </portlet>  
 </gatein-resources>

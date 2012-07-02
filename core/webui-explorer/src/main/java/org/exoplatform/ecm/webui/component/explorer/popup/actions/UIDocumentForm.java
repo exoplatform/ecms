@@ -239,10 +239,58 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().importJavascript("eXo.ecm.UIDocumentForm", "/ecmexplorer/javascript/");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AutoFocus");
     super.processRender(context);
+    Writer writer = context.getWriter();
+    writer.append("<script type=\"text/javascript\">");
+    writer.append("eXo.loadJS('/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js', function() {");
+    writer.append("b_changed = false;");
+    writer.append("/**");
+    writer.append(" * Catch when some content has changed in the form");
+    writer.append(" **/");
+    writer.append("if (navigator.userAgent.indexOf(\"MSIE\") >= 0) {");
+    writer.append("  changeElements(\"UIDocumentForm\");");
+    writer.append("  changeElements(\"UITask\");");
+    writer.append("} else {");
+    writer.append("if (document.getElementById(\"UIDocumentForm\")) {");
+    writer.append("  document.getElementById(\"UIDocumentForm\").setAttribute(\"onchange\", \"changed()\");");
+    writer.append("}");
+    writer.append("if (document.getElementById(\"UITask\")) {");
+    writer.append("  document.getElementById(\"UITask\").setAttribute(\"onchange\", \"changed()\");");
+    writer.append("}");
+    writer.append("}");
+    
+    writer.append("/**");
+    writer.append("* Catch any url changes in the browser");
+    writer.append("**/");
+    writer.append("window.onbeforeunload = closeIt;");  
+    
+    writer.append("/**");
+    writer.append("* Update each textarea when you type inside CKEditor");
+    writer.append("* Inform the page that some content has changed");
+    writer.append("**/");
+    writer.append("try {");
+    writer.append("if (CKEDITOR && typeof CKEDITOR == \"object\") {");
+    writer.append("for ( var name in CKEDITOR.instances ) {");
+    writer.append("var oEditor ;");
+    writer.append("try {");
+    writer.append("oEditor = CKEDITOR.instances[name] ;");
+    writer.append("/**");
+    writer.append("* inform the content has changed");
+    writer.append("* update the textarea with last modifiedcontent");
+    writer.append("*/");
+    writer.append("oEditor.on( 'key', function() {");
+    writer.append("b_changed = true;");
+    writer.append("});");
+    writer.append("} catch(e) {");
+    writer.append("continue ;");
+    writer.append("}");
+    writer.append("}");
+    writer.append("}");
+    writer.append("} catch(e) {}");  
+    writer.append("});");
+    writer.append("</script>");    
   }
 
   public void processRenderAction() throws Exception {

@@ -44,8 +44,6 @@
   UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
   def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UITimelineView','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');

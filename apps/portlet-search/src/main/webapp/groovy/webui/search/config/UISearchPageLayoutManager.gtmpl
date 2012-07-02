@@ -3,13 +3,6 @@
 	import org.exoplatform.webui.application.portlet.PortletRequestContext;
 	import org.exoplatform.wcm.webui.Utils;
 	
-	def rcontext = _ctx.getRequestContext() ;
-	String portletId = Utils.getRealPortletId(rcontext);
-	def quickEditingBlockId = portletId + "-QuickEditingBlock";
-	def jsManager = rcontext.getJavascriptManager();
-	//jsManager.importJavascript('eXo.wcm.frontoffice.private.QuickEdit', '/eXoWCMResources/javascript/') ;
-	//jsManager.addOnLoadJavascript('eXo.ecm.QuickEdit.removeQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '")');
-	String fieldName;
 %>
 <div class="UIForm $uicomponent.id">
   <%uiform.begin()%>

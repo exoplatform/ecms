@@ -3,7 +3,6 @@
   import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea ;
   import org.exoplatform.webui.core.UIPopupContainer;
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.fixHeight('UIECMAdminPortlet') ;") ;
   def userAgent = uicomponent.getUserAgent();
   if(userAgent != null && userAgent.contains("MSIE 6.0")) {

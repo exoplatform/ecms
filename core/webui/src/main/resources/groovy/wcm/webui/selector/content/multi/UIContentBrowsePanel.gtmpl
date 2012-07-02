@@ -5,8 +5,6 @@
 	def jsManager = rcontext.getJavascriptManager();
   def itemPaths = uicomponent.getItemPaths();
   def itemTargetPath = uicomponent.getItemTargetPath();
-	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
-	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
 	if (uicomponent instanceof UIContentBrowsePanelMulti) {
 		def uiBrowserMulti = (UIContentBrowsePanelMulti)uicomponent;
 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi', '" +

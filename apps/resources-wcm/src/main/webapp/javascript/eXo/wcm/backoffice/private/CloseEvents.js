@@ -37,7 +37,7 @@ function ajaxGet(url, callback) {
  * - manage changes popup
  * - manage CKeditor update in textareas
  **/
-UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
+eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
   if(action.toLowerCase() == "changetype" || action.toLowerCase() == "close" || action.toLowerCase() == "back") {
   	if (eXo.ecm.ECMUtils) {
       eXo.ecm.ECMUtils.editFullScreen = false;
@@ -101,7 +101,7 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
     form.submit();
   }
 } ;
-eXo.webui.UIForm = new UIForm();
+
 /**
  * END UPDATE FORM
  **/
@@ -111,7 +111,7 @@ eXo.webui.UIForm = new UIForm();
  * Calls ajaxPost of PortalHttpRequest
  * Note: ie bug  you cannot have more than one button tag
  */
-UIForm.prototype.submitEvent = function(formId, action, params) {
+eXo.webui.UIForm.submitEvent = function(formId, action, params) {
   var form = this.getFormElemt(formId) ;
 	 try {
 	  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
@@ -167,27 +167,6 @@ function closeIt(e) {
     return 'The changes you made will be lost if you navigate away from this page.';
   }
 }
-
-/**
- * Catch any url changes in the browser
- **/
-window.onbeforeunload = closeIt;
-
-/**
- * Catch when some content has changed in the form
- **/
-if (navigator.userAgent.indexOf("MSIE") >= 0) {
-  changeElements("UIDocumentForm");
-  changeElements("UITask");
-} else {
-  if (document.getElementById("UIDocumentForm")) {
-    document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
-  }
-	 
-  if (document.getElementById("UITask")) {
-    document.getElementById("UITask").setAttribute("onchange", "changed()");
-  }
-}
  
 function changeElements(divId) {
   var UIDocForm = document.getElementById(divId);
@@ -210,33 +189,5 @@ function changeElements(divId) {
     textareaTags[i].attachEvent("onchange", new Function ("changed();"));
   }
 }
-
-
-/**
- * Update each textarea when you type inside CKEditor
- * Inform the page that some content has changed
- **/
- try {
-  if (CKEDITOR && typeof CKEDITOR == "object") {
-    for ( var name in CKEDITOR.instances ) {
-      var oEditor ;
-      try {
-        oEditor = CKEDITOR.instances[name] ;
-        /**
-         * inform the content has changed
-         * update the textarea with last modifiedcontent
-         */
-		oEditor.on( 'key', function() {
-		  b_changed = true;
-        });
-
-
-
-      } catch(e) {
-        continue ;
-      }
-    }
-  }
- } catch(e) {}
 
 

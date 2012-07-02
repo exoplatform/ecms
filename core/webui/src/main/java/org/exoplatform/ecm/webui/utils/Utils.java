@@ -857,11 +857,13 @@ public class Utils {
     }
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("  //<![CDATA[ \n");
+    buffer.append("    eXo.loadJS('/eXoStaticResources/ckeditor/ckeditor.js', function() {");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
         contentsCss + ", ignoreEmptyParagraph:true});\n");
     buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
     buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");
+    buffer.append("       });");
     buffer.append("       });");
     buffer.append("  //]]> \n");
     buffer.append("</script>\n");
