@@ -10,7 +10,8 @@
       <sitemap>Sitemap: </sitemap>
       <sitemapvisible>Visible in sitemap</sitemapvisible>
       <priority>Priority: </priority>
-      <frequency>Frequency: </frequency>  
+      <frequency>Frequency: </frequency>
+      <select-language>Select a language</select-language>
       <option>
         <Always>Always</Always>
         <Hourly>Hourly</Hourly>
@@ -19,16 +20,6 @@
         <Monthly>Monthly</Monthly>
         <Yearly>Yearly</Yearly>
         <Never>Never</Never>
-      </option>    
-      <option>
-      	<en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
       </option>
     </label>
 	<tip>
@@ -39,8 +30,17 @@
       <Cancel>Cancel</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>	
     </msg>
+    <title>
+    	<seo-delete>Delete</seo-delete>
+    </title>
+	  <help> 
+		  <priority>Valid values range from 0.0 to 1.0.</priority>
+		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
+	  </help>	
   </UISEOForm>
   <UISEOPopupWindow>
   	<title>
@@ -57,4 +57,26 @@
       <Invalid-number>The field Priority is invalid float number.</Invalid-number>
     </msg>
   </FloatNumberValidator>
+  <Locale>
+    <label>
+      <uk>Ukrainian</uk>
+      <it>Italian</it>
+      <vi>Vietnamese</vi>
+      <pt_BR>Portuguese - Brazil</pt_BR>
+      <ko>Korean</ko>
+      <ar>Arabic</ar>
+      <zh_CN>Simplified Chinese</zh_CN>
+      <de>German</de>
+      <ma>Ma</ma>
+      <ne>Nepali</ne>
+      <zh_TW>Traditional Chinese</zh_TW>
+      <fr>French</fr>
+      <en>English</en>
+      <ru>Russian</ru>
+      <es>Spanish</es>
+      <nl>Dutch</nl>
+      <ja>Japanese</ja>
+      <cs>Czech</cs>
+    </label>
+  </Locale>
 </bundle>

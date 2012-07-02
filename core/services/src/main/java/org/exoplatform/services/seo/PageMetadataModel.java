@@ -33,6 +33,8 @@ public class PageMetadataModel {
   private String keywords = null;
  
   private String description = null;
+  
+  private String title = null;
  
   private float priority = -1;
  
@@ -78,6 +80,13 @@ public class PageMetadataModel {
     return keywords; 
   }
   public void setKeywords(String keywords) { this.keywords = keywords; }
+  
+  public String getTitle() { 
+    if(title != null && title.length() > 0)
+      return title.trim();
+    return title; 
+  }
+  public void setTitle(String title) { this.title = title; }
  
   public float getPriority() { return priority; }
   public void setPriority(float priority) { this.priority= priority; }

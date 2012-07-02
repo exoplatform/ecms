@@ -19,18 +19,15 @@
 	def jsManager = rcontext.getJavascriptManager();
 	int top = uicomponent.getWindowTop();
 	int left = uicomponent.getWindowLeft();
-	if(top > -1 && left > -1) {
-		jsManager.require("SHARED/ecm-seo", "ecmseo").
-		addScripts("ecmseo.WCMUIPopupWindow.init('$popupId', $uicomponent.show, $uicomponent.resizable, true, $uicomponent.showMask, $top, $left);");
-	} else {
-	  if(uicomponent.isShow()) {
-	    jsManager.require("SHARED/webui", "webui").
-	    addScripts("webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
-	  } else if (rcontext.useAjax()) {
-      jsManager.require("SHARED/webui", "webui").
-      addScripts("webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
-	  }	
-	}
+	
+	if(uicomponent.isShow()) {
+	  jsManager.require("SHARED/webui", "webui").
+	  addScripts("webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
+	} else if (rcontext.useAjax()) {
+    jsManager.require("SHARED/webui", "webui").
+    addScripts("webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
+	}	
+	
 	String title = rsId;
 	if(component != null)	title = component.getId();
 	

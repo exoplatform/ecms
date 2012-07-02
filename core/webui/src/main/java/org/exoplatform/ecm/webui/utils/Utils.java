@@ -41,6 +41,7 @@ import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
@@ -49,6 +50,7 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -74,6 +76,10 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import java.util.Iterator;
+import org.exoplatform.services.resources.LocaleConfig;
+import org.exoplatform.services.resources.LocaleConfigService;
+import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -1018,5 +1024,29 @@ public class Utils {
     return isMakeVersionable;
   }
 
+  
+  public static List<SelectItemOption<String>> languages() throws Exception {
+    
+    // Get default locale
+    Locale defaultLocale = Locale.getDefault();
+    
+    // set default locale to current user selected language
+    Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
+    
+    LocaleConfigService localService = WCMCoreUtils.getService(LocaleConfigService.class) ;
+    List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
+    Iterator<LocaleConfig> iter = localService.getLocalConfigs().iterator() ;    
+    while (iter.hasNext()) {
+      LocaleConfig localConfig = iter.next() ;
+      Locale locale = localConfig.getLocale();      
+      String lang = locale.getLanguage();
+      String country = locale.getCountry(); 
+      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+      languages.add(new SelectItemOption<String>(localConfig.getLocale().getDisplayLanguage(), lang)) ;
+    }    
+    // Set back to the default locale
+    Locale.setDefault(defaultLocale);    
+    return languages ;
+  }  
 
 }

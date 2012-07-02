@@ -36,7 +36,6 @@ public class FloatNumberValidator implements Validator{
   public void validate(UIFormInput uiInput) throws Exception {
     if (uiInput.getValue()==null || ((String)uiInput.getValue()).length()==0) return;
     WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
-    String priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");
     UIComponent uiComponent = (UIComponent) uiInput ;
     UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;
     String label;
@@ -47,12 +46,11 @@ public class FloatNumberValidator implements Validator{
     }
     label = label.trim();
     String s = (String)uiInput.getValue();
-    if(s.equalsIgnoreCase(priority)) return;
     try {
       Float.parseFloat(s);
     } catch (NumberFormatException ex) {
       Object[] args = {label};
-      throw new MessageException(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", args));
+      throw new MessageException(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", args, ApplicationMessage.WARNING));
     }
   }
 }
