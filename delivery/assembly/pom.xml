@@ -201,6 +201,7 @@
 	<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
 	<dependency><groupId>org.exoplatform.commons</groupId><artifactId>commons-webui-ext</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.0.2-SNAPSHOT-->
     <dependency><groupId>org.chromattic</groupId><artifactId>chromattic.core</artifactId><version>${chromattic.version}</version><type>jar</type></dependency><!-- 1.0.4-->
+    <dependency><groupId>org.chromattic</groupId><artifactId>chromattic.apt</artifactId><version>${chromattic.version}</version><type>jar</type></dependency><!-- 1.0.4-->
     <dependency><groupId>org.exoplatform.kernel</groupId><artifactId>exo.kernel.component.ext.cache.impl.jboss.v3</artifactId><version>${org.exoplatform.kernel.version}</version><type>jar</type></dependency><!-- 2.3.0-CR1-->
     <dependency><groupId>org.hsqldb</groupId><artifactId>hsqldb</artifactId><version>${org.hsqldb.version}</version><type>jar</type></dependency>
     <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-jdk14</artifactId><version>${org.slf4j.version}</version><type>jar</type></dependency>
