@@ -17,6 +17,7 @@
  **************************************************************************/
 package org.exoplatform.ecms.upgrade.plugins;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,7 +146,11 @@ public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
         //Remove "Remove" right permission of all nodes under user folder
         while (nodeIter.hasNext()) {
           NodeImpl nodeImpl = (NodeImpl) nodeIter.next();
-          nodeImpl.removePermission(userName, PermissionType.REMOVE);
+          try {
+            nodeImpl.removePermission(userName, PermissionType.REMOVE);
+          } catch(AccessControlException ace) {
+            continue;
+          }
         }
         userNode.save();
       }
