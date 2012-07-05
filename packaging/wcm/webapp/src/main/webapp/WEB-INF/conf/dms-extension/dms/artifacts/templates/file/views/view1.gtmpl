@@ -47,7 +47,6 @@
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
-  String serverUrl = uicomponent.getWebDAVServerPrefix();
   String portalName = uicomponent.getPortalName() ;
   String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
   
@@ -75,7 +74,7 @@
           def encodedPath = URLEncoder.encode(ndPath, "utf-8");
           encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
           
-          sb.append(serverUrl).append("/").append(restContextName).append("/contents/download/");
+          sb.append("/").append(restContextName).append("/contents/download/");
           sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
           def downloadLink = sb.toString();
         %>

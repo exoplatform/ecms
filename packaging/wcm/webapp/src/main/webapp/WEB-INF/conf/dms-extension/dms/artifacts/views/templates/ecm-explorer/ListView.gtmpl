@@ -187,8 +187,7 @@
 						</div>
 					</div>
 				</div>
-      <%
-      	String serverUrl = uicomponent.getWebDAVServerPrefix();
+      <%      	
       	String portalName = uicomponent.getPortalName() ;
       	RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
       	String repository = rService.getCurrentRepository().getConfiguration().getName();
@@ -230,7 +229,7 @@
 							}
 							// This escape "'" for js
 	    		  	String webDavPath = nodePath.contains("%27") ? nodePath.replaceAll("%27","%2527") : nodePath;
-	    		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
+	    		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
 	    		  	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;	        
 	    		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 	    			  strActs += 		"</a>" ;				  	
@@ -239,7 +238,7 @@
 							def dataTarget = data;
 					  	if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
 					  	if (dataTarget != null) {
-  	    		  	String link = serverUrl + "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
+  	    		  	String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
   	    		  	strActs +=		"<a class=\"MenuItem\" style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
   	    		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
   	    			  strActs += 		"</a>" ;
@@ -260,7 +259,7 @@
 	        }
 	        
 	        if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-	        	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+	        	String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
 		        strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
 		  			strActs +=  "	<div class='ItemIcon GetURL16x16Icon'>" ;
 		  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
