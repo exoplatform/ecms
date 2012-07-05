@@ -26,6 +26,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotWebFolderFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.upload.UIUploadManager;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -57,6 +58,7 @@ public class UploadActionComponent extends UIAbstractManagerComponent {
                                                   new IsNotLockedFilter(),
                                                   new IsCheckedOutFilter(),
                                                   new IsNotTrashHomeNodeFilter(),
+                                                  new IsNotWebFolderFilter(),
                                                   new IsNotInTrashFilter()});
 
   @UIExtensionFilters
