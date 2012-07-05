@@ -24,7 +24,6 @@ import org.exoplatform.ecm.jcr.model.Preference;
 <%
 	def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
 	String componentId = uicomponent.getId();
-    String serverUrl= uicomponent.getWebDAVServerPrefix();
     String portalName = uicomponent.getPortalName();
     String repository = uicomponent.getRepository(); 
     def viewComponentId  = new Date().getTime();

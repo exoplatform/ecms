@@ -144,7 +144,6 @@
 			    <div style="clear: both"><span></span></div>
 				</div>
 	      <%
-	      	String serverUrl = uicomponent.getWebDAVServerPrefix();
 	      	String portalName = uicomponent.getPortalName();
 	      	String repository = uicomponent.getRepository();
 	        for(data in uicomponent.getChildrenList()) {

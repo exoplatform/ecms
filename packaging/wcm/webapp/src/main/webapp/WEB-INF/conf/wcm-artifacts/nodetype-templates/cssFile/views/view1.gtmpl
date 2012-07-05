@@ -69,7 +69,7 @@
     <table align="center" class="ActionContainer">  
       <tr>
         <td align="center">
-          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
             <div class="ButtonLeft">
               <div class="ButtonRight">
                 <div class="ButtonMiddle">
