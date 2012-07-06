@@ -63,7 +63,7 @@
 		  <table class="ActionContainer">  
 		  	<tr>
 		  		<td>
-			      <div onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+			      <div style="float:right;padding: 4px 10px;" onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
 			        <div class="ButtonLeft">
 			          <div class="ButtonRight">
 			            <div class="ButtonMiddle">
@@ -71,16 +71,7 @@
 			            </div>
 			          </div>
 			        </div>
-			      </div>
-			      <div onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle">
-			        <div class="ButtonLeft">
-			          <div class="ButtonRight">
-			            <div class="ButtonMiddle" title="<%=_ctx.appRes("File.view.label.download")%>">
-			              <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
-			            </div>
-			          </div>
-			        </div>
-			      </div>
+			      </div>			      
 		  		</td>
 		  	</tr>          
 		  </table>

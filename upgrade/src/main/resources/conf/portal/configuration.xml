@@ -9,4 +9,8 @@
     <key>org.exoplatform.upgrade.PortletPreferenceMigrationService</key>
     <type>org.exoplatform.upgrade.PortletPreferenceMigrationService</type>
   </component>
+  
+  <component>    
+    <type>org.exoplatform.upgrade.NodeTypeTemplateMigrationService</type>
+  </component>
 </configuration>
