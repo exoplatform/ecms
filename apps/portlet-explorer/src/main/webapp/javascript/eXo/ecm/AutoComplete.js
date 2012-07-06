@@ -2,8 +2,6 @@ function AutoComplete() {
 	var Self = this;
 
 	//set private property;
-	var DOM = eXo.core.DOMUtil;
-
 
 	//--------------------------------------------------------------------------------
 	AutoComplete.prototype.createTags = function(event, clickedElement) {
@@ -19,11 +17,11 @@ function AutoComplete() {
 
 		var event = event || window.event;
 		event.cancelBubble = true; 
-		popupSelector = DOM.findAncestorByClass(clickedElement, "UITaggingForm");
-		showBlock = DOM.findFirstDescendantByClass(popupSelector,"div", "UIFormTextAreaInput");
-		itemList = DOM.findDescendantsByClass(showBlock, "option", "Item");
-		tagNameInput = DOM.findFirstDescendantByClass(popupSelector,"div", "UITagNameInput");
-		inputBox = DOM.findDescendantById(tagNameInput, "names");
+		popupSelector = gj(clickedElement).parents(".UITaggingForm:first")[0];
+		showBlock = gj(popupSelector).find("div.UIFormTextAreaInput:first")[0];
+		itemList = gj(showBlock).find("option.Item");
+		tagNameInput = gj(popupSelector).find("div.UITagNameInput:first")[0];
+		inputBox = gj(tagNameInput).find("#names:first")[0];
 		tags = new Array(itemList.length);
 		for (var i = 0; i < itemList.length; i++) {
 			var item = itemList[i];

@@ -2,4 +2,4 @@
   load ckeditor javascript
 */
 
-eXo.loadJS('/eXoStaticResources/ckeditor/ckeditor.js');
+eXo.loadJS('/eXoWCMResources/ckeditor/ckeditor.js');

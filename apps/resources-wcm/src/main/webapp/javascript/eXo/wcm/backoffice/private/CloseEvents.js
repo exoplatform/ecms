@@ -84,7 +84,7 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
       try {
         oEditor = CKEDITOR.instances[name] ;
         if (oEditor && document.getElementById(name)) {
-            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+            var rendered = gj(document.getElementById(name)).nextAll('span:first')[0].id.indexOf('cke');
             if (rendered == 0) document.getElementById(name).value = oEditor.getData();
         }
       } catch(e) {
@@ -132,7 +132,7 @@ eXo.webui.UIForm.submitEvent = function(formId, action, params) {
 	      try {
 	        oEditor = CKEDITOR.instances[name] ;
 	        if (oEditor && document.getElementById(name)) {
-	            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+	            var rendered = gj(document.getElementById(name)).nextAll('span:first')[0].id.indexOf('cke');
 	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
 	        }
 	      } catch(e) {

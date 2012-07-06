@@ -135,7 +135,7 @@ ZeroClipboard.Client.prototype = {
 	getElementSize: function(obj){
 		var orginalDisplay = obj.style.display ;
 		obj.style.display = "block";
-		var menuItem = eXo.core.DOMUtil.findFirstDescendantByClass(obj,"div","MenuItem");
+		var menuItem = gj(obj).find("div.MenuItem:first")[0];
 		var size = [];
 		size.push(obj.offsetWidth);
 		size.push(obj.offsetHeight);
@@ -260,7 +260,7 @@ ZeroClipboard.Client.prototype = {
                 this.movie.setText( this.clipText );
                 this.movie.setHandCursor( this.handCursorEnabled );
                 var rightClickMenu = document.getElementById("ECMContextMenu");
-                var divMovie = eXo.core.DOMUtil.findAncestorByTagName(this.movie, 'div');
+                var divMovie = gj(this.movie).parents('div:first')[0];
                 var style = divMovie.style;
                 this.movie.width=rightClickMenu.offsetWidth;
                 style.width = '' + this.movie.width + 'px';

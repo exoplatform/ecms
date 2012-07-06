@@ -30,7 +30,6 @@ function WCMUIPopupWindow() {} ;
  */
   
 WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask, top, left) {
-	var DOMUtil = eXo.core.DOMUtil ;
 	this.superClass = eXo.webui.UIPopup ;
 	this.topDelta = 10;
 	this.leftDelta = 10;
@@ -43,11 +42,11 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	if (isShow) {
 		popup.style.display = "block";
 	}
-	var contentBlock = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupContent');
-	if(contentBlock && (eXo.core.Browser.getBrowserHeight() - 100 < contentBlock.offsetHeight)) {
-		contentBlock.style.height = (eXo.core.Browser.getBrowserHeight() - 100) + "px";
+	var contentBlock = gj(popup).find('div.PopupContent:first')[0];
+	if(contentBlock && (gj(window).height() - 100 < contentBlock.offsetHeight)) {
+		contentBlock.style.height = (gj(window).height() - 100) + "px";
 	}
-	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'span' ,'PopupTitle') ;
+	var popupBar = gj(popup).find('span.PopupTitle:first')[0];
 
 	popupBar.onmousedown = this.initDND;
 	popupBar.onkeydown = this.initDND;
@@ -58,7 +57,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	} 
 	
 	if(isResizable) {
-		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "span", "ResizeButton");
+		var resizeBtn = gj(popup).find("span.ResizeButton:first")[0];
 		resizeBtn.style.display = 'block';
 		resizeBtn.onmousedown = this.startResizeEvt;
 		resizeBtn.onkeydown = this.startResizeEvt;
@@ -66,7 +65,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	
 	popup.style.visibility = "hidden" ;
 	if(isShow == true) {
-		var iframes = DOMUtil.findDescendantsByTagName(popup, "iframe") ;
+		var iframes = gj(popup).find("iframe");
 		if(iframes.length > 0) {
 			setTimeout("eXo.webui.WCMUIPopupWindow.show('" + popupId + "'," + isShowMask + ")", 500, top, left) ;
 		} else {
@@ -83,7 +82,7 @@ WCMUIPopupWindow.prototype.showMask = function(popup, isShowPopup) {
 	}
 	if(isShowPopup) {
 		//Modal if popup is portal component
-		if (eXo.core.DOMUtil.findAncestorByClass(popup, "PORTLET-FRAGMENT") == null) {
+		if (gj(popup).parents(".PORTLET-FRAGMENT:first")[0] == null) {
 			if(!mask) eXo.core.UIMaskLayer.createMask(popup.parentNode, popup, 1) ;
 		} else {
 			//If popup is portlet's component, modal with just its parent
@@ -104,20 +103,19 @@ WCMUIPopupWindow.prototype.showMask = function(popup, isShowPopup) {
  * sets the position of the popup on the page (top and left properties)
  */
 WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top, left) {
-	var DOMUtil = eXo.core.DOMUtil ;
 	if(typeof(popup) == "string") popup = document.getElementById(popup) ;
 	var portalApp = document.getElementById("UIPortalApplication") ;
-	var maskLayer = DOMUtil.findFirstDescendantByClass(portalApp, "div", "UIMaskWorkspace") ;
+	var maskLayer = gj(portalApp).find("div.UIMaskWorkspace:first")[0];
 	var zIndex = 0 ;
 	var currZIndex = 0 ;
 	if (maskLayer != null) {
-		currZIndex = DOMUtil.getStyle(maskLayer, "zIndex") ;
+		currZIndex = gj(maskLayer).css("zIndex");
 		if (!isNaN(currZIndex) && currZIndex > zIndex) zIndex = currZIndex ;
 	}
-	var popupWindows = DOMUtil.findDescendantsByClass(portalApp, "div", "WCMUIPopupWindow") ;
+	var popupWindows = gj(portalApp).find("div.WCMUIPopupWindow") ;
 	var len = popupWindows.length ;
 	for (var i = 0 ; i < len ; i++) {
-		currZIndex = DOMUtil.getStyle(popupWindows[i], "zIndex") ;
+		currZIndex = gj(popupWindows[i]).css("zIndex") ;
 		if (!isNaN(currZIndex) && currZIndex > zIndex) zIndex = currZIndex ;
 	}
 	if (zIndex == 0) zIndex = 2000 ;
@@ -150,15 +148,15 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
 		else	scrollY = document.body.scrollTop;
 		//reference
 		if(offsetParent) {
-			var middleWindow = (eXo.core.DOMUtil.hasClass(offsetParent, "WCMUIPopupWindow") || eXo.core.DOMUtil.hasClass(offsetParent, "UIWindow"));
+			var middleWindow = (gj(offsetParent).hasClass("WCMUIPopupWindow") || gj(offsetParent).hasClass("UIWindow"));
 			if (middleWindow) {			
 				popup.style.top = Math.ceil((offsetParent.offsetHeight - popup.offsetHeight) / 2) + "px" ;
 			} 
 			if (middleBrowser || !middleWindow) {
-				popup.style.top = Math.ceil((eXo.core.Browser.getBrowserHeight() - popup.offsetHeight ) / 2) + scrollY + "px";
+				popup.style.top = Math.ceil((gj(window).height() - popup.offsetHeight ) / 2) + scrollY + "px";
 			}
 			//Todo: set popup of UIPopup always display in the center browsers in case UIMaskWorkspace
-			if(eXo.core.DOMUtil.hasClass(offsetParent, "UIMaskWorkspace")) {
+			if(gj(offsetParent).hasClass("UIMaskWorkspace")) {
 				//if(eXo.core.Browser.browserType=='ie') offsetParent.style.position = "relative";
 				popup.style.top = Math.ceil((offsetParent.offsetHeight - popup.offsetHeight) / 2) + "px" ;
 			}
@@ -173,7 +171,7 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
 			else popup.style.right = Math.ceil((offsetParent.offsetWidth - popup.offsetWidth) / 2) + "px" ;
 		
 		}
-		if (eXo.core.Browser.findPosY(popup) < 0) popup.style.top = scrollY + "px" ;
+		if (gj(popup).offset().top < 0) popup.style.top = scrollY + "px" ;
   }
   popup.style.visibility = "visible" ;
 } ;
@@ -181,12 +179,11 @@ WCMUIPopupWindow.prototype.show = function(popup, isShowMask, middleBrowser, top
  * @param {Object} evt
  */
 WCMUIPopupWindow.prototype.increasezIndex = function(popup) {
-  var DOMUtil = eXo.core.DOMUtil ;
 	if(typeof(popup) == "string") popup = document.getElementById(popup) ;
 	var portalApp = document.getElementById("UIPortalApplication") ;
-  var uiLogin = DOMUtil.findFirstDescendantByClass(portalApp, "div", "UILoginForm"); 
+  var uiLogin = gj(portalApp).find("div.UILoginForm:first")[0]; 
   if(uiLogin) {
-    var curMaskzIndex = parseInt(DOMUtil.getStyle(document.getElementById('UIMaskWorkspace'), "zIndex"));
+    var curMaskzIndex = parseInt(gj(document.getElementById('UIMaskWorkspace')).css("zIndex"));
     popup.style.zIndex = ++curMaskzIndex +"";
   }
 }
@@ -195,7 +192,7 @@ WCMUIPopupWindow.prototype.increasezIndex = function(popup) {
  * Hides (display: none) the popup window when the close button is clicked
  */
 WCMUIPopupWindow.prototype.closePopupEvt = function(evt) {
-	eXo.core.DOMUtil.findAncestorByClass(this, "UIDragObject").style.display = "none" ;
+	gj(this).parents(".UIDragObject:first")[0].style.display = "none" ;
 }
 /**
  * Called when the window starts being resized
@@ -220,7 +217,7 @@ WCMUIPopupWindow.prototype.startResizeEvt = function(evt) {
   } 
 
 
-  var targetPopup = eXo.core.DOMUtil.findAncestorByClass(this, "UIPopupWindow");
+  var targetPopup = gj(this).parents(".UIPopupWindow:first")[0];
   eXo.webui.WCMUIPopupWindow.resizedPopup = targetPopup;
   eXo.webui.WCMUIPopupWindow.backupPointerY = eXo.core.Browser.findMouseRelativeY(targetPopup, evt) ;     
   
@@ -247,7 +244,7 @@ var POPUP_WINDOW_BOTTOM_HEIGHT=50;
  */
 WCMUIPopupWindow.prototype.resize = function(evt) {
   var targetPopup = eXo.webui.WCMUIPopupWindow.resizedPopup ;
-  var content = eXo.core.DOMUtil.findFirstDescendantByClass(targetPopup, "div", "PopupContent") ;
+  var content = gj(targetPopup).find("div.PopupContent:first")[0];
   var isRTL = eXo.core.I18n.isRT();
   var pointerX = eXo.core.Browser.findMouseRelativeX(targetPopup, evt, isRTL) ;
   var pointerY = eXo.core.Browser.findMouseRelativeY(targetPopup, evt) ;
@@ -284,7 +281,7 @@ WCMUIPopupWindow.prototype.endResizeEvt = function(evt) {
   eXo.webui.WCMUIPopupWindow.backupEvent = null;  
   // Added by Philippe
   // inits all the scroll managers, in case there is one in the popup that needs to be recalculated
-  eXo.portal.UIPortalControl.initAllManagers();
+  //eXo.portal.UIPortalControl.initAllManagers();
   // other solutions :
   // - add a callback property that points to the init function of the concerned scroll manager. call it here
   // - add a boolean to each scroll manager that specifies if it's in a popup. re init only those that have this property true
@@ -298,15 +295,14 @@ WCMUIPopupWindow.prototype.endResizeEvt = function(evt) {
  */
 WCMUIPopupWindow.prototype.initDND = function(evt) {
   var DragDrop = eXo.core.DragDrop ;
-  var DOMUtil = eXo.core.DOMUtil ;
 
 	DragDrop.initCallback = function (dndEvent) {
 		var dragObject = dndEvent.dragObject ;
-		dragObject.uiWindowContent = DOMUtil.findFirstDescendantByClass(dragObject, "div", "PopupContent") ;
+		dragObject.uiWindowContent = gj(dragObject).find("div.PopupContent:first")[0];
 		if(!dragObject.uiWindowContent) return;
 		if(eXo.core.Browser.browserType == "mozilla") {
 			dragObject.uiWindowContent.style.overflow = "hidden" ;
-			var elements = eXo.core.DOMUtil.findDescendantsByClass(dragObject.uiWindowContent,  "div" ,"PopupMessageBox") ;
+			var elements = gj(dragObject.uiWindowContent).find("div.PopupMessageBox");
   		for(var i = 0; i < elements.length; i++) {
      	  elements[i].style.overflow  = "hidden" ;
 			}
@@ -320,7 +316,7 @@ WCMUIPopupWindow.prototype.initDND = function(evt) {
   	var dragObject = dndEvent.dragObject ;
 		if(eXo.core.Browser.browserType == "mozilla" && dragObject.uiWindowContent) {
 			dragObject.uiWindowContent.style.overflow = "auto" ;
-   		var elements = eXo.core.DOMUtil.findDescendantsByClass(dragObject.uiWindowContent,  "div" ,"PopupMessageBox") ;
+   		var elements = gj(dragObject.uiWindowContent).find("div.PopupMessageBox");
   		for(var i = 0; i < elements.length; i++) {
      	  elements[i].style.overflow  = "auto" ;
 			}
@@ -328,14 +324,14 @@ WCMUIPopupWindow.prototype.initDND = function(evt) {
   	
   	var offsetParent = dragObject.offsetParent ;
   	if (offsetParent) {
-  		if (eXo.core.Browser.findPosY(dragObject) < 0)  dragObject.style.top = (0 - offsetParent.offsetTop) + "px" ;
+  		if (gj(dragObject).offset().top < 0)  dragObject.style.top = (0 - offsetParent.offsetTop) + "px" ;
   	} else {
   		dragObject.style.top = "0px" ;
   	}
   }
   var clickBlock = this ;
-  var dragBlock = eXo.core.DOMUtil.findAncestorByClass(this, "UIDragObject") ;
-  DragDrop.init(null, clickBlock, dragBlock, evt) ;
+  var dragBlock = gj(this).parents(".UIDragObject:first")[0];
+  DragDrop.init(clickBlock, dragBlock) ;
 } ;
 
 eXo.webui.WCMUIPopupWindow = new WCMUIPopupWindow();

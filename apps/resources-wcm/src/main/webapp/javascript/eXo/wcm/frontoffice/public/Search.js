@@ -2,7 +2,7 @@ function SearchPortlet() {
 }
 
 SearchPortlet.prototype.showObject = function(obj) {
-	var element = eXo.core.DOMUtil.findNextElementByTagName(obj, "div");
+	var element = gj(obj).nextAll("div:first")[0];
 	if (!element.style.display || element.style.display != 'block') {
 		element.style.display = 'block';
 	} else {
@@ -32,7 +32,7 @@ SearchPortlet.prototype.quickSearchOnEnter = function(event, resultPageURI) {
 	var keyNum = eXo.ecm.SearchPortlet.getKeynum(event);
 	if (keyNum == 13) {
 		var searchBox = document.getElementById("siteSearchBox");
-		var keyWordInput = eXo.core.DOMUtil.findFirstDescendantByClass(searchBox, "input", "keyword");
+		var keyWordInput = gj(searchBox).find("input.keyword:first")[0];
 		var keyword = encodeURI(keyWordInput.value);
 		/*
 		Filter user input on client
@@ -57,16 +57,14 @@ SearchPortlet.prototype.quickSearchOnEnter = function(event, resultPageURI) {
 
 SearchPortlet.prototype.search = function(comId) {
 	var searchForm = document.getElementById(comId);
-	var inputKey = eXo.core.DOMUtil.findDescendantById(searchForm,
-			"keywordInput");
+	var inputKey = gj(searchForm).find("#keywordInput:first")[0];
 	searchForm.onsubmit = function() {
 		return false;
 	};
 	inputKey.onkeypress = function(event) {
 		var keyNum = eXo.ecm.SearchPortlet.getKeynum(event);
 		if (keyNum == 13) {
-			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(
-					this.form, "a", "SearchButton");
+			var searchButton = gj(this.form).find("a.SearchButton:first")[0];
 			searchButton.onclick();
 			var href = searchButton.getAttribute('href');
 			eval(href);
@@ -77,8 +75,7 @@ SearchPortlet.prototype.search = function(comId) {
 SearchPortlet.prototype.keepKeywordOnBoxSearch = function() {
 	var queryRegex = /^portal=[\w%]+&keyword=[\w%]+/;
 	var searchBox = document.getElementById("siteSearchBox");
-	var keyWordInput = eXo.core.DOMUtil.findFirstDescendantByClass(searchBox,
-			"input", "keyword");
+	var keyWordInput = gj(searchBox).find("input.keyword:first")[0];
 	var queryString = location.search.substring(1);
 	if (!queryString.match(queryRegex)) {
 		return;
@@ -91,8 +88,7 @@ SearchPortlet.prototype.keepKeywordOnBoxSearch = function() {
 	}
 	var uiSearchForm = document.getElementById("UISearchForm");
 	if (uiSearchForm != null) {
-		var inputKeyInForm = eXo.core.DOMUtil.findDescendantById(uiSearchForm,
-				"keywordInput");
+		var inputKeyInForm = gj(uiSearchForm).find("#keywordInput:first")[0];
 		if ((inputKeyInForm != null) && (inputKeyInForm.value.length != 0)) {
 			keyWordInput.value=inputKeyInForm.value;
 		}

@@ -9,17 +9,17 @@ UIJCRExplorer.prototype.loadViewNodeScroll = function(e) {
 	var jcr = eXo.ecm.UIJCRExplorer;
 	var uiFilePlanView = document.getElementById("UIFilePlanView");
 	if (uiFilePlanView) {
-		jcr.vnScrollMgr = eXo.portal.UIPortalControl.newScrollManager("UIFilePlanView");
+		jcr.vnScrollMgr = new ScrollManager("UIFilePlanView");
 		jcr.vnScrollMgr.margin = 8;
 		jcr.vnScrollMgr.initFunction = jcr.initViewNodeScroll;
-		var mainCont = eXo.core.DOMUtil.findFirstDescendantByClass(uiFilePlanView, "div", "UIHorizontalTabs");
-		var tabs = eXo.core.DOMUtil.findFirstDescendantByClass(mainCont, "div", "TabsContainer");
-		var arrows = eXo.core.DOMUtil.findFirstDescendantByClass(mainCont, "div", "NavigationButtonContainer");
+		var mainCont = gj(uiFilePlanView).find("div.UIHorizontalTabs:first")[0];
+		var tabs = gj(mainCont).find("div.TabsContainer:first")[0];
+		var arrows = gj(mainCont).find("div.NavigationButtonContainer:first")[0];
 		jcr.vnScrollMgr.mainContainer = mainCont;
 		jcr.vnScrollMgr.arrowsContainer = arrows;
 		jcr.vnScrollMgr.loadElements("UITab");
 		//var arrowButtons = eXo.core.DOMUtil.findDescendantsByTagName(arrows, "div");
-		var arrowButtons = eXo.core.DOMUtil.findDescendantsByClass(arrows, "div", "NavigationIcon");
+		var arrowButtons = gj(arrows).find("div.NavigationIcon");
 		if (arrowButtons.length == 2) {
 			jcr.vnScrollMgr.initArrowButton(arrowButtons[0], "left", "NavigationIcon ScrollBackArrow16x16Icon", "NavigationIcon DisableBackArrow16x16Icon", "NavigationIcon DisableBackArrow16x16Icon");
 			jcr.vnScrollMgr.initArrowButton(arrowButtons[1], "right", "NavigationIcon ScrollNextArrow16x16Icon", "NavigationIcon DisableNextArrow16x16Icon", "NavigationIcon DisableNextArrow16x16Icon");
@@ -39,7 +39,7 @@ UIJCRExplorer.prototype.initViewNodeScroll = function(e) {
 
 UIJCRExplorer.prototype.viewNodeScrollCallback = function() {
 	var scrollMgr = eXo.ecm.UIJCRExplorer.vnScrollMgr;
-	var selTab = eXo.core.DOMUtil.findFirstDescendantByClass(scrollMgr.mainContainer, "div", "SelectedTab");
+	var selTab = gj(scrollMgr.mainContainer).find("div.SelectedTab:first")[0];
 	if (selTab) {
 		scrollMgr.cleanElements();
 		scrollMgr.getElementsSpace();
@@ -50,17 +50,17 @@ UIJCRExplorer.prototype.loadNodeTypeScroll = function() {
 	var jcr = eXo.ecm.UIJCRExplorer;
 	var uiPopup = document.getElementById("UINodeTypeInfoPopup");
 	if (uiPopup) {
-		jcr.ntScrollMgr = eXo.portal.UIPortalControl.newScrollManager("UINodeTypeInfoPopup");
+		jcr.ntScrollMgr = new ScrollManager("UINodeTypeInfoPopup");
 		jcr.ntScrollMgr.margin = 5;
 		jcr.ntScrollMgr.initFunction = jcr.initNodeTypeScroll;
-		var mainCont = eXo.core.DOMUtil.findFirstDescendantByClass(uiPopup, "div", "UIHorizontalTabs");
-		var tabs = eXo.core.DOMUtil.findFirstDescendantByClass(mainCont, "div", "TabsContainer");
-		var arrows = eXo.core.DOMUtil.findFirstDescendantByClass(mainCont, "div", "NavigationButtonContainer");
+		var mainCont = gj(uiPopup).find("div.UIHorizontalTabs:first")[0];
+		var tabs = gj(mainCont).find("div.TabsContainer:first")[0];
+		var arrows = gj(mainCont).find("div.NavigationButtonContainer:first")[0];
 		jcr.ntScrollMgr.mainContainer = mainCont;
 		jcr.ntScrollMgr.arrowsContainer = arrows;
 		jcr.ntScrollMgr.loadElements("UITab");
 		//var arrowButtons = eXo.core.DOMUtil.findDescendantsByTagName(arrows, "div");
-		var arrowButtons = eXo.core.DOMUtil.findDescendantsByClass(arrows, "div", "NavigationIcon");
+		var arrowButtons = gj(arrows).find("div.NavigationIcon");
 		if (arrowButtons.length == 2) {
 			jcr.ntScrollMgr.initArrowButton(arrowButtons[0], "left", "NavigationIcon ScrollBackArrow16x16Icon", "NavigationIcon DisableBackArrow16x16Icon", "NavigationIcon DisableBackArrow16x16Icon");
 			jcr.ntScrollMgr.initArrowButton(arrowButtons[1], "right", "NavigationIcon ScrollNextArrow16x16Icon", "NavigationIcon DisableNextArrow16x16Icon", "NavigationIcon DisableNextArrow16x16Icon");
@@ -79,21 +79,20 @@ UIJCRExplorer.prototype.initNodeTypeScroll = function() {
 };
 
 UIJCRExplorer.prototype.dropDownIconList = function(uniqueId) {
- 	var DOMUtil = eXo.core.DOMUtil;
 	var actionBar = document.getElementById(uniqueId);
 	if (!actionBar) return;
-	var activeBoxContent = DOMUtil.findFirstDescendantByClass(actionBar, "div", "ActiveBoxContent");
-	var actionBgs = DOMUtil.findChildrenByClass(activeBoxContent, "div", "ActionBg");
+	var activeBoxContent = gj(actionBar).find("div.ActiveBoxContent:first")[0];
+	var actionBgs = gj(activeBoxContent).children("div.ActionBg");
 	var nSize = actionBgs.length;
 	if (nSize) {
-		var storeBoxContentContainer = DOMUtil.findFirstDescendantByClass(actionBar, "div", "StoreBoxContentContainer");
+		var storeBoxContentContainer = gj(actionBar).find("div.StoreBoxContentContainer:first")[0];
 		storeBoxContentContainer.style.display = "block";
-		var showHideBoxContainer = DOMUtil.findFirstDescendantByClass(actionBar, "div", "ShowHideBoxContainer");
+		var showHideBoxContainer = gj(actionBar).find("div.ShowHideBoxContainer:first")[0];
 		showHideBoxContainer.innerHTML = "";
-		var posY = eXo.core.Browser.findPosY(activeBoxContent);
+		var posY = gj(activeBoxContent).offset().top;
 		for (var o = 0; o < nSize; ++ o) {
 			actionBgs[o].style.display = "block";
-			Y = eXo.core.Browser.findPosY(actionBgs[o]);
+			Y = gj(actionBgs[o]).offset().top;
 			if (Y - posY) {
 				showHideBoxContainer.appendChild(actionBgs[o].cloneNode(true));
 				actionBgs[o].style.display = "none";
@@ -116,24 +115,25 @@ UIJCRExplorer.prototype.dropDownIconList = function(uniqueId) {
  * if tabId are provided, can get the tab content by Ajax
  */
 UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
-  var DOMUtil = eXo.core.DOMUtil;
-  var uiSelectTab = DOMUtil.findAncestorByClass(clickedEle, "UITab") ;
+  var uiSelectTab = gj(clickedEle).parents(".UITab:first")[0];
 
-  var uiHorizontalTabs = DOMUtil.findAncestorByClass(clickedEle, "UIHorizontalTabs") ;
-  var uiTabs = eXo.core.DOMUtil.findDescendantsByClass(uiHorizontalTabs, "li", "UITab") ;
+  var uiHorizontalTabs = gj(clickedEle).parents(".UIHorizontalTabs:first")[0];
+  var uiTabs = gj(uiHorizontalTabs).find("li.UITab");
   var parentdHorizontalTab = uiHorizontalTabs.parentNode ;
-  var contentTabContainer = DOMUtil.findFirstDescendantByClass(parentdHorizontalTab, "div", "UITabContentContainer") ;
-  var uiTabContents = DOMUtil.findChildrenByClass(contentTabContainer, "div", "UITabContent") ;
-    var form = DOMUtil.getChildrenByTagName(contentTabContainer, "form") ;
+  var contentTabContainer = gj(parentdHorizontalTab).find("div.UITabContentContainer:first")[0];
+  var uiTabContents = gj(contentTabContainer).children("div.UITabContent");
+//    var form = DOMUtil.getChildrenByTagName(contentTabContainer, "form") ;
+  var form = gj(contentTabContainer).children("form") ;
     if(form.length > 0) {
-        var tmp = DOMUtil.findChildrenByClass(form[0], "div", "UITabContent") ;
+        var tmp = gj(form[0]).children("div.UITabContent");
     for(var i = 0; i < tmp.length; i++) {
         uiTabContents.push(tmp[i]) ;
     }
     }
   var index = 0 ;
   for(var i = 0; i < uiTabs.length; i++) {
-    var styleTabDiv = DOMUtil.getChildrenByTagName(uiTabs[i], "div")[0] ;
+//	var styleTabDiv = DOMUtil.getChildrenByTagName(uiTabs[i], "div")[0] ;	  
+    var styleTabDiv = gj(uiTabs[i]).children("div")[0] ;
     if(styleTabDiv.className == "DisabledTab") continue ;
     if(uiSelectTab == uiTabs[i]) {
       styleTabDiv.className = "SelectedTab" ;

@@ -12,11 +12,11 @@ CategoryNavigation.prototype.toggleSubMenu = function(e) {
   } 
 
   //reset all sub-menu  
-  var rootElement = eXo.core.DOMUtil.findAncestorByClass(clickedElement, "UIMicroSite");
+  var rootElement = gj(clickedElement).parents(".UIMicroSite:first")[0];
   this.closeAllSubMenu(rootElement);
 
   //expand or collapse menu  
-  var subMenu = eXo.core.DOMUtil.findFirstDescendantByClass(clickedElement.parentNode, "ul", "SubMenu");  
+  var subMenu = gj(clickedElement.parentNode).find("ul.SubMenu:first")[0];  
   if (subMenu) {
     if (isExpand) {
       subMenu.style.display = "block";
@@ -36,7 +36,7 @@ CategoryNavigation.prototype.toggleSubMenu = function(e) {
 
 CategoryNavigation.prototype.closeAllSubMenu = function(rootElement) {  
   //close all sub menu
-  var subMenus = eXo.core.DOMUtil.findDescendantsByClass(rootElement, "ul", "SubMenu");
+  var subMenus = gj(rootElement).find("ul.SubMenu");
   if (subMenus) {
     for(var i = 0; i < subMenus.length; i++) {
       subMenus[i].style.display = "none";
@@ -44,7 +44,7 @@ CategoryNavigation.prototype.closeAllSubMenu = function(rootElement) {
   }
 
   //switch all to close button
-  var categoryMenus = eXo.core.DOMUtil.findDescendantsByClass(rootElement, "a", "TabLeft");
+  var categoryMenus = gj(rootElement).find("a.TabLeft");
   if (categoryMenus) {
     for(var i = 0; i < categoryMenus.length; i++) {
       if (categoryMenus[i].className.indexOf("IconClose") > 0) {
@@ -56,17 +56,17 @@ CategoryNavigation.prototype.closeAllSubMenu = function(rootElement) {
 
 CategoryNavigation.prototype.loadSubMenu = function() {
 	//UIMicroSite
-  var rootElement = eXo.core.DOMUtil.findDescendantsByClass(document, "div", "UIMicroSite")[0];
+  var rootElement = gj(document).find("div.UIMicroSite")[0];
   if (!rootElement) {
   	return;
   }
   
   eXo.ecm.CategoryNavigation.closeAllSubMenu(rootElement);
   
-  var expandedElement = eXo.core.DOMUtil.findDescendantsByClass(rootElement, "a", "SelectedCategory")[0];	
+  var expandedElement = gj(rootElement).find("a.SelectedCategory")[0];	
   if (expandedElement) {
 	expandedElement.className = expandedElement.className.replace("IconExplain", "IconClose");
-	var subMenu = eXo.core.DOMUtil.findFirstDescendantByClass(expandedElement.parentNode, "ul", "SubMenu");
+	var subMenu = gj(expandedElement.parentNode).find("ul.SubMenu:first")[0];
 	if (subMenu) {
 	  subMenu.style.display = "block";
 	}

@@ -25,17 +25,23 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2 http://www.gatein.org/xml/ns/gatein_resources_1_2" 
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
 
-  <javascript>
-    <param>
-      <js-module>eXo.ecm.CategoryNavigation</js-module>
-      <js-path>/javascript/eXo/ecm/CategoryNavigation.js</js-path>
-      <js-priority>50</js-priority>
-    </param>
-    <param>
-      <js-module>eXo.ecm.WAIPortalToolbar</js-module>
-      <js-path>/javascript/eXo/ecm/WAIPortalToolbar.js</js-path>
-      <js-priority>50</js-priority>
-    </param>
-  </javascript>
+
+  <portal>
+    <name>waiportal</name>
+    <module>
+    <script>
+      <name>eXo.ecm.CategoryNavigation</name>
+      <path>/javascript/eXo/ecm/CategoryNavigation.js</path>
+    </script>
+    <script>
+      <name>eXo.ecm.WAIPortalToolbar</name>
+      <path>/javascript/eXo/ecm/WAIPortalToolbar.js</path>
+    </script>    
+      <depends>
+        <module>base</module>
+      </depends>
+    </module>
+  </portal>
+
 </gatein-resources>
 

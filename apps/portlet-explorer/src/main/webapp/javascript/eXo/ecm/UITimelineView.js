@@ -3,7 +3,6 @@ var TimelineView = function() {
   // eXo.ecm.UITimelineView
   
   var Self = this;
-  var DOM = eXo.core.DOMUtil;
   var BROW = eXo.core.Browser;
   
   TimelineView.prototype.temporaryItem = null;
@@ -27,7 +26,7 @@ var TimelineView = function() {
     Self.actionAreaId = actionAreaId;
     var actionArea = document.getElementById(actionAreaId);
     if (!actionArea) return;
-    Self.allItems = DOM.findDescendantsByClass(actionArea, "div", "RowView");
+    Self.allItems = gj(actionArea).find("div.RowView");
     var mousedown = null;
     var keydown = null;
     for (var i in Self.allItems) {
@@ -91,34 +90,55 @@ var TimelineView = function() {
   TimelineView.prototype.initDragDropForTreeEvent = function(actionAreaId, enableDragAndDrop) {
     //registry action drag drop in tree list
     eXo.ecm.UITimelineView.enableDragAndDrop = enableDragAndDrop;
-    var UIWorkingArea = document.getElementById(actionAreaId);
-    var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-    if (UITreeExplorer) {
-      DOM.getElementsBy(
-          function(element) {return element.getAttribute("objectId");},
-          "div",
-          UITreeExplorer,
-          function(element) {
-            if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
-              mousedown = element.getAttributeNode("onmousedown").value;
-              element.setAttribute("mousedown", mousedown);
-            }
-            if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
-              keydown = element.getAttributeNode("onkeydown").value;
-              element.setAttribute("keydown", keydown);
+//    var UIWorkingArea = document.getElementById(actionAreaId);
+//    var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
+//    if (UITreeExplorer) {
+//      DOM.getElementsBy(
+//          function(element) {return element.getAttribute("objectId");},
+//          "div",
+//          UITreeExplorer,
+//          function(element) {
+//            if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
+//              mousedown = element.getAttributeNode("onmousedown").value;
+//              element.setAttribute("mousedown", mousedown);
+//            }
+//            if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
+//              keydown = element.getAttributeNode("onkeydown").value;
+//              element.setAttribute("keydown", keydown);
+//            }           
+//  //          if (enableDragAndDrop == "true") {
+//              element.onmousedown = Self.mouseDownTree;
+//              element.onkeydown = Self.mouseDownTree;
+//              element.onmouseup = Self.mouseUpTree;
+//              element.onmouseover = Self.mouseOverTree;
+//              element.onmouseout = Self.mouseOutTree;
+//              element.onfocus = Self.mouseOverTree;
+//              element.onblur = Self.mouseOutTree;             
+////            }
+//          }
+//      );
+//    }
+    gj("#" + actionAreaId + " div.UITreeExplorer:first").find("div[objectId]").each(
+      function(index, element) {
+        if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
+          mousedown = element.getAttributeNode("onmousedown").value;
+          element.setAttribute("mousedown", mousedown);
+        }
+        if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
+          keydown = element.getAttributeNode("onkeydown").value;
+          element.setAttribute("keydown", keydown);
             }           
   //          if (enableDragAndDrop == "true") {
-              element.onmousedown = Self.mouseDownTree;
-              element.onkeydown = Self.mouseDownTree;
-              element.onmouseup = Self.mouseUpTree;
-              element.onmouseover = Self.mouseOverTree;
-              element.onmouseout = Self.mouseOutTree;
-              element.onfocus = Self.mouseOverTree;
-              element.onblur = Self.mouseOutTree;             
+          element.onmousedown = Self.mouseDownTree;
+          element.onkeydown = Self.mouseDownTree;
+          element.onmouseup = Self.mouseUpTree;
+          element.onmouseover = Self.mouseOverTree;
+          element.onmouseout = Self.mouseOutTree;
+          element.onfocus = Self.mouseOverTree;
+          element.onblur = Self.mouseOutTree;             
 //            }
-          }
+      	}
       );
-    }
   };
   
   //event in tree list
@@ -127,14 +147,14 @@ var TimelineView = function() {
     var element = this;
     var mobileElement = document.getElementById(Self.mobileId);
     if (mobileElement && mobileElement.move) {
-      var expandElement = DOM.findAncestorByClass(element, "ExpandIcon");
+      var expandElement = gj(element).parents(".ExpandIcon:first")[0];
       if(expandElement && expandElement.onclick) {
         if (expandElement.onclick instanceof Function) {
           element.Timeout = setTimeout(function() {expandElement.onclick(event)}, 1000);
         } 
       }
     }
-    var scroller = DOM.findAncestorByClass(element, "SideContent");
+    var scroller = gj(element).parents(".SideContent:first")[0];
     scroller.onmousemove = eXo.ecm.UITimelineView.setScroll ;
   };
   
@@ -142,7 +162,7 @@ var TimelineView = function() {
     if(Self.enableDragDrop) {
     eXo.ecm.UITimelineView.object = this;
       var element = eXo.ecm.UITimelineView.object ;
-    var pos = eXo.core.Browser.findMouseYInPage(evt) - eXo.core.Browser.findPosY(element);
+    var pos = evt.pageY - gj(element).offset().top;
     if(element.offsetHeight - pos < 10){
       element.scrollTop = element.scrollTop + 5;  
     } else if(element.scrollTop > 0 && pos < 10) {
@@ -181,7 +201,7 @@ var TimelineView = function() {
       //create mobile element
       var mobileElement = newElement({
         className: "UIJCRExplorerPortlet",
-        id: DOM.generateId('Id'),
+        id: eXo.generateId('Id'),
         style: {
           position: "absolute",
           display: "none",
@@ -193,7 +213,7 @@ var TimelineView = function() {
           height: "25px"
         }
       });
-      eXo.core.Browser.setOpacity(mobileElement, 65);
+      mobileElement.style.opacity = 65/100;
       Self.mobileId = mobileElement.id;
       var coverElement = newElement({
         className: "UITreeExplorer",
@@ -218,7 +238,7 @@ var TimelineView = function() {
     if (mobileElement && mobileElement.move) {
       //post action
       var actionArea = document.getElementById("UIWorkingArea");
-      var moveAction = DOM.findFirstDescendantByClass(actionArea, "div", "JCRMoveAction");
+      var moveAction = gj(actionArea).find("div.JCRMoveAction:first")[0];
       var wsTarget = element.getAttribute('workspacename');
       var idTarget = element.getAttribute('objectId');
       var targetPath = decodeURIComponent(idTarget);
@@ -298,7 +318,7 @@ var TimelineView = function() {
       //create mobile element
       var mobileElement = newElement({
         className: "UIJCRExplorerPortlet MoveItem",
-        id: DOM.generateId('Id'),
+        id: eXo.generateId('Id'),
         style: {
             position: "absolute",
             display: "none",
@@ -309,7 +329,7 @@ var TimelineView = function() {
         }
       });
       
-      eXo.core.Browser.setOpacity(mobileElement, 64);
+      mobileElement.style.opacity = 64/100;
       Self.mobileId = mobileElement.getAttribute('id');
       var coverElement = newElement({className: "UITimelineView"});
       for(var i in Self.itemsSelected) {
@@ -335,8 +355,8 @@ var TimelineView = function() {
       var mobileElement = document.getElementById(Self.mobileId);
       if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
         mobileElement.style.display = "block";
-        var X = eXo.core.Browser.findMouseXInPage(event);
-        var Y = eXo.core.Browser.findMouseYInPage(event);
+        var X = event.pageX;
+        var Y = event.pageY;
         mobileElement.style.top = Y + 5 + "px";
         mobileElement.style.left = X + 5 + "px";
         mobileElement.move = true;
@@ -468,7 +488,7 @@ var TimelineView = function() {
     if (!rightClick && eXo.ecm.UITimelineView.objResize == null) {
       resetArrayItemsSelected();
       element.onmousemove = Self.mutipleSelect;
-      var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+      var mask = gj(element).find("div.Mask:first")[0];
       mask.storeX = eXo.ecm.DMSBrowser.findMouseRelativeX(element, event);
       mask.storeY = eXo.core.Browser.findMouseRelativeY(element, event);
       addStyle(mask, {
@@ -480,10 +500,10 @@ var TimelineView = function() {
         backgroundColor: "gray",
         border: "1px dotted black"
       });
-      eXo.core.Browser.setOpacity(mask, 17);
+      mask.style.opacity = 17/100;
       
       //store position for all item
-      var listGrid = DOM.findFirstDescendantByClass(element, "div", "UIListGrid");
+      var listGrid = gj(element).find("div.UIListGrid:first")[0];
       for( var i = 0 ; i < Self.allItems.length; ++i) {
         Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - listGrid.scrollLeft;
         Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - listGrid.scrollTop;
@@ -494,7 +514,7 @@ var TimelineView = function() {
   TimelineView.prototype.mutipleSelect = function(event) {
     var event = event || window.event;
     var element = this;
-    var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+    var mask = gj(element).find("div.Mask:first")[0];
     
     var top = mask.storeY - 2;
     var right = element.offsetWidth - mask.storeX - 2;
@@ -614,7 +634,7 @@ var TimelineView = function() {
     Self.enableDragDrop = null;
     document.onselectstart = function(){return true};
     
-    var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+    var mask = gj(element).find("div.Mask:first")[0];
     addStyle(mask, {width: "0px", height: "0px", top: "0px", left: "0px", border: "none"});
     //collect item
     var item = null;
@@ -638,7 +658,7 @@ var TimelineView = function() {
     }
     //create context menu
     var actionArea = document.getElementById(Self.actionAreaId);
-    var context = DOM.findFirstDescendantByClass(actionArea, "div", "ItemContextMenu");
+    var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
     var contextMenu = newElement({
       innerHTML: context.innerHTML,
       id: Self.contextMenuId,
@@ -666,8 +686,8 @@ var TimelineView = function() {
       if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
       if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
     }
-    var lockAction = DOM.findFirstDescendantByClass(contextMenu, "div", "Lock16x16Icon");
-    var unlockAction = DOM.findFirstDescendantByClass(contextMenu, "div", "Unlock16x16Icon");
+    var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
+    var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
     
     if (checkUnlock) {
       unlockAction.parentNode.style.display = "block";
@@ -677,8 +697,8 @@ var TimelineView = function() {
       lockAction.parentNode.style.display = "block";
     }
 
-      var addFavouriteAction = DOM.findFirstDescendantByClass(contextMenu, "div", "AddToFavourite16x16Icon");
-      var removeFavouriteAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RemoveFromFavourite16x16Icon");
+      var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
+      var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
       if (checkRemoveFavourite) {
         removeFavouriteAction.parentNode.style.display = "block";    
         addFavouriteAction.parentNode.style.display = "none";
@@ -686,9 +706,9 @@ var TimelineView = function() {
         addFavouriteAction.parentNode.style.display = "block";
         removeFavouriteAction.parentNode.style.display = "none";
       }
-      var restoreFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RestoreFromTrash16x16Icon");
-      var emptyTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "EmptyTrash16x16Icon");
-      var playMediaAction = DOM.findFirstDescendantByClass(contextMenu, "div", "PlayMedia16x16Icon");
+      var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
+      var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
+      var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
       
       if (!checkInTrash) {
         restoreFromTrashAction.parentNode.style.display = "none";
@@ -709,11 +729,11 @@ var TimelineView = function() {
           }
       
     //check position popup
-    var X = eXo.core.Browser.findMouseXInPage(event);
-    var Y = eXo.core.Browser.findMouseYInPage(event);
-    var portWidth = eXo.core.Browser.getBrowserWidth();
-    var portHeight = eXo.core.Browser.getBrowserHeight();
-    var contentMenu = DOM.findFirstChildByClass(contextMenu, "div", "UIRightClickPopupMenu");
+    var X = event.pageX;
+    var Y = event.pageY;
+    var portWidth = gj(window).width();
+    var portHeight = gj(window).height();
+    var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
     if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
     if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
     contextMenu.style.top = Y + 5 + "px";
@@ -734,7 +754,7 @@ var TimelineView = function() {
     }
     //create context menu
     var actionArea = document.getElementById(Self.actionAreaId);
-    var context = DOM.findFirstDescendantByClass(actionArea, "div", "GroundContextMenu");
+    var context = gj(actionArea).find("div.GroundContextMenu:first")[0];
     var contextMenu = newElement({
       innerHTML: context.innerHTML,
       id: Self.contextMenuId,
@@ -749,11 +769,11 @@ var TimelineView = function() {
     document.body.appendChild(contextMenu);
     
     //check position popup
-    var X = eXo.core.Browser.findMouseXInPage(event);
-    var Y = eXo.core.Browser.findMouseYInPage(event);
-    var portWidth = eXo.core.Browser.getBrowserWidth();
-    var portHeight = eXo.core.Browser.getBrowserHeight();
-    var contentMenu = DOM.findFirstChildByClass(contextMenu, "div", "UIRightClickPopupMenu");
+    var X = event.pageX;
+    var Y = event.pageY;
+    var portWidth = gj(window).width();
+    var portHeight = gj(window).height();
+    var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
     if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
     if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
     contextMenu.style.top = Y + 5 + "px";
@@ -857,27 +877,27 @@ var TimelineView = function() {
   
     //revert status overflow for UIResizableBlock;
     var actionArea = document.getElementById(Self.actionAreaId);
-    var uiWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
-    var uiResizableBlock = DOM.findFirstDescendantByClass(uiWorkingArea, "div", "UIResizableBlock");
+    var uiWorkingArea = gj(actionArea).parents(".UIWorkingArea:first")[0];
+    var uiResizableBlock = gj(uiWorkingArea).find("div.UIResizableBlock:first")[0];
     
   }
   
   TimelineView.prototype.setHeight = function() {   
     var root = document.getElementById("UIDocumentInfo");
-    var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
+    var view = gj(root).find("div.UIListGrid:first")[0];
     var workingArea = document.getElementById('UIWorkingArea');
     var actionBar = document.getElementById('UIActionBar'); 
     var actionBaroffsetHeight = 0;
     if(actionBar)
       actionBaroffsetHeight = actionBar.offsetHeight;
-    var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");
+    var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];
     var workingContainer = document.getElementById('UIDocumentContainer');                
-    var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");
-    var title = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleTable");       
-    var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-    var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");    
-    var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
-    var barContent = DOM.findFirstDescendantByClass(workingArea, "div", "BarContent");  
+    var page = gj(root).find("div.PageAvailable:first")[0];
+    var title = gj(root).find("div.TitleTable:first")[0];       
+    var sizeBarContainer = gj(workingArea).find("div.UISideBarContainer:first")[0];
+    var resizeSizeBar = gj(workingArea).find("div.ResizeSideBar:first")[0];    
+    var uiResizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
+    var barContent = gj(workingArea).find("div.BarContent:first")[0];  
     
     var workingAreaHeight = workingArea.offsetHeight;
     if (sizeBarContainer)
@@ -904,7 +924,7 @@ var TimelineView = function() {
     }
     var container = document.getElementById("UITreeExplorer");
     if (!container && uiResizableBlock) {
-      container = DOM.findFirstDescendantByClass(uiResizableBlock, "div", "SideBarContent");
+      container = gj(uiResizableBlock).find("div.SideBarContent:first")[0];
       if (container)
         eXo.ecm.UITimelineView.initialHeightOfContainer = container.offsetHeight;
     } 
@@ -919,8 +939,8 @@ var TimelineView = function() {
     var event = event || window.event;
     event.cancelBubble = true;
     
-    var listGrid = DOM.findAncestorByClass(obj, "UIListGrid");
-    var rowClazz = DOM.findDescendantsByClass(listGrid, "div", "RowView Normal");           
+    var listGrid = gj(obj).parents(".UIListGrid:first")[0];
+    var rowClazz = gj(listGrid).find("div.RowView,Normal");           
     if(!eXo.ecm.UITimelineView.mapColumn) {
       eXo.ecm.UITimelineView.mapColumn = new eXo.core.HashMap();
     }   
@@ -930,7 +950,7 @@ var TimelineView = function() {
     // Resize the whole column
     try {
       for (var i in rowClazz) {       
-        var objColumn = DOM.findFirstDescendantByClass(rowClazz[i], "div", objResize.className);
+        var objColumn = gj(rowClazz[i]).find("div." + objResize.className + ":first")[0];
         objColumn.style.display = "none";       
       }
     } catch(err) {}           
@@ -943,9 +963,9 @@ var TimelineView = function() {
     document.onselectstart = function(){return false};
     var event = event || window.event;
     event.cancelBubble = true;
-    var previousClass = DOM.findPreviousElementByTagName(obj, "div");         
-    var listGrid = DOM.findAncestorByClass(previousClass, "UIListGrid");
-    var rowClazz = DOM.findDescendantsByClass(listGrid, "div", "RowView Normal");       
+    var previousClass = gj(obj).prevAll("div:first")[0];         
+    var listGrid = gj(previousClass).parents(".UIListGrid:first")[0];
+    var rowClazz = gj(listGrid).find("div.RowView,Normal");       
     if(!eXo.ecm.UITimelineView.mapColumn) {
       eXo.ecm.UITimelineView.mapColumn = new eXo.core.HashMap();
     }
@@ -963,7 +983,7 @@ var TimelineView = function() {
     var objResize = eXo.ecm.UITimelineView.objResize;
     var objResizeClazz = eXo.ecm.UITimelineView.objRowClazz;
     var resizeValue = event.clientX - eXo.ecm.UITimelineView.currentMouseX;   
-    var listGrid = DOM.findAncestorByClass(objResize, "UIListGrid");  
+    var listGrid = gj(objResize).parents(".UIListGrid:first")[0];  
         
     // Case of resize width lower than allowable minimum.   
     if (eXo.ecm.UITimelineView.objResizeValue + resizeValue < 8 ) return;       
@@ -973,10 +993,10 @@ var TimelineView = function() {
       resizeDiv = document.createElement("div");
       resizeDiv.className = "ResizeHandle";
       resizeDiv.id = "ResizeDiv";     
-      var workspace = DOM.findAncestorByClass(objResize, "UIDocumentWorkspace");
+      var workspace = gj(objResize).parents(".UIDocumentWorkspace:first")[0];
       resizeDiv.style.height = workspace.offsetHeight + "px";
       var documentInfo = document.getElementById('UIDocumentInfo');
-      DOM.findFirstDescendantByClass(documentInfo, "div", "UIListGrid").appendChild(resizeDiv); 
+      gj(documentInfo).find("div.UIListGrid:first")[0].appendChild(resizeDiv); 
     }
     var X_Resize = eXo.core.Browser.findMouseRelativeX(listGrid,event);       
     eXo.core.Browser.setPositionInContainer(listGrid, resizeDiv, X_Resize, 0);
@@ -1006,14 +1026,14 @@ var TimelineView = function() {
     // Resize the whole column
     for (var i in objResizeClazz) {
       try {
-        var objColumn = DOM.findFirstDescendantByClass(objResizeClazz[i], "div", objResize.className);
+        var objColumn = gj(objResizeClazz[i]).find("div." + objResize.className + ":first")[0];
         objColumn.style.width = eXo.ecm.UITimelineView.objResizeValue + resizeValue + "px";
       } catch(err) {
       }
     }
       
     // Remove the resize div on mouseUp event
-    var listGrid = DOM.findAncestorByClass(objResize, "UIListGrid");    
+    var listGrid = gj(objResize).parents(".UIListGrid:first")[0];    
     var resizeDiv = document.getElementById("ResizeDiv");   
     if (listGrid) 
       listGrid.removeChild(resizeDiv);
@@ -1034,18 +1054,18 @@ var TimelineView = function() {
     var workingArea = document.getElementById("UIWorkingArea");
     var leftContainer = document.getElementById("LeftContainer");
     var dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;    
-    var listGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
+    var listGrid = gj(root).find("div.UIListGrid:first")[0];
     root.style.overflow = "auto";
-    var rightContainer = DOM.findAncestorByClass(listGrid, "RightContainer");
+    var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];
     
     if(!eXo.ecm.UITimelineView.mapColumn) return;
     for(var name in eXo.ecm.UITimelineView.mapColumn.properties) {
-      var objColumn = DOM.findFirstDescendantByClass(listGrid, "div", name);
+      var objColumn = gj(listGrid).find("div." + name + ":first")[0];
       objColumn.style.width = eXo.ecm.UITimelineView.mapColumn.properties[name];
-      var rowClazz = DOM.findDescendantsByClass(listGrid, "div", "RowView Normal");
+      var rowClazz = gj(listGrid).find("div.RowView,Normal");
       for (var i in rowClazz) {
         try {
-          var objColumnInRow = DOM.findFirstDescendantByClass(rowClazz[i], "div", name);
+          var objColumnInRow = gj(rowClazz[i]).find("div." + name + ":first")[0];
           objColumnInRow.style.width = eXo.ecm.UITimelineView.mapColumn.properties[name];
         } catch(err) {
         }

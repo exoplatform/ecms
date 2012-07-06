@@ -173,15 +173,16 @@ UIWCMNavigation.prototype.init = function(popupMenu, container, x, y) {
   this.containerStyleClass = "MenuItemContainer";
   
   this.buildMenu(popupMenu);
+  this.backupNavigationTabStyle = null;
 };
 /**
  * Calls the init function when the page loads
  */
 UIWCMNavigation.prototype.onLoad = function(navigationId) {
   var uiWorkingWorkspace = document.getElementById("UIWorkingWorkspace");
-  var uiNavPortlets = eXo.core.DOMUtil.findDescendantsByClass(uiWorkingWorkspace, "div", navigationId);
+  var uiNavPortlets = gj(uiWorkingWorkspace).find("div." + navigationId);
   if (uiNavPortlets.length) {
-  		var mainContainer = eXo.core.DOMUtil.findFirstDescendantByClass(uiNavPortlets[0], "div", "TabsContainer");
+  		var mainContainer = gj(uiNavPortlets[0]).find("div.TabsContainer:first")[0];
 	 		eXo.portal.UIWCMNavigation.init(uiNavPortlets[0], mainContainer, 0, 0);
   		for (var i = 1; i < uiNavPortlets.length; ++i) {
 					uiNavPortlets[i].style.display = "none";
@@ -201,11 +202,10 @@ UIWCMNavigation.prototype.onLoad = function(navigationId) {
  *  . adds onclick event if the item contains a link, so a click on this item will call the link
  */
 UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
-  var DOMUtil = eXo.core.DOMUtil;
-  var topContainer = DOMUtil.findFirstDescendantByClass(popupMenu, "div", "TabsContainer");
+  var topContainer = gj(popupMenu).find("div.TabsContainer:first")[0];
   topContainer.id = "PortalNavigationTopContainer";
   // Top menu items
-  var topItems = DOMUtil.findDescendantsByClass(topContainer, "div", "UITab");
+  var topItems = gj(topContainer).find("div.UITab");
   for (var i = 0; i < topItems.length; i++) {
     var item = topItems[i];
     item.onmouseover = eXo.portal.UIWCMNavigation.setTabStyleOnMouseOver ;
@@ -219,7 +219,7 @@ UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
     /**
      * TODO: fix IE7;
      */
-    var container = DOMUtil.findFirstDescendantByClass(item, "div", this.containerStyleClass);
+    var container = gj(item).find("div." + this.containerStyleClass + ":first")[0];
     if (container) {
       if (eXo.core.Browser.browserType == "mozilla" || eXo.core.Browser.isIE7() || eXo.core.Browser.browserType == "safari") {
         container.style.minWidth = item.offsetWidth + "px";
@@ -230,7 +230,7 @@ UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
   }
   
   // Sub menus items
-  var menuItems = DOMUtil.findDescendantsByClass(topContainer, "div", this.tabStyleClass);
+  var menuItems = gj(topContainer).find("div." + this.tabStyleClass);
   for(var i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
     menuItem.onmouseover = eXo.portal.UIWCMNavigation.onMenuItemOver;
@@ -239,25 +239,45 @@ UIWCMNavigation.prototype.buildMenu = function(popupMenu) {
     menuItem.onblur = eXo.portal.UIWCMNavigation.onMenuItemOut;    
 
     // Set an id to each container for future reference
-    var cont = DOMUtil.findAncestorByClass(menuItem, this.containerStyleClass) ;
+    var cont = gj(menuItem).parents("." + this.containerStyleClass + ":first")[0];
     if (!cont.id) cont.id = "PortalNavigationContainer-" + i + Math.random();
     cont.resized = false;
   }
 };
+
+/**
+ * Changes the style of a tab, depending on the over value (true or false)
+ * Gives the defaut css style class names . UITab when tab is NOT highlighted .
+ * HighlightNavigationTab when tab is highlighted
+ */
+changeTabNavigationStyle : function(clickedEle, over) {
+    if (clickedEle == null)
+      return;
+    if (!gj(clickedEle).hasClass("UITab"))
+      clickedEle = gj(clickedEle).parents(".UITab:first")[0]; 
+    if (over) {
+      this.backupNavigationTabStyle = clickedEle.className;
+      clickedEle.className = "UITab HighlightNavigationTab";
+    } else if (this.backupNavigationTabStyle) {
+      clickedEle.className = this.backupNavigationTabStyle;
+    }
+  };
+  
 /**
  * Sets the tab style on mouse over and mouse out
  * If the mouse goes out of the item but stays on its sub menu, the item remains highlighted
  */
 UIWCMNavigation.prototype.setTabStyle = function() {
   var tab = this;
-  var tabChildren = eXo.core.DOMUtil.getChildrenByTagName(tab, "div") ;
+//  var tabChildren = eXo.core.DOMUtil.getChildrenByTagName(tab, "div") ;
+  var tabChildren = gj(tab).children("div");
   if (tabChildren[0].className != "HighlightNavigationTab") {
     // highlights the tab
-    eXo.webui.UIHorizontalTabs.changeTabNavigationStyle(tab, true);
+	  changeTabNavigationStyle(tab, true);
   } else {
     if(tabChildren.length <= 1 || tabChildren[1].id != eXo.portal.UIWCMNavigation.currentOpenedMenu) {
       // de-highlights the tab if it doesn't have a submenu (cond 1) or its submenu isn't visible (cond 2)
-      eXo.webui.UIHorizontalTabs.changeTabNavigationStyle(tab, false);
+    	changeTabNavigationStyle(tab, false);
     }
   }
 }
@@ -270,7 +290,7 @@ UIWCMNavigation.prototype.setTabStyleOnMouseOver = function(e) {
 	eXo.portal.UIWCMNavigation.setTabStyleOnMouseOut(e, tab) ;
   eXo.portal.UIWCMNavigation.previousMenuItem = tab ;
   if (!eXo.portal.UIWCMNavigation.menuVisible) {
-    var menuItemContainer = eXo.core.DOMUtil.findFirstDescendantByClass(tab, "div", eXo.portal.UIWCMNavigation.containerStyleClass);
+    var menuItemContainer = gj(tab).find("div." + eXo.portal.UIWCMNavigation.containerStyleClass + ":first")[0];
     var hideSubmenu = tab.getAttribute('hideSubmenu') ;
     if (menuItemContainer && !hideSubmenu) {
       eXo.portal.UIWCMNavigation.toggleSubMenu(e, tab, menuItemContainer) ;
@@ -281,17 +301,18 @@ UIWCMNavigation.prototype.setTabStyleOnMouseOver = function(e) {
 
 UIWCMNavigation.prototype.setTabStyleOnMouseOut = function(e, src) {
   var tab = src || this;
-  var tabChildren = eXo.core.DOMUtil.getChildrenByTagName(tab, "div") ;
+//  var tabChildren = eXo.core.DOMUtil.getChildrenByTagName(tab, "div") ;
+  var tabChildren = gj(tab).children("div") ;
   if (tabChildren.length <= 0) {
     return ;
   }
   if (tabChildren[0].className != "HighlightNavigationTab") {
     // highlights the tab
-    eXo.webui.UIHorizontalTabs.changeTabNavigationStyle(tab, true);
+	  changeTabNavigationStyle(tab, true);
   } else {
     if(tabChildren.length <= 1 || tabChildren[1].id != eXo.portal.UIWCMNavigation.currentOpenedMenu) {
       // de-highlights the tab if it doesn't have a submenu (cond 1) or its submenu isn't visible (cond 2)
-      eXo.webui.UIHorizontalTabs.changeTabNavigationStyle(tab, false);
+    	changeTabNavigationStyle(tab, false);
     }
   }
   eXo.portal.UIWCMNavigation.hideMenuTimeout(500) ;
@@ -323,7 +344,6 @@ UIWCMNavigation.prototype.toggleSubMenu = function(e, tab, menuItemContainer) {
     return false;
   }
   var item = tab;
-  var DOMUtil = eXo.core.DOMUtil;
   if (menuItemContainer) {
     if (menuItemContainer.style.display == "none") {
       // shows the sub menu
@@ -336,7 +356,7 @@ UIWCMNavigation.prototype.toggleSubMenu = function(e, tab, menuItemContainer) {
       eXo.portal.UIWCMNavigation.superClass.setPosition(menuItemContainer, x, y);
       eXo.portal.UIWCMNavigation.superClass.show(menuItemContainer);
       
-      menuItemContainer.style.width = menuItemContainer.offsetWidth - parseInt(DOMUtil.getStyle(menuItemContainer, 'borderLeftWidth')) - parseInt(DOMUtil.getStyle(menuItemContainer, 'borderRightWidth')) + "px";
+      menuItemContainer.style.width = menuItemContainer.offsetWidth - parseInt(gj(menuItemContainer).css('borderLeftWidth')) - parseInt(gj(menuItemContainer).css('borderRightWidth')) + "px";
       eXo.portal.UIWCMNavigation.currentOpenedMenu = menuItemContainer.id;
       
       /*Hide eXoStartMenu whenever click on the UIApplication*/
@@ -392,8 +412,8 @@ UIWCMNavigation.prototype.hideMenuContainer = function() {
 UIWCMNavigation.prototype.hideMenu = function() {
   if (eXo.portal.UIWCMNavigation.currentOpenedMenu) {
     var currentItemContainer = document.getElementById(eXo.portal.UIWCMNavigation.currentOpenedMenu);
-    var tab = eXo.core.DOMUtil.findAncestorByClass(currentItemContainer, "UITab");
-    eXo.webui.UIHorizontalTabs.changeTabNavigationStyle(tab, false);
+    var tab = gj(currentItemContainer).parents(".UITab:first")[0];
+    changeTabNavigationStyle(tab, false);
   }
   eXo.portal.UIWCMNavigation.hideMenuContainer();
 };
@@ -404,8 +424,7 @@ UIWCMNavigation.prototype.hideMenu = function() {
  */
 UIWCMNavigation.prototype.onMenuItemOver = function(e) {
   var menuItem = this;
-  var DOMUtil = eXo.core.DOMUtil;
-  var subContainer = DOMUtil.findFirstDescendantByClass(menuItem, "div", eXo.portal.UIWCMNavigation.containerStyleClass);
+  var subContainer = gj(menuItem).find("div." + eXo.portal.UIWCMNavigation.containerStyleClass + ":first")[0];
   if (subContainer) {
     eXo.portal.UIWCMNavigation.superClass.pushVisibleContainer(subContainer.id);
     eXo.portal.UIWCMNavigation.showMenuItemContainer(menuItem, subContainer) ;
@@ -431,7 +450,7 @@ UIWCMNavigation.prototype.showMenuItemContainer = function(menuItem, menuItemCon
  */
 UIWCMNavigation.prototype.onMenuItemOut = function(e) {
   var menuItem = this;
-  var subContainer = eXo.core.DOMUtil.findFirstDescendantByClass(menuItem, "div", eXo.portal.UIWCMNavigation.containerStyleClass);
+  var subContainer = gj(menuItem).find("div." + eXo.portal.UIWCMNavigation.containerStyleClass + ":first")[0];
   if (subContainer) {
     eXo.portal.UIWCMNavigation.superClass.pushHiddenContainer(subContainer.id);
     eXo.portal.UIWCMNavigation.superClass.popVisibleContainer();
@@ -452,15 +471,15 @@ UIWCMNavigation.prototype.loadScroll = function(e) {
   var portalNav = document.getElementById("PortalNavigationTopContainer");
   if (portalNav) {
     // Creates new ScrollManager and initializes it
-    uiNav.scrollMgr = eXo.portal.UIPortalControl.newScrollManager("PortalNavigationTopContainer");
+    uiNav.scrollMgr = new ScrollManager("PortalNavigationTopContainer");
     uiNav.scrollMgr.initFunction = uiNav.initScroll;
     // Adds the tab elements to the manager
-    var tabs = eXo.core.DOMUtil.findAncestorByClass(portalNav, "UIHorizontalTabs");
+    var tabs = gj(portalNav).parents(".UIHorizontalTabs:first")[0];
     uiNav.scrollMgr.mainContainer = tabs;
-    uiNav.scrollMgr.arrowsContainer = eXo.core.DOMUtil.findFirstDescendantByClass(tabs, "div", "ScrollButtons");
+    uiNav.scrollMgr.arrowsContainer = gj(tabs).find("div.ScrollButtons:first")[0];
     uiNav.scrollMgr.loadElements("UITab");
     // Configures the arrow buttons
-    var arrowButtons = eXo.core.DOMUtil.findDescendantsByTagName(uiNav.scrollMgr.arrowsContainer, "div");
+    var arrowButtons = gj(uiNav.scrollMgr.arrowsContainer).find("div");
     if (arrowButtons.length == 2) {
       uiNav.scrollMgr.initArrowButton(arrowButtons[0], "left", "ScrollLeftButton", "HighlightScrollLeftButton", "DisableScrollLeftButton");
       uiNav.scrollMgr.initArrowButton(arrowButtons[1], "right", "ScrollRightButton", "HighlightScrollRightButton", "DisableScrollRightButton");

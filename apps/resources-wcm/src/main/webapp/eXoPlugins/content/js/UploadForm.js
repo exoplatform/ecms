@@ -15,7 +15,7 @@ UploadForm.prototype.showUploadForm = function() {
 	popupContainer.style.position = "absolute";
 	popupContainer.style.top = "0px";
 	popupContainer.innerHTML = uploadContainer.innerHTML;
-	var iFrame = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "iframe", "iFrameUpload");
+	var iFrame = gj(popupContainer).find("iframe.iFrameUpload:first")[0];
 	var iContent = document.getElementById("iContentUpLoad").innerHTML;
 	iContent = iContent.replace(/&amp;/g, "&");
 	iContent = iContent.replace(/&lt;/g, "<");
@@ -27,18 +27,18 @@ UploadForm.prototype.showUploadForm = function() {
 			document.close();
 	}
 	eXo.ecm.UploadForm.showMask(popupContainer, true);
-	var uploadForm = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "UploadForm");
-	var maskLayer = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "MaskLayer");
+	var uploadForm = gj(popupContainer).find("div.UploadForm:first")[0];
+	var maskLayer = gj(popupContainer).find("div.MaskLayer:first")[0];
 	if (maskLayer!=null) maskLayer.style.zIndex = uploadForm.style.zIndex++;
 	uploadForm.style.position = 'absolute';
-	var widthUploadForm = (eXo.core.Browser.getBrowserWidth() - uploadForm.offsetWidth)/2;
-	var heightUploadForm = (eXo.core.Browser.getBrowserHeight() - uploadForm.offsetHeight)/2;
+	var widthUploadForm = (gj(window).width() - uploadForm.offsetWidth)/2;
+	var heightUploadForm = (gj(window).height() - uploadForm.offsetHeight)/2;
 	uploadForm.style.left = widthUploadForm + "px";
 	uploadForm.style.top = heightUploadForm + "px";
 	
-	var tblActionContainer =  eXo.core.DOMUtil.findFirstDescendantByClass(uploadForm, "table", "ActionContainer");
-	var trFolder =  eXo.core.DOMUtil.findFirstDescendantByClass(tblActionContainer, "tr", "PathFolder");
-	var spanFolder = eXo.core.DOMUtil.findDescendantsByTagName(trFolder, "span")[0];
+	var tblActionContainer =  gj(uploadForm).find("table.ActionContainer:first")[0];
+	var trFolder =  gj(tblActionContainer).find("tr.PathFolder:first")[0];
+	var spanFolder = gj(trFolder).find("span")[0];
 	spanFolder.innerHTML += ":"+ eXo.ecm.ECS.currentFolder;
 };
 
@@ -51,15 +51,15 @@ UploadForm.prototype.showAlert = function() {
 	popupContainer.style.position = "absolute";
 	popupContainer.style.top = "0px";
 	var hideContainer = document.getElementById("hideContainer");
-	var alertContainer = eXo.core.DOMUtil.findFirstDescendantByClass(hideContainer, "div", "AlertContainer");
+	var alertContainer = gj(hideContainer).find("div.AlertContainer:first")[0];
 	popupContainer.innerHTML = alertContainer.innerHTML;
 	eXo.ecm.UploadForm.showMask(popupContainer, true);
-	var alertForm = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "AlertForm");
-	var maskLayer = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "MaskLayer");
+	var alertForm = gj(popupContainer).find("div.AlertForm:first")[0];
+	var maskLayer = gj(popupContainer).find("div.MaskLayer:first")[0];
 	if (maskLayer!=null) maskLayer.style.zIndex = alertForm.style.zIndex++;
 	alertForm.style.position = 'absolute';
-	var widthAlertForm = (eXo.core.Browser.getBrowserWidth() - alertForm.offsetWidth)/2;
-	var heightAlertForm = (eXo.core.Browser.getBrowserHeight() - alertForm.offsetHeight)/2;
+	var widthAlertForm = (gj(window).width() - alertForm.offsetWidth)/2;
+	var heightAlertForm = (gj(window).height() - alertForm.offsetHeight)/2;
 	alertForm.style.left = widthAlertForm + "px";
 	alertForm.style.top = heightAlertForm + "px";
 }
@@ -97,7 +97,7 @@ UploadForm.prototype.getStringParam = function() {
 UploadForm.prototype.uploadFile = function() {
 	eXo.ecm.UploadForm.uploadId = eXp.getID();
 	var popupContainer = document.getElementById("PopupContainer");
-	var iFrameUpload = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "iframe", "iFrameUpload");
+	var iFrameUpload = gj(popupContainer).find("iframe.iFrameUpload:first")[0];
 	var formUpload = iFrameUpload.contentWindow.document.getElementsByTagName("form")[0];
 	if(!formUpload.file.value == '') {
 		var repositoryName = eXo.ecm.ECS.repositoryName;
@@ -115,11 +115,11 @@ UploadForm.prototype.uploadFile = function() {
 			formUpload.submit();
 		}
 		eXo.ecm.UploadForm.stopUpload = false;
-		var uploadField = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr","UploadField");
+		var uploadField = gj(popupContainer).find("tr.UploadField:first")[0];
 		uploadField.style.display = "none";
-		var UploadInfo = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr","UploadInfo");
+		var UploadInfo = gj(popupContainer).find("tr.UploadInfo:first")[0];
 		UploadInfo.style.display = "";
-		var CancelAction = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr","CancelAction");
+		var CancelAction = gj(popupContainer).find("tr.CancelAction:first")[0];
 		CancelAction.style.display = "none";
 		if(!eXo.ecm.UploadForm.stopUpload) {
 				setTimeout(function() {
@@ -143,9 +143,9 @@ UploadForm.prototype.uploadFile = function() {
 					if(nodeList.length > 0) oProgress = nodeList[0];
 					var nPercent = oProgress.getAttribute("percent");
 					var popupContainer = document.getElementById("PopupContainer");
-					var uploadInfo = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr", "UploadInfo");
-					var graphProgress = eXo.core.DOMUtil.findFirstDescendantByClass(uploadInfo, "div", "GraphProgress");
-					var numberProgress = eXo.core.DOMUtil.findFirstDescendantByClass(uploadInfo, "div", "NumberProgress");
+					var uploadInfo = gj(popupContainer).find("tr.UploadInfo:first")[0];
+					var graphProgress = gj(uploadInfo).find("div.GraphProgress:first")[0];
+					var numberProgress = gj(uploadInfo).find("div.NumberProgress:first")[0];
 					if(nPercent * 1 < 100) {
 						graphProgress.style.width = nPercent + "%";
 						numberProgress.innerHTML = nPercent + "%";
@@ -156,7 +156,7 @@ UploadForm.prototype.uploadFile = function() {
 						numberProgress.innerHTML = 100 + "%";
 						eXo.ecm.UploadForm.stopUpload = true;
 						uploadInfo.className = "UploadInfo Delete";
-						var uploadAction = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr", "UploadAction");
+						var uploadAction = gj(popupContainer).find("tr.UploadAction:first")[0];
 						uploadAction.style.display = "";
 					}
 				}, 1*1000);
@@ -208,13 +208,13 @@ UploadForm.prototype.uploadFileDelete = function() {
 UploadForm.prototype.uploadFileSave = function() {
 		var popupContainer = document.getElementById("PopupContainer");
 		var nodeName = '';
-		var nodes = eXo.core.DOMUtil.findDescendantsByTagName(popupContainer, "input");
+		var nodes = gj(popupContainer).find("input");
 		for(var i = 0; i < nodes.length;  i++) {
 			if(nodes[i].getAttribute("name") == "fileName") {
 				nodeName = nodes[i].value;
 			}
 		}
-		var iFrameUpload = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "iframe", "iFrameUpload");
+		var iFrameUpload = gj(popupContainer).find("iframe.iFrameUpload:first")[0];
 		var formUpload = iFrameUpload.contentWindow.document.getElementsByTagName("form")[0];
 		var filename = formUpload.file.value;
     try {

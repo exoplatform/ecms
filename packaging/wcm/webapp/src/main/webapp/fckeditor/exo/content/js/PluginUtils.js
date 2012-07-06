@@ -108,9 +108,9 @@ PluginUtils.prototype.renderSubTrees = function(currentNode, event, connector) {
 				treeHTML +=		'</div>';
 				treeHTML +=	'</div>';
 			}
-			var parentNode = eXo.core.DOMUtil.findAncestorByClass(currentNode, "Node");
-			var nodeIcon = eXo.core.DOMUtil.findAncestorByTagName(currentNode, "div");
-			var nextElementNode = eXo.core.DOMUtil.findNextElementByTagName(parentNode, "div");
+			var parentNode = gj(currentNode).parents(".Node:first")[0];
+			var nodeIcon = gj(currentNode).parents("div:first")[0];
+			var nextElementNode = gj(parentNode).nextAll("div:first")[0];
 			var tmpNode = document.createElement("div");
 			tmpNode.className = "ChildrenContainer" ;
 			tmpNode.innerHTML = treeHTML;
@@ -122,7 +122,7 @@ PluginUtils.prototype.renderSubTrees = function(currentNode, event, connector) {
 				eXoWCM.PluginUtils.actionColExp(parentNode);
 				if(nodeIcon) nodeIcon.className = 'ExpandIcon';
 			} else {
-				var cldrContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
+				var cldrContainer = gj(currentNode).parents(".ChildrenContainer:first")[0];
 				nodeIcon.className = 'CollapseIcon';
 				cldrContainer.appendChild(tmpNode);
 			}
@@ -133,8 +133,8 @@ PluginUtils.prototype.renderSubTrees = function(currentNode, event, connector) {
 
 PluginUtils.prototype.actionColExp = function(objNode) {
 	if(!objNode) return;
-	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(objNode, "div");
-	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(objNode, "div")[0];
+	var nextElt = gj(objNode).nextAll("div:first")[0];
+	var iconElt = gj(objNode).children("div")[0];
 	if(!nextElt || nextElt.className != "ChildrenContainer") return;
 	if(nextElt.style.display != 'block') {
 		nextElt.style.display = 'block';
@@ -147,8 +147,8 @@ PluginUtils.prototype.actionColExp = function(objNode) {
 
 PluginUtils.prototype.listFiles = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var tblRWS  = gj(rightWS).find("table")[0];
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -215,11 +215,11 @@ Pager.prototype.init = function() {
 	var len = 0;
 	var table = document.getElementById(eXoWCM.Pager.tableName);
 	if(eXo.core.Browser.isFF()) {
-		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-		var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
+		var tHead = gj(table).children("thead")[0];
+		var rowsTHead = gj(tHead).children("tr");
 		len = rowsTHead.length;
 	}	else {
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+		var tBody = gj(table).children("tbody")[0];
 		len = tBody.childNodes.length -1;
 	}
     var records = len; 
@@ -232,10 +232,10 @@ Pager.prototype.showRecords = function(from, to) {
 	var rows = null;
 	var table = document.getElementById(eXoWCM.Pager.tableName);
 	if(eXo.core.Browser.isFF()) {
-		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-		rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
+		var tHead = gj(table).children("thead")[0];
+		rows = gj(tHead).children("tr");
 	}	else {
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+		var tBody = gj(table).children("tbody")[0];
 		rows =tBody.childNodes;
 	}
 	var len = rows.length;
@@ -333,7 +333,7 @@ PluginUtils.prototype.renderBreadcrumbs = function(currentNode) {
 		
 		currentNode = currentNode.parentNode;
 		if(currentNode != null && currentNode.className == 'ChildrenContainer'){
-			currentNode = eXo.core.DOMUtil.findPreviousElementByTagName(currentNode, 'div');
+			currentNode = gj(currentNode).prevAll('div:first')[0];
 			currentNode = currentNode.getElementsByTagName('div')[0].getElementsByTagName('a')[0];
 		}
 	}
@@ -363,7 +363,7 @@ PluginUtils.prototype.generateIdNodes = function(objNode, idNode) {
 
 PluginUtils.prototype.actionBreadcrumbs = function(nodeId) {
 	var element = document.getElementById(nodeId);
-	var node =  eXo.core.DOMUtil.findAncestorByClass(element, "Node");
+	var node =  gj(element).parents(".Node:first")[0];
 	eXoWCM.PluginUtils.actionColExp(node);
 	eXoWCM.PluginUtils.renderBreadcrumbs(element);
 
@@ -440,8 +440,8 @@ function getParameterValueByName( parameterName )
 PluginUtils.prototype.showSettings = function(obj) {
 	if(!obj) return;
 	if(obj.Timeout) clearTimeout(obj.Timeout);
-	var settingContainer = eXo.core.DOMUtil.findFirstDescendantByClass(obj, "div", "SettingContainer");
-	var popupMenu = eXo.core.DOMUtil.findFirstChildByClass(settingContainer, "div", "UIRightClickPopupMenu");
+	var settingContainer = gj(obj).find("div.SettingContainer:first")[0];
+	var popupMenu = gj(settingContainer).children("div.UIRightClickPopupMenu:first")[0];
 	if(popupMenu && popupMenu.style.display != "block") {
 		popupMenu.style.display = 'block';
 		popupMenu.onmouseout = function(){
@@ -456,16 +456,16 @@ PluginUtils.prototype.showSettings = function(obj) {
 			if(obj.Timeout) clearTimeout(obj.Timeout);
 			obj.Timeout = null;
 		};
-		eXo.core.DOMUtil.hideElements();
+//		eXo.core.DOMUtil.hideElements();
 	}
 };
 
 PluginUtils.prototype.showSubMenuSettings = function(obj) {
 	if(!obj) return;
 	if(obj.Timeout) clearTimeout(obj.Timeout);	
-	var childrenContainer = eXo.core.DOMUtil.findFirstDescendantByClass(obj, "div", "ChildrenContainer");
+	var childrenContainer = gj(obj).find("div.ChildrenContainer:first")[0];
 	if(childrenContainer) {
-		var viewSubMenuContainer = eXo.core.DOMUtil.findFirstChildByClass(childrenContainer, "div", "UIRightClickPopupMenu");
+		var viewSubMenuContainer = gj(childrenContainer).children("div.UIRightClickPopupMenu:first")[0];
 		if(viewSubMenuContainer && viewSubMenuContainer.style.display != 'block') {
 			viewSubMenuContainer.style.display = 'block';
 			viewSubMenuContainer.style.left 	= -viewSubMenuContainer.offsetWidth + 'px';
@@ -481,15 +481,15 @@ PluginUtils.prototype.showSubMenuSettings = function(obj) {
 				if(obj.Timeout) clearTimeout(obj.Timeout);
 				obj.Timeout = null;
 			};
-			eXo.core.DOMUtil.hideElements();
+//			eXo.core.DOMUtil.hideElements();
 		}
 	}
 };
 
 PluginUtils.prototype.changeFilter = function() {
 	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS	= eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var tblRWS	= gj(rightWS).find("table")[0];
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -501,15 +501,15 @@ PluginUtils.prototype.changeFilter = function() {
 
 PluginUtils.prototype.fixHeightTrees = function() {
 	var leftWS = document.getElementById('LeftWorkspace');
-	var windowHeight = eXo.core.Browser.getBrowserHeight();
-	var root = eXo.core.DOMUtil.findAncestorByClass(leftWS, "UIHomePageDT");
-	var titleBar = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleBar");
-	var uiWorkingWorkspace = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIWorkingWorkspace");
-	var actionBar = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "ActionBar");
+	var windowHeight = gj(window).height();
+	var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
+	var titleBar = gj(root).find("div.TitleBar:first")[0];
+	var uiWorkingWorkspace = gj(root).find("div.UIWorkingWorkspace:first")[0];
+	var actionBar = gj(uiWorkingWorkspace).find("div.ActionBar:first")[0];
 	var actionBaroffsetHeight = 0;
 	if(actionBar)
 	  actionBaroffsetHeight = actionBar.offsetHeight;
-	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
+	var breadcumbsPortlet = gj(uiWorkingWorkspace).find("div.BreadcumbsPortlet:first")[0];
 	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 };
 

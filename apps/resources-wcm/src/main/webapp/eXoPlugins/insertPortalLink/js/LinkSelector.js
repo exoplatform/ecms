@@ -85,8 +85,8 @@ LinkSelector.loadLinks = function() {
 };	
 
 LinkSelector.listPortalLinks = function(oPortalLink) {
-	var parentNode = eXo.core.DOMUtil.findAncestorByClass(oPortalLink, "Node");
-	var nodeGroup = eXo.core.DOMUtil.findNextElementByTagName(parentNode, "div");
+	var parentNode = gj(oPortalLink).parents(".Node:first")[0];
+	var nodeGroup = gj(parentNode).nextAll("div:first")[0];
 	var namePortalLink = oPortalLink.getAttribute('name');
 	var command = LinkSelector.cmdPortalLink + LinkSelector.cmdGetFolderAndFile+"type="+LinkSelector.resourceType+"&currentFolder="+namePortalLink;
 	var url = LinkSelector.hostName + LinkSelector.connector + command+"&lang="+LinkSelector.userLanguage;
@@ -112,7 +112,8 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 	} else {
 		nodeGroup.style.height = 0;
 	}
-	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0]
+//	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0]
+	var iconElt = gj(parentNode).children("div")[0];
 	if(nodeGroup.style.display != 'block') {
 		nodeGroup.style.display = 'block';
 		iconElt.className = 'Collapse';
@@ -127,7 +128,7 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 
 LinkSelector.listFileLinks = function(fileLinks) {
 	var tblRWS  = document.getElementById('ListRecords');
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);

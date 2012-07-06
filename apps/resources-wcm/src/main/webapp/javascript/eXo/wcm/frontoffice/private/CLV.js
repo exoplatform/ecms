@@ -19,8 +19,8 @@ ContentListViewer.prototype.initCondition = function(formid) {
 	} else{		
 		var selectedRadio = radioboxes[0];
 	}
-	var itemSelectedContainer = eXo.core.DOMUtil.findAncestorByClass(selectedRadio,"ContentSearchForm");
-	var itemContainers = eXo.core.DOMUtil.findDescendantsByClass(selectedRadio.form, "div", "ContentSearchForm");
+	var itemSelectedContainer = gj(selectedRadio).parents(".ContentSearchForm:first")[0];
+	var itemContainers = gj(selectedRadio.form).find("div.ContentSearchForm");
 	for(var i = 0 ;i < itemContainers.length; i++){
 		eXo.ecm.CLV.setCondition(itemContainers[i], true);
 	}
@@ -29,10 +29,10 @@ ContentListViewer.prototype.initCondition = function(formid) {
 
 ContentListViewer.prototype.chooseCondition = function() {
 	var me = this;
-	var hiddenField = eXo.core.DOMUtil.findFirstDescendantByClass(me.form,"input","hidden");
+	var hiddenField = gj(me.form).find("input.hidden:first")[0];
 	hiddenField.value = me.id;
-	var itemSelectedContainer = eXo.core.DOMUtil.findAncestorByClass(me,"ContentSearchForm");
-	var itemContainers = eXo.core.DOMUtil.findDescendantsByClass(me.form,"div","ContentSearchForm");
+	var itemSelectedContainer = gj(me).parents(".ContentSearchForm:first")[0];
+	var itemContainers = gj(me.form).find("div.ContentSearchForm");
 	for(var i=0;i<itemContainers.length;i++){
 		eXo.ecm.CLV.setCondition(itemContainers[i],true);
 	}
@@ -46,8 +46,7 @@ ContentListViewer.prototype.enableCondition = function(itemContainer) {
 };
 
 ContentListViewer.prototype.setCondition = function(itemContainer,state) {
-	var domUtil = eXo.core.DOMUtil;
-	var action = domUtil.findDescendantsByTagName(itemContainer,"img");
+	var action = gj(itemContainer).find("img");
 	if(action && action.length > 0){
 		for(var i = 0; i < action.length; i++){
 			if(state) {
@@ -58,14 +57,14 @@ ContentListViewer.prototype.setCondition = function(itemContainer,state) {
 		}
 	}
 	
-	var action = domUtil.findDescendantsByTagName(itemContainer,"input");
+	var action = gj(itemContainer).find("input");
 	if(action && (action.length > 0)){
 		for(i = 0; i < action.length; i++){
 			if(action[i].type != "radio") action[i].disabled = state;
 		}
 	}
 	
-	var action = domUtil.findDescendantsByTagName(itemContainer,"select");
+	var action = gj(itemContainer).find("select");
 	if(action && (action.length > 0)){
 		for(i = 0; i < action.length; i++){
 			action[i].disabled = state;
@@ -86,8 +85,8 @@ ContentListViewer.prototype.setHiddenValue = function() {
 
 ContentListViewer.prototype.checkModeViewer = function() {
 	var formObj = document.getElementById("UICLVConfig");
-	var OrderOptions = eXo.core.DOMUtil.findDescendantsByClass(formObj, "tr", "OrderBlock");
-	var viewerModes = eXo.core.DOMUtil.findDescendantsByTagName(formObj, "input");
+	var OrderOptions = gj(formObj).find("tr.OrderBlock");
+	var viewerModes = gj(formObj).find("input");
 	for(var i = 0; i < viewerModes.length; i++) {
 		if(viewerModes[i].getAttribute("name") == "ViewerMode") {
 			if(viewerModes[i].value == "AutoViewerMode") {
@@ -109,16 +108,16 @@ ContentListViewer.prototype.checkModeViewer = function() {
 
 ContentListViewer.prototype.checkContextualFolderInput = function() {
 	var formObj = document.getElementById("UICLVConfig");
-	var tdContextualFolder = eXo.core.DOMUtil.findDescendantsByClass(formObj, "td", "ContextualRadio")[0];
+	var tdContextualFolder = gj(formObj).find("td.ContextualRadio")[0];
 
-	var inputs = eXo.core.DOMUtil.getChildrenByTagName(tdContextualFolder, "input");
+	var inputs = gj(tdContextualFolder).children("input");
 	var enableInput = inputs[0];
 	var disableInput = inputs[1];
 	
-	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(tdContextualFolder, "tr");
-	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
+	var trContextual = gj(tdContextualFolder).parents("tr:first")[0];
+	var trClv = gj(trContextual).nextAll("tr:first")[0];
 	
-	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+	var clvInput = gj(trClv).find("input")[0];
 
 	enableInput.setAttribute("onmouseup", "eXo.ecm.CLV.enableClvInput(this)");
 	disableInput.setAttribute("onmouseup", "eXo.ecm.CLV.disableClvInput(this)");
@@ -130,16 +129,16 @@ ContentListViewer.prototype.checkContextualFolderInput = function() {
 };
 
 ContentListViewer.prototype.enableClvInput = function(obj){
-	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(obj, "tr");
-	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
-	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+	var trContextual = gj(obj).parents("tr:first")[0];
+	var trClv = gj(trContextual).nextAll("tr:first")[0];
+	var clvInput = gj(trClv).find("input")[0];
 	clvInput.removeAttribute('readonly');
 };
 
 ContentListViewer.prototype.disableClvInput = function(obj){
-	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(obj, "tr");
-	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
-	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+	var trContextual = gj(obj).parents("tr:first")[0];
+	var trClv = gj(trContextual).nextAll("tr:first")[0];
+	var clvInput = gj(trClv).find("input")[0];
 	clvInput.setAttribute('readonly', '');
 };
 

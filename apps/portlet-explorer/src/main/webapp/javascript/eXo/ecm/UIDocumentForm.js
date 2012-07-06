@@ -9,9 +9,9 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 	var uiWorkingWorkspace = document.getElementById('UIWorkingWorkspace');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
-	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
-	var uiHorizontalTabs = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIHorizontalTabs");
-	var horizontalLayout = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "HorizontalLayout");
+	var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
+	var uiHorizontalTabs = gj(uiDocumentForm).find("div.UIHorizontalTabs:first")[0];
+	var horizontalLayout = gj(uiDocumentForm).find("div.HorizontalLayout:first")[0];
 
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
 		
@@ -38,12 +38,12 @@ UIDocumentForm.prototype.UpdateGUI = function () {
 	var uiWorkingWorkspace = document.getElementById('UIWorkingWorkspace');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
-	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
-	var fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "MaximizeScreen20x20Icon");
-	var changeTypeLink = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "ChangeTypeLink");
+	var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
+	var fullscreenDiv = gj(uiAction).find("a.MaximizeScreen20x20Icon:first")[0];
+	var changeTypeLink = gj(uiAction).find("a.ChangeTypeLink:first")[0];
 
 	if (!fullscreenDiv) {
-		fullscreenDiv = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "MinimizeScreen20x20Icon");
+		fullscreenDiv = gj(uiAction).find("a.MinimizeScreen20x20Icon:first")[0];
 	}
 	
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
@@ -63,11 +63,11 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 	var uiWorkingWorkspace = document.getElementById('UIWorkingWorkspace');
 	var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
-	var uiAction = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "UIAction");
-	var changeTypeLink = eXo.core.DOMUtil.findFirstDescendantByClass(uiAction, "a", "ChangeTypeLink");	
+	var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
+	var changeTypeLink = gj(uiAction).find("a.ChangeTypeLink:first")[0];	
 	
 	if (!eXo.webui.UIDocForm.horizontalLayout) {	
-		eXo.webui.UIDocForm.horizontalLayout = eXo.core.DOMUtil.findFirstDescendantByClass(uiDocumentForm, "div", "HorizontalLayout");
+		eXo.webui.UIDocForm.horizontalLayout = gj(uiDocumentForm).find("div.HorizontalLayout:first")[0];
 	}
 
 	if (element.className == "MaximizeScreen20x20Icon") {

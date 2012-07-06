@@ -55,7 +55,8 @@ Utils = function(){
 	Utils.prototype.insertQuickeditingBlock = function(portletID, quickEditingBlockId) {
 		var presentation = document.getElementById(portletID);		
 		var parentNode = presentation.parentNode;
-		var fistChild = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0];
+		//var fistChild = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0];
+		var fistChild = gj(parentNode).children("div")[0];
 		if (fistChild.id == quickEditingBlockId) {
 			var quickEditingBlock = document.getElementById(quickEditingBlockId);
 			quickEditingBlock.parentNode.removeChild(quickEditingBlock);
@@ -79,7 +80,7 @@ Utils = function(){
 eXo.wcm = new Utils();
 
 function showObject(obj) {
-	var element = eXo.core.DOMUtil.findNextElementByTagName(obj, "div");
+	var element = gj(obj).nextAll("div:first")[0];
 	if (!element.style.display || element.style.display == 'none') {
 		element.style.display = 'block';
 	} else {
@@ -112,7 +113,7 @@ function getKeynum(event) {
 
 function quickSearch(resultPageURI) {
 	var searchBox = document.getElementById("siteSearchBox");
-	var keyWordInput = eXo.core.DOMUtil.findFirstDescendantByClass(searchBox, "input", "keyword");
+	var keyWordInput = gj(searchBox).find("input.keyword:first")[0];
 	var keyword = encodeURI(keyWordInput.value);
 	var resultPageURIDefault = "searchResult";
 	var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
@@ -134,12 +135,12 @@ function quickSearchOnEnter(event, resultPageURI) {
 
 function search(comId) {
 	var searchForm = document.getElementById(comId);
-	var inputKey = eXo.core.DOMUtil.findDescendantById(searchForm, "keywordInput");
+	var inputKey = gj(searchForm).find("#keywordInput:first")[0];
 	searchForm.onsubmit = function() {return false;};
 	inputKey.onkeypress = function(event) {
 		var keyNum = getKeynum(event);
 		if (keyNum == 13) {
-			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(this.form, "div", "SearchButton");
+			var searchButton = gj(this.form).find("div.SearchButton:first")[0];
 			searchButton.onclick();
   	 }		
 	}
@@ -148,7 +149,7 @@ function search(comId) {
 function keepKeywordOnBoxSearch() {
 	var queryRegex = /^portal=[\w%]+&keyword=[\w%]+/;
 	var searchBox = document.getElementById("siteSearchBox");
-	var keyWordInput = eXo.core.DOMUtil.findFirstDescendantByClass(searchBox, "input", "keyword");
+	var keyWordInput = gj(searchBox).find("input.keyword:first")[0];
 	var queryString = location.search.substring(1);
 	if (!queryString.match(queryRegex)) {return;}
 	var portalParam = queryString.split('&')[0];
@@ -162,7 +163,6 @@ eXo.core.Browser.addOnLoadCallback("keepKeywordOnBoxSearch", keepKeywordOnBoxSea
 
 /*------------------Overrite method eXo.webui.UIPopup.init to show popup display center-------------------------------*/
 UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask) {XoWork
-	var DOMUtil = eXo.core.DOMUtil ;
 	this.superClass = eXo.webui.UIPopup ;
 	var popup = document.getElementById(popupId) ;
 	var portalApp = document.getElementById("UIPortalApplication") ;
@@ -173,11 +173,11 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 	
 	//TODO Lambkin: this statement create a bug in select box component in Firefox
 	//this.superClass.init(popup) ;
-	var contentBlock = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupContent');
-	if((eXo.core.Browser.getBrowserHeight() - 100 ) < contentBlock.offsetHeight) {
-		contentBlock.style.height = (eXo.core.Browser.getBrowserHeight() - 100) + "px";
+	var contentBlock = gj(popup).find('div.PopupContent:first')[0];
+	if((gj(window).height() - 100 ) < contentBlock.offsetHeight) {
+		contentBlock.style.height = (gj(window).height() - 100) + "px";
 	}
-	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupTitle') ;
+	var popupBar = gj(popup).find('div.PopupTitle:first')[0];
 
 	popupBar.onmousedown = this.initDND;
 	popupBar.onkeydown = this.initDND;
@@ -188,7 +188,7 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 	} 
 	
 	if(isResizable) {
-		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "div", "ResizeButton");
+		var resizeBtn = gj(popup).find("div.ResizeButton:first")[0];
 		resizeBtn.style.display = 'block';
 		resizeBtn.onmousedown = this.startResizeEvt;
 		resizeBtn.onkeydown = this.startResizeEvt;
@@ -197,7 +197,7 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 	
 	popup.style.visibility = "hidden" ;
 	if(isShow == true) {
-		var iframes = DOMUtil.findDescendantsByTagName(popup, "iframe") ;
+		var iframes = gj(popup).find("iframe") ;
 		if(iframes.length > 0) {
 			setTimeout("eXo.webui.UIPopupWindow.show('" + popupId + "'," + isShowMask + ")", 500) ;
 		} else {
@@ -239,7 +239,7 @@ eXo.portal.UIControlWorkspace.showWorkspace = function() {
 		/*23 is height of User Workspace Title*/
 
 		eXo.webui.UIVerticalScroller.init();
-		eXo.portal.UIPortalControl.fixHeight();
+		//eXo.portal.UIPortalControl.fixHeight();
 	}
 	
 	/* Reorganize opened windows */
@@ -248,12 +248,11 @@ eXo.portal.UIControlWorkspace.showWorkspace = function() {
 	var uiPageDesktop = document.getElementById("UIPageDesktop") ;
 	if(uiPageDesktop) eXo.desktop.UIDockbar.resizeDockBar() ;
 	/* Resizes the scrollable containers */
-	eXo.portal.UIPortalControl.initAllManagers();
+	//eXo.portal.UIPortalControl.initAllManagers();
 	
 	/* BEGIN - Check positon of widgets in order to avoid hide widgets when we expand/collapse workspace*/
 	if(uiPageDesktop) {
-		var DOMUtil = eXo.core.DOMUtil ;
-		var uiWidget = DOMUtil.findChildrenByClass(uiPageDesktop, "div", "UIWidget") ;
+		var uiWidget = gj(uiPageDesktop).children("div.UIWidget") ;
 		var uiControlWorkspace = document.getElementById("UIControlWorkspace") ;
 		var size = uiWidget.length ;
 		var limitX = 50 ;
@@ -277,7 +276,7 @@ eXo.portal.UIControlWorkspace.showWorkspace = function() {
 		}		
 		
 		//fix for UIGadget by Pham Dinh Tan
-		var uiGadgets = DOMUtil.findChildrenByClass(uiPageDesktop, "div", "UIGadget") ;
+		var uiGadgets = gj(uiPageDesktop).children("div.UIGadget") ;
 		var limitXGadget = 80;
 		for(var i = 0 ; i < uiGadgets.length; i++) {
 			var dragObject = uiGadgets[i] ;
@@ -300,14 +299,14 @@ eXo.portal.UIControlWorkspace.showWorkspace = function() {
 	}
 	
 	// fix for DropDropList bug in IE by Pham Dinh Tan  
-	var dropDownAnchors = eXo.core.DOMUtil.findDescendantsByClass(document, "div", "UIDropDownAnchor");
+	var dropDownAnchors = gj(document).find("div.UIDropDownAnchor");
 	for(var i = 0; i < dropDownAnchors.length; i++) {
 		if(dropDownAnchors[i].style.display != "none") {
 			dropDownAnchors[i].style.display = "none";
 		}
 	}
 	
-	var popupWindows = eXo.core.DOMUtil.findDescendantsByClass(document, "div", "UIPopupWindow") ;
+	var popupWindows = gj(document).find("div.UIPopupWindow");
 	for(var i = 0; i < popupWindows.length; i++) {
 		if(popupWindows[i].style.display != "none") {
 			eXo.webui.UIPopupWindow.show(popupWindows[i], popupWindows[i].isShowMask) ;
@@ -338,8 +337,8 @@ function initCondition(formid){
 	} else{		
 		var selectedRadio = radioboxes[0];
 	}
-	var itemSelectedContainer = eXo.core.DOMUtil.findAncestorByClass(selectedRadio,"ContentSearchForm");
-	var itemContainers = eXo.core.DOMUtil.findDescendantsByClass(selectedRadio.form,"div","ContentSearchForm");
+	var itemSelectedContainer = gj(selectedRadio).parents(".ContentSearchForm:first")[0];
+	var itemContainers = gj(selectedRadio.form).find("div.ContentSearchForm");
 	for(var i=1;i<itemContainers.length;i++){
 		setCondition(itemContainers[i],true);
 	}
@@ -348,10 +347,10 @@ function initCondition(formid){
 
 function chooseCondition() {
 	var me = this;
-	var hiddenField = eXo.core.DOMUtil.findFirstDescendantByClass(me.form,"input","hidden");
+	var hiddenField = gj(me.form).find("input.hidden:first")[0];
 	hiddenField.value = me.id;
-	var itemSelectedContainer = eXo.core.DOMUtil.findAncestorByClass(me,"ContentSearchForm");
-	var itemContainers = eXo.core.DOMUtil.findDescendantsByClass(me.form,"div","ContentSearchForm");
+	var itemSelectedContainer = gj(me).parents(".ContentSearchForm:first")[0];
+	var itemContainers = gj(me.form).find("div.ContentSearchForm");
 	for(var i=1;i<itemContainers.length;i++){
 		setCondition(itemContainers[i],true);
 	}
@@ -365,8 +364,7 @@ function enableCondition(itemContainer) {
 };
 
 function setCondition(itemContainer,state) {
-	var domUtil = eXo.core.DOMUtil;
-	var action = domUtil.findDescendantsByTagName(itemContainer,"img");
+	var action = gj(itemContainer).find("img");
 	if(action && (action.length > 0)){
 		for(var i = 0; i < action.length; i++){
 			if(state) {
@@ -376,13 +374,13 @@ function setCondition(itemContainer,state) {
 			}	
 		}
 	}
-	var action = domUtil.findDescendantsByTagName(itemContainer,"input");
+	var action = gj(itemContainer).find("input");
 	if(action && (action.length > 0)){
 		for(i = 0; i < action.length; i++){
 			if(action[i].type != "radio") action[i].disabled = state;
 		}
 	}
-	var action = domUtil.findDescendantsByTagName(itemContainer,"select");
+	var action = gj(itemContainer).find("select");
 	if(action && (action.length > 0)){
 		for(i = 0; i < action.length; i++){
 			action[i].disabled = state;
@@ -407,7 +405,7 @@ function setHiddenValue() {
 function showHideOrderBy() {
 	var formObj = document.getElementById('UIViewerManagementForm');
 	var viewerModeObj = formObj['ViewerMode'];
-	var orderXXX = eXo.core.DOMUtil.findDescendantsByClass(formObj, 'tr', 'OrderBlock');			
+	var orderXXX = gj(formObj).find('tr.OrderBlock');			
 	viewerModeObj[0].onclick = function() {
 		for (var i = 0; i < orderXXX.length; i++) {
 			orderXXX[i].style.display = '';
@@ -428,18 +426,17 @@ function showPopupMenu(obj) {
 	// Todo fix bug show menu popup appears under Navigation
 	// Will remove when add javascript for navagation ok
 	var uiACMENavi = document.getElementById('navigation-generator');
-	var uiWCMNavigationPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiACMENavi, "div", "UIWCMNavigationPortlet");
+	var uiWCMNavigationPortlet = gj(uiACMENavi).find("div.UIWCMNavigationPortlet:first")[0];
 	if(eXo.core.Browser.browserType == 'ie')  {
 		if(uiNavi) uiNavi.style.position = "static";
 		if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
 	}
 	if(obj.Timeout) clearTimeout(obj.Timeout);
-	var DOMUtil = eXo.core.DOMUtil;
-	var mnuItemContainer = DOMUtil.findNextElementByTagName(obj, "div");
-	var objParent = DOMUtil.findAncestorByClass(obj, "TBItem");
+	var mnuItemContainer = gj(obj).nextAll("div:first")[0];
+	var objParent = gj(obj).parents(".TBItem:first")[0];
 	if(mnuItemContainer && mnuItemContainer.style.display != "block") {
 		mnuItemContainer.style.display = 'block';
-		mnuItemContainer.style.width = mnuItemContainer.offsetWidth - parseInt(DOMUtil.getStyle(mnuItemContainer, "borderLeftWidth")) - parseInt(DOMUtil.getStyle(mnuItemContainer, "borderRightWidth")) + 'px';
+		mnuItemContainer.style.width = mnuItemContainer.offsetWidth - parseInt(gj(mnuItemContainer).css("borderLeftWidth")) - parseInt(gj(mnuItemContainer).css("borderRightWidth")) + 'px';
 		objParent.className = 'TBItemHover';
 		mnuItemContainer.onmouseout = function(){
 			if(eXo.core.Browser.browserType == 'ie')  {
@@ -499,10 +496,9 @@ function showPopupMenu(obj) {
 function showPopupSubMenu(obj) {
 	if(!obj) return;
 	if(obj.Timeout) clearTimeout(obj.Timeout);	
-	var DOMUtil = eXo.core.DOMUtil;
-	var objParent = DOMUtil.findAncestorByClass(obj, "ArrowIcon");
+	var objParent = gj(obj).parents(".ArrowIcon:first")[0];
 	var subMenuItemContainer = false;
-	if(objParent) subMenuItemContainer = DOMUtil.findNextElementByTagName(objParent, "div");
+	if(objParent) subMenuItemContainer = gj(objParent).nextAll("div:first")[0];
 	if(subMenuItemContainer && subMenuItemContainer.style.display != "block") {
 		subMenuItemContainer.style.display = 'block';
 		objParent.className = 'MenuItemHover ArrowIcon';
@@ -542,7 +538,7 @@ function showPopupSubMenu(obj) {
 
 		obj.onmouseout = subMenuItemContainer.onmouseout;
 		obj.onblur = subMenuItemContainer.onblur;
-		subMenuItemContainer.style.width = subMenuItemContainer.offsetWidth - parseInt(DOMUtil.getStyle(subMenuItemContainer, "borderLeftWidth")) - parseInt(DOMUtil.getStyle(subMenuItemContainer, "borderRightWidth")) + 'px';
+		subMenuItemContainer.style.width = subMenuItemContainer.offsetWidth - parseInt(gj(subMenuItemContainer).css("borderLeftWidth")) - parseInt(gj(subMenuItemContainer).css("borderRightWidth")) + 'px';
 		subMenuItemContainer.style.left = objParent.offsetLeft + objParent.offsetWidth + 'px';
 		subMenuItemContainer.style.top =  eXo.core.Browser.findPosYInContainer(objParent,subMenuItemContainer.offsetParent) + 'px';
 	}

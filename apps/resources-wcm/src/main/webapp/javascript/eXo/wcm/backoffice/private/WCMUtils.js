@@ -1,5 +1,4 @@
 function WCMUtils(){
-	var DOM = eXo.core.DOMUtil;
 }
 
 WCMUtils.prototype.getHostName = function() {
@@ -68,13 +67,13 @@ WCMUtils.prototype.openPrintPreview = function(urlToOpen) {
 WCMUtils.prototype.showInContextHelp = function(id, isIn){
   var parentElm = document.getElementById(id);
   var popupHelp = document.getElementById(id+"ID");
-  var inContextContentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(parentElm,"div","InContextHelpContent");
+  var inContextContentHelp = gj(parentElm).find("div.InContextHelpContent:first")[0];
   var wTmp = 1;
   if(inContextContentHelp){
     if(isIn == "true"){
       inContextContentHelp.style.display = "block";
-      var inContextHelpPopup = eXo.core.DOMUtil.findFirstDescendantByClass(inContextContentHelp,"div","InContextHelpPopup");
-      var contentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(inContextHelpPopup,"div","LeftInContextHelpPopup");
+      var inContextHelpPopup = gj(inContextContentHelp).find("div.InContextHelpPopup:first")[0];
+      var contentHelp = gj(inContextHelpPopup).find("div.LeftInContextHelpPopup:first")[0];
       var l = String(contentHelp.innerHTML).length;
       if(l < 100){
         contentHelp.style.width = (20 + l*4) + "px"
@@ -108,8 +107,8 @@ WCMUtils.prototype.showInContextHelp = function(id, isIn){
 };
 
 WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
-		var nodeReference = eXo.core.DOMUtil.findAncestorByClass(elemtClicked,  "ShowHideContainer");    
-		var elemt = eXo.core.DOMUtil.findFirstDescendantByClass(nodeReference, "div", "ShowHideComponent") ;		
+		var nodeReference = gj(elemtClicked).parents(".ShowHideContainer:first")[0];    
+		var elemt = gj(nodeReference).find("div.ShowHideComponent:first")[0];		
 		if(elemt.style.display == 'none') {		
 			elemtClicked.childNodes[0].style.display = 'none' ;
 			elemtClicked.childNodes[1].style.display = 'block' ;
@@ -127,7 +126,7 @@ WCMUtils.prototype.setScrollBar = function()  {
       var elementWorkingArea = document.getElementById('UIWorkingArea');
       var parent = document.getElementById('TabContainerParent'); 
       if(parent!=null)	{
-        var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
+        var elements  = gj(parent).find("div.UITabContent"); 
         if(elements!=null)	{      
 					for(i=0;i<elements.length;i++)
 					{    
@@ -147,7 +146,7 @@ WCMUtils.prototype.setScrollBar = function()  {
 }; 
 
 WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
-	var contextMenu = eXo.core.DOMUtil.findAncestorByClass(menuItemElem, "UIRightClickPopupMenu") ;
+	var contextMenu = gj(menuItemElem).parents(".UIRightClickPopupMenu:first")[0];
 	contextMenu.style.display = "none" ;
 }
 
@@ -186,9 +185,9 @@ WCMUtils.prototype.searchNodeTypeOnKeyPress = function() {
       keynum = event.keyCode;
     } 
     if (keynum == 13) {
-    	var divUINodeTypeSearch = eXo.core.DOMUtil.findAncestorByClass(this,"UINodeTypeSearh");
-    	var tdButtonCell = eXo.core.DOMUtil.findFirstDescendantByClass(divUINodeTypeSearch, "td", "ButtonCell");
-    	var btnSearch = eXo.core.DOMUtil.findDescendantsByTagName(tdButtonCell, "a")[0];
+    	var divUINodeTypeSearch = gj(this).parents(".UINodeTypeSearh:first")[0];
+    	var tdButtonCell = gj(divUINodeTypeSearch).find("td.ButtonCell:first")[0];
+    	var btnSearch = gj(tdButtonCell).find("a")[0];
         eval(btnSearch.getAttribute("href"));
         return false;
     }

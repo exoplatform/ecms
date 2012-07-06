@@ -145,10 +145,10 @@
           </div>
           <script type="text/javascript">
             function contextualProcessing(element) {
-              var rdoContexttual = eXo.core.DOMUtil.findFirstDescendantByClass(element, "input", "radio");
+              var rdoContexttual = gj(element).find("input.radio:first")[0];
               var isChecked = rdoContexttual.getAttribute("checked");
-              var scvPreferences = eXo.core.DOMUtil.findAncestorByClass(element, "UIForm");
-              var inputSet = eXo.core.DOMUtil.findFirstDescendantByClass(scvPreferences, "div", "UIFormInputSetWithAction");
+              var scvPreferences = gj(element).parents(".UIForm:first")[0];
+              var inputSet = gj(scvPreferences).find("div.UIFormInputSetWithAction:first")[0];
               var savedInnerHTML = inputSet.innerHTML;
               var imgStartIndex = savedInnerHTML.indexOf("<img");
               var strFirstInput  = savedInnerHTML.substr(0,imgStartIndex);

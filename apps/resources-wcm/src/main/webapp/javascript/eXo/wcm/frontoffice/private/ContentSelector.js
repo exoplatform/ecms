@@ -146,7 +146,7 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 	if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
 	var contentSelectorPop = document.getElementById('CorrectContentSelectorPopupWindow');
   if(contentSelectorPop) {
-		var contentBlock = eXo.core.DOMUtil.findFirstDescendantByClass(contentSelectorPop, 'div' ,'PopupContent');
+		var contentBlock = gj(contentSelectorPop).find('div.PopupContent:first')[0];
 		if(contentBlock) contentBlock.style.height="";
 	}
 };
@@ -171,11 +171,11 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 		eXo.ecm.ECS.showUpload();	
 	} else if(currentNode.getAttribute('isUpload')) {
 		
-			var nodeContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
+			var nodeContainer = gj(currentNode).parents(".ChildrenContainer:first")[0];
 			if(!nodeContainer) return;
-			var nodeParent = eXo.core.DOMUtil.findPreviousElementByTagName(nodeContainer, "div");
+			var nodeParent = gj(nodeContainer).prevAll("div:first")[0];
 			if(!nodeParent) return;
-			var nodeLink = eXo.core.DOMUtil.findFirstDescendantByClass(nodeParent, "a", "NodeIcon");
+			var nodeLink = gj(nodeParent).find("a.NodeIcon:first")[0];
 			if(nodeLink) {
 				if(nodeLink.getAttribute('currentFolder') && nodeLink.getAttribute('currentFolder') != null) {
 					currentFolder = nodeLink.getAttribute('currentFolder') + '/' + currentNode.getAttribute('name');
@@ -258,8 +258,8 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 	}	
 	
 	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var tblRWS  = gj(rightWS).find("table")[0];
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -329,9 +329,9 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 				treeHTML +=		'</div>';
 				treeHTML +=	'</div>';
 			}
-			var parentNode = eXo.core.DOMUtil.findAncestorByClass(currentNode, "Node");
-			var nodeIcon = eXo.core.DOMUtil.findAncestorByTagName(currentNode, "div");
-			var nextElementNode = eXo.core.DOMUtil.findNextElementByTagName(parentNode, "div");
+			var parentNode = gj(currentNode).parents(".Node:first")[0];
+			var nodeIcon = gj(currentNode).parents("div:first")[0];
+			var nextElementNode = gj(parentNode).nextAll("div:first")[0];
 			var tmpNode = document.createElement("div");
 			tmpNode.className = "ChildrenContainer" ;      
 			tmpNode.innerHTML = treeHTML;
@@ -342,7 +342,7 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 			} else if(nextElementNode && nextElementNode.className == "ChildrenContainer"){				
 				eXo.ecm.ECS.actionColExp(parentNode);
 			} else {				
-				var cldrContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
+				var cldrContainer = gj(currentNode).parents(".ChildrenContainer:first")[0];
 				nodeIcon.className = 'CollapseIcon';
 				cldrContainer.appendChild(tmpNode);
 			}
@@ -361,10 +361,10 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 EcmContentSelector.prototype.actionColExp = function(objNode) {
  
 	if(!objNode) return;
-	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(objNode, "div");
-	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(objNode, "div")[0];
+	var nextElt = gj(objNode).nextAll("div:first")[0];
+	var iconElt = gj(objNode).children("div")[0];
 	if(!nextElt || nextElt.className != "ChildrenContainer") {		
-		var currentNode	= eXo.core.DOMUtil.findFirstDescendantByClass(objNode,"a","NodeIcon");			
+		var currentNode	= gj(objNode).find("a.NodeIcon:first")[0];			
 		if (currentNode != null) {      
 			eXo.ecm.ECS.getDir(currentNode, false);
 		} else return;
@@ -418,7 +418,7 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 		}
 		currentNode = currentNode.parentNode;
 		if(currentNode != null && currentNode.className == 'ChildrenContainer'){
-			currentNode = eXo.core.DOMUtil.findPreviousElementByTagName(currentNode, 'div');
+			currentNode = gj(currentNode).prevAll('div:first')[0];
 			currentNode = currentNode.getElementsByTagName('div')[0].getElementsByTagName('a')[0];
 		}
 	}
@@ -427,7 +427,7 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 	var ECS = eXo.ecm.ECS;
 	var element = document.getElementById(nodeId);
-	var node =  eXo.core.DOMUtil.findAncestorByClass(element, "Node");
+	var node =  gj(element).parents(".Node:first")[0];
 	eXo.ecm.ECS.actionColExp(node);
 	eXo.ecm.ECS.renderBreadcrumbs(element);
 	var currentFolder;
@@ -480,8 +480,8 @@ EcmContentSelector.prototype.listFiles = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');  
 	if(!list || list.length <= 0) {
 		if(viewType=="list") {
-			var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-			var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+			var tblRWS  = gj(rightWS).find("table")[0];
+			var rowsRWS = gj(tblRWS).find("tr");
 			if(rowsRWS && rowsRWS.length > 0) {
 				for(var i = 0; i < rowsRWS.length; i++) {
 					if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -494,7 +494,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 			tdNoContent.userLanguage = "UserLanguage.NoContent";	
 			document.getElementById("pageNavPosition").innerHTML = "";
 		} else {
-			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
 			container.innerHTML = "<div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
 			document.getElementById("pageNavPosition").innerHTML = "";
 		}
@@ -502,9 +502,9 @@ EcmContentSelector.prototype.listFiles = function(list) {
 	} else {		
     
     if(viewType=="list") {
-			var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+			var tblRWS  = gj(rightWS).find("table")[0];
 			if(tblRWS) {
-				var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+				var rowsRWS = gj(tblRWS).find("tr");
 				if(rowsRWS && rowsRWS.length > 0) {
 					for(var i = 0; i < rowsRWS.length; i++) {
 						if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -512,7 +512,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 				} 
 			} else eXo.ecm.ECS.updateHTML(viewType);			
 		} else {
-			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
 			if(container) container.innerHTML = "";
       else eXo.ecm.ECS.updateHTML(viewType);
 		}			
@@ -531,7 +531,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
       
       if(viewType=="list") {	        
 				var clazz = 'OddItem';
-        var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+        var tblRWS  = gj(rightWS).find("table")[0];
 				var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 				var newRow = tblRWS.insertRow(i+1);
 				newRow.className = clazz;					
@@ -539,10 +539,10 @@ EcmContentSelector.prototype.listFiles = function(list) {
 				newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 				newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 			} else {				  
-        var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');			
+        var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];			
 				var strViewContent = "";
 				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
-				strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
+				strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = gj(this.parentNode).nextAll(\'div:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
 				container.innerHTML += strViewContent;
 			}
 		}			
@@ -581,8 +581,8 @@ EcmContentSelector.prototype.updateHTML = function(viewType) {
 
 EcmContentSelector.prototype.listFolders = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var tblRWS  = gj(rightWS).find("table")[0];
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -630,8 +630,8 @@ EcmContentSelector.prototype.listFolders = function(list) {
 
 EcmContentSelector.prototype.listMutilFiles = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+	var tblRWS  = gj(rightWS).find("table")[0];
+	var rowsRWS = gj(tblRWS).find("tr");
 	if(rowsRWS && rowsRWS.length > 0) {
 		for(var i = 0; i < rowsRWS.length; i++) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
@@ -708,16 +708,16 @@ Pager.prototype.init = function() {
   if(eXo.ecm.ECS.viewType=="list") {
 		var table = document.getElementById(eXo.ecm.Pager.tableName);
 		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+			var tBody = gj(table).children("tbody")[0];
 			len = tBody.childNodes.length;
 		} else {
-			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-			var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
+			var tHead = gj(table).children("thead")[0];
+			var rowsTHead = gj(tHead).children("tr");
 			len = rowsTHead.length - 1;		
 		}
 	} else {
 		var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
+    icons =  gj(icon_container).children("div.ActionIconBox");    
     len = icons.length;		
 	}
   var records = len; 
@@ -732,7 +732,7 @@ Pager.prototype.showRecords = function(from, to) {
 		var table = document.getElementById(eXo.ecm.Pager.tableName);
 		var len = 0;
 		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+			var tBody = gj(table).children("tbody")[0];
 			rows =tBody.childNodes;		
 			len = rows.length;
 		
@@ -744,8 +744,9 @@ Pager.prototype.showRecords = function(from, to) {
 				}
 			}
 		}	else {
-			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-			rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
+//			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
+			var tHead = gj(table).children("thead")[0];
+			rows = gj(tHead).children("tr");
 			len = rows.length - 1;		  
 			for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
 				if (i < from || i > to)  {
@@ -758,7 +759,7 @@ Pager.prototype.showRecords = function(from, to) {
 	} else {
 		var icons = null;   
     var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
+    icons =  gj(icon_container).children("div.ActionIconBox");    
     len = icons.length;		
 		for (var i = 0; i < len; i++) {
 			if (i < from || i > to)  {
@@ -884,13 +885,13 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath) {
 	var rws = document.getElementById("RightWorkspace");
 	var tblContent = document.getElementById("ListFilesContent");
-	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
+	var rowsContent = gj(tblContent).find("tr");
 	if (rowsContent.length <= 1) {
 		alert("There are no content for now. You have to select at least one.");
 	}
 	var strContent = "";
 	for(var i = 0; i < rowsContent.length; i++) {
-		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
+		var nodeContent = gj(rowsContent[i]).find("a.Item:first")[0];
 		if(nodeContent) {
 			var path = nodeContent.getAttribute("path");
 			strContent += encodeURIComponent(path) + ";";
@@ -913,15 +914,15 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 
 EcmContentSelector.prototype.addFile2ListContent = function(objNode) {  
 	var tblListFilesContent = document.getElementById("ListFilesContent");
-	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblListFilesContent, "tr");
-	var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
+	var rowsContent = gj(tblListFilesContent).find("tr");
+	var trNoContent = gj(tblListFilesContent).find("td.TRNoContent:first")[0];
 	if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
 	var url = objNode.getAttribute("url");  
 	var nodeType	= objNode.getAttribute("nodeType");
 	var path = objNode.getAttribute("path");
 	var title = objNode.getAttribute("title");	
 	var linkTarget = objNode.getAttribute("linkTarget");
-	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
+	var selectedNodeList = gj(tblListFilesContent).find("a.Item");
 	for(var i = 0; i < selectedNodeList.length; i++) {
 		var selectedNodePath = selectedNodeList[i].getAttribute("linkTarget");
 		if(linkTarget == selectedNodePath) {
@@ -948,7 +949,7 @@ EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray
 	var arrTarget = strTargetArray.split(";");
 	if (arrContent.length>arrTarget.length) return;
 	if(arrContent.length > 0) {
-		var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
+		var trNoContent = gj(tblListFilesContent).find("td.TRNoContent:first")[0];
 		if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
 		var clazz = 'OddItem';
 		for(var i = 0; i < arrContent.length-1; i++) {
@@ -975,7 +976,7 @@ EcmContentSelector.prototype.removeContent = function(objNode) {
 		return;
 	}
 	var tblListFilesContent = document.getElementById("ListFilesContent"); 
-	var objRow = eXo.core.DOMUtil.findAncestorByTagName(objNode, "tr");
+	var objRow = gj(objNode).parents("tr:first")[0];
 	tblListFilesContent.deleteRow(objRow.rowIndex);	
 	eXo.ecm.ECS.pathContent = false;
 	this.insertMultiContent("SaveTemporary", this.initPathExpanded);
@@ -984,15 +985,15 @@ EcmContentSelector.prototype.removeContent = function(objNode) {
 EcmContentSelector.prototype.changeFilter = function() {
 	var rightWS = document.getElementById('RightWorkspace');	
   if(eXo.ecm.ECS.viewType=="list") {
-		var tblRWS	= eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-		var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+		var tblRWS	= gj(rightWS).find("table")[0];
+		var rowsRWS = gj(tblRWS).find("tr");
 		if(rowsRWS && rowsRWS.length > 0) {
 			for(var i = 0; i < rowsRWS.length; i++) {
 				if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 			}
 		} 
 	} else {
-		var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+		var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
 			container.innerHTML = "";
 	}
 	
@@ -1064,15 +1065,15 @@ EcmContentSelector.prototype.generateIdNodes = function(objNode, idNode) {
 EcmContentSelector.prototype.fixHeightTrees = function() {
 	var leftWS = document.getElementById('LeftWorkspace');
 	var rightWS = document.getElementById('RightWorkspace'); 
-	var windowHeight = eXo.core.Browser.getBrowserHeight();
-	var root = eXo.core.DOMUtil.findAncestorByClass(leftWS, "UIHomePageDT");
-	var titleBar = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleBar");
-	var uiWorkingWorkspace = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIWorkingWorkspace");
-	var actionBar = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "ActionBar");
+	var windowHeight = gj(window).height();
+	var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
+	var titleBar = gj(root).find("div.TitleBar:first")[0];
+	var uiWorkingWorkspace = gj(root).find("div.UIWorkingWorkspace:first")[0];
+	var actionBar = gj(uiWorkingWorkspace).find("div.ActionBar:first")[0];
 	var actionBaroffsetHeight = 0;
 	if(actionBar)
 	  actionBaroffsetHeight = actionBar.offsetHeight;
-	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
+	var breadcumbsPortlet = gj(uiWorkingWorkspace).find("div.BreadcumbsPortlet:first")[0];
 	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 	if(rightWS)
 	  rightWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
@@ -1080,7 +1081,7 @@ EcmContentSelector.prototype.fixHeightTrees = function() {
 
 EcmContentSelector.prototype.isShowFilter = function() {
 	var selectFilter = document.getElementById("Filter");
-	var filterContainer = eXo.core.DOMUtil.findAncestorByClass(selectFilter, "ActionBar");
+	var filterContainer = gj(selectFilter).parents(".ActionBar:first")[0];
 	if(eXo.ecm.ECS.typeObj == "folder") {
 		filterContainer.style.display = "none";
 	} 
@@ -1125,14 +1126,14 @@ EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, com
 	initDrive = initDrive.replace(/ /g, "");
 	initPath = initPath.replace(/ /g, "");
 	var contentBrowsePanel = document.getElementById(componentId);
-	var leftWorkspace = eXo.core.DOMUtil.findDescendantsByClass(contentBrowsePanel, "div", "LeftWorkspace")[0];
-	var tagADrives = eXo.core.DOMUtil.findDescendantsByTagName(leftWorkspace, "a");
+	var leftWorkspace = gj(contentBrowsePanel).find("div.LeftWorkspace")[0];
+	var tagADrives = gj(leftWorkspace).find("a");
 	for (var i = 0; i < tagADrives.length; ++i) {
 		if (tagADrives[i].getAttribute("id")) {
 			var id = tagADrives[i].getAttribute("id");
 			if (id && (id.indexOf('_' + initDrive + '_') >= 0)) {
-				var nodeContainer = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "ChildrenContainer");
-				var nodeParent = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "Node");
+				var nodeContainer = gj(tagADrives[i]).parents(".ChildrenContainer:first")[0];
+				var nodeParent = gj(tagADrives[i]).parents(".Node:first")[0];
 				if(!nodeContainer) return;
 				var nodeADriveType = nodeContainer.previousSibling;
 				if(!nodeADriveType) return;
@@ -1152,7 +1153,7 @@ EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, com
 };
 
 EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) { 
-	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(nodeParent, "div");	
+	var nextElt = gj(nodeParent).nextAll("div:first")[0];	
 	if(!nextElt || nextElt.className != "ChildrenContainer" || !path || path == "") {
 		return;
 	}
@@ -1176,12 +1177,12 @@ EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) {
 		leftWS.scrollTop = height;
 		return;
 	}
-	var tagADrives = eXo.core.DOMUtil.findDescendantsByTagName(nextElt, "a");
+	var tagADrives = gj(nextElt).find("a");
 	for (var i = 0; i < tagADrives.length; ++i) {
 		if (tagADrives[i].getAttribute("id")) {
 			var id = tagADrives[i].getAttribute("id");
 			if (id && (id.indexOf(preStr) >= 0)) {
-				nodeParent = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "Node");
+				nodeParent = gj(tagADrives[i]).parents(".Node:first")[0];
 				var event = false;				
 				eXo.ecm.ECS.getDir(tagADrives[i], event);
 				//eXo.ecm.ECS.actionColExp(nodeParent);

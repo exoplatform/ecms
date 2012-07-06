@@ -44,23 +44,21 @@ eXo.webui.UIVerticalSlideTabs = {
   },
 
   switchVTab : function(clickedElement) {
-    var uiClickedVTab = eXo.core.DOMUtil.findAncestorByClass(clickedElement,
-        "UIVTab");
-    var uiClickedVTabContent = eXo.core.DOMUtil.findFirstChildByClass(
-        uiClickedVTab, "div", "UIVTabContent");
-    var uiVerticalSlideTabs = eXo.core.DOMUtil.findAncestorByClass(
-        clickedElement, "UIVerticalSlideTabs");
-    var uiVTabs = eXo.core.DOMUtil.findChildrenByClass(uiVerticalSlideTabs,
-        "div", "UIVTab");
+    var uiClickedVTab = gj(clickedElement).parents(".UIVTab:first")[0];
+    var uiClickedVTabContent = gj(uiClickedVTab).children("div.UIVTabContent:first")[0];
+    var uiVerticalSlideTabs = gj(clickedElement).parents(".UIVerticalSlideTabs:first")[0];
+    var uiVTabs = gj(uiVerticalSlideTabs).children("div.UIVTab");
     for ( var i = 0; i < uiVTabs.length; i++) {
-      if (eXo.core.DOMUtil.getChildrenByTagName(uiVTabs[i], "div")[0].className == "SelectedTab") {
-        this.selectedTab = eXo.core.DOMUtil.findFirstChildByClass(uiVTabs[i],
-            "div", "UIVTabContent");
-        eXo.core.DOMUtil.getChildrenByTagName(uiVTabs[i], "div")[0].className = "NormalTab";
+//      if (eXo.core.DOMUtil.getChildrenByTagName(uiVTabs[i], "div")[0].className == "SelectedTab") {
+        if (gj(uiVTabs[i]).children("div")[0].className == "SelectedTab") {
+        this.selectedTab = gj(uiVTabs[i]).children("div.UIVTabContent:first")[0];
+//        eXo.core.DOMUtil.getChildrenByTagName(uiVTabs[i], "div")[0].className = "NormalTab";
+        gj(uiVTabs[i]).children("div")[0].className = "NormalTab";
         break;
       }
     }
-    eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className = "SelectedTab";
+//    eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className = "SelectedTab";
+    gj(uiClickedVTab).children("div")[0].className = "SelectedTab";
     this.clickedTab = uiClickedVTabContent;
     if (this.clickedTab != this.selectedTab) {
       if (this.selectedTab)
@@ -82,27 +80,24 @@ eXo.webui.UIVerticalSlideTabs = {
    *          a css class indicate selected state
    */
   onTabClick : function(clickedElement, normalStyle, selectedStyle) {
-    var uiClickedVTab = eXo.core.DOMUtil.findAncestorByClass(clickedElement,
-        "UIVTab");
-    var uiClickedVTabContent = eXo.core.DOMUtil.findFirstChildByClass(
-        uiClickedVTab, "div", "UIVTabContent");
-    var uiVerticalSlideTabs = eXo.core.DOMUtil.findAncestorByClass(
-        clickedElement, "UIVerticalSlideTabs");
-    var uiVTab = eXo.core.DOMUtil.findChildrenByClass(uiVerticalSlideTabs,
-        "div", "UIVTab");
+    var uiClickedVTab = gj(clickedElement).parents(".UIVTab:first")[0];
+    var uiClickedVTabContent = gj(uiClickedVTab).children("div.UIVTabContent:first")[0];
+    var uiVerticalSlideTabs = gj(clickedElement).parents(".UIVerticalSlideTabs:first")[0];
+    var uiVTab = gj(uiVerticalSlideTabs).children("div.UIVTab");
 
-    if (eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className == normalStyle) {
+    if (gj(uiClickedVTab, "div")[0].className == normalStyle) {
       for ( var i = 0; i < uiVTab.length; i++) {
-        eXo.core.DOMUtil.getChildrenByTagName(uiVTab[i], "div")[0].className = normalStyle;
-        eXo.core.DOMUtil.findFirstChildByClass(uiVTab[i], "div",
-            "UIVTabContent").style.display = "none";
+//        eXo.core.DOMUtil.getChildrenByTagName(uiVTab[i], "div")[0].className = normalStyle;
+    	  gj(uiVTab[i]).children("div")[0].className = normalStyle;
+        gj(uiVTab[i]).children("div.UIVTabContent:first")[0].style.display = "none";
       }
-      eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className = selectedStyle;
+//      eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className = selectedStyle;
+      gj(uiClickedVTab).children("div")[0].className = selectedStyle;
       uiClickedVTabContent.style.display = "block";
       // eXo.webui.WebUI.fixHeight(eXo.core.DOMUtil.findFirstDescendantByClass(uiClickedVTabContent,
       // "div", "ScrollArea"), 'UIWorkspacePanel');
     } else {
-      eXo.core.DOMUtil.getChildrenByTagName(uiClickedVTab, "div")[0].className = normalStyle;
+      gj(uiClickedVTab).children("div")[0].className = normalStyle;
       uiClickedVTabContent.style.display = "none";
     }
   },
@@ -110,21 +105,18 @@ eXo.webui.UIVerticalSlideTabs = {
   onResize : function(uiVerticalSlideTabs, width, height) {
     var vTabHeight = 35;
 
-    var uiVTabs = eXo.core.DOMUtil.findChildrenByClass(uiVerticalSlideTabs,
-        "div", "UIVTab");
+    var uiVTabs = gj(uiVerticalSlideTabs).children("div.UIVTab");
     var uiVTab = this.getSelectedUIVTab(uiVerticalSlideTabs, "div", "UIVTab");
     if (uiVTab == null)
       return;
 
     if (height != null) {
       var totalTabHeight = (vTabHeight * uiVTabs.length);
-      var controlArea = eXo.core.DOMUtil.findFirstDescendantByClass(uiVTab,
-          "div", "ControlArea");
+      var controlArea = gj(uiVTab).find("div.ControlArea:first")[0];
       var controlAreaHeight = 0;
       if (controlArea != null)
         controlAreaHeight = controlArea.offsetHeight;
-      scrollArea = eXo.core.DOMUtil.findFirstDescendantByClass(uiVTab, "div",
-          "ScrollArea");
+      scrollArea = gj(uiVTab).find("div.ScrollArea:first")[0];
       if (scrollArea != null) {
         scrollArea.style.height = (height - controlAreaHeight - totalTabHeight - 35)
             + "px";
@@ -137,17 +129,15 @@ eXo.webui.UIVerticalSlideTabs = {
   },
 
   isSelectedUIVTab : function(uiVtab) {
-    var tabRight = eXo.core.DOMUtil.findFirstDescendantByClass(uiVtab, "div",
-        "TabRight");
-    var changeIcon = eXo.core.DOMUtil.getChildrenByTagName(tabRight, "div")[0];
+    var tabRight = gj(uiVtab).find("div.TabRight:first")[0];
+    var changeIcon = gj(tabRight).children("div")[0];
     if (changeIcon.className == "ExpandButton")
       return true;
     return false;
   },
 
   getSelectedUIVTab : function(uiVerticalSlideTabs) {
-    var uiVTab = eXo.core.DOMUtil.findChildrenByClass(uiVerticalSlideTabs,
-        "div", "UIVTab");
+    var uiVTab = gj(uiVerticalSlideTabs).children("div.UIVTab");
     for ( var i = 0; i < uiVTab.length; i++) {
       if (this.isSelectedUIVTab(uiVTab[i]))
         return uiVTab[i];

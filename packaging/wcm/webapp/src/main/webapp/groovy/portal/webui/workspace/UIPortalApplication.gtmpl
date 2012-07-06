@@ -133,8 +133,10 @@
      eXo.env.server.portalURLTemplate = "<%=uicomponent.getPortalURLTemplate()%>" ;
      eXo.env.client.skin = "$skin" ;
      <% 
-        boolean canKeepState = uicomponent.canKeepState();
-        boolean isSessionOpen = uicomponent.isSessionOpen();
+       UIPortal portal = uicomponent.findFirstComponentOfType(UIPortal.class);
+       String sessionAliveLevel = (portal == null ? null : portal.sessionAlive) ;
+       boolean canKeepState = sessionAliveLevel == null ? false : !sessionAliveLevel.equals(PortalProperties.SESSION_NEVER) ;
+       boolean isSessionOpen = uicomponent.isSessionOpen();
      %>
      eXo.portal.portalMode = <%= uicomponent.getModeState() %>;
      eXo.session.canKeepState = $canKeepState;
@@ -178,7 +180,7 @@
   <body style="height: 100%;">
     <% 
       /*Hide All Popup Menu when click on document*/
-      rcontext.getJavascriptManager().addOnLoadJavascript('eXo.core.DOMUtil.hideElements');
+      //rcontext.getJavascriptManager().addOnLoadJavascript('eXo.core.DOMUtil.hideElements');
       //rcontext.getJavascriptManager().addOnResizeJavascript('eXo.core.UIMaskLayer.resizeMaskLayer');
     %>
  

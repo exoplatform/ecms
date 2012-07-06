@@ -3,7 +3,6 @@ var SimpleView = function() {
 	//eXo.ecm.UISimpleView
 
 	var Self = this;
-	var DOM = eXo.core.DOMUtil;
 	
 	SimpleView.prototype.temporaryItem = null;
 	SimpleView.prototype.itemsSelected = [];
@@ -26,7 +25,7 @@ var SimpleView = function() {
 
 		var actionArea = document.getElementById(actionAreaId);
 		if (!actionArea) return; 
-		Self.allItems = DOM.findDescendantsByClass(actionArea, "div", "ActionIconBox");
+		Self.allItems = gj(actionArea).find("div.ActionIconBox");
 		var mousedown = null;
 		var keydown = null;
 		for (var i in Self.allItems) {
@@ -73,32 +72,51 @@ var SimpleView = function() {
 		var contextMenu = document.getElementById(Self.contextMenuId);
 		if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
 		//registry action drag drop in tree list
-		var UIWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
-		var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-		if (UITreeExplorer) {
-			DOM.getElementsBy(
-					function(element) {return element.getAttribute("objectId");},
-					"div",
-					UITreeExplorer,
-					function(element) {
-						if (element.getAttribute("onmousedown") && !element.getAttribute("mousedown")) {
-							mousedown = element.getAttributeNode("onmousedown").value;
-							element.setAttribute("mousedown", mousedown);
-						}
+		
+//		var UIWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
+//		var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
+//		if (UITreeExplorer) {
+//			DOM.getElementsBy(
+//					function(element) {return element.getAttribute("objectId");},
+//					"div",
+//					UITreeExplorer,
+//					function(element) {
+//						if (element.getAttribute("onmousedown") && !element.getAttribute("mousedown")) {
+//							mousedown = element.getAttributeNode("onmousedown").value;
+//							element.setAttribute("mousedown", mousedown);
+//						}
+//            if (element.getAttribute("onkeydown") && !element.getAttribute("keydown")) {
+//              keydown = element.getAttributeNode("onkeydown").value;
+//              element.setAttribute("keydown", keydown);
+//            }						
+//						element.onmousedown = Self.mouseDownTree;
+//						element.onkeydown = Self.mouseDownTree;
+//						element.onmouseup = Self.mouseUpTree;
+//						element.onmouseover = Self.mouseOverTree;
+//						element.onmouseout = Self.mouseOutTree;
+//            element.onfocus = Self.mouseOverTree;
+//            element.onblur = Self.mouseOutTree;						
+//					}
+//			);
+//		}
+		gj(actionArea).parents(".UIWorkingArea:first").find("div.UITreeExplorer:first").find("div[objectId]").each(
+		function(index, element) {
+			if (element.getAttribute("onmousedown") && !element.getAttribute("mousedown")) {
+				mousedown = element.getAttributeNode("onmousedown").value;
+				element.setAttribute("mousedown", mousedown);
+			}
             if (element.getAttribute("onkeydown") && !element.getAttribute("keydown")) {
               keydown = element.getAttributeNode("onkeydown").value;
               element.setAttribute("keydown", keydown);
             }						
-						element.onmousedown = Self.mouseDownTree;
-						element.onkeydown = Self.mouseDownTree;
-						element.onmouseup = Self.mouseUpTree;
-						element.onmouseover = Self.mouseOverTree;
-						element.onmouseout = Self.mouseOutTree;
+			element.onmousedown = Self.mouseDownTree;
+			element.onkeydown = Self.mouseDownTree;
+			element.onmouseup = Self.mouseUpTree;
+			element.onmouseover = Self.mouseOverTree;
+			element.onmouseout = Self.mouseOutTree;
             element.onfocus = Self.mouseOverTree;
             element.onblur = Self.mouseOutTree;						
-					}
-			);
-		}
+		});
 	};
 	
 	//event in tree list
@@ -107,14 +125,14 @@ var SimpleView = function() {
 		var element = this;
 		var mobileElement = document.getElementById(Self.mobileId);
 		if (mobileElement && mobileElement.move) {
-			var expandElement = DOM.findAncestorByClass(element, "ExpandIcon");
+			var expandElement = gj(element).parents(".ExpandIcon:first")[0];
 			if(expandElement && expandElement.onclick) {
 				if (expandElement.onclick instanceof Function) {
 					element.Timeout = setTimeout(function() {expandElement.onclick(event)}, 1000);
 				}
 			}
 		}
-		var scroller = DOM.findAncestorByClass(element, "SideContent");
+		var scroller = gj(element).parents(".SideContent:first")[0];
     scroller.onmousemove = eXo.ecm.UISimpleView.setScroll ;
 	};
 	
@@ -122,7 +140,7 @@ var SimpleView = function() {
 	  if(Self.enableDragDrop) {
 	    eXo.ecm.UISimpleView.object = this;
         var element = eXo.ecm.UISimpleView.object ;
-	    var pos = eXo.core.Browser.findMouseYInPage(evt) - eXo.core.Browser.findPosY(element);
+	    var pos = evt.pageY - gj(element).offset().top;
 	    if(element.offsetHeight - pos < 10){
 	      element.scrollTop = element.scrollTop + 5;  
 	    } else if(element.scrollTop > 0 && pos < 10) {
@@ -159,7 +177,7 @@ var SimpleView = function() {
 			//create mobile element
 			var mobileElement = newElement({
 				className: "UIJCRExplorerPortlet",
-				id: DOM.generateId('Id'),
+				id: eXo.generateId('Id'),
 				style: {
 					position: "absolute",
 					display: "none",
@@ -171,7 +189,7 @@ var SimpleView = function() {
           height: "25px"
         }
       });
-      eXo.core.Browser.setOpacity(mobileElement, 65);
+      mobileElement.style.opacity = 65/100;
 			Self.mobileId = mobileElement.id;
 			var coverElement = newElement({
 				className: "UITreeExplorer",
@@ -193,7 +211,7 @@ var SimpleView = function() {
 		if (mobileElement && mobileElement.move) {
 			//post action
 			var actionArea = document.getElementById("UIWorkingArea");
-			var moveAction = DOM.findFirstDescendantByClass(actionArea, "div", "JCRMoveAction");
+			var moveAction = gj(actionArea).find("div.JCRMoveAction:first")[0];
 			var wsTarget = element.getAttribute('workspacename');
 			var idTarget = element.getAttribute('objectId');
 
@@ -271,7 +289,7 @@ var SimpleView = function() {
 			//create mobile element
 			var mobileElement = newElement({
 				className: "UIJCRExplorerPortlet",
-				id: DOM.generateId('Id'),
+				id: eXo.generateId('Id'),
 				style: {
 						position: "absolute",
 						display: "none",
@@ -279,7 +297,7 @@ var SimpleView = function() {
 						border: "1px solid gray"
 				}
 			});
-			eXo.core.Browser.setOpacity(mobileElement, 64);
+			mobileElement.style.opacity = 64/100;
 			Self.mobileId = mobileElement.getAttribute('id');
 			var coverElement = newElement({
 				className: "UIThumbnailsView",
@@ -306,8 +324,8 @@ var SimpleView = function() {
 			var mobileElement = document.getElementById(Self.mobileId);
 			if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
 				mobileElement.style.display = "block";
-				var X = eXo.core.Browser.findMouseXInPage(event);
-				var Y = eXo.core.Browser.findMouseYInPage(event);
+				var X = event.pageX;
+				var Y = event.pageY;
 				mobileElement.style.top = Y + 5 + "px";
 				mobileElement.style.left = X + 5 + "px";
 				mobileElement.move = true;
@@ -356,7 +374,7 @@ var SimpleView = function() {
 			if (mobileElement && mobileElement.move && element.temporary) {
 				//post action
 				var actionArea = document.getElementById("UIWorkingArea");
-				var moveAction = DOM.findFirstDescendantByClass(actionArea, "div", "JCRMoveAction");
+				var moveAction = gj(actionArea).find("div.JCRMoveAction:first")[0];
 				var wsTarget = element.getAttribute('workspacename');
 				var idTarget = element.getAttribute('objectId');
 				//Dunghm: check symlink
@@ -466,7 +484,7 @@ var SimpleView = function() {
 		if (!rightClick) {
 			resetArrayItemsSelected();
 			element.onmousemove = Self.mutipleSelect;
-			var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+			var mask = gj(element).find("div.Mask:first")[0];
 			mask.storeX = eXo.core.Browser.findMouseRelativeX(element, event);
 			mask.storeY = eXo.core.Browser.findMouseRelativeY(element, event);
 			addStyle(mask, {
@@ -478,10 +496,10 @@ var SimpleView = function() {
 				backgroundColor: "gray",
 				border: "1px dotted black"
 			});
-			eXo.core.Browser.setOpacity(mask, 17);
+			mask.style.opacity = 17/100;
 			
 			//store position for all item
-			var thumbnailView = DOM.findFirstDescendantByClass(element, "div", "UIThumbnailsView");
+			var thumbnailView = gj(element).find("div.UIThumbnailsView:first")[0];
 			for( var i = 0 ; i < Self.allItems.length; ++i) {
 				Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - thumbnailView.scrollLeft;
 				Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - thumbnailView.scrollTop;
@@ -492,7 +510,7 @@ var SimpleView = function() {
 	SimpleView.prototype.mutipleSelect = function(event) {
 		var event = event || window.event;
 		var element = this;
-		var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+		var mask = gj(element).find("div.Mask:first")[0];
 		
 		var top = mask.storeY - 2;
 		var right = element.offsetWidth - mask.storeX - 2;
@@ -647,7 +665,7 @@ var SimpleView = function() {
 		Self.enableDragDrop = null;
 		document.onselectstart = function(){return true};
 		
-		var mask = DOM.findFirstDescendantByClass(element, "div", "Mask");
+		var mask = gj(element).find("div.Mask:first")[0];
 		addStyle(mask, {width: "0px", height: "0px", top: "0px", left: "0px", border: "none"});
 		//collect item
 		var item = null;
@@ -671,7 +689,7 @@ var SimpleView = function() {
 		}
 		//create context menu
 		var actionArea = document.getElementById(Self.actionAreaId);
-		var context = DOM.findFirstDescendantByClass(actionArea, "div", "ItemContextMenu");
+		var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
 		var contextMenu = newElement({
 			innerHTML: context.innerHTML,
 			id: Self.contextMenuId,
@@ -700,8 +718,8 @@ var SimpleView = function() {
 		    if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
 			if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;      
 		}
-		var lockAction = DOM.findFirstDescendantByClass(contextMenu, "div", "Lock16x16Icon");
-		var unlockAction = DOM.findFirstDescendantByClass(contextMenu, "div", "Unlock16x16Icon");
+		var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
+		var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
 
 		if (checkUnlock) {
 			unlockAction.parentNode.style.display = "block";
@@ -711,10 +729,10 @@ var SimpleView = function() {
 			lockAction.parentNode.style.display = "block";
 		}
 
-	    var addFavouriteAction = DOM.findFirstDescendantByClass(contextMenu, "div", "AddToFavourite16x16Icon");
-	    var emptyTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "EmptyTrash16x16Icon");    
-	    var removeFavouriteAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RemoveFromFavourite16x16Icon");
-	    var playMediaAction = DOM.findFirstDescendantByClass(contextMenu, "div", "PlayMedia16x16Icon");    
+	    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
+	    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];    
+	    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+	    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];    
 	    if (checkRemoveFavourite) {
 	      removeFavouriteAction.parentNode.style.display = "block";    
 	      addFavouriteAction.parentNode.style.display = "none";
@@ -723,7 +741,7 @@ var SimpleView = function() {
 	      removeFavouriteAction.parentNode.style.display = "none";
 	    }
 	    
-	    var restoreFromTrashAction = DOM.findFirstDescendantByClass(contextMenu, "div", "RestoreFromTrash16x16Icon");
+	    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
 	    if (!checkInTrash) {
 	      restoreFromTrashAction.parentNode.style.display = "none";
 	    }   
@@ -744,11 +762,11 @@ var SimpleView = function() {
 				 	}
 			  }
 	  //check position popup
-		var X = eXo.core.Browser.findMouseXInPage(event);
-		var Y = eXo.core.Browser.findMouseYInPage(event);
-		var portWidth = eXo.core.Browser.getBrowserWidth();
-		var portHeight = eXo.core.Browser.getBrowserHeight();
-		var contentMenu = DOM.findFirstChildByClass(contextMenu, "div", "UIRightClickPopupMenu");
+		var X = event.pageX;
+		var Y = event.pageY;
+		var portWidth = gj(window).width();
+		var portHeight = gj(window).height();
+		var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
 		if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
 		if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 		contextMenu.style.top = Y + 5 + "px";
@@ -769,7 +787,7 @@ var SimpleView = function() {
 		}
 		//create context menu
 		var actionArea = document.getElementById(Self.actionAreaId);
-		var context = DOM.findFirstDescendantByClass(actionArea, "div", "GroundContextMenu");
+		var context = gj(actionArea).find("div.GroundContextMenu:first")[0];
 		var contextMenu = newElement({
 			innerHTML: context.innerHTML,
 			id: Self.contextMenuId,
@@ -784,11 +802,11 @@ var SimpleView = function() {
 		document.body.appendChild(contextMenu);
 	
 		//check position popup
-		var X = eXo.core.Browser.findMouseXInPage(event);
-		var Y = eXo.core.Browser.findMouseYInPage(event);
-		var portWidth = eXo.core.Browser.getBrowserWidth();
-		var portHeight = eXo.core.Browser.getBrowserHeight();
-		var contentMenu = DOM.findFirstChildByClass(contextMenu, "div", "UIRightClickPopupMenu");
+		var X = event.pageX;
+		var Y = event.pageY;
+		var portWidth = gj(window).width();
+		var portHeight = gj(window).height();
+		var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
 		if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
 		if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 		contextMenu.style.top = Y + 5 + "px";
@@ -843,7 +861,7 @@ var SimpleView = function() {
 		}
 	};
 	SimpleView.prototype.errorCallback = function(obj){
-	  var img = eXo.core.DOMUtil.findNextElementByTagName(obj.parentNode,"div");
+	  var img = gj(obj.parentNode).nextAll("div:first")[0];
 	  img.style.display = "block";
 	  obj.parentNode.style.display = "none";
 	};
@@ -893,23 +911,23 @@ var SimpleView = function() {
 	function revertResizableBlock() {
 		//revert status overflow for UIResizableBlock;
 		var actionArea = document.getElementById(Self.actionAreaId);
-		var uiWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
-		var uiResizableBlock = DOM.findFirstDescendantByClass(uiWorkingArea, "div", "UIResizableBlock");
+		var uiWorkingArea = gj(actionArea).parents(".UIWorkingArea:first")[0];
+		var uiResizableBlock = gj(uiWorkingArea).find("div.UIResizableBlock:first")[0];
 	}
 	
 	SimpleView.prototype.setHeight = function() {
 		var root = document.getElementById("UIDocumentInfo");
-		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIThumbnailsView");
+		var view = gj(root).find("div.UIThumbnailsView:first")[0];
 		var workingArea = document.getElementById('UIWorkingArea');
-		var documentWorkspace = DOM.findFirstDescendantByClass(workingArea, "div", "UIDocumentWorkspace");	
+		var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];	
 		var actionBar = document.getElementById('UIActionBar');	
 		var actionBaroffsetHeight = 0;
 		if(actionBar)
 		  actionBaroffsetHeight = actionBar.offsetHeight;
 		var workingContainer = document.getElementById('UIDocumentContainer');		
-		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");		
-		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-		var resizeSideBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");
+		var page = gj(root).find("div.PageAvailable:first")[0];		
+		var sizeBarContainer = gj(workingArea).find("div.UISideBarContainer:first")[0];
+		var resizeSideBar = gj(workingArea).find("div.ResizeSideBar:first")[0];
 		
 		var workingAreaHeight = workingArea.offsetHeight;
 

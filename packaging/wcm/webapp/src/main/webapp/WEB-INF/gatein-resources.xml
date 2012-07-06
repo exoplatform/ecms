@@ -36,10 +36,6 @@
    <module>
       <name>ecm-utils</name>
       <script>
-         <name>eXo.ecm.ECMUtils</name>
-         <path>/javascript/eXo/ecm/ECMUtils.js</path>
-      </script>      
-      <script>
          <name>eXo.ecm.DMSBrowser</name>
          <path>/javascript/eXo/ecm/DMSBrowser.js</path>
       </script>
@@ -51,12 +47,19 @@
          <name>eXo.ecm.SelectFix</name>
          <path>/javascript/eXo/ecm/Select_fix.js</path>
       </script>
-      <depends>
-        <module>webui-ext</module>
-      </depends>
+      <script>
+         <name>eXo.ecm.ECMUtils</name>
+         <path>/javascript/eXo/ecm/ECMUtils.js</path>
+      </script>      
       <depends>
         <module>ecm-bootstrap</module>
       </depends>      
+      <depends>
+        <module>webui</module>
+      </depends>
+      <depends>
+        <module>webui-ext</module>
+      </depends>
    </module>
    
 </gatein-resources>
