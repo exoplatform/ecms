@@ -1,4 +1,4 @@
-package org.exoplatform.ecm.REST.favorite;
+package org.exoplatform.wcm.connector.collaboration;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

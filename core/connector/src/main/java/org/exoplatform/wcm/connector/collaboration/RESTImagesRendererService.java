@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.wcm.images;
+package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -204,57 +204,14 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   }
 
-  /**
-   * Generate uri.
-   *
-   * @param file the node
-   * @param propertyName the image property name, null if file is an image node
-   *
-   * @return the string
-   *
-   * @throws Exception the exception
-   */
-  public String generateImageURI(Node file, String propertyName) throws Exception {
-    StringBuilder builder = new StringBuilder();
-    NodeLocation fileLocation = NodeLocation.getNodeLocationByNode(file);
-    String repository = fileLocation.getRepository();
-    String workspaceName = fileLocation.getWorkspace();
-    String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
-    String portalName = PortalContainer.getCurrentPortalContainerName();
-    String restContextName = PortalContainer.getCurrentRestContextName();
-
-    if (propertyName == null) {
-      if(!file.isNodeType("nt:file")) return null;
-      InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
-      if (stream.available() == 0) return null;
-      stream.close();
-      builder.append("/").append(portalName).append("/")
-             .append(restContextName).append("/")
-             .append("images/")
-             .append(repository).append("/")
-             .append(workspaceName).append("/")
-             .append(nodeIdentifiler)
-             .append("?param=file");
-      return builder.toString();
-    }
-    builder.append("/").append(portalName).append("/")
-           .append(restContextName).append("/")
-           .append("images/")
-           .append(repository).append("/")
-           .append(workspaceName).append("/")
-           .append(nodeIdentifiler)
-           .append("?param=").append(propertyName);
-    return builder.toString();
-  }
-
   @Deprecated
   public String generateURI(Node file) throws Exception {
-    return generateImageURI(file, null);
+    return WCMCoreUtils.generateImageURI(file, null);
   }
 
   @Deprecated
   public String generateURI(Node file, String propertyName) throws Exception {
-    return generateImageURI(file, propertyName);
+    return WCMCoreUtils.generateImageURI(file, propertyName);
   }
 
 }

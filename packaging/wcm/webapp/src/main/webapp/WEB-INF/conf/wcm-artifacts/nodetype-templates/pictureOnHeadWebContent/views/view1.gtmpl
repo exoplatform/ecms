@@ -4,7 +4,6 @@
 	import java.util.List;
 	import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 	import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-	import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.services.wcm.skin.XSkinService;
 	import org.exoplatform.services.wcm.javascript.XJavascriptService;
@@ -38,8 +37,7 @@
 	boolean isShowTags = getPortletPreference("ShowTags");
 
 	if (currentNode.hasProperty("exo:image")) {
-		RESTImagesRendererService imagesRenderer = uicomponent.getApplicationComponent(RESTImagesRendererService.class);								
-		def imageURI = imagesRenderer.generateImageURI(currentNode,"exo:image")
+	  def imageURI = org.exoplatform.services.wcm.utils.WCMCoreUtils.generateImageURI(currentNode,"exo:image");
 		String imageWidth = getRimOfImage("exo:imageWidth", currentNode);
 		String imageHeight = getRimOfImage("exo:imageHeight", currentNode);
 		%>

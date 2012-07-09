@@ -63,7 +63,13 @@
       <artifactId>icu4j</artifactId>
       <version>${icu4j.version}</version>
       <scope>compile</scope>
-    </dependency>	
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-authoring-services</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <resources>

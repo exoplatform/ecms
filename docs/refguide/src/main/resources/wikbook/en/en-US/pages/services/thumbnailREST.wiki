@@ -1,6 +1,6 @@
 This class provide the request which will be used to get the response data.
 
-Package org.exoplatform.services.cms.thumbnail.impl.ThumbnailRESTService;
+Package org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService;
 
 || *Method* || *Return* || *Prototype* || *Description* |
 | getThumbnailImage | Response | getThumbnailImage(@URIParam("repoName") String repoName, @URIParam("workspaceName") String wsName, @URIParam("nodePath") String nodePath) throws Exception | Get the image with medium size{example}{example}ex: /portal/rest/thumbnailImage/repository/collaboration/test.gif/?size=medium{example}{example}@param repoName Repository name{example}{example}@param wsName Workspace name{example}{example}@param nodePath Node path{example}{example}@return Response inputstream{example}{example}@throws Exception|

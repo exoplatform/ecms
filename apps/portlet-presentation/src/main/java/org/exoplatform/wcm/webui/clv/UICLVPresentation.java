@@ -33,7 +33,6 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
@@ -52,7 +51,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
-import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
@@ -621,12 +619,11 @@ public class UICLVPresentation extends UIContainer {
   public String getIllustrativeImage(Node node) {
     WebSchemaConfigService schemaConfigService = getApplicationComponent(WebSchemaConfigService.class);
     WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
-    RESTImagesRendererService imagesRendererService = getApplicationComponent(RESTImagesRendererService.class);
     Node illustrativeImage = null;
     String uri = null;
     try {
       illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
-      uri = imagesRendererService.generateImageURI(illustrativeImage, null);
+      uri = WCMCoreUtils.generateImageURI(illustrativeImage, null);
     } catch (PathNotFoundException ex) {
       // We don't do anything here because so many documents doesn't have
       // illustration image

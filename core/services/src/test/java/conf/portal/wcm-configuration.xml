@@ -9,10 +9,6 @@
     <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
     <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
   </component>
-	
-  <component>
-    <type>org.exoplatform.services.wcm.images.RESTImagesRendererService</type>
-  </component>
 
   <component>
     <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>

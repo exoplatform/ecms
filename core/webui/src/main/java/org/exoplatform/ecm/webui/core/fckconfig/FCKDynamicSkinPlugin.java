@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.wcm.fckconfig;
+package org.exoplatform.ecm.webui.core.fckconfig;
 
 import java.util.Collection;
 
@@ -22,8 +22,6 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
-import org.exoplatform.services.ecm.fckconfig.FCKConfigPlugin;
-import org.exoplatform.services.ecm.fckconfig.FCKEditorContext;
 import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 
 /**

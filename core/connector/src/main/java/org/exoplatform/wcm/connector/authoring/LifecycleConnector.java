@@ -1,4 +1,4 @@
-package org.exoplatform.wcm.extensions.component.rest;
+package org.exoplatform.wcm.connector.authoring;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

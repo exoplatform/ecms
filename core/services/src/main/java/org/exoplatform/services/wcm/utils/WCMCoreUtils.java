@@ -547,4 +547,46 @@ public class WCMCoreUtils {
       }
     }
   }
+  /**
+   * Generate uri.
+   *
+   * @param file the node
+   * @param propertyName the image property name, null if file is an image node
+   *
+   * @return the string
+   *
+   * @throws Exception the exception
+   */
+  public static String generateImageURI(Node file, String propertyName) throws Exception {
+    StringBuilder builder = new StringBuilder();
+    NodeLocation fileLocation = NodeLocation.getNodeLocationByNode(file);
+    String repository = fileLocation.getRepository();
+    String workspaceName = fileLocation.getWorkspace();
+    String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
+    String portalName = PortalContainer.getCurrentPortalContainerName();
+    String restContextName = PortalContainer.getCurrentRestContextName();
+
+    if (propertyName == null) {
+      if(!file.isNodeType("nt:file")) return null;
+      InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
+      if (stream.available() == 0) return null;
+      stream.close();
+      builder.append("/").append(portalName).append("/")
+             .append(restContextName).append("/")
+             .append("images/")
+             .append(repository).append("/")
+             .append(workspaceName).append("/")
+             .append(nodeIdentifiler)
+             .append("?param=file");
+      return builder.toString();
+    }
+    builder.append("/").append(portalName).append("/")
+           .append(restContextName).append("/")
+           .append("images/")
+           .append(repository).append("/")
+           .append(workspaceName).append("/")
+           .append(nodeIdentifiler)
+           .append("?param=").append(propertyName);
+    return builder.toString();
+  }
 }

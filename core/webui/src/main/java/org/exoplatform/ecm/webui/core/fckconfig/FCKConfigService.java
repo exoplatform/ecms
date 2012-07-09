@@ -14,9 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.ecm.fckconfig;
+package org.exoplatform.ecm.webui.core.fckconfig;
 
-import org.exoplatform.container.component.BaseComponentPlugin;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 
 /**
@@ -24,13 +27,32 @@ import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
  *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public abstract class FCKConfigPlugin extends BaseComponentPlugin {
+public class FCKConfigService {
+
+  private List<FCKConfigPlugin> fckConfigPlugins = new ArrayList<FCKConfigPlugin>();
+
+  public FCKConfigService() { }
 
   /**
-   * This method is used to add/override some variables in fckconfig.js
+   * Adds the FCKConfigPlugin.
    *
-   * @param config the config
+   * @param plugin the FCKConfigPlugin
+   */
+  public void addPlugin(ComponentPlugin plugin) {
+    if(plugin instanceof FCKConfigPlugin) {
+      fckConfigPlugins.add(FCKConfigPlugin.class.cast(plugin));
+    }
+  }
+
+  /**
+   * Use to configure the fckeditoConfig by via FCKConfigPlugin.
+   *
+   * @param editorConfig the FCKEditorConfig
    * @throws Exception the exception
    */
-  public abstract void addParameters(final FCKEditorConfig config, final FCKEditorContext context) throws Exception;
+  public void processFCKEditorConfig(final FCKEditorConfig editorConfig, final FCKEditorContext context) throws Exception{
+    for(FCKConfigPlugin plugin: fckConfigPlugins) {
+      plugin.addParameters(editorConfig,context);
+    }
+  }
 }

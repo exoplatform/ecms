@@ -10,7 +10,7 @@
   </component>
   
   <component>    
-    <type>org.exoplatform.services.ecm.fckconfig.FCKConfigService</type>
+    <type>org.exoplatform.ecm.webui.core.fckconfig.FCKConfigService</type>
   </component>
   
   <component>
@@ -47,6 +47,27 @@
     <type>org.exoplatform.wcm.connector.collaboration.DownloadConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.collaboration.GetEditedDocumentRESTService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.PublicationGetDocumentRESTService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.FavoriteRESTService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.ThumbnailRESTService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.authoring.LifecycleConnector</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.RESTImagesRendererService</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.viewer.PDFViewerRESTService</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
       <value-param>
@@ -77,7 +98,7 @@
     <component-plugin>
       <name>FCK Dynamic Skin Plugins</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.fckconfig.FCKDynamicSkinPlugin</type>
+      <type>org.exoplatform.ecm.webui.core.fckconfig.FCKDynamicSkinPlugin</type>
       <description>Add Dynamic Skin Plugins into FCK editor </description>
     </component-plugin>
   </external-component-plugins>

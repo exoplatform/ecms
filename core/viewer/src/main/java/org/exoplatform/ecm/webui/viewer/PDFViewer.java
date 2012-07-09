@@ -28,16 +28,17 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
-import org.exoplatform.ecm.REST.viewer.PDFViewerRESTService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -45,14 +46,13 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.PInfo;
-import javax.jcr.NodeIterator;
 
 /**
  * Created by The eXo Platform SARL
@@ -149,7 +149,7 @@ public class PDFViewer extends UIForm {
   }
 
   private Document getDocument(Node node) throws RepositoryException, Exception {
-    PDFViewerRESTService pdfViewerService = getApplicationComponent(PDFViewerRESTService.class);
+    PDFViewerService pdfViewerService = getApplicationComponent(PDFViewerService.class);
     String repository = (String) getMethod(this.getParent(), "getRepository").invoke(this.getParent(), (Object[]) null);
     return pdfViewerService.initDocument(node, repository);
   }
@@ -279,7 +279,7 @@ public class PDFViewer extends UIForm {
       Node node = (Node)methodGetNode.invoke(uiParent, (Object[]) null);
       node = getFileLangNode(node);
       String repository = (String) pdfViewer.getMethod(uiParent, "getRepository").invoke(uiParent, (Object[]) null);
-      PDFViewerRESTService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerRESTService.class);
+      PDFViewerService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerService.class);
       File file = pdfViewerService.getPDFDocumentFile(node, repository);
       String fileName = node.getName();
       String mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();

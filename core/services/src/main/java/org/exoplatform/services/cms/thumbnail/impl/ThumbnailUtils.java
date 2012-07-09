@@ -34,7 +34,7 @@ public final class ThumbnailUtils {
 
   private static final Log LOG = ExoLogger.getLogger(ThumbnailUtils.class.getName());
   
-  static synchronized Node getThumbnailFolder(Node parentNode) throws RepositoryException {
+  public static synchronized Node getThumbnailFolder(Node parentNode) throws RepositoryException {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       try {
         Node thumbnailFolder = parentNode.addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER,
@@ -52,7 +52,7 @@ public final class ThumbnailUtils {
     return parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
   }
 
-  static synchronized Node getThumbnailNode(Node thumbnailFolder, String identifier) throws RepositoryException {
+  public static synchronized Node getThumbnailNode(Node thumbnailFolder, String identifier) throws RepositoryException {
     if (!thumbnailFolder.hasNode(identifier)) {
       try {
         Node thumbnailNode = thumbnailFolder.addNode(identifier, ThumbnailService.EXO_THUMBNAIL);

@@ -35,9 +35,9 @@
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
-
-	 <component>
-    <type>org.exoplatform.ecm.REST.favorite.FavoriteRESTService</type>
+  
+  <component>
+    <type>org.exoplatform.services.pdfviewer.PDFViewerService</type>
   </component>
 
   <component>
@@ -71,7 +71,7 @@
 	  <type>org.exoplatform.services.cms.folksonomy.impl.NewFolksonomyServiceImpl</type>
 	</component>
 
-	<component>
+  <component>
     <key>org.exoplatform.services.cms.metadata.MetadataService</key>
     <type>org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl</type>
   </component>
@@ -201,10 +201,6 @@
       </value-param>
     </init-params>
 	</component>
-
-	<component>
-    <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailRESTService</type>
-  </component>
 
 	 <component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
@@ -489,5 +485,27 @@
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>
-  	
+	
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cache.CacheService</target-component>
+    <component-plugin>
+      <name>addExoCacheConfig</name>
+      <set-method>addExoCacheConfig</set-method>
+      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+      <description>Configures the cache for PDF Viewer Service</description>
+      <init-params>
+        <object-param>
+          <name>org.exoplatform.services.pdfviewer.PDFViewerService</name>
+          <description></description>
+          <object type="org.exoplatform.services.cache.ExoCacheConfig">
+            <field name="name"><string>org.exoplatform.services.pdfviewer.PDFViewerService</string></field>
+            <field name="maxSize"><int>${wcm.cache.pdfviewer.capacity:300}</int></field>
+            <field name="liveTime"><long>${wcm.cache.pdfviewer.timetolive:600000}</long></field>
+            <field name="implementation"><string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string></field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
 </configuration>

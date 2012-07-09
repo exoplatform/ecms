@@ -28,10 +28,6 @@
 	  <type>org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl</type>
 </component>	
 
-<component>
-  <type>org.exoplatform.wcm.extensions.component.rest.LifecycleConnector</type>
-</component>
-
 <external-component-plugins>
   <target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
   <component-plugin>

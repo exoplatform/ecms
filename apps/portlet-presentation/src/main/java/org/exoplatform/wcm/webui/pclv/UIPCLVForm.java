@@ -35,7 +35,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
-import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
@@ -338,11 +337,10 @@ public class UIPCLVForm extends UIForm {
     WebSchemaConfigService schemaConfigService = getApplicationComponent(WebSchemaConfigService.class);
     WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     Node illustrativeImage = null;
-    RESTImagesRendererService imagesRendererService = getApplicationComponent(RESTImagesRendererService.class);
     String uri = null;
     try {
       illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
-      uri = imagesRendererService.generateImageURI(illustrativeImage, null);
+      uri = WCMCoreUtils.generateImageURI(illustrativeImage, null);
     } catch (Exception e) {
       // You shouldn't throw popup message, because some exception often rise
       // here.

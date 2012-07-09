@@ -31,15 +31,7 @@
     <type>org.exoplatform.services.wcm.metadata.PageMetadataServiceImpl</type>
   </component>
 	
-	<component>
-    <type>org.exoplatform.services.ecm.publication.REST.presentation.document.edit.GetEditedDocumentRESTService</type>
-  </component>  
-  
-  <component>
-    <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
-  </component>	
-
-	<external-component-plugins>
+   <external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
 		<component-plugin>
 	    <name>add.namespaces</name>

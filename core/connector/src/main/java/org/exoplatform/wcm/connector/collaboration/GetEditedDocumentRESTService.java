@@ -15,7 +15,7 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  *
  **************************************************************************/
-package org.exoplatform.services.ecm.publication.REST.presentation.document.edit;
+package org.exoplatform.wcm.connector.collaboration;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
