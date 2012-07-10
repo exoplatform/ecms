@@ -25,11 +25,11 @@ var SimpleView = function() {
 
 		var actionArea = document.getElementById(actionAreaId);
 		if (!actionArea) return; 
-		Self.allItems = gj(actionArea).find("div.ActionIconBox");
 		var mousedown = null;
 		var keydown = null;
-		for (var i in Self.allItems) {
-			if (Array.prototype[i]) continue;
+		Self.allItems = gj(actionArea).find("div.ActionIconBox");
+		Self.allItems.each(function(i, elem){
+			if (!Array.prototype[i]) {
 			var item = Self.allItems[i];
 			item.storeIndex = i;
 			if (item.getAttribute("onmousedown")) {
@@ -38,12 +38,12 @@ var SimpleView = function() {
 				item.onmousedown = null;
 				item.removeAttribute("onmousedown");
 			}
-      if (item.getAttribute("onkeydown")) {
-        keydown = Self.allItems[i].getAttributeNode("onkeydown").value;
-        item.setAttribute("keydown", keydown);
-        item.onmousedown = null;
-        item.removeAttribute("onkeydown");
-      }			
+	      if (item.getAttribute("onkeydown")) {
+	        keydown = Self.allItems[i].getAttributeNode("onkeydown").value;
+	        item.setAttribute("keydown", keydown);
+	        item.onmousedown = null;
+	        item.removeAttribute("onkeydown");
+	      }			
 //			if (enableDragAndDrop == "true") {			
 				item.onmouseover = Self.mouseOverItem;
 				item.onfocus = Self.mouseOverItem;
@@ -54,7 +54,8 @@ var SimpleView = function() {
 				item.onblur = Self.mouseOutItem;
 //			}
 			//eXo.core.Browser.setOpacity(item, 85);
-		}
+			}
+		});
 		actionArea.onmousedown = Self.mouseDownGround;
 		actionArea.onkeydown = Self.mouseDownGround;
 		actionArea.onmouseup = Self.mouseUpGround;

@@ -131,18 +131,22 @@ UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
     }
     }
   var index = 0 ;
-  for(var i = 0; i < uiTabs.length; i++) {
+  uiTabs.each(function(i, elem) {
 //	var styleTabDiv = DOMUtil.getChildrenByTagName(uiTabs[i], "div")[0] ;	  
     var styleTabDiv = gj(uiTabs[i]).children("div")[0] ;
-    if(styleTabDiv.className == "DisabledTab") continue ;
-    if(uiSelectTab == uiTabs[i]) {
-      styleTabDiv.className = "SelectedTab" ;
-      index = i ;
-            continue ;
+    if (!(styleTabDiv.className == "DisabledTab")) {
+	    var changeClassName = true;
+	    if(uiSelectTab == uiTabs[i]) {
+	      styleTabDiv.className = "SelectedTab" ;
+	      index = i ;
+	      changeClassName = false;
+	    }
+	    if (changeClassName) {
+		    styleTabDiv.className = "NormalTab" ;
+		    uiTabContents[i].style.display = "none" ;
+	    }
     }
-    styleTabDiv.className = "NormalTab" ;
-    uiTabContents[i].style.display = "none" ;
-  }
+  });
   uiTabContents[index].style.display = "block" ;
     if (eXo.ecm.UIJCRExplorer) {
         try {

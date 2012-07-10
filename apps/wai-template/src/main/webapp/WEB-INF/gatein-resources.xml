@@ -27,7 +27,7 @@
 
 
   <portal>
-    <name>waiportal</name>
+    <name>WAIPortal</name>
     <module>
     <script>
       <name>eXo.ecm.CategoryNavigation</name>
@@ -37,9 +37,9 @@
       <name>eXo.ecm.WAIPortalToolbar</name>
       <path>/javascript/eXo/ecm/WAIPortalToolbar.js</path>
     </script>    
-      <depends>
-        <module>base</module>
-      </depends>
+    <depends>
+      <module>base</module>
+    </depends>
     </module>
   </portal>
 

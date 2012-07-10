@@ -26,11 +26,11 @@ var TimelineView = function() {
     Self.actionAreaId = actionAreaId;
     var actionArea = document.getElementById(actionAreaId);
     if (!actionArea) return;
-    Self.allItems = gj(actionArea).find("div.RowView");
     var mousedown = null;
     var keydown = null;
-    for (var i in Self.allItems) {
-      if (Array.prototype[i]) continue;
+    Self.allItems = gj(actionArea).find("div.RowView");
+    Self.allItems.each(function(i, elem){
+      if (!Array.prototype[i]) {
       var item = Self.allItems[i];
       item.storeIndex = i;
       if (item.getAttribute("onmousedown")) {
@@ -55,7 +55,8 @@ var TimelineView = function() {
         item.onblur = Self.mouseOutItem;
 //      }
       //eXo.core.Browser.setOpacity(item, 85);
-    }
+      }
+    });
     actionArea.onmousedown = Self.mouseDownGround;
     actionArea.onkeydown = Self.mouseDownGround;
     actionArea.onmouseup = Self.mouseUpGround;
@@ -940,7 +941,7 @@ var TimelineView = function() {
     event.cancelBubble = true;
     
     var listGrid = gj(obj).parents(".UIListGrid:first")[0];
-    var rowClazz = gj(listGrid).find("div.RowView,Normal");           
+    var rowClazz = gj(listGrid).find("div.RowView,div.Normal");           
     if(!eXo.ecm.UITimelineView.mapColumn) {
       eXo.ecm.UITimelineView.mapColumn = new eXo.core.HashMap();
     }   
@@ -949,10 +950,10 @@ var TimelineView = function() {
     
     // Resize the whole column
     try {
-      for (var i in rowClazz) {       
+	  rowClazz.each(function(i, elem) {       
         var objColumn = gj(rowClazz[i]).find("div." + objResize.className + ":first")[0];
         objColumn.style.display = "none";       
-      }
+      });
     } catch(err) {}           
   } 
   
@@ -965,7 +966,7 @@ var TimelineView = function() {
     event.cancelBubble = true;
     var previousClass = gj(obj).prevAll("div:first")[0];         
     var listGrid = gj(previousClass).parents(".UIListGrid:first")[0];
-    var rowClazz = gj(listGrid).find("div.RowView,Normal");       
+    var rowClazz = gj(listGrid).find("div.RowView,div.Normal");       
     if(!eXo.ecm.UITimelineView.mapColumn) {
       eXo.ecm.UITimelineView.mapColumn = new eXo.core.HashMap();
     }
@@ -1062,14 +1063,14 @@ var TimelineView = function() {
     for(var name in eXo.ecm.UITimelineView.mapColumn.properties) {
       var objColumn = gj(listGrid).find("div." + name + ":first")[0];
       objColumn.style.width = eXo.ecm.UITimelineView.mapColumn.properties[name];
-      var rowClazz = gj(listGrid).find("div.RowView,Normal");
-      for (var i in rowClazz) {
+      var rowClazz = gj(listGrid).find("div.RowView,div.Normal");
+      rowClazz.each(function(i, elem){
         try {
           var objColumnInRow = gj(rowClazz[i]).find("div." + name + ":first")[0];
           objColumnInRow.style.width = eXo.ecm.UITimelineView.mapColumn.properties[name];
         } catch(err) {
         }
-      }
+      });
     } 
     
     //update width of UIListGrid

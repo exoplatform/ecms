@@ -23,10 +23,9 @@ function AutoComplete() {
 		tagNameInput = gj(popupSelector).find("div.UITagNameInput:first")[0];
 		inputBox = gj(tagNameInput).find("#names:first")[0];
 		tags = new Array(itemList.length);
-		for (var i = 0; i < itemList.length; i++) {
-			var item = itemList[i];
-			tags[i] = item.getAttributeNode("value").value;
-		}
+		itemList.each(function(index, elem) {
+			tags[index] = elem.getAttributeNode("value").value;
+		});
 		eXo.ecm.AutoComplete.Tags = {'data':tags,
 				'isVisible':false,
 				'element': inputBox,
