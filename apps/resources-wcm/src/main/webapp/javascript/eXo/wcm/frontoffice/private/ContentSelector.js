@@ -547,7 +547,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 			}
 		}			
 	}	
-	if(i > 12) {
+	if(i > 12) {		
 		var numberRecords = 12;		
 		var viewType = eXo.ecm.ECS.viewType; 
     if(viewType=='list') eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
@@ -706,21 +706,16 @@ Pager.prototype.init = function() {
 	this.setHeightRightWS();
 	var len = 0;
   if(eXo.ecm.ECS.viewType=="list") {
-		var table = document.getElementById(eXo.ecm.Pager.tableName);
-		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-			len = tBody.childNodes.length;
-		} else {
-			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-			var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
-			len = rowsTHead.length - 1;		
-		}
+		var table = document.getElementById(eXo.ecm.Pager.tableName);		
+		var rowsTHead = eXo.core.DOMUtil.findDescendantsByTagName(table, "tr");
+		len = rowsTHead.length - 1;
 	} else {
 		var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
     icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
     len = icons.length;		
 	}
-  var records = len; 
+  
+  var records = len;   
   this.pages = Math.ceil(records / eXo.ecm.Pager.itemsPerPage);
 	if(this.pages < 0) this.page =1;
     this.inited = true;
@@ -730,31 +725,16 @@ Pager.prototype.showRecords = function(from, to) {
   if(eXo.ecm.ECS.viewType=="list") {
 		var rows = null;
 		var table = document.getElementById(eXo.ecm.Pager.tableName);
-		var len = 0;
-		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-			rows =tBody.childNodes;		
-			len = rows.length;
-		
-			for (var i = 0; i < len; i++) {
-				if (i < (from-1) || i > (to-1))  {
-					  rows[i].style.display = 'none';
-				} else {
-					  rows[i].style.display = '';
-				}
+		var len = 0;				
+		rows = eXo.core.DOMUtil.findDescendantsByTagName(table ,"tr");
+		len = rows.length - 1;		  
+		for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
+			if (i < from || i > to)  {
+				  rows[i].style.display = 'none';
+			} else {
+				  rows[i].style.display = '';
 			}
-		}	else {
-			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-			rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
-			len = rows.length - 1;		  
-			for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
-				if (i < from || i > to)  {
-					  rows[i].style.display = 'none';
-				} else {
-					  rows[i].style.display = '';
-				}
-			}
-		}
+		}	
 	} else {
 		var icons = null;   
     var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
@@ -1063,6 +1043,7 @@ EcmContentSelector.prototype.generateIdNodes = function(objNode, idNode) {
 
 EcmContentSelector.prototype.fixHeightTrees = function() {
 	var leftWS = document.getElementById('LeftWorkspace');
+	var rightWS = document.getElementById('RightWorkspace'); 
 	var windowHeight = eXo.core.Browser.getBrowserHeight();
 	var root = eXo.core.DOMUtil.findAncestorByClass(leftWS, "UIHomePageDT");
 	var titleBar = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleBar");
@@ -1073,6 +1054,8 @@ EcmContentSelector.prototype.fixHeightTrees = function() {
 	  actionBaroffsetHeight = actionBar.offsetHeight;
 	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
 	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
+	if(rightWS)
+	  rightWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 };
 
 EcmContentSelector.prototype.isShowFilter = function() {
@@ -1201,3 +1184,4 @@ EcmContentSelector.prototype.safe_tags_regex = function(str) {
  }
 
 eXo.ecm.ECS = new EcmContentSelector();
+window.onresize = eXo.ecm.ECS.fixHeightTrees;
