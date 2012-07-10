@@ -39,6 +39,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringUtils;
 import org.artofsolving.jodconverter.office.OfficeException;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -130,31 +131,19 @@ public class PDFViewerRESTService implements ResourceContainer {
       ManageableRepository repository = repositoryService_.getCurrentRepository();
       session = getSystemProvider().getSession(wsName, repository);
       Node currentNode = session.getNodeByUUID(uuid);
+      String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
+                                                                .append("/jcr:lastModified").toString()));      
       if(objCache!=null) {
         File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
         if (!content.exists()) {
           initDocument(currentNode, repoName);
         }
         is = pushToCache(new File((String) pdfCache.get(new ObjectKey(bd.toString()))),
-            repoName,
-            wsName,
-            uuid,
-            pageNumber,
-            strRotation,
-            strScale);
+			 repoName, wsName, uuid, pageNumber, strRotation, strScale, lastModified);
       } else {
         File file = getPDFDocumentFile(currentNode, repoName);
-        is = pushToCache(file,
-            repoName,
-            wsName,
-            uuid,
-            pageNumber,
-            strRotation,
-            strScale);
+        is = pushToCache(file, repoName, wsName, uuid, pageNumber, strRotation, strScale, lastModified);
       }
-      String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
-          .append("/jcr:lastModified")
-          .toString()));
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -172,15 +161,18 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   private InputStream pushToCache(File content, String repoName, String wsName, String uuid,
-      String pageNumber, String strRotation, String strScale) throws FileNotFoundException {
+      String pageNumber, String strRotation, String strScale, String lastModified) throws FileNotFoundException {
     StringBuilder bd = new StringBuilder();
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid).append("/").append(
         pageNumber).append("/").append(strRotation).append("/").append(strScale);
+    StringBuilder bd1 = new StringBuilder().append(bd).append("/jcr:lastModified");
     String filePath = (String) pdfCache.get(new ObjectKey(bd.toString()));
-    if (filePath == null || !(new File(filePath).exists())) {
+    String fileModifiedTime = (String) pdfCache.get(new ObjectKey(bd1.toString()));
+    if (filePath == null || !(new File(filePath).exists()) || !StringUtils.equals(lastModified, fileModifiedTime)) {
       File file = buildFileImage(content, uuid, pageNumber, strRotation, strScale);
       filePath = file.getPath();
       pdfCache.put(new ObjectKey(bd.toString()), filePath);
+      pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
     }
     return new BufferedInputStream(new FileInputStream(new File(filePath)));
   }
@@ -300,11 +292,15 @@ public class PDFViewerRESTService implements ResourceContainer {
     StringBuilder bd = new StringBuilder();
     StringBuilder bd1 = new StringBuilder();
     bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
+    bd1.append(bd).append("/jcr:lastModified");
     String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
+    String lastModifiedTime = (String)pdfCache.get(new ObjectKey(bd1.toString()));
     File content = null;
     String name = currentNode.getName();
-    if (path == null || !(content = new File(path)).exists()) {
-      Node contentNode = currentNode.getNode("jcr:content");
+    Node contentNode = currentNode.getNode("jcr:content");
+    String lastModified = getJcrLastModified(currentNode);
+    
+    if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
@@ -342,17 +338,22 @@ public class PDFViewerRESTService implements ResourceContainer {
         }
       }
       if (content.exists()) {
-          if (contentNode.hasProperty("jcr:lastModified")) {
-            String lastModified = contentNode.getProperty("jcr:lastModified").getString();
-            pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
-            pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
-          }
+        pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
+        pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
       }
     }
     return content;
   }
 
-  private void read(InputStream is, OutputStream os) throws Exception {
+  private String getJcrLastModified(Node node) throws Exception {
+    Node checkedNode = node;
+    if (node.isNodeType("nt:frozenNode")) {
+      checkedNode = node.getSession().getNodeByUUID(node.getProperty("jcr:frozenUuid").getString());
+    }
+    return checkedNode.getProperty("jcr:content/jcr:lastModified").getString();
+  }  
+
+private void read(InputStream is, OutputStream os) throws Exception {
     int bufferLength = 1024;
     int readLength = 0;
     while (readLength > -1) {
@@ -401,7 +402,7 @@ public class PDFViewerRESTService implements ResourceContainer {
 
     @Override
     public int hashCode() {
-      return key == null ? -1 : key.length();
+      return key == null ? -1 : key.hashCode();
     }
 
     @Override
