@@ -10,7 +10,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("RssEnable.dialog.label.title")%></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldTitle = ["jcrPath=/node/exo:rss-enable/exo:title", "options=noSanitization"] ;
+		        String[] fieldTitle = ["jcrPath=/node/exo:rss-enable/exo:title"] ;
 		        uicomponent.addTextField("title", fieldTitle) ;
 		      %>
 		    </td>

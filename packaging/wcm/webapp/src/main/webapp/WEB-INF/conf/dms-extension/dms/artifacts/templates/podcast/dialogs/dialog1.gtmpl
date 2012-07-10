@@ -21,7 +21,7 @@
 	      <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Podcast.dialog.label.name")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldName = ["jcrPath=/node", "options=noSanitization", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+		        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
 		        uicomponent.addTextField("name", fieldName) ;   
 		      %>
 		    </td>
@@ -41,7 +41,7 @@
 	      <td class="FieldLabel"><label for="title"><%=_ctx.appRes("Podcast.dialog.label.title")%></label></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldTitle = ["jcrPath=/node/exo:title", "options=noSanitization"] ;
+		        String[] fieldTitle = ["jcrPath=/node/exo:title"] ;
 		        uicomponent.addTextField("title", fieldTitle) ;  
 		      %>
 		    </td>

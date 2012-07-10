@@ -16,7 +16,7 @@
         <td class="FieldLabel"><label for="title"><%=_ctx.appRes("Article.dialog.label.title")%></label></td>
         <td class="FieldComponent">
         <%
-          String[] fieldTitle = ["jcrPath=/node/exo:title", "options=noSanitization", "validate=empty"] ;
+          String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
           uicomponent.addTextField("title", fieldTitle) ;
         %>
         </td>
@@ -26,7 +26,7 @@
 			  <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Article.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 			  <%
-	        String[] fieldName = ["jcrPath=/node", "options=noSanitization", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
+	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ; 
       	%>	      
           <script type="text/javascript">
