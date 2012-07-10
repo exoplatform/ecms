@@ -16,6 +16,12 @@
  */
 package org.exoplatform.services.ecm.dms.drive;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.List;
 
 import javax.jcr.Node;
@@ -26,8 +32,11 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -36,7 +45,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  *          xxx5669@gmail.com
  * Jun 11, 2009
  */
-public class TestDriveService extends BaseDMSTestCase {
+
+public class TestDriveService extends BaseWCMTestCase {
   private ManageDriveService driveService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private Node rootNode;
@@ -52,6 +62,14 @@ public class TestDriveService extends BaseDMSTestCase {
   private static String VIEW_SIDEBAR = "exo:viewSideBar" ;
   private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode" ;
   private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    driveService = (ManageDriveService)container.getComponentInstanceOfType(ManageDriveService.class);
+    nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+    drivePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH);
+  }
 
   /**
    * Set up for testing
@@ -69,11 +87,9 @@ public class TestDriveService extends BaseDMSTestCase {
    *              |___B1_1
    *
    */
+  @BeforeMethod
   public void setUp() throws Exception {
-    super.setUp();
-    driveService = (ManageDriveService)container.getComponentInstanceOfType(ManageDriveService.class);
-    nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
-    drivePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH);
+    applySystemSession();
     createTree();
   }
 
@@ -96,6 +112,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    'Backup Administration' node
    * @throws Exception
    */
+  @Test
   public void testInit() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     Node myDrive = (Node)mySession.getItem(drivePath);
@@ -114,6 +131,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    property of this node is mapped exactly
    * @throws Exception
    */
+  @Test
   public void testAddDrive() throws Exception {
     driveService.addDrive("MyDrive", COLLABORATION_WS, "*:/platform/administrators",
         "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -149,6 +167,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    node: name = MyDrive is not null
    * @throws Exception
    */
+  @Test
   public void testGetDriveByName() throws Exception {
     driveService.addDrive("MyDrive", COLLABORATION_WS, "*:/platform/administrators",
         "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -185,6 +204,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    Size of list node = 2, contains node MyDrive1 and MyDrive2
    * @throws Exception
    */
+  @Test
   public void testGetAllDrives() throws Exception {
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -238,6 +258,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    Size of list node = 1
    * @throws Exception
    */
+  @Test
   public void testRemoveDrive() throws Exception {
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -278,6 +299,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    Size of list node = 0
    * @throws Exception
    */
+  @Test
   public void testGetAllDriveByPermission() throws Exception {
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators",
         "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -342,6 +364,7 @@ public class TestDriveService extends BaseDMSTestCase {
    *    result: false
    * @throws Exception
    */
+  @Test
   public void testIsUsedView() throws Exception {
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
@@ -355,6 +378,7 @@ public class TestDriveService extends BaseDMSTestCase {
     assertFalse(driveService.isUsedView("xXx", REPO_NAME));
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     try {
       Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
@@ -369,6 +393,5 @@ public class TestDriveService extends BaseDMSTestCase {
       session.save();
     } catch (PathNotFoundException e) {
     }
-    super.tearDown();
   }
 }

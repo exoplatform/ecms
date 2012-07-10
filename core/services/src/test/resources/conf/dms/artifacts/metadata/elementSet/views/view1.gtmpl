@@ -1,0 +1,221 @@
+<head>
+  <style>
+    .tabNormal {
+      float: left; /* orientation=lt */
+      float: right; /* orientation=rt */
+      background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left top;
+      height: 20px; width: 120px; line-height: 20px; text-align: center;
+      border: solid 1px #a3abb6;
+      font-size: 12px; font-weight: bold;
+    }
+    
+    .tabSelected {
+      float: left; /* orientation=lt */
+      float: right; /* orientation=rt */
+      background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left -20px;
+      height: 20px; width: 120px; line-height: 20px; text-align: center;
+      border: solid 1px #a3abb6;
+      font-size: 12px; font-weight: bold;
+    }
+    
+    .ContentBlock {
+      margin: 15px;
+    }
+    
+    .LabelMetadata {
+    	border-bottom: 1px dotted #666666;
+    	padding-bottom: 5px;
+      height:14px;
+      font-weight: bold;
+      font-size: 12px;
+      font-style: Verdana;
+      text-align: left; /* orientation=lt */
+      text-align: right; /* orientation=rt */
+      color: #f68822;
+    }
+    
+    .Header {
+      font-weight: bold;
+      font-size: 14px;
+      font-style: Verdana;
+      text-align: left; /* orientation=lt */
+      text-align: right; /* orientation=rt */
+    }
+  </style>   
+</head>
+<%
+	public void renderDCValues(String name) {
+	  def node = uicomponent.getViewNode("dc:elementSet") ;
+		def values = uicomponent.getMultiValues(node, name) ;
+		if(values.size() == 0) { %>
+	    <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
+	      <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/ecm/skin/images/metadata/rect.gif'/></div>     
+	      <div style="text-align: left"><%=_ctx.appRes("ElementSet.view.label.not-avaliable")%></div>
+	    </div>    		
+	<%} else {
+			for(value in values) { %>
+	      <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
+	        <div style="float:left"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/ecm/skin/images/metadata/rect.gif'/></div>     
+	        <div style="font-size:12px; text-align: left ">$value</div>
+	      </div>    			
+	<%	}
+		}
+	}
+%>
+
+<div class="Header">DC:ELEMENTSET</div>
+<div>     
+  <div class="ContentBlock" style="width:39%">
+    <div class="Title">
+      <div class="LabelMetadata">Title</div>
+    </div>          
+    <div><% renderDCValues("dc:title") %></div>
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%;">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.date")%></div>
+          <div><% renderDCValues("dc:date") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%;">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.subject")%></div>
+        </div>
+        <div><% renderDCValues("dc:subject") %></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.description")%></div>
+          <div><% renderDCValues("dc:description") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.languages")%></div>
+        </div>
+        <div><% renderDCValues("dc:language") %></div>
+      </div>
+    </div> 
+                 
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.creator")%></div>
+          <div><% renderDCValues("dc:creator") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.publisher")%></div>
+        </div>
+        <div><% renderDCValues("dc:publisher") %></div>
+      </div>
+    </div>  
+               
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.contributor")%></div>
+          <div><% renderDCValues("dc:contributor") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.identifier")%></div>
+        </div>
+        <div><% renderDCValues("dc:identifier") %></div>
+      </div>
+    </div>  
+           
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.resource-type")%></div>
+          <div><% renderDCValues("dc:resourceType") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right;width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.format")%></div>
+        </div>
+        <div><% renderDCValues("dc:format") %></div>
+      </div>
+    </div>   
+          
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.relation")%></div>
+          <div><% renderDCValues("dc:relation") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.rights")%></div>
+        </div>
+        <div><% renderDCValues("dc:rights") %></div>
+      </div>
+    </div>  
+           
+  </div>
+
+  <div class="ClearFix">
+    <div style="float: left; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.source")%></div>
+          <div><% renderDCValues("dc:source") %></div>
+        </div>                        
+      </div>
+    </div>
+    <div style="float:right; width:44%">
+      <div class="ContentBlock">
+        <div class="Title">
+          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.coverage")%></div>
+        </div>
+        <div><% renderDCValues("dc:coverage") %></div>
+      </div>
+    </div>              
+    
+  </div>  
+</div>
+<%/* start render action*/%>
+<div class="UIAction">
+	<a onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="ActionButton LightBlueStyle" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" href="javascript:void(0);"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></a>
+	<a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" href="javascript:void(0);"><%=_ctx.appRes("ElementSet.view.action.cancel")%></a>				     
+</div>
+<%/* end render action*/%>
+ 

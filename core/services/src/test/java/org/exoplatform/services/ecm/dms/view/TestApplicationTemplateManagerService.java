@@ -16,6 +16,10 @@
  */
 package org.exoplatform.services.ecm.dms.view;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,27 +30,35 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin.PortletTemplateConfig;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
  * June 09, 2009
  */
-public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
+public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
 
   private ApplicationTemplateManagerService appTemplateManagerService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private String basedApplicationTemplatesPath;
   private Session sessionDMS;
-
-  public void setUp() throws Exception {
-    super.setUp();
-    appTemplateManagerService = (ApplicationTemplateManagerService)container.getComponentInstanceOfType(
-        ApplicationTemplateManagerService.class);
-    nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    appTemplateManagerService = (ApplicationTemplateManagerService) container.getComponentInstanceOfType(ApplicationTemplateManagerService.class);
+    nodeHierarchyCreator = (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     basedApplicationTemplatesPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
-    System.out.println("basedApplicationTemplatesPath :" + basedApplicationTemplatesPath );
+    System.out.println("basedApplicationTemplatesPath :" + basedApplicationTemplatesPath);
+  }
+
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
 
@@ -57,6 +69,7 @@ public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
    * Expect: Return The templates by category
    * @throws Exception
    */
+  @Test
   public void testGetAllManagedPortletName() throws Exception {
     List<String> listTemplateManager = appTemplateManagerService.getAllManagedPortletName(REPO_NAME);
     assertEquals(0, listTemplateManager.size());
@@ -72,6 +85,7 @@ public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
    * Expect: Return The templates by category
    * @throws Exception
    */
+  @Test
   public void testGetTemplatesByApplication() throws Exception {
     assertNull(appTemplateManagerService.getTemplatesByApplication(REPO_NAME,
         "UIBrowseContentPortlet", sessionProviderService_.getSystemSessionProvider(null)));
@@ -178,6 +192,7 @@ public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
 //        "detail-document", SessionProviderFactory.createSessionProvider()).size());
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     Node nodeAppTemplate = (Node) sessionDMS.getItem(basedApplicationTemplatesPath);
     if (nodeAppTemplate.hasNode("categoryA")) {
@@ -189,6 +204,5 @@ public class TestApplicationTemplateManagerService extends BaseDMSTestCase {
     Node n = (Node)sessionDMS.getItem("/exo:ecm/views/templates/ecm-explorer");
     for(NodeIterator iter = n.getNodes(); iter.hasNext();)
       System.out.println(iter.nextNode().getPath());
-    super.tearDown();
   }
 }

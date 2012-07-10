@@ -16,16 +16,19 @@
  */
 package org.exoplatform.services.wcm;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.fail;
+
 import java.util.Date;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.test.BasicTestCase;
 
 /**
  * Created by The eXo Platform SAS
@@ -33,37 +36,11 @@ import org.exoplatform.test.BasicTestCase;
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Jul 14, 2009
  */
-public abstract class BaseWCMTestCase extends BasicTestCase {
-
-  /** The container. */
-  protected PortalContainer   container;
-
-  /** The session. */
-  protected Session               session;
-
-  /** The REP o_ name. */
-  protected final String          REPO_NAME        = "repository";
-
-  /** The DMSSYSTE m_ ws. */
-  protected final String          DMSSYSTEM_WS     = "dms-system";
-
-  /** The SYSTE m_ ws. */
-  protected final String          SYSTEM_WS        = "system";
-
-  /** The COLLABORATIO n_ ws. */
-  protected final String          COLLABORATION_WS = "collaboration";
-
-  /* (non-Javadoc)
-   * @see junit.framework.TestCase#setUp()
-   */
-  public void setUp() throws Exception {
-    container = PortalContainer.getInstance();
-    RepositoryService repositoryService = getService(RepositoryService.class);
-    repositoryService.setCurrentRepositoryName(REPO_NAME);
-    session = repositoryService.getCurrentRepository().getSystemSession(COLLABORATION_WS);
-
-
-  }
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-core-service-test-configuration.xml") 
+  })
+public abstract class BaseWCMTestCase extends BaseECMSTestCase {
 
   /**
    * Check mixins.

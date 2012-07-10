@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.ecm.dms.test;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -23,7 +25,10 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -31,9 +36,15 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  *          hunghvit@gmail.com
  * Mar 15, 2009
  */
-public class TestSymLink extends BaseDMSTestCase {
+public class TestSymLink extends BaseWCMTestCase {
 
   MockNodeFinderImpl nodeFinder;
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    nodeFinder = (MockNodeFinderImpl) container.getComponentInstanceOfType(MockNodeFinderImpl.class);
+  }
 
   /**
    * Set up for testing
@@ -64,10 +75,10 @@ public class TestSymLink extends BaseDMSTestCase {
    *                    |_____P1
    *
    */
+  @BeforeMethod
   public void setUp() throws Exception {
     System.out.println("========== Create root node  ========");
-    super.setUp();
-    nodeFinder = (MockNodeFinderImpl) container.getComponentInstanceOfType(MockNodeFinderImpl.class);
+    applySystemSession();    
     createTreeInCollaboration();
     createTreeInSystem();
   }
@@ -77,6 +88,7 @@ public class TestSymLink extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void createTreeInSystem() throws Exception {
 //    Session session = repository.login(credentials, SYSTEM_WS);
     Session sessionSys = sessionProviderService_.getSystemSessionProvider(null).getSession(SYSTEM_WS, repository);
@@ -207,7 +219,8 @@ public class TestSymLink extends BaseDMSTestCase {
       this.browserTree(tempNode, iLevel + 1);
     }
   }
-
+  
+  @Test
   public void testGetPath() throws Exception {
     String path = "/";
     String expectedPath = "/";
@@ -217,7 +230,8 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path out put: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
-
+  
+  @Test
   public void testGetPath1() throws Exception {
     String path = "/TestTreeNode";
     String expectedPath = "/TestTreeNode";
@@ -228,6 +242,7 @@ public class TestSymLink extends BaseDMSTestCase {
     assertEquals(expectedPath,node.getPath());
   }
 
+  @Test
   public void testGetPath2() throws Exception {
     String path = "/TestTreeNode/A2/B2";
     String expectedPath = "/TestTreeNode/A2/B2";
@@ -238,6 +253,7 @@ public class TestSymLink extends BaseDMSTestCase {
     assertEquals(expectedPath,item.getPath());
   }
 
+  @Test
   public void testGetPath3() throws Exception {
     String path = "/TestTreeNode/A3/C2_2/D/C4";
     String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -248,6 +264,7 @@ public class TestSymLink extends BaseDMSTestCase {
     assertEquals(expectedPath,node.getPath());
   }
 
+  @Test
   public void testGetPath4() throws Exception {
     String path = "/TestTreeNode/A2/B2/C1_1/C1_2/C1_3/C2_2/D";
     String expectedPath = "/TestTreeNode/A1/C2/C2_2/D";
@@ -258,6 +275,7 @@ public class TestSymLink extends BaseDMSTestCase {
     assertEquals(expectedPath,node.getPath());
   }
 
+  @Test
   public void testGetPath5() throws Exception {
     String path = "/TestTreeNode/A1/C1/C1_1/C1_2/C1_3/C2_2/D/C4";
     String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -304,6 +322,7 @@ public class TestSymLink extends BaseDMSTestCase {
 //      assertEquals(expectedPath,node.getPath());
 //  }
 
+  @Test
   public void testGetInvalidPath1() throws Exception {
     String path = "/TestTreeNode/A2/D";
     System.out.println("\n\n Path input : " + path);
@@ -313,7 +332,7 @@ public class TestSymLink extends BaseDMSTestCase {
     } catch (PathNotFoundException e) {}
   }
 
-
+  @Test
   public void testGetInvalidPath2() throws Exception {
     String path = "/TestTreeNode/A2/B2/C2";
     System.out.println("\n\n Path input : " + path);
@@ -326,7 +345,7 @@ public class TestSymLink extends BaseDMSTestCase {
   /**
    * Test with target Node is remove: Throws PathNotFoundException
    */
-
+  @Test
   public void testGetInvalidPath3() throws Exception {
     String path = "/TestTreeNode2/O1";
     System.out.println("\n\n Path input : " + path);
@@ -336,6 +355,7 @@ public class TestSymLink extends BaseDMSTestCase {
     } catch (PathNotFoundException e) {}
   }
 
+  @Test
   public void testGetInvalidPath4() throws Exception {
   String path = "/TestTreeNode2/O1/C2_2";
   System.out.println("\n\n Path input : " + path);
@@ -345,6 +365,7 @@ public class TestSymLink extends BaseDMSTestCase {
     } catch (PathNotFoundException e) {}
   }
 
+  @Test
   public void testGetInvalidWorkspace() throws Exception {
     try {
       Node node = (Node) nodeFinder.getItem(REPO_NAME, SYSTEM_WS + "12", "/");
@@ -352,6 +373,7 @@ public class TestSymLink extends BaseDMSTestCase {
     } catch (RepositoryException e) {}
   }
 
+  @Test
   public void testGetInvalidRepository() throws Exception {
     try {
       Node node = (Node) nodeFinder.getItem(REPO_NAME + "12", SYSTEM_WS, "/");
@@ -359,6 +381,7 @@ public class TestSymLink extends BaseDMSTestCase {
     } catch (RepositoryException e) {}
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     Node root;
     try {
@@ -371,7 +394,6 @@ public class TestSymLink extends BaseDMSTestCase {
       root.save();
     } catch (PathNotFoundException e) {
     }
-    super.tearDown();
   }
 
 }

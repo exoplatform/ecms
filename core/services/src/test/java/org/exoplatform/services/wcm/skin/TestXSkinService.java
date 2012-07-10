@@ -17,6 +17,10 @@
 
 package org.exoplatform.services.wcm.skin;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.fail;
+
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -28,6 +32,9 @@ import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * The Class TestXJavaScriptService.
@@ -48,16 +55,16 @@ public class TestXSkinService extends BaseWCMTestCase {
   private Node documentNode;
 
   private Node sharedCssNode;
-
-  SessionProvider sessionProvider;
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
-   */
-  public void setUp() throws Exception {
-    super.setUp();
-    sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     skinService = getService(XSkinService.class);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
     documentNode = (Node) session.getItem("/sites content/live/classic/documents");
     sharedCssNode = (Node) session.getItem("/sites content/live/classic/css");
   }
@@ -67,6 +74,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    *
    * When parameter input is null
    */
+  @Test
   public void testGetActiveStylesheet_01() {
     try {
       skinService.getActiveStylesheet(null);
@@ -81,6 +89,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    *
    * When node input node type is not exo:webcontent.
    */
+  @Test
   public void testGetActiveStylesheet_02() {
     try {
       Node nodeInput = documentNode.addNode(WEB_CONTENT_NODE_NAME);
@@ -98,6 +107,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    *
    * When node input is exo:webcontent and have some child node but does not content mixin type.
    */
+  @Test
   public void testGetActiveStylesheet_03() {
     try {
       Node webContent = documentNode.addNode(WEB_CONTENT_NODE_NAME, "exo:webContent");
@@ -118,6 +128,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Child node have properties normal and value of exo:active is:
    * - "exo:active": false
    */
+  @Test
   public void testGetActiveStylesheet_04() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -137,6 +148,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:mimeType": text/css
    */
+  @Test
   public void testGetActiveStylesheet_05() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -156,6 +168,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    *
    * Child node have properties normal and value of jcr:data is ""
    */
+  @Test
   public void testGetActiveStylesheet_06() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, "", null);
@@ -171,6 +184,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    *
    * In case normal
    */
+  @Test
   public void testGetActiveStylesheet_07() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -185,6 +199,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on modify_01.
    * When node input is null.
    */
+  @Test
   public void testUpdatePortalSkinOnModify_01() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -199,6 +214,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on modify_02.
    * When Node portal input is null.
    */
+  @Test
   public void testUpdatePortalSkinOnModify_02() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -213,6 +229,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on modify_03.
    * When Node input does not cssFile.
    */
+  @Test
   public void testUpdatePortalSkinOnModify_03() {
     try {
       Node portal = this.findPortalNode(sessionProvider, documentNode);
@@ -229,6 +246,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on modify_04.
    * When node input have jcr:data is "".
    */
+  @Test
   public void testUpdatePortalSkinOnModify_04() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -251,6 +269,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on modify_05.
    * When node input have jcr:data is "Test XSkin Service".
    */
+  @Test
   public void testUpdatePortalSkinOnModify_05() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -273,6 +292,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_01.
    * When node input is null.
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_01() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -287,6 +307,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_02.
    * When Node portal input is null.
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_02() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -302,6 +323,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_03.
    * When Node input does not cssFile.
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_03() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -318,6 +340,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_04.
    * When node input have jcr:data is "".
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_04() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -340,6 +363,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_05.
    * When node input have jcr:data is "Test XSkin Service".
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_05() {
     try {
       Node portal = findPortalNode(sessionProvider, documentNode);
@@ -365,6 +389,7 @@ public class TestXSkinService extends BaseWCMTestCase {
    * Test update portal Skin on remove_07.
    * When portal node is shared portal.
    */
+  @Test
   public void testUpdatePortalSkinOnRemove_07() {
     try {
       WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);;
@@ -388,8 +413,8 @@ public class TestXSkinService extends BaseWCMTestCase {
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
+  @AfterMethod
   public void tearDown() throws Exception {
-    super.tearDown();
     Node sharedPortalNode = (Node) session.getItem("/sites content/live/shared/css");
     NodeIterator nodeIterator = documentNode.getNodes();
     NodeIterator cssNodeIterator = sharedCssNode.getNodes();
@@ -404,10 +429,6 @@ public class TestXSkinService extends BaseWCMTestCase {
       sharedIterator.nextNode().remove();
     }
     session.save();
-    sessionProvider = null;
-    skinService = null;
-    documentNode = null;
-    sharedCssNode = null;
   }
 
   private Node findPortalNode(SessionProvider sessionProvider, Node child) throws Exception{

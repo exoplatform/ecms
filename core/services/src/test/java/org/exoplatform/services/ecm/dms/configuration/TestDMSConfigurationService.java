@@ -17,9 +17,16 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.configuration;
 
+import static org.testng.AssertJUnit.assertEquals;
+
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.Test;
 
 /**
  * Created by eXo Platform
@@ -35,16 +42,15 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 2. addPlugin() method
  * 3. initNewRepo() method
  */
-
-public class TestDMSConfigurationService extends BaseDMSTestCase {
+public class TestDMSConfigurationService extends BaseWCMTestCase {
 
   private DMSConfiguration dmsConfiguration = null;
 
   private final static String TEST_WS = "workspace-test";
-
+  
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     dmsConfiguration = (DMSConfiguration)container.getComponentInstanceOfType(DMSConfiguration.class);
   }
 
@@ -55,6 +61,7 @@ public class TestDMSConfigurationService extends BaseDMSTestCase {
    *     Workspace Name:  DMSSYSTEM_WS
    *     Repository Name: REPO_NAME
    */
+  @Test
   public void testGetConfig() throws Exception {
     DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
     try {
@@ -72,6 +79,7 @@ public class TestDMSConfigurationService extends BaseDMSTestCase {
    * Expected:
    *        New repository is initialized
    */
+  @Test
   public void testInitNewRepo() throws Exception {
     DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
     try {
@@ -92,6 +100,7 @@ public class TestDMSConfigurationService extends BaseDMSTestCase {
    * Expected:
    *        plugin is added to repository
    */
+  @Test
   public void testAddPlugin() throws Exception {
     DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
     try {
@@ -104,10 +113,5 @@ public class TestDMSConfigurationService extends BaseDMSTestCase {
     finally {
       dmsConfiguration.addPlugin(oldDmsRepoConf);
     }
-  }
-
-  @Override
-  public void tearDown() throws Exception {
-    super.tearDown();
   }
 }

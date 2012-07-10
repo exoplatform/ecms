@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+	<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
+    	<component-plugin> 
+        <name>manage.view.plugin</name>
+        <set-method>setManageViewPlugin</set-method>
+        <type>org.exoplatform.services.cms.views.impl.ManageViewPlugin</type>
+        <description>this plugin manage user view</description>
+        <init-params>
+        	<value-param>
+	        	<name>autoCreateInNewRepository</name>
+	        	<value>true</value>
+	        </value-param>
+	        <value-param>
+	        	<name>predefinedViewsLocation</name>
+	        	<value>classpath:/conf/dms/artifacts</value>
+	        </value-param>	        
+		      <object-param>	      
+		        <name>Admin-View</name>
+		        <description>View configuration of Admin</description>
+		        <object type="org.exoplatform.services.cms.views.ViewConfig">		          
+		          <field name="name"><string>admin-view</string></field>
+		          <field name="permissions"><string>*:/platform/administrators</string></field>
+		          <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/ListView</string></field>	
+		          <field name="tabList">
+                <collection type="java.util.ArrayList">               
+                  <value>
+                    <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                      <field name="tabName"><string>Admin</string></field>
+                      <field name="buttons">
+                      	<string>
+                      		manageVersions; managePublications; manageCategories; manageRelations; 
+                      		manageActions; viewProperties; exportNode; importNode; manageHidden
+                      	</string>
+                      </field>
+                    </object>
+                  </value>
+                  <value>
+                    <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                      <field name="tabName"><string>Info</string></field>
+                      <field name="buttons">
+                      	<string>
+                      		viewReferences; viewNodeType;  viewPermissions; viewMetadatas; viewRelations; manageAuditing; showJCRStructure
+                      	</string>
+                      </field>
+                    </object>
+                  </value>
+                  <value>
+                    <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                      <field name="tabName"><string>Actions</string></field>
+                      <field name="buttons">
+                      	<string>
+                      		addFolder; addDocument; editDocument; upload; addSymLink
+                      	</string>
+                      </field>
+                    </object>
+                  </value>
+                  <value>
+                    <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                      <field name="tabName"><string>Collaboration</string></field>
+                      <field name="buttons">
+                      	<string>
+                      		watchDocument; taggingDocument; multiLanguage; vote; Comment
+                      	</string>
+                      </field>
+                    </object>
+                  </value>
+                </collection>
+              </field>	          
+		        </object>
+		      </object-param>
+		      <object-param>	      
+		        <name>Anonymous</name>
+		        <description>View configuration for anonymous user</description>
+		        <object type="org.exoplatform.services.cms.views.ViewConfig">		        	
+		          <field name="name"><string>anonymous-view</string></field>
+		          <field name="permissions"><string>*</string></field>
+		          <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/ListView</string></field>
+		          <field name="tabList">
+                <collection type="java.util.ArrayList">
+                  <value>
+                    <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                      <field name="tabName"><string>Actions</string></field>
+                      <field name="buttons"><string></string></field>
+                    </object>
+                  </value>
+                </collection>
+              </field>
+		        </object>		        
+		      </object-param>		      
+		      <object-param>	      
+		        <name>System Template</name>
+		        <description>Template for display documents in list style</description>
+		        <object type="org.exoplatform.services.cms.views.TemplateConfig">		        	
+              <field name="type"><string>ecmExplorerTemplate</string></field>
+		          <field name="name"><string>SystemView</string></field>
+		          <field name="warPath"><string>/ecm-explorer/SystemView.gtmpl</string></field>              
+		        </object>
+		      </object-param>		              
+	      </init-params>	
+      </component-plugin> 
+  </external-component-plugins>
+  <external-component-plugins>
+		<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+		<component-plugin>
+			<name>add.action</name>
+			<set-method>registerUIExtensionPlugin</set-method>
+			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+			<init-params>
+				<object-param>
+					<name>ViewNodeType</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<field name="name"><string>ViewNodeType</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewNodeTypeActionComponent</string></field>
+					</object>
+				</object-param>
+				<object-param>
+					<name>ManageAuditing</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<field name="name"><string>ManageAuditing</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageAuditingActionComponent</string></field>
+					</object>
+				</object-param>					
+				<object-param>
+					<name>ManagePublications</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<field name="name"><string>ManagePublications</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManagePublicationsActionComponent</string></field>
+					</object>
+				</object-param>					
+				<object-param>
+					<name>WatchDocument</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<field name="name"><string>WatchDocument</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.WatchDocumentActionComponent</string></field>
+					</object>
+				</object-param>					
+				<object-param>
+					<name>ManageVersions</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<field name="name"><string>ManageVersions</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent</string></field>
+					</object>
+				</object-param>					
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+</configuration>

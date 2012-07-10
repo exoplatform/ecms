@@ -17,6 +17,11 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.taxonomy;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.List;
 
 import javax.jcr.Node;
@@ -28,8 +33,11 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyAlreadyExistsException;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyNodeAlreadyExistsException;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -37,7 +45,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  *          hunghvit@gmail.com
  * Jun 14, 2009
  */
-public class TestTaxonomyService extends BaseDMSTestCase {
+public class TestTaxonomyService extends BaseWCMTestCase {
 
   private TaxonomyService      taxonomyService;
 
@@ -53,22 +61,29 @@ public class TestTaxonomyService extends BaseDMSTestCase {
   
   private MockTaxonomyService mockTaxonomyService;
 
-  public void setUp() throws Exception {
-    super.setUp();
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     taxonomyService = (TaxonomyService) container.getComponentInstanceOfType(TaxonomyService.class);
-    mockTaxonomyService = (MockTaxonomyService) container.getComponentInstanceOfType(MockTaxonomyService.class);
-    dmsSesssion = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
+    mockTaxonomyService = (MockTaxonomyService) container.getComponentInstanceOfType(MockTaxonomyService.class);    
     nodeHierarchyCreator = (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     linkManage = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
     definitionPath =  nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);
     storagePath =  nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
   }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+    dmsSesssion = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
+  }  
 
 
   /**
    *  Test method TaxonomyService.addTaxonomyPlugin()
    *  @see {@link # testInit()}
    */
+  @Test
   public void testAddTaxonomyPlugin() throws Exception {
   }
 
@@ -77,6 +92,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    *  Expect: Create system taxonomy tree in dms-system
    *  @see {@link # testInit()}
    */
+  @Test
   public void testInit() throws Exception {
     Node systemTreeDef = (Node) dmsSesssion.getItem(definitionPath + "/System");
     Node systemTreeStorage = (Node) dmsSesssion.getItem(storagePath + "/System");
@@ -90,6 +106,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    *  Expect: return System tree
    * @throws Exception
    */
+  @Test
   public void testGetTaxonomyTree1() throws Exception {
     Node systemTree = taxonomyService.getTaxonomyTree(REPO_NAME, "System");
     assertNotNull(systemTree);
@@ -103,6 +120,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testAddTaxonomyTree1() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -121,6 +139,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws RepositoryException
    * @throws TaxonomyNodeAlreadyExistsException
    */
+  @Test
   public void testAddTaxonomyTree2() throws RepositoryException, TaxonomyNodeAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -141,6 +160,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testGetTaxonomyTree2() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -157,6 +177,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    *  Expect: return one tree in repository
    * @throws Exception
    */
+  @Test
   public void testGetAllTaxonomyTrees2() throws Exception {
     assertEquals(1, taxonomyService.getAllTaxonomyTrees(REPO_NAME).size());
   }
@@ -169,6 +190,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testRemoveTaxonomyTree() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -190,6 +212,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testGetAllTaxonomyTrees1() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -212,6 +235,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testHasTaxonomyTree() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -228,6 +252,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws RepositoryException
    */
+  @Test
   public void testAddTaxonomyNode1() throws TaxonomyNodeAlreadyExistsException, RepositoryException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -242,6 +267,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    *  Ouput: TaxonomyNodeAlreadyExistsException
    * @throws RepositoryException
    */
+  @Test
   public void testAddTaxonomyNode2() throws RepositoryException {
     try {
       session.getRootNode().addNode("MyDocuments");
@@ -259,6 +285,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws RepositoryException
    * @throws TaxonomyNodeAlreadyExistsException
    */
+  @Test
   public void testRemoveTaxonomyNode() throws RepositoryException, TaxonomyNodeAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -274,6 +301,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws RepositoryException
    * @throws TaxonomyNodeAlreadyExistsException
    */
+  @Test
   public void testMoveTaxonomyNode() throws RepositoryException, TaxonomyNodeAlreadyExistsException  {
     session.getRootNode().addNode("MyDocuments");
     session.save();
@@ -295,7 +323,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
-
+  @Test
   public void testAddCategory() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -319,6 +347,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testAddCategories() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -346,6 +375,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testHasCategories() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -371,6 +401,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testGetCategories() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -397,6 +428,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testGetAllCategories() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -430,6 +462,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
    * @throws TaxonomyNodeAlreadyExistsException
    * @throws TaxonomyAlreadyExistsException
    */
+  @Test
   public void testRemoveCategory() throws RepositoryException, TaxonomyNodeAlreadyExistsException, TaxonomyAlreadyExistsException {
     session.getRootNode().addNode("MyDocuments");
     Node article = session.getRootNode().addNode("Article");
@@ -454,6 +487,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
     assertEquals(0, lstNode.size());
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     List<Node> lstNode = taxonomyService.getAllTaxonomyTrees(true);
     for(Node tree : lstNode) {
@@ -465,7 +499,6 @@ public class TestTaxonomyService extends BaseDMSTestCase {
       session.getItem(s).remove();
       session.save();
     }
-    super.tearDown();
   }
 }
 

@@ -69,6 +69,9 @@ public class DumpSEOServiceImpl extends SEOServiceImpl {
       seoNode.setProperty("exo:metaDescription", description);
       seoNode.setProperty("exo:metaFully", fullStatus);
       if(onContent) {
+        if (!seoNode.isNodeType("mix:referenceable")) {
+          seoNode.addMixin("mix:referenceable");
+        }
         seoNode.setProperty("exo:metaUri", seoNode.getUUID());
         hash = getHash(seoNode.getUUID());
       }

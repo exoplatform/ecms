@@ -17,6 +17,9 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.voting;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -33,7 +36,10 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.voting.VotingService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by eXo Platform
@@ -48,7 +54,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 1. Vote method
  * 2. Get Vote Total method
  */
-public class TestVotingService extends BaseDMSTestCase {
+public class TestVotingService extends BaseWCMTestCase {
 
   private final static String I18NMixin = "mix:i18n";
 
@@ -87,13 +93,18 @@ public class TestVotingService extends BaseDMSTestCase {
   private VotingService votingService = null;
 
   private MultiLanguageService multiLanguageService = null;
-
+  
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     votingService = (VotingService) container.getComponentInstanceOfType(VotingService.class);
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
   }
+
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+  } 
 
   /**
    * Test Method: vote()
@@ -107,6 +118,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        votingRate = (1 + 4 + 5)/3 = 3.33
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testVote() throws Exception {
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -131,6 +143,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        Voter's language is not default language
    * Expected: throws exception
    */
+  @Test
   public void testVote1() throws Exception{
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -155,6 +168,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        votingRate = (3 + 1 + 4)/3 = 2.67
    *        total of vote: 3.
    */
+  @Test
   public void testVote2() throws Exception {
     Node test = initNode();
     votingService.vote(test, 3, null, "fr");
@@ -181,6 +195,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        votingRate = (2 + 3 + 4)/3
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testVote3() throws Exception {
     Node test = initNode();
     votingService.vote(test, 2, "root", "fr");
@@ -210,11 +225,12 @@ public class TestVotingService extends BaseDMSTestCase {
    *        votingRate = 3.33
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testVote4() throws Exception{
     try {
       Node test = session.getRootNode().addNode("Test", FILE);
       Node testFile = test.addNode(CONTENT, RESOURCE);
-      testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+      testFile.setProperty(DATA, "test");
       testFile.setProperty(MIMETYPE, "text/xml");
       testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
       if (test.canAddMixin(I18NMixin)) {
@@ -258,6 +274,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        voter's language is null
    * Expected: throws Exception
    */
+  @Test
   public void testVote5() throws Exception {
     try {
       Node test = session.getRootNode().addNode("Test");
@@ -276,6 +293,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *        Voter's language is not equal default language.
    * Expected: throws Exception
    */
+  @Test
   public void testVote6() throws Exception{
     try {
       Node test = session.getRootNode().addNode("Test");
@@ -292,6 +310,7 @@ public class TestVotingService extends BaseDMSTestCase {
    * Expected:
    *        Total of test's vote = value of VOTE_TOTAL_LANG_PROP property.
    */
+  @Test
   public void testGetVoteTotal() throws Exception{
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -314,6 +333,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *       In this case:
    *       total = total of voters with default language + total of voter with other languages.
    */
+  @Test
   public void testGetVoteTotal1() throws Exception{
     Node test = initNode();
     String DefaultLang = multiLanguageService.getDefault(test);
@@ -337,6 +357,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *       In this case:
    *       total = total of voters with default language + total of voter with other languages.
    */
+  @Test
   public void testGetVoteValueOfUser() throws Exception{
     Node test = initNode();
     String DefaultLang = multiLanguageService.getDefault(test);
@@ -356,13 +377,13 @@ public class TestVotingService extends BaseDMSTestCase {
   /**
    * Clean data test
    */
+  @AfterMethod
   public void tearDown() throws Exception {
     if (session.itemExists("/Test")) {
       Node test = session.getRootNode().getNode("Test");
       test.remove();
       session.save();
     }
-    super.tearDown();
   }
 
   /**
@@ -405,7 +426,7 @@ public class TestVotingService extends BaseDMSTestCase {
     String mimeType = CmsService.NODE + "/" + CONTENT + "/" + MIMETYPE;
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
-    inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    inputProperty.setValue("test");
     map.put(data, inputProperty);
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(mimeType);

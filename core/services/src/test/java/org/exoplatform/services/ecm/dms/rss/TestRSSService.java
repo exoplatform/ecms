@@ -16,25 +16,38 @@
  */
 package org.exoplatform.services.ecm.dms.rss;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.rss.RSSService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
  * June 09, 2009
  */
-public class TestRSSService extends BaseDMSTestCase {
+public class TestRSSService extends BaseWCMTestCase {
 
   private RSSService rssService;
 
-  public void setUp() throws Exception {
-    super.setUp();
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     rssService = (RSSService)container.getComponentInstanceOfType(RSSService.class);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
   }
 
   /**
@@ -44,6 +57,7 @@ public class TestRSSService extends BaseDMSTestCase {
    * Expect: Create a Feed file (feed type is RSS or Podcast)
    * @throws Exception
    */
+  @Test
   public void testGenerateFeed() throws Exception {
     Map<String, String> contextRss = new HashMap<String, String>();
     contextRss.put("exo:feedType", "rss");
@@ -83,6 +97,7 @@ public class TestRSSService extends BaseDMSTestCase {
     }
   }
 
+  @Test
   public void testGenerateFeed2() throws Exception {
     Map<String, String> contextPodcast = new HashMap<String, String>();
     contextPodcast.put("exo:feedType", "podcast");
@@ -115,12 +130,12 @@ public class TestRSSService extends BaseDMSTestCase {
   /**
    * Clean all node for testing
    */
+  @AfterMethod
   public void tearDown() throws Exception {
     Node myRoot = session.getRootNode();
     if (myRoot.hasNode("Feeds")) {
       myRoot.getNode("Feeds").remove();
     }
     session.save();
-    super.tearDown();
   }
 }

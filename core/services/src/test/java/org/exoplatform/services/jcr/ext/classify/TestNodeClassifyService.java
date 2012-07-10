@@ -16,6 +16,9 @@
  */
 package org.exoplatform.services.jcr.ext.classify;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 
@@ -23,6 +26,8 @@ import org.exoplatform.services.jcr.ext.classify.impl.AlphabetClassifyPlugin;
 import org.exoplatform.services.jcr.ext.classify.impl.TypeClassifyPlugin;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -32,11 +37,9 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
  */
 public class TestNodeClassifyService extends BaseWCMTestCase {
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
-   */
+  @BeforeMethod
   public void setUp() throws Exception {
-    super.setUp();
+    applySystemSession();
   }
 
   /**
@@ -44,6 +47,7 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testClassifyPluginManager() throws Exception {
     NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class);
@@ -57,6 +61,7 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAlphabetClassify() throws Exception {
     NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class);
@@ -216,6 +221,7 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testTypeClassify() throws Exception{
     NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class) ;

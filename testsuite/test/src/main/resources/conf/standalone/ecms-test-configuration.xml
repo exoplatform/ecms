@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
+  xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
+
+  <component>
+    <key>org.exoplatform.services.listener.ListenerService</key>
+    <type>org.exoplatform.services.listener.ListenerService</type>
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.jcr.ext.app.SessionProviderService</key>
+    <type>org.exoplatform.ecms.test.DumpThreadLocalSessionProviderService</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.services.scheduler.impl.QuartzSheduler</type>
+  </component>
+  
+  <import>classpath:/conf/standalone/core/ecms-test-core-configuration.xml</import>
+  <import>classpath:/conf/standalone/core/ecms-test-organization-configuration.xml</import>
+  <import>classpath:/conf/standalone/core/rest/ecms-test-rest-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/ecms-test-jcr-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/ecms-test-wcmjcr-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/ecms-test-system-configuration.xml</import>
+  <import>classpath:/conf/standalone/portal/ecms-test-portal-configuration.xml</import>
+
+</configuration>

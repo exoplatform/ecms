@@ -17,6 +17,9 @@
  **************************************************************************/
 package org.exoplatform.services.cms.documents;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
@@ -25,16 +28,19 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Phan Trong Lam
  * lamptdev@gmail.com
  * Oct 6, 2009
  */
-public class TestDocumentTypeService extends BaseDMSTestCase {
+public class TestDocumentTypeService extends BaseWCMTestCase {
 
   private final static String NT_UNSTRUCTURED   = "nt:unstructured";
 
@@ -50,21 +56,19 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
 
   private DocumentTypeService documentTypeService_;
 
-  /*
-   * (non-Javadoc)
-   * @see junit.framework.TestCase#setUp()
-   */
-  public void setUp() throws Exception {
-    super.setUp();
-    init();
-    documentTypeService_ = (DocumentTypeService) container
-                .getComponentInstanceOfType(DocumentTypeService.class);
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    documentTypeService_ = (DocumentTypeService) container.getComponentInstanceOfType(DocumentTypeService.class);
   }
 
-  /*
-   * (non-Javadoc)
-   * @see junit.framework.TestCase#tearDown()
-   */
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+    init();
+  }
+
+  @AfterMethod
   public void tearDown() throws Exception {
     clear();
     session.save();
@@ -77,6 +81,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * Expect: Get list of all supported types include Video, Images.
    * @throws Exception
    */
+  @Test
   public void testAllSupportedType() throws Exception {
 
     List<String> expectedList = documentTypeService_.getAllSupportedType();
@@ -95,6 +100,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * Expect: Get list of mime types of Video supported type.
    * @throws Exception
    */
+  @Test
   public void testAllDocumentsByKindOfDocumentType() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -128,6 +134,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * Expect: Get list of nodes in which jcr:mimeType properties are image/gif types.
    * @throws Exception
    */
+  @Test
   public void testAllDocumentsByType() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -159,6 +166,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * audio/mp3, text/plain types.
    * @throws Exception
    */
+  @Test
   public void testAllDocumentsByTypes() throws Exception {
     String[] mimeTypes = { "image/gif", "audio/mp3" };
     Node rootNode = session.getRootNode();
@@ -189,6 +197,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * exo:owner is root
    * @throws Exception
    */
+  @Test
   public void testAllDocumentsByUser01() throws Exception {
     String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
@@ -222,6 +231,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * Expect: Get an empty list of nodes.
    * @throws Exception
    */
+  @Test
   public void testAllDocumentsByUser02() throws Exception {
     String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();

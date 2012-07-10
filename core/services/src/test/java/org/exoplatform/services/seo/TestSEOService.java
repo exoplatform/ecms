@@ -16,11 +16,17 @@
  */
 package org.exoplatform.services.seo;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+
 import java.util.ArrayList;
 
 import javax.jcr.Node;
 
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -28,19 +34,24 @@ import org.exoplatform.services.wcm.BaseWCMTestCase;
  *          exo@exoplatform.com
  * Jun 21, 2011  
  */
+
 public class TestSEOService extends BaseWCMTestCase{
   
   /** The SEO Service. */
   private SEOService seoService;
- 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.seo.TestSEOService#setUp()
-   */
-  public void setUp() throws Exception {
-    super.setUp();
-    seoService =  getService(SEOService.class);    
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart(); 
+    seoService = getService(SEOService.class);
   }
   
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+  }
+  
+  @Test
   public void testConstruct() throws Exception{
     assertNotNull(seoService);
   }
@@ -49,6 +60,7 @@ public class TestSEOService extends BaseWCMTestCase{
    * test store page metadata
    * @throws Exception
    */
+  @Test
   public void testStorePageMetadata() throws Exception {
    PageMetadataModel metaModel = new PageMetadataModel();
     metaModel.setUri("home");
@@ -94,6 +106,7 @@ public class TestSEOService extends BaseWCMTestCase{
   public void tesRemovePageMetadata() throws Exception{
     PageMetadataModel metaModel = new PageMetadataModel();    
     metaModel.setUri("home");
+    metaModel.setPageReference("home");
     metaModel.setKeywords("test");    
     metaModel.setRobotsContent("index,follow");    
     seoService.storePageMetadata(metaModel,"classic",false);
@@ -119,14 +132,4 @@ public class TestSEOService extends BaseWCMTestCase{
     assertNull(seoService.getPageMetadata("home"));     
   }
   
-  /**
-   * Gets the service.
-   *
-   * @param clazz the clazz
-   *
-   * @return the service
-   */
-  protected <T> T getService(Class<T> clazz) {
-    return clazz.cast(container.getComponentInstanceOfType(clazz));
-  }
 }

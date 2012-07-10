@@ -16,12 +16,21 @@
  */
 package org.exoplatform.services.ecm.dms.link;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.AssertJUnit.fail;
+
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -30,7 +39,8 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  *          xxx5669@gmail.com
  * Jun 9, 2009
  */
-public class TestLinkManager extends BaseDMSTestCase {
+
+public class TestLinkManager extends BaseWCMTestCase {
   private LinkManager linkManager;
   private Session session;
   private Node rootNode;
@@ -39,6 +49,12 @@ public class TestLinkManager extends BaseDMSTestCase {
   private final static String UUID = "exo:uuid";
   private final static String PRIMARY_TYPE = "exo:primaryType";
 
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+  }
+  
   /**
    * Set up for testing
    *
@@ -57,9 +73,9 @@ public class TestLinkManager extends BaseDMSTestCase {
    *              |___B1_1
    *
    */
-  public void setUp() throws Exception {
-    super.setUp();
-    linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+  @BeforeMethod
+  public void setUp() throws Exception {    
+    applySystemSession();
     createTree();
   }
 
@@ -125,6 +141,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *        exo:primaryType = primaryType of node B1_1
    * @throws Exception
    */
+  @Test
   public void testCreateLink() throws Exception {
     System.out.println("================== Test Create Link  ==================");
 //    Test method createLink(Node parent, Node target)
@@ -197,6 +214,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *    result: false
    * @throws Exception
    */
+  @Test
   public void testIsLink() throws Exception {
     System.out.println("================== Test Is Link  ==================");
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
@@ -227,6 +245,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *    node target: name = "B1_1" is not null,
    * @throws Exception
    */
+  @Test
   public void testGetTarget() throws Exception {
     System.out.println("================== Test Get Target  ==================");
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
@@ -261,6 +280,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *    result: true
    * @throws Exception
    */
+  @Test
   public void testIsTargetReachable() throws Exception {
     System.out.println("================== Test IsTargetReachable  ==================");
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
@@ -287,6 +307,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *    property exo:primaryType = primaryNodeType of nodeB1_1
    * @throws Exception
    */
+  @Test
   public void testGetTargetPrimaryNodeType() throws Exception {
     System.out.println("================== Test GetTargetPrimaryNodeType  ==================");
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
@@ -309,6 +330,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    *        exo:primaryType = primaryType of node B1
    * @throws Exception
    */
+  @Test
   public void testUpdateLink() throws Exception {
     System.out.println("================== Test Update Link  ==================");
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
@@ -326,6 +348,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeUpdate.getPrimaryNodeType().getName(), symlinkNodeA1.getPrimaryNodeType().getName());
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     try {
       Node root = session.getRootNode();
@@ -334,6 +357,5 @@ public class TestLinkManager extends BaseDMSTestCase {
       session.save();
     } catch (PathNotFoundException e) {
     }
-    super.tearDown();
   }
 }

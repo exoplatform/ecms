@@ -16,10 +16,16 @@
  */
 package org.exoplatform.services.wcm.core;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.Collection;
 
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -31,18 +37,26 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
 
   /** The configuration service. */
   private WCMConfigurationService configurationService;
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    configurationService = (WCMConfigurationService) container.getComponentInstanceOfType(WCMConfigurationService.class);
+  }
+
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
    */
+  @BeforeMethod
   public void setUp() throws Exception {
-    super.setUp();
-    configurationService = getService(WCMConfigurationService.class);
+    applySystemSession();
   }
 
   /**
    * Test get site drive config.
    */
+  @Test
   public void testGetSiteDriveConfig() {
     DriveData driveData = configurationService.getSiteDriveConfig();
     assertEquals("{siteName}", driveData.getName());
@@ -61,6 +75,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   /**
    * Test get live portals location.
    */
+  @Test
   public void testGetLivePortalsLocation() {
     NodeLocation nodeLocation = configurationService.getLivePortalsLocation();
     assertEquals("collaboration", nodeLocation.getWorkspace());
@@ -70,6 +85,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   /**
    * Test get runtime context param.
    */
+  @Test
   public void testGetRuntimeContextParam() {
     assertEquals("/detail", configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI));
     assertEquals("/printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_PAGE_URI));
@@ -83,6 +99,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   /**
    * Test get runtime context params.
    */
+  @Test
   public void testGetRuntimeContextParams() {
     Collection<String> runtimeContextParams = configurationService.getRuntimeContextParams();
     assertTrue(runtimeContextParams.contains("/detail"));
@@ -98,6 +115,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   /**
    * Test get shared portal name.
    */
+  @Test
   public void testGetSharedPortalName() {
     assertEquals("shared", configurationService.getSharedPortalName());
   }
@@ -105,6 +123,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   /**
    * Test get all live portals location.
    */
+  @Test
   public void testGetAllLivePortalsLocation() {
     Collection<NodeLocation> nodeLocations = configurationService.getAllLivePortalsLocation();
     assertEquals(1, nodeLocations.size());

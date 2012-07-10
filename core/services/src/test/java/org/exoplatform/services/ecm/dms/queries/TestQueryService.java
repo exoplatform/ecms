@@ -16,6 +16,11 @@
  */
 package org.exoplatform.services.ecm.dms.queries;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.fail;
+
 import java.util.List;
 
 import javax.jcr.Node;
@@ -27,15 +32,18 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.queries.QueryService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
  * quang.ly@exoplatform.com xxx5669@gmail.com Jun 12, 2009
  */
-public class TestQueryService extends BaseDMSTestCase {
+public class TestQueryService extends BaseWCMTestCase {
   private QueryService         queryService;
 
   private NodeHierarchyCreator nodeHierarchyCreator;
@@ -46,13 +54,19 @@ public class TestQueryService extends BaseDMSTestCase {
 
   private String               relativePath = "Private/Searches";
 
-  public void setUp() throws Exception {
-    super.setUp();
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     queryService = (QueryService) container.getComponentInstanceOfType(QueryService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator) container
         .getComponentInstanceOfType(NodeHierarchyCreator.class);
     baseUserPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     baseQueriesPath = nodeHierarchyCreator.getJcrPath(BasePath.QUERIES_PATH);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
   }
 
   /**
@@ -64,6 +78,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    AllArticles node
    * @throws Exception
    */
+  @Test
   public void testInit() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     Node queriesHome = (Node) mySession.getItem(baseQueriesPath);
@@ -83,6 +98,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    node: name = "QueryAll" not null;
    * @throws Exception
    */
+  @Test
   public void testAddQuery() throws Exception {
     queryService.addQuery("QueryAll", "Select * from nt:base", "sql", "root", REPO_NAME);
     String userPath = baseUserPath + "/root/" + relativePath;
@@ -107,6 +123,7 @@ public class TestQueryService extends BaseDMSTestCase {
    * Expect: Size of list node = 0
    * @throws Exception
    */
+  @Test
   public void testGetQueries() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root", REPO_NAME);
@@ -139,6 +156,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    exception: Query path not found!
    * @throws Exception
    */
+  @Test
   public void testRemoveQuery() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
 //    queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root", REPO_NAME);
@@ -178,6 +196,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    node: query node is null
    * @throws Exception
    */
+  @Test
   public void testGetQueryByPath() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root", REPO_NAME);
@@ -206,6 +225,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *      exo:accessPermissions = *:/platform/administrators
    * @throws Exception
    */
+  @Test
   public void testAddSharedQuery() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -236,6 +256,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *      exo:accessPermissions = *:/platform/administrators
    * @throws Exception
    */
+  @Test
   public void testGetSharedQuery() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -269,6 +290,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    node: name = "QueryAll1" is removed
    * @throws Exception
    */
+  @Test
   public void testRemoveSharedQuery() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -318,6 +340,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    Size of listNode = 1, contains QueryAll2
    * @throws Exception
    */
+  @Test
   public void testGetSharedQueries() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -407,6 +430,7 @@ public class TestQueryService extends BaseDMSTestCase {
    *    exception: Query Path not found!
    * @throws Exception
    */
+  @Test
   public void testExecute() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1",
@@ -425,6 +449,7 @@ public class TestQueryService extends BaseDMSTestCase {
     queriesHome.save();
   }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     try {
       Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
@@ -447,6 +472,5 @@ public class TestQueryService extends BaseDMSTestCase {
 //      mySession.save();
     } catch (PathNotFoundException e) {
     }
-    super.tearDown();
   }
 }

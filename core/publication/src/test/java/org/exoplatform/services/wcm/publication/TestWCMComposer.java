@@ -1,56 +1,50 @@
 package org.exoplatform.services.wcm.publication;
 
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+
 import java.util.HashMap;
 
 import javax.jcr.Node;
-import javax.jcr.Session;
 
-import junit.framework.TestCase;
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.ecms.test.BaseECMSTestCase;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-public class TestWCMComposer extends TestCase {
-  protected PortalContainer container;
-
-  protected Session         session;
-
-  SessionProvider           sessionProvider         = null;
-
-  SessionProviderService    sessionProviderService_ = null;
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
+  })
+public class TestWCMComposer extends BaseECMSTestCase {
 
   WCMComposer               wcmComposer             = null;
-
-  String                    repository              = "repository";
-
-  String                    workspace               = "collaboration";
-
-	@Override
-  public void setUp() throws Exception {
-    super.setUp();
-    container = PortalContainer.getInstance();
-    sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    session = repositoryService.getRepository(repository).getSystemSession(workspace);
-    
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     wcmComposer = (WCMComposer) container.getComponentInstanceOfType(WCMComposer.class);
+  }
+
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
   }
 
 	/**
 	 * test getContent for an authorized node
 	 * @throws Exception
 	 */
+  @Test
 	public void testGetContentAuthorized() throws Exception {
-	  
-	  sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
 		
 		HashMap<String, String> filters = new HashMap<String, String>();
 
 		String nodeIdentifier = "/sites content";
-		Node node = wcmComposer.getContent(repository, workspace, nodeIdentifier, filters, sessionProvider);
+		Node node = wcmComposer.getContent(COLLABORATION_WS, nodeIdentifier, filters, sessionProvider);
 		
 		assertNotNull(node);
 	}
@@ -59,13 +53,13 @@ public class TestWCMComposer extends TestCase {
 	 * test getContent for an non authorized node
 	 * @throws Exception
 	 */
+  @Test
 	public void testGetContentNotAuthorized() throws Exception {
-    sessionProvider = sessionProviderService_.getSystemSessionProvider(null);	  
 		
 		HashMap<String, String> filters = new HashMap<String, String>();
 
 		String nodeIdentifier = "/exo:application";
-		Node node = wcmComposer.getContent(repository, workspace, nodeIdentifier, filters, sessionProvider);
+		Node node = wcmComposer.getContent(COLLABORATION_WS, nodeIdentifier, filters, sessionProvider);
 		
 		assertNull(node);
 	}

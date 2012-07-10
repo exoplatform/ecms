@@ -20,21 +20,37 @@ import java.util.Calendar;
 
 import javax.jcr.Node;
 
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.services.cms.records.RecordsService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
  * quang.ly@exoplatform.com xxx5669@gmail.com Jun 16, 2009
  */
-public class TestRecordsService extends BaseDMSTestCase {
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-core-service-test-configuration.xml") 
+  })
+public class TestRecordsService extends BaseWCMTestCase {
   private RecordsService       recordsService;
 
   private Node                 rootNode;
 
-  public void setUp() throws Exception {
-    super.setUp();
+  @Override
+  protected void afterContainerStart() {    
+    super.afterContainerStart();
     recordsService = (RecordsService) container.getComponentInstanceOfType(RecordsService.class);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
     createTree();
   }
 
@@ -110,6 +126,7 @@ public class TestRecordsService extends BaseDMSTestCase {
    *    Some property in file plan node has been changed
    * @throws Exception
    */
+  @Test
   public void testAddRecord() throws Exception {
     Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
     Node nodeA2 = rootNode.getNode("TestTreeNode/A2");
@@ -731,6 +748,7 @@ public class TestRecordsService extends BaseDMSTestCase {
 //    return listNodeName;
 //  }
 
+  @AfterMethod
   public void tearDown() throws Exception {
     try {
       Node testNode = rootNode.getNode("TestTreeNode");
@@ -739,6 +757,5 @@ public class TestRecordsService extends BaseDMSTestCase {
       session.save();
     } catch (Exception e) {
     }
-    super.tearDown();
   }
 }

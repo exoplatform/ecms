@@ -16,6 +16,9 @@
  */
 package org.exoplatform.services.wcm.core;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -30,6 +33,9 @@ import org.exoplatform.services.wcm.skin.CSSFileHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -44,13 +50,16 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
 
   /** The live node. */
   private Node documentNode;
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
-   */
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    webSchemaConfigService = (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
+  }
+  
+  @BeforeMethod
   public void setUp() throws Exception {
-    super.setUp();
-    webSchemaConfigService = getService(WebSchemaConfigService.class);
+    applySystemSession();
     webSchemaConfigService.getAllWebSchemaHandler().clear();
     documentNode = (Node) session.getItem("/sites content/live/classic/documents");
   }
@@ -60,6 +69,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddCSSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new CSSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -70,6 +80,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddDoubleCSSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new CSSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -82,6 +93,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddJSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new JSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -92,6 +104,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddDoubleJSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new JSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -105,6 +118,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddHTMLFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new HTMLFileSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -116,6 +130,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddDoubleHTMLFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new HTMLFileSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -129,6 +144,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddPortalFolderSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new PortalFolderSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -141,6 +157,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddDoublePortalFolderSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new PortalFolderSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -154,6 +171,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddWebcontentSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new WebContentSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -165,6 +183,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testAddDoubleWebcontentSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new WebContentSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
@@ -178,6 +197,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testGetAllWebSchemaHandler() throws Exception {
     webSchemaConfigService.addWebSchemaHandler(new JSFileHandler());
     webSchemaConfigService.addWebSchemaHandler(new CSSFileHandler());
@@ -192,6 +212,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testGetWebSchemaHandlerByType() throws Exception {
     webSchemaConfigService.addWebSchemaHandler(new JSFileHandler());
     webSchemaConfigService.addWebSchemaHandler(new CSSFileHandler());
@@ -220,6 +241,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testCreateCSSFileSchemaHandler() throws Exception {
     webSchemaConfigService.addWebSchemaHandler(new CSSFileHandler());
     webSchemaConfigService.addWebSchemaHandler(new PortalFolderSchemaHandler());
@@ -251,6 +273,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testCreateJSFileSchemaHandler() throws Exception {
     webSchemaConfigService.addWebSchemaHandler(new JSFileHandler());
     webSchemaConfigService.addWebSchemaHandler(new PortalFolderSchemaHandler());
@@ -282,6 +305,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testCreateWebcontentSchemaHandler_01() throws Exception {
     webSchemaConfigService.addWebSchemaHandler(new WebContentSchemaHandler());
     Node webcontentNode = documentNode.addNode("webcontent", NodetypeConstant.EXO_WEBCONTENT);
@@ -312,6 +336,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
   /**
    * Test create html file schema handler.
    */
+  @Test
   public void testCreateHTMLFileSchemaHandler() throws Exception {
     Node htmlFolder = documentNode.addNode("html", NodetypeConstant.EXO_WEB_FOLDER);
 
@@ -339,6 +364,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testUpdateCSSFileSchemaHandlerOnModify() throws Exception {
 
   }
@@ -348,11 +374,13 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testUpdateJSFileSchemaHandlerOnModify() throws Exception {}
 
   /**
    * Test modified html file schema handler.
    */
+  @Test
   public void testUpdateHTMLFileSchemaHandlerOnModify() throws Exception {
     String htmlData = "<html>" + "<head>" + "<title>My own HTML file</title>"
       + "</head>" + "<body>" + "<h1>the first h1 tag</h1>"
@@ -393,6 +421,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
   /**
    * Test remove css file schema handler.
    */
+  @Test
   public void testUpdateCSSFileSchemaHandlerOnRemove() {
 
   }
@@ -402,13 +431,14 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testUpdateJSFileSchemaHandlerOnRemove() throws Exception {}
 
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
+  @AfterMethod
   public void tearDown() throws Exception {
-    super.tearDown();
     NodeIterator nodeIterator = documentNode.getNodes();
     while (nodeIterator.hasNext()) {
       nodeIterator.nextNode().remove();

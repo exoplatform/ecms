@@ -16,22 +16,31 @@
  */
 package org.exoplatform.services.wcm.search;
 
+import static org.testng.AssertJUnit.assertEquals;
+
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
+import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -39,7 +48,11 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Jul 14, 2009
  */
-public class TestSearchService extends BaseWCMTestCase {
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml") 
+  })
+public class TestSearchService extends BaseECMSTestCase {
   QueryCriteria queryCriteria = new QueryCriteria();
 
   private SiteSearchService siteSearchService;
@@ -50,7 +63,7 @@ public class TestSearchService extends BaseWCMTestCase {
 
   private UserPortalConfigService userPortalConfigService;
 
-  private String searchKeyword = "This is";
+  private final String searchKeyword = "This is";
 
   private SessionProvider sessionProvider;
 
@@ -58,20 +71,11 @@ public class TestSearchService extends BaseWCMTestCase {
 
   private POMSession  pomSession;
 
-
-  private boolean searchPageChecked = true;
-
-  private boolean searchDocumentChecked = true;
-
-  private String searchSelectedPortal = "shared";
-
   private int seachItemsPerPage = 100;
-
-  private boolean searchIsLiveMode = false;
-
-  public void setUp() throws Exception {
-    super.setUp();
-    queryCriteria = new QueryCriteria();
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
     userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     pomManager = WCMCoreUtils.getService(POMSessionManager.class);
@@ -82,19 +86,12 @@ public class TestSearchService extends BaseWCMTestCase {
     publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
 
-    addDocuments();
+  }
 
-    queryCriteria.setSiteName(searchSelectedPortal);
-    queryCriteria.setKeyword(searchKeyword);
-    if (searchDocumentChecked) {
-      queryCriteria.setSearchDocument(true);
-      queryCriteria.setSearchWebContent(true);
-    } else  {
-      queryCriteria.setSearchDocument(false);
-      queryCriteria.setSearchWebContent(false);
-    }
-    queryCriteria.setSearchWebpage(searchPageChecked);
-    queryCriteria.setLiveMode(searchIsLiveMode);
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+    addDocuments();
   }
 
   private void addDocuments() throws Exception {
@@ -103,14 +100,6 @@ public class TestSearchService extends BaseWCMTestCase {
 
     Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
     addChildNodes(sharedPortal);
-
-//  private void addAnotherNode() throws Exception{
-//  Node parentNode = (Node)session.getItem("/sites content/live");
-//  for(int i = 0; i < 10; i ++){
-//    parentNode.addNode(parentNode.getName() + " anotherNode " + i);
-//  }
-//  session.save();
-//}
   }
 
   private void addChildNodes(Node parentNode)throws Exception{
@@ -127,27 +116,22 @@ public class TestSearchService extends BaseWCMTestCase {
 
     Node webContentNode = null;
     HashMap<String, String> context = null;
-    // Create 5 nodes which have status is PUBLISHED
-    for(int i = 0; i < 5; i++){
-      webContentNode = createWebcontentNode(parentNode, "webcontent" + i, null, null, null);
+      webContentNode = createWebcontentNode(parentNode, "webcontent0" , null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
       wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
       wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
-    }
-
-    // Create 5 nodes which have status is DRAFT
-    for(int i = 5; i < 10; i++){
-      webContentNode = createWebcontentNode(parentNode, "webcontent" + i, null, null, null);
+        
+      webContentNode = createWebcontentNode(parentNode, "webcontent1", null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
       wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
       wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
-    }
+    
     session.save();
     pomSession.close();
   }
@@ -167,10 +151,17 @@ public class TestSearchService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testSearchSharedPortalNotLiveMode() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getPage(1).size());
+    assertEquals(2, pageList.getPage(1).size());
   }
 
   /**
@@ -183,12 +174,18 @@ public class TestSearchService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testSearchSharedPortalLiveMode() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
+    assertEquals(1, pageList.getPage(1).size());
+    assertEquals(2, pageList.getTotalNodes());
   }
 
   /**
@@ -201,12 +198,18 @@ public class TestSearchService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  public void testSearchAllPortalNotLiveMode() throws Exception {
+  @Test
+  public void testSearchAllPortalNotLiveMode() throws Exception {    
+    queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(20, pageList.getTotalNodes());
-    assertEquals(20, pageList.getPage(1).size());
+    assertEquals(4, pageList.getTotalNodes());
+    assertEquals(4, pageList.getPage(1).size());
   }
 
   /**
@@ -219,13 +222,18 @@ public class TestSearchService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testSearchAllPortalLiveMode() throws Exception {
-    queryCriteria.setSearchWebpage(false);
-    queryCriteria.setLiveMode(true);
+    queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getPage(1).size());
-    assertEquals(20, pageList.getTotalNodes());
+    assertEquals(2, pageList.getPage(1).size());
+    assertEquals(4, pageList.getTotalNodes());
   }
 
   //---------------------------------------------- Test search document -----------------------------------------------------------
@@ -237,13 +245,17 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchDocumentLiveMode() throws Exception {
-    queryCriteria.setSearchWebpage(false);
-    queryCriteria.setSearchDocument(true);
-    queryCriteria.setLiveMode(true);
+  @Test
+  public void testSearchDocumentLiveMode() throws Exception {    
+    queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getPage(1).size());
+    assertEquals(2, pageList.getPage(1).size());
   }
 
   /**
@@ -254,11 +266,17 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = false<br>
    */
+  @Test
   public void testSearchDocumentNotLiveMode() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName(null);
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
-    this.searchSelectedPortal = null;
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getTotalNodes());
+    assertEquals(4, pageList.getTotalNodes());
   }
 
   /**
@@ -269,10 +287,17 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
    */
+  @Test
   public void testSearchDocumentOfSharedPortal() throws Exception {
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(false);
     queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getTotalNodes());
+    assertEquals(2, pageList.getTotalNodes());
   }
 
   /**
@@ -283,12 +308,18 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = true<br>
    */
+  @Test
   public void testSearchDocumentOfSharedPortalLiveMode() throws Exception {
-    queryCriteria.setSearchWebpage(false);
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false); 
     AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
+    assertEquals(1, pageList.getPage(1).size());
+    assertEquals(2, pageList.getTotalNodes());
   }
 
   //------------------------------------------- Test search pages ------------------------------------------------------------------
@@ -537,61 +568,87 @@ public class TestSearchService extends BaseWCMTestCase {
 //    assertEquals(0, pageList.getAvailable());
 //  }
 
+  @Test
   public void testSearchByProperty()throws Exception{
-    this.searchIsLiveMode = true;
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(searchKeyword);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(new String[] {"dc:description"});
     assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
+  @Test
   public void testSearchByDocumentType()throws Exception{
-    String documentType = "exo:webContent";
-    this.searchIsLiveMode = true;
-    queryCriteria.setSearchWebpage(false);
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
     queryCriteria.setKeyword(null);
-    queryCriteria.setFulltextSearch(true);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFulltextSearch(true);    
+    String documentType = "exo:webContent";    
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setContentTypes(documentType.split(","));
-    assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
+  @Test
   public void testSearchByDocumentAuthor()throws Exception{
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(null);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFulltextSearch(true);    
+    queryCriteria.setFulltextSearchProperty(null);    
     String author = "root";
-    this.searchIsLiveMode = true;
-    this.searchKeyword = null;
-    queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);
-    queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setAuthors(new String[]{author});
-    assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
+  @Test
   public void testSearchByMimeTypes()throws Exception{
-    this.searchIsLiveMode = true;
-    this.searchKeyword = null;
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(null);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);
-    queryCriteria.setFulltextSearchProperty(null);
+    queryCriteria.setFulltextSearch(true);    
+    queryCriteria.setFulltextSearchProperty(null);    
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
-    assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
+  @Test
   public void testSearchByTagUUID() throws Exception{
+    queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName("shared");
+    queryCriteria.setKeyword(null);
+    queryCriteria.setSearchDocument(true);
+    queryCriteria.setSearchWebContent(true);
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setFulltextSearch(true);    
+    queryCriteria.setFulltextSearchProperty(null);    
+    queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});    
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = "classic";
-    this.searchKeyword = null;
-    queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);
-    queryCriteria.setFulltextSearchProperty(null);
-    queryCriteria.setTagUUIDs(new String[]{uuid});
-    assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    queryCriteria.setTagUUIDs(new String[]{uuid});   
+    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
+  @AfterMethod
   protected void tearDown() throws Exception {
-    super.tearDown();
 
     NodeIterator iterator = null;
     Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
@@ -607,5 +664,114 @@ public class TestSearchService extends BaseWCMTestCase {
     }
 
     session.save();
+  }
+  
+  protected Node createWebcontentNode(Node parentNode,
+                                      String nodeName,
+                                      String htmlData,
+                                      String cssData,
+                                      String jsData) throws Exception {
+    Node webcontent = parentNode.addNode(nodeName, "exo:webContent");
+    webcontent.setProperty("exo:title", nodeName);
+    Node htmlNode;
+    try {
+      htmlNode = webcontent.getNode("default.html");
+    } catch (Exception ex) {
+      htmlNode = webcontent.addNode("default.html", "nt:file");
+    }
+    Node articleNode = webcontent.addNode("article", "exo:article");
+    articleNode.setProperty("exo:title", "This is");
+    articleNode.setProperty("exo:text", "This is text");
+    if (!htmlNode.isNodeType("exo:htmlFile"))
+      htmlNode.addMixin("exo:htmlFile");
+    Node htmlContent;
+    try {
+      htmlContent = htmlNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      htmlContent = htmlNode.addNode("jcr:content", "nt:resource");
+    }
+    htmlContent.setProperty("jcr:encoding", "UTF-8");
+    htmlContent.setProperty("jcr:mimeType", "text/html");
+    htmlContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (htmlData == null)
+      htmlData = "This is the default.html file.";
+    htmlContent.setProperty("jcr:data", htmlData);
+
+    Node jsFolder;
+    try {
+      jsFolder = webcontent.getNode("js");
+    } catch (Exception ex) {
+      jsFolder = webcontent.addNode("js", "exo:jsFolder");
+    }
+    Node jsNode;
+    try {
+      jsNode = jsFolder.getNode("default.js");
+    } catch (Exception ex) {
+      jsNode = jsFolder.addNode("default.js", "nt:file");
+    }
+    if (!jsNode.isNodeType("exo:jsFile"))
+      jsNode.addMixin("exo:jsFile");
+    jsNode.setProperty("exo:active", true);
+    jsNode.setProperty("exo:priority", 1);
+    jsNode.setProperty("exo:sharedJS", true);
+
+    Node jsContent;
+    try {
+      jsContent = jsNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      jsContent = jsNode.addNode("jcr:content", "nt:resource");
+    }
+    jsContent.setProperty("jcr:encoding", "UTF-8");
+    jsContent.setProperty("jcr:mimeType", "text/javascript");
+    jsContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (jsData == null)
+      jsData = "This is the default.js file.";
+    jsContent.setProperty("jcr:data", jsData);
+
+    Node cssFolder;
+    try {
+      cssFolder = webcontent.getNode("css");
+    } catch (Exception ex) {
+      cssFolder = webcontent.addNode("css", "exo:cssFolder");
+    }
+    Node cssNode;
+    try {
+      cssNode = cssFolder.getNode("default.css");
+    } catch (Exception ex) {
+      cssNode = cssFolder.addNode("default.css", "nt:file");
+    }
+    if (!cssNode.isNodeType("exo:cssFile"))
+      cssNode.addMixin("exo:cssFile");
+    cssNode.setProperty("exo:active", true);
+    cssNode.setProperty("exo:priority", 1);
+    cssNode.setProperty("exo:sharedCSS", true);
+
+    Node cssContent;
+    try {
+      cssContent = cssNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      cssContent = cssNode.addNode("jcr:content", "nt:resource");
+    }
+    cssContent.setProperty("jcr:encoding", "UTF-8");
+    cssContent.setProperty("jcr:mimeType", "text/css");
+    cssContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (cssData == null)
+      cssData = "This is the default.css file.";
+    cssContent.setProperty("jcr:data", cssData);
+
+    Node mediaFolder;
+    try {
+      mediaFolder = webcontent.getNode("medias");
+    } catch (Exception ex) {
+      mediaFolder = webcontent.addNode("medias");
+    }
+    if (!mediaFolder.hasNode("images"))
+      mediaFolder.addNode("images", "nt:folder");
+    if (!mediaFolder.hasNode("videos"))
+      mediaFolder.addNode("videos", "nt:folder");
+    if (!mediaFolder.hasNode("audio"))
+      mediaFolder.addNode("audio", "nt:folder");
+    session.save();
+    return webcontent;
   }
 }

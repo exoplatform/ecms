@@ -1,12 +1,17 @@
 package org.exoplatform.services.ecm.dms.documents;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-public class TestTrashService extends BaseDMSTestCase {
+public class TestTrashService extends BaseWCMTestCase {
 
   final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   final static public String RESTORE_PATH = "exo:restorePath";
@@ -15,18 +20,19 @@ public class TestTrashService extends BaseDMSTestCase {
   private SessionProvider sessionProvider;
   private TrashService trashService;
 
-  /**
-   * {@inheritDoc}
-   */
-  public void setUp() throws Exception {
-    super.setUp();
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
-    trashService = (TrashService)container.getComponentInstanceOfType(TrashService.class);
+    trashService = (TrashService) container.getComponentInstanceOfType(TrashService.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
+  }
+  
+  @AfterMethod
   public void tearDown() throws Exception {
 //    Node trashNode = session.getRootNode().getNode("TrashNode");
 //    trashNode.remove();
@@ -44,6 +50,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testMoveToTrashSameWorkspace() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -80,6 +87,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testMoveToTrashDifferentWorkspaces() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -119,6 +127,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testRestoreFromTrashSameWorkspace() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -173,6 +182,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testRestoreFromTrashDifferentWorkspaces() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -238,6 +248,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testGetAllNodeInTrash() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -284,6 +295,7 @@ public class TestTrashService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testGetAllNodeInTrashByUser() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -325,6 +337,7 @@ public class TestTrashService extends BaseDMSTestCase {
    * And node3 is NOT in trash, <code>isInTrash()</code> return <code>false</code>
    * @throws Exception
    */
+  @Test
   public void testIsInTrash1() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -362,6 +375,7 @@ public class TestTrashService extends BaseDMSTestCase {
    * expectedValue: node0 is in /Trash/ and all child nodes of node0 (node1 and node2) are also in /Trash/
    * @throws Exception
    */
+  @Test
   public void testIsInTrash2() throws Exception {
     Node rootNode = session.getRootNode();
 

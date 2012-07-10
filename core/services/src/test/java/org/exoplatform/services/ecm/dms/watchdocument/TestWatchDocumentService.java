@@ -17,6 +17,10 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.watchdocument;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +32,10 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.services.cms.watch.WatchDocumentService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by eXo Platform
@@ -44,7 +51,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 2. watthDocument() method
  * 3. unWatchDocument() method
  */
-public class TestWatchDocumentService extends BaseDMSTestCase{
+public class TestWatchDocumentService extends BaseWCMTestCase{
 
   private final static String  EXO_WATCHABLE_MIXIN  = "exo:watchable";
 
@@ -55,21 +62,27 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
   private WatchDocumentService watchDocumentService = null;
 
   private Node test;
-
+  
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     watchDocumentService = (WatchDocumentService) container.getComponentInstanceOfType(WatchDocumentService.class);
+  }
+
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
     test = session.getRootNode().addNode("Test");
     session.save();
   }
-
+  
   /**
    * Test Method: getNotification()
    * Input: test node is not exo:watchable document
    * Expected:
    *        Value of notification is -1.
    */
+  @Test
   public void testGetNotificationType() throws Exception{
     int notification = watchDocumentService.getNotificationType(test, "root");
     assertEquals(-1, notification);
@@ -81,6 +94,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    * Expected:
    *       Value of notification is 0.
    */
+  @Test
   public void testGetNotificationType1() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
     session.save();
@@ -95,6 +109,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    * Expected:
    *       Value of notification is 1.
    */
+  @Test
   public void testGetNotificationType2() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
     session.save();
@@ -109,6 +124,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    * Expected:
    *       Value of notification is 2.
    */
+  @Test
   public void testGetNotificationType3() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
     session.save();
@@ -124,6 +140,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    *        document is added exo:watchable mixinType
    *        exo:emailWatch property of document node has value: root.
    */
+  @Test
   public void testWatchDocument() throws Exception{
     watchDocumentService.watchDocument(test, "root", 1);
     assertTrue(test.isNodeType(EXO_WATCHABLE_MIXIN));
@@ -143,6 +160,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    *        document is added exo:watchable mixinType
    *        document doesn't has exo:emailWatch property.
    */
+  @Test
   public void testWatchDocument1() throws Exception{
     watchDocumentService.watchDocument(test, "root", 2);
     assertTrue(test.isNodeType(EXO_WATCHABLE_MIXIN));
@@ -158,6 +176,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    *        exo:emailWatch property of document node has value: root and marry.
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testWatchDocument2() throws Exception{
     watchDocumentService.watchDocument(test, "root", 1);
     watchDocumentService.watchDocument(test, "marry", 1);
@@ -177,6 +196,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    *        exo:emailWatch property of document node only has value: marry.
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testUnWatchDocument() throws Exception {
     watchDocumentService.watchDocument(test, "root", 1);
     watchDocumentService.watchDocument(test, "marry", 1);
@@ -198,6 +218,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    *        exo:emailWatch property of a document node has value: both root and marry.
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testUnWatchDocument2() throws Exception{
     watchDocumentService.watchDocument(test, "root", 1);
     watchDocumentService.watchDocument(test, "marry", 1);
@@ -238,12 +259,12 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
   /**
    * Clean data test
    */
+  @AfterMethod
   public void tearDown() throws Exception {
     if (session.itemExists("/Test")) {
       test = session.getRootNode().getNode("Test");
       test.remove();
       session.save();
     }
-    super.tearDown();
   }
 }

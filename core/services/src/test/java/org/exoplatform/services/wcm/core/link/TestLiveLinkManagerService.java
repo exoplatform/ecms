@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.core.link;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,9 @@ import javax.jcr.Value;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.link.LiveLinkManagerService;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -36,13 +41,17 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
 
   /** The live link manager service. */
   private LiveLinkManagerService liveLinkManagerService;
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
-   */
-  public void setUp() throws Exception {
-    super.setUp();
+  
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     liveLinkManagerService = getService(LiveLinkManagerService.class);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
     Node folder = (Node) session.getItem("/sites content/live/classic/web contents");
     createWebcontentNode(folder, "webcontent", "This is the live link: <a href='http://www.google.com'>Goolge</a> and this is the broken link: <a href='http://www.thiscannotbeanactivelink.com'>Broken</a>", null, null);
   }
@@ -52,6 +61,7 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testExtractLinks() throws Exception {
     Node result = (Node) session.getItem("/sites content/live/classic/web contents/webcontent");
     Node htmlFile = result.getNode("default.html");
@@ -66,6 +76,7 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
+  @Test
   public void testUpdateLinkDataForNode() throws Exception {
     liveLinkManagerService.updateLinks("classic");
     Node result = (Node) session.getItem("/sites content/live/classic/web contents/webcontent");
@@ -81,8 +92,8 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
+  @AfterMethod
   protected void tearDown() throws Exception {
-    super.tearDown();
     session.getItem("/sites content/live/classic/web contents/webcontent").remove();
     session.save();
   }

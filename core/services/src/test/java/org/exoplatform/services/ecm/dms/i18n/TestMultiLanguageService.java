@@ -17,8 +17,13 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.i18n;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.AssertJUnit.fail;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +36,11 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.exceptions.SameAsDefaultLangException;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -40,7 +48,7 @@ import org.exoplatform.services.exceptions.SameAsDefaultLangException;
  *          hunghvit@gmail.com
  * Jun 17, 2009
  */
-public class TestMultiLanguageService extends BaseDMSTestCase {
+public class TestMultiLanguageService extends BaseWCMTestCase {
 
   private static final String I18NMixin = "mix:i18n";
 
@@ -74,9 +82,16 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
 
   private MultiLanguageService multiLanguageService;
 
-  public void setUp() throws Exception {
-    super.setUp();
+  
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
+  }
+  
+  @BeforeMethod
+  public void setUp() throws Exception {
+    applySystemSession();
   }
 
   /**
@@ -85,6 +100,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: Node has two language: vi and English
    * @throws Exception
    */
+  @Test
   public void testGetSupportedLanguages() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -172,7 +188,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
 
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
-    inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    inputProperty.setValue("test");
     map.put(data, inputProperty);
 
     inputProperty = new JcrInputProperty();
@@ -207,7 +223,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
 
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
-    inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    inputProperty.setValue("test");
     map.put(data, inputProperty);
 
     inputProperty = new JcrInputProperty();
@@ -231,6 +247,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    *         exo:title = this is title; exo:summary = this is summary; exo:text: this is article content;
    * @throws Exception
    */
+  @Test
   public void testAddLanguage1() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -260,6 +277,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    *         if add language = fr with default = true then node test has language = fr, with properties created in method  createMapInput2
    * @throws Exception
    */
+  @Test
   public void testAddLanguage2() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -292,11 +310,11 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: if language fr is added as not default language then language node is add following relative path = languages/fr
    *         if language fr is added as default language then content of test node contains data defined in method createFileInput()
    * @throws Exception
-   */
+   */  
   public void testAddLanguage3() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
-    testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    testFile.setProperty(DATA, "test");
     testFile.setProperty(MIMETYPE, "text/xml");
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
     test.addMixin(I18NMixin);
@@ -308,16 +326,12 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       assertTrue(test.hasNode("languages/fr"));
       Node testlanguage = test.getNode("languages/fr");
       assertTrue(testlanguage.hasNode(CONTENT));
-      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
-                                              .openStream(),
-                                    testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
+      assertEquals("test", testlanguage.getNode(CONTENT).getProperty(DATA).getString());
       multiLanguageService.addLanguage(test, createFileInput(), "vi", true, CONTENT);
       defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
       assertEquals("vi", defaultLanguage);
       assertTrue(test.hasNode(CONTENT));
-      assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
-                                              .openStream(),
-                                    test.getNode(CONTENT).getProperty(DATA).getStream()));
+      assertEquals("test", test.getNode(CONTENT).getProperty(DATA).getString());
     } catch (ConstraintViolationException e) {
       // TODO: handle exception
     }
@@ -329,6 +343,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: language default of node test is language. Properties of test node are properties defined in creatMapInput1() method
    * @throws Exception
    */
+  @Test
   public void testSetDefault() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -338,6 +353,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     multiLanguageService.addLanguage(test, createMapInput1(), "fr", false);
     assertTrue(test.hasNode("languages/fr"));
     Node testlanguage = test.getNode("languages/fr");
+    testlanguage.addNode(CONTENT);
     assertEquals("this is title", testlanguage.getProperty(TITLE).getString());
     assertEquals("this is summary", testlanguage.getProperty(SUMMARY).getString());
     assertEquals("this is article content", testlanguage.getProperty(TEXT).getString());
@@ -353,6 +369,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: language default of node is  fr
    * @throws Exception
    */
+  @Test
   public void testGetDefault() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.setProperty(TITLE, "Document");
@@ -376,26 +393,24 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testAddFileLanguage1() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
-    testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    testFile.setProperty(DATA, "test");
     testFile.setProperty(MIMETYPE, "text/xml");
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
     test.addMixin(I18NMixin);
     test.addMixin(VOTEABLE);
 
     session.save();
-    InputStream is = getClass().getResource("/conf/standalone/system-configuration.xml").openStream();
-    Value contentValue = session.getValueFactory().createValue(is);
+    Value contentValue = session.getValueFactory().createValue("test");
 
     multiLanguageService.addFileLanguage(test, "system-configuration.xml" , contentValue, "text/xml", "fr", REPO_NAME, false);
     String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("en", defaultLanguage);
 
-    Value contentValue1 = session.getValueFactory()
-                                 .createValue(getClass().getResource("/conf/standalone/system-configuration.xml")
-                                                        .openStream());
+    Value contentValue1 = session.getValueFactory().createValue("test");
     multiLanguageService.addFileLanguage(test, "test-configuration.xml" , contentValue1, "text/xml", "vi", REPO_NAME, true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
@@ -409,12 +424,13 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: data of child node nt:file of test node is  ("/conf/standalone/system-configuration.xml"), default language is vi
    * @throws Exception
    */
+  @Test
   public void testAddFileLanguage2() throws Exception {
     Node test = session.getRootNode().addNode("test", PODCAST);
     Node testFile = test.addNode(CONTENT, RESOURCE);
     testFile.setProperty(MIMETYPE, "text/xml");
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
-    testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+    testFile.setProperty(DATA, "test");
     test.addMixin(I18NMixin);
     session.save();
 
@@ -423,18 +439,14 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertEquals("en", defaultLanguage);
     assertTrue(test.hasNode("languages/fr"));
     Node testlanguage = test.getNode("languages/fr");
-    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
-                                            .openStream(),
-                                  testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
+    assertEquals("test", testlanguage.getNode(CONTENT).getProperty(DATA).getString());
     assertEquals("this is podcast", testlanguage.getProperty(TITLE).getString());
     assertEquals("connect", testlanguage.getProperty(LINK).getString());
 
     multiLanguageService.addFileLanguage(test, "vi" , createPodcastMapInput(), true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
-    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml")
-                                            .openStream(),
-                                  test.getNode(CONTENT).getProperty(DATA).getStream()));
+    assertEquals("test", test.getNode(CONTENT).getProperty(DATA).getString());
     assertEquals("this is podcast", test.getProperty(TITLE).getString());
     assertEquals("connect", test.getProperty(LINK).getString());
   }
@@ -446,13 +458,14 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: if fr is not default language then method return fr node, else return null
    * @throws Exception
    */
+  @Test
   public void testGetLanguage() throws Exception {
     try {
       Node test = session.getRootNode().addNode("test", PODCAST);
       Node testFile = test.addNode(CONTENT, RESOURCE);
       testFile.setProperty(MIMETYPE, "text/xml");
       testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
-      testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
+      testFile.setProperty(DATA, "test");
       test.addMixin(I18NMixin);
       session.save();
       multiLanguageService.addLanguage(test, createPodcastMapInput(), "fr", false);
@@ -471,6 +484,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: linking successfully if the source node has different language from the default one of target node and vice versa    
    * @throws Exception
    */
+  @Test
   public void testAddSynchronizedLinkedLanguage() throws Exception{
     Node test = session.getRootNode().addNode("article1", ARTICLE);
     test.addMixin(I18NMixin);
@@ -505,32 +519,15 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
   }
 
   /**
-   * Compare two input stream, return true if 2 streams are equal
-   * @param is1
-   * @param is2
-   * @return
-   * @throws IOException
-   */
-  private boolean compareInputStream(InputStream is1, InputStream is2) throws IOException {
-    int b1, b2;
-    do {
-      b1 = is1.read();
-      b2 = is2.read();
-      if (b1 != b2) return false;
-    } while ((b1 !=-1) && (b2!=-1));
-    return true;
-  }
-
-  /**
    * Clean data test
    */
+  @AfterMethod
   public void tearDown() throws Exception {
     if (session.itemExists("/test")) {
       Node test = session.getRootNode().getNode("test");
       test.remove();
       session.save();
     }
-    super.tearDown();
   }
 
 }

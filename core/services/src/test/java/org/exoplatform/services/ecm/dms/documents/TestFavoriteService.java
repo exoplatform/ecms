@@ -16,42 +16,42 @@
  */
 package org.exoplatform.services.ecm.dms.documents;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.FavoriteService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Nguyen Anh Vu anhvurz90@gmail.com
  * Nov 17, 2009 11:14:48 AM
  */
-public class TestFavoriteService extends BaseDMSTestCase {
+public class TestFavoriteService extends BaseWCMTestCase {
 
   // final static public String EXO_FAVOURITE_NODE = "exo:favourite";
   // final static public String EXO_FAVOURITER_PROPERTY = "exo:favouriter";
 
   private FavoriteService favoriteService;
 
+  @Override
+  protected void afterContainerStart() {
+    super.afterContainerStart();
+    favoriteService = (FavoriteService) container.getComponentInstanceOfType(FavoriteService.class);
+  }
+  
+  @BeforeMethod
   public void setUp() throws Exception {
-    super.setUp();
-    super.applyUserSession("john", "exo");
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
-
-
-    SessionProviderService sessionProviderService
-    =	(SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
-
+    applyUserSession("john", "exo",COLLABORATION_WS);
+    SessionProviderService sessionProviderService = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
-
     Session session = sessionProvider.getSession(COLLABORATION_WS, manageableRepository);
     Node rootNode = session.getRootNode();
     String[] names = new String[] {"root", "demo", "james", "john", "marry"};
@@ -70,6 +70,7 @@ public class TestFavoriteService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testAddFavorite() throws Exception {
     Node rootNode = session.getRootNode();
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
@@ -100,6 +101,7 @@ public class TestFavoriteService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testRemoveFavorite() throws Exception {
     Node rootNode = session.getRootNode();
     Node test1Remove = rootNode.addNode("test1");
@@ -132,6 +134,7 @@ public class TestFavoriteService extends BaseDMSTestCase {
    *
    * @throws Exception
    */
+  @Test
   public void testGetAllFavouriteNodesByUser() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");

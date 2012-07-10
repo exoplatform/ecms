@@ -17,6 +17,8 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.comment;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,7 +34,10 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
+import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * Created by eXo Platform
@@ -47,7 +52,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 1. addComment() method
  * 2. getComment() method
  */
-public class TestCommentService extends BaseDMSTestCase {
+public class TestCommentService extends BaseWCMTestCase {
 
   private final static String I18NMixin = "mix:i18n";
 
@@ -72,12 +77,17 @@ public class TestCommentService extends BaseDMSTestCase {
   private CommentsService     commentsService    = null;
 
   private MultiLanguageService multiLangService  = null;
-
+  
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
+  protected void afterContainerStart() {
+    super.afterContainerStart();
     commentsService = (CommentsService) container.getComponentInstanceOfType(CommentsService.class);
     multiLangService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
+  }
+
+  @BeforeMethod
+  protected void setUp() throws Exception {
+    applySystemSession();
     initNode();
   }
 
@@ -89,6 +99,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected:
    *      Test node has comment node with 2 comments.
    */
+  @Test
   public void testAddComment1() throws Exception{
     Node test = session.getRootNode().addNode("test");
     if(test.canAddMixin(I18NMixin)){
@@ -111,6 +122,7 @@ public class TestCommentService extends BaseDMSTestCase {
    *                 doesn't have comment node, NodeType of COMMENTS node is "nt:unstructured"
    * Expected Result: throws Exception
    */
+  @Test
   public void testAddComment2() throws Exception {
     Node test = session.getRootNode().addNode("test1", "nt:file");
     if(test.getPrimaryNodeType().getName().equals("nt:file")){
@@ -137,6 +149,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected:
    *      commenter's name will be assigned ANONYMOUS.
    */
+  @Test
   public void testAddComment3() throws Exception{
     Node test = session.getRootNode().getNode("test");
     if(test.canAddMixin(I18NMixin)){
@@ -161,6 +174,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected:
    *      Comment message is "Ciao"
    */
+  @Test
   public void testUpdateComment() throws Exception{
     Node test = session.getRootNode().getNode("test");
     if(test.canAddMixin(I18NMixin)){
@@ -180,6 +194,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected:
    *      Comment for node is delete
    */
+  @Test
   public void testDeleteComment() throws Exception{
     Node test = session.getRootNode().getNode("test");
     commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", multiLangService.getDefault(test));
@@ -196,6 +211,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected Result:
    *        Get all comment nodes with default language.
    */
+  @Test
   public void testGetComments1() throws Exception{
     Node test = session.getRootNode().getNode("test");
     if(test.canAddMixin(I18NMixin)){
@@ -219,6 +235,7 @@ public class TestCommentService extends BaseDMSTestCase {
    * Expected Result:
    *        Get all comment nodes with jp language.
    */
+  @Test
   public void testGetComments2() throws Exception{
     Node test = session.getRootNode().getNode("test");
     if(test.canAddMixin(I18NMixin)){
@@ -310,9 +327,7 @@ public class TestCommentService extends BaseDMSTestCase {
     }
   }
 
-  /**
-   * Clean data test
-   */
+  @AfterMethod
   public void tearDown() throws Exception {
     try {
       session.getRootNode().getNode("test").remove();
@@ -320,7 +335,6 @@ public class TestCommentService extends BaseDMSTestCase {
     } catch(Exception e) {
       return;
     }
-    super.tearDown();
   }
 
   class NameComparator implements Comparator<Node>{
