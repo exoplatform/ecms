@@ -16,18 +16,13 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Iterator;
 
-import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriter;
-import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+
 import org.imgscalr.Scalr;
 
 /**
@@ -73,23 +68,10 @@ public class ImageUtils {
       //between SPEED and QUALITY
       thumbImage = Scalr.resize(image, Scalr.Method.BALANCED, maxWidth, maxHeight);      
     }
-    Iterator<ImageWriter> iter = ImageIO.getImageWritersByFormatName("jpeg");
-    ImageWriter writer = iter.next();
-    JPEGImageWriteParam iwp = (JPEGImageWriteParam)writer.getDefaultWriteParam();
-    int quality = 85; // Use between 1 and 100, with 100 being highest quality
-    quality = Math.max(0, Math.min(quality, 100));
-    iwp.setCompressionMode(JPEGImageWriteParam.MODE_EXPLICIT);
-    iwp.setCompressionQuality(quality / 100.0f);
-    
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    writer.setOutput(ImageIO.createImageOutputStream(out));
-    IIOImage iioImage = new IIOImage(thumbImage, null, null);
-    writer.write(null, iioImage, iwp);
-    writer.dispose();    
-
-    // Read the outputstream into the inputstream for the return value
-    ByteArrayInputStream bis = new ByteArrayInputStream(out.toByteArray());
-    return bis;
+    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+    ImageIO.write(thumbImage, "png", outStream);
+    InputStream is = new ByteArrayInputStream(outStream.toByteArray());
+    return is;
   }
 
 }
