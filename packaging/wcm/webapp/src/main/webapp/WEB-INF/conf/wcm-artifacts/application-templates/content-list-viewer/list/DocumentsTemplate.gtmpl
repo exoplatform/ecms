@@ -110,15 +110,17 @@
 													if (isShowDate) {
 													  %><div class="DateAndMail">$itemDateCreated</div><%
 													}
-													if (isShowSummary) { 
-														%><div class="Summary">
-														<%
+                          if (isShowSummary) { 
+                            %><div class="Summary">
+                            <%
                               if (itemSummaryField!=null) {
                                 print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
                               }
                             %>
                             </div></div><% 
-													}
+                          } else {%>
+                            </div>
+                          <%}
 													if (isShowReadmore) {
 													  %>
 													  
