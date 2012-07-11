@@ -61,6 +61,9 @@
          <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
       </script>
       <depends>
+        <module>jquery</module>
+      </depends>      
+      <depends>
         <module>wcm-utils</module>
       </depends>      
    </module>

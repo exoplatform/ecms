@@ -10,9 +10,10 @@
 		<link type="text/css" rel="stylesheet" href="../../../../eXoResources/skin/Stylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../../eXoWCMResources/skin/DefaultSkin/DMSStylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../../eXoWCMResources/skin/DefaultSkin/WCMStylesheet.css"/>
-		<script type="text/javascript" src="../../../../eXoResources/javascript/eXo.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/exo-jquery-1.7.1.js"></script>		
+		<script type="text/javascript" src="../../../eXoResources/javascript/exo-jquery-alias.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
 		<script type="text/javascript" src="../../../../eXoResources/javascript/eXo/core/Util.js"></script>		
-		<script type="text/javascript" src="../../../../eXoResources/javascript/eXo/core/DOMUtil.js"></script>
 		<script type="text/javascript" src="../../../../eXoResources/javascript/eXo/core/Browser.js"></script>
 		<script type="text/javascript" src="../../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"></script>
 		<script type="text/javascript" src="js/PluginUtils.js"></script>
@@ -405,11 +406,11 @@ var eXp = {
 			eXp.store.driverName = driverName;
 			currentFolder = '';
 		} else {
-				var nodeContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
+				var nodeContainer = gj(currentNode).parent(".ChildrenContainer:first")[0];
 				if(!nodeContainer) return;
-				var nodeParent = eXo.core.DOMUtil.findPreviousElementByTagName(nodeContainer, "div");
+				var nodeParent = gj(nodeContainer).prevAll("div:first")[0];
 				if(!nodeParent) return;
-				var nodeLink = eXo.core.DOMUtil.findFirstDescendantByClass(nodeParent, "a", "NodeIcon");
+				var nodeLink = gj(nodeParent).find("a.NodeIcon:first")[0];
 				if(nodeLink) {
 					if(nodeLink.getAttribute('currentFolder') && nodeLink.getAttribute('currentFolder') != null) {
 						currentFolder = nodeLink.getAttribute('currentFolder') + '/' + currentNode.getAttribute('name');

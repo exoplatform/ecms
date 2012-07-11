@@ -177,8 +177,9 @@ var TimelineView = function() {
     clearTimeout(element.Timeout);
   };
 
-  TimelineView.prototype.mouseDownTree = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseDownTree = function(evt) {
+	eval("var event = ''");
+    event = event || window.event;
     var element = this;
     Self.enableDragDrop = true;
     Self.srcPath = element.getAttribute("objectId");
@@ -226,8 +227,9 @@ var TimelineView = function() {
     }
   };
   
-  TimelineView.prototype.mouseUpTree = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseUpTree = function(evt) {
+	eval("var event = ''");
+    event = evt || window.event;
     var element = this;
     revertResizableBlock();
     Self.enableDragDrop = null;
@@ -294,8 +296,9 @@ var TimelineView = function() {
     }
   };
   
-  TimelineView.prototype.mouseDownItem = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseDownItem = function(evt) {
+	eval("var event = ''");  
+    event = evt || window.event;
     event.cancelBubble = true;
     var element = this;
     removeMobileElement();
@@ -392,8 +395,9 @@ var TimelineView = function() {
     //eXo.core.Browser.setOpacity(element, 100);
   };
   
-  TimelineView.prototype.mouseUpItem = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseUpItem = function(evt) {
+	eval("var event = ''");
+    event = evt || window.event;
     var element = this;
     Self.enableDragDrop = null;
     document.onmousemove = null;
@@ -477,8 +481,9 @@ var TimelineView = function() {
   };
   
   //event in ground
-  TimelineView.prototype.mouseDownGround = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseDownGround = function(evt) {
+	eval("var event = ''");  
+    event = evt || window.event;
     var element = this;
     element.holdMouse = true;
     Self.hideContextMenu();
@@ -625,8 +630,9 @@ var TimelineView = function() {
     }
   };
   
-  TimelineView.prototype.mouseUpGround = function(event) {
-    var event = event || window.event;
+  TimelineView.prototype.mouseUpGround = function(evt) {
+	eval("var event = ''");
+	event = evt || window.event;
     var element = this;
     element.holdMouse = null;
     element.onmousemove = null;

@@ -155,8 +155,9 @@ var SimpleView = function() {
 		clearTimeout(element.Timeout);
 	};
 	
-	SimpleView.prototype.mouseDownTree = function(event) {
-		var event = event || window.event;
+	SimpleView.prototype.mouseDownTree = function(evt) {
+		eval("var event =''");
+		event = evt || window.event;
 		var element = this;
 		Self.enableDragDrop = true;
 		Self.srcPath = element.getAttribute("objectId");
@@ -202,9 +203,9 @@ var SimpleView = function() {
 		}
 	};
 	
-	SimpleView.prototype.mouseUpTree = function(event) {
-		var event = event || window.event;
-				
+	SimpleView.prototype.mouseUpTree = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		revertResizableBlock();
 		Self.enableDragDrop = null;
@@ -264,8 +265,9 @@ var SimpleView = function() {
 		}
 	};
 	
-	SimpleView.prototype.mouseDownItem = function(event) {
-		var event = event || window.event;
+	SimpleView.prototype.mouseDownItem = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		event.cancelBubble = true;
 		var element = this;
 		removeMobileElement();
@@ -361,8 +363,9 @@ var SimpleView = function() {
 		//eXo.core.Browser.setOpacity(element, 100);
 	};
 	
-	SimpleView.prototype.mouseUpItem = function(event) {
-		var event = event || window.event;
+	SimpleView.prototype.mouseUpItem = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		Self.enableDragDrop = null;
 		document.onmousemove = null;
@@ -473,8 +476,9 @@ var SimpleView = function() {
 		}
 	};
 	
-	SimpleView.prototype.mouseDownGround = function(event) {
-		var event = event || window.event;
+	SimpleView.prototype.mouseDownGround = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		element.holdMouse = true;
 		Self.hideContextMenu();
@@ -656,8 +660,9 @@ var SimpleView = function() {
 		}
 	};
 	
-	SimpleView.prototype.mouseUpGround = function(event) {
-		var event = event || window.event;
+	SimpleView.prototype.mouseUpGround = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		element.holdMouse = null;
 		element.onmousemove = null;

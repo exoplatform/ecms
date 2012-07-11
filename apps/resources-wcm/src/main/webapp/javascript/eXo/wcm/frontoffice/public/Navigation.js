@@ -155,7 +155,7 @@ WCMNavigationPortlet.prototype.buildMenu = function(popupMenu) {
   * Gives the defaut css style class names . UITab when tab is NOT highlighted .
   * HighlightNavigationTab when tab is highlighted
   */
-changeTabNavigationStyle : function(clickedEle, over) {
+changeTabNavigationStyle = function(clickedEle, over) {
     if (clickedEle == null)
       return;
     if (!gj(clickedEle).hasClass("UITab"))

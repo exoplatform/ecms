@@ -178,25 +178,22 @@ var ListView = function() {
 		clearTimeout(element.Timeout);
 	};
 
-	ListView.prototype.mouseDownTree = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseDownTree = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		Self.enableDragDrop = true;
 		Self.srcPath = element.getAttribute("objectId");
 		resetArrayItemsSelected();
-		
 		var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-
 		if (rightClick) {
 			eval(element.getAttribute("mousedown"));
 		} else {
 			// init drag drop;
 			document.onmousemove = Self.dragItemsSelected;
 			document.onmouseup = Self.dropOutActionArea;
-			
 			var itemSelected = element.cloneNode(true);
 			Self.itemsSelected = new Array(itemSelected);
-			
 			//var uiResizableBlock = DOM.findAncestorByClass(element, "UIResizableBlock");
 			//if (uiResizableBlock) uiResizableBlock.style.overflow = "hidden";
 			
@@ -227,8 +224,9 @@ var ListView = function() {
 		}
 	};
 	
-	ListView.prototype.mouseUpTree = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseUpTree = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		revertResizableBlock();
 		Self.enableDragDrop = null;
@@ -295,8 +293,9 @@ var ListView = function() {
 		}
 	};
 	
-	ListView.prototype.mouseDownItem = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseDownItem = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		event.cancelBubble = true;
 		var element = this;
 		removeMobileElement();
@@ -395,8 +394,9 @@ var ListView = function() {
 		//eXo.core.Browser.setOpacity(element, 100);
 	};
 	
-	ListView.prototype.mouseUpItem = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseUpItem = function(evt) {
+		eval("var event=''");
+		event = evt || window.event;
 		var element = this;
 		Self.enableDragDrop = null;
 		document.onmousemove = null;
@@ -479,8 +479,9 @@ var ListView = function() {
 	};
 	
 	//event in ground
-	ListView.prototype.mouseDownGround = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseDownGround = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		element.holdMouse = true;
 		Self.hideContextMenu();
@@ -627,8 +628,9 @@ var ListView = function() {
 		}
 	};
 	
-	ListView.prototype.mouseUpGround = function(event) {
-		var event = event || window.event;
+	ListView.prototype.mouseUpGround = function(evt) {
+		eval("var event = ''");
+		event = evt || window.event;
 		var element = this;
 		element.holdMouse = null;
 		element.onmousemove = null;
