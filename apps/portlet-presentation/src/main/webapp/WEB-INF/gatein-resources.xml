@@ -106,6 +106,9 @@
       <depends>
         <module>clv</module>
       </depends>
+      <depends>
+      	<module>content-selector</module>
+      </depends>
     </module>
   </portlet>
 
@@ -120,6 +123,9 @@
       </depends>
       <depends>
         <module>clv</module>
+      </depends>
+      <depends>
+      	<module>content-selector</module>
       </depends>
     </module>
   </portlet>

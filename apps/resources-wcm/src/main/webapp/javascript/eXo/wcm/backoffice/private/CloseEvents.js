@@ -166,7 +166,7 @@ function closeIt(e) {
     // For Safari
     return 'The changes you made will be lost if you navigate away from this page.';
   }
-}
+};
  
 function changeElements(divId) {
   var UIDocForm = document.getElementById(divId);
@@ -191,3 +191,49 @@ function changeElements(divId) {
 }
 
 
+function changeWarning() {
+  b_changed = false;
+  /**
+   * Catch when some content has changed in the form
+   **/
+  if (navigator.userAgent.indexOf("MSIE") >= 0) {
+      changeElements("UIDocumentForm");
+      changeElements("UITask");
+  } else {
+    if (document.getElementById("UIDocumentForm")) {
+      document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
+    }
+    if (document.getElementById("UITask")) {
+      document.getElementById("UITask").setAttribute("onchange", "changed()");
+    }
+  }
+    
+  /**
+  * Catch any url changes in the browser
+  **/
+  window.onbeforeunload = closeIt;  
+    
+  /**
+  * Update each textarea when you type inside CKEditor
+  * Inform the page that some content has changed
+  **/
+  try {
+    if (CKEDITOR && typeof CKEDITOR == "object") {
+	  for ( var name in CKEDITOR.instances ) {
+	    var oEditor ;
+	    try {
+		  oEditor = CKEDITOR.instances[name] ;
+		  /**
+		  * inform the content has changed
+		  * update the textarea with last modifiedcontent
+		  */
+		  oEditor.on( 'key', function() {
+		    b_changed = true;
+		  });
+	    } catch(e) {
+	      continue ;
+	    }
+      }
+    }
+  } catch(e) {}  
+};

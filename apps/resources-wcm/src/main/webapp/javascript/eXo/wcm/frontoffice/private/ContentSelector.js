@@ -1064,6 +1064,7 @@ EcmContentSelector.prototype.generateIdNodes = function(objNode, idNode) {
 
 EcmContentSelector.prototype.fixHeightTrees = function() {
 	var leftWS = document.getElementById('LeftWorkspace');
+	if (!leftWS) return;
 	var rightWS = document.getElementById('RightWorkspace'); 
 	var windowHeight = gj(window).height();
 	var root = gj(leftWS).parents(".UIHomePageDT:first")[0];

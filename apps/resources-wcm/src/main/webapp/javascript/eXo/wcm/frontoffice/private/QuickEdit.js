@@ -13,8 +13,7 @@ WCMQuickEdit.prototype.removeQuickeditingBlock = function(portletID, quickEditin
 WCMQuickEdit.prototype.insertQuickeditingBlock = function(portletID, quickEditingBlockId) {
 	var presentation = document.getElementById(portletID);		
 	var parentNode = presentation.parentNode;
-//	var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-	var tHead = gj(table).children("thead")[0];
+	var fistChild = gj(parentNode).children("div:first")[0]; 
 	if (fistChild.id == quickEditingBlockId) {
 		var quickEditingBlock = document.getElementById(quickEditingBlockId);
 		quickEditingBlock.parentNode.removeChild(quickEditingBlock);
