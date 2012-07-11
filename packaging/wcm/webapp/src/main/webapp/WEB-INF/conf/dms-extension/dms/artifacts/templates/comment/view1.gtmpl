@@ -23,10 +23,10 @@
 			  <div class="RightCommentBar">
 			    <div class="MiddleCommentBar">
 			    	<div class="LabelPostedComment">
-		  			  <%=_ctx.appRes("Comment.view.label.postedBy")%><span style="color:#f7941e">
-		  			  <%if(lastComment.hasProperty("exo:commentor")){%>
-		  			  	<%=lastComment.getProperty("exo:commentor").getString()%></span> 
-		  			  <%}%>
+		  			  <%=_ctx.appRes("Comment.view.label.postedBy")%>
+		  			  <span style="color:#f7941e">
+		  			  	<%=lastComment.getProperty("exo:commentorFullName").getString()%>
+		  			  </span>		  			  
 		  			  <%=_ctx.appRes("Comment.view.label.at")%> 
 		  			  <%if(lastComment.hasProperty("exo:commentDate")){%>
 			  			  <%=commentDateFormat.format(lastComment.getProperty("exo:commentDate").getDate().getTime())%>
@@ -47,11 +47,11 @@
 		  for(comment in commentsList) {%>
 		  	<div class="CommentInfo">
 		  		<%=_ctx.appRes("Comment.view.label.comment-by")%> 
-		  		<span style="color: orange; font-weight: bold;">
-			  		<%if(comment.hasProperty("exo:commentor")){%>
-			  			<%=comment.getProperty("exo:commentor").getString()%>
-			  		<%}%>
-		  		</span>
+		  		
+			  		<span style="color: orange; font-weight: bold;">
+			  			<%=comment.getProperty("exo:commentorFullName").getString()%> 
+			  		</span>		  		
+		  		
 		  		<%
 		  		  if(comment.hasProperty("exo:commentorEmail")) {
 		  		    String email = comment.getProperty("exo:commentorEmail").getString() ;

@@ -196,4 +196,16 @@ public class WCMCoreUtils {
     return null;
   }
   
+  public static void startRequest(OrganizationService orgService) throws Exception
+  {
+    if(orgService instanceof ComponentRequestLifecycle) 
+      ((ComponentRequestLifecycle) orgService).startRequest(ExoContainerContext.getCurrentContainer());    
+  }
+  
+  public static void endRequest(OrganizationService orgService) throws Exception
+  {
+    if(orgService instanceof ComponentRequestLifecycle)
+      ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());  
+  }
+  
 }

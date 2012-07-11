@@ -35,7 +35,9 @@ import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -53,6 +55,7 @@ public class CommentsServiceImpl implements CommentsService {
   private final static String NT_UNSTRUCTURE = "nt:unstructured".intern() ;
   private final static String MESSAGE = "exo:commentContent".intern() ;
   private final static String COMMENTOR = "exo:commentor".intern() ;
+  private final static String COMMENTOR_FULLNAME = "exo:commentorFullName" ;
   private final static String COMMENTOR_EMAIL = "exo:commentorEmail".intern() ;
   private final static String COMMENTOR_SITE = "exo:commentorSite".intern() ;
   private final static String CREATED_DATE = "exo:commentDate".intern() ;
@@ -112,12 +115,20 @@ public class CommentsServiceImpl implements CommentsService {
 
       if(commentor == null || commentor.length() == 0) {
         commentor = ANONYMOUS ;      
-      }
-
+      }      
+      
       Calendar commentDate = new GregorianCalendar() ;
       String name = Long.toString(commentDate.getTimeInMillis()) ;    
       Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;     
-      newComment.setProperty(COMMENTOR,commentor) ;
+      newComment.setProperty(COMMENTOR,commentor) ;      
+      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+      WCMCoreUtils.startRequest(organizationService);
+      User user = organizationService.getUserHandler().findUserByName(commentor);
+      if(user == null)
+        newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
+      else
+        newComment.setProperty(COMMENTOR_FULLNAME,user.getFullName()) ; 	   
+           
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;
       if(email!=null && email.length()>0) {
@@ -129,6 +140,7 @@ public class CommentsServiceImpl implements CommentsService {
       document.save();
       systemSession.save();    
       commentsCache_.remove(commentNode.getPath()) ;
+      WCMCoreUtils.endRequest(organizationService);
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to add comment", e);
     } finally {
