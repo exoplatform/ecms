@@ -737,7 +737,7 @@
 }
 
 .UIECMAdminPortlet .ECMAdminPanel {
-  height: 100%; width: 250px;
+  height: 100%; width: 260px;
   overflow: auto; 
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
