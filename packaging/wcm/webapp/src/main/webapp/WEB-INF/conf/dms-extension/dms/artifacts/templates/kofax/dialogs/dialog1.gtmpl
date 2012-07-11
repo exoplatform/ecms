@@ -16,7 +16,7 @@
 			  <td class="FieldLabel"><label for="name"><%=_ctx.appRes("Kofax.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 	      <%
-	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "options=noSanitization", "validate=empty,name"] ;
+	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ; 
 	      %>			  
 			  </td>
@@ -53,7 +53,7 @@
 	        	<td class="FieldLabel"><label for="$compid"><%=propertyName.substring(namespace.length(), propertyName.length())%></label></td>         					
 	        	<td class="FieldComponent">
 			      <%
-			        String[] param = ["jcrPath=/node/" + propertyName, "options=noSanitization"] ;
+			        String[] param = ["jcrPath=/node/" + propertyName] ;
 			        uicomponent.addTextField("component_" + i, param) ; 
 			      %>
 			      </td>
