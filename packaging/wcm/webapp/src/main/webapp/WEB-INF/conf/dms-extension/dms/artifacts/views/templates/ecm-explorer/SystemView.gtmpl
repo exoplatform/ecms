@@ -143,8 +143,7 @@
           </div>
           
         </div>
-        <%
-          String serverUrl = uicomponent.getWebDAVServerPrefix();
+        <%          
           String portalName = uicomponent.getPortalName();
           RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
           String repository = rService.getCurrentRepository().getConfiguration().getName();

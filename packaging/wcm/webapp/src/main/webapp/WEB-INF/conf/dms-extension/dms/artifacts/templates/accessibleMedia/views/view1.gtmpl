@@ -47,7 +47,6 @@
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
-  String serverUrl = uicomponent.getWebDAVServerPrefix();
   String portalName = uicomponent.getPortalName() ;
   String restContextName = org.exoplatform.ecm.webui.utils.Utils.getRestContextName(portalName);
   String componentId = uicomponent.getId();
@@ -72,7 +71,7 @@
           StringBuilder sb = new StringBuilder();
           String ndPath = currentNode.getPath();
           if (ndPath.startsWith("/")) ndPath.substring(1);
-          sb.append(serverUrl).append("/").append(restContextName).append("/contents/download/");
+          sb.append("/").append(restContextName).append("/contents/download/");
           sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(currentNode.getPath());
           def downloadLink = sb.toString();
         %>
