@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Contenido principal</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Avanzado</Advanced>
+        <Summary>Resumen</Summary>
+        <name>Nombre</name>
+        <title>T\u00edtulo</title>
+        <ContentCSS>Datos CSS</ContentCSS>
+        <hintCSS>En este panel, puede especificar la hoja de estilos principal para el contenido web. Este estilo anula definido a nivel de sitio y a nivel compartido.</hintCSS>
+        <ContentJS>Datos de JS</ContentJS>
+        <hintJS>En este panel, usted puede especificar el c\u00f3digo Java Script que puede ser ejecutado antes de que su contenido web sea reproducido.</hintJS>
+        <WebContentHtml>Contenido principal</WebContentHtml>
+        <Illustration>Ilustraci\u00f3n</Illustration>
+        <hintIllustration>En este panel, puede especificar una imagen que ser\u00e1 mostrada cuando su contenido web es mostrado en listados  En adici\u00f3n, usted pued especificar alg\u00fan texto de res\u00famen que acompa\u00f1e esta imagen.</hintIllustration>
+        <confirm-delete>\u00bfEst\u00e1s seguro de eliminar esta ilustraci\u00f3n?</confirm-delete>
+        <illustrationImage>Imagen de la Ilustraci\u00f3n</illustrationImage>
+        <imageMimeType>Tipo de imagen</imageMimeType>
+        <image>Subir Imagen</image>
+        <imageWidth>Anchura de la imagen</imageWidth>
+        <imageHeight>Altura de la imagen</imageHeight>
+        <Synchronize>Sincronizar con CSS y HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+  <JSFile>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos de JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+  <WebLink>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <url>URL</url>
+        <description>Descripci\u00f3n</description>
+      </label>
+    </dialog>
+  </WebLink>
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>T\u00edtulo del Sitio</title>
+        <description>Descripci\u00f3n del Sitio</description>
+        <keywords>Palabras clave del sitio</keywords>
+        <robots>Comportamiento del motor de b\u00fasqueda</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

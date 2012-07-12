@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <Homepage>
+    <ecm>
+      <label>
+        <slogan>"\u00a1Dele vida a sus documentos\!"</slogan>
+        <productIntro>"A trav\u00e9s de caracter\u00edsticas colaborativas y otras caracter\u00edsticas avanzadas."</productIntro>
+        <FE>
+          <name>Explorador de archivos</name>
+          <bullet1>Interfaz de Usuario Inteligentes y Extensibles</bullet1>
+          <bullet2>Facilidades de Clic Derecho y de Arrastrar y Soltar</bullet2>
+          <bullet3>\u00c1rboles de categor\u00eda</bullet3>
+          <bullet4>Enlaces simb\u00f3licos</bullet4>
+          <bullet5>\u00a1Acci\u00f3n, auditor\u00eda, etiquetas y m\u00e1s\!</bullet5>
+        </FE>
+        <CB>
+          <name>Navegador de Contenido</name>
+          <bullet1>Encontrar/Mostrar sus documentos f\u00e1cilmente</bullet1>
+          <bullet2>Mapa de etiqueta</bullet2>
+          <bullet3>Comentar, Votar</bullet3>
+          <bullet4>B\u00fasqueda R\u00e1pida</bullet4>
+          <bullet5>Vista Personalizada</bullet5>
+        </CB>
+        <ECMA>
+          <name>Administraci\u00f3n ECM</name>
+          <bullet1>Interfaz de Usuario Extensible</bullet1>
+          <bullet2>Gestionar categor\u00eda</bullet2>
+          <bullet3>Administrar vistas</bullet3>
+          <bullet4>Administrar formularios</bullet4>
+          <bullet5>\u00a1Administrar Scripts y mucho m\u00e1s\!</bullet5>
+        </ECMA>
+      </label>
+    </ecm>
+  </Homepage>
+</bundle>

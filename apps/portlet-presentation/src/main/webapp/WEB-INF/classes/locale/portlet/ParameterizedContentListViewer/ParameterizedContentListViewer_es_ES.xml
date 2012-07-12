@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>Edici\u00f3n r\u00e1pida</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>Configuraci\u00f3n del visor del listado de contenido parametrizado</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+  <UIPCLVConfig>
+    <label>
+      <Title>Configuraci\u00f3n del visor del listado de contenido parametrizado</Title>
+      <ContentSelectionBlock>Selecci\u00f3n de contenido</ContentSelectionBlock>
+      <OrderBy>Ordenar por</OrderBy>
+      <option>
+        <exo>startEvent \= fecha de evento</exo>
+        <publication>liveDate \= fecha de publicaci\u00f3n</publication>
+      </option>
+      <DisplaySettingBlock>Configuraci\u00f3n de pantalla</DisplaySettingBlock>
+      <Header>Encabezado</Header>
+      <AutomaticDetection>Detecci\u00f3n Autom\u00e1tica</AutomaticDetection>
+      <FormViewTemplate>Plantilla de Vista</FormViewTemplate>
+      <PaginatorTemplate>Plantilla del paginador</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>\u00c1rbol de categor\u00edas</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>Art\u00edculos por p\u00e1gina</ItemsPerPage>
+      <ViewerTitle>Mostrar t\u00edtulo</ViewerTitle>
+      <ViewerHeader>Mostrar Encabezado</ViewerHeader>
+      <ViewerButtonRefresh>Mostrar bot\u00f3n de actualizar</ViewerButtonRefresh>
+      <ViewerThumbnailsView>Mostrar ilustraci\u00f3n</ViewerThumbnailsView>
+      <ViewerDateCreated>Mostrar fecha de creaci\u00f3n</ViewerDateCreated>
+      <ShowReadMore>Mostrar Leer M\u00e1s</ShowReadMore>
+      <ViewerSummary>Mostrar Res\u00famen</ViewerSummary>
+      <ShowRSSLink>Mostrar Enlace RSS</ShowRSSLink>
+      <ShowLink>Mostrar Enlace</ShowLink>
+      <LinkFormatBlock>Formato del enlace</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>P\u00e1gina de objetivo</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>No se encontr\u00f3 contenido.</content-not-found>
+    </label>
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UIPCLVConfig>
+  <OrderTypes>
+    <label>
+      <OrderDesc>Descendiente</OrderDesc>
+      <OrderAsc>Ascendente</OrderAsc>
+    </label>
+  </OrderTypes>
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>Seleccione la p\u00e1gina de destino</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

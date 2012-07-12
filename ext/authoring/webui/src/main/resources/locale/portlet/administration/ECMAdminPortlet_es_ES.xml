@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIViewFormTabPane>
+    <label>
+      <publicationRequestApproval>Publicaci\u00f3n &gt; Solicitar la aprobaci\u00f3n</publicationRequestApproval>
+      <publicationApproveContent>Publicaci\u00f3n &gt; Aprobar contenido</publicationApproveContent>
+      <publicationPublish>Publicaci\u00f3n &gt; Publicar</publicationPublish>
+      <showDrives>Mostrar unidades</showDrives>
+    </label>
+  </UIViewFormTabPane>
+</bundle>
