@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <WebLink>
+    <view>
+      <label>
+        <url>URL</url>
+        <description>Descripci\u00f3n</description>
+      </label>
+    </view>
+  </WebLink>
+  <SiteMetadata>
+    <view>
+      <label>
+        <title>T\u00edtulo del Sitio</title>
+        <description>Descripci\u00f3n del Sitio</description>
+        <keywords>Palabras clave del sitio</keywords>
+        <robots>Comportamiento del motor de b\u00fasqueda</robots>
+      </label>
+      <tooltip>
+        <add-edit>Agregar/Editar metadatos</add-edit>
+        <cancel>Cancelar</cancel>
+      </tooltip>
+      <action>
+        <add-edit>A\u00f1adir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+    </view>
+  </SiteMetadata>
+  <Category>
+    <view>
+      <label>Categor\u00eda</label>
+    </view>
+  </Category>
+  <Tag>
+    <view>
+      <label>Etiqueta</label>
+    </view>
+  </Tag>
+</bundle>
