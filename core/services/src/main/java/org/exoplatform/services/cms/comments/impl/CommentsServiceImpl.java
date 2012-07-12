@@ -36,6 +36,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 
 
 /**
@@ -54,6 +56,7 @@ public class CommentsServiceImpl implements CommentsService {
   private final static String NT_UNSTRUCTURE = "nt:unstructured" ;
   private final static String MESSAGE = "exo:commentContent" ;
   private final static String COMMENTOR = "exo:commentor" ;
+  private final static String COMMENTOR_FULLNAME = "exo:commentorFullName" ;
   private final static String COMMENTOR_EMAIL = "exo:commentorEmail" ;
   private final static String COMMENTOR_SITE = "exo:commentorSite" ;
   private final static String CREATED_DATE = "exo:commentDate" ;
@@ -113,12 +116,20 @@ public class CommentsServiceImpl implements CommentsService {
 
       if(commentor == null || commentor.length() == 0) {
         commentor = ANONYMOUS ;
-      }
-
+      }      
+      
       Calendar commentDate = new GregorianCalendar() ;
       String name = Long.toString(commentDate.getTimeInMillis()) ;
       Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;
       newComment.setProperty(COMMENTOR,commentor) ;
+      
+      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+      User user = organizationService.getUserHandler().findUserByName(commentor);
+      if(user == null)
+      	newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
+      else
+      	newComment.setProperty(COMMENTOR_FULLNAME,user.getFullName()) ; 
+      
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;
       if(email!=null && email.length()>0) {
