@@ -197,15 +197,15 @@ public class PDFViewerRESTService implements ResourceContainer {
     try {
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
-      if (LOG.isErrorEnabled()) {
+      if (LOG.isDebugEnabled()) {
         LOG.error("Error parsing PDF document " + ex);
       }
     } catch (PDFSecurityException ex) {
-      if (LOG.isErrorEnabled()) {
+      if (LOG.isDebugEnabled()) {
         LOG.error("Error encryption not supported " + ex);
       }
     } catch (FileNotFoundException ex) {
-      if (LOG.isErrorEnabled()) {
+      if (LOG.isDebugEnabled()) {
         LOG.error("Error file not found " + ex);
       }
     } catch (IOException ex) {
