@@ -40,6 +40,9 @@
     <depends>
       <module>base</module>
     </depends>
+    <depends>
+    	<module>ecm-bootstrap</module>
+    </depends>
     </module>
   </portal>
 
