@@ -20,14 +20,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.gatein.portal.controller.resource.ResourceScope;
-import org.gatein.portal.controller.resource.script.FetchMode;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
@@ -40,10 +42,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import org.gatein.portal.controller.resource.ResourceScope;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -154,13 +153,13 @@ public class UICLVPortlet extends UIPortletApplication {
 
   /** The Constant PREFERENCE_SHOW_CLV_BY. */
   public final static String PREFERENCE_SHOW_CLV_BY               = "showClvBy";
-  
+
   /** The Constant PREFERENCE_CACHE_ENABLED. */
   public final static String PREFERENCE_CACHE_ENABLED             = "sharedCache";
-  
+
   /** The Constant CONTENT_BY_QUERY. */
   public final static String PREFERENCE_CONTENTS_BY_QUERY         = "query";
-  
+
   /** The Constant PREFERENCE_WORKSPACE. */
   public final static String PREFERENCE_WORKSPACE                 = "workspace";
 
@@ -175,48 +174,48 @@ public class UICLVPortlet extends UIPortletApplication {
   public static final String DEFAULT_SHOW_SCV_WITH                = "content-id";
 
   public static final String PREFERENCE_APPLICATION_TYPE          = "application";
-  
+
   public static final String APPLICATION_CLV_BY_QUERY             = "ContentsByQuery";
-  
+
   public static final String PREFERENCE_SHARED_CACHE              = "sharedCache";
   /* Dynamic parameter for CLV by query */
   public static final String QUERY_USER_PARAMETER                 = "user";
   public static final String QUERY_LANGUAGE_PARAMETER             = "lang";
-  
+
   private PortletMode        cpMode;
 
   private UICLVFolderMode    folderMode;
 
   private UICLVManualMode    manualMode;
-  
+
   private UICLVConfig        clvConfig;
 
   private String             currentFolderPath;
-  
+
   private String             header;
 
   private String             currentDisplayMode;
-  
+
   private String             currentApplicationMode;
-  
+
   /**
    * Instantiates a new uICLV portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UICLVPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     currentFolderPath = getFolderPath();
   }
-  
+
   public String getHeader() {
-  	return header;
+    return header;
   }
 
   public void setCurrentFolderPath(String value) {
     currentFolderPath = value;
   }
-  
+
   public String getFolderPath() {
     PortalRequestContext preq = Util.getPortalRequestContext();
     currentFolderPath = "";
@@ -224,29 +223,29 @@ public class UICLVPortlet extends UIPortletApplication {
       currentFolderPath = getFolderPathParamValue();
     }
     try {
-    	if (currentFolderPath != null && currentFolderPath.length() > 0) {
-    		Node folderNode = null;
-    		NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(currentFolderPath);
-    		folderNode = NodeLocation.getNodeByLocation(folderLocation);
-    		if (folderNode == null) {
-    			header = null;
-    		} else {
-    			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE))
-    				header = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
-    			else header = folderNode.getName();
-    		}
-    	} else header = null;
+      if (currentFolderPath != null && currentFolderPath.length() > 0) {
+        Node folderNode = null;
+        NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(currentFolderPath);
+        folderNode = NodeLocation.getNodeByLocation(folderLocation);
+        if (folderNode == null) {
+          header = null;
+        } else {
+          if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE))
+            header = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
+          else header = folderNode.getName();
+        }
+      } else header = null;
     } catch(IllegalArgumentException ex) {
-    	header = null;
+      header = null;
     } catch(ItemNotFoundException ex) {
-    	header = null;
+      header = null;
     } catch(PathNotFoundException ex) {
-    	header = null;
+      header = null;
     } catch(NoSuchWorkspaceException ex) {
-    	header = null;
+      header = null;
     } catch(RepositoryException ex) {
-    	header = null;
-    } 
+      header = null;
+    }
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     currentDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     currentApplicationMode = preferences.getValue(PREFERENCE_APPLICATION_TYPE, null);
@@ -280,9 +279,9 @@ public class UICLVPortlet extends UIPortletApplication {
     }
     return folderPath;
   }
-  
+
   /**
-   * 
+   *
    * @param params
    * @return
    */
@@ -314,11 +313,11 @@ public class UICLVPortlet extends UIPortletApplication {
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
     PortletPreferences preferences = pContext.getRequest().getPreferences();
-    
-    Boolean sharedCache = "true".equals(preferences.getValue(PREFERENCE_SHARED_CACHE, "true"));    
 
-    if ((context.getRemoteUser()==null ||
-          !"Edit".equals(Utils.getCurrentMode())) && sharedCache){
+    Boolean sharedCache = "true".equals(preferences.getValue(PREFERENCE_SHARED_CACHE, "true"));
+
+    if (context.getRemoteUser() == null
+        || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode() && Utils.isPortletViewMode(pContext))) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE,
                                          "" + wcmService.getPortletExpirationCache());
@@ -353,7 +352,7 @@ public class UICLVPortlet extends UIPortletApplication {
    * @Author Nguyen The Vinh from ExoPlatform
    */
   private void activateMode(PortletMode npMode, String nDisplayMode) throws Exception {
-  	PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     if (npMode.equals(cpMode)) {
       // Switch manual/auto
       // Not reach in the case of queryMode.
@@ -362,14 +361,14 @@ public class UICLVPortlet extends UIPortletApplication {
         clvConfig = addChild(UICLVConfig.class, null, null);
         clvConfig.setModeInternal(false);
       }else {
-        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {          
+        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
           folderMode = addChild(UICLVFolderMode.class, null, UICLVFolderMode.class.getSimpleName() +
-          		"_" + pContext.getWindowId());          
+              "_" + pContext.getWindowId());
           folderMode.init();
           folderMode.setRendered(true);
         } else {
-        	manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() + 
-        			"_" + pContext.getWindowId());
+          manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() +
+              "_" + pContext.getWindowId());
           manualMode.init();
           manualMode.setRendered(true);
         }
@@ -378,13 +377,13 @@ public class UICLVPortlet extends UIPortletApplication {
       if (npMode.equals(PortletMode.VIEW)) { //Change from edit to iew
         removeChildren();
         if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-        	folderMode = addChild(UICLVFolderMode.class, null, UICLVFolderMode.class.getSimpleName() + 
-        			"_" + pContext.getWindowId());
+          folderMode = addChild(UICLVFolderMode.class, null, UICLVFolderMode.class.getSimpleName() +
+              "_" + pContext.getWindowId());
           folderMode.init();
           folderMode.setRendered(true);
         } else {
-        	manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() + 
-        			"_" + pContext.getWindowId());
+          manualMode = addChild(UICLVManualMode.class, null, UICLVManualMode.class.getSimpleName() +
+              "_" + pContext.getWindowId());
           manualMode.init();
           manualMode.setRendered(true);
         }
@@ -436,7 +435,7 @@ public class UICLVPortlet extends UIPortletApplication {
   }
 
   /**
-   * 
+   *
    * @param sqlQuery
    * @return
    */
@@ -446,9 +445,9 @@ public class UICLVPortlet extends UIPortletApplication {
 
     return Utils.buildQuery(sqlQuery, queryParam);
   }
-  
+
   /**
-   * 
+   *
    * @return
    */
   public boolean isQueryApplication() {

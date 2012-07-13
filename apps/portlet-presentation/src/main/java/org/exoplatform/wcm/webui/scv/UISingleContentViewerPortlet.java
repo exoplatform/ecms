@@ -104,7 +104,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public final static String PREFERENCE_SHOW_SCV_WITH               = "showScvWith";
 
   public static final String DEFAULT_SHOW_SCV_WITH                  = "content-id";
-  
+
   /** The Cache */
   public static final String ENABLE_CACHE = "sharedCache";
 
@@ -121,10 +121,10 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
    *
    * @throws Exception the exception
    */
-  public UISingleContentViewerPortlet() throws Exception {  
+  public UISingleContentViewerPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    preferences = portletRequestContext.getRequest().getPreferences();    
+    preferences = portletRequestContext.getRequest().getPreferences();
   }
 
   /**
@@ -142,17 +142,12 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       removeChild(UISCVPreferences.class);
     }
     if(PortletMode.VIEW.equals(newMode)) {
-    	PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance(); 
+      PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
       uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() + pContext.getWindowId());
     } else if (PortletMode.EDIT.equals(newMode)) {
       popPreferences = addChild(UISCVPreferences.class, null, null);
       popPreferences.setInternalPreferencesMode(true);
     }
-  }
-  public boolean isViewMode() {
-//    System.out.println(Utils.getCurrentMode());
-    return Utils.getCurrentMode().equals(PortletMode.VIEW);
-
   }
 
   /*
@@ -168,8 +163,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     PortletPreferences preferences = pContext.getRequest().getPreferences();
     Boolean sharedCache = "true".equals(preferences.getValue(ENABLE_CACHE, "true"));
 
-    if (context.getRemoteUser()==null ||
-          (!"Edit".equals(Utils.getCurrentMode()) && sharedCache)) {
+    if (context.getRemoteUser() == null
+        || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode() && Utils.isPortletViewMode(pContext))) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
       if (log.isTraceEnabled())
@@ -189,7 +184,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
         uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
       }
     }
-    
+
     if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
       RenderResponse response = context.getResponse();
       Element title = response.createElement("title");
@@ -210,7 +205,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
       portletRequestContext.setApplicationMode(PortletMode.VIEW);
   }
-  
+
   @Override
   public void serveResource(WebuiRequestContext context) throws Exception {
     super.serveResource(context);
@@ -226,7 +221,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     MimeResponse res = context.getResponse();
     res.setContentType("text/json");
     res.getWriter().write(jsChilds.toString());
-  }   
+  }
 
   public JSONArray getChildrenAsJSON(String nodeURI) throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
@@ -264,7 +259,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     return jsChildren;
   }
-  
+
   private JSONObject toJSON(UserNode node, MimeResponse res) throws Exception {
     JSONObject json = new JSONObject();
     String nodeId = node.getId();

@@ -105,7 +105,7 @@ public class Utils {
   private static final String NT_FILE = "nt:file";
 
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
-  
+
   private static ConfigurationManager cservice_ ;
   @Deprecated
   /**
@@ -138,6 +138,16 @@ public class Utils {
     if (popupWindow == null)
       return false;
     return true;
+  }
+
+  /**
+   * Check if the portlet current mode is view mode or not
+   * @param pContext The request context of a portlet
+   * 
+   * @return return true if current portlet mode is view mode; otherwise return false
+   */
+  public static boolean isPortletViewMode(PortletRequestContext pContext) {
+    return PortletMode.VIEW.equals(pContext.getApplicationMode());
   }
 
   public static boolean isPortalEditMode() {
@@ -329,6 +339,16 @@ public class Utils {
       return WCMComposer.MODE_LIVE;
     boolean turnOnQuickEdit = Boolean.parseBoolean(isQuickEditable.toString());
     return turnOnQuickEdit ? WCMComposer.MODE_EDIT : WCMComposer.MODE_LIVE;
+  }
+
+  /**
+   * Check if the current mode is live mode or not
+   *
+   * @return return true if current mode is WCMComposer.MODE_LIVE; otherwise
+   *         false.
+   */
+  public static boolean isLiveMode() {
+    return WCMComposer.MODE_LIVE.equals(getCurrentMode());
   }
 
   /**
@@ -725,7 +745,7 @@ public class Utils {
   public static String getWebdavURL(Node node, boolean withTimeParam) throws Exception {
     return getWebdavURL(node, withTimeParam, true);
   }
-  
+
   public static String getWebdavURL(Node node, boolean withTimeParam, boolean isGetRealNodePath) throws Exception {
     NodeLocation location = NodeLocation.getNodeLocationByNode(getRealNode(node));
     String repository = location.getRepository();
