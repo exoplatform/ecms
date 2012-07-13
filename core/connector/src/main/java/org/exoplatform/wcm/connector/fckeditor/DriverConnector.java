@@ -610,13 +610,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 	  		checkNode = sourceNode != null ? sourceNode : child;
 
-	  		if (isFolder(checkNode)) {	  			
+	  		if (isFolder(checkNode, repositoryName)) {
 	  			Element folder = createFolderElement(
 	  					document, checkNode, checkNode.getPrimaryNodeType().getName(), child.getName(), nodeDriveName);
 	  			folders.appendChild(folder);
 	  		}
 
-	  		if (FILE_TYPE_ALL.equals(filterBy) && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode))) {
+	  		if (FILE_TYPE_ALL.equals(filterBy) && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode, repositoryName))) {
 	  		  fileType = FILE_TYPE_ALL;
 	  		}
 	  		
@@ -653,15 +653,25 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	 * 
 	 * @throws RepositoryException the repository exception
 	 */
-	private boolean isFolder(Node checkNode) throws RepositoryException {
-	  return 
-	  		checkNode.isNodeType(FCKUtils.NT_UNSTRUCTURED)
-	  		|| checkNode.isNodeType(FCKUtils.NT_FOLDER)
-	  		|| checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
+  private boolean isFolder(Node checkNode, String repositoryName) throws RepositoryException {
+    try {
+      if (isDocument(checkNode, repositoryName)) {
+        return false;
+      }
+    } catch (Exception e) {
+      if (log.isWarnEnabled()) {
+        log.warn(e.getMessage());
+      }
+    }
+    
+    return 
+      checkNode.isNodeType(FCKUtils.NT_UNSTRUCTURED)
+        || checkNode.isNodeType(FCKUtils.NT_FOLDER)
+        || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
   
   /**
-   * Checks if is dMS document.
+   * Checks if is dMS document.(not including free layout webcontent & media & article)
    * 
    * @param node the node
    * @param repositoryName the repository name
@@ -687,6 +697,24 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	return false;
   }
   
+  /**
+   * Checks if specific node is document
+   * 
+   * @param node specific Node
+   * @param repositoryName repository Name
+   * @return true: is document, false: not document;
+   * @throws Exception
+   */
+  private boolean isDocument(Node node, String repositoryName) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    List<String> documentTypeList = templateService.getDocumentTemplates(repositoryName);
+    for (String documentType : documentTypeList) {
+      if (node.getPrimaryNodeType().isNodeType(documentType)) {
+        return true;
+      }
+    }
+  	return false;
+  }
 
   /**
    * Checks if is media type.
