@@ -54,6 +54,11 @@
 				<!--value>replace</value -->
 				<!-- value>add</value -->
 			</value-param>
+			
+			<values-param>
+	  			<name>untrusted-user-agents</name>
+	  			<value>Microsoft Office Core Storage Infrastructure/1.0</value>
+			</values-param>
 		</init-params>
 </component>
     
