@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UISEOForm>
     <label>
-      <title>Titre: </title>
-      <description>Description: </description>
-      <keywords>Mots clés: </keywords>
-      <language>Langue: </language>
-      <robots>Robots: </robots>
-      <sitemap>Sitemap: </sitemap>
+      <description>Description:</description>
+      <keywords>Mots clés:</keywords>
+      <language>Langue:</language>
+      <robots>Robots:</robots>
+      <sitemap>Plan du site:</sitemap>
       <sitemapvisible>Visible dans le sitemap</sitemapvisible>
-      <priority>Priorité: </priority>
-      <frequency>Fréquence: </frequency>  
+      <isInherited>Hérité de la page parent</isInherited>
+      <priority>Priorité:</priority>
+      <frequency>Fréquence:</frequency>
       <option>
         <Always>Toujours</Always>
         <Hourly>Toutes les heures</Hourly>
@@ -19,42 +19,35 @@
         <Monthly>Mensuel</Monthly>
         <Yearly>Annuel</Yearly>
         <Never>Jamais</Never>
-      </option>    
-      <option>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
       </option>
     </label>
     <tip>
-        <priority>Valeurs valides de 0.0 à 1.0.</priority>
-    </tip>  
+      <priority>Valeurs valides de 0.0 à 1.0.</priority>
+    </tip>
     <action>
       <Save>Sauvegarder</Save>
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <repository-exception>Une erreure inattendue est apparue! Sauvegarde impossible des métadonnées.</repository-exception>   
+      <repository-exception>Une erreure inattendue est apparue! Sauvegarde impossible des métadonnées.</repository-exception>
     </msg>
+    <help>
+      <priority>La priorité de cette URL par rapport aux autres URL sur votre site. La plage de valeurs valides va de 0,0 à 1,0. Cette valeur n'affecte pas la manière dont vos pages sont comparées aux pages sur d'autres sites, il ne permet qu'aux moteurs de recherche de savoir les pages que vous jugez plus importantes au sein de votre site. La priorité par défaut d'une page est de 0,5.</priority>
+    </help>
   </UISEOForm>
   <UISEOPopupWindow>
     <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>Gestion du référencement</UISEOForm>
     </title>
   </UISEOPopupWindow>
   <UISEOToolbarForm>
     <title>
-      <seo>SEO Management</seo>
+      <seo>Gestion du référencement</seo>
     </title>
   </UISEOToolbarForm>
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>Le champ '{0}' est un nombre invalide (float).</Invalid-number>
+      <Invalid-number>La valeur saisi pour la Priorité doit être au format numérique. Les valeurs valides vont de 0.0 à 1.0.</Invalid-number>
     </msg>
-  </FloatNumberValidator> 
+  </FloatNumberValidator>
 </bundle>

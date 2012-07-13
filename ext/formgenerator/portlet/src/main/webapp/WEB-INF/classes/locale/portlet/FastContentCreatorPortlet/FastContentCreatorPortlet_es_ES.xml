@@ -2,17 +2,17 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>Este nombre no est\u00e1 permitido.</name-not-allowed>
+      <name-not-allowed>Este nombre no está permitido.</name-not-allowed>
       <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
       <cannot-save>Error al guardar el nodo.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
       <not-add-folder>Solo el Nt:file puede agregarse a esta carpeta.</not-add-folder>
       <access-denied>Acceso denegado. No tiene el permiso de agregar a '{0}'.</access-denied>
-      <path-not-found>La ruta de acceso '{0}' fue eliminada o no es v\u00e1lida.</path-not-found>
-      <node-locked>El nodo '{0}' est\u00e1 bloqueado. Por favor desbloquear este nodo antes de crear documentos.</node-locked>
+      <path-not-found>La ruta de acceso '{0}' fue eliminada o no es válida.</path-not-found>
+      <node-locked>El nodo '{0}' está bloqueado. Por favor desbloquear este nodo antes de crear documentos.</node-locked>
       <node-isExist>Este nodo ya existe en '{0}' y no se permite que tenga el mismo nombre.</node-isExist>
-      <get-dialog-path>Se produjo un error al obtener la ruta del di\u00e1logo.</get-dialog-path>
+      <get-dialog-path>Se produjo un error al obtener la ruta del diálogo.</get-dialog-path>
       <new-jcr-template>Error al crear una nueva plantilla.</new-jcr-template>
     </msg>
     <action>
@@ -23,28 +23,28 @@
   <UIFCCConfig>
     <label>
       <select-repository>Seleccione el repositorio</select-repository>
-      <UIFCCSaveLocationField>Guardar ubicaci\u00f3n</UIFCCSaveLocationField>
+      <UIFCCSaveLocationField>Guardar ubicación</UIFCCSaveLocationField>
       <UIFCCRepositoryFormSelectBox>Seleccione el repositorio</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Seleccione el espacio de trabajo</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opciones de Plantilla</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
       <UIFCCTemplateFormSelectBox>Seleccionar Plantilla</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Personalizar el bot\u00f3n de guardar</UIFCCSaveFormStringInput>
+      <UIFCCSaveFormStringInput>Personalizar el botón de guardar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Personalizar Mensaje de Guardar</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirigir</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirigir la ruta</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Acciones</UIFCCActionField>
     </label>
     <msg>
-      <save-successfully>Se guard\u00f3 a las preferencias del portlet  exitosamente.</save-successfully>
-      <item-not-found>Esta ruta no es v\u00e1lida.</item-not-found>
-      <fileType-empty>Por favor, seleccione un tipo de archivo antes de guardar esta configuraci\u00f3n.</fileType-empty>
+      <save-successfully>Se guardó a las preferencias del portlet  exitosamente.</save-successfully>
+      <item-not-found>Esta ruta no es válida.</item-not-found>
+      <fileType-empty>Por favor, seleccione un tipo de archivo antes de guardar esta configuración.</fileType-empty>
       <ws-empty>Por favor, seleccione un espacio de trabajo.</ws-empty>
-      <action-empty>Por favor, seleccione una carpeta con una acci\u00f3n.</action-empty>
-      <message-empty>El campo "Personalizar Mensaje de Guardar" es necesario en caso que usted no elige la opci\u00f3n de redirecci\u00f3n o que  la ruta est\u00e9 vac\u00eda.</message-empty>
+      <action-empty>Por favor, seleccione una carpeta con una acción.</action-empty>
+      <message-empty>El campo "Personalizar Mensaje de Guardar" es necesario en caso que usted no elige la opción de redirección o que  la ruta esté vacía.</message-empty>
       <get-template>Se produjo un error al obtener la plantilla.</get-template>
-      <set-template-option>Error al establecer la opci\u00f3n de plantilla.</set-template-option>
-      <do-select>Error al seleccionar la ubicaci\u00f3n.</do-select>
+      <set-template-option>Error al establecer la opción de plantilla.</set-template-option>
+      <do-select>Error al seleccionar la ubicación.</do-select>
     </msg>
     <action>
       <Save>Guardar</Save>
@@ -58,36 +58,36 @@
   <UIFCCActionList>
     <header>
       <name>Nombre</name>
-      <description>Descripci\u00f3n</description>
+      <description>Descripción</description>
       <instanceOf>Instancia de</instanceOf>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <action>
-      <Add>A\u00f1adir</Add>
+      <Add>Añadir</Add>
     </action>
     <msg>
       <empty>No hay acciones</empty>
       <remove-popup-first>Debe cerrar la ventana emergente antes de eliminar este nodo.</remove-popup-first>
-      <confirm-delete-action>\u00bfEst\u00e1s seguro de eliminar esta acci\u00f3n?</confirm-delete-action>
-      <template-empty>La plantilla de '{0}' es nula o est\u00e1 vac\u00eda.</template-empty>
-      <template-null>La plantilla es nula o vac\u00eda; o no tiene permiso para acceder a esta plantilla.</template-null>
-      <access-denied>Acceso denegado. No tienes permiso para realizar esta acci\u00f3n.</access-denied>
+      <confirm-delete-action>¿Estás seguro de eliminar esta acción?</confirm-delete-action>
+      <template-empty>La plantilla de '{0}' es nula o está vacía.</template-empty>
+      <template-null>La plantilla es nula o vacía; o no tiene permiso para acceder a esta plantilla.</template-null>
+      <access-denied>Acceso denegado. No tienes permiso para realizar esta acción.</access-denied>
     </msg>
   </UIFCCActionList>
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Seleccione ubicaci\u00f3n</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Seleccione ubicación</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
   <UIWorkspaceList>
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
-      <rootNodePath>Ruta de Ra\u00edz</rootNodePath>
+      <rootNodePath>Ruta de Raíz</rootNodePath>
     </label>
   </UIWorkspaceList>
   <rootNodeInfo>
     <title>
-      <AddRootNode>A\u00f1adir el nodo de la ra\u00edz</AddRootNode>
+      <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
     </title>
   </rootNodeInfo>
   <UITreeList>
@@ -96,28 +96,28 @@
     </info>
     <header>
       <name>Nombre</name>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
   </UITreeList>
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>A\u00f1adir Acci\u00f3n</UIFCCActionContainer>
+      <UIFCCActionContainer>Añadir Acción</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
   <UIFCCActionForm>
-    <title>Agregar/ Editar la Acci\u00f3n</title>
+    <title>Agregar/ Editar la Acción</title>
     <action>
       <Save>Guardar</Save>
       <Close>Cerrar</Close>
     </action>
     <msg>
-      <repository-exception>No se puede guardar esta acci\u00f3n  El nombre provisto no puede tener un \u00edndice en su elemento final.</repository-exception>
-      <numberformat-exception>No se puede guardar esta acci\u00f3n  El nombre provisto no puede tener  '[' o ']'.</numberformat-exception>
-      <existed-action>El nombre de acci\u00f3n '{0}' ya existe. Por favor, seleccione otro nombre.</existed-action>
-      <unable-add-action>No se ha podido agregar esta acci\u00f3n.</unable-add-action>
-      <unable-add>No se ha podido agregar esta acci\u00f3n. Este nodo es la ra\u00edz o no tienes el permiso.</unable-add>
-      <not-support>El di\u00e1logo '{0}' no est\u00e1 apoyado.</not-support>
-      <no-permission-add>Acceso denegado. No tienes derecho a a\u00f1adir una acci\u00f3n aqu\u00ed.</no-permission-add>
+      <repository-exception>No se puede guardar esta acción  El nombre provisto no puede tener un índice en su elemento final.</repository-exception>
+      <numberformat-exception>No se puede guardar esta acción  El nombre provisto no puede tener  '[' o ']'.</numberformat-exception>
+      <existed-action>El nombre de acción '{0}' ya existe. Por favor, seleccione otro nombre.</existed-action>
+      <unable-add-action>No se ha podido agregar esta acción.</unable-add-action>
+      <unable-add>No se ha podido agregar esta acción. Este nodo es la raíz o no tienes el permiso.</unable-add>
+      <not-support>El diálogo '{0}' no está apoyado.</not-support>
+      <no-permission-add>Acceso denegado. No tienes derecho a añadir una acción aquí.</no-permission-add>
       <access-denied>Acceso denegado. No tienes permiso para acceder a esta plantilla.</access-denied>
     </msg>
     <validator>
@@ -127,7 +127,7 @@
   </UIFCCActionForm>
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Crear una acci\u00f3n de tipo</actionType>
+      <actionType>Crear una acción de tipo</actionType>
     </label>
     <msg>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
@@ -136,21 +136,21 @@
   </UIFCCActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Seleccione ubicaci\u00f3n</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Seleccione ubicación</UIOneNodePathSelector>
       <UIPermissionSelector>Navegador de permiso</UIPermissionSelector>
-      <UICategoriesSelector>A\u00f1adir Categor\u00edas</UICategoriesSelector>
-      <UIOneTaxonomySelector>A\u00f1adir Categor\u00edas</UIOneTaxonomySelector>
+      <UICategoriesSelector>Añadir Categorías</UICategoriesSelector>
+      <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>El campo '{0}' con el valor '{1}' no es v\u00e1lido.</Invalid-input>
+      <Invalid-input>El campo '{0}' con el valor '{1}' no es válido.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Seleccionar categor\u00edas</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Categor\u00edas referenciadas</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Seleccionar categorías</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Categorías referenciadas</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
   <UICategoriesSelector>
@@ -160,12 +160,12 @@
   </UICategoriesSelector>
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>\u00c1rbol de categor\u00edas</taxonomyTree>
+      <taxonomyTree>Árbol de categorías</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Selector de categor\u00edas</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Selector de categorías</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

@@ -8,7 +8,7 @@
   <UIConfigTabPane>
     <tab>
       <label>
-        <UIPathConfig>Configuraci\u00f3n de la Ruta</UIPathConfig>
+        <UIPathConfig>Configuración de la Ruta</UIPathConfig>
         <UINewConfigForm>Crear nuevo</UINewConfigForm>
       </label>
     </tab>
@@ -25,52 +25,52 @@
   -->
   <UIPathConfig>
     <label>
-      <categoryPath>Ruta de Categor\u00edas</categoryPath>
+      <categoryPath>Ruta de Categorías</categoryPath>
       <workspace>Espacio de Trabajo</workspace>
       <repository>Repositorio</repository>
       <path>UIPathConfig</path>
       <template>Plantilla</template>
-      <itemPerPage>Art\u00edculos por p\u00e1gina</itemPerPage>
+      <itemPerPage>Artículos por página</itemPerPage>
       <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
       <enableToolBar>Ver barra de herramientas</enableToolBar>
       <enableRefDoc>Documento de Referencia</enableRefDoc>
-      <filterCategory>Filtrar las categor\u00edas basadas en permisos de usuarios actuales</filterCategory>
+      <filterCategory>Filtrar las categorías basadas en permisos de usuarios actuales</filterCategory>
       <enableChildDoc>Documentos de los Subnodos</enableChildDoc>
       <enableTagMap>Mapa de etiquetas</enableTagMap>
       <enableComment>Autorizar los comentarios</enableComment>
       <enableVote>Autorizar los votos</enableVote>
-      <isAllowPublish>Mostrar s\u00f3lo documentos en el estado publicado</isAllowPublish>
-      <searchEnable>Habilitar la ubicaci\u00f3n de b\u00fasqueda</searchEnable>
-      <searchLocation>Buscar localizaci\u00f3n</searchLocation>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
+      <searchEnable>Habilitar la ubicación de búsqueda</searchEnable>
+      <searchLocation>Buscar localización</searchLocation>
       <searchPath>UIPathConfig</searchPath>
     </label>
-    <title>Configuraci\u00f3n de la Ruta</title>
+    <title>Configuración de la Ruta</title>
     <action>
-      <Add>Nueva configuraci\u00f3n</Add>
-      <Save>\#{word.save}</Save>
+      <Add>Nueva configuración</Add>
+      <Save>#{word.save}</Save>
       <Edit>Editar</Edit>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Back>\# {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
     </action>
     <msg>
-      <require-path>Debe seleccionar la ruta de la categor\u00eda.</require-path>
-      <invalid-path>La ruta de la categor\u00eda es v\u00e1lida.</invalid-path>
-      <invalid-value>El n\u00famero de p\u00e1gina no es v\u00e1lido.</invalid-value>
-      <invalid-number>Debe introducir el n\u00famero.</invalid-number>
-      <access-denied>Acceso denegado. No tienes permiso en esta categor\u00eda de ruta.</access-denied>
-      <enter-search-location>Por favor, especifique la ubicaci\u00f3n de b\u00fasqueda.</enter-search-location>
-      <explain>Cuando la ruta mostrada en navegar contenido corresponde a una jerarqu\u00eda de categor\u00edas, es necesario especificar la ruta donde los documentos se almacenan, de manera que se pueda encontrar por la funci\u00f3n de b\u00fasqueda del portlet.</explain>
+      <require-path>Debe seleccionar la ruta de la categoría.</require-path>
+      <invalid-path>La ruta de la categoría es válida.</invalid-path>
+      <invalid-value>El número de página no es válido.</invalid-value>
+      <invalid-number>Debe introducir el número.</invalid-number>
+      <access-denied>Acceso denegado. No tienes permiso en esta categoría de ruta.</access-denied>
+      <enter-search-location>Por favor, especifique la ubicación de búsqueda.</enter-search-location>
+      <explain>Cuando la ruta mostrada en navegar contenido corresponde a una jerarquía de categorías, es necesario especificar la ruta donde los documentos se almacenan, de manera que se pueda encontrar por la función de búsqueda del portlet.</explain>
     </msg>
   </UIPathConfig>
   <UIQueryConfig>
     <msg>
-      <repostoryException>Quiz\u00e1s tiene problemas con su consulta.  Favor de verificar de nuevo.</repostoryException>
-      <noSuchNodeTypeException>Quiz\u00e1s tiene problemas con su consulta.  Favor de verificar de nuevo.</noSuchNodeTypeException>
-      <invalid-value>El n\u00famero de p\u00e1gina no es v\u00e1lido.</invalid-value>
-      <invalid-query>La cadena de consulta no es v\u00e1lida.</invalid-query>
-      <invalid-name>El nombre de la consulta no fu\u00e9 encontrado. Por favor intente otro tipo, lenguaje y estado.</invalid-name>
+      <repostoryException>Quizás tiene problemas con su consulta.  Favor de verificar de nuevo.</repostoryException>
+      <noSuchNodeTypeException>Quizás tiene problemas con su consulta.  Favor de verificar de nuevo.</noSuchNodeTypeException>
+      <invalid-value>El número de página no es válido.</invalid-value>
+      <invalid-query>La cadena de consulta no es válida.</invalid-query>
+      <invalid-name>El nombre de la consulta no fué encontrado. Por favor intente otro tipo, lenguaje y estado.</invalid-name>
     </msg>
-    <title>Configuraci\u00f3n de la Consulta</title>
+    <title>Configuración de la Consulta</title>
     <label>
       <repository>Repositorio</repository>
       <workspace>Espacio de Trabajo</workspace>
@@ -80,19 +80,19 @@
       <queryStore>Nombre de la Consulta</queryStore>
       <query>Consulta</query>
       <template>Plantilla</template>
-      <itemPerPage>Art\u00edculos por p\u00e1gina</itemPerPage>
+      <itemPerPage>Artículos por página</itemPerPage>
       <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
       <enableTagMap>Mapa de etiquetas</enableTagMap>
       <enableComment>Autorizar los comentarios</enableComment>
       <enableVote>Autorizar los votos</enableVote>
-      <isAllowPublish>Mostrar s\u00f3lo documentos en estado "publicado"</isAllowPublish>
+      <isAllowPublish>Mostrar sólo documentos en estado "publicado"</isAllowPublish>
     </label>
     <action>
-      <Add>Nueva configuraci\u00f3n</Add>
-      <Save>\# {word.save}</Save>
+      <Add>Nueva configuración</Add>
+      <Save># {word.save}</Save>
       <Edit>Editar</Edit>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Back>\# {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
     </action>
   </UIQueryConfig>
   <!--
@@ -107,7 +107,7 @@
   </path>
   <rootNodeInfo>
     <title>
-      <AddRootNode>A\u00f1adir el nodo de la ra\u00edz</AddRootNode>
+      <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
     </title>
   </rootNodeInfo>
   <!--
@@ -135,24 +135,24 @@
   ###################################################################
   -->
   <UIScriptConfig>
-    <title>Config del gui\u00f3n</title>
+    <title>Config del guión</title>
     <label>
       <repository>Repositorio</repository>
       <workspace>Espacio de Trabajo</workspace>
-      <scriptName>Nombre del gui\u00f3n</scriptName>
+      <scriptName>Nombre del guión</scriptName>
       <template>Plantilla</template>
       <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
       <enableTagMap>Mapa de etiquetas</enableTagMap>
       <enableComment>Autorizar los comentarios</enableComment>
       <enableVote>Autorizar los votos</enableVote>
-      <isAllowPublish>Mostrar s\u00f3lo documentos en el estado publicado</isAllowPublish>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
     </label>
     <action>
       <Add>Nueva Config</Add>
-      <Save>\#{word.save}</Save>
+      <Save>#{word.save}</Save>
       <Edit>Editar</Edit>
-      <Back>\# {word.back}</Back>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIScriptConfig>
   <!--
@@ -161,31 +161,31 @@
   ###################################################################
   -->
   <UIDocumentConfig>
-    <title>Configuraci\u00f3n del Documento</title>
+    <title>Configuración del Documento</title>
     <label>
       <repository>Repositorio</repository>
       <workspace>Espacio de Trabajo</workspace>
-      <categoryPath>Ruta de Categor\u00edas</categoryPath>
+      <categoryPath>Ruta de Categorías</categoryPath>
       <path>UIDocumentConfig</path>
       <doc>UIDocumentConfig</doc>
       <docName>Nombre del Documento</docName>
       <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
       <enableComment>Autorizar los comentarios</enableComment>
       <enableVote>Autorizar los votos</enableVote>
-      <isAllowPublish>Mostrar s\u00f3lo documentos en el estado publicado</isAllowPublish>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
     </label>
     <action>
       <Add>Nueva Config</Add>
-      <Save>\#{word.save}</Save>
+      <Save>#{word.save}</Save>
       <Edit>Editar</Edit>
-      <Back>\# {word.back}</Back>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <require-path>Primero debe seleccionar la ruta de la categor\u00eda.</require-path>
-      <invalid-path>Categor\u00eda de ruta inv\u00e1lida, favor de seleccionar una ruta de nuevo.</invalid-path>
+      <require-path>Primero debe seleccionar la ruta de la categoría.</require-path>
+      <invalid-path>Categoría de ruta inválida, favor de seleccionar una ruta de nuevo.</invalid-path>
       <require-doc>Debe seleccionar un documento.</require-doc>
-      <invalid-doc>Este documento fu\u00e9 eliminado o cambiado o no tiene permiso de acceso.</invalid-doc>
+      <invalid-doc>Este documento fué eliminado o cambiado o no tiene permiso de acceso.</invalid-doc>
     </msg>
   </UIDocumentConfig>
   <!--
@@ -202,7 +202,7 @@
     <title>Crear nuevo</title>
     <action>
       <Next>Siguiente</Next>
-      <Back>\# {word.back}</Back>
+      <Back># {word.back}</Back>
     </action>
   </UINewConfigForm>
   <!--
@@ -212,24 +212,24 @@
   -->
   <UIToolBar>
     <label>
-      <RootNode>Ra\u00edz</RootNode>
+      <RootNode>Raíz</RootNode>
     </label>
     <tooltip>
-      <Hidden>\u00e1rbol oculto</Hidden>
-      <Show>Mostrar el \u00e1rbol</Show>
-      <showSearch>Mostrar/esconder la forma de b\u00fasqueda</showSearch>
-      <Back>Atr\u00e1s</Back>
+      <Hidden>árbol oculto</Hidden>
+      <Show>Mostrar el árbol</Show>
+      <showSearch>Mostrar/esconder la forma de búsqueda</showSearch>
+      <Back>Atrás</Back>
       <Vote>Votar</Vote>
       <Comment>Escribir comentario</Comment>
     </tooltip>
     <msg>
-      <back-view-search>Regresar a la vista previa de b\u00fasqueda.</back-view-search>
-      <select-doc>Ning\u00fan documento fue seleccionado o se ha eliminado.</select-doc>
+      <back-view-search>Regresar a la vista previa de búsqueda.</back-view-search>
+      <select-doc>Ningún documento fue seleccionado o se ha eliminado.</select-doc>
       <node-removed>El nodo se ha eliminado.</node-removed>
-      <readonly-doc>El documento actual ha sido registrado. Por favor verif\u00edquelo.</readonly-doc>
-      <not-support-vote>La funci\u00f3n de votar no es compatible con este tipo de documento.</not-support-vote>
-      <not-support-comment>La funci\u00f3n de votar no es compatible con este tipo de documento.</not-support-comment>
-      <node-is-locked>El nodo est\u00e1 bloqueado. Favor de desbloquearlo.</node-is-locked>
+      <readonly-doc>El documento actual ha sido registrado. Por favor verifíquelo.</readonly-doc>
+      <not-support-vote>La función de votar no es compatible con este tipo de documento.</not-support-vote>
+      <not-support-comment>La función de votar no es compatible con este tipo de documento.</not-support-comment>
+      <node-is-locked>El nodo está bloqueado. Favor de desbloquearlo.</node-is-locked>
       <access-add-denied>Acceso denegado. No tienes el permiso de agregar en este nodo.</access-add-denied>
     </msg>
   </UIToolBar>
@@ -242,7 +242,7 @@
     <label>
       <nodePath>Estas buscando en</nodePath>
       <searchTime>Resultado</searchTime>
-      <duration>Duraci\u00f3n</duration>
+      <duration>Duración</duration>
       <nodeName>Nodo</nodeName>
     </label>
   </UISearchController>
@@ -264,7 +264,7 @@
     </title>
     <msg>
       <not-empty>Debe introducir la palabra clave.</not-empty>
-      <suggestion-keyword>Sugerencias '{0}' no fu\u00e9 encontrado. Intente palabras clave diferentes.</suggestion-keyword>
+      <suggestion-keyword>Sugerencias '{0}' no fué encontrado. Intente palabras clave diferentes.</suggestion-keyword>
     </msg>
   </UICBSearchForm>
   <!--
@@ -276,10 +276,10 @@
     <header>
       <name>Nombre</name>
       <path>Ruta</path>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <action>
-      <Close>\# {word.close}</Close>
+      <Close># {word.close}</Close>
     </action>
     <msg>
       <node-removed>Nodo perdido: ha sido movido o borrado.</node-removed>
@@ -299,23 +299,23 @@
   -->
   <UIBrowseContainer>
     <label>
-      <NoDocument>No hay documento en esta categor\u00eda</NoDocument>
+      <NoDocument>No hay documento en esta categoría</NoDocument>
       <author>Autor</author>
       <summary>Resumen</summary>
-      <more>M\u00e1s documentos</more>
+      <more>Más documentos</more>
       <previous>Vista Previa</previous>
       <path-Previous>Previo</path-Previous>
-      <path-Root>Ra\u00edz</path-Root>
+      <path-Root>Raíz</path-Root>
       <home>Inicio</home>
-      <cannot-access>Acceso denegado. Tal vez, no tiene el permiso de ver en esta configuraci\u00f3n de portlet.</cannot-access>
+      <cannot-access>Acceso denegado. Tal vez, no tiene el permiso de ver en esta configuración de portlet.</cannot-access>
     </label>
     <title>
       <home>Inicio</home>
-      <prevTabs>Leng\u00fcetas Previas</prevTabs>
-      <moreTabs>M\u00e1s leng\u00fcetas</moreTabs>
+      <prevTabs>Lengüetas Previas</prevTabs>
+      <moreTabs>Más lengüetas</moreTabs>
     </title>
     <msg>
-      <template-notsupported>No hay plantilla de visualizaci\u00f3n para cargar.</template-notsupported>
+      <template-notsupported>No hay plantilla de visualización para cargar.</template-notsupported>
       <invalid-node>Nodo Perdido: se ha movido o eliminado o no tiene suficientes permisos para accesarlo</invalid-node>
       <symlinkNode-no-targetNode>El nodo de destino ha sido movido o eliminado, o no tiene permiso de acceso.</symlinkNode-no-targetNode>
     </msg>
@@ -339,7 +339,7 @@
   <UITreeList>
     <header>
       <name>Nombre</name>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <info>
       <child-not-found>No tiene subnodo</child-not-found>
@@ -354,16 +354,16 @@
     <label>
       <title>Agregar comentario</title>
       <name>Nombre</name>
-      <email>Correo electr\u00f3nico</email>
+      <email>Correo electrónico</email>
       <website>Sitio Web</website>
       <comment>Comentario</comment>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Save>\#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
-      <locked-doc>El documento est\u00e1 bloqueado.</locked-doc>
+      <locked-doc>El documento está bloqueado.</locked-doc>
       <versioning-doc>El documento es control de versiones.</versioning-doc>
       <error-vote>Error al comentar en el documento.</error-vote>
       <comment-required>El comentario es requerido.</comment-required>
@@ -371,9 +371,9 @@
   </UICBCommentForm>
   <UICBVoteForm>
     <msg>
-      <locked-doc>El documento est\u00e1 bloqueado.</locked-doc>
+      <locked-doc>El documento está bloqueado.</locked-doc>
       <versioning-doc>El documento es control de versiones.</versioning-doc>
-      <error-vote>Ocurri\u00f3 un error al votar por el documento.</error-vote>
+      <error-vote>Ocurrió un error al votar por el documento.</error-vote>
     </msg>
   </UICBVoteForm>
   <!--
@@ -396,8 +396,8 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
-      <rootNodeInfo>Ruta de la Ra\u00edz</rootNodeInfo>
-      <rootPath>Ruta de la Ra\u00edz</rootPath>
+      <rootNodeInfo>Ruta de la Raíz</rootNodeInfo>
+      <rootPath>Ruta de la Raíz</rootPath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -408,13 +408,13 @@
   <UITagList>
     <label>
       <tagTitle>Mapa de etiqueta</tagTitle>
-      <PublicTags>Etiquetas p\u00fablicas</PublicTags>
+      <PublicTags>Etiquetas públicas</PublicTags>
       <PrivateTags>Etiquetas privadas</PrivateTags>
     </label>
   </UITagList>
   <UICategoryTree>
     <label>
-      <title>Categor\u00edas</title>
+      <title>Categorías</title>
     </label>
     <msg>
       <invalid-node>Nodo perdido : ha sido movido o borrado</invalid-node>
@@ -427,12 +427,12 @@
   -->
   <UIBrowseContentHelp>
     <label>
-      <info>Usted est\u00e1 en el modo de ayuda, puede configurar su porlet seleccionando el modo de edici\u00f3n.</info>
+      <info>Usted está en el modo de ayuda, puede configurar su porlet seleccionando el modo de edición.</info>
     </label>
   </UIBrowseContentHelp>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>\u00bfEst\u00e1s seguro de eliminar?</confirm-delete>
+      <confirm-delete>¿Estás seguro de eliminar?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <!--
@@ -442,13 +442,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>El valor de este campo es nulo o vac\u00edo.</empty-input>
-      <Invalid-char>Este campo contiene algunos caracteres no v\u00e1lidos. Por favor, introduzca otro valor.</Invalid-char>
-      <Invalid-char1>El n\u00famero que le sigue al car\u00e1cter '~' debe estar entre 0 a 1</Invalid-char1>
-      <Invalid-char2>El n\u00famero debe seguir el car\u00e1cter '~'</Invalid-char2>
-      <Invalid-char3>El n\u00famero debe seguir el car\u00e1cter '^'</Invalid-char3>
-      <Invalid-char4>Ning\u00fan espacio es permitido cerca del car\u00e1cter '^'</Invalid-char4>
-      <Invalid-char5>Ning\u00fan espacio es permitido cerca del car\u00e1cter '^'</Invalid-char5>
+      <empty-input>El valor de este campo es nulo o vacío.</empty-input>
+      <Invalid-char>Este campo contiene algunos caracteres no válidos. Por favor, introduzca otro valor.</Invalid-char>
+      <Invalid-char1>El número que le sigue al carácter '~' debe estar entre 0 a 1</Invalid-char1>
+      <Invalid-char2>El número debe seguir el carácter '~'</Invalid-char2>
+      <Invalid-char3>El número debe seguir el carácter '^'</Invalid-char3>
+      <Invalid-char4>Ningún espacio es permitido cerca del carácter '^'</Invalid-char4>
+      <Invalid-char5>Ningún espacio es permitido cerca del carácter '^'</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -475,7 +475,7 @@
   </Comments>
   <UIDocumentDetail>
     <msg>
-      <confirm-deletecomment>\u00bfEst\u00e1s seguro de borrar este comentario?</confirm-deletecomment>
+      <confirm-deletecomment>¿Estás seguro de borrar este comentario?</confirm-deletecomment>
     </msg>
     <tooltip>
       <remove-attachment>Eliminar este archivo adjunto</remove-attachment>

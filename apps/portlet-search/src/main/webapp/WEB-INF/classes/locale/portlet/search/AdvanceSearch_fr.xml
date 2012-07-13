@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UIDefaultSearchForm>
     <label>
@@ -11,12 +11,11 @@
       <Search>Recherche</Search>
     </action>
   </UIDefaultSearchForm>
-
   <UIDefaultSearchResult>
     <label>
       <Page>Page</Page>
       <Document>Document</Document>
-      <DocumentAndPage>Document et page</DocumentAndPage>
+      <DocumentAndPage>Document et Page</DocumentAndPage>
       <documentandpage>document et page</documentandpage>
       <resutlsCaption>Résultats</resutlsCaption>
       <ofAboutCaption>sur</ofAboutCaption>
@@ -37,17 +36,17 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Articles par page</itemsPerPageSelector>
-      <searchFormSelector>Formulaire de recherche de modèle</searchFormSelector>
-      <searchResultSelector>Résultat de la recherche de modèle</searchResultSelector>
-      <searchPaginatorSelector>Paginator modèle de recherche</searchPaginatorSelector>
-      <searchPageLayoutSelector>Mise en page modèle de recherche</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base de chemin</searchResultBasePathInputSetAction>
+      <searchFormSelector>Template de formulaire</searchFormSelector>
+      <searchResultSelector>Template de résultats</searchResultSelector>
+      <searchPaginatorSelector>Template de pagination</searchPaginatorSelector>
+      <searchPageLayoutSelector>Template de mise en page</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Chemin de base</searchResultBasePathInputSetAction>
       <pageMode>Mode de page</pageMode>
       <option>
         <none>Aucun</none>
         <more>Plus</more>
         <pagination>Pagination</pagination>
-      </option>      
+      </option>
     </label>
     <action>
       <Save>Enregistrer</Save>
@@ -60,11 +59,11 @@
     </title>
   </searchResultBasePathInputSetAction>
   <UISearchForm>
-  	 <message>
-  	    <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
-        <keyword-not-empty>La valeur de ce mot clé ne peut pas être nul ou vide</keyword-not-empty>
-        <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
-  	 </message>
+    <message>
+      <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
+      <not-checked>Veuillez sélectionner un type de recherche.</not-checked>
+      <keyword-not-empty>La valeur de ce mot clé ne peut pas être nul ou vide.</keyword-not-empty>
+    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
@@ -77,7 +76,7 @@
     <label>
       <quickEditTitle>Edition rapide</quickEditTitle>
     </label>
-  </UISearchPageLayoutDefault>  
+  </UISearchPageLayoutDefault>
   <searchOption>
     <label>
       <pageCheckBox>dans les pages</pageCheckBox>
@@ -88,7 +87,7 @@
     <label>
       <option>
         <all>rechechez tous les sites</all>
-      </option>  
-    </label>  
-  </ViewMode>  
+      </option>
+    </label>
+  </ViewMode>
 </bundle>

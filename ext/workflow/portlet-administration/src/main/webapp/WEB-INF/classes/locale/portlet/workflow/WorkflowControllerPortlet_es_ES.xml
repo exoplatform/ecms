@@ -11,7 +11,7 @@
       <text>Gestionar el flujo de trabajo de admin</text>
     </tab>
     <msg>
-      <refresh-session-success>La sesi\u00f3n se actualiz\u00f3 correctamente.</refresh-session-success>
+      <refresh-session-success>La sesión se actualizó correctamente.</refresh-session-success>
     </msg>
     <label>
       <refresh>Actualizar</refresh>
@@ -19,13 +19,13 @@
   </UIWorkflowControllerPortlet>
   <ControllerPopup>
     <title>
-      <UITaskManager>Gesti\u00f3n de Tareas</UITaskManager>
+      <UITaskManager>Gestión de Tareas</UITaskManager>
     </title>
   </ControllerPopup>
   <UITabPane>
     <title>
       <UITaskList>Controlador de Tareas</UITaskList>
-      <UIBPDefinition>Controlador de definici\u00f3n de BP</UIBPDefinition>
+      <UIBPDefinition>Controlador de definición de BP</UIBPDefinition>
       <UIDocumentContent>Ver contenido</UIDocumentContent>
       <UIDocumentForm>Editar contenido</UIDocumentForm>
       <UITask>Tarea</UITask>
@@ -37,11 +37,11 @@
       <processName>Nombre del Proceso</processName>
       <taskName>Nombre de la Tarea</taskName>
       <actor>Actor</actor>
-      <description>Descripci\u00f3n</description>
+      <description>Descripción</description>
       <actorId>Id del actor</actorId>
       <taskVariables>Variables de la Tarea</taskVariables>
       <processDateStart>Fecha de Comienzo del Proceso</processDateStart>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <label>
       <managerState>Gestionar</managerState>
@@ -60,7 +60,7 @@
     <label>
       <hide-process-link>Ocultar el diagrama de procesos</hide-process-link>
       <show-process-link>Mostrar el diagrama de proceso</show-process-link>
-      <process-diagram-not-available>Diagrama del proceso no est\u00e1 disponible</process-diagram-not-available>
+      <process-diagram-not-available>Diagrama del proceso no está disponible</process-diagram-not-available>
     </label>
     <title>
       <Delegate>Seleccionar Usuario</Delegate>
@@ -80,11 +80,11 @@
     <header>
       <id>ID</id>
       <name>Nombre</name>
-      <version>Versi\u00f3n</version>
-      <action>Acci\u00f3n</action>
+      <version>Versión</version>
+      <action>Acción</action>
     </header>
     <msg>
-      <empty>No hay ning\u00fan proceso de negocios para iniciar</empty>
+      <empty>No hay ningún proceso de negocios para iniciar</empty>
     </msg>
   </UIBPDefinition>
   <UIControllerManager>
@@ -100,20 +100,20 @@
       <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
       <value-invalid>'{0}' es requerido.</value-invalid>
-      <confirm-close>Los cambios hechos ser\u00e1n perdidos al cerrar esta forma.</confirm-close>
-      <confirm-navigate>Los cambios hechos ser\u00e1n perdidos si sale de esta p\u00e1gina.</confirm-navigate>
+      <confirm-close>Los cambios hechos serán perdidos al cerrar esta forma.</confirm-close>
+      <confirm-navigate>Los cambios hechos serán perdidos si sale de esta página.</confirm-navigate>
     </msg>
   </UIDocumentForm>
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>A\u00f1adir Categor\u00edas</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
       <UIOneNodePathSelector>Seleccione la ruta</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>\u00c1rbol de categor\u00edas</taxonomyTree>
-      <rootNodePath>Ra\u00edz de un \u00e1rbol</rootNodePath>
+      <taxonomyTree>Árbol de categorías</taxonomyTree>
+      <rootNodePath>Raíz de un árbol</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
@@ -121,17 +121,17 @@
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Ruta de Ra\u00edz</rootNodePath>
+      <rootNodePath>Ruta de Raíz</rootNodePath>
     </label>
   </UIWorkspaceList>
   <rootNodeInfo>
     <title>
-      <AddRootNode>A\u00f1adir el nodo de la ra\u00edz</AddRootNode>
+      <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
     </title>
   </rootNodeInfo>
   <PositiveNumberValidator>
     <msg>
-      <invalid-input>El campo '{0}' con el valor '{1}' no es v\u00e1lido. Este campo requiere un n\u00famero positivo.</invalid-input>
+      <invalid-input>El campo '{0}' con el valor '{1}' no es válido. Este campo requiere un número positivo.</invalid-input>
     </msg>
   </PositiveNumberValidator>
 </bundle>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
@@ -92,7 +92,7 @@
     <view>
       <label>
         <not-viewable>Ce contenu n'est pas consultable. Veuillez le télécharger ou utiliser WebDAV pour y accéder.</not-viewable>
-        <file-size-too-big>Le contenu de ce fichier est trop important. Veuillez le télécharger pour le consulter.</file-size-too-big>
+        <file-size-too-big>Ce fichier est trop gros pour être consulté. Veuillez le télécharger pour le consulter.</file-size-too-big>
         <webDAV>Vue WebDAV</webDAV>
         <download>Télécharger</download>
         <htmlview>Vue HTML</htmlview>
@@ -109,7 +109,7 @@
         <content>Contenu du File Plan</content>
         <record-category-identifier>Identification de la catégorie de l'Enregistrement</record-category-identifier>
         <disposition-author>Auteur de la disposition</disposition-author>
-        <disposition-instruction>Instructions de la disposition</disposition-instruction>
+        <disposition-instruction>Instructions de la déposition</disposition-instruction>
         <permanent-record-indicator>Indicateur d'enregistrement permanent</permanent-record-indicator>
         <contain-record-folder>Dossier contenant l'Enregistrement</contain-record-folder>
         <default-media-type>Type de média par défaut</default-media-type>
@@ -127,7 +127,7 @@
         <destroyable-record>Enregistrements destructibles</destroyable-record>
         <record-id>Identifiant de l'Enregistrement</record-id>
         <record-name>Nom de l'Enregistrement</record-name>
-        <originator>Originataire</originator>
+        <originator>Originaire</originator>
         <date-received>Date de réception</date-received>
         <originating-organization>Organisation originataire</originating-organization>
         <next-review-date>Date de revue suivante</next-review-date>
@@ -137,7 +137,7 @@
         <transfer-date>Date de transfert</transfer-date>
         <transfer-location>Emplacement du transfert</transfer-location>
         <accession-date>Date d'acquisition</accession-date>
-        <accession-location>Location de l'acquisition</accession-location>
+        <accession-location>Emplacement de l'acquisition</accession-location>
         <destruction-date>Date de destruction</destruction-date>
       </label>
     </view>
@@ -277,6 +277,10 @@
         <username>Nom d'utilisateur</username>
         <description>Description</description>
         <stote-path>Emplacement de sauvegarde</stote-path>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </Getmail>
@@ -328,6 +332,10 @@
         <category>Catégorie</category>
         <keywords>Mots clés</keywords>
         <query-path>Emplacement de la requête</query-path>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </Rss>
@@ -341,6 +349,10 @@
         <lifecycle>Cycle de vie</lifecycle>
         <metadata>Metadonnée</metadata>
         <description>Description</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </AddMetadata>
@@ -353,6 +365,10 @@
         <action-name>Nom de l'action</action-name>
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </ReloadAction>
@@ -366,6 +382,10 @@
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
         <mail-to>Envoyer l'email à</mail-to>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </SendMail>
@@ -378,6 +398,10 @@
         <action-name>Nom</action-name>
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </Transform>
@@ -390,6 +414,10 @@
         <action-name>Nom de l'action</action-name>
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </AutoVersioning>
@@ -402,6 +430,10 @@
         <action-name>Nom</action-name>
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
       </label>
     </view>
   </EnableVersioning>
@@ -507,10 +539,10 @@
     <view>
       <label>
         <not-available>ND</not-available>
-        <hold-executed>Arrêt exécuté</hold-executed>
-        <hold-until>Arrêt jusqu'à</hold-until>
-        <holds-discretionary>Arrêt discrétionnaire</holds-discretionary>
-        <hold-until-event>Arrêt jusqu'à évènement</hold-until-event>
+        <hold-executed>Emprise exécutée</hold-executed>
+        <hold-until>Emprise jusqu'à</hold-until>
+        <holds-discretionary>Emprise discrétionnaire</holds-discretionary>
+        <hold-until-event>Emprise jusqu'à évènement</hold-until-event>
         <freeze>Geler</freeze>
       </label>
       <action>
@@ -532,7 +564,7 @@
         <not-available>ND</not-available>
         <supplemental-marking-list>Liste supplémentaire d'inscription</supplemental-marking-list>
         <subject>Sujet</subject>
-        <record-identifier>Identifiant du Record</record-identifier>
+        <record-identifier>Identifiant de l'enregistrement</record-identifier>
         <originator>Créateur</originator>
         <format>Format</format>
         <addresses>Adresses</addresses>
@@ -585,7 +617,7 @@
     <view>
       <label>
         <not-available>ND</not-available>
-        <is-vital-record>Le Record est vital</is-vital-record>
+        <is-vital-record>Enregistrement vital</is-vital-record>
         <prev-review-date>Date de revue précédente</prev-review-date>
         <next-review-date>Date de revue suivante</next-review-date>
       </label>
@@ -619,121 +651,31 @@
         <backup-path>Emplacement de la sauvegarde</backup-path>
         <trash-workspace>Espace de la corbeille</trash-workspace>
         <trash-path>Emplacement de la corbeille</trash-path>
-								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </view>
   </ContentPublishing>
-		
-		<SendMail>
-   <view>
-     <label> 
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </SendMail>
-
   <ScriptAction>
-   <view>
-     <label> 
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
+    <view>
+      <label>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
+      </label>
+    </view>
   </ScriptAction>
-  	
-  <Getmail>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </Getmail>
-  	
-  <Rss>
-   <view>
-     <label> 
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </Rss>
-  	
-  <AddMetadata>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </AddMetadata>
-		
-  <ReloadAction>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </ReloadAction>
-		
-  <Transform>
-   <view>
-     <label> 
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </Transform>
-
-  <EnableVersioning>
-   <view>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
-     </label> 
-   </view>
-  </EnableVersioning>
-  <AutoVersioning>
-   <view>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>
-     </label> 
-   </view>
-  </AutoVersioning>
-  
   <AccessibleMedia>
     <view>
       <label>
-      	<Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
-      	<Read-more>Lire la suite</Read-more>
-      	<Read-less>Réduire</Read-less>
-      	<Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
+        <Play-audio-description-of-this-video>Description audio</Play-audio-description-of-this-video>
+        <Read-more>Lire la suite</Read-more>
+        <Read-less>Réduire</Read-less>
+        <Switch-back-to-original-video>Vidéo d'origine</Switch-back-to-original-video>
       </label>
       <tooltip>
-      	<A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
+        <A-second-media-file-is-available-as-audio-description>Un second media est disponible comme description audio</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>
-  
 </bundle>

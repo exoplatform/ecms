@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <Signin>
     <welcome>Bienvenue</welcome>
@@ -12,22 +12,22 @@
   </Signin>
   <Toolbar>
     <SkipToContent>Passer au contenu</SkipToContent>
-    <SiteMap>Carte du site</SiteMap>
-    <Accessibility>Accessibilité</Accessibility >
+    <SiteMap>Plan du site</SiteMap>
+    <Accessibility>Accessibilité</Accessibility>
     <NormalSize>Taille normale</NormalSize>
     <MediumSize>Taille moyenne</MediumSize>
-    <LargeSize>Taille large</LargeSize>
-    <NormalContrast>Contrastes normaux</NormalContrast>
-    <HighContrast>Contrastes elevés</HighContrast>
+    <LargeSize>Grande taille</LargeSize>
+    <NormalContrast>Contraste normal</NormalContrast>
+    <HighContrast>Contraste élevé</HighContrast>
     <Search>Rechercher</Search>
   </Toolbar>
   <Logo>
-    <GoHome>Allez à l'accueil</GoHome>
+    <GoHome>Aller à l'accueil</GoHome>
   </Logo>
   <acme>
-    <label>ACME Modèle</label>
+    <label>Template ACME</label>
   </acme>
   <WAIPortal>
-    <label>Exemple de Site Accessible</label>
+    <label>Exemple de site Accessible</label>
   </WAIPortal>
 </bundle>

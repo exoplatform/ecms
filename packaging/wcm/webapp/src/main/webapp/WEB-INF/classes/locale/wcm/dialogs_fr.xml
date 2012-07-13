@@ -1,25 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) 2009 eXo Platform SAS.
-    
-    This is free software; you can redistribute it and/or modify it
-    under the terms of the GNU Lesser General Public License as
-    published by the Free Software Foundation; either version 2.1 of
-    the License, or (at your option) any later version.
-    
-    This software is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-    Lesser General Public License for more details.
-    
-    You should have received a copy of the GNU Lesser General Public
-    License along with this software; if not, write to the Free
-    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-    02110-1301 USA, or see the FSF site: http://www.fsf.org.
-
--->
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <WebContent>
     <dialog>
@@ -34,12 +13,12 @@
         <ContentCSS>CSS données</ContentCSS>
         <hintCSS>Dans ce panneau, vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
         <ContentJS>JS données</ContentJS>
-        <hintJS>Dans ce panneau, vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
+        <hintJS>Dans ce panneau, vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web soit affiché sur la page.</hintJS>
         <WebContentHtml>Contenu principal</WebContentHtml>
         <Illustration>Illustration</Illustration>
         <hintIllustration>Dans ce panneau, vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
+        <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
         <illustrationImage>Illustration Vignette</illustrationImage>
-        <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
         <imageMimeType>Type d'image</imageMimeType>
         <image>Transférer l'image</image>
         <imageWidth>Largeur de l'image</imageWidth>
@@ -48,7 +27,6 @@
       </label>
     </dialog>
   </WebContent>
-
   <CSSFile>
     <dialog>
       <label>
@@ -59,7 +37,6 @@
       </label>
     </dialog>
   </CSSFile>
-
   <JSFile>
     <dialog>
       <label>
@@ -70,7 +47,6 @@
       </label>
     </dialog>
   </JSFile>
-
   <WebLink>
     <dialog>
       <label>
@@ -80,7 +56,6 @@
       </label>
     </dialog>
   </WebLink>
-
   <SiteMetadata>
     <dialog>
       <label>

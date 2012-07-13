@@ -4,48 +4,48 @@
     <label>
       <keyword>Palabra Clave</keyword>
       <portal>Portal</portal>
-      <Page>P\u00e1gina</Page>
+      <Page>Página</Page>
       <Document>Documento</Document>
     </label>
     <action>
-      <Search>B\u00fasqueda</Search>
+      <Search>Búsqueda</Search>
     </action>
   </UIDefaultSearchForm>
   <UIDefaultSearchResult>
     <label>
-      <Page>P\u00e1gina</Page>
+      <Page>Página</Page>
       <Document>Documento</Document>
-      <DocumentAndPage>Documento y P\u00e1gina</DocumentAndPage>
-      <documentandpage>documento y p\u00e1gina</documentandpage>
+      <DocumentAndPage>Documento y Página</DocumentAndPage>
+      <documentandpage>documento y página</documentandpage>
       <resutlsCaption>Resultados</resutlsCaption>
       <ofAboutCaption>de aproximadamente</ofAboutCaption>
       <forCaption>para</forCaption>
       <timeUnitCaption>segundos</timeUnitCaption>
-      <similar>P\u00e1ginas en donde el mismo contenido aparece</similar>
+      <similar>Páginas en donde el mismo contenido aparece</similar>
       <editor>Editor</editor>
     </label>
     <action>
       <edit>Editar</edit>
     </action>
     <msg>
-      <your-search>Su b\u00fasqueda</your-search>
+      <your-search>Su búsqueda</your-search>
       <did-not-match>no coincide con ninguna</did-not-match>
       <new-suggestion>Sugerencia</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Art\u00edculos por p\u00e1gina</itemsPerPageSelector>
-      <searchFormSelector>Plantilla del formulario de b\u00fasqueda</searchFormSelector>
-      <searchResultSelector>Plantilla de b\u00fasqueda de resultados</searchResultSelector>
-      <searchPaginatorSelector>Plantilla de b\u00fasqueda Paginator</searchPaginatorSelector>
-      <searchPageLayoutSelector>Plantilla de dise\u00f1o de la p\u00e1gina de b\u00fasqueda</searchPageLayoutSelector>
+      <itemsPerPageSelector>Artículos por página</itemsPerPageSelector>
+      <searchFormSelector>Plantilla del formulario de búsqueda</searchFormSelector>
+      <searchResultSelector>Plantilla de búsqueda de resultados</searchResultSelector>
+      <searchPaginatorSelector>Plantilla de búsqueda Paginator</searchPaginatorSelector>
+      <searchPageLayoutSelector>Plantilla de diseño de la página de búsqueda</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Ruta de la base</searchResultBasePathInputSetAction>
-      <pageMode>Modo de p\u00e1gina</pageMode>
+      <pageMode>Modo de página</pageMode>
       <option>
         <none>Ninguno</none>
-        <more>M\u00e1s</more>
-        <pagination>Paginaci\u00f3n</pagination>
+        <more>Más</more>
+        <pagination>Paginación</pagination>
       </option>
     </label>
     <action>
@@ -60,26 +60,26 @@
   </searchResultBasePathInputSetAction>
   <UISearchForm>
     <message>
-      <keyword-not-support>La palabra clave no es v\u00e1lida.  Algunos caracteres no son compatibles.</keyword-not-support>
-      <not-checked>Por favor seleccione un tipo de b\u00fasqueda.</not-checked>
-      <keyword-not-empty>El valor de la palabra clave no puede estar vac\u00edo.</keyword-not-empty>
+      <keyword-not-support>La palabra clave no es válida.  Algunos caracteres no son compatibles.</keyword-not-support>
+      <not-checked>Por favor seleccione un tipo de búsqueda.</not-checked>
+      <keyword-not-empty>El valor de la palabra clave no puede estar vacío.</keyword-not-empty>
     </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
       <next>Siguiente</next>
       <previous>Previo</previous>
-      <more>M\u00e1s</more>
+      <more>Más</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Edici\u00f3n r\u00e1pida</quickEditTitle>
+      <quickEditTitle>Edición rápida</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>en las p\u00e1ginas</pageCheckBox>
+      <pageCheckBox>en las páginas</pageCheckBox>
       <documentCheckBox>en el contenido</documentCheckBox>
     </label>
   </searchOption>

@@ -3,9 +3,9 @@
   <PublicationService>
     <StageAndVersionPublicationPlugin>
       <changeState>
-        <enrolled>El contenido fu\u00e9 inscrito</enrolled>
+        <enrolled>El contenido fué inscrito</enrolled>
         <draft>El contenido es un borrador</draft>
-        <published>El contenido es p\u00fablico</published>
+        <published>El contenido es público</published>
         <obsolete>El contenido es obsoleto</obsolete>
       </changeState>
     </StageAndVersionPublicationPlugin>

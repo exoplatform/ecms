@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   ###################### global word for ECM dialogs resoucebundle ####
@@ -30,7 +30,7 @@
         <title>#{word.title}</title>
         <summary>#{word.summary}</summary>
         <content>#{word.content}</content>
-        <lastModifiedDate>Dernière date de modification</lastModifiedDate>
+        <lastModifiedDate>Date de dernière modification</lastModifiedDate>
       </label>
     </dialog>
     <msg>
@@ -45,25 +45,25 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Nom</name>
-	    <categories>Catégories</categories>
-	    <recordCategoryIdentifier>Identification de la catégorie de l'Enregistrement</recordCategoryIdentifier>
-	    <dispositionAuthority>Auteur de la disposition</dispositionAuthority>
-	    <permanentRecordIndicator>Indicateur d'enregistrement permanent</permanentRecordIndicator>
-	    <containsRecordFolders>Dossier contenant l'Enregistrement</containsRecordFolders>
-	    <defaultMediaType>Type de média par défaut</defaultMediaType>
-	    <defaultMarkingList>Liste de marquage par défaut</defaultMarkingList>
-	    <defaultOriginatingOrganization>Organisation émettrice par défaut</defaultOriginatingOrganization>
-	    <vitalRecordIndicator>Indicateur d'enregistrement vital</vitalRecordIndicator>
-	    <processCutoff>Processus de prélèvement</processCutoff>
-	    <eventTrigger>Déclenchement d'évènement</eventTrigger>
-	    <processHold>Suspension du Processus</processHold>
-	    <processTransfer>Processus de transfert</processTransfer>
-	    <transferBlockSize>Taille du bloc de transfert</transferBlockSize>
-	    <processAccession>Processus d'acquisition</processAccession>
-	    <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
-	    <processDestruction>Processus de destruction</processDestruction>
-	    <location>Emplacement</location>
-	    <LinkURL>URL</LinkURL>
+      <categories>Catégories</categories>
+      <recordCategoryIdentifier>Identifiant de la catégorie de l'Enregistrement</recordCategoryIdentifier>
+      <dispositionAuthority>Auteur de la déposition</dispositionAuthority>
+      <permanentRecordIndicator>Indicateur d'enregistrement permanent</permanentRecordIndicator>
+      <containsRecordFolders>Dossier contenant l'Enregistrement</containsRecordFolders>
+      <defaultMediaType>Type de média par défaut</defaultMediaType>
+      <defaultMarkingList>Liste de marquage par défaut</defaultMarkingList>
+      <defaultOriginatingOrganization>Organisation émettrice par défaut</defaultOriginatingOrganization>
+      <vitalRecordIndicator>Indicateur d'enregistrement vital</vitalRecordIndicator>
+      <processCutoff>Processus de prélèvement</processCutoff>
+      <eventTrigger>Déclenchement d'évènement</eventTrigger>
+      <processHold>Suspension du Processus</processHold>
+      <processTransfer>Processus de transfert</processTransfer>
+      <transferBlockSize>Taille du bloc de transfert</transferBlockSize>
+      <processAccession>Processus d'acquisition</processAccession>
+      <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
+      <processDestruction>Processus de destruction</processDestruction>
+      <location>Emplacement</location>
+      <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
   <!--
@@ -79,7 +79,7 @@
         <author>Auteur</author>
         <explicit>Explicite</explicit>
         <category>Catégorie</category>
-        <keywords>Mot Clé</keywords>
+        <keywords>Mot-clé</keywords>
         <publish-date>Date de Publication</publish-date>
         <description>Description</description>
         <upload-file>Uploader un Fichier</upload-file>
@@ -154,9 +154,9 @@
         <record-properties>Propriétés de l'Enregistrement</record-properties>
         <process-properties>Propriétés du Processus</process-properties>
         <note>Note du File Plan</note>
-        <record-category-identifier>Identification de la catégorie de l'Enregistrement</record-category-identifier>
-        <disposition-author>Auteur de la disposition</disposition-author>
-        <disposition-instruction>Instructions de la disposition</disposition-instruction>
+        <record-category-identifier>Identifiant de la catégorie de l'Enregistrement</record-category-identifier>
+        <disposition-author>Auteur de la déposition</disposition-author>
+        <disposition-instruction>Instructions de la déposition</disposition-instruction>
         <permanent-record-indicator>Indicateur d'enregistrement permanent</permanent-record-indicator>
         <contain-record-folder>Dossier contenant l'Enregistrement</contain-record-folder>
         <default-media-type>Type de média par défaut</default-media-type>
@@ -282,6 +282,9 @@
         <password>#{word.password}</password>
         <description>#{word.description}</description>
         <stote-path>Emplacement de sauvegarde</stote-path>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </Getmail>
@@ -295,7 +298,7 @@
         <action-name>Nom de l'action</action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <calendar-file-name>Nom du fichier calendrier</calendar-file-name>
+        <calendar-file-name>Nom du calendrier</calendar-file-name>
         <query-items>#{Ecm.dialog.label.query-items}</query-items>
       </label>
     </dialog>
@@ -307,7 +310,7 @@
     <dialog>
       <label>
         <id>Id</id>
-        <feed-action-name>Créer un nom de flux</feed-action-name>
+        <feed-action-name>Créer un flux</feed-action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
         <start-time>#{Ecm.dialog.label.start-time}</start-time>
@@ -323,7 +326,7 @@
         <feed-type>Type de flux</feed-type>
         <summary>Sommaire</summary>
         <title>Titre</title>
-        <rss-version>Version Rss</rss-version>
+        <rss-version>Version RSS</rss-version>
         <link>Lien</link>
         <description>#{word.description}</description>
         <language>Langue</language>
@@ -334,6 +337,9 @@
         <image-url>URL de l'image</image-url>
         <category>#{word.category}</category>
         <keywords>Mots clés</keywords>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </Rss>
@@ -348,6 +354,9 @@
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadonnée</metadata>
         <description>#{word.description}</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -361,6 +370,9 @@
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </ReloadAction>
@@ -381,6 +393,9 @@
         <cron-expression>Commande Cron</cron-expression>
         <description>#{word.description}</description>
         <mail-to>Envoyer l'email à</mail-to>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </SendMail>
@@ -400,6 +415,9 @@
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
         <cron-expression>Commande Cron</cron-expression>
         <description>#{word.description}</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </Transform>
@@ -419,6 +437,9 @@
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
         <cron-expression>Commande Cron</cron-expression>
         <description>#{word.description}</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -438,6 +459,9 @@
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
         <cron-expression>Commande Cron</cron-expression>
         <description>#{word.description}</description>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -658,7 +682,7 @@
       <label>
         <version-history>L'historique des versions</version-history>
         <base-version>Version de base</base-version>
-        <is-checked-out>Est extrait</is-checked-out>
+        <is-checked-out>Est en état check out</is-checked-out>
         <predecessors>Prédécesseurs</predecessors>
         <merge-failed>Echec de la fusion</merge-failed>
         <uuid>UUID</uuid>
@@ -671,7 +695,7 @@
   <VitalRecord>
     <dialog>
       <label>
-        <is-vital-record>Le Record est vital</is-vital-record>
+        <is-vital-record>Enregistrement vital</is-vital-record>
         <prev-review-date>Date de revue précédente</prev-review-date>
         <next-review-date>Date de revue suivante</next-review-date>
       </label>
@@ -710,7 +734,7 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-
+  #
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -722,134 +746,45 @@
         <homePath>Chemin Racine</homePath>
         <targetWorkspace>Espace de travail Cible</targetWorkspace>
         <targetPath>Chemin Cible</targetPath>
+        <isDeep>Récursif</isDeep>
+        <nodetypes>Types de noeuds</nodetypes>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
-   <form>
-   	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
-   </form>
+    <form>
+      <DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
+    </form>
   </UIDialogForm>
-
   <!--
   #####Since version 2.6#######
-
+  #
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <no>Non</no>
-	<yes>Oui</yes>
-	<true>Vrai</true>
-	<false>Faux</false>
-	<Electronic>Électronique</Electronic>
-	<Paper>Papier</Paper>
-	<NONE>Aucun</NONE>
-	<CLASSIFIED>Classé</CLASSIFIED>
-	<UNCLASSIFIED>Non classé</UNCLASSIFIED>
-	<NOCONTRACT>Aucun contrat</NOCONTRACT>
-	<true>Vrai</true>
-	<false>Faux</false>
-	<one-minute>Une fois par Minute</one-minute>
-	<hourly>Une fois par heure</hourly>
-	<daily>Journalier</daily>
-	<quarterly>Trimestriel</quarterly>
-	<yearly>Annuel</yearly>
-	<ten-years>Tous les 10 ans</ten-years>
-	<read>Action Utilisateur</read>
-	    <schedule>Planificateur</schedule>
-        <node_added>Content Addition</node_added>
-        <node_removed>Ajout de contenu</node_removed>
-        <property_added>Ajout de la propriété</property_added>
-        <property_removed>Enlèvement de la propriété</property_removed>
-        <property_changed>Modification de la propriété</property_changed>
-    <SendMail>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </SendMail>
-
-  <ScriptAction>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </ScriptAction>
-
-  <Getmail>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </Getmail>
-
-  <Rss>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </Rss>
-
-  <AddMetadata>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </AddMetadata>
-
-  <ReloadAction>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </ReloadAction>
-
-  <Transform>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </Transform>
-
-  <EnableVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </EnableVersioning>
-  <AutoVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </AutoVersioning>
-		
+  <yes>Oui</yes>
+  <true>Vrai</true>
+  <false>Faux</false>
+  <Electronic>Électronique</Electronic>
+  <Paper>Papier</Paper>
+  <NONE>Aucun</NONE>
+  <CLASSIFIED>Classé</CLASSIFIED>
+  <UNCLASSIFIED>Non classé</UNCLASSIFIED>
+  <NOCONTRACT>Aucun contrat</NOCONTRACT>
+  <one-minute>Une fois par Minute</one-minute>
+  <hourly>Une fois par heure</hourly>
+  <daily>Journalier</daily>
+  <quarterly>Trimestriel</quarterly>
+  <yearly>Annuel</yearly>
+  <ten-years>Tous les 10 ans</ten-years>
+  <read>Action Utilisateur</read>
+  <schedule>Planificateur</schedule>
+  <node_added>Ajout de contenu</node_added>
+  <node_removed>Suppression de contenu</node_removed>
+  <property_added>Ajout de la propriété</property_added>
+  <property_removed>Suppression de la propriété</property_removed>
+  <property_changed>Modification de la propriété</property_changed>
   <!--
   ###################### resoucebundle exo:contentPublishing dialogs template ####
   -->
@@ -870,24 +805,22 @@
         <backup-path>Emplacement de la sauvegarde</backup-path>
         <trash-workspace>Espace de la corbeille</trash-workspace>
         <trash-path>Emplacement de la corbeille</trash-path>
-								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </ContentPublishing>
-				
   <AccessibleMedia>
-  	<dialog>
-  		<label>
-  			<captions>Sous-titres</captions>
-				<audioDescription>Description audio</audioDescription>
-				<alternativeText>Texte alternatif</alternativeText>
-			</label>
-		</dialog>
-		<help>
-			<CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
-			<AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
-			<AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
-		</help>
-	</AccessibleMedia>
-  
+    <dialog>
+      <label>
+        <captions>Sous-titres</captions>
+        <audioDescription>Description audio</audioDescription>
+        <alternativeText>Texte alternatif</alternativeText>
+      </label>
+    </dialog>
+    <help>
+      <CaptionsHelp>Les sous-titres communiquent le contenu des dialogues mais aussi toutes informations audio importantes.</CaptionsHelp>
+      <AudioDescriptionHelp>Narration ajoutée à une piste sonore pour décrire les détails visuels importants.</AudioDescriptionHelp>
+      <AlternativeTextHelp>Fournir une alternative accessible pour présenter l'information</AlternativeTextHelp>
+    </help>
+  </AccessibleMedia>
 </bundle>

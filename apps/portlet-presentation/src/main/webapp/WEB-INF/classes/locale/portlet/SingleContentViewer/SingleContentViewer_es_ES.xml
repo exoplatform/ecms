@@ -3,7 +3,7 @@
   <UIPresentationContainer>
     <title>
       <QuickEdit>Editar en el explorador de contenido</QuickEdit>
-      <print>Imprimir esta p\u00e1gina</print>
+      <print>Imprimir esta página</print>
       <FastPublish>Publicar</FastPublish>
     </title>
     <label>
@@ -11,9 +11,9 @@
       <print>Imprimir</print>
     </label>
     <msg>
-      <no-content>No se encontr\u00f3 contenido.</no-content>
-      <internal-server-error>Un error ocurri\u00f3 al solicitar los datos desde el servidor.</internal-server-error>
-      <empty-title-error>Por favor especifique el nuevo t\u00edtulo.</empty-title-error>
+      <no-content>No se encontró contenido.</no-content>
+      <internal-server-error>Un error ocurrió al solicitar los datos desde el servidor.</internal-server-error>
+      <empty-title-error>Por favor especifique el nuevo título.</empty-title-error>
     </msg>
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
@@ -23,7 +23,7 @@
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
     <msg>
-      <AccessControlException>No tiene permiso para acceder al modo de edici\u00f3n.</AccessControlException>
+      <AccessControlException>No tiene permiso para acceder al modo de edición.</AccessControlException>
     </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
@@ -47,36 +47,36 @@
     </action>
     <title>Preferencias del detalle de contenido</title>
     <label>
-      <Back>Volver a la p\u00e1gina anterior</Back>
+      <Back>Volver a la página anterior</Back>
       <Edit>Editar</Edit>
       <Preferences>Preferencias</Preferences>
       <Title>Preferencias de detalle de contenido</Title>
-      <UISCVShowTitleConfigurationCheckBox>Mostrar t\u00edtulo</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowTitleConfigurationCheckBox>Mostrar título</UISCVShowTitleConfigurationCheckBox>
       <UISCVShowDateConfigurationCheckBox>Mostrar fecha</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Mostrar barra de opci\u00f3n</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Configuraci\u00f3n de pantalla</DisplaySettingBlock>
-      <ContentPathBlock>Selecci\u00f3n de contenido</ContentPathBlock>
+      <UISCVShowOptionBarConfigurationCheckBox>Mostrar barra de opción</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Configuración de pantalla</DisplaySettingBlock>
+      <ContentPathBlock>Selección de contenido</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Ruta del contenido</UISCVConfigItemPathFormInputSet>
       <UISCVContentPathConfigurationInputBox>Ruta del contenido</UISCVContentPathConfigurationInputBox>
       <Advance>Avanzado</Advance>
-      <ContextCaption>Navegaci\u00f3n din\u00e1mica</ContextCaption>
+      <ContextCaption>Navegación dinámica</ContextCaption>
       <UISCVContextualRadioBox>Contenido contextual</UISCVContextualRadioBox>
       <UISCVParameterInputBox>por</UISCVParameterInputBox>
-      <PrintSettingBlock>Configuraci\u00f3n de impresora</PrintSettingBlock>
+      <PrintSettingBlock>Configuración de impresora</PrintSettingBlock>
       <UISCVPrintPageParameter>con</UISCVPrintPageParameter>
-      <UISCVConfigPrintPageFormInputSet>Mostrar en p\u00e1gina</UISCVConfigPrintPageFormInputSet>
+      <UISCVConfigPrintPageFormInputSet>Mostrar en página</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Cerrar</LockStatus>
       <CacheManagement>Visibilidad de contenido</CacheManagement>
       <UISCVCacheRadioBox>Compartir contenido</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Seleccione el contenido que desea mostrar.  La selecci\u00f3n por defecto ser\u00e1 remplazada din\u00e1micamente si activa la navegaci\u00f3n din\u00e1mica (modo avanzado, ver debajo).</ContentPathBlock>
-      <DisplaySettingBlock>Puede mostrar u ocultar la barra de opciones que se utiliza para mostrar el enlace de impresi\u00f3n. La muestra de t\u00edtulo y fecha tambi\u00e9n es opcional.</DisplaySettingBlock>
-      <ContextualHelp>Activa la navegaci\u00f3n din\u00e1mica.  El contenido puede ser cambiado din\u00e1micamente por otro par\u00e1metro basado en URL.</ContextualHelp>
-      <ParameterHelp>Este par\u00e1metro ser\u00e1 usado para conseguir el contenido si la navegaci\u00f3n din\u00e1mica es activada.</ParameterHelp>
+      <ContentPathBlock>Seleccione el contenido que desea mostrar.  La selección por defecto será remplazada dinámicamente si activa la navegación dinámica (modo avanzado, ver debajo).</ContentPathBlock>
+      <DisplaySettingBlock>Puede mostrar u ocultar la barra de opciones que se utiliza para mostrar el enlace de impresión. La muestra de título y fecha también es opcional.</DisplaySettingBlock>
+      <ContextualHelp>Activa la navegación dinámica.  El contenido puede ser cambiado dinámicamente por otro parámetro basado en URL.</ContextualHelp>
+      <ParameterHelp>Este parámetro será usado para conseguir el contenido si la navegación dinámica es activada.</ParameterHelp>
     </help>
     <msg>
-      <not-valid-path>El camino del item no es v\u00e1lido.</not-valid-path>
+      <not-valid-path>El camino del item no es válido.</not-valid-path>
     </msg>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
@@ -86,24 +86,24 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Mostrar en p\u00e1gina</SelectTargetPage>
+      <SelectTargetPage>Mostrar en página</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
     <archived>Archivado</archived>
     <obsolete>Obsoleto</obsolete>
-    <unpublished>In\u00e9dito</unpublished>
+    <unpublished>Inédito</unpublished>
     <enrolled>Inscrito</enrolled>
     <draft>Borrador</draft>
     <pending>Pendiente</pending>
     <approved>Aprobado</approved>
-    <inreview>En Revisi\u00f3n</inreview>
+    <inreview>En Revisión</inreview>
     <staged>Escenificado</staged>
     <published>Publicado</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
-      <Enable>Restringido por autenticaci\u00f3n</Enable>
+      <Enable>Restringido por autenticación</Enable>
       <Disable>Restringido por roles de usuario</Disable>
     </label>
   </UISCVCacheRadioBox>

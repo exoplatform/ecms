@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UINewsletterViewerForm>
     <msg>
@@ -8,10 +8,10 @@
       <checkSubscriptionToProcess>S'il vous plaît, valider un ou plusieurs abonnements avant de soumettre</checkSubscriptionToProcess>
       <alreadyExistedEmail>Cet email est déjà inscrit. Merci d'utiliser une autre adresse.</alreadyExistedEmail>
       <canNotSubcribed>Inscription impossible. Merci d'essayer à nouveau.</canNotSubcribed>
-      <get-checked>erreur lorsque vous effectuez obtenir d'abonnement sont contrôlés. </get-checked>
+      <get-checked>Une erreur est survenue en accedant  aux abonnements.</get-checked>
     </msg>
     <action>
-      <Subcribe>Je m'inscris</Subcribe>
+      <Subcribe>S'inscrire</Subcribe>
       <ForgetEmail>Oublier cet email</ForgetEmail>
       <ChangeSubcriptions>Modifier mon Abonnement</ChangeSubcriptions>
     </action>
@@ -23,7 +23,7 @@
     <Email>
       <ConfirmUser>
         <Subject>Confirmation d'abonnement aux Newsletters</Subject>
-        <Content>Cliquez #ici# pour valider votre inscription aux Newsletters.</Content>
+        <Content>Cliquez #ici# pour valider votre inscription.</Content>
       </ConfirmUser>
     </Email>
   </UINewsletterViewerForm>

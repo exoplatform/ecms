@@ -7,7 +7,7 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Solicitar aprobaci\u00f3n</PublicationRequestApproval>
+      <PublicationRequestApproval>Solicitar aprobación</PublicationRequestApproval>
       <PublicationApproveContent>Aprobar el contenido</PublicationApproveContent>
       <PublicationPublish>Publicar</PublicationPublish>
       <ShowDrives>Mostrar u ocultar las unidades</ShowDrives>
