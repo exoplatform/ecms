@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <NoneHTMLValidator>
+    <msg>
+      <invalid>Etiquetas HTML no pueden utilizarse en el campo "{0}"</invalid>
+    </msg>
+  </NoneHTMLValidator>
+  <NewsletterPortlet>
+    <action>
+      <Preferences>Preferencias</Preferences>
+      <Save>Guardar</Save>
+      <Open>Abierto</Open>
+      <Cancel>Cancelar</Cancel>
+      <Close>Cerrar</Close>
+      <Down>Abajo</Down>
+      <Up>Arriba</Up>
+      <Delete>Borrar</Delete>
+      <Edit>Editar</Edit>
+      <Moderation>Moderaci\u00f3n</Moderation>
+      <CreateLetter>Carta Nueva</CreateLetter>
+      <UpdateNewsletter>Actualizar los par\u00e1metros de env\u00edo</UpdateNewsletter>
+      <RemoveModerators>Eliminar</RemoveModerators>
+    </action>
+    <title>
+      <eXoNewsletter>Bolet\u00edn eXo</eXoNewsletter>
+      <Preferences>Preferencias</Preferences>
+    </title>
+  </NewsletterPortlet>
+  <UITabPane>
+    <title>
+      <UIManagerUsers>Usuarios P\u00fablicos</UIManagerUsers>
+      <UIManagerModerator>Administrar los Usuarios</UIManagerModerator>
+    </title>
+  </UITabPane>
+  <UIWebcontentSelectorFormPopupWindow>
+    <title>
+      <UINewsletterEntryWebcontentSelectorForm>Formulario de selector de contenido web</UINewsletterEntryWebcontentSelectorForm>
+    </title>
+  </UIWebcontentSelectorFormPopupWindow>
+  <UIWebcontentSelectorPopupWindow>
+    <title>
+      <UIWebContentTabSelector>Selector de WebContent</UIWebContentTabSelector>
+    </title>
+  </UIWebcontentSelectorPopupWindow>
+  <FormWebcontentSelector>
+    <title>
+      <SelectWebcontent>Seleccionar Webcontent</SelectWebcontent>
+    </title>
+  </FormWebcontentSelector>
+  <UICategoryFormPopupWindow>
+    <title>
+      <UICategoryForm>Crear nueva categor\u00eda</UICategoryForm>
+    </title>
+  </UICategoryFormPopupWindow>
+  <UISubscriptionFormPopupWindow>
+    <title>
+      <UISubcriptionForm>Crear nueva suscripci\u00f3n</UISubcriptionForm>
+      <UIManagerUsers>Administrador de usuarios</UIManagerUsers>
+    </title>
+  </UISubscriptionFormPopupWindow>
+  <UINewsletterEntryFormPopupWindow>
+    <title>
+      <UINewsletterEntryContainer>Entrada del bolet\u00edn</UINewsletterEntryContainer>
+    </title>
+    <action>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UINewsletterEntryFormPopupWindow>
+  <UIManagerUsersFormPopupWindow>
+    <title>
+      <UIManagerUsers>Gestionar Usuarios</UIManagerUsers>
+    </title>
+  </UIManagerUsersFormPopupWindow>
+  <UICategoryForm>
+    <msg>
+      <saveSuccess>La categor\u00eda se ha guardado correctamente.</saveSuccess>
+      <categoryNameIsNotEmpty>Se requiere el nombre de la categor\u00eda.</categoryNameIsNotEmpty>
+      <categoryTitleIsNotEmpty>Se requiere el t\u00edtulo de la categor\u00eda.</categoryTitleIsNotEmpty>
+      <categoryNameIsAlreadyExist>Ya existe este nombre de categor\u00eda.</categoryNameIsAlreadyExist>
+      <inputModeratorEmpty>Por favor, seleccione al menos un moderador para esta categor\u00eda.</inputModeratorEmpty>
+      <error-add-category>Error al agregar/editar la categor\u00eda.</error-add-category>
+      <doNotHaveModerators>No tiene moderadores.</doNotHaveModerators>
+    </msg>
+    <label>
+      <CategoryName>Nombre</CategoryName>
+      <CategoryTitle>T\u00edtulo</CategoryTitle>
+      <CategoryDescription>Descripci\u00f3n</CategoryDescription>
+      <FormCategoryModerator>Moderador</FormCategoryModerator>
+      <CategoryModerator>Moderador</CategoryModerator>
+    </label>
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UICategoryForm>
+  <UICategories>
+    <title>
+      <SubScription>Suscripci\u00f3n</SubScription>
+      <NumberOfUser>N\u00famero de Usuarios</NumberOfUser>
+      <AWaitingLetter>Carta pendiente</AWaitingLetter>
+      <NewsLetter>Carta Nueva</NewsLetter>
+      <NewsSubscription>Suscripci\u00f3n Nueva</NewsSubscription>
+      <NewsCategory>Nueva Categor\u00eda</NewsCategory>
+      <Administration>Administraci\u00f3n</Administration>
+    </title>
+    <msg>
+      <get-list-categories>Error al obtener la lista de categor\u00edas.</get-list-categories>
+      <get-list-subscriptions>Error al obtener la lista de suscripciones.</get-list-subscriptions>
+    </msg>
+  </UICategories>
+  <UISubscription>
+    <msg>
+      <confirmDeleteCategory>\u00bfEst\u00e1 seguro de eliminar esta categor\u00eda?</confirmDeleteCategory>
+      <confirmDeleteSubscription>\u00bfEst\u00e1 seguro de eliminar esta suscripci\u00f3n?</confirmDeleteSubscription>
+      <checkOnlyOneSubScriptionToEdit>Por favor seleccione s\u00f3lo una suscripci\u00f3n que desea editar.</checkOnlyOneSubScriptionToEdit>
+      <checkOnlyOneSubScriptionToDelete>Por favor, seleccione las suscripciones que desea eliminar.</checkOnlyOneSubScriptionToDelete>
+      <subscriptionNotfound>No existe el nombre de la suscripci\u00f3n.</subscriptionNotfound>
+      <checkOnlyOneSubScriptionToOpen>Por favor seleccione una suscripci\u00f3n que desee abrir.</checkOnlyOneSubScriptionToOpen>
+      <checkOneSubScriptionToEdit>Por favor seleccione una suscripci\u00f3n que desee editar.</checkOneSubScriptionToEdit>
+      <checkOneSubScriptionToOpen>Por favor seleccione una suscripci\u00f3n que desee abrir.</checkOneSubScriptionToOpen>
+      <checkOnlyOneNewsletterToEdit>Por favor, seleccione un s\u00f3lo bolet\u00edn que desea editar.</checkOnlyOneNewsletterToEdit>
+      <checkOnlyOneNewsletterToDelete>Por favor seleccione los boletines que desea eliminar.</checkOnlyOneNewsletterToDelete>
+      <checkOnlyOneNewsletterToOpen>Por favor, seleccione un s\u00f3lo bolet\u00edn que desee abrir.</checkOnlyOneNewsletterToOpen>
+      <checkOnlyOneNewsletterToConvert>Por favor, seleccione un s\u00f3lo bolet\u00edn que desee convertir.</checkOnlyOneNewsletterToConvert>
+      <checkOneNewsletterToEdit>Por favor, seleccione el bolet\u00edn que desea editar.</checkOneNewsletterToEdit>
+      <checkOneNewsletterToOpen>Por favor, seleccione el bolet\u00edn que desea abrir.</checkOneNewsletterToOpen>
+      <checkOneNewsletterToConvert>Por favor, seleccione el bolet\u00edn que desea convertir.</checkOneNewsletterToConvert>
+      <convertSuccessful>Convertir correctamente.</convertSuccessful>
+      <templateIsExist>Ya existe el nombre de la plantilla. Por favor, verifique de nuevo.</templateIsExist>
+      <get-list-subscriptions>Error al obtener la lista de suscripciones.</get-list-subscriptions>
+    </msg>
+    <title>
+      <ManageCategory>Gestionar categor\u00eda</ManageCategory>
+      <EditCategory>Editar Categor\u00eda</EditCategory>
+      <DeleteCategory>Borrar categor\u00eda</DeleteCategory>
+      <Edit>Editar</Edit>
+      <Delete>Borrar</Delete>
+      <ManageUsers>Gestionar Usuarios</ManageUsers>
+      <Open>Abrir</Open>
+    </title>
+  </UISubscription>
+  <FormCategoryModerator>
+    <title>
+      <SelectUser>Seleccionar Usuario</SelectUser>
+      <SelectMember>Seleccionar miembro</SelectMember>
+      <DeleteModerator>Borrar Moderador</DeleteModerator>
+    </title>
+  </FormCategoryModerator>
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectMembership>Seleccione la membres\u00eda</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>\u00bfEst\u00e1 seguro de eliminar esta categor\u00eda?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <UIUserMemberSelectorPopupWindow>
+    <title>
+      <UIUserMemberSelector>Selector del Usuario</UIUserMemberSelector>
+    </title>
+  </UIUserMemberSelectorPopupWindow>
+  <UIGroupMemberSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Selector de Grupo</UIGroupMemberSelector>
+    </title>
+  </UIGroupMemberSelectorPopupWindow>
+  <UISubcriptionForm>
+    <msg>
+      <saveSuccess>La suscripci\u00f3n se ha guardado correctamente.</saveSuccess>
+      <subcriptionNameIsNotEmpty>Se requiere el nombre de la suscripci\u00f3n.</subcriptionNameIsNotEmpty>
+      <subcriptionTitleIsNotEmpty>El t\u00edtulo de suscripci\u00f3n es requerido.</subcriptionTitleIsNotEmpty>
+      <subcriptionNameIsAlreadyExist>Ya existe este nombre de la suscripci\u00f3n.</subcriptionNameIsAlreadyExist>
+      <selectRedactorPermission>Especifique al menos un redactor para la suscripci\u00f3n.</selectRedactorPermission>
+    </msg>
+    <label>
+      <SubcriptionName>Nombre</SubcriptionName>
+      <SubcriptionTitle>T\u00edtulo</SubcriptionTitle>
+      <SubcriptionDescription>Descripci\u00f3n</SubcriptionDescription>
+      <CategoryName>Categor\u00eda</CategoryName>
+      <UIWCMSubscriptionRedactor>Redactor</UIWCMSubscriptionRedactor>
+      <UIWCMFormSubscriptionRedactor>Redactor</UIWCMFormSubscriptionRedactor>
+    </label>
+  </UISubcriptionForm>
+  <UINewsletterEntryForm>
+    <action>
+      <Select>Seleccionar</Select>
+      <Preview>Previsualizar</Preview>
+      <Save>Guardar</Save>
+      <Send>Enviar</Send>
+      <Cancel>Cancelar</Cancel>
+    </action>
+    <msg>
+      <UpdateBeforeSave>Favor de actualizar las preferencias del env\u00edo del bolet\u00edn antes de enviar o guardar.</UpdateBeforeSave>
+      <DateTimeIsNotNull>La fecha de env\u00edo est\u00e1 vac\u00eda. Por favor, verifique de nuevo.</DateTimeIsNotNull>
+      <DateTimeIsInvalid>La fecha de env\u00edo es v\u00e1lida. Por favor, verifique de nuevo.</DateTimeIsInvalid>
+      <UpdateInformationSuccessful>La informaci\u00f3n se ha actualizado correctamente.</UpdateInformationSuccessful>
+      <NodeNameInvalid>No se puede crear el bolet\u00edn porque este t\u00edtulo ya existe. Por favor, int\u00e9ntelo de nuevo.</NodeNameInvalid>
+      <get-template>Se produjo un error al intentar encontrar la plantilla.</get-template>
+      <get-template-resource>Se produjo un error al intentar encontrar la plantilla.</get-template-resource>
+      <add-email-newsletter>Error al agregar la direcci\u00f3n de correo electr\u00f3nico a la lista.</add-email-newsletter>
+      <send-newsletter>Error al enviar el bolet\u00edn.</send-newsletter>
+    </msg>
+  </UINewsletterEntryForm>
+  <UINewsletterEntryDialogSelector>
+    <action>
+      <OpenWebcontentSelectorForm>Abrir el selector de contenido web</OpenWebcontentSelectorForm>
+    </action>
+    <title>
+      <UINewsletterEntryTemplate>Plantilla</UINewsletterEntryTemplate>
+      <UINewsletterEntrySendDate>Enviar fecha</UINewsletterEntrySendDate>
+      <UINewsletterEntryCategorySelectBox>Categor\u00eda</UINewsletterEntryCategorySelectBox>
+      <UINetterEntrySubscriptionSelectBox>Suscripci\u00f3n</UINetterEntrySubscriptionSelectBox>
+      <UINewsletterEntrySubscriptionSelectBox>Suscripci\u00f3n</UINewsletterEntrySubscriptionSelectBox>
+    </title>
+    <msg>
+      <subcriptionIsNotEmpty>Se requiere el nombre de la suscripci\u00f3n.</subcriptionIsNotEmpty>
+    </msg>
+  </UINewsletterEntryDialogSelector>
+  <UIManagerUsers>
+    <header>
+      <Mail>Correo Electr\u00f3nico</Mail>
+      <isBanned>Prohibido</isBanned>
+      <action>Acciones</action>
+      <UserName>Nombre de Usuario</UserName>
+      <FirstName>Primer nombre</FirstName>
+      <LastName>Apellido</LastName>
+      <Email>Correo Electr\u00f3nico</Email>
+      <Role>Rol</Role>
+    </header>
+    <action>
+      <title>
+        <Edit>Editar</Edit>
+        <BanOrUnBanUser>Prohibir/ Desprohibir el Usuario</BanOrUnBanUser>
+        <DeleteUser>Borrar Usuario</DeleteUser>
+        <Addministrator>Administrador</Addministrator>
+        <AddAdministrator>Establecer como Administrador de Boletines de Noticias</AddAdministrator>
+        <DeleteAdministrator>Borrar Administrador</DeleteAdministrator>
+      </title>
+    </action>
+    <role>
+      <Administrator>Administrador</Administrator>
+      <Moderator>Moderador</Moderator>
+      <Redactor>Redactor</Redactor>
+      <User>Usuario</User>
+    </role>
+    <msg>
+      <get-list-users>Se ha producido un error al intentar encontrar la lista de los usuarios p\u00fablicos.</get-list-users>
+      <set-infor-users>Error al configurar la informaci\u00f3n para los usuarios.</set-infor-users>
+      <remove-admin-role-of-root>No puede remover el rol de administrador de super usuario.</remove-admin-role-of-root>
+    </msg>
+  </UIManagerUsers>
+  <UINewsletterEntryManager>
+    <msg>
+      <confirmDeleteNewsletter>\u00bfEst\u00e1s seguro de eliminar este bolet\u00edn?</confirmDeleteNewsletter>
+      <set-list-newsletter>Error al configurar la lista de entradas del bolet\u00edn.</set-list-newsletter>
+      <get-checked>Se produjo un error al obtener el bolet\u00edn; o se comprob\u00f3 la suscripci\u00f3n.</get-checked>
+      <canNotEditNewsletter>No puede editar el bolet\u00edn enviado. S\u00f3lo puede convertirlo como plantilla y crear una nueva carta con esta plantilla.</canNotEditNewsletter>
+    </msg>
+    <title>
+      <ConvertAsTemplate>Convertir en Plantilla</ConvertAsTemplate>
+      <Letter>Carta</Letter>
+      <Date>Fecha</Date>
+      <Status>Estado</Status>
+      <EditSubscription>Editar Suscripci\u00f3n</EditSubscription>
+      <CheckAll>Marcar todos</CheckAll>
+    </title>
+  </UINewsletterEntryManager>
+  <UINewsletterEntryViewForm>
+    <title>
+      <UINewsletterManagerPopup>Ver el Contenido del Bolet\u00edn de Noticias</UINewsletterManagerPopup>
+    </title>
+  </UINewsletterEntryViewForm>
+  <WebContent>
+    <dialog>
+      <label>
+        <Advanced>Avanzado</Advanced>
+      </label>
+    </dialog>
+  </WebContent>
+  <UIRemoveModeratorsFormPopupWindow>
+    <title>
+      <UIRemoveModerators>Eliminar Moderadores</UIRemoveModerators>
+    </title>
+    <msg>
+      <checkToRemove>Por favor, seleccione al menos un permiso en la lista que desea remover.</checkToRemove>
+      <donotMoveYourSelt>Acaba de remover su permiso de la lista.</donotMoveYourSelt>
+    </msg>
+  </UIRemoveModeratorsFormPopupWindow>
+</bundle>

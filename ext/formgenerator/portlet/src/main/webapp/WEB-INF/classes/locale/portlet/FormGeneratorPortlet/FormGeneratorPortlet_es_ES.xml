@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIFormGeneratorTabPane>
+    <label>
+      <UIFormGeneratorGeneralTab>General</UIFormGeneratorGeneralTab>
+      <FormGeneratorName>Nombre</FormGeneratorName>
+      <UIFormGeneratorNodetypeFormSelectBox>Seg\u00fan tipo de nodo</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorDescriptionFormWYSIWYGInput>Descripci\u00f3n</UIFormGeneratorDescriptionFormWYSIWYGInput>
+      <UIFormGeneratorIconFormUploadInput>Icono</UIFormGeneratorIconFormUploadInput>
+      <UIFormGeneratorDnDTab>Constructor de Formularios</UIFormGeneratorDnDTab>
+      <UIFormGeneratorOptionsTab>Opciones</UIFormGeneratorOptionsTab>
+      <UIFormGeneratorVoteFormCheckboxInput>Permitir la votaci\u00f3n</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>Permitir comentarios</UIFormGeneratorCommentFormCheckboxInput>
+    </label>
+    <action>
+      <Save>Guardar</Save>
+      <Reset>Restablecer</Reset>
+    </action>
+    <msg>
+      <register-failed>El registro del tipo de nodo no tuvo \u00e9xito.  El mismo ya existe o Super types es inv\u00e1lido.</register-failed>
+      <AddNewsSuccessful>La plantilla del tipo de nodo {0} fu\u00e9 generada exitosamente.</AddNewsSuccessful>
+      <duplicate-name>El campo del nombre de la etiqueta est\u00e1 duplicado. Favor de escribir otro.</duplicate-name>
+      <select-value-empty>Algunos campos en el valor predeterminado del cuadro de selecci\u00f3n no pueden estar vac\u00edos. Por favor a\u00f1ada los valores de entrada para los mismos.</select-value-empty>
+      <input-only-special-characters>El campo de etiqueta debe tiene car\u00e1cter alfanum\u00e9rico</input-only-special-characters>
+    </msg>
+  </UIFormGeneratorTabPane>
+  <FormGeneratorDialog>
+    <label>
+      <Download>Descargar este documento</Download>
+      <remove>Eliminar Item</remove>
+    </label>
+  </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>El campo '{0}' contiene algunos caracteres que no v\u00e1lidos. Por favor escriba otro valor.</Invalid-char>
+    </msg>
+  </ECMNameValidator>
+</bundle>

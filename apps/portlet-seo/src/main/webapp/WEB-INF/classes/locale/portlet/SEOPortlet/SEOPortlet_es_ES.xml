@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UISEOForm>
+    <label>
+      <description>Descripción:</description>
+      <keywords>Palabras claves:</keywords>
+      <language>Idioma:</language>
+      <robots>Robots:</robots>
+      <sitemap>Mapa del sitio:</sitemap>
+      <sitemapvisible>Visible en el mapa del sitio</sitemapvisible>
+      <isInherited>Heredado de la página principal</isInherited>
+      <priority>Prioridad:</priority>
+      <frequency>Frecuencia:</frequency>
+      <option>
+        <Always>Siempre</Always>
+        <Hourly>Por hora</Hourly>
+        <Daily>Diario</Daily>
+        <Weekly>Semanal</Weekly>
+        <Monthly>Mensual</Monthly>
+        <Yearly>Anual</Yearly>
+        <Never>Nunca</Never>
+      </option>
+    </label>
+    <tip>
+      <priority>Valores válidos oscilan entre 0.0 y 1.0</priority>
+    </tip>
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Ocurrió un error inesperado al guardar los metadatos de la página.</repository-exception>
+    </msg>
+    <help>
+      <priority>La prioridad de esta URL en relación con otras URLs en su sitio. El intérvalo de valores válidos van de 0.0 a 1.0. Este valor no afecta a cómo se comparan sus páginas a páginas de otros sitios, sólo permite a los motores de búsqueda saber las páginas que usted considere más importantes para los rastreadores. La prioridad predeterminada de una página es 0.5.</priority>
+    </help>
+  </UISEOForm>
+  <UISEOPopupWindow>
+    <title>
+      <UISEOForm>Gestión de SEO</UISEOForm>
+    </title>
+  </UISEOPopupWindow>
+  <UISEOToolbarForm>
+    <title>
+      <seo>Gestión de SEO</seo>
+    </title>
+  </UISEOToolbarForm>
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>El valor del campo de prioridad debe estar en el formato numérico. El intervalo de valores válidos es de 0.0 a 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>
+</bundle>

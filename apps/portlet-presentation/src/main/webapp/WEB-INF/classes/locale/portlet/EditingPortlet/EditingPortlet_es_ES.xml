@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <EditingPortlet>
+    <label>
+      <Editing>Modo:</Editing>
+    </label>
+    <msg>
+      <not-permission>No tienes permisos para realizar esta acci\u00f3n.</not-permission>
+    </msg>
+  </EditingPortlet>
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>Editar</Draft>
+        <Published>Publicado</Published>
+      </option>
+    </label>
+  </UIEditingForm>
+</bundle>

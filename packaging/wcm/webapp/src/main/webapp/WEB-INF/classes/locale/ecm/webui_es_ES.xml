@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Nombre</name>
+      <action>A\u00f1adir</action>
+    </header>
+    <info>
+      <child-not-found>\u00a1El subnodo no fu\u00e9 encontrado\!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Nombre de la Categor\u00eda</categoryName>
+      <categoryPath>Ruta de la categor\u00eda</categoryPath>
+      <action>Acci\u00f3n</action>
+    </header>
+    <action>
+      <SaveCategories>Guardar</SaveCategories>
+      <Cancel>Cancelar</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Las categor\u00edas no fueron guardadas.</cannot-save>
+      <have-saved>Las categor\u00edas fueron guardadas exitosamente</have-saved>
+      <non-categories>Las categor\u00edas son err\u00f3neas  Favor de seleccionar buenas categor\u00edas.</non-categories>
+      <confirm-delete>\u00bfDesea borrar esta categor\u00eda?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  #	 org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Seleccionar Usuario</UIPermissionUser>
+      <UIPermissionMembership>Seleccione la membres\u00eda</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Seleccionar Usuario</selectUser>
+      <selectGroup>Navegar y seleccionar un grupo</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Seleccione la membres\u00eda</selectUser>
+      <selectGroup>Navegar y seleccionar un Grupo</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

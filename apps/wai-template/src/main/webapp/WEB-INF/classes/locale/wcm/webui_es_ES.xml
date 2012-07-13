@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIPortalApplication>
+    <title>
+      <abort>Abortar</abort>
+    </title>
+  </UIPortalApplication>
+  <CategoryNavigationTemplate>
+    <label>
+      <home>Inicio</home>
+      <Accessibility>Accesibilidad</Accessibility>
+    </label>
+  </CategoryNavigationTemplate>
+  <Breadcrumb>
+    <label>
+      <home>Inicio</home>
+    </label>
+  </Breadcrumb>
+</bundle>
