@@ -8,9 +8,9 @@
       <label>
         <languages>Idiomas</languages>
         <summary>Resumen</summary>
-        <none-summary>El res\u00famen est\u00e1 vac\u00edo</none-summary>
+        <none-summary>El resúmen está vacío</none-summary>
         <content>Contenido</content>
-        <none-content>El contenido est\u00e1 vac\u00edo</none-content>
+        <none-content>El contenido está vacío</none-content>
         <link>Enlaces</link>
         <attachment>Archivos adjuntos</attachment>
       </label>
@@ -19,14 +19,14 @@
   <View>
     <label>
       <languages>
-        <en>Ingl\u00e9s</en>
-        <fr>Franc\u00e9s</fr>
+        <en>Inglés</en>
+        <fr>Francés</fr>
         <ru>Ruso</ru>
         <vi>Vietnamita</vi>
-        <nl>Holand\u00e9s</nl>
-        <de>Alem\u00e1n</de>
+        <nl>Holandés</nl>
+        <de>Alemán</de>
         <uk>Ucranio</uk>
-        <ar>\u00c1rabe</ar>
+        <ar>Árabe</ar>
       </languages>
     </label>
   </View>
@@ -47,13 +47,13 @@
   <Comment>
     <view>
       <label>
-        <postedBy>\u00daltimo comentario publicado por:</postedBy>
+        <postedBy>Último comentario publicado por:</postedBy>
         <at>en</at>
         <comments>Comentario (s)</comments>
         <show-comments>Mostrar comentarios</show-comments>
         <hide-comments>Ocultar comentarios</hide-comments>
         <comment-by>Comentado por</comment-by>
-        <email>Correo Electr\u00f3nico</email>
+        <email>Correo Electrónico</email>
         <site>Sitio</site>
       </label>
     </view>
@@ -78,9 +78,9 @@
         <december>Diciembre</december>
         <event>Evento</event>
         <subject>Asunto</subject>
-        <location>Localizaci\u00f3n</location>
+        <location>Localización</location>
         <comment>Comentario</comment>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
       </label>
     </view>
   </Event>
@@ -107,38 +107,38 @@
     <view>
       <label>
         <content>Archivar el Contenido del Plan</content>
-        <record-category-identifier>Identificador de Categor\u00eda de Registro</record-category-identifier>
-        <disposition-author>Autoridad de la disposici\u00f3n</disposition-author>
-        <disposition-instruction>Instrucciones de la Disposici\u00f3n</disposition-instruction>
+        <record-category-identifier>Identificador de Categoría de Registro</record-category-identifier>
+        <disposition-author>Autoridad de la disposición</disposition-author>
+        <disposition-instruction>Instrucciones de la Disposición</disposition-instruction>
         <permanent-record-indicator>Indicador del archivo permanente</permanent-record-indicator>
         <contain-record-folder>Contiene Archivos de Registro</contain-record-folder>
-        <default-media-type>Tipo de medios de comunicaci\u00f3n predeterminado</default-media-type>
+        <default-media-type>Tipo de medios de comunicación predeterminado</default-media-type>
         <default-marking-list>Lista de marca predeterminada</default-marking-list>
-        <default-originating-organization>Organizaci\u00f3n Emitida por Defecto</default-originating-organization>
-        <number-of-record>N\u00famero de Registros</number-of-record>
+        <default-originating-organization>Organización Emitida por Defecto</default-originating-organization>
+        <number-of-record>Número de Registros</number-of-record>
         <record>Registros</record>
         <obsolete-record>Registros Obsoletos</obsolete-record>
         <supreseded-record>Registros reemplazados</supreseded-record>
         <vital-record>Registros vitales</vital-record>
         <cutoff-record>Archivos del corte</cutoff-record>
-        <holdable-record>Expedientes de Suspensi\u00f3n</holdable-record>
+        <holdable-record>Expedientes de Suspensión</holdable-record>
         <transferable-record>Registros transferibles</transferable-record>
         <accessionable-record>Registros accesibles</accessionable-record>
         <destroyable-record>Archivos Destruibles</destroyable-record>
         <record-id>Id de Registro</record-id>
         <record-name>Nombre de Registro</record-name>
         <originator>Creador</originator>
-        <date-received>Fecha de recepci\u00f3n</date-received>
+        <date-received>Fecha de recepción</date-received>
         <originating-organization>Origen del organismo</originating-organization>
-        <next-review-date>Pr\u00f3xima fecha de revisi\u00f3n</next-review-date>
-        <previous-review-date>Fecha de revisi\u00f3n previa</previous-review-date>
-        <cutoff-date>Fecha de extracci\u00f3n</cutoff-date>
-        <hold-until>Suspensi\u00f3n hasta</hold-until>
+        <next-review-date>Próxima fecha de revisión</next-review-date>
+        <previous-review-date>Fecha de revisión previa</previous-review-date>
+        <cutoff-date>Fecha de extracción</cutoff-date>
+        <hold-until>Suspensión hasta</hold-until>
         <transfer-date>Fecha de transferencia</transfer-date>
-        <transfer-location>Localizaci\u00f3n de la transferencia</transfer-location>
+        <transfer-location>Localización de la transferencia</transfer-location>
         <accession-date>Fecha de acceso</accession-date>
-        <accession-location>Ubicaci\u00f3n del acceso</accession-location>
-        <destruction-date>Fecha de destrucci\u00f3n</destruction-date>
+        <accession-location>Ubicación del acceso</accession-location>
+        <destruction-date>Fecha de destrucción</destruction-date>
       </label>
     </view>
   </FilePlan>
@@ -175,16 +175,16 @@
     <view>
       <label>
         <podcast>Podcast</podcast>
-        <title>T\u00edtulo</title>
+        <title>Título</title>
         <link>Enlace</link>
         <author>Autor</author>
-        <explicit>Expl\u00edcito</explicit>
-        <category>Categor\u00eda</category>
+        <explicit>Explícito</explicit>
+        <category>Categoría</category>
         <keyword>Palabras claves</keyword>
-        <publish-date>Fecha de Publicaci\u00f3n</publish-date>
+        <publish-date>Fecha de Publicación</publish-date>
         <mime-type>Tipo Mime</mime-type>
         <length>Longitud</length>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
       </label>
     </view>
   </Podcast>
@@ -195,10 +195,10 @@
     <view>
       <label>
         <node-name>Nombre del Nodo</node-name>
-        <title>T\u00edtulo</title>
+        <title>Título</title>
         <date>Fecha</date>
         <date-time>Fecha hora</date-time>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <image>Imagen</image>
         <summary>Resumen</summary>
         <content>Contenido</content>
@@ -213,7 +213,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Calificaci\u00f3n promedio</avg-rating>
+        <avg-rating>Calificación promedio</avg-rating>
         <subscription>Votos</subscription>
       </label>
     </view>
@@ -227,9 +227,9 @@
         <name>Nombre</name>
         <versionable>Versionable</versionable>
         <exo_owner>Propietario</exo_owner>
-        <exo_dateCreated>Fecha de creaci\u00f3n</exo_dateCreated>
-        <exo_dateModified>Fecha de Modificaci\u00f3n</exo_dateModified>
-        <auditing>Auditor\u00eda</auditing>
+        <exo_dateCreated>Fecha de creación</exo_dateCreated>
+        <exo_dateModified>Fecha de Modificación</exo_dateModified>
+        <auditing>Auditoría</auditing>
       </label>
     </view>
   </ListView>
@@ -241,10 +241,10 @@
       <label>
         <name>Nombre</name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <validator>Validador</validator>
         <to-workspace>Al espacio de trabajo</to-workspace>
-        <at-location>En Ubicaci\u00f3n</at-location>
+        <at-location>En Ubicación</at-location>
       </label>
     </view>
   </Workflow>
@@ -256,9 +256,9 @@
       <label>
         <name>Nombre</name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <to-workspace>Al espacio de trabajo</to-workspace>
-        <at-location>En Ubicaci\u00f3n</at-location>
+        <at-location>En Ubicación</at-location>
       </label>
     </view>
   </Backup>
@@ -268,14 +268,14 @@
   <Getmail>
     <view>
       <label>
-        <name>Nombre de la acci\u00f3n</name>
+        <name>Nombre de la acción</name>
         <lifecycle>Ciclo de vida</lifecycle>
         <protocol>Protocolo</protocol>
         <host>Servidor</host>
         <port>Puerto</port>
         <folder>Archivo</folder>
         <username>Nombre de Usuario</username>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <stote-path>Ruta de almacenamiento</stote-path>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
@@ -290,10 +290,10 @@
   <Icalendar>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <calendar-path>Ruta del Calendario</calendar-path>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <query>Consulta</query>
         <repository>Repositorio</repository>
       </label>
@@ -305,31 +305,31 @@
   <Rss>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <feed-name>Nombre del Flujo</feed-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <schedule-type>Tipo de Programa</schedule-type>
         <start-time>Hora de inicio</start-time>
-        <end-time>Hora de finalizaci\u00f3n</end-time>
-        <repeat-count>N\u00famero de Repeticiones</repeat-count>
-        <time-inteval>Int\u00e9rvalo de Tiempo</time-inteval>
-        <cron-expression>Expresi\u00f3n de cron</cron-expression>
+        <end-time>Hora de finalización</end-time>
+        <repeat-count>Número de Repeticiones</repeat-count>
+        <time-inteval>Intérvalo de Tiempo</time-inteval>
+        <cron-expression>Expresión de cron</cron-expression>
         <feed-node-name>Nombre del nodo del feed</feed-node-name>
         <feed-store-path>Ruta de almacenamiento del feed</feed-store-path>
         <query-items>Elementos de Consulta</query-items>
         <rss-url>URL RSS</rss-url>
-        <feed-title>T\u00edtulo del Feed</feed-title>
+        <feed-title>Título del Feed</feed-title>
         <feed-type>Tipo de Feed</feed-type>
-        <rss-version>Versi\u00f3n RSS</rss-version>
+        <rss-version>Versión RSS</rss-version>
         <link>Enlace</link>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <language>idioma</language>
         <copyright>Derechos de autor</copyright>
-        <publish-date>Fecha de Publicaci\u00f3n</publish-date>
+        <publish-date>Fecha de Publicación</publish-date>
         <owner-name>Nombre del propietario</owner-name>
-        <owner-email>Correo electr\u00f3nico del propietario</owner-email>
+        <owner-email>Correo electrónico del propietario</owner-email>
         <image-url>Imagen del URL</image-url>
-        <category>Categor\u00eda</category>
+        <category>Categoría</category>
         <keywords>Palabras claves</keywords>
         <query-path>Ruta de Consulta</query-path>
         <isDeep>Es profundo</isDeep>
@@ -345,10 +345,10 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <metadata>Metadato</metadata>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
@@ -362,9 +362,9 @@
   <ReloadAction>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
@@ -378,9 +378,9 @@
   <SendMail>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <mail-to>Enviar correo a</mail-to>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
@@ -397,7 +397,7 @@
       <label>
         <action-name>Nombre</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
@@ -411,9 +411,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Nombre de la acci\u00f3n</action-name>
+        <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
@@ -429,7 +429,7 @@
       <label>
         <action-name>Nombre</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
@@ -444,7 +444,7 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
-        <title>T\u00edtulo</title>
+        <title>Título</title>
         <creator>Creador</creator>
         <subject>Asunto</subject>
         <source>Origen</source>
@@ -452,21 +452,21 @@
         <resource-type>Tipo de Recursos</resource-type>
         <date>Fecha</date>
         <publisher>Editor</publisher>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
         <rights>Derechos</rights>
-        <relation>Relaci\u00f3n</relation>
+        <relation>Relación</relation>
         <format>Formato</format>
         <coverage>Cobertura</coverage>
         <identifier>Identificador</identifier>
         <languages>Idiomas</languages>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -477,20 +477,20 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <cutoff-executed>Extracci\u00f3n Ejecutada</cutoff-executed>
+        <cutoff-executed>Extracción Ejecutada</cutoff-executed>
         <cutoff-now>Cortar ahora</cutoff-now>
-        <cutoff-date-time>Planificaci\u00f3n para la extracci\u00f3n</cutoff-date-time>
-        <cutoff-event>Evento de extracci\u00f3n</cutoff-event>
-        <cutoff-obsolete>Extracci\u00f3n obsoleta</cutoff-obsolete>
-        <cutoff-superseded>Extracci\u00f3n de reemplazo</cutoff-superseded>
+        <cutoff-date-time>Planificación para la extracción</cutoff-date-time>
+        <cutoff-event>Evento de extracción</cutoff-event>
+        <cutoff-obsolete>Extracción obsoleta</cutoff-obsolete>
+        <cutoff-superseded>Extracción de reemplazo</cutoff-superseded>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </Cutoffable>
@@ -501,15 +501,15 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <destruction-date>Fecha de destrucci\u00f3n</destruction-date>
+        <destruction-date>Fecha de destrucción</destruction-date>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </Destroyable>
@@ -524,7 +524,7 @@
         <accession-date>Fecha de acceso</accession-date>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
@@ -539,19 +539,19 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <hold-executed>Ejecuci\u00f3n de la Suspensi\u00f3n</hold-executed>
-        <hold-until>Suspensi\u00f3n hasta</hold-until>
-        <holds-discretionary>Suspensi\u00f3n discrecional</holds-discretionary>
+        <hold-executed>Ejecución de la Suspensión</hold-executed>
+        <hold-until>Suspensión hasta</hold-until>
+        <holds-discretionary>Suspensión discrecional</holds-discretionary>
         <hold-until-event>Suspender hasta el evento</hold-until-event>
         <freeze>Congelar</freeze>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </Holdable>
@@ -564,28 +564,28 @@
         <not-available>N/A</not-available>
         <supplemental-marking-list>Lista de marcado suplementario</supplemental-marking-list>
         <subject>Asunto</subject>
-        <record-identifier>Registro de Identificaci\u00f3n</record-identifier>
+        <record-identifier>Registro de Identificación</record-identifier>
         <originator>Creador</originator>
         <format>Formato</format>
         <addresses>Direcciones</addresses>
         <originating-organization>Origen del organismo</originating-organization>
         <other-addresses>Otras direcciones</other-addresses>
-        <publication-date>Fecha de publicaci\u00f3n</publication-date>
+        <publication-date>Fecha de publicación</publication-date>
         <record-note>Nota del registro</record-note>
-        <date-received>Fecha de recepci\u00f3n</date-received>
-        <media-format>Formato de los medios de comunicaci\u00f3n</media-format>
-        <is-obsolete>Est\u00e1 obsoleto</is-obsolete>
+        <date-received>Fecha de recepción</date-received>
+        <media-format>Formato de los medios de comunicación</media-format>
+        <is-obsolete>Está obsoleto</is-obsolete>
         <date-field>Campo de fecha</date-field>
         <superseded>Reemplazado</superseded>
         <uuid>UUID</uuid>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </Record>
@@ -598,15 +598,15 @@
         <not-available>N/A</not-available>
         <transfer-executed>Transferencia ejecutada</transfer-executed>
         <transfer-date>Fecha de transferencia</transfer-date>
-        <transfer-location>Localizaci\u00f3n de la transferencia</transfer-location>
+        <transfer-location>Localización de la transferencia</transfer-location>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </Transferable>
@@ -618,16 +618,16 @@
       <label>
         <not-available>N/A</not-available>
         <is-vital-record>Es Registro Vital</is-vital-record>
-        <prev-review-date>Fecha de revisi\u00f3n anterior</prev-review-date>
-        <next-review-date>Pr\u00f3xima fecha de revisi\u00f3n</next-review-date>
+        <prev-review-date>Fecha de revisión anterior</prev-review-date>
+        <next-review-date>Próxima fecha de revisión</next-review-date>
       </label>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>A\u00f1adir/Editar Propiedades</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </VitalRecord>
@@ -638,18 +638,18 @@
     <view>
       <label>
         <id>ID</id>
-        <name>\#{word.name}</name>
-        <lifecycle>\#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>\#{word.description}</description>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
         <validator>Validador</validator>
         <supervisor>Supervisor</supervisor>
-        <public-workspace>\u00c1rea de publicaci\u00f3n</public-workspace>
-        <public-path>Ruta de publicaci\u00f3n</public-path>
+        <public-workspace>Área de publicación</public-workspace>
+        <public-path>Ruta de publicación</public-path>
         <pending-workspace>Espacio de trabajo pendiente</pending-workspace>
         <pending-path>Ruta pendiente</pending-path>
         <backup-workspace>Espacio de trabajo de copia de seguridad</backup-workspace>
         <backup-path>Ruta de reserva</backup-path>
-        <trash-workspace>Espacio de trabajo del zafac\u00f3n</trash-workspace>
+        <trash-workspace>Espacio de trabajo del zafacón</trash-workspace>
         <trash-path>Ruta de la basura</trash-path>
         <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
       </label>
@@ -668,13 +668,13 @@
   <AccessibleMedia>
     <view>
       <label>
-        <Play-audio-description-of-this-video>Descripci\u00f3n de audio</Play-audio-description-of-this-video>
-        <Read-more>Leer m\u00e1s</Read-more>
+        <Play-audio-description-of-this-video>Descripción de audio</Play-audio-description-of-this-video>
+        <Read-more>Leer más</Read-more>
         <Read-less>Leer menos</Read-less>
         <Switch-back-to-original-video>Video original</Switch-back-to-original-video>
       </label>
       <tooltip>
-        <A-second-media-file-is-available-as-audio-description>Un segundo archivo de medios est\u00e1 disponible como audio descripci\u00f3n</A-second-media-file-is-available-as-audio-description>
+        <A-second-media-file-is-available-as-audio-description>Un segundo archivo de medios está disponible como audio descripción</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

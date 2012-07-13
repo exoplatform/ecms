@@ -2,77 +2,77 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Prefer\u00eancias</Preferences>
-      <AddContent>Adicionar Conte\u00fado</AddContent>
-      <ManageContent>Gerenciar Conte\u00fado</ManageContent>
+      <Preferences>Preferências</Preferences>
+      <AddContent>Adicionar Conteúdo</AddContent>
+      <ManageContent>Gerenciar Conteúdo</ManageContent>
     </label>
     <msg>
-      <non-contents>Desculpe, n\u00e3o h\u00e1 artigos dispon\u00edveis.</non-contents>
-      <item-not-found>Item n\u00e3o encontrado</item-not-found>
-      <no-permission>Voc\u00ea n\u00e3o tem permiss\u00e3o para acessar este node</no-permission>
+      <non-contents>Desculpe, não há artigos disponíveis.</non-contents>
+      <item-not-found>Item não encontrado</item-not-found>
+      <no-permission>Você não tem permissão para acessar este node</no-permission>
       <category-back>Ir para anterior</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Prefer\u00eancias de Conte\u00fado da Lista</UICLVConfig>
+      <UICLVConfig>Preferências de Conteúdo da Lista</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Prefer\u00eancias de Conte\u00fado da Lista</Title>
-      <ContentSelectionBlock>Sele\u00e7\u00e3o de conte\u00fado</ContentSelectionBlock>
+      <Title>Preferências de Conteúdo da Lista</Title>
+      <ContentSelectionBlock>Seleção de conteúdo</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Caminho da Pasta</UICLVConfigItemPathFormInputSet>
       <UICLVConfigItemPathFormStringInput>Caminho da Pasta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo>\u00edndice \= \u00cdndice</exo>
+        <exo>índice \= Índice</exo>
         <publication>liveDate \= Dado Publicado</publication>
       </option>
-      <DisplaySettingBlock>Mostrar Configura\u00e7\u00f5es</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Cabe\u00e7alho</UICLVConfigHeaderFormStringInput>
+      <DisplaySettingBlock>Mostrar Configurações</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Cabeçalho</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Modelo</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginador</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigItemsPerPageFormStringInput>Itens por p\u00e1gina</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Itens por página</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Mostrar Imagem</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Mostrar Sum\u00e1rio</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Mostrar Cabe\u00e7alho</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Mostrar Sumário</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Mostrar Cabeçalho</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Mostrar Atualizar</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Mostrar T\u00edtulo</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Mostrar Título</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Mostrar Data</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Mostrar Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Mostrar Mais Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Permitir URL Din\u00e2mica</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Permitir URL Dinâmica</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Mostrar Link RSS</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Detec\u00e7\u00e3o Autom\u00e1tica</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Avan\u00e7ado</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Navega\u00e7\u00e3o Din\u00e2mica</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Detecção Automática</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avançado</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Navegação Dinâmica</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Pasta Contextual</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>por</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>com</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Mostrar na p\u00e1gina</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Conte\u00fado n\u00e3o encontrado.</content-not-found>
-      <ContentPath>Caminho do Cont\u00e9udo</ContentPath>
+      <UICLVConfigTargetPageFormInputSet>Mostrar na página</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Conteúdo não encontrado.</content-not-found>
+      <ContentPath>Caminho do Contéudo</ContentPath>
       <Up>Para cima</Up>
       <Down>Para baixo</Down>
-      <UICLVConfigCacheManagementLabel>Visibilidade do Conte\u00fado</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Conte\u00fado por consulta</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Espa\u00e7o de trabalho</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigCacheManagementLabel>Visibilidade do Conteúdo</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Conteúdo por consulta</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Espaço de trabalho</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>por consulta</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Compartilhar conte\u00fado entre os usu\u00e1rios</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigCacheEnableRadioBoxInput>Compartilhar conteúdo entre os usuários</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Dois modos est\u00e3o dispon\u00edveis para mostrar cont\u00e9udos. "Por pasta" mostrar\u00e1 todos os conte\u00fados dispon\u00edveis na pasta/categoria que voc\u00ea escolher ; "Por conte\u00fado" deixa voc\u00ea escolher manualmente o que quer exibir.</ModeSelectionHelp>
-      <FolderPathHelp>Selecione o conte\u00fado que quer mostrar. Esta sele\u00e7\u00e3o padr\u00e3o ser\u00e1 substitu\u00edda dinamicamente se for ativada a Navega\u00e7\u00e3o din\u00e2mica (veja abaixo o modo Avan\u00e7ado).</FolderPathHelp>
-      <HeaderOptionHelp>Mostrar um cabe\u00e7alho no topo da lista de conte\u00fado. Se for ativada a Detec\u00e7\u00e3o Autom\u00e1tica, ele tentar\u00e1 encontrar um cabe\u00e7alho baseado na sele\u00e7\u00e3o atual.</HeaderOptionHelp>
-      <GeneralOptionHelp>Selecione os elementos gr\u00e1ficos que deseja mostrar na sua lista. Note que, dependendo do modelo que escolher, alguns elementos podem n\u00e3o estar dispon\u00edveis.</GeneralOptionHelp>
-      <ContextualHelp>Ativa a navega\u00e7\u00e3o din\u00e2mica. O conte\u00fado pode ser modificados dinamicamente por outros baseado em um par\u00e2metro da URL.</ContextualHelp>
-      <ParameterHelp>Este par\u00e2metro ser\u00e1 usado para obter o conte\u00fado se a Navega\u00e7\u00e3o Din\u00e2mica estiver ativada.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicar em um conte\u00fado redireciona para uma p\u00e1gina de detalhes. Voc\u00ea deve ter um portlet "Conte\u00fado por URL" com Navega\u00e7\u00e3o Din\u00e2mica habilitada na p\u00e1gina de destino para mostr\u00e1-lo.</ShowDetailInPageHelp>
-      <DetailParameterHelp>Este par\u00e2metro conter\u00e1 o caminho para o cont\u00e9udo no link para a p\u00e1gina de Detalhes. Este par\u00e2metro deve corresponder ao par\u00e2metro usado no portlet "Conte\u00fado por URL" da p\u00e1gina.</DetailParameterHelp>
-      <ContentByQueryHelp>Voc\u00ea pode definir uma consulta SQL para obter conte\u00fado dinamicamente. Os seguintes par\u00e2metros s\u00e3o permitidos : ${user}, ${lang} ou qualquer um get parmeter (PARAM) cercado por ${PARAM}.</ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restrito pela autentica\u00e7\u00e3o" filtrar\u00e1 o conte\u00fado com base na autentica\u00e7\u00e3o. Se voc\u00ea n\u00e3o se logar, voc\u00ea ver\u00e1 somente conte\u00fado p\u00fablico. Se estiver logado, voc\u00ea ver\u00e1 todo o conte\u00fado vis\u00edvel para os usu\u00e1rios da intranet (mas compartilhado por todos). "Restrito por fun\u00e7\u00f5es do usu\u00e1rio" significa que voc\u00ea vai ver o conte\u00fado em fun\u00e7\u00e3o das suas atribui\u00e7\u00f5es. Na maioria dos casos, essa op\u00e7\u00e3o n\u00e3o deve ser usada pois reduz o desempenho geral.</ContentsVisibilityHelp>
+      <ModeSelectionHelp>Dois modos estão disponíveis para mostrar contéudos. "Por pasta" mostrará todos os conteúdos disponíveis na pasta/categoria que você escolher ; "Por conteúdo" deixa você escolher manualmente o que quer exibir.</ModeSelectionHelp>
+      <FolderPathHelp>Selecione o conteúdo que quer mostrar. Esta seleção padrão será substituída dinamicamente se for ativada a Navegação dinâmica (veja abaixo o modo Avançado).</FolderPathHelp>
+      <HeaderOptionHelp>Mostrar um cabeçalho no topo da lista de conteúdo. Se for ativada a Detecção Automática, ele tentará encontrar um cabeçalho baseado na seleção atual.</HeaderOptionHelp>
+      <GeneralOptionHelp>Selecione os elementos gráficos que deseja mostrar na sua lista. Note que, dependendo do modelo que escolher, alguns elementos podem não estar disponíveis.</GeneralOptionHelp>
+      <ContextualHelp>Ativa a navegação dinâmica. O conteúdo pode ser modificados dinamicamente por outros baseado em um parâmetro da URL.</ContextualHelp>
+      <ParameterHelp>Este parâmetro será usado para obter o conteúdo se a Navegação Dinâmica estiver ativada.</ParameterHelp>
+      <ShowDetailInPageHelp>Clicar em um conteúdo redireciona para uma página de detalhes. Você deve ter um portlet "Conteúdo por URL" com Navegação Dinâmica habilitada na página de destino para mostrá-lo.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Este parâmetro conterá o caminho para o contéudo no link para a página de Detalhes. Este parâmetro deve corresponder ao parâmetro usado no portlet "Conteúdo por URL" da página.</DetailParameterHelp>
+      <ContentByQueryHelp>Você pode definir uma consulta SQL para obter conteúdo dinamicamente. Os seguintes parâmetros são permitidos : ${user}, ${lang} ou qualquer um get parmeter (PARAM) cercado por ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Restrito pela autenticação" filtrará o conteúdo com base na autenticação. Se você não se logar, você verá somente conteúdo público. Se estiver logado, você verá todo o conteúdo visível para os usuários da intranet (mas compartilhado por todos). "Restrito por funções do usuário" significa que você vai ver o conteúdo em função das suas atribuições. Na maioria dos casos, essa opção não deve ser usada pois reduz o desempenho geral.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>Salvar</Save>
@@ -80,14 +80,14 @@
       <delete>Excluir</delete>
     </action>
     <msg>
-      <not-valid-path>O caminho da pasta \u00e9 inv\u00e1lido.</not-valid-path>
-      <saving-success>As prefer\u00eancias do portlet est\u00e3o salvas.</saving-success>
+      <not-valid-path>O caminho da pasta é inválido.</not-valid-path>
+      <saving-success>As preferências do portlet estão salvas.</saving-success>
     </msg>
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
       <AutoViewerMode>Por Pasta</AutoViewerMode>
-      <ManualViewerMode>Por Conte\u00fado</ManualViewerMode>
+      <ManualViewerMode>Por Conteúdo</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
@@ -114,7 +114,7 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Seletor de p\u00e1gina</UIPageSelector>
+      <UIPageSelector>Seletor de página</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
@@ -132,12 +132,12 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Painel de sele\u00e7\u00e3o de m\u00faltipos cont\u00e9udos</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Painel de seleção de múltipos contéudos</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Formul\u00e1rio de conte\u00fado Web</UIContentDialogForm>
+      <UIContentDialogForm>Formulário de conteúdo Web</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
@@ -149,19 +149,19 @@
   <PublicationStates>
     <archived>Arquivado</archived>
     <obsolete>Obsoleto</obsolete>
-    <unpublished>N\u00e3o publicado</unpublished>
+    <unpublished>Não publicado</unpublished>
     <enrolled>Registrado</enrolled>
     <draft>Rascunho</draft>
     <pending>Pendente</pending>
     <approved>Aprovado</approved>
-    <inreview>Em Revis\u00e3o</inreview>
+    <inreview>Em Revisão</inreview>
     <staged>Organizado</staged>
     <published>Publicado</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restrito por autentica\u00e7\u00e3o</ENABLE>
-      <DISABLE>Restrito pelo papel do usu\u00e1rio</DISABLE>
+      <ENABLE>Restrito por autenticação</ENABLE>
+      <DISABLE>Restrito pelo papel do usuário</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

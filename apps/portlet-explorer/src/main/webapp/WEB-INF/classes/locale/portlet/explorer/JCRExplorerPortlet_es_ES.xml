@@ -13,8 +13,8 @@
       <comment>Comentario</comment>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <not-support>No puede comentar en este tipo de documento.</not-support>
@@ -199,8 +199,8 @@
       <Advance>Avanzado</Advance>
     </label>
     <action>
-      <Back>\#{word.close}</Back>
-      <Save>\#{word.save}</Save>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
       <HideAdvance>Esconder Avanzado</HideAdvance>
       <ShowAdvance>Mostrar Avanzado</ShowAdvance>
     </action>
@@ -213,8 +213,8 @@
   <UIAllItemsPreferenceForm>
     <title>Configurar preferencias de filtro</title>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Save>\#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
     <label>
       <showOwnedByUser>De mi propiedad</showOwnedByUser>
@@ -235,13 +235,13 @@
       <titleField>Título</titleField>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Save>\#{word.save}</Save>
-      <Back>\#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
     </action>
     <msg>
       <rename-successfull>El nodo '{0}' fué renombrado a '{1}' exitosamente.</rename-successfull>
-      <rename-denied>¡Acceso denegado\! No puede cambiar el nombre a este nodo.</rename-denied>
+      <rename-denied>¡Acceso denegado! No puede cambiar el nombre a este nodo.</rename-denied>
       <fileName-invalid>El nuevo nombre contiene algunos caracteres inválidos.</fileName-invalid>
       <newName-same-oldName>El nuevo nombre ya existe. Por favor, compruebe de nuevo.</newName-same-oldName>
       <version-exception>Este nodo o el antecesor de este nodo no ha sido retirado.</version-exception>
@@ -470,9 +470,9 @@
       <cannot-readsource>No puede leer datos desde el nodo de origen.</cannot-readsource>
       <node-locked-editing>No puede editar este nodo con la ruta {0}. Está siendo bloqueado por otro usuario.</node-locked-editing>
       <editTagAccessDenied>Acceso denegado.</editTagAccessDenied>
-      <can-not-remove-locked-node>¡El nodo {0} está bloqueado, no se puede mover al zafacón\!</can-not-remove-locked-node>
-      <can-not-remove-checked-in-node>¡El nodo {0} o su padre ya está registrado, no se puede mover al zafacón\!</can-not-remove-checked-in-node>
-      <access-denied-to-delete>¡Acceso denegado, no puede mover el nodo {0} a la basura\!</access-denied-to-delete>
+      <can-not-remove-locked-node>¡El nodo {0} está bloqueado, no se puede mover al zafacón!</can-not-remove-locked-node>
+      <can-not-remove-checked-in-node>¡El nodo {0} o su padre ya está registrado, no se puede mover al zafacón!</can-not-remove-checked-in-node>
+      <access-denied-to-delete>¡Acceso denegado, no puede mover el nodo {0} a la basura!</access-denied-to-delete>
     </msg>
   </UIPopupMenu>
   <!--
@@ -482,8 +482,8 @@
   -->
   <UIFolderForm>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Save>\#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
     <label>
       <type>Tipo</type>
@@ -574,7 +574,7 @@
       <null-exception>No se ha encontrado el elemento. Fué removido o cambiado o no tiene permiso para acceder a este nodo.</null-exception>
       <confirm-deleteattachment>¿Estás seguro de eliminar este archivo de datos adjuntos?</confirm-deleteattachment>
       <confirm-deleteattcomment>¿Estás seguro de eliminar este comentario?</confirm-deleteattcomment>
-      <access-denied-exception>¡Acceso denegado\! Tal vez, no tiene permisos de lectura o el nodo fue eliminado o cambiado.</access-denied-exception>
+      <access-denied-exception>¡Acceso denegado! Tal vez, no tiene permisos de lectura o el nodo fue eliminado o cambiado.</access-denied-exception>
       <path-not-found>Este elemento fue eliminado o cambiado. Por favor haga clic en el botón de actualizar.</path-not-found>
       <confirm-deletecomment>¿Estás seguro de borrar este comentario?</confirm-deletecomment>
       <repository-error>Se ha producido un error. La información acerca del repositorio se perdió.</repository-error>
@@ -688,9 +688,9 @@
       <ticketID>Boleto ID</ticketID>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Update>\#{word.update}</Update>
-      <Save>\#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Update>#{word.update}</Update>
+      <Save>#{word.save}</Save>
     </action>
     <msg>
       <unable-create>No se puede crear el billete.</unable-create>
@@ -776,7 +776,7 @@
       <cannotget>No se puede obtener valores</cannotget>
     </label>
     <action>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPropertyTab>
   <!--
@@ -799,7 +799,7 @@
       <property_select>Añadir Nueva Propiedad</property_select>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Cancelar</Cancel>
       <Reset>Reajustar</Reset>
     </action>
@@ -829,8 +829,8 @@
   </UIMixinTypeSelect>
   <UIMixinTypeForm>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Reajustar</Reset>
     </action>
   </UIMixinTypeForm>
@@ -845,7 +845,7 @@
       <metadataName>Nombre de metadatos</metadataName>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
+      <Save>#{word.save}</Save>
     </action>
   </UIMetadataTab>
   <!--
@@ -872,7 +872,7 @@
       <confirm-delete-permission>¿Está seguro que desea remover este permiso?</confirm-delete-permission>
       <no-permission-tochange>No tiene derecho a remover el permiso.</no-permission-tochange>
       <no-permission-remove>No puede remover el propietario.</no-permission-remove>
-      <access-denied>¡Acceso denegado\! No puede remover este permiso.</access-denied>
+      <access-denied>¡Acceso denegado! No puede remover este permiso.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
@@ -915,8 +915,8 @@
     </label>
     <title>Añadir un permiso a ese nodo</title>
     <action>
-      <Close>\#{word.close}</Close>
-      <Save>\#{word.save}</Save>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
       <Reset>Reajustar</Reset>
     </action>
     <msg>
@@ -950,8 +950,8 @@
       <fieldListTaxonomy>Lista de categorías</fieldListTaxonomy>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <AddUpload>Añadir Subida</AddUpload>
       <RemoveUpload>Eliminar Subida</RemoveUpload>
     </action>
@@ -992,7 +992,7 @@
   </UIUploadContent>
   <UIUploadContainer>
     <action>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
       <AddMetadata>Agregar metadatos</AddMetadata>
     </action>
     <tab>
@@ -1081,7 +1081,7 @@
     </label>
     <action>
       <Search>Búsqueda</Search>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <keyword-not-allowed>Esta palabra clave no está permitida.</keyword-not-allowed>
@@ -1091,8 +1091,8 @@
     <action>
       <MoreConstraints>Mostrar/ocultar formulario de restricción</MoreConstraints>
       <Search>Búsqueda</Search>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
@@ -1125,7 +1125,7 @@
       <query-invalid>La consulta es inválida.</query-invalid>
     </msg>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <path>Ruta</path>
       <action>Acción</action>
       <shortcutPath>Ruta</shortcutPath>
@@ -1156,7 +1156,7 @@
       <query-invalid>La consulta es inválida</query-invalid>
     </msg>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <path>Ruta</path>
       <action>Acción</action>
       <shortcutPath>Ruta</shortcutPath>
@@ -1182,12 +1182,12 @@
   <UIShowAllFavouriteResult>
     <msg>
       <not-support>No hay ninguna plantilla de vista para este nodo</not-support>
-      <empty>¡No se encontraron resultados\!</empty>
-      <access-denied>¡No puede ver este nodo porque la plantilla no es apoyada o no tiene el acceso\!</access-denied>
+      <empty>¡No se encontraron resultados!</empty>
+      <access-denied>¡No puede ver este nodo porque la plantilla no es apoyada o no tiene el acceso!</access-denied>
       <query-invalid>La consulta no es válida</query-invalid>
     </msg>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <path>Ruta</path>
       <action>Acción</action>
       <shortcutPath>Ruta</shortcutPath>
@@ -1218,7 +1218,7 @@
       <query-invalid>La consulta no es válida.</query-invalid>
     </msg>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <path>Ruta</path>
       <action>Acción</action>
       <shortcutPath>Ruta</shortcutPath>
@@ -1251,7 +1251,7 @@
       <query-invalid>La consulta no es válida.</query-invalid>
     </msg>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <path>Ruta</path>
       <action>Acción</action>
       <shortcutPath>Ruta</shortcutPath>
@@ -1286,7 +1286,7 @@
     </label>
     <action>
       <Add>Añadir</Add>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <properties-required>Se requiere el nombre de la propiedad.</properties-required>
@@ -1374,8 +1374,8 @@
       <query>Consulta</query>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
       <Search>Búsqueda</Search>
     </action>
     <msg>
@@ -1397,8 +1397,8 @@
       <query>Consulta</query>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </EditQueryForm>
   <EditSavedQueryForm>
@@ -1411,7 +1411,7 @@
       <metadataType>Tipo de metadatos</metadataType>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Add>Añadir</Add>
     </action>
   </UIMetadataSelectForm>
@@ -1465,7 +1465,7 @@
   <UISaveQueryForm>
     <msg>
       <query-name-null>Por favor introduzca nombre de consulta para guardar.</query-name-null>
-      <access-denied>¡Acceso denegado\! No tienes el permiso de agregar para guardar esta consulta.</access-denied>
+      <access-denied>¡Acceso denegado! No tienes el permiso de agregar para guardar esta consulta.</access-denied>
       <save-failed>No se pudo guardar la consulta. La declaración no es válida o ya existe el nombre de la consulta.</save-failed>
       <name-not-allowed>El nombre de la consulta no está permitido.</name-not-allowed>
     </msg>
@@ -1473,8 +1473,8 @@
       <queryName>Nombre de la Consulta</queryName>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISaveQueryForm>
   <UISavedQuery>
@@ -1519,7 +1519,7 @@
       <documentView>Vista del Documento</documentView>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Export>Exportar</Export>
       <ExportHistory>Historial de la versión de exportación</ExportHistory>
     </action>
@@ -1698,7 +1698,7 @@
       <versionHistory>Historia de la versión</versionHistory>
     </label>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Import>Importar</Import>
     </action>
     <title>Importar Nodo</title>
@@ -1707,7 +1707,7 @@
       <filename-invalid>Buscar un archivo .xml para importarlo al campo 'Subir archivo'.</filename-invalid>
       <filetype-error>No se puede importar el archivo cargado. Tal vez, el archivo .xml no es válido.</filetype-error>
       <mimetype-invalid>Sólo los archivos .xml o .zip son compatibles para importar.</mimetype-invalid>
-      <access-denied>¡Acceso denegado\! No está autorizado a importar allí.</access-denied>
+      <access-denied>¡Acceso denegado! No está autorizado a importar allí.</access-denied>
       <constraint-violation-exception>No se puede importar el nodo. Los datos importados son incorrectos o el tipo de nodo '{0}' no puede ser un subnodo '{0}'.</constraint-violation-exception>
       <item-exists-exception>Un nodo entrante referenciable tiene el mismo UUID como un nodo existente en el área de trabajo.</item-exists-exception>
       <history-invalid-type>Tipo de archivo no válido en el historial de versiones. Sólo los archivos .zip son compatibles.</history-invalid-type>
@@ -1724,7 +1724,7 @@
       <label>Etiqueta</label>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
+      <Save>#{word.save}</Save>
       <Cancel>Cancelar</Cancel>
     </action>
     <title>Añadir etiqueta</title>
@@ -1745,7 +1745,7 @@
     </label>
     <action>
       <Remove>Eliminar</Remove>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
   <!--
@@ -1886,7 +1886,7 @@
       <selectTemplate>Seleccione la plantilla en la lista de abajo</selectTemplate>
       <ThumbnailView>Vista de Viñetas</ThumbnailView>
       <ListView>Vista de la lista</ListView>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1901,8 +1901,8 @@
       <SaveAndClose><![CDATA[Guardar & cerrar]]></SaveAndClose>
       <ChangeType>Cambiar el tipo de contenido</ChangeType>
       <Fullscreen>Pantalla completa</Fullscreen>
-      <Cancel>\#{word.cancel}</Cancel>
-      <Close>\#{word.close}</Close>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
     </action>
     <tooltip>
       <FullScreen>Maximizar/Minimizar</FullScreen>
@@ -1939,7 +1939,7 @@
       </label>
     </tab>
     <action>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIViewDocumentController>
   <!--
@@ -1957,8 +1957,8 @@
       <name>Nombre de la Consulta</name>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIQuerySaveForm>
   <!--
@@ -1974,12 +1974,12 @@
   </editActionPopup>
   <UIActionViewContainer>
     <action>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIActionViewContainer>
   <UIActionList>
     <header>
-      <name>\#{word.name}</name>
+      <name>#{word.name}</name>
       <description>Descripción</description>
       <lifecycle>Ciclo de vida</lifecycle>
       <triggeredaction>Acción desencadenada</triggeredaction>
@@ -1994,7 +1994,7 @@
       <access-denied>Acceso denegado. No tienes suficientes permisos para realizar esta acción.</access-denied>
     </msg>
     <action>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
       <View>Ver</View>
       <Edit>Editar</Edit>
       <Delete>Borrar</Delete>
@@ -2002,8 +2002,8 @@
   </UIActionList>
   <UIActionForm>
     <action>
-      <Save>\#{word.save}</Save>
-      <Back>\#{word.back}</Back>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
     </action>
     <label>
       <name>Formulario de acción</name>
@@ -2084,7 +2084,7 @@
   <UIWatchDocumentForm>
     <action>
       <Watch>Vigilar</Watch>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Continue>Continuar</Continue>
       <Unwatch>No vigilar más</Unwatch>
     </action>
@@ -2096,8 +2096,8 @@
       <watching-successfully>Usted está vigilando este documento.</watching-successfully>
       <unwatching-successfully>Se ha dado de baja de la lista exitosamente.</unwatching-successfully>
       <node-iswatching>El documento está siendo vigilado.</node-iswatching>
-      <node-is-locked>¡Este nodo está bloqueado, no es visible\!</node-is-locked>
-      <unknown-error>¡Se produjeron algunos errores, no puede ver este nodo\!</unknown-error>
+      <node-is-locked>¡Este nodo está bloqueado, no es visible!</node-is-locked>
+      <unknown-error>¡Se produjeron algunos errores, no puede ver este nodo!</unknown-error>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -2118,7 +2118,7 @@
     </label>
     <action>
       <AddTag>Añadir Etiquetas</AddTag>
-      <Cancel>\#{word.close}</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
       <name-exist>Ya existe el nombre de la etiqueta '{0}'.</name-exist>
@@ -2144,7 +2144,7 @@
     <action>
       <AddLanguage>Añadir</AddLanguage>
       <SetDefault>Establecer Por Defecto</SetDefault>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <View>Ver</View>
     </action>
     <msg>
@@ -2164,8 +2164,8 @@
       <access-denied>Acceso denegado. No tienes el permiso de agregar en este nodo.</access-denied>
     </msg>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UILanguageDialogForm>
   <!--
@@ -2185,8 +2185,8 @@
   -->
   <UIViewMetadataForm>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIViewMetadataForm>
   <metadataForm>
@@ -2196,7 +2196,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>¡Acceso denegado\! Usted no es el propietario o no tiene el permiso de edición en este nodo.</access-denied>
+      <access-denied>¡Acceso denegado! Usted no es el propietario o no tiene el permiso de edición en este nodo.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2237,7 +2237,7 @@
     <msg>Error en la acción. Todavía hay algunos elementos de referencia en el área de trabajo.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>¡Este ítem ya existe\!</msg>
+    <msg>¡Este ítem ya existe!</msg>
   </ItemExistsException>
   <AccessControlException>
     <msg>Acceso denegado. No tienes permiso para realizar esta acción.</msg>
@@ -2249,7 +2249,7 @@
     <msg>No se ha encontrado el elemento. Tal vez, fue eliminado o cambiado.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>¡No se encontró la ruta\! Tal vez fué eliminado o cambiado.</msg>
+    <msg>¡No se encontró la ruta! Tal vez fué eliminado o cambiado.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
     <msg>No se puede hacer esta acción debido a algunas restricciones.</msg>
@@ -2290,7 +2290,7 @@
       <taxonomyTree>Árbol de categorías</taxonomyTree>
     </label>
     <msg>
-      <AccessDeniedException>¡Acceso denegado\! No tienes el permiso de lectura en esta área de trabajo.</AccessDeniedException>
+      <AccessDeniedException>¡Acceso denegado! No tienes el permiso de lectura en esta área de trabajo.</AccessDeniedException>
     </msg>
   </UIWorkspaceList>
   <pathSelector>
@@ -2393,8 +2393,8 @@
   -->
   <UIThumbnailForm>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <mediumSize>Imagen de la viñeta</mediumSize>
@@ -2548,8 +2548,8 @@
       <pathNode>Nodo de la Ruta</pathNode>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <addFolder-successful>El symlink '{0}' se agregó correctamente.</addFolder-successful>
@@ -2557,7 +2557,7 @@
       <name-not-allowed>Este nombre no está permitido.</name-not-allowed>
       <fileName-error>El nombre del archivo no es válido.</fileName-error>
       <constraint-violation>No se puede agregar el tipo de nodo '{0}' al nodo actual.</constraint-violation>
-      <repository-exception>¡Acceso denegado\! No tienes permiso para añadir un symlink a este nodo.</repository-exception>
+      <repository-exception>¡Acceso denegado! No tienes permiso para añadir un symlink a este nodo.</repository-exception>
       <numberformat-exception>No se puede guardar esta carpeta. El nombre proporcionado debe ser un formato numérico.</numberformat-exception>
       <path-node-invalid>Por favor ingrese el nodo de la ruta.</path-node-invalid>
       <path-node-not-allowed>Este nombre no está permitido.</path-node-not-allowed>
@@ -2593,7 +2593,7 @@
   </UISimpleCategoryManager>
   <UIConfirmMessage>
     <label>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
       <OK>OK</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
@@ -2602,7 +2602,7 @@
   </UIConfirmMessage>
   <UIRestoreConfirmMessage>
     <label>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
       <OK>OK</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>
@@ -2686,8 +2686,8 @@
       <fieldListTaxonomy>Lista de categorías</fieldListTaxonomy>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
       <fileName-error>Por favor asegúrese de que ha cargado el archivo seleccionado al servidor mediante el icono de carga.</fileName-error>
@@ -2721,7 +2721,7 @@
   </UISingleUploadContent>
   <UISingleUploadContainer>
     <action>
-      <Close>\#{word.close}</Close>
+      <Close>#{word.close}</Close>
       <AddMetadata>Añadir Metadatos</AddMetadata>
     </action>
     <tab>
@@ -2783,8 +2783,8 @@
     </label>
     <title>Configurar preferencias de filtro</title>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
   <UIAllItemsByType>
@@ -2841,8 +2841,8 @@
   </UIEditingTagsForm>
   <UITagForm>
     <action>
-      <UpdateTag>\#{word.save}</UpdateTag>
-      <Cancel>\#{word.cancel}</Cancel>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <tagName>Nombre de la etiqueta</tagName>

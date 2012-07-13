@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   #############################################################################
@@ -8,26 +8,26 @@
   <UIWorkflowControllerPortlet>
     <tab>
       <label>Contrôleur</label>
-      <text>Gestion du Workflow</text>
+      <text>Administration des Workflows</text>
     </tab>
     <msg>
-      <refresh-session-success>La session a été rafraichie avec succès</refresh-session-success>
+      <refresh-session-success>La session a été rafraichie avec succès.</refresh-session-success>
     </msg>
     <label>
-      <refesh>Rafraichir</refesh>
+      <refresh>Rafraîchir</refresh>
     </label>
   </UIWorkflowControllerPortlet>
   <ControllerPopup>
     <title>
-      <UITaskManager>Gestion des UITask</UITaskManager>
+      <UITaskManager>Gestion des tâches</UITaskManager>
     </title>
   </ControllerPopup>
   <UITabPane>
     <title>
       <UITaskList>Contrôleur des Tâches</UITaskList>
-      <UIBPDefinition>Definition du Processus Métier</UIBPDefinition>
-      <UIDocumentContent>Visualiser le contenu</UIDocumentContent>
-      <UIDocumentForm>Editer le contenu</UIDocumentForm>
+      <UIBPDefinition>Gestion des Définitions de Processus Métier</UIBPDefinition>
+      <UIDocumentContent>Afficher le contenu</UIDocumentContent>
+      <UIDocumentForm>Modifier le contenu</UIDocumentForm>
       <UITask>Tâche</UITask>
     </title>
   </UITabPane>
@@ -35,7 +35,7 @@
     <header>
       <id>ID Tâche</id>
       <processName>Nom Processus</processName>
-      <taskName>Nom Tâche</taskName>
+      <taskName>Nom de la Tâche</taskName>
       <actor>Acteur</actor>
       <description>Description</description>
       <actorId>Id Acteur</actorId>
@@ -47,8 +47,8 @@
       <managerState>Gérer</managerState>
     </label>
     <msg>
-      <task-not-found>La tâche ne peut pas être gérée. La raison la plus probable est qu'un autre utilisateur a déjà géré la tâche.</task-not-found>
-      <task-change>La tâche que vous avez sélectionnée, a été modifiée ou supprimée</task-change>
+      <task-not-found>Vous ne pouvez pas gérer cette tâche. Cette tâche a peut-être été géré par un autre utilisateur.</task-not-found>
+      <task-change>La tâche a été modifiée ou supprimée.</task-change>
     </msg>
   </UITaskList>
   <UITaksList>
@@ -63,17 +63,17 @@
       <process-diagram-not-available>Schéma du processus n'est pas disponible</process-diagram-not-available>
     </label>
     <title>
-      <Delegate>Saisir un utilisateur</Delegate>
-      <state-image>image de l'état</state-image>
+      <Delegate>Choisir un utilisateur</Delegate>
+      <state-image>Image de l'État</state-image>
     </title>
     <msg>
-      <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer</has-not-got-delegate>
-      <user-not-exist>Cet utilisateur délégué n'existe pas</user-not-exist>
+      <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer.</has-not-got-delegate>
+      <user-not-exist>Cet utilisateur délégué n'existe pas.</user-not-exist>
     </msg>
   </UITask>
   <PopupDelegatedSelectorId>
     <title>
-      <UIUserSelectContainer>Saisir un utilisateur</UIUserSelectContainer>
+      <UIUserSelectContainer>Choisir un utilisateur</UIUserSelectContainer>
     </title>
   </PopupDelegatedSelectorId>
   <UIBPDefinition>
@@ -96,21 +96,24 @@
   </UIControllerManager>
   <UIDocumentForm>
     <msg>
-      <cannot-save>Certaines contraintes n'ont pas été respectées durant cette action.</cannot-save>
-      <in-versioning>Veuillez extraire le noeud courant avant d'ajouter un nouveau noeud</in-versioning>
+      <cannot-save>Une erreur s'est produite lors de l'enregistrement du document.</cannot-save>
+      <in-versioning>Veuillez faire un Check Out sur le noeud courant avant d'en ajouter un nouveau.</in-versioning>
       <not-support>Impossible de charger le formulaire '{0}'.</not-support>
-      <value-invalid>'{0}' est une valeur requise</value-invalid>
+      <value-invalid>'{0}' est une valeur requise.</value-invalid>
+      <confirm-close>Les changements que vous avez faits seront perdus si vous fermez ce formulaire.</confirm-close>
+      <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
     </msg>
   </UIDocumentForm>
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Ajouter Catégories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Ajouter des Catégories</UIOneTaxonomySelector>
+      <UIOneNodePathSelector>Choisir un chemin</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Taxonomie Tree</taxonomyTree>
-      <rootNodePath>Arbre racine</rootNodePath>
+      <taxonomyTree>Arbre de catégories</taxonomyTree>
+      <rootNodePath>Racine de l'arborescence</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
@@ -123,23 +126,12 @@
   </UIWorkspaceList>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Ajouter le noeud racine</AddRootNode>
+      <AddRootNode>Ajouter un noeud racine</AddRootNode>
     </title>
   </rootNodeInfo>
-  <PopupComponent>
-    <title>
-      <UIOneNodePathSelector>Choisir un chemin</UIOneNodePathSelector>
-    </title>
-  </PopupComponent>
-  <UIDocumentForm>
-   <msg>
-     <confirm-close>Les changements que vous avez fait seront perdus si vous fermez ce formulaire.</confirm-close>
-     <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
-   </msg>
-  </UIDocumentForm>
   <PositiveNumberValidator>
     <msg>
-      <invalid-input>Le champs {0} avec la valeur {1} est invalide. Vous devez saisir une valeur positive.</invalid-input>
+      <invalid-input>Le champ « {0} » avec la valeur « {1} » n'est pas valide. Un nombre positif est requis.</invalid-input>
     </msg>
   </PositiveNumberValidator>
 </bundle>

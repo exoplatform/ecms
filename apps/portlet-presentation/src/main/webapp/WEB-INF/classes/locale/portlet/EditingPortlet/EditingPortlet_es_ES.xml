@@ -5,7 +5,7 @@
       <Editing>Modo:</Editing>
     </label>
     <msg>
-      <not-permission>No tienes permisos para realizar esta acci\u00f3n.</not-permission>
+      <not-permission>No tienes permisos para realizar esta acción.</not-permission>
     </msg>
   </EditingPortlet>
   <UIEditingForm>

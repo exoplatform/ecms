@@ -2,12 +2,12 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Panel de edici\u00f3n</title>
+      <title>Panel de edición</title>
       <nocontent>Sin contenido</nocontent>
       <mydraft>El Contenido de mi Borrador</mydraft>
-      <waitingapproval>Esperando mi aprobaci\u00f3n</waitingapproval>
+      <waitingapproval>Esperando mi aprobación</waitingapproval>
       <approve>Aprobar</approve>
-      <publishedtomorrow>A ser publicado ma\u00f1ana</publishedtomorrow>
+      <publishedtomorrow>A ser publicado mañana</publishedtomorrow>
     </label>
   </UIDashboardForm>
 </bundle>

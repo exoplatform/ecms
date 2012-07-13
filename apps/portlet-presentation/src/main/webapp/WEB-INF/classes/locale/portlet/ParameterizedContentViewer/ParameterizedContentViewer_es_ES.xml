@@ -3,8 +3,8 @@
   <UIPCVContainer>
     <title>
       <Back>Regresar</Back>
-      <print>Imprimir esta p\u00e1gina</print>
-      <QuickEdit>Edici\u00f3n r\u00e1pida</QuickEdit>
+      <print>Imprimir esta página</print>
+      <QuickEdit>Edición rápida</QuickEdit>
     </title>
     <label>
       <print>Imprimir</print>
@@ -16,22 +16,22 @@
       <Close>Cerrar</Close>
     </action>
     <msg>
-      <content-not-found>No se encontr\u00f3 contenido.</content-not-found>
+      <content-not-found>No se encontró contenido.</content-not-found>
       <not-support>No tienes permiso para acceder.</not-support>
     </msg>
   </UIPCVContainer>
   <UIPCVConfigPopupWindow>
     <title>
-      <UIPCVConfig>Configuraci\u00f3n del visor de contenido parametrizado</UIPCVConfig>
+      <UIPCVConfig>Configuración del visor de contenido parametrizado</UIPCVConfig>
     </title>
   </UIPCVConfigPopupWindow>
   <UIPCVConfig>
     <label>
-      <Title>Configuraci\u00f3n del visor de contenido parametrizado</Title>
-      <DisplaySettingBlock>Configuraci\u00f3n de pantalla</DisplaySettingBlock>
-      <ShowTitle>Mostrar t\u00edtulo</ShowTitle>
-      <ShowDateCreated>Mostrar fecha de creaci\u00f3n</ShowDateCreated>
-      <ShowBar>Mostrar barra de opci\u00f3n</ShowBar>
+      <Title>Configuración del visor de contenido parametrizado</Title>
+      <DisplaySettingBlock>Configuración de pantalla</DisplaySettingBlock>
+      <ShowTitle>Mostrar título</ShowTitle>
+      <ShowDateCreated>Mostrar fecha de creación</ShowDateCreated>
+      <ShowBar>Mostrar barra de opción</ShowBar>
     </label>
     <action>
       <Save>Guardar</Save>

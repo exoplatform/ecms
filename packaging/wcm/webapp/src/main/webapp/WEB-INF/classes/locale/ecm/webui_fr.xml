@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   #####################################################################
@@ -10,7 +10,6 @@
       <name>Nom</name>
       <action>Ajouter</action>
     </header>
-    <action />
     <info>
       <child-not-found>Fils non trouvé!</child-not-found>
     </info>
@@ -24,7 +23,7 @@
     <header>
       <categoryName>Nom de catégorie</categoryName>
       <categoryPath>Chemin de catégorie</categoryPath>
-      <action>Action</action>
+      <action>#{word.action}</action>
     </header>
     <action>
       <SaveCategories>Enregistrer</SaveCategories>
@@ -33,7 +32,7 @@
     <msg>
       <cannot-save>Les catégories ne sont pas sauvegardées.</cannot-save>
       <have-saved>Les catégories ont été sauvegardées avec succès.</have-saved>
-      <non-categories>Les catégories sont mauvaises. Veuillez sélectionner une bonne catégorie.</non-categories>
+      <non-categories>Les catégories sont incorrectes. Veuillez sélectionner une catégorie correcte.</non-categories>
       <confirm-delete>Etes vous sûr de vouloir supprimer cette catégorie ?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
@@ -45,18 +44,18 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Sélectionner un utilisateur</UIPermissionUser>
-      <UIPermissionMembership>Sélectionner un membership</UIPermissionMembership>
+      <UIPermissionMembership>Sélectionner un rôle</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
       <selectUser>Sélectionner un utilisateur</selectUser>
-      <selectGroup>Parcourir et Sélectionner un groupe</selectGroup>
+      <selectGroup>Parcourir et sélectionner un groupe</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Sélectionner un Membership</selectUser>
+      <selectUser>Sélectionner un rôle</selectUser>
       <selectGroup>Parcourir et sélectionner un groupe</selectGroup>
     </label>
   </UIPermissionMembership>

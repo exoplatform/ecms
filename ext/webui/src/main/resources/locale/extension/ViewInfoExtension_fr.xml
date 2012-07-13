@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
 	<UIPopupWindow>
 		<title>
 			<UIViewInfoManager>Voir l'information</UIViewInfoManager>
 		</title>	
 	</UIPopupWindow>
-    
 	<ECMContextMenu>
 		<event>
 			<ViewInfo>Voir l'information</ViewInfo>
@@ -24,7 +23,7 @@
 			<publicationState>Etat de publication</publicationState>
 		</label>
 		<value>
-			<folder>Dossier</folder>
+      <folder>Répertoire</folder>
 		</value>
 		<action>
 			<Close>Fermer</Close>

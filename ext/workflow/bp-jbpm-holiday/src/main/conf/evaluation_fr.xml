@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <task-name>Evaluer les cong\u00e9s</task-name>
+  <title>Evaluer les cong\u00e9s</title>
+  <approve>
+    <submit>Approuver</submit>
+    <value>Approuver les cong\u00e9s</value>
+  </approve>
+  <disapprove>
+    <submit>D\u00e9sapprouver</submit>
+    <value>D\u00e9sapprouver les cong\u00e9s</value>
+  </disapprove>
+  <refuse>
+    <submit>Refuser</submit>
+    <value>Refuser les cong\u00e9s</value>
+  </refuse>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui demande des cong\u00e9s</title>
+    <label>Initiateur:</label>
+  </initiator>
+  <start>
+    <title>D\u00e9but des cong\u00e9s:</title>
+    <label>D\u00e9but (jj/mm/aaaa):</label>
+  </start>
+  <end>
+    <title>Fin des cong\u00e9s:</title>
+    <label>Fin (jj/mm/aaaa):</label>
+  </end>
+  <grant>
+    <submit>Accorder</submit>
+    <value>Accorder l'augmentation</value>
+  </grant>
+  <deny>
+    <submit>Refuser</submit>
+    <value>Refuser l'augmentation</value>
+  </deny>
+  <reason>
+    <title>Raison donn\u00e9e par l'initiateur</title>
+    <label>Raison:</label>
+  </reason>
+  <amount-asked>
+    <title>Montant demand\u00e9:</title>
+    <label>Montant:</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Montant accord\u00e9:</title>
+    <label>Accord\u00e9:</label>
+  </amount-granted>
+  <priority>
+    <title>Sp\u00e9cifier la priorit\u00e9</title>
+    <label>Priorit\u00e9:</label>
+  </priority>
+  <rewarded>
+    <title>L'initiateur a t'il \u00e9t\u00e9 augment\u00e9</title>
+    <label>Augment\u00e9:</label>
+    <checkbox>Oui il a \u00e9t\u00e9 augment\u00e9 !</checkbox>
+  </rewarded>
+  <cancel>Annuler</cancel>
+</bundle>

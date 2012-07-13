@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UIViewFormTabPane>
   		<label>
-          <publicationRequestApproval>Publication > Demande de validation</publicationRequestApproval>
-          <publicationApproveContent>Publication > Approuver</publicationApproveContent>
-          <publicationPublish>Publication > Publier</publicationPublish>
+      <publicationRequestApproval>Publication &gt; Demande de validation</publicationRequestApproval>
+      <publicationApproveContent>Publication &gt; Approuver</publicationApproveContent>
+      <publicationPublish>Publication &gt; Publier</publicationPublish>
           <showDrives>Afficher Lecteurs</showDrives>
   		</label>
   </UIViewFormTabPane>
 </bundle>
-

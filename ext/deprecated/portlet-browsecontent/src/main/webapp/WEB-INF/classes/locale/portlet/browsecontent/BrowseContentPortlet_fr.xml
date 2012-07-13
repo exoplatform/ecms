@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   ###################################################################
@@ -17,8 +17,6 @@
   ###################################################################
   #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
   ###################################################################
-  -->
-  <!--
     ###################################################################
 		#	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
 		#	    to display checkbox for filtering category tree             #
@@ -42,6 +40,9 @@
       <enableComment>Autoriser les commentaires</enableComment>
       <enableVote>Autoriser les votes</enableVote>
       <isAllowPublish>Afficher uniquement les documents "publiés"</isAllowPublish>
+      <searchEnable>Activer un emplacement de recherche</searchEnable>
+      <searchLocation>Emplacement de recherche</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
     </label>
     <title>Configuration du répertoire</title>
     <action>
@@ -57,14 +58,16 @@
       <invalid-value>Numéro de page invalide</invalid-value>
       <invalid-number>Vous devez insérer un nombre</invalid-number>
       <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour accéder à ce répertoire des catégories.</access-denied>
+      <enter-search-location>Un emplacement de recherche doit être spécifié</enter-search-location>
+      <explain>Quand la Portlet affiche une hiérarchie de catégories, il est nécessaire de spécifier l'emplacement où les documents sont en fait stockés, afin qu'ils puissent être trouvés par la fonctionnalité de recherche de la Portlet.</explain>
     </msg>
   </UIPathConfig>
   <UIQueryConfig>
     <msg>
-      <repostoryException>Peut-être avez vous un problème avcec votre requête. Vérifiez-la à nouveau.</repostoryException>
-      <noSuchNodeTypeException>Peut-être avez vous un problème avcec votre requête. Vérifiez-la à nouveau.</noSuchNodeTypeException>
+      <repostoryException>Peut-être avez-vous un problème avec votre requête. Vérifiez-la à nouveau.</repostoryException>
+      <noSuchNodeTypeException>Peut-être avez-vous un problème avec votre requête. Vérifiez-la à nouveau.</noSuchNodeTypeException>
       <invalid-value>Nouvelle configuration</invalid-value>
-      <invalid-query>Chaîne de requête invalide</invalid-query>
+      <invalid-query>Requête invalide</invalid-query>
       <invalid-name>Requête introuvable, essayez un autre type, langage ou statut</invalid-name>
     </msg>
     <title>Configuration de requête</title>
@@ -118,7 +121,7 @@
       <good>Bon/Cliquer pour voter</good>
       <verygood>Très Bon/Cliquer pour voter</verygood>
       <excellent>Excellent/Cliquer pour voter</excellent>
-      <best>Meilleur/Cliquer pour voter</best>
+      <best>Parfait/Cliquer pour voter</best>
     </title>
     <button>
       <label>
@@ -314,6 +317,7 @@
     <msg>
       <template-notsupported>Aucun formulaire de visualisation trouvé pour ce document</template-notsupported>
       <invalid-node>Document introuvable (probablement déplacé ou supprimé)</invalid-node>
+      <symlinkNode-no-targetNode>Le contenus a été déplacé ou supprimé, ou vous n'avez pas la permission de le voir.</symlinkNode-no-targetNode>
     </msg>
   </UIBrowseContainer>
   <!--
@@ -404,6 +408,8 @@
   <UITagList>
     <label>
       <tagTitle>Carte des mots clés</tagTitle>
+      <PublicTags>Public tags</PublicTags>
+      <PrivateTags>Private tags</PrivateTags>
     </label>
   </UITagList>
   <UICategoryTree>
@@ -438,8 +444,8 @@
     <msg>
       <empty-input>La valeur de ce chemin est nulle ou vide!</empty-input>
       <Invalid-char>Il y a des caractères invalides dans ce champ. S'il vous plaît essayez une autre valeur!</Invalid-char>
+      <Invalid-char1>Les nombres suivant le caractère '~' doivent être situés entre 0 et 1</Invalid-char1>
       <Invalid-char2>Des nombres doivent suivre le caractère '~'</Invalid-char2>
-      <Invalid-char1>Les nombres suivant le caractère '~' doivent être 0 ou 1</Invalid-char1>
       <Invalid-char3>Des nombres doivent suivre le caractère '^'</Invalid-char3>
       <Invalid-char4>Aucun espace n'est autorisé près du caractère '~'</Invalid-char4>
       <Invalid-char5>Aucun espace n'est autorisé près du caractère '^'</Invalid-char5>
@@ -450,19 +456,6 @@
   # Since ECM 2.3
   ######################################################################################
   -->
-  <UIPathConfig>
-    <label>
-      <searchEnable>Activer un emplacement de recherche</searchEnable>
-      <searchLocation>Emplacement de recherche</searchLocation>
-      <searchPath>UIPathConfig</searchPath>
-      <explain></explain>
-    </label>
-    <msg>
-      <enter-search-location>Un emplacement de recherche doit être spécifié</enter-search-location>
-      <explain>Quand la Portlet affiche une hiérarchie de catégories, il est nécessaire de spécifier l'emplacement où les documents sont en fait stockés, afin qu'ils puissent être trouvés par la fonctionnalité de recherche de la Portlet.</explain>
-    </msg>
-  </UIPathConfig>
-  
   <UIDocumentForm>
   	<msg>
   		<not-support>Impossible de charger le modèle '{0}'.</not-support>
@@ -476,41 +469,26 @@
 	  -->
   <Comments>
 	  <tooltip>
-	    <remove-comment>Remove this comment</remove-comment>
-	    <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>Supprimer ce commentaire</remove-comment>
+      <edit-comment>Modifier ce commentaire</edit-comment>
 	  </tooltip>
 		</Comments>
 		<UIDocumentDetail>
 		  <msg>
-		    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Etes-vous certain de vouloir supprimer ce commentaire ?</confirm-deletecomment>
 		  </msg>
+    <tooltip>
+      <remove-attachment>Supprimez ce fichier joint</remove-attachment>
+    </tooltip>
 		</UIDocumentDetail>
 		<UIPopupWindow>
 			<title>
-				<UICBCommentForm>Input comment</UICBCommentForm>
+      <UICBCommentForm>Entrez un commentaire</UICBCommentForm>
 			</title> 
 		</UIPopupWindow>
-	<UIBrowseContainer>
-    <msg>
-			<symlinkNode-no-targetNode>Missing node : The target node has been moved or deleted or You don't have enough permission to access</symlinkNode-no-targetNode>
-    </msg>
-  </UIBrowseContainer>
-  <UIDocumentDetail>
-  	<tooltip>
-  		<remove-attachment>Delete this attached file</remove-attachment>
-  	</tooltip>
-  </UIDocumentDetail>
   <DocumentDetail>
   	<tooltip>
-  		<remove-attachment>Delete this attached file</remove-attachment>
+      <remove-attachment>Supprimez ce fichier joint</remove-attachment>
   	</tooltip>
   </DocumentDetail>
-  
-  <UITagList>
-   <label>
-     <PublicTags>Public tags</PublicTags>
-     <PrivateTags>Private tags</PrivateTags>
-    </label>
-  </UITagList>
-  
 </bundle>

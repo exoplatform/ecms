@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <NoneHTMLValidator>
     <msg>
-      <invalid>S'il vous plaît, n'utilisez pas de balise HTML dans "{0}" sur le terrain</invalid>
+      <invalid>Les balises HTML ne peuvent pas être utilisées dans le champ "{0}"</invalid>
     </msg>
   </NoneHTMLValidator>
   <NewsletterPortlet>
     <action>
       <Preferences>Préférences</Preferences>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Open>Ouvrir</Open>
       <Cancel>Annuler</Cancel>
       <Close>Fermer</Close>
@@ -22,79 +22,67 @@
       <RemoveModerators>Supprimer</RemoveModerators>
     </action>
     <title>
-      <eXoNewsletter>eXo Newsletter</eXoNewsletter>
+      <eXoNewsletter>Newsletter eXo</eXoNewsletter>
       <Preferences>Préférences</Preferences>
     </title>
   </NewsletterPortlet>
-
   <UITabPane>
     <title>
-      <UIManagerUsers>Utilisateurs publics</UIManagerUsers>
-      <UIManagerModerator>Utilisateurs Manager</UIManagerModerator>
+      <UIManagerUsers>Profil Public</UIManagerUsers>
+      <UIManagerModerator>Profil Manager</UIManagerModerator>
     </title>
   </UITabPane>
-
   <UIWebcontentSelectorFormPopupWindow>
     <title>
-      <UINewsletterEntryWebcontentSelectorForm>Sélection des formulaires</UINewsletterEntryWebcontentSelectorForm>
+      <UINewsletterEntryWebcontentSelectorForm>Formulaire de sélection de contenus</UINewsletterEntryWebcontentSelectorForm>
     </title>
   </UIWebcontentSelectorFormPopupWindow>
-
   <UIWebcontentSelectorPopupWindow>
     <title>
       <UIWebContentTabSelector>Sélection de contenus</UIWebContentTabSelector>
     </title>
   </UIWebcontentSelectorPopupWindow>
-
   <UINewsletterEntryWebcontentSelectorForm>
-    <label>
-      <WebcontentSelector></WebcontentSelector>
-    </label>
+    <label/>
   </UINewsletterEntryWebcontentSelectorForm>
-
   <FormWebcontentSelector>
     <title>
       <SelectWebcontent>Sélectionnez un contenu</SelectWebcontent>
     </title>
   </FormWebcontentSelector>
-
   <UICategoryFormPopupWindow>
     <title>
-      <UICategoryForm>Edition d'une Catégorie</UICategoryForm>
+      <UICategoryForm>Créer une nouvelle catégorie</UICategoryForm>
     </title>
   </UICategoryFormPopupWindow>
-
   <UISubscriptionFormPopupWindow>
     <title>
       <UISubcriptionForm>Formulaire d'abonnement</UISubcriptionForm>
       <UIManagerUsers>Gestion des utilisateurs</UIManagerUsers>
     </title>
   </UISubscriptionFormPopupWindow>
-
   <UINewsletterEntryFormPopupWindow>
     <title>
-      <UINewsletterEntryContainer>Abonnement aux Newsletters</UINewsletterEntryContainer>
+      <UINewsletterEntryContainer>Edition d'une Newsletter</UINewsletterEntryContainer>
     </title>
     <action>
       <Cancel>Annuler</Cancel>
     </action>
   </UINewsletterEntryFormPopupWindow>
-
   <UIManagerUsersFormPopupWindow>
     <title>
       <UIManagerUsers>Gestion des utilisateurs</UIManagerUsers>
     </title>
   </UIManagerUsersFormPopupWindow>
-
   <UICategoryForm>
     <msg>
       <saveSuccess>La catégorie a été enregistrée.</saveSuccess>
-      <categoryNameIsNotEmpty>Le nom de la catégorie ne peut pas être vide!</categoryNameIsNotEmpty>
-      <categoryTitleIsNotEmpty>Le titre de la catégorie ne peut pas être vide!</categoryTitleIsNotEmpty>
-      <categoryNameIsAlreadyExist>Ce nom de catégorie existe déjà!</categoryNameIsAlreadyExist>
-      <inputModeratorEmpty>Vous devez sélectionner un modérateur</inputModeratorEmpty>
-      <error-add-category>Erreur lors de l'ajouter ou modifier catégorie.</error-add-category>
-      <doNotHaveModerators>Ne pas avoir d'animateurs!</doNotHaveModerators>
+      <categoryNameIsNotEmpty>Le nom de la catégorie ne peut pas être vide.</categoryNameIsNotEmpty>
+      <categoryTitleIsNotEmpty>Le titre de la catégorie ne peut pas être vide.</categoryTitleIsNotEmpty>
+      <categoryNameIsAlreadyExist>Ce nom de catégorie existe déjà.</categoryNameIsAlreadyExist>
+      <inputModeratorEmpty>Vous devez sélectionner au moins un modérateur</inputModeratorEmpty>
+      <error-add-category>Erreur lors de l'ajout ou édition de la catégorie.</error-add-category>
+      <doNotHaveModerators>Il n'y a aucun modérateur.</doNotHaveModerators>
     </msg>
     <label>
       <CategoryName>Nom</CategoryName>
@@ -108,7 +96,6 @@
       <Cancel>Annuler</Cancel>
     </action>
   </UICategoryForm>
-
   <UICategories>
     <title>
       <SubScription>Abonnement</SubScription>
@@ -120,32 +107,30 @@
       <Administration>Administration</Administration>
     </title>
     <msg>
-      <get-list-categories>erreur lorsque vous effectuez obtenir liste des catégories.</get-list-categories>
-      <get-list-subscriptions>erreur lorsque vous effectuez obtenir abonnements liste.</get-list-subscriptions>
+      <get-list-categories>Une erreur s'est produite lors de la récupération des catégories</get-list-categories>
+      <get-list-subscriptions>Une erreur s'est produite lors de la récupération des abonnements</get-list-subscriptions>
     </msg>
   </UICategories>
-
   <UISubscription>
     <msg>
       <confirmDeleteCategory>Êtes-vous sûr de vouloir supprimer cette catégorie?</confirmDeleteCategory>
       <confirmDeleteSubscription>Êtes-vous sûr de vouloir supprimer cet abonnement?</confirmDeleteSubscription>
-      <checkOnlyOneSubScriptionToEdit>S'il vous plaît cocher une seule case d'abonnement à modifier!</checkOnlyOneSubScriptionToEdit>
-      <checkOnlyOneSubScriptionToDelete>S'il vous plaît cocher une seule case pour supprimer l'abonnement!</checkOnlyOneSubScriptionToDelete>
-      <subscriptionNotfound>Cet abonnement n'existe pas!</subscriptionNotfound>
-      <checkOnlyOneSubScriptionToOpen>S'il vous plaît cocher une seule case d'abonnement à ouvrir!</checkOnlyOneSubScriptionToOpen>
-      <checkOnlyOneNewsletterToEdit>S'il vous plaît cocher une seule case de nouvelle lettre à modifier!</checkOnlyOneNewsletterToEdit>
-      <checkOnlyOneNewsletterToDelete>S'il vous plaît cocher une seule case pour supprimer la nouvelle lettre!</checkOnlyOneNewsletterToDelete>
-      <checkOnlyOneNewsletterToOpen>S'il vous plaît cocher une seule case de nouvelle lettre à ouvrir!</checkOnlyOneNewsletterToOpen>
-      <checkOnlyOneNewsletterToConvert>S'il vous plaît cocher une seule lettre d'information pour convertir!</checkOnlyOneNewsletterToConvert>
-		
-	  <checkOneNewsletterToEdit>S'il vous plaît cocher une case de nouvelle lettre à modifier!</checkOneNewsletterToEdit>      
-      <checkOneNewsletterToOpen>S'il vous plaît cocher une case de nouvelle lettre à ouvrir!</checkOneNewsletterToOpen>
-      <checkOneNewsletterToConvert>S'il vous plaît cocher une lettre d'information pour convertir!</checkOneNewsletterToConvert>
-			
-		
+      <checkOnlyOneSubScriptionToEdit>Sélectionnez un seul abonnement pour l'édition</checkOnlyOneSubScriptionToEdit>
+      <checkOnlyOneSubScriptionToDelete>Sélectionnez les abonnements que vous souhaitez supprimer</checkOnlyOneSubScriptionToDelete>
+      <subscriptionNotfound>Cet abonnement n'existe pas.</subscriptionNotfound>
+      <checkOnlyOneSubScriptionToOpen>Sélectionnez un seul abonnement à ouvrir</checkOnlyOneSubScriptionToOpen>
+      <checkOneSubScriptionToEdit>Sélectionnez un seul abonnement pour l'édition</checkOneSubScriptionToEdit>
+      <checkOneSubScriptionToOpen>Sélectionnez un seul abonnement à ouvrir</checkOneSubScriptionToOpen>
+      <checkOnlyOneNewsletterToEdit>Sélectionnez une seule lettre pour l'édition</checkOnlyOneNewsletterToEdit>
+      <checkOnlyOneNewsletterToDelete>Sélectionnez les lettres que vous souhaitez supprimer</checkOnlyOneNewsletterToDelete>
+      <checkOnlyOneNewsletterToOpen>Sélectionnez une seule lettre à ouvrir</checkOnlyOneNewsletterToOpen>
+      <checkOnlyOneNewsletterToConvert>Sélectionnez une seule lettre pour la convertir</checkOnlyOneNewsletterToConvert>
+      <checkOneNewsletterToEdit>Sélectionnez une seule lettre pour l'édition</checkOneNewsletterToEdit>
+      <checkOneNewsletterToOpen>Sélectionnez une seule lettre à ouvrir.</checkOneNewsletterToOpen>
+      <checkOneNewsletterToConvert>Sélectionnez une seule lettre à convertir</checkOneNewsletterToConvert>
       <convertSuccessful>Lettre convertie en tant que modèle avec succès</convertSuccessful>
       <templateIsExist>Il existe déjà un modèle avec le même nom! Merci de modifier le titre et de réessayer.</templateIsExist>
-      <get-list-subscriptions>erreur lorsque vous effectuez obtenir abonnements liste. </get-list-subscriptions>
+      <get-list-subscriptions>Une erreur s'est produite lors de la récupération des abonnements</get-list-subscriptions>
     </msg>
     <title>
       <ManageCategory>Gérer la catégorie</ManageCategory>
@@ -157,47 +142,41 @@
       <Open>Ouvert</Open>
     </title>    
   </UISubscription>
-
   <FormCategoryModerator>
     <title>
-      <SelectUser>Sélectionnez l'utilisateur</SelectUser>
-      <SelectMember>Sélectionnez le membre</SelectMember>
-      <DeleteModerator>Supprimer Modérateur</DeleteModerator>
+      <SelectUser>Sélectionnez un utilisateur</SelectUser>
+      <SelectMember>Sélectionnez un membre</SelectMember>
+      <DeleteModerator>Supprimer le modérateur</DeleteModerator>
     </title>
   </FormCategoryModerator>
-
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Sélectionnez le groupe</selectGroup>
-      <selectMembership>Sélectionnez l'adhésion</selectMembership>
+      <selectGroup>Sélectionnez un groupe</selectGroup>
+      <selectMembership>Sélectionnez le droit</selectMembership>
     </label>
   </UIGroupMemberSelector>
-
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Êtes-vous sûr de vouloir supprimer cette catégorie de la liste?</confirm-delete>
+      <confirm-delete>Êtes-vous sûr de vouloir supprimer cette catégorie ?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
-
   <UIUserMemberSelectorPopupWindow>
     <title>
-      <UIUserMemberSelector>Sélecteur d'utilisateur</UIUserMemberSelector>
+      <UIUserMemberSelector>Sélection d'utilisateur</UIUserMemberSelector>
     </title>
   </UIUserMemberSelectorPopupWindow>
-
   <UIGroupMemberSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Sélecteur de groupe</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Sélection de groupe</UIGroupMemberSelector>
     </title>
   </UIGroupMemberSelectorPopupWindow>
-
   <UISubcriptionForm>
     <msg>
       <saveSuccess>L'abonnement a été enregistré.</saveSuccess>
-      <subcriptionNameIsNotEmpty>Le nom d'abonnement ne peut pas être vide!</subcriptionNameIsNotEmpty>
-      <subcriptionTitleIsNotEmpty>le titre d'abonnement ne peut pas être vide!</subcriptionTitleIsNotEmpty>
-      <subcriptionNameIsAlreadyExist>Le nom de cet abonnement existe déjà!</subcriptionNameIsAlreadyExist>
-      <selectRedactorPermission>Vous devez sélectionner l'utilisateur ou rédacteur membre!</selectRedactorPermission>
+      <subcriptionNameIsNotEmpty>Le nom d'abonnement ne peut pas être vide.</subcriptionNameIsNotEmpty>
+      <subcriptionTitleIsNotEmpty>le titre d'abonnement ne peut pas être vide.</subcriptionTitleIsNotEmpty>
+      <subcriptionNameIsAlreadyExist>Ce nom d'abonnement existe déjà.</subcriptionNameIsAlreadyExist>
+      <selectRedactorPermission>Vous devez sélectionner au moins un rédacteur pour l'abonnement.</selectRedactorPermission>
     </msg>
     <label>
       <SubcriptionName>Nom</SubcriptionName>
@@ -207,12 +186,7 @@
       <UIWCMSubscriptionRedactor>Rédacteur</UIWCMSubscriptionRedactor>
       <UIWCMFormSubscriptionRedactor>Rédacteur</UIWCMFormSubscriptionRedactor>
     </label>
-    <action>
-    	<Save>Sauver</Save>
-    	<Cancel>Annuler</Cancel>
-    </action>
   </UISubcriptionForm>
-
   <UINewsletterEntryForm>
     <action>
       <Select>Sélectionner</Select>
@@ -222,26 +196,17 @@
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <UpdateBeforeSave>
-        Merci de valider la date d'envoi envoyer de sauver la lettre. 
-			</UpdateBeforeSave>
-      <DateTimeIsNotNull>
-        la date d'envoi est nulle. Merci de vérifier à nouveau!
-			</DateTimeIsNotNull>
-      <DateTimeIsInvalid>
-        La date d'envoi n'est pas valide. Merci de vérifier à nouveau!
-			</DateTimeIsInvalid>
-      <UpdateInformationSuccessful>Mise à jour des informations réussie!</UpdateInformationSuccessful>
-      <NodeNameInvalid>
-        Impossible de créer la lettre car son titre existe déjà. Merci d'essayer à nouveau!
-			</NodeNameInvalid>
-      <get-template>erreur lorsque vous effectuez obtenir modèle. </get-template>
-      <get-template-resource>erreur lorsque vous effectuez obtenir modèle de résolution de ressource </get-template-resource>
-      <add-email-newsletter>erreur lorsque vous effectuez ajouter l'adresse e-mail liste. </add-email-newsletter>
-      <send-newsletter>erreur lorsque vous effectuez envoyer des lettres d'informations. </send-newsletter>
+      <UpdateBeforeSave>Merci de valider la date d'envoi avant d'envoyer la lettre.  \t\t\t</UpdateBeforeSave>
+      <DateTimeIsNotNull>La date d'envoi n'est pas renseignée. Merci de vérifier à nouveau.</DateTimeIsNotNull>
+      <DateTimeIsInvalid>La date d'envoi n'est pas valide. Merci de vérifier à nouveau. \t\t\t</DateTimeIsInvalid>
+      <UpdateInformationSuccessful>Mise à jour des informations réussie.</UpdateInformationSuccessful>
+      <NodeNameInvalid>Impossible de créer la lettre car son titre existe déjà. Merci d'essayer à nouveau.</NodeNameInvalid>
+      <get-template>Une erreur s'est produite pendant la récupération du template</get-template>
+      <get-template-resource>Une erreur s'est produite pendant la récupération du template.</get-template-resource>
+      <add-email-newsletter>Une erreur s'est produite sur l'ajout de cette adresse email.</add-email-newsletter>
+      <send-newsletter>Une erreur s'est produite lors de l'envoi de la lettre.</send-newsletter>
     </msg>
   </UINewsletterEntryForm>
-
   <UINewsletterEntryDialogSelector>
     <action>
       <OpenWebcontentSelectorForm>Parcourir les contenus</OpenWebcontentSelectorForm>
@@ -254,10 +219,9 @@
       <UINewsletterEntrySubscriptionSelectBox>Abonnement</UINewsletterEntrySubscriptionSelectBox>
     </title>
     <msg>
-      <subcriptionIsNotEmpty>Subcription ne peut pas être vide!</subcriptionIsNotEmpty>
+      <subcriptionIsNotEmpty>Le nom d'abonnement doit être renseigné.</subcriptionIsNotEmpty>
     </msg>
   </UINewsletterEntryDialogSelector>
-
   <UIManagerUsers>
     <header>
       <Mail>Email</Mail>
@@ -286,18 +250,17 @@
       <User>Utilisateur</User>
     </role>
     <msg>
-      <get-list-users> erreur lorsque obtenir la liste des utilisateurs publics. </get-list-users>
-      <set-infor-users> erreur lorsque ensemble d'information pour les utilisateurs. </set-infor-users>
-	  <remove-admin-role-of-root>Vous ne pouvez supprimer le rôle d'administrateur de l'utilisateur supérieur.</remove-admin-role-of-root>
+      <get-list-users>Une erreur s'est produite lors de la récupération de la liste des utilisateurs</get-list-users>
+      <set-infor-users>Une erreur s'est produite lors de l'enregistrement des informations des utilisateurs.</set-infor-users>
+      <remove-admin-role-of-root>Vous ne pouvez pas supprimer le profil d'administrateur pour l'administrateur général de la plateforme</remove-admin-role-of-root>
     </msg>
   </UIManagerUsers>
-
   <UINewsletterEntryManager>
     <msg>
       <confirmDeleteNewsletter>Êtes-vous sûr de vouloir supprimer cette Newsletter ?</confirmDeleteNewsletter>
-      <get-checked>erreur lorsque vous effectuez obtenir un bulletin ou de souscription est cochée. </get-checked>
-      <set-list-newsletter>erreur lorsque vous effectuez ensemble des entrées newsletter liste. </set-list-newsletter>
-      <canNotEditNewsletter>Ce bulletin a été transmis, ne peut pas modifier. Vous ne convertir que ce modèle au fur et à ajouter de nouveaux Newsletter avec ce modèle.</canNotEditNewsletter>
+      <set-list-newsletter>Une erreur s'est produite sur l'enregistrement des lettres.</set-list-newsletter>
+      <get-checked>Une erreur s'est produite pendant la récupération de la lettre.</get-checked>
+      <canNotEditNewsletter>Une lettre envoyée ne peut plus être éditée. Vous pouvez la convertir en template pour la réutiliser dans une nouvelle lettre.</canNotEditNewsletter>
     </msg>
     <title>
       <ConvertAsTemplate>Convertir en tant que modèle</ConvertAsTemplate>
@@ -305,23 +268,28 @@
       <Date>Date</Date>
       <Status>État</Status>
       <EditSubscription>Modifier l'abonnement</EditSubscription>
-      <CheckAll>Check All</CheckAll>
+      <CheckAll>Tout sélectionner</CheckAll>
     </title>
   </UINewsletterEntryManager>
-
   <UINewsletterEntryViewForm>
     <title>
       <UINewsletterManagerPopup>Voir le contenu de la Newsletter</UINewsletterManagerPopup>
     </title>
   </UINewsletterEntryViewForm>
-
+  <WebContent>
+    <dialog>
+      <label>
+        <Advanced>Avancé</Advanced>
+      </label>
+    </dialog>
+  </WebContent>
   <UIRemoveModeratorsFormPopupWindow>
     <title>
-      <UIRemoveModerators>Retirer Modérateurs</UIRemoveModerators>
+      <UIRemoveModerators>Retirer les modérateurs</UIRemoveModerators>
     </title>
     <msg>
-      <checkToRemove>S'il vous plaît, cocher une ou plusieurs autorisations dans la liste à supprimer</checkToRemove>
-      <donotMoveYourSelt>Vous avez seulement retirer votre autorisation dans la liste, s'il vous plaît vérifier à nouveau!</donotMoveYourSelt>
+      <checkToRemove>Sélectionnez au moins un droit à supprimer dans la liste.</checkToRemove>
+      <donotMoveYourSelt>Votre droit a été retiré de la liste, veuillez vérifier.</donotMoveYourSelt>
     </msg>
   </UIRemoveModeratorsFormPopupWindow>
 </bundle>

@@ -1,28 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UIFormGeneratorTabPane>
     <label>
       <UIFormGeneratorGeneralTab>Général</UIFormGeneratorGeneralTab>
       <FormGeneratorName>Nom</FormGeneratorName>
-      <UIFormGeneratorNodetypeFormSelectBox>Sur la base nodeType</UIFormGeneratorNodetypeFormSelectBox>
-      <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
+      <UIFormGeneratorNodetypeFormSelectBox>Type de contenu</UIFormGeneratorNodetypeFormSelectBox>
       <UIFormGeneratorDescriptionFormWYSIWYGInput>Description</UIFormGeneratorDescriptionFormWYSIWYGInput>
-      <UIFormGeneratorIconFormUploadInput>Icon</UIFormGeneratorIconFormUploadInput>
+      <UIFormGeneratorIconFormUploadInput>Icône</UIFormGeneratorIconFormUploadInput>
       <UIFormGeneratorDnDTab>Constructeur de formulaire</UIFormGeneratorDnDTab>
       <UIFormGeneratorOptionsTab>Options</UIFormGeneratorOptionsTab>
-      <UIFormGeneratorVoteFormCheckboxInput>Permettez-vote</UIFormGeneratorVoteFormCheckboxInput>
-      <UIFormGeneratorCommentFormCheckboxInput>Laisser un commentaire</UIFormGeneratorCommentFormCheckboxInput>
+      <UIFormGeneratorVoteFormCheckboxInput>Activer le vote</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>Activer les commentaires</UIFormGeneratorCommentFormCheckboxInput>
     </label>
     <action>
-      <Save>Sauver</Save>
-      <Reset>Reset</Reset>
+      <Save>Enregistrer</Save>
+      <Reset>Réinitialiser</Reset>
     </action>
     <msg>
-      <register-failed>NodeType enregistrement est vain. Il est en vigueur ou Super types est invalide</register-failed>
-      <AddNewsSuccessful>Le formulaire a été créé avec succès</AddNewsSuccessful>
-      <duplicate-name>Nom du champ label est double, s'il vous plaît le nom de différence d'entrée</duplicate-name>
-      <select-value-empty>Certains champs de la valeur par défaut de boîte de sélection ne peut pas être vide, s'il vous plaît valeur d'entrée pour lui.</select-value-empty>
-      <input-only-special-characters>Le champ Label a de caractères alphanumériques doit</input-only-special-characters>
+      <register-failed>L'enregistrement de ce type de contenu a échoué, soit il existe déjà, soit les données entrées ne sont pas valides.</register-failed>
+      <AddNewsSuccessful>Le formulaire {0} a été créé avec succès.</AddNewsSuccessful>
+      <duplicate-name>Le champ Nom du Label est dupliqué. Veuillez en saisir un autre.</duplicate-name>
+      <select-value-empty>Les valeurs par défaut pour les liste de sélection ne doivent pas être vides. Veuillez saisir une valeur.</select-value-empty>
+      <input-only-special-characters>Le champ Label doit être au format alphanumérique.</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>

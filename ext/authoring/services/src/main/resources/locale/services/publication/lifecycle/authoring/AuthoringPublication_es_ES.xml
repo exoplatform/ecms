@@ -3,13 +3,13 @@
   <PublicationService>
     <AuthoringPublicationPlugin>
       <changeState>
-        <obsoleted>El contenido est\u00e1 obsoleto</obsoleted>
+        <obsoleted>El contenido está obsoleto</obsoleted>
         <published>El contenido se publica</published>
-        <unpublished>El contenido est\u00e1 in\u00e9dito</unpublished>
-        <archived>El contenido est\u00e1 archivado</archived>
-        <staged>El contenido est\u00e1 escenificado</staged>
-        <approved>El contenido est\u00e1 aprobado</approved>
-        <pending>El contenido est\u00e1 pendiente</pending>
+        <unpublished>El contenido está inédito</unpublished>
+        <archived>El contenido está archivado</archived>
+        <staged>El contenido está escenificado</staged>
+        <approved>El contenido está aprobado</approved>
+        <pending>El contenido está pendiente</pending>
         <draft>El contenido es un borrador</draft>
       </changeState>
     </AuthoringPublicationPlugin>

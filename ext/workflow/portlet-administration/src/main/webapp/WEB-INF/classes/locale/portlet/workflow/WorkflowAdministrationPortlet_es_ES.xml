@@ -7,11 +7,11 @@
   -->
   <UIWorkflowAdministrationPortlet>
     <tab>
-      <label>Administraci\u00f3n</label>
-      <text>Administraci\u00f3n del Flujo de Trabajo</text>
+      <label>Administración</label>
+      <text>Administración del Flujo de Trabajo</text>
     </tab>
     <msg>
-      <refresh-session-success>La sesi\u00f3n se actualiz\u00f3 correctamente.</refresh-session-success>
+      <refresh-session-success>La sesión se actualizó correctamente.</refresh-session-success>
     </msg>
     <label>
       <refresh>Actualizar</refresh>
@@ -28,11 +28,11 @@
     <header>
       <id>Proceso de Id</id>
       <name>Nombre del Proceso</name>
-      <version>Versi\u00f3n del Proceso</version>
-      <action>Acci\u00f3n</action>
+      <version>Versión del Proceso</version>
+      <action>Acción</action>
     </header>
     <msg>
-      <empty>Ning\u00fan proceso de negocio para supervisar</empty>
+      <empty>Ningún proceso de negocio para supervisar</empty>
     </msg>
   </UIMonitor>
   <UIAdministrationManager>
@@ -43,7 +43,7 @@
       </label>
     </tab>
     <msg>
-      <confirm-delete-process>\u00bfEst\u00e1s seguro de eliminar este modelo de proceso?</confirm-delete-process>
+      <confirm-delete-process>¿Estás seguro de eliminar este modelo de proceso?</confirm-delete-process>
     </msg>
     <action>
       <UploadProcess>Subir Proceso</UploadProcess>
@@ -79,14 +79,14 @@
       <upload>Seleccione archivo</upload>
     </label>
     <action>
-      <Save>\#{word.save}</Save>
-      <Cancel>\#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>La ruta del archivo no se encontr\u00f3.</fileName-error>
-      <fileName-invalid>El nombre del archivo contiene algunos caracteres no v\u00e1lidos. Por favor vuelva a escribir el nombre o cargue otro archivo.</fileName-invalid>
-      <process-successful>\u00a1La carga fu\u00e9 exitosa\!</process-successful>
-      <data-invalid>Error al cargar. Tal vez, el prop\u00f3sito de definici\u00f3n del archivo de proceso no ser encontrado o los datos son inv\u00e1lidos.</data-invalid>
+      <fileName-error>La ruta del archivo no se encontró.</fileName-error>
+      <fileName-invalid>El nombre del archivo contiene algunos caracteres no válidos. Por favor vuelva a escribir el nombre o cargue otro archivo.</fileName-invalid>
+      <process-successful>¡La carga fué exitosa!</process-successful>
+      <data-invalid>Error al cargar. Tal vez, el propósito de definición del archivo de proceso no ser encontrado o los datos son inválidos.</data-invalid>
     </msg>
   </UIUploadProcess>
   <UIProcessDetailGrid>
@@ -95,8 +95,8 @@
       <processId>Proceso de Id</processId>
       <processName>Nombre del Proceso</processName>
       <startDate>Fecha de comienzo</startDate>
-      <endDate>Fecha de finalizaci\u00f3n</endDate>
-      <action>Acci\u00f3n</action>
+      <endDate>Fecha de finalización</endDate>
+      <action>Acción</action>
     </header>
     <msg>
       <empty>Por favor, seleccione el proceso que desea para ver el detalle.</empty>
@@ -104,9 +104,9 @@
   </UIProcessDetailGrid>
   <UIProcessDetail>
     <msg>
-      <confirm-delete-process>\u00bfEst\u00e1s seguro de eliminar la instancia de este proceso?</confirm-delete-process>
-      <confirm-delete-completed-process>\u00bfEst\u00e1s seguro de eliminar estos procesos terminados?</confirm-delete-completed-process>
-      <result-delete-completed-process>No hay ning\u00fan proceso completado para eliminar.</result-delete-completed-process>
+      <confirm-delete-process>¿Estás seguro de eliminar la instancia de este proceso?</confirm-delete-process>
+      <confirm-delete-completed-process>¿Estás seguro de eliminar estos procesos terminados?</confirm-delete-completed-process>
+      <result-delete-completed-process>No hay ningún proceso completado para eliminar.</result-delete-completed-process>
     </msg>
     <action>
       <FlushAll>Borrar Todo</FlushAll>
@@ -142,10 +142,10 @@
       <processName>Nombre del Proceso</processName>
       <startDate>Fecha de comienzo</startDate>
       <endDate>Fin de la Fecha</endDate>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <msg>
-      <empty>No hay ning\u00fan proceso para ver los detalles.</empty>
+      <empty>No hay ningún proceso para ver los detalles.</empty>
     </msg>
     <action>
       <Cancel>Cancelar</Cancel>
@@ -158,10 +158,10 @@
       <processName>Nombre del Proceso</processName>
       <startDate>Fecha de comienzo</startDate>
       <endDate>Fin de la Fecha</endDate>
-      <action>Acci\u00f3n</action>
+      <action>Acción</action>
     </header>
     <msg>
-      <empty>No hay ning\u00fan proceso para ver los detalles.</empty>
+      <empty>No hay ningún proceso para ver los detalles.</empty>
     </msg>
     <action>
       <FlushAll>Borrar Todo</FlushAll>

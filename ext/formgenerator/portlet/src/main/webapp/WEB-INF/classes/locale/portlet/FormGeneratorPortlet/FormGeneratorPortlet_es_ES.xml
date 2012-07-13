@@ -4,12 +4,12 @@
     <label>
       <UIFormGeneratorGeneralTab>General</UIFormGeneratorGeneralTab>
       <FormGeneratorName>Nombre</FormGeneratorName>
-      <UIFormGeneratorNodetypeFormSelectBox>Seg\u00fan tipo de nodo</UIFormGeneratorNodetypeFormSelectBox>
-      <UIFormGeneratorDescriptionFormWYSIWYGInput>Descripci\u00f3n</UIFormGeneratorDescriptionFormWYSIWYGInput>
+      <UIFormGeneratorNodetypeFormSelectBox>Según tipo de nodo</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorDescriptionFormWYSIWYGInput>Descripción</UIFormGeneratorDescriptionFormWYSIWYGInput>
       <UIFormGeneratorIconFormUploadInput>Icono</UIFormGeneratorIconFormUploadInput>
       <UIFormGeneratorDnDTab>Constructor de Formularios</UIFormGeneratorDnDTab>
       <UIFormGeneratorOptionsTab>Opciones</UIFormGeneratorOptionsTab>
-      <UIFormGeneratorVoteFormCheckboxInput>Permitir la votaci\u00f3n</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorVoteFormCheckboxInput>Permitir la votación</UIFormGeneratorVoteFormCheckboxInput>
       <UIFormGeneratorCommentFormCheckboxInput>Permitir comentarios</UIFormGeneratorCommentFormCheckboxInput>
     </label>
     <action>
@@ -17,11 +17,11 @@
       <Reset>Restablecer</Reset>
     </action>
     <msg>
-      <register-failed>El registro del tipo de nodo no tuvo \u00e9xito.  El mismo ya existe o Super types es inv\u00e1lido.</register-failed>
-      <AddNewsSuccessful>La plantilla del tipo de nodo {0} fu\u00e9 generada exitosamente.</AddNewsSuccessful>
-      <duplicate-name>El campo del nombre de la etiqueta est\u00e1 duplicado. Favor de escribir otro.</duplicate-name>
-      <select-value-empty>Algunos campos en el valor predeterminado del cuadro de selecci\u00f3n no pueden estar vac\u00edos. Por favor a\u00f1ada los valores de entrada para los mismos.</select-value-empty>
-      <input-only-special-characters>El campo de etiqueta debe tiene car\u00e1cter alfanum\u00e9rico</input-only-special-characters>
+      <register-failed>El registro del tipo de nodo no tuvo éxito.  El mismo ya existe o Super types es inválido.</register-failed>
+      <AddNewsSuccessful>La plantilla del tipo de nodo {0} fué generada exitosamente.</AddNewsSuccessful>
+      <duplicate-name>El campo del nombre de la etiqueta está duplicado. Favor de escribir otro.</duplicate-name>
+      <select-value-empty>Algunos campos en el valor predeterminado del cuadro de selección no pueden estar vacíos. Por favor añada los valores de entrada para los mismos.</select-value-empty>
+      <input-only-special-characters>El campo de etiqueta debe tiene carácter alfanumérico</input-only-special-characters>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>
@@ -32,7 +32,7 @@
   </FormGeneratorDialog>
   <ECMNameValidator>
     <msg>
-      <Invalid-char>El campo '{0}' contiene algunos caracteres que no v\u00e1lidos. Por favor escriba otro valor.</Invalid-char>
+      <Invalid-char>El campo '{0}' contiene algunos caracteres que no válidos. Por favor escriba otro valor.</Invalid-char>
     </msg>
   </ECMNameValidator>
 </bundle>

@@ -4,31 +4,31 @@
     <view>
       <label>
         <url>URL</url>
-        <description>Descripci\u00f3n</description>
+        <description>Descripción</description>
       </label>
     </view>
   </WebLink>
   <SiteMetadata>
     <view>
       <label>
-        <title>T\u00edtulo del Sitio</title>
-        <description>Descripci\u00f3n del Sitio</description>
+        <title>Título del Sitio</title>
+        <description>Descripción del Sitio</description>
         <keywords>Palabras clave del sitio</keywords>
-        <robots>Comportamiento del motor de b\u00fasqueda</robots>
+        <robots>Comportamiento del motor de búsqueda</robots>
       </label>
       <tooltip>
         <add-edit>Agregar/Editar metadatos</add-edit>
         <cancel>Cancelar</cancel>
       </tooltip>
       <action>
-        <add-edit>A\u00f1adir/Editar</add-edit>
+        <add-edit>Añadir/Editar</add-edit>
         <cancel>Cancelar</cancel>
       </action>
     </view>
   </SiteMetadata>
   <Category>
     <view>
-      <label>Categor\u00eda</label>
+      <label>Categoría</label>
     </view>
   </Category>
   <Tag>
