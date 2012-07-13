@@ -2,7 +2,7 @@
   import org.exoplatform.web.application.JavascriptManager;
   import java.util.HashMap;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;  
-  def rcontext = _ctx.getRequestContext() ;
+  def rcontext = _ctx.getRequestContext();
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   JavascriptManager jsmanager = rcontext.getJavascriptManager();
   

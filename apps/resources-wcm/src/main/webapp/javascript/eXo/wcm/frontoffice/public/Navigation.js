@@ -7,59 +7,6 @@ function WCMNavigationPortlet() {
   this.scrollManagerLoaded = false;
 };
 
-ScrollManager.prototype.checkAvailableSpace = function(maxSpace) { // in pixels
-	if (!maxSpace) maxSpace = this.getElementSpace(this.mainContainer) - this.getElementSpace(this.arrowsContainer) - 50;
-	var elementsSpace = 0;
-	var margin = 0;
-	var length =  this.elements.length;
-	for (var i = 0; i < length; i++) {
-		elementsSpace += this.getElementSpace(this.elements[i]);
-		//dynamic margin;
-		if (i+1 < length) margin = this.getElementSpace(this.elements[i+1]) / 3;
-		else margin = this.margin;
-		if (elementsSpace + margin < maxSpace) { // If the tab fits in the available space
-			this.elements[i].isVisible = true;
-			this.lastVisibleIndex = i;
-		} else { // If the available space is full
-			this.elements[i].isVisible = false;
-		}
-	}
-};
-
-ScrollManager.prototype.getVisibleElements = function() {
-	var availableSpace = this.getElementSpace(this.mainContainer) - this.getElementSpace(this.arrowsContainer) - 50;
-	var refereceIndex = 0;
-	var margin = 0;
-	var elementsSpace = 0;
-	
-	if (this.currDirection) {
-		var length = this.elements.length;
-		for (var i = this.firstVisibleIndex; i < length ; i++) {
-			elementsSpace += this.getElementSpace(this.elements[i]);
-			//dynamic margin;
-			if (i+1 < length) margin = this.getElementSpace(this.elements[i+1]) / 3;
-			else margin = this.margin;
-			if (elementsSpace + margin < availableSpace) {
-				this.elements[i].isVisible = true;
-				refereceIndex = i;
-			} else this.elements[i].isVisible = false;
-		}
-		if (this.lastVisibleIndex == refereceIndex) this.scrollRight();
-		else this.lastVisibleIndex = refereceIndex;
-	} else {
-		for (var i = this.lastVisibleIndex; i >= 0 ; i--) {
-			elementsSpace += this.getElementSpace(this.elements[i]);
-			//dynamic margin;
-			margin = this.getElementSpace(this.elements[this.lastVisibleIndex]) / 3;
-			if (elementsSpace + margin < availableSpace) {
-				this.elements[i].isVisible = true;
-				refereceIndex = i;
-			} else this.elements[i].isVisible = false;
-		}
-		if (this.firstVisibleIndex == refereceIndex) this.scrollLeft();
-		else this.firstVisibleIndex = refereceIndex;
-	}
-};
 
 /**
  * Sets some parameters :

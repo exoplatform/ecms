@@ -144,5 +144,44 @@
       </depends>
    </module>
    
+   <module>
+   		<name>wcm-navigation</name>
+   		<script>
+   			<name>eXo.ecm.WCMNavigationPortlet</name>
+   			<path>/javascript/eXo/wcm/frontoffice/public/Navigation.js</path>
+   		</script>
+   		<depends>
+   			<module>ecm-bootstrap</module>
+   		</depends>
+   		<depends>
+   			<module>navigation</module>
+   		</depends>
+   </module>
+   
+   <module>
+   		<name>wcm-search</name>
+   		<script>
+   			<name>eXo.ecm.SearchPortlet</name>
+   			<path>/javascript/eXo/wcm/frontoffice/public/Search.js</path>
+   		</script>
+   		<depends>
+   			<module>ecm-bootstrap</module>
+   		</depends>
+   		<depends>
+   			<module>jquery</module>
+   		</depends>
+   </module>
+   
+   <module>
+   		<name>wcm-breadcrumb</name>
+   		<script>
+   			<name>eXo.ecm.WCMBreadcrumbPortlet</name>
+   			<path>/javascript/eXo/wcm/frontoffice/public/Breadcrumb.js</path>
+   		</script>
+   		<depends>
+   			<module>ecm-bootstrap</module>
+   		</depends>
+   </module>
+   
 </gatein-resources>
 

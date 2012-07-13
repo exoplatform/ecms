@@ -62,5 +62,16 @@
       </depends>
    </module>
    
+   <module>
+      <name>ecm-browser</name>
+      <script>
+         <name>eXo.ecm.DMSBrowser</name>
+         <path>/javascript/eXo/ecm/DMSBrowser.js</path>
+      </script>
+      <depends>
+      	<module>ecm-bootstrap</module>
+      </depends>
+	 </module>   
+   
 </gatein-resources>
 

@@ -27,10 +27,9 @@
     return currentNode ;
   }
   
-  def rcontext = _ctx.getRequestContext() ; 
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.DMSBrowser.managerResize();");
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().loadScriptResource("ecm-utils");
+  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.DMSBrowser.managerResize()");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();  
   
