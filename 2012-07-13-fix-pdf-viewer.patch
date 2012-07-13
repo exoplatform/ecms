@@ -1,0 +1,39 @@
+diff --git a/core/connector/src/main/java/org/exoplatform/wcm/connector/viewer/PDFViewerRESTService.java b/core/connector/src/main/java/org/exoplatform/wcm/connector/viewer/PDFViewerRESTService.java
+index 9564076..905778b 100644
+--- a/core/connector/src/main/java/org/exoplatform/wcm/connector/viewer/PDFViewerRESTService.java
++++ b/core/connector/src/main/java/org/exoplatform/wcm/connector/viewer/PDFViewerRESTService.java
+@@ -284,7 +284,8 @@ public class PDFViewerRESTService implements ResourceContainer {
+     File content = null;
+     String name = currentNode.getName();
+     Node contentNode = currentNode.getNode("jcr:content");
+-    String lastModified = contentNode.getProperty("jcr:lastModified").getString();
++    String lastModified = getJcrLastModified(currentNode);
++
+     if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
+       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
+       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
+@@ -323,14 +324,20 @@ public class PDFViewerRESTService implements ResourceContainer {
+         }
+       }
+       if (content.exists()) {
+-          if (contentNode.hasProperty("jcr:lastModified")) {
+-            pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
+-            pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
+-          }
++        pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
++        pdfCache.put(new ObjectKey(bd1.toString()), lastModified);
+       }
+     }
+     return content;
+   }
++  
++  private String getJcrLastModified(Node node) throws Exception {
++    Node checkedNode = node;
++    if (node.isNodeType("nt:frozenNode")) {
++      checkedNode = node.getSession().getNodeByUUID(node.getProperty("jcr:frozenUuid").getString());
++    }
++    return checkedNode.getProperty("jcr:content/jcr:lastModified").getString();
++  }  
+ 
+   private void read(InputStream is, OutputStream os) throws Exception {
+     int bufferLength = 1024;
