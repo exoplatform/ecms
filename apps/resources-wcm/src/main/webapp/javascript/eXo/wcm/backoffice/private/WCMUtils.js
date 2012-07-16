@@ -239,4 +239,8 @@ WCMUtils.prototype.replaceToIframe = function(txtAreaId) {
   } catch (ex) {}
 };
 
+WCMUtils.prototype.setZIndex = function(index) {
+	eXo.webui.UIPopup.zIndex = index;
+};
+
 eXo.ecm.WCMUtils = new WCMUtils();
