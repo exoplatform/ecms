@@ -25,7 +25,12 @@ public class JodConverterServiceImpl implements JodConverterService, Startable {
 
   public JodConverterServiceImpl(InitParams initParams) throws Exception {
     int ports[];
-    enable = Boolean.parseBoolean(System.getProperty("wcm.jodconverter.enable"));
+    String enableJod = System.getProperty("wcm.jodconverter.enable");
+    if(enableJod == null || enableJod.isEmpty()) {
+      enable = true;
+    } else {
+      enable = Boolean.parseBoolean(enableJod);
+    }
     if(enable) {
       String officeHomeParam = initParams.getValueParam("officeHome").getValue();
       String portNumbers = initParams.getValueParam("port").getValue();
