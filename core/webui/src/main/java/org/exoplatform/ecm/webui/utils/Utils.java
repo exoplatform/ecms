@@ -404,7 +404,7 @@ public class Utils {
       if (node.hasNode(JCR_CONTENT)) {
         Node jcrContentNode = node.getNode(JCR_CONTENT);
         str.append(' ').append(
-            jcrContentNode.getProperty(JCR_MIMETYPE).getString().replaceAll(
+            jcrContentNode.getProperty(JCR_MIMETYPE).getString().toLowerCase().replaceAll(
                 "/|\\.", "_")).append(appended);
       }
     }
@@ -999,7 +999,7 @@ public class Utils {
     UIExtensionManager manager = WCMCoreUtils.getService(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(FILE_VIEWER_EXTENSION_TYPE);
     Map<String, Object> context = new HashMap<String, Object>();
-    context.put(MIME_TYPE, mimeType);
+    context.put(MIME_TYPE, mimeType.toLowerCase());
     for (UIExtension extension : extensions) {
       UIComponent uiComponent = manager.addUIExtension(extension, context, container);
       if(uiComponent != null) return uiComponent;
