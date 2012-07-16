@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <PublicationRequestApproval>Solicitar aprobación</PublicationRequestApproval>
+      <PublicationApproveContent>Aprobar el contenido</PublicationApproveContent>
+      <PublicationPublish>Publicar</PublicationPublish>
+      <ShowDrives>Mostrar u ocultar las unidades</ShowDrives>
+    </tooltip>
+  </UIActionBar>
+</bundle>

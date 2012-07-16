@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  #############################################################################
+  #      org.exoplatform.workflow.webui.component.controller                    #
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <tab>
+      <label>Controlador</label>
+      <text>Gestionar el flujo de trabajo de admin</text>
+    </tab>
+    <msg>
+      <refresh-session-success>La sesión se actualizó correctamente.</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Actualizar</refresh>
+    </label>
+  </UIWorkflowControllerPortlet>
+  <ControllerPopup>
+    <title>
+      <UITaskManager>Gestión de Tareas</UITaskManager>
+    </title>
+  </ControllerPopup>
+  <UITabPane>
+    <title>
+      <UITaskList>Controlador de Tareas</UITaskList>
+      <UIBPDefinition>Controlador de definición de BP</UIBPDefinition>
+      <UIDocumentContent>Ver contenido</UIDocumentContent>
+      <UIDocumentForm>Editar contenido</UIDocumentForm>
+      <UITask>Tarea</UITask>
+    </title>
+  </UITabPane>
+  <UITaskList>
+    <header>
+      <id>ID de la Tarea</id>
+      <processName>Nombre del Proceso</processName>
+      <taskName>Nombre de la Tarea</taskName>
+      <actor>Actor</actor>
+      <description>Descripción</description>
+      <actorId>Id del actor</actorId>
+      <taskVariables>Variables de la Tarea</taskVariables>
+      <processDateStart>Fecha de Comienzo del Proceso</processDateStart>
+      <action>Acción</action>
+    </header>
+    <label>
+      <managerState>Gestionar</managerState>
+    </label>
+    <msg>
+      <task-not-found>No puede administrar la tarea. Tal vez, ha sido ya gestionado por otro usuario.</task-not-found>
+      <task-change>La tarea ha cambiado o se ha eliminado.</task-change>
+    </msg>
+  </UITaskList>
+  <UITaksList>
+    <msg>
+      <no-task>No hay tareas asignadas</no-task>
+    </msg>
+  </UITaksList>
+  <UITask>
+    <label>
+      <hide-process-link>Ocultar el diagrama de procesos</hide-process-link>
+      <show-process-link>Mostrar el diagrama de proceso</show-process-link>
+      <process-diagram-not-available>Diagrama del proceso no está disponible</process-diagram-not-available>
+    </label>
+    <title>
+      <Delegate>Seleccionar Usuario</Delegate>
+      <state-image>Imagen de estado</state-image>
+    </title>
+    <msg>
+      <has-not-got-delegate>Debe seleccionar cualquier usuario para delegar.</has-not-got-delegate>
+      <user-not-exist>Este usuario delegado no existe.</user-not-exist>
+    </msg>
+  </UITask>
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Seleccionar Usuario</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
+  <UIBPDefinition>
+    <header>
+      <id>ID</id>
+      <name>Nombre</name>
+      <version>Versión</version>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <empty>No hay ningún proceso de negocios para iniciar</empty>
+    </msg>
+  </UIBPDefinition>
+  <UIControllerManager>
+    <action>
+      <title>
+        <ManageStart>Gestionar el Comienzo</ManageStart>
+      </title>
+    </action>
+  </UIControllerManager>
+  <UIDocumentForm>
+    <msg>
+      <cannot-save>Error al guardar el documento.</cannot-save>
+      <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
+      <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
+      <value-invalid>'{0}' es requerido.</value-invalid>
+      <confirm-close>Los cambios hechos serán perdidos al cerrar esta forma.</confirm-close>
+      <confirm-navigate>Los cambios hechos serán perdidos si sale de esta página.</confirm-navigate>
+    </msg>
+  </UIDocumentForm>
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
+      <UIOneNodePathSelector>Seleccione la ruta</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Árbol de categorías</taxonomyTree>
+      <rootNodePath>Raíz de un árbol</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espacio de Trabajo</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Ruta de Raíz</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <PositiveNumberValidator>
+    <msg>
+      <invalid-input>El campo '{0}' con el valor '{1}' no es válido. Este campo requiere un número positivo.</invalid-input>
+    </msg>
+  </PositiveNumberValidator>
+</bundle>

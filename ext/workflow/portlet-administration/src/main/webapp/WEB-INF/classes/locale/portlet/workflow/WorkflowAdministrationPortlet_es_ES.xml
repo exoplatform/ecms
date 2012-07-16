@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.monitor											#
+  #############################################################################
+  -->
+  <UIWorkflowAdministrationPortlet>
+    <tab>
+      <label>Administración</label>
+      <text>Administración del Flujo de Trabajo</text>
+    </tab>
+    <msg>
+      <refresh-session-success>La sesión se actualizó correctamente.</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Actualizar</refresh>
+    </label>
+  </UIWorkflowAdministrationPortlet>
+  <UITabPane>
+    <title>
+      <UIMonitor>Monitor de procesos</UIMonitor>
+      <UICompletedProcesses>Completado</UICompletedProcesses>
+      <UIRunningProcesses>Procesando</UIRunningProcesses>
+    </title>
+  </UITabPane>
+  <UIMonitor>
+    <header>
+      <id>Proceso de Id</id>
+      <name>Nombre del Proceso</name>
+      <version>Versión del Proceso</version>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <empty>Ningún proceso de negocio para supervisar</empty>
+    </msg>
+  </UIMonitor>
+  <UIAdministrationManager>
+    <tab>
+      <label>
+        <UITimers>Temporizadores</UITimers>
+        <UIMonitor>Monitor</UIMonitor>
+      </label>
+    </tab>
+    <msg>
+      <confirm-delete-process>¿Estás seguro de eliminar este modelo de proceso?</confirm-delete-process>
+    </msg>
+    <action>
+      <UploadProcess>Subir Proceso</UploadProcess>
+      <title>
+        <View>Ver</View>
+        <Delete>Borrar</Delete>
+      </title>
+    </action>
+  </UIAdministrationManager>
+  <UITimers>
+    <header>
+      <id>ID</id>
+      <name>Nombre</name>
+      <dueDate>Fecha de Vencimiento</dueDate>
+    </header>
+    <msg>
+      <empty>Sin temporizador</empty>
+    </msg>
+  </UITimers>
+  <AdministrationPopup>
+    <title>
+      <UIProcessDetail>Detalle del proceso</UIProcessDetail>
+    </title>
+  </AdministrationPopup>
+  <UploadProcessPopup>
+    <title>
+      <UIUploadProcess>Proceso de carga</UIUploadProcess>
+    </title>
+  </UploadProcessPopup>
+  <UIUploadProcess>
+    <label>
+      <name>Nombre</name>
+      <upload>Seleccione archivo</upload>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <fileName-error>La ruta del archivo no se encontró.</fileName-error>
+      <fileName-invalid>El nombre del archivo contiene algunos caracteres no válidos. Por favor vuelva a escribir el nombre o cargue otro archivo.</fileName-invalid>
+      <process-successful>¡La carga fué exitosa!</process-successful>
+      <data-invalid>Error al cargar. Tal vez, el propósito de definición del archivo de proceso no ser encontrado o los datos son inválidos.</data-invalid>
+    </msg>
+  </UIUploadProcess>
+  <UIProcessDetailGrid>
+    <header>
+      <processInstanceId>Instancia del Proceso de Id</processInstanceId>
+      <processId>Proceso de Id</processId>
+      <processName>Nombre del Proceso</processName>
+      <startDate>Fecha de comienzo</startDate>
+      <endDate>Fecha de finalización</endDate>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <empty>Por favor, seleccione el proceso que desea para ver el detalle.</empty>
+    </msg>
+  </UIProcessDetailGrid>
+  <UIProcessDetail>
+    <msg>
+      <confirm-delete-process>¿Estás seguro de eliminar la instancia de este proceso?</confirm-delete-process>
+      <confirm-delete-completed-process>¿Estás seguro de eliminar estos procesos terminados?</confirm-delete-completed-process>
+      <result-delete-completed-process>No hay ningún proceso completado para eliminar.</result-delete-completed-process>
+    </msg>
+    <action>
+      <FlushAll>Borrar Todo</FlushAll>
+      <Cancel>Cancelar</Cancel>
+      <title>
+        <View>Ver</View>
+        <Delete>Borrar</Delete>
+      </title>
+    </action>
+  </UIProcessDetail>
+  <UITasksGrid>
+    <header>
+      <id>ID</id>
+      <taskName>Nombre de la Tarea</taskName>
+      <actorId>Id Actor</actorId>
+      <end>Final</end>
+    </header>
+  </UITasksGrid>
+  <TaskListOfProcessPopup>
+    <title>
+      <UITaskListOfProcess>Listar tareas de Instancia</UITaskListOfProcess>
+    </title>
+    <tab>
+      <label>
+        <UITasksGrid>Tarea</UITasksGrid>
+      </label>
+    </tab>
+  </TaskListOfProcessPopup>
+  <UIRunningProcesses>
+    <header>
+      <processInstanceId>Instancia del Proceso de Id</processInstanceId>
+      <processId>Proceso de Id</processId>
+      <processName>Nombre del Proceso</processName>
+      <startDate>Fecha de comienzo</startDate>
+      <endDate>Fin de la Fecha</endDate>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <empty>No hay ningún proceso para ver los detalles.</empty>
+    </msg>
+    <action>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UIRunningProcesses>
+  <UICompletedProcesses>
+    <header>
+      <processInstanceId>Instancia del Proceso de Id</processInstanceId>
+      <processId>Proceso de Id</processId>
+      <processName>Nombre del Proceso</processName>
+      <startDate>Fecha de comienzo</startDate>
+      <endDate>Fin de la Fecha</endDate>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <empty>No hay ningún proceso para ver los detalles.</empty>
+    </msg>
+    <action>
+      <FlushAll>Borrar Todo</FlushAll>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UICompletedProcesses>
+  <UITaskListOfProcess>
+    <tab>
+      <label>
+        <UITasksGrid>Listado de tareas</UITasksGrid>
+      </label>
+    </tab>
+    <action>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UITaskListOfProcess>
+</bundle>

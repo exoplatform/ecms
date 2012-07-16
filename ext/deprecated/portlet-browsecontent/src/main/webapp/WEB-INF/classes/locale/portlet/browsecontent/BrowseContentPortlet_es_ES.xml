@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIConfigTabPane #
+  ###################################################################
+  -->
+  <UIConfigTabPane>
+    <tab>
+      <label>
+        <UIPathConfig>Configuración de la Ruta</UIPathConfig>
+        <UINewConfigForm>Crear nuevo</UINewConfigForm>
+      </label>
+    </tab>
+  </UIConfigTabPane>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
+  ###################################################################
+  ###################################################################
+  #	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
+  #	    to display checkbox for filtering category tree             #
+  #	    base on permission of user                                  #
+  ###################################################################
+  -->
+  <UIPathConfig>
+    <label>
+      <categoryPath>Ruta de Categorías</categoryPath>
+      <workspace>Espacio de Trabajo</workspace>
+      <repository>Repositorio</repository>
+      <path>UIPathConfig</path>
+      <template>Plantilla</template>
+      <itemPerPage>Artículos por página</itemPerPage>
+      <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
+      <enableToolBar>Ver barra de herramientas</enableToolBar>
+      <enableRefDoc>Documento de Referencia</enableRefDoc>
+      <filterCategory>Filtrar las categorías basadas en permisos de usuarios actuales</filterCategory>
+      <enableChildDoc>Documentos de los Subnodos</enableChildDoc>
+      <enableTagMap>Mapa de etiquetas</enableTagMap>
+      <enableComment>Autorizar los comentarios</enableComment>
+      <enableVote>Autorizar los votos</enableVote>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
+      <searchEnable>Habilitar la ubicación de búsqueda</searchEnable>
+      <searchLocation>Buscar localización</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
+    </label>
+    <title>Configuración de la Ruta</title>
+    <action>
+      <Add>Nueva configuración</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editar</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
+    </action>
+    <msg>
+      <require-path>Debe seleccionar la ruta de la categoría.</require-path>
+      <invalid-path>La ruta de la categoría es válida.</invalid-path>
+      <invalid-value>El número de página no es válido.</invalid-value>
+      <invalid-number>Debe introducir el número.</invalid-number>
+      <access-denied>Acceso denegado. No tienes permiso en esta categoría de ruta.</access-denied>
+      <enter-search-location>Por favor, especifique la ubicación de búsqueda.</enter-search-location>
+      <explain>Cuando la ruta mostrada en navegar contenido corresponde a una jerarquía de categorías, es necesario especificar la ruta donde los documentos se almacenan, de manera que se pueda encontrar por la función de búsqueda del portlet.</explain>
+    </msg>
+  </UIPathConfig>
+  <UIQueryConfig>
+    <msg>
+      <repostoryException>Quizás tiene problemas con su consulta.  Favor de verificar de nuevo.</repostoryException>
+      <noSuchNodeTypeException>Quizás tiene problemas con su consulta.  Favor de verificar de nuevo.</noSuchNodeTypeException>
+      <invalid-value>El número de página no es válido.</invalid-value>
+      <invalid-query>La cadena de consulta no es válida.</invalid-query>
+      <invalid-name>El nombre de la consulta no fué encontrado. Por favor intente otro tipo, lenguaje y estado.</invalid-name>
+    </msg>
+    <title>Configuración de la Consulta</title>
+    <label>
+      <repository>Repositorio</repository>
+      <workspace>Espacio de Trabajo</workspace>
+      <queryLanguage>Lenguaje de Consulta</queryLanguage>
+      <queryStatus>Estado de la Consulta</queryStatus>
+      <queryType>Tipo de Consulta</queryType>
+      <queryStore>Nombre de la Consulta</queryStore>
+      <query>Consulta</query>
+      <template>Plantilla</template>
+      <itemPerPage>Artículos por página</itemPerPage>
+      <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
+      <enableTagMap>Mapa de etiquetas</enableTagMap>
+      <enableComment>Autorizar los comentarios</enableComment>
+      <enableVote>Autorizar los votos</enableVote>
+      <isAllowPublish>Mostrar sólo documentos en estado "publicado"</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nueva configuración</Add>
+      <Save># {word.save}</Save>
+      <Edit>Editar</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back># {word.back}</Back>
+    </action>
+  </UIQueryConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIQueryConfig #
+  ###################################################################
+  -->
+  <path>
+    <title>
+      <AddPath>Agregar Ruta</AddPath>
+    </title>
+  </path>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl		#
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Normal/Pulse para votar</normal>
+      <good>Bueno/Pulse para votar</good>
+      <verygood>Muy bueno/Pulse para votar</verygood>
+      <excellent>Excelente/Pulse para votar</excellent>
+      <best>Mejor/Pulse para votar</best>
+    </title>
+    <button>
+      <label>
+        <cancel>Cancelar</cancel>
+      </label>
+    </button>
+  </UIVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIScriptConfig #
+  ###################################################################
+  -->
+  <UIScriptConfig>
+    <title>Config del guión</title>
+    <label>
+      <repository>Repositorio</repository>
+      <workspace>Espacio de Trabajo</workspace>
+      <scriptName>Nombre del guión</scriptName>
+      <template>Plantilla</template>
+      <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
+      <enableTagMap>Mapa de etiquetas</enableTagMap>
+      <enableComment>Autorizar los comentarios</enableComment>
+      <enableVote>Autorizar los votos</enableVote>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nueva Config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editar</Edit>
+      <Back># {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIScriptConfig>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIDocumentConfig #
+  ###################################################################
+  -->
+  <UIDocumentConfig>
+    <title>Configuración del Documento</title>
+    <label>
+      <repository>Repositorio</repository>
+      <workspace>Espacio de Trabajo</workspace>
+      <categoryPath>Ruta de Categorías</categoryPath>
+      <path>UIDocumentConfig</path>
+      <doc>UIDocumentConfig</doc>
+      <docName>Nombre del Documento</docName>
+      <detailBoxTemp>Plantilla del Detalle de la Caja</detailBoxTemp>
+      <enableComment>Autorizar los comentarios</enableComment>
+      <enableVote>Autorizar los votos</enableVote>
+      <isAllowPublish>Mostrar sólo documentos en el estado publicado</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nueva Config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editar</Edit>
+      <Back># {word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <require-path>Primero debe seleccionar la ruta de la categoría.</require-path>
+      <invalid-path>Categoría de ruta inválida, favor de seleccionar una ruta de nuevo.</invalid-path>
+      <require-doc>Debe seleccionar un documento.</require-doc>
+      <invalid-doc>Este documento fué eliminado o cambiado o no tiene permiso de acceso.</invalid-doc>
+    </msg>
+  </UIDocumentConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UINewConfigForm #
+  ###################################################################
+  -->
+  <UINewConfigForm>
+    <label>
+      <repository>Seleccione el repositorio</repository>
+      <workspace>Espacio de Trabajo</workspace>
+      <browseType>Buscar Contenido</browseType>
+    </label>
+    <title>Crear nuevo</title>
+    <action>
+      <Next>Siguiente</Next>
+      <Back># {word.back}</Back>
+    </action>
+  </UINewConfigForm>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UIToolBar      #
+  ###################################################################
+  -->
+  <UIToolBar>
+    <label>
+      <RootNode>Raíz</RootNode>
+    </label>
+    <tooltip>
+      <Hidden>árbol oculto</Hidden>
+      <Show>Mostrar el árbol</Show>
+      <showSearch>Mostrar/esconder la forma de búsqueda</showSearch>
+      <Back>Atrás</Back>
+      <Vote>Votar</Vote>
+      <Comment>Escribir comentario</Comment>
+    </tooltip>
+    <msg>
+      <back-view-search>Regresar a la vista previa de búsqueda.</back-view-search>
+      <select-doc>Ningún documento fue seleccionado o se ha eliminado.</select-doc>
+      <node-removed>El nodo se ha eliminado.</node-removed>
+      <readonly-doc>El documento actual ha sido registrado. Por favor verifíquelo.</readonly-doc>
+      <not-support-vote>La función de votar no es compatible con este tipo de documento.</not-support-vote>
+      <not-support-comment>La función de votar no es compatible con este tipo de documento.</not-support-comment>
+      <node-is-locked>El nodo está bloqueado. Favor de desbloquearlo.</node-is-locked>
+      <access-add-denied>Acceso denegado. No tienes el permiso de agregar en este nodo.</access-add-denied>
+    </msg>
+  </UIToolBar>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UISearchController #
+  ###################################################################
+  -->
+  <UISearchController>
+    <label>
+      <nodePath>Estas buscando en</nodePath>
+      <searchTime>Resultado</searchTime>
+      <duration>Duración</duration>
+      <nodeName>Nodo</nodeName>
+    </label>
+  </UISearchController>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBSearchForm #
+  ###################################################################
+  -->
+  <UICBSearchForm>
+    <label>
+      <inputValue>Buscar palabras clave</inputValue>
+      <option>Ninguna etiqueta</option>
+      <search>Buscar ahora</search>
+      <referencesDoc>Referencias</referencesDoc>
+      <childDoc>Subnodos</childDoc>
+    </label>
+    <title>
+      <search>Buscar ahora</search>
+    </title>
+    <msg>
+      <not-empty>Debe introducir la palabra clave.</not-empty>
+      <suggestion-keyword>Sugerencias '{0}' no fué encontrado. Intente palabras clave diferentes.</suggestion-keyword>
+    </msg>
+  </UICBSearchForm>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UICBSearchResults #
+  ###################################################################
+  -->
+  <UICBSearchResults>
+    <header>
+      <name>Nombre</name>
+      <path>Ruta</path>
+      <action>Acción</action>
+    </header>
+    <action>
+      <Close># {word.close}</Close>
+    </action>
+    <msg>
+      <node-removed>Nodo perdido: ha sido movido o borrado.</node-removed>
+      <not-support>La plantilla de vista no es compatible para este nodo.</not-support>
+      <not-permission>Acceso denegado. Tal vez, no tiene privilegios para acceder a este nodo.</not-permission>
+      <empty>No se encontraron resultados.</empty>
+    </msg>
+    <tooltip>
+      <Goto>Ir a la carpeta</Goto>
+      <View>Ver</View>
+    </tooltip>
+  </UICBSearchResults>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIBrowseContainer #
+  ###################################################################
+  -->
+  <UIBrowseContainer>
+    <label>
+      <NoDocument>No hay documento en esta categoría</NoDocument>
+      <author>Autor</author>
+      <summary>Resumen</summary>
+      <more>Más documentos</more>
+      <previous>Vista Previa</previous>
+      <path-Previous>Previo</path-Previous>
+      <path-Root>Raíz</path-Root>
+      <home>Inicio</home>
+      <cannot-access>Acceso denegado. Tal vez, no tiene el permiso de ver en esta configuración de portlet.</cannot-access>
+    </label>
+    <title>
+      <home>Inicio</home>
+      <prevTabs>Lengüetas Previas</prevTabs>
+      <moreTabs>Más lengüetas</moreTabs>
+    </title>
+    <msg>
+      <template-notsupported>No hay plantilla de visualización para cargar.</template-notsupported>
+      <invalid-node>Nodo Perdido: se ha movido o eliminado o no tiene suficientes permisos para accesarlo</invalid-node>
+      <symlinkNode-no-targetNode>El nodo de destino ha sido movido o eliminado, o no tiene permiso de acceso.</symlinkNode-no-targetNode>
+    </msg>
+  </UIBrowseContainer>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.JCRBrowser #
+  ###################################################################
+  -->
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Seleccionar ruta</UIOneNodePathSelector>
+      <pathSelector>Selector de Ruta</pathSelector>
+    </title>
+  </pathSelector>
+  <documentSelector>
+    <title>
+      <UIOneNodePathSelector>Seleccionar un Documento</UIOneNodePathSelector>
+    </title>
+  </documentSelector>
+  <UITreeList>
+    <header>
+      <name>Nombre</name>
+      <action>Acción</action>
+    </header>
+    <info>
+      <child-not-found>No tiene subnodo</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBCommentForm #
+  ###################################################################
+  -->
+  <UICBCommentForm>
+    <label>
+      <title>Agregar comentario</title>
+      <name>Nombre</name>
+      <email>Correo electrónico</email>
+      <website>Sitio Web</website>
+      <comment>Comentario</comment>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <locked-doc>El documento está bloqueado.</locked-doc>
+      <versioning-doc>El documento es control de versiones.</versioning-doc>
+      <error-vote>Error al comentar en el documento.</error-vote>
+      <comment-required>El comentario es requerido.</comment-required>
+    </msg>
+  </UICBCommentForm>
+  <UICBVoteForm>
+    <msg>
+      <locked-doc>El documento está bloqueado.</locked-doc>
+      <versioning-doc>El documento es control de versiones.</versioning-doc>
+      <error-vote>Ocurrió un error al votar por el documento.</error-vote>
+    </msg>
+  </UICBVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPopupWindow #
+  ###################################################################
+  -->
+  <UICBPopupWindow>
+    <title>
+      <UICBCommentForm>Agregar comentario</UICBCommentForm>
+      <UICBVoteForm>Votar por este</UICBVoteForm>
+      <UIDocumentDetail>Ver Documento</UIDocumentDetail>
+    </title>
+  </UICBPopupWindow>
+  <!--
+  ###################################################################################
+  # JCR Browser																			  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espacio de Trabajo</workspaceName>
+      <rootNodeInfo>Ruta de la Raíz</rootNodeInfo>
+      <rootPath>Ruta de la Raíz</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # UITagList																		  #
+  ###################################################################################
+  -->
+  <UITagList>
+    <label>
+      <tagTitle>Mapa de etiqueta</tagTitle>
+      <PublicTags>Etiquetas públicas</PublicTags>
+      <PrivateTags>Etiquetas privadas</PrivateTags>
+    </label>
+  </UITagList>
+  <UICategoryTree>
+    <label>
+      <title>Categorías</title>
+    </label>
+    <msg>
+      <invalid-node>Nodo perdido : ha sido movido o borrado</invalid-node>
+    </msg>
+  </UICategoryTree>
+  <!--
+  ###################################################################################
+  #  org.exoplatform.ecm.webui.component.browse.UIBrowseContentHelp																  #
+  ###################################################################################
+  -->
+  <UIBrowseContentHelp>
+    <label>
+      <info>Usted está en el modo de ayuda, puede configurar su porlet seleccionando el modo de edición.</info>
+    </label>
+  </UIBrowseContentHelp>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>¿Estás seguro de eliminar?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator																			#
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>El valor de este campo es nulo o vacío.</empty-input>
+      <Invalid-char>Este campo contiene algunos caracteres no válidos. Por favor, introduzca otro valor.</Invalid-char>
+      <Invalid-char1>El número que le sigue al carácter '~' debe estar entre 0 a 1</Invalid-char1>
+      <Invalid-char2>El número debe seguir el carácter '~'</Invalid-char2>
+      <Invalid-char3>El número debe seguir el carácter '^'</Invalid-char3>
+      <Invalid-char4>Ningún espacio es permitido cerca del carácter '^'</Invalid-char4>
+      <Invalid-char5>Ningún espacio es permitido cerca del carácter '^'</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ######################################################################################
+  # Since ECM 2.3
+  ######################################################################################
+  -->
+  <UIDocumentForm>
+    <msg>
+      <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
+      <do-not-permission>No tiene permiso para subir la plantilla de '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  ######################################################################################
+  # Since ECM 2.6
+  ######################################################################################
+  -->
+  <Comments>
+    <tooltip>
+      <remove-comment>Remover este comentario</remove-comment>
+      <edit-comment>Editar este comentario</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentDetail>
+    <msg>
+      <confirm-deletecomment>¿Estás seguro de borrar este comentario?</confirm-deletecomment>
+    </msg>
+    <tooltip>
+      <remove-attachment>Eliminar este archivo adjunto</remove-attachment>
+    </tooltip>
+  </UIDocumentDetail>
+  <UIPopupWindow>
+    <title>
+      <UICBCommentForm>Entrar Comentario</UICBCommentForm>
+    </title>
+  </UIPopupWindow>
+  <DocumentDetail>
+    <tooltip>
+      <remove-attachment>Eliminar este archivo adjunto</remove-attachment>
+    </tooltip>
+  </DocumentDetail>
+</bundle>

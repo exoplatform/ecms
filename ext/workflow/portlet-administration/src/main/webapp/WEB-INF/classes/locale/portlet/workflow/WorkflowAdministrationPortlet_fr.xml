@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <!--
   #############################################################################
@@ -11,10 +11,10 @@
       <text>Gestion du Workflow</text>
     </tab>
 		<msg>
-      <refresh-session-success>La session a été rafraichie avec succès</refresh-session-success>
+      <refresh-session-success>La session a été rafraichie avec succès.</refresh-session-success>
     </msg>
 		<label>
-      <refresh>Rafraichir</refresh>
+      <refresh>Rafraîchir</refresh>
     </label>
   </UIWorkflowAdministrationPortlet>
   <UITabPane>
@@ -43,7 +43,7 @@
       </label>
     </tab>
     <msg>
-      <confirm-delete-process>Voulez-vous vraiment supprimer ce modèle de pocessus métier ?</confirm-delete-process>
+      <confirm-delete-process>Voulez-vous vraiment supprimer ce modèle de processus métier?</confirm-delete-process>
     </msg>
     <action>
       <UploadProcess>Uploader un processus</UploadProcess>
@@ -57,7 +57,7 @@
     <header>
       <id>Id</id>
       <name>Nom</name>
-      <dueDate>Echéance</dueDate>
+      <dueDate>Date d'échéance</dueDate>
     </header>
     <msg>
       <empty>Aucun temporisateur n'a été sélectionné</empty>
@@ -70,7 +70,7 @@
   </AdministrationPopup>
   <UploadProcessPopup>
     <title>
-      <UIUploadProcess>Uploader le processus</UIUploadProcess>
+      <UIUploadProcess>Uploader un processus</UIUploadProcess>
     </title>
   </UploadProcessPopup>
   <UIUploadProcess>
@@ -83,10 +83,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Chemin de fichier introuvable</fileName-error>
-      <fileName-invalid>Il existe des caractères interdits dans le nom de fichier. Veuillez saisir un autre nom ou uploader un autre fichier.</fileName-invalid>
-      <process-successful>L'upload s'est correctement déroulé !</process-successful>
-      <data-invalid>Impossible de trouver la définition du processus dans l'archive ou les données sont invalides. Veuillez vérifier le contenu de l'archive </data-invalid>
+      <fileName-error>Chemin de fichier introuvable.</fileName-error>
+      <fileName-invalid>Il existe des caractères interdits dans le nom de fichier Veuillez saisir un autre nom ou uploader un autre fichier.</fileName-invalid>
+      <process-successful>Upload effectué avec succès!</process-successful>
+      <data-invalid>Impossible de trouver la définition du processus dans l'archive ou les données sont invalides. Veuillez vérifier le contenu de l'archive.</data-invalid>
     </msg>
   </UIUploadProcess>
   <UIProcessDetailGrid>
@@ -99,13 +99,23 @@
       <action>Action</action>
     </header>
     <msg>
-      <empty>Aucun processus pour voir le détail</empty>
+      <empty>Veuillez sélectionner un processus dont vous souhaitez afficher les détails.</empty>
     </msg>
   </UIProcessDetailGrid>
   <UIProcessDetail>
     <msg>
-      <confirm-delete-process>Voulez-vous vraiment supprimer cet instance de processus métier ?</confirm-delete-process>
+      <confirm-delete-process>Voulez-vous vraiment supprimer cette instance de processus métier?</confirm-delete-process>
+      <confirm-delete-completed-process>Êtes-vous sûr de vouloir supprimer les processus terminés?</confirm-delete-completed-process>
+      <result-delete-completed-process>Il n'y a aucun processus terminé à supprimer.</result-delete-completed-process>
     </msg>
+    <action>
+      <FlushAll>Tout supprimer</FlushAll>
+      <Cancel>Annuler</Cancel>
+      <title>
+        <View>Consulter</View>
+        <Delete>Supprimer</Delete>
+      </title>
+    </action>
   </UIProcessDetail>
   <UITasksGrid>
     <header>
@@ -115,16 +125,6 @@
       <end>Fin</end>
     </header>
   </UITasksGrid>
-  <UIProcessDetail>
-    <msg>
-      <confirm-delete-completed-process>Confirmez-vous vouloir supprimer les processus terminés?</confirm-delete-completed-process>
-      <result-delete-completed-process>Il n'y a aucun processus terminé à supprimer</result-delete-completed-process>      
-    </msg>
-    <action>
-      <FlushAll>Tout supprimer</FlushAll>
-      <Cancel>Annuler</Cancel>
-    </action>    
-  </UIProcessDetail>
   <TaskListOfProcessPopup>
     <title>
       <UITaskListOfProcess>Lister les tâches de l'instance</UITaskListOfProcess>
@@ -145,7 +145,7 @@
       <action>Action</action>
     </header>
     <msg>
-      <empty>Aucun processus pour voir le détail</empty>
+      <empty>Aucun processus pour voir le détail.</empty>
     </msg>
     <action>
       <Cancel>Annuler</Cancel>
@@ -161,7 +161,7 @@
       <action>Action</action>
     </header>
     <msg>
-      <empty>Aucun processus pour voir le détail</empty>
+      <empty>Aucun processus pour voir le détail.</empty>
     </msg>
     <action>
       <FlushAll>Tout supprimer</FlushAll>
@@ -175,15 +175,7 @@
       </label>
     </tab>
     <action>      
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>Annuler</Cancel>
     </action>    
   </UITaskListOfProcess>
-	<UIProcessDetail>
-    <action>
-    	<title>
-    		<View>Visualiser</View>
-				<Delete>Supprimer</Delete>
-    	</title>
-    </action>  
-  </UIProcessDetail>
 </bundle>

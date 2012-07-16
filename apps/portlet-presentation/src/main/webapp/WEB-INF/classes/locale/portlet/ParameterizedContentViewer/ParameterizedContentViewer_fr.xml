@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UIPCVContainer>
     <title>
@@ -8,23 +8,27 @@
     </title>
     <label>
       <print>Imprimer</print>
+      <draft>Brouillon</draft>
+      <edit>Modifier</edit>
     </label>
     <action>
       <Print>Imprimer</Print>
       <Close>Fermer</Close>
     </action>
+    <msg>
+      <content-not-found>Aucun contenu trouvé</content-not-found>
+      <not-support>Vous n'avez pas les droits d'accès suffisants.</not-support>
+    </msg>
   </UIPCVContainer>
-
   <UIPCVConfigPopupWindow>
     <title>
-      <UIPCVConfig>Configuration de Parameterized content viewer</UIPCVConfig>
+      <UIPCVConfig>Configuration des contenus</UIPCVConfig>
     </title>
   </UIPCVConfigPopupWindow>
-
   <UIPCVConfig>
     <label>
-      <Title>Configuration de Parameterized content viewer</Title>
-      <DisplaySettingBlock>L'écran de réglage</DisplaySettingBlock>
+      <Title>Configuration des contenus</Title>
+      <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
       <ShowTitle>Afficher le titre</ShowTitle>
       <ShowDateCreated>Afficher la date de création</ShowDateCreated>
       <ShowBar>Afficher la barre d'options</ShowBar>
@@ -34,15 +38,4 @@
       <Cancel>Annuler</Cancel>
     </action>
   </UIPCVConfig>
-
-  <UIPCVContainer>
-    <label>
-      <draft>Brouillon</draft>
-      <edit>Modifier</edit>
-    </label>
-    <msg>
-      <content-not-found>Aucun contenu trouvé</content-not-found>
-      <not-support>Vous n'avez pas la permission d'accéder à</not-support>
-    </msg>
-  </UIPCVContainer>
 </bundle>

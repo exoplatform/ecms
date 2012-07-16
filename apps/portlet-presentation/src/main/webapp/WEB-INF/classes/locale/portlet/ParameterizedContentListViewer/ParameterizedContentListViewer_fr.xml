@@ -1,46 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bundle>
   <UIPCLVContainer>
     <title>
-      <QuickEdit>Préférences</QuickEdit>
+      <QuickEdit>Edition rapide</QuickEdit>
     </title>
   </UIPCLVContainer>
-
   <UIParameterizedManagerPopupWindow>
     <title>
-      <UIPCLVConfig>Configuration de Parameterized content list viewer</UIPCLVConfig>
+      <UIPCLVConfig>Configuration des contenus</UIPCLVConfig>
     </title>
   </UIParameterizedManagerPopupWindow>
-
   <UIPCLVConfig>
     <label>
-      <Title>Configuration de Parameterized content list viewer</Title>
-      <ContentSelectionBlock>Sommaire de sélection</ContentSelectionBlock>
+      <Title>Configuration des contenus</Title>
+      <ContentSelectionBlock>Sélection de contenu</ContentSelectionBlock>
       <OrderBy>Classement par</OrderBy>
       <option>
-        <exo:title>Titre</exo:title>
-        <exo:dateCreated>Date de création</exo:dateCreated>
-        <exo:dateModified>Date de modification</exo:dateModified>
-        <publication:liveDate>Date de publication</publication:liveDate>
-        <exo:startEvent>Date d'événement</exo:startEvent>
+        <exo>startEvent\=Date de l'événement</exo>
+        <publication>liveDate\=Date de publication</publication>
       </option>
       <DisplaySettingBlock>Paramètre d'affichage</DisplaySettingBlock>
       <Header>Entête</Header>
       <AutomaticDetection>Détection automatique</AutomaticDetection>
-      <FormViewTemplate>Modèle de vue</FormViewTemplate>
-      <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
-      <UICategoryNavigationTreeNameFormSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameFormSelectBox>
+      <FormViewTemplate>Template</FormViewTemplate>
+      <PaginatorTemplate>Pagination</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>Catégories</UICategoryNavigationTreeNameFormSelectBox>
       <ItemsPerPage>Articles par page</ItemsPerPage>
       <ViewerTitle>Afficher le titre</ViewerTitle>
       <ViewerHeader>Afficher l'en-tête</ViewerHeader>
       <ViewerButtonRefresh>Afficher le bouton actualiser</ViewerButtonRefresh>
       <ViewerThumbnailsView>Afficher l'illustration</ViewerThumbnailsView>
       <ViewerDateCreated>Afficher la date de création</ViewerDateCreated>
-      <ShowReadMore>Lire la suite</ShowReadMore>
+      <ShowReadMore>En savoir plus</ShowReadMore>
       <ViewerSummary>Afficher le résumé</ViewerSummary>
-      <ShowRSSLink>Show RSS link</ShowRSSLink>
+      <ShowRSSLink>Afficher le lien RSS</ShowRSSLink>
       <ShowLink>Afficher le lien</ShowLink>
-      <LinkFormatBlock>Le format de lien</LinkFormatBlock>
+      <LinkFormatBlock>Le format du lien</LinkFormatBlock>
       <UIParameterizedTagetPageInputSetAction>Page cible</UIParameterizedTagetPageInputSetAction>
       <content-not-found>Aucun contenu trouvé</content-not-found>
     </label>
@@ -49,14 +44,12 @@
       <Cancel>Annuler</Cancel>
     </action>
   </UIPCLVConfig>
-
   <OrderTypes>
     <label>
       <OrderDesc>Descendant</OrderDesc>
       <OrderAsc>Ascendant</OrderAsc>
     </label>
   </OrderTypes>
-
   <UIParameterizedTagetPageInputSetAction>
     <title>
       <SelectTargetPage>Sélectionnez la page cible</SelectTargetPage>

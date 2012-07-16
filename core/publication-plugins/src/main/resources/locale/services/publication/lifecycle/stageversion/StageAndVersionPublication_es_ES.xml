@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <PublicationService>
+    <StageAndVersionPublicationPlugin>
+      <changeState>
+        <enrolled>El contenido fué inscrito</enrolled>
+        <draft>El contenido es un borrador</draft>
+        <published>El contenido es público</published>
+        <obsolete>El contenido es obsoleto</obsolete>
+      </changeState>
+    </StageAndVersionPublicationPlugin>
+  </PublicationService>
+</bundle>

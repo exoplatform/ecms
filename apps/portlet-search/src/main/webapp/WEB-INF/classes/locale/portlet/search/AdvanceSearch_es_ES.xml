@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Palabra Clave</keyword>
+      <portal>Portal</portal>
+      <Page>Página</Page>
+      <Document>Documento</Document>
+    </label>
+    <action>
+      <Search>Búsqueda</Search>
+    </action>
+  </UIDefaultSearchForm>
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Página</Page>
+      <Document>Documento</Document>
+      <DocumentAndPage>Documento y Página</DocumentAndPage>
+      <documentandpage>documento y página</documentandpage>
+      <resutlsCaption>Resultados</resutlsCaption>
+      <ofAboutCaption>de aproximadamente</ofAboutCaption>
+      <forCaption>para</forCaption>
+      <timeUnitCaption>segundos</timeUnitCaption>
+      <similar>Páginas en donde el mismo contenido aparece</similar>
+      <editor>Editor</editor>
+    </label>
+    <action>
+      <edit>Editar</edit>
+    </action>
+    <msg>
+      <your-search>Su búsqueda</your-search>
+      <did-not-match>no coincide con ninguna</did-not-match>
+      <new-suggestion>Sugerencia</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Artículos por página</itemsPerPageSelector>
+      <searchFormSelector>Plantilla del formulario de búsqueda</searchFormSelector>
+      <searchResultSelector>Plantilla de búsqueda de resultados</searchResultSelector>
+      <searchPaginatorSelector>Plantilla de búsqueda Paginator</searchPaginatorSelector>
+      <searchPageLayoutSelector>Plantilla de diseño de la página de búsqueda</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Ruta de la base</searchResultBasePathInputSetAction>
+      <pageMode>Modo de página</pageMode>
+      <option>
+        <none>Ninguno</none>
+        <more>Más</more>
+        <pagination>Paginación</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Seleccione la base de ruta</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>
+  <UISearchForm>
+    <message>
+      <keyword-not-support>La palabra clave no es válida.  Algunos caracteres no son compatibles.</keyword-not-support>
+      <not-checked>Por favor seleccione un tipo de búsqueda.</not-checked>
+      <keyword-not-empty>El valor de la palabra clave no puede estar vacío.</keyword-not-empty>
+    </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Siguiente</next>
+      <previous>Previo</previous>
+      <more>Más</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Edición rápida</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>en las páginas</pageCheckBox>
+      <documentCheckBox>en el contenido</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>Buscar en todos los sitios</all>
+      </option>
+    </label>
+  </ViewMode>
+</bundle>

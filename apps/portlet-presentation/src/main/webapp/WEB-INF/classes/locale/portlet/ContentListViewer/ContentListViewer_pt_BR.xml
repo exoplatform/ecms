@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferências</Preferences>
+      <AddContent>Adicionar Conteúdo</AddContent>
+      <ManageContent>Gerenciar Conteúdo</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Desculpe, não há artigos disponíveis.</non-contents>
+      <item-not-found>Item não encontrado</item-not-found>
+      <no-permission>Você não tem permissão para acessar este node</no-permission>
+      <category-back>Ir para anterior</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Preferências de Conteúdo da Lista</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Preferências de Conteúdo da Lista</Title>
+      <ContentSelectionBlock>Seleção de conteúdo</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Modo</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Caminho da Pasta</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigItemPathFormStringInput>Caminho da Pasta</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo>índice \= Índice</exo>
+        <publication>liveDate \= Dado Publicado</publication>
+      </option>
+      <DisplaySettingBlock>Mostrar Configurações</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Cabeçalho</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Modelo</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginador</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigItemsPerPageFormStringInput>Itens por página</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Mostrar Imagem</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Mostrar Sumário</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Mostrar Cabeçalho</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Mostrar Atualizar</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Mostrar Título</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Mostrar Data</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Mostrar Link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Mostrar Mais Links</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Permitir URL Dinâmica</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Mostrar Link RSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Detecção Automática</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avançado</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Navegação Dinâmica</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Pasta Contextual</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>por</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>com</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Mostrar na página</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Conteúdo não encontrado.</content-not-found>
+      <ContentPath>Caminho do Contéudo</ContentPath>
+      <Up>Para cima</Up>
+      <Down>Para baixo</Down>
+      <UICLVConfigCacheManagementLabel>Visibilidade do Conteúdo</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Conteúdo por consulta</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Espaço de trabalho</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>por consulta</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Compartilhar conteúdo entre os usuários</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Dois modos estão disponíveis para mostrar contéudos. "Por pasta" mostrará todos os conteúdos disponíveis na pasta/categoria que você escolher ; "Por conteúdo" deixa você escolher manualmente o que quer exibir.</ModeSelectionHelp>
+      <FolderPathHelp>Selecione o conteúdo que quer mostrar. Esta seleção padrão será substituída dinamicamente se for ativada a Navegação dinâmica (veja abaixo o modo Avançado).</FolderPathHelp>
+      <HeaderOptionHelp>Mostrar um cabeçalho no topo da lista de conteúdo. Se for ativada a Detecção Automática, ele tentará encontrar um cabeçalho baseado na seleção atual.</HeaderOptionHelp>
+      <GeneralOptionHelp>Selecione os elementos gráficos que deseja mostrar na sua lista. Note que, dependendo do modelo que escolher, alguns elementos podem não estar disponíveis.</GeneralOptionHelp>
+      <ContextualHelp>Ativa a navegação dinâmica. O conteúdo pode ser modificados dinamicamente por outros baseado em um parâmetro da URL.</ContextualHelp>
+      <ParameterHelp>Este parâmetro será usado para obter o conteúdo se a Navegação Dinâmica estiver ativada.</ParameterHelp>
+      <ShowDetailInPageHelp>Clicar em um conteúdo redireciona para uma página de detalhes. Você deve ter um portlet "Conteúdo por URL" com Navegação Dinâmica habilitada na página de destino para mostrá-lo.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Este parâmetro conterá o caminho para o contéudo no link para a página de Detalhes. Este parâmetro deve corresponder ao parâmetro usado no portlet "Conteúdo por URL" da página.</DetailParameterHelp>
+      <ContentByQueryHelp>Você pode definir uma consulta SQL para obter conteúdo dinamicamente. Os seguintes parâmetros são permitidos : ${user}, ${lang} ou qualquer um get parmeter (PARAM) cercado por ${PARAM}.</ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Restrito pela autenticação" filtrará o conteúdo com base na autenticação. Se você não se logar, você verá somente conteúdo público. Se estiver logado, você verá todo o conteúdo visível para os usuários da intranet (mas compartilhado por todos). "Restrito por funções do usuário" significa que você vai ver o conteúdo em função das suas atribuições. Na maioria dos casos, essa opção não deve ser usada pois reduz o desempenho geral.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>Salvar</Save>
+      <Cancel>Cancelar</Cancel>
+      <delete>Excluir</delete>
+    </action>
+    <msg>
+      <not-valid-path>O caminho da pasta é inválido.</not-valid-path>
+      <saving-success>As preferências do portlet estão salvas.</saving-success>
+    </msg>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>Por Pasta</AutoViewerMode>
+      <ManualViewerMode>Por Conteúdo</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Selecionar caminho da pasta</SelectFolderPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Navegar Pastas</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormRadioBoxInput>
+    <label>
+      <OrderDesc>Descendente</OrderDesc>
+      <OrderAsc>Ascendente</OrderAsc>
+    </label>
+  </UICLVConfigOrderTypeFormRadioBoxInput>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Selecionar caminho base</SelectBasePath>
+      <SelectTargetPage>Selecione o Caminho Base</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Seletor de página</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <label>
+      <readmore>Ler mais</readmore>
+      <rssFeed>RSS Feed</rssFeed>
+      <draft>Rascunho</draft>
+    </label>
+    <action>
+      <refresh>Atualizar</refresh>
+      <edit>Editar</edit>
+      <delete>Excluir</delete>
+      <publish>Publicar</publish>
+    </action>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Painel de seleção de múltipos contéudos</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Formulário de conteúdo Web</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Habilitado</contextualEnable>
+      <contextualDisable>Desabilitado</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Arquivado</archived>
+    <obsolete>Obsoleto</obsolete>
+    <unpublished>Não publicado</unpublished>
+    <enrolled>Registrado</enrolled>
+    <draft>Rascunho</draft>
+    <pending>Pendente</pending>
+    <approved>Aprovado</approved>
+    <inreview>Em Revisão</inreview>
+    <staged>Organizado</staged>
+    <published>Publicado</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Restrito por autenticação</ENABLE>
+      <DISABLE>Restrito pelo papel do usuário</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

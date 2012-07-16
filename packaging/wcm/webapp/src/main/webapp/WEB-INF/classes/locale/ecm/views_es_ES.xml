@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <!--
+  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
+  -->
+  <Article>
+    <view>
+      <label>
+        <languages>Idiomas</languages>
+        <summary>Resumen</summary>
+        <none-summary>El resúmen está vacío</none-summary>
+        <content>Contenido</content>
+        <none-content>El contenido está vacío</none-content>
+        <link>Enlaces</link>
+        <attachment>Archivos adjuntos</attachment>
+      </label>
+    </view>
+  </Article>
+  <View>
+    <label>
+      <languages>
+        <en>Inglés</en>
+        <fr>Francés</fr>
+        <ru>Ruso</ru>
+        <vi>Vietnamita</vi>
+        <nl>Holandés</nl>
+        <de>Alemán</de>
+        <uk>Ucranio</uk>
+        <ar>Árabe</ar>
+      </languages>
+    </label>
+  </View>
+  <!--
+  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
+  -->
+  <Calendar>
+    <view>
+      <label>
+        <calendar>Calendario</calendar>
+        <shared>Compartido</shared>
+      </label>
+    </view>
+  </Calendar>
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Último comentario publicado por:</postedBy>
+        <at>en</at>
+        <comments>Comentario (s)</comments>
+        <show-comments>Mostrar comentarios</show-comments>
+        <hide-comments>Ocultar comentarios</hide-comments>
+        <comment-by>Comentado por</comment-by>
+        <email>Correo Electrónico</email>
+        <site>Sitio</site>
+      </label>
+    </view>
+  </Comment>
+  <!--
+  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
+  -->
+  <Event>
+    <view>
+      <label>
+        <january>Enero</january>
+        <february>Febrero</february>
+        <march>Marzo</march>
+        <april>Abril</april>
+        <may>Mayo</may>
+        <june>Junio</june>
+        <july>Julio</july>
+        <august>Agosto</august>
+        <september>Septiembre</september>
+        <october>Octubre</october>
+        <november>Noviembre</november>
+        <december>Diciembre</december>
+        <event>Evento</event>
+        <subject>Asunto</subject>
+        <location>Localización</location>
+        <comment>Comentario</comment>
+        <description>Descripción</description>
+      </label>
+    </view>
+  </Event>
+  <!--
+  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Este contenido no es visible. Por favor, descargue o utilice WebDAV para acceder al contenido</not-viewable>
+        <file-size-too-big>El contenido de este archivo es demasiado grande. Debe descargar y abrir en el cliente.</file-size-too-big>
+        <webDAV>Vista WebDAV</webDAV>
+        <download>Descargar</download>
+        <htmlview>Ver como HTML</htmlview>
+        <plaintextview>Ver como texto sin formato</plaintextview>
+      </label>
+    </view>
+  </File>
+  <!--
+  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
+  -->
+  <FilePlan>
+    <view>
+      <label>
+        <content>Archivar el Contenido del Plan</content>
+        <record-category-identifier>Identificador de Categoría de Registro</record-category-identifier>
+        <disposition-author>Autoridad de la disposición</disposition-author>
+        <disposition-instruction>Instrucciones de la Disposición</disposition-instruction>
+        <permanent-record-indicator>Indicador del archivo permanente</permanent-record-indicator>
+        <contain-record-folder>Contiene Archivos de Registro</contain-record-folder>
+        <default-media-type>Tipo de medios de comunicación predeterminado</default-media-type>
+        <default-marking-list>Lista de marca predeterminada</default-marking-list>
+        <default-originating-organization>Organización Emitida por Defecto</default-originating-organization>
+        <number-of-record>Número de Registros</number-of-record>
+        <record>Registros</record>
+        <obsolete-record>Registros Obsoletos</obsolete-record>
+        <supreseded-record>Registros reemplazados</supreseded-record>
+        <vital-record>Registros vitales</vital-record>
+        <cutoff-record>Archivos del corte</cutoff-record>
+        <holdable-record>Expedientes de Suspensión</holdable-record>
+        <transferable-record>Registros transferibles</transferable-record>
+        <accessionable-record>Registros accesibles</accessionable-record>
+        <destroyable-record>Archivos Destruibles</destroyable-record>
+        <record-id>Id de Registro</record-id>
+        <record-name>Nombre de Registro</record-name>
+        <originator>Creador</originator>
+        <date-received>Fecha de recepción</date-received>
+        <originating-organization>Origen del organismo</originating-organization>
+        <next-review-date>Próxima fecha de revisión</next-review-date>
+        <previous-review-date>Fecha de revisión previa</previous-review-date>
+        <cutoff-date>Fecha de extracción</cutoff-date>
+        <hold-until>Suspensión hasta</hold-until>
+        <transfer-date>Fecha de transferencia</transfer-date>
+        <transfer-location>Localización de la transferencia</transfer-location>
+        <accession-date>Fecha de acceso</accession-date>
+        <accession-location>Ubicación del acceso</accession-location>
+        <destruction-date>Fecha de destrucción</destruction-date>
+      </label>
+    </view>
+  </FilePlan>
+  <!--
+  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Kofax>
+    <view>
+      <label>
+        <document-name>Nombre del Documento Kofax</document-name>
+        <downloadable>Archivo descargable</downloadable>
+      </label>
+    </view>
+  </Kofax>
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>De:</from>
+        <to>Para:</to>
+        <cc>Cc:</cc>
+        <date>Fecha:</date>
+        <subject>Asunto:</subject>
+        <attachment>Archivos adjuntos:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
+  -->
+  <Podcast>
+    <view>
+      <label>
+        <podcast>Podcast</podcast>
+        <title>Título</title>
+        <link>Enlace</link>
+        <author>Autor</author>
+        <explicit>Explícito</explicit>
+        <category>Categoría</category>
+        <keyword>Palabras claves</keyword>
+        <publish-date>Fecha de Publicación</publish-date>
+        <mime-type>Tipo Mime</mime-type>
+        <length>Longitud</length>
+        <description>Descripción</description>
+      </label>
+    </view>
+  </Podcast>
+  <!--
+  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
+  -->
+  <Sample>
+    <view>
+      <label>
+        <node-name>Nombre del Nodo</node-name>
+        <title>Título</title>
+        <date>Fecha</date>
+        <date-time>Fecha hora</date-time>
+        <description>Descripción</description>
+        <image>Imagen</image>
+        <summary>Resumen</summary>
+        <content>Contenido</content>
+        <relation>Relaciones</relation>
+        <attachment>Archivos adjuntos</attachment>
+      </label>
+    </view>
+  </Sample>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Calificación promedio</avg-rating>
+        <subscription>Votos</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Nombre</name>
+        <versionable>Versionable</versionable>
+        <exo_owner>Propietario</exo_owner>
+        <exo_dateCreated>Fecha de creación</exo_dateCreated>
+        <exo_dateModified>Fecha de Modificación</exo_dateModified>
+        <auditing>Auditoría</auditing>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
+  -->
+  <Workflow>
+    <view>
+      <label>
+        <name>Nombre</name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <validator>Validador</validator>
+        <to-workspace>Al espacio de trabajo</to-workspace>
+        <at-location>En Ubicación</at-location>
+      </label>
+    </view>
+  </Workflow>
+  <!--
+  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
+  -->
+  <Backup>
+    <view>
+      <label>
+        <name>Nombre</name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <to-workspace>Al espacio de trabajo</to-workspace>
+        <at-location>En Ubicación</at-location>
+      </label>
+    </view>
+  </Backup>
+  <!--
+  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
+  -->
+  <Getmail>
+    <view>
+      <label>
+        <name>Nombre de la acción</name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <protocol>Protocolo</protocol>
+        <host>Servidor</host>
+        <port>Puerto</port>
+        <folder>Archivo</folder>
+        <username>Nombre de Usuario</username>
+        <description>Descripción</description>
+        <stote-path>Ruta de almacenamiento</stote-path>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </Getmail>
+  <!--
+  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
+  -->
+  <Icalendar>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <calendar-path>Ruta del Calendario</calendar-path>
+        <description>Descripción</description>
+        <query>Consulta</query>
+        <repository>Repositorio</repository>
+      </label>
+    </view>
+  </Icalendar>
+  <!--
+  ###################### resoucebundle for exo:createRSSFeedAction view template ####
+  -->
+  <Rss>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <feed-name>Nombre del Flujo</feed-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <schedule-type>Tipo de Programa</schedule-type>
+        <start-time>Hora de inicio</start-time>
+        <end-time>Hora de finalización</end-time>
+        <repeat-count>Número de Repeticiones</repeat-count>
+        <time-inteval>Intérvalo de Tiempo</time-inteval>
+        <cron-expression>Expresión de cron</cron-expression>
+        <feed-node-name>Nombre del nodo del feed</feed-node-name>
+        <feed-store-path>Ruta de almacenamiento del feed</feed-store-path>
+        <query-items>Elementos de Consulta</query-items>
+        <rss-url>URL RSS</rss-url>
+        <feed-title>Título del Feed</feed-title>
+        <feed-type>Tipo de Feed</feed-type>
+        <rss-version>Versión RSS</rss-version>
+        <link>Enlace</link>
+        <description>Descripción</description>
+        <language>idioma</language>
+        <copyright>Derechos de autor</copyright>
+        <publish-date>Fecha de Publicación</publish-date>
+        <owner-name>Nombre del propietario</owner-name>
+        <owner-email>Correo electrónico del propietario</owner-email>
+        <image-url>Imagen del URL</image-url>
+        <category>Categoría</category>
+        <keywords>Palabras claves</keywords>
+        <query-path>Ruta de Consulta</query-path>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </Rss>
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <metadata>Metadato</metadata>
+        <description>Descripción</description>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </AddMetadata>
+  <!--
+  ###################### resoucebundle for exo:ReloadBPAction view template ####
+  -->
+  <ReloadAction>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </ReloadAction>
+  <!--
+  ###################### resoucebundle for exo:sendMailAction view template ####
+  -->
+  <SendMail>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <mail-to>Enviar correo a</mail-to>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </SendMail>
+  <!--
+  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
+  -->
+  <Transform>
+    <view>
+      <label>
+        <action-name>Nombre</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </Transform>
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Nombre</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <description>Descripción</description>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <title>Título</title>
+        <creator>Creador</creator>
+        <subject>Asunto</subject>
+        <source>Origen</source>
+        <contributor>Contribuyente</contributor>
+        <resource-type>Tipo de Recursos</resource-type>
+        <date>Fecha</date>
+        <publisher>Editor</publisher>
+        <description>Descripción</description>
+        <rights>Derechos</rights>
+        <relation>Relación</relation>
+        <format>Formato</format>
+        <coverage>Cobertura</coverage>
+        <identifier>Identificador</identifier>
+        <languages>Idiomas</languages>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+  <!--
+  ###################### resoucebundle for rma:cutoffable view template ####
+  -->
+  <Cutoffable>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <cutoff-executed>Extracción Ejecutada</cutoff-executed>
+        <cutoff-now>Cortar ahora</cutoff-now>
+        <cutoff-date-time>Planificación para la extracción</cutoff-date-time>
+        <cutoff-event>Evento de extracción</cutoff-event>
+        <cutoff-obsolete>Extracción obsoleta</cutoff-obsolete>
+        <cutoff-superseded>Extracción de reemplazo</cutoff-superseded>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </Cutoffable>
+  <!--
+  ###################### resoucebundle for rma:destroyable view template ####
+  -->
+  <Destroyable>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <destruction-date>Fecha de destrucción</destruction-date>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </Destroyable>
+  <!--
+  ###################### resoucebundle for rma:accessionable view template ####
+  -->
+  <Accessionable>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <accession-executed>Ejecutado accesible</accession-executed>
+        <accession-date>Fecha de acceso</accession-date>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+      </tooltip>
+    </view>
+  </Accessionable>
+  <!--
+  ###################### resoucebundle for rma:holdable view template ####
+  -->
+  <Holdable>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <hold-executed>Ejecución de la Suspensión</hold-executed>
+        <hold-until>Suspensión hasta</hold-until>
+        <holds-discretionary>Suspensión discrecional</holds-discretionary>
+        <hold-until-event>Suspender hasta el evento</hold-until-event>
+        <freeze>Congelar</freeze>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </Holdable>
+  <!--
+  ###################### resoucebundle rma:record view template ####
+  -->
+  <Record>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <supplemental-marking-list>Lista de marcado suplementario</supplemental-marking-list>
+        <subject>Asunto</subject>
+        <record-identifier>Registro de Identificación</record-identifier>
+        <originator>Creador</originator>
+        <format>Formato</format>
+        <addresses>Direcciones</addresses>
+        <originating-organization>Origen del organismo</originating-organization>
+        <other-addresses>Otras direcciones</other-addresses>
+        <publication-date>Fecha de publicación</publication-date>
+        <record-note>Nota del registro</record-note>
+        <date-received>Fecha de recepción</date-received>
+        <media-format>Formato de los medios de comunicación</media-format>
+        <is-obsolete>Está obsoleto</is-obsolete>
+        <date-field>Campo de fecha</date-field>
+        <superseded>Reemplazado</superseded>
+        <uuid>UUID</uuid>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </Record>
+  <!--
+  ###################### resoucebundle rma:transferable view template ####
+  -->
+  <Transferable>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <transfer-executed>Transferencia ejecutada</transfer-executed>
+        <transfer-date>Fecha de transferencia</transfer-date>
+        <transfer-location>Localización de la transferencia</transfer-location>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </Transferable>
+  <!--
+  ###################### resoucebundle rma:vitalRecord view template ####
+  -->
+  <VitalRecord>
+    <view>
+      <label>
+        <not-available>N/A</not-available>
+        <is-vital-record>Es Registro Vital</is-vital-record>
+        <prev-review-date>Fecha de revisión anterior</prev-review-date>
+        <next-review-date>Próxima fecha de revisión</next-review-date>
+      </label>
+      <action>
+        <add-edit>Añadir/Editar</add-edit>
+        <cancel>Cancelar</cancel>
+      </action>
+      <tooltip>
+        <cancel>Cancelar</cancel>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
+      </tooltip>
+    </view>
+  </VitalRecord>
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <view>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>Validador</validator>
+        <supervisor>Supervisor</supervisor>
+        <public-workspace>Área de publicación</public-workspace>
+        <public-path>Ruta de publicación</public-path>
+        <pending-workspace>Espacio de trabajo pendiente</pending-workspace>
+        <pending-path>Ruta pendiente</pending-path>
+        <backup-workspace>Espacio de trabajo de copia de seguridad</backup-workspace>
+        <backup-path>Ruta de reserva</backup-path>
+        <trash-workspace>Espacio de trabajo del zafacón</trash-workspace>
+        <trash-path>Ruta de la basura</trash-path>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+      </label>
+    </view>
+  </ContentPublishing>
+  <ScriptAction>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label>
+    </view>
+  </ScriptAction>
+  <AccessibleMedia>
+    <view>
+      <label>
+        <Play-audio-description-of-this-video>Descripción de audio</Play-audio-description-of-this-video>
+        <Read-more>Leer más</Read-more>
+        <Read-less>Leer menos</Read-less>
+        <Switch-back-to-original-video>Video original</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+        <A-second-media-file-is-available-as-audio-description>Un segundo archivo de medios está disponible como audio descripción</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+</bundle>

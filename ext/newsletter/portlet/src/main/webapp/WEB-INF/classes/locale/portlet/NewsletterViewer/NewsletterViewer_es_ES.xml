@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>Tu suscripción se ha actualizado correctamente.</updateSuccess>
+      <subcribed>Ahora ya estás suscrito a los boletines seleccionados.</subcribed>
+      <email-not-empty>El campo del correo electrónico es obligatorio.</email-not-empty>
+      <checkSubscriptionToProcess>Por favor, seleccione al menos una suscripción antes de enviar.</checkSubscriptionToProcess>
+      <alreadyExistedEmail>Este correo electrónico ya existe. Favor de escribir otro.</alreadyExistedEmail>
+      <canNotSubcribed>No puede suscribirse. Por favor, inténtelo de nuevo.</canNotSubcribed>
+      <get-checked>Se produjo un error al intentar acceder a la suscripción seleccionada.</get-checked>
+    </msg>
+    <action>
+      <Subcribe>Suscribirse</Subcribe>
+      <ForgetEmail>Olvidar este correo electrónico</ForgetEmail>
+      <ChangeSubcriptions>Cambia tu suscripción</ChangeSubcriptions>
+    </action>
+    <title>
+      <userEmail>Su Correo Electrónico</userEmail>
+      <subscription>Suscripción</subscription>
+      <yourStatus>Marque para suscribirse</yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>Pedido de confirmación del boletín de noticias</Subject>
+        <Content>Pulsar #aquí# para confirmar su suscripción.</Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>

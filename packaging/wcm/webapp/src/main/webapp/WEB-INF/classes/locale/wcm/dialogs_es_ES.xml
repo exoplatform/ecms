@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>Contenido principal</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>Avanzado</Advanced>
+        <Summary>Resumen</Summary>
+        <name>Nombre</name>
+        <title>Título</title>
+        <ContentCSS>Datos CSS</ContentCSS>
+        <hintCSS>En este panel, puede especificar la hoja de estilos principal para el contenido web. Este estilo anula definido a nivel de sitio y a nivel compartido.</hintCSS>
+        <ContentJS>Datos de JS</ContentJS>
+        <hintJS>En este panel, usted puede especificar el código Java Script que puede ser ejecutado antes de que su contenido web sea reproducido.</hintJS>
+        <WebContentHtml>Contenido principal</WebContentHtml>
+        <Illustration>Ilustración</Illustration>
+        <hintIllustration>En este panel, puede especificar una imagen que será mostrada cuando su contenido web es mostrado en listados  En adición, usted pued especificar algún texto de resúmen que acompañe esta imagen.</hintIllustration>
+        <confirm-delete>¿Estás seguro de eliminar esta ilustración?</confirm-delete>
+        <illustrationImage>Imagen de la Ilustración</illustrationImage>
+        <imageMimeType>Tipo de imagen</imageMimeType>
+        <image>Subir Imagen</image>
+        <imageWidth>Anchura de la imagen</imageWidth>
+        <imageHeight>Altura de la imagen</imageHeight>
+        <Synchronize>Sincronizar con CSS y HTML</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos CSS</content>
+      </label>
+    </dialog>
+  </CSSFile>
+  <JSFile>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos de JS</content>
+      </label>
+    </dialog>
+  </JSFile>
+  <WebLink>
+    <dialog>
+      <label>
+        <name>Nombre</name>
+        <url>URL</url>
+        <description>Descripción</description>
+      </label>
+    </dialog>
+  </WebLink>
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>Título del Sitio</title>
+        <description>Descripción del Sitio</description>
+        <keywords>Palabras clave del sitio</keywords>
+        <robots>Comportamiento del motor de búsqueda</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>

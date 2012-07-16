@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bundle>
+  <UIPCVContainer>
+    <title>
+      <Back>Regresar</Back>
+      <print>Imprimir esta página</print>
+      <QuickEdit>Edición rápida</QuickEdit>
+    </title>
+    <label>
+      <print>Imprimir</print>
+      <draft>Borrador</draft>
+      <edit>Editar</edit>
+    </label>
+    <action>
+      <Print>Imprimir</Print>
+      <Close>Cerrar</Close>
+    </action>
+    <msg>
+      <content-not-found>No se encontró contenido.</content-not-found>
+      <not-support>No tienes permiso para acceder.</not-support>
+    </msg>
+  </UIPCVContainer>
+  <UIPCVConfigPopupWindow>
+    <title>
+      <UIPCVConfig>Configuración del visor de contenido parametrizado</UIPCVConfig>
+    </title>
+  </UIPCVConfigPopupWindow>
+  <UIPCVConfig>
+    <label>
+      <Title>Configuración del visor de contenido parametrizado</Title>
+      <DisplaySettingBlock>Configuración de pantalla</DisplaySettingBlock>
+      <ShowTitle>Mostrar título</ShowTitle>
+      <ShowDateCreated>Mostrar fecha de creación</ShowDateCreated>
+      <ShowBar>Mostrar barra de opción</ShowBar>
+    </label>
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+  </UIPCVConfig>
+</bundle>
