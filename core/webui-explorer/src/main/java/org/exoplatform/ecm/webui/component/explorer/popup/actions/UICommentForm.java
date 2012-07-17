@@ -139,6 +139,15 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
   public void setDocument(Node doc) {
     document_ = NodeLocation.getNodeLocationByNode(doc);
   }
+  
+  /**
+   * Overrides method processRender of UIForm, loads javascript module wcm-webui-ext
+   */
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
+    super.processRender(context);
+  }  
 
   public static class CancelActionListener extends EventListener<UICommentForm>{
     public void execute(Event<UICommentForm> event) throws Exception {
