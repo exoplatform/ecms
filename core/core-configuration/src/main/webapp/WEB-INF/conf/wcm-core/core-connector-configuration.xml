@@ -47,6 +47,9 @@
     <type>org.exoplatform.wcm.connector.collaboration.DownloadConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.collaboration.NavigationConnector</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
       <value-param>
