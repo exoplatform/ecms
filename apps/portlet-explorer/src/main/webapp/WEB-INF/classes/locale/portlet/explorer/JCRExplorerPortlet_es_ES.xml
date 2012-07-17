@@ -2126,6 +2126,7 @@
       <tag-name-empty>El nombre de su etiqueta está vacío</tag-name-empty>
       <tag-name-duplicate>Los nombres de las etiquetas de entrada están duplicados.</tag-name-duplicate>
       <tagName-too-long>Una de las etiquetas introducidas es demasiado larga. El nombre de la etiqueta debe ser menos de 30 caracteres.</tagName-too-long>
+      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
       <tagName>(Separar mútiples etiquetas con las comas.)</tagName>

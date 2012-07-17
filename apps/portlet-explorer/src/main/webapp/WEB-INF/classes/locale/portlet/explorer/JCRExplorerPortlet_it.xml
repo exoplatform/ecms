@@ -1993,6 +1993,7 @@
       <tag-name-empty>Nome tag vuoto</tag-name-empty>
       <tag-name-duplicate>Nomi tag inseriti duplicati.</tag-name-duplicate>
       <tagName-too-long>Nomi tag inseriti troppo lungo. Il nome tag deve essere minore di 30 caratteri.</tagName-too-long>
+      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
       <tagName>(Separa tag multipli con la virgola.)</tagName>

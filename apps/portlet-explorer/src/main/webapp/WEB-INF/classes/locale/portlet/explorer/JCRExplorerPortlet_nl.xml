@@ -2022,6 +2022,7 @@
 			<tag-name-duplicate>Input tag names are duplicate.</tag-name-duplicate>
 			<tagName-too-long>Een van de tags is te lang.(max 30 karakters)
 			</tagName-too-long>
+			<path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
 		</msg>
 		<introduction>
 			<tagName>(gebruik "," om meerdere tags toe te voegen)</tagName>

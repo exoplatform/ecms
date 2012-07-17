@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -126,12 +127,18 @@ public class UITagExplorer extends UIContainer {
   static public class ViewTagActionListener extends EventListener<UITagExplorer> {
     public void execute(Event<UITagExplorer> event) throws Exception {
       UITagExplorer uiTagExplorer = event.getSource() ;
+      UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
       String tagPath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setSelectRootNode();
       uiExplorer.setTagPath(tagPath);
       uiExplorer.setIsViewTag(true);
-      uiExplorer.updateAjax(event);
+      try {
+        uiExplorer.updateAjax(event);
+      } catch(PathNotFoundException pne) {
+      	uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
+      	return;
+      }
     }
   }
 
