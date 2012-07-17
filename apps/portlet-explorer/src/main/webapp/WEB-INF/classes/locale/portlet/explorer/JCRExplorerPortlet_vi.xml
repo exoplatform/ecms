@@ -488,6 +488,9 @@
       <execute-successfully>Thao tác'{0}' đã được thực thi.</execute-successfully>
       <save-node-success>Node'{0}' đã được lưu lại.</save-node-success>
       <move-problem>không thể di chuyển node '{0}' đến '{1}' bởi vì bạn gặp vấn đề về quyền truy nhập hoặc các điều kiện ràng buộc.</move-problem>
+      <confirm-delete-permanently-has-relations>Node '{0}' có các liên kết tới nó. Bạn có muốn xóa vĩnh viễn node này và các liên kết tới nó?</confirm-delete-permanently-has-relations>
+      <confirm-delete-permanently-multi-one-node-has-relations>Bạn có muốn xóa vĩnh viễn các item: {0}? (Node {1} có liên kết tới chúng, xử lý này sẽ xóa tất cả các liên kết.</confirm-delete-permanently-multi-one-node-has-relations>
+      <confirm-delete-permanently-multi-many-nodes-have-relations>Bạn có muốn xóa vĩnh viễn các item: {0}? (Node {1} có liên kết tới chúng, xử lý này sẽ xóa tất cả các liên kết.)</confirm-delete-permanently-multi-many-nodes-have-relations>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
