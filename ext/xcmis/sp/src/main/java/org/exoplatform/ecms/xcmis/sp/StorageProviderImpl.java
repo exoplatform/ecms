@@ -17,28 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
-import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
-import org.exoplatform.services.jcr.impl.core.observation.ObservationManagerRegistry;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
-import org.xcmis.search.SearchService;
-import org.xcmis.search.SearchServiceException;
-import org.xcmis.spi.CmisConstants;
-import org.xcmis.spi.CmisRegistry;
-import org.xcmis.spi.CmisRuntimeException;
-import org.xcmis.spi.Connection;
-import org.xcmis.spi.InvalidArgumentException;
-import org.xcmis.spi.PermissionService;
-import org.xcmis.spi.StorageProvider;
-import org.xcmis.spi.model.BaseType;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +27,26 @@ import javax.jcr.Session;
 import javax.jcr.Workspace;
 import javax.jcr.observation.Event;
 import javax.jcr.observation.EventListenerIterator;
+
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
+import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
+import org.exoplatform.services.jcr.impl.core.observation.ObservationManagerRegistry;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.picocontainer.Startable;
+import org.xcmis.search.SearchService;
+import org.xcmis.spi.CmisConstants;
+import org.xcmis.spi.CmisRegistry;
+import org.xcmis.spi.CmisRuntimeException;
+import org.xcmis.spi.Connection;
+import org.xcmis.spi.InvalidArgumentException;
+import org.xcmis.spi.PermissionService;
+import org.xcmis.spi.StorageProvider;
+import org.xcmis.spi.model.BaseType;
 
 /**
  * @author <a href="mailto:andrey00x@gmail.com">Andrey Parfonov</a>
@@ -256,7 +254,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
          init();
          registry.addStorage(this);
       }
-      catch (Throwable e)
+      catch (Exception e)
       {
         if (LOG.isErrorEnabled()) {
           LOG.error("Unable to initialize storage. ", e);
@@ -275,8 +273,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
       //      }
    }
 
-   protected synchronized void init() throws RepositoryException, RepositoryConfigurationException,
-      SearchServiceException
+   protected synchronized void init() throws RepositoryException
    {
       if (storageConfiguration == null)
       {
