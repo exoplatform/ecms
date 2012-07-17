@@ -3386,4 +3386,11 @@
 	  <property_changed>Modifica proprietÃ </property_changed>
 	</label>
   </lifecyclePhase>
+  <UIWorkingArea>
+    <msg>
+      <confirm-delete-permanently-has-relations>The node '{0}' has relations that refer to it. Are you sure to delete it permanently and all its relations?</confirm-delete-permanently-has-relations>
+      <confirm-delete-permanently-multi-one-node-has-relations>Are you sure to delete these items permanently: {0}? (The node {1} has relations that refer to them, this process will remove all their relations).</confirm-delete-permanently-multi-one-node-has-relations>
+      <confirm-delete-permanently-multi-many-nodes-have-relations>Are you sure to delete these items permanently: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-permanently-multi-many-nodes-have-relations>
+    </msg>
+  </UIWorkingArea>
 </bundle>

@@ -472,6 +472,9 @@
       <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Are you sure to delete it and all its relations?</confirm-delete-has-relations>
       <confirm-delete-multi-one-node-has-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations).</confirm-delete-multi-one-node-has-relations>
       <confirm-delete-multi-many-nodes-have-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-multi-many-nodes-have-relations>
+      <confirm-delete-permanently-has-relations>The node '{0}' has relations that refer to it. Are you sure to delete it permanently and all its relations?</confirm-delete-permanently-has-relations>
+      <confirm-delete-permanently-multi-one-node-has-relations>Are you sure to delete these items permanently: {0}? (The node {1} has relations that refer to them, this process will remove all their relations).</confirm-delete-permanently-multi-one-node-has-relations>
+      <confirm-delete-permanently-multi-many-nodes-have-relations>Are you sure to delete these items permanently: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-permanently-multi-many-nodes-have-relations>
       <confirm-delete-permanently-multi>Are you sure to move these items: {0} permanently?</confirm-delete-permanently-multi>
       <confirm-move>Are you sure to move?</confirm-move>
       <node-cut>The node '{0}' has been cut.</node-cut>

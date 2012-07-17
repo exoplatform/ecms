@@ -2100,6 +2100,13 @@
       <unknown-error>Des erreurs sont survenus, vous ne pouvez pas suivre ce noeud!</unknown-error>
     </msg>
   </UIWatchDocumentForm>
+  <UIWorkingArea>
+    <msg>
+      <confirm-delete-permanently-has-relations>Le noeud '{0}' a des relations le référant, Etes-vous sûr de vouloir le supprimer définitivement ainsi que ses relations?</confirm-delete-permanently-has-relations>
+      <confirm-delete-permanently-multi-one-node-has-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs relations).</confirm-delete-permanently-multi-one-node-has-relations>
+      <confirm-delete-permanently-multi-many-nodes-have-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs relations).</confirm-delete-permanently-multi-many-nodes-have-relations>
+    </msg>
+  </UIWorkingArea>
   <!--
   ###################################################################################
   # 	org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm			#

@@ -45,6 +45,7 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
   private String[] args_ = {};
   protected boolean isOK_ = false;
   protected String nodePath_;
+  private boolean isNodeInTrash = false;
 
   public UIConfirmMessage() throws Exception {
   }
@@ -64,13 +65,27 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
   public String[] getActions() {
     return new String[] {"OK", "Close"};
   }
+  
+  public boolean isNodeInTrash() {
+    return isNodeInTrash;
+  }
+
+  public void setNodeInTrash(boolean isNodeInTrash) {
+    this.isNodeInTrash = isNodeInTrash;
+  }
 
   static  public class OKActionListener extends EventListener<UIConfirmMessage> {
     public void execute(Event<UIConfirmMessage> event) throws Exception {
       UIConfirmMessage uiConfirm = event.getSource();
       UIJCRExplorer uiExplorer = uiConfirm.getAncestorOfType(UIJCRExplorer.class);
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      uiWorkingArea.getChild(DeleteManageComponent.class).doDelete(uiConfirm.nodePath_, event);
+      
+      if (uiConfirm.isNodeInTrash()) {
+        uiWorkingArea.getChild(DeleteManageComponent.class).doDeleteWithoutTrash(uiConfirm.nodePath_, event);
+      } else {
+        uiWorkingArea.getChild(DeleteManageComponent.class).doDelete(uiConfirm.nodePath_, event);
+      }
+      
       uiConfirm.isOK_ = true;
       uiConfirm.deActivate();
     }
