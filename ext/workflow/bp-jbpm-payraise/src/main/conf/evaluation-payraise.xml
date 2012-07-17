@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <task-name>Evaluate a pay raise</task-name>
-  <title>Evaluate a pay raise</title>
+  <task-name>Evaluate Pay Raise</task-name>
+  <title>Evaluate Pay Raise</title>
   <grant>
     <submit>Grant</submit>
     <value>Grant Pay Raise</value>
@@ -15,30 +15,35 @@
   -->
   <initiator>
     <title>Who asked for more money?</title>
-    <label>Initiator :</label>
+    <label>Initiator:</label>
   </initiator>
+  <start>
+    <label>Start (dd/mm/yyyy):</label>
+  </start>
+  <end>
+    <label>End (dd/mm/yyyy):</label>
+  </end>
   <reason>
     <title>Reason given by the initiator</title>
-    <label>Reason :</label>
+    <label>Reason:</label>
   </reason>
   <amount-asked>
-    <title>Amount asked :</title>
-    <label>Amount :</label>
+    <title>Amount Asked:</title>
+    <label>Amount:</label>
   </amount-asked>
   <amount-granted>
-    <title>Amount granted :</title>
-    <label>Grant :</label>
+    <title>Amount Granted:</title>
+    <label>Grant:</label>
   </amount-granted>
   <priority>
-    <title>Set the priority</title>
+    <title>Set Priority</title>
     <label>Priority:</label>
   </priority>
   <rewarded>
     <title>Was the initiator rewarded</title>
     <label>Rewarded:</label>
-    <checkbox>Yes the initiator was rewarded!</checkbox>
+    <checkbox>Yes, the initiator was rewarded.</checkbox>
   </rewarded>
   
   <cancel>Cancel</cancel>
 </bundle>
-

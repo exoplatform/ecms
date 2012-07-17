@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Valuta Aumento</task-name>
+  <title>Valuta Aumento</title>
+  <!--
+  #variable title and label
+  -->  
+  <initiator>
+    <title>Chi ha chiesto un aumento?</title>
+    <label>Iniziatore:</label>
+  </initiator>
+  <start>
+    <title>Inizio delle ferie:</title>
+    <label>Inizio (gg/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Fine delle ferie:</title>
+    <label>Fine (gg/mm/yyyy) :</label>
+  </end>
+  
+  <grant>
+    <submit>Consenti</submit>
+    <value>Consenti Aumento</value>
+  </grant>
+  <deny>
+    <submit>Nega</submit>
+    <value>Nega Aumento</value>
+  </deny>
+  <reason>
+    <title>Ragione data da iniziatore</title>
+    <label>Ragione:</label>
+  </reason>
+  <amount-asked>
+    <title>Ammontare chiesto:</title>
+    <label>Ammontare:</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Ammontare consentito:</title>
+    <label>Consentito:</label>
+  </amount-granted>
+  <priority>
+    <title>Imposta Priorità</title>
+    <label>Priorità:</label>
+  </priority>
+  <rewarded>
+    <title>Iniziatore è stato premiato</title>
+    <label>Premiato:</label>
+    <checkbox>Si, iniziatore è stato premiato!</checkbox>
+  </rewarded>
+  
+  <cancel>Annulla</cancel>
+</bundle>
