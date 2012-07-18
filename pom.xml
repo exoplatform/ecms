@@ -101,6 +101,7 @@
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
     <org.imgscalr.version>4.2</org.imgscalr.version>
+    <org.exoplatform.doc.doc-style.version>1.0.8-SNAPSHOT</org.exoplatform.doc.doc-style.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
