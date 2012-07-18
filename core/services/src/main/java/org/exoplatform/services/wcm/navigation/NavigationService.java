@@ -78,9 +78,9 @@ public class NavigationService {
 			  } 
 			  js.append("{");
 			  js.append("\"icon\":"+(node.getIcon()!=null?"\""+node.getIcon()+"\"":"null")+",");
-			  js.append("\"label\":\""+node.getLabel()+"\",");
+			  js.append("\"label\":\""+node.getEncodedResolvedLabel()+"\",");
 			  js.append("\"name\":\""+node.getName()+"\",");
-			  js.append("\"resolvedLabel\":\""+node.getResolvedLabel()+"\",");
+			  js.append("\"resolvedLabel\":\""+node.getEncodedResolvedLabel()+"\",");
 			  js.append("\"uri\":\""+node.getUri()+"\",");
 			  js.append("\"link\":\"" + link + "\",");
 			  js.append("\"nodes\":"+addJsonNodes(node.getNodes()));
