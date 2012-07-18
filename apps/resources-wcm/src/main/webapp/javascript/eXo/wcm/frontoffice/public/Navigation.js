@@ -328,21 +328,10 @@ WCMNavigationPortlet.prototype.loadScroll = function(e) {
   if (portalNav) {
     // Creates new ScrollManager and initializes it
     uiNav.scrollMgr = new ScrollManager("navigation-generator");
-    uiNav.scrollMgr.initFunction = uiNav.initScroll;
     // Adds the tab elements to the manager
-    uiNav.scrollMgr.mainContainer = portalNav;
-    uiNav.scrollMgr.arrowsContainer = gj(portalNav).find("li.ScrollButtons:first")[0];
     uiNav.scrollMgr.loadElements("UITab"); 
-    // Configures the arrow buttons
-    var arrowButtons = gj(uiNav.scrollMgr.arrowsContainer).find("a");
-    if (arrowButtons.length == 2) {
-      uiNav.scrollMgr.initArrowButton(arrowButtons[0], "left", "ScrollLeftButton", "HighlightScrollLeftButton", "DisableScrollLeftButton");
-      uiNav.scrollMgr.initArrowButton(arrowButtons[1], "right", "ScrollRightButton", "HighlightScrollRightButton", "DisableScrollRightButton");
-    }
-    // Finish initialization
-    uiNav.scrollMgr.callback = uiNav.scrollCallback;
-    uiNav.scrollManagerLoaded = true;
-    uiNav.initScroll();
+    uiNav.scrollMgr.init();
+    uiNav.scrollMgr.renderElements();    
   }
 };
 
