@@ -1,4 +1,4 @@
-The _JodConverterServices_ component is used to convert documents into different office formats.
+The _JodConverterServices_ component is used to convert documents into different office formats. This component is enabled by default.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
 {code:xml}
