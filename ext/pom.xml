@@ -18,5 +18,6 @@
     <module>formgenerator</module>
     <module>xcmis</module>
     <module>webui</module>
+    <module>data-injector</module>
   </modules>
 </project>
