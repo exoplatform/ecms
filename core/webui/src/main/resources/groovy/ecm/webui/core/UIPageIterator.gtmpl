@@ -71,7 +71,7 @@
   <% if (uicomponent.isUseMaxSizeSetting()) {
     def pageSizeIdBottom = "maxPageSize_" + String.valueOf(System.currentTimeMillis()+1);
     %>
-  <a class="TotalPages" style="float:left; display:block;"><label for="$pageSizeIdBottom"><%=_ctx.appRes("UIPageIterator.label.maxPageSize")%>:&nbsp;</a>
+  <a class="TotalPages" style="float:left; display:block;"><label for="$pageSizeIdBottom"><%=_ctx.appRes("UIPageIterator.label.maxPageSize")%>:&nbsp;</label></a>
   <select class="selectbox" onchange="window.location.href=this.options[this.selectedIndex].value; return false;" id="$pageSizeIdBottom">
   <% for (maxItemPerPage in maxItemPerPageList) {
     if (maxPageSize == maxItemPerPage) {
