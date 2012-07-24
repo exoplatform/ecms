@@ -19,19 +19,9 @@
 
 <controller
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_controller_1_0 http://www.gatein.org/xml/ns/gatein_controller_1_0"
-    xmlns="http://www.gatein.org/xml/ns/gatein_controller_1_0"
+    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_controller_1_1 http://www.gatein.org/xml/ns/gatein_controller_1_1"
+    xmlns="http://www.gatein.org/xml/ns/gatein_controller_1_1"
     separator-escape=":">
-
-  <route path="/standalone/{gtn:path}">    
-    
-    <route-param qname="gtn:handler">
-      <value>standalone</value>
-    </route-param>
-    <path-param qname="gtn:path" encoding="preserve-path">
-      <pattern>.*</pattern>
-    </path-param>
-  </route>
 
   <route path="/upload">
     <route-param qname="gtn:handler">
@@ -44,18 +34,6 @@
       <value>download</value>
     </route-param>
   </route>
-
-  <route path="/{gtn:sitename}/sitemaps.xml">
-    <route-param qname="gtn:handler">
-      <value>sitemap</value>
-    </route-param>
-  </route>
-	
-  <route path="/{gtn:sitename}/robots.txt">
-    <route-param qname="gtn:handler">
-      <value>robots</value>
-    </route-param>
-  </route>	
 
   <!-- The legacy route -->
   <route path="/public">
@@ -87,7 +65,17 @@
 	    <pattern>.*</pattern>
 	  </path-param>
   	</route>
-  </route> 
+  </route>
+
+  <!-- Static resource handler needs to be before the portal handler -->
+  <route path="/{gtn:path}">
+    <route-param qname="gtn:handler">
+      <value>staticResource</value>
+    </route-param>
+    <path-param qname="gtn:path" encoding="preserve-path">
+      <pattern>.*\.(jpg|png|gif|ico|css)</pattern>
+    </path-param>
+  </route>
 
   <route path="/">
 
@@ -136,15 +124,38 @@
     </route>
 
   </route>
-	
-  <route path="/{gtn:path}">
+
+  <!-- Script handler -->
+  <route path="/scripts/{gtn:version}/{gtn:scope}/">
     <route-param qname="gtn:handler">
-      <value>staticResource</value>
+      <value>script</value>
     </route-param>
-    <path-param qname="gtn:path" encoding="preserve-path">
-      <pattern>.*\.(jpg|png|gif|ico|css)</pattern>
+    <path-param qname="gtn:version" encoding="preserve-path">
+      <pattern>[^/]*</pattern>
     </path-param>
-  </route>	
+    <route path="/{gtn:resource}{gtn:lang}{gtn:compress}.js">
+      <path-param qname="gtn:resource">
+        <pattern>.+?</pattern>
+      </path-param>
+      <path-param qname="gtn:lang" capture-group="true">
+        <pattern>-([A-Za-z]{2}(-[A-Za-z]{2})?)|</pattern>
+      </path-param>
+      <path-param qname="gtn:compress" capture-group="true">
+        <pattern>-(min)|</pattern>
+      </path-param>
+    </route>
+    <route path="/{gtn:resource}/{gtn:module}{gtn:lang}{gtn:compress}.js">
+      <path-param qname="gtn:module">
+        <pattern>.+?</pattern>
+      </path-param>
+      <path-param qname="gtn:lang" capture-group="true">
+        <pattern>-([A-Za-z]{2}(-[A-Za-z]{2})?)|</pattern>
+      </path-param>
+      <path-param qname="gtn:compress" capture-group="true">
+        <pattern>-(min)|</pattern>
+      </path-param>
+    </route>
+  </route>
 
   <!-- Default handler -->
   <route path="/">
