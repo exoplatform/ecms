@@ -333,6 +333,10 @@
     <dependency><groupId>org.openoffice</groupId><artifactId>juh</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
     <dependency><groupId>org.openoffice</groupId><artifactId>jurt</artifactId><version>${openoffice.version}</version><type>jar</type></dependency><!-- 3.0.1-->
     <dependency><groupId>org.imgscalr</groupId><artifactId>imgscalr-lib</artifactId><version>${org.imgscalr.version}</version><type>jar</type></dependency>
+    <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache</artifactId><version>${net.sf.ehcache.version}</version><type>jar</type></dependency><!-- 1.6.0-->
+    <dependency><groupId>de.odysseus.juel</groupId><artifactId>juel-api</artifactId><version>${de.odysseus.juel.version}</version><type>jar</type></dependency><!-- 2.1.2-->
+    <dependency><groupId>de.odysseus.juel</groupId><artifactId>juel-impl</artifactId><version>${de.odysseus.juel.version}</version><type>jar</type></dependency><!-- 2.1.2-->
+    
   </dependencies>
   <build>
     <plugins>

@@ -117,6 +117,8 @@
     <version.release.plugin>2.2.1</version.release.plugin>
     <version.buildnumber.plugin>1.1</version.buildnumber.plugin>
     <org.imgscalr.version>4.2</org.imgscalr.version>
+    <net.sf.ehcache.version>1.6.0</net.sf.ehcache.version>
+    <de.odysseus.juel.version>2.1.2</de.odysseus.juel.version>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
