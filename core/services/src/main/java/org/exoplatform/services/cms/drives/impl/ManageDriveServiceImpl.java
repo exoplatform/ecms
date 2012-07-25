@@ -301,6 +301,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public DriveData getDriveByName(String name) throws Exception{
     if (name.startsWith(".")) {
       String groupName = name.replace(".", "/");
+      if (groupDriveTemplate_ == null) return null;
       DriveData drive = groupDriveTemplate_.clone();
       drive.setHomePath("/Groups" + groupName);
       drive.setName(name);
@@ -592,7 +593,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for (String role : userRoles) {
       String group = role.substring(role.indexOf(":")+1);
-      if (group.charAt(0)=='/') {
+      if (groupDriveTemplate_ != null && group.charAt(0)=='/') {
         DriveData drive = groupDriveTemplate_.clone();
         drive.setHomePath(groupPath + group);
         drive.setName(group.replace("/", "."));
@@ -667,7 +668,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * {@inheritDoc}
    */
   public boolean isVitualDrive(String driveName) {
-    if (groupDriveTemplate_.getName().equals(driveName))
+    if (groupDriveTemplate_!= null && groupDriveTemplate_.getName().equals(driveName))
       return true;
     return false;
   }
