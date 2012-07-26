@@ -1,16 +1,7 @@
-/**
- * Created by The eXo Platform SARL
- * Author : Tran The Trong
- *          trongtt@gmail.com
- * August 01, 2006
- * version: $Id$
- */
-
 @import url("../../../icons/DefaultStylesheet.css");
 @import url("control/DefaultStylesheet.css");
 @import url("sidebar/DefaultStylesheet.css");
 @import url("UIPopupAction/DefaultStylesheet.css");
-@import url("UIDrivesBrowser/DefaultStylesheet.css");
 @import url("UIJCRExplorer/DefaultStylesheet.css");
 
 .UIPageDesktop .UIJCRExplorerPortlet {

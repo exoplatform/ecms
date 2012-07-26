@@ -68,15 +68,6 @@ public class UIDriveSelector extends UIContainer {
     LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(driveList, 10);
     uiPageIterator_.setPageList(dataPageList);
   }
-
-  @Deprecated
-  public List<DriveData> getDrives(String repoName) throws Exception {
-    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
-    List<DriveData> driveList =
-      driveService.getDriveByUserRoles(Util.getPortalRequestContext().getRemoteUser(), Utils.getMemberships());
-    Collections.sort(driveList, new DriveComparator()) ;
-    return driveList ;
-  }
   
   public List<DriveData> getDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
