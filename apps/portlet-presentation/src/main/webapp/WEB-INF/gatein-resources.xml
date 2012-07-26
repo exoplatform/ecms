@@ -51,24 +51,6 @@
     <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
-  <!-- ParameterizedContentViewerPortlet skins -->
-
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ParameterizedContentViewerPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/PrameterizedContentViewer/DefaultStylesheet.css</css-path>
-  </portlet-skin>
-  
-  <!-- ParameterizedContentListViewerPortlet skins -->
-
-  <portlet-skin>
-    <application-name>presentation</application-name>
-    <portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
-    <skin-name>Default</skin-name>
-    <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
-  </portlet-skin>
-  
   <portlet-skin>
     <application-name>presentation</application-name>
     <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
