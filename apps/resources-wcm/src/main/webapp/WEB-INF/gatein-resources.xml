@@ -50,7 +50,7 @@
          <path>/javascript/eXo/wcm/ECM.js</path>
       </script>
       <depends>
-        <scripts>bootstrap</scripts>
+        <module>bootstrap</module>
       </depends>
    </module>
    
@@ -140,7 +140,7 @@
          <path>/eXoLoader.js</path>
       </script>
       <depends>
-        <scripts>bootstrap</scripts>
+        <module>bootstrap</module>
       </depends>
    </module>
    
