@@ -114,11 +114,6 @@
     <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
     <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
   </component>
-
-  <component>
-    <key>org.exoplatform.services.wcm.metadata.PageMetadataService</key>
-    <type>org.exoplatform.services.wcm.metadata.PageMetadataServiceImpl</type>
-  </component>
 	
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>
