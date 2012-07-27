@@ -78,21 +78,15 @@ public class LockServiceImpl implements LockService, Startable {
    * {@inheritDoc}
    */
   public void start() {
-    try {
-      settingLockList.clear();
-      for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
-        try{
-          settingLockList.addAll(plugin.initGroupsOrUsers());
-          preSettingLockList.addAll(plugin.initGroupsOrUsers());
-        }catch(Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("can not init lock groups or users: ", e);
-          }
+    settingLockList.clear();
+    for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
+      try{
+        settingLockList.addAll(plugin.initGroupsOrUsers());
+        preSettingLockList.addAll(plugin.initGroupsOrUsers());
+      }catch(Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("can not init lock groups or users: ", e);
         }
-      }
-    }catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("===>>>>Exception when init LockService", e);
       }
     }
   }
