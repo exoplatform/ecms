@@ -140,11 +140,11 @@ public interface QueryService {
   /**
    * Remove share query by giving the following params : queryName
    *
-   * @param queryName String The name of query
-   * @param repository String The name of repository
+   * @param queryName String The name of query  
+   * @param provider SessionProvider
    * @throws Exception
    */
-  public void removeSharedQuery(String queryName) throws Exception;  
+  public void removeSharedQuery(String queryName, SessionProvider provider) throws Exception;  
 
   /**
    * Get shared queries by giving the following params : provider

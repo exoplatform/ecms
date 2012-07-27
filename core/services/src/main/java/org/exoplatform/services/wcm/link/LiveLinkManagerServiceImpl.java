@@ -130,17 +130,19 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
    * @see org.exoplatform.services.wcm.link.LiveLinkManagerService#getBrokenLinks(javax.jcr.Node)
    */
   public List<String> getBrokenLinks(Node webContent) throws Exception {
-    List<String> listBrokenUrls = (List<String>)brokenLinksCache.get(webContent.getUUID());
-    if(listBrokenUrls == null) {
+    List<String> listBrokenUrls = (List<String>) brokenLinksCache.get(webContent.getUUID());
+    if (listBrokenUrls == null || listBrokenUrls.size() == 0) {
       listBrokenUrls = new ArrayList<String>();
-      for(Value value:webContent.getProperty("exo:links").getValues()) {
-        String link = value.getString();
-        LinkBean linkBean = LinkBean.parse(link);
-        if(linkBean.isBroken()) {
-          listBrokenUrls.add(linkBean.getUrl());
+      if (webContent.hasProperty("exo:links")) {
+        for (Value value : webContent.getProperty("exo:links").getValues()) {
+          String link = value.getString();
+          LinkBean linkBean = LinkBean.parse(link);
+          if (linkBean.isBroken()) {
+            listBrokenUrls.add(linkBean.getUrl());
+          }
         }
+        brokenLinksCache.put(webContent.getUUID(), listBrokenUrls);
       }
-      brokenLinksCache.put(webContent.getUUID(), listBrokenUrls);
     }
     return listBrokenUrls;
   }
@@ -328,6 +330,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       }
     }
     webContent.setProperty("exo:links", values);
+    webContent.save();
   }
 
 }

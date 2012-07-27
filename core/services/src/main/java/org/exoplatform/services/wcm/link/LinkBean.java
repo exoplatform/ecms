@@ -77,7 +77,7 @@ public class LinkBean {
     String[] links = link.split(SEPARATOR);
     if (links.length < 2) return new LinkBean("","");
     String url = links[1].replaceAll(URL, "");
-    String status = links[0];
+    String status = links[0].replaceAll(STATUS, "");
     return new LinkBean(url,status);
   }
 }

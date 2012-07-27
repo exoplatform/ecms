@@ -26,6 +26,7 @@ import javax.jcr.Value;
 
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.link.LinkBean;
 import org.exoplatform.services.wcm.link.LiveLinkManagerService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -42,6 +43,8 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
   /** The live link manager service. */
   private LiveLinkManagerService liveLinkManagerService;
   
+  private Node                   link;
+  
   
   @Override
   protected void afterContainerStart() {
@@ -53,7 +56,28 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
   public void setUp() throws Exception {
     applySystemSession();
     Node folder = (Node) session.getItem("/sites content/live/classic/web contents");
-    createWebcontentNode(folder, "webcontent", "This is the live link: <a href='http://www.google.com'>Goolge</a> and this is the broken link: <a href='http://www.thiscannotbeanactivelink.com'>Broken</a>", null, null);
+    link = createWebcontentNode(folder, "webcontent", "This is the live link: <a href='http://www.google.com'>Goolge</a> and this is the broken link: <a href='http://www.thiscannotbeanactivelink.com'>Broken</a>", null, null);
+  }
+  
+  @Test
+  public void testGetBrokenLinks() throws Exception {
+    List<LinkBean> links = liveLinkManagerService.getBrokenLinks("classic");
+    assertEquals(0, links.size());
+    String[] linkValues = {"status=broken@url=http://www.mozilla.com"};
+    link.setProperty("exo:links", linkValues);
+    link.save();
+    links = liveLinkManagerService.getBrokenLinks("classic");
+    assertEquals(1, links.size());
+  }
+  
+  @Test
+  public void testUpdateLinks() throws Exception {
+    List<String> linkValues = new ArrayList<String>();
+    linkValues.add("http://www.thiscannotbeanactivelink.com");
+    liveLinkManagerService.updateLinkDataForNode(link, linkValues);
+    liveLinkManagerService.updateLinks();
+    List<LinkBean> links = liveLinkManagerService.getBrokenLinks("classic");
+    assertEquals(1, links.size());
   }
 
   /**
@@ -94,6 +118,7 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
    */
   @AfterMethod
   protected void tearDown() throws Exception {
+    link = null;
     session.getItem("/sites content/live/classic/web contents/webcontent").remove();
     session.save();
   }

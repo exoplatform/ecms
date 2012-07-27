@@ -261,7 +261,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     Query query = manager.createQuery(statement, language);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userName);
-    if (!userNode.hasNode(relativePath_)) {
+    if (!userNode.hasNode(getRelativePath())) {
       getNodeByRelativePath(userNode, relativePath_);
       session.save();
     }
@@ -353,8 +353,12 @@ public class QueryServiceImpl implements QueryService, Startable{
    */
   public Node getSharedQuery(String queryName, SessionProvider provider) throws Exception {
     Session session = getSession(provider, true);
-    Node sharedQueryNode = (Node)session.getItem(baseQueriesPath_ + "/" + queryName);
-    return sharedQueryNode;
+    try {
+      Node sharedQueryNode = (Node) session.getItem(baseQueriesPath_ + "/" + queryName);
+      return sharedQueryNode;
+    } catch (PathNotFoundException e) {
+      return null;
+    }
   }  
 
   /**
@@ -418,8 +422,8 @@ public class QueryServiceImpl implements QueryService, Startable{
   /**
    * {@inheritDoc}
    */
-  public void removeSharedQuery(String queryName) throws Exception {
-    Session session = getSession();
+  public void removeSharedQuery(String queryName, SessionProvider provider) throws Exception {
+    Session session = getSession(provider, true);
     session.getItem(baseQueriesPath_ + "/" + queryName).remove();
     session.save();
   }  
