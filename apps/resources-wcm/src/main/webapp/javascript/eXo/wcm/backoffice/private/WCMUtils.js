@@ -249,4 +249,8 @@ WCMUtils.prototype.getBundle = function(key, lang) {
   return message.getAttribute("value");
 };
 
+WCMUtils.prototype.setZIndex = function(index) {
+  eXo.webui.UIPopup.zIndex = index;
+};
+
 eXo.ecm.WCMUtils = new WCMUtils();

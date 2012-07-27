@@ -13,6 +13,7 @@
 	<%
     jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass');})");
     jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className');})");
+    jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.setZIndex(10)");
     
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
