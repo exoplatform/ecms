@@ -290,7 +290,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
           repo == null || repo.length() == 0)
         return "";
       ManageDriveService managerDriveService = uiSymlinkForm.getApplicationComponent(ManageDriveService.class);
-      DriveData driveData = managerDriveService.getDriveByName(driveName, repo);
+      DriveData driveData = managerDriveService.getDriveByName(driveName);
       if (!path.startsWith(driveData.getHomePath()))
         return "";
       if ("/".equals(driveData.getHomePath()))

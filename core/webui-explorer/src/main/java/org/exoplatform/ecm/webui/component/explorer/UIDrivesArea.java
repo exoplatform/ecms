@@ -174,9 +174,8 @@ public class UIDrivesArea extends UIContainer {
 
   public List<DriveData> personalDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
-    List<String> userRoles = getUserRoles(false);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getPersonalDrives(userId, userRoles);
+    return driveService.getPersonalDrives(userId);
   }
 
   static  public class SelectDriveActionListener extends EventListener<UIDrivesArea> {

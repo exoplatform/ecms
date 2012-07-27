@@ -170,7 +170,7 @@ public class ManageDocumentService implements ResourceContainer {
     } else if (DriveType.GROUP.toString().equalsIgnoreCase(driveType)) {
       driveList = manageDriveService.getGroupDrives(userId, userRoles);
     } else if (DriveType.PERSONAL.toString().equalsIgnoreCase(driveType)) {
-      driveList = manageDriveService.getPersonalDrives(userId, userRoles);
+      driveList = manageDriveService.getPersonalDrives(userId);
     //remove Private drive
       String privateDrivePath = "";
       for (DriveData driveData : driveList) {

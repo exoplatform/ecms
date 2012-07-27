@@ -59,8 +59,6 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
    private final ManageDriveService driveService;
 
-   private final String defRepository = "repository";
-
    private String repository;
 
    private final PermissionService permissionService;
@@ -87,7 +85,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
          DriveData drive = null;
          try
          {
-            drive = driveService.getDriveByName(storageId, repository);
+            drive = driveService.getDriveByName(storageId);
          }
          catch (Exception e)
          {
@@ -227,7 +225,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       List<DriveData> drives;
       try
       {
-         drives = driveService.getAllDrives(repositoryService.getCurrentRepository().getConfiguration().getName());
+         drives = driveService.getAllDrives();
       }
       catch (Exception e)
       {
@@ -251,12 +249,11 @@ public class DriveCmisRegistry extends JcrCmisRegistry
    public void start()
    {
 
-      repository = getValueParameter("repository", defRepository);
       persistRenditions = Boolean.parseBoolean(getValueParameter("exo.cmis.renditions.persistent", "false"));
       List<DriveData> allDrives = null;
       try
       {
-         allDrives = driveService.getAllDrives(repository);
+         allDrives = driveService.getAllDrives();
       }
       catch (Exception e)
       {

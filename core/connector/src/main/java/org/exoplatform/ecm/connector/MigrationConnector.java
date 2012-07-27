@@ -43,7 +43,7 @@ public class MigrationConnector implements ResourceContainer {
       element.appendChild(drives);
       ManageDriveService driveService = (ManageDriveService) ExoContainerContext.
           getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
-        List<DriveData> drivesList = driveService.getAllDrives("repository");
+        List<DriveData> drivesList = driveService.getAllDrives();
         for (DriveData drive:drivesList) {
           Element driveElt = document.createElement("drive");
           driveElt.setAttribute("name", drive.getName());

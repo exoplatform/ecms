@@ -31,10 +31,8 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderResponse;
 
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
@@ -68,7 +66,6 @@ import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
-import org.w3c.dom.Element;
 
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class
@@ -257,9 +254,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   
   public DriveData getUserDrive(String userType) throws Exception {
     ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
-    List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    for(DriveData userDrive : manageDriveService.getPersonalDrives(userId, userRoles)) {
+    for(DriveData userDrive : manageDriveService.getPersonalDrives(userId)) {
       if(userDrive.getName().equalsIgnoreCase(userType)) {
         return userDrive;
       }
