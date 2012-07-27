@@ -255,8 +255,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if (advanceQuery.length() == 0)
           advanceQuery.append("jcr:primaryType = '").append(nodeType).append("'");
         else
-          advanceQuery.append(advanceQuery)
-                      .append(" ")
+          advanceQuery.append(" ")
                       .append(OR_OPERATION)
                       .append(" ")
                       .append("jcr:primaryType = '")
