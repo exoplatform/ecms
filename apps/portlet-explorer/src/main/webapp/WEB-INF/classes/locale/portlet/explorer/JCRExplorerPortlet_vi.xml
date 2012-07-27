@@ -2000,6 +2000,7 @@
       <tag-name-empty>Tên thẻ của bạn là rỗng</tag-name-empty>
       <tag-name-duplicate>Tên thẻ bạn nhập bị trùng nhau.</tag-name-duplicate>
       <tagName-too-long>Một trong các thẻ nhập vào là quá dài. Các thể phải có độ dài nhỏ hơn 30 kí tự.</tagName-too-long>
+      <path-not-found>Có thể thẻ đã bị xóa hoặc bị thay đổi. Vui lòng nhấp nút Refresh.</path-not-found>
     </msg>
     <introduction>
       <tagName>(Sử dụng dấu "," để thêm nhiều thẻ)</tagName>

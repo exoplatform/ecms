@@ -1973,6 +1973,7 @@
       <tag-name-empty>タグ名は空です。</tag-name-empty>
       <tag-name-duplicate>入力されたタグ名が重複しています。</tag-name-duplicate>
       <tagName-too-long>入力されたタグの一つは長過ぎます。タグは長さ30文字未満でなければなりません。</tagName-too-long>
+      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
       <tagName>(複数のタグを追加する為に","をセパレータとして利用)</tagName>
