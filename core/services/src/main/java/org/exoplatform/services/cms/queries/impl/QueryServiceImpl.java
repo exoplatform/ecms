@@ -125,14 +125,6 @@ public class QueryServiceImpl implements QueryService, Startable{
    */
   public void stop() {
   }
-
-  /**
-   * Init query node with specified repository
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    init();
-  }
   
   /**
    * Init query node with current repository
@@ -164,14 +156,6 @@ public class QueryServiceImpl implements QueryService, Startable{
    * {@inheritDoc}
    */
   public String getRelativePath() { return relativePath_; }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Query> getQueries(String userName, String repository, SessionProvider provider) throws Exception {
-    return getQueries(userName, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -265,15 +249,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     permissions.put(group_, perms);
     return permissions;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addQuery(String queryName, String statement, String language,
-      String userName, String repository) throws Exception {
-    addQuery(queryName, statement, language, userName);
-  }
   
   /**
    * {@inheritDoc}
@@ -293,15 +268,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     String absPath = userNode.getPath() + "/" + relativePath_ + "/" + queryName;
     query.storeAsNode(absPath);
     session.save();  
-  }
-  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeQuery(String queryPath, String userName, String repository) throws Exception {
-    removeQuery(queryPath, userName);
   }
   
   /**
@@ -327,19 +293,6 @@ public class QueryServiceImpl implements QueryService, Startable{
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void addSharedQuery(String queryName,
-                             String statement,
-                             String language,
-                             String[] permissions,
-                             boolean cachedResult,
-                             String repository) throws Exception {
-    addSharedQuery(queryName, statement, language, permissions, cachedResult);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public void addSharedQuery(String queryName,
                              String statement,
                              String language,
@@ -351,17 +304,6 @@ public class QueryServiceImpl implements QueryService, Startable{
                    permissions,
                    cachedResult,
                    WCMCoreUtils.getUserSessionProvider());
-  }
-
-  @Deprecated
-  public void addSharedQuery(String queryName,
-                             String statement,
-                             String language,
-                             String[] permissions,
-                             boolean cachedResult,
-                             String repository,
-                             SessionProvider provider) throws Exception {
-    addSharedQuery(queryName, statement, language, permissions, cachedResult, provider);
   }
   
   public void addSharedQuery(String queryName,
@@ -405,14 +347,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     removeFromCache(queryPath);
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Node getSharedQuery(String queryName, String repository, SessionProvider provider) throws Exception {
-    return getSharedQuery(queryName, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -451,17 +385,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     return sharedQueries;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getSharedQueries(String queryType,
-                                     String userId,
-                                     String repository,
-                                     SessionProvider provider) throws Exception {
-    return getSharedQueries(queryType, userId, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -480,14 +403,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     return resultList;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Query getQueryByPath(String queryPath, String userName, String repository, SessionProvider provider) throws Exception {
-    return getQueryByPath(queryPath, userName, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -499,14 +414,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     return null;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeSharedQuery(String queryName, String repository) throws Exception {
-    removeSharedQuery(queryName);
-  }
   
   /**
    * {@inheritDoc}
@@ -516,18 +423,6 @@ public class QueryServiceImpl implements QueryService, Startable{
     session.getItem(baseQueriesPath_ + "/" + queryName).remove();
     session.save();
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public QueryResult execute(String queryPath,
-                             String workspace,
-                             String repository,
-                             SessionProvider provider,
-                             String userId) throws Exception {
-    return execute(queryPath, workspace, provider, userId);
-  }
   
   /**
    * {@inheritDoc}

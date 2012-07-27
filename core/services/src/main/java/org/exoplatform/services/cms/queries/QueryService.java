@@ -35,20 +35,6 @@ public interface QueryService {
    * @return
    */
   public String getRelativePath();
-
-  /**
-   * Get queries by giving the following params : userName, repository, provider
-   *
-   * @param userName String Can be <code>null</code>
-   * @param repository String The name of repository
-   * @param provider SessionProvider
-   * @return queries List<Query>
-   * @see Query
-   * @see SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public List<Query> getQueries(String userName, String repository, SessionProvider provider) throws Exception;
   
   /**
    * Get queries by giving the following params : userName, repository, provider
@@ -60,28 +46,7 @@ public interface QueryService {
    * @see SessionProvider
    * @throws Exception
    */
-  public List<Query> getQueries(String userName, SessionProvider provider) throws Exception;  
-
-  /**
-   * Execute query by giving the following params : queryPath, workspace,
-   * repository, provider, userId
-   *
-   * @param queryPath String The path of query
-   * @param workspace String The name of workspace
-   * @param repository String The name of repository
-   * @param provider SessionProvider
-   * @param userId String The id of current user
-   * @return queries QueryResult
-   * @see QueryResult
-   * @see SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public QueryResult execute(String queryPath,
-                             String workspace,
-                             String repository,
-                             SessionProvider provider,
-                             String userId) throws Exception;
+  public List<Query> getQueries(String userName, SessionProvider provider) throws Exception;
   
   /**
    * Execute query by giving the following params : queryPath, workspace,
@@ -101,24 +66,6 @@ public interface QueryService {
                              SessionProvider provider,
                              String userId) throws Exception;
   
-
-  /**
-   * Add new query by giving the following params : queryName, statement,
-   * language, userName, repository
-   *
-   * @param queryName String The name of query
-   * @param statement String The statement query
-   * @param language String The language is requested
-   * @param userName String Can be <code>null</code>
-   * @param repository String The name of repository
-   * @throws Exception
-   */
-  @Deprecated
-  public void addQuery(String queryName,
-                       String statement,
-                       String language,
-                       String userName,
-                       String repository) throws Exception;
   
   /**
    * Add new query by giving the following params : queryName, statement,
@@ -131,18 +78,6 @@ public interface QueryService {
    * @throws Exception
    */
   public void addQuery(String queryName, String statement, String language, String userName) throws Exception;
-
-  /**
-   * Remove query by giving the following params : queryPath, userName,
-   * repository
-   *
-   * @param queryPath String The path of query
-   * @param userName String Can be <code>null</code>
-   * @param repository String The name of repository
-   * @throws Exception
-   */
-  @Deprecated
-  public void removeQuery(String queryPath, String userName, String repository) throws Exception;
   
   /**
    * Remove query by giving the following params : queryPath, userName
@@ -152,26 +87,6 @@ public interface QueryService {
    * @throws Exception
    */
   public void removeQuery(String queryPath, String userName) throws Exception;  
-
-  /**
-   * Add new shared query by giving the following params: queryName, statement,
-   * language, permissions, cachedResult, repository
-   *
-   * @param queryName String The name of query
-   * @param statement String The statement query
-   * @param language String The language is requested
-   * @param permissions String[]
-   * @param cachedResult boolean Choosen for caching results
-   * @param repository String The name of repository
-   * @throws Exception
-   */
-  @Deprecated
-  public void addSharedQuery(String queryName,
-                             String statement,
-                             String language,
-                             String[] permissions,
-                             boolean cachedResult,
-                             String repository) throws Exception;
   
   /**
    * Add new shared query by giving the following params: queryName, statement,
@@ -189,28 +104,6 @@ public interface QueryService {
                              String language,
                              String[] permissions,
                              boolean cachedResult) throws Exception;
-
-  /**
-   * Add new shared query by giving the following params: queryName, statement,
-   * language, permissions, cachedResult, repository, provider
-   *
-   * @param queryName String The name of query
-   * @param statement String The statement query
-   * @param language String The language is requested
-   * @param permissions String[]
-   * @param cachedResult boolean Choosen for caching results
-   * @param repository String The name of repository
-   * @param provider Session provider
-   * @throws Exception
-   */
-  @Deprecated
-  public void addSharedQuery(String queryName,
-                             String statement,
-                             String language,
-                             String[] permissions,
-                             boolean cachedResult,
-                             String repository,
-                             SessionProvider provider) throws Exception;
   
   /**
    * Add new shared query by giving the following params: queryName, statement,
@@ -231,20 +124,6 @@ public interface QueryService {
                              boolean cachedResult,
                              SessionProvider provider) throws Exception;
 
-  /**
-   * Get shared queries by giving the following params : queryName, repository,
-   * provider
-   *
-   * @param queryName the name of query
-   * @param repository String The name of repository
-   * @param provider SessionProvider
-   * @return sharedQueries List<Node>
-   * @see Node
-   * @see SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public Node getSharedQuery(String queryName, String repository, SessionProvider provider) throws Exception;
   
   /**
    * Get shared queries by giving the following params : queryName, provider
@@ -257,16 +136,6 @@ public interface QueryService {
    * @throws Exception
    */
   public Node getSharedQuery(String queryName, SessionProvider provider) throws Exception;
-
-  /**
-   * Remove share query by giving the following params : queryName, repository
-   *
-   * @param queryName String The name of query
-   * @param repository String The name of repository
-   * @throws Exception
-   */
-  @Deprecated
-  public void removeSharedQuery(String queryName, String repository) throws Exception;
   
   /**
    * Remove share query by giving the following params : queryName
@@ -287,26 +156,6 @@ public interface QueryService {
    * @throws Exception
    */
   public List<Node> getSharedQueries(SessionProvider provider) throws Exception;
-
-  /**
-   * Get query with path by giving the following params : queryPath, userName,
-   * repository, provider
-   *
-   * @param queryPath String The path of query
-   * @param userName String The name of current user
-   * @param repository String The name of repository
-   * @param provider SessionProvider
-   * @return query Query
-   * @see Node
-   * @see Query
-   * @see SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public Query getQueryByPath(String queryPath,
-                              String userName,
-                              String repository,
-                              SessionProvider provider) throws Exception;
   
   /**
    * Get query with path by giving the following params : queryPath, userName,
@@ -336,25 +185,6 @@ public interface QueryService {
    * @throws Exception
    */
   public List<Node> getSharedQueries(String userId, SessionProvider provider) throws Exception;  
-
-  /**
-   * Get shared queries by giving the following params : queryType, userId,
-   * repository, provider
-   *
-   * @param queryType String The type of query
-   * @param userId String The id of current user
-   * @param repository String The name of repository
-   * @param provider SessionProvider
-   * @return sharedQueries List<Node>
-   * @see Node
-   * @see SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public List<Node> getSharedQueries(String queryType,
-                                     String userId,
-                                     String repository,
-                                     SessionProvider provider) throws Exception;
   
   /**
    * Get shared queries by giving the following params : queryType, userId,
@@ -372,16 +202,6 @@ public interface QueryService {
                                      String userId,
                                      SessionProvider provider) throws Exception;
 
-  /**
-   * Init all query plugin by giving the following params : repository
-   *
-   * @param repository String The name of repository
-   * @see QueryPlugin
-   * @throws Exception
-   */
-  @Deprecated
-  public void init(String repository) throws Exception;
-  
   /**
    * Init all query plugin in the current repository
    * @see QueryPlugin
