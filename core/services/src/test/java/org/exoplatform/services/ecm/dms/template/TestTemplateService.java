@@ -23,6 +23,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 
 import java.io.ByteArrayInputStream;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -31,6 +32,7 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -43,15 +45,18 @@ import org.testng.annotations.Test;
 public class TestTemplateService extends BaseWCMTestCase {
 
   private TemplateService templateService;
-  private String expectedArticleDialogPath = "/exo:ecm/templates/exo:article/dialogs/dialog1";
-  private String expectedTemplateLabel = "Article";
+  private String expectedArticleDialogPath  = "/exo:ecm/templates/exo:article/dialogs/dialog1";
+  private String expectedArticleViewPath  = "/exo:ecm/templates/exo:article/views/view1";
+  private String expectedHTMLFileDialogPath = "/exo:ecm/templates/exo:htmlFile/dialogs/dialog1";
+  private String expectedTemplateLabel      = "Article";
   private NodeHierarchyCreator nodeHierarchyCreator;
   private String cmsTemplatesBasePath;
   private Session sessionDMS;
 
   static private final String DMSSYSTEM_WS = "dms-system";
-  static private final String EXO_ARTICLE = "exo:article";
-
+  static private final String EXO_ARTICLE  = "exo:article";
+  
+  static private final String DEMO_ID      = "demo";
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
@@ -91,6 +96,7 @@ public class TestTemplateService extends BaseWCMTestCase {
   @Test
   public void testGetDefaultTemplatePath() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getDefaultTemplatePath(true, EXO_ARTICLE));
+    assertEquals(expectedArticleViewPath, templateService.getDefaultTemplatePath(false, EXO_ARTICLE));
   }
 
   /**
@@ -121,11 +127,21 @@ public class TestTemplateService extends BaseWCMTestCase {
     Node root = sessionDMS.getRootNode();
     Node aaa = root.addNode("AAA");
     Node bbb = root.addNode("BBB", "exo:article");
+    Node ddd = root.addNode("DDD", "nt:file");
+    Node contentNode = ddd.addNode("jcr:content", "nt:resource");
+    ddd.addMixin("exo:presentationable");
+    ddd.setProperty("exo:presentationType", "exo:htmlFile");
+    contentNode.setProperty("jcr:encoding", "UTF-8");
+    contentNode.setProperty("jcr:mimeType", "text/html");    
+    contentNode.setProperty("jcr:data", "Hello");
+    contentNode.setProperty("jcr:lastModified", new GregorianCalendar());  
     bbb.setProperty("exo:title", "Hello");
     sessionDMS.save();
 
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePath(bbb, true));
+    assertEquals(expectedHTMLFileDialogPath, templateService.getTemplatePath(ddd, true));
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePath(true, EXO_ARTICLE, "dialog1"));
+    assertEquals(expectedArticleViewPath, templateService.getTemplatePath(false, EXO_ARTICLE, "view1"));
     try {
       templateService.getTemplatePath(aaa, true);
       fail("The content type: nt:unstructured doesn't be supported by any template");
@@ -147,6 +163,7 @@ public class TestTemplateService extends BaseWCMTestCase {
   @Test
   public void testGetTemplatePathByAnonymous() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByAnonymous(true, EXO_ARTICLE));
+    assertEquals(expectedArticleViewPath, templateService.getTemplatePathByAnonymous(false, EXO_ARTICLE));
   }
 
   /**
@@ -176,7 +193,15 @@ public class TestTemplateService extends BaseWCMTestCase {
    */
   @Test
   public void testGetTemplatePathByUser() throws Exception {
-    //assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, "root", REPO_NAME));
+//    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, ROOT_ID));    
+    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, IdentityConstants.ANONIM));
+    assertEquals(expectedArticleViewPath, templateService.getTemplatePathByUser(false, EXO_ARTICLE, IdentityConstants.ANONIM));
+    try {
+      templateService.getTemplatePathByUser(true, EXO_ARTICLE, DEMO_ID);
+      fail("Dummy user can not get the template in this case");
+    }catch ( Exception e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -194,8 +219,9 @@ public class TestTemplateService extends BaseWCMTestCase {
    */
   @Test
   public void testGetTemplate() throws Exception {
-    assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1"));
-    assertNotNull(templateService.getTemplate(TemplateService.VIEWS, EXO_ARTICLE, "view1", REPO_NAME));
+    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, IdentityConstants.ANONIM));
+    assertEquals(expectedArticleViewPath, templateService.getTemplatePathByUser(false, EXO_ARTICLE, IdentityConstants.ANONIM));
+    assertEquals(null, templateService.getTemplate(null));
   }
 
   /**
@@ -292,6 +318,10 @@ public class TestTemplateService extends BaseWCMTestCase {
   public void testGetAllTemplatesOfNodeType() throws Exception {
     assertEquals(1, templateService.getAllTemplatesOfNodeType(true, "exo:sample",
         sessionProviderService_.getSystemSessionProvider(null)).getSize());
+    assertEquals(1, templateService.getAllTemplatesOfNodeType(false, "exo:sample",
+        sessionProviderService_.getSystemSessionProvider(null)).getSize());
+    assertEquals(null, templateService.getAllTemplatesOfNodeType(false, "exo:cssFile",
+        sessionProviderService_.getSystemSessionProvider(null)));
   }
 
   /**
@@ -341,6 +371,7 @@ public class TestTemplateService extends BaseWCMTestCase {
   public void testGetTemplateRoles() throws Exception {
     Node templateNode = templateService.getTemplateNode(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", sessionProviderService_.getSystemSessionProvider(null));
     assertEquals("*", templateService.getTemplateRoles(templateNode));
+    assertEquals(null, templateService.getTemplateRoles(null));
   }
 
   /**
@@ -381,6 +412,57 @@ public class TestTemplateService extends BaseWCMTestCase {
     assertTrue(listContentType.contains("nt:file"));
   }
 
+  /**
+   * Test method: TemplateServiceImpl.getAllConfiguredNodeTypes()
+   * Input      : N/A
+   * Expect     : an array of configured node types 
+   * @throws      Exception
+   */
+  @Test
+  public void testGetAllConfiguredNodeTypes() throws Exception {
+    assertTrue(templateService.getAllConfiguredNodeTypes().size()>0);
+  }
+  /**
+   * Test method: TemplateServiceImpl.buildDialogForm()
+   * Input      : N/A
+   * Expect     : a String as the form dialog built 
+   * @throws      Exception
+   */
+  @Test
+  public void testBuildDialogForm() throws Exception {
+    assertTrue(templateService.buildDialogForm(EXO_ARTICLE).length() >0);
+  }
+  /**
+   * Test method: TemplateServiceImpl.buildDialogForm()
+   * Input      : N/A
+   * Expect     : a String as the form viewer built 
+   * @throws      Exception
+   */
+  @Test
+  public void testBuildViewForm() throws Exception {
+    assertTrue(templateService.buildViewForm(EXO_ARTICLE).length() >0);
+  }
+  /**
+   * Test method: TemplateServiceImpl.buildDialogForm()
+   * Input      : N/A
+   * Expect     : a String as the stylesheet of nodetype 
+   * @throws      Exception
+   */
+  @Test
+  public void testBuildStyleSheet() throws Exception {
+    assertTrue(templateService.buildStyleSheet(EXO_ARTICLE).length() >0);
+  }
+  /**
+   * Test method: TemplateServiceImpl.getSkinPath()
+   * Input      : N/A
+   * Expect     : a String as the stylesheet of nodetype 
+   * @throws      Exception
+   */
+  @Test
+  public void testGetSkinPath() throws Exception{
+      assertNotNull(templateService.getSkinPath(EXO_ARTICLE, "Stylesheet", "en"));
+      assertNotNull(templateService.getSkinPath(EXO_ARTICLE, "Stylesheet", "ar"));
+  }
   /**
    * Clean all templateTest node
    */
