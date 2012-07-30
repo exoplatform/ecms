@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Không có nội dung được chọn. Hãy chọn ít nhất một nội dung.</no-file-selected>
+    </msg>
+  </ContentSelector>
+</bundle>

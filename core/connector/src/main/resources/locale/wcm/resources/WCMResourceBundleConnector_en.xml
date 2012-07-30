@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>There are no content for now. You have to select at least one.</no-file-selected>
+    </msg>
+  </ContentSelector>
+</bundle>

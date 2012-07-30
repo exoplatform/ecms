@@ -8,6 +8,8 @@ function EcmContentSelector() {
 	this.hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
 	this.repositoryName = "repository";
 	this.workspaceName	= "collaboration";
+  this.cmdEcmBundle = "/bundle/";
+  this.cmdGetBundle = "getBundle?";
 	this.cmdEcmDriver = "/wcmDriver/"
 	this.cmdGetDriver = "getDrivers?";
 	this.cmdGetFolderAndFile = "getFoldersAndFiles?";
@@ -887,8 +889,10 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = gj(tblContent).find("tr");
 	if (rowsContent.length <= 1) {
-		alert("There are no content for now. You have to select at least one.");
-	}
+    var msg = eXo.ecm.WCMUtils.getBundle('ContentSelector.msg.no-file-selected', eXo.ecm.ECS.userLanguage);
+    alert(msg);
+    return;
+  }
 	var strContent = "";
 	for(var i = 0; i < rowsContent.length; i++) {
 		var nodeContent = gj(rowsContent[i]).find("a.Item:first")[0];
