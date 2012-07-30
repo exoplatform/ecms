@@ -186,22 +186,13 @@ public class UIViewInfoContainer extends UIContainer {
       if (!node.isCheckedOut())
         node.checkout();
       Node contentNode = node.getNode(Utils.JCR_CONTENT);
-
       strType = contentNode.getProperty(Utils.JCR_MIMETYPE).getString();
 
-    } else if (templateService.isManagedNodeType(strNodeTypeName, uiExplorer.getRepositoryName())) { // is
-                                                                                                     // Document
-                                                                                                     // which
-                                                                                                     // is
-                                                                                                     // created
-                                                                                                     // by
-                                                                                                     // user
-                                                                                                     // on
-                                                                                                     // web
-      strType = templateService.getTemplateLabel(strNodeTypeName, uiExplorer.getRepositoryName());
-    } else if (nodeType.isNodeType(Utils.NT_UNSTRUCTURED) || nodeType.isNodeType(Utils.NT_FOLDER)) { // is
-                                                                                                     // a
-                                                                                                     // folder
+    } else if (templateService.isManagedNodeType(strNodeTypeName)) { 
+      // is Document which is created by user on web
+      strType = templateService.getTemplateLabel(strNodeTypeName);
+    } else if (nodeType.isNodeType(Utils.NT_UNSTRUCTURED) || nodeType.isNodeType(Utils.NT_FOLDER)) { 
+      // is a folder
       isFolder = true;
     } else { // other
       strType = strNodeTypeName;
