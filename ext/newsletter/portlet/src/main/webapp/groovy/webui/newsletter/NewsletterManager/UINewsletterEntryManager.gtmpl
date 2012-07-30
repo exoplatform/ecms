@@ -152,9 +152,13 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 								def isDisable = "";
 								if(uicomponent.getListNewsletterEntries()==null || uicomponent.getListNewsletterEntries().size()==0) 
 									isDisable = "DISABLED";
+								def mainCheckBoxStatus = "";
+								if(uicomponent.isMainCheckBoxSelected()) {
+								    mainCheckBoxStatus = "checked='checked'";
+								}
 							%>
 							<th class="thContent Title" style="border-right:none;">
-								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" title="<%=_ctx.appRes("UINewsletterEntryManager.title.CheckAll")%>" <%=isDisable%> onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
+								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" title="<%=_ctx.appRes("UINewsletterEntryManager.title.CheckAll")%>" <%=isDisable%> onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);" <%=mainCheckBoxStatus%>>
 							</th>
 						</tr>
 						<%int count = 0;

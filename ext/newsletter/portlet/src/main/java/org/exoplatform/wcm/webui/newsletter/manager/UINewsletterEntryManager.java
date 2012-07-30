@@ -47,8 +47,8 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SAS
@@ -68,13 +68,14 @@ import org.exoplatform.webui.form.UIFormSelectBox;
          @EventConfig(listeners = UINewsletterEntryManager.ConvertTemplateActionListener.class),
          @EventConfig(listeners = UINewsletterEntryManager.EditNewsletterEntryActionListener.class),
          @EventConfig(listeners = UINewsletterEntryManager.DeleteNewsletterEntryActionListener.class),
+         @EventConfig(listeners = UINewsletterEntryManager.OnChangeActionListener.class),
          @EventConfig(listeners = UINewsletterEntryManager.SelectNewsletterActionListener.class)
      }
  )
 public class UINewsletterEntryManager extends UIForm {
 
   /** The check box input. */
-  private UIFormCheckBoxInput<Boolean>  checkBoxInput;
+  private UICheckBoxInput  checkBoxInput;
 
   /** The subscription config. */
   private NewsletterSubscriptionConfig subscriptionConfig;
@@ -93,6 +94,9 @@ public class UINewsletterEntryManager extends UIForm {
 
   /** The ui page iterator_. */
   private UIPageIterator uiPageIterator_;
+  
+  /** Status of main checkbox in the header of all subscriptions of specific category */
+  private boolean isMainCheckBoxSelected_;
 
   /**
    * Instantiates a new uI newsletter entry manager.
@@ -133,9 +137,10 @@ public class UINewsletterEntryManager extends UIForm {
                                                                                             categoryConfig.getName(),
                                                                                             subscriptionConfig.getName()));
       for (NewsletterManagerConfig newletter : listNewsletterConfig) {
-        checkBoxInput = new UIFormCheckBoxInput<Boolean>(newletter.getNewsletterName(),
+        checkBoxInput = new UICheckBoxInput(newletter.getNewsletterName(),
                                                          newletter.getNewsletterName(),
                                                          false);
+        checkBoxInput.setOnChange("OnChange");
         this.addChild(checkBoxInput);
       }
     } catch (Exception ex) {
@@ -168,10 +173,10 @@ public class UINewsletterEntryManager extends UIForm {
   @SuppressWarnings("unchecked")
   public List<String> getChecked() {
     List<String> newsletterId = new ArrayList<String>();
-    UIFormCheckBoxInput<Boolean> checkbox = null;
+    UICheckBoxInput checkbox = null;
     for (UIComponent component : this.getChildren()) {
       try {
-        checkbox = (UIFormCheckBoxInput<Boolean>) component;
+        checkbox = (UICheckBoxInput)component;
         if (checkbox.isChecked()) {
           newsletterId.add(checkbox.getName());
         }
@@ -217,6 +222,24 @@ public class UINewsletterEntryManager extends UIForm {
    */
   public void setCategoryConfig(NewsletterCategoryConfig categoryConfig) {
     this.categoryConfig = categoryConfig;
+  }
+
+  /**
+   * Get status of main CheckBox
+   * 
+   * @return the isMainCheckBoxSelected_
+   */
+  public boolean isMainCheckBoxSelected() {
+  	return isMainCheckBoxSelected_;
+  }
+
+  /**
+   * Set status of main CheckBox
+   * 
+   * @param isMainCheckBoxSelected_ the isMainCheckBoxSelected_ to set
+   */
+  public void setMainCheckBoxSelected(boolean isMainCheckBoxSelected) {
+	this.isMainCheckBoxSelected_ = isMainCheckBoxSelected;
   }
 
   /**
@@ -558,4 +581,25 @@ public class UINewsletterEntryManager extends UIForm {
       
     }
   }
+  
+  /**
+   * When user click on checkbox of newsletter. This handler is called.
+   * If all member checkboxes are checked, set checked status for main checkbox.
+   * Else set unchecked status for main checkbox
+   * 
+   * @author dongpd
+   */
+  static public class OnChangeActionListener extends EventListener<UINewsletterEntryManager> {
+    public void execute(Event<UINewsletterEntryManager> event) throws Exception {
+      UINewsletterEntryManager newsletterEntryManager = event.getSource();
+      int numOfCheckedNewsletters = newsletterEntryManager.getChecked().size();
+      int numOfNewsletters = newsletterEntryManager.getListNewsletterEntries().size();
+      if (numOfCheckedNewsletters == numOfNewsletters) {
+    	newsletterEntryManager.setMainCheckBoxSelected(true);
+      } else {
+      	newsletterEntryManager.setMainCheckBoxSelected(false);
+      }
+    }
+  }
 }
+
