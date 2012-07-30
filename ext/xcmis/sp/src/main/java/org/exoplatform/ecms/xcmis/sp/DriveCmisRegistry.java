@@ -59,6 +59,8 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
    private final ManageDriveService driveService;
 
+   private final String defRepository = "repository";
+
    private String repository;
 
    private final PermissionService permissionService;
@@ -249,6 +251,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
    public void start()
    {
 
+      repository = getValueParameter("repository", defRepository);
       persistRenditions = Boolean.parseBoolean(getValueParameter("exo.cmis.renditions.persistent", "false"));
       List<DriveData> allDrives = null;
       try
