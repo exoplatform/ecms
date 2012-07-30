@@ -40,7 +40,7 @@
               <preferences>
                 <preference>
                   <name>folderPath</name>
-                  <value>repository:collaboration:/sites content/live/WAIPortal/categories/WAIPortal</value>
+                  <value>repository:collaboration:/sites content/live/@owner@/categories/@owner@</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
@@ -113,7 +113,7 @@
               <preferences>
                 <preference>
                   <name>folderPath</name>
-                  <value>repository:collaboration:/sites content/live/WAIPortal/categories/WAIPortal</value>
+                  <value>repository:collaboration:/sites content/live/@owner@/categories/@owner@</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
