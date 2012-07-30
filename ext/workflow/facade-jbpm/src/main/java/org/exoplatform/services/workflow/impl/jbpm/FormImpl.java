@@ -174,6 +174,8 @@ public class FormImpl implements Form{
       attributes.put("visiable", visiable);
       String isPositiveNumber = variableElement.attributeValue("isPositiveNumber");
       attributes.put("isPositiveNumber", isPositiveNumber);
+      String hasDateRelationValidator = variableElement.attributeValue("hasDateRelationValidator");
+      attributes.put("hasDateRelationValidator", hasDateRelationValidator);
       this.variables.add(attributes);
     }
   }

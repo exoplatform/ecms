@@ -129,6 +129,11 @@
       <AddRootNode>Ajouter un noeud racine</AddRootNode>
     </title>
   </rootNodeInfo>
+  <DateRelationValidator>
+    <msg>
+      <must-before>Le champ {0} doit Ãªtre avant du champ {1}</must-before>
+    </msg>
+  </DateRelationValidator>  
   <PositiveNumberValidator>
     <msg>
       <invalid-input>Le champ « {0} » avec la valeur « {1} » n'est pas valide. Un nombre positif est requis.</invalid-input>

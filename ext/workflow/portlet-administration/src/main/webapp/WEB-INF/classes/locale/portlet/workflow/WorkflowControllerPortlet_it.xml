@@ -136,6 +136,11 @@
             <confirm-navigate>Le modifiche apportate saranno perse se navighi da questa pagina ad un'altra.</confirm-navigate>
         </msg>
     </UIDocumentForm>
+    <DateRelationValidator>
+      <msg>
+        <must-before>The field {0} must be before the field {1}</must-before>
+      </msg>
+    </DateRelationValidator>
     <PositiveNumberValidator>
       <msg>
         <invalid-input>The field '{0}' with the value '{1}' is invalid. This field require a positive number.</invalid-input>

@@ -79,6 +79,7 @@ import org.exoplatform.workflow.webui.component.BJARResourceResolver;
 import org.exoplatform.workflow.webui.component.InputInfo;
 import org.exoplatform.workflow.webui.component.UISelectable;
 import org.exoplatform.workflow.webui.component.VariableMaps;
+import org.exoplatform.workflow.webui.component.validator.DateRelationValidator;
 import org.exoplatform.workflow.webui.component.validator.PositiveNumberValidator;
 import org.exoplatform.workflow.webui.utils.LockUtil;
 import org.exoplatform.workflow.webui.utils.Utils;
@@ -209,6 +210,12 @@ public class UITask extends UIForm implements UISelectable {
       String mandatoryString = (String) attributes.get("mandatory");
       if (mandatoryString != null && !"".equals(mandatoryString)) {
         mandatory = new Boolean(mandatoryString).booleanValue();
+      }
+      boolean hasDateRelationValidator = false;
+      try {
+        hasDateRelationValidator = Boolean.parseBoolean((String) attributes.get("hasDateRelationValidator"));
+      }catch (Exception e) {
+        //Wrong configuration value, hasDateRelationValidator still be false
       }
       boolean visiable = true;
       String visiableString = (String) attributes.get("visiable");
@@ -408,6 +415,9 @@ public class UITask extends UIForm implements UISelectable {
         }
         if (isPositiveNumber) {
           input.addValidator(PositiveNumberValidator.class);
+        }
+        if (hasDateRelationValidator) {
+          input.addValidator(DateRelationValidator.class);
         }
         addUIFormInput(input);
       }

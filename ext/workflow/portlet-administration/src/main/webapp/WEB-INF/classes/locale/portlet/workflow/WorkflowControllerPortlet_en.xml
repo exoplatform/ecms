@@ -137,6 +137,11 @@
      <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
    </msg>
   </UIDocumentForm>
+  <DateRelationValidator>
+    <msg>
+      <must-before>Le champ {0} doit être avant du champ {1}</must-before>
+    </msg>
+  </DateRelationValidator>
   <PositiveNumberValidator>
     <msg>
       <invalid-input>The field '{0}' with the value '{1}' is invalid. This field require a positive number.</invalid-input>

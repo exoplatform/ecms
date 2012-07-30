@@ -113,6 +113,11 @@
 		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
+  <DateRelationValidator>
+    <msg>
+      <must-before>Trường dữ liệu {0} phải sớm hơn trường dữ liệu {1}</must-before>
+    </msg>
+  </DateRelationValidator>
   <PositiveNumberValidator>
     <msg>
       <invalid-input>Trường '{0}' với giá trị '{1}' là không hợp lệ. Trường này yêu cầu số dương.</invalid-input>
