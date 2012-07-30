@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Aucun contenu. Veuillez en sélectionner un.</no-file-selected>
+    </msg>
+  </ContentSelector>
+</bundle>

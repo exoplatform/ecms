@@ -42,12 +42,14 @@
           <value>locale.wcm.dialogs</value>
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
+          <value>locale.wcm.resources.WCMResourceBundleConnector</value>
         </values-param>
         <values-param>
           <name>portal.resource.names</name>
           <value>locale.wcm.dialogs</value>
           <value>locale.wcm.views</value>
           <value>locale.wcm.webui</value>
+          <value>locale.wcm.resources.WCMResourceBundleConnector</value>
         </values-param>
       </init-params>
     </component-plugin>

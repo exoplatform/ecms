@@ -240,4 +240,13 @@ WCMUtils.prototype.replaceToIframe = function(txtAreaId) {
   } catch (ex) {}
 };
 
+WCMUtils.prototype.getBundle = function(key, lang) {
+  var ECS = eXo.ecm.ECS;  
+  var command = ECS.cmdEcmBundle + ECS.cmdGetBundle + "key=" + key + "&locale=" + lang;
+  var url = ECS.connector + command;
+  var mXML = eXo.ecm.WCMUtils.request(url);
+  var message = mXML.getElementsByTagName(key)[0];
+  return message.getAttribute("value");
+};
+
 eXo.ecm.WCMUtils = new WCMUtils();
