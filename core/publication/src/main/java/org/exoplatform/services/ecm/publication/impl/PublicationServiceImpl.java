@@ -42,6 +42,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -243,11 +244,8 @@ public class PublicationServiceImpl implements PublicationService {
   }
 
   public String getLocalizedAndSubstituteLog(Locale locale, String key, String[] values){
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
-        getComponentInstanceOfType(ResourceBundleService.class);
     ClassLoader cl=this.getClass().getClassLoader();
-    ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile,locale,cl);
+    ResourceBundle resourceBundle=ResourceBundle.getBundle(localeFile,locale,cl);
     String result = resourceBundle.getString(key);
     return String.format(result,values);
   }

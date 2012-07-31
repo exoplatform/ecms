@@ -131,6 +131,7 @@
           <name>autoCreatedInNewRepository</name>
           <description>Node types configuration file</description>
           <value>classpath:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
+          <value>classpath:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
         </values-param>
       </init-params>
     </component-plugin>
