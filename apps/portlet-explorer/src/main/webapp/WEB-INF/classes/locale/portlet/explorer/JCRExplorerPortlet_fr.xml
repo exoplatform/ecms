@@ -3460,4 +3460,9 @@
       <confirm-delete-permanently-multi-many-nodes-have-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs relations).</confirm-delete-permanently-multi-many-nodes-have-relations>
     </msg>
   </UIWorkingArea>
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

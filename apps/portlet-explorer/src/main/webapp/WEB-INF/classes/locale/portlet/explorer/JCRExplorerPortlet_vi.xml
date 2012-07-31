@@ -3459,4 +3459,9 @@
       <unknown-error>Có một số lỗi xảy ra, bạn không thể theo dõi node này!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

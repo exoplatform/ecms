@@ -3398,4 +3398,9 @@
       <confirm-delete-permanently-multi-many-nodes-have-relations>Are you sure to delete these items permanently: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-permanently-multi-many-nodes-have-relations>
     </msg>
   </UIWorkingArea>
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>
