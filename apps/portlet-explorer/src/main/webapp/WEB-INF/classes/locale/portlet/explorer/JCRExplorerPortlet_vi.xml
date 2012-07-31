@@ -3366,4 +3366,9 @@
       <no-permission>Bạn không có thể loại bỏ tất cả quyền truy cập của node này. Node cần có ít nhất một quyền truy cập ngoại trừ 'system'</no-permission>
     </msg>
   </UIPermissionInfo>	  	
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

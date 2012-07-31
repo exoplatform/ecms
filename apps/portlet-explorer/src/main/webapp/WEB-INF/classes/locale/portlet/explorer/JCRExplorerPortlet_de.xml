@@ -3345,4 +3345,9 @@
       <no-permission>You can not remove all permissions of this node. Node should have at least one permission except for the 'system'</no-permission>
     </msg>
   </UIPermissionInfo>	  	
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

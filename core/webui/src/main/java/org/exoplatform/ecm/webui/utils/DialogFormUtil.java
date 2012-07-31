@@ -33,13 +33,15 @@ import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInputBase;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormUploadInput;
 import org.exoplatform.webui.form.validator.DateTimeValidator;
@@ -48,7 +50,6 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NullFieldValidator;
 import org.exoplatform.webui.form.validator.NumberFormatValidator;
 import org.exoplatform.webui.form.validator.StringLengthValidator;
-import org.exoplatform.wcm.webui.Utils;
 
 /*
  * Created by The eXo Platform SAS
@@ -296,19 +297,21 @@ public class DialogFormUtil {
       return NumberFormatValidator.class;
     } else if (validatorType.equals("empty")){
       return MandatoryValidator.class ;
-    }else if(validatorType.equals("null")) {
+    } else if(validatorType.equals("null")) {
         return NullFieldValidator.class;
-    }else if(validatorType.equals("datetime")) {
+    } else if(validatorType.equals("datetime")) {
       return DateTimeValidator.class;
-    }else if(validatorType.equals("cronExpressionValidator")) {      
+    } else if(validatorType.equals("cronExpressionValidator")) {      
       return CronExpressionValidator.class;    
-    }else if(validatorType.equals("repeatCountValidator")) {      
+    } else if(validatorType.equals("repeatCountValidator")) {      
       return RepeatCountValidator.class;
-    }else if(validatorType.equals("repeatIntervalValidator")) {      
+    } else if(validatorType.equals("repeatIntervalValidator")) {      
       return RepeatIntervalValidator.class;
-    }else if (validatorType.equals("length")){
+    } else if (validatorType.equals("length")){
       return StringLengthValidator.class;
-    }else {
+    } else if (validatorType.equals("XSSValidator")){
+      return XSSValidator.class;
+    } else {
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       return cl.loadClass(validatorType);
     }
