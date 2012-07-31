@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.drive;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertNotNull;
@@ -26,28 +24,20 @@ import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.drives.impl.ManageDrivePlugin;
 import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.picocontainer.Startable;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -66,9 +56,6 @@ public class TestDriveService extends BaseWCMTestCase {
   private CacheService caService;
   private Node rootNode;
   private String drivePath;
-  
-  private Level originalLogLevel = Logger.getLogger(ManageDriveServiceImpl.class.getName()).getLevel();
-  private List<ManageDrivePlugin> originDrivePlugins_;
 
   private static String WORKSPACE = "exo:workspace" ;
   private static String PERMISSIONS = "exo:accessPermissions" ;
@@ -80,23 +67,16 @@ public class TestDriveService extends BaseWCMTestCase {
   private static String VIEW_SIDEBAR = "exo:viewSideBar" ;
   private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode" ;
   private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
-  
+
   private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles";
   private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives";
   private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives";
   private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
-  
-  @SuppressWarnings("unchecked")
+
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
     driveService = (ManageDriveService)container.getComponentInstanceOfType(ManageDriveService.class);
-    Field field;
-    try {
-      field = ManageDriveServiceImpl.class.getDeclaredField("drivePlugins_");
-      field.setAccessible(true);
-      originDrivePlugins_ = (List<ManageDrivePlugin>)field.get(driveService);
-    } catch (Exception e) {}
     caService = (CacheService)container.getComponentInstanceOfType(CacheService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     drivePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH);
@@ -206,6 +186,7 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(myDrive.getProperty(SHOW_HIDDEN_NODE).getBoolean(), true);
 
   }
+
   /**
    * Return an DriveData Object
    * Input: Add a new drive
@@ -242,7 +223,7 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(driveData2.getAllowCreateFolders(), "nt:folder");
     assertEquals(driveData2.getShowHiddenNode(), true);
   }
-  
+
   /**
    * Test GetDriveByName: groupdrivetemplate is inactive
    * @throws Exception
@@ -252,11 +233,11 @@ public class TestDriveService extends BaseWCMTestCase {
     deActivateGroupDriveTemplate();
     driveService.addDrive("MyDrive", COLLABORATION_WS, "*:/platform/administrators",
         "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", null);
-    
+
     DriveData driveData1 = driveService.getDriveByName("abc");
     DriveData driveData2 = driveService.getDriveByName("MyDrive");
     DriveData groupDrive = driveService.getDriveByName(".platform.administrators");
-    
+
     assertNull(driveData1);
     assertNotNull(driveData2);
     assertEquals(driveData2.getWorkspace(), COLLABORATION_WS) ;
@@ -323,7 +304,7 @@ public class TestDriveService extends BaseWCMTestCase {
 
   /**
    * Test getAllDrives(boolean withVirtualDrives): withVirtualDrives = true;
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -333,17 +314,17 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("MyDrive2", COLLABORATION_WS, "*:/platform/user", "/TestTreeNode/A1_1",
         "admin-view, system-view", "", true, true, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     List<DriveData> drives = driveService.getAllDrives(true);
-    
+
     assertTrue(drives.contains(driveService.getDriveByName("MyDrive1")));
     assertTrue(drives.contains(driveService.getDriveByName("MyDrive2")));
     assertTrue(drives.contains(driveService.getDriveByName("Groups")));
   }
-  
+
   /**
    * Test getAllDrives(boolean withVirtualDrives): withVirtualDrives = false;
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -353,14 +334,14 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("MyDrive2", COLLABORATION_WS, "*:/platform/user", "/TestTreeNode/A1_1",
         "admin-view, system-view", "", true, true, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     List<DriveData> drives = driveService.getAllDrives(false);
-    
+
     assertTrue(drives.contains(driveService.getDriveByName("MyDrive1")));
     assertTrue(drives.contains(driveService.getDriveByName("MyDrive2")));
     assertFalse(drives.contains(driveService.getDriveByName("Groups")));
   }
-  
+
   /**
    * Remove drive with specified drive name and repository
    * Input:
@@ -458,11 +439,11 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(driveDatas.get(1).getViewSideBar(), true);
     assertEquals(driveDatas.get(1).getAllowCreateFolders(), "nt:unstructured");
     assertEquals(driveDatas.get(1).getShowHiddenNode(), true);
-    
+
     List<DriveData> driveDatas2 = driveService.getAllDriveByPermission("*:/platform/xXx");
     assertEquals(driveDatas2.size(), 0);
   }
-  
+
   @Test
   public void testGetAllDriveByPermissionWithPrivateDrive() throws Exception {
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators",
@@ -473,10 +454,10 @@ public class TestDriveService extends BaseWCMTestCase {
         "system-view", "", true, true, true, true, "nt:unstructured", "*");
     driveService.addDrive("Private", COLLABORATION_WS, "${userId}", "/Users/${userId}/Private",
         "timeline-view", "", true, false, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     List<DriveData> listDriveData = driveService.getAllDrives();
     List<DriveData> driveDatas = driveService.getAllDriveByPermission("*:/platform/user");
-    
+
     assertEquals(listDriveData.size(), 4);
     assertEquals(driveDatas.size(), 3);
     assertEquals(driveDatas.get(0).getWorkspace(), COLLABORATION_WS) ;
@@ -502,66 +483,6 @@ public class TestDriveService extends BaseWCMTestCase {
     assertTrue(driveDatas.contains(driveService.getDriveByName("Private")));
     List<DriveData> driveDatas2 = driveService.getAllDriveByPermission("*:/platform/xXx");
     assertEquals(driveDatas2.size(), 1);
-  }
-  
-  /**
-   * Test getAllDriveByPermissionWith with Exception And Log
-   * 
-   * @throws Exception
-   */
-  @Test
-  public void testGetAllDriveByPermissionWithExceptionAndLog() throws Exception {
-    Field field = null;
-    try {
-      driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators",
-          "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
-      // Make throw PathNotFoundException
-      field = ManageDriveServiceImpl.class.getDeclaredField("baseDrivePath_");
-      field.setAccessible(true);
-      field.set(driveService, "xxx");
-      
-      List<DriveData> drives = driveService.getAllDriveByPermission("*:/platform/user");
-      
-      assertEquals(0, drives.size());
-    } catch (Exception e) {
-      fail();
-    } finally {
-      field.set(driveService, nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH));
-    }
-  }
-  
-  /**
-   * Test getAllDriveByPermissionWith with Exception and No Log
-   * 
-   * @throws Exception
-   */
-  @Test
-  public void testGetAllDriveByPermissionWithExceptionAndNoLog() throws Exception {
-    Field field = null;
-    try {
-      driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators",
-          "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
-      // Make throw PathNotFoundException
-      field = ManageDriveServiceImpl.class.getDeclaredField("baseDrivePath_");
-      field.setAccessible(true);
-      field.set(driveService, "xxx");
-      // Mock Log
-      Log mockLOG = mock(org.exoplatform.services.log.impl.SLF4JExoLog.class);
-      when(mockLOG.isErrorEnabled()).thenReturn(false);
-      setFinalStatic(ManageDriveServiceImpl.class.getDeclaredField("LOG"), mockLOG);
-      
-      List<DriveData> drives = driveService.getAllDriveByPermission("*:/platform/user");
-      
-      assertEquals(0, drives.size());
-    } catch (Exception e) {
-      fail();
-    } finally {
-      // Set origin log status
-      setFinalStatic(ManageDriveServiceImpl.class.getDeclaredField("LOG"), ExoLogger.getLogger(ManageDriveServiceImpl.class.getName()));
-  
-      // Set origin baseDrivePath_
-      field.set(driveService, nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH));
-    }
   }
 
   /**
@@ -599,14 +520,14 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view, system-view", "", true, true, true, false, "nt:folder,nt:unstructured", "*");
     driveService.addDrive("MyDrive3", COLLABORATION_WS, "*:/platform/user", "/TestTreeNode/A1_2",
         "system-view", "", true, true, true, true, "nt:unstructured", "*");
-    
+
     assertTrue(driveService.isUsedView("system-view"));
     assertFalse(driveService.isUsedView("xXx"));
   }
 
   /**
    * Test getGroupDrives: groupDriveTemplate is activated.
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -619,15 +540,15 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/users");
-    
+
     List<DriveData> drives = driveService.getGroupDrives("john", userRoles);
-    
+
     assertEquals(drives.size(), 4);
    }
-  
+
   /**
    * Test getGroupDrives: groupDriveTemplate is deactivated
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -643,15 +564,15 @@ public class TestDriveService extends BaseWCMTestCase {
     field.setAccessible(true);
     field.set(driveService, null);
     driveService.clearAllDrivesCache();
-    
+
     List<DriveData> drives = driveService.getGroupDrives("john", userRoles);
-    
+
     assertEquals(drives.size(), 0);
    }
-  
+
   /**
    * Test getGroupDrives: drivecache
-   * 
+   *
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
@@ -665,19 +586,19 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/users");
-    
+
     driveService.getGroupDrives("john", userRoles);
-    
+
     Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_GROUP_CACHED_DRIVES);
     assertTrue(drivesInCache != null);
     assertEquals(((List<DriveData>)drivesInCache).size(), 4);
    }
-  
+
   /**
    * Test getPersonalDrives.
    * Input 4 drives: 3 personal drives
    * Expected: 3 personal drives
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -690,9 +611,9 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     List<DriveData> drives = driveService.getPersonalDrives("john");
-    
+
     assertEquals(drives.size(), 3);
     assertEquals(drives.get(0).getWorkspace(), COLLABORATION_WS) ;
     assertEquals(drives.get(0).getPermissions(), "${userId}");
@@ -725,12 +646,12 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(drives.get(2).getAllowCreateFolders(), "nt:folder,nt:unstructured");
     assertEquals(drives.get(2).getShowHiddenNode(), false);
    }
-  
+
   /**
    * Test getPersonalDrives: with drivecache
    * Input 4 drives: 3 personal drives
    * Expected: 3 personal drives
-   * 
+   *
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
@@ -745,17 +666,17 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     driveService.getPersonalDrives("john");
     driveService.getPersonalDrives("john");
     Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_PERSONAL_CACHED_DRIVE);
     assertTrue(drivesInCache != null);
     assertEquals(((List<DriveData>)drivesInCache).size(), 3);
   }
-  
+
   /**
    * Test isVitualDrive: activate GroupDriveTemplate
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -765,14 +686,14 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
-    
+
     assertFalse(driveService.isVitualDrive("MyDrive1"));
     assertTrue(driveService.isVitualDrive("Groups"));
   }
-  
+
   /**
    * Test isVitualDrive: deactivate GroupDriveTemplate
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -784,30 +705,30 @@ public class TestDriveService extends BaseWCMTestCase {
     Field field = ManageDriveServiceImpl.class.getDeclaredField("groupDriveTemplate_");
     field.setAccessible(true);
     field.set(driveService, null);
-    
+
     assertFalse(driveService.isVitualDrive("MyDrive1"));
     assertFalse(driveService.isVitualDrive("Groups"));
   }
-  
+
   /**
    * Test testNewRoleUpdated
-   * 
+   *
    * @throws Exception
    */
   @Test
   public void testNewRoleUpdated() throws Exception {
     driveService.setNewRoleUpdated(true);
     assertTrue(driveService.newRoleUpdated());
-    
+
     driveService.setNewRoleUpdated(false);
     assertFalse(driveService.newRoleUpdated());
   }
-  
+
   /**
    * Test getMainDrives
    * Input: drives including personal, group, general drives
    * Expect: only general drives
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -827,9 +748,9 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("*:/platform/web-contributors");
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/users");
-    
+
     List<DriveData> drives = driveService.getMainDrives("john", userRoles);
-    
+
     assertEquals(drives.size(), 1);
     assertEquals(drives.get(0).getWorkspace(), COLLABORATION_WS) ;
     assertEquals(drives.get(0).getPermissions(), "*:/platform/administrators");
@@ -842,10 +763,10 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(drives.get(0).getAllowCreateFolders(), "nt:folder");
     assertEquals(drives.get(0).getShowHiddenNode(), true);
   }
-  
+
   /**
    * Test getMainDrives: using driveCache
-   * 
+   *
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
@@ -869,17 +790,17 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("*:/platform/web-contributors");
     userRoles.add("*:/platform/administrators");
     userRoles.add("*:/platform/users");
-    
+
     driveService.getMainDrives("john", userRoles);
     driveService.getMainDrives("john", userRoles);
-    
+
     Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "john" + ALL_MAIN_CACHED_DRIVE);
     assertEquals(((List<DriveData>)drivesInCache).size(), 2);
   }
 
   /**
    * Test getDriveByUserRoles: userId not null
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -902,9 +823,9 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("marry");
     userRoles.add("*:/platform/web-contributors"); // Marry have permission
     userRoles.add("*:/platform/users"); // Marry have permission
-    
+
     List<DriveData> drives = driveService.getDriveByUserRoles("marry", userRoles);
-    
+
     assertEquals(drives.size(), 6);
     assertTrue(drives.contains(driveService.getDriveByName("Public")));
     assertTrue(drives.contains(driveService.getDriveByName("Private")));
@@ -915,10 +836,10 @@ public class TestDriveService extends BaseWCMTestCase {
     assertTrue(drives.contains(driveService.getDriveByName(".platform.web-contributors")));
     assertTrue(drives.contains(driveService.getDriveByName(".platform.users")));
   }
-  
+
   /**
    * Test getDriveByUserRoles: userId null
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -941,7 +862,7 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("marry");
     userRoles.add("*:/platform/web-contributors"); // Marry have permission
     userRoles.add("*:/platform/users"); // Marry have permission
-    
+
     List<DriveData> drives = driveService.getDriveByUserRoles(null, userRoles);
     assertEquals(drives.size(), 1);
     assertFalse(drives.contains(driveService.getDriveByName("Public")));
@@ -953,10 +874,10 @@ public class TestDriveService extends BaseWCMTestCase {
     assertFalse(drives.contains(driveService.getDriveByName(".platform.web-contributors")));
     assertFalse(drives.contains(driveService.getDriveByName(".platform.users")));
   }
-  
+
   /**
    * Test getDriveByUserRoles: using driveCache
-   * 
+   *
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
@@ -980,64 +901,15 @@ public class TestDriveService extends BaseWCMTestCase {
     userRoles.add("marry");
     userRoles.add("*:/platform/web-contributors"); // Marry have permission
     userRoles.add("*:/platform/users"); // Marry have permission
-    
+
     driveService.getDriveByUserRoles("marry", userRoles);
     driveService.getDriveByUserRoles("marry", userRoles);
-    
+
     Object drivesInCache = caService.getCacheInstance("wcm.drive").get(REPO_NAME + "_" + "marry" + ALL_DRIVES_CACHED_BY_ROLES);
     assertEquals(((List<DriveData>)drivesInCache).size(), 6);
-    
+
   }
-  
-  /**
-   * Test start(): with exception & log
-   * 
-   * @throws Exception
-   */
-  @Test
-  public void testStartWithExceptionAndLog() throws Exception {
-    try {
-      Field field = ManageDriveServiceImpl.class.getDeclaredField("drivePlugins_");
-      field.setAccessible(true);
-      field.set(driveService, null);
-      
-      ((Startable)driveService).start();
-    } catch (Exception e) {
-      fail();
-    }
-  }
-  
-  /**
-   * Test start(): with exception &  No log
-   * 
-   * @throws Exception
-   */
-  @Test
-  public void testStartWithExceptionAndNoLog() throws Exception {
-    try {
-      // Mock Log
-      Log mockLOG = mock(org.exoplatform.services.log.impl.SLF4JExoLog.class);
-      when(mockLOG.isDebugEnabled()).thenReturn(false);
-      setFinalStatic(ManageDriveServiceImpl.class.getDeclaredField("LOG"), mockLOG);
-      
-      // Set driveService null to create exception
-      Field reflectDrivePlugins = ManageDriveServiceImpl.class.getDeclaredField("drivePlugins_");
-      reflectDrivePlugins.setAccessible(true);
-      reflectDrivePlugins.set(driveService, null);
-      
-      ((Startable)driveService).start();
-    } catch (Exception e) {
-      fail();
-    }
-    finally {
-      // Return origin log status
-      setFinalStatic(ManageDriveServiceImpl.class.getDeclaredField("LOG"), ExoLogger.getLogger(ManageDriveServiceImpl.class.getName()));
-      
-      // Stop
-      ((Startable)driveService).stop();
-    }
-  }
-  
+
   /**
    * Test init()
    */
@@ -1049,10 +921,10 @@ public class TestDriveService extends BaseWCMTestCase {
       fail();
     }
   }
-  
+
   /**
    * Add Groups Drive Template
-   * 
+   *
    * @throws Exception
    */
   private void activateGroupDriveTemplate(String userId) throws Exception {
@@ -1061,16 +933,16 @@ public class TestDriveService extends BaseWCMTestCase {
         COLLABORATION_WS,
         "*:${groupId}",
         "/Groups${groupId}",
-        "simple-view", "", 
-        false, 
-        true, 
-        true, 
-        false, 
-        "nt:folder,nt:unstructured", 
+        "simple-view", "",
+        false,
+        true,
+        true,
+        false,
+        "nt:folder,nt:unstructured",
         "*");
     driveService.getAllDrives();
   }
-  
+
   /**
    * Deactivate group drive template
    * @throws Exception
@@ -1080,35 +952,18 @@ public class TestDriveService extends BaseWCMTestCase {
     field.setAccessible(true);
     field.set(driveService, null);
   }
-  static void setFinalStatic(Field field, Object newValue) throws Exception {
-    field.setAccessible(true);
-
-    Field modifiersField = Field.class.getDeclaredField("modifiers");
-    modifiersField.setAccessible(true);
-    modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-
-    field.set(null, newValue);
- }
 
   @AfterMethod
   public void tearDown() throws Exception {
-    try {
-      Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
-      Node rootDrive = (Node)mySession.getItem(drivePath);
-      NodeIterator iter = rootDrive.getNodes();
-      while (iter.hasNext()) {
-        iter.nextNode().remove();
-      }
-      rootDrive.getSession().save();
-
-      session.getRootNode().getNode("TestTreeNode").remove();
-      session.save();
-      
-      Logger.getLogger(ManageDriveServiceImpl.class.getName()).setLevel(originalLogLevel);
-      Field field = ManageDriveServiceImpl.class.getDeclaredField("drivePlugins_");
-      field.setAccessible(true);
-      field.set(driveService, originDrivePlugins_);
-    } catch (PathNotFoundException e) {
+    Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
+    Node rootDrive = (Node)mySession.getItem(drivePath);
+    NodeIterator iter = rootDrive.getNodes();
+    while (iter.hasNext()) {
+      iter.nextNode().remove();
     }
+    rootDrive.getSession().save();
+
+    session.getRootNode().getNode("TestTreeNode").remove();
+    session.save();
   }
 }
