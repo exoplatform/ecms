@@ -671,7 +671,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     }
     Identity identity = identityRegistry.getIdentity(userId) ;
     if(identity == null) {
-      System.out.println("null " + userId);
       return false ;
     }
     String[] listRoles = roles.split("; ");
