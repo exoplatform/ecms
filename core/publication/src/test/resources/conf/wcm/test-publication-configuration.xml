@@ -116,11 +116,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.services.wcm.metadata.PageMetadataService</key>
-    <type>org.exoplatform.services.wcm.metadata.PageMetadataServiceImpl</type>
-  </component>
-  
-  <component>
     <key>org.exoplatform.commons.scope.ScopeManager</key>
     <type>org.exoplatform.commons.scope.ScopeManager</type>
   </component>
@@ -320,7 +315,7 @@
  		    <values-param>
  		      <name>autoCreatedInNewRepository</name>
            <value>jar:/conf/wcm/gatein-nodetypes.xml</value>
-           <value>jar:/conf/wcm/mop-nodetypes.xml</value>
+           <value>jar:/conf/wcm/test-publication-nodetypes.xml</value>
            <value>jar:/conf/wcm/content-nodetypes.xml</value>
            <value>jar:/conf/wcm/test-mop-nodetypes.xml</value>
  		    </values-param>
