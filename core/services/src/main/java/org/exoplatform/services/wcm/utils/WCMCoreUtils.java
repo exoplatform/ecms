@@ -357,7 +357,7 @@ public class WCMCoreUtils {
         }
       }
       //sort cssFile by priority and merge them
-      Collections.sort(cssNodeList, new FileComparatorByPriority());
+      Collections.sort(cssNodeList, new FileCSSComparatorByPriority());
       for (Node registeredCSSFile : cssNodeList) {
         try {
           buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
@@ -541,6 +541,28 @@ public class WCMCoreUtils {
         } else {
           return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -  
                        o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
+        }
+      } catch (Exception e) {
+        return 0;
+      }
+    }
+  }
+  /**
+   * compares two CSSFile node by exo:priority value, tending to sort in ASC order 
+   * because CSSFile file with higher priority is loaded last 
+   * @author vinh_nguyen
+   */
+  private static class FileCSSComparatorByPriority implements Comparator<Node>{
+    @Override
+    public int compare(Node o1, Node o2) {
+      try {
+        if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+          return -1;
+        } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+          return 1;
+        } else {
+          return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -  
+                       o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
         }
       } catch (Exception e) {
         return 0;
