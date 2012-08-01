@@ -3,104 +3,154 @@ You can restrict the visibility of this drive to a group/user and apply a specif
 
 A drive is the combination of:
 * Path: the root folder of the drive.
-* View: how we can see the contents (by list, thumbnails, coverflow, etc).
-* Role: visible to everybody, a group or a single user.
-* Options: allow us to specify whether to see hidden nodes or not and to create folders in this drive or not.
+* View: allow seeing the contents by list, thumbnails, coverflow, and more.
+* Role: be visible to everybody, a group or a single user.
+* Options: allow specifying whether hidden nodes is visible or not and folders are created in this drive or not.
 
 h1. Fields {anchor:id=CONTref.Configuration.Drives.Fields}
 
 Object type: _org.exoplatform.services.cms.drives.*DriveData*_
 
 ||*Field name* ||*Type* || *Description*  ||
-| *name* | {{String}} | Name of the drive. It must be unique|
-| *repository* | {{String}} | Content Repository where to find the root path |
-| *workspace* | {{String}} | Workspace in the Content Repository |
-| *homePath* | {{String}} | Root path in the Content Repository. *{{userId}}* can be used to use the userId at runtime in the path. |
-| *permissions* | {{String}} | Visibility of the drive based on eXo rights. For example: {{ {{{*:/platform/users}}} }} |
-| *icon* | {{String}} | Url to the icon |
-| *views* | {{String}} | The list of views you want to use, separated by commas. For example: {{simple-view,admin-view}} |
-| *viewPreferences* | {{Boolean}} | *User Preference* icon will be visible if true |
-| *viewNonDocument* | {{Boolean}} | Non-document types will be visible in the user view if true |
-| *viewSideBar* | {{Boolean}} | Show/Hide the left bar (with navigation and filters) |
-| *showHiddenNode* | {{Boolean}} | Hidden nodes will be visible if true |
-| *allowCreateFolders* | {{Boolean}} | List of nodet ype we can create as folders. For example: {{nt:folder,nt:unstructured}} |
-| *allowNodeTypesOnTree* | {{String}} | Allows you to filter node types in the navigation tree. For example, the default value is "{{{*}}}" to show all content types |
+| *name* | {{String}} | The drive name which must be unique.|
+| *repository* | {{String}} | The content repository where the root path is found. |
+| *workspace* | {{String}} |The workspace in the Content Repository. |
+| *homePath* | {{String}} | The root path in the Content Repository. *{{userId}}* can be used to use the userId at runtime in the path. |
+| *permissions* | {{String}} | Visibility of the drive based on eXo rights. For example: {{ {{{*:/platform/users}}} }}. |
+| *icon* | {{String}} |The URL to the icon. |
+| *views* | {{String}} | The list of views you want to use, separated by commas. For example: {{simple-view,admin-view}}. |
+| *viewPreferences* | {{Boolean}} |The *User Preference* icon will be visible if the value is "true". |
+| *viewNonDocument* | {{Boolean}} | Non-document types will be visible in the user view if the value is "true". |
+| *viewSideBar* | {{Boolean}} | Show/Hide the left bar (with navigation and filters). |
+| *showHiddenNode* | {{Boolean}} | Hidden nodes will be visible if the value is "true". |
+| *allowCreateFolders* | {{Boolean}} | The list of node types which are create. For example: {{nt:folder,nt:unstructured}}. |
+| *allowNodeTypesOnTree* | {{String}} | Allow filtering node types in the navigation tree. For example, the default value is "{{{*}}}" to show all content types. |
 
-We use the following structure for drives configuration
-{code:language=xml|indent=2}
-	<external-component-plugins>
-		<target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
-		<component-plugin>
-			<name>manage.drive.plugin</name>
-			<set-method>setManageDrivePlugin</set-method>
-			<type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
-			<description>Nothing</description>
-			<init-params>
-				<object-param>
-					There are initializing attributes of org.exoplatform.services.cms.drives.DriveData object
-				</object-param>
-			</init-params>
-		</component-plugin>
-	</external-component-plugins>
+The following structure is used for the drive configuration.
+{code}
+<external-component-plugins>
+  <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
+  <component-plugin>
+    <name>manage.drive.plugin</name>
+    <set-method>setManageDrivePlugin</set-method>
+    <type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
+    <description>Nothing</description>
+    <init-params>
+      <object-param>
+        There are initializing attributes of org.exoplatform.services.cms.drives.DriveData object
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}
 
-The file that contains the structure above will be configured in the configuration.xml file as the following:
-{code:language=xml|indent=2}
+The file that contains the structure above will be configured in the {{configuration.xml}} file as below:
+{code}
 	<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>			
 {code}
 
 h1. Example of configuration {anchor:id=CONTref.Configuration.Drives.Example_configuration}
-{code:language=xml|indent=2}
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
+{code}
+<external-component-plugins>
+  <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
+  <component-plugin>
+    <name>manage.drive.plugin</name>
+    <set-method>setManageDrivePlugin</set-method>
+    <type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
+    <description>Nothing</description>
+    <init-params>
+      <object-param>
+        <name>Managed Sites</name>
+        <description>Managed Sites</description>
+        <object type="org.exoplatform.services.cms.drives.DriveData">
+          <field name="name">
+            <string>Managed Sites</string>
+          </field>
+          <field name="repository">
+            <string>repository</string>
+          </field>
+          <field name="workspace">
+            <string>collaboration</string>
+          </field>
+          <field name="permissions">
+            <string>*:/platform/administrators</string>
+          </field>
+          <field name="homePath">
+            <string>/sites content/live</string>
+          </field>
+          <field name="icon">
+            <string></string>
+          </field>
+          <field name="views">
+            <string>wcm-view</string>
+          </field>
+          <field name="viewPreferences">
+            <boolean>false</boolean>
+          </field>
+          <field name="viewNonDocument">
+            <boolean>true</boolean>
+          </field>
+          <field name="viewSideBar">
+            <boolean>true</boolean>
+          </field>
+          <field name="showHiddenNode">
+            <boolean>false</boolean>
+          </field>
+          <field name="allowCreateFolders">
+            <string>nt:folder,nt:unstructured</string>
+          </field>
+          <field name="allowNodeTypesOnTree">
+            <string>*</string>
+          </field>
+        </object>
+      </object-param>
 
-    <component-plugin>
-      <name>manage.drive.plugin</name>
-      <set-method>setManageDrivePlugin</set-method>
-      <type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
-      <description>Nothing</description>
-      <init-params>
-        <object-param>
-          <name>Managed Sites</name>
-          <description>Managed Sites</description>
-          <object type="org.exoplatform.services.cms.drives.DriveData">
-            <field name="name"><string>Managed Sites</string></field>
-            <field name="repository"><string>repository</string></field>
-            <field name="workspace"><string>collaboration</string></field>
-            <field name="permissions"><string>*:/platform/administrators</string></field>
-            <field name="homePath"><string>/sites content/live</string></field>
-            <field name="icon"><string></string></field>
-            <field name="views"><string>wcm-view</string></field>
-            <field name="viewPreferences"><boolean>false</boolean></field>
-            <field name="viewNonDocument"><boolean>true</boolean></field>
-            <field name="viewSideBar"><boolean>true</boolean></field>
-            <field name="showHiddenNode"><boolean>false</boolean></field>
-            <field name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
-            <field name="allowNodeTypesOnTree"><string>*</string></field>
-          </object>
-        </object-param>
-        
-        <object-param>        
-          <name>Public</name>
-          <description>Public drive</description>
-          <object type="org.exoplatform.services.cms.drives.DriveData">
-            <field name="name"><string>Public</string></field>
-            <field name="repository"><string>repository</string></field>
-            <field name="workspace"><string>collaboration</string></field>
-            <field name="permissions"><string>*:/platform/users</string></field>
-            <field name="homePath"><string>/Users/${userId}/Public</string></field>
-            <field name="icon"><string></string></field>
-            <field name="views"><string>simple-view, admin-view</string></field>
-            <field name="viewPreferences"><boolean>false</boolean></field>
-            <field name="viewNonDocument"><boolean>false</boolean></field>
-            <field name="viewSideBar"><boolean>true</boolean></field>
-            <field name="showHiddenNode"><boolean>false</boolean></field>
-            <field name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
-            <field name="allowNodeTypesOnTree"><string>*</string></field>       
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-
-  </external-component-plugins>
+      <object-param>
+        <name>Public</name>
+        <description>Public drive</description>
+        <object type="org.exoplatform.services.cms.drives.DriveData">
+          <field name="name">
+            <string>Public</string>
+          </field>
+          <field name="repository">
+            <string>repository</string>
+          </field>
+          <field name="workspace">
+            <string>collaboration</string>
+          </field>
+          <field name="permissions">
+            <string>*:/platform/users</string>
+          </field>
+          <field name="homePath">
+            <string>/Users/${userId}/Public</string>
+          </field>
+          <field name="icon">
+            <string></string>
+          </field>
+          <field name="views">
+            <string>simple-view, admin-view</string>
+          </field>
+          <field name="viewPreferences">
+            <boolean>false</boolean>
+          </field>
+          <field name="viewNonDocument">
+            <boolean>false</boolean>
+          </field>
+          <field name="viewSideBar">
+            <boolean>true</boolean>
+          </field>
+          <field name="showHiddenNode">
+            <boolean>false</boolean>
+          </field>
+          <field name="allowCreateFolders">
+            <string>nt:folder,nt:unstructured</string>
+          </field>
+          <field name="allowNodeTypesOnTree">
+            <string>*</string>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}

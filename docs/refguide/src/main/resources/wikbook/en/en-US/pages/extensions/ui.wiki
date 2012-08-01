@@ -2,256 +2,301 @@ This part describes how to create a sample UI extension.
 
 h1. Overview {anchor:id=CONTref.Extensions.UIExtensions.Overview}
 
-Since DMS 2.5, it is possible to extend the *File  Explorer* and the *ECM Administration* with the *UI   Extension Framework*.  Indeed, you can add your own action buttons to the *File Explorer* and/or add your own  managers to the *ECM Administration*.
+Since DMS 2.5, it is possible to extend the *File Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *File Explorer* and/or add your own managers to the *ECM Administration*.
 
 h1. How to add your own tab in ECM Administration {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration}
 
 h2. Add your own UIAction {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnUIAction}
 
-* Create a pom.xml from the following content:
+To add your own UIAction, do as follows:
 
-{code:lang=xml}<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-examples-uiextension-framework</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>exo-ecms-examples-uiextension-framework-manage-wcm-cache</artifactId>
-  <name>eXo WCM Cache Examples </name>
-  <description>eXo WCM Cache Examples </description>
-  <dependencies>
-    <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
-      <artifactId>exo.kernel.container</artifactId>
-      <version>${org.exoplatform.kernel.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.commons</groupId>
-      <artifactId>exo.platform.commons.webui.ext</artifactId>
-      <version>${org.exoplatform.commons.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-administration</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.conf</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.gif</include>
-          <include>**/*.jpg</include>
-          <include>**/*.png</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
-</project>{code}
+*1.* Create a _pom.xml_ file with the following content:
 
+{code:xml}
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>exo-ecms-examples-uiextension-framework</artifactId>
+        <version>2.2.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>exo-ecms-examples-uiextension-framework-manage-wcm-cache</artifactId>
+    <name>eXo WCM Cache Examples</name>
+    <description>eXo WCM Cache Examples</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.exoplatform.kernel</groupId>
+            <artifactId>exo.kernel.container</artifactId>
+            <version>${org.exoplatform.kernel.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.commons</groupId>
+            <artifactId>exo.platform.commons.webui.ext</artifactId>
+            <version>${org.exoplatform.commons.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ecms</groupId>
+            <artifactId>exo-ecms-core-webui</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ecms</groupId>
+            <artifactId>exo-ecms-core-webui-administration</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.jar</include>
+                    <include>**/*.pom</include>
+                    <include>**/*.conf</include>
+                    <include>**/*.gtmpl</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.png</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>
+{code}
 
-* Create the directories _src/main/java_ and start launching _mvn_ _eclipse:eclipse_.  You can then, launch your eclipse and import this new project.
+*2.* Create the _src/main/java_ directory and start launching _{{{mvn eclipse:eclipse}}}_.  Then, you can launch your eclipse and import this new project.
 
-* Create a new class called *_org.exoplatform.wcm.component.cache.UIWCMCacheComponent_* that extends *org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent*.
+*3.* Create a new class called _org.exoplatform.wcm.component.cache.UIWCMCacheComponent_ that extends _org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent_.
 
 h2. Add your own ActionListener {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnActionListener}
 
-The webui framework allows you to be notified when a given action has  been triggered, you just need to call your own action listener as follows (_ACTION_NAME) *ActionListener*.
-For example: You create your own action listener name *CacheView*, so your action listener then will be named as *CacheViewActionListener*.
+With the Webui framework, you will be notified if any given action is triggered. You just need to call your own action listener ($ACTIONNAME) *ActionListener*.
+For example, to create your own action listener for *CacheView*, do as follows:
 
-* First, add a static inner class called *_CacheViewActionListener_* that extends *_org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener_*.
+*1.* Call *CacheViewActionListener*.
 
+*2.* Add a static inner class called _CacheViewActionListener_ that extends _org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener_.
 
-See the expected code below:
-{code}public class CacheViewComponent extends UIAbstractManagerComponent {
-public static class CacheViewActionListener extends UIECMAdminControlPanelActionListener<UIWCMCacheComponent> {
-  public void processEvent(Event<UIWCMCacheComponent> event) throws Exception {UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
-     UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
-     uiWorkingArea.setChild(UIWCMCachePanel.class) ;
-     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
-  }
- }{code}
+You will see the expected code below:
+{code:java}
+public class CacheViewComponent extends UIAbstractManagerComponent {
+        public static class CacheViewActionListener extends UIECMAdminControlPanelActionListener
+<UIWCMCacheComponent>{
+    public void processEvent(Event
+    <UIWCMCacheComponent>event) throws Exception {
+        UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
+        UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
+        uiWorkingArea.setChild(UIWCMCachePanel.class) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
+        }
+        }
+        }
+{code}
 
-* Create the directories _src/main/java_ and launch _mvn  eclipse:eclipse_.  You can then, launch your eclipse and import this new project.
+*3.* Create the _src/main/java_ directory and launch _mvn eclipse\:eclipse_. You can then launch your eclipse and import this new project.
 
-* Create a new configuration file _conf/portal/configuration.xml_ to register your action (see [6.2.2.3|#6.2.2.3]) with the service _org.exoplatform.webui.ext.UIExtensionManager_.
+*4.* Create a new configuration file called _conf/portal/configuration.xml_ to register your action (see [Register your UI Action|#CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction]) with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
 
 h2. Register your UI Action {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction}
 
-{code:lang=xml}<?xml version="1.0" encoding="ISO-8859-1"?>
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
-   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+To register your UI Action, do as follows:
 
-	<external-component-plugins>
-	<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
-	<component-plugin>
-	    <name>Add.Actions</name>
-		<set-method>registerUIExtensionPlugin</set-method>
-		<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-	        <init-params>
-		   <object-param>
-		        <name>CacheView</name>
-		        <object type="org.exoplatform.webui.ext.UIExtension">
-                        	<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-			        <field name="name"><string>CacheView</string></field>
-				<field name="category"><string>GlobalAdministration</string></field>
-				<field name="component"><string>org.exoplatform.wcm.component.cache.UIWCMCacheComponent</string></field>
-		   	 </object>
-	           </object-param>
-     		   <object-param>
-		       <name>UIWCMCacheManager</name>
-	               <object type="org.exoplatform.webui.ext.UIExtension">
-		           <field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-		           <field name="name"><string>UIWCMCacheManager</string></field>
-		           <field name="category"><string>GlobalAdministration</string></field>
-		           <field name="component"><string>org.exoplatform.wcm.manager.cache.UIWCMCacheManagerComponent</string></field>
-	               </object>
-                   </object-param>
-              </init-params>
-       </component-plugin>
-</external-component-plugins>
+*1.* Create the code:
+
+{code:xml}
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+               xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+
+    <external-component-plugins>
+        <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+        <component-plugin>
+            <name>Add.Actions</name>
+            <set-method>registerUIExtensionPlugin</set-method>
+            <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+            <init-params>
+                <object-param>
+                    <name>CacheView</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="name">
+                            <string>CacheView</string>
+                        </field>
+                        <field name="category">
+                            <string>GlobalAdministration</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.wcm.component.cache.UIWCMCacheComponent</string>
+                        </field>
+                    </object>
+                </object-param>
+                <object-param>
+                    <name>UIWCMCacheManager</name>
+                    <object type="org.exoplatform.webui.ext.UIExtension">
+                        <field name="type">
+                            <string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string>
+                        </field>
+                        <field name="name">
+                            <string>UIWCMCacheManager</string>
+                        </field>
+                        <field name="category">
+                            <string>GlobalAdministration</string>
+                        </field>
+                        <field name="component">
+                            <string>org.exoplatform.wcm.manager.cache.UIWCMCacheManagerComponent</string>
+                        </field>
+                        <field name="extendedFilters">
+                            <collection type="java.util.ArrayList">
+                                <value>
+                                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                                        <field name="permissions">
+                                            <collection type="java.util.ArrayList" item-type="java.lang.String">
+                                                <value>
+                                                    <string>*:/platform/administrators</string>
+                                                </value>
+                                            </collection>
+                                        </field>
+                                    </object>
+                                </value>
+                            </collection>
+                        </field>
+                    </object>
+                </object-param>
+            </init-params>
+        </component-plugin>
+    </external-component-plugins>
 </configuration>
-	{code}
-Launch *mvn clean install* and copy the file _target/exo-ecms-examples-webui-2.1.0-SNAPSHOT.jar_ into _(TOMCAT_HOME)/lib_
+{code}
 
-h2. Define label for your actions and register the resource bundle {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.Define_label}
 {note}
-All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure. 
+With this configuration, only the users with the _\*:/platform/administrators_ membership have the right to access the CacheView item.{note}
+
+*2.* Launch *mvn clean install*.
+
+*3.* Copy the resource bundle. {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.DefineLabelandRegisterResourceBundle}
+
+{note}
+All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure.
 {note}
 
-Create _ExamplePortlet_en.xml_ with the following content and add it to _src/main/resource_ package:
+Create _ExamplePortlet\_en.xml_ with the following content and add it to the _src/main/resource_ package:
 
 
-{code:lang=xml}<?xml version="1.0" encoding="UTF-8"?>
+{code:xml}
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################################################################################
-  #             org.exoplatform.wcm.component.cache.UIWCMCacheForm #
-  ################################################################################
-  -->
+    <!-- ################################################################################ # org.exoplatform.wcm.component.cache.UIWCMCacheForm
+  # ################################################################################ -->
 
- <UIWCMCacheForm>
- 	 <action>
- 	 	<Cancel>Cancel</Cancel>
- 	 	<Save>Save</Save>
-		<Clear>Clear the cache</Clear>
- 	 </action>
-	 <label>
-		<maxsize>Max size :</maxsize>
-		<livetime>Live time in sec :</livetime>
-		<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
-		<hit>Hit count :</hit>
-		<currentSize>Current size</currentSize>
-		<miss>Miss count :</miss>
-	 </label>
- </UIWCMCacheForm>
+    <UIWCMCacheForm>
+        <action>
+            <Cancel>Cancel</Cancel>
+            <Save>Save</Save>
+            <Clear>Clear the cache</Clear>
+        </action>
+        <label>
+            <maxsize>Max size :</maxsize>
+            <livetime>Live time in sec :</livetime>
+            <isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
+            <hit>Hit count :</hit>
+            <currentSize>Current size</currentSize>
+            <miss>Miss count :</miss>
+        </label>
+    </UIWCMCacheForm>
 
-<!--
-  ################################################################################
-  #             org.exoplatform.wcm.manager.cache.UIWCMCacheManagerForm #
-  ################################################################################
-  -->
+    <!-- ################################################################################ # org.exoplatform.wcm.manager.cache.UIWCMCacheManagerForm
+  # ################################################################################ -->
 
- <UIWCMCacheManagerForm>
- 	 <action>
- 	 	<Cancel>Cancel</Cancel>
- 	 	<Save>Save</Save>
-		<Clear>Clear the cache</Clear>
- 	 </action>
- 	 <label>
-		<cacheModify>Cache to modify :</cacheModify>
-	        <maxsize>Max size :</maxsize>
-		<livetime>Live time in sec :</livetime>
-		<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
-		<hit>Hit count :</hit>
-		<currentSize>Current size</currentSize>
-		<miss>Miss count :</miss>
-	 </label>
- </UIWCMCacheManagerForm>
+    <UIWCMCacheManagerForm>
+        <action>
+            <Cancel>Cancel</Cancel>
+            <Save>Save</Save>
+            <Clear>Clear the cache</Clear>
+        </action>
+        <label>
+            <cacheModify>Cache to modify :</cacheModify>
+            <maxsize>Max size :</maxsize>
+            <livetime>Live time in sec :</livetime>
+            <isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
+            <hit>Hit count :</hit>
+            <currentSize>Current size</currentSize>
+            <miss>Miss count :</miss>
+        </label>
+    </UIWCMCacheManagerForm>
 
- <UIECMAdminControlPanel>
-    <tab>
-      <label>
-        <GlobalAdministration>Global Administration</GlobalAdministration>
-      </label>
-    </tab>
-    <label>
-      <UIWCMCache>WCM Cache</UIWCMCache>
-      <UIWCMCachePanel>WCM Cache Administration</UIWCMCachePanel>
-      <UIWCMCacheManager>Managing Caches</UIWCMCacheManager>
-      <UIWCMCacheManagerPanel>WCM Cache Management</UIWCMCacheManagerPanel>
-    </label>
-  </UIECMAdminControlPanel>
-</bundle>{code}
+    <UIECMAdminControlPanel>
+        <tab>
+            <label>
+                <GlobalAdministration>Global Administration</GlobalAdministration>
+            </label>
+        </tab>
+        <label>
+            <UIWCMCache>WCM Cache</UIWCMCache>
+            <UIWCMCachePanel>WCM Cache Administration</UIWCMCachePanel>
+            <UIWCMCacheManager>Managing Caches</UIWCMCacheManager>
+            <UIWCMCacheManagerPanel>WCM Cache Management</UIWCMCacheManagerPanel>
+        </label>
+    </UIECMAdminControlPanel>
+</bundle>
+{code}
 
-
-You must add the following content to _configuration.xml- to register the resource bundle.
+You must add the following content to _configuration.xml_ to register the resource bundle.
 
 {note}
-By being added this configuration, the resource bundle has been completely separated the resource bundle from the original system, this is so clearly useful, you get an independent plugin.{note}
+By being added this configuration, the resource bundle has been completely separated from the original system. This is clearly useful for you to get an independent plugin.
+{note}
 
-
-{code:lang=xml}
+{code:xml}
 <external-component-plugins>
     <!-- The full qualified name of the ResourceBundleService -->
     <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
     <component-plugin>
-      <!-- The name of the plugin -->
-      <name>ResourceBundle Plugin</name>
-      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
-      <set-method>addResourceBundle</set-method>
-      <!-- The full qualified name of the BaseResourceBundlePlugin -->
-      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
-      <init-params>
-	  <values-param>
-	      <name>init.resources</name>
-	      <description>Store the following resources into the db for the first launch </description>
-	      <value>locale.portlet.cache.ExamplePortlet</value>
-	  </values-param>
-	  <values-param>
-              <name>portal.resource.names</name>
-              <description>The properties files of the portal , those file will be merged
-              into one ResoruceBundle properties </description>
-              <value>locale.portlet.cache.ExamplePortlet</value>
-          </values-param>
-      </init-params>
+        <!-- The name of the plugin -->
+        <name>ResourceBundle Plugin</name>
+        <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
+        <set-method>addResourceBundle</set-method>
+        <!-- The full qualified name of the BaseResourceBundlePlugin -->
+        <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+        <init-params>
+            <values-param>
+                <name>init.resources</name>
+                <description>Store the following resources into the db for the first launch</description>
+                <value>locale.portlet.cache.ExamplePortlet</value>
+            </values-param>
+            <values-param>
+                <name>portal.resource.names</name>
+                <description>The properties files of the portal , those file will be merged
+                    into one ResoruceBundle properties
+                </description>
+                <value>locale.portlet.cache.ExamplePortlet</value>
+            </values-param>
+        </init-params>
     </component-plugin>
-  </external-component-plugins>
+</external-component-plugins>
 {code}
 
 h2. Run your own UI extension sample {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RunUIExtensionSample}
+Do as follows:
 
+*1.* Run Tomcat.
 
-* Run tomcat
-* Sign in as root
-* Go to the ECM Administration. 
+*2.* Sign in as "root".
 
-You will see a new extension has been already added to ECM Administrator.
-[image:Screenshot2.png]
-
+*3.* Go to the ECM Administration. You will see that a new extension has been already added to ECM Administrator.

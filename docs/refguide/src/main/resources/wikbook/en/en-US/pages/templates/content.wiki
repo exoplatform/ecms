@@ -1,19 +1,19 @@
 *Overview*
 
-The templates are applied to a NodeType or a metadata MixinType. Two kinds of templates exist :
+The templates are applied to a node type or a metadata mixin type. There are two kinds of templates:
 
-* *dialogs* : are html forms that allow to create node instances.
-* *views* : are html fragments used to display nodes.
+* *dialogs*: are HTML forms that allow to create node instances.
+* *views*: are HTML fragments used to display nodes.
 
-From the ECM admin portlet, _Manage Template_ lists existing NodeTypes that have been associated to Dialog and/or View templates. These templates can be attached to permissions (in the usual _membership:group_ form), so that a specific one is displayed according to the rights of the user (very useful in a content validation workflow activity).
+From the ECM admin portlet, _Manage Template_ lists existing node types that have been associated to the Dialog and/or View templates. These templates can be attached to permissions (in the usual _membership:group_ form), so that a specific one is displayed according to the rights of the user (very useful in a content validation workflow activity).
 
 *DocumentType*
 
-# checkbox allows to say if the NodeType should be considered as a *DocumentType*. File Explorer considers such nodes as user content and applies the following behavior :
+The checkbox allows specifying if the node type should be considered as a *DocumentType* or not. File Explorer considers such nodes as user content and applies the following behavior:
 
-* View template will be used to display the DocumentType nodes
-* DocumentTypes nodes can created by the '_Add Document_' action
-* non DocumentType are hidden (unless _'Show non document types'_ option is checked)
+* *View* template will be used to display the DocumentType nodes.
+* *DocumentTypes* nodes can created by the '_Add Document_' action.
+* *non DocumentType* nodes are hidden (unless _'Show non document types'_ option is checked).
 
 Templates are written using [Groovy Templates|http://groovy.codehaus.org/Groovy+Templates] and will require some experience with JCR API and HTML notions.
 

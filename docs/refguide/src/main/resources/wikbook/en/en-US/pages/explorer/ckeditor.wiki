@@ -1,6 +1,6 @@
 Basically, if you want to add a rich text area into your dialogs, you can use [addRichtextField|#richtext-field] method. However, sometimes you want to add the rich text editor manually. So, first, you need to use [addTextAreaField|#textarea-field] method and some additionl javascripts like the below:
 
-{code:language=java}
+{code:java}
 <%
 	String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
 	uicomponent.addTextAreaField("description", fieldDescription)
@@ -15,4 +15,5 @@ Basically, if you want to add a rich text area into your dialogs, you can use [a
 </script>
 {code}
 
-[image:custom_ck.png]
+!images/custom_ck.gif|align="center" width="70" fo:scalefit="1" html:scalefit="0"!
+

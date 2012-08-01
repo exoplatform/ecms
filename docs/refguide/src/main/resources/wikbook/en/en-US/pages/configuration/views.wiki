@@ -1,22 +1,20 @@
-A view can include many object parameters. Parameters are used to create default views, templates and actions of *Manage View* service. View enables administrators to customize view classification that can impact on users in exploring workspace. Each object-param has a type that is a class representing all properties of a view.
-
-
+A view can include many object parameters. Parameters are used to create default views, templates and actions of the *Manage View* service. View enables administrators to customize view classification that can impact on users in exploring workspace. Each object-param has a type that is a class representing all properties of a view.
 
 h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 
-- *target-component*: _org.exoplatform.services.cms.views.ManageViewService</target-component-
-- *Name*: {{manage.view.plugin}}
-- *Set-method*: {{setManageViewPlugin}}
-- *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
-- *Description*: This plugin manages user views
+* *target-component*: _org.exoplatform.services.cms.views.ManageViewService</target-component-
+* *Name*: {{manage.view.plugin}}
+* *Set-method*: {{setManageViewPlugin}}
+* *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
+* *Description*: This plugin manages user views.
         
 
 *Object type*: _org.exoplatform.services.cms.views.ViewConfig_
 
 || *Name* || *Type* || *Default value*|| *Description* ||
-| *name* | {{String}} |{{system-view}}| The name of the view. It must be unique inside WCM. |
-| *permissions* | {{String}} |{{{*:/platform/administrators}}}| Visibility of the view based on eXo rights.|
-| *template* | {{String}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify path to the template location. |
+| *name* | {{String}} |{{system-view}}| The view name which must be unique inside WCM. |
+| *permissions* | {{String}} |{{{*:/platform/administrators}}}|The visibility of the view based on eXo rights.|
+| *template* | {{String}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify the path to the template location. |
 | *tabList* | {{ArrayList}}| {{java.util.ArrayList}} | Include a set of view names. |
 
 
@@ -24,7 +22,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 *Object type*: _org.exoplatform.services.cms.views.ViewConfig$Tab_
 
 || *Name* || *Type* ||*Default value*||  *Description* ||
-| *tabName* | {{String}} | {{Info}}|The name of the tab. It must be unique.  |
+| *tabName* | {{String}} | {{Info}}|The tab name which must be unique.  |
 | *button* | {{String}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names.|
 
 
@@ -38,7 +36,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 
 
 h1. Example of configuration {anchor:id=CONTref.Configuration.Views.Example_configuration}
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
     	<component-plugin> 

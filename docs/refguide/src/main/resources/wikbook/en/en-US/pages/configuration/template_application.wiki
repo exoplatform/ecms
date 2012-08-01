@@ -9,8 +9,8 @@ h2. Init-params {anchor:id=CONTref.Configuration.Templates.Application_template.
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *autoCreateInNewRepository* | {{Boolean}} | {{true}} | Enable the application to import predefined templates at the start-up of template service automatically.|
-| storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates |
-| repository | {{String}} | {{repository}} | Location of stored templates |
+| storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates. |
+| repository | {{String}} | {{repository}} | Location of stored templates. |
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
@@ -18,126 +18,153 @@ h2. Object-param {anchor:id=CONTref.Configuration.Templates.Application_template
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *name* | {{String}} | {{template.configuration}} | The name of this configuration |
-| *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance |
-| *object-type* | {{Structure}} | | Details configuration for each instance type |
-
-
-*Object-type* defines all available template files, using the "collection type" configuration*
+| *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of the template instance. |
+| *object-type* | {{Structure}} | |The detailed configuration for each instance type. It defines all available template files, using the "collection type" configuration. |
 
 h2. Object {anchor:id=CONTref.Configuration.Templates.Application_template.Available_configuration.Object}
 
 *type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
 || *Field name* || *Data type* || *Description* ||
-| *nodetypeName* | {{String}} | The name of template that is saved as a node in system |
-| *documentTemplate* | {{Boolean}} | Determine if the node type is a document type |
-| *label* | {{String}} | Visual display of the title for this node |
+| *nodetypeName* | {{String}} | The name of template that is saved as a node in the system. |
+| *documentTemplate* | {{Boolean}} | Specify if the node type is a document type or not. |
+| *label* | {{String}} | The display title of this node. |
 
 
 There are three further information related to the presentation of each template:
 
-- *{{referencedView}}*: Determine how to display a view.
+* *{{referencedView}}*: Determine how to display a view.
 
-- *{{referencedDialog}}*: Determine how to display a dialog to input information.
+* *{{referencedDialog}}*: Determine how to display a dialog to input information.
 
-- *{{referencedSkin}}*: Determine the stylesheet for displaying.
+* *{{referencedSkin}}*: Determine the stylesheet for displaying.
 
-Each type includes some definitions as an ﻿{{object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\}} with the fields as the properties.
+Each type includes some definitions as an {{object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"}} with the fields as the properties.
 || *Field name* || *Data type* || *Description* ||
-| *templateFile* | {{String}} | The location of the file store for the template's presentation |
-| *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS) |
+| *templateFile* | {{String}} | The location of the file which stores the template's presentation. |
+| *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS). |
 
 h1. Example of template configuration {anchor:id=CONTref.Configuration.Templates.Application_template.Example}
 
-This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
+This below example is the configuration for the _nt:file_ template, any other templates will be put in the same level with this template starting from the line
 {{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}}
-as the another NodeType.
+as the another node type.
 
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
-      <component-plugin>
-        <name>addTemplates</name>
-        <set-method>addTemplates</set-method>
-        <type>org.exoplatform.services.cms.templates.impl.TemplatePlugin</type>
-        <init-params>
-	        <value-param>
-	        	<name>autoCreateInNewRepository</name>
-	        	<value>true</value>
-	        </value-param>
-	        <value-param>
-	        	<name>storedLocation</name>
-	        	<value>war:/conf/dms-extension/dms/artifacts/templates</value>
-	        </value-param>
-	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>
-          <object-param>
-            <name>template.configuration</name>
-            <description>configuration for the localtion of templates to inject in jcr</description>
-            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig">
-		<field  name="nodeTypes">
-                <collection type="java.util.ArrayList">
-                  <value>
-                    <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                      <field  name="nodetypeName"><string>nt:file</string></field>
-                      <field  name="documentTemplate"><boolean>true</boolean></field>
-                      <field  name="label"><string>File</string></field>
-                      <field  name="referencedView">
-                        <collection type="java.util.ArrayList">
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/views/view1.gtmpl</string></field>
-                              <field name="roles"><string>*</string></field>
-                            </object>
-                          </value>
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/views/admin_view.gtmpl</string></field>
-                              <field name="roles"><string>*:/platform/administrators</string></field>
-                            </object>
-                          </value>
-                        </collection>
-                      </field>
-                      <field  name="referencedDialog">
-                        <collection type="java.util.ArrayList">
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/dialogs/dialog1.gtmpl</string></field>
-                              <field name="roles"><string>*</string></field>
-                            </object>
-                          </value>
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/dialogs/admin_dialog.gtmpl</string></field>
-                              <field name="roles"><string>*:/platform/administrators</string></field>
-                            </object>
-                          </value>
-                        </collection>
-                      </field>
-                      <field  name="referencedSkin">
-                        <collection type="java.util.ArrayList">
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/skins/Stylesheet-lt.css</string></field>
-                              <field name="roles"><string>*</string></field>
-                            </object>
-                          </value>
-                          <value>
-                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                              <field name="templateFile"><string>/file/skins/Stylesheet-rt.css</string></field>
-                              <field name="roles"><string>*</string></field>
-                            </object>
-                          </value>
-                        </collection>
-                      </field>
-                    </object>
-                  </value>
-		</collection>
-              </field>
-            </object>
-          </object-param>
-        </init-params>
-      </component-plugin>
+  <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
+  <component-plugin>
+    <name>addTemplates</name>
+    <set-method>addTemplates</set-method>
+    <type>org.exoplatform.services.cms.templates.impl.TemplatePlugin</type>
+    <init-params>
+      <value-param>
+        <name>autoCreateInNewRepository</name>
+        <value>true</value>
+      </value-param>
+      <value-param>
+        <name>storedLocation</name>
+        <value>war:/conf/dms-extension/dms/artifacts/templates</value>
+      </value-param>
+      <value-param>
+        <name>repository</name>
+        <value>repository</value>
+      </value-param>
+      <object-param>
+        <name>template.configuration</name>
+        <description>configuration for the localtion of templates to inject in jcr</description>
+        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig">
+          <field name="nodeTypes">
+            <collection type="java.util.ArrayList">
+              <value>
+                <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
+                  <field name="nodetypeName">
+                    <string>nt:file</string>
+                  </field>
+                  <field name="documentTemplate">
+                    <boolean>true</boolean>
+                  </field>
+                  <field name="label">
+                    <string>File</string>
+                  </field>
+                  <field name="referencedView">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/views/view1.gtmpl</string>
+                          </field>
+                          <field name="roles">
+                            <string>*</string>
+                          </field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/views/admin_view.gtmpl</string>
+                          </field>
+                          <field name="roles">
+                            <string>*:/platform/administrators</string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                  <field name="referencedDialog">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/dialogs/dialog1.gtmpl</string>
+                          </field>
+                          <field name="roles">
+                            <string>*</string>
+                          </field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/dialogs/admin_dialog.gtmpl</string>
+                          </field>
+                          <field name="roles">
+                            <string>*:/platform/administrators</string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                  <field name="referencedSkin">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/skins/Stylesheet-lt.css</string>
+                          </field>
+                          <field name="roles">
+                            <string>*</string>
+                          </field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
+                          <field name="templateFile">
+                            <string>/file/skins/Stylesheet-rt.css</string>
+                          </field>
+                          <field name="roles">
+                            <string>*</string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
 </external-component-plugins>
 {code}

@@ -5,33 +5,33 @@
 
 h1. Package WCM standalone version - Tomcat bundle {anchor:id=CONTref.Preface.Package.WCMStandaloneVersion.TomcatBundle}
 {code}
-	$ cd wcm/assembly
-	$ mvn clean install
+$ cd wcm/assembly
+$ mvn clean install
 {code}
 
 
 h1. Package WCM with workflow enabled - Tomcat bundle {anchor:id=CONTref.Preface.Package.WCMWorkflowEnabled.TomcatBundle}
 {code}
-	$ cd wkf-wcm/assembly
-	$ mvn clean install
+$ cd wkf-wcm/assembly
+$ mvn clean install
 {code}
 
 h1. Make WCM EAR packages to run with jBoss {anchor:id=CONTref.Preface.Package.WCMEARRunWithJBoss}
 
 * Make WCM extension EAR
 {code}
-	$ cd packaging/wcm/ear
-	$ mvn clean install
+$ cd packaging/wcm/ear
+$ mvn clean install
 {code}
 
 * Make WCM demo sites EAR
 {code}
-	$ cd packaging/ecmdemo/ear
-	$ mvn clean install
+$ cd packaging/ecmdemo/ear
+$ mvn clean install
 {code}
 
 * Make workflow EAR
 {code}
-	$ cd packaging/workflow/ear
-	$ mvn clean install
+$ cd packaging/workflow/ear
+$ mvn clean install
 {code}

@@ -4,49 +4,49 @@ h1. Fields {anchor:id=CONTref.Configuration.Nodetypes.Fields}
 
 *{{org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager}}*
 || *Node Type*|| *Type* || *Description* ||
-| *name* | {{String}} | Name of the node type. This field is required |
-| *isMixin* | {{boolean}} | mixin type&nbsp; |
-| *hasOrderableChildNodes* | {{boolean}} | Orderable childnodes |
-| *primaryItemName* | {{String}} | Primary item name |
-| *suppertype* | {{String}} | Name of supper type |
-| *propertyDefinition* | {{Object}} | Define properties of node type |
+| *name* | {{String}} |The name of the node type. This field is required. |
+| *isMixin* | {{boolean}} | The mixin type. |
+| *hasOrderableChildNodes* | {{boolean}} |Specify if the child nodes are oderable or not. |
+| *primaryItemName* | {{String}} |The primary item name. |
+| *suppertype* | {{String}} |The name of supper type. |
+| *propertyDefinition* | {{Object}} | Define properties of the node type. |
 
 
 h1. Examples Nodetype configuration {anchor:id=CONTref.Configuration.Nodetypes.Example_nodetype_configuration}
 
 The node definition should be placed in a special XML file (see DTD below) and declared in the service's configuration file to eXo component plugin mechanism, described as follows:
-{code}
-	<external-component-plugins>
-  	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
-		<component-plugin>
-	    <name>add.namespaces</name>
-	    <set-method>addPlugin</set-method>
-	    <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
-	    <init-params>
-	      <properties-param>
-	        <name>namespaces</name>
-	        <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/"/>
-	      </properties-param>
-	    </init-params>
-	  </component-plugin>
-	  <component-plugin>
-	    <name>add.nodeType</name>
-	    <set-method>addPlugin</set-method>
-	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-			<priority>99</priority>
-	    <init-params>
-	      <values-param>
-	        <name>autoCreatedInNewRepository</name>
-	        <description>Node types configuration file</description>
-	        <value>jar:/conf/nodetypes-publication-config.xml</value>
-	      </values-param>
-	    </init-params>
-	  </component-plugin>
-	</external-component-plugins>
+{code:xml}
+<external-component-plugins>
+  <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+  <component-plugin>
+    <name>add.namespaces</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+    <init-params>
+      <properties-param>
+        <name>namespaces</name>
+        <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/"/>
+      </properties-param>
+    </init-params>
+  </component-plugin>
+  <component-plugin>
+    <name>add.nodeType</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+    <priority>99</priority>
+    <init-params>
+      <values-param>
+        <name>autoCreatedInNewRepository</name>
+        <description>Node types configuration file</description>
+        <value>jar:/conf/nodetypes-publication-config.xml</value>
+      </values-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}
 
-This is a Nodetype definition file format:
-{code}
+This is a node type definition file format:
+{code:xml}
 <nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
   xmlns:jcr="http://www.jcp.org/jcr/1.0">
   <nodeType name="publication:publication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
