@@ -19,6 +19,12 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-test</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -91,6 +97,7 @@
           <include>**/*.sha1</include>
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
+          <include>**/*.gif</include>
         </includes>
       </testResource>
       <testResource>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <SimplePublicationPlugin>
+      <changeState>
+        <enrolled>Il contenuto web è stato iscritto al ciclo di vita %s</enrolled>
+        <published>Contenuto web pubblicato</published>
+      </changeState>
+    </SimplePublicationPlugin>
+  </PublicationService>
+</bundle>

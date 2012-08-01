@@ -63,6 +63,7 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -485,7 +486,9 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values)
   throws Exception {
     ClassLoader cl=this.getClass().getClassLoader();
-    ResourceBundle resourceBundle= ResourceBundle.getBundle(LOCALE_FILE, locale, cl);
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(LOCALE_FILE, locale, cl);
+//    ResourceBundle resourceBundle = ResourceBundle.getBundle(LOCALE_FILE, locale, cl);
     String result = "";
     try {
       result = resourceBundle.getString(key);

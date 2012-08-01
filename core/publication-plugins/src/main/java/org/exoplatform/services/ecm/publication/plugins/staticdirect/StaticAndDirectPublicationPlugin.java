@@ -52,6 +52,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
 
@@ -507,14 +508,9 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
   @Override
   public String getUserInfo(Node node, Locale locale) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
-        getComponentInstanceOfType(ResourceBundleService.class);
-    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile,
-                                                                            locale,
-                                                                            this.getClass()
-                                                                                .getClassLoader());
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+    ResourceBundle resourceBundle= ResourceBundle.getBundle(localeFile, locale, this.getClass()
+                                                                                  .getClassLoader());
     Session session = node.getSession() ;
     if (node.getProperty(CURRENT_STATE).getString().equals(ENROLLED)
         || node.getProperty(CURRENT_STATE).getString().equals(NON_PUBLISHED)) {
@@ -616,10 +612,11 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
-        getComponentInstanceOfType(ResourceBundleService.class);
+//    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
+//        getComponentInstanceOfType(ResourceBundleService.class);
     ClassLoader cl = this.getClass().getClassLoader();
-    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, cl);
+//    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, cl);
+    ResourceBundle resourceBundle = ResourceBundle.getBundle(localeFile, locale, cl);
     String result = resourceBundle.getString(key);
     return String.format(result, values);
   }
