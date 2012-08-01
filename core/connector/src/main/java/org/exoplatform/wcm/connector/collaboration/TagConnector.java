@@ -74,8 +74,8 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
     Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
 
-//    tagService.addPublicTag("/Application Data/Tags", new String[]{tag}, content, repositoryName,  workspaceName);
-    tagService.addPublicTag("/tags", new String[]{tag}, content, repositoryName,  workspaceName);
+//    tagService.addPublicTag("/Application Data/Tags", new String[]{tag}, content,  workspaceName);
+    tagService.addPublicTag("/tags", new String[]{tag}, content, workspaceName);
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();

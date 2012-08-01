@@ -20,6 +20,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -63,7 +64,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     newFolksonomyService_ = (NewFolksonomyService) container.getComponentInstanceOfType(NewFolksonomyService.class);
     linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
   }
-  
+
   @BeforeMethod
   public void setUp() throws Exception {
     applySystemSession();
@@ -89,13 +90,9 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 //    .getComponentInstanceOfType(NodeHierarchyCreator.class);
 
     String folksonomyPath = "Folksonomy";
-    System.out.println(folksonomyPath);
     folksonomyNode = privateNode.hasNode(folksonomyPath) ? privateNode.getNode(folksonomyPath) :
                                                                 privateNode.addNode(folksonomyPath);
-    System.out.println(folksonomyNode.getPath());
-
     rootNode = privateNode;
-    System.out.println(userName);
     test = rootNode.addNode(TEST);
     test2 = rootNode.addNode(TEST2);
 
@@ -150,6 +147,56 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   }
 
   /**
+   * test addPrivateTag(): case the node already is added private tag before
+   * @throws Exception
+   */
+  @Test
+  public void testAddPrivateTag2() throws Exception {
+    String[] tags = { "sport" };
+
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID()); // Call again to add existing tag
+    assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("sport"));
+
+    Node sportTagNode = folksonomyNode.getNode("sport");
+    Node link = sportTagNode.getNodes().nextNode();
+    Node targetNode = linkManager.getTarget(link);
+    assertTrue("testAddPrivateTag failed! ", test.isSame(targetNode));
+
+    assertEquals("testAddPrivateTag failed! ", 1L, sportTagNode.getProperty(EXO_TOTAL).getLong());
+  }
+
+  /**
+   * test addPrivateTag(): add private tag for symlink
+   * @throws Exception
+   */
+  @Test
+  public void testAddPrivateTag3() throws Exception {
+    // Create a symlink to document
+    linkManager.createLink(test.getParent(), test);
+    NodeIterator nodeIterator = test.getParent().getNodes();
+    Node linkToDocument = null;
+    while(nodeIterator.hasNext()) {
+      linkToDocument = nodeIterator.nextNode();
+      if (linkToDocument.isNodeType("exo:link")) {
+        break;
+      }
+    }
+
+    String[] tags = { "sport" };
+
+    newFolksonomyService_.addPrivateTag(tags, linkToDocument, COLLABORATION_WS, session.getUserID());
+    assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("sport"));
+
+    Node sportTagNode = folksonomyNode.getNode("sport");
+    Node link = sportTagNode.getNodes().nextNode();
+    Node targetNode = linkManager.getTarget(link);
+    assertTrue("testAddPrivateTag failed! ", test.isSame(targetNode));
+
+    assertEquals("testAddPrivateTag failed! ", 1L, sportTagNode.getProperty(EXO_TOTAL).getLong());
+  }
+
+  /**
    * Test Method: addGroupsTag()
    * Input: Node 'test'
    * Test action: add 2 tags 'sport' and 'weather' for node 'test' in group 'a' and 'b'
@@ -165,8 +212,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   public void testAddGroupsTag() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
-
-    System.out.println("Group A:" + groupAFolksonomyNode.getPath());
 
     assertTrue("testAddGroupsTag failed! ", groupAFolksonomyNode.hasNode("sport"));
     assertTrue("testAddGroupsTag failed! ", groupAFolksonomyNode.hasNode("weather"));
@@ -293,12 +338,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   public void testGetAllDocumentsByTag() throws Exception {
     String[] tags = { "sport", "weather" };
     String user = session.getUserID();
-//    Node sportTagNode = folksonomyNode.getNode("sport");
-//    System.out.println(sportTagNode.getProperty(EXO_TOTAL).getLong());
-//    NodeIterator iter = sportTagNode.getNodes();
-//    while (iter.hasNext()) {
-//      System.out.println(iter.nextNode().getPath());
-//    }
+
     newFolksonomyService_.addPrivateTag(tags,
                                        test,
                                        COLLABORATION_WS,
@@ -347,7 +387,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
       if ("sport".equals(tag.getName())) count ++;
       if ("weather".equals(tag.getName())) count ++;
       if ("music".equals(tag.getName())) count ++;
-      System.out.println(tag.getPath());
     }
 
     assertEquals("testGetAllGroupTagsOfManyRoles failed! ", 6, count);
@@ -375,7 +414,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
       if ("sport".equals(tag.getName())) count ++;
       if ("weather".equals(tag.getName())) count ++;
       if ("music".equals(tag.getName())) count ++;
-      System.out.println(tag.getPath());
     }
 
     assertEquals("testGetAllGroupTags failed! ", 3, count);
@@ -557,7 +595,174 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   /**
    * Clean data test
    */
-  
+
+  @Test
+  public void testGetAllTagNamesWithPublicScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+
+    List<String> tagListPublic = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, NewFolksonomyService.PUBLIC, publicFolksonomyTreePath);
+
+    assertTrue(tagListPublic.contains("sport"));
+    assertTrue(tagListPublic.contains("weather"));
+    assertTrue(tagListPublic.contains("boy"));
+    assertTrue(tagListPublic.contains("girl"));
+
+    assertEquals("getAllTagNames failed!", 4, tagListPublic.size());
+  }
+
+  @Test
+  public void testGetAllTagNamesWithPrivateScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    String[] tags2 = {"sport", "xyz"};
+    newFolksonomyService_.addPrivateTag(tags2, test2, COLLABORATION_WS, session.getUserID());
+
+    List<String> tagList = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, NewFolksonomyService.PRIVATE, session.getUserID());
+
+    assertTrue(tagList.contains("sport"));
+    assertTrue(tagList.contains("weather"));
+    assertTrue(tagList.contains("xyz"));
+    assertEquals("getAllTagNames failed! ", 3, tagList.size());
+  }
+
+  @Test
+  public void testGetAllTagNamesWithGroupScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "sport", "music" };
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
+
+    List<String> groupTags = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, NewFolksonomyService.GROUP, "/platform/users;/platform/guests");
+
+    assertTrue(groupTags.contains("sport"));
+    assertTrue(groupTags.contains("weather"));
+    assertTrue(groupTags.contains("music"));
+    assertEquals("getAllTagNames failed! ", 6, groupTags.size());
+  }
+
+  @Test
+  public void testGetAllTagNamesWithGroupScope2() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "sport", "music" };
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
+
+    List<String> groupTags = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, NewFolksonomyService.GROUP, "/platform/users");
+
+    assertTrue(groupTags.contains("sport"));
+    assertTrue(groupTags.contains("weather"));
+    assertTrue(groupTags.contains("music"));
+    assertEquals("getAllTagNames failed! ", 3, groupTags.size());
+  }
+
+  @Test
+  public void testGetAllTagNamesWithSiteScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String site = "portal1";
+    newFolksonomyService_.addSiteTag(site,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addSiteTag(site,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+    List<String> tagList = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, NewFolksonomyService.SITE, site);
+
+    assertTrue(tagList.contains("sport"));
+    assertTrue(tagList.contains("weather"));
+    assertTrue(tagList.contains("boy"));
+    assertTrue(tagList.contains("girl"));
+    assertEquals("getAllTagNames failed!", 4, tagList.size());
+  }
+
+  @Test
+  public void testGetAllTagNamesWithNoneExistingScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String site = "portal1";
+    newFolksonomyService_.addSiteTag(site,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addSiteTag(site,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+    List<String> tagList = newFolksonomyService_.getAllTagNames(COLLABORATION_WS, 10, site);
+
+    assertFalse(tagList.contains("sport"));
+    assertFalse(tagList.contains("weather"));
+    assertFalse(tagList.contains("boy"));
+    assertFalse(tagList.contains("girl"));
+    assertEquals("getAllTagNames failed!", 0, tagList.size());
+  }
+
+  @Test
+  public void testCanEditTag1() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+
+    List<String> memberships = new ArrayList<String>();
+    memberships.add("/platform/users");
+    memberships.add("/platform/guests");
+    assertFalse(newFolksonomyService_.canEditTag(0, memberships));
+
+    memberships.clear();
+    memberships.add("*:/platform/administrators");
+    assertTrue(newFolksonomyService_.canEditTag(0, memberships));
+
+    memberships.clear();
+    memberships.add("manager:/platform/administrators");
+    assertTrue(newFolksonomyService_.canEditTag(0, memberships));
+
+    memberships.clear();
+    memberships.add("/platform/administrators");
+    assertTrue(newFolksonomyService_.canEditTag(1, memberships));
+  }
+
+  @Test
+  public void testCanEditTag2() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+
+    List<String> memberships = new ArrayList<String>();
+    memberships.add("/platform/administrators");
+    newFolksonomyService_.removeTagPermission("*:/platform/administrators");
+
+    assertFalse(newFolksonomyService_.canEditTag(0, memberships));
+    newFolksonomyService_.addTagPermission("*:/platform/administrators");
+  }
+
   @AfterMethod
   public void tearDown() throws Exception {
     String[] nodes = {"/Application Data/Tags",
@@ -572,9 +777,5 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
         n.remove();
         session.save();
       }
-    NodeIterator iter = session.getRootNode().getNodes();
-    System.out.println("TearDown:......................");
-    while (iter.hasNext())
-      System.out.println(iter.nextNode().getPath());
   }
 }

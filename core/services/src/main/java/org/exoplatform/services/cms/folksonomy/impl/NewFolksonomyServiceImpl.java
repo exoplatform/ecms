@@ -62,7 +62,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private static final String       USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy";
 
-
   private static final String       GROUPS_ALIAS           = "groupsPath";
 
   private static final String       TAG_STYLE_ALIAS        = "exoTagStylePath";
@@ -126,18 +125,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void addPrivateTag(String[] tagsName,
-                            Node documentNode,
-                            String repository,
-                            String workspace,
-                            String userName) throws Exception {
-    addPrivateTag(tagsName, documentNode, workspace, userName);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public void addPrivateTag(String[] tagsName,
                             Node documentNode,
                             String workspace,
@@ -146,21 +133,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node targetNode = getTargetNode(documentNode);
     for (String tag : tagsName) {
       try {
-        // find tag node
-        Node tagNode = userFolksonomyNode.hasNode(tag) ? userFolksonomyNode.getNode(tag)
-                                                      : userFolksonomyNode.addNode(tag);
-        // add symlink and total
-        if (targetNode != null && !existSymlink(tagNode, targetNode)) {
-          linkManager.createLink(tagNode, targetNode);
-          long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
-                                                     : 0;
-          tagNode.setProperty(EXO_TOTAL, total + 1);
-          if (!tagNode.isNodeType(EXO_TAGGED))
-            tagNode.addMixin(EXO_TAGGED);
-        } else {
-          if (!tagNode.hasProperty(EXO_TOTAL))
-            tagNode.setProperty(EXO_TOTAL, 0);
-        }
+        // Find tag node
+        Node tagNode = getTagNode(userFolksonomyNode, tag);
+
+        // Add symlink and total
+        addTag(tagNode, targetNode);
+
         userFolksonomyNode.getSession().save();
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -169,20 +147,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addGroupsTag(String[] tagsName,
-                           Node documentNode,
-                           String repository,
-                           String workspace,
-                           String[] roles) throws Exception {
-    addGroupsTag(tagsName, documentNode, workspace, roles);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -195,21 +161,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       Node groupFolksonomyNode = getGroupFolksonomyFolder(group, workspace);
       for (String tag : tagsName) {
         try {
-          // find tag node
-          Node tagNode = groupFolksonomyNode.hasNode(tag) ? groupFolksonomyNode.getNode(tag)
-                                                         : groupFolksonomyNode.addNode(tag);
-          // add symlink and total
-          if (targetNode != null && !existSymlink(tagNode, targetNode)) {
-            linkManager.createLink(tagNode, targetNode);
-            long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
-                                                       : 0;
-            tagNode.setProperty(EXO_TOTAL, total + 1);
-            if (!tagNode.isNodeType(EXO_TAGGED))
-              tagNode.addMixin(EXO_TAGGED);
-          } else {
-            if (!tagNode.hasProperty(EXO_TOTAL))
-              tagNode.setProperty(EXO_TOTAL, 0);
-          }
+          // Find tag node
+          Node tagNode = getTagNode(groupFolksonomyNode, tag);
+
+          // Add symlink and total
+          addTag(tagNode, targetNode);
+
           groupFolksonomyNode.getSession().save();
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -219,20 +176,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addPublicTag(String treePath,
-                           String[] tagsName,
-                           Node documentNode,
-                           String repository,
-                           String workspace) throws Exception {
-    addPublicTag(treePath, tagsName, documentNode, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -244,21 +189,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node targetNode = getTargetNode(documentNode);
     for (String tag : tagsName) {
       try {
-        // find tag node
-        Node tagNode = publicFolksonomyTreeNode.hasNode(tag) ? publicFolksonomyTreeNode.getNode(tag)
-                                                            : publicFolksonomyTreeNode.addNode(tag);
-        // add symlink and total
-        if (targetNode != null && !existSymlink(tagNode, targetNode)) {
-          linkManager.createLink(tagNode, targetNode);
-          long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
-                                                     : 0;
-          tagNode.setProperty(EXO_TOTAL, total + 1);
-          if (!tagNode.isNodeType(EXO_TAGGED))
-            tagNode.addMixin(EXO_TAGGED);
-        } else {
-          if (!tagNode.hasProperty(EXO_TOTAL))
-            tagNode.setProperty(EXO_TOTAL, 0);
-        }
+        // Find tag node
+        Node tagNode = getTagNode(publicFolksonomyTreeNode, tag);
+
+        // Add symlink and total
+        addTag(tagNode, targetNode);
+
         publicFolksonomyTreeNode.getSession().save();
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -267,7 +203,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-  }  
+  }
 
   private Node getTargetNode(Node showingNode) throws Exception {
     Node targetNode = null;
@@ -286,18 +222,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void addSiteTag(String siteName,
-                         String[] tagsName,
-                         Node node,
-                         String repository,
-                         String workspace) throws Exception {
-    addSiteTag(siteName, tagsName, node, workspace);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public void addSiteTag(String siteName,
                          String[] tagsName,
                          Node node,
@@ -309,19 +233,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                  tagsName,
                  node,
                  workspace);
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllDocumentsByTag(String tagPath,
-                                         String repository,
-                                         String workspace,
-                                         SessionProvider sessionProvider) throws Exception {
-    return getAllDocumentsByTag(tagPath, workspace, sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -349,16 +262,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       }
     }
     return ret;
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllGroupTags(String[] roles, String repository, String workspace) throws Exception {
-    return getAllGroupTags(roles, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -375,16 +280,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       }
     }
     return new ArrayList<Node>(tagSet);
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllGroupTags(String role, String repository, String workspace) throws Exception {
-    return getAllGroupTags(role, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -396,50 +293,24 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       tagSet.add(nodeIter.nextNode());
     }
     return tagSet;
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllPrivateTags(String userName, String repository, String workspace) throws Exception {
-    Node userFolksonomyNode = getUserFolksonomyFolder(userName);
-    return getAllPrivateTags(userName);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public List<Node> getAllPrivateTags(String userName) throws Exception {
     Node userFolksonomyNode = getUserFolksonomyFolder(userName);
     return getChildNodes(userFolksonomyNode);
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllPublicTags(String treePath, String repository, String workspace) throws Exception {
-    Node publicFolksonomyTreeNode = getNode(workspace, treePath);
-    return getAllPublicTags(treePath, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public List<Node> getAllPublicTags(String treePath, String workspace) throws Exception {
     Node publicFolksonomyTreeNode = getNode(workspace, treePath);
     return getChildNodes(publicFolksonomyTreeNode);
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllSiteTags(String siteName, String repository, String workspace) throws Exception {
-    return getAllSiteTags(siteName, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -448,7 +319,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       createSiteTagPath();
     }
     return getAllPublicTags(sitesTagPath.get(getRepoName()) + "/" + siteName, workspace);
-  }  
+  }
 
   private String getRepoName() {
     try {
@@ -473,35 +344,19 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getAllTagStyle(String repository, String workspace) throws Exception {
-   return getAllTagStyle(workspace);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public List<Node> getAllTagStyle(String workspace) throws Exception {
     String tagStylesPath = nodeHierarchyCreator.getJcrPath(TAG_STYLE_ALIAS);
     Node tagStylesNode = getNode(workspace, tagStylesPath);
     return getChildNodes(tagStylesNode);
-  } 
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public String getTagStyle(String tagStylePath, String repository, String workspace) throws Exception {
-    return getTagStyle(tagStylePath, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public String getTagStyle(String tagStylePath, String workspace) throws Exception {
     Node tagStyleNode = getNode(workspace, tagStylePath);
     return tagStyleNode.getProperty(HTML_STYLE_PROP).getString();
-  }  
+  }
 
   /**
    * Add new TagStylePlugin in plugin_
@@ -512,14 +367,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     if (plugin instanceof TagStylePlugin) {
       plugin_.add((TagStylePlugin) plugin);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    init();
   }
 
   /**
@@ -553,14 +400,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node modifyTagName(String tagPath, String newTagName, String repository, String workspace) throws Exception {
-    return modifyTagName(tagPath, newTagName, workspace);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public Node modifyTagName(String tagPath, String newTagName, String workspace) throws Exception {
     Node oldTagNode = getNode(workspace, tagPath);
     if (oldTagNode.getParent().hasNode(newTagName))
@@ -578,16 +417,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     session.move(tagPath, newPath.toString());
     session.save();
     return getNode(workspace, newPath.toString());
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTag(String tagPath, String repository, String workspace) throws Exception {
-    removeTag(tagPath, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -596,16 +427,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node parentNode = tagNode.getParent();
     tagNode.remove();
     parentNode.getSession().save();
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTagOfDocument(String tagPath, Node document, String repository, String workspace) throws Exception {
-    removeTagOfDocument(tagPath, document, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -635,20 +458,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-  } 
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void updateTagStyle(String styleName,
-                             String tagRange,
-                             String htmlStyle,
-                             String repository,
-                             String workspace) throws Exception {
-    updateTagStyle(styleName, tagRange, htmlStyle, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -659,20 +470,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     styleNode.setProperty(TAG_RATE_PROP, tagRange);
     styleNode.setProperty(HTML_STYLE_PROP, htmlStyle);
     tagStylesNode.getSession().save();
-  }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addTagStyle(String styleName,
-                          String tagRange,
-                          String htmlStyle,
-                          String repository,
-                          String workspace) throws Exception {
-    addTagStyle(styleName, tagRange, htmlStyle, workspace);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -684,20 +483,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     styleNode.setProperty(TAG_RATE_PROP, tagRange);
     styleNode.setProperty(HTML_STYLE_PROP, htmlStyle);
     tagStylesNode.getSession().save();
-  } 
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTagsOfNodeRecursively(Node node,
-                                          String repository,
-                                          String workspace,
-                                          String username,
-                                          String groups) throws Exception {
-    removeTagsOfNodeRecursively(node, workspace, username, groups);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -718,7 +505,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
           removeTagOfDocument(tag.getPath(), child, workspace);
       }
     }
-  } 
+  }
 
   private List<Node> getAllNodes(Node node) throws Exception {
     List<Node> ret = new ArrayList<Node>();
@@ -743,10 +530,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   }
 
   private Node getGroupFolksonomyFolder(String group, String workspace) throws Exception {
-    // code for running
     String groupsPath = nodeHierarchyCreator.getJcrPath(GROUPS_ALIAS);
-    // String folksonomyPath =
-    // nodeHierarchyCreator.getJcrPath(GROUP_FOLKSONOMY_ALIAS);
     String folksonomyPath = "ApplicationData/Tags";
     Node groupsNode = getNode(workspace, groupsPath);
     return groupsNode.getNode(group.substring(1)).getNode(folksonomyPath);
@@ -810,12 +594,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
   }
 
-  @Deprecated
-  public List<Node> getLinkedTagsOfDocument(Node documentNode, String repository, String workspace) throws Exception {
-
-    return getLinkedTagsOfDocument(documentNode, workspace);
-  }
-  
   public List<Node> getLinkedTagsOfDocument(Node documentNode, String workspace) throws Exception {
 
     Set<Node> ret = new HashSet<Node>();
@@ -838,15 +616,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         ret.add(tagNode);
     }
     return new ArrayList<Node>(ret);
-  }  
-
-  @Deprecated
-  public List<Node> getLinkedTagsOfDocumentByScope(int scope,
-                                                   String value,
-                                                   Node documentNode,
-                                                   String repository,
-                                                   String workspace) throws Exception {
-    return getLinkedTagsOfDocumentByScope(scope, value, documentNode, workspace);
   }
 
   public List<Node> getLinkedTagsOfDocumentByScope(int scope,
@@ -891,7 +660,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       }
     }
     return ret;
-  }  
+  }
+
   /**
    * Add new users or groups into tagPermissionPlugin_
    *
@@ -929,28 +699,19 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public boolean canEditTag(int scope, List<String> memberships) {
     if (scope == PUBLIC) {
-      if (tagPermissionList != null)
-        for (String membership : memberships) {
-          if (tagPermissionList.contains(membership))
+      for (String membership : memberships) {
+        if (tagPermissionList.contains(membership))
+          return true;
+        if (membership.contains(":")) {
+          if (tagPermissionList.contains("*" + membership.substring(membership.indexOf(":"))))
             return true;
-          if (membership.contains(":")) {
-            if (tagPermissionList.contains("*" + membership.substring(membership.indexOf(":"))))
-              return true;
-          }
         }
+      }
       return false;
     }
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<String> getAllTagNames(String repository, String workspace, int scope, String value) throws Exception {
-    return getAllTagNames(workspace, scope, value);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -975,7 +736,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       ret.add(tag.getName());
     Collections.sort(ret);
     return ret;
-  }  
+  }
 
   private void createSiteTagPath() throws Exception {
     if (sitesTagPath.get(getRepoName()) == null) {
@@ -1007,4 +768,23 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
   }
 
+  private Node getTagNode(Node folksonomyHome, String tagName) throws Exception {
+    Node tagNode = null;
+    if (folksonomyHome.hasNode(tagName)) {
+      tagNode = folksonomyHome.getNode(tagName);
+    } else {
+      tagNode = folksonomyHome.addNode(tagName);
+      if (!tagNode.isNodeType(EXO_TAGGED)) tagNode.addMixin(EXO_TAGGED);
+      tagNode.setProperty(EXO_TOTAL, 0);
+    }
+    return tagNode;
+  }
+
+  private void addTag(Node tagNode, Node targetNode) throws Exception {
+    if (!existSymlink(tagNode, targetNode)) {
+      linkManager.createLink(tagNode, targetNode);
+      long total = tagNode.getProperty(EXO_TOTAL).getLong();
+      tagNode.setProperty(EXO_TOTAL, total + 1);
+    }
+  }
 }
