@@ -62,8 +62,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -260,7 +260,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    */
   public void newJCRTemplateResourceResolver() {
     try {
-      jcrTemplateResourceResolver_ = new JCRResourceResolver(repositoryName, getDMSWorkspace()) ;
+      jcrTemplateResourceResolver_ = new JCRResourceResolver(getDMSWorkspace()) ;
     } catch(Exception e) {
       Utils.createPopupMessage(this, "UIFCCForm.msg.new-jcr-template", null, ApplicationMessage.ERROR);
     }

@@ -116,11 +116,6 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   Session getSession() throws Exception {
     return WCMCoreUtils.getSystemSessionProvider().getSession(workspace, getRepository());
   }
-
-  @Deprecated
-  public ManageableRepository getRepository(String repositoryName) throws Exception{
-    return getRepository();
-  }
   
   public ManageableRepository getRepository() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);

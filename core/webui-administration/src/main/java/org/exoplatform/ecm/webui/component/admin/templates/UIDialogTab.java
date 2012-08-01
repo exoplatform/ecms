@@ -73,11 +73,6 @@ public class UIDialogTab extends UIContainer {
   }
 
   public List<String> getListDialog() { return listDialog_ ; }
-
-  @Deprecated
-  public void updateGrid(String nodeName, String repository) throws Exception {
-    updateGrid(nodeName);
-  }
   
   public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;

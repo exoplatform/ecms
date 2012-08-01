@@ -144,8 +144,6 @@ public class Utils {
   final static public String EXO_TITLE = "exo:title";
   final static public String EXO_SUMMARY = "exo:summary";
   final static public String EXO_RELATION = "exo:relation";
-  @Deprecated
-  final static public String EXO_TAXANOMY = "exo:taxonomy";
   final static public String EXO_TAXONOMY = "exo:taxonomy";
   final static public String EXO_IMAGE = "exo:image";
   final static public String EXO_ARTICLE = "exo:article";
@@ -297,13 +295,6 @@ public class Utils {
 
     }
     return buffer.toString();
-  }
-
-  @Deprecated
-  public static List<String> getListAllowedFileType(Node currentNode,
-                                                    String repository,
-                                                    TemplateService templateService) throws Exception {
-    return getListAllowedFileType(currentNode, templateService);
   }
 
   public static List<String> getListAllowedFileType(Node currentNode,
@@ -490,12 +481,6 @@ public class Utils {
       return null;
     }
     return null;
-  }
-
-  @Deprecated
-  public static Node findNodeByUUID(String repository, String uuid)
-      throws Exception {
-    return findNodeByUUID(uuid);
   }
 
   public static Node findNodeByUUID(String uuid) throws Exception {

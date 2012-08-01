@@ -331,17 +331,6 @@ public class UIPresentationContainer extends UIContainer{
   }
 
   /**
-   *
-   *
-   * @return
-   * @throws RepositoryException
-   */
-  @Deprecated
-  public String getPrintUrl() throws RepositoryException{
-    return getPrintUrl(null);
-  }
-
-  /**
    * Get the print's page URL
    *
    * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
@@ -368,11 +357,6 @@ public class UIPresentationContainer extends UIContainer{
     nodeURL.setQueryParameterValue("isPrint", "true");
     nodeURL.setQueryParameterValue("noadminbar", "true");
     return nodeURL.toString();
-  }
-
-  @Deprecated
-  public String getQuickEditLink(){
-    return getQuickEditLink(null);
   }
 
   /**

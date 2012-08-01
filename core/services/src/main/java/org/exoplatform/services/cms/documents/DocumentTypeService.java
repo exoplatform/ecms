@@ -52,7 +52,6 @@ public interface DocumentTypeService {
    */
   public List<Node> getAllDocumentsByDocumentType(String documentType,
                                                   String workspace,
-                                                  String repository,
                                                   SessionProvider sessionProvider) throws Exception;
 
   /**
@@ -65,7 +64,6 @@ public interface DocumentTypeService {
    * @throws Exception
    */
   public List<Node> getAllDocumentsByType(String workspace,
-                                          String repository,
                                           SessionProvider sessionProvider,
                                           String mimeType) throws Exception;
 
@@ -79,7 +77,6 @@ public interface DocumentTypeService {
    * @throws Exception
    */
   public List<Node> getAllDocumentsByType(String workspace,
-                                          String repository,
                                           SessionProvider sessionProvider,
                                           String[] mimeTypes) throws Exception;
 
@@ -93,23 +90,6 @@ public interface DocumentTypeService {
    * @throws Exception
    */
   public List<Node> getAllDocumentsByUser(String workspace,
-                                          SessionProvider sessionProvider,
-                                          String[] mimeTypes,
-                                          String userName) throws Exception;
-
-  /**
-   * Get all document type by user
-   * @param workspace The name of workspace will be used to get documents
-   * @param repository The name of repository will be used to get documents
-   * @param sessionProvider
-   * @param mimeTypes The array of mimetype(For example: ["image/jpg", "image/png"])
-   * @param userName The name of current user
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
-   * @return List<Node> all documents by mime type
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentsByUser(String workspace,
-                                          String repository,
                                           SessionProvider sessionProvider,
                                           String[] mimeTypes,
                                           String userName) throws Exception;
@@ -135,25 +115,6 @@ public interface DocumentTypeService {
                                                  SessionProvider sessionProvider,
                                                  String userName) throws Exception;
 
-  /**
-   * Get all contents type document
-   *
-   * @param documentType Contents type
-   * @param workspace The name of workspace will be used to get documents
-   * @param repository The name of repository will be used to get documents
-   * @param sessionProvider
-   * @param userName
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use
-   *             {@link #getAllDocumentByContentsType(documentType, workspace, sessionProvider, userName)}
-   *             instead.
-   * @return List<Node> all contents type document
-   * @throws Exception
-   */
-  public List<Node> getAllDocumentByContentsType(String documentType,
-                                                 String workspace,
-                                                 String repository,
-                                                 SessionProvider sessionProvider,
-                                                 String userName) throws Exception;
 
   /**
    * Get mime types by document type

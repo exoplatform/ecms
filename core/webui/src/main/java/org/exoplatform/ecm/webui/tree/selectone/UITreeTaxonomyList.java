@@ -109,11 +109,6 @@ public class UITreeTaxonomyList extends UIForm {
       return display;
     }
   }
-
-  @Deprecated
-  public void setTaxonomyTreeList(String repository) throws Exception {
-    setTaxonomyTreeList();
-  }
   
   public void setTaxonomyTreeList() throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);

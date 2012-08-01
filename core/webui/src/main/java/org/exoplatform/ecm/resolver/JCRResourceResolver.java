@@ -44,35 +44,6 @@ public class JCRResourceResolver extends ResourceResolver {
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(JCRResourceResolver.class.getName());
   private TemplateService templateService;
-
-  /**
-   * Instantiates a new jCR resource resolver
-   * to load template that stored as a property of node in jcr
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param propertyName the property name
-   * @deprecated Since WCM 2.1 you don't need to add the property's name as a parameter anymore
-   */
-  @Deprecated
-  public JCRResourceResolver(String repository,String workspace,String propertyName) {
-    this(repository, workspace);
-  }
-
-  /**
-   * Instantiates a new jCR resource resolver
-   * to load template that stored as a property of node in jcr
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param propertyName the property name
-   */
-  @Deprecated
-  public JCRResourceResolver(String repository,String workspace) {
-    this.repository = repository ;
-    this.workspace = workspace;
-    templateService = WCMCoreUtils.getService(TemplateService.class);
-  }
   
   /**
    * Instantiates a new jCR resource resolver to load template that stored as a

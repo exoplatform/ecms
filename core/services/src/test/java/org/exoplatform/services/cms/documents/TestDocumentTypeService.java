@@ -115,8 +115,7 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     documentNode.getSession().save();
     String supportedType = "Video";
     List<Node> expectedList = documentTypeService_
-                  .getAllDocumentsByDocumentType(supportedType, COLLABORATION_WS,
-        REPO_NAME, createSessionProvider());
+                  .getAllDocumentsByDocumentType(supportedType, COLLABORATION_WS, createSessionProvider());
     assertNotNull(expectedList);
     Iterator<Node> iterNodes = expectedList.iterator();
     Node expectedNode = null;
@@ -146,8 +145,7 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS,
-        REPO_NAME, createSessionProvider(), "image/gif");
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), "image/gif");
     assertNotNull(expectedList);
     assertEquals(3, expectedList.size());
     Iterator<Node> iterNodes = expectedList.iterator();
@@ -179,8 +177,7 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS,
-        REPO_NAME, createSessionProvider(), mimeTypes);
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), mimeTypes);
     Iterator<Node> expectedIter  = expectedList.iterator();
     Node expectedNode = null;
     while( expectedIter.hasNext()) {

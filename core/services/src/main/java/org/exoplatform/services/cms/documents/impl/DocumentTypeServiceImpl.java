@@ -97,14 +97,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     Collections.sort(supportedType);
     return supportedType;
   }
-
-  @Deprecated
-  public List<Node> getAllDocumentsByDocumentType(String documentType,
-                                                  String workspace,
-                                                  String repository,
-                                                  SessionProvider sessionProvider) throws Exception {
-    return getAllDocumentsByType(workspace, repository, sessionProvider, getMimeTypes(documentType));
-  }
   
   public List<Node> getAllDocumentsByDocumentType(String documentType,
                                                   String workspace,
@@ -112,35 +104,11 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return getAllDocumentsByType(workspace, sessionProvider, getMimeTypes(documentType));
   }
 
-  @Deprecated
-  public List<Node> getAllDocumentsByType(String workspace,
-                                          String repository,
-                                          SessionProvider sessionProvider,
-                                          String mimeType) throws Exception {
-    return getAllDocumentsByType(workspace, repository, sessionProvider, new String[] { mimeType });
-  }
-  
   public List<Node> getAllDocumentsByType(String workspace,
                                           SessionProvider sessionProvider,
                                           String mimeType) throws Exception {
     return getAllDocumentsByType(workspace, sessionProvider, new String[] { mimeType });
   }  
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.cms.documents.DocumentTypeService#
-   * getAllDocumentsByUser(java.lang.String, java.lang.String,
-   * org.exoplatform.services.jcr.ext.common.SessionProvider,
-   * java.lang.String[], java.lang.String)
-   */
-  @Deprecated
-  public List<Node> getAllDocumentsByUser(String workspace,
-                                          String repository,
-                                          SessionProvider sessionProvider,
-                                          String[] mimeTypes,
-                                          String userName) throws Exception {
-    return getAllDocumentsByUser(workspace, sessionProvider, mimeTypes, userName);
-  }
 
   public List<Node> getAllDocumentsByUser(String workspace,
                                           SessionProvider sessionProvider,
@@ -166,14 +134,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return resultList;
   }
 
-  @Deprecated
-  public List<Node> getAllDocumentsByType(String workspace,
-                                          String repository,
-                                          SessionProvider sessionProvider,
-                                          String[] mimeTypes) throws Exception {
-    return getAllDocumentsByUser(workspace, repository, sessionProvider, mimeTypes, null);
-  }
-  
   public List<Node> getAllDocumentsByType(String workspace,
                                           SessionProvider sessionProvider,
                                           String[] mimeTypes) throws Exception {
@@ -204,20 +164,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
       }
     }
     return false;
-  }
-
-  /**
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use
-   *             {@link #getAllDocumentByContentsType(documentType, workspace, sessionProvider, userName)}
-   *             instead.
-   */
-  @Deprecated
-  public List<Node> getAllDocumentByContentsType(String documentType,
-                                                 String workspace,
-                                                 String repository,
-                                                 SessionProvider sessionProvider,
-                                                 String userName) throws Exception {
-    return getAllDocumentByContentsType(documentType, workspace, sessionProvider, userName);
   }
 
   public List<Node> getAllDocumentByContentsType(String documentType,

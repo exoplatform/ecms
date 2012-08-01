@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.search.UIWCMSearchPortlet;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
@@ -216,7 +217,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
     List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(portletName,
                                                                                 category,
-                                                                                Utils.getSessionProvider());
+                                                                                WCMCoreUtils.getUserSessionProvider());
     for (Node templateNode : templateNodeList) {
       String templateName = templateNode.getName();
       String templatePath = templateNode.getPath();

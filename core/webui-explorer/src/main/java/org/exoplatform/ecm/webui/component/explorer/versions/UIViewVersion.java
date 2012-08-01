@@ -211,18 +211,6 @@ public class UIViewVersion extends UIBaseNodePresentation {
     return attachments;
   }
 
-  /**
-   * use getViewableLink(Node attNode, Parameter[] params) instead
-   * @param attNode
-   * @param params
-   * @return
-   * @throws Exception
-   */
-  @Deprecated
-  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
-    return getViewableLink(attNode, params);
-  }
-
   public String getViewableLink(Node attNode, Parameter[] params)
       throws Exception {
     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);

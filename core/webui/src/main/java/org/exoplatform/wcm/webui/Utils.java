@@ -57,7 +57,6 @@ import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
@@ -655,26 +654,6 @@ public class Utils {
   public static <T> T getService(Class<T> clazz) {
     UIPortalApplication portalApplication = Util.getUIPortalApplication();
     return clazz.cast(portalApplication.getApplicationComponent(clazz));
-  }
-
-  @Deprecated
-  /**
-   * Gets the session provider. Try to use WCMCoreUtils.getUserSessionProvider().
-   *
-   * @return the session provider
-   */
-  public static SessionProvider getSessionProvider() {
-    return WCMCoreUtils.getUserSessionProvider();
-  }
-
-  @Deprecated
-  /**
-   * Gets the system session provider. Try to use WCMCoreUtils.getSystemSessionProvider().
-   *
-   * @return the system session provider
-   */
-  public static SessionProvider getSystemSessionProvider() {
-    return WCMCoreUtils.getSystemSessionProvider();
   }
 
   /**

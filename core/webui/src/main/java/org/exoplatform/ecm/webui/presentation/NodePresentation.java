@@ -123,15 +123,6 @@ public interface NodePresentation {
   public List<Node> getAttachments() throws Exception;
   
   /**
-   * @param attNode
-   * @param params
-   * @return
-   * @throws Exception
-   */
-  @Deprecated
-  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
-
-  /**
    * Gets the viewable link.
    *
    * @return the viewable URL

@@ -246,11 +246,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     return pcontext.getRequest().getPreferences();
   }
-
-  @Deprecated
-  public DriveData getUserDrive(String repoName, String userType) throws Exception {
-    return getUserDrive(userType);
-  }
   
   public DriveData getUserDrive(String userType) throws Exception {
     ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
@@ -262,11 +257,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     }
     return null;
   }  
-
-  @Deprecated
-  public boolean canUseConfigDrive(String repoName, String driveName) throws Exception {
-    return canUseConfigDrive(driveName);
-  }
   
   public boolean canUseConfigDrive(String driveName) throws Exception {
     ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);

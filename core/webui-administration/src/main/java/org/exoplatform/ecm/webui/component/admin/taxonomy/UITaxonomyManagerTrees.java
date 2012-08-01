@@ -92,22 +92,11 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiPopup.setShow(true);
   }
 
-  @Deprecated
-  public String getSystemWorkspaceName(String repository) throws RepositoryException {
-    return getSystemWorkspaceName();
-  }
-  
   public String getSystemWorkspaceName() throws RepositoryException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }  
-  
-
-  @Deprecated
-  public String getDmsSystemWorkspaceName(String repository) {
-    return getDmsSystemWorkspaceName();
-  }
   
   public String getDmsSystemWorkspaceName() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);

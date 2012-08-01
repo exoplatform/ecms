@@ -83,11 +83,6 @@ public class UIDriveList extends UIPagingGridDecorator {
   }
 
   public List getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
-
-  @Deprecated
-  public List<DriveData> getDrives(String repoName) throws Exception {
-    return getDrives();
-  }
   
   public String getRequestContextName() {
     return WCMCoreUtils.getRestContextName();

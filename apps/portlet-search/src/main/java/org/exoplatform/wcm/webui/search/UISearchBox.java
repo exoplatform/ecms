@@ -78,23 +78,6 @@ public class UISearchBox extends UIForm {
   public String getTemplate() {
     return templatePath;
   }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
-   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
-   */
-  @Deprecated
-  public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    try {
-      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(workspace);
-    } catch (Exception e) {
-      return null;
-    }
-  }
   
   public ResourceResolver getTemplateResourceResolver() {
     try {

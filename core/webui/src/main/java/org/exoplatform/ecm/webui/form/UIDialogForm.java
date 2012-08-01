@@ -238,12 +238,6 @@ public class UIDialogForm extends UIForm {
     this.listTaxonomy = listTaxonomy;
   }
 
-
-  @Deprecated
-  public void setStoredLocation(String repository, String workspace, String storedPath) {
-    setStoredLocation(workspace, storedPath);
-  }
-
   public void setStoredLocation(String workspace, String storedPath) {
     try {
     this.repositoryName = getApplicationComponent(RepositoryService.class).getCurrentRepository()
@@ -1700,6 +1694,10 @@ public class UIDialogForm extends UIForm {
   }
 
   @Deprecated
+  /**
+   * TODO: This method still used in dialog1.gtmpl of podcast
+   * @return
+   */
   public boolean dataRemoved() { return dataRemoved_; }
 
   @Deprecated

@@ -170,21 +170,6 @@ public class UIPresentation extends UIBaseNodePresentation {
     this.templatePath = templatePath;
   }
 
-
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
-   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
-   */
-  @Deprecated
-  public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(workspace);
-  }
-
   public ResourceResolver getTemplateResourceResolver() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
@@ -234,18 +219,6 @@ public class UIPresentation extends UIBaseNodePresentation {
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getUIComponent(mimeType, this);
-  }
-
-  /**
-   * use getViewableLink(Node attNode, Parameter[] params) instead
-   * @param attNode
-   * @param params
-   * @return
-   * @throws Exception
-   */
-  @Deprecated
-  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
-    return getViewableLink(attNode, params);
   }
 
   /**

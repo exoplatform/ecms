@@ -35,14 +35,12 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -202,16 +200,6 @@ public class RESTImagesRendererService implements ResourceContainer{
        return false;
      }
 
-  }
-
-  @Deprecated
-  public String generateURI(Node file) throws Exception {
-    return WCMCoreUtils.generateImageURI(file, null);
-  }
-
-  @Deprecated
-  public String generateURI(Node file, String propertyName) throws Exception {
-    return WCMCoreUtils.generateImageURI(file, propertyName);
   }
 
 }

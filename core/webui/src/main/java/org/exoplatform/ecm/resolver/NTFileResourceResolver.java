@@ -36,29 +36,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class NTFileResourceResolver extends JCRResourceResolver {
 
   /**
-   * Instantiates a new nT file resource resolver to load
-   * template that stored as nt:file in jcr
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param propertyName the property name
-   */
-  @Deprecated
-  public NTFileResourceResolver(String repository, String workspace, String propertyName) {
-    super(repository, workspace, propertyName);
-  }
-
-  /**
    * Instantiates a new nT file resource resolver.
    *
-   * @param repository the repository
    * @param workspace the workspace
-   */
-  @Deprecated
-  public NTFileResourceResolver(String repository, String workspace) {
-    super(repository,workspace,null);
-  }
-  
+   */  
   public NTFileResourceResolver(String workspace) {
     super(workspace);
   }

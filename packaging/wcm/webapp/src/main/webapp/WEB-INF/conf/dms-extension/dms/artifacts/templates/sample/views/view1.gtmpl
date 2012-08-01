@@ -161,7 +161,7 @@
 						  for(att in attachments) {
 						  	wsName = att.getSession().getWorkspace().getName();
   							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
+  							def viewAttachmentLink =  uicomponent.getViewableLink(att, params);
   							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 						%>
 							<div style="font-size: 12px; padding: 10px;" class=" ClearFix">

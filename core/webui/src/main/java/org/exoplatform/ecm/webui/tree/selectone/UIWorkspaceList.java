@@ -32,7 +32,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -91,11 +90,6 @@ public class UIWorkspaceList extends UIForm {
   public void setShowRootPathSelect(boolean isRender) {
     UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO);
     uiInputAction.setRendered(isRender);
-  }
-
-  @Deprecated
-  public void setWorkspaceList(String repository) throws Exception {
-    setWorkspaceList();
   }
   
   public void setWorkspaceList() throws Exception {

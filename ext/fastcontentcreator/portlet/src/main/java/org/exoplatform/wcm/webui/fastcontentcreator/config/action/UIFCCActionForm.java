@@ -22,6 +22,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector;
@@ -39,6 +40,7 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet;
@@ -54,8 +56,8 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -494,7 +496,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
                                                              wsName,
                                                              rootPath);
         ((UIOneNodePathSelector) uiComp).setShowRootPathSelect(true);
-        ((UIOneNodePathSelector) uiComp).init(Utils.getSessionProvider());
+        ((UIOneNodePathSelector) uiComp).init(WCMCoreUtils.getUserSessionProvider());
       } else if (uiComp instanceof UINodeTypeSelector) {
         ((UINodeTypeSelector)uiComp).setRepositoryName(repositoryName);
           UIFormMultiValueInputSet uiFormMultiValueInputSet = fastContentCreatorActionForm.getChildById(fieldName);

@@ -314,11 +314,6 @@ public class UIJCRExplorer extends UIContainer {
     return getCurrentDriveWorkspace();
   }
 
-  @Deprecated
-  public void setBackNodePath(String previousPath) throws Exception {
-    setBackNodePath(null, previousPath);
-  }
-
   /**
    * Tells to go back to the given location
    */
@@ -370,18 +365,10 @@ public class UIJCRExplorer extends UIContainer {
   public String getLanguage() { return language_ ; }
 
   public LinkedList<String> getNodesHistory() { return nodesHistory_ ; }
-  @Deprecated
-  public void setNodesHistory(LinkedList<String> h) {nodesHistory_ = h;}
 
   public LinkedList<String> getWorkspacesHistory() { return wsHistory_; }
-  @Deprecated
-  public void setWorkspaceHistory(LinkedList<String> wsHistory) { wsHistory_ =  wsHistory; }
 
   public Collection<HistoryEntry> getHistory() { return addressPath_.values() ; }
-  @Deprecated
-  public Set<String> getAddressPath() { return addressPath_.keySet() ; }
-  @Deprecated
-  public void setAddressPath(Set<String> s) {} ;
 
   public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }
 
@@ -810,11 +797,6 @@ public class UIJCRExplorer extends UIContainer {
 
   public String previousWsName() { return wsHistory_.removeLast(); }
 
-  @Deprecated
-  public void setSelectNode(String uri, Session session) throws Exception {
-    setSelectNode(session.getWorkspace().getName(), uri);
-  }
-
   public void setSelectNode(String workspaceName, String uri) throws Exception {
     String lastWorkspaceName = setTargetWorkspaceProperties(workspaceName);
     setSelectNode(uri);
@@ -1197,20 +1179,6 @@ public class UIJCRExplorer extends UIContainer {
         this.refreshExplorer();
       }
     }
-  }
-
-  @Deprecated
-  public String getPreferencesPath() {
-    String prefPath = driveData_.getHomePath() ;
-    if (prefPath == null || prefPath.length() == 0 || prefPath.equals("/"))return "" ;
-    return prefPath ;
-  }
-
-  @Deprecated
-  public String getPreferencesWorkspace() {
-    String workspaceName = driveData_.getWorkspace() ;
-    if(workspaceName == null || workspaceName.length() == 0) return "" ;
-    return workspaceName ;
   }
 
   public static class HistoryEntry {

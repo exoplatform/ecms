@@ -16,6 +16,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -23,8 +24,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -66,7 +67,7 @@ public class UIContentPropertySelector extends UIForm{
     UIFormSelectBox uiSelect = new UIFormSelectBox(METADATA_TYPE, METADATA_TYPE, options);
     uiSelect.setOnChange("ChangeMetadataType");
     addUIFormInput(uiSelect);
-    SessionProvider sessionProvider = Utils.getSystemSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     RepositoryService repoService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manRepository = repoService.getCurrentRepository();
     //String workspaceName = manRepository.getConfiguration().getSystemWorkspaceName();
@@ -91,7 +92,7 @@ public class UIContentPropertySelector extends UIForm{
 
   public void renderProperties(String metadata) throws Exception {
     properties.clear() ;
-    SessionProvider sessionProvider = Utils.getSystemSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     RepositoryService repoService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manRepository = repoService.getCurrentRepository();
     String workspaceName = manRepository.getConfiguration().getSystemWorkspaceName();

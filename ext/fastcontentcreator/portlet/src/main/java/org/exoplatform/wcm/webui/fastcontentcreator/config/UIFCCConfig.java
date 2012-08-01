@@ -38,6 +38,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.container.UIFormFieldSet;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
@@ -146,7 +147,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     fastContentCreatorActionList.init(preferenceMode);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository repository = repositoryService.getCurrentRepository();
-    Session session = Utils.getSessionProvider().getSession(preferenceWorkspace, repository);
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
       fastContentCreatorActionList.updateGrid((Node) session.getItem(preferencePath),
                                               fastContentCreatorActionList.getChild(UIGrid.class)
                                                                           .getUIPageIterator()
@@ -233,7 +234,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     try {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
       ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = Utils.getSessionProvider().getSession(workspaceName, repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repository);
       Node currentNode = null ;
       UIFormSelectBox uiSelectTemplate = getUIFormSelectBox(UIFCCConstant.TEMPLATE_FORM_SELECTBOX);
       List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
@@ -338,7 +339,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     try {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
       ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = Utils.getSessionProvider().getSession(preferenceWorkspace, repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
       UIFCCActionList uiFCCActionList = ((UIFormFieldSet) getChildById("UIFCCActionField")).getChild(UIFCCActionList.class);
       uiFCCActionList.updateGrid((Node) session.getItem(savedLocationPath),
                                  uiFCCActionList.getChild(UIGrid.class)
@@ -413,7 +414,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       uiOneNodePathSelector.setIsDisable(preferenceWorkspace, true) ;
       uiOneNodePathSelector.setShowRootPathSelect(true) ;
       uiOneNodePathSelector.setRootNodeLocation(preferenceRepository, preferenceWorkspace, "/");
-      uiOneNodePathSelector.init(Utils.getSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
       uiOneNodePathSelector.setSourceComponent(fastContentCreatorConfig,
                                                new String[] { UIFCCConstant.LOCATION_FORM_STRING_INPUT });
       Utils.createPopupWindow(fastContentCreatorConfig, uiOneNodePathSelector, UIFCCConstant.SELECTOR_POPUP_WINDOW, 610);

@@ -54,7 +54,6 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
@@ -111,8 +110,6 @@ public class UISearchResult extends UIContainer {
   static private int PAGE_SIZE = 10;
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
-  @Deprecated
-  private boolean isTaxonomyNode = false;
   private String workspaceName = null;
   private String currentPath = null;
   private String keyword ="";
@@ -170,27 +167,6 @@ public class UISearchResult extends UIContainer {
   }
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  @Deprecated
-  public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
-    this.isTaxonomyNode = isTaxonomyNode;
-    this.workspaceName = workspaceName;
-    this.currentPath = currentPath;
-  }
-  @Deprecated
-  public boolean isTaxonomyNode() { return isTaxonomyNode; }
-  @Deprecated
-  public Node getSymlinkNode(Node targetNode) throws Exception {
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
-    String queryStatement =
-      "select * from exo:taxonomyLink where jcr:path like '" + currentPath + "/%' " +
-          "and exo:uuid='"+targetNode.getUUID()+"' " +
-          "and exo:workspace='"+targetNode.getSession().getWorkspace().getName()+"' order by exo:primaryType DESC";
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery(queryStatement, Query.SQL);
-    if(query.execute().getNodes().getSize() > 0) return query.execute().getNodes().nextNode();
-    return null;
-  }
 
   public void updateGrid() throws Exception {
     TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()

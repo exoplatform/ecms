@@ -181,9 +181,6 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
 
   public String getRepositoryName() { return repositoryName; }
 
-  @Deprecated
-  public String getTenmplateNodeType() { return getTemplateNodeType(); }
-
   public String getTemplateNodeType() { return nodeTypeName_; }
 
   private void setPath(String scriptPath) {
