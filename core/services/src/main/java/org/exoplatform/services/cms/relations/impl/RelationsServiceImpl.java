@@ -126,7 +126,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    */
   public void removeRelation(Node node, String relationPath) throws Exception {
     List<Value> vals = new ArrayList<Value>();
-    if (!"*".equals(relationPath)) {
+    if (!"*".equals(relationPath) && node.hasProperty(RELATION_PROP)) {
       SessionProvider provider = SessionProvider.createSystemProvider() ;
       Property relations = node.getProperty(RELATION_PROP);
       if (relations != null) {
@@ -142,10 +142,10 @@ public class RelationsServiceImpl implements RelationsService, Startable {
         if (uuid2Remove == null) return;
       }
       provider.close();
+      if(vals.size() == 0) node.removeMixin(RELATION_MIXIN);
+      else node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
+      node.save() ;
     }
-    if(vals.size() == 0) node.removeMixin(RELATION_MIXIN);
-    else node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
-    node.save() ;
   }  
 
   /**
