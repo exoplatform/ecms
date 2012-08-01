@@ -38,6 +38,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.Validate;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
@@ -108,39 +109,21 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   }
 
   private void processRemoveMultiple(String[] nodePaths, Event<?> event) throws Exception {
-    Node node = null;
-    String wsName = null;
-    String nodePath = null;
-    Session session = null;
     Map<String, Node> mapNode = new HashMap<String, Node>();
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     for (int i = 0; i < nodePaths.length; i++) {
-      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
-      // prepare to remove
-      if (matcher.find()) {
-        wsName = matcher.group(1);
-        nodePath = matcher.group(2);
-        try {
-          session = uiExplorer.getSessionByWorkspace(wsName);
-          // Use the method getNodeByPath because it is link aware
-          node = uiExplorer.getNodeByPath(nodePath, session, false);
-          // Reset the session to manage the links that potentially change of
-          // workspace
-          session = node.getSession();
-          // Reset the workspace name to manage the links that potentially
-          // change of workspace
-          wsName = session.getWorkspace().getName();
-          mapNode.put(nodePath, node);
-        } catch (PathNotFoundException path) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
-              ApplicationMessage.WARNING));
-          
-        } catch (Exception e) {
-          JCRExceptionManager.process(uiApp, e);
-        }
-      } else {
-        throw new IllegalArgumentException("The ObjectId is invalid '" + nodePath + "'");
+      try {
+        Node node = this.getNodeByPath(nodePaths[i]);
+        
+        // Prepare to remove
+        Validate.isTrue(node != null, "The ObjectId is invalid '" + nodePaths[i] + "'");
+        mapNode.put(node.getPath(), node);
+      } catch (PathNotFoundException path) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
       }
     }
 
@@ -450,38 +433,22 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     if (nodePath.indexOf(";") > -1) {
       processRemoveMultiple(nodePath.split(";"), event);
     } else {
-      String wsName = null;
-      Session session = null;
-      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
       UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-      // prepare to remove
-      if (matcher.find()) {
-        wsName = matcher.group(1);
-        nodePath = matcher.group(2);
-        try {
-          // Use the method getNodeByPath because it is link aware
-          session = uiExplorer.getSessionByWorkspace(wsName);
-          // Use the method getNodeByPath because it is link aware
-          Node node = uiExplorer.getNodeByPath(nodePath, session, false);
-          // Reset the session to manage the links that potentially change of
-          // workspace
-          session = node.getSession();
-          // Reset the workspace name to manage the links that potentially
-          // change of workspace
-          wsName = session.getWorkspace().getName();
-          // Use the method getNodeByPath because it is link aware
-          node = uiExplorer.getNodeByPath(nodePath, session, false);
-
-          processRemoveOrMoveToTrash(nodePath, node, event, false, checkToMoveToTrash);
-        } catch (PathNotFoundException path) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
-              ApplicationMessage.WARNING));
-          
-          return;
-        } catch (Exception e) {
-          JCRExceptionManager.process(uiApp, e);
-          return;
+      
+      // Prepare to remove
+      try {
+        Node node = this.getNodeByPath(nodePath);
+        if (node != null) {
+          processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }
+      } catch (PathNotFoundException path) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
+              ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
       }
     }
     uiExplorer.updateAjax(event);
@@ -589,6 +556,23 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     return listNodesHaveRelations;
   }
 
+  /**
+   * Get node by node path.
+   * 
+   * @param nodePath node path of specific node with syntax [workspace:node path]
+   * @return Node of specific node nath
+   * @throws Exception
+   */
+  private Node getNodeByPath(String nodePath) throws Exception {
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
+    if (!matcher.find()) return null;
+    String wsName = matcher.group(1);
+    nodePath = matcher.group(2);
+    Session session = uiExplorer.getSessionByWorkspace(wsName);
+    return uiExplorer.getNodeByPath(nodePath, session, false);
+  }
+  
   private String getGroups() throws Exception {
     StringBuilder ret = new StringBuilder();
     for (String group : Utils.getGroups())
