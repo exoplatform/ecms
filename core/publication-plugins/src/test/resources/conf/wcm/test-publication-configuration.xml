@@ -22,6 +22,32 @@
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
   
+    <component>
+      <key>org.exoplatform.services.resources.ResourceBundleService</key>
+      <type>org.exoplatform.services.resources.impl.SimpleResourceBundleService</type>
+        <init-params>
+          <values-param>
+            <name>classpath.resources</name>
+            <description>The resources  that start with the following package name should be load from file system</description>
+            <value>locale.portlet.publication</value>
+          </values-param>
+
+          <values-param>
+            <name>init.resources</name>
+            <description>Store the following resources into the db for  the first launch </description>
+            <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>
+            <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+          </values-param>
+          <values-param>
+            <name>portal.resource.names</name>
+            <description>The properties files of  the portal ,  those file will be merged
+              into one ResourceBundle properties </description>
+            <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>            
+            <value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+          </values-param>
+        </init-params>
+    </component>
+  
    <component>
     <key>org.exoplatform.services.cms.documents.TrashService</key>  
     <type>org.exoplatform.services.cms.documents.impl.TrashServiceImpl</type>
@@ -457,5 +483,31 @@
     </component-plugin>
   </external-component-plugins>
   
+	<external-component-plugins>
+    <!-- The full qualified name of the ResourceBundleService -->
+		<target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <!-- The name of the plugin -->
+      <name>ResourceBundle Plugin</name>
+      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
+      <set-method>addResourceBundle</set-method>
+      <!-- The full qualified name of the BaseResourceBundlePlugin -->
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+					<name>init.resources</name>
+					<description>Store the following resources into the db for the first launch </description>
+          <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>					
+					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+				</values-param>
+        <values-param>
+					<name>portal.resource.names</name>
+					<description>Store the following resources into the db for the first launch </description>
+          <value>locale.services.publication.lifecycle.stageversion.StageAndVersionPublication</value>					
+					<value>locale.services.publication.lifecycle.simple.SimplePublication</value>
+				</values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
 
 </configuration>

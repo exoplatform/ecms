@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <StageAndVersionPublicationPlugin>
+      <changeState>
+        <enrolled>Nội dung đã được đưa vào quy trình xuất bản</enrolled>
+        <draft>Nội dung đang là bản nháp</draft>
+        <published>Nội dung đã được xuất bản</published>
+        <obsolete>Nội dung đã bị hết hạn</obsolete>
+      </changeState>
+    </StageAndVersionPublicationPlugin>
+  </PublicationService>
+</bundle>

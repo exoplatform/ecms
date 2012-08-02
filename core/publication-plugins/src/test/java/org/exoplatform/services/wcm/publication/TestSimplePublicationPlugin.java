@@ -19,11 +19,8 @@ package org.exoplatform.services.wcm.publication;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import javax.jcr.Node;
@@ -32,12 +29,10 @@ import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
-import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.testng.annotations.AfterMethod;
@@ -137,18 +132,13 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
     assertNotNull(plugin_.getStateImage(node_, new Locale("en")));
   }
   
-//
-//  /**
-//  * tests getting possible states 
-//  */
-//  @Test
-//  public void testGetPossibleStates() throws Exception {
-//    List<String> states = Arrays.asList(plugin_.getPossibleStates());
-//    assertTrue(states.contains(ENROLLED));
-//    assertTrue(states.contains(PUBLISHED));
-//    assertTrue(states.contains(NON_PUBLISHED));
-//    plugin_.getLocalizedAndSubstituteMessage(
-//                   new Locale("en"), "PublicationService.test.test", new String[]{});
-//  }
+  /**
+   * tests getLocalizedAndSubstituteLog
+   */
+  @Test
+  public void testGetLocalizedAndSubstituteLog() throws Exception {
+    assertEquals("The web content has been published", plugin_.getLocalizedAndSubstituteMessage(
+         new Locale("en"), "PublicationService.SimplePublicationPlugin.changeState.published", new String[]{}));
+  }
   
 }

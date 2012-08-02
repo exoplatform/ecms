@@ -62,6 +62,7 @@ import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleExc
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -531,7 +532,8 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values)
   throws Exception {
     ClassLoader cl=this.getClass().getClassLoader();
-    ResourceBundle resourceBundle= ResourceBundle.getBundle(LOCALE_FILE, locale, cl);
+    ResourceBundleService bundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle= bundleService.getResourceBundle(LOCALE_FILE, locale, cl);
     String result = "";
     try {
       result = resourceBundle.getString(key);

@@ -32,7 +32,7 @@ public interface StageAndVersionPublicationConstant {
 
   /** The Constant LOCALIZATION. */
   public static final String LOCALIZATION               =
-    "locale.services.publication.lifecycle.simple.SimplePublication";
+    "locale.services.publication.lifecycle.stageversion.StageAndVersionPublication";
 
   /** The Constant ENROLLED_TO_LIFECYCLE. */
   public static final String PUBLICATION_LOG_LIFECYCLE  =

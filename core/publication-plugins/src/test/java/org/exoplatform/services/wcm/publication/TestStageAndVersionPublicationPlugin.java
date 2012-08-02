@@ -18,7 +18,6 @@ package org.exoplatform.services.wcm.publication;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertNull;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -26,9 +25,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
-import javax.jcr.Value;
 
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
@@ -53,6 +52,7 @@ import org.exoplatform.portal.pom.data.ComponentData;
 import org.exoplatform.portal.pom.data.ContainerData;
 import org.exoplatform.portal.pom.data.PageData;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.listener.ListenerService;
@@ -60,6 +60,8 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -69,55 +71,45 @@ import org.testng.annotations.Test;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Jul 26, 2012  
+ * Jul 24, 2012  
  */
+
 @ConfiguredBy({
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
   })
-public class TestWCMPublicationService extends BaseECMSTestCase {
+public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String TEST = "test";
   private static final String ENROLLED = "enrolled";
   private static final String PUBLISHED = "published";
-
-  private WCMPublicationService publicationService_;
-  private WebpagePublicationPlugin plugin_;
-  private Node node_;
+  private static final String NON_PUBLISHED = "non published";
+  private static final String ID = "portal#test:/web/presentation/ContentListViewerPortlet";
+  
+  private PublicationService publicationService_;
+  private StageAndVersionPublicationPlugin plugin_;
   private PortalConfig portal_;
   private Page page_;
   private Portlet portlet_;
-  //-----------------
-  /** . */
-  private final String testPage = "portal::classic::testPage";
-
-  /** . */
-  private final String testPortletPreferences = "portal#classic:/web/BannerPortlet/testPortletPreferences";
-
+  private Node node_;
   /** . */
   private DataStorage storage_;
-
   /** . */
   private NavigationService navService;
-
   /** . */
   private POMSessionManager mgr;
-
   /** . */
   private LinkedList<Event> events;
-
   /** . */
   private ListenerService listenerService;
-
   /** . */
   private OrganizationService org;
-
   
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
-    publicationService_ = WCMCoreUtils.getService(WCMPublicationService.class);
+    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
   }
 
   @BeforeMethod
@@ -129,9 +121,9 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     session.save();
     ConversationState c = new ConversationState(new Identity(session.getUserID()));
     ConversationState.setCurrent(c);
-    plugin_ = new DumpPublicationPlugin();
-    plugin_.setName("Simple publication");
-    plugin_.setDescription("Simple publication");
+    plugin_ = new StageAndVersionPublicationPlugin();
+    plugin_.setName(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+    plugin_.setDescription(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
     publicationService_.addPublicationPlugin(plugin_);
     
     //--------------------------------
@@ -170,130 +162,57 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   
   @AfterMethod
   public void tearDown() throws Exception {
-    publicationService_.getWebpagePublicationPlugins().clear();
+    publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
     storage_.remove(portal_);
-    RequestLifeCycle.end();
   }
 
   /**
-   * tests add publication plugin: 
-   * add 1 publication plugins and check if the total plugins number is 1
+   * tests changing state for a node 
    */
   @Test
-  public void testAddPublicationPlugin() throws Exception {
-    assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
-  }
-  
-  /**
-   * tests get publication plugin: 
-   * add 3 publication plugins, get the total plugins and check if the number is 3 
-   */
-  @Test
-  public void testGetWebpagePublicationPlugins() throws Exception {
-    assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
-  }
-  
-  /**
-   * tests enrolling node in life cycle 1
-   */
-  @Test
-  public void testEnrollNodeInLifecycle1() throws Exception {
+  public void testChangeState() throws Exception {
+    HashMap<String, String> context = new HashMap<String, String>();
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    assertEquals(ENROLLED, node_.getProperty(CURRENT_STATE).getString());
-  }
-  
-  /**
-   * tests enrolling node in life cycle 2
-   */
-  @Test
-  public void testEnrollNodeInLifecycle2() throws Exception {
-    Exception e = null;
-    try {
-      publicationService_.enrollNodeInLifecycle(node_, "classic", node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNotNull(e);
-    
-    publicationService_.enrollNodeInLifecycle(node_, "test", node_.getSession().getUserID());
-    assertEquals(ENROLLED, node_.getProperty(CURRENT_STATE).getString());
-    
-  }
-  
-  /**
-   * tests if node is enrolled in lifecycle
-   */
-  @Test
-  public void testIsEnrolledWCMInLifecycle() throws Exception {
-    assertFalse(publicationService_.isEnrolledInWCMLifecycle(node_));
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    assertTrue(publicationService_.isEnrolledInWCMLifecycle(node_));
+    plugin_.changeState(node_, PublicationDefaultStates.DRAFT, context);
+    assertEquals(PublicationDefaultStates.DRAFT, node_.getProperty(CURRENT_STATE).getString());
+    plugin_.changeState(node_, PublicationDefaultStates.ENROLLED, context);
+    assertEquals(PublicationDefaultStates.ENROLLED, node_.getProperty(CURRENT_STATE).getString());
+    plugin_.changeState(node_, PublicationDefaultStates.PUBLISHED, context);
+    assertEquals(PublicationDefaultStates.PUBLISHED, node_.getProperty(CURRENT_STATE).getString());
+    plugin_.changeState(node_, PublicationDefaultStates.PUBLISHED, context);
+    assertEquals(PublicationDefaultStates.PUBLISHED, node_.getProperty(CURRENT_STATE).getString());
+    plugin_.changeState(node_, PublicationDefaultStates.OBSOLETE, context);
+    assertEquals(PublicationDefaultStates.OBSOLETE, node_.getProperty(CURRENT_STATE).getString());
   }
 
   /**
-   * tests getting content state 
-   */
+  * tests getting user info
+  */
   @Test
-  public void testGetContentState() throws Exception {
+  public void testGetUserInfo() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    assertEquals(ENROLLED, publicationService_.getContentState(node_));
+    assertNull(plugin_.getUserInfo(node_, new Locale("en")));
+  }
+
+  /**
+   * tests getLocalizedAndSubstituteLog
+   */
+  @Test
+  public void testGetLocalizedAndSubstituteLog() throws Exception {
+    assertEquals("The content is published", plugin_.getLocalizedAndSubstituteMessage(
+         new Locale("en"), "PublicationService.StageAndVersionPublicationPlugin.changeState.published", new String[]{}));
   }
   
   /**
-   * tests unsubscribing node
+   * tests publish content to scv
    */
   @Test
-  public void testUnsubscribeLifecycle() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.unsubcribeLifecycle(node_);
-    assertFalse(publicationService_.isEnrolledInWCMLifecycle(node_));
-  }
-  
-  
-  /**
-   * tests update life cycle on change content 1
-   */
-  @Test
-  public void testUpdateLifecyleOnChangeContent1() throws Exception {
-    publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID(), PUBLISHED);
-    assertEquals(PUBLISHED, publicationService_.getContentState(node_));
-    
-    publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID(), "temp");
-    assertEquals(DumpPublicationPlugin.DEFAULT_STATE, publicationService_.getContentState(node_));
-  }
-  
-  /**
-   * tests update life cycle on change content 2
-   */
-  @Test
-  public void testUpdateLifecyleOnChangeContent2() throws Exception {
-    publicationService_.updateLifecyleOnChangeContent(
-              node_, "test", node_.getSession().getUserID());
-    assertEquals(DumpPublicationPlugin.DEFAULT_STATE, publicationService_.getContentState(node_));
-  }
-  
-  /**
-   * tests publish content scv
-   */
-  @Test
-  public void testPublishContentSCV() throws Exception {
-    Page page = new Page();
+  public void testPublishContentToSCV() throws Exception {
     Exception e = null;
     try {
-      publicationService_.publishContentSCV(node_, page, node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNotNull(e);
-    
-    e = null;
-    try {
-      publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-      publicationService_.publishContentSCV(node_, page, node_.getSession().getUserID());
+      plugin_.publishContentToSCV(node_, page_, "test");
     } catch (Exception ex) {
       e = ex;
     }
@@ -301,73 +220,48 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   }
   
   /**
-   * tests publish content clv
+   * tests publish content to CLV
    */
   @Test
-  public void testPublishContentCLV() throws Exception {
-    Page page = new Page();
-    Exception e = null;
-    try {
-      publicationService_.publishContentCLV(node_, page, node_.getSession().getUserID(),
-                                            "CLV1", node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNotNull(e);
-    
-    e = null;
-    try {
-      publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-      publicationService_.publishContentCLV(node_, page, node_.getSession().getUserID(),
-                                            "CLV1", node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNull(e);
-  }
-  
-  /**
-   * tests update lifecycle on create page
-   */
-  @Test
-  public void testUpdateLifecycleOnCreatePage() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecyleOnCreatePage(page_, node_.getSession().getUserID());
-    assertTrue(node_.isNodeType(NodetypeConstant.PUBLICATION_WEBPAGES_PUBLICATION));
-  }
-  
-  /**
-   * tests update lifecycle on remove page
-   */
-  @Test
-  public void testUpdateLifecycleOnRemovePage() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecycleOnRemovePage(page_, node_.getSession().getUserID());
-    if (node_.hasProperty("publication:webPageIDs")) {
-      Value[] values = node_.getProperty("publication:webPageIDs").getValues();
-      if (values != null) {
-        for (Value v : values) {
-          assertFalse(v.getString().equals(page_.getPageId()));
-        }
-      }
-    }
-  }  
+  public void testPublishContentToCLV() throws Exception {
+    plugin_.publishContentToCLV(node_, page_, "portal#test:/web/presentation/SingleContentViewertemp", 
+                                "test", node_.getSession().getUserID());
+    assertEquals(WCMCoreUtils.getRepository().getConfiguration().getName(),
+                 storage_.getPortletPreferences("portal#test:/web/presentation/SingleContentViewertemp").
+                 getPreference("repository").getValues().get(0));
 
+    plugin_.publishContentToCLV(node_, page_, ID, 
+                                "test", node_.getSession().getUserID());
+    Preference p = storage_.getPortletPreferences(ID).getPreference("contents");
+    assertTrue(p.getValues().contains(node_.getPath()));
+  }
+  
   /**
-   * tests update lifecycle on change page
+   * tests suspend published content from page
    */
   @Test
-  public void testUpdateLifecycleOnChangePage() throws Exception {
+  public void testSuspendPublishedContentFromPage() throws Exception {
+    plugin_.publishContentToCLV(node_, page_, ID, 
+                                "test", node_.getSession().getUserID());
+    Preference p = storage_.getPortletPreferences(ID).getPreference("contents");
+    assertTrue(p.getValues().contains(node_.getPath()));
+    
+    plugin_.suspendPublishedContentFromPage(node_, page_, node_.getSession().getUserID());
+    p = storage_.getPortletPreferences(ID).getPreference("contents");
+    assertFalse(p.getValues().contains(node_.getPath()));    
+  }
+  
+  /**
+   * tests update lifecycle on change content 
+   */
+  @Test
+  public void testUpdateLifeCycleOnChangeContent() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecyleOnChangePage(page_, node_.getSession().getUserID());
-    if (node_.hasProperty("publication:webPageIDs")) {
-      Value[] values = node_.getProperty("publication:webPageIDs").getValues();
-      if (values != null) {
-        for (Value v : values) {
-          assertFalse(v.getString().equals(page_.getPageId()));
-        }
-      }
-    }
+    plugin_.updateLifecyleOnChangeContent(node_, node_.getSession().getUserID());
+    assertEquals(PublicationDefaultStates.DRAFT, node_.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString());
+    plugin_.updateLifecyleOnChangeContent(node_, node_.getSession().getUserID(), PublicationDefaultStates.PUBLISHED);
+    assertEquals(PublicationDefaultStates.PUBLISHED, node_.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).
+                 getString());
   }
   
   private void createPortalModel() throws Exception {
@@ -388,10 +282,10 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     portlet_ = new Portlet();
 
     ApplicationState<Portlet> state = 
-      new TransientApplicationState<Portlet>("portal#test:/web/presentation/SingleContentViewer", portlet_);
+      new TransientApplicationState<Portlet>(ID, portlet_);
     ApplicationData<Portlet> applicationData = 
-      new ApplicationData<Portlet>(null, "portal#test:/web/presentation/SingleContentViewer",
-       ApplicationType.PORTLET, state, "portal#test:/web/presentation/SingleContentViewer", 
+      new ApplicationData<Portlet>(null, ID,
+       ApplicationType.PORTLET, state, ID, 
        "app-title", "app-icon", "app-description", false, true, false,
        "app-theme", "app-wdith", "app-height", new HashMap<String,String>(),
        Collections.singletonList("app-edit-permissions"));
@@ -414,12 +308,13 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     storage_.create(page_);
     
     PortletPreferences p = new PortletPreferences();
-    p.setWindowId("portal#test:/web/presentation/SingleContentViewer");
+    p.setWindowId(ID);
     p.setPreference(new Preference("workspace", node_.getSession().getWorkspace().getName()));
     p.setPreference(new Preference("nodeIdentifier", node_.getUUID()));
-    
+    p.setPreference(new Preference("mode", "ManualViewerMode"));
+    p.setPreference(new Preference("contents", "def"));
+    p.setPreference(new Preference("folderPath", "abc"));
     storage_.save(p);
     //------------------------------------------
   }
 }
-

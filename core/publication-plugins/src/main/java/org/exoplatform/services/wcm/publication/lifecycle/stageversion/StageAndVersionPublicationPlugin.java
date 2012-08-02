@@ -62,6 +62,7 @@ import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleExc
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.IdGenerator;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -391,7 +392,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    */
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception {
     ClassLoader cl=this.getClass().getClassLoader();
-    ResourceBundle resourceBundle= ResourceBundle.getBundle(StageAndVersionPublicationConstant.LOCALIZATION, locale, cl);
+    ResourceBundleService bundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle= bundleService.getResourceBundle(StageAndVersionPublicationConstant.LOCALIZATION, locale, cl);
     String result = "";
     try {
       result = resourceBundle.getString(key);

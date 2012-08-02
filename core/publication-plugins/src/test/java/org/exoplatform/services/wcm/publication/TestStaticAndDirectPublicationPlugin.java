@@ -161,8 +161,15 @@ public class TestStaticAndDirectPublicationPlugin extends BaseECMSTestCase {
     assertTrue(states.contains(ENROLLED));
     assertTrue(states.contains(PUBLISHED));
     assertTrue(states.contains(NON_PUBLISHED));
-    plugin_.getLocalizedAndSubstituteMessage(
-                   new Locale("en"), "PublicationService.test.test", new String[]{});
+  }
+  
+  /**
+   * tests getLocalizedAndSubstituteLog
+   */
+  @Test
+  public void testGetLocalizedAndSubstituteLog() throws Exception {
+    assertEquals("Test EN", plugin_.getLocalizedAndSubstituteMessage(
+                           new Locale("en"), "PublicationService.test.test", new String[]{}));
   }
   
 }
