@@ -96,8 +96,7 @@
 	           <destinationFileName>${project.artifactId}.xml</destinationFileName>
 	             <emitDoctype>false</emitDoctype>
 	           <beforeBookBodyXML><![CDATA[
-	           <xi:include href="bookinfo.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	           <xi:include href="preface.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	           <xi:include href="bookinfo.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />	           
 			   <xi:include href="package.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	           ]]></beforeBookBodyXML>
 	           <validationMode>lax</validationMode>
