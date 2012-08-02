@@ -1,6 +1,4 @@
-<preface xml:id="CONTref.AboutThisGuide">
-  <title>About this guide</title>
-  <abstract>
+<abstract>
     <para>Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform,
       the extension mechanism is used to add content features. To have more information about the extension mechanism,
       refer to the <ulink url="http://docs.exoplatform.org/PLF35/topic/org.exoplatform.doc.35/GateInReferenceGuide.html">GateIn Reference Guide</ulink>.
@@ -37,4 +35,4 @@
       </listitem>
     </itemizedlist>
   </abstract>
-</preface>
+

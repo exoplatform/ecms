@@ -1,3 +1,5 @@
+This service is used to manage all tags and their styles. Currently, it just supports adding/editing/removing the Private & Public tags.
+
 _Package org.exoplatform.services.cms.folksonomy.NewFolksonomyService_;
 
 || *Method* || *Return* || *Prototype* || *Description* ||
