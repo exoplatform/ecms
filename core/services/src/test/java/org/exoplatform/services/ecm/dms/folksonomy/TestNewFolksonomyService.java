@@ -25,6 +25,8 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -763,6 +765,143 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     newFolksonomyService_.addTagPermission("*:/platform/administrators");
   }
 
+  @Test
+  public void testGetLinkedTagsOfDocumentByScopeWithPrivateScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    String[] tags2 = {"sport", "xyz"};
+    newFolksonomyService_.addPrivateTag(tags2, test2, COLLABORATION_WS, session.getUserID());
+
+    List<Node> linkedTags = newFolksonomyService_
+        .getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE, session.getUserID(), test, COLLABORATION_WS);
+    List<String> tagNames = getNodeNames(linkedTags);
+
+    assertTrue(tagNames.contains("sport"));
+    assertTrue(tagNames.contains("weather"));
+    assertFalse(tagNames.contains("xyz"));
+    assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, linkedTags.size());
+  }
+
+  @Test
+  public void testGetLinkedTagsOfDocumentByScopeWithPublicScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags,
+                                       test,
+                                       COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
+                                       tags2,
+                                       test2,
+                                       COLLABORATION_WS);
+
+    List<Node> linkedTags = newFolksonomyService_
+        .getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC, null, test, COLLABORATION_WS);
+    List<String> tagNames = getNodeNames(linkedTags);
+
+    assertTrue(tagNames.contains("sport"));
+    assertTrue(tagNames.contains("weather"));
+    assertFalse(tagNames.contains("boy"));
+    assertFalse(tagNames.contains("girl"));
+
+    assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, linkedTags.size());
+  }
+
+  @Test
+  public void testGetLinkedTagsOfDocumentByScopeWithGroupScope() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "sport", "music" };
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
+
+    List<Node> linkedTags = newFolksonomyService_
+        .getLinkedTagsOfDocumentByScope(NewFolksonomyService.GROUP, "/platform/users", test, COLLABORATION_WS);
+    List<String> tagNames = getNodeNames(linkedTags);
+
+    assertTrue(tagNames.contains("sport"));
+    assertTrue(tagNames.contains("weather"));
+    assertFalse(tagNames.contains("music"));
+    assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, tagNames.size());
+  }
+
+  @Test
+  public void testGetLinkedTagsOfDocument() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, tags, test, COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, tags2, test2, COLLABORATION_WS);
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags2, test2, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
+
+    List<Node> linkedTags = newFolksonomyService_.getLinkedTagsOfDocument(test, COLLABORATION_WS);
+    List<String> tagNames = getNodeNames(linkedTags);
+
+    assertTrue(tagNames.contains("sport"));
+    assertTrue(tagNames.contains("weather"));
+    assertFalse(tagNames.contains("boy"));
+    assertFalse(tagNames.contains("girl"));
+    assertFalse(tagNames.contains("music"));
+    assertEquals("getLinkedTagsOfDocument failed! ", 8, tagNames.size());
+  }
+
+  @Test
+  public void testRemoveTagsOfNodeRecursively() throws Exception {
+    String[] tags = { "sport", "weather" };
+    String[] tags2 = { "boy", "girl", "sport" };
+    String publicFolksonomyTreePath = "/Application Data/Tags";
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, tags, test, COLLABORATION_WS);
+    newFolksonomyService_.addPublicTag(publicFolksonomyTreePath, tags2, test2, COLLABORATION_WS);
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags2, test2, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
+
+    newFolksonomyService_.removeTagsOfNodeRecursively(test, COLLABORATION_WS, session.getUserID(), "/platform/users;/platform/guests");
+
+    List<Node> linkedTags = newFolksonomyService_.getLinkedTagsOfDocument(test, COLLABORATION_WS);
+    List<String> tagNames = getNodeNames(linkedTags);
+    assertEquals("removeTagsOfNodeRecursively failed! ", 0, tagNames.size());
+  }
+
+  @Test
+  public void testManipulateTagStyle() throws Exception {
+    String normal = "normal";
+    String normalTagRange = "0..2";
+    String normalHtmlStyle = "font-size: 12px; font-weight: bold; color: #6b6b6b; font-family: verdana; text-decoration:none;";
+    String interesting = "interesting";
+    String interestingTagRange = "2..5";
+    String interestingHtmlStyle = "font-size: 13px; font-weight: bold; color: #5a66ce; font-family: verdana; text-decoration:none;";
+    String tagStylePath = "/jcr:system/exo:ecm/exo:folksonomies/exo:tagStyle";
+
+    // Test addTagStyle
+    newFolksonomyService_.addTagStyle(normal, normalTagRange, normalHtmlStyle, DMSSYSTEM_WS);
+    assertEquals(normalHtmlStyle, newFolksonomyService_.getTagStyle(tagStylePath + "/" + normal, DMSSYSTEM_WS));
+
+    // Test updateTagStyle
+    newFolksonomyService_.updateTagStyle(normal, interestingTagRange, interestingHtmlStyle, DMSSYSTEM_WS);
+    assertEquals(interestingHtmlStyle, newFolksonomyService_.getTagStyle(tagStylePath + "/" + normal, DMSSYSTEM_WS));
+
+    // Test addTagStyle
+    newFolksonomyService_.addTagStyle(interesting, interestingTagRange, interestingHtmlStyle, DMSSYSTEM_WS);
+    List<String> tagStyleNames = getNodeNames(newFolksonomyService_.getAllTagStyle(DMSSYSTEM_WS));
+    assertTrue(tagStyleNames.contains(normal));
+    assertTrue(tagStyleNames.contains(interesting));
+    assertFalse(tagStyleNames.contains("boy"));
+    assertEquals("testManipulateTagStyle failed! ", 2, tagStyleNames.size());
+  }
+
+  private List<String> getNodeNames(List<Node> nodes) throws RepositoryException {
+    List<String> nodeNames = new ArrayList<String>();
+    for (Node node : nodes) {
+      nodeNames.add(node.getName());
+    }
+    return nodeNames;
+  }
+
   @AfterMethod
   public void tearDown() throws Exception {
     String[] nodes = {"/Application Data/Tags",
@@ -777,5 +916,16 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
         n.remove();
         session.save();
       }
+
+    Session dmsSession = sessionProvider.getSession(DMSSYSTEM_WS, repository);
+    String tagStylesPath = "/jcr:system/exo:ecm/exo:folksonomies/exo:tagStyle";
+    if (dmsSession.itemExists(tagStylesPath)) {
+      Node tagStylesNode = (Node)dmsSession.getItem(tagStylesPath);
+      for (NodeIterator iter = tagStylesNode.getNodes(); iter.hasNext();) {
+        iter.nextNode().remove();
+      }
+    }
+    dmsSession.save();
+    dmsSession.logout();
   }
 }
