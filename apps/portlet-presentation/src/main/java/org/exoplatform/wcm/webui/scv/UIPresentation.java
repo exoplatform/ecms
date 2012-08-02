@@ -169,6 +169,19 @@ public class UIPresentation extends UIBaseNodePresentation {
   public void setTemplatePath(String templatePath) {
     this.templatePath = templatePath;
   }
+  
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+   */
+  @Deprecated
+  public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
+    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+    return new JCRResourceResolver(workspace);
+  }
 
   public ResourceResolver getTemplateResourceResolver() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
