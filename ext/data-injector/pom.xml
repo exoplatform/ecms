@@ -42,13 +42,13 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-publication</artifactId>
+      <artifactId>ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
