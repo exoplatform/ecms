@@ -77,7 +77,9 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
     } catch(NullPointerException npe) {
       ConversationState conversationState = ConversationState.getCurrent();
       if(conversationState == null) return;
-      siteName = conversationState.getAttribute("siteName").toString();
+      if (conversationState.getAttribute("siteName") != null) {
+        siteName = conversationState.getAttribute("siteName").toString();
+      }
       remoteUser = currentNode.getSession().getUserID();
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
