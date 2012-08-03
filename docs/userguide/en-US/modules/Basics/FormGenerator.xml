@@ -15,7 +15,7 @@
   The <emphasis role="bold">Form Builder</emphasis> portlet allows users to create and edit the template of document types. Documents are stored in the so-called node; therefore, the term "node" and node types are often applied.
  </para>
   <para>To use this porlet, you need to add it to a specific page first by dragging and dropping <emphasis role="bold">Form Generator Portlet</emphasis> from
-      <emphasis role="bold">Page Editor --> Applications --> Form Generator Portlet</emphasis>
+      <menuchoice><guimenu>Page Editor</guimenu><guisubmenu>Applications</guisubmenu><guimenuitem>Form Generator Portlet</guimenuitem></menuchoice>
       to the main pane. This can be done when
       <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link>
       or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link>
@@ -48,7 +48,7 @@
     </step>
     <step>
       <para>
-    Enter the template name into the <emphasis role="bold">Name</emphasis> field which is required.
+    Enter the template name into the <guilabel>Name</guilabel> field which is required.
    </para>
     </step>
     <step>
@@ -58,7 +58,7 @@
     </step>
     <step>
       <para>
-    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for the template. Available components are displayed in the left pane.
+    Click the <guilabel>Form Builder</guilabel> tab that allows you to set properties for the template. Available components are displayed in the left pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -130,11 +130,11 @@
           </thead>
           <tbody>
             <row>
-              <entry><emphasis role="bold"> Field Label</emphasis> </entry>
+              <entry><guilabel> Field Label</guilabel> </entry>
               <entry> The label of the field. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Width</emphasis></entry>
+              <entry><guilabel>Width</guilabel></entry>
               <entry> The width of the field width.</entry>
              </row>
              <row>
@@ -158,15 +158,15 @@
                 </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Height</emphasis> </entry>
+              <entry><guilabel>Height</guilabel> </entry>
               <entry> The height of the field. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Default Value</emphasis> </entry>
+              <entry><guilabel>Default Value</guilabel> </entry>
               <entry> Display the default value. </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Guidelines for User</emphasis> </entry>
+              <entry><guilabel>Guidelines for User</guilabel> </entry>
               <entry> Display instructions about this component. </entry>
             </row>
           </tbody>
@@ -213,7 +213,7 @@
     </step>
     <step>
       <para>
-    Click <emphasis role="bold">Save</emphasis> to accept creating a new template, or <emphasis role="bold">Reset</emphasis> to edit this template again before saving.</para>
+    Click <guibutton>Save</guibutton> to accept creating a new template, or <guibutton>Reset</guibutton> to edit this template again before saving.</para>
     <itemizedlist>
 	<listitem>	<para>
     A message will inform that you have created the template successfully.

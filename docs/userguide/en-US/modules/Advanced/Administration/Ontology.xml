@@ -28,7 +28,7 @@
             in a tag.
         </para>
         <para>
-            By selecting <emphasis role="bold">Categories &amp; Tags --> Manage Tags</emphasis>, you will be directed to the <emphasis role="bold">Manage Tags</emphasis> page as below:
+            By selecting <menuchoice><guimenu>Categories &amp; Tags</guimenu> <guimenuitem>Manage Tags</guimenuitem></menuchoice>, you will be directed to the <guilabel>Manage Tags</guilabel> page as below:
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -67,9 +67,9 @@
                 <step>
                     <para>
                         Click the
-                        <emphasis role="bold">Add Style</emphasis>
+                        <guibutton>Add Style</guibutton>
                         button. The
-                        <emphasis role="bold">Edit Tag Style Configuration</emphasis>
+                        <guilabel>Edit Tag Style Configuration</guilabel>
                         form will appear.
                     </para>
                     <mediaobject>
@@ -125,13 +125,13 @@
                 <step>
                     <para>
                         Input values in the fields:
-                        <emphasis role="bold">Style Name, Document Range,</emphasis> and <emphasis role="bold">HTML Style.</emphasis>
+                        <guilabel>Style Name, Document Range,</guilabel> and <guilabel>HTML Style</guilabel>.
                     </para>
                 </step>
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Update</emphasis>
+                        <guibutton>Update</guibutton>
                         to accept adding a new tag style.
                     </para>
                 </step>
@@ -153,7 +153,7 @@
             <title>Edit a tag style</title>
             <para>
                 The
-                <emphasis role="bold">Tag Manager</emphasis>
+                <guilabel>Tag Manager</guilabel>
                 tab enables you to edit the existing tags.
             </para>
             <citetitle>
@@ -174,22 +174,22 @@
                             </textobject>
                         </inlinemediaobject>
                         corresponding to the tag name which you want to edit in the
-                        <emphasis role="bold">Action</emphasis>
+                        <guilabel>Action</guilabel>
                         column to edit the tag style configuration. The
-                        <emphasis role="bold">Edit Tag Style Configuration</emphasis>
+                        <guilabel>Edit Tag Style Configuration</guilabel>
                         form appears which is similar to that of adding a tag style.
                     </para>
                 </step>
                 <step>
                     <para>
-                        Change values in the fields, including <emphasis role="bold">Document Range</emphasis> and <emphasis role="bold">HTML Style</emphasis>, except <emphasis role="bold">Style
-                        Name.</emphasis>
+                        Change values in the fields, including <guilabel>Document Range</guilabel> and <guilabel>HTML Style</guilabel>, except <guilabel>Style
+                        Name.</guilabel>
                     </para>
                 </step>
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Update</emphasis>
+                        <guibutton>Update</guibutton>
                         to save new changes.
                     </para>
                 </step>
@@ -198,9 +198,9 @@
         <section id="sect-User_Guide-Manage_Tags-Delete_a_tag_style">
             <title>Delete a tag style</title>
             <para>To delete one tag style, simply click the corresponding
-                <emphasis role="bold">Delete</emphasis>
+                <guilabel>Delete</guilabel>
                 icon and select
-                <emphasis role="bold">OK</emphasis>
+                <guibutton>OK</guibutton>
                 in the confirmation to accept your deletion.
             </para>
         </section>
@@ -208,7 +208,7 @@
             <title>Set permissions on public tags</title>
             <para>
                 The
-                <emphasis role="bold">Tag Permission Manager</emphasis>
+                <guilabel>Tag Permission Manager</guilabel>
                 tab helps you set permissions regarding to editing and deleting public tags.
             </para>
             <mediaobject>
@@ -237,9 +237,9 @@
                             </textobject>
                         </inlinemediaobject>
                         beside the
-                        <emphasis role="bold">Memberships</emphasis>
+                        <guilabel>Memberships</guilabel>
                         field to select memberships to add a permission to those memberships. The
-                        <emphasis role="bold">Select Membership</emphasis>
+                        <guilabel>Select Membership</guilabel>
                         form will appear.
                     </para>
                     <mediaobject>
@@ -255,16 +255,16 @@
                     <para>
                         Select a group on the left and the corresponding membership on the right. The selected
                         membership will appear in the
-                        <emphasis role="bold">Memberships</emphasis>
+                        <guilabel>Memberships</guilabel>
                         field.
                     </para>
                 </step>
                 <step>
                     <para>
                         Click
-                        <emphasis role="bold">Save</emphasis>
+                        <guibutton>Save</guibutton>
                         to accept adding a permission for the membership to the
-                        <emphasis role="bold">Memberships</emphasis>
+                        <guilabel>Memberships</guilabel>
                         column.
                     </para>
                     <mediaobject>
@@ -283,7 +283,7 @@
                             </imageobject>
                         </inlinemediaobject>
                         regarding to that membership, then click
-                        <emphasis role="bold">OK</emphasis>
+                        <guibutton>OK</guibutton>
                         in the confirmation message.
                     </para>
                 </step>
@@ -297,7 +297,7 @@
             at facilitating searches. The category management includes adding, editing and deleting a category tree.
         </para>
         <para>
-            By selecting <emphasis role="bold">Categories &amp; Tags --> Manage Categories</emphasis>, you will be directed to the <emphasis role="bold">Manage Categories</emphasis> page as below:
+            By selecting <menuchoice><guimenu>Categories &amp; Tags</guimenu><guimenuitem>Manage Categories</guimenuitem> </menuchoice>, you will be directed to the <emphasis role="bold">Manage Categories</emphasis> page as below:
         </para>
         <mediaobject>
             <imageobject role="html">
@@ -327,9 +327,9 @@
             <step>
                 <para>
                     Click the
-                    <emphasis role="bold">Add Category Tree</emphasis>
+                    <guilabel>Add Category Tree</guilabel>
                     button to add a new category. The
-                    <emphasis role="bold">Add Category Tree</emphasis>
+                    <guilabel>Add Category Tree</guilabel>
                     form will appear.
                 </para>
                 <mediaobject>
@@ -344,7 +344,7 @@
             <step>
                 <para>
                     Enter the category tree name in the
-                    <emphasis role="bold">Name</emphasis>
+                    <guilabel>Name</guilabel>
                     field which is required.
                 </para>
             </step>
@@ -362,7 +362,7 @@
                         </imageobject>
                     </inlinemediaobject>
                     . The
-                    <emphasis role="bold">Select Home Path</emphasis>
+                    <guilabel>Select Home Path</guilabel>
                     form will appear.
                 </para>
                 <mediaobject>
@@ -382,7 +382,7 @@
                             <imagedata fileref="images/Select_path_icon.png" format="PNG" scalefit="1" width="3mm"/>
                         </imageobject>
                     </inlinemediaobject>
-                    next to <emphasis role="bold">Root Path</emphasis> if you want to select the root path or;
+                    next to <guilabel>Root Path</guilabel> if you want to select the root path or;
                 </para>
                     </listitem>
                     <listitem>
@@ -403,9 +403,9 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Reset</emphasis>
+                    <guibutton>Reset</guibutton>
                     if you want to reset values that have just been selected or
-                    <emphasis role="bold">Next</emphasis>
+                    <guibutton>Next</guibutton>
                     to select permissions for a category tree.
                 </para>
                 <mediaobject>
@@ -446,7 +446,7 @@
                     </inlinemediaobject>
                     to select everyone to set permissions. The user or membership that you have just selected will be
                     displayed in the
-                    <emphasis role="bold">User or Group</emphasis>
+                    <guilabel>User or Group</guilabel>
                     field.
                 </para>
                 <para><emphasis role="bold">ii.</emphasis>
@@ -505,11 +505,11 @@
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to save all values, or
-                    <emphasis role="bold">Reset</emphasis>
-                    to change values that have just been set. After clicking <emphasis role="bold">Save</emphasis>, click
-                    <emphasis role="bold">Next</emphasis>
+                    <guibutton>Reset</guibutton>
+                    to change values that have just been set. After clicking <guibutton>Save</guibutton>, click
+                    <guilabel>Next</guilabel>
                     to go to the next step.
                 </para>
                 <mediaobject>
@@ -524,24 +524,24 @@
             <step>
                 <para>
                     Enter the name for an action of the category tree in the
-                    <emphasis role="bold">Name</emphasis>
+                    <guilabel>Name</guilabel>
                     field which is required.
                 </para>
             </step>
             <step>
                 <para>
                     Select values for
-                    <emphasis role="bold">Lifecycle, Node Types, Target Workspace, Target Path, Affected Node Types
-                    </emphasis>
+                    <guilabel>Lifecycle, Node Types, Target Workspace, Target Path, Affected Node Types
+                    </guilabel>
                     which are required.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to save all values, then select
-                    <emphasis role="bold">Next</emphasis>
+                    <guilabel>Next</guilabel>
                     to go to the next step.
                 </para>
             </step>
@@ -549,7 +549,7 @@
         <note>
             <para>
                 Do not input some special characters into the
-                <emphasis role="bold">Name</emphasis>
+                <guilabel>Name</guilabel>
                 field, such as: !,@,#,$,%,&amp;,*,(,).
             </para>
             <para>
@@ -597,9 +597,9 @@
                         </textobject>
                     </inlinemediaobject>
                     in the
-                    <emphasis role="bold">Add</emphasis>
+                    <guibutton>Add</guibutton>
                     column to add more category trees. The
-                    <emphasis role="bold">Edit Category Tree</emphasis>
+                    <guilabel>Edit Category Tree</guilabel>
                     form will appear.
                 </para>
                 <mediaobject>
@@ -614,32 +614,32 @@
             <step>
                 <para>
                     Enter a category name in the
-                    <emphasis role="bold">Category Name</emphasis>
+                    <guilabel>Category Name</guilabel>
                     field which is required.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to save the category name.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Previous</emphasis>
+                    <guilabel>Previous</guilabel>
                     to return to the previous steps.
                 </para>
             </step>
             <step>
                 <para>
                     Click
-                    <emphasis role="bold">Save</emphasis>
+                    <guibutton>Save</guibutton>
                     to save all changes, or
-                    <emphasis role="bold">Previous</emphasis>
+                    <guilabel>Previous</guilabel>
                     or
-                    <emphasis role="bold">Next</emphasis>
+                    <guilabel>Next</guilabel>
                     if you want to edit more.
                 </para>
             </step>
@@ -653,7 +653,7 @@
                     </imageobject>
                 </inlinemediaobject>
                 corresponding to the category that you want to delete. Click
-                <emphasis role="bold">OK</emphasis>
+                <guibutton>OK</guibutton>
                 in the confirmation message to accept your deletion.
             </para>
             <para>

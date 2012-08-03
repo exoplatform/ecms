@@ -312,7 +312,7 @@
                         <textobject>
                            <phrase>sprocket</phrase>
                         </textobject>
-							</inlinemediaobject> to open the <emphasis role="bold">Preferences.</emphasis>
+							</inlinemediaobject> to open the <guilabel>Preferences</guilabel>.
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -325,14 +325,14 @@
 					</step>
 					 <step>
 						<para>
-							Deselect the <emphasis role="bold">Show Sidebar</emphasis> checkbox, then click <emphasis role="bold">Save</emphasis> to accept your changes.
+							Deselect the <guilabel>Show sidebar</guilabel> checkbox, then click <guibutton>Save</guibutton> to accept your changes.
 						</para>
 					</step>
 				</procedure>
           <itemizedlist>
             <listitem>
 						<para>
-							To show the sidebar, tick the <emphasis role="bold">Show Sidebar</emphasis> checkbox in the <emphasis role="bold">Preferences</emphasis> form.
+							To show the sidebar, tick the <guilabel>Show Sidebar</guilabel> checkbox in the <guilabel>Preferences</guilabel> form.
 						</para>
 					</listitem>
          </itemizedlist>

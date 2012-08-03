@@ -24,8 +24,8 @@
     </step>
     <step>
       <para>
-        Open the <emphasis role="bold">SEO Management</emphasis> form by hovering your cursor over
-        <emphasis role="bold">Edit --> Page --> SEO</emphasis> on the <emphasis role="bold">Administration</emphasis> bar.
+        Open the <guilabel>SEO Management</guilabel> form by hovering your cursor over
+        <menuchoice><guimenu>Edit</guimenu><guisubmenu>Page</guisubmenu><guimenuitem>SEO</guimenuitem></menuchoice> on the <guilabel>Administration</guilabel> bar.
       </para>
       <mediaobject>
         <imageobject role="html">
@@ -37,11 +37,11 @@
         </imageobject>
       </mediaobject>
 
-      <para>Depending on your SEO management for a page or content, the content of the <emphasis role="bold">SEO Management</emphasis> form will be different.
+      <para>Depending on your SEO management for a page or content, the content of the <guilabel>SEO Management</guilabel> form will be different.
       </para>
       <itemizedlist>
       <listitem>
-      <para>The <emphasis role="bold">SEO Management</emphasis> form for content is as follows.</para>
+      <para>The <guilabel>SEO Management</guilabel> form for content is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_content.png" format="PNG"/>
@@ -53,7 +53,7 @@
       </mediaobject>
       </listitem>
       <listitem>
-      <para xml:id="SEO_data_page">The <emphasis role="bold">SEO Management</emphasis> form for a page is as follows.</para>
+      <para xml:id="SEO_data_page">The <guilabel>SEO Management</guilabel> form for a page is as follows.</para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" fileref="images/SEO_management_page.png" format="PNG"/>
@@ -76,17 +76,17 @@
           </thead>
           <tbody>
             <row>
-              <entry><emphasis role="bold">Description</emphasis></entry>
+              <entry><guilabel>Description</guilabel></entry>
               <entry>The description of your page/content. This description will be seen in the results list of search
                 engines.
               </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Keywords</emphasis></entry>
+              <entry><guilabel>Keywords</guilabel></entry>
               <entry>By using these keywords, other users can find out your page/content via search engines.</entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Robots</emphasis></entry>
+              <entry><guilabel>Robots</guilabel></entry>
               <entry>Search engines can access the whole directories on a website, or individual pages, or individual
                 links on a page and list your page/content or not, it depends on your options:
                 <itemizedlist>
@@ -115,11 +115,11 @@
               </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Sitemap</emphasis></entry>
+              <entry><guilabel>Sitemap</guilabel></entry>
               <entry>Allow you to see pages of the sites in the tree-like structure.</entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Frequency</emphasis></entry>
+              <entry><guilabel>Frequency</guilabel></entry>
               <entry>Show how often pages are updated on the site. Also, setting your frequency levels tells the search
                 engines which pages should be crawled over other pages. The frequency levels include: Always, Hourly,
                 Daily, Weekly, Monthly, Yearly and Never. If you set "Never" for the frequency level, meaning that this
@@ -127,7 +127,7 @@
               </entry>
             </row>
             <row>
-              <entry><emphasis role="bold">Priority</emphasis></entry>
+              <entry><guilabel>Priority</guilabel></entry>
               <entry>Allow search engines to search the page with the higher priority level first. The acceptable value
                 in this field is from 0 to 1. In which, 0 is the lowest priority level and 1 is the highest.
               </entry>
@@ -141,7 +141,7 @@
     </step>
     <step>
       <para>Click
-        <emphasis role="bold">Save</emphasis>
+        <guibutton>Save</guibutton>
         to finish creating SEO data.
       </para>
     </step>
@@ -169,7 +169,7 @@
               <imagedata fileref="images/SEO_green_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
           </inlinemediaobject>
-          means that the <emphasis role="bold">SEO Management</emphasis> form is filled out with the full SEO information.
+          means that the <guilabel>SEO Management</guilabel> form is filled out with the full SEO information.
         </para>
         <para>
           <inlinemediaobject>

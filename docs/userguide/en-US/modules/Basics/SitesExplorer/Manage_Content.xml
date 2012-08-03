@@ -12,7 +12,7 @@
   <note>
     <para>
       Only users who have the right to access the 
-      <emphasis role="bold">Sites Management</emphasis>
+      <guilabel>Sites Management</guilabel>
       drive can do it.
     </para>
   </note>
@@ -25,7 +25,7 @@
       <step>
         <para>
           Go to the 
-          <emphasis role="bold">Sites Management</emphasis>
+          <guilabel>Sites Management</guilabel>
           drive, then select a site to which you want to add web content.
         </para>
       </step>
@@ -62,8 +62,8 @@
               <phrase>[ Add Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open <link linkend="content_templates">a list of content templates</link>, including
-          <emphasis role="bold">Free layout web content</emphasis>, and <emphasis role="bold">Picture on head layout web content</emphasis>.
+          on the <guilabel>Action</guilabel> bar to open <link linkend="content_templates">a list of content templates</link>, including
+          <guilabel>Free layout web content</guilabel>, and <guilabel>Picture on head layout web content</guilabel>.
         </para>
       </step>
       <step>
@@ -88,18 +88,18 @@
       </step>
       <step>
         <para>
-          Enter values in the fields of the <emphasis role="bold">Add New Document</emphasis> form.
+          Enter values in the fields of the <guilabel>Add New Document</guilabel> form.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to save the content or
-          <emphasis role="bold">Close</emphasis>
-          to quit the <emphasis role="bold">Add New Document</emphasis> form.
+          <guibutton>Close</guibutton>
+          to quit the <guilabel>Add New Document</guilabel> form.
         </para>
       </step>
     </procedure>
@@ -110,7 +110,7 @@
       </citetitle>
       <para>
         The
-        <emphasis role="bold">Main Content</emphasis>
+        <guilabel>Main Content</guilabel>
         tab
       </para>
       <table>
@@ -128,7 +128,7 @@
           <tbody>
            <row>
               <entry>
-                <emphasis role="bold">Title</emphasis>
+                <guilabel>Title</guilabel>
               </entry>
               <entry>
                 The title of the web content.
@@ -136,7 +136,7 @@
             </row>
             <row>
               <entry>
-                <emphasis role="bold">Name</emphasis>
+                <guilabel>Name</guilabel>
               </entry>
               <entry>
                 The name of the web content that you want to add new.
@@ -144,7 +144,7 @@
             </row>
              <row>
               <entry>
-                <emphasis role="bold">Language</emphasis>
+                <guilabel>Language</guilabel>
               </entry>
               <entry>
                 The language of the web content. At present, eXo Platform 3.5 supports two languages: English and French.
@@ -152,7 +152,7 @@
             </row>
             <row>
               <entry>
-                <emphasis role="bold">Main Content</emphasis>
+                <guilabel>Main Content</guilabel>
               </entry>
               <entry>
                 The main content that you want to display when publishing this web content.
@@ -162,7 +162,7 @@
         </tgroup>
       </table>
       <para>
-        The <emphasis role="bold">Illustration</emphasis> tab allows you to upload an illustration that makes the site's content more attractive.
+        The <guilabel>Illustration</guilabel> tab allows you to upload an illustration that makes the site's content more attractive.
       </para>
       <mediaobject>
         <imageobject role="html">
@@ -190,7 +190,7 @@
           <tbody>
             <row>
               <entry>
-                <emphasis role="bold">Illustration Image</emphasis>
+                <guilabel>Illustration Image</guilabel>
               </entry>
               <entry>
                 The path to an image that you want to upload into a site. This image will be used like an illustration of that site.
@@ -198,7 +198,7 @@
             </row>
             <row>
               <entry>
-               <emphasis role="bold">Summary</emphasis>
+               <guilabel>Summary</guilabel>
               </entry>
               <entry>
                 You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
@@ -217,7 +217,7 @@
       <procedure>
         <step>
           <para>
-            Browse a list of images on your local device by clicking the <emphasis role="bold">Browse...</emphasis> button, then select a specific location.
+            Browse a list of images on your local device by clicking the <guilabel>Browse...</guilabel> button, then select a specific location.
           </para>
         </step>
         <step>
@@ -227,7 +227,7 @@
         </step>
       </procedure>
       <para>
-        The <emphasis role="bold">Advanced</emphasis> tab includes two parts: CSS Data and JS Data.
+        The <guilabel>Advanced</guilabel> tab includes two parts: CSS Data and JS Data.
       </para>
       <mediaobject>
         <imageobject role="html">
@@ -255,7 +255,7 @@
           <tbody>
             <row>
               <entry>
-                <emphasis role="bold">CSS Data</emphasis>
+                <guilabel>CSS Data</guilabel>
               </entry>
               <entry>
                 Contain the CSS definition to present data in the web content. You can optionally enter CSS data into this
@@ -264,7 +264,7 @@
             </row>
             <row>
               <entry>
-                <emphasis role="bold">JS Data</emphasis>
+                <guilabel>JS Data</guilabel>
               </entry>
               <entry>
                 Contain the JS content to make the web content more dynamic after being published. You can optionally enter
@@ -305,7 +305,7 @@
               <phrase>[ Edit Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to show the form to edit the selected web content. This form is similar to that of creating
+          on the <guilabel>Action</guilabel> bar to show the form to edit the selected web content. This form is similar to that of creating
           a new document.
         </para>
       </step>
@@ -317,8 +317,8 @@
       <step>
         <para>
           Complete editing the selected web content by clicking
-          <emphasis role="bold">Save</emphasis>
-          or <emphasis role="bold">Save &amp; Close.</emphasis>
+          <guibutton>Save</guibutton>
+          or <guibutton>Save &amp; Close.</guibutton>
         </para>
       </step>
     </procedure>
@@ -346,14 +346,14 @@
       <step>
         <para>
           Right-click the name of the web content that you want to delete, then select
-          <emphasis role="bold">Delete</emphasis>
+          <guilabel>Delete</guilabel>
           from the drop-down menu.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">OK</emphasis>
+          <guibutton>OK</guibutton>
           to accept your deletion in the confirmation message.
         </para>
       </step>
@@ -372,7 +372,7 @@
     </para>
     <para>
       After the content is published, all users who have the right to access that position can view the published web
-      content as a page on the <emphasis role="bold">Navigation</emphasis> bar.
+      content as a page on the <guilabel>Navigation</guilabel> bar.
     </para>
   </section>
   <xi:include href="Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
