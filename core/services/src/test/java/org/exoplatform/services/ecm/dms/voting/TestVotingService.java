@@ -18,6 +18,7 @@
 package org.exoplatform.services.ecm.dms.voting;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
@@ -30,7 +31,6 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.Value;
-import javax.jcr.nodetype.ConstraintViolationException;
 
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -139,25 +139,6 @@ public class TestVotingService extends BaseWCMTestCase {
 
   /**
    * Test Method: vote()
-   * Input: Test node is set English default language, but not set MultiLanguage
-   *        Voter's language is not default language
-   * Expected: throws exception
-   */
-  @Test
-  public void testVote1() throws Exception{
-    Node test = session.getRootNode().addNode("Test");
-    if (test.canAddMixin(I18NMixin)) {
-      test.addMixin(I18NMixin);
-    }
-    session.save();
-    try {
-      votingService.vote(test, 3, "root", "fr");
-    } catch (NullPointerException ex) {
-    }
-  }
-
-  /**
-   * Test Method: vote()
    * Input: test node is set English default language.
    *        adding vote for test node by French
    *        first vote : userName = null, rate = 3.0, language = "fr"
@@ -169,7 +150,7 @@ public class TestVotingService extends BaseWCMTestCase {
    *        total of vote: 3.
    */
   @Test
-  public void testVote2() throws Exception {
+  public void testVote1() throws Exception {
     Node test = initNode();
     votingService.vote(test, 3, null, "fr");
     votingService.vote(test, 1, null, "fr");
@@ -196,7 +177,7 @@ public class TestVotingService extends BaseWCMTestCase {
    */
   @SuppressWarnings("unchecked")
   @Test
-  public void testVote3() throws Exception {
+  public void testVote2() throws Exception {
     Node test = initNode();
     votingService.vote(test, 2, "root", "fr");
     votingService.vote(test, 3, "marry", "fr");
@@ -225,82 +206,36 @@ public class TestVotingService extends BaseWCMTestCase {
    *        votingRate = 3.33
    */
   @SuppressWarnings("unchecked")
-  @Test
-  public void testVote4() throws Exception{
-    try {
-      Node test = session.getRootNode().addNode("Test", FILE);
-      Node testFile = test.addNode(CONTENT, RESOURCE);
-      testFile.setProperty(DATA, "test");
-      testFile.setProperty(MIMETYPE, "text/xml");
-      testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
-      if (test.canAddMixin(I18NMixin)) {
-        test.addMixin(I18NMixin);
-      }
-      if (test.canAddMixin(VOTEABLE)) {
-        test.addMixin(VOTEABLE);
-      }
-      session.save();
-      multiLanguageService.addLanguage(test, createFileInput(), "fr", false, "jcr:content");
-      multiLanguageService.addLanguage(test, createFileInput(), "en", false, "jcr:content");
-      multiLanguageService.addLanguage(test, createFileInput(), "vi", false, "jcr:content");
-      votingService.vote(test, 3, "root", "fr");
-      votingService.vote(test, 2, "marry", "fr");
-      votingService.vote(test, 5, "john", "fr");
-      Node viLangNode = multiLanguageService.getLanguage(test, "vi");
-      Node enLangNode = multiLanguageService.getLanguage(test, "en");
-      Node frLangNode = multiLanguageService.getLanguage(test, "fr");
-      List voters = Arrays.asList(new String[] { "root", "marry", "john" });
-      Property voterProperty = frLangNode.getProperty(VOTER_PROP);
-      Value[] value = voterProperty.getValues();
-      for (Value val : value) {
-        assertTrue(voters.contains(val.getString()));
-      }
-      assertEquals(testFile.getProperty(MIMETYPE).getString(), frLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
-      assertEquals(testFile.getProperty(DATA).getValue(), frLangNode.getNode(CONTENT).getProperty(DATA).getValue());
-      assertEquals(testFile.getProperty(MIMETYPE).getString(), viLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
-      assertEquals(testFile.getProperty(DATA).getValue(), viLangNode.getNode(CONTENT).getProperty(DATA).getValue());
-      assertEquals(testFile.getProperty(MIMETYPE).getString(), enLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
-      assertEquals(testFile.getProperty(DATA).getValue(), enLangNode.getNode(CONTENT).getProperty(DATA).getValue());
-      assertEquals(3.33, frLangNode.getProperty(VOTING_RATE_PROP).getValue().getDouble());
-      assertEquals(3, frLangNode.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
-    } catch (ConstraintViolationException e) {
-      // TODO: handle exception
+  public void testVote3() throws Exception {
+    Node test = session.getRootNode().addNode("Test", FILE);
+    Node testFile = test.addNode(CONTENT, RESOURCE);
+    testFile.setProperty(DATA, "test");
+    testFile.setProperty(MIMETYPE, "text/xml");
+    testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
+    if (test.canAddMixin(I18NMixin)) {
+      test.addMixin(I18NMixin);
     }
-  }
-
-  /**
-   * Test Method: vote()
-   * Input: test node is set default language
-   *        voter's language is null
-   * Expected: throws Exception
-   */
-  @Test
-  public void testVote5() throws Exception {
-    try {
-      Node test = session.getRootNode().addNode("Test");
-      if(test.canAddMixin(I18NMixin)){
-        test.addMixin(I18NMixin);
-      }
-      session.save();
-      votingService.vote(test, 3, "root", null);
-    } catch (Exception ex) {
+    if (test.canAddMixin(VOTEABLE)) {
+      test.addMixin(VOTEABLE);
     }
-  }
-
-  /**
-   * Test Method: vote()
-   * Input: Test node doesn't have multiple language.
-   *        Voter's language is not equal default language.
-   * Expected: throws Exception
-   */
-  @Test
-  public void testVote6() throws Exception{
-    try {
-      Node test = session.getRootNode().addNode("Test");
-      session.save();
-      votingService.vote(test, 3, "root", "fr");
-    } catch (Exception ex) {
-    }
+    session.save();
+    multiLanguageService.addLanguage(test, createFileInput(), "fr", false, "jcr:content");
+    multiLanguageService.addLanguage(test, createFileInput(), "en", false, "jcr:content");
+    multiLanguageService.addLanguage(test, createFileInput(), "vi", false, "jcr:content");
+    votingService.vote(test, 3, "root", "fr");
+    votingService.vote(test, 2, "marry", "fr");
+    votingService.vote(test, 5, "john", "fr");
+    Node viLangNode = multiLanguageService.getLanguage(test, "vi");
+    Node enLangNode = multiLanguageService.getLanguage(test, "en");
+    Node frLangNode = multiLanguageService.getLanguage(test, "fr");
+    assertEquals(testFile.getProperty(MIMETYPE).getString(), frLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
+    assertEquals(testFile.getProperty(DATA).getValue(), frLangNode.getNode(CONTENT).getProperty(DATA).getValue());
+    assertEquals(testFile.getProperty(MIMETYPE).getString(), viLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
+    assertEquals(testFile.getProperty(DATA).getValue(), viLangNode.getNode(CONTENT).getProperty(DATA).getValue());
+    assertEquals(testFile.getProperty(MIMETYPE).getString(), enLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
+    assertEquals(testFile.getProperty(DATA).getValue(), enLangNode.getNode(CONTENT).getProperty(DATA).getValue());
+    assertEquals(3.33, frLangNode.getProperty(VOTING_RATE_PROP).getValue().getDouble());
+    assertEquals(3, frLangNode.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
   }
 
   /**
@@ -344,6 +279,25 @@ public class TestVotingService extends BaseWCMTestCase {
     votingService.vote(test, 2, "marry", "vi");
     long voteTotal = votingService.getVoteTotal(test);
     assertEquals(voteTotal, test.getProperty(VOTE_TOTAL_PROP).getValue().getLong());
+  }
+  
+  /**
+   * Test Method: IsVoted()
+   * Input: test node is set English default language and has MultiLanguage
+   *        test node is voted 1 time: root votes 1 times using default language.
+   * Expected: root voted  test node and mary didn't
+   * @throws Exception
+   */
+  @Test
+  public void testIsVoted() throws Exception{
+    Node test = session.getRootNode().addNode("Test");
+    if (test.canAddMixin(I18NMixin)) {
+      test.addMixin(I18NMixin);
+    }
+    session.save();
+    votingService.vote(test, 3, "root", multiLanguageService.getDefault(test));
+    assertTrue(votingService.isVoted(test, "root", multiLanguageService.getDefault(test)));
+    assertFalse(votingService.isVoted(test, "mary", multiLanguageService.getDefault(test)));
   }
   
   /**

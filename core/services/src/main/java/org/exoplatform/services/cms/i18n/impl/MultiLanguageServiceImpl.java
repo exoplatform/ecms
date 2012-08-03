@@ -19,6 +19,7 @@ package org.exoplatform.services.cms.i18n.impl;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -573,6 +574,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         }
       }
       Node jcrContent = node.getNode(nodeType) ;
+      if ("jcr:content".equals(nodeType)) {
+        Node jcrContentNode = newLanguageNode.addNode("jcr:content", "nt:resource");
+        jcrContentNode.setProperty("jcr:lastModified", new GregorianCalendar());
+        jcrContentNode.setProperty("jcr:mimeType", "text/plain");
+        jcrContentNode.setProperty("jcr:data", "");
+      }
       node.save() ;
       if(!newLanguageNode.hasNode(nodeType)) {
         ws.copy(jcrContent.getPath(), newLanguageNode.getPath() + "/" + jcrContent.getName()) ;

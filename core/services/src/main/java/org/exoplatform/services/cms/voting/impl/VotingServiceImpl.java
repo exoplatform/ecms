@@ -185,27 +185,8 @@ public class VotingServiceImpl implements VotingService {
     }
     return voterVoteValues;
   }
-  public boolean isVoted(Node node, String userName, String language) throws Exception {
-    boolean isVoted = false;
-    Session session = node.getSession();
-    node = handleUser(session, node, userName);
-
-    if(!node.isNodeType(VOTABLE)) {
-      if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
-      else throw new NoSuchNodeTypeException() ;
-    }
-
-    Node languageNode = handleLanguage(node, language);
-    Value[] voters = {} ;
-    if(languageNode.hasProperty(VOTER_PROP)) {
-      voters = languageNode.getProperty(VOTER_PROP).getValues() ;
-    }
-    Value newVoter = session.getValueFactory().createValue(userName) ;
-    List<Value> newVoterList = new ArrayList<Value>() ;
-    newVoterList.addAll(Arrays.<Value>asList(voters)) ;
-    if (newVoterList.contains(newVoter))
-      isVoted = true;
-    return isVoted;
+  public boolean isVoted(Node node, String userName, String language) throws Exception {    
+    return getVoteValueOfUser(node, userName, language) > 0;
   }
 
   private Node handleLanguage(Node node, String language) throws Exception {
