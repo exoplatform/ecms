@@ -17,7 +17,7 @@
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="3mm"/>
             </imageobject>
-          </inlinemediaobject> on the <emphasis role="bold">Administration</emphasis> bar, then select <emphasis role="bold">Content --> Sites Explorer</emphasis> from the drop-down menu.
+          </inlinemediaobject> on the <guilabel>Administration</guilabel> bar, then select <menuchoice><guimenu>Content</guimenu><guimenuitem>Sites Explorer</guimenuitem></menuchoice> from the drop-down menu.
 			</para>
      
 			 <mediaobject>

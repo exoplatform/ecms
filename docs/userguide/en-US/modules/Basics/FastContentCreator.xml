@@ -12,7 +12,7 @@
          There are two modes in <emphasis role="bold">Fast Content Creator:</emphasis> <emphasis role="bold">Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
   </para>
   <para>
-     The <emphasis role="bold">Standard Content Creator</emphasis> mode allows you to add an action to your document. When <link linkend="sect-User_Guide-Fast_Content_Creator-Configuration">Configuring Fast Content Creator</link>, the <emphasis role="bold">Edit Mode</emphasis> tab has the <emphasis role="bold">Actions</emphasis> part that allows you to add an action to the document and view actions added to the document.
+     The <emphasis role="bold">Standard Content Creator</emphasis> mode allows you to add an action to your document. When <link linkend="sect-User_Guide-Fast_Content_Creator-Configuration">Configuring Fast Content Creator</link>, the <guilabel>Edit Mode</guilabel> tab has the <guilabel>Actions</guilabel> part that allows you to add an action to the document and view actions added to the document.
    </para>
    <mediaobject>
       <imageobject role="html">
@@ -23,23 +23,23 @@
       </imageobject>
     </mediaobject>
     <para>
-       To add an action to a document, click <emphasis role="bold">Add</emphasis> or <inlinemediaobject>
+       To add an action to a document, click <guibutton>Add</guibutton> or <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/plusicon1.png" format="PNG" scalefit="1" width="4mm"/>
         </imageobject>
           <textobject>
              <phrase>plus</phrase>
           </textobject>
-      </inlinemediaobject> to open the <emphasis role="bold">Add Action</emphasis> form. Do the same steps in the <link linkend="sect-User_Guide-Manage_Actions-Add_an_action">Add an action</link> section.
+      </inlinemediaobject> to open the <guilabel>Add Action</guilabel> form. Do the same steps in the <link linkend="sect-User_Guide-Manage_Actions-Add_an_action">Add an action</link> section.
    </para>
    <para>To use the
        <emphasis role="bold">Fast Content Creator</emphasis>
        portlet, you need to add it to a specific page first by dragging and dropping
-       <emphasis role="bold">Content Creator</emphasis>
+       <guilabel>Content Creator</guilabel>
        or
-       <emphasis role="bold">Standard Content Creator</emphasis>
+       <guilabel>Standard Content Creator</guilabel>
        from
-       <emphasis role="bold">Page Editor --> Applications --> Forms</emphasis>
+       <menuchoice><guimenu>Page Editor</guimenu><guisubmenu>Applications</guisubmenu><guimenuitem>Forms</guimenuitem></menuchoice>
        to the main pane. This can be done when
        <link linkend="sect-User_Guide-Page_Creation_Wizard">creating a new page</link>
        or <link linkend="sect-User_Guide-Manage_Pages-Edit_a_Page">editing an existing page</link>
@@ -63,7 +63,7 @@
     <procedure>
             <step><para>Open the <emphasis role="bold">Question?</emphasis> page.</para></step>
             <step>
-                <para>Hover your cursor over <emphasis role="bold">Edit --> Page</emphasis>, then click <emphasis role="bold">Layout</emphasis> on the <emphasis role="bold">Administration</emphasis> bar.</para>
+                <para>Hover your cursor over <menuchoice><guimenu>Edit</guimenu><guimenuitem>Page</guimenuitem></menuchoice>, then click <guilabel>Layout</guilabel> on the <guilabel>Administration</guilabel> bar.</para>
                 <para>The edit page appear.</para>
             </step>
             <mediaobject>
@@ -89,7 +89,7 @@
                 to edit the portlet.
             </para>
             <para>The form with the
-                <emphasis role="bold">Edit Mode</emphasis>
+                <guilabel>Edit Mode</guilabel>
                 tab appears.
             </para>
         <mediaobject>
@@ -111,28 +111,28 @@
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Location to Save</emphasis> </entry>
+                <entry><guilabel>Location to Save</guilabel> </entry>
                 <entry> Select the location to save documents or messages. </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Select Template</emphasis> </entry>
+                <entry><guilabel>Select Template</guilabel> </entry>
                 <entry> Select a template for the document. There are different input fields corresponding to each selected template.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Custom Save Button</emphasis> </entry>
+                <entry><guilabel>Custom Save Button</guilabel> </entry>
                 <entry> Change the label for the "Save" button. </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Custom Save Message</emphasis> </entry>
+                <entry><guilabel>Custom Save Message</guilabel> </entry>
                 <entry> Change the content of custom message that informs you have just saved a document. </entry>
               </row>
               <row>
-                <entry><emphasis role="bold"> Redirect</emphasis> </entry>
-                <entry> Allow you to redirect the path in the <emphasis role="bold">Redirect Path</emphasis> field. </entry>
+                <entry><guilabel> Redirect</guilabel> </entry>
+                <entry> Allow you to redirect the path in the <guilabel>Redirect Path</guilabel> field. </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Redirect Path</emphasis> </entry>
-                <entry> Show a path to which you will be directed after clicking <emphasis role="bold">OK</emphasis> in the confirmation message. </entry>
+                <entry><guilabel>Redirect Path</guilabel> </entry>
+                <entry> Show a path to which you will be directed after clicking <guibutton>OK</guibutton> in the confirmation message. </entry>
               </row>
             </tbody>
           </tgroup>
@@ -149,7 +149,7 @@
                 <textobject>
                    <phrase>magnifying glass</phrase>
                 </textobject>
-              </inlinemediaobject> to open the <emphasis role="bold">Select Location</emphasis> form.</para>
+              </inlinemediaobject> to open the <guilabel>Select Location</guilabel> form.</para>
             <mediaobject>
               <imageobject role="html">
                 <imagedata align="center"  fileref="images/selectlocationform.png" format="PNG"/>
@@ -168,7 +168,7 @@
                 <textobject>
                    <phrase>green tick</phrase>
                 </textobject>
-              </inlinemediaobject> in the <emphasis role="bold">Add</emphasis> column to select the child node in the right pane. After being selected, this location will be displayed on the <emphasis role="bold">Location to Save</emphasis> field. Created documents will be saved in this location.
+              </inlinemediaobject> in the <guilabel>Add</guilabel> column to select the child node in the right pane. After being selected, this location will be displayed on the <guilabel>Location to Save</guilabel> field. Created documents will be saved in this location.
             </para>
       </step>
       <step>
@@ -177,20 +177,20 @@
     </para>
       </step>
       <step>
-        <para>Change the label for the <emphasis role="bold">Custom Save</emphasis> button, and the content for <emphasis role="bold">Custom Save Message.</emphasis></para>
+        <para>Change the label for the <guilabel>Custom Save</guilabel> button, and the content for <guilabel>Custom Save Message.</guilabel></para>
       </step>
       <step>
         <para>
-     Tick the <emphasis role="bold">Redirect</emphasis> checkbox if you want to redirect to the path in the <emphasis role="bold">Redirect Path</emphasis> field after clicking <emphasis role="bold">OK</emphasis> in the confirmation message.
+     Tick the <guilabel>Redirect</guilabel> checkbox if you want to redirect to the path in the <guilabel>Redirect Path</guilabel> field after clicking <guibutton>OK</guibutton> in the confirmation message.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to finish the configuration of <emphasis role="bold">Fast Content Creator</emphasis>. Then, click <emphasis role="bold">OK</emphasis> in the notification message to accept your changes.</para>
+     Click <guibutton>Save</guibutton> to finish the configuration of <emphasis role="bold">Fast Content Creator</emphasis>. Then, click <guilabel>OK</guilabel> in the notification message to accept your changes.</para>
       </step>
       <step>
         <para>
-    Click <emphasis role="bold">Close</emphasis> to quit the form to edit the configuration of <emphasis role="bold">Fast Content Creator</emphasis>.</para>
+    Click <guibutton>Close</guibutton> to quit the form to edit the configuration of <emphasis role="bold">Fast Content Creator</emphasis>.</para>
       </step>
     </procedure>
 
@@ -207,7 +207,7 @@
         <para>Fill values in all the fields in the page.</para>
       </step>
       <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept creating the new document. A message appears to let you know that the document is created successfully at the location selected in the <emphasis role="bold">Location to Save</emphasis> field.</para>
+        <para>Click <guibutton>Save</guibutton> to accept creating the new document. A message appears to let you know that the document is created successfully at the location selected in the <guilabel>Location to Save</guilabel> field.</para>
       </step>
     </procedure>
       </section>

@@ -34,17 +34,17 @@
               <phrase>[ Add category ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar  to open the <emphasis role="bold">Add Category</emphasis> form.
+          on the <guilabel>Action</guilabel> bar  to open the <guilabel>Add Category</guilabel> form.
         </para>
       </step>
       <step>
         <para>
-          Enter a name for the category in the <emphasis role="bold">Category Name</emphasis> field.
+          Enter a name for the category in the <guilabel>Category Name</guilabel> field.
         </para>
       </step>
       <step>
         <para>
-          Click <emphasis role="bold">Save</emphasis> to accept creating the new category.
+          Click <guibutton>Save</guibutton> to accept creating the new category.
         </para>
       </step>
     </procedure>
@@ -52,8 +52,8 @@
   <section id="sect-User_Guide-Actions-Add_a_document">
     <title>Add a document</title>
     <para>
-      There are several types of document in &PRODUCT;, such as <emphasis role="bold">File, Article, Podcast, Sample
-      node, File Plan, Kofax,</emphasis> and more.
+      There are several types of document in &PRODUCT;, such as <guilabel>File, Article, Podcast, Sample
+      node, File Plan, Kofax,</guilabel> and more.
     </para>
     <para>
       The table below shows types of nodes which can be added to various document types. The rows indicate which nodes
@@ -606,10 +606,11 @@
         </para>
         <para>
           The
-          <emphasis role="bold">Upload File</emphasis>
+          <guilabel>Upload File</guilabel>
           form will appear.
         </para>
         <mediaobject>
+
           <imageobject role="html">
             <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
@@ -621,16 +622,16 @@
       <step>
         <para>
           Enter a name into the
-          <emphasis role="bold">Name</emphasis>
+          <guilabel>Name</guilabel>
           field. If not, the
-          <emphasis role="bold">Name</emphasis>
+          <guilabel>Name</guilabel>
           field is automatically filled with the file name.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Browse...</emphasis>
+          <guilabel>Browse...</guilabel>
           to select the attachment file. You can click
           <inlinemediaobject>
             <imageobject>
@@ -646,10 +647,10 @@
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to attach the files.
         </para>
-        <para>To view the attached file directly in <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis>,</emphasis> simply click its name.</para>
+        <para>To view the attached file directly in <emphasis role="bold">Sites Explorer</emphasis>, simply click its name.</para>
         <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/pdf-viewer.png" format="PNG"/>
@@ -669,33 +670,33 @@
     <procedure>
  <step>
    <para>
-Follow the steps in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section to open the corresponding form to add a <emphasis role="bold">File</emphasis> document.
+Follow the steps in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section to open the corresponding form to add a <guilabel>File</guilabel> document.
    </para>
  </step>
  <step>
    <para>
-Input a name for the file document in the <emphasis role="bold">Name</emphasis> field. Some special characters (@ # % &amp; * ( ) “ &apos; : ; [ ] {} / !) cannot be used in the <emphasis role="bold">Name</emphasis> field.
+Input a name for the file document in the <guilabel>Name</guilabel> field. Some special characters (@ # % &amp; * ( ) “ &apos; : ; [ ] {} / !) cannot be used in the <guilabel>Name</guilabel> field.
 </para>
  </step>
  <step>
    <para>
 Click the
-<emphasis role="bold">Mime Type</emphasis> field and select one type. There are three types of <emphasis role="bold">File</emphasis> document:
+<guilabel>Mime Type</guilabel> field and select one type. There are three types of <guilabel>File</guilabel> document:
 </para>
    <itemizedlist>
      <listitem>
        <para>
-  <emphasis role="bold">text/html</emphasis>: when creating a text/html File document, you can input values like source code (HyperText Markup Language HTML) in the <emphasis role="bold">Content</emphasis> field . After being created, it will generate the content you want, then you can see both the input source code and the generated content in that document.
+  <guilabel>text/html</guilabel>: when creating a text/html File document, you can input values like source code (HyperText Markup Language HTML) in the <emphasis role="bold">Content</emphasis> field . After being created, it will generate the content you want, then you can see both the input source code and the generated content in that document.
  </para>
      </listitem>
      <listitem>
        <para>
-  <emphasis role="bold">text/plain</emphasis>: after a text/plain File document is created, it will display exactly what you input in the <emphasis role="bold">Content</emphasis> field.
+  <guilabel>text/plain</guilabel>: after a text/plain File document is created, it will display exactly what you input in the <guilabel>Content</guilabel> field.
  </para>
      </listitem>
        <listitem>
            <para>
-               <emphasis role="bold">application/x-groovy+html</emphasis>: it indicates your file as a groovy file. </para>
+               <guilabel>application/x-groovy+html</guilabel>: it indicates your file as a groovy file. </para>
        </listitem>
    </itemizedlist>
  </step>
@@ -706,7 +707,7 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
    <itemizedlist>
      <listitem>
        <para>
-  <emphasis role="bold">text/html</emphasis> or <emphasis role="bold">application/x-groovy+html</emphasis>: if you want to create a <emphasis role="bold">File</emphasis> document with a source code and generated content, click the
+  <guilabel>text/html</guilabel> or <guilabel>application/x-groovy+html</guilabel>: if you want to create a <guilabel>File</guilabel> document with a source code and generated content, click the
   <inlinemediaobject>
            <imageobject>
              <imagedata width="10mm" fileref="images/sourceicon.png" format="PNG" scalefit="1"/>
@@ -719,7 +720,7 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
      </listitem>
      <listitem>
        <para>
-  <emphasis role="bold">text/plain</emphasis>: if you select text/plain type, the content field will be displayed like the following illustration.
+  <guilabel>text/plain</guilabel>: if you select text/plain type, the content field will be displayed like the following illustration.
  </para>
        <mediaobject>
          <imageobject role="html">
@@ -734,7 +735,7 @@ Input a value in the <emphasis role="bold">Content</emphasis> field:
  </step>
  <step>
    <para>
-Optionally, fill values in all the rest fields, including <emphasis role="bold">Title</emphasis>, <emphasis role="bold">Description</emphasis>, <emphasis role="bold">Creator</emphasis> and <emphasis role="bold">Source</emphasis>.
+Optionally, fill values in all the rest fields, including <guilabel>Title</guilabel>, <guilabel>Description</guilabel>, <guilabel>Creator</guilabel> and <guilabel>Source</guilabel>.
 </para>
 <para>
 Click <inlinemediaobject>
@@ -749,10 +750,10 @@ Click <inlinemediaobject>
  </step>
  <step>
    <para>
-Click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to accept creating a new file document.
+Click <guibutton>Save</guibutton> or <guibutton>Save &amp; Close</guibutton> to accept creating a new file document.
 </para>
    <para>
-After being created successfully, a file document with the <emphasis>text/html</emphasis> type will be displayed like the illustration below.
+After being created successfully, a file document with the <guilabel>text/html</guilabel> type will be displayed like the illustration below.
 </para>
    <mediaobject>
      <imageobject role="html">
@@ -784,26 +785,26 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Input name and title of the Article in the
-          <emphasis role="bold">Name</emphasis>
+          <guilabel>Name</guilabel>
           and
-          <emphasis role="bold">Title</emphasis>
-          fields. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in the <emphasis role="bold">Name</emphasis> field.
+          <guilabel>Title</guilabel>
+          fields. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in the <guilabel>Name</guilabel> field.
         </para>
       </step>
       <step>
         <para>
           Input values for both fields:
-          <emphasis role="bold">Summary</emphasis>
+          <guilabel>Summary</guilabel>
           and
-          <emphasis role="bold">Content.</emphasis>
+          <guilabel>Content</guilabel>.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to accept the inputted values.
         </para>
       </step>
@@ -820,12 +821,12 @@ After being created successfully, a file document with the <emphasis>text/html</
       </imageobject>
     </mediaobject>
     <para>
-      The <emphasis role="bold">Links</emphasis> area lists all its related documents. After adding relations to a document, Article will be
+      The <guilabel>Links</guilabel> area lists all its related documents. After adding relations to a document, Article will be
       displayed. You can click these links to view the content of the related documents. For more details about how to
       add a relation to a document, refer to the <link linkend="sect-User_Guide-Manage_Relations-Add_a_relation">Add a relation</link> section.
     </para>
     <para>
-      The <emphasis role="bold">Attachments</emphasis> area lists all its uploaded files/documents which are attached with the Article. You can remove
+      The <guilabel>Attachments</guilabel> area lists all its uploaded files/documents which are attached with the Article. You can remove
       the attachments by clicking
       <inlinemediaobject>
         <imageobject>
@@ -857,7 +858,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link>
             section
             to open the corresponding
-            <emphasis role="bold">Podcast</emphasis>
+            <guilabel>Podcast</guilabel>
             form.
         </para>
           <mediaobject>
@@ -881,30 +882,30 @@ After being created successfully, a file document with the <emphasis>text/html</
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Name</emphasis></entry>
+                <entry><guilabel>Name</guilabel></entry>
                 <entry>The document name which is required. Special characters (@ # % &amp; * ( ) “
-                  &apos; : ; [ ] {} / !) are not allowed in the <emphasis role="bold">Name</emphasis> field.
+                  &apos; : ; [ ] {} / !) are not allowed in the <guilabel>Name</guilabel> field.
                 </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Categories</emphasis></entry>
+                <entry><guilabel>Categories</guilabel></entry>
                 <entry>Categories of a document.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Title</emphasis></entry>
+                <entry><guilabel>Title</guilabel></entry>
                 <entry>The display name of a document.</entry>
               </row>
 
               <row>
-                <entry><emphasis role="bold">Link</emphasis></entry>
+                <entry><guilabel>Link</guilabel></entry>
                 <entry>The link to the source path of the uploaded media file that is required.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Author</emphasis></entry>
+                <entry><guilabel>Author</guilabel></entry>
                 <entry>The author of the uploaded media file.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Explicit</emphasis></entry>
+                <entry><guilabel>Explicit</guilabel></entry>
                 <entry>
                   <para>
                     It is used to indicate if your Podcast episodes contain an explicit content or not.
@@ -912,29 +913,29 @@ After being created successfully, a file document with the <emphasis>text/html</
                 </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Category</emphasis></entry>
+                <entry><guilabel>Category</guilabel></entry>
                 <entry>The category of the uploaded media file, for example music, film, or short clip.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Keyword</emphasis></entry>
+                <entry><guilabel>Keyword</guilabel></entry>
                 <entry>This field allows you to search your Podcast files more quickly. You can use commas to separate
                   between keywords.
                 </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Publish Date</emphasis></entry>
+                <entry><guilabel>Publish Date</guilabel></entry>
                 <entry>The date when an episode was released.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Description</emphasis></entry>
+                <entry><guilabel>Description</guilabel></entry>
                 <entry>Information about the uploaded media file.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Mime Type</emphasis></entry>
+                <entry><guilabel>Mime Type</guilabel></entry>
                 <entry>The type of the uploaded media file.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Length</emphasis></entry>
+                <entry><guilabel>Length</guilabel></entry>
                 <entry>The length of the uploaded media file.</entry>
               </row>
             </tbody>
@@ -944,16 +945,16 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Input values for fields. To upload a media file, click
-          <emphasis role="bold">Browse...</emphasis>
+          <guilabel>Browse...</guilabel>
           and select the media file from your device.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
       </step>
@@ -992,16 +993,16 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Browse...</emphasis>
+          <guilabel>Browse...</guilabel>
           to locate your desired image, and upload it.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
       </step>
@@ -1019,7 +1020,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </mediaobject>
     <para>
       The
-      <emphasis role="bold">Relations</emphasis>
+      <guilabel>Relations</guilabel>
       area is used to list all its related documents. See the
         <link
                 linkend="sect-User_Guide-Manage_Relations-View_Relations">View a relation
@@ -1031,7 +1032,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </para>
     <para>
       The
-      <emphasis role="bold">Attachments</emphasis>
+      <guilabel>Attachments</guilabel>
       area is used to list all its uploaded files. See the <link
             linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document">Attach files to a document</link> section for more details.
 	</para>
@@ -1043,7 +1044,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
           Follow the instructions
           in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
-          to open the corresponding form to add a <emphasis role="bold">File Plan</emphasis> document.
+          to open the corresponding form to add a <guilabel>File Plan</guilabel> document.
 		    <mediaobject>
               <imageobject role="html">
                 <imagedata align="center" fileref="images/addfileplanform.png" format="PNG"/>
@@ -1056,7 +1057,7 @@ After being created successfully, a file document with the <emphasis>text/html</
 		 <para xml:id="vari-User_Guide-Create_a_new_File_Plan-Tabs_in_the_Add_File_plan_form"><emphasis role="bold">Details:</emphasis></para>
 		 <itemizedlist>
 		 <listitem>
-		<para>The <emphasis role="bold">Name</emphasis> tab
+		<para>The <guilabel>Name</guilabel> tab
           </para>
             <table>
               <tgroup cols="2">
@@ -1068,11 +1069,11 @@ After being created successfully, a file document with the <emphasis>text/html</
                 </thead>
                 <tbody>
                   <row>
-                    <entry><emphasis role="bold">Name</emphasis></entry>
+                    <entry><guilabel>Name</guilabel></entry>
                     <entry>The name of the file plan.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Categories</emphasis></entry>
+                    <entry><guilabel>Categories</guilabel></entry>
                     <entry>Categories of your file plan. Select the categories for your file plan by clicking
                       <inlinemediaobject>
                         <imageobject>
@@ -1085,11 +1086,11 @@ After being created successfully, a file document with the <emphasis>text/html</
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Language</emphasis></entry>
+                    <entry><guilabel>Language</guilabel></entry>
                     <entry>The language of the File Plan document.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">File Plan Note</emphasis></entry>
+                    <entry><guilabel>File Plan Note</guilabel></entry>
                     <entry>Note for presenting any other information for users.</entry>
                   </row>
                 </tbody>
@@ -1097,7 +1098,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </table>
           </listitem>
         <listitem>
-        <para>The <emphasis role="bold">Record Properties</emphasis> tab
+        <para>The <guilabel>Record Properties</guilabel> tab
           </para>
             <mediaobject>
               <imageobject role="html">
@@ -1117,13 +1118,13 @@ After being created successfully, a file document with the <emphasis>text/html</
                 </thead>
                 <tbody>
                   <row>
-                    <entry><emphasis role="bold">Record Category Identifier</emphasis></entry>
+                    <entry><guilabel>Record Category Identifier</guilabel></entry>
                     <entry>The alphanumeric identifier indicates a unique record category. This must be a
                       unique ID. If this field is left blank, it will be created automatically by the system.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Disposition Authority</emphasis></entry>
+                    <entry><guilabel>Disposition Authority</guilabel></entry>
                     <entry>A reference number to the regulations that govern the disposition.</entry>
                   </row>
                   <row>
@@ -1131,41 +1132,41 @@ After being created successfully, a file document with the <emphasis>text/html</
                     <entry>A type of record indicators which should never be deleted.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Disposition Instructions
-                    </emphasis></entry>
+                    <entry><guilabel>Disposition Instructions
+                    </guilabel></entry>
                     <entry>A readable guideline on how to handle the records associated with the file plan.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Contains Records Folder</emphasis></entry>
+                    <entry><guilabel>Contains Records Folder</guilabel></entry>
                     <entry>The confirmation is about whether the records folder is contained or not.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Default Media Type</emphasis></entry>
+                    <entry><guilabel>Default Media Type</guilabel></entry>
                     <entry>The choice for preset media types which are made available to simplify the data entry for the
                       record. The frequently-chosen value is &quot;electronic&quot; or paper.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Default Marking List</emphasis></entry>
+                    <entry><guilabel>Default Marking List</guilabel></entry>
                     <entry>Handling and classifying information that is printed at the bottom of the record, such as
                       UNCLASSIFIED, or NOCONTRACT.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Default Originating Organization</emphasis></entry>
+                    <entry><guilabel>Default Originating Organization</guilabel></entry>
                     <entry>This option is to enter the original arrangement as default which is made available to
                       simplify the data entry for the record and to assume that originating organizations are the same
                       for the information in the file plan.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Vital Record Indicator</emphasis></entry>
+                    <entry><guilabel>Vital Record Indicator</guilabel></entry>
                     <entry>This flag is to allow tracking or reminding you of the record as essential or not.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Vital Record Review Period</emphasis></entry>
+                    <entry><guilabel>Vital Record Review Period</guilabel></entry>
                     <entry>The choice for the interval of time between vital record reviews.</entry>
                   </row>
                 </tbody>
@@ -1173,7 +1174,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </table>
           </listitem>
         <listitem>
-        <para>The <emphasis role="bold">Process Properties</emphasis> tab
+        <para>The <guilabel>Process Properties</guilabel> tab
           </para>
             <mediaobject>
               <imageobject role="html">
@@ -1193,80 +1194,80 @@ After being created successfully, a file document with the <emphasis>text/html</
                 </thead>
                 <tbody>
                   <row>
-                    <entry><emphasis role="bold">Process Cutoffs</emphasis></entry>
+                    <entry><guilabel>Process Cutoffs</guilabel></entry>
                     <entry>The Boolean data type is used to break a process. If the process cutoff flag is set in the
                       file plan, the record is cutoff after the expiration, or after it has been obsolete or superseded,
                       depending on the information in the file plan.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Event Trigger</emphasis></entry>
+                    <entry><guilabel>Event Trigger</guilabel></entry>
                     <entry>The text data type is an automatic executing code which is used to tell the event to perform
                       some actions.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Cutoff Period</emphasis></entry>
+                    <entry><guilabel>Cutoff Period</guilabel></entry>
                     <entry>The duration for the record cutoff performance.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Cutoff on Obsolete</emphasis></entry>
+                    <entry><guilabel>Cutoff on Obsolete</guilabel></entry>
                     <entry>The record is cutoff when it is obsolete.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Cutoff on Superseded</emphasis> </entry>
+                    <entry><guilabel>Cutoff on Superseded</guilabel> </entry>
                     <entry>The record is cutoff when it is removed or replaced.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Process Hold</emphasis></entry>
+                    <entry><guilabel>Process Hold</guilabel></entry>
                     <entry>This boolean data type is used when a record process may be held before the further
                       disposition is handled.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Hold Period</emphasis></entry>
+                    <entry><guilabel>Hold Period</guilabel></entry>
                     <entry>The duration when a record may be held after cutoff which is normally measured in Years.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Discretionary Hold</emphasis></entry>
+                    <entry><guilabel>Discretionary Hold</guilabel></entry>
                     <entry>The Boolean data type is used when a hold may be discretionary, such as after a command
                       change. So, the discretionary hold flag allows the records management module to track these manual
                       checks.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Process Transfer</emphasis></entry>
+                    <entry><guilabel>Process Transfer</guilabel></entry>
                     <entry>The boolean data type is used to determine how a record process will be transferred.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Default Transfer Location</emphasis></entry>
+                    <entry><guilabel>Default Transfer Location</guilabel></entry>
                     <entry>The text data type is used to determine where a record is transferred by default.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Transfer Block Size</emphasis></entry>
+                    <entry><guilabel>Transfer Block Size</guilabel></entry>
                     <entry>The float data type is used to determine in what size blocks for organizational purposes that
                       is normally measured in Years.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Process Access</emphasis></entry>
+                    <entry><guilabel>Process Access</guilabel></entry>
                     <entry>The Boolean data type is flagged when a record, which is held permanently, must be ultimately
                       transferred to the national records authority.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Access Location</emphasis></entry>
+                    <entry><guilabel>Access Location</guilabel></entry>
                     <entry>The text data type is flagged to specify an area for the access transfer.</entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Access Block Size</emphasis></entry>
+                    <entry><guilabel>Access Block Size</guilabel></entry>
                     <entry>The text data type is flagged to determine the blocks size for organizational purposes which
                       is normally measured in Years.
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="bold">Process Destruction</emphasis></entry>
+                    <entry><guilabel>Process Destruction</guilabel></entry>
                     <entry>The Boolean data type is flagged if there is any record to be destroyed. After that, the
                       record is marked in the Alfresco system to be permanently destroyed so that all information,
                       metadata and physical traces are removed and cannot be recovered.
@@ -1286,9 +1287,9 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
       </step>
@@ -1301,7 +1302,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
           Follow the instructions
           in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
-          to open the <emphasis role="bold">Add Kofax Document</emphasis> form.
+          to open the <guilabel>Add Kofax Document</guilabel> form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -1314,7 +1315,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Input a name for a Kofax document in the <emphasis role="bold">Name</emphasis> field which is required. Special characters (@ # % &amp; * ( ) “ &apos; : ; [ ] { } / !) are not allowed in this field.
+          Input a name for a Kofax document in the <guilabel>Name</guilabel> field which is required. Special characters (@ # % &amp; * ( ) “ &apos; : ; [ ] { } / !) are not allowed in this field.
         </para>
       </step>
       <step>
@@ -1332,9 +1333,9 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
       </step>
@@ -1353,9 +1354,9 @@ After being created successfully, a file document with the <emphasis>text/html</
 	<itemizedlist>
 	<listitem>
     <para>
-      The <emphasis role="bold">File View</emphasis> tab is used to display all added nodes in that Kofax. Besides, all added files in Kofax are also
+      The <guilabel>File View</guilabel> tab is used to display all added nodes in that Kofax. Besides, all added files in Kofax are also
       displayed in the
-      <emphasis role="bold">Document View</emphasis>
+      <guilabel>Document View</guilabel>
       tab.
     </para>
 	</listitem>
@@ -1368,7 +1369,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
           Follow the instructions
           in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
-          to open the <emphasis role="bold">Add an event document</emphasis> form.
+          to open the <guilabel>Add an event document</guilabel> form.
         </para>
       </step>
       <step>
@@ -1379,34 +1380,34 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Input the location where the event will take place in the
-          <emphasis role="bold">Location</emphasis>
-          field. Select the <emphasis role="bold">Google Maps</emphasis> checkbox if you want the location of the event to be shown on Google Maps.
+          <guilabel>Location</guilabel>
+          field. Select the <guilabel>Google Maps</guilabel> checkbox if you want the location of the event to be shown on Google Maps.
         </para>
       </step>
       <step>
         <para>
           Enter the
-          <emphasis role="bold">Start</emphasis>
+          <guilabel>Start</guilabel>
           and
-          <emphasis role="bold">End Date/Time</emphasis>
+          <guilabel>End Date/Time</guilabel>
           of the event.
         </para>
       </step>
       <step>
         <para>
           Fill the
-          <emphasis role="bold">Summary</emphasis>
+          <guilabel>Summary</guilabel>
           and
-          <emphasis role="bold">Content</emphasis>
+          <guilabel>Content</guilabel>
           fields.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
       </step>
@@ -1431,7 +1432,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <para>
           Follow the instructions
           in the <link linkend="proc-User_Guide-Add_a_document-Add_a_new_document">Add a new document</link> section
-          to open the content template list, and select the <emphasis role="bold">Accessible Media</emphasis> template.
+          to open the content template list, and select the <guilabel>Accessible Media</guilabel> template.
         </para>
         <mediaobject>
       <imageobject role="html">
@@ -1454,46 +1455,46 @@ After being created successfully, a file document with the <emphasis>text/html</
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Name</emphasis></entry>
+                <entry><guilabel>Name</guilabel></entry>
                 <entry>The document name which is required. Special characters (@ # % &amp; * ( ) “
-                  &apos; : ; [ ] {} / !) are not allowed in the <emphasis role="bold">Name</emphasis> field.
+                  &apos; : ; [ ] {} / !) are not allowed in the <guilabel>Name</guilabel> field.
                 </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Categories</emphasis></entry>
+                <entry><guilabel>Categories</guilabel></entry>
                 <entry>The name of the selected categories.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Language</emphasis></entry>
+                <entry><guilabel>Language</guilabel></entry>
                 <entry>The language of the media.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Content</emphasis></entry>
+                <entry><guilabel>Content</guilabel></entry>
                 <entry>The content of the media which is required.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Title</emphasis></entry>
+                <entry><guilabel>Title</guilabel></entry>
                 <entry>The display name of the media.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Creator</emphasis></entry>
+                <entry><guilabel>Creator</guilabel></entry>
                 <entry>The creator of the media.</entry>
               </row>
 
               <row>
-                <entry><emphasis role="bold">Source</emphasis></entry>
+                <entry><guilabel>Source</guilabel></entry>
                 <entry>The source of the media.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Captions</emphasis></entry>
+                <entry><guilabel>Captions</guilabel></entry>
                 <entry>Provide the text of the dialogue and important sounds.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Audio description</emphasis></entry>
+                <entry><guilabel>Audio description</guilabel></entry>
                 <entry>Provide the narrate track of the media. You can browse and upload another media file from your local device to set it as the audio description.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Alternative text</emphasis></entry>
+                <entry><guilabel>Alternative text</guilabel></entry>
                 <entry>Provide the descriptive information about the media.</entry>
               </row>
             </tbody>
@@ -1504,22 +1505,22 @@ After being created successfully, a file document with the <emphasis>text/html</
       <para>Input the information in the fields, and attach existing files from your local device to the following fields:</para>
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Content</emphasis>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+          <para><guilabel>Content</guilabel>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
         </listitem>
         <listitem>
-          <para><emphasis role="bold">Captions</emphasis>: It must be a <emphasis>.srt</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+          <para><guilabel>Captions</guilabel>: It must be a <emphasis>.srt</emphasis> or <emphasis>.mp3</emphasis> file.</para>
         </listitem>
         <listitem>
-          <para><emphasis role="bold">Audio description</emphasis>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
+          <para><guilabel>Audio description</guilabel>: It must be a <emphasis>.flv</emphasis> or <emphasis>.mp3</emphasis> file.</para>
         </listitem>
       </itemizedlist>
     </step>
     <step>
       <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           or
-          <emphasis role="bold">Save &amp; Close</emphasis>
+          <guibutton>Save &amp; Close</guibutton>
           to finish.
         </para>
     </step>
@@ -1621,7 +1622,7 @@ After being created successfully, a file document with the <emphasis>text/html</
 						</entry>
 						 <entry>
 							Listen to the audio description. This icon only appears if you attach another media with the audio description to the
-               <emphasis role="bold">Audio description</emphasis> field. After opening the audio description, to back to the original media, click
+               <guilabel>Audio description</guilabel> field. After opening the audio description, to back to the original media, click
                <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/back-the-original-video.png" format="PNG" scalefit="1" width="4mm"/>
@@ -1638,14 +1639,14 @@ After being created successfully, a file document with the <emphasis>text/html</
 							</mediaobject>
 						</entry>
 						 <entry>
-							Activate/Deactivate the media caption. If you attach an <emphasis>.srt</emphasis> or <emphasis>.xml</emphasis> file to the <emphasis role="bold">Captions</emphasis> field, the caption will appear when you clicking this button.
+							Activate/Deactivate the media caption. If you attach an <emphasis>.srt</emphasis> or <emphasis>.xml</emphasis> file to the <guilabel>Captions</guilabel> field, the caption will appear when you clicking this button.
 						</entry>
 					</row>
         </tbody>
 			</tgroup>
 		</table>
     <note>
-      You can also attach <emphasis role="bold">Captions</emphasis> and <emphasis role="bold">Audio description</emphasis> to the uploaded
+      You can also attach <guilabel>Captions</guilabel> and <guilabel>Audio description</guilabel> to the uploaded
       media when <link linkend="sect-User_Guide-Actions-Edit_documents">editing this document</link>. To know how to upload a file, see the <link linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document">Attach files to a document</link> section.
     </note>
   </section>
@@ -1687,7 +1688,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </citetitle>
     <variablelist>
       <varlistentry>
-        <term><emphasis role="bold">Content folder</emphasis></term>
+        <term><guilabel>Content folder</guilabel></term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -1720,7 +1721,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><emphasis role="bold">Document folder</emphasis></term>
+        <term><guilabel>Document folder</guilabel></term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -1778,8 +1779,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Folder ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the
-          <emphasis role="bold">New Folder</emphasis>
+          on the <guilabel>Action</guilabel> bar to open the
+          <guilabel>New Folder</guilabel>
           form.
         </para>
         <mediaobject>
@@ -1798,13 +1799,13 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Input values for both <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Title</emphasis> fields which are required. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in these fields.
+          Input values for both <guilabel>Name</guilabel> and <guilabel>Title</guilabel> fields which are required. Special characters (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !) are not allowed in these fields.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept creating a new folder.
         </para>
       </step>
@@ -1853,9 +1854,9 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Translation ]</phrase>
             </textobject>
           </inlinemediaobject> on the
-          <emphasis role="bold">Action</emphasis>
+          <guilabel>Action</guilabel>
           bar to open the
-          <emphasis role="bold">Symlink Manager</emphasis>
+          <guilabel>Symlink Manager</guilabel>
           form.
         </para>
         <mediaobject>
@@ -1893,17 +1894,17 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           on the
-          <emphasis role="bold">Symlink Manager</emphasis>
+          <guilabel>Symlink Manager</guilabel>
           form.
         </para>
       </step>
       <step>
         <para>
           Select the document to which you have added the translation, then click the
-          <emphasis role="bold">Relation</emphasis>
-          button on the <emphasis role="bold">Filter</emphasis> bar.
+          <guibutton>Relation</guibutton>
+          button on the <guilabel>Filter</guilabel> bar.
         </para>
         <para>
           You will see the available language for the selected document. Click the language on this pane to view the
@@ -1944,7 +1945,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Add Sym Link ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Symlink Manager</emphasis> form.
+          on the <guilabel>Action</guilabel> bar to open the <guilabel>Symlink Manager</guilabel> form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -1967,11 +1968,11 @@ After being created successfully, a file document with the <emphasis>text/html</
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Path Node</emphasis></entry>
+                <entry><guilabel>Path Node</guilabel></entry>
                 <entry>The path to the target node.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Symlink Name</emphasis></entry>
+                <entry><guilabel>Symlink Name</guilabel></entry>
                 <entry>The name of the Symlink.</entry>
               </row>
             </tbody>
@@ -1990,7 +1991,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           to open the
-          <emphasis role="bold">Select Target Node</emphasis>
+          <guilabel>Select Target Node</guilabel>
           form.
         </para>
       </step>
@@ -2011,7 +2012,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           in the row of the node that you want to add. The path that the node will appear in the
-          <emphasis role="bold">Path Node</emphasis>
+          <guilabel>Path Node</guilabel>
           field and the name of the node is set by the name of the selected node. You can also edit this name.
         </para>
         <mediaobject>
@@ -2026,7 +2027,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to finish adding a Symlink.
         </para>
         <mediaobject>
@@ -2047,7 +2048,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <para>Right-click a node that you want to create a Symlink. Note that if you follow this way, the Symlink will be created to the current node.</para>
 	        </step>
 	        <step>
-		        <para>Click <emphasis role="bold">Add Symlink</emphasis> from the drop-down menu.</para>
+		        <para>Click <guilabel>Add Symlink</guilabel> from the drop-down menu.</para>
 	        </step>
         </procedure>
 	  <para>This node will become a Symlink to the current node.</para>
@@ -2063,16 +2064,16 @@ After being created successfully, a file document with the <emphasis>text/html</
 
 <note>
     <para>
-        You should notice the different behaviour between adding a Symlink via the <emphasis role="bold">Action</emphasis> bar and the right-click menu.
+        You should notice the different behaviour between adding a Symlink via the <guilabel>Action</guilabel> bar and the right-click menu.
     </para>
 <itemizedlist><listitem>
 	<para>
-        After you have right-clicked a node, then selected <emphasis role="bold">Add Symlink</emphasis>, a Symlink to the current node is created.
+        After you have right-clicked a node, then selected <guilabel>Add Symlink</guilabel>, a Symlink to the current node is created.
     </para>
 </listitem>
 <listitem>
 	<para>
-        Meanwhile, when you select <emphasis role="bold">Add Symlink</emphasis> on the <emphasis role="bold">Action</emphasis> bar, a <emphasis role="bold">Symlink Manager</emphasis> form will appear to let you select the target node.
+        Meanwhile, when you select <guilabel>Add Symlink</guilabel> on the <guilabel>Action</guilabel> bar, a <guilabel>Symlink Manager</guilabel> form will appear to let you select the target node.
     </para>
 </listitem>
 </itemizedlist>
@@ -2114,20 +2115,20 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Comment this document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Comment</emphasis> form.
+          on the <guilabel>Action</guilabel> bar to open the <guilabel>Comment</guilabel> form.
         </para>
       </step>
       <step>
         <para>
           Add your comment to the
-          <emphasis role="bold">Comment</emphasis>
+          <guilabel>Comment</guilabel>
           field.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to commit.
         </para>
       </step>
@@ -2145,7 +2146,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </mediaobject>
     <para>
       To view your comment, click the
-      <emphasis role="bold">Show comments</emphasis>
+      <guilabel>Show comments</guilabel>
       link:
     </para>
     <mediaobject>
@@ -2200,7 +2201,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Edit Document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar.
+          on the <guilabel>Action</guilabel> bar.
         </para>
       </step>
     </procedure>
@@ -2213,20 +2214,20 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Right-click the document you want to edit and select <emphasis role="bold">Edit</emphasis> from the menu.
+          Right-click the document you want to edit and select <guilabel>Edit</guilabel> from the menu.
         </para>
         <para>
           The
           form to edit the document will appear. All information of the selected document will be displayed in this form and ready for you to
           change except the
-          <emphasis role="bold">Name</emphasis>
+          <guilabel>Name</guilabel>
           field.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to commit your changes.
         </para>
       </step>
@@ -2236,9 +2237,9 @@ After being created successfully, a file document with the <emphasis>text/html</
     <title>Export nodes</title>
     <para>
       Nodes can be exported into either
-      <emphasis role="bold">.xml</emphasis>
+      <emphasis>.xml</emphasis>
       or
-      <emphasis role="bold">.zip</emphasis>
+      <emphasis>.zip</emphasis>
       file types.
     </para>
     <procedure>
@@ -2258,8 +2259,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Export Node ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to show the
-          <emphasis role="bold">Export</emphasis>
+          on the <guilabel>Action</guilabel> bar to show the
+          <guilabel>Export</guilabel>
           form.
         </para>
         <mediaobject>
@@ -2283,25 +2284,25 @@ After being created successfully, a file document with the <emphasis>text/html</
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Path to Export</emphasis></entry>
+                <entry><guilabel>Path to Export</guilabel></entry>
                 <entry>The path of the node being exported. This field will be pre-populated.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Format</emphasis></entry>
+                <entry><guilabel>Format</guilabel></entry>
                 <entry>The format of the original node.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">System View</emphasis></entry>
+                <entry><guilabel>System View</guilabel></entry>
                 <entry>Each node and each property of that node is included in a different tag.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Document View</emphasis></entry>
+                <entry><guilabel>Document View</guilabel></entry>
                 <entry>Each node is a tag and properties of that node are considered to be elements of that tag.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Zip</emphasis></entry>
+                <entry><guilabel>Zip</guilabel></entry>
                 <entry>If this field is checked, the node will be exported as a
-                  <emphasis role="bold">.zip</emphasis>
+                  <emphasis>.zip</emphasis>
                   file.
                 </entry>
               </row>
@@ -2312,15 +2313,15 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Export</emphasis>
+          <guilabel>Export</guilabel>
           and select a location to save the exported file.
         </para>
         <note>
           <para>
             The
-            <emphasis role="bold">Export</emphasis>
+            <guilabel>Export</guilabel>
             form can contain
-            <emphasis role="bold">Export Version History</emphasis>
+            <guilabel>Export Version History</guilabel>
             if the exported node or any of its child nodes is versioned.
           </para>
           <para>
@@ -2334,7 +2335,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     <title>Import nodes</title>
     <para>
       Nodes which are in the
-      <emphasis role="bold">.xml</emphasis>
+      <emphasis>.xml</emphasis>
       file format can be imported into the JCR Explorer system.
     </para>
     <procedure>
@@ -2354,8 +2355,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Import Node ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar. The
-          <emphasis role="bold">Import</emphasis>
+          on the <guilabel>Action</guilabel> bar. The
+          <guilabel>Import</guilabel>
           form appears.
         </para>
         <mediaobject>
@@ -2370,21 +2371,21 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Browse...</emphasis>
+          <guilabel>Browse...</guilabel>
           next to the
-          <emphasis role="bold">Upload File</emphasis>
+          <guilabel>Upload File</guilabel>
           field and navigate to the file you want to import.
         </para>
       </step>
       <step>
         <para>
           Select one value from the
-          <emphasis role="bold">UUID Behaviour</emphasis>
+          <guilabel>UUID Behaviour</guilabel>
           drop-down menu, including:
         </para>
         <variablelist>
           <varlistentry>
-            <term><emphasis role="bold">Create New</emphasis></term>
+            <term><guilabel>Create New</guilabel></term>
             <listitem>
                 <para>
                     If you select this behavior, the imported nodes receive new UUIDs which are completely independent
@@ -2396,7 +2397,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term><emphasis role="bold">Remove Existing</emphasis></term>
+            <term><guilabel>Remove Existing</guilabel></term>
             <listitem>
                 <para>
                     If you select this behavior, the imported nodes in a selected path receive the same UUIDs of the
@@ -2407,7 +2408,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term><emphasis role="bold">Replace Existing</emphasis></term>
+            <term><guilabel>Replace Existing</guilabel></term>
             <listitem>
                 <para>
                     If you select this behavior, you only can import the exported nodes into their original workspaces
@@ -2419,11 +2420,11 @@ After being created successfully, a file document with the <emphasis>text/html</
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term><emphasis role="bold">Throw Exception</emphasis></term>
+            <term><guilabel>Throw Exception</guilabel></term>
             <listitem>
                 <para>
                     If you select this behavior, there is a message which will alert that you can not import this node
-                    in case this node has been existing in the workspace. If this node hasn't existed, a new node will
+                    in case this node has been existing in the workspace. If this node has not existed, a new node will
                     be created.
                 </para>
             </listitem>
@@ -2433,8 +2434,8 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Browse...</emphasis>
-          next to <emphasis role="bold">Version History</emphasis> to select a version to import.
+          <guilabel>Browse...</guilabel>
+          next to <guilabel>Version History</guilabel> to select a version to import.
         </para>
       </step>
       <step>
@@ -2445,7 +2446,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Import</emphasis>
+          <guilabel>Import</guilabel>
           to import the file's selected version.
         </para>
       </step>
@@ -2495,18 +2496,18 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Actions ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
           <para>
             The
-            <emphasis role="bold">Manage Actions</emphasis>
+            <guilabel>Manage Actions</guilabel>
             form will appear.
           </para>
         </step>
         <step>
           <para>
             Select the
-            <emphasis role="bold">Add Action</emphasis>
+            <guilabel>Add Action</guilabel>
             tab.
           </para>
           <mediaobject>
@@ -2539,25 +2540,25 @@ After being created successfully, a file document with the <emphasis>text/html</
                   </row>     -->
                   <row>
                     <entry>
-                      <emphasis role="bold">Name</emphasis>
+                      <guilabel>Name</guilabel>
                     </entry>
                     <entry>The name of this action. This name is internal to the JCR explorer.</entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Lifecycle</emphasis>
+                      <guilabel>Lifecycle</guilabel>
                     </entry>
                     <entry>Select the lifecycle for this action. The action will be executed, depending on the lifecycle:
                       <itemizedlist>
                         <listitem>
                           <para>
-                           <emphasis role="bold">'User Action':</emphasis> The action is executed when
+                           <guilabel>'User Action':</guilabel> The action is executed when
                             right-clicking the folder and then selecting the action.
                           </para>
                         </listitem>
                         <listitem>
                           <para>
-                            <emphasis role="bold">'Content Addition':</emphasis> The action will be executed
+                            <guilabel>'Content Addition':</guilabel> The action will be executed
                             on a new document, but not on a subfolder when the document or the subfolder is created in
                             the folder to which an action has been added. It is also applied to a new document in
                             the subfolder of the folder.
@@ -2565,31 +2566,31 @@ After being created successfully, a file document with the <emphasis>text/html</
                         </listitem>
                         <listitem>
                           <para>
-                            <emphasis role="bold">'Content Removal':</emphasis> The action will be executed on
+                            <guilabel>'Content Removal':</guilabel> The action will be executed on
                             a document, but not on a subfolder in the folder when the document or the subfolder is
                             moved.
                           </para>
                         </listitem>
                         <listitem>
-                          <para><emphasis role="bold">'Property Addition':</emphasis> The action will be
+                          <para><guilabel>'Property Addition':</guilabel> The action will be
                             executed on a document when a property is added to the document.
                           </para>
                         </listitem>
                         <listitem>
-                          <para><emphasis role="bold">'Property Removal':</emphasis> The action will be
+                          <para><guilabel>'Property Removal':</guilabel> The action will be
                             executed on a document when a property is removed from the document.
                           </para>
                         </listitem>
 
                         <listitem>
                           <para>
-                            <emphasis role="bold">'Property Modification':</emphasis> The action will be
+                            <guilabel>'Property Modification':</guilabel> The action will be
                             executed on a document when a property of the document is modified.
                           </para>
                         </listitem>
                         <listitem>
                           <para>
-                            <emphasis role="bold">'Schedule':</emphasis> The action is done at specific time.
+                            <guilabel>'Schedule':</guilabel> The action is done at specific time.
                           <!--  There are 2 schedule lifeless types: period and cron. (See more details on Schedule lifecycle). -->
                           </para>
                           <para>
@@ -2607,7 +2608,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Select one type for your action from the
-            <emphasis role="bold">Create Action of Type</emphasis>
+            <guilabel>Create Action of Type</guilabel>
             drop-down menu.
           </para>
           <mediaobject>
@@ -2631,39 +2632,39 @@ After being created successfully, a file document with the <emphasis>text/html</
               </thead>
               <tbody>
                 <row>
-                  <entry><emphasis role="bold">exo:AddMetadataAction</emphasis></entry>
+                  <entry><guilabel>exo:AddMetadataAction</guilabel></entry>
                   <entry>Add metadata.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:autoVersioning</emphasis></entry>
+                  <entry><guilabel>exo:autoVersioning</guilabel></entry>
                   <entry>Add a version automatically.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:createRSSFeedAction</emphasis></entry>
+                  <entry><guilabel>exo:createRSSFeedAction</guilabel></entry>
                   <entry>Create an RSS file.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:enableVersioning</emphasis></entry>
+                  <entry><guilabel>exo:enableVersioning</guilabel></entry>
                   <entry>Enable versioning.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:getMailAction</emphasis> </entry>
+                  <entry><guilabel>exo:getMailAction</guilabel> </entry>
                   <entry>Fetch mails.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:populateToMenu</emphasis></entry>
+                  <entry><guilabel>exo:populateToMenu</guilabel></entry>
                   <entry>This type is not supported.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:sendMailAction</emphasis></entry>
+                  <entry><guilabel>exo:sendMailAction</guilabel></entry>
                   <entry>Send mails.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:taxonomyAction</emphasis></entry>
+                  <entry><guilabel>exo:taxonomyAction</guilabel></entry>
                   <entry>Create categories.</entry>
                 </row>
                 <row>
-                  <entry><emphasis role="bold">exo:transformBinaryTo TextAction</emphasis></entry>
+                  <entry><guilabel>exo:transformBinaryTo TextAction</guilabel></entry>
                   <entry>Convert
                     <emphasis>.pdf</emphasis>
                     or
@@ -2677,20 +2678,20 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Complete all the fields in the form. The <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Lifecycle</emphasis> fields are required.
+            Complete all the fields in the form. The <guilabel>Name</guilabel> and <guilabel>Lifecycle</guilabel> fields are required.
           </para>
         </step>
         <step>
           <para>
             Click
-            <emphasis role="bold">Save</emphasis>
+            <guibutton>Save</guibutton>
             to commit the action.
           </para>
         </step>
       </procedure>
       <para>
         All actions of a node are listed in the
-        <emphasis role="bold">Available Actions</emphasis>
+        <guilabel>Available Actions</guilabel>
         tab.
       </para>
       <para>
@@ -2713,9 +2714,9 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Open the
-            <emphasis role="bold">Manage Actions</emphasis>
+            <guilabel>Manage Actions</guilabel>
             form and select the
-            <emphasis role="bold">Available Actions</emphasis>
+            <guilabel>Available Actions</guilabel>
             tab.
           </para>
         </step>
@@ -2734,7 +2735,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           </para>
           <para>
             The details will be displayed in the
-            <emphasis role="bold">Action Info</emphasis>
+            <guilabel>Action Info</guilabel>
             tab.
           </para>
           <mediaobject>
@@ -2754,9 +2755,9 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Open the
-            <emphasis role="bold">Manage Actions</emphasis>
+            <guilabel>Manage Actions</guilabel>
             form and select the
-            <emphasis role="bold">Available Actions</emphasis>
+            <guilabel>Available Actions</guilabel>
             tab.
           </para>
           <mediaobject>
@@ -2784,7 +2785,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </step>
         <step>
           <para>
-            Edit properties in the <emphasis role="bold">Action Form.</emphasis>
+            Edit properties in the <guilabel>Action Form.</guilabel>
           </para>
           <mediaobject>
             <imageobject role="html">
@@ -2798,7 +2799,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">Save</emphasis>
+            <guibutton>Save</guibutton>
             to accept your changes.
           </para>
         </step>
@@ -2810,9 +2811,9 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Open the
-            <emphasis role="bold">Manage Actions</emphasis>
+            <guilabel>Manage Actions</guilabel>
             form and select the
-            <emphasis role="bold">Available Actions</emphasis>
+            <guilabel>Available Actions</guilabel>
             tab.
           </para>
           <mediaobject>
@@ -2841,7 +2842,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">OK</emphasis>
+            <guibutton>OK</guibutton>
             in the confirmation message to delete the action.
           </para>
         </step>
@@ -2870,8 +2871,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Manage Auditing ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar. The
-          <emphasis role="bold">Activate Auditing</emphasis>
+          on the <guilabel>Action</guilabel> bar. The
+          <guilabel>Activate Auditing</guilabel>
           message appears.
         </para>
         <mediaobject>
@@ -2886,7 +2887,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Activate</emphasis>
+          <guilabel>Activate</guilabel>
           to enable auditing on the selected node.
         </para>
       </step>
@@ -2905,7 +2906,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
         <para>
           The
-          <emphasis role="bold">Auditing Information</emphasis>
+          <guilabel>Auditing Information</guilabel>
           list appears.
         </para>
         <mediaobject>
@@ -2955,18 +2956,18 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Categories ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
           <para>
             The
-            <emphasis role="bold">Add Category</emphasis>
+            <guilabel>Add Category</guilabel>
             form appears.
           </para>
         </step>
         <step>
           <para>
             Select the
-            <emphasis role="bold">Select Category</emphasis>
+            <guilabel>Select Category</guilabel>
             tab to show the available categories.
           </para>
           <mediaobject>
@@ -2995,7 +2996,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </procedure>
       <para>
         The category, which has been added to a node, is listed in the
-        <emphasis role="bold">Referenced Categories</emphasis>
+        <guilabel>Referenced Categories</guilabel>
         tab.
       </para>
       <para>
@@ -3061,7 +3062,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Select the
-            <emphasis role="bold">Referenced Categories</emphasis>
+            <guilabel>Referenced Categories</guilabel>
             tab.
           </para>
         </step>
@@ -3106,7 +3107,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Hide/Show content ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to hide the node.
+          on the <guilabel>Action</guilabel> bar to hide the node.
         </para>
         <para>
           A confirmation message, which notifies that the node has been hidden, will appear.
@@ -3150,11 +3151,11 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Manage Publications ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar.
+          on the <guilabel>Action</guilabel> bar.
         </para>
         <para>
           The
-          <emphasis role="bold">Manage Publication</emphasis>
+          <guilabel>Manage Publication</guilabel>
           form appears.
         </para>
         <mediaobject>
@@ -3167,7 +3168,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
         <para>
           The
-          <emphasis role="bold">Revision</emphasis>
+          <guilabel>Revision</guilabel>
           tab displays some basic information and the current state of the selected node.
         </para>
       </step>
@@ -3199,14 +3200,14 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Select the
-          <emphasis role="bold">History</emphasis>
+          <guilabel>History</guilabel>
           tab to view the publications history of the node.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept your changes.
         </para>
         <note>
@@ -3262,18 +3263,18 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
           <para>
             The
-            <emphasis role="bold">Add Relation</emphasis>
+            <guilabel>Add Relation</guilabel>
             form appears.
           </para>
         </step>
         <step>
           <para>
             Select the
-            <emphasis role="bold">Select Relation</emphasis>
+            <guilabel>Select Relation</guilabel>
             tab to see a list of other documents.
           </para>
         </step>
@@ -3293,7 +3294,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           </para>
           <para>
             Documents linked to the original via a relation will be listed in the
-            <emphasis role="bold">Relation List</emphasis>
+            <guilabel>Relation List</guilabel>
             tab.
           </para>
         </step>
@@ -3326,13 +3327,13 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject>
-            button on the <emphasis role="bold">Action</emphasis> bar.
+            button on the <guilabel>Action</guilabel> bar.
           </para>
         </step>
         <step>
           <para>
             Select the
-            <emphasis role="bold">Relation List</emphasis>
+            <guilabel>Relation List</guilabel>
             tab to view relations of the selected node.
           </para>
         </step>
@@ -3353,7 +3354,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">OK</emphasis>
+            <guibutton>OK</guibutton>
             in the confirmation message to accept your deletion.
           </para>
           <para>
@@ -3379,7 +3380,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <textobject>
                 <phrase>[Relation button]</phrase>
               </textobject>
-            </inlinemediaobject> on the <emphasis role="bold">Filter</emphasis> bar.
+            </inlinemediaobject> on the <guilabel>Filter</guilabel> bar.
           </para>
           <mediaobject>
             <imageobject role="html">
@@ -3390,7 +3391,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </imageobject>
           </mediaobject>
           <para>
-            All nodes related to the selected node will be displayed in the <emphasis role="bold">Relations List</emphasis> in the left pane.
+            All nodes related to the selected node will be displayed in the <guilabel>Relations List</guilabel> in the left pane.
           </para>
         </step>
         <step>
@@ -3450,7 +3451,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
           <para>
             The following message will appear.
@@ -3467,14 +3468,14 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">Activate</emphasis>
+            <guilabel>Activate</guilabel>
             to enable a version for the node.
           </para>
         </step>
         <step>
           <para>
             Right-click the selected node and select
-            <emphasis role="bold">CheckIn</emphasis>
+            <guilabel>CheckIn</guilabel>
             from the drop-down menu.
           </para>
           <mediaobject>
@@ -3498,7 +3499,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               </textobject>
             </inlinemediaobject>
             again to open the
-            <emphasis role="bold">Version Info</emphasis>
+            <guilabel>Version Info</guilabel>
             window.
           </para>
           <mediaobject>
@@ -3516,7 +3517,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Right-click the node again and select
-            <emphasis role="bold">CheckOut</emphasis>
+            <guilabel>CheckOut</guilabel>
             to obtain a version of this node.
           </para>
         </step>
@@ -3524,13 +3525,13 @@ After being created successfully, a file document with the <emphasis>text/html</
       <note>
         <para>
           No actions (copying/cutting/renaming) can be taken on a node in the
-          <emphasis role="bold">CheckIn</emphasis>
+          <guilabel>CheckIn</guilabel>
           status. You must check it out before you can perform any actions on it.
         </para>
         <para>
           If you want to add more versions to a node, right-click the selected node above and select
-          <emphasis role="bold">CheckIn</emphasis>
-          and then <emphasis role="bold">CheckOut</emphasis>.
+         <guilabel>CheckIn</guilabel>
+          and then<guilabel>CheckOut</guilabel>.
         </para>
       </note>
     </section>
@@ -3556,7 +3557,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
         </step>
         <step>
@@ -3571,9 +3572,9 @@ After being created successfully, a file document with the <emphasis>text/html</
               </textobject>
             </inlinemediaobject>
             on the
-            <emphasis role="bold">Version Info</emphasis>
+            <guilabel>Version Info</guilabel>
             window to show the
-            <emphasis role="bold">Add Label</emphasis>
+            <guilabel>Add Label</guilabel>
             field under the version list.
           </para>
           <mediaobject>
@@ -3588,7 +3589,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Enter a value into the
-            <emphasis role="bold">Label</emphasis>
+            <guilabel>Label</guilabel>
             field.
           </para>
           <para>
@@ -3598,7 +3599,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">Save</emphasis>
+            <guibutton>Save</guibutton>
             to submit the new label.
           </para>
         </step>
@@ -3623,7 +3624,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject>
-            on the <emphasis role="bold">Action</emphasis> bar.
+            on the <guilabel>Action</guilabel> bar.
           </para>
         </step>
         <step>
@@ -3638,9 +3639,9 @@ After being created successfully, a file document with the <emphasis>text/html</
               </textobject>
             </inlinemediaobject>
             on the
-            <emphasis role="bold">Version Info</emphasis>
+            <guilabel>Version Info</guilabel>
             window to show the
-            <emphasis role="bold">Remove Label</emphasis>
+            <guilabel>Remove Label</guilabel>
             field under the versions list.
           </para>
           <mediaobject>
@@ -3660,7 +3661,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click the
-            <emphasis role="bold">Remove</emphasis>
+            <guilabel>Remove</guilabel>
             button to remove the selected label.
           </para>
         </step>
@@ -3810,7 +3811,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         <step>
           <para>
             Click
-            <emphasis role="bold">OK</emphasis>
+            <guibutton>OK</guibutton>
             in the confirmation message to accept your deletion.
           </para>
         </step>
@@ -3845,12 +3846,12 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           on the
-          <emphasis role="bold">Action</emphasis>
+          <guibutton>Action</guibutton>
           bar.
         </para>
         <para>
           The
-          <emphasis role="bold">Multi Language</emphasis>
+          <guilabel>Multi Language</guilabel>
           form will appear.
         </para>
         <mediaobject>
@@ -3863,19 +3864,19 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
         <para>
           The
-          <emphasis role="bold">View Language</emphasis>
+          <guilabel>View Language</guilabel>
           tab contains a list of all languages. The default language for the document will be automatically populated.
         </para>
       </step>
       <step>
         <para>
           Select the
-          <emphasis role="bold">Add Language</emphasis>
+          <guilabel>Add Language</guilabel>
           tab. This tab will be displayed differently, depending on which file you selected. However, the area where you
           can add languages to a document is the same. The below illustration shows the
-          <emphasis role="bold">Add Language</emphasis>
+          <guilabel>Add Language</guilabel>
           tab for a
-          <emphasis role="bold">Sample node</emphasis>
+          <guilabel>Sample node</guilabel>
           file:
         </para>
         <mediaobject>
@@ -3890,26 +3891,26 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Select a language you want to add from the
-          <emphasis role="bold">Language</emphasis> drop-down list.
+          <guilabel>Language</guilabel> drop-down list.
         </para>
         <para>
           If the selected language has not been added to the current document, the content field will be blank.
         </para>
         <para>
           Select the
-          <emphasis role="bold">Set Default</emphasis>
+          <guilabel>Set Default</guilabel>
           checkbox if you want to set your selected language as a default language.
         </para>
       </step>
       <step>
         <para>
-          Click <emphasis role="bold">Save</emphasis> to be returned to the <emphasis role="bold">View Language</emphasis> tab. Your selected language is now added to the
-          <emphasis role="bold">Language</emphasis> field.
+          Click <guibutton>Save</guibutton> to be returned to the <guilabel>View Language</guilabel> tab. Your selected language is now added to the
+          <guilabel>Language</guilabel> field.
         </para>
         <para>
-          You can view this document in your newly added language by selecting that language from the <emphasis role="bold">Language</emphasis> drop-down
+          You can view this document in your newly added language by selecting that language from the <guilabel>Language</guilabel> drop-down
           list, then click the
-          <emphasis role="bold">View</emphasis>
+          <guilabel>View</guilabel>
           button.
         </para>
       </step>
@@ -3923,8 +3924,8 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Select a document that you want to view the languages list, then click the
-          <emphasis role="bold">Relation</emphasis>
-          button on the <emphasis role="bold">Filter</emphasis> bar:
+          <guilabel>Relation</guilabel>
+          button on the <guilabel>Filter</guilabel> bar:
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -3948,11 +3949,11 @@ After being created successfully, a file document with the <emphasis>text/html</
           </imageobject>
         </mediaobject>
         <para>
-          You can view the document in the new language by clicking the corresponding link in <emphasis role="bold">
-          Languages List.</emphasis>
+          You can view the document in the new language by clicking the corresponding link in <guilabel>
+          Languages List</guilabel>.
         </para>
         <para>
-            For more details about <emphasis role="bold">Relations</emphasis>, refer to the
+            For more details about <guilabel>Relations</guilabel>, refer to the
             <link
                     linkend="sect-User_Guide-Manage_Relations-View_Relations">Views relations
             </link>
@@ -3992,11 +3993,11 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Overload thumbnail ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar.
+          on the <guilabel>Action</guilabel> bar.
         </para>
         <para>
           The
-          <emphasis role="bold">Add Thumbnail Image</emphasis>
+          <guilabel>Add Thumbnail Image</guilabel>
           form appears.
         </para>
         <mediaobject>
@@ -4011,14 +4012,14 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click the
-          <emphasis role="bold">Browse...</emphasis>
+          <guilabel>Browse...</guilabel>
           button to select the image which will be used as the display icon for the selected folder.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept your changes. The node will be stored in an
           <emphasis>exo:thumbnails</emphasis>
           folder.
@@ -4046,10 +4047,10 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[Request approval ]</phrase>
             </textobject>
-          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar.
+          </inlinemediaobject> on the <guilabel>Action</guilabel> bar.
         </para>
         <para>
-          The content is displayed at the bottom of the <emphasis role="bold"><emphasis role="bold">Sites Explorer</emphasis></emphasis> of the people who have the right to approve
+          The content is displayed at the bottom of the <emphasis role="bold">Sites Explorer</emphasis> of the people who have the right to approve
           content.
         </para>
       </step>
@@ -4076,35 +4077,38 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[Approve Content ]</phrase>
             </textobject>
-          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar and the content is ready to be published.
+          </inlinemediaobject> on the <guilabel>Action</guilabel> bar and the content is ready to be published.
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Approve Content</emphasis> button is only visible for users who have the right to approve content.
+            The <guilabel>Approve Content</guilabel> button is only visible for users who have the right to approve content.
           </para>
           <para>
-            By default, this button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
+            By default, this button is not displayed on the <guilabel>Action</guilabel> bar.
           </para>
           <para>
-              Enable this function by selecting
+              Enable this function by selecting <menuchoice>
+            <guiicon>
               <inlinemediaobject>
                   <imageobject>
                       <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="3mm"/>
                   </imageobject>
               </inlinemediaobject>
-              <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.
-              </emphasis>
+            </guiicon>
+            <guimenuitem>Content</guimenuitem>
+            <guimenuitem>Content Administration</guimenuitem>
+            <guimenuitem>Content Presentation</guimenuitem>
+            <guimenuitem>Manage Views</guimenuitem>
+          </menuchoice>.
               See the
               <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link>
               section
               to know how to add the
-              <emphasis role="bold">Approve Content</emphasis>
+              <guilabel>Approve Content</guilabel>
               button to the tabs on the
-              <emphasis role="bold">Action</emphasis>
+              <guilabel>Action</guilabel>
               bar in
-              <emphasis role="bold">
                   <emphasis role="bold">Sites Explorer.</emphasis>
-              </emphasis>
           </para>
         </note>
       </step>
@@ -4130,24 +4134,31 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[Publish]</phrase>
             </textobject>
-          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar. The content will be published as the schedule that you set up.
+          </inlinemediaobject> on the <guilabel>Action</guilabel> bar. The content will be published as the schedule that you set up.
         </para>
         <note>
           <para>
-            The <emphasis role="bold">Publish</emphasis> button is only visible for users who have the "Publish" right.
+            The <guilabel>Publish</guilabel> button is only visible for users who have the "Publish" right.
           </para>
           <para>
-            By default, the button is not displayed on the <emphasis role="bold">Action</emphasis> bar.
+            By default, the button is not displayed on the <guibutton>Action</guibutton> bar.
           </para>
           <para>
             Enable this function by selecting
+            <menuchoice>
+              <guiicon>
             <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
-            </inlinemediaobject> <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage Views.</emphasis> See the
+            </inlinemediaobject>
+            </guiicon><guimenuitem>Content</guimenuitem>
+            <guimenuitem>Content Administration</guimenuitem>
+            <guimenuitem>Content Presentation</guimenuitem>
+            <guimenuitem>Manage Views</guimenuitem>
+          </menuchoice>. See the
             <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section
-            to know how to add the <emphasis role="bold">Publish Content</emphasis> button to the tabs on the <emphasis role="bold">Action</emphasis> bar in <emphasis role="bold">Sites Explorer.</emphasis>
+            to know how to add the <guilabel>Publish Content</guilabel> button to the tabs on the <guilabel>Action</guilabel> bar in <emphasis role="bold">Sites Explorer.</emphasis>
           </para>
         </note>
       </step>
@@ -4168,7 +4179,7 @@ After being created successfully, a file document with the <emphasis>text/html</
           <phrase>[ Show/Hide Drives ]</phrase>
         </textobject>
       </inlinemediaobject>
-      on the <emphasis role="bold">Action</emphasis> bar.
+      on the <guilabel>Action</guilabel> bar.
     </para>
     <para>
       To hide drives, click
@@ -4207,7 +4218,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
             </textobject>
-          </inlinemediaobject> on the <emphasis role="bold">Action</emphasis> bar.
+          </inlinemediaobject> on the <guilabel>Action</guilabel> bar.
         </para>
       </step>
     <!--  <step>
@@ -4288,8 +4299,8 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Tagging this document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar. The
-          <emphasis role="bold">Tag Manager</emphasis> will be displayed.
+          on the <guilabel>Action</guilabel> bar. The
+          <guilabel>Tag Manager</guilabel> will be displayed.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4312,19 +4323,19 @@ After being created successfully, a file document with the <emphasis>text/html</
             </thead>
             <tbody>
               <row>
-                <entry><emphasis role="bold">Tag Names</emphasis></entry>
+                <entry><guilabel>Tag Names</guilabel></entry>
                 <entry>The tag names that users want to add tags to documents.</entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Tag Scopes</emphasis></entry>
+                <entry><guilabel>Tag Scopes</guilabel></entry>
                 <entry>Classify the tags. There are four tag types: private, public, group, and site. Currently, the two
                   first types are activated ("Private" means that a user who creates tags can view and edit tags; "Public" means that all users
                   can view and edit tags).
                 </entry>
               </row>
               <row>
-                <entry><emphasis role="bold">Linked Tags</emphasis></entry>
-                <entry>List all tags of a document after the <emphasis role="bold">Add Tags</emphasis> button has been clicked.</entry>
+                <entry><guilabel>Linked Tags</guilabel></entry>
+                <entry>List all tags of a document after the <guilabel>Add Tags</guilabel> button has been clicked.</entry>
               </row>
             </tbody>
           </tgroup>
@@ -4333,25 +4344,25 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Input a value into the
-          <emphasis role="bold">Tag Names</emphasis>
+          <guilabel>Tag Names</guilabel>
           field. Several tags can be added to a document at a time. To do that, input all tag names in the
-          <emphasis role="bold">Tag Names</emphasis>
+          <guilabel>Tag Names</guilabel>
           field and separate by commas.
         </para>
       </step>
       <step>
         <para>
           Select a value for the
-          <emphasis role="bold">Tag Scopes</emphasis>
+          <guilabel>Tag Scopes</guilabel>
           field.
         </para>
       </step>
       <step>
         <para>
           Click
-          <emphasis role="bold">Add Tags</emphasis>
+          <guibutton>Add Tags</guibutton>
           to accept, or
-          <emphasis role="bold">Close</emphasis>
+          <guibutton>Close</guibutton>
           to quit. Only you can see this tag in this document.
         </para>
       </step>
@@ -4390,7 +4401,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Tagging this document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Tag Manager</emphasis> form.
+          on the <guilabel>Action</guilabel> bar to open the <guilabel>Tag Manager</guilabel> form.
         </para>
       </step>
       <step>
@@ -4410,7 +4421,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">OK</emphasis>
+          <guibutton>OK</guibutton>
           in the confirmation message to delete the tags.
         </para>
       </step>
@@ -4438,7 +4449,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Upload ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar to open the <emphasis role="bold">Upload File</emphasis> form.
+          on the <guilabel>Action</guilabel> bar to open the <guilabel>Upload File</guilabel> form.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4451,9 +4462,9 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
       <step>
         <para>
-          Browse and select a file on your device by clicking the <emphasis role="bold">Browse...</emphasis> button.
+          Browse and select a file on your device by clicking the <guilabel>Browse...</guilabel> button.
           The selected file name will be displayed in the
-          <emphasis role="bold">Select File</emphasis>
+          <guilabel>Select File</guilabel>
           field.
         </para>
         <para>
@@ -4466,7 +4477,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject>
-          to open more <emphasis role="bold">Upload File</emphasis> forms.
+          to open more <guilabel>Upload File</guilabel> forms.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4486,7 +4497,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject>
-          to close a <emphasis role="bold">Upload File</emphasis> form.
+          to close a <guilabel>Upload File</guilabel> form.
         </para>
         <para>
           To change the uploaded file, click
@@ -4499,13 +4510,13 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           in the
-          <emphasis role="bold">Select File</emphasis>
-          field and select <emphasis role="bold">Browse...</emphasis> again to select another one.
+          <guilabel>Select File</guilabel>
+          field and select <guibutton>Browse...</guibutton> again to select another one.
         </para>
       </step>
       <step>
         <para>
-            Optionally, type a name in the <emphasis role="bold">Name</emphasis> field which is not required. Special characters (! @ $ % &amp; [ ]) are not allowed in this field.
+            Optionally, type a name in the <guilabel>Name</guilabel> field which is not required. Special characters (! @ $ % &amp; [ ]) are not allowed in this field.
           If not, the name of the uploaded file will be kept as original.
         </para>
       </step>
@@ -4520,7 +4531,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject>
-          next to the <emphasis role="bold">Categories List</emphasis> field to select categories to which you want to add this file.
+          next to the <guilabel>Categories List</guilabel> field to select categories to which you want to add this file.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4562,7 +4573,7 @@ After being created successfully, a file document with the <emphasis>text/html</
                 <phrase>plus</phrase>
               </textobject>
             </inlinemediaobject>
-            again to open the <emphasis role="bold">Add Categories</emphasis> form.
+            again to open the <guilabel>Add Categories</guilabel> form.
           </para>
           <para>
             Click
@@ -4575,12 +4586,12 @@ After being created successfully, a file document with the <emphasis>text/html</
               </textobject>
             </inlinemediaobject>
             to delete a category in
-            <emphasis role="bold">Upload File</emphasis>
+            <guilabel>Upload File</guilabel>
             form.
           </para>
             <para>
                 You also manage categories which have been added to files by using the
-                <emphasis role="bold">Manage Categories</emphasis>
+                <guilabel>Manage Categories</guilabel>
                 function. See the
                 <link linkend="sect-User_Guide-Actions-Manage_Categories">Manage categories</link>
                 section.
@@ -4590,7 +4601,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Complete uploading file by clicking
-          <emphasis role="bold">Save.</emphasis>
+          <guibutton>Save</guibutton>.
         </para>
         <para>
           After being saved, the main information of the uploaded file will be displayed.
@@ -4616,7 +4627,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           to see more details about its external metadata information. The
-          <emphasis role="bold">List External Metadata</emphasis>
+          <guilabel>List External Metadata</guilabel>
           tab will be enabled and you can do some actions in this tab.
         </para>
         <mediaobject>
@@ -4642,9 +4653,9 @@ After being created successfully, a file document with the <emphasis>text/html</
               <listitem>
                   <para>
           Click
-          <emphasis role="bold">Add metadata</emphasis>
+          <guibutton>Add metadata</guibutton>
           to add more metadata to the uploaded file. Then,
-             tick the checkbox, and click <emphasis role="bold">Add.</emphasis>
+             tick the checkbox, and click <guibutton>Add</guibutton>.
            <mediaobject>
           <imageobject role="html">
             <imagedata align="center" fileref="images/addexternalmetadata.png" format="PNG"/>
@@ -4656,7 +4667,7 @@ After being created successfully, a file document with the <emphasis>text/html</
          </para>
                   <para>
                       The new metadata are displayed in the
-                      <emphasis role="bold">List External Metadata</emphasis>
+                      <guilabel>List External Metadata</guilabel>
                       tab.
                   </para>
 
@@ -4666,8 +4677,8 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Close</emphasis>
-          to quit the <emphasis role="bold">Upload File</emphasis> form.
+          <guibutton>Close</guibutton>
+          to quit the <guilabel>Upload File</guilabel> form.
         </para>
         <para>
           After being uploaded, the tree is displayed in the left pane.
@@ -4706,7 +4717,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ View Metadatas ]</phrase>
             </textobject>
           </inlinemediaobject>. The
-          <emphasis role="bold">View Metadata</emphasis>
+          <guilabel>View Metadata</guilabel>
           form appears.
         </para>
         <mediaobject>
@@ -4721,16 +4732,16 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click the
-          <emphasis role="bold">Add/Edit</emphasis>
+          <guibutton>Add/Edit</guibutton>
           button at the bottom of the
-          <emphasis role="bold">View Metadata</emphasis>
+          <guilabel>View Metadata</guilabel>
           form to add metadata.
         </para>
       </step>
       <step>
         <para>
           Complete the desired fields in the
-          <emphasis role="bold">Add/Edit Properties</emphasis>
+          <guilabel>Add/Edit Properties</guilabel>
           form. Click
           <inlinemediaobject>
             <imageobject>
@@ -4754,7 +4765,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept the new metadata values.
         </para>
       </step>
@@ -4820,7 +4831,7 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ View Permissions ]</phrase>
             </textobject>
           </inlinemediaobject>. The
-          <emphasis role="bold">Permission Management</emphasis>
+          <guilabel>Permission Management</guilabel>
           form appears.
         </para>
         <mediaobject>
@@ -4835,7 +4846,7 @@ After being created successfully, a file document with the <emphasis>text/html</
     </procedure>
     <para>
       By opening the
-      <emphasis role="bold">Permission Management</emphasis>
+      <guilabel>Permission Management</guilabel>
       form, you can perform the following actions:
     </para>
       <itemizedlist>
@@ -4873,10 +4884,10 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           next to the
-          <emphasis role="bold">User Or Group</emphasis>
+          <guilabel>User Or Group</guilabel>
           field to add permission for a specific user.</para>
                 <para>
-          The <emphasis role="bold">Select User Permission</emphasis> form appears.
+          The <guilabel>Select User Permission</guilabel> form appears.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -4904,8 +4915,8 @@ After being created successfully, a file document with the <emphasis>text/html</
             <listitem>
           <para>
           Enter a group name in the
-          <emphasis role="bold">Group</emphasis>
-          field at the top of the form (for example, <emphasis role="bold">/platform/users</emphasis>). Then press <emphasis role="bold">Enter</emphasis>.
+          <guilabel>Group</guilabel>
+          field at the top of the form (for example, <guilabel>/platform/users</guilabel>). Then press <emphasis role="bold">Enter</emphasis>.
               All users in the
           nominated group will be displayed.
         </para>
@@ -4924,7 +4935,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           beside the
-          <emphasis role="bold">Group</emphasis>
+          <guilabel>Group</guilabel>
           field to open a form that lists groups and their sub-groups. Select a sub-group and all users of the sub-group will be displayed.</para>
         <mediaobject>
           <imageobject role="html">
@@ -4968,11 +4979,11 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           next to the
-          <emphasis role="bold">User Or Group</emphasis>
+          <guilabel>User Or Group</guilabel>
           field to add permissions based on memberships.</para>
           <para>
               Then, select a group in the left pane, and
-          membership types in the right pane in the <emphasis role="bold">Select Membership</emphasis>
+          membership types in the right pane in the <guilabel>Select Membership</guilabel>
           form.
         </para>
             </listitem>
@@ -4988,7 +4999,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           next to the
-          <emphasis role="bold">User Or Group</emphasis>
+          <guilabel>User Or Group</guilabel>
           field to assign the "read" permission to all users/groups. </para>
             </listitem>
           </itemizedlist>
@@ -5002,7 +5013,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept your changes. The new permissions will appear in the permissions table above.
         </para>
       </step>
@@ -5037,7 +5048,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept your changed permissions.
         </para>
       </step>
@@ -5067,7 +5078,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">OK</emphasis>
+          <guibutton>OK</guibutton>
           in the confirmation message to remove the permission.
         </para>
       </step>
@@ -5096,7 +5107,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             </textobject>
           </inlinemediaobject>
           to show the
-          <emphasis role="bold">Properties Management</emphasis>
+          <guilabel>Properties Management</guilabel>
           form.
         </para>
         <para>
@@ -5139,7 +5150,7 @@ After being created successfully, a file document with the <emphasis>text/html</
       </step>
         <step>
             <para>
-                Select the <emphasis role="bold">Add New Property</emphasis> tab to add new properties to the selected node.
+                Select the <guilabel>Add New Property</guilabel> tab to add new properties to the selected node.
             </para>
         </step>
       <step>
@@ -5150,18 +5161,18 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Enter a name for the new property in the
-          <emphasis role="bold">Name</emphasis>
+          <guilabel>Name</guilabel>
           field.
         </para>
       </step>
       <step>
         <para>
-         Select the property type from the <emphasis role="bold">Type</emphasis> drop-down menu.
+         Select the property type from the <guilabel>Type</guilabel> drop-down menu.
         </para>
       </step>
       <step>
         <para>
-          Enter a value for the property in the <emphasis role="bold">Value</emphasis> field.
+          Enter a value for the property in the <guilabel>Value</guilabel> field.
         </para>
         <para>
           To add multiple new values, click
@@ -5190,16 +5201,16 @@ After being created successfully, a file document with the <emphasis>text/html</
       <step>
         <para>
           Click
-          <emphasis role="bold">Save</emphasis>
+          <guibutton>Save</guibutton>
           to accept your new values, or
-          <emphasis role="bold">Reset</emphasis>
+          <guibutton>Reset</guibutton>
           to clear all modified fields.
         </para>
       </step>
     </procedure>
     <para>
       After you have made changes on new properties, you will be returned to the
-      <emphasis role="bold">Properties</emphasis>
+      <guibutton>Properties</guibutton>
       tab. The newly added values will be displayed.
     </para>
     <para>
@@ -5240,7 +5251,7 @@ After being created successfully, a file document with the <emphasis>text/html</
             <textobject>
               <phrase>[ Show/Hide Relations ]</phrase>
             </textobject>
-          </inlinemediaobject>. Documents related to the selected node will be shown in the <emphasis role="bold">Filter</emphasis> bar.
+          </inlinemediaobject>. Documents related to the selected node will be shown in the <guilabel>Filter</guilabel> bar.
         </para>
         <mediaobject>
           <imageobject role="html">
@@ -5252,7 +5263,7 @@ After being created successfully, a file document with the <emphasis>text/html</
         </mediaobject>
         <para>
           If the node does not have any related documents, the message
-          <emphasis role="bold">No Related Document</emphasis>
+          <guilabel>No Related Document</guilabel>
           will appear instead.
         </para>
         <mediaobject>
@@ -5308,11 +5319,11 @@ After being created successfully, a file document with the <emphasis>text/html</
               <phrase>[ Vote for document ]</phrase>
             </textobject>
           </inlinemediaobject>
-          on the <emphasis role="bold">Action</emphasis> bar.
+          on the <guilabel>Action</guilabel> bar.
         </para>
         <para>
           The
-          <emphasis role="bold">Vote Document</emphasis>
+          <guilabel>Vote Document</guilabel>
           form will appear.
         </para>
         <mediaobject>
@@ -5372,9 +5383,9 @@ After being created successfully, a file document with the <emphasis>text/html</
         </para>
         <para>
           The
-          <emphasis role="bold">Watch Document</emphasis>
+          <guilabel>Watch Document</guilabel>
           form will appear. Click the
-          <emphasis role="bold">Watch</emphasis>
+          <guilabel>Watch</guilabel>
           button to finish.
         <mediaobject>
           <imageobject role="html">

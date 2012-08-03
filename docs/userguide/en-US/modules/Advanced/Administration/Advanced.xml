@@ -24,7 +24,7 @@
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Queries">
     <title>Manage queries</title>
     <para>
-   The function enables you to add, edit and delete queries by going to <emphasis role="bold"> Advanced Configuration --> Manage Queries.</emphasis>
+   The function enables you to add, edit and delete queries by going to <menuchoice><guimenu>Advanced Configuration</guimenu><guimenuitem>Manage Queries</guimenuitem></menuchoice>.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -40,7 +40,7 @@
       <procedure>
       <step>
         <para>
-     Open the <emphasis role="bold">Add Query</emphasis> form by clicking the <emphasis role="bold">Add Query</emphasis> button in the <emphasis role="bold">Manage Queries</emphasis> page.
+     Open the <guilabel>Add Query</guilabel> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> page.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -53,21 +53,21 @@
       </step>
       <step>
         <para>
-     Enter a query name into the <emphasis role="bold">Query Name</emphasis> field.
+     Enter a query name into the <guilabel>Query Name</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Select the query type from the drop-down <emphasis role="bold">Query Type</emphasis> menu.
+     Select the query type from the drop-down <guilabel>Query Type</guilabel> menu.
      <itemizedlist>
             <listitem>
               <para>
-        <emphasis role="bold">xPath</emphasis> (XML Path Language) is a language for selecting nodes. For example, <filename>/jcr:root/Documents/Live</filename>.
+        <guilabel>xPath</guilabel> (XML Path Language) is a language for selecting nodes. For example, <filename>/jcr:root/Documents/Live</filename>.
        </para>
             </listitem>
             <listitem>
               <para>
-        <emphasis role="bold">SQL</emphasis> (Structured Query Language) is a database computer language.
+        <guilabel>SQL</guilabel> (Structured Query Language) is a database computer language.
        </para>
             </listitem>
           </itemizedlist>
@@ -80,7 +80,7 @@
       </step>
       <step>
         <para>
-     Check or uncheck the <emphasis role="bold">Enable Cache Results</emphasis> option. If you tick this checkbox, for the first time you use this query to search, the result will be cached. For the second time you search using this query, it will show the cached results. After 45 minutes, the cache will be removed.
+     Check or uncheck the <guilabel>Enable Cache Results</guilabel> option. If you tick this checkbox, for the first time you use this query to search, the result will be cached. For the second time you search using this query, it will show the cached results. After 45 minutes, the cache will be removed.
     </para>
     <para>
      For example, you have the query <literal>Test</literal> with statement <literal>//element (*, nt:file)</literal>. In the File Explorer, you have a <filename>nt:file</filename> document named <filename>File1</filename>. When you execute the query <literal>Test</literal>, only document <filename>File1</filename> will be shown. After that, create a <filename>nt:file</filename> document named <filename>File2</filename> and execute query <literal>Test</literal>, only document <filename>File2</filename> document will be listed. After 45 minutes, the cache will be removed. When you execute the query <literal>Test</literal>, the documents <filename>File1</filename> and <filename>File2</filename> will be listed.
@@ -101,7 +101,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to finish adding a new query.
+     Click <guibutton>Save</guibutton> to finish adding a new query.
     </para>
       </step>
     </procedure>
@@ -120,7 +120,7 @@
                <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to the query you want to edit. The <emphasis role="bold">Edit Query</emphasis> form will appear.
+      corresponding to the query you want to edit. The <guilabel>Edit Query</guilabel> form will appear.
     </para>
       </step>
       <step>
@@ -130,7 +130,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept all changes.
+     Click <guibutton>Save</guibutton> to accept all changes.
     </para>
       </step>
     </procedure>
@@ -154,7 +154,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+     Click <guibutton>OK</guibutton> in the confirmation message to accept your deletion, or <guibutton>Cancel</guibutton> to discard this action.
     </para>
       </step>
     </procedure>
@@ -162,7 +162,7 @@
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Scripts">
     <title>Manage Scripts</title>
     <para>
-   The function enables you to manage all script codes in the <emphasis role="bold">&PRODUCT;</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system by going to <emphasis role="bold">Advanced Configuration --> Manage Scripts.</emphasis>
+   The function enables you to manage all script codes in the <emphasis role="bold">&PRODUCT;</emphasis> and <emphasis role="bold"> Browser Content </emphasis> system by going to <menuchoice> <guimenu>Advanced Configuration</guimenu><guimenuitem>Manage Scripts</guimenuitem></menuchoice>.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -179,7 +179,7 @@
     <procedure>
       <step>
         <para>
-     Click the <emphasis role="bold">Add</emphasis> button in the <emphasis role="bold">Manage Script</emphasis> page to open the <emphasis role="bold">Add/Edit Script</emphasis> form.
+     Click the <guibutton>Add</guibutton> button in the <emphasis role="bold">Manage Script</emphasis> page to open the <guilabel>Add/Edit Script</guilabel> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -192,17 +192,17 @@
       </step>
       <step>
         <para>
-     Enter a value for the <emphasis role="bold">Script Content</emphasis> field.
+     Enter a value for the <guilabel>Script Content</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Enter a script name for the <emphasis role="bold">Script Name</emphasis> field that must be unique and not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
+     Enter a script name for the <guilabel>Script Name</guilabel> field that must be unique and not contain special characters, such as !,@,#,$,%,&amp;,*,(,).
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept adding the new script.
+     Click <guibutton>Save</guibutton> to accept adding the new script.
     </para>
       </step>
     </procedure>
@@ -221,7 +221,7 @@
                <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to the script that you want to edit in the <emphasis role="bold">ECM Scripts</emphasis> tab. The <emphasis role="bold">Add/Edit script</emphasis> form will appear.
+      corresponding to the script that you want to edit in the <guilabel>ECM Scripts</guilabel> tab. The <guilabel>Add/Edit script</guilabel> form will appear.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -239,7 +239,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to save all changes.
+     Click <guibutton>Save</guibutton> to save all changes.
     </para>
       </step>
     </procedure>
@@ -256,12 +256,12 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> on the script that you want to delete in the <emphasis role="bold">ECM Scripts</emphasis> tab.
+          </inlinemediaobject> on the script that you want to delete in the <guilabel>ECM Scripts</guilabel> tab.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message to accept your deletion, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+     Click <guibutton>OK</guibutton> in the confirmation message to accept your deletion, or <guibutton>Cancel</guibutton> to discard this action.
     </para>
       </step>
     </procedure>
@@ -274,7 +274,7 @@
     <procedure>
       <step>
         <para>
-     Select <emphasis role="bold">Advanced Configuration --> Create Action Type.</emphasis>
+     Select <menuchoice><guimenu>Advanced Configuration</guimenu><guimenuitem>Create Action Type</guimenuitem></menuchoice>.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -287,7 +287,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Action Type</emphasis> form.
+     Click the <guibutton>Add</guibutton> button to open the <guilabel>Action Type</guilabel> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -310,12 +310,12 @@
       </step>
       <step>
         <para>
-     Check/uncheck the <emphasis role="bold">is Action Move</emphasis> option. The action will have <emphasis>exo:move</emphasis> property or not.
+     Check/uncheck the <guilabel>is Action Move</guilabel> option. The action will have <emphasis>exo:move</emphasis> property or not.
     </para>
       </step>
       <step>
         <para>
-     Select an "execute" for the <emphasis role="bold">Execute</emphasis> field.
+     Select an "execute" for the <guilabel>Execute</guilabel> field.
     </para>
       </step>
       <step>
@@ -328,7 +328,7 @@
                <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject>
-         next to <emphasis role="bold">Variables</emphasis> field to add more values for the action.</para>
+         next to <guilabel>Variables</guilabel> field to add more values for the action.</para>
 		 <itemizedlist>
 		 <listitem>
        <para> Click
@@ -346,7 +346,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept adding a new action type.
+     Click <guibutton>Save</guibutton> to accept adding a new action type.
     </para>
       </step>
     </procedure>
@@ -355,7 +355,7 @@
   <section id="sect-User_Guide-Advanced_Configuration-Manage_Unlocks">
     <title>Manage locks</title>
     <para>
-   All locked nodes are listed and managed by administrators in the <emphasis role="bold">Content Administration</emphasis> page. There are two ways that help administrators lock nodes: unlock nodes in the right-click menu in <emphasis role="bold">Sites Explorer</emphasis> or unlock nodes in the <emphasis role="bold">Content Administration</emphasis> page.
+   All locked nodes are listed and managed by administrators in the <guilabel>Content Administration</guilabel> page. There are two ways that help administrators lock nodes: unlock nodes in the right-click menu in <emphasis role="bold">Sites Explorer</emphasis> or unlock nodes in the <emphasis role="bold">Content Administration</emphasis> page.
   </para>
       <citetitle>
    <para xml:id="proc-User_Guide-Manage_Unlocks-Unlock_Nodes"><emphasis role="bold">Unlock a node</emphasis></para>
@@ -363,7 +363,7 @@
     <procedure>
       <step>
         <para>
-     Select <emphasis role="bold">Advanced Configuration --> Manage Locks</emphasis> on the <emphasis role="bold">Manage ECM Main Functions</emphasis> pane on the left. The locked nodes will be listed in the right pane.
+     Select <menuchoice><guimenu>Advanced Configuration</guimenu><guimenuitem>Manage Locks</guimenuitem></menuchoice> on the <guilabel>Manage ECM Main Functions</guilabel> pane on the left. The locked nodes will be listed in the right pane.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -385,15 +385,15 @@
                <phrase>open lock</phrase>
             </textobject>
           </inlinemediaobject>
-      corresponding to nodes which need to be unlocked in the <emphasis role="bold">Locked Node</emphasis> tab in the right pane. The unlocked nodes will disappear from the locked nodes list.
+      corresponding to nodes which need to be unlocked in the <guilabel>Locked Node</guilabel> tab in the right pane. The unlocked nodes will disappear from the locked nodes list.
     </para>
         <para>
-     Administrators can manage and add the unlock permission for another group and users in the <emphasis role="bold">Manage Lock</emphasis> tab.
+     Administrators can manage and add the unlock permission for another group and users in the <guilabel>Manage Lock</guilabel> tab.
     </para>
       </step>
       <step>
         <para>
-     Select the group on the <emphasis role="bold">Select Group</emphasis> pane and the corresponding membership on the <emphasis role="bold">Select Membership</emphasis> pane. The selected group will be listed in the <emphasis role="bold">Groups Or Users</emphasis> column. 
+     Select the group on the <guilabel>Select Group</guilabel> pane and the corresponding membership on the <guilabel>Select Membership</guilabel> pane. The selected group will be listed in the <guilabel>Groups Or Users</guilabel> column.
 	 </para>
     <itemizedlist>
 	<listitem>

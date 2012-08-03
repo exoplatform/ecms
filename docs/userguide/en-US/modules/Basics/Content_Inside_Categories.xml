@@ -22,14 +22,16 @@
 		 <procedure>
 			 <step>
          <para>
-           Hover your cursor over 
+           Hover your cursor over <menuchoice>
+           <guiicon>
            <inlinemediaobject>
              <imageobject>
                <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
              </imageobject>
            </inlinemediaobject>
-           <emphasis role="bold"> --> Content --> Sites Explorer</emphasis>
-           on the <emphasis role="bold">Administration</emphasis> bar.
+           </guiicon>
+           <guimenuitem>Content</guimenuitem> <guimenuitem>Sites Explorer</guimenuitem></menuchoice>
+           on the <guilabel>Administration</guilabel> bar.
          </para>
          <mediaobject>
            <imageobject role="html">
@@ -40,7 +42,7 @@
            </imageobject>
          </mediaobject>
          <para>For example, select the
-           <emphasis role="bold">acme-category</emphasis>
+           <guilabel>acme-category</guilabel>
            drive as the following illustration.
          </para>
          <mediaobject>
@@ -54,7 +56,7 @@
 			</step>
 			 <step>
 				<para>
-					Click the <emphasis role="bold">New Content</emphasis> button to create new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add new content. The new content is a Symlink.
+					Click the <guilabel>New Content</guilabel> button to create new content. See the <link linkend="sect-User_Guide-Actions-Add_a_document">Add a document</link> section to know how to add new content. The new content is a Symlink.
 					To view the content, simply click the Symlink.
         </para>
              <mediaobject>

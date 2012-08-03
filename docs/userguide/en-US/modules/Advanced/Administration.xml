@@ -9,13 +9,21 @@
   <para>
   This page is used to manage all workspaces, drives, node types, metadata, templates, queries, and more. Only administrators can access the <emphasis role="bold">Content Administration</emphasis> page.
  </para>
-  
- <para>To access the <emphasis role="bold">Content Administration</emphasis> page, hover your cursor over <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
-            </imageobject>
-          </inlinemediaobject> <emphasis role="bold"> --> Content --> Content Administration </emphasis> on the <emphasis role="bold">Administration</emphasis> bar.
-			</para>
+
+  <para>To access the
+    <emphasis role="bold">Content Administration</emphasis>
+    page, hover your cursor over
+    <menuchoice>
+      <guiicon>
+      <inlinegraphic fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
+    </guiicon>
+    <guimenuitem>Content</guimenuitem>
+    <guimenuitem>Content Administration</guimenuitem>
+  </menuchoice>
+  on the
+  <guilabel>Administration</guilabel>
+  bar.
+  </para>
       <mediaobject>
         <imageobject role="html">
           <imagedata  align="center"  fileref="images/WCM_admin.png" format="PNG"/>
