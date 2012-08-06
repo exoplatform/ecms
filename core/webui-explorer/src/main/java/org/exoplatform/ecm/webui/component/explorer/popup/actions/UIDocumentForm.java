@@ -280,7 +280,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           .append(fullscreen)
           .append("\" id=\"")
           .append(contextID)
-          .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this);'></a>");
+          .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'></a>");
     writer.append("</td>");
     writer.append("</tr>");
     writer.append("</table>");
