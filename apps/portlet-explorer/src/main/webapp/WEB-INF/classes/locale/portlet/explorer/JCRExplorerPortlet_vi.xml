@@ -2443,6 +2443,7 @@
 			<non-node>Vui lòng chọn vị trí của liên kết. Bạn đã chọn một node mà bạn không có quyền đọc</non-node>
 			<cannot-save>Thông tin không được lưu do một số điều kiện rằng buộc trong quá trình thực hiện.</cannot-save>
 			<item-exists-exception>Kiểu node này không cho phép trùng tên</item-exists-exception>
+      <translation-node-same-language-default>Node dịch có ngôn ngữ trùng với ngôn ngữ mặc định của node hiện tại.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>Node được liên kết không được thể tham chiếu đến (có thể do bị khóa)</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>

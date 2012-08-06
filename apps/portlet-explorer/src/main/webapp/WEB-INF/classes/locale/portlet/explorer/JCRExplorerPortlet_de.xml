@@ -2258,6 +2258,7 @@
 			<non-node>Bitte wählen Sie Vertrauen Ziel Knoten oder Sie haben nicht genug Rechte um diese Knoten</non-node>
 			<cannot-save>Einige Einschränkungen verletzt wurden während dieser Aktion nicht.</cannot-save>
 			<item-exists-exception>Die gleichen Namen Knoten Geschwister ist nicht erlaubt</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>Dieses Ziel-Knoten ist nicht referenceable</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>

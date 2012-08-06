@@ -2428,6 +2428,7 @@
       <non-node>信頼できるターゲットノードを選択するか、もしくは、ノードを読める十分な権限がありません。</non-node>
       <cannot-save>コンテンツはアクションの間に破棄されました。</cannot-save>
       <item-exists-exception>同じ名前のノード名が既に存在します。</item-exists-exception>
+      <translation-node-same-language-default>The translation node has same language with the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>ターゲットノードは参照ではありません。</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
