@@ -33,6 +33,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.container.component.ComponentPlugin;
@@ -835,14 +836,23 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String getTemplate(Node template) {
-    try {
-      Node resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
-      return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("An error has been occurred when getting template", e);
+      Node resourceNode;
+      try {
+        resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
+        return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      } catch (ValueFormatException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Wrong Value format ", e);
+        }
+      } catch (PathNotFoundException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not found the template because of: ", e);
+        }
+      } catch (RepositoryException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository failed ", e);
+        }
       }
-    }
     return null;
   }
 

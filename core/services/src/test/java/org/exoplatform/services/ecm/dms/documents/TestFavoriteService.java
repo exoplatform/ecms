@@ -39,7 +39,8 @@ public class TestFavoriteService extends BaseWCMTestCase {
   // final static public String EXO_FAVOURITER_PROPERTY = "exo:favouriter";
 
   private FavoriteService favoriteService;
-
+  private Node            rootNode;
+  
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
@@ -53,7 +54,7 @@ public class TestFavoriteService extends BaseWCMTestCase {
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");
     Session session = sessionProvider.getSession(COLLABORATION_WS, manageableRepository);
-    Node rootNode = session.getRootNode();
+    rootNode = session.getRootNode();
     String[] names = new String[] {"root", "demo", "james", "john", "marry"};
     for (String name : names)
       if (rootNode.hasNode(name)) {
@@ -72,7 +73,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   @Test
   public void testAddFavorite() throws Exception {
-    Node rootNode = session.getRootNode();
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
     Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");
     session.save();
@@ -90,9 +90,25 @@ public class TestFavoriteService extends BaseWCMTestCase {
 
     testAddFavouriteNode1.remove();
     testAddFavouriteNode2.remove();
+    
     session.save();
   }
-
+  /**
+   * test method addFavourite. Input: /testAddFavourite1, /testAddFavorite2 nodes 
+   * tested action: add favorite for users 'john' to the nodes
+   * above. Expected value : 2 for favorite node list size
+   * @author vinh_nguyen
+   * @throws Exception
+   */
+  @Test
+  public void testIsFavoriter() throws Exception {
+    Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
+    favoriteService.addFavorite(testAddFavouriteNode1, "john");
+    assertEquals(true, favoriteService.isFavoriter("john", testAddFavouriteNode1));
+    testAddFavouriteNode1.remove();
+    session.save();
+  }
+  
   /**
    * test method removeFavourite. Input: /test1, /test2, /test3 nodes  .Tested action:
    * add favorite for 'john' to the nodes above,
@@ -103,7 +119,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   @Test
   public void testRemoveFavorite() throws Exception {
-    Node rootNode = session.getRootNode();
     Node test1Remove = rootNode.addNode("test1");
     Node test2Remove = rootNode.addNode("test2");
     Node test3Remove = rootNode.addNode("test3");
@@ -136,7 +151,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllFavouriteNodesByUser() throws Exception {
-    Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
     session.save();
 
@@ -147,11 +161,12 @@ public class TestFavoriteService extends BaseWCMTestCase {
     Node node4 = node3.addNode("node4");
 
     favoriteService.addFavorite(node0, "john");
+    favoriteService.addFavorite(node1, "john");
     favoriteService.addFavorite(node2, "john");
     favoriteService.addFavorite(node3, "john");
     favoriteService.addFavorite(node4, "john");
 
-    assertEquals("testGetAllFavouriteNodesByUser failed!", 4, favoriteService
+    assertEquals("testGetAllFavouriteNodesByUser failed!", 5, favoriteService
         .getAllFavoriteNodesByUser(
             rootNode.getSession().getWorkspace().getName(), "repository",
             "john").size());

@@ -32,6 +32,7 @@
   <import>classpath:/conf/standalone/wcm/test-taxonomies-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-dms-actions-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-templates-configuration.xml</import>
+  <import>classpath:/conf/standalone/wcm/test-wcmcontentinitialize-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-drives-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-metadata-configuration.xml</import>
   <import>classpath:/conf/standalone/wcm/test-folksonomy-configuration.xml</import>
