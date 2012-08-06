@@ -69,9 +69,6 @@
           <field name="name">
             <string>{siteName}</string>
           </field>
-          <field name="repository">
-            <string>{repository}</string>
-          </field>
           <field name="workspace">
             <string>{workspace}</string>
           </field>

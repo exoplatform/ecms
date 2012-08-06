@@ -254,16 +254,12 @@
       <properties-param>
         <name>share.portal.config</name>
         <description>share portal name for each repository</description>
-        <property name="repository" value="repository" />
         <property name="portalName" value="shared" />
       </properties-param>
       <object-param>
         <name>live.portals.location.config</name>
         <description>configuration for the cms path</description>
         <object type="org.exoplatform.services.wcm.core.NodeLocation">
-          <field name="repository">
-            <string>repository</string>
-          </field>
           <field name="workspace">
             <string>collaboration</string>
           </field>
@@ -278,9 +274,6 @@
         <object type="org.exoplatform.services.cms.drives.DriveData">
           <field name="name">
             <string>{siteName}</string>
-          </field>
-          <field name="repository">
-            <string>{repository}</string>
           </field>
           <field name="workspace">
             <string>{workspace}</string>
@@ -470,10 +463,6 @@
       <type>org.exoplatform.services.cms.impl.DMSRepositoryConfiguration</type>
       <description>DMS Repository configuration</description>
       <init-params>
-        <value-param>
-          <name>repository</name>
-          <value>repository</value>
-        </value-param>
         <value-param>
           <name>systemWorkspace</name>
           <value>dms-system</value>

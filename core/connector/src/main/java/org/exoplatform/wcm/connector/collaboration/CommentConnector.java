@@ -77,7 +77,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
     String workspaceName = path[2];
     jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
-    Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+    Node content = getContent(workspaceName, jcrPath, null, false);
 
     commentsService.addComment(content, content.getSession().getUserID(), null, null, comment,null);
 
@@ -103,7 +103,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
 
     try {
-      Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+      Node content = getContent(workspaceName, jcrPath, null, false);
 
       List<Node> comments = commentsService.getComments(content, null);
 

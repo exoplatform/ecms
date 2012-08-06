@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui;
 
 import java.io.InputStream;
+import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -106,7 +107,6 @@ public class Utils {
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
 
   private static ConfigurationManager cservice_ ;
-  @Deprecated
   /**
    * Checks if is edits the portlet in create page wizard.
    * @return true, if is edits the portlet in create page wizard
@@ -120,7 +120,6 @@ public class Utils {
     return false;
   }
 
-  @Deprecated
   /**
    * Checks if is quick editmode.
    *
@@ -397,19 +396,16 @@ public class Utils {
    * Check if the user can delete the current node
    *
    * @return true, if current mode is edit mode
+   * @throws RepositoryException 
+   * @throws AccessControlException 
    */
-  public static boolean isShowDelete(Node content) {
-    return false;
-    // try {
-    // boolean isEditMode = false;
-    // if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
-    // ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
-    // ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
-    // ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
-    // return isEditMode;
-    // } catch (Exception e) {
-    // return false;
-    // }
+  public static boolean isShowDelete(Node content) throws AccessControlException, RepositoryException {
+    boolean isEditMode = false;
+    if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
+    ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
+    ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
+    ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
+    return isEditMode;
   }
 
   /**

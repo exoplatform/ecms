@@ -32,10 +32,6 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    */
   private static final long serialVersionUID = -1483463576328793278L;
   private String name ;
-  /**
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
-   */
-  private String repository ;
   private String workspace ;
   private String permissions ;
   private String homePath ;
@@ -82,18 +78,6 @@ public class DriveData implements Comparable<DriveData>, Serializable {
    * @param name  the name of DriveData
    */
   public void setName(String name) { this.name = name ; }
-
-  /**
-   * @return the name of repository
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
-   */
-  public String getRepository() { return repository ; }
-  /**
-   * Register repository to drive
-   * @param rp repository name
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
-   */
-  public void setRepository(String rp) { repository = rp ; }
 
   /**
    *

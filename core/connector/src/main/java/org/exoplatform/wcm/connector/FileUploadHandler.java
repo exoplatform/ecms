@@ -17,7 +17,6 @@
 package org.exoplatform.wcm.connector;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -90,48 +89,24 @@ public class FileUploadHandler {
   }
 
   /**
-   * Upload.
-   *
-   * @param uploadId the upload id
-   * @param contentType the content type
-   * @param contentLength the content length
-   * @param inputStream the input stream
-   * @param currentNode the current node
-   * @param language the language
-   * @param limit the limit
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
+   * Upload
+   * @param servletRequest The request to upload file
+   * @param uploadId Upload Id
+   * @param limit Limit size of upload file
+   * @return
+   * @throws Exception
    */
-  @Deprecated
-  public Response upload(String uploadId,
-                         String contentType,
-                         double contentLength,
-                         InputStream inputStream,
-                         Node currentNode,
-                         String language,
-                         int limit) throws Exception {
-    // Require from portal 2.5.5
-    uploadService.addUploadLimit(uploadId, limit);
-    uploadService.createUploadResource(uploadId,null,contentType,contentLength,inputStream);
-    CacheControl cacheControl = new CacheControl();
-    cacheControl.setNoCache(true);
-    cacheControl.setNoStore(true);
-
-    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(null, MediaType.TEXT_XML)
-                   .cacheControl(cacheControl)
-                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                   .build();
-  }
   public Response upload(HttpServletRequest servletRequest, String uploadId, Integer limit) throws Exception{
     uploadService.addUploadLimit(uploadId, limit);
     uploadService.createUploadResource(servletRequest);
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
-    return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(null, MediaType.TEXT_XML)
+                   .cacheControl(cacheControl)
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
   /**
    * Control.

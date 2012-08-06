@@ -356,24 +356,6 @@ public abstract class BaseConnector {
   /**
    * Gets the jcr content.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @return the jcr content
-   * @throws Exception the exception
-   */
-  @Deprecated
-  protected Node getContent(String repositoryName,
-                            String workspaceName,
-                            String jcrPath,
-                            String NodeTypeFilter,
-                            boolean isSystemSession) throws Exception {
-    return getContent(workspaceName, jcrPath, NodeTypeFilter, isSystemSession);
-  }
-
-  /**
-   * Gets the jcr content.
-   *
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
    * @return the jcr content
@@ -403,20 +385,6 @@ public abstract class BaseConnector {
       }
     }
     return null;
-  }
-  
-  /**
-   * Gets the jcr content.
-   *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @return the jcr content
-   * @throws Exception the exception
-   */
-  @Deprecated
-  protected Node getContent(String repositoryName, String workspaceName, String jcrPath) throws Exception {
-    return getContent(repositoryName, workspaceName, jcrPath, null, true);
   }
   
   /**

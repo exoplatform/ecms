@@ -16,6 +16,23 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -24,18 +41,6 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import javax.jcr.Node;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /*
  * Created by The eXo Platform SAS
@@ -72,7 +77,7 @@ public class TagConnector extends BaseConnector implements ResourceContainer {
     String workspaceName = path[2];
     jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
-    Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+    Node content = getContent(workspaceName, jcrPath, null, false);
 
 //    tagService.addPublicTag("/Application Data/Tags", new String[]{tag}, content,  workspaceName);
     tagService.addPublicTag("/tags", new String[]{tag}, content, workspaceName);

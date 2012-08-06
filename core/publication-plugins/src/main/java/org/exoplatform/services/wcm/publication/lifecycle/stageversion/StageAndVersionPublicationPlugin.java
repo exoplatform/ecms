@@ -287,8 +287,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     }
     
     NodeLocation location = NodeLocation.make(node);
-    composer.updateContent(location.getRepository(),
-                           location.getWorkspace(),
+    composer.updateContent(location.getWorkspace(),
                            location.getPath(),
                            new HashMap<String, String>());
   }

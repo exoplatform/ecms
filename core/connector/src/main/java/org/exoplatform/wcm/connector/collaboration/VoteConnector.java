@@ -130,7 +130,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
         jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
         if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
       }
-      Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+      Node content = getContent(workspaceName, jcrPath, null, false);
       if (content.isNodeType("mix:votable")) {
         String userName = content.getSession().getUserID();
         votingService.vote(content, Double.parseDouble(vote), userName, lang);
@@ -170,7 +170,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
         jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
         if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
       }
-      Node content = getContent(repositoryName, workspaceName, jcrPath);
+      Node content = getContent(workspaceName, jcrPath);
       if (content.isNodeType("mix:votable")) {
         String votingRate = "";
         if (content.hasProperty("exo:votingRate"))

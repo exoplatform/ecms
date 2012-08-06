@@ -34,20 +34,6 @@ public class DMSConfiguration implements Startable {
   private DMSRepositoryConfiguration dmsConfig;
 
   /**
-   * Get DMS configuration with specific repository.
-   * @return
-   */  
-  @Deprecated
-  public DMSRepositoryConfiguration getConfig(String repository) {
-    DMSRepositoryConfiguration dmsRepositoryConfiguration = dmsConfigMap_.get(repository);
-    if (dmsRepositoryConfiguration != null) {
-      return dmsRepositoryConfiguration;
-    }
-    dmsConfigMap_.putAll(getDmsConfigMap());
-    return dmsConfigMap_.get(repository);
-  }
-  
-  /**
    * Get DMS configuration with current repository.
    * @return
    */

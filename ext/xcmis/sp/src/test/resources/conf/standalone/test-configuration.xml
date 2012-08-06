@@ -290,9 +290,6 @@
                   <field name="name">
                      <string>driveA</string>
                   </field>
-                  <field name="repository">
-                     <string>db1</string>
-                  </field>
                   <field name="workspace">
                      <string>ws</string>
                   </field>
@@ -336,9 +333,6 @@
                   <field name="name">
                      <string>driveB</string>
                   </field>
-                  <field name="repository">
-                     <string>db1</string>
-                  </field>
                   <field name="workspace">
                      <string>ws</string>
                   </field>
@@ -381,9 +375,6 @@
                <object type="org.exoplatform.services.cms.drives.DriveData">
                   <field name="name">
                      <string>driveC</string>
-                  </field>
-                  <field name="repository">
-                     <string>db1</string>
                   </field>
                   <field name="workspace">
                      <string>ws1</string>
@@ -434,10 +425,6 @@
          <description>DMS Repository configuration</description>
          <init-params>
             <value-param>
-               <name>repository</name>
-               <value>db1</value>
-            </value-param>
-            <value-param>
                <name>systemWorkspace</name>
                <value>ws</value>
             </value-param>
@@ -456,9 +443,6 @@
                <name>sites.content.storage.configuration</name>
                <description>config for storage to store running sites content</description>
                <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-                  <field name="repository">
-                     <string>db1</string>
-                  </field>
                   <field name="workspaces">
                      <collection type="java.util.ArrayList">
                         <value>

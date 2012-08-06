@@ -74,8 +74,7 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
     events = {
       @EventConfig(listeners = UIFCCConfig.SaveActionListener.class),
       @EventConfig(listeners = UIFCCConfig.SelectPathActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UIFCCConfig.ChangeWorkspaceActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UIFCCConfig.ChangeRepositoryActionListener.class, phase=Phase.DECODE)
+      @EventConfig(listeners = UIFCCConfig.ChangeWorkspaceActionListener.class, phase=Phase.DECODE)
     }
 )
 public class UIFCCConfig extends UIForm implements UISelectable {
@@ -445,40 +444,6 @@ public class UIFCCConfig extends UIForm implements UISelectable {
                                                 .getValue(),
                                      wsName);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiFCCConfig);
-    }
-  }
-
-  /**
-   * The listener interface for receiving changeRepositoryAction events.
-   * The class that is interested in processing a changeRepositoryAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addChangeRepositoryActionListener<code> method. When
-   * the changeRepositoryAction event occurs, that object's appropriate
-   * method is invoked.
-   *
-   * @see ChangeRepositoryActionEvent
-   */
-  static public class ChangeRepositoryActionListener extends EventListener<UIFCCConfig> {
-
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-     */
-    public void execute(Event<UIFCCConfig> event) throws Exception {
-      UIFCCConfig fastContentCreatorConfig = event.getSource() ;
-      RepositoryService repositoryService = fastContentCreatorConfig.getApplicationComponent(RepositoryService.class) ;
-      fastContentCreatorConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).setValue("/") ;
-      String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
-      String systemWsName = repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName() ;
-      List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>() ;
-      for(String ws : wsNames) {
-        if(!ws.equals(systemWsName)) workspace.add(new SelectItemOption<String>(ws, ws)) ;
-      }
-      if(workspace.size() > 0) {
-        fastContentCreatorConfig.setTemplateOptions("/", workspace.get(0).getLabel()) ;
-      }
-      fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).setOptions(workspace) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorConfig) ;
     }
   }
 

@@ -113,13 +113,12 @@ public class UICLVPresentation extends UIContainer {
   }
 
   /**
-   * Inits the.
+   * Init portlet information.
    *
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public void init(ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
 
     String paginatorTemplatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE);
@@ -557,11 +556,8 @@ public class UICLVPresentation extends UIContainer {
         Node originalNode = node.getSession().getNodeByUUID(uuid);
         return "Icon16x16 default16x16Icon "
             + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "16x16Icon");
-      } else {
-        return "Icon16x16 default16x16Icon "
-            + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
-      }
-
+      } 
+      return "Icon16x16 default16x16Icon " + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
     } catch (RepositoryException e) {
       Utils.createPopupMessage(this,
                                "UIMessageBoard.msg.get-content-icon",
@@ -582,7 +578,6 @@ public class UICLVPresentation extends UIContainer {
     return uiPaginator;
   }
 
-  @SuppressWarnings("unchecked")
   public List getCurrentPageData() throws Exception {
     return NodeLocation.getNodeListByLocationList(uiPaginator.getCurrentPageData());
   }
@@ -605,9 +600,8 @@ public class UICLVPresentation extends UIContainer {
         return false;
       }
       return true;
-    } else {
-      return false;
-    }
+    } 
+    return false;
   }
 
   /**

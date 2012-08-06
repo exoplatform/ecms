@@ -107,26 +107,6 @@ public interface WCMComposer {
   /**
    * returns content at the specified path based on filters.
    *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param nodeIdentifier the path
-   * @param filters the filters
-   * @param sessionProvider the session provider
-   *
-   * @return a jcr node
-   *
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public Node getContent(String repository,
-                         String workspace,
-                         String nodeIdentifier,
-                         HashMap<String, String> filters,
-                         SessionProvider sessionProvider) throws Exception;
-  
-  /**
-   * returns content at the specified path based on filters.
-   *
    * @param workspace the workspace
    * @param path the path
    * @param filters the filters
@@ -141,26 +121,6 @@ public interface WCMComposer {
                          HashMap<String, String> filters,
                          SessionProvider sessionProvider) throws Exception;  
 
-  /**
-   * returns contents at the specified path based on filters.
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
-   * @param sessionProvider the session provider
-   *
-   * @return a jcr node
-   *
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public List<Node> getContents(String repository,
-                                String workspace,
-                                String path,
-                                HashMap<String, String> filters,
-                                SessionProvider sessionProvider) throws Exception;
-  
   /**
    * returns contents at the specified path based on filters.
    * 
@@ -191,23 +151,6 @@ public interface WCMComposer {
                                                              HashMap<String, String> filters, 
                                                              SessionProvider sessionProvider) throws Exception ;
   
-  
-  /**
-   * Update content.
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param nodeIdentifier the path 
-   * @param filters the filters
-   *
-   * @return true, if successful
-   */
-  @Deprecated
-  public boolean updateContent(String repository,
-                               String workspace,
-                               String nodeIdentifier,
-                               HashMap<String, String> filters) throws Exception;
-  
   /**
    * Update content.
    * 
@@ -220,22 +163,6 @@ public interface WCMComposer {
                                String nodeIdentifier,
                                HashMap<String, String> filters) throws Exception;
 
-  /**
-   * Update contents.
-   *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
-   *
-   * @return true, if successful
-   */
-  @Deprecated
-  public boolean updateContents(String repository,
-                                String workspace,
-                                String path,
-                                HashMap<String, String> filters) throws Exception;
-  
   /**
    * Update contents.
    * 

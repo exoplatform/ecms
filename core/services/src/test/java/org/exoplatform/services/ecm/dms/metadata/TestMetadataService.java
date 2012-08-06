@@ -83,7 +83,7 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetMetadataList() throws Exception {
-    List<String> metadataTypes = metadataService.getMetadataList(REPO_NAME);
+    List<String> metadataTypes = metadataService.getMetadataList();
     assertTrue(metadataTypes.contains("dc:elementSet"));
     assertTrue(metadataTypes.contains("rma:record"));
     assertTrue(metadataTypes.contains("rma:vitalRecord"));
@@ -103,7 +103,7 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllMetadatasNodeType() throws Exception {
-    List<NodeType> metadataTypes = metadataService.getAllMetadatasNodeType(REPO_NAME);
+    List<NodeType> metadataTypes = metadataService.getAllMetadatasNodeType();
     assertNotNull(metadataTypes.size());
   }
 
@@ -120,12 +120,12 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testAddMetadata() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators;*:/platform/users", "This is content", true, REPO_NAME);
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators;*:/platform/users", "This is content", true);
 
     Node myMetadata = (Node)sessionDMS.getItem("/exo:ecm/metadata/exo:article/dialogs/dialog1");
     assertEquals("This is content", myMetadata.getNode("jcr:content").getProperty("jcr:data").getString());
 
-    String roles = metadataService.getMetadataRoles(EXO_ARTICLE, true, repository.getConfiguration().getName());
+    String roles = metadataService.getMetadataRoles(EXO_ARTICLE, true);
     assertEquals("*:/platform/administrators; *:/platform/users", roles);
   }
 
@@ -140,8 +140,8 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetMetadataTemplate() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true, REPO_NAME);
-    assertEquals("This is content", metadataService.getMetadataTemplate(EXO_ARTICLE, true, REPO_NAME));
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    assertEquals("This is content", metadataService.getMetadataTemplate(EXO_ARTICLE, true));
   }
 
   /**
@@ -153,10 +153,10 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testRemoveMetadata() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true, REPO_NAME);
-    assertEquals("This is content", metadataService.getMetadataTemplate(EXO_ARTICLE, true, REPO_NAME));
-    metadataService.removeMetadata(EXO_ARTICLE, REPO_NAME);
-    assertNull(metadataService.getMetadataTemplate(EXO_ARTICLE, true, REPO_NAME));
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    assertEquals("This is content", metadataService.getMetadataTemplate(EXO_ARTICLE, true));
+    metadataService.removeMetadata(EXO_ARTICLE);
+    assertNull(metadataService.getMetadataTemplate(EXO_ARTICLE, true));
   }
 
   /**
@@ -168,7 +168,7 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetExternalMetadataType() throws Exception {
-    List<String> extenalMetaTypes = metadataService.getExternalMetadataType(REPO_NAME);
+    List<String> extenalMetaTypes = metadataService.getExternalMetadataType();
     assertEquals(2, extenalMetaTypes.size());
   }
 
@@ -183,8 +183,8 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetMetadataPath() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is my content", true, REPO_NAME);
-    assertEquals(expectedArticleDialogPath, metadataService.getMetadataPath(EXO_ARTICLE, true, REPO_NAME));
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is my content", true);
+    assertEquals(expectedArticleDialogPath, metadataService.getMetadataPath(EXO_ARTICLE, true));
   }
 
   /**
@@ -198,8 +198,8 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testGetMetadataRoles() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true, REPO_NAME);
-    assertEquals("*:/platform/administrators", metadataService.getMetadataRoles(EXO_ARTICLE, true, REPO_NAME));
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    assertEquals("*:/platform/administrators", metadataService.getMetadataRoles(EXO_ARTICLE, true));
   }
 
   /**
@@ -212,10 +212,10 @@ public class TestMetadataService extends BaseWCMTestCase {
    */
   @Test
   public void testHasMetadata() throws Exception {
-    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true, REPO_NAME);
-    assertTrue(metadataService.hasMetadata(EXO_ARTICLE, REPO_NAME));
-    metadataService.removeMetadata(EXO_ARTICLE, REPO_NAME);
-    assertFalse(metadataService.hasMetadata(EXO_ARTICLE, REPO_NAME));
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    assertTrue(metadataService.hasMetadata(EXO_ARTICLE));
+    metadataService.removeMetadata(EXO_ARTICLE);
+    assertFalse(metadataService.hasMetadata(EXO_ARTICLE));
   }
 
   /**

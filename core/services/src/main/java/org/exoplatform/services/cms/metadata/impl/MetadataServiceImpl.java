@@ -174,29 +174,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
       }
     }
   }
-
-  /**
-   * {@inheritDoc}
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #init()} instead.
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    init();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public String addMetadata(String nodetype,
-                            boolean isDialog,
-                            String role,
-                            String content,
-                            boolean isAddNew,
-                            String repository) throws Exception {
-    return addMetadata(nodetype, isDialog, role, content, isAddNew);
-  }
-  
+ 
   /**
    * {@inheritDoc}
    */
@@ -252,14 +230,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void removeMetadata(String nodetype, String repository) throws Exception {
-    removeMetadata(nodetype);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public void removeMetadata(String nodetype) throws Exception {
     Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
@@ -273,28 +243,12 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<String> getMetadataList(String repository) throws Exception {
-    return getMetadataList();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public List<String> getMetadataList() throws Exception {
     List<String> metadataTypes = new ArrayList<String>();
     for(NodeType metadata:getAllMetadatasNodeType()) {
       metadataTypes.add(metadata.getName());
     }
     return metadataTypes;
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<NodeType> getAllMetadatasNodeType(String repository) throws Exception {
-    return getAllMetadatasNodeType();
   }
   
   /**
@@ -336,14 +290,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String getMetadataTemplate(String name, boolean isDialog, String repository) throws Exception {
-    return getMetadataTemplate(name, isDialog);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public String getMetadataTemplate(String name, boolean isDialog) throws Exception {
     Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
@@ -356,14 +302,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     return ret;
   }  
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public String getMetadataPath(String name, boolean isDialog, String repository) throws Exception {
-    return getMetadataPath(name, isDialog);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -385,14 +323,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String getMetadataRoles(String name, boolean isDialog, String repository) throws Exception {
-    return getMetadataRoles(name, isDialog);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public String getMetadataRoles(String name, boolean isDialog) throws Exception {
     Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
@@ -407,14 +337,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return ret;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public boolean hasMetadata(String name, String repository) throws Exception {
-    return hasMetadata(name);
-  }
   
   /**
    * {@inheritDoc}
@@ -429,14 +351,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return false;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<String> getExternalMetadataType(String repository) throws Exception {
-    return getExternalMetadataType();
-  }
   
   /**
    * {@inheritDoc}

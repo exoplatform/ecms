@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.connector.fckeditor;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,23 +78,6 @@ public class FileUploadHandler {
   public FileUploadHandler(ExoContainer container) {
     uploadService = (UploadService)container.getComponentInstanceOfType(UploadService.class);
     fckMessage = new FCKMessage();
-  }
-  @Deprecated
-  public Response upload(String uploadId,
-                         String contentType,
-                         double contentLength,
-                         InputStream inputStream,
-                         Node currentNode,
-                         String language) throws Exception {
-    CacheControl cacheControl = new CacheControl();
-    cacheControl.setNoCache(true);
-    uploadService.createUploadResource(uploadId, null, contentType, contentLength, inputStream);
-
-    DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(null, new MediaType("text", "xml"))
-                   .cacheControl(cacheControl)
-                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                   .build();
   }
 
   public Response upload(HttpServletRequest servletRequest) throws Exception {

@@ -146,21 +146,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @see
    * org.exoplatform.services.wcm.publication.WCMComposer#getContent(java.lang
    * .String, java.lang.String, java.lang.String, java.util.HashMap)
-   */  
-  @Deprecated
-  public Node getContent(String repository,
-                         String workspace,
-                         String nodeIdentifier,
-                         HashMap<String, String> filters,
-                         SessionProvider sessionProvider) throws Exception {
-    return getContent(workspace, nodeIdentifier, filters, sessionProvider);
-  }
-  
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#getContent(java.lang
-   * .String, java.lang.String, java.lang.String, java.util.HashMap)
    */
   public Node getContent(String workspace,
                          String nodeIdentifier,
@@ -178,7 +163,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       remoteUser = getRemoteUser();
     }
     try {
-      repository = ((ManageableRepository)repositoryService.getCurrentRepository()).getConfiguration().getName();
+      repository = repositoryService.getCurrentRepository().getConfiguration().getName();
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
@@ -219,15 +204,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       cache.put(hash, node);
     }
     return node;
-  }
-  
-  @Deprecated
-  public List<Node> getContents(String repository,
-                                String workspace,
-                                String path,
-                                HashMap<String, String> filters,
-                                SessionProvider sessionProvider) throws Exception {
-    return getContents(workspace, path, filters, sessionProvider);
   }
   
   @SuppressWarnings("unchecked")
@@ -524,20 +500,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return targetNode;
   }
 
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#updateContent(java
-   * .lang.String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
-  @Deprecated
-  public boolean updateContent(String repository,
-                               String workspace,
-                               String path,
-                               HashMap<String, String> filters) throws Exception {
-    return updateContent(workspace, path, filters);
-  }
   /*
    * (non-Javadoc)
    * @see
@@ -647,12 +609,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return true;
   }
   
-
-  @Deprecated
-  public List<Node> getCategories(Node node, String repository) throws Exception {
-    return getCategories(node);
-  }
-  
   public List<Node> getCategories(Node node) throws Exception {
     if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
     List<Node> listCategories = new ArrayList<Node>();
@@ -679,20 +635,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       if (LOG.isErrorEnabled())LOG.error("Unexpected error when getting node taxonomies");
     }
     return "";
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#updateContents(java
-   * .lang.String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
-  @Deprecated
-  public boolean updateContents(String repository,
-                                String workspace,
-                                String path,
-                                HashMap<String, String> filters) throws Exception {
-    return updateContents(workspace, path, filters);
   }
 
   /*

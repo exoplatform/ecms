@@ -16,7 +16,6 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -729,46 +728,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
   }
 
-
-  /**
-   * Creates the upload file response.
-   *
-   * @param inputStream the input stream
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param runningPortalName the running portal name
-   * @param jcrPath the jcr path
-   * @param uploadId the upload id
-   * @param language the language
-   * @param contentType the content type
-   * @param contentLength the content length
-   * @param currentFolderNode the current folder node
-   * @param limit the limit
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
-   */
-  @Deprecated
-  protected Response createUploadFileResponse(InputStream inputStream,
-                                              String repositoryName,
-                                              String workspaceName,
-                                              Node currentFolderNode,
-                                              String runningPortalName,
-                                              String jcrPath,
-                                              String uploadId,
-                                              String language,
-                                              String contentType,
-                                              String contentLength,
-                                              int limit) throws Exception {
-    return fileUploadHandler.upload(uploadId,
-                                    contentType,
-                                    Double.parseDouble(contentLength),
-                                    inputStream,
-                                    currentFolderNode,
-                                    language,
-                                    limit);
-  }
 
   /**
    * Creates the process upload response.
