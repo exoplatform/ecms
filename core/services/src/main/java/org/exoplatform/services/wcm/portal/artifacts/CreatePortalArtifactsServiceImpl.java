@@ -44,7 +44,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   public void addPlugin(CreatePortalPlugin artifactsPlugin) throws Exception {
     artifactPlugins.put(artifactsPlugin.getName(),artifactsPlugin);
   }
-  
+
   public void addIgnorePortalPlugin(IgnorePortalPlugin ignorePortalPlugin) throws Exception {
     ArrayList<String> ignoredPortals = ignorePortalPlugin.getIgnorePortals();
     if (ignoredPortals != null && !ignoredPortals.isEmpty()) {
@@ -52,30 +52,25 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
     }
   }
 
-  @Deprecated
-  public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName)
-  throws Exception {
-    //Do not initalize portal artifact for predefined portal
-    if(initialPortals.contains(portalName)) return ;
-
-    for(CreatePortalPlugin plugin: artifactPlugins.values()) {
-      plugin.deployToPortal(sessionProvider, portalName);
-    }
-
-    listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
-  }
-  
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception {
     //Do not initalize portal artifact for predefined portal
     if(initialPortals.contains(portalName)) return;
     DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+
+    // Call CreatePortalPlugin plugins for specific portal template
     for (CreatePortalPlugin plugin : artifactPlugins.values()) {
-      if (!plugin.getName().startsWith("template") || (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName))) {
+      if (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName)) {
         plugin.deployToPortal(sessionProvider, portalName);
       }
     }
-    
+
+    // Call common CreatePortalPlugin plugins
+    for (CreatePortalPlugin plugin : artifactPlugins.values()) {
+      if (!plugin.getName().startsWith("template")) {
+        plugin.deployToPortal(sessionProvider, portalName);
+      }
+    }
+
     listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
   }
-
 }
