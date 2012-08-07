@@ -704,6 +704,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         catch (RepositoryException e) {
           title = null;
         }
+        catch (IndexOutOfBoundsException e) {
+          title = null;
+        }
       }
     }
     if (title==null) title = selectedNode.getName();
