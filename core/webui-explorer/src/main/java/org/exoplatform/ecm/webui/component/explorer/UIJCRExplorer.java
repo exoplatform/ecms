@@ -471,7 +471,9 @@ public class UIJCRExplorer extends UIContainer {
   
   public void setPathToAddressBar(String path) throws Exception {
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(
-                                          UIAddressBar.FIELD_ADDRESS).setValue(filterPath(path)) ;
+      UIAddressBar.FIELD_ADDRESS).setValue(filterPath(path)) ;
+    findFirstComponentOfType(UIAddressBar.class).getUIInput(
+      UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(filterPath(path)) ;
   } 
   
   private void refreshExplorer(Node currentNode) throws Exception {
@@ -489,7 +491,9 @@ public class UIJCRExplorer extends UIContainer {
       setCurrentPath(currentRootPath_);
     }
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(UIAddressBar.FIELD_ADDRESS).
-        setValue(filterPath(currentPath_)) ;
+        setValue(filterPath(Text.unescapeIllegalJcrChars(filterPath(currentPath_)))) ;
+    findFirstComponentOfType(UIAddressBar.class).getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).
+    setValue(filterPath(currentPath_)) ;
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocumentWorkspace.isRendered()) {
@@ -636,6 +640,8 @@ public class UIJCRExplorer extends UIContainer {
     
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
         Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+    uiAddressBar.getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(
+        filterPath(currentPath_)) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();

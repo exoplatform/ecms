@@ -93,6 +93,7 @@
   								<div class="InputContainer"  id="AddressBarControl">
   									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation"></a>
   									<% uicomponent.renderChild(0); %>
+  									<% uicomponent.renderChild(2); %>
   								</div>
   								<div style="clear: both;"><span></span></div>
   							 </div>

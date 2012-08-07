@@ -9,11 +9,13 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.pclv.UIPCLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
+	import org.exoplatform.wcm.webui.reader.ContentReader;  
 %>
 <div class="UIPCLVEvents">
  	<%
 	 	uiform.begin();
 		def header = uicomponent.getHeader();
+		header = ContentReader.getXSSCompatibilityContent(header);
 		def rssLink = uicomponent.getRssLink();
 		def isShowHeader = uicomponent.isShowHeader() && header != null && header.trim().length() != 0;
 		def isShowRSSLink = uicomponent.isShowField(UIPCLVPortlet.SHOW_RSS_LINK);

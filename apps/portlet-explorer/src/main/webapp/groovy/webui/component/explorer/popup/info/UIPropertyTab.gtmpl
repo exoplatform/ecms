@@ -6,7 +6,7 @@
 	 * September 14, 2006
 	 * 2:10:23 PM
 	 */
-import org.apache.commons.lang.StringEscapeUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 <div class="UIPropertyTab">
   <table class="UIGrid" style="width: 97%">
@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 			    multiValue = bean.getDefinition().isMultiple() ;
 		    } catch(Exception e) {
 		    }
-		    value = uicomponent.getPropertyValue(bean) ;
+		    ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
 	      if(even) rowClass = "EvenRow" ;
 	      else rowClass =  "OddRow" ;
 	      even = !even ; %>
@@ -57,8 +57,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 				      <%=_ctx.appRes("UIPropertyTab.label." + value)%>
 				    </div>
 				    <%} else {%>
-				    <div class="Text" title="<%=StringEscapeUtils.escapeHtml(value)%>">
-				      <%=StringEscapeUtils.escapeHtml(value)%>
+				    <div class="Text" title="<%=value%>">
+				      <%=value%>
 				   	</div>
 				    <%}%>
 			    </td>

@@ -7,9 +7,9 @@
  * 9:36:26 AM 
  */
   import java.text.SimpleDateFormat;
-  import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.commons.utils.ISO8601;
   import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationContainer;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 
 <div class="$uicomponent.id" id="$uicomponent.id">
@@ -34,7 +34,7 @@
   	      out.println("<tr class=\"" + rowClass + "\">");
   	      
 					out.println("<td><div class=\"Text\">" + uicomponent.getAncestorOfType(UIPublicationContainer.class).getDateTimeFormater().format(bean.getLogDate().getTime()) + "</div></td>");
-					out.println("<td><div class=\"Text\">" + Text.unescapeIllegalJcrChars(bean.getVersionName()) + "</div></td>");
+					out.println("<td><div class=\"Text\" title=\""+ContentReader.getXSSCompatibilityContent(bean.getVersionName())+"\">" + ContentReader.getXSSCompatibilityContent(bean.getVersionName()) + "</div></td>");
 					out.println("<td><div class=\"Text\">" + _ctx.appRes("UIPublicationPanel.status." + bean.getState()) + "</div></td>");	          
 					out.println("<td><div class=\"Text\">" + bean.getAuthor() + "</div></td>");	          
 					out.println("<td><div class=\"Text\">" + _ctx.appRes(bean.getDescription()) + "</div></td>");	          

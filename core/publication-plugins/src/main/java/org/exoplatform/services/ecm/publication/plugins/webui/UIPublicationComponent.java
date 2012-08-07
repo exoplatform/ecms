@@ -30,6 +30,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /**
  * Created by The eXo Platform SAS
@@ -62,8 +63,8 @@ public class UIPublicationComponent extends UIComponent {
   }
 
   public String getNodeName() {
-    try {
-      return node_.getName();
+    try {      
+      return ContentReader.getXSSCompatibilityContent(node_.getName());
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       return "Error in getNodeName";

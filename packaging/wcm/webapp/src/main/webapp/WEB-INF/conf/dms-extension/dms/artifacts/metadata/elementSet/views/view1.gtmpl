@@ -1,4 +1,6 @@
 <%
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
 	public void renderDCValues(String name) {
 	  def node = uicomponent.getViewNode("dc:elementSet") ;
 		def values = uicomponent.getMultiValues(node, name) ;
@@ -11,7 +13,7 @@
 			for(value in values) { %>
 	      <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
 	        <div class="MetaImage"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="" src='/ecmexplorer/skin/images/metadata/rect.gif'/></div>     
-	        <div style="Text">$value</div>
+	        <div style="Text"><%= ContentReader.getXSSCompatibilityContent(value) %></div>
 	      </div>    			
 	<%	}
 		}

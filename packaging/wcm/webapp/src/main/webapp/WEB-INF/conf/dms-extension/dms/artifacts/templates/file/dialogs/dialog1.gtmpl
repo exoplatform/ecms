@@ -1,4 +1,6 @@
 <%
+  import org.exoplatform.ecm.webui.utils.Utils;
+  
   String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
   String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;
   String[] hiddenField4 = ["jcrPath=/node/jcr:content/jcr:lastModified", "visible=false"] ;
@@ -74,8 +76,8 @@
                       }
                     } else {
                     if (content.getProperty("jcr:data").getStream().available() > 0) {
-                        def actionLink = uicomponent.event("RemoveData", "/jcr:content");
-                        def fileName = curNode.getName();
+                        def actionLink = uicomponent.event("RemoveData", "/jcr:content");                        
+                        def fileName = Utils.getTitle(curNode);
                         %> 
                           <div>
                           <div style="font-size:12px; font-weight: bold; line-height: 17px;">

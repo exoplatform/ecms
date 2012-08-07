@@ -4,8 +4,8 @@
 	import javax.jcr.Node;
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIComponent;
-    import org.exoplatform.services.jcr.util.Text;
-    import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 	
 	UIComponent uiParent = uicomponent.getParent();
 	
@@ -228,7 +228,7 @@
 		<div class="ClearBoth"><span></span></div>
 	</div>
 	<div class="InfoPopup" id="metadatas" style="display: none;position: absolute;">
-		<div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%></span>: <span class="metaValue"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></span></div>
+		<div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%></span>: <span class="metaValue"><%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%></span></div>
 		<%for(key in metadatas.keySet()) {%>
 			<div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata." + key)%>: </span><span class="metaValue"><%=metadatas.get(key)%></span></div>
 		<%}%>

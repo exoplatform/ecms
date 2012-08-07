@@ -88,7 +88,7 @@
     
           <td class="action">
             <div class="ActionContainer"> 
-              <img onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" />
+              <img onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" title="$titleNode"/>
               <img onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />
             </div>
           </td>

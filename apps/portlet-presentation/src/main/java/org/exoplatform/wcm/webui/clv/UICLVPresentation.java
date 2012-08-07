@@ -63,6 +63,7 @@ import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -337,7 +338,7 @@ public class UICLVPresentation extends UIContainer {
 	  	}
 	  	
 	  }
-	  return Text.unescapeIllegalJcrChars(title);
+	  return ContentReader.getXSSCompatibilityContent(title);
   }
 
   /**

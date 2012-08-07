@@ -22,6 +22,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.ExoContainer;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.w3c.dom.Document;
@@ -91,8 +92,8 @@ public class FCKFileHandler {
    * @throws Exception the exception
    */
   public Element createFileElement(Document document, Node child, String fileType) throws Exception {   
-    Element file = document.createElement("File");
-    file.setAttribute("name", child.getName());     
+    Element file = document.createElement("File");    
+    file.setAttribute("name", Utils.getTitle(child));
     SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);    
     file.setAttribute("dateCreated", formatter.format(child.getProperty("exo:dateCreated").getDate().getTime()));    
     file.setAttribute("dateModified", formatter.format(child.getProperty("exo:dateModified").getDate().getTime()));      
