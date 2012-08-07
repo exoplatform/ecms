@@ -69,8 +69,17 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
     //Do not initalize portal artifact for predefined portal
     if(initialPortals.contains(portalName)) return;
     DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+    
+    // Call CreatePortalPlugin plugins for specific portal template
     for (CreatePortalPlugin plugin : artifactPlugins.values()) {
-      if (!plugin.getName().startsWith("template") || (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName))) {
+      if (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName)) {
+        plugin.deployToPortal(sessionProvider, portalName);
+      }
+    }
+    
+    // Call common CreatePortalPlugin plugins
+    for (CreatePortalPlugin plugin : artifactPlugins.values()) {
+      if (!plugin.getName().startsWith("template")) {
         plugin.deployToPortal(sessionProvider, portalName);
       }
     }
