@@ -7,6 +7,7 @@
   import org.exoplatform.services.jcr.util.Text;	
   import org.exoplatform.wcm.webui.Utils;
 	UIComponent uiParent = uicomponent.getParent();
+	import org.exoplatform.wcm.webui.reader.ContentReader;
 
   def originalNode = uiParent.getOriginalNode();
   def currentNode = uiParent.getNode() ;
@@ -71,7 +72,7 @@
 			        	  rqcontext.getJavascriptManager().addCustomizedOnLoadScript("eXo.ecm.ECMUtils.replaceToIframe('$iframeId');");
 			        %>
 			        	<div style="text-align: center">
-			        		<textarea id="<%=iframeId%>"><%=Utils.sanitize(contentNode.getProperty("jcr:data").getString())%></textarea> 
+			        		<textarea id="<%=iframeId%>"><%=ContentReader.getEscapeHtmlContent(contentNode.getProperty("jcr:data").getString())%></textarea> 
 			        	</div>
 			        <%}%>
 				    </div>   

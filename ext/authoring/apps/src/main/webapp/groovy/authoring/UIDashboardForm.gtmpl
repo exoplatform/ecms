@@ -56,6 +56,10 @@ color: #888;
 }
 
 </style>
+<%
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+%>
+
 <div class="UIAuthoringDashboard">
 	<% uiform.begin(); %>
 	<div>
@@ -77,6 +81,7 @@ color: #888;
             def path = node.getPath();
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
+            name = ContentReader.getEscapeHtmlContent(name);
           %>
             <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
           <%
@@ -105,6 +110,7 @@ color: #888;
             def path = node.getPath();
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
+            name = ContentReader.getEscapeHtmlContent(name);
           %>
             <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
           <%
@@ -133,6 +139,7 @@ color: #888;
             def path = node.getPath();
             def name = node.getName();
             if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
+            name = ContentReader.getEscapeHtmlContent(name);
           %>
             <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
           <%

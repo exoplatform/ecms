@@ -34,6 +34,7 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /**
  * Created by The eXo Platform SARL
@@ -361,7 +362,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     }
     if (title==null) title = node.getName();
 
-    return Text.unescapeIllegalJcrChars(title);
+    return ContentReader.getXSSCompatibilityContent(title);
   }
   public void setContentSelectorID(String id) {
     this.contentSelectorID = id;
@@ -389,8 +390,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       if (selectedNode==null) return;
       strNodeUUID = selectedNode.getUUID();
       this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
-      this.setSelectedNodePath(selectedNode.getPath());
-      getUIStringInput(selectField).setValue(Text.unescapeIllegalJcrChars(getTitle(selectedNode)));
+      this.setSelectedNodePath(selectedNode.getPath());      
+      getUIStringInput(selectField).setValue(ContentReader.getXSSCompatibilityContent(getTitle(selectedNode)));
     }else if (PRINT_VIEW_PAGE_INPUT.equals(selectField)) {
       getUIStringInput(selectField).setValue(strPath);
     }

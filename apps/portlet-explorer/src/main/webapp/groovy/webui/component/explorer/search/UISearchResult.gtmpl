@@ -12,9 +12,9 @@
   import org.exoplatform.services.jcr.impl.core.SessionImpl;
   import javax.jcr.Node;
   import javax.jcr.Session;
-  import org.apache.commons.lang.StringEscapeUtils;
   import java.util.ArrayList;
   import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 <% 
   def resultList = uicomponent.getCurrentList(); 
@@ -110,7 +110,7 @@
           }
          
           String excerpt = row.getValue("rep:excerpt(.)")== null ? "" : row.getValue("rep:excerpt(.)").getString();
-          excerpt = StringEscapeUtils.unescapeHtml(excerpt);
+          excerpt = ContentReader.getXSSCompatibilityContent(excerpt);
           String score = row.getValue("jcr:score")== null ? "" : row.getValue("jcr:score").getString();
           String s = ""; 
           if (node != null) {
@@ -125,7 +125,7 @@
               	<%=Utils.getTitleWithSymlink(node)%>
               </div>
               <div>$excerpt</div>
-              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=node.getPath()%></div>
+              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=ContentReader.getXSSCompatibilityContent(node.getPath())%></div>
               <div><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></div>
             </td>
             <td><div class="ActionContainer">$score</div></td>

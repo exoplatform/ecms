@@ -15,7 +15,7 @@
  import org.exoplatform.wcm.webui.search.UISearchForm;
  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
  import org.exoplatform.services.wcm.search.SiteSearchService;
- import org.apache.commons.lang.StringEscapeUtils;
+ import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
@@ -25,7 +25,7 @@
   def currentPageData = uicomponent.getCurrentPageData();
   def keyword = uicomponent.getKeyword();
   if (keyword != null)
-    keyword = StringEscapeUtils.escapeHtml(keyword)
+    keyword = ContentReader.getEscapeHtmlContent(keyword);  
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
@@ -93,6 +93,7 @@
      def itemName = viewNode.getName();
      def itemTitle = uicomponent.getTitle(viewNode);
      if (itemTitle != null && itemTitle.trim().length() != 0) itemName = itemTitle;
+     itemName = ContentReader.getXSSCompatibilityContent(itemName);
      def itemUrl = uicomponent.getURL(viewNode);
      List<String> listNavigationNodeUris = uicomponent.getURLs(viewNode);
      if (!listNavigationNodeUris.isEmpty()) {

@@ -56,6 +56,7 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormHiddenInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -85,6 +86,7 @@ public class UIAddressBar extends UIForm {
   
   public final static String WS_NAME = "workspaceName";  
   public final static String FIELD_ADDRESS = "address";
+  public final static String FIELD_ADDRESS_HIDDEN = "address_hidden";
   public final static String ACTION_TAXONOMY = "exo:taxonomyAction";
   public final static String EXO_TARGETPATH = "exo:targetPath"; 
   public final static String EXO_TARGETWORKSPACE = "exo:targetWorkspace";
@@ -100,6 +102,7 @@ public class UIAddressBar extends UIForm {
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
     addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SimpleSearchValidator.class));
+    addUIFormInput(new UIFormHiddenInput(FIELD_ADDRESS_HIDDEN, FIELD_ADDRESS_HIDDEN, null));
   }
 
   public void setViewList(List<String> viewList) {
@@ -171,8 +174,10 @@ public class UIAddressBar extends UIForm {
   
   static public class ChangeNodeActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
-      UIAddressBar uiAddress = event.getSource() ;
-      String path = Text.escapeIllegalJcrChars(uiAddress.getUIStringInput(FIELD_ADDRESS).getValue());
+      UIAddressBar uiAddress = event.getSource() ;      
+      String path = null;
+      if(uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue() != null)
+      	path = uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue().toString();
       if (path == null || path.trim().length() == 0) path = "/";
       UIJCRExplorer uiExplorer = uiAddress.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setIsViewTag(false) ;

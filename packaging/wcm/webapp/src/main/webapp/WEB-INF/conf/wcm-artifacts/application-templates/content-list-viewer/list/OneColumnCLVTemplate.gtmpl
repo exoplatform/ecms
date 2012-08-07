@@ -11,12 +11,14 @@
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
 		import org.exoplatform.services.wcm.core.NodeLocation;
+		import org.exoplatform.wcm.webui.reader.ContentReader;  
 %>
 
 <div id="$uicomponent.id" class="OneColumnCLVTemplate">
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
+			header = ContentReader.getXSSCompatibilityContent(header);
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
 			def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;

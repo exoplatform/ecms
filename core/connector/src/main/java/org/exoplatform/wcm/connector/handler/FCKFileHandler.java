@@ -30,7 +30,7 @@ public class FCKFileHandler {
   public static Element createFileElement(
   		Document document, String fileType, Node sourceNode, Node displayNode, String currentPortal, LinkManager linkManager) throws Exception {   
   	Element file = document.createElement("File");
-    file.setAttribute("name", displayNode.getName());    
+    file.setAttribute("name", Utils.getTitle(displayNode));
     file.setAttribute("title", Utils.getTitle(displayNode));         
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);    
     file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));

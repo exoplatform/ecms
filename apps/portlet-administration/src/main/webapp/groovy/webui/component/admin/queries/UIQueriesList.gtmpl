@@ -8,6 +8,8 @@
  */
 %>
 <%
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
   def sharedQueries = uicomponent.getQueryList() ;
   if(sharedQueries == null) return ;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
@@ -35,8 +37,8 @@
       %>
           <tr class="$rowClass">
             <td><div class="Text">$node.name</div></td>
-            <td><div class="Text"><%=node.getProperty("jcr:language").getString()%></div></td>
-            <td><div class="Text"><%=node.getProperty("jcr:statement").getString()%></div></td>
+            <td><div class="Text"><%=node.getProperty("jcr:language").getString()%></div></td>            
+            <td><div class="Text"><%=ContentReader.getXSSCompatibilityContent(node.getProperty("jcr:statement").getString())%></div></td>
             <td>
             <%
             	String permissions = null ;

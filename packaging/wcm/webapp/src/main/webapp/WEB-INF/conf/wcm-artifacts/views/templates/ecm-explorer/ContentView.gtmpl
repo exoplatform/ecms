@@ -12,10 +12,10 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-  import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.wcm.webui.reader.ContentReader;  
 
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
@@ -226,12 +226,11 @@
           if (status == null) status = "";
 
           //   Title
-          def title = uiWorkingArea.getTitle(data);
-          title = Text.unescapeIllegalJcrChars(title);
+          def title = uiWorkingArea.getTitle(data);          
 
           //   Name
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
-          name = Text.unescapeIllegalJcrChars(name);
+          name = ContentReader.getXSSCompatibilityContent(name);
 
           //   Datetime
           def date = getDate(data, status);

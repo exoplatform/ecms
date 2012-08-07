@@ -22,6 +22,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 
@@ -88,6 +89,6 @@ public class Utils {
 	  	}
 	  	
 	  }
-	  return Text.unescapeIllegalJcrChars(title);
+	  return StringEscapeUtils.escapeHtml(Text.unescapeIllegalJcrChars(title));
   }
 }

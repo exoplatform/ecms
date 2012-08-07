@@ -15,8 +15,8 @@
 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.setDeleteConfirmationMessage('"+uiBrowserMulti.getDeleteConfirmationMsg()+"')");
 	}else {
 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
-	}
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"', '" +itemTargetPath +"')");%>
+	}	
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\")");%>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar">
 		<div class="FilterTitle">Filter</div>

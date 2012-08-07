@@ -1,5 +1,7 @@
 <%
   import org.exoplatform.webui.core.UIComponent ;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
   String[] beanFields =  uicomponent.getBeanFields() ;
   String[] beanActions =  uicomponent.getBeanActions() ;
   UIComponent uiParent = uicomponent.getParent() ;
@@ -51,6 +53,7 @@
 	          def fieldValue = uicomponent.getFieldValue(bean, field) ;
 	          def cssClass = "" ;
 	          if(fieldValue != null) {
+	            fieldValue = ContentReader.getXSSCompatibilityContent(fieldValue);
 	            def fieldClass = fieldValue.getClass() ;
 	            if(fieldClass == Integer.class)  cssClass = "number" ;
 	            else if(fieldClass == java.util.Date.class)  cssClass = "Date" ;

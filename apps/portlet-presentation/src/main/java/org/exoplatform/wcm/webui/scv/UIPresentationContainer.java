@@ -43,6 +43,7 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /**
  * Author : Do Ngoc Anh *
@@ -113,7 +114,7 @@ public class UIPresentationContainer extends UIContainer{
 		}
 		if (title==null) title = node.getName();
 
-		return Text.unescapeIllegalJcrChars(title);
+		return ContentReader.getXSSCompatibilityContent(title);
 	}
 	public boolean isPrinting() {
 	  return this.isPrint;
