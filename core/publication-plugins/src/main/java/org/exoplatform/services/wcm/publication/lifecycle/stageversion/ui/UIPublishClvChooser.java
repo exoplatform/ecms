@@ -95,7 +95,7 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
    * @param node the new node
    */
   public void setNode(Node node) {
-    nodeLocation = NodeLocation.make(node);
+    nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**

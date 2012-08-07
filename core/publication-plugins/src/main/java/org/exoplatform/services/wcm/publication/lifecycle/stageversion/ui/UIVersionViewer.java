@@ -77,7 +77,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setNode(javax.jcr.Node)
    */
   public void setNode(Node node) {
-    nodeLocation = NodeLocation.make(node);
+    nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /* (non-Javadoc)
@@ -93,7 +93,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
    * @param originalNode the new original node
    */
   public void setOriginalNode(Node originalNode) {
-    originalNodeLocation = NodeLocation.make(originalNode);
+    originalNodeLocation = NodeLocation.getNodeLocationByNode(originalNode);
   }
 
   /* (non-Javadoc)

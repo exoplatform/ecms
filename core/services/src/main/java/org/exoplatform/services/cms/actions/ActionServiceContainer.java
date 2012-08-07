@@ -140,45 +140,12 @@ public interface ActionServiceContainer {
    * Add mixintype = exo:actionable to current node
    * Add new node to current node with nodetype = type
    * @param node        current node
-   * @param repository  current repository
-   * @param type        nodetype name
-   * @param mappings    value of property for adding to new node
-   * @throws Exception
-   */
-  @Deprecated
-  public void addAction(Node node, String repository, String type, Map mappings) throws Exception;
-  
-  /**
-   * Add mixintype = exo:actionable to current node
-   * Add new node to current node with nodetype = type
-   * @param node        current node
    * @param type        nodetype name
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
   public void addAction(Node node, String type, Map mappings) throws Exception;  
 
-  /**
-   * Add mixintype = exo:actionable to current node
-   * Add new node to current node with nodetype = type
-   * @param node        current node
-   * @param repository  current repository
-   * @param type        nodetype name
-   * @param isDeep      affect to child node of node
-   * @param uuid        affect only to parent node of event having given uuid
-   * @param nodeTypeNames        affect to parent node of event having nodetype in nodeTypeNames
-   * @param mappings    value of property for adding to new node
-   * @throws Exception
-   */
-  @Deprecated
-  public void addAction(Node node,
-                        String repository,
-                        String type,
-                        boolean isDeep,
-                        String[] uuid,
-                        String[] nodeTypeNames,
-                        Map mappings) throws Exception;
-  
   /**
    * Add mixintype = exo:actionable to current node
    * Add new node to current node with nodetype = type
@@ -203,44 +170,32 @@ public interface ActionServiceContainer {
    * @param node        current node
    * @param actionName  name of action
    * @param variables   Map with variables and value
-   * @param repository  current repository
    * @throws Exception
    */
   public void executeAction(String userId,
                             Node node,
                             String actionName,
-                            Map variables,
-                            String repository) throws Exception;
+                            Map variables) throws Exception;
 
   /**
    * Execute action following userId, node, repository, initiated variables
    * @param userId user identify
    * @param node current node
    * @param actionName name of action
-   * @param repository current repository
    * @throws Exception
    * @see {@link #executeAction(String, Node, String, Map, String)}
    */
-  public void executeAction(String userId, Node node, String actionName, String repository) throws Exception;
+  public void executeAction(String userId, Node node, String actionName) throws Exception;
 
   /**
-   * Add action listener for all action child node of current node in repository
+   * Add action listener for all action child node of current node in current repository
    * @param node        current node
-   * @param repository  Repository name
    * @throws Exception
    */
-  public void initiateObservation(Node node, String repository) throws Exception;
-
-  /**
-   * init service with repository name
-   * @param repository   repository name
-   * @throws Exception
-   */
-  @Deprecated
-  public void init(String repository) throws Exception;
+  public void initiateObservation(Node node) throws Exception;
   
   /**
-   * init service with repository name
+   * Init all available action plugins. 
    * @throws Exception
    */
   public void init() throws Exception;  

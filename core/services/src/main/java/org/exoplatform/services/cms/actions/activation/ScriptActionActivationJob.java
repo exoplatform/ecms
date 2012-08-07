@@ -69,10 +69,8 @@ public class ScriptActionActivationJob implements Job {
     String srcPath = jdatamap.getString("srcPath") ;
     String actionName = jdatamap.getString("actionName") ;
     String executable = jdatamap.getString("executable") ;
-    String repository = null;
     Map variables = jdatamap.getWrappedMap() ;
     try {
-      repository = repositoryService.getCurrentRepository().getConfiguration().getName();
       jcrSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace);
       Node node = (Node) jcrSession.getItem(srcPath);
       actionNode = actionServiceContainer.getAction(node, actionName);
@@ -83,7 +81,7 @@ public class ScriptActionActivationJob implements Job {
         jcrSession.logout();
         return;
       }
-      scriptActionService.activateAction(userId, executable, variables, repository);
+      scriptActionService.activateAction(userId, executable, variables);
       int currentCounter = (int)actionNode.getProperty(COUNTER_PROP).getValue().getLong() ;
       actionNode.setProperty(COUNTER_PROP,currentCounter +1) ;
       actionNode.save() ;

@@ -167,7 +167,7 @@ public class ExportContentJob implements Job {
             }
             bos = new ByteArrayOutputStream();
 
-            NodeLocation nodeLocation = NodeLocation.make(node_);
+            NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node_);
             StringBuffer contenTargetPath = new StringBuffer();
             contenTargetPath.append(nodeLocation.getRepository());
             contenTargetPath.append(":");
@@ -189,7 +189,7 @@ public class ExportContentJob implements Job {
 
             for (Node nodeSymlink : categorySymLinks) {
 
-              NodeLocation symlinkLocation = NodeLocation.make(nodeSymlink);
+              NodeLocation symlinkLocation = NodeLocation.getNodeLocationByNode(nodeSymlink);
               StringBuffer symlinkTargetPath = new StringBuffer();
               symlinkTargetPath.append(symlinkLocation.getRepository());
               symlinkTargetPath.append(":");
@@ -226,7 +226,7 @@ public class ExportContentJob implements Job {
 
           if (node_.isNodeType("nt:frozenNode"))
             continue;
-          NodeLocation nodeLocation = NodeLocation.make(node_);
+          NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node_);
           StringBuffer contenTargetPath = new StringBuffer();
           contenTargetPath.append(nodeLocation.getRepository());
           contenTargetPath.append(":");

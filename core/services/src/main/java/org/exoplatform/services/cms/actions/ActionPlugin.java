@@ -27,9 +27,9 @@ public interface ActionPlugin {
 
   public String getExecutableDefinitionName();
 
-  public Collection<String> getActionExecutables(String repository) throws Exception;
-
   public String getActionExecutableLabel();
+  
+  public Collection<String> getActionExecutables() throws Exception;
 
   public String getActionExecutable(String actionTypeName) throws Exception;
 
@@ -42,26 +42,9 @@ public interface ActionPlugin {
 
   public void removeActivationJob(String jobName, String jobGroup, String jobClass) throws Exception;
 
-  @Deprecated
-  public void addAction(String actionType,
-                        String repository,
-                        String srcWorkspace,
-                        String srcPath,
-                        Map mappings) throws Exception;
-  
   public void addAction(String actionType,
                         String srcWorkspace,
                         String srcPath,
-                        Map mappings) throws Exception;
-
-  @Deprecated
-  public void addAction(String actionType,
-                        String repository,
-                        String srcWorkspace,
-                        String srcPath,
-                        boolean isDeep,
-                        String[] uuid,
-                        String[] nodeTypeNames,
                         Map mappings) throws Exception;
   
   public void addAction(String actionType,
@@ -72,23 +55,14 @@ public interface ActionPlugin {
                         String[] nodeTypeNames,
                         Map mappings) throws Exception;  
 
-  @Deprecated
-  public void initiateActionObservation(Node actionNode, String repository) throws Exception;
-  
   public void initiateActionObservation(Node actionNode) throws Exception;
 
-  @Deprecated
-  public void reScheduleActivations(Node actionNode, String repository) throws Exception;
-  
   public void reScheduleActivations(Node actionNode) throws Exception;
 
-  public void executeAction(String userId, Node actionNode, Map variables, String repository) throws Exception;
+  public void executeAction(String userId, Node actionNode, Map variables) throws Exception;
 
-  public void executeAction(String userId, String executable, Map variables, String repository) throws Exception;
+  public void executeAction(String userId, String executable, Map variables) throws Exception;
   
   public void activateAction(String userId, String executable, Map variables) throws Exception;  
-
-  @Deprecated
-  public void activateAction(String userId, String executable, Map variables, String repository) throws Exception;
 
 }

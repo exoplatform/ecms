@@ -124,7 +124,6 @@ public class UITagStyleList extends UIPagingGrid {
     public void execute(Event<UITagStyleList> event) throws Exception {
       UITagStyleList uiTagStyleList = event.getSource();
       UITagManager uiManager = uiTagStyleList.getParent();
-      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
       uiManager.initTaggingFormPopup(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }

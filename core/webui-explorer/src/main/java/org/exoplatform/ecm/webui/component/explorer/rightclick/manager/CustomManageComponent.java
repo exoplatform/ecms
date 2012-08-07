@@ -72,7 +72,6 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
     UIWorkingArea uicomp = event.getSource().getParent();
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
     String actionName = event.getRequestContext().getRequestParameter("actionName");
-    String repository = uiExplorer.getRepositoryName();
     String wsName = event.getRequestContext().getRequestParameter(UIWorkingArea.WS_NAME);
     Session session = uiExplorer.getSessionByWorkspace(wsName);
     ActionServiceContainer actionService =
@@ -80,7 +79,7 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
     try {
       Node node = uiExplorer.getNodeByPath(nodePath, session);
       String userId = event.getRequestContext().getRemoteUser();
-      actionService.executeAction(userId, node, actionName, repository);
+      actionService.executeAction(userId, node, actionName);
       Object[] arg = { actionName };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.execute-successfully", arg));
       

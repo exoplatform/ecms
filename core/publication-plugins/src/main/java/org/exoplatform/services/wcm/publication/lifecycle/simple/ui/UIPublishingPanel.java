@@ -56,7 +56,7 @@ public class UIPublishingPanel extends UIForm implements UIPopupComponent {
    * @param node the new node
    */
   public void setNode(Node node) {
-    currentNodeLocation = NodeLocation.make(node);
+    currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**
@@ -79,7 +79,7 @@ public class UIPublishingPanel extends UIForm implements UIPopupComponent {
    * @throws Exception the exception
    */
   public void initPanel(Node node,String portalName,List<String> runningPortals) throws Exception {
-    currentNodeLocation = NodeLocation.make(node);
+    currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
     UIPublicationComponentStatus publicationComponentStatus = getChild(UIPublicationComponentStatus.class);
     publicationComponentStatus.setNode(getNode());
   }

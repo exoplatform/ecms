@@ -69,7 +69,7 @@ public class UIPublicationComponentStatus extends UIForm {
    * @throws Exception the exception
    */
   public UIPublicationComponentStatus(Node node) throws Exception {
-    nodeLocation = NodeLocation.make(node);
+    nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**
@@ -87,7 +87,7 @@ public class UIPublicationComponentStatus extends UIForm {
    * @param node the new node
    */
   public void setNode(Node node) {
-    nodeLocation = NodeLocation.make(node);
+    nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**

@@ -348,7 +348,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
 
           // Save to database
           ActionServiceContainer actionServiceContainer = fccActionForm.getApplicationComponent(ActionServiceContainer.class);
-          actionServiceContainer.addAction(parentNode, repository, fccActionForm.nodeTypeName_, sortedInputs);
+          actionServiceContainer.addAction(parentNode, fccActionForm.nodeTypeName_, sortedInputs);
           fccActionForm.setIsOnchange(false) ;
           parentNode.getSession().save() ;
 

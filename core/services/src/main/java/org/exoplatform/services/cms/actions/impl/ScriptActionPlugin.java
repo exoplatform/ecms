@@ -36,9 +36,9 @@ import org.exoplatform.services.cms.actions.activation.ScriptActionActivationJob
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlugin {
 
@@ -47,17 +47,13 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   private ScriptService scriptService_;
   private RepositoryService repositoryService_;
   private ActionConfig config_;
+  private String desc_ = "";
 
   public ScriptActionPlugin(ScriptService scriptService, InitParams params,
                             RepositoryService repositoryService) throws Exception {
     scriptService_ = scriptService;
     repositoryService_ = repositoryService;
     config_ = params.getObjectParamValues(ActionConfig.class).get(0);
-  }
-
-  @Deprecated
-  public Collection<String> getActionExecutables(String repository) throws Exception {
-    return getActionExecutables();
   }
   
   public Collection<String> getActionExecutables() throws Exception {
@@ -77,9 +73,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
 
   public String getExecutableDefinitionName() { return "exo:script"; }
   protected String getWorkspaceName() { return config_.getWorkspace() ; }
-  protected List<RepositoryEntry> getRepositories() {
-    return repositoryService_.getConfig().getRepositoryConfigurations() ;
-  }
+  
   protected ManageableRepository getRepository() throws Exception {
     return repositoryService_.getCurrentRepository();
   }
@@ -95,11 +89,13 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   public String getName() { return ACTION_TYPE; }
   public void setName(String s) { }
 
-  public String getDescription() { return "Add a action service"; }
-  public void setDescription(String desc) { }
+  public String getDescription() { return desc_; }
+  public void setDescription(String desc) {
+    desc_ = desc;
+  }
 
   @SuppressWarnings("unchecked")
-  public void executeAction(String userId, Node actionNode, Map variables, String repository) throws Exception {
+  public void executeAction(String userId, Node actionNode, Map variables) throws Exception {
     String script = null;
     if(actionNode.hasProperty("exo:script")) {
       script = actionNode.getProperty("exo:script").getString();
@@ -112,7 +108,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
       }
     }
     variables.put("actionNode", actionNode);
-    variables.put("repository",repository) ;
+    variables.put("repository",WCMCoreUtils.getRepository().getConfiguration().getName()) ;
     executeAction(userId, script, variables);
   }
 
@@ -141,11 +137,6 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     return null ;
   }
 
-  @Deprecated
-  public void executeAction(String userId, String executable, Map variables, String repository) throws Exception {
-    executeAction(userId, executable, variables);
-  }
-  
   public void executeAction(String userId, String executable, Map variables) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
@@ -170,11 +161,6 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     executeAction(userId,executable,variables) ;
   }
 
-  @Override
-  public void activateAction(String userId, String executable, Map variables, String repository) throws Exception {
-    activateAction(userId, executable, variables);
-  }
-  
   protected Class createActivationJob() throws Exception {
     return ScriptActionActivationJob.class ;
   }

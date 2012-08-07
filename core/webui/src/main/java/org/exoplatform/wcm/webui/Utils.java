@@ -639,19 +639,6 @@ public class Utils {
     application.addMessage(new ApplicationMessage(message, args, type));
   }
 
-  @Deprecated
-  /**
-   * Gets the service.  Try to use WCMCoreUtils.getService(Class<T> clazz).
-   *
-   * @param clazz the class of the service
-   *
-   * @return the service
-   */
-  public static <T> T getService(Class<T> clazz) {
-    UIPortalApplication portalApplication = Util.getUIPortalApplication();
-    return clazz.cast(portalApplication.getApplicationComponent(clazz));
-  }
-
   /**
    * Get one portlet preference by name
    *
@@ -881,14 +868,16 @@ public class Utils {
       return value;
     }
   }
+  
   public static boolean isEmptyContent(String inputValue) {
-  boolean isEmpty = true;
-  inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
-  inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
-  inputValue = inputValue.replaceAll("&nbsp;", "");
-  if(inputValue != null && inputValue.length() > 0) return false;
-  return isEmpty;
+    boolean isEmpty = true;
+    inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
+    inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
+    inputValue = inputValue.replaceAll("&nbsp;", "");
+    if(inputValue != null && inputValue.length() > 0) return false;
+    return isEmpty;
   }
+  
   /**
    * @purpose     Check if a query is valid
    * @param workspace

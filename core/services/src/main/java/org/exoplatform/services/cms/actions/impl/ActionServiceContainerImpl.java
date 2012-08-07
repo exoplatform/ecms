@@ -205,19 +205,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   }
 
   /**
-   * Add mixin exo:actionable for node in repository
-   * @param repository   repository name
-   * @throws Exception
-   */
-  @Deprecated
-  public void init(String repository) {
-    init();
-  }
-  
-  /**
-   * Add mixin exo:actionable for node in current repository
-   * @param repository   repository name
-   * @throws Exception
+   * {@inheritDoc}
    */
   public void init() {
     try {
@@ -233,6 +221,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }  
 
+  /**
+   * {@inheritDoc}
+   */  
   public Collection<String> getActionPluginNames() {
     Collection<String> actionPluginNames = new ArrayList<String>(actionPlugins.size());
     for (ComponentPlugin plugin : actionPlugins) {
@@ -241,6 +232,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     return actionPluginNames;
   }
 
+  /**
+   * {@inheritDoc}
+   */  
   public ActionPlugin getActionPlugin(String actionsServiceName) {
     for (ComponentPlugin plugin : actionPlugins) {
       if (plugin.getName().equals(actionsServiceName))
@@ -359,6 +353,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     return jcrRepository.getSystemSession(workspace);
   }
 
+  /**
+   * {@inheritDoc}
+   */  
   public ActionPlugin getActionPluginForActionType(String actionTypeName) {
     for (ComponentPlugin plugin : actionPlugins) {
       String actionServiceName = plugin.getName();
@@ -370,6 +367,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     return null;
   }
 
+  /**
+   * {@inheritDoc}
+   */  
   public Node getAction(Node node, String actionName) throws Exception {
     NodeIterator nodeIter = node.getNodes(EXO_ACTIONS);
     while(nodeIter.hasNext()) {
@@ -382,15 +382,24 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
     return null;
   }
-
+  
+  /**
+   * {@inheritDoc}
+   */
   public boolean hasActions(Node node) throws Exception {
     return node.isNodeType(ACTIONABLE);
   }
-
+  
+  /**
+   * {@inheritDoc}
+   */
   public List<Node> getActions(Node node) throws Exception {
     return getActions(node, null);
   }
 
+  /**
+   * {@inheritDoc}
+   */  
   public List<Node> getCustomActionsNode(Node node, String lifecyclePhase) throws Exception {
     try {
       return getActions(node, lifecyclePhase) ;
@@ -399,6 +408,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public List<Node> getActions(Node node, String lifecyclePhase) throws Exception {
     List<Node> actions = new ArrayList<Node>();
     Node actionStorage = null;
@@ -429,6 +441,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }
   
+  /**
+   * {@inheritDoc}
+   */
   public void removeAction(Node node, String actionName, String repository) throws Exception {
     if(!node.isNodeType(ACTIONABLE)) return  ;
     Node action2Remove = getAction(node, actionName);
@@ -456,17 +471,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     node.save();
   }
   
-  @Deprecated
-  public void addAction(Node storeActionNode,
-                        String repository,
-                        String actionType,
-                        boolean isDeep,
-                        String[] uuid,
-                        String[] nodeTypeNames,
-                        Map mappings) throws Exception {
-    addAction(storeActionNode, actionType, isDeep, uuid, nodeTypeNames, mappings);
-  }
-  
+  /**
+   * {@inheritDoc}}
+   */
   public void addAction(Node storeActionNode,
                         String actionType,
                         boolean isDeep,
@@ -508,11 +515,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }  
 
-  @Deprecated
-  public void addAction(Node storeActionNode, String repository, String actionType, Map mappings) throws Exception {
-    addAction(storeActionNode, actionType, mappings);
-  }
-  
+  /**
+   * {@inheritDoc}
+   */
   public void addAction(Node storeActionNode, String actionType, Map mappings) throws Exception {
     boolean isDeep = true;
     String[] nodeTypeName = null;
@@ -545,7 +550,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @throws Exception
    * @see {@link #executeAction(String, Node, String, Map, String)}
    */
-  public void executeAction(String userId, Node node, String actionName, String repository) throws Exception {
+  public void executeAction(String userId, Node node, String actionName) throws Exception {
     Map<String, String> variables = new HashMap<String, String>();
     variables.put("initiator", userId);
     variables.put("actionName", actionName);
@@ -567,7 +572,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       fillVariables(actionNode, mixinType, variables);
     }
 
-    executeAction(userId, node, actionName, variables, repository);
+    executeAction(userId, node, actionName, variables);
   }
 
 
@@ -601,7 +606,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param repository  current repository
    * @throws Exception
    */
-  public void executeAction(String userId, Node node, String actionName, Map variables, String repository) throws Exception {
+  public void executeAction(String userId, Node node, String actionName, Map variables) throws Exception {
     if (!node.isNodeType(ACTIONABLE)) return ;
     Node actionNode = getAction(node, actionName);
     String actionTypeName = actionNode.getPrimaryNodeType().getName();
@@ -609,7 +614,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       String actionServiceName = plugin.getName();
       ActionPlugin actionPlugin = getActionPlugin(actionServiceName);
       if (actionPlugin.isActionTypeSupported(actionTypeName)) {
-        actionPlugin.executeAction(userId, actionNode, variables, repository);
+        actionPlugin.executeAction(userId, actionNode, variables);
       }
     }
   }
@@ -735,7 +740,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }
 
-  public void initiateObservation(Node node, String repository) throws Exception {
+  /**
+   * {@inheritDoc}
+   */
+  public void initiateObservation(Node node) throws Exception {
     try {
       Session session = node.getSession();
       QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -783,10 +791,22 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
   }
 
+  /**
+   * Parase Array Value to Array String
+   * @param values
+   * @return Array String
+   * @throws Exception
+   */
   private String[] parseValuesToArray(Value[] values) throws Exception {
     return parseValuesToList(values).toArray(new String[0]);
   }
 
+  /**
+   * Parse Array Value to List String
+   * @param values
+   * @return
+   * @throws Exception
+   */
   private List<String> parseValuesToList(Value[] values) throws Exception {
     List<String> lstValues = new ArrayList<String>();
     for(Value value : values) {

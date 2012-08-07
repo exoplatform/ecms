@@ -45,7 +45,6 @@ import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.DMSEvent;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -95,7 +94,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   protected Map<String, ECMEventListener> listeners_ = new HashMap<String, ECMEventListener>();
   private static final Log LOG  = ExoLogger.getLogger(BaseActionPlugin.class.getName());
 
-  abstract protected List<RepositoryEntry> getRepositories();
   abstract protected String getWorkspaceName();
   abstract protected ManageableRepository getRepository() throws Exception;
   abstract protected String getActionType();
@@ -106,15 +104,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
 
   abstract protected Class createActivationJob() throws Exception ;
 
-  @Deprecated
-  public void addAction(String actionType,
-                        String repository,
-                        String srcWorkspace,
-                        String srcPath,
-                        Map mappings) throws Exception {
-    addAction(actionType, repository, srcWorkspace, srcPath, true, null, null, mappings);
-  }
-  
+  /**
+   * {@inheritDoc}
+   */
   public void addAction(String actionType,
                         String srcWorkspace,
                         String srcPath,
@@ -122,6 +114,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     addAction(actionType, srcWorkspace, srcPath, true, null, null, mappings);
   }  
 
+  /**
+   * {@inheritDoc}
+   */  
   public void addAction(String actionType,
                         String srcWorkspace,
                         String srcPath,
@@ -142,7 +137,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String actionExecutable = getActionExecutable(actionType);
     if (DMSEvent.getEventTypes(type) == DMSEvent.READ) return;
     if ((DMSEvent.getEventTypes(type) & DMSEvent.SCHEDULE) > 0) {
-      scheduleActionActivationJob(repoName, srcWorkspace, srcPath, actionName, actionType,
+      scheduleActionActivationJob(srcWorkspace, srcPath, actionName, actionType,
           actionExecutable, mappings);
     }
     if (DMSEvent.getEventTypes(type) == DMSEvent.SCHEDULE)
@@ -163,25 +158,10 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     listeners_.put(listenerKey, listener);
   }
   
-  @Deprecated
-  public void addAction(String actionType,
-                        String repository,
-                        String srcWorkspace,
-                        String srcPath,
-                        boolean isDeep,
-                        String[] uuid,
-                        String[] nodeTypeNames,
-                        Map mappings) throws Exception {
-    addAction(actionType, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
-  }
-
-  @Deprecated
-  public void initiateActionObservation(Node storedActionNode, String repository) throws Exception {
-    initiateActionObservation(storedActionNode);
-  }
-  
+  /**
+   * {@inheritDoc}
+   */  
   public void initiateActionObservation(Node storedActionNode) throws Exception {
-    
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
     String repository = repositoryService.getCurrentRepository().getConfiguration().getName();    
@@ -231,12 +211,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         nodeTypeNames, false);
     session.logout();
     listeners_.put(listenerKey, listener);
-  }
-  
-  
-  @Deprecated
-  public void reScheduleActivations(Node storedActionNode, String repository) throws Exception {
-    reScheduleActivations(storedActionNode);
   }
   
   public void reScheduleActivations(Node storedActionNode) throws Exception {
@@ -528,7 +502,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
       srcNode.save();
   }
 
-  private void scheduleActionActivationJob(String repository, String srcWorkspace,String srcPath,
+  private void scheduleActionActivationJob(String srcWorkspace,String srcPath,
       String actionName,String actionType,String actionExecutable, Map mappings) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     JobSchedulerService schedulerService =
@@ -585,7 +559,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     variables.put(actionNameVar, actionName);
     variables.put(executableVar,actionExecutable) ;
     variables.put(srcWorkspaceVar, srcWorkspace);
-//    variables.put(srcRepository, repository);
     variables.put(srcPathVar, srcPath);
     variables.put(nodePath, srcPath);
     Map<String,Object> executionVariables = getExecutionVariables(mappings) ;

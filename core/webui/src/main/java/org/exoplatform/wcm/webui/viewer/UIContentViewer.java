@@ -55,7 +55,7 @@ public class UIContentViewer extends UIBaseNodePresentation {
   }
 
   public void setOriginalNode(Node originalNode) throws Exception{
-    originalNodeLocation = NodeLocation.make(originalNode);
+    originalNodeLocation = NodeLocation.getNodeLocationByNode(originalNode);
   }
 
   public Node getNode() {
@@ -63,7 +63,7 @@ public class UIContentViewer extends UIBaseNodePresentation {
   }
 
   public void setNode(Node viewNode) {
-    viewNodeLocation = NodeLocation.make(viewNode);
+    viewNodeLocation = NodeLocation.getNodeLocationByNode(viewNode);
   }
 
   public String getTemplate() {

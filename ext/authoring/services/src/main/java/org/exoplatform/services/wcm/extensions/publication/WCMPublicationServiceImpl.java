@@ -163,7 +163,7 @@ public class WCMPublicationServiceImpl
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
 
-      NodeLocation currentRevisionLocation = NodeLocation.make(node);
+      NodeLocation currentRevisionLocation = NodeLocation.getNodeLocationByNode(node);
 
       Node currentRevision = getCurrentRevision(currentRevisionLocation);
       if (currentRevision != null) {

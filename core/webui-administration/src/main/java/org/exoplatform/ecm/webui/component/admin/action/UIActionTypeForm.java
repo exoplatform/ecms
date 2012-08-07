@@ -26,7 +26,6 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -35,8 +34,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -113,16 +112,12 @@ public class UIActionTypeForm extends UIForm {
     addUIFormInput(uiFormMultiValue) ;
   }
 
-  @SuppressWarnings("unchecked")
   private List<SelectItemOption<String>> getExecutableOptions(String actionTypeName) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    String repository =  portletPref.getValue(Utils.REPOSITORY, "") ;
     ActionServiceContainer actionServiceContainer =
       getApplicationComponent(ActionServiceContainer.class) ;
     ActionPlugin actionPlugin = actionServiceContainer.getActionPluginForActionType(actionTypeName) ;
-    List<String> executables = (List)actionPlugin.getActionExecutables(repository);
+    List<String> executables = (List<String>)actionPlugin.getActionExecutables();
     for(String actionExec : executables) {
       options.add(new SelectItemOption<String>(actionExec, actionExec)) ;
     }

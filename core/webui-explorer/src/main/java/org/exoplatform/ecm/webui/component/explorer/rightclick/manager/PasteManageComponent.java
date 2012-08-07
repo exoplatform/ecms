@@ -294,10 +294,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       if (ClipboardCommand.COPY.equals(type)) {
         pasteByCopy(destSession, srcWorkspace, srcPath, destPath);
         Node selectedNode = (Node) destSession.getItem(destPath);
-        actionContainer.initiateObservation(selectedNode, uiExplorer.getRepositoryName());
+        actionContainer.initiateObservation(selectedNode);
       } else {
         pasteByCut(currentClipboard, uiExplorer, destSession, srcWorkspace, srcPath, destPath,
-            actionContainer, uiExplorer.getRepositoryName(), isMultiSelect, isLastPaste);
+            actionContainer, isMultiSelect, isLastPaste);
       }
     } catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
@@ -395,7 +395,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
   private static void pasteByCut(ClipboardCommand currentClipboard, UIJCRExplorer uiExplorer,
       Session session, String srcWorkspace, String srcPath, String destPath,
-      ActionServiceContainer actionContainer, String repository, boolean isMultiSelect,
+      ActionServiceContainer actionContainer, boolean isMultiSelect,
       boolean isLastPaste) throws Exception {
     UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
     Workspace workspace = session.getWorkspace();
@@ -460,7 +460,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         }
 
         if (!(desNode.getPath().equals(uiExplorer.getCurrentPath())))
-          actionContainer.initiateObservation(desNode, repository);
+          actionContainer.initiateObservation(desNode);
         for (int i = 0; i < refList.size(); i++) {
           Node addRef = refList.get(i);
           relationsService.addRelation(addRef, destPath, session.getWorkspace().getName());

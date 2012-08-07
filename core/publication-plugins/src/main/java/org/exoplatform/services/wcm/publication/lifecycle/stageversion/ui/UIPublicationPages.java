@@ -62,7 +62,7 @@ public class UIPublicationPages extends UIForm {
    * @param node the new node
    */
   public void setNode(Node node) {
-    currentNodeLocation = NodeLocation.make(node);
+    currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**
@@ -87,7 +87,7 @@ public class UIPublicationPages extends UIForm {
    * @throws Exception the exception
    */
   public void init(Node node,String portalName,List<String> runningPortals) throws Exception {
-    currentNodeLocation = NodeLocation.make(node);
+    currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
     UIPortalNavigationExplorer poExplorer = getChild(UIPortalNavigationExplorer.class);
     poExplorer.init(portalName,runningPortals);
     UIPublishedPages publishedPages = getChild(UIPublishedPages.class);

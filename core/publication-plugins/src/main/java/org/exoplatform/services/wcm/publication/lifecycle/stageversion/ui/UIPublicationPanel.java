@@ -113,8 +113,8 @@ public class UIPublicationPanel extends UIForm {
    * @throws Exception the exception
    */
   public void init(Node node) throws Exception {
-    currentNodeLocation = NodeLocation.make(node);
-    currentRevisionLocation = NodeLocation.make(node);
+    currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
+    currentRevisionLocation = NodeLocation.getNodeLocationByNode(node);
     this.viewedRevisions = NodeLocation.getLocationsByNodeList(getLatestRevisions(3,node));
     this.revisionsDataMap = getRevisionData(node);
     //In some cases as copy a a node, we will lost all version of the node
@@ -271,7 +271,7 @@ public class UIPublicationPanel extends UIForm {
    * @param revision the new current revision
    */
   public void setCurrentRevision(Node revision) {
-    currentRevisionLocation = NodeLocation.make(revision);
+    currentRevisionLocation = NodeLocation.getNodeLocationByNode(revision);
   }
 
   /**

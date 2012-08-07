@@ -230,18 +230,6 @@ public class WCMCoreUtils {
   }
 
   /**
-   * Get the repository by name
-   *
-   * @param repository the repository name
-   *
-   * @return the manageable repository by name, the current repository if name is null
-   */
-  @Deprecated
-  public static ManageableRepository getRepository(String repository) {
-    return getRepository();
-  }
-
-  /**
    * Get the current repository
    *
    * @return the current manageable repository

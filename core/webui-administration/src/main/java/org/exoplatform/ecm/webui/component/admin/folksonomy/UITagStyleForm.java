@@ -48,7 +48,6 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    //template =  "system:/groovy/webui/form/UIForm.gtmpl",
     template =  "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UITagStyleForm.UpdateStyleActionListener.class),

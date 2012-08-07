@@ -22,7 +22,6 @@ import java.util.List;
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.link.ItemLinkAware;
@@ -94,58 +93,6 @@ public class NodeLocation extends ItemLocation {
    */
   public NodeLocation(ItemLocation location) {
     super(location);
-  }
-
-  /**
-   * Parses the.
-   *
-   * @param exp the exp
-   * @return the node location
-   */
-  @Deprecated
-  /**
-   * Get an NodeLocation object by an expression.
-   *
-   * @param exp the expression with pattern repository:workspace:path
-   *
-   * @return a NodeLocation object
-   */
-  public static final NodeLocation parse(final String exp) {
-    String[] temp = split(exp, ":");
-    if (temp.length == 3 && temp[2].indexOf("/") == 0) {
-      return new NodeLocation(temp[0], temp[1], temp[2]);
-    }
-    throw new IllegalArgumentException("Invalid expression: " + exp
-        + ". An valid expression has pattern repository:workspace:path");
-  }
-
-  /**
-   * Make.
-   *
-   * @param node the node
-   * @return the node location
-   */
-  @Deprecated
-  /**
-   * Get an NodeLocation object by a node. Try to use toNodeLocation() instead.
-   *
-   * @param node the node
-   *
-   * @return a NodeLocation object
-   */
-  public static final NodeLocation make(final Node node) {
-    try {
-      Session session = node.getSession();
-      String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-      String workspace = session.getWorkspace().getName();
-      String path = node.getPath();
-      return new NodeLocation(repository, workspace, path);
-    } catch (RepositoryException e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("make() failed because of ", e);
-      }
-    }
-    return null;
   }
 
   /**
@@ -284,7 +231,7 @@ public class NodeLocation extends ItemLocation {
    * @return a node
    */
   public static final Node getNodeByExpression(final String expression) {
-    return getNodeByLocation(parse(expression));
+    return getNodeByLocation(getNodeLocationByExpression(expression));
   }
 
   /**

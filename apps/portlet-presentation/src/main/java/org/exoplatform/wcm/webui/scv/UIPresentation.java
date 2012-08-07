@@ -99,7 +99,7 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public void setOriginalNode(Node node) throws Exception{
-    originalNodeLocation = NodeLocation.make(node);
+    originalNodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /* (non-Javadoc)
@@ -138,7 +138,7 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setNode(javax.jcr.Node)
    */
   public void setNode(Node node) {
-    viewNodeLocation = NodeLocation.make(node);
+    viewNodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /* (non-Javadoc)
@@ -176,7 +176,6 @@ public class UIPresentation extends UIBaseNodePresentation {
    * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
    * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
-  @Deprecated
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();

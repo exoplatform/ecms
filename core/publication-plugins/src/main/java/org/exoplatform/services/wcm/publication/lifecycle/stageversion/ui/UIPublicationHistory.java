@@ -76,7 +76,7 @@ public class UIPublicationHistory extends UIComponentDecorator {
    * @param node the node
    */
   public void init(Node node) {
-   currentNodeLocation = NodeLocation.make(node);
+   currentNodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**
