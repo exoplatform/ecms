@@ -156,6 +156,7 @@ public class ManageDocumentService implements ResourceContainer {
    * 
    * @param driveType The types of drive (General, Group, or Personal)
    * @param showPrivate Show the Private drive or not. The default value is false
+   * @param showPersonal Show the Personal drive or not. The default value is false
    * @return {@link Document} Contain the drives
    * 
    * @throws Exception The exception
@@ -167,7 +168,7 @@ public class ManageDocumentService implements ResourceContainer {
   @RolesAllowed("users")
   public Response getDrives(@QueryParam("driveType") String driveType,
                             @DefaultValue("false") @QueryParam("showPrivate") String showPrivate,
-                            @DefaultValue("false") @QueryParam("showPrivate") String showPersonal) throws Exception {
+                            @DefaultValue("false") @QueryParam("showPersonal") String showPersonal) throws Exception {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     List<String> userRoles = getMemberships();
     DocumentBuilder builder = factory.newDocumentBuilder();
