@@ -155,7 +155,7 @@ public class ManageDocumentService implements ResourceContainer {
   @RolesAllowed("users")
   public Response getDrives(@QueryParam("driveType") String driveType,
                             @DefaultValue("false") @QueryParam("showPrivate") String showPrivate,
-                            @DefaultValue("false") @QueryParam("showPrivate") String showPersonal) throws Exception {
+                            @DefaultValue("false") @QueryParam("showPersonal") String showPersonal) throws Exception {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     List<String> userRoles = getMemberships();
     DocumentBuilder builder = factory.newDocumentBuilder();
