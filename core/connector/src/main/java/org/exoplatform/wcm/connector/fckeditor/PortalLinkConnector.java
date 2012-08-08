@@ -198,6 +198,8 @@ public class PortalLinkConnector implements ResourceContainer {
   @SuppressWarnings("unchecked")
   private Document buildPortalXMLResponse(String currentFolder, String command, String userId) throws Exception {
     Element rootElement = initRootElement(command, currentFolder);
+    PortalContainer container = PortalContainer.getInstance();
+    RequestLifeCycle.begin(container);
     Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class);
     PageList pageList = portalDataStorage.find(query, new Comparator<PortalConfig>() {
       public int compare(PortalConfig pconfig1, PortalConfig pconfig2) {
@@ -219,6 +221,7 @@ public class PortalLinkConnector implements ResourceContainer {
       folderElement.setAttribute("folderType", "");
       foldersElement.appendChild(folderElement);
     }
+    RequestLifeCycle.end();
     return rootElement.getOwnerDocument();
   }
 
@@ -367,34 +370,5 @@ public class PortalLinkConnector implements ResourceContainer {
       fileElement.setAttribute("size", "");
       filesElement.appendChild(fileElement);
     }
-  }
-
-  /**
-   * Gets the page node.
-   *
-   * @param root the root
-   * @param uri the uri
-   *
-   * @return the page node
-   */
-  private UserNode getUserNode(UserNode root, String uri) {
-    if (uri.equals("/" + root.getURI() + "/")) {
-      return root;
-    }
-    Iterator<UserNode> childrenIter = root.getChildren().iterator();
-    if (childrenIter == null) {
-      return null;
-    }
-    while (childrenIter.hasNext()) {
-      UserNode child = childrenIter.next();
-      if (uri.equals("/" + child.getURI() + "/")) {
-        return child;
-      }
-      UserNode deepChild = getUserNode(child, uri);
-      if (deepChild != null) {
-        return deepChild;
-      }
-    }
-    return null;
   }
 }
