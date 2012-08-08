@@ -5,7 +5,7 @@
 }
 
 .UIPCLVDefault .TopBoxParameterized {
-  background: url('background/BGTopBox.gif') repeat-x left top;
+  background: url('/eXoWCMResources/skin/DefaultSkin/background/BGTopBox.gif') repeat-x left top;
   line-height: 30px;
   padding: 0px 10px;
   margin-bottom: 1px;
@@ -19,7 +19,7 @@
 }
 
 .UIPCLVDefault .Header {
-  background: url(background/BgCategoryTitle1x25.gif) repeat-x;
+  background: url(/eXoWCMResources/skin/DefaultSkin/background/BgCategoryTitle1x25.gif) repeat-x;
   line-height: 25px;
   padding-left: 10px;
   font-weight: bold;

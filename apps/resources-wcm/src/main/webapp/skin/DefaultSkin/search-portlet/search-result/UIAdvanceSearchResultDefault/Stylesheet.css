@@ -13,7 +13,7 @@
 }
 
 .UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ResultHeader {
-  background: url(/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIPCLVDefault/icons/BgCategoryTitle1x25.gif) repeat-x;
+  background: url(/eXoWCMResources/skin/DefaultSkin/background/BgCategoryTitle1x25.gif) repeat-x;
   border-bottom: 1px solid #B7B7B7;
   line-height: 25px;
   overflow: hidden;

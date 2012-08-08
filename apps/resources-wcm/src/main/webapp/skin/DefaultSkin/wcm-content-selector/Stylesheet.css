@@ -579,7 +579,7 @@
 }
 
 .SelectIcon {
-  background: url('background/SelectIcon.gif') repeat scroll 0 0 transparent;
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SelectIcon.gif') repeat scroll 0 0 transparent;
   height: 16px;
   width: 16px;
   margin: auto;

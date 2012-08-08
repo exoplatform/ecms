@@ -9,7 +9,7 @@
 }
 
 .UICLVPortlet .UIContentListPresentationDefault .Header {
-  background: url(icons/BgCategoryTitle1x25.gif) repeat-x;
+  background: url(/eXoWCMResources/skin/DefaultSkin/background/BgCategoryTitle1x25.gif) repeat-x;
   border-bottom: 1px solid #B7B7B7;
   line-height: 25px;
   padding-left: 10px;

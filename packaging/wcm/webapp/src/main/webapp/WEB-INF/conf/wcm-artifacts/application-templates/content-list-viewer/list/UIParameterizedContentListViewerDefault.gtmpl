@@ -59,7 +59,7 @@
 							def isShowReadmore = uicomponent.isShowField(UIPCLVPortlet.SHOW_READMORE);
 							if (itemSummary == null) itemSummary = "";
 							if (imgSrc == null) 
-							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIContentListPresentationDefault/background/IIlustrationImages.jpg";
+							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/background/IIlustrationImages.jpg";
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
 							%>
