@@ -23,14 +23,23 @@
 <bundle>
   <UIAdminToolbarPortlet>
     <action>
-      <AddPage>أضف صفحة جديدة</AddPage>
-      <EditPage>تحرير الصفحة</EditPage>
+      <AddPage>اضافة صفحة جديدة</AddPage>
+      <EditPage>تغيير الصفحة</EditPage>
       <CreatePortal>إنشاء بوابة جديدة</CreatePortal>
-      <EditPortal>تحرير البوابة</EditPortal>
+      <EditPortal>تغيير البوابة</EditPortal>
       <BrowsePage>إدارة الصفحات</BrowsePage>
-      <EditPageAndNavigation>تحرير الصفحة والتصفح</EditPageAndNavigation>
-      <Editor>محرر</Editor>
-						<EditSiteLayout>تحرير التنسيق</EditSiteLayout>
+      <EditPageAndNavigation>تغييرالصفحة والتصفـّح</EditPageAndNavigation>
+      <Editor>تغيير</Editor>
+      <EditSiteLayout>تعديل التخطيط</EditSiteLayout>
+      <portal>
+        <Editor>مغيّر الموقع</Editor>
+      </portal>
+      <group>
+        <Editor>مغيّر المجموعة</Editor>
+      </group>
+      <user>
+        <Editor>مغيّر لوحة التحكم</Editor>
+      </user>
     </action>
   </UIAdminToolbarPortlet>
 </bundle>
