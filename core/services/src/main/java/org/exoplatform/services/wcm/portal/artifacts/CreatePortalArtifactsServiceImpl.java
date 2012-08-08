@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
 
@@ -67,7 +68,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception {
     //Do not initalize portal artifact for predefined portal
     if(initialPortals.contains(portalName)) return;
-
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
     for (CreatePortalPlugin plugin : artifactPlugins.values()) {
       if (!plugin.getName().startsWith("template") || (portalTemplateName != null && plugin.getName().startsWith(portalTemplateName))) {
         plugin.deployToPortal(sessionProvider, portalName);
