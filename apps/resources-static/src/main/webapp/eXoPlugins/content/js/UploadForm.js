@@ -134,9 +134,18 @@ UploadForm.prototype.uploadFile = function() {
 					strParam += "&currentPortal="+eXo.ecm.portalName;
 					strParam +="&action=progress&uploadId="+uploadId;
 					var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
-					var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language=en";
+					var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language=" + eXo.ecm.ECS.userLanguage;
 					var iXML = eXo.ecm.WCMUtils.request(connector);
 					if(!iXML) return;
+					// Get message if any error while uploading
+					var message = iXML.getElementsByTagName("Message")[0];
+					if(message) {
+						var strText = message.getAttribute("text");
+						alert(strText);
+						eXo.ecm.UploadForm.removeMask();
+						eXo.ecm.UploadForm.showUploadForm();
+						return;
+					}
 					var nodeList = iXML.getElementsByTagName("UploadProgress");
 					if(!nodeList) return;
 					var oProgress;
