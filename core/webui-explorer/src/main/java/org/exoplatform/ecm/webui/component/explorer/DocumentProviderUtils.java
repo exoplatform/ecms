@@ -110,14 +110,9 @@ public class DocumentProviderUtils {
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     if (!byUser) {
-      ret = trashService_.getAllNodeInTrash(
-          trashWorkspace,
-          sessionProvider);
+      ret = trashService_.getAllNodeInTrash(sessionProvider);
     } else {
-      ret = trashService_.getAllNodeInTrashByUser(
-          trashWorkspace,
-          sessionProvider,
-          uiExplorer.getSession().getUserID());
+      ret = trashService_.getAllNodeInTrashByUser(sessionProvider, uiExplorer.getSession().getUserID());
     }
     return ret;
   }

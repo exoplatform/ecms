@@ -41,6 +41,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.jdom.IllegalAddException;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
@@ -50,6 +51,7 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 import com.totsp.xml.syndication.itunes.EntryInformation;
 import com.totsp.xml.syndication.itunes.EntryInformationImpl;
@@ -175,7 +177,9 @@ public class RSSServiceImpl implements RSSService{
           String url = rssUrl + child.getPath();
           entry = new SyndEntryImpl();
           try {
-            entry.setTitle(child.getProperty(title).getString());
+          	if(child.hasProperty(TITLE)) {
+          		entry.setTitle(child.getProperty(TITLE).getString());
+          	}            
           } catch(PathNotFoundException path) {
             entry.setTitle("") ;
           }
@@ -183,15 +187,17 @@ public class RSSServiceImpl implements RSSService{
           description = new SyndContentImpl();
           description.setType("text/plain");
           try {
-            if (child.hasProperty(summary))
-              description.setValue(child.getProperty(summary).getString().replaceAll("&nbsp;", " "));
+            if(child.hasProperty(SUMMARY))
+              description.setValue(child.getProperty(SUMMARY).getString().replaceAll("&nbsp;", " "));
           } catch(PathNotFoundException path) {
             description.setValue("") ;
           }
           entry.setDescription(description);
           try{
-            Date udate = child.getProperty(PUBLISHED_DATE).getDate().getTime() ;
-            entry.setPublishedDate(udate) ;
+          	if (child.hasProperty(PUBLISHED_DATE)){
+          	  Date udate = child.getProperty(PUBLISHED_DATE).getDate().getTime() ;
+              entry.setPublishedDate(udate) ;
+          	}           
           }catch (Exception e) {
             entry.setPublishedDate(new Date());
           }
@@ -202,7 +208,18 @@ public class RSSServiceImpl implements RSSService{
       feed.setEntries(entries);
       feed.setEncoding("UTF-8");
       SyndFeedOutput output = new SyndFeedOutput();
-      String feedXML = output.outputString(feed);
+      String feedXML = feed.toString();
+      try {
+        feedXML = output.outputString(feed);
+      } catch(FeedException ex) {
+      	if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ex);
+        }
+      } catch(IllegalAddException ex) {
+      	if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ex);
+        }
+      }
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
       storeXML(feedXML, storePath, feedName);
     } catch (Exception e) {
@@ -335,8 +352,8 @@ public class RSSServiceImpl implements RSSService{
         description = new SyndContentImpl();
         description.setType("text/plain");
         try {
-          if (child.hasProperty(summary)){
-            String summaryValue = child.getProperty(summary).getString();
+          if (child.hasProperty(SUMMARY)){
+            String summaryValue = child.getProperty(SUMMARY).getString();
             description.setValue(summaryValue);
             entryInfo.setSubtitle(summaryValue);
             entryInfo.setSummary(summaryValue);
@@ -395,8 +412,14 @@ public class RSSServiceImpl implements RSSService{
       }
       feed.setEntries(entries);
       feed.setEncoding("UTF-8") ;
-      SyndFeedOutput output = new SyndFeedOutput();
-      String feedXML = output.outputString(feed);
+      String feedXML = feed.toString();      
+      try {SyndFeedOutput output = new SyndFeedOutput();
+        feedXML = output.outputString(feed);
+      } catch(FeedException ex) {
+      	if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ex);
+        }
+      }
       storeXML(feedXML, storePath, feedName);
     }catch(Exception e) {
       if (LOG.isErrorEnabled()) {

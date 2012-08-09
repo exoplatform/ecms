@@ -109,27 +109,7 @@ public class TrashServiceImpl implements TrashService {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void moveToTrash(Node node, String trashPath, String trashWorkspace,
-      String repository, SessionProvider sessionProvider)
-  throws Exception {
-    moveToTrash(node, trashPath, trashWorkspace, repository, sessionProvider, 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void moveToTrash(Node node,
-                          String trashPath,
-                          String trashWorkspace,
-                          SessionProvider sessionProvider) throws Exception {
-    moveToTrash(node, sessionProvider, 0);
-  }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -137,20 +117,10 @@ public class TrashServiceImpl implements TrashService {
     moveToTrash(node, sessionProvider, 0);
   }
 
-  @Deprecated
-  public void moveToTrash(Node node,
-                          String trashPath,
-                          String trashWorkspace,
-                          String repository,
-                          SessionProvider sessionProvider,
-                          int deep) throws Exception {
-    moveToTrash(node, trashPath, trashWorkspace, sessionProvider, deep);
-  }
-
+ 
   /**
    *{@inheritDoc}
-   */
-  @Deprecated
+   */  
   public void moveToTrash(Node node,
                           String trashPath,
                           String trashWorkspace,
@@ -176,6 +146,7 @@ public class TrashServiceImpl implements TrashService {
         }
       }
     }
+    String originalPath = node.getPath();
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
@@ -214,7 +185,7 @@ public class TrashServiceImpl implements TrashService {
             NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
             myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
 
-            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
+            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();            
             List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, tagWorkspace);
             for (Node tag : tags) {
               newFolksonomyService.removeTagOfDocument(tag.getPath(), node, tagWorkspace);
@@ -242,7 +213,7 @@ public class TrashServiceImpl implements TrashService {
             LOG.warn(e.getMessage());
           }
         }
-        if (targetNode != null && isInTaxonomyTree(node, targetNode)) {
+        if (targetNode != null && isInTaxonomyTree(originalPath, targetNode)) {
           List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK, sessionProvider);
           boolean found = false;
           for (Node symlink : symlinks)
@@ -266,11 +237,11 @@ public class TrashServiceImpl implements TrashService {
    * @param targetNode
    * @return
    */
-  private boolean isInTaxonomyTree(Node taxonomyNode, Node targetNode) {
+  private boolean isInTaxonomyTree(String path, Node targetNode) {
     try {
       List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(true);
       for (Node tree : taxonomyTrees)
-        if (taxonomyNode.getPath().contains(tree.getPath())) {
+        if (path.contains(tree.getPath())) {
           Node taxonomyActionNode = tree.getNode("exo:actions/taxonomyAction");
           String targetWorkspace = taxonomyActionNode.getProperty(EXO_TARGETWS).getString();
           String targetPath = taxonomyActionNode.getProperty(EXO_TARGETPATH).getString();
@@ -284,27 +255,7 @@ public class TrashServiceImpl implements TrashService {
       return false;
     }
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  //parameter:restorePath->trashNodePath
-  @Deprecated
-  public void restoreFromTrash(Node trashHomeNode, String trashNodePath,
-      String repository,
-      SessionProvider sessionProvider) throws Exception {
-    restoreFromTrash(trashNodePath, sessionProvider, 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void restoreFromTrash(Node trashHomeNode,
-                               String trashNodePath,
-                               SessionProvider sessionProvider) throws Exception {
-    restoreFromTrash(trashNodePath, sessionProvider, 0);
-  }
+ 
 
   /**
    * {@inheritDoc}
@@ -424,21 +375,7 @@ public class TrashServiceImpl implements TrashService {
     restoreSession.save();
   }
 
-  @Deprecated
-  public List<Node> getAllNodeInTrash(String trashWorkspace, String repository,
-      SessionProvider sessionProvider) throws Exception {
-
-    return getAllNodeInTrash(sessionProvider);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllNodeInTrash(String trashWorkspace, SessionProvider sessionProvider) throws Exception {
-    return getAllNodeInTrash(sessionProvider);
-  }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -474,10 +411,6 @@ public class TrashServiceImpl implements TrashService {
     return selectNodesByQuery(sessionProvider, query.toString(), Query.SQL);
   }
 
-  @Deprecated
-  public void removeRelations(Node node, SessionProvider sessionProvider, String repository) throws Exception {
-    removeRelations(node, sessionProvider);
-  }
 
   public void removeRelations(Node node, SessionProvider sessionProvider) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();

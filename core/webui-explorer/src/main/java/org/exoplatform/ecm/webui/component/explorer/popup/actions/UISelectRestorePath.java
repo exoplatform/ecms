@@ -211,8 +211,7 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
                                                        trashNode.getName());
       TrashService trashService = uiSelectRestorePath.getApplicationComponent(TrashService.class);
       try {
-        trashService.restoreFromTrash(uiSelectRestorePath.getTrashHomeNode(),
-                                      uiSelectRestorePath.getSrcPath(),
+        trashService.restoreFromTrash(uiSelectRestorePath.getSrcPath(),
                                       uiExplorer.getSessionProvider());
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
         uiPopupContainer.removeChild(UISelectRestorePath.class);

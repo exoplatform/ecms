@@ -2,11 +2,21 @@ package org.exoplatform.services.ecm.dms.documents;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-import javax.jcr.Node;
+import java.util.List;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
+
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.gatein.pc.api.PortletInvoker;
+import org.mockito.Mockito;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,6 +26,7 @@ public class TestTrashService extends BaseWCMTestCase {
   final static public String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   final static public String RESTORE_PATH = "exo:restorePath";
   final static public String RESTORE_WORKSPACE = "exo:restoreWorkspace";
+  final static public String MIX_REFERENCEABLE = "mix:referenceable";
 
   private SessionProvider sessionProvider;
   private TrashService trashService;
@@ -23,6 +34,9 @@ public class TestTrashService extends BaseWCMTestCase {
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
+    ExoContainer manager = ExoContainerContext.getCurrentContainer();
+    PortletInvoker portletInvoker = Mockito.mock(PortletInvoker.class);
+    manager.addComponentToCtx(portletInvoker.hashCode(), portletInvoker);
     sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     trashService = (TrashService) container.getComponentInstanceOfType(TrashService.class);
   }
@@ -52,27 +66,62 @@ public class TestTrashService extends BaseWCMTestCase {
    */
   @Test
   public void testMoveToTrashSameWorkspace() throws Exception {
-    Node rootNode = session.getRootNode();
-
-    Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("Trash");
+    Node rootNode = session.getRootNode();    
+    Node trashNode = rootNode.addNode("Trash");    
     Node testNode = rootNode.addNode("TestNode");
-
+   
     Node node0 = testNode.addNode("node0");
     Node node1 = testNode.addNode("node1");
     Node node2 = testNode.addNode("node2");
+    //Add mix:referenceable into node to coverage code for the case relate to the SEO Service
+    node0.addMixin(MIX_REFERENCEABLE);
+    node1.addMixin(MIX_REFERENCEABLE);
+    node2.addMixin(MIX_REFERENCEABLE);    
     session.save();
-    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
-    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
     session.save();
+    
     long testNodeChild = testNode.getNodes().getSize();
     long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
-
     assertEquals("testMoveToTrashSameWorkspace failed!", 0, testNodeChild);
     assertEquals("testMoveToTrashSameWorkspace failed 2 !", 3, trashNodeChild);
 
-    trashNode.remove();
+    trashNode.remove();    
+    testNode.remove();
+    session.save();
+  }
+  /**
+   * test method testMoveSymlinkToTrash when node workspace and trash workspace are the same
+   * input:     /TestNode/node0 and taxonomy link "testSymlink" for node0        
+   * tested action: move taxonomy link node to /TrashNode/
+   * expectedValue : 0 (number of nodes remain in /TestNode/ )
+   *                 2 (number of nodes in /TrashNode/)
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testMoveSymlinkToTrash() throws Exception {
+  	Node rootNode = session.getRootNode();
+  	Node trashNode = rootNode.addNode("Trash");
+  	Node testNode = rootNode.addNode("TestNode");
+  	Node documentNode = testNode.addNode("Documents");
+  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
+  	
+  	Node node0 = documentNode.addNode("node0");
+  	node0.addMixin(MIX_REFERENCEABLE);
+  	LinkManager linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+    Node nodeLink = linkManager.createLink(taxonomyNode, "exo:taxonomyLink", node0, "testSymlink");
+    session.save();
+    trashService.moveToTrash(nodeLink, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    session.save();
+    long testNodeChild = documentNode.getNodes().getSize();
+    long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
+    assertEquals("testMoveSymlinkToTrash failed!", 0, testNodeChild);
+    assertEquals("testMoveSymlinkToTrash failed 2 !", 2, trashNodeChild);  
+    
+  	trashNode.remove();    
     testNode.remove();
     session.save();
   }
@@ -89,20 +138,32 @@ public class TestTrashService extends BaseWCMTestCase {
    */
   @Test
   public void testMoveToTrashDifferentWorkspaces() throws Exception {
-    Node rootNode = session.getRootNode();
-
+    Node rootNode = session.getRootNode();    
+    Node tagsNode = rootNode.addNode("tags");
+    
     Node trashRootNode = session.getRootNode();
     Node trashNode = trashRootNode.addNode("Trash");
-    Node testNode = rootNode.addNode("TestNode");
-
-    Node node0 = testNode.addNode("node0");
+    
+    Session session2 = sessionProvider.getSession(DMSSYSTEM_WS, repository);    
+    Node rootNode2 = session2.getRootNode();    
+    Node testNode = rootNode2.addNode("TestNode");    
+    Node node0 = testNode.addNode("node0");    
     Node node1 = testNode.addNode("node1");
+    node0.addMixin(MIX_REFERENCEABLE);
+    node1.addMixin(MIX_REFERENCEABLE);
+    
+    // Add public tag for node
+    NewFolksonomyService newFolksonomyService = (NewFolksonomyService)container.getComponentInstanceOfType(NewFolksonomyService.class);
+    String[] tags = {"wcm","ecms"};    
+    newFolksonomyService.addPublicTag("/tags", tags, node0, COLLABORATION_WS);  
+    newFolksonomyService.addPublicTag("/tags", tags, node1, COLLABORATION_WS); 
     session.save();
+    session2.save();
+    
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
     session.save();
-    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    session.save();
-    session.save();
+    session2.save();
     long testNodeChild = testNode.getNodes().getSize();
     long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
 
@@ -111,6 +172,7 @@ public class TestTrashService extends BaseWCMTestCase {
 
     trashNode.remove();
     testNode.remove();
+    tagsNode.remove();
     session.save();
     session.save();
   }
@@ -140,27 +202,20 @@ public class TestTrashService extends BaseWCMTestCase {
     Node node2 = testNode.addNode("node2");
     Node node3 = testNode.addNode("node3");
     session.save();
-    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node3, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node3, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
     session.save();
 
-    System.out.println(trashNode.getNodes().getSize());
-    System.out.println("Test restore:");
-
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node0", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node1", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node2", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node3", "repository", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node0", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node1", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node2", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node3", sessionProvider);
 
     session.save();
-    session.save();
-
-
     long testNodeChild =  testNode.getNodes().getSize();
     long trashNodeChild =  trashNode.getNodes().getSize();
-    System.out.println(testNodeChild + " " + trashNodeChild);
     assertEquals("testRestoreFromTrashSameWorkspace failed 3!", 4, testNodeChild);
     assertEquals("testRestoreFromTrashSameWorkspace failed 4 !", 0, trashNodeChild);
 
@@ -184,54 +239,85 @@ public class TestTrashService extends BaseWCMTestCase {
    */
   @Test
   public void testRestoreFromTrashDifferentWorkspaces() throws Exception {
-    Node rootNode = session.getRootNode();
-
+    Node rootNode = session.getRootNode();    
     Node trashRootNode = session.getRootNode();
     Node trashNode = trashRootNode.addNode("Trash");
-    Node testNode = rootNode.addNode("TestNode");
+    
+    Session session2 = sessionProvider.getSession(DMSSYSTEM_WS, repository);
+    Node rootNode2 = session2.getRootNode();
+    Node testNode = rootNode2.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
     Node node1 = testNode.addNode("node1");
     Node node2 = testNode.addNode("node2");
     Node node3 = testNode.addNode("node3");
     Node node4 = testNode.addNode("node4");
-//    String node0Path = node0.getPath();
-//    String node1Path = node1.getPath();
-//    String node2Path = node2.getPath();
-//    String node3Path = node3.getPath();
-//    String node4Path = node4.getPath();
+    node0.addMixin(MIX_REFERENCEABLE);
+    node1.addMixin(MIX_REFERENCEABLE);
+    node2.addMixin(MIX_REFERENCEABLE);
+    node3.addMixin(MIX_REFERENCEABLE);
+    node4.addMixin(MIX_REFERENCEABLE);
 
     session.save();
+    session2.save();
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node3, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node4, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
     session.save();
-    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node3, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node4, trashNode.getPath(), session.getWorkspace().getName(), "repository", sessionProvider);
-    session.save();
-    session.save();
-
-    System.out.println(trashNode.getNodes().getSize());
-    System.out.println("Test restore:");
-
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node0", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node1", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node2", "repository", sessionProvider);
-    trashService.restoreFromTrash(trashNode, trashNode.getPath() + "/node3", "repository", sessionProvider);
+    session2.save();
+    
+    trashService.restoreFromTrash(trashNode.getPath() + "/node0", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node1", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node2", sessionProvider);
+    trashService.restoreFromTrash(trashNode.getPath() + "/node3", sessionProvider);
 
     session.save();
-    session.save();
-
-
+    session2.save();
     long testNodeChild =  testNode.getNodes().getSize();
     long trashNodeChild =  trashNode.getNodes().getSize();
-    System.out.println(testNodeChild + " " + trashNodeChild);
     assertEquals("testRestoreFromTrashDifferentWorkspace failed 3!", 4, testNodeChild);
     assertEquals("testRestoreFromTrashDifferentWorkspace failed 4 !", 1, trashNodeChild);
 
     trashNode.remove();
     testNode.remove();
     session.save();
+    session.save();
+  }
+  /**
+   * test method testRestoreSymlinkFromTrash when node workspace and trash workspace are same
+   * input:  /TestNode/node0
+   *         /TrashNode/testSymlink with testSymlink is taxonomy link of node0   *         
+   * tested action: restore taxonomy node from /TrashNode/
+   * expectedValue : 1 (number of nodes remain in /TestNode/ )
+   *                 0 (number of nodes in /TrashNode/)
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testRestoreSymlinkFromTrash() throws Exception {
+  	Node rootNode = session.getRootNode();
+  	Node trashNode = rootNode.addNode("Trash");
+  	Node testNode = rootNode.addNode("TestNode");
+  	Node documentNode = testNode.addNode("Documents");
+  	Node taxonomyNode = rootNode.addNode("exo:ecm").addNode("exo:taxonomyTrees").addNode("storage").addNode("System");
+  	
+  	Node node0 = documentNode.addNode("node0");
+  	node0.addMixin(MIX_REFERENCEABLE);
+  	LinkManager linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+    Node nodeLink = linkManager.createLink(taxonomyNode, "exo:taxonomyLink", node0, "testSymlink");
+    session.save();
+    trashService.moveToTrash(nodeLink, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    session.save();    
+    trashService.restoreFromTrash(trashNode.getPath() + "/testSymlink", sessionProvider);
+    session.save();    
+    long testNodeChild = documentNode.getNodes().getSize();
+    long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();    
+    assertEquals("testMoveSymlinkToTrash failed!", 1, testNodeChild);
+    assertEquals("testMoveSymlinkToTrash failed 2 !", 0, trashNodeChild);    
+  	trashNode.remove();    
+    testNode.remove();
     session.save();
   }
 
@@ -265,21 +351,18 @@ public class TestTrashService extends BaseWCMTestCase {
     session.save();
     session.save();
 
-    trashService.moveToTrash(node0, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), "repository", sessionProvider);
-    trashService.moveToTrash(node4, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), "repository", sessionProvider);
+    trashService.moveToTrash(node0, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node4, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), sessionProvider, 0);
 
     int count =
-      trashService.getAllNodeInTrash(trashRootNode.getSession().getWorkspace().getName(), "repository", sessionProvider).size();
+      trashService.getAllNodeInTrash(sessionProvider).size();
 
     session.save();
     session.save();
-
-    System.out.println("count = " + count);
     assertEquals("testGetAllNodeInTrash failed!", 3, count);
     trashNode.remove();
     testNode.remove();
-    session.save();
     session.save();
   }
 
@@ -310,20 +393,16 @@ public class TestTrashService extends BaseWCMTestCase {
 
     session.save();
 
-    trashService.moveToTrash(node0, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), REPO_NAME, sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), REPO_NAME, sessionProvider);
+    trashService.moveToTrash(node0, trashNode.getPath(), trashRootNode.getSession().getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, sessionProvider);
 
-    int count =
-      trashService.getAllNodeInTrashByUser(trashRootNode.getSession().getWorkspace().getName(),
-                  REPO_NAME,
-                  sessionProvider, session.getUserID()).size();
+    int count = trashService.getAllNodeInTrashByUser(sessionProvider, session.getUserID()).size();
 
     session.save();
 
 //    assertEquals("testGetAllNodeInTrash failed!", 2, count);
     trashNode.remove();
     testNode.remove();
-    session.save();
     session.save();
   }
 
@@ -352,8 +431,8 @@ public class TestTrashService extends BaseWCMTestCase {
 
     session.save();
 
-    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
-    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
+    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
 
     session.save();
 
@@ -364,6 +443,35 @@ public class TestTrashService extends BaseWCMTestCase {
     trashNode.remove();
     testNode.remove();
     session.save();
+  }
+  /**
+   * test method testRemoveRelations()
+   * input: /TestNode/node0
+   *        Add a relation node to node0
+   *        /TestNode/node3
+   * test action: remove all relation nodes of node0
+   * expectedValue : 0 (number of relation nodes of /testNode/node0 )   
+   * @throws Exception
+   */
+  @Test
+  public void testRemoveRelations() throws Exception {
+  	Node rootNode = session.getRootNode();
+  	Node testNode = rootNode.addNode("testNode");
+  	Node test0 = rootNode.addNode("test0");
+  	testNode.addMixin(MIX_REFERENCEABLE);
+  	test0.addMixin(MIX_REFERENCEABLE);
+  	session.save();
+  	RelationsService relationService = (RelationsService) container.getComponentInstanceOfType(RelationsService.class);
+  	relationService.addRelation(testNode, "/test0", session.getWorkspace().getName());
+  	session.save();
+  	trashService.removeRelations(testNode, sessionProvider);
+  	session.save();
+  	List<Node> nodesRelation = relationService.getRelations(testNode, sessionProvider);
+  	int count = nodesRelation.size();
+  	assertEquals("testRemoveRelations failed!", 0, count);
+  	testNode.remove();
+  	test0.remove();
+  	session.save();
   }
 
   /**
@@ -390,7 +498,7 @@ public class TestTrashService extends BaseWCMTestCase {
 
     session.save();
 
-    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), sessionProvider, 0);
 
     session.save();
 
@@ -401,6 +509,6 @@ public class TestTrashService extends BaseWCMTestCase {
     trashNode.remove();
     testNode.remove();
     session.save();
-  }
+  } 
 
 }
