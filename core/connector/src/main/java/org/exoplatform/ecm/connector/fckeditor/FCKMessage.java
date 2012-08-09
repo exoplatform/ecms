@@ -71,6 +71,9 @@ public class FCKMessage {
   /** The Constant FILE_NOT_UPLOADED. */
   public static final int FILE_NOT_UPLOADED = 204;
 
+  /** The Constant FILE_EXCEED_LIMIT. */
+  public static final int FILE_EXCEED_LIMIT = 205;
+
   /** The Constant FCK_RESOURCE_BUNDLE. */
   public static final String FCK_RESOURCE_BUNDLE_FILE   = "locale.services.fckeditor.FCKConnector"
                                                             ;
@@ -168,6 +171,9 @@ public class FCKMessage {
       break;
     case FILE_UPLOAD_RESTRICTION:
       messageKey = "fckeditor.file-uploaded-restriction";
+      break;
+    case FILE_EXCEED_LIMIT:
+      messageKey = "fckeditor.file-exceed-limit";
       break;
     default:
       messageKey = "connector.fckeditor.unknowm-message";

@@ -293,11 +293,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("fileName") String fileName,
       @QueryParam("uploadId") String uploadId) throws Exception {
     try {
+      // Check upload status
+      Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
+      if (msgResponse != null) return msgResponse;
+      
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
         Node currentFolderNode = getParentFolderNode(Text.escapeIllegalJcrChars(workspaceName),
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
+        
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
                                            currentFolderNode,
                                            siteName,

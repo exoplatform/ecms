@@ -31,6 +31,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.commons.utils.MimeTypeResolver;
@@ -108,6 +109,48 @@ public class FileUploadHandler {
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
   }
+  
+  /**
+   * Check status of uploaded file.
+   * If any problem while uploading, error message is returned.
+   * Returning null means no problem happen.
+   * 
+   * @param uploadId upload ID
+   * @param language language for getting message
+   * @return Response message is returned if any problem while uploading.
+   * @throws Exception
+   */
+  public Response checkStatus(String uploadId, String language) throws Exception {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    cacheControl.setNoStore(true);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    
+    if (StringUtils.isEmpty(uploadId)) return null;
+    
+    // If file size exceed limit, return message
+    if (UploadResource.FAILED_STATUS == uploadService.getUploadResource(uploadId).getStatus()) {
+      
+      // Remove upload Id
+      uploadService.removeUploadResource(uploadId);
+      
+      // Get message warning upload exceed limit
+      String uploadLimit = String.valueOf(uploadService.getUploadLimits().get(uploadId).getLimit());
+      Document fileExceedLimit =
+          fckMessage.createMessage(FCKMessage.FILE_EXCEED_LIMIT,
+                                   FCKMessage.ERROR,
+                                   language,
+                                   new String[]{uploadLimit});
+      
+      return Response.ok(new DOMSource(fileExceedLimit), MediaType.TEXT_XML)
+        .cacheControl(cacheControl)
+        .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+        .build();
+    }
+    
+    return null;
+  }
+  
   /**
    * Control.
    *
@@ -123,6 +166,7 @@ public class FileUploadHandler {
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    
     if (FileUploadHandler.PROGRESS_ACTION.equals(action)) {
       Document currentProgress = getProgress(uploadId);
       return Response.ok(new DOMSource(currentProgress), MediaType.TEXT_XML)
