@@ -675,7 +675,7 @@
           <para>
       Directly click the newsletter;
 		</para>
-		<para> Or, select the checkbox corresponding to your desired newsletter, then click <menuchoice><guimenu>Administration</guimenu><guimenuitem>Open</guimenuitem></menuchoice>.
+		<para>Or, select the checkbox corresponding to your desired newsletter, then click <menuchoice><guimenu>Moderation</guimenu><guimenuitem>Open</guimenuitem></menuchoice>.
      </para>
           <mediaobject>
             <imageobject role="html">
