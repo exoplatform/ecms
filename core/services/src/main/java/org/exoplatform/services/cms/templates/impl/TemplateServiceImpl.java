@@ -297,8 +297,16 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     } else {
       templateType = node.getPrimaryNodeType().getName();
     }
-    if (isManagedNodeType(templateType))
+    if (isManagedNodeType(templateType)) {
       return getTemplatePathByUser(isDialog, templateType, userId);
+    }
+
+    // Check if node's nodetype or its supper type has managed template type
+    String managedTemplateType = getManagedTemplateType(node);
+    if (StringUtils.isNotEmpty(managedTemplateType)) {
+      return getTemplatePathByUser(isDialog, managedTemplateType, userId);
+    }
+
     throw new Exception("The content type: " + templateType + " isn't supported by any template");
   }
 
@@ -928,5 +936,36 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
       serviceLogContentNode.save();
     }
+  }
+
+  /**
+   * Check if node's nodetype or its supper type has managed template type and return the template type.
+   *
+   * @param node
+   * @return managed template type. Null value mean not exist template
+   * @throws Exception
+   */
+  private String getManagedTemplateType(Node node) throws Exception {
+    // Check if the node type is document type first
+    List<String> managedDocumentTypes = getManagedDocumentTypesMap();
+    for (String documentType : managedDocumentTypes) {
+      if (node.getPrimaryNodeType().isNodeType(documentType)) {
+        return documentType;
+      }
+    }
+
+    // Check if node's nodetype or its supper type has managed template type
+    SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
+    Session session = getSession(provider);
+    Node systemTemplatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
+    NodeIterator templatesIter = systemTemplatesHome.getNodes();
+    while(templatesIter.hasNext()) {
+      String templateName = templatesIter.nextNode().getName();
+      if (node.getPrimaryNodeType().isNodeType(templateName)) {
+        return templateName;
+      }
+    }
+
+    return null;
   }
 }
