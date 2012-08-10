@@ -34,7 +34,7 @@ public class TestCreatePortalArtifactsService extends BaseWCMTestCase {
   @SuppressWarnings("deprecation")
 	public void testDeployArtifactsToPortal() throws Exception {
   	SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
-  	createPortalArtifactsService.deployArtifactsToPortal(sessionProvider, "test1");
+  	createPortalArtifactsService.deployArtifactsToPortal(sessionProvider, "test1", "templateportal");
   } 
   
   @Test
