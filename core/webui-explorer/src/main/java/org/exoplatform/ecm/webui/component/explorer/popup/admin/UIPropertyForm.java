@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
 import javax.jcr.Value;
@@ -622,9 +623,16 @@ public class UIPropertyForm extends UIForm {
         }
       } else {
         name = uiForm.propertyName_;
-        type = currentNode.getProperty(name).getType();
+        Property property = null;
+        try {
+          property = currentNode.getProperty(name);
+        } catch (PathNotFoundException ex) {
+          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.property-not-exist", new String[] { name }));
+          return;
+        }
+        type = property.getType();
         if (type == 0) type = 1;
-        isMultiple = currentNode.getProperty(name).getDefinition().isMultiple();
+        isMultiple = property.getDefinition().isMultiple();
       }
       try {
         if(name != null) {

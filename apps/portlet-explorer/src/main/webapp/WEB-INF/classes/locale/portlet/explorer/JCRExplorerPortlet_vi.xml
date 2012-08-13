@@ -732,6 +732,7 @@
       <propertyValu-null>Có thể có một số giá trị là null</propertyValu-null>
       <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất </valueFormatEx>
       <number-format-exception>Giá trị nhập vào của bạn sai định dạng</number-format-exception>
+      <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--

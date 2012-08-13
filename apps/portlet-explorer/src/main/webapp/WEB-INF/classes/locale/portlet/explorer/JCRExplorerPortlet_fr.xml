@@ -815,6 +815,7 @@
       <valueFormatEx>Impossible d'attribuer plusieurs valeurs à une propriété à valeur unique.</valueFormatEx>
       <number-format-exception>La valeur saisie ne respecte pas le format attendu</number-format-exception>
       <unknown-error>Une erreur s'est produite, vous ne pouvez pas modifier cette propriété.</unknown-error>
+      <property-not-exist>La propriété {0} n'existe pas.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--

@@ -3342,4 +3342,9 @@
       <unknown-error>There are some error occurs, you can not watch this node!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
+  <UIPropertyForm>
+    <msg>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
 </bundle>

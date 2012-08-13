@@ -726,6 +726,7 @@
       <propertyValu-null>Maybe, some values are null.</propertyValu-null>
       <valueFormatEx>Cannot assign a multiple-value value to a single-valued property.</valueFormatEx>
       <number-format-exception>Your input value has a wrong format.</number-format-exception>
+      <property-not-exist>The property {0} doesn't exist.</property-not-exist>
     </msg>
   </UIPropertyForm>
   <!--
