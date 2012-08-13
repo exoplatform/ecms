@@ -35,6 +35,11 @@
 	width: 100%;
 }
 
+
+*+html .UIJCRExplorerPortlet .UIFormGrid {
+	width: 95%;
+}
+
 .UIJCRExplorerPortlet .UIPreferencesForm {
   width: 550px;
   border: none;

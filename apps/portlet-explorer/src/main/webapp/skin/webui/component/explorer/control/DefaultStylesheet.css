@@ -506,6 +506,11 @@
   width: 128px;
 }
 
+
+*+html .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FieldLabel {
+  width: 155px;
+}
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UIFormUploadInput .SelectFileFrame {
 	width: auto;
 }
