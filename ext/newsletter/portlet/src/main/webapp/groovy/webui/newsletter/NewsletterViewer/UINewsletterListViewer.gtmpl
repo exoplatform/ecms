@@ -2,9 +2,6 @@
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 
-// set link to subcripe
-String url = uicomponent.url("Subcribe", "OBJECTID");
-uicomponent.setLink(url);
 if(uicomponent.userCode != null){
 	uicomponent.setActionAgain();
 }

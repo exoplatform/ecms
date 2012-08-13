@@ -89,17 +89,17 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 																<!-- Detail action -->
 																<%
 																if(uicomponent.isAdministrator() || uicomponent.isModerator()){%>
-																	<div class="MenuItem" onclick="javaScript:void(0)">
+																	<div class="MenuItem" onclick="<%=uicomponent.event("EditCategory")%>">
 																		<div class="ItemIcon Pencil" style="padding-left:30px;">
-																			<a href="<%=uicomponent.event("EditCategory")%>"><%=_ctx.appRes("UISubscription.title.EditCategory")%></a>
+																			<a href="javaScript:void(0)"><%=_ctx.appRes("UISubscription.title.EditCategory")%></a>
 																		</div>
 																	</div>
 																	<% 
 																	if(uicomponent.isAdministrator()){
 																	%>
-																		<div class="MenuItem" onclick="javaScript:void(0)">
+																		<div class="MenuItem" onclick="javascript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
 																			<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;">
-																				<a href="javascript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
+																				<a href="javaScript:void(0)">
 																					<%=_ctx.appRes("UISubscription.title.DeleteCategory")%>
 																				</a>
 																			</div>
@@ -108,33 +108,33 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 																	}%>
 																	<div><hr></div>
 																<%}%>
-																<div class="MenuItem" onclick="javaScript:void(0)">
+																<div class="MenuItem" onclick="<%=uicomponent.event("OpenSubscription")%>">
 																	<div class="ItemIcon openFolder" style="padding-left:30px;">
-																		<a href="<%=uicomponent.event("OpenSubscription")%>">
+																		<a href="javaScript:void(0)">
 																			<%=_ctx.appRes("UISubscription.title.Open")%>
 																		</a>
 																	</div>
 																</div>
-																<div class="MenuItem" onclick="javaScript:void(0)">
+																<div class="MenuItem" onclick="<%=uicomponent.event("EditSubscription")%>">
 																	<div class="ItemIcon Pencil" style="padding-left:30px;">
-																		<a href="<%=uicomponent.event("EditSubscription")%>">
+																		<a href="javaScript:void(0)">
 																			<%=_ctx.appRes("UISubscription.title.Edit")%>
 																		</a>
 																	</div>
 																</div>
 																<%
 																if(uicomponent.isAdministrator() || uicomponent.isModerator()){%>
-																	<div class="MenuItem" onclick="javaScript:void(0)">
+																	<div class="MenuItem" onclick="javaScript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
 																		<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;">
-																			<a href="javascript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UISubscriptions', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneSubScriptionToDelete")%>', '<%=_ctx.appRes("UISubscription.msg.confirmDeleteSubscription")%>')) <%=uicomponent.event("DeleteSubscription")%>">
+																			<a href="javaScript:void(0)">
 																				<%=_ctx.appRes("UISubscription.title.Delete")%>
 																			</a>
 																		</div>
 																	</div>
 																	<div><hr></div>
-																	<div class="MenuItem" onclick="javaScript:void(0)">
+																	<div class="MenuItem" onclick="<%=uicomponent.event("ManagerUsers")%>">
 																		<div class="ItemIcon SmallGroup16x16Icon" style="padding-left:30px;">
-																			<a href="<%=uicomponent.event("ManagerUsers")%>">
+																			<a href="javaScript:void(0)">
 																				<%=_ctx.appRes("UISubscription.title.ManageUsers")%>
 																			</a>
 																		</div>

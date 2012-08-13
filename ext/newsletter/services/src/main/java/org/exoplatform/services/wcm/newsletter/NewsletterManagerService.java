@@ -80,6 +80,8 @@ public class NewsletterManagerService {
 
   /** The workspace name. */
   private String workspaceName;
+  
+  private boolean isUpdateNewsletter = false;
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(NewsletterManagerService.class.getName());
@@ -252,6 +254,7 @@ public class NewsletterManagerService {
         }
       }
       newsletterEntry.setProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS, NewsletterConstant.STATUS_SENT);
+      setIsUpdateNewsletter(true);
     }
     session.save();
     session.logout();
@@ -325,6 +328,23 @@ public class NewsletterManagerService {
    */
   public void setWorkspaceName(String workspaceName) {
     this.workspaceName = workspaceName;
+  }
+  
+  /**
+   * Gets value of the isUpdateNewsletter.
+   *
+   * @return the boolean value
+   */
+  public boolean isUpdateNewsletter() {
+    return isUpdateNewsletter;
+  }
+  /**
+   * Sets value for the isUpdateNewsletter variable.
+   *
+   * @param isUpdateNewsletter the new value
+   */
+  public void setIsUpdateNewsletter(boolean isUpdateNewsletter) {
+    this.isUpdateNewsletter = isUpdateNewsletter;
   }
 
 }

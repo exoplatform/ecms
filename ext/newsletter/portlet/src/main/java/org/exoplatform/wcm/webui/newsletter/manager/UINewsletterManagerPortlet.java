@@ -16,6 +16,9 @@
  */
 package org.exoplatform.wcm.webui.newsletter.manager;
 
+import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
+import org.exoplatform.webui.application.WebuiApplication;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
@@ -78,5 +81,14 @@ public class UINewsletterManagerPortlet extends UIPortletApplication {
     addChild(UISubscriptions.class, null, null).setRendered(isRenderUICategories);
     addChild(UINewsletterEntryManager.class, null, null).setRendered(isRenderUINewsLetters);
     addChild(UIPopupContainer.class, null, null);
+  }
+  
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+  	NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
+  	if(newsletterManagerService != null && newsletterManagerService.isUpdateNewsletter()) {
+  		getChild(UINewsletterEntryManager.class).init();
+  		newsletterManagerService.setIsUpdateNewsletter(false);
+  	}  	
+  	super.processRender(app, context);
   }
 }

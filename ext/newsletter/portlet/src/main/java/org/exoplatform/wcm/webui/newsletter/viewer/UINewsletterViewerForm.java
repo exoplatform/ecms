@@ -21,8 +21,14 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.mail.MailService;
+import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
@@ -59,10 +65,15 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     @EventConfig(listeners = UINewsletterViewerForm.ForgetEmailActionListener.class),
     @EventConfig(listeners = UINewsletterViewerForm.ChangeSubcriptionsActionListener.class) })
 public class UINewsletterViewerForm extends UIForm {
+	
+	private static final Log LOG  = ExoLogger.getLogger(UINewsletterViewerForm.class.getName());
 
   public static String SUBJECT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Subject";
 
   public static String CONTENT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Content";
+  
+  public static String CONFIRM_CODE_ACTION = "ConfirmUserCode";
+  public static String EVENT_ACTION	= "action";
 
   /** The user code. */
   public String userCode;
@@ -93,9 +104,6 @@ public class UINewsletterViewerForm extends UIForm {
 
   /** The newsletter manager service. */
   private NewsletterManagerService newsletterManagerService;
-
-  /** The link to send mail. */
-  private String linkToSendMail;
 
   /** The list ids. */
   private List<String> listIds;
@@ -172,7 +180,8 @@ public class UINewsletterViewerForm extends UIForm {
    * @param categoryName the category name
    * @throws Exception the exception
    */
-  public void init(List<NewsletterSubscriptionConfig> listNewsletterSubcription, String categoryName) throws Exception {
+  @SuppressWarnings("deprecation")
+	public void init(List<NewsletterSubscriptionConfig> listNewsletterSubcription, String categoryName) throws Exception {
     if ((listIds != null && listIds.size() > 0)
         || (userCode != null && userCode.trim().length() > 0)) { // run when
                                                                  // confirm user
@@ -223,7 +232,7 @@ public class UINewsletterViewerForm extends UIForm {
    *
    * @return the list< string>
    */
-  @SuppressWarnings({ "unchecked" })
+  @SuppressWarnings({ "unchecked", "deprecation" })
   private List<String> listSubscriptionChecked(){
     List<String> listSubscription = new ArrayList<String>();
     for(UIComponent component : this.getChildren()){
@@ -275,7 +284,7 @@ public class UINewsletterViewerForm extends UIForm {
    * @param url the new link
    */
   public void setLink(String url) throws Exception {
-    this.linkToSendMail = NewsLetterUtil.generateLink(url);
+    NewsLetterUtil.generateLink(url);
   }
 
   /**
@@ -294,7 +303,7 @@ public class UINewsletterViewerForm extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation" })
     public void execute(Event<UINewsletterViewerForm> event) throws Exception {
       UINewsletterViewerForm newsletterForm = event.getSource();
       newsletterForm.publicUserHandler.forgetEmail(WCMCoreUtils.getUserSessionProvider(),
@@ -402,18 +411,50 @@ public class UINewsletterViewerForm extends UIForm {
           // get email's content to create mail confirm
           String emailContent[] = new String[]{Subject, Content};
           try {
-            newsletterForm.publicUserHandler.subscribe(WCMCoreUtils.getUserSessionProvider(),
+          	String confirmCode = newsletterForm.publicUserHandler.subscribeEmail(WCMCoreUtils.getUserSessionProvider(),
                                                        portalName,
                                                        userEmail,
-                                                       listCategorySubscription,
-                                                       newsletterForm.linkToSendMail,
-                                                       emailContent);
+                                                       listCategorySubscription);
+            PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+            String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
+            String portalURI = portalRequestContext.getPortalURI();
+            String domainURL = requestURL.substring(0, requestURL.indexOf(portalURI));
+            
+            UIPortal uiPortal = Util.getUIPortal();
+            String pageNodeSelected = uiPortal.getSelectedUserNode().getURI();
+            StringBuilder sb = new StringBuilder(domainURL);
+            sb.append(portalURI);
+            sb.append(pageNodeSelected);
+            sb.append("/?");            
+            sb.append(EVENT_ACTION + "=" + CONFIRM_CODE_ACTION + "&");
+            sb.append(OBJECTID + "=" + userEmail + "/" + confirmCode);
+                        
+            String confirmUrl = sb.toString();                  
+            String openTag = "<a href=\"" + confirmUrl + "\">";
+            String mailContent = (emailContent[1].replaceFirst("#", openTag)).replace("#", "</a>");
+            
+            MailService mailService = WCMCoreUtils.getService(MailService.class);
+            Message message = new Message();
+            message.setMimeType("text/html");
+            message.setTo(userEmail);
+            message.setSubject(emailContent[0]);
+            message.setBody(mailContent);
+            
             newsletterForm.setListIds(listCategorySubscription);
             newsletterForm.inputEmail.setRendered(false);
             newsletterForm.userMail = userEmail;
             newsletterForm.isUpdated = true;
-            newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
+            newsletterForm.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });            
             contentOfMessage = "UINewsletterViewerForm.msg.subcribed";
+            
+            try {
+              mailService.sendMessage(message);
+            } catch (Exception e) {
+            	if (LOG.isErrorEnabled()) {
+                LOG.error(e.getMessage());
+              }
+            }  
+            
           }catch(Exception ex){
             contentOfMessage = "UINewsletterViewerForm.msg.canNotSubcribed";
           }

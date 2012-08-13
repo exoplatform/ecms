@@ -61,25 +61,25 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 												<div class="MiddleRightRightClickPopupMenu">
 													<div class="UIRightPopupMenuContainer">
 														<!-- Detail action -->
-														<div class="MenuItem" onclick="javaScript:void(0)">
+														<div class="MenuItem" onclick="<%=uicomponent.event("OpenNewsletter")%>">
 															<div class="ItemIcon IconsView" style="padding-left:18px;">
-																<a href="<%=uicomponent.event("OpenNewsletter")%>">Open</a>
+																<a href="javaScript:void(0)">Open</a>
 															</div>
 														</div>
-														<div class="MenuItem" onclick="javaScript:void(0)">
+														<div class="MenuItem" onclick="<%=uicomponent.event("EditSubscription")%>">
 															<div class="ItemIcon IconsView" style="padding-left:18px;">
-																<a href="<%=uicomponent.event("EditSubscription")%>">Edit</a>
+																<a href="javaScript:void(0)">Edit</a>
 															</div>
 														</div>
-														<div class="MenuItem" onclick="javaScript:void(0)">
+														<div class="MenuItem" onclick="<%=uicomponent.event("DeleteSubscription")%>">
 															<div class="ItemIcon IconsView" style="padding-left:18px;">
-																<a href="<%=uicomponent.event("DeleteSubscription")%>">Delete</a>
+																<a href="javaScript:void(0)">Delete</a>
 															</div>
 														</div>
 														<hr style="width:90%"/>
-														<div class="MenuItem" onclick="javaScript:void(0)">
+														<div class="MenuItem" onclick="<%=uicomponent.event("AddCategory")%>">
 															<div class="ItemIcon IconsView" style="padding-left:18px;">
-																<a href="<%=uicomponent.event("AddCategory")%>">Manager Uers</a>
+																<a href="javaScript:void(0)">Manager Uers</a>
 															</div>
 														</div>
 														<!-- Finish detail action -->
