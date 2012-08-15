@@ -33,7 +33,7 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 			    multiValue = bean.getDefinition().isMultiple() ;
 		    } catch(Exception e) {
 		    }
-		    ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
+		    value = ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
 	      if(even) rowClass = "EvenRow" ;
 	      else rowClass =  "OddRow" ;
 	      even = !even ; %>
