@@ -413,5 +413,9 @@
       <access-denied-exception>Truy cập bị chặn do bạn không có quyền đọc node, thay đổi node hoặc node đã bị xóa hoặc thay đổi.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
-  
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

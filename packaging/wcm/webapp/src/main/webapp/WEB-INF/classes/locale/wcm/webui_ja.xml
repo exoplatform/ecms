@@ -411,5 +411,9 @@
       <access-denied-exception>アクセスが拒否されました。読み出し権がない、もしくはノードが削除、変更されたかもしれません。</access-denied-exception>
     </msg>
   </UIDocumentInfo>
-  
+   <UIActionForm>
+     <msg>
+       <xss-vulnerability-character> フィールド'{0}'はクロスサイトスクリプティングの脆弱性文字が含まれている</xss-vulnerability-character>
+     </msg>
+  </UIActionForm>
 </bundle>
