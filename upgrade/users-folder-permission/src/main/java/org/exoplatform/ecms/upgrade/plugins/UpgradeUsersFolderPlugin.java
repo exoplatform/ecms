@@ -19,7 +19,9 @@ package org.exoplatform.ecms.upgrade.plugins;
 
 import java.security.AccessControlException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import javax.jcr.LoginException;
 import javax.jcr.NoSuchWorkspaceException;
@@ -27,6 +29,8 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
@@ -56,6 +60,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * 2. Remove "Remove" right permission of folder Private & Public under user folder
  */
 public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
+  
+  private static final String USER_ALIAS = "usersPath";
 
   private RepositoryService repoService_;
   private static final Log LOG = ExoLogger.getLogger(UpgradeUsersFolderPlugin.class.getName());
@@ -135,31 +141,43 @@ public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     String defaultWSName = repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
     try {
-      //Get all users
-      WCMCoreUtils.startRequest(orgService_);
-      ListAccess<User> userListAccess = orgService_.getUserHandler().findAllUsers();
-      List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
-      for(User user : userList) {
-        String userName = user.getUserName();
-        Node userNode = nodeHCreator_.getUserNode(sessionProvider, userName);
-        NodeIterator nodeIter = userNode.getNodes();
-        //Remove "Remove" right permission of all nodes under user folder
-        while (nodeIter.hasNext()) {
-          NodeImpl nodeImpl = (NodeImpl) nodeIter.next();
+      Session session = 
+        sessionProvider.getSession(repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                   repoService_.getCurrentRepository());
+      String usersNodePath = nodeHCreator_.getJcrPath(USER_ALIAS);
+      int count = 0;
+      NodeIterator nodeIter = session.getWorkspace().getQueryManager().createQuery(
+                                   "SELECT * FROM nt:unstructured WHERE jcr:path like '" + usersNodePath + "/%'" +
+                                   " AND (exo:name='Public' OR exo:name='Private') ORDER BY exo:dateCreated", Query.SQL).
+                                   execute().getNodes();
+      while (nodeIter.hasNext()) {
+        Node appNode = nodeIter.nextNode();
+        Node userNode = appNode.getParent();
+        String userNodePath = userNode.getPath();
+        String userNodeName = userNode.getName();
+        if (userNodePath.equals(nodeHCreator_.getUserNode(sessionProvider, userNodeName).getPath())) {
+          //Remove "Remove" right permission of all nodes under user folder
+          NodeImpl nodeImpl = (NodeImpl) appNode;
           try {
-            nodeImpl.removePermission(userName, PermissionType.REMOVE);
+            nodeImpl.removePermission(userNodeName, PermissionType.REMOVE);
           } catch(AccessControlException ace) {
             continue;
           }
+          userNode.save();
+          count ++;
+          if (count % 200 == 0) {
+            if (LOG.isInfoEnabled()) {
+              StringBuilder infor = new StringBuilder(this.getClass().getSimpleName()).append(": ").append(count/2).append(" users done!");
+              LOG.info(infor.toString());
+            }
+          }
         }
-        userNode.save();
       }
     } catch (Exception e) {
       //Rollback the change in the case exception occurs
       sessionProvider.getSession(defaultWSName, repoService_.getCurrentRepository()).refresh(false);
       LOG.error("MIGRATION DIDN'T SUCCESSED", e);
     } finally {
-      WCMCoreUtils.endRequest(orgService_);
       if(sessionProvider != null) sessionProvider.close();
     }
   }
