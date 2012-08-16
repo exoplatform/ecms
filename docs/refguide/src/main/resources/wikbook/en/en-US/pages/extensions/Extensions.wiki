@@ -1,0 +1,53 @@
+{docbook}
+<highlights>
+<itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.RESTServices">REST Services</link>
+          </emphasis> </para>
+          <para>Information about REST services used in Content, such as HTTP Methods, formats, data format, rest configuration
+            and a REST service creation.</para>
+      </listitem>
+       <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.UIExtensions">UI Extensions</link>
+          </emphasis> </para>
+          <para>Instructions on extending the Sites Explorer and the ECM Administration with the UI Extension Framework.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.AuthoringExtension">Authoring Extension</link>
+          </emphasis> </para>
+          <para>Information about extended publication plugin and publication manager. </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.AuxiliaryAttributes">Auxiliary attributes for documents</link>
+          </emphasis> </para>
+          <para>Information about how to create the <emphasis>DocumentContex</emphasis> context which stores some auxiliary attributes of the document and helps document listeners make decision
+based on these attributes.</para>
+      </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]

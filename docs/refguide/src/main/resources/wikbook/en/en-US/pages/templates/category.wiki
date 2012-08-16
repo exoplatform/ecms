@@ -1,3 +1,10 @@
+{docbook}
+<para xml:id="CONTref.InsideWCMTemplates.ListOfContents.CategoryTreeTemplate">
+<citetitle>
+<emphasis role="bold">Category Navigation Template</emphasis>
+</citetitle>
+</para>
+{docbook}
 The *Category Navigation Template* displays all contents under the categories.
 
 ||*Template* || *Description* ||

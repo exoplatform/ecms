@@ -1,34 +1,178 @@
-h1. ThumbnailRESTService {anchor:id=CONTref.Devref.PublicRestAPIs.ThumnailRestService}
+{docbook}
+<highlights>
+<itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.ThumnailRestService">ThumbnailRESTService</link>
+          </emphasis> </para>
+          <para>Returns a responding data as a thumbnail image.</para>
+      </listitem>
+       <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.RssConnector">RssConnector</link>
+          </emphasis> </para>
+          <para>Generates an RSS feed.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector">FCKCoreRESTConnector</link>
+          </emphasis> </para>
+          <para>Gets a list of files and folders, and create a folder and upload files.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.ResourceBundleConnector">ResourceBundleConnector</link>
+          </emphasis> </para>
+          <para>Gets the bundle basing on the key and the locale.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.VoteConnector">VoteConnector</link>
+          </emphasis> </para>
+          <para>Returns and set a vote value of a given node in the sent parameter.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.DriverConnector"> DriverConnector</link>
+          </emphasis> </para>
+          <para>Returns a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.GadgetConnector">GadgetConnector</link>
+          </emphasis> </para>
+          <para>Instantiate a new gadget connector.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.PortalLinkConnector">PortalLinkConnector</link>
+          </emphasis> </para>
+          <para>Returns a page URI for a given location.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService">GetEditedDocumentRESTService</link>
+          </emphasis> </para>
+          <para>Returns the latest edited documents.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService">PublicationGetDocumentRESTService</link>
+          </emphasis> </para>
+          <para>Returns a list of published documents.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.FavoriteRESTService">FavoriteRESTService</link>
+          </emphasis> </para>
+          <para>Returns a list of favourite documents of a given user.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.RESTImagesRendererService">RESTImagesRendererService</link>
+          </emphasis> </para>
+          <para>Gets the image binary data of a given image node.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.LifecycleConnector">LifecycleConnector</link>
+          </emphasis> </para>
+          <para>Returns a list of contents in a given state range of the publication lifecycle.</para>
+      </listitem><listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.CopyContentFile">CopyContentFile</link>
+          </emphasis> </para>
+          <para>Copies a file.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Devref.PublicRestAPIs.PDFViewerRESTService">PDFViewerRESTService</link>
+          </emphasis> </para>
+          <para>Returns the pdf content to display on the web page</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.ManageDocumentService">ManageDocumentService</link>
+          </emphasis> </para>
+          <para>Allows performing some actions on a folder or a file, such as creating, deleting a folder/file, or uploading a file.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.DownloadConnector">DownloadConnector</link>
+          </emphasis> </para>
+          <para>Enables downloading the content of <emphasis>nt:file</emphasis>.</para>
+      </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [Extensions|#CONTref.Extensions]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]
+
+
+h1. ThumbnailRESTService {anchor:id=CONTref.Devref.PublicRestAPIs.ThumnailRestServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.services.cms.thumbnail.impl.ThumbnailRESTService.wiki" /}
-h1. RssConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.RssConnector}
+h1. RssConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.RssConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.collaboration.RssConnector.wiki" /}
-h1. FCKCoreRESTConnector {anchor:id=CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector}
+h1. FCKCoreRESTConnector {anchor:id=CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.ecm.connector.fckeditor.FCKCoreRESTConnector.wiki" /}
-h1. ResourceBundleConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.ResourceBundleConnector}
+h1. ResourceBundleConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.ResourceBundleConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.collaboration.ResourceBundleConnector.wiki" /}
-h1. VoteConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.VoteConnector}
+h1. VoteConnector     {anchor:id=CONTref.Devref.PublicRestAPIs.VoteConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.collaboration.VoteConnector.wiki" /}
-h1. DriverConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.DriverConnector}
+h1. DriverConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.DriverConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.fckeditor.DriverConnector.wiki" /}
-h1. GadgetConnector    {anchor:id=CONTref.Devref.PublicRestAPIs.GadgetConnector}
+h1. GadgetConnector    {anchor:id=CONTref.Devref.PublicRestAPIs.GadgetConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.fckeditor.GadgetConnector.wiki" /}
-h1. PortalLinkConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.PortalLinkConnector}
+h1. PortalLinkConnector   {anchor:id=CONTref.Devref.PublicRestAPIs.PortalLinkConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector.wiki" /}
-h1. GetEditedDocumentRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService}
+h1. GetEditedDocumentRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.services.ecm.publication.REST.presentation.document.edit.GetEditedDocumentRESTService.wiki" /}
-h1. PublicationGetDocumentRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService}
+h1. PublicationGetDocumentRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService.wiki" /}
-h1. FavoriteRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.FavoriteRESTService}
+h1. FavoriteRESTService  {anchor:id=CONTref.Devref.PublicRestAPIs.FavoriteRESTServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.ecm.REST.favorite.FavoriteRESTService.wiki" /}
-h1. RESTImagesRendererService   {anchor:id=CONTref.Devref.PublicRestAPIs.RESTImagesRendererService}
+h1. RESTImagesRendererService   {anchor:id=CONTref.Devref.PublicRestAPIs.RESTImagesRendererServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.services.wcm.images.RESTImagesRendererService.wiki" /}
-h1. LifecycleConnector  {anchor:id=CONTref.Devref.PublicRestAPIs.LifecycleConnector}
+h1. LifecycleConnector  {anchor:id=CONTref.Devref.PublicRestAPIs.LifecycleConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.extensions.component.rest.LifecycleConnector.wiki" /}
-h1. CopyContentFile {anchor:id=CONTref.Devref.PublicRestAPIs.CopyContentFile}
+h1. CopyContentFile {anchor:id=CONTref.Devref.PublicRestAPIs.CopyContentFileRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.extensions.component.rest.CopyContentFile.wiki" /}
-h1. PDFViewerRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PDFViewerRESTService}
+h1. PDFViewerRESTService   {anchor:id=CONTref.Devref.PublicRestAPIs.PDFViewerRESTServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.ecm.REST.viewer.PDFViewerRESTService.wiki" /}
-h1. ManageDocumentService {anchor:id=CONTref.JavaServices.ManageDocumentService}
+h1. ManageDocumentService {anchor:id=CONTref.JavaServices.ManageDocumentServiceRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.ecm.connector.platform.ManageDocumentService.wiki" /}
-h1. DownloadConnector {anchor:id=CONTref.JavaServices.DownloadConnector}
+h1. DownloadConnector {anchor:id=CONTref.JavaServices.DownloadConnectorRoleNotInToc}
 {include:document="DeveloperReference/jaxrs/generated/org.exoplatform.wcm.connector.collaboration.DownloadConnector.wiki" /}

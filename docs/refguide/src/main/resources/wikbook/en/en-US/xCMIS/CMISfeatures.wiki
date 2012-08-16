@@ -3,7 +3,7 @@ The CMIS specification prescribes:
 * Domain model
 * Services
 
-h1. CMIS Domain Model {anchor:id=Dev_CMIS.features.CMIS_domain_model}
+h1. CMIS Domain Model {anchor:id=Dev_CMIS.features.CMIS_domain_modelRoleNotInToc}
 The CMIS Domain Model defines a repository as a container and an entry point to the objects that is quite simple and non-restrictive. The followings are some of the common entities of the domain model. 
 
 * Repository is a container of objects with a set of "capabilities" which may be different depending on the implementation.
@@ -28,7 +28,7 @@ Document Object and Folder Object are self-explanatory. Document Object has prop
 Relationship Object denotes the connection between two objects (target and source). An object can have multiple relationships with other objects.
 Policy Object is a way to define administrative policies in managing objects. For example, you can use a CMIS policy to define which documents are subject to retention policies.
 
-h1. CMIS Services {anchor:id=Dev_CMIS.features.CMIS_services}
+h1. CMIS Services {anchor:id=Dev_CMIS.features.CMIS_servicesRoleNotInToc}
 CMIS provides a set of services to access and manage the content or repository. These services include:
 
 || Name || Description ||

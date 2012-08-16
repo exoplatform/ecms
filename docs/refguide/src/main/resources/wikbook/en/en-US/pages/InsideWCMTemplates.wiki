@@ -1,0 +1,37 @@
+{docbook}
+<highlights>
+<itemizedlist>
+  <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.CONTref.InsideWCMTemplates.ContentTypes">Content types</link>
+          </emphasis> </para>
+          <para>Information about two types of template (css and dialog) applied to a node type or a metadata mixin type. </para>
+  </listitem>
+   <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.InsideWCMTemplates.ListOfContents">List of Contents</link>
+          </emphasis> </para>
+          <para>Provision of a list of content types commonly used in Content.</para>
+  </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [Extensions|#CONTref.Extensions]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]

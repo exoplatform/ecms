@@ -1,3 +1,11 @@
+{docbook}
+<para xml:id="CONTref.InsideWCMTemplates.ListOfContents.FolderbasedTemplate">
+<citetitle>
+<emphasis role="bold">Content List Template</emphasis>
+</citetitle>
+</para>
+{docbook}
+
 The *Content List Template* allows you to view the content list with various templates. eXo Platform supports the following content list templates:
 ||*Template*||*Description*||
 |*BigHotNewsTemplateCLV.gtmpl*|Display contents under one column with a content list. The illustration of each content is displayed above the content.|

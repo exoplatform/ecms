@@ -1,0 +1,58 @@
+<para>
+<highlights>
+	<itemizedlist>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Contribute_Content">Contribute content</link>: Learnt about the <emphasis role="bold">Edit mode</emphasis>, <emphasis role="bold">InContext Editing</emphasis>, <emphasis role="bold">Inline Editing</emphasis>, <emphasis role="bold">CKEeditor</emphasis> and the publication process.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Content_By_Query">Manage content list viewer by query</link>: Learn to user the <emphasis role="bold">Content By Query</emphasis> portlet to collect and display data throughout a workspace by using a query.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Content_Inside_Categories-Create_a_Content">Create content inside a category</link>: Learn to create content in a catagory.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer">Manage content in Sites Explorer</link>: Learn to create, edit, delete, publish and seatch for web content.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV">Manage content with WebDAV</link>: Learn to use WebDAV to add new content or delete web content.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Fast_Content_Creator">Manage content with Fast Content Creator</link>: Learn to configure the <emphasis role="bold">Fast Content Creator</emphasis> portlet and create new content with this portlet.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Form_Builder">Create content templates with Form Builder</link>: Learn to use the <emphasis role="bold">Form Builder</emphasis> portlet to create and edit the template of document types.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-CLV_templates">Manage CLV templates in Sites Explorer</link>: Learn to create, edit and delete a CLV template.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Category_Navigation">Manage Category Navigation</link>: Learn to access and configure the <emphasis role="bold">Category Navigation</emphasis> portlet.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-SEO_Management">Manage SEO</link>: Learn to use the <emphasis role="bold">SEO Management</emphasis> to manage SEO data of web pages, web content and optimize your website for search engine.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Search_portlet">Search content in a site</link>: Learn to search for content and configure the <emphasis role="bold">Search</emphasis> portlet.</para>
+		</listitem>
+		<listitem>
+			<para><link linkend="sect-User_Guide-Print_content">Print content</link>: Learn to print any content in a site.</para>
+		</listitem>
+	</itemizedlist>
+</highlights>
+<para>
+    <prompt>
+        <emphasis role="bold">See also</emphasis>
+    </prompt>
+</para>
+<itemizedlist>
+        <listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Structure content</link></para>
+		</listitem>
+		<listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Manage newsletter</link></para>
+		</listitem>
+		<listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
+		</listitem>
+</itemizedlist>
+</para>

@@ -1,7 +1,6 @@
 In Content, it is possible to extend the *Sites Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Sites Explorer* and/or add your own managers to the *ECM Administration*.
 This section shows you how to create a sample UI extension via adding your own tab to *ECM Administration*.
-{anchor:id=
-}
+
 
 h1. Add your own UIAction {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnUIAction}
 

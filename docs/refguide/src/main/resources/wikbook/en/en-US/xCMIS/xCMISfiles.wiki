@@ -8,7 +8,6 @@ eXo CMIS consists of JAR files below:
 
 {docbook}
 <para>
-
 <citetitle>
 xCMIS project files (for xCMIS 1.2.x)
 </citetitle>
@@ -53,4 +52,16 @@ Third-party dependencies (for xCMIS 1.2.x)
 * _lucene-regex-2.4.1.jar_
 
 
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Overview|#Dev_CMIS.Overview]
+* [CMIS specification|#Dev_CMIS.Specification]
+* [xCMIS project|#Dev_CMIS.xCMIS_project]
+* [CMIS features|#Dev_CMIS.features]
 

@@ -1,4 +1,4 @@
-h1. CMIS search and index {anchor:id=CONTref.Configuration.CMIS_search_index}
+h1. CMIS search and index {anchor:id=CONTref.Configuration.CMIS_search_indexRoleNotInToc}
 
 The CMIS standard defines a query language based on a subset of the SQL-92 grammar (ISO/IEC 9075: 1992 -- Database Language SQL), with a few extensions to enhance its filtering capability for the CMIS data model, such as existential quantification for multi-valued property, full-text search, and folder membership.
 
@@ -7,11 +7,23 @@ The CMIS standard defines a query language based on a subset of the SQL-92 gramm
   To discover the search capability, check the _capabilityQuery_ property (see the [table|#CONTref.Configuration.Query_capabilities] below).
 {warning}
 
-h2. CMIS Relational View {anchor:id=CONTref.Configuration.CMIS_relational_view}
+{docbook}
+<para xml:id="CONTref.Configuration.CMIS_relational_view">
+<citetitle>
+<emphasis role="bold">CMIS Relational View</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 The relational view of a CMIS repository consists of a collection of virtual tables that are defined on the top of the CMIS data model. A virtual table exists for every _queryable_ object type (content type if you prefer) in the repository. Each row in these virtual tables corresponds to an instance of the corresponding object type (or one of its subtypes). A column exists for every property that the object type has.
 
-h2. Query Capabilities {anchor:id=CONTref.Configuration.Query_capabilities}
+{docbook}
+<para xml:id="CONTref.Configuration.Query_capabilities">
+<citetitle>
+<emphasis role="bold">Query Capabilities</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 || *Capability* || *Value* ||
 | _capabilityQuery_ | {{bothcombined}} (if _indexDir_ is configured, otherwise {{none}}) |
@@ -20,7 +32,13 @@ h2. Query Capabilities {anchor:id=CONTref.Configuration.Query_capabilities}
 | _capabilityAllVersionsSearchable_ | {{false}} |
 
 
-h2. Configuration {anchor:id=CONTref.Configuration.CMIS_search_index.configuration}
+{docbook}
+<para xml:id="CONTref.Configuration.CMIS_search_index.configuration">
+<citetitle>
+<emphasis role="bold">Configuration</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 To be able to provide full-text search capabilities, xCMIS uses its own index. The following is the configuration parameter:
 
@@ -45,7 +63,13 @@ For example, to set up the index directory:
 </component>
 {code}
 
-h2. Index atomicity and durability {anchor:id=CONTref.Configuration.Index_atomicity_durability}
+{docbook}
+<para xml:id="CONTref.Configuration.Index_atomicity_durability">
+<citetitle>
+<emphasis role="bold">Index atomicity and durability</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 * *Write-ahead logging*
 

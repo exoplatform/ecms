@@ -1,4 +1,4 @@
-h1. Authenticator and organization service configuration {anchor:id=CONTref.Configuration.Authentication_organization_service_configuration}
+h1. Authenticator and organization service configuration {anchor:id=CONTref.Configuration.Authentication_organization_service_configurationRoleNotInToc}
 
 An authenticator is responsible for creating Identity Security Service Authenticator.
 

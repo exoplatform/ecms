@@ -1,4 +1,4 @@
-h1. Integration with eXo WCM {anchor:id=Dev_CMIS.features.Integration_with_eXoWCM}
+h1. Integration with eXo WCM {anchor:id=Dev_CMIS.features.Integration_with_eXoWCMRoleNotInToc}
 
 eXo Web Content Management (WCM) system provides CMIS access to its content storage features:
 * WCM drives
