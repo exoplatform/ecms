@@ -16,7 +16,7 @@
 			  <td class="FieldLabel"><%=_ctx.appRes("EnableVersioning.dialog.label.name")%></td>
 			  <td class="FieldComponent">
 				  <% 
-					String[] fieldName = ["jcrPath=/node/exo:name", "validate=XSSValidator"];
+					String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty,XSSValidator"];
 					uicomponent.addTextField("actionName", _ctx.appRes("EnableVersioning.dialog.label.name"), fieldName);
 				  %>
 				</td>

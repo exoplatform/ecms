@@ -27,7 +27,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("Rss.dialog.label.feed-action-name")%></td>
 	      <td class="FieldComponent">
 		      <%
-		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=XSSValidator"];
+		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty,XSSValidator"];
 		        uicomponent.addTextField("actionName", _ctx.appRes("Rss.dialog.label.feed-action-name"), fieldName) ;  
 		      %>
 		    </td>
