@@ -27,6 +27,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Query;
 
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
@@ -69,7 +70,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private static final Log LOG = ExoLogger.getLogger(FavoriteActionUpgradePlugin.class.getName());
 
-  private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
+  private static final String FAVORITE_ALIAS = "userPrivateFavorites";
+  private static final String USER_ALIAS = "usersPath";
   private static final String ADD_TO_FAVORITE_ACTION = "addToFavorite";
   private static final String NODE_TYPE_ADD_TO_FAVORITE_ACTION = "exo:addToFavoriteAction";
   private static final String FILE_NAME_ADD_TO_FAVORITE_ACTION = "AddToFavoriteScript.groovy";
@@ -115,13 +117,14 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
   @Override
   public void processUpgrade(String oldVersion, String newVersion) {
+    SessionProvider sessionProvider = null;
     try {
       if (LOG.isInfoEnabled()) {
         LOG.info("Start " + this.getClass().getName() + ".............");
       }
       RequestLifeCycle.begin(PortalContainer.getInstance());
 
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       Session session = sessionProvider.getSession(dmsConfiguration.getConfig().getSystemWorkspace(),
                                                    repoService.getCurrentRepository());
 
@@ -150,33 +153,30 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
       }
 
       // Get all users and remove exo:addToFavoriteAction action for favorite folder
-      ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
-      List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
-      Node favoriteNode = null;
+//      ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
+//      List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
+      session = sessionProvider.getSession(repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                           repoService.getCurrentRepository());
+      String usersNodePath = nodeHierarchyCreator.getJcrPath(USER_ALIAS);
+      if (!usersNodePath.endsWith("/")) {
+        usersNodePath += "/";
+      }
       int count = 0;
-      for (User user : userList) {
-        String userName = user.getUserName();
-        Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
-        String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
+      NodeIterator nodeIter = session.getWorkspace().getQueryManager().createQuery(
+                                   "SELECT * FROM exo:favoriteFolder WHERE jcr:path like '" + usersNodePath + "%'", Query.SQL).
+                                   execute().getNodes();
+      while (nodeIter.hasNext()) {
+        Node favoriteNode = nodeIter.nextNode();
 
-        try {
-          favoriteNode = userNode.getNode(favoritePath);
-        }
-        catch (PathNotFoundException pne) {
-          favoriteNode = createFavoriteFolder(userName);
-        }
-
-        if (favoriteNode != null) {
-          if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) != null) {
-            actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION, 
-                                                repoService.getCurrentRepository().getConfiguration().getName());
-            count++;
-            if ((count) % 100 == 0) {
-	          if (LOG.isInfoEnabled()) {
-	        	StringBuilder infor = new StringBuilder(this.getClass().getSimpleName()).append(": ").append(count).append(" users done!");
-	        	LOG.info(infor.toString());
-	          }
-            }
+        if (actionServiceContainer.getAction(favoriteNode, ADD_TO_FAVORITE_ACTION) != null) {
+          actionServiceContainer.removeAction(favoriteNode, ADD_TO_FAVORITE_ACTION, 
+                                              repoService.getCurrentRepository().getConfiguration().getName());
+          count++;
+          if ((count) % 100 == 0) {
+          if (LOG.isInfoEnabled()) {
+        	StringBuilder infor = new StringBuilder(this.getClass().getSimpleName()).append(": ").append(count).append(" users done!");
+        	LOG.info(infor.toString());
+          }
           }
         }
       }
@@ -191,6 +191,9 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
     }
     finally {
       RequestLifeCycle.end();
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
