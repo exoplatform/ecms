@@ -799,3 +799,18 @@ float: left;
 	padding: 0px;
 	min-width: 0px;
 }
+
+
+/***** Metadata Template *****/
+
+
+.UIECMAdminPortlet .UIForm .dialogTab td.FieldComponent .textarea, .UIECMAdminPortlet .UIForm .viewTab td.FieldComponent .textarea{
+	width: 100%;
+}
+
+.UIECMAdminPortlet .dialogTab td.FieldLabel, .UIECMAdminPortlet .viewTab td.FieldLabel{
+	width: 0px;
+	padding: 0px;
+	min-width: 0px;
+}
+

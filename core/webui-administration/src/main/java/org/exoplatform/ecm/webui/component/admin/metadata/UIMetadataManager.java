@@ -55,7 +55,7 @@ public class UIMetadataManager extends UIAbstractManager {
     removeChildById(METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, METADATA_POPUP);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(650, 450);
+    uiPopup.setWindowSize(650, 0);
     UIMetadataForm uiMetaForm = createUIComponent(UIMetadataForm.class, null, null) ;
     uiPopup.setUIComponent(uiMetaForm) ;
     uiPopup.setRendered(true);
@@ -67,7 +67,7 @@ public class UIMetadataManager extends UIAbstractManager {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, VIEW_METADATA_POPUP);
     uiPopup.setShowMask(true);
     uiPopup.setShow(true) ;
-    uiPopup.setWindowSize(600, 500);
+    uiPopup.setWindowSize(600, 0);
     uiPopup.setRendered(true);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     ExtendedNodeTypeManager ntManager = repositoryService.getCurrentRepository().getNodeTypeManager() ;
@@ -82,7 +82,7 @@ public class UIMetadataManager extends UIAbstractManager {
     removeChildById(PERMISSION_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PERMISSION_POPUP);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(560, 300);
+    uiPopup.setWindowSize(560, 0);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;
     uiECMPermission.setSelectedMembership(true);
