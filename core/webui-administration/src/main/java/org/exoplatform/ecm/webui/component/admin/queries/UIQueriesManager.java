@@ -47,7 +47,7 @@ public class UIQueriesManager extends UIAbstractManager {
     removeChildById(id) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id) ;
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 500) ;
+    uiPopup.setWindowSize(600, 0) ;
     UIQueriesForm uiForm = createUIComponent(UIQueriesForm.class, null, null) ;
     uiForm.setIsAddNew(true) ;
     uiPopup.setUIComponent(uiForm) ;
@@ -60,7 +60,7 @@ public class UIQueriesManager extends UIAbstractManager {
     removeChildById("PermissionPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PermissionPopup");
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(560, 300);
+    uiPopup.setWindowSize(560, 0);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "QueriesPermissionBrowse") ;
     uiECMPermission.setSelectedMembership(true);

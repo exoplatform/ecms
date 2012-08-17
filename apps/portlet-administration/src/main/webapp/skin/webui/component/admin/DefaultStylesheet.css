@@ -438,7 +438,7 @@
 }
 
 .UIECMAdminPortlet .UIQueriesManager .UIQueriesForm .UIForm .textarea {
-	height: 350px ;
+	height: auto;
 	width: 95%;
 }
 

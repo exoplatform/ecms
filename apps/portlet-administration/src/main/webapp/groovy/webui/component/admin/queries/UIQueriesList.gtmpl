@@ -45,7 +45,7 @@
   	      even = !even ;
       %>
           <tr class="$rowClass">
-            <td><div class="Text">$node.name</div></td>
+            <td><div class="Text" title="$node.name">$node.name</div></td>
             <td><div class="Text"><%=node.getProperty("jcr:language").getString()%></div></td>
             <td><div class="Text"><%=ContentReader.getXSSCompatibilityContent(node.getProperty("jcr:statement").getString())%></div></td>
             <td>
