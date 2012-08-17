@@ -397,6 +397,15 @@
   float: right; /* orientation=rt */
 }
 
+
+.UIECMScripts .ECMScriptForm .FormContainer .FieldComponent textarea {
+	width: 95%;
+}
+
+.UIECMScripts .ECMScriptForm .UIFormGrid td.FieldLabel{
+	width: 110px;
+}
+
 /*------------------------------UICBScripts------------------------*/
 
 .UIECMAdminPortlet .UICBScripts  {
