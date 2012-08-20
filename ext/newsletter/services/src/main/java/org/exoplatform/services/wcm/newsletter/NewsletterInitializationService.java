@@ -107,37 +107,40 @@ public class NewsletterInitializationService implements Startable {
       } else {
         newsletterInitializationService = serviceFolder.addNode("NewsletterInitializationService", "nt:unstructured");
       }
-      if (!newsletterInitializationService.hasNode("NewsletterInitializationServiceLog")) {
-        String[] arrayPers = {PermissionType.READ, PermissionType.SET_PROPERTY, PermissionType.ADD_NODE, PermissionType.REMOVE} ;
-        for (String portalName : portalNames) {
-          NewsletterCategoryHandler categoryHandler = newsletterManagerService.getCategoryHandler();
-          for (NewsletterCategoryConfig categoryConfig : categoryConfigs) {
-            categoryHandler.add(sessionProvider, portalName, categoryConfig);
-          }
-
-          NewsletterSubscriptionHandler subscriptionHandler = newsletterManagerService.getSubscriptionHandler();
-          for (NewsletterSubscriptionConfig subscriptionConfig : subscriptionConfigs) {
-            subscriptionHandler.add(sessionProvider, portalName, subscriptionConfig);
-          }
-
-          NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
-          for (NewsletterUserConfig userConfig : userConfigs) {
-            manageUserHandler.add(sessionProvider, portalName, userConfig.getMail());
-          }
-
-          for (String admin : administrators) {
-            if (admin != null && admin.length() > 0) {
-              manageUserHandler.addAdministrator(sessionProvider, portalName, admin);
+      String[] arrayPers = {PermissionType.READ, PermissionType.SET_PROPERTY, PermissionType.ADD_NODE, PermissionType.REMOVE} ;
+      for (String portalName : portalNames) {
+        if (!newsletterInitializationService.hasNode(portalName +"/NewsletterInitializationServiceLog" )) {
+          if (!dataRegistered(portalName, sessionProvider)) {
+            NewsletterCategoryHandler categoryHandler = newsletterManagerService.getCategoryHandler();
+            for (NewsletterCategoryConfig categoryConfig : categoryConfigs) {
+              categoryHandler.add(sessionProvider, portalName, categoryConfig);
             }
+  
+            NewsletterSubscriptionHandler subscriptionHandler = newsletterManagerService.getSubscriptionHandler();
+            for (NewsletterSubscriptionConfig subscriptionConfig : subscriptionConfigs) {
+              subscriptionHandler.add(sessionProvider, portalName, subscriptionConfig);
+            }
+  
+            NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
+            for (NewsletterUserConfig userConfig : userConfigs) {
+              manageUserHandler.add(sessionProvider, portalName, userConfig.getMail());
+            }
+  
+            for (String admin : administrators) {
+              if (admin != null && admin.length() > 0) {
+                manageUserHandler.addAdministrator(sessionProvider, portalName, admin);
+              }
+            }
+            ExtendedNode userFolderNode = (ExtendedNode)((Node)session.getItem(NewsletterConstant.generateUserPath(portalName)));
+            if(userFolderNode.canAddMixin("exo:privilegeable"))
+              userFolderNode.addMixin("exo:privilegeable");
+  
+            userFolderNode.setPermission("any", arrayPers);
           }
-          ExtendedNode userFolderNode = (ExtendedNode)((Node)session.getItem(NewsletterConstant.generateUserPath(portalName)));
-          if(userFolderNode.canAddMixin("exo:privilegeable"))
-            userFolderNode.addMixin("exo:privilegeable");
-
-          userFolderNode.setPermission("any", arrayPers);
-
-          Node newsletterInitializationServiceLog = newsletterInitializationService.addNode("NewsletterInitializationServiceLog",
-                                                                                            "nt:file");
+        
+          Node newsletterInitializationServiceLog = newsletterInitializationService.
+                                                        addNode(portalName).
+                                                        addNode("NewsletterInitializationServiceLog","nt:file");          
           Node newsletterInitializationServiceLogContent = newsletterInitializationServiceLog.addNode("jcr:content",
                                                                                                       "nt:resource");
           newsletterInitializationServiceLogContent.setProperty("jcr:encoding", "UTF-8");
@@ -156,6 +159,48 @@ public class NewsletterInitializationService implements Startable {
     }
   }
 
+  private boolean dataRegistered(String siteName, SessionProvider sessionProvider) throws Exception {
+    boolean registered = true;
+    //check if all categories are registed OK
+    try {
+      for (NewsletterCategoryConfig categoryConfig : categoryConfigs) {
+        if (newsletterManagerService.getCategoryHandler().
+              getCategoryByName(sessionProvider, siteName, categoryConfig.getName()) == null) {
+          registered = false;
+          break;
+        }
+      }
+    } catch (Exception e) {
+      registered = false;
+    }
+    //check if all subscriptions are registered OK
+    try {
+      for (NewsletterSubscriptionConfig subscriptionConfig : subscriptionConfigs) {
+        if (newsletterManagerService.getSubscriptionHandler().
+              getSubscriptionsByName(sessionProvider, siteName, 
+                                     subscriptionConfig.getCategoryName(), subscriptionConfig.getName()) == null) {
+          registered = false;
+          break;
+        }
+      }
+    } catch (Exception e) {
+      registered = false;
+    }
+    //check if all admins are registered OK
+    try {
+      for (String admin : administrators) {
+        if (!newsletterManagerService.getManageUserHandler().
+            getAllAdministrator(sessionProvider, siteName).contains(admin)) {
+          registered = false;
+          break;
+        }
+      }
+    } catch (Exception e) {
+      registered = false;
+    }
+    return registered;
+  }
+  
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */
