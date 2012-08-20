@@ -54,6 +54,13 @@ public class UIECMPageIterator extends UIPageIterator {
 
   public static final int[] MAX_ITEMS_PER_PAGE = new int[] { 5, 10, 15, 20, 30, 60, 100 };
  
+  private boolean justPaginated_ = false;
+  
+  public boolean isJustPaginated() { return justPaginated_; }
+  
+  public void setJustPaginated(boolean value) {
+    justPaginated_ = value;
+  }
 
   public UIECMPageIterator() {
   }
@@ -126,6 +133,7 @@ public class UIECMPageIterator extends UIPageIterator {
       UIECMPageIterator uiPageIterator = event.getSource();
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID));
       uiPageIterator.setCurrentPage(page);
+      uiPageIterator.setJustPaginated(true);
       UIComponent parent = uiPageIterator.getParent();
       if (parent == null)
         return;
