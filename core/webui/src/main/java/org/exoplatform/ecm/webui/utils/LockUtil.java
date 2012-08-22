@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2007 eXo Platform SAS.
+ * Copyright (C) 2003-2012 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -32,10 +32,8 @@ import javax.jcr.query.QueryResult;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.IdentityConstants;
@@ -49,83 +47,73 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class LockUtil {
 
-  public static ExoCache getLockCache() throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    CacheService cacheService = (CacheService)container.getComponentInstanceOfType(CacheService.class);
-    return cacheService.getCacheInstance(LockManagerImpl.class.getName());
-  }
-
-  @SuppressWarnings("unchecked")
   public static void keepLock(Lock lock) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(lock.getNode());
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.put(key,lock.getLockToken());
-    lockcache.put(userId,lockedNodesInfo);
+    lockService.putToLockHoding(userId,lockedNodesInfo);
   }
 
   public static void keepLock(Lock lock, String userId) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String keyRoot = createLockKey(lock.getNode(), userId);
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.put(keyRoot, lock.getLockToken());
-    lockcache.put(userId, lockedNodesInfo);
+    lockService.putToLockHoding(userId, lockedNodesInfo);
   }
 
   public static void keepLock(Lock lock, String userId, String lockToken) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String keyRoot = createLockKey(lock.getNode(), userId);
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.put(keyRoot, lockToken);
-    lockcache.put(userId, lockedNodesInfo);
+    lockService.putToLockHoding(userId, lockedNodesInfo);
   }
 
-  @SuppressWarnings("unchecked")
   public static void removeLock(Node node) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) return;
     lockedNodesInfo.remove(key);
   }
 
-  @SuppressWarnings("unchecked")
   public static void changeLockToken(Node oldNode, Node newNode) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String newKey = createLockKey(newNode);
     String oldKey = createLockKey(oldNode);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.remove(oldKey) ;
     lockedNodesInfo.put(newKey,newNode.getLock().getLockToken());
-    lockcache.put(userId,lockedNodesInfo);
+    lockService.putToLockHoding(userId,lockedNodesInfo);
   }
 
-  @SuppressWarnings("unchecked")
   public static void changeLockToken(String srcPath, Node newNode) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String newKey = createLockKey(newNode);
     String oldKey = getOldLockKey(srcPath, newNode);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
@@ -133,16 +121,15 @@ public class LockUtil {
       lockedNodesInfo.put(newKey, lockedNodesInfo.get(oldKey));
       lockedNodesInfo.remove(oldKey);
     }
-    lockcache.put(userId, lockedNodesInfo);
+    lockService.putToLockHoding(userId, lockedNodesInfo);
   }
 
-  @SuppressWarnings("unchecked")
   public static String getLockTokenOfUser(Node node) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
@@ -151,11 +138,11 @@ public class LockUtil {
 
   @SuppressWarnings("unchecked")
   public static String getLockToken(Node node) throws Exception {
-    ExoCache lockcache = getLockCache();
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
+    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
@@ -169,7 +156,7 @@ public class LockUtil {
       permissionBuffer.append(membership.getMembershipType()).append(":").append(membership.getGroupId());
       if ((permissionBuffer != null) && (permissionBuffer.toString().length() > 0)) {
         keyPermission = createLockKey(node, permissionBuffer.toString());
-        lockedNodesInfo = (Map<String,String>)lockcache.get(permissionBuffer.toString());
+        lockedNodesInfo = lockService.getLockInformation(permissionBuffer.toString());
         if ((lockedNodesInfo != null) && (lockedNodesInfo.get(keyPermission) != null)) {
           return lockedNodesInfo.get(keyPermission);
         }
@@ -231,7 +218,6 @@ public class LockUtil {
    */
   @SuppressWarnings("unchecked")
   public static void updateLockCache(String membership) throws Exception {
-    ExoCache lockcache = getLockCache();
     ManageableRepository repo = WCMCoreUtils.getRepository();
     Session session = null;
     //get all locked nodes
