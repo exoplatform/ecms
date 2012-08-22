@@ -160,7 +160,8 @@ public class UIPublicationPanel
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
 
         String nodeVersionUUID = null;
-        if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP))
+        if(PublicationDefaultStates.PUBLISHED.equals(currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString())
+          && currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP))
           nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
         if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {
           publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
