@@ -16,6 +16,11 @@
       <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
+				<dependency>
+				  <groupId>org.exoplatform.ecms</groupId>
+						<artifactId>exo-ecms-core-webui</artifactId>
+						<version>${project.version}</version>
+				</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-ext-workflow-api</artifactId>
