@@ -49,9 +49,9 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -429,5 +429,22 @@ public class Utils {
   
   public static boolean hasChild(Node node, String childType) throws Exception {
     return (getChildOfType(node, childType) != null);
+  }
+  
+  /**
+   * Check if a node is document type.
+   * @param node
+   * @return true: is document; false: not document
+   * @throws Exception
+   */
+  public static boolean isDocument(Node node) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    List<String> documentTypeList = templateService.getDocumentTemplates();
+    for (String documentType : documentTypeList) {
+      if (node.getPrimaryNodeType().isNodeType(documentType)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -37,6 +37,7 @@ import javax.jcr.query.QueryResult;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -118,7 +119,9 @@ public class LinkManagerImpl implements LinkManager {
       linkNode.getSession().save();
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       try {
-        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
+        if (Utils.isDocument(target)) {
+          listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
+        }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Error while broadcasting event: " + e.getMessage());
