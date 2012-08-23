@@ -56,21 +56,6 @@ public class WCMServiceImpl implements WCMService {
     String expirationCache = propertiesParam.getProperty("expirationCache");
     this.setPortletExpirationCache(new Integer(expirationCache));
   }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.core.WCMService#getReferencedContent(java.
-   * lang.String, java.lang.String, java.lang.String,
-   * org.exoplatform.services.jcr.ext.common.SessionProvider)
-   */
-  @Deprecated
-  public Node getReferencedContent(SessionProvider sessionProvider,
-                                   String repository,
-                                   String workspace,
-                                   String nodeIdentifier) throws Exception {
-    return getReferencedContent(sessionProvider, workspace, nodeIdentifier);
-  }
   
   /*
    * (non-Javadoc)
@@ -128,6 +113,5 @@ public class WCMServiceImpl implements WCMService {
   public int getPortletExpirationCache() throws Exception {
     return this.expirationCache;
   }
-
 
 }

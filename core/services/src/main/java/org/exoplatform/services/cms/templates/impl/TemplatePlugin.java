@@ -244,19 +244,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     importPredefineTemplates() ;
   }
 
-  /**
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #init()} instead.
-   * @param repository
-   * @throws Exception
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    if(autoCreateInNewRepository_) {
-      importPredefineTemplates() ;
-    }
-  }
-
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   private void addTemplate(TemplateConfig templateConfig, Node templatesHome, String storedLocation) throws Exception {
     NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager() ;
     NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
@@ -321,7 +309,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     session.logout();
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   private void addNode(String basePath, TemplateConfig.NodeType nodeType, List templates, String templateType,
       Node templatesHome)  throws Exception {
     for (Iterator iterator = templates.iterator(); iterator.hasNext();) {

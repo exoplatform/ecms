@@ -49,31 +49,9 @@ public class NodeFinderImpl implements NodeFinder {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Item getItem(String repository, String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
-                                                                                              RepositoryException {
-    return getItem(workspace, absPath, giveTarget);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Item getItem(String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                            RepositoryException {
     return getItemGiveTargetSys(workspace, absPath, giveTarget, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Item getItemGiveTargetSys(String repository,
-                                   String workspace,
-                                   String absPath,
-                                   boolean giveTarget,
-                                   boolean system) throws PathNotFoundException,
-                                                  RepositoryException {
-    return getItemGiveTargetSys(workspace, absPath, giveTarget, system);
   }
 
   /**
@@ -93,28 +71,10 @@ public class NodeFinderImpl implements NodeFinder {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Item getItem(String repository, String workspace, String absPath) throws PathNotFoundException,
-                                                                          RepositoryException {
-    return getItem(workspace, absPath);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public Item getItem(String workspace, String absPath) throws PathNotFoundException,
                                                        RepositoryException {
     return getItem(workspace, absPath, false);
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Item getItemSys(String repository, String workspace, String absPath, boolean system) throws PathNotFoundException,
-                                                                                             RepositoryException {
-    return getItemSys(workspace, absPath, system);
-  }
   
   /**
    * {@inheritDoc}

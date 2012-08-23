@@ -34,7 +34,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.timeline.TimelineService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
@@ -70,15 +69,6 @@ public class TimelineServiceImpl implements TimelineService {
     repositoryService_ = repoService;
     templateService_ = templateService;
     itemPerTimeline = Integer.parseInt(initParams.getValueParam("itemPerTimeline").getValue());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisYear(String nodePath, String repository, String workspace,
-      SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
-    return getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, byUser);
   }
 
   /**
@@ -136,15 +126,6 @@ public class TimelineServiceImpl implements TimelineService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath, String repository, String workspace,
-      SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
-    return getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, byUser);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
                                                    String workspace,
                                                    SessionProvider sessionProvider,
@@ -196,19 +177,6 @@ public class TimelineServiceImpl implements TimelineService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
-                                                  String repository,
-                                                  String workspace,
-                                                  SessionProvider sessionProvider,
-                                                  String userName,
-                                                  boolean byUser) throws Exception {
-    return getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, byUser);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
                                                   String workspace,
                                                   SessionProvider sessionProvider,
@@ -255,19 +223,6 @@ public class TimelineServiceImpl implements TimelineService {
       documentsOfWeek.add(nodeIter.nextNode());
     }
     return documentsOfWeek;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfYesterday(String nodePath,
-                                            String repository,
-                                            String workspace,
-                                            SessionProvider sessionProvider,
-                                            String userName,
-                                            boolean byUser) throws Exception {
-    return getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, byUser);
   }
 
   /**
@@ -325,19 +280,6 @@ public class TimelineServiceImpl implements TimelineService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getDocumentsOfToday(String nodePath,
-                                        String repository,
-                                        String workspace,
-                                        SessionProvider sessionProvider,
-                                        String userName,
-                                        boolean byUser) throws Exception {
-    return getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, byUser);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public List<Node> getDocumentsOfToday(String nodePath,
                                         String workspace,
                                         SessionProvider sessionProvider,
@@ -382,8 +324,7 @@ public class TimelineServiceImpl implements TimelineService {
     return documentsOfToday;
   }
 
-  private Session getSession(SessionProvider sessionProvider, String workspace) throws RepositoryException,
-                                                                               RepositoryConfigurationException {
+  private Session getSession(SessionProvider sessionProvider, String workspace) throws RepositoryException {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return sessionProvider.getSession(workspace, manageableRepository);
   }

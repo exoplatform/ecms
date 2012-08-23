@@ -384,16 +384,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
 
-  @Deprecated
-  public Response put(String repoName, String repoPath, String lockTokenHeader, String ifHeader,
-      String fileNodeTypeHeader, String contentNodeTypeHeader, String mixinTypes, MediaType mediatype,
-      InputStream inputStream)
-  {
-    return put(repoName, repoPath, lockTokenHeader, ifHeader, fileNodeTypeHeader, contentNodeTypeHeader, mixinTypes,
-        mediatype, inputStream, null);
-  }
-
-
   @PUT
   @Path("/{repoName}/{repoPath:.*}/")
   public Response put(@PathParam("repoName") String repoName,
@@ -616,17 +606,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       overwriteHeader,
                       uriInfo,
                       body);
-  }
-
-  @Deprecated
-  public Response mkcol(@PathParam("repoName") String repoName,
-      @PathParam("repoPath") String repoPath,
-      @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
-      @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-      @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
-      @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader) {
-    return mkcol(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, mixinTypesHeader, null);
-
   }
 
   /**

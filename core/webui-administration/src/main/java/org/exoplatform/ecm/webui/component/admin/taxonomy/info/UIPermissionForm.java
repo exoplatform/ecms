@@ -110,7 +110,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       Iterator<AccessControlEntry> perIter = permsList.iterator() ;
       StringBuilder userPermission = new StringBuilder() ;
       while(perIter.hasNext()) {
-        AccessControlEntry accessControlEntry = (AccessControlEntry)perIter.next() ;
+        AccessControlEntry accessControlEntry = perIter.next() ;
         if(user.equals(accessControlEntry.getIdentity())) {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
         }

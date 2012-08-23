@@ -62,19 +62,6 @@ public interface NodeFinder {
   /**
    * Returns the item at the specified absolute path.
    *
-   * @param repository The name of repository
-   * @param workspace The name of workspace
-   * @param absPath An absolute path.
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
-   */
-  @Deprecated
-  public Item getItem(String repository, String workspace, String absPath) throws PathNotFoundException,
-                                                                          RepositoryException;
-  
-  /**
-   * Returns the item at the specified absolute path.
-   *
    * @param workspace The name of workspace
    * @param absPath An absolute path.
    * @throws PathNotFoundException if the specified path cannot be found.
@@ -82,19 +69,6 @@ public interface NodeFinder {
    */
   public Item getItem(String workspace, String absPath) throws PathNotFoundException,
                                                                           RepositoryException;  
-
-  /**
-   * Returns the item at the specified absolute path.
-   *
-   * @param repository The name of repository
-   * @param workspace The name of workspace
-   * @param absPath An absolute path.
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
-   */
-  @Deprecated
-  public Item getItemSys(String repository, String workspace, String absPath, boolean system) throws PathNotFoundException,
-                                                                                             RepositoryException;
   
   /**
    * Returns the item at the specified absolute path.
@@ -112,23 +86,6 @@ public interface NodeFinder {
    * giveTarget has been set to <code>true</code>, the target node will be
    * returned
    *
-   * @param repository The name of repository
-   * @param workspace The name of workspace
-   * @param absPath An absolute path.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
-   */
-  @Deprecated
-  public Item getItem(String repository, String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
-                                                                                              RepositoryException;
-  
-  /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
-   *
    * @param workspace The name of workspace
    * @param absPath An absolute path.
    * @param giveTarget Indicates if the target must be returned in case the item
@@ -138,30 +95,6 @@ public interface NodeFinder {
    */
   public Item getItem(String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                                               RepositoryException;
-  
-
-
-  /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
-   *
-   * @param repository The name of repository
-   * @param workspace The name of workspace
-   * @param absPath An absolute path.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
-   * @param system system provider
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
-   */
-  @Deprecated
-  public Item getItemGiveTargetSys(String repository,
-                                   String workspace,
-                                   String absPath,
-                                   boolean giveTarget,
-                                   boolean system) throws PathNotFoundException,
-                                                  RepositoryException;
   
   /**
    * Returns the item at the specified absolute path. If the item is a link and

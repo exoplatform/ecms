@@ -40,17 +40,6 @@ public interface RemovePortalArtifactsService {
    *
    * @param portalName the portal name
    * @param sessionProvider the session provider
-   *
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public void invalidateArtifactsFromPortal(SessionProvider sessionProvider, String portalName) throws Exception;
-  
-  /**
-   * Deploy artifacts to portal.
-   *
-   * @param portalName the portal name
-   * @param sessionProvider the session provider
    * @param portalTemplateName
    * 
    * @throws Exception the exception

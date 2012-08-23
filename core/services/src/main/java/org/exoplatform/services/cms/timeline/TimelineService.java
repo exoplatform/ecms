@@ -38,25 +38,6 @@ public interface TimelineService {
    * Get all documents of Today
    * 
    * @param nodePath Path of current node
-   * @param repository Repository name
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @return List<Node>
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfToday(String nodePath,
-                                        String repository,
-                                        String workspace,
-                                        SessionProvider sessionProvider,
-                                        String userName,
-                                        boolean byUser) throws Exception;
-
-  /**
-   * Get all documents of Today
-   * 
-   * @param nodePath Path of current node
    * @param workspace Workspace name
    * @param sessionProvider SessionProvider
    * @param userName Logged in user
@@ -87,25 +68,6 @@ public interface TimelineService {
                                         boolean byUser,
                                         boolean isLimit) throws Exception;  
 
-  /**
-   * Get all documents of Yesterday
-   * 
-   * @param nodePath Path of current node
-   * @param repository Repository name
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @return List<Node>
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfYesterday(String nodePath,
-                                            String repository,
-                                            String workspace,
-                                            SessionProvider sessionProvider,
-                                            String userName,
-                                            boolean byUser) throws Exception;
-  
   /**
    * Get all documents of Yesterday
    * 
@@ -144,25 +106,6 @@ public interface TimelineService {
    * Get all documents earlier this week
    * 
    * @param nodePath Path of current node
-   * @param repository Repository name
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @return List<Node>
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
-                                                  String repository,
-                                                  String workspace,
-                                                  SessionProvider sessionProvider,
-                                                  String userName,
-                                                  boolean byUser) throws Exception;
-  
-  /**
-   * Get all documents earlier this week
-   * 
-   * @param nodePath Path of current node
    * @param workspace Workspace name
    * @param sessionProvider SessionProvider
    * @param userName Logged in user
@@ -197,25 +140,6 @@ public interface TimelineService {
    * Get all documents earlier this month
    * 
    * @param nodePath Path of current node
-   * @param repository Repository name
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @return List<Node>
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
-                                                   String repository,
-                                                   String workspace,
-                                                   SessionProvider sessionProvider,
-                                                   String userName,
-                                                   boolean byUser) throws Exception;
-  
-  /**
-   * Get all documents earlier this month
-   * 
-   * @param nodePath Path of current node
    * @param workspace Workspace name
    * @param sessionProvider SessionProvider
    * @param userName Logged in user
@@ -246,25 +170,6 @@ public interface TimelineService {
                                                    boolean byUser,
                                                    boolean isLimit) throws Exception;  
 
-  /**
-   * Get all documents earlier this year
-   * 
-   * @param nodePath Path of current node
-   * @param repository Repository name
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @return List<Node>
-   */
-  @Deprecated
-  public List<Node> getDocumentsOfEarlierThisYear(String nodePath,
-                                                  String repository,
-                                                  String workspace,
-                                                  SessionProvider sessionProvider,
-                                                  String userName,
-                                                  boolean byUser) throws Exception;
-  
   /**
    * Get all documents earlier this year
    * 

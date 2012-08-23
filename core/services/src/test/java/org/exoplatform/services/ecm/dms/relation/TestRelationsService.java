@@ -79,7 +79,7 @@ public class TestRelationsService extends BaseWCMTestCase {
     Node bbb = root.addNode("BBB");
     session.save();
 
-    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS, REPO_NAME);
+    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS);
     assertTrue(aaa.isNodeType(RELATION_MIXIN));
 
     Value[] values = aaa.getProperty(RELATION_PROP).getValues();
@@ -100,7 +100,7 @@ public class TestRelationsService extends BaseWCMTestCase {
     Node bbb = root.addNode("BBB");
     session.save();
 
-    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS, REPO_NAME);
+    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS);
     assertTrue(relationsService.hasRelations(aaa));
     assertFalse(relationsService.hasRelations(bbb));
   }
@@ -122,10 +122,10 @@ public class TestRelationsService extends BaseWCMTestCase {
     Node ddd = root.addNode("DDD");
     session.save();
 
-    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS, REPO_NAME);
-    relationsService.addRelation(aaa, ccc.getPath(), COLLABORATION_WS, REPO_NAME);
+    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS);
+    relationsService.addRelation(aaa, ccc.getPath(), COLLABORATION_WS);
 
-    List<Node> listRelation = relationsService.getRelations(aaa, REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    List<Node> listRelation = relationsService.getRelations(aaa, sessionProviderService_.getSystemSessionProvider(null));
     List<String> relationPathList = new ArrayList<String>();
     for (Node relation : listRelation) {
       relationPathList.add(relation.getPath());
@@ -152,11 +152,11 @@ public class TestRelationsService extends BaseWCMTestCase {
     Node ddd = root.addNode("DDD");
     session.save();
 
-    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS, REPO_NAME);
-    relationsService.addRelation(aaa, ccc.getPath(), COLLABORATION_WS, REPO_NAME);
-    relationsService.addRelation(aaa, ddd.getPath(), COLLABORATION_WS, REPO_NAME);
+    relationsService.addRelation(aaa, bbb.getPath(), COLLABORATION_WS);
+    relationsService.addRelation(aaa, ccc.getPath(), COLLABORATION_WS);
+    relationsService.addRelation(aaa, ddd.getPath(), COLLABORATION_WS);
 
-    List<Node> listBeforeRemove = relationsService.getRelations(aaa, REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    List<Node> listBeforeRemove = relationsService.getRelations(aaa, sessionProviderService_.getSystemSessionProvider(null));
     List<String> pathBeforeRemove = new ArrayList<String>();
     for (Node relation : listBeforeRemove) {
       pathBeforeRemove.add(relation.getPath());
@@ -165,9 +165,9 @@ public class TestRelationsService extends BaseWCMTestCase {
     assertTrue(pathBeforeRemove.contains(ccc.getPath()));
     assertTrue(pathBeforeRemove.contains(ddd.getPath()));
 
-    relationsService.removeRelation(aaa, "/DDD", REPO_NAME);
+    relationsService.removeRelation(aaa, "/DDD");
 
-    List<Node> listAfterRemove = relationsService.getRelations(aaa, REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    List<Node> listAfterRemove = relationsService.getRelations(aaa, sessionProviderService_.getSystemSessionProvider(null));
     List<String> pathAfterRemove = new ArrayList<String>();
     for (Node relation : listAfterRemove) {
       pathAfterRemove.add(relation.getPath());

@@ -87,11 +87,6 @@ public class QueryPlugin extends BaseComponentPlugin {
     }
   }
 
-  @Deprecated
-  public void init(String repository,String baseQueriesPath) throws Exception {
-    init(baseQueriesPath);
-  } 
-
   private Session getSession() throws Exception {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();

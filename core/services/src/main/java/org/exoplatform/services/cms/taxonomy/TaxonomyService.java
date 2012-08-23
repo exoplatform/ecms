@@ -35,20 +35,6 @@ public interface TaxonomyService {
   
   /**
    * Returns the root node of the given taxonomy tree
-   * 
-   * @param repository The name of repository
-   * @param taxonomyName The name of the taxonomy
-   * @param system Indicates whether the nodes must be retrieved using a session
-   *          system or user session
-   *
-   * @throws RepositoryException if the taxonomy tree could not be found
-   */
-  @Deprecated
-  public Node getTaxonomyTree(String repository, String taxonomyName, boolean system)
-      throws RepositoryException;
-  
-  /**
-   * Returns the root node of the given taxonomy tree
    * @param taxonomyName The name of the taxonomy
    * @param system Indicates whether the nodes must be retrieved using a session
    *          system or user session
@@ -57,16 +43,6 @@ public interface TaxonomyService {
    */
   public Node getTaxonomyTree(String taxonomyName, boolean system)
       throws RepositoryException;
-
-  /**
-   * Returns the root node of the given taxonomy tree with the user session
-   *
-   * @param repository The name of repository
-   * @param taxonomyName The name of the taxonomy
-   * @throws RepositoryException if the taxonomy tree could not be found
-   */
-  @Deprecated
-  public Node getTaxonomyTree(String repository, String taxonomyName) throws RepositoryException;
   
   /**
    * Returns the root node of the given taxonomy tree with the user session
@@ -76,19 +52,6 @@ public interface TaxonomyService {
    */
   public Node getTaxonomyTree(String taxonomyName) throws RepositoryException;  
 
-  /**
-   * Returns the list of all the root nodes of the taxonomy tree available
-   * 
-   * @param repository The name of repository
-   * @param system Indicates whether the nodes must be retrieved using a session
-   *          system or user session
-   *
-   * @throws RepositoryException if the taxonomy trees could not be found
-   */
-  @Deprecated
-  public List<Node> getAllTaxonomyTrees(String repository, boolean system)
-      throws RepositoryException;
-  
   /**
    * Returns the list of all the root nodes of the taxonomy tree available
    * @param system Indicates whether the nodes must be retrieved using a session
@@ -103,31 +66,10 @@ public interface TaxonomyService {
    * Returns the list of all the root nodes of the taxonomy tree available with
    * the user session
    *
-   * @param repository The name of repository
-   * @throws RepositoryException if the taxonomies could not be found
-   */
-  @Deprecated
-  public List<Node> getAllTaxonomyTrees(String repository) throws RepositoryException;
-  
-  /**
-   * Returns the list of all the root nodes of the taxonomy tree available with
-   * the user session
-   *
    * @throws RepositoryException if the taxonomies could not be found
    */
   public List<Node> getAllTaxonomyTrees() throws RepositoryException;  
 
-  /**
-   * Checks if a taxonomy tree with the given name has already been defined
-   * 
-   * @param repository The name of repository
-   * @param taxonomyName The name of the taxonomy
-   *
-   * @throws RepositoryException if the taxonomy name could not be checked
-   */
-  @Deprecated
-  public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException;
-  
   /**
    * Checks if a taxonomy tree with the given name has already been defined
    * @param taxonomyName The name of the taxonomy
@@ -182,39 +124,6 @@ public interface TaxonomyService {
                                              TaxonomyNodeAlreadyExistsException;
   
   /**
-   * Adds a new taxonomy node at the given location
-   * 
-   * @param repository The name of repository
-   * @param workspace The name of the workspace
-   * @param parentPath The place where the taxonomy node will be added
-   * @param taxoNodeName The name of taxonomy node
-   * @param creator The name of the user creating this node
-   *
-   * @throws TaxonomyNodeAlreadyExistsException if a taxonomy node with the same
-   *           name has already been added
-   * @throws RepositoryException if the taxonomy node could not be added
-   */
-  @Deprecated
-  public void addTaxonomyNode(String repository,
-                              String workspace,
-                              String parentPath,
-                              String taxoNodeName,
-                              String creator) throws RepositoryException,
-                                             TaxonomyNodeAlreadyExistsException;  
-
-  /**
-   * Removes the taxonomy node located at the given absolute path
-   *
-   * @param repository The name of the repository
-   * @param workspace The name of the workspace
-   * @param absPath The absolute path of the taxonomy node to remove
-   * @throws RepositoryException if the taxonomy node could not be removed
-   */
-  @Deprecated
-  public void removeTaxonomyNode(String repository, String workspace, String absPath)
-      throws RepositoryException;
-  
-  /**
    * Removes the taxonomy node located at the given absolute path
    *
    * @param workspace The name of the workspace
@@ -224,23 +133,6 @@ public interface TaxonomyService {
   public void removeTaxonomyNode(String workspace, String absPath)
       throws RepositoryException;  
 
-  /**
-   * Copies or cuts the taxonomy node from source path to destination path
-   * <p>
-   * The parameter type indicates if the node must be cut or copied
-   *
-   * @param repository The name of the repository
-   * @param workspace The name of the workspace
-   * @param srcPath The source path of this taxonomy
-   * @param destPath The destination path of the taxonomy
-   * @param type If type is equal to "cut", the process will be cut If type is
-   *          equal to "copy", the process will be copied
-   * @throws RepositoryException if the taxonomy node could not be moved
-   */
-  @Deprecated
-  public void moveTaxonomyNode(String repository, String workspace, String srcPath,
-      String destPath, String type) throws RepositoryException;
-  
   /**
    * Copies or cuts the taxonomy node from source path to destination path
    * <p>
@@ -385,6 +277,10 @@ public interface TaxonomyService {
   public void addCategory(Node node, String taxonomyName, String categoryPath, boolean system)
       throws RepositoryException;
 
+  /**
+   * Get default user permission of Taxonomy tree
+   * @return Map<String, String[]>
+   */
   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission();
   
   /**
@@ -398,16 +294,6 @@ public interface TaxonomyService {
    * @param plugin The plugin to add
    */
   public void addTaxonomyPlugin(ComponentPlugin plugin);
-
-  /**
-   * Initial all taxonomy plugins that have been already configured in xml files
-   *
-   * @param repository The name of repository
-   * @see TaxonomyPlugin
-   * @throws Exception
-   */
-  @Deprecated
-  public void init(String repository) throws Exception;
   
   /**
    * Initial all taxonomy plugins that have been already configured in xml files

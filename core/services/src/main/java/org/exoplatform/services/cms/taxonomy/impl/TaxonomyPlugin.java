@@ -29,8 +29,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -114,11 +112,6 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
       treeName = nameParam.getValue();
     }
     dmsConfiguration_ = dmsConfiguration;
-  }
-
-  @Deprecated
-  public void init(String repository) throws Exception {
-    importPredefineTaxonomies();
   }
   
   public void init() throws Exception {
@@ -256,9 +249,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
 
   private void addAction(ActionConfig.TaxonomyAction action, Node srcNode)
       throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
-
     Map<String, JcrInputProperty> sortedInputs = new HashMap<String, JcrInputProperty>();
     JcrInputProperty jcrInputName = new JcrInputProperty();
     jcrInputName.setJcrPath("/node/exo:name");

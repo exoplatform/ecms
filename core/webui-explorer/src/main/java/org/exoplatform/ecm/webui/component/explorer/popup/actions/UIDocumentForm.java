@@ -419,7 +419,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       homeNode = documentNode.getParent();
       nodeType = documentNode.getPrimaryNodeType().getName();
       if(documentNode.isLocked()) {
-        documentNode.getSession().addLockToken(LockUtil.getLockToken(documentNode));
+        String lockToken = LockUtil.getLockToken(documentNode);
+        if(lockToken != null && !lockToken.isEmpty()) {
+          documentNode.getSession().addLockToken(lockToken);
+        }
       }
     }
     try {

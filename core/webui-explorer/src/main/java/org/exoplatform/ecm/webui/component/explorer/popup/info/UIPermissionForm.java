@@ -49,7 +49,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL Author : nqhungvn
@@ -261,7 +260,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
 
       if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
         LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
-        List<Node> symlinks = linkManager.getAllLinks(currentNode, SYMLINK, uiExplorer.getRepositoryName());
+        List<Node> symlinks = linkManager.getAllLinks(currentNode, SYMLINK);
         for (Node symlink : symlinks) {
           try {
             linkManager.updateLink(symlink, currentNode);

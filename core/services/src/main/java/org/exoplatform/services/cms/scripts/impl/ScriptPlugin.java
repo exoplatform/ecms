@@ -26,7 +26,6 @@ import org.exoplatform.container.xml.ValueParam;
 
 public class ScriptPlugin extends BaseComponentPlugin{
 
-  private String name;
   private String description;
   private InitParams params_ ;
 
@@ -41,13 +40,6 @@ public class ScriptPlugin extends BaseComponentPlugin{
     ValueParam param = params_.getValueParam("autoInitInNewRepository") ;
     if(param == null) return true ;
     return Boolean.parseBoolean(param.getValue()) ;
-  }
-
-  @Deprecated
-  public String getInitRepository() {
-    ValueParam param = params_.getValueParam("repository") ;
-    if(param == null) return null ;
-    return param.getValue() ;
   }
 
   public String getPredefineScriptsLocation() {

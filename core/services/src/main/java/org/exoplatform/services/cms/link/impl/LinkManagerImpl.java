@@ -319,11 +319,6 @@ public class LinkManagerImpl implements LinkManager {
     }
   }
 
-  @Deprecated
-  public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception {
-    return getAllLinks(targetNode, linkType);
-  }
-
   /**
    * {@inheritDoc}
    */

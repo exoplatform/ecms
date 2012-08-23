@@ -134,16 +134,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     return categoryNameLength_;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    for (TaxonomyPlugin plugin : plugins_) {
-      plugin.init(repository);
-    }
-  }
-
   public void init() throws Exception {
     for (TaxonomyPlugin plugin : plugins_) {
       plugin.init();
@@ -159,25 +149,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllTaxonomyTrees(String repository) throws RepositoryException {
-    return getAllTaxonomyTrees(repository, false);
-  }
-
   public List<Node> getAllTaxonomyTrees() throws RepositoryException {
     return getAllTaxonomyTrees(false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllTaxonomyTrees(String repository, boolean system)
-      throws RepositoryException {
-    return getAllTaxonomyTrees(system);
   }
 
   /**
@@ -213,25 +186,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node getTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
-    return getTaxonomyTree(repository, taxonomyName, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Node getTaxonomyTree(String taxonomyName) throws RepositoryException {
     return getTaxonomyTree(taxonomyName, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Node getTaxonomyTree(String repository, String taxonomyName, boolean system)
-      throws RepositoryException {
-    return getTaxonomyTree(taxonomyName, system);
   }
 
   /**
@@ -269,14 +225,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       //ignore this exception
     }
     return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
-    return hasTaxonomyTree(taxonomyName);
   }
 
   /**
@@ -368,30 +316,12 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addTaxonomyNode(String repository, String workspace, String parentPath, String taxoNodeName,
-      String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
-    addTaxonomyNode(workspace, parentPath, taxoNodeName, creatorUser);
-  }
-
   private boolean containsUser(List<AccessControlEntry> entries, String userName) {
     if (userName == null) return false;
     for (AccessControlEntry entry : entries)
       if (userName.equals(entry.getIdentity()))
           return true;
     return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTaxonomyNode(String repository, String workspace, String absPath)
-      throws RepositoryException {
-    removeTaxonomyNode(workspace, absPath);
   }
 
   /**
@@ -572,15 +502,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (listCate != null && listCate.size() > 0)
       return true;
     return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void moveTaxonomyNode(String repository, String workspace, String srcPath,
-      String destPath, String type) throws RepositoryException {
-    moveTaxonomyNode(workspace, srcPath, destPath, type);
   }
 
   public void moveTaxonomyNode(String workspace, String srcPath, String destPath, String type) throws RepositoryException {

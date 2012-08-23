@@ -44,12 +44,10 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   private static final String RELATION_PROP = "exo:relation";
 
   private RepositoryService repositoryService_;
-  private NodeHierarchyCreator nodeHierarchyCreator_;
   private static final Log LOG  = ExoLogger.getLogger(RelationsServiceImpl.class.getName());
   public RelationsServiceImpl(RepositoryService repositoryService,
       NodeHierarchyCreator nodeHierarchyCreator, InitParams params) {
     repositoryService_ = repositoryService;
-    nodeHierarchyCreator_ = nodeHierarchyCreator;
   }
 
   /**
@@ -86,14 +84,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getRelations(Node node, String repository, SessionProvider provider) {
-    return getRelations(node, provider);
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public List<Node> getRelations(Node node, SessionProvider provider) {
     List<Node> rels = new ArrayList<Node>();
     try {
@@ -113,14 +103,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     return rels ;
   }  
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeRelation(Node node, String relationPath, String repository) throws Exception {
-    removeRelation(node, relationPath);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -148,14 +130,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     }
   }  
 
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addRelation(Node node, String relationPath,String workspace,String repository) throws Exception {
-    addRelation(node, relationPath, workspace);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -209,14 +183,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void stop() {
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    init();
   }
   
   /**

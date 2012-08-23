@@ -233,20 +233,6 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     importPredefineTaxonomies();
   }
 
-  /**
-   * Inits the.
-   *
-   * @param repository the repository
-   *
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public void init(String repository) throws Exception {
-    if (!autoCreateInNewRepository_)
-      return;
-    importPredefineTaxonomies();
-  }
-
   /* (non-Javadoc)
    * @see org.exoplatform.services.deployment.DeploymentPlugin#getName()
    */

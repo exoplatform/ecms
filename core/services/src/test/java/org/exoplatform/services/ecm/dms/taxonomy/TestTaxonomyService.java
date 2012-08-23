@@ -108,7 +108,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
    */
   @Test
   public void testGetTaxonomyTree1() throws Exception {
-    Node systemTree = taxonomyService.getTaxonomyTree(REPO_NAME, "System");
+    Node systemTree = taxonomyService.getTaxonomyTree("System");
     assertNotNull(systemTree);
   }
 
@@ -149,6 +149,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
       taxonomyService.addTaxonomyTree(docTree);
       taxonomyService.addTaxonomyTree(docTree);
     } catch(TaxonomyAlreadyExistsException e) {
+      System.out.println("The taxonomy tree with name '" +docTree.getName()+ "' already exist");
     }
   }
 
@@ -179,7 +180,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllTaxonomyTrees2() throws Exception {
-    assertEquals(1, taxonomyService.getAllTaxonomyTrees(REPO_NAME).size());
+    assertEquals(1, taxonomyService.getAllTaxonomyTrees().size());
   }
 
   /**
@@ -220,7 +221,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Europa", "root");
     Node championLeague = (Node)session.getItem("/MyDocuments/Europa");
     Node europa = (Node)session.getItem("/MyDocuments/Champion Leage");
-    int totalTree1 = taxonomyService.getAllTaxonomyTrees(REPO_NAME).size();
+    int totalTree1 = taxonomyService.getAllTaxonomyTrees().size();
     taxonomyService.addTaxonomyTree(championLeague);
     taxonomyService.addTaxonomyTree(europa);
     int totalTree2 = taxonomyService.getAllTaxonomyTrees(true).size();
@@ -275,6 +276,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
       taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Sport", "root");
       taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Sport", "root");
     } catch (TaxonomyNodeAlreadyExistsException e) {
+      System.out.println("The category with name 'MyDocuments' already exist");
     }
   }
 
@@ -290,7 +292,7 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     session.getRootNode().addNode("MyDocuments");
     session.save();
     taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Tennis", "root");
-    taxonomyService.removeTaxonomyNode(REPO_NAME, COLLABORATION_WS, "/MyDocuments/Tennis");
+    taxonomyService.removeTaxonomyNode(COLLABORATION_WS, "/MyDocuments/Tennis");
     assertFalse(session.itemExists("/MyDocuments/Tennis"));
   }
 
@@ -307,8 +309,8 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     session.save();
     taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Serie", "root");
     taxonomyService.addTaxonomyNode(COLLABORATION_WS, "/MyDocuments", "Budesliga", "root");
-    taxonomyService.moveTaxonomyNode(REPO_NAME, COLLABORATION_WS, "/MyDocuments/Serie", "/Serie", "cut");
-    taxonomyService.moveTaxonomyNode(REPO_NAME, COLLABORATION_WS, "/MyDocuments/Budesliga", "/Budesliga", "copy");
+    taxonomyService.moveTaxonomyNode(COLLABORATION_WS, "/MyDocuments/Serie", "/Serie", "cut");
+    taxonomyService.moveTaxonomyNode(COLLABORATION_WS, "/MyDocuments/Budesliga", "/Budesliga", "copy");
     assertFalse(session.itemExists("/MyDocuments/Serie"));
     assertTrue(session.itemExists("/Serie"));
     assertTrue(session.itemExists("/Budesliga"));
@@ -501,6 +503,4 @@ public class TestTaxonomyService extends BaseWCMTestCase {
     }
   }
 }
-
-
 
