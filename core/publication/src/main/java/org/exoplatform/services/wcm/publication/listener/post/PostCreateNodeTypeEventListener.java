@@ -46,6 +46,9 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
   private TaxonomyService taxonomyService;
 
   private ActionServiceContainer actionServiceContainer;
+  
+  /** Node Type: exo:taxonomyAction **/
+  private static final String TAXONOMY_ACTION = "exo:taxonomyAction";
 
   /**
    * Instantiates a new post create content event listener.
@@ -63,24 +66,33 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
    */
   public void onEvent(Event<CmsService, String> event) throws Exception {
     composer.cleanTemplates();
-
-    // TODO: Hardcode for now, we need to improve the way to update affectedNodeTypeNames
+    
     this.taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
     this.actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
     String nodetypeName = event.getData();
     List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees();
     for (Node taxonomyTree : taxonomyTrees) {
-      Node action = actionServiceContainer.getAction(taxonomyTree, "taxonomyAction");
-      Session session = action.getSession();
-      ValueFactory valueFactory = session.getValueFactory();
-      Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
-      List<Value> tmpValues = new ArrayList<Value>();
-      for (Value value : values) {
-        tmpValues.add(value);
-      }
-      tmpValues.add(valueFactory.createValue(nodetypeName));
-      action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
-      session.save();
+      // Get node whose type is exo:taxonomyAction
+    	Node action = null;
+    	List<Node> actions = actionServiceContainer.getActions(taxonomyTree);
+    	for (Node taxonomyAction : actions) {
+    		if (taxonomyAction.isNodeType(TAXONOMY_ACTION)) {
+    			action = taxonomyAction;
+    			break;
+    		}
+    	}
+    	if(action != null) {
+    		Session session = action.getSession();
+    		ValueFactory valueFactory = session.getValueFactory();
+    		Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
+    		List<Value> tmpValues = new ArrayList<Value>();    		
+  			for (Value value : values) {
+  				tmpValues.add(value);
+  			}
+  			tmpValues.add(valueFactory.createValue(nodetypeName));
+  			action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));    
+    		session.save();
+    	}
     }
   }
 }
