@@ -24,18 +24,24 @@ import java.util.Set;
 
 import javax.jcr.Node;
 
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
 
 /**
  * Created by The eXo Platform SAS
@@ -43,14 +49,20 @@ import org.exoplatform.webui.form.UIForm;
  *          exo@exoplatform.com
  * Feb 2, 2010
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, 
+@ComponentConfig(lifecycle = Lifecycle.class, 
                  template = "app:/groovy/authoring/UIDashboardForm.gtmpl", 
                  events = {
     @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
     @EventConfig(listeners = UIDashboardForm.RefreshActionListener.class) })
-public class UIDashboardForm extends UIForm {
-
-  public UIDashboardForm() {
+public class UIDashboardForm extends UIContainer {
+  
+  private int pageSize_ = 10;
+  
+  public UIDashboardForm() throws Exception {
+    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.mydraft");
+    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.waitingapproval");
+    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.publishedtomorrow");
+    refreshData();
   }
 
   public List<Node> getContents(String fromstate) {
@@ -68,13 +80,13 @@ public class UIDashboardForm extends UIForm {
     String lang = Util.getPortalRequestContext().getLocale().getLanguage();
     List<Node> nodes = new ArrayList<Node>();
     List<Node> temp = new ArrayList<Node>();
-    try {    	
+    try {     
       nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
       Set<String> uuidList = new HashSet<String>();
       for(Node node : nodes) {
         String currentState = null;
         if(node.hasProperty("publication:currentState"))
-          currentState = node.getProperty("publication:currentState").getString();    	
+          currentState = node.getProperty("publication:currentState").getString();      
         if(currentState == null || !currentState.equals("published")) {
           if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node) && 
             !uuidList.contains(node.getSession().getWorkspace().getName() + node.getUUID())) {
@@ -88,6 +100,37 @@ public class UIDashboardForm extends UIForm {
     }
     return temp;
   }
+  
+  private void refreshData() {
+    List<UIDashBoardColumn> children = new ArrayList<UIDashBoardColumn>();
+    for (UIComponent component : getChildren()) {
+      if (component instanceof UIDashBoardColumn) {
+        children.add((UIDashBoardColumn)component);
+      }
+    }
+    ListAccess<NodeLocation> draftNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
+        NodeLocation.getLocationsByNodeList(getContents("draft")));
+    children.get(0).getUIPageIterator().setPageList(
+    new LazyPageList<NodeLocation>(draftNodes,  pageSize_));
+    
+    ListAccess<NodeLocation> waitingNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
+    NodeLocation.getLocationsByNodeList(getContents("pending", "approved")));
+    children.get(1).getUIPageIterator().setPageList(
+    new LazyPageList<NodeLocation>(waitingNodes, pageSize_));
+    
+    ListAccess<NodeLocation> publishedNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
+    NodeLocation.getLocationsByNodeList(getContents("staged", null, "2")));
+    children.get(2).getUIPageIterator().setPageList(
+    new LazyPageList<NodeLocation>(publishedNodes, pageSize_));
+
+  }
+  
+  public void processRender(WebuiRequestContext context) throws Exception
+  {
+    refreshData();
+    super.processRender(context);
+  }
+
 
   /**
    * The listener interface for receiving ShowDocumentAction events.
@@ -109,10 +152,10 @@ public class UIDashboardForm extends UIForm {
       PortalRequestContext context = Util.getPortalRequestContext();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
       HashMap<String, String> map = new HashMap<String, String>();
-    map.put("repository", "repository");
-    map.put("drive", "collaboration");
-    map.put("path", path);
-    context.setAttribute("jcrexplorer-show-document", map);
+      map.put("repository", "repository");
+      map.put("drive", "collaboration");
+      map.put("path", path);
+      context.setAttribute("jcrexplorer-show-document", map);
       Utils.updatePortal((PortletRequestContext) event.getRequestContext());
 
     }
@@ -136,7 +179,7 @@ public class UIDashboardForm extends UIForm {
        */
     public void execute(Event<UIDashboardForm> event) throws Exception {
       UIDashboardForm src = event.getSource();
-        Utils.updatePortal((PortletRequestContext) event.getRequestContext());
+      Utils.updatePortal((PortletRequestContext) event.getRequestContext());
     }
   }
 
