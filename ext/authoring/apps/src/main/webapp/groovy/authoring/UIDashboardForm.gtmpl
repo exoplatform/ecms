@@ -9,13 +9,29 @@ def escapeChar = '%' as char
 }
 
 .UIAuthoringDashboard a {
-color: #333;
-text-decoration:none;
+  color: #333;
+  text-decoration:none;
+}
+
+.UIAuthoringDashboard .Refresh{
+  background-color: #ee0000;
+  color: #fff;
+  min-width: 25px;
+  float: left;
+  text-align:center;
+  font-weight: bold;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin-top: 4px;
+  line-height: 16px;
+  margin-right: 4px;
 }
 
 .UIAuthoringDashboard .Refresh a {
-color: #ccc;
+  color: white;
+  text-decoration:none;
 }
+
 
 .UIAuthoringDashboard .AlignLeft {
 	float: left;
@@ -76,99 +92,9 @@ color: #888;
 }
 
 </style>
-<div class="UIAuthoringDashboard">
-	<% uiform.begin(); %>
-	<div>
-      <%
-        def nodes = uicomponent.getContents("draft");
-      %>
-     <div class="ClearFix">
-     <div class="AlignLeft">
-        <div class="Header ClearFix">
-		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.mydraft")%></div>
-		      <% if (nodes.size()>0) { %>
-		        <div class="Total"><%=nodes.size()%></div>
-		      <% } %>
-					
-        </div>
-
-        <div class="Elements">
-        <%
-          for (Node node:nodes) {
-            def path = Text.escape(node.getPath(),escapeChar, true);
-            def name = node.getName();            
-            if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = ContentReader.getEscapeHtmlContent(name);
-          %>
-            <div class="Element"><a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/></div>
-          <%
-          }
-          %>
-          <% if (nodes.size()==0) { %>
-            <div class="NoContent"><%=_ctx.appRes("UIDashboardForm.label.nocontent")%></div>
-          <% } %>
-        </div>
-     </div>
-      <%
-        nodes = uicomponent.getContents("pending", "approved");
-      %>
-     <div class="AlignLeft">
-        <div class="Header ClearFix">
-		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.waitingapproval")%></div>
-		      <% if (nodes.size()>0) { %>
-		        <div class="Total"><%=nodes.size()%></div>
-		      <% } %>
-					
-        </div>
-
-        <div class="Elements">
-        <%
-          for (Node node:nodes) {
-            def path = Text.escape(node.getPath(),escapeChar, true);
-            def name = node.getName();            
-            if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = ContentReader.getEscapeHtmlContent(name);
-          %>
-            <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
-          <%
-          }
-          %>
-          <% if (nodes.size()==0) { %>
-            <div class="NoContent"><%=_ctx.appRes("UIDashboardForm.label.nocontent")%></div>
-          <% } %>
-        </div>
-     </div>
-      <%
-        nodes = uicomponent.getContents("staged", null, "2");
-      %>
-     <div class="AlignLeft">
-        <div class="Header ClearFix">
-		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.publishedtomorrow")%></div>
-		      <% if (nodes.size()>0) { %>
-		        <div class="Total"><%=nodes.size()%></div>
-		      <% } %>
-					
-        </div>
-
-        <div class="Elements">
-        <%
-          for (Node node:nodes) {
-            def path = Text.escape(node.getPath(),escapeChar, true);
-            def name = node.getName();            
-            if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
-						name = ContentReader.getEscapeHtmlContent(name);
-          %>
-            <a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/>
-          <%
-          }
-          %>
-          <% if (nodes.size()==0) { %>
-            <div class="NoContent"><%=_ctx.appRes("UIDashboardForm.label.nocontent")%></div>
-          <% } %>
-        </div>
-     </div>
-	 </div>
-     <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" title="refresh">refresh</a></div><br/>
-	</div>
-	<% uiform.end(); %>
+<div class="UIAuthoringDashboard" id="$uicomponent.id">
+  <div class="ClearFix">
+   <% uicomponent.renderChildren(); %>
+  </div>
+  <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" title="refresh">refresh</a></div><br/>
 </div>
