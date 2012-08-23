@@ -26,6 +26,9 @@ import java.util.Properties;
 import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+
+import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.impl.TemplateServiceImpl;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -59,10 +62,12 @@ public class NodeTypeTemplateMigrationService implements Startable{
   private RepositoryService repoService_;
   
   private TemplateService templateService_;
+  private MetadataService metadataService_;
   
-  public NodeTypeTemplateMigrationService(RepositoryService repositoryService, TemplateService templateService) {
+  public NodeTypeTemplateMigrationService(RepositoryService repositoryService, TemplateService templateService, MetadataService metadataService) {
     repoService_ = repositoryService;
     templateService_ = templateService;
+    metadataService_ = metadataService;
   }
   
   public void start() {
@@ -85,8 +90,11 @@ public class NodeTypeTemplateMigrationService implements Startable{
       ManageableRepository repository = repoService_.getCurrentRepository(); 
       Set<String> migratedNodeTypeSet = new HashSet<String>();
       List<Node> removedNodes = new ArrayList<Node>();
+      List<String> removedMetadataNodes = new ArrayList<String>();
   		
       List<String> configuredNodeTypeSet = templateService_.getAllDocumentNodeTypes(repository.getConfiguration().getName());
+      List<String> configuredMetadataNodeTypeSet = metadataService_.getMetadataList(repository.getConfiguration().getName());
+      
       for (String migratedNodeType : migratedNodeTypes.split(",")) {
         migratedNodeTypeSet.add(migratedNodeType.trim());
       }      
@@ -99,6 +107,11 @@ public class NodeTypeTemplateMigrationService implements Startable{
           removedNodes.add(templateNode);
         }
       }      
+      // get all metadata nodes that need to be removed
+      for (String migratedNodeType : migratedNodeTypeSet) {
+				if(configuredMetadataNodeTypeSet.contains(migratedNodeType))
+					removedMetadataNodes.add(migratedNodeType);
+			}
       // remove all old node type nodes
       for (Node removedNode : removedNodes) {
 	      try {
@@ -110,8 +123,13 @@ public class NodeTypeTemplateMigrationService implements Startable{
 	        }
 	      }
       }
+      // remove all old metadata node type
+      for (String removedMetadaNode : removedMetadataNodes) {
+      	metadataService_.removeMetadata(removedMetadaNode, repository.getConfiguration().getName());
+			}
       // reinitialize new templates
       ((TemplateServiceImpl)templateService_).start();
+      ((MetadataServiceImpl)metadataService_).start();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) LOG.error("An unexpected problem occurs when migrating templates to new structure", e);
     } finally {
