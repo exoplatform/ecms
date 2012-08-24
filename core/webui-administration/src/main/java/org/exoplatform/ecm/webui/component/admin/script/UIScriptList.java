@@ -56,16 +56,14 @@ import org.exoplatform.webui.exception.MessageException;
 
 public class UIScriptList extends UIComponentDecorator {
 
-  private UIPageIterator uiPageIterator_ ;
-  final static public String ECMScript_EDIT = "ECMScriptPopupWindow" ;
-  final static public String CBScript_EDIT = "BCScriptPopupWindow";
+  private UIPageIterator uiPageIterator_;
+  final static public String ECMScript_EDIT = "ECMScriptPopupWindow";
 
   public UIScriptList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "ScriptListIterator");
-    setUIComponent(uiPageIterator_) ;
+    setUIComponent(uiPageIterator_);
   }
 
-  @SuppressWarnings("unchecked")
   public void updateGrid(List<ScriptData> scriptData, int currentPage) throws Exception {
     Collections.sort(scriptData, new ScriptComparator());
     ListAccess<ScriptData> scriptList = new ListAccessImpl<ScriptData>(ScriptData.class, scriptData);
@@ -77,57 +75,51 @@ public class UIScriptList extends UIComponentDecorator {
       uiPageIterator_.setCurrentPage(currentPage);
   }
 
-  public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
+  public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getScriptList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
+  public List getScriptList() throws Exception { return uiPageIterator_.getCurrentPageData(); }
 
   public String getScriptCategory() throws Exception {
-    UIComponent parent = getParent() ;
-    ScriptService scriptService =  getApplicationComponent(ScriptService.class) ;
-    Node script = null ;
+    UIComponent parent = getParent();
+    ScriptService scriptService =  getApplicationComponent(ScriptService.class);
+    Node script = null;
     if(parent instanceof UIECMScripts) {
-      UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
+      UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class);
       String categoryName =
-        filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
+        filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue();
       script = scriptService.getECMScriptHome(WCMCoreUtils.getSystemSessionProvider()).getNode(categoryName);
-    } else {
-      script = scriptService.getCBScriptHome(WCMCoreUtils.getSystemSessionProvider());
-    }
-    String basePath = scriptService.getBaseScriptPath() + "/" ;
-    return script.getPath().substring(basePath.length()) ;
+    } 
+    String basePath = scriptService.getBaseScriptPath() + "/";
+    return script.getPath().substring(basePath.length());
   }
 
   public void refresh(int currentPage) throws Exception {
     UIScriptManager sManager = getAncestorOfType(UIScriptManager.class);
-    UIComponent parent = getParent();
     sManager.getChild(UIECMScripts.class).refresh(currentPage);
   }
 
-  public String[] getActions() {return new String[]{"AddNew"} ;}
+  public String[] getActions() {return new String[]{"AddNew"};}
 
   public Node getScriptNode(String nodeName) throws Exception {
-    UIComponent parent = getParent() ;
-    ScriptService scriptService =  getApplicationComponent(ScriptService.class) ;
-    Node script = null  ;
+    UIComponent parent = getParent();
+    ScriptService scriptService =  getApplicationComponent(ScriptService.class);
+    Node script = null ;
     if(parent instanceof UIECMScripts) {
-      UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
+      UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class);
       String categoryName =
-        filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
+        filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue();
       Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider())
                                    .getNode(categoryName);
-      script = category.getNode(nodeName) ;
-    } else {
-      Node cbScript = scriptService.getCBScriptHome(WCMCoreUtils.getSystemSessionProvider());
-      script = cbScript.getNode(nodeName) ;
-    }
-    return script ;
+      script = category.getNode(nodeName);
+    } 
+    return script;
   }
 
-  static public class ScriptComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
-      String name1 = ((ScriptData) o1).getName() ;
-      String name2 = ((ScriptData) o2).getName() ;
-      return name1.compareToIgnoreCase(name2) ;
+  static public class ScriptComparator implements Comparator<ScriptData> {
+    public int compare(ScriptData o1, ScriptData o2) throws ClassCastException {
+      String name1 = o1.getName();
+      String name2 = o2.getName();
+      return name1.compareToIgnoreCase(name2);
     }
   }
 
@@ -164,36 +156,36 @@ public class UIScriptList extends UIComponentDecorator {
 
   static public class DeleteActionListener extends EventListener<UIScriptList> {
     public void execute(Event<UIScriptList> event) throws Exception {
-      UIScriptList uiScriptList = event.getSource() ;
-      ScriptService scriptService =  uiScriptList.getApplicationComponent(ScriptService.class) ;
-      String scriptName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String namePrefix = uiScriptList.getScriptCategory() ;
+      UIScriptList uiScriptList = event.getSource();
+      ScriptService scriptService =  uiScriptList.getApplicationComponent(ScriptService.class);
+      String scriptName = event.getRequestContext().getRequestParameter(OBJECTID);
+      String namePrefix = uiScriptList.getScriptCategory();
       try {
         scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getUserSessionProvider());
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
-                                                          null, ApplicationMessage.WARNING)) ;
+                                                          null, ApplicationMessage.WARNING));
       }
       uiScriptList.refresh(uiScriptList.uiPageIterator_.getCurrentPage());
-      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class) ;
+      UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class);
       if(uiScriptList.getParent() instanceof UIECMScripts) {
-        uiManager.setRenderedChild(UIECMScripts.class) ;
+        uiManager.setRenderedChild(UIECMScripts.class);
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList.getParent()) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList.getParent());
     }
   }
   public static class ScriptData {
-    private String name ;
-    private String path ;
-    private String baseVersion ;
+    private String name;
+    private String path;
+    private String baseVersion;
 
     public ScriptData(String scriptName, String scriptParth, String version) {
-      name = scriptName ;
-      path = scriptParth ;
-      baseVersion = version ;
+      name = scriptName;
+      path = scriptParth;
+      baseVersion = version;
     }
-    public String getName() { return name ; }
-    public String getPath() { return path ; }
-    public String getBaseVersion() { return baseVersion ; }
+    public String getName() { return name; }
+    public String getPath() { return path; }
+    public String getBaseVersion() { return baseVersion; }
   }
 }

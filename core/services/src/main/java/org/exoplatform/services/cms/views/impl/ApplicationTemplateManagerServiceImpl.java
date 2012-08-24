@@ -103,23 +103,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public List<Node> getTemplatesByApplication(String repository, String portletName,
-      SessionProvider provider) throws Exception {
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public List<Node> getTemplatesByApplication(String portletName,
-      SessionProvider provider) throws Exception {
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public void addTemplate(Node portletTemplateHome, PortletTemplateConfig config) throws Exception {
     Node category = null;
     try {
@@ -143,24 +126,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   }
 
   /**
-   * Gets the application template home.
-   * @param repository        String
-   *                          The name of repository
-   * @param portletName       String
-   *                          The name of portlet
-   * @param provider          SessionProvider
-   * @see SessionProvider
-   * @return the application template home
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public Node getApplicationTemplateHome(String repository,
-                                         String portletName,
-                                         SessionProvider provider) throws Exception {
-    return getApplicationTemplateHome(portletName, provider);
-  }
-
-  /**
    * {@inheritDoc}
    */
   public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception {
@@ -178,28 +143,10 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node getTemplateByName(String repository, String portletName, String category,
-      String templateName, SessionProvider sessionProvider) throws Exception {
-    return getTemplateByName(portletName, category, templateName, sessionProvider);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Node getTemplateByName(String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
     return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getTemplatesByCategory(String repository, String portletName, String category,
-      SessionProvider sessionProvider) throws Exception {
-    return getTemplatesByCategory(portletName, category, sessionProvider);
   }
 
   /**
@@ -220,28 +167,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node getTemplateByPath(String repository,
-                                String templatePath,
-                                SessionProvider sessionProvider) throws Exception {
-    return getTemplateByPath(templatePath, sessionProvider);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Node getTemplateByPath(String templatePath, SessionProvider sessionProvider) throws Exception {
     Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
     return (Node) basedTemplateNode.getSession().getItem(templatePath);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTemplate(String repository, String portletName, String category,
-      String templateName, SessionProvider sessionProvider) throws Exception {
-    removeTemplate(portletName, category, templateName, sessionProvider);
   }
 
   /**
@@ -273,7 +201,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Node basedTemplateHome = (Node)session.getItem(basedApplicationTemplatesPath);
     return basedTemplateHome;
   }
-
 
   /**
    * Import predefined template to db.
@@ -347,9 +274,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       }
     }
     sessionProvider.close();
-//    //clear all template plugin to optimize memomry
-//    portletTemplatePlugins.clear();
-//    portletTemplatePlugins = null;
   }
 
   /**

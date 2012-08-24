@@ -85,13 +85,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     return;
   }
 
-  @Deprecated
-  public void init(String repository) throws Exception {
-    if (!autoCreateInNewRepository_)
-      return;
-    importPredefineViews();
-  }
-
   @SuppressWarnings("unchecked")
   private void importPredefineViews() throws Exception {
     configuredTemplate_ = new HashSet<String>();

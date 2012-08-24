@@ -135,20 +135,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void init(String repository) throws Exception  {
-    configuredTemplates_ = new HashSet<String>();
-    configuredViews_ = new HashSet<String>();
-    for(ManageViewPlugin plugin : plugins_) {
-      plugin.init(repository) ;
-      configuredTemplates_.addAll(plugin.getConfiguredTemplates());
-      configuredViews_.addAll(plugin.getConfiguredViews());
-    }
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public void init() throws Exception  {
     configuredTemplates_ = new HashSet<String>();
     configuredViews_ = new HashSet<String>();
@@ -176,26 +162,10 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node getViewHome(String repository) throws Exception {
-    return getViewHome();
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public Node getViewHome() throws Exception {
     String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
     return (Node) getSession().getItem(viewsPath);
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<ViewConfig> getAllViews(String repository) throws Exception {
-    return getAllViews();
-  }
   
   /**
    * {@inheritDoc}
@@ -230,14 +200,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     }
     return viewList ;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public boolean hasView(String name, String repository) throws Exception {
-    return hasView(name);
-  }
   
   /**
    * {@inheritDoc}
@@ -249,14 +211,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.logout();
     return b;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Node getViewByName(String name, String repository, SessionProvider provider) throws Exception {
-    return getViewByName(name, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -269,18 +223,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
       return null;
     }
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void addView(String name,
-                      String permissions,
-                      String template,
-                      List<?> tabs,
-                      String repository) throws Exception {
-    addView(name, permissions, template, tabs);
-  }
   
   /**
    * {@inheritDoc}
@@ -317,15 +259,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.logout();
   }
   
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeView(String viewName, String repository) throws Exception {
-    removeView(viewName);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -353,14 +286,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     }
     tab.setProperty("exo:buttons", buttons);
     view.save() ;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public Node getTemplateHome(String homeAlias, String repository,SessionProvider provider) throws Exception{
-    return getTemplateHome(homeAlias, provider);
   }
   
   /**
@@ -410,14 +335,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
   }  
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public List<Node> getAllTemplates(String homeAlias, String repository,SessionProvider provider) throws Exception {
-    return getAllTemplates(homeAlias, provider);
-  }
   
   /**
    * {@inheritDoc}
@@ -436,27 +353,10 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public Node getTemplate(String path, String repository,SessionProvider provider) throws Exception{
-    return (Node)getSession(provider).getItem(path) ;
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
   public Node getTemplate(String path, SessionProvider provider) throws Exception{
     return (Node)getSession(provider).getItem(path) ;
   }  
 
-
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public String addTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
-    return addTemplate(name, content, homeTemplate);
-  }
-  
   /**
    * {@inheritDoc}
    */
@@ -487,14 +387,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.save();
     return templatePath;
   }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public String updateTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
-    return updateTemplate(name, content, homeTemplate);
-  }
 
   /**
    * {@inheritDoc}
@@ -523,14 +415,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
                                                          new String[] { "*" });
     session.save();
     return templatePath;
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Deprecated
-  public void removeTemplate(String templatePath, String repository) throws Exception {
-    removeTemplate(templatePath);
   }
   
   /**

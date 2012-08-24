@@ -69,10 +69,6 @@ public class TestManageViewService extends BaseWCMTestCase {
 
   private String                      templatesQuery;
 
-  private String                      templatesScripts;
-
-  private String                      templatesDetail;
-  
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
@@ -83,8 +79,6 @@ public class TestManageViewService extends BaseWCMTestCase {
     templatesPathCb = nodeHierarchyCreator.getJcrPath(BasePath.CB_PATH_TEMPLATES);
     System.out.println("templatesPathCb: " + templatesPathCb);
     templatesQuery = nodeHierarchyCreator.getJcrPath(BasePath.CB_QUERY_TEMPLATES);
-    templatesScripts = nodeHierarchyCreator.getJcrPath(BasePath.CB_SCRIPT_TEMPLATES);
-    templatesDetail = nodeHierarchyCreator.getJcrPath(BasePath.CB_DETAIL_VIEW_TEMPLATES);
   }
   
   @BeforeMethod
@@ -127,7 +121,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testInit() throws Exception {
-    manageViewService.init(REPO_NAME);
+    manageViewService.init();
     checkInitData();
   }
 
@@ -155,7 +149,7 @@ public class TestManageViewService extends BaseWCMTestCase {
     List<Tab> lstTab = new ArrayList<Tab>();
     lstTab.add(tab1);
     lstTab.add(tab2);
-    manageViewService.addView(name, permission, template, lstTab, REPO_NAME);
+    manageViewService.addView(name, permission, template, lstTab);
     Node templateTest = (Node)sessionDMS.getItem(viewsPath + "/" + name);
 
     assertEquals(VIEW_NODETYPE, templateTest.getPrimaryNodeType().getName());
@@ -178,7 +172,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testGetViewByName() throws Exception {
-    Node adminView = manageViewService.getViewByName("admin-view", REPO_NAME, WCMCoreUtils.getSystemSessionProvider());
+    Node adminView = manageViewService.getViewByName("admin-view", WCMCoreUtils.getSystemSessionProvider());
     assertEquals(VIEW_NODETYPE, adminView.getPrimaryNodeType().getName());
   }
   /**
@@ -198,7 +192,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testRemoveView() throws Exception {
-    manageViewService.removeView("anonymous-view", REPO_NAME);
+    manageViewService.removeView("anonymous-view");
     assertFalse(sessionDMS.itemExists(viewsPath + "/anonymous-view"));
   }
 
@@ -211,7 +205,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllViews() throws Exception {
-    List<ViewConfig> viewList = manageViewService.getAllViews(REPO_NAME);
+    List<ViewConfig> viewList = manageViewService.getAllViews();
     assertNotNull(viewList.size());
   }
 
@@ -224,8 +218,8 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testHasView() throws Exception {
-    assertTrue(manageViewService.hasView("admin-view", REPO_NAME));
-    assertFalse(manageViewService.hasView("admin_view", REPO_NAME));
+    assertTrue(manageViewService.hasView("admin-view"));
+    assertFalse(manageViewService.hasView("admin_view"));
   }
 
   /**
@@ -236,9 +230,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testGetTemplateHome() throws Exception {
-    Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH,
-                                                      REPO_NAME,
-                                                      WCMCoreUtils.getSystemSessionProvider());
+    Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH, WCMCoreUtils.getSystemSessionProvider());
     assertEquals("/exo:ecm/views/userviews", homeNode.getPath());
   }
 
@@ -250,9 +242,8 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllTemplates() throws Exception {
-    List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
-                                                           REPO_NAME,
-                                                           WCMCoreUtils.getSystemSessionProvider());
+    List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, 
+        WCMCoreUtils.getSystemSessionProvider());
     assertEquals(1, lstNode.size());
     assertEquals("SystemView", lstNode.get(0).getName());
   }
@@ -274,12 +265,12 @@ public class TestManageViewService extends BaseWCMTestCase {
         "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
         "<div id=$componentId></div>";
 
-    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);
+    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx);
     Node simpleViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SimpleView");
     assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
     assertEquals(templateFile, simpleViewNode.getNode("jcr:content").getProperty("jcr:data").getString());
 
-    manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
+    manageViewService.removeTemplate(templatesPathEx + "/SimpleView");
   }
   
   /**
@@ -343,9 +334,9 @@ public class TestManageViewService extends BaseWCMTestCase {
     "import org.exoplatform.web.application.Parameter;" +
     "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
     "<div id=$componentId></div>";
-    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);
+    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx);
 
-    manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
+    manageViewService.removeTemplate(templatesPathEx + "/SimpleView");
     assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
   }
   

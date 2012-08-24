@@ -55,24 +55,6 @@ public interface CmsService {
                           Map inputProperties) throws Exception;
   
   /**
-   * Store node in given workspace and repository with given properties
-   * @param workspace       name of workspace
-   * @param nodetypeName    NodeType's name
-   * @param storePath       Path to store node
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param repository      Repository's name
-   * @throws Exception      Throwing exception
-   * @return path to saved node
-   * @see #storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception
-   */
-  @Deprecated
-  public String storeNode(String workspace,
-                          String nodetypeName,
-                          String storePath,
-                          Map inputProperties,
-                          String repository) throws Exception;
-
-  /**
    * Store node in given repository with given properties
    * @param nodetypeName    NodeType's name
    * @param storeHomeNode   Parent node, where node is stored
@@ -87,23 +69,6 @@ public interface CmsService {
                           boolean isAddNew) throws Exception;
   
   /**
-   * Store node in given repository with given properties
-   * @param nodetypeName    NodeType's name
-   * @param storeHomeNode   Parent node, where node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @param repository      Repository's name
-   * @return                return path to saved node
-   * @throws Exception
-   */
-  @Deprecated
-  public String storeNode(String nodetypeName,
-                          Node storeHomeNode,
-                          Map inputProperties,
-                          boolean isAddNew,
-                          String repository) throws Exception;
-
-  /**
    * Store edited node in given repository with given properties
    * used in case that user only has permission to access storeNode but
    * can't access parent of storeNode (storeHomeNode)
@@ -119,24 +84,6 @@ public interface CmsService {
                                 Map inputProperties,
                                 boolean isAddNew) throws Exception;
   
-  /**
-   * Store edited node in given repository with given properties
-   * used in case that user only has permission to access storeNode but
-   * can't access parent of storeNode (storeHomeNode)
-   * @param nodetypeName    NodeType's name
-   * @param storeNode       Node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @param repository      Repository's name
-   * @return                return path to saved node
-   * @throws Exception
-   */
-  @Deprecated
-  public String storeEditedNode(String nodetypeName,
-                                Node storeNode,
-                                Map inputProperties,
-                                boolean isAddNew,
-                                String repository) throws Exception;
 
   /**
    * Store node in given repository with given properties and return UUID of saved node
@@ -154,25 +101,6 @@ public interface CmsService {
                                 Map inputProperties,
                                 boolean isAddNew) throws Exception;
   
-  /**
-   * Store node in given repository with given properties and return UUID of saved node
-   * @param nodetypeName    NodeType's name
-   * @param storeNode       Node is stored
-   * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @param repository      Repository's name
-   * @return                return UUID of saved node
-   * @throws Exception
-   * @see #storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception
-   * @see #storeNode(String workspace, String nodetypeName, String storePath, Map inputProperties) throws Exception
-   */
-  @Deprecated
-  public String storeNodeByUUID(String nodetypeName,
-                                Node storeNode,
-                                Map inputProperties,
-                                boolean isAddNew,
-                                String repository) throws Exception;
-
   /**
    * Move node from one workspace to the other, with the same repository
    * @param nodePath      Path to node in source workspace
@@ -182,14 +110,4 @@ public interface CmsService {
    */
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);
   
-  /**
-   * Move node from one workspace to the other, with the same repository
-   * @param nodePath      Path to node in source workspace
-   * @param srcWorkspace  Source workspace name
-   * @param destWorkspace Destination of workspace name
-   * @param destPath      Destination of node path
-   * @param repository      Repository's name
-   */
-  @Deprecated
-  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath, String repository);  
 }

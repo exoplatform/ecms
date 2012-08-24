@@ -18,7 +18,6 @@ package org.exoplatform.services.ecm.dms.view;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,22 +75,6 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
   }
 
   /**
-   * Test ApplicationTemplateManagerServiceImpl.getTemplatesByApplication()
-   * Input: repository        String
-   *                          The name of repository
-   *        portletName       String
-   *                          The name of portlet
-   *        sessionProvider   SessionProvider
-   * Expect: Return The templates by category
-   * @throws Exception
-   */
-  @Test
-  public void testGetTemplatesByApplication() throws Exception {
-    assertNull(appTemplateManagerService.getTemplatesByApplication(REPO_NAME,
-        "UIBrowseContentPortlet", sessionProviderService_.getSystemSessionProvider(null)));
-  }
-
-  /**
    * Test ApplicationTemplateManagerServiceImpl.getTemplatesByCategory()
    * Input: repository        String
    *                          The name of repository
@@ -104,7 +87,7 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testGetTemplatesByCategory() throws Exception {
-    assertEquals(1, appTemplateManagerService.getTemplatesByCategory(REPO_NAME, "content-browser",
+    assertEquals(1, appTemplateManagerService.getTemplatesByCategory("content-browser",
         "detail-document", sessionProviderService_.getSystemSessionProvider(null)).size());
   }
 
@@ -123,7 +106,7 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testGetTemplateByName() throws Exception {
-    assertNotNull(appTemplateManagerService.getTemplateByName(REPO_NAME, "content-browser",
+    assertNotNull(appTemplateManagerService.getTemplateByName("content-browser",
         "detail-document", "DocumentView", sessionProviderService_.getSystemSessionProvider(null)));
   }
 
@@ -138,8 +121,8 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testGetTemplateByPath() throws Exception {
-    assertNotNull(appTemplateManagerService.getTemplateByPath(REPO_NAME,
-                                                              "/exo:ecm/views/templates/content-browser/detail-document/DocumentView",
+    assertNotNull(
+        appTemplateManagerService.getTemplateByPath("/exo:ecm/views/templates/content-browser/detail-document/DocumentView",
                                                               sessionProviderService_.getSystemSessionProvider(null)));
   }
 
@@ -163,8 +146,8 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
     config.setTemplateData("Hello teamplate data");
     appTemplateManagerService.addTemplate(portletTemplateHome, config);
 
-    assertNotNull(appTemplateManagerService.getTemplateByPath(REPO_NAME,
-        "/exo:ecm/views/templates/categoryA/HelloName", sessionProviderService_.getSystemSessionProvider(null)));
+    assertNotNull(appTemplateManagerService.getTemplateByPath("/exo:ecm/views/templates/categoryA/HelloName", 
+        sessionProviderService_.getSystemSessionProvider(null)));
 
     sessionDMS.getItem("/exo:ecm/views/templates/categoryA").remove();
     sessionDMS.save();
@@ -185,11 +168,11 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    * @throws Exception
    */
   public void testRemoveTemplate() throws Exception {
-//    appTemplateManagerService.removeTemplate(REPO_NAME, "content-browser", "detail-document",
-//        "DocumentView", SessionProviderFactory.createSessionProvider());
-//
-//    assertEquals(0, appTemplateManagerService.getTemplatesByCategory(REPO_NAME, "content-browser",
-//        "detail-document", SessionProviderFactory.createSessionProvider()).size());
+    appTemplateManagerService.removeTemplate("content-browser", "detail-document",
+        "DocumentView", sessionProvider);
+
+    assertEquals(0, appTemplateManagerService.getTemplatesByCategory("content-browser", 
+        "detail-document", sessionProvider).size());
   }
 
   @AfterMethod

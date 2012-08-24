@@ -378,10 +378,9 @@ public class Utils {
                     if (name1.equals(name2)) {
                       int index1 = node1.getIndex();
                       int index2 = node2.getIndex();
-                      return -1 * ((Integer)index1).compareTo((Integer)index2);
-                    } else {
-                      return -1 * name1.compareTo(name2);
-                    }
+                      return -1 * ((Integer)index1).compareTo(index2);
+                    } 
+                    return -1 * name1.compareTo(name2);
                   } catch (RepositoryException e) {
                     return 0;
                   }
@@ -390,7 +389,7 @@ public class Utils {
 
             for (Node symlink : symlinks) {
               synchronized (symlink) {
-                trashService.moveToTrash(symlink, trashPath, trashWorkspace, sessionProvider, 1);
+                trashService.moveToTrash(symlink, sessionProvider, 1);
               }
             }
           } catch (Exception e) {

@@ -89,18 +89,7 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String storeNode(String workspace,
-                          String nodeTypeName,
-                          String storePath,
-                          Map mappings,
-                          String repository) throws Exception {
-    return storeNode(workspace, nodeTypeName, storePath, mappings);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String storeNode(String workspace, String nodeTypeName, String storePath, Map mappings) throws Exception {
     Session session = jcrService.getCurrentRepository().login(workspace);
     Node storeHomeNode = (Node) session.getItem(storePath);
@@ -114,15 +103,7 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings,
-      boolean isAddNew, String repository) throws Exception {
-    return storeNode(nodeTypeName, storeHomeNode, mappings, isAddNew);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings,
       boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
@@ -213,15 +194,6 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
-      boolean isAddNew, String repository) throws Exception {
-    return storeEditedNode(nodeTypeName, storeNode, mappings, isAddNew);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
       boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
@@ -251,15 +223,7 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
-      boolean isAddNew, String repository) throws Exception {
-    return storeNodeByUUID(nodeTypeName, storeHomeNode, mappings, isAddNew);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
       boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
@@ -832,7 +796,6 @@ public class CmsServiceImpl implements CmsService {
             }
         }
         session.save();
-//        session.logout();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -1107,7 +1070,6 @@ public class CmsServiceImpl implements CmsService {
           }
         }
         session.save();
-//        session.logout();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;
         String referenceWorksapce = null;
@@ -1141,7 +1103,6 @@ public class CmsServiceImpl implements CmsService {
           node.setProperty(propertyName, list.toArray(new Value[list.size()]));
         }
         session.save();
-//        session.logout();
       }
       break ;
     default:
@@ -1168,18 +1129,7 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  @Deprecated
-  public void moveNode(String nodePath,
-                       String srcWorkspace,
-                       String destWorkspace,
-                       String destPath,
-                       String repository) {
-    moveNode(nodePath, srcWorkspace, destWorkspace, destPath);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
     Session srcSession = null ;
     Session destSession = null ;

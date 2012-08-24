@@ -44,7 +44,6 @@ public class TestScriptService extends BaseWCMTestCase {
 
   private ScriptService scriptService;
   private String expectedECMScriptHomePath = "/exo:ecm/scripts/ecm-explorer";
-  private String expectedCBScriptHomePath = "/exo:ecm/scripts/content-browser";
   private String expectedBaseScriptPath = "/exo:ecm/scripts";
   private NodeHierarchyCreator nodeHierarchyCreator;
   private String cmsScriptsPath;
@@ -74,7 +73,7 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testInitRepo() throws Exception {
-    scriptService.initRepo(REPO_NAME);
+    scriptService.initRepo();
     assertTrue(sessionDMS.itemExists(cmsScriptsPath));
     assertTrue(sessionDMS.itemExists(cmsScriptsPath + "/content-browser"));
     assertTrue(sessionDMS.itemExists(cmsScriptsPath + "/ecm-explorer"));
@@ -90,23 +89,8 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetECMScriptHome() throws Exception {
-    assertNotNull(scriptService.getECMScriptHome(REPO_NAME, sessionProviderService_.getSystemSessionProvider(null)));
-    assertEquals(expectedECMScriptHomePath, scriptService.getECMScriptHome(REPO_NAME,
-        sessionProviderService_.getSystemSessionProvider(null)).getPath());
-  }
-
-  /**
-   * Test method: ScriptServiceImpl.getCBScriptHome()
-   * Input: repository    String
-   *                      The name of repository
-   *        provider      SessionProvider
-   * Expect: Return "/exo:ecm/scripts/content-browser" is path of node for Content Browser Scripts
-   * @throws Exception
-   */
-  @Test
-  public void testGetCBScriptHome() throws Exception {
-    assertNotNull(scriptService.getCBScriptHome(REPO_NAME, sessionProviderService_.getSystemSessionProvider(null)));
-    assertEquals(expectedCBScriptHomePath, scriptService.getCBScriptHome(REPO_NAME,
+    assertNotNull(scriptService.getECMScriptHome(sessionProviderService_.getSystemSessionProvider(null)));
+    assertEquals(expectedECMScriptHomePath, scriptService.getECMScriptHome(
         sessionProviderService_.getSystemSessionProvider(null)).getPath());
   }
 
@@ -120,7 +104,7 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetECMActionScripts() throws Exception {
-    List<Node> listECMScripts = scriptService.getECMActionScripts(REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    List<Node> listECMScripts = scriptService.getECMActionScripts(sessionProviderService_.getSystemSessionProvider(null));
     assertTrue(listECMScripts.size() >0);
 
     List<String> scriptPathList = new ArrayList<String>();
@@ -140,7 +124,7 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetECMInterceptorScripts() throws Exception {
-    List<Node> listECMInterceptorcripts = scriptService.getECMInterceptorScripts(REPO_NAME,
+    List<Node> listECMInterceptorcripts = scriptService.getECMInterceptorScripts(
         sessionProviderService_.getSystemSessionProvider(null));
     assertTrue(listECMInterceptorcripts.size() >0);
 
@@ -161,8 +145,7 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetECMWidgetScripts() throws Exception {
-    List<Node> listECMWidgetScripts = scriptService.getECMWidgetScripts(REPO_NAME,
-        sessionProviderService_.getSystemSessionProvider(null));
+    List<Node> listECMWidgetScripts = scriptService.getECMWidgetScripts(sessionProviderService_.getSystemSessionProvider(null));
     assertTrue(listECMWidgetScripts.size() >0);
 
     List<String> scriptPathList = new ArrayList<String>();
@@ -183,9 +166,9 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetScript() throws Exception {
-    assertNotNull(scriptService.getScript("content-browser/GetDocuments.groovy", REPO_NAME));
+    assertNotNull(scriptService.getScript("content-browser/GetDocuments.groovy"));
     try {
-      scriptService.getScript("content-browser/GetDocuments1.groovy", REPO_NAME);
+      scriptService.getScript("content-browser/GetDocuments1.groovy");
       fail();
     } catch (Exception ex) {
     }
@@ -214,25 +197,10 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testAddScript() throws Exception {
-    scriptService.addScript("Hello Name", "Hello Text", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    scriptService.addScript("Hello Name", "Hello Text", sessionProviderService_.getSystemSessionProvider(null));
     Node hello = (Node)sessionDMS.getItem("/exo:ecm/scripts/Hello Name");
     assertNotNull(hello);
     assertEquals("Hello Text", hello.getNode("jcr:content").getProperty("jcr:data").getString());
-  }
-
-  /**
-   * Test method: ScriptServiceImpl.getScriptAsText()
-   * Input: scriptPath    String
-   *                      The path of script
-   *        repository    String
-   *                      The name of repository
-   * Expect: Return "This is my script as text" as text of script
-   * @throws Exception
-   */
-  @Test
-  public void testGetScriptAsText() throws Exception {
-    scriptService.addScript("My script", "This is my script as text", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
-    assertEquals("This is my script as text", scriptService.getScriptAsText("My script", REPO_NAME));
   }
 
   /**
@@ -247,9 +215,9 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testGetScriptNode() throws Exception {
-    scriptService.addScript("My script 2", "This is my script as text 2", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    scriptService.addScript("My script 2", "This is my script as text 2", sessionProviderService_.getSystemSessionProvider(null));
 
-    Node scriptNode = scriptService.getScriptNode("My script 2", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    Node scriptNode = scriptService.getScriptNode("My script 2", sessionProviderService_.getSystemSessionProvider(null));
     assertEquals("My script 2", scriptNode.getName());
     assertEquals("This is my script as text 2", scriptNode.getNode("jcr:content").getProperty("jcr:data").getString());
   }
@@ -266,15 +234,14 @@ public class TestScriptService extends BaseWCMTestCase {
    */
   @Test
   public void testRemoveScript() throws Exception {
-    scriptService.addScript("Hello Name", "Hello Text", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
+    scriptService.addScript("Hello Name", "Hello Text", sessionProviderService_.getSystemSessionProvider(null));
 
-    Node hello = scriptService.getScriptNode("Hello Name", REPO_NAME,
-        sessionProviderService_.getSystemSessionProvider(null));
+    Node hello = scriptService.getScriptNode("Hello Name", sessionProviderService_.getSystemSessionProvider(null));
     assertNotNull(hello);
     assertEquals("Hello Text", hello.getNode("jcr:content").getProperty("jcr:data").getString());
 
-    scriptService.removeScript("Hello Name", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
-    assertNull(scriptService.getScriptNode("Hello Name", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null)));
+    scriptService.removeScript("Hello Name", sessionProviderService_.getSystemSessionProvider(null));
+    assertNull(scriptService.getScriptNode("Hello Name", sessionProviderService_.getSystemSessionProvider(null)));
   }
 
   /**

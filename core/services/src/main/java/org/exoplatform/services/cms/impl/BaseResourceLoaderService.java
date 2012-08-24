@@ -31,6 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -47,7 +48,7 @@ public abstract class BaseResourceLoaderService implements Startable{
 
   protected ConfigurationManager cservice_;
 
-  protected ExoCache             resourceCache_;
+  protected ExoCache<String, CmsScript>  resourceCache_;
 
   /**
    * DMS configuration which used to store informations
@@ -119,7 +120,7 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @see                 ResourceConfig
    * @throws Exception
    */
-  protected void addScripts(Session session, List resources,String location) throws Exception{
+  protected void addScripts(Session session, List resources, String location) throws Exception{
     String resourcesPath = getBasePath();
     if (resources.size() == 0) return;
     try {
@@ -190,28 +191,12 @@ public abstract class BaseResourceLoaderService implements Startable{
     String resourcesPath = getBasePath();
     return (Node) session.getItem(resourcesPath);
   }
-
-  /**
-   * get Resource As Text
-   * @param resourceName    String
-   * @param repository      String
-   *                        The name of repository
-   * @deprecated Since WCM 2.1 you should use {@link #getResourceAsStream(String, String)} instead.
-   * @see
-   * @return                SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public String getResourceAsText(String resourceName, String repository) throws Exception {
-    return getResourceAsText(resourceName);
-  }
   
   /**
    * get Resource As Text
    * @param resourceName    String
-   * @deprecated Since WCM 2.1 you should use {@link #getResourceAsStream(String, String)} instead.
    * @see
-   * @return                SessionProvider
+   * @return                String
    * @throws Exception
    */
   public String getResourceAsText(String resourceName) throws Exception {
@@ -225,20 +210,6 @@ public abstract class BaseResourceLoaderService implements Startable{
       sessionProvider.close();
     }
   }  
-
-  /**
-   * get Resource As Stream
-   * @param resourceName    String
-   * @param repository      String
-   *                        The name of repository
-   * @see
-   * @return                SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public InputStream getResourceAsStream(String resourceName, String repository) throws Exception {
-    return getResourceAsStream(resourceName);
-  }
   
   /**
    * get Resource As Stream
@@ -254,20 +225,6 @@ public abstract class BaseResourceLoaderService implements Startable{
     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
     return stream;
   }  
-
-  /**
-   * get Resources
-   * @param repository          String
-   *                            The name of repository
-   * @param sessionProvider     SessionProvider
-   * @see                       SessionProvider
-   * @return
-   * @throws Exception
-   */
-  @Deprecated
-  public NodeIterator getResources(String repository,SessionProvider sessionProvider) throws Exception {
-    return getResources(sessionProvider);
-  }
   
   /**
    * get Resources
@@ -279,20 +236,6 @@ public abstract class BaseResourceLoaderService implements Startable{
   public NodeIterator getResources(SessionProvider sessionProvider) throws Exception {
     Node resourcesHome = getResourcesHome(sessionProvider);
     return resourcesHome.getNodes();
-  }
-
-  /**
-   * Check has Resources
-   * @param repository        String
-   *                          The name of repository
-   * @param sessionProvider   SessionProvider
-   * @see                     SessionProvider
-   * @return
-   * @throws Exception
-   */
-  @Deprecated
-  public boolean hasResources(String repository,SessionProvider sessionProvider) throws Exception {
-    return hasResources(sessionProvider);
   }
   
   /**
@@ -306,22 +249,6 @@ public abstract class BaseResourceLoaderService implements Startable{
     Node resourcesHome = getResourcesHome(sessionProvider);
     return resourcesHome.hasNodes();
   }  
-
-  /**
-   * add Resource
-   * @param name          String
-   *                      The name of resource
-   * @param text          String
-   * @param repository    String
-   *                      The name of repository
-   * @param provider      SessionProvider
-   * @see                 SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public void addResource(String name, String text, String repository,SessionProvider provider) throws Exception {
-    addResource(name, text, provider);
-  }
   
   /**
    * add Resource
@@ -339,21 +266,6 @@ public abstract class BaseResourceLoaderService implements Startable{
     resourcesHome.save();
   }  
 
-  /**
-   * remove Resource
-   * @param resourceName    String
-   *                        The name of resource
-   * @param repository      String
-   *                        The name of repository
-   * @param provider        SessionProvider
-   * @see                   SessionProvider
-   * @throws Exception
-   */
-  @Deprecated
-  public void removeResource(String resourceName, String repository,SessionProvider provider) throws Exception {
-    removeResource(resourceName, provider);
-  }
-  
   /**
    * remove Resource
    * @param resourceName    String

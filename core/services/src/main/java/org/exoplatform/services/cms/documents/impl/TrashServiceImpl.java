@@ -120,19 +120,8 @@ public class TrashServiceImpl implements TrashService {
  
   /**
    *{@inheritDoc}
-   */  
-  public void moveToTrash(Node node,
-                          String trashPath,
-                          String trashWorkspace,
-                          SessionProvider sessionProvider,
-                          int deep) throws Exception {
-
-    moveToTrash(node, sessionProvider, deep);
-  }
-
-  /**
-   *{@inheritDoc}
    */
+  @Override
   public void moveToTrash(Node node,
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
@@ -381,24 +370,9 @@ public class TrashServiceImpl implements TrashService {
    */
   public List<Node> getAllNodeInTrash(SessionProvider sessionProvider) throws Exception {
 
-    // String trashPathTail = (trashPath.endsWith("/"))? "" : "/";
     StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL");
 
-    // System.out.println(query);
     return selectNodesByQuery(sessionProvider, query.toString(), Query.SQL);
-  }
-
-  @Deprecated
-  public List<Node> getAllNodeInTrashByUser(String trashWorkspace, String repository,
-      SessionProvider sessionProvider, String userName) throws Exception {
-    return getAllNodeInTrashByUser(sessionProvider, userName);
-  }
-
-  @Deprecated
-  public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
-                                            SessionProvider sessionProvider,
-                                            String userName) throws Exception {
-    return getAllNodeInTrashByUser(sessionProvider, userName);
   }
 
   /**
