@@ -18,10 +18,11 @@
 package org.exoplatform.services.cms.documents;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -84,14 +85,9 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
   @Test
   public void testAllSupportedType() throws Exception {
 
-    List<String> expectedList = documentTypeService_.getAllSupportedType();
+    List<String> resultList = documentTypeService_.getAllSupportedType();
 
-    Iterator<String> iterSupportedType = expectedList.iterator();
-    String expectedSupportedName = null;
-    while (iterSupportedType.hasNext()) {
-      expectedSupportedName = iterSupportedType.next();
-      System.out.println(" The supported type is :" +expectedSupportedName);
-    }
+    assertEquals(1, resultList.size()); // Content
   }
 
   /**
@@ -114,18 +110,10 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     addDocumentFile(documentNode, "image04", "image/tiff");
     documentNode.getSession().save();
     String supportedType = "Video";
-    List<Node> expectedList = documentTypeService_
+    List<Node> resultList = documentTypeService_
                   .getAllDocumentsByDocumentType(supportedType, COLLABORATION_WS, createSessionProvider());
-    assertNotNull(expectedList);
-    Iterator<Node> iterNodes = expectedList.iterator();
-    Node expectedNode = null;
-    while (iterNodes.hasNext()) {
-      expectedNode = iterNodes.next();
-      System.out.println("The node name : "+expectedNode.getName()+" have mime type : "
-        + expectedNode.getNode("jcr:content").getProperty("jcr:mimeType").getValue().getString());
-    }
+    assertEquals(2, resultList.size());
   }
-
 
   /**
    * Test method getAllDocumentsByType
@@ -145,16 +133,9 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), "image/gif");
-    assertNotNull(expectedList);
-    assertEquals(3, expectedList.size());
-    Iterator<Node> iterNodes = expectedList.iterator();
-    Node expectedNode = null;
-    while (iterNodes.hasNext()) {
-      expectedNode = iterNodes.next();
-      assertEquals("image/gif",
-          expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
-    }
+    List<Node> resultList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), "image/gif");
+    assertNotNull(resultList);
+    assertEquals(3, resultList.size());
   }
 
   /**
@@ -177,14 +158,8 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), mimeTypes);
-    Iterator<Node> expectedIter  = expectedList.iterator();
-    Node expectedNode = null;
-    while( expectedIter.hasNext()) {
-      expectedNode = expectedIter.next();
-      System.out.println("Expected mime type:"
-             +expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
-    }
+    List<Node> resultList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, createSessionProvider(), mimeTypes);
+    assertEquals(5, resultList.size());
   }
 
   /**
@@ -199,28 +174,24 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
-    addDocumentFile(documentNode, "testaudio01", "audio/mp3");
-    addDocumentFile(documentNode, "testaudio02", "audio/mp3");
-    addDocumentFile(documentNode, "image01", "image/gif");
-    addDocumentFile(documentNode, "image02", "image/gif");
-    addDocumentFile(documentNode, "image03", "image/gif");
-    addDocumentFile(documentNode, "text", "text/plain");
+    Node testaudio01 = addDocumentFile(documentNode, "testaudio01", "audio/mp3");
+    Node testaudio02 = addDocumentFile(documentNode, "testaudio02", "audio/mp3");
+    Node image01 = addDocumentFile(documentNode, "image01", "image/gif");
+    Node image02 = addDocumentFile(documentNode, "image02", "image/gif");
+    Node image03 = addDocumentFile(documentNode, "image03", "image/gif");
+    Node text = addDocumentFile(documentNode, "text", "text/plain");
     documentNode.getSession().save();
     String username = "__system";
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
+    List<Node> resultList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
         createSessionProvider(), mimeTypes, username);
-    //TODO: Need to check why the list is empty
-    //    assertEquals(3, expectedList.size());
-    Iterator<Node> iterator = expectedList.iterator();
-    Node expectedNode= null;
-    while (iterator.hasNext()) {
-      expectedNode = iterator.next();
-      System.out.println("Expected mime type:"
-        +expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
-    }
+    assertTrue(resultList.contains(testaudio01));
+    assertTrue(resultList.contains(testaudio02));
+    assertFalse(resultList.contains(image01));
+    assertFalse(resultList.contains(image02));
+    assertFalse(resultList.contains(image03));
+    assertTrue(resultList.contains(text));
   }
-
 
   /**
    * Test method getAllDocumentsByUser
@@ -242,26 +213,94 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     documentNode.getSession().save();
     String username = "jame";
 
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
+    List<Node> resultList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
         createSessionProvider(), mimeTypes, username);
 
-    assertEquals(0, expectedList.size());
-    Iterator<Node> iterator = expectedList.iterator();
-    Node expectedNode= null;
-    while (iterator.hasNext()) {
-      expectedNode = iterator.next();
-      System.out.println("Expected mime type:"
-                      +expectedNode.getProperty(JCR_MINE_TYPE).getString());
-    }
+    assertEquals(0, resultList.size());
   }
 
+  /**
+   * Test AllDocumentByContentsType with content type is not content
+   *
+   * Expect: empty list of nodes.
+   * @throws Exception
+   */
+  @Test
+  public void testGetAllDocumentByContentsTypeIsNoneContent() throws Exception {
+    Node rootNode = session.getRootNode();
+    Node documentNode = getDocument(rootNode, "document");
+    addDocumentFile(documentNode, "testaudio01", "audio/mp3");
+    addDocumentFile(documentNode, "testaudio02", "audio/mp3");
+    addDocumentFile(documentNode, "image01", "image/gif");
+    addDocumentFile(documentNode, "image02", "image/gif");
+    addDocumentFile(documentNode, "image03", "image/gif");
+    addDocumentFile(documentNode, "text", "text/plain");
+    documentNode.getSession().save();
+    String documentType = "NoneContent";
+
+    List<Node> resultList = documentTypeService_.getAllDocumentByContentsType(documentType, COLLABORATION_WS, sessionProvider, null);
+
+    assertEquals(null, resultList);
+  }
+
+  /**
+   * Test AllDocumentByContentsType with content type is content
+   *
+   * Expect: nodes that are content
+   * @throws Exception
+   */
+  @Test
+  public void testGetAllDocumentByContentsTypeIsContent() throws Exception {
+    Node rootNode = session.getRootNode();
+    Node documentNode = getDocument(rootNode, "document");
+    Node testaudio01 = addDocumentFile(documentNode, "testaudio01", "audio/mp3");
+    Node testaudio02 = addDocumentFile(documentNode, "testaudio02", "audio/mp3");
+    Node image01 = addDocumentFile(documentNode, "image01", "image/gif");
+    Node image02 = addDocumentFile(documentNode, "image02", "image/gif");
+    Node image03 = addDocumentFile(documentNode, "image03", "image/gif");
+    Node text = addDocumentFile(documentNode, "text", "text/plain");
+    documentNode.getSession().save();
+    String documentType = "Content";
+
+    List<Node> resultList = documentTypeService_.getAllDocumentByContentsType(documentType, COLLABORATION_WS, sessionProvider, null);
+
+    assertTrue(resultList.contains(testaudio01));
+    assertTrue(resultList.contains(testaudio02));
+    assertTrue(resultList.contains(image01));
+    assertTrue(resultList.contains(image02));
+    assertTrue(resultList.contains(image03));
+    assertTrue(resultList.contains(text));
+  }
+
+  /**
+   * Test AllDocumentByContentsType with content type is content and have specific owner
+   *
+   * Expect: nodes that are content and have specific owner
+   * @throws Exception
+   */
+  @Test
+  public void testGetAllDocumentByContentsTypeAndOwner() throws Exception {
+    Node rootNode = session.getRootNode();
+    Node documentNode = getDocument(rootNode, "document");
+    addDocumentFile(documentNode, "testaudio01", "audio/mp3");
+    addDocumentFile(documentNode, "testaudio02", "audio/mp3");
+    addDocumentFile(documentNode, "image01", "image/gif");
+    addDocumentFile(documentNode, "image02", "image/gif");
+    addDocumentFile(documentNode, "image03", "image/gif");
+    addDocumentFile(documentNode, "text", "text/plain");
+    documentNode.getSession().save();
+    String documentType = "Content";
+
+    List<Node> resultList = documentTypeService_.getAllDocumentByContentsType(documentType, COLLABORATION_WS, sessionProvider, "john");
+
+    assertEquals(0, resultList.size());
+  }
 
   private SessionProvider createSessionProvider() {
     SessionProviderService sessionProviderService = (SessionProviderService) container
         .getComponentInstanceOfType(SessionProviderService.class);
     return sessionProviderService.getSystemSessionProvider(null);
   }
-
 
   /**
    * @throws Exception
@@ -275,7 +314,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     rootNode.addNode("document", NT_UNSTRUCTURED);
     session.save();
   }
-
 
   /**
    * @throws Exception
@@ -291,23 +329,22 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
     session.save();
   }
 
-
   /**
    * @param currentNode
    * @param testName
    * @param mimeTypeValue
+   * @return newly created node
    * @throws Exception
    */
-  private void addDocumentFile(Node currentNode, String testName, String mimeTypeValue)
+  private Node addDocumentFile(Node currentNode, String testName, String mimeTypeValue)
       throws Exception {
     Node documentNode = currentNode.addNode(testName, NT_FILE);
     Node subNode = documentNode.addNode("jcr:content", NT_RESOURCE);
     subNode.setProperty(JCR_MINE_TYPE, mimeTypeValue);
     subNode.setProperty(JCR_DATA, "");
     subNode.setProperty(JCR_LAST_MODIFIED, new GregorianCalendar());
-
+    return documentNode;
   }
-
 
   /**
    * @param parentNode
@@ -324,5 +361,4 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
       return parentNode.addNode(documentName);
     }
   }
-
 }

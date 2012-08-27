@@ -9,6 +9,17 @@
     <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
 		<init-params>
 			<object-param>
+				<name>Content</name>
+				<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
+					<field name="contentsType"><string>true</string></field>
+					<field name="displayInFilter"><string>true</string></field>
+					<field name="mimeTypes">
+						<collection type="java.util.ArrayList">
+						</collection>
+					</field>
+				</object>
+			</object-param>
+			<object-param>
 				<name>Images</name>
 				<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
 					<field name="mimeTypes">
