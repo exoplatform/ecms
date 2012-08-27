@@ -441,4 +441,9 @@
   		<home>Home</home>
   	</label>  
   </Breadcrumb>
+  <UIActionForm>
+     <msg>
+       <xss-vulnerability-character> フィールド'{0}'はクロスサイトスクリプティングの脆弱性文字が含まれている</xss-vulnerability-character>
+     </msg>
+  </UIActionForm>
 </bundle>

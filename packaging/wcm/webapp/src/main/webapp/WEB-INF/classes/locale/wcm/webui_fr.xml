@@ -380,4 +380,9 @@
   		<home>Accueil</home>
   	</label>  
   </Breadcrumb>
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>  
 </bundle>

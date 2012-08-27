@@ -441,4 +441,9 @@
   		<home>Trang chủ</home>
   	</label>  
   </Breadcrumb>
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>

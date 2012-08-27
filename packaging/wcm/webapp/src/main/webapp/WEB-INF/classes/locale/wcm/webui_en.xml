@@ -449,4 +449,9 @@
   		<home>Home</home>
   	</label>  
   </Breadcrumb>
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
 </bundle>
