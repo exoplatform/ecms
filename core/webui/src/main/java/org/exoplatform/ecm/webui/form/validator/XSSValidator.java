@@ -34,6 +34,10 @@ public class XSSValidator implements Validator {
   @Override
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = ((String) uiInput.getValue());
+    if (inputValue == null || inputValue.trim().length() == 0) {
+      return;
+    }
+    
     inputValue = Utils.sanitize(inputValue);
     if (StringUtils.isEmpty(inputValue)) {
       Object[] args = { uiInput.getLabel() };
