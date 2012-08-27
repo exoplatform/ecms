@@ -19,8 +19,10 @@
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
+  
+  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkTabSize');
+  
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";
   def displayTabContainer = "";
@@ -72,12 +74,12 @@
 				      displayTabName = fullTabName.substring(0, 10) + "..."
 				    } 
 				%>
-					    <div class="UITab" style="display: block;">
+					    <div class="UITab" style="display: block;" onclick="<%=uicomponent.event('ChangeTab', tab);%>">
 						    <div class="$tabStyle">
 								  <div class="TabL">
 								    <div class="TabR">
 										  <div class="TabM" style="width: 125px;">
-										    <a href="<%=uicomponent.event("ChangeTab", tab)%>" title="$fullTabName" class="TabLabel">$displayTabName</a>
+										    <div title="$fullTabName" class="TabLabel">$displayTabName</div>
 										  </div>
 								    </div>
 								  </div>  
@@ -96,12 +98,12 @@
 				   if (action != null) {
 				     def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
 			 %>
-						 <div class="NormalSubItem SubTabItem" style="width: auto;">
+						 <div class="NormalSubItem SubTabItem" style="width: auto;" onclick="<%=action.event(button);%>">
 							 <div class="NormalSubTabItemL">
 								 <div class="NormalSubTabItemR">
 									 <div class="NormalSubTabItemM">
 									 	<div class="Split">
-										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</a>
+									 	  <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
 										 </div>
 									 </div>
 								 </div>
