@@ -16,8 +16,8 @@
 			  <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("AddMetadata.dialog.label.name")%></label></td>
 			  <td class="FieldComponent">
 				  <% 
-					String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
-					uicomponent.addTextField("actionName", fieldName);
+					String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty,XSSValidator"];
+					uicomponent.addTextField("actionName", _ctx.appRes("AddMetadata.dialog.label.name"), fieldName);
 				  %>
 				</td>
 			</tr>		          					
