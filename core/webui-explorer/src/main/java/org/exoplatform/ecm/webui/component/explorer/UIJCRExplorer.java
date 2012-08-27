@@ -47,7 +47,7 @@ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.comparator.NodeNameComparator;
+import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.ecm.webui.comparator.StringComparator;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -922,7 +922,7 @@ public class UIJCRExplorer extends UIContainer {
 
   private void sort(List<Node> childrenList) {
     if (Preference.SORT_BY_NODENAME.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new NodeNameComparator(preferences_.getOrder())) ;
+      Collections.sort(childrenList, new NodeTitleComparator(preferences_.getOrder())) ;
     } else if (Preference.SORT_BY_NODETYPE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new TypeNodeComparator(preferences_.getOrder())) ;
     } else if (Preference.SORT_BY_VERSIONABLE.equals(preferences_.getSortType())) {
