@@ -971,9 +971,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                // Has not required mixin 'cmis:document'. Some operation for
                // this type of document will be different from default.
-               if (LOG.isWarnEnabled())
+               if (LOG.isDebugEnabled())
                {
-                  LOG.warn("Node " + node.getPath()
+                  LOG.debug("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
                }
                return new JcrFile(entry);
@@ -986,9 +986,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                // Has not required mixin 'cmis:folder'. Some operation for this
                // type of document will be different from default.
-               if (LOG.isWarnEnabled())
+               if (LOG.isDebugEnabled())
                {
-                  LOG.warn("Node " + node.getPath()
+                  LOG.debug("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operation may be disabled.");
                }
                return new JcrFolder(entry);
