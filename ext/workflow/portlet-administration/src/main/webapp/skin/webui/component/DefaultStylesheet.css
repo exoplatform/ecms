@@ -33,7 +33,7 @@
 }
 
 .UIWorkflowPortlet .UITabContentContainer .UIFormGrid td.FieldLabel {
-         vertical-align: top;
+         vertical-align: middle;
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
