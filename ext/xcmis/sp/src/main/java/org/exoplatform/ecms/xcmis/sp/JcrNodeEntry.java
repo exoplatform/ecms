@@ -151,10 +151,10 @@ class JcrNodeEntry
             }
           }
         } catch (NotSupportedNodeTypeException iae) {
-          if (LOG.isWarnEnabled()) {
+          if (LOG.isDebugEnabled()) {
             // Show only in debug mode. It may cause a lot of warn when
             // unsupported by xCMIS nodes met.
-            LOG.warn("Unable get next object . " + iae.getMessage());
+            LOG.debug("Unable get next object . " + iae.getMessage());
           }
         } catch (javax.jcr.RepositoryException re) {
           if (LOG.isWarnEnabled()) {
@@ -224,7 +224,7 @@ class JcrNodeEntry
    {
       if (id != null)
          return id;
-      
+
       if (StorageImpl.PWC_LABEL.equalsIgnoreCase(getString(CmisConstants.VERSION_LABEL))) {
          try {
             id = ((ExtendedNode)node).getIdentifier();
@@ -235,7 +235,7 @@ class JcrNodeEntry
          // not PWC
          id = getString(CmisConstants.OBJECT_ID);
       }
-      
+
       if (id == null)
       {
          // if not PWC and not Document (with stored objectId)
@@ -498,7 +498,7 @@ class JcrNodeEntry
 
    /**
     * Create permission map which can be passed to JCR node.
-    * 
+    *
     * @param source source ACL
     * @return permission map
     */
@@ -643,7 +643,7 @@ class JcrNodeEntry
          String contentFileName = getString(CmisConstants.CONTENT_STREAM_FILE_NAME);
          if (contentFileName == null)
          {
-            // Use name of Document if content not empty. 
+            // Use name of Document if content not empty.
             contentFileName = getName();
          }
          return contentFileName;
@@ -707,7 +707,7 @@ class JcrNodeEntry
 
    /**
     * Set new or remove (if <code>content == null</code>) content stream.
-    * 
+    *
     * @param content content
     * @throws IOException if any i/o error occurs
     */
