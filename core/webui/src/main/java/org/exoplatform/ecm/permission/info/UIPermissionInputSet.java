@@ -42,7 +42,17 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
     userGroup.setEditable(false) ;
     addUIFormInput(userGroup) ;
     for (String perm : PermissionType.ALL) {
-      addUIFormInput(new UIFormCheckBoxInput<String>(perm, perm, null)) ;
+      UIFormCheckBoxInput checkbox = new UIFormCheckBoxInput<String>(perm, perm, null);
+      if (PermissionType.ADD_NODE.equals(perm)) {
+        checkbox.setOnChange("ChangeAddNodePermission");
+      }
+      if (PermissionType.SET_PROPERTY.equals(perm)) {
+        checkbox.setOnChange("ChangeSetPropertyPermission");
+      }
+      if (PermissionType.REMOVE.equals(perm)) {
+        checkbox.setOnChange("ChangeRemovePermission");
+      }
+      addUIFormInput(checkbox) ;
     }
     setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"}) ;
   }
