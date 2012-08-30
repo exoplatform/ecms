@@ -18,6 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.comparator.PropertyValueComparator;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -61,7 +62,9 @@ public class FavoriteRESTService implements ResourceContainer {
       @PathParam("userName") String userName, @QueryParam("showItems") String showItems) throws Exception {
     List<FavoriteNode> listFavorites = new ArrayList<FavoriteNode>();
     List<DriveData> listDrive = manageDriveService.getAllDrives();
-    if (showItems == null || showItems.trim().length() == 0) showItems = String.valueOf(NO_PER_PAGE);
+    if (StringUtils.isEmpty(showItems)) {
+      showItems = String.valueOf(NO_PER_PAGE);
+    }
     try {
       List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(wsName,
           repoName, userName);
@@ -83,10 +86,12 @@ public class FavoriteRESTService implements ResourceContainer {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
       }
+      return Response.serverError().build();
     } catch (RepositoryException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
       }
+      return Response.serverError().build();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);
@@ -111,16 +116,6 @@ public class FavoriteRESTService implements ResourceContainer {
   private String getDateFormat(Calendar date) {
     return String.valueOf(date.getTimeInMillis());
   }
-
-  /*private String getDateFormatShow(java.util.Date date) {
-    java.text.DateFormat dateFormat = getSimpleDateFormat();
-    return dateFormat.format(date);
-  }*/
-
-  /*private DateFormat getSimpleDateFormat() {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-    return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
-  }*/
 
   private String getDriveName(List<DriveData> listDrive, Node node) throws RepositoryException{
     String driveName = "";
