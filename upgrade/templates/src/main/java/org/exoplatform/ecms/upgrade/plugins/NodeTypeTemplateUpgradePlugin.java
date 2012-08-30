@@ -73,6 +73,7 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
     try {
       Set<String> unchangedNodeTypeSet = new HashSet<String>();
       Set<String> configuredNodeTypeSet = templateService_.getAllConfiguredNodeTypes();
+      Set<String> editedPredefinedNodeTypes = templateService_.getAllEditedConfiguredNodeTypes();
       List<Node> removedNodes = new ArrayList<Node>();
       for (String unchangedNodeType : unchangedNodeTypes.split(",")) {
         unchangedNodeTypeSet.add(unchangedNodeType.trim());
@@ -83,7 +84,9 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
       NodeIterator iter = templateHomeNode.getNodes();
       while (iter.hasNext()) {
         Node templateNode = iter.nextNode();
-        if (configuredNodeTypeSet.contains(templateNode.getName()) && !unchangedNodeTypeSet.contains(templateNode.getName())) {
+        if (configuredNodeTypeSet.contains(templateNode.getName()) 
+           && !unchangedNodeTypeSet.contains(templateNode.getName())
+           && !editedPredefinedNodeTypes.contains(templateNode.getName())) {
           removedNodes.add(templateNode);
         }
       }

@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,6 +97,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   private DMSConfiguration dmsConfiguration_;
 
   private static final String NODETYPE_LIST = "nodeTypeList";
+  private static final String EDITED_CONFIGURED_NODE_TYPES = "EditedConfiguredNodeTypes";
 
   private ExoCache nodeTypeListCached ;
 
@@ -135,6 +137,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         plugin.init();
         configuredNodeTypes.addAll(plugin.getAllConfiguredNodeTypes());
       }
+      
       // Cached all nodetypes that is document type in the map
       getDocumentTemplates();
     } catch (Exception e) {
@@ -506,6 +509,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     Node contentNode = specifiedTemplatesHome.getNode(templateName);
     contentNode.remove();
     nodeTypeHome.save();
+    
+    // Update list of changed template node type list
+    addEditedConfiguredNodeType(nodeTypeName);
   }
 
   /**
@@ -530,6 +536,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     managedDocumentTypes.remove(nodeTypeName);
     removeTemplateNodeTypeList();
+    
+    // Add to edited predefined template node type list
+    addEditedConfiguredNodeType(nodeTypeName);
   }
 
   /**
@@ -1080,6 +1089,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.getSession().save();
+      
+      // Add to edited predefined node type list
+      addEditedConfiguredNodeType(template.getParent().getParent().getName());
       return template.getPath();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -1187,4 +1199,26 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   
     return null;
   }
+  
+  @Override
+  public Set<String> getAllEditedConfiguredNodeTypes() throws Exception {
+    HashSet<String> editedConfigNodetypes = new HashSet<String>();
+    Node serviceLogContentNode= Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      editedConfigNodetypes.addAll(Arrays.asList(logData.split(";")));
+    }
+    return editedConfigNodetypes;
+  }
+  
+  private void addEditedConfiguredNodeType(String nodeType) throws Exception { 
+    Node serviceLogContentNode = Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isEmpty(logData)) logData = nodeType;
+      else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
+      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+      serviceLogContentNode.save();
+    }
+  } 
 }

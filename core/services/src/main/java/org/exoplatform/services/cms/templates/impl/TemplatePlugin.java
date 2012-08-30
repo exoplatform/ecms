@@ -258,6 +258,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
   @SuppressWarnings("unchecked")
   private void addTemplate(TemplateConfig templateConfig, Node templatesHome, String storedLocation) throws Exception {
+    Set<String> editedPredefinedNodeTypes = templateService.getAllEditedConfiguredNodeTypes();
     NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager() ;
     NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
     List<String> listNodeTypeName = new ArrayList<String>();
@@ -276,6 +277,12 @@ public class TemplatePlugin extends BaseComponentPlugin {
         }
         continue;
       }
+      
+      configuredNodeTypes.add(nodeType.getNodetypeName());
+
+      // Do not update predefined templates which was edited by user
+      if (editedPredefinedNodeTypes.contains(nodeType.getNodetypeName())) continue;
+      
       Node nodeTypeHome = null;
       nodeTypeHome = Utils.makePath(templatesHome, nodeType.getNodetypeName(), NT_UNSTRUCTURED);
       if(nodeType.getDocumentTemplate())
@@ -295,7 +302,6 @@ public class TemplatePlugin extends BaseComponentPlugin {
       if(skins != null) {
         addNode(storedLocation, nodeType, skins, SKINS, templatesHome);
       }
-      configuredNodeTypes.add(nodeType.getNodetypeName());
     }
   }
 
