@@ -60,7 +60,7 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
   }
   @Test
   public void testGetFavoriteByUser() throws Exception{
-    applyUserSession("john", "exo", "collaboration");
+    applyUserSession("john", "gtn", "collaboration");
     /* Prepare the favourite nodes */
     manageableRepository = repositoryService.getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(COLLABORATION_WS, manageableRepository);

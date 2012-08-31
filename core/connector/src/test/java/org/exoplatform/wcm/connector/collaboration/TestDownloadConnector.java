@@ -44,7 +44,7 @@ public class TestDownloadConnector extends BaseConnectorTestCase{
   @Test
   public void testDownload() throws Exception{
 //    ConversationState.setCurrent(new ConversationState(new Identity("root")));
-    applyUserSession("john", "exo", "collaboration");
+    applyUserSession("john", "gtn", "collaboration");
     /* Prepare the favourite nodes */
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());

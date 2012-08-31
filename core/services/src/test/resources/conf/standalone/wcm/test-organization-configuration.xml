@@ -699,7 +699,7 @@
                       <string>root</string>
                     </field>
                     <field name="password">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="firstName">
                       <string>Root</string>
@@ -725,7 +725,7 @@
                       <string>john</string>
                     </field>
                     <field name="password">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="firstName">
                       <string>John</string>
@@ -750,7 +750,7 @@
                       <string>marry</string>
                     </field>
                     <field name="password">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="firstName">
                       <string>Marry</string>
@@ -772,13 +772,13 @@
                       <string>demo</string>
                     </field>
                     <field name="password">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="firstName">
                       <string>Demo</string>
                     </field>
                     <field name="lastName">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="email">
                       <string>demo@localhost</string>
@@ -794,7 +794,7 @@
                       <string>james</string>
                     </field>
                     <field name="password">
-                      <string>exo</string>
+                      <string>gtn</string>
                     </field>
                     <field name="firstName">
                       <string>James</string>
