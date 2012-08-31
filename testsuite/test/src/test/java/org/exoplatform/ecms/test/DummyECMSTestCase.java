@@ -82,11 +82,11 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
     assertNotNull(this.repository);
     assertEquals(IdentityConstants.SYSTEM, session.getUserID());
 
-    applyUserSession("john", "exo", COLLABORATION_WS);
+    applyUserSession("john", "gtn", COLLABORATION_WS);
     assertNotNull(this.session);
     assertEquals("john", session.getUserID());
     
-    applyUserSession("john", "exo", DMSSYSTEM_WS);
+    applyUserSession("john", "gtn", DMSSYSTEM_WS);
     assertNotNull(this.session);
     assertEquals("john", session.getUserID());
   }

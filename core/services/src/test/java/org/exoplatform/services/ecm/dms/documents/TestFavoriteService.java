@@ -49,7 +49,7 @@ public class TestFavoriteService extends BaseWCMTestCase {
   
   @BeforeMethod
   public void setUp() throws Exception {
-    applyUserSession("john", "exo",COLLABORATION_WS);
+    applyUserSession("john", "gtn",COLLABORATION_WS);
     SessionProviderService sessionProviderService = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     ManageableRepository manageableRepository = repositoryService.getRepository("repository");

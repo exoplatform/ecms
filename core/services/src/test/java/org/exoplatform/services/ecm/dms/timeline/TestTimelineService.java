@@ -52,7 +52,7 @@ public class TestTimelineService extends BaseWCMTestCase {
   
   @BeforeMethod
   public void setUp() throws Exception {
-    applyUserSession("root", "exo",COLLABORATION_WS);
+    applyUserSession("root", "gtn",COLLABORATION_WS);
   }
 
 

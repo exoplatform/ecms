@@ -77,7 +77,6 @@ public class TestManageViewService extends BaseWCMTestCase {
     viewsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWS_PATH);
     templatesPathEx = nodeHierarchyCreator.getJcrPath(BasePath.ECM_EXPLORER_TEMPLATES);
     templatesPathCb = nodeHierarchyCreator.getJcrPath(BasePath.CB_PATH_TEMPLATES);
-    System.out.println("templatesPathCb: " + templatesPathCb);
     templatesQuery = nodeHierarchyCreator.getJcrPath(BasePath.CB_QUERY_TEMPLATES);
   }
   
@@ -305,7 +304,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testAddTemplate3() throws Exception {    
-    applyUserSession("marry", "exo",DMSSYSTEM_WS);
+    applyUserSession("marry", "gtn",DMSSYSTEM_WS);
     String templateFile = "<%import org.exo platform.ecm.webui.utils.Utils; "
         + "import org.exoplatform.web.application.Parameter;"
         + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
@@ -366,7 +365,7 @@ public class TestManageViewService extends BaseWCMTestCase {
   @Test
   public void testRemoveTemplate3() throws Exception {
 
-    applyUserSession("marry", "exo",DMSSYSTEM_WS);
+    applyUserSession("marry", "gtn",DMSSYSTEM_WS);
 
     try {
       manageViewService.removeTemplate(templatesPathEx + "/SystemView",
@@ -430,7 +429,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    */
   @Test
   public void testUpdateTemplate2() throws Exception {
-    applyUserSession("marry", "exo", DMSSYSTEM_WS);
+    applyUserSession("marry", "gtn", DMSSYSTEM_WS);
     String updateTemplateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
         + "import org.exoplatform.web.application.Parameter;"
         + "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>"
