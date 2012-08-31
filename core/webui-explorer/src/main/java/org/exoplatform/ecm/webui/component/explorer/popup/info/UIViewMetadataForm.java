@@ -26,6 +26,7 @@ import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.log.ExoLogger;
@@ -102,6 +103,10 @@ public class UIViewMetadataForm extends UIDialogForm {
       UIJCRExplorer uiJCRExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       UIViewMetadataManager uiViewManager = uiForm.getAncestorOfType(UIViewMetadataManager.class);
       Node node = uiViewManager.getViewNode(uiForm.getNodeType());
+      Node parent=node.getParent();
+      if(parent.isLocked()) {
+        parent.getSession().addLockToken(LockUtil.getLockToken(parent));  
+      }
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
       List<Value> valueList = new ArrayList<Value>();
