@@ -80,8 +80,8 @@ import org.exoplatform.workflow.webui.component.InputInfo;
 import org.exoplatform.workflow.webui.component.UISelectable;
 import org.exoplatform.workflow.webui.component.VariableMaps;
 import org.exoplatform.workflow.webui.component.validator.PositiveNumberValidator;
-import org.exoplatform.workflow.webui.utils.LockUtil;
 import org.exoplatform.workflow.webui.utils.Utils;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 /**
  * Created by The eXo Platform SARL
  * Author : Ly Dinh Quang

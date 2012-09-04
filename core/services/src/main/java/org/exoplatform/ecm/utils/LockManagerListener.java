@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (C) 2003-2009 eXo Platform SAS.
+ * Copyright (C) 2003-2012 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -17,91 +17,34 @@
  **************************************************************************/
 package org.exoplatform.ecm.utils;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.RootContainer;
-import org.exoplatform.services.cache.CacheService;
-import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationRegistry;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Hoang Van Hung
- *          hunghvit@gmail.com
- * Sep 30, 2009
+ * This listener will be used to unlock all locked node of current user in the case session destroyed.
+ * @author minh_dang
+ *
  */
 public class LockManagerListener extends Listener<ConversationRegistry, ConversationState > {
 
-  private static final Log LOG  = ExoLogger.getLogger(LockManagerListener.class.getName());
-
   @Override
-  @SuppressWarnings("unchecked")
   public void onEvent(Event<ConversationRegistry, ConversationState> event) throws Exception {
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Removing the locks of all locked nodes");
-    }
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    ConversationState conversationState = event.getData();
-    String userid = conversationState.getIdentity().getUserId();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    if(container == null) {
-      RootContainer rootContainer = RootContainer.getInstance() ;
-      container = rootContainer.getPortalContainer("portal") ;
-    }
-    CacheService cacheService = (CacheService)container.getComponentInstanceOfType(CacheService.class);
-    ExoCache lockcache = cacheService.getCacheInstance(LockManagerImpl.class.getName());
-    try {
-      Map<String,String> lockedNodes = (Map<String,String>)lockcache.get(userid);
-      if(lockedNodes == null || lockedNodes.values().isEmpty()) return;
-      RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-      String key = null, nodePath = null, workspaceName = null, lockToken= null ;
-      String[] temp = null, location = null ;
-      Session session = null;
-      for(Iterator<String> iter = lockedNodes.keySet().iterator(); iter.hasNext();) {
-        try {
-          //The key structure is built in org.exoplatform.ecm.webui.utils.LockUtil.createLockKey() method
-          key = iter.next();
-          temp = key.split(":/:");
-          nodePath = temp[1];
-          location = temp[0].split("/::/");
-          workspaceName = location[1] ;
-          session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
-          lockToken = lockedNodes.get(key);
-          session.addLockToken(lockToken);
-          Node node = (Node)session.getItem(nodePath);
-          node.unlock();
-          node.removeMixin("mix:lockable");
-          node.save();
-        } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Error while unlocking the locked nodes",e);
-          }
-        } finally {
-          if(session != null) session.logout();
-        }
-      }
-      lockedNodes.clear();
-    } catch(Exception ex) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error during the time unlocking the locked nodes",ex);
-      }
-    } finally {
-      sessionProvider.close();
-    }
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    /*
+     * In the case system stop working then we have to check the available of connection to repository.
+     * If connection lost we will do nothing in this listener.
+     */
+    if(repositoryService.getCurrentRepository() == null) return;
+    LockService lockService = WCMCoreUtils.getService(LockService.class);
+    /*
+     * Remove all locked node of current user
+     */
+    lockService.removeLocksOfUser(event.getData().getIdentity().getUserId());
   }
 
 }
