@@ -6,25 +6,25 @@
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin">Extended Publication Plugin</link>
           </emphasis> </para>
-          <para>Information about an extended Publication plugin used to manage the lifecycles of documents in Content via the following topics:</para>
+          <para>Details of an extended Publication plugin used to manage the lifecycles of documents in Content, including:</para>
           <itemizedlist>
               <listitem>
                  <para> <emphasis role="bold">
                  <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States">States</link>
                   </emphasis> </para>
-                  <para>Information about new states and new profiles of the extended publication, that are enabled in Content.</para>
+                  <para>Information about new states and new profiles of the extended publication that are enabled in Content.</para>
               </listitem>
               <listitem>
                  <para> <emphasis role="bold">
                  <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates">Start/End publication dates</link>
                   </emphasis> </para>
-                  <para>Introduction about new properties added to the new publication plugin, that allows you to manage the content publication in a defined period.</para>
+                  <para>Introduction to new properties added to the new publication plugin that allows you to manage the content publication in a defined period.</para>
               </listitem>
               <listitem>
                  <para> <emphasis role="bold">
                  <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin">New Publication Mixin</link>
                   </emphasis></para>
-                  <para>Introduction about new authoring mixin that supplies more information about the document creator.</para>
+                  <para>Introduction to the new authoring mixin that supplies more information about the document creator.</para>
               </listitem>
           </itemizedlist>
       </listitem>
@@ -33,26 +33,25 @@
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager">Publication Manager</link>
           </emphasis> </para>
-          <para>Knowledge about the Publication Manager which manages lifecycles and contexts in the Content platform. It allows to manages different lifecycles based on different publication plugin in the platform.
-          This section consists of the following topics:</para>
+          <para>Introduction to Publication Manager which manages lifecycles and contexts in Content and its details, including:</para>
           <itemizedlist>
               <listitem>
                  <para> <emphasis role="bold">
-                 <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle">Lifecycle </link>
+                 <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle">Lifecycle</link>
                   </emphasis> </para>
-                  <para>Sample code about lifecycle which is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a Publication plugin (compliant with the JBPM or Bonita business processes).</para>
+                  <para>Sample code of lifecycle, information about 3 lifecycles, and instructions on how to listen to a lifecycle and to perform tasks when a content's state is updated.</para>
               </listitem>
               <listitem>
                  <para> <emphasis role="bold">
                  <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.Context">Context</link>
                   </emphasis> </para>
-                  <para>Information and sample code about content in Content.</para>
+                  <para>Details of context, its sample code and rules.</para>
               </listitem>
               <listitem>
                  <para> <emphasis role="bold">
                  <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.NewAuthoringMixin">New Authoring Mixin</link>
                   </emphasis> </para>
-                  <para>Introduction about new authoring mixin that supplies more information about the document creator.</para>
+                  <para>Introduction to the new authoring mixin that supplies more information about the document creator, its sample code and details of querying based on publication status.</para>
               </listitem>
           </itemizedlist>
       </listitem>

@@ -1,6 +1,6 @@
 <preface xml:id="CONTref.AboutContentPackage">
   <title>About Content Package</title>
-      <para>All package actions in Content are started from the _delivery_ folder, so you should go to this folder
+      <para>All package actions in Content are started from the <emphasis>delivery</emphasis> folder, so you should go to this folder
         first.</para>
       <programlisting>$ cd ecms/delivery
       </programlisting>

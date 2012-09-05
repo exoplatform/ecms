@@ -1,39 +1,39 @@
 {docbook}
 <abstract>
- <para>This chapter provides you a comprehensive view about all portlet applications of Content, including:</para>
+ <para>This chapter introduces you to a list of portlets included in Content, and their details (packaging, portlet class name, available preferences and sample configurations:</para>
   <itemizedlist>
 	<listitem>
 	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.ContentDetail">Content Detail</link></emphasis>
 	  </para>
-	  <para>Allow users to view the detail of a specific content.
+	  <para>Allow viewing details of a specific content.
 	  </para>
     </listitem>
 	<listitem>
 	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.ContentList">Content List</link></emphasis>
 	  </para>
-	  <para>Show a list of contents which already exist in the system.</para>
+	  <para>Show a list of content which already exist in the system.</para>
     </listitem>
 	<listitem>
 	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.Search">Search</link></emphasis>
 	  </para>
-	  <para>Allow users to do a search with any string. In Content, there are three types of search: quick search, advanced search and search with saved queries.
+	  <para>Allow doing a search with any string.
 	  </para>
     </listitem>
 	<listitem>
 	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.Explorer">Sites Explorer</link></emphasis>
 	  </para>
-	  <para>Manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node, managing publication, and more. </para>
+	  <para>Manage all documents in different drives. With this portlet, you can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node, managing publication, and more. </para>
     </listitem>
 	<listitem>
 	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.Administration">Administration</link></emphasis>
 	  </para>
 	  <para>
-	  Manage the main ECM functions, including categories and tags, content presentation, types of content and advanced configuration.
+	  Manage the main Content functions, including categories and tags, content presentation, types of content and advanced configuration.
 	  </para>
     </listitem>
 	<listitem>

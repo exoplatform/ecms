@@ -46,16 +46,23 @@ WCM's nodetype exo\:article is not supported by eXo CMIS due to uncompliant stru
 h2. WCM drives as CMIS Repositories {anchor:id=Dev_CMIS.features.WCM_drives_as_CMIS_repositories}
 
 The WCM drive is used to expose as an isolated repository via the CMIS service. Operations on the repository will reflect the drive immediately.
+
 {tip}
 When working with CMIS repositories, it is important to understand that a repository reflects a WCM Drive, which is a sub-tree in JCR workspace. Two or more drives can be mapped to a same workspace or a sub-tree.
 As a result, changes in one repository can affect others.
 Refer to the WCM drives mappings to know actual location of a content you will access or change.
 {tip}
 
-h3. Use Case: Browse Drives via _getRepository_ {anchor:id=Dev_CMIS.features.Use_case_browse_drives_via_getRepositort}
+{docbook}
+<para xml:id="Dev_CMIS.features.Use_case_browse_drives_via_getRepository">
+<citetitle>
+	<emphasis role="bold">Use Case: Browse Drives via getRepository</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 * Login to the website as a user with the developer role.
-* Open *Group | Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
+* Open *Group --> Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
 * Get the list of these WCM drives via CMIS using _Curl_, asking _getRepositories_ service:
 {code}
 curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/ 
@@ -470,7 +477,7 @@ This section gives query examples for each specific case, including:
 * [Select all documents where query supertype is cmis:article|#Dev_CMIS.features.Select_all_documents_where_query_supertype_cmisArticle]
 * [IN_TREE constraint|#Dev_CMIS.features.INTREE_constraint]
 * [LIKE Comparison|#Dev_CMIS.features.LIKE_comparison]
-* [Test LIKE constraint with escape symbols|#Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols]
+* [LIKE constraint with escape symbols|#Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols]
 * [NOT constraint|#Dev_CMIS.features.NOT_constraint]
 * [Property existence|#Dev_CMIS.features.Property_existence]
 * [ORDER BY|#Dev_CMIS.features.ORDERBY]
@@ -707,7 +714,7 @@ SELECT * FROM cmis:document AS doc WHERE apollo:PropertyCommander LIKE 'James%'
 Query result:
 * document3.
 
-h4. Test LIKE constraint with escape symbols {anchor:id=Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols}
+h4. LIKE constraint with escape symbols {anchor:id=Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols}
 
 Query: Select all documents where apollo:someProperty like 'ad\%min%'.
 

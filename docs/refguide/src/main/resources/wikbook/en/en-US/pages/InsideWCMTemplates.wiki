@@ -6,14 +6,14 @@
           <emphasis role="bold">
             <link linkend="CONTref.CONTref.InsideWCMTemplates.ContentTypes">Content types</link>
           </emphasis> </para>
-          <para>Information about two types of template (css and dialog) applied to a node type or a metadata mixin type. </para>
+          <para>Details of 2 template types (dialog and view) applied to a node type or a metadata mixin type. </para>
   </listitem>
    <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.InsideWCMTemplates.ListOfContents">List of Contents</link>
           </emphasis> </para>
-          <para>Provision of a list of content types commonly used in Content.</para>
+          <para>Description about Content List and Category Navigation templates which are commonly used in Content.</para>
   </listitem>
 </itemizedlist>
 </highlights>
@@ -34,4 +34,4 @@
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]

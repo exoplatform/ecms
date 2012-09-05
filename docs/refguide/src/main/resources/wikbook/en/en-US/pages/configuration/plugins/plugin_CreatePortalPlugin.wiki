@@ -1,1 +1,9 @@
-This is an abstract class and the parent of [_TaxonomyPlugin_|#CONTref.Configuration.Plugins.TaxonomyPlugin]. You can create a link from this plugin to its children.
+{docbook}
+<para xml:id="CONTref.Configuration.Plugins.CreatePortalPlugin">
+<citetitle>
+<emphasis role="bold">CreatePortalPlugin</emphasis>
+</citetitle>
+</para>
+{docbook}
+
+This is an abstract class and the parent of [_TaxonomyPlugin_|#CONTref.Configuration.Plugins.TaxonomyPlugin].

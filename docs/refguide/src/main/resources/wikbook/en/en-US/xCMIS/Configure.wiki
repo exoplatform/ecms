@@ -6,29 +6,28 @@
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.CMIS_configuration">CMIS Configuration</link>
           </emphasis> </para>
-          <para>Necessary infomation to make a special extension of <emphasis>CmisRegistry</emphasis>.</para>
+          <para>Necessary information to make a special extension of <emphasis>CmisRegistry</emphasis>.</para>
     </listitem>
     <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Required_nodetypes_namespaces_in_JCR">Required nodetypes and namespaces in JCR</link>
           </emphasis> </para>
-          <para>Introduction about the mandatory configuration for JCR to work correctly.</para>
+          <para>Introduction to the mandatory configuration for JCR to work correctly.</para>
      </listitem>
      <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Authentication_organization_service_configuration">Authenticator and organization service configuration</link>
           </emphasis> </para>
-          <para>Introduction about authenticator and organization service configuration.</para>
+          <para>Overall introduction to configuration of authenticator and organization service.</para>
      </listitem>
-
     <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.CMIS_search_index">CMIS search and index</link>
           </emphasis> </para>
-          <para>Full provision about CMIS and index, such as query capabilities, configuration, Index atomicity and durability, and more.  </para>
+          <para>Full provision of CMIS and index, such as query capabilities, configuration, index atomicity and durability.</para>
      </listitem>
 </itemizedlist>
 </highlights>

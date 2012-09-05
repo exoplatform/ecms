@@ -1,1 +1,9 @@
-This is an abstract class and the parent of [_RemoveTaxonomyPlugin_|#CONTref.Configuration.Plugins.RemoveTaxonomyPlugin]. You can create a link from this plugin to its children.
+{docbook}
+<para xml:id="CONTref.Configuration.Plugins.RemovePortalPlugin">
+<citetitle>
+<emphasis role="bold">RemovePortalPlugin</emphasis>
+</citetitle>
+</para>
+{docbook}
+
+This is an abstract class and the parent of [_RemoveTaxonomyPlugin_|#CONTref.Configuration.Plugins.RemoveTaxonomyPlugin].

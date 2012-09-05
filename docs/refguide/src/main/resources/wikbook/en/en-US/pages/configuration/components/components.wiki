@@ -6,111 +6,111 @@
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.ActionServiceContainer">ActionServiceContainer</link>
           </emphasis> </para>
-          <para>Manages actions (adding, removing, or executing actions, and more) in the system.</para>
+          <para>Manage actions (adding, removing, or executing actions, and more) in the system.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.ApplicationTemplateManagerService">ApplicationTemplateManagerService</link>
           </emphasis> </para>
-          <para>Manages dynamic Groovy templates for WCM-based products.</para>
+          <para>Manage dynamic Groovy templates for WCM-based products.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.FragmentCacheService">FragmentCacheService</link>
           </emphasis> </para>
-          <para>Caches the response fragments which are sent to end-users.</para>
+          <para>Cache the response fragments which are sent to end-users.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.JodConverterService">JodConverterService</link>
           </emphasis> </para>
-          <para>Converts documents into different office formats.</para>
+          <para>Convert documents into different office formats.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.LiveLinkManagerService">LiveLinkManagerService</link>
           </emphasis> </para>
-          <para>Checks broken links, updates links when the links are edited and extracts links to return a list of all links.</para>
+          <para>Check broken links, updates links when the links are edited and extracts links to return a list of all links.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.LockService">LockService</link>
           </emphasis> </para>
-          <para>Manages all locked nodes and allows unlocking the locked nodes in the system. It is also used to assign the Lock right to a user or a user group or a membership.</para>
+          <para>Manage all locked nodes and allows unlocking the locked nodes in the system. It is also used to assign the Lock right to a user or a user group or a membership.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.NewsletterInitializationService">NewsletterInitializationService</link>
           </emphasis> </para>
-          <para>Initiates some data for the newsletter portlet. </para>
+          <para>Initiate some data for the newsletter portlet. </para>
       </listitem><listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.NewsletterManagerService">NewsletterManagerService</link>
           </emphasis> </para>
-          <para>Sends newsletters to subscribers.</para>
+          <para>Send newsletters to subscribers.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.SiteSearchService">SiteSearchService</link>
           </emphasis> </para>
-          <para>Is used in the <emphasis role="bold">Search</emphasis> portlet that allows users to find all information matching with your given keyword.</para>
+          <para>Allow finding all information matching with your given keyword.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.SEOService">SEOService</link>
           </emphasis> </para>
-          <para>Helps users manage SEO data of a page or a content, so their websites can achieve higher rankings on search engines.</para>
+          <para>Help users manage SEO data of a page or a content, so their websites can achieve higher rankings on search engines.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.QueryService">QueryService</link>
           </emphasis> </para>
-          <para>Manages many queries, including adding, removing or executing a query.</para>
+          <para>Manage many queries, including adding, removing or executing a query.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.TaxonomyService">TaxonomyService</link>
           </emphasis> </para>
-          <para>Sorts documents to ease searches when browsing documents online.</para>
+          <para>Sort documents to ease searches when browsing documents online.</para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.ThumbnailService">ThumbnailService</link>
           </emphasis> </para>
-          <para>Resizes all images into different sizes. Besides the default sizes, it also allows users to customize the images into the desired sizes. </para>
+          <para>Resize all images into different sizes. Besides the default sizes, it also allows users to customize the images into the desired sizes. </para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.TimelineService">TimelineService</link>
           </emphasis> </para>
-          <para>Allows documents to be displayed by days, months and years.</para>
+          <para>Allow documents to be displayed by days, months and years.</para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.WatchDocumentService">WatchDocumentService</link>
           </emphasis> </para>
-          <para>Allows users to watch/unwatch a document. If they are watching the document, they will receive a notification mail when there are any changes on the document.</para>
+          <para>Allow watching/unwatching a document. If you are watching the document, you will receive a notification mail when there are any changes on the document.</para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.WCMService">WCMService</link>
           </emphasis> </para>
-          <para>Allows setting expiration cache of portlets and checking given portals if they are shared portals or not. It also gets reference contents basing on item identifiers.</para>
+          <para>Allow setting expiration cache of portlets and checking given portals if they are shared portals or not. It also gets reference contents basing on item identifiers.</para>
       </listitem>
 </itemizedlist>
 </highlights>
