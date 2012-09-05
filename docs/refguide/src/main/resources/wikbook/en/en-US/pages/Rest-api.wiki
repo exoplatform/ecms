@@ -6,48 +6,48 @@
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.ThumnailRestService">ThumbnailRESTService</link>
           </emphasis> </para>
-          <para>Returns a responding data as a thumbnail image.</para>
+          <para>Return a responding data as a thumbnail image.</para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.RssConnector">RssConnector</link>
           </emphasis> </para>
-          <para>Generates an RSS feed.</para>
+          <para>Generate an RSS feed.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector">FCKCoreRESTConnector</link>
           </emphasis> </para>
-          <para>Gets a list of files and folders, and create a folder and upload files.</para>
+          <para>Get a list of files and folders, and create a folder and upload files.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.ResourceBundleConnector">ResourceBundleConnector</link>
           </emphasis> </para>
-          <para>Gets the bundle basing on the key and the locale.</para>
+          <para>Get the bundle basing on the key and the locale.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.VoteConnector">VoteConnector</link>
           </emphasis> </para>
-          <para>Returns and set a vote value of a given node in the sent parameter.</para>
+          <para>Return and set a vote value of a given node in the sent parameter.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.DriverConnector"> DriverConnector</link>
           </emphasis> </para>
-          <para>Returns a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action.</para>
+          <para>Return a drive list, a folder list and a document list in a specified location for a given user. Also, it processes the file uploading action.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.GadgetConnector">GadgetConnector</link>
-          </emphasis> </para>
+          </emphasis></para>
           <para>Instantiate a new gadget connector.</para>
       </listitem>
       <listitem>
@@ -55,69 +55,69 @@
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.PortalLinkConnector">PortalLinkConnector</link>
           </emphasis> </para>
-          <para>Returns a page URI for a given location.</para>
+          <para>Return a page URI for a given location.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService">GetEditedDocumentRESTService</link>
           </emphasis> </para>
-          <para>Returns the latest edited documents.</para>
+          <para>Return the latest edited documents.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService">PublicationGetDocumentRESTService</link>
           </emphasis> </para>
-          <para>Returns a list of published documents.</para>
+          <para>Return a list of published documents.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.FavoriteRESTService">FavoriteRESTService</link>
           </emphasis> </para>
-          <para>Returns a list of favourite documents of a given user.</para>
+          <para>Return a list of favorite documents of a given user.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.RESTImagesRendererService">RESTImagesRendererService</link>
           </emphasis> </para>
-          <para>Gets the image binary data of a given image node.</para>
+          <para>Get the image binary data of a given image node.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.LifecycleConnector">LifecycleConnector</link>
           </emphasis> </para>
-          <para>Returns a list of contents in a given state range of the publication lifecycle.</para>
+          <para>Return a list of contents in a given state range of the publication lifecycle.</para>
       </listitem><listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.CopyContentFile">CopyContentFile</link>
           </emphasis> </para>
-          <para>Copies a file.</para>
+          <para>Copy a file.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs.PDFViewerRESTService">PDFViewerRESTService</link>
           </emphasis> </para>
-          <para>Returns the pdf content to display on the web page</para>
+          <para>Return the PDF content to display on the web page</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.JavaServices.ManageDocumentService">ManageDocumentService</link>
           </emphasis> </para>
-          <para>Allows performing some actions on a folder or a file, such as creating, deleting a folder/file, or uploading a file.</para>
+          <para>Allow performing some actions on a folder or a file, such as creating, deleting a folder/file, or uploading a file.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.JavaServices.DownloadConnector">DownloadConnector</link>
           </emphasis> </para>
-          <para>Enables downloading the content of <emphasis>nt:file</emphasis>.</para>
+          <para>Enable downloading the content of <emphasis>nt:file</emphasis>.</para>
       </listitem>
 </itemizedlist>
 </highlights>
@@ -139,7 +139,7 @@
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]
 
 
 h1. ThumbnailRESTService {anchor:id=CONTref.Devref.PublicRestAPIs.ThumnailRestServiceRoleNotInToc}

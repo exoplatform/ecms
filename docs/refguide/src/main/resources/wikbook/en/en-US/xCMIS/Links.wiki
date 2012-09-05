@@ -28,4 +28,4 @@
 * [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]

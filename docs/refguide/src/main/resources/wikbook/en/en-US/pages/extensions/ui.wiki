@@ -1,10 +1,13 @@
 In Content, it is possible to extend the *Sites Explorer* and the *ECM Administration* with the *UI Extension Framework*. Indeed, you can add your own action buttons to the *Sites Explorer* and/or add your own managers to the *ECM Administration*.
 This section shows you how to create a sample UI extension via adding your own tab to *ECM Administration*.
 
-
-h1. Add your own UIAction {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnUIAction}
-
-To add your own UIAction, do as follows:
+{docbook}
+<para xml:id="CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnUIAction">
+<citetitle>
+	<emphasis role="bold">Add your own UIAction</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 *1.* Create a _pom.xml_ file with the following content:
 
@@ -78,7 +81,13 @@ To add your own UIAction, do as follows:
 
 *3.* Create a new class called _org.exoplatform.wcm.component.cache.UIWCMCacheComponent_ that extends _org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent_.
 
-h1. Add your own ActionListener {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnActionListener}
+{docbook}
+<para xml:id="CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnActionListener">
+<citetitle>
+	<emphasis role="bold">Add your own ActionListener</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 With the Webui framework, you will be notified if any given action is triggered. You just need to call your own action listener ($ACTIONNAME) *ActionListener*.
 For example, to create your own action listener for *CacheView*, do as follows:
@@ -107,9 +116,13 @@ public class CacheViewComponent extends UIAbstractManagerComponent {
 
 *4.* Create a new configuration file called _conf/portal/configuration.xml_ to register your action (see [Register your UI Action|#CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction]) with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
 
-h1. Register your UI Action {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction}
-
-To register your UI Action, do as follows:
+{docbook}
+<para xml:id="CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction">
+<citetitle>
+	<emphasis role="bold">Register your UI Action</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 *1.* Create the code:
 
@@ -288,8 +301,13 @@ By being added this configuration, the resource bundle has been completely separ
 </external-component-plugins>
 {code}
 
-h1. Run your own UI extension sample {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RunUIExtensionSample}
-Do as follows:
+{docbook}
+<para xml:id="CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RunUIExtensionSample">
+<citetitle>
+	<emphasis role="bold">Run your own UI extension sample</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 *1.* Run Tomcat.
 

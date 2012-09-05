@@ -6,29 +6,28 @@
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.RESTServices">REST Services</link>
           </emphasis> </para>
-          <para>Information about REST services used in Content, such as HTTP Methods, formats, data format, rest configuration
-            and a REST service creation.</para>
+          <para>Introduction to Rest Services, and details (including HTTP Methods, formats, data format, REST configuration) of Restful Web Service, and how to create a REST service.</para>
       </listitem>
        <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.UIExtensions">UI Extensions</link>
           </emphasis> </para>
-          <para>Instructions on extending the Sites Explorer and the ECM Administration with the UI Extension Framework.</para>
+          <para>Instructions on how to do UI extensions via adding your own UIAction/ActionListener, registering your UIAction and running your own UI extension sample.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.AuthoringExtension">Authoring Extension</link>
           </emphasis> </para>
-          <para>Information about extended publication plugin and publication manager. </para>
+          <para>Information about the extended publication plugin and publication manager.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Extensions.AuxiliaryAttributes">Auxiliary attributes for documents</link>
           </emphasis> </para>
-          <para>Information about how to create the <emphasis>DocumentContex</emphasis> context which stores some auxiliary attributes of the document and helps document listeners make decision
+          <para>Details of how to create the <emphasis>DocumentContext</emphasis> which stores some auxiliary attributes of the document and helps document listeners make decision
 based on these attributes.</para>
       </listitem>
 </itemizedlist>
@@ -50,4 +49,4 @@ based on these attributes.</para>
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]

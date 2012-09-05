@@ -7,32 +7,44 @@
       and publishing content - all from a single, familiar console.
     </para>
     <para>When starting a new project, you can see Content as a Java developer platform.</para>
-    <para>This document will give you guidelines related to building stable applications using Content from the
-      inside. The document consists of the following main contents:
+    <para>This document will give you guidelines related to building stable applications using Content from inside via the following chapters:
     </para>
     <itemizedlist>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Applications">Portlet Applications</link></emphasis>
-            describes portlet applications included in Content.
+		</para>
+		<para>
+            Introduction to a list of portlets included in Content, and their details (packaging, portlet class name, available preferences and sample configurations).
+        </para>
+      </listitem>
+	   <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Applications">CMIS</link></emphasis>
+		</para>
+		<para>
+          Overview of CMIS, necessary information about CMIS specification and xCMIS project, details of important CMIS features and Service JARs.
         </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration">Configuration</link></emphasis>
-            provides you the comprehensive knowledge about the configuration with a large range of configuration
-            parameters declared in Content.
+		</para>
+		<para>
+           A comprehensive knowledge of components and external component plugins, and details of CMIS configuration.
         </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.DeveloperReferences">Developer References</link></emphasis>
-            describes about extension, public APIs, Java APIs, FAQs and related others in Content.
+		</para>
+		<para>
+            Many useful information of WCM templates, WCM Explorer, extensions, examples of CMIS Usage code, public REST APIs, and Public Java APIs. Also, this chapter lists deprecated portlets and gives reference links as well FAQs related to Content.
         </para>
       </listitem>
     </itemizedlist>
   </abstract>
-

@@ -7,28 +7,28 @@
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Overview">Overview</link>
           </emphasis> </para>
-          <para>Overview introduction about CMIS, xCMIS and eXo CMIS.</para>
+          <para>Overall introduction to CMIS, xCMIS and eXo CMIS.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Specification">CMIS specification</link>
           </emphasis> </para>
-          <para>Introduction about CMIS specification which provides a Web services interface. </para>
+          <para>Introduction to the CMIS specification and functions of a Web services interface which is provided by the CMIS specification. </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.xCMIS_project">xCMIS project</link>
           </emphasis> </para>
-          <para>Introduction about the xCMIS project and its benefits.</para>
+          <para>Introduction to the xCMIS project and its benefits.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.features">CMIS features</link>
           </emphasis></para>
-        <para>Introduction about CMIS feartures, such as Integration with eXo WCM, CMIS Domain Model and CMIS Services. </para>
+        <para>Introduction to the CMIS features, including how to integrate with eXo WCM, CMIS Domain Model and CMIS Services.</para>
       </listitem>
       <listitem>
         <para>

@@ -6,7 +6,7 @@
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Usage_code_examples.Login_to_repository">Login to repository</link>
           </emphasis> </para>
-          <para>Example about basic HTTP authentication.</para>
+          <para>Example of using Java to login to repository.</para>
       </listitem>
       <listitem>
         <para>
@@ -20,29 +20,29 @@
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream">Read document properties and content-stream</link>
           </emphasis> </para>
-          <para>Instruction about how to read and get the document properties and content stream.</para>
+          <para>Instructions on how to read and get the document properties and content stream.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Usage_code_examples.Search_data_syntax_example">Search of data and syntax examples</link>
           </emphasis> </para>
-          <para>Examples about searching data and syntax in CMIS.</para>
+          <para>Examples of using Java and Javascript to search for data and syntax in CMIS.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content">Modification of document properties or content</link>
           </emphasis> </para>
-          <para>Examples about how to update and get document properties or content in CMIS.</para>
+          <para>Instructions on how to use Java and Javascript to update and get document properties or content in CMIS.</para>
       </listitem>
 </itemizedlist>
 </highlights>
 {docbook}
 
-The following examples of the CMIS usage may be useful for developers who need to access a repository.
+The examples of the CMIS usage may be useful for developers who need to access a repository.
 CMIS access code snippets are built using Apache HTTP Client for Java, or using Google gadgets (gadgets.io) for JavaScript examples.
-For the cURL examples, look at http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
+For examples of CURL, visit http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
 
 {docbook}
 <para>
@@ -59,7 +59,7 @@ For the cURL examples, look at http://code.google.com/p/xcmis/wiki/xCMISusesWith
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]
 
 h1. Login to repository {anchor:id=Dev_CMIS.Usage_code_examples.Login_to_repositoryRoleNotInToc}
 

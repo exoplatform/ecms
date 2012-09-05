@@ -40,4 +40,4 @@ Basically, if you want to add a rich text area to your dialogs, you can use the 
 * [Public Java APIs|#CONTref.JavaServices]
 * [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQ|#CONTref.FAQ]
+* [FAQs|#CONTref.FAQ]

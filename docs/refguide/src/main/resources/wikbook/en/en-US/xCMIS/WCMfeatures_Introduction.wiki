@@ -6,49 +6,23 @@
           <emphasis role="bold">
             <link linkend="Dev_CMIS.features.Integration_with_eXoWCM">Integration with eXo WCM</link>
           </emphasis> </para>
-          <para>This section will show you how integration between eXo WCM and CMIS is via the following topics:
-          </para>
-          <itemizedlist>
-              <listitem>
-               <para>
-                <emphasis role="bold"><link linkend="Dev_CMIS.features.JCR_namespaces_nodetypes">JCR namespaces and nodetypes</link></emphasis>
-              </para>
-              </listitem>
-              <listitem>
-               <para>
-                <emphasis role="bold"><link linkend="Dev_CMIS.features.WCM_drives_as_CMIS_repositories"> WCM drives as CMIS Repositories</link></emphasis>
-              </para>
-              </listitem>
-              <listitem>
-               <para>
-                <emphasis role="bold"><link linkend="Dev_CMIS.features.WCM_symlinks">WCM Symlinks</link></emphasis>
-              </para>
-              </listitem>
-              <listitem>
-               <para>
-                <emphasis role="bold"><link linkend="Dev_CMIS.features.Modify_WCM_via_CMIS">Modify WCM via CMIS</link></emphasis>
-              </para>
-              </listitem>
-              <listitem>
-               <para>
-                <emphasis role="bold"><link linkend="Dev_CMIS.features.Search">CMIS search</link></emphasis>
-              </para>
-              </listitem>
-          </itemizedlist>
+          <para>This section will show you how to integrate between eXo WCM and CMIS via <emphasis role="bold"><link linkend="Dev_CMIS.features.JCR_namespaces_nodetypes">JCR namespaces and nodetypes</link></emphasis>, <emphasis role="bold"><link linkend="Dev_CMIS.features.WCM_drives_as_CMIS_repositories"> WCM drives as CMIS Repositories</link></emphasis>,
+		  <emphasis role="bold"><link linkend="Dev_CMIS.features.WCM_symlinks">WCM Symlinks</link></emphasis>, <emphasis role="bold"><link linkend="Dev_CMIS.features.Search">CMIS search</link></emphasis>, and <emphasis role="bold"><link linkend="Dev_CMIS.features.Modify_WCM_via_CMIS">how to modify WCM via CMIS</link></emphasis>.
+        </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.features.CMIS_domain_model">CMIS Domain Model</link>
           </emphasis> </para>
-          <para>Introduction about the CMIS Domain Model and some of its common entities. </para>
+          <para>Necessary information about the CMIS Domain Model and some of its common entities.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.features.CMIS_services">CMIS Services</link>
           </emphasis> </para>
-          <para>Introduction about the CMIS Services.</para>
+          <para>Introduction to the CMIS Services, including Repository, Navigation, Object, Multi-filing, Discovery, Versioning, Relationship, Policy and ACL.</para>
       </listitem>
     </itemizedlist>
 </highlights>

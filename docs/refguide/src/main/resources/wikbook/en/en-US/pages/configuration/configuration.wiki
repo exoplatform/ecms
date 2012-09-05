@@ -15,7 +15,7 @@
             <link linkend="CONTref.Configuration.Plugins">External Component Plugins</link>
           </emphasis> </para>
           <para>Description of the main external component plugins used in the Content function. Each part supplies an example configuration
-           with the explanation about ini-params so you can know how to use these plugins.</para>
+           with the explanation about init-params so you can know how to use these plugins.</para>
       </listitem>
       <listitem>
         <para>
