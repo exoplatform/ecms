@@ -334,9 +334,15 @@
       <name>AdjustDrivePermissionNewUserListener</name>
       <set-method>addListenerPlugin</set-method>
       <type>org.exoplatform.services.cms.permission.AdjustDrivePermissionNewUserListener</type>
-      <description>description</description>
+      <description>Adjust permission of user folder</description>
     </component-plugin>
+				
+				<component-plugin>
+      <name>AddMixinToNewUserListener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.cms.listeners.AddMixinToNewUserListener</type>
+      <description>Add mixin exo:userFolder into user folder</description>
+    </component-plugin>				
 	  
-	  
-	</external-component-plugins>
+	 </external-component-plugins>
 </configuration>

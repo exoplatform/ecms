@@ -1032,5 +1032,8 @@
 			<supertype>nt:base</supertype>
 		</supertypes>
 	</nodeType>
+	
+  <nodeType name="exo:userFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>	
 
 </nodeTypes>
