@@ -69,7 +69,7 @@ public class UITagExplorer extends UIContainer {
   public static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
   private static final String PRIVATE_TAG_PAGE_ITERATOR_ID           = "PrivateTagPageIterator";
   private static final String PUBLIC_TAG_PAGE_ITERATOR_ID           = "PublicTagPageIterator";
-  private static final int TAG_PAGE_SIZE = 50;
+  private static final int TAG_PAGE_SIZE = 30;
   private int tagScope;
   private UIPageIterator        privateTagPageIterator_;
   private UIPageIterator        publicTagPageIterator_;
