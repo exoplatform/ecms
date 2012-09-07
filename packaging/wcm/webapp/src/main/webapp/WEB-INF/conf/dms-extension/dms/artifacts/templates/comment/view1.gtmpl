@@ -4,6 +4,7 @@
   import org.exoplatform.portal.webui.util.Util;
   import java.util.Locale;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  import org.apache.commons.lang.StringUtils;
   
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
@@ -13,6 +14,9 @@
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
     java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy", locale) ;
     def lastComment = commentsList.get(0) ;
+    def lastFullname = null;
+    if(lastComment.hasProperty("exo:commentor"))
+      lastFullname = uicomponent.getUserFullName(lastComment.getProperty("exo:commentor").getString());      
     def rcontext = _ctx.getRequestContext() ;
     
 %>
@@ -25,9 +29,9 @@
 			  <div class="RightCommentBar">
 			    <div class="MiddleCommentBar">
 			    	<div class="LabelPostedComment">
-		  			  <%=_ctx.appRes("Comment.view.label.postedBy")%><span style="color:#f7941e">
-		  			  <%if(lastComment.hasProperty("exo:commentor")){%>
-		  			  	<%=lastComment.getProperty("exo:commentor").getString()%></span> 
+		  			  <%=_ctx.appRes("Comment.view.label.postedBy")%>
+		  			  <%if(StringUtils.isNotEmpty(lastFullname)){%><span style="color:#f7941e">
+		  			  	<%=lastFullname%></span> 
 		  			  <%}%>
 		  			  <%=_ctx.appRes("Comment.view.label.at")%> 
 		  			  <%if(lastComment.hasProperty("exo:commentDate")){%>
@@ -46,14 +50,16 @@
 		<div class="ShowHideComponent" style="display: none;">
 		  <%
 		  def uiremovecomment = uicomponent.getRemoveComment();
-		  for(comment in commentsList) {%>
+		  for(comment in commentsList) {
+		    def fullName = null;
+		    if(comment.hasProperty("exo:commentor"))
+		      fullName = uicomponent.getUserFullName(comment.getProperty("exo:commentor").getString());
+		    %>
 		  	<div class="CommentInfo">
 		  		<%=_ctx.appRes("Comment.view.label.comment-by")%> 
-		  		<span style="color: orange; font-weight: bold;">
-			  		<%if(comment.hasProperty("exo:commentor")){%>
-			  			<%=comment.getProperty("exo:commentor").getString()%>
-			  		<%}%>
-		  		</span>
+		  		<%if(StringUtils.isNotEmpty(fullName)){%>  <span style="color: orange; font-weight: bold;">
+		  		  <%=fullName%>  </span>
+		  		<%}%>
 		  		<%
 		  		  if(comment.hasProperty("exo:commentorEmail")) {
 		  		    String email = comment.getProperty("exo:commentorEmail").getString() ;

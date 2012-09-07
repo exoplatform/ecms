@@ -121,6 +121,9 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 
 /**
  * Created by The eXo Platform SARL
@@ -1675,5 +1678,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       return node.isNodeType(NodetypeConstant.EXO_AUDIO_DESCRIPTION) &&
              parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA);
     } catch (Exception e) { return false; }
+  }
+  
+  public String getUserFullName(String userName) throws Exception {
+    String fullname = userName;
+    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    User user = organizationService.getUserHandler().findUserByName(userName);
+    fullname = user.getFullName();
+    return fullname;
   }
 }
