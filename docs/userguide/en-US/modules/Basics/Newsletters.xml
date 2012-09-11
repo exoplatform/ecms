@@ -5,10 +5,40 @@
 ]>
 <section id="sect-User_Guide-Newsletters">
 <title>Manage newsletters</title>
+  <highlights>
+      <itemizedlist>
+           <listitem>
+               <para>
+                   <link linkend="sect-User_Guide-Newsletters-Newsletter_Viewer">Newsletter viewer</link>: Learn to create subscribe to email newsletter.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <link linkend="sect-User_Guide-Newsletters-Manage_Newsletters">Newsletter Manager</link>: Learn to manage categories in the <emphasis role="bold">Newsletter</emphasis> portlet, add a new subscription; view, edit, delete a newsletter or convert a newsletter as template.
+               </para>
+           </listitem>
+      </itemizedlist>
+  </highlights>
   <para>
   &PRODUCT; provides the <emphasis role="bold">Newsletters</emphasis> service, aiming at helping users quickly get the updated newsletters from a website.
  </para>
-  <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
+ <para>
+    <prompt>
+        <emphasis role="bold">See also</emphasis>
+    </prompt>
+</para>
+<itemizedlist>
+        <listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Structure_Content">Structure content</link></para>
+		</listitem>
+		<listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Content">Manage content</link></para>
+		</listitem>
+		<listitem>
+			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
+		</listitem>
+</itemizedlist>
+  <section id="sect-User_Guide-Newsletters-Newsletter_Viewer" role="NotInToc">
     <title>Newsletter viewer</title>
 	<note>
    <para>
@@ -68,7 +98,7 @@
       </step>
     </procedure>
   </section>
-  <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
+  <section id="sect-User_Guide-Newsletters-Manage_Newsletters" role="NotInToc">
     <title>Newsletter Manager</title>
 	<note>
    <para>

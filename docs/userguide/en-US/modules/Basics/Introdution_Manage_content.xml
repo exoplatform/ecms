@@ -1,44 +1,61 @@
 <para>
 <highlights>
-	<itemizedlist>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Contribute_Content">Contribute content</link>: Learnt about the <emphasis role="bold">Edit mode</emphasis>, <emphasis role="bold">InContext Editing</emphasis>, <emphasis role="bold">Inline Editing</emphasis>, <emphasis role="bold">CKEeditor</emphasis> and the publication process.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Content_By_Query">Manage content list viewer by query</link>: Learn to user the <emphasis role="bold">Content By Query</emphasis> portlet to collect and display data throughout a workspace by using a query.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Content_Inside_Categories-Create_a_Content">Create content inside a category</link>: Learn to create content in a catagory.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer">Manage content in Sites Explorer</link>: Learn to create, edit, delete, publish and seatch for web content.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV">Manage content with WebDAV</link>: Learn to use WebDAV to add new content or delete web content.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Fast_Content_Creator">Manage content with Fast Content Creator</link>: Learn to configure the <emphasis role="bold">Fast Content Creator</emphasis> portlet and create new content with this portlet.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Form_Builder">Create content templates with Form Builder</link>: Learn to use the <emphasis role="bold">Form Builder</emphasis> portlet to create and edit the template of document types.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-CLV_templates">Manage CLV templates in Sites Explorer</link>: Learn to create, edit and delete a CLV template.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Category_Navigation">Manage Category Navigation</link>: Learn to access and configure the <emphasis role="bold">Category Navigation</emphasis> portlet.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-SEO_Management">Manage SEO</link>: Learn to use the <emphasis role="bold">SEO Management</emphasis> to manage SEO data of web pages, web content and optimize your website for search engine.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Search_portlet">Search content in a site</link>: Learn to search for content and configure the <emphasis role="bold">Search</emphasis> portlet.</para>
-		</listitem>
-		<listitem>
-			<para><link linkend="sect-User_Guide-Print_content">Print content</link>: Learn to print any content in a site.</para>
-		</listitem>
-	</itemizedlist>
+<itemizedlist>
+<listitem>
+<para><link linkend="sect-User_Guide-Contribute_Content">Contribute content</link></para>
+<para>Introduction to the <emphasis role="bold">Edit</emphasis> mode, procedures to do actions in <emphasis role="bold">InContext Editing</emphasis>, <emphasis role="bold">Inline Editing</emphasis>, <emphasis role="bold">CKEeditor</emphasis> and information of the publication process.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Content_By_Query">Manage content list viewer by query</link></para>
+<para>Introduction to the <emphasis role="bold">Content By Query</emphasis> portlet and detailed steps to add this portlet to a specific page.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Content_Inside_Categories-Create_a_Content">Create content inside a category</link></para>
+<para>Steps to create content in a category.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer">Manage content in <emphasis role="bold">Sites Explorer</emphasis></link></para>
+<para>Information of Web content, and detailed steps to create, edit, delete, publish and search for web content in <emphasis role="bold">Sites Explorer</emphasis>.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV">Manage content with <emphasis role="bold">WebDAV</emphasis></link></para>
+<para>Introduction to <emphasis role="bold">WebDAV</emphasis>, and detailed steps to use <emphasis role="bold">WebDAV</emphasis> in <emphasis role="bold">eXo Platform</emphasis>, add new content or delete web content in <emphasis role="bold">WebDAV</emphasis>.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Fast_Content_Creator">Manage content with <emphasis role="bold">Fast Content Creator</emphasis></link></para>
+<para>Introduction to the <emphasis role="bold">Fast Content Creator</emphasis> portlet, steps to configure this portlet and to create and view content with this portlet.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Form_Builder">Create content templates with <emphasis role="bold">Form Builder</emphasis></link></para>
+<para>Introduction to the <emphasis role="bold">Form Builder</emphasis> portlet, the way to add this portlet to a specific page, steps to create and edit the template of document types.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-CLV_templates">Manage CLV templates in <emphasis role="bold">Sites Explorer</emphasis></link></para>
+<para>Instructions on how to to create, edit and delete a CLV template.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Category_Navigation">Manage Category Navigation</link></para>
+<para>Instructions on how to access and configure the <emphasis role="bold">Category Navigation</emphasis> portlet.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-SEO_Management">Manage SEO</link></para>
+<para>Introduction to <emphasis role="bold">Search Engine Optimization (SEO)</emphasis>, steps to manage <emphasis role="bold">SEO</emphasis> data of web pages, web content and optimize your website for search engine.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Search_portlet">Search content in a site</link></para>
+<para>Steps to search for content and to configure the <emphasis role="bold">Search</emphasis> portlet.</para>
+</listitem>
+<listitem>
+<para><link linkend="sect-User_Guide-Print_content">Print content</link></para>
+<para>Steps to print any content in a site.</para>
+</listitem>
+</itemizedlist>
 </highlights>
+<para>
+In addition to using <link linkend="sect-User_Guide-Actions">functions on action tabs</link> in content management, this section provides with more advanced functions for your most effective content management.
+You not only know many different types of content management, but also know how to create templates for content. Moreover, you will learn how to
+<link lienkend="http://localhost:8080/PLF35/topic/org.exoplatform.doc.35/sect-User_Guide-SEO_Management.html">optimize your content for search engines</link>.
+</para>
 <para>
     <prompt>
         <emphasis role="bold">See also</emphasis>
@@ -46,13 +63,13 @@
 </para>
 <itemizedlist>
         <listitem>
-			<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Structure content</link></para>
-		</listitem>
-		<listitem>
-			<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Manage newsletter</link></para>
-		</listitem>
-		<listitem>
-			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
-		</listitem>
+<para><link linkend="Platform_User_Guide.Organize_Content.Structure_Content">Structure content</link></para>
+</listitem>
+<listitem>
+<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Manage newsletter</link></para>
+</listitem>
+<listitem>
+<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
+</listitem>
 </itemizedlist>
 </para>

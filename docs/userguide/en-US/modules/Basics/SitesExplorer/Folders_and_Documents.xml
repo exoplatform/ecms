@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Actions_on_Folders_and_Documents">
+<section id="sect-User_Guide-Actions_on_Folders_and_Documents" role="NotInToc">
   <title>Actions on folders and documents</title>
   <para>
   This section represents actions on folders and documents through the right-click menu (Adding to favorites, copying, cutting, pasting, adding Symlink, locking/unlocking, viewing/renaming/downloading document, and allowing edition and copying URL to clipboard) and other actions (dragging and dropping folders or documents).
