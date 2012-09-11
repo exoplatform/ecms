@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Fast_Content_Creator">
+<section id="sect-User_Guide-Fast_Content_Creator" role="NotInToc">
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Manage content with Fast Content Creator</title>
   <para> The <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT; enables you to quickly create and save a new document with only one template in a specific location without accessing <emphasis role="bold">Sites Explorer.</emphasis> This helps you save a lot of time when creating a new document.

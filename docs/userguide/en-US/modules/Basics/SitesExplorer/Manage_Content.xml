@@ -3,7 +3,7 @@
         <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
         %BOOK_ENTITIES;
         ]>
-<section id="sect-User_Guide-Manage_Content_In_Content_Explorer">
+<section id="sect-User_Guide-Manage_Content_In_Content_Explorer" role="NotInToc">
   <title>Manage content in Sites Explorer</title>
   <para>
    Web content is a key resource which is used for a site. Other resources make a site more dynamic and animated by using

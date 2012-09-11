@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Print_content">
+<section id="sect-User_Guide-Print_content" role="NotInToc">
 	<title>Print content</title>
 	 <para>
 		Users can easily print any content in a site by following these steps:

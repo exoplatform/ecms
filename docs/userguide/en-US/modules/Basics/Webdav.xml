@@ -4,7 +4,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
+<section id="sect-User_Guide-Manage_Site_Content_with_WebDAV" role="NotInToc">
  <title>Manage content with WebDAV</title>
   <citetitle>
     <para xml:id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV"><emphasis role="bold">What is WebDAV?</emphasis></para>

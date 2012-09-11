@@ -4,8 +4,12 @@
         <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
         %BOOK_ENTITIES;
         ]>
-<section id="sect-User_Guide-Contribute_Content">
+<section id="sect-User_Guide-Contribute_Content" role="NotInToc">
     <title>Contribute content</title>
+    <para>
+This function allows contributor to edit content, quickly access content list folders from the homepage of the current site, publish content without using the
+<link linkend="sect-User_Guide-Actions-Manage_Publications">Manage Publication</link> function in <emphasis role="bold">Sites Explorer</emphasis>.
+</para>
     <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
         <title>Edit mode</title>
         <para>When you access a site, by default, the site content is in the published mode and you cannot edit

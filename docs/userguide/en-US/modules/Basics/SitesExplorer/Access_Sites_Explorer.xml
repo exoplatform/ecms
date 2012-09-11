@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Access_Content_Explorer">
+<section id="sect-User_Guide-Access_Content_Explorer" role="NotInToc">
 	<title>Access Sites Explorer</title>
 	 <para>
 		This page is used to manage all documents in different drives. This is really a flexible way because you can do through Internet whenever and wherever. 

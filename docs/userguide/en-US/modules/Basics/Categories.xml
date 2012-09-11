@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Category_Navigation">
+<section id="sect-User_Guide-Category_Navigation" role="NotInToc">
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Manage Category Navigation</title>
   <para>
