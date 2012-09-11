@@ -4,7 +4,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Search_portlet">
+<section id="sect-User_Guide-Search_portlet" role="NotInToc">
     <title>Search content in a site</title>
     <para>The
         <emphasis role="bold">Search</emphasis>

@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Views">
+<section id="sect-User_Guide-Views" role="NotInToc">
 	<title>Views</title>
 	 <para>
 		There are many drives in <emphasis role="bold">Sites Explorer</emphasis>. Each drive has some views that enable you to view data in the drive in a particular way. Each view has some action tabs and each action tab contains some functions.

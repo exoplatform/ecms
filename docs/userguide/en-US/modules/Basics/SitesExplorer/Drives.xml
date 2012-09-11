@@ -3,8 +3,10 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Drives">
+<section id="sect-User_Guide-Drives" role="NotInToc"><para></para>
   <title>Drives</title>
+<para>Drive is a shortcut to a specific location in the content repository that enables administrators to limit visibility of each workspace for groups of users.
+It is also a simple way to hide the complexity of the content storage by showing only the structure that is helpful for business users. For information about how to manage drives, you can read the <link linkend="sect-User_Guide-Content_Presentation_Manager-Drives_Management">Manage drives</link> section.</para>
 	 <section id="sect-User_Guide-Drives-Private_drive">
 		<title>Private drive</title>
 		 <para>

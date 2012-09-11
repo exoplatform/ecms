@@ -4,7 +4,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Administration_page">
+<section id="sect-User_Guide-Administration_page" role="NotInToc">
   <title>Content Administration</title>
   <para>
   This page is used to manage all workspaces, drives, node types, metadata, templates, queries, and more. Only administrators can access the <emphasis role="bold">Content Administration</emphasis> page.

@@ -3,10 +3,25 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-CLV_templates">
+<section id="sect-User_Guide-CLV_templates" role="NotInToc">
     <title>Manage CLV templates in Sites Explorer</title>
-    <section id="sect-User_Guide-CLV_templates-Create_template">
-        <title>Create a CLV template</title>
+    <para>This section will show you how to manage a template for a content list in the <emphasis role="bold">DMS Administration</emphasis> drive via the following topics:</para>
+     <itemizedlist>
+         <listitem>
+             <para><link linkend="sect-User_Guide-CLV_templates-Create_template">Create a CLV template</link></para>
+         </listitem>
+         <listitem>
+             <para><link linkend="sect-User_Guide-CLV_templates-Edit_template">Edit a CLV template</link></para>
+         </listitem>
+         <listitem>
+             <para><link linkend="sect-User_Guide-CLV_templates-Delete_template">Delete a CLV template</link></para>
+         </listitem>
+     </itemizedlist>
+    <para xml:id="sect-User_Guide-CLV_templates-Create_template">
+       <citetitle>
+           <emphasis role="bold">Create a CLV template</emphasis>
+       </citetitle>
+    </para>
         <procedure>
             <step>
                 <para> <link linkend="sect-User_Guide-Access_Content_Explorer"> Access <emphasis role="bold">Sites Explorer</emphasis></link>, then select <guilabel>DMS
@@ -61,9 +76,11 @@
         <note>
             <para>See more details about the <emphasis role="bold">File</emphasis> document in the <link linkend="proc-User_Guide-Add_a_document-Create_a_new_File_documen">Create a new File document</link> section.</para>
         </note>
-    </section>
-    <section id="sect-User_Guide-CLV_templates-Edit_template">
-        <title>Edit a CLV template</title>
+     <para xml:id="sect-User_Guide-CLV_templates-Edit_template">
+       <citetitle>
+           <emphasis role="bold">Edit a CLV template</emphasis>
+       </citetitle>
+    </para>
          <procedure>
              <step>
                 <para>Click  <menuchoice><guimenu>exo:ecms</guimenu><guisubmenu>views</guisubmenu><guisubmenu>templates</guisubmenu> <guisubmenu>content-list-viewer</guisubmenu><guimenuitem>list</guimenuitem></menuchoice> in the <emphasis role="bold">DMS Administration</emphasis> drive.</para>
@@ -75,9 +92,11 @@
                  <para>Edit your desired fields, then click <guibutton>Save</guibutton> or <guibutton>Save &amp; Close</guibutton> to accept your changes.</para>
              </step>
          </procedure>
-    </section>
-    <section id="sect-User_Guide-CLV_templates-Delete_template">
-        <title>Delete a CLV template</title>
+     <para xml:id="sect-User_Guide-CLV_templates-Delete_template">
+       <citetitle>
+           <emphasis role="bold">Delete a CLV template</emphasis>
+       </citetitle>
+    </para>
          <procedure>
              <step>
                 <para>Click  <menuchoice><guimenu>exo:ecms</guimenu><guisubmenu>views</guisubmenu><guisubmenu>templates</guisubmenu> <guisubmenu>content-list-viewer</guisubmenu><guimenuitem>list</guimenuitem></menuchoice> in the <emphasis role="bold">DMS Administration</emphasis> drive.</para>
@@ -89,5 +108,4 @@
                  <para>Click <guibutton>OK</guibutton> in the confirmation message to accept your deletion.</para>
              </step>
         </procedure>
-    </section>
 </section>

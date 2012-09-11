@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
+<section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content" role="NotInToc">
 		<title>Create content inside a category</title>
   <para>
 		In eXo Platform, you can create new content in any folders or directly in a CLV with <emphasis role="bold">Incontext Editing.</emphasis>

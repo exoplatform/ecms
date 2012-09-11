@@ -4,7 +4,7 @@
         <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
         %BOOK_ENTITIES;
         ]>
-<section id="sect-User_Guide-Actions">
+<section id="sect-User_Guide-Actions" role="NotInToc">
   <title>Functions on action tabs</title>
   <note>
   <para>

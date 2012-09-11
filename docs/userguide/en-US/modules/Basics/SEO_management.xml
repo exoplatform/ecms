@@ -3,7 +3,7 @@
         <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
         %BOOK_ENTITIES;
         ]>
-<section id="sect-User_Guide-SEO_Management">
+<section id="sect-User_Guide-SEO_Management" role="NotInToc">
   <title>Manage SEO</title>
   <para>
     SEO (Search Engine Optimization) allows you to improve the visibility of your webpages and web content in the major
