@@ -1892,7 +1892,7 @@
   <UITagStyleList>
     <header>
       <name>Style Name</name>
-      <documentRange>Document Range</documentRange>
+      <documentRange>Range</documentRange>
       <tagHTML>Tag Style</tagHTML>
       <action>Action</action>
     </header>
