@@ -55,6 +55,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -203,16 +204,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("filterBy") String filterBy)
       throws Exception {
     try {
+      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+      ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
-        .getComponentInstanceOfType(RepositoryService.class);
+      
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      DriveData drive = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName));
+      workspaceName = drive.getWorkspace();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
-      ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
-        .getComponentInstanceOfType(ManageDriveService.class);
-
-      String driverHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
-                                                .getHomePath();
+      String driverHomePath = drive.getHomePath();
       String itemPath = driverHomePath
                         + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
                         + currentFolder;
@@ -306,11 +306,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
-        Node currentFolderNode = getParentFolderNode(Text.escapeIllegalJcrChars(workspaceName),
+        ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
+        workspaceName = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName)).getWorkspace();
+        Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
         
-        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
+        return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
                                            siteName,
                                            userId,
@@ -568,7 +570,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           continue;
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
-          sourceNode = session.getNodeByUUID(child.getProperty("exo:uuid").getString());
+          LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+          sourceNode = linkManager.getTarget(child);
         } else {
           sourceNode = child;
         }
