@@ -18,7 +18,9 @@ package org.exoplatform.wcm.webui.authoring;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 
@@ -66,11 +68,19 @@ public class UIDashboardForm extends UIForm {
     String lang = Util.getPortalRequestContext().getLocale().getLanguage();
     List<Node> nodes = new ArrayList<Node>();
     List<Node> temp = new ArrayList<Node>();
-    try {
+    try {    	
       nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
+      Set<String> uuidList = new HashSet<String>();
       for(Node node : nodes) {
-        if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node)) {
-          temp.add(node);
+        String currentState = null;
+        if(node.hasProperty("publication:currentState"))
+          currentState = node.getProperty("publication:currentState").getString();    	
+        if(currentState == null || !currentState.equals("published")) {
+          if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node) && 
+            !uuidList.contains(node.getSession().getWorkspace().getName() + node.getUUID())) {
+            uuidList.add(node.getSession().getWorkspace().getName() + node.getUUID());
+            temp.add(node);
+          }
         }
       }
     } catch (Exception e) {
