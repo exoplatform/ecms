@@ -142,8 +142,8 @@ public class UISEOForm extends UIForm{
       if(pageModel.getPriority() >= 0)
         priority = String.valueOf(pageModel.getPriority());
       if(pageModel.getRobotsContent() != null && pageModel.getRobotsContent().length() > 0) {
-        index = pageModel.getRobotsContent().split(",")[0];
-        follow = pageModel.getRobotsContent().split(",")[1];
+        index = pageModel.getRobotsContent().split(",")[0].trim();
+        follow = pageModel.getRobotsContent().split(",")[1].trim();
       }
       sitemap = pageModel.getSitemap();
     }
