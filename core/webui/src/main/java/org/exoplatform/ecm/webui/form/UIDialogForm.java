@@ -95,7 +95,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
@@ -105,6 +104,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 
@@ -509,19 +509,19 @@ public class UIDialogForm extends UIForm {
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
     Node node = getNode();
-    UIFormCheckBoxInput uiCheckBoxInput = findComponentById(name);
+    UICheckBoxInput uiCheckBoxInput = findComponentById(name);
     boolean isFirstTimeRender = false;
     if(uiCheckBoxInput == null || isResetForm ){
       isFirstTimeRender = true;
-        uiCheckBoxInput = new UIFormCheckBoxInput(name, name, null);
+        uiCheckBoxInput = new UICheckBoxInput(name, name, null);
         if (defaultValue != null) {
-          uiCheckBoxInput.setValue(defaultValue);
-          uiCheckBoxInput.setChecked(Boolean.valueOf(defaultValue));
+          uiCheckBoxInput.setValue(Boolean.parseBoolean(defaultValue));
+          uiCheckBoxInput.setChecked(Boolean.parseBoolean(defaultValue));
         }
     }
 
     if (node != null && node.hasProperty(propertyName) && isFirstTimeRender) {
-      uiCheckBoxInput.setValue(node.getProperty(propertyName).getValue());
+      uiCheckBoxInput.setValue(Boolean.parseBoolean(node.getProperty(propertyName).getValue().toString()));
       uiCheckBoxInput.setChecked(node.getProperty(propertyName).getValue().getBoolean());
     }
 
