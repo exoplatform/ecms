@@ -40,8 +40,8 @@
 	margin-right: 224px; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UIFormGrid {
-	width: 100%;
+*+html .UIJCRExplorerPortlet .UIFormGrid {
+	width: 95%;
 }
 
 .UIJCRExplorerPortlet .UIPreferencesForm {
