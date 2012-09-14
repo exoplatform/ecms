@@ -9,6 +9,7 @@ import javax.jcr.Session;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -30,35 +31,49 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 @Path("/contents/")
 public class DownloadConnector implements ResourceContainer{
-  
+
   /**
    * Return to browser a stream got from _jcr\:content_/_jcr\:data_ for downloading the content of the node.
    * 
    * @param workspace The workspace where to store the document node
    * @param path The path to the document node
-   * @return
+   * @param version   : version name
+   * @return the instance of javax.ws.rs.core.Response
    * @throws Exception
    * @Objective Return to browser a stream for downloading content of a node. The stream is got from _jcr\:content_/_jcr\:data_
    * @Author Nguyen The Vinh from ECM of eXoPlatform
    *              nguyenthevinhbk@gmail.com
+   *              dongpd@exoplatform.com
    *              
    * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector.download
    */
   @GET
   @Path("/download/{workspace}/{path:.*}/")
-  public Response download(@PathParam("workspace") String workspace, @PathParam("path") String path) throws Exception {
-    InputStream is=null;
+  public Response download(@PathParam("workspace") String workspace,
+                           @PathParam("path") String path,
+                           @QueryParam("version") String version) throws Exception {
+    InputStream is = null;
     Node node = null;
+    String fileName = null;
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
         .getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
+
     if (!path.startsWith("/")) {
       path = "/" + path;
     }
+
     try {
       node = (Node) session.getItem(path);
+      fileName = Text.unescapeIllegalJcrChars(node.getName());
+
+      // In case version is specified, get file from version history
+      if (version != null) {
+        node = node.getVersionHistory().getVersion(version).getNode("jcr:frozenNode");
+      }
+
       Node jrcNode = node.getNode("jcr:content");
       is = jrcNode.getProperty("jcr:data").getStream();
     }catch (PathNotFoundException pne) {
@@ -68,7 +83,7 @@ public class DownloadConnector implements ResourceContainer{
     }
 
     return Response.ok(is, MediaType.TEXT_XML)
-          .header("Content-Disposition","attachment; filename=" + Text.unescapeIllegalJcrChars(node.getName()))
+          .header("Content-Disposition","attachment; filename=" + fileName)
             .build();
   }
 }
