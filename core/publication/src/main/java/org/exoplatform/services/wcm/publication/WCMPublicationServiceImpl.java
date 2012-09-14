@@ -21,8 +21,6 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -41,8 +39,6 @@ import org.picocontainer.Startable;
  */
 public class WCMPublicationServiceImpl implements WCMPublicationService, Startable {
 
-  private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class.getName());
-  
   /** The Constant SIMPLE_LIFECYCLE_NAME. */
   private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication";
 
@@ -86,58 +82,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
 
   /*
    * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #suspendPublishedContentFromPage(javax.jcr.Node,
-   * org.exoplatform.portal.config.model.Page)
-   */
-  public void suspendPublishedContentFromPage(Node content,
-                                              Page page,
-                                              String remoteUser) throws NotInPublicationLifecycleException,
-                                              Exception {
-    if (!publicationService.isNodeEnrolledInLifecycle(content)) {
-      throw new NotInPublicationLifecycleException();
-    }
-    String lifecycleName= publicationService.getNodeLifecycleName(content);
-    WebpagePublicationPlugin publicationPlugin = publicationPlugins.get(lifecycleName);
-    publicationPlugin.suspendPublishedContentFromPage(content, page, remoteUser);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #publishContentToPage(javax.jcr.Node,
-   * org.exoplatform.portal.config.model.Page)
-   */
-  public void publishContentSCV(Node content, Page page, String portalOwnerName)
-  throws NotInPublicationLifecycleException, Exception {
-    if(!publicationService.isNodeEnrolledInLifecycle(content))
-      throw new NotInPublicationLifecycleException("The node " + content.getPath()
-          + " is not enrolled to any publication lifecyle");
-    String lifecycleName = publicationService.getNodeLifecycleName(content);
-    WebpagePublicationPlugin publicationPlugin = publicationPlugins.get(lifecycleName);
-    publicationPlugin.publishContentToSCV(content,page, portalOwnerName);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #publishContentCLV
-   */
-  public void publishContentCLV(Node content, Page page, String clvPortletId, String portalOwnerName,
-      String remoteUser) throws Exception{
-    if(!publicationService.isNodeEnrolledInLifecycle(content))
-      throw new NotInPublicationLifecycleException("The node " + content.getPath()
-          + " is not enrolled to any publication lifecyle");
-    String lifecycleName = publicationService.getNodeLifecycleName(content);
-    WebpagePublicationPlugin publicationPlugin = publicationPlugins.get(lifecycleName);
-    publicationPlugin.publishContentToCLV(content, page, clvPortletId, portalOwnerName, remoteUser);
-  }
-
-  /*
-   * (non-Javadoc)
    * @seeorg.exoplatform.services.wcm.publication.WCMPublicationService#
    * enrollNodeInLifecycle(javax.jcr.Node, java.lang.String)
    */
@@ -163,105 +107,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    */
   public Map<String, WebpagePublicationPlugin> getWebpagePublicationPlugins() {
     return publicationPlugins;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecycleOnChangeNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecycleOnChangeNavigation(navigationContext, remoteUser);
-      } catch(Exception e) {
-        continue;
-      }
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecycleOnRemovePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecycleOnRemovePage(Page page, String remoteUser) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecycleOnRemovePage(page, remoteUser);
-      } catch(Exception e) {
-        continue;
-      }
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecyleOnChangePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecyleOnChangePage(Page page, String remoteUser) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecyleOnChangePage(page, remoteUser);
-      } catch(Exception e) {
-        continue;
-      }
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecyleOnCreateNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecyleOnCreateNavigation(navigationContext);
-      } catch(Exception e) {
-        continue;
-      }
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecyleOnCreatePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecyleOnCreatePage(Page page, String remoteUser) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecyleOnCreatePage(page, remoteUser);
-      } catch(Exception e){
-        continue;
-      }
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMPublicationPresentationService
-   * #updateLifecyleOnRemoveNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) {
-    for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
-      try {
-        publicationPlugin.updateLifecyleOnRemoveNavigation(navigationContext);
-      } catch (Exception e) {
-        continue;
-      }
-    }
   }
 
   /* (non-Javadoc)

@@ -37,42 +37,25 @@ import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.application.PortletPreferences;
-import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Application;
-import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
-import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.util.IdGenerator;
 import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
-import org.exoplatform.services.wcm.publication.PublicationUtil;
-import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.publication.listener.navigation.NavigationEventListenerDelegate;
-import org.exoplatform.services.wcm.publication.listener.page.PageEventListenerDelegate;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
@@ -112,22 +95,10 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
   /** The Constant IMG_PATH. */
   public static final String IMG_PATH = "artifacts/";
 
-  /** The page event listener delegate. */
-  private PageEventListenerDelegate pageEventListenerDelegate;
-
-  /** The navigation event listener delegate. */
-  private NavigationEventListenerDelegate navigationEventListenerDelegate;
-
   /**
    * Instantiates a new wCM publication plugin.
    */
-  public DumpPublicationPlugin() {
-    pageEventListenerDelegate = new PageEventListenerDelegate(LIFECYCLE_NAME,
-                                                              ExoContainerContext.getCurrentContainer());
-    navigationEventListenerDelegate = new NavigationEventListenerDelegate(LIFECYCLE_NAME,
-                                                                          ExoContainerContext.getCurrentContainer());
-
-  }
+  public DumpPublicationPlugin() {  }
 
   public String getLifecycleType() {
     return WCM_PUBLICATION_MIXIN;
@@ -277,96 +248,13 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     List<PortalConfig> portalConfigs = WCMCoreUtils.getAllElementsOfListAccess(pageList);
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     for(PortalConfig portalConfig : portalConfigs) {
+      System.out.println("-------------------------------------------------------------portalConfig:" + portalConfig);
       if(userACL.hasPermission(portalConfig)) {
         listPortalName.add(portalConfig.getName());
       }
     }
     if (session != null) session.close();
     return listPortalName;
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#publishContentToPage(javax.jcr.Node, org.exoplatform.portal.config.model.Page)
-   */
-  public void publishContentToPage(Node content, Page page) throws Exception {
-    Application<Portlet> portlet = new Application<Portlet>(ApplicationType.PORTLET);
-    portlet.setShowInfoBar(false);
-
-    // Create portlet
-    WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    StringBuilder windowId = new StringBuilder();
-    windowId.append(PortalConfig.PORTAL_TYPE)
-            .append("#")
-            .append(org.exoplatform.portal.webui.util.Util.getUIPortal().getSiteKey().getName())
-            .append(":")
-            .append(configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))
-            .append("/")
-            .append(IdGenerator.generate());
-//    portlet.setInstanceId(windowId.toString());
-
-    // Add preferences to portlet
-    PortletPreferences portletPreferences = new PortletPreferences();
-    portletPreferences.setWindowId(windowId.toString());
-//    portletPreferences.setOwnerType(PortalConfig.PORTAL_TYPE);
-//    portletPreferences.setOwnerId(org.exoplatform.portal.webui.util.Util.getUIPortal().getOwner());
-    ArrayList<Preference> listPreference = new ArrayList<Preference>();
-
-    Preference preferenceR = new Preference();
-    ArrayList<String> listValue = new ArrayList<String>();
-    listValue.add(((ManageableRepository) content.getSession().getRepository()).getConfiguration().getName());
-    preferenceR.setName("repository");
-    preferenceR.setValues(listValue);
-    listPreference.add(preferenceR);
-
-    Preference preferenceW = new Preference();
-    listValue = new ArrayList<String>();
-    listValue.add(content.getSession().getWorkspace().getName());
-    preferenceW.setName("workspace");
-    preferenceW.setValues(listValue);
-    listPreference.add(preferenceW);
-
-    Preference preferenceN = new Preference();
-    listValue = new ArrayList<String>();
-    listValue.add(content.getUUID());
-    preferenceN.setName("nodeIdentifier");
-    preferenceN.setValues(listValue);
-    listPreference.add(preferenceN);
-
-    Preference preferenceQ = new Preference();
-    listValue = new ArrayList<String>();
-    listValue.add("true");
-    preferenceQ.setName("ShowQuickEdit");
-    preferenceQ.setValues(listValue);
-    listPreference.add(preferenceQ);
-
-    portletPreferences.setPreferences(listPreference);
-
-    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    dataStorage.save(portletPreferences);
-
-    // Add portlet to page
-//    ArrayList<Object> listPortlet = page.getChildren();
-//    listPortlet.add(portlet);
-//    page.setChildren(listPortlet);
-    dataStorage.save(page);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#suspendPublishedContentFromPage(javax.jcr.Node, org.exoplatform.portal.config.model.Page)
-   */
-  public void suspendPublishedContentFromPage(Node content, Page page) throws Exception {
-    String pageId = page.getPageId();
-    List<String> mixedApplicationIDs = PublicationUtil.getValuesAsString(content, "publication:applicationIDs");
-    ArrayList<String> removedApplicationIDs = new ArrayList<String>();
-    for(String mixedID: mixedApplicationIDs) {
-      if(mixedID.startsWith(pageId)) {
-        String realAppID = PublicationUtil.parseMixedApplicationId(mixedID)[1];
-        removedApplicationIDs.add(realAppID);
-      }
-    }
-    if(removedApplicationIDs.size() == 0) return;
-    PublicationUtil.removeApplicationFromPage(page, removedApplicationIDs);
-    WCMCoreUtils.getService(DataStorage.class).save(page);
   }
 
   /**
@@ -439,48 +327,6 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
   }
 
   /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecycleOnChangeNavigation(org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception {
-    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(navigationContext, remoteUser, this);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecycleOnRemovePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecycleOnRemovePage(page, remoteUser, this);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnChangePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecyleOnChangePage(page, remoteUser, this);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnCreateNavigation(org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(navigationContext);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnCreatePage(org.exoplatform.portal.config.model.Page)
-   */
-  public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecyleOnCreatePage(page, remoteUser, this);
-  }
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnRemoveNavigation(org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(navigationContext);
-  }
-
-  /* (non-Javadoc)
    * @see org.exoplatform.services.ecm.publication.PublicationPlugin#getLocalizedAndSubstituteMessage(java.util.Locale, java.lang.String, java.lang.String[])
    */
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values)
@@ -499,22 +345,6 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
       return String.format(result, (Object[])values);
     }
     return result;
-  }
-
-  @Override
-  public void publishContentToCLV(Node content,
-                                  Page page,
-                                  String clvPortletId,
-                                  String portalOwnerName,
-                                  String remoteUser) throws Exception {
-  }
-
-  @Override
-  public void publishContentToSCV(Node content, Page page, String portalOwnerName) throws Exception {
-  }
-
-  @Override
-  public void suspendPublishedContentFromPage(Node content, Page page, String remoteUser) throws Exception {
   }
 
   @Override

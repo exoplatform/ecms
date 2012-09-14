@@ -17,7 +17,7 @@
 	def recordList = recordsService.getRecords(node) ;
     def rcontext = _ctx.getRequestContext() ;
     Parameter[] params = [new Parameter("workspaceName", node.getSession().getWorkspace().getName()), new Parameter("findDrive","true")];
-    rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
+//    rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
     rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadViewNodeScroll()');
 %>
 <style>

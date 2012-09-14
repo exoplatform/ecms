@@ -15,10 +15,10 @@ import javax.jcr.version.Version;
 import javax.portlet.PortletMode;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
@@ -35,8 +35,6 @@ import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndV
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
-import org.exoplatform.services.wcm.publication.listener.navigation.NavigationEventListenerDelegate;
-import org.exoplatform.services.wcm.publication.listener.page.PageEventListenerDelegate;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
@@ -49,18 +47,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
   
-  /** The page event listener delegate. */
-  private PageEventListenerDelegate       pageEventListenerDelegate;
-
-  /** The navigation event listener delegate. */
-  private NavigationEventListenerDelegate navigationEventListenerDelegate;
-
   /**
    * Instantiates a new stage and version publication plugin.
    */
   public AuthoringPublicationPlugin() {
-    pageEventListenerDelegate = new PageEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME, null);
-    navigationEventListenerDelegate = new NavigationEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME, null);
   }
 
   /*
@@ -422,68 +412,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    */
   public boolean canAddMixin(Node node) throws Exception {
     return node.canAddMixin(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecycleOnChangeNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation, java.lang.String)
-   */
-  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception {
-    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(navigationContext,
-                                                                      remoteUser,
-                                                                      this);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecycleOnRemovePage(org.exoplatform.portal.config.model.Page,
-   * java.lang.String)
-   */
-  public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecycleOnRemovePage(page, remoteUser, this);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecyleOnChangePage(org.exoplatform.portal.config.model.Page,
-   * java.lang.String)
-   */
-  public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecyleOnChangePage(page, remoteUser, this);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecyleOnCreateNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(navigationContext);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecyleOnCreatePage(org.exoplatform.portal.config.model.Page,
-   * java.lang.String)
-   */
-  public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception {
-    pageEventListenerDelegate.updateLifecyleOnCreatePage(page, remoteUser, this);
-  }
-
-  /*
-   * (non-Javadoc)
-   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
-   * updateLifecyleOnRemoveNavigation
-   * (org.exoplatform.portal.config.model.PageNavigation)
-   */
-  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(navigationContext);
   }
 
   /**

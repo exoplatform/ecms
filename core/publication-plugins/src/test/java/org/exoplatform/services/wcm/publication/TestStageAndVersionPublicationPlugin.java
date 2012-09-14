@@ -156,8 +156,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
     listenerService.addListener(DataStorage.PORTAL_CONFIG_UPDATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_REMOVED, listener);
 
-    //
-    createPortalModel();
   }
   
   @AfterMethod
@@ -165,7 +163,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
     publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
-    storage_.remove(portal_);
   }
 
   /**
@@ -206,52 +203,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   }
   
   /**
-   * tests publish content to scv
-   */
-  @Test
-  public void testPublishContentToSCV() throws Exception {
-    Exception e = null;
-    try {
-      plugin_.publishContentToSCV(node_, page_, "test");
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNull(e);
-  }
-  
-  /**
-   * tests publish content to CLV
-   */
-  @Test
-  public void testPublishContentToCLV() throws Exception {
-    plugin_.publishContentToCLV(node_, page_, "portal#test:/web/presentation/SingleContentViewertemp", 
-                                "test", node_.getSession().getUserID());
-    assertEquals(WCMCoreUtils.getRepository().getConfiguration().getName(),
-                 storage_.getPortletPreferences("portal#test:/web/presentation/SingleContentViewertemp").
-                 getPreference("repository").getValues().get(0));
-
-    plugin_.publishContentToCLV(node_, page_, ID, 
-                                "test", node_.getSession().getUserID());
-    Preference p = storage_.getPortletPreferences(ID).getPreference("contents");
-    assertTrue(p.getValues().contains(node_.getPath()));
-  }
-  
-  /**
-   * tests suspend published content from page
-   */
-  @Test
-  public void testSuspendPublishedContentFromPage() throws Exception {
-    plugin_.publishContentToCLV(node_, page_, ID, 
-                                "test", node_.getSession().getUserID());
-    Preference p = storage_.getPortletPreferences(ID).getPreference("contents");
-    assertTrue(p.getValues().contains(node_.getPath()));
-    
-    plugin_.suspendPublishedContentFromPage(node_, page_, node_.getSession().getUserID());
-    p = storage_.getPortletPreferences(ID).getPreference("contents");
-    assertFalse(p.getValues().contains(node_.getPath()));    
-  }
-  
-  /**
    * tests update lifecycle on change content 
    */
   @Test
@@ -264,57 +215,4 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
                  getString());
   }
   
-  private void createPortalModel() throws Exception {
-    //create portal
-    String label = "portal_test";
-    String description = "This is new portal for testing";
-    portal_ = new PortalConfig();
-    portal_.setType("portal");
-    portal_.setName("test");
-    portal_.setLocale("en");
-    portal_.setLabel(label);
-    portal_.setDescription(description);
-    portal_.setAccessPermissions(new String[]{UserACL.EVERYONE});
-
-    storage_.create(portal_);
-    //create pate
-    //---------------------
-    portlet_ = new Portlet();
-
-    ApplicationState<Portlet> state = 
-      new TransientApplicationState<Portlet>(ID, portlet_);
-    ApplicationData<Portlet> applicationData = 
-      new ApplicationData<Portlet>(null, ID,
-       ApplicationType.PORTLET, state, ID, 
-       "app-title", "app-icon", "app-description", false, true, false,
-       "app-theme", "app-wdith", "app-height", new HashMap<String,String>(),
-       Collections.singletonList("app-edit-permissions"));
-
-    ContainerData containerData = new ContainerData(null, "cd-id", "cd-name", "cd-icon", "cd-template", "cd-factoryId", 
-                                                    "cd-title", "cd-description", "cd-width", "cd-height", 
-                                                    Collections.singletonList("cd-access-permissions"), 
-                                                    Collections.singletonList((ComponentData) applicationData));
-    List<ComponentData> children = Collections.singletonList((ComponentData) containerData);
-    
-    PageData expectedData = new PageData(null, null, "page-name", null, null, null, "Page Title", null, null, null,
-       Collections.singletonList("access-permissions"), children, "", "", "edit-permission", true);
-
-    page_ = new Page(expectedData);
-    page_.setTitle("MyTitle");
-    page_.setOwnerType(PortalConfig.PORTAL_TYPE);
-    page_.setOwnerId("test");
-    page_.setName("foo");
-
-    storage_.create(page_);
-    
-    PortletPreferences p = new PortletPreferences();
-    p.setWindowId(ID);
-    p.setPreference(new Preference("workspace", node_.getSession().getWorkspace().getName()));
-    p.setPreference(new Preference("nodeIdentifier", node_.getUUID()));
-    p.setPreference(new Preference("mode", "ManualViewerMode"));
-    p.setPreference(new Preference("contents", "def"));
-    p.setPreference(new Preference("folderPath", "abc"));
-    storage_.save(p);
-    //------------------------------------------
-  }
 }

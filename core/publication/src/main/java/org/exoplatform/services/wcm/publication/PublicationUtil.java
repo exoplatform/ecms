@@ -20,17 +20,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.ValueFormatException;
 
-import org.exoplatform.portal.application.PortletPreferences;
-import org.exoplatform.portal.application.Preference;
-import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
@@ -41,11 +35,6 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -63,10 +52,7 @@ public class PublicationUtil {
 
   /** The Constant URI_SEPARATOR. */
   public static final String URI_SEPARATOR = "/";
-  
-  /** The Loger **/
-  private static final Log LOG = ExoLogger.getLogger(PublicationUtil.class.getName());
- 
+   
   /**
    * Find user node by page id.
    * @param rootNode
@@ -229,50 +215,6 @@ public class PublicationUtil {
       list.add(factory.createValue(value));
     }
     return list.toArray(new Value[list.size()]);
-  }
-
-  /**
-   * Gets the node by application id.
-   *
-   * @param applicationId the application id
-   *
-   * @return the node by application id
-   *
-   * @throws Exception the exception
-   */
-  public static Node getNodeByApplicationId(String applicationId) throws Exception {
-    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
-    if (portletPreferences == null) return null;
-    String workspaceName = null;
-    String nodeIdentifier = null;
-    for (Object object : portletPreferences.getPreferences()) {
-      Preference preference = (Preference) object;
-      if (preference.getName().equals("workspace")) {
-        workspaceName = preference.getValues().get(0).toString();
-      } else if (preference.getName().equals("nodeIdentifier")) {
-        nodeIdentifier = preference.getValues().get(0).toString();
-      }
-    }
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    if (workspaceName != null && nodeIdentifier != null) {
-      Session session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
-      Node content = null;
-      try {
-        content = session.getNodeByUUID(nodeIdentifier);
-      } catch (ItemNotFoundException e) {
-        try {
-          content = (Node)session.getItem(nodeIdentifier);
-        } catch (RepositoryException re) {
-          if (LOG.isWarnEnabled()) {
-            LOG.warn(re.getMessage());
-          }
-        }
-      }
-      return content;
-    }
-    return null;
   }
 
   /**

@@ -21,9 +21,9 @@
 	  if(uicomponent.isShowSearchForm()) {
 	  	uicomponent.renderChild(UISearchController.class);
 	  } else {
-			jsmanager.importJavascript('eXo.portal.UIBrowseContent');
+//			jsmanager.importJavascript('eXo.portal.UIBrowseContent');
 			jsmanager.addOnLoadJavascript('eXo.portal.UIBrowseContent.waitForLoadComplete');
-			//jsmanager.addOnResizeJavascript('eXo.portal.UIBrowseContent.loadScroll');
+			jsmanager.addOnResizeJavascript('eXo.portal.UIBrowseContent.loadScroll');
 			
 	    Node currentNode = uicomponent.getCurrentNode() ;
 	    Node selectedTab = uicomponent.getSelectedTab() ; 

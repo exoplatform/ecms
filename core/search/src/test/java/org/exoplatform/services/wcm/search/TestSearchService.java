@@ -119,7 +119,6 @@ public class TestSearchService extends BaseECMSTestCase {
       webContentNode = createWebcontentNode(parentNode, "webcontent0" , null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
       wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-      wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
@@ -127,7 +126,6 @@ public class TestSearchService extends BaseECMSTestCase {
       webContentNode = createWebcontentNode(parentNode, "webcontent1", null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
       wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
-      wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);

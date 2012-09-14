@@ -30,7 +30,7 @@
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
-	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
+//	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
 	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.scrollToBottom('${uicomponent.id}')");
 	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.changeColor('NewResultData')");
   %>

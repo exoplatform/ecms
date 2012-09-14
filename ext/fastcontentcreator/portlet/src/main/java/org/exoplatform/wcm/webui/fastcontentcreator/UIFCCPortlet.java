@@ -55,8 +55,8 @@ public class UIFCCPortlet extends UIPortletApplication {
    * org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
-                                                    "/ecm-wcm-extension/javascript/");
+//    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
+//                                                    "/ecm-wcm-extension/javascript/");
     context.getJavascriptManager()
            .addJavascript("eXo.ecm.ECMUtils.init('UIFastContentCreatorPortlet') ;");
     PortletRequestContext portletRequestContext = (PortletRequestContext) context;

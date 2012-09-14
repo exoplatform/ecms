@@ -32,7 +32,7 @@
     <org.exoplatform.ws.version>2.2.9-GA-SNAPSHOT</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.14.9-GA-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.9-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.3.0-GA</org.exoplatform.portal.version>
+    <org.exoplatform.portal.version>3.4.0.Final</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
@@ -45,7 +45,7 @@
     <xml.parser.version>3.1</xml.parser.version>
     <!-- 3rd parties -->
     <c3p0.version>0.9.1.2</c3p0.version>
-    <org.gatein.wci.version>2.2.0-Beta01</org.gatein.wci.version>
+    <org.gatein.wci.version>2.2.0-Beta02</org.gatein.wci.version>
     <org.javassist.version>3.14.0-GA</org.javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
     <commons-pool.version>1.5.5</commons-pool.version>
@@ -166,6 +166,12 @@
         <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.frameworks.json</artifactId>
         <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <!-- GateIn Redirect -->
+      <dependency>
+	<groupId>org.gatein.web</groupId>
+	<artifactId>redirect</artifactId>
+	<version>${org.exoplatform.portal.version}</version>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.core</groupId>

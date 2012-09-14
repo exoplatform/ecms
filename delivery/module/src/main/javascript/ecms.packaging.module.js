@@ -19,6 +19,7 @@ function getModule(params) {
   var jaxenVersion = "${jaxen.version}";
   var antlrVersion = "${org.antlr.version}";
   var commonsVersion = "${org.exoplatform.commons.version}";
+  var portalVersion = "${org.exoplatform.portal.version}";
   var antisamyVersion = "${org.owasp.antisamy.version}";
   var batikVersion = "${org.apache.batik.version}";
   var batikUtilVersion = "${org.apache.batik-util.version}";
@@ -122,9 +123,10 @@ function getModule(params) {
     addDependency(new Project("org.owasp.antisamy", "antisamy", "jar", antisamyVersion)).
     addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
     addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
-    addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).    
+    addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).
     addDependency(new Project("org.exoplatform.commons", "commons-component-product", "jar", commonsVersion)).
-    addDependency(new Project("org.exoplatform.commons", "commons-component-upgrade", "jar", commonsVersion));
+    addDependency(new Project("org.exoplatform.commons", "commons-component-upgrade", "jar", commonsVersion)).
+    addDependency(new Project("org.gatein.web", "redirect", "jar", portalVersion));
   
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 

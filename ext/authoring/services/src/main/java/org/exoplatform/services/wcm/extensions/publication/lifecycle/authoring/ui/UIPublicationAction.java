@@ -22,9 +22,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
-import org.exoplatform.portal.application.PortletPreferences;
-import org.exoplatform.portal.application.Preference;
-import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteKey;
@@ -32,24 +29,17 @@ import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPortalNavigationExplorer;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPages;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPagesContainer;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishClvChooser;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishedPages;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -154,39 +144,8 @@ public class UIPublicationAction extends UIForm {
         return;
       }
 
-      WCMPublicationService presentationService = publicationAction.getApplicationComponent(WCMPublicationService.class);
-
       UIPublicationPagesContainer publicationPagesContainer = publicationPages.
           getAncestorOfType(UIPublicationPagesContainer.class);
-      UserPortalConfigService userPortalConfigService = publicationAction.getApplicationComponent(UserPortalConfigService.class);
-      Page page = userPortalConfigService.getPage(userNode.getPageRef(),
-                                                  event.getRequestContext().getRemoteUser());
-      List<String> clvPortletIds = getManualModeCLVPortletIDs(page);
-      if (clvPortletIds.isEmpty()) {
-        presentationService.publishContentSCV(node, page, Util.getUIPortal().getSiteKey().getName());
-      } else {
-        if (clvPortletIds.size() > 1) {
-          UIPublishClvChooser clvChooser = publicationAction.createUIComponent(UIPublishClvChooser.class,
-                                                                               null,
-                                                                               "UIPublishClvChooser");
-          clvChooser.setPage(page);
-          clvChooser.setNode(node);
-          UIPopupWindow popupWindow = publicationPagesContainer.getChildById("UIClvPopupContainer");
-          clvChooser.setRendered(true);
-          popupWindow.setUIComponent(clvChooser);
-          popupWindow.setWindowSize(400, -1);
-          popupWindow.setShow(true);
-          popupWindow.setShowMask(true);
-          event.getRequestContext().addUIComponentToUpdateByAjax(publicationPagesContainer);
-        } else {
-          String clvPortletId = clvPortletIds.get(0);
-          presentationService.publishContentCLV(node,
-                                                page,
-                                                clvPortletId,
-                                                Util.getUIPortal().getSiteKey().getName(),
-                                                event.getRequestContext().getRemoteUser());
-        }
-      }
       publicationAction.updateUI();
       UIPublicationContainer publicationContainer = publicationAction.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());
@@ -246,12 +205,6 @@ public class UIPublicationAction extends UIForm {
                                                  event.getRequestContext().getRemoteUser());
         }
       }
-      WCMPublicationService presentationService = publicationAction.getApplicationComponent(WCMPublicationService.class);
-      StageAndVersionPublicationPlugin publicationPlugin = (StageAndVersionPublicationPlugin) presentationService.
-          getWebpagePublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      publicationPlugin.suspendPublishedContentFromPage(publicationPages.getNode(),
-                                                        page,
-                                                        event.getRequestContext().getRemoteUser());
       publicationAction.updateUI();
       UIPublicationPagesContainer publicationPagesContainer = publicationPages.
           getAncestorOfType(UIPublicationPagesContainer.class);
@@ -272,29 +225,4 @@ public class UIPublicationAction extends UIForm {
     }
   }
 
-  private static List<String> getManualModeCLVPortletIDs(Page page) throws Exception {
-    WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page,
-                                                                        wcmConfigurationService.
-                                                                        getRuntimeContextParam(WCMConfigurationService.
-                                                                                               CLV_PORTLET));
-    List<String> applicationIDs = new ArrayList<String>();
-    for (String clvPortletId : clvPortletsId) {
-      boolean isManualViewerMode = false;
-      PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
-      if (portletPreferences != null) {
-        for (Object object : portletPreferences.getPreferences()) {
-          Preference preference = (Preference) object;
-          if ("mode".equals(preference.getName()) && preference.getValues().size() > 0) {
-            isManualViewerMode = "ManualViewerMode".equals(preference.getValues().get(0).toString());
-          }
-        }
-      }
-
-      if (isManualViewerMode)
-        applicationIDs.add(clvPortletId);
-    }
-    return applicationIDs;
-  }
 }

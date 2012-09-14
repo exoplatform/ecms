@@ -45,53 +45,6 @@ public interface WCMPublicationService {
  public void addPublicationPlugin(WebpagePublicationPlugin p);
 
  /**
-  * Publish content to a portal page when the node is in a publication lifecyle.
-  *
-  * @param content the content
-  * @param page the page
-  * @param portalOwnerName
-  *
-  * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
-  * @throws Exception the exception
-  */
-  public void publishContentSCV(Node content,
-                                Page page,
-                                String portalOwnerName) throws NotInPublicationLifecycleException,
-                                                                                Exception;
-
- /**
-  * Publish content to a portal page when the node is in a publication lifecyle.
-  *
-  * @param content the content
-  * @param page the page
-  * @param clvPortletId the clv portlet id
-  * @param portalOwnerName the portal owner name
-  * @param remoteUser the remote user
-  *
-  * @throws Exception the exception
-  */
-  public void publishContentCLV(Node content,
-                                Page page,
-                                String clvPortletId,
-                                String portalOwnerName,
-                                String remoteUser) throws Exception;
-
- /**
-  * Suspend a published content from a portal page.
-  *
-  * @param content the jcr content node
-  * @param page the portal page
-  * @param remoteUser
-  *
-  * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
-  * @throws Exception the exception
-  */
-  public void suspendPublishedContentFromPage(Node content,
-                                              Page page,
-                                              String remoteUser) throws NotInPublicationLifecycleException,
-                                                                                         Exception;
-
- /**
   * Retrieves all added web page publication plugins.
   * This method is notably used to enumerate possible lifecycles.
   *
@@ -146,64 +99,6 @@ public interface WCMPublicationService {
   * @throws Exception the exception
   */
   public void unsubcribeLifecycle(Node node) throws NotInPublicationLifecycleException, Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is created.
-  *
-  * @param page the page
-  * @param remoteUser
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is changed.
-  *
-  * @param page the page
-  * @param remoteUser
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is removed.
-  *
-  * @param page the page
-  * @param remoteUser
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is created.
-  *
-  * @param navigation the navigation
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is changed.
-  *
-  * @param navigation the navigation
-  * @param remoteUser
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception;
-
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is removed.
-  *
-  * @param navigation the navigation
-  *
-  * @throws Exception the exception
-  */
-  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception;
 
   /**
    * Called by create and edit listeners. It allows to update the lifecycle of

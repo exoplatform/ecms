@@ -79,6 +79,32 @@
               </field>
             </object>
           </object-param>
+          
+        <object-param>
+          <name>group.configuration</name>
+          <object type="org.exoplatform.portal.config.NewPortalConfig">
+            <field name="predefinedOwner">
+              <collection type="java.util.HashSet">
+                <value>
+                  <string>platform/administrators</string>
+                </value>
+                <value>
+                  <string>platform/users</string>
+                </value>
+                <value>
+                  <string>platform/guests</string>
+                </value>
+              </collection>
+            </field>
+            <field name="ownerType">
+              <string>group</string>
+            </field>
+            <field name="templateLocation">
+              <string>classpath:/org/exoplatform/portal/config/conf</string>
+            </field>
+          </object>
+        </object-param>
+          
         </init-params>
       </component-plugin>
     </component-plugins>
@@ -141,6 +167,27 @@
 		</values-param>	                
 	  </init-params>   
   </component>
+
+  <component>
+     <key>org.jboss.cache.transaction.TransactionManagerLookup</key>
+     <type>org.jboss.cache.transaction.JBossStandaloneJTAManagerLookup</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.transaction.TransactionService</key>
+    <type>org.exoplatform.services.transaction.jbosscache.JBossTransactionsService</type>
+    <init-params>
+      <value-param>
+        <name>timeout</name>
+        <value>300</value>
+      </value-param>
+    </init-params>
+  </component>
+
+	<component>
+	  <key>org.gatein.common.transaction.JTAUserTransactionLifecycleService</key>
+	  <type>org.gatein.common.transaction.JTAUserTransactionLifecycleServiceImpl</type>
+	</component>
 
   <component>
     <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
@@ -280,6 +327,11 @@
           <value>org.gatein.mop.core.api.workspace.content.ContextSpecialization</value>
           <value>org.gatein.mop.core.api.workspace.content.WorkspaceClone</value>
           <value>org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization</value>
+          <value>org.exoplatform.portal.mop.redirects.Redirectable</value>
+          <value>org.exoplatform.portal.mop.redirects.Redirect</value>
+          <value>org.exoplatform.portal.mop.redirects.Mappings</value>
+          <!-- GateIn node types -->
+
           <value>org.exoplatform.portal.pom.spi.portlet.PortletState</value>
           <value>org.exoplatform.portal.pom.spi.portlet.PreferenceState</value>
           <value>org.exoplatform.portal.pom.spi.gadget.GadgetState</value>

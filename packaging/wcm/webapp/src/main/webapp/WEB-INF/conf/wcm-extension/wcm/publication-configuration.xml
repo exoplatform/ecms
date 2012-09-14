@@ -109,39 +109,6 @@
     </component-plugin>
   </external-component-plugins>
 
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
-    <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.pageCreated</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.page.CreatePageEventListener</type>
-      <description>this listener update publication state of content when page is created</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.pageUpdated</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.page.UpdatePageEventListener</type>
-      <description>this listener update publication state of content when page is updated</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.pageRemoved</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.page.RemovePageEventListener</type>
-      <description>this listener update publication state of content when page is removed</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.mop.navigation.navigation_updated</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.navigation.UpdateNavigationEventListener</type>
-      <description>this listener update publication state of content when navigation is updated</description>
-    </component-plugin>
-    <component-plugin>
-      <name>org.exoplatform.portal.mop.navigation.navigation_destroyed</name>
-      <set-method>addListener</set-method>
-      <type>org.exoplatform.services.wcm.publication.listener.navigation.RemoveNavigationEventListener</type>
-      <description>this listener update publication state of content when navigation is removed</description>
-    </component-plugin>
-  </external-component-plugins>
   <!-- 
 	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like exo:article OR WCM like exo:webContent) 
 	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS (UNTIL DMS 2.5.1)

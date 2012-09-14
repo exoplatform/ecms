@@ -18,17 +18,23 @@
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+  import org.json.JSONArray;  
 		
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
   String skin = uicomponent.getSkin();
   def portalSkins = uicomponent.getPortalSkins() ;
   def portletSkins = uicomponent.getPortletSkins() ;
-  def scriptsURLs = rcontext.getAttribute("eXo.portal.scriptsURLs");
+  def scriptsURLs = uicomponent.getScripts();
   def headerScripts = new LinkedList();	
-  for (path in scriptsURLs.keySet()) {
-    if (!scriptsURLs.get(path)) {
-      headerScripts.add(path);
+  def jsConfig = uicomponent.getJSConfig(); 
+  def remoteScripts = new JSONArray();
+  for (module in scriptsURLs.keySet()) {
+    def url = !jsConfig.has("paths") ? null : 
+              (!jsConfig.get("paths").has(module) ? null : jsConfig.get("paths").get(module)); 
+    headerScripts.add(url != null ? url + ".js" : module);      
+    if (scriptsURLs.get(module)) {
+      remoteScripts.put(module);
     }
   }
   def lang = uicomponent.getLocale().getLanguage();
@@ -113,16 +119,17 @@
     %>
       <link id="${portletSkin.id}" rel="stylesheet" type="text/css" href= "$url" />
     <%}%>
+    <script type="text/javascript">
+    var require = <%=jsConfig%>;
+    </script>
     <% for (url in headerScripts) { %>
-       <script type="text/javascript" src="<%= url %>"></script>
-    <% } %>
-   <script type="text/javascript">     
+            <script type="text/javascript" src="<%= url %>"></script>
+    <% } %>   
+   <script type="text/javascript">
+   eXo.env.addLoadedRemoteScripts(<%=remoteScripts%>);
    <% if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) { %>
            eXo.developing = true ;
    <% } %>
-   <% for (url in headerScripts) { %>
-         eXo.core.AsyncLoader.addLoadedJS('$url');
-   <% } %> 
      eXo.env.portal.context = "<%=docBase%>" ;
      <%
       if(rcontext.getAccessPath() == 0) {%>eXo.env.portal.accessMode = "public" ;<%}
@@ -142,52 +149,32 @@
      eXo.session.canKeepState = $canKeepState;
      eXo.session.isOpen = $isSessionOpen;
      eXo.session.itvTime = ${((PortalRequestContext)rcontext).getRequest().getSession().getMaxInactiveInterval()} ;
-     <% if(canKeepState && isSessionOpen) { %> eXo.session.itvInit() ;<% } %>
-   </script>
-  <%
+     </script>
+     <%
     def headerElements = rcontext.getExtraMarkupHeadersAsStrings();
     if (headerElements != null) 
     {
        for (element in headerElements)
-       { %>
-        <%=element%>  
-    <% }
-     }     
-    %>
-          
-    <script type="text/javascript">
-      function initLoading(lblLoading, lblAbort) {
-        var ajaxLoading = document.getElementById("AjaxLoadingMask");
-        var loadingText = document.createElement("span");
-        loadingText.className = "LoadingText";
-        loadingText.innerHTML = lblLoading;
-        ajaxLoading.appendChild(loadingText);
-        
-        var loadingBar = document.createElement("span");
-        loadingBar.className = "LoadingProgressBar";
-        ajaxLoading.appendChild(loadingBar);
-        
-        var closeIcon = document.createElement("a");
-        closeIcon.className = "CloseLoadIcon";
-        closeIcon.setAttribute("href", "javascript:ajaxAbort();");
-        closeIcon.setAttribute("title", lblAbort);
-        closeIcon.innerHTML = "&nbsp;";
-        ajaxLoading.appendChild(closeIcon);
-      }
-    </script>
-  </head>
+       {
+         print(element);  
+       }
+    }     
+   %>
+ </head>
 
-  <body style="height: 100%;">
-    <% 
-      /*Hide All Popup Menu when click on document*/
-      //rcontext.getJavascriptManager().addOnLoadJavascript('eXo.core.DOMUtil.hideElements');
-      //rcontext.getJavascriptManager().addOnResizeJavascript('eXo.core.UIMaskLayer.resizeMaskLayer');
-    %>
+ <body style="height: 100%;">
+
+ <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
+     
+   <div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
+     <div class="LoadingContainer">
+       <div class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
+       <span class="LoadingProgressBar"></span>
+       
+       <div class="UIAction"> 
+         <a href="javascript:ajaxAbort();" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIPortalApplication.label.Abort")%></a>
+       </div>
+     
+     </div>
+   </div>
  
-	<div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
-		<div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
-	  </div>
-    
-    <script type="text/javascript">
-      initLoading('<%=_ctx.appRes("UIPortalApplication.label.Loading")%>', '<%=_ctx.appRes("UIPortalApplication.title.abort")%>');
-    </script>

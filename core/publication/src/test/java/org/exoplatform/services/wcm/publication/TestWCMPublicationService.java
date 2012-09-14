@@ -163,9 +163,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     listenerService.addListener(DataStorage.PORTAL_CONFIG_CREATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_UPDATED, listener);
     listenerService.addListener(DataStorage.PORTAL_CONFIG_REMOVED, listener);
-
-    //
-    createPortalModel();
   }
   
   @AfterMethod
@@ -173,7 +170,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     publicationService_.getWebpagePublicationPlugins().clear();
     node_.remove();
     session.save();
-    storage_.remove(portal_);
     RequestLifeCycle.end();
   }
 
@@ -276,150 +272,5 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     assertEquals(DumpPublicationPlugin.DEFAULT_STATE, publicationService_.getContentState(node_));
   }
   
-  /**
-   * tests publish content scv
-   */
-  @Test
-  public void testPublishContentSCV() throws Exception {
-    Page page = new Page();
-    Exception e = null;
-    try {
-      publicationService_.publishContentSCV(node_, page, node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNotNull(e);
-    
-    e = null;
-    try {
-      publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-      publicationService_.publishContentSCV(node_, page, node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNull(e);
-  }
-  
-  /**
-   * tests publish content clv
-   */
-  @Test
-  public void testPublishContentCLV() throws Exception {
-    Page page = new Page();
-    Exception e = null;
-    try {
-      publicationService_.publishContentCLV(node_, page, node_.getSession().getUserID(),
-                                            "CLV1", node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNotNull(e);
-    
-    e = null;
-    try {
-      publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-      publicationService_.publishContentCLV(node_, page, node_.getSession().getUserID(),
-                                            "CLV1", node_.getSession().getUserID());
-    } catch (Exception ex) {
-      e = ex;
-    }
-    assertNull(e);
-  }
-  
-  /**
-   * tests update lifecycle on create page
-   */
-  @Test
-  public void testUpdateLifecycleOnCreatePage() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecyleOnCreatePage(page_, node_.getSession().getUserID());
-    assertTrue(node_.isNodeType(NodetypeConstant.PUBLICATION_WEBPAGES_PUBLICATION));
-  }
-  
-  /**
-   * tests update lifecycle on remove page
-   */
-  @Test
-  public void testUpdateLifecycleOnRemovePage() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecycleOnRemovePage(page_, node_.getSession().getUserID());
-    if (node_.hasProperty("publication:webPageIDs")) {
-      Value[] values = node_.getProperty("publication:webPageIDs").getValues();
-      if (values != null) {
-        for (Value v : values) {
-          assertFalse(v.getString().equals(page_.getPageId()));
-        }
-      }
-    }
-  }  
-
-  /**
-   * tests update lifecycle on change page
-   */
-  @Test
-  public void testUpdateLifecycleOnChangePage() throws Exception {
-    publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
-    publicationService_.updateLifecyleOnChangePage(page_, node_.getSession().getUserID());
-    if (node_.hasProperty("publication:webPageIDs")) {
-      Value[] values = node_.getProperty("publication:webPageIDs").getValues();
-      if (values != null) {
-        for (Value v : values) {
-          assertFalse(v.getString().equals(page_.getPageId()));
-        }
-      }
-    }
-  }
-  
-  private void createPortalModel() throws Exception {
-    //create portal
-    String label = "portal_test";
-    String description = "This is new portal for testing";
-    portal_ = new PortalConfig();
-    portal_.setType("portal");
-    portal_.setName("test");
-    portal_.setLocale("en");
-    portal_.setLabel(label);
-    portal_.setDescription(description);
-    portal_.setAccessPermissions(new String[]{UserACL.EVERYONE});
-
-    storage_.create(portal_);
-    //create pate
-    //---------------------
-    portlet_ = new Portlet();
-
-    ApplicationState<Portlet> state = 
-      new TransientApplicationState<Portlet>("portal#test:/web/presentation/SingleContentViewer", portlet_);
-    ApplicationData<Portlet> applicationData = 
-      new ApplicationData<Portlet>(null, "portal#test:/web/presentation/SingleContentViewer",
-       ApplicationType.PORTLET, state, "portal#test:/web/presentation/SingleContentViewer", 
-       "app-title", "app-icon", "app-description", false, true, false,
-       "app-theme", "app-wdith", "app-height", new HashMap<String,String>(),
-       Collections.singletonList("app-edit-permissions"));
-
-    ContainerData containerData = new ContainerData(null, "cd-id", "cd-name", "cd-icon", "cd-template", "cd-factoryId", 
-                                                    "cd-title", "cd-description", "cd-width", "cd-height", 
-                                                    Collections.singletonList("cd-access-permissions"), 
-                                                    Collections.singletonList((ComponentData) applicationData));
-    List<ComponentData> children = Collections.singletonList((ComponentData) containerData);
-    
-    PageData expectedData = new PageData(null, null, "page-name", null, null, null, "Page Title", null, null, null,
-       Collections.singletonList("access-permissions"), children, "", "", "edit-permission", true);
-
-    page_ = new Page(expectedData);
-    page_.setTitle("MyTitle");
-    page_.setOwnerType(PortalConfig.PORTAL_TYPE);
-    page_.setOwnerId("test");
-    page_.setName("foo");
-
-    storage_.create(page_);
-    
-    PortletPreferences p = new PortletPreferences();
-    p.setWindowId("portal#test:/web/presentation/SingleContentViewer");
-    p.setPreference(new Preference("workspace", node_.getSession().getWorkspace().getName()));
-    p.setPreference(new Preference("nodeIdentifier", node_.getUUID()));
-    
-    storage_.save(p);
-    //------------------------------------------
-  }
 }
 
