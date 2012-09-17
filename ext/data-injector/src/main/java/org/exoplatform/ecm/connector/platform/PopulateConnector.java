@@ -86,10 +86,10 @@ public class PopulateConnector implements ResourceContainer {
   private static final String DICTIONARY_FILE = "dictionary.txt";
   
   /** Files to be imported */
-  private static final String[] SOURCE_FILES1 = {"content.doc application/msword", "content.pdf application/pdf"};
-  private static final String[] SOURCE_FILES2 = {"content.ppt application/ppt","content.xls application/xls",
-                                                  "image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif",
-                                                  "image.png image/png"};
+  private static final String[] SOURCE_FILES1 = {"content.doc application/msword", "content.pdf application/pdf",
+  																							 "content.ppt application/ppt","content.xls application/xls"
+    																						 };
+  private static final String[] SOURCE_FILES2 = {"image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif", "image.png image/png"};
   
   private static final String IMPORTED_DOCUMENTS_FOLDER = "importedDocuments";
   
@@ -214,33 +214,47 @@ public class PopulateConnector implements ResourceContainer {
       }
     }
     content.append('.');
-    //create a temporary txt file containing generated content at previous step
-    File tempFile = File.createTempFile("content_temp", fileExtension);
-    InputStream input = new BufferedInputStream(new ByteArrayInputStream(content.toString().getBytes()));
-    OutputStream out = new BufferedOutputStream((new FileOutputStream(tempFile)));
-    // create temp file to store original data of nt:file node
-    File in = File.createTempFile("content_tmp", null);
-    read(input, new BufferedOutputStream(new FileOutputStream(in)));
-    try {
-      boolean success = jodConverter_.convert(in, tempFile, fileExtension);
-      // If the converting was failure then delete the content temporary file
-      if (!success) {
-        tempFile.delete();
-      }
-    } catch (OfficeException connection) {
-      tempFile.delete();
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Exception when using Office Service");
-      }
-    } finally {
-      in.delete();
-      out.flush();
-      out.close();
+    File tempFile = null;
+    if(fileExtension.equalsIgnoreCase("doc")) {
+	    //create a temporary txt file containing generated content at previous step
+	    tempFile = File.createTempFile("content_temp", fileExtension);
+	    InputStream input = new BufferedInputStream(new ByteArrayInputStream(content.toString().getBytes()));
+	    OutputStream out = new BufferedOutputStream((new FileOutputStream(tempFile)));
+	    // create temp file to store original data of nt:file node
+	    File in = File.createTempFile("content_tmp", null);
+	    read(input, new BufferedOutputStream(new FileOutputStream(in)));
+	    try {
+	      boolean success = jodConverter_.convert(in, tempFile, fileExtension);
+	      // If the converting was failure then delete the content temporary file
+	      if (!success) {
+	        tempFile.delete();
+	      }
+	    } catch (OfficeException connection) {
+	      tempFile.delete();
+	      if (LOG.isErrorEnabled()) {
+	        LOG.error("Exception when using Office Service");
+	      }
+	    } finally {
+	      in.delete();
+	      out.flush();
+	      out.close();
+	    }
+    } else {
+    	try {
+    		DocumentRenderer documentRender = new DocumentRenderer();
+    		boolean success = documentRender.createDocument(content.toString(), fileName, fileExtension);
+    		if(success) tempFile = new File(fileName);
+    	} catch(Exception ex) {
+    		if (LOG.isErrorEnabled()) {
+	        LOG.error("Exception when creating document");
+	      }
+    	}
     }
     //import the newly created file into jcr
     InputStream inputStream = new FileInputStream(tempFile);
     String fileNodeName = cmsService_.storeNode("nt:file", parentNode,
                                                 getInputProperties(fileName, inputStream, mimeType), true);
+    
     
     return fileNodeName;
   }
@@ -298,6 +312,7 @@ public class PopulateConnector implements ResourceContainer {
       sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session sourceSession = sessionProvider.getSession(WORKSPACE_NAME, repoService_.getCurrentRepository());
       Session session = sessionProvider.getSession(workspace, repoService_.getCurrentRepository());
+      
       initializeLoadData(true, true, (size == null ? 0 : size));
       //1.get source node
       Node sourceNode = getSourceNode(sourceSession, IMPORTED_DOCUMENTS_FOLDER, docType);
