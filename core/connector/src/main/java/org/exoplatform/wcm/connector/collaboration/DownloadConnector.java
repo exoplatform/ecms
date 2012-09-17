@@ -37,7 +37,7 @@ public class DownloadConnector implements ResourceContainer{
    * 
    * @param workspace The workspace where to store the document node
    * @param path The path to the document node
-   * @param version   : version name
+   * @param version The version name
    * @return the instance of javax.ws.rs.core.Response
    * @throws Exception
    * @Objective Return to browser a stream for downloading content of a node. The stream is got from _jcr\:content_/_jcr\:data_
@@ -45,7 +45,7 @@ public class DownloadConnector implements ResourceContainer{
    *              nguyenthevinhbk@gmail.com
    *              dongpd@exoplatform.com
    *              
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector.download
+   * @anchor CONTref.Devref.PublicRestAPIs.DownloadConnector.download
    */
   @GET
   @Path("/download/{workspace}/{path:.*}/")

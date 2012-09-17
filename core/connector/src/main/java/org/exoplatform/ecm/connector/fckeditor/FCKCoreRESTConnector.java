@@ -64,8 +64,8 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Instantiate a new FCK core rest connector.
    *
-   * @param repositoryService The repository service
-   * @param providerService The provider service
+   * @param repositoryService The repository service.
+   * @param providerService The provider service.
    */
   public FCKCoreRESTConnector(RepositoryService repositoryService, ThreadLocalSessionProviderService providerService) {
     this.repositoryService = repositoryService;
@@ -78,15 +78,15 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Return folders and files in the current folder.
    *
-   * @param repoName The name of repository
-   * @param workspaceName The name of workspace
-   * @param currentFolder The current folder
-   * @param command The command
-   * @param type The type
-   * @return The folders and files
+   * @param repoName The name of repository.
+   * @param workspaceName The name of workspace.
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param type The type.
+   * @return The folders and files.
    * @throws Exception The exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.getFoldersAndFiles
+   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -136,15 +136,15 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Create a folder under the current folder.
    *
-   * @param repositoryName The name of repository
-   * @param workspaceName The name of workspace
-   * @param currentFolder The current folder
-   * @param newFolderName The name of new folder
-   * @param language The language
-   * @return The response
+   * @param repositoryName The name of repository.
+   * @param workspaceName The name of workspace.
+   * @param currentFolder The current folder.
+   * @param newFolderName The name of the new folder.
+   * @param language The language.
+   * @return The response.
    * @throws Exception The exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.createFolder
+   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -165,7 +165,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    *
    * @return The response
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.uploadFile
+   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -178,12 +178,16 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   /**
    * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @param action The action
-   * @param uploadId The Id of upload
-   * @param language The language
-   * @return The response
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
+   * @param currentFolder The current folder.
+   * @param action The process of the upload file, such as saving or cancelling the file.
+   * @param language The language of the file.
+   * @param fileName  The file name.
+   * @param uploadId The Id of the upload.
+   * @return The response.
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FCKCoreRESTConnector.processUpload
+   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

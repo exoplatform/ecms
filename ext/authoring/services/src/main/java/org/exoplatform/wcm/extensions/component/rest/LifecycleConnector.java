@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  *
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector
+ * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector
  */
 @Path("/authoring/")
 public class LifecycleConnector implements ResourceContainer {
@@ -44,15 +44,16 @@ public class LifecycleConnector implements ResourceContainer {
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
    * =draft&user=root&lang=en&workspace=collaboration
    *
-   * @param fromstate
-   * @param user
-   * @param lang
-   * @param workspace
+   * @param fromstate The beginning state of the content.
+   * @param user  The author of the content.
+   * @param lang  The language of the content.
+   * @param workspace The workspace name which contains the content.
+   * @param json The format of the returned data.
    * @param path
    * @return
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector.byState
+   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byState
    */
   @GET
   @Path("/bystate/")
@@ -70,15 +71,17 @@ public class LifecycleConnector implements ResourceContainer {
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
    * =draft&tostate=pending&user=root&lang=en&workspace=collaboration
    *
-   * @param fromstate
-   * @param user
-   * @param lang
-   * @param workspace
+   * @param fromstate  The beginning state of the content.
+   * @param tostate The destination state of the content.
+   * @param user The author of the content.
+   * @param lang The language of the content.
+   * @param workspace The workspace name which contains the content.
+   * @param json The format of the returned data.
    * @param path
    * @return
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector.toState
+   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.toState
    */
   @GET
   @Path("/tostate/")
@@ -97,15 +100,16 @@ public class LifecycleConnector implements ResourceContainer {
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
    * =staged&date=2&lang=en&workspace=collaboration
    *
-   * @param fromstate
-   * @param user
-   * @param lang
-   * @param workspace
+   * @param fromstate  The beginning state of the content.
+   * @param date The date before when the content is published.
+   * @param workspace The workspace name which contains the content.
+   * @param lang The language of the content.
+   * @param json The format of the returned data.
    * @param path
    * @return
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.LifecycleConnector.byDate
+   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byDate
    */
   @GET
   @Path("/bydate/")

@@ -60,7 +60,7 @@ import com.sun.syndication.io.SyndFeedOutput;
  * @since      29-08-2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector
+ * @anchor CONTref.Devref.PublicRestAPIs.RssConnector
  */
 @Path("/feed/")
 public class RssConnector extends BaseConnector implements ResourceContainer {
@@ -116,17 +116,26 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /**
    * Generate an RSS feed.
    *
-   * @param repositoryName The name of repository
-   * @param workspaceName The name of workspace
-   * @param server The server
-   * @param siteName The name of site
-   * @param categoryPath The path of category
+   * @param repositoryName The name of repository.
+   * @param workspaceName The name of workspace.
+   * @param server The server.
+   * @param siteName The name of site.
+   * @param title The title of the feed.
+   * @param desc  The description of the feed.
+   * @param folderPath The folder path of the feed.
+   * @param orderBy The criteria to order the content.
+   * @param orderType The descending or ascending order.
+   * @param lang   The language of the feed.
+   * @param detailPage The page used to open the content.
+   * @param detailParam The parameters is the key in the URL to let CLV know which really is the path in the current URL.
+   * @param recursive This param is deprecated and will be moved soon.
+   * @param categoryPath The path of the category.
    *
    * @return The response
    *
    * @throws Exception The exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RssConnector.generate
+   * @anchor CONTref.Devref.PublicRestAPIs.RssConnector.generate
    */
   @GET
   @Path("/rss/")
@@ -201,7 +210,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /**
    * Generate an RSS feed.
    *
-   * @param context The context
+   * @param context The context.
    *
    * @return The string
    */

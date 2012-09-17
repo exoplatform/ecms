@@ -53,7 +53,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @since      Mar 31, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
+ * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -82,8 +82,8 @@ public class RESTImagesRendererService implements ResourceContainer{
   /**
    * Instantiate a new REST images renderer service.
    *
-   * @param repositoryService The repository service
-   * @param sessionProviderService The session provider service
+   * @param repositoryService The repository service.
+   * @param sessionProviderService The session provider service.
    */
   public RESTImagesRendererService(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
@@ -93,13 +93,14 @@ public class RESTImagesRendererService implements ResourceContainer{
   /**
    * Get the image binary data of a given image node.
    *
-   * @param repository The repository
-   * @param workspace The workspace
-   * @param nodeIdentifier The node identifier
+   * @param repository The repository name.
+   * @param workspace The workspace name.
+   * @param nodeIdentifier The node identifier.
+   * @param param Check if the document is a file or not.
    *
    * @return The response
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
+   * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
@@ -212,8 +213,8 @@ public class RESTImagesRendererService implements ResourceContainer{
   /**
    * Generate URI.
    *
-   * @param file The node
-   * @param propertyName The image property name. The value will be null if the file is an image node
+   * @param file The node.
+   * @param propertyName The image property name. The value will be null if the file is an image node.
    *
    * @return The string
    *
