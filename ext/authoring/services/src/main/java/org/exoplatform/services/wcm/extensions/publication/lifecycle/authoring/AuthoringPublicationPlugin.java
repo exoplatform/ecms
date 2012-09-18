@@ -168,16 +168,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       addRevisionData(node, revisionsMap.values());
       addLog(node, versionLog);
     } else if (PublicationDefaultStates.UNPUBLISHED.equalsIgnoreCase(newState)) {
-      Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = null;
-      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
-      }
-      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
-        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
-                         valueFactory.createValue(""));
-      }
       versionLog = new VersionLog(selectedRevision.getName(),
                                   PublicationDefaultStates.UNPUBLISHED,
                                   userId,
