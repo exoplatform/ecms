@@ -97,8 +97,9 @@ public class UIPublicationPanel
     Calendar endDate = null;
     String nodeVersionUUID = null;
     super.init(node);
-    if (PublicationDefaultStates.PUBLISHED.equals(node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
-                                                      .getString())) {
+    String currentState = node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+            .getString();
+    if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
       nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
                             .getString();
       if (!"".equals(nodeVersionUUID)) {
@@ -160,10 +161,15 @@ public class UIPublicationPanel
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
 
         String nodeVersionUUID = null;
-        if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP))
-          nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
-        if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {
-          publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
+        String currentState = currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+                .getString();
+        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+          if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)){
+            nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
+          }
+          if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {
+            publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
+          }
         }
         String siteName = Util.getPortalRequestContext().getPortalOwner();
         String remoteUser = Util.getPortalRequestContext().getRemoteUser();
