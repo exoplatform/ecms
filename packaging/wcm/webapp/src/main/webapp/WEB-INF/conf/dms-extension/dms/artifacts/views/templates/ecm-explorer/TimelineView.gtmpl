@@ -46,7 +46,7 @@
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/explorer-module", "explorer").
             require("SHARED/ecm-utils", "ecmutil").
-  addScripts("explorer.UITimelineViewinitAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("explorer.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
   addScripts('ecmutil.ECMUtils.loadEffectedItemsInSideBar();');
 

@@ -99,6 +99,15 @@
 				<div class="UITabContentContainer">
 					<div class="UITabContent" style="display: block;">
 						<table class="UIFormGrid">
+                    <tr>
+                      <td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%></label></td>
+                        <td class="FieldComponent">
+                      <%
+                            String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
+                            uicomponent.addTextField("title", webContentFieldTitle) ;
+                        %>
+                      </td>
+                    </tr> 
 		            		<tr>
 		        				<td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%></label></td>
 		          				<td class="FieldComponent">
@@ -120,17 +129,12 @@
 			              	 		uicomponent.addHiddenField("videoFolder", videoFolder);
 			              	 		uicomponent.addHiddenField("audioFolder", audioFolder);
 		            	   		%>
+		            	   		<script type="text/javascript">
+  		            	   		titleField = document.getElementById("title");
+  		            	   		titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+		            	   		</script>
 		          			 	</td>
 		        			</tr>
-							<tr>
-								<td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%></label></td>
-							  	<td class="FieldComponent">
-								<%
-							        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
-							        uicomponent.addTextField("title", webContentFieldTitle) ;
-							    %>
-								</td>
-							</tr>	
 							<tr>
         						<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
 								<td class="FieldComponent">
@@ -354,8 +358,8 @@
 									if(jsContent == null || jsContent.equals("")) {
 										jsContent = 	"eXo.core.Browser.addOnLoadCallback('renderNavigations', function() {\n" +
 																	"\trenderNavigations();\n"  +
-																	"\teXo.portal.UIWCMNavigation.onLoad('UIWCMNavigationPortlet');n"  +
-																	"\teXo.portal.UIWCMNavigation.loadScroll();n"  +
+																	"\teXo.portal.UIWCMNavigation.onLoad('UIWCMNavigationPortlet');\n"  +
+																	"\teXo.portal.UIWCMNavigation.loadScroll();\n"  +
 																	"});\n" +
 																	"function renderChildrenContainer(navigations) {\n" +
 																	"\tvar html =\t'<div class=\"MenuItemContainer\" style=\"display: none;\">' +\n" +
