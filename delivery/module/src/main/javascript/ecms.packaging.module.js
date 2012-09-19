@@ -122,11 +122,7 @@ function getModule(params) {
     addDependency(new Project("org.owasp.antisamy", "antisamy", "jar", antisamyVersion)).
     addDependency(new Project("org.apache.xmlgraphics", "batik-css", "jar", batikVersion)).
     addDependency(new Project("batik", "batik-util", "jar", batikUtilVersion)).
-    addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).
-    addDependency(new Project("com.lowagie", "itext", "jar",  "${itext.version}")).
-    addDependency(new Project("com.itextpdf", "itextpdf", "jar",  "${com.itextpdf.version}")).
-    addDependency(new Project("org.xhtmlrenderer", "flying-saucer-core", "jar",  "${flying-saucer-core.version}")).
-    addDependency(new Project("org.xhtmlrenderer", "flying-saucer-pdf", "jar",  "${flying-saucer-pdf.version}")).
+    addDependency(new Project("org.w3c", "sac", "jar", sacVersion)).    
     addDependency(new Project("org.exoplatform.commons", "commons-component-product", "jar", commonsVersion)).
     addDependency(new Project("org.exoplatform.commons", "commons-component-upgrade", "jar", commonsVersion));
   
