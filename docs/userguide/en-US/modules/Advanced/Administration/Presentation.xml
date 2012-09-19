@@ -1272,7 +1272,7 @@
                             <imagedata align="center" fileref="images/addiconfileform.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/addiconfileform.png" format="PNG"/>
+                            <imagedata width="130mm" align="center" fileref="images/addiconfileform.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>
@@ -1401,7 +1401,7 @@
                             <imagedata align="center" fileref="images/applyviewstab.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="150mm" align="center" fileref="images/applyviewstab.png" format="PNG"/>
+                            <imagedata width="120mm" align="center" fileref="images/applyviewstab.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </step>

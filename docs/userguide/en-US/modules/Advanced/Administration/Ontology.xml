@@ -213,7 +213,7 @@
                     <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center" width="150mm"/>
+                    <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center" width="130mm"/>
                 </imageobject>
             </mediaobject>
             <citetitle>
@@ -269,7 +269,7 @@
                             <imagedata fileref="images/managemembership.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/managemembership.png" format="PNG" align="center" width="150mm"/>
+                            <imagedata fileref="images/managemembership.png" format="PNG" align="center" width="130mm"/>
                         </imageobject>
                     </mediaobject>
                     <para>

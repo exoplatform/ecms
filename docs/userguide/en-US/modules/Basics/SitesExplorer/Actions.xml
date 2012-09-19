@@ -1616,7 +1616,7 @@ After being created successfully, a file document with the <guilabel>text/html</
 						<entry>
 							<mediaobject>
 								<imageobject>
-                           <imagedata align="center" fileref="images/audio-description-button.png" format="PNG" width="4mm" scalefit="1"/>
+                           <imagedata align="center" fileref="images/audio-description-button.png" format="PNG" width="16mm" scalefit="1"/>
 								</imageobject>
 							</mediaobject>
 						</entry>
@@ -1625,7 +1625,7 @@ After being created successfully, a file document with the <guilabel>text/html</
                <guilabel>Audio description</guilabel> field. After opening the audio description, to back to the original media, click
                <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/back-the-original-video.png" format="PNG" scalefit="1" width="4mm"/>
+              <imagedata fileref="images/back-the-original-video.png" format="PNG" scalefit="1" width="16mm"/>
             </imageobject>
           </inlinemediaobject>.
 						</entry>
@@ -1889,7 +1889,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/choosetargetnode.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/choosetargetnode.png" format="PNG"/>
+            <imagedata width="130mm" align="center" fileref="images/choosetargetnode.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1917,7 +1917,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="100mm" scalefit="1" align="center" fileref="images/availablelanguages.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2060,7 +2060,7 @@ After being created successfully, a file document with the <guilabel>text/html</
          <imagedata align="center" fileref="images/Add_symlink_rightclick.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-         <imagedata width="100mm" scalefit="1" align="center" fileref="images/Add_symlink_rightclick.png" format="PNG"/>
+         <imagedata width="130mm" scalefit="1" align="center" fileref="images/Add_symlink_rightclick.png" format="PNG"/>
       </imageobject>
 </mediaobject>
 
@@ -2111,7 +2111,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="30mm" scalefit="1" fileref="images/commentdocumentbutton.png" format="PNG"/>
+              <imagedata width="20mm" scalefit="1" fileref="images/commentdocumentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Comment this document ]</phrase>
@@ -2197,7 +2197,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" scalefit="1" fileref="images/editdocumenticon.png" format="PNG"/>
+              <imagedata width="15mm" scalefit="1" fileref="images/editdocumenticon.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Edit Document ]</phrase>
@@ -2488,7 +2488,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageactionsbutton.png" format="PNG"/>
+                <imagedata width="15mm" scalefit="1" fileref="images/manageactionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Actions ]</phrase>
@@ -2863,7 +2863,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="15mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="13mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2894,7 +2894,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="18mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
+              <imagedata width="13mm" scalefit="1" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Auditing ]</phrase>
@@ -2912,7 +2912,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="100mm" scalefit="1" align="center" fileref="images/auditinformation.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2923,7 +2923,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="100mm" scalefit="1" align="center" fileref="images/noauditinformation.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3019,7 +3019,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/view-category.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="105mm" scalefit="1" align="center" fileref="images/view-category.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/view-category.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         </step>
@@ -3143,7 +3143,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
+              <imagedata width="18mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Manage Publications ]</phrase>
@@ -3306,7 +3306,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click the
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3374,7 +3374,7 @@ After being created successfully, a file document with the <guilabel>text/html</
               <imagedata align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="67mm" scalefit="1" align="center" fileref="images/relationsbutton.png" format="PNG"/>
+              <imagedata width="80mm" scalefit="1" align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -3431,7 +3431,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Relations ]</phrase>
@@ -3447,7 +3447,7 @@ After being created successfully, a file document with the <guilabel>text/html</
               <imagedata align="center" fileref="images/activateversionmessage.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="103mm" align="center" fileref="images/activateversionmessage.png" format="PNG"/>
+              <imagedata width="90mm" align="center" fileref="images/activateversionmessage.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3478,7 +3478,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3493,7 +3493,7 @@ After being created successfully, a file document with the <guilabel>text/html</
               <imagedata align="center" fileref="images/versioninfo.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="150mm" align="center" fileref="images/versioninfo.png" format="PNG"/>
+              <imagedata width="130mm" align="center" fileref="images/versioninfo.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -3568,7 +3568,7 @@ After being created successfully, a file document with the <guilabel>text/html</
               <imagedata align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="100mm" scalefit="1" align="center" fileref="images/addlabelform.png" format="PNG"/>
+              <imagedata width="130mm" scalefit="1" align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3604,7 +3604,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3635,7 +3635,7 @@ After being created successfully, a file document with the <guilabel>text/html</
               <imagedata align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="100mm" scalefit="1" align="center" fileref="images/removelabelform.png" format="PNG"/>
+              <imagedata width="120mm" scalefit="1" align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3666,7 +3666,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3728,7 +3728,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3770,7 +3770,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             Click
             <inlinemediaobject>
               <imageobject>
-                <imagedata width="20mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
+                <imagedata width="18mm" scalefit="1" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>[ Manage Versions ]</phrase>
@@ -3845,7 +3845,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/multi-language.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="150mm" align="center" fileref="images/multi-language.png" format="PNG"/>
+            <imagedata width="130mm" align="center" fileref="images/multi-language.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -3870,7 +3870,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="100mm" scalefit="1" align="center" fileref="images/addlanguageform.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3991,7 +3991,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/addthumbnail.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="129mm" align="center" fileref="images/addthumbnail.png" format="PNG"/>
+            <imagedata width="110mm" align="center" fileref="images/addthumbnail.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4113,7 +4113,7 @@ After being created successfully, a file document with the <guilabel>text/html</
         <para>
           Click <inlinemediaobject>
             <imageobject>
-              <imagedata width="20mm" fileref="images/Publish_button.png" format="PNG"/>
+              <imagedata width="16mm" fileref="images/Publish_button.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[Publish]</phrase>
@@ -4385,7 +4385,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="14mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
+              <imagedata width="12mm" scalefit="1" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ Tagging this document ]</phrase>
@@ -4701,7 +4701,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="22mm" scalefit="1" fileref="images/viewmetadatasbutton.png" format="PNG"/>
+              <imagedata width="18mm" scalefit="1" fileref="images/viewmetadatasbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Metadatas ]</phrase>
@@ -4775,7 +4775,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           Click
           <inlinemediaobject>
             <imageobject>
-              <imagedata width="18mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
+              <imagedata width="16mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>[ View Node Types ]</phrase>
@@ -4788,7 +4788,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="100mm" scalefit="1" align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4829,7 +4829,7 @@ After being created successfully, a file document with the <guilabel>text/html</
             <imagedata align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="120mm" scalefit="1" align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
+            <imagedata width="130mm" scalefit="1" align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>

@@ -47,7 +47,7 @@
           <imagedata align="center" scale="" fileref="images/categorypanes.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="100mm" scalefit="1"/>
+          <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="130mm" scalefit="1"/>
         </imageobject>
       </mediaobject>
     </step>
