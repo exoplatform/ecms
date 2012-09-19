@@ -304,7 +304,7 @@
           Click 
           <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="25mm" scalefit="1"/>
+              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="16mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Edit Document ]</phrase>
@@ -331,7 +331,7 @@
       <para>
         When you click <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="25mm" scalefit="1"/>
+              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="16mm" scalefit="1"/>
             </imageobject>
             <textobject>
               <phrase>[ Edit Document ]</phrase>

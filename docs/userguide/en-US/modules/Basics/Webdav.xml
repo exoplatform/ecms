@@ -94,7 +94,7 @@
             <imagedata  align="center"  fileref="images/networkplacewizard.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/networkplacewizard.png" format="PNG" width="149mm"/>
+            <imagedata   align="center" fileref="images/networkplacewizard.png" format="PNG" width="130mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -107,7 +107,7 @@
             <imagedata  align="center"  fileref="images/networkplacelocation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/networkplacelocation.png" format="PNG" width="144mm"/>
+            <imagedata   align="center" fileref="images/networkplacelocation.png" format="PNG" width="130mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -131,7 +131,7 @@
             <imagedata  align="center"  fileref="images/newnetworklocation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/newnetworklocation.png" format="PNG" width="150mm"/>
+            <imagedata   align="center" fileref="images/newnetworklocation.png" format="PNG" width="130mm"/>
           </imageobject>
         </mediaobject>
         <para>

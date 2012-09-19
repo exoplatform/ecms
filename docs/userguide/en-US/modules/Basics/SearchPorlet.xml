@@ -165,7 +165,7 @@
                         <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG"/>
                     </imageobject>
                     <imageobject role="fo">
-                        <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG" width="150mm"/>
+                        <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG" width="100mm"/>
                     </imageobject>
                 </mediaobject>
                 <para><emphasis role="bold">Details:</emphasis></para>

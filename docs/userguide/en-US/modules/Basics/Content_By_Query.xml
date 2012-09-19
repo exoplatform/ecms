@@ -36,7 +36,7 @@
                     <imagedata align="center" fileref="images/query.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata align="center" fileref="images/query.png" format="PNG" width="150mm"/>
+                    <imagedata align="center" fileref="images/query.png" format="PNG" width="130mm"/>
                 </imageobject>
             </mediaobject>
             <para>The form with the

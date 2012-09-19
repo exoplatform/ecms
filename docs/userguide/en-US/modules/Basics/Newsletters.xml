@@ -522,7 +522,7 @@
               <imagedata  align="center"  fileref="images/newsletters_subscription_form.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/newsletters_subscription_form.png" format="PNG" width="100mm"/>
+              <imagedata   align="center" fileref="images/newsletters_subscription_form.png" format="PNG" width="80mm"/>
             </imageobject>
           </mediaobject>
           <para><emphasis role="bold">Details:</emphasis></para>

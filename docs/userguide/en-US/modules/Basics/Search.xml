@@ -545,7 +545,7 @@
                   <imagedata  align="center"  fileref="images/datesearchcondition.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/datesearchcondition.png" format="PNG" width="100mm" scalefit="1"/>
+                  <imagedata   align="center" fileref="images/datesearchcondition.png" format="PNG" width="130mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -601,7 +601,7 @@
                   <imagedata  align="center"  fileref="images/documenttypepopulated.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/documenttypepopulated.png" format="PNG" width="100mm" scalefit="1"/>
+                  <imagedata   align="center" fileref="images/documenttypepopulated.png" format="PNG" width="130mm" scalefit="1"/>
                 </imageobject>
               </mediaobject>
             </step>

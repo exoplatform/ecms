@@ -587,7 +587,7 @@
             <imagedata align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="65mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
+            <imagedata width="50mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
         </mediaobject>
      <para>

@@ -34,7 +34,7 @@ This function allows contributor to edit content, quickly access content list fo
                     <imagedata align="center" fileref="images/twomodes.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                    <imagedata width="100mm" scalefit="1" align="center" fileref="images/twomodes.png" format="PNG"/>
+                    <imagedata width="80mm" scalefit="1" align="center" fileref="images/twomodes.png" format="PNG"/>
                 </imageobject>
             </mediaobject>
         </para>
@@ -126,7 +126,7 @@ This function allows contributor to edit content, quickly access content list fo
                             <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="70mm" scalefit="1" align="center" fileref="images/documentform.png" format="PNG"/>
+                            <imagedata width="130mm" scalefit="1" align="center" fileref="images/documentform.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                   <para><emphasis role="bold">Details:</emphasis></para>
@@ -1375,7 +1375,7 @@ This function allows contributor to edit content, quickly access content list fo
                             <imagedata align="center" fileref="images/bottombar.png" format="PNG"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata width="100mm" scalefit="1" align="center" fileref="images/bottombar.png" format="PNG"/>
+                            <imagedata width="120mm" scalefit="1" align="center" fileref="images/bottombar.png" format="PNG"/>
                         </imageobject>
                     </mediaobject>
                 </note>
