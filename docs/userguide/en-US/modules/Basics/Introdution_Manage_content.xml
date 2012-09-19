@@ -3,7 +3,7 @@
 <itemizedlist>
 <listitem>
 <para><link linkend="sect-User_Guide-Contribute_Content">Contribute content</link></para>
-<para>Introduction to the <emphasis role="bold">Edit</emphasis> mode, procedures to do actions in <emphasis role="bold">InContext Editing</emphasis>, <emphasis role="bold">Inline Editing</emphasis>, <emphasis role="bold">CKEeditor</emphasis> and information of the publication process.</para>
+<para>Introduction to the <emphasis role="bold">Edit</emphasis> mode, procedures to do actions in <emphasis role="bold">InContext Editing</emphasis>, <emphasis role="bold">Inline Editing</emphasis>, <emphasis role="bold">CKEeditor</emphasis> and information about the publication process.</para>
 </listitem>
 <listitem>
 <para><link linkend="sect-User_Guide-Content_By_Query">Manage content list viewer by query</link></para>
@@ -15,7 +15,7 @@
 </listitem>
 <listitem>
 <para><link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer">Manage content in <emphasis role="bold">Sites Explorer</emphasis></link></para>
-<para>Information of Web content, and detailed steps to create, edit, delete, publish and search for web content in <emphasis role="bold">Sites Explorer</emphasis>.</para>
+<para>Information about Web content, and detailed steps to create, edit, delete, publish and search for web content in <emphasis role="bold">Sites Explorer</emphasis>.</para>
 </listitem>
 <listitem>
 <para><link linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV">Manage content with <emphasis role="bold">WebDAV</emphasis></link></para>
@@ -54,7 +54,7 @@
 <para>
 In addition to using <link linkend="sect-User_Guide-Actions">functions on action tabs</link> in content management, this section provides with more advanced functions for your most effective content management.
 You not only know many different types of content management, but also know how to create templates for content. Moreover, you will learn how to
-<link lienkend="http://localhost:8080/PLF35/topic/org.exoplatform.doc.35/sect-User_Guide-SEO_Management.html">optimize your content for search engines</link>.
+<link linkend="sect-User_Guide-SEO_Management">optimize your content for search engines</link>.
 </para>
 <para>
     <prompt>

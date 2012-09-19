@@ -193,11 +193,15 @@
     Click <guibutton>Close</guibutton> to quit the form to edit the configuration of <emphasis role="bold">Fast Content Creator</emphasis>.</para>
       </step>
     </procedure>
-
   </section>
-  <section id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
-    <title>Create new content</title>
-       <procedure>
+  <section id="sect-User_Guide-Fast_Content_Creator-Create_new_View_document_by_Fast_Content_Creator">
+	<title>Create/View content</title>
+	<para xml:id="sect-User_Guide-Fast_Content_Creator-Create_new_document_by_Fast_Content_Creator">
+		<citetitle>
+			<emphasis role="bold">Create new content</emphasis>
+		</citetitle>
+	</para>
+    <procedure>
       <step>
         <para>
            Go to your newly created page.
@@ -210,9 +214,11 @@
         <para>Click <guibutton>Save</guibutton> to accept creating the new document. A message appears to let you know that the document is created successfully at the location selected in the <guilabel>Location to Save</guilabel> field.</para>
       </step>
     </procedure>
-      </section>
-    <section id="sect-User_Guide-Fast_Content_Creator-view_document_by_Fast_Content_Creator">
-        <title>View content</title>
+    <para xml:id="sect-User_Guide-Fast_Content_Creator-view_document_by_Fast_Content_Creator">
+		<citetitle>
+			<emphasis role="bold">View content</emphasis>
+		</citetitle>
+	</para>
     <para>After creating a new document by <emphasis role="bold">Fast Content Creator</emphasis>, you can view it as follows:</para>
     <procedure>
       <step>
@@ -222,6 +228,5 @@
         <para>Select the drive and the path that you established in the configuration of <emphasis role="bold">Fast Content Creator.</emphasis> You will see this document.</para>
       </step>
     </procedure>
-  </section>
+ </section>
 </section>
-

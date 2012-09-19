@@ -40,7 +40,7 @@
       <procedure>
       <step>
         <para>
-     Open the <guilabel>Add Query</guilabel> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> page.
+     Open the <guilabel>Add Query</guilabel> form by clicking <guibutton>Add Query</guibutton> in the <emphasis role="bold">Manage Queries</emphasis> page.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -179,7 +179,7 @@
     <procedure>
       <step>
         <para>
-     Click the <guibutton>Add</guibutton> button in the <emphasis role="bold">Manage Script</emphasis> page to open the <guilabel>Add/Edit Script</guilabel> form.
+     Click <guibutton>Add</guibutton> in the <emphasis role="bold">Manage Script</emphasis> page to open the <guilabel>Add/Edit Script</guilabel> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -269,7 +269,7 @@
     <section id="sect-User_Guide-Advanced_Configuration-Create_Action_Types">
     <title>Create an action type</title>
     <para>
-   This function allows you to manage all action nodes in the <emphasis role="bold">&PRODUCT;</emphasis>.
+   This function allows you to manage all action nodes in <emphasis role="bold">&PRODUCT;</emphasis>.
   </para>
     <procedure>
       <step>
@@ -287,7 +287,7 @@
       </step>
       <step>
         <para>
-     Click the <guibutton>Add</guibutton> button to open the <guilabel>Action Type</guilabel> form.
+     Click <guibutton>Add</guibutton> to open the <guilabel>Action Type</guilabel> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -310,7 +310,7 @@
       </step>
       <step>
         <para>
-     Check/uncheck the <guilabel>is Action Move</guilabel> option. The action will have <emphasis>exo:move</emphasis> property or not.
+     Check/uncheck the <guilabel>is Action Move</guilabel> option. The action will have the <emphasis>exo:move</emphasis> property or not.
     </para>
       </step>
       <step>

@@ -8,22 +8,28 @@
     <highlights>
         <itemizedlist>
             <listitem>
-                <para><link linkend="sect-User_Guide-Access_Content_Explorer">Access Sites Explorer</link>: Learn how to access the <emphasis role="bold">Sites Explorers</emphasis></para>
+                <para><link linkend="sect-User_Guide-Access_Content_Explorer">Access Sites Explorer</link></para>
+				<para>Instructions on how to access <emphasis role="bold">Sites Explorer</emphasis>.</para>
             </listitem>
             <listitem>
-                <para><link linkend="sect-User_Guide-Drives">Drives</link>: Learn about private drives, public drives, Personal Documents drive, group drives.</para>
+                <para><link linkend="sect-User_Guide-Drives">Drives</link></para>
+				<para>Information about private, public, Personal Documents, and group drives.</para>
             </listitem>
             <listitem>
-                <para><link linkend="sect-User_Guide-Views">Views</link>: Learn about different view modes in <emphasis role="bold">Sites Explorer</emphasis>.</para>
+                <para><link linkend="sect-User_Guide-Views">Views</link></para>
+				<para>Introduction to different view modes in <emphasis role="bold">Sites Explorer</emphasis>.</para>
             </listitem>
             <listitem>
-                <para><link linkend="sect-User_Guide-Actions">Functions on action tabs</link>: Learn to all functions of <emphasis role="bold">Sites Explorer</emphasis>.</para>
+                <para><link linkend="sect-User_Guide-Actions">Functions on action tabs</link></para>
+				<para>Introduction to all functions on action tabs of <emphasis role="bold">Sites Explorer</emphasis> and detailed steps to do them.</para>
             </listitem>
             <listitem>
-                <para><link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and documents</link>: Learn to perform all actions on folders and documents.</para>
+                <para><link linkend="sect-User_Guide-Actions_on_Folders_and_Documents">Actions on folders and documents</link></para>
+				<para>Introduction to all actions on folders and documents and detailed steps to do them.</para>
             </listitem>
             <listitem>
-                <para><link linkend="sect-User_Guide-Administration_page">Content Administration</link>: Learn about the <emphasis role="bold">Content Administration</emphasis> page to manage workspaces, drives, node types, metadata, templates, queries.</para>
+                <para><link linkend="sect-User_Guide-Administration_page">Content Administration</link></para>
+				<para>The way to access the <emphasis role="bold">Content Administration</emphasis> page where you can manage workspaces, drives, node types, metadata, templates, queries.</para>
             </listitem>
         </itemizedlist>
     </highlights>

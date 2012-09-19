@@ -276,8 +276,13 @@
       </table>
   </section>
 
-  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
-    <title>Edit web content</title>
+  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_Publish_Delete_a_web_content">
+	<title>Edit/Publish/Delete web content</title>
+	<para xml:id="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">
+		<citetitle>
+			<emphasis role="bold">Edit web content</emphasis>
+		</citetitle>
+	</para>
     <para>
       This function is used to edit web content in a specific drive of an existing site.
     </para>
@@ -335,10 +340,28 @@
         editing. After finishing, the content is back to the unlock status. You can manage "Locks" in the <link linkend="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">Unlock a node</link> section.
       </para>
     </note>
-  </section>
-
-  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
-    <title>Delete web content</title>
+	<para xml:id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
+		<citetitle>
+			<emphasis role="bold">Publish web content</emphasis>
+		</citetitle>
+	</para>
+    <para>
+      This function helps you publish web content that you have added to a web content folder in <emphasis role="bold">Sites Explorer</emphasis>.
+    </para>
+    <para>
+      See the
+      <link linkend="sect-User_Guide-Contribute_Content-Publication_Process">Publication process</link>
+      section to know how to publish web content.
+    </para>
+    <para>
+      After the content is published, all users who have the right to access that position can view the published web
+      content as a page on the <guilabel>Navigation</guilabel> bar.
+    </para>
+	<para xml:id="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content">
+		<citetitle>
+			<emphasis role="bold">Delete web content</emphasis>
+		</citetitle>
+	</para>
     <para>
       This function is used to remove web content from the web content folder in a specific site's drive.
     </para>
@@ -358,22 +381,6 @@
         </para>
       </step>
     </procedure>
-  </section>
-
-  <section id="sect-User_Guide-Manage_Content_In_Content_Explorer-Publish_a_web_content">
-    <title>Publish web content</title>
-    <para>
-      This function helps you publish web content that you have added to a web content folder in <emphasis role="bold">Sites Explorer</emphasis>.
-    </para>
-    <para>
-      See the
-      <link linkend="sect-User_Guide-Contribute_Content-Publication_Process">Publication process</link>
-      section to know how to publish web content.
-    </para>
-    <para>
-      After the content is published, all users who have the right to access that position can view the published web
-      content as a page on the <guilabel>Navigation</guilabel> bar.
-    </para>
   </section>
   <xi:include href="Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
   <xi:include href="Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>

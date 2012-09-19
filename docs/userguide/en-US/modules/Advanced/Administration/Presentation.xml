@@ -62,12 +62,7 @@
             </step>
             <step>
                 <para>
-                    Click the
-                    <guibutton>Add</guibutton>
-                    button in the
-                    <guilabel>Manage Templates</guilabel>
-                    form to open the
-                    <guilabel>Template Form</guilabel>.
+                    Click <guibutton>Add</guibutton> in the <guilabel>Manage Templates</guilabel> form to open the <guilabel>Template Form</guilabel>.
                 </para>
                 <mediaobject>
                     <imageobject role="html">
@@ -564,7 +559,7 @@
         <para>
             The
             <guilabel>Manage View</guilabel>
-            function is used to control view ways of a user. It has two tabs:
+            function is used to control view ways of a user. It has 2 tabs:
             <guilabel>View</guilabel> and <guilabel>ECM Templates</guilabel>
         </para>
         <para>
@@ -606,11 +601,7 @@
         <procedure>
             <step>
                 <para>
-                    Click the
-                    <guibutton>Add View</guibutton>
-                    button located at the bottom of the
-                    <guilabel>Manage View</guilabel>
-                    form.
+                    Click <guibutton>Add View</guibutton> located at the bottom of the <guilabel>Manage View</guilabel> form.
                 </para>
                 <para>
                     The
@@ -670,7 +661,7 @@
                 </para>
             </step>
             <step>
-                <para>Click the <guilabel>Add Tab</guilabel> button to create a functional tab on this view. It is required.</para>
+                <para>Click <guilabel>Add Tab</guilabel> to create a functional tab on this view. It is required.</para>
                 <mediaobject>
                     <imageobject role="html">
                         <imagedata align="center" fileref="images/tabform.png" format="PNG"/>
@@ -777,11 +768,7 @@
             </step>
             <step>
                 <para>
-                    Optionally, click the
-                    <guibutton>Add Tab</guibutton>
-                    button to open the
-                    <guilabel>Tab Form</guilabel>
-                    tab that allows you to add more Tabs to the View.
+                    Optionally, click <guibutton>Add Tab</guibutton> to open the <guilabel>Tab Form</guilabel> tab that allows you to add more Tabs to the View.
                 </para>
             </step>
             <step>
@@ -900,11 +887,7 @@
                 </step>
                 <step>
                     <para>
-                        Click the
-                        <guibutton>Add</guibutton>
-                        button to open the
-                        <guilabel>Add ECM Template</guilabel>
-                        form.
+                        Click <guibutton>Add</guibutton> to open the <guilabel>Add ECM Template</guilabel> form.
                     </para>
                     <mediaobject>
                         <imageobject role="html">
@@ -983,7 +966,7 @@
                         </para>
                         <para>
                             If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it
-                            displays the <guibutton>Restore</guibutton> button that allows restoring the template version.
+                            displays <guibutton>Restore</guibutton> that allows restoring the template version.
                         </para>
                     </note>
                 </step>
@@ -1002,7 +985,7 @@
                                 <imagedata fileref="images/Delete_icon.png" format="PNG" scalefit="1" width="4mm"/>
                             </imageobject>
                         </inlinemediaobject>
-                        corresponding with the template you want to delete.
+                        corresponding to the template you want to delete.
                     </para>
                 </step>
                 <step>
@@ -1160,9 +1143,7 @@
     <section id="sect-User_Guide-Content_Presentation_Manager-Drives_Management">
         <title>Manage drives</title>
         <para>
-            The function supports you to manage drives in the
-            <emphasis role="bold">Sites Explorer.</emphasis>
-            It allows adding, editing and deleting drives.
+            The function supports you to manage drives in <emphasis role="bold">Sites Explorer</emphasis>. It allows adding, editing and deleting drives.
         </para>
         <para>
             Go to
@@ -1199,9 +1180,7 @@
             <procedure>
                 <step>
                     <para>
-                        Click the
-                        <guibutton>Add Drive</guibutton>
-                        button in the
+                        Click <guibutton>Add Drive</guibutton> in the
                         <emphasis role="bold">Manage Drives</emphasis>
                         page to open the
                         <guilabel>Add Drive</guilabel>

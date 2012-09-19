@@ -198,12 +198,28 @@
           </para>
       </note>
   </section>
-  <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Edit_documents">
-    <title>Edit documents</title>
+    <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Edit_Document">
+    <title>View/Edit document</title>
+	<para xml:id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
+		<citetitle>
+			<emphasis role="bold">View a document</emphasis>
+		</citetitle>
+	</para>
     <para>
+   The <guilabel>View Document</guilabel> item is visible in the drop-down menu when you right-click a document. This function allows you to view the document on another tab with the link containing the document path.
+   </para>
+	<para>To view a document, simply right-click it, and select <guilabel> View Document</guilabel> from the drop-down menu.
+	 The document is opened in another tab.
+	</para>
+	<para xml:id="sect-User_Guide-Actions_on_Folders_and_Documents-Edit_documents">
+		<citetitle>
+			<emphasis role="bold">Edit a document</emphasis>
+		</citetitle>
+	</para> 
+	<para>
    To edit a document, refer to the <link linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content">Edit web content</link> section.
-  </para>
-  </section>
+	</para>
+  </section>  
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
     <title>Delete folders and documents</title>
     <para>
@@ -411,15 +427,6 @@
           </imageobject>
         </mediaobject>
        </para>
-  </section>
-  <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
-    <title>View document</title>
-    <para>
-   The <guilabel>View Document</guilabel> item is visible in the drop-down menu when you right-click a document. This function allows you to view the document on another tab with the link containing the document path.
-   </para>
-	<para>To view a document, simply right-click it, and select <guilabel> View Document</guilabel> from the drop-down menu.
-	 The document is opened in another tab.
-	</para>        
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
     <title>Copy a URL to the clipboard</title>
