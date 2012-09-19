@@ -459,18 +459,16 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     String wsName = null;
     Session session = null;
-    Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
-
-    if (matcher.find()) {
-      wsName = matcher.group(1);
-      nodePath = matcher.group(2);
-
-      session = uiExplorer.getSessionByWorkspace(wsName);
-      Node node = uiExplorer.getNodeByPath(nodePath, session, false);
-      session = node.getSession();
-      node = uiExplorer.getNodeByPath(nodePath, session, false);
-
-      return Utils.isInTrash(node);
+    String[] nodePaths = nodePath.split(";");
+    for(int i=0; i<nodePaths.length; i++) {    	
+      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);	
+      if (matcher.find()) {
+        wsName = matcher.group(1);
+        nodePath = matcher.group(2);	
+        session = uiExplorer.getSessionByWorkspace(wsName);
+        Node node = uiExplorer.getNodeByPath(nodePath, session, false);
+        return Utils.isInTrash(node);
+      }
     }
     return false;
   }
