@@ -14,11 +14,14 @@
 	 <note>
 		 <para>
 			The number of view types depends on which drive you are browsing. In eXo Platform, you can manage view types by selecting
-      <inlinemediaobject>
+<menuchoice>     
+<guiicon> 
+<inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/sawtooth_icon.png" format="PNG" scalefit="1" width="4mm"/>
             </imageobject>
-          </inlinemediaobject> <emphasis role="bold">--> Content --> Content Administration --> Content Presentation --> Manage View.</emphasis> See the <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section for more details.
+          </inlinemediaobject> 
+</guiicon> <guisubmenu>Content</guisubmenu><guisubmenu>Content Administration</guisubmenu><guisubmenu>Content Presentation</guisubmenu><guimenuitem>Manage View</guimenuitem></menuchoice>. See the <link linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views">Manage views</link> section for more details.
 		</para>
 	</note>
 	 <section id="sect-User_Guide-Views-Admin_view">

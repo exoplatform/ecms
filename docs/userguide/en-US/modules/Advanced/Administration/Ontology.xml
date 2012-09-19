@@ -66,10 +66,7 @@
             <procedure>
                 <step>
                     <para>
-                        Click the
-                        <guibutton>Add Style</guibutton>
-                        button. The
-                        <guilabel>Edit Tag Style Configuration</guilabel>
+                        Click <guibutton>Add Style</guibutton>. The <guilabel>Edit Tag Style Configuration</guilabel>
                         form will appear.
                     </para>
                     <mediaobject>
