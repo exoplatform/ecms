@@ -43,9 +43,12 @@
   UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
   def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/explorer-module", "explorer").
+            require("SHARED/ecm-utils", "ecmutil").
+  addScripts("explorer.UITimelineViewinitAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
+  addScripts('ecmutil.ECMUtils.loadEffectedItemsInSideBar();');
 
   uicomponent.checkTimelineUpdate();
   List<String> labels = new ArrayList<String>();

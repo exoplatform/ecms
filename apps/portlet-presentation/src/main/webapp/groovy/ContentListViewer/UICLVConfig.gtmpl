@@ -12,8 +12,9 @@
   def jsManager = rcontext.getJavascriptManager();
   def advancedBlockDisplay = "block";
   def advancedLinkDispplay = "none";
-  jsManager.addJavascript("eXo.ecm.CLV.checkModeViewer();");
-  jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");
+  jsManager.require("SHARED/clv", "clv").
+  addScripts("clv.CLV.checkModeViewer();").
+  addScripts("clv.CLV.checkContextualFolderInput();");
   def showFolderContexttual = "";
   
 %>

@@ -6,8 +6,9 @@
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   JavascriptManager jsmanager = rcontext.getJavascriptManager();
   
-  jsmanager.addJavascript('eXo.ecm.ECMUtils.onKeyAddressBarPress();') ;
-  jsmanager.addJavascript('eXo.ecm.ECMUtils.onKeySimpleSearchPress();') ;
+  jsmanager.require("SHARED/ecm-utils", "ecmutil").
+  addScripts('ecmutil.ECMUtils.onKeyAddressBarPress();').
+  addScripts('ecmutil.ECMUtils.onKeySimpleSearchPress();') ;
 %>
 <% uiform.begin() %>
 <div class="UIAddressBar">

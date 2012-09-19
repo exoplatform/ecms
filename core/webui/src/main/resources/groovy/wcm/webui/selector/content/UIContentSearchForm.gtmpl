@@ -6,9 +6,10 @@
   def checkedRadioId = uicomponent.getCheckedRadioId();
   def jsManager = rcontext.getJavascriptManager();
   
-  jsManager.addJavascript("eXo.ecm.CLV.initCheckedRadio('$checkedRadioId');");
-  jsManager.addJavascript("eXo.ecm.CLV.initCondition('$uiform.id');");
-  jsManager.addOnLoadJavascript("eXo.ecm.CLV.setHiddenValue");
+  jsManager.require("SHARED/clv", "clv").
+  addScripts("clv.CLV.initCheckedRadio('$checkedRadioId');").
+  addScripts("clv.CLV.initCondition('$uiform.id');").
+  addScripts("clv.CLV.setHiddenValue();");
 %>
 
 <div class="$uicomponent.id">

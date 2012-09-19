@@ -31,8 +31,9 @@
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
 //	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
-	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.scrollToBottom('${uicomponent.id}')");
-	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.changeColor('NewResultData')");
+	jsManager.require("SHARED/wcm-search", "search").
+	addScripts("search.SearchPortlet.scrollToBottom('${uicomponent.id}');").
+	addScripts("search.SearchPortlet.changeColor('NewResultData');");
   %>
    <div class="ResultHeader">
     <div class="CaptionSearchType"><strong><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></strong></div>

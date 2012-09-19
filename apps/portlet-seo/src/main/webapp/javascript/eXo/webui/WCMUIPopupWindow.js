@@ -335,3 +335,4 @@ WCMUIPopupWindow.prototype.initDND = function(evt) {
 } ;
 
 eXo.webui.WCMUIPopupWindow = new WCMUIPopupWindow();
+_module.WCMUIPopupWindow = eXo.webui.WCMUIPopupWindow;

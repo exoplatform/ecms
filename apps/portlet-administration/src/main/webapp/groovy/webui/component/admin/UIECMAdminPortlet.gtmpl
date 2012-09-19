@@ -3,11 +3,9 @@
   import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea ;
   import org.exoplatform.webui.core.UIPopupContainer;
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.fixHeight('UIECMAdminPortlet') ;") ;
+  rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+  addScripts("ecmutil.ECMUtils.fixHeight('UIECMAdminPortlet') ;") ;
   def userAgent = uicomponent.getUserAgent();
-  if(userAgent != null && userAgent.contains("MSIE 6.0")) {
-	  rcontext.getJavascriptManager().addJavascript("SelectFix.autoRepairFloatingElements(100) ;") ;
-  }
 %>
 <div class="UIECMAdminPortlet" id="UIECMAdminPortlet">
   <%uicomponent.renderChild(UIPopupContainer.class);%>

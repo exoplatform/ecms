@@ -77,3 +77,4 @@ MouseEventManager.prototype.addMouseClickHandler = function(method) {
 } ;
 
 eXo.core.MouseEventManager = new MouseEventManager() ;
+_module.MouseEventManager = eXo.core.MouseEventManager;

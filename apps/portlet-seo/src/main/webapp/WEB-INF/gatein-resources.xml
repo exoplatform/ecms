@@ -28,19 +28,28 @@
   <portlet>
     <name>SEOToolbarPortlet</name>
     <module>
-      <script>
-        <name>eXo.webui.WCMUIPopupWindow</name>
-        <path>/javascript/eXo/webui/WCMUIPopupWindow.js</path>
-      </script>
     	<depends>
-    		<module>jquery</module>
+    		<module>ecm-seo</module>
     	</depends>
-      <depends>
-        <module>wcm-utils</module>
-      </depends>
-      <depends>
-        <module>common</module>
-      </depends>      
     </module>
-  </portlet>  
+  </portlet> 
+  
+  <module>
+  	<name>ecm-seo</name>
+  	<as>ecmSeo</as>
+    <script>
+      <name>eXo.webui.WCMUIPopupWindow</name>
+      <path>/javascript/eXo/webui/WCMUIPopupWindow.js</path>
+    </script>
+  	<depends>
+  		<module>jquery</module>
+  		<as>gj</as>
+  	</depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>common</module>
+    </depends>      
+  </module> 
 </gatein-resources>

@@ -1210,4 +1210,5 @@ EcmContentSelector.prototype.safe_tags_regex = function(str) {
  }
 
 eXo.ecm.ECS = new EcmContentSelector();
+_module.ECS = eXo.ecm.ECS;
 window.onresize = eXo.ecm.ECS.fixHeightTrees;

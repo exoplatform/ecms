@@ -1,7 +1,6 @@
 <%
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   def rcontext = _ctx.getRequestContext();
-  def jsManager = rcontext.getJavascriptManager(); 
   if(uicomponent.isShowViewFile() && !uicomponent.isJcrEnable()) {
 %>
 <div class="UIResizableBlock" style="padding:10px;">

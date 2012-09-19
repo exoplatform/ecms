@@ -27,6 +27,8 @@ WCMServices = function() {
 	};
 }	
 eXo.wcm.services = new WCMServices();
+_module.services = eXo.wcm.services;
+
 
 /**
  * Vote service
@@ -61,3 +63,4 @@ Vote = function(){
 	
 }
 eXo.wcm.vote = new Vote();
+_module.vote = eXo.wcm.vote;

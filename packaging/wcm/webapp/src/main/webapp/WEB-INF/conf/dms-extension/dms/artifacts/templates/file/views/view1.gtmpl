@@ -29,7 +29,8 @@
   
   def rcontext = _ctx.getRequestContext();
   rcontext.getJavascriptManager().loadScriptResource("ecm-utils");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.DMSBrowser.managerResize()");
+  rcontext.getJavascriptManager().require("SHARED/ecm-browser", "browser").
+  addScripts("browser.DMSBrowser.managerResize();");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();  
   

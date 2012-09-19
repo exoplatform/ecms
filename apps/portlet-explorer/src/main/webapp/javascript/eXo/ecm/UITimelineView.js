@@ -1086,3 +1086,4 @@ var TimelineView = function() {
 };
 
 eXo.ecm.UITimelineView = new TimelineView();
+_module.UITimelineView = eXo.ecm.UITimelineView;

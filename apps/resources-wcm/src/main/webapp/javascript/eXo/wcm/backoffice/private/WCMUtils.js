@@ -253,3 +253,4 @@ WCMUtils.prototype.getBundle = function(key, lang) {
 };
 
 eXo.ecm.WCMUtils = new WCMUtils();
+_module.WCMUtils = eXo.ecm.WCMUtils;

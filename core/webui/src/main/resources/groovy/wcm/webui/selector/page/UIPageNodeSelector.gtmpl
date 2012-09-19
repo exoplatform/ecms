@@ -25,7 +25,8 @@
     } else {
       popupMenu = uiPopupMenu.getJSOnclickShowPopup("", "AddNode,EditNavigation,SaveNavigation,DeleteNavigation");
     }
-  	jsmanager.addJavascript("eXo.webui.UIRightClickPopupMenu.disableContextMenu('"+id+"') ;");
+  	jsmanager.require("SHARED/webui-ext", "webuiExt").
+  	addScripts("webuiExt.UIRightClickPopupMenu.disableContextMenu('"+id+"');");
     uicomponent.renderUIComponent(uiPopupMenu) ;
    
   }

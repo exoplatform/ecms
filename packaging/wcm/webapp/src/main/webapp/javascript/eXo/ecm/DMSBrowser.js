@@ -36,4 +36,5 @@ DMSBrowser.prototype.findMouseRelativeX = function(object, e) {
 } ;
 
 eXo.ecm.DMSBrowser = new DMSBrowser();
+_module.DMSBrowser = eXo.ecm.DMSBrowser;
 window.onresize = eXo.ecm.DMSBrowser.managerResize;

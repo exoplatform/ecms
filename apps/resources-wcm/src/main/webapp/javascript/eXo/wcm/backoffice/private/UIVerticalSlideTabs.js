@@ -149,3 +149,5 @@ eXo.webui.UIVerticalSlideTabs = {
     this.onResize(obj, null, obj.parentNode.offsetHeight);
   }
 }
+
+_module.UIVerticalSlideTabs = eXo.webui.UIVerticalSlideTabs;

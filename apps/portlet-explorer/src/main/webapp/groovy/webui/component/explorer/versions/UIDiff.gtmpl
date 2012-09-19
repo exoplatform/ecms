@@ -44,7 +44,7 @@
 						  <%  
 						    def i=1;
 						  	for(Delta delta in uicomponent.getDeltas()){		    		
-						  	  jm.addJavascript("eXo.ecm.ECMUtils.insertContentToIframe('$i') ;") ;
+						  	  jm.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.insertContentToIframe('$i');") ;
 			    		%>		    		
 		    			<tr onload="eXo.ecm.ECMUtils.insertContentToIframe('$i') ;"> 
 		    				<% 

@@ -156,3 +156,4 @@ UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
 };
 
 eXo.ecm.UIJCRExplorer = new UIJCRExplorer();
+_module.UIJCRExplorer = eXo.ecm.UIJCRExplorer;

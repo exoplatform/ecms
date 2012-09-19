@@ -465,3 +465,4 @@ function AutoComplete() {
 };
 
 eXo.ecm.AutoComplete = new AutoComplete();
+_module.AutoComplete = eXo.ecm.AutoComplete;

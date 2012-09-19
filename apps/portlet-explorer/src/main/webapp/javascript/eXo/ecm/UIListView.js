@@ -1084,3 +1084,4 @@ var ListView = function() {
 };
 
 eXo.ecm.UIListView = new ListView();
+_module.UIListView = eXo.ecm.UIListView;

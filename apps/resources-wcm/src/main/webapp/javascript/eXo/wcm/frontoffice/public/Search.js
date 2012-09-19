@@ -118,3 +118,4 @@ SearchPortlet.prototype.changeColor = function(divId, count) {
 };
 
 eXo.ecm.SearchPortlet = new SearchPortlet();
+_module.SearchPortlet = eXo.ecm.SearchPortlet;

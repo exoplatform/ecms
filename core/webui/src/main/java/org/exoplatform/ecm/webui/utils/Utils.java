@@ -849,7 +849,7 @@ public class Utils {
     }
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("  //<![CDATA[ \n");
-    buffer.append("    eXo.loadJS('/eXoWCMResources/ckeditor/ckeditor.js', function() {");
+    buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
         contentsCss + ", ignoreEmptyParagraph:true});\n");

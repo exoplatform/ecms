@@ -8,9 +8,10 @@
  */
 %>
 <%
-  def rcontext = _ctx.getRequestContext() ;
-  double rating = uicomponent.getRating() ;
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.initVote('$uicomponent.id', $rating) ;") ;
+  def rcontext = _ctx.getRequestContext();
+  double rating = uicomponent.getRating();
+  rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+  addScripts("ecmutil.ECMUtils.initVote('$uicomponent.id', $rating);");
 %>
 <div class="UIVoteForm" id="$uicomponent.id">
 	<div class="VoteFormContainer">

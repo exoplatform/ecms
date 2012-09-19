@@ -239,10 +239,13 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
-    context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AutoFocus");
+    context.getJavascriptManager().
+    require("SHARED/explorer-module", "explorer").
+    addScripts("explorer.UIDocForm.UpdateGUI();").
+    addScripts("explorer.UIDocForm.AutoFocus();");
+
     context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
-    context.getJavascriptManager().addOnLoadJavascript("changeWarning()");
+    context.getJavascriptManager().addCustomizedOnLoadScript("changeWarning();");
     super.processRender(context);
   }
 
@@ -285,7 +288,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     writer.append("</tr>");
     writer.append("</table>");
     writer.append("</div>");
-    context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\")");
+    context.getJavascriptManager().loadScriptResource("explorer-module");
+    context.getJavascriptManager().addCustomizedOnLoadScript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\");");
   }
 
   @SuppressWarnings("unused")

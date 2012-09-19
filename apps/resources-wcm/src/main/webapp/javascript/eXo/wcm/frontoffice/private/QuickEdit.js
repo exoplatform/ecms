@@ -35,3 +35,4 @@ WCMQuickEdit.prototype.insertQuickeditingBlock = function(portletID, quickEditin
 };
 
 eXo.ecm.QuickEdit = new WCMQuickEdit();
+_module.QuickEdit = eXo.ecm.QuickEdit;

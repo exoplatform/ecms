@@ -162,3 +162,4 @@ UIWCMTreeView.prototype.OpenPath = function(path) {
 };
 
 eXo.ecm.UIWCMTreeView = new UIWCMTreeView();
+_module.UIWCMTreeView = eXo.ecm.UIWCMTreeView;

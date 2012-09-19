@@ -8,7 +8,8 @@
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 	def jsManager = rcontext.getJavascriptManager();
 	//jsManager.importJavascript('eXo.wcm.frontoffice.public.Breadcrumb', '/eXoWCMResources/javascript/') ;
-	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+	jsManager.require("SHARED/wcm-utils", "util").
+  addScripts("util.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "');");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;	
 	

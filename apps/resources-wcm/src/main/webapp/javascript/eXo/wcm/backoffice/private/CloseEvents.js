@@ -7,7 +7,7 @@ var b_changed = false;
 /**
  * Change the current state to inform some content has changed
  **/
-function changed() {
+window.changed = function () {
   b_changed = true;
 }
 
@@ -16,7 +16,7 @@ function changed() {
  * - manage changes popup
  **/
 
-function ajaxGet(url, callback) {
+window.ajaxGet = function (url, callback) {
   var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
   if (b_changed && bypassActionbar<=0) {
     var answer = confirm(document.getElementById("NavigateConfirmationMsg").innerHTML);
@@ -155,7 +155,7 @@ eXo.webui.UIForm.submitEvent = function(formId, action, params) {
  * Inform the user with a popup
  **/
 
-function closeIt(e) {
+window.closeIt = function (e) {
   if (b_changed) {
     var e = e || window.event;
     // For IE and Firefox
@@ -168,7 +168,7 @@ function closeIt(e) {
   }
 };
  
-function changeElements(divId) {
+window.changeElements = function (divId) {
   var UIDocForm = document.getElementById(divId);
   if (!UIDocForm) return;
   //add onchange event into <input> tags
@@ -191,7 +191,7 @@ function changeElements(divId) {
 }
 
 
-function changeWarning() {
+window.changeWarning = function () {
   b_changed = false;
   /**
    * Catch when some content has changed in the form

@@ -47,12 +47,16 @@ UIDocumentForm.prototype.UpdateGUI = function () {
 	}
 	
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
-		fullscreenDiv.className = "MaximizeScreen20x20Icon";
+		if (fullscreenDiv) {
+			fullscreenDiv.className = "MaximizeScreen20x20Icon";
+		}
 		if (changeTypeLink) {
 			changeTypeLink.style.display = "inline-block";
 		}
 	} else {
-		fullscreenDiv.className = "MinimizeScreen20x20Icon";
+		if (fullscreenDiv) {
+			fullscreenDiv.className = "MinimizeScreen20x20Icon";
+		}
 		if (changeTypeLink) {
 			changeTypeLink.style.display = "none";
 		}
@@ -169,13 +173,13 @@ UIDocumentForm.GetViewPaneSize = function( win )
 //focus to the first element in the form after loading successfuly
 UIDocumentForm.prototype.AutoFocus = function() {
   var uiDocumentForm = document.getElementById("UIDocumentForm");
-  for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
-		  
+  for (var i = 0; uiDocumentForm.elements[i] && (uiDocumentForm.elements[i].type == 'hidden'); i++);
   setTimeout(function() {
     try {
       uiDocumentForm.elements[i].focus();
     } catch(err){}
   }, 200);
+  
 };
 UIDocumentForm.prototype.initFullScreenStatus = function(elementId) {
 	var aElement = document.getElementById(elementId);
@@ -185,3 +189,4 @@ UIDocumentForm.prototype.initFullScreenStatus = function(elementId) {
 	}
 }
 eXo.webui.UIDocForm = new UIDocumentForm();
+_module.UIDocForm = eXo.webui.UIDocForm;

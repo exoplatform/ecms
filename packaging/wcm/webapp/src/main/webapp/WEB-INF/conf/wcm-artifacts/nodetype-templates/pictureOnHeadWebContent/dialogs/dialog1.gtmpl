@@ -10,7 +10,8 @@
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 //	jsManager.importJavascript('eXo.webui.UIHorizontalTabs');
-	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+	jsManager.require("SHARED/wcm-utils", "util").
+	addScripts("util.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "');");
 	private void setUploadFields() {
 			String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "mixintype=mix:referenceable", "defaultValues=illustration"];
 			String[] illustrationHiddenField2 = ["jcrPath=/node/medias/images/illustration/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 

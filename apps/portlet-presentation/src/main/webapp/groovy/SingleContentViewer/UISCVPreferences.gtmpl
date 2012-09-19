@@ -2,7 +2,11 @@
   import org.exoplatform.wcm.webui.Utils;
   
   def rcontext = _ctx.getRequestContext();
-  String portletId = Utils.getRealPortletId(rcontext);  
+  def jsManager = rcontext.getJavascriptManager();
+  String portletId = Utils.getRealPortletId(rcontext);
+  
+  jsManager.require("SHARED/clv", "clv").
+  addScripts("clv.CLV.contextualProcessing(document.getElementById('ContexttualContainer" + portletId + "'));");
 %>
 <div class="UIForm $uicomponent.id" >
    <%
@@ -95,7 +99,7 @@
                 <tr>
                   <td class="FieldComponent AlignRight" ><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %></td>
                   <td>
-                    <div onclick="contextualProcessing(this);" id="ContexttualContainer$portletId">
+                    <div onclick="eXo.ecm.CLV.contextualProcessing(this);" id="ContexttualContainer$portletId">
                       <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %>                      
                     </div>
                   </td>
@@ -144,25 +148,6 @@
             </fieldset>  
           </div>
           <script type="text/javascript">
-            function contextualProcessing(element) {
-              var rdoContexttual = gj(element).find("input.radio:first")[0];
-              var isChecked = rdoContexttual.getAttribute("checked");
-              var scvPreferences = gj(element).parents(".UIForm:first")[0];
-              var inputSet = gj(scvPreferences).find("div.UIFormInputSetWithAction:first")[0];
-              var savedInnerHTML = inputSet.innerHTML;
-              var imgStartIndex = savedInnerHTML.indexOf("<img");
-              var strFirstInput  = savedInnerHTML.substr(0,imgStartIndex);
-              var strLastImgInput = savedInnerHTML.substr(imgStartIndex);
-              strFirstInput = strFirstInput.substr(0, strFirstInput.lastIndexOf(">") + 1);
-              strFirstInput = strFirstInput.trim();
-              if (rdoContexttual.checked) {
-                document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('readonly',0);
-                inputSet.innerHTML =  strFirstInput + strLastImgInput;
-              }else  {
-                document.getElementById('UISCVParameterInputBox').setAttribute('readonly',true);
-                inputSet.innerHTML =  strFirstInput + "*"  + strLastImgInput;
-              }
-            }
             if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) {
               document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0);
               document.getElementById('UISCVShowAdvanceOption').style.display='none';
@@ -170,7 +155,6 @@
               document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);
               document.getElementById('UISCVContextualSelectionAdvance').style.display='none';
             }
-            contextualProcessing(document.getElementById('ContexttualContainer$portletId'));
           </script>
         <div class="UIAction"> 
 				  <% for(action in uicomponent.getActions()) { 

@@ -113,7 +113,7 @@ function ECMUtils() {
 		for(var i = 0; i < Self.popupArray.length; i++) {
 			Self.popupArray[i].style.display = "none" ;
 		}
-		Self.popupArray.clear() ;
+		Self.popupArray = [];
 	};
 
 	ECMUtils.prototype.initVote = function(voteId, rate) {
@@ -1082,7 +1082,7 @@ function ECMUtils() {
 	}
 	
 	ECMUtils.prototype.loadEffectedItemsInSideBar = function() {
-	  window.setTimeout("eXo.ecm.ECMUtils.adjustItemsInSideBar()",100);
+	  window.setTimeout("eXo.ecm.ECMUtils.adjustItemsInSideBar();",100);
 	}
 	
 	ECMUtils.prototype.adjustItemsInSideBar = function() {
@@ -1406,3 +1406,4 @@ ECMUtils.prototype.collapseAlternativeText = function(displayDiv) {
 };
 
 eXo.ecm.ECMUtils = new ECMUtils();
+_module.ECMUtils = eXo.ecm.ECMUtils;

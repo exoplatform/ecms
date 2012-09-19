@@ -34,8 +34,11 @@
   def size = uicomponent.getChildrenList().size();
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
-	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+            require("SHARED/explorer-module", "explorer").
+  addScripts("explorer.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');");
 %>
 <div id="$componentId">
 <script language="JavaScript">

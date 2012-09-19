@@ -174,3 +174,5 @@ InlineEditor.presentationAjaxResponse = function (){
     }
 }
 InlineEditor.init();
+_module.InlineEditor = InlineEditor;
+window.InlineEditor = InlineEditor;

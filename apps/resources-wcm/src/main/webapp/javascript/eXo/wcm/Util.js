@@ -162,7 +162,7 @@ function keepKeywordOnBoxSearch() {
 eXo.core.Browser.addOnLoadCallback("keepKeywordOnBoxSearch", keepKeywordOnBoxSearch);
 
 /*------------------Overrite method eXo.webui.UIPopup.init to show popup display center-------------------------------*/
-UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask) {XoWork
+webui.UIPopupWindow.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask) {XoWork
 	this.superClass = eXo.webui.UIPopup ;
 	var popup = document.getElementById(popupId) ;
 	var portalApp = document.getElementById("UIPortalApplication") ;
@@ -211,112 +211,112 @@ UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseB
 } ;
 /*----------------------------------------------End of overrite-------------------------------------------------------*/
 /*----------------------------------------------Begin overite UIWorkSpace---------------------------------------------*/
-eXo.portal.UIControlWorkspace.showWorkspace = function() {
-	var cws = eXo.portal.UIControlWorkspace ;
-	var uiWorkspace = document.getElementById(this.id) ;
-	var uiWorkspaceContainer = document.getElementById("UIWorkspaceContainer") ;
-	var uiWorkspacePanel = document.getElementById("UIWorkspacePanel") ;
-	var slidebar = document.getElementById("ControlWorkspaceSlidebar") ;
-	var uiControlWorkspace = document.getElementById("UIControlWorkspace") ;
-	if(cws.showControlWorkspace) {
-		// hides the workspace
-		cws.showControlWorkspace = false ;
-		uiWorkspaceContainer.style.display = "none" ;
-		slidebar.style.display = "block" ;
-		eXo.portal.UIControlWorkspace.width = eXo.portal.UIControlWorkspace.slidebar.offsetWidth ;
-		uiWorkspace.style.width = slidebar.offsetWidth + "px";
-		eXo.portal.UIWorkingWorkspace.onResize(null, null) ;
-	} else {
-		cws.showControlWorkspace = true ;
-		slidebar.style.display = "none" ;
-		eXo.portal.UIControlWorkspace.width = cws.defaultWidth;
-		uiWorkspace.style.width = cws.defaultWidth + "px" ;
-		eXo.portal.UIWorkingWorkspace.onResize(null, null) ;
-		uiWorkspaceContainer.style.display = "block" ;
-		uiWorkspaceContainer.style.width = cws.defaultWidth + "px" ;
-		uiWorkspacePanel.style.height = (eXo.portal.UIControlWorkspace.height - 
-																		 eXo.portal.UIControlWorkspace.uiWorkspaceControl.offsetHeight - 23) + "px" ;
-		/*23 is height of User Workspace Title*/
-
-		eXo.webui.UIVerticalScroller.init();
-		//eXo.portal.UIPortalControl.fixHeight();
-	}
-	
-	/* Reorganize opened windows */
-//	eXo.portal.UIWorkingWorkspace.reorganizeWindows(this.showControlWorkspace);
-	/* Resize Dockbar */
-	var uiPageDesktop = document.getElementById("UIPageDesktop") ;
-	if(uiPageDesktop) eXo.desktop.UIDockbar.resizeDockBar() ;
-	/* Resizes the scrollable containers */
-	//eXo.portal.UIPortalControl.initAllManagers();
-	
-	/* BEGIN - Check positon of widgets in order to avoid hide widgets when we expand/collapse workspace*/
-	if(uiPageDesktop) {
-		var uiWidget = gj(uiPageDesktop).children("div.UIWidget") ;
-		var uiControlWorkspace = document.getElementById("UIControlWorkspace") ;
-		var size = uiWidget.length ;
-		var limitX = 50 ;
-		for(var i = 0 ; i < size ; i ++) {
-			var dragObject = uiWidget[i] ;
-			if (cws.showControlWorkspace) {
-				dragObject.style.left = (dragObject.offsetLeft - uiControlWorkspace.offsetWidth) + "px";				
-			}
-			else {				
-				dragObject.style.left = (dragObject.offsetLeft + uiControlWorkspace.offsetWidth + dragObject.offsetWidth) + "px";				
-			}
-			var offsetHeight = uiPageDesktop.offsetHeight - dragObject.offsetHeight  - limitX;
-	  	var offsetTop = dragObject.offsetTop ;
-	  	var offsetWidth = uiPageDesktop.offsetWidth - dragObject.offsetWidth - limitX ;
-	  	var offsetLeft = dragObject.offsetLeft ;
-	  	
-	  	if (dragObject.offsetLeft < 0) dragObject.style.left = "0px" ;
-	  	if (dragObject.offsetTop < 0) dragObject.style.top = "0px" ;
-	  	if (offsetTop > offsetHeight) dragObject.style.top = (offsetHeight + limitX) + "px" ;
-	  	if (offsetLeft > offsetWidth) dragObject.style.left = (offsetWidth + limitX) + "px" ;				
-		}		
-		
-		//fix for UIGadget by Pham Dinh Tan
-		var uiGadgets = gj(uiPageDesktop).children("div.UIGadget") ;
-		var limitXGadget = 80;
-		for(var i = 0 ; i < uiGadgets.length; i++) {
-			var dragObject = uiGadgets[i] ;
-			if (cws.showControlWorkspace) {
-				dragObject.style.left = (parseInt(dragObject.style.left) - uiControlWorkspace.offsetWidth) + "px";	
-			}
-			else {
-				dragObject.style.left = (parseInt(dragObject.style.left) + uiControlWorkspace.offsetWidth + dragObject.offsetWidth - limitXGadget) + "px";			
-			}
-			
-			var offsetHeight = uiPageDesktop.offsetHeight - dragObject.offsetHeight ;
-			var offsetWidth = uiPageDesktop.offsetWidth - dragObject.offsetWidth ;
-			var dragPosX = parseInt(dragObject.style.left);
-			var dragPosY = parseInt(dragObject.style.top);
-			if (dragPosX < 0) dragObject.style.left = "0px" ;
-	  	if (dragPosY < 0) dragObject.style.top = "0px" ;
-	  	if (dragPosY > offsetHeight) dragObject.style.top = offsetHeight + "px" ;
-	  	if (dragPosX > offsetWidth) dragObject.style.left = offsetWidth + "px" ;			
-		}		
-	}
-	
-	// fix for DropDropList bug in IE by Pham Dinh Tan  
-	var dropDownAnchors = gj(document).find("div.UIDropDownAnchor");
-	for(var i = 0; i < dropDownAnchors.length; i++) {
-		if(dropDownAnchors[i].style.display != "none") {
-			dropDownAnchors[i].style.display = "none";
-		}
-	}
-	
-	var popupWindows = gj(document).find("div.UIPopupWindow");
-	for(var i = 0; i < popupWindows.length; i++) {
-		if(popupWindows[i].style.display != "none") {
-			eXo.webui.UIPopupWindow.show(popupWindows[i], popupWindows[i].isShowMask) ;
-		}
-	}
-	
-	/* -- END -- */
-	var params = [ {name: "objectId", value : cws.showControlWorkspace} ] ;
-	ajaxAsyncGetRequest(eXo.env.server.createPortalURL(this.id, "SetVisible", true, params), false) ;
-};
+//eXo.portal.UIControlWorkspace.showWorkspace = function() {
+//	var cws = eXo.portal.UIControlWorkspace ;
+//	var uiWorkspace = document.getElementById(this.id) ;
+//	var uiWorkspaceContainer = document.getElementById("UIWorkspaceContainer") ;
+//	var uiWorkspacePanel = document.getElementById("UIWorkspacePanel") ;
+//	var slidebar = document.getElementById("ControlWorkspaceSlidebar") ;
+//	var uiControlWorkspace = document.getElementById("UIControlWorkspace") ;
+//	if(cws.showControlWorkspace) {
+//		// hides the workspace
+//		cws.showControlWorkspace = false ;
+//		uiWorkspaceContainer.style.display = "none" ;
+//		slidebar.style.display = "block" ;
+//		eXo.portal.UIControlWorkspace.width = eXo.portal.UIControlWorkspace.slidebar.offsetWidth ;
+//		uiWorkspace.style.width = slidebar.offsetWidth + "px";
+//		eXo.portal.UIWorkingWorkspace.onResize(null, null) ;
+//	} else {
+//		cws.showControlWorkspace = true ;
+//		slidebar.style.display = "none" ;
+//		eXo.portal.UIControlWorkspace.width = cws.defaultWidth;
+//		uiWorkspace.style.width = cws.defaultWidth + "px" ;
+//		eXo.portal.UIWorkingWorkspace.onResize(null, null) ;
+//		uiWorkspaceContainer.style.display = "block" ;
+//		uiWorkspaceContainer.style.width = cws.defaultWidth + "px" ;
+//		uiWorkspacePanel.style.height = (eXo.portal.UIControlWorkspace.height - 
+//																		 eXo.portal.UIControlWorkspace.uiWorkspaceControl.offsetHeight - 23) + "px" ;
+//		/*23 is height of User Workspace Title*/
+//
+//		eXo.webui.UIVerticalScroller.init();
+//		//eXo.portal.UIPortalControl.fixHeight();
+//	}
+//	
+//	/* Reorganize opened windows */
+////	eXo.portal.UIWorkingWorkspace.reorganizeWindows(this.showControlWorkspace);
+//	/* Resize Dockbar */
+//	var uiPageDesktop = document.getElementById("UIPageDesktop") ;
+//	if(uiPageDesktop) eXo.desktop.UIDockbar.resizeDockBar() ;
+//	/* Resizes the scrollable containers */
+//	//eXo.portal.UIPortalControl.initAllManagers();
+//	
+//	/* BEGIN - Check positon of widgets in order to avoid hide widgets when we expand/collapse workspace*/
+//	if(uiPageDesktop) {
+//		var uiWidget = gj(uiPageDesktop).children("div.UIWidget") ;
+//		var uiControlWorkspace = document.getElementById("UIControlWorkspace") ;
+//		var size = uiWidget.length ;
+//		var limitX = 50 ;
+//		for(var i = 0 ; i < size ; i ++) {
+//			var dragObject = uiWidget[i] ;
+//			if (cws.showControlWorkspace) {
+//				dragObject.style.left = (dragObject.offsetLeft - uiControlWorkspace.offsetWidth) + "px";				
+//			}
+//			else {				
+//				dragObject.style.left = (dragObject.offsetLeft + uiControlWorkspace.offsetWidth + dragObject.offsetWidth) + "px";				
+//			}
+//			var offsetHeight = uiPageDesktop.offsetHeight - dragObject.offsetHeight  - limitX;
+//	  	var offsetTop = dragObject.offsetTop ;
+//	  	var offsetWidth = uiPageDesktop.offsetWidth - dragObject.offsetWidth - limitX ;
+//	  	var offsetLeft = dragObject.offsetLeft ;
+//	  	
+//	  	if (dragObject.offsetLeft < 0) dragObject.style.left = "0px" ;
+//	  	if (dragObject.offsetTop < 0) dragObject.style.top = "0px" ;
+//	  	if (offsetTop > offsetHeight) dragObject.style.top = (offsetHeight + limitX) + "px" ;
+//	  	if (offsetLeft > offsetWidth) dragObject.style.left = (offsetWidth + limitX) + "px" ;				
+//		}		
+//		
+//		//fix for UIGadget by Pham Dinh Tan
+//		var uiGadgets = gj(uiPageDesktop).children("div.UIGadget") ;
+//		var limitXGadget = 80;
+//		for(var i = 0 ; i < uiGadgets.length; i++) {
+//			var dragObject = uiGadgets[i] ;
+//			if (cws.showControlWorkspace) {
+//				dragObject.style.left = (parseInt(dragObject.style.left) - uiControlWorkspace.offsetWidth) + "px";	
+//			}
+//			else {
+//				dragObject.style.left = (parseInt(dragObject.style.left) + uiControlWorkspace.offsetWidth + dragObject.offsetWidth - limitXGadget) + "px";			
+//			}
+//			
+//			var offsetHeight = uiPageDesktop.offsetHeight - dragObject.offsetHeight ;
+//			var offsetWidth = uiPageDesktop.offsetWidth - dragObject.offsetWidth ;
+//			var dragPosX = parseInt(dragObject.style.left);
+//			var dragPosY = parseInt(dragObject.style.top);
+//			if (dragPosX < 0) dragObject.style.left = "0px" ;
+//	  	if (dragPosY < 0) dragObject.style.top = "0px" ;
+//	  	if (dragPosY > offsetHeight) dragObject.style.top = offsetHeight + "px" ;
+//	  	if (dragPosX > offsetWidth) dragObject.style.left = offsetWidth + "px" ;			
+//		}		
+//	}
+//	
+//	// fix for DropDropList bug in IE by Pham Dinh Tan  
+//	var dropDownAnchors = gj(document).find("div.UIDropDownAnchor");
+//	for(var i = 0; i < dropDownAnchors.length; i++) {
+//		if(dropDownAnchors[i].style.display != "none") {
+//			dropDownAnchors[i].style.display = "none";
+//		}
+//	}
+//	
+//	var popupWindows = gj(document).find("div.UIPopupWindow");
+//	for(var i = 0; i < popupWindows.length; i++) {
+//		if(popupWindows[i].style.display != "none") {
+//			eXo.webui.UIPopupWindow.show(popupWindows[i], popupWindows[i].isShowMask) ;
+//		}
+//	}
+//	
+//	/* -- END -- */
+//	var params = [ {name: "objectId", value : cws.showControlWorkspace} ] ;
+//	ajaxAsyncGetRequest(eXo.env.server.createPortalURL(this.id, "SetVisible", true, params), false) ;
+//};
 /*----------------------------------------------End  overite UIWorkSpace---------------------------------------------*/
 function initCheckedRadio(id) {
 	eXo.core.Browser.chkRadioId = id;
@@ -419,130 +419,127 @@ function showHideOrderBy() {
 }  
 
 
-function showPopupMenu(obj) {
-	if(!obj) return;
-	var uiNavi = document.getElementById('PortalNavigationTopContainer');
-	
-	// Todo fix bug show menu popup appears under Navigation
-	// Will remove when add javascript for navagation ok
-	var uiACMENavi = document.getElementById('navigation-generator');
-	var uiWCMNavigationPortlet = gj(uiACMENavi).find("div.UIWCMNavigationPortlet:first")[0];
-	if(eXo.core.Browser.browserType == 'ie')  {
-		if(uiNavi) uiNavi.style.position = "static";
-		if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
-	}
-	if(obj.Timeout) clearTimeout(obj.Timeout);
-	var mnuItemContainer = gj(obj).nextAll("div:first")[0];
-	var objParent = gj(obj).parents(".TBItem:first")[0];
-	if(mnuItemContainer && mnuItemContainer.style.display != "block") {
-		mnuItemContainer.style.display = 'block';
-		mnuItemContainer.style.width = mnuItemContainer.offsetWidth - parseInt(gj(mnuItemContainer).css("borderLeftWidth")) - parseInt(gj(mnuItemContainer).css("borderRightWidth")) + 'px';
-		objParent.className = 'TBItemHover';
-		mnuItemContainer.onmouseout = function(){
-			if(eXo.core.Browser.browserType == 'ie')  {
-			 if(uiNavi) uiNavi.style.position = "relative";
-			 if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "relative";
-			}
-			obj.Timeout = setTimeout(function() {
-				mnuItemContainer.style.display = 'none';
-				objParent.className = 'TBItem';
-				mnuItemContainer.onmouseover = null;
-				mnuItemContainer.onmouseout = null;
-        mnuItemContainer.onfocus = null;
-        mnuItemContainer.onblur = null;				
-			},1*10);
-		}
-		
-    mnuItemContainer.onblur = function(){
-      if(eXo.core.Browser.browserType == 'ie')  {
-       if(uiNavi) uiNavi.style.position = "relative";
-       if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "relative";
-      }
-      obj.Timeout = setTimeout(function() {
-        mnuItemContainer.style.display = 'none';
-        objParent.className = 'TBItem';
-        mnuItemContainer.onmouseover = null;
-        mnuItemContainer.onmouseout = null;
-        mnuItemContainer.onfocus = null;
-        mnuItemContainer.onblur = null;     
-      },1*10);
-    }		
+window.showPopupMenu = function (obj) {  
+	  var uiNavi = document.getElementById('UIPresentationContainer');	
+	  var uiACMENavi = document.getElementById('navigation-generator');
+	  var uiWCMNavigationPortlet = gj(uiACMENavi).find("div.UIWCMNavigationPortlet:first")[0];
+	 
+	  var objParent = gj(obj).parents(".UITab:first")[0];  
+	  var menuItemContainer = gj(obj).nextAll("div:first")[0];
 
-		mnuItemContainer.onmouseover = function() {
-			objParent.className = 'TBItemHover';
-			if(eXo.core.Browser.browserType == 'ie')  {
-				if(uiNavi) uiNavi.style.position = "static";
-				if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
-			}
-			if(obj.Timeout) clearTimeout(obj.Timeout);
-			obj.Timeout = null;
-		}
-		
-    mnuItemContainer.onfocus = function() {
-      objParent.className = 'TBItemHover';
-      if(eXo.core.Browser.browserType == 'ie')  {
-        if(uiNavi) uiNavi.style.position = "static";
-        if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
-      }
-      if(obj.Timeout) clearTimeout(obj.Timeout);
-      obj.Timeout = null;
-    }
-    		
-		obj.onmouseout = mnuItemContainer.onmouseout;
-		obj.onblur = mnuItemContainer.onblur;
-	}
-}		
+	  var getNodeURL = obj.getAttribute("exo:getNodeURL");
+	  if (getNodeURL && !menuItemContainer) {
+	    var jsChilds = ajaxAsyncGetRequest(getNodeURL, false)
+	    try {
+	      var data = gj.parseJSON(jsChilds);
+	      if (isNaN(data.length)) {
+					return;
+	      }
 
-function showPopupSubMenu(obj) {
-	if(!obj) return;
-	if(obj.Timeout) clearTimeout(obj.Timeout);	
-	var objParent = gj(obj).parents(".ArrowIcon:first")[0];
-	var subMenuItemContainer = false;
-	if(objParent) subMenuItemContainer = gj(objParent).nextAll("div:first")[0];
-	if(subMenuItemContainer && subMenuItemContainer.style.display != "block") {
-		subMenuItemContainer.style.display = 'block';
-		objParent.className = 'MenuItemHover ArrowIcon';
-		subMenuItemContainer.onmouseout = function() {
-			objParent.Timeout = setTimeout(function() {
-				subMenuItemContainer.style.display = 'none';
-				objParent.className = 'MenuItem ArrowIcon';
-				subMenuItemContainer.onmouseover = null;
-				subMenuItemContainer.onmouseout = null;
-        subMenuItemContainer.onfocus = null;
-        subMenuItemContainer.onblur = null;
-			}, 1*10);
-		}
-		
-    subMenuItemContainer.onblur = function() {
-      objParent.Timeout = setTimeout(function() {
-        subMenuItemContainer.style.display = 'none';
-        objParent.className = 'MenuItem ArrowIcon';
-        subMenuItemContainer.onmouseover = null;
-        subMenuItemContainer.onmouseout = null;
-        subMenuItemContainer.onfocus = null;
-        subMenuItemContainer.onblur = null;
-      }, 1*10);
-    }		
-		
-		subMenuItemContainer.onmouseover = function() {
-			objParent.className = 'MenuItemHover ArrowIcon';
-			if(objParent.Timeout) clearTimeout(objParent.Timeout);
-			objParent.Timeout =  null;
-		}
-		
-    subMenuItemContainer.onfocus = function() {
-      objParent.className = 'MenuItemHover ArrowIcon';
-      if(objParent.Timeout) clearTimeout(objParent.Timeout);
-      objParent.Timeout =  null;
-    }		
+	      var temp = document.createElement("div");
+	      temp.innerHTML = generateContainer(data); 		  
+	      objParent.appendChild(gj(temp).children("div.ECMMenuItemContainer:first")[0]);
+	    } catch (e) {
+	      return;
+	    }			  
+	  }
 
-		obj.onmouseout = subMenuItemContainer.onmouseout;
-		obj.onblur = subMenuItemContainer.onblur;
-		subMenuItemContainer.style.width = subMenuItemContainer.offsetWidth - parseInt(gj(subMenuItemContainer).css("borderLeftWidth")) - parseInt(gj(subMenuItemContainer).css("borderRightWidth")) + 'px';
-		subMenuItemContainer.style.left = objParent.offsetLeft + objParent.offsetWidth + 'px';
-		subMenuItemContainer.style.top =  eXo.core.Browser.findPosYInContainer(objParent,subMenuItemContainer.offsetParent) + 'px';
+	  //display popup    
+	  if(obj.Timeout) clearTimeout(obj.Timeout);  
+	  if(menuItemContainer && menuItemContainer.style.display != "block") {
+	    objParent.style.position="relative";         
+	    menuItemContainer.style.top =  obj.offsetHeight + 'px';   
+	    menuItemContainer.style.display = 'block';          
+	    menuItemContainer.onmouseout = function(){                              
+	      if(base.Browser.browserType == 'ie')  {
+	        if(uiNavi) uiNavi.style.position = "relative";
+					if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "relative";
+	      }
+	      obj.Timeout = setTimeout(function() {
+	        menuItemContainer.style.display = 'none';			
+	        menuItemContainer.onmouseover = null;
+	        menuItemContainer.onmouseout = null;
+	      },1*10);
+	    }
+	    menuItemContainer.onmouseover = function() {                                              		
+	      if(base.Browser.browserType == 'ie')  {
+	        if(uiNavi) uiNavi.style.position = "static";
+	        if(uiWCMNavigationPortlet) uiWCMNavigationPortlet.style.position = "static";
+	      }
+	      if(obj.Timeout) clearTimeout(obj.Timeout);
+	      obj.Timeout = null;
+	    }
+	    obj.onmouseout = menuItemContainer.onmouseout;
+	    //menuItemContainer.style.width = menuItemContainer.offsetWidth + 'px'; 
+	  }  
 	}
-}
+
+window.showPopupSubMenu = function(obj) { 
+	  var objParent = obj;
+	  var subMenuItemContainer = false;   
+	  var objParent = gj(obj).parents(".ArrowIcon:first")[0];
+	  if(objParent) subMenuItemContainer = gj(objParent).nextAll("div:first")[0]; 
+
+	  var getNodeURL = obj.getAttribute("exo:getNodeURL");
+	  if (getNodeURL && !subMenuItemContainer) {
+	    var jsChilds = ajaxAsyncGetRequest(getNodeURL, false);
+	    try {
+	      var data = gj.parseJSON(jsChilds);
+		if (isNaN(data.length)) {
+		  return;
+		}
+
+		var temp = document.createElement("div");
+		temp.innerHTML = generateContainer(data); 	
+		var grandParent = gj(objParent).parents(".MenuItem:first")[0];
+		grandParent.appendChild(gj(temp).children("div.ECMMenuItemContainer:first")[0]);
+	     } catch (e) {
+	       return;
+	     }			  
+	  }
+
+	  objParent = gj(obj).parents(".ArrowIcon:first")[0];
+	  if(objParent) subMenuItemContainer = gj(objParent).nextAll("div:first")[0]; 
+
+	  if(obj.Timeout) clearTimeout(obj.Timeout);	
+	  if(subMenuItemContainer && subMenuItemContainer.style.display != "block") {      
+	    subMenuItemContainer.style.display = 'block';
+	    objParent.className = '';   
+	    subMenuItemContainer.onmouseover = function() {	
+	      objParent.className = '';	
+	      if(objParent.Timeout) clearTimeout(objParent.Timeout);
+	      objParent.Timeout =  null;      
+	    }
+
+	    subMenuItemContainer.onmouseout = function() {
+	      objParent.Timeout = setTimeout(function() {                
+	        var subobj = gj(subMenuItemContainer).find("div.ECMMenuItemContainer:first")[0];
+	        if(subobj) {
+	          if(subobj.style.display=='block') {
+	            subobj.style.display = 'none'; 									
+	            subobj.onmouseover = null;
+	            subobj.onmouseout = null;							 
+	          } else {
+		    subMenuItemContainer.style.display = 'none'; 
+		    objParent.className = 'ArrowIcon';				
+	            subMenuItemContainer.onmouseover = null;
+	            subMenuItemContainer.onmouseout = null;
+		  }
+	        } else {		
+		  subMenuItemContainer.style.display = 'none'; 					
+		  objParent.className = 'ArrowIcon';				
+		  subMenuItemContainer.onmouseover = null;
+		  subMenuItemContainer.onmouseout = null;
+	        }
+	      }, 1*10);      
+	    }	
+	    obj.onmouseout = subMenuItemContainer.onmouseout;	
+	    subMenuItemContainer.style.width = subMenuItemContainer.offsetWidth + 'px';	
+	    subMenuItemContainer.style.left = objParent.offsetLeft + objParent.offsetWidth + 'px';
+	    subMenuItemContainer.style.top =  base.Browser.findPosYInContainer(objParent,subMenuItemContainer.offsetParent) + 'px';
+	  }
+	};
+
 
 function requestAjax(url) {
 	var xmlHttpRequest = false;

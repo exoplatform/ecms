@@ -194,8 +194,9 @@ public class UITaggingForm extends UIForm {
   public void processRender(WebuiRequestContext context) throws Exception {
 //    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
 //                                                    "/ecm-wcm-extension/javascript/");
-    context.getJavascriptManager()
-           .addJavascript("eXo.ecm.ECMUtils.disableAutocomplete('UITaggingForm');");
+    
+    context.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+    addScripts("ecmutil.ECMUtils.disableAutocomplete('UITaggingForm');");
     super.processRender(context);
   }
 

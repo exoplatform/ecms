@@ -22,7 +22,8 @@
                     <%
                       uicomponent.renderChildren();
                       def rcontext = _ctx.getRequestContext() ;
-                      rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.WCMUtils.searchNodeTypeOnKeyPress");
+                      rcontext.getJavascriptManager().require("SHARED/wcm-utils", "wcmutil").
+                      addScripts("wcmutil.WCMUtils.searchNodeTypeOnKeyPress();");
                     %>
                 </td>  
                 <td class="ButtonCell">

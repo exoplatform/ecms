@@ -88,4 +88,5 @@ CategoryNavigation.prototype.addLoadEvent = function(func) {
 } ;
 
 eXo.ecm.CategoryNavigation = new CategoryNavigation();
+_module.CategoryNavigation = eXo.ecm.CategoryNavigation;
 eXo.ecm.CategoryNavigation.addLoadEvent(eXo.ecm.CategoryNavigation.loadSubMenu);

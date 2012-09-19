@@ -45,23 +45,23 @@
    <!-- Bootstrap Javascripts -->
    <module>
       <name>ecm-bootstrap</name>
+      <as>ecm_bootstrap</as>
       <script>
          <name>ECM</name>
          <path>/javascript/eXo/wcm/ECM.js</path>
       </script>
-      <depends>
-        <module>bootstrap</module>
-      </depends>
    </module>
    
    <module>
       <name>content-selector</name>
+      <as>content_selector</as>
       <script>
          <name>eXo.ecm.ContentSelector</name>
          <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
       </script>
       <depends>
         <module>jquery</module>
+        <as>gj</as>
       </depends>      
       <depends>
         <module>wcm-utils</module>
@@ -70,9 +70,14 @@
    
    <module>
       <name>wcm-utils</name>
+      <as>wcm_utils</as>
       <script>
          <name>eXo.ecm.WCMUtils</name>
          <path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</path>
+      </script>
+      <script>
+         <name>eXo.ecm.Util</name>
+         <path>/javascript/eXo/wcm/Util.js</path>
       </script>
       <script>
          <name>eXo.ecm.CKEditorUtil</name>
@@ -83,21 +88,30 @@
          <path>/javascript/eXo/wcm/backoffice/public/Components.js</path>
       </script>      
       <depends>
-        <module>ecm-bootstrap</module>
+        <module>jquery</module>
+        <as>gj</as>
       </depends>
       <depends>
         <module>base</module>
       </depends>
+      <depends>
+      	<module>webui</module>
+      </depends>
    </module>
    <module>
       <name>wcm-webui-ext</name>
+      <as>wcm_webui_ext</as>
       <script>
          <name>eXo.ecm.CloseEvents</name>
          <path>/javascript/eXo/wcm/backoffice/private/CloseEvents.js</path>
       </script>
       <depends>
+      	<module>jquery</module>
+      	<as>gj</as>
+      </depends>
+      <depends>
         <module>webui</module>
-      </depends>      
+      </depends>
    </module>
    
    <module>
@@ -107,45 +121,56 @@
          <path>/javascript/eXo/wcm/frontoffice/private/CLV.js</path>
       </script>
       <depends>
-        <module>ecm-bootstrap</module>
+        <module>jquery</module>
+        <as>gj</as>
       </depends>      
    </module>
    
    <module>
       <name>quick-edit</name>
+      <as>quick_edit</as>
       <script>
          <name>eXo.ecm.InlineEditing</name>
          <path>/javascript/eXo/wcm/frontoffice/private/InlineEditing.js</path>
       </script>
+      <script>
+         <name>eXo.ecm.QuickEdit</name>
+         <path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</path>
+      </script>
       <depends>
-        <module>ecm-bootstrap</module>
+        <module>jquery</module>
+        <as>gj</as>
       </depends>
    </module>
    
    <module>
       <name>ui-vertical-slide-tab</name>
+      <as>ui_vertical_slide_tab</as>
       <script>
          <name>eXo.webui.UIVerticalSlideTabs</name>
          <path>/javascript/eXo/wcm/backoffice/private/UIVerticalSlideTabs.js</path>
       </script>
       <depends>
         <module>base</module>
+      </depends>
+      <depends>
+        <module>jquery</module>
+        <as>gj</as>
       </depends>            
    </module>
 
    <module>
       <name>ckeditor-loader</name>
+      <as>ckeditor_loader</as>
       <script>
          <name>exo.load.ckeditor</name>
-         <path>/eXoLoader.js</path>
+         <path>/ckeditor/ckeditor.js</path>
       </script>
-      <depends>
-        <module>bootstrap</module>
-      </depends>
    </module>
    
    <module>
    		<name>wcm-navigation</name>
+   		<as>wcm_navigation</as>
    		<script>
    			<name>eXo.ecm.WCMNavigationPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Navigation.js</path>
@@ -160,6 +185,7 @@
    
    <module>
    		<name>wcm-search</name>
+   		<as>wcm_search</as>
    		<script>
    			<name>eXo.ecm.SearchPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Search.js</path>
@@ -169,11 +195,13 @@
    		</depends>
    		<depends>
    			<module>jquery</module>
+   			<as>gj</as>
    		</depends>
    </module>
    
    <module>
    		<name>wcm-breadcrumb</name>
+   		<as>wcm_breadcrumb</as>
    		<script>
    			<name>eXo.ecm.WCMBreadcrumbPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Breadcrumb.js</path>

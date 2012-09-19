@@ -22,8 +22,9 @@
 	  String portalName = uicomponent.getPortalName();
 	  String restContextName = Utils.getRestContextName(portalName);
       def viewComponentId  = new Date().getTime();
-	  def rcontext = _ctx.getRequestContext() ;
-	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
+	  def rcontext = _ctx.getRequestContext();
+	  rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
+	  addScripts("explorer.UICoverFlow.initEvent('$viewComponentId');");
 	  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
 	  String repository = rService.getCurrentRepository().getConfiguration().getName();	  
 %>

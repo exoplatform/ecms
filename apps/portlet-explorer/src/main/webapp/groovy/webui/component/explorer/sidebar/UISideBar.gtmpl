@@ -4,8 +4,10 @@
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
   def managers = uicomponent.getManagers();
   
-  _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.resizeVisibleComponent");
-  _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.loadEffectedItemsInSideBar");
+  def jsManager = _ctx.getRequestContext().getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+  addScripts("ecmutil.ECMUtils.resizeVisibleComponent();").
+  addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();");
   
   public String getCSSClassName(String item) {
     if (uicomponent.getSelectedComp().equals(item)) return "SelectedItem";

@@ -47,3 +47,4 @@ CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {
 };
 
 eXo.ecm.CKEditor = new CKEditor();
+_module.CKEditor = eXo.ecm.CKEditor;

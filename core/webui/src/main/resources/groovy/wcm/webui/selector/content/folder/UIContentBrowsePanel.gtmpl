@@ -3,15 +3,18 @@
 
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
+	jsManager.loadScriptResource("content-selector");
 	
 	if (uicomponent instanceof UIContentBrowsePanelFolder) {
 		def uiBrowseFolder = (UIContentBrowsePanelFolder)uicomponent;
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder', '" +
+    jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.initRequestXmlTree('folder', '" +
 				uiBrowseFolder.getInitDrive() + "', '" + 
 				uiBrowseFolder.getInitPath()  + "', '" + 
-				uicomponent.id + "')");
+				uicomponent.id + "');");
 	}else {
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder')");
+    jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.initRequestXmlTree('folder');");
 	}
 %>
 

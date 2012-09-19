@@ -16,16 +16,19 @@
 		rsId = popupId.substring(0,popupId.lastIndexOf('-'));
 	} 
 	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
 	int top = uicomponent.getWindowTop();
 	int left = uicomponent.getWindowLeft();
 	if(top > -1 && left > -1) {
-		rcontext.getJavascriptManager().addJavascript("eXo.webui.WCMUIPopupWindow.init('$popupId', $uicomponent.show, $uicomponent.resizable, true, $uicomponent.showMask, $top, $left);");
+		jsManager.require("SHARED/ecm-seo", "ecmseo").
+		addScripts("ecmseo.WCMUIPopupWindow.init('$popupId', $uicomponent.show, $uicomponent.resizable, true, $uicomponent.showMask, $top, $left);");
 	} else {
-	  rcontext.getJavascriptManager().loadScriptResource("webui");
 	  if(uicomponent.isShow()) {
-	    rcontext.getJavascriptManager().addJavascript("eXo.webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
+	    jsManager.require("SHARED/webui", "webui").
+	    addScripts("webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
 	  } else if (rcontext.useAjax()) {
-	    rcontext.getJavascriptManager().addJavascript("eXo.webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
+      jsManager.require("SHARED/webui", "webui").
+      addScripts("webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
 	  }	
 	}
 	String title = rsId;

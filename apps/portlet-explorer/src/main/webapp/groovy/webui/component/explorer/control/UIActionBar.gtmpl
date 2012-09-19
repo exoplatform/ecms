@@ -21,8 +21,9 @@
   def rcontext = _ctx.getRequestContext() ;
   def uiFormId = uicomponent.id;
   
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkTabSize');
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+  addScripts('ecmutil.ECMUtils.checkAvailableSpace();');
   
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";

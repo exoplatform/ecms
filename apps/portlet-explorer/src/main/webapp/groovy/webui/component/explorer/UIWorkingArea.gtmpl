@@ -25,15 +25,20 @@
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
     def expandNode = uiTreeExplorer.getEncodeExpandPath();
     def isExpand = uiTreeExplorer.getIsExpand();
+ 
+  String componentId = uicomponent.getId();
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer").
+  addScripts("explorer.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');").
+  addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();");
   
-    String componentId = uicomponent.getId();
-    rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
-    rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
-    if(!isExpand && focusNode != null)
-  	   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
-    else if(isExpand && expandNode != null)
-  	   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;  
-  }
+  
+  if(!isExpand && focusNode != null)
+    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");
+  else if(isExpand && expandNode != null)
+    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$expandNode');");
+  }    
+
 %>
 
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">

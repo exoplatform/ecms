@@ -7,6 +7,7 @@
 
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
+    jsManager.loadScriptResource("quick-edit");
     
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
@@ -21,7 +22,8 @@
 			
 			if (isShowTitle && (!uicomponent.isViewMode())) {
         def multiLangMsg = uicomponent.getInlineEditingMsg();
-        jsManager.addOnLoadJavascript("InlineEditor.loadLanguage(" + multiLangMsg + ")");
+        jsManager.require("SHARED/quick-edit", "quickEdit").
+        addScripts("quickEdit.InlineEditor.loadLanguage(" + multiLangMsg + ");");
       }			
 			def edittingStyle = "z-index: 5";
 			if (isShowInfoBar)
@@ -29,8 +31,9 @@
 			%>
 			<div class="UIPresentationContainer" id="$uicomponent.id">
 			<%
-        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')})");
-        jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')})");
+			  jsManager.require("SHARED/wcm-utils", "wcmutil").
+        addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')});").
+        addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')});");
         
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="EdittingToolBarContainer" style="$edittingStyle">

@@ -98,3 +98,4 @@ WCMBreadcrumbPortlet.prototype.getBreadcrumbs = function(){
 };
 
 eXo.ecm.WCMBreadcrumbPortlet = new WCMBreadcrumbPortlet();
+_module.WCMBreadcrumbPortlet = eXo.ecm.WCMBreadcrumbPortlet;

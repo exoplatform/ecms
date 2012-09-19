@@ -22,8 +22,9 @@
 	  	uicomponent.renderChild(UISearchController.class);
 	  } else {
 //			jsmanager.importJavascript('eXo.portal.UIBrowseContent');
-			jsmanager.addOnLoadJavascript('eXo.portal.UIBrowseContent.waitForLoadComplete');
-			jsmanager.addOnResizeJavascript('eXo.portal.UIBrowseContent.loadScroll');
+	    jsmanager.require("SHARED/ecm-browser", "browser").
+			addScripts('browser.UIBrowseContent.waitForLoadComplete();').
+			addScripts('browser.UIBrowseContent.loadScroll();');
 			
 	    Node currentNode = uicomponent.getCurrentNode() ;
 	    Node selectedTab = uicomponent.getSelectedTab() ; 

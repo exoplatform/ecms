@@ -1,14 +1,13 @@
 <%
   def rcontext = _ctx.getRequestContext() ;
   def userAgent = uicomponent.getUserAgent();
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.onDbClickOnTreeExplorer();");
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.init('UIJCRExplorerPortlet');");
-  rcontext.getJavascriptManager().addJavascript("eXo.session.itvInit();");
+  def jsManager = rcontext.getJavascriptManager();
   
-  if(userAgent != null && userAgent.contains("MSIE 6.0")) {
-	  rcontext.getJavascriptManager().addJavascript("SelectFix.autoRepairFloatingElements(100) ;") ;
-  }
-	
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/base", "base").
+  addScripts("ecmutil.ECMUtils.onDbClickOnTreeExplorer();").
+  addScripts("ecmutil.ECMUtils.init('UIJCRExplorerPortlet');").
+  addScripts("eXo.session.itvInit();");
+  
 %>
 <div class="$uicomponent.id" id="$uicomponent.id" >
 	<div style="height: 0px;">

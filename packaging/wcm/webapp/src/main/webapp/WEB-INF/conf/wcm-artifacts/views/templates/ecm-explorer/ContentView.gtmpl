@@ -66,9 +66,12 @@
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
   def size = uicomponent.getChildrenList().size();
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");  
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIListView.loadEffectedWidthColumn');
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+            require("SHARED/explorer-module", "explorer").
+  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").  
+  addScripts('explorer.UIListView.loadEffectedWidthColumn();');
   
   //Config to display columns with format: ["${column};${width}"]
   //Default 

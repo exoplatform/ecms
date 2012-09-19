@@ -3,19 +3,25 @@
 	
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
+	jsManager.loadScriptResource("content-selector");
+
   def itemPaths = uicomponent.getItemPaths();
   def itemTargetPath = uicomponent.getItemTargetPath();
 	if (uicomponent instanceof UIContentBrowsePanelMulti) {
 		def uiBrowserMulti = (UIContentBrowsePanelMulti)uicomponent;
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi', '" +
+    jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.initRequestXmlTree('multi', '" +
 										uiBrowserMulti.getInitDrive() + "', '" + 
 										uiBrowserMulti.getInitPath()  + "', '" + 
-										uicomponent.id + "')");
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.setDeleteConfirmationMessage('"+uiBrowserMulti.getDeleteConfirmationMsg()+"')");
+										uicomponent.id + "');");
+    jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.setDeleteConfirmationMessage('"+uiBrowserMulti.getDeleteConfirmationMsg()+"');");
 	}else {
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
+    jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.initRequestXmlTree('multi');");
 	}
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\")");%>
+  jsManager.require("SHARED/content-selector", "selector").
+  addScripts("selector.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\");");%>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar ClearFix">
 		<div class="FilterTitle"><label for="Filter">Filter</label></div>

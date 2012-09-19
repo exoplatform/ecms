@@ -112,4 +112,5 @@ WAIPortalToolbar.prototype.addLoadEvent = function(func) {
 } ;
 
 eXo.ecm.WAIPortalToolbar = new WAIPortalToolbar();
+_module.WAIPortalToolbar = eXo.ecm.WAIPortalToolbar;
 eXo.ecm.WAIPortalToolbar.addLoadEvent(eXo.ecm.WAIPortalToolbar.initToolbar);

@@ -34,7 +34,16 @@
   
   <portlet>
     <name>FileExplorerPortlet</name>
-        <module>
+    <module>
+	    <depends>
+	    	<module>explorer-module</module>
+	    </depends>
+    </module>
+  </portlet>
+  
+  <module>
+  	<name>explorer-module</name>
+  	<as>explorer_module</as>
     <script>
       <name>eXo.core.MouseEventManager</name>
       <path>/javascript/eXo/ecm/MouseEventManager.js</path>
@@ -87,26 +96,25 @@
       <name>eXo.ecm.ZeroClipboard</name>
       <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
     </script>    
-
-    	<depends>
-    		<module>jquery</module>
-    	</depends>
-      <depends>
-        <module>quick-edit</module>
-      </depends>
-      <depends>
-        <module>webui</module>
-      </depends>
-      <depends>
-        <module>webui-ext</module>
-      </depends>
-      <depends>
-        <module>ecm-utils</module>
-      </depends>
-      <depends>
-        <module>wcm-utils</module>
-      </depends>
-    </module>
-  </portlet>
+   	<depends>
+   		<module>jquery</module>
+   		<as>gj</as>
+   	</depends>
+     <depends>
+       <module>quick-edit</module>
+     </depends>
+     <depends>
+       <module>webui</module>
+     </depends>
+     <depends>
+       <module>webui-ext</module>
+     </depends>
+     <depends>
+       <module>ecm-utils</module>
+     </depends>
+     <depends>
+       <module>wcm-utils</module>
+     </depends>
+  </module>
   
 </gatein-resources>

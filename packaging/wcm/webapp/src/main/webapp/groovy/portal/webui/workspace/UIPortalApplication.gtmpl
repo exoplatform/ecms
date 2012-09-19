@@ -1,6 +1,6 @@
 <!DOCTYPE html 
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
   import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.portal.application.PortalRequestContext ;
@@ -31,7 +31,8 @@
   def remoteScripts = new JSONArray();
   for (module in scriptsURLs.keySet()) {
     def url = !jsConfig.has("paths") ? null : 
-              (!jsConfig.get("paths").has(module) ? null : jsConfig.get("paths").get(module)); 
+              (!jsConfig.get("paths").has(module) ? null : jsConfig.get("paths").get(module));
+//    def url = jsConfig.get("paths").get(module);
     headerScripts.add(url != null ? url + ".js" : module);      
     if (scriptsURLs.get(module)) {
       remoteScripts.put(module);
@@ -126,10 +127,14 @@
             <script type="text/javascript" src="<%= url %>"></script>
     <% } %>   
    <script type="text/javascript">
-   eXo.env.addLoadedRemoteScripts(<%=remoteScripts%>);
-   <% if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) { %>
-           eXo.developing = true ;
-   <% } %>
+   //initialize eXo.ecm
+     if (!eXo.ecm) {
+       eXo.ecm = {};
+     }   
+     eXo.env.addLoadedRemoteScripts(<%=remoteScripts%>);
+     <% if(org.exoplatform.commons.utils.PropertyManager.isDevelopping()) { %>
+             eXo.developing = true ;
+     <% } %>
      eXo.env.portal.context = "<%=docBase%>" ;
      <%
       if(rcontext.getAccessPath() == 0) {%>eXo.env.portal.accessMode = "public" ;<%}

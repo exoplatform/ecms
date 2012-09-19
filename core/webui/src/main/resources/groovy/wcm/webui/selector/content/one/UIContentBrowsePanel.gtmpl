@@ -3,15 +3,18 @@
   
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
+  jsManager.loadScriptResource("content-selector");
 	
 	if (uicomponent instanceof UIContentBrowsePanelOne) {
 	  def uiBrowseOne = (UIContentBrowsePanelOne)uicomponent;
-      jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one', '" +
+	    jsManager.require("SHARED/content-selector", "selector").
+      addScripts("selector.ECS.initRequestXmlTree('one', '" +
 						  							uiBrowseOne.getInitDrive() + "', '" + 
 						  							uiBrowseOne.getInitPath()  + "', '" + 
-						  							uicomponent.id + "')");	  
+						  							uicomponent.id + "');");	  
 	}else 
-		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one')");
+	  jsManager.require("SHARED/content-selector", "selector").
+    addScripts("selector.ECS.initRequestXmlTree('one');");
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar ClearFix">

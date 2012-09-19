@@ -62,5 +62,6 @@ var CoverFlow = function() {
 };
 
 eXo.ecm.UICoverFlow = new CoverFlow();
+_module.UICoverFlow = eXo.core.UICoverFlow;
 
 window.onerror = function() {return false;}

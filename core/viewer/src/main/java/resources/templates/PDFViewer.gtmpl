@@ -29,8 +29,9 @@
   def currentRotation = uicomponent.getCurrentRotation();
   def currentScale = uicomponent.getCurrentScale();
   def metadatas = uicomponent.getMetadataExtraction();
-  def rqcontext = _ctx.getRequestContext() ;
-  rqcontext.getJavascriptManager().addJavascript('eXo.ecm.ECMUtils.onKeyPDFViewerPress();') ;
+  def rqcontext = _ctx.getRequestContext();
+  rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+  addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
 %>
 <head>
   <style>

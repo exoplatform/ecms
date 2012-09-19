@@ -29,6 +29,15 @@
   <portal>
     <name>WAIPortal</name>
     <module>
+    	<depends>
+    		<module>wai-module</module>
+    	</depends>
+    </module>
+  </portal>
+  
+  <module>
+  	<name>wai-module</name>
+  	<as>wai_module</as>
     <script>
       <name>eXo.ecm.CategoryNavigation</name>
       <path>/javascript/eXo/ecm/CategoryNavigation.js</path>
@@ -41,10 +50,10 @@
       <module>base</module>
     </depends>
     <depends>
-    	<module>ecm-bootstrap</module>
+    	<module>jquery</module>
+    	<as>gj</as>
     </depends>
-    </module>
-  </portal>
+  </module>
 
 </gatein-resources>
 

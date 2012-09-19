@@ -16,7 +16,8 @@ String link = uicomponent.event("Search");
 def context = _ctx.getRequestContext();
 def jsManager = context.getJavascriptManager();
 //jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
-context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + uicomponent.id + '");');
+jsManager.require("SHARED/wcm-search", "search").
+addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
 %>
 
 <div class="UIForm $uicomponent.id" >

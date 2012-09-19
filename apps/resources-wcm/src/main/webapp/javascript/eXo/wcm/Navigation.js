@@ -512,3 +512,4 @@ UIWCMNavigation.prototype.scrollCallback = function() {
 };
 /***** Scroll Management *****/
 eXo.portal.UIWCMNavigation = new UIWCMNavigation() ;
+_module.UIWCMNavigation = eXo.portal.UIWCMNavigation;

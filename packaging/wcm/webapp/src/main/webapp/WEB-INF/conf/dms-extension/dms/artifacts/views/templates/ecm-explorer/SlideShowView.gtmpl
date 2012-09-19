@@ -27,7 +27,8 @@
 	def rcontext = _ctx.getRequestContext() ;
 	def data = "";
 	String imgSrc = "";
-	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
+  rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
+	addScripts("explorer.UICoverFlow.initEvent('$viewComponentId');");
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
 %>

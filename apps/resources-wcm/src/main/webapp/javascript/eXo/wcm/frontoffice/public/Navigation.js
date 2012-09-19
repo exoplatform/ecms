@@ -387,3 +387,4 @@ WCMNavigationPortlet.prototype.getCurrentNodes = function(navigations, selectedN
 };
 
 eXo.ecm.WCMNavigationPortlet = new WCMNavigationPortlet();
+_module.WCMNavigationPortlet = eXo.ecm.WCMNavigationPortlet;

@@ -959,3 +959,4 @@ var SimpleView = function() {
 };
 
 eXo.ecm.UISimpleView = new SimpleView();
+_module.UISimpleView = eXo.ecm.UISimpleView;

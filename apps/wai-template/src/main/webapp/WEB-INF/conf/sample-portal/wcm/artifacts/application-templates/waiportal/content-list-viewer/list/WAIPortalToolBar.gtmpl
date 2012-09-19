@@ -23,6 +23,9 @@
     return new Cookie(cookieName, cookieValue);
   }
   
+  def jsManager = _ctx.getRequestContext().getJavascriptManager();
+  jsManager.loadScriptResource("wai-module");
+  
   HttpServletRequest request = Util.getPortalRequestContext().getRequest();
   HttpServletResponse response = Util.getPortalRequestContext().getResponse();
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();

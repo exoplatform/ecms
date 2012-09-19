@@ -378,3 +378,4 @@ ExoEditor.prototype.cancelEvent = function(e) {
 };
 
 eXo.ecm.ExoEditor = new ExoEditor() ;
+_module.ExoEditor = eXo.ecm.ExoEditor;

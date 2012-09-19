@@ -158,4 +158,25 @@ ContentListViewer.prototype.addURL = function(aDiv) {
   aDiv.setAttribute("href", strHref);
 }
 
+ContentListViewer.prototype.contextualProcessing = function(element) {
+    var rdoContexttual = gj(element).find("input.radio:first")[0];
+    var isChecked = rdoContexttual.getAttribute("checked");
+    var scvPreferences = gj(element).parents(".UIForm:first")[0];
+    var inputSet = gj(scvPreferences).find("div.UIFormInputSetWithAction:first")[0];
+    var savedInnerHTML = inputSet.innerHTML;
+    var imgStartIndex = savedInnerHTML.indexOf("<img");
+    var strFirstInput  = savedInnerHTML.substr(0,imgStartIndex);
+    var strLastImgInput = savedInnerHTML.substr(imgStartIndex);
+    strFirstInput = strFirstInput.substr(0, strFirstInput.lastIndexOf(">") + 1);
+    strFirstInput = strFirstInput.trim();
+    if (rdoContexttual.checked) {
+      document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('readonly',0);
+      inputSet.innerHTML =  strFirstInput + strLastImgInput;
+    }else  {
+      document.getElementById('UISCVParameterInputBox').setAttribute('readonly',true);
+      inputSet.innerHTML =  strFirstInput + "*"  + strLastImgInput;
+    }
+  };
+
 eXo.ecm.CLV = new ContentListViewer();
+_module.CLV = eXo.ecm.CLV;

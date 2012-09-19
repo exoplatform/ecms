@@ -1,8 +1,9 @@
 <%
   import org.exoplatform.wcm.webui.Utils;  
   def rcontext = _ctx.getRequestContext();  
-  def jsManager = rcontext.getJavascriptManager();  
-  jsManager.addOnLoadJavascript("eXo.ecm.WCMUtils.changePriorityCss()");
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/wcm-utils", "wcmutil").
+  addScripts("wcmutil.WCMUtils.changePriorityCss();");
 %>
 <div class="$uicomponent.id">
 	<%uiform.begin()%>

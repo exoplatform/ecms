@@ -26,3 +26,4 @@ Vote.prototype.showVoteWindow = function(div) {
 };
 
 eXo.ecm.Vote = new Vote();
+_module.QuickEdit = eXo.ecm.QuickEdit;

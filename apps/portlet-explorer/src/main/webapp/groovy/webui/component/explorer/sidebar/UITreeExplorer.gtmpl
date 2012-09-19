@@ -16,8 +16,11 @@
 %>
 <%
 
-  def idSelected = uicomponent.getEncodeCurrentPath();  
-  _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.selectedPath('${idSelected}')");
+  def idSelected = uicomponent.getEncodeCurrentPath();
+  def rcontext = _ctx.getRequestContext() ;
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+  addScripts("ecmutil.ECMUtils.selectedPath('${idSelected}');");
 
   public void writeNodes(TreeNode rootTree) {
     UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
@@ -47,7 +50,9 @@
     if(!uicomponent.isSystemWorkspace()) {
       def rcontext = _ctx.getRequestContext();
       int depth = rootTree.getNode().getDepth() + 1;
-  		rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('${drive}_treeclip_button','$depth','$childrenSize')");
+      def jsManager = rcontext.getJavascriptManager();
+      jsManager.require("SHARED/ecm-utils", "ecmutil").
+  		addScripts("ecmutil.ECMUtils.initClipboard('${drive}_treeclip_button','$depth','$childrenSize');");
     }
 
     for(treeNode in realChildrenTrees) {	    

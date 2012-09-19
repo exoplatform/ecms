@@ -12,3 +12,4 @@ SELocalization.prototype.cleanName = function(title, targetId) {
 };
 
 eXo.ecm.SELocalization = new SELocalization();
+_module.SELocalization = eXo.ecm.SELocalization;
