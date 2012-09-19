@@ -64,9 +64,19 @@ public class ImageUtils {
     if(crop) {
       thumbImage = Scalr.crop(image, maxWidth, maxHeight);
     } else {
-      //BALANCED: Used to indicate that the scaling implementation should use a scaling operation balanced 
-      //between SPEED and QUALITY
-      thumbImage = Scalr.resize(image, Scalr.Method.BALANCED, maxWidth, maxHeight);      
+      if (maxHeight == 0) {
+        //Just used in custom size case. When 0 as specified as height then it will be calculated automatically to fit 
+        //with expected width.
+        thumbImage = Scalr.resize(image, Scalr.Mode.FIT_TO_WIDTH, maxWidth);
+      } else if(maxWidth == 0) {
+        //Just used in custom size case. When 0 as specified as width then it will be calculated automatically to fit 
+        //with expected height.
+        thumbImage = Scalr.resize(image, Scalr.Mode.FIT_TO_HEIGHT, maxHeight);
+      } else {
+        //BALANCED: Used to indicate that the scaling implementation should use a scaling operation balanced 
+        //between SPEED and QUALITY
+        thumbImage = Scalr.resize(image, Scalr.Method.BALANCED, maxWidth, maxHeight);      
+      }
     }
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     ImageIO.write(thumbImage, "png", outStream);
