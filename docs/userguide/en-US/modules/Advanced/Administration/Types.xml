@@ -41,7 +41,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
     <para>
-     Click the <guibutton>Register</guibutton> button on the <guilabel>Namespace Registry</guilabel> form to register a new namespace.
+     Click <guibutton>Register</guibutton> on the <guilabel>Namespace Registry</guilabel> form to register a new namespace.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -119,7 +119,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <procedure>
       <step>
         <para xml:id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
-     Open the <guilabel>Add/Edit Node Type Definitions</guilabel> form by clicking the <guibutton>Add</guibutton> button on the <emphasis role="bold">Manage Node Type</emphasis> page.
+     Open the <guilabel>Add/Edit Node Type Definitions</guilabel> form by clicking <guibutton>Add</guibutton> on the <emphasis role="bold">Manage Node Type</emphasis> page.
     </para>
           <mediaobject>
              <imageobject role="html">
@@ -274,7 +274,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <guilabel>Browse...</guilabel> button to upload a file.
+     Click <guibutton>Browse...</guibutton> to upload a file.
     </para>
         <note>
           <para>
@@ -304,7 +304,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <guibutton>Import</guibutton> button to complete importing a node type.
+     Click <guibutton>Import</guibutton> to complete importing a node type.
     </para>
       </step>
     </procedure>

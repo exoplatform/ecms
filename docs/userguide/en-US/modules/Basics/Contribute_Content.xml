@@ -1290,8 +1290,8 @@ This function allows contributor to edit content, quickly access content list fo
     <section id="sect-User_Guide-Contribute_Content-Publication_Process">
         <title>Publication process</title>
         <para>
-            After new content has been created, it is saved as draft and you can easily to publish it on your site.
-            The publication process consists of four steps:
+            After new content has been created, it is saved as draft and you can easily publish it on your site.
+            The publication process consists of 4 steps:
         </para>
         <para>
             <emphasis role="bold">Request for Approval --> Approval --> Stage --> Publish</emphasis>
@@ -1331,7 +1331,7 @@ This function allows contributor to edit content, quickly access content list fo
                     <guilabel>Approve:</guilabel>
                     To approve content, click
                     <guilabel>Approve</guilabel>
-                    on the <guilabel>Action</guilabel> bar of the Sites Explorer, or
+                    on the <guilabel>Action</guilabel> bar of <emphasis role="bold">Sites Explorer</emphasis>, or
                     <guilabel>Approved</guilabel>
                     in the
                     <guilabel>Manage Publication.</guilabel>

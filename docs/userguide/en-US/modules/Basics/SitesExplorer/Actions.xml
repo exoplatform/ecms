@@ -1646,9 +1646,11 @@ After being created successfully, a file document with the <guilabel>text/html</
 			</tgroup>
 		</table>
     <note>
+	  <para>
       You can also attach <guilabel>Captions</guilabel> and <guilabel>Audio description</guilabel> to the uploaded
       media when <link linkend="sect-User_Guide-Actions-Edit_documents">editing this document</link>. To know how to upload a file, see the <link linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document">Attach files to a document</link> section.
-    </note>
+	  </para>  
+	</note>
   </section>
   <section id="sect-User_Guide-Actions-Add_Folder">
     <title>Add a folder</title>
@@ -2181,7 +2183,7 @@ After being created successfully, a file document with the <guilabel>text/html</
   <section id="sect-User_Guide-Actions-Edit_documents">
     <title>Edit a document</title>
     <para>
-      There are two ways to edit a document.
+      There are 2 ways to edit a document.
     </para>
 	<para xml:id="proc-User_Guide-Edit_documents-Method_One"><emphasis role="bold">The first way</emphasis></para>
     <procedure>
@@ -2318,11 +2320,7 @@ After being created successfully, a file document with the <guilabel>text/html</
         </para>
         <note>
           <para>
-            The
-            <guilabel>Export</guilabel>
-            form can contain
-            <guilabel>Export Version History</guilabel>
-            if the exported node or any of its child nodes is versioned.
+            The <guilabel>Export</guilabel> form can contain <guilabel>Export Version History</guilabel> if the exported node or any of its child nodes is versioned.
           </para>
           <para>
             This action exports all of the node&apos;s version history.
@@ -3222,27 +3220,12 @@ After being created successfully, a file document with the <guilabel>text/html</
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Manage_Relations">
-    <title>Manage relations</title>
-    <para>There are some actions you can perform on relations as follows:</para>
-    <itemizedlist>
-	<listitem>
-	<para>
-    <link linkend='sect-User_Guide-Manage_Relations-Add_a_relation'>Add a relation</link>
-    </para>
-	</listitem>
-	<listitem>
-	<para>
-    <link linkend='sect-User_Guide-Manage_Relations-Delete_a_relation'>Delete a relation</link>
-    </para>
-	</listitem>
-	<listitem>
-	<para>
-    <link linkend='sect-User_Guide-Manage_Relations-View_Relations'>View a relation</link>
-    </para>
-	</listitem>
-    </itemizedlist>
-    <section id="sect-User_Guide-Manage_Relations-Add_a_relation">
-      <title>Add a relation</title>
+    <title>Add/Delete/View relations</title>
+    <para xml:id="sect-User_Guide-Manage_Relations-Add_a_relation">
+		<citetitle>
+			<emphasis role="bold">Add a relation</emphasis>
+		</citetitle>
+	</para>
 	<para>
       You can use this function to create relations between nodes.
     </para>
@@ -3307,9 +3290,11 @@ After being created successfully, a file document with the <guilabel>text/html</
                 A node cannot have a relation to itself.
             </para>
         </note>
-    </section>
-    <section id="sect-User_Guide-Manage_Relations-Delete_a_relation">
-      <title>Delete a relation</title>
+	<para xml:id="sect-User_Guide-Manage_Relations-Delete_a_relation">
+		<citetitle>
+			<emphasis role="bold">Delete a relation</emphasis>
+		</citetitle>
+	</para>
       <procedure>
         <step>
           <para>
@@ -3362,9 +3347,11 @@ After being created successfully, a file document with the <guilabel>text/html</
           </para>
         </step>
       </procedure>
-    </section>
-    <section id="sect-User_Guide-Manage_Relations-View_Relations">
-      <title>View a relation</title>
+	<para xml:id="sect-User_Guide-Manage_Relations-View_Relations">
+		<citetitle>
+			<emphasis role="bold">View a relation</emphasis>
+		</citetitle>
+	</para>
       <procedure>
         <step>
           <para>
@@ -3400,7 +3387,6 @@ After being created successfully, a file document with the <guilabel>text/html</
           </para>
         </step>
       </procedure>
-    </section>
   </section>
   <section id="sect-User_Guide-Actions-Manage_Versions">
     <title>Manage versions</title>
@@ -4011,9 +3997,7 @@ After being created successfully, a file document with the <guilabel>text/html</
       </step>
       <step>
         <para>
-          Click the
-          <guilabel>Browse...</guilabel>
-          button to select the image which will be used as the display icon for the selected folder.
+          Click <guilabel>Browse...</guilabel> to select the image which will be used as the display icon for the selected folder.
         </para>
       </step>
       <step>
@@ -4169,30 +4153,36 @@ After being created successfully, a file document with the <guilabel>text/html</
     <para>
       This function enables you to show or hide all the drives in <emphasis role="bold">Sites Explorer.</emphasis>
     </para>
-    <para>
-      To show drives, click
-      <inlinemediaobject>
-        <imageobject>
-          <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
-        </imageobject>
-        <textobject>
-          <phrase>[ Show/Hide Drives ]</phrase>
-        </textobject>
-      </inlinemediaobject>
-      on the <guilabel>Action</guilabel> bar.
-    </para>
-    <para>
-      To hide drives, click
-      <inlinemediaobject>
-        <imageobject>
-          <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
-        </imageobject>
-        <textobject>
-          <phrase>[ Show/Hide Drives ]</phrase>
-        </textobject>
-      </inlinemediaobject>
-      again.
-    </para>
+	<itemizedlist>
+		<listitem>
+			<para>
+			  To show drives, click
+			  <inlinemediaobject>
+				<imageobject>
+				  <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+				  <phrase>[ Show/Hide Drives ]</phrase>
+				</textobject>
+			  </inlinemediaobject>
+			  on the <guilabel>Action</guilabel> bar.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			  To hide drives, click
+			  <inlinemediaobject>
+				<imageobject>
+				  <imagedata width="30mm" scalefit="1" fileref="images/showhidedrives.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+				  <phrase>[ Show/Hide Drives ]</phrase>
+				</textobject>
+			  </inlinemediaobject>
+			  again.
+			</para>
+		</listitem>
+	</itemizedlist>
   </section>
   <section id="sect-User_Guide-Actions-Show_JCR_Structure">
     <title>Show/Hide content structure</title>
@@ -4812,7 +4802,7 @@ After being created successfully, a file document with the <guilabel>text/html</
   <section id="sect-User_Guide-Actions-View_Permissions">
     <title>View permissions</title>
     <para>
-      This function allows an administrator to manage the permissions for nodes.
+      This function allows administrators to manage the permissions for nodes.
     </para>
 	<procedure>
       <step>
@@ -4952,23 +4942,20 @@ After being created successfully, a file document with the <guilabel>text/html</
                  </para>
                 <itemizedlist>
                     <listitem>
-                        <para>Enter the information of the user ino the textbox.</para>
+                        <para>Enter the information of the user into the textbox.</para>
                     </listitem>
                     <listitem>
                         <para>Click
-          <inlinemediaobject>
-            <imageobject>
-              <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>magnifying glass</phrase>
-            </textobject>
-          </inlinemediaobject>
-          to search for users matching with your selected information.</para>
+						  <inlinemediaobject>
+							<imageobject>
+							  <imagedata width="4mm" scalefit="1" fileref="images/magnifyingglassicon.png" format="PNG"/>
+							</imageobject>
+							<textobject>
+							  <phrase>magnifying glass</phrase>
+							</textobject>
+						  </inlinemediaobject> to search for users matching with your selected information.</para>
                     </listitem>
-                </itemizedlist>
-        </listitem>
-            <listitem>
+					<listitem>
                 <para xml:id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships">Click
           <inlinemediaobject>
             <imageobject>
@@ -4987,7 +4974,7 @@ After being created successfully, a file document with the <guilabel>text/html</
           form.
         </para>
             </listitem>
-            <listitem>
+			<listitem>
                <para xml:id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
              Click
           <inlinemediaobject>
@@ -5002,6 +4989,8 @@ After being created successfully, a file document with the <guilabel>text/html</
           <guilabel>User Or Group</guilabel>
           field to assign the "read" permission to all users/groups. </para>
             </listitem>
+                </itemizedlist>
+        </listitem>
           </itemizedlist>
       </step>
       <step>

@@ -158,9 +158,7 @@
 			</para>
       </step>
       <step>
-        <para>
-     Click the <guibutton>Drives</guibutton> button, then select <guilabel>Sites Management.</guilabel>
-    </para>
+        <para>Click the <guibutton>Drives</guibutton> button, then select <guilabel>Sites Management</guilabel>.</para>
         <mediaobject>
           <imageobject role="html">
             <imagedata  align="center"  fileref="images/sitesmanagementdrive.png" format="PNG"/>
@@ -202,9 +200,14 @@
       </step>
     </procedure>
   </section>
-    <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
-      <title>Add new content to a specific site</title>
-      <para>
+  <section id="sect-User_Guide-Actions-Add_Delete_content">
+	<title>Add/Delete web content</title>
+	<para xml:id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
+		<citetitle>
+			<emphasis role="bold">Add new content to a specific site</emphasis>
+		</citetitle>
+	</para>
+    <para>
     This function enables you to copy web content, such as an <emphasis>.html</emphasis> file, from your local device to a <emphasis>web content</emphasis> folder of a site.
    </para>
       <procedure>
@@ -225,9 +228,11 @@
       <para>
     After the new content is added, it can be viewed as a folder in WebDAV or as a page using a web browser.
    </para>
-    </section>
-    <section id="sect-User_Guide-Actions-Delete_a_web_content">
-      <title>Delete web content</title>
+	<para xml:id="sect-User_Guide-Actions-Delete_a_web_content">
+		<citetitle>
+			<emphasis role="bold">Delete web content</emphasis>
+		</citetitle>
+	</para>
       <para>
     This function enables site administrators to delete web content files separately or in batches.
    </para>
@@ -254,5 +259,5 @@
      </para>
         </step>
       </procedure>
-    </section>
+   </section>
 </section>

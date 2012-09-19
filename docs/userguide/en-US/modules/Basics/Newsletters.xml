@@ -9,13 +9,19 @@
       <itemizedlist>
            <listitem>
                <para>
-                   <link linkend="sect-User_Guide-Newsletters-Newsletter_Viewer">Newsletter viewer</link>: Learn to create subscribe to email newsletter.
-               </para>
+                   <link linkend="sect-User_Guide-Newsletters-Newsletter_Viewer">Newsletter viewer</link>
+				</para>
+				<para>
+				Step-by-step instructions on how to subscribe your email to get newsletters from eXo Service.
+                </para>
            </listitem>
            <listitem>
                <para>
-                   <link linkend="sect-User_Guide-Newsletters-Manage_Newsletters">Newsletter Manager</link>: Learn to manage categories in the <emphasis role="bold">Newsletter</emphasis> portlet, add a new subscription; view, edit, delete a newsletter or convert a newsletter as template.
-               </para>
+                   <link linkend="sect-User_Guide-Newsletters-Manage_Newsletters">Newsletter Manager</link>
+				</para>
+				<para>
+				The ways to add the <emphasis role="bold">Newsletter Manager</emphasis> portlet to a specific page, actions to manage categories in <emphasis role="bold">Newsletter</emphasis>, ways to add a new subscription, steps to view/edit/delete/create a newsletter or to convert a newsletter as template.
+                </para>
            </listitem>
       </itemizedlist>
   </highlights>
