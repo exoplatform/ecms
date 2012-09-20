@@ -67,6 +67,11 @@ public class AddToFavoriteScript implements CmsScript {
       // Get new added node
       session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService_.getCurrentRepository());
       Node addedNode = (Node) session.getItem(nodePath);
+      if (ConversationState.getCurrent() == null || 
+          ConversationState.getCurrent().getIdentity() == null || 
+          ConversationState.getCurrent().getIdentity().getUserId() == null) {
+        return;
+      }
       String userID = ConversationState.getCurrent().getIdentity().getUserId();
       Node userNode = nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
