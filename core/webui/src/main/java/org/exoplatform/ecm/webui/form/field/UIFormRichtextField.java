@@ -32,10 +32,12 @@ public class UIFormRichtextField extends DialogFormField {
   private final String TOOLBAR = "toolbar";
   private final String WIDTH = "width";
   private final String HEIGHT = "height";
+  private final String ENTERMODE = "enterMode";
 
   private String toolbar;
   private String width;
   private String height;
+  private String enterMode;
 
   public UIFormRichtextField(String name, String label, String[] arguments) {
     super(name, label, arguments);
@@ -48,6 +50,7 @@ public class UIFormRichtextField extends DialogFormField {
     richtext.setToolbar(toolbar);
     richtext.setWidth(width);
     richtext.setHeight(height);
+    richtext.setEnterMode(enterMode);
     if(validateType != null) {
       DialogFormUtil.addValidators(richtext, validateType);
     }
@@ -64,6 +67,8 @@ public class UIFormRichtextField extends DialogFormField {
         width = entry[1];
       } else if(HEIGHT.equals(entry[0])) {
         height = entry[1];
+      } else if(ENTERMODE.equals(entry[0])) {
+      	enterMode = entry[1];
       }
     }
   }
