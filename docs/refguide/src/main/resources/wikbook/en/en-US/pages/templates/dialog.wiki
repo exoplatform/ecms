@@ -3,14 +3,15 @@ Dialogs are Groovy templates that generate forms by mixing static HTML fragments
 h1. Common parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters}
 
 These following parameters are common and can be used for all input fields.
+
 ||*Parameter*||*Type*||*Required*||*Example*||*Description*||
-|*jcrPath*|{{string}}|!images/check.gif!|{{jcrPath=/node/exo:title}}|The relative path inside the current node.|
-|*mixintype*|{{string}} with the commas (,) character.|!images/error.gif!|{example}{{mixintype=mix:i18n}}{example} {example}{{mixintype=mix:votable,mix:commentable,mix:i18n}}{example}|The list of mixin types you want to initialize when creating the content.|
-|*validate*|{{string}} with the comma (,) character|!images/error.gif!|{{validate=empty}}{example} {example}{{validate=empty,name}}{example}{example}{{validate=org.exoplatform.webui.form.validator.StringLengthValidator}}|The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes. To know how to pass parameters to validators, refer [here|#CONTref.InsideWCMTemplates.ContentTypes.How_to_pass_parameters_to_validators]|
-|*editable*|{{string}}|!images/error.gif!|{{editable=if-null}}|The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
-|*multiValues*|{{boolean}}|!images/error.gif!|{{multiValues=true}}|Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
-|*visible*|{{boolean}}|!images/error.gif!|{{visible=true}}|The input is visible if this value is true.|
-|*options*|{{String}} separated by the commas (,) character.}}|!images/error.gif!|A list of parameters which are input while the content templates are initialized.|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |
+|*jcrPath*| {{string}} |!images/check.gif!| {{jcrPath=/node/exo:title}} | The relative path inside the current node.|
+|*mixintype*| {{string}} with the commas (,) character.| !images/error.gif! | {{mixintype=mix:i18n}} {example}{example} {{mixintype=mix:votable,mix:commentable,mix:i18n}} |The list of mixin types you want to initialize when creating the content.|
+|*validate*| {{string}} with the comma (,) character| !images/error.gif! | {{validate=empty}} {example}{example} {{validate=empty,name}} {example}{example} {{validate=org.exoplatform.webui.form.validator.StringLengthValidator}} |The list of validators you want to apply to the input. Possible values are: _name, email, number, empty, null, datetime, length_ OR validator classes. To know how to pass parameters to validators, refer [here|#CONTref.InsideWCMTemplates.ContentTypes.How_to_pass_parameters_to_validators]|
+|*editable*| {{string}} |!images/error.gif!| {{editable=if-null}} | The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
+|*multiValues*| {{boolean}} |!images/error.gif!| {{multiValues=true}} | Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
+|*visible*| {{boolean}} |!images/error.gif!| {{visible=true}} |The input is visible if this value is true.|
+|*options*| {{String}} separated by the commas (,) character.}}|!images/error.gif!|A list of parameters which are input while the content templates are initialized.|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |
 
 {docbook}
 <citetitle>
@@ -165,6 +166,7 @@ h1. Rich Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Ri
 |*toolbar*|{{string}}|!images/error.gif!|The predefined toolbar for CKEditor. The value can be: {{Default}}, {{Basic}}, {{CompleteWCM}}, {{BasicWCM}}, {{SuperBasicWCM}}.|{{options=CompleteWCM}}|
 |*width*|{{string}}|!images/error.gif!|The width of CKEditor. Its value can be the percent of pixel.|{{options=width:'100%'}}|
 |*height*|{{string}}|!images/error.gif!|The height of CKEditor. Its value can be the percent of pixel.|{{options=height:'200px'}}|
+
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.Example}
@@ -286,6 +288,7 @@ h1. Radio Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioF
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some radio values. | {{options=radio1,radio2,radio3}} |
+
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.Example}
@@ -300,6 +303,7 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 h1. Select box Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some option values. | {{options=option1,option2,option3}} |
+
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField.Example}
@@ -316,6 +320,7 @@ h1. Checkbox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Che
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{string}} with the comma (,) characters | !images/error.gif! | Some checkbox values. | {{options=checkbox1,checkbox2,checkbox3}} |
+
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.Example}

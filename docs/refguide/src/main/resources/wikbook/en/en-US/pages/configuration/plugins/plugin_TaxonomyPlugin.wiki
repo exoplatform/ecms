@@ -99,9 +99,9 @@ In which:
 ||*Name*||*Type*||*Value*||*Description*||
 |*permissions*|{{ArrayList}}| {{{{java.util.ArrayList}}}}|The list of permissions for users or groups to access the taxonomy.|
 
-* *Object type*: {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission}}
+* *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission_
 ||*Name*||*Type*||*Value*||*Description*||
-|*identity*|{{string}}|\*:/platform/users|The name of the user, group or membership.|
+|*identity*|{{string}}| \*:/platform/users |The name of the user, group or membership.|
 |*read*|{{boolean}}|{{true}}|The permission to read the taxonomy tree.|
 |*addNode*| {{boolean}}|{{true}}|The permission to add a node to the taxonomy tree.|
 |*setProperty*|{{boolean}}|{{true}}|The permission to set properties for a node in the taxonomy tree. |

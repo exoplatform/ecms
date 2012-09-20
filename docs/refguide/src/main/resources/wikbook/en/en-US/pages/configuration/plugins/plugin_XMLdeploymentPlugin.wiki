@@ -69,7 +69,7 @@ In which:
 | *cleanupPublication* | {{boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
 | *versionHistoryPath* | {{string}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |
 
-* *Object type*: {{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}
+* *Object type*: _org.exoplatform.services.deployment.DeploymentDescriptor$Target_
 || *Field* || *Type* || *Value* || *Description* ||
 | *repository* | {{string}} | {{repository}} | The repository name of the target node. |
 | *workspace* | {{string}} | {{collaboration}} | The collaboration name of the target node. |

@@ -99,16 +99,14 @@ In which:
 * *Set-method*: _addLifecycle_
 * *Type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin_
 
-* *Object type*:
- {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle}}
+* *Object type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle_
 ||*Field*||*Type*||*Value*||*Description*||
 |*name*|{{string}}|{{lifecycle1}}| The name of the lifecycle.|
 |*publicationPlugin*|{{string}}| {{Authoring publication}}| The publication plugin name.|
 |*states*|{{ArrayList}}|_{{{{java.util.ArrayList}}}}_| The list of the publication states.|
 
 
-* *Object type*:
- {{org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State}}
+* *Object type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State_
 ||*Field*||*Type*||*Description*||
 |*state*|{{string}}|The publication states: draft, pending, staged, approved or published.|
 |*membership*|{{string}}|The user or group.|
