@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.utils;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Sep 15, 2008 11:17:13 AM
  */
 public class LockUtil {
-  
+
   public static void keepLock(Lock lock) throws Exception {
     LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(lock.getNode());
@@ -93,110 +92,31 @@ public class LockUtil {
   }
 
   public static void changeLockToken(Node oldNode, Node newNode) throws Exception {
-    String newKey = createLockKey(newNode);
-    String oldKey = createLockKey(oldNode);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
-    if(lockedNodesInfo == null) {
-      lockedNodesInfo = new HashMap<String,String>();
-    }
-    lockedNodesInfo.remove(oldKey) ;
-    lockedNodesInfo.put(newKey,newNode.getLock().getLockToken());
-    lockService.putToLockHoding(userId,lockedNodesInfo);
+    WCMCoreUtils.getService(LockService.class).changeLockToken(oldNode, newNode);
   }
 
   public static void changeLockToken(String srcPath, Node newNode) throws Exception {
-    String newKey = createLockKey(newNode);
-    String oldKey = getOldLockKey(srcPath, newNode);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
-    if(lockedNodesInfo == null) {
-      lockedNodesInfo = new HashMap<String,String>();
-    }
-    if(lockedNodesInfo.containsKey(oldKey)) {
-      lockedNodesInfo.put(newKey, lockedNodesInfo.get(oldKey));
-      lockedNodesInfo.remove(oldKey);
-    }
-    lockService.putToLockHoding(userId, lockedNodesInfo);
+    WCMCoreUtils.getService(LockService.class).changeLockToken(srcPath, newNode);
   }
 
   public static String getLockTokenOfUser(Node node) throws Exception {
-    String key = createLockKey(node);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
-    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
-      return lockedNodesInfo.get(key);
-    }
-    return null;
+    return WCMCoreUtils.getService(LockService.class).getLockTokenOfUser(node);
   }
 
-  @SuppressWarnings("unchecked")
   public static String getLockToken(Node node) throws Exception {
-    String key = createLockKey(node);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
-    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
-      return lockedNodesInfo.get(key);
-    }
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-    Collection<org.exoplatform.services.organization.Membership>
-                        collection = service.getMembershipHandler().findMembershipsByUser(userId);
-    String keyPermission;
-    for(org.exoplatform.services.organization.Membership membership : collection) {
-      StringBuffer permissionBuffer = new StringBuffer();
-      permissionBuffer.append(membership.getMembershipType()).append(":").append(membership.getGroupId());
-      keyPermission = createLockKey(node, permissionBuffer.toString());
-      lockedNodesInfo = lockService.getLockInformation(permissionBuffer.toString());
-      if ((lockedNodesInfo != null) && (lockedNodesInfo.get(keyPermission) != null)) {
-        return lockedNodesInfo.get(keyPermission);
-      }
-    }
-    return null;
+    return WCMCoreUtils.getService(LockService.class).getLockToken(node);
   }
 
   public static String getOldLockKey(String srcPath, Node node) throws Exception {
-    StringBuffer buffer = new StringBuffer();
-    Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-    buffer.append(repositoryName).append("/::/")
-          .append(session.getWorkspace().getName()).append("/::/")
-          .append(session.getUserID()).append(":/:")
-          .append(srcPath);
-    return buffer.toString();
+    return WCMCoreUtils.getService(LockService.class).getOldLockKey(srcPath, node);
   }
 
   public static String createLockKey(Node node) throws Exception {
-    StringBuffer buffer = new StringBuffer();
-    Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    buffer.append(repositoryName).append("/::/")
-          .append(session.getWorkspace().getName()).append("/::/")
-          .append(userId).append(":/:")
-          .append(node.getPath());
-    return buffer.toString();
+    return WCMCoreUtils.getService(LockService.class).createLockKey(node);
   }
 
   public static String createLockKey(Node node, String userId) throws Exception {
-    StringBuffer buffer = new StringBuffer();
-    Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-    if(userId == null) userId = IdentityConstants.ANONIM;
-    buffer.append(repositoryName).append("/::/")
-          .append(session.getWorkspace().getName()).append("/::/")
-          .append(userId).append(":/:")
-          .append(node.getPath());
-    return buffer.toString();
+    return WCMCoreUtils.getService(LockService.class).createLockKey(node, userId);
   }
 
   public static boolean isLocked(Node node) throws Exception {
@@ -208,7 +128,7 @@ public class LockUtil {
     }
     return true;
   }
-  
+
   /**
    * update the lockCache by adding lockToken of all locked nodes for the given membership
    * @param membership
@@ -220,7 +140,7 @@ public class LockUtil {
     Session session = null;
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
-    
+
     //get all locked nodes
     for (String ws : repo.getWorkspaceNames()) {
       session = WCMCoreUtils.getSystemSessionProvider().getSession(ws, repo);
@@ -243,5 +163,5 @@ public class LockUtil {
         }
       }
     }
-  }  
+  }
 }

@@ -1,4 +1,6 @@
 function WCMUtils(){
+	this.cmdEcmBundle = "/bundle/";
+	this.cmdGetBundle = "getBundle?";
 }
 
 WCMUtils.prototype.getHostName = function() {
@@ -244,12 +246,16 @@ WCMUtils.prototype.setZIndex = function(index) {
 };
 
 WCMUtils.prototype.getBundle = function(key, lang) {
-  var ECS = eXo.ecm.ECS;  
-  var command = ECS.cmdEcmBundle + ECS.cmdGetBundle + "key=" + key + "&locale=" + lang;
-  var url = ECS.connector + command;
-  var mXML = eXo.ecm.WCMUtils.request(url);
-  var message = mXML.getElementsByTagName(key)[0];
-  return message.getAttribute("value");
+  var command = this.cmdEcmBundle + this.cmdGetBundle + "key=" + key + "&locale=" + lang;
+  var url = eXo.ecm.WCMUtils.getRestContext() + command;
+  var mXML = this.request(url);
+  var message;
+  try {
+    message = mXML.getElementsByTagName(key)[0];
+    return message.getAttribute("value");
+  } catch(err) {
+    return "";
+  }
 };
 
 eXo.ecm.WCMUtils = new WCMUtils();

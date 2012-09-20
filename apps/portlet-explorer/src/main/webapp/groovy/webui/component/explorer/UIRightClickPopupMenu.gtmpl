@@ -1,12 +1,17 @@
 <%
+  import java.net.URLEncoder;
+
   import org.exoplatform.webui.core.UIComponent ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
  
   def rcontext = _ctx.getRequestContext() ;
   def managers = uicomponent.getAncestorOfType(UIWorkingArea.class).getManagers();
+
+  def refreshAction = URLEncoder.encode(uicomponent.getAncestorOfType(UIWorkingArea.class).event(UIWorkingArea.REFRESH_ACTION), "utf-8");
   
   rcontext.getJavascriptManager().require("SHARED/webui-ext", "webuiExt").
-  addScripts("webuiExt.UIRightClickPopupMenu.init('" + uicomponent.getId() + "');");
+  addScripts("webuiExt.UIRightClickPopupMenu.init('" + uicomponent.getId() + "');").
+  addScripts("eXo.ecm.Rename.init('" + refreshAction + "') ;");
 %>
 <div class="UIRightClickPopupMenu" id="$uicomponent.id">
   <div class="UIContextMenuContainer">
@@ -21,11 +26,19 @@
 				  <div class="UIRightPopupMenuContainer">
 					 		<%
 					 			for(itemContext in managers) {
-					 			def action = itemContext.getUIExtensionName();
-					 			
+						 			def action = itemContext.getUIExtensionName();
+									def href = "";
+									def onClick = "";
+									if (action.equals(UIWorkingArea.RENAME_ACTION)) {
+										href = "";
+										onClick = "javascript:eXo.ecm.Rename.showRenamePopup();";
+									} else {
+										href = "href=\"" + itemContext.event(action) + "\"";
+										onClick = "return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);";
+									}
 					 		%>
 					   	<div class="MenuItem"> 	
-								<a exo:attr="$action" href="<%=itemContext.event(action);%>" onclick="return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);" class="ItemIcon DefaultAction16x16Icon ${action}16x16Icon" >
+								<a exo:attr="$action" $href onclick="$onClick" class="ItemIcon DefaultAction16x16Icon ${action}16x16Icon" >
 									<%=_ctx.appRes(uicomponent.getId() + ".event." + action) %>
 								</a>
 						 	</div>

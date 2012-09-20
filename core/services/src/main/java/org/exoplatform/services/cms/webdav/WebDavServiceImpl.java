@@ -66,6 +66,7 @@ import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
 import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
 import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -184,7 +185,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
 
-    try {      
+    try {
       repoPath = convertRepoPath(repoPath, false);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -220,7 +221,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @QueryParam("version") String version,
                       @Context UriInfo uriInfo) {
 
-    try {      
+    try {
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -344,7 +345,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @Context UriInfo uriInfo,
                            HierarchicalProperty body) {
 
-    try {      
+    try {
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -368,7 +369,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                             @Context UriInfo uriInfo,
                             HierarchicalProperty body) {
 
-    try {      
+    try {
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -398,22 +399,27 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @Context UriInfo uriInfo) {
 
     Session session = null;
+    Item item = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
-        Item item = nodeFinder.getItem(workspaceName(repoPath),
+        item = nodeFinder.getItem(workspaceName(repoPath),
                                        LinkUtils.getParentPath(path(normalizePath(repoPath))),
                                        true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
       } catch (PathNotFoundException e) {
-        Item item = nodeFinder.getItem(workspaceName(repoPath),
+        item = nodeFinder.getItem(workspaceName(repoPath),
                                        LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
                                        true);
         repoPath = item.getSession().getWorkspace().getName()
-            + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+            + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
+      }
+      Node node = (Node) session.getItem(path(item.getPath()));
+      if(node.isNodeType(NodetypeConstant.EXO_WEB_FOLDER)) {
+        return Response.status(HTTPStatus.METHOD_NOT_ALLOWED).build();
       }
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -578,7 +584,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
-    try {      
+    try {
       repoPath = convertRepoPath(repoPath, true);
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();

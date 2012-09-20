@@ -174,9 +174,9 @@
 	    if (node.isLocked()) {
         println "<div class=\"IconLocked\"></div>";
 	    }
-	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + URLEncoder.encode(Utils.formatNodeName(treeNode.getPath()), "utf-8") + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
+	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
 	    println "      <div class='NodeLabel'>" ;
-	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' title=\"$treeNodeName $lockedLabel\">$treeNodeName</a>" ;
+	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' title=\"$treeNodeName $lockedLabel\"><span class='NodeName'>$treeNodeName</span></a>" ;
 	    println "      </div>" ; 
 	    println "    </div>" ; 
 	    println "  </div>" ; 

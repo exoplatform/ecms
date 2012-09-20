@@ -23,6 +23,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -63,6 +65,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import com.ibm.icu.text.Transliterator;
 
 /**
  * @author benjaminmestrallet
@@ -468,4 +472,48 @@ public class Utils {
     session.save();
     return serviceLogContentNode;
   }
+
+  public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
+    return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
+  }
+
+  /**
+   * Clean string.
+   *
+   * @param str the str
+   *
+   * @return the string
+   */
+  public static String cleanString(String str) {
+    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+    str = accentsconverter.transliterate(str);
+    //the character ? seems to not be changed to d by the transliterate function
+    StringBuffer cleanedStr = new StringBuffer(str.trim());
+    // delete special character
+    for(int i = 0; i < cleanedStr.length(); i++) {
+      char c = cleanedStr.charAt(i);
+      if(c == ' ') {
+        if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
+          cleanedStr.deleteCharAt(i--);
+        } else {
+          c = '-';
+          cleanedStr.setCharAt(i, c);
+        }
+        continue;
+      }
+      if(i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
+        cleanedStr.deleteCharAt(i--);
+        continue;
+      }
+      if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
+        cleanedStr.deleteCharAt(i--);
+    }
+    String clean = cleanedStr.toString().toLowerCase();
+    if (clean.endsWith("-")) {
+      clean = clean.substring(0, clean.length()-1);
+    }
+
+    return clean;
+  }
+
 }

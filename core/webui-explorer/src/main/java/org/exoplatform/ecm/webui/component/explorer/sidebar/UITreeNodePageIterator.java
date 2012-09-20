@@ -47,15 +47,14 @@ public class UITreeNodePageIterator extends UIPageIterator {
 
   public String getSelectedPath() { return selectedPath_ ; }
   public void setSelectedPath(String path) { this.selectedPath_ = path ; }
-  @SuppressWarnings("unused")
   static  public class ShowPageActionListener extends EventListener<UITreeNodePageIterator> {
     public void execute(Event<UITreeNodePageIterator> event) throws Exception {
       UITreeNodePageIterator uiPageIterator = event.getSource() ;
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
       uiPageIterator.setCurrentPage(page) ;
       if(uiPageIterator.getParent() == null) return ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPageIterator.getParent());
       UIJCRExplorer uiExplorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
       UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.findFirstComponentOfType(UIDocumentWorkspace.class) ;
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChild(UISearchResult.class) ;
       if(uiSearchResult.isRendered()) return ;
@@ -70,15 +69,15 @@ public class UITreeNodePageIterator extends UIPageIterator {
         else
           uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo");
       }
-      
+
       if (uiDocumentInfo == null) return;
-      
+
       String currentPath = uiExplorer.getCurrentNode().getPath();
       if(!currentPath.equalsIgnoreCase(uiPageIterator.getSelectedPath())) return ;
 
       UIPageIterator iterator = uiDocumentInfo.getContentPageIterator();
       iterator.setCurrentPage(page);
-      
+
       if (uiDocumentWorkspace.isRendered() && uiDocumentContainer.isRendered() && uiDocumentInfo.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
       }

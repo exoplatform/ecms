@@ -1080,15 +1080,6 @@
   background: #f3f3f3;
 }
 
-/*=================================UICategoryManager==============================*/
-.UIJCRExplorer .UIRenameForm {
-	padding: 10px;
-}
-
-.UIJCRExplorer .UIRenameForm .FormContainer {
-	width: 500px;
-	margin: auto;
-}
 /*====================================UIActivateVersion==================================*/
 
 .UIJCRExplorer .UIActivateVersion {

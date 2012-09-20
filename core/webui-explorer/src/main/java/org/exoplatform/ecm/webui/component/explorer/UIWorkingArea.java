@@ -30,7 +30,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
@@ -46,14 +48,18 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
@@ -64,7 +70,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * July 3, 2006 10:07:15 AM
  */
 @ComponentConfigs( {
-    @ComponentConfig(template = "app:/groovy/webui/component/explorer/UIWorkingArea.gtmpl"),
+    @ComponentConfig(template = "app:/groovy/webui/component/explorer/UIWorkingArea.gtmpl",
+                     events = {@EventConfig(listeners = UIWorkingArea.RefreshActionListener.class)}),
     @ComponentConfig(
         type = UIRightClickPopupMenu.class,
         id = "ECMContextMenu",
@@ -128,6 +135,10 @@ public class UIWorkingArea extends UIContainer {
   	return this.deleteNotice;
   }
 
+  public static final String               REFRESH_ACTION           = "Refresh";
+
+  public static final String               RENAME_ACTION           = "Rename";
+
   private List<UIAbstractManagerComponent> managers                 =
     Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
@@ -151,7 +162,7 @@ public class UIWorkingArea extends UIContainer {
     UISideBar uiSideBar = getChild(UISideBar.class);
     return uiSideBar.getChild(UITreeExplorer.class);
   }
-  
+
   public void initialize() throws Exception {
     List<UIExtension> extensions = getUIExtensionList();
     if (extensions == null) {
@@ -218,7 +229,7 @@ public class UIWorkingArea extends UIContainer {
     String workspace = repo.getConfiguration().getDefaultWorkspaceName();
     return getNodeByUUID(uuid, workspace);
   }
-  
+
   public Node getNodeByUUID(String uuid, String workspaceName) throws Exception {
     ManageableRepository repo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName, repo);
@@ -408,7 +419,7 @@ public class UIWorkingArea extends UIContainer {
   public String getTitle(Node node) throws Exception {
     return Utils.getTitle(node);
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
     UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
@@ -416,4 +427,27 @@ public class UIWorkingArea extends UIContainer {
     super.processRender(context);
   }
 
+  /**
+   * Refresh UIWorkingArea after renaming.
+   *
+   * @see RefreshActionEvent
+   */
+  public static class RefreshActionListener extends EventListener<UIWorkingArea> {
+    public void execute(Event<UIWorkingArea> event) throws Exception {
+      // Get old and new node path after renaming
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      String pathBeforeRename = event.getRequestContext().getRequestParameter("oldPath");
+      String pathAfterRename =
+          uiExplorer.getSession().getNodeByUUID(event.getRequestContext().getRequestParameter("uuid")).getPath();
+
+      // Update content explorer
+      String currentPath = uiExplorer.getCurrentPath();
+      if (currentPath.equals(pathBeforeRename)) {
+        uiExplorer.setCurrentPath(pathAfterRename) ;
+      } else if(currentPath.startsWith(pathBeforeRename)) {
+        uiExplorer.setCurrentPath(pathAfterRename + currentPath.replace(pathBeforeRename, StringUtils.EMPTY));
+      }
+      uiExplorer.updateAjax(event);
+    }
+  }
 }
