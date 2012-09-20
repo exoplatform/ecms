@@ -37,6 +37,7 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -678,10 +679,16 @@ public class Utils {
     if (orgNode.hasProperty(propertyName)) {
       try {
       	if(propertyName.equals(EXO_TITLE))
-          currentValue =  ContentReader.getXSSCompatibilityContent(
-          		orgNode.getProperty(propertyName).getString());
-      	else currentValue =  orgNode.getProperty(propertyName).getString() ;
-      } catch (Exception e) {
+          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+      	else {
+      	  if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
+      	  //The requested property is multiple-valued, inline editing enable users to edit the first value of property
+      	    currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+      	  }else {
+      	    currentValue =  orgNode.getProperty(propertyName).getString() ;
+      	  }
+      	}
+      }catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
         }
