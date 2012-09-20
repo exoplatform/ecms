@@ -40,7 +40,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 ||Name||*Type*||*Value*||*Description*||
 |*port*| {{Integer}} | {{{${jodconverter.portNumbers}}}} |The number of ports to connect with the office server.|
 |*officeHome*| {{String}}| {{{${jodconverter.officeHome}}}} |The absolute path to the office home on the current local computer.|
-|*taskQueueTimeout* | {{Long}}|{{{${jodconverter.taskExecutionTimeout}}}} |The maximum living time of a task in the conversation queue. |
-|*taskExecutionTimeout*|{{Long}} |{{{${jodconverter.taskExecutionTimeout}}}} ||The maximum time to process a task. |
-|*maxTasksPerProcess* |{{Integer}} |{{{${jodconverter.maxTasksPerProcess}}}} |The maximum number of tasks are processed. |
-|*retryTimeout* |{{Long}} |{{{${jodconverter.retryTimeout}}}} |The interval time to try to restart the office services in case they unexpectedly stop.|
+|*taskQueueTimeout* | {{Long}}| {{{${jodconverter.taskExecutionTimeout}}}} |The maximum living time of a task in the conversation queue. |
+|*taskExecutionTimeout*|{{Long}} | {{{${jodconverter.taskExecutionTimeout}}}} ||The maximum time to process a task. |
+|*maxTasksPerProcess* |{{Integer}} | {{{${jodconverter.maxTasksPerProcess}}}} |The maximum number of tasks are processed. |
+|*retryTimeout* |{{Long}} | {{{${jodconverter.retryTimeout}}}} |The interval time to try to restart the office services in case they unexpectedly stop.|

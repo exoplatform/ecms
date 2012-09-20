@@ -161,16 +161,16 @@ In which:
 ||*Field* || *Type*||*Value* ||*Description*||
 |*nodeTypes*|{{ArrayList}}| {{{ {java.util.ArrayList} }}}| The node type of the template.|
 
-* *Object-type*: {{org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType}}
+* *Object-type*: _org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType_
 ||*Field*||*Type*||*Value* ||*Description*||
 |*nodetypeName*|{{string}}|nt:file |The name of template that is saved as a node in system.|
 |*documentTemplate*|{{boolean}}| {{true}}|Determine if the node type is a document type.|
 |*label*|{{string}}| {{file}}| Visual display of the title for this node.|
-|*referencedView*|{{ArrayList}} |{{{ {java.util.ArrayList} }}} |Determine how to display a view. |
-|*referencedDialog*|{{ArrayList}} |{{{ {java.util.ArrayList} }}}|Determine how to display a dialog to input information. |
-|*referencedSkin*|{{ArrayList}} |{{{ {java.util.ArrayList} }}}|Determine the stylesheet for display. |
+|*referencedView*|{{ArrayList}} | {{{{java.util.ArrayList}}}} |Determine how to display a view. |
+|*referencedDialog*|{{ArrayList}} | {{{{java.util.ArrayList}}}} |Determine how to display a dialog to input information. |
+|*referencedSkin*|{{ArrayList}} | {{{{java.util.ArrayList}}}} |Determine the stylesheet for display. |
 
-* *Object type:* {{org.exoplatform.services.cms.templates.impl.TemplateConfig$Template}}
+* *Object type:* _org.exoplatform.services.cms.templates.impl.TemplateConfig$Template_
 
 ||*Field *||*Type*||*Description*||
 |*templateFile*|{{string}}|The location of the file store for the template's presentation.|
