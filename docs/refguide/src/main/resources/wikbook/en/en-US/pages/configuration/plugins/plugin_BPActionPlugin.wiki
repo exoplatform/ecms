@@ -147,6 +147,6 @@ In which:
 
 * *Object type*: {{org.exoplatform.services.cms.actions.impl.ActionConfig}}
 ||*Field*||*Type*||*Value*||*Description*||
-|*repository*| {{string}}| {{repository}}|The repository name. |
-|*workspace*| {{string}}| {{collaboration}}|The workspace name. |
-|*action*| {{ArrayList}}|_{{{{java.util.ArrayList}}}}_ |The action name. |
+|*repository*| {{string}} | {{repository}}|The repository name. |
+|*workspace*| {{string}} | {{collaboration}}|The workspace name. |
+|*action*| {{ArrayList}} | _{{{{java.util.ArrayList}}}}_ | The action name. |
