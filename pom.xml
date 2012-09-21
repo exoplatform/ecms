@@ -102,6 +102,8 @@
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
     <org.imgscalr.version>4.2</org.imgscalr.version>
     <org.exoplatform.doc.doc-style.version>1.0.8-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+        <!-- Wikbook -->
+    <wikbook.version>0.9.41</wikbook.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
