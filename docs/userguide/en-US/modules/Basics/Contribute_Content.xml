@@ -1294,7 +1294,8 @@ This function allows contributor to edit content, quickly access content list fo
             The publication process consists of 4 steps:
         </para>
         <para>
-            <emphasis role="bold">Request for Approval --> Approval --> Stage --> Publish</emphasis>
+            <menuchoice><guimenu>Request for Approval</guimenu><guisubmenu>Approval</guisubmenu><guisubmenu>Stage</guisubmenu>
+            <guimenuitem>Publish</guimenuitem></menuchoice>.
         </para>
         <para>
             In case you want to publish your content without having the "Approve" or "Publish" right, you first need to
