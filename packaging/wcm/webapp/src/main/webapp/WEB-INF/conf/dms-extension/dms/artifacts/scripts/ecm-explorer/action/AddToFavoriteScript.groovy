@@ -18,7 +18,6 @@
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.Session;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -30,6 +29,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.IdentityConstants;
 /**
  * Created by The eXo Platform SAS
  * Author : dongpd@exoplatform.com
@@ -62,17 +62,15 @@ public class AddToFavoriteScript implements CmsScript {
     Map variables = (Map) context;
     String nodePath = (String) variables.get("nodePath");
     String workspace = (String) variables.get("srcWorkspace");
-    Session session = null;
     try {
       // Get new added node
-      session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService_.getCurrentRepository());
-      Node addedNode = (Node) session.getItem(nodePath);
-      if (ConversationState.getCurrent() == null || 
-          ConversationState.getCurrent().getIdentity() == null || 
-          ConversationState.getCurrent().getIdentity().getUserId() == null) {
+      Node addedNode = (Node) WCMCoreUtils.getSystemSessionProvider().
+          getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
+      if (ConversationState.getCurrent() == null) { 
         return;
       }
       String userID = ConversationState.getCurrent().getIdentity().getUserId();
+      if(userID.equals(IdentityConstants.ANONIM) || userID.equals(IdentityConstants.SYSTEM)) return;
       Node userNode = nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
       Node favoriteNode = userNode.getNode(favoritePath);
