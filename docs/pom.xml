@@ -10,15 +10,9 @@
   <artifactId>exo-ecms-docs</artifactId>
   <packaging>pom</packaging>
 
-  <name>ECMS documentation</name>
+  <name>ECMS Documentation</name>
 
-  <properties>
-    <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
-    <wikbook.resources>${project.basedir}/src/main/resources</wikbook.resources>
-    <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.35</wikbook.version>
-  </properties>
-  
+
    <modules>
      <module>refguide</module>
    </modules>
