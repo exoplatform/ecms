@@ -36,18 +36,30 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public static final String FULL_TOOLBAR = "Full";
 
   public static final String BASIC_TOOLBAR = "Basic";
+  
+  public static final String ENTER_P = "1";
+  public static final String ENTER_BR = "2";
+  public static final String ENTER_DIV = "3";
 
   private String width;
 
   private String height;
 
   private String toolbar;
+  
+  private String enterMode;
 
   public UIFormRichtextInput(String name, String bindingField, String value) {
     super(name, bindingField, String.class);
     this.value_ = value;
  }
 
+  public UIFormRichtextInput(String name, String bindingField, String value, String enterMode) {
+    super(name, bindingField, String.class);
+    this.value_ = value;
+    this.enterMode = enterMode;
+ }
+  
   public String getWidth() {
     return width;
   }
@@ -67,9 +79,17 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public String getToolbar() {
     return toolbar;
   }
+  
+  public String getEnterMode() {
+  	return enterMode;
+  }
 
   public void setToolbar(String toolbar) {
     this.toolbar = toolbar;
+  }
+  
+  public void setEnterMode(String enterMode) {
+  	this.enterMode = enterMode;
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -77,6 +97,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     if (toolbar == null) toolbar = BASIC_TOOLBAR;
     if (width == null) width = "'100%'";
     if (height == null) height = "200";
+    if (enterMode == null) enterMode = "1";
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
@@ -108,7 +129,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:"
-        + height + ", contentsCss:" + contentsCss + "});\n");
+    		+ height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + ", shiftEnterMode:" + enterMode + "});\n");
     buffer.append("       });");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
