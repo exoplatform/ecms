@@ -310,7 +310,6 @@
 .UIPresentationContainer .Title {
     font-size: 24px;
     width:100%;
-    line-height: 20px;    
     padding: 2px 0 0;
     overflow: hidden;
 }
@@ -318,7 +317,6 @@
     background: #fffacd;
     font-size: 24px;
     width:100%;
-    line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
 }
