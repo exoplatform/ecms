@@ -222,7 +222,7 @@ public class InlineEditingService implements ResourceContainer{
                   node.addMixin(EXO_RSS_ENABLE);
               }
               if (!propertyName.contains("/")) {
-                if (node.getProperty(propertyName).getDefinition().isMultiple()) {
+                if (node.hasProperty(propertyName) && node.getProperty(propertyName).getDefinition().isMultiple()) {
                   Value[] currentValue = node.getProperty(propertyName).getValues();
                   if (currentValue==null) currentValue = new Value[1];
                   currentValue[0] = session.getValueFactory().createValue(newValue);
@@ -235,7 +235,7 @@ public class InlineEditingService implements ResourceContainer{
                 String subnodePath = propertyName.substring(0, iSlash);
                 String subnodeProperty = propertyName.substring(iSlash+1);
                 Node subnode = node.getNode(subnodePath);
-                if (subnode.getProperty(subnodeProperty).getDefinition().isMultiple()) {
+                if (subnode.hasProperty(subnodeProperty) && subnode.getProperty(subnodeProperty).getDefinition().isMultiple()) {
                   Value[] currentValue = subnode.getProperty(subnodeProperty).getValues();
                   if (currentValue==null) currentValue = new Value[1];
                   currentValue[0] = session.getValueFactory().createValue(newValue);
