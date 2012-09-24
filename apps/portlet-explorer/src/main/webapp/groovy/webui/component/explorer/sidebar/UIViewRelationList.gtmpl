@@ -1,5 +1,6 @@
 <%
   import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
   def rcontext = _ctx.getRequestContext();
 %>
 <div class="SideBarContent">
@@ -33,7 +34,8 @@
             } else {
              relTitle = rel.getName(); 
             }            
-            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
+            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
+            relName = ContentReader.getXSSCompatibilityContent(relName);
         %>
             <div> - <a href="$actionLink">$relLang ($relName)</a></div>
         <% 
@@ -72,7 +74,8 @@
        } else {
         relTitle = rel.getName(); 
        }       
-            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
+            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
+            relName = ContentReader.getXSSCompatibilityContent(relName);
 				%>
 				 	  <div> - <a href="$actionLink">$relName</a></div>
 				<% 
@@ -111,7 +114,8 @@
        } else {
         relTitle = rel.getName();
        }
-            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
+            if (relTitle!=null && !"".equals(relTitle)) relName = relTitle;
+            relName = ContentReader.getXSSCompatibilityContent(relName);
 				%>
 				 	  <div> - <a href="$actionLink">$relName</a></div>
 				<% 

@@ -10,7 +10,7 @@
 <% 
 	import org.exoplatform.ecm.webui.utils.Utils;
 	import java.net.URLEncoder;
-	import org.exoplatform.services.jcr.util.Text;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
 %>
 <div id="$uicomponent.id" class="UITreeList">
   <table class="UIGrid">
@@ -40,9 +40,8 @@
 				      <tr class="$rowClass">
 				        <td>
 				        <%
-				          String nodeName = Text.unescapeIllegalJcrChars(Utils.getIndexName(node));
-				          
-								  				String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
+                  String nodeName = ContentReader.getXSSCompatibilityContent(Utils.getIndexName(node));          
+                  String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
 				          def clazz = "Text"
 						  						
 				          if(Utils.isSymLink(node)) clazz = "TextSymLink";
