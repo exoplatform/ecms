@@ -1229,7 +1229,7 @@ public class UIDialogForm extends UIForm {
           uiInput.setValue(i18nNodePath.substring(i18nNodePath.lastIndexOf("/") + 1));
         } else {
           String nameValue =  node.getPath().substring(node.getPath().lastIndexOf("/") + 1);
-          uiInput.setValue(Text.unescapeIllegalJcrChars(nameValue));
+          uiInput.setValue(nameValue);
         }
       } else if(node.hasProperty(propertyName)) {
         uiInput.setValue(node.getProperty(propertyName).getValue().getString());
