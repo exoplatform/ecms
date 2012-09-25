@@ -895,10 +895,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public void updatePageListData() throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 
-    int nodesPerPage = uiExplorer.getPreference().getNodesPerPage();
+    Preference pref = uiExplorer.getPreference();
+    int nodesPerPage = pref.getNodesPerPage();
     List<Node> nodeList = new ArrayList<Node>();
 
-    Preference pref = uiExplorer.getPreference();
     String currentPath = uiExplorer.getCurrentPath();
     if(!uiExplorer.isViewTag()) {
       Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
