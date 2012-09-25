@@ -1551,8 +1551,6 @@
     <header>
       <usersOrGroups>Benutzer oder eine Gruppe</usersOrGroups>
       <read>Lesen</read>
-      <addNode>Knoten Hinzufügen</addNode>
-      <setProperty>Festlegen Eigentum</setProperty>
       <remove>Entfernen</remove>
       <action>Aktion</action>
     </header>
@@ -1596,8 +1594,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Benutzer oder eine Gruppe</userOrGroup>
       <read>Lesen Sie Rechts</read>
-      <add_node>Knoten Hinzufügen Rechts</add_node>
-      <set_property>Festlegen Eigentum Rechts</set_property>
       <remove>Entfernen Rechts</remove>
     </label>
     <title>Fügen Sie eine Erlaubnis, dass die Knoten</title>
@@ -2495,5 +2491,15 @@
       <can-not-unlock-node><![CDATA[Sie haben keine Genegmigung diesen Knoten aufzusperren. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>
 

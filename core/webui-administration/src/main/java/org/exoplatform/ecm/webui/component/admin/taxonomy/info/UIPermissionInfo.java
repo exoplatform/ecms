@@ -73,8 +73,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIPermissionInfo extends UIContainer {
 
-  public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode",
-    "setProperty", "remove"} ;
+  public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode", "remove"} ;
   private static String[] PERMISSION_ACTION = {"Edit", "Delete"} ;
 
   private NodeLocation currentNode = null;
@@ -120,7 +119,6 @@ public class UIPermissionInfo extends UIContainer {
       permOwnerBean.setUsersOrGroups(owner);
       permOwnerBean.setRead(true) ;
       permOwnerBean.setAddNode(true) ;
-      permOwnerBean.setSetProperty(true) ;
       permOwnerBean.setRemove(true) ;
       permBeans.add(permOwnerBean);
     }
@@ -132,7 +130,6 @@ public class UIPermissionInfo extends UIContainer {
       for(String perm : permissions) {
         if(PermissionType.READ.equals(perm)) permBean.setRead(true);
         else if(PermissionType.ADD_NODE.equals(perm)) permBean.setAddNode(true);
-        else if(PermissionType.SET_PROPERTY.equals(perm)) permBean.setSetProperty(true);
         else if(PermissionType.REMOVE.equals(perm)) permBean.setRemove(true);
       }
       permBeans.add(permBean);
@@ -233,7 +230,6 @@ public class UIPermissionInfo extends UIContainer {
     private String usersOrGroups ;
     private boolean read ;
     private boolean addNode ;
-    private boolean setProperty ;
     private boolean remove ;
 
     public String getUsersOrGroups() { return usersOrGroups ; }
@@ -248,8 +244,6 @@ public class UIPermissionInfo extends UIContainer {
     public boolean isRemove() { return remove ; }
     public void setRemove(boolean b) { remove = b ; }
 
-    public boolean isSetProperty() { return setProperty ; }
-    public void setSetProperty(boolean b) { setProperty = b ; }
   }
 
   public Node getCurrentNode() {

@@ -1557,8 +1557,6 @@
     <header>
       <usersOrGroups>Uilisateur ou Groupe</usersOrGroups>
       <read>Lecture</read>
-      <addNode>Ajout de noeud</addNode>
-      <setProperty>MAJ des propriétés</setProperty>
       <remove>Suppression</remove>
       <action>Action</action>
     </header>
@@ -1603,8 +1601,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Utilisateur ou Groupe</userOrGroup>
       <read>Droit de lecture</read>
-      <add_node>Droit d'ajout de noeud</add_node>
-      <set_property>Droit de MAJ des propriétés</set_property>
       <remove>Droit de suppression</remove>
     </label>
     <title>Ajouter une permission à ce noeud</title>
@@ -2490,5 +2486,15 @@
       <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modifier</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Droit d'édition</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>
 

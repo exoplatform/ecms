@@ -728,8 +728,6 @@
     <header>
       <usersOrGroups>Benutzer oder Gruppe</usersOrGroups>
       <read>Lesen</read>
-      <addNode><![CDATA[Knoten hinzuf&uuml;gen]]></addNode>
-      <setProperty>Eigenschaft einstellen</setProperty>
       <remove>Entfernen</remove>
       <action>Aktion</action>
     </header>
@@ -774,8 +772,6 @@
       <permission>UIGenehmigungsForm</permission>
       <userOrGroup>Benutzer oder Gruppe</userOrGroup>
       <read>Recht lesen</read>
-      <add_node><![CDATA[Knotenrecht hinzuf&uuml;gen]]></add_node>
-      <set_property>Eigenschaftsrecht einstellen</set_property>
       <remove>Recht entfernen</remove>
     </label>
     <title><![CDATA[Eine Genehmigung zum Knoten hinzuf&uuml;gen]]></title>
@@ -3443,4 +3439,14 @@
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify Right</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>

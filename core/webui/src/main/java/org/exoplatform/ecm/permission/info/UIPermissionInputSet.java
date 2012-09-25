@@ -44,7 +44,7 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
     userGroup.addValidator(MandatoryValidator.class);
     userGroup.setReadOnly(true);
     addUIFormInput(userGroup);
-    for (String perm : PermissionType.ALL) {
+    for (String perm : new String[] { PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE }) {
       UICheckBoxInput checkBoxInput = new UICheckBoxInput(perm, perm, false);
       addUIFormInput(checkBoxInput);
       checkBoxInput.setOnChange("OnChange");
@@ -57,9 +57,8 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
       UIForm permissionForm = event.getSource();
       UICheckBoxInput readCheckBox = permissionForm.getUICheckBoxInput(PermissionType.READ);
       boolean isAddNodeCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked();
-      boolean isSetPropertyCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked();
       boolean isRemoveCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked();
-      if (isAddNodeCheckBoxChecked || isSetPropertyCheckBoxChecked || isRemoveCheckBoxChecked) {
+      if (isAddNodeCheckBoxChecked || isRemoveCheckBoxChecked) {
         readCheckBox.setChecked(true);
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(permissionForm);

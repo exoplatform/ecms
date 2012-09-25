@@ -1554,8 +1554,6 @@
     <header>
       <usersOrGroups>Gebruiker of Groep</usersOrGroups>
       <read>Lezen</read>
-      <addNode>Toevoegen Knoop</addNode>
-      <setProperty>Stel Eigendom</setProperty>
       <remove>Verwijderen</remove>
       <action>Actie</action>
     </header>
@@ -1600,8 +1598,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Gebruiker of Groep</userOrGroup>
       <read>Lees Recht</read>
-      <add_node>Voeg Knoop Recht</add_node>
-      <set_property>Ingesteld Eigendomsrecht</set_property>
       <remove>Verwijderen Recht</remove>
     </label>
     <title>Voeg een toestemming voor dat knooppunt</title>
@@ -2425,5 +2421,15 @@
 				contacteer uw beheerder</can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>
 

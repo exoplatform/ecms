@@ -1551,8 +1551,6 @@
     <header>
       <usersOrGroups>مستخدم او مجموعة</usersOrGroups>
       <read>القراءة</read>
-      <addNode>إضافة عقدة</addNode>
-      <setProperty>إضافة صفة</setProperty>
       <remove>حذف الصلاحية</remove>
       <action>عمل</action>
     </header>
@@ -1596,8 +1594,6 @@
       <permission>إذن نموذج واجهة المستخدم</permission>
       <userOrGroup>مستخدم او مجموعة</userOrGroup>
       <read> صلاحية القراءة</read>
-      <add_node> صلاحية إضافة عقدة</add_node>
-      <set_property> صلاحية إضافة صفة </set_property>
       <remove> صلاحية الحذف</remove>
     </label>
     <title>إضافة صلاحية للعقدة</title>
@@ -2406,5 +2402,15 @@
       <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
     </msg>
   </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>
   

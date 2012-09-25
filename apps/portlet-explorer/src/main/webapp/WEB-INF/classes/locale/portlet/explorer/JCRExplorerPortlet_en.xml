@@ -778,8 +778,7 @@
     <header>
       <usersOrGroups>User Or Group</usersOrGroups>
       <read>Read</read>
-      <addNode>Add Node</addNode>
-      <setProperty>Set Property</setProperty>
+      <addNode>Modify</addNode>
       <remove>Remove</remove>
       <action>Action</action>
     </header>
@@ -824,8 +823,7 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
+      <add_node>Modify Right</add_node>
       <remove>Remove Right</remove>
     </label>
     <title>Add a permission to that node</title>

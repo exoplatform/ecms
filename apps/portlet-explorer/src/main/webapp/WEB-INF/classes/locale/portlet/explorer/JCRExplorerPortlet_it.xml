@@ -771,8 +771,6 @@
     <header>
       <usersOrGroups>Utente O Gruppo</usersOrGroups>
       <read>Leggi</read>
-      <addNode>Aggiungi Nodo</addNode>
-      <setProperty>Imposta ProprietÃ </setProperty>
       <remove>Rimuovi</remove>
       <action>Azione</action>
     </header>
@@ -817,8 +815,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Utente O Gruppo</userOrGroup>
       <read>Diritti Lettura</read>
-      <add_node>Diritti Aggiunta Nodo</add_node>
-      <set_property>Diritti Impostazione ProprietÃ </set_property>
       <remove>Diritti Rimozione</remove>
     </label>
     <title>Aggiungi un permesso al nodo</title>
@@ -3403,4 +3399,14 @@
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify Right</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>

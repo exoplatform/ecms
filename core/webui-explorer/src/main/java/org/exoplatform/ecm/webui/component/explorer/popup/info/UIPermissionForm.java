@@ -74,6 +74,8 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   final static public String PERMISSION   = "permission";
   final static public String POPUP_SELECT = "SelectUserOrGroup";
   final static public String SYMLINK = "exo:symlink";
+  
+  private static final String[] PERMISSION_TYPES = {PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE}; 
 
   private NodeLocation               currentNode;
   private static final Log LOG  = ExoLogger.getLogger(UIPermissionForm.class.getName());
@@ -90,7 +92,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
 
   private void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
-    for (String perm : PermissionType.ALL) {
+    for (String perm : PERMISSION_TYPES) {
       uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
   }
@@ -103,7 +105,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
     refresh();
     uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(user);
     if(user.equals(Utils.getNodeOwner(node))) {
-      for (String perm : PermissionType.ALL) {
+      for (String perm : PERMISSION_TYPES) {
         uiInputSet.getUICheckBoxInput(perm).setChecked(true);
       }
     } else {
@@ -116,7 +118,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
         }
       }
-      for (String perm : PermissionType.ALL) {
+      for (String perm : PERMISSION_TYPES) {
         boolean isCheck = userPermission.toString().contains(perm);
         uiInputSet.getUICheckBoxInput(perm).setChecked(isCheck);
       }
@@ -132,7 +134,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       setActions(new String[] { "Save", "Reset", "Close" });
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
     }
-    for (String perm : PermissionType.ALL) {
+    for (String perm : PERMISSION_TYPES) {
       uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
     }
   }
@@ -183,19 +185,25 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         return;
       }
       for (String perm : PermissionType.ALL) {
-        if (uiForm.getUICheckBoxInput(perm).isChecked()) permsList.add(perm);
+        if (uiForm.getUICheckBoxInput(perm) != null &&
+            uiForm.getUICheckBoxInput(perm).isChecked()) permsList.add(perm);
         else {
           permsRemoveList.add(perm);
         }
       }
-      if (uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked() ||
-          uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked() ||
-          uiForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked())
-      {
-        if(!permsList.contains(PermissionType.READ))
-          permsList.add(PermissionType.READ);
+      //check both ADD_NODE and SET_PROPERTY
+      if (uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked()) {
+        if(!permsList.contains(PermissionType.SET_PROPERTY))
+          permsList.add(PermissionType.SET_PROPERTY);
       }
 
+      //uncheck both ADD_NODE and SET_PROPERTY
+      if (!uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked()) {
+        if(!permsRemoveList.contains(PermissionType.SET_PROPERTY))
+          permsRemoveList.add(PermissionType.SET_PROPERTY);
+      }
+
+      //------------------
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));

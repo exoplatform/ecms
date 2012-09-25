@@ -1551,8 +1551,6 @@
     <header>
       <usersOrGroups>ユーザorグループ</usersOrGroups>
       <read>読み込み</read>
-      <addNode>ノードの追加</addNode>
-      <setProperty>プロパティの設定</setProperty>
       <remove>削除</remove>
       <action>アクション</action>
     </header>
@@ -1597,8 +1595,6 @@
       <permission>UI権限フォーム</permission>
       <userOrGroup>ユーザorグループ</userOrGroup>
       <read>読み込み権限</read>
-      <add_node>ノード権限の追加</add_node>
-      <set_property>プロパティ権限の設定</set_property>
       <remove>削除権限</remove>
     </label>
     <title>ノードへ権限の追加</title>
@@ -2473,5 +2469,15 @@
       <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>
 

@@ -723,8 +723,6 @@
     <header>
       <usersOrGroups>مستخدم أو مجموعة</usersOrGroups>
       <read>قراءة</read>
-      <addNode>إضافة عقدة</addNode>
-      <setProperty>إدخال محتوى صفة</setProperty>
       <remove>حذف</remove>
       <action>عمل</action>
     </header>
@@ -769,8 +767,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>مستخدم أو مجموعة</userOrGroup>
       <read>صلاحية للقراءة</read>
-      <add_node>صلاحية لإضافة عقد</add_node>
-      <set_property>صلاحية لإدخال محتوى الصفات</set_property>
       <remove>صلاحية للحذف</remove>
     </label>
     <title>إضافة صلاحية إلى هذه العقدة</title>
@@ -2981,4 +2977,14 @@
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify Right</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>

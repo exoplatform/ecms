@@ -1549,8 +1549,6 @@
     <header>
       <usersOrGroups>Người dùng hoặc nhóm người dùng</usersOrGroups>
       <read>Đọc</read>
-      <addNode>Thêm nút</addNode>
-      <setProperty>Thiết lập thuộc tính</setProperty>
       <remove>Loại bỏ</remove>
       <action>Hành động</action>
     </header>
@@ -1595,8 +1593,6 @@
       <permission>Xem quyền</permission>
       <userOrGroup>Người dùng hay nhóm</userOrGroup>
       <read>Quyền đọc</read>
-      <add_node>Thêm nút</add_node>
-      <set_property>Thiết lập thuộc tính</set_property>
       <remove>Quyền xóa</remove>
     </label>
     <title>Thêm quyền cho nút</title>
@@ -2494,5 +2490,14 @@
       <can-not-unlock-node>Bạn không có quyền mở khóa node này.Vui lòng liên hệ với quản trị hệ thống để được xét quyền</can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Sửa</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Sửa</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>
-

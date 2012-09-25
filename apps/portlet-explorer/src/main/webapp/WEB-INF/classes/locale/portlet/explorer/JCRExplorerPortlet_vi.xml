@@ -784,8 +784,6 @@
     <header>
       <usersOrGroups>Người dùng hoặc nhóm</usersOrGroups>
       <read>Đọc</read>
-      <addNode>Thêm node</addNode>
-      <setProperty>Thiết lập thuộc tính</setProperty>
       <remove>Xóa bỏ</remove>
       <action>Thao tác</action>
     </header>
@@ -830,8 +828,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Người dùng hoặc nhóm người dùng</userOrGroup>
       <read>Quyền đọc</read>
-      <add_node>Quyền thêm node</add_node>
-      <set_property>Quyền thiết lập thuộc tính</set_property>
       <remove>Quyền xóa bỏ</remove>
     </label>
     <title>Thêm quyền cho node ?</title>
@@ -3464,4 +3460,14 @@
       <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Sửa</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Quyền sửa</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>

@@ -774,8 +774,6 @@
     <header>
       <usersOrGroups>Utilisateurs ou groupes</usersOrGroups>
       <read>Lire</read>
-      <addNode>Ajouter un noeud</addNode>
-      <setProperty>Définir une propriété</setProperty>
       <remove>Supprimer</remove>
       <action>Action</action>
     </header>
@@ -820,8 +818,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>utilisateur ou Groupe</userOrGroup>
       <read>Lecture</read>
-      <add_node>Ajout d'un noeud</add_node>
-      <set_property>Ajout d'une propriété</set_property>
       <remove>Supprimer</remove>
     </label>
     <title>Ajouter une permission sur ce noeud</title>
@@ -3465,4 +3461,14 @@
       <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modifier</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Droit d'édition</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>

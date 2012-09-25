@@ -845,8 +845,6 @@
 		<header>
 			<usersOrGroups>Gebruiker of Groep</usersOrGroups>
 			<read>Lezen</read>
-			<addNode>Node toevoegen</addNode>
-			<setProperty>Set Eigenschap</setProperty>
 			<remove>Verwijderen</remove>
 			<action>Actie</action>
 		</header>
@@ -896,8 +894,6 @@
 			<permission>UIPermissionForm</permission>
 			<userOrGroup>Gebruiker of Groep</userOrGroup>
 			<read>Lezen Right</read>
-			<add_node>Node right toevoegen</add_node>
-			<set_property>eigenschap Right wijzigen</set_property>
 			<remove>Right verwijderen</remove>
 		</label>
 		<title>Rechten toevoegen aan node</title>
@@ -3357,4 +3353,14 @@
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify Right</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>

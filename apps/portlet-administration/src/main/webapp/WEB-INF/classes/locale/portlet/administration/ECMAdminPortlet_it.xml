@@ -1549,8 +1549,6 @@
     <header>
       <usersOrGroups>Utente O Gruppo</usersOrGroups>
       <read>Leggi</read>
-      <addNode>Aggiungi Nodo</addNode>
-      <setProperty>Imposta proprietà</setProperty>
       <remove>Rimuovi</remove>
       <action>Azione</action>
     </header>
@@ -1595,8 +1593,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Utente O Gruppo</userOrGroup>
       <read>Leggi</read>
-      <add_node>Aggiungi Nodo</add_node>
-      <set_property>Imposta Proprietà</set_property>
       <remove>Rimuovi</remove>
     </label>
     <title>Aggiungi permesso al nodo</title>
@@ -2475,4 +2471,14 @@
       <can-not-unlock-node>Non hai i permessi di sbloccare questo nodo. Contatta l'amministratore per avere i diritti corretti.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify</add_node>
+    </label>
+  </UIPermissionForm>
 </bundle>

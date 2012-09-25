@@ -765,8 +765,6 @@
     <header>
       <usersOrGroups>ユーザorグループ</usersOrGroups>
       <read>読み込み</read>
-      <addNode>ノードの追加</addNode>
-      <setProperty>プロパティの設定</setProperty>
       <remove>削除</remove>
       <action>アクション</action>
     </header>
@@ -786,7 +784,7 @@
   </permission>
   <!--
   #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #             org.exoplatform.ecm.webui.component.explorer.` #
   #############################################################################
   -->
   <SelectUserOrGroup>
@@ -811,8 +809,6 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>ユーザorグループ</userOrGroup>
       <read>読み込み権限</read>
-      <add_node>ノード権限の追加</add_node>
-      <set_property>プロパティ権限の設定</set_property>
       <remove>権限の削除</remove>
     </label>
     <title>このノードへ権限を追加</title>
@@ -3400,5 +3396,15 @@
       <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
     </msg>
   </UIActionForm>
+  <UIPermissionInfo>
+    <header>
+      <addNode>Modify</addNode>
+    </header>
+  </UIPermissionInfo>
+  <UIPermissionForm>
+    <label>
+      <add_node>Modify Right</add_node>
+    </label>
+  </UIPermissionForm>  
 </bundle>
 
