@@ -193,7 +193,7 @@
   <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.Configuration.Plugins.BaseAction_CreatePortal_Publication_RemovePortal_Plugins">BaseActionPlugin/CreatePortalPlugin/PublicationPlugin/RemovePortalPlugin</link>
+            <link linkend="CONTref.Configuration.Plugins.BaseAction_CreatePortal_Publication_RemovePortal">BaseActionPlugin/CreatePortalPlugin/PublicationPlugin/RemovePortalPlugin</link>
           </emphasis> 
 		</para>
           <para>Create a link from the plugin to its children.</para>
@@ -214,4 +214,4 @@ Each part supplies an example configuration with the explanation about ini-param
 {docbook}
 
 * [Components|#CONTref.Configuration.Components]
-* [CMIS configuration|#DCONTref.CMIS.Configuration]
+* [CMIS configuration|#CONTref.CMIS.Configuration]
