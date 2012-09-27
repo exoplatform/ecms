@@ -22,7 +22,7 @@
 	   <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.Applications">CMIS</link></emphasis>
+            <link linkend="CONTref.CMIS">CMIS</link></emphasis>
 		</para>
 		<para>
           Overview of CMIS, necessary information about CMIS specification and xCMIS project, details of important CMIS features and Service JARs.
