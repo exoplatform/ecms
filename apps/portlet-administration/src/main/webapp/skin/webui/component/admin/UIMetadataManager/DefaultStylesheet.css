@@ -12,24 +12,25 @@
 	padding: 0px 10px;
 }
 
-.UIECMAdminPortlet .MetadataInfo .GridTitleBar {
+.UIECMAdminPortlet .GridTitleBar {
   width: 220px;
-  padding-top: 10px ;
+  padding-top: 10px;
+  font-weight: bold;
 }
 
-.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleLeftBar  {
+.UIECMAdminPortlet .GridTitleBar .GridTitleLeftBar  {
   padding-left: 5px;
   line-height: 21px;
   background: url('DefaultSkin/background/InfoBar.gif') no-repeat left top;
 }
 
-.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleRightBar {
+.UIECMAdminPortlet .GridTitleBar .GridTitleRightBar {
   padding-right: 21px;
   line-height: 21px;
   background: url('DefaultSkin/background/InfoBar.gif') no-repeat right -21px;
 }
 
-.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleMiddleBar {
+.UIECMAdminPortlet .GridTitleBar .GridTitleMiddleBar {
   line-height: 21px;
   vertical-align: middle;
   background: url('DefaultSkin/background/InfoBar.gif') repeat-x left -42px;

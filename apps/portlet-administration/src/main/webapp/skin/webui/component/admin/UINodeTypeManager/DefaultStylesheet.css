@@ -74,7 +74,8 @@
 
 
 .UINodeTypeManager .UINodeTypeList .IconNodeType{
-	float: left; /* orientation=lt */
+	float: center; /* orientation=lt */
+	padding-left: 0px; /* orientation=lt */
 	float: right; /* orientation=rt */
 	padding-left: 20px; /* orientation=rt */
 }

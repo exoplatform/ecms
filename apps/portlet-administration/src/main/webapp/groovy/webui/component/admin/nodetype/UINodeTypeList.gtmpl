@@ -57,7 +57,7 @@
             </td>
             <td><div class="Text"><%=node.getName()%></div></td>
             <% if (!(node instanceof Node)) { %>
-              <td>
+              <td align="center">
                 <%
                   String booleanText ;
                   String iconType ;
@@ -70,11 +70,10 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span></span></div>
-	                <div class="Text">$booleanText</div>
+	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType" title="$booleanText"><span></span></div>
 	              </div>
               </td>
-              <td>
+              <td align="center">
                 <%
                   if(node.hasOrderableChildNodes()) {
                     booleanText = _ctx.appRes("UIMetadataList.label.true") ;
@@ -85,8 +84,7 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType" ><span></span></div>
-	                <div class="Text">$booleanText</div>
+	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType" title="$booleanText"><span></span></div>
 	              </div>
               </td>
               <td align="center"><div class="Text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
