@@ -127,4 +127,4 @@ This section describes services which provide low-level functionality for UI com
 {docbook}
 
 * [External Component Plugins|#CONTref.Configuration.Plugins]
-* [CMIS configuration|#DCONTref.CMIS.Configuration]
+* [CMIS configuration|#CONTref.CMIS.Configuration]
