@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,6 +37,7 @@ import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -44,8 +46,8 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.DynamicIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -96,6 +98,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   private DMSConfiguration dmsConfiguration_;
 
   private static final String NODETYPE_LIST = "nodeTypeList";
+  private static final String EDITED_CONFIGURED_NODE_TYPES = "EditedConfiguredNodeTypes";
 
   private ExoCache nodeTypeListCached ;
 
@@ -135,6 +138,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         plugin.init();
         configuredNodeTypes.addAll(plugin.getAllConfiguredNodeTypes());
       }
+
       // Cached all nodetypes that is document type in the map
       getDocumentTemplates();
     } catch (Exception e) {
@@ -337,7 +341,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     if(IdentityConstants.ANONIM.equals(userName) || DynamicIdentity.DYNAMIC.equals(userName) || userName == null) {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
-    Node templateHomeNode = 
+    Node templateHomeNode =
       (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     String type = DIALOGS;
     if (!isDialog)
@@ -377,7 +381,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       Node nodeType = templateHome.getNode(nodeTypeName);
       if (nodeType.hasProperty("label")) {
         return nodeType.getProperty("label").getString();
-      }  
+      }
     } finally {
       provider.close();
     }
@@ -403,13 +407,16 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     Node contentNode = specifiedTemplatesHome.getNode(templateName);
     contentNode.remove();
     nodeTypeHome.save();
+
+    // Update list of changed template node type list
+    addEditedConfiguredNodeType(nodeTypeName);
   }
 
   /**
    * {@inheritDoc}
    */
   public void removeManagedNodeType(String nodeTypeName) throws Exception {
-    Node templatesHome = 
+    Node templatesHome =
       (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node managedNodeType = templatesHome.getNode(nodeTypeName);
     managedNodeType.remove();
@@ -418,6 +425,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     managedDocumentTypes.remove(nodeTypeName);
     removeTemplateNodeTypeList();
+
+    // Add to edited predefined template node type list
+    addEditedConfiguredNodeType(nodeTypeName);
   }
 
   /**
@@ -439,7 +449,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
-    Node homeNode = 
+    Node homeNode =
       (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
@@ -477,7 +487,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     List<String> contentTypes = new ArrayList<String>();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
-      Node templatesHome = 
+      Node templatesHome =
         (Node) getSession(sessionProvider).getItem(cmsTemplatesBasePath_);
       for (NodeIterator templateIter = templatesHome.getNodes(); templateIter.hasNext();) {
         Node template = templateIter.nextNode();
@@ -495,7 +505,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String getSkinPath(String nodeTypeName, String skinName, String locale) throws Exception {
-    Node homeNode = 
+    Node homeNode =
       (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     Orientation orientation = getOrientation(locale);
@@ -756,7 +766,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     } catch(PathNotFoundException e) {
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
           isDocumentTemplate, templateName, roles, templateFile);
-    } 
+    }
     //Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
@@ -809,7 +819,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       if (LOG.isErrorEnabled()) {
         LOG.error("An error has been occurred when adding template", e);
       }
-    } 
+    }
     return null;
   }
 
@@ -823,12 +833,15 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.getSession().save();
+
+      // Add to edited predefined node type list
+      addEditedConfiguredNodeType(template.getParent().getParent().getName());
       return template.getPath();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An error has been occurred when updating template", e);
       }
-    } 
+    }
     return null;
   }
 
@@ -893,5 +906,27 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   @Override
   public Set<String> getAllConfiguredNodeTypes() {
     return configuredNodeTypes;
+  }
+
+  @Override
+  public Set<String> getAllEditedConfiguredNodeTypes() throws Exception {
+    HashSet<String> editedConfigNodetypes = new HashSet<String>();
+    Node serviceLogContentNode= Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      editedConfigNodetypes.addAll(Arrays.asList(logData.split(";")));
+    }
+    return editedConfigNodetypes;
+  }
+
+  private void addEditedConfiguredNodeType(String nodeType) throws Exception {
+    Node serviceLogContentNode = Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isEmpty(logData)) logData = nodeType;
+      else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
+      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+      serviceLogContentNode.save();
+    }
   }
 }

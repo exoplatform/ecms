@@ -384,5 +384,11 @@ public interface TemplateService {
    * @return
    */
   public Set<String> getAllConfiguredNodeTypes();
+  
+  /**
+   * Gets all node types configured whose templates were edited.
+   * @return list of String
+   */
+  public Set<String> getAllEditedConfiguredNodeTypes() throws Exception;
 
 }

@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,16 +42,18 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
@@ -58,6 +61,7 @@ import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -115,9 +119,9 @@ public class Utils {
   public static void processImportHistory(Node currentNode,
                                           InputStream versionHistorySourceStream,
                                           Map<String, String> mapHistoryValue) throws Exception {
-    //read stream, get the version history data & keep it inside a map 
+    //read stream, get the version history data & keep it inside a map
     Map<String, byte[]> mapVersionHistoryData = getVersionHistoryData (versionHistorySourceStream);
-    
+
     //import one by one
     for (String uuid : mapHistoryValue.keySet()) {
       for (String name : mapVersionHistoryData.keySet()) {
@@ -149,36 +153,36 @@ public class Utils {
       }
     }
   }
-  
+
   /**
    * This function is used to get the version history data which is kept inside the xml files
    * @param versionHistorySourceStream
    * @return a map saving version history data with format: [file name, version history data]
-   * @throws IOException 
+   * @throws IOException
    */
   private static Map<String, byte[]> getVersionHistoryData (InputStream versionHistorySourceStream) throws IOException {
-    Map<String, byte[]> mapVersionHistoryData = new HashMap<String, byte[]>();    
+    Map<String, byte[]> mapVersionHistoryData = new HashMap<String, byte[]>();
     ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(versionHistorySourceStream));
-    byte[] data = new byte[1024];    
+    byte[] data = new byte[1024];
     ZipEntry entry = zipInputStream.getNextEntry();
-    while (entry != null) {      
+    while (entry != null) {
       //get binary data inside the zip entry
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       int available = -1;
       while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
         out.write(data, 0, available);
       }
-      
+
       //save data into map
       mapVersionHistoryData.put(entry.getName(), out.toByteArray());
-      
+
       //go to next entry
       out.close();
       zipInputStream.closeEntry();
       entry = zipInputStream.getNextEntry();
     }
-    
-    zipInputStream.close();    
+
+    zipInputStream.close();
     return mapVersionHistoryData;
   }
 
@@ -349,11 +353,6 @@ public class Utils {
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-
-    String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
-    String trashWorkspace = WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository().
-                                  getConfiguration().getDefaultWorkspaceName();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Queue<Node> queue = new LinkedList<Node>();
     queue.add(node);
@@ -379,7 +378,7 @@ public class Utils {
                       int index1 = node1.getIndex();
                       int index2 = node2.getIndex();
                       return -1 * ((Integer)index1).compareTo(index2);
-                    } 
+                    }
                     return -1 * name1.compareTo(name2);
                   } catch (RepositoryException e) {
                     return 0;
@@ -429,4 +428,44 @@ public class Utils {
     return (getChildOfType(node, childType) != null);
   }
 
+  /**
+   * Get Service Log Content Node of specific service.
+   *
+   * @param serviceName
+   * @return
+   * @throws Exception
+   */
+  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+    // Get workspace and session where store service log
+    ManageableRepository repository = WCMCoreUtils.getRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+    Node serviceLogContentNode = null;
+
+    if (session.getRootNode().hasNode("exo:services")) {
+      // Get service folder
+      Node  serviceFolder = session.getRootNode().getNode("exo:services");
+
+      // Get service node
+      Node serviceNode = serviceFolder.hasNode(serviceName) ?
+        serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
+
+      // Get log node of service
+      String serviceLogName =  serviceName + "_" + logType;
+      Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
+        serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
+
+      // Get service log content
+      if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
+        serviceLogContentNode = serviceLogNode.getNode(NodetypeConstant.JCR_CONTENT);
+      } else {
+        serviceLogContentNode = serviceLogNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, MediaType.TEXT_PLAIN);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, StringUtils.EMPTY);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
+      }
+    }
+    session.save();
+    return serviceLogContentNode;
+  }
 }
