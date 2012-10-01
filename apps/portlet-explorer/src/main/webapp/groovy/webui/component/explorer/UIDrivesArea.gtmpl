@@ -53,6 +53,7 @@
 	        <%
 	          for(groupDrive in groupDrives) {
 	            println("<div class=\"Drive\">");
+	            def groupLabel = uicomponent.getGroupLabel(groupDrive);
 	  	        if(groupDrive.getIcon() != null && groupDrive.getIcon().length() > 0) {
 		  		      String[] groupIconPath = groupDrive.getIcon().split(":/") ;
 		      %>
@@ -60,9 +61,9 @@
 			        	<img alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
 			        </div>
 	        <%  } else {  %>
-				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName())%>"><span></span></div>
-	  			      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="<%=uicomponent.getGroupLabel(groupDrive.getName())%>">
-	  			        <%=uicomponent.getGroupLabel(groupDrive.getName())%>
+				        <div class="IconDrivesUse DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupLabel}"><span></span></div>
+	  			      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" title="${groupLabel}">
+	  			        ${groupLabel}
   			        </a>
 		      <%
 		          }

@@ -18,7 +18,6 @@ package org.exoplatform.ecms.upgrade.plugins;
 
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
@@ -26,23 +25,17 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
-import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -50,13 +43,11 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -80,9 +71,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
   private static final String EXO_PRIVILEGEABLE = "exo:privilegeable";
 
   private ActionServiceContainer actionServiceContainer;
-  private TemplateService templateService;
   private NodeHierarchyCreator nodeHierarchyCreator;
-  private OrganizationService organizationService;
   private DMSConfiguration dmsConfiguration;
   private RepositoryService repoService;
   private ScriptService scriptService;
@@ -101,9 +90,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
     // Get services
     this.nodeHierarchyCreator =  nodeHierarchyCreator;
-    this.organizationService = organizationService;
     this.actionServiceContainer = actionServiceContainer;
-    this.templateService = templateService;
     this.repoService = repoService;
     this.dmsConfiguration = dmsConfiguration;
     this.scriptService = scriptService;

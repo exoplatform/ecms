@@ -48,16 +48,20 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -140,15 +144,18 @@ public class UITreeExplorer extends UIContainer {
   public String getLabel()  {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
-    String id = getAncestorOfType(UIJCRExplorer.class).getDriveData().getName();
+    DriveData driveData = getAncestorOfType(UIJCRExplorer.class).getDriveData();
+    String id = driveData.getName();
+    String path = driveData.getHomePath();
     try {
       return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
     } catch (MissingResourceException ex) {
       try {
-        OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
-        Group group = orgService.getGroupHandler().findGroupById(id.replace(".", "/"));
-        if(group != null && group.getLabel().length() > 0) return group.getLabel();
-        return id.replace(".", " / ");
+        RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+        Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                                      repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                      repoService.getCurrentRepository()).getItem(path);
+        return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
       } catch(Exception e) {
         return id.replace(".", " / ");
       }
