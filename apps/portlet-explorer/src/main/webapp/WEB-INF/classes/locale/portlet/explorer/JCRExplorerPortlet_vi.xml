@@ -1228,6 +1228,10 @@
       <ConstraintOption-To>Đến</ConstraintOption-To>
       <DocumentType-label>Kiểu tài liệu</DocumentType-label>
       <Category-label>loại</Category-label>
+      <created>Ngày tạo</created>
+      <modified>Ngày sửa</modified>
+      <and>Và</and>
+      <or>Hoặc</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
