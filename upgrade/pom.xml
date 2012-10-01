@@ -83,5 +83,6 @@
     <module>users-folder-permission</module>
     <module>templates</module>
     <module>portlet-preferences</module>
+    <module>drive-data</module>
   </modules>
 </project>

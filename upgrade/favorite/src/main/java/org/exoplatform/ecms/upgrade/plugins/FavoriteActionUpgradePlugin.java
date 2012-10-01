@@ -25,7 +25,6 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
-
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
@@ -74,7 +73,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
   private ActionServiceContainer actionServiceContainer;
   private NodeHierarchyCreator nodeHierarchyCreator;
-  private OrganizationService organizationService;
+  private OrganizationService organizationService;  
   private DMSConfiguration dmsConfiguration;
   private RepositoryService repoService;
   private ScriptService scriptService;
@@ -92,7 +91,7 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
     // Get services
     this.nodeHierarchyCreator =  nodeHierarchyCreator;
-    this.organizationService = organizationService;
+    this.organizationService = organizationService;    
     this.actionServiceContainer = actionServiceContainer;
     this.repoService = repoService;
     this.dmsConfiguration = dmsConfiguration;

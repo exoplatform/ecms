@@ -40,6 +40,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.GroupEventListener;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh minh.dang@exoplatform.com Nov 15, 2007
@@ -71,7 +72,7 @@ public class NewGroupListener extends GroupEventListener
 
    public void preSave(Group group, boolean isNew) throws Exception
    {
-     buildGroupStructure(group.getId());
+     buildGroupStructure(group);
    }
 
    public void preDelete(Group group) throws Exception
@@ -100,13 +101,16 @@ public class NewGroupListener extends GroupEventListener
    }
 
    @SuppressWarnings("unchecked")
-   private void buildGroupStructure(String groupId) throws Exception
+   private void buildGroupStructure(Group group) throws Exception
    {
       ManageableRepository manageableRepository = jcrService_.getCurrentRepository();
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = manageableRepository.getSystemSession(systemWorkspace);
       Node groupsHome = (Node)session.getItem(groupsPath_);
       List jcrPaths = config_.getJcrPaths();
+      String groupId = group.getId();
+      String groupLabel = group.getLabel();
+      
       Node groupNode = null;
       try
       {
@@ -116,6 +120,10 @@ public class NewGroupListener extends GroupEventListener
       {
          groupNode = groupsHome.addNode(groupId.substring(1, groupId.length()));
       }
+      if (groupNode.canAddMixin(NodetypeConstant.EXO_DRIVE)) {
+        groupNode.addMixin(NodetypeConstant.EXO_DRIVE);
+      }
+      groupNode.setProperty(NodetypeConstant.EXO_LABEL, groupLabel);
       for (JcrPath jcrPath : (List<JcrPath>)jcrPaths)
       {
          createNode(groupNode, jcrPath.getPath(), jcrPath.getNodeType(), jcrPath.getMixinTypes(), getPermissions(
