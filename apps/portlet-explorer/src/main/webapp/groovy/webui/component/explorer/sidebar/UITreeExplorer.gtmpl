@@ -192,7 +192,8 @@
   TreeNode treeNodeRoot = uicomponent.getRootTreeNode();
   treeNodeRoot.getNode().refresh(true);
   String contextMenuEvent = uicomponent.getRootActionList() ;
-  def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);   
+  def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
+  def label = uicomponent.getLabel();
 %>
 
 <div class="JCRMoveAction" style="display: none;" 
@@ -204,8 +205,8 @@
   	<div class="BarContentL">
   		<div class="BarContentR">
   			<div class="BarContentM ClearFix">
-			    <div class="Title" style="cursor: pointer;" title="<%=uicomponent.getLabel()%>" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
-			      <%=uicomponent.getLabel()%>
+			    <div class="Title" style="cursor: pointer;" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
+			      ${label}
 			    </div>			  	
 			  	
 			  </div>

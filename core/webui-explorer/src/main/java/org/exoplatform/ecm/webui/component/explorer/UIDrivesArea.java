@@ -43,13 +43,16 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -101,14 +104,15 @@ public class UIDrivesArea extends UIContainer {
     }
   }
 
-  public String getGroupLabel(String groupId) throws Exception{
+  public String getGroupLabel(DriveData driveData) throws Exception{
     try {
-      OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
-      Group group = orgService.getGroupHandler().findGroupById(groupId.replace(".", "/"));
-      if(group != null && group.getLabel().length() > 0) return group.getLabel();  
-      return groupId.replace(".", " / ");
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                                    repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                    repoService.getCurrentRepository()).getItem(driveData.getHomePath());
+      return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
     } catch(Exception e) {
-      return groupId.replace(".", " / "); 
+      return driveData.getName().replace(".", " / "); 
     }
   }
   
