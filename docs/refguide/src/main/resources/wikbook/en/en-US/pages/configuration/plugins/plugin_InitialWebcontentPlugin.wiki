@@ -82,5 +82,5 @@ In which:
 ||  *Name*  ||  *Type*  ||  *Value*   ||  *Description*  ||
 | *repository*|{{string}}|{{repository}}| The repository into which the initial web contents will be deployed.
 | *workspace* | {{string}} | {{collaboration}} | The workspace into which the initial web contents will be deployed. |
-| *nodePath* | {{string}} | {{/sites content/live/{portalName}/web contents/site artifacts}} | The target node where the initial web-contents will be deployed into. |
+| *nodePath* | {{string}} | {{/sites content/live/{{{{portalName}}}}/web contents/site artifacts}} | The target node where the initial web-contents will be deployed into. |
 | *sourcePath* | {{string}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme-templates/Logo.xml}} | The path to the source that this plugin will get data. |
