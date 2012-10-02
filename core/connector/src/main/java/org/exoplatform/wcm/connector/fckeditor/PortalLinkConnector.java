@@ -268,7 +268,7 @@ public class PortalLinkConnector implements ResourceContainer {
                                                                  userId,
                                                                  NULL_CONTEXT);
     UserPortal userPortal = userPortalCfg.getUserPortal();
-    UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+    UserNavigation navigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
     UserNode userNode = null;
 
     if (pageNodeUri == null) {

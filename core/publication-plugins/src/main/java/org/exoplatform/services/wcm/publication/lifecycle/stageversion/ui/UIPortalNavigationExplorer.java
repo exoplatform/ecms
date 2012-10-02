@@ -89,7 +89,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPortalTree");
       for (String portal : this.runningPortals) {
         UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
         UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
         ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
                                                                       userNavigation.getKey().getName());
@@ -173,7 +173,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
       List<TreeNode> list = new ArrayList<TreeNode>();
       for (String portal : this.runningPortals) {
         UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
         UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
         UIPortalApplication portalApplication = Util.getUIPortalApplication();
         LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).

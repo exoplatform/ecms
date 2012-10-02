@@ -2,10 +2,10 @@
   import org.exoplatform.portal.webui.util.Util;  
   import org.exoplatform.services.wcm.navigation.NavigationUtils;
   
-  if (!NavigationUtils.gotNavigation()) {
-    def rcontext = _ctx.getRequestContext();
-    def userName = rcontext.getRemoteUser();  
-    def portalName = Util.getPortalRequestContext().getPortalOwner();
+  def rcontext = _ctx.getRequestContext();
+  def userName = rcontext.getRemoteUser();  
+  def portalName = Util.getPortalRequestContext().getPortalOwner();
+  if (!NavigationUtils.gotNavigation(portalName, userName)) {
     def JSONnavigation = NavigationUtils.getNavigationAsJSON(portalName, userName);
     %>
     <script type="text/javascript">

@@ -2,7 +2,6 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;
-  import org.exoplatform.services.wcm.navigation.NavigationUtils;
   import javax.servlet.http.HttpSession;
 
   def rcontext = _ctx.getRequestContext() ;
@@ -12,7 +11,6 @@
   def session = _ctx.getRequestContext().getRequest().getSession();
   def previousURI = session.getAttribute("previousURI");
   
-  NavigationUtils.setGotNavigation(false);
   session.setAttribute("previousURI", selectedNodeUri);
   if (userName==null && session.getMaxInactiveInterval()>60) {
     session.setAttribute("DefaultMaxInactiveInterval", new Integer(session.getMaxInactiveInterval()));

@@ -33,6 +33,7 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
@@ -218,7 +219,7 @@ public class UIPublicationAction extends UIForm {
       String pageNodeUri = selectedNavigationNodeURI.replaceFirst("/\\w+/", "");
       
       UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-      UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+      UserNavigation navigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
       Page page = null;
       Node contentNode = null;
       if (navigation != null) {
