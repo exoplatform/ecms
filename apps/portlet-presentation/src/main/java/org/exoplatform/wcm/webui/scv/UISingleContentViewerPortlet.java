@@ -230,7 +230,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     // get user node & update children
     UserNode userNode;
     if (context.getRemoteUser() != null) {
-      userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);
+      userNode = userPortal.resolvePath(NavigationUtils.getUserNavigationOfPortal(
+                                            userPortal, Util.getUIPortal().getSiteKey().getName()),
+                                        filterConfig, nodeURI);
     } else {
       userNode = userPortal.resolvePath(filterConfig, nodeURI);
     }

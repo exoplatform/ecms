@@ -63,6 +63,7 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -883,7 +884,10 @@ public class Utils {
   }
 
   public static UserNavigation getSelectedNavigation() throws Exception {
-    return Util.getUIPortal().getUserNavigation();
+    
+    return NavigationUtils.getUserNavigationOfPortal(
+                 Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
+                 Util.getUIPortal().getSiteKey().getName());
   }
 
   public static String sanitize(String value) {
