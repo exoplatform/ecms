@@ -87,7 +87,7 @@
 	   </dependency>
      <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-test</artifactId>
+      <artifactId>ecms-testsuite-test</artifactId>
       <version>${project.version}</version>
        <scope>test</scope>
      </dependency>
