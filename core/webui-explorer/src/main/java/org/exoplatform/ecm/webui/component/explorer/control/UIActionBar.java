@@ -238,7 +238,7 @@ public class UIActionBar extends UIForm {
     public void execute(Event<UIActionBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIPopupContainer.activate(UIECMSearch.class, 700);
+      UIPopupContainer.activate(UIECMSearch.class, 800);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
@@ -288,7 +288,7 @@ public class UIActionBar extends UIForm {
       contentNameSearch.setLocation(currentNodePath);
       UISimpleSearch uiSimpleSearch = uiECMSearch.findFirstComponentOfType(UISimpleSearch.class);
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNodePath);
-      UIPopupContainer.activate(uiECMSearch, 700, 500);
+      UIPopupContainer.activate(uiECMSearch, 800, 500);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }

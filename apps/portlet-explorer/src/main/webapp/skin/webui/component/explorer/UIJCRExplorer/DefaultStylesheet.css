@@ -888,6 +888,7 @@
 
 .UIJCRExplorerPortlet #UIECMSearch .UITabContentContainer .UITabContent {
 	background: #ffffff;
+	overflow: visible !important;
 }
 
 /*================================UIConstraintsForm=================================*/
