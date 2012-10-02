@@ -5,7 +5,8 @@
     <groupId>org.exoplatform</groupId>
     <artifactId>exo.parent</artifactId>
     <version>8.1</version>
-  </parent>
+    <relativePath /> 
+ </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
   <version>4.0.0.Alpha1-SNAPSHOT</version>
