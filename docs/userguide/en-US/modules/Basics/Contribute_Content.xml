@@ -653,14 +653,14 @@ This function allows contributor to edit content, quickly access content list fo
                                                     </itemizedlist>
                                                 </listitem>
                                                 <listitem>
-                                                    <para>
+                                                    <para xml:id="User_Guide-Preferences-Content_Detail_Preferences-Content_visibilitySCV">
                                                         <guilabel>Content Visibility</guilabel>:
                                                         Allow you to use a cache shared between users to
                                                         get content. If you want to get content, which are displayed
                                                         in CLV or SCV, from one cache, select
                                                         <guilabel>Restricted by Authentication.</guilabel>
                                                         If not, select
-                                                        <guilabel>Restricted by User Roles.</guilabel>
+                                                        <guilabel>Restricted by User Roles.</guilabel> In most cases, you should not switch to <guilabel>Restricted by User Roles</guilabel> as it reduces the overall performance.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -1012,14 +1012,14 @@ This function allows contributor to edit content, quickly access content list fo
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
-                                            <para>
+                                            <para xml:id="User_Guide-Preferences-Content_Detail_Preferences-Content_visibilityCLV">
                                                 <guilabel>Content Visibility:</guilabel>
                                                 Allow you to use a cache shared between users to
-                                                get content. If you want to get content, which are displayed in CLV or
-                                                SCV, from one cache, select
-                                                <guilabel>Restricted by Authentication.</guilabel>
+                                                get content. If you want to get content which is displayed in CLV or
+                                                SCV from one cache, select
+                                                <guilabel>Restricted by Authentication</guilabel> (default).
                                                 If not, select
-                                                <guilabel>Restricted by User Roles.</guilabel>
+                                                <guilabel>Restricted by User Roles</guilabel>. In most cases, you should not switch to <guilabel>Restricted by User Roles</guilabel> as it reduces the overall performance.
                                             </para>
                                         </entry>
                                     </row>
