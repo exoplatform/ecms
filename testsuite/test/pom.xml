@@ -4,11 +4,11 @@
   xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>ecms</artifactId>
+    <artifactId>ecms-testsuite</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
     <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
-  <artifactId>ecms-test</artifactId>
+  <artifactId>ecms-testsuite-test</artifactId>
   <name>eXo ECMS Testing</name>
   <dependencies>
     <dependency>
