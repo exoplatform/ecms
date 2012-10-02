@@ -28,6 +28,8 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.cms.metadata.impl.MetadataServiceImpl;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.impl.TemplateServiceImpl;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -54,10 +56,12 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
   private static final Log LOG = ExoLogger.getLogger(NodeTypeTemplateUpgradePlugin.class.getName());
 
   private TemplateService templateService_;
+  private MetadataService metadataService_;
 
-  public NodeTypeTemplateUpgradePlugin(TemplateService templateService, InitParams initParams) {
+  public NodeTypeTemplateUpgradePlugin(TemplateService templateService, MetadataService metadataService, InitParams initParams) {
     super(initParams);
     this.templateService_ = templateService;
+    this.metadataService_ = metadataService;
   }
 
   @Override
@@ -70,14 +74,25 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
     if (StringUtils.isEmpty(unchangedNodeTypes)) {
       unchangedNodeTypes = "";
     }
+    String unchangedMetadataTypes = PrivilegedSystemHelper.getProperty("unchanged-metadata-templates");
+    if (StringUtils.isEmpty(unchangedMetadataTypes)) {
+      unchangedMetadataTypes = "";
+    }
     try {
       Set<String> unchangedNodeTypeSet = new HashSet<String>();
+      Set<String> unchangedMetadataTypeSet = new HashSet<String>();
       Set<String> configuredNodeTypeSet = templateService_.getAllConfiguredNodeTypes();
       Set<String> editedPredefinedNodeTypes = templateService_.getAllEditedConfiguredNodeTypes();
+      List<String> configuredMetadataTypeSet = metadataService_.getMetadataList();
       List<Node> removedNodes = new ArrayList<Node>();
+      List<String> removedMetadatas = new ArrayList<String>();
+      
       for (String unchangedNodeType : unchangedNodeTypes.split(",")) {
         unchangedNodeTypeSet.add(unchangedNodeType.trim());
       }
+      for (String unchangedMetadataType : unchangedMetadataTypes.split(",")) {
+        unchangedMetadataTypeSet.add(unchangedMetadataType.trim());
+       }
       //get all node type nodes that need to be removed
       sessionProvider = SessionProvider.createSystemProvider();
       Node templateHomeNode = templateService_.getTemplatesHome(sessionProvider);
@@ -90,6 +105,11 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
           removedNodes.add(templateNode);
         }
       }
+      // get all metadata type nodes that need to be removed
+      for (String metadataType : configuredMetadataTypeSet) {
+        if(!unchangedMetadataTypeSet.contains(metadataType)) 
+          removedMetadatas.add(metadataType);
+      }
       // remove all old node type nodes
       for (Node removedNode : removedNodes) {
         try {
@@ -101,8 +121,13 @@ public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
           }
         }
       }
+      // remove all old metadata node type
+      for (String removedMetadaNode : removedMetadatas) {
+        metadataService_.removeMetadata(removedMetadaNode);
+      }
       // reinitialize new templates
       ((TemplateServiceImpl)templateService_).start();
+      ((MetadataServiceImpl)metadataService_).start();
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating node type template", e);
