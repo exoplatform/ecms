@@ -268,7 +268,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       writer.append("<a href=\"javascript:void(0);\"")
             .append("onclick=\"")
             .append(link)
-            .append("\" class=\"ActionButton LightBlueStyle\">")
+            .append(";return false;\" class=\"ActionButton LightBlueStyle\">")
             .append(actionLabel)
             .append("</a>");
     }
