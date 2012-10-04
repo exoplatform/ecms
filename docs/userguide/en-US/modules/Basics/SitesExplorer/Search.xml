@@ -6,18 +6,6 @@
         ]>
 <section id="sect-User_Guide-Search_in_Content_Explorer">
   <title>Search in Sites Explorer</title>
-	<para>There are 3 search types in <emphasis role="bold">Sites Explorer</emphasis>:</para>
-	<itemizedlist>
-	  <listitem>
-		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Simple_Search'>Quick search</link></para>
-	  </listitem>
-	  <listitem>
-		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Advanced_Search'>Advanced search</link></para>
-	  </listitem>
-	  <listitem>
-		<para><link linkend='sect-User_Guide-Search_in_Content_Explorer-Quick_Search'>Search with saved queries</link></para>
-	  </listitem>
-	</itemizedlist>
   <section id="sect-User_Guide-Search_in_Content_Explorer-Simple_Search">
     <title>Quick search</title>
     <para>With the quick search, you can directly type a search term in the search field. All documents, whose keywords

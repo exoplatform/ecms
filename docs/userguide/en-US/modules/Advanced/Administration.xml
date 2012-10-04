@@ -69,7 +69,8 @@
    </para>
     </listitem>
   </itemizedlist>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Ontology.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Tag.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Category.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Presentation.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Types.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Administration/Advanced.xml"/>
