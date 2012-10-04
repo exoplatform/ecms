@@ -28,8 +28,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.actions.activation.ScriptActionActivationJob;
@@ -39,6 +37,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlugin {
 
@@ -147,8 +146,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   }
   
   public void executeAction(String userId, String executable, Map variables) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
+    ScriptService scriptService =  WCMCoreUtils.getService(ScriptService.class);
     CmsScript cmsScript = scriptService.getScript(executable);
     cmsScript.execute(variables);
   }  
