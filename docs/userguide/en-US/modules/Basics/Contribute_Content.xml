@@ -75,21 +75,6 @@ This function allows contributor to edit content, quickly access content list fo
         <para>
             To use <emphasis role="bold">InContext Editing</emphasis>, you first need to turn on the <emphasis role="bold">Edit Mode</emphasis>.
         </para>
-        <para>Here, you can do the following specific actions:</para>
-        <itemizedlist>
-		<listitem>
-		<para><link linkend='sect-User_Guide-InContext_Editing-Add_Content'>Add content</link></para>
-		</listitem>
-		<listitem>
-		<para><link linkend='sect-User_Guide-InContext_Editing-Edit_Content'>Edit content</link></para>
-		</listitem>
-		<listitem>
-		<para><link linkend='sect-User_Guide-InContext_Editing-Manage_Content'>Manage content</link></para>
-		</listitem>
-		<listitem>
-		<para><link linkend='sect-User_Guide-InContext_Editing-Preferences'>Manage preferences</link></para>
-		</listitem>
-		</itemizedlist>
         <section id="sect-User_Guide-InContext_Editing-Add_Content">
             <title>Add content</title>
             <para>

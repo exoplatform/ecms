@@ -7,29 +7,6 @@
 <section id="sect-User_Guide-Content_Presentation_Manager">
     <!--    This document was created with Syntext Serna Free.    -->
     <title>Content Presentation</title>
-	<para>This section is divided into 4 sub-topics:</para>
-    <itemizedlist>
-	<listitem>
-    <para>
-	<link linkend='sect-User_Guide-Content_Presentation_Manager-Manage_a_Template'>Manage a template</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-	<link linkend='sect-User_Guide-Content_Presentation_Manager-Metadata_Management'>Manage metadata</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-	<link linkend='sect-User_Guide-Content_Presentation_Manager-Manage_Views'>Manage views</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-	<link linkend='sect-User_Guide-Content_Presentation_Manager-Drives_Management'>Manage drives</link>
-    </para>
-	</listitem>
-	</itemizedlist>
     <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
         <title>Manage a template</title>
         <para>

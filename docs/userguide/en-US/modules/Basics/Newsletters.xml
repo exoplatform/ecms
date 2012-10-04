@@ -144,29 +144,6 @@
     </mediaobject>
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
       <title>Manage categories in Newsletter</title>
-		<para>Managing categories in <emphasis role="bold">Newsletter</emphasis> includes the following actions:</para>
-		<itemizedlist>
-		<listitem>
-		<para>
-		<link linkend='sect-User_Guide-Category_Management-Add_a_new_category'>Add a new category</link>
-		</para>
-		</listitem>
-		<listitem>
-		<para>
-		<link linkend='sect-User_Guide-Category_Management-Edit_a_category'>Edit a category</link>
-		</para>
-		</listitem>
-		<listitem>
-		<para>
-		<link linkend='sect-User_Guide-Category_Management-Delete_a_category'>Delete a category</link>
-		</para>
-		</listitem>
-		<listitem>
-		<para>
-		<link linkend='sect-User_Guide-Category_Management-Manage_Users'>Manage users</link>
-		</para>
-		</listitem>
-		</itemizedlist>
 	<section id="sect-User_Guide-Category_Management-Add_a_new_category">
         <title>Add a new category</title>
         <procedure>
