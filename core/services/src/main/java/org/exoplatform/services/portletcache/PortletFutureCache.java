@@ -34,6 +34,7 @@ import org.exoplatform.services.log.Log;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@Deprecated
 class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
 {
 

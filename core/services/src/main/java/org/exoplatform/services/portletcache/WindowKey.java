@@ -19,6 +19,8 @@
 
 package org.exoplatform.services.portletcache;
 
+import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -29,7 +31,7 @@ import javax.portlet.WindowState;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-class WindowKey
+class WindowKey implements Serializable
 {
 
   /** . */
