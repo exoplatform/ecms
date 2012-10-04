@@ -19,12 +19,16 @@
 
 package org.exoplatform.services.portletcache;
 
+import org.exoplatform.commons.cache.future.FutureCache;
+import org.exoplatform.commons.cache.future.FutureExoCache;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.management.annotations.Managed;
 import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
@@ -41,104 +45,36 @@ import org.picocontainer.Startable;
 @RESTEndpoint(path = "fragmentcacheservice")
 public class FragmentCacheService implements Startable {
 
-  private static final int DEFAULT_CACHE_SIZE    = 10000;                                          // default
-                                                                                                    // to
-                                                                                                    // 10000
-                                                                                                    // entries
-                                                                                                    // in
-                                                                                                    // FutureCache
+  private static final int DEFAULT_CACHE_SIZE    = 10000;  // default to 10000 entries in FutureCache
 
-  private static final int DEFAULT_CACHE_CLEANUP = 15;                                             // default
-                                                                                                    // 15s
-                                                                                                    // interval
-                                                                                                    // for
-                                                                                                    // cleanup
-                                                                                                    // thread
-
+  private static final int DEFAULT_CACHE_CLEANUP = 30;     // default 30s interval for cleanup thread
+  
   /** . */
   private static final Log LOG                   = ExoLogger.getLogger(FragmentCacheService.class.getName());
 
   /** . */
-  final PortletFutureCache cache;
-
-  public FragmentCacheService(InitParams params) {
-    int cleanupCache = DEFAULT_CACHE_CLEANUP;
-    int cacheSize = DEFAULT_CACHE_SIZE;
-
-    if (params.getValueParam("cleanup-cache") != null) {
-      String cleanupCacheConfig = params.getValueParam("cleanup-cache").getValue();
-      try {
-        cleanupCache = Integer.parseInt(cleanupCacheConfig);
-      } catch (NumberFormatException e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
-        }
-      }
-    }
-
-    if (params.getValueParam("cache-size") != null) {
-      String cacheSizeConfig = params.getValueParam("cache-size").getValue();
-      try {
-        cacheSize = Integer.parseInt(cacheSizeConfig);
-      } catch (NumberFormatException e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn("Invalid cache-size setting " + cacheSizeConfig);
-        }
-      }
-    }
-
-    this.cache = new PortletFutureCache(LOG, cleanupCache, cacheSize);
-
+  private ExoCache<WindowKey, MarkupFragment> markupCache_;
+  private FutureCache<WindowKey, MarkupFragment, PortletRenderContext> futureCache;
+  
+  public FragmentCacheService(CacheService cacheService, InitParams params) {
+    markupCache_ = cacheService.getCacheInstance(FragmentCacheService.class.getSimpleName());
+    futureCache = new FutureExoCache<WindowKey, MarkupFragment, PortletRenderContext>(new PortletRenderer(LOG), markupCache_);
+  }
+  
+  public MarkupFragment getMarkupFragment(PortletRenderContext context, WindowKey key) {
+    return futureCache.get(context, key);
+  }
+  
+  public void setCacheSize(int size) {
+    markupCache_.setMaxSize(size);
   }
 
-  @Managed
-  @ManagedDescription("What is the Cleanup Cache period (in seconds) ?")
-  public int getCleanupCache() {
-    return cache.getCleanupCache();
-  }
-
-  @Managed
-  @ManagedDescription("How many Entries in Cache  ?")
-  public int getCacheSize() {
-    return cache.getCacheSize();
-  }
-
-  @Managed
-  @ManagedDescription("Get Maximum Entries in Cache")
-  public int getCacheMaxSize() {
-    return cache.getCacheMaxSize();
-  }
-
-  @Managed
-  @ManagedDescription("Set Maximum Entries in Cache")
-  /***
-   * Set Max Cache size, ie, max entries allowed in FutureCache.
-   * An IllegalArgumentException is thrown if cacheMaxSize is less than 1.
-   */
-  public void setCacheSize(int cacheMaxSize) {
-    if (cacheMaxSize < 1)
-      throw new IllegalArgumentException("invalid value for max cache size");
-
-    cache.setCacheMaxSize(cacheMaxSize);
-  }
-
-  @Managed
-  @ManagedDescription("Sets Cleanup Cache period (in seconds)")
-  public void setCleanupCache(int cleanupCache) {
-    this.cache.updateCleanupCache(cleanupCache);
-  }
-
+  @Override
   public void start() {
-    cache.start();
   }
 
+  @Override
   public void stop() {
-    cache.stop();
   }
 
-  @Managed
-  @ManagedDescription("Clear the Fragment Cache")
-  public void clearCache() {
-    cache.clearCache();
-  }
 }

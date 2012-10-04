@@ -39,10 +39,10 @@ import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.PortletFilter;
 import javax.portlet.filter.RenderFilter;
 
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -111,9 +111,8 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
           query);
 
       //
-      FragmentCacheService service = (FragmentCacheService)PortalContainer.getInstance().
-          getComponentInstanceOfType(FragmentCacheService.class);
-      MarkupFragment value = service.cache.get(new PortletRenderContext(req, resp, chain), key);
+      FragmentCacheService service = WCMCoreUtils.getService(FragmentCacheService.class);
+      MarkupFragment value = service.getMarkupFragment(new PortletRenderContext(req, resp, chain), key);
       OutputStream out = resp.getPortletOutputStream();
       out.write(value.data);
       out.close();

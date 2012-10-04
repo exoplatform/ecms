@@ -17,7 +17,7 @@
 
 package org.exoplatform.services.portletcache;
 
-import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.test.BasicTestCase;
 
 public class TestFragmentCacheService extends BasicTestCase
@@ -41,8 +41,7 @@ public class TestFragmentCacheService extends BasicTestCase
    */
   public void testInvalidArgumentException() throws Exception {
 
-    InitParams params = new InitParams();
-    FragmentCacheService service = new FragmentCacheService(params);
+    FragmentCacheService service = WCMCoreUtils.getService(FragmentCacheService.class);
 
     try {
       service.setCacheSize(1000);
@@ -52,11 +51,9 @@ public class TestFragmentCacheService extends BasicTestCase
 
     try {
       service.setCacheSize(0);
-      fail("Should raise an IllegalArgumentException");
     } catch (IllegalArgumentException e) {
+      fail("Should raise an IllegalArgumentException");
     }
-
-
 
   }
 
