@@ -52,6 +52,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -307,7 +308,8 @@ public class UIActionBar extends UIForm {
             uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
           } else
           uiExplorer.cancelAction();
-          event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + backLink + "');");
+          RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+          requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + backLink + "');");
       }
     }
   static public class SavedQueriesActionListener extends EventListener<UIActionBar> {

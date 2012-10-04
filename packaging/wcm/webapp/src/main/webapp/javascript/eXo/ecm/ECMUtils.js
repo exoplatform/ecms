@@ -1405,5 +1405,10 @@ ECMUtils.prototype.collapseAlternativeText = function(displayDiv) {
   }
 };
 
+ECMUtils.prototype.ajaxRedirect = function(url) {
+  url =	url.replace(/&amp;/g, "&") ;
+  window.location.href = url ;
+};
+
 eXo.ecm.ECMUtils = new ECMUtils();
 _module.ECMUtils = eXo.ecm.ECMUtils;

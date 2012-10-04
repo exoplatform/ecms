@@ -69,6 +69,8 @@ import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.web.application.RequireJS;
+
 
 /**
  * Created by The eXo Platform SAS
@@ -409,7 +411,8 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         boolean preferenceIsRedirect = Boolean.parseBoolean(preferences.getValue(UIFCCConstant.PREFERENCE_IS_REDIRECT, "")) ;
         String preferenceRedirectPath = preferences.getValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, "") ;
         if (preferenceIsRedirect && preferenceRedirectPath != null) {
-          event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + preferenceRedirectPath + "');");
+        	RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+        	requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + preferenceRedirectPath + "');");
         } else {
           String saveMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "") ;
           if (saveMessage == null) saveMessage = "saved-successfully";

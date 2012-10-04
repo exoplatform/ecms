@@ -40,6 +40,7 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -290,8 +291,9 @@ public class PDFViewer extends UIForm {
           new BufferedInputStream(new FileInputStream(file)), DMSMimeTypeResolver.getInstance().getMimeType(".pdf"));
       dresource.setDownloadName(fileName) ;
       String downloadLink = dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
-        event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript(
-            "ajaxRedirect('" + downloadLink + "');");
+        
+      RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+      requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }

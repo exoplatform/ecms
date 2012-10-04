@@ -48,6 +48,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.compress.CompressData;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -212,7 +213,8 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
           dresource.setDownloadName(format + ".xml");
         }
         String downloadLink = dservice.getDownloadLink(dservice.addDownloadResource(dresource));
-        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + downloadLink + "');");
+        RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+        requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
         uiExplorer.cancelAction();
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
@@ -288,7 +290,8 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         dresource = new InputStreamDownloadResource(in, "application/zip") ;
         dresource.setDownloadName(format + "_versionHistory.zip");
         String downloadLink = dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
-        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + downloadLink + "');");
+        RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+        requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
         

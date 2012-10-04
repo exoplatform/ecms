@@ -47,6 +47,7 @@ import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.Parameter;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -341,7 +342,8 @@ public class UIPresentation extends UIBaseNodePresentation {
       UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
       try {
         String downloadLink = Utils.getDownloadLink(Utils.getFileLangNode(uiComp.getNode()));
-        event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript("ajaxRedirect('" + downloadLink + "');");
+        RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+        requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       } catch(RepositoryException e) {
         if (LOG.isErrorEnabled()) {
          LOG.error("Repository cannot be found", e);

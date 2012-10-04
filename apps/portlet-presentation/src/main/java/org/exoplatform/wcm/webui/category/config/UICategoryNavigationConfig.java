@@ -39,6 +39,7 @@ import org.exoplatform.wcm.webui.category.UICategoryNavigationPortlet;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationUtils;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -257,7 +258,8 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
 
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
         Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
-        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + uri + "');");
+        RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+      	requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + uri + "');");
       } else {
         if (Utils.isQuickEditMode(categoryNavigationConfig,
                                   UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {
