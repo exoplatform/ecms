@@ -88,8 +88,8 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		}
 		
 		//save style		
-		UIDocumentForm.SaveStyles("UIDocumentWorkspace", uiDocumentWorkspace);
-		UIDocumentForm.SaveStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
+		eXo.webui.UIDocForm.SaveStyles("UIDocumentWorkspace", uiDocumentWorkspace);
+		eXo.webui.UIDocForm.SaveStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
 
 		// Resize.
 		var oViewPaneSize = UIDocumentForm.GetViewPaneSize(uiWorkingWorkspace) ;
@@ -111,15 +111,15 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 			changeTypeLink.style.display = "inline-block";
 		}
 		// Restore original size
-		UIDocumentForm.RestoreStyles("UIDocumentWorkspace", uiDocumentWorkspace) ;
-		UIDocumentForm.RestoreStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
+		eXo.webui.UIDocForm.RestoreStyles("UIDocumentWorkspace", uiDocumentWorkspace) ;
+		eXo.webui.UIDocForm.RestoreStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
 
 		delete eXo.webui.UIDocForm.horizontalLayout;
 	}
 	eXo.webui.UIDocForm.AutoFocus();
 }
 
-UIDocumentForm.GetStyleData = function( element ) {
+UIDocumentForm.prototype.GetStyleData = function( element ) {
 	var objStyleData = new Object() ;
 
 	if ( element.className.length > 0 )	{
@@ -134,7 +134,7 @@ UIDocumentForm.GetStyleData = function( element ) {
 	return objStyleData ;
 }
 
-UIDocumentForm.SetStyleData = function( element, objStyleData )
+UIDocumentForm.prototype.SetStyleData = function( element, objStyleData )
 {
 	element.className = objStyleData.Class || '' ;
 
@@ -144,23 +144,18 @@ UIDocumentForm.SetStyleData = function( element, objStyleData )
 		element.removeAttribute('style', 0);
 }
 
-UIDocumentForm.SaveStyles = function( key, element ) {
+UIDocumentForm.prototype.SaveStyles = function( key, element ) {
 	var styleData = this.GetStyleData(element);
-	if (!tblSavedStyles) {
-		tblSavedStyles = new eXo.core.HashMap();
-	}
-	if (tblSavedStyles.get(key)) {
-		tblSavedStyles.remove(key);
-	}
-	tblSavedStyles.put(key, styleData);
+	if(gj.hasData(element)) gj.removeData(element, key);
+        gj.data(element, key, styleData);
 }
 
-UIDocumentForm.RestoreStyles = function( key, element ) {
-	if (!tblSavedStyles.get(key)) {
+UIDocumentForm.prototype.RestoreStyles = function( key, element ) {
+	if (!gj.hasData(element)) {
 		return;
 	}
-	var styleData = tblSavedStyles.get(key);
-	UIDocumentForm.SetStyleData(element, styleData);
+	var styleData = gj.data(element, key);
+	eXo.webui.UIDocForm.SetStyleData(element, styleData);
 }
 
 // Returns and object with the "Width" and "Height" properties.
