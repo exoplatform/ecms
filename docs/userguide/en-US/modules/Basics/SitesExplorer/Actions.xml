@@ -2452,29 +2452,6 @@ After being created successfully, a file document with the <guilabel>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Actions">
     <title>Manage actions</title>
-    <para>There are some actions you can perform as follows:</para>
-    <itemizedlist>
-    <listitem>
-    <para>
-   <link linkend='sect-User_Guide-Manage_Actions-Add_an_action'>Add an action</link>
-    </para>
-    </listitem>
-   <listitem>
-    <para>
-   <link linkend='sect-User_Guide-Manage_Actions-View_Actions'>View an action</link>
-    </para>
-    </listitem>
-	<listitem>
-    <para>
-   <link linkend='sect-User_Guide-Manage_Actions-Edit_an_action'>Edit an action</link>
-    </para>
-    </listitem>
-	<listitem>
-    <para>
-	<link linkend='sect-User_Guide-Manage_Actions-Delete_an_action'>Delete an action</link>
-    </para>
-    </listitem>
-    </itemizedlist>
     <section id="sect-User_Guide-Manage_Actions-Add_an_action">
       <title>Add an action</title>
       <procedure>
@@ -3390,34 +3367,6 @@ After being created successfully, a file document with the <guilabel>text/html</
   </section>
   <section id="sect-User_Guide-Actions-Manage_Versions">
     <title>Manage versions</title>
-    <para>There are some actions you can perform on versions as follows:</para>
-    <itemizedlist>
-    <listitem>
-    <para>
-    <link linkend='sect-User_Guide-Manage_Versions-Add_versions_for_nodes'>Add versions to a node</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-    <link linkend='sect-User_Guide-Manage_Versions-Add_and_Remov_labels_for_Versions'>Add/Remove labels for versions</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-    <link linkend='sect-User_Guide-Manage_Versions-View_versions'>View versions</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-    <link linkend='sect-User_Guide-Manage_Versions-Restore_versions'>Restore a version</link>
-    </para>
-	</listitem>
-	<listitem>
-    <para>
-    <link linkend='sect-User_Guide-Manage_Versions-Delete_versions'>Delete a version</link>
-    </para>
-	</listitem>
-    </itemizedlist>
     <section id="sect-User_Guide-Manage_Versions-Add_versions_for_nodes">
       <title>Add versions to a node</title>
       <procedure>
