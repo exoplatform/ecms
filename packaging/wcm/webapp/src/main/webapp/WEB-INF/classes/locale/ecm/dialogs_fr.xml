@@ -140,6 +140,8 @@
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
         <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et télécharger un autre fichier à partir d'ici.</re-upload>
+        <width>Largeur</width>
+        <height>Hauteur</height>
       </label>
     </dialog>
   </File>

@@ -1,5 +1,5 @@
-<% 
-  import org.exoplatform.ecm.webui.utils.Utils;
+<%
+  import org.exoplatform.ecm.webui.utils.Utils ;
   
   String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
   String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;
@@ -125,6 +125,36 @@
               %>
           </td>
         </tr>       
+        <%
+        	def curNode = uicomponent.getNode() ;
+        	if(curNode.hasNode("jcr:content")) {
+        	  def content = curNode.getNode("jcr:content") ;
+            String mimeType = content.getProperty("jcr:mimeType").getString() ;
+            if(mimeType.indexOf(Utils.FLASH_MIMETYPE) >= 0){
+        %>
+		        	<tr>
+					      <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.width")%></td>
+					      <td class="FieldComponent">
+						      <% 
+						        String[] fieldWidth = ["jcrPath=/node/exo:documentWidth", "validate=number"];
+						        uicomponent.addTextField("width", fieldWidth);
+						      %>
+						    </td>
+						  </tr>	
+						  
+						   <tr>
+					      <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.height")%></td>
+					      <td class="FieldComponent">
+						      <% 
+						        String[] fieldHeight = ["jcrPath=/node/exo:documentHeight", "validate=number"];
+						        uicomponent.addTextField("height", fieldHeight);
+						      %>
+						    </td>
+						  </tr> 		
+        <%    
+            }
+        	}
+        %> 
           <tr>
             <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
             <td class="FieldComponent">

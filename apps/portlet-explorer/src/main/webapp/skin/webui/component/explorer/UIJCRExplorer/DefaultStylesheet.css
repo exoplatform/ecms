@@ -217,6 +217,8 @@
 	padding: 4px;
 }
 
+
+
 /*############################## -- Begin UIDocumentWorkspace -- ##############################*/
 
 .UIJCRExplorerPortlet .RightContainer {
@@ -229,6 +231,10 @@
 
 .UIJCRExplorerPortlet .UIListView {
 	position: relative;
+}
+
+.UIJCRExplorerPortlet .UIDocumentWorkspace .FileContent .Content .FlashViewer { 
+	text-align: center;
 }
 
 .UIJCRExplorerPortlet .UITabPane .UIListView {

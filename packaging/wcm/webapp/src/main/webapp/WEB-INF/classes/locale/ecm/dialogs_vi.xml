@@ -137,6 +137,8 @@
         <mimeType>MimeType</mimeType>
         <content>Nội dung</content>
         <re-upload>Có file đã tồn tại. Bạn có thể xóa file cũ ở đây rồi tải file khác để thay đổi nó.</re-upload>
+				<width>Chiều rộng</width>
+				<height>Chiều cao</height>
       </label>
     </dialog>
   </File>

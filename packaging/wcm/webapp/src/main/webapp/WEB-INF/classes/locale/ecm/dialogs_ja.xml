@@ -117,6 +117,8 @@
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
         <re-upload>ファイルが既に存在します。再度アップロードすることで置き換えることができます。</re-upload>
+        <width>Width</width>
+        <height>Height</height>
       </label>
     </dialog>
   </File>
