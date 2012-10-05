@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+    <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+    <Ecm>
+        <dialog>
+            <label>
+                <end-time>Tempo Fine</end-time>
+                <start-time>Tempo Inizio</start-time>
+                <lifecycle>Ciclo di vita</lifecycle>
+                <mimeType>Tipo Mime</mimeType>
+                <repeat-count>Conteggio Ripetizione</repeat-count>
+                <time-interval>Intervallo Tempo</time-interval>
+                <query-items>Oggetti Query</query-items>
+                <schedule-type>Tipo Schedulato</schedule-type>
+            </label>
+        </dialog>
+    </Ecm>
+    <!--
+  ###################### resoucebundle for exo:article dialogs template ####
+  -->
+    <Article>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <title>#{word.title}</title>
+                <summary>#{word.summary}</summary>
+                <content>#{word.content}</content>
+                <lastModifiedDate>Data Ultima Modifica</lastModifiedDate>
+            </label>
+        </dialog>
+        <msg>
+            <no-view>
+                Il nodo o questo template è stato cancellato o cambiato. Prego clicchi il bottone Aggiorna
+            </no-view>
+        </msg>
+    </Article>
+    
+    <UIDocumentForm>
+        <label>
+            <title>#{word.title}</title>
+            <link>Link</link>
+            <contentHtml>#{word.content}</contentHtml>
+            <content>#{word.content}</content>
+            <contentPlain>#{word.content}</contentPlain>
+            <name>Nome</name>
+            <categories>Categorie</categories>
+            <recordCategoryIdentifier>Registra Identificatore Categoria</recordCategoryIdentifier>
+            <dispositionAuthority>Autorità Disposizione</dispositionAuthority>
+            <permanentRecordIndicator>Indicatore Record Permanente</permanentRecordIndicator>
+            <containsRecordFolders>Contiene Cartella Registrazioni</containsRecordFolders>
+            <defaultMediaType>Tipo Media Default</defaultMediaType>
+            <defaultMarkingList>Lista Default Marcatura</defaultMarkingList>
+            <defaultOriginatingOrganization>Provenienza Organizzazioni Default</defaultOriginatingOrganization>
+            <vitalRecordIndicator>Indicatore Registrazioni Vitali</vitalRecordIndicator>
+            <processCutoff>Tagli Processi</processCutoff>
+            <eventTrigger>Trigger Eventi</eventTrigger>
+            <processHold>Fermi dei Processi</processHold>
+            <processTransfer>Trasferimenti dei Processi</processTransfer>
+            <transferBlockSize>Dimensione Blocco Trasferimenti</transferBlockSize>
+            <processAccession>Accesso Processi</processAccession>
+            <accessionBlockSize>Dimensione Blocco d'Accesso</accessionBlockSize>
+            <processDestruction>Distruzione Processi</processDestruction>
+            <location>Posizione</location>
+            <LinkURL>URL</LinkURL>
+        </label>
+    </UIDocumentForm>
+    <!--
+  ###################### resoucebundle for exo:podcast dialogs template ####
+  -->
+    <Podcast>
+        <dialog>
+            <label>
+                <name>Nome</name>
+                <categories>Categorie</categories>
+                <title>Titolo</title>
+                <link>Link</link>
+                <author>Autore</author>
+                <explicit>Esplicito</explicit>
+                <category>Categoria</category>
+                <keywords>Parola chiave</keywords>
+                <publish-date>Data Pubblicazione</publish-date>
+                <description>Descrizione</description>
+                <upload-file>Carica File</upload-file>
+                <mime-type>Tipo Mime</mime-type>
+                <lenght>Lunghezza</lenght>
+            </label>
+        </dialog>
+    </Podcast>
+    <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+    <HtmlFile>
+        <dialog>
+            <label>
+                <name>Nome</name>
+                <content>Contenuto</content>
+            </label>
+        </dialog>
+    </HtmlFile>
+    <!--
+  ###################### resoucebundle for exo:calendar dialogs template ####
+  -->
+    <Calendar>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <shared>Condiviso</shared>
+            </label>
+        </dialog>
+    </Calendar>
+    <!--
+  ###################### resoucebundle for exo:event dialogs template ####
+  -->
+    <Event>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <subject>#{word.subject}</subject>
+                <description>#{word.description}</description>
+                <location>Posizione</location>
+                <start-date-time>Data/Tempo Inizio</start-date-time>
+                <end-date-time>Data/Tempo Fine</end-date-time>
+                <comment>#{word.comment}</comment>
+                <category>#{word.category}</category>
+                <availability>Disponibilità</availability>
+                <share-type>Tipo Condivisione</share-type>
+            </label>
+        </dialog>
+    </Event>
+    <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+    <File>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <categories>Categorie</categories>
+                <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+                <content>#{word.content}</content>
+                <re-upload>Il file esiste già. Può eliminarlo o caricare un'altro file.</re-upload>
+                <width>Width</width>
+                <height>Height</height>
+            </label>
+        </dialog>
+    </File>
+    <!--
+  ###################### resoucebundle for rma:filePlan dialogs template ####
+  -->
+    <FilePlan>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <categories>Categorie</categories>
+                <record-properties>Proprietà Registrazioni</record-properties>
+                <process-properties>Proprietà Processi</process-properties>
+                <note>Annotazione File Plan</note>
+                <record-category-identifier>Identificatore Record Categoria</record-category-identifier>
+                <disposition-author>Disposizione Autorità</disposition-author>
+                <disposition-instruction>Istruzioni su Disposizione</disposition-instruction>
+                <permanent-record-indicator>Indicatore Record Permanente</permanent-record-indicator>
+                <contain-record-folder>Contiene Cartella Registrazioni</contain-record-folder>
+                <default-media-type>Tipo Media Default</default-media-type>
+                <default-marking-list>Lista Marcatori Default</default-marking-list>
+                <default-originating-organization>Provenienza Organizzazioni Default</default-originating-organization>
+                <vitalRecordIndicator>Indicatore Registrazioni Vitali</vitalRecordIndicator>
+                <vital-record-review-period>Periodo Anteprima Indicatore Registrazioni Vitali</vital-record-review-period>
+                <process-cutoff>Tagli Processi</process-cutoff>
+                <event-trigger>Trigger Eventi</event-trigger>
+                <cutoff-period>Tagli Periodi</cutoff-period>
+                <cutoff-on-obsolete>Taglio su Obsoleto</cutoff-on-obsolete>
+                <cutoff-on-superseded>Taglio su Superseded</cutoff-on-superseded>
+                <process-hold>Fermi dei Processi</process-hold>
+                <hold-period>Fermi dei Periodi</hold-period>
+                <discretionary-hold>Fermi Discrezionali</discretionary-hold>
+                <process-transfer>Trasferimenti Processi</process-transfer>
+                <default-transfer-location>Posizione Trasferimenti Default</default-transfer-location>
+                <transfer-block-size>Dimensione Blocco Trasferimento</transfer-block-size>
+                <process-accession>Accesso Processi</process-accession>
+                <accession-location>Accesso Posizioni</accession-location>
+                <accession-block-size>Accesso Dimensioni Blocco</accession-block-size>
+                <process-destruction>Distruzione Processi</process-destruction>
+            </label>
+        </dialog>
+    </FilePlan>
+    <!--
+  ###################### resoucebundle for kfx:document dialogs template ####
+  -->
+    <Kofax>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <categories>Categorie</categories>
+            </label>
+        </dialog>
+    </Kofax>
+    <!--
+  ###################### resoucebundle for exo:sample dialogs template ####
+  -->
+    <Sample>
+        <dialog>
+            <label>
+                <name>#{word.name}</name>
+                <categories>Categories</categories>
+                <title>#{word.title}</title>
+                <description>#{word.description}</description>
+                <date>#{word.date}</date>
+                <date-time>Data tempo</date-time>
+                <upload-image>Carica immagine</upload-image>
+                <mime-type>#{Ecm.dialog.label.mimeType}</mime-type>
+                <summary>#{word.summary}</summary>
+                <content>#{word.content}</content>
+            </label>
+        </dialog>
+    </Sample>
+    <!--
+  ###################### resoucebundle for exo:workflow dialogs template ####
+  -->
+    <Workflow>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <description>#{word.description}</description>
+                <validator>Validatore</validator>
+                <to-workspace>Nel Workspace</to-workspace>
+                <with-path>Con Path</with-path>
+            </label>
+        </dialog>
+    </Workflow>
+    
+    <UIActionForm>
+        <label>
+            <description>#{word.description}</description>
+            <port>Porta</port>
+            <userName>#{word.userName}</userName>
+            <password>Password</password>
+            <link>Link</link>
+            <to>Invia Mail A</to>
+            <actionName>#{word.name}</actionName>
+        </label>
+    </UIActionForm>
+    
+    <EditFormAction>
+        <label>
+            <description>#{word.description}</description>
+            <port>Porta</port>
+            <userName>#{word.userName}</userName>
+            <password>Password</password>
+            <link>Link</link>
+            <to>Manda Mail A</to>
+            <actionName>#{word.name}</actionName>
+        </label>
+    </EditFormAction>
+    <!--
+  ###################### resoucebundle for exo:bacupAction dialogs template ####
+  -->
+    <Backup>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <description>#{word.description}</description>
+                <to-workspace>Nel Workspace</to-workspace>
+                <with-path>Con Path</with-path>
+            </label>
+        </dialog>
+    </Backup>
+    <!--
+  ###################### resoucebundle for exo:getmail dialogs template ####
+  -->
+    <Getmail>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <protocol>Protocollo</protocol>
+                <host>Host</host>
+                <port>Porta</port>
+                <folder>Cartella</folder>
+                <username>#{word.userName}</username>
+                <password>Password</password>
+                <description>#{word.description}</description>
+                <stote-path>Salva path</stote-path>
+            </label>
+        </dialog>
+    </Getmail>
+    <!--
+  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
+  -->
+    <Icalendar>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <action-name>Nome Azione</action-name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <description>#{word.description}</description>
+                <calendar-file-name>Nome File Calendario</calendar-file-name>
+                <query-items>#{Ecm.dialog.label.query-items}</query-items>
+            </label>
+        </dialog>
+    </Icalendar>
+    <!--
+  ###################### resoucebundle for exo:createRSSFeedAction dialogs template ####
+  -->
+    <Rss>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <feed-action-name>Crea Nome Azione Feed</feed-action-name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+                <start-time>#{Ecm.dialog.label.start-time}</start-time>
+                <end-time>#{Ecm.dialog.label.end-time}</end-time>
+                <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+                <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+                <cron-expression>Cron Expression</cron-expression>
+                <feed-node-name>Nome Nodo Feed</feed-node-name>
+                <feed-store-path>Path Salvataggio Feed</feed-store-path>
+                <query-items>#{Ecm.dialog.label.query-items}</query-items>
+                <rss-url>URL RSS</rss-url>
+                <feed-title>Titolo Feed</feed-title>
+                <feed-type>Tipo Feed</feed-type>
+                <summary>Sommario</summary>
+                <title>Titolo</title>
+                <rss-version>Versione RSS</rss-version>
+                <link>Link</link>
+                <description>#{word.description}</description>
+                <language>Lingua</language>
+                <copyright>Copyright</copyright>
+                <publish-date>Data Pubblicazione</publish-date>
+                <owner-name>Nome Proprietario</owner-name>
+                <owner-email>Email Proprietario</owner-email>
+                <image-url>URL Immagine</image-url>
+                <category>#{word.category}</category>
+                <keywords>Parole Chiave</keywords>
+            </label>
+        </dialog>
+    </Rss>
+    <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+    <AddMetadata>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <metadata>Metadata</metadata>
+                <description>#{word.description}</description>
+            </label>
+        </dialog>
+    </AddMetadata>
+    <!--
+  ###################### resoucebundle for exo:ReloadBPAction dialogs template ####
+  -->
+    <ReloadAction>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <description>#{word.description}</description>
+            </label>
+        </dialog>
+    </ReloadAction>
+    <!--
+  ###################### resoucebundle for exo:sendMailAction dialogs template ####
+  -->
+    <SendMail>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+                <start-time>#{Ecm.dialog.label.start-time}</start-time>
+                <end-time>#{Ecm.dialog.label.end-time}</end-time>
+                <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+                <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+                <cron-expression>Espressione Cron</cron-expression>
+                <description>#{word.description}</description>
+                <mail-to>Manda Mail A</mail-to>
+            </label>
+        </dialog>
+    </SendMail>
+    <!--
+  ###################### resoucebundle for exo:transformBinaryToTextAction dialogs template ####
+  -->
+    <Transform>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+                <start-time>#{Ecm.dialog.label.start-time}</start-time>
+                <end-time>#{Ecm.dialog.label.end-time}</end-time>
+                <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+                <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+                <cron-expression>Cron expression</cron-expression>
+                <description>#{word.description}</description>
+            </label>
+        </dialog>
+    </Transform>
+    <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+    <AutoVersioning>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+                <start-time>#{Ecm.dialog.label.start-time}</start-time>
+                <end-time>#{Ecm.dialog.label.end-time}</end-time>
+                <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+                <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+                <cron-expression>Cron expression</cron-expression>
+                <description>#{word.description}</description>
+            </label>
+        </dialog>
+    </AutoVersioning>
+    <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+    <EnableVersioning>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+                <start-time>#{Ecm.dialog.label.start-time}</start-time>
+                <end-time>#{Ecm.dialog.label.end-time}</end-time>
+                <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+                <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+                <cron-expression>Cron Expression</cron-expression>
+                <description>#{word.description}</description>
+            </label>
+        </dialog>
+    </EnableVersioning>
+    <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+    <ElementSet>
+        <dialog>
+            <label>
+                <title>#{word.title}</title>
+                <creator>Creator</creator>
+                <subject>#{word.subject}</subject>
+                <source>Sorgente</source>
+                <contributor>Contributore</contributor>
+                <resource-type>Tipo Risorsa</resource-type>
+                <date>#{word.date}</date>
+                <publisher>Editore</publisher>
+                <description>#{word.description}</description>
+                <rights>Diritti</rights>
+                <relation>Relazione</relation>
+                <format>#{word.format}</format>
+                <coverage>Copertura</coverage>
+                <identifier>Identificatore</identifier>
+                <language>Lingua</language>
+            </label>
+        </dialog>
+    </ElementSet>
+    <!--
+  ###################### resoucebundle for rma:cutoffable dialogs template ####
+  -->
+    <Cutoffable>
+        <dialog>
+            <label>
+                <cutoff-executed>Taglio Eseguito</cutoff-executed>
+                <cutoff-now>Taglia Ora</cutoff-now>
+                <cutoff-date-time>Data Tempo del Taglio</cutoff-date-time>
+                <cutoff-event>Evento del Taglio</cutoff-event>
+                <cutoff-obsolete>Taglio Obsoleto</cutoff-obsolete>
+                <cutoff-superseded>Taglio Superseded</cutoff-superseded>
+            </label>
+        </dialog>
+    </Cutoffable>
+    <!--
+  ###################### resoucebundle for rma:destroyable dialogs template ####
+  -->
+    <Destroyable>
+        <dialog>
+            <label>
+                <destruction-date>Data Distruzione</destruction-date>
+            </label>
+        </dialog>
+    </Destroyable>
+    <!--
+  ###################### resoucebundle for rma:accessControllable dialogs template ####
+  -->
+    <AccessControllable>
+        <dialog>
+            <label>
+                <owner>Proprietario</owner>
+                <permissions>Permessi</permissions>
+            </label>
+        </dialog>
+    </AccessControllable>
+    <!--
+  ###################### resoucebundle for rma:accessionable dialogs template ####
+  -->
+    <Accessionable>
+        <dialog>
+            <label>
+                <accession-executed>Eseguito Adesione</accession-executed>
+                <accession-date>Data Adesione</accession-date>
+            </label>
+        </dialog>
+    </Accessionable>
+    <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+    <Actionable>
+        <dialog>
+            <label>
+                <primary-type>Tipi Primari</primary-type>
+                <mixin-types>Tipi Mixin</mixin-types>
+            </label>
+        </dialog>
+    </Actionable>
+    <!--
+  ###################### resoucebundle for exo:categorized dialogs template ####
+  -->
+    <Categorized>
+        <dialog>
+            <label>
+                <category>#{word.category}</category>
+            </label>
+        </dialog>
+    </Categorized>
+    <!--
+  ###################### resoucebundle for rma:holdable dialogs template ####
+  -->
+    <Holdable>
+        <dialog>
+            <label>
+                <hold-executed>Fermao su Eseguito</hold-executed>
+                <hold-until>Ferma fino a</hold-until>
+                <holds-discretionary>Ferma Discrezionale</holds-discretionary>
+                <hold-until-event>Ferma Fino a Evento</hold-until-event>
+                <freeze>Congela</freeze>
+            </label>
+        </dialog>
+    </Holdable>
+    <!--
+  ###################### resoucebundle for rma:lockable dialogs template ####
+  -->
+    <Lockable>
+        <dialog>
+            <label>
+                <lock-owner>Proprietario Blocco</lock-owner>
+                <lock-is-deep>Blocco è Profondo</lock-is-deep>
+            </label>
+        </dialog>
+    </Lockable>
+    <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+    <Move>
+        <dialog>
+            <label>
+                <destination-workpsace>Workspace di Destinazione</destination-workpsace>
+                <destination-path>Path di Destinazione</destination-path>
+                <primary-type>Tipo Primario</primary-type>
+                <mixin-types>Tipi Mixin</mixin-types>
+            </label>
+        </dialog>
+    </Move>
+    <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+    <Published>
+        <dialog>
+            <label>
+                <start-publication>Inizio Pubblicazione</start-publication>
+                <end-publication>Fine Pubblicazione</end-publication>
+            </label>
+        </dialog>
+    </Published>
+    <!--
+  ###################### resoucebundle rma:record dialogs template ####
+  -->
+    <Record>
+        <dialog>
+            <label>
+                <supplemental-marking-list>Lista Marcature Supplementari</supplemental-marking-list>
+                <subject>#{word.subject}</subject>
+                <record-identifier>Identificatore Record</record-identifier>
+                <originator>Origine</originator>
+                <format>#{word.format}</format>
+                <addresses>Indirizzi</addresses>
+                <originating-organization>Organizzazione d'origine</originating-organization>
+                <other-addresses>Altri Indirizzi</other-addresses>
+                <publication-date>Data Pubblicazione</publication-date>
+                <record-note>Nota Record</record-note>
+                <date-received>Data Ricevuto</date-received>
+                <media-format>Formato Media</media-format>
+                <is-obsolete>È Obsoleto</is-obsolete>
+                <date-field>Campo Data</date-field>
+                <superseded>Superseded</superseded>
+                <uuid>UUID</uuid>
+            </label>
+        </dialog>
+    </Record>
+    <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+    <Referenceable>
+        <dialog>
+            <label>
+                <uuid>UUID</uuid>
+            </label>
+        </dialog>
+    </Referenceable>
+    <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+    <Relationable>
+        <dialog>
+            <label>
+                <relation>Relazione</relation>
+            </label>
+        </dialog>
+    </Relationable>
+    <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+    <RssEnable>
+        <dialog>
+            <label>
+                <title>Titolo</title>
+                <summary>#{word.summary}</summary>
+            </label>
+        </dialog>
+    </RssEnable>
+    <!--
+  ###################### resoucebundle rma:transferable dialogs template ####
+  -->
+    <Transferable>
+        <dialog>
+            <label>
+                <transfer-executed>Trasferimento Eseguito</transfer-executed>
+                <transfer-date>Data Trasferimento</transfer-date>
+                <transfer-location>Posizione Trasferimento</transfer-location>
+            </label>
+        </dialog>
+    </Transferable>
+    <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+    <Versionable>
+        <dialog>
+            <label>
+                <version-history>Storico Versioni</version-history>
+                <base-version>Versione Base</base-version>
+                <is-checked-out>È stato fato il Check out</is-checked-out>
+                <predecessors>Predecessori</predecessors>
+                <merge-failed>Unione Fallita</merge-failed>
+                <uuid>UUID</uuid>
+            </label>
+        </dialog>
+    </Versionable>
+    <!--
+  ###################### resoucebundle rma:vitalRecord dialogs template ####
+  -->
+    <VitalRecord>
+        <dialog>
+            <label>
+                <is-vital-record>È una Record Vitale</is-vital-record>
+                <prev-review-date>Data Revisione Prec</prev-review-date>
+                <next-review-date>Data Revisione Succ</next-review-date>
+            </label>
+        </dialog>
+    </VitalRecord>
+    <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+    <ResouceContainer>
+        <dialog>
+            <label>
+                <name>Nome</name>
+                <autoload>Caricamento Auto</autoload>
+                <minetype>Tipo Mine</minetype>
+                <content>Contenuto</content>
+            </label>
+        </dialog>
+    </ResouceContainer>
+    <!--
+  ###################### resoucebundle for validator ####
+  -->
+    <EmailAddressValidator>
+        <msg>
+            <Invalid-input>Indirizzo email non è valido.</Invalid-input>
+        </msg>
+    </EmailAddressValidator>
+    <EmptyFieldValidator>
+        <msg>
+            <empty-input>Il campo '{0}' è richiesto. Prego inserisca un'altro valore.</empty-input>
+        </msg>
+    </EmptyFieldValidator>
+    <NumberFormatValidator>
+        <msg>
+            <Invalid-number>Il campo '{0}' è valido.</Invalid-number>
+        </msg>
+    </NumberFormatValidator>
+    <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+    <ScriptAction>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>Nome</name>
+                <lifecycle>Ciclo di Vita</lifecycle>
+                <homePath>Path Home</homePath>
+                <targetWorkspace>Workspace Destinazione</targetWorkspace>
+                <targetPath>Path Destinazione</targetPath>
+            </label>
+        </dialog>
+    </ScriptAction>
+    
+    <UIDialogForm>
+        <form>
+            <DialogFormException>
+                Impossibile salvare questo documento. Forse c'è un problema con intercettazione pre-salvataggio.
+            </DialogFormException>
+        </form>
+    </UIDialogForm>
+    <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+    <no>No</no>
+    <yes>Si</yes>
+    <true>Vero</true>
+    <false>Falso</false>
+    <Electronic>Elettronico</Electronic>
+    <Paper>Carta</Paper>
+    <NONE>Niente</NONE>
+    <CLASSIFIED>Classificato</CLASSIFIED>
+    <UNCLASSIFIED>Non classificato</UNCLASSIFIED>
+    <NOCONTRACT>Nessun Contratto</NOCONTRACT>
+    <true>Vero</true>
+    <false>falso</false>
+    <one-minute>Un minuto</one-minute>
+    <hourly>Ogni ora</hourly>
+    <daily>Giornalmente</daily>
+    <quarterly>Ogni quadrimestre</quarterly>
+    <yearly>Annualmente</yearly>
+    <ten-years>Dieci Anni</ten-years>
+    <read>Azione Utente</read>
+    <schedule>Schedulatore</schedule>
+    <node_added>Addizione Contenuto</node_added>
+    <node_removed>Rimozione Contenuto</node_removed>
+    <property_added>Addizione Proprietà</property_added>
+    <property_removed>Rimozione Proprietà</property_removed>
+    <property_changed>Modifica Proprietà</property_changed>
+    
+    <SendMail>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </SendMail>
+    
+    <ScriptAction>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </ScriptAction>
+   
+    <Getmail>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </Getmail>
+    
+    <Rss>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </Rss>
+    
+    <AddMetadata>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </AddMetadata>
+    
+    <ReloadAction>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </ReloadAction>
+    
+    <Transform>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </Transform>
+    
+    <EnableVersioning>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </EnableVersioning>
+    
+    <AutoVersioning>
+        <dialog>
+            <label>
+                <isDeep>È profondo</isDeep>
+                <nodetypes>Tipi Nodo</nodetypes>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </AutoVersioning>
+    <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+    <ContentPublishing>
+        <dialog>
+            <label>
+                <id>Id</id>
+                <name>#{word.name}</name>
+                <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+                <description>#{word.description}</description>
+                <validator>Validatore</validator>
+                <supervisor>Supervisore</supervisor>
+                <public-workspace>Workspace Pubblicazioni</public-workspace>
+                <public-path>Path Pubblicazioni</public-path>
+                <pending-workspace>Workspace in attesa</pending-workspace>
+                <pending-path>Path in attesa</pending-path>
+                <backup-workspace>Workspace Backup</backup-workspace>
+                <backup-path>Path Backup</backup-path>
+                <trash-workspace>Workspace Cestino</trash-workspace>
+                <trash-path>Path Cestion</trash-path>
+                <affectedNodeTypeNames>Tipi Nodo Influenzati</affectedNodeTypeNames>
+            </label>
+        </dialog>
+    </ContentPublishing>
+</bundle>
