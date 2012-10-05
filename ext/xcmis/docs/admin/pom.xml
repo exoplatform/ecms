@@ -54,7 +54,7 @@
          <plugin>
             <groupId>org.wikbook</groupId>
             <artifactId>wikbook.maven</artifactId>
-            <version>0.9.37</version>
+            <version>${wikbook.version}</version>
             <executions>
                <execution>
                   <phase>prepare-package</phase>
