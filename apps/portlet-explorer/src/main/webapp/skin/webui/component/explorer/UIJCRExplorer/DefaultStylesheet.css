@@ -410,6 +410,11 @@
 	z-index:0;
 }
 
+
+.UIJCRExplorerPortlet .UIDocumentWorkspace .FileContent .Content .FlashViewer { 
+	text-align: center;
+}
+
 .UIJCRExplorerPortlet .UITabPane .UIListView {
 	background: white;
 	border: 1px solid #b7b7b7;
