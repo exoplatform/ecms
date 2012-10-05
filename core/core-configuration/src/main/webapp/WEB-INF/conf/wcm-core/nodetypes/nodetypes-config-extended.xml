@@ -672,6 +672,7 @@
 			</propertyDefinition>
 		</propertyDefinitions>
 	</nodeType>
+<<<<<<< HEAD
   <nodeType name="exo:activityComment" isMixin="true" hasOrderableChildNodes="false" primaryItemName="" >
     <supertypes>
       <supertype>nt:base</supertype>
@@ -697,5 +698,18 @@
 			<supertype>nt:base</supertype>
 		</supertypes>
 	</nodeType>
-	
+
+  <nodeType name="exo:documentSize" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">   
+    <propertyDefinitions>
+      <propertyDefinition name="exo:documentWidth" requiredType="Long" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:documentHeight" requiredType="Long" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>     
+  
 </nodeTypes>

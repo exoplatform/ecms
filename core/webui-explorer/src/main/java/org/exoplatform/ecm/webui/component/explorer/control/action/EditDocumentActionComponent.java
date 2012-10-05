@@ -52,6 +52,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -171,6 +172,12 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
             uiDocumentForm.setIsKeepinglock(true);
           }
         }
+      }
+      // Add mixin type exo:documentSize if the current node is flash file
+      String mimeType = DMSMimeTypeResolver.getInstance().getMimeType(selectedNode.getName());
+      if(mimeType.indexOf(Utils.FLASH_MIMETYPE) >= 0 && selectedNode.canAddMixin(Utils.EXO_RISIZEABLE)) {
+        selectedNode.addMixin(Utils.EXO_RISIZEABLE);
+       	selectedNode.save();          	
       }
       // Update data avoid concurrent modification by other session
       refresh(selectedNode);
