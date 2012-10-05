@@ -81,7 +81,7 @@
       <not-exist-tree>L'arbre de catégories n'existe pas encore.</not-exist-tree>
 		</msg>
     <action>
-      <Cancel>Fermer</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
 	</UITaxonomyTreeContainer>
     <!--
@@ -161,13 +161,13 @@
     <msg>
       <have-not-any-permission>Ajouter une permission au noeud</have-not-any-permission>
       <checkbox-require>Vous devez choisir au moins une permission</checkbox-require>
-      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant de sauver la permission</userOrGroup-required>
+      <userOrGroup-required>Vous devez choisir un groupe ou un utilisateur avant d'enregistrer la permission</userOrGroup-required>
       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission</not-change-permission>
       <access-denied>Accès refusé! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
 		<action>
       <Close>#{word.close}</Close>
-			<Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
 			<Reset>Réinitialiser</Reset>
       <NextAddAction>Suivant</NextAddAction>
       <Previous>Précédent</Previous>
@@ -183,7 +183,7 @@
       <removeReference>Supprimer</removeReference>
     </title>
 		<action>
-			<Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
       <PreviousViewPermission>Précédent</PreviousViewPermission>
       <NextViewTree>Suivant</NextViewTree>
 		</action>
@@ -277,7 +277,7 @@
       <name>Nom de la métadonnée</name>
       <type>Type de mixin</type>
       <internalUse>Usage interne</internalUse>
-      <action>Actions possibles sur le formulaire</action>
+      <action>Actions</action>
     </header>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
@@ -356,7 +356,7 @@
       <metadataView>Information Métadonnées</metadataView>
     </tab>
     <action>
-      <Cancel>Fermer</Cancel>
+      <Cancel>#{word.close}</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
@@ -511,7 +511,7 @@
       <action>Sélection</action>
     </header>
     <action>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIRepositoryValueSelect>
   <UIRepositorySelectForm>
@@ -735,7 +735,7 @@
     </tooltip>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <no-list>Il n'y a pas de type de noeud comme condition de recherche</no-list>
+      <no-list>Il n'y aucun type de noeud satisfisant à cette condition de recherche.</no-list>
     </msg>
   </UINodeTypeList>
   <!--
@@ -1049,7 +1049,7 @@
       <UITagPermissionManager>Gestion des permissions d'accès aux Tags</UITagPermissionManager>
     </title>
     <action>
-      <Close>Fermer</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UITabPane>
   <!--
@@ -1129,7 +1129,7 @@
       <Close>#{word.close}</Close>
       <Restore>Restaurer</Restore>
       <AddTabForm>Ajouter un onglet</AddTabForm>
-      <AddTab>Enregistrer</AddTab>
+      <AddTab>#{word.save}</AddTab>
       <BackViewForm>Précédent</BackViewForm>
     </action>
     <label>
@@ -2210,7 +2210,7 @@
   <UITagPermissionForm>
     <title>Ajouter une permission</title>
     <action>
-      <Save>Enregistrer</Save>
+      <Save>#{word.save}</Save>
     </action>
     <label>
       <userOrGroup>Rôles: </userOrGroup>
