@@ -1,25 +1,8 @@
 This chapter provides you the basic knowledge of eXo CMIS, working principles and how to configure it via the following topics:
-{docbook}
-<abstract>
-<itemizedlist>
-<listitem>
-<para>
-<link linkend="Adm_CMIS.Introduction.CMIS_specification">CMIS Specification</link>
-</para>
-</listitem>
-<listitem>
-<para>
-<link linkend="Adm_CMIS.Introduction.xCMIS_project">xCMIS project</link>
-</para>
-</listitem>
-<listitem>
-<para>
-<link linkend="Adm_CMIS.Introduction.eXo_CMIS">eXo CMIS</link>
-</para>
-</listitem>
-</itemizedlist>
-</abstract>
-{docbook}
+* [CMIS Specification|#Adm_CMIS.Introduction.CMIS_specification]
+* [xCMIS project|#Adm_CMIS.Introduction.xCMIS_project]
+* [eXo CMIS|#Adm_CMIS.Introduction.eXo_CMIS]
+
 h1. CMIS Specification {anchor:id=Adm_CMIS.Introduction.CMIS_specification}
 
 {info}

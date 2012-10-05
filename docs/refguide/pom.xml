@@ -8,13 +8,18 @@
     <version>2.3.9-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-docs-refguide</artifactId>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Content Reference Guide</name>
 
   <profiles>
  <profile>
-  <id>distrib</id>
+  <id>docs</id>
+  <activation>
+    <property>
+      <name>!skip.doc</name>
+    </property>
+  </activation>  
   <properties>
     <wikbook.source>${project.basedir}/src/main/resources/wikbook/en/en-US</wikbook.source>
 	<docbook.source>${project.build.directory}/docbook-src</docbook.source>
@@ -27,18 +32,6 @@
        <version>${org.exoplatform.doc.doc-style.version}</version>
        <type>jar</type>
      </dependency>
-
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
-      <version>${project.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-services</artifactId>
@@ -186,7 +179,7 @@
 	         <version>${wikbook.version}</version>
 	         <executions>
              <execution>
-               <!--id>d-generate-docbook</id-->
+               <id>d-generate-docbook</id>
                <phase>generate-sources</phase>
 	             <goals>
 	               <goal>transform</goal>
