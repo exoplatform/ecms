@@ -418,11 +418,7 @@ public class UICLVPresentation extends UIContainer {
    */
   public String getURL(Node node) throws Exception {
     String link = null;
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletRequest portletRequest = portletRequestContext.getRequest();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-        + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
@@ -454,7 +450,7 @@ public class UICLVPresentation extends UIContainer {
       nodeURL.setQueryParameterValue(clvBy, fullPath);
     }
 
-    link = baseURI + nodeURL.toString();
+    link = nodeURL.toString();
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
 
@@ -469,13 +465,9 @@ public class UICLVPresentation extends UIContainer {
    * @throws Exception the exception
    */
   public String getWebdavURL(Node node) throws Exception {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletRequest portletRequest = portletRequestContext.getRequest();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String repository = nodeLocation.getRepository();
     String workspace = nodeLocation.getWorkspace();
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-        + String.format("%s", portletRequest.getServerPort());
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     String link = "#";// friendlyService.getFriendlyUri(link);
@@ -485,10 +477,10 @@ public class UICLVPresentation extends UIContainer {
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
+      link = "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
           + workspace + originalNode.getPath() + "?version=" + node.getParent().getName();
     } else {
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
+      link = "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
           + workspace + node.getPath();
     }
 
