@@ -9,7 +9,6 @@
 %>
 <%
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar ;
-  import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace ;
   import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea ;
@@ -18,21 +17,23 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   
   def rcontext = _ctx.getRequestContext() ;
-  UITreeExplorer uiTreeExplorer = uicomponent.findFirstComponentOfType(UITreeExplorer.class);
-  def focusNode = uiTreeExplorer.getEncodeCurrentPath();
-  def expandNode = uiTreeExplorer.getEncodeExpandPath();
-  def isExpand = uiTreeExplorer.getIsExpand();
+  def uiTreeExplorer = uicomponent.getTreeExplorer();
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
   def enableDragAndDrop = pref.isEnableDragAndDrop();
   
-  String componentId = uicomponent.getId();
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
-  if(!isExpand && focusNode != null)
-  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
-  else if(isExpand && expandNode != null)
-  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;  
+  if(uiTreeExplorer != null && uicomponent.isShowSideBar()) {
+    def focusNode = uiTreeExplorer.getEncodeCurrentPath();
+    def expandNode = uiTreeExplorer.getEncodeExpandPath();
+    def isExpand = uiTreeExplorer.getIsExpand();
+    String componentId = uicomponent.getId();
+    rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
+    rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
+    if(!isExpand && focusNode != null)
+  	   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
+    else if(isExpand && expandNode != null)
+  	   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;  
+  	}
 %>
 
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">

@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.query.Query;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -52,6 +53,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   private static final String EXO_FAVORITEFOLDER = "exo:favoriteFolder";
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
   private static final String FAVORITE_ALIAS = "userPrivateFavorites";
+  private static final String USER_ALIAS = "usersPath";
 
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
@@ -158,11 +160,22 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     Node userFavoriteNode = null;
     try {
-      userFavoriteNode = getUserFavoriteFolder(userName);
+      String usersNodePath = nodeHierarchyCreator.getJcrPath(USER_ALIAS);
+      if (!usersNodePath.endsWith("/")) {
+        usersNodePath += "/";
+      }
+      //This query always return one result by using user session.
+      //It just get only his/her favorite folder because restricted permission on other favorite folder.
+      //By using query here, we don't need userName anymore. It already exists inside session object.
+      NodeIterator nodeIter = node.getSession().getWorkspace().getQueryManager().createQuery(
+          "SELECT * FROM exo:favoriteFolder WHERE jcr:path like '" + usersNodePath + "%'", Query.SQL).
+          execute().getNodes();
+      userFavoriteNode = nodeIter.nextNode();
     }catch (PathNotFoundException e) {
       return false;
     }
 
+    //Should use query here instead of loop to check all the symlink node which has exo:uuid equals UUID of node.
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
       Node childNode = nodeIter.nextNode();

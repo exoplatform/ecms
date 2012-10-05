@@ -33,6 +33,7 @@ import javax.jcr.Value;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -46,6 +47,7 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -56,7 +58,6 @@ import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
-import org.exoplatform.wcm.webui.reader.ContentReader;
 
 
 /**
@@ -118,8 +119,13 @@ public class UIWorkingArea extends UIContainer {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     return manager.getUIExtensions(EXTENSION_TYPE);
   }
+  
+  public synchronized UITreeExplorer getTreeExplorer() {
+    UISideBar uiSideBar = getChild(UISideBar.class);
+    return uiSideBar.getChild(UITreeExplorer.class);
+  }  
 
-  public synchronized void initialize() throws Exception {
+  public void initialize() throws Exception {
     List<UIExtension> extensions = getUIExtensionList();
     if (extensions == null) {
       return;
@@ -132,22 +138,25 @@ public class UIWorkingArea extends UIContainer {
     }
   }
 
-  private synchronized UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
+  private UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     UIComponent component = manager.addUIExtension(extension, context, this);
-    if (component instanceof UIAbstractManagerComponent) {
-      // You can access to the given extension and the extension is valid
-      UIAbstractManagerComponent uiAbstractManagerComponent = (UIAbstractManagerComponent) component;
-      uiAbstractManagerComponent.setUIExtensionName(extension.getName());
-      uiAbstractManagerComponent.setUIExtensionCategory(extension.getCategory());
-      return component;
-    } else if (component != null) {
-      // You can access to the given extension but the extension is not valid
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
-          + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
+    if(component == null) return null;
+    synchronized (component) {
+      if (component instanceof UIAbstractManagerComponent) {
+        // You can access to the given extension and the extension is valid
+        UIAbstractManagerComponent uiAbstractManagerComponent = (UIAbstractManagerComponent) component;
+        uiAbstractManagerComponent.setUIExtensionName(extension.getName());
+        uiAbstractManagerComponent.setUIExtensionCategory(extension.getCategory());
+        return component;
+      } else if (component != null) {
+        // You can access to the given extension but the extension is not valid
+        if (LOG.isWarnEnabled()) {
+          LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
+              + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
+        }
+        removeChild(component.getClass());
       }
-      removeChild(component.getClass());
     }
     return null;
   }
@@ -279,17 +288,19 @@ public class UIWorkingArea extends UIContainer {
     return actionsList.toString();
   }
 
-  public synchronized UIComponent getJCRMoveAction() throws Exception {
+  public UIComponent getJCRMoveAction() throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    return manager.addUIExtension(EXTENSION_TYPE, MOVE_NODE, null, this);
+    UIExtension extension = manager.getUIExtension(EXTENSION_TYPE, MOVE_NODE);
+    return addUIExtension(extension, null);
   }
 
-  public synchronized UIComponent getCreateLinkAction() throws Exception {
+  public UIComponent getCreateLinkAction() throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    return manager.addUIExtension(EXTENSION_TYPE, CREATE_LINK, null, this);
+    UIExtension extension = manager.getUIExtension(EXTENSION_TYPE, CREATE_LINK);
+    return addUIExtension(extension, null);
   }
 
-  public synchronized UIComponent getPermlink(Node node) throws Exception {
+  public UIComponent getPermlink(Node node) throws Exception {
     UIComponent uicomponent = null;
     List<UIExtension> uiExtensionList = getUIExtensionList();
     for (UIExtension uiextension : uiExtensionList) {
@@ -300,7 +311,7 @@ public class UIWorkingArea extends UIContainer {
     return uicomponent;
   }
 
-  public synchronized UIComponent getCustomAction() throws Exception {
+  public UIComponent getCustomAction() throws Exception {
     UIComponent uicomponent = null;
     List<UIExtension> uiExtensionList = getUIExtensionList();
     for (UIExtension uiextension : uiExtensionList) {

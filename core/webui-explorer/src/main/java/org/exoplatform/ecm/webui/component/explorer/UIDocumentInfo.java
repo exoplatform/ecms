@@ -971,8 +971,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isSymLink(Node node) throws RepositoryException {
-    LinkManager linkManager = getApplicationComponent(LinkManager.class);
-    return linkManager.isLink(node);
+    //LinkManager linkManager = getApplicationComponent(LinkManager.class);
+    //return linkManager.isLink(node);
+    return node.isNodeType(Utils.EXO_SYMLINK);
   }
 
   public UIComponent getRemoveAttach() throws Exception {
