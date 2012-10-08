@@ -16,7 +16,14 @@ This section provides you the following topics:
 * [REST configuration|#CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration]
 * [Create a REST service|#CONTref.Extensions.RESTServices.RestfulWebService.CreateRESTService]
 
-h2. HTTP Methods {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods}
+
+{docbook}
+<para xml:id="CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods">
+<citetitle>
+<emphasis role="bold">HTTP Methods</emphasis>
+</citetitle>
+</para>
+{docbook}
 Here is the convention you should follow:
 
 || *Method* || *Definition* ||
@@ -25,19 +32,39 @@ Here is the convention you should follow:
 | *PUT* | Update a Resource. |
 | *DELETE* | Delete a Resource. |
 
-h2. Formats {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.Formats}
+
+{docbook}
+<para xml:id="CONTref.Extensions.RESTServices.RestfulWebService.Formats">
+<citetitle>
+<emphasis role="bold">Formats</emphasis>
+</citetitle>
+</para>
+{docbook}
 The followings are formats which need to be supported for all your APIs:
 
 * [JSON|http://tools.ietf.org/html/rfc4627]: This format makes developers easy to parse in a lot of languages, such as JavaScript, Python or Ruby.
 * [XML|http://www.w3.org/TR/xml/]: Most of Java developers like using this format.
 * [ATOM|http://tools.ietf.org/html/rfc4287]: This is a standard format which can be used by many applications.
 
-h2. Data Format {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.DataFormat}
+
+{docbook}
+<para xml:id="CONTref.Extensions.RESTServices.RestfulWebService.DataFormat">
+<citetitle>
+<emphasis role="bold">Data Format</emphasis>
+</citetitle>
+</para>
+{docbook}
 The default format is JSON.
 
 The response format can be specified by a parameter in the request: "_format_". You need to specify the format requested. 
 
-h2. REST configuration {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration}
+{docbook}
+<para xml:id="CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration">
+<citetitle>
+<emphasis role="bold">REST configuration</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 First, you need to register the REST service class to the configuration file in the package named _conf.portal_.
 
@@ -53,7 +80,13 @@ First, you need to register the REST service class to the configuration file in 
 {code}
 
 
-h2. Create a REST service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.CreateRESTService}
+{docbook}
+<para xml:id="CONTref.Extensions.RESTServices.RestfulWebService.CreateRESTService">
+<citetitle>
+<emphasis role="bold">Create a REST service</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 You can start creating _GetEditedDocumentRESTService_ that implements from the ResourceContainer interface as follows:
 
