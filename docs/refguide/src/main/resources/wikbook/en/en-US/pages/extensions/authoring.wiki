@@ -65,7 +65,14 @@ This section covers the following topics:
 * [Start/End publication dates|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates]
 * [New Publication Mixin|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin]
 
-h2. States {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States}
+
+{docbook}
+<para xml:id="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States">
+<citetitle>
+<emphasis role="bold">States</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 This extended publication has new states and new profiles that are enabled in Content.
 
@@ -86,7 +93,14 @@ This extended publication has new states and new profiles that are enabled in Co
 ** obsolete: A content can still be published but it is not in an editing lifecycle anymore.
 ** archived (Automatic): A content is archived and ready to be moved in the archive workspace if enabled.
 
-h2. Start/End publication dates {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates}
+
+{docbook}
+<para xml:id="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates">
+<citetitle>
+<emphasis role="bold">Start/End publication datess</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 In most cases, you do not want to publish a content directly, but at a defined date and you can also want  the content to be unpublished automatically after that.
 New properties are added to the new publication plugin, that allows you to manage this:
@@ -101,7 +115,14 @@ Thus, the publication dates are not mandatory and a content can go to:
 * Staged: in multi-server mode, the publisher can only put the content to the "staged" state and wait for auto-publication.
 * Published: in single-server mode, the publisher can directly publish a content (with or without publication dates).
 
-h2. New Publication Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin}
+
+{docbook}
+<para xml:id="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin">
+<citetitle>
+<emphasis role="bold">New Publication Mixin</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 {code:xml}
 <nodeType name="publication:authoringPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
