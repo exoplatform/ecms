@@ -134,7 +134,7 @@
       <anonymous-view>Icone</anonymous-view>
       <taxonomy-list>Dettagli</taxonomy-list>
       <taxonomy-icons>Icone</taxonomy-icons>
-      <timeline-view>Timeline view</timeline-view>
+      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <!--
@@ -196,7 +196,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Imposta Preferenze</title>
+    <title>Imposta Preferenze Filtro</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -710,7 +710,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>Annulla</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Azzer</Reset>
     </action>
     <msg>
       <name-invalid>Inserisci il nome proprietÃ .</name-invalid>
@@ -739,7 +739,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>Azzer</Reset>
     </action>
   </UIMixinTypeForm>
   <!--
@@ -825,7 +825,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Azzer</Reset>
     </action>
     <msg>
       <checkbox-require>Seleziona almeno un permesso.</checkbox-require>
@@ -3241,7 +3241,7 @@
       <pending>In Attesa</pending>
       <approved>Approvato</approved>
       <inreview>In Revisione</inreview>
-      <staged>In cantiere</staged>
+      <staged>Pronto per la pubblicazione</staged>
       <published>Pubblicato</published>
       <live>Pubblicato</live>
     </status>
