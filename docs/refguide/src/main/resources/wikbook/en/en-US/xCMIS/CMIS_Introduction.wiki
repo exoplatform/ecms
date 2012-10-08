@@ -7,30 +7,35 @@
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Overview">Overview</link>
           </emphasis> </para>
+          <para>Overview introduction about CMIS, xCMIS and eXo CMIS.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Specification">CMIS specification</link>
           </emphasis> </para>
+          <para>Introduction about CMIS specification which provides a Web services interface. </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.xCMIS_project">xCMIS project</link>
           </emphasis> </para>
+          <para>Introduction about the xCMIS project and its benefits.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.features">CMIS features</link>
-          </emphasis> </para>
+          </emphasis></para>
+        <para>Introduction about CMIS feartures, such as Integration with eXo WCM, CMIS Domain Model and CMIS Services. </para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Adm_CMIS.ServiceJARs">Service JARs</link>
           </emphasis> </para>
+          <para>Additional information about a list of JARs used in eXo CMIS.</para>
       </listitem>
     </itemizedlist>
 	</abstract>

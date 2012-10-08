@@ -1,3 +1,11 @@
+{docbook}
+<para xml:id="CONTref.InsideWCMExplorer.CKEditor">
+<citetitle>
+<emphasis role="bold">CKEditor</emphasis>
+</citetitle>
+</para>
+{docbook}
+
 Basically, if you want to add a rich text area to your dialogs, you can use the [_addRichtextField_|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField] method. However, in case you want to add the rich text editor manually, you first need to use the [_addTextAreaField_|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField] method and some additional Javascripts as shown below:
 
 {code:groovy}
@@ -16,3 +24,20 @@ Basically, if you want to add a rich text area to your dialogs, you can use the 
 {code}
 
 !images/custom_ck.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [Extensions|#CONTref.Extensions]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]

@@ -8,54 +8,63 @@
           <emphasis role="bold">
             <link linkend="CONTref.InsideWCMTemplates">WCM Templates</link>
           </emphasis> </para>
+          <para> Information about Content types used in the Content function.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.InsideWCMExplorer">WCM Explorer</link>
           </emphasis> </para>
+          <para>Introduction about CSS files and CKEditor applied in the Content function.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Extensions">Extensions</link>
           </emphasis> </para>
+          <para>Knowledge about extensions in the Content function, such as REST services, UI extensions, authoring extensions and more.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Dev_CMIS.Usage_code_examples">CMIS Usage code examples</link>
           </emphasis> </para>
+          <para>Examples of CMIS usage code which may be useful for developers who need to access a repository.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Devref.PublicRestAPIs">Public REST APIs</link>
           </emphasis> </para>
+          <para>Information (such as name, service URL, parameter, and description) on Public REST APIs used in the Content function.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.JavaServices">Public Java APIs</link>
           </emphasis> </para>
+          <para>Information on public Java APIs used in the Content function.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Deprecated_portlets">Deprecated portlets</link>
           </emphasis> </para>
+          <para>A list of deprecated portlets in the Content function.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="Adm_CMIS.Miscellaneous_tips">Miscellaneous and Tips</link>
           </emphasis> </para>
+          <para>List of reference links for xCMIS project and CMIS.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.FAQ">FAQ</link>
           </emphasis> </para>
+          <para>List of FAQ related to the product.</para>
       </listitem>
     </itemizedlist>
 	</abstract>

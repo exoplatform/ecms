@@ -17,3 +17,15 @@ The project is to make joining Enterprise Content repositories simpler by offeri
 The xCMIS project is distributed under the LGPL license. You can download sources on [Google code|http://code.google.com/p/xcmis/source/checkout],
 or visit [Community Wiki|http://code.google.com/p/xcmis/w/list] for more information.
 
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Overview|#Dev_CMIS.Overview]
+* [CMIS specification|#Dev_CMIS.Specification]
+* [CMIS features|#Dev_CMIS.features]
+* [Service JARs|#Adm_CMIS.ServiceJARs]

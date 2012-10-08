@@ -7,18 +7,22 @@
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components">Component</link>
           </emphasis> </para>
+          <para>Description of the services which provide low-level functionality for UI components.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.Configuration.Plugins">External Component Plugins</link>
           </emphasis> </para>
+          <para>Description of the main external component plugins used in the Content function. Each part supplies an example configuration
+           with the explanation about ini-params so you can know how to use these plugins.</para>
       </listitem>
       <listitem>
         <para>
           <emphasis role="bold">
             <link linkend="CONTref.CMIS.Configuration">CMIS configuration</link>
           </emphasis> </para>
+          <para>Description of CMIS configuration and other additional information. </para>
       </listitem>
     </itemizedlist>
 	</abstract>

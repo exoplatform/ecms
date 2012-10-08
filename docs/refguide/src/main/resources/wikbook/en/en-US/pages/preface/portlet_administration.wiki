@@ -26,3 +26,20 @@ This is an example of the *Administration* portlet used in Content:
 </portlet-preferences>
 {code}
 
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Content Detail|#CONTref.Portlets.ContentDetail]
+* [Content List|#CONTref.Portlets.ContentList]
+* [Search|#CONTref.Portlets.Search]
+* [Sites Explorer|#CONTref.Portlets.Explorer]
+* [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
+* [Form Builder|#CONTref.Portlets.FormBuilder]
+* [Authoring|#CONTref.Portlets.Authoring]
+* [Newsletter|#CONTref.Portlets.Newsletter]
+* [SEO portlet|#CONTref.Portlets.SEO]

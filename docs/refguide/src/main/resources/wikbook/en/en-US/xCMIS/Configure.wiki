@@ -1,4 +1,52 @@
-h1. CMIS Configuration {anchor:id=CONTref.Configuration.CMIS_configuration}
+{docbook}
+<highlights>
+<itemizedlist>
+    <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Configuration.CMIS_configuration">CMIS Configuration</link>
+          </emphasis> </para>
+          <para>Necessary infomation to make a special extension of <emphasis>CmisRegistry</emphasis>.</para>
+    </listitem>
+    <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Configuration.Required_nodetypes_namespaces_in_JCR">Required nodetypes and namespaces in JCR</link>
+          </emphasis> </para>
+          <para>Introduction about the mandatory configuration for JCR to work correctly.</para>
+     </listitem>
+     <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Configuration.Authentication_organization_service_configuration">Authenticator and organization service configuration</link>
+          </emphasis> </para>
+          <para>Introduction about authenticator and organization service configuration.</para>
+     </listitem>
+
+    <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Configuration.CMIS_search_index">CMIS search and index</link>
+          </emphasis> </para>
+          <para>Full provision about CMIS and index, such as query capabilities, configuration, Index atomicity and durability, and more.  </para>
+     </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Components|#CONTref.Configuration.Components]
+* [External Component Plugins|#CONTref.Configuration.Plugins]
+
+
+h1. CMIS Configuration {anchor:id=CONTref.Configuration.CMIS_configurationRoleNotInToc}
 
 To expose WCM drives to the CMIS repositories, you must make a special extension of _CmisRegistry_.
 
@@ -37,7 +85,7 @@ Where configuration parameters include:
   In case of any change of the indexer storage location, do not comment the _indexDir_ value parameter and point it to the actual location.
 {info}
 
-h1. Required nodetypes and namespaces in JCR {anchor:id=CONTref.Configuration.Required_nodetypes_namespaces_in_JCR}
+h1. Required nodetypes and namespaces in JCR {anchor:id=CONTref.Configuration.Required_nodetypes_namespaces_in_JCRRoleNotInToc}
 
 The following configuration is mandatory for JCR to work correctly:
 {code:xml}

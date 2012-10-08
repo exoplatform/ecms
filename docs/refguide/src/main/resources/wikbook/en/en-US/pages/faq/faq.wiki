@@ -87,3 +87,20 @@ You can use _classpath\:_ to configure which _.jar_ files contain your workflow 
 {code}	
   
 The notification message is displayed when you deploy a workflow on Jboss. If you use _classpath\:_ to register, you must put your workflow in the _.jar_ files inside the _gatein.ear/lib_ folder (instead of the _lib_ folder) to make it work.
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [Extensions|#CONTref.Extensions]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]

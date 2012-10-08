@@ -7,3 +7,21 @@ This is an example of the *SEO* portlet used in Content:
 * *Packaging*:  This porlet is packaged in the _seo.war_ file.
 
 * *The portlet class name*: _org.exoplatform.wcm.webui.seo.UISEOToolbarPortlet_
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Content Detail|#CONTref.Portlets.ContentDetail]
+* [Content List|#CONTref.Portlets.ContentList]
+* [Search|#CONTref.Portlets.Search]
+* [Sites Explorer|#CONTref.Portlets.Explorer]
+* [Administration|#CONTref.Portlets.Administration]
+* [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
+* [Form Builder|#CONTref.Portlets.FormBuilder]
+* [Authoring|#CONTref.Portlets.Authoring]
+* [Newsletter|#CONTref.Portlets.Newsletter]

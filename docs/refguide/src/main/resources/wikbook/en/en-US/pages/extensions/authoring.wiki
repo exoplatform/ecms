@@ -1,6 +1,66 @@
-Publication add-ons for Content.
+{docbook}
+<highlights>
+<itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin">Extended Publication Plugin</link>
+          </emphasis> </para>
+          <para>Information about an extended Publication plugin used to manage the lifecycles of documents in Content via the following topics:</para>
+          <itemizedlist>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States">States</link>
+                  </emphasis> </para>
+                  <para>Information about new states and new profiles of the extended publication, that are enabled in Content.</para>
+              </listitem>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates">Start/End publication dates</link>
+                  </emphasis> </para>
+                  <para>Introduction about new properties added to the new publication plugin, that allows you to manage the content publication in a defined period.</para>
+              </listitem>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin">New Publication Mixin</link>
+                  </emphasis></para>
+                  <para>Introduction about new authoring mixin that supplies more information about the document creator.</para>
+              </listitem>
+          </itemizedlist>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager">Publication Manager</link>
+          </emphasis> </para>
+          <para>Knowledge about the Publication Manager which manages lifecycles and contexts in the Content platform. It allows to manages different lifecycles based on different publication plugin in the platform.
+          This section consists of the following topics:</para>
+          <itemizedlist>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle">Lifecycle </link>
+                  </emphasis> </para>
+                  <para>Sample code about lifecycle which is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a Publication plugin (compliant with the JBPM or Bonita business processes).</para>
+              </listitem>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.Context">Context</link>
+                  </emphasis> </para>
+                  <para>Information and sample code about content in Content.</para>
+              </listitem>
+              <listitem>
+                 <para> <emphasis role="bold">
+                 <link linkend="CONTref.Extensions.AuthoringExtension.PublicationManager.NewAuthoringMixin">New Authoring Mixin</link>
+                  </emphasis> </para>
+                  <para>Introduction about new authoring mixin that supplies more information about the document creator.</para>
+              </listitem>
+          </itemizedlist>
+      </listitem>
+      </itemizedlist>
+</highlights>
+{docbook}
 
-h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin}
+h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPluginRoleNotInToc}
 This section covers the following topics:
 * [States|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States]
 * [Start/End publication dates|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates]
@@ -80,9 +140,9 @@ The publishing and unpublish CRON jobs will do this:
 
 See the export section for more information about the CRON jobs.
 
-h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager}
+h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManagerRoleNotInToc}
 
-The Publication Manager manages lifecycles and contexts in the Content platform. It allows to manages different lifecycles based on different publication plugin in the platform.
+The Publication Manager manages lifecycles and contexts in the Content platform. It allows managing different lifecycles based on different publication plugin in the platform.
 
 {code:java}
 public interface PublicationManager {

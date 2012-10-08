@@ -1,0 +1,108 @@
+{docbook}
+<highlights>
+<itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.TaxonomyService">TaxonomyService</link>
+          </emphasis> </para>
+          <para>Works with taxonomies. In this service, there are many functions which enable you to add, find, or delete taxonomies from a node.</para>
+      </listitem>
+       <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.LinkManager">LinkManager</link>
+          </emphasis> </para>
+          <para>Provides APIs to work with the linked node or the link included in a node.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.PublicationManager">PublicationManager</link>
+          </emphasis> </para>
+          <para>Manages the content publication.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.WCMComposer">WCMComposer</link>
+          </emphasis> </para>
+          <para>Gets contents inside the WCM product.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.NewFolksonomy">NewFolksonomy</link>
+          </emphasis> </para>
+          <para>Manages all the tag and tag style. Currently it just supports adding/editing/removing Private and Public tags.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.ApplicationTemplateManager">ApplicationTemplateManager</link>
+          </emphasis> </para>
+          <para>Manages dynamic groovy templates for WCM-based products.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.NodeFinder">NodeFinder</link>
+          </emphasis> </para>
+          <para>Finds a node with a given path.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.JodConverter">JodConverter</link>
+          </emphasis> </para>
+          <para>Converts documents into different office formats.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.TimelineService">TimelineService</link>
+          </emphasis> </para>
+          <para>Gets all documents by time frame (day, month, year).</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.SiteSearchService">SiteSearchService</link>
+          </emphasis> </para>
+          <para>Used in the <emphasis role="bold">Search</emphasis> portlet that allows users to find all information matching with a given keyword.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.SEOService">SEOService</link>
+          </emphasis> </para>
+          <para>Provides APIs to manage SEO data of a page or a content.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="CONTref.JavaServices.ManageViewService">ManageViewService</link>
+          </emphasis> </para>
+          <para>Used to work with views. This service has many functions which allow you to add, edit, delete, and get views.</para>
+      </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
+
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [Extensions|#CONTref.Extensions]
+* [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]

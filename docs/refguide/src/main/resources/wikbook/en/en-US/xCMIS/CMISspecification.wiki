@@ -22,3 +22,15 @@ The CMIS specification provides a Web services interface which can:
 * Build the development platform and language agnostic.
 * Support the composite application development and mashups by the business or IT analysts.
 
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [Overview|#Dev_CMIS.Overview]
+* [xCMIS project|#Dev_CMIS.xCMIS_project]
+* [CMIS features|#Dev_CMIS.features]
+* [Service JARs|#Adm_CMIS.ServiceJARs]

@@ -1,8 +1,67 @@
+{docbook}
+<highlights>
+<itemizedlist>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples.Login_to_repository">Login to repository</link>
+          </emphasis> </para>
+          <para>Example about basic HTTP authentication.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples.List_of_documents">List of documents (folder, files)</link>
+          </emphasis> </para>
+          <para>Description about the usage of several methods to get the documents lists, such as <emphasis>getChildren()</emphasis>, <emphasis>getFolderTree()</emphasis> and <emphasis>getDescentants()</emphasis>.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream">Read document properties and content-stream</link>
+          </emphasis> </para>
+          <para>Instruction about how to read and get the document properties and content stream.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples.Search_data_syntax_example">Search of data and syntax examples</link>
+          </emphasis> </para>
+          <para>Examples about searching data and syntax in CMIS.</para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="bold">
+            <link linkend="Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content">Modification of document properties or content</link>
+          </emphasis> </para>
+          <para>Examples about how to update and get document properties or content in CMIS.</para>
+      </listitem>
+</itemizedlist>
+</highlights>
+{docbook}
+
 The following examples of the CMIS usage may be useful for developers who need to access a repository.
 CMIS access code snippets are built using Apache HTTP Client for Java, or using Google gadgets (gadgets.io) for JavaScript examples.
 For the cURL examples, look at http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
 
-h1. Login to repository {anchor:id=Dev_CMIS.Usage_code_examples.Login_to_repository}
+{docbook}
+<para>
+<prompt>
+<emphasis role="bold">See also</emphasis>
+</prompt>
+</para>
+{docbook}
+
+* [WCM Templates|#CONTref.InsideWCMTemplates]
+* [WCM Explorer|#CONTref.InsideWCMExplorer]
+* [Extensions|#CONTref.Extensions]
+* [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
+* [Public Java APIs|#CONTref.JavaServices]
+* [Deprecated portlets|#CONTref.Deprecated_portlets]
+* [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
+* [FAQ|#CONTref.FAQ]
+
+h1. Login to repository {anchor:id=Dev_CMIS.Usage_code_examples.Login_to_repositoryRoleNotInToc}
 
 {note}
 The CMIS service uses the default authentication in general case, but it can be overridden in case of embedding CMIS into an Application Service.
@@ -33,13 +92,19 @@ Use java
 {code}
 
 
-h1. List of documents (folder, files) {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documents}
+h1. List of documents (folder, files) {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documentsRoleNotInToc}
 
 There are several methods to get the documents lists, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
 The difference between them is the usage of different URL segments to get data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
 and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() have a tree of items in response).
 
-h2. Use Java {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documents.Use_java}
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.List_of_documents.Use_java">
+<citetitle>
+<emphasis role="bold">Use Java</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
@@ -65,7 +130,14 @@ h2. Use Java {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documents.Use_java}
 {code}
 
 
-h2. Use JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.List_of_document.Use_Javascript}
+
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.List_of_document.Use_Javascript">
+<citetitle>
+<emphasis role="bold">Use JavaScript</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 Creating an URL to make a request (consists of repository name, the method name, for example "/children/", and folderID to get children from):
 
@@ -99,12 +171,18 @@ var handler = function(resp) {
 }
 {code}
 
-h1. Read document properties and content-stream {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream}
+h1. Read document properties and content-stream {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstreamRoleNotInToc}
 
 Reading the Document properties and content stream are two separate operations.
 Getting the content stream is possible after the properties set have been read and the content stream ID was extracted from it.
 
-h2. Use Java {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_java}
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_java">
+<citetitle>
+<emphasis role="bold">Use Java</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 Get document properties.
 
@@ -169,7 +247,14 @@ renditions. If no stream ID is specified, the default stream will be returned.
  }
 {code}
 
-h2. Use JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_Javascript}
+
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_Javascript">
+<citetitle>
+<emphasis role="bold">Use JavaScrip</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 Get document properties.
 
@@ -211,14 +296,20 @@ Performing a content stream request in JavaScript will cause the browser dialog 
 {code}
 
 
-h1. Search of data and syntax examples {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example}
+h1. Search of data and syntax examples {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_exampleRoleNotInToc}
 
 CMIS supports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
 The GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
 
 For more detailed instructions how to construct queries, refer to the [Query examples|#Dev_CMIS.features.Query_examples] chapter.
 
-h2. Use java {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Java}
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Java">
+<citetitle>
+<emphasis role="bold">Use Java</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 {code:java}
  import org.apache.commons.httpclient.HttpClient;
@@ -255,7 +346,13 @@ h2. Use java {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example.
 {code}
 
 
-h2. Use JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Javascript}
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Javascript">
+<citetitle>
+<emphasis role="bold">Use JavaScript</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 {code:java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
@@ -271,14 +368,21 @@ h2. Use JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_ex
 {code}
 
 
-h1. Modification of document properties or content {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content}
+h1. Modification of document properties or content {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_contentRoleNotInToc}
 
 The command of property update uses PUT method. The URL is the same as the one for reading properties, the difference is only in the HTTP method used.
 The body of the request must be an Atom document with specified properties  (see spec. 2.2.4.12 for detailed constructing document).
 
 Sending of content stream can be executed via PUT or POST requests. Content-type of the request must be an "multipart/form-data".
 
-h2. Use java {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_java}
+
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_java">
+<citetitle>
+<emphasis role="bold">Use Java</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 Update properties:
 
@@ -350,7 +454,14 @@ Set content stream:
  }
 {code}
 
-h2. Use JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_javascript}
+
+{docbook}
+<para xml:id="Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_javascript">
+<citetitle>
+<emphasis role="bold">Use JavaScript</emphasis>
+</citetitle>
+</para>
+{docbook}
 
 Update properties:
 
