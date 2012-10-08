@@ -26,10 +26,16 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-/**
- * @author lamphan AUG 01, 2010
- */
 
+/**
+ * Return a list of favorite documents of a given user. 
+ *
+ * @author lamphan
+ * @since      AUG 01, 2010
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService
+ */
 @Path("/favorite/")
 public class FavoriteRESTService implements ResourceContainer {
   private final FavoriteService favoriteService;
@@ -55,6 +61,18 @@ public class FavoriteRESTService implements ResourceContainer {
     this.manageDriveService = manageDriveService;
   }
 
+  /**
+   * Return a list of favorite documents of a given user.
+   * 
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param userName
+   * @param showItems
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService.getFavoriteByUser
+   */
   @GET
   @Path("/all/{repoName}/{workspaceName}/{userName}")
   public Response getFavoriteByUser(@PathParam("repoName") String repoName,

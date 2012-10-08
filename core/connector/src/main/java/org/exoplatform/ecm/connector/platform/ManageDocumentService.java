@@ -71,12 +71,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Lai Trung Hieu
- *          hieu.lai@exoplatform.com
- * 6 Apr 2011
+ * This is a service which is used to perform some actions on a folder or on a file, such as creating, or deleting a folder/file, or uploading a file.
+ *
+ * @author Lai Trung Hieu <hieu.lai@exoplatform.com>
+ * @since      6 Apr 2011
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService
  */
-
 @Path("/managedocument/")
 public class ManageDocumentService implements ResourceContainer {
 
@@ -144,11 +146,15 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   *
-   * @param driveType type of drives to get: general, group or personal
-   * @return {@link Document} contains the drives
-   *
-   * @throws Exception the exception
+   * Get all drives by type (General, Group or Personal). 
+   * 
+   * @param driveType The types of drive (General, Group, or Personal)
+   * @param showPrivate Show the Private drive or not. The default value is false
+   * @return {@link Document} Contain the drives
+   * 
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.getDrives
    */
   @GET
   @Path("/getDrives/")
@@ -197,15 +203,18 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Gets the folders and files of node, node can be user root node or children node
+   * Get all folders and files which can be viewed by the current user.
    *
-   * @param driveName the workspace name
-   * @param workspaceName the workspace name
-   * @param currentFolder path to current folder
+   * @param driveName The name of drive 
+   * @param workspaceName The name of workspace
+   * @param currentFolder The path to the folder to achieve its folders and files
+   * @param showHidden Show the hidden items or not. The default value is false 
    *
-   * @return {@link Document} contains the folders and files
+   * @return {@link Document} Contain the folders and files
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -243,15 +252,17 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Delete a folder or a file.
+   * Delete a folder/file.
+   * 
+   * @param driveName The name of drive
+   * @param workspaceName The name of workspace
+   * @param itemPath The path to the folder/file
    *
-   * @param driveName the drive name
-   * @param workspaceName the workspace name
-   * @param itemPath path to item to delete
+   * @return {@link Response} Return the status of an item which has been deleted.
    *
-   * @return {@link Response} ok if item is deleted
-   *
-   * @throws Exception the exception
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.deleteFolderOrFile
    */
   @GET
   @Path("/deleteFolderOrFile/")
@@ -291,16 +302,18 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Create new folder.
+   * Create a new folder and return its information.
+   *  
+   * @param driveName The name of drive
+   * @param workspaceName The name of workspace
+   * @param currentFolder The path to the folder where a child folder is added
+   * @param folderName The name of folder
    *
-   * @param driveName the drive name
-   * @param workspaceName the workspace name
-   * @param currentFolder path to current folder
-   * @param folderName the name of folder to create
+   * @return {@link Document} Contain the created folder
    *
-   * @return {@link Document} contains created folder
-   *
-   * @throws Exception the exception
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -348,14 +361,16 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Upload file.
+   * Upload a file to the server.
    *
-   * @param uploadId the upload id
-   * @param servletRequest the content of servlet request
+   * @param uploadId The Id of uploaded resource 
+   * @param servletRequest The servlet request
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -368,21 +383,22 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Process upload.
+   * Return information about the upload status of a file (upload percentage, file name, and more).
    *
-   * @param workspaceName the workspace name
-   * @param driveName the drive name
-   * @param currentFolder the current folder
-   * @param siteName the current portal
-   * @param jcrPath the jcr path
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
+   * @param workspaceName The name of workspace 
+   * @param driveName The name of drive
+   * @param currentFolder The path to the current folder
+   * @param currentPortal The name of the current site
+   * @param action The action to perform (saving, processing, and more)
+   * @param language The language of user
+   * @param fileName The name of file
+   * @param uploadId The Id of the uploaded resource 
    *
-   * @return the response
+   * @return The response
    *
-   * @throws Exception the exception
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ManageDocumentService.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

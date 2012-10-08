@@ -45,10 +45,13 @@ import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Hoa Pham
- * hoa.phamvu@exoplatform.com
- * Mar 31, 2009
+ * Get the image binary data of a given image node. 
+ *
+ * @author Hoa Pham <hoa.phamvu@exoplatform.com>
+ * @since      Mar 31, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -86,13 +89,15 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Serve image.
+   * Get the image binary data of a given image node.
    *
-   * @param repository the repository
-   * @param workspace the workspace
-   * @param nodeIdentifier the node identifier
+   * @param repository The repository
+   * @param workspace The workspace
+   * @param nodeIdentifier The node identifier
    *
-   * @return the response
+   * @return The response
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")

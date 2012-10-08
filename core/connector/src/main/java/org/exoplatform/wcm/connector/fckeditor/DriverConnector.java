@@ -81,10 +81,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * Created by The eXo Platform SEA
- * Author : Do Dang Thang
- * thang.do@exoplatform.com
- * Sep 7, 2009
+ * Return a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
+ *
+ * {{{{portalname}}}}: The name of portal.
+ * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
+ * 
+ * @author Do Dang Thang <thang.do@exoplatform.com>
+ * @since      Sep 7, 2009
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector
  */
 @Path("/wcmDriver/")
 public class DriverConnector extends BaseConnector implements ResourceContainer {
@@ -133,15 +139,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the drivers.
+   * Return a list of drives for the current user.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param userId the user id
-   *
-   * @return the drivers
-   *
-   * @throws Exception the exception
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param userId The Id of user
+   * @return The drives
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getDrivers
    */
   @GET
   @Path("/getDrivers/")
@@ -173,18 +179,18 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the folders and files.
+   * Return all folders and files in a given location.
    *
-   * @param driverName the driver name
-   * @param currentFolder the current folder
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param filterBy the filter by
-   * @param userId the user id
-   *
-   * @return the folders and files
-   *
-   * @throws Exception the exception
+   * @param driverName The name of drive
+   * @param currentFolder The current folder
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param filterBy The type of filter
+   * @param userId The Id of user
+   * @return The folders and files
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -233,23 +239,23 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
 
   /**
-   * Upload file.
+   * Upload a file.
    *
-   * @param inputStream the input stream
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param jcrPath the jcr path
-   * @param uploadId the upload id
-   * @param language the language
-   * @param contentType the content type
-   * @param contentLength the content length
-   * @param currentPortal the current portal
-   * @param driverName the driver name
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
+   * @param inputStream The input stream
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param jcrPath The jcr path
+   * @param uploadId The Id of upload
+   * @param language The language
+   * @param contentType The type of content
+   * @param contentLength The length of content
+   * @param currentPortal The current portal
+   * @param driverName The name of drive
+   * @return The response
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -261,22 +267,22 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Process upload.
+   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param currentFolder the current folder
-   * @param jcrPath the jcr path
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param siteName the current portal
-   * @param driverName the driver name
-   *
-   * @return the response
-   *
-   * @throws Exception the exception
+   * @param repositoryName The name of repository
+   * @param workspaceName The name of workspace
+   * @param currentFolder The current folder
+   * @param jcrPath The jcr path
+   * @param action The action
+   * @param language The language
+   * @param fileName The name of file
+   * @param uploadId The Id of upload
+   * @param siteName The current portal
+   * @param driverName The name of drive
+   * @return The response
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DriverConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

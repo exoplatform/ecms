@@ -49,18 +49,19 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Oct 23, 2008 11:09:39 AM
- */
-/**
- * Provide the request which will be used to get the response data
- * {repoName} Repository name
- * {workspaceName} Name of workspace
- * {nodePath} The node path
- * Example:
- * <img src="/portal/rest/thumbnailImage/repository/collaboration/test.gif" />
+ * Return a responding data as a thumbnail image. 
+ * {{{{repoName}}}}: The name of repository.
+ * {{{{workspaceName}}}}: The name of workspace.
+ * {{{{{nodePath}}}}: The node path.
+ *
+ * {{{{portalname}}}}: The name of the portal.
+ * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
+ * 
+ * @author Dang Van Minh <minh.dang@exoplatform.com>
+ * @since      Oct 23, 2008 11:09:39 AM
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService
  */
 @Path("/thumbnailImage/")
 public class ThumbnailRESTService implements ResourceContainer {
@@ -85,16 +86,19 @@ public class ThumbnailRESTService implements ResourceContainer {
     nodeFinder_ = nodeFinder;
     linkManager_ = linkManager;
   }
+
 /**
- * Get the image with medium size
- * ex: /portal/rest/thumbnailImage/medium/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a medium size (64x64).
+ * For example: /portal/rest/thumbnailImage/medium/repository/collaboration/test.gif/
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getThumbnailImage
  */
-
   @Path("/medium/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
   public Response getThumbnailImage(@PathParam("repoName") String repoName,
@@ -108,13 +112,15 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Get the image with big size
- * ex: /portal/rest/thumbnailImage/big/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a big size.
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getCoverImage
  */
   @Path("/big/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -126,13 +132,15 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Get the image with large size
- * ex: /portal/rest/thumbnailImage/large/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a large size (300x300).
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getLargeImage
  */
   @Path("/large/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -144,13 +152,15 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Get the image with small size
- * ex: /portal/rest/thumbnailImage/small/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a small size (32x32).
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getSmallImage
  */
   @Path("/small/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -162,13 +172,15 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Get the image with custom size
- * ex: /portal/rest/thumbnailImage/custom/30x40/repository/collaboration/test.gif/
- * @param repoName Repository name
- * @param wsName Workspace name
- * @param nodePath Node path
+ * Return an image at a custom size.
+ *
+ * @param repoName The name of repository
+ * @param wsName The name of workspace
+ * @param nodePath The node path
  * @return Response inputstream
  * @throws Exception
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getCustomImage
  */
   @Path("/custom/{size}/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -181,13 +193,15 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
   /**
-   * Get the image with origin data
-   * ex: /portal/rest/thumbnailImage/origin/repository/collaboration/test.gif/
-   * @param repoName Repository name
-   * @param wsName Workspace name
-   * @param nodePath Node path
+   * Return an image at an original size.
+   *
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param nodePath The node path
    * @return Response data stream
    * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ThumbnailRESTService.getOriginImage
    */
   @Path("/origin/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET

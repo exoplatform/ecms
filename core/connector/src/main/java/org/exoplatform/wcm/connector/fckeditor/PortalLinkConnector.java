@@ -62,9 +62,14 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/*
- * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
- * Jul 11, 2008
+/**
+ * Return a page URI for a given location.
+ *
+ * @author Anh Do Ngoc <anh.do@exoplatform.com>
+ * @since      Jul 11, 2008
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector
  */
 @SuppressWarnings("deprecation")
 @Path("/portalLinks/")
@@ -111,15 +116,15 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Gets the page uri.
+   * Get the page URI.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param type the type
-   *
-   * @return the page uri
-   *
-   * @throws Exception the exception
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param type The type
+   * @return The page URI
+   * @throws Exception The exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

@@ -62,21 +62,21 @@ import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Sep 3, 2009
- * 7:33:30 AM
- */
-/**
- * Provide the request which will be used to display PDF file on web browser
- * {repoName} Repository name
- * {workspaceName} Workspace name
- * {nodePath} Node path
- * {pageNumber} Page number
- * {rotation} Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
- * {scale} Zoom factor to be applied to the rendered page
- * Example: <img src="/portal/rest/pdfviewer/repository/collaboration/test.pdf/1/0.0f/1.0f">
+ * Return a PDF content to be displayed on the webpage.
+ * 
+ * {{{{repoName}}}}: The name of repository
+ * {{{{workspaceName}}}}: The name of workspace
+ * {{{{nodePath}}}}: The node path
+ * {{{pageNumber}}}}: The page number
+ * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
+ * {{{{scale}}}}: The Zoom factor which is applied to the rendered page
+ *
+ *     
+ * @author Dang Van Minh <minh.dang@exoplatform.com>
+ * @since Sep 3, 2009 7:33:30 AM
+ * @copyright  eXo Platform SEA
+ * 
+ * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
@@ -95,6 +95,20 @@ public class PDFViewerRESTService implements ResourceContainer {
     pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
   }
 
+  /**
+   * Return a thumbnail image for a PDF document.
+   * 
+   * @param repoName The name of repository
+   * @param wsName The name of workspace
+   * @param n
+   * @param pageNumber The page number
+   * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
+   * @param scale The Zoom factor which is applied to the rendered page
+   * @return Response inputstream
+   * @throws Exception
+   * 
+   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService.getCoverImage
+   */
   @GET
   public Response getCoverImage(@PathParam("repoName") String repoName,
       @PathParam("workspaceName") String wsName,
