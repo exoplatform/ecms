@@ -43,7 +43,6 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -177,11 +176,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		Node node = null;
 		try {
       if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
-          if (ConversationState.getCurrent()!=null){
-              sessionProvider = new SessionProvider(ConversationState.getCurrent());
-          } else {
-              sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-          }
+        sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
       }
 		  node = wcmService.getReferencedContent(sessionProvider, repository, workspace, nodeIdentifier);
 		} catch (RepositoryException e) {
@@ -234,11 +229,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		List<Node> nodes = new ArrayList<Node>();
     try {
       if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
-          if (ConversationState.getCurrent()!=null){
-              sessionProvider = new SessionProvider(ConversationState.getCurrent());
-          } else {
-              sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-          }
+        sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
 			}
       if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
       NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider, false);
@@ -310,11 +301,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
 
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
-        if (ConversationState.getCurrent()!=null){
-      sessionProvider = new SessionProvider(ConversationState.getCurrent());
-    } else {
-            sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
-        }
+      sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
     }
 
     nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider, true);
