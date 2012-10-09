@@ -735,7 +735,7 @@
     </tooltip>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <no-list>Il n'y aucun type de noeud satisfisant à cette condition de recherche.</no-list>
+      <no-list>Aucun type de noeud ne satisfait à la requête.</no-list>
     </msg>
   </UINodeTypeList>
   <!--
