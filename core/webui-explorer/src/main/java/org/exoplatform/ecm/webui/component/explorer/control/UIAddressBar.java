@@ -189,9 +189,8 @@ public class UIAddressBar extends UIForm {
   static public class ChangeNodeActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddress = event.getSource() ;
-      String path = null;
-      if(uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue() != null)
-        path = uiAddress.getUIInput(FIELD_ADDRESS_HIDDEN).getValue().toString();
+      String path = Text.escapeIllegalJcrChars(uiAddress.getUIStringInput(FIELD_ADDRESS).getValue());
+      ((UIFormHiddenInput)uiAddress.getChildById(FIELD_ADDRESS_HIDDEN)).setValue(path);
       if (path == null || path.trim().length() == 0) path = "/";
       UIJCRExplorer uiExplorer = uiAddress.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setIsViewTag(false) ;
