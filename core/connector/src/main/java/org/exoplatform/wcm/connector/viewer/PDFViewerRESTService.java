@@ -64,19 +64,19 @@ import org.icepdf.core.util.GraphicsRenderingHints;
 /**
  * Return a PDF content to be displayed on the webpage.
  * 
- * {{{{repoName}}}}: The name of repository
- * {{{{workspaceName}}}}: The name of workspace
- * {{{{nodePath}}}}: The node path
- * {{{pageNumber}}}}: The page number
- * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
- * {{{{scale}}}}: The Zoom factor which is applied to the rendered page
+ * {{{{repoName}}}}: The name of repository.
+ * {{{{workspaceName}}}}: The name of workspace.
+ * {{{{nodePath}}}}: The node path.
+ * {{{pageNumber}}}}: The page number.
+ * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
+ * {{{{scale}}}}: The Zoom factor which is applied to the rendered page.
  *
  *     
  * @author Dang Van Minh <minh.dang@exoplatform.com>
  * @since Sep 3, 2009 7:33:30 AM
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService
+ * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
@@ -98,16 +98,16 @@ public class PDFViewerRESTService implements ResourceContainer {
   /**
    * Return a thumbnail image for a PDF document.
    * 
-   * @param repoName The name of repository
-   * @param wsName The name of workspace
-   * @param n
-   * @param pageNumber The page number
-   * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f
-   * @param scale The Zoom factor which is applied to the rendered page
-   * @return Response inputstream
+   * @param repoName The name of repository.
+   * @param wsName The name of workspace.
+   * @param uuid The identifier of the document.
+   * @param pageNumber The page number.
+   * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
+   * @param scale The Zoom factor which is applied to the rendered page.
+   * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PDFViewerRESTService.getCoverImage
+   * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService.getCoverImage
    */
   @GET
   public Response getCoverImage(@PathParam("repoName") String repoName,
@@ -270,8 +270,8 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   /**
    * Init pdf document from InputStream in nt:file node
-   * @param currentNode
-   * @param repoName
+   * @param currentNode The name of the current node.
+   * @param repoName  The repository name.
    * @return
    * @throws Exception
    */

@@ -69,7 +69,7 @@ import org.w3c.dom.Element;
  * @since      Jul 11, 2008
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector
+ * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector
  */
 @SuppressWarnings("deprecation")
 @Path("/portalLinks/")
@@ -99,10 +99,10 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Instantiates a new portal link connector.
    *
-   * @param params the params
-   * @param dataStorage the data storage
-   * @param userACL the user acl
-   * @param servletContext the servlet context
+   * @param params the params.
+   * @param dataStorage the data storage.
+   * @param userACL the user acl.
+   * @param servletContext the servlet context.
    *
    * @throws Exception the exception
    */
@@ -118,13 +118,13 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Get the page URI.
    *
-   * @param currentFolder The current folder
-   * @param command The command
-   * @param type The type
-   * @return The page URI
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param type The type.
+   * @return The page URI.
    * @throws Exception The exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PortalLinkConnector.getFoldersAndFiles
+   * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

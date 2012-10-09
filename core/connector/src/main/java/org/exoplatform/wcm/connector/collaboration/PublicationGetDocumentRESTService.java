@@ -59,7 +59,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @since      May 17, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService
+ * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService
  */
 @Path("/publication/presentation/")
 public class PublicationGetDocumentRESTService implements ResourceContainer {
@@ -89,15 +89,16 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
 
   /**
    * Return a list of published documents by the default plugin.
-   * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}}}
+   * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}}}}
    *
-   * @param repoName The name of repository
-   * @param wsName The name of workspace
-   * @param state The state is specified to classify the process
+   * @param repoName The name of repository.
+   * @param wsName The name of workspace.
+   * @param state The state is specified to classify the process.
+   * @param showItems Show the number of items per page.
    * @return
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService.getPublishDocument
+   * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService.getPublishDocument
    */
   @Path("/{repository}/{workspace}/{state}/")
   @GET
@@ -112,14 +113,15 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * Return a list of published documents by a specific plugin.
    * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}?showItems={numberOfItem}}}}
    *
-   * @param repoName The name of repository
-   * @param wsName The name of workspace
-   * @param publicationPluginName The name of plugin
-   * @param state The state is specified to classify the process
+   * @param repoName The repository name.
+   * @param wsName The workspace name.
+   * @param pluginName The name of the plugin.
+   * @param state The state is specified to classify the process.
+   * @param showItems Show the number of items per page.
    * @return
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.PublicationGetDocumentRESTService.getPublishedListDocument
+   * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService.getPublishedListDocument
    */
   @Path("/{repository}/{workspace}/{publicationPluginName}/{state}/")
   @GET

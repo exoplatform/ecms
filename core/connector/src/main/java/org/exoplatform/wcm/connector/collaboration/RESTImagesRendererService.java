@@ -51,7 +51,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @since      Mar 31, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService
+ * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -80,8 +80,8 @@ public class RESTImagesRendererService implements ResourceContainer{
   /**
    * Instantiates a new rEST images renderer service.
    *
-   * @param repositoryService the repository service
-   * @param sessionProviderService the session provider service
+   * @param repositoryService the repository service.
+   * @param sessionProviderService the session provider service.
    */
   public RESTImagesRendererService(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
@@ -91,13 +91,13 @@ public class RESTImagesRendererService implements ResourceContainer{
   /**
    * Get the image binary data of a given image node.
    *
-   * @param repository The repository
-   * @param workspace The workspace
-   * @param nodeIdentifier The node identifier
+   * @param repository The repository.
+   * @param workspace The workspace.
+   * @param nodeIdentifier The node identifier.
    *
    * @return The response
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.RESTImagesRendererService.serveImage
+   * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")

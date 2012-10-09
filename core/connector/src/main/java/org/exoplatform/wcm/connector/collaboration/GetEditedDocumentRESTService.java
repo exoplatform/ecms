@@ -62,7 +62,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @since      May 17, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService
+ * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService
  */
 
 @Path("/presentation/document/edit/")
@@ -112,13 +112,13 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
   /**
    * Return the latest edited documents.
    * 
-   * @param repository The name of repository
-   * @param showItems 
-   * @param showGadgetWs 
-   * @return Response inputstream
+   * @param repository The name of repository.
+   * @param showItems Return the number of items in each page.
+   * @param showGadgetWs Show the gadget workspace or not. 
+   * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GetEditedDocumentRESTService.getLastEditedDoc
+   * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService.getLastEditedDoc
    */
   @Path("/{repository}/")
   @GET

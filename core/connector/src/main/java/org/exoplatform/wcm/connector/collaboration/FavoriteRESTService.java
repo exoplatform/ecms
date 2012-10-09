@@ -34,7 +34,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  * @since      AUG 01, 2010
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService
+ * @anchor CONTref.Devref.PublicRestAPIs.FavoriteRESTService
  */
 @Path("/favorite/")
 public class FavoriteRESTService implements ResourceContainer {
@@ -64,14 +64,14 @@ public class FavoriteRESTService implements ResourceContainer {
   /**
    * Return a list of favorite documents of a given user.
    * 
-   * @param repoName The name of repository
-   * @param wsName The name of workspace
-   * @param userName
-   * @param showItems
-   * @return Response inputstream
+   * @param repoName The name of repository.
+   * @param wsName The name of workspace.
+   * @param userName The username.
+   * @param showItems  Show the number of items per page.
+   * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.FavoriteRESTService.getFavoriteByUser
+   * @anchor CONTref.Devref.PublicRestAPIs.FavoriteRESTService.getFavoriteByUser
    */
   @GET
   @Path("/all/{repoName}/{workspaceName}/{userName}")

@@ -46,17 +46,17 @@ import org.w3c.dom.Element;
  * @since      Dec 21, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector
+ * @anchor CONTref.Devref.PublicRestAPIs.ResourceBundleConnector
  */
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {
 
   /**
   * Get the bundle that is based on the key and the locale.
-  * @param key 
-  * @param locale 
+  * @param key The key used to get the bundle.
+  * @param locale  The locale used to get the bundle.
   * 
-  * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.ResourceBundleConnector.getBundle
+  * @anchor CONTref.Devref.PublicRestAPIs.ResourceBundleConnector.getBundle
   */
   @GET
   @Path("/getBundle/")

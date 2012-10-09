@@ -66,7 +66,7 @@ import org.w3c.dom.Element;
  * @since      Jan 21, 2009
  * @copyright  eXo Platform SEA
  * 
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector
+ * @anchor CONTref.Devref.PublicRestAPIs.GadgetConnector
  */
 @Path("/wcmGadget/")
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
@@ -92,8 +92,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Instantiates a new gadget connector.
    *
-   * @param container the container
-   * @param initParams the init params
+   * @param container the container.
+   * @param initParams the init params.
    */
   public GadgetConnector(InitParams initParams) throws Exception {
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
@@ -103,12 +103,13 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Get folders and files.
    *
-   * @param currentFolder The current folder
-   * @param language The language
-   * @return The folders and files
+   * @param currentFolder The current folder.
+   * @param language The language.
+   * @param host The server address on which the gadget is deployed.
+   * @return The folders and files.
    * @throws Exception The exception
    * 
-   * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.GadgetConnector.getFoldersAndFiles
+   * @anchor CONTref.Devref.PublicRestAPIs.GadgetConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -131,8 +132,9 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Builds the xml response.
    *
-   * @param currentFolder the current folder
-   * @param language the language
+   * @param currentFolder The current folder.
+   * @param language The language.
+   * @param host The server address on which the gadget is deployed.
    *
    * @return the response
    *
