@@ -41,6 +41,12 @@
       <version>${org.exoplatform.portal.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>commons-component-common</artifactId>
+      <version>${org.exoplatform.commons.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-services</artifactId>
       <version>${project.version}</version>

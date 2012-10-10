@@ -38,6 +38,7 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "ecms-core-publication-plugins", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "ecms-ext-authoring-services", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "ecms-ext-webui", "jar",  module.version)).
+    addDependency(new Project("org.exoplatform.commons", "commons-component-common", "jar",  "${org.exoplatform.commons.version}")).
     addDependency(ws.frameworks.json).
     addDependency(jcr.frameworks.command).
     addDependency(portal.webui.portal);

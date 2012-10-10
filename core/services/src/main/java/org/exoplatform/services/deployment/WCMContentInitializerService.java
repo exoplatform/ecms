@@ -94,7 +94,7 @@ public class WCMContentInitializerService implements Startable{
       StringBuffer logData = new StringBuffer();
       for (DeploymentPlugin deploymentPlugin : listDeploymentPlugin) {
         try {
-          if (firstTimeDeploy || deploymentPlugin.isOverride() || !deploymentPlugin.deployed()) {
+          if (firstTimeDeploy || deploymentPlugin.isOverride() || !isDeployed(deploymentPlugin)) {
             deploymentPlugin.deploy(sessionProvider);
             if (deploymentPlugin.getSiteName() != null) {
               newSiteNames.add(deploymentPlugin.getSiteName());
@@ -140,6 +140,32 @@ public class WCMContentInitializerService implements Startable{
       }
     } finally {
       sessionProvider.close();
+    }
+  }
+  
+  /**
+   * indicates if this plugin was deployed,
+   * always return true for legacy data. 
+   */
+  public boolean isDeployed(DeploymentPlugin deploymentPlugin) {
+    SessionProvider sessionProvider = null;
+    try {
+      sessionProvider = SessionProvider.createSystemProvider();
+      ManageableRepository repository = WCMCoreUtils.getRepository();
+      Node serviceFolder = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository)
+                          .getRootNode().getNode("exo:services");
+      Node contentInitializerService = serviceFolder.hasNode("WCMContentInitializerService") ? 
+                                       serviceFolder.getNode("WCMContentInitializerService") :
+                                       serviceFolder.addNode("WCMContentInitializerService", "nt:unstructured");
+      String sideName = deploymentPlugin.getSiteName();
+      boolean ret = (sideName == null) || contentInitializerService.hasNode(sideName);
+      return ret;
+    } catch (Exception e) {
+      return false;
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
