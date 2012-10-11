@@ -179,7 +179,9 @@
 	################################################################################
 	-->
 	<UIActionForm>
-    <title>Ajouter une Action pour les catégories<ShowComponent>Ouvrir la fenêtre</ShowComponent>
+    <title>Ajouter une Action pour les catégories</title>
+    <title>
+      <ShowComponent>Ouvrir la fenêtre</ShowComponent>
       <removeReference>Supprimer</removeReference>
     </title>
 		<action>
@@ -1584,7 +1586,7 @@
     <title>
       <SelectUser>Sélectionner un utilisateur</SelectUser>
       <SelectMember>Sélectionner un rôle</SelectMember>
-      <AddAny>Sélectionner "tout le monde"</AddAny>
+      <AddAny>Sélectionner 'tout le monde'</AddAny>
     </title>
   </permission>
   <!--
