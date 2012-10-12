@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms-ext-xcmis</artifactId>
-    <version>4.0.0.Alpha1-SNAPSHOT</version>
+    <version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-ext-xcmis-docs</artifactId>
   <packaging>pom</packaging>
