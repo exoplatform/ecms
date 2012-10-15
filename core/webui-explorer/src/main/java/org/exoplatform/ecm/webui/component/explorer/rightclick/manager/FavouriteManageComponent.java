@@ -34,6 +34,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotFavouriteFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
@@ -76,7 +77,8 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
                                                  new IsNotLockedFilter(),
                                                  new IsCheckedOutFilter(),
                                                  new CanSetPropertyFilter(),
-                                                 new IsNotTrashHomeNodeFilter() });
+                                                 new IsNotTrashHomeNodeFilter(),
+                                                 new IsDocumentFilter() });
 
   private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class.getName());
 
