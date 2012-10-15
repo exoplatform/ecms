@@ -63,9 +63,6 @@ public class AddToFavoriteScript implements CmsScript {
     String nodePath = (String) variables.get("nodePath");
     String workspace = (String) variables.get("srcWorkspace");
     try {
-      // Get new added node
-      Node addedNode = (Node) WCMCoreUtils.getSystemSessionProvider().
-          getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
       if (ConversationState.getCurrent() == null) { 
         return;
       }
@@ -74,10 +71,14 @@ public class AddToFavoriteScript implements CmsScript {
       Node userNode = nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
       Node favoriteNode = userNode.getNode(favoritePath);
-      if (nodePath.startsWith(favoriteNode.getPath()) && 
-          templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
-        // Add new node to favorite
-        favoriteService_.addFavorite(addedNode, userID);
+      if (nodePath.startsWith(favoriteNode.getPath())) { 
+        // Get new added node
+        Node addedNode = (Node) WCMCoreUtils.getSystemSessionProvider().
+        getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
+        if (templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
+          // Add new node to favorite
+          favoriteService_.addFavorite(addedNode, userID);
+        }
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
