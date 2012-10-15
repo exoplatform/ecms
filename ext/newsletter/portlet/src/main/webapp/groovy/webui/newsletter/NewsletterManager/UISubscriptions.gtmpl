@@ -97,7 +97,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 																	<% 
 																	if(uicomponent.isAdministrator()){
 																	%>
-																		<div class="MenuItem" onclick="javascript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
+																		<div class="MenuItem" onclick="javaScript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
 																			<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;">
 																				<a href="javaScript:void(0)">
 																					<%=_ctx.appRes("UISubscription.title.DeleteCategory")%>
