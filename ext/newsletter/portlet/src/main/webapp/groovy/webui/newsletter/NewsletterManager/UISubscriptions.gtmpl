@@ -124,7 +124,7 @@ if(categoryTitle != null && categoryTitle.length() > 30)
 																</div>
 																<%
 																if(uicomponent.isAdministrator() || uicomponent.isModerator()){%>
-																	<div class="MenuItem" onclick="javaScript:if (confirm('<%=_ctx.appRes("UISubscription.msg.confirmDeleteCategory")%>')) <%=uicomponent.event("DeleteCategory")%>">
+																	<div class="MenuItem" onclick="javaScript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UISubscriptions', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneSubScriptionToDelete")%>', '<%=_ctx.appRes("UISubscription.msg.confirmDeleteSubscription")%>')) <%=uicomponent.event("DeleteSubscription")%>">
 																		<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;">
 																			<a href="javaScript:void(0)">
 																				<%=_ctx.appRes("UISubscription.title.Delete")%>
