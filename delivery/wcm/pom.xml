@@ -15,6 +15,18 @@
     <module>module</module>
     <module>product</module>
     <module>jboss-package</module>
-    <module>assembly</module>
   </modules>
+   <profiles>
+     <profile>
+       <id>pkg-wcm</id>
+       <activation>
+         <property>
+           <name>!skip.wcm</name>
+         </property>
+       </activation>
+       <modules>
+         <module>assembly</module>
+       </modules>
+     </profile>
+   </profiles>  
 </project>
