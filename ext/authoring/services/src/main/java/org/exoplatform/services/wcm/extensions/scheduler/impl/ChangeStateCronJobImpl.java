@@ -112,7 +112,7 @@ public class ChangeStateCronJobImpl implements Job {
                                      append(" and (jcr:path like '").append(contentPath).append("%' )");
                                      
           long normalCount = changeStateForNodes(sessionProvider, property, NORMAL_NODE, normalNodesStatement.toString());
-          long stagedCount = (property == START_TIME_PROPERTY) ? 
+          long stagedCount = (START_TIME_PROPERTY.equals(property)) ? 
                               changeStateForNodes(sessionProvider, property, STAGED_NODE, stagedNodesStatement.toString()) : 0;
                               
           long numberOfItemsToChange = normalCount + stagedCount;
