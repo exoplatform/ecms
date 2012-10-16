@@ -84,5 +84,6 @@
     <module>templates</module>
     <module>portlet-preferences</module>
     <module>drive-data</module>
+    <module>waiportal-translations</module>
   </modules>
 </project>

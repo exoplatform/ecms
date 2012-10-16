@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.wcm.portal.artifacts;
 
+import java.util.HashMap;
+
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
@@ -55,4 +57,11 @@ public interface CreatePortalArtifactsService {
    * @throws Exception
    */
   public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception;
+  
+  /**
+   * Return all artifacts plugins - list of CreatePortalPlugin
+   * 
+   * @return the artifactPlugins
+   */
+  public HashMap<String, CreatePortalPlugin> getArtifactPlugins();
 }

@@ -24,9 +24,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
+import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
 
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -502,6 +508,51 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     } catch (SameAsDefaultLangException ex) {
       assertTrue(true);
     }
+  }
+  
+  /**
+   * Test addLinkedLanguage the case that force to replace existing language symlink.
+   * 
+   * @throws Exception 
+   */
+  public void testAddLinkedLanguage() throws Exception {
+    Node test = session.getRootNode().addNode("test");
+    Node article1 = test.addNode("article1", ARTICLE);
+    article1.addMixin(I18NMixin);
+    article1.setProperty(TITLE, "sport");
+    article1.setProperty(SUMMARY, "report of season");
+    article1.setProperty(TEXT, "sport is exciting");
+    
+    Node article2 = test.addNode("article2", ARTICLE);
+    article2.addMixin(I18NMixin);
+    article2.setProperty(TITLE, "sport");
+    article2.setProperty(SUMMARY, "french version");
+    article2.setProperty(TEXT, "le sport est passionnant");
+    article2.setProperty(MultiLanguageService.EXO_LANGUAGE, "fr");
+    session.save();
+    
+    multiLanguageService.addLinkedLanguage(article1, article2);
+    
+    List<String> lstLanguages = multiLanguageService.getSupportedLanguages(article1);
+    assertTrue(lstLanguages.contains("en"));
+    assertTrue(lstLanguages.contains("fr"));
+    Node frNode = multiLanguageService.getLanguage(article1, "fr");
+    assertTrue(frNode.getName().equals("article2"));
+    
+    Node article3 = test.addNode("article3", ARTICLE);
+    article3.addMixin(I18NMixin);
+    article3.setProperty(TITLE, "sport");
+    article3.setProperty(SUMMARY, "french version");
+    article3.setProperty(TEXT, "le sport est passionnant");
+    article3.setProperty(MultiLanguageService.EXO_LANGUAGE, "fr");
+    session.save();
+    multiLanguageService.addLinkedLanguage(article1, article3, true);
+    
+    lstLanguages = multiLanguageService.getSupportedLanguages(article1);
+    assertTrue(lstLanguages.contains("en"));
+    assertTrue(lstLanguages.contains("fr"));
+    frNode = multiLanguageService.getLanguage(article1, "fr");
+    assertTrue(frNode.getName().equals("article3"));
   }
 
   /**

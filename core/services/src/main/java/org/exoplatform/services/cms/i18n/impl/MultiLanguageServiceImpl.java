@@ -458,7 +458,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
   /**
    * {@inheritDoc}
    */
-  public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
+  public void addLinkedLanguage(Node node, Node translationNode, boolean forceReplace) throws Exception {
     Node languagesNode;
     if (node.hasNode(LANGUAGES))
       languagesNode = node.getNode(LANGUAGES);
@@ -477,7 +477,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     }
     String lang = translationNode.getProperty("exo:language").getString();
     if (languagesNode.hasNode(lang)) {
-      throw new ItemExistsException();
+      if (forceReplace) {
+        languagesNode.getNode(lang).remove();
+        languagesNode.save();
+      } else {
+        throw new ItemExistsException();
+      }
     } else if (getDefault(node).equals(lang)) {
       throw new SameAsDefaultLangException();
     }
@@ -486,6 +491,13 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     Node linkNode = linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
     ((ExtendedNode)linkNode).setPermission(IdentityConstants.ANY, new String[]{PermissionType.READ});
     linkNode.getSession().save();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
+    addLinkedLanguage(node, translationNode, false);
   }
   
   /**
@@ -1176,7 +1188,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     }
     return null ;
   }
-
+  
   /**
    * {@inheritDoc}
    */
