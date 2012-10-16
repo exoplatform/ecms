@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+ * Copyright (C) 2003-2014 eXo Platform SAS.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
