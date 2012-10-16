@@ -502,6 +502,10 @@
   margin: 2px 0px;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FieldLabel {
+  width: 128px;
+}
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UIFormUploadInput .SelectFileFrame {
 	width: auto;
 }
@@ -509,10 +513,6 @@
 .UIJCRExplorerPortlet .UIViewBar .ShowSideBarButton {
   width: 24px;	height: 24px;
   background: url('DefaultSkin/icons/ShowSideBarButton.gif') no-repeat bottom;
-}
-
-.UISearchContainer .UIForm .UIFormGrid .FieldComponent{
-  width: 60%;
 }
 
 /**************New skin**************/
