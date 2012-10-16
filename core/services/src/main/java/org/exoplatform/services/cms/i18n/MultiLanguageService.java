@@ -123,6 +123,15 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addLinkedLanguage(Node node, Node translationNode) throws Exception;
+  
+  /**
+   * Add newLanguageNode node with a symlink, based on exo:language targetNode property
+   * @param node              current node
+   * @param translationNode   target translation node
+   * @param overrideExistence   true if override existing symlink pointing to other translation, else throw ItemExistsException 
+   * @throws Exception
+   */
+  public void addLinkedLanguage(Node node, Node translationNode, boolean overrideExistence) throws Exception;
 
   /**
    * Add new translation for one node and synchronize all related translation nodes.
