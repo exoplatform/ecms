@@ -1,23 +1,22 @@
-h1. Overview {anchor:id=CONTref.ExtendUIExtension.Overview}
 There are many places inside ECMS which is built basing on the UI Extension Framework, so you can add your own actions packaged in external jars to them. They are:
 
-*The action bar*
+* *Action bar*
 
 !images/actionbar.png|align="center" width="120mm" fo:scalefix="1" html:scalefix="0"!
 
-*The side bar*
+* *Side bar*
 
 !images/sidebar.png|align="center" width="50mm" fo:scalefix="1" html:scalefix="0"!
 
-*The admin control panel*
+* *Admin control panel*
 
 !images/admin_control_panel.png|align="center" width="50mm" fo:scalefix="1" html:scalefix="0"!
 
-*The context menu in the main working area*
+* *Context menu in the main working area*
 
 !images/context_menu.png|align="center" width="50mm" fo:scalefix="1" html:scalefix="0"!
 
-*File viewer*
+* *File viewer*
 
 !images/file_viewer.png|align="center" width="80mm" fo:scalefix="1" html:scalefix="0"!
 
@@ -49,8 +48,7 @@ Navigating in the project's folder, you will see the following structure:
 
 Here is the content of the _pom.xml_ file:
 
-{code:xml}
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+{code:xml}<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
  <modelVersion>4.0.0</modelVersion>
 
@@ -96,8 +94,7 @@ Here is the content of the _pom.xml_ file:
      </plugin>
    </plugins>
  </build>
-</project>
-{code}
+</project>{code}
 
 
 {docbook}
@@ -156,8 +153,7 @@ Register new action with UIExtensionManager
 {docbook}
 
 Edit the _configuration.xml_ file as below:
-{code:xml}
-<?xml version="1.0" encoding="UTF-8"?>
+{code:xml}<?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
@@ -187,19 +183,18 @@ Edit the _configuration.xml_ file as below:
    </component-plugin>
  </external-component-plugins>
 
-</configuration>
-{code}
+</configuration>{code}
 
 h1. Deploy new action extension {anchor:id=CONTref.ExtendUIExtension.DeployNewActionExtension}
 Follow these steps to deploy your new action extension:
 
-*1*. Build the project by using the "mvn clean install" command.
+*1.* Build the project by using the _mvn clean install_ command.
 
-*2*. Copy the _target/example-1.0-SNAPSHOT.jar_ file into the _TOMCAT\-HOME/lib/_ directory.
+*2.* Copy the _target/example-1.0-SNAPSHOT.jar_ file into the _TOMCAT\-HOME/lib/_ directory.
 
-*3*. Run the tomcat and go to *Content explorer*.
+*3.* Run Tomcat and go to *Content explorer*.
 
-*4*. Add the deployed action to WCM View. You will get the result:
+*4.* Add the deployed action to the WCM View. You will get the results:
 
 !images/extendUI_result1.png|align="center" width="120mm" fo:scalefix="1" html:scalefix="0"!
 
@@ -219,7 +214,7 @@ Define a label in ECM Administration
 </para>
 {docbook}
 
-Edit the file _$TOMCAT\-HOME/webapps/ecmadmin/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet\_en.xml_ (for English which is also the default language) and add the label as below:
+Edit the _$TOMCAT\-HOME/webapps/ecmadmin/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet\_en.xml_ file (for English which is also the default language) and add the label as below:
 
 {code:xml}
 ...
@@ -244,10 +239,9 @@ Define a label in the File Explorer
 </para>
 {docbook}
 
-Edit the file _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ (for English which is also the default language) and add the label as below:
+Edit the _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ file (for English which is also the default language) and add the label as below:
 
-{code:xml}
-...
+{code:xml}...
  <UIActionBar>
     ...
    <tooltip>
@@ -256,8 +250,7 @@ Edit the file _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/
    </tooltip>
     ...
  </UIActionBar>
-...
-{code}
+...{code}
 
 {docbook}
 <para>
@@ -270,25 +263,22 @@ Define Logos
 {docbook}
 
 
-Edit the file _$TOMCAT-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultStylesheet.css_ (for the default Skin) and add the icon definition as below
-(in this case, the "ManageUnLock" icon is re-useed but you could add your own picture into the directory _$TOMCAT\-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultSkin_):
+Edit the _$TOMCAT-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultStylesheet.css_ file (for the default Skin) and add the icon definition as below
+(in this case, the "ManageUnLock" icon is re-used but you could add your own picture into the _$TOMCAT\-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultSkin_ directory):
 
-{code:xml}
-.ExampleIcon{
+{code:xml}.ExampleIcon{
   width: 24px; height: 24px;
   background: url('DefaultSkin/ManageUnLock.gif') no-repeat left center; /* orientation=lt */
   background: url('DefaultSkin/ManageUnLock.gif') no-repeat right center; /* orientation=rt */
-}
-{code}
+}{code}
 
 h1. Filter your action {anchor:id=CONTref.ExtendUIExtension.FilterYourAction}
 
-With the UI Extension framework, you can use internal and external (existed) filters. The internal filters are parts of the business logic of your component. For example, if your component is only dedicated to articles, you will add an internal filter to your component that will check the type of the current document. The external filters are mainly used to add new filters that are not related to the business logic, to your component, a good example is the _UserACLFilter_ which allows you to filter by access permissions.
+With the UI Extension framework, you can use internal and external (existing) filters. The internal filters are parts of the business logic of your component. For example, if your component is only dedicated to articles, you will add an internal filter to your component that will check the type of the current document. The external filters are mainly used to add new filters that are not related to the business logic, to your component, a good example is the _UserACLFilter_ which allows you to filter by access permissions.
 
 It is very simple to apply a filter in an UI component:
 
-{code:java}
-public class ExampleComponent extends UIComponent {
+{code:java}public class ExampleComponent extends UIComponent {
 
     private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {new MyUIFilter()});
 
@@ -296,61 +286,57 @@ public class ExampleComponent extends UIComponent {
 public List<UIExtensionFilter> getFilters() {
 return FILTERS;
 }
-...
-{code}
+...{code}
 
-h2. Use existed filters {anchor:id=CONTref.ExtendUIExtension.UseExistedFilter}
+h2. Use existing filters {anchor:id=CONTref.ExtendUIExtension.UseExistingFilter}
 
 There are many useful built-in filters in ECMS:
 
-* org.exoplatform.webui.ext.filter.impl.UserACLFilter
-* org.exoplatform.webui.ext.filter.impl.FileFilter
-* In package org.exoplatform.ecm.webui.component.explorer.control.filter
-* CanAddCategoryFilter 
-* IsFavouriteFilter
-* IsNotNtFileFilter
-* CanAddNodeFilter               
-* IsHoldsLockFilter           
-* IsNotRootNodeFilter
-* CanCutNodeFilter               
-* IsInTrashFilter             
-* IsNotSameNameSiblingFilter
-* CanDeleteNodeFilter           
-* IsMixCommentable            
-* IsNotSimpleLockedFilter
-* CanEnableVersionFilter        
-* IsMixVotable                
-* IsNotSymlinkFilter
-* CanRemoveNodeFilter            
-* IsNotCategoryFilter         
-* IsNotSystemWorkspaceFilter
-* CanSetPropertyFilter           
-* IsNotCheckedOutFilter       
-* IsNotTrashHomeNodeFilter
-* HasMetadataTemplatesFilter     
-* IsNotEditingDocumentFilter  
-* IsPasteableFilter
-* HasPublicationLifecycleFilter  
-* IsNotFavouriteFilter        
-* IsReferenceableNodeFilter
-* HasRemovePermissionFilter      
-* IsNotFolderFilter           
-* IsTrashHomeNodeFilter
-* IsCheckedOutFilter            
-* IsNotHoldsLockFilter        
-* IsVersionableFilter
-* IsDocumentFilter              
-* IsNotInTrashFilter         
-* IsVersionableOrAncestorFilter
-* IsEditableFilter               
-* IsNotLockedFilter
+* _org.exoplatform.webui.ext.filter.impl.UserACLFilter_: Used to filter all nodes that do not have any permission on current context.
+* _org.exoplatform.webui.ext.filter.impl.FileFilter_: Used to filter all nodes that do not exist in the given mime type list.
+* _CanAddCategoryFilter_: Used to check if the current node is possible to add categories or not. It returns true if the current node is possible to add categories.            
+* _CanCutNodeFilter_: Used to check if the current node is possible to cut nodes or not. It returns true if the current node is possible to cut nodes.            
+* _CanAddNodeFilter_: Used to check if the current node is possible to add nodes or not. It returns true if the current node is possible to add nodes.            
+* _CanDeleteNodeFilter_: Used to check if the current node is possible to delete node or not. It returns true if the current node is possible to delete nodes.            
+* _CanRemoveNodeFilter_: Used to check if the current node is possible to remove node or not. It returns true if the current node is possible to remove nodes.            
+* _CanEnableVersionFilter_: Used to check if the current node is possible to enable version or not. It returns true if the current node is possible to enable version.            
+* _CanSetPropertyFilter_: Used to check if the current node can be modified or not. It returns true if the current node can be modified.  
+* _HasMetadataTemplatesFilter_: Used to check if the current node has metadata templates or not. It returns true if the current node has metadata templates.    
+* _HasPublicationLifecycleFilter_: Used to check if the current node has publication plugins or not. It returns true if the current node has publication plugins.    
+* _HasRemovePermissionFilter_: Used to check if the current node has the Remove permission or not. It returns true if the current node has the Remove permission.         
+* _IsFavouriteFilter_: Used to check if the current node is a favorite node or not. It returns true if the current node is a favorite node.        
+* _IsNotFavouriteFilter_: Used to check if the current node is a favorite node or not. It returns true if the current node is not a favorite node.        
+* _IsNotNtFileFilter_: Used to check if the current node is a nt:file or not. It returns true if the current node is not a nt:file.        
+* _IsHoldsLockFilter_: Used to check if the current node is holding lock or not. It returns true if the current node is holding lock.
+* _IsNotHoldsLockFilter_: Used to check if the current node is holding lock or not. It returns true if the current node is not holding lock.
+* _IsNotRootNodeFilter_: Used to check if the current node is a root node or not. It returns true if the current node is not a root node.
+* _IsInTrashFilter_: Used to check if the current node is not in the trash node or not. It returns true if the current node is already in the trash.            
+* _IsNotInTrashFilter_: Used to check if the current node is not in the trash node or not. It returns true if the current node is not in the trash.            
+* _IsNotSameNameSiblingFilter_: Used to check if the current node is the same name sibling or not. It returns true if the current node is not the same name sibling.             
+* _IsMixCommentable_: Used to check if the current node is added mix:commentable or not. It returns true if the current node is added mix:commentable.            
+* _IsMixVotable_: Used to check if the current node is added the mixin mix:votable or not. It returns true if the current node is added mix:votable.            
+* _IsNotSimpleLockedFilter_: Used to check if the current node is locked or not. It returns true if the current node is not locked.            
+* _IsNotSymlinkFilter_: Used to check if the current node is a symlink or not. It returns true if the current node is not a symlink.            
+* _IsNotCategoryFilter_: Used to check if the current node is a category node or not. It returns true if the current node is not a category.            
+* _IsNotSystemWorkspaceFilter_: Used to check if the current workspace is a system workspace or not. It returns true if the current workspace is not a system workspace.            
+* _IsNotCheckedOutFilter_: Used to check if the current node is checked out or not. It returns true if the current node is not checked out.
+* _IsTrashHomeNodeFilter_: Used to check if the current node is a trash node or not. It returns true if the current node is a trash node.
+* _IsNotTrashHomeNodeFilter_: Used to if the current node is a trash node or not. It returns true if the current node is not a trash node. 
+* _IsNotEditingDocumentFilter_: Used to check if the current node is under editing or not. It returns true if the current node is not under editing.
+* _IsPasteableFilter_: Used to filter places where are not allowed to paste. It returns true if the place is allowed to paste.
+* _IsReferenceableNodeFilter_: Used to check if the current node is added mixin mix:referenceable or not. It returns true if the current node is added mixin mix:referenceable.
+* _IsNotFolderFilter_: Used to check if the current node is a folder or not. It returns true if the current node is not a folder.         
+* _IsCheckedOutFilter_: Used to check if the current node is checked out or not. It returns true if the current node is checked out.
+* _IsVersionableFilter_: Used to check if the current node is added mixin mix:versionable or not. It returns true if the current node is added mixin mix:versionable.
+* _IsVersionableOrAncestorFilter_: Used to check if the current node or ancestor nodes are added mixin mix:versionable or not. It returns true if the current node or ancestor nodes are added mixin mix:versionable.
+* _IsDocumentFilter_: Used to check if the current node is a document or not. It returns true if the current node is a document.
+* _IsEditableFilter_: Used to check if the current node is editable or not. It returns true if the current node is editable.
 
 h2. Create your own filters {anchor:id=CONTref.ExtendUIExtension.CreateYourOwnFilters}
 
-Beside using existed ones, you can also create new filters. See the example code below:
+Beside using existing ones, you can also create new filters. See the example code below:
 
-{code:java}
-public class MyUIFilter implements UIExtensionFilter {
+{code:java}public class MyUIFilter implements UIExtensionFilter {
 
 /**
 * This method checks if the current node is of the right type
@@ -374,8 +360,7 @@ return UIExtensionFilterType.MANDATORY;
 public void onDeny(Map<String, Object> context) throws Exception {
 System.out.println("This document has been rejected");
 }
-}
-{code}
+}{code}
 
 h1. Other toolbars {anchor:id=CONTref.ExtendUIExtension.OtherToolbars}
 
@@ -385,16 +370,15 @@ Working with other toolbars is quite similar to _UIActionbar_, except configurat
 <para>
 <citetitle>
 <emphasis role="bold">
-The side bar
+Side bar
 </emphasis>
 </citetitle>
 </para>
 {docbook}
 
-*Sample configuration*
+* *Sample configuration*
 
-{code:xml}
-<object-param>
+{code:xml}<object-param>
  <name>Example</name>
  <object type="org.exoplatform.webui.ext.UIExtension">
    <field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
@@ -402,13 +386,11 @@ The side bar
    <field name="rank"><int>110</int></field>
    <field name="component"><string>com.acme.ExampleActionComponent</string></field>
  </object>
-</object-param>
-{code}
+</object-param>{code}
 
 Resources are located at  _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ (for English which is also the default language):
 
-{code:xml}
-...
+{code:xml}...
  <UISideBar>
     ...
    <label>
@@ -417,23 +399,21 @@ Resources are located at  _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/loc
    </label>
     ...
  </UISideBar>
-...
-{code}
+...{code}
 
 {docbook}
 <para>
 <citetitle>
 <emphasis role="bold">
-The admin control panel
+Admin control panel
 </emphasis>
 </citetitle>
 </para>
 {docbook}
 
-*Sample configuration*
+* *Sample configuration*
 
-{code:xml}
-<object-param>
+{code:xml}<object-param>
  <name>Example</name>
  <object type="org.exoplatform.webui.ext.UIExtension">
    <field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
@@ -442,12 +422,11 @@ The admin control panel
    <field name="category"><string>Ontologies</string></field>
    <field name="component"><string>com.acme.ExampleActionComponent</string></field>
  </object>
-</object-param>
-{code}
+</object-param>{code}
 
 The "category" field specifies which category the extend action will take place. There are 4 options:
 
-* Ontologies
+* Ontology
 
 !images/Ontologies.png|align="center" width="60mm" fo:scalefix="1" html:scalefix="0"!
 
@@ -455,18 +434,17 @@ The "category" field specifies which category the extend action will take place.
 
 !images/ContentPresentation.png|align="center" width="60mm" fo:scalefix="1" html:scalefix="0"!
 
-* TypesOfContent
+* Content Type
 
 !images/ContentType.png|align="center" width="60mm" fo:scalefix="1" html:scalefix="0"!
 
-* AdvanceConfiguration
+* Advanced Configuration
 
 !images/AdvancedConfigurations.png|align="center" width="60mm" fo:scalefix="1" html:scalefix="0"!
 
 Resources are located at _$TOMCAT\-HOME/webapps/ecmadmin/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet\_en.xml_ (for English which is also the default language):
 
-{code:xml}
-...
+{code:xml}...
  <UIECMAdminControlPanel>
     ...
    <label>
@@ -475,23 +453,21 @@ Resources are located at _$TOMCAT\-HOME/webapps/ecmadmin/WEB-INF/classes/locale/
    </label>
     ...
  </UIECMAdminControlPanel>
-...
-{code}
+...{code}
 
 {docbook}
 <para>
 <citetitle>
 <emphasis role="bold">
-The context menu
+Context menu
 </emphasis>
 </citetitle>
 </para>
 {docbook}
 
-*Sample configuration*
+* *Sample configuration*
 
-{code:xml}
-<object-param>
+{code:xml}<object-param>
  <name>Example</name>
  <object type="org.exoplatform.webui.ext.UIExtension">
    <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
@@ -500,8 +476,7 @@ The context menu
    <field name="category"><string>ItemContextMenu_SingleSelection</string></field>
    <field name="component"><string>com.acme.ExampleActionComponent</string></field>
  </object>
-</object-param>
-{code}
+</object-param>{code}
 
 The "category" field specifies which category the extend action will take place. There are many options:
 
@@ -511,34 +486,30 @@ The "category" field specifies which category the extend action will take place.
 
 * GroundContextMenu & ItemGroundContextMenu: The menu appear when user right click on the ground of node:
 
-
 Resources are located at  _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ (for English which is also the default language):
 
-{code:xml}
- <UIWorkingArea>
+{code:xml}<UIWorkingArea>
     ...
    <label>
      <example>Example action</example>
     ...
    </label>
     ...
- </UIWorkingArea>
-{code}
+</UIWorkingArea>{code}
 
 {docbook}
 <para>
 <citetitle>
 <emphasis role="bold">
-The File Viewer
+File Viewer
 </emphasis>
 </citetitle>
 </para>
 {docbook}
 
-*Sample configuration*
+* *Sample configuration*
 
-{code:xml}
-<object-param>
+{code:xml}<object-param>
  <name>Example</name>
  <object type="org.exoplatform.webui.ext.UIExtension">
    <field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
@@ -560,16 +531,13 @@ The File Viewer
       </collection>
     </field>
  </object>
-</object-param>
-{code}
+</object-param>{code}
 
-Resources are located at  _$TOMCAT\-HOME/webapps/ecm-wcm-extension/WEB-INF/classes/locale/ecm/views\_en.xml_ (for English which is also the default language):
+Resources are located at _$TOMCAT\-HOME/webapps/ecm-wcm-extension/WEB-INF/classes/locale/ecm/views\_en.xml_ (for English which is also the default language):
 
-{code:xml}
- <File>
+{code:xml}<File>
    <view>
      <example>Example view</example>
     ...
    </view>
- </File>
-{code}
+ </File>{code}
