@@ -292,45 +292,46 @@ h2. Use existing filters {anchor:id=CONTref.ExtendUIExtension.UseExistingFilter}
 
 There are many useful built-in filters in ECMS:
 
-* _org.exoplatform.webui.ext.filter.impl.UserACLFilter_: Used to filter all nodes that do not have any permission on current context.
-* _org.exoplatform.webui.ext.filter.impl.FileFilter_: Used to filter all nodes that do not exist in the given mime type list.
-* _CanAddCategoryFilter_: Used to check if the current node is possible to add categories or not. It returns true if the current node is possible to add categories.            
-* _CanCutNodeFilter_: Used to check if the current node is possible to cut nodes or not. It returns true if the current node is possible to cut nodes.            
-* _CanAddNodeFilter_: Used to check if the current node is possible to add nodes or not. It returns true if the current node is possible to add nodes.            
-* _CanDeleteNodeFilter_: Used to check if the current node is possible to delete node or not. It returns true if the current node is possible to delete nodes.            
-* _CanRemoveNodeFilter_: Used to check if the current node is possible to remove node or not. It returns true if the current node is possible to remove nodes.            
-* _CanEnableVersionFilter_: Used to check if the current node is possible to enable version or not. It returns true if the current node is possible to enable version.            
-* _CanSetPropertyFilter_: Used to check if the current node can be modified or not. It returns true if the current node can be modified.  
-* _HasMetadataTemplatesFilter_: Used to check if the current node has metadata templates or not. It returns true if the current node has metadata templates.    
-* _HasPublicationLifecycleFilter_: Used to check if the current node has publication plugins or not. It returns true if the current node has publication plugins.    
-* _HasRemovePermissionFilter_: Used to check if the current node has the Remove permission or not. It returns true if the current node has the Remove permission.         
-* _IsFavouriteFilter_: Used to check if the current node is a favorite node or not. It returns true if the current node is a favorite node.        
-* _IsNotFavouriteFilter_: Used to check if the current node is a favorite node or not. It returns true if the current node is not a favorite node.        
-* _IsNotNtFileFilter_: Used to check if the current node is a nt:file or not. It returns true if the current node is not a nt:file.        
-* _IsHoldsLockFilter_: Used to check if the current node is holding lock or not. It returns true if the current node is holding lock.
-* _IsNotHoldsLockFilter_: Used to check if the current node is holding lock or not. It returns true if the current node is not holding lock.
-* _IsNotRootNodeFilter_: Used to check if the current node is a root node or not. It returns true if the current node is not a root node.
-* _IsInTrashFilter_: Used to check if the current node is not in the trash node or not. It returns true if the current node is already in the trash.            
-* _IsNotInTrashFilter_: Used to check if the current node is not in the trash node or not. It returns true if the current node is not in the trash.            
-* _IsNotSameNameSiblingFilter_: Used to check if the current node is the same name sibling or not. It returns true if the current node is not the same name sibling.             
-* _IsMixCommentable_: Used to check if the current node is added mix:commentable or not. It returns true if the current node is added mix:commentable.            
-* _IsMixVotable_: Used to check if the current node is added the mixin mix:votable or not. It returns true if the current node is added mix:votable.            
-* _IsNotSimpleLockedFilter_: Used to check if the current node is locked or not. It returns true if the current node is not locked.            
-* _IsNotSymlinkFilter_: Used to check if the current node is a symlink or not. It returns true if the current node is not a symlink.            
-* _IsNotCategoryFilter_: Used to check if the current node is a category node or not. It returns true if the current node is not a category.            
-* _IsNotSystemWorkspaceFilter_: Used to check if the current workspace is a system workspace or not. It returns true if the current workspace is not a system workspace.            
-* _IsNotCheckedOutFilter_: Used to check if the current node is checked out or not. It returns true if the current node is not checked out.
-* _IsTrashHomeNodeFilter_: Used to check if the current node is a trash node or not. It returns true if the current node is a trash node.
-* _IsNotTrashHomeNodeFilter_: Used to if the current node is a trash node or not. It returns true if the current node is not a trash node. 
-* _IsNotEditingDocumentFilter_: Used to check if the current node is under editing or not. It returns true if the current node is not under editing.
-* _IsPasteableFilter_: Used to filter places where are not allowed to paste. It returns true if the place is allowed to paste.
-* _IsReferenceableNodeFilter_: Used to check if the current node is added mixin mix:referenceable or not. It returns true if the current node is added mixin mix:referenceable.
-* _IsNotFolderFilter_: Used to check if the current node is a folder or not. It returns true if the current node is not a folder.         
-* _IsCheckedOutFilter_: Used to check if the current node is checked out or not. It returns true if the current node is checked out.
-* _IsVersionableFilter_: Used to check if the current node is added mixin mix:versionable or not. It returns true if the current node is added mixin mix:versionable.
-* _IsVersionableOrAncestorFilter_: Used to check if the current node or ancestor nodes are added mixin mix:versionable or not. It returns true if the current node or ancestor nodes are added mixin mix:versionable.
-* _IsDocumentFilter_: Used to check if the current node is a document or not. It returns true if the current node is a document.
-* _IsEditableFilter_: Used to check if the current node is editable or not. It returns true if the current node is editable.
+|| Filters || Description||
+|{{org.exoplatform.webui.ext.filter.impl.UserACLFilter}}| Filter all nodes that do not have any permission on the current context.|
+|{{org.exoplatform.webui.ext.filter.impl.FileFilter}}| Filter all nodes that do not exist in the given mime type list.|
+|{{CanAddCategoryFilter}}| Filter nodes to which are impossible to add categories.|
+|{{CanCutNodeFilter}}| Filter nodes that are impossible to cut node.|
+| {{CanAddNodeFilter}} | Filter nodes that are impossible to add node.|
+| {{CanDeleteNodeFilter}} | Filter nodes that cannot be deleted.|
+| {{CanRemoveNodeFilter}} | Filter nodes that cannot be removed. |
+| {{CanEnableVersionFilter}} |Filter nodes that cannot add the _mix\:versionable_ mixin.|
+| {{CanSetPropertyFilter}} | Filter nodes that cannot be modified.|
+| {{HasMetadataTemplatesFilter}} | Filter nodes that do not have metadata templates.  |
+| {{HasPublicationLifecycleFilter}} | Check the filtering of all the nodes that do not have any publication plugins. |
+| {{HasRemovePermissionFilter}} | Filter nodes that do not have the _Remove_ permission.|
+| {{IsFavouriteFilter}} | Filter nodes that are not favorite.|
+| {{IsNotFavouriteFilter}} |Filter nodes that are favorite.|
+| {{IsNotNtFileFilter}} | Filter nodes that are _nt\:file_. |
+| {{IsHoldsLockFilter}} | Filter nodes which do not hold lock.|
+| {{IsNotHoldsLockFilter}} | Filter nodes which are holding lock.|
+| {{IsNotRootNodeFilter}} | Check if the current node is the root node or not. It returns true if the selected node is not the root node.|
+| {{IsInTrashFilter}} | Check if the current node is in the trash node or not. It returns true if the current node is already in the trash.|
+| {{IsNotInTrashFilter}} | Filter nodes that are not in the trash node.|
+| {{IsNotSameNameSiblingFilter}} | Filter nodes that are the same name siblings.|
+| {{IsMixCommentable}} | Filter nodes to which are not added _mix\:commentable_ yet.|
+| {{IsMixVotable}} | Filter nodes to which are not added the _mix\:votable_ mixin yet.|
+| {{IsNotSimpleLockedFilter}} | Filter nodes that are locked.|
+| {{IsNotSymlinkFilter}} | Filter nodes that are symlinks.|
+| {{IsNotCategoryFilter}} | Filter nodes that are category nodes.|
+| {{IsNotSystemWorkspaceFilter}} | Filter actions that the current workspace is a system once.|
+| {{IsNotCheckedOutFilter}} | Filter nodes that are checked out.|
+| {{IsTrashHomeNodeFilter}} | Filter a node that is not a trash node.|
+| {{IsNotTrashHomeNodeFilter}} | Filter a node that is a trash node.|
+| {{IsNotEditingDocumentFilter}} | Filter nodes that is under being edited. |
+| {{IsPasteableFilter}} | Filter the place where are not allowed to paste.|
+| {{IsReferenceableNodeFilter}} |Filter nodes to which are not added the _mix\:referenceable_ mixin.|
+| {{IsNotFolderFilter}} | Filter nodes that are folders.|
+| {{IsCheckedOutFilter}} | Filter nodes that are not checked out.|
+| {{IsVersionableFilter}} | Filter nodes to which are not added the _mix\:versionable_ mixin.|
+| {{IsVersionableOrAncestorFilter}} | Filter nodes or ancestor nodes to which are not added the _mix\:versionable_ mixin.|
+| {{IsDocumentFilter}} | Filter nodes that are not documents.|
+| {{IsEditableFilter}} | Filter nodes that are not editable.|
 
 h2. Create your own filters {anchor:id=CONTref.ExtendUIExtension.CreateYourOwnFilters}
 
