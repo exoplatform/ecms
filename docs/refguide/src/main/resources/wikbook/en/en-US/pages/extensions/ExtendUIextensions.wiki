@@ -42,9 +42,9 @@ Create a Maven project which has the following directory structure:
 
 Navigating in the project's folder, you will see the following structure:
 
-* _pom.xml_: the project's POM file.
-* _src/main/java/.../ExampleActionComponent.java_: a simple action supporting user to view the wiki markup of a page.
-* _src/main/resources/conf/portal/configuration.xml_: the configuration file to register your actions with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
+* _pom.xml_: The project's POM file.
+* _src/main/java/.../ExampleActionComponent.java_: A simple action supporting user to view the wiki markup of a page.
+* _src/main/resources/conf/portal/configuration.xml_: The configuration file to register your actions with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
 
 Here is the content of the _pom.xml_ file:
 
@@ -262,7 +262,6 @@ Define Logos
 </para>
 {docbook}
 
-
 Edit the _$TOMCAT-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultStylesheet.css_ file (for the default Skin) and add the icon definition as below
 (in this case, the "ManageUnLock" icon is re-used but you could add your own picture into the _$TOMCAT\-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultSkin_ directory):
 
@@ -274,7 +273,7 @@ Edit the _$TOMCAT-HOME/webapps/ecmexplorer/skin/icons/24x24/DefaultStylesheet.cs
 
 h1. Filter your action {anchor:id=CONTref.ExtendUIExtension.FilterYourAction}
 
-With the UI Extension framework, you can use internal and external (existing) filters. The internal filters are parts of the business logic of your component. For example, if your component is only dedicated to articles, you will add an internal filter to your component that will check the type of the current document. The external filters are mainly used to add new filters that are not related to the business logic, to your component, a good example is the _UserACLFilter_ which allows you to filter by access permissions.
+With the UI Extension framework, you can use internal and external (existing) filters. The internal filters are parts of the business logic of your component. For example, if your component is only dedicated to articles, you will add an internal filter to your component that will check the type of the current document. The external filters are mainly used to add new filters that are not related to the business logic, to your component. A good example is the _UserACLFilter_ which allows you to filter by access permissions.
 
 It is very simple to apply a filter in an UI component:
 
@@ -292,46 +291,48 @@ h2. Use existing filters {anchor:id=CONTref.ExtendUIExtension.UseExistingFilter}
 
 There are many useful built-in filters in ECMS:
 
+* {{org.exoplatform.webui.ext.filter.impl.UserACLFilter}}: Filter all nodes that do not have any permission on the current context.
+* {{org.exoplatform.webui.ext.filter.impl.FileFilter}}: Filter all nodes that do not exist in the given MIME type list.
+* {{org.exoplatform.ecm.webui.component.explorer.control.filter}}: This package includes the following filters.
+
 || Filters || Description||
-|{{org.exoplatform.webui.ext.filter.impl.UserACLFilter}}| Filter all nodes that do not have any permission on the current context.|
-|{{org.exoplatform.webui.ext.filter.impl.FileFilter}}| Filter all nodes that do not exist in the given mime type list.|
-|{{CanAddCategoryFilter}}| Filter nodes to which are impossible to add categories.|
-|{{CanCutNodeFilter}}| Filter nodes that are impossible to cut node.|
-| {{CanAddNodeFilter}} | Filter nodes that are impossible to add node.|
-| {{CanDeleteNodeFilter}} | Filter nodes that cannot be deleted.|
-| {{CanRemoveNodeFilter}} | Filter nodes that cannot be removed. |
-| {{CanEnableVersionFilter}} |Filter nodes that cannot add the _mix\:versionable_ mixin.|
-| {{CanSetPropertyFilter}} | Filter nodes that cannot be modified.|
-| {{HasMetadataTemplatesFilter}} | Filter nodes that do not have metadata templates.  |
-| {{HasPublicationLifecycleFilter}} | Check the filtering of all the nodes that do not have any publication plugins. |
-| {{HasRemovePermissionFilter}} | Filter nodes that do not have the _Remove_ permission.|
-| {{IsFavouriteFilter}} | Filter nodes that are not favorite.|
-| {{IsNotFavouriteFilter}} |Filter nodes that are favorite.|
-| {{IsNotNtFileFilter}} | Filter nodes that are _nt\:file_. |
-| {{IsHoldsLockFilter}} | Filter nodes which do not hold lock.|
-| {{IsNotHoldsLockFilter}} | Filter nodes which are holding lock.|
-| {{IsNotRootNodeFilter}} | Check if the current node is the root node or not. It returns true if the selected node is not the root node.|
-| {{IsInTrashFilter}} | Check if the current node is in the trash node or not. It returns true if the current node is already in the trash.|
-| {{IsNotInTrashFilter}} | Filter nodes that are not in the trash node.|
-| {{IsNotSameNameSiblingFilter}} | Filter nodes that are the same name siblings.|
-| {{IsMixCommentable}} | Filter nodes to which are not added _mix\:commentable_ yet.|
-| {{IsMixVotable}} | Filter nodes to which are not added the _mix\:votable_ mixin yet.|
-| {{IsNotSimpleLockedFilter}} | Filter nodes that are locked.|
-| {{IsNotSymlinkFilter}} | Filter nodes that are symlinks.|
-| {{IsNotCategoryFilter}} | Filter nodes that are category nodes.|
-| {{IsNotSystemWorkspaceFilter}} | Filter actions that the current workspace is a system once.|
-| {{IsNotCheckedOutFilter}} | Filter nodes that are checked out.|
-| {{IsTrashHomeNodeFilter}} | Filter a node that is not a trash node.|
-| {{IsNotTrashHomeNodeFilter}} | Filter a node that is a trash node.|
-| {{IsNotEditingDocumentFilter}} | Filter nodes that is under being edited. |
-| {{IsPasteableFilter}} | Filter the place where are not allowed to paste.|
-| {{IsReferenceableNodeFilter}} |Filter nodes to which are not added the _mix\:referenceable_ mixin.|
-| {{IsNotFolderFilter}} | Filter nodes that are folders.|
-| {{IsCheckedOutFilter}} | Filter nodes that are not checked out.|
-| {{IsVersionableFilter}} | Filter nodes to which are not added the _mix\:versionable_ mixin.|
-| {{IsVersionableOrAncestorFilter}} | Filter nodes or ancestor nodes to which are not added the _mix\:versionable_ mixin.|
-| {{IsDocumentFilter}} | Filter nodes that are not documents.|
-| {{IsEditableFilter}} | Filter nodes that are not editable.|
+|{{CanAddCategoryFilter}}|Filter nodes to which it is impossible to add categories.|
+|{{CanCutNodeFilter}}|Filter nodes which cannot be cut.|
+|{{CanAddNodeFilter}}|Filter nodes to which it is impossible to add nodes.|
+|{{CanDeleteNodeFilter}}|Filter nodes that cannot be deleted.|
+|{{CanRemoveNodeFilter}}|Filter nodes that cannot be removed.|
+|{{CanEnableVersionFilter}}|Filter nodes which do not allow versioning.|
+|{{CanSetPropertyFilter}}|Filter nodes that cannot be modified.|
+|{{HasMetadataTemplatesFilter}}|Filter nodes that do not have metadata templates.|
+|{{HasPublicationLifecycleFilter}}|Filter all nodes that do not have the publication plugins.|
+|{{HasRemovePermissionFilter}}|Filter nodes that do not have the *Remove* permission.|
+|{{IsFavouriteFilter}}|Filter nodes that are not favorite.|
+|{{IsNotFavouriteFilter}}|Filter nodes that are favorite.|
+|{{IsNotNtFileFilter}}|Filter nodes that are of _nt\:file_. |
+|{{IsHoldsLockFilter}}|Filter nodes which do not hold lock.|
+|{{IsNotHoldsLockFilter}}|Filter nodes which are holding lock.|
+|{{IsNotRootNodeFilter}}|Filter the root node.|
+|{{IsInTrashFilter}}|Filter nodes that are not in the trash node.|
+|{{IsNotInTrashFilter}}|Filter nodes that are in the trash node.|
+|{{IsNotSameNameSiblingFilter}}|Filter nodes that allow the same name siblings.|
+|{{IsMixCommentable}}|Filter nodes that do not allow commenting.|
+|{{IsMixVotable}}|Filter nodes that do not allow voting.|
+|{{IsNotSimpleLockedFilter}}|Filter nodes that are locked.|
+|{{IsNotSymlinkFilter}}|Filter nodes that are symlinks.|
+|{{IsNotCategoryFilter}}|Filter nodes that are of the category type.|
+|{{IsNotSystemWorkspaceFilter}}|Filter actions of the system-typed workspace.|
+|{{IsNotCheckedOutFilter}}|Filter nodes that are checked out.|
+|{{IsTrashHomeNodeFilter}}|Filter nodes that are not trash ones.|
+|{{IsNotTrashHomeNodeFilter}}|Filter a node that is the trash one.|
+|{{IsNotEditingDocumentFilter}}|Filter nodes that are being edited. |
+|{{IsPasteableFilter}}|Filter nodes where the *paste* action is not allowed.|
+|{{IsReferenceableNodeFilter}}|Filter nodes that do not allow adding references.|
+|{{IsNotFolderFilter}}|Filter nodes that are folders.|
+|{{IsCheckedOutFilter}}|Filter nodes that are not checked out.|
+|{{IsVersionableFilter}}|Filter nodes which do not allow versioning.|
+|{{IsVersionableOrAncestorFilter}}|Filter nodes and ancestor nodes which do not allow versioning.|
+|{{IsDocumentFilter}}|Filter nodes that are not documents.|
+|{{IsEditableFilter}}|Filter nodes that are not editable.|
 
 h2. Create your own filters {anchor:id=CONTref.ExtendUIExtension.CreateYourOwnFilters}
 
@@ -365,7 +366,7 @@ System.out.println("This document has been rejected");
 
 h1. Other toolbars {anchor:id=CONTref.ExtendUIExtension.OtherToolbars}
 
-Working with other toolbars is quite similar to _UIActionbar_, except configurations and the resources.
+Working with other toolbars is quite similar to _UIActionbar_, except configurations and resources.
 
 {docbook}
 <para>
@@ -425,7 +426,7 @@ Admin control panel
  </object>
 </object-param>{code}
 
-The "category" field specifies which category the extend action will take place. There are 4 options:
+The "category" field specifies the category where your extension action is performed. There are 4 options:
 
 * Ontology
 
@@ -479,15 +480,13 @@ Context menu
  </object>
 </object-param>{code}
 
-The "category" field specifies which category the extend action will take place. There are many options:
+The "category" field specifies the category where your extension action is performed. There are many options:
 
-* ItemContextMenu\_SingleSelection: This menu has only one item when right click on Trash Folder:
+* {{ItemContextMenu\_SingleSelection}}: This menu has only one item when Trash Folder is right-clicked.
+* {{ItemContextMenu}}: The menu appears when the user selects one or many items.
+* {{GroundContextMenu}} & {{ItemGroundContextMenu}}: The menu appears when the user right-clicks the ground of node.
 
-* ItemContextMenu: This is the menu that appears when user select one or many item:
-
-* GroundContextMenu & ItemGroundContextMenu: The menu appear when user right click on the ground of node:
-
-Resources are located at  _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ (for English which is also the default language):
+Resources are located at _$TOMCAT\-HOME/webapps/ecmexplorer/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet\_en.xml_ (for English which is also the default language):
 
 {code:xml}<UIWorkingArea>
     ...
