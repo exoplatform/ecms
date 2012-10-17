@@ -11,9 +11,9 @@
        <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.Extensions.UIExtensions">UI Extensions</link>
+            <link linkend="CONTref.Extensions.ExtendUIExtension">How to make your own ECMS UI Extensions</link>
           </emphasis> </para>
-          <para>Instructions on how to do UI extensions via adding your own UIAction/ActionListener, registering your UIAction and running your own UI extension sample.</para>
+          <para>Instructions on how to make your own UI extension by creating the new action and its corresponding listener, registering with <emphasis>UIExtensionManager</emphasis> and running your UI extension sample. This section also provides information on filtering action with exsiting filters or creating your new filter.</para>
       </listitem>
       <listitem>
         <para>
