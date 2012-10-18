@@ -5,4 +5,4 @@
 </citetitle>
 </para>
 {docbook}
-This is an abstract class and the parent of _[ScriptActionPlugin|#CONTref.Configuration.Plugins.ScriptActionPlugin]_ and _[BPActionPlugin|#CONTref.Configuration.Plugins.BPActionPlugin]_.
+This is an abstract class and the parent of _[ScriptActionPlugin|#CONTref.Configuration.Plugins.ScriptActionPlugin]_ and _BPActionPlugin_.

@@ -101,7 +101,5 @@ In Content 2.3.0, some preferences are no longer used, for example, the *ShowPri
 * [Sites Explorer|#CONTref.Portlets.Explorer]
 * [Administration|#CONTref.Portlets.Administration]
 * [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
 * [Authoring|#CONTref.Portlets.Authoring]
-* [Newsletter|#CONTref.Portlets.Newsletter]
 * [SEO portlet|#CONTref.Portlets.SEO]

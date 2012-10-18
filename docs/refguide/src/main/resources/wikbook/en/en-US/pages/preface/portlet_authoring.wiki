@@ -51,6 +51,4 @@ This is an example of the *Authoring* portlet used in Content:
 * [Sites Explorer|#CONTref.Portlets.Explorer]
 * [Administration|#CONTref.Portlets.Administration]
 * [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
-* [Newsletter|#CONTref.Portlets.Newsletter]
 * [SEO portlet|#CONTref.Portlets.SEO]

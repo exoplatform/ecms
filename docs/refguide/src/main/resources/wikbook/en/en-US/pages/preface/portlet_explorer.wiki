@@ -12,10 +12,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||
 | *repository* | {{string}} | {{repository}} | The repository name which is used in an instance of Sites Explorer. |
-| *workspace* | {{string}} | {{N/A}} | Not in use. The workspace name was included in the Drive.|
 | *path* | {{string}} | {{N/A}} | The path of the node. This preference will be used when the selected usecase is *Parameterize*. |
-| *drive* | {{string}} | {{N/A}} | Not in use. Replaced by the driveName preference. |
-| *views* | {{string}} | {{N/A}} | Not in use. The views will be displayed basing on the Drive which the user has the access permission.|
 | *allowCreateFolders* | {{string}} | {{N/A}} | Allow creating a folder by type. When you do not specify the value, the default value will be nt:unstructured, nt:folder. |
 | *categoryMandatoryWhenFileUpload* | {{boolean}} | false | Force a user to add a category when uploading or creating a document. |
 | *uploadFileSizeLimitMB* | {{float}} | 150 | The maximum size of a file that is uploaded to the system (MB). |
@@ -28,7 +25,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
 | *showTopBar* | {{boolean}} | {{true}} | Allow showing the Top bar or not. |
 | *showActionBar* | {{boolean}} | {{true}} | Allow showing the Action bar or not.|
 | *showSideBar* | {{boolean}} | {{true}} | Allow showing the Side bar or not.|
-| *showFilterBar* | {{boolean}} | {{true}} | Allow showing the Filter bar or not. |
+| *showFilterBar* | {{boolean}} | {{true}} | Allow showing the Filter bar or not.|
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.Explorer.ExampleConfiguration}
 
@@ -140,7 +137,5 @@ This is an example of the *Sites Explorer* portlet used in Content:
 * [Search|#CONTref.Portlets.Search]
 * [Administration|#CONTref.Portlets.Administration]
 * [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
 * [Authoring|#CONTref.Portlets.Authoring]
-* [Newsletter|#CONTref.Portlets.Newsletter]
 * [SEO portlet|#CONTref.Portlets.SEO]

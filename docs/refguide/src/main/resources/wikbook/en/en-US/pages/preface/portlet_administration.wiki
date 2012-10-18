@@ -39,7 +39,5 @@ This is an example of the *Administration* portlet used in Content:
 * [Search|#CONTref.Portlets.Search]
 * [Sites Explorer|#CONTref.Portlets.Explorer]
 * [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
 * [Authoring|#CONTref.Portlets.Authoring]
-* [Newsletter|#CONTref.Portlets.Newsletter]
 * [SEO portlet|#CONTref.Portlets.SEO]

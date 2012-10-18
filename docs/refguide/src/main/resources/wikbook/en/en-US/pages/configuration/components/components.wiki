@@ -46,19 +46,6 @@
       <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.Configuration.Components.NewsletterInitializationService">NewsletterInitializationService</link>
-          </emphasis> </para>
-          <para>Initiate some data for the newsletter portlet. </para>
-      </listitem><listitem>
-        <para>
-          <emphasis role="bold">
-            <link linkend="CONTref.Configuration.Components.NewsletterManagerService">NewsletterManagerService</link>
-          </emphasis> </para>
-          <para>Send newsletters to subscribers.</para>
-      </listitem>
-      <listitem>
-        <para>
-          <emphasis role="bold">
             <link linkend="CONTref.Configuration.Components.SiteSearchService">SiteSearchService</link>
           </emphasis> </para>
           <para>Allow finding all information matching with your given keyword.</para>

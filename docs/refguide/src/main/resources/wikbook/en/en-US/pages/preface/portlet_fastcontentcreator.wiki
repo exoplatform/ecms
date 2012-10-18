@@ -92,7 +92,5 @@ By default, this porlet is applied for the Contact Us portlet in Content.
 * [Search|#CONTref.Portlets.Search]
 * [Sites Explorer|#CONTref.Portlets.Explorer]
 * [Administration|#CONTref.Portlets.Administration]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
 * [Authoring|#CONTref.Portlets.Authoring]
-* [Newsletter|#CONTref.Portlets.Newsletter]
 * [SEO portlet|#CONTref.Portlets.SEO]

@@ -49,23 +49,9 @@
       <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.Deprecated_portlets">Deprecated portlets</link>
-          </emphasis> </para>
-          <para>A list of deprecated portlets in the Content function.</para>
-      </listitem>
-      <listitem>
-        <para>
-          <emphasis role="bold">
             <link linkend="Adm_CMIS.Miscellaneous_tips">Miscellaneous and Tips</link>
           </emphasis> </para>
           <para>A list of reference links for xCMIS project and CMIS.</para>
-      </listitem>
-      <listitem>
-        <para>
-          <emphasis role="bold">
-            <link linkend="CONTref.FAQ">FAQs</link>
-          </emphasis> </para>
-          <para>A list of FAQs related to the product.</para>
       </listitem>
     </itemizedlist>
 	</abstract>
