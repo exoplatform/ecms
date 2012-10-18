@@ -6,7 +6,7 @@ This is an example of the *Content Detail* portlet used in Content:
 
 * *Packaging*: This portlet is packaged in the _presentation.war_ file.
 
-* *The portlet class name*: _org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet_
+* *Portlet class name*: _org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet_
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||

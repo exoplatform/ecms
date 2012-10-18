@@ -7,7 +7,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
 
 * *Packaging*: The porlet is packaged in the _ecmexplorer.war_ file.
 
-* *The portlet class name*: _org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet_
+* *Portlet class name*: _org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet_
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||

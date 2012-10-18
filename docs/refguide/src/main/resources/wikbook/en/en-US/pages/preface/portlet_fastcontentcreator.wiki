@@ -7,7 +7,7 @@ This is an example of the *Fast Content Creator* portlet used in Content:
 By default, this porlet is applied for the Contact Us portlet in Content.
 * *Packaging*: This portlet is packaged in the _formgenerator.war_ file.
 
-* *The portlet class name*: _org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet_
+* *Portlet class name*: _org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet_
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.FastContentCreator.AvailablePreferences}
 || *Preference* || *Type* || *Value* || *Description* ||
