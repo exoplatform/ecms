@@ -6,7 +6,7 @@ The users can find this porlet in the front page. This is an example of the *Sea
 
 * *Packaging*: This portlet is packaged in the _searches.war_ file.
 
-* *The portlet class name*: _org.exoplatform.wcm.webui.search.UIWCMSearchPortlet_
+* *Portlet class name*: _org.exoplatform.wcm.webui.search.UIWCMSearchPortlet_
 
 * *Available preferences*: When using this portlet, you can customize the following preferences: {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
 || *Preference* || *Type*|| *Value* || *Description* ||

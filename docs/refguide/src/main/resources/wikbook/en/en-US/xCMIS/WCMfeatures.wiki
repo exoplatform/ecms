@@ -864,7 +864,7 @@ Query result:
 
 h4. More than comparison (>) {anchor:id=Dev_CMIS.features.More_than_comparison}
 
-Query: Select all documents wihch have {{{apollo:propertyBooster}}} property which is more than 5.
+Query: Select all documents which have {{{apollo:propertyBooster}}} property which is more than 5.
 
 Initial data:
 * document1: {{{apollo:propertyBooster}}} - 3
