@@ -6,7 +6,7 @@ This is an example of the *Administration* portlet used in Content:
 
 * *Packaging*: This portlet is packaged in the _ecmadmin.war_ file.
 
-* *The portlet class name*: _org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet_
+* *Portlet class name*: _org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet_
 
 * *Available preferences*: When using this portlet, you can customize the following preference: {anchor:id=CONTref.Portlets.Administration.AvailablePreferences}
 
