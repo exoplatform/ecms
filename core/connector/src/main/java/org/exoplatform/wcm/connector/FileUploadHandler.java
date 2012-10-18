@@ -151,7 +151,7 @@ public class FileUploadHandler {
     cacheControl.setNoStore(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     
-    if (StringUtils.isEmpty(uploadId)) return null;
+    if ((StringUtils.isEmpty(uploadId)) || (uploadService.getUploadResource(uploadId) == null)) return null;
     
     // If file size exceed limit, return message
     if (UploadResource.FAILED_STATUS == uploadService.getUploadResource(uploadId).getStatus()) {

@@ -1,4 +1,5 @@
 function UploadForm() {
+	this.uploadProgressTimer;
 }
 
 UploadForm.prototype.showUploadForm = function() {
@@ -122,7 +123,7 @@ UploadForm.prototype.uploadFile = function() {
 		var CancelAction = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr","CancelAction");
 		CancelAction.style.display = "none";
 		if(!eXo.ecm.UploadForm.stopUpload) {
-				setTimeout(function() {
+				this.uploadProgressTimer = setInterval(function() {
 					var repositoryName = eXo.ecm.ECS.repositoryName;
 					var workspaceName  = eXo.ecm.ECS.workspaceName;
 					var driverName = eXo.ecm.ECS.driverName;
@@ -167,6 +168,7 @@ UploadForm.prototype.uploadFile = function() {
 						uploadInfo.className = "UploadInfo Delete";
 						var uploadAction = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "tr", "UploadAction");
 						uploadAction.style.display = "";
+						clearInterval(eXo.ecm.UploadForm.uploadProgressTimer);
 					}
 				}, 1*1000);
 		}
@@ -181,12 +183,13 @@ UploadForm.prototype.uploadFileAbort = function() {
 	var strParam ="action=abort&uploadId="+eXo.ecm.UploadForm.uploadId+"&currentFolder="+eXo.ecm.ECS.currentFolder+"&currentPortal="+eXo.ecm.ECS.portalName;
 	if (repositoryName !== undefined) strParam += "&repositoryName="+ repositoryName;
 	if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
-	var strConnector = eXo.ecm.connector.replace("/getDrivers?repositoryName=repository", "/");
+	var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 	var connector = strConnector + eXo.ecm.ECS.controlUpload + "?"+strParam;
 	eXo.ecm.WCMUtils.request(connector);
 	eXo.ecm.UploadForm.stopUpload = true;
 	eXo.ecm.UploadForm.removeMask();
 	eXo.ecm.UploadForm.showUploadForm();
+	clearInterval(this.uploadProgressTimer);
 };
 
 UploadForm.prototype.uploadFileCancel = function() {
