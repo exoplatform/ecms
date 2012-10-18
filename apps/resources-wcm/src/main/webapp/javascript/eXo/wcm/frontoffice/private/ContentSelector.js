@@ -743,7 +743,7 @@ Pager.prototype.showRecords = function(from, to) {
     icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
     len = icons.length;		
 		for (var i = 0; i < len; i++) {
-			if (i < from || i > to)  {
+			if (i < from-1 || i > to-1)  {
 				  icons[i].style.display = 'none';
 			} else {
 				  icons[i].style.display = '';
