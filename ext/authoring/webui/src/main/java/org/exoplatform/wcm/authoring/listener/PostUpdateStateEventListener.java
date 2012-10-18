@@ -18,12 +18,10 @@ package org.exoplatform.wcm.authoring.listener;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.RootContainer;
+import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
@@ -41,6 +39,7 @@ import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -127,25 +126,15 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
                         String userId,
                         boolean isNextState,
                         boolean isPublished) throws Exception {
-    // if (log.isInfoEnabled()) {
-    // if (isNextState)
-    // log.info("### Next State is "+state.getState());
-    // else
-    // log.info("### Current State is "+state.getState());
-    // }
     if (state.getMembership().contains(":")) {
       String[] membership = state.getMembership().split(":");
       String membershipType = membership[0];
       String group = membership[1];
-      // ExoContainer container = ExoContainerContext.getCurrentContainer();
-      // ExoContainer container = RootContainer.getInstance();
-      ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
-      OrganizationService orgService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+      OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
       UserHandler userh = orgService.getUserHandler();
-      // MailService mailService =
-      // (MailService)container.getComponentInstanceOfType(MailService.class);
       MembershipHandler msh = orgService.getMembershipHandler();
-      List<User> users = userh.findUsersByGroup(group).getAll();
+      
+      ListAccess<User> userList = userh.findUsersByGroupId(group);
       User currentUser = null;
       try {
         currentUser = userh.findUserByName(userId);
@@ -157,7 +146,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       String username = userId;
       if (currentUser != null)
         username = currentUser.getFirstName() + " " + currentUser.getLastName();
-      for (User user : users) {
+      for (User user : userList.load(0, userList.getSize())) {
         Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
         for (Membership ms : mss) {
           if (membershipType.equals(ms.getMembershipType())) {

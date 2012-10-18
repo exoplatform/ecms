@@ -21,8 +21,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.lock.Lock;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -30,6 +28,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -68,6 +67,8 @@ public class UIActionListContainer extends UIContainer {
     // Check document is lock for editing
     uiActionForm.setIsKeepinglock(false);
     if (!actionNode.isLocked()) {
+      OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+      List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
       synchronized (EditDocumentActionComponent.class) {
         actionNode.refresh(true);
         if (!actionNode.isLocked()) {
@@ -84,9 +85,6 @@ public class UIActionListContainer extends UIContainer {
             if (!settingLock.startsWith("*"))
               continue;
             String lockTokenString = settingLock;
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
-            List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
             for (MembershipType membership : memberships) {
               lockTokenString = settingLock.replace("*", membership.getName());
               LockUtil.keepLock(lock, lockTokenString);

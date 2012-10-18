@@ -128,9 +128,10 @@ public class EmailNotifyListener implements EventListener {
                                          .getUserHandler()
                                          .findUsersByQuery(query)
                                          .load(0, 1)[0].getFullName());
-    binding.put("doc_title", NodeLocation.getNodeByLocation(observedNode_)
-                                        .getProperty("exo:title").getValue().getString());
-    binding.put("doc_name", NodeLocation.getNodeByLocation(observedNode_).getName());
+    
+    Node node = NodeLocation.getNodeByLocation(observedNode_);
+    binding.put("doc_title", node.getProperty("exo:title").getValue().getString());
+    binding.put("doc_name", node.getName());
     binding.put("doc_url", getViewableLink());
     message.setBody(engine.createTemplate(messageConfig.getContent()).make(binding).toString());
     message.setMimeType(messageConfig.getMimeType());
@@ -154,7 +155,7 @@ public class EmailNotifyListener implements EventListener {
                                WCMCoreUtils.getRepository()
                                            .getConfiguration()
                                            .getDefaultWorkspaceName(),
-                               NodeLocation.getNodeByLocation(observedNode_).getPath());
+                               nodePath);
 
     String driverName = drive.getName();
     String nodePathInDrive = "/".equals(drive.getHomePath()) ? nodePath
@@ -267,10 +268,7 @@ public class EmailNotifyListener implements EventListener {
    */
   private List<String> getEmailList(Node observedNode) {
     List<String> emailList = new ArrayList<String>() ;
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    OrganizationService orgService =
-      (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class) ;
-
+    OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
     try{
       if(observedNode.hasProperty(EMAIL_WATCHERS_PROP)) {
         Value[] watcherNames = observedNode.getProperty(EMAIL_WATCHERS_PROP).getValues() ;

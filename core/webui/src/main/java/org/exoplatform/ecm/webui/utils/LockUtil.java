@@ -147,19 +147,17 @@ public class LockUtil {
       return lockedNodesInfo.get(key);
     }
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     Collection<org.exoplatform.services.organization.Membership>
                         collection = service.getMembershipHandler().findMembershipsByUser(userId);
     String keyPermission;
     for(org.exoplatform.services.organization.Membership membership : collection) {
       StringBuffer permissionBuffer = new StringBuffer();
       permissionBuffer.append(membership.getMembershipType()).append(":").append(membership.getGroupId());
-      if ((permissionBuffer != null) && (permissionBuffer.toString().length() > 0)) {
-        keyPermission = createLockKey(node, permissionBuffer.toString());
-        lockedNodesInfo = lockService.getLockInformation(permissionBuffer.toString());
-        if ((lockedNodesInfo != null) && (lockedNodesInfo.get(keyPermission) != null)) {
-          return lockedNodesInfo.get(keyPermission);
-        }
+      keyPermission = createLockKey(node, permissionBuffer.toString());
+      lockedNodesInfo = lockService.getLockInformation(permissionBuffer.toString());
+      if ((lockedNodesInfo != null) && (lockedNodesInfo.get(keyPermission) != null)) {
+        return lockedNodesInfo.get(keyPermission);
       }
     }
     return null;
@@ -220,6 +218,9 @@ public class LockUtil {
   public static void updateLockCache(String membership) throws Exception {
     ManageableRepository repo = WCMCoreUtils.getRepository();
     Session session = null;
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+    List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
+    
     //get all locked nodes
     for (String ws : repo.getWorkspaceNames()) {
       session = WCMCoreUtils.getSystemSessionProvider().getSession(ws, repo);
@@ -234,9 +235,6 @@ public class LockUtil {
           keepLock(itemNode.getLock(), membership, lockToken);
           if (membership.startsWith("*")) {
             String lockTokenString = membership;
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
-            List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
             for (MembershipType m : memberships) {
               lockTokenString = membership.replace("*", m.getName());
               LockUtil.keepLock(itemNode.getLock(), lockTokenString, lockToken);

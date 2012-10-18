@@ -13,6 +13,7 @@ import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -86,7 +87,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     addChild(UIAnyPermission.class, null, null);
     UIBreadcumbs uiBreadcumbs = addChild(UIBreadcumbs.class, "BreadcumbMembershipSelector", "BreadcumbMembershipSelector") ;
     UITree tree = addChild(UITree.class, "UITreeMembershipSelector", "TreeMembershipSelector");
-    OrganizationService service = getApplicationComponent(OrganizationService.class) ;
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     Collection<?> sibblingsGroup = service.getGroupHandler().findGroups(null);
 
     Collection<?> collection = service.getMembershipTypeHandler().findMembershipTypes();
@@ -109,7 +110,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   public List<String> getListMemberhip() { return listMemberhip; }
 
   public void changeGroup(String groupId) throws Exception {
-    OrganizationService service = getApplicationComponent(OrganizationService.class) ;
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     uiBreadcumb.setPath(getPath(null, groupId)) ;
 
@@ -143,7 +144,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   private List<LocalPath> getPath(List<LocalPath> list, String id) throws Exception {
     if(list == null) list = new ArrayList<LocalPath>(5);
     if(id == null) return list;
-    OrganizationService service = getApplicationComponent(OrganizationService.class) ;
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     Group group = service.getGroupHandler().findGroupById(id);
     if(group == null) return list;
     list.add(0, new LocalPath(group.getId(), group.getGroupName()));
@@ -153,7 +154,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   @SuppressWarnings("unchecked")
   public List<String> getListGroup() throws Exception {
-    OrganizationService service = getApplicationComponent(OrganizationService.class) ;
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     List<String> listGroup = new ArrayList<String>();
     if(getCurrentGroup() == null) return null;
     Collection<Object> groups = service.getGroupHandler().findGroups(getCurrentGroup());

@@ -437,15 +437,8 @@ public class UITemplateContent extends UIForm implements UISelectable {
       return areValidPermissions;
     }
 
-    OrganizationService oservice = uiTemplateContent.getApplicationComponent(OrganizationService.class);
+    OrganizationService oservice = WCMCoreUtils.getService(OrganizationService.class);
     String[] arrPermissions = permissions.split(",");
-    List<String> listMemberhip;
-    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-    listMemberhip = new ArrayList<String>(5);
-    for (Object obj : collection) {
-      listMemberhip.add(((MembershipType) obj).getName());
-    }
-    listMemberhip.add("*");
     for (String itemPermission : arrPermissions) {
       if (itemPermission.length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
@@ -464,7 +457,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           
           areValidPermissions = false;
           return areValidPermissions;
-        } else if (!listMemberhip.contains(permission[0])) {
+        } else if (!permission[0].equals("*") && (oservice.getMembershipTypeHandler().findMembershipType(permission[0]) == null)) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));

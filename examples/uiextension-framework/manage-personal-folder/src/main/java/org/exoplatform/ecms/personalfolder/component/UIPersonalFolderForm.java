@@ -18,7 +18,6 @@
 package org.exoplatform.ecms.personalfolder.component;
 
 import org.exoplatform.ecms.personalfolder.services.ManagePersonalFolderServiceImpl;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -55,8 +54,7 @@ public class UIPersonalFolderForm extends UIForm {
   
   private boolean isExisting(String userName) throws Exception {
     OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    if(organizationService.getUserHandler().findUserByName(userName) == null) return false;
-    return true;
+    return organizationService.getUserHandler().findUserByName(userName) != null;
   }
   
   public static class SaveActionListener extends EventListener<UIPersonalFolderForm> {

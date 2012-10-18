@@ -14,22 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-
 package org.exoplatform.ecm.webui.form.validator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
-
-
 
 /**
  * Created by The eXo Platform SEA
@@ -45,16 +38,7 @@ public class PermissionValidator implements Validator {
       return;
     String permissions = ((String) uiInput.getValue()).trim();
 
-    OrganizationService oservice = 
-      (OrganizationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(OrganizationService.class);
-    List<String> listMemberhip;
-    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-    listMemberhip = new ArrayList<String>(5);
-    for (Object obj : collection) {
-      listMemberhip.add(((MembershipType) obj).getName());
-    }
-    listMemberhip.add("*");
-
+    OrganizationService oservice = WCMCoreUtils.getService(OrganizationService.class);
     String[] arrPermissions = permissions.split(",");
     for (String itemPermission : arrPermissions) {
       if (itemPermission.length() == 0) {
@@ -70,7 +54,7 @@ public class PermissionValidator implements Validator {
           Object[] args = { itemPermission };
           throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
                                                             args));
-        } else if (!listMemberhip.contains(permission[0])) {
+        } else if (!permission[0].equals("*") && (oservice.getMembershipTypeHandler().findMembershipType(permission[0]) == null)) {
           Object[] args = { itemPermission };
           throw new MessageException(new ApplicationMessage("PermissionValidator.msg.permission-path-invalid",
                                                             args));

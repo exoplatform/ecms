@@ -18,13 +18,13 @@ package org.exoplatform.ecms.upgrade.plugins;
 
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
+
 import org.apache.commons.io.IOUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.ListAccess;
@@ -152,9 +152,8 @@ public class FavoriteActionUpgradePlugin extends UpgradeProductPlugin {
 
       // Get all users and remove exo:addToFavoriteAction action for favorite folder
       ListAccess<User> userListAccess = organizationService.getUserHandler().findAllUsers();
-      List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
       Node favoriteNode = null;
-      for (User user : userList) {
+      for (User user : userListAccess.load(0, userListAccess.getSize())) {
         String userName = user.getUserName();
         Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
         String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);

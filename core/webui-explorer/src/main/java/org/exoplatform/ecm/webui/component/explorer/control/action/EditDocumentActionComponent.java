@@ -57,6 +57,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -145,6 +146,8 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       // Check document is lock for editing
       uiDocumentForm.setIsKeepinglock(false);
       if (!selectedNode.isLocked()) {
+        OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+        List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
         synchronized (EditDocumentActionComponent.class) {
           refresh(selectedNode);
           if (!selectedNode.isLocked()) {
@@ -161,9 +164,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
               if (!settingLock.startsWith("*"))
                 continue;
               String lockTokenString = settingLock;
-              ExoContainer container = ExoContainerContext.getCurrentContainer();
-              OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
-              List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
               for (MembershipType membership : memberships) {
                 lockTokenString = settingLock.replace("*", membership.getName());
                 LockUtil.keepLock(lock, lockTokenString);

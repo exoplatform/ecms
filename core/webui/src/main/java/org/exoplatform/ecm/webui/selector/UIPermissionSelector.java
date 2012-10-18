@@ -19,9 +19,10 @@ package org.exoplatform.ecm.webui.selector;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -311,11 +312,10 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    */
   public List getUsers() throws Exception {
     List<User> children = new ArrayList<User>();
-    OrganizationService service = getApplicationComponent(OrganizationService.class);
-    PageList userPageList = service.getUserHandler().findUsersByGroup(
-        this.getCurrentGroup().getId());
-    for (Object child : userPageList.getAll()) {
-      children.add((User) child);
+    OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+    ListAccess<User> userPageList = service.getUserHandler().findUsersByGroupId(this.getCurrentGroup().getId());
+    for (User child : userPageList.load(0, userPageList.getSize())) {
+      children.add(child);
     }
     return children;
   }
@@ -337,5 +337,4 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
  public void setShowAnyPermission(boolean isShowAnyPermission) {
    this.isShowAnyPermission = isShowAnyPermission;
  }
-
 }

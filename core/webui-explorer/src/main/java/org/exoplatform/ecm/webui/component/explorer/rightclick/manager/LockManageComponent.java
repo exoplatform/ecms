@@ -28,15 +28,12 @@ import javax.jcr.Session;
 import javax.jcr.lock.Lock;
 import javax.jcr.lock.LockException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotHoldsLockFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSameNameSiblingFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSimpleLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -49,6 +46,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -141,14 +139,13 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       LockUtil.keepLock(lock);
       LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
       List<String> settingLockList = lockService.getAllGroupsOrUsersForLock();
+      OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+      List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
       for (String settingLock : settingLockList) {
         LockUtil.keepLock(lock, settingLock);
         if (!settingLock.startsWith("*"))
           continue;
         String lockTokenString = settingLock;
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
-        List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
         for (MembershipType membership : memberships) {
           lockTokenString = settingLock.replace("*", membership.getName());
           LockUtil.keepLock(lock, lockTokenString);

@@ -171,17 +171,15 @@ public class WCMCoreUtils {
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       startRequest(organizationService);
-      Collection<?> memberships = null;
-      Membership userMembership = null;
+      Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
       String userMembershipTmp = null;
+      Membership userMembership = null;
       int count = 0;
       String permissionTmp = "";
       for (String permission : permissions) {
         if (!permissionTmp.equals(permission)) count = 0;
-        memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-        Iterator<?> membershipIterator = memberships.iterator();
-        while (membershipIterator.hasNext()) {
-          userMembership = (Membership)membershipIterator.next();
+        for (Object userMembershipObj : memberships) {
+          userMembership = (Membership) userMembershipObj;
           if (permission.equals(userMembership.getUserName())) {
             return true;
           } else if ("any".equals(permission)) {

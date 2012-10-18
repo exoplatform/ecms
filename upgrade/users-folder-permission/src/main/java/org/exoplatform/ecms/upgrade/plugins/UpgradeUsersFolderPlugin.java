@@ -137,8 +137,7 @@ public class UpgradeUsersFolderPlugin extends UpgradeProductPlugin {
       //Get all users
       WCMCoreUtils.startRequest(orgService_);
       ListAccess<User> userListAccess = orgService_.getUserHandler().findAllUsers();
-      List<User> userList = WCMCoreUtils.getAllElementsOfListAccess(userListAccess);
-      for(User user : userList) {
+      for(User user : userListAccess.load(0, userListAccess.getSize())) {
         String userName = user.getUserName();
         Node userNode = nodeHCreator_.getUserNode(sessionProvider, userName);
         NodeIterator nodeIter = userNode.getNodes();

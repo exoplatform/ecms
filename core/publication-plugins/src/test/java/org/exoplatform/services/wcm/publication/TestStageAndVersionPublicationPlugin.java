@@ -17,14 +17,10 @@
 package org.exoplatform.services.wcm.publication;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 
 import javax.jcr.Node;
@@ -35,22 +31,12 @@ import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
-import org.exoplatform.portal.application.PortletPreferences;
-import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.config.model.ApplicationState;
-import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.config.model.TransientApplicationState;
 import org.exoplatform.portal.mop.EventType;
 import org.exoplatform.portal.mop.navigation.NavigationService;
 import org.exoplatform.portal.pom.config.POMSessionManager;
-import org.exoplatform.portal.pom.data.ApplicationData;
-import org.exoplatform.portal.pom.data.ComponentData;
-import org.exoplatform.portal.pom.data.ContainerData;
-import org.exoplatform.portal.pom.data.PageData;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.listener.Event;
@@ -142,9 +128,8 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
     navService = (NavigationService)container.getComponentInstanceOfType(NavigationService.class);
     events = new LinkedList<Event>();
     listenerService = (ListenerService)container.getComponentInstanceOfType(ListenerService.class);
-    org = (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class);
+    org = WCMCoreUtils.getService(OrganizationService.class);
 
-    //
     listenerService.addListener(DataStorage.PAGE_CREATED, listener);
     listenerService.addListener(DataStorage.PAGE_REMOVED, listener);
     listenerService.addListener(DataStorage.PAGE_UPDATED, listener);
