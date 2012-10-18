@@ -42,7 +42,7 @@ The following is a sample code of the *View* template of a content node:
 %>
 {code}
 
-* Display the translation of the _Sample.view.label.node-name_ message in different lanaguages.
+* Display the translation of the _Sample.view.label.node-name_ message in different languages.
 {code:groovy}
 <%=_ctx.appRes("Sample.view.label.node-name")%>
 {code}

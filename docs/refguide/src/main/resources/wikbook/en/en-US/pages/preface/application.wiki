@@ -1,6 +1,6 @@
 {docbook}
 <abstract>
- <para>This chapter introduces you to a list of portlets included in Content, and their details (packaging, portlet class name, available preferences and sample configurations:</para>
+ <para>This chapter introduces you to a list of portlets included in Content, and their details (packaging, portlet class name, available preferences and sample configurations):</para>
   <itemizedlist>
 	<listitem>
 	  <para> 
