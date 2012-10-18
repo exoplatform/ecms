@@ -14,4 +14,19 @@
       <renaming>Renaming...</renaming>
     </msg>
   </RenameConnector>
+  <UIMultiUpload>
+	  <label>
+	    <in>in</in>
+	    <MaxFileSizeAlert>The file's size exceeds the size limit of </MaxFileSizeAlert>
+	    <Waiting>Waiting</Waiting>
+	    <Error>Error</Error>
+	    <or>or</or>
+	    <AlreadyInUse>Already in use</AlreadyInUse>
+	    <Keep>Keep both</Keep>
+	    <Replace>Replace</Replace>
+	    <Canceled>Canceled</Canceled>
+	    <Cancel>Cancel</Cancel>
+	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    </label>
+   </UIMultiUpload>
 </bundle>

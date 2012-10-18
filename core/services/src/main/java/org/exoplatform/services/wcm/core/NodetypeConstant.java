@@ -23,6 +23,8 @@ package org.exoplatform.services.wcm.core;
 public class NodetypeConstant {
 
   public static final String NT_BASE                          = "nt:base";
+  
+  public static final String NT_HIERARCHY_NODE                = "nt:hierarchyNode";
 
   public static final String NT_FILE                          = "nt:file";
 

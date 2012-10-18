@@ -5,7 +5,7 @@ var ZeroClipboard = {
 	
 	version: "1.0.4",
 	clients: {}, // registered upload clients on page, indexed by id
-	moviePath: '/ecmexplorer/javascript/eXo/ecm/ZeroClipboard.swf', // URL to movie
+	moviePath: '/ecm-wcm-extension/javascript/eXo/ecm/ZeroClipboard.swf', // URL to movie
 	nextId: 1, // ID of next movie
 	
 	$: function(thingy) {

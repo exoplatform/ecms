@@ -3514,5 +3514,15 @@
     <label>
       <add_node>Droit d'édition</add_node>
     </label>
-  </UIPermissionForm>  
+  </UIPermissionForm>
+  <UIMultiUpload>
+  	<label>
+	  	<AbortAll>Tout annuler</AbortAll>
+      <AbortAllFiles>Annuler tous les fichiers</AbortAllFiles>
+      <MaxFileSize>La taille maximale des fichiers est </MaxFileSize>
+      <InvalidCharacters>Les caractères invalides seront remplacés par un '-'</InvalidCharacters>
+      <DropFileMessage>Déposer vos fichiers dans le répertoire courant</DropFileMessage>
+      <Close>Fermer</Close>
+  	</label>
+  </UIMultiUpload>    
 </bundle>

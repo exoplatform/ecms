@@ -102,7 +102,7 @@
 		    <%
 		      int i = 0;
 		      def permlink;
-		      for(data in uicomponent.getChildrenList()) { 
+		      for(data in uicomponent.getChildrenList()) {
               i++;
 		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
 		          def preferenceWS = data.getSession().getWorkspace().getName() ;
@@ -186,14 +186,17 @@
                if (uicomponent.isMediaType(data)) isMediaType = "true";
                if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
 		        %>   
-		      <div class="ActionIconBox" locked="<%=isLocked%>"
+		      <div class="ActionIconBox" <%= uicomponent.getDragAndDropEvents(data) %> 
+		                                 locked="<%=isLocked%>"
 		      													 trashHome="$isTrashHome" 
 																		 removeFavourite="$isFavourite"
 																		 inTrash="$isInTrash"
 																		 mediaType="$isMediaType"
 		      													 <%=rightClickMenu%> style="padding: 4px 0px 4px 0px; height: auto;"
-																		 isFile="<%=data.isNodeType("nt:file")%>"
-		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>" workspaceName="$preferenceWS" ondblclick="$actionLink">
+		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>"
+		       													 isFile="<%=data.isNodeType("nt:file")%>"
+		       													 workspaceName="$preferenceWS" 
+	       													   ondblclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="NodeLabel">
 								<div class="ThumbnailImage">

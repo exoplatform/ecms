@@ -173,7 +173,8 @@
 		          if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
 		          
 		        %>   
-		      <div class="ActionIconBox" locked="<%=isLocked%>"
+		      <div class="ActionIconBox" <%= uicomponent.getDragAndDropEvents(data) %> 
+		                                 locked="<%=isLocked%>"
 		      													 trashHome="$isTrashHome" 
 		      													 removeFavourite="$isFavourite"
 	      														 inTrash="$isInTrash"
@@ -181,7 +182,9 @@
 		      													 <%=rightClickMenu%> 
 		      													 style="padding: 4px 0px 4px 0px; height: auto;"
 																		 isFile="<%=data.isNodeType("nt:file")%>"
-		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>" workspaceName="$preferenceWS" ondblclick="$actionLink">
+		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>"
+		       													 workspaceName="$preferenceWS" 
+		       													 ondblclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="NodeLabel">
 								<div class="ActionIcon">
