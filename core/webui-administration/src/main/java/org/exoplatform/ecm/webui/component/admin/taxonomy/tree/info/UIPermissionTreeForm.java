@@ -85,6 +85,9 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   public static final String PERMISSION      = "permission";
 
   public static final String POPUP_SELECT    = "TaxoTreeSelectUserOrGroupPopup";
+  
+  public static final String[] PERMISSIONS   = new String[] { PermissionType.READ, PermissionType.ADD_NODE, 
+  	PermissionType.REMOVE };
 
   public static final String SELECT_GROUP_ID = "TaxoTreeSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger(UIPermissionTreeForm.class.getName());
@@ -104,8 +107,8 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
 
   private void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION) ;
-    for (String perm : PermissionType.ALL) {
-      uiInputSet.getUICheckBoxInput(perm).setChecked(check);
+    for (String perm : PERMISSIONS) {
+    	uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
   }
 
@@ -119,7 +122,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
     uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(user);
     if (node != null) {
       if (user.equals(Utils.getNodeOwner(node))) {
-        for (String perm : PermissionType.ALL) {
+        for (String perm : PERMISSIONS) {
           uiInputSet.getUICheckBoxInput(perm).setChecked(true);
         }
       } else {
@@ -132,7 +135,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
             userPermission.append(accessControlEntry.getPermission()).append(" ");
           }
         }
-        for (String perm : PermissionType.ALL) {
+        for (String perm : PERMISSIONS) {
           boolean isCheck = userPermission.toString().contains(perm);
           uiInputSet.getUICheckBoxInput(perm).setChecked(isCheck);
         }
@@ -161,7 +164,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] { "SelectUser",
           "SelectMember", "AddAny" });
     }
-    for (String perm : PermissionType.ALL) {
+    for (String perm : PERMISSIONS) {
       uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
     }
   }
@@ -227,7 +230,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       permBean.setRemove(uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked());
       permBean.setSetProperty(uiForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked());
 
-      for (String perm : PermissionType.ALL) {
+      for (String perm : PERMISSIONS) {
         if (uiForm.getUICheckBoxInput(perm).isChecked()) {
           permsList.add(perm);
         } else {
@@ -348,6 +351,18 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
           IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUICheckBoxInput(PermissionType.READ).setChecked(true);
+      String userOrGroup = uiForm.getChild(UIPermissionInputSet.class).getUIStringInput(
+          UIPermissionInputSet.FIELD_USERORGROUP).getValue();
+      List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
+      PermissionBean permBean = new PermissionBean();
+      permBean.setUsersOrGroups(userOrGroup);
+      permBean.setRead(true);
+      permBean.setAddNode(false);
+      permBean.setRemove(false);
+      permBean.setSetProperty(false);
+      permBeans.add(permBean);
+      UIPermissionTreeInfo uiPermInfo = ((UIContainer)uiForm.getParent()).getChild(UIPermissionTreeInfo.class);
+      uiPermInfo.setPermBeans(permBeans);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
