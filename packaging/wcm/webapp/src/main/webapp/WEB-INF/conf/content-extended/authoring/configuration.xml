@@ -160,7 +160,7 @@
               <property name="jobName" value="changeStateJobToPublished"/>
               <property name="groupName" value="group"/>
               <property name="job" value="org.exoplatform.services.wcm.extensions.scheduler.impl.ChangeStateCronJobImpl"/>
-              <property name="expression" value="15/120 * * * * ?"/>
+              <property name="expression" value="15 */2 * * * ?"/>
           </properties-param>
           <properties-param>
             <name>changeStateCronJob.generalParams</name>
@@ -188,7 +188,7 @@
               <property name="jobName" value="changeStateJobToUnpublished"/>
               <property name="groupName" value="group"/>
               <property name="job" value="org.exoplatform.services.wcm.extensions.scheduler.impl.ChangeStateCronJobImpl"/>
-              <property name="expression" value="45/120 * * * * ?"/>
+              <property name="expression" value="45 */2 * * * ?"/>
           </properties-param>
           <properties-param>
             <name>changeStateCronJob.generalParams</name>
