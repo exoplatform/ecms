@@ -8,11 +8,11 @@
 * [Demo site with CMISExpert client|http://xcmis.org/CmisExpert1/org.exoplatform.cmis.CmisExpertApplication/CmisExpertApplication.html].
 
 *CMIS-related links*:
-* [CMIS specification|http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis].
-* CMIS working group (list, mail, feeds, and more).
-* CMIS external tutorials, guides, videos, blogs, news.
-* CMIS clients, UI, web.
- 
+* [CMIS specification|http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis]
+* [CMIS working group (list, mail, feeds, and more)|https://groups.google.com/forum/?fromgroups#!forum/cmis-interop].
+* [CMIS clients|http://blog.exoplatform.org/2010/02/18/list-of-cmis-clients/].
+
+
 {docbook}
 <para>
 <prompt>
