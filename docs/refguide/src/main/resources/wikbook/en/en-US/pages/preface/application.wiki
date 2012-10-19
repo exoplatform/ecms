@@ -47,24 +47,9 @@
     </listitem>
 	<listitem>
 	  <para> 
-		<emphasis role="bold"><link linkend="CONTref.Portlets.FormBuilder">Form Builder</link></emphasis>
-	  </para>
-	  <para>Allow users to create node types and document templates for node types.
-	  </para>
-    </listitem>
-	<listitem>
-	  <para> 
 		<emphasis role="bold"><link linkend="CONTref.Portlets.Authoring">Authoring</link></emphasis>
 	  </para>
 	  <para>Allow users to manage contents in draft and ones which need to be approved or published.
-	  </para>
-    </listitem>
-	<listitem>
-	  <para> 
-		<emphasis role="bold"><link linkend="CONTref.Portlets.Newsletter">Newsletter</link></emphasis>
-	  </para>
-	  <para>
-	  Help users quickly get the updated newsletter from a site.
 	  </para>
     </listitem>
 	<listitem>

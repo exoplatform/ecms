@@ -27,4 +27,3 @@ In which:
 * [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
 * [Public Java APIs|#CONTref.JavaServices]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQs|#CONTref.FAQ]

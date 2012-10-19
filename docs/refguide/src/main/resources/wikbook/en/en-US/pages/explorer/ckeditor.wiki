@@ -38,6 +38,4 @@ Basically, if you want to add a rich text area to your dialogs, you can use the 
 * [CMIS Usage code examples|#Dev_CMIS.Usage_code_examples]
 * [Public REST APIs|#CONTref.Devref.PublicRestAPIs]
 * [Public Java APIs|#CONTref.JavaServices]
-* [Deprecated portlets|#CONTref.Deprecated_portlets]
 * [Miscellaneous and Tips|#Adm_CMIS.Miscellaneous_tips]
-* [FAQs|#CONTref.FAQ]

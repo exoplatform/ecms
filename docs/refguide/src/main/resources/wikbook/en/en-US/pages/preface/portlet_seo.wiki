@@ -22,6 +22,4 @@ This is an example of the *SEO* portlet used in Content:
 * [Sites Explorer|#CONTref.Portlets.Explorer]
 * [Administration|#CONTref.Portlets.Administration]
 * [Fast Content Creator|#CONTref.Portlets.FastContentCreator]
-* [Form Builder|#CONTref.Portlets.FormBuilder]
 * [Authoring|#CONTref.Portlets.Authoring]
-* [Newsletter|#CONTref.Portlets.Newsletter]

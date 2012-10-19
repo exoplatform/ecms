@@ -7,13 +7,6 @@
             <link linkend="CONTref.Configuration.Plugins.AuthoringPublicationPlugin">AuthoringPublicationPlugin</link>
           </emphasis> </para>
           <para>Manage the publication lifecycle of web contents and DMS document on a portal page with more states and versions.</para>
-  </listitem>   
-  <listitem>
-        <para>
-          <emphasis role="bold">
-            <link linkend="CONTref.Configuration.Plugins.BPActionPlugin">BPActionPlugin</link>
-          </emphasis> </para>
-          <para>Define the business process action in Workflow.</para>
   </listitem>
   <listitem>
         <para>
@@ -105,13 +98,6 @@
             <link linkend="CONTref.Configuration.Plugins.PortetTemplatePlugin">PortetTemplatePlugin</link>
           </emphasis> </para>
           <para>Import the view templates into Content List Viewer.</para>
-  </listitem>
-  <listitem>
-        <para>
-          <emphasis role="bold">
-            <link linkend="CONTref.Configuration.Plugins.predifinedProcessesPlugin">predifinedProcessesPlugin</link>
-          </emphasis> </para>
-          <para>Import the predefined processes into the system.</para>
   </listitem>
   <listitem>
         <para>
