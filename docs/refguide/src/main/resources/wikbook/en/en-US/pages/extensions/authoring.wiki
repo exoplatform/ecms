@@ -234,16 +234,13 @@ For example: _Two lifecycles with/without states_
                                                     <field name="memberships">
                                                         <collection type="java.util.ArrayList">
                                                             <value>
-                                                                <string>author:/CA/communicationDG</string>
+                                                                <string>author:/communication</string>
                                                             </value>
                                                             <value>
-                                                                <string>author:/CA/alerteSanitaire</string>
+                                                                <string>author:/sanitaryAlert</string>
                                                             </value>
                                                             <value>
-                                                                <string>author:/CA/alerteInformatique</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>author:/CA/informations</string>
+                                                                <string>author:/informations</string>
                                                             </value>
                                                         </collection>
                                                     </field>
@@ -321,16 +318,13 @@ For example: _Two lifecycles with/without states_
                                                     <field name="memberships">
                                                         <collection type="java.util.ArrayList">
                                                             <value>
-                                                                <string>publisher:/CA/communicationDG</string>
+                                                                <string>publisher:/communication</string>
                                                             </value>
                                                             <value>
-                                                                <string>publisher:/CA/alerteSanitaire</string>
+                                                                <string>publisher:/sanitaryAlert</string>
                                                             </value>
                                                             <value>
-                                                                <string>publisher:/CA/alerteInformatique</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>publisher:/CA/informations</string>
+                                                                <string>publisher:/informations</string>
                                                             </value>
                                                         </collection>
                                                     </field>
@@ -520,20 +514,17 @@ For example, *Different Contexts*:
                                         <string>lifecycle4</string>
                                     </field>
                                     <field name="memberships">
-                                        <collection type="java.util.ArrayList">
-                                            <value>
-                                                <string>manager:/CA/communicationDG</string>
-                                            </value>
-                                            <value>
-                                                <string>manager:/CA/alerteSanitaire</string>
-                                            </value>
-                                            <value>
-                                                <string>manager:/CA/alerteInformatique</string>
-                                            </value>
-                                            <value>
-                                                <string>manager:/CA/informations</string>
-                                            </value>
-                                        </collection>
+                                      <collection type="java.util.ArrayList">
+                                        <value>
+                                            <string>manager:/communication</string>
+                                        </value>
+                                        <value>
+                                            <string>manager:/sanitaryAlert</string>
+                                        </value>
+                                        <value>
+                                            <string>manager:/informations</string>
+                                        </value>
+                                      </collection>
                                     </field>
                                     <field name="path">
                                         <string>repository:collaboration:/documents/company/finances</string>
