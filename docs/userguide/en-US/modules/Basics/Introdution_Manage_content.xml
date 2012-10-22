@@ -26,10 +26,6 @@
 <para>Introduction to the <emphasis role="bold">Fast Content Creator</emphasis> portlet, steps to configure this portlet and to create and view content with this portlet.</para>
 </listitem>
 <listitem>
-<para><link linkend="sect-User_Guide-Form_Builder">Create content templates with <emphasis role="bold">Form Builder</emphasis></link></para>
-<para>Introduction to the <emphasis role="bold">Form Builder</emphasis> portlet, the way to add this portlet to a specific page, steps to create and edit the template of document types.</para>
-</listitem>
-<listitem>
 <para><link linkend="sect-User_Guide-CLV_templates">Manage CLV templates in <emphasis role="bold">Sites Explorer</emphasis></link></para>
 <para>Instructions on how to to create, edit and delete a CLV template.</para>
 </listitem>
@@ -64,12 +60,6 @@ You not only know many different types of content management, but also know how 
 <itemizedlist>
         <listitem>
 <para><link linkend="Platform_User_Guide.Organize_Content.Structure_Content">Structure content</link></para>
-</listitem>
-<listitem>
-<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Manage newsletter</link></para>
-</listitem>
-<listitem>
-<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
 </listitem>
 </itemizedlist>
 </para>

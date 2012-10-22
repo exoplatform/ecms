@@ -7,7 +7,7 @@
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Manage Category Navigation</title>
   <para>
-  <emphasis role="bold">Category Navigation</emphasis> and <emphasis role="bold">Parameterized Content List Viewer</emphasis> portlets get rid of long URLs when you view content and enable users to see published documents or web content in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
+  The <emphasis role="bold">Category Navigation</emphasis> portlet gets rid of long URLs when you view content and enables you to see published documents or web content in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the <emphasis role="bold">Parameterized Content List Viewer</emphasis> easily.
  </para>
  <citetitle>
  <para xml:id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet"><emphasis role="bold">Access the Category Navigation portlet</emphasis></para>

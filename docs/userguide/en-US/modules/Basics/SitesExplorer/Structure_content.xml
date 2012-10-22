@@ -68,12 +68,6 @@
 		<listitem>
 			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Content">Manage content</link></para>
 		</listitem>
-		<listitem>
-			<para><link linkend="Platform_User_Guide.Organize_Content.Newsletter">Manage newsletter</link></para>
-		</listitem>
-		<listitem>
-			<para><link linkend="Platform_User_Guide.Organize_Content.Manage_Workflows">Manage workflows</link></para>
-		</listitem>
 	</itemizedlist>
 
 <xi:include href="Access_Sites_Explorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

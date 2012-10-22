@@ -15,9 +15,7 @@
 	 <xi:include href="Basics/Dynamic_Navigation.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/Newsletters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
    <xi:include href="Basics/SEO_management.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
    <xi:include href="Basics/Content_By_Query.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
