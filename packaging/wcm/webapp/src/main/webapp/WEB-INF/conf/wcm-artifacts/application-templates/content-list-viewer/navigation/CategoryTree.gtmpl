@@ -46,7 +46,11 @@ public void renderCategories(def categories) {
 }
 def header = uicomponent.getHeader();
 def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
+def categories = getCategoriesFromUrl();
+def editFlag   = Utils.isShowQuickEdit();
+def cSize = categories.size();
+if (header == 0) header=_ctx.appRes("UICLVContainer.msg.non-contents");
+if (cSize>0 || editFlag) {
 %>
 
 <style>
@@ -63,7 +67,7 @@ if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
 <div id="$uicomponent.id" class="SimpleVerticalHierachy">
   <div class="CategoriesContainer">
   <%
-    if (isShowHeader) { 
+    if (isShowHeader && (cSize>0||editFlag)) { 
   %>
       <div class="TitleBarL">
         <div class="TitleBarR">
@@ -75,10 +79,9 @@ if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
    <% } %>
     <div class="NewContent">
       <%
-//      def categories = uicomponent.getCategoriesFromUrl();
-      def categories = getCategoriesFromUrl();
-      renderCategories(categories);
+        renderCategories(categories);
       %>
     </div>
   </div>
 </div>
+<% } %>
