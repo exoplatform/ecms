@@ -21,6 +21,7 @@
 
 .UITreeList table {
 	*width: 94%;
+	table-layout: fixed;
 }
 
 .UITreeList table .Icon16x16 {
