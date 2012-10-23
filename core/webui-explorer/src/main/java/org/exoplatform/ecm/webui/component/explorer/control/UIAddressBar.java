@@ -31,6 +31,7 @@ import javax.jcr.query.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SimpleSearchValidator;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
@@ -81,7 +82,7 @@ public class UIAddressBar extends UIForm {
   public final static String  WS_NAME                  = "workspaceName";
 
   public final static String  FIELD_ADDRESS            = "address";
-  
+
   public final static String  FIELD_ADDRESS_HIDDEN     = "address_hidden";
 
   public final static String  ACTION_TAXONOMY          = "exo:taxonomyAction";
