@@ -34,7 +34,6 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.form.UIFormInputSetWithColspan;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -100,18 +99,15 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     templateTab.setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(templateTab) ;
     setSelectedTab(templateTab.getId()) ;
-    UIFormInputSetWithColspan defaultDialogTab = new UIFormInputSetWithColspan(FIELD_TAB_DIALOG) ;
-    defaultDialogTab.allowColspan(true);
+    UIFormInputSet defaultDialogTab = new UIFormInputSet(FIELD_TAB_DIALOG) ;
     defaultDialogTab.addUIFormInput(new UIFormTextAreaInput(FIELD_DIALOG, FIELD_DIALOG, null).
                                     addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultDialogTab) ;
-    UIFormInputSetWithColspan defaultViewTab = new UIFormInputSetWithColspan(FIELD_TAB_VIEW) ;
-    defaultViewTab.allowColspan(true);
+    UIFormInputSet defaultViewTab = new UIFormInputSet(FIELD_TAB_VIEW) ;
     defaultViewTab.addUIFormInput(new UIFormTextAreaInput(FIELD_VIEW, FIELD_VIEW, null).
                                   addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultViewTab) ;
-    UIFormInputSetWithColspan defaultSkinTab = new UIFormInputSetWithColspan(FIELD_TAB_SKIN) ;
-    defaultSkinTab.allowColspan(true);
+    UIFormInputSet defaultSkinTab = new UIFormInputSet(FIELD_TAB_SKIN) ;
     defaultSkinTab.addUIFormInput(new UIFormTextAreaInput(FIELD_SKIN, FIELD_SKIN, null)) ;
     addUIFormInput(defaultSkinTab) ;
     setActions(new String[]{"Save", "Refresh", "Cancel"}) ;

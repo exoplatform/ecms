@@ -53,18 +53,20 @@
             </td>
             <td>$meta.name</td>
             <td>
-                <%
-                  String internalText = _ctx.appRes("UIMetadataList.label." + meta.getInternalUse()) ;
-                  String internalIconType = meta.getInternalUse() ;                
-                %>
-                <div class="ActionContainer" title="$internalText">
-                    <img class="Icon16x16 ${internalIconType}16x16Icon" alt="$internalText" src="/eXoResources/skin/sharedImages/Blank.gif"/>
-               </div>
+            	<div class="ActionContainer">
+	              <%
+	                String internalText = _ctx.appRes("UIMetadataList.label." + meta.getInternalUse()) ;
+	                String internalIconType = meta.getInternalUse() ;                
+	              %>
+				          <img class="Icon16x16 ${internalIconType}16x16Icon" alt="$internalText" src="/eXoResources/skin/sharedImages/Blank.gif"/>
+		              <span>$internalText</span>
+		           </div>
             </td>
             <td>
-                <div class="ActionContainer" title="<%=_ctx.appRes("UIMetadataList.label.True")%>">
-                   <img class="Icon16x16 True16x16Icon" alt="<%=_ctx.appRes("UIMetadataList.label.True")%>" src="/eXoResources/skin/sharedImages/Blank.gif"/>
-                </div>
+            	<div class="ActionContainer">
+			          <img class="Icon16x16 True16x16Icon" alt="<%=_ctx.appRes("UIMetadataList.label.True")%>" src="/eXoResources/skin/sharedImages/Blank.gif"/>
+	              <span><%=_ctx.appRes("UIMetadataList.label.True")%></span>
+	            </div>
             </td>
             <td>
             	<div class="ActionContainer">

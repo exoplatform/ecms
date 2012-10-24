@@ -41,7 +41,7 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public UITemplatesManager() throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();  	
-    addChild(UITemplateList.class, null, null) ;
+    addChild(UITemplateList.class, null, "ugb_" + UITemplateList.class.getSimpleName() + pContext.getWindowId()) ;
   }
 
   public boolean isEditingTemplate() {
@@ -55,7 +55,7 @@ public class UITemplatesManager extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(popuId) ;
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, popuId) ;
-      uiPopup.setWindowSize(700, 0) ;
+      uiPopup.setWindowSize(700, 500) ;
       uiPopup.setShowMask(true);
     } else {
       uiPopup.setRendered(true) ;
