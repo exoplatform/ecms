@@ -33,7 +33,6 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.wcm.webui.form.UIFormInputSetWithColspan;
 
 /**
  * Created by The eXo Platform SARL
@@ -81,12 +80,10 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     uiMetadataType.setActionInfo(VIEW_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiMetadataType) ;
     setSelectedTab(uiMetadataType.getId()) ;
-    UIFormInputSetWithColspan uiDialogTab = new UIFormInputSetWithColspan(DIALOG_TAB) ;
-    uiDialogTab.allowColspan(true);
+    UIFormInputSet uiDialogTab = new UIFormInputSet(DIALOG_TAB) ;
     uiDialogTab.addUIFormInput(new UIFormTextAreaInput(DIALOG_TEMPLATE, DIALOG_TEMPLATE, null)) ;
     addUIComponentInput(uiDialogTab) ;
-    UIFormInputSetWithColspan uiViewTab = new UIFormInputSetWithColspan(VIEW_TAB);
-    uiViewTab.allowColspan(true);
+    UIFormInputSet uiViewTab = new UIFormInputSet(VIEW_TAB) ;
     uiViewTab.addUIFormInput(new UIFormTextAreaInput(VIEW_TEMPLATE, VIEW_TEMPLATE, null)) ;
     addUIComponentInput(uiViewTab) ;
     setActions(new String[] {"Save", "Cancel"}) ;

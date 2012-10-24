@@ -1893,7 +1893,7 @@
       <action>Aktion</action>
     </header>
     <action>
-      <AddStyle>Add</AddStyle>
+      <AddStyle>Add Style</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>

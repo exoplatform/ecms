@@ -14,7 +14,7 @@
   if(lockedNodeList == null) return;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
 %>
-<div class="UILockNodeList" id="$uicomponent.id">
+<div class="UIQueriesList" id="$uicomponent.id">
   <% if (totalItems > 5) {%>
   <div style="margin:1px 0px 5px 0px;">
     <%
@@ -43,7 +43,7 @@
   	      even = !even ;
       %>
           <tr class="$rowClass">
-            <td align="center">
+            <td>
             		<div title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
 					  							</div>
 					  					</td>

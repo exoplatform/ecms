@@ -55,7 +55,7 @@ public class UINodeTypeManager extends UIAbstractManager {
   public void setExportPopup() throws Exception {
     removeChildById(EXPORT_POPUP) ;
     UIPopupWindow  uiPopup = addChild(UIPopupWindow.class, null, EXPORT_POPUP);
-    uiPopup.setWindowSize(500, 0);
+    uiPopup.setWindowSize(500, 400);
     UINodeTypeExport uiExport = uiPopup.createUIComponent(UINodeTypeExport.class, null, null) ;
     uiExport.update() ;
     uiPopup.setUIComponent(uiExport) ;
@@ -66,7 +66,7 @@ public class UINodeTypeManager extends UIAbstractManager {
   public void setImportPopup() throws Exception {
     removeChildById(IMPORT_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, IMPORT_POPUP);
-    uiPopup.setWindowSize(500, 0);
+    uiPopup.setWindowSize(500, 400);
     UINodeTypeImportPopup uiImportPopup =
       uiPopup.createUIComponent(UINodeTypeImportPopup.class, null, null) ;
     uiPopup.setUIComponent(uiImportPopup) ;
@@ -83,7 +83,7 @@ public class UINodeTypeManager extends UIAbstractManager {
     uiPopup.setShowMask(true);
     UINodeTypeForm uiForm = createUIComponent(UINodeTypeForm.class, null, null) ;
     uiForm.update(null, false) ;
-    uiPopup.setWindowSize(660, 0) ;
+    uiPopup.setWindowSize(660, 400) ;
     uiPopup.setUIComponent(uiForm) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;

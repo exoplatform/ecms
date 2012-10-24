@@ -397,15 +397,6 @@
   float: right; /* orientation=rt */
 }
 
-
-.UIECMScripts .ECMScriptForm .FormContainer .FieldComponent textarea {
-	width: 95%;
-}
-
-.UIECMScripts .ECMScriptForm .UIFormGrid td.FieldLabel{
-	width: 110px;
-}
-
 /*------------------------------UICBScripts------------------------*/
 
 .UIECMAdminPortlet .UICBScripts  {
@@ -447,7 +438,7 @@
 }
 
 .UIECMAdminPortlet .UIQueriesManager .UIQueriesForm .UIForm .textarea {
-	height: auto;
+	height: 350px ;
 	width: 95%;
 }
 
@@ -483,15 +474,9 @@
 }
 
 .UIECMAdminPortlet .UIDialogTab .UIFormGrid  td.FieldComponent .textarea {
-  width: 540px;
-  height: auto;
+  width: 460px;
+  height: 350px;
 }
-
-
-.UIECMAdminPortlet .UIDialogTab .UIFormGrid  td.FieldLabel, .UIECMAdminPortlet .ViewForm .UIFormGrid  td.FieldLabel, .UIECMAdminPortlet .SkinForm .UIFormGrid  td.FieldLabel {
-  width: 80px;
-}
-
 
 /*----------------------------UIViewTab-------------------------------*/
 
@@ -503,13 +488,10 @@
 	padding-top: 10px;
 }
 
-.UIECMAdminPortlet .UIViewTab .UIFormGrid td.FieldComponent .textarea, .UIECMAdminPortlet .SkinForm .UIFormGrid td.FieldComponent .textarea {
-  width: 540px;
-  height: auto;
+.UIECMAdminPortlet .UIViewTab .UIFormGrid td.FieldComponent .textarea {
+  width: 460px;
+  height: 350px;
 }
-
-
-
 
 /*############################## -- Any Permission -- ########################*/
 .UIECMAdminPortlet .UIAnyPermission .UIForm .HorizontalLayout {
@@ -798,30 +780,3 @@ float: left;
 	margin: 6px 3px 0px 0px; /* orientation=lt */
 	margin: 6px 0px 0px 3px; /* orientation=rt */
 }
-
-/********/
-
-.UIECMAdminPortlet .UIForm .defaultDialog td.FieldComponent .textarea, .UIECMAdminPortlet .UIForm .defaultView td.FieldComponent .textarea, .UIECMAdminPortlet .UIForm .defaultSkin td.FieldComponent .textarea{
-	width: 98%;
-}
-
-.UIECMAdminPortlet .defaultDialog td.FieldLabel, .UIECMAdminPortlet .defaultView td.FieldLabel, .UIECMAdminPortlet .defaultSkin td.FieldLabel{
-	width: 0px;
-	padding: 0px;
-	min-width: 0px;
-}
-
-
-/***** Metadata Template *****/
-
-
-.UIECMAdminPortlet .UIForm .dialogTab td.FieldComponent .textarea, .UIECMAdminPortlet .UIForm .viewTab td.FieldComponent .textarea{
-	width: 100%;
-}
-
-.UIECMAdminPortlet .dialogTab td.FieldLabel, .UIECMAdminPortlet .viewTab td.FieldLabel{
-	width: 0px;
-	padding: 0px;
-	min-width: 0px;
-}
-

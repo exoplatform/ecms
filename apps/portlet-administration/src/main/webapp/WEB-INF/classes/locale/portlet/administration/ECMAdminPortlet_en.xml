@@ -1892,12 +1892,12 @@
   <UITagStyleList>
     <header>
       <name>Style Name</name>
-      <documentRange>Range</documentRange>
+      <documentRange>Document Range</documentRange>
       <tagHTML>Tag Style</tagHTML>
       <action>Action</action>
     </header>
     <action>
-      <AddStyle>Add</AddStyle>
+      <AddStyle>Add Style</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
@@ -1907,7 +1907,7 @@
       <styleHTML>HTML Style</styleHTML>
     </label>
     <action>
-      <UpdateStyle>Save</UpdateStyle>
+      <UpdateStyle>Update</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1918,7 +1918,7 @@
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
