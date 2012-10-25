@@ -213,10 +213,15 @@ public class LockServiceImpl implements LockService, Startable {
       while(nodeIter.hasNext()) {
         Node lockedNode = nodeIter.nextNode();
         //Check to avoid contains some corrupted data in the system which still contains mix:lockable but not locked.
+        if (!lockedNode.isCheckedOut()) {
+          lockedNode.checkout();
+        }
         if(lockedNode.isLocked()) {
           lockedNode.unlock();
         }  
-        lockedNode.removeMixin("mix:lockable");
+        if (lockedNode.isNodeType("mix:lockable")) {
+          lockedNode.removeMixin("mix:lockable");
+        }
         lockedNode.save();
       }
     } catch(RepositoryException re) {
