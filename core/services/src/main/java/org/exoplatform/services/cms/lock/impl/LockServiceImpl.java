@@ -153,8 +153,15 @@ public class LockServiceImpl implements LockService, Startable {
           String lockToken = lockedNodes.get(key);
           session.addLockToken(lockToken);
           Node node = (Node)session.getItem(nodePath);
-          node.unlock();
-          node.removeMixin("mix:lockable");
+          if (!node.isCheckedOut()) {
+            node.checkout();
+          }
+          if (node.isLocked()) {
+            node.unlock();
+          }
+          if (node.isNodeType("mix:lockable")) {
+            node.removeMixin("mix:lockable");
+          }
           node.save();
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
