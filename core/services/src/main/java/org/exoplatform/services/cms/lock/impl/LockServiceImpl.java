@@ -24,6 +24,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -178,9 +179,24 @@ public class LockServiceImpl implements LockService, Startable {
           Session session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
           String lockToken = lockedNodes.get(key);
           session.addLockToken(lockToken);
-          Node node = (Node)session.getItem(nodePath);
-          node.unlock();
-          node.removeMixin("mix:lockable");
+          Node node =null;
+          try {
+            node = (Node)session.getItem(nodePath);
+          }catch (PathNotFoundException e) {
+            if (LOG.isInfoEnabled()) {
+              LOG.info("Node " + nodePath + " has been already removed before");
+            }
+            continue;
+          }
+          if (!node.isCheckedOut()) {
+            node.checkout();
+          }
+          if (node.isLocked()) {
+            node.unlock();
+          }
+          if (node.isNodeType("mix:lockable")) {
+            node.removeMixin("mix:lockable");
+          }
           node.save();
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
