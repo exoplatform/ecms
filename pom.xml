@@ -83,6 +83,7 @@
     <picocontainer.version>1.1</picocontainer.version>
     <commons-io.version>1.4</commons-io.version>
     <junit.version>3.8.2</junit.version>
+    <testng.version>5.10</testng.version>
     <xpp3.version>1.1.4c</xpp3.version>
     <mockito.version>1.8.1</mockito.version>
     <icu4j.version>3.8</icu4j.version>
@@ -294,6 +295,12 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>
+        <classifier>jdk15</classifier>
       </dependency>
       <dependency>
         <groupId>xpp3</groupId>
