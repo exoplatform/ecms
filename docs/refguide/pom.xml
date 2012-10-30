@@ -16,14 +16,13 @@
     <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
     <wikbook.resources>${project.basedir}/src/main/resources/wikbook/images</wikbook.resources>
     <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.37</wikbook.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.wikbook</groupId>
       <artifactId>wikbook.docbkxstyle</artifactId>
-      <version>${wikbook.version}</version>
+      <version>${version.wikbook.plugin}</version>
     </dependency>
     
     <dependency>
@@ -85,7 +84,6 @@
 	      <plugin>
 	         <groupId>org.wikbook</groupId>
 	         <artifactId>wikbook.maven</artifactId>
-	         <version>${wikbook.version}</version>
 	         <executions>
 	           <execution>
 	             <phase>prepare-package</phase>
@@ -112,7 +110,6 @@
 	       
                <plugin>
                  <artifactId>maven-antrun-plugin</artifactId>
-                 <version>1.6</version>
                  <executions>
                    <execution>
                      <id>add-role</id>
@@ -136,7 +133,6 @@
 	       <plugin>
 	         <groupId>org.apache.maven.plugins</groupId>
 	         <artifactId>maven-dependency-plugin</artifactId>
-	         <version>2.1</version>
 	         <executions>
 	           <execution>
 	             <id>a</id>
@@ -172,7 +168,6 @@
 	       <plugin>
 	         <groupId>com.agilejava.docbkx</groupId>
 	         <artifactId>docbkx-maven-plugin</artifactId>
-	         <version>2.0.13</version>
 	         <executions>
 	           <execution>
 	             <goals>

@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform</groupId>
-    <artifactId>exo.parent</artifactId>
-    <version>8.1</version>
-    <relativePath /> 
- </parent>
+    <artifactId>maven-parent-pom</artifactId>
+    <version>9-SNAPSHOT</version>
+    <relativePath />
+  </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
   <version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</version>
@@ -16,17 +16,20 @@
   <scm>
     <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
     <developerConnection>scm:git:git@github.com:exoplatform/ecms.git</developerConnection>
-    <url>https://fisheye.exoplatform.com/browse/ecms.git</url>
+    <url>https://fisheye.exoplatform.com/browse/ecms</url>
   </scm>
-  <issueManagement>
-    <system>jira</system>
-    <url>http://jira.exoplatform.org/browse/ECMS</url>
-  </issueManagement>
-  <ciManagement>
-    <system>hudson</system>
-    <url>https://ci.exoplatform.org/job/ecms-master-ci/</url>
-  </ciManagement>
   <properties>
+    <!-- **************************************** -->
+    <!-- Jira Settings                            -->
+    <!-- **************************************** -->
+    <jira.project.key>ECMS</jira.project.key>
+    <!-- **************************************** -->
+    <!-- Jenkins Settings                         -->
+    <!-- **************************************** -->
+    <jenkins.job.name>ecms-master-ci</jenkins.job.name>
+    <!-- **************************************** -->
+    <!-- Project Dependencies                     -->
+    <!-- **************************************** -->
     <!-- Dependencies versions -->
     <org.exoplatform.kernel.version>2.3.9-GA-SNAPSHOT</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.4.9-GA-SNAPSHOT</org.exoplatform.core.version>
@@ -98,11 +101,6 @@
     <javax.resource.version>1.5</javax.resource.version>
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
-    <!-- ************** -->
-    <!-- Build settings -->
-    <!-- ************** -->
-    <exo.product.name>exo-wcm</exo.product.name>
-    <exo.product.specification>2.0</exo.product.specification>
     <org.owasp.antisamy.version>1.4.5</org.owasp.antisamy.version>
     <org.apache.batik.version>1.7</org.apache.batik.version>
     <org.apache.batik-util.version>1.6</org.apache.batik-util.version>
@@ -111,21 +109,17 @@
     <flying-saucer-core.version>9.0.1</flying-saucer-core.version>
     <flying-saucer-pdf.version>9.0.1</flying-saucer-pdf.version>
     <com.itextpdf.version>5.3.1</com.itextpdf.version>
-    <!-- exopackage -->
-    <org.exoplatform.exopackage.version>1.1.4</org.exoplatform.exopackage.version>
-    <!-- We enforce Java 6 to build to use Chromattic and APT -->
-    <jdk.min.version>1.6</jdk.min.version>
-    <!-- maven-release-plugin -->
-    <preparationGoals>clean install</preparationGoals>
-    <arguments>-Dgatein.working.dir=target</arguments>
-    <!-- Required to add generate sources bundle -->
-    <version.assembly.plugin>2.2</version.assembly.plugin>
-    <!-- config-scm-maven-plugin -->
-    <version.release.plugin>2.2.1</version.release.plugin>
-    <version.buildnumber.plugin>1.1</version.buildnumber.plugin>
     <org.imgscalr.version>4.2</org.imgscalr.version>
     <net.sf.ehcache.version>1.6.0</net.sf.ehcache.version>
     <de.odysseus.juel.version>2.1.2</de.odysseus.juel.version>
+    <!-- ************** -->
+    <!-- Build settings -->
+    <!-- ************** -->
+    <!-- exopackage -->
+    <org.exoplatform.exopackage.version>1.1.4</org.exoplatform.exopackage.version>
+    <!-- maven-release-plugin -->
+    <preparationGoals>clean install</preparationGoals>
+    <arguments>-Dgatein.working.dir=target</arguments>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
@@ -396,44 +390,6 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <!-- Create a source-release artifact that contains the fully buildable 
-               project directory source structure. This is the artifact which is 
-               the official subject of any release vote. -->
-          <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <dependencies>
-              <dependency>
-                <groupId>org.apache.apache.resources</groupId>
-                <artifactId>apache-source-release-assembly-descriptor</artifactId>
-                <version>1.0.2</version>
-              </dependency>
-            </dependencies>
-            <executions>
-              <execution>
-                <id>source-release-assembly</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
-                  <descriptorRefs>
-                    <descriptorRef>source-release</descriptorRef>
-                  </descriptorRefs>
-                  <tarLongFileFormat>gnu</tarLongFileFormat>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
   <modules>
     <module>core</module>
     <module>apps</module>
