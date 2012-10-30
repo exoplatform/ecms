@@ -40,7 +40,7 @@
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-connector</artifactId>
       <version>${project.version}</version>
-      <classifier>doc-jaxrs</classifier>
+      <classifier>sources</classifier>
     </dependency>    
   </dependencies>
 
@@ -156,8 +156,8 @@
                      <configuration>
                        <includeGroupIds>org.exoplatform.ecms</includeGroupIds>
                        <includeArtifactIds>ecms-core-connector</includeArtifactIds>
-                       <includeClassifiers>doc-jaxrs</includeClassifiers>
-                       <excludes>META-INF/**</excludes>
+                       <includeClassifiers>sources</includeClassifiers>
+                       <includes>**/*.wiki</includes>
                        <outputDirectory>${project.build.directory}/wikbook-src/en/en-US/pages/DeveloperReference/jaxrs</outputDirectory>
                      </configuration>
                    </execution>	           

@@ -126,30 +126,10 @@
       </resource>
     </resources>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <executions>
-          <execution>
-            <id>default-compile</id>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <compilerArguments>
-                <sourcepath>${project.build.directory}/templates</sourcepath>
-              </compilerArguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
+      <!-- Extract templates used by wikbook -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.1</version>
         <executions>
           <execution>
             <id>unpack-templates</id>
@@ -170,18 +150,38 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-compiler-plugin</artifactId>
         <executions>
           <execution>
-            <phase>package</phase>
+            <id>default-compile</id>
             <goals>
-              <goal>jar</goal>
+              <goal>compile</goal>
+            </goals>
+            <phase>compile</phase>
+            <!-- Additional configuration to generate wiki pages from wikbook annotations-->
+            <configuration>
+              <compilerArguments>
+                <sourcepath>${project.build.directory}/templates</sourcepath>
+              </compilerArguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>add-source</goal>
             </goals>
             <configuration>
-              <classifier>doc-jaxrs</classifier>
-              <includes>
-                <include>**/generated/*</include>
-              </includes>
+              <sources>
+                <source>${project.build.directory}/generated-sources/annotations</source>
+              </sources>
             </configuration>
           </execution>
         </executions>
