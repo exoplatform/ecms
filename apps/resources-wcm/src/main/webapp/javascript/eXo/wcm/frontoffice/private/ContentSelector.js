@@ -298,14 +298,15 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 		treeHTML += '<div class="ChildrenContainer" style="display:none;">'	;
 		for(var i = 0; i < nodeList.length; i++) {
 			var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
+			var strTitle = nodeList[i].getAttribute("title");
 			var strName = nodeList[i].getAttribute("name");
 			var isUpload = nodeList[i].getAttribute("isUpload");
 			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
 			if (nodeDriveName==null) nodeDriveName='';
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
-			treeHTML +=				decodeURIComponent(strName);	
+			treeHTML +=			'<a title="'+ decodeURIComponent(strTitle) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+			treeHTML +=				decodeURIComponent(strTitle);	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
 			treeHTML +=	'</div>';
@@ -319,14 +320,15 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 		if(currentNodeList && currentNodeList.length > 0) {
 			for(var i = 0; i < currentNodeList.length; i++) {
 				var id = eXo.ecm.ECS.generateIdNodes(currentNodeList[i], currentNode.id);
+				var	strTitle = currentNodeList[i].getAttribute("title");
 				var	strName	= currentNodeList[i].getAttribute("name");
 				var isUpload = currentNodeList[i].getAttribute("isUpload");
 				var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
 				if (nodeDriveName==null) nodeDriveName='';
 				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
-				treeHTML +=				decodeURIComponent(strName);	
+				treeHTML +=			'<a title="'+decodeURIComponent(strTitle)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+				treeHTML +=				decodeURIComponent(strTitle);	
 				treeHTML += 		'</a>';
 				treeHTML +=		'</div>';
 				treeHTML +=	'</div>';

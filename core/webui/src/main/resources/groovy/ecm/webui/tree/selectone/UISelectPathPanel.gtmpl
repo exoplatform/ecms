@@ -40,7 +40,7 @@
 				      <tr class="$rowClass">
 				        <td>
 				        <%
-                  String nodeName = ContentReader.getXSSCompatibilityContent(Utils.getIndexName(node));          
+                  String nodeTitle = ContentReader.getXSSCompatibilityContent(Utils.getTitle(node));
                   String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
 				          def clazz = "Text"
 						  						
@@ -49,9 +49,9 @@
 				          
 				          <div class="$clazz <%=nodeTypeIcon%>">
 				          <%if(Utils.isSymLink(node)) {%>
-	                  <img class="LinkSmall" alt="<%=nodeName%>" />
+	                  <img class="LinkSmall" alt="<%=nodeTitle%>" />
 	                <%}%>
-				          $nodeName</div>
+				          $nodeTitle</div>
 				        </td>
 				        <td>
 		              <a href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
