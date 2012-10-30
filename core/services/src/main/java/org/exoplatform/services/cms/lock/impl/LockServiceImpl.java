@@ -158,7 +158,7 @@ public class LockServiceImpl implements LockService, Startable {
             node = (Node)session.getItem(nodePath);
           }catch (PathNotFoundException e) {
             if (LOG.isInfoEnabled()) {
-              LOG.info("Node " + nodePath + "have been already removed before");
+              LOG.info("Node " + nodePath + " has been already removed before");
             }
             continue;
           }
