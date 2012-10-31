@@ -1,4 +1,4 @@
-There are many places inside ECMS which is built basing on the UI Extension Framework, so you can add your own actions packaged in external jars to them. They are:
+There are many places inside ECMS which are built basing on the [UI Extension Framework|../../../developer-guide/html/DEV.UI_Extension_Framework.html], so you can add your own actions packaged in external jars to them. They are:
 
 * *Action bar*
 
