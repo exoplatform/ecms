@@ -21,8 +21,8 @@
 -->
 
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1" 
-    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
+    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3" 
+    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
 	<!--javascript>
     <param>
@@ -37,15 +37,12 @@
       <name>ecm-utils</name>
       <as>ecm_utils</as>
       <script>
-         <name>eXo.ecm.DMSBrowser</name>
          <path>/javascript/eXo/ecm/DMSBrowser.js</path>
       </script>
       <script>
-         <name>eXo.ecm.ExoEditor</name>
          <path>/javascript/eXo/ecm/ExoEditor.js</path>
       </script>
       <script>
-         <name>eXo.ecm.ECMUtils</name>
          <path>/javascript/eXo/ecm/ECMUtils.js</path>
       </script>      
       <depends>
@@ -67,11 +64,9 @@
       <name>ecm-browser</name>
       <as>ecm_browser</as>
       <script>
-         <name>eXo.ecm.DMSBrowser</name>
          <path>/javascript/eXo/ecm/DMSBrowser.js</path>
       </script>
       <script>
-         <name>eXo.ecm.UIBrowseContent</name>
          <path>/javascript/eXo/ecm/UIBrowseContent.js</path>
       </script>
       <depends>

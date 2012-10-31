@@ -22,8 +22,8 @@
 
 <gatein-resources
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1"
-  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
+  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3"
+  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
 
   <!-- WCMSkin -->
@@ -47,7 +47,6 @@
       <name>ecm-bootstrap</name>
       <as>ecm_bootstrap</as>
       <script>
-         <name>ECM</name>
          <path>/javascript/eXo/wcm/ECM.js</path>
       </script>
    </module>
@@ -56,7 +55,6 @@
       <name>content-selector</name>
       <as>content_selector</as>
       <script>
-         <name>eXo.ecm.ContentSelector</name>
          <path>/javascript/eXo/wcm/frontoffice/private/ContentSelector.js</path>
       </script>
       <depends>
@@ -72,19 +70,15 @@
       <name>wcm-utils</name>
       <as>wcm_utils</as>
       <script>
-         <name>eXo.ecm.WCMUtils</name>
          <path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</path>
       </script>
       <script>
-         <name>eXo.ecm.Util</name>
          <path>/javascript/eXo/wcm/Util.js</path>
       </script>
       <script>
-         <name>eXo.ecm.CKEditorUtil</name>
          <path>/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js</path>
       </script>
       <script>
-         <name>eXo.ecm.SELocalization</name>
          <path>/javascript/eXo/wcm/backoffice/public/Components.js</path>
       </script>      
       <depends>
@@ -102,7 +96,6 @@
       <name>wcm-webui-ext</name>
       <as>wcm_webui_ext</as>
       <script>
-         <name>eXo.ecm.CloseEvents</name>
          <path>/javascript/eXo/wcm/backoffice/private/CloseEvents.js</path>
       </script>
       <depends>
@@ -117,7 +110,6 @@
    <module>
       <name>clv</name>
       <script>
-         <name>eXo.ecm.CLV</name>
          <path>/javascript/eXo/wcm/frontoffice/private/CLV.js</path>
       </script>
       <depends>
@@ -130,11 +122,9 @@
       <name>quick-edit</name>
       <as>quick_edit</as>
       <script>
-         <name>eXo.ecm.InlineEditing</name>
          <path>/javascript/eXo/wcm/frontoffice/private/InlineEditing.js</path>
       </script>
       <script>
-         <name>eXo.ecm.QuickEdit</name>
          <path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</path>
       </script>
       <depends>
@@ -147,7 +137,6 @@
       <name>ui-vertical-slide-tab</name>
       <as>ui_vertical_slide_tab</as>
       <script>
-         <name>eXo.webui.UIVerticalSlideTabs</name>
          <path>/javascript/eXo/wcm/backoffice/private/UIVerticalSlideTabs.js</path>
       </script>
       <depends>
@@ -163,7 +152,6 @@
       <name>ckeditor-loader</name>
       <as>ckeditor_loader</as>
       <script>
-         <name>exo.load.ckeditor</name>
          <path>/ckeditor/ckeditor.js</path>
       </script>
    </module>
@@ -172,7 +160,6 @@
    		<name>wcm-navigation</name>
    		<as>wcm_navigation</as>
    		<script>
-   			<name>eXo.ecm.WCMNavigationPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Navigation.js</path>
    		</script>
    		<depends>
@@ -187,7 +174,6 @@
    		<name>wcm-search</name>
    		<as>wcm_search</as>
    		<script>
-   			<name>eXo.ecm.SearchPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Search.js</path>
    		</script>
    		<depends>
@@ -203,7 +189,6 @@
    		<name>wcm-breadcrumb</name>
    		<as>wcm_breadcrumb</as>
    		<script>
-   			<name>eXo.ecm.WCMBreadcrumbPortlet</name>
    			<path>/javascript/eXo/wcm/frontoffice/public/Breadcrumb.js</path>
    		</script>
    		<depends>
