@@ -37,7 +37,7 @@
 	boolean isShowCategories = getPortletPreference("ShowCategories");
 	boolean isShowTags = getPortletPreference("ShowTags");
 
-	if (currentNode.hasProperty("exo:image")) {
+	if (currentNode.hasProperty("exo:image") && currentNode.getProperty("exo:image").getStream().available() > 0 ) {
 		RESTImagesRendererService imagesRenderer = uicomponent.getApplicationComponent(RESTImagesRendererService.class);								
 		def imageURI = imagesRenderer.generateImageURI(currentNode,"exo:image")
 		String imageWidth = getRimOfImage("exo:imageWidth", currentNode);
