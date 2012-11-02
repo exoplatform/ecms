@@ -211,7 +211,7 @@ public class InlineEditingService implements ResourceContainer{
         node = (Node)session.getItem(node.getPath());
         if(canSetProperty(node)) {
           if (!sameValue(newValue, node, propertyName)) {
-            if (newValue.length() > 0) {
+            if (newValue.length() >= 0) {
               newValue = Text.unescapeIllegalJcrChars(newValue.trim());
               PortalContainerInfo containerInfo =
                 (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
