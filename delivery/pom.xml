@@ -12,9 +12,6 @@
   <description>eXo Entreprise Content Management Suite :: Delivery</description>
   <modules>
     <module>server-tomcat</module>
-    <module>module</module>
-    <module>product</module>
     <module>jboss-package</module>
-    <module>assembly</module>
   </modules>
 </project>
