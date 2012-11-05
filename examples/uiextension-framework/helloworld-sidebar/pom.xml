@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms-examples-uiextension-framework</artifactId>
-    <version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</version>
+    <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-examples-uiextension-framework-helloworld-sidebar</artifactId>
 	<packaging>jar</packaging>
