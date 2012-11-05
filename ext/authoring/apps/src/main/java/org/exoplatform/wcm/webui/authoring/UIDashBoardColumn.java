@@ -54,7 +54,7 @@ public class UIDashBoardColumn extends UIContainer {
   private String label_;
   
   public UIDashBoardColumn() throws Exception {
-    uiPageIterator_ = addChild(UIPageIterator.class, null, null);
+    uiPageIterator_ = addChild(UIPageIterator.class, null, "UIDashboardColumnIterator" + Math.random());
   }
   
   public UIPageIterator getUIPageIterator() {

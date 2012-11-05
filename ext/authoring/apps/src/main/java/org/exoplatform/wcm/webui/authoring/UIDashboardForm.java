@@ -59,9 +59,9 @@ public class UIDashboardForm extends UIContainer {
   private int pageSize_ = 10;
   
   public UIDashboardForm() throws Exception {
-    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.mydraft");
-    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.waitingapproval");
-    addChild(UIDashBoardColumn.class, null, null).setLabel("UIDashboardForm.label.publishedtomorrow");
+    addChild(UIDashBoardColumn.class, null, "UIDashboardDraft").setLabel("UIDashboardForm.label.mydraft");
+    addChild(UIDashBoardColumn.class, null, "UIDashboardWaiting").setLabel("UIDashboardForm.label.waitingapproval");
+    addChild(UIDashBoardColumn.class, null, "UIDashboardPublish").setLabel("UIDashboardForm.label.publishedtomorrow");
     refreshData();
   }
 
