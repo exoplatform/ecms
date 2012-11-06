@@ -1,8 +1,0 @@
-{docbook}
-<para xml:id="CONTref.Configuration.Plugins.BaseActionPlugin">
-<citetitle>
-<emphasis role="bold">BaseActionPlugin</emphasis>
-</citetitle>
-</para>
-{docbook}
-This is an abstract class and the parent of _[ScriptActionPlugin|#CONTref.Configuration.Plugins.ScriptActionPlugin]_ and _BPActionPlugin_.

@@ -1,5 +1,0 @@
-_SiteSearchService_ is used in the Search portlet that allows users to find all information matching with your given keyword.
-
-||*Method*||*Param* || *Return*||*Description*||
-|*addExcludeIncludeDataTypePlugin*(ExcludeIncludeDataTypePlugin plugin) | {{plugin}}: The plugin. | {{void}} | Filter mimetypes data in the search results. |
-|*searchSiteContents*(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception; | {{queryCriteria}}: The query criteria for SiteSearchService. Basing on search criteria, SiteSearchService can easily create the query statement to search.{example}{example}{{sessionProvider}}: The session provider. {example}{example} {{pageSize}}: The number of search results on a page. |{{AbstractPageList<ResultNode>}}|Find all child nodes whose contents match with the given keyword. These nodes will be put in the list of search results.|

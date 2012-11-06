@@ -1,9 +1,0 @@
-{docbook}
-<para xml:id="CONTref.Configuration.Plugins.PublicationPlugin">
-<citetitle>
-<emphasis role="bold">PublicationPlugin</emphasis>
-</citetitle>
-</para>
-{docbook}
-This is an abstract class and the parent of [_StageAndVersionPublicationPlugin_|#CONTref.Configuration.Plugins.StageAndVersionPublicationPlugin] 
-and [_AuthoringPublicationPlugin_|#CONTref.Configuration.Plugins.AuthoringPublicationPlugin].
