@@ -42,8 +42,6 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.javascript.Javascript;
-//import org.exoplatform.web.application.javascript.Javascript.PortalJScript;
 import org.exoplatform.web.application.javascript.JavascriptConfigService;
 import org.picocontainer.Startable;
 

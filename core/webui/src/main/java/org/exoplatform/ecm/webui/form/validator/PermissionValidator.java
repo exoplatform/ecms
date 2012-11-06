@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.form.validator;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;

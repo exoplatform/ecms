@@ -31,9 +31,6 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
@@ -79,7 +76,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
 
   public UILockNodeList() throws Exception {
     getUIPageIterator().setId("LockNodeListIterator");
-    
+
   }
 
   public String[] getActions() { return ACTIONS ; }
@@ -215,12 +212,12 @@ public class UILockNodeList extends UIPagingGridDecorator {
         Object[] args = {lockedNode.getName()};
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args,
             ApplicationMessage.WARNING));
-        
+
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
-        
+
       }
       uiUnLockManager.refresh();
       uiUnLockManager.getChild(UILockNodeList.class).setRendered(true);

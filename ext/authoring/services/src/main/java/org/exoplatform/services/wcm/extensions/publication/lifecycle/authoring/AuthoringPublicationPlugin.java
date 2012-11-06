@@ -16,8 +16,6 @@ import javax.portlet.PortletMode;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
@@ -46,7 +44,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
-  
+
   /**
    * Instantiates a new stage and version publication plugin.
    */
@@ -59,8 +57,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * (javax.jcr.Node, java.lang.String, java.util.HashMap)
    */
 
-  public void changeState(Node node, 
-                          String newState, 
+  public void changeState(Node node,
+                          String newState,
                           HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
                                                                                       Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
@@ -326,10 +324,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     if (!node.isNew())
       node.save();
-    
+
     //raise event to notify that state is changed
     if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
-      
+
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
 
@@ -339,11 +337,11 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
       }
     }
-    
+
     ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }
-  
+
   /*
    * (non-Javadoc)
    * @see
@@ -383,15 +381,15 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * org.exoplatform.services.ecm.publication.PublicationPlugin#addMixin(javax
    * .jcr.Node)
    */
-  public void addMixin(Node node) throws Exception {  	
-    node.addMixin(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);    
+  public void addMixin(Node node) throws Exception {
+    node.addMixin(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);
     String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
     if(nodetypes == null || nodetypes.length() == 0)
-   	  nodetypes = "exo:webContent";
+       nodetypes = "exo:webContent";
     if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
-	    if (!node.isNodeType(AuthoringPublicationConstant.MIX_VERSIONABLE)) {
-	      node.addMixin(AuthoringPublicationConstant.MIX_VERSIONABLE);
-	    }
+      if (!node.isNodeType(AuthoringPublicationConstant.MIX_VERSIONABLE)) {
+        node.addMixin(AuthoringPublicationConstant.MIX_VERSIONABLE);
+      }
     }
   }
 

@@ -17,9 +17,6 @@
 package org.exoplatform.services.cms.voting.impl;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -185,7 +182,7 @@ public class VotingServiceImpl implements VotingService {
     }
     return voterVoteValues;
   }
-  public boolean isVoted(Node node, String userName, String language) throws Exception {    
+  public boolean isVoted(Node node, String userName, String language) throws Exception {
     return getVoteValueOfUser(node, userName, language) > 0;
   }
 

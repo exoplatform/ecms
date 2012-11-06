@@ -19,7 +19,6 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -78,7 +77,7 @@ public class UISearchBox extends UIForm {
   public String getTemplate() {
     return templatePath;
   }
-  
+
   public ResourceResolver getTemplateResourceResolver() {
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
@@ -87,7 +86,7 @@ public class UISearchBox extends UIForm {
     } catch (Exception e) {
       return null;
     }
-  }  
+  }
 
   /**
    * The listener interface for receiving searchAction events. The class that is
@@ -113,13 +112,13 @@ public class UISearchBox extends UIForm {
       String portalName = Util.getPortalRequestContext().getPortalOwner();
       PortalRequestContext prContext = Util.getPortalRequestContext();
       prContext.setResponseComplete(true);
-      
+
       NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
       NavigationResource resource = new NavigationResource(SiteType.PORTAL, portalName, "searchResult");
       nodeURL.setResource(resource);
       nodeURL.setQueryParameterValue(PORTAL_NAME_PARAM, portalName);
       nodeURL.setQueryParameterValue(KEYWORD_PARAM, keyword);
-      
+
       prContext.getResponse().sendRedirect(nodeURL.toString());
     }
   }

@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.templates;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -30,7 +29,6 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -139,7 +137,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(true) ;
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
         setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
-      }      
+      }
       getUIFormTextAreaInput(FIELD_CONTENT).setValue(templateContent) ;
       getUIStringInput(FIELD_NAME).setValue(template.getName()) ;
       getUIStringInput(FIELD_NAME).setEditable(false) ;
@@ -237,7 +235,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       app.addMessage(new ApplicationMessage("UITemplateContent.msg.version-restored", args)) ;
       uiForm.refresh() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-      
+
     }
   }
 
@@ -251,13 +249,13 @@ public class UITemplateContent extends UIForm implements UISelectable {
         Object[] args = { FIELD_NAME } ;
         uiApp.addMessage(new ApplicationMessage("ECMNameValidator.msg.empty-input", args,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
       if(!Utils.isNameValid(name, UITemplateContent.REG_EXPRESSION)){
         uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
-        
+
         return ;
       }
       String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue() ;
@@ -271,7 +269,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          
+
           return ;
         }
       } else if(uiForm.getId().equals(UIViewTab.VIEW_FORM_NAME)) {
@@ -280,7 +278,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          
+
           return ;
         }
       } else if(uiForm.getId().equals(UISkinTab.SKIN_FORM_NAME)) {
@@ -289,7 +287,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           Object[] args = { name } ;
           uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
-          
+
           return ;
         }
       }
@@ -394,7 +392,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContent);
     }
   }
-  
+
   static public class RefreshActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiForm = event.getSource() ;
@@ -432,7 +430,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null",
                                               null,
                                               ApplicationMessage.WARNING));
-      
+
       areValidPermissions = false;
       return areValidPermissions;
     }
@@ -444,7 +442,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         areValidPermissions = false;
         return areValidPermissions;
       }
@@ -454,14 +452,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           areValidPermissions = false;
           return areValidPermissions;
         } else if (!permission[0].equals("*") && (oservice.getMembershipTypeHandler().findMembershipType(permission[0]) == null)) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           areValidPermissions = false;
           return areValidPermissions;
         }
@@ -469,14 +467,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           areValidPermissions = false;
           return areValidPermissions;
         } else if (oservice.getGroupHandler().findGroupById(permission[1]) == null) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           areValidPermissions = false;
           return areValidPermissions;
         }
@@ -485,7 +483,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           areValidPermissions = false;
           return areValidPermissions;
         }

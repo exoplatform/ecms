@@ -20,8 +20,6 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 
 /**
@@ -135,5 +133,5 @@ public interface WCMPublicationService {
    * @return the revision state stored in publication:currentState property
    */
   public String getContentState(Node node) throws Exception ;
-  
+
 }

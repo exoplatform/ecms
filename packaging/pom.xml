@@ -11,8 +11,6 @@
   <name>eXo ECM Suite :: Packaging</name>
   <description>eXo Entreprise Content Management Suite :: Packaging</description>
   <modules>
-    <module>ecmdemo</module>
     <module>wcm</module>
-    <module>waiportal</module>
   </modules>
 </project>

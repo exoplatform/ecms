@@ -29,7 +29,6 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -83,9 +82,9 @@ public class UIPresentationContainer extends UIContainer{
    * @throws Exception the exception
    */
   public UIPresentationContainer() throws Exception{
-  	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     addChild(UIPresentation.class, null, UIPresentation.class.getSimpleName() + portletRequestContext.getWindowId());
-    
+
     portletPreferences = portletRequestContext.getRequest().getPreferences();
   }
 
@@ -398,7 +397,7 @@ public class UIPresentationContainer extends UIContainer{
       .append("')");
     return sb.toString();
   }
-  
+
   private String getResourceBundle(String key) {
     try {
       ResourceBundle rs = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
@@ -406,7 +405,7 @@ public class UIPresentationContainer extends UIContainer{
     } catch(MissingResourceException e) {
       return key;
     }
-  } 
+  }
 
 
   /**
