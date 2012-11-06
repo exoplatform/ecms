@@ -25,29 +25,6 @@
    xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-
-  <component>
-    <key>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</key>
-    <type>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsServiceImpl</type>
-  </component>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
-    <component-plugin>
-      <name>Add ignored portals</name>
-      <set-method>addIgnorePortalPlugin</set-method>
-      <type>org.exoplatform.services.wcm.portal.artifacts.IgnorePortalPlugin</type>
-      <description>ignored portals. the service will not deploy data to the ignored portals</description>
-      <init-params>
-        <values-param>
-          <name>ignored.portals</name>
-          <description>ignored portal list</description>
-          <value>WAIPortal</value>
-        </values-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
   <import>war:/conf/sample-portal/wcm/deployment/template-WAIPortal-deployment-configuration.xml</import>
 
 </configuration>
