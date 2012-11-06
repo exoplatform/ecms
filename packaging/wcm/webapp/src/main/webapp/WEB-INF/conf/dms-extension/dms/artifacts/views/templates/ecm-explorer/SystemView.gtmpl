@@ -136,10 +136,10 @@
                 if (typeSort.equals("Alphabetic")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="padding-left: 20px;">
-                  <%=_ctx.appRes("ListView.view.label.name")%>
+                  <%=_ctx.appRes("ListView.view.label.title")%>
                 </div>
               <%} else { %>
-                <%=_ctx.appRes("ListView.view.label.name")%>
+                <%=_ctx.appRes("ListView.view.label.title")%>
               <%} %>
             </a>
           </div>

@@ -606,13 +606,14 @@
     <header>
       <dateTime>Date</dateTime>
       <name>Nom</name>
-      <title>Titre du document</title>
+      <title>Titre</title>
     </header>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
         <name>Nom</name>
+        <title>Titre</title>
         <versionable>Versionnable</versionable>
         <exo_owner>Propriétaire</exo_owner>
         <auditing><![CDATA[Tra&ccedil;abilit&eacute;]]></auditing>
@@ -2964,7 +2965,7 @@
       <status>Etat</status>
       <author>Auteur</author>
       <date>Date de création</date>
-      <title>Titre du document</title>
+      <title>Titre</title>
      <lastUser>Dernier utilisateur</lastUser>
 	</header>
   </WCMContentView>

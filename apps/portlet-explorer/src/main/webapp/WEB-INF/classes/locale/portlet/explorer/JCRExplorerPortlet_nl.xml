@@ -600,6 +600,7 @@
 		<view>
 			<label>
 				<name>naam</name>
+				<title>Title</title>
 				<versionable>Versionable</versionable>
 				<exo_owner>Eigenaar</exo_owner>
 				<auditing>Auditing</auditing>
@@ -3219,7 +3220,7 @@
       <status>Status</status>
       <author>Author</author>
       <date>Created date</date>
-      <title>Document title</title>
+      <title>Title</title>
       <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>

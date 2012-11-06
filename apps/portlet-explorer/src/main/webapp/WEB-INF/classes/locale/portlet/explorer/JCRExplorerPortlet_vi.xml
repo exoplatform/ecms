@@ -533,6 +533,7 @@
     <view>
       <label>
         <name>Tên</name>
+        <title>Tiêu đề</title>
         <versionable>Phiên bản</versionable>
         <exo_owner>Người tạo</exo_owner>
         <auditing>Kiểm định</auditing>
@@ -2980,7 +2981,7 @@
     <header>
       <dateTime>Ngày đổi</dateTime>
       <name>Tên</name>
-      <title>Document Title</title>
+      <title>Tiêu đề</title>
     </header>
     <tooltip>
       <View>Xem</View>
@@ -3332,7 +3333,7 @@
       <status>Trạng thái</status>
       <author>Tác giả</author>
       <date>Ngày tạo</date>
-      <title>Tiêu đề của tài liệu</title>
+      <title>Tiêu đề</title>
       <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>

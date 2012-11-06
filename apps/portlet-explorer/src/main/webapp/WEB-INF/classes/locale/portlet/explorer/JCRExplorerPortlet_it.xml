@@ -523,6 +523,7 @@
     <view>
       <label>
         <name>Nome</name>
+        <title>Title</title>
         <versionable>Versionabile</versionable>
         <exo_owner>Proprietario</exo_owner>
         <auditing>Revisione</auditing>

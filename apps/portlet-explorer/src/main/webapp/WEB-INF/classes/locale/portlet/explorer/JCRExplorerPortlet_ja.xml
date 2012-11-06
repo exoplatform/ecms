@@ -519,6 +519,7 @@
     <view>
       <label>
         <name>名前</name>
+        <title>Title</title>
         <versionable>バージョン可能</versionable>
         <exo_owner>オーナー</exo_owner>
         <auditing>監査</auditing>
@@ -2906,7 +2907,7 @@
     <header>
       <dateTime>日時</dateTime>
       <name>名前</name>
-      <title>Document Title</title>
+      <title>Title</title>
     </header>
     <tooltip>
       <View>ビュー</View>

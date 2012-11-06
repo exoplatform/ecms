@@ -489,6 +489,7 @@
     <view>
       <label>
         <name>الاسم</name>
+        <title>Title</title>
         <versionable>قابل للإصدار</versionable>
         <exo_owner>الصاحب</exo_owner>
         <auditing>الفحص</auditing>
@@ -2907,7 +2908,7 @@
       <status>Status</status>
       <author>Author</author>
       <date>Created date</date>
-      <title>Document title</title>
+      <title>Title</title>
       <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>

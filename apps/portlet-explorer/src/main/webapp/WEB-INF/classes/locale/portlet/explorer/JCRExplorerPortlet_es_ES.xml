@@ -613,6 +613,7 @@
     <view>
       <label>
         <name>Nombre</name>
+        <title>Título</title>
         <versionable>Versionable</versionable>
         <exo_owner>Propietario</exo_owner>
         <auditing>Auditoría</auditing>

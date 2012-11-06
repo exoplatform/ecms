@@ -493,6 +493,7 @@
     <view>
       <label>
         <name>Name</name>
+        <title>Title</title>
         <versionable>Versionierbar</versionable>
         <exo_owner>Besitzer</exo_owner>
         <auditing>Wirtschaftsprüfung</auditing>
@@ -2895,7 +2896,7 @@
     <header>
       <dateTime>Date time</dateTime>
       <name>Name</name>
-      <title>Document Title</title>
+      <title>Title</title>
     </header>
     <tooltip>
       <View>View</View>
@@ -3305,7 +3306,7 @@
       <status>Status</status>
       <author>Author</author>
       <date>Created date</date>
-      <title>Document title</title>
+      <title>Title</title>
       <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>

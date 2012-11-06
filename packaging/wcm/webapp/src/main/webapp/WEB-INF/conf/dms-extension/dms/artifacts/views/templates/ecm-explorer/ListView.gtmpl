@@ -82,10 +82,10 @@
 			          if (selectedSortType.equals("Alphabetic")) {
 			        %>
 				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.name")%>
+				        	<%=_ctx.appRes("ListView.view.label.title")%>
 				        </div>
 				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.name")%>
+				        <%=_ctx.appRes("ListView.view.label.title")%>
 				      <%} %>
 				    </div>
 					<!--
