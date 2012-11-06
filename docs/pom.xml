@@ -23,18 +23,4 @@
      <module>refguide</module>
    </modules>
 
-   <profiles>
-     <profile>
-       <id>docs</id>
-       <activation>
-         <property>
-           <name>!skip.doc</name>
-         </property>
-       </activation>
-       <modules>
-         <module>userguide</module>
-       </modules>
-     </profile>
-   </profiles>
-
 </project>
