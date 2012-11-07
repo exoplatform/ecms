@@ -11,6 +11,8 @@
   <name>eXo ECMS Assemblies</name>
   <properties>
     <gatein.working.dir>${basedir}/target</gatein.working.dir>
+    <!-- com.ibm.icu:icu4j:jar:2.6.1 has a broken class (com/ibm/icu/impl/data/LocaleElements_zh__PINYIN.class) that breaks the enforcer animal sniffer rule -->
+    <enforcer.skip>true</enforcer.skip>
   </properties>
   <dependencies>
     <dependency>
