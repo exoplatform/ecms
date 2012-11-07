@@ -18,6 +18,7 @@
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
 		
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -59,9 +60,9 @@
 	  if(seoService != null) {	  
 		  metaModel = seoService.getMetadata(paramArray, pageReference);
 		  if(metaModel != null) {
-		  	hasMetadata = true;
-		  	keywords = metaModel.getKeywords();
-		    description = metaModel.getDescription();	
+		    hasMetadata = true;
+		    keywords = ContentReader.getXSSCompatibilityContent(metaModel.getKeywords());
+		    description = ContentReader.getXSSCompatibilityContent(metaModel.getDescription());	
 		    robots = metaModel.getRobotsContent();    
 		  }	   
 	  }
