@@ -5,7 +5,7 @@
     <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-docs</artifactId>
-    <version>2.3.9-CR02-SNAPSHOT</version>
+    <version>2.3.9</version>
   </parent>
   <artifactId>exo-ecms-docs-userguide</artifactId>
   <packaging>jdocbook</packaging>
