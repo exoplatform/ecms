@@ -99,7 +99,7 @@
           <goal>copy-resources</goal>
         </goals>
         <configuration>
-          <outputDirectory>${docbook.source}</outputDirectory>
+          <outputDirectory>${docbook.source}/en-US</outputDirectory>
           <resources>
             <resource>
              <directory>src/main/resources/wikbook</directory>
@@ -148,7 +148,7 @@
             <configuration>
             <includeGroupIds>org.exoplatform.doc</includeGroupIds>
             <includeArtifactIds>doc-style</includeArtifactIds>
-            <outputDirectory>${docbook.source}</outputDirectory>
+            <outputDirectory>${docbook.source}/en-US</outputDirectory>
             </configuration>
            </execution>
            <execution>
@@ -190,7 +190,7 @@
                <bookId>ContentReferenceGuide</bookId>
 	           <sourceDirectory>${project.build.directory}/wikbook-src</sourceDirectory>
 	      	  <sourceFileName>wcm-ref.wiki</sourceFileName>
-	           <destinationDirectory>${docbook.source}</destinationDirectory>
+	           <destinationDirectory>${docbook.source}/en-US</destinationDirectory>
 	           <destinationFileName>${project.artifactId}.xml</destinationFileName>
 	           <beforeBookBodyXML><![CDATA[
 	           <xi:include href="bookinfo.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />
@@ -210,7 +210,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <target>
-                <replace file="${docbook.source}/${project.artifactId}.xml">
+                <replace file="${docbook.source}/en-US/${project.artifactId}.xml">
                   <replacetoken><![CDATA[RoleNotInToc"]]></replacetoken>
                   <replacevalue><![CDATA[" role="NotInToc"]]></replacevalue>
                 </replace>
@@ -227,7 +227,7 @@
       <plugin>
         <groupId>org.jboss.maven.plugins</groupId>
         <artifactId>maven-jdocbook-plugin</artifactId>
-        <version>2.1.1</version>
+        <version>2.2.1</version>
         <extensions>true</extensions>
         <dependencies>
           <dependency>
@@ -257,14 +257,14 @@
           <sourceDirectory>${docbook.source}</sourceDirectory>
           <sourceDocumentName>${project.artifactId}.xml</sourceDocumentName>
           <imageResource>
-            <directory>${docbook.source}</directory>
+            <directory>${docbook.source}/en-US</directory>
             <includes>
               <include>images/**</include>
               <include>background/**</include>
             </includes>
           </imageResource>
           <cssResource>
-            <directory>${docbook.source}</directory>
+            <directory>${docbook.source}/en-US</directory>
             <includes>
               <include>css/**</include>
             </includes>
@@ -272,12 +272,12 @@
           <formats>
             <format>
               <formatName>html</formatName>
-              <stylesheetResource>file:${docbook.source}/xsl/xhtml.xsl</stylesheetResource>
+              <stylesheetResource>file:${docbook.source}/en-US/xsl/xhtml.xsl</stylesheetResource>
               <finalName>index.html</finalName>
             </format>
             <format>
               <formatName>pdf</formatName>
-              <stylesheetResource>file:${docbook.source}/xsl/pdf.xsl</stylesheetResource>
+              <stylesheetResource>file:${docbook.source}/en-US/xsl/pdf.xsl</stylesheetResource>
               <finalName>${project.artifactId}-${project.version}.pdf</finalName>
             </format>
           </formats>
