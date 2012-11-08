@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-ext-workflow</artifactId>
-    <version>2.3.9</version>
+    <version>2.3.10-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-ext-workflow-resources</artifactId>
   <packaging>war</packaging>
