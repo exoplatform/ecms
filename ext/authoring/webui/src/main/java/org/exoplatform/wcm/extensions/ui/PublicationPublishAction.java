@@ -27,6 +27,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -53,7 +54,7 @@ public class PublicationPublishAction extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
       new UIExtensionFilter[] {
-          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter()});
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter(), new IsNotIgnoreVersionNodeFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
