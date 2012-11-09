@@ -69,7 +69,6 @@
     <dependency>
       <groupId>org.chromattic</groupId>
       <artifactId>chromattic.core</artifactId>
-      <version>${chromattic.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
