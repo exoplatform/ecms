@@ -52,7 +52,6 @@
     <dependency>
       <groupId>org.chromattic</groupId>
       <artifactId>chromattic.core</artifactId>
-      <version>${chromattic.version}</version>
       <scope>test</scope>
     </dependency>
     <!-- "unused declared" by analyze but still use for test -->
