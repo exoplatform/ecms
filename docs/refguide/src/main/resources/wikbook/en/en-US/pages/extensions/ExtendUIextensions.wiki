@@ -2,7 +2,7 @@ There are many places inside ECMS which are built basing on the UI Extensions fr
 
 * *Action bar*
 
-!images/actionbar.png|align="center" width="120mm" fo:scalefix="1" html:scalefix="0"!
+!images/Actionbar.png|align="center" width="120mm" fo:scalefix="1" html:scalefix="0"!
 
 * *Side bar*
 
