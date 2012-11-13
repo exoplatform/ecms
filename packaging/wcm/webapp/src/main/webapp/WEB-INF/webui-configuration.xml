@@ -31,15 +31,8 @@
     <ui-component-root>org.exoplatform.portal.webui.workspace.UIPortalApplication</ui-component-root>    
     <state-manager>org.exoplatform.portal.application.PortalStateManager</state-manager>
 
-    <application-lifecycle-listeners>       
-      <listener>org.exoplatform.portal.application.UserSiteLifeCycle</listener>
-      <listener>org.exoplatform.portal.application.PortalLogoutLifecycle</listener>
-      <listener>org.exoplatform.portal.application.PortalStatisticLifecycle</listener>
-      <listener>org.exoplatform.portal.application.PortalApplicationLifecycle</listener>
-      <listener>org.exoplatform.webui.application.MonitorApplicationLifecycle</listener>
-      <listener>org.exoplatform.portal.application.UserProfileLifecycle</listener>
-      <listener>org.exoplatform.portal.application.localization.LocalizationLifecycle</listener>
-      <!--<listener>org.exoplatform.ecms.application.PortalResourceLifecycle</listener>-->
+    <application-lifecycle-listeners>      
+      <listener>org.exoplatform.ecms.application.PortalResourceLifecycle</listener>
     </application-lifecycle-listeners>
 
     <events>

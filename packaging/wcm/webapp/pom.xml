@@ -9,6 +9,14 @@
   <artifactId>ecms-packaging-wcm-webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Extension WAR</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <description>eXo WCM Extension WAR's configuration</description>
   <build>
     <finalName>gatein-exo-wcm-${project.version}</finalName>
