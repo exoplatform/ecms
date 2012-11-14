@@ -1,8 +1,7 @@
 The _ApplicationTemplateManagerService_ component is used to manage dynamic Groovy templates for WCM-based products.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
     <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
     <init-params>
@@ -11,8 +10,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
             <property name="repository" value="system"/>
         </properties-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 

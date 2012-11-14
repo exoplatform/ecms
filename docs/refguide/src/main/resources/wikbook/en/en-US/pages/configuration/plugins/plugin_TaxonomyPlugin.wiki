@@ -1,15 +1,12 @@
 This plugin is used to configure the predefined taxonomies to inject into JCR.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.taxonomy.TaxonomyService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.taxonomy.TaxonomyService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-categories-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.taxonomy.TaxonomyService</target-component>
     <component-plugin>
         <name>predefinedTaxonomyPlugin</name>
@@ -73,8 +70,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

@@ -1,8 +1,7 @@
 The _SEOService_ component is used to help users manage SEO data of a page or a content, so their websites can achieve higher rankings on search engines.
 The configuration of this component is found in _/packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-extension/wcm/seo-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.seo.SEOService</key>
     <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
     <init-params>
@@ -57,8 +56,7 @@ The configuration of this component is found in _/packaging/wcm/webapp/src/main/
             </object>
         </object-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 
 *Details*:

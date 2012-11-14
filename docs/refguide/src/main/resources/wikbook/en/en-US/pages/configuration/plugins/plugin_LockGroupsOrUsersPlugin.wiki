@@ -1,14 +1,11 @@
 This plugin is used to configure predefined groups or users for lock administration.
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.lock.LockService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.lock.LockService</target-component>{code}
 
 The configuration is applied mainly in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.lock.LockService</target-component>
     <component-plugin>
         <name>predefinedLockGroupsOrUsersPlugin</name>
@@ -30,8 +27,7 @@ The configuration is applied mainly in _core/core-configuration/src/main/webapp/
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

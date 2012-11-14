@@ -2,16 +2,13 @@ This plugin is used to create a predefined View into a repository.
 A View can include many object parameters. Parameters are used to create default Views, Templates and Actions of *Manage View* service. View enables administrators to customize View classification that can impact on users in exploring workspace. Each object-param has a type that is a class representing all properties of a View.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-views-configuration.xml_.
 
 *Sample configuration*:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
     <component-plugin>
         <name>manage.view.plugin</name>
@@ -77,9 +74,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-
-{code}
+</external-component-plugins>{code}
 
 In which:
 

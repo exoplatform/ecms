@@ -51,8 +51,7 @@ To expose WCM drives to the CMIS repositories, you must make a special extension
 
 To make a typical component _org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry_, do as follows:
 
-{code:xml}
-<component>
+{code:xml}<component>
    <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</type>
    <init-params>
       <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
@@ -71,8 +70,7 @@ To make a typical component _org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegi
          <value>org.xcmis.renditions.impl.ImageRenditionProvider</value>
       </values-param>
    </init-params>
-</component>
-{code}
+</component>{code}
 
 Where configuration parameters include:
 * _indexDir_: the directory where the lucene index will be placed. It is disabled by default.
@@ -87,8 +85,7 @@ Where configuration parameters include:
 h1. Required nodetypes and namespaces in JCR {anchor:id=CONTref.Configuration.Required_nodetypes_namespaces_in_JCRRoleNotInToc}
 
 The following configuration is mandatory for JCR to work correctly:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
    <component-plugin>
       <name>add.namespaces</name>
@@ -114,6 +111,5 @@ The following configuration is mandatory for JCR to work correctly:
          </values-param>
       </init-params>
    </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 

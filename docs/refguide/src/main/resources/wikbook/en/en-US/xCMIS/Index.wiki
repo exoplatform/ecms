@@ -49,8 +49,7 @@ To be able to provide full-text search capabilities, xCMIS uses its own index. T
 This parameter is passed through the XML configuration.
 
 For example, to set up the index directory:
-{code:xml}
-<component>
+{code:xml}<component>
    <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
    <init-params>
          <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
@@ -60,8 +59,7 @@ For example, to set up the index directory:
          </value-param-->
          ..............
    </init-params>
-</component>
-{code}
+</component>{code}
 
 {docbook}
 <para xml:id="CONTref.Configuration.Index_atomicity_durability">

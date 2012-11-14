@@ -7,8 +7,7 @@ The Newsletter portlet and its services are deprecated. It remains fully support
 </para></note>
 {docbook}
 
-{code:xml}
-<component>
+{code:xml}<component>
     <type>org.exoplatform.services.wcm.newsletter.NewsletterInitializationService</type>
     <init-params>
         <values-param>
@@ -139,8 +138,7 @@ The Newsletter portlet and its services are deprecated. It remains fully support
             </object>
         </object-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 

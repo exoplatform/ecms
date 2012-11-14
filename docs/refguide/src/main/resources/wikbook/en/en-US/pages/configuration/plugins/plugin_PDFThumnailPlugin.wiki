@@ -1,16 +1,13 @@
 This plugin is to set the supported file types of PDF thumbnail. See also [*ImageThumbnailPlugin*|#CONTref.Configuration.Plugins.ImageThumnailPlugin].
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-thumbnail-configuration.xml_.
 
 *Sample configuration*:
 
-{code:xml}
-<component-plugin>
+{code:xml}<component-plugin>
     <name>PDFThumbnailPlugin</name>
     <set-method>addPlugin</set-method>
     <type>org.exoplatform.services.cms.thumbnail.impl.PDFThumbnailPlugin</type>
@@ -29,8 +26,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
             </object>
         </object-param>
     </init-params>
-</component-plugin>
-{code}
+</component-plugin>{code}
 
 In which:
 

@@ -36,8 +36,7 @@ This is an example of the *Content List* portlet used in Content:
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.ContentList.SampleConfiguration}
 
-{code:xml}
-<portlet-preferences>
+{code:xml}<portlet-preferences>
   <preference>
     <name>mode</name>
     <value>AutoViewerMode</value>
@@ -153,8 +152,7 @@ This is an example of the *Content List* portlet used in Content:
     <value>true</value>
     <read-only>false</read-only>
   </preference>
-</portlet-preferences>
-{code}
+</portlet-preferences>{code}
 
 {docbook}
 <para>

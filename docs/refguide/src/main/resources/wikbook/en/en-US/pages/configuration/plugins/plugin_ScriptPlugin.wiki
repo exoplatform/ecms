@@ -1,15 +1,12 @@
 This plugin is used to add groovy scripts into the system.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.scripts.ScriptService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.scripts.ScriptService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-scripts-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.scripts.ScriptService</target-component>
     <component-plugin>
         <name>manage.script.plugin</name>
@@ -181,8 +178,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

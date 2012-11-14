@@ -24,8 +24,7 @@ This is an example of the *Content Detail* portlet used in Content:
 
 * *Sample configuration* {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
 
-{code:xml}
-<portlet-preferences>
+{code:xml}<portlet-preferences>
   <preference>
     <name>repository</name>
     <value>repository</value>
@@ -81,8 +80,7 @@ This is an example of the *Content Detail* portlet used in Content:
     <value>true</value>
     <read-only>false</read-only>
   </preference>
-</portlet-preferences>
-{code}
+</portlet-preferences>{code}
 
 {note}
 In Content 2.3.0, some preferences are no longer used, for example, the *ShowPrintAction* preference.

@@ -1,32 +1,25 @@
 The following is a sample code of the *View* template of a content node:
 
 * Get a content node to display: 	
-{code:groovy}
-<%
+{code:groovy}<%
   def node = uicomponent.getNode() ;
   def originalNode = uicomponent.getOriginalNode()
-%>
-{code}
+%>{code}
 
 * Display the name of the content node: 
-{code:groovy}
-<%=node.getName()%>
-{code}
+{code:groovy}<%=node.getName()%>{code}
 
 * Display the _exo\:title_ property of the content node:
-{code:groovy}
-<%
+{code:groovy}<%
   if(node.hasProperty("exo:title")) {
 %>
   <%=node.getProperty("exo:title").getString()%>
 <%
   }
-%>
-{code}
+%>{code}
 
 * Display the _exo\:date_ property of the content node in a desired format. For example: "MM DD YYYY" or "YYYY MM DD".
-{code:groovy}
-<%
+{code:groovy}<%
   import java.text.SimpleDateFormat ;
   SimpleDateFormat dateFormat = new SimpleDateFormat() ;
 %>
@@ -39,10 +32,7 @@ The following is a sample code of the *View* template of a content node:
     <%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
 <%
   }
-%>
-{code}
+%>{code}
 
 * Display the translation of the _Sample.view.label.node-name_ message in different languages.
-{code:groovy}
-<%=_ctx.appRes("Sample.view.label.node-name")%>
-{code}
+{code:groovy}<%=_ctx.appRes("Sample.view.label.node-name")%>{code}

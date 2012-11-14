@@ -1,8 +1,7 @@
 The _WatchDocumentService_ component allows users to watch/unwatch a document. If they are watching the document, they will receive a notification mail when there are any changes on the document.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.cms.watch.WatchDocumentService</key>
     <type>org.exoplatform.services.cms.watch.impl.WatchDocumentServiceImpl</type>
     <init-params>
@@ -24,8 +23,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
             </object>
         </object-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 
