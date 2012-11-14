@@ -2,56 +2,49 @@
   <title>About Content Package</title>
       <para>All package actions in Content are started from the <emphasis>delivery</emphasis> folder, so you should go to this folder
         first.</para>
-      <programlisting>$ cd ecms/delivery
-      </programlisting>
+      <programlisting>$ cd ecms/delivery</programlisting>
       <itemizedlist>
         <listitem>
           <para>
               <emphasis role="bold">Package WCM standalone version - Tomcat bundle</emphasis>
           </para>
           <programlisting>$ cd wcm/assembly
-            $ mvn clean install
-          </programlisting>
+$ mvn clean install</programlisting>
         </listitem>
         <listitem>
           <para>
               <emphasis role="bold">Package WCM with workflow enabled - Tomcat bundle</emphasis>
           </para>
           <programlisting>$ cd wkf-wcm/assembly
-            $ mvn clean install
-          </programlisting>
+$ mvn clean install</programlisting>
         </listitem>
         <listitem>
           <para>
               <emphasis role="bold">Make WCM EAR packages to run with jBoss</emphasis>
           </para>
           <programlisting>$ cd wcm/assembly
-            $ mvn clean install
-          </programlisting>
+$ mvn clean install</programlisting>
           <itemizedlist>
             <listitem>
               <para>
                 Make WCM extension EAR
               </para>
               <programlisting>$ cd packaging/wcm/ear
-                $ mvn clean install
-              </programlisting>
+$ mvn clean install</programlisting>
             </listitem>
             <listitem>
               <para>
                 Make WCM demo sites EAR
               </para>
               <programlisting>$ cd packaging/ecmdemo/ear
-                $ mvn clean install
-              </programlisting>
+$ mvn clean install</programlisting>
             </listitem>
             <listitem>
               <para>
                 Make workflow EAR
               </para>
               <programlisting>$ cd packaging/workflow/ear
-                $ mvn clean install
-              </programlisting>
+$ mvn clean install</programlisting>
             </listitem>
           </itemizedlist>
         </listitem>

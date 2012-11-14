@@ -4,16 +4,14 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 
 *Sample configuration*:
 
-{code:xml}
-<component-plugin>
+{code:xml}<component-plugin>
     <name>States and versions based publication</name>
     <set-method>addPublicationPlugin</set-method>
     <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
     <description>This publication lifecycle publish a web content or DMS document to a portal page with more state
         and version.
     </description>
-</component-plugin>
-{code}
+</component-plugin>{code}
 
 In which:
 

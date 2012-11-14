@@ -9,15 +9,12 @@ A drive is the combination of:
 * Options: allow you to specify whether to see hidden nodes or not and to create folders in this drive or not.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-drives-configuration.xml_.
 
 The following structure is used for drives configuration.
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
     <component-plugin>
         <name>manage.drive.plugin</name>
@@ -30,17 +27,13 @@ The following structure is used for drives configuration.
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 The file that contains the structure above will be configured in the _configuration.xml_ file as the following:
-{code:xml}
-<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>
-{code}
+{code:xml}<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>{code}
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
     <component-plugin>
         <name>manage.drive.plugin</name>
@@ -140,8 +133,7 @@ The file that contains the structure above will be configured in the _configurat
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

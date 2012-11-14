@@ -1,8 +1,7 @@
 The _TimelineService_ component allows documents to be displayed by days, months and years.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.cms.timeline.TimelineService</key>
     <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
     <init-params>
@@ -11,8 +10,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
             <value>5</value>
         </value-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 * *Value-param*

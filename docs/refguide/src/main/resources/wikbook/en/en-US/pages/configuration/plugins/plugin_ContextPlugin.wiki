@@ -1,14 +1,11 @@
 This plugin is used to store the context configuration of a publication lifecycle.
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>{code}
 
 The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/wcm/content-configuration.xml_ or _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
     <component-plugin>
         <name>AddContext</name>
@@ -42,8 +39,7 @@ The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 * *Name*: _AddContext_

@@ -24,8 +24,7 @@ By default, this porlet is applied for the Contact Us portlet in Content.
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.FastContentCreator.SampleConfiguration}
 
-{code:xml}
-<portlet-preferences>
+{code:xml}<portlet-preferences>
   <preference>
     <name>mode</name>
     <value>basic</value>
@@ -76,8 +75,7 @@ By default, this porlet is applied for the Contact Us portlet in Content.
     <value>true</value>
     <read-only>true</read-only>
   </preference>
-</portlet-preferences>
-{code}
+</portlet-preferences>{code}
 
 {docbook}
 <para>

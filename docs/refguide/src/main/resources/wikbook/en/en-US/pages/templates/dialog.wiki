@@ -26,69 +26,53 @@ Pass parameters to validators
 
 * "name" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=name", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=name", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "email" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=email", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=email", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "number" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=number", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=number", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "empty" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "null" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=null", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=null", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "datetime" validator:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=datetime", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=datetime", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 * "length" validator:
 
 For a maximum length of 50 characters:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(50;int)", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(50;int)", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 For a minimum length of 6 characters and maximum length of 50 characters:
 
-{code:java}
-String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(6;50;int)", "editable=if-null"];
+{code:java}String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty,length(6;50;int)", "editable=if-null"];
 
-uicomponent.addTextField("title", webContentFieldTitle) ;
-{code}
+uicomponent.addTextField("title", webContentFieldTitle) ;{code}
 
 {docbook}
 <para>
@@ -119,12 +103,10 @@ h1. Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextFie
 See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
   uicomponent.addTextField("title", fieldTitle) ;
-%>
-{code}
+%>{code}
 
 h1. Hidden Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField}
 
@@ -134,10 +116,8 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.Example}
 
-{code:java}
-String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"];
-  uicomponent.addCalendarField("hiddenInput5", hiddenField5);
-{code}
+{code:java}String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"];
+  uicomponent.addCalendarField("hiddenInput5", hiddenField5);{code}
 h1. Text Area Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField}
 
 * *Additional parameters* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.AdditionParameters}
@@ -150,12 +130,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ;
   uicomponent.addTextAreaField("description", fieldDescription) ;
-%>
-{code}
+%>{code}
 
 h1. Rich Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField}
 
@@ -171,12 +149,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=toolbar:CompleteWCM,width:'100%',height:'200px'", "validate=empty"] ;
   uicomponent.addRichtextField("summary", fieldSummary) ;
-%>
-{code}
+%>{code}
 
 h1. Calendar Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField}
 
@@ -188,12 +164,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldPublishedDate = ["jcrPath=/node/exo:publishedDate", "options=displaytime", "validate=datetime", "visible=true"] ;
   uicomponent.addCalendarField("publishedDate", fieldPublishedDate) ;
-%>
-{code}
+%>{code}
 
 h1. Upload Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField}
 
@@ -207,17 +181,14 @@ When you create an upload form, you can store an image by two main ways:
 
 * If you want to store the image as a property, use the following code:
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldMedia = ["jcrPath=/node/exo:image"] ;
   uicomponent.addUploadField("media", fieldMedia) ;
-%>
-{code}
+%>{code}
 
 * If you want to store the image as a node, use the following code:
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] hiddenField1 = ["jcrPath=/node/exo:image", "nodetype=nt:resource", "visible=false"] ;
   String[] hiddenField2 = ["jcrPath=/node/exo:image/jcr:encoding", "visible=false", "UTF-8"] ;
   String[] hiddenField3 = ["jcrPath=/node/exo:image/jcr:lastModified", "visible=false"] ;
@@ -227,13 +198,11 @@ When you create an upload form, you can store an image by two main ways:
 
   String[] fieldMedia = ["jcrPath=/node/exo:image"] ;
   uicomponent.addUploadField("media", fieldMedia) ;
-%>
-{code}
+%>{code}
 
 * But, this code is not complete. If you want to display the *upload* field, the image must be blank, otherwise you can display the image and an action enables you to remove it. You can do as follows:
 
-{code:groovy}
-<%
+{code:groovy}<%
 	def image = "image";
 	// If you're trying to edit the document
 	if(uicomponent.isEditing()) {
@@ -268,15 +237,12 @@ When you create an upload form, you can store an image by two main ways:
 		String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
 		uicomponent.addUploadField(image, fieldImage) ;
 	}
-%>
-{code}
+%>{code}
 
 * To have multiple upload fields, you just add the *multiValues=true* parameter to *fieldProperty* in _dialog1.gtmpl_:
-{code:java}
-# Multi upload
+{code:java}# Multi upload
 fieldProperty = ["jcrPath=/node/exo:value", "multiValues=true"];
-uicomponent.addUploadField("/node/exo_value", fieldProperty);
-{code}
+uicomponent.addUploadField("/node/exo_value", fieldProperty);{code}
 {note}
 In this case, you must be sure that the node type definition of the document you are currently editing should allow the document
 to have a child node named '_exo\:value_' whose node type is '_nt\:unstructured_'. All uploaded files of this upload component are stored
@@ -293,12 +259,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=radio1,radio2,radio3"];
   uicomponent.addRadioBoxField("isDeep", fieldDeep);
-%>
-{code}
+%>{code}
 
 h1. Select box Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
@@ -308,12 +272,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=checkbox1,checkbox2,checkbox3"];
   uicomponent.addCheckBoxField("isDeep", fieldDeep);
-%>
-{code}
+%>{code}
 
 h1. Checkbox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField}
 
@@ -325,12 +287,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=checkbox1,checkbox2,checkbox3"];
   uicomponent.addCheckBoxField("isDeep", fieldDeep);
-%>
-{code}
+%>{code}
 
 h1. Mixin Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField}
 
@@ -340,12 +300,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
   uicomponent.addMixinField("id", fieldId) ;
-%>
-{code}
+%>{code}
 
 h1. Action Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField}
 
@@ -368,12 +326,10 @@ See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.Com
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon"] ;
   uicomponent.addActionField("targetPath", fieldPath)  ;
-%>
-{code}
+%>{code}
 
 h1. Interceptors {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Interceptors}
 
@@ -384,19 +340,16 @@ To add an interceptor to a dialog, you can use this method {{*uicomponent.addInt
 
 * *Example* {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Interceptors.Example}
 
-{code:groovy}
-<%
+{code:groovy}<%
   uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev");
-%>
-{code}
+%>{code}
 
 h1. How to add a new ECM template with tabs {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HowToAddNewECMTemplateWithTabs}
 
 To avoid refreshing the first tab for every action execution, add a new private function to the template with tabs.
 In the template, you must insert a new piece of code like the following:
 
-{code:groovy}
-private String getDisplayTab(String selectedTab) {
+{code:groovy}private String getDisplayTab(String selectedTab) {
   if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
 			|| selectedTab.equals(uicomponent.getSelectedTab())) {
 		return "display:block";
@@ -409,13 +362,11 @@ private String getSelectedTab(String selectedTab) {
 		return "SelectedTab";
 	}
 	return "NormalTab";
-}
-{code}
+}{code}
 
 Changing in every event of *onClick* must be done like the following:
 
-{code:html}
-<div class="UITab NormalTabStyle">
+{code:html}<div class="UITab NormalTabStyle">
   <div class="<%=getSelectedTab("mainWebcontent")%>
     ">
     <div class="LeftTab">
@@ -446,14 +397,11 @@ Changing in every event of *onClick* must be done like the following:
       </div>
     </div>
   </div>
-</div>
-{code}
+</div>{code}
 
 Finally, to display the selected tab, simply add it to the style of UITabContent class.
 
-{code:html}
-<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
-{code}
+{code:html}<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">{code}
 
 h1. How to prevent XSS attacks {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HowToPreventXSS}
 In the content management sytem, its typical feature is enabling JavaScript in a content. This causes the XSS (Cross-site Scripting) attacks to the content displayed in the HTML format.
@@ -465,9 +413,7 @@ JavaScript is allowed to run on a field of the content template or not by using 
 
 * For example: The following code shows how to enable JavaScript in the *Main Content* field of the *Free Layout Wecontent* content:
 
-{code:java}
-String [] htmlArguments = ["jcrPath = / node / default.html / JCR: content / JCR: data", "options = toolbar: CompleteWCM, height: '410px ', noSanitization" htmlContent];
-{code}
+{code:java}String [] htmlArguments = ["jcrPath = / node / default.html / JCR: content / JCR: data", "options = toolbar: CompleteWCM, height: '410px ', noSanitization" htmlContent];{code}
 
 * By default, there is no "{{options = noSanitization}}" parameter in the dialog template file and this helps you prevent the XSS attacks. When end-users input JavaScript into a content, the JavaScript is automatically deleted when the content is saved.
 

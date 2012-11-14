@@ -1,8 +1,7 @@
 The _WCMService_ component allows setting expiration cache of portlets and checking given portals if they are shared portals or not. It also gets reference contents basing on item identifiers.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
   <key>org.exoplatform.services.wcm.core.WCMService</key>
   <type>org.exoplatform.services.wcm.core.impl.WCMServiceImpl</type>
   <init-params>
@@ -12,8 +11,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
       <property name="expirationCache" value="30" />
     </properties-param>
   </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 ||*Properties-param*||*Property name*||*Type*||*Value*||*Description*||

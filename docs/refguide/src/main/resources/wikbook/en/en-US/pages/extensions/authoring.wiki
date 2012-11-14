@@ -124,8 +124,7 @@ Thus, the publication dates are not mandatory and a content can go to:
 </para>
 {docbook}
 
-{code:xml}
-<nodeType name="publication:authoringPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+{code:xml}<nodeType name="publication:authoringPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   <supertypes>
     <supertype>publication:stateAndVersionBasedPublication</supertype>
   </supertypes>
@@ -139,19 +138,16 @@ Thus, the publication dates are not mandatory and a content can go to:
       <valueConstraints />
     </propertyDefinition>
   </propertyDefinitions>
-</nodeType>
-{code}
+</nodeType>{code}
 
 *Publication plugin UI*: {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.PublicationPluginUI}
 
 Note that some labels containing special or non-ASCII characters could not be well displayed in the publication UI.
 You can extend the width of the current UI State button by adding:
 
-{code:css}
-.UIPublicationPanel .StatusTable .ActiveStatus {
+{code:css}.UIPublicationPanel .StatusTable .ActiveStatus {
   width: 75px !important;
-}
-{code}
+}{code}
 
 Also, for the publication date inputs, _UIPublicationPanel_ should not initialize the dates to any default value.
 The publishing and unpublish CRON jobs will do this:
@@ -164,8 +160,7 @@ h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.Publica
 
 The Publication Manager manages lifecycles and contexts in the Content platform. It allows managing different lifecycles based on different publication plugin in the platform.
 
-{code:java}
-public interface PublicationManager {
+{code:java}public interface PublicationManager {
 
 	public List<Lifecycle> getLifecycles();
 
@@ -176,8 +171,7 @@ public interface PublicationManager {
 	public Lifecycle getLifecycle(String name);
 
 	public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
-}
-{code}
+}{code}
 
 In which:
 
@@ -193,8 +187,7 @@ A lifecycle is defined by a simple vertical workflow with steps (states) and pro
 
 For example: _Two lifecycles with/without states_
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.wcm.publication.PublicationManager</target-component>
     <component-plugin>
         <name>AddLifecycle</name>
@@ -340,8 +333,7 @@ For example: _Two lifecycles with/without states_
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In the last example, there are three lifecycles:
 
@@ -359,13 +351,10 @@ h3. Listen to a lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.Publi
 When a state is changed, you can broadcast an event to add features.
 The event could look like this:
 
-{code:java}
-listenerService.broadcast(AuthoringPlugin.POST_UPDATE_STATE_EVENT, null, node);
-{code}
+{code:java}listenerService.broadcast(AuthoringPlugin.POST_UPDATE_STATE_EVENT, null, node);{code}
 Listener declaration could look like this:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
   <target-component>org.exoplatform.services.listener.ListenerService</target-component>
   <component-plugin>
     <name>PublicationService.event.postUpdateState</name>
@@ -373,15 +362,13 @@ Listener declaration could look like this:
     <type>org.exoplatform.services.wcm.publication.listener.post.PostUpdateStateEventListener</type>
     <description>this listener will be called every time a content changes its current state</description>
   </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 h3. Perform tasks when a content's state is updated {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.PeroformTasksWhenContentUpdated}
 
 To perform some tasks when a content's state is updated, you need to create a listener that handles the task and configure it. Following is the general configuration:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
 <target-component>org.exoplatform.services.listener.ListenerService</target-component>
 <component-plugin>
 <name>PublicationService.event.postUpdateState</name>
@@ -389,15 +376,13 @@ To perform some tasks when a content's state is updated, you need to create a li
 <type>my.package.MyListener</type>
 <description>Your listener description</description>
 </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 With this configuration, your listener _my.package.MyListener_ will be executed each time a content's state is changed.
 
 For example, eXo provides a listener which automatically sends email notifications about the new state to all users of defined groups: _org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener_. So, the configuration will be:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
 <target-component>org.exoplatform.services.listener.ListenerService</target-component>
 <component-plugin>
 <name>PublicationService.event.postUpdateState</name>
@@ -405,8 +390,7 @@ For example, eXo provides a listener which automatically sends email notificatio
 <type>org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener</type>
 <description>This listener will send a mail when there are changes in a content's state</description>
 </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 h2. Context {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Context}
 
@@ -427,8 +411,7 @@ To avoid conflicts on contexts, you can set a priority (the less is the best).
 
 For example, *Different Contexts*:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.wcm.publication.PublicationManager</target-component>
     <component-plugin>
         <name>AddContext</name>
@@ -540,8 +523,7 @@ For example, *Different Contexts*:
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecyle priority:
 * _context4_ is the most important (priority=50): you will enroll the content in the lifecycle "lifecycle4" if:
@@ -564,8 +546,7 @@ Once you have the corresponding lifecycle, you will set the lifecycle inside the
 
 h2. New Authoring Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.NewAuthoringMixin}
 
-{code:xml}
-<nodeType name="publication:authoring" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+{code:xml}<nodeType name="publication:authoring" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   <propertyDefinitions>
     <propertyDefinition name="publication:lastUser" requiredType="String" autoCreated="false" mandatory="false"
       onParentVersion="IGNORE" protected="false" multiple="false">
@@ -576,8 +557,7 @@ h2. New Authoring Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.Publica
       <valueConstraints />
     </propertyDefinition>
   </propertyDefinitions>
-</nodeType>
-{code}
+</nodeType>{code}
 When adding the content in a lifecycle, set the _publication:lifecycle_ property with the corresponding lifecycle.
 
 {note}

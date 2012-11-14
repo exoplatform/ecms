@@ -1,8 +1,7 @@
 The _QueryService_ component is used to manage many queries, including adding, removing or executing a query.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.cms.queries.QueryService</key>
     <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
     <init-params>
@@ -19,8 +18,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
             <value>*:/admin</value>
         </value-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 

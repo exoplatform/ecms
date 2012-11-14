@@ -1,8 +1,7 @@
 The _LiveLinkManagerService_ component is used to check broken links, update links when the links are edited and extract links to return a list of all links.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/wcm-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
     <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
     <init-params>
@@ -14,8 +13,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
             <property name="port" value="8080"/>
         </properties-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 ||*Properties-param*||*Property name*||*Type*||*Value*||*Description*||

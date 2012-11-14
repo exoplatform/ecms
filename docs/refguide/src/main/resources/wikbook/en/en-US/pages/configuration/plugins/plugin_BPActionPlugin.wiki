@@ -1,16 +1,14 @@
 This plugin is used to define the business process action in Workflow.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.actions.ActionServiceContainer</target-component>
-{code}
+
+{code:xml}<target-component>org.exoplatform.services.cms.actions.ActionServiceContainer</target-component>{code}
 
 The configuration is applied mainly in _packaging/workflow/webapp/src/main/webapp/WEB-INF/workflow-extension/workflow/workflow-system-configuration.xml_.
 
 *Sample configuration*:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.actions.ActionServiceContainer</target-component>
     <component-plugin>
         <name>exo:businessProcessAction</name>
@@ -137,8 +135,7 @@ The configuration is applied mainly in _packaging/workflow/webapp/src/main/webap
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 * *Name*: {{exo:businessProcessAction}}

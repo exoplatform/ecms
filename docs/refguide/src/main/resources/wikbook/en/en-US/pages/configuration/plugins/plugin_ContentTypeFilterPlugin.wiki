@@ -1,15 +1,12 @@
 This plugin is used to filter WCM node types.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>{code}
 
 The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-templates-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
     <component-plugin>
         <name>FilterContentTypeForWCMSpecificFolder</name>
@@ -38,8 +35,7 @@ The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WE
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 * *Name*: _FilterContentTypeForWCMSpecificFolder_
