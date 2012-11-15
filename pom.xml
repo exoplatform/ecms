@@ -253,6 +253,11 @@
         <version>${jodconverter-core.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.chromattic</groupId>
+        <artifactId>chromattic.core</artifactId>
+        <version>${chromattic.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.codehaus.groovy</groupId>
         <artifactId>groovy-all</artifactId>
         <version>${org.codehaus.groovy.all.version}</version>
@@ -464,11 +469,6 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ws</groupId>
-        <artifactId>exo.ws.testframework</artifactId>
-        <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.frameworks.json</artifactId>
         <version>${org.exoplatform.ws.version}</version>
       </dependency>
@@ -480,6 +480,11 @@
       <dependency>
         <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.rest.ext</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.testframework</artifactId>
         <version>${org.exoplatform.ws.version}</version>
       </dependency>
       <dependency>
@@ -516,11 +521,6 @@
         <groupId>org.json</groupId>
         <artifactId>json</artifactId>
         <version>${org.json.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.chromattic</groupId>
-        <artifactId>chromattic.core</artifactId>
-        <version>${chromattic.version}</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
