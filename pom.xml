@@ -267,11 +267,11 @@
         <artifactId>commons-component-common</artifactId>
         <version>${org.exoplatform.commons.version}</version>
       </dependency>
-			<dependency>
-				 <groupId>org.exoplatform.commons</groupId>
-				 <artifactId>commons-testing</artifactId>
-			   <version>${org.exoplatform.commons.version}</version>
-			 </dependency>
+      <dependency>
+        <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-testing</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.exoplatform.commons</groupId>
         <artifactId>commons-webui-ext</artifactId>
@@ -462,11 +462,11 @@
         <artifactId>exo.ws.commons</artifactId>
         <version>${org.exoplatform.ws.version}</version>
       </dependency>
-     <dependency>
-       <groupId>org.exoplatform.ws</groupId>
-       <artifactId>exo.ws.testframework</artifactId>
-       <version>${org.exoplatform.ws.version}</version>
-     </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.testframework</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.frameworks.json</artifactId>
@@ -517,11 +517,11 @@
         <artifactId>json</artifactId>
         <version>${org.json.version}</version>
       </dependency>
-     <dependency>
-       <groupId>org.chromattic</groupId>
-       <artifactId>chromattic.core</artifactId>
-      <version>${chromattic.version}</version>
-     </dependency>
+      <dependency>
+        <groupId>org.chromattic</groupId>
+        <artifactId>chromattic.core</artifactId>
+        <version>${chromattic.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-all</artifactId>
