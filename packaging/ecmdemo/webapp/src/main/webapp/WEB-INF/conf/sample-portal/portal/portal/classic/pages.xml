@@ -37,6 +37,11 @@
             <portlet-ref>SingleContentViewer</portlet-ref>
             <preferences>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>workspace</name>
                 <value>collaboration</value>
                 <read-only>false</read-only>
@@ -81,6 +86,11 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -123,6 +133,11 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -168,6 +183,11 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -211,6 +231,11 @@
 	                <value>repository:collaboration:/sites content/live/classic/web contents/site artifacts/KeyFeatures</value>
 	                <read-only>false</read-only>
 	              </preference>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>orderType</name>
 	                <value>ASC</value>
@@ -279,6 +304,11 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
@@ -320,6 +350,11 @@
 	            <application-ref>presentation</application-ref>
 	            <portlet-ref>SingleContentViewer</portlet-ref>
 	            <preferences>
+                      <preference>
+                        <name>nodeDrive</name>
+                        <value>Managed Sites</value>
+                        <read-only>false</read-only>
+                      </preference>
 	              <preference>
 	                <name>workspace</name>
 	                <value>collaboration</value>
