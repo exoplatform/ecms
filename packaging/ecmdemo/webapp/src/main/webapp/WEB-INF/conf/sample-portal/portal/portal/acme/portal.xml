@@ -49,6 +49,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>nodeIdentifier</name>
                 <value>/sites content/live/acme/web contents/site artifacts/Logo</value>
                 <read-only>false</read-only>
@@ -102,6 +107,11 @@
               <preference>
                 <name>workspace</name>
                 <value>collaboration</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -161,6 +171,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>nodeIdentifier</name>
                 <value>/sites content/live/acme/web contents/site artifacts/Searchbox</value>
                 <read-only>false</read-only>
@@ -214,6 +229,11 @@
           <preference>
             <name>workspace</name>
             <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>nodeDrive</name>
+            <value>Managed Sites</value>
             <read-only>false</read-only>
           </preference>
           <preference>
@@ -271,6 +291,11 @@
           <preference>
             <name>workspace</name>
             <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>nodeDrive</name>
+            <value>Managed Sites</value>
             <read-only>false</read-only>
           </preference>
           <preference>

@@ -427,6 +427,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>orderType</name>
                 <value>ASC</value>
                 <read-only>false</read-only>
@@ -945,6 +950,11 @@
             <read-only>false</read-only>
           </preference>
           <preference>
+            <name>nodeDrive</name>
+            <value>Managed Sites</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
             <name>nodeIdentifier</name>
             <value>/sites content/live/@owner@/web contents/site artifacts/Introduce</value>
             <read-only>false</read-only>
@@ -1112,6 +1122,11 @@
             <read-only>false</read-only>
           </preference>
           <preference>
+            <name>nodeDrive</name>
+            <value>Managed Sites</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
             <name>nodeIdentifier</name>
             <value>/sites content/live/@owner@/web contents/site artifacts/newsletter_header</value>
             <read-only>false</read-only>
@@ -1239,6 +1254,11 @@
           <preference>
             <name>workspace</name>
             <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>nodeDrive</name>
+            <value>Managed Sites</value>
             <read-only>false</read-only>
           </preference>
           <preference>
