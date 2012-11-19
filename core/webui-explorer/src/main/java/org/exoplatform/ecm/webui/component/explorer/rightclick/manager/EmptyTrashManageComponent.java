@@ -25,8 +25,6 @@ import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsTrashHomeNodeFilter;
@@ -36,10 +34,8 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -64,8 +60,6 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
                      @EventConfig(listeners = EmptyTrashManageComponent.EmptyTrashActionListener.class,
                                          confirm = "EmptyTrashManageComponent.msg.confirm-delete") })
 public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
-
-  private static final Log LOG = ExoLogger.getLogger(EmptyTrashManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
@@ -100,7 +94,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     if (error) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.error-when-emptying-trash", null,
           ApplicationMessage.WARNING));
-      
+
     }
   }
 
@@ -169,9 +163,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
     String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
 
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session trashSession = uiExplorer.getSessionProvider().getSession(trashWorkspace, manageableRepository);
     return (Node)trashSession.getItem(trashHomeNodePath);
   }

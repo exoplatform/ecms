@@ -26,8 +26,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
@@ -289,8 +287,7 @@ public class UIViewVersion extends UIBaseNodePresentation {
   }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
 

@@ -36,8 +36,6 @@ import org.apache.ws.commons.util.Base64;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
@@ -225,8 +223,7 @@ public class UITreeExplorer extends UIContainer {
   }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
 
@@ -578,7 +575,7 @@ public class UITreeExplorer extends UIContainer {
     return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
   private boolean isFolderType(Node node) throws Exception {
-   	if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
+     if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
       node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
     return false;
   }

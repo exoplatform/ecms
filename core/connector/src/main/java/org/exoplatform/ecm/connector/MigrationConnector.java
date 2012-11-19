@@ -12,11 +12,11 @@ import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -41,8 +41,7 @@ public class MigrationConnector implements ResourceContainer {
       document.appendChild(element);
       Element drives = document.createElement("drives");
       element.appendChild(drives);
-      ManageDriveService driveService = (ManageDriveService) ExoContainerContext.
-          getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
+      ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
         List<DriveData> drivesList = driveService.getAllDrives();
         for (DriveData drive:drivesList) {
           Element driveElt = document.createElement("drive");

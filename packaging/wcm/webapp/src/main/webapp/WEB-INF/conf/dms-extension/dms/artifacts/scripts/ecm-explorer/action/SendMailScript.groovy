@@ -22,13 +22,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.mail.MailService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
 
@@ -48,8 +46,7 @@ public class SendMailScript implements CmsScript {
      try {
        String subject = variables.get("actionName").toString();              
        String message = variables.get("exo:description").toString();
-       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();       
-       MailService service = (MailService)myContainer.getComponentInstanceOfType(MailService.class);
+       MailService service = WCMCoreUtils.getService(MailService.class);
        Session mailSession = service.getMailSession();
        MimeMessage msg = new MimeMessage(mailSession);
        if(from.equals("null") || from.isEmpty()) {

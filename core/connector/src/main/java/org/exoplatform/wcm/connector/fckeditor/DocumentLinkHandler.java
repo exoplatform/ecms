@@ -28,6 +28,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -98,8 +99,7 @@ public class DocumentLinkHandler extends FCKFileHandler {
                     .append(nodePath)
                     .toString();
     }
-    WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext
-        .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
+    WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     String parameterizedPageViewerURI = configurationService.
         getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     return baseURI.replace("/rest", "") + "/" + accessMode + "/" + currentPortal

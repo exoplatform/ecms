@@ -20,14 +20,10 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -142,14 +138,9 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
 
     public void removeTagFromNode(String userID, int scope, String tagName, UIEditingTagsForm uiForm) throws Exception {
 
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-
-      RepositoryService repositoryService
-      = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-      String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+      String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
 
       String tagPath = "";
       if (NewFolksonomyService.PUBLIC == scope) {

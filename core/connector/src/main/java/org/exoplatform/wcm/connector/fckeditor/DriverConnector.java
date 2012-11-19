@@ -45,8 +45,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
@@ -85,11 +83,11 @@ import org.w3c.dom.NodeList;
  *
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
- * 
+ *
  * @author Do Dang Thang <thang.do@exoplatform.com>
  * @since      Sep 7, 2009
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector
  */
 @Path("/wcmDriver/")
@@ -147,7 +145,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param userId The Id of user.
    * @return The drives.
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getDrivers
    */
   @GET
@@ -191,7 +189,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param userId The Id of user.
    * @return The folders and files.
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getFoldersAndFiles
    */
   @GET
@@ -256,7 +254,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param driverName The name of drive.
    * @return The response.
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.uploadFile
    */
   @POST
@@ -284,7 +282,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param driverName The name of drive.
    * @return The response.
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.processUpload
    */
   @GET
@@ -345,8 +343,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> getDriversByUserId(String userId) throws Exception {
-    ManageDriveService driveService =
-      (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
+    ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
     List<String> userRoles = getMemberships(userId);
     return driveService.getDriveByUserRoles(userId, userRoles);
   }
@@ -419,8 +416,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) throws Exception {
     List<DriveData> personalDrivers = new ArrayList<DriveData>();
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     for(DriveData drive : driveList) {
@@ -445,8 +441,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> groupDrivers(List<DriveData> driverList) throws Exception {
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     List<DriveData> groupDrivers = new ArrayList<DriveData>();
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
@@ -475,8 +470,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private List<DriveData> generalDrivers(List<DriveData> driverList) throws Exception {
     List<DriveData> generalDrivers = new ArrayList<DriveData>();
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for(DriveData drive : driverList) {
@@ -523,8 +517,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return a collection of MembershipEntry
    */
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
   }
@@ -636,8 +629,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private boolean isDMSDocument(Node node) throws Exception {
-    TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
-                                                                           .getComponentInstanceOfType(TemplateService.class);
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> dmsDocumentListTmp = templateService.getDocumentTemplates();
     List<String> dmsDocumentList = new ArrayList<String>();
     dmsDocumentList.addAll(dmsDocumentListTmp);
@@ -794,12 +786,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private Node getParentFolderNode(String workspaceName, String driverName, String currentFolder) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
-      .getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
-    ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
-      .getComponentInstanceOfType(ManageDriveService.class);
+    ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
 
     try {
       String parentPath =

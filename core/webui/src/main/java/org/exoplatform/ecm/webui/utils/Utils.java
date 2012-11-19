@@ -37,7 +37,6 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -67,6 +66,7 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -74,7 +74,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-import org.exoplatform.wcm.webui.reader.ContentReader;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -460,8 +459,7 @@ public class Utils {
    * @return a collection of MembershipEntry
    */
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
   }
@@ -609,10 +607,8 @@ public class Utils {
    * @return
    */
   public static String getResourceBundle(String name, String key, ClassLoader cl) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container
-        .getComponentInstanceOfType(ResourceBundleService.class);
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
         name, locale, cl);
     try {
@@ -678,22 +674,22 @@ public class Utils {
     ResourceBundle resourceBundle;
     if (orgNode.hasProperty(propertyName)) {
       try {
-      	if(propertyName.equals(EXO_TITLE))
+        if(propertyName.equals(EXO_TITLE))
           currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-      	else {
-      	  if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
-      	  //The requested property is multiple-valued, inline editing enable users to edit the first value of property
-      	    currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-      	  }else {
-      	    currentValue =  orgNode.getProperty(propertyName).getString() ;
-      	  }
-      	}
+        else {
+          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
+          //The requested property is multiple-valued, inline editing enable users to edit the first value of property
+            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+          }else {
+            currentValue =  orgNode.getProperty(propertyName).getString() ;
+          }
+        }
       }catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
         }
       }
-    }    
+    }
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -1021,6 +1017,6 @@ public class Utils {
     }
     return isMakeVersionable;
   }
-  
+
 
 }

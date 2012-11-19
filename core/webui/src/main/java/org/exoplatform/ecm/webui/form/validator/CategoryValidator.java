@@ -1,6 +1,6 @@
 package org.exoplatform.ecm.webui.form.validator;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
@@ -9,12 +9,10 @@ import org.exoplatform.webui.form.validator.Validator;
 
 public class CategoryValidator implements Validator{
 
-  @SuppressWarnings("unchecked")
   public void validate(UIFormInput uiInput) throws Exception {
     if (uiInput.getValue() == null) return;
     if (uiInput instanceof UIFormStringInput) {
-      TaxonomyService taxonomyService =
-          (TaxonomyService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(TaxonomyService.class);
+      TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
       try{
         int index = 0;
         String categoryPath = (String) uiInput.getValue();

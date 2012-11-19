@@ -27,17 +27,14 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -56,11 +53,8 @@ public class FavoriteServiceImpl implements FavoriteService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private SessionProviderService sessionProviderService;
-  
+
   private OrganizationService    organizationService;
-  
-  /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(FavoriteServiceImpl.class.getName());
 
   public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService, OrganizationService organizationService) {
@@ -149,8 +143,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   public boolean isFavoriter(String userName, Node node) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+    LinkManager lnkManager = WCMCoreUtils.getService(LinkManager.class);
 
     if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
       node = lnkManager.getTarget(node);
@@ -176,7 +169,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     return false;
   }
 
-  private Node getUserFavoriteFolder(String userName) throws Exception {   
+  private Node getUserFavoriteFolder(String userName) throws Exception {
     if (organizationService.getUserHandler().findUserByName(userName) == null) {
       return null;
     }

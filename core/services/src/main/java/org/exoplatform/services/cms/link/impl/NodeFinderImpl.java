@@ -23,13 +23,12 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com
@@ -74,15 +73,15 @@ public class NodeFinderImpl implements NodeFinder {
   public Item getItem(String workspace, String absPath) throws PathNotFoundException,
                                                        RepositoryException {
     return getItem(workspace, absPath, false);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
   public Item getItemSys(String workspace, String absPath, boolean system) throws PathNotFoundException,
                                                                                              RepositoryException {
     return getItemGiveTargetSys(workspace, absPath, false, system);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -206,9 +205,7 @@ public class NodeFinderImpl implements NodeFinder {
    * @throws RepositoryException
    */
   private Session getSession(ManageableRepository manageableRepository, String workspace) throws RepositoryException {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service =
-      (SessionProviderService)container.getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
     return service.getSessionProvider(null).getSession(workspace, manageableRepository);
   }
 

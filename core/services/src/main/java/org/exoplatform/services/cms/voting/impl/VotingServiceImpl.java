@@ -17,9 +17,6 @@
 package org.exoplatform.services.cms.voting.impl;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -27,13 +24,10 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.voting.VotingService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -185,7 +179,7 @@ public class VotingServiceImpl implements VotingService {
     }
     return voterVoteValues;
   }
-  public boolean isVoted(Node node, String userName, String language) throws Exception {    
+  public boolean isVoted(Node node, String userName, String language) throws Exception {
     return getVoteValueOfUser(node, userName, language) > 0;
   }
 
@@ -213,11 +207,8 @@ public class VotingServiceImpl implements VotingService {
   private Node handleUser(Session session, Node node, String userName) throws Exception {
     if (userName == null || "__anonim".equals(userName)) {
       String strWorkspaceName = node.getSession().getWorkspace().getName();
-      ExoContainer eXoContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = (RepositoryService) eXoContainer
-          .getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageRepository = repositoryService.getCurrentRepository();
-      session = SessionProvider.createSystemProvider().getSession(strWorkspaceName,
+      ManageableRepository manageRepository = WCMCoreUtils.getRepository();
+      session = WCMCoreUtils.getSystemSessionProvider().getSession(strWorkspaceName,
           manageRepository);
       String uid = node.getUUID();
       node = session.getNodeByUUID(uid);

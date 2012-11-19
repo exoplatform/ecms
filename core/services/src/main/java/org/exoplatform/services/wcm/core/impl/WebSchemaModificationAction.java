@@ -20,8 +20,6 @@ import javax.jcr.Node;
 import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -53,9 +51,7 @@ public class WebSchemaModificationAction implements Action{
     if(propertyName.equals("jcr:data") && !grandParent.getPrimaryNodeType().getName().equals("nt:file"))
       return false;
 
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService =
-      (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
 
     Node node = null;

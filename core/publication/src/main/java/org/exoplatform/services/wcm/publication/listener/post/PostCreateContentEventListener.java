@@ -19,8 +19,6 @@ package org.exoplatform.services.wcm.publication.listener.post;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -101,8 +99,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
       currentNode = (Node)session.getItem(nodePath);
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       if (linkManager.isLink(currentNode)) {
         try {
           currentNode = linkManager.getTarget(currentNode, false);

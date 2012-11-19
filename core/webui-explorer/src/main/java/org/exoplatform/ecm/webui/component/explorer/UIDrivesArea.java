@@ -28,8 +28,6 @@ import javax.jcr.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -108,7 +106,7 @@ public class UIDrivesArea extends UIContainer {
                                     repoService.getCurrentRepository()).getItem(driveData.getHomePath());
       return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
     } catch(Exception e) {
-      return driveData.getName().replace(".", " / "); 
+      return driveData.getName().replace(".", " / ");
     }
   }
 
@@ -138,9 +136,7 @@ public class UIDrivesArea extends UIContainer {
   }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo) container
-        .getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
 

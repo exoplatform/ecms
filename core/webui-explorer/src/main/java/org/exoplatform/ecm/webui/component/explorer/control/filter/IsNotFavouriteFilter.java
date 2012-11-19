@@ -20,10 +20,9 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -45,9 +44,7 @@ public class IsNotFavouriteFilter extends UIExtensionAbstractFilter {
   }
 
   public static boolean isNotFavourite(Node node, UIJCRExplorer uiExplorer) throws Exception {
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    FavoriteService favoriteService
-        = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
+    FavoriteService favoriteService = WCMCoreUtils.getService(FavoriteService.class);
 
     return !favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
   }

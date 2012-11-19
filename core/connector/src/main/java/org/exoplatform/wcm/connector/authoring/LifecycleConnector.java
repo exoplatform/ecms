@@ -14,19 +14,19 @@ import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Return a list of content during a given state range of the publication lifecycle.  
+ * Return a list of content during a given state range of the publication lifecycle.
  *
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector
  */
 @Path("/authoring/")
@@ -40,7 +40,7 @@ public class LifecycleConnector implements ResourceContainer {
 
   /**
    * Return a list of content from a given to the last state.
-   * 
+   *
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
    * =draft&user=root&lang=en&workspace=collaboration
    *
@@ -51,7 +51,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @param json The format of the returned data.
    * @return
    * @throws Exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byState
    */
   @GET
@@ -66,7 +66,7 @@ public class LifecycleConnector implements ResourceContainer {
 
   /**
    * Return a list of content from the beginning to the last state.
-   * 
+   *
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
    * =draft&tostate=pending&user=root&lang=en&workspace=collaboration
    *
@@ -78,7 +78,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @param json The format of the returned data.
    * @return
    * @throws Exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.toState
    */
   @GET
@@ -94,7 +94,7 @@ public class LifecycleConnector implements ResourceContainer {
 
   /**
    * Return a list of content from the given beginning to published state and before the given date.
-   * 
+   *
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
    * =staged&date=2&lang=en&workspace=collaboration
    *
@@ -105,7 +105,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @param json The format of the returned data.
    * @return
    * @throws Exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byDate
    */
   @GET
@@ -141,8 +141,7 @@ public class LifecycleConnector implements ResourceContainer {
       Element root = document.createElement("contents");
       document.appendChild(root);
 
-      PublicationManager manager = (PublicationManager) ExoContainerContext.getCurrentContainer()
-                                                                           .getComponentInstanceOfType(PublicationManager.class);
+      PublicationManager manager = WCMCoreUtils.getService(PublicationManager.class);
       List<Node> nodes = manager.getContents(fromstate, tostate, date, user, lang, workspace);
 
       JSONArray jsonList = new JSONArray();

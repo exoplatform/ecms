@@ -16,8 +16,6 @@ import javax.jcr.Value;
 import javax.jcr.observation.Event;
 import javax.jcr.observation.EventIterator;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.impl.ECMEventListener;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -30,6 +28,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -72,15 +71,11 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
 
   @SuppressWarnings("unchecked")
   public void onEvent(EventIterator events) {
-    ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService =
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
-    ActionServiceContainer actionServiceContainer =
-      (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
-    IdentityRegistry identityRegistry = (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
 
-    TemplateService templateService =
-      (TemplateService) exoContainer.getComponentInstanceOfType(TemplateService.class);
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     if (events.hasNext()) {
       Event event = events.nextEvent();
       Node node = null;
@@ -123,9 +118,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
           node.getSession().save();
         }
 
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        PublicationService publicationService = (PublicationService) container.
-            getComponentInstanceOfType(PublicationService.class);
+        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
         publicationService.enrollNodeInLifecycle(node, WORKFLOW);
         node.getSession().save();
 
@@ -135,8 +128,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
             "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest" };
         publicationService.addLog(node, logs);
 
-        NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator) container.
-            getComponentInstanceOfType(NodeHierarchyCreator.class);
+        NodeHierarchyCreator hierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
         String documentBackup = hierarchyCreator.getJcrPath(DOCUMENT_BACUPUP);
         node.setProperty(DEST_WORKSPACE, actionNode.getProperty
             (DEST_WORKSPACE).getString());

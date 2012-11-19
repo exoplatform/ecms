@@ -71,7 +71,7 @@ public class TrashServiceImpl implements TrashService {
   private String trashWorkspace_;
   private String trashHome_;
   private ExoCache<String, Object> cache;
-  
+
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(TrashServiceImpl.class.getName());
 
@@ -109,7 +109,7 @@ public class TrashServiceImpl implements TrashService {
     }
   }
 
-  
+
   /**
    * {@inheritDoc}
    */
@@ -117,7 +117,7 @@ public class TrashServiceImpl implements TrashService {
     moveToTrash(node, sessionProvider, 0);
   }
 
- 
+
   /**
    *{@inheritDoc}
    */
@@ -139,14 +139,13 @@ public class TrashServiceImpl implements TrashService {
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);
     String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
     String taxonomyLinkWS = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(EXO_WORKSPACE).getString() : null;
     if(nodeUUID != null) {
-      SEOService seoService = (SEOService)myContainer.getComponentInstanceOfType(SEOService.class);
+      SEOService seoService = WCMCoreUtils.getService(SEOService.class);
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
@@ -171,10 +170,9 @@ public class TrashServiceImpl implements TrashService {
             Node clonedNode = trashSession.getNodeByUUID(node.getUUID());
             //remove link from tag to node
 
-            NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
-            myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
+            NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
 
-            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();            
+            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
             List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, tagWorkspace);
             for (Node tag : tags) {
               newFolksonomyService.removeTagOfDocument(tag.getPath(), node, tagWorkspace);
@@ -244,7 +242,7 @@ public class TrashServiceImpl implements TrashService {
       return false;
     }
   }
- 
+
 
   /**
    * {@inheritDoc}
@@ -281,9 +279,7 @@ public class TrashServiceImpl implements TrashService {
         Node restoredNode = restoreSession.getNodeByUUID(trashNode.getUUID());
 
         //remove link from tag to node in trash
-        ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-        NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
-        myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
+        NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
 
         String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
         List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, tagWorkspace);
@@ -364,7 +360,7 @@ public class TrashServiceImpl implements TrashService {
     restoreSession.save();
   }
 
-  
+
   /**
    * {@inheritDoc}
    */

@@ -32,8 +32,6 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
@@ -71,7 +69,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 public class EmailNotifyListener implements EventListener {
 
   private NodeLocation observedNode_ ;
-  
+
   final public static String  EMAIL_WATCHERS_PROP = "exo:emailWatcher";
 
   private static final String SITE_EXPLORER       = "siteExplorer";
@@ -90,10 +88,8 @@ public class EmailNotifyListener implements EventListener {
    * message is sent to list of email
    */
   public void onEvent(EventIterator arg0) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    MailService mailService = (MailService) container.getComponentInstanceOfType(MailService.class);
-    WatchDocumentServiceImpl watchService = (WatchDocumentServiceImpl) 
-                                                container.getComponentInstanceOfType(WatchDocumentService.class);
+    MailService mailService = WCMCoreUtils.getService(MailService.class);
+    WatchDocumentServiceImpl watchService = (WatchDocumentServiceImpl)WCMCoreUtils.getService(WatchDocumentService.class);
     MessageConfig messageConfig = watchService.getMessageConfig();
     List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
     for (String receiver : emailList) {
@@ -113,7 +109,7 @@ public class EmailNotifyListener implements EventListener {
    * @param receiver
    * @param messageConfig
    * @return
-   * @throws Exception 
+   * @throws Exception
    */
   private Message createMessage(String receiver, MessageConfig messageConfig) throws Exception {
     Message message = new Message();
@@ -128,7 +124,7 @@ public class EmailNotifyListener implements EventListener {
                                          .getUserHandler()
                                          .findUsersByQuery(query)
                                          .load(0, 1)[0].getFullName());
-    
+
     Node node = NodeLocation.getNodeByLocation(observedNode_);
     binding.put("doc_title", node.getProperty("exo:title").getValue().getString());
     binding.put("doc_name", node.getName());
@@ -137,9 +133,9 @@ public class EmailNotifyListener implements EventListener {
     message.setMimeType(messageConfig.getMimeType());
     return message;
   }
-  
+
   /**
-   * 
+   *
    * @return
    * @throws Exception
    */
@@ -172,9 +168,9 @@ public class EmailNotifyListener implements EventListener {
         + String.format("%s", portletRequest.getServerPort());
     return baseURI + nodeURL.toString();
   }
-  
+
   /**
-   * 
+   *
    * @param lstDrive
    * @param workspace
    * @param nodePath
@@ -206,9 +202,9 @@ public class EmailNotifyListener implements EventListener {
     }
     return driveData;
   }
-  
+
   /**
-   * 
+   *
    * @param uri
    * @return
    */
@@ -225,10 +221,10 @@ public class EmailNotifyListener implements EventListener {
       }
     }
     return null;
-  }  
-  
+  }
+
   /**
-   * 
+   *
    * @return
    * @throws Exception
    */
@@ -248,15 +244,14 @@ public class EmailNotifyListener implements EventListener {
     }
     return userMemberships;
   }
-  
+
   /**
-   * 
+   *
    * @param authenticatedUser
    * @return
    */
   private Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
   }

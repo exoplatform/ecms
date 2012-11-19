@@ -9,8 +9,6 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -131,8 +129,7 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     for (Lifecycle lifecycle : getLifecycles()) {
       if (lifecycles == null)
         lifecycles = new ArrayList<Lifecycle>();
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+      IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
       Identity identity = identityRegistry.getIdentity(remoteUser);
       for (State state_ : lifecycle.getStates()) {
         if (state.equals(state_.getState())) {
@@ -163,8 +160,7 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
                                 String lang,
                                 String workspace) throws Exception {
 
-    WCMComposer wcmComposer = (WCMComposer) ExoContainerContext.getCurrentContainer()
-                                                               .getComponentInstanceOfType(WCMComposer.class);
+    WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
 
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_EDIT);

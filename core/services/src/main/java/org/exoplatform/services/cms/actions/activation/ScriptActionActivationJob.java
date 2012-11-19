@@ -23,8 +23,6 @@ import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.impl.ScriptActionPlugin;
@@ -35,6 +33,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -52,13 +51,9 @@ public class ScriptActionActivationJob implements Job {
   private static final Log LOG  = ExoLogger.getLogger(ScriptActionActivationJob.class.getName());
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService =
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
-    ActionServiceContainer actionServiceContainer =
-      (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
-    IdentityRegistry identityRegistry =
-      (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     ActionPlugin scriptActionService = actionServiceContainer.getActionPlugin(ScriptActionPlugin.ACTION_TYPE) ;
 
     Session jcrSession = null;

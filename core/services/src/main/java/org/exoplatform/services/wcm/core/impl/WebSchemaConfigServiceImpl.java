@@ -22,10 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -141,16 +138,13 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * Creates the live share portal folders.
    */
   private void createLiveSharePortalFolders() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService =
-      (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
     SessionProvider sessionProvider = null;
     try {
       sessionProvider = SessionProvider.createSystemProvider();
       for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
         String repoName = locationEntry.getRepository();
         try {
-          ManageableRepository repository = repositoryService.getCurrentRepository();
+          ManageableRepository repository = WCMCoreUtils.getRepository();
           Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
           Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
           String liveSharedPortalName = wcmConfigService.getSharedPortalName();

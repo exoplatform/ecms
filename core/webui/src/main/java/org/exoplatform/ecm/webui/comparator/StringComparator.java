@@ -20,13 +20,12 @@ import java.util.Comparator;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.ext.audit.AuditHistory;
 import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -61,14 +60,12 @@ public class StringComparator implements Comparator<Node> {
   }
 
   private boolean hasAuditHistory(Node node) throws Exception{
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
+    AuditService auServ = WCMCoreUtils.getService(AuditService.class);
     return auServ.hasHistory(node);
   }
 
   private int getNumAuditHistory(Node node) throws Exception{
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
+    AuditService auServ = WCMCoreUtils.getService(AuditService.class);
     if (auServ.hasHistory(node)) {
       AuditHistory auHistory = auServ.getHistory(node);
       return (auHistory.getAuditRecords()).size();

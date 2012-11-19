@@ -30,8 +30,6 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.HasRemovePermissionFilter;
@@ -115,7 +113,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      
+
       return;
     }
     confirmToRestore(node, srcPath, event);
@@ -141,8 +139,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   public static void doRestore(String srcPath, Node node, Event<? extends UIComponent> event) throws Exception {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
 
     String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
@@ -207,42 +204,42 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is locked, can't restore node :" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (VersionException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is checked in, can't restore node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't restore of node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (ConstraintViolationException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't restore of node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     }
   }

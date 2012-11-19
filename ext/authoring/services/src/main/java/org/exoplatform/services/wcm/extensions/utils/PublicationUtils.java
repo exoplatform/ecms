@@ -25,9 +25,6 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -66,9 +63,8 @@ public class PublicationUtils {
         // content/live/acme
 
         HashMap<String, String> context_ = new HashMap<String, String>();
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
         PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
-        PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+        PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
         String containerName = containerInfo.getContainerName();
         context_.put("containerName", containerName);
 

@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.i18n.impl;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
@@ -139,13 +137,13 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
   final static String         TEMP_NODE            = "temp";
 
   private static final String MIX_REFERENCEABLE    = "mix:referenceable";
-  
+
   private static final String MIX_COMMENTABLE ="mix:commentable";
 
   private static final String COUNTRY_VARIANT      = "_";
-  
+
   private static final Log       LOG             = ExoLogger.getLogger(MultiLanguageServiceImpl.class.getName());
-  
+
   /**
    * CmsService
    */
@@ -482,13 +480,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     } else if (getDefault(node).equals(lang)) {
       throw new SameAsDefaultLangException();
     }
-    LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
-                                                               .getComponentInstanceOfType(LinkManager.class);
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node linkNode = linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
     ((ExtendedNode)linkNode).setPermission(IdentityConstants.ANY, new String[]{PermissionType.READ});
     linkNode.getSession().save();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -501,13 +498,13 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       newTranslationNode.addMixin("mix:i18n");
       newTranslationNode.save();
     }
-    
+
     String newLang = newTranslationNode.getProperty("exo:language").getString();
-    
+
     // Only add new translation if lang of new translation
     // has not existed yet inside selected Node
     if (getLanguage(selectedNode, newLang) == null) {
-      
+
       // Get all real translation Nodes of selected node.
       // If there are some, add new translation for them
       List<Node> realTranslationNodes = getRealTranslationNodes(selectedNode);
@@ -520,20 +517,20 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
             LOG.info(String.format("Language %s already existed for %s", newLang, node.getPath()));
           }
         }
-        
+
         // Update translations for new translation Node
         try {
           addLinkedLanguage(newTranslationNode, node);
         }
         catch(ItemExistsException ex) {
           if (LOG.isInfoEnabled()) {
-            LOG.info(String.format("Language %s already existed for %s", 
+            LOG.info(String.format("Language %s already existed for %s",
                    node.getProperty("exo:language").getString(),
                    newTranslationNode.getPath()));
           }
         }
       }
-      
+
       try {
         addLinkedLanguage(newTranslationNode, selectedNode);
       }
@@ -544,14 +541,14 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
                  newTranslationNode.getPath()));
         }
       }
-      
+
       // Add new translation to selected Node
       addLinkedLanguage(selectedNode, newTranslationNode);
     } else {
       throw new ItemExistsException();
     }
   }
-    
+
   /**
    * {@inheritDoc}
    */
@@ -792,7 +789,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     }
     return languages;
   }
-  
+
   /**
    * Get all current supported translation Nodes of specified node
    * @param node Specified Node
@@ -800,8 +797,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
    * @throws Exception
    */
   private List<Node> getRealTranslationNodes(Node node) throws Exception {
-    LinkManager linkManager =
-      (LinkManager) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     List<Node> translationNodes = new ArrayList<Node>();
     if(node.hasNode(LANGUAGES)){
       Node languageNode = node.getNode(LANGUAGES) ;
@@ -1190,8 +1186,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     if(node.hasNode(LANGUAGES + "/"+ language)) {
       Node target = node.getNode(LANGUAGES + "/"+ language) ;
       if (target.isNodeType("exo:symlink")) {
-        LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
-                                                                   .getComponentInstanceOfType(LinkManager.class);
+        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
         target = linkManager.getTarget(target);
       }
       return target;
@@ -1201,8 +1196,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       if(node.hasNode(LANGUAGES + "/"+ pureLanguage)) {
         Node target = node.getNode(LANGUAGES + "/"+ pureLanguage) ;
         if (target.isNodeType("exo:symlink")) {
-          LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
-                                                                     .getComponentInstanceOfType(LinkManager.class);
+          LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
           target = linkManager.getTarget(target);
         }
         return target;

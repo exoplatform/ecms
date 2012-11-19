@@ -20,8 +20,6 @@ package org.exoplatform.services.wcm.core.impl;
 import javax.jcr.Node;
 
 import org.apache.commons.chain.Context;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -40,9 +38,7 @@ public class WebSchemaCreationAction implements Action {
 
   public boolean execute(Context context) throws Exception {
     Node node = (Node)context.get("currentItem");
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService =
-      (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
       schemaConfigService.createSchema(sessionProvider, node);

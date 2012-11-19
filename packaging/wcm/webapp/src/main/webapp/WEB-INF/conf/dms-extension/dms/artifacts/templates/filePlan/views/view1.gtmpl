@@ -3,6 +3,8 @@
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.ecm.webui.utils.Utils;
 	import org.exoplatform.services.jcr.util.Text;
+	import org.exoplatform.services.cms.records.RecordsService;
+	import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 	
 	def node = uicomponent.getNode() ;
 	def originalNode = uicomponent.getOriginalNode();
@@ -13,7 +15,7 @@
 	dateFormat.applyPattern(pattern) ;
   
 	def className = "org.exoplatform.services.cms.records.RecordsService" ;
-	def recordsService = uicomponent.getComponentInstanceOfType(className) ;
+	def recordsService = WCMCoreUtils.getService(RecordsService.class) ;
 	def recordList = recordsService.getRecords(node) ;
     def rcontext = _ctx.getRequestContext() ;
     Parameter[] params = [new Parameter("workspaceName", node.getSession().getWorkspace().getName()), new Parameter("findDrive","true")];

@@ -39,8 +39,6 @@ import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.Validate;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -115,7 +113,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     for (int i = 0; i < nodePaths.length; i++) {
       try {
         Node node = this.getNodeByPath(nodePaths[i]);
-        
+
         // Prepare to remove
         Validate.isTrue(node != null, "The ObjectId is invalid '" + nodePaths[i] + "'");
         mapNode.put(node.getPath(), node);
@@ -196,8 +194,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   }
 
   private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     boolean ret = true;
     final String virtualNodePath = srcPath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -243,8 +240,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is locked, can't move to trash node :" + node.getPath());
       }
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-locked-node", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-locked-node",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -255,8 +252,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         LOG.error("node is checked in, can't move to trash node:" + node.getPath());
       }
       removeMixinEXO_RESTORE_LOCATION(node);
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -266,8 +263,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't move to trash node:" + node.getPath());
       }
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.access-denied-to-delete", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.access-denied-to-delete",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -277,7 +274,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
       }
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unexpected-error", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unexpected-error",
                                               new String[] {node.getPath()}, ApplicationMessage.ERROR));
       uiExplorer.updateAjax(event);
       ret = false;
@@ -346,7 +343,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (ReferentialIntegrityException ref) {
@@ -356,7 +353,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           .addMessage(new ApplicationMessage(
               "UIPopupMenu.msg.remove-referentialIntegrityException", null,
               ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (ConstraintViolationException cons) {
@@ -364,13 +361,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null, ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException lockException) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
@@ -378,7 +375,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         LOG.error("an unexpected error occurs while removing the node", e);
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       return;
     }
     if (!isMultiSelect) {
@@ -434,7 +431,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       processRemoveMultiple(nodePath.split(";"), event);
     } else {
       UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-      
+
       // Prepare to remove
       try {
         Node node = this.getNodeByPath(nodePath);
@@ -454,17 +451,17 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     uiExplorer.updateAjax(event);
     uiExplorer.getSession().save();
   }
-  
+
   private boolean isInTrashFolder(String nodePath) throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     String wsName = null;
     Session session = null;
     String[] nodePaths = nodePath.split(";");
-    for(int i=0; i<nodePaths.length; i++) {    	
-      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);	
+    for(int i=0; i<nodePaths.length; i++) {
+      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
       if (matcher.find()) {
         wsName = matcher.group(1);
-        nodePath = matcher.group(2);	
+        nodePath = matcher.group(2);
         session = uiExplorer.getSessionByWorkspace(wsName);
         Node node = uiExplorer.getNodeByPath(nodePath, session, false);
         return Utils.isInTrash(node);
@@ -488,15 +485,15 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       listNodesHaveRelations = checkRelations(nodePath, uiExplorer);
     } catch (PathNotFoundException pathEx) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
     }
-    
+
     boolean isInTrashFolder = deleteManageComponent.isInTrashFolder(nodePath);
 
     //show confirm message
     if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them
-      
+
       // in the deleting node list
       // build node list to string to add into the confirm message
       StringBuffer sb = new StringBuffer();
@@ -594,7 +591,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   /**
    * Get node by node path.
-   * 
+   *
    * @param nodePath node path of specific node with syntax [workspace:node path]
    * @return Node of specific node nath
    * @throws Exception
@@ -608,7 +605,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     Session session = uiExplorer.getSessionByWorkspace(wsName);
     return uiExplorer.getNodeByPath(nodePath, session, false);
   }
-  
+
   private String getGroups() throws Exception {
     StringBuilder ret = new StringBuilder();
     for (String group : Utils.getGroups())
@@ -628,7 +625,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       deleteManage(event);
     }
   }
-  
+
   private void removeMixinEXO_RESTORE_LOCATION(Node node) throws Exception {
     if (node.isNodeType(Utils.EXO_RESTORELOCATION)) {
       node.removeMixin(Utils.EXO_RESTORELOCATION);

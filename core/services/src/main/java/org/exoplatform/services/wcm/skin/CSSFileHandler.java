@@ -22,6 +22,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS.
@@ -123,7 +124,7 @@ public class CSSFileHandler extends BaseWebSchemaHandler {
     Node portal = findPortalNode(sessionProvider, file);
     if (portal == null)
       return false;
-    WebSchemaConfigService schemaConfigService = getService(WebSchemaConfigService.class);
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     PortalFolderSchemaHandler schemaHandler = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
     Node cssFolder = schemaHandler.getCSSFolder(portal);
     return file.getPath().startsWith(cssFolder.getPath());
@@ -153,7 +154,7 @@ public class CSSFileHandler extends BaseWebSchemaHandler {
   public void onModifyNode(SessionProvider sessionProvider, Node file) throws Exception {
     if(isInPortalCSSFolder) {
       Node portal = findPortalNode(sessionProvider, file);
-      XSkinService skinService = getService(XSkinService.class);
+      XSkinService skinService = WCMCoreUtils.getService(XSkinService.class);
       skinService.updatePortalSkinOnModify(portal, file);
     }
   }
@@ -166,7 +167,7 @@ public class CSSFileHandler extends BaseWebSchemaHandler {
    */
   public void onRemoveNode(SessionProvider sessionProvider, Node file) throws Exception {
     if (isInPortalCSSFolder) {
-      XSkinService skinService = getService(XSkinService.class);
+      XSkinService skinService = WCMCoreUtils.getService(XSkinService.class);
       Node portal = findPortalNode(sessionProvider, file);
       skinService.updatePortalSkinOnRemove(portal, file);
     }

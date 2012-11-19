@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class FriendlyServlet extends HttpServlet {
 
@@ -35,8 +35,7 @@ public class FriendlyServlet extends HttpServlet {
   protected void service(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException {
 
-    FriendlyService fs = (FriendlyService) ExoContainerContext.getCurrentContainer()
-                                                              .getComponentInstanceOfType(FriendlyService.class);
+    FriendlyService fs = WCMCoreUtils.getService(FriendlyService.class);
 
     String path = request.getRequestURI();
     path = fs.getUnfriendlyUri(path);

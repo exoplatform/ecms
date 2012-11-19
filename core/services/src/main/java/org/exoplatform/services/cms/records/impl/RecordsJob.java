@@ -24,8 +24,6 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.records.RecordsService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -33,6 +31,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.scheduler.BaseJob;
 import org.exoplatform.services.scheduler.JobContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class RecordsJob extends BaseJob {
 
@@ -55,9 +54,8 @@ public class RecordsJob extends BaseJob {
     try {
       if (LOG.isDebugEnabled())
         LOG.debug("File plan job started");
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      recordsService_ = (RecordsService) container.getComponentInstanceOfType(RecordsService.class);
+      repositoryService_ = WCMCoreUtils.getService(RepositoryService.class);
+      recordsService_ = WCMCoreUtils.getService(RecordsService.class);
       ManageableRepository repository = repositoryService_.getCurrentRepository();
 
       if (repository.getState() != ManageableRepository.OFFLINE) {

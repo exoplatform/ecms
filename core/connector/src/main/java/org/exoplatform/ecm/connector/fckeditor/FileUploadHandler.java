@@ -34,6 +34,7 @@ import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.w3c.dom.Document;
@@ -76,7 +77,7 @@ public class FileUploadHandler {
    * @param container the container
    */
   public FileUploadHandler(ExoContainer container) {
-    uploadService = (UploadService)container.getComponentInstanceOfType(UploadService.class);
+    uploadService = WCMCoreUtils.getService(UploadService.class);
     fckMessage = new FCKMessage();
   }
 

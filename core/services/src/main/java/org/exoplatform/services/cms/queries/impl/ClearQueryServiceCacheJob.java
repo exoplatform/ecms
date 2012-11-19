@@ -18,13 +18,12 @@ package org.exoplatform.services.cms.queries.impl;
 
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.scheduler.BaseJob;
 import org.exoplatform.services.scheduler.JobContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -34,9 +33,7 @@ import org.exoplatform.services.scheduler.JobContext;
  */
 public class ClearQueryServiceCacheJob extends BaseJob {
   public  void  execute(JobContext context) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    CacheService cacheService =
-      (CacheService)container.getComponentInstanceOfType(CacheService.class) ;
+    CacheService cacheService = WCMCoreUtils.getService(CacheService.class) ;
     ExoCache<String, QueryResult> queryCache = cacheService.getCacheInstance(QueryService.CACHE_NAME);
     queryCache.clearCache() ;
   }

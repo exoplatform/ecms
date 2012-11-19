@@ -5,9 +5,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.ControllerContext;
 import org.exoplatform.web.WebAppController;
 import org.exoplatform.web.WebRequestHandler;
@@ -29,18 +28,17 @@ public class RobotsHandler extends WebRequestHandler {
     }
     public void execute(WebAppController controller, HttpServletRequest req, HttpServletResponse res) throws Exception  {
     String robotsContent = "";
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
       if(portalName != null && portalName.length() > 0) {
-        SEOService seoService = (SEOService) container.getComponentInstanceOfType(SEOService.class);
+        SEOService seoService = WCMCoreUtils.getService(SEOService.class);
         robotsContent = seoService.getRobots(portalName);
         res.setContentType("text/plain");
         PrintWriter out = res.getWriter();
         out.println(robotsContent);
       }
     }
-    
+
     public boolean getRequiresLifeCycle() {
-    	return true;
+      return true;
     }
 
 }

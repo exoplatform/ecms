@@ -28,8 +28,6 @@ import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
@@ -46,6 +44,7 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -90,9 +89,7 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
   private static void addToFavourite(String srcPath, Event<FavouriteManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    FavoriteService favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
+    FavoriteService favoriteService = WCMCoreUtils.getService(FavoriteService.class);
 
     UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class);
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
@@ -122,7 +119,7 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      
+
       return;
     }
 
@@ -145,27 +142,27 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
         LOG.error("node is locked, can't add favourite to node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (VersionException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is checked in, can't add favourite to node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't add favourite to node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
       }
-      JCRExceptionManager.process(uiApp, e);        
+      JCRExceptionManager.process(uiApp, e);
       uiExplorer.updateAjax(event);
     }
   }

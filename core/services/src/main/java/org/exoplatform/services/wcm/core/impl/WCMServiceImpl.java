@@ -20,8 +20,6 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.management.annotations.Managed;
@@ -35,6 +33,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS.
@@ -56,7 +55,7 @@ public class WCMServiceImpl implements WCMService {
     String expirationCache = propertiesParam.getProperty("expirationCache");
     this.setPortletExpirationCache(new Integer(expirationCache));
   }
-  
+
   /*
    * (non-Javadoc)
    * @see
@@ -68,8 +67,7 @@ public class WCMServiceImpl implements WCMService {
                                    String workspace,
                                    String nodeIdentifier) throws Exception {
     if(workspace == null || nodeIdentifier == null) throw new ItemNotFoundException();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node content = null;
@@ -83,7 +81,7 @@ public class WCMServiceImpl implements WCMService {
       }
     }
     return content;
-  }  
+  }
 
   /*
    * (non-Javadoc)
@@ -92,9 +90,7 @@ public class WCMServiceImpl implements WCMService {
    * , org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LivePortalManagerService livePortalManagerService = (LivePortalManagerService) container.
-        getComponentInstanceOfType(LivePortalManagerService.class);
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     boolean isShared = false;
     Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
     isShared = sharedPortal.getName().equals(portalName);

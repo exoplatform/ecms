@@ -38,8 +38,6 @@ import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.observation.ObservationManager;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -51,6 +49,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.scheduler.JobInfo;
 import org.exoplatform.services.scheduler.JobSchedulerService;
 import org.exoplatform.services.scheduler.PeriodInfo;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.JobDataMap;
 
 abstract public class BaseActionPlugin implements ActionPlugin {
@@ -112,11 +111,11 @@ abstract public class BaseActionPlugin implements ActionPlugin {
                         String srcPath,
                         Map mappings) throws Exception {
     addAction(actionType, srcWorkspace, srcPath, true, null, null, mappings);
-  }  
+  }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void addAction(String actionType,
                         String srcWorkspace,
                         String srcPath,
@@ -124,9 +123,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
                         String[] uuid,
                         String[] nodeTypeNames,
                         Map mappings) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    String repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
+    String repoName = WCMCoreUtils.getRepository().getConfiguration().getName();
     String actionName =
       (String) ((JcrInputProperty) mappings.get("/node/exo:name")).getValue();
     mappings.remove("/node/exo:name");
@@ -157,14 +154,13 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     session.logout();
     listeners_.put(listenerKey, listener);
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public void initiateActionObservation(Node storedActionNode) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    String repository = repositoryService.getCurrentRepository().getConfiguration().getName();    
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
     String actionName = storedActionNode.getProperty("exo:name").getString() ;
     String[] lifecyclePhase = storedActionNode.hasProperty("exo:lifecyclePhase") ? parseValuesToArray(storedActionNode
         .getProperty("exo:lifecyclePhase").getValues())
@@ -212,7 +208,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     session.logout();
     listeners_.put(listenerKey, listener);
   }
-  
+
   public void reScheduleActivations(Node storedActionNode) throws Exception {
     String jobClassName = storedActionNode.getProperty(JOB_CLASS_PROP).getString() ;
     Class activationJobClass  = null ;
@@ -232,9 +228,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String srcPath = storedActionNode.getParent().getParent().getPath() ;
     String jobName = storedActionNode.getProperty(JOB_NAME_PROP).getString() ;
     String jobGroup = storedActionNode.getProperty(JOB_GROUP_PROP).getString() ;
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    JobSchedulerService schedulerService =
-      (JobSchedulerService)container.getComponentInstanceOfType(JobSchedulerService.class) ;
+    JobSchedulerService schedulerService = WCMCoreUtils.getService(JobSchedulerService.class) ;
     Map<String,Object> variables = new HashMap<String,Object>() ;
     NodeType nodeType = storedActionNode.getPrimaryNodeType() ;
     PropertyDefinition[] defs = nodeType.getPropertyDefinitions() ;
@@ -324,11 +318,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     }
     listeners_.remove(repository + ":" + actionPath);
   }
-  
+
   public void removeActivationJob(String jobName,String jobGroup,String jobClass) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    JobSchedulerService schedulerService =
-      (JobSchedulerService)container.getComponentInstanceOfType(JobSchedulerService.class) ;
+    JobSchedulerService schedulerService = WCMCoreUtils.getService(JobSchedulerService.class) ;
     Class activationJob = null ;
     try {
       activationJob = Class.forName(jobClass) ;
@@ -413,11 +405,8 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Node srcNode = (Node) session.getItem(action.getSrcPath());
     Node actionNode = null;
     boolean firstImport = false;
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ActionServiceContainer actionContainer = (ActionServiceContainer) container
-        .getComponentInstanceOfType(ActionServiceContainer.class);
-    RepositoryService repositoryService = 
-        (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ActionServiceContainer actionContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     ManageableRepository manageRepo = repositoryService.getCurrentRepository();
     Node actionNodeName = null;
     try {
@@ -504,11 +493,8 @@ abstract public class BaseActionPlugin implements ActionPlugin {
 
   private void scheduleActionActivationJob(String srcWorkspace,String srcPath,
       String actionName,String actionType,String actionExecutable, Map mappings) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    JobSchedulerService schedulerService =
-      (JobSchedulerService)container.getComponentInstanceOfType(JobSchedulerService.class) ;
-    ActionServiceContainer actionContainer =
-      (ActionServiceContainer) container.getComponentInstanceOfType(ActionServiceContainer.class) ;
+    JobSchedulerService schedulerService = WCMCoreUtils.getService(JobSchedulerService.class) ;
+    ActionServiceContainer actionContainer = WCMCoreUtils.getService(ActionServiceContainer.class) ;
 
     Session session = getSystemSession(srcWorkspace) ;
     Node srcNode = (Node)session.getItem(srcPath) ;

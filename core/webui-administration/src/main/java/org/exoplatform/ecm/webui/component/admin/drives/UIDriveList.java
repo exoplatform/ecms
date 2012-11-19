@@ -28,8 +28,6 @@ import javax.jcr.Session;
 
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
@@ -83,7 +81,7 @@ public class UIDriveList extends UIPagingGridDecorator {
   }
 
   public List getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
-  
+
   public String getRequestContextName() {
     return WCMCoreUtils.getRestContextName();
   }
@@ -116,7 +114,7 @@ public class UIDriveList extends UIPagingGridDecorator {
 
   /**
    * Get Drive Views Labels from resource Bundle.
-   * 
+   *
    * @param driveData DriveData
    * @return Views Labels
    */
@@ -133,20 +131,18 @@ public class UIDriveList extends UIPagingGridDecorator {
       } catch (MissingResourceException e) {
         label = viewName;
       }
-      
+
       if (strBuilder.length() > 0) {
         strBuilder.append(", ");
       }
-      
+
       strBuilder.append(label);
     }
     return strBuilder.toString();
   }
-  
+
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo) container
-        .getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
 

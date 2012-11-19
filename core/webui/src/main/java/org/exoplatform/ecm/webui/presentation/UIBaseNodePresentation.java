@@ -24,8 +24,6 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
@@ -181,8 +179,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getPortalName()
    */
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
 
@@ -433,13 +430,13 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }
-  
+
   public String getMediaState() { return mediaState; }
-  
-  public void switchMediaState() { 
-    mediaState = MEDIA_STATE_DISPLAY.equals(mediaState) ? MEDIA_STATE_NONE : MEDIA_STATE_DISPLAY; 
+
+  public void switchMediaState() {
+    mediaState = MEDIA_STATE_DISPLAY.equals(mediaState) ? MEDIA_STATE_NONE : MEDIA_STATE_DISPLAY;
   }
-  
+
   public boolean isDisplayAlternativeText() {
     return false;
   }
@@ -448,10 +445,10 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public boolean playAudioDescription() {
     return false;
   }
-  
+
   @Override
   public boolean switchBackAudioDescription() {
     return false;
   }
-  
+
 }

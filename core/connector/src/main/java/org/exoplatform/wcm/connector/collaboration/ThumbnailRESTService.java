@@ -32,8 +32,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -47,20 +45,21 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Return a responding data as a thumbnail image. 
+ * Return a responding data as a thumbnail image.
  * {{{{repoName}}}}: The name of repository.
  * {{{{workspaceName}}}}: The name of workspace.
  * {{{{{nodePath}}}}: The node path.
  *
  * {{{{portalname}}}}: The name of the portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
- * 
+ *
  * @author Dang Van Minh <minh.dang@exoplatform.com>
  * @since      Oct 23, 2008 11:09:39 AM
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService
  */
 @Path("/thumbnailImage/")
@@ -96,7 +95,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getThumbnailImage
  */
   @Path("/medium/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -119,7 +118,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getCoverImage
  */
   @Path("/big/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -139,7 +138,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getLargeImage
  */
   @Path("/large/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -159,7 +158,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getSmallImage
  */
   @Path("/small/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -180,7 +179,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getCustomImage
  */
   @Path("/custom/{size}/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -201,7 +200,7 @@ public class ThumbnailRESTService implements ResourceContainer {
    * @param nodePath The node path.
    * @return Response data stream.
    * @throws Exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getOriginImage
    */
   @Path("/origin/{repoName}/{workspaceName}/{nodePath:.*}/")
@@ -379,9 +378,7 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
   private SessionProvider getSystemProvider() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service = (SessionProviderService) container.
-        getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
     return service.getSystemSessionProvider(null) ;
   }
 }

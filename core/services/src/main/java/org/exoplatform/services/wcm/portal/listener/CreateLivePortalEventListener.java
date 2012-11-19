@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
@@ -74,9 +72,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   public final void onEvent(final Event<DataStorageImpl, PortalConfig> event) throws Exception {
     PortalConfig portalConfig = event.getData();
     if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LivePortalManagerService livePortalManagerService = (LivePortalManagerService) container
-    .getComponentInstanceOfType(LivePortalManagerService.class);
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     try {
       livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
@@ -100,10 +96,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     }
     // create drive for the site content storage
     if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
-      ManageDriveService manageDriveService = (ManageDriveService) container
-      .getComponentInstanceOfType(ManageDriveService.class);
-      WCMConfigurationService configurationService = (WCMConfigurationService) container
-      .getComponentInstanceOfType(WCMConfigurationService.class);
+      ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
+      WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
       try {
         Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
         createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
@@ -114,8 +108,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       }
     }
     //Deploy initial artifacts for this portal
-    CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
-    container.getComponentInstanceOfType(CreatePortalArtifactsService.class);
+    CreatePortalArtifactsService artifactsInitializerService = WCMCoreUtils.getService(CreatePortalArtifactsService.class);
     try {
       artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(),
                                                           portalConfig.getPortalLayout().getId());

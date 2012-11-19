@@ -58,8 +58,6 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
@@ -158,7 +156,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   final protected static String   YES                                = "YES";
 
   final protected static String   COMMENT_COMPONENT                  = "Comment";
-  
+
   final protected static String   Contents_Document_Type             = "Content";
 
   final protected static String CATEGORY_ALL                       = "All";
@@ -174,7 +172,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   final protected static String CATEGORY_YEAR                      = "UIDocumentInfo.label.EarlierThisYear";
 
   final protected static String CONTENT_PAGE_ITERATOR_ID           = "ContentPageIterator";
-  
+
   final protected static String CONTENT_TODAY_PAGE_ITERATOR_ID     = "ContentTodayPageIterator";
 
   final protected static String CONTENT_YESTERDAY_PAGE_ITERATOR_ID = "ContentYesterdayPageIterator";
@@ -184,7 +182,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   final protected static String CONTENT_MONTH_PAGE_ITERATOR_ID     = "ContentMonthPageIterator";
 
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
-  
+
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
@@ -192,7 +190,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private String                sortOrder_                         = Preference.BLUE_UP_ARROW;
 
   private String                displayCategory_;
-  
+
   private int                   itemsPerTimeline;
 
   private NodeLocation          currentNode_;
@@ -220,13 +218,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private DocumentTypeService   documentTypeService;
 
   private TemplateService       templateService;
-  
+
   private HashMap<String, String> isExpanded_;
-  
+
   //flag indicating if we need to update data for Timeline
   private boolean updateTimeLineData_ = false;
 
-  public UIDocumentInfo() throws Exception {    
+  public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
     todayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_TODAY_PAGE_ITERATOR_ID);
     yesterdayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YESTERDAY_PAGE_ITERATOR_ID);
@@ -250,7 +248,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
        this.updateTimeLineData_ = false;
      }
    }
-  
+
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
   public void setTimeLineSortByFavourite(String timeLineSortByFavourite) {
     this.timeLineSortByFavourite = timeLineSortByFavourite;
@@ -269,7 +267,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public void updateNodeLists() throws Exception {
     TimelineService timelineService = getApplicationComponent(TimelineService.class);
     itemsPerTimeline = timelineService.getItemPerTimeline();
-    
+
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     Session session = uiExplorer.getSession();
@@ -289,11 +287,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if (CATEGORY_ALL.equalsIgnoreCase(displayCategory_))  {
       nodesPerPage = Integer.MAX_VALUE; // always display in one page (no paginator)
       todayNodes = NodeLocation.getLocationsByNodeList(timelineService.
-                                                       getDocumentsOfToday(nodePath, workspace, 
+                                                       getDocumentsOfToday(nodePath, workspace,
                                                                            sessionProvider, userName, false, isLimit));
       if (todayNodes.size() > this.getItemsPerTimeline()) {
         isExpanded_.put(UIDocumentInfo.CATEGORY_TODAY, YES);
-        todayNodes = todayNodes.subList(0, this.getItemsPerTimeline());        
+        todayNodes = todayNodes.subList(0, this.getItemsPerTimeline());
       } else {
         isExpanded_.put(UIDocumentInfo.CATEGORY_TODAY, NO);
       }
@@ -305,13 +303,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                                                    isLimit));
       if (yesterdayNodes.size() > this.getItemsPerTimeline()) {
         isExpanded_.put(UIDocumentInfo.CATEGORY_YESTERDAY, YES);
-        yesterdayNodes = yesterdayNodes.subList(0, this.getItemsPerTimeline());        
+        yesterdayNodes = yesterdayNodes.subList(0, this.getItemsPerTimeline());
       } else {
         isExpanded_.put(UIDocumentInfo.CATEGORY_YESTERDAY, NO);
       }
       earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
-                                                                 getDocumentsOfEarlierThisWeek(nodePath, 
-                                                                                               workspace, 
+                                                                 getDocumentsOfEarlierThisWeek(nodePath,
+                                                                                               workspace,
                                                                                                sessionProvider,
                                                                                                userName,
                                                                                                false,
@@ -323,11 +321,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         isExpanded_.put(UIDocumentInfo.CATEGORY_WEEK, NO);
       }
       earlierThisMonthNodes = NodeLocation.getLocationsByNodeList(timelineService.
-                                                                  getDocumentsOfEarlierThisMonth(nodePath, 
-                                                                                                 workspace, 
-                                                                                                 sessionProvider, 
+                                                                  getDocumentsOfEarlierThisMonth(nodePath,
+                                                                                                 workspace,
+                                                                                                 sessionProvider,
                                                                                                  userName,
-                                                                                                 false, 
+                                                                                                 false,
                                                                                                  isLimit));
       if (earlierThisMonthNodes.size() > this.getItemsPerTimeline()) {
         isExpanded_.put(UIDocumentInfo.CATEGORY_MONTH, YES);
@@ -341,10 +339,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                                                sessionProvider,
                                                                                                userName,
                                                                                                false,
-                                                                                               isLimit));   
+                                                                                               isLimit));
       if (earlierThisYearNodes.size() > this.getItemsPerTimeline()) {
         isExpanded_.put(UIDocumentInfo.CATEGORY_YEAR, YES);
-        earlierThisYearNodes = earlierThisYearNodes.subList(0, this.getItemsPerTimeline());        
+        earlierThisYearNodes = earlierThisYearNodes.subList(0, this.getItemsPerTimeline());
       } else {
         isExpanded_.put(UIDocumentInfo.CATEGORY_YEAR, NO);
       }
@@ -363,7 +361,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                                                      sessionProvider,
                                                                                                      userName,
                                                                                                      false,
-                                                                                                     isLimit));        
+                                                                                                     isLimit));
       } else if (CATEGORY_WEEK.equalsIgnoreCase(displayCategory_)) {
         earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
                                                                    getDocumentsOfEarlierThisWeek(nodePath,
@@ -379,7 +377,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
                                                                                                    sessionProvider,
                                                                                                    userName,
                                                                                                    false,
-                                                                                                   isLimit));        
+                                                                                                   isLimit));
       } else if (CATEGORY_YEAR.equalsIgnoreCase(displayCategory_)) {
         earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
                                                                    getDocumentsOfEarlierThisYear(nodePath,
@@ -404,21 +402,21 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     Collections.sort(earlierThisWeekNodes, new SearchComparator());
     Collections.sort(earlierThisMonthNodes, new SearchComparator());
     Collections.sort(earlierThisYearNodes, new SearchComparator());
-    
+
     ListAccess<NodeLocation> todayNodesList = new ListAccessImpl<NodeLocation>(NodeLocation.class, todayNodes);
     todayPageIterator_.setPageList(new LazyPageList<NodeLocation>(todayNodesList, nodesPerPage));
-    
+
     ListAccess<NodeLocation> yesterdayNodesList = new ListAccessImpl<NodeLocation>(NodeLocation.class, yesterdayNodes);
     yesterdayPageIterator_.setPageList(new LazyPageList<NodeLocation>(yesterdayNodesList, nodesPerPage));
-    
+
     ListAccess<NodeLocation> earlierThisWeekList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisWeekNodes);
     earlierThisWeekPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisWeekList, nodesPerPage));
-    
+
     ListAccess<NodeLocation> earlierThisMonthList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisMonthNodes);
     earlierThisMonthPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisMonthList, nodesPerPage));
-    
+
     ListAccess<NodeLocation> earlierThisYearList = new ListAccessImpl<NodeLocation>(NodeLocation.class, earlierThisYearNodes);
-    earlierThisYearPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisYearList, nodesPerPage));    
+    earlierThisYearPageIterator_.setPageList(new LazyPageList<NodeLocation>(earlierThisYearList, nodesPerPage));
   }
 
   public List<NodeLocation> filterDocumentsByTag(List<NodeLocation> nodes, String path) throws Exception {
@@ -457,29 +455,29 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public UIPageIterator getContentPageIterator() {
     return pageIterator_;
   }
-  
+
   /**
    * @return the todayPageIterator_
    */
   public UIPageIterator getTodayPageIterator() {
     return todayPageIterator_;
   }
-  
+
   public UIPageIterator getYesterdayPageIterator() {
     return yesterdayPageIterator_;
   }
-  
+
   public UIPageIterator getWeekPageIterator() {
     return earlierThisWeekPageIterator_;
   }
-  
+
   public UIPageIterator getMonthPageIterator() {
     return earlierThisMonthPageIterator_;
   }
-  
+
   public UIPageIterator getYearPageIterator() {
     return earlierThisYearPageIterator_;
-  }  
+  }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
     return Utils.getUIComponent(mimeType, this);
@@ -612,12 +610,12 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public String getImage(InputStream input, String nodeName) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class);    
+    DownloadService dservice = getApplicationComponent(DownloadService.class);
     InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image");
     dresource.setDownloadName(nodeName);
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
-  
+
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
     String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
@@ -762,8 +760,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
    * @author CPop
    */
   public boolean hasAuditHistory(Node node) throws Exception{
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
+    AuditService auServ = WCMCoreUtils.getService(AuditService.class);
     node = node instanceof NodeLinkAware ? ((NodeLinkAware) node).getTargetNode().getRealNode() : node;
     return auServ.hasHistory(node);
   }
@@ -773,8 +770,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
    * @author CPop
    */
   public int getNumAuditHistory(Node node) throws Exception{
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
+    AuditService auServ = WCMCoreUtils.getService(AuditService.class);
     node = node instanceof NodeLinkAware ? ((NodeLinkAware) node).getTargetNode().getRealNode() : node;
     if (auServ.hasHistory(node)) {
       AuditHistory auHistory = auServ.getHistory(node);
@@ -791,9 +787,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public String getRssLink() { return null ; }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo =
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
   }
 
@@ -829,7 +823,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     return currentNode;
   }
-  
+
   public Node getNode() throws Exception {
     Node ret = getDisplayNode();
     if (NodePresentation.MEDIA_STATE_DISPLAY.equals(getMediaState()) &&
@@ -902,7 +896,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
     pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
-    
+
     updateTimeLineData_ = true;
   }
 
@@ -1063,7 +1057,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
     return (allItemsByTypeFilterSet.size() > 0 || allItemsFilterSet.size() > 0);
   }
-  
+
   private boolean filterOk(Node node) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 
@@ -1475,7 +1469,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
     }
   }
-  
+
   static public class SwitchToAudioDescriptionActionListener extends EventListener<UIDocumentInfo> {
     public void execute(Event<UIDocumentInfo> event) throws Exception {
       UIDocumentInfo uiDocumentInfo = event.getSource();
@@ -1484,7 +1478,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
     }
   }
-  
+
   static public class SwitchToOriginalActionListener extends EventListener<UIDocumentInfo> {
     public void execute(Event<UIDocumentInfo> event) throws Exception {
       UIDocumentInfo uiDocumentInfo = event.getSource();
@@ -1493,7 +1487,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
     }
   }
-  
+
 //  public boolean isRenderAccessibleMedia() {
 //    Node originalNode = getOriginalNode();
 //    if (!originalNode.hasNode("audioDescription")) return false;
@@ -1505,7 +1499,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   static public class ShowPageActionListener extends EventListener<UIPageIterator> {
     public void execute(Event<UIPageIterator> event) throws Exception {
       UIPageIterator uiPageIterator = event.getSource() ;
-      
+
       // If in the timeline view, then does not have the equivalent paginator on the left tree view explorer
       if (!UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID.equalsIgnoreCase(uiPageIterator.getId())) {
         return;
@@ -1567,7 +1561,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       return 0;
     }
   }
-  
+
   static public class CollapseTimelineCatergoryActionListener extends EventListener<UIDocumentInfo> {
 
     @Override
@@ -1631,13 +1625,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   /**
-   * 
+   *
    * @return
    */
   public HashMap<String, String> getIsExpanded() {
     return isExpanded_;
   }
-  
+
   @Override
   public boolean isDisplayAlternativeText() {
     try {
@@ -1647,7 +1641,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
              StringUtils.isNotEmpty(node.getProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT).getString());
     } catch (Exception e) { return false; }
   }
-  
+
   @Override
   public boolean playAudioDescription() {
     try {
@@ -1656,7 +1650,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
              org.exoplatform.services.cms.impl.Utils.hasChild(node, NodetypeConstant.EXO_AUDIO_DESCRIPTION);
     } catch (Exception e) { return false; }
   }
-  
+
   @Override
   public boolean switchBackAudioDescription() {
     try {
