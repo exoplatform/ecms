@@ -76,7 +76,7 @@ public class ChangeStateCronJobImpl implements Job {
         PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
         ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
         if (manageableRepository == null) {
-          if (LOG.isDebugEnabled()) LOG.debug("Repository not found. Ignoring");
+          if (LOG.isDebugEnabled()) LOG.debug("manageableRepository not found. Ignoring");
           return;
         }
         session = sessionProvider.getSession(workspace, manageableRepository);
@@ -113,17 +113,21 @@ public class ChangeStateCronJobImpl implements Job {
             HashMap<String, String> context_ = new HashMap<String, String>();
             context_.put("containerName", containerName);
             for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
+              String path = "path not found";
+              String nodeDateStr = "date not found";
               Node node_ = iter.nextNode();
-              String path = node_.getPath();
+              try{
+                   path = node_.getPath();
               if (!path.startsWith("/jcr:system")) {
                 if (node_.hasProperty(property)) {
 
                   SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
                   Date now = Calendar.getInstance().getTime();
                   Date nodeDate = node_.getProperty(property).getDate().getTime();
+                  nodeDateStr = format.format(nodeDate);
                   if (now.compareTo(nodeDate) >= 0) {
-                    if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
-                        + format.format(nodeDate) + ")");
+                    if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + path + " (" + property + "="
+                        + nodeDateStr + ")");
 
                     if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
                       if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
@@ -146,7 +150,12 @@ public class ChangeStateCronJobImpl implements Job {
                   publicationPlugin.changeState(node_, toState, context_);
                 }
               }
-            }
+              }
+              catch( Exception e ) {
+            	  if (LOG.isErrorEnabled()) LOG.error("Exception while changing '" + toState + "' " + path + " (" + property + "="
+							+ nodeDateStr + ")", e);
+				}
+              }
           } else {
             if (LOG.isDebugEnabled()) LOG.debug("no '" + fromState + "' content found in " + predefinedPath);
           }
