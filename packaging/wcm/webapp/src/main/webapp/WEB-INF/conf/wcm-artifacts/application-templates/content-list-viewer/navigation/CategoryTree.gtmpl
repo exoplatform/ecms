@@ -76,12 +76,16 @@ if (cSize>0 || editFlag) {
           </div>
         </div>
       </div>
-   <% } %>
+   <% } 
+     if (cSize>0) {
+       
+   %>
     <div class="NewContent">
       <%
         renderCategories(categories);
       %>
     </div>
+    <% } %>
   </div>
 </div>
 <% } %>
