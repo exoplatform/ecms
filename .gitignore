@@ -9,6 +9,7 @@
 /.classpath
 /.idea
 /*.iml
+/*.stackdump
 /*.ipr
 /*.iws
 /temp
