@@ -30,24 +30,40 @@ import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
  */
 public class ACLSessionProviderServiceThreadLocalImpl implements ACLSessionProviderService {
   
-  private static ThreadLocal<SessionProvider> aclSessionProviderKeepers = new ThreadLocal<SessionProvider>();
+  private static ThreadLocal<SessionProvider> aclSessionProviderKeeper = new ThreadLocal<SessionProvider>();
+  private static ThreadLocal<SessionProvider> anonymSessionProviderKeeper = new ThreadLocal<SessionProvider>();
 
   @Override
   public SessionProvider getACLSessionProvider(List<AccessControlEntry> accessList) {
-    SessionProvider provider = aclSessionProviderKeepers.get();
+    SessionProvider provider = aclSessionProviderKeeper.get();
     if (provider == null) {
       provider = SessionProvider.createProvider(accessList);
-      aclSessionProviderKeepers.set(provider);
+      aclSessionProviderKeeper.set(provider);
+    }
+    return provider;
+  }
+  
+  @Override
+  public SessionProvider getAnonymSessionProvider() {
+    SessionProvider provider = anonymSessionProviderKeeper.get();
+    if (provider == null) {
+      provider = SessionProvider.createAnonimProvider();
+      anonymSessionProviderKeeper.set(provider);
     }
     return provider;
   }
 
   @Override
   public void clearSessionProviders() {
-    SessionProvider provider = aclSessionProviderKeepers.get();
+    SessionProvider provider = aclSessionProviderKeeper.get();
     if (provider != null) {
       provider.close();
-      aclSessionProviderKeepers.remove();
+      aclSessionProviderKeeper.remove();
+    }
+    provider = anonymSessionProviderKeeper.get();
+    if (provider != null) {
+      provider.close();
+      anonymSessionProviderKeeper.remove();
     }
   }
   

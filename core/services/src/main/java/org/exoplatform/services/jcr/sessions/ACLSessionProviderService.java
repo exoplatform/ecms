@@ -30,12 +30,18 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 public interface ACLSessionProviderService {
   
   /**
+   * Gets the anonym session provider
+   * @return the SessionProvider
+   */
+  public SessionProvider getAnonymSessionProvider();
+  
+  /**
    * Gets the session provider by access control entry list
    * @param accessEntry
    * @return the SessionProvider
    */
-  public SessionProvider getACLSessionProvider(List<AccessControlEntry> accessList);
   
+  public SessionProvider getACLSessionProvider(List<AccessControlEntry> accessList);
   /**
    * Clears all created session providers
    */
