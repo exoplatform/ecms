@@ -143,15 +143,6 @@
   <build>
     <resources>
       <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xsl</include>
-          <include>**/*.dtd</include>
-        </includes>
-      </resource>
-      <resource>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>
@@ -169,6 +160,8 @@
           <include>**/*.gif</include>
           <include>**/*.jpg</include>
           <include>**/*.png</include>
+          <include>**/*.xsl</include>
+          <include>**/*.dtd</include>
         </includes>
       </resource>
     </resources>
