@@ -37,6 +37,13 @@
 @import url('wcm-publication/Stylesheet.css');
 @import url('seo/Stylesheet.css');
 
+/************DMSStylesheet.css*************/
+@import url('skinIcons/Stylesheet.css');
+@import url('webui/Stylesheet.css');
+@import url('webui/Select_fix.css');
+@import url('NewSkinIcons/Stylesheet.css');
+
+@import url('/eXoWCMResources/skin/ecms-resources-wcmskin.css');
 
 
 .UIPageIterator .selectbox {

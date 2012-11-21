@@ -33,14 +33,14 @@
     <css-path>/skin/webui/component/admin/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
-  <!-- Order should be modified -->
+  <!-- Order should be modified 
   <portlet-skin>
     <application-name>ecmadmin</application-name>
     <portlet-name>ECMAdminPortlet</portlet-name>
     <skin-name>Default</skin-name>
     <css-path>/skin/ecms-administration.css</css-path>
   </portlet-skin> 
-  
+  -->
   <portlet>
     <name>ECMAdminPortlet</name>
     <module>

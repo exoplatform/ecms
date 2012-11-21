@@ -32,7 +32,7 @@
     <css-path>/skin/webui/component/explorer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
-  <!-- Order should be modified -->
+  <!-- Order should be modified
   <portlet-skin>
     <application-name>ecmexplorer</application-name>
     <portlet-name>FileExplorerPortlet</portlet-name>
@@ -40,7 +40,7 @@
     <css-path>/skin/ecms-explorer.css</css-path>
     <css-priority>1</css-priority>
   </portlet-skin> 
-  
+   -->
   <portlet>
     <name>FileExplorerPortlet</name>
     <module>

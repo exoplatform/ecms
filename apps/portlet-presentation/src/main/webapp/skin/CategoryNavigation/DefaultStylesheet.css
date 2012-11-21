@@ -1,3 +1,5 @@
+@import url('/presentation/skin/ecms-presentation-categorynavigationportlet.css');
+
 .UICategoryNavigationTargetPathFormInputSet .SelectTargetPathIcon {
   background: url('DefaultSkin/SearchPath.gif') no-repeat;
   width: 16px;
