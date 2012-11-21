@@ -89,4 +89,31 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+    <!-- Plugin to create css from less File to be able to build the skin -->
+	  <plugin>
+        <groupId>org.lesscss</groupId>
+        <artifactId>lesscss-maven-plugin</artifactId>
+        <configuration>
+          <outputDirectory>${project.build.directory}/${project.build.finalName}/skin</outputDirectory>
+          <compress>false</compress>
+          <includes>
+            <include>ecms-presentation-singlecontentviewer.less</include>
+            <include>ecms-presentation-contentlistviewerportlet.less</include>
+            <include>ecms-presentation-contentlistviewerbyqueryportlet.less</include>
+            <include>ecms-presentation-categorynavigationportlet.less</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+	  </plugin>
+    </plugins>
+  </build>
 </project>
