@@ -145,6 +145,7 @@ public class Utils {
    * 
    * @return return true if current portlet mode is view mode; otherwise return false
    */
+  @Deprecated
   public static boolean isPortletViewMode() {
     return Utils.getCurrentMode().equals(PortletMode.VIEW);
   }
