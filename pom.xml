@@ -601,28 +601,6 @@
     </dependencies>
   </dependencyManagement>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-          <include>**/*.jstmpl</include>
-        </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -663,31 +641,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <!-- To be removed : http://jira.exoplatform.org/browse/ECMS-120 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <tasks>
-                <copy failonerror="false" todir="${project.build.directory}/${project.build.finalName}/WEB-INF/classes">
-                  <fileset dir="${basedir}/src/main/webapp/WEB-INF/classes">
-                    <include name="**/*_en.properties"></include>
-                  </fileset>
-                  <globmapper from="*_en.properties" to="*.properties"></globmapper>
-                </copy>
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
 </project>

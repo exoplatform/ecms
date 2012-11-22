@@ -185,12 +185,6 @@
           <include>**/*.gif</include>
         </includes>
       </testResource>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </testResource>
     </testResources>
     <plugins>
       <plugin>
