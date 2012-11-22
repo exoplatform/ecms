@@ -1,3 +1,12 @@
+
+/************DMSStylesheet.css*************/
+@import url('skinIcons/Stylesheet.css');
+@import url('webui/Stylesheet.css');
+@import url('webui/Select_fix.css');
+@import url('NewSkinIcons/Stylesheet.css');
+
+/********************/
+
 @import url('category-navigation-portlet/vertical-hierachy/SimpleVerticalHierachy/Stylesheet.css');
 
 @import url('content-list-viewer-portlet/list-contents/UIContentListPresentationDefault/Stylesheet.css');
@@ -37,14 +46,8 @@
 @import url('wcm-publication/Stylesheet.css');
 @import url('seo/Stylesheet.css');
 
-/************DMSStylesheet.css*************/
-@import url('skinIcons/Stylesheet.css');
-@import url('webui/Stylesheet.css');
-@import url('webui/Select_fix.css');
-@import url('NewSkinIcons/Stylesheet.css');
 
 @import url('/eXoWCMResources/skin/ecms-resources-wcmskin.css');
-
 
 .UIPageIterator .selectbox {
   display:block; 

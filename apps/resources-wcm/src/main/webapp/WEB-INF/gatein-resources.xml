@@ -25,8 +25,9 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1"
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
 
-  <!-- Order should be modified 
-  <!-- WCMSkin 
+  <!--  
+  Order should be modified 
+ 
   <portlet-skin>
     <skin-name>Default</skin-name>
     <skin-module>WCMSkin</skin-module>
@@ -40,23 +41,25 @@
     <css-path>/skin/ecms-resources-dmsskin.css</css-path>
     <css-priority>1</css-priority>
   </portlet-skin> 
-	-->
+  -->
+  
   <!-- WCMSkin -->
+  
   <portal-skin>
     <skin-name>Default</skin-name>
     <skin-module>WCMSkin</skin-module>
     <css-path>/skin/DefaultSkin/WCMStylesheet.css</css-path>
-    <css-priority>3</css-priority>
-  </portal-skin>
-
-  <!-- DMSSkin
-  <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>DMSSkin</skin-module>
-    <css-path>/skin/DefaultSkin/DMSStylesheet.css</css-path>
     <css-priority>1</css-priority>
   </portal-skin>
-   -->
+
+  <!--
+  <portal-skin>
+    <skin-name>Default</skin-name   s>
+    <skin-module>DMSSkin</skin-module>
+    <css-path>/skin/DefaultSkin/WCMStylesheet.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+ -->
    <!-- Bootstrap Javascripts -->
    <module>
       <name>ecm-bootstrap</name>

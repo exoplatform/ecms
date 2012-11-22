@@ -58,8 +58,8 @@
     <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
-  <!-- Order should be modified --
-  <!-- SingleContentViewer skins --
+  <!-- Order should be modified -->
+  <!-- SingleContentViewer skins
   <portlet-skin>
     <application-name>presentation</application-name>
     <portlet-name>SingleContentViewer</portlet-name>
@@ -67,18 +67,20 @@
     <css-path>/skin/ecms-presentation-singlecontentviewer.css</css-path>
     <css-priority>1</css-priority>
   </portlet-skin> 
-  
-  <!-- Order should be modified --
-  <!-- CategoryNavigationPortlet skins --
+  -->
+  <!-- Order should be modified -->
+  <!-- CategoryNavigationPortlet skins
   <portlet-skin>
     <application-name>presentation</application-name>
     <portlet-name>CategoryNavigationPortlet</portlet-name>
     <skin-name>Default</skin-name>
     <css-path>/skin/ecms-presentation-categorynavigationportlet.css</css-path>
   </portlet-skin>
-
-  <!-- Order should be modified --  
-  <!-- ContentListViewerPortlet skins --
+  -->
+ 
+  <!-- Order should be modified -->  
+  
+  <!-- ContentListViewerPortlet skins
   <portlet-skin>
     <application-name>presentation</application-name>
     <portlet-name>ContentListViewerPortlet</portlet-name>
