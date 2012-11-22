@@ -14,6 +14,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
+	import org.apache.commons.lang.StringUtils;
   
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -52,10 +53,10 @@
 
 <%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
 <% uiform.begin() %>
-<div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
-	<div class="UIHorizontalTabs">
-		<div class="TabsContainer">
-		  <div style="overflow: hidden; $displayTabContainer" class="ClearFix">
+<div class="uiActionBar" id="$uicomponent.id" style="position: relative;">
+
+		<div class="uiTabNormal uiTabGrayInPage">
+		  <ul class="nav nav-tabs">
 				<%
 			    def isSelected = false;
 					def selectedTab = uicomponent.getSelectedTab();
@@ -63,12 +64,16 @@
 						selectedTab = tabAvailableList.get(0);
 						uicomponent.setSelectedTab(selectedTab);
 					}
+				  int i = 0;
 					for(tab in tabAvailableList) {
-				    def tabStyle = "NormalActionBarTab";
+				    def tabStyle = "";				   
+				    i++;
+				    if(tabAvailableList.size() == i) tabStyle = "last ";
 				    if(selectedTab.equals(tab)) {
 				      isSelected = true;
-				      tabStyle = "SelectedActionBarTab";
+				      tabStyle += "active ";
 				    }
+				    if(StringUtils.isNotEmpty(tabStyle)) tabStyle = "class=\""+tabStyle+"\"";
 				    String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
 				    String displayTabName = fullTabName;
 				    if (fullTabName.length() > 13)
@@ -76,45 +81,47 @@
 				      displayTabName = fullTabName.substring(0, 10) + "..."
 				    } 
 				%>
-					    <div class="UITab" style="display: block;" onclick="<%=uicomponent.event('ChangeTab', tab);%>">
-						    <div class="$tabStyle">
-								  <div class="TabL">
-								    <div class="TabR">
-										  <div class="TabM" style="width: 125px;">
-										    <div title="$fullTabName" class="TabLabel">$displayTabName</div>
-										  </div>
-								    </div>
-								  </div>  
-						    </div>
-						  </div>
+					    <li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab);%>">
+						    <a title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
+						  </li>
 				<%
 				  }
 				%>
-				
-		  </div>
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a data-toggle="tab" href="#dropdown1_4">@fat</a></li>
+							<li><a data-toggle="tab" href="#dropdown2_4">@mdo</a></li>
+						</ul>
+					</li>
+		  </ul>
 		 <%if(isSelected) {%>
-		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer">
-		   <%
-		     for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
-		       def action = uicomponent.getUIAction(button);
-				   if (action != null) {
-				     def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
-			 %>
-						 <div class="NormalSubItem SubTabItem" style="width: auto;" onclick="<%=action.event(button);%>">
-							 <div class="NormalSubTabItemL">
-								 <div class="NormalSubTabItemR">
-									 <div class="NormalSubTabItemM">
-									 	<div class="Split">
-									 	  <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
-										 </div>
-									 </div>
-								 </div>
-							 </div>
-						 </div>
-				<%
-					 }
-				 }
-				%>
+		   <div id="DMSMenuItemContainer" class="tab-content">
+				 <div id="tab1_4" class="tab-pane fade in active">
+					 <ul class="nav nav-pills">
+					 <%
+						 for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
+							 def action = uicomponent.getUIAction(button);
+							 if (action != null) {
+								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
+					 %>
+								 <li onclick="<%=action.event(button);%>">
+										<a title="$title" class="DefaultActionIcon ${button}Icon"><i class="icon-plus-sign"></i> $title</a>
+								 </li>
+						<%
+							 }
+						 }
+						%>
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
 		 <%}%>
 		</div>
@@ -131,12 +138,12 @@
   	    
   			
   		</div>
-  		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event); eXo.ecm.ECMUtils.showListTrigger();">
+  		<div id="IconListHideElement" style="position: absolute; top: 40px; right: 100px; visibility: hidden; " onclick="eXo.ecm.ECMUtils.showListHideElements(this,event); eXo.ecm.ECMUtils.showListTrigger();">
   			<div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
         <div class="WhiteBG"><span></span></div>
   			<div class="ListHideContainer UIRightClickPopupMenu" id="ListHideContainer" style="display:none"></div>
   		</div>
-	</div>
+
 </div>
 <% uiform.end() %>
 <% } else if (uicomponent.hasBackButton()) {%>
