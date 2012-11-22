@@ -122,7 +122,7 @@
 <% uiform.end() %>
 <% } else if (uicomponent.hasBackButton()) {%>
   <% uiform.begin() %>
-    <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
+    <div class="uiActionBar" id="$uicomponent.id">
       <div class="UIViewBarContainer" id="UIViewBarContainer">
         <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
       </div>
