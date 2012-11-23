@@ -105,10 +105,10 @@
   		  if (uicomponent.hasBackButton()) {%>
   		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}%>  	      
-  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
 
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
-  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
   			
   		</div>
@@ -124,7 +124,7 @@
   <% uiform.begin() %>
     <div class="uiActionBar" id="$uicomponent.id">
       <div class="UIViewBarContainer" id="UIViewBarContainer">
-        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
+        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
       </div>
     </div>
   <% uiform.end() %>
