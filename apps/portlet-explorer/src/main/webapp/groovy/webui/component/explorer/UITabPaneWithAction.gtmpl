@@ -8,44 +8,39 @@
  */
 %>
 <div class="$uicomponent.id" id="$uicomponent.id">
-	<div class="UITabPane">
-	  <div class="TabPaneContent"> 
-	    <div class="WorkingAreaWithHelp">
-	      <div class="UIHorizontalTabs">
-	        <div class="LeftHorizontalTabs">
-		     	  <div class="RightHorizontalTabs">
-		     	    <div class="CenterHorizontalTabs">
-				        <div class="TabsContainer">
-				          <%
-				            for(uiChild in uicomponent.getChildren()) {
-				              String style = "NormalTab" ;
-				              if(uiChild.isRendered()) style = "SelectedTab" ;
-				          %>
-				            <div class="UITab NormalTabStyle">
-				              <div class="$style">
-				                <div class="LeftTab">
-				                  <div class="RightTab">                
-				                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></div>
-				                  </div>
-				                </div>
-				              </div>
-				            </div>              
-				          <%}%>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-	      </div>
-	      <div class="UITabContentContainer">
-	        <%
-	          for(uiChild in uicomponent.getChildren()) { 
-	            String display = "none" ;
-	            if(uiChild.isRendered()) display="block" ;
-	            println "<div class=\"UITabContent\" style=\"display: $display\">" ;
-	            uicomponent.renderUIComponent(uiChild) ;
-	            println "</div>" ;
-	          }
-	        %>
+
+	    <div class="WorkingAreaWithHelp uiTabNormal">
+	      
+				<ul class="nav nav-tabs">
+					<%
+					  int count = 0;
+						def children = uicomponent.getChildren();
+						for(uiChild in children) {
+							String style = "" ;
+							if(uiChild.isRendered()) style = "active" ;
+							if (count++ == 0) {
+								style+= children.size() == 1 ? " only" : " first";
+							}
+					%>
+						<li class="$style" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)">             
+								<a data-toggle="tab" href="#tab1"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></a>
+						
+						</li>              
+					<%}%>
+	
+	      </ul>
+	      <div class="tab-content" id="myTabContent">
+					<div id="tab1" class="tab-pane fade in active">
+						<%
+							for(uiChild in uicomponent.getChildren()) { 
+								String display = "none" ;
+								if(uiChild.isRendered()) display="block" ;
+								println "<div class=\"UITabContent\" style=\"display: $display\">" ;
+								uicomponent.renderUIComponent(uiChild) ;
+								println "</div>" ;
+							}
+						%>
+					</div>  
 	      </div>  
 	    </div>  
 	    <div class="UIAction"> 
@@ -53,6 +48,5 @@
 			<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
 		  <%} %>
 		</div>
-	  </div>  
-	</div>  
+ 
 </div>
