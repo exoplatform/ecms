@@ -39,7 +39,7 @@ public void renderCategories(def categories) {
       if (category.getDepth()>0) cssStyle = "SubCategory";
       if (category.isSelected()) cssStyle += " CategorySelected";
       %>
-      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>
+      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" rel="tooltip" data-placement="bottom" title="$categoryTitle">$categoryTitle</a>
       <%
       //if (category.hasChilds() && category.getDepth()==0) renderCategories(category.getChilds());
     }

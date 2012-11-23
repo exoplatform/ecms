@@ -12,7 +12,7 @@
   		<div class="BarContentR">
   			<div class="BarContentM ClearFix">
 			    <div class="Title"><%=_ctx.appRes("UISavedSearches.title.savedSearches")%></div>
-			  	<div class="AdvancedSearch" onclick="<%=uicomponent.event("AdvanceSearch")%>" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"><span></span></div>
+			  	<div class="AdvancedSearch" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"><span></span></div>
 			  	
 			  </div>
 			</div>
@@ -28,14 +28,14 @@
             def storedQueryPath = object.getStoredQueryPath() ;
 	          def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
 	          selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "SelectedNode" : "");
-			  		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");			  			  
+			  		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");			  			  
 	          println("  <div class=\"ArrowSidContent TextSiderContent\">" + queryName +"</div>");			  			  
 	          println("</a>");
           } else if(object instanceof NodeData) {			
-						selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "SelectedNode" : "";	          
-            println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");						
+					selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "SelectedNode" : "";	          
+            		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");						
 			  		println("<div class=\"ArrowSidContent TextSiderContent\">" +object.getName()+ "</div>");			  
-	          println("</a>"); 
+	          		println("</a>"); 
           }
         }
       }

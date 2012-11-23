@@ -74,7 +74,7 @@
                       }
                     %> 
                     <div class="NodeHistoryContainer">   
-	                    <a class="NodeNavigationIcon BackButtonLabel" href="$previousActionLink"><%= _ctx.appRes("UIBrowseContainer.label.path-"+previousNodeName) %></a>
+	                    <a class="NodeNavigationIcon BackButtonLabel" href="$previousActionLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.label.path-"+previousNodeName) %>"><%= _ctx.appRes("UIBrowseContainer.label.path-"+previousNodeName) %></a>
 	                  </div>  
                   </div>            
                   <%
@@ -85,7 +85,7 @@
                       if(nodeName.equals(currentNode.getName())) classStyleName = "NodeLabelSelected";
                   %>
                       <div class="NodeHistoryContainer">
-                        <a class="NodeItemIcon $classStyleName" href="$nodeLink">$nodeName</a>
+                        <a class="NodeItemIcon $classStyleName" href="$nodeLink" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</a>
                       </div>              
                   <%}%>
                 </div>
@@ -95,7 +95,7 @@
             <div class="RightHomeTab">
               <div class="MiddleHomeTab ClearFix">
               	<div class="LeftIcon CBHome16x16Icon" title="<%= _ctx.appRes( componentName  +".title.home") %>"><span></span></div>
-                <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(rootNode.getPath()))%>" ><%= _ctx.appRes(componentName + ".label.home") %></a>
+                <a href="<%=uicomponent.event('ChangeNode',Utils.formatNodeName(rootNode.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes(componentName + ".label.home") %>"><%= _ctx.appRes(componentName + ".label.home") %></a>
                 <div class="RightIcon CBDropDownArrow16x16Icon" onmouseup="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2)"><span></span></div>
                
               </div>
@@ -121,7 +121,7 @@
                       <div class="MiddleTab ClearFix">
                       	<div class="Icon CBDefaultFolder16x16Icon"><span></span></div>
                         <div class="LabelButton">                            	
-                          <a onclick="$tabAction" style="cursor: pointer;">$tabName</a>
+                          <a onclick="$tabAction" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$tabName">$tabName</a>
                         </div>
 
                       </div>
@@ -132,8 +132,8 @@
           <%}%>  
         </div>
         <div class="NavigationButtonContainer">
-						<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
-							<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
+						<div class="NavigationIcon DisableBackArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
+							<div class="NavigationIcon DisableNextArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 						</div>
 			  		
 					</div>                  
@@ -150,14 +150,14 @@
 			              %>
 		                    <a class="NodeLabel" href="$actionLinkSub">
 		                     <%if(uicomponent.isSymLink(subCat)) {%> 
-		                       <img alt="symlink" class="LinkSmall" />
+		                       <img alt="symlink" class="LinkSmall" rel="tooltip" data-placement="bottom" title="symlink" />
 		                     <%}%> 
 		                    $catName</a>
 			                  <div class="SeparatorLine"><span></span></div>
 			              <%}%>
 			            <div class="NavigationButtonContainer">
-										<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
-											<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
+										<div class="NavigationIcon DisableBackArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs") %>"><!--<span></span>-->
+											<div class="NavigationIcon DisableNextArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 										</div>
 			              
 			            </div>
@@ -240,7 +240,7 @@
 	    <%if(isShowAllDoc) {%>
 	    <div class="ViewPreviousDocument ClearFix"> 
 	      <div class="BackIcon"><span></span></div>
-	      <a href="<%=uicomponent.event('Back')%>">
+	      <a href="<%=uicomponent.event('Back')%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(componentName + ".label.previous")%>">
 	      	<%=_ctx.appRes(componentName + ".label.previous")%>
 	      </a>
 	      
@@ -269,7 +269,7 @@
 					              <div class="LinkSmall"><span></span></div>
 					            <%}%>
 	                  </div>
-	                  <a class="NodeLabel" href="$subCatLink">
+	                  <a class="NodeLabel" href="$subCatLink" rel="tooltip" data-placement="bottom" title="$catName">
 				            $catName</a>
 	                </div>
 	                
@@ -290,15 +290,15 @@
 							                  %>					                      	
 				                        <a class="NodeLabel" href="$subChildLink">
 				                        <%if(uicomponent.isSymLink(subChild)) {%> 
-						                      <img alt="symlink" class="LinkSmall" />
+						                      <img alt="symlink" class="LinkSmall" rel="tooltip" data-placement="bottom" title="symlink" />
 						                    <%}%> 
 				                        $subChildName
 				                        </a>
 					                      <div class="SeparatorLine"><span></span></div>
 							                  <%}%>
 							                  <div class="NavigationButtonContainer">
-																	<div class="NavigationIcon DisableBackArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs")%>"><!--<span></span>-->
-																		<div class="NavigationIcon DisableNextArrow16x16Icon" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
+																	<div class="NavigationIcon DisableBackArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.prevTabs")%>"><!--<span></span>-->
+																		<div class="NavigationIcon DisableNextArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIBrowseContainer.title.moreTabs") %>"><span></span></div>
 																	</div>
 										              
 										            </div>                  
@@ -341,7 +341,7 @@
 	                                    <%}%>
 	                                  </div>
 	                                  <div class="DocumentLabel">
-	                                    <a onclick="$docActionLink" style="cursor: pointer;"><%=docName%></a>
+	                                    <a onclick="$docActionLink" rel="tooltip" data-placement="bottom" title="<%=docName%>" style="cursor: pointer;"><%=docName%></a>
 	                                  </div>
 	                                  
 	                                </div>
@@ -361,7 +361,7 @@
 				                             %>
 				                             	<div class="ViewMoreDocument ClearFix">
 				                                	<div class="NextIcon"><span></span></div>
-				                                	<a href="$subCatLink">
+				                                	<a href="$subCatLink" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(label)%>">
 														<%=_ctx.appRes(label)%>
 													</a>
 				                                	                            

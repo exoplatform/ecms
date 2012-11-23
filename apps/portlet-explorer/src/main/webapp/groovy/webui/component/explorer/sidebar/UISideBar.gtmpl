@@ -26,7 +26,7 @@
 			for(itemContext in uicomponent.getLstVisibleComp()) {
 	        	def action = itemContext.getUIExtensionName();
 			%>
-				<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
+				<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
 					<div class="ItemIcon DefaultIcon ${action}Icon"><span></span></div>
 				</div>
 			<% } %>
@@ -42,7 +42,7 @@
          					for(itemContext in uicomponent.getLstHiddenComp()) {
          						def action = itemContext.getUIExtensionName();
        					%>
-								<a title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
+								<a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
 					<% } %>
 					</div>
 				</div>

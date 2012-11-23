@@ -45,7 +45,7 @@
 	      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
 						 String link = uicomponent.event(action) ;
 	      %>
-		    <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+		    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="$actionLabel" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
 	      <%}%>          
 	  </div>
 	  <%/* end render action*/%>

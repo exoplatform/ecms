@@ -198,7 +198,7 @@
 							  String actionLink2 = uicomponent.event("ChangeNode", rel.getPath(), new Parameter("workspaceName", rel.getSession().getWorkspace().getName())) ;
 							%>
 								<div style="font-size: 12px; padding: 10px;">
-									-	<a href="$actionLink2">
+									-	<a href="$actionLink2" rel="tooltip" data-placement="bottom" title="<%=rel.getName()%>">
 											<%=rel.getName()%>
 										</a>
 								</div>
@@ -226,13 +226,13 @@
 						%>
 							<div style="font-size: 12px; padding: 10px;">
 								<div class="RemoveNodeFloat">
-								 -<a href="$actionLink3">
+								 -<a href="$actionLink3" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>">
 								 		<%=att.getName()%>
 								 	</a>
 								</div>
 								<div class="RemoveNodeFloat"> 	
 							 	 <% if (PermissionUtil.canRemoveNode(att)) {%>
-	                    <a href="$removeLink" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+	                    <a rel="tooltip" data-placement="bottom" href="$removeLink" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 	                      <div class="RemoveAttachments"><span></span></div>
 	                    </a>
                 <% } %>

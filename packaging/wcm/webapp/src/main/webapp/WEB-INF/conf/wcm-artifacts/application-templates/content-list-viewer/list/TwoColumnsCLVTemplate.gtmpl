@@ -29,7 +29,7 @@
 							<div class="TitleBarR">
                 <div class="TitleBarM">
                   <%if (isShowRssLink) {
-                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
                   }%>
                   $header                  
                 </div>
@@ -84,14 +84,14 @@
 							
 							<%
 							if(isShowImage) {
-							  %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
+							  %><a class="Image" rel="tooltip" data-placement="bottom" title="$itemName"><img alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" /></a><%
 							}
 							%>
 							<div class="Content">
 								<%
 									if (isShowTitle) {
 										if (isShowLink) {
-											%><div class="Title"><a href="$itemLink">$itemName</a></div><%
+											%><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
 										} else {
 											%><div class="Title">
 											<%
@@ -115,7 +115,7 @@
 							</div>
 							<%
 								if (isShowReadmore) {
-								  %><div class="LinkMore"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+								  %><div class="LinkMore"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 								}
 							%>
 						</div>
@@ -132,7 +132,7 @@
 						String link = uicomponent.event("Refresh");
 				%>
 							<div class="CaptionRefresh">
-								<a href="$link">$labelRefreshAction</a>
+								<a href="$link" rel="tooltip" data-placement="bottom" title="$labelRefreshAction">$labelRefreshAction</a>
 							</div>
 				<% 
 					}

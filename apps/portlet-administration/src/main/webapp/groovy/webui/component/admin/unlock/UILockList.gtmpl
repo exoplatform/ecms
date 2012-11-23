@@ -44,7 +44,7 @@
             <td><div class="Text">$settingLock</div></td>
 	          	<td width="35px">
 		          	<div class="ActionContainer">
-				          <img onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" alt="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+				          <img onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" alt="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
 			          </div>
 	          	</td>	                    
           </tr>

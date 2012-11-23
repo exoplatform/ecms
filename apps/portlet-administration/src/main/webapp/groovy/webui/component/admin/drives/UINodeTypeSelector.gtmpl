@@ -23,7 +23,7 @@
 							<tr>                            
 									<td class="FieldLabel"><%=_ctx.appRes("UINodeTypeSelector.label.selectedAllNodeTypes")%></td>
 							 	<td class="FieldComponent">
-							 			<img class="AddIcon16x16" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UINodeTypeSelector.label.selectedAllNodeTypes")%>" title="<%=_ctx.appRes("UINodeTypeSelector.label.selectedAllNodeTypes")%>" onclick="<%=uicomponent.event("SelectedAllNodeTypes")%>"/>
+							 			<img class="AddIcon16x16" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UINodeTypeSelector.label.selectedAllNodeTypes")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeSelector.label.selectedAllNodeTypes")%>" onclick="<%=uicomponent.event("SelectedAllNodeTypes")%>"/>
 							 	</td>
 							</tr>
 	    </table>

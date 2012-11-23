@@ -61,7 +61,7 @@
 	                  <%}%>
                     </div>
                     <div class="EventDocumentLabel">
-                      <a href="$viewAction"><%=doc.getName()%></a>
+                      <a href="$viewAction" rel="tooltip" data-placement="bottom" title="<%=doc.getName()%>"><%=doc.getName()%></a>
                     </div>  
                   </td>
                   <td class="EventAuthorNameLabel">
@@ -87,7 +87,7 @@
     <%if(isShowDocByTag) {%>
     <div class="ViewPreviousDocument ClearFix"> 
       <div class="BackIcon"><span></span></div>
-      <a href="<%=uicomponent.event('Back')%>">
+      <a href="<%=uicomponent.event('Back')%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(componentName + ".label.previous")%>">
       	<%=_ctx.appRes(componentName + ".label.previous")%>
       </a>
       

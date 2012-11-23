@@ -93,7 +93,7 @@
           <!-- Switch between original media and audio description -->
           <% if (uicomponent.playAudioDescription()) {%>
               <div class="ActionSwitchButton" style="text-align:left;margin-top:1px;display:block;margin-left:100px" 
-                   onclick="<%=uicomponent.event("SwitchToAudioDescription")%>" class="ActionTextButton LightBlueStyle"
+                   onclick="<%=uicomponent.event("SwitchToAudioDescription")%>" class="ActionTextButton LightBlueStyle" rel="tooltip" data-placement="bottom"
                    title="<%=_ctx.appRes("AccessibleMedia.view.tooltip.A-second-media-file-is-available-as-audio-description")%>" >
                 <a href="javascript:void(0);"><%=_ctx.appRes("AccessibleMedia.view.label.Play-audio-description-of-this-video")%></a>
               </div>

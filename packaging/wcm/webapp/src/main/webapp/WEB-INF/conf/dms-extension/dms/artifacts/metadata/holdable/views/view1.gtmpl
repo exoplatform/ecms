@@ -69,7 +69,7 @@
 </div>
 <%/* start render action*/%>
 <div class="UIAction"> 
-	<a href="javascript:void(0);" title="<%=_ctx.appRes("Holdable.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:holdable")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Holdable.view.action.add-edit")%></a>
-	<a href="javascript:void(0);" title="<%=_ctx.appRes("Holdable.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Holdable.view.action.cancel")%></a>
+	<a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Holdable.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:holdable")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Holdable.view.action.add-edit")%></a>
+	<a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Holdable.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Holdable.view.action.cancel")%></a>
 </div>
 <%/* end render action*/%>

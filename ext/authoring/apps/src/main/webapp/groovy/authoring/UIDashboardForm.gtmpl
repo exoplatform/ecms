@@ -96,5 +96,5 @@ color: #888;
   <div class="ClearFix">
    <% uicomponent.renderChildren(); %>
   </div>
-  <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" title="refresh">refresh</a></div><br/>
+  <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" rel="tooltip" data-placement="bottom" title="refresh">refresh</a></div><br/>
 </div>

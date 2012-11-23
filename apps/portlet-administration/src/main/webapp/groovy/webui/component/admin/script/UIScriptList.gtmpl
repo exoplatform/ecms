@@ -37,12 +37,12 @@
       %>
           <tr class="$rowClass">
             <td><div class="Text"><%=node.getName()%></div></td>
-            <td><div class="Text" title="<%=node.getPath()%>"><%=pathTitle(node.getPath(), 30)%></div></td>
+            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=node.getPath()%>"><%=pathTitle(node.getPath(), 30)%></div></td>
             <td><div class="Text"><%=node.getBaseVersion()%></div></td>
 	          <td>
 	          	<div class="ActionContainer">
-	            	<img class="Edit16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Edit", node.getName())%>" alt="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>"/>
-	            	<img class="Delete16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", node.getName())%>" alt="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>"/>
+	            	<img class="Edit16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Edit", node.getName())%>" alt="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>"/>
+	            	<img class="Delete16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", node.getName())%>" alt="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>"/>
 	            </div>
 	          </td>	                    
           </tr>

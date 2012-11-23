@@ -48,7 +48,7 @@
 </div>
 <%/* start render action*/%>
 <div class="UIAction"> 
-    <a href="javascript:void(0);" title="<%=_ctx.appRes("VitalRecord.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:vitalRecord")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("VitalRecord.view.action.add-edit")%></a>
-    <a href="javascript:void(0);" title="<%=_ctx.appRes("VitalRecord.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("VitalRecord.view.action.cancel")%></a>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("VitalRecord.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:vitalRecord")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("VitalRecord.view.action.add-edit")%></a>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("VitalRecord.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("VitalRecord.view.action.cancel")%></a>
 </div>
 <%/* end render action*/%>

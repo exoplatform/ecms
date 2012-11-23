@@ -45,13 +45,13 @@
 								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
 									<div style="float: right">
-										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+										<a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
 										  &nbsp;
 										</a>         
 									</div>
 									<%}%>
 									<div style="float: right">
-									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
+									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
 										  &nbsp;
 										</a>           
 									</div>
@@ -83,13 +83,13 @@
 							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
 								<div style="float: right">
-									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+									<a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
 									  &nbsp;
 									</a>         
 								</div>
 								<%}%>
 								<div style="float: right">
-									<div class="IconLocked" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
+									<div class="IconLocked" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
 									  &nbsp;
 									</div>           
 								</div>
@@ -122,8 +122,8 @@
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
 					<div class="UIOptionBar">
-	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+	         <div class="BackButton" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
+						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
 				<% 
 			} 
@@ -151,7 +151,7 @@
              <div class="EdittingToolBarR">
                <div class="EdittingToolBarC ClearFix">
                  <div style="float: right">
-                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+                   <a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
                      &nbsp;
                    </a>         
                  </div>            

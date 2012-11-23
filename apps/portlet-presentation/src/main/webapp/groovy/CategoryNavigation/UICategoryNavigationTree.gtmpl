@@ -18,7 +18,7 @@
     %>
     <div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
 		<div style="position: absolute; right: 0px; top: 0px; z-index: 1">
-    		 <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UICNContainer.title.QuickEdit") %>"><div class="QuickEdit"><span></span></div></a>
+    		 <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICNContainer.title.QuickEdit") %>"><div class="QuickEdit"><span></span></div></a>
     	</div>
 	</div> 
      <%

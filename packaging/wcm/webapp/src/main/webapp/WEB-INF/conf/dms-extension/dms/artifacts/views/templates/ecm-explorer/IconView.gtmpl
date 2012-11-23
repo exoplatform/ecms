@@ -196,7 +196,7 @@
 								</div>
 							</div>			        
 			        <div class="ActionIconLabel" style="width: auto; overflow: hidden;">
-			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><span class="NodeName"><%=title%></span></a>
+			          <a class="ActionLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="<%=title%> $lockedLabel"><%=title%></a>
 			        </div>
 			      </div>
 			      $strActs

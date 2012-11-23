@@ -44,14 +44,14 @@
       %>
           <tr class="$rowClass">
             <td>
-            		<div title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
+            		<div rel="tooltip" data-placement="bottom" title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
 					  							</div>
 					  					</td>
             <td><div class="Text"><%= node.getPath(); %></div></td>
             <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
 	          	<td>
 		          	<div class="ActionContainer">
-				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
+				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
 			          </div>
 	          	</td>	                    
           </tr>

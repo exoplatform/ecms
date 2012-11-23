@@ -39,7 +39,7 @@
 		<ul class="MenuItemContainer" style="display:none;">
 			<% if(userCouldEditNavigation){ %>
 				<li class="MenuItem">	
-					<a href="javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'PageCreationWizard', true))" title="$addPageLabel" class="ItemIcon AddPageIcon">$addPageLabel</a>
+					<a href="javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'PageCreationWizard', true))" rel="tooltip" data-placement="bottom" title="$addPageLabel" class="ItemIcon AddPageIcon">$addPageLabel</a>
 				</li>
 			<% } %>
 			
@@ -49,13 +49,13 @@
         String editPageRequest = "javascript:ajaxGet(eXo.env.server.createPortalURL('" + uiPage.getId() + "', 'EditCurrentPage', true))";
 			  %>
 				<li class="MenuItem">
-					<a href="$editPageRequest" title="$editPageLabel" class="ItemIcon EditPageIcon">$editPageLabel</a>
+					<a href="$editPageRequest" rel="tooltip" data-placement="bottom" title="$editPageLabel" class="ItemIcon EditPageIcon">$editPageLabel</a>
 				</li>
 			<% } %>
 			
 			<% if(userCouldEditPortal){ %>
 				<li class="MenuItem">	
-					<a href="javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))" title="$editSiteLayout" class="ItemIcon EditSiteIcon">$editSiteLayout</a>
+					<a href="javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'EditInline', true))" rel="tooltip" data-placement="bottom" title="$editSiteLayout" class="ItemIcon EditSiteIcon">$editSiteLayout</a>
 				</li>
 			<% } %>
 		</ul>

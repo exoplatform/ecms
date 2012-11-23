@@ -20,7 +20,7 @@
 	 		    <th>
 	 		    	<%=_ctx.appRes("UIFCCActionList.header.action")%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
- 		    		<img class="Add16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"/>
+ 		    		<img class="Add16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"/>
   	<% } %>
 	 		    </th>
 	    	</tr>
@@ -71,7 +71,7 @@
 			        					<%
 			          						for(act in uicomponent.getActions()) { 
 			        							%>
-	            									<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>"  title="$act"/>
+	            									<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"/>
 	            								<%
 	            							} 
 	            						%>

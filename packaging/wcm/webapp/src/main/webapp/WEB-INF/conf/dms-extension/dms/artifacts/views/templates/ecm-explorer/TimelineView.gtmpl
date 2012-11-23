@@ -82,14 +82,14 @@
             <div  class="StarLight"
                   style="margin-top: 5px;"
                   onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("favourite"))%>"
-                  title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteDESC")%>">
+                 rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteDESC")%>">
               <span></span>
             </div>
           <% } else {%>
           <div  class="StarLight"
                 style="margin-top: 5px;"
                 onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("favourite"))%>"
-                title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteASC")%>">
+               rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineFavouriteASC")%>">
             <span></span>
           </div>
           <% } %>
@@ -97,19 +97,19 @@
         <div style="border: medium none; width: 130px; padding: 0px 3px;" class="RightColumn">
           <% if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_UP_ARROW)) {%>
               <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
-                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
+                  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
                 <div class="BlueUpArrow16x16Icon"> <%=_ctx.appRes("UIDocumentInfo.header.dateTime")%></div>
             
               </div>
           <% } else if (uicomponent.getTimeLineSortByDate().equals(Preference.BLUE_DOWN_ARROW)) { %>
               <div onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("dateTime"))%>"
-                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeDESC")%>">
+                  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeDESC")%>">
                 <div class="BlueDownArrow16x16Icon"><%=_ctx.appRes("UIDocumentInfo.header.dateTime")%></div>
               
               </div>
           <% } else { %>
               <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("dateTime"))%>"
-                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
+                  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineDateTimeASC")%>">
                 <%=_ctx.appRes("UIDocumentInfo.header.dateTime")%>
               </div>
           <% } %>
@@ -117,19 +117,19 @@
         <div class="ResizeColumn Split" style="margin-left: 163px;" >
           <% if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_UP_ARROW)) {%>
               <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
-                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
+                  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
                 <div class="BlueUpArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.title")%></div>
                 
               </div>
           <% } else if (uicomponent.getTimeLineSortByName().equals(Preference.BLUE_DOWN_ARROW)) { %>
               <div style="padding: 6px 5px 0px;" onclick="<%=uicomponent.event("SortTimelineDESC", Utils.formatNodeName("name"))%>"
-                   title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameDESC")%>">
+                  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameDESC")%>">
                 <div class="BlueDownArrow16x16Icon" style="margin: 0px;"><%=_ctx.appRes("UIDocumentInfo.header.title")%></div>
                 
               </div>
           <% } else { %>
               <div onclick="<%=uicomponent.event("SortTimelineASC", Utils.formatNodeName("name"))%>"
-                     title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
+                   rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.timelineNameASC")%>">
                   <%=_ctx.appRes("UIDocumentInfo.header.title")%>
               </div>
           <% } %>
@@ -190,7 +190,7 @@
         <% if (uicomponent.getDisplayCategory().equals(uicomponent.CATEGORY_ALL)) { 
              if (uicomponent.getIsExpanded().get(label) == uicomponent.YES) {
         %>
-        <a class="ExpandCategory" href="<%=uicomponent.event("ExpandTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.expand")%>"><%=_ctx.appRes(label)%> >></a>
+        <a class="ExpandCategory" href="<%=uicomponent.event("ExpandTimelineCatergory", label);%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.expand")%>"><%=_ctx.appRes(label)%> >></a>
         <%
              } else {
         %>
@@ -199,7 +199,7 @@
              }
         %>
         <% } else { %>
-        <a class="CollapseCategory" href="<%=uicomponent.event("CollapseTimelineCatergory", label);%>" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.collapse")%>"><%=_ctx.appRes(label)%> <<</a>
+        <a class="CollapseCategory" href="<%=uicomponent.event("CollapseTimelineCatergory", label);%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.label.tooltip.collapse")%>"><%=_ctx.appRes(label)%> <<</a>
         <% } %>
       </div>  
       <div class="BorderRow">
@@ -301,12 +301,12 @@
               <div style="width: 26px; padding-top: 5px;" class="LeftColumn">
                 <% if (uicomponent.isFavouriteNode(node.getSession().getUserID(), node)) { %>
                   <div class="StarLight" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
-                       title="<%=_ctx.appRes("UIDocumentInfo.tooltip.RemoveFromFavourite")%>"/>
+                      rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.RemoveFromFavourite")%>"/>
                     <span></span>
                   </div>
                 <% } else { %>
                   <div class="StarOff" onclick="<%=uicomponent.event("StarClick",node.getSession().getWorkspace().getName() + ":" +  Utils.formatNodeName(node.getPath()))%>"
-                       title="<%=_ctx.appRes("UIDocumentInfo.tooltip.AddToFavourite")%>"/>
+                      rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDocumentInfo.tooltip.AddToFavourite")%>"/>
                     <span></span>
                   </div>
                 <% }%>
@@ -326,7 +326,7 @@
               <div class="ResizeColumn" style="width:495px; *width: 425px;">
                 <div class="PositionIconDocument">
                   <div class="NodeLabel">
-                    <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=title%> $lockedLabel"><span class="NodeName"><%=title%></span></div>
+                    <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" rel="tooltip" data-placement="bottom" title="<%=title%> $lockedLabel"><%=title%></div>
                   </div>                
                 </div>
               </div>

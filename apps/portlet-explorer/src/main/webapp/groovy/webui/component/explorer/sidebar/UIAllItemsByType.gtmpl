@@ -13,8 +13,7 @@
 	  		<div class="BarContentR">
 	  			<div class="BarContentM ClearFix">
 						<div class="Title"><%=_ctx.appRes("UIAllItemsByType.label.ByType")%></div>
-						<div class="SideGeneratal" onclick="<%=uicomponent.event("DocumentFilter")%>" 
-			        title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><span></span></div>
+						<div class="SideGeneratal" onclick="<%=uicomponent.event("DocumentFilter")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><span></span></div>
 						
 					</div>
 			  </div>
@@ -30,7 +29,7 @@
 							"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
       %>
   			<div class="$classValue">
-  				<a href="$supportedLink" title="<%=_ctx.appRes("UIAllItemsByType.title.Show"+type)%>">
+  				<a href="$supportedLink" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.title.Show"+type)%>">
   	        <%=_ctx.appRes("DocumentType.label." + type)%>
   	      </a>
   			</div>

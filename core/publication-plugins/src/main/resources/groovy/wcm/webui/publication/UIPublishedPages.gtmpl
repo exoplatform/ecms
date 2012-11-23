@@ -14,7 +14,7 @@
 								selectedClass = uicomponent.getSelectedNavigationNodeURI().equals(navigationURI) ? "Selected" : "";
 							}
 			      	%>
-		        		<div class="ItemIcon $selectedClass" onclick="<%=uicomponent.event("SelectNavigationNodeURI", navigationURI)%>" title="$navigationURI">$navigationURI</div>
+		        		<div class="ItemIcon $selectedClass" onclick="<%=uicomponent.event("SelectNavigationNodeURI", navigationURI)%>" rel="tooltip" data-placement="bottom" title="$navigationURI">$navigationURI</div>
 		      		<%
 		      	}
 	      	}

@@ -7,8 +7,7 @@
   		<div class="BarContentR">
   			<div class="BarContentM ClearFix">
 			    <div class="Title"><%=_ctx.appRes("UITagExplorer.title.PrivateTags")%></div>
-			  	<div class="TagExplorer" 
-			  			 title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
+			  	<div class="TagExplorer" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
 			  			 onclick="<%=uicomponent.event("EditTags", "Private")%>"><span></span></div>
 			  	
 			  </div>
@@ -45,8 +44,7 @@
 		<div class="BarContentR ClearFix">
 			<div class="BarContentM">
 		    <div class="Title"><%=_ctx.appRes("UITagExplorer.title.PublicTags")%></div>
-		  	<div class="TagExplorer" 
-		  			 title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
+		  	<div class="TagExplorer" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
 		  			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ><span></span></div>
 		  	
 		  </div>

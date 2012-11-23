@@ -60,14 +60,14 @@
 					<%=uicomponent.addQuickEditDiv("CaptionItem", viewNode)%>
 				<%
                 if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
-                    %><img alt="$itemName" src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%
+                    %><img alt="$itemName" src="$imgSrc" width="30" rel="tooltip" data-placement="bottom" title="$itemName" style="float:left; padding-right:5px;" /><%
                 }
 								if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE)) {
 									%>
 										<div class="CaptionTitle" >
 											<% 
 												if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_LINK)) {
-													%><a href="$itemLink">$itemName</a><% 
+													%><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a><% 
 												} else { 
                           print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 												} 
@@ -91,7 +91,7 @@
 	            <%
 	            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {
 	            %>
-	            <div class="CaptionViewMore"><a href="$itemLink"><%=labelReadMore%>&raquo;</a></div>
+	            <div class="CaptionViewMore"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%=labelReadMore%>"><%=labelReadMore%>&raquo;</a></div>
 	            <%
 	            }
 	            %>
@@ -107,7 +107,7 @@
 					String link = uicomponent.event("Refresh");
 					%>				
 						<div class="CaptionRefresh">
-							<a href="$link">$labelRefreshAction</a>
+							<a href="$link" rel="tooltip" data-placement="bottom" title="$labelRefreshAction">$labelRefreshAction</a>
 						</div>
 					<% 
 				}

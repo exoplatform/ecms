@@ -56,11 +56,11 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 			    </td>
 			    <td>
 				    <%if ((value == "binary")||(value == "notavailable")||(value == "cannotget")) {%>
-			    	<div class="Text" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
+			    	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
 				      <%=_ctx.appRes("UIPropertyTab.label." + value)%>
 				    </div>  
 				    <%} else {%>
-				    <div class="Text" title="<%=value%>">
+				    <div class="Text" rel="tooltip" data-placement="bottom" title="<%=value%>">
 				      <%=value%>
 				   	</div>
 				    <%}%>  
@@ -69,10 +69,10 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 			    	<div class="ActionContainer">
 					    <%
 					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
-					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
+					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
 					    <%}%>
 					    <%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
-					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
+					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
 					    <%}%>  
 				    </div>
 			    </td>

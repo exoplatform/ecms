@@ -22,8 +22,9 @@
     msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
   %>
   <div class="HorizontalLayout">
-    <div class="ClearFix">    	
-    	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>    	
+    <div class="ClearFix">
+    	<div class="RecycleBinFull"><span></span></div>
+    	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=msgValue%>"><%=msgValue%></div>    	
     </div>
  <div class="UIAction">
 		<%

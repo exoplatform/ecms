@@ -31,7 +31,7 @@
     <div class="ContentSearchForm">
       <input type="radio" class="radioboxes" id="<%=uicomponent.PROPERTY%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.PROPERTY%>"/>
       <label class="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Property")%>:</span></label> <%uiform.renderField(uiform.getChildById(uicomponent.PROPERTY));%>
-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddMetadataType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" />
+      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddMetadataType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" />
       <label calss="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Contain")%> :</span> </label> <%uiform.renderField(uiform.getChildById(uicomponent.CONTAIN));%>
     </div>
  
@@ -49,7 +49,7 @@
       <input type="radio" class="radioboxes" id="<%=uicomponent.DOC_TYPE%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.DOC_TYPE%>"/>
       <span><%= _ctx.appRes("UIContentSearchForm.title.DocumentType")%>:</span>
       <%uiform.renderField(uiform.getChildById(uicomponent.DOC_TYPE));%>
-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddNodeType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" />
+      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddNodeType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" />
     </div>
      
       <div class="UIAction">

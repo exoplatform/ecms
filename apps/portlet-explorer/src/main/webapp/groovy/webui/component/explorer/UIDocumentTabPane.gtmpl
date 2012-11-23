@@ -27,7 +27,7 @@
 					              <div class="$style">
 					                <div class="LeftTab">
 					                  <div class="RightTab">                
-					                  <div id="$tabId" class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+					                  <div id="$tabId" class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITabPane.title." + uiChild.getId());%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
 					                  </div>
 					                </div>
 					              </div>

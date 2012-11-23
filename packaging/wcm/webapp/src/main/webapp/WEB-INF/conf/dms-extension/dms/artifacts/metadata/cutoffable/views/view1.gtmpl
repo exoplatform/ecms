@@ -80,7 +80,7 @@
 </div>
 <%/* start render action*/%>
 <div class="UIAction"> 
-    <a href="javascript:void(0);" title="<%=_ctx.appRes("Cutoffable.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:cutoffable")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Cutoffable.view.action.add-edit")%></a>
-    <a href="javascript:void(0);" title="<%=_ctx.appRes("Cutoffable.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Cutoffable.view.action.cancel")%></a>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Cutoffable.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "rma:cutoffable")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Cutoffable.view.action.add-edit")%></a>
+    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Cutoffable.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("Cutoffable.view.action.cancel")%></a>
 </div>
 <%/* end render action*/%>

@@ -90,8 +90,8 @@
     
           <td class="action">
             <div class="ActionContainer"> 
-            <img alt="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>" onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" title="$titleNode"/>
-              <img alt="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />
+            <img alt="<%=_ctx.appRes("UIContentSearchResult.title.Select")%>" onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" rel="tooltip" data-placement="bottom" title="$titleNode"/>
+              <img rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" alt="<%=_ctx.appRes("UIContentSearchResult.title.View")%>" onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />
             </div>
           </td>
         </tr>

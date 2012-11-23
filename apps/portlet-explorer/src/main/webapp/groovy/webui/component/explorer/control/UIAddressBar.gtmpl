@@ -31,7 +31,7 @@
 					if(viewCount < 8) {
 			%>
 				<td class="IconFileExplorer">
-						<a href="<%=uicomponent.event("ChangeView", viewStyle)%>" class="$defaultView $viewIcon ViewIcon" title="$label"><span></span></a>
+						<a href="<%=uicomponent.event("ChangeView", viewStyle)%>" class="$defaultView $viewIcon ViewIcon" rel="tooltip" data-placement="bottom" title="$label"><span></span></a>
 				</td>
 			<%  } else {
 						extendMap.put(viewStyle, label + ";" + viewIcon);
@@ -59,14 +59,14 @@
 						}
 				%>
 						
-						<a href="<%=uicomponent.event("ChangeView", key)%>" class="$defaultView $viewIcon ViewIcon" title="$label"><span></span></a>
+						<a href="<%=uicomponent.event("ChangeView", key)%>" class="$defaultView $viewIcon ViewIcon" rel="tooltip" data-placement="bottom" title="$label"><span></span></a>
 					<%}%>
 				</div>
 				<%}%>
 			</td>
   			<td class="BackAndRefreshBlock" style="width: 55px;">
-  				<a class="BackBtn FloatLeft" href="<%=uicomponent.event("Back")%>" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><span></span></a>	
-  				<a class="RefreshSessionButton FloatLeft" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
+  				<a class="BackBtn FloatLeft" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><span></span></a>	
+  				<a class="RefreshSessionButton FloatLeft" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
   			</td>	
   			<%
   				 def viewSize = "";
@@ -88,10 +88,10 @@
   									</div>
   								</div>
   								<div class="DropDownButtonBox" onmousedown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)" onkeydown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)">
-  									<div class="DropDownButton Style1DownArrow16x16Icon" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
+  									<div class="DropDownButton Style1DownArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
   								</div>
   								<div class="InputContainer"  id="AddressBarControl">
-  									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
+  									<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
   									<% uicomponent.renderChild(0); %>
   									<% uicomponent.renderChild(2); %>
   								</div>
@@ -106,7 +106,7 @@
   					<div class="BgRightAddressBar">
   						<div class="BgCenterAddressBar">
   							<div class="Advance" id="SimpleSearchControl">
-  								<a href="<%=uicomponent.event("SimpleSearch")%>" title="<%=_ctx.appRes("UIActionBar.title.SimpleSearch")%>" class="SearchBtn" id="SimpleSearch"><span></span></a>
+  								<a href="<%=uicomponent.event("SimpleSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.SimpleSearch")%>" class="SearchBtn" id="SimpleSearch"><span></span></a>
   								<% uicomponent.renderChild(1); %>
   							</div>
   						</div>

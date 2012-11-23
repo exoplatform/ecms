@@ -68,7 +68,7 @@
 	            fieldValue = "";
 	          }
 	      %>
-	          <td><div class="$cssClass" title="$fieldValue">$fieldValue</div></td>
+	          <td><div class="$cssClass" rel="tooltip" data-placement="bottom" title="$fieldValue">$fieldValue</div></td>
 	          
 	      <%}%>
 	      <%if(beanActions != null && beanActions.length > 0) { %>
@@ -81,9 +81,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                    <img onclick="<%=uicomponent.event(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
+	                    <img onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
 	              <%  }else{ %>
-	                    <img onclick="<%=uicomponent.url(action, beanId)%>" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
+	                    <img onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>                 

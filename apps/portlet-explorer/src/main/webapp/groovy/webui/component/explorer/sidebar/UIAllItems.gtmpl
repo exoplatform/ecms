@@ -19,7 +19,7 @@
 	  		<div class="BarContentR">
 	  			<div class="BarContentM ClearFix">
 						<div class="Title"><%=_ctx.appRes("UIAllItems.title.allItems")%></div>
-						<div class="SideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>">
+						<div class="SideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>">
 							<span></span>
 						</div>
 						
@@ -34,7 +34,7 @@
 								"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
 					%>
 						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>" class="ShowAllOwnedByUserBtn">
+							<a href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>" class="ShowAllOwnedByUserBtn">
 								<span><%=_ctx.appRes("UIAllItems.label.OwnedByMe")%></span>
 							</a>
 						</div>
@@ -45,7 +45,7 @@
 								"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
 			  	%>
 						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", favorite)%>" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>" class="ShowAllFavouriteBtn">
+							<a href="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>" class="ShowAllFavouriteBtn">
 								<span><%=_ctx.appRes("UIAllItems.label.Favourites")%></span>
 							</a>
 						</div>
@@ -56,7 +56,7 @@
 							"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
 					%>
 						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", hidden)%>" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>" class="ShowAllHiddenBtn">
+							<a href="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>" class="ShowAllHiddenBtn">
 								<span><%=_ctx.appRes("UIAllItems.label.Hidden")%></span>
 							</a>
 						</div>

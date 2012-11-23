@@ -200,7 +200,7 @@
 					                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", repository)];
 					                       if (removeattachcomponent != null) {
 					                    %>
-					                    <a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+					                    <a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 					                      <div class="RemoveAttachments"><span></span></div>
 					                    </a>
 

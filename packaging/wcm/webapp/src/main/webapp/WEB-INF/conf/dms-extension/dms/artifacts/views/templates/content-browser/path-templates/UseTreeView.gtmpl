@@ -86,7 +86,7 @@
 	                        <%}%>			                      
 			                    </div>
 			                    <div class="EventDocumentLabel">
-			                      <a onclick="$viewAction" style="cursor:pointer;"><%=docName%></a>
+			                      <a onclick="$viewAction" rel="tooltip" data-placement="bottom" title="<%=docName%>" style="cursor:pointer;"><%=docName%></a>
 			                    </div>  
 			                  </td>
 			                  <td class="EventAuthorNameLabel">
@@ -204,7 +204,7 @@
 				                %>
 				                    <div class="ViewMoreDocument ClearFix">
 				                    	<div class="NextIcon"><span></span></div>
-				                    	<a href="<%=actionLinkSub%>">
+				                    	<a href="<%=actionLinkSub%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(label)%>">
 				                    		<%=_ctx.appRes(label)%>
 															</a>
 				                    	                             

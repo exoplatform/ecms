@@ -30,9 +30,9 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 		<tr>
 			<td>
 		    <%if( currentPage - 1 > 0 ){%>        
-		    	  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPage" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
+		    	  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
 		    <% } else {%>
-		    	  <a class="Icon LastPage DisablePage" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
+		    	  <a class="Icon LastPage DisablePage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
 		    <%}%>
 		  </td>
       <%
@@ -60,9 +60,9 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
       <%}%>
 	    <td>
 		    <% if(currentPage +1 <= totalPage) { %>
-		    	   <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPage" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
+		    	   <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
 		    <% } else { %>
-		    	   <a class="Icon NextPage DisablePage" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
+		    	   <a class="Icon NextPage DisablePage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
 		    <%}%>
 	    </td>	  
 		</tr>

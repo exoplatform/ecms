@@ -64,7 +64,7 @@
 			        <%
 			          for(act in uicomponent.getActions()) { 
 			        %>
-	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>"  title="<%=_ctx.appRes("UIActionList.action." + act)%>"/>
+	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionList.action." + act)%>"/>
 			        <%} %>
 	           	</div>
 		        </td>

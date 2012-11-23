@@ -162,7 +162,7 @@
         %>
         <div class="RowView Normal ClearFix" isFile="<%=data.isNodeType("nt:file")%>" objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">
           <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px;  border-right: none;">
-            <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">              
+            <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">              
             <%if(uicomponent.isSymLink(data)) {%>
                 <div class="LinkSmall"></div>
               <%}%>
@@ -201,7 +201,7 @@
           </div>
           <div class="ResizeColumn" style="float:left; width: 113px; padding-left: 6px;$hiddenStyle;">
               <div class="NodeLabel">
-                <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:113px; overflow:hidden;" title="<%=title%>"><span class="NodeName"><%=subName%></span></div>
+                <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none; white-space: nowrap; width:113px; overflow:hidden;" rel="tooltip" data-placement="bottom" title="<%=title%>"><%=subName%></div>
               </div>
           </div>
           

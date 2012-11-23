@@ -63,12 +63,12 @@
 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
 				%>
 				    <tr class="$rowClass">
-				      <td class="Text" title="<%=fullPath%>"><%=path%></td>
+				      <td class="Text" rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></td>
 				    	<td class="Text"><%=item.getType()%></td>
 				      <td>         
 				        <div class="ActionContainer">
 				          <%for(action in beanActions) { %>
-		                <img onclick="<%=uicomponent.event(action, index.toString())%>" title = "$action" alt="$action" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
+		                <img onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" title = "$action" alt="$action" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
 				          <%}%>        
 				        </div>
 				      </td>

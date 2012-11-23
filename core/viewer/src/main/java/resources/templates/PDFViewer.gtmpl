@@ -169,7 +169,7 @@
 	<div class="UIPDFViewerContainer">   
  	 <div class="PDFViewerBar ClearFix">
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("PreviousPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>"><div class="ButtonBack"><span></span></div></a>
+			<a href="<%=uicomponent.event("PreviousPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>"><div class="ButtonBack"><span></span></div></a>
 		</div>
 		<div class="ControlButton">
 			<div class="Lable"><%=uicomponent.getResourceBundle("PDFViewer.label.page")%></div>
@@ -182,7 +182,7 @@
 			<div class="Lable"><%=uicomponent.getResourceBundle("PDFViewer.label.of")%> $maximumPage</div>
 		</div>
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("NextPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.nextPage")%>">
+			<a href="<%=uicomponent.event("NextPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.nextPage")%>">
 			  <div class="ButtonNext"><span></span></div>
 			</a>
 		</div>
@@ -190,12 +190,12 @@
 			<div class="SeparatorLine"><span></span></div>
 		</div>
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("ZoomOutPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomOutPage")%>">
+			<a href="<%=uicomponent.event("ZoomOutPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomOutPage")%>">
 			  <div class="ZoomOut"><span></span></div>
 			</a>
 		</div>
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("ZoomInPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomInPage")%>">
+			<a href="<%=uicomponent.event("ZoomInPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomInPage")%>">
 			  <div class="ZoomIn"><span></span></div>
 			</a>
 		</div>
@@ -203,15 +203,15 @@
 		   <div class="selectbox"><%uiform.renderField(uicomponent.getChildById("scalePage"))%></div>
 		</div>
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("RotateLeftPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>">
+			<a href="<%=uicomponent.event("RotateLeftPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>">
 			  <div class="RotateLeft"><span></span></div>
 			</a>
 		</div>
 		<div class="ControlButton">
-			<a href="<%=uicomponent.event("RotateRightPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>"><div class="RotateRight"><span></span></div></a>
+			<a href="<%=uicomponent.event("RotateRightPage")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>"><div class="RotateRight"><span></span></div></a>
 		</div>
 		<div class="ControlButton">
-			<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>"><span></span></div>
+			<div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>"><span></span></div>
 		</div>
 		<a href="javascript: void(0)"><div class="DownLoadIcon" onclick="<%=uicomponent.event("DownloadFile")%>"><%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%></div></a>
 		
@@ -230,7 +230,7 @@
 			                        "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" +
 			                        originalNode.getProperty("jcr:content/jcr:lastModified").getString();			  
 		%>
-			  <a href="$pdfPageImage" style="display:inline-block" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><img src="$pdfPageImage" /></a>
+			  <a href="$pdfPageImage" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><img src="$pdfPageImage" /></a>
 		</div>
 	</div>
   </div>

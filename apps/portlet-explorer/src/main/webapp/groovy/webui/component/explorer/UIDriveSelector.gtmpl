@@ -24,7 +24,7 @@
 							<td><%=drive.getName()%></td>	          	
 							<td width="10%">
 								<div class="ActionContainer">
-									<img class="Select16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIDriveSelector.label.adddrives")%>" onclick="<%=uicomponent.event("AddDrive", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveSelector.label.adddrives")%>" />
+									<img class="Select16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIDriveSelector.label.adddrives")%>" onclick="<%=uicomponent.event("AddDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveSelector.label.adddrives")%>" />
 								</div>
 							</td>
 	          </tr>

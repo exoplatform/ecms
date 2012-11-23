@@ -126,7 +126,7 @@
   			  for(act in customActs) {
   			    String actName = act.getProperty("exo:name").getValue().getString() ;
   			    params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName", Utils.formatNodeName(act.getName()))] ;
-  			    strActs += "<a class=\"MenuItem\" style='display: block;' title=\"$actName\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom", Utils.formatNodeName(path), params) + "\">" ;
+  			    strActs += "<a class=\"MenuItem\" style='display: block;' rel=\"tooltip\" data-placement=\"bottom\" title=\"$actName\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom", Utils.formatNodeName(path), params) + "\">" ;
   		      strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">";
   		      if (actName.length() > 10) strActs += actName.substring(0, 10) + "...";
   		      else strActs += actName;
@@ -176,7 +176,7 @@
 	    }
 	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
 	    println "      <div class='NodeLabel'>" ;
-	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' title=\"$treeNodeName $lockedLabel\"><span class='NodeName'>$treeNodeName</span></a>" ;
+	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\">$treeNodeName</a>" ;
 	    println "      </div>" ; 
 	    println "    </div>" ; 
 	    println "  </div>" ; 
@@ -210,7 +210,7 @@
   	<div class="BarContentL">
   		<div class="BarContentR">
   			<div class="BarContentM ClearFix">
-			    <div class="Title" style="cursor: pointer;" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
+			    <div class="Title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
 			      ${label}
 			    </div>			  	
 			  	

@@ -137,21 +137,21 @@
 	                imgSrc = "/" + portalName + "/" + restContextName + "/thumbnailImage/big/" + repository + "/" + wsName + image.getPath() + "/?";
 	  					    if((!linkManager.isLink(image) || linkManager.isTargetReachable(image)) && uicomponent.isSupportedThumbnailImage(image)) {
 								    if(isShowCoverFlow) {
-	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
+	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 								    } else {
-								      println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" onload='this.setAttribute(\"w\", (this.width || 300)); this.setAttribute(\"h\", (this.height || 300));' alt=\""+title+"\"/>";
+								      println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" onload='this.setAttribute(\"w\", (this.width || 300)); this.setAttribute(\"h\", (this.height || 300));' rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 								    }
 							    } else if(primaryType.equals("nt:unstructured") || primaryType.equals("nt:folder")) {
 	  						    if(isShowCoverFlow) {
-	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
+	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 	  						    } else {
-  	  						    println "<img src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+title+"\"/>";
+  	  						    println "<img src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 	  						    }
 							    } else {
 							      if(isShowCoverFlow) {
-	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+title+"\"/>";
+	                    println "<img src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 	  						    } else {
-	  						      println "<img src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+title+"\"/>";
+	  						      println "<img src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+title+"\" alt=\""+title+"\"/>";
 	                  }
 							    }
 							  }

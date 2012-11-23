@@ -112,7 +112,7 @@
 			    }
     		  feedUrl = feedUrl +  "/" + portalName + "/" + wsName + "/" + storePath + "/" + feedType + "/" + feedName;
     	%>              	  
-    		<a title="$feedUrl" onclick="javascript:window.open('$feedUrl');" style="cursor:pointer">$feedUrl</a>  
+    		<a rel="tooltip" data-placement="bottom" title="$feedUrl" onclick="javascript:window.open('$feedUrl');" style="cursor:pointer">$feedUrl</a>  
 			<%}%>	
 		</td>
   </tr>
@@ -123,7 +123,7 @@
 			  if(node.hasProperty("exo:link")) {
 			    String actionLink = node.getProperty("exo:link").getString() ; 
 			%>
-        <a title="$actionLink" onclick="javascript:window.open('$actionLink');" style="cursor:pointer">$actionLink</a>			
+        <a rel="tooltip" data-placement="bottom" title="$actionLink" onclick="javascript:window.open('$actionLink');" style="cursor:pointer">$actionLink</a>			
 			<%}%>	
 		</td>
   </tr>

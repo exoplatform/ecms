@@ -19,7 +19,7 @@
       def selectedClass = "";
       if (categoryUri.equals("/" + categoryPath + "/" + subcategoryName)) selectedClass = "SubCategorySelected";
       def categoryLink = uicomponent.renderCategoryLink(subcategory);
-      %><a class="CategoryLabel $selectedClass" href="$categoryLink" title="$subcategoryTitle">$subcategoryTitle</a>&nbsp;|&nbsp;<%      
+      %><a class="CategoryLabel $selectedClass" href="$categoryLink" rel="tooltip" data-placement="bottom" title="$subcategoryTitle">$subcategoryTitle</a>&nbsp;|&nbsp;<%      
       if (subcategory.hasNodes() && (categoryUri+"/").startsWith("/" + categoryPath + "/" + subcategoryName + "/"))       
         renderChild(categoryUri, categories, level + 1);
     }
@@ -47,7 +47,7 @@
                 def subcategoryName = subcategory.getName();
                 def subcategoryTitle = uicomponent.getTitle(subcategory);
                 def categoryLink = uicomponent.renderCategoryLink(subcategory);
-                %><a class="CategoryLabel" href="$categoryLink">$subcategoryTitle</a>&nbsp;|&nbsp;<%
+                %><a class="CategoryLabel" href="$categoryLink" rel="tooltip" data-placement="bottom" title="$subcategoryTitle">$subcategoryTitle</a>&nbsp;|&nbsp;<%
                 if ((categoryUri+"/").startsWith("/" + subcategoryName + "/")) renderChild(categoryUri, categories, 1);
               }
             %>

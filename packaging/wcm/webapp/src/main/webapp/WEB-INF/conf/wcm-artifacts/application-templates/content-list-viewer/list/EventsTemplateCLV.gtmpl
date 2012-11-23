@@ -76,7 +76,7 @@
 							<%=uicomponent.addQuickEditDiv("NormalNews ClearFix", viewNode)%>
 							<%
 					    		if (isShowIllustrationImg) {
-												%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" src="$imgSrc" /></a><%
+												%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" rel="tooltip" data-placement="bottom" title="$imgSrc" src="$imgSrc" /></a><%
 											} 
 										%>
 										<div class="ContentNormalNews">
@@ -86,7 +86,7 @@
 														<div>
 															<%
 																if (isShowLink) {
-																	%><a class="TitleContentNormalNews" href="$itemLink"><%= itemName %></a><%
+																	%><a class="TitleContentNormalNews" rel="tooltip" data-placement="bottom" title="<%= itemName %>" href="$itemLink"><%= itemName %></a><%
 																} else {
 																		print uicomponent.getInlineEditingField(viewNode, "exo:title", itemTitle, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 																} 
@@ -113,7 +113,7 @@
 										
 									</div>
 									<% if (isShowReadmore) {
-											  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div>
+											  %><div class="ReadLink"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div>
 										<% } %>
 						<%
 						} // End for loop
@@ -127,7 +127,7 @@
 
 							%>				
 								<div class="CaptionRefresh">
-									<a href="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
+									<a href="<%=uicomponent.event("Refresh")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.action.refresh") %>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
 								</div>
 							<% 
 						}

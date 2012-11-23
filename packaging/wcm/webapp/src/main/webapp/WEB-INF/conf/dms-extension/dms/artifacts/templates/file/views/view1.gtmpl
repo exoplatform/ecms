@@ -62,7 +62,7 @@
   <div class="FileContent">
     <div class="NavigationContainer"> 
       <div class="TopNavContent ClearFix">
-        <div class="TopTitle" title="<%=title %>">
+        <div class="TopTitle" rel="tooltip" data-placement="bottom" title="<%=title %>">
           <%=title %>
         </div>
         <%

@@ -288,7 +288,7 @@
 		      <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" isFile="<%=data.isNodeType("nt:file")%>" inTrash="$isInTrash" workspacename="$preferenceWS"  objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">
 			      $strActs
 		        <div class="ColumnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
-						  <div title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
+						  <div rel="tooltip" data-placement="bottom" title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                 <%if(isLocked) {%>
                   <div class="IconLocked"></div>
                 <%}%>
@@ -299,7 +299,7 @@
 		        </div>
 		        <div class="ColumnName" style="width: 125px;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=title%> $lockedLabel"><span class="NodeName"><%=title%></span></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
 		 					</div>
 		        </div>
 		        <!--

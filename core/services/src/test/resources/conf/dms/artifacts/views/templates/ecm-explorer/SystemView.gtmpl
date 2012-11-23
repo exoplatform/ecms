@@ -147,7 +147,7 @@
 	      %>
 	      <div class="RowView Normal ClearFix" ondblclick="$actionLink">
 	        <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px; 	border-right: none;">
-					  <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">					    
+					  <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">					    
 						<%if(uicomponent.isSymLink(data)) {%>
 					      <div class="LinkSmall"></div>
 					    <%}%>
@@ -186,7 +186,7 @@
 	        </div>
 	        <div class="ResizeColumn">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="$name">$subName</div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="$name">$subName</div>
 		 					</div>
 	        </div>
 	       

@@ -54,7 +54,7 @@ public void renderHomeMenu() {
   def homeURL = nodeURL.toString();
   
   %>
-    <li><a href="$homeURL" class="TabLeft" title="$lblHome">$lblHome</a></li>
+    <li><a href="$homeURL" class="TabLeft" rel="tooltip" data-placement="bottom" title="$lblHome">$lblHome</a></li>
   <%
 }
     
@@ -89,7 +89,7 @@ private void renderCategoryMenu() {
     }
       
     %>
-      <li><a href="javascript:void(0);" id="$categoryName" class="TabLeft IconClose $selectedCategoryClass" title="$categoryTitle" onclick="eXo.ecm.CategoryNavigation.toggleSubMenu(event)">$categoryTitle</a>
+      <li><a href="javascript:void(0);" id="$categoryName" class="TabLeft IconClose $selectedCategoryClass" rel="tooltip" data-placement="bottom" title="$categoryTitle" onclick="eXo.ecm.CategoryNavigation.toggleSubMenu(event)">$categoryTitle</a>
     <%
       
     //render sub menu  
@@ -126,11 +126,11 @@ private void renderCategoryMenu() {
         
         if (selectedContent != null && selectedContent.equals(contentId)) {
           %>
-            <li class="SelectedContent"><a href="$contentURL" title="$nodeTitle">$nodeTitle</a></li>
+            <li class="SelectedContent"><a href="$contentURL" rel="tooltip" data-placement="bottom" title="$nodeTitle">$nodeTitle</a></li>
           <%
         } else {
           %>
-            <li><a href="$contentURL" title="$nodeTitle">$nodeTitle</a></li>
+            <li><a href="$contentURL" rel="tooltip" data-placement="bottom" title="$nodeTitle">$nodeTitle</a></li>
           <%
         }
       }

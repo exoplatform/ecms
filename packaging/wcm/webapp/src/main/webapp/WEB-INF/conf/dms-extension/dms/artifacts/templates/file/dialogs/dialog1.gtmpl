@@ -89,11 +89,11 @@
                           <div style="font-size:12px; font-weight: bold; line-height: 17px;">
                        	   <%=_ctx.appRes("File.dialog.label.re-upload")%>
                           </div>
-                          <a style="font-size:12px; font-weight: bold; line-height: 17px;">
+                          <a rel="tooltip" data-placement="bottom" title="$fileName" style="font-size:12px; font-weight: bold; line-height: 17px;">
                              $fileName
                           </a>
                           <a href="$actionLink">
-							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
+							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" class="ActionIcon Remove16x16Icon"/>
 						  </a>
 						  </div>
                        <%

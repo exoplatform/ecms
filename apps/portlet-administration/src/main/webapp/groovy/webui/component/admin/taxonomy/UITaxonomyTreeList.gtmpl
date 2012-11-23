@@ -52,12 +52,12 @@
             even = !even;
         %>
             <tr class="$rowClass">
-              <td><div class="Text" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
-              <td><div class="Text" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
-              <td><div class="Text" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
+              <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
+              <td><div class="Text" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
+              <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
               <td>
                 <div class="Text">
-                  <div class="ShowHideComponent ClearFix" title="$taxonomyTree.taxoTreePermissions" onclick="eXo.ecm.ECMUtils.showHideContentOnRow(this)">
+                  <div class="ShowHideComponent ClearFix" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreePermissions" onclick="eXo.ecm.ECMUtils.showHideContentOnRow(this)">
                     <div class="ShortContentPermission"><a><%=pathTitle(taxonomyTree.taxoTreePermissions, 20)%></a></div>
                     <div class="FullContentPermission" style="display: none"><a>$taxonomyTree.taxoTreePermissions</a></div>
                   </div>                  
@@ -66,11 +66,11 @@
               <td>
                 <div class="ActionContainer">
                   <% if (taxonomyTree.isEdit()) { %>
-                    <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" class="Edit16x16Icon" />
+                    <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" class="Edit16x16Icon" />
                   <% } else { %>
                     <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="None Edit" />
                   <% } %>
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" class="Delete16x16Icon" />
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" class="Delete16x16Icon" />
                 </div>
               </td>                     
             </tr>

@@ -17,11 +17,11 @@
 	<div class="VoteFormContainer">
 		<div class="UIRatingInfoContainer">
 		  <div class="OptionsContainer">
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "1");%>" title="<%=_ctx.appRes("UIVoteForm.title.normal")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "2");%>" title="<%=_ctx.appRes("UIVoteForm.title.good")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "3");%>" title="<%=_ctx.appRes("UIVoteForm.title.verygood")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "4");%>" title="<%=_ctx.appRes("UIVoteForm.title.excellent")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "5");%>" title="<%=_ctx.appRes("UIVoteForm.title.best")%>"><span></span></div>
+		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "1");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.normal")%>"><span></span></div>
+		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "2");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.good")%>"><span></span></div>
+		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "3");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.verygood")%>"><span></span></div>
+		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "4");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.excellent")%>"><span></span></div>
+		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "5");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.best")%>"><span></span></div>
 		    </div>
 		</div>
 	  <div class="UIAction"> 

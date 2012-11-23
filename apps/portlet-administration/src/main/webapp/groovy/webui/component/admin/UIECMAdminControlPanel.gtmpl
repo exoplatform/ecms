@@ -36,7 +36,7 @@
 	    <div class="UIVTab VTabStyle3 ClearFix">
 			<div <%=currentBlockStyleClass%>>
 				<div class="TabRepeat ClearFix" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
-					  <div class="TabLabel" title="<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>">
+					  <div class="TabLabel" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>">
 						<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>
 					  </div>
 					  <div class="SwitchButton"><span></span></div>

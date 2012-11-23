@@ -16,7 +16,7 @@
         	<tr>
 	  	      <td class="FieldLabel"><label for="<%=uicomponent.getChild(0).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.filter")%></label></td>
 	  	      <td class="FieldComponent"><%uiform.renderField(uicomponent.getChild(0))%>
-	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" />
+	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" />
 	          </td>
 	        </tr>
 	        <tr>

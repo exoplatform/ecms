@@ -7,16 +7,16 @@
 <div class="UIPageIterator ClearFix">
 <% if(totalPage > 1) {%> 
   <% if(currentPage + 10 <= totalPage) {%>        
-  <a href="<%=uicomponent.event("ShowPage","${currentPage + 10}")%>" class="Icon NextTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"></a>
+  <a href="<%=uicomponent.event("ShowPage","${currentPage + 10}")%>" class="Icon NextTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"></a>
       <% } else if(currentPage + 1 <= totalPage) { %>
-  <a class="Icon DisableNextTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"><span></span></a>
+  <a class="Icon DisableNextTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"><span></span></a>
   <% } else {%>
-  <a class="Icon DisableNextTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"><span></span></a>
+  <a class="Icon DisableNextTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"><span></span></a>
   <% }%>  
   <% if(currentPage +1 <= totalPage) { %>
-  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"></a>
+  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"></a>
   <% } else { %>
-  <a class="Icon DisableNextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
+  <a class="Icon DisableNextPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
   <%}%>
   
   <%
@@ -39,14 +39,14 @@
   <%}%>
 
   <%if( currentPage - 1 > 0 ){%>        
-  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"></a>
+  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"></a>
   <% } else {%>
-  <a class="Icon DisableLastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
+  <a class="Icon DisableLastPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
   <%}%>
   <%if(currentPage > 10) { %>
-  <a href="<%=uicomponent.event("ShowPage","${currentPage -10}")%>" class="Icon LastTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.backTenPages")%>"></a>
+  <a href="<%=uicomponent.event("ShowPage","${currentPage -10}")%>" class="Icon LastTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.backTenPages")%>"></a>
   <% }else { %>
-  <a class="Icon DisableLastTopPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.backTenPages")%>"></a>       
+  <a class="Icon DisableLastTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.backTenPages")%>"></a>       
   <%}%>
   
   <a class="PagesTotalNumber"><%=totalPage%></a>

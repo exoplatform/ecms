@@ -32,7 +32,7 @@
 							<div class="TitleBarR">
                 <div class="TitleBarM">
                   <%if (isShowRssLink) {
-                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
                   }%>
                   $header                  
                 </div>
@@ -88,7 +88,7 @@
                 <%=uicomponent.addQuickEditDiv("Column1 ClearFix", viewNode)%>
                 <%
       			    	if (isShowImage) {
-                    %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
+                    %><a class="Image" title="$itemName"><img alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" /></a><%
 											}
 											%>
 												<div class="Content">
@@ -97,7 +97,7 @@
 													if (isShowTitle) {
 														%><div title="$itemName" class="FL $itemIcon"></div><%
 														if (isShowLink) {
-															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" title="$itemName">$itemName</a></div><%
+															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
 														} else {
 															%><div class="Title">
 															<%
@@ -124,7 +124,7 @@
 													if (isShowReadmore) {
 													  %>
 													  
-													  <div class="ReadLink"><a href="$itemWebdavLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+													  <div class="ReadLink"><a href="$itemWebdavLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 													}
 													%>
 												</div>
@@ -143,7 +143,7 @@
 							String link = uicomponent.event("Refresh");
 					%>				
 							<div class="CaptionRefresh">
-								<a href="$link">$labelRefreshAction</a>
+								<a href="$link" rel="tooltip" data-placement="bottom" title="$labelRefreshAction">$labelRefreshAction</a>
 							</div>
 						<% 
 						}

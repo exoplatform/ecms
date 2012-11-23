@@ -35,7 +35,7 @@
   	      out.println("<tr class=\"" + rowClass + "\">");
   	      
 					out.println("<td><div class=\"Text\">" + uicomponent.getAncestorOfType(UIPublicationContainer.class).getDateTimeFormater().format(bean.getLogDate().getTime()) + "</div></td>");
-					out.println("<td><div class=\"Text\" title=\""+ContentReader.getXSSCompatibilityContent(bean.getVersionName())+"\">" + ContentReader.getXSSCompatibilityContent(bean.getVersionName()) + "</div></td>");
+					out.println("<td><div class=\"Text\" rel=\"tooltip\" data-placement=\"bottom\" title=\""+ContentReader.getXSSCompatibilityContent(bean.getVersionName())+"\">" + ContentReader.getXSSCompatibilityContent(bean.getVersionName()) + "</div></td>");
 					out.println("<td><div class=\"Text\">" + _ctx.appRes("UIPublicationPanel.status." + bean.getState()) + "</div></td>");	          
 					out.println("<td><div class=\"Text\">" + bean.getAuthor() + "</div></td>");	          
 					out.println("<td><div class=\"Text\">" + _ctx.appRes(bean.getDescription()) + "</div></td>");	          
@@ -51,7 +51,7 @@
   <% } %>
 	<div class="UIAction">
 		      <% for(action in uicomponent.getActions()) { %>
-	  							  <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></a>
+	  							  <a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationLogList.action." + action)%>" onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></a>
 	  				    <% } %>
     		</div>
 </div>

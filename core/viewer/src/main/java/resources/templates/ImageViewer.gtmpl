@@ -92,5 +92,5 @@
 <% } else { %>
   <div style="text-align:center; height:610px; overflow:auto;">
 <% } %>
-    <a title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" width="$imageWidthStr"/></a>
+    <a rel="tooltip" data-placement="bottom" title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" width="$imageWidthStr"/></a>
   </div>

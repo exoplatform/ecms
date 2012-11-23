@@ -31,7 +31,7 @@
 				<%
 			}
 			if (isShowRssLink) {
-				%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
+				%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
 			}
 			%>
 			
@@ -81,14 +81,14 @@
 										
 									<%
 										if (isShowImage) {
-											%><a class="ImageHotNews" href="$itemLink"><img width="200" alt="$imgSrc" src="$imgSrc" /></a><%
+											%><a class="ImageHotNews" href="$itemLink"><img width="200" alt="$imgSrc" src="$imgSrc" rel="tooltip" data-placement="bottom" title="$imgSrc" /></a><%
 										} 
 										%>
 										<div class="ContentHotNews">
 											<% 
 												if (isShowTitle) {
 													if (isShowLink) {
-														%><a class="TitleContentHotNews" href="$itemLink"><%= itemName %></a><%
+														%><a class="TitleContentHotNews" href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= itemName %>"><%= itemName %></a><%
 													} else {
 														print uicomponent.getInlineEditingField(viewNode, "exo:title", itemTitle, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 													} 
@@ -115,7 +115,7 @@
 									</div>
 									<%if (isShowReadmore) {
 										  %>
-									<div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+									<div class="ReadLink"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 										}%>
 								<%
 							} else {
@@ -123,7 +123,7 @@
 								<%=uicomponent.addQuickEditDiv("NormalNews ClearFix", viewNode)%>	
 									<%
 										if (isShowImage) {
-											%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" src="$imgSrc" /></a><%
+											%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" rel="tooltip" data-placement="bottom" title="$imgSrc" src="$imgSrc" /></a><%
 										} 
 										%>
 										<div class="ContentNormalNews">
@@ -133,7 +133,7 @@
 														<div>
 															<%
 																if (isShowLink) {
-																	%><a class="TitleContentNormalNews" href="$itemLink"><%= itemName %></a><%
+																	%><a class="TitleContentNormalNews" href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= itemName %>"><%= itemName %></a><%
 																} else {
 																		print uicomponent.getInlineEditingField(viewNode, "exo:title", itemTitle, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 																} 
@@ -162,7 +162,7 @@
 											
 									</div>
 									<% if (isShowReadmore) {
-											  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div>
+											  %><div class="ReadLink"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.readmore") %>" ><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div>
 										<% } %>
 								<%
 							} // End is else
@@ -177,7 +177,7 @@
 
 							%>				
 								<div class="CaptionRefresh">
-									<a href="<%=uicomponent.event("Refresh")%>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
+									<a href="<%=uicomponent.event("Refresh")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.action.refresh") %>"><%= _ctx.appRes("UICLVPresentation.action.refresh") %></a>
 								</div>
 							<% 
 						}

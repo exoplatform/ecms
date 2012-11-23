@@ -51,7 +51,7 @@ public void renderFixPageMenu(page, label) {
   def homeURL = nodeURL.toString();
   
   %>
-    <li><a href="$homeURL" class="TabLeft" title="$lblHome">$lblHome</a></li>
+    <li><a href="$homeURL" class="TabLeft" rel="tooltip" data-placement="bottom" title="$lblHome">$lblHome</a></li>
   <%
 }
     
@@ -112,7 +112,7 @@ private void renderCategoryMenu() {
         def contentURL = nodeURL.toString();
         
         %>
-          <li><a href="$contentURL" title="$nodeTitle">$nodeTitle</a></li>
+          <li><a href="$contentURL" rel="tooltip" data-placement="bottom" title="$nodeTitle">$nodeTitle</a></li>
         <%
       }
       

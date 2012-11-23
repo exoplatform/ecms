@@ -33,22 +33,22 @@
 			            String path = node.getPath() ;
 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
 			           %>
-			          <div class="Text" title="$nodeName">$nodeName</div>
+			          <div class="Text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
 			        </td>
 			        <td>
 			        	<div class="ActionContainer">
 		              <%
 		                if(uicomponent.isRootNode()) {
 		              %>
-		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
+		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" rel="tooltip" data-placement="bottom" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
+		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
 		              <%} else {%>
-			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
-		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
-			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
-		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
-		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
+			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
+		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
+			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
+		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
+		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
+		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
 		              <%}%>
 		            </div>
 			        </td>

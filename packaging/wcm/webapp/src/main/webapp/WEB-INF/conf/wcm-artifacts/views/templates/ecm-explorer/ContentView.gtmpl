@@ -343,7 +343,7 @@
           %>
             <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" isFile="<%=data.isNodeType("nt:file")%>" objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">$strActs
               <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
-                <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
+                <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>
                     <div class="IconLocked"></div>
                   <%}%>
@@ -358,35 +358,35 @@
 <!-- Title-->
               <div class="ColumnName" style="width: 200px;">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" title="$title $lockedLabel"><span class='NodeName'>$title</span></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel">$title</div>
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>
 <!-- Date created -->
               <div class="ColumnDatetime Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= datetime %>"><%= datetime %></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>
 <!-- Author -->
               <div class="ColumnAuthor Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= author %>"><%= author %></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>
 <!-- Last User -->
               <div class="ColumnLastUser Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= lastUser %>"><%= lastUser %></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>
 <!-- Status-->
               <div class="ColumnStatus Column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
                 </div>
               </div>
               <div class="LineLeftItem"><span></span></div>

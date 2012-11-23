@@ -35,7 +35,7 @@
 	          String subValue = value ; 
 	          if(value.length() > 20) subValue = value.substring(0,20) + "..." ;
 	      %>
-	          <td style="text-align: center;overflow:hidden;"><span title="$value"><%=subValue%></span></td>
+	          <td style="text-align: center;overflow:hidden;"><span rel="tooltip" data-placement="bottom" title="$value"><%=subValue%></span></td>
 	      <%}%>
 	    </tr>
 	  </tbody>
@@ -71,8 +71,8 @@
 		      </td>
 		      <td><%=nodeType%></td>
 	 	      <td>
-	          <a href="<%=uicomponent.event("Edit", nodeType)%>" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>">
-	            <div class="Icon16x16 Edit16x16Icon" style="margin-left:7px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>"><span></span></div>
+	          <a href="<%=uicomponent.event("Edit", nodeType)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>">
+	            <div class="Icon16x16 Edit16x16Icon" style="margin-left:7px;" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>"><span></span></div>
 	          </a>
 	 	      </td>
 		    </tr>

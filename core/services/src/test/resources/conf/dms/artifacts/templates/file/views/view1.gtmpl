@@ -224,8 +224,8 @@
 		  </div> 
 	  <%}%>
 	  <div class="UIAction">                                          
-			<a onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(fileLangNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("File.view.label.webDAV")%></a>
-			<a onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle" title="<%=_ctx.appRes("File.view.label.download")%>" href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
+			<a onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(fileLangNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle" href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>"><%=_ctx.appRes("File.view.label.webDAV")%></a>
+			<a onclick="<%=uicomponent.event("Download")%>" class="ActionButton LightBlueStyle" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>" href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
 	  </div>                 
 	  <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
 	  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>

@@ -44,7 +44,7 @@
 				  <div class="ContainerConfigOptions">
 				  	<div class="ClearFix">
 							<%uicomponent.renderChild(UIDropDownControl.class);%>
-							<a class="AddNavigationIcon" href ="<%=uicomponent.event("CreateNavigation"); %>" title="<%=_ctx.appRes("UIPageNodeSelector.tooltip.newPageNavigation")%>"><span></span></a>
+							<a class="AddNavigationIcon" href ="<%=uicomponent.event("CreateNavigation"); %>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageNodeSelector.tooltip.newPageNavigation")%>"><span></span></a>
 		        </div>	
 						<div class="UIVerticalSlideTabs ItemList CategoryContainer" style="padding: 1px;">
 							<%

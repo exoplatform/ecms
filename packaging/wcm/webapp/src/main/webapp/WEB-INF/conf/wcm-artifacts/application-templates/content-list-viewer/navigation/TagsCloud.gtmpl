@@ -21,7 +21,7 @@ public void renderCategories(def categories) {
       style = "Style = '" + uicomponent.getTagHtmlStyle(tagCount)+ "'" ;
       %>
 
-      <a class="$cssStyle" href="$categoryURL" title="$categoryTitle" $style>$categoryTitle</a>  
+      <a class="$cssStyle" href="$categoryURL" rel="tooltip" data-placement="bottom" title="$categoryTitle" $style>$categoryTitle</a>  
       <%
       first=false;
       if (category.hasChilds()) {

@@ -214,8 +214,8 @@
 			            </div> 
 									
 									<div class="NavigationButtonContainer">
-	                  <div title="Previous Tabs" class="NavigationIcon ScrollBackArrow16x16Icon">
-	                    <div title="More Tabs" class="NavigationIcon ScrollNextArrow16x16Icon"><span/></div>
+	                  <div rel="tooltip" data-placement="bottom" title="Previous Tabs" class="NavigationIcon ScrollBackArrow16x16Icon">
+	                    <div rel="tooltip" data-placement="bottom" title="More Tabs" class="NavigationIcon ScrollNextArrow16x16Icon"><span/></div>
 	                  </div>
 	                </div>
 				    </div>

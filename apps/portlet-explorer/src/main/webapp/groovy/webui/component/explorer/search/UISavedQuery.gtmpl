@@ -48,21 +48,21 @@
 		              String storedQueryPath = object.getStoredQueryPath() ;
 		              storedQueryPath =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1, storedQueryPath.length()) ;
 		            %>
-		            <td><div class="Text" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
+		            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
 		            <td><div class="Text"><%=object.getLanguage()%></div></td>
 		            <td>
 		            	<%
 		            		String statement = object.getStatement() ;
 		            		if(statement.length() > 30) statement = "..." + statement.substring(10) ;
 		            	%>
-		            	<div class="Text" title="<%=object.getStatement()%>"><%=statement%></div>
+		            	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=statement%></div>
 		            </td>
 		            <td><%=uicomponent.getCurrentUserId()%></td>
 			          <td style="width:100px;">
 			          	<div class="ActionContainer">
-				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
-				            <img onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
-				            <img onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
 			            </div>
 			          </td>	                    
 		          </tr>
@@ -75,7 +75,7 @@
 		            <td><div class="Text"><%=object.getName()%></div></td>
 		            <td><div class="Text"><%=object.getProperty("jcr:language").getString()%></div></td>
 		            <td>
-		            	<div class="Text" title="<%=object.getProperty("jcr:statement").getString()%>">
+		            	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getProperty("jcr:statement").getString()%>">
 			            	<%
 				            		String sharedStatement = object.getProperty("jcr:statement").getString() ;
 				            		if(sharedStatement.length() > 40) sharedStatement = "..." + sharedStatement.substring(20) ;
@@ -95,7 +95,7 @@
 		            </td>
 			          <td style="width:80px;">
 			          	<div class="ActionContainer">
-				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
 			            </div>
 			          </td>	                    
 		          </tr>

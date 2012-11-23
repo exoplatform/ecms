@@ -82,7 +82,7 @@
 				    } 
 				%>
 					    <li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab);%>">
-						    <a title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
+						    <a rel="tooltip" data-placement="bottom" title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
 						  </li>
 				<%
 				  }
@@ -106,7 +106,7 @@
 								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
 					 %>
 								 <li onclick="<%=action.event(button);%>">
-										<a title="$title"><i class="${button}Icon"></i> $title</a>
+										<a rel="tooltip" data-placement="bottom" title="$title"><i class="${button}Icon"></i> $title</a>
 								 </li>
 						<%
 							 }
@@ -130,10 +130,10 @@
   		  if (uicomponent.hasBackButton()) {%>
   		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}%>  	      
-  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
 
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
-  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
   	    
   			
@@ -150,7 +150,7 @@
   <% uiform.begin() %>
     <div class="uiActionBar" id="$uicomponent.id">
       <div class="UIViewBarContainer" id="UIViewBarContainer">
-        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
+        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
       </div>
     </div>
   <% uiform.end() %>

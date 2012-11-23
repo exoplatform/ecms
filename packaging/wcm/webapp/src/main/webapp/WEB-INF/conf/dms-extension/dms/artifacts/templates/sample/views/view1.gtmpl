@@ -86,7 +86,7 @@
             <% if (imageNode.getProperty("jcr:data").getStream().available() > 0) {
                imgSrc = uicomponent.getImage(node) ; 
             %>
-			      	<img src="$imgSrc" alt="$title" width="250" height="150"/> 
+			      	<img src="$imgSrc" rel="tooltip" data-placement="bottom" title="$title" alt="$title" width="250" height="150"/> 
             <% } %>
 						</div>
 					</div>
@@ -134,7 +134,7 @@
 							  	String actionLink2 = uicomponent.event("ChangeNode", rel.getPath(), params);
 							%>
 								<div style="font-size: 12px; padding: 10px;">
-									-	<a href="$actionLink2">
+									-	<a href="$actionLink2" rel="tooltip" data-placement="bottom" title="<%=rel.getName()%>">
 											<%=rel.getName()%>
 										</a>
 								</div>
@@ -166,14 +166,14 @@
 						%>
 							<div style="font-size: 12px; padding: 10px;" class=" ClearFix">
 								<div class="RemoveNodeFloat">
-								 <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;">-<%=att.getName()%></a>
+								 <a $linkActionName="$viewAttachmentLink" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>" style="cursor: pointer;">-<%=att.getName()%></a>
 								</div>
 								<div class="RemoveNodeFloat"> 	
 							 	 <% if (PermissionUtil.canRemoveNode(att)) {
 							 	 			params = [new Parameter("workspaceName", wsName), new Parameter("repository", repository)];
 							 	 			if (removeattachcomponent != null) {
 							 	 %>
-									<a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+									<a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 				                      <div class="RemoveAttachments"><span></span></div>
 				                    </a>
                 <%    }  

@@ -46,7 +46,7 @@
 				        even = !even ;
 			  %>
 				  		  <div class="$rowCssClass">
-						       <a class="ItemIcon" href="<%=uicomponent.event("SelectMembership", member)%>" title="$member">$member</a>
+						       <a class="ItemIcon" href="<%=uicomponent.event("SelectMembership", member)%>" rel="tooltip" data-placement="bottom" title="$member">$member</a>
 						     </div>
 			  <%					        
 					    }	        

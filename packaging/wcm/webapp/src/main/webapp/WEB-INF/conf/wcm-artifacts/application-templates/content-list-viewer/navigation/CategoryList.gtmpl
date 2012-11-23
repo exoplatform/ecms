@@ -17,7 +17,7 @@ public void renderCategories(def categories) {
       if (category.isSelected()) cssStyle = "CategoryLabel CategorySelected";
       %>
       <%if (!first) {%> &nbsp;|&nbsp; <%}%>
-      <a class="$cssStyle" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>  
+      <a class="$cssStyle" href="$categoryURL" rel="tooltip" data-placement="bottom" title="$categoryTitle">$categoryTitle</a>  
       <%
       first=false;
       if (category.hasChilds()) {

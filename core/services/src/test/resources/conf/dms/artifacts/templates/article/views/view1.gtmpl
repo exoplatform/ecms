@@ -468,10 +468,10 @@
 								%>
 										<div class="AttachmentsContainer ClearFix">	
 							              <div class="AttachmentsContentIcon">
-							                 <a href="<%=uicomponent.event("ChangeNode", attPath)%>"><%=att.getName()%></a>
+							                 <a href="<%=uicomponent.event("ChangeNode", attPath)%>" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>"><%=att.getName()%></a>
 							              </div>
 							                  <% if (PermissionUtil.canRemoveNode(att)) {%>
-							              <a href="<%=uicomponent.event("RemoveAttach", attPath)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
+							              <a href="<%=uicomponent.event("RemoveAttach", attPath)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 							                  <div class="RemoveAttachments"><span></span></div>
 							              </a>
                                 <% } %>

@@ -38,9 +38,9 @@
   NavigationResource resource = new NavigationResource(portalRequestContext.getSiteType(), portalRequestContext.getSiteName(), portletId);
   nodeURL.setResource(resource);
   def homeURL = nodeURL.toString();
-  homeSpan = "<span class=\"SubNavigationBranch\" title=\"$lblHome\">$lblHome</span>";
+  homeSpan = "<span class=\"SubNavigationBranch\" rel=\"tooltip\" data-placement=\"bottom\" title=\"$lblHome\">$lblHome</span>";
   if (category!=null) {
-    homeSpan       = "<span class=\"SubNavigationBranch\"><a href=\"$homeURL\" title=\"$lblHome\">$lblHome ></a></span>";
+    homeSpan       = "<span class=\"SubNavigationBranch\"><a href=\"$homeURL\" rel=\"tooltip\" data-placement=\"bottom\" title=\"$lblHome\">$lblHome ></a></span>";
     if (contentTitle==null) cls = "SubNavigationLeaf";
     categorySpan = "<span class=\"" + clsName + "\"> " + category + " > </span>";
     if (contentTitle!=null) {
