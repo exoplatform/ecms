@@ -57,6 +57,7 @@
       <authoring-view>Authoring View</authoring-view>
       <slide-show>Slide Show View</slide-show>
       <wcm-category-view>WCM Category View</wcm-category-view>
+      <file-view>File View</file-view>
     </label>
   </Views>
 
