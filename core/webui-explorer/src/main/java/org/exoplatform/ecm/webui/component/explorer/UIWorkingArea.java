@@ -139,6 +139,7 @@ public class UIWorkingArea extends UIContainer {
 
   public static final String               RENAME_ACTION           = "Rename";
 
+
   private List<UIAbstractManagerComponent> managers                 =
     Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
