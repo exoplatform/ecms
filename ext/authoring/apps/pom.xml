@@ -62,6 +62,11 @@
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portlet</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.application-registry</artifactId>
+      <scope>runtime</scope>
+    </dependency>    
   </dependencies>
   <build>
     <resources>
