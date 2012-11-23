@@ -262,6 +262,9 @@
       <UIPreferencesForm>Préférences</UIPreferencesForm>
       <UIPublicationManager>Gérer la publication</UIPublicationManager>
       <UIConfirmMessage>Confirmer la suppression</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Supprimer Fichier ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Supprimer Dossier ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Supprimer Objets ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirmer la restauration</UIRestoreConfirmMessage>
       <UIActivePublication>Inscrire dans un cycle de publication</UIActivePublication>
       <UITaggingForm>Tagguer ce document</UITaggingForm>
@@ -464,14 +467,55 @@
       <Icon>Icône</Icon>
     </title>
     <msg>
-      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <confirm-delete-permanently> Souhaitez-vous définitivement supprimer le noeud '{0}' et tout son contenu?</confirm-delete-permanently>
-      <confirm-restore>Un noeud du même nom existe déjà sous l'arborescence '{0}'. Souhaitez-vous réellement restaurer ce noeud?</confirm-restore>
-      <confirm-delete-multi>Etes vous certains de vouloir déplacer ces {0} éléments vers la corbeille?</confirm-delete-multi>
-      <confirm-delete-permanently-multi>Souhaitez-vous réellement supprimer définitivement les éléments {0}?</confirm-delete-permanently-multi>
-	  <confirm-delete-has-relations>L'élément '{0}' a des relations qui y référencient. Voulez-vous supprimer l'élément et ses relations?</confirm-delete-has-relations>
-	  <confirm-delete-multi-one-node-has-relations>Voulez-vous supprimer ces {0} élément? (L'élément {1} a des relations qui y référencient, ce processus va supprimer toutes ses relations)</confirm-delete-multi-one-node-has-relations>
-      <confirm-delete-multi-many-nodes-have-relations>Voulez-vous supprimer ces {0} élément? (Les éléments {1} ont des relations qui y référencient, ce processus va supprimer toutes ses relations)</confirm-delete-multi-many-nodes-have-relations>
+      // Delte one node is not in trash and have no relation
+      <confirm-delete>Êtes-vous sûr de vouloir supprimer l'objet '{0}'?</confirm-delete>
+      <confirm-delete-file>Êtes-vous sûr de vouloir supprimer le fichier '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Êtes-vous sûr de vouloir supprimer le dossier '{0}' et ses sous-dossiers?</confirm-delete-folder>
+      
+      // Delte one node is in trash and have no relation
+      <confirm-delete-permanently>Êtes-vous sûr de vouloir supprimer définitivement l'objet '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Êtes-vous sûr de vouloir supprimer définitivement le fichier '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement le dossier '{0}' et ses sous-dossiers?</confirm-delete-folder-permanently>
+      
+      // Delte one node is not in trash and have relations
+      <confirm-delete-has-relations>Êtes-vous sûr de vouloir supprimer l'objet '{0}' et ses références?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Êtes-vous sûr de vouloir supprimer le fichier '{0}' et ses références?</confirm-delete-file-has-relations>
+      
+      // Delte multiple nodes, not in Trash, have no relations
+      <confirm-delete-multi-nodes-generic>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Êtes-vous sûr de vouloir supprimer les {0} fichiers sélectionnés?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Êtes-vous sûr de vouloir supprimer les {0} dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Êtes-vous sûr de vouloir supprimer les {0} objets et fichiers sélectionnés?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Êtes-vous sûr de vouloir supprimer les {0} objets, dossiers sélectionnés et leurs sous-dossiers ?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Êtes-vous sûr de vouloir supprimer les {0} fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Êtes-vous sûr de vouloir supprimer les {0} objets, fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      // Delte multiple nodes, in Trash
+      <confirm-delete-multi-nodes-generic-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets sélectionnés?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} fichiers sélectionnés?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets et fichiers sélectionnés?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets, fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      // Delte multiple nodes, have relations
+      <confirm-delete-multi-nodes-generic-have-relations>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés et leurs références?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Êtes-vous sûr de vouloir supprimer les {0} fichiers sélectionnés et leurs références?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Êtes-vous sûr de vouloir supprimer les {0} dossiers sélectionnés, leurs sous-dossiers et leurs références?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Êtes-vous sûr de vouloir supprimer les {0} objets et fichiers sélectionnés et leurs références?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés, leurs références, dossiers et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Êtes-vous sûr de vouloir supprimer les {0} fichiers sélectionnés, leurs références, dossiers et leurs sous-dossiers?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés, fichiers, leurs références, dossiers et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' a été supprimé avec succès.</feedback-delete>
+      <feedback-delete-multi>{0} objets ont été supprimés avec succès.</feedback-delete-multi>
+      <feedback-delete-permanently>'{0}' a été supprimé définitivement.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} objets ont été supprimés définitivement.</feedback-delete-permanently-multi>
+      <undo-delete>Annuler</undo-delete>
+      <feedback-restore>'{0}' a été restauré avec succès.</feedback-restore>
+      <feedback-restore-multi>{0} objets ont été restaurés avec succès.</feedback-restore-multi>
+           
       <confirm-move>Souhaitez-vous vraiment déplacer ce(s) noeud(s)?</confirm-move>
       <node-cut>Le noeud '{0}' a été coupé.</node-cut>
       <execute-successfully>L'action '{0}' a été exécutée.</execute-successfully>
@@ -2549,7 +2593,7 @@
 
 	<UIConfirmMessage>
 	  <label>
-	    <Close>#{word.close}</Close>
+	    <Close>#{word.cancel}</Close>
 	    <OK>OK</OK>
 	    <ReplaceData>Remplacer les données</ReplaceData>
 	    <Back>Retour à renommer</Back>
@@ -3452,8 +3496,8 @@
   <UIWorkingArea>
     <msg>
       <confirm-delete-permanently-has-relations>Le noeud '{0}' a des relations le référant, Etes-vous sûr de vouloir le supprimer définitivement ainsi que ses relations?</confirm-delete-permanently-has-relations>
-      <confirm-delete-permanently-multi-one-node-has-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs relations).</confirm-delete-permanently-multi-one-node-has-relations>
-      <confirm-delete-permanently-multi-many-nodes-have-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs relations).</confirm-delete-permanently-multi-many-nodes-have-relations>
+      <confirm-delete-permanently-multi-one-node-has-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs références).</confirm-delete-permanently-multi-one-node-has-relations>
+      <confirm-delete-permanently-multi-many-nodes-have-relations>Etes-vous sûr de vouloir le supprimer ces objets définitivement: {0}? (Le noeud '{1}' a des relations les référants, cette action supprimera toutes leurs références).</confirm-delete-permanently-multi-many-nodes-have-relations>
     </msg>
   </UIWorkingArea>
   <UIActionForm>

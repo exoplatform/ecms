@@ -17,11 +17,12 @@
 package org.exoplatform.ecm.webui.component.explorer;
 
 import org.exoplatform.ecm.webui.component.explorer.rightclick.manager.DeleteManageComponent;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -87,7 +88,9 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
       }
       
       uiConfirm.isOK_ = true;
-      uiConfirm.deActivate();
+      UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
+      popupAction.setShow(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
 
@@ -95,8 +98,9 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
     public void execute(Event<UIConfirmMessage> event) throws Exception {
       UIConfirmMessage uiConfirm = event.getSource();
       uiConfirm.isOK_ = false;
-      UIPopupContainer popupAction = uiConfirm.getAncestorOfType(UIPopupContainer.class) ;
-      popupAction.deActivate() ;
+      UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
+      popupAction.setShow(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
 

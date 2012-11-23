@@ -22,16 +22,15 @@
     msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
   %>
   <div class="HorizontalLayout">
-    <div class="ClearFix">
-    	<div class="RecycleBinFull"><span></span></div>
-    	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>
-    	
+    <div class="ClearFix">    	
+    	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>    	
     </div>
  <div class="UIAction">
 		<%
+		  int tabIndex = 1;
 		  for(action in uicomponent.getActions()) {
 		%>
-			<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></a>
+			<a onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></a>
 		<%}%>
 	    </div>
 	 <%// end render action%>

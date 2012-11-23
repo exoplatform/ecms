@@ -99,6 +99,34 @@ public class UIWorkingArea extends UIContainer {
   public static final String               CUSTOM_ACTIONS           = "CustomActions";
 
   public static final String               PERMLINK                 = "PermlinkContextMenu";
+  
+  private String nodePathDelete = "";
+  private String deleteNotice = "";
+  private String wcmNotice = "";
+  
+  public void setNodePathDelete(String nodePathDelete) {
+  	this.nodePathDelete = nodePathDelete;
+  }
+  
+  public String getNodePathDelete() {
+  	return nodePathDelete;
+  }
+  
+  public String getWCMNotice() {
+  	return wcmNotice;
+  }
+  
+  public void setWCMNotice(String wcmNotice) {
+  	this.wcmNotice = wcmNotice;
+  }
+  
+  public void setDeleteNotice(String deleteNotice) {
+  	this.deleteNotice = deleteNotice;
+  }
+  
+  public String getDeleteNotice() {
+  	return this.deleteNotice;
+  }
 
   private List<UIAbstractManagerComponent> managers                 =
     Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());

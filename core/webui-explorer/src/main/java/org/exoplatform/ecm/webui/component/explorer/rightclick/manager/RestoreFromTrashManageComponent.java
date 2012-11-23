@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
@@ -50,6 +51,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -84,6 +86,9 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
+  
+  private static int numberItemsRestored = 0;
+  private static String itemName = "";
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -122,7 +127,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   private static void confirmToRestore(Node node, String srcPath, Event<RestoreFromTrashManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-
+    itemName = node.getName();
     String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
     String restoreWs = node.getProperty(Utils.EXO_RESTORE_WORKSPACE).getString();
     Session session = uiExplorer.getSessionByWorkspace(restoreWs);
@@ -131,9 +136,12 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       nodeFinder.getItem(session, restorePath);
     } catch (PathNotFoundException e) {
       doRestore(srcPath, node, event);
+      numberItemsRestored++;
       return;
     }
     doRestore(srcPath, node, event);
+    
+    numberItemsRestored++;
   }
 
   public static void doRestore(String srcPath, Node node, Event<? extends UIComponent> event) throws Exception {
@@ -245,12 +253,29 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   }
 
   public static class RestoreFromTrashActionListener extends UIWorkingAreaActionListener<RestoreFromTrashManageComponent> {
-    public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {
+    public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {   
+    	numberItemsRestored = 0;
       String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
       if (srcPath.indexOf(';') > -1) {
         multiRestoreFromTrash(srcPath.split(";"), event);
       } else {
         restoreFromTrash(srcPath, event);
+      }
+      RequestContext context = RequestContext.getCurrentInstance();
+      ResourceBundle res = context.getApplicationResourceBundle();
+      String restoreNotice = "";
+      if(srcPath.indexOf(";") < 0 && numberItemsRestored == 1) {
+      	restoreNotice = "UIWorkingArea.msg.feedback-restore";
+      	restoreNotice = res.getString(restoreNotice);
+      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
+      } else if(srcPath.indexOf(';') > -1 && numberItemsRestored >= 1) {
+      	restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
+      	restoreNotice = res.getString(restoreNotice);
+      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
+      }      
+      if(restoreNotice.length() > 0) {
+      	UIWorkingArea uiWorkingArea = event.getSource().getParent();
+      	uiWorkingArea.setWCMNotice(restoreNotice);
       }
     }
 
