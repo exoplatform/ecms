@@ -106,7 +106,7 @@
 								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
 					 %>
 								 <li onclick="<%=action.event(button);%>">
-										<a title="$title" class="DefaultActionIcon ${button}Icon"><i class="icon-plus-sign"></i> $title</a>
+										<a title="$title"><i class="${button}Icon"></i> $title</a>
 								 </li>
 						<%
 							 }
