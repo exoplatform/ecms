@@ -634,7 +634,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private boolean isFolder(Node checkNode) throws RepositoryException {
     try {
-      if (isDocument(checkNode)) return false;
+      if ( isDMSDocument(checkNode) ) return false;
     } catch (Exception e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
@@ -647,7 +647,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Check if a selected node is a DMS document. (not including free layout webcontent & media & article)
+   * Check if a selected node is a DMS document.
    *
    * @param node The node
    *
@@ -673,25 +673,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return false;
   }
 
-  /**
-   * Checks if specific node is document
-   * 
-   * @param node specific Node
-   * @param repositoryName repository Name
-   * @return true: is document, false: not document
-   * @throws Exception
-   */
-  private boolean isDocument(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    List<String> documentTypeList = templateService.getDocumentTemplates();
-    for (String documentType : documentTypeList) {
-      if (node.getPrimaryNodeType().isNodeType(documentType)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  
+
   /**
    * Check if a selected node is of media type.
    *
