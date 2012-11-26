@@ -69,15 +69,11 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
-          <include>**/*.properties</include>
           <include>**/*.xml</include>
           <include>**/*.doc</include>
           <include>**/*.xls</include>
           <include>**/*.ppt</include>
           <include>**/*.txt</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.conf</include>
           <include>**/*.pdf</include>
           <include>**/*.jpg</include>
           <include>**/*.jpeg</include>

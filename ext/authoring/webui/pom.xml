@@ -74,19 +74,6 @@
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
-          <include>**/*.drl</include>
-          <include>**/*.doc</include>
-          <include>**/*.xls</include>
-          <include>**/*.ppt</include>
-          <include>**/*.txt</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.sha1</include>
-          <include>**/*.conf</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.gif</include>
-          <include>**/*.jpg</include>
-          <include>**/*.png</include>
         </includes>
       </resource>
     </resources>

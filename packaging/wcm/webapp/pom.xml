@@ -69,6 +69,5 @@
       <artifactId>ecms-core-publication</artifactId>
       <scope>runtime</scope>
     </dependency>
-
   </dependencies>
 </project>
